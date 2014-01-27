@@ -21,9 +21,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import erebus.ErebusMod;
 import erebus.ModBlocks;
+import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
-import erebus.utils.Utils;
 
 public class BlockPetrifiedChest extends BlockContainer {
 

@@ -13,9 +13,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityBambooCrate extends TileEntity implements IInventory {
 
 	private ItemStack[] crateContents = new ItemStack[27];
-	
+
 	@Override
-	public boolean canUpdate(){
+	public boolean canUpdate() {
 		return false;
 	}
 
@@ -128,10 +128,10 @@ public class TileEntityBambooCrate extends TileEntity implements IInventory {
 	public boolean isItemValidForSlot(int slot, ItemStack is) {
 		return true;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getRenderBoundingBox(){
-		return AxisAlignedBB.getAABBPool().getAABB(xCoord-1,yCoord,zCoord-1,xCoord+2,yCoord+2,zCoord+2);
+	public AxisAlignedBB getRenderBoundingBox() {
+		return AxisAlignedBB.getAABBPool().getAABB(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 2, zCoord + 2);
 	}
 }

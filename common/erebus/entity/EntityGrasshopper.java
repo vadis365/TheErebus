@@ -158,14 +158,7 @@ public class EntityGrasshopper extends EntityCreature {
 
 	public void munchBlock() {
 		if (isEating && worldObj.getWorldTime() % 5 == 0)
-			PacketDispatcher.sendPacketToAllAround(
-			posX,
-			posY,
-			posZ,
-			64D,
-			dimension,
-			PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ, worldObj.getBlockId(aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ),
-			Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ))));
+			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ, worldObj.getBlockId(aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ), Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ))));
 	}
 
 	@Override

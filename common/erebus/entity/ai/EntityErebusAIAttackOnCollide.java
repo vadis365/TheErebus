@@ -57,8 +57,7 @@ public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 	@Override
 	public boolean continueExecuting() {
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
-		return entitylivingbase == null ? false : !entitylivingbase.isEntityAlive() ? false : !longMemory ? !attacker.getNavigator().noPath() : attacker.func_110176_b(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY),
-		MathHelper.floor_double(entitylivingbase.posZ));
+		return entitylivingbase == null ? false : !entitylivingbase.isEntityAlive() ? false : !longMemory ? !attacker.getNavigator().noPath() : attacker.func_110176_b(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ));
 	}
 
 	@Override

@@ -102,8 +102,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
 		byte var2 = 0;
-		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && player.boundingBox.maxX >= boundingBox.minX && player.boundingBox.minX <= boundingBox.maxX && player.boundingBox.maxZ >= boundingBox.minZ &&
-		player.boundingBox.minZ <= boundingBox.maxZ && player.lastTickPosY > player.posY) {
+		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && player.boundingBox.maxX >= boundingBox.minX && player.boundingBox.minX <= boundingBox.maxX && player.boundingBox.maxZ >= boundingBox.minZ && player.boundingBox.minZ <= boundingBox.maxZ && player.lastTickPosY > player.posY) {
 			if (worldObj.difficultySetting > 1)
 				if (worldObj.difficultySetting == 2)
 					var2 = 7;
@@ -220,14 +219,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	public void munchBlock() {
 		if (isEating && worldObj.getWorldTime() % 5 == 0)
-			PacketDispatcher.sendPacketToAllAround(
-			posX,
-			posY,
-			posZ,
-			64D,
-			dimension,
-			PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ, worldObj.getBlockId(aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ),
-			Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ))));
+			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ, worldObj.getBlockId(aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ), Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ))));
 	}
 
 	public void setisSquashed(boolean par1) {

@@ -9,8 +9,7 @@ import erebus.tileentity.TileEntityErebusAltarRepair;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityErebusAltarRepairRenderer extends TileEntityErebusAltarRenderer {
-	private static final ResourceLocation[] tex = new ResourceLocation[] { new ResourceLocation("erebus:textures/special/tiles/RepairAltar1.png"), new ResourceLocation("erebus:textures/special/tiles/RepairAltar2.png"), new ResourceLocation("erebus:textures/special/tiles/RepairAltar3.png"),
-	new ResourceLocation("erebus:textures/special/tiles/RepairAltar4.png"), new ResourceLocation("erebus:textures/special/tiles/RepairAltar5.png") };
+	private static final ResourceLocation[] tex = new ResourceLocation[] { new ResourceLocation("erebus:textures/special/tiles/RepairAltar1.png"), new ResourceLocation("erebus:textures/special/tiles/RepairAltar2.png"), new ResourceLocation("erebus:textures/special/tiles/RepairAltar3.png"), new ResourceLocation("erebus:textures/special/tiles/RepairAltar4.png"), new ResourceLocation("erebus:textures/special/tiles/RepairAltar5.png") };
 
 	private final ModelAltarRepair model = new ModelAltarRepair();
 

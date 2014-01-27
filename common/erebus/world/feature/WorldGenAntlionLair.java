@@ -25,72 +25,49 @@ import erebus.world.loot.WeightedLootList;
 
 public class WorldGenAntlionLair extends WorldGenerator {
 
-	//@formatter:off
-	public static final WeightedLootList chestLoot = new WeightedLootList(
-	new LootItemStack(Item.book).setAmount(1, 4).setWeight(18),
-	new LootItemStack(Item.paper).setAmount(2, 6).setWeight(16),
-	new LootItemStack(Block.web).setAmount(2, 7).setWeight(13),
-	new LootItemStack(ModItems.erebusMaterials).setAmount(1, 3).setDamage(ItemErebusMaterial.dataJade).setWeight(10),
-	new LootItemStack(ModItems.erebusMaterials).setAmount(4, 8).setDamage(ItemErebusMaterial.dataExoPlate).setWeight(9),
-	new LootItemStack(Item.enchantedBook).setWeight(8),
-	new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1),
-	new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
+	// @formatter:off
+	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack(Item.book).setAmount(1, 4).setWeight(18), new LootItemStack(Item.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Block.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.erebusMaterials)
+			.setAmount(1, 3).setDamage(ItemErebusMaterial.dataJade).setWeight(10), new LootItemStack(ModItems.erebusMaterials).setAmount(4, 8).setDamage(ItemErebusMaterial.dataExoPlate).setWeight(9), new LootItemStack(Item.enchantedBook).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue)
+			.setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
 
-	new LootItemStack(Item.pickaxeGold).setWeight(3),
-	new LootItemStack(Item.pickaxeIron).setWeight(2),
-	new LootItemStack(ModItems.jadePickaxe).setWeight(1),
-	new LootItemStack(Item.pickaxeStone).setWeight(1),
+	new LootItemStack(Item.pickaxeGold).setWeight(3), new LootItemStack(Item.pickaxeIron).setWeight(2), new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Item.pickaxeStone).setWeight(1),
 
-	new LootItemStack(Item.shovelGold).setWeight(3),
-	new LootItemStack(Item.shovelIron).setWeight(2),
-	new LootItemStack(ModItems.jadeShovel).setWeight(1),
-	new LootItemStack(Item.shovelStone).setWeight(1),
+	new LootItemStack(Item.shovelGold).setWeight(3), new LootItemStack(Item.shovelIron).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Item.shovelStone).setWeight(1),
 
-	new LootItemStack(Item.axeGold).setWeight(3),
-	new LootItemStack(Item.axeIron).setWeight(2),
-	new LootItemStack(ModItems.jadeAxe).setWeight(1),
-	new LootItemStack(Item.axeStone).setWeight(1),
+	new LootItemStack(Item.axeGold).setWeight(3), new LootItemStack(Item.axeIron).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Item.axeStone).setWeight(1),
 
-	new LootItemStack(Item.swordGold).setWeight(3),
-	new LootItemStack(Item.swordIron).setWeight(2),
-	new LootItemStack(ModItems.jadeSword).setWeight(1),
-	new LootItemStack(Item.swordStone).setWeight(1),
+	new LootItemStack(Item.swordGold).setWeight(3), new LootItemStack(Item.swordIron).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Item.swordStone).setWeight(1),
 
-	new LootItemStack(Item.plateIron).setWeight(2),
-	new LootItemStack(ModItems.jadeBody).setWeight(1),
-	new LootItemStack(Item.plateGold).setWeight(1),
+	new LootItemStack(Item.plateIron).setWeight(2), new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Item.plateGold).setWeight(1),
 
-	new LootItemStack(Item.helmetIron).setWeight(2),
-	new LootItemStack(ModItems.jadeHelmet).setWeight(1),
-	new LootItemStack(Item.helmetGold).setWeight(1),
+	new LootItemStack(Item.helmetIron).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1), new LootItemStack(Item.helmetGold).setWeight(1),
 
-	new LootItemStack(Item.legsIron).setWeight(2),
-	new LootItemStack(ModItems.jadeLegs).setWeight(1),
-	new LootItemStack(Item.legsGold).setWeight(1),
+	new LootItemStack(Item.legsIron).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Item.legsGold).setWeight(1),
 
-	new LootItemStack(Item.bootsIron).setWeight(2),
-	new LootItemStack(ModItems.jadeBoots).setWeight(1),
-	new LootItemStack(Item.bootsGold).setWeight(1)
-	).setPostProcessor(new IPostProcess(){
+	new LootItemStack(Item.bootsIron).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Item.bootsGold).setWeight(1)).setPostProcessor(new IPostProcess() {
 		@Override
-		public ItemStack postProcessItem(ItemStack is, Random rand){
-			if (is.itemID==Item.enchantedBook.itemID || (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword) && rand.nextInt(2) == 0){
-				if (is.itemID==Item.enchantedBook.itemID)is.itemID=Item.book.itemID;
-				List enchList = EnchantmentHelper.buildEnchantmentList(rand,is,7+rand.nextInt(10));
-				if (is.itemID==Item.book.itemID)is.itemID=Item.enchantedBook.itemID;
+		public ItemStack postProcessItem(ItemStack is, Random rand) {
+			if (is.itemID == Item.enchantedBook.itemID || (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword) && rand.nextInt(2) == 0) {
+				if (is.itemID == Item.enchantedBook.itemID)
+					is.itemID = Item.book.itemID;
+				List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
+				if (is.itemID == Item.book.itemID)
+					is.itemID = Item.enchantedBook.itemID;
 
-				if (enchList!=null && enchList.size()>0)
-					if (is.itemID==Item.enchantedBook.itemID)Item.enchantedBook.addEnchantment(is,(EnchantmentData)enchList.get(rand.nextInt(enchList.size())));
+				if (enchList != null && enchList.size() > 0)
+					if (is.itemID == Item.enchantedBook.itemID)
+						Item.enchantedBook.addEnchantment(is, (EnchantmentData) enchList.get(rand.nextInt(enchList.size())));
 					else
-						for(int a=0; a<enchList.size(); ++a){
-							EnchantmentData data=(EnchantmentData)enchList.get(a);
-							is.addEnchantment(data.enchantmentobj,data.enchantmentLevel);
+						for (int a = 0; a < enchList.size(); ++a) {
+							EnchantmentData data = (EnchantmentData) enchList.get(a);
+							is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
 						}
 			}
 			return is;
 		}
 	});
-	//@formatter:on
+
+	// @formatter:on
 
 	@Override
 	public boolean generate(World world, Random random, int x, int y, int z) {

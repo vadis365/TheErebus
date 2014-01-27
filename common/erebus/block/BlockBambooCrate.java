@@ -9,9 +9,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import erebus.ErebusMod;
+import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityBambooCrate;
-import erebus.utils.Utils;
 
 public class BlockBambooCrate extends BlockContainer {
 

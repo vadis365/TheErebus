@@ -4,7 +4,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityUmberGolemStatue extends TileEntity {
 	@Override
-	public boolean canUpdate(){
+	public boolean canUpdate() {
 		return false;
 	}
 

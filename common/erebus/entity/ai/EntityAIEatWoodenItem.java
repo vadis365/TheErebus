@@ -59,14 +59,12 @@ public class EntityAIEatWoodenItem extends EntityAIBase {
 		if (theEntity.getNavigator().noPath() && !theEntity.isCollidedHorizontally)
 			theEntity.getMoveHelper().setMoveTo(WoodX + 0.5D, WoodY, WoodZ + 0.5D, moveSpeed);
 		ticksSpent++;
-		if (theEntity.boundingBox.maxY >= blockbounds.minY && theEntity.boundingBox.minY <= blockbounds.maxY && theEntity.boundingBox.maxX >= blockbounds.minX && theEntity.boundingBox.minX <= blockbounds.maxX && theEntity.boundingBox.maxZ >= blockbounds.minZ &&
-		theEntity.boundingBox.minZ <= blockbounds.maxZ && ticksSpent < maxTicks) {
+		if (theEntity.boundingBox.maxY >= blockbounds.minY && theEntity.boundingBox.minY <= blockbounds.maxY && theEntity.boundingBox.maxX >= blockbounds.minX && theEntity.boundingBox.minX <= blockbounds.maxX && theEntity.boundingBox.maxZ >= blockbounds.minZ && theEntity.boundingBox.minZ <= blockbounds.maxZ && ticksSpent < maxTicks) {
 			((EntityBeetleLarva) theEntity).setIsEating(true);
 			((EntityBeetleLarva) theEntity).munchBlock();
 		} else
 			((EntityBeetleLarva) theEntity).setIsEating(false);
-		if (ticksSpent >= maxTicks && theEntity.worldObj.difficultySetting >= diffEaten && theEntity.boundingBox.maxY >= blockbounds.minY && theEntity.boundingBox.minY <= blockbounds.maxY && theEntity.boundingBox.maxX >= blockbounds.minX && theEntity.boundingBox.minX <= blockbounds.maxX &&
-		theEntity.boundingBox.maxZ >= blockbounds.minZ && theEntity.boundingBox.minZ <= blockbounds.maxZ) {
+		if (ticksSpent >= maxTicks && theEntity.worldObj.difficultySetting >= diffEaten && theEntity.boundingBox.maxY >= blockbounds.minY && theEntity.boundingBox.minY <= blockbounds.maxY && theEntity.boundingBox.maxX >= blockbounds.minX && theEntity.boundingBox.minX <= blockbounds.maxX && theEntity.boundingBox.maxZ >= blockbounds.minZ && theEntity.boundingBox.minZ <= blockbounds.maxZ) {
 			theEntity.worldObj.destroyBlock(WoodX, WoodY, WoodZ, false);
 			float size = ((EntityBeetleLarva) theEntity).getLarvaSize();
 			((EntityBeetleLarva) theEntity).setLarvaSize(size + 0.2F);

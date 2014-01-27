@@ -52,8 +52,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 						if (var8 >= 0 && var8 < 256) {
 							var12 = world.getBlockId(var10, var8, var11);
 
-							if (var12 != 0 && Block.blocksList[var12] != null && !Block.blocksList[var12].isLeaves(world, var10, var8, var11) && var12 != Block.grass.blockID && var12 != Block.dirt.blockID && Block.blocksList[var12] != null &&
-							!Block.blocksList[var12].isWood(world, var10, var8, var11) && var12 != Block.sapling.blockID)
+							if (var12 != 0 && Block.blocksList[var12] != null && !Block.blocksList[var12].isLeaves(world, var10, var8, var11) && var12 != Block.grass.blockID && var12 != Block.dirt.blockID && Block.blocksList[var12] != null && !Block.blocksList[var12].isWood(world, var10, var8, var11) && var12 != Block.sapling.blockID)
 								var7 = false;
 						} else
 							var7 = false;
@@ -167,8 +166,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 
 					Block block = Block.blocksList[world.getBlockId(var11, var8, var13)];
 
-					if ((var12 >= 0 || var14 >= 0 || var12 * var12 + var14 * var14 <= var10 * var10) && (var12 <= 0 && var14 <= 0 || var12 * var12 + var14 * var14 <= (var10 + 1) * (var10 + 1)) && (par6Random.nextInt(4) != 0 || var12 * var12 + var14 * var14 <= (var10 - 1) * (var10 - 1)) &&
-					(block == null || block.canBeReplacedByLeaves(world, var11, var8, var13)))
+					if ((var12 >= 0 || var14 >= 0 || var12 * var12 + var14 * var14 <= var10 * var10) && (var12 <= 0 && var14 <= 0 || var12 * var12 + var14 * var14 <= (var10 + 1) * (var10 + 1)) && (par6Random.nextInt(4) != 0 || var12 * var12 + var14 * var14 <= (var10 - 1) * (var10 - 1)) && (block == null || block.canBeReplacedByLeaves(world, var11, var8, var13)))
 						setBlockAndMetadata(world, var11, var8, var13, leavesID, leavesMetadata);
 				}
 			}

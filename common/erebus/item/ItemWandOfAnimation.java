@@ -63,8 +63,7 @@ public class ItemWandOfAnimation extends Item {
 	}
 
 	private boolean canAnimate(Block block) {
-		return block.blockID == Block.chest.blockID || !(block instanceof BlockContainer) && block.blockHardness >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F &&
-		block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
+		return block.blockID == Block.chest.blockID || !(block instanceof BlockContainer) && block.blockHardness >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
 		// Bamboo Crate removed for now
 		// || block.blockID == ModBlocks.bambooCrate.blockID
 	}

@@ -1,7 +1,6 @@
 package erebus.item;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.ForgeHooks;
-import erebus.core.helper.ReflectionHelper;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class ItemPaxel extends ItemTool {
 
@@ -54,19 +53,21 @@ public class ItemPaxel extends ItemTool {
 		return getStrVsBlock(is, block);
 	}
 
-	public static boolean isToolEffective(Block block, int metadata) {
-		List toolClass = (List) ReflectionHelper.getField(ForgeHooks.class, HashMap.class, null, "toolClasses").get(Item.pickaxeIron);
-		if (toolClass != null)
-			return ReflectionHelper.getField(ForgeHooks.class, HashSet.class, null, "toolEffectiveness").contains(Arrays.asList(block, metadata, toolClass.get(0)));
+	public boolean isToolEffective(Block block, int metadata) {
+		try {
+			List tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Item.pickaxeIron);
+			if (tool != null)
+				return ((HashSet<List>) ReflectionHelper.findField(ForgeHooks.class, "toolEffectiveness").get(null)).contains(Arrays.asList(block, metadata, tool.get(0)));
 
-		toolClass = (List) ReflectionHelper.getField(ForgeHooks.class, HashMap.class, null, "toolClasses").get(Item.axeIron);
-		if (toolClass != null)
-			return ReflectionHelper.getField(ForgeHooks.class, HashSet.class, null, "toolEffectiveness").contains(Arrays.asList(block, metadata, toolClass.get(0)));
+			tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Item.axeIron);
+			if (tool != null)
+				return ((HashSet<List>) ReflectionHelper.findField(ForgeHooks.class, "toolEffectiveness").get(null)).contains(Arrays.asList(block, metadata, tool.get(0)));
 
-		toolClass = (List) ReflectionHelper.getField(ForgeHooks.class, HashMap.class, null, "toolClasses").get(Item.shovelIron);
-		if (toolClass != null)
-			return ReflectionHelper.getField(ForgeHooks.class, HashSet.class, null, "toolEffectiveness").contains(Arrays.asList(block, metadata, toolClass.get(0)));
-
+			tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Item.shovelIron);
+			if (tool != null)
+				return ((HashSet<List>) ReflectionHelper.findField(ForgeHooks.class, "toolEffectiveness").get(null)).contains(Arrays.asList(block, metadata, tool.get(0)));
+		} catch (Exception e) {
+		}
 		return false;
 	}
 }

@@ -14,9 +14,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ErebusMod;
+import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityExtenderThingy;
-import erebus.utils.Utils;
 
 public class BlockExtenderThingy extends BlockContainer {
 	@SideOnly(Side.CLIENT)

@@ -58,8 +58,7 @@ public class EntityAIEatCrops extends EntityAIBase {
 			if (!((EntityGrasshopper) theEntity).isEating)
 				theEntity.getMoveHelper().setMoveTo(PlantX + 0.5D, PlantY, PlantZ + 0.5D, moveSpeed);
 		ticksSpent++;
-		if (theEntity.boundingBox.maxY >= blockbounds.minY && theEntity.boundingBox.minY <= blockbounds.maxY && theEntity.boundingBox.maxX >= blockbounds.minX && theEntity.boundingBox.minX <= blockbounds.maxX && theEntity.boundingBox.maxZ >= blockbounds.minZ &&
-		theEntity.boundingBox.minZ <= blockbounds.maxZ && ticksSpent < maxTicks) {
+		if (theEntity.boundingBox.maxY >= blockbounds.minY && theEntity.boundingBox.minY <= blockbounds.maxY && theEntity.boundingBox.maxX >= blockbounds.minX && theEntity.boundingBox.minX <= blockbounds.maxX && theEntity.boundingBox.maxZ >= blockbounds.minZ && theEntity.boundingBox.minZ <= blockbounds.maxZ && ticksSpent < maxTicks) {
 			((EntityGrasshopper) theEntity).setCanJump(false);
 			((EntityGrasshopper) theEntity).setMoveTasks(false);
 			((EntityGrasshopper) theEntity).setIsEating(true);

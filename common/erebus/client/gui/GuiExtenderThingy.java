@@ -9,9 +9,9 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
 import erebus.inventory.ContainerExtenderThingy;
 import erebus.tileentity.TileEntityExtenderThingy;
-import erebus.utils.Utils;
 
 @SideOnly(Side.CLIENT)
 public class GuiExtenderThingy extends GuiContainer {

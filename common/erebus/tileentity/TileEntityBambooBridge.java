@@ -25,9 +25,9 @@ public class TileEntityBambooBridge extends TileEntity {
 	public byte getRenderSide2() {
 		return renderSide2;
 	}
-	
+
 	@Override
-	public boolean canUpdate(){
+	public boolean canUpdate() {
 		return false;
 	}
 

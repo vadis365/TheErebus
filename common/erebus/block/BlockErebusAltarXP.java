@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarXP;
-import erebus.utils.Utils;
 
 public class BlockErebusAltarXP extends BlockContainer {
 

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.utils.Utils;
+import erebus.core.helper.Utils;
 
 @SideOnly(Side.CLIENT)
 public class GuiPetrifiedWorkbench extends GuiCrafting {

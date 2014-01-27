@@ -60,9 +60,7 @@ public class WorldGenBigLake extends WorldGenerator {
 			for (i1 = 0; i1 < 16; ++i1)
 				for (j2 = 0; j2 < 16; ++j2)
 					for (i2 = 0; i2 < 8; ++i2) {
-						flag = !aboolean[(i1 * 16 + j2) * 8 + i2] &&
-						(i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 &&
-						aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
+						flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 						if (flag) {
 							Material material = world.getBlockMaterial(x + i1, y + i2, z + j2);
@@ -97,9 +95,7 @@ public class WorldGenBigLake extends WorldGenerator {
 				for (i1 = 0; i1 < 16; ++i1)
 					for (j2 = 0; j2 < 16; ++j2)
 						for (i2 = 0; i2 < 8; ++i2) {
-							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] &&
-							(i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 &&
-							aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
+							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 							if (flag && (i2 < 4 || rand.nextInt(2) != 0) && world.getBlockMaterial(x + i1, y + i2, z + j2).isSolid())
 								world.setBlock(x + i1, y + i2, z + j2, Block.stone.blockID, 0, 2);

@@ -119,33 +119,33 @@ public class BlockErebusAltar extends BlockContainer {
 
 	private void chooseAltar(World world, int x, int y, int z, int damage) {
 		switch (damage) {
-			case 8:
-				if (!world.isRemote)
-					world.setBlock(x, y, z, ModBlocks.erebusAltarXP.blockID, world.getBlockMetadata(x, y, z), 3);
-				if (world.isRemote)
-					message = "Altar of Experience Summoned.";
-				break;
+		case 8:
+			if (!world.isRemote)
+				world.setBlock(x, y, z, ModBlocks.erebusAltarXP.blockID, world.getBlockMetadata(x, y, z), 3);
+			if (world.isRemote)
+				message = "Altar of Experience Summoned.";
+			break;
 
-			case 9:
-				if (!world.isRemote)
-					world.setBlock(x, y, z, ModBlocks.erebusAltarRepair.blockID, world.getBlockMetadata(x, y, z), 3);
-				if (world.isRemote)
-					message = "Altar of Repair Summoned.";
-				break;
+		case 9:
+			if (!world.isRemote)
+				world.setBlock(x, y, z, ModBlocks.erebusAltarRepair.blockID, world.getBlockMetadata(x, y, z), 3);
+			if (world.isRemote)
+				message = "Altar of Repair Summoned.";
+			break;
 
-			case 12:
-				if (!world.isRemote)
-					world.setBlock(x, y, z, ModBlocks.erebusAltarLightning.blockID, world.getBlockMetadata(x, y, z), 3);
-				if (world.isRemote)
-					message = "Altar of Lightning Summoned.";
-				break;
+		case 12:
+			if (!world.isRemote)
+				world.setBlock(x, y, z, ModBlocks.erebusAltarLightning.blockID, world.getBlockMetadata(x, y, z), 3);
+			if (world.isRemote)
+				message = "Altar of Lightning Summoned.";
+			break;
 
-			case 13:
-				if (!world.isRemote)
-					world.setBlock(x, y, z, ModBlocks.erebusAltarHealing.blockID, world.getBlockMetadata(x, y, z), 3);
-				if (world.isRemote)
-					message = "Altar of Healing Summoned.";
-				break;
+		case 13:
+			if (!world.isRemote)
+				world.setBlock(x, y, z, ModBlocks.erebusAltarHealing.blockID, world.getBlockMetadata(x, y, z), 3);
+			if (world.isRemote)
+				message = "Altar of Healing Summoned.";
+			break;
 		}
 	}
 }

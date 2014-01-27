@@ -11,9 +11,9 @@ import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
 import erebus.inventory.ContainerUmberFurnace;
 import erebus.tileentity.TileEntityUmberFurnace;
-import erebus.utils.Utils;
 
 @SideOnly(Side.CLIENT)
 public class GuiUmberFurnace extends GuiContainer {

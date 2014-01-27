@@ -11,8 +11,7 @@ import erebus.entity.EntityBeetle;
 
 @SideOnly(Side.CLIENT)
 public class RenderBeetle extends RenderLiving {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/Beetlerarespawn.png"), new ResourceLocation("erebus:textures/entity/Beetleblue.png"), new ResourceLocation("erebus:textures/entity/Beetlebrown.png"),
-	new ResourceLocation("erebus:textures/entity/Beetlegreen.png"), new ResourceLocation("erebus:textures/entity/Beetlered.png"), new ResourceLocation("erebus:textures/entity/Beetletan.png") };
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/Beetlerarespawn.png"), new ResourceLocation("erebus:textures/entity/Beetleblue.png"), new ResourceLocation("erebus:textures/entity/Beetlebrown.png"), new ResourceLocation("erebus:textures/entity/Beetlegreen.png"), new ResourceLocation("erebus:textures/entity/Beetlered.png"), new ResourceLocation("erebus:textures/entity/Beetletan.png") };
 
 	public RenderBeetle() {
 		super(new ModelBeetle(), 0.5F);

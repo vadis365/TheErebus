@@ -1,4 +1,4 @@
-package erebus.utils;
+package erebus.core.helper;
 
 import java.awt.Color;
 

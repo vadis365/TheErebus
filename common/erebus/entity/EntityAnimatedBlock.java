@@ -27,8 +27,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ErebusMod;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
-import erebus.utils.Utils;
 
 public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditionalSpawnData {
 

@@ -255,8 +255,7 @@ public class ClientProxy extends CommonProxy {
 				return;
 
 			for (int countparticles = 0; countparticles <= 50; ++countparticles)
-				eff.addEffect(new EntityDiggingFX(player.worldObj, woodX + 0.5D + (e.getRNG().nextDouble() - 0.5D) * e.width, woodY + 0.2D + e.getRNG().nextDouble() * e.height - e.yOffset, woodZ + 0.5D + (e.getRNG().nextDouble() - 0.5D) * e.width, e.getRNG().nextGaussian() * 0.5D, e.getRNG()
-				.nextGaussian() * 0.01D, e.getRNG().nextGaussian() * 0.5D, block, blockMeta));
+				eff.addEffect(new EntityDiggingFX(player.worldObj, woodX + 0.5D + (e.getRNG().nextDouble() - 0.5D) * e.width, woodY + 0.2D + e.getRNG().nextDouble() * e.height - e.yOffset, woodZ + 0.5D + (e.getRNG().nextDouble() - 0.5D) * e.width, e.getRNG().nextGaussian() * 0.5D, e.getRNG().nextGaussian() * 0.01D, e.getRNG().nextGaussian() * 0.5D, block, blockMeta));
 		}
 	}
 

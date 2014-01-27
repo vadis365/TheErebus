@@ -10,8 +10,8 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityAnimatedChest;
-import erebus.utils.Utils;
 
 public class EntityAnimatedChest extends EntityAnimatedBlock {
 
