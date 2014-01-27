@@ -3,7 +3,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Minecraft"/>
 	<classpathentry kind="src" path="common"/>
 	<classpathentry kind="src" path="resources"/>
-	<classpathentry kind="lib" path="/Minecraft/lib/CodeChickenLib-dev-1.6.4-1.0.0.51.jar"/>
 	<classpathentry kind="lib" path="/Minecraft/lib/NotEnoughItems-dev 1.6.1.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
