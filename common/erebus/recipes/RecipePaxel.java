@@ -5,8 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
-import erebus.ErebusMod;
 import erebus.ModItems;
+import erebus.ModMaterials;
 
 public class RecipePaxel implements IRecipe {
 	@Override
@@ -29,7 +29,7 @@ public class RecipePaxel implements IRecipe {
 			currentDurability += is.getMaxDamage() - is.getItemDamage();
 		}
 
-		return new ItemStack(ModItems.jadePaxel.itemID, 1, ErebusMod.toolJADEPAXEL.getMaxUses() - (int) Math.floor((float) currentDurability * ErebusMod.toolJADEPAXEL.getMaxUses() / totalDurability));
+		return new ItemStack(ModItems.jadePaxel.itemID, 1, ModMaterials.toolJADEPAXEL.getMaxUses() - (int) Math.floor((float) currentDurability * ModMaterials.toolJADEPAXEL.getMaxUses() / totalDurability));
 	}
 
 	@Override

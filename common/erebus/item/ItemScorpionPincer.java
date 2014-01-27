@@ -8,13 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import erebus.ErebusMod;
+import erebus.ModMaterials;
 import erebus.entity.EntityScorpion;
 
 public class ItemScorpionPincer extends ItemSword {
 
 	public ItemScorpionPincer(int id) {
-		super(id, ErebusMod.weaponScorpionPincer);
+		super(id, ModMaterials.weaponScorpionPincer);
 		maxStackSize = 1;
 	}
 

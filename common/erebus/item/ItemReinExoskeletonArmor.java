@@ -3,13 +3,13 @@ package erebus.item;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import erebus.ErebusMod;
 import erebus.ModItems;
+import erebus.ModMaterials;
 
 public class ItemReinExoskeletonArmor extends ItemArmor {
 
 	public ItemReinExoskeletonArmor(int id, int armorType) {
-		super(id, ErebusMod.armorREINEXOSKELETON, 2, armorType);
+		super(id, ModMaterials.armorREINEXOSKELETON, 2, armorType);
 	}
 
 	@Override

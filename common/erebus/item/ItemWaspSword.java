@@ -5,13 +5,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import erebus.ErebusMod;
+import erebus.ModMaterials;
 import erebus.entity.EntityWasp;
 
 public class ItemWaspSword extends ItemSword {
 
 	public ItemWaspSword(int id) {
-		super(id, ErebusMod.weaponWaspSword);
+		super(id, ModMaterials.weaponWaspSword);
 		maxStackSize = 1;
 	}
 

@@ -16,14 +16,14 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
 import erebus.ModItems;
+import erebus.ModMaterials;
 import erebus.client.model.armor.ModelArmorGlider;
 
 public class ItemArmorGlider extends ItemArmor {
 
 	public ItemArmorGlider(int id, int armorType) {
-		super(id, ErebusMod.armorREINEXOSPECIAL, 2, armorType);
+		super(id, ModMaterials.armorREINEXOSPECIAL, 2, armorType);
 	}
 
 	@Override

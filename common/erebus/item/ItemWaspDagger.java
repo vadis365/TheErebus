@@ -5,12 +5,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
-import erebus.ErebusMod;
+import erebus.ModMaterials;
 import erebus.entity.EntityWaspDagger;
 
 public class ItemWaspDagger extends ItemSword {
 	public ItemWaspDagger(int id) {
-		super(id, ErebusMod.weaponWaspDagger);
+		super(id, ModMaterials.weaponWaspDagger);
 		maxStackSize = 16;
 		setTextureName("paper");
 	}

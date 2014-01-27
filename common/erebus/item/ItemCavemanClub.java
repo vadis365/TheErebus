@@ -3,12 +3,12 @@ package erebus.item;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import erebus.ErebusMod;
+import erebus.ModMaterials;
 
 public class ItemCavemanClub extends ItemSword {
 
 	public ItemCavemanClub(int id) {
-		super(id, ErebusMod.toolCAVEMANCLUB);
+		super(id, ModMaterials.toolCAVEMANCLUB);
 	}
 
 	@Override
