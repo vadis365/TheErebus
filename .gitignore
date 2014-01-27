@@ -1,3 +1,4 @@
 bin/
 .settings/
+.classpath
 .DS_Store
