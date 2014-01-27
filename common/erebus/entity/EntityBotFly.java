@@ -20,7 +20,7 @@ import erebus.client.render.entity.AnimationMathHelper;
 import erebus.item.ItemErebusMaterial;
 
 public class EntityBotFly extends EntityMob {
-
+//AKA ButtFly
 	private ChunkCoordinates currentFlightTarget;
 	private float heightOffset = 0.5F;
 	public float wingFloat;
