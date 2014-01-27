@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityBambooCrate;
@@ -30,7 +30,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedChest {
 				chest.setInventorySlotContents(i, inventory[i]);
 			return true;
 		} else if (is == null) {
-			player.openGui(ErebusMod.instance, CommonProxy.GUI_ID_ANIMATED_BAMBOO_CRATE, player.worldObj, entityId, 0, 0);
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_ANIMATED_BAMBOO_CRATE, player.worldObj, entityId, 0, 0);
 			return true;
 		} else
 			return false;

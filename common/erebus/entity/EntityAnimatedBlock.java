@@ -24,7 +24,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
@@ -174,7 +174,7 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 			worldObj.playSoundEffect(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), "erebus:altaroffering", 0.2F, 1.0F);
 			return true;
 		} else if (blockID == ModBlocks.petrifiedCraftingTable.blockID && is == null) {
-			player.openGui(ErebusMod.instance, CommonProxy.GUI_ID_PETRIFIED_CRAFT, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CRAFT, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
 			return true;
 		} else
 			return false;

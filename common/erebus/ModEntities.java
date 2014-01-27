@@ -113,7 +113,7 @@ public class ModEntities {
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name) {
-		EntityRegistry.registerModEntity(entityClass, name, id, ErebusMod.instance, 256, 1, true);
+		EntityRegistry.registerModEntity(entityClass, name, id, Erebus.instance, 256, 1, true);
 	}
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor) {

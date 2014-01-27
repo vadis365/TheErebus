@@ -19,7 +19,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
@@ -250,7 +250,7 @@ public class BlockPetrifiedChest extends BlockContainer {
 		if (world.isRemote)
 			return true;
 		else {
-			player.openGui(ErebusMod.instance, CommonProxy.GUI_ID_PETRIFIED_CHEST, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CHEST, world, x, y, z);
 			return true;
 		}
 	}

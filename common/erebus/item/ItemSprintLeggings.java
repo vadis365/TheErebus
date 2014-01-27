@@ -11,7 +11,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModItems;
 
 public class ItemSprintLeggings extends ItemArmor {
@@ -22,7 +22,7 @@ public class ItemSprintLeggings extends ItemArmor {
 
 	public ItemSprintLeggings(int i, EnumArmorMaterial enumarmormaterial, int k) {
 		super(i, enumarmormaterial, 2, k);
-		setCreativeTab(ErebusMod.tabErebusGear);
+		setCreativeTab(Erebus.tabErebusGear);
 	}
 
 	@Override

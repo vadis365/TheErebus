@@ -6,7 +6,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 
 import com.google.common.io.ByteArrayDataInput;
 
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.network.IPacket;
 
 public class PacketParticle implements IPacket {
@@ -16,6 +16,6 @@ public class PacketParticle implements IPacket {
 
 	@Override
 	public void handle(INetworkManager manager, Packet250CustomPayload packet, EntityPlayer player, ByteArrayDataInput data) {
-		ErebusMod.proxy.handleParticlePacket(manager, packet, player, data);
+		Erebus.proxy.handleParticlePacket(manager, packet, player, data);
 	}
 }

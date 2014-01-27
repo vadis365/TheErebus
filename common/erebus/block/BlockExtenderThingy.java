@@ -13,7 +13,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityExtenderThingy;
@@ -47,7 +47,7 @@ public class BlockExtenderThingy extends BlockContainer {
 			return true;
 
 		if (world.getBlockTileEntity(x, y, z) != null)
-			player.openGui(ErebusMod.instance, CommonProxy.GUI_ID_EXTENDER_THINGY, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_EXTENDER_THINGY, world, x, y, z);
 
 		return true;
 	}

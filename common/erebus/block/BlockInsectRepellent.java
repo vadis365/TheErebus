@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModBlocks;
 
 public class BlockInsectRepellent extends Block {
@@ -94,7 +94,7 @@ public class BlockInsectRepellent extends Block {
 				particleX = x + 0 - d0;
 
 			if (particleX < x || particleX > x + 1 || particleY < 0.0D || particleY > y + 1 || particleZ < z || particleZ > z + 1)
-				ErebusMod.proxy.spawnCustomParticle("repellent", world, particleX, particleY, particleZ, 0D, 0D, 0D);
+				Erebus.proxy.spawnCustomParticle("repellent", world, particleX, particleY, particleZ, 0D, 0D, 0D);
 		}
 	}
 

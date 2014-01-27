@@ -6,7 +6,7 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModBlocks;
 
 @SideOnly(Side.CLIENT)
@@ -48,6 +48,6 @@ public class BlockBambooCropRender implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return ErebusMod.proxy.bambooCropRenderID;
+		return Erebus.proxy.bambooCropRenderID;
 	}
 }

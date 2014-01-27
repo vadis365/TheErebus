@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.core.handler.ConfigurationHandler;
 import erebus.core.teleport.TeleportClient;
@@ -56,7 +56,7 @@ public class BlockPortalErebus extends BlockBreakable {
 		if (side == Side.SERVER) {
 			if (entity.ridingEntity == null && entity.riddenByEntity == null && entity instanceof EntityPlayerMP) {
 				EntityPlayerMP player = (EntityPlayerMP) entity;
-				ErebusMod.teleportHandler.getPlayer(player.username).setInPortal();
+				Erebus.teleportHandler.getPlayer(player.username).setInPortal();
 			}
 		} else if (side == Side.CLIENT && entity instanceof EntityPlayer) {
 			TeleportClient.setInPortal();

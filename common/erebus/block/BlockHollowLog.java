@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
+import erebus.Erebus;
 
 public class BlockHollowLog extends Block {
 
@@ -48,7 +48,7 @@ public class BlockHollowLog extends Block {
 
 	@Override
 	public int getRenderType() {
-		return ErebusMod.proxy.hollowLogRenderID;
+		return Erebus.proxy.hollowLogRenderID;
 	}
 
 	@Override

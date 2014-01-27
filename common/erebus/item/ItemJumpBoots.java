@@ -9,14 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModItems;
 
 public class ItemJumpBoots extends ItemArmor {
 
 	public ItemJumpBoots(int i, EnumArmorMaterial enumarmormaterial, int k) {
 		super(i, enumarmormaterial, 2, k);
-		setCreativeTab(ErebusMod.tabErebusGear);
+		setCreativeTab(Erebus.tabErebusGear);
 	}
 
 	@Override

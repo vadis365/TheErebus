@@ -44,13 +44,13 @@ import erebus.world.WorldProviderErebus;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
 @NetworkMod(channels = { Reference.CHANNEL }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
-public class ErebusMod {
+public class Erebus {
 
 	@SidedProxy(clientSide = Reference.SP_CLIENT, serverSide = Reference.SP_SERVER)
 	public static CommonProxy proxy;
 
 	@Instance(Reference.MOD_ID)
-	public static ErebusMod instance;
+	public static Erebus instance;
 
 	public static CreativeTabErebus tabErebusBlock = new CreativeTabErebusBlock("erebus.block");
 	public static CreativeTabErebus tabErebusItem = new CreativeTabErebusItem("erebus.item");

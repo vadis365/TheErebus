@@ -8,7 +8,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.core.proxy.CommonProxy;
 
 public class BlockPetrifiedCraftingTable extends Block {
@@ -25,7 +25,7 @@ public class BlockPetrifiedCraftingTable extends Block {
 		if (world.isRemote)
 			return true;
 		else {
-			player.openGui(ErebusMod.instance, CommonProxy.GUI_ID_PETRIFIED_CRAFT, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CRAFT, world, x, y, z);
 			return true;
 		}
 	}

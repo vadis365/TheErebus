@@ -19,7 +19,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityUmberFurnace;
@@ -103,7 +103,7 @@ public class BlockUmberFurnace extends BlockContainer {
 		}
 
 		if (tile != null)
-			player.openGui(ErebusMod.instance, CommonProxy.GUI_ID_UMBER_FURNACE, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_UMBER_FURNACE, world, x, y, z);
 
 		return true;
 

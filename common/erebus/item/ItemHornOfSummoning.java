@@ -5,7 +5,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.ErebusMod;
+import erebus.Erebus;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityLocust;
 
@@ -14,7 +14,7 @@ public class ItemHornOfSummoning extends Item {
 	public ItemHornOfSummoning(int id) {
 		super(id);
 		maxStackSize = 1;
-		setCreativeTab(ErebusMod.tabErebusGear);
+		setCreativeTab(Erebus.tabErebusGear);
 	}
 
 	@Override
