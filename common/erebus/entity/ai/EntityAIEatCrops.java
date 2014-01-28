@@ -1,7 +1,6 @@
 package erebus.entity.ai;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.AxisAlignedBB;
 import erebus.ModBlocks;
@@ -13,7 +12,7 @@ public class EntityAIEatCrops extends EntityAIBase {
 	private final int diffEaten = 0;// 0-peaceful,1-easy,2-med,3-hard
 	private final int maxTicks = 240;// approx 30 tick/sec +- processing delays
 	private final int maxDistance = 8;// higher numbers increase load
-	protected EntityLiving theEntity;
+	protected EntityGrasshopper theEntity;
 	public int PlantX;
 	public int PlantY;
 	public int PlantZ;
@@ -21,7 +20,7 @@ public class EntityAIEatCrops extends EntityAIBase {
 	private int ticksSpent = 0;
 	private int reproCap = 0;
 
-	public EntityAIEatCrops(EntityLiving entityLiving, double d) {
+	public EntityAIEatCrops(EntityGrasshopper entityLiving, double d) {
 		theEntity = entityLiving;
 		moveSpeed = d;
 		setMutexBits(1);
@@ -32,17 +31,12 @@ public class EntityAIEatCrops extends EntityAIBase {
 		if (theEntity.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing")) {
 			boolean hasFoundPlant = findClosestPlant(maxDistance);
 			if (!hasFoundPlant) {
-				((EntityGrasshopper) theEntity).setIsEating(false);
+				theEntity.setIsEating(false);
 				return false;
 			}
 			return true;
 		} else
 			return false;
-	}
-
-	@Override
-	public void startExecuting() {
-		super.startExecuting();
 	}
 
 	@Override
@@ -55,20 +49,20 @@ public class EntityAIEatCrops extends EntityAIBase {
 		AxisAlignedBB blockbounds = getBlockAABB(PlantX, PlantY, PlantZ);
 		theEntity.getLookHelper().setLookPosition(PlantX + 0.5D, PlantY + 0.5D, PlantZ + 0.5D, 50.0F, 8.0F);
 		if (theEntity.getNavigator().noPath())
-			if (!((EntityGrasshopper) theEntity).isEating)
+			if (!theEntity.isEating)
 				theEntity.getMoveHelper().setMoveTo(PlantX + 0.5D, PlantY, PlantZ + 0.5D, moveSpeed);
 		ticksSpent++;
 		if (theEntity.boundingBox.maxY >= blockbounds.minY && theEntity.boundingBox.minY <= blockbounds.maxY && theEntity.boundingBox.maxX >= blockbounds.minX && theEntity.boundingBox.minX <= blockbounds.maxX && theEntity.boundingBox.maxZ >= blockbounds.minZ && theEntity.boundingBox.minZ <= blockbounds.maxZ && ticksSpent < maxTicks) {
-			((EntityGrasshopper) theEntity).setCanJump(false);
-			((EntityGrasshopper) theEntity).setMoveTasks(false);
-			((EntityGrasshopper) theEntity).setIsEating(true);
-			((EntityGrasshopper) theEntity).munchBlock();
+			theEntity.setCanJump(false);
+			theEntity.setMoveTasks(false);
+			theEntity.setIsEating(true);
+			theEntity.munchBlock();
 		} else
-			((EntityGrasshopper) theEntity).setIsEating(false);
+			theEntity.setIsEating(false);
 		if (ticksSpent >= maxTicks && theEntity.worldObj.difficultySetting >= diffEaten && theEntity.boundingBox.maxY >= blockbounds.minY && theEntity.boundingBox.minY <= blockbounds.maxY) {
 			theEntity.worldObj.destroyBlock(PlantX, PlantY, PlantZ, false);
-			((EntityGrasshopper) theEntity).setMoveTasks(true);
-			((EntityGrasshopper) theEntity).setCanJump(true);
+			theEntity.setMoveTasks(true);
+			theEntity.setCanJump(true);
 			if (reproCap == 6)
 				if (theEntity.worldObj.countEntities(EntityGrasshopper.class) < 80) {
 					EntityGrasshopper entityGrasshopper = new EntityGrasshopper(theEntity.worldObj);
