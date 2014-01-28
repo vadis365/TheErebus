@@ -403,7 +403,8 @@ public class ModelWasp extends ModelBase {
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-
+		GL11.glPushMatrix();
+		GL11.glTranslated(0F, 0F, -0.5F);
 		Thx.render(unitPixel);
 		ThxS.render(unitPixel);
 		ThxTop.render(unitPixel);
@@ -461,6 +462,7 @@ public class ModelWasp extends ModelBase {
 		LWingMid.render(unitPixel);
 		LWingFront.render(unitPixel);
 		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 	}
 
