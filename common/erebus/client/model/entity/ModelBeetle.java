@@ -1,5 +1,7 @@
 package erebus.client.model.entity;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -249,6 +251,8 @@ public class ModelBeetle extends ModelBase {
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		GL11.glPushMatrix();
+		GL11.glTranslated(0F, 0F, -0.375F);
 		backbody.render(unitPixel);
 		body.render(unitPixel);
 		head.render(unitPixel);
@@ -260,6 +264,7 @@ public class ModelBeetle extends ModelBase {
 		RFL1.render(unitPixel);
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
+		GL11.glPopMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
