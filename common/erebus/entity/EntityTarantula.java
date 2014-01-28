@@ -80,6 +80,26 @@ public class EntityTarantula extends EntityMob {
 
 		dataWatcher.updateObject(16, Byte.valueOf(b0));
 	}
+	
+	@Override
+	protected String getLivingSound() {
+		return "mob.spider.say";
+	}
+
+	@Override
+	protected String getHurtSound() {
+		return "mob.spider.say";
+	}
+
+	@Override
+	protected String getDeathSound() {
+		return "mob.spider.death";
+	}
+
+	@Override
+	protected void playStepSound(int x, int y, int z, int blockID) {
+		playSound("mob.spider.step", 0.15F, 1.0F);
+	}
 
 	@Override
 	public void onUpdate() {
