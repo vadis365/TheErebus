@@ -90,6 +90,7 @@ public class ConfigurationHandler {
 			ModBlocks.blockWitherWebID = config.getBlock("Block ID of Wither Web", 2576).getInt(2576);
 			ModBlocks.extenderThingyID = config.getBlock("Block ID of Bamboo Extender", 2578).getInt(2578);
 			ModBlocks.bambooPoleID = config.getBlock("Block ID of Bamboo Nerd Pole", 2579).getInt(2579);
+			ModBlocks.umberstonePillarID = config.getBlock("Block ID of Umberstone Pillar", 2580).getInt(2580);
 
 			int id = 2527;
 			ModBlocks.umbercobbleStairsID = new int[BlockUmberstone.iconPaths.length];

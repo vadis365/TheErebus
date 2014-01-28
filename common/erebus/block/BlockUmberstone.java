@@ -13,12 +13,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-/**
- * @author ProPercivalalb
- */
 public class BlockUmberstone extends Block {
 
-	public static final String[] iconPaths = new String[] { "Umberstone", "cobbleUmber", "cobbleUmberMossy", "cobbleUmberWebbed", "umberstoneBricks" };
+	public static final String[] iconPaths = new String[] { "Umberstone", "cobbleUmber", "cobbleUmberMossy", "cobbleUmberWebbed", "umberstoneBricks", "smoothUmbertile", "smoothUmbertiles" };
 	public static final Icon[] icons = new Icon[iconPaths.length];
 
 	public BlockUmberstone(int id) {
@@ -26,10 +23,10 @@ public class BlockUmberstone extends Block {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister) {
+	public void registerIcons(IconRegister reg) {
 		int i = 0;
 		for (String path : iconPaths)
-			icons[i++] = iconRegister.registerIcon("erebus:" + path);
+			icons[i++] = reg.registerIcon("erebus:" + path);
 	}
 
 	@Override
@@ -42,8 +39,8 @@ public class BlockUmberstone extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {
-		for (int a = 0; a < icons.length; a++)
-			list.add(new ItemStack(id, 1, a));
+		for (int i = 0; i < icons.length; i++)
+			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override

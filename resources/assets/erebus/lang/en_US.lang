@@ -95,12 +95,16 @@ umberStone_item_1.name=Umbercobble
 umberStone_item_2.name=Mossy Umbercobble
 umberStone_item_3.name=Webbed Umbercobble
 umberStone_item_4.name=Umbricks
+umberStone_item_5.name=Smooth Umbertile
+umberStone_item_6.name=Smooth Umbertiles
 tile.umberstoneButton.name=Umberstone Button
 tile.umbercobbleStairs0.name=Umberstone Stairs
 tile.umbercobbleStairs1.name=Umbercobble Stairs
 tile.umbercobbleStairs2.name=Mossy Umbercobble Stairs
 tile.umbercobbleStairs3.name=Webbed Umbercobble Stairs
 tile.umbercobbleStairs4.name=Umbricks Stairs
+tile.umbercobbleStairs5.name=Smooth Umbertile Stairs
+tile.umbercobbleStairs6.name=Smooth Umbertiles Stairs
 tile.amberBrickStairs.name=Amber Brick Stairs
 tile.waspNestStairs.name=Wasp Nest Stairs
 erebusSapling_item_0.name=Acacia Sapling
@@ -146,6 +150,7 @@ tile.blockBones.name=Block o' Bones
 tile.witherWeb.name=Wither Web
 tile.extenderThingy.name=Bamboo Extender
 tile.bambooPole.name=Bamboo Nerd Pole
+tile.umberstonePillar.name=Umberstone Pillar
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet
