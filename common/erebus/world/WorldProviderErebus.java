@@ -17,9 +17,6 @@ public class WorldProviderErebus extends WorldProvider {
 	@SideOnly(Side.CLIENT)
 	private double[] currentFogColor, targetFogColor;
 
-	public WorldProviderErebus() {
-	}
-
 	@Override
 	public boolean canRespawnHere() {
 		return false;

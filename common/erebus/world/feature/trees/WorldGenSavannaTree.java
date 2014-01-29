@@ -8,19 +8,15 @@ import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
 
+// @formatter:off
 public class WorldGenSavannaTree extends WorldGenerator {
-
-	private final int extraHeight;
-
-	public WorldGenSavannaTree(int extraHeight) {
-		this.extraHeight = extraHeight;
-	}
-
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
-		for (int i = 0; i < 6 + extraHeight; i++)
-			if (world.getBlockId(x, y + i, z) != 0)
-				return false;
+		int extraHeight = rand.nextInt(3);
+		
+		for (int i = 0; i < 6 + extraHeight; i++) {
+			if (world.getBlockId(x, y + i, z) != 0) return false;
+		}
 
 		for (int i = 0; i < 6 + extraHeight; i++)
 			world.setBlock(x, y + i, z, ModBlocks.logErebusGroup1.blockID, BlockLogErebus.dataAcacia, 2);
@@ -37,3 +33,4 @@ public class WorldGenSavannaTree extends WorldGenerator {
 		return true;
 	}
 }
+// @formatter:on

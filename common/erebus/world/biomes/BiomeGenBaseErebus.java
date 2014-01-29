@@ -10,6 +10,7 @@ import erebus.block.BlockErebusOreExtras;
 import erebus.core.handler.ConfigurationHandler;
 import erebus.world.feature.WorldGenErebusMinable;
 
+// @formatter:off
 public abstract class BiomeGenBaseErebus extends BiomeGenBase{
 	public BiomeGenBaseErebus(int biomeID){
 		super(biomeID);
@@ -31,7 +32,7 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase{
 		return rand.nextInt(16) + 8;
 	}
 	
-	public abstract void generateTerrain(World worldObj, Random rand, int x, int z);
+	public abstract void generateTerrain(World world, Random rand, int x, int z);
 
 	public void generateOres(World worldObj, Random rand, int x, int z){
 		boolean extraOres=ConfigurationHandler.lead||ConfigurationHandler.silver||ConfigurationHandler.copper||ConfigurationHandler.tin||ConfigurationHandler.aluminium;
@@ -129,3 +130,4 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase{
 		}
 	}
 }
+// @formatter:on
