@@ -252,6 +252,7 @@ entity.Erebus.MoneySpider.name=Money Spider
 entity.Erebus.PrayingMantis.name=Praying Mantis
 entity.Erebus.JumpingSpider.name=Jumping Spider
 entity.Erebus.FireAnt.name=Fire Ant
+entity.Erebus.RhinoBeetle.name=Rhino Beetle
 
 #Other
 itemGroup.erebus.block=Erebus Blocks
