@@ -52,14 +52,7 @@ public class VelocityBlock extends Block {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack is) {
 		int angle = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-		if (angle == 0)
-			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
-		if (angle == 1)
-			world.setBlockMetadataWithNotify(x, y, z, 1, 2);
-		if (angle == 2)
-			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-		if (angle == 3)
-			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+		world.setBlockMetadataWithNotify(x, y, z, angle, 2);
 	}
 
 	@Override
