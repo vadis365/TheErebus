@@ -10,7 +10,6 @@ import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityCentipede;
-import erebus.entity.EntityFirebrat;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntitySolifuge;
@@ -27,7 +26,6 @@ public final class RandomMobNames {
 		names.put(EntityBeetle.class, new NameData(280, new String[] { "John Lennon", "Paul McCartney", "George Harisson", "Ringo Starr" }));
 		names.put(EntityCentipede.class, new NameData(220, new String[] { "Centipaedo" }));
 		names.put(EntitySolifuge.class, new NameData(220, new String[] { "Fast & Furious" }));
-		names.put(EntityFirebrat.class, new NameData(200, new String[] { "Firebra", "Ginger Silverfish" }));
 		names.put(EntityScorpion.class, new NameData(150, new String[] { "Nippletwister" }));
 	};
 

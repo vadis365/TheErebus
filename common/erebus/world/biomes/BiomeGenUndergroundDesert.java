@@ -13,7 +13,6 @@ import erebus.entity.EntityAntlion;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityFireAnt;
-import erebus.entity.EntityFirebrat;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityScorpion;
@@ -33,7 +32,6 @@ public class BiomeGenUndergroundDesert extends BiomeGenBaseErebus {
 		spawnableMonsterList.add(new SpawnListEntry(EntityScorpion.class, 30, 1, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySolifuge.class, 30, 1, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityFireAnt.class, 30, 1, 8));
-		spawnableMonsterList.add(new SpawnListEntry(EntityFirebrat.class, 30, 1, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityBlackWidow.class, 5, 1, 1));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class, 10, 4, 8));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class, 10, 8, 8));
