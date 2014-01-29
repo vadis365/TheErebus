@@ -99,24 +99,24 @@ public abstract class GenLayerErebus extends GenLayer {
 	}
 
 	@Override
-	public void initChunkSeed(long par1, long par3) {
+	public void initChunkSeed(long x, long z) {
 		chunkSeed = worldGenSeed;
 		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += par1;
+		chunkSeed += x;
 		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += par3;
+		chunkSeed += z;
 		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += par1;
+		chunkSeed += x;
 		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += par3;
+		chunkSeed += z;
 	}
 
 	@Override
-	protected int nextInt(int par1) {
-		int j = (int) ((chunkSeed >> 24) % par1);
+	protected int nextInt(int range) {
+		int j = (int) ((chunkSeed >> 24) % range);
 
 		if (j < 0)
-			j += par1;
+			j += range;
 
 		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
 		chunkSeed += worldGenSeed;
@@ -124,7 +124,7 @@ public abstract class GenLayerErebus extends GenLayer {
 	}
 
 	@Override
-	public abstract int[] getInts(int i, int j, int k, int l);
+	public abstract int[] getInts(int x, int z, int sizeX, int sizeZ);
 
 	public static byte getModdedBiomeSize(WorldType worldType, byte original) {
 		WorldTypeEvent.BiomeSize event = new WorldTypeEvent.BiomeSize(worldType, original);

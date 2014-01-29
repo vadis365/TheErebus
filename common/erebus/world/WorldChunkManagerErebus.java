@@ -20,19 +20,18 @@ import erebus.world.genlayer.GenLayerErebus;
 
 public class WorldChunkManagerErebus extends WorldChunkManager {
 
-	private final float hellTemperature;
+	private static final float temperature = 1F;
+	private static final float rainfall = 0F;
+	private static final ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah));
+	
 	private final List biomesToSpawnIn;
-	public static ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ModBiomes.underjungle, ModBiomes.undersavannah));
 	private final BiomeCache biomeCache;
 	private final GenLayer biomeIndexLayer;
 	private final GenLayer genBiomes;
 
-	private final float rainfall;
 
-	public WorldChunkManagerErebus(float temperature, float rain, World world) {
+	public WorldChunkManagerErebus(World world) {
 		biomesToSpawnIn = new ArrayList(allowedBiomes);
-		hellTemperature = temperature;
-		rainfall = rain;
 		biomeCache = new BiomeCache(this);
 		GenLayer[] layers = GenLayerErebus.initializeAllBiomeGenerators(world.getSeed(), world.getWorldInfo().getTerrainType());
 		layers = getModdedBiomeGenerators(world.getWorldInfo().getTerrainType(), world.getSeed(), layers);
@@ -49,30 +48,27 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase biomesForGeneration[], int x, int z, int sizeX, int sizeZ) {
 		IntCache.resetIntCache();
 
-		if (biomesForGeneration == null || biomesForGeneration.length < sizeX * sizeZ)
-			biomesForGeneration = new BiomeGenBase[sizeX * sizeZ];
+		if (biomesForGeneration == null || biomesForGeneration.length < sizeX * sizeZ) biomesForGeneration = new BiomeGenBase[sizeX * sizeZ];
 
-		int[] var6 = genBiomes.getInts(x, z, sizeX, sizeZ);
+		int[] biomeArray = genBiomes.getInts(x, z, sizeX, sizeZ);
 
-		for (int var7 = 0; var7 < sizeX * sizeZ; ++var7)
-			biomesForGeneration[var7] = BiomeGenBase.biomeList[var6[var7]];
+		for (int index = 0; index < sizeX * sizeZ; ++index)
+			biomesForGeneration[index] = BiomeGenBase.biomeList[biomeArray[index]];
 
 		return biomesForGeneration;
 	}
 
 	@Override
 	public float[] getTemperatures(float temperatureArray[], int x, int z, int sizeX, int sizeZ) {
-		if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ)
-			temperatureArray = new float[sizeX * sizeZ];
+		if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ) temperatureArray = new float[sizeX * sizeZ];
 
-		Arrays.fill(temperatureArray, 0, sizeX * sizeZ, hellTemperature);
+		Arrays.fill(temperatureArray, 0, sizeX * sizeZ, temperature);
 		return temperatureArray;
 	}
 
 	@Override
 	public float[] getRainfall(float rainfallArray[], int x, int z, int sizeX, int sizeZ) {
-		if (rainfallArray == null || rainfallArray.length < sizeX * sizeZ)
-			rainfallArray = new float[sizeX * sizeZ];
+		if (rainfallArray == null || rainfallArray.length < sizeX * sizeZ) rainfallArray = new float[sizeX * sizeZ];
 
 		Arrays.fill(rainfallArray, 0, sizeX * sizeZ, rainfall);
 		return rainfallArray;
@@ -80,7 +76,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 
 	@Override
 	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase biomesForGeneration[], int x, int z, int sizeX, int sizeZ) {
-		return this.getBiomeGenAt(biomesForGeneration, x, z, sizeX, sizeZ, true);
+		return getBiomeGenAt(biomesForGeneration, x, z, sizeX, sizeZ, true);
 	}
 
 	@Override
@@ -91,60 +87,57 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 			biomesForGeneration = new BiomeGenBase[sizeX * sizeZ];
 
 		if (useCache && sizeX == 16 && sizeZ == 16 && (x & 15) == 0 && (z & 15) == 0) {
-			BiomeGenBase[] var9 = biomeCache.getCachedBiomes(x, z);
-			System.arraycopy(var9, 0, biomesForGeneration, 0, sizeX * sizeZ);
+			BiomeGenBase[] cachedBiomes = biomeCache.getCachedBiomes(x, z);
+			System.arraycopy(cachedBiomes, 0, biomesForGeneration, 0, sizeX * sizeZ);
 			return biomesForGeneration;
 		} else {
-			int[] var7 = biomeIndexLayer.getInts(x, z, sizeX, sizeZ);
-			for (int var8 = 0; var8 < sizeX * sizeZ; ++var8)
-				biomesForGeneration[var8] = BiomeGenBase.biomeList[var7[var8]];
+			int[] generatedBiomes = biomeIndexLayer.getInts(x, z, sizeX, sizeZ);
+			for (int index = 0; index < sizeX * sizeZ; ++index)
+				biomesForGeneration[index] = BiomeGenBase.biomeList[generatedBiomes[index]];
 
 			return biomesForGeneration;
 		}
 	}
 
 	@Override
-	public ChunkPosition findBiomePosition(int par1, int par2, int par3, List par4List, Random rand) {
+	public ChunkPosition findBiomePosition(int x, int z, int checkRadius, List viableBiomes, Random rand) {
 		IntCache.resetIntCache();
-		int var6 = par1 - par3 >> 2;
-		int var7 = par2 - par3 >> 2;
-		int var8 = par1 + par3 >> 2;
-		int var9 = par2 + par3 >> 2;
-		int var10 = var8 - var6 + 1;
-		int var11 = var9 - var7 + 1;
-		int[] var12 = genBiomes.getInts(var6, var7, var10, var11);
-		ChunkPosition var13 = null;
-		int var14 = 0;
+		int minX = x - checkRadius >> 2;
+		int minZ = z - checkRadius >> 2;
+		int maxX = x + checkRadius >> 2;
+		int maxZ = z + checkRadius >> 2;
+		int sizeX = maxX - minX + 1;
+		int sizeZ = maxZ - minZ + 1;
+		int[] biomeArray = genBiomes.getInts(minX, minZ, sizeX, sizeZ);
+		ChunkPosition pos = null;
+		int attempts = 0;
 
-		for (int var15 = 0; var15 < var10 * var11; ++var15) {
-			int var16 = var6 + var15 % var10 << 2;
-			int var17 = var7 + var15 / var10 << 2;
-			BiomeGenBase var18 = BiomeGenBase.biomeList[var12[var15]];
+		for (int index = 0; index < sizeX * sizeZ; ++index) {
+			int finalX = minX + index % sizeX << 2;
+			int finalZ = minZ + index / sizeX << 2;
 
-			if (par4List.contains(var18) && (var13 == null || rand.nextInt(var14 + 1) == 0)) {
-				var13 = new ChunkPosition(var16, 0, var17);
-				++var14;
+			if (viableBiomes.contains(BiomeGenBase.biomeList[biomeArray[index]]) && (pos == null || rand.nextInt(attempts + 1) == 0)) {
+				pos = new ChunkPosition(finalX, 0, finalZ);
+				++attempts;
 			}
 		}
 
-		return var13;
+		return pos;
 	}
 
 	@Override
-	public boolean areBiomesViable(int par1, int par2, int par3, List par4List) {
+	public boolean areBiomesViable(int x, int z, int checkRadius, List viableBiomes) {
 		IntCache.resetIntCache();
-		int var5 = par1 - par3 >> 2;
-		int var6 = par2 - par3 >> 2;
-		int var7 = par1 + par3 >> 2;
-		int var8 = par2 + par3 >> 2;
-		int var9 = var7 - var5 + 1;
-		int var10 = var8 - var6 + 1;
-		int[] var11 = genBiomes.getInts(var5, var6, var9, var10);
+		int minX = x - checkRadius >> 2;
+		int minZ = z - checkRadius >> 2;
+		int maxX = x + checkRadius >> 2;
+		int maxZ = z + checkRadius >> 2;
+		int sizeX = maxX - minX + 1;
+		int sizeZ = maxZ - minZ + 1;
+		int[] biomeArray = genBiomes.getInts(minX, minZ, sizeX, sizeZ);
 
-		for (int var12 = 0; var12 < var9 * var10; ++var12) {
-			BiomeGenBase var13 = BiomeGenBase.biomeList[var11[var12]];
-
-			if (!par4List.contains(var13))
+		for (int index = 0; index < sizeX * sizeZ; ++index) {
+			if (!viableBiomes.contains(BiomeGenBase.biomeList[biomeArray[index]]))
 				return false;
 		}
 

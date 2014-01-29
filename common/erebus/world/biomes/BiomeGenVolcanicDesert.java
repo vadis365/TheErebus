@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
@@ -21,29 +20,28 @@ import erebus.entity.EntitySolifuge;
 import erebus.world.feature.WorldGenAntlionLair;
 import erebus.world.feature.trees.WorldGenScorchedTree;
 
-public class BiomeGenUndergroundDesert extends BiomeGenBaseErebus {
+public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus {
 
-	public BiomeGenUndergroundDesert(int biomeID) {
+	public BiomeGenVolcanicDesert(int biomeID) {
 		super(biomeID);
-		spawnableMonsterList.clear();
-		spawnableCreatureList.clear();
-		spawnableWaterCreatureList.clear();
-		spawnableCaveCreatureList.clear();
+
 		spawnableMonsterList.add(new SpawnListEntry(EntityScorpion.class, 30, 1, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySolifuge.class, 30, 1, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityFireAnt.class, 30, 1, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityBlackWidow.class, 5, 1, 1));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class, 10, 4, 8));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class, 10, 8, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityScytodes.class, 35, 1, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityJumpingSpider.class, 10, 1, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAntlion.class, 30, 1, 8));
+		
+		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class, 10, 4, 8));
+		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class, 10, 8, 8));
+		
 		topBlock = (byte) Block.sand.blockID;
 		fillerBlock = (byte) Block.sandStone.blockID;
 	}
 
 	@Override
-	public void generateTerrain(World worldObj, Random rand, IChunkProvider chunkProvider, int x, int z) {
+	public void generateTerrain(World worldObj, Random rand, int x, int z) {
 		WorldGenerator gen = new WorldGenLakes(Block.lavaMoving.blockID);
 		for (int c = 35; c > 0; c--) {
 			int posX = x + rand.nextInt(16) + 8;

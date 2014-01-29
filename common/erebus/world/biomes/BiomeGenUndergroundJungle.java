@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.SpawnListEntry;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 import net.minecraft.world.gen.feature.WorldGenHugeTrees;
@@ -48,23 +47,21 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus {
 
 	public BiomeGenUndergroundJungle(int biomeID) {
 		super(biomeID);
-		spawnableMonsterList.clear();
-		spawnableCreatureList.clear();
-		spawnableWaterCreatureList.clear();
-		spawnableCaveCreatureList.clear();
+		
 		spawnableMonsterList.add(new SpawnListEntry(EntityWasp.class, 30, 4, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityCentipede.class, 10, 4, 8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityPrayingMantis.class, 10, 4, 8));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class, 10, 4, 8));
-		// spawnableCaveCreatureList.add(newSpawnListEntry(EntityVelvetWorm.class,10,2,4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityScytodes.class, 35, 1, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityJumpingSpider.class, 10, 1, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityTarantula.class, 5, 4, 8));
+		
+		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class, 10, 4, 8));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetle.class, 8, 1, 2));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetleLarva.class, 8, 2, 4));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class, 10, 8, 8));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityMoth.class, 5, 4, 4));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityMosquito.class, 60, 1, 3));
+		
 		topBlock = (byte) Block.grass.blockID;
 		fillerBlock = (byte) Block.dirt.blockID;
 	}
@@ -74,12 +71,8 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus {
 		return 0.2F;
 	}
 
-	public int getRandomXZOffset(Random rand) {
-		return rand.nextInt(16) + 8;
-	}
-
 	@Override
-	public void generateTerrain(World worldObj, Random rand, IChunkProvider chunkProvider, int x, int z) {
+	public void generateTerrain(World worldObj, Random rand, int x, int z) {
 		/** Generating big lakes first to avoid complications **/
 		/**
 		 * TODO: Currently broken, generates into other chunks and causes
