@@ -30,7 +30,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	AnimationMathHelper mathWings = new AnimationMathHelper();
 	Class[] preys = { EntityGrasshopper.class, EntityBeetle.class, EntityBeetleLarva.class };
 	private boolean areAttributesSetup = false;
-	
+
 	public EntityWasp(World world) {
 		super(world);
 	}
@@ -38,9 +38,9 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(25, new Byte((byte) rand.nextInt(32)));	
+		dataWatcher.addObject(25, new Byte((byte) rand.nextInt(32)));
 	}
-	
+
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
@@ -49,22 +49,24 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	protected void updateBossAttributes() {
-		if(getIsBoss()==1){
+		if (getIsBoss() == 1) {
+			setSize(3F, 2F);
 			this.experienceValue = 25;
 			setCustomNameTag("Hornet of Despair");
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
-	} else {
-		this.experienceValue = 10;
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
+			getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		} else {
+			setSize(1.5F, 1.0F);
+			this.experienceValue = 10;
+			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
+			getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
 		}
 	}
-	
+
 	@Override
 	public boolean getCanSpawnHere() {
 		return super.getCanSpawnHere();
@@ -110,6 +112,14 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	@Override
 	public void onUpdate() {
+		int i;
+		if (worldObj.isRemote) {
+			i = getIsBoss();
+			if (i == 1)
+				setSize(3F, 2F);
+			else
+				setSize(1.5F, 1.0F);
+		}
 		if (!isFlying())
 			wingFloat = 0.0F;
 		if (isFlying())
@@ -173,7 +183,8 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 					else if (worldObj.difficultySetting == 3)
 						var2 = 15;
 				if (var2 > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id,
+									var2 * 20, 0));
 			}
 			return true;
 		}
@@ -185,7 +196,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		if (par2 < 2.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
 			attackEntityAsMob(entity);
 	}
-	
+
 	public byte getIsBoss() {
 		return dataWatcher.getWatchableObjectByte(25);
 	}
@@ -193,14 +204,12 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	public void setIsBoss(byte boss) {
 		dataWatcher.updateObject(25, Byte.valueOf((byte) (boss)));
 		worldObj.setEntityState(this, (byte) 25);
-		if (getIsBoss()==1)
+		if (boss == 1)
 			setSize(3F, 2F);
-		else
-			setSize(1.5F, 1.0F);
 		if (areAttributesSetup)
 			updateBossAttributes();
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
