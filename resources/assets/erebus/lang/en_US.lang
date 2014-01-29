@@ -151,6 +151,7 @@ tile.witherWeb.name=Wither Web
 tile.extenderThingy.name=Bamboo Extender
 tile.bambooPole.name=Bamboo Nerd Pole
 tile.umberstonePillar.name=Umberstone Pillar
+tile.velocityBlock.name=Velocity Block
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

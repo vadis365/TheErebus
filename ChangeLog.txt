@@ -4,3 +4,4 @@ v0.1.3
 - Added spider sounds to Tarantula
 - Added Smooth Umbertile, Smooth Umbertiles and Umberstone Pillar
 - Removed Firebrat
+- Added Velocity Block
