@@ -1,5 +1,5 @@
 v0.1.3
-- Did nothing tonight
--
--
--
+- Added "Hornet of Despair" a double sized random spawn Wasp
+- Tweaked Beetle hit box size and position
+- Added spider sounds to Tarantula
+- Added Smooth Umbertile, Smooth Umbertiles and Umberstone Pillar

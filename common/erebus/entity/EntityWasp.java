@@ -9,38 +9,62 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
+
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
 import erebus.item.ItemErebusMaterial;
 
-public class EntityWasp extends EntityMob {
+public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
 
 	private float heightOffset = 0.0F;
 	public float wingFloat;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
 	Class[] preys = { EntityGrasshopper.class, EntityBeetle.class, EntityBeetleLarva.class };
+	private boolean areAttributesSetup = false;
 
 	public EntityWasp(World world) {
 		super(world);
-		setSize(1.5F, 1.5F);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataWatcher.addObject(25, new Byte((byte) rand.nextInt(32)));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D); // MaxHealth
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D); // atkDmg
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D); // followRange
+		areAttributesSetup = true;
+		updateBossAttributes();
+	}
+
+	protected void updateBossAttributes() {
+		if (getIsBoss() == 1) {
+			setSize(3F, 2F);
+			this.experienceValue = 25;
+			setCustomNameTag("Hornet of Despair");
+			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
+			getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		} else {
+			setSize(1.5F, 1.0F);
+			this.experienceValue = 10;
+			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
+			getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		}
 	}
 
 	@Override
@@ -88,11 +112,18 @@ public class EntityWasp extends EntityMob {
 
 	@Override
 	public void onUpdate() {
+		int i;
+		if (worldObj.isRemote) {
+			i = getIsBoss();
+			if (i == 1)
+				setSize(3F, 2F);
+			else
+				setSize(1.5F, 1.0F);
+		}
 		if (!isFlying())
 			wingFloat = 0.0F;
 		if (isFlying())
 			wingFloat = mathWings.swing(4.0F, 0.1F);
-		// find enemies
 		if (findPlayerToAttack() != null)
 			entityToAttack = findPlayerToAttack();
 		else if (findEnemyToAttack() != null)
@@ -152,7 +183,8 @@ public class EntityWasp extends EntityMob {
 					else if (worldObj.difficultySetting == 3)
 						var2 = 15;
 				if (var2 > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id,
+									var2 * 20, 0));
 			}
 			return true;
 		}
@@ -163,5 +195,40 @@ public class EntityWasp extends EntityMob {
 	protected void attackEntity(Entity entity, float par2) {
 		if (par2 < 2.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
 			attackEntityAsMob(entity);
+	}
+
+	public byte getIsBoss() {
+		return dataWatcher.getWatchableObjectByte(25);
+	}
+
+	public void setIsBoss(byte boss) {
+		dataWatcher.updateObject(25, Byte.valueOf((byte) (boss)));
+		worldObj.setEntityState(this, (byte) 25);
+		if (boss == 1)
+			setSize(3F, 2F);
+		if (areAttributesSetup)
+			updateBossAttributes();
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setByte("mobType", getIsBoss());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setIsBoss(nbt.getByte("mobType"));
+	}
+
+	@Override
+	public void writeSpawnData(ByteArrayDataOutput data) {
+		data.writeByte(getIsBoss());
+	}
+
+	@Override
+	public void readSpawnData(ByteArrayDataInput data) {
+		setIsBoss(data.readByte());
 	}
 }

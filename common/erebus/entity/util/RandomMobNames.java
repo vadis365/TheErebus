@@ -23,7 +23,7 @@ public final class RandomMobNames {
 	static {
 		names.put(EntityBotFly.class, new NameData(380, new String[] { "Butt Fly" }));
 		names.put(EntityGrasshopper.class, new NameData(360, new String[] { "Grasshumper", "Jimminey" }));
-		names.put(EntityBeetleLarva.class, new NameData(320, new String[] { "Trampoline" }));
+		names.put(EntityBeetleLarva.class, new NameData(320, new String[] { "Trampoline", "Dylan4ever" }));
 		names.put(EntityBeetle.class, new NameData(280, new String[] { "John Lennon", "Paul McCartney", "George Harisson", "Ringo Starr" }));
 		names.put(EntityCentipede.class, new NameData(220, new String[] { "Centipaedo" }));
 		names.put(EntitySolifuge.class, new NameData(220, new String[] { "Fast & Furious" }));
