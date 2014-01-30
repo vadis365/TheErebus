@@ -149,10 +149,10 @@ public class BlockSaplingErebus extends BlockSapling {
 	}
 
 	@ForgeSubscribe
-	public void onBonemeal(BonemealEvent e) {
-		if (!e.world.isRemote && e.ID == blockID) {
-			growTree(e.world, e.X, e.Y, e.Z, e.world.rand);
-			e.setResult(Result.ALLOW);
-		}
+	public void onBonemeal(BonemealEvent event) {
+		if (!event.world.isRemote && event.ID == blockID)
+			if (event.world.rand.nextFloat() < 0.45D)
+				growTree(event.world, event.X, event.Y, event.Z, event.world.rand);
+		event.setResult(Result.ALLOW);
 	}
 }
