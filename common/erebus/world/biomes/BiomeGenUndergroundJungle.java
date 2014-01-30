@@ -32,8 +32,7 @@ import erebus.world.feature.WorldGenEucalyptus;
 import erebus.world.feature.WorldGenMelon;
 import erebus.world.feature.WorldGenPonds;
 import erebus.world.feature.WorldGenQuickSand;
-import erebus.world.feature.WorldGenRedGem1;
-import erebus.world.feature.WorldGenRedGem2;
+import erebus.world.feature.WorldGenRedGem;
 import erebus.world.feature.WorldGenTurnips;
 import erebus.world.feature.WorldGenWaspDungeon;
 import erebus.world.feature.trees.WorldGenAsperTree;
@@ -142,9 +141,8 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 		new WorldGenFlowers(Block.mushroomBrown.blockID).generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
 		new WorldGenFlowers(Block.mushroomRed.blockID).generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
 
-		for(int attempt=0; attempt<10; attempt++){
-			new WorldGenRedGem1().generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
-			new WorldGenRedGem2().generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
+		for(int attempt=0; attempt<20; attempt++){
+			new WorldGenRedGem().generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
 		}
 
 		for(int attempt=0; attempt<12; attempt++){

@@ -15,15 +15,27 @@ import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
 
-public class WorldGenSpiderDungeons extends WorldGenerator {
+public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 
 	// @formatter:off
-	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack(Item.silk).setAmount(5, 10).setWeight(13), new LootItemStack(Block.web).setAmount(3, 8).setWeight(13), new LootItemStack(Item.stick).setAmount(1, 8).setWeight(12), new LootItemStack(Item.goldNugget)
-			.setAmount(3, 11).setWeight(12), new LootItemStack(ModItems.erebusMaterials).setAmount(3, 8).setDamage(ItemErebusMaterial.dataBoneShard).setWeight(12), new LootItemStack(Item.bone).setAmount(1, 3).setWeight(11), new LootItemStack(Item.ingotIron).setAmount(1, 3).setWeight(10),
-			new LootItemStack(Item.ingotGold).setAmount(1, 2).setWeight(10), new LootItemStack(ModItems.erebusMaterials).setAmount(1, 5).setDamage(ItemErebusMaterial.dataFlyWing).setWeight(10), new LootItemStack(ModItems.erebusMaterials).setAmount(1).setDamage(ItemErebusMaterial.dataJade)
-					.setWeight(9), new LootItemStack(ModItems.erebusMaterials).setAmount(3, 6).setDamage(ItemErebusMaterial.dataExoPlate).setWeight(8), new LootItemStack(ModItems.erebusMaterials).setAmount(2, 6).setDamage(ItemErebusMaterial.dataCompoundEyes).setWeight(7), new LootItemStack(
-					ModItems.erebusMaterials).setAmount(1, 1).setDamage(ItemErebusMaterial.dataCompoundLens).setWeight(2), new LootItemStack(ModItems.maxSpeedBow).setAmount(1).setWeight(1), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(
-					ModItems.webSlinger).setAmount(1).setWeight(1));
+	public static final WeightedLootList chestLoot=new WeightedLootList(new LootItemStack[]{
+		new LootItemStack(Item.silk).setAmount(5,10).setWeight(13),
+		new LootItemStack(Block.web).setAmount(3,8).setWeight(13),
+		new LootItemStack(Item.stick).setAmount(1,8).setWeight(12),
+		new LootItemStack(Item.goldNugget).setAmount(3,11).setWeight(12),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(3,8).setDamage(ItemErebusMaterial.dataBoneShard).setWeight(12),
+		new LootItemStack(Item.bone).setAmount(1,3).setWeight(11),
+		new LootItemStack(Item.ingotIron).setAmount(1,3).setWeight(10),
+		new LootItemStack(Item.ingotGold).setAmount(1,2).setWeight(10),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(1,5).setDamage(ItemErebusMaterial.dataFlyWing).setWeight(10),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(1).setDamage(ItemErebusMaterial.dataJade).setWeight(9),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(3,6).setDamage(ItemErebusMaterial.dataExoPlate).setWeight(8),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(2,6).setDamage(ItemErebusMaterial.dataCompoundEyes).setWeight(7),
+		new LootItemStack(ModItems.erebusMaterials).setDamage(ItemErebusMaterial.dataCompoundLens).setWeight(2),
+		new LootItemStack(ModItems.maxSpeedBow).setWeight(1),
+		new LootItemStack(ModBlocks.umberGolemStatue).setWeight(1),
+		new LootItemStack(ModItems.webSlinger).setWeight(1)
+	});
 
 	// @formatter:on
 

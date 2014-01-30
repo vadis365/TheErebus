@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenBigLake extends WorldGenerator {
+public class WorldGenBigLake extends WorldGenerator { // TODO
 
 	private final int blockIndex;
 

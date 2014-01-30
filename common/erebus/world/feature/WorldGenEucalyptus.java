@@ -7,7 +7,7 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenEucalyptus extends WorldGenerator {
+public class WorldGenEucalyptus extends WorldGenerator { // TODO
 
 	private final int woodId;
 	private final int woodMeta;

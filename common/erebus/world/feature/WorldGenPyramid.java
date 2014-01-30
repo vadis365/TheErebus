@@ -6,41 +6,50 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+//@formatter:off
 public class WorldGenPyramid extends WorldGenerator {
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
-		for (int h = 10; h > 0; h--)
-			for (int w = -(14 - h); w < 14 - h; w++)
-				for (int w2 = -(14 - h); w2 < 14 - h; w2++) {
-					if (w < 0 && w <= -(14 - h))
-						world.setBlock(x + w, y + h + 1, z + w2, Block.stairsSandStone.blockID, 0, 3);
-					if (w > 0 && w >= 14 - h - 1)
-						world.setBlock(x + w, y + h + 1, z + w2, Block.stairsSandStone.blockID, 1, 3);
-					if (w2 < 0 && w2 <= -(14 - h))
-						world.setBlock(x + w, y + h + 1, z + w2, Block.stairsSandStone.blockID, 2, 3);
-					if (w2 > 0 && w2 >= 14 - h - 1)
-						world.setBlock(x + w, y + h + 1, z + w2, Block.stairsSandStone.blockID, 3, 3);
-					if (w < 0 && w <= -(14 - h))
-						if (w2 < 0 && w2 <= -(14 - h))
-							world.setBlock(x + w, y + h + 1, z + w2, Block.stoneSingleSlab.blockID);
-					if (w > 0 && w >= 14 - h - 1)
-						if (w2 > 0 && w2 >= 14 - h - 1)
-							world.setBlock(x + w, y + h + 1, z + w2, Block.stoneSingleSlab.blockID);
-					if (w < 0 && w <= -(14 - h))
-						if (w2 > 0 && w2 >= 14 - h - 1)
-							world.setBlock(x + w, y + h + 1, z + w2, Block.stoneSingleSlab.blockID);
-					if (w > 0 && w >= 14 - h - 1)
-						if (w2 < 0 && w2 <= -(14 - h))
-							world.setBlock(x + w, y + h + 1, z + w2, Block.stoneSingleSlab.blockID);
+	public boolean generate(World world, Random rand, int x, int y, int z){
+		for(int yy=10; yy>0; yy--){
+			for(int xx=-(14-yy); xx<14-yy; xx++){
+				for(int zz=-(14-yy); zz<14-yy; zz++){
+					if (xx<0&&xx<=-(14-yy))world.setBlock(x+xx,y+yy+1,z+zz,Block.stairsSandStone.blockID,0,3);
+					
+					if (xx>0&&xx>=14-yy-1)world.setBlock(x+xx,y+yy+1,z+zz,Block.stairsSandStone.blockID,1,3);
+					
+					if (zz<0&&zz<=-(14-yy))world.setBlock(x+xx,y+yy+1,z+zz,Block.stairsSandStone.blockID,2,3);
+					
+					if (zz>0&&zz>=14-yy-1)world.setBlock(x+xx,y+yy+1,z+zz,Block.stairsSandStone.blockID,3,3);
+					
+					if (xx<0&&xx<=-(14-yy)){
+						if (zz<0&&zz<=-(14-yy))world.setBlock(x+xx,y+yy+1,z+zz,Block.stoneSingleSlab.blockID);
+					}
+					
+					if (xx>0&&xx>=14-yy-1){
+						if (zz>0&&zz>=14-yy-1)world.setBlock(x+xx,y+yy+1,z+zz,Block.stoneSingleSlab.blockID);
+					}
+					
+					if (xx<0&&xx<=-(14-yy)){
+						if (zz>0&&zz>=14-yy-1)world.setBlock(x+xx,y+yy+1,z+zz,Block.stoneSingleSlab.blockID);
+					}
+					
+					if (xx>0&&xx>=14-yy-1){
+						if (zz<0&&zz<=-(14-yy))world.setBlock(x+xx,y+yy+1,z+zz,Block.stoneSingleSlab.blockID);
+					}
 
-					world.setBlock(x + w, y + h, z + w2, Block.sandStone.blockID);
+					world.setBlock(x+xx,y+yy,z+zz,Block.sandStone.blockID);
 				}
+			}
+		}
 
-		for (int w = -3; w < 3; w++)
-			for (int w2 = -3; w2 < 3; w2++)
-				world.setBlock(x + w, y + 11, z + w2, Block.sandStone.blockID);
+		for(int xx=-3; xx<3; xx++){
+			for(int zz=-3; zz<3; zz++){
+				world.setBlock(x+xx,y+11,z+zz,Block.sandStone.blockID);
+			}
+		}
 
 		return true;
 	}
 }
+//@formatter:on

@@ -15,7 +15,7 @@ public class WeightedLootList extends WeightedList<LootItemStack> {
 
 	private IPostProcess postProcessor = genericPostProcessor;
 
-	public WeightedLootList(LootItemStack... items) {
+	public WeightedLootList(LootItemStack[] items) {
 		for (LootItemStack item : items)
 			add(item);
 	}

@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 
-public class WorldGenBigMushroomErebus extends WorldGenerator {
+public class WorldGenBigMushroomErebus extends WorldGenerator { // TODO
 
 	private int mushroomType = -1;
 

@@ -10,7 +10,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenPonds extends WorldGenerator {
+public class WorldGenPonds extends WorldGenerator { // TODO
 
 	private final int blockIndex;
 	private final int groundIndex;
