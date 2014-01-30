@@ -55,16 +55,6 @@ public class EntitySolifuge extends EntityMob {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-	}
-
-	@Override
-	public boolean getCanSpawnHere() {
-		return super.getCanSpawnHere();
-	}
-
-	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}

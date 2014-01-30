@@ -1,4 +1,4 @@
-package erebus.world.feature.trees;
+package erebus.world.feature;
 
 import java.util.Random;
 
@@ -11,7 +11,7 @@ import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
 
-public class WorldGenErebusTrees extends WorldGenerator {
+public class WorldGenErebusTrees extends WorldGenerator { // TODO
 
 	private final int minTreeHeight;
 	private final boolean vinesGrow;

@@ -49,21 +49,22 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	protected void updateBossAttributes() {
-		if (getIsBoss() == 1) {
-			setSize(3F, 2F);
-			this.experienceValue = 25;
-			setCustomNameTag("Hornet of Despair");
-			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
-			getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
-		} else {
-			setSize(1.5F, 1.0F);
-			this.experienceValue = 10;
-			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-			getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		if (worldObj!=null && !worldObj.isRemote) {
+			if (getIsBoss() == 1) {
+				setSize(3F, 2F);
+				this.experienceValue = 25;
+				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
+				getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
+				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
+				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+			} else {
+				setSize(1.5F, 1.0F);
+				this.experienceValue = 10;
+				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
+				getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
+				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
+				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+			}
 		}
 	}
 
@@ -112,11 +113,13 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	@Override
 	public void onUpdate() {
-		int i;
+		byte i;
 		if (worldObj.isRemote) {
 			i = getIsBoss();
-			if (i == 1)
+			if (i == 1){
 				setSize(3F, 2F);
+				setCustomNameTag("Hornet of Despair");
+		}		
 			else
 				setSize(1.5F, 1.0F);
 		}
@@ -202,10 +205,8 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	public void setIsBoss(byte boss) {
-		dataWatcher.updateObject(25, Byte.valueOf((byte) (boss)));
+		dataWatcher.updateObject(25, Byte.valueOf(boss));
 		worldObj.setEntityState(this, (byte) 25);
-		if (boss == 1)
-			setSize(3F, 2F);
 		if (areAttributesSetup)
 			updateBossAttributes();
 	}

@@ -166,19 +166,16 @@ public class BlockLeavesErebus extends BlockLeaves {
 
 	@Override
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float par6, int fortune) {
-		if (!world.isRemote) {
-			byte saplingChance = (byte) (meta < 8 ? 20 : 40);
-
-			if (world.rand.nextInt(saplingChance) == 0 && damageDropped(meta) != -1)
+		if (!world.isRemote)
+			if (world.rand.nextInt(20) == 0 && damageDropped(meta) != -1)
 				dropBlockAsItem_do(world, x, y, z, new ItemStack(idDropped(meta, world.rand, fortune), 1, damageDropped(meta)));
-		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int id, CreativeTabs creativeTab, List list) {
-		for (int a = 0; a < leafTypes.length; a++)
-			list.add(new ItemStack(id, 1, a));
+		for (int i = 0; i < leafTypes.length; i++)
+			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override
@@ -191,8 +188,8 @@ public class BlockLeavesErebus extends BlockLeaves {
 	public void registerIcons(IconRegister iconRegister) {
 		iconArray = new Icon[leafTypes.length];
 
-		for (int a = 0; a < leafTypes.length; a++)
-			iconArray[a] = iconRegister.registerIcon("erebus:leaves_" + leafTypes[a]);
+		for (int i = 0; i < leafTypes.length; i++)
+			iconArray[i] = iconRegister.registerIcon("erebus:leaves_" + leafTypes[i]);
 	}
 
 	@Override

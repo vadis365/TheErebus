@@ -11,13 +11,13 @@ public class GenLayerRiverErebus extends GenLayer {
 	}
 
 	@Override
-	public int[] getInts(int par1, int par2, int par3, int par4) {
-		int[] aint1 = IntCache.getIntCache(par3 * par4);
+	public int[] getInts(int x, int z, int sizeX, int sizeZ) {
+		int[] ints = IntCache.getIntCache(sizeX * sizeZ);
 
-		for (int i2 = 0; i2 < par4; ++i2)
-			for (int j2 = 0; j2 < par3; ++j2)
-				aint1[j2 + i2 * par3] = -1;
+		for (int zz = 0; zz < sizeZ; ++zz)
+			for (int xx = 0; xx < sizeX; ++xx)
+				ints[xx + zz * sizeX] = -1;
 
-		return aint1;
+		return ints;
 	}
 }

@@ -19,12 +19,12 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.world.feature.WorldGenAsperTree;
+import erebus.world.feature.WorldGenErebusHugeTree;
+import erebus.world.feature.WorldGenErebusTrees;
 import erebus.world.feature.WorldGenEucalyptus;
-import erebus.world.feature.trees.WorldGenAsperTree;
-import erebus.world.feature.trees.WorldGenErebusHugeTree;
-import erebus.world.feature.trees.WorldGenErebusTrees;
-import erebus.world.feature.trees.WorldGenMossbarkTree;
-import erebus.world.feature.trees.WorldGenSavannaTree;
+import erebus.world.feature.WorldGenMossbarkTree;
+import erebus.world.feature.WorldGenSavannaTree;
 
 public class BlockSaplingErebus extends BlockSapling {
 
@@ -72,9 +72,9 @@ public class BlockSaplingErebus extends BlockSapling {
 		boolean var10 = false;
 
 		if (meta == dataEucalyptus)
-			worldGen = new WorldGenEucalyptus(ModBlocks.logErebusGroup1.blockID, BlockLogErebus.dataEucalyptus, ModBlocks.leavesErebus.blockID, BlockLeavesErebus.dataEucalyptusDecay, 8 + rand.nextInt(4), 5, 8, Block.grass.blockID);
+			worldGen = new WorldGenEucalyptus();
 		else if (meta == dataAcacia)
-			worldGen = new WorldGenSavannaTree(world.rand.nextInt(3));
+			worldGen = new WorldGenSavannaTree();
 		else if (meta == dataMossbark)
 			worldGen = new WorldGenMossbarkTree();
 		else if (meta == dataAsper)
@@ -149,10 +149,10 @@ public class BlockSaplingErebus extends BlockSapling {
 	}
 
 	@ForgeSubscribe
-	public void onBonemeal(BonemealEvent e) {
-		if (!e.world.isRemote && e.ID == blockID) {
-			growTree(e.world, e.X, e.Y, e.Z, e.world.rand);
-			e.setResult(Result.ALLOW);
-		}
+	public void onBonemeal(BonemealEvent event) {
+		if (!event.world.isRemote && event.ID == blockID)
+			if (event.world.rand.nextFloat() < 0.45D)
+				growTree(event.world, event.X, event.Y, event.Z, event.world.rand);
+		event.setResult(Result.ALLOW);
 	}
 }

@@ -1,4 +1,4 @@
-package erebus.world.feature.trees;
+package erebus.world.feature;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 
-public class WorldGenErebusHugeTree extends WorldGenerator {
+public class WorldGenErebusHugeTree extends WorldGenerator { // TODO
 
 	private final int baseHeight;
 	private final int woodMetadata;
