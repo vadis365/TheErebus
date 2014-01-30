@@ -118,7 +118,15 @@ public class EntityRhinoBeetle extends EntityTameable {
 			is.stackSize--;
 			inLove = 600;
 			return true;
-		} else
+		} 
+		
+		if (is == null && getHasBeenTamed()==1) {
+	        if (!this.worldObj.isRemote) {
+	            player.mountEntity(this);
+	        }
+			return true;
+		} 		
+		else
 			return super.interact(player);
 	}
 	
@@ -164,7 +172,60 @@ public class EntityRhinoBeetle extends EntityTameable {
 		else
 			return true;
 	}
+	
+	@Override
+    public void moveEntityWithHeading(float par1, float par2)
+    {
+        if (riddenByEntity != null && getHasBeenTamed() == 1) {
+            this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
+            this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
+            this.setRotation(this.rotationYaw, this.rotationPitch);
+            this.rotationYawHead = this.renderYawOffset = this.rotationYaw;
+            par1 = ((EntityLivingBase)this.riddenByEntity).moveStrafing * 0.5F;
+            par2 = ((EntityLivingBase)this.riddenByEntity).moveForward;
 
+            if (par2 <= 0.0F) {
+                par2 *= 0.25F;
+            }
+            
+            this.stepHeight = 1.0F;
+            this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
+
+            if (!this.worldObj.isRemote) {
+                this.setAIMoveSpeed((float)this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+                super.moveEntityWithHeading(par1, par2);
+            }
+            this.prevLimbSwingAmount = this.limbSwingAmount;
+            double d0 = this.posX - this.prevPosX;
+            double d1 = this.posZ - this.prevPosZ;
+            float f4 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
+
+            if (f4 > 1.0F) {
+                f4 = 1.0F;
+            }
+
+            this.limbSwingAmount += (f4 - this.limbSwingAmount) * 0.4F;
+            this.limbSwing += this.limbSwingAmount;
+        }
+        else {
+            this.stepHeight = 0.5F;
+            this.jumpMovementFactor = 0.02F;
+            super.moveEntityWithHeading(par1, par2);
+        }
+    }
+    
+	@Override
+    public void updateRiderPosition()
+    {
+    	super.updateRiderPosition();
+    		if (this.riddenByEntity instanceof EntityLivingBase) {
+    			double a = Math.toRadians(renderYawOffset);
+    			double offSetX = -Math.sin(a) * 0.35D;
+    			double offSetZ = Math.cos(a) * 0.35D;
+    			riddenByEntity.setPosition(posX - offSetX, posY + 1.3D + riddenByEntity.getYOffset(), posZ - offSetZ);
+    }
+   }
+ 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		return spawnBabyAnimal(entityageable);
