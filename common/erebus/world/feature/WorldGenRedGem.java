@@ -18,10 +18,10 @@ public class WorldGenRedGem extends WorldGenerator{
 
 		world.setBlock(x,y,z,ModBlocks.redGem.blockID);
 
-		for(int attempt=0,xx,yy,zz; attempt<1500; ++attempt){ // TODO speed up
-			xx=x+rand.nextInt(8)-rand.nextInt(8);
-			yy=y-rand.nextInt(12);
-			zz=z+rand.nextInt(8)-rand.nextInt(8);
+		for(int attempt=0,xx,yy,zz,dist=2,distUpd=0; attempt<400; ++attempt){
+			xx=x+rand.nextInt(dist)-rand.nextInt(dist);
+			yy=y-rand.nextInt(dist+4);
+			zz=z+rand.nextInt(dist)-rand.nextInt(dist);
 
 			if (world.isAirBlock(xx,yy,zz)){
 				int adjacent=0;
@@ -31,6 +31,11 @@ public class WorldGenRedGem extends WorldGenerator{
 				}
 
 				if (adjacent==1)world.setBlock(xx,yy,zz,ModBlocks.redGem.blockID);
+			}
+			
+			if (++distUpd>22+dist*30){
+				dist=Math.min(8,dist+1);
+				distUpd=0;
 			}
 		}
 
