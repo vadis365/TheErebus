@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import erebus.client.model.entity.ModelRhinoBeetle;
-import erebus.entity.EntityBeetle;
 import erebus.entity.EntityRhinoBeetle;
 
 public class RenderRhinoBeetle extends RenderLiving
