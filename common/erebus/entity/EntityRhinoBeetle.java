@@ -32,7 +32,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	
 	public EntityRhinoBeetle(World world) {
 		super(world);
-		this.setSize(1.8F, 1.4F);
+		this.setSize(2.3F, 1.4F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));

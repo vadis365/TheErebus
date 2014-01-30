@@ -7,12 +7,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import erebus.client.model.entity.ModelRhinoBeetle;
+import erebus.entity.EntityBeetle;
 import erebus.entity.EntityRhinoBeetle;
 
 public class RenderRhinoBeetle extends RenderLiving
 {
 	protected ModelRhinoBeetle model;
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/ModelRhinoBeetle.png");
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/ModelRhinoBeetle.png"), new ResourceLocation("erebus:textures/entity/ModelRhinoBeetleTamed.png") };
 
 	public RenderRhinoBeetle(ModelRhinoBeetle modelBase, float shadowSize){
 		super(modelBase, shadowSize);
@@ -43,7 +44,13 @@ public class RenderRhinoBeetle extends RenderLiving
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+		EntityRhinoBeetle beetle = (EntityRhinoBeetle) entity;
+		if (beetle.getHasBeenTamed()==0)
+			return textures[0];
+		else if (beetle.getHasBeenTamed()==1)
+			return textures[1];
+		else
+			return null;
 	}
 
 }
