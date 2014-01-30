@@ -24,11 +24,13 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase{
 
 	@Override
 	public void decorate(World world, Random rand, int x, int z){
+		System.out.println("genT "+getClass());
 		generateTerrain(world, rand, x, z);
+		System.out.println("genO "+getClass());
 		generateOres(world, rand, x, z);
 	}
 
-	public final int getRandomXZOffset(Random rand) {
+	protected final int getRandomXZOffset(Random rand) {
 		return rand.nextInt(16) + 8;
 	}
 	

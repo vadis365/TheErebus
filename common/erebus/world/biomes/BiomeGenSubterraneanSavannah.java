@@ -56,9 +56,9 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 	@Override
 	public void generateTerrain(World world, Random rand, int x, int z){
 		for(int attempt=0; attempt<65; attempt++){
-			int xx=x+rand.nextInt(16)+8,
+			int xx=x+getRandomXZOffset(rand),
 				yy=15+rand.nextInt(90),
-				zz=z+rand.nextInt(16)+8;
+				zz=z+getRandomXZOffset(rand);
 
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 				new WorldGenSavannaTree().generate(world,rand,xx,yy,zz);
@@ -67,8 +67,8 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 
 		if (rand.nextInt(3)==0){
 			for(int yy=100; yy>20; yy--){
-				int xx=x+rand.nextInt(16)+8,
-					zz=z+rand.nextInt(16)+8;
+				int xx=x+getRandomXZOffset(rand),
+					zz=z+getRandomXZOffset(rand);
 
 				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 					new WorldGenSavannaRock().generate(world,rand,xx,yy,zz);
@@ -78,8 +78,8 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 
 		if (rand.nextInt(26)==0){
 			for(int yy=100; yy>20; yy--){
-				int xx=x+rand.nextInt(16)+8,
-					zz=z+rand.nextInt(16)+8;
+				int xx=x+getRandomXZOffset(rand),
+					zz=z+getRandomXZOffset(rand);
 				
 				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 					new WorldGenBamboo(7).generate(world,rand,xx,yy,zz);
@@ -88,9 +88,9 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 		}
 		
 		for(int attempt=0; attempt<10; attempt++){
-			int xx=x+rand.nextInt(16)+8,
+			int xx=x+getRandomXZOffset(rand),
 				yy=rand.nextInt(120),
-				zz=z+rand.nextInt(16)+8;
+				zz=z+getRandomXZOffset(rand);
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 				new WorldGenAsperTree().generate(world,rand,xx,yy,zz);
@@ -98,9 +98,9 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 		}
 
 		for(int attempt=0; attempt<28; attempt++){
-			int xx=x+rand.nextInt(16)+8,
+			int xx=x+getRandomXZOffset(rand),
 				yy=15+rand.nextInt(90),
-				zz=z+rand.nextInt(16)+8;
+				zz=z+getRandomXZOffset(rand);
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 				new WorldGenRottenAcacia().generate(world,rand,xx,yy,zz);
@@ -108,9 +108,9 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 		}
 
 		for(int attempt=0; attempt<180; attempt++){
-			int xx=x+rand.nextInt(16)+8,
+			int xx=x+getRandomXZOffset(rand),
 				yy=15+rand.nextInt(90),
-				zz=z+rand.nextInt(16)+8;
+				zz=z+getRandomXZOffset(rand);
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 				new WorldGenTallGrass(ModBlocks.erebusGrass.blockID,1).generate(world,rand,xx,yy,zz);
@@ -118,14 +118,18 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 		}
 
 		if (rand.nextInt(6)==0){
+			WorldGenAmberGround genAmber=new WorldGenAmberGround();
+			
 			for(int attempt=0; attempt<6; attempt++){
-				if (new WorldGenAmberGround().generate(world,rand,x+rand.nextInt(16)+8,rand.nextInt(120),z+rand.nextInt(16)+8)) break;
+				if (genAmber.generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(120),z+getRandomXZOffset(rand))) break;
 			}
 		}
 
 		if (rand.nextInt(3)==0){
+			WorldGenAmberUmberstone genAmber=new WorldGenAmberUmberstone();
+			
 			for(int attempt=0; attempt<5; attempt++){
-				if (new WorldGenAmberUmberstone().generate(world,rand,x+rand.nextInt(16)+8,rand.nextInt(120),z+rand.nextInt(16)+8)) break;
+				if (genAmber.generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(120),z+getRandomXZOffset(rand))) break;
 			}
 		}
 	}
