@@ -72,14 +72,10 @@ public class WorldGenAntlionLair extends WorldGenerator{
 				if (enchBook)is.itemID=Item.enchantedBook.itemID;
 
 				if (enchList!=null&&enchList.size()>0){
-					if (is.itemID==Item.enchantedBook.itemID){
-						Item.enchantedBook.addEnchantment(is,(EnchantmentData)enchList.get(rand.nextInt(enchList.size()))); // TODO update for multiple enchantments on a book?
-					}
-				}
-				else{
 					for(int a=0; a<enchList.size(); ++a){
 						EnchantmentData data=(EnchantmentData)enchList.get(a);
-						is.addEnchantment(data.enchantmentobj,data.enchantmentLevel);
+						if (is.itemID==Item.enchantedBook.itemID)Item.enchantedBook.addEnchantment(is,data);
+						else is.addEnchantment(data.enchantmentobj,data.enchantmentLevel);
 					}
 				}
 			}

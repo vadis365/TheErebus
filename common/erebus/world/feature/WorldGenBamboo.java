@@ -28,6 +28,7 @@ public class WorldGenBamboo extends WorldGenerator{
 
 					for(int bambooY=1,bambooHeight=rand.nextInt(6)+4; bambooY<bambooHeight; bambooY++){
 						if (world.isAirBlock(xx,yy+bambooY,zz))world.setBlock(xx,yy+bambooY,zz,ModBlocks.bambooCrop.blockID);
+						else break;
 					}
 					
 					++bambooPlaced;

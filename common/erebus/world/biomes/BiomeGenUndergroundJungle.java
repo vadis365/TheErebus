@@ -208,9 +208,9 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 		}
 
 		byte[] offsetX=new byte[]{ -1, 1, 0, 0 }, offsetZ=new byte[]{ 0, 0, -1, 1  };
-		for(int attempt=0,xx,yy,zz,block,offset; attempt<700; attempt++){
+		for(int attempt=0,xx,yy,zz,block,offset; attempt<800; attempt++){
 			xx=x+getRandomXZOffset(rand);
-			yy=6+rand.nextInt(120);
+			yy=30+rand.nextInt(80);
 			zz=z+getRandomXZOffset(rand);
 
 			if (world.isAirBlock(xx,yy,zz)){
