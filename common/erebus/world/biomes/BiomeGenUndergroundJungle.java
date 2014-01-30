@@ -131,7 +131,7 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 					case 4: treeGen=new WorldGenTrees(true,6,3,3,true); break;
 					case 5: treeGen=new WorldGenErebusHugeTree(true,20+rand.nextInt(5),BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID); break;
 					case 6: treeGen=new WorldGenErebusTrees(true,5,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID,ModBlocks.thorns.blockID); break;
-					case 7: treeGen=new WorldGenEucalyptus(ModBlocks.logErebusGroup1.blockID,BlockLogErebus.dataEucalyptus,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataEucalyptusDecay,8+rand.nextInt(4),5,8,Block.grass.blockID); break;
+					case 7: treeGen=new WorldGenEucalyptus(); break;
 				}
 				
 				treeGen.generate(world,rand,xx,yy,zz);

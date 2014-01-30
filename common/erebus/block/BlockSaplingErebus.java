@@ -72,7 +72,7 @@ public class BlockSaplingErebus extends BlockSapling {
 		boolean var10 = false;
 
 		if (meta == dataEucalyptus)
-			worldGen = new WorldGenEucalyptus(ModBlocks.logErebusGroup1.blockID, BlockLogErebus.dataEucalyptus, ModBlocks.leavesErebus.blockID, BlockLeavesErebus.dataEucalyptusDecay, 8 + rand.nextInt(4), 5, 8, Block.grass.blockID);
+			worldGen = new WorldGenEucalyptus();
 		else if (meta == dataAcacia)
 			worldGen = new WorldGenSavannaTree();
 		else if (meta == dataMossbark)
