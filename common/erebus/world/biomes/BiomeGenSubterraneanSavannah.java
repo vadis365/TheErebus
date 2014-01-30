@@ -22,11 +22,11 @@ import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
 import erebus.world.feature.WorldGenAmberGround;
 import erebus.world.feature.WorldGenAmberUmberstone;
+import erebus.world.feature.WorldGenAsperTree;
 import erebus.world.feature.WorldGenBamboo;
 import erebus.world.feature.WorldGenRottenAcacia;
 import erebus.world.feature.WorldGenSavannaRock;
-import erebus.world.feature.trees.WorldGenAsperTree;
-import erebus.world.feature.trees.WorldGenSavannaTree;
+import erebus.world.feature.WorldGenSavannaTree;
 
 // @formatter:off
 public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{

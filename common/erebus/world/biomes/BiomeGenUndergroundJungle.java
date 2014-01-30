@@ -27,19 +27,19 @@ import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
 import erebus.world.feature.WorldGenAmberGround;
 import erebus.world.feature.WorldGenAmberUmberstone;
+import erebus.world.feature.WorldGenAsperTree;
 import erebus.world.feature.WorldGenBamboo;
+import erebus.world.feature.WorldGenErebusHugeTree;
+import erebus.world.feature.WorldGenErebusTrees;
 import erebus.world.feature.WorldGenEucalyptus;
 import erebus.world.feature.WorldGenMelon;
+import erebus.world.feature.WorldGenMossbarkTree;
 import erebus.world.feature.WorldGenPonds;
 import erebus.world.feature.WorldGenQuickSand;
 import erebus.world.feature.WorldGenRedGem;
+import erebus.world.feature.WorldGenTallJungleTree;
 import erebus.world.feature.WorldGenTurnips;
 import erebus.world.feature.WorldGenWaspDungeon;
-import erebus.world.feature.trees.WorldGenAsperTree;
-import erebus.world.feature.trees.WorldGenErebusHugeTree;
-import erebus.world.feature.trees.WorldGenErebusTrees;
-import erebus.world.feature.trees.WorldGenMossbarkTree;
-import erebus.world.feature.trees.WorldGenTallJungleTree;
 
 //@formatter:off
 public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
@@ -77,7 +77,7 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 				zz=z+getRandomXZOffset(rand);
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
-				new WorldGenPonds(Block.waterMoving.blockID,Block.blockClay.blockID,(rand.nextDouble()+1D)*2D).generate(world,rand,xx,yy,zz);
+				new WorldGenPonds((rand.nextDouble()+0.7D)*2.2D).generate(world,rand,xx,yy,zz);
 			}
 		}
 

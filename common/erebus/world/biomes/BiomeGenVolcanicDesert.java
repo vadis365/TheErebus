@@ -16,7 +16,7 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.world.feature.WorldGenAntlionLair;
-import erebus.world.feature.trees.WorldGenScorchedTree;
+import erebus.world.feature.WorldGenScorchedTree;
 
 //@formatter:off
 public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
