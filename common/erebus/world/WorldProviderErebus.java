@@ -39,9 +39,9 @@ public class WorldProviderErebus extends WorldProvider {
 
 		if (targetFogColor == null)
 			targetFogColor = new double[3];
-		targetFogColor[0] = 0.029999999329447746D * 255D;
-		targetFogColor[1] = 0.49999999329447746D * 255D;
-		targetFogColor[2] = 0.029999999329447746D * 255D;
+		targetFogColor[0] = 0.03D * 255D;
+		targetFogColor[1] = 0.5D * 255D;
+		targetFogColor[2] = 0.03D * 255D;
 
 		if (b == ModBiomes.subterraneanSavannah) {
 			targetFogColor[0] = 140D;

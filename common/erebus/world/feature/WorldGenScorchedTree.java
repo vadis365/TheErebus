@@ -1,7 +1,6 @@
 package erebus.world.feature;
 
 import java.util.Random;
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
@@ -30,7 +29,6 @@ public class WorldGenScorchedTree extends WorldGenerator{
 				}
 			}
 		}
-		if (world.getBlockId(x,y-1,z)!=Block.sand.blockID)return false;
 
 		// generate tree
 

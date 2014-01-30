@@ -23,7 +23,7 @@ public class MapGenErebusRavine extends MapGenBase {
 
 		if (seed6 <= 0) {
 			int j1 = range * 16 - 16;
-			seed6 = j1 - random.nextInt(j1 / 4);
+			seed6 = j1 - random.nextInt(j1 >> 2);
 		}
 
 		boolean flag = false;

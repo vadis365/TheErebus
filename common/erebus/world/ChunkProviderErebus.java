@@ -161,12 +161,13 @@ public class ChunkProviderErebus implements IChunkProvider {
 		double d1 = 2053.236D;
 		noiseData4 = noiseGen5.generateNoiseOctaves(noiseData4, x, y, z, sizeX, 1, sizeZ, 1D, 0D, 1D);
 		noiseData5 = noiseGen6.generateNoiseOctaves(noiseData5, x, y, z, sizeX, 1, sizeZ, 100D, 0D, 100D);
-		noiseData1 = noiseGen3.generateNoiseOctaves(noiseData1, x, y, z, sizeX, sizeY, sizeZ, d / 80D, d1 / 60D, d / 80D);
+		noiseData1 = noiseGen3.generateNoiseOctaves(noiseData1, x, y, z, sizeX, sizeY, sizeZ, d * 0.0125D, d1 / 60D, d * 0.0125D);
 		noiseData2 = noiseGen1.generateNoiseOctaves(noiseData2, x, y, z, sizeX, sizeY, sizeZ, d, d1, d);
 		noiseData3 = noiseGen2.generateNoiseOctaves(noiseData3, x, y, z, sizeX, sizeY, sizeZ, d, d1, d);
 		int i = 0;
 		int j = 0;
 		double ad[] = new double[sizeY];
+		double oneOver512 = 1D / 512D;
 
 		for (int k = 0; k < sizeY; k++) {
 			ad[k] = Math.cos(k * Math.PI * 6D / sizeY) * 2D;
@@ -183,13 +184,13 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 		for (int l = 0; l < sizeX; l++)
 			for (int i1 = 0; i1 < sizeZ; i1++) {
-				double d3 = (noiseData4[j] + 256D) / 512D;
+				double d3 = (noiseData4[j] + 256D) * oneOver512;
 
 				if (d3 > 1.0D)
 					d3 = 1.0D;
 
 				double d4 = 0.0D;
-				double d5 = noiseData5[j] / 8000D;
+				double d5 = noiseData5[j] * 0.000125D;
 
 				if (d5 < 0.0D)
 					d5 = -d5;
@@ -203,7 +204,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 						d5 = -1D;
 
 					d5 /= 1.3999999999999999D;
-					d5 /= 2D;
+					d5 *= 0.5D;
 					d3 = 0.0D;
 				} else {
 					if (d5 > 1.0D)
@@ -213,15 +214,15 @@ public class ChunkProviderErebus implements IChunkProvider {
 				}
 
 				d3 += 0.5D;
-				d5 = d5 * sizeY / 16D;
+				d5 = d5 * sizeY * 0.0625D;
 				j++;
 
 				for (int j1 = 0; j1 < sizeY; j1++) {
 					double d6 = 0.0D;
 					double d7 = ad[j1];
-					double d8 = noiseData2[i] / 512D;
-					double d9 = noiseData3[i] / 512D;
-					double d10 = (noiseData1[i] / 10D + 1.0D) / 2D;
+					double d8 = noiseData2[i] * oneOver512;
+					double d9 = noiseData3[i] * oneOver512;
+					double d10 = (noiseData1[i] * 0.1D + 1.0D) * 0.5D;
 
 					if (d10 < 0.0D)
 						d6 = d8;
@@ -238,7 +239,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 					}
 
 					if (j1 < d4) {
-						double d12 = (d4 - j1) / 4D;
+						double d12 = (d4 - j1) * 0.25D;
 
 						if (d12 < 0.0D)
 							d12 = 0.0D;
@@ -264,14 +265,13 @@ public class ChunkProviderErebus implements IChunkProvider {
 			return;
 
 		byte var5 = 0;
-		double var6 = 0.03125D;
-		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, x * 16, z * 16, 0, 16, 16, 1, var6 * 2.0D, var6 * 2.0D, var6 * 2.0D);
+		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, x * 16, z * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
 
 		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
 			for (int zInChunk = 0; zInChunk < 16; ++zInChunk) {
 				BiomeGenBase biome = biomes[zInChunk + xInChunk * 16];
 				float temperature = biome.getFloatTemperature();
-				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
+				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
 				byte topBlock = biome.topBlock;
 				byte fillerBlock = biome.fillerBlock;
@@ -279,8 +279,9 @@ public class ChunkProviderErebus implements IChunkProvider {
 				for (int yInChunk = 127; yInChunk >= 0; --yInChunk) {
 					int index = (zInChunk * 16 + xInChunk) * 128 + yInChunk;
 
-					if (yInChunk <= 0 + rand.nextInt(5) || yInChunk >= 127 - rand.nextInt(5))
+					if ((yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5)) || (yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))) {
 						blocks[index] = (byte) Block.bedrock.blockID;
+					}
 					else {
 						byte block = blocks[index];
 

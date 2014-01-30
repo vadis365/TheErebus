@@ -116,8 +116,8 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase{
 
 			for(int a=0; a<6; a++){
 				int testX=xx+checkX[a]*checkArea,testY=yy+checkY[a]*checkArea,testZ=zz+checkZ[a]*checkArea;
-				if (testX>>4!=x>>4) testX=x;
-				if (testZ>>4!=z>>4) testZ=z;
+				if (testX>>4!=x>>4)testX=x;
+				if (testZ>>4!=z>>4)testZ=z;
 
 				if (world.isAirBlock(testX,testY,testZ)){
 					if (oreNumber==1){

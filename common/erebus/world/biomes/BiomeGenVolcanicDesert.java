@@ -68,7 +68,7 @@ public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
 			int yy=rand.nextInt(120);
 			int zz=z+getRandomXZOffset(rand);
 			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.sand.blockID){
+			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.sand.blockID && !world.isAirBlock(xx,yy-2,zz)){
 				new WorldGenScorchedTree().generate(world,rand,xx,yy,zz);
 				if (rand.nextInt(4)!=0) break;
 			}

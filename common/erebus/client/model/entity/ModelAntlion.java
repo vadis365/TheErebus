@@ -392,6 +392,8 @@ public class ModelAntlion extends ModelBase {
 		float cos2 = MathHelper.cos(limbSwing * 1.0F) * 0.5F * prevLimbSwing;
 		float heady = rotationYaw / (180F / (float) Math.PI);
 		float headx = rotationPitch / (180F / (float) Math.PI);
+		float cos3 = MathHelper.cos(limbSwing * 0.75F);
+		float cos4 = MathHelper.cos(limbSwing * 0.75F + (float) Math.PI);
 		Head.rotateAngleY = heady;
 		Neck1.rotateAngleY = heady;
 		Head.rotateAngleX = headx;
@@ -408,11 +410,11 @@ public class ModelAntlion extends ModelBase {
 		RB1.rotateAngleY = -cos2 + 3.8397247F;
 		RM1.rotateAngleY = -cos1 + 3.141593F;
 		RF1.rotateAngleY = -cos2 + 2.6179942F;
-		MandR1.rotateAngleY = -MathHelper.cos(limbSwing * 0.75F) * 0.2F * prevLimbSwing + 0.35F;
-		MandR2.rotateAngleY = -MathHelper.cos(limbSwing * 0.75F) * 0.2F * prevLimbSwing + 0.35F;
-		MandR3.rotateAngleY = -MathHelper.cos(limbSwing * 0.75F) * 0.2F * prevLimbSwing - 0.35F;
-		MandL1.rotateAngleY = -MathHelper.cos(limbSwing * 0.75F + (float) Math.PI) * 0.2F * prevLimbSwing - 0.35F;
-		MandL2.rotateAngleY = -MathHelper.cos(limbSwing * 0.75F + (float) Math.PI) * 0.2F * prevLimbSwing - 0.35F;
-		MandL3.rotateAngleY = -MathHelper.cos(limbSwing * 0.75F + (float) Math.PI) * 0.2F * prevLimbSwing + 0.35F;
+		MandR1.rotateAngleY = -cos3 * 0.2F * prevLimbSwing + 0.35F;
+		MandR2.rotateAngleY = -cos3 * 0.2F * prevLimbSwing + 0.35F;
+		MandR3.rotateAngleY = -cos3 * 0.2F * prevLimbSwing - 0.35F;
+		MandL1.rotateAngleY = -cos4 * 0.2F * prevLimbSwing - 0.35F;
+		MandL2.rotateAngleY = -cos4 * 0.2F * prevLimbSwing - 0.35F;
+		MandL3.rotateAngleY = -cos4 * 0.2F * prevLimbSwing + 0.35F;
 	}
 }
