@@ -2,6 +2,7 @@ package erebus.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -24,11 +25,14 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial;
 
 public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
+	private boolean ramming;
 	
 	public EntityRhinoBeetle(World world) {
 		super(world);
@@ -196,17 +200,17 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 	
 	@Override
-    public void moveEntityWithHeading(float par1, float par2) {
+    public void moveEntityWithHeading(float strafe, float forward) {
         if (riddenByEntity != null) {
             this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
             this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
             this.setRotation(this.rotationYaw, this.rotationPitch);
             this.rotationYawHead = this.renderYawOffset = this.rotationYaw;
-            par1 = ((EntityLivingBase)this.riddenByEntity).moveStrafing * 0.5F;
-            par2 = ((EntityLivingBase)this.riddenByEntity).moveForward;
+            strafe = ((EntityLivingBase)this.riddenByEntity).moveStrafing * 0.5F;
+            forward = ((EntityLivingBase)this.riddenByEntity).moveForward;
 
-            if (par2 <= 0.0F) {
-                par2 *= 0.25F;
+            if (forward <= 0.0F) {
+            	forward *= 0.25F;
             }
             
             this.stepHeight = 1.0F;
@@ -214,7 +218,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 
             if (!this.worldObj.isRemote) {
                 this.setAIMoveSpeed((float)this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-                super.moveEntityWithHeading(par1, par2);
+                super.moveEntityWithHeading(strafe, forward);
             }
             this.prevLimbSwingAmount = this.limbSwingAmount;
             double d0 = this.posX - this.prevPosX;
@@ -232,7 +236,7 @@ public class EntityRhinoBeetle extends EntityTameable {
         else {
             this.stepHeight = 0.5F;
             this.jumpMovementFactor = 0.02F;
-            super.moveEntityWithHeading(par1, par2);
+            super.moveEntityWithHeading(strafe, forward);
         }
     }
     
@@ -246,13 +250,14 @@ public class EntityRhinoBeetle extends EntityTameable {
     			riddenByEntity.setPosition(posX - offSetX, posY + 1.3D + riddenByEntity.getYOffset(), posZ - offSetZ);
     }
    }
+	
+	public void setRamAttack(boolean state) {
+		ramming = state;
+	}
 
 	@Override
     protected void collideWithEntity(Entity entity) {
-		     double x = this.posX - this.prevPosX;
-	         double z = this.posZ - this.prevPosZ;
-	         float velocity = MathHelper.sqrt_double(x * x + z * z) * 4.0F;
-    	if(riddenByEntity != null && (entity instanceof EntityLivingBase) && !(entity instanceof EntityPlayer) && velocity>=4.317)
+    	if(riddenByEntity != null && (entity instanceof EntityLivingBase) && !(entity instanceof EntityPlayer)&& ramming)
     		Attack(entity);
     }
 
@@ -280,4 +285,6 @@ public class EntityRhinoBeetle extends EntityTameable {
 	public byte getHasBeenTamed() {
 		return dataWatcher.getWatchableObjectByte(31);
 	}
+
 }
+

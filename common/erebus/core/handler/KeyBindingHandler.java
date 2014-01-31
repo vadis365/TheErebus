@@ -14,12 +14,14 @@ import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.ModItems;
+import erebus.entity.EntityRhinoBeetle;
 import erebus.network.PacketHandler;
 
 public class KeyBindingHandler extends KeyHandler {
 	public static KeyBinding glide = new KeyBinding("Glide", Keyboard.KEY_LMENU);
-	public static KeyBinding[] arrayOfKeys = new KeyBinding[] { glide };
-	public static boolean[] areRepeating = new boolean[] { false };
+	public static KeyBinding beetleRam = new KeyBinding("Beetle Ram Attack", Keyboard.KEY_R);
+	public static KeyBinding[] arrayOfKeys = new KeyBinding[] { glide, beetleRam };
+	public static boolean[] areRepeating = new boolean[] { false, false };
 
 	public KeyBindingHandler() {
 		super(arrayOfKeys, areRepeating);
@@ -47,6 +49,16 @@ public class KeyBindingHandler extends KeyHandler {
 					PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(4, true));
 				}
 			}
+		
+		if (kb.keyCode == beetleRam.keyCode) {
+			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+			if (player == null)
+				return;
+
+			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle) {
+			PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(5, true));
+			}
+		}		
 	}
 
 	@Override
@@ -64,6 +76,10 @@ public class KeyBindingHandler extends KeyHandler {
 				chestPlate.getTagCompound().setBoolean("isGliding", false);
 				PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(4, false));
 			}
+			
+			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle) {
+			PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(5, false));
+			}	
 		}
 	}
 

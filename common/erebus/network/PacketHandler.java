@@ -16,6 +16,7 @@ import com.google.common.io.ByteStreams;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import erebus.lib.Reference;
+import erebus.network.packet.PacketBeetleRamAttack;
 import erebus.network.packet.PacketColossalCratePage;
 import erebus.network.packet.PacketGlider;
 import erebus.network.packet.PacketParticle;
@@ -32,6 +33,7 @@ public class PacketHandler implements IPacketHandler {
 		register(2, new PacketParticle());
 		register(3, new PacketSound());
 		register(4, new PacketGlider());
+		register(5, new PacketBeetleRamAttack());
 	}
 
 	private void register(int packetID, IPacket packet) {
