@@ -90,7 +90,7 @@ public class ItemErebusFood extends ItemFood {
 			case dataLarvaRaw:
 				return world.rand.nextFloat() > 0.75 ? new PotionEffect(Potion.confusion.id, 30 * 20, 0) : null;
 			case dataMelonadeSparkly:
-				return new PotionEffect(Potion.regeneration.id, 110, 0);
+				return new PotionEffect(Potion.regeneration.id, 200, 0);
 			default:
 				return null;
 		}
