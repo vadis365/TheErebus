@@ -44,7 +44,7 @@ public class RenderRhinoBeetle extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityRhinoBeetle beetle = (EntityRhinoBeetle) entity;
-		if(beetle.getHasBeenTamed()<2)
+		if(beetle.getTameState()<2)
 			return textures[0];
 		else
 			return textures[1];
