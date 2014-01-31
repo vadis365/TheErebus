@@ -32,7 +32,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	
 	public EntityRhinoBeetle(World world) {
 		super(world);
-		this.setSize(1.8F, 1.4F);
+		this.setSize(2.3F, 1.4F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));
@@ -105,22 +105,35 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 	
 	@Override
+	public boolean isOnLadder() {
+		return riddenByEntity != null && isCollidedHorizontally;
+	}
+	
+	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (is != null && is.itemID == new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataBamboo).itemID && getHasBeenTamed()==0) {
+		if (is != null && is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == 11 && getHasBeenTamed()==0) {
 			is.stackSize--;
 			setTame((byte) 1);
+			playTameEffect(true);
 			tasks.removeTask(aiNearestAttackableTarget);
 			setAttackTarget((EntityLivingBase)null);
 			return true;
 		}
-		if (is != null && is.itemID == ModItems.turnip.itemID && !isInLove() && getHasBeenTamed()==1) {
+		
+		if (is != null && is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == 20 && getHasBeenTamed()==1) {
+			is.stackSize--;
+			setTame((byte) 2);
+			return true;
+		}
+		
+		if (is != null && is.itemID == ModItems.turnip.itemID && !isInLove() && getHasBeenTamed()!=0){
 			is.stackSize--;
 			inLove = 600;
 			return true;
 		} 
 		
-		if (is == null && getHasBeenTamed()==1) {
+		if (is == null && getHasBeenTamed()==2) {
 	        if (!this.worldObj.isRemote) {
 	            player.mountEntity(this);
 	        }
@@ -137,7 +150,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		if (getHasBeenTamed() == 1)
+		if (getHasBeenTamed() != 0)
 			if(entity instanceof EntityPlayer){
 				setAttackTarget((EntityLivingBase)null);
 				return false;
@@ -146,17 +159,26 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 
 	protected boolean Attack(Entity entity) {
-		float Knockback = 1;
+		float knockback=1;
 		entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F + 3);
-		entity.addVelocity(-MathHelper.sin(this.rotationYaw * 3.141593F / 180.0F) * Knockback, 0.4D, MathHelper.cos(this.rotationYaw * 3.141593F / 180.0F) * Knockback);
+		entity.addVelocity(-MathHelper.sin(this.rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(this.rotationYaw * 3.141593F / 180.0F) * knockback);
 		this.worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
 		((EntityLivingBase) entity) .addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, this.worldObj.difficultySetting * 50, 0));
 		return true;
 	}
 	
 	@Override
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		if (getHasBeenTamed() == 2)
+			entityDropItem( new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataRhinoRidingKit), 0.0F);
+	}
+	
+	@Override
 	public boolean isBreedingItem(ItemStack is) {
+		if (getHasBeenTamed() != 0)
 		return is != null && is.itemID == ModItems.turnip.itemID;
+		else
+			return false;
 	}
 
 	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {
@@ -167,16 +189,15 @@ public class EntityRhinoBeetle extends EntityTameable {
 
 	@Override
 	protected boolean canDespawn() {
-		if (getHasBeenTamed() == 1)
+		if (getHasBeenTamed() != 0)
 			return false;
 		else
 			return true;
 	}
 	
 	@Override
-    public void moveEntityWithHeading(float par1, float par2)
-    {
-        if (riddenByEntity != null && getHasBeenTamed() == 1) {
+    public void moveEntityWithHeading(float par1, float par2) {
+        if (riddenByEntity != null) {
             this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
             this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
             this.setRotation(this.rotationYaw, this.rotationPitch);
@@ -206,6 +227,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 
             this.limbSwingAmount += (f4 - this.limbSwingAmount) * 0.4F;
             this.limbSwing += this.limbSwingAmount;
+
         }
         else {
             this.stepHeight = 0.5F;
@@ -215,8 +237,7 @@ public class EntityRhinoBeetle extends EntityTameable {
     }
     
 	@Override
-    public void updateRiderPosition()
-    {
+    public void updateRiderPosition() {
     	super.updateRiderPosition();
     		if (this.riddenByEntity instanceof EntityLivingBase) {
     			double a = Math.toRadians(renderYawOffset);
@@ -225,26 +246,35 @@ public class EntityRhinoBeetle extends EntityTameable {
     			riddenByEntity.setPosition(posX - offSetX, posY + 1.3D + riddenByEntity.getYOffset(), posZ - offSetZ);
     }
    }
- 
+
+	@Override
+    protected void collideWithEntity(Entity entity) {
+		     double x = this.posX - this.prevPosX;
+	         double z = this.posZ - this.prevPosZ;
+	         float velocity = MathHelper.sqrt_double(x * x + z * z) * 4.0F;
+    	if(riddenByEntity != null && (entity instanceof EntityLivingBase) && !(entity instanceof EntityPlayer) && velocity>=4.317)
+    		Attack(entity);
+    }
+
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		return spawnBabyAnimal(entityageable);
 	}
 
-	public void setTame(byte hasMated) {
-		dataWatcher.updateObject(31, Byte.valueOf(hasMated));
+	public void setTame(byte tameState) {
+		dataWatcher.updateObject(31, Byte.valueOf(tameState));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setByte("hasMated", getHasBeenTamed());
+		nbt.setByte("tameState", getHasBeenTamed());
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setTame(nbt.getByte("hasMated"));
+		setTame(nbt.getByte("tameState"));
 	}
 
 	public byte getHasBeenTamed() {

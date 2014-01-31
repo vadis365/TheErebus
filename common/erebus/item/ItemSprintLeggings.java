@@ -1,12 +1,13 @@
 package erebus.item;
 
 import java.util.List;
-
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -54,5 +55,16 @@ public class ItemSprintLeggings extends ItemArmor {
 		armtick++;
 		if (armtick > 60 || player.isSprinting())
 			armtick = 0;
+	}
+	
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(int id, CreativeTabs tab, List list) {
+		list.add(new ItemStack(id,1,0));
+
+		ItemStack is=new ItemStack(id,1,0);
+		(is.stackTagCompound=new NBTTagCompound()).setByte("upgradeTier",(byte)8);
+		list.add(is);
 	}
 }
