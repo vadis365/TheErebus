@@ -168,6 +168,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 		entity.addVelocity(-MathHelper.sin(this.rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(this.rotationYaw * 3.141593F / 180.0F) * knockback);
 		this.worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
 		((EntityLivingBase) entity) .addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, this.worldObj.difficultySetting * 50, 0));
+		setRamAttack(false);
 		return true;
 	}
 	
