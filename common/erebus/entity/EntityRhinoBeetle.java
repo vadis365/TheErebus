@@ -2,7 +2,6 @@ package erebus.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -25,8 +24,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial;
 
@@ -114,6 +111,20 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 	
 	@Override
+	protected boolean canDespawn() {
+		if (getHasBeenTamed() != 0)
+			return false;
+		else
+			return true;
+	}
+	
+	@Override
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		if (getHasBeenTamed() == 2)
+			entityDropItem( new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataRhinoRidingKit), 0.0F);
+	}
+	
+	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
 		if (is != null && is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == 11 && getHasBeenTamed()==0) {
@@ -124,25 +135,22 @@ public class EntityRhinoBeetle extends EntityTameable {
 			setAttackTarget((EntityLivingBase)null);
 			return true;
 		}
-		
 		if (is != null && is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == 20 && getHasBeenTamed()==1) {
 			is.stackSize--;
 			setTame((byte) 2);
 			return true;
 		}
-		
 		if (is != null && is.itemID == ModItems.turnip.itemID && !isInLove() && getHasBeenTamed()!=0){
 			is.stackSize--;
 			inLove = 600;
 			return true;
 		} 
-		
 		if (is == null && getHasBeenTamed()==2) {
 	        if (!this.worldObj.isRemote) {
 	            player.mountEntity(this);
 	        }
-			return true;
-		} 		
+	        return true;
+		}
 		else
 			return super.interact(player);
 	}
@@ -150,6 +158,16 @@ public class EntityRhinoBeetle extends EntityTameable {
     @Override
 	public void setAttackTarget(EntityLivingBase entityLivingBase){
         super.setAttackTarget(entityLivingBase);
+    }
+    
+	public void setRamAttack(boolean state) {
+		ramming = state;
+	}
+	
+	@Override
+    protected void collideWithEntity(Entity entity) {
+    	if(riddenByEntity != null && (entity instanceof EntityLivingBase) && !(entity instanceof EntityPlayer)&& ramming)
+    		Attack(entity);
     }
 
 	@Override
@@ -170,34 +188,6 @@ public class EntityRhinoBeetle extends EntityTameable {
 		((EntityLivingBase) entity) .addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, this.worldObj.difficultySetting * 50, 0));
 		setRamAttack(false);
 		return true;
-	}
-	
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if (getHasBeenTamed() == 2)
-			entityDropItem( new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataRhinoRidingKit), 0.0F);
-	}
-	
-	@Override
-	public boolean isBreedingItem(ItemStack is) {
-		if (getHasBeenTamed() != 0)
-		return is != null && is.itemID == ModItems.turnip.itemID;
-		else
-			return false;
-	}
-
-	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {
-		EntityBeetleLarva entityBeetleLarva = new EntityBeetleLarva(worldObj);
-		entityBeetleLarva.setTame((byte) 1);
-		return entityBeetleLarva;
-	}
-
-	@Override
-	protected boolean canDespawn() {
-		if (getHasBeenTamed() != 0)
-			return false;
-		else
-			return true;
 	}
 	
 	@Override
@@ -249,26 +239,34 @@ public class EntityRhinoBeetle extends EntityTameable {
     			double offSetX = -Math.sin(a) * 0.35D;
     			double offSetZ = Math.cos(a) * 0.35D;
     			riddenByEntity.setPosition(posX - offSetX, posY + 1.3D + riddenByEntity.getYOffset(), posZ - offSetZ);
-    }
+    		}
    }
-	
-	public void setRamAttack(boolean state) {
-		ramming = state;
-	}
-
-	@Override
-    protected void collideWithEntity(Entity entity) {
-    	if(riddenByEntity != null && (entity instanceof EntityLivingBase) && !(entity instanceof EntityPlayer)&& ramming)
-    		Attack(entity);
-    }
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		return spawnBabyAnimal(entityageable);
 	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack is) {
+		if (getHasBeenTamed() != 0)
+		return is != null && is.itemID == ModItems.turnip.itemID;
+		else
+			return false;
+	}
 
+	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {
+		EntityBeetleLarva entityBeetleLarva = new EntityBeetleLarva(worldObj);
+		entityBeetleLarva.setTame((byte) 1);
+		return entityBeetleLarva;
+	}
+	
 	public void setTame(byte tameState) {
 		dataWatcher.updateObject(31, Byte.valueOf(tameState));
+	}
+	
+	public byte getHasBeenTamed() {
+		return dataWatcher.getWatchableObjectByte(31);
 	}
 
 	@Override
@@ -282,10 +280,5 @@ public class EntityRhinoBeetle extends EntityTameable {
 		super.readEntityFromNBT(nbt);
 		setTame(nbt.getByte("tameState"));
 	}
-
-	public byte getHasBeenTamed() {
-		return dataWatcher.getWatchableObjectByte(31);
-	}
-
 }
 
