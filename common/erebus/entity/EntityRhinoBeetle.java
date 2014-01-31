@@ -1,8 +1,5 @@
 package erebus.entity;
 
-import java.util.List;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,8 +26,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial;
-import erebus.network.PacketHandler;
-import erebus.network.packet.PacketParticle;
 
 public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
