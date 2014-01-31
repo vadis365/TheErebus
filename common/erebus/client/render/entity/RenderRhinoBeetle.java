@@ -12,7 +12,7 @@ import erebus.entity.EntityRhinoBeetle;
 public class RenderRhinoBeetle extends RenderLiving
 {
 	protected ModelRhinoBeetle model;
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/ModelRhinoBeetle.png"), new ResourceLocation("erebus:textures/entity/ModelRhinoBeetleTamed.png") };
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/ModelRhinoBeetle.png"), new ResourceLocation("erebus:textures/entity/ModelRhinoBeetleKit.png") };
 
 	public RenderRhinoBeetle(ModelRhinoBeetle modelBase, float shadowSize){
 		super(modelBase, shadowSize);
@@ -44,6 +44,9 @@ public class RenderRhinoBeetle extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityRhinoBeetle beetle = (EntityRhinoBeetle) entity;
-			return textures[beetle.getHasBeenTamed()];
+		if(beetle.getHasBeenTamed()<2)
+			return textures[0];
+		else
+			return textures[1];
 	}
 }
