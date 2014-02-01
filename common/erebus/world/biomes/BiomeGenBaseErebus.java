@@ -9,9 +9,10 @@ import erebus.block.BlockErebusOre;
 import erebus.block.BlockErebusOreExtras;
 import erebus.core.handler.ConfigurationHandler;
 import erebus.world.feature.WorldGenErebusMinable;
+import erebus.world.loot.IWeightProvider;
 
 // @formatter:off
-public abstract class BiomeGenBaseErebus extends BiomeGenBase{
+public abstract class BiomeGenBaseErebus extends BiomeGenBase implements IWeightProvider{
 	public BiomeGenBaseErebus(int biomeID){
 		super(biomeID);
 		ModBiomes.biomeList.add(this);
@@ -20,6 +21,13 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase{
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 		spawnableCaveCreatureList.clear();
+	}
+	
+	protected abstract short getBiomeWeight();
+	
+	@Override
+	public final short getWeight(){
+		return getBiomeWeight();
 	}
 
 	@Override

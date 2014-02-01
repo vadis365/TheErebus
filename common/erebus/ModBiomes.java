@@ -1,15 +1,15 @@
 package erebus;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
+import erebus.world.biomes.BiomeGenBaseErebus;
 import erebus.world.biomes.BiomeGenSubterraneanSavannah;
 import erebus.world.biomes.BiomeGenUndergroundJungle;
 import erebus.world.biomes.BiomeGenVolcanicDesert;
+import erebus.world.loot.WeightedList;
 
 public class ModBiomes {
-	public static List<BiomeGenBase> biomeList = new ArrayList<BiomeGenBase>();
+	public static WeightedList<BiomeGenBaseErebus> biomeList = new WeightedList<BiomeGenBaseErebus>();
 	
 	public static BiomeGenBase undergroundJungle;
 	public static BiomeGenBase volcanicDesert;

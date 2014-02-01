@@ -29,7 +29,6 @@ import erebus.creativetab.CreativeTabErebusBlock;
 import erebus.creativetab.CreativeTabErebusGear;
 import erebus.creativetab.CreativeTabErebusItem;
 import erebus.creativetab.CreativeTabErebusSpecialItem;
-import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.util.RandomMobNames;
 import erebus.integration.IModIntegration;
 import erebus.lib.Reference;

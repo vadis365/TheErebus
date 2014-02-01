@@ -63,6 +63,11 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 		topBlock=(byte)Block.grass.blockID;
 		fillerBlock=(byte)Block.dirt.blockID;
 	}
+	
+	@Override
+	public short getBiomeWeight(){
+		return 10;
+	}
 
 	@Override
 	public float getSpawningChance(){

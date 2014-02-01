@@ -14,12 +14,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class VelocityBlock extends Block {
+public class BlockVelocity extends Block {
 
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
 
-	public VelocityBlock(int id) {
+	public BlockVelocity(int id) {
 		super(id, Material.rock);
 	}
 
@@ -36,7 +36,7 @@ public class VelocityBlock extends Block {
 			int[] factorX = { 0, 1, 0, -1 };
 			int[] factorZ = { -1, 0, 1, 0 };
 
-			if (entity != null && entity.posY > y + 0.5D) {
+			if (entity.posY > y + 0.5D) {
 				if (factorX[meta] == 0 && Math.abs(x + 0.5D - entity.posX) < 0.5D && Math.abs(x + 0.5D - entity.posX) > 0.1D)
 					entity.motionX += Math.signum(x + 0.5D - entity.posX) * Math.min(speed, Math.abs(x + 0.5D - entity.posX)) / 1.2D;
 

@@ -7,9 +7,9 @@ import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class UmberstonePillar extends BlockRotatedPillar {
+public class BlockUmberstonePillar extends BlockRotatedPillar {
 
-	public UmberstonePillar(int id) {
+	public BlockUmberstonePillar(int id) {
 		super(id, Material.rock);
 	}
 
