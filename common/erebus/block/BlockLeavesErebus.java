@@ -3,7 +3,6 @@ package erebus.block;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -121,7 +120,7 @@ public class BlockLeavesErebus extends BlockLeaves {
 	}
 
 	private void removeLeaves(World world, int x, int y, int z) {
-		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		dropBlockAsItem(world, x, y, z, getDamageValue(world, x, y, z), 0);
 		world.setBlockToAir(x, y, z);
 	}
 
@@ -163,9 +162,14 @@ public class BlockLeavesErebus extends BlockLeaves {
 				return -1;
 		}
 	}
+	
+	@Override
+	public int getDamageValue(World world, int x, int y, int z){
+		return world.getBlockMetadata(x,y,z)&~8;
+	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float par6, int fortune) {
+	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float chance, int fortune) {
 		if (!world.isRemote)
 			if (world.rand.nextInt(20) == 0 && damageDropped(meta) != -1)
 				dropBlockAsItem_do(world, x, y, z, new ItemStack(idDropped(meta, world.rand, fortune), 1, damageDropped(meta)));

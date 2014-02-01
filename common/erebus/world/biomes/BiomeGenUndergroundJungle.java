@@ -110,17 +110,16 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 				WorldGenerator treeGen=null;
+				int r=rand.nextInt(31);
 				
-				switch(rand.nextInt(8)){
-					case 0: treeGen=new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3); break;
-					case 1: treeGen=new WorldGenMossbarkTree(); break;
-					case 2: treeGen=new WorldGenTallJungleTree(); break;
-					case 3: treeGen=new WorldGenAsperTree(); break;
-					case 4: treeGen=new WorldGenTrees(true,6,3,3,true); break;
-					case 5: treeGen=new WorldGenErebusHugeTree(true,20+rand.nextInt(5),BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID); break;
-					case 6: treeGen=new WorldGenErebusTrees(true,5,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID,ModBlocks.thorns.blockID); break;
-					case 7: treeGen=new WorldGenEucalyptusTree(); break;
-				}
+				if (r<=6)treeGen=new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3);
+				else if (r<=11)treeGen=new WorldGenErebusTrees(true,5,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID,ModBlocks.thorns.blockID);
+				else if (r<=16)treeGen=new WorldGenErebusHugeTree(true,20+rand.nextInt(5),BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID);
+				else if (r<=20)treeGen=new WorldGenAsperTree();
+				else if (r<=23)treeGen=new WorldGenTrees(true,6,3,3,true);
+				else if (r<=26)treeGen=new WorldGenMossbarkTree();
+				else if (r<=28)treeGen=new WorldGenTallJungleTree();
+				else treeGen=new WorldGenEucalyptusTree();
 				
 				treeGen.generate(world,rand,xx,yy,zz);
 			}

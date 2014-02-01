@@ -11,7 +11,9 @@ Additions
 Changes
 =======
 - Tweaked Beetle hit box size and position
+- Some biomes are more rare than others
 
 Bugfixes
 ========
 - Erebus logs, planks, leaves and some other blocks catch on fire
+- Leaves now give corrent metadata values when picked
