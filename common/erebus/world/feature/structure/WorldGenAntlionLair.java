@@ -1,4 +1,4 @@
-package erebus.world.feature;
+package erebus.world.feature.structure;
 
 import java.util.List;
 import java.util.Random;

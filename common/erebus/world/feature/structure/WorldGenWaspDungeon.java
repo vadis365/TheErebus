@@ -1,6 +1,7 @@
-package erebus.world.feature;
+package erebus.world.feature.structure;
 
 import erebus.ModBlocks;
+import erebus.world.feature.util.WorldGeneratorExt;
 
 //@formatter:off
 public class WorldGenWaspDungeon extends WorldGeneratorExt{

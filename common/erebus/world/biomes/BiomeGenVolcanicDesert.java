@@ -15,8 +15,8 @@ import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
-import erebus.world.feature.WorldGenAntlionLair;
-import erebus.world.feature.WorldGenScorchedTree;
+import erebus.world.feature.decoration.WorldGenScorchedWood;
+import erebus.world.feature.structure.WorldGenAntlionLair;
 
 //@formatter:off
 public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
@@ -74,7 +74,7 @@ public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
 			int zz=z+getRandomXZOffset(rand);
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.sand.blockID && !world.isAirBlock(xx,yy-2,zz)){
-				new WorldGenScorchedTree().generate(world,rand,xx,yy,zz);
+				new WorldGenScorchedWood().generate(world,rand,xx,yy,zz);
 				if (rand.nextInt(4)!=0) break;
 			}
 		}

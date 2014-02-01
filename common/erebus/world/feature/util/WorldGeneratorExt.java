@@ -1,4 +1,4 @@
-package erebus.world.feature;
+package erebus.world.feature.util;
 
 import java.util.Random;
 

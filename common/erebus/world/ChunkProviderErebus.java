@@ -18,7 +18,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import erebus.ModBlocks;
-import erebus.world.feature.WorldGenSpiderDungeons;
+import erebus.world.feature.structure.WorldGenSpiderDungeons;
 import erebus.world.structure.MapGenErebusRavine;
 
 public class ChunkProviderErebus implements IChunkProvider {

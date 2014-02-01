@@ -19,12 +19,12 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.world.feature.WorldGenAsperTree;
-import erebus.world.feature.WorldGenErebusHugeTree;
-import erebus.world.feature.WorldGenErebusTrees;
-import erebus.world.feature.WorldGenEucalyptus;
-import erebus.world.feature.WorldGenMossbarkTree;
-import erebus.world.feature.WorldGenSavannaTree;
+import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenErebusHugeTree;
+import erebus.world.feature.tree.WorldGenErebusTrees;
+import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import erebus.world.feature.tree.WorldGenMossbarkTree;
+import erebus.world.feature.tree.WorldGenSavannaTree;
 
 public class BlockSaplingErebus extends BlockSapling {
 
@@ -72,7 +72,7 @@ public class BlockSaplingErebus extends BlockSapling {
 		boolean var10 = false;
 
 		if (meta == dataEucalyptus)
-			worldGen = new WorldGenEucalyptus();
+			worldGen = new WorldGenEucalyptusTree();
 		else if (meta == dataAcacia)
 			worldGen = new WorldGenSavannaTree();
 		else if (meta == dataMossbark)

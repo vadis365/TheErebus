@@ -8,26 +8,22 @@ import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import erebus.ModBlocks;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
-import erebus.entity.EntityBombardierBeetle;
-import erebus.entity.EntityBotFly;
-import erebus.entity.EntityCentipede;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityJumpingSpider;
-import erebus.entity.EntityMoth;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
-import erebus.world.feature.WorldGenAmberGround;
-import erebus.world.feature.WorldGenAmberUmberstone;
-import erebus.world.feature.WorldGenAsperTree;
-import erebus.world.feature.WorldGenBamboo;
-import erebus.world.feature.WorldGenRottenAcacia;
-import erebus.world.feature.WorldGenSavannaRock;
-import erebus.world.feature.WorldGenSavannaTree;
+import erebus.world.feature.decoration.WorldGenAmberGround;
+import erebus.world.feature.decoration.WorldGenAmberUmberstone;
+import erebus.world.feature.decoration.WorldGenRottenAcacia;
+import erebus.world.feature.decoration.WorldGenSavannaRock;
+import erebus.world.feature.plant.WorldGenBamboo;
+import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenSavannaTree;
 
 // @formatter:off
 public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{

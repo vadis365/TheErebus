@@ -26,21 +26,21 @@ import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
-import erebus.world.feature.WorldGenAmberGround;
-import erebus.world.feature.WorldGenAmberUmberstone;
-import erebus.world.feature.WorldGenAsperTree;
-import erebus.world.feature.WorldGenBamboo;
-import erebus.world.feature.WorldGenErebusHugeTree;
-import erebus.world.feature.WorldGenErebusTrees;
-import erebus.world.feature.WorldGenEucalyptus;
-import erebus.world.feature.WorldGenMelon;
-import erebus.world.feature.WorldGenMossbarkTree;
-import erebus.world.feature.WorldGenPonds;
-import erebus.world.feature.WorldGenQuickSand;
-import erebus.world.feature.WorldGenRedGem;
-import erebus.world.feature.WorldGenTallJungleTree;
-import erebus.world.feature.WorldGenTurnips;
-import erebus.world.feature.WorldGenWaspDungeon;
+import erebus.world.feature.decoration.WorldGenAmberGround;
+import erebus.world.feature.decoration.WorldGenAmberUmberstone;
+import erebus.world.feature.decoration.WorldGenPonds;
+import erebus.world.feature.decoration.WorldGenQuickSand;
+import erebus.world.feature.decoration.WorldGenRedGem;
+import erebus.world.feature.plant.WorldGenBamboo;
+import erebus.world.feature.plant.WorldGenMelon;
+import erebus.world.feature.plant.WorldGenTurnips;
+import erebus.world.feature.structure.WorldGenWaspDungeon;
+import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenErebusHugeTree;
+import erebus.world.feature.tree.WorldGenErebusTrees;
+import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import erebus.world.feature.tree.WorldGenMossbarkTree;
+import erebus.world.feature.tree.WorldGenTallJungleTree;
 
 //@formatter:off
 public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
@@ -138,7 +138,7 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 					case 4: treeGen=new WorldGenTrees(true,6,3,3,true); break;
 					case 5: treeGen=new WorldGenErebusHugeTree(true,20+rand.nextInt(5),BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID); break;
 					case 6: treeGen=new WorldGenErebusTrees(true,5,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID,ModBlocks.thorns.blockID); break;
-					case 7: treeGen=new WorldGenEucalyptus(); break;
+					case 7: treeGen=new WorldGenEucalyptusTree(); break;
 				}
 				
 				treeGen.generate(world,rand,xx,yy,zz);

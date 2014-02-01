@@ -1,4 +1,4 @@
-package erebus.world.feature;
+package erebus.world.feature.tree;
 
 import java.util.Random;
 import net.minecraft.block.Block;

@@ -1,4 +1,4 @@
-package erebus.world.feature;
+package erebus.world.feature.decoration;
 
 import java.util.Random;
 import net.minecraft.world.World;
@@ -7,7 +7,7 @@ import erebus.ModBlocks;
 import erebus.block.BlockLogErebus;
 
 //@formatter:off
-public class WorldGenScorchedTree extends WorldGenerator{
+public class WorldGenScorchedWood extends WorldGenerator{
 
 	private static final int[] offsetX=new int[]{ -1, 1, 0, 0 };
 	private static final int[] offsetZ=new int[]{ 0, 0, -1, 1 };

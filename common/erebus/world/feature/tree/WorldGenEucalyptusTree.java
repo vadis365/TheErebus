@@ -1,4 +1,4 @@
-package erebus.world.feature;
+package erebus.world.feature.tree;
 
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -8,7 +8,7 @@ import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
 
-public class WorldGenEucalyptus extends WorldGenerator{
+public class WorldGenEucalyptusTree extends WorldGenerator{
 
 	private static final int span = 5;
 	private static final int branches = 8;
