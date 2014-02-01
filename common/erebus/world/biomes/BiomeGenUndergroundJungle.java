@@ -15,6 +15,7 @@ import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityFly;
@@ -52,8 +53,9 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 		spawnableMonsterList.add(new SpawnListEntry(EntityScytodes.class,35,1,4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityJumpingSpider.class,10,1,4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityTarantula.class,5,4,8));
+		spawnableMonsterList.add(new SpawnListEntry(EntityBombardierBeetle.class,4,1,1));
 
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class,10,4,8));
+		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class,10,2,3));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetle.class,8,1,2));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetleLarva.class,8,2,4));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class,10,8,8));

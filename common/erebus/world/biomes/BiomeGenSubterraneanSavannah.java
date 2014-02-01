@@ -18,6 +18,7 @@ import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
+import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
 import erebus.world.feature.WorldGenAmberGround;
@@ -35,19 +36,16 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 		spawnableCreatureList.add(new SpawnListEntry(EntityGrasshopper.class,14,4,8));
 		spawnableCreatureList.add(new SpawnListEntry(EntityGlowWorm.class,14,4,8));
 
-		spawnableMonsterList.add(new SpawnListEntry(EntityCentipede.class,10,4,8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityScorpion.class,10,4,8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityWasp.class,30,4,8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityScytodes.class,35,1,4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityJumpingSpider.class,10,1,4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityTarantula.class,18,4,8));
-		spawnableMonsterList.add(new SpawnListEntry(EntityBombardierBeetle.class,4,1,1));
+		spawnableMonsterList.add(new SpawnListEntry(EntitySolifuge.class,5,1,3));
 
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class,10,4,8));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class,10,8,8));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetle.class,8,1,2));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetleLarva.class,8,2,4));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityMoth.class,5,4,4));
 
 		topBlock=(byte)Block.grass.blockID;
 		fillerBlock=(byte)Block.dirt.blockID;

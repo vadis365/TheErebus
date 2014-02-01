@@ -31,7 +31,7 @@ public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
 		spawnableMonsterList.add(new SpawnListEntry(EntityJumpingSpider.class,10,1,4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityAntlion.class,30,1,8));
 
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class,10,4,8));
+		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class,10,2,3));
 		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class,10,8,8));
 
 		topBlock=(byte)Block.sand.blockID;
