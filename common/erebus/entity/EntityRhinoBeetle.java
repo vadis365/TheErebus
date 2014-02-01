@@ -26,6 +26,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusSpecial;
 
 public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
@@ -122,13 +123,13 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() == 2)
-			entityDropItem( new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataRhinoRidingKit), 0.0F);
+			entityDropItem( new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), 0.0F);
 	}
 	
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (is != null && is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == 11 && getTameState()==0) {
+		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 1 && getTameState()==0) {
 			is.stackSize--;
 			setTameState((byte) 1);
 			playTameEffect(true);
@@ -136,7 +137,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 			setAttackTarget((EntityLivingBase)null);
 			return true;
 		}
-		if (is != null && is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == 20 && getTameState()==1) {
+		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 0 && getTameState()==1) {
 			is.stackSize--;
 			setTameState((byte) 2);
 			return true;

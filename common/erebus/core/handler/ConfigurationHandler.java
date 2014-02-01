@@ -126,6 +126,7 @@ public class ConfigurationHandler {
 			 */
 			ModItems.portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
 			ModItems.erebusMaterialsID = config.getItem("Item ID of Erebus Materials", 9707).getInt(9707);
+			ModItems.erebusSpecialItemID = config.getItem("Item ID of Erebus Special Item", 9746).getInt(9746);
 			ModItems.erebusFoodID = config.getItem("Item ID of Erebus Food", 9708).getInt(9708);
 			ModItems.metalIngotID = config.getItem("Item ID of Metal Ingots", 9709).getInt(9709);
 			ModItems.bamBucketID = config.getItem("Item ID of Bambucket", 9710).getInt(9710);
@@ -171,7 +172,7 @@ public class ConfigurationHandler {
 
 			ModItems.spawnEggsID = config.getItem("Item ID of Spawn Eggs", 9743).getInt(9743);
 
-			// latest ID used (please update after adding new items!) >>> 9745
+			// latest ID used (please update after adding new items!) >>> 9746
 
 			/*
 			 * Biomes & misc

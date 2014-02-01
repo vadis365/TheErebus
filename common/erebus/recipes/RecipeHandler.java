@@ -14,6 +14,7 @@ import erebus.block.BlockPlanksErebus;
 import erebus.core.handler.ConfigurationHandler;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusSpecial;
 
 public class RecipeHandler {
 
@@ -173,7 +174,10 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.umberGolemStatue, 1), new Object[] { " s ", "sss", "s s", 's', Block.stone });
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.book, 1, 0), new Object[] { new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), new ItemStack(Item.paper, 1, 0), new ItemStack(Item.paper, 1, 0), new ItemStack(Item.paper, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.velocityBlock), "xxx", "xxx", "xxx", 'x', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataBioVelocity));
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL",'S', Item.silk, 'X', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), 'C', new ItemStack(Block.carpet, 1, 0), 'L', new ItemStack(Item.dyePowder, 1, 4) });
+		
+		// Special Items - for future expansion
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL",'S', Item.silk, 'X', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), 'C', new ItemStack(Block.carpet, 1, 0), 'L', new ItemStack(Item.dyePowder, 1, 4) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataBeetleTamingAmulet), new Object[] { " N ", "NJN", " F ",'N', Item.goldNugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataJade), 'F',  new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataAltarFragment) });
 		
 		// Furnace smelting
 		FurnaceRecipes.smelting().addSmelting(ModBlocks.blockAmber.blockID, 0, new ItemStack(ModBlocks.blockAmber, 1, 1), 0.3F);

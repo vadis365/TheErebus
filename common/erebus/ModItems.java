@@ -22,6 +22,7 @@ import erebus.item.ItemCavemanClub;
 import erebus.item.ItemCompoundGoggles;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusSpecial;
 import erebus.item.ItemExoskeletonArmor;
 import erebus.item.ItemHornOfSummoning;
 import erebus.item.ItemJadeArmor;
@@ -55,6 +56,7 @@ public class ModItems {
 	public static Item wandOfAnimation;					public static int wandOfAnimationID;
 	public static Item bucketOfBeetleJuice;				public static int bucketOfBeetleJuiceID;
 	public static Item hornOfSummoning;					public static int hornOfSummoningID;
+	public static Item erebusSpecialItem;				public static int erebusSpecialItemID;
 
 	// JADE STUFF
 	public static Item jadeHelmet;						public static int jadeHelmetID;
@@ -105,6 +107,7 @@ public class ModItems {
 
 		portalActivator = new ItemPortalActivator(portalActivatorID).setUnlocalizedName("portalActivator").setTextureName("erebus:portalActivator");
 		erebusMaterials = new ItemErebusMaterial(erebusMaterialsID).setUnlocalizedName("erebusMaterials");
+		erebusSpecialItem = new ItemErebusSpecial(erebusSpecialItemID).setUnlocalizedName("erebusSpecialItem");
 		erebusFood = new ItemErebusFood(erebusFoodID).setUnlocalizedName("erebusFood");
 		if (ConfigurationHandler.lead || ConfigurationHandler.silver || ConfigurationHandler.copper || ConfigurationHandler.tin || ConfigurationHandler.aluminium)
 			metalIngot = new ItemMetalIngots(metalIngotID);
@@ -162,7 +165,8 @@ public class ModItems {
 		Erebus.tabErebusGear.add(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		Erebus.tabErebusGear.add(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, hornOfSummoning, scorpionPincer, webSlinger);
 		Erebus.tabErebusGear.add(compoundGoggles, reinCompoundGoggles, armorGlider, sprintLeggings, jumpBoots);
-
+		Erebus.tabErebusGear.add(erebusSpecialItem);
+		
 		// Tool classes
 		MinecraftForge.setToolClass(jadeAxe, "axe", 2);
 		MinecraftForge.setToolClass(jadePickaxe, "pickaxe", 2);
@@ -172,6 +176,7 @@ public class ModItems {
 		GameRegistry.registerItem(portalActivator, "erebus.portalActivator");
 		GameRegistry.registerItem(erebusMaterials, "erebus.erebusMaterials");
 		GameRegistry.registerItem(erebusFood, "erebus.erebusFood");
+		GameRegistry.registerItem(erebusSpecialItem, "erebus.erebusSpecialItem");
 		if (ConfigurationHandler.lead || ConfigurationHandler.silver || ConfigurationHandler.copper || ConfigurationHandler.tin || ConfigurationHandler.aluminium)
 			GameRegistry.registerItem(metalIngot, "erebus.metalIngot");
 		GameRegistry.registerItem(bamBucket, "erebus.bamBucket");
