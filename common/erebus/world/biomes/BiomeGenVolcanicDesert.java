@@ -15,8 +15,10 @@ import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
+import erebus.world.feature.decoration.WorldGenRedGem;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.structure.WorldGenAntlionLair;
+import erebus.world.feature.util.FeatureType;
 
 //@formatter:off
 public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
@@ -86,6 +88,16 @@ public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
 				if (genAntlionLair.generate(world,rand,x+5+rand.nextInt(6)+8,15+rand.nextInt(35),z+5+rand.nextInt(6)+8)) break;
 			}
 		}
+	}
+	
+	@Override
+	public void generateFeature(World world, Random rand, int x, int z, FeatureType featureType){
+		if (featureType==FeatureType.REDGEM){
+			for(int attempt=0; attempt<10; attempt++){
+				new WorldGenRedGem().generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(64),z+getRandomXZOffset(rand));
+			}
+		}
+		else super.generateFeature(world,rand,x,z,featureType);
 	}
 }
 //@formatter:on

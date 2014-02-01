@@ -1,7 +1,17 @@
 v0.1.3
+
+Additions
+=========
 - Added "Hornet of Despair" a double sized random spawn Wasp
-- Tweaked Beetle hit box size and position
 - Added spider sounds to Tarantula
 - Added Smooth Umbertile, Smooth Umbertiles and Umberstone Pillar
 - Removed Firebrat
 - Added Velocity Block
+
+Changes
+=======
+- Tweaked Beetle hit box size and position
+
+Bugfixes
+========
+- Erebus logs, planks, leaves and some other blocks catch on fire

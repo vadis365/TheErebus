@@ -22,6 +22,7 @@ import erebus.world.feature.decoration.WorldGenSavannaRock;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenSavannaTree;
+import erebus.world.feature.util.FeatureType;
 
 // @formatter:off
 public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
@@ -113,6 +114,12 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 				new WorldGenTallGrass(ModBlocks.erebusGrass.blockID,1).generate(world,rand,xx,yy,zz);
 			}
 		}
+	}
+	
+	@Override
+	public void generateFeature(World world, Random rand, int x, int z, FeatureType featureType){
+		if ((featureType==FeatureType.AMBER_GROUND||featureType==FeatureType.AMBER_UMBERSTONE)&&rand.nextInt(4)!=0)return;
+		super.generateFeature(world,rand,x,z,featureType);
 	}
 }
 // @formatter:on

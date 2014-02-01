@@ -28,7 +28,6 @@ import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
-import erebus.world.feature.decoration.WorldGenRedGem;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.plant.WorldGenMelon;
 import erebus.world.feature.plant.WorldGenTurnips;
@@ -129,10 +128,6 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 		
 		new WorldGenFlowers(Block.mushroomBrown.blockID).generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
 		new WorldGenFlowers(Block.mushroomRed.blockID).generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
-
-		for(int attempt=0; attempt<20; attempt++){
-			new WorldGenRedGem().generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
-		}
 
 		for(int attempt=0; attempt<12; attempt++){
 			int xx=x+getRandomXZOffset(rand),

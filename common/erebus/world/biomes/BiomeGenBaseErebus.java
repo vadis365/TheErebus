@@ -11,6 +11,7 @@ import erebus.block.BlockErebusOreExtras;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenErebusMinable;
+import erebus.world.feature.decoration.WorldGenRedGem;
 import erebus.world.feature.util.FeatureType;
 import erebus.world.feature.util.OreType;
 import erebus.world.loot.IWeightProvider;
@@ -53,8 +54,8 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase implements IWeight
 				if (rand.nextInt(6)!=0)return;
 				
 				WorldGenAmberGround genAmberGround=new WorldGenAmberGround();
-				for(int attempt=0; attempt<6; attempt++){
-					if (genAmberGround.generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(120),z+getRandomXZOffset(rand))) break;
+				for(int attempt=0; attempt<4; attempt++){
+					if (genAmberGround.generate(world,rand,x+getRandomXZOffset(rand),10+rand.nextInt(40),z+getRandomXZOffset(rand))) break;
 				}
 				break;
 				
@@ -64,6 +65,12 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase implements IWeight
 				WorldGenAmberUmberstone genAmberUmberstone=new WorldGenAmberUmberstone();
 				for(int attempt=0; attempt<5; attempt++){
 					if (genAmberUmberstone.generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(120),z+getRandomXZOffset(rand))) break;
+				}
+				break;
+				
+			case REDGEM:
+				for(int attempt=0; attempt<5; attempt++){
+					new WorldGenRedGem().generate(world,rand,x+getRandomXZOffset(rand),64+rand.nextInt(60),z+getRandomXZOffset(rand));
 				}
 				break;
 		}

@@ -18,7 +18,7 @@ public class WorldGenRedGem extends WorldGenerator{
 
 		world.setBlock(x,y,z,ModBlocks.redGem.blockID);
 
-		for(int attempt=0,xx,yy,zz,dist=2,distUpd=0; attempt<400; ++attempt){
+		for(int attempt=0,xx,yy,zz,dist=2,distUpd=0,attCount=rand.nextInt(100)+300; attempt<attCount; ++attempt){
 			xx=x+rand.nextInt(dist)-rand.nextInt(dist);
 			yy=y-rand.nextInt(dist+4);
 			zz=z+rand.nextInt(dist)-rand.nextInt(dist);

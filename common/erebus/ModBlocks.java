@@ -368,5 +368,16 @@ public class ModBlocks {
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 3, "pickaxe", 2);
 		if (ConfigurationHandler.tin)
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 4, "pickaxe", 1);
+		
+		// Burning rates
+		Block.setBurnProperties(logErebusGroup1.blockID,5,5);
+		Block.setBurnProperties(logErebusGroup2.blockID,5,5);
+		Block.setBurnProperties(planksErebus.blockID,5,20);
+		Block.setBurnProperties(leavesErebus.blockID,30,60);
+		Block.setBurnProperties(blockWitherWeb.blockID,20,50);
+		Block.setBurnProperties(erebusGrass.blockID,60,100);
+		Block.setBurnProperties(fern.blockID,60,100);
+		Block.setBurnProperties(fiddlehead.blockID,60,100);
+		Block.setBurnProperties(thorns.blockID,15,100);
 	}
 }
