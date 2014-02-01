@@ -44,7 +44,7 @@ public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
 	}
 
 	@Override
-	public void generateTerrain(World world, Random rand, int x, int z){
+	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		for(int attempt=0; attempt<35; attempt++){
 			int xx=x+getRandomXZOffset(rand);
 			int yy=15+rand.nextInt(90);

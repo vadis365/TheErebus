@@ -26,8 +26,6 @@ import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
-import erebus.world.feature.decoration.WorldGenAmberGround;
-import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.decoration.WorldGenRedGem;
@@ -77,7 +75,7 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 	}
 
 	@Override
-	public void generateTerrain(World world, Random rand, int x, int z){
+	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		for(int attempt=0; attempt<20; attempt++){
 			int xx=x+getRandomXZOffset(rand),
 				yy=rand.nextInt(120),
@@ -93,22 +91,6 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 			
 			for(int attempt=0; attempt<5; attempt++){
 				if (genWaspDungeon.generate(world,rand,x+getRandomXZOffset(rand),127,z+getRandomXZOffset(rand))) break;
-			}
-		}
-
-		if (rand.nextInt(5)==0){
-			WorldGenAmberGround genAmber=new WorldGenAmberGround();
-			
-			for(int attempt=0; attempt<6; attempt++){
-				if (genAmber.generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(120),z+getRandomXZOffset(rand))) break;
-			}
-		}
-
-		if (rand.nextInt(3)==0){
-			WorldGenAmberUmberstone genAmber=new WorldGenAmberUmberstone();
-			
-			for(int attempt=0; attempt<5; attempt++){
-				if (genAmber.generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(120),z+getRandomXZOffset(rand))) break;
 			}
 		}
 		

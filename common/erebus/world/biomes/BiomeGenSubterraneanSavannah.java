@@ -17,8 +17,6 @@ import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
-import erebus.world.feature.decoration.WorldGenAmberGround;
-import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannaRock;
 import erebus.world.feature.plant.WorldGenBamboo;
@@ -53,7 +51,7 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 	}
 
 	@Override
-	public void generateTerrain(World world, Random rand, int x, int z){
+	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		for(int attempt=0; attempt<65; attempt++){
 			int xx=x+getRandomXZOffset(rand),
 				yy=15+rand.nextInt(90),
@@ -113,22 +111,6 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 				new WorldGenTallGrass(ModBlocks.erebusGrass.blockID,1).generate(world,rand,xx,yy,zz);
-			}
-		}
-
-		if (rand.nextInt(6)==0){
-			WorldGenAmberGround genAmber=new WorldGenAmberGround();
-			
-			for(int attempt=0; attempt<6; attempt++){
-				if (genAmber.generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(120),z+getRandomXZOffset(rand))) break;
-			}
-		}
-
-		if (rand.nextInt(3)==0){
-			WorldGenAmberUmberstone genAmber=new WorldGenAmberUmberstone();
-			
-			for(int attempt=0; attempt<5; attempt++){
-				if (genAmber.generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(120),z+getRandomXZOffset(rand))) break;
 			}
 		}
 	}
