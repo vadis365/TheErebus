@@ -69,7 +69,8 @@ public class EntityRhinoBeetle extends EntityTameable {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-
+/*
+ * Disabled until sounds are found
 	@Override
 	protected String getLivingSound() {
 		return "erebus:rhinobeetlesound";
@@ -79,7 +80,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	protected String getHurtSound() {
 		return "erebus:rhinobeetlehurt";
 	}
-
+*/
 	@Override
 	protected String getDeathSound() {
 		return "erebus:squish";
