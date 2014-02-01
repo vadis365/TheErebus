@@ -155,17 +155,15 @@ public class ModItems {
 		spawnEggs = new ItemSpawnEggs(spawnEggsID).setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
 
 		// Creative tabs
-		Erebus.tabErebusItem.add(portalActivator, erebusMaterials, erebusFood, bucketOfBeetleJuice, turnip);
+		Erebus.tabErebusItem.add(erebusMaterials, erebusFood, turnip);
 		if (ConfigurationHandler.lead || ConfigurationHandler.silver || ConfigurationHandler.copper || ConfigurationHandler.tin || ConfigurationHandler.aluminium)
 			Erebus.tabErebusItem.add(metalIngot);
-		Erebus.tabErebusItem.add(spawnEggs);
 
-		Erebus.tabErebusGear.add(bamBucket, sprayCan);
 		Erebus.tabErebusGear.add(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		Erebus.tabErebusGear.add(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
-		Erebus.tabErebusGear.add(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, hornOfSummoning, scorpionPincer, webSlinger);
+		Erebus.tabErebusGear.add(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger);
 		Erebus.tabErebusGear.add(compoundGoggles, reinCompoundGoggles, armorGlider, sprintLeggings, jumpBoots);
-		Erebus.tabErebusGear.add(erebusSpecialItem);
+		Erebus.tabErebusSpecial.add(portalActivator, bamBucket, bucketOfBeetleJuice, erebusSpecialItem, sprayCan, hornOfSummoning, spawnEggs);
 		
 		// Tool classes
 		MinecraftForge.setToolClass(jadeAxe, "axe", 2);

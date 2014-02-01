@@ -28,6 +28,7 @@ import erebus.creativetab.CreativeTabErebus;
 import erebus.creativetab.CreativeTabErebusBlock;
 import erebus.creativetab.CreativeTabErebusGear;
 import erebus.creativetab.CreativeTabErebusItem;
+import erebus.creativetab.CreativeTabErebusSpecialItem;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.util.RandomMobNames;
 import erebus.integration.IModIntegration;
@@ -50,7 +51,8 @@ public class Erebus {
 	public static CreativeTabErebus tabErebusBlock = new CreativeTabErebusBlock("erebus.block");
 	public static CreativeTabErebus tabErebusItem = new CreativeTabErebusItem("erebus.item");
 	public static CreativeTabErebus tabErebusGear = new CreativeTabErebusGear("erebus.gear");
-
+	public static CreativeTabErebus tabErebusSpecial = new CreativeTabErebusSpecialItem("erebus.special");
+	
 	public static PlayerTeleportHandler teleportHandler = new PlayerTeleportHandler();
 
 	@EventHandler

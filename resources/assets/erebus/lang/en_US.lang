@@ -260,6 +260,7 @@ entity.Erebus.RhinoBeetle.name=Rhinoceros Beetle
 itemGroup.erebus.block=Erebus Blocks
 itemGroup.erebus.item=Erebus Items
 itemGroup.erebus.gear=Erebus Gear
+itemGroup.erebus.special=Special Items
 container.bambooCrate=Bamboo Crate
 container.colossalCrate=Bamboo Crate
 container.umberFurnace=Umber Furnace
