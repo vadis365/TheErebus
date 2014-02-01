@@ -25,9 +25,7 @@ import erebus.network.PacketHandler;
 import erebus.network.packet.PacketParticle;
 
 public class EntityBeetleLarva extends EntityAnimal {
-	private final EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
-	private final EntityAIWatchClosest aiWatchClosest = new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F);
-	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D);
+public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D);
 	public boolean isEating;
 	public boolean isSquashed;
 
@@ -38,10 +36,9 @@ public class EntityBeetleLarva extends EntityAnimal {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, aiEatWoodItem);
 		tasks.addTask(2, new EntityAITempt(this, 0.48D, Item.stick.itemID, false));
-		tasks.addTask(3, aiWander);
-		tasks.addTask(4, aiWatchClosest);
-		tasks.addTask(5, new EntityAILookIdle(this));
-		tasks.addTask(6, new EntityAIPanic(this, 0.48D));
+		tasks.addTask(3, new EntityAIWander(this, 0.48D));
+		tasks.addTask(4, new EntityAILookIdle(this));
+		tasks.addTask(5, new EntityAIPanic(this, 0.48D));
 	}
 
 	@Override
@@ -202,24 +199,13 @@ public class EntityBeetleLarva extends EntityAnimal {
 		return super.interact(player);
 	}
 
-	public void setMoveTasks(boolean par1) {
-		if (par1 == false) {
-			tasks.removeTask(aiWander);
-			tasks.removeTask(aiWatchClosest);
-		}
-		if (par1 == true) {
-			tasks.addTask(2, aiWander);
-			tasks.addTask(4, aiWatchClosest);
-		}
-	}
-
 	public void setIsEating(boolean par1) {
 		isEating = par1;
 	}
 
 	public void munchBlock() {
 		if (isEating && worldObj.getWorldTime() % 5 == 0)
-			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ, worldObj.getBlockId(aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ), Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatWoodItem.WoodX, aiEatWoodItem.WoodY, aiEatWoodItem.WoodZ))));
+			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatWoodItem.woodX, aiEatWoodItem.woodY, aiEatWoodItem.woodZ, worldObj.getBlockId(aiEatWoodItem.woodX, aiEatWoodItem.woodY, aiEatWoodItem.woodZ), Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatWoodItem.woodX, aiEatWoodItem.woodY, aiEatWoodItem.woodZ))));
 	}
 
 	public void setisSquashed(boolean par1) {
