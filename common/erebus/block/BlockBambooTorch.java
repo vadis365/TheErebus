@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
@@ -61,18 +62,18 @@ public class BlockBambooTorch extends Block {
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		int meta = world.getBlockMetadata(x, y, z);
 		if(meta==0){
-		int l = world.getBlockId(x, y - 1, z);
-		int m = world.getBlockId(x, y + 1, z);
+		int l = world.getBlockId(x, y -1, z);
+		int m = world.getBlockId(x, y +1, z);
 		Block block = Block.blocksList[l];
 		if (block == null || m != 0)
 			return false;
-		if (block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
+		if (block == this && (world.getBlockMetadata(x, y -1, z) & 7) == 7)
 			return true;
-		if (!block.isLeaves(world, x, y - 1, z) && !Block.blocksList[l].isOpaqueCube())
+		if (!block.isLeaves(world, x, y -1, z) && !Block.blocksList[l].isOpaqueCube())
 			return false;
-		world.setBlock(x,y+1,z,this.blockID,1, 3);
+		world.setBlock(x, y +1, z, this.blockID, 1, 3);
 		}
-		return world.getBlockMaterial(x, y - 1, z).blocksMovement();
+		return world.getBlockMaterial(x, y -1, z).blocksMovement();
 	}
 
 	@Override
@@ -81,23 +82,34 @@ public class BlockBambooTorch extends Block {
 	}
 
 	protected boolean dropTorchIfCantStay(World world, int x, int y, int z) {
-		if (!canPlaceBlockAt(world, x, y, z)) {
-			if (world.getBlockId(x, y, z) == blockID) {
-				dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-				world.setBlockToAir(x, y, z);
-				world.setBlockToAir(x, y+1, z);
-			}
-			return false;
-		} else
-			return true;
+		int meta=world.getBlockMetadata(x, y +1, z);
+	      if (world.getBlockId(x, y - 1, z) == 0) {
+	    	  world.setBlockToAir(x, y, z);
+	    	  if(meta==0) {
+	    	  dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+	    	  }
+	            return false;
+	       }
+	      return true;
 	}
+	
+	@Override
+    public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+       if (world.getBlockId(x, y -1, z) == this.blockID) {
+            world.setBlockToAir(x, y -1, z);
+       }
+       if (world.getBlockId(x, y +1, z) == this.blockID) {
+    	 world.setBlockToAir(x, y +1, z);      
+       }
+       if (world.getBlockId(x, y, z) == this.blockID) {
+    	 dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+    	 world.setBlockToAir(x, y +1, z);      
+       }
+    }
 
 	@Override
 	public int idDropped(int meta, Random rand, int fortune) {
-		if(meta==1)
 			return blockID;
-		else
-		return 0;
 	}
 
 	@Override
