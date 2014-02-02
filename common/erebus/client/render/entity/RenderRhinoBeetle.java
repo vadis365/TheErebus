@@ -5,7 +5,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import erebus.client.model.entity.ModelRhinoBeetle;
 import erebus.entity.EntityRhinoBeetle;
 
@@ -18,9 +20,11 @@ public class RenderRhinoBeetle extends RenderLiving
 		super(modelBase, shadowSize);
 		model =((ModelRhinoBeetle)mainModel);
 	}
+	
     public void renderRhinoBeetle(EntityRhinoBeetle entityRhinoBeetle, double x, double y, double z, float rotationYaw, float partialTickTime) {
         super.doRenderLiving(entityRhinoBeetle, x, y, z, rotationYaw, partialTickTime);
-    }
+        }
+    
     @Override
     public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
         this.renderRhinoBeetle((EntityRhinoBeetle)entityLiving, x, y, z, rotationYaw, partialTickTime);

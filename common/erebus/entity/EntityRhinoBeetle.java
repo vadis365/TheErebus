@@ -25,12 +25,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
 import erebus.item.ItemErebusSpecial;
 
 public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	private boolean ramming;
+	public int rammingCharge;
 	
 	public EntityRhinoBeetle(World world) {
 		super(world);
@@ -169,7 +169,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
     protected void collideWithEntity(Entity entity) {
     	if(riddenByEntity != null && (entity instanceof EntityLivingBase) && !(entity instanceof EntityPlayer)&& ramming)
-    		Attack(entity);
+    		Attack(entity, rammingCharge *0.1F, rammingCharge *0.2F );
     }
 
 	@Override
@@ -179,12 +179,11 @@ public class EntityRhinoBeetle extends EntityTameable {
 				setAttackTarget((EntityLivingBase)null);
 				return false;
 			}
-		return Attack(entity);
+		return Attack(entity, 1F, 6F);
 	}
 
-	protected boolean Attack(Entity entity) {
-		float knockback=1;
-		entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F + 3);
+	protected boolean Attack(Entity entity, float knockback, float damage) {
+		entity.attackEntityFrom(DamageSource.causeMobDamage(this),(int) damage);
 		entity.addVelocity(-MathHelper.sin(this.rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(this.rotationYaw * 3.141593F / 180.0F) * knockback);
 		this.worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
 		((EntityLivingBase) entity) .addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, this.worldObj.difficultySetting * 50, 0));
@@ -217,7 +216,7 @@ public class EntityRhinoBeetle extends EntityTameable {
             double d0 = this.posX - this.prevPosX;
             double d1 = this.posZ - this.prevPosZ;
             float f4 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
-
+            travelSpeed(f4);
             if (f4 > 1.0F) {
                 f4 = 1.0F;
             }
@@ -233,6 +232,17 @@ public class EntityRhinoBeetle extends EntityTameable {
         }
     }
     
+	private void travelSpeed(float velocity) {
+		if (velocity >4.3F)
+			 rammingCharge++;
+		else if (velocity <4.3F)
+			rammingCharge--;
+		if (rammingCharge<=0)
+			rammingCharge=0;
+		if (rammingCharge>=50)
+			rammingCharge=50;		
+	}
+
 	@Override
     public void updateRiderPosition() {
     	super.updateRiderPosition();

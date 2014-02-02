@@ -18,6 +18,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
 import erebus.client.sound.EntitySoundEvent;
 import erebus.core.handler.CommonTickHandler;
@@ -58,6 +59,7 @@ public class Erebus {
 	public void preInit(FMLPreInitializationEvent event) {
 		if (event.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.register(new EntitySoundEvent());
+			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			AmbientMusicManager.register();
 		}
 
