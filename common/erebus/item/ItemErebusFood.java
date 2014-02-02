@@ -34,9 +34,9 @@ public class ItemErebusFood extends ItemFood {
 	public int getHealAmount(ItemStack is, World world, EntityPlayer player) {
 		switch (is.getItemDamage()) {
 			case dataLarvaRaw:
-				return 2;
+				return 1;
 			case dataLarvaCooked:
-				return 6;
+				return 3;
 			case dataGrasshopperLegRaw:
 				return 2;
 			case dataGrasshopperLegCooked:
@@ -52,7 +52,7 @@ public class ItemErebusFood extends ItemFood {
 			case dataMelonadeSparkly:
 				return 6;
 			case dataLarvaeOnStick:
-				return 18;
+				return 9;
 			default:
 				return 0;
 		}
@@ -61,9 +61,9 @@ public class ItemErebusFood extends ItemFood {
 	public float getSaturationModifier(ItemStack is, World world, EntityPlayer player) {
 		switch (is.getItemDamage()) {
 			case dataLarvaRaw:
-				return 0.65F;
+				return 0.45F;
 			case dataLarvaCooked:
-				return 0.85F;
+				return 0.65F;
 			case dataGrasshopperLegRaw:
 				return 0.8F;
 			case dataGrasshopperLegCooked:
@@ -79,7 +79,7 @@ public class ItemErebusFood extends ItemFood {
 			case dataMelonadeSparkly:
 				return 0.85F;
 			case dataLarvaeOnStick:
-				return 2.0F;
+				return 0.85F;
 			default:
 				return 0.0F;
 		}
@@ -88,9 +88,11 @@ public class ItemErebusFood extends ItemFood {
 	public PotionEffect getPotionEffect(ItemStack is, World world, EntityPlayer player) {
 		switch (is.getItemDamage()) {
 			case dataLarvaRaw:
-				return world.rand.nextFloat() > 0.75 ? new PotionEffect(Potion.confusion.id, 30 * 20, 0) : null;
+				return new PotionEffect(Potion.confusion.id, 300, 2);
 			case dataMelonadeSparkly:
 				return new PotionEffect(Potion.regeneration.id, 200, 0);
+			case dataLarvaeOnStick:
+				return new PotionEffect(Potion.confusion.id, 100, 1);
 			default:
 				return null;
 		}
