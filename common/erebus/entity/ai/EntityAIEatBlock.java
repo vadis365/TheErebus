@@ -73,11 +73,14 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 			entity.getMoveHelper().setMoveTo(cropX+0.5D, cropY, cropZ+0.5D, movespeed);
 			entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 			AxisAlignedBB blockbounds = getBlockAABB(cropX, cropY, cropZ);
-			boolean flag = entity.boundingBox.intersectsWith(blockbounds);
-			
+			//boolean flag = entity.boundingBox.intersectsWith(blockbounds);
+			boolean flag = entity.boundingBox.maxY >= blockbounds.minY && this.entity.boundingBox.minY <= blockbounds.maxY
+					&& this.entity.boundingBox.maxX >= blockbounds.minX && this.entity.boundingBox.minX <= blockbounds.maxX
+					&& this.entity.boundingBox.maxZ >= blockbounds.minZ && this.entity.boundingBox.minZ <= blockbounds.maxZ;
+
 			if (flag){
 				prepareToEat();
-				if (canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
+				if (!canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
 					hasTarget = false;
 				else {
 					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, entity.worldObj.getBlockId(cropX, cropY, cropZ) + (maxGrowthMetadata << 12));
