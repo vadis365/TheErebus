@@ -8,7 +8,6 @@ import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,7 +24,7 @@ import erebus.network.PacketHandler;
 import erebus.network.packet.PacketParticle;
 
 public class EntityBeetleLarva extends EntityAnimal {
-public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D);
+	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this);
 	public boolean isEating;
 	public boolean isSquashed;
 
@@ -201,11 +200,6 @@ public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.4
 
 	public void setIsEating(boolean par1) {
 		isEating = par1;
-	}
-
-	public void munchBlock() {
-		if (isEating && worldObj.getWorldTime() % 5 == 0)
-			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatWoodItem.woodX, aiEatWoodItem.woodY, aiEatWoodItem.woodZ, worldObj.getBlockId(aiEatWoodItem.woodX, aiEatWoodItem.woodY, aiEatWoodItem.woodZ), Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatWoodItem.woodX, aiEatWoodItem.woodY, aiEatWoodItem.woodZ))));
 	}
 
 	public void setisSquashed(boolean par1) {

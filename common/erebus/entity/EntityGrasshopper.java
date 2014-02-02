@@ -14,18 +14,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.ModItems;
 import erebus.entity.ai.EntityAIEatCrops;
-import erebus.network.PacketHandler;
-import erebus.network.packet.PacketParticle;
 
 public class EntityGrasshopper extends EntityCreature {
 
 	protected EntityLiving theEntity;
 	private ChunkCoordinates currentJumpTarget;
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
-	public EntityAIEatCrops aiEatCrops = new EntityAIEatCrops(this, 0.6D);
+	public EntityAIEatCrops aiEatCrops = new EntityAIEatCrops(this);
 	public boolean isEating;
 	public boolean canJump = true;
 
@@ -154,15 +151,5 @@ public class EntityGrasshopper extends EntityCreature {
 		if (!worldObj.isRemote && motionY < 0 && !onGround && !isEating)
 			jumpMovevement();
 		super.onLivingUpdate();
-	}
-
-	public void munchBlock() {
-		if (isEating && worldObj.getWorldTime() % 5 == 0)
-			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ, worldObj.getBlockId(aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ), Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatCrops.PlantX, aiEatCrops.PlantY, aiEatCrops.PlantZ))));
-	}
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
 	}
 }

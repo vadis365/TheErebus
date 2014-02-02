@@ -3,7 +3,8 @@ package erebus.entity.ai;
 import java.awt.Point;
 import java.util.List;
 
-import net.minecraft.block.BlockCrops;
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.item.ItemStack;
@@ -11,11 +12,11 @@ import net.minecraft.util.AxisAlignedBB;
 import erebus.core.helper.Spiral;
 import erebus.core.helper.Utils;
 
-public class BetterEntityAIEatCrop extends EntityAIBase {
+public abstract class EntityAIEatBlock extends EntityAIBase {
 
-	private final EntityAnimal entity;
+	protected final EntityLiving entity;
 	private final int maxGrowthMetadata;
-	private final BlockCrops crop;
+	private final Block block;
 	private final ItemStack seed;
 
 	private boolean hasTarget;
@@ -23,13 +24,17 @@ public class BetterEntityAIEatCrop extends EntityAIBase {
 	private int spiralIndex;
 	private static final List<Point> spiral = new Spiral(32, 32).spiral();
 
-	public BetterEntityAIEatCrop(EntityAnimal entity, BlockCrops crop, int maxGrowthMetadata, ItemStack seed) {
+	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed) {
 		this.entity = entity;
 		this.maxGrowthMetadata = maxGrowthMetadata;
-		this.crop = crop;
+		this.block = block;
 		this.seed = seed;
 		hasTarget = false;
 		spiralIndex = 0;
+	}
+
+	public EntityAIEatBlock(EntityAnimal entity, Block block, int maxGrowthMetadata) {
+		this(entity, block, maxGrowthMetadata, null);
 	}
 
 	@Override
@@ -39,7 +44,7 @@ public class BetterEntityAIEatCrop extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
-		return !entity.isInLove() && !entity.isChild();
+		return !entity.isChild();
 	}
 
 	@Override
@@ -56,30 +61,27 @@ public class BetterEntityAIEatCrop extends EntityAIBase {
 
 			Point p = getNextPoint();
 			for (int y = -2; y < 2; y++)
-				if (entity.worldObj.getBlockId(xCoord + p.x, yCoord + y, zCoord + p.y) == crop.blockID && entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y) >= maxGrowthMetadata) {
+				if (canEatBlock(entity.worldObj.getBlockId(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 					cropX = xCoord + p.x;
 					cropY = yCoord + y;
 					cropZ = zCoord + p.y;
 					hasTarget = true;
 				}
-		}
-
-		// isReadyToMate() should make sure the breeding timer is zero
-		if (entity.isReadyForLove() && hasTarget) {
+		} else if (isEntityReady()) {
 			entity.getNavigator().tryMoveToXYZ(cropX, cropY, cropZ, 1.0D);
 			entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 
 			boolean flag = entity.boundingBox.intersectsWith(AxisAlignedBB.getBoundingBox(cropX, cropY, cropZ, cropX + 1, cropY + 1, cropZ + 1));
 			if (flag)
-				if (entity.worldObj.getBlockId(cropX, cropY, cropZ) != crop.blockID)
+				if (canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
 					hasTarget = false;
 				else {
-					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, crop.blockID + (maxGrowthMetadata << 12));
+					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, entity.worldObj.getBlockId(cropX, cropY, cropZ) + (maxGrowthMetadata << 12));
 					entity.worldObj.setBlockToAir(cropX, cropY, cropZ);
-					Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
+					if (seed != null)
+						Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
 					hasTarget = false;
-					entity.seduce(); // TODO Whatever is to be done (love
-										// particles and all that)
+					afterEaten();
 				}
 		}
 	}
@@ -93,4 +95,32 @@ public class BetterEntityAIEatCrop extends EntityAIBase {
 	private Point getNextPoint() {
 		return spiral.get(spiralIndex);
 	}
+
+	public int getTargetBlockID() {
+		return entity.worldObj.getBlockId(cropX, cropY, cropZ);
+	}
+
+	/**
+	 * Override this if you wish to do a more advanced checking on which blocks
+	 * should be eaten
+	 * 
+	 * @param blockID
+	 * @param meta
+	 * @return true is should eat block, false is it shouldn't
+	 */
+	protected boolean canEatBlock(int blockID, int meta) {
+		return blockID == block.blockID && meta == maxGrowthMetadata;
+	}
+
+	/**
+	 * Test if entity is ready to eat block
+	 * 
+	 * @return true to allow block to be eaten. false to deny it.
+	 */
+	protected abstract boolean isEntityReady();
+
+	/**
+	 * Gets called just after block has been eaten.
+	 */
+	protected abstract void afterEaten();
 }

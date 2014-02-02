@@ -1,10 +1,8 @@
 package erebus.core.proxy;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityBreakingFX;
-import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -245,17 +243,6 @@ public class ClientProxy extends CommonProxy {
 
 			for (int countparticles = 0; countparticles <= 200; ++countparticles)
 				eff.addEffect(new EntityBreakingFX(player.worldObj, e.posX + (e.getRNG().nextDouble() - 0.5D) * e.width, e.posY + e.getRNG().nextDouble() * e.height - e.yOffset, e.posZ + (e.getRNG().nextDouble() - 0.5D) * e.width, Item.slimeBall));
-		} else if (particleType == PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT) { // x,y,z,blockID,meta
-			EntityLivingBase e = (EntityLivingBase) player.worldObj.getEntityByID(data.readInt());
-			int woodX = data.readInt(), woodY = data.readInt(), woodZ = data.readInt();
-			Block block = Block.blocksList[data.readInt()];
-			int blockMeta = data.readByte();
-
-			if (e == null || block == null)
-				return;
-
-			for (int countparticles = 0; countparticles <= 50; ++countparticles)
-				eff.addEffect(new EntityDiggingFX(player.worldObj, woodX + 0.5D + (e.getRNG().nextDouble() - 0.5D) * e.width, woodY + 0.2D + e.getRNG().nextDouble() * e.height - e.yOffset, woodZ + 0.5D + (e.getRNG().nextDouble() - 0.5D) * e.width, e.getRNG().nextGaussian() * 0.5D, e.getRNG().nextGaussian() * 0.01D, e.getRNG().nextGaussian() * 0.5D, block, blockMeta));
 		}
 	}
 
