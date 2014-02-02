@@ -1,6 +1,8 @@
 package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 //@formatter:off
 public class BiomeGenElysianFields extends BiomeGenBaseErebus{
@@ -16,6 +18,12 @@ public class BiomeGenElysianFields extends BiomeGenBaseErebus{
 	@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeGrassColor(){
+		return 8365877;
 	}
 }
 //@formatter:on
