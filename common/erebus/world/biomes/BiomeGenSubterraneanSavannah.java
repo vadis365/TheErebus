@@ -24,7 +24,7 @@ import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenSavannaTree;
 import erebus.world.feature.util.FeatureType;
 
-// @formatter:off
+//@formatter:off
 public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 	public BiomeGenSubterraneanSavannah(int biomeID){
 		super(biomeID);
@@ -122,4 +122,4 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 		super.generateFeature(world,rand,x,z,featureType);
 	}
 }
-// @formatter:on
+//@formatter:on
