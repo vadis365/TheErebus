@@ -24,7 +24,8 @@ import erebus.network.PacketHandler;
 import erebus.network.packet.PacketParticle;
 
 public class EntityBeetleLarva extends EntityAnimal {
-	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this);
+	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D);
+	private EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
 	public boolean isEating;
 	public boolean isSquashed;
 
@@ -35,7 +36,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, aiEatWoodItem);
 		tasks.addTask(2, new EntityAITempt(this, 0.48D, Item.stick.itemID, false));
-		tasks.addTask(3, new EntityAIWander(this, 0.48D));
+		tasks.addTask(3, aiWander);
 		tasks.addTask(4, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIPanic(this, 0.48D));
 	}
@@ -205,6 +206,17 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void setisSquashed(boolean par1) {
 		isSquashed = par1;
 	}
+	
+    public void setMoveTasks(boolean par1) {
+        if(par1==false)	 {
+        	this.tasks.removeTask(this.aiWander);
+        }
+        
+        if(par1==true) {
+        	this.tasks.addTask(2, this.aiWander);
+        }
+    }
+    
 
 	@Override
 	public AxisAlignedBB getBoundingBox() {

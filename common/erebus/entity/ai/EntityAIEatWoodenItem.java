@@ -10,11 +10,12 @@ import erebus.block.BlockBambooCrop;
 import erebus.block.BlockBambooTorch;
 import erebus.block.BlockHollowLog;
 import erebus.core.handler.ConfigurationHandler;
+import erebus.entity.EntityBeetleLarva;
 
 public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
-	public EntityAIEatWoodenItem(EntityAnimal entity) {
-		super(entity, null, 0);
+	public EntityAIEatWoodenItem(EntityAnimal entity, double movespeed) {
+		super(entity, null, 0, null, movespeed);
 	}
 
 	@Override
@@ -47,10 +48,21 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
 	@Override
 	protected boolean isEntityReady() {
-		return false;
+		return true;
 	}
 
 	@Override
 	protected void afterEaten() {
+		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
+		beetleLarva.setIsEating(false);
+		beetleLarva.setMoveTasks(true);
+		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);	
+	}
+
+	@Override
+	protected void prepareToEat() {
+		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
+		beetleLarva.setMoveTasks(false);
+		beetleLarva.setIsEating(true);	
 	}
 }
