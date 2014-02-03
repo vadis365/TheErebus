@@ -31,10 +31,10 @@ public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	private boolean ramming;
 	public int rammingCharge;
-	
+
 	public EntityRhinoBeetle(World world) {
 		super(world);
-		this.setSize(2.3F, 1.4F);
+		setSize(2.3F, 1.4F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));
@@ -42,16 +42,16 @@ public class EntityRhinoBeetle extends EntityTameable {
 		tasks.addTask(5, new EntityAIWander(this, 0.5D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(7, new EntityAILookIdle(this));
-		this.targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		this.targetTasks.addTask(1, aiNearestAttackableTarget);
-		}
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, aiNearestAttackableTarget);
+	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(31, new Byte((byte) 0));
 	}
-	
+
 	@Override
 	public boolean isAIEnabled() {
 		return true;
@@ -70,18 +70,16 @@ public class EntityRhinoBeetle extends EntityTameable {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-/*
- * Disabled until sounds are found
-	@Override
-	protected String getLivingSound() {
-		return "erebus:rhinobeetlesound";
-	}
 
-	@Override
-	protected String getHurtSound() {
-		return "erebus:rhinobeetlehurt";
-	}
-*/
+	/*
+	 * Disabled until sounds are found
+	 * 
+	 * @Override protected String getLivingSound() { return
+	 * "erebus:rhinobeetlesound"; }
+	 * 
+	 * @Override protected String getHurtSound() { return
+	 * "erebus:rhinobeetlehurt"; }
+	 */
 	@Override
 	protected String getDeathSound() {
 		return "erebus:squish";
@@ -99,19 +97,19 @@ public class EntityRhinoBeetle extends EntityTameable {
 
 	@Override
 	protected void dropRareDrop(int par1) {
-		this.dropItem(Item.ghastTear.itemID, 1);
+		dropItem(Item.ghastTear.itemID, 1);
 	}
 
 	@Override
 	public boolean getCanSpawnHere() {
 		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
 	public boolean isOnLadder() {
 		return riddenByEntity != null && isCollidedHorizontally;
 	}
-	
+
 	@Override
 	protected boolean canDespawn() {
 		if (getTameState() != 0)
@@ -119,150 +117,146 @@ public class EntityRhinoBeetle extends EntityTameable {
 		else
 			return true;
 	}
-	
+
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() == 2)
-			entityDropItem( new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), 0.0F);
+			entityDropItem(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), 0.0F);
 	}
-	
+
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 1 && getTameState()==0) {
+		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 1 && getTameState() == 0) {
 			is.stackSize--;
 			setTameState((byte) 1);
 			playTameEffect(true);
+			player.swingItem();
 			tasks.removeTask(aiNearestAttackableTarget);
-			setAttackTarget((EntityLivingBase)null);
+			setAttackTarget((EntityLivingBase) null);
 			return true;
 		}
-		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 0 && getTameState()==1) {
+		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 0 && getTameState() == 1) {
 			is.stackSize--;
 			setTameState((byte) 2);
 			return true;
 		}
-		if (is != null && is.itemID == ModItems.turnip.itemID && !isInLove() && getTameState()!=0){
+		if (is != null && is.itemID == ModItems.turnip.itemID && !isInLove() && getTameState() != 0) {
 			is.stackSize--;
 			inLove = 600;
 			return true;
-		} 
-		if (is == null && getTameState()==2) {
-	        if (!this.worldObj.isRemote) {
-	            player.mountEntity(this);
-	        }
-	        return true;
 		}
-		else
+		if (is == null && getTameState() == 2) {
+			if (!worldObj.isRemote)
+				player.mountEntity(this);
+			return true;
+		} else
 			return super.interact(player);
 	}
-	
-    @Override
-	public void setAttackTarget(EntityLivingBase entityLivingBase){
-        super.setAttackTarget(entityLivingBase);
-    }
-    
+
+	@Override
+	public void setAttackTarget(EntityLivingBase entityLivingBase) {
+		super.setAttackTarget(entityLivingBase);
+	}
+
 	public void setRamAttack(boolean state) {
 		ramming = state;
 	}
-	
+
 	@Override
-    protected void collideWithEntity(Entity entity) {
-    	if(riddenByEntity != null && (entity instanceof EntityLivingBase) && !(entity instanceof EntityPlayer)&& ramming)
-    		Attack(entity, rammingCharge *0.1F, rammingCharge *0.2F );
-    }
+	protected void collideWithEntity(Entity entity) {
+		if (riddenByEntity != null && entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) && ramming)
+			ram(entity, rammingCharge * 0.1F, rammingCharge * 0.2F);
+	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (getTameState() != 0)
-			if(entity instanceof EntityPlayer){
-				setAttackTarget((EntityLivingBase)null);
+			if (entity instanceof EntityPlayer) {
+				setAttackTarget((EntityLivingBase) null);
 				return false;
 			}
-		return Attack(entity, 1F, 6F);
+		return ram(entity, 1F, 6F);
 	}
 
-	protected boolean Attack(Entity entity, float knockback, float damage) {
-		entity.attackEntityFrom(DamageSource.causeMobDamage(this),(int) damage);
-		entity.addVelocity(-MathHelper.sin(this.rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(this.rotationYaw * 3.141593F / 180.0F) * knockback);
-		this.worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
-		((EntityLivingBase) entity) .addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, this.worldObj.difficultySetting * 50, 0));
+	private boolean ram(Entity entity, float knockback, float damage) {
+		entity.attackEntityFrom(DamageSource.causeMobDamage(this), (int) damage);
+		entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
+		worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
+		((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting * 50, 0));
 		setRamAttack(false);
 		return true;
 	}
-	
+
 	@Override
-    public void moveEntityWithHeading(float strafe, float forward) {
-        if (riddenByEntity != null) {
-            this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
-            this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
-            this.setRotation(this.rotationYaw, this.rotationPitch);
-            this.rotationYawHead = this.renderYawOffset = this.rotationYaw;
-            strafe = ((EntityLivingBase)this.riddenByEntity).moveStrafing * 0.5F;
-            forward = ((EntityLivingBase)this.riddenByEntity).moveForward;
+	public void moveEntityWithHeading(float strafe, float forward) {
+		if (riddenByEntity != null) {
+			prevRotationYaw = rotationYaw = riddenByEntity.rotationYaw;
+			rotationPitch = riddenByEntity.rotationPitch * 0.5F;
+			setRotation(rotationYaw, rotationPitch);
+			rotationYawHead = renderYawOffset = rotationYaw;
+			strafe = ((EntityLivingBase) riddenByEntity).moveStrafing * 0.5F;
+			forward = ((EntityLivingBase) riddenByEntity).moveForward;
 
-            if (forward <= 0.0F) {
-            	forward *= 0.25F;
-            }
-            
-            this.stepHeight = 1.0F;
-            this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
+			if (forward <= 0.0F)
+				forward *= 0.25F;
 
-            if (!this.worldObj.isRemote) {
-                this.setAIMoveSpeed((float)this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-                super.moveEntityWithHeading(strafe, forward);
-            }
-            this.prevLimbSwingAmount = this.limbSwingAmount;
-            double d0 = this.posX - this.prevPosX;
-            double d1 = this.posZ - this.prevPosZ;
-            float f4 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
-            travelSpeed(f4);
-            if (f4 > 1.0F) {
-                f4 = 1.0F;
-            }
+			stepHeight = 1.0F;
+			jumpMovementFactor = getAIMoveSpeed() * 0.1F;
 
-            this.limbSwingAmount += (f4 - this.limbSwingAmount) * 0.4F;
-            this.limbSwing += this.limbSwingAmount;
+			if (!worldObj.isRemote) {
+				setAIMoveSpeed((float) getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+				super.moveEntityWithHeading(strafe, forward);
+			}
+			prevLimbSwingAmount = limbSwingAmount;
+			double d0 = posX - prevPosX;
+			double d1 = posZ - prevPosZ;
+			float f4 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
+			travelSpeed(f4);
+			if (f4 > 1.0F)
+				f4 = 1.0F;
 
-        }
-        else {
-            this.stepHeight = 0.5F;
-            this.jumpMovementFactor = 0.02F;
-            super.moveEntityWithHeading(strafe, forward);
-        }
-    }
-    
+			limbSwingAmount += (f4 - limbSwingAmount) * 0.4F;
+			limbSwing += limbSwingAmount;
+
+		} else {
+			stepHeight = 0.5F;
+			jumpMovementFactor = 0.02F;
+			super.moveEntityWithHeading(strafe, forward);
+		}
+	}
+
 	private void travelSpeed(float velocity) {
-		if (velocity >4.3F)
-			 rammingCharge++;
-		else if (velocity <4.3F)
+		if (velocity > 4.3F)
+			rammingCharge++;
+		else if (velocity < 4.3F)
 			rammingCharge--;
-		if (rammingCharge<=0)
-			rammingCharge=0;
-		if (rammingCharge>=50)
-			rammingCharge=50;		
+		if (rammingCharge <= 0)
+			rammingCharge = 0;
+		if (rammingCharge >= 50)
+			rammingCharge = 50;
 	}
 
 	@Override
-    public void updateRiderPosition() {
-    	super.updateRiderPosition();
-    		if (this.riddenByEntity instanceof EntityLivingBase) {
-    			double a = Math.toRadians(renderYawOffset);
-    			double offSetX = -Math.sin(a) * 0.35D;
-    			double offSetZ = Math.cos(a) * 0.35D;
-    			riddenByEntity.setPosition(posX - offSetX, posY + 1.3D + riddenByEntity.getYOffset(), posZ - offSetZ);
-    		}
-   }
+	public void updateRiderPosition() {
+		super.updateRiderPosition();
+		if (riddenByEntity instanceof EntityLivingBase) {
+			double a = Math.toRadians(renderYawOffset);
+			double offSetX = -Math.sin(a) * 0.35D;
+			double offSetZ = Math.cos(a) * 0.35D;
+			riddenByEntity.setPosition(posX - offSetX, posY + 1.3D + riddenByEntity.getYOffset(), posZ - offSetZ);
+		}
+	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		return spawnBabyAnimal(entityageable);
 	}
-	
+
 	@Override
 	public boolean isBreedingItem(ItemStack is) {
 		if (getTameState() != 0)
-		return is != null && is.itemID == ModItems.turnip.itemID;
+			return is != null && is.itemID == ModItems.turnip.itemID;
 		else
 			return false;
 	}
@@ -272,11 +266,11 @@ public class EntityRhinoBeetle extends EntityTameable {
 		entityBeetleLarva.setTame((byte) 1);
 		return entityBeetleLarva;
 	}
-	
+
 	public void setTameState(byte tameState) {
 		dataWatcher.updateObject(31, Byte.valueOf(tameState));
 	}
-	
+
 	public byte getTameState() {
 		return dataWatcher.getWatchableObjectByte(31);
 	}
@@ -293,4 +287,3 @@ public class EntityRhinoBeetle extends EntityTameable {
 		setTameState(nbt.getByte("tameState"));
 	}
 }
-
