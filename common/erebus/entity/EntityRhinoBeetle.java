@@ -138,6 +138,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 		}
 		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 0 && getTameState() == 1) {
 			is.stackSize--;
+			player.swingItem();
 			setTameState((byte) 2);
 			return true;
 		}
