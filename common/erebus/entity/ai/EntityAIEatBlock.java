@@ -15,7 +15,7 @@ import erebus.core.helper.Utils;
 public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	private final double moveSpeed;
-	private int eatSpeed;
+	private final int EAT_SPEED;
 	protected final EntityLiving entity;
 	private final int maxGrowthMetadata;
 	private final Block block;
@@ -37,7 +37,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 		hasTarget = false;
 		spiralIndex = 0;
 		this.moveSpeed = moveSpeed;
-		this.eatSpeed = eatSpeed*20;
+		EAT_SPEED = eatSpeed * 20;
 	}
 
 	public EntityAIEatBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float moveSpeed, int eatSpeed) {
@@ -56,10 +56,9 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	@Override
 	public void updateTask() {
-		if (!continueExecuting()) {
+		if (!continueExecuting())
 			return;
-		}
-		
+
 		int xCoord = (int) entity.posX;
 		int yCoord = (int) entity.posY;
 		int zCoord = (int) entity.posZ;
@@ -76,31 +75,33 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 					hasTarget = true;
 				}
 		} else if (isEntityReady()) {
-			entity.getMoveHelper().setMoveTo(cropX+0.5D, cropY, cropZ+0.5D, moveSpeed);
+			entity.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed);
 			entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 			AxisAlignedBB blockbounds = getBlockAABB(cropX, cropY, cropZ);
-			boolean flag = entity.boundingBox.maxY >= blockbounds.minY && this.entity.boundingBox.minY <= blockbounds.maxY
-					&& this.entity.boundingBox.maxX >= blockbounds.minX && this.entity.boundingBox.minX <= blockbounds.maxX
-					&& this.entity.boundingBox.maxZ >= blockbounds.minZ && this.entity.boundingBox.minZ <= blockbounds.maxZ;
+			boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
 
-			if (flag){
+			if (flag) {
 				prepareToEat();
 				eatTicks++;
+				entity.worldObj.destroyBlockInWorldPartially(entity.entityId, cropX, cropY, cropZ, getScaledEatTicks());
 				if (!canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ))) {
 					hasTarget = false;
 					eatingInterupted();
-					}
-				else if(eatSpeed<=eatTicks){
+				} else if (EAT_SPEED <= eatTicks) {
 					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, entity.worldObj.getBlockId(cropX, cropY, cropZ) + (maxGrowthMetadata << 12));
 					entity.worldObj.setBlockToAir(cropX, cropY, cropZ);
 					if (seed != null)
 						Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
 					hasTarget = false;
-					eatTicks=0;
+					eatTicks = 0;
 					afterEaten();
 				}
-				}
+			}
 		}
+	}
+
+	private int getScaledEatTicks() {
+		return (int) ((float) eatTicks / (float) EAT_SPEED * 10.0F);
 	}
 
 	private void increment() {
@@ -135,23 +136,23 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	 * @return true to allow block to be eaten. false to deny it.
 	 */
 	protected abstract boolean isEntityReady();
-	
+
 	/**
 	 * Allows any other tasks to be cancelled just before block has been eaten.
 	 */
 	protected abstract void prepareToEat();
-	
+
 	/**
 	 * Allows any other tasks to be cancelled if the block cannot be eaten.
 	 */
 	protected abstract void eatingInterupted();
-	
+
 	/**
 	 * Gets called just after block has been eaten.
 	 */
 	protected abstract void afterEaten();
-	
+
 	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
-		return AxisAlignedBB.getAABBPool().getAABB (cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
+		return AxisAlignedBB.getAABBPool().getAABB(cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
 	}
 }

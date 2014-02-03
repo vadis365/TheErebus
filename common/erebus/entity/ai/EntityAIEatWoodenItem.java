@@ -56,15 +56,14 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
 		beetleLarva.setIsEating(false);
 		beetleLarva.setMoveTasks(true);
-		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);	
+		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);
 	}
 
 	@Override
 	protected void prepareToEat() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
-		beetleLarva.munchBlock();
 		beetleLarva.setMoveTasks(false);
-		beetleLarva.setIsEating(true);	
+		beetleLarva.setIsEating(true);
 	}
 
 	@Override
