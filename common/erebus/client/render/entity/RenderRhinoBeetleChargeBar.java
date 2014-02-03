@@ -33,18 +33,7 @@ public class RenderRhinoBeetleChargeBar extends Gui {
 	}
 
 	private void renderChargeBar(int currCond, int posX, int posY) {
-		for (int i = 0; i < 10; i++)
-			drawTexturedModalRect(posX - i * 8 - 9, posY, 0, 9, 9, 9);
-
-		boolean addAHalf = false;
-
-		if (currCond % 2 != 0 && currCond >= 0)
-			addAHalf = true;
-
-		for (int i = 0; i < currCond / 2; i++)
-			drawTexturedModalRect(posX - i * 8 - 9, posY, 9, 9, 9, 9);
-
-		if (addAHalf)
-			drawTexturedModalRect(posX - currCond / 2 * 8 - 9, posY, 18, 9, 9, 9);
+		for (int i = 0; i < currCond; i++)
+			drawTexturedModalRect(posX - i * 16, posY, 0, 0, 16, 16);
 	}
 }
