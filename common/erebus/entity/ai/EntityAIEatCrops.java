@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 
 public class EntityAIEatCrops extends EntityAIEatBlock {
 
-	public EntityAIEatCrops(EntityLiving entity, double movespeed) {
-		super(entity, Block.crops, 7, new ItemStack(Item.seeds), movespeed);
+	public EntityAIEatCrops(EntityLiving entity, double moveSpeed, int eatSpeed) {
+		super(entity, Block.crops, 7, new ItemStack(Item.seeds), moveSpeed, eatSpeed);
 	}
 
 	@Override
@@ -28,6 +28,12 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 
 	@Override
 	protected void prepareToEat() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void eatingInterupted() {
 		// TODO Auto-generated method stub
 		
 	}

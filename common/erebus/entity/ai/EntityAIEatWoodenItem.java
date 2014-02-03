@@ -14,8 +14,8 @@ import erebus.entity.EntityBeetleLarva;
 
 public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
-	public EntityAIEatWoodenItem(EntityAnimal entity, double movespeed) {
-		super(entity, null, 0, null, movespeed);
+	public EntityAIEatWoodenItem(EntityAnimal entity, double moveSpeed, int eatSpeed) {
+		super(entity, null, 0, null, moveSpeed, eatSpeed);
 	}
 
 	@Override
@@ -62,7 +62,15 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 	@Override
 	protected void prepareToEat() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
+		beetleLarva.munchBlock();
 		beetleLarva.setMoveTasks(false);
 		beetleLarva.setIsEating(true);	
+	}
+
+	@Override
+	protected void eatingInterupted() {
+		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
+		beetleLarva.setIsEating(false);
+		beetleLarva.setMoveTasks(true);
 	}
 }

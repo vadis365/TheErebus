@@ -14,29 +14,34 @@ import erebus.core.helper.Utils;
 
 public abstract class EntityAIEatBlock extends EntityAIBase {
 
-	private final double movespeed;
+	private final double moveSpeed;
+	private int eatSpeed;
 	protected final EntityLiving entity;
 	private final int maxGrowthMetadata;
 	private final Block block;
 	private final ItemStack seed;
 
 	private boolean hasTarget;
-	private int cropX, cropY, cropZ;
+	public int cropX;
+	public int cropY;
+	public int cropZ;
 	private int spiralIndex;
+	private int eatTicks;
 	private static final List<Point> spiral = new Spiral(32, 32).spiral();
 
-	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double movespeed) {
+	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed) {
 		this.entity = entity;
 		this.maxGrowthMetadata = maxGrowthMetadata;
 		this.block = block;
 		this.seed = seed;
 		hasTarget = false;
 		spiralIndex = 0;
-		this.movespeed = movespeed;
+		this.moveSpeed = moveSpeed;
+		this.eatSpeed = eatSpeed*20;
 	}
 
-	public EntityAIEatBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float movespeed) {
-		this(entity, block, maxGrowthMetadata, null, movespeed);
+	public EntityAIEatBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float moveSpeed, int eatSpeed) {
+		this(entity, block, maxGrowthMetadata, null, moveSpeed, eatSpeed);
 	}
 
 	@Override
@@ -51,8 +56,9 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	@Override
 	public void updateTask() {
-		if (!continueExecuting())
+		if (!continueExecuting()) {
 			return;
+		}
 		
 		int xCoord = (int) entity.posX;
 		int yCoord = (int) entity.posY;
@@ -70,24 +76,27 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 					hasTarget = true;
 				}
 		} else if (isEntityReady()) {
-			entity.getMoveHelper().setMoveTo(cropX+0.5D, cropY, cropZ+0.5D, movespeed);
+			entity.getMoveHelper().setMoveTo(cropX+0.5D, cropY, cropZ+0.5D, moveSpeed);
 			entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 			AxisAlignedBB blockbounds = getBlockAABB(cropX, cropY, cropZ);
-			//boolean flag = entity.boundingBox.intersectsWith(blockbounds);
 			boolean flag = entity.boundingBox.maxY >= blockbounds.minY && this.entity.boundingBox.minY <= blockbounds.maxY
 					&& this.entity.boundingBox.maxX >= blockbounds.minX && this.entity.boundingBox.minX <= blockbounds.maxX
 					&& this.entity.boundingBox.maxZ >= blockbounds.minZ && this.entity.boundingBox.minZ <= blockbounds.maxZ;
 
 			if (flag){
 				prepareToEat();
-				if (!canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
+				eatTicks++;
+				if (!canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ))) {
 					hasTarget = false;
-				else {
+					eatingInterupted();
+					}
+				else if(eatSpeed<=eatTicks){
 					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, entity.worldObj.getBlockId(cropX, cropY, cropZ) + (maxGrowthMetadata << 12));
 					entity.worldObj.setBlockToAir(cropX, cropY, cropZ);
 					if (seed != null)
 						Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
 					hasTarget = false;
+					eatTicks=0;
 					afterEaten();
 				}
 				}
@@ -131,6 +140,11 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	 * Allows any other tasks to be cancelled just before block has been eaten.
 	 */
 	protected abstract void prepareToEat();
+	
+	/**
+	 * Allows any other tasks to be cancelled if the block cannot be eaten.
+	 */
+	protected abstract void eatingInterupted();
 	
 	/**
 	 * Gets called just after block has been eaten.

@@ -22,7 +22,7 @@ public class EntityGrasshopper extends EntityCreature {
 	protected EntityLiving theEntity;
 	private ChunkCoordinates currentJumpTarget;
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
-	public EntityAIEatCrops aiEatCrops = new EntityAIEatCrops(this,0.6D);
+	public EntityAIEatCrops aiEatCrops = new EntityAIEatCrops(this, 0.6D, 10);
 	public boolean isEating;
 	public boolean canJump = true;
 

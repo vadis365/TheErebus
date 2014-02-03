@@ -24,7 +24,7 @@ import erebus.network.PacketHandler;
 import erebus.network.packet.PacketParticle;
 
 public class EntityBeetleLarva extends EntityAnimal {
-	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D);
+	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
 	private EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
 	public boolean isEating;
 	public boolean isSquashed;
@@ -217,6 +217,10 @@ public class EntityBeetleLarva extends EntityAnimal {
         }
     }
     
+    public void munchBlock() {
+    if (isEating && worldObj.getWorldTime() % 5 == 0)
+    PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_AND_GRASSHOPPER_EAT, entityId, aiEatWoodItem.cropX, aiEatWoodItem.cropY, aiEatWoodItem.cropZ, worldObj.getBlockId(aiEatWoodItem.cropX, aiEatWoodItem.cropY, aiEatWoodItem.cropZ), Byte.valueOf((byte) worldObj.getBlockMetadata(aiEatWoodItem.cropX, aiEatWoodItem.cropY, aiEatWoodItem.cropZ))));
+    }
 
 	@Override
 	public AxisAlignedBB getBoundingBox() {
