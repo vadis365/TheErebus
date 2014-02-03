@@ -61,15 +61,3 @@ public class RenderRhinoBeetleChargeBar extends Gui {
     }
     }
     }  
-    
-	      
-/*
-	@ForgeSubscribe(priority = EventPriority.NORMAL)
-    public void eventHandler(RenderGameOverlayEvent.Pre event){
-		if (event.type.equals(RenderGameOverlayEvent.ElementType.HOTBAR)) {
-	       // EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
-	    	if(player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
-    	    {
-	    		//System.out.println("PUT SOME RENDERING CODE HERE " + ((EntityRhinoBeetle)player.ridingEntity).rammingCharge);
-	    	} }
-	*/ 
