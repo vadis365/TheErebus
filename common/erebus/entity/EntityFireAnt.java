@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -79,8 +81,9 @@ public class EntityFireAnt extends EntityMob {
 	}
 
 	@Override
-	protected void dropRareDrop(int par1) {
-		dropItem(Item.blazePowder.itemID, 1);
+	protected void dropRareDrop(int fortune) {
+		for (int i = 0; i < 1 + new Random().nextInt(1 + fortune); i++)
+			dropItem(Item.magmaCream.itemID, 1);
 	}
 
 	public boolean isClimbing() {
