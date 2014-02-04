@@ -15,7 +15,7 @@ import erebus.entity.EntityBlackWidow;
 
 @SideOnly(Side.CLIENT)
 public class RenderBlackWidow extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/ModelBlackWidow.png");
+	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackWidow.png");
 
 	public RenderBlackWidow() {
 		super(new ModelBlackWidow(), 0.3F);

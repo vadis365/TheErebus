@@ -12,7 +12,7 @@ import erebus.client.model.entity.ModelJumpingSpider;
 import erebus.entity.EntityJumpingSpider;
 
 public class RenderJumpingSpider extends RenderLiving {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/ModelJumpingSpider.png"), new ResourceLocation("erebus:textures/entity/ModelJumpingSpider_green.png"), new ResourceLocation("erebus:textures/entity/ModelJumpingSpider_red.png") };
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/jumpingSpider.png"), new ResourceLocation("erebus:textures/entity/jumpingSpiderGreen.png"), new ResourceLocation("erebus:textures/entity/jumpingSpiderRed.png") };
 
 	public RenderJumpingSpider(ModelJumpingSpider model, float shadowSize) {
 		super(model, shadowSize);

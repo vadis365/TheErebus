@@ -14,7 +14,7 @@ import erebus.entity.EntityRhinoBeetle;
 public class RenderRhinoBeetle extends RenderLiving
 {
 	protected ModelRhinoBeetle model;
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/ModelRhinoBeetle.png"), new ResourceLocation("erebus:textures/entity/ModelRhinoBeetleKit.png") };
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/rhinoBeetle.png"), new ResourceLocation("erebus:textures/entity/rhinoBeetleKit.png") };
 
 	public RenderRhinoBeetle(ModelRhinoBeetle modelBase, float shadowSize){
 		super(modelBase, shadowSize);

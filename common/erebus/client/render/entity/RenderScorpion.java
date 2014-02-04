@@ -11,7 +11,7 @@ import erebus.entity.EntityScorpion;
 
 @SideOnly(Side.CLIENT)
 public class RenderScorpion extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/ModelScorpion.png");
+	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/scorpion.png");
 
 	public RenderScorpion() {
 		super(new ModelScorpion(), 0.5F);

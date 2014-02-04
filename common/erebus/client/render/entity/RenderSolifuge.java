@@ -12,7 +12,7 @@ import erebus.entity.EntitySolifuge;
 @SideOnly(Side.CLIENT)
 public class RenderSolifuge extends RenderLiving {
 
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/ModelSolifuge.png");
+	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/solifuge.png");
 
 	public RenderSolifuge() {
 		super(new ModelSolifuge(), 0.5F);

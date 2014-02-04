@@ -15,7 +15,7 @@ import erebus.entity.EntityWasp;
 
 @SideOnly(Side.CLIENT)
 public class RenderWasp extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/ModelWasp.png");
+	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/wasp.png");
 
 	public RenderWasp() {
 		super(new ModelWasp(), 0.5F);

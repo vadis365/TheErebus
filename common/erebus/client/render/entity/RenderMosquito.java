@@ -15,7 +15,7 @@ import erebus.entity.EntityMosquito;
 
 @SideOnly(Side.CLIENT)
 public class RenderMosquito extends RenderLiving {
-	private final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/Mosquito.png");
+	private final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/mosquito.png");
 
 	public RenderMosquito() {
 		super(new ModelMosquito(), 0.5F);

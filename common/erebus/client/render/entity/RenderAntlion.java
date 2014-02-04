@@ -56,9 +56,9 @@ public class RenderAntlion extends RenderLiving {
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityAntlion antlion = (EntityAntlion) entity;
 		if (!antlion.isBoss())
-			texture = new ResourceLocation("erebus:textures/entity/ModelAntlion.png");
+			texture = new ResourceLocation("erebus:textures/entity/antlion.png");
 		if (antlion.isBoss())
-			texture = new ResourceLocation("erebus:textures/entity/ModelAntlionSandstone.png");
+			texture = new ResourceLocation("erebus:textures/entity/antlionSandstone.png");
 		return texture;
 	}
 }

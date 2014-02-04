@@ -15,7 +15,7 @@ import erebus.entity.EntityBombardierBeetle;
 
 @SideOnly(Side.CLIENT)
 public class RenderBombardierBeetle extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/ModelBombardierBeetle.png");
+	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/beetleBombardier.png");
 
 	public RenderBombardierBeetle(ModelBombardierBeetle model, float shadowSize) {
 		super(model, shadowSize);
