@@ -39,7 +39,7 @@ public class ConfigurationHandler {
 			 */
 			ModBlocks.portalErebusID = config.getBlock("Block ID of Erebus Portal", 2500).getInt();
 
-			ModBlocks.umberstoneID = config.get(Configuration.CATEGORY_BLOCK, "Block ID of Umberstone", 255, "Umberstone Block ID must be below 256").getInt(255);
+			ModBlocks.umberstoneID = config.getTerrainBlock(Configuration.CATEGORY_BLOCK, "Block ID of Umberstone", 255, "Umberstone Block ID must be below 256").getInt(255);
 			ModBlocks.umberOreBlockID = config.getBlock("Block ID of the Umberstone Ores", 2501).getInt(2501);
 			ModBlocks.oreFossilID = config.getBlock("Block ID of Fossil Ore", 2502).getInt(2502);
 			ModBlocks.redGemID = config.getBlock("Block ID of Red Gem", 2503).getInt(2503);
