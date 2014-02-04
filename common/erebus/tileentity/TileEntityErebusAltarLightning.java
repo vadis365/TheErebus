@@ -8,8 +8,6 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.entity.EntityMobBlock;
 import erebus.entity.EntityUmberGolem;
@@ -52,25 +50,26 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
 			setActive(false);
 	}
 
-	@SideOnly(Side.CLIENT)
 	public void flameOn(World world, int x, int y, int z) {
-		double d0 = x + 0.53125F;
-		double d1 = y + 1.25F;
-		double d2 = z + 0.53125F;
-		world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("flame", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("smoke", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("flame", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("smoke", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("flame", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("smoke", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("flame", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("smoke", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("flame", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("smoke", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("flame", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("smoke", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
-		world.spawnParticle("flame", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+		if (world.isRemote) {
+			double d0 = x + 0.53125F;
+			double d1 = y + 1.25F;
+			double d2 = z + 0.53125F;
+			world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("smoke", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("smoke", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("smoke", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("smoke", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("smoke", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("smoke", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+		}
 	}
 
 	public void setActive(boolean par1) {
