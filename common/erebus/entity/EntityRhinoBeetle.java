@@ -167,7 +167,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	protected void collideWithEntity(Entity entity) {
 		if (riddenByEntity != null && entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) && ramming)
-			ram(entity, rammingCharge * 0.1F, rammingCharge * 0.2F);
+			ram(entity, rammingCharge * 0.2F, rammingCharge * 0.4F);
 	}
 
 	@Override
@@ -228,14 +228,14 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 
 	private void travelSpeed(float velocity) {
-		if (velocity > 4.3F)
+		if (velocity >= 4F)
 			rammingCharge++;
-		else if (velocity < 4.3F)
+		else if (velocity <= 4F)
 			rammingCharge--;
 		if (rammingCharge <= 0)
 			rammingCharge = 0;
-		if (rammingCharge >= 50)
-			rammingCharge = 50;
+		if (rammingCharge >= 25)
+			rammingCharge = 25;
 	}
 
 	@Override
