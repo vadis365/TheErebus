@@ -51,12 +51,12 @@ import erebus.block.BlockUmberFurnace;
 import erebus.block.BlockUmberGolemStatue;
 import erebus.block.BlockUmberPaver;
 import erebus.block.BlockUmberstone;
+import erebus.block.BlockUmberstonePillar;
+import erebus.block.BlockVelocity;
 import erebus.block.BlockWallErebus;
 import erebus.block.BlockWaspNest;
 import erebus.block.BlockWaspSpawner;
 import erebus.block.BlockWitherWeb;
-import erebus.block.BlockUmberstonePillar;
-import erebus.block.BlockVelocity;
 import erebus.core.handler.ConfigurationHandler;
 import erebus.item.block.ItemBlockAmber;
 import erebus.item.block.ItemBlockColoredSingle;
@@ -237,7 +237,7 @@ public class ModBlocks {
 		for (int i = 0; i < petrifiedWoodSlab.length; i++)
 			petrifiedWoodSlab[i] = new BlockSlabPetrifiedWood(petrifiedWoodSlabID[i], i == 1).setUnlocalizedName("petrifiedWoodSlab");
 		amberBrickStairs = new BlockStairsErebus(amberBrickStairsID, blockAmber, 2).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("amberBrickStairs");
-		waspNestStairs = new BlockStairsErebus(waspNestStairsID, waspNestBlock, 2).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestStairs");
+		waspNestStairs = new BlockStairsErebus(waspNestStairsID, waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestStairs");
 		//
 		spiderSpawner = new BlockSpiderSpawner(spiderSpawnerID, "Scytodes - Erebus").setUnlocalizedName("spiderSpawner").setTextureName("erebus:spiderSpawner");
 		jumpingSpiderSpawner = new BlockSpiderSpawner(jumpingSpiderSpawnerID, "JumpingSpider - Erebus").setUnlocalizedName("jumpingSpiderSpawner").setTextureName("erebus:spiderSpawner");
@@ -368,16 +368,16 @@ public class ModBlocks {
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 3, "pickaxe", 2);
 		if (ConfigurationHandler.tin)
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 4, "pickaxe", 1);
-		
+
 		// Burning rates
-		Block.setBurnProperties(logErebusGroup1.blockID,5,5);
-		Block.setBurnProperties(logErebusGroup2.blockID,5,5);
-		Block.setBurnProperties(planksErebus.blockID,5,20);
-		Block.setBurnProperties(leavesErebus.blockID,30,60);
-		Block.setBurnProperties(blockWitherWeb.blockID,20,50);
-		Block.setBurnProperties(erebusGrass.blockID,60,100);
-		Block.setBurnProperties(fern.blockID,60,100);
-		Block.setBurnProperties(fiddlehead.blockID,60,100);
-		Block.setBurnProperties(thorns.blockID,15,100);
+		Block.setBurnProperties(logErebusGroup1.blockID, 5, 5);
+		Block.setBurnProperties(logErebusGroup2.blockID, 5, 5);
+		Block.setBurnProperties(planksErebus.blockID, 5, 20);
+		Block.setBurnProperties(leavesErebus.blockID, 30, 60);
+		Block.setBurnProperties(blockWitherWeb.blockID, 20, 50);
+		Block.setBurnProperties(erebusGrass.blockID, 60, 100);
+		Block.setBurnProperties(fern.blockID, 60, 100);
+		Block.setBurnProperties(fiddlehead.blockID, 60, 100);
+		Block.setBurnProperties(thorns.blockID, 15, 100);
 	}
 }
