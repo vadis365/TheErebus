@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPlanksErebus extends Block {
 
-	public static final String[] plankTypes = new String[] { "acacia", "eucalyptus", "mahogany", "baobab", "mossbark", "pink", "scorched", "asper", "white", "bamboo" };
+	public static final String[] plankTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Baobab", "Mossbark", "Pink", "Scorched", "Asper", "White", "Bamboo" };
 	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataBaobab = 3, dataMossbark = 4, dataPink = 5, dataScorched = 6, dataAsper = 7, dataWhite = 8, dataBamboo = 9;
 
 	@SideOnly(Side.CLIENT)
@@ -47,6 +47,6 @@ public class BlockPlanksErebus extends Block {
 		iconArray = new Icon[plankTypes.length];
 
 		for (int i = 0; i < iconArray.length; i++)
-			iconArray[i] = iconRegister.registerIcon("erebus:wood_" + plankTypes[i]);
+			iconArray[i] = iconRegister.registerIcon("erebus:plank" + plankTypes[i]);
 	}
 }

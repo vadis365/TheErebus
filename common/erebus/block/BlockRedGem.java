@@ -20,7 +20,7 @@ import erebus.item.ItemErebusMaterial;
 
 public class BlockRedGem extends Block {
 
-	public static final String[] iconPaths = new String[] { "redgem", "redlamp_on", "redlamp_off" };
+	public static final String[] iconPaths = new String[] { "redgem", "redlampOn", "redlampOff" };
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
 

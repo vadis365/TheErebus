@@ -22,6 +22,6 @@ public class BlockUmberstonePillar extends BlockRotatedPillar {
 	@Override
 	public void registerIcons(IconRegister reg) {
 		super.registerIcons(reg);
-		field_111051_a = reg.registerIcon("erebus:umberstonePillar_end");
+		field_111051_a = reg.registerIcon("erebus:umberstonePillarEnd");
 	}
 }

@@ -36,9 +36,9 @@ public class BlockHollowLog extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
-		iconTop = reg.registerIcon("erebus:hollow_log_top");
-		iconSide = reg.registerIcon("erebus:hollow_log_side");
-		iconMoss = reg.registerIcon("erebus:hollow_log_moss");
+		iconTop = reg.registerIcon("erebus:hollowLogTop");
+		iconSide = reg.registerIcon("erebus:hollowLogSide");
+		iconMoss = reg.registerIcon("erebus:hollowLogMoss");
 	}
 
 	@Override

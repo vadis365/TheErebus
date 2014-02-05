@@ -72,6 +72,6 @@ public class BlockTurnip extends BlockCrops {
 		iconArray = new Icon[4];
 
 		for (int i = 0; i < iconArray.length; ++i)
-			iconArray[i] = iconRegister.registerIcon("erebus:turnips_" + i);
+			iconArray[i] = iconRegister.registerIcon("erebus:turnips" + i);
 	}
 }

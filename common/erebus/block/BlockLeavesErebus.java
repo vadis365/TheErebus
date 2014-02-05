@@ -17,7 +17,7 @@ import erebus.ModBlocks;
 
 public class BlockLeavesErebus extends BlockLeaves {
 
-	public static final String[] leafTypes = new String[] { "acacia", "eucalyptus", "mahogany", "asper", "mossbark", "pink" };
+	public static final String[] leafTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Asper", "Mossbark", "Pink" };
 	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataAsper = 3, dataMossbark = 4, dataPink = 5;
 	public static final byte dataAcaciaDecay = 8, dataEucalyptusDecay = 9, dataMahoganyDecay = 10, dataAsperDecay = 11, dataMossbarkDecay = 12, dataPinkDecay = 13;
 
@@ -193,7 +193,7 @@ public class BlockLeavesErebus extends BlockLeaves {
 		iconArray = new Icon[leafTypes.length];
 
 		for (int i = 0; i < leafTypes.length; i++)
-			iconArray[i] = iconRegister.registerIcon("erebus:leaves_" + leafTypes[i]);
+			iconArray[i] = iconRegister.registerIcon("erebus:leaves" + leafTypes[i]);
 	}
 
 	@Override

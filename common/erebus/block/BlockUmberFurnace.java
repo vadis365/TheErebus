@@ -78,9 +78,9 @@ public class BlockUmberFurnace extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:umberfurnace_sides");
-		furnaceIconFront = reg.registerIcon(isActive ? "erebus:umberfurnace_front_lit" : "erebus:umberfurnace_front");
-		furnaceIconTop = reg.registerIcon("erebus:umberfurnace_topbottom");
+		blockIcon = reg.registerIcon("erebus:umberfurnaceSides");
+		furnaceIconFront = reg.registerIcon(isActive ? "erebus:umberfurnaceFrontLit" : "erebus:umberfurnaceFront");
+		furnaceIconTop = reg.registerIcon("erebus:umberfurnaceEnd");
 	}
 
 	@Override

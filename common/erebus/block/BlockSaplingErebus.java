@@ -28,7 +28,7 @@ import erebus.world.feature.tree.WorldGenSavannaTree;
 
 public class BlockSaplingErebus extends BlockSapling {
 
-	public static final String[] saplingTypes = new String[] { "acacia", "eucalyptus", "mahogany", "mossbark", "asper" };
+	public static final String[] saplingTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Mossbark", "Asper" };
 	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataMossbark = 3, dataAsper = 4;
 
 	@SideOnly(Side.CLIENT)
@@ -145,7 +145,7 @@ public class BlockSaplingErebus extends BlockSapling {
 		iconArray = new Icon[saplingTypes.length];
 
 		for (int i = 0; i < iconArray.length; i++)
-			iconArray[i] = iconRegister.registerIcon("erebus:sapling_" + saplingTypes[i]);
+			iconArray[i] = iconRegister.registerIcon("erebus:sapling" + saplingTypes[i]);
 	}
 
 	@ForgeSubscribe

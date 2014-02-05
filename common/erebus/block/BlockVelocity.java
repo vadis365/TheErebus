@@ -67,6 +67,6 @@ public class BlockVelocity extends Block {
 		icons = new Icon[4];
 
 		for (int i = 0; i < icons.length; i++)
-			icons[i] = reg.registerIcon("erebus:block_speed_" + i);
+			icons[i] = reg.registerIcon("erebus:blockSpeed" + i);
 	}
 }

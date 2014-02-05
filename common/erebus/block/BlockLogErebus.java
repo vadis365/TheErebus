@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLogErebus extends BlockLog {
 
-	public static final String[][] logTypes = new String[][] { new String[] { "acacia", "eucalyptus", "mahogany", "baobab" }, new String[] { "mossbark", "pink", "scorched", "asper" } };
+	public static final String[][] logTypes = new String[][] { new String[] { "Acacia", "Eucalyptus", "Mahogany", "Baobab" }, new String[] { "Mossbark", "Pink", "Scorched", "Asper" } };
 
 	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataBaobab = 3, dataMossbark = 0, dataPink = 1, dataScorched = 2, dataAsper = 3;
 
@@ -58,8 +58,8 @@ public class BlockLogErebus extends BlockLog {
 		iconTop = new Icon[logTypes[logGroup].length];
 
 		for (int a = 0; a < logTypes[logGroup].length; a++) {
-			iconSide[a] = iconRegister.registerIcon("erebus:tree_" + logTypes[logGroup][a]);
-			iconTop[a] = iconRegister.registerIcon("erebus:tree_" + logTypes[logGroup][a] + "_top");
+			iconSide[a] = iconRegister.registerIcon("erebus:tree" + logTypes[logGroup][a]);
+			iconTop[a] = iconRegister.registerIcon("erebus:tree" + logTypes[logGroup][a] + "Top");
 		}
 	}
 }

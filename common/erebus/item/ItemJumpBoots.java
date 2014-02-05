@@ -22,7 +22,7 @@ public class ItemJumpBoots extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
 		if (is.itemID == ModItems.jumpBoots.itemID)
-			return "erebus:textures/models/armor/hopper_1.png";
+			return "erebus:textures/models/armor/hopper1.png";
 		else
 			return null;
 	}
