@@ -174,12 +174,14 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.umberGolemStatue, 1), new Object[] { " s ", "sss", "s s", 's', Block.stone });
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.book, 1, 0), new Object[] { new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), new ItemStack(Item.paper, 1, 0), new ItemStack(Item.paper, 1, 0), new ItemStack(Item.paper, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.velocityBlock), "xxx", "xxx", "xxx", 'x', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataBioVelocity));
-		
+
 		// Special Items - for future expansion
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL",'S', Item.silk, 'X', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), 'C', new ItemStack(Block.carpet, 1, 0), 'L', new ItemStack(Item.dyePowder, 1, 4) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataBeetleTamingAmulet), new Object[] { " N ", "NJN", " F ",'N', Item.goldNugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataJade), 'F',  new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataAltarFragment) });
-		
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL", 'S', Item.silk, 'X', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), 'C', new ItemStack(Block.carpet, 1, 0), 'L', new ItemStack(Item.dyePowder, 1, 4) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataBeetleTamingAmulet), new Object[] { " N ", "NJN", " F ", 'N', Item.goldNugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataJade), 'F', new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataAltarFragment) });
+
 		// Furnace smelting
+		GameRegistry.addSmelting(ModBlocks.logErebusGroup1.blockID, new ItemStack(Item.coal, 1, 1), 1.0F);
+		GameRegistry.addSmelting(ModBlocks.logErebusGroup2.blockID, new ItemStack(Item.coal, 1, 1), 1.0F);
 		FurnaceRecipes.smelting().addSmelting(ModBlocks.blockAmber.blockID, 0, new ItemStack(ModBlocks.blockAmber, 1, 1), 0.3F);
 		FurnaceRecipes.smelting().addSmelting(ModItems.erebusFood.itemID, 0, new ItemStack(ModItems.erebusFood, 1, 1), 0.2F);
 		FurnaceRecipes.smelting().addSmelting(ModItems.erebusFood.itemID, 2, new ItemStack(ModItems.erebusFood, 1, 3), 0.2F);

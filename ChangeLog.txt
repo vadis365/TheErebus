@@ -14,6 +14,7 @@ Changes
 - Some biomes are more rare than others
 - Exoskeleton armour can now be repaired on anvils
 - Wasp Nest Stairs have the same hardness as the block
+- Logs are smeltable into charcoal
 
 Bugfixes
 ========
