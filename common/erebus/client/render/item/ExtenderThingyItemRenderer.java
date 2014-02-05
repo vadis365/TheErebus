@@ -49,7 +49,7 @@ public class ExtenderThingyItemRenderer implements IItemRenderer {
 	}
 
 	private void renderBlock(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/ModelExtenderThingy.png"));
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/extenderThingy.png"));
 		TileEntityExtenderThingy te = new TileEntityExtenderThingy();
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();

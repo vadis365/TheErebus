@@ -17,7 +17,7 @@ public class TileEntityUmberGolemStatueRenderer extends TileEntitySpecialRendere
 	private final ModelUmberGolemStatue ModelUmberGolemStatue = new ModelUmberGolemStatue();
 
 	public void renderAModelAt(TileEntityUmberGolemStatue tile, double x, double y, double z, float f) {
-		bindTexture(new ResourceLocation("erebus:textures/special/tiles/ModelUmberGolemStatue.png"));
+		bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		int meta = tile.getBlockMetadata();
 		switch (meta) {
 			case 2:

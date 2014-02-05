@@ -13,7 +13,7 @@ import erebus.tileentity.TileEntityErebusAltar;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityErebusAltarRenderer extends TileEntitySpecialRenderer {
-	private static final ResourceLocation tex = new ResourceLocation("erebus:textures/special/tiles/blockErebusAltar.png");
+	private static final ResourceLocation tex = new ResourceLocation("erebus:textures/special/tiles/altarBase.png");
 
 	private final ModelErebusAltar model = new ModelErebusAltar();
 

@@ -15,7 +15,7 @@ import erebus.client.model.item.ModelWebSlinger;
 @SideOnly(Side.CLIENT)
 public class WebSlingerItemRenderer implements IItemRenderer {
 	private final ModelWebSlinger model;
-	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/ModelWebSlinger.png");
+	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/webSlinger.png");
 
 	public WebSlingerItemRenderer() {
 		model = new ModelWebSlinger();

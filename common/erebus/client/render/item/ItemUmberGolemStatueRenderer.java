@@ -48,7 +48,7 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 	}
 
 	private void renderBlock(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/ModelUmberGolemStatue.png"));
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y - 1.1F, z);
@@ -68,7 +68,7 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 	}
 
 	private void renderEquipped(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/ModelUmberGolemStatue.png"));
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -79,7 +79,7 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 	}
 
 	private void renderFirstPerson(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/ModelUmberGolemStatue.png"));
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -90,7 +90,7 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 	}
 
 	private void renderInventory(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/ModelUmberGolemStatue.png"));
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);

@@ -21,7 +21,7 @@ public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer 
 	private final RenderBlocks blockRenderer = new RenderBlocks();
 
 	public void renderAModelAt(TileEntityExtenderThingy tile, double x, double y, double z, float f) {
-		bindTexture(new ResourceLocation("erebus:textures/special/tiles/ModelExtenderThingy.png"));
+		bindTexture(new ResourceLocation("erebus:textures/special/tiles/extenderThingy.png"));
 		int meta = tile.getBlockMetadata();
 		switch (meta) {
 			case 0:

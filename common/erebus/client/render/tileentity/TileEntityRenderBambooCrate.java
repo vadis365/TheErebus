@@ -19,7 +19,7 @@ public class TileEntityRenderBambooCrate extends TileEntitySpecialRenderer {
 	public static ResourceLocation bambooCrateResource = new ResourceLocation("erebus:textures/special/tiles/bambooCrate.png");
 
 	private final ModelColossalCrate colossalCrateModel = new ModelColossalCrate();
-	public static ResourceLocation colossalCrateResource = new ResourceLocation("erebus:textures/special/tiles/colossalcrate.png");
+	public static ResourceLocation colossalCrateResource = new ResourceLocation("erebus:textures/special/tiles/colossalCrate.png");
 
 	public void renderCrate(TileEntityBambooCrate crate, float x, float y, float z) {
 

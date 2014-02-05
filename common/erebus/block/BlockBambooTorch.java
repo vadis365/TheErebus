@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockBambooTorch extends Block {
 
 	@SideOnly(Side.CLIENT)
-	public static final String[] iconPaths = new String[] { "blockBambooTorch_lower", "blockBambooTorch", "blockBambooTorch_top", "blockBambooTorch_bottom" };
+	public static final String[] iconPaths = new String[] { "bambooTorchLower", "bambooTorch", "bambooTorchTop", "bambooTorchBottom" };
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
 

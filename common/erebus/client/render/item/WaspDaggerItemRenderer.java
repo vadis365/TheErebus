@@ -18,7 +18,7 @@ import erebus.entity.EntityWaspDagger;
 @SideOnly(Side.CLIENT)
 public class WaspDaggerItemRenderer extends Render implements IItemRenderer {
 	private final ModelWaspDagger ModelWaspDagger;
-	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/ModelWaspSword.png");
+	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/waspSword.png");
 
 	public WaspDaggerItemRenderer() {
 		ModelWaspDagger = new ModelWaspDagger();

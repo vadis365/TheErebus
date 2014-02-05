@@ -9,7 +9,7 @@ import erebus.tileentity.TileEntityErebusAltarXP;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityErebusAltarXPRenderer extends TileEntityErebusAltarRenderer {
-	private static final ResourceLocation[] tex = new ResourceLocation[] { new ResourceLocation("erebus:textures/special/tiles/XPAltar1.png"), new ResourceLocation("erebus:textures/special/tiles/XPAltar2.png"), new ResourceLocation("erebus:textures/special/tiles/XPAltar3.png"), new ResourceLocation("erebus:textures/special/tiles/XPAltar4.png"), new ResourceLocation("erebus:textures/special/tiles/XPAltar5.png") };
+	private static final ResourceLocation[] tex = new ResourceLocation[] { new ResourceLocation("erebus:textures/special/tiles/altarXP1.png"), new ResourceLocation("erebus:textures/special/tiles/altarXP2.png"), new ResourceLocation("erebus:textures/special/tiles/altarXP3.png"), new ResourceLocation("erebus:textures/special/tiles/altarXP4.png"), new ResourceLocation("erebus:textures/special/tiles/altarXP5.png") };
 
 	private final ModelAltarXP model = new ModelAltarXP();
 
