@@ -38,8 +38,8 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 		ghostEntityItem.hoverStart = 0.0F;
 		ghostEntityItem.setEntityItemStack(glowThingy);
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.25F), (float) z + 0.5F);
-		GL11.glScalef(1.5F, 1.5F, 1.5F);
+		GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
+		GL11.glScalef(1.2F, 1.2F, 1.2F);
 		renderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
 		GL11.glPopMatrix();
 
