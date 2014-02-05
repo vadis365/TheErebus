@@ -3,6 +3,8 @@ package erebus.item;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModMaterials;
 
@@ -13,10 +15,16 @@ public class ItemExoskeletonArmor extends ItemArmor {
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
-		if (is.itemID == ModItems.exoskeletonHelmet.itemID || is.itemID == ModItems.exoskeletonBody.itemID || is.itemID == ModItems.exoskeletonBoots.itemID)
-			return "erebus:textures/models/armor/exoskeleton_1.png";
+	@SideOnly(Side.CLIENT)
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
+		if (stack.itemID == ModItems.exoskeletonLegs.itemID)
+			return "erebus:textures/models/armor/exoskeleton2.png";
 		else
-			return "erebus:textures/models/armor/exoskeleton_2.png";
+			return "erebus:textures/models/armor/exoskeleton1.png";
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataExoPlate;
 	}
 }

@@ -12,6 +12,7 @@ Changes
 =======
 - Tweaked Beetle hit box size and position
 - Some biomes are more rare than others
+- Exoskeleton armour can now be repaired on anvils
 
 Bugfixes
 ========
