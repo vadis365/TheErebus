@@ -1,11 +1,13 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+
+import org.lwjgl.opengl.GL11;
+
+import erebus.entity.EntityRhinoBeetle;
 
 public class ModelRhinoBeetle extends ModelBase {
 	ModelRenderer Ab;
@@ -48,6 +50,7 @@ public class ModelRhinoBeetle extends ModelBase {
 	ModelRenderer NoseA;
 	ModelRenderer NoseB;
 	ModelRenderer NoseC;
+	ModelRenderer Neck;
 
 	public ModelRhinoBeetle() {
 		textureWidth = 64;
@@ -214,6 +217,11 @@ public class ModelRhinoBeetle extends ModelBase {
 		NoseC.addBox(-0.5F, -6.5F, -8.2F, 1, 3, 1);
 		NoseC.setRotationPoint(0F, 17F, -4F);
 		setRotation(NoseC, -0.1396263F, 0F, 0F);
+		Neck = new ModelRenderer(this, 21, 66);
+		Neck.addBox(-2F, -4F, 2F, 4, 6, 2);
+		Neck.setRotationPoint(0F, 17F, -4F);
+		setRotation(Neck, 0F, 0F, 0F);
+
 
 		LFL1.addChild(LFL2);
 		LFL1.addChild(LFL3);
@@ -245,7 +253,7 @@ public class ModelRhinoBeetle extends ModelBase {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GL11.glPushMatrix();
-		GL11.glTranslated(0F, -0.0625F, -0.25F);
+		GL11.glTranslatef(0F, -0.0625F, -0.25F);
 		Ab.render(unitPixel);
 		AbSide.render(unitPixel);
 		Ab.render(unitPixel);
@@ -264,13 +272,14 @@ public class ModelRhinoBeetle extends ModelBase {
 		NoseA.render(unitPixel);
 		NoseB.render(unitPixel);
 		NoseC.render(unitPixel);
+		Neck.render(unitPixel);
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
-		GL11.glTranslated(0F, 0.125F, -0.375F);
+		GL11.glTranslatef(0F, 0.125F, -0.375F);
 		LBL1.render(unitPixel);
 		LFL1.render(unitPixel);
 		LML1.render(unitPixel);
-		GL11.glTranslated(0.125F, 0F, 0F);
+		GL11.glTranslatef(0.125F, 0F, 0F);
 		RFL1.render(unitPixel);
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
@@ -286,8 +295,24 @@ public class ModelRhinoBeetle extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		EntityRhinoBeetle beetle = (EntityRhinoBeetle) entity;
 		float cos1 = MathHelper.cos(limbSwing * 1.0F + (float) Math.PI) * 0.5F * prevLimbSwing;
 		float cos2 = MathHelper.cos(limbSwing * 1.0F) * 0.5F * prevLimbSwing;
+		float headAngle = beetle.getRammingCharge()*0.01F;
+		
+		HeadA.rotateAngleX = headAngle;
+		HeadB.rotateAngleX = headAngle;
+		HeadC.rotateAngleX = headAngle;
+		Eyes.rotateAngleX = headAngle;
+		Lplate.rotateAngleX = headAngle;
+		Rplate.rotateAngleX = headAngle;
+		TplateA.rotateAngleX = headAngle + 0.6981317F;
+		TplateB.rotateAngleX = headAngle + 0.6981317F;
+		TplateC.rotateAngleX = headAngle + 0.6981317F;
+		NoseA.rotateAngleX = headAngle + 0.3490659F;
+		NoseB.rotateAngleX = headAngle - 0.1396263F;
+		NoseC.rotateAngleX = headAngle - 0.1396263F;
+		
 		LBL1.rotateAngleX = cos1;
 		LML1.rotateAngleX = cos2;
 		LFL1.rotateAngleX = cos1;

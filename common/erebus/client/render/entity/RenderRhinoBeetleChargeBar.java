@@ -27,7 +27,7 @@ public class RenderRhinoBeetleChargeBar extends Gui {
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				mc.renderEngine.bindTexture(new ResourceLocation("erebus:textures/gui/overlay/rhinoChargeBar.png"));
 				ScaledResolution res = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
-				renderChargeBar(((EntityRhinoBeetle) player.ridingEntity).rammingCharge*2, res.getScaledWidth() / 2 + 84, res.getScaledHeight() - 30);
+				renderChargeBar(((EntityRhinoBeetle) player.ridingEntity).getRammingCharge()*2, res.getScaledWidth() / 2 + 84, res.getScaledHeight() - 30);
 			}
 		}
 	}

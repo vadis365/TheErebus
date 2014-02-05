@@ -49,6 +49,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataWatcher.addObject(30, new Byte((byte) 0));
 		dataWatcher.addObject(31, new Byte((byte) 0));
 	}
 
@@ -166,8 +167,10 @@ public class EntityRhinoBeetle extends EntityTameable {
 
 	@Override
 	protected void collideWithEntity(Entity entity) {
-		if (riddenByEntity != null && entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) && ramming)
-			ram(entity, rammingCharge * 0.2F, rammingCharge * 0.4F);
+		if (riddenByEntity != null && entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) && ramming){
+			ram(entity, getRammingCharge() * 0.2F, getRammingCharge() * 0.4F);
+			setRammingCharge((byte) 0);
+		}
 	}
 
 	@Override
@@ -228,16 +231,26 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 
 	private void travelSpeed(float velocity) {
+		if(!worldObj.isRemote){
 		if (velocity >= 4F)
-			rammingCharge++;
+			setRammingCharge((byte) (getRammingCharge()+1));
 		else if (velocity <= 4F)
-			rammingCharge--;
-		if (rammingCharge <= 0)
-			rammingCharge = 0;
-		if (rammingCharge >= 25)
-			rammingCharge = 25;
+			setRammingCharge((byte) (getRammingCharge()-1));
+		if (getRammingCharge() <= 0)
+			setRammingCharge((byte) (0));
+		if (getRammingCharge() >= 25)
+			setRammingCharge((byte) (25));
+		}
+	}
+	
+	public void setRammingCharge(byte velocity) {
+		dataWatcher.updateObject(30, Byte.valueOf(velocity));
 	}
 
+	public byte getRammingCharge() {
+		return dataWatcher.getWatchableObjectByte(30);
+	}
+	
 	@Override
 	public void updateRiderPosition() {
 		super.updateRiderPosition();
