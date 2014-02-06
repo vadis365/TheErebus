@@ -129,6 +129,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
+		float healingBuff = 0.0F;
 		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 1 && getTameState() == 0) {
 			is.stackSize--;
 			setTameState((byte) 1);
@@ -137,6 +138,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 			tasks.removeTask(aiNearestAttackableTarget);
 			setAttackTarget((EntityLivingBase) null);
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(80.0D);
+			heal(20F);
 			return true;
 		}
 		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 0 && getTameState() == 1) {
@@ -154,7 +156,20 @@ public class EntityRhinoBeetle extends EntityTameable {
 			if (!worldObj.isRemote)
 				player.mountEntity(this);
 			return true;
-		} else
+		}
+        if (is != null && is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == 11 && getTameState() != 0) {
+        	healingBuff = 5.0F;
+        	if (getHealth() < getMaxHealth() && healingBuff > 0.0F) {
+        		heal(healingBuff);
+        		playTameEffect(true);
+    			player.swingItem();
+    			is.stackSize--;
+    			if (getHealth() == getMaxHealth())
+    				worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
+        	}
+        	return true;
+		}
+		else
 			return super.interact(player);
 	}
 
@@ -168,7 +183,18 @@ public class EntityRhinoBeetle extends EntityTameable {
 			ram(entity, getRammingCharge() * 0.2F, getRammingCharge() * 0.4F);
 			setRammingCharge((byte) 0);
 		}
+	super.collideWithEntity(entity);
 	}
+	
+	@Override
+    public void setAttackTarget(EntityLivingBase entity) {
+		if (getTameState() != 0) {
+			if (entity instanceof EntityPlayer)
+				super.setAttackTarget((EntityLivingBase) null);
+		}
+		else
+			super.setAttackTarget((EntityLivingBase) entity);
+    }
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
