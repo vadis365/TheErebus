@@ -81,6 +81,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	 * @Override protected String getHurtSound() { return
 	 * "erebus:rhinobeetlehurt"; }
 	 */
+	
 	@Override
 	protected String getDeathSound() {
 		return "erebus:squish";
@@ -102,11 +103,6 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
-		return super.getCanSpawnHere();
-	}
-
-	@Override
 	public boolean isOnLadder() {
 		return riddenByEntity != null && isCollidedHorizontally;
 	}
@@ -118,6 +114,11 @@ public class EntityRhinoBeetle extends EntityTameable {
 		else
 			return true;
 	}
+	
+	@Override
+    public boolean allowLeashing() {
+        return !canDespawn() && super.allowLeashing();
+    }
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
@@ -155,11 +156,6 @@ public class EntityRhinoBeetle extends EntityTameable {
 			return true;
 		} else
 			return super.interact(player);
-	}
-
-	@Override
-	public void setAttackTarget(EntityLivingBase entityLivingBase) {
-		super.setAttackTarget(entityLivingBase);
 	}
 
 	public void setRamAttack(boolean state) {
@@ -243,7 +239,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 
 	private void travelSpeed(float velocity) {
-		if(!worldObj.isRemote){
+		if(!worldObj.isRemote) {
 		if (velocity >= 4F)
 			setRammingCharge((byte) (getRammingCharge()+1));
 		else if (velocity <= 4F)
