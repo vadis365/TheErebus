@@ -131,6 +131,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 		ItemStack is = player.inventory.getCurrentItem();
 		float healingBuff = 0.0F;
 		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 1 && getTameState() == 0) {
+			healingBuff = 20F;
 			is.stackSize--;
 			setTameState((byte) 1);
 			playTameEffect(true);
@@ -138,7 +139,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 			tasks.removeTask(aiNearestAttackableTarget);
 			setAttackTarget((EntityLivingBase) null);
 			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(80.0D);
-			heal(20F);
+			heal(healingBuff);
 			return true;
 		}
 		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 0 && getTameState() == 1) {
@@ -159,7 +160,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 		}
         if (is != null && is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == 11 && getTameState() != 0) {
         	healingBuff = 5.0F;
-        	if (getHealth() < getMaxHealth() && healingBuff > 0.0F) {
+        	if (getHealth() < getMaxHealth()) {
         		heal(healingBuff);
         		playTameEffect(true);
     			player.swingItem();
