@@ -62,7 +62,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(40.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(8.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.75D);
 	}
@@ -135,6 +135,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 			player.swingItem();
 			tasks.removeTask(aiNearestAttackableTarget);
 			setAttackTarget((EntityLivingBase) null);
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(80.0D);
 			return true;
 		}
 		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 0 && getTameState() == 1) {
