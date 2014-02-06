@@ -184,12 +184,23 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 
 	private boolean ram(Entity entity, float knockback, float damage) {
+		if(getTameState() == 0 || riddenByEntity == null)
+			setRammingCharge((byte) 32);
 		entity.attackEntityFrom(DamageSource.causeMobDamage(this), (int) damage);
 		entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
 		worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
 		((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting * 50, 0));
 		setRamAttack(false);
 		return true;
+	}
+	
+	@Override
+	public void onUpdate() {
+		if(!ramming)
+			if(getTameState() == 0|| riddenByEntity == null)
+				if(worldObj.getWorldTime() % 10 == 0)
+					setRammingCharge((byte) 0);
+		super.onUpdate();	
 	}
 
 	@Override

@@ -312,7 +312,7 @@ public class ModelRhinoBeetle extends ModelBase {
 		NoseA.rotateAngleX = headAngle + 0.3490659F;
 		NoseB.rotateAngleX = headAngle - 0.1396263F;
 		NoseC.rotateAngleX = headAngle - 0.1396263F;
-		
+			
 		LBL1.rotateAngleX = cos1;
 		LML1.rotateAngleX = cos2;
 		LFL1.rotateAngleX = cos1;
