@@ -26,7 +26,7 @@ public class ModBiomes {
 		undergroundJungle = new BiomeGenUndergroundJungle(undergroundJungleID).setColor(5470985).func_76733_a(5470985).setTemperatureRainfall(1.35F, 0.9F).setBiomeName("Undergound Jungle");
 		volcanicDesert = new BiomeGenVolcanicDesert(volcanicDesertID).setColor(5470985).func_76733_a(5470985).setDisableRain().setTemperatureRainfall(2.2F, 0.2F).setBiomeName("Volcanic Desert");
 		subterraneanSavannah = new BiomeGenSubterraneanSavannah(subterraneanSavannahID).setColor(5470985).func_76733_a(5470985).setDisableRain().setTemperatureRainfall(0.95F, 0.05F).setBiomeName("Subterranean Savannah");
-		elysianFields = new BiomeGenElysianFields(elysianFieldsID).setColor(8365877).func_76733_a(8365877).setDisableRain().setTemperatureRainfall(0.1F, 0.52F).setBiomeName("Elysian Fields");
+		elysianFields = new BiomeGenElysianFields(elysianFieldsID).setColor(8365877).func_76733_a(8365877).setDisableRain().setTemperatureRainfall(0.85F, 0.5F).setBiomeName("Elysian Fields");
 		
 		BiomeDictionary.registerBiomeType(undergroundJungle, BiomeDictionary.Type.JUNGLE);
 		BiomeDictionary.registerBiomeType(volcanicDesert, BiomeDictionary.Type.DESERT);

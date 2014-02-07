@@ -14,16 +14,22 @@ public class BiomeGenElysianFields extends BiomeGenBaseErebus{
 	protected short getBiomeWeight(){
 		return 50;
 	}
-
-	@Override
-	public void generateBiomeFeatures(World world, Random rand, int x, int z){
-		
-	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBiomeGrassColor(){
 		return 8365877;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeFoliageColor(){
+		return 8365877;
+	}
+
+	@Override
+	public void generateBiomeFeatures(World world, Random rand, int x, int z){
+		
 	}
 }
 //@formatter:on
