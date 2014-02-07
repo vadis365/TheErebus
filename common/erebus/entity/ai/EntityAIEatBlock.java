@@ -75,7 +75,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 					hasTarget = true;
 				}
 		} else if (isEntityReady()) {
-			entity.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed);
+			moveToLocation();
 			entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 			AxisAlignedBB blockbounds = getBlockAABB(cropX, cropY, cropZ);
 			boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
@@ -86,7 +86,6 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 				entity.worldObj.destroyBlockInWorldPartially(entity.entityId, cropX, cropY, cropZ, getScaledEatTicks());
 				if (!canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ))) {
 					hasTarget = false;
-					eatingInterupted();
 				} else if (EAT_SPEED <= eatTicks) {
 					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, entity.worldObj.getBlockId(cropX, cropY, cropZ) + (maxGrowthMetadata << 12));
 					entity.worldObj.setBlockToAir(cropX, cropY, cropZ);
@@ -96,6 +95,11 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 					eatTicks = 0;
 					afterEaten();
 				}
+			}
+			if (!flag && eatTicks>0) {
+				eatingInterupted();
+				hasTarget = false;
+				eatTicks = 0;
 			}
 		}
 	}
@@ -136,6 +140,12 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	 * @return true to allow block to be eaten. false to deny it.
 	 */
 	protected abstract boolean isEntityReady();
+	
+	
+	/**
+	 * Allows you to set mob specific move tasks.
+	 */
+	protected abstract void moveToLocation();
 
 	/**
 	 * Allows any other tasks to be cancelled just before block has been eaten.

@@ -14,8 +14,11 @@ import erebus.entity.EntityBeetleLarva;
 
 public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
+	private double moveSpeed;
+
 	public EntityAIEatWoodenItem(EntityAnimal entity, double moveSpeed, int eatSpeed) {
 		super(entity, null, 0, null, moveSpeed, eatSpeed);
+		this.moveSpeed=moveSpeed;
 	}
 
 	@Override
@@ -50,13 +53,13 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 	protected boolean isEntityReady() {
 		return true;
 	}
-
+	
 	@Override
-	protected void afterEaten() {
+	protected void moveToLocation() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
-		beetleLarva.setIsEating(false);
-		beetleLarva.setMoveTasks(true);
-		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);
+		if (!beetleLarva.isEating){
+			entity.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed);
+		}
 	}
 
 	@Override
@@ -71,5 +74,13 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
 		beetleLarva.setIsEating(false);
 		beetleLarva.setMoveTasks(true);
+	}
+	
+	@Override
+	protected void afterEaten() {
+		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
+		beetleLarva.setIsEating(false);
+		beetleLarva.setMoveTasks(true);
+		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);
 	}
 }

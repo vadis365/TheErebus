@@ -23,6 +23,7 @@ public class EntityGrasshopper extends EntityCreature {
 	private ChunkCoordinates currentJumpTarget;
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
 	public EntityAIEatCrops aiEatCrops = new EntityAIEatCrops(this, 0.6D, 10);
+	public EntityAIWatchClosest aiWatchClosest = new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F);
 	public boolean isEating;
 	public boolean canJump = true;
 
@@ -33,7 +34,7 @@ public class EntityGrasshopper extends EntityCreature {
 		setSize(1.3F, 0.5F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(1, aiWatchClosest);
 		tasks.addTask(2, aiWander);
 		tasks.addTask(3, aiEatCrops);
 		tasks.addTask(4, new EntityAIPanic(this, 0.8D));
@@ -110,11 +111,14 @@ public class EntityGrasshopper extends EntityCreature {
 	}
 
 	public void setMoveTasks(boolean par1) {
-		if (par1 == false)
+		if (par1 == false){
 			tasks.removeTask(aiWander);
-
-		if (par1 == true)
+			tasks.removeTask(aiWatchClosest);
+		}
+		if (par1 == true){
 			tasks.addTask(2, aiWander);
+			tasks.addTask(2, aiWatchClosest);
+		}
 	}
 
 	public void setCanJump(boolean canJump) {
