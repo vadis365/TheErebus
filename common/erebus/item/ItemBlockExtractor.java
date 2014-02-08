@@ -1,6 +1,8 @@
 package erebus.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockPane;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -38,20 +40,20 @@ public class ItemBlockExtractor extends Item {
 
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
-		is.damageItem(1, player);
+		
 		//world.playSoundAtEntity(player, "erebus:someSoundHere", 1.0F, 1.0F);
 		extractBlock(is, world, player);
+		is.damageItem(1, player);
 		return is;
 	}
 
 	protected void extractBlock(ItemStack is, World world, EntityPlayer player) {
-		MovingObjectPosition objectMouseOver = mc.thePlayer.rayTrace(16,0);// Distance is 16 atm;
-			if(objectMouseOver != null && objectMouseOver.typeOfHit == EnumMovingObjectType.TILE){
+		MovingObjectPosition objectMouseOver = mc.thePlayer.rayTrace(16,1);// Distance is 16 atm;
+			if(objectMouseOver != null && objectMouseOver.typeOfHit == EnumMovingObjectType.TILE) {
 		        int blockID = world.getBlockId(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
 		        int blockMeta = world.getBlockMetadata(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
 		        Block block = Block.blocksList[blockID];
-		        if (block != null) {
-		        	if (!world.isRemote) {
+		        if (!world.isRemote && block != null && canExtract(block)) {
 		        		EntityExtractedBlock entityExtractedBlock;
 		        		entityExtractedBlock = new EntityExtractedBlock(world);
 		        		world.setBlock(objectMouseOver.blockX,objectMouseOver.blockY,objectMouseOver.blockZ, 0);
@@ -59,8 +61,11 @@ public class ItemBlockExtractor extends Item {
 						entityExtractedBlock.setBlock(blockID, blockMeta);
 						entityExtractedBlock.setHeading(player.posX, player.posY, player.posZ);
 						world.spawnEntityInWorld(entityExtractedBlock);
-		        }
 			}
 		}
+	}
+	
+	private boolean canExtract(Block block) {
+		return  !(block instanceof BlockContainer) &&!(block instanceof BlockPane) && block.blockHardness >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
 	}
 }

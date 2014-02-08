@@ -14,6 +14,7 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import erebus.core.helper.Utils;
 
 public class EntityExtractedBlock extends EntityFlying implements IEntityAdditionalSpawnData {
 	
@@ -40,15 +41,17 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 	}
 	
 	@Override
+	public boolean isAIEnabled() {
+		return true;
+	}
+	
+	@Override
 	public void onUpdate() {
 		if (!worldObj.isRemote) {
 			if(posX !=targetX ||posZ !=targetZ) {
-				double var1 = targetX  - posX;
-				double var3 = targetY - posY;
-				double var5 = targetZ  - posZ;
-				motionX += ((var1) * 0.5D - motionX) * 0.10000000149011612D;
-				motionY += ((var3) * 0.5D - motionY) * 0.10000000149011612D;
-				motionZ += ((var5) * 0.5D - motionZ) * 0.10000000149011612D;
+				motionX += ((targetX - posX) * 0.5D - motionX) * 0.10000000149011612D;
+				motionY += ((targetY - posY) * 0.5D - motionY) * 0.10000000149011612D;
+				motionZ += ((targetZ - posZ) * 0.5D - motionZ) * 0.10000000149011612D;
 			}
 			
 			if(posX ==targetX && posZ ==targetZ)
@@ -71,21 +74,18 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 		setDead();
 		if (entity instanceof EntityPlayer) {
 			if(!worldObj.isRemote) {
-				worldObj.setBlock((int) posX,(int) posY,(int) posZ, 0);
-				((EntityPlayer)entity).inventory.addItemStackToInventory(new ItemStack((Item.itemsList[blockID].itemID),1,blockMeta));
-			}	
+				if(((EntityPlayer)entity).inventory.addItemStackToInventory(new ItemStack((Item.itemsList[blockID].itemID), 1 ,blockMeta)));
+				else {
+					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, (new ItemStack((Item.itemsList[blockID].itemID), 1 ,blockMeta)));
+				}	
+			}
 		}
 		else if(!worldObj.isRemote) {
 			worldObj.setBlock((int) posX,(int) posY,(int) posZ, this.blockID, this.blockMeta, 3);
-			}
+		}
 	super.collideWithEntity(entity);
 	}
 	
-	@Override
-	public boolean isAIEnabled() {
-		return true;
-	}
-
 	@Override
 	public void writeEntityToNBT(NBTTagCompound data) {
 		super.writeEntityToNBT(data);
