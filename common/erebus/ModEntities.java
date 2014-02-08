@@ -16,6 +16,7 @@ import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityCentipede;
+import erebus.entity.EntityExtractedBlock;
 import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGlowWorm;
@@ -108,6 +109,8 @@ public class ModEntities {
 		registerEntity(70, EntityWaspDagger.class, "WaspDagger");
 		registerEntity(71, EntityWebSling.class, "WebSling");
 		registerEntity(72, EntityErebusLightningBolt.class, "ErebusLightning");
+		registerEntity(73, EntityExtractedBlock.class, "ExtractedBlock");
+		
 		// Spawn conditions
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);
 	}

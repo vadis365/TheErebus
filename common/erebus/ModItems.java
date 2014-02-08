@@ -17,6 +17,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.core.handler.ConfigurationHandler;
 import erebus.item.ItemArmorGlider;
 import erebus.item.ItemBambucket;
+import erebus.item.ItemBlockExtractor;
 import erebus.item.ItemBucketOfBeetleJuice;
 import erebus.item.ItemCavemanClub;
 import erebus.item.ItemCompoundGoggles;
@@ -57,6 +58,7 @@ public class ModItems {
 	public static Item bucketOfBeetleJuice;				public static int bucketOfBeetleJuiceID;
 	public static Item hornOfSummoning;					public static int hornOfSummoningID;
 	public static Item erebusSpecialItem;				public static int erebusSpecialItemID;
+	public static Item blockExtractor;					public static int blockExtractorID;
 
 	// JADE STUFF
 	public static Item jadeHelmet;						public static int jadeHelmetID;
@@ -145,7 +147,8 @@ public class ModItems {
 		waspDagger = new ItemWaspDagger(waspDaggerID).setUnlocalizedName("waspDagger");
 		scorpionPincer = new ItemScorpionPincer(scorpionPincerID).setUnlocalizedName("scorpionPincer").setTextureName("paper");
 		webSlinger = new ItemWebSlinger(webSlingerID).setUnlocalizedName("webSlinger").setTextureName("paper");
-
+		blockExtractor = new ItemBlockExtractor(blockExtractorID).setFull3D().setUnlocalizedName("blockExtractor").setTextureName("erebus:blockExtractor");
+		
 		reinCompoundGoggles = new ItemCompoundGoggles(reinCompoundGogglesID, ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
 		compoundGoggles = new ItemCompoundGoggles(compoundGogglesID, ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("compoundGoggles").setTextureName("erebus:compoundGoggles");
 		sprintLeggings = new ItemSprintLeggings(sprintLeggingsID, ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("sprintLeggings").setTextureName("erebus:sprintLeggings");
@@ -162,7 +165,7 @@ public class ModItems {
 		Erebus.tabErebusGear.add(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		Erebus.tabErebusGear.add(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		Erebus.tabErebusGear.add(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger);
-		Erebus.tabErebusGear.add(compoundGoggles, reinCompoundGoggles, armorGlider, sprintLeggings, jumpBoots);
+		Erebus.tabErebusGear.add(compoundGoggles, reinCompoundGoggles, armorGlider, sprintLeggings, jumpBoots, blockExtractor);
 		Erebus.tabErebusSpecial.add(portalActivator, bamBucket, bucketOfBeetleJuice, erebusSpecialItem, sprayCan, hornOfSummoning, spawnEggs);
 		
 		// Tool classes
@@ -212,6 +215,7 @@ public class ModItems {
 		GameRegistry.registerItem(waspDagger, "erebus.waspDagger");
 		GameRegistry.registerItem(scorpionPincer, "erebus.scorpionPincer");
 		GameRegistry.registerItem(webSlinger, "erebus.webSlinger");
+		GameRegistry.registerItem(blockExtractor, "erebus.blockExtractor");
 
 		GameRegistry.registerItem(compoundGoggles, "erebus.compoundGoggles");
 		GameRegistry.registerItem(sprintLeggings, "erebus.sprintLeggings");

@@ -228,6 +228,7 @@ item.scorpionPincer.name=Augmented Scorpion Pincer
 item.bucketOfBeetleJuice.name=Bucket Of Beetle Juice
 item.hornOfSummoning.name=Horn of The Swarm
 item.webSlinger.name=Web Slinger
+item.blockExtractor.name=Block Extractor
 
 #Entities
 entity.Erebus.BeetleLarva.name=Beetle Larva
