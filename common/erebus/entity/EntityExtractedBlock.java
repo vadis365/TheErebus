@@ -16,15 +16,17 @@ import com.google.common.io.ByteArrayDataOutput;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityExtractedBlock extends EntityFlying implements IEntityAdditionalSpawnData {
+	
 	public int blockID, blockMeta;
 	public double targetX, targetY, targetZ;
 	EntityLivingBase entityToAttack;
+	
 	public EntityExtractedBlock(World world) {
 		super(world);
 		setSize(1.0F, 1.0F);
 		setBlock(Block.stone.blockID, 0);
 		experienceValue = 0;
-}
+	}
 	
 	public void setBlock(int blockID, int blockMeta) {
 		this.blockID = blockID;
@@ -67,7 +69,6 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 	@Override
 	protected void collideWithEntity(Entity entity) {
 		setDead();
-		ItemStack is;
 		if (entity instanceof EntityPlayer) {
 			if(!worldObj.isRemote) {
 				worldObj.setBlock((int) posX,(int) posY,(int) posZ, 0);
@@ -85,7 +86,6 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 		return true;
 	}
 
-	
 	@Override
 	public void writeEntityToNBT(NBTTagCompound data) {
 		super.writeEntityToNBT(data);
