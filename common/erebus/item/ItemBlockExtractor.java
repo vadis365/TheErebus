@@ -1,5 +1,7 @@
 package erebus.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPane;
@@ -14,6 +16,8 @@ import net.minecraft.world.World;
 import erebus.entity.EntityExtractedBlock;
 
 public class ItemBlockExtractor extends Item {
+	
+	@SideOnly(Side.CLIENT)
 	private final Minecraft mc = Minecraft.getMinecraft();
 	public Block block;
 	public int blockID;
@@ -39,9 +43,17 @@ public class ItemBlockExtractor extends Item {
 			x = 150;
 		return (int) x;
 	}
+	
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+		getBlockInfo(world);
+		player.setItemInUse(is, getMaxItemUseDuration(is));
+		return is;
+	}
+	
+	@SideOnly(Side.CLIENT)	
+	public void getBlockInfo(World world) {
 		MovingObjectPosition objectMouseOver = mc.thePlayer.rayTrace(16, 1);// Distance is 16 atm;
 		if (objectMouseOver != null && objectMouseOver.typeOfHit == EnumMovingObjectType.TILE) {
 			objectX = objectMouseOver.blockX;
@@ -53,8 +65,6 @@ public class ItemBlockExtractor extends Item {
 			if(block !=null)
 				blockHardness = block.getBlockHardness(world, objectX, objectY, objectZ);
 		}
-		player.setItemInUse(is, getMaxItemUseDuration(is));
-		return is;
 	}
 
 	@Override
