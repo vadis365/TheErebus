@@ -7,8 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumMovingObjectType;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import erebus.entity.EntityExtractedBlock;
 
@@ -17,13 +16,15 @@ public class ItemBlockExtractor extends Item {
 	public Block block;
 	public int blockID;
 	public int blockMeta;
-	public int objectX, objectY, objectZ;
+	public double targetX, targetY, targetZ;
 	public float blockHardness;
+	private boolean seekBlock;
 
 	public ItemBlockExtractor(int id) {
 		super(id);
 		maxStackSize = 1;
 		setMaxDamage(128);
+		seekBlock=true;
 	}
 
 	@Override
@@ -41,29 +42,43 @@ public class ItemBlockExtractor extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
-		getBlockInfo(world, player);
+		if(seekBlock)
+			getBlockInfo(world, player);
+		
 		player.setItemInUse(is, getMaxItemUseDuration(is));
 		return is;
 	}
 
 	public void getBlockInfo(World world, EntityPlayer player) {
-		MovingObjectPosition objectMouseOver = player.rayTrace(16, 1.0F);// That method has a SideOnly(Side.CLIENT) annotation
-		if (objectMouseOver != null && objectMouseOver.typeOfHit == EnumMovingObjectType.TILE) {
-			objectX = objectMouseOver.blockX;
-			objectY = objectMouseOver.blockY;
-			objectZ = objectMouseOver.blockZ;
-			blockID = world.getBlockId(objectX, objectY, objectZ);
-			blockMeta = world.getBlockMetadata(objectX, objectY, objectZ);
-			block = Block.blocksList[blockID];
-			if (block != null)
-				blockHardness = block.getBlockHardness(world, objectX, objectY, objectZ);
+		float range = 16.0F; // range of 16
+		Vec3 vec3 = player.getLookVec().normalize();
+		targetX = player.posX;
+		targetY = player.posY + player.getEyeHeight() - 0.10000000149011612D;
+		targetZ = player.posZ;
+		
+		while (Math.abs(targetX) < (Math.abs(player.posX) + Math.abs(vec3.xCoord * range)) && seekBlock) {
+			targetX += vec3.xCoord;
+			targetY += vec3.yCoord;
+			targetZ += vec3.zCoord;
+			if (!world.isAirBlock((int) targetX, (int) targetY, (int) targetZ)) {
+				seekForBlock(false);
+				blockID = world.getBlockId((int)targetX, (int)targetY, (int)targetZ);
+				blockMeta = world.getBlockMetadata((int)targetX, (int)targetY, (int)targetZ);
+				block = Block.blocksList[blockID];
+				if (block != null)
+					blockHardness = block.getBlockHardness(world, (int)targetX, (int)targetY, (int)targetZ);
+			}
 		}
+	}
+	
+	private void seekForBlock(boolean state) {
+		seekBlock = state;	
 	}
 
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
 		// world.playSoundAtEntity(player, "erebus:someSoundHere", 1.0F, 1.0F);
-		if (block != null)
+		if (block != null && canExtract(block))
 			extractBlock(is, world, player);
 		is.damageItem(1, player);
 		return is;
@@ -72,18 +87,20 @@ public class ItemBlockExtractor extends Item {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack is, World world, EntityPlayer player, int count) {
 		block = null;
+		seekForBlock(true);
 	}
 
 	protected void extractBlock(ItemStack is, World world, EntityPlayer player) {
 		if (!world.isRemote && block != null && canExtract(block)) {
 			EntityExtractedBlock entityExtractedBlock;
 			entityExtractedBlock = new EntityExtractedBlock(world);
-			world.setBlock(objectX, objectY, objectZ, 0);
-			entityExtractedBlock.setLocationAndAngles((double) objectX + 0.5F, objectY, (double) objectZ + 0.5F, 0.0F, 0.0F);
+			world.setBlock((int)targetX, (int)targetY, (int)targetZ, 0);
+			entityExtractedBlock.setLocationAndAngles(targetX, targetY, targetZ, 0.0F, 0.0F);
 			entityExtractedBlock.setBlock(blockID, blockMeta);
 			entityExtractedBlock.setHeading(player.posX, player.posY, player.posZ);
 			world.spawnEntityInWorld(entityExtractedBlock);
 		}
+		seekForBlock(true);
 	}
 
 	private boolean canExtract(Block block) {
