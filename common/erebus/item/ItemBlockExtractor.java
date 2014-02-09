@@ -1,11 +1,8 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPane;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -13,12 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import cpw.mods.fml.client.FMLClientHandler;
 import erebus.entity.EntityExtractedBlock;
 
 public class ItemBlockExtractor extends Item {
 	
-	@SideOnly(Side.CLIENT)
-	private final Minecraft mc = Minecraft.getMinecraft();
 	public Block block;
 	public int blockID;
 	public int blockMeta;
@@ -51,10 +47,10 @@ public class ItemBlockExtractor extends Item {
 		player.setItemInUse(is, getMaxItemUseDuration(is));
 		return is;
 	}
-	
-	@SideOnly(Side.CLIENT)	
+		
 	public void getBlockInfo(World world) {
-		MovingObjectPosition objectMouseOver = mc.thePlayer.rayTrace(16, 1);// Distance is 16 atm;
+		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+		MovingObjectPosition objectMouseOver = player.rayTrace(16, 1.0F);// Distance is 16 atm;
 		if (objectMouseOver != null && objectMouseOver.typeOfHit == EnumMovingObjectType.TILE) {
 			objectX = objectMouseOver.blockX;
 			objectY = objectMouseOver.blockY;

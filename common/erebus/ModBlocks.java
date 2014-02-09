@@ -199,7 +199,7 @@ public class ModBlocks {
 		insectRepellent = new BlockInsectRepellent(insectRepellentID).setUnlocalizedName("insectRepellent");
 		bambooShoot = new BlockBambooShoot(bambooShootID).setCreativeTab(null).setUnlocalizedName("bambooShoot").setTextureName("erebus:bambooShoot");
 		bambooCrop = new BlockBambooCrop(bambooCropID).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bambooCrop").setTextureName("erebus:bambooCropBase");
-		bambooTorch = new BlockBambooTorch(bambooTorchID).setHardness(0.0F).setUnlocalizedName("bambooTorch").setTextureName("erebus:blockBambooTorch");
+		bambooTorch = new BlockBambooTorch(bambooTorchID).setHardness(0.0F).setUnlocalizedName("bambooTorch");
 		erebusAltar = new BlockErebusAltar(erebusAltarID).setUnlocalizedName("erebusAltar");
 		erebusAltarLightning = new BlockErebusAltarLightning(erebusAltarLightningID).setUnlocalizedName("erebusAltarLightning");
 		erebusAltarHealing = new BlockErebusAltarHealing(erebusAltarHealingID).setUnlocalizedName("erebusAltarHealing");
