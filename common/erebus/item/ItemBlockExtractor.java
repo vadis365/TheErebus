@@ -95,7 +95,7 @@ public class ItemBlockExtractor extends Item {
 			EntityExtractedBlock entityExtractedBlock;
 			entityExtractedBlock = new EntityExtractedBlock(world);
 			world.setBlock((int)targetX, (int)targetY, (int)targetZ, 0);
-			entityExtractedBlock.setLocationAndAngles(targetX, targetY, targetZ, 0.0F, 0.0F);
+			entityExtractedBlock.setLocationAndAngles((int)targetX + 0.5D, (int)targetY, (int)targetZ + 0.5D, 0.0F, 0.0F);
 			entityExtractedBlock.setBlock(blockID, blockMeta);
 			entityExtractedBlock.setHeading(player.posX, player.posY, player.posZ);
 			world.spawnEntityInWorld(entityExtractedBlock);
