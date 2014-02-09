@@ -10,11 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import cpw.mods.fml.client.FMLClientHandler;
 import erebus.entity.EntityExtractedBlock;
 
 public class ItemBlockExtractor extends Item {
-	
+
 	public Block block;
 	public int blockID;
 	public int blockMeta;
@@ -39,17 +38,15 @@ public class ItemBlockExtractor extends Item {
 			x = 150;
 		return (int) x;
 	}
-	
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
-		getBlockInfo(world);
+		getBlockInfo(world, player);
 		player.setItemInUse(is, getMaxItemUseDuration(is));
 		return is;
 	}
-		
-	public void getBlockInfo(World world) {
-		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+
+	public void getBlockInfo(World world, EntityPlayer player) {
 		MovingObjectPosition objectMouseOver = player.rayTrace(16, 1.0F);// Distance is 16 atm;
 		if (objectMouseOver != null && objectMouseOver.typeOfHit == EnumMovingObjectType.TILE) {
 			objectX = objectMouseOver.blockX;
@@ -58,7 +55,7 @@ public class ItemBlockExtractor extends Item {
 			blockID = world.getBlockId(objectX, objectY, objectZ);
 			blockMeta = world.getBlockMetadata(objectX, objectY, objectZ);
 			block = Block.blocksList[blockID];
-			if(block !=null)
+			if (block != null)
 				blockHardness = block.getBlockHardness(world, objectX, objectY, objectZ);
 		}
 	}
@@ -66,16 +63,16 @@ public class ItemBlockExtractor extends Item {
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
 		// world.playSoundAtEntity(player, "erebus:someSoundHere", 1.0F, 1.0F);
-		if(block !=null)
-		extractBlock(is, world, player);
+		if (block != null)
+			extractBlock(is, world, player);
 		is.damageItem(1, player);
 		return is;
 	}
-	
+
 	@Override
-	  public void onPlayerStoppedUsing(ItemStack is, World world, EntityPlayer player, int count) {
-		  block = null;
-	    }
+	public void onPlayerStoppedUsing(ItemStack is, World world, EntityPlayer player, int count) {
+		block = null;
+	}
 
 	protected void extractBlock(ItemStack is, World world, EntityPlayer player) {
 		if (!world.isRemote && block != null && canExtract(block)) {
