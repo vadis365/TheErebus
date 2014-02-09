@@ -47,7 +47,7 @@ public class ItemBlockExtractor extends Item {
 	}
 
 	public void getBlockInfo(World world, EntityPlayer player) {
-		MovingObjectPosition objectMouseOver = player.rayTrace(16, 1.0F);// Distance is 16 atm;
+		MovingObjectPosition objectMouseOver = player.rayTrace(16, 1.0F);// That method has a SideOnly(Side.CLIENT) annotation
 		if (objectMouseOver != null && objectMouseOver.typeOfHit == EnumMovingObjectType.TILE) {
 			objectX = objectMouseOver.blockX;
 			objectY = objectMouseOver.blockY;
