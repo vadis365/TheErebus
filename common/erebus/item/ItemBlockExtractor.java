@@ -18,13 +18,12 @@ public class ItemBlockExtractor extends Item {
 	public int blockMeta;
 	public double targetX, targetY, targetZ;
 	public float blockHardness;
-	private boolean seekBlock;
+	private int range;
 
 	public ItemBlockExtractor(int id) {
 		super(id);
 		maxStackSize = 1;
 		setMaxDamage(128);
-		seekBlock=true;
 	}
 
 	@Override
@@ -42,43 +41,39 @@ public class ItemBlockExtractor extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
-		if(seekBlock)
-			getBlockInfo(world, player);
-		
+		getBlockInfo(world, player);
 		player.setItemInUse(is, getMaxItemUseDuration(is));
 		return is;
 	}
 
 	public void getBlockInfo(World world, EntityPlayer player) {
-		float range = 16.0F; // range of 16
+		if (!world.isRemote) {
 		Vec3 vec3 = player.getLookVec().normalize();
 		targetX = player.posX;
 		targetY = player.posY + player.getEyeHeight() - 0.10000000149011612D;
 		targetZ = player.posZ;
 		
-		while (Math.abs(targetX) < (Math.abs(player.posX) + Math.abs(vec3.xCoord * range)) && seekBlock) {
+		while (world.isAirBlock((int) targetX, (int) targetY, (int) targetZ) && range <= 15) { // range of 16
+			range++;
 			targetX += vec3.xCoord;
 			targetY += vec3.yCoord;
 			targetZ += vec3.zCoord;
 			if (!world.isAirBlock((int) targetX, (int) targetY, (int) targetZ)) {
-				seekForBlock(false);
+				System.out.println("found Block"+range);
 				blockID = world.getBlockId((int)targetX, (int)targetY, (int)targetZ);
 				blockMeta = world.getBlockMetadata((int)targetX, (int)targetY, (int)targetZ);
 				block = Block.blocksList[blockID];
 				if (block != null)
-					blockHardness = block.getBlockHardness(world, (int)targetX, (int)targetY, (int)targetZ);
+					blockHardness = block.getBlockHardness(world, (int)targetX, (int)targetY, (int)targetZ);		
 			}
 		}
 	}
-	
-	private void seekForBlock(boolean state) {
-		seekBlock = state;	
 	}
 
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
 		// world.playSoundAtEntity(player, "erebus:someSoundHere", 1.0F, 1.0F);
-		if (block != null && canExtract(block))
+		if (!world.isRemote && block != null && canExtract(block))
 			extractBlock(is, world, player);
 		is.damageItem(1, player);
 		return is;
@@ -86,12 +81,11 @@ public class ItemBlockExtractor extends Item {
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack is, World world, EntityPlayer player, int count) {
-		block = null;
-		seekForBlock(true);
+		resetStats();
 	}
 
 	protected void extractBlock(ItemStack is, World world, EntityPlayer player) {
-		if (!world.isRemote && block != null && canExtract(block)) {
+		if (!world.isRemote) {
 			EntityExtractedBlock entityExtractedBlock;
 			entityExtractedBlock = new EntityExtractedBlock(world);
 			world.setBlock((int)targetX, (int)targetY, (int)targetZ, 0);
@@ -100,7 +94,12 @@ public class ItemBlockExtractor extends Item {
 			entityExtractedBlock.setHeading(player.posX, player.posY, player.posZ);
 			world.spawnEntityInWorld(entityExtractedBlock);
 		}
-		seekForBlock(true);
+		resetStats();
+	}
+	
+	public void resetStats() {
+		block = null;
+		range = 0;
 	}
 
 	private boolean canExtract(Block block) {
