@@ -47,13 +47,13 @@ public class ItemBlockExtractor extends Item {
 			double targetY = player.posY + player.getEyeHeight() - 0.10000000149011612D;
 			double targetZ = player.posZ;
 
-			while (world.isAirBlock((int) targetX, (int) targetY, (int) targetZ) && stack.getTagCompound().getInteger("range") <= 15) { // range of 16
-				stack.getTagCompound().setInteger("range", stack.getTagCompound().getInteger("range") + 1);
+			int range = 0;
+			while (world.isAirBlock((int) targetX, (int) targetY, (int) targetZ) && range <= 15) { // range of 16
+				range++;
 				targetX += vec3.xCoord;
 				targetY += vec3.yCoord;
 				targetZ += vec3.zCoord;
 				if (!world.isAirBlock((int) targetX, (int) targetY, (int) targetZ)) {
-					System.out.println("found Block" + stack.getTagCompound().getInteger("range"));
 
 					stack.getTagCompound().setInteger("blockID", world.getBlockId((int) targetX, (int) targetY, (int) targetZ));
 					stack.getTagCompound().setInteger("blockMeta", world.getBlockMetadata((int) targetX, (int) targetY, (int) targetZ));
@@ -80,11 +80,6 @@ public class ItemBlockExtractor extends Item {
 		return stack;
 	}
 
-	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
-		resetStats(stack);
-	}
-
 	protected void extractBlock(ItemStack stack, World world, EntityPlayer player) {
 		if (!world.isRemote) {
 			EntityExtractedBlock entityExtractedBlock;
@@ -98,12 +93,7 @@ public class ItemBlockExtractor extends Item {
 			entityExtractedBlock.setBlock(stack.getTagCompound().getInteger("blockID"), stack.getTagCompound().getInteger("blockMeta"));
 			entityExtractedBlock.setHeading(player.posX, player.posY, player.posZ);
 			world.spawnEntityInWorld(entityExtractedBlock);
-			resetStats(stack);
 		}
-	}
-
-	public void resetStats(ItemStack stack) {
-		stack.getTagCompound().setInteger("range", 0);
 	}
 
 	private boolean canExtract(Block block) {
