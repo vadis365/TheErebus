@@ -66,6 +66,7 @@ import erebus.client.render.entity.RenderUmberGolem;
 import erebus.client.render.entity.RenderVelvetWorm;
 import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
+import erebus.client.render.entity.RenderWorkerBee;
 import erebus.client.render.item.BambooBridgeItemRenderer;
 import erebus.client.render.item.BambooCrateItemRenderer;
 import erebus.client.render.item.BambooPoleItemRenderer;
@@ -131,6 +132,7 @@ import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWaspDagger;
 import erebus.entity.EntityWebSling;
+import erebus.entity.EntityWorkerBee;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.network.packet.PacketParticle;
 import erebus.tileentity.TileEntityBambooBridge;
@@ -193,6 +195,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityWebSling.class, new RenderWebSling());
 		RenderingRegistry.registerEntityRenderingHandler(EntityErebusLightningBolt.class, new RenderErebusLightningBolt());
 		RenderingRegistry.registerEntityRenderingHandler(EntityExtractedBlock.class, new RenderExtractedBlock());
+		RenderingRegistry.registerEntityRenderingHandler(EntityWorkerBee.class, new RenderWorkerBee());
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());
@@ -209,7 +212,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBones.class, new TileEntityBoneBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooPole.class, new TileEntityBambooPoleRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtenderThingy.class, new TileEntityExtenderThingyRenderer());
-
+	
 		RenderingRegistry.registerBlockHandler(bambooCropRenderID, new BlockBambooCropRender());
 		RenderingRegistry.registerBlockHandler(hollowLogRenderID, new BlockHollowLogRender());
 
