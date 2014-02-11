@@ -111,6 +111,7 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 	}
 
 	static class EggData {
+
 		private final short id;
 		String entityName;
 		private final Class<? extends EntityLiving> entityClass;
@@ -135,6 +136,7 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 			try {
 				e = entityClass.getConstructor(World.class).newInstance(world);
 			} catch (Exception ex) {
+				ex.printStackTrace();
 				return null;
 			}
 

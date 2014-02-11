@@ -11,9 +11,9 @@ import erebus.item.ItemErebusMaterial;
 
 public class EntityWorkerBee extends EntityCreature {
 
-	private float heightOffset = 0.0F;
+	private final float heightOffset = 0.0F;
 	public float wingFloat;
-	AnimationMathHelper mathWings = new AnimationMathHelper();
+	private final AnimationMathHelper mathWings = new AnimationMathHelper();
 
 	public EntityWorkerBee(World world) {
 		super(world);
@@ -23,15 +23,14 @@ public class EntityWorkerBee extends EntityCreature {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
 	}
-
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -75,13 +74,11 @@ public class EntityWorkerBee extends EntityCreature {
 	public void onUpdate() {
 		if (!isFlying())
 			wingFloat = 0.0F;
-		if (isFlying())
+		else
 			wingFloat = mathWings.swing(4.0F, 0.1F);
 
 		if (motionY < 0.0D)
 			motionY *= 0.5D;
 		super.onUpdate();
 	}
-
-	
 }
