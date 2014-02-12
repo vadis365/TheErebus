@@ -36,16 +36,22 @@ public class ItemBlockExtractor extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		getBlockInfo(world, player, stack);
-		player.setItemInUse(stack, getMaxItemUseDuration(stack));
+		Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
+		if(block != null)
+			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		return stack;
+	}
+	
+	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
+		resetStats(stack);
 	}
 
 	public void getBlockInfo(World world, EntityPlayer player, ItemStack stack) {
 		if (!world.isRemote && hasTag(stack)) {
 			Vec3 vec3 = player.getLookVec().normalize();
-			double targetX = player.posX;
+			double targetX = player.posX-1;
 			double targetY = player.posY + player.getEyeHeight() - 0.10000000149011612D;
-			double targetZ = player.posZ;
+			double targetZ = player.posZ-1;
 
 			int range = 0;
 			while (world.isAirBlock((int) targetX, (int) targetY, (int) targetZ) && range <= 15) { // range of 16
@@ -54,17 +60,16 @@ public class ItemBlockExtractor extends Item {
 				targetY += vec3.yCoord;
 				targetZ += vec3.zCoord;
 				if (!world.isAirBlock((int) targetX, (int) targetY, (int) targetZ)) {
-
+					stack.getTagCompound().setInteger("targetX", (int) targetX);
+					stack.getTagCompound().setInteger("targetY", (int) targetY);
+					stack.getTagCompound().setInteger("targetZ", (int) targetZ);
 					stack.getTagCompound().setInteger("blockID", world.getBlockId((int) targetX, (int) targetY, (int) targetZ));
 					stack.getTagCompound().setInteger("blockMeta", world.getBlockMetadata((int) targetX, (int) targetY, (int) targetZ));
 					Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
 					if (block != null) {
 						stack.getTagCompound().setFloat("blockHardness", block.getBlockHardness(world, (int) targetX, (int) targetY, (int) targetZ));
-						stack.getTagCompound().setInteger("targetX", (int) targetX);
-						stack.getTagCompound().setInteger("targetY", (int) targetY);
-						stack.getTagCompound().setInteger("targetZ", (int) targetZ);
 					}
-				}
+				}	
 			}
 		}
 	}
@@ -76,6 +81,7 @@ public class ItemBlockExtractor extends Item {
 			if (block != null && canExtract(block))
 				extractBlock(stack, world, player);
 		}
+		resetStats(stack);
 		stack.damageItem(1, player);
 		return stack;
 	}
@@ -93,11 +99,15 @@ public class ItemBlockExtractor extends Item {
 			entityExtractedBlock.setBlock(stack.getTagCompound().getInteger("blockID"), stack.getTagCompound().getInteger("blockMeta"));
 			entityExtractedBlock.setHeading(player.posX, player.posY, player.posZ);
 			world.spawnEntityInWorld(entityExtractedBlock);
-		}
+		}	
 	}
 
 	private boolean canExtract(Block block) {
 		return !(block instanceof BlockContainer) && !(block instanceof BlockPane) && block.blockHardness >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
+	}
+	
+	public void resetStats(ItemStack stack) {
+		stack.getTagCompound().setInteger("blockID", 0);
 	}
 
 	private boolean hasTag(ItemStack stack) {
