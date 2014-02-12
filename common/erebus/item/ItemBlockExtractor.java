@@ -65,9 +65,9 @@ public class ItemBlockExtractor extends Item {
 	public void getBlockInfo(World world, EntityPlayer player, ItemStack stack) {
 		if (!world.isRemote && hasTag(stack)) {
 			Vec3 vec3 = player.getLookVec().normalize();
-			double targetX = player.posX-1;
+			double targetX = player.posX;
 			double targetY = player.posY + player.getEyeHeight() - 0.10000000149011612D;
-			double targetZ = player.posZ-1;
+			double targetZ = player.posZ;
 
 			int range = 0;
 			while (world.isAirBlock((int) targetX, (int) targetY, (int) targetZ) && range <= 15) { // range of 16
