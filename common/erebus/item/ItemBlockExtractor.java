@@ -36,9 +36,11 @@ public class ItemBlockExtractor extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		getBlockInfo(world, player, stack);
-		Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
-		if(block != null)
-			player.setItemInUse(stack, getMaxItemUseDuration(stack));
+		if (hasTag(stack)){
+			Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
+			if(block != null)
+				player.setItemInUse(stack, getMaxItemUseDuration(stack));
+		}
 		return stack;
 	}
 	
