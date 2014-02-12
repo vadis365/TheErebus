@@ -3,6 +3,7 @@ package erebus.item;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPane;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -35,7 +36,8 @@ public class ItemBlockExtractor extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		getBlockInfo(world, player, stack);
+		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown")<=0)
+			getBlockInfo(world, player, stack);
 		if (hasTag(stack)){
 			Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
 			if(block != null)
@@ -110,6 +112,7 @@ public class ItemBlockExtractor extends Item {
 	
 	public void resetStats(ItemStack stack) {
 		stack.getTagCompound().setInteger("blockID", 0);
+		stack.getTagCompound().setInteger("coolDown", 20);
 	}
 
 	private boolean hasTag(ItemStack stack) {
@@ -119,4 +122,11 @@ public class ItemBlockExtractor extends Item {
 		}
 		return true;
 	}
+	
+	@Override
+	public void onUpdate(ItemStack stack, World world, Entity entity, int aNumber, boolean aBoolean ) {
+		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown")>=0)
+			stack.getTagCompound().setInteger("coolDown", stack.getTagCompound().getInteger("coolDown")-1);	
+	 }
+
 }
