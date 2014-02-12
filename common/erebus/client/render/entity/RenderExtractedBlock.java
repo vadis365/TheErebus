@@ -21,15 +21,11 @@ public class RenderExtractedBlock extends Render{
 	
 	public void renderExtractedBlock(EntityExtractedBlock entity, double x, double y, double z, float yaw, float tick) {
 		GL11.glPushMatrix();
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glTranslatef((float) x, (float) y, (float) z);
 		GL11.glTranslatef(0.0F, 0.5F, 0.0F);
-		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
+		//GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		renderBlocks.renderBlockAsItem(Block.blocksList[entity.blockID], entity.blockMeta, 1.0F);
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 
