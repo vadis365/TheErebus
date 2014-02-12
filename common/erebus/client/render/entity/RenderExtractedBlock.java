@@ -23,7 +23,6 @@ public class RenderExtractedBlock extends Render{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
 		GL11.glTranslatef(0.0F, 0.5F, 0.0F);
-		//GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		renderBlocks.renderBlockAsItem(Block.blocksList[entity.blockID], entity.blockMeta, 1.0F);
 		GL11.glPopMatrix();
