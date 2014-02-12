@@ -1,5 +1,9 @@
 package erebus.item;
 
+import java.util.List;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPane;
@@ -19,6 +23,14 @@ public class ItemBlockExtractor extends Item {
 		super(id);
 		maxStackSize = 1;
 		setMaxDamage(128);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
+		list.add("Point at blocks and hold");
+		list.add("down R mouse button");
+		list.add("to extract them.");
 	}
 
 	@Override
