@@ -85,8 +85,9 @@ public class EntityWorkerBee extends EntityAnimal {
 		return "erebus:squish";
 	}
 
-	protected void getStepSound(int par1, int par2, int par3, int par4) {
-		worldObj.playSoundAtEntity(this, "mob.zombie.wood", 0.15F, 1.0F);
+	@Override
+	protected void playStepSound(int x, int y, int z, int blockID) {
+		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
