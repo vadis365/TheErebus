@@ -34,7 +34,7 @@ public class EntityWorkerBee extends EntityAnimal {
 		setSize(1.5F, 1.0F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
-		tasks.addTask(2, new EntityAIPolinate(this, 0.5D, 10));
+		tasks.addTask(2, new EntityAIPolinate(this, 10));
 		tasks.addTask(3, new EntityAITempt(this, 0.5D, Item.sugar.itemID, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.4D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));

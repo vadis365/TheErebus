@@ -7,11 +7,8 @@ import erebus.entity.EntityWorkerBee;
 
 public class EntityAIPolinate extends EntityAIFindFlower {
 
-	private double moveSpeed;
-
-	public EntityAIPolinate(EntityAnimal entity, double moveSpeed, int pollinateSpeed) {
-		super(entity, null, 0, null, moveSpeed, pollinateSpeed);
-		this.moveSpeed=moveSpeed;
+	public EntityAIPolinate(EntityAnimal entity, int pollinateSpeed) {
+		super(entity, null, 0, pollinateSpeed);
 	}
 
 	@Override

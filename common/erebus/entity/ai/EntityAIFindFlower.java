@@ -7,13 +7,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import erebus.core.helper.Spiral;
 
 public abstract class EntityAIFindFlower extends EntityAIBase {
 
-	private final double moveSpeed;
 	private final int COLLECT_SPEED;
 	protected final EntityLiving entity;
 	private final int blockMetadata;
@@ -27,18 +25,13 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 	private int collectTicks;
 	private static final List<Point> spiral = new Spiral(32, 32).spiral();
 
-	public EntityAIFindFlower(EntityLiving entity, Block block, int blockMetadata, ItemStack seed, double moveSpeed, int pollinateSpeed) {
+	public EntityAIFindFlower(EntityLiving entity, Block block, int blockMetadata, int pollinateSpeed) {
 		this.entity = entity;
 		this.blockMetadata = blockMetadata;
 		this.block = block;
 		hasTarget = false;
 		spiralIndex = 0;
-		this.moveSpeed = moveSpeed;
 		COLLECT_SPEED = pollinateSpeed * 20;
-	}
-
-	public EntityAIFindFlower(EntityAnimal entity, Block block, int blockMetadata, float moveSpeed, int pollinateSpeed) {
-		this(entity, block, blockMetadata, null, moveSpeed, pollinateSpeed);
 	}
 
 	@Override
