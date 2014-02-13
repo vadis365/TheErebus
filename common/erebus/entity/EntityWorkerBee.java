@@ -14,6 +14,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -32,9 +33,9 @@ public class EntityWorkerBee extends EntityAnimal {
 	public EntityWorkerBee(World world) {
 		super(world);
 		setSize(1.5F, 1.0F);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
-		tasks.addTask(2, new EntityAIPolinate(this, 10));
+		tasks.addTask(0, new EntityAIPolinate(this, 10));
+		tasks.addTask(1, new EntityAISwimming(this));
+		tasks.addTask(2, new EntityAIAttackOnCollide(this, 0.5D, true));
 		tasks.addTask(3, new EntityAITempt(this, 0.5D, Item.sugar.itemID, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.4D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -45,6 +46,7 @@ public class EntityWorkerBee extends EntityAnimal {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataWatcher.addObject(22, new Integer(0));
 	}
 	
 	@Override
@@ -89,7 +91,7 @@ public class EntityWorkerBee extends EntityAnimal {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataWaspSting), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, getNectarPoints(), ItemErebusMaterial.dataNectar), 0.0F);
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, ItemErebusMaterial.dataExoPlate), 0.0F);
 	}
 
@@ -157,10 +159,42 @@ public class EntityWorkerBee extends EntityAnimal {
 	private void land() {
 		//Nothing to see here - yet
 	}
+	
+	@Override
+	public boolean interact(EntityPlayer player) {
+		ItemStack is = player.inventory.getCurrentItem();
+		if (!worldObj.isRemote && is != null && is.itemID == Item.sugar.itemID && getNectarPoints()>0) {
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataNectar), 0.0F);
+			--is.stackSize;
+			setNectarPoints(getNectarPoints()-1);
+			return true;
+		}
+		return super.interact(player);
+	}
+	
+	public void setNectarPoints(int count) {
+		dataWatcher.updateObject(22, Integer.valueOf(count));	
+	}
+	
+	public int getNectarPoints() {
+		return dataWatcher.getWatchableObjectInt(22);
+	}
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("nectarPoints", getNectarPoints());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setNectarPoints(nbt.getInteger("nectarPoints"));
 	}
 }
