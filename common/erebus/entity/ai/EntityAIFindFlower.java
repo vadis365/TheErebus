@@ -76,7 +76,6 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 				if (!canPolinate(entity.worldObj.getBlockId(flowerX, flowerY, flowerZ), entity.worldObj.getBlockMetadata(flowerX, flowerY, flowerZ))) {
 					hasTarget = false;
 				} else if (COLLECT_SPEED <= collectTicks) {
-					System.out.println("POLINATED");
 					hasTarget = false;
 					collectTicks = 0;
 					afterPollination();
@@ -108,44 +107,18 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 		return entity.worldObj.getBlockId(flowerX, flowerY, flowerZ);
 	}
 
-	/**
-	 * Override this if you wish to do a more advanced checking on which blocks
-	 * should be eaten
-	 * 
-	 * @param blockID
-	 * @param meta
-	 * @return true is should eat block, false is it shouldn't
-	 */
 	protected boolean canPolinate(int blockID, int meta) {
 		return blockID == block.blockID && meta == blockMetadata;
 	}
 
-	/**
-	 * Test if entity is ready to eat block
-	 * 
-	 * @return true to allow block to be eaten. false to deny it.
-	 */
 	protected abstract boolean isEntityReady();
 	
-	
-	/**
-	 * Allows you to set mob specific move tasks.
-	 */
 	protected abstract void moveToLocation();
 
-	/**
-	 * Allows any other tasks to be cancelled just before block has been eaten.
-	 */
 	protected abstract void prepareToPollinate();
 
-	/**
-	 * Allows any other tasks to be cancelled if the block cannot be eaten.
-	 */
 	protected abstract void pollinationInterupted();
 
-	/**
-	 * Gets called just after block has been eaten.
-	 */
 	protected abstract void afterPollination();
 
 	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
