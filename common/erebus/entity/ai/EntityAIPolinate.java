@@ -16,15 +16,8 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 		if (blockID == 0)
 			return false;
 
-		Block block = Block.blocksList[blockID];
-		if (block.blockHardness == -1)
-			return false;
-
-		if (blockID == 170)
+		else if (blockID == 170)
 			return true;
-		
-		else if (block.hasTileEntity(blockMeta))
-			return false;
 
 		return false;
 	}
