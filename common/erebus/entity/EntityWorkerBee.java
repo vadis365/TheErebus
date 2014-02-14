@@ -144,17 +144,22 @@ public class EntityWorkerBee extends EntityAnimal {
 	}
 	
 	public void flyToTarget() {
-
-		double var1 = currentFlightTarget.posX + 0.5D - posX;
-		double var3 = currentFlightTarget.posY + 0.1D - posY;
-		double var5 = currentFlightTarget.posZ + 0.5D - posZ;
-		motionX += (Math.signum(var1) * 0.5D - motionX) * 0.10000000149011612D;
-		motionY += (Math.signum(var3) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-		motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.10000000149011612D;
-		float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-		float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
-		moveForward = 0.5F;
-		rotationYaw += var8;
+		if (currentFlightTarget != null && worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ)==170 && isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ)){
+			this.setPosition(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ);
+			this.playSound("mob.endermen.portal", 1.0F, 1.0F);
+			}
+		else {
+			double var1 = currentFlightTarget.posX + 0.5D - posX;
+			double var3 = currentFlightTarget.posY + 0.1D - posY;
+			double var5 = currentFlightTarget.posZ + 0.5D - posZ;
+			motionX += (Math.signum(var1) * 0.5D - motionX) * 0.10000000149011612D;
+			motionY += (Math.signum(var3) * 0.699999988079071D - motionY) * 0.10000000149011612D;
+			motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.10000000149011612D;
+			float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+			float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
+			moveForward = 0.5F;
+			rotationYaw += var8;
+		}
 	}
 
 	private void land() {

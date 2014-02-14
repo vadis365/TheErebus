@@ -56,7 +56,7 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 			increment();
 
 			Point p = getNextPoint();
-			for (int y = -2; y < 2; y++)
+			for (int y = -12; y < 12; y++)
 				if (canPolinate(entity.worldObj.getBlockId(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 					flowerX = xCoord + p.x;
 					flowerY = yCoord + y;
