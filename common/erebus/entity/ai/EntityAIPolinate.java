@@ -1,6 +1,5 @@
 package erebus.entity.ai;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.ChunkCoordinates;
 import erebus.entity.EntityWorkerBee;
@@ -18,7 +17,7 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 
 		else if (blockID == 170)
 			return true;
-
+		
 		return false;
 	}
 
