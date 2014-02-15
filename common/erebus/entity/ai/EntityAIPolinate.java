@@ -1,6 +1,7 @@
 package erebus.entity.ai;
 
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import erebus.entity.EntityWorkerBee;
 

@@ -15,16 +15,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
+import erebus.entity.ai.EntityAIEatWoodenItem;
 import erebus.entity.ai.EntityAIPolinate;
 import erebus.item.ItemErebusMaterial;
 
 public class EntityWorkerBee extends EntityAnimal {
 	public ChunkCoordinates currentFlightTarget;
+	public EntityAIPolinate aiPollinate = new EntityAIPolinate(this, 10);
+	
 	public float wingFloat;
 	private final AnimationMathHelper mathWings = new AnimationMathHelper();
 	public boolean beeFlying;
@@ -33,7 +37,7 @@ public class EntityWorkerBee extends EntityAnimal {
 	public EntityWorkerBee(World world) {
 		super(world);
 		setSize(1.5F, 1.0F);
-		tasks.addTask(0, new EntityAIPolinate(this, 10));
+		tasks.addTask(0, aiPollinate);
 		tasks.addTask(1, new EntityAISwimming(this));
 		tasks.addTask(2, new EntityAIAttackOnCollide(this, 0.5D, true));
 		tasks.addTask(3, new EntityAITempt(this, 0.5D, Item.sugar.itemID, false));
@@ -144,17 +148,22 @@ public class EntityWorkerBee extends EntityAnimal {
 	}
 	
 	public void flyToTarget() {
-		if (currentFlightTarget != null && worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ)==170 && isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ)){
-			this.setPosition(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ);
-			this.playSound("mob.endermen.portal", 1.0F, 1.0F);
+		if (currentFlightTarget != null && worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ)==170 && isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ)) 
+			if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX,currentFlightTarget.posY+1,currentFlightTarget.posZ,currentFlightTarget.posX+1,currentFlightTarget.posY+2,currentFlightTarget.posZ+1)).isEmpty()) {
+				this.setPosition(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ);
+				this.playSound("mob.endermen.portal", 1.0F, 1.0F);
+			}else {
+				currentFlightTarget = null;
+				setBeePollinating(false);
+				setBeeFlying(true);
 			}
 		else {
-			double var1 = currentFlightTarget.posX + 0.5D - posX;
-			double var3 = currentFlightTarget.posY + 0.1D - posY;
-			double var5 = currentFlightTarget.posZ + 0.5D - posZ;
-			motionX += (Math.signum(var1) * 0.5D - motionX) * 0.10000000149011612D;
-			motionY += (Math.signum(var3) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-			motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.10000000149011612D;
+			double targetX = currentFlightTarget.posX + 0.5D - posX;
+			double targetY = currentFlightTarget.posY + 0.1D - posY;
+			double targetZ = currentFlightTarget.posZ + 0.5D - posZ;
+			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
+			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
+			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
 			float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
 			float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
 			moveForward = 0.5F;

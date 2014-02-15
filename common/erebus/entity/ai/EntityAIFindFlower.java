@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.AxisAlignedBB;
 import erebus.core.helper.Spiral;
+import erebus.entity.EntityWorkerBee;
 
 public abstract class EntityAIFindFlower extends EntityAIBase {
 
@@ -40,7 +41,7 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
-		return !entity.isChild();
+		return entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, AxisAlignedBB.getBoundingBox(flowerX,flowerY+1,flowerZ,flowerX+1,flowerY+2,flowerZ+1)).isEmpty();
 	}
 
 	@Override
