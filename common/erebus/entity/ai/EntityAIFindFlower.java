@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.AxisAlignedBB;
 import erebus.core.helper.Spiral;
-import erebus.entity.EntityWorkerBee;
 
 public abstract class EntityAIFindFlower extends EntityAIBase {
 

@@ -1,13 +1,12 @@
 package erebus.entity.ai;
 
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ChunkCoordinates;
 import erebus.entity.EntityWorkerBee;
 
 public class EntityAIPolinate extends EntityAIFindFlower {
 
-	public EntityAIPolinate(EntityAnimal entity, int pollinateSpeed) {
+	public EntityAIPolinate(EntityLiving entity, int pollinateSpeed) {
 		super(entity, null, 0, pollinateSpeed);
 	}
 
