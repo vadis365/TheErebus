@@ -22,6 +22,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
 import erebus.entity.ai.EntityAIPolinate;
@@ -157,7 +158,7 @@ public class EntityWorkerBee extends EntityAnimal {
 	}
 	
 	public void flyToTarget() {
-		if (currentFlightTarget != null && getEntityToAttack()==null && worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ)==170 && isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ)) 
+		if (currentFlightTarget != null && getEntityToAttack()==null && worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ)==ModBlocks.erebusFlowerID && isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ)) 
 			if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX,currentFlightTarget.posY+1,currentFlightTarget.posZ,currentFlightTarget.posX+1,currentFlightTarget.posY+2,currentFlightTarget.posZ+1)).isEmpty()) {
 				this.setPosition(currentFlightTarget.posX, currentFlightTarget.posY+1, currentFlightTarget.posZ);
 			}else {
