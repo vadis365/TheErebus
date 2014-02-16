@@ -44,120 +44,86 @@ import erebus.item.ItemWebSlinger;
 
 public class ModItems {
 
-	//@formatter:off
-
 	// BASIC MATERIALS
-	public static Item portalActivator;					public static int portalActivatorID;
-	public static Item erebusMaterials;  				public static int erebusMaterialsID;
-	public static Item erebusFood;						public static int erebusFoodID;
-	public static Item metalIngot;						public static int metalIngotID;
-	public static Item bamBucket;						public static int bamBucketID;
-	public static Item turnip;							public static int turnipID;
-	public static Item sprayCan;						public static int sprayCanID;
-	public static Item wandOfAnimation;					public static int wandOfAnimationID;
-	public static Item bucketOfBeetleJuice;				public static int bucketOfBeetleJuiceID;
-	public static Item hornOfSummoning;					public static int hornOfSummoningID;
-	public static Item erebusSpecialItem;				public static int erebusSpecialItemID;
-	public static Item blockExtractor;					public static int blockExtractorID;
+	public static Item portalActivator, erebusMaterials, erebusFood, metalIngot, bamBucket, turnip, sprayCan, wandOfAnimation;
+	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor;
 
 	// JADE STUFF
-	public static Item jadeHelmet;						public static int jadeHelmetID;
-	public static Item jadeBody;						public static int jadeBodyID;
-	public static Item jadeLegs;						public static int jadeLegsID;
-	public static Item jadeBoots;						public static int jadeBootsID;
-	public static Item jadeSword;						public static int jadeSwordID;
-	public static Item jadePickaxe;						public static int jadePickaxeID;
-	public static Item jadeAxe;							public static int jadeAxeID;
-	public static Item jadeShovel;						public static int jadeShovelID;
-	public static Item jadePaxel;						public static int jadePaxelID;
-	public static Item jadeHoe;							public static int jadeHoeID;
+	public static Item jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe;
 
 	// EXOSKELETON STUFF
-	public static Item exoskeletonHelmet;				public static int exoskeletonHelmetID;
-	public static Item exoskeletonBody;					public static int exoskeletonBodyID;
-	public static Item exoskeletonLegs;					public static int exoskeletonLegsID;
-	public static Item exoskeletonBoots;				public static int exoskeletonBootsID;
-
-	public static Item reinExoskeletonHelmet;			public static int reinExoskeletonHelmetID;
-	public static Item reinExoskeletonBody;				public static int reinExoskeletonBodyID;
-	public static Item reinExoskeletonLegs;				public static int reinExoskeletonLegsID;
-	public static Item reinExoskeletonBoots;			public static int reinExoskeletonBootsID;
+	public static Item exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots;
+	public static Item reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots;
 
 	// MISC WEAPONS
-	public static Item fossilClub;						public static int fossilClubID;
-	public static Item waspSword;						public static int waspSwordID;
-	public static Item maxSpeedBow;						public static int maxSpeedBowID;
-	public static Item waspDagger;						public static int waspDaggerID;
-	public static Item scorpionPincer;					public static int scorpionPincerID;
-	public static Item webSlinger;						public static int webSlingerID;
+	public static Item fossilClub, waspSword, maxSpeedBow, waspDagger, scorpionPincer, webSlinger;
 
 	// MISC ARMOR
-	public static Item reinCompoundGoggles;             public static int reinCompoundGogglesID;
-	public static Item compoundGoggles;                 public static int compoundGogglesID;
-	public static Item sprintLeggings;					public static int sprintLeggingsID;
-	public static Item jumpBoots;						public static int jumpBootsID;
-	public static Item armorGlider;						public static int armorGliderID;
+	public static Item reinCompoundGoggles, compoundGoggles, sprintLeggings, jumpBoots, armorGlider;
 
 	// CREATIVE
-	public static Item spawnEggs;						public static int spawnEggsID;
-
-	//@formatter:on
+	public static Item spawnEggs;
 
 	public static void init() {
-		// constructor, set full 3D, creative tab (null), unlocalized name,
-		// texture name
+		initItems();
+		initCreativeTabs();
+		registerItems();
+		registerProperties();
+	}
 
-		portalActivator = new ItemPortalActivator(portalActivatorID).setUnlocalizedName("portalActivator").setTextureName("erebus:portalActivator");
-		erebusMaterials = new ItemErebusMaterial(erebusMaterialsID).setUnlocalizedName("erebusMaterials");
-		erebusSpecialItem = new ItemErebusSpecial(erebusSpecialItemID).setUnlocalizedName("erebusSpecialItem");
-		erebusFood = new ItemErebusFood(erebusFoodID).setUnlocalizedName("erebusFood");
+	private static void initItems() {
+		portalActivator = new ItemPortalActivator(ConfigHandler.portalActivatorID).setUnlocalizedName("portalActivator").setTextureName("erebus:portalActivator");
+		erebusMaterials = new ItemErebusMaterial(ConfigHandler.erebusMaterialsID).setUnlocalizedName("erebusMaterials");
+		erebusSpecialItem = new ItemErebusSpecial(ConfigHandler.erebusSpecialItemID).setUnlocalizedName("erebusSpecialItem");
+		erebusFood = new ItemErebusFood(ConfigHandler.erebusFoodID).setUnlocalizedName("erebusFood");
 		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
-			metalIngot = new ItemMetalIngots(metalIngotID);
-		bamBucket = new ItemBambucket(bamBucketID).setUnlocalizedName("bamBucket");
-		turnip = new ItemSeedFood(turnipID, 4, 0.6F, ModBlocks.blockTurnip.blockID, Block.tilledField.blockID).setUnlocalizedName("turnips").setTextureName("erebus:turnips");
-		sprayCan = new ItemSprayCan(sprayCanID).setUnlocalizedName("sprayCan").setTextureName("erebus:sprayCan");
-		wandOfAnimation = new ItemWandOfAnimation(wandOfAnimationID).setUnlocalizedName("wandOfAnimation");
-		bucketOfBeetleJuice = new ItemBucketOfBeetleJuice(bucketOfBeetleJuiceID).setUnlocalizedName("bucketOfBeetleJuice").setTextureName("erebus:bucketOfBeetleJuice");
-		hornOfSummoning = new ItemHornOfSummoning(hornOfSummoningID).setUnlocalizedName("hornOfSummoning").setTextureName("erebus:hornOfSummoning");
+			metalIngot = new ItemMetalIngots(ConfigHandler.metalIngotID);
+		bamBucket = new ItemBambucket(ConfigHandler.bamBucketID).setUnlocalizedName("bamBucket");
+		turnip = new ItemSeedFood(ConfigHandler.turnipID, 4, 0.6F, ModBlocks.blockTurnip.blockID, Block.tilledField.blockID).setUnlocalizedName("turnips").setTextureName("erebus:turnips");
+		sprayCan = new ItemSprayCan(ConfigHandler.sprayCanID).setUnlocalizedName("sprayCan").setTextureName("erebus:sprayCan");
+		wandOfAnimation = new ItemWandOfAnimation(ConfigHandler.wandOfAnimationID).setUnlocalizedName("wandOfAnimation");
+		bucketOfBeetleJuice = new ItemBucketOfBeetleJuice(ConfigHandler.bucketOfBeetleJuiceID).setUnlocalizedName("bucketOfBeetleJuice").setTextureName("erebus:bucketOfBeetleJuice");
+		hornOfSummoning = new ItemHornOfSummoning(ConfigHandler.hornOfSummoningID).setUnlocalizedName("hornOfSummoning").setTextureName("erebus:hornOfSummoning");
 
-		jadeHelmet = new ItemJadeArmor(jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
-		jadeBody = new ItemJadeArmor(jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
-		jadeLegs = new ItemJadeArmor(jadeLegsID, 2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
-		jadeBoots = new ItemJadeArmor(jadeBootsID, 3).setUnlocalizedName("bootsJade").setTextureName("erebus:bootsJade");
-		jadeSword = new ItemSword(jadeSwordID, ModMaterials.toolJADE).setUnlocalizedName("swordJade").setTextureName("erebus:swordJade");
-		jadePickaxe = new ItemPickaxe(jadePickaxeID, ModMaterials.toolJADE).setUnlocalizedName("pickaxeJade").setTextureName("erebus:pickaxeJade");
-		jadeAxe = new ItemAxe(jadeAxeID, ModMaterials.toolJADE).setUnlocalizedName("axeJade").setTextureName("erebus:axeJade");
-		jadeShovel = new ItemSpade(jadeShovelID, ModMaterials.toolJADE).setUnlocalizedName("shovelJade").setTextureName("erebus:shovelJade");
-		jadePaxel = new ItemPaxel(jadePaxelID, ModMaterials.toolJADEPAXEL).setUnlocalizedName("paxelJade").setTextureName("erebus:paxelJade");
-		jadeHoe = new ItemHoe(jadeHoeID, ModMaterials.toolJADE).setUnlocalizedName("hoeJade").setTextureName("erebus:hoeJade");
+		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
+		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
+		jadeLegs = new ItemJadeArmor(ConfigHandler.jadeLegsID, 2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
+		jadeBoots = new ItemJadeArmor(ConfigHandler.jadeBootsID, 3).setUnlocalizedName("bootsJade").setTextureName("erebus:bootsJade");
+		jadeSword = new ItemSword(ConfigHandler.jadeSwordID, ModMaterials.toolJADE).setUnlocalizedName("swordJade").setTextureName("erebus:swordJade");
+		jadePickaxe = new ItemPickaxe(ConfigHandler.jadePickaxeID, ModMaterials.toolJADE).setUnlocalizedName("pickaxeJade").setTextureName("erebus:pickaxeJade");
+		jadeAxe = new ItemAxe(ConfigHandler.jadeAxeID, ModMaterials.toolJADE).setUnlocalizedName("axeJade").setTextureName("erebus:axeJade");
+		jadeShovel = new ItemSpade(ConfigHandler.jadeShovelID, ModMaterials.toolJADE).setUnlocalizedName("shovelJade").setTextureName("erebus:shovelJade");
+		jadePaxel = new ItemPaxel(ConfigHandler.jadePaxelID, ModMaterials.toolJADEPAXEL).setUnlocalizedName("paxelJade").setTextureName("erebus:paxelJade");
+		jadeHoe = new ItemHoe(ConfigHandler.jadeHoeID, ModMaterials.toolJADE).setUnlocalizedName("hoeJade").setTextureName("erebus:hoeJade");
 
-		exoskeletonHelmet = new ItemExoskeletonArmor(exoskeletonHelmetID, 0).setUnlocalizedName("helmetExo").setTextureName("erebus:helmetExo");
-		exoskeletonBody = new ItemExoskeletonArmor(exoskeletonBodyID, 1).setUnlocalizedName("chestplateExo").setTextureName("erebus:chestplateExo");
-		exoskeletonLegs = new ItemExoskeletonArmor(exoskeletonLegsID, 2).setUnlocalizedName("leggingsExo").setTextureName("erebus:leggingsExo");
-		exoskeletonBoots = new ItemExoskeletonArmor(exoskeletonBootsID, 3).setUnlocalizedName("bootsExo").setTextureName("erebus:bootsExo");
+		exoskeletonHelmet = new ItemExoskeletonArmor(ConfigHandler.exoskeletonHelmetID, 0).setUnlocalizedName("helmetExo").setTextureName("erebus:helmetExo");
+		exoskeletonBody = new ItemExoskeletonArmor(ConfigHandler.exoskeletonBodyID, 1).setUnlocalizedName("chestplateExo").setTextureName("erebus:chestplateExo");
+		exoskeletonLegs = new ItemExoskeletonArmor(ConfigHandler.exoskeletonLegsID, 2).setUnlocalizedName("leggingsExo").setTextureName("erebus:leggingsExo");
+		exoskeletonBoots = new ItemExoskeletonArmor(ConfigHandler.exoskeletonBootsID, 3).setUnlocalizedName("bootsExo").setTextureName("erebus:bootsExo");
 
-		reinExoskeletonHelmet = new ItemReinExoskeletonArmor(reinExoskeletonHelmetID, 0).setUnlocalizedName("exoHelmetRein").setTextureName("erebus:exoHelmetRein");
-		reinExoskeletonBody = new ItemReinExoskeletonArmor(reinExoskeletonBodyID, 1).setUnlocalizedName("exoChestplateRein").setTextureName("erebus:exoChestplateRein");
-		reinExoskeletonLegs = new ItemReinExoskeletonArmor(reinExoskeletonLegsID, 2).setUnlocalizedName("exoLeggingsRein").setTextureName("erebus:exoLeggingsRein");
-		reinExoskeletonBoots = new ItemReinExoskeletonArmor(reinExoskeletonBootsID, 3).setUnlocalizedName("exoBootsRein").setTextureName("erebus:exoBootsRein");
+		reinExoskeletonHelmet = new ItemReinExoskeletonArmor(ConfigHandler.reinExoskeletonHelmetID, 0).setUnlocalizedName("exoHelmetRein").setTextureName("erebus:exoHelmetRein");
+		reinExoskeletonBody = new ItemReinExoskeletonArmor(ConfigHandler.reinExoskeletonBodyID, 1).setUnlocalizedName("exoChestplateRein").setTextureName("erebus:exoChestplateRein");
+		reinExoskeletonLegs = new ItemReinExoskeletonArmor(ConfigHandler.reinExoskeletonLegsID, 2).setUnlocalizedName("exoLeggingsRein").setTextureName("erebus:exoLeggingsRein");
+		reinExoskeletonBoots = new ItemReinExoskeletonArmor(ConfigHandler.reinExoskeletonBootsID, 3).setUnlocalizedName("exoBootsRein").setTextureName("erebus:exoBootsRein");
 
-		fossilClub = new ItemCavemanClub(fossilClubID).setFull3D().setUnlocalizedName("clubBone").setTextureName("erebus:clubBone");
-		waspSword = new ItemWaspSword(waspSwordID).setUnlocalizedName("waspSword").setTextureName("paper");
-		maxSpeedBow = new ItemMaxSpeedBow(maxSpeedBowID).setUnlocalizedName("maxSpeedBow").setTextureName("erebus:maxSpeedBow");
-		waspDagger = new ItemWaspDagger(waspDaggerID).setUnlocalizedName("waspDagger");
-		scorpionPincer = new ItemScorpionPincer(scorpionPincerID).setUnlocalizedName("scorpionPincer").setTextureName("paper");
-		webSlinger = new ItemWebSlinger(webSlingerID).setUnlocalizedName("webSlinger").setTextureName("paper");
-		blockExtractor = new ItemBlockExtractor(blockExtractorID).setFull3D().setUnlocalizedName("blockExtractor").setTextureName("erebus:blockExtractor");
-		
-		reinCompoundGoggles = new ItemCompoundGoggles(reinCompoundGogglesID, ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
-		compoundGoggles = new ItemCompoundGoggles(compoundGogglesID, ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("compoundGoggles").setTextureName("erebus:compoundGoggles");
-		sprintLeggings = new ItemSprintLeggings(sprintLeggingsID, ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("sprintLeggings").setTextureName("erebus:sprintLeggings");
-		jumpBoots = new ItemJumpBoots(jumpBootsID, ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("jumpBoots").setTextureName("erebus:jumpBoots");
-		armorGlider = new ItemArmorGlider(armorGliderID, 1).setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
+		fossilClub = new ItemCavemanClub(ConfigHandler.fossilClubID).setFull3D().setUnlocalizedName("clubBone").setTextureName("erebus:clubBone");
+		waspSword = new ItemWaspSword(ConfigHandler.waspSwordID).setUnlocalizedName("waspSword").setTextureName("paper");
+		maxSpeedBow = new ItemMaxSpeedBow(ConfigHandler.maxSpeedBowID).setUnlocalizedName("maxSpeedBow").setTextureName("erebus:maxSpeedBow");
+		waspDagger = new ItemWaspDagger(ConfigHandler.waspDaggerID).setUnlocalizedName("waspDagger");
+		scorpionPincer = new ItemScorpionPincer(ConfigHandler.scorpionPincerID).setUnlocalizedName("scorpionPincer").setTextureName("paper");
+		webSlinger = new ItemWebSlinger(ConfigHandler.webSlingerID).setUnlocalizedName("webSlinger").setTextureName("paper");
+		blockExtractor = new ItemBlockExtractor(ConfigHandler.blockExtractorID).setFull3D().setUnlocalizedName("blockExtractor").setTextureName("erebus:blockExtractor");
 
-		spawnEggs = new ItemSpawnEggs(spawnEggsID).setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
+		reinCompoundGoggles = new ItemCompoundGoggles(ConfigHandler.reinCompoundGogglesID, ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
+		compoundGoggles = new ItemCompoundGoggles(ConfigHandler.compoundGogglesID, ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("compoundGoggles").setTextureName("erebus:compoundGoggles");
+		sprintLeggings = new ItemSprintLeggings(ConfigHandler.sprintLeggingsID, ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("sprintLeggings").setTextureName("erebus:sprintLeggings");
+		jumpBoots = new ItemJumpBoots(ConfigHandler.jumpBootsID, ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("jumpBoots").setTextureName("erebus:jumpBoots");
+		armorGlider = new ItemArmorGlider(ConfigHandler.armorGliderID, 1).setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
 
-		// Creative tabs
+		spawnEggs = new ItemSpawnEggs(ConfigHandler.spawnEggsID).setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
+	}
+
+	private static void initCreativeTabs() {
 		Erebus.tabErebusItem.add(erebusMaterials, erebusFood, turnip);
 		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
 			Erebus.tabErebusItem.add(metalIngot);
@@ -167,13 +133,9 @@ public class ModItems {
 		Erebus.tabErebusGear.add(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger);
 		Erebus.tabErebusGear.add(compoundGoggles, reinCompoundGoggles, armorGlider, sprintLeggings, jumpBoots, blockExtractor);
 		Erebus.tabErebusSpecial.add(portalActivator, bamBucket, bucketOfBeetleJuice, erebusSpecialItem, sprayCan, hornOfSummoning, spawnEggs);
-		
-		// Tool classes
-		MinecraftForge.setToolClass(jadeAxe, "axe", 2);
-		MinecraftForge.setToolClass(jadePickaxe, "pickaxe", 2);
-		MinecraftForge.setToolClass(jadeShovel, "shovel", 2);
+	}
 
-		// Registering items
+	private static void registerItems() {
 		GameRegistry.registerItem(portalActivator, "erebus.portalActivator");
 		GameRegistry.registerItem(erebusMaterials, "erebus.erebusMaterials");
 		GameRegistry.registerItem(erebusFood, "erebus.erebusFood");
@@ -221,9 +183,15 @@ public class ModItems {
 		GameRegistry.registerItem(sprintLeggings, "erebus.sprintLeggings");
 		GameRegistry.registerItem(jumpBoots, "erebus.jumpBoots");
 		GameRegistry.registerItem(armorGlider, "erebus.armorGlider");
+	}
 
-		// Furnace fuel
+	private static void registerProperties() {
+		MinecraftForge.setToolClass(jadeAxe, "axe", 2);
+		MinecraftForge.setToolClass(jadePickaxe, "pickaxe", 2);
+		MinecraftForge.setToolClass(jadeShovel, "shovel", 2);
+
 		GameRegistry.registerFuelHandler(new IFuelHandler() {
+
 			@Override
 			public int getBurnTime(ItemStack fuel) {
 				return fuel.itemID == erebusMaterials.itemID && fuel.getItemDamage() == ItemErebusMaterial.dataBamboo ? 300 : 0;

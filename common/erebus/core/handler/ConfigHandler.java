@@ -5,10 +5,11 @@ import java.util.logging.Level;
 
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import erebus.ModBiomes;
-import erebus.ModItems;
 import erebus.block.BlockPlanksErebus;
 import erebus.block.BlockUmberstone;
+import erebus.lib.Reference;
 
 public class ConfigHandler {
 
@@ -17,6 +18,7 @@ public class ConfigHandler {
 	public static byte beetleLarvaEating = 0;
 	public static boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium;
 
+	// BLOCKS
 	public static int portalErebusID, umberstoneID, umberOreBlockID, oreFossilID, redGemID, blockAmberID, quickSandID, ghostSandID;
 	public static int erebusOreExtraID, umberstoneButtonID, logErebusGroup1ID, logErebusGroup2ID, planksErebusID, leavesErebusID;
 	public static int erebusSaplingID, hollowLogAcaciaID, erebusFlowerID, erebusGrassID, thornsID, fernID, blockTurnipID;
@@ -29,8 +31,17 @@ public class ConfigHandler {
 	public static int waspNestBlockID;
 	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID;
 
-	public static void loadConfig(File configFile) {
-		config = new Configuration(configFile);
+	// ITEMS
+	public static int portalActivatorID, erebusMaterialsID, erebusFoodID, metalIngotID, bamBucketID, turnipID, sprayCanID;
+	public static int wandOfAnimationID, bucketOfBeetleJuiceID, hornOfSummoningID, erebusSpecialItemID, blockExtractorID;
+	public static int jadeHelmetID, jadeBodyID, jadeLegsID, jadeBootsID, jadeSwordID, jadePickaxeID, jadeAxeID, jadeShovelID;
+	public static int jadePaxelID, jadeHoeID, exoskeletonHelmetID, exoskeletonBodyID, exoskeletonLegsID, exoskeletonBootsID;
+	public static int reinExoskeletonHelmetID, reinExoskeletonBodyID, reinExoskeletonLegsID, reinExoskeletonBootsID, fossilClubID;
+	public static int waspSwordID, maxSpeedBowID, waspDaggerID, scorpionPincerID, webSlingerID, reinCompoundGogglesID, compoundGogglesID;
+	public static int sprintLeggingsID, jumpBootsID, armorGliderID, spawnEggsID;
+
+	public static void loadConfig(FMLPreInitializationEvent event) {
+		config = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
 
 		try {
 			config.load();
@@ -122,54 +133,54 @@ public class ConfigHandler {
 			// latest ID used (please update after adding new blocks!) >>> 2583
 
 			// Items
-			ModItems.portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
-			ModItems.erebusMaterialsID = config.getItem("Item ID of Erebus Materials", 9707).getInt(9707);
-			ModItems.erebusSpecialItemID = config.getItem("Item ID of Erebus Special Item", 9746).getInt(9746);
-			ModItems.erebusFoodID = config.getItem("Item ID of Erebus Food", 9708).getInt(9708);
-			ModItems.metalIngotID = config.getItem("Item ID of Metal Ingots", 9709).getInt(9709);
-			ModItems.bamBucketID = config.getItem("Item ID of Bambucket", 9710).getInt(9710);
-			ModItems.turnipID = config.getItem("Item ID of Turnips", 9711).getInt(9711);
-			ModItems.sprayCanID = config.getItem("Item ID of Insect Repellent", 9712).getInt(9712);
-			ModItems.wandOfAnimationID = config.getItem("ItemID of Wand of Animation", 9734).getInt(9734);
-			ModItems.bucketOfBeetleJuiceID = config.getItem("ItemID of Bucket Of Beetle Juice", 9742).getInt(9742);
-			ModItems.hornOfSummoningID = config.getItem("ItemID of Horn of The Swarm", 9744).getInt(9744);
+			portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
+			erebusMaterialsID = config.getItem("Item ID of Erebus Materials", 9707).getInt(9707);
+			erebusSpecialItemID = config.getItem("Item ID of Erebus Special Item", 9746).getInt(9746);
+			erebusFoodID = config.getItem("Item ID of Erebus Food", 9708).getInt(9708);
+			metalIngotID = config.getItem("Item ID of Metal Ingots", 9709).getInt(9709);
+			bamBucketID = config.getItem("Item ID of Bambucket", 9710).getInt(9710);
+			turnipID = config.getItem("Item ID of Turnips", 9711).getInt(9711);
+			sprayCanID = config.getItem("Item ID of Insect Repellent", 9712).getInt(9712);
+			wandOfAnimationID = config.getItem("ItemID of Wand of Animation", 9734).getInt(9734);
+			bucketOfBeetleJuiceID = config.getItem("ItemID of Bucket Of Beetle Juice", 9742).getInt(9742);
+			hornOfSummoningID = config.getItem("ItemID of Horn of The Swarm", 9744).getInt(9744);
 
-			ModItems.jadeHelmetID = config.getItem("Item ID of Jade Helmet", 9713).getInt(9713);
-			ModItems.jadeBodyID = config.getItem("Item ID of Jade Chestplate", 9714).getInt(9714);
-			ModItems.jadeLegsID = config.getItem("Item ID of Jade Leggings", 9715).getInt(9715);
-			ModItems.jadeBootsID = config.getItem("Item ID of Jade Boots", 9716).getInt(9716);
-			ModItems.jadeSwordID = config.getItem("Item ID of Jade Sword", 9717).getInt(9717);
-			ModItems.jadePickaxeID = config.getItem("Item ID of Jade Pickaxe", 9718).getInt(9718);
-			ModItems.jadeAxeID = config.getItem("Item ID of Jade Axe", 9719).getInt(9719);
-			ModItems.jadeShovelID = config.getItem("Item ID of Jade Shovel", 9720).getInt(9720);
-			ModItems.jadePaxelID = config.getItem("Item ID of Jade Paxel", 9721).getInt(9721);
-			ModItems.jadeHoeID = config.getItem("Item ID of Jade Hoe", 9722).getInt(9722);
+			jadeHelmetID = config.getItem("Item ID of Jade Helmet", 9713).getInt(9713);
+			jadeBodyID = config.getItem("Item ID of Jade Chestplate", 9714).getInt(9714);
+			jadeLegsID = config.getItem("Item ID of Jade Leggings", 9715).getInt(9715);
+			jadeBootsID = config.getItem("Item ID of Jade Boots", 9716).getInt(9716);
+			jadeSwordID = config.getItem("Item ID of Jade Sword", 9717).getInt(9717);
+			jadePickaxeID = config.getItem("Item ID of Jade Pickaxe", 9718).getInt(9718);
+			jadeAxeID = config.getItem("Item ID of Jade Axe", 9719).getInt(9719);
+			jadeShovelID = config.getItem("Item ID of Jade Shovel", 9720).getInt(9720);
+			jadePaxelID = config.getItem("Item ID of Jade Paxel", 9721).getInt(9721);
+			jadeHoeID = config.getItem("Item ID of Jade Hoe", 9722).getInt(9722);
 
-			ModItems.exoskeletonHelmetID = config.getItem("Item ID of Exoskeleton Helmet", 9723).getInt(9723);
-			ModItems.exoskeletonBodyID = config.getItem("Item ID of Exoskeleton Chestplate", 9724).getInt(9724);
-			ModItems.exoskeletonLegsID = config.getItem("Item ID of Exoskeleton Leggings", 9725).getInt(9725);
-			ModItems.exoskeletonBootsID = config.getItem("Item ID of Exoskeleton Boots", 9726).getInt(9726);
+			exoskeletonHelmetID = config.getItem("Item ID of Exoskeleton Helmet", 9723).getInt(9723);
+			exoskeletonBodyID = config.getItem("Item ID of Exoskeleton Chestplate", 9724).getInt(9724);
+			exoskeletonLegsID = config.getItem("Item ID of Exoskeleton Leggings", 9725).getInt(9725);
+			exoskeletonBootsID = config.getItem("Item ID of Exoskeleton Boots", 9726).getInt(9726);
 
-			ModItems.fossilClubID = config.getItem("Item ID of Caveman's Club", 9727).getInt(9727);
-			ModItems.waspSwordID = config.getItem("Item ID of Wasp Sword", 9728).getInt(9728);
-			ModItems.maxSpeedBowID = config.getItem("Item ID of MaxSpeed Bow", 9729).getInt(9729);
-			ModItems.waspDaggerID = config.getItem("Item ID of Wasp Dagger", 9733).getInt(9733);
-			ModItems.scorpionPincerID = config.getItem("Item ID of Scorpion Pincer", 9741).getInt(9741);
-			ModItems.webSlingerID = config.getItem("Item ID of Web Slinger", 9745).getInt(9745);
-			ModItems.blockExtractorID = config.getItem("Item ID of Block Extractor", 9747).getInt(9747);
+			fossilClubID = config.getItem("Item ID of Caveman's Club", 9727).getInt(9727);
+			waspSwordID = config.getItem("Item ID of Wasp Sword", 9728).getInt(9728);
+			maxSpeedBowID = config.getItem("Item ID of MaxSpeed Bow", 9729).getInt(9729);
+			waspDaggerID = config.getItem("Item ID of Wasp Dagger", 9733).getInt(9733);
+			scorpionPincerID = config.getItem("Item ID of Scorpion Pincer", 9741).getInt(9741);
+			webSlingerID = config.getItem("Item ID of Web Slinger", 9745).getInt(9745);
+			blockExtractorID = config.getItem("Item ID of Block Extractor", 9747).getInt(9747);
 
-			ModItems.compoundGogglesID = config.getItem("Item ID of Compound Goggles", 9730).getInt(9730);
-			ModItems.reinCompoundGogglesID = config.getItem("Item ID of Reinforced Compound Goggles", 9740).getInt(9740);
-			ModItems.sprintLeggingsID = config.getItem("Item ID of Sprint Leggings", 9731).getInt(9731);
-			ModItems.jumpBootsID = config.getItem("Item ID of Jump Boots", 9732).getInt(9732);
-			ModItems.armorGliderID = config.getItem("Item ID of Chest Armour Glider", 9735).getInt(9735);
+			compoundGogglesID = config.getItem("Item ID of Compound Goggles", 9730).getInt(9730);
+			reinCompoundGogglesID = config.getItem("Item ID of Reinforced Compound Goggles", 9740).getInt(9740);
+			sprintLeggingsID = config.getItem("Item ID of Sprint Leggings", 9731).getInt(9731);
+			jumpBootsID = config.getItem("Item ID of Jump Boots", 9732).getInt(9732);
+			armorGliderID = config.getItem("Item ID of Chest Armour Glider", 9735).getInt(9735);
 
-			ModItems.reinExoskeletonHelmetID = config.getItem("Item ID of Reinforced Exoskeleton Helmet", 9736).getInt(9736);
-			ModItems.reinExoskeletonBodyID = config.getItem("Item ID of Reinforced Exoskeleton Chestplate", 9737).getInt(9737);
-			ModItems.reinExoskeletonLegsID = config.getItem("Item ID of Reinforced Exoskeleton Leggings", 9738).getInt(9738);
-			ModItems.reinExoskeletonBootsID = config.getItem("Item ID of Reinforced Exoskeleton Boots", 9739).getInt(9739);
+			reinExoskeletonHelmetID = config.getItem("Item ID of Reinforced Exoskeleton Helmet", 9736).getInt(9736);
+			reinExoskeletonBodyID = config.getItem("Item ID of Reinforced Exoskeleton Chestplate", 9737).getInt(9737);
+			reinExoskeletonLegsID = config.getItem("Item ID of Reinforced Exoskeleton Leggings", 9738).getInt(9738);
+			reinExoskeletonBootsID = config.getItem("Item ID of Reinforced Exoskeleton Boots", 9739).getInt(9739);
 
-			ModItems.spawnEggsID = config.getItem("Item ID of Spawn Eggs", 9743).getInt(9743);
+			spawnEggsID = config.getItem("Item ID of Spawn Eggs", 9743).getInt(9743);
 
 			// latest ID used (please update after adding new items!) >>> 9747
 
@@ -179,18 +190,18 @@ public class ConfigHandler {
 			ModBiomes.subterraneanSavannahID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Subterranean Savannah", 153).getInt(153);
 			ModBiomes.elysianFieldsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Elysian Fields", 154).getInt(154);
 
-			ConfigHandler.erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
-			ConfigHandler.spawnPortalMobs = config.get(Configuration.CATEGORY_GENERAL, "Should spawn beetles and larvae in the portal", true).getBoolean(true);
-			ConfigHandler.beetleLarvaEating = (byte) config.get(Configuration.CATEGORY_GENERAL, "Beetle larva eating settings", 0, "0 = only wooden blocks except tile entities & logs, 1 = only wooden blocks except logs, 2 = anything").getInt(0);
-			ConfigHandler.bombardierBlockDestroy = config.get(Configuration.CATEGORY_GENERAL, "Bombardier Beetle Block destruction", true, "This will not stop block destruction for player attacks only collided with blocks!").getBoolean(true);
-			ConfigHandler.randomNames = config.get(Configuration.CATEGORY_GENERAL, "Random mob names", true).getBoolean(true);
-			ConfigHandler.playCustomSongs = config.get(Configuration.CATEGORY_GENERAL, "Play erebus songs", true).getBoolean(true);
+			erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
+			spawnPortalMobs = config.get(Configuration.CATEGORY_GENERAL, "Should spawn beetles and larvae in the portal", true).getBoolean(true);
+			beetleLarvaEating = (byte) config.get(Configuration.CATEGORY_GENERAL, "Beetle larva eating settings", 0, "0 = only wooden blocks except tile entities & logs, 1 = only wooden blocks except logs, 2 = anything").getInt(0);
+			bombardierBlockDestroy = config.get(Configuration.CATEGORY_GENERAL, "Bombardier Beetle Block destruction", true, "This will not stop block destruction for player attacks only collided with blocks!").getBoolean(true);
+			randomNames = config.get(Configuration.CATEGORY_GENERAL, "Random mob names", true).getBoolean(true);
+			playCustomSongs = config.get(Configuration.CATEGORY_GENERAL, "Play erebus songs", true).getBoolean(true);
 
-			ConfigHandler.lead = config.get(Configuration.CATEGORY_GENERAL, "Should generate lead?", false).getBoolean(false);
-			ConfigHandler.silver = config.get(Configuration.CATEGORY_GENERAL, "Should generate silver?", false).getBoolean(false);
-			ConfigHandler.copper = config.get(Configuration.CATEGORY_GENERAL, "Should generate copper?", false).getBoolean(false);
-			ConfigHandler.tin = config.get(Configuration.CATEGORY_GENERAL, "Should generate tin?", false).getBoolean(false);
-			ConfigHandler.aluminium = config.get(Configuration.CATEGORY_GENERAL, "Should generate aluminium?", false).getBoolean(false);
+			lead = config.get(Configuration.CATEGORY_GENERAL, "Should generate lead?", false).getBoolean(false);
+			silver = config.get(Configuration.CATEGORY_GENERAL, "Should generate silver?", false).getBoolean(false);
+			copper = config.get(Configuration.CATEGORY_GENERAL, "Should generate copper?", false).getBoolean(false);
+			tin = config.get(Configuration.CATEGORY_GENERAL, "Should generate tin?", false).getBoolean(false);
+			aluminium = config.get(Configuration.CATEGORY_GENERAL, "Should generate aluminium?", false).getBoolean(false);
 
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, "Erebus has had a problem loading its configuration");

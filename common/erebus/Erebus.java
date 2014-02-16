@@ -1,7 +1,5 @@
 package erebus;
 
-import java.io.File;
-
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -60,13 +58,13 @@ public class Erebus {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ConfigHandler.loadConfig(event);
+
 		if (event.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.register(new EntitySoundEvent());
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			AmbientMusicManager.register();
 		}
-
-		ConfigHandler.loadConfig(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
 
 		ModBlocks.init();
 		ModItems.init();
