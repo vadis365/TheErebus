@@ -16,12 +16,12 @@ import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import erebus.ModBlocks;
-import erebus.core.handler.ConfigurationHandler;
+import erebus.core.handler.ConfigHandler;
 
 public class TeleporterErebus extends Teleporter {
 
 	public static final TeleporterErebus TELEPORTER_TO_OVERWORLD = new TeleporterErebus(DimensionManager.getWorld(0));
-	public static final TeleporterErebus TELEPORTER_TO_EREBUS = new TeleporterErebus(DimensionManager.getWorld(ConfigurationHandler.erebusDimensionID));
+	public static final TeleporterErebus TELEPORTER_TO_EREBUS = new TeleporterErebus(DimensionManager.getWorld(ConfigHandler.erebusDimensionID));
 
 	private final WorldServer worldServerInstance;
 	private final Random random;

@@ -2,6 +2,7 @@ package erebus.world;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.entity.EnumCreatureType;
@@ -18,6 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import erebus.ModBlocks;
+import erebus.core.handler.ConfigHandler;
 import erebus.world.feature.structure.WorldGenSpiderDungeons;
 import erebus.world.structure.MapGenErebusRavine;
 
@@ -287,7 +289,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 						if (block == 0)
 							var13 = -1;
-						else if (block == ModBlocks.umberstone.blockID || block == ModBlocks.umberstoneID - 256)
+						else if (block == ModBlocks.umberstone.blockID || block == ConfigHandler.umberstoneID - 256)
 							if (var13 == -1) {
 								if (var12 <= 0) {
 									topBlock = 0;

@@ -29,7 +29,7 @@ public class ItemSprayCan extends Item {
 		else if (player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
 			int i1 = world.getBlockId(x, y, z);
 			Block block = Block.blocksList[i1];
-			int i2 = ModBlocks.insectRepellentID;
+			int i2 = ModBlocks.insectRepellent.blockID;
 			if (block != null && world.doesBlockHaveSolidTopSurface(x, y, z) && i1 != i2) {
 				world.setBlock(x, y + 1, z, i2);
 				PacketDispatcher.sendPacketToAllAround(x, y, z, 64D, world.provider.dimensionId, PacketHandler.buildPacket(2, PacketParticle.SPRAY_CAN));

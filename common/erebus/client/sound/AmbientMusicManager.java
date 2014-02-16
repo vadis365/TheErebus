@@ -20,7 +20,7 @@ import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.ConfigurationHandler;
+import erebus.core.handler.ConfigHandler;
 import erebus.lib.Reference;
 
 @SideOnly(Side.CLIENT)
@@ -65,8 +65,8 @@ public class AmbientMusicManager implements IScheduledTickHandler {
 
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-		if (ConfigurationHandler.playCustomSongs)
-			if (!sndMan.sndSystem.playing("BgMusic") && rand.nextInt(15) == 0 && ((EntityPlayer) tickData[0]).dimension == ConfigurationHandler.erebusDimensionID) {
+		if (ConfigHandler.playCustomSongs)
+			if (!sndMan.sndSystem.playing("BgMusic") && rand.nextInt(15) == 0 && ((EntityPlayer) tickData[0]).dimension == ConfigHandler.erebusDimensionID) {
 				List<Entry<String, URL>> entries = new ArrayList<Entry<String, URL>>(poolAmbient.entrySet());
 				if (entries.size() == 0)
 					return;
@@ -86,7 +86,7 @@ public class AmbientMusicManager implements IScheduledTickHandler {
 	}
 
 	public void play(Entry<String, URL> entry) {
-		if (ConfigurationHandler.playCustomSongs) {
+		if (ConfigHandler.playCustomSongs) {
 			sndMan.sndSystem.backgroundMusic("BgMusic", entry.getValue(), entry.getKey(), false);
 			sndMan.sndSystem.setVolume("BgMusic", Minecraft.getMinecraft().gameSettings.musicVolume);
 			sndMan.sndSystem.play("BgMusic");

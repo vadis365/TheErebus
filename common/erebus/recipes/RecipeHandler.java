@@ -12,7 +12,7 @@ import erebus.ModItems;
 import erebus.block.BlockErebusFlower.FLOWER_BLOCK_TYPE;
 import erebus.block.BlockLogErebus;
 import erebus.block.BlockPlanksErebus;
-import erebus.core.handler.ConfigurationHandler;
+import erebus.core.handler.ConfigHandler;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemErebusMaterial;
 import erebus.item.ItemErebusSpecial;
@@ -226,27 +226,27 @@ public class RecipeHandler {
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.WHITE_PETAL.ordinal()));
 
-		if (ConfigurationHandler.lead) {
+		if (ConfigHandler.lead) {
 			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));
 			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.erebusOreExtra, 1, 2));
 			FurnaceRecipes.smelting().addSmelting(ModBlocks.erebusOreExtra.blockID, 2, new ItemStack(ModItems.metalIngot, 1, 1), 1.0F);
 		}
-		if (ConfigurationHandler.silver) {
+		if (ConfigHandler.silver) {
 			OreDictionary.registerOre("ingotSilver", new ItemStack(ModItems.metalIngot, 1, 2));
 			OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.erebusOreExtra, 1, 3));
 			FurnaceRecipes.smelting().addSmelting(ModBlocks.erebusOreExtra.blockID, 3, new ItemStack(ModItems.metalIngot, 1, 2), 1.0F);
 		}
-		if (ConfigurationHandler.copper) {
+		if (ConfigHandler.copper) {
 			OreDictionary.registerOre("ingotCopper", new ItemStack(ModItems.metalIngot, 1, 0));
 			OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.erebusOreExtra, 1, 1));
 			FurnaceRecipes.smelting().addSmelting(ModBlocks.erebusOreExtra.blockID, 1, new ItemStack(ModItems.metalIngot, 1, 0), 1.0F);
 		}
-		if (ConfigurationHandler.tin) {
+		if (ConfigHandler.tin) {
 			OreDictionary.registerOre("ingotTin", new ItemStack(ModItems.metalIngot, 1, 3));
 			OreDictionary.registerOre("oreTin", new ItemStack(ModBlocks.erebusOreExtra, 1, 4));
 			FurnaceRecipes.smelting().addSmelting(ModBlocks.erebusOreExtra.blockID, 4, new ItemStack(ModItems.metalIngot, 1, 3), 1.0F);
 		}
-		if (ConfigurationHandler.aluminium)
+		if (ConfigHandler.aluminium)
 			OreDictionary.registerOre("oreAluminum", new ItemStack(ModBlocks.erebusOreExtra, 1, 0));
 	}
 }

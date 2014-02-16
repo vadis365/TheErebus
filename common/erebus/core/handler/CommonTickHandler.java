@@ -40,7 +40,7 @@ public class CommonTickHandler implements ITickHandler {
 			Erebus.teleportHandler.onTick(player);
 		} else if (type.equals(EnumSet.of(TickType.WORLD))) {
 			World world = (World) tickData[0];
-			if (world.provider.dimensionId == ConfigurationHandler.erebusDimensionID) {
+			if (world.provider.dimensionId == ConfigHandler.erebusDimensionID) {
 				TeleporterErebus.TELEPORTER_TO_EREBUS.removeStalePortalLocations(world.getTotalWorldTime());
 				TeleporterErebus.TELEPORTER_TO_OVERWORLD.removeStalePortalLocations(world.getTotalWorldTime());
 			}

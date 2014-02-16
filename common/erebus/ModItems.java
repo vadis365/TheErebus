@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.core.handler.ConfigurationHandler;
+import erebus.core.handler.ConfigHandler;
 import erebus.item.ItemArmorGlider;
 import erebus.item.ItemBambucket;
 import erebus.item.ItemBlockExtractor;
@@ -111,7 +111,7 @@ public class ModItems {
 		erebusMaterials = new ItemErebusMaterial(erebusMaterialsID).setUnlocalizedName("erebusMaterials");
 		erebusSpecialItem = new ItemErebusSpecial(erebusSpecialItemID).setUnlocalizedName("erebusSpecialItem");
 		erebusFood = new ItemErebusFood(erebusFoodID).setUnlocalizedName("erebusFood");
-		if (ConfigurationHandler.lead || ConfigurationHandler.silver || ConfigurationHandler.copper || ConfigurationHandler.tin || ConfigurationHandler.aluminium)
+		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
 			metalIngot = new ItemMetalIngots(metalIngotID);
 		bamBucket = new ItemBambucket(bamBucketID).setUnlocalizedName("bamBucket");
 		turnip = new ItemSeedFood(turnipID, 4, 0.6F, ModBlocks.blockTurnip.blockID, Block.tilledField.blockID).setUnlocalizedName("turnips").setTextureName("erebus:turnips");
@@ -159,7 +159,7 @@ public class ModItems {
 
 		// Creative tabs
 		Erebus.tabErebusItem.add(erebusMaterials, erebusFood, turnip);
-		if (ConfigurationHandler.lead || ConfigurationHandler.silver || ConfigurationHandler.copper || ConfigurationHandler.tin || ConfigurationHandler.aluminium)
+		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
 			Erebus.tabErebusItem.add(metalIngot);
 
 		Erebus.tabErebusGear.add(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
@@ -178,7 +178,7 @@ public class ModItems {
 		GameRegistry.registerItem(erebusMaterials, "erebus.erebusMaterials");
 		GameRegistry.registerItem(erebusFood, "erebus.erebusFood");
 		GameRegistry.registerItem(erebusSpecialItem, "erebus.erebusSpecialItem");
-		if (ConfigurationHandler.lead || ConfigurationHandler.silver || ConfigurationHandler.copper || ConfigurationHandler.tin || ConfigurationHandler.aluminium)
+		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
 			GameRegistry.registerItem(metalIngot, "erebus.metalIngot");
 		GameRegistry.registerItem(bamBucket, "erebus.bamBucket");
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(bamBucket, 1, 1), new ItemStack(bamBucket, 1, 0));

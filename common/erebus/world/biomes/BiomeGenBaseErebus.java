@@ -1,5 +1,5 @@
 package erebus.world.biomes;
-import static erebus.core.handler.ConfigurationHandler.*;
+import static erebus.core.handler.ConfigHandler.*;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;

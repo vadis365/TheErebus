@@ -18,13 +18,14 @@ public class BlockGlowingJar extends BlockContainer {
 	public BlockGlowingJar(int id) {
 		super(id, Material.glass);
 		setCreativeTab(CreativeTabs.tabBlock);
-		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);;
+		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);
+		;
 		setLightValue(1.0F);
 	}
 
 	@Override
 	public int idDropped(int meta, Random rand, int fortune) {
-		return ModBlocks.glowingJarID;
+		return blockID;
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class BlockGlowingJar extends BlockContainer {
 	}
 
 	public static boolean isIdAJar(int id) {
-		return id == ModBlocks.glowingJarID;
+		return id == ModBlocks.glowingJar.blockID;
 	}
 
 	@Override

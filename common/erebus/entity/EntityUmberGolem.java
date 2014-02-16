@@ -145,7 +145,7 @@ public class EntityUmberGolem extends EntityCreature implements IMob {
 
 			if (l1 == 3)
 				b0 = 4;
-			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY + 0.1D), MathHelper.floor_double(posZ), ModBlocks.umberGolemStatueID, b0, 3);
+			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY + 0.1D), MathHelper.floor_double(posZ), ModBlocks.umberGolemStatue.blockID, b0, 3);
 			worldObj.playSoundEffect(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), "erebus:altaroffering", 0.2F, 1.0F);
 			return true;
 		} else

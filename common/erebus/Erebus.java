@@ -1,10 +1,13 @@
 package erebus;
 
 import java.io.File;
+
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -22,7 +25,7 @@ import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
 import erebus.client.sound.EntitySoundEvent;
 import erebus.core.handler.CommonTickHandler;
-import erebus.core.handler.ConfigurationHandler;
+import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.PlayerTeleportHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.creativetab.CreativeTabErebus;
@@ -52,7 +55,7 @@ public class Erebus {
 	public static CreativeTabErebus tabErebusItem = new CreativeTabErebusItem("erebus.item");
 	public static CreativeTabErebus tabErebusGear = new CreativeTabErebusGear("erebus.gear");
 	public static CreativeTabErebus tabErebusSpecial = new CreativeTabErebusSpecialItem("erebus.special");
-	
+
 	public static PlayerTeleportHandler teleportHandler = new PlayerTeleportHandler();
 
 	@EventHandler
@@ -63,7 +66,7 @@ public class Erebus {
 			AmbientMusicManager.register();
 		}
 
-		ConfigurationHandler.loadConfig(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
+		ConfigHandler.loadConfig(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
 
 		ModBlocks.init();
 		ModItems.init();
@@ -72,8 +75,8 @@ public class Erebus {
 		GameRegistry.registerPlayerTracker(teleportHandler);
 		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
 
-		DimensionManager.registerProviderType(ConfigurationHandler.erebusDimensionID, WorldProviderErebus.class, true);
-		DimensionManager.registerDimension(ConfigurationHandler.erebusDimensionID, ConfigurationHandler.erebusDimensionID);
+		DimensionManager.registerProviderType(ConfigHandler.erebusDimensionID, WorldProviderErebus.class, true);
+		DimensionManager.registerDimension(ConfigHandler.erebusDimensionID, ConfigHandler.erebusDimensionID);
 	}
 
 	@EventHandler
@@ -92,7 +95,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModItems.armorGlider);
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
 
-		if (ConfigurationHandler.randomNames)
+		if (ConfigHandler.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);

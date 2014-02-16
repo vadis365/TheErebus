@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.core.handler.ConfigurationHandler;
+import erebus.core.handler.ConfigHandler;
 import erebus.entity.ai.EntityAIExplodeAttackOnCollide;
 import erebus.item.ItemErebusMaterial;
 
@@ -106,8 +106,8 @@ public class EntityBombardierBeetle extends EntityMob {
 		int x = (int) (posX - Math.sin(direction) * 2.0D);
 		int y = (int) posY;
 		int z = (int) (posZ + Math.cos(direction) * 2.0D);
-		if (worldObj.getBlockId(x, y, z) != ModBlocks.reinExoID)
-			if (ConfigurationHandler.bombardierBlockDestroy == true) {
+		if (worldObj.getBlockId(x, y, z) != ModBlocks.reinExo.blockID)
+			if (ConfigHandler.bombardierBlockDestroy == true) {
 				worldObj.createExplosion(this, posX - Math.sin(direction) * 1.5D, posY + 1, posZ + Math.cos(direction) * 1.5D, explosionRadius, rule);
 				worldObj.destroyBlock(x, y, z, true);
 			}

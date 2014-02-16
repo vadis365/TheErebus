@@ -9,7 +9,7 @@ import erebus.ModBlocks;
 import erebus.block.BlockBambooCrop;
 import erebus.block.BlockBambooTorch;
 import erebus.block.BlockHollowLog;
-import erebus.core.handler.ConfigurationHandler;
+import erebus.core.handler.ConfigHandler;
 import erebus.entity.EntityBeetleLarva;
 
 public class EntityAIEatWoodenItem extends EntityAIEatBlock {
@@ -39,11 +39,11 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		if (blockID == ModBlocks.plankStairs[9].blockID)
 			return false;
 
-		if (ConfigurationHandler.beetleLarvaEating == 2)
+		if (ConfigHandler.beetleLarvaEating == 2)
 			return true;
 		else if (block.blockMaterial != Material.wood || block instanceof BlockLog || block instanceof BlockBambooCrop || block instanceof BlockHollowLog || block instanceof BlockMushroomCap || block instanceof BlockBambooTorch)
 			return false;
-		else if (ConfigurationHandler.beetleLarvaEating == 0 && block.hasTileEntity(blockMeta))
+		else if (ConfigHandler.beetleLarvaEating == 0 && block.hasTileEntity(blockMeta))
 			return false;
 
 		return true;

@@ -58,7 +58,7 @@ import erebus.block.BlockWallErebus;
 import erebus.block.BlockWaspNest;
 import erebus.block.BlockWaspSpawner;
 import erebus.block.BlockWitherWeb;
-import erebus.core.handler.ConfigurationHandler;
+import erebus.core.handler.ConfigHandler;
 import erebus.item.block.ItemBlockAmber;
 import erebus.item.block.ItemBlockColoredSingle;
 import erebus.item.block.ItemBlockErebusFlower;
@@ -80,185 +80,142 @@ import erebus.item.block.ItemBlockWallErebus;
 
 public class ModBlocks {
 
-	//@formatter:off
-
 	// PORTAL
-	public static BlockPortalErebus portalErebus;		public static int portalErebusID;
+	public static BlockPortalErebus portalErebus;
 
 	// TERRAIN AND ORES
-	public static Block umberstone;         			public static int umberstoneID;
-	public static Block umberOreBlock;     				public static int umberOreBlockID;
-	public static Block oreFossil;      				public static int oreFossilID;
-	public static Block redGem;       					public static int redGemID;
-	public static Block blockAmber;      				public static int blockAmberID;
-	public static Block quickSand;      				public static int quickSandID;
-	public static Block ghostSand;						public static int ghostSandID;
-	public static Block erebusOreExtra;      			public static int erebusOreExtraID;
-	public static Block umberstoneButton;				public static int umberstoneButtonID;
+	public static Block umberstone, umberOreBlock, oreFossil, redGem, blockAmber, quickSand, ghostSand, erebusOreExtra, umberstoneButton;
 
 	// WOOD
-	public static Block logErebusGroup1;            	public static int logErebusGroup1ID;
-	public static Block logErebusGroup2;             	public static int logErebusGroup2ID;
-	public static Block planksErebus;             		public static int planksErebusID;
-	public static BlockLeavesErebus leavesErebus;  		public static int leavesErebusID;
-	public static Block erebusSapling;     				public static int erebusSaplingID;
-	public static Block hollowLogAcacia;    			public static int hollowLogAcaciaID;
-	public static Block erebusFlower;					public static int erebusFlowerID;
+	public static Block logErebusGroup1, logErebusGroup2, planksErebus, erebusSapling, hollowLogAcacia, erebusFlower;
+	public static BlockLeavesErebus leavesErebus;
 
 	// UNDERGROWTH
-	public static Block erebusGrass;     				public static int erebusGrassID;
-	public static Block thorns;       					public static int thornsID;
-	public static BlockFern fern;      					public static int fernID;
-	public static Block blockTurnip;     				public static int blockTurnipID;
-	public static Block fiddlehead;      				public static int fiddleheadID;
+	public static Block erebusGrass, thorns, blockTurnip, fiddlehead;
+	public static BlockFern fern;
 
 	// DECORATIONS AND UTILITIES
-	public static Block blockSilk;      				public static int blockSilkID;
-	public static Block mirBrick;      					public static int mirBrickID;
-	public static Block petrifiedWoodPlanks;   			public static int petrifiedWoodPlanksID;
-	public static Block petrifiedCraftingTable;  		public static int petrifiedCraftingTableID;
-	public static Block bambooCrate;          			public static int bambooCrateID;
-	public static Block umberFurnace;					public static int umberFurnaceID;
-	public static Block umberFurnace_on;				public static int umberFurnace_onID;
-	public static Block umberPaver;						public static int umberPaverID;
-	public static Block insectRepellent;				public static int insectRepellentID;
-	public static Block bambooShoot;					public static int bambooShootID;
-	public static Block bambooCrop;						public static int bambooCropID;
-	public static Block bambooTorch;					public static int bambooTorchID;
-	public static Block erebusAltar;					public static int erebusAltarID;
-	public static Block erebusAltarLightning;			public static int erebusAltarLightningID;
-	public static Block erebusAltarHealing;				public static int erebusAltarHealingID;
-	public static Block erebusAltarXP;					public static int erebusAltarXPID;
-	public static Block erebusAltarRepair;				public static int erebusAltarRepairID;
-	public static Block glowingJar;						public static int glowingJarID;
-	public static Block reinExo;						public static int reinExoID;
-	public static Block bambooLadder;					public static int bambooLadderID;
-	public static Block bambooBridge;					public static int bambooBridgeID;
-	public static Block umberGolemStatue;				public static int umberGolemStatueID;
-	public static Block petrifiedWoodChest;				public static int petrifiedWoodChestID;
-	public static Block blockBones;						public static int blockBonesID;
-	public static Block blockWitherWeb;					public static int blockWitherWebID;
-	public static Block extenderThingy;					public static int extenderThingyID;
-	public static Block bambooPole;						public static int bambooPoleID;
-	public static Block umberstonePillar;				public static int umberstonePillarID;
-	public static Block velocityBlock;					public static int velocityBlockID;
+	public static Block blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, umberFurnace, umberFurnace_on;
+	public static Block umberPaver, insectRepellent, bambooShoot, bambooCrop, bambooTorch, erebusAltar, erebusAltarLightning;
+	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
+	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
+	public static Block velocityBlock;
 
 	// STAIRS, SLABS, WALLS
-	public static Block[] umbercobbleStairs;			public static int[] umbercobbleStairsID;
-	public static Block[] plankStairs;     				public static int[] plankStairsID;
-	public static Block petrifiedWoodStairs;  		  	public static int petrifiedWoodStairsID;
-	public static Block[] stoneSlabs;					public static int[] stoneSlabsID;
-	public static Block[] plankSlabs;					public static int[] plankSlabsID;
-	public static Block wallErebus;						public static int wallErebusID;
-	public static Block[] petrifiedWoodSlab;			public static int[] petrifiedWoodSlabID;
-	public static Block amberBrickStairs;				public static int amberBrickStairsID;
-	public static Block waspNestStairs;    				public static int waspNestStairsID;
+	public static Block[] umbercobbleStairs, plankStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab;
+	public static Block wallErebus, petrifiedWoodStairs, amberBrickStairs, waspNestStairs;
 
 	// DUNGEONS
-	public static Block spiderSpawner;     				public static int spiderSpawnerID;
-	public static Block jumpingSpiderSpawner;    		public static int jumpingSpiderSpawnerID;
-	public static Block waspSpawner;    				public static int waspSpawnerID;
-	public static Block waspNestBlock;    				public static int waspNestBlockID;
-
-	//@formatter:on
+	public static Block spiderSpawner, jumpingSpiderSpawner, waspSpawner, waspNestBlock;
 
 	public static void init() {
-		// Block declaration: constructor, hardness, resistance, light value,
-		// light opacity, step sound, creative tab (null), unlocalized name,
-		// texture name
-		portalErebus = (BlockPortalErebus) new BlockPortalErebus(portalErebusID).setHardness(-1F).setLightValue(1.0F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("portalErebus");
+		initBlocks();
+		initCreativeTabs();
+		registerBlocks();
+		registerProperties();
+	}
 
-		umberstone = new BlockUmberstone(umberstoneID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstone");
-		umberOreBlock = new BlockErebusOre(umberOreBlockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("oreBlockU");
-		oreFossil = new BlockOreFossil(oreFossilID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("oreFossilU").setTextureName("erebus:oreFossilU");
-		redGem = new BlockRedGem(redGemID).setHardness(0.3F).setLightValue(1F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("redGem");
-		blockAmber = new BlockAmber(blockAmberID).setHardness(1.5F).setResistance(10.0F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("blockAmber");
-		quickSand = new BlockQuickSand(quickSandID).setHardness(28F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("quickSand").setTextureName("erebus:quickSand");
-		ghostSand = new BlockGhostSand(ghostSandID).setHardness(0.42F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("ghostSand").setTextureName("erebus:ghostSand");
-		erebusOreExtra = new BlockErebusOreExtras(erebusOreExtraID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("erebusOreExtras");
-		umberstoneButton = new BlockButtonUmberstone(umberstoneButtonID).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstoneButton");
+	private static void initBlocks() {
+		portalErebus = (BlockPortalErebus) new BlockPortalErebus(ConfigHandler.portalErebusID).setHardness(-1F).setLightValue(1.0F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("portalErebus");
 
-		logErebusGroup1 = new BlockLogErebus(logErebusGroup1ID, 0).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus1");
-		logErebusGroup2 = new BlockLogErebus(logErebusGroup2ID, 1).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus2");
-		planksErebus = new BlockPlanksErebus(planksErebusID).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("planksErebus");
-		leavesErebus = (BlockLeavesErebus) new BlockLeavesErebus(leavesErebusID).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("leavesErebus");
-		erebusSapling = new BlockSaplingErebus(erebusSaplingID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("sapling_mahogany");
-		hollowLogAcacia = new BlockHollowLog(hollowLogAcaciaID).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hollowLogAcacia");
-		erebusFlower = new BlockErebusFlower(erebusFlowerID).setHardness(1.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFlower");
+		umberstone = new BlockUmberstone(ConfigHandler.umberstoneID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstone");
+		umberOreBlock = new BlockErebusOre(ConfigHandler.umberOreBlockID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("oreBlockU");
+		oreFossil = new BlockOreFossil(ConfigHandler.oreFossilID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("oreFossilU").setTextureName("erebus:oreFossilU");
+		redGem = new BlockRedGem(ConfigHandler.redGemID).setHardness(0.3F).setLightValue(1F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("redGem");
+		blockAmber = new BlockAmber(ConfigHandler.blockAmberID).setHardness(1.5F).setResistance(10.0F).setLightOpacity(3).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("blockAmber");
+		quickSand = new BlockQuickSand(ConfigHandler.quickSandID).setHardness(28F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("quickSand").setTextureName("erebus:quickSand");
+		ghostSand = new BlockGhostSand(ConfigHandler.ghostSandID).setHardness(0.42F).setStepSound(Block.soundSandFootstep).setUnlocalizedName("ghostSand").setTextureName("erebus:ghostSand");
+		erebusOreExtra = new BlockErebusOreExtras(ConfigHandler.erebusOreExtraID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("erebusOreExtras");
+		umberstoneButton = new BlockButtonUmberstone(ConfigHandler.umberstoneButtonID).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstoneButton");
 
-		erebusGrass = new BlockErebusGrass(erebusGrassID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusTallGrass").setTextureName("erebus:tallgrass");
-		thorns = new BlockThorns(thornsID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("thorns").setTextureName("erebus:thorns");
-		fern = (BlockFern) new BlockFern(fernID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFern");
-		blockTurnip = new BlockTurnip(blockTurnipID).setUnlocalizedName("turnips");
-		fiddlehead = new BlockFiddlehead(fiddleheadID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFiddlehead");
+		logErebusGroup1 = new BlockLogErebus(ConfigHandler.logErebusGroup1ID, 0).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus1");
+		logErebusGroup2 = new BlockLogErebus(ConfigHandler.logErebusGroup2ID, 1).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus2");
+		planksErebus = new BlockPlanksErebus(ConfigHandler.planksErebusID).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("planksErebus");
+		leavesErebus = (BlockLeavesErebus) new BlockLeavesErebus(ConfigHandler.leavesErebusID).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("leavesErebus");
+		erebusSapling = new BlockSaplingErebus(ConfigHandler.erebusSaplingID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("sapling_mahogany");
+		hollowLogAcacia = new BlockHollowLog(ConfigHandler.hollowLogAcaciaID).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hollowLogAcacia");
+		erebusFlower = new BlockErebusFlower(ConfigHandler.erebusFlowerID).setHardness(1.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFlower");
 
-		blockSilk = new Block(blockSilkID, Material.cloth).setHardness(0.2F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("blockSilk").setTextureName("erebus:blockSilk");
-		mirBrick = new Block(mirBrickID, Material.rock).setHardness(1.5F).setResistance(100.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("mirbrick").setTextureName("erebus:mirbrick");
-		petrifiedWoodPlanks = new Block(petrifiedWoodPlanksID, Material.rock).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("petrifiedWoodPlanks").setTextureName("erebus:petrifiedWoodPlanks");
-		petrifiedCraftingTable = new BlockPetrifiedCraftingTable(petrifiedCraftingTableID).setHardness(2.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("petrifiedCraftingTable");
-		bambooCrate = new BlockBambooCrate(bambooCrateID).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bambooCrate");
-		umberFurnace = new BlockUmberFurnace(umberFurnaceID, false).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberFurnaceOFF");
-		umberFurnace_on = new BlockUmberFurnace(umberFurnace_onID, true).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberFurnaceON");
-		umberPaver = new BlockUmberPaver(umberPaverID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberPaver");
-		insectRepellent = new BlockInsectRepellent(insectRepellentID).setUnlocalizedName("insectRepellent");
-		bambooShoot = new BlockBambooShoot(bambooShootID).setCreativeTab(null).setUnlocalizedName("bambooShoot").setTextureName("erebus:bambooShoot");
-		bambooCrop = new BlockBambooCrop(bambooCropID).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bambooCrop").setTextureName("erebus:bambooCropBase");
-		bambooTorch = new BlockBambooTorch(bambooTorchID).setHardness(0.0F).setUnlocalizedName("bambooTorch");
-		erebusAltar = new BlockErebusAltar(erebusAltarID).setUnlocalizedName("erebusAltar");
-		erebusAltarLightning = new BlockErebusAltarLightning(erebusAltarLightningID).setUnlocalizedName("erebusAltarLightning");
-		erebusAltarHealing = new BlockErebusAltarHealing(erebusAltarHealingID).setUnlocalizedName("erebusAltarHealing");
-		erebusAltarXP = new BlockErebusAltarXP(erebusAltarXPID).setUnlocalizedName("erebusAltarXP");
-		erebusAltarRepair = new BlockErebusAltarRepair(erebusAltarRepairID).setUnlocalizedName("erebusAltarRepair");
-		glowingJar = new BlockGlowingJar(glowingJarID).setUnlocalizedName("glowingJar");
-		reinExo = new BlockReinExo(reinExoID).setHardness(1.5F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("reinExo").setTextureName("erebus:blockReinExo");
-		bambooLadder = new BlockBambooLadder(bambooLadderID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("bambooLadder").setTextureName("erebus:bambooLadder");
-		umberGolemStatue = new BlockUmberGolemStatue(umberGolemStatueID).setUnlocalizedName("umberGolemStatue");
-		waspNestBlock = new BlockWaspNest(waspNestBlockID).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestBlock").setTextureName("erebus:waspNestBlock");
-		petrifiedWoodChest = new BlockPetrifiedChest(petrifiedWoodChestID).setHardness(2.0F).setUnlocalizedName("petrifiedWoodChest").setTextureName("erebus:petrifiedWoodPlanks");
-		blockBones = new BlockBones(blockBonesID).setUnlocalizedName("blockBones");
-		blockWitherWeb = new BlockWitherWeb(blockWitherWebID).setHardness(4.0F).setUnlocalizedName("witherWeb").setTextureName("erebus:witherWeb");
-		bambooBridge = new BlockBambooBridge(bambooBridgeID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("bambooBridge").setTextureName("erebus:bambooBridge");
-		extenderThingy = new BlockExtenderThingy(extenderThingyID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("extenderThingy").setTextureName("erebus:extenderThingy");
-		bambooPole = new BlockBambooPole(bambooPoleID).setHardness(0.4F).setUnlocalizedName("bambooPole").setTextureName("erebus:blockBambooPole");
-		umberstonePillar = new BlockUmberstonePillar(umberstonePillarID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstonePillar").setTextureName("erebus:umberstonePillarSides");
-		velocityBlock = new BlockVelocity(velocityBlockID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("velocityBlock").setTextureName("erebus:blockSpeed0");
+		erebusGrass = new BlockErebusGrass(ConfigHandler.erebusGrassID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusTallGrass").setTextureName("erebus:tallgrass");
+		thorns = new BlockThorns(ConfigHandler.thornsID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("thorns").setTextureName("erebus:thorns");
+		fern = (BlockFern) new BlockFern(ConfigHandler.fernID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFern");
+		blockTurnip = new BlockTurnip(ConfigHandler.blockTurnipID).setUnlocalizedName("turnips");
+		fiddlehead = new BlockFiddlehead(ConfigHandler.fiddleheadID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFiddlehead");
+
+		blockSilk = new Block(ConfigHandler.blockSilkID, Material.cloth).setHardness(0.2F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("blockSilk").setTextureName("erebus:blockSilk");
+		mirBrick = new Block(ConfigHandler.mirBrickID, Material.rock).setHardness(1.5F).setResistance(100.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("mirbrick").setTextureName("erebus:mirbrick");
+		petrifiedWoodPlanks = new Block(ConfigHandler.petrifiedWoodPlanksID, Material.rock).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("petrifiedWoodPlanks").setTextureName("erebus:petrifiedWoodPlanks");
+		petrifiedCraftingTable = new BlockPetrifiedCraftingTable(ConfigHandler.petrifiedCraftingTableID).setHardness(2.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("petrifiedCraftingTable");
+		bambooCrate = new BlockBambooCrate(ConfigHandler.bambooCrateID).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bambooCrate");
+		umberFurnace = new BlockUmberFurnace(ConfigHandler.umberFurnaceID, false).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberFurnaceOFF");
+		umberFurnace_on = new BlockUmberFurnace(ConfigHandler.umberFurnace_onID, true).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberFurnaceON");
+		umberPaver = new BlockUmberPaver(ConfigHandler.umberPaverID).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberPaver");
+		insectRepellent = new BlockInsectRepellent(ConfigHandler.insectRepellentID).setUnlocalizedName("insectRepellent");
+		bambooShoot = new BlockBambooShoot(ConfigHandler.bambooShootID).setCreativeTab(null).setUnlocalizedName("bambooShoot").setTextureName("erebus:bambooShoot");
+		bambooCrop = new BlockBambooCrop(ConfigHandler.bambooCropID).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bambooCrop").setTextureName("erebus:bambooCropBase");
+		bambooTorch = new BlockBambooTorch(ConfigHandler.bambooTorchID).setHardness(0.0F).setUnlocalizedName("bambooTorch");
+		erebusAltar = new BlockErebusAltar(ConfigHandler.erebusAltarID).setUnlocalizedName("erebusAltar");
+		erebusAltarLightning = new BlockErebusAltarLightning(ConfigHandler.erebusAltarLightningID).setUnlocalizedName("erebusAltarLightning");
+		erebusAltarHealing = new BlockErebusAltarHealing(ConfigHandler.erebusAltarHealingID).setUnlocalizedName("erebusAltarHealing");
+		erebusAltarXP = new BlockErebusAltarXP(ConfigHandler.erebusAltarXPID).setUnlocalizedName("erebusAltarXP");
+		erebusAltarRepair = new BlockErebusAltarRepair(ConfigHandler.erebusAltarRepairID).setUnlocalizedName("erebusAltarRepair");
+		glowingJar = new BlockGlowingJar(ConfigHandler.glowingJarID).setUnlocalizedName("glowingJar");
+		reinExo = new BlockReinExo(ConfigHandler.reinExoID).setHardness(1.5F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("reinExo").setTextureName("erebus:blockReinExo");
+		bambooLadder = new BlockBambooLadder(ConfigHandler.bambooLadderID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("bambooLadder").setTextureName("erebus:bambooLadder");
+		umberGolemStatue = new BlockUmberGolemStatue(ConfigHandler.umberGolemStatueID).setUnlocalizedName("umberGolemStatue");
+		waspNestBlock = new BlockWaspNest(ConfigHandler.waspNestBlockID).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestBlock").setTextureName("erebus:waspNestBlock");
+		petrifiedWoodChest = new BlockPetrifiedChest(ConfigHandler.petrifiedWoodChestID).setHardness(2.0F).setUnlocalizedName("petrifiedWoodChest").setTextureName("erebus:petrifiedWoodPlanks");
+		blockBones = new BlockBones(ConfigHandler.blockBonesID).setUnlocalizedName("blockBones");
+		blockWitherWeb = new BlockWitherWeb(ConfigHandler.blockWitherWebID).setHardness(4.0F).setUnlocalizedName("witherWeb").setTextureName("erebus:witherWeb");
+		bambooBridge = new BlockBambooBridge(ConfigHandler.bambooBridgeID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("bambooBridge").setTextureName("erebus:bambooBridge");
+		extenderThingy = new BlockExtenderThingy(ConfigHandler.extenderThingyID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("extenderThingy").setTextureName("erebus:extenderThingy");
+		bambooPole = new BlockBambooPole(ConfigHandler.bambooPoleID).setHardness(0.4F).setUnlocalizedName("bambooPole").setTextureName("erebus:blockBambooPole");
+		umberstonePillar = new BlockUmberstonePillar(ConfigHandler.umberstonePillarID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstonePillar").setTextureName("erebus:umberstonePillarSides");
+		velocityBlock = new BlockVelocity(ConfigHandler.velocityBlockID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("velocityBlock").setTextureName("erebus:blockSpeed0");
 
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
-			umbercobbleStairs[i] = new BlockStairsErebus(umbercobbleStairsID[i], umberstone, i).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umbercobbleStairs" + i);
+			umbercobbleStairs[i] = new BlockStairsErebus(ConfigHandler.umbercobbleStairsID[i], umberstone, i).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umbercobbleStairs" + i);
 		plankStairs = new Block[BlockPlanksErebus.plankTypes.length];
 		for (int i = 0; i < BlockPlanksErebus.plankTypes.length; i++)
-			plankStairs[i] = new BlockStairsErebus(plankStairsID[i], planksErebus, i).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("stairsPlanks" + i);
-		petrifiedWoodStairs = new BlockStairsErebus(petrifiedWoodStairsID, petrifiedWoodPlanks, 0).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("petrifiedWoodStairs");
+			plankStairs[i] = new BlockStairsErebus(ConfigHandler.plankStairsID[i], planksErebus, i).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("stairsPlanks" + i);
+		petrifiedWoodStairs = new BlockStairsErebus(ConfigHandler.petrifiedWoodStairsID, petrifiedWoodPlanks, 0).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("petrifiedWoodStairs");
 		stoneSlabs = new Block[2];
 		for (int i = 0; i < 2; i++)
-			stoneSlabs[i] = new BlockSlabStoneErebus(stoneSlabsID[i], i == 1).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("slabStoneErebus");
+			stoneSlabs[i] = new BlockSlabStoneErebus(ConfigHandler.stoneSlabsID[i], i == 1).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("slabStoneErebus");
 		plankSlabs = new Block[4];
 		for (int i = 0; i < 4; i++)
-			plankSlabs[i] = new BlockSlabPlanksErebus(plankSlabsID[i], (int) Math.floor(i / 2f), i % 2 == 1).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("slabPlanksErebus");
-		wallErebus = new BlockWallErebus(wallErebusID).setUnlocalizedName("wallErebus");
+			plankSlabs[i] = new BlockSlabPlanksErebus(ConfigHandler.plankSlabsID[i], (int) Math.floor(i / 2f), i % 2 == 1).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("slabPlanksErebus");
+		wallErebus = new BlockWallErebus(ConfigHandler.wallErebusID).setUnlocalizedName("wallErebus");
 		petrifiedWoodSlab = new Block[2];
 		for (int i = 0; i < petrifiedWoodSlab.length; i++)
-			petrifiedWoodSlab[i] = new BlockSlabPetrifiedWood(petrifiedWoodSlabID[i], i == 1).setUnlocalizedName("petrifiedWoodSlab");
-		amberBrickStairs = new BlockStairsErebus(amberBrickStairsID, blockAmber, 2).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("amberBrickStairs");
-		waspNestStairs = new BlockStairsErebus(waspNestStairsID, waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestStairs");
+			petrifiedWoodSlab[i] = new BlockSlabPetrifiedWood(ConfigHandler.petrifiedWoodSlabID[i], i == 1).setUnlocalizedName("petrifiedWoodSlab");
+		amberBrickStairs = new BlockStairsErebus(ConfigHandler.amberBrickStairsID, blockAmber, 2).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("amberBrickStairs");
+		waspNestStairs = new BlockStairsErebus(ConfigHandler.waspNestStairsID, waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestStairs");
 		//
-		spiderSpawner = new BlockSpiderSpawner(spiderSpawnerID, "Scytodes - Erebus").setUnlocalizedName("spiderSpawner").setTextureName("erebus:spiderSpawner");
-		jumpingSpiderSpawner = new BlockSpiderSpawner(jumpingSpiderSpawnerID, "JumpingSpider - Erebus").setUnlocalizedName("jumpingSpiderSpawner").setTextureName("erebus:spiderSpawner");
-		waspSpawner = new BlockWaspSpawner(waspSpawnerID, "Wasp - Erebus").setUnlocalizedName("waspSpawner").setTextureName("erebus:waspNestSpawner");
+		spiderSpawner = new BlockSpiderSpawner(ConfigHandler.spiderSpawnerID, "Scytodes - Erebus").setUnlocalizedName("spiderSpawner").setTextureName("erebus:spiderSpawner");
+		jumpingSpiderSpawner = new BlockSpiderSpawner(ConfigHandler.jumpingSpiderSpawnerID, "JumpingSpider - Erebus").setUnlocalizedName("jumpingSpiderSpawner").setTextureName("erebus:spiderSpawner");
+		waspSpawner = new BlockWaspSpawner(ConfigHandler.waspSpawnerID, "Wasp - Erebus").setUnlocalizedName("waspSpawner").setTextureName("erebus:waspNestSpawner");
+	}
 
-		// Creative tabs
+	private static void initCreativeTabs() {
+		// Break down long lines
 		Erebus.tabErebusBlock.add(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
 		Erebus.tabErebusBlock.add(logErebusGroup1, logErebusGroup2, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
 		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns, erebusFlower);
-		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder, bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar, reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, umberstonePillar, velocityBlock);
+		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
+		Erebus.tabErebusBlock.add(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
+		Erebus.tabErebusBlock.add(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
+		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock);
 		for (Block b : umbercobbleStairs)
 			Erebus.tabErebusBlock.add(b);
 		for (Block b : plankStairs)
 			Erebus.tabErebusBlock.add(b);
-		Erebus.tabErebusBlock.add(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, stoneSlabs[0], plankSlabs[0], plankSlabs[2], petrifiedWoodSlab[0], wallErebus);
+		Erebus.tabErebusBlock.add(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, stoneSlabs[0], plankSlabs[0]);
+		Erebus.tabErebusBlock.add(plankSlabs[2], petrifiedWoodSlab[0], wallErebus);
+	}
 
-		// Registering blocks
+	private static void registerBlocks() {
 		GameRegistry.registerBlock(portalErebus, "erebus.portal");
 
 		GameRegistry.registerBlock(umberstone, ItemBlockUmberStone.class, "erebus.umberstone");
@@ -268,7 +225,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(blockAmber, ItemBlockAmber.class, "erebus.blockAmber");
 		GameRegistry.registerBlock(quickSand, "erebus.quickSand");
 		GameRegistry.registerBlock(ghostSand, "erebus.ghostSand");
-		if (ConfigurationHandler.lead || ConfigurationHandler.silver || ConfigurationHandler.copper || ConfigurationHandler.tin || ConfigurationHandler.aluminium)
+		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
 			GameRegistry.registerBlock(erebusOreExtra, ItemBlockErebusOreExtras.class, "erebus.erebusOreExtras");
 		GameRegistry.registerBlock(umberstoneButton, "erebus.umberstoneButton");
 
@@ -336,8 +293,9 @@ public class ModBlocks {
 		GameRegistry.registerBlock(spiderSpawner, "erebus.spiderSpawner");
 		GameRegistry.registerBlock(jumpingSpiderSpawner, "erebus.jumpingSpiderSpawner");
 		GameRegistry.registerBlock(waspSpawner, "erebus.waspSpawner");
+	}
 
-		// Mining levels
+	private static void registerProperties() {
 		MinecraftForge.setBlockHarvestLevel(blockAmber, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(oreFossil, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(mirBrick, "pickaxe", 1);
@@ -363,18 +321,17 @@ public class ModBlocks {
 		MinecraftForge.setBlockHarvestLevel(reinExo, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(petrifiedWoodChest, "pickaxe", 0);
 
-		if (ConfigurationHandler.aluminium)
+		if (ConfigHandler.aluminium)
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 0, "pickaxe", 1);
-		if (ConfigurationHandler.copper)
+		if (ConfigHandler.copper)
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 1, "pickaxe", 1);
-		if (ConfigurationHandler.lead)
+		if (ConfigHandler.lead)
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 2, "pickaxe", 2);
-		if (ConfigurationHandler.silver)
+		if (ConfigHandler.silver)
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 3, "pickaxe", 2);
-		if (ConfigurationHandler.tin)
+		if (ConfigHandler.tin)
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 4, "pickaxe", 1);
 
-		// Burning rates
 		Block.setBurnProperties(logErebusGroup1.blockID, 5, 5);
 		Block.setBurnProperties(logErebusGroup2.blockID, 5, 5);
 		Block.setBurnProperties(planksErebus.blockID, 5, 20);

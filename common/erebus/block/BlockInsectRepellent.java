@@ -101,7 +101,7 @@ public class BlockInsectRepellent extends Block {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
 		if (!world.isRemote && entity instanceof EntityLiving)
-			if (entity.worldObj.getBlockId(x, y, z) == ModBlocks.insectRepellentID && ((EntityLiving) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD)) {
+			if (entity.worldObj.getBlockId(x, y, z) == ModBlocks.insectRepellent.blockID && ((EntityLiving) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD)) {
 				int Knockback = 1;
 				entity.addVelocity(MathHelper.sin(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F, 0.1D, MathHelper.cos(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F);
 				entity.worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
@@ -111,7 +111,7 @@ public class BlockInsectRepellent extends Block {
 	@ForgeSubscribe
 	public void onArthropodSpawn(LivingSpawnEvent.CheckSpawn e) {
 		if (e.entity instanceof EntityLivingBase)
-			if (e.entity.worldObj.getBlockId((int) e.x, (int) e.y, (int) e.z) == ModBlocks.insectRepellentID)
+			if (e.entity.worldObj.getBlockId((int) e.x, (int) e.y, (int) e.z) == ModBlocks.insectRepellent.blockID)
 				if (((EntityLivingBase) e.entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD))
 					e.setResult(Result.DENY);
 	}
