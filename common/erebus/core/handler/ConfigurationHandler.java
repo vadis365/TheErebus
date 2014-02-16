@@ -55,6 +55,7 @@ public class ConfigurationHandler {
 			ModBlocks.leavesErebusID = config.getBlock("Block ID of Leaves", 2510).getInt(2510);
 			ModBlocks.erebusSaplingID = config.getBlock("Block ID of Erebus Saplings", 2511).getInt(2511);
 			ModBlocks.hollowLogAcaciaID = config.getBlock("Block ID of Hollow Log", 2512).getInt(2512);
+			ModBlocks.erebusFlowerID = config.getBlock("Block ID of Erebus Flower Blocks", 2582).getInt(2582);
 
 			ModBlocks.erebusGrassID = config.getBlock("Block ID of Erebus Grass", 2513).getInt(2513);
 			ModBlocks.thornsID = config.getBlock("Block ID of Thorns", 2514).getInt(2514);
@@ -119,7 +120,7 @@ public class ConfigurationHandler {
 			ModBlocks.jumpingSpiderSpawnerID = config.getBlock("Block ID of Jumping Spider Spawners", 2553).getInt(2553);
 			ModBlocks.waspSpawnerID = config.getBlock("Block ID of Wasp Spawners", 2572).getInt(2572);
 
-			// latest ID used (please update after adding new blocks!) >>> 2581
+			// latest ID used (please update after adding new blocks!) >>> 2583
 
 			/*
 			 * Items

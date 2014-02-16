@@ -152,6 +152,22 @@ tile.extenderThingy.name=Bamboo Extender
 tile.bambooPole.name=Bamboo Nerd Pole
 tile.umberstonePillar.name=Umberstone Pillar
 tile.velocityBlock.name=Velocity Block
+erebusFlower_item_0.name=Stigma
+erebusFlower_item_1.name=Stem
+erebusFlower_item_2.name=Black Petal
+erebusFlower_item_3.name=Red Petal
+erebusFlower_item_4.name=Brown Petal
+erebusFlower_item_5.name=Blue Petal
+erebusFlower_item_6.name=Purple Petal
+erebusFlower_item_7.name=Cyan Petal
+erebusFlower_item_8.name=Light Gray Petal
+erebusFlower_item_9.name=Gray Petal
+erebusFlower_item_10.name=Pink Petal
+erebusFlower_item_11.name=Yellow Petal
+erebusFlower_item_12.name=Light Blue Petal
+erebusFlower_item_13.name=Magenta Petal
+erebusFlower_item_14.name=Orange Petal
+erebusFlower_item_15.name=White Petal
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

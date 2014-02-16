@@ -19,6 +19,7 @@ import erebus.block.BlockErebusAltarHealing;
 import erebus.block.BlockErebusAltarLightning;
 import erebus.block.BlockErebusAltarRepair;
 import erebus.block.BlockErebusAltarXP;
+import erebus.block.BlockErebusFlower;
 import erebus.block.BlockErebusGrass;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockErebusOreExtras;
@@ -60,6 +61,7 @@ import erebus.block.BlockWitherWeb;
 import erebus.core.handler.ConfigurationHandler;
 import erebus.item.block.ItemBlockAmber;
 import erebus.item.block.ItemBlockColoredSingle;
+import erebus.item.block.ItemBlockErebusFlower;
 import erebus.item.block.ItemBlockErebusOreExtras;
 import erebus.item.block.ItemBlockLeavesErebus;
 import erebus.item.block.ItemBlockLogErebus1;
@@ -101,6 +103,7 @@ public class ModBlocks {
 	public static BlockLeavesErebus leavesErebus;  		public static int leavesErebusID;
 	public static Block erebusSapling;     				public static int erebusSaplingID;
 	public static Block hollowLogAcacia;    			public static int hollowLogAcaciaID;
+	public static Block erebusFlower;					public static int erebusFlowerID;
 
 	// UNDERGROWTH
 	public static Block erebusGrass;     				public static int erebusGrassID;
@@ -181,6 +184,7 @@ public class ModBlocks {
 		leavesErebus = (BlockLeavesErebus) new BlockLeavesErebus(leavesErebusID).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("leavesErebus");
 		erebusSapling = new BlockSaplingErebus(erebusSaplingID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("sapling_mahogany");
 		hollowLogAcacia = new BlockHollowLog(hollowLogAcaciaID).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hollowLogAcacia");
+		erebusFlower = new BlockErebusFlower(erebusFlowerID).setHardness(1.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFlower");
 
 		erebusGrass = new BlockErebusGrass(erebusGrassID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusTallGrass").setTextureName("erebus:tallgrass");
 		thorns = new BlockThorns(thornsID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("thorns").setTextureName("erebus:thorns");
@@ -246,7 +250,7 @@ public class ModBlocks {
 		// Creative tabs
 		Erebus.tabErebusBlock.add(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
 		Erebus.tabErebusBlock.add(logErebusGroup1, logErebusGroup2, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
-		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns);
+		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns, erebusFlower);
 		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder, bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar, reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, umberstonePillar, velocityBlock);
 		for (Block b : umbercobbleStairs)
 			Erebus.tabErebusBlock.add(b);
@@ -274,6 +278,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(leavesErebus, ItemBlockLeavesErebus.class, "erebus.leavesErebus");
 		GameRegistry.registerBlock(erebusSapling, ItemBlockSapling.class, "erebus.erebusSapling");
 		GameRegistry.registerBlock(hollowLogAcacia, "erebus.hollowLogAcacia");
+		GameRegistry.registerBlock(erebusFlower, ItemBlockErebusFlower.class, "erebus.erebusFlower");
 
 		GameRegistry.registerBlock(erebusGrass, "erebus.erebusGrass");
 		GameRegistry.registerBlock(thorns, "erebus.thorns");
