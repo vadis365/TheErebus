@@ -16,9 +16,9 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 		if (blockID == 0)
 			return false;
 
-		else if (blockID == ModBlocks.erebusFlowerID && blockMeta==0)
+		else if (blockID == ModBlocks.erebusFlower.blockID && blockMeta == 0)
 			return true;
-		
+
 		return false;
 	}
 
@@ -26,20 +26,19 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	protected boolean isEntityReady() {
 		return true;
 	}
-	
+
 	@Override
 	protected void moveToLocation() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		bee.setBeePollinating(true);
 		bee.setBeeFlying(false);
-		bee.currentFlightTarget = new ChunkCoordinates((int) flowerX, (int) flowerY, (int) flowerZ);
+		bee.currentFlightTarget = new ChunkCoordinates(flowerX, flowerY, flowerZ);
 		bee.flyToTarget();
 	}
 
 	@Override
 	protected void prepareToPollinate() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -55,7 +54,7 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		bee.setBeePollinating(false);
 		bee.setBeeFlying(true);
-		bee.setNectarPoints(bee.getNectarPoints()+1);
+		bee.setNectarPoints(bee.getNectarPoints() + 1);
 		bee.flyAbout();
 	}
 
