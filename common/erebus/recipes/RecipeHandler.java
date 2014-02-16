@@ -9,6 +9,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.block.BlockErebusFlower.FLOWER_BLOCK_TYPE;
 import erebus.block.BlockLogErebus;
 import erebus.block.BlockPlanksErebus;
 import erebus.core.handler.ConfigurationHandler;
@@ -209,6 +210,21 @@ public class RecipeHandler {
 		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.umberOreBlock, 1, 4));
 		OreDictionary.registerOre("oreEmerald", new ItemStack(ModBlocks.umberOreBlock, 1, 5));
 		OreDictionary.registerOre("craftingtable", new ItemStack(ModBlocks.petrifiedCraftingTable));
+
+		OreDictionary.registerOre("dyeBlack", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.BLACK_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeRed", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.RED_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeBrown", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.BROWN_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeBlue", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.BLUE_PETAL.ordinal()));
+		OreDictionary.registerOre("dyePurple", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.PURPLE_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeCyan", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.CYAN_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeLightGray", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.LIGHT_GRAY_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeGray", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.GRAY_PETAL.ordinal()));
+		OreDictionary.registerOre("dyePink", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.PINK_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeYellow", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.YELLOW_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeLightBlue", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.LIGHT_BLUE_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeMagenta", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.MAGENTA_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.ORANGE_PETAL.ordinal()));
+		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_BLOCK_TYPE.WHITE_PETAL.ordinal()));
 
 		if (ConfigurationHandler.lead) {
 			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));

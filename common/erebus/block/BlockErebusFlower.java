@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockErebusFlower extends Block {
 
-	private enum TYPE {
+	public enum FLOWER_BLOCK_TYPE {
 		STIGMA, STEM, BLACK_PETAL, RED_PETAL, BROWN_PETAL, BLUE_PETAL, PURPLE_PETAL, CYAN_PETAL, LIGHT_GRAY_PETAL, GRAY_PETAL, PINK_PETAL, YELLOW_PETAL, LIGHT_BLUE_PETAL, MAGENTA_PETAL, ORANGE_PETAL, WHITE_PETAL
 	}
 
