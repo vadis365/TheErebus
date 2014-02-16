@@ -12,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -27,6 +29,8 @@ import erebus.entity.EntityBeetleLarva;
 
 public class BlockPortalErebus extends BlockBreakable {
 
+	public static final int[][] types = new int[][] { new int[0], { 3, 1 }, { 2, 0 } };
+
 	public BlockPortalErebus(int id) {
 		super(id, "erebus:portalErebus", Material.portal, false);
 		setTickRandomly(true);
@@ -36,7 +40,8 @@ public class BlockPortalErebus extends BlockBreakable {
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		if (ConfigHandler.spawnPortalMobs && world.difficultySetting > 0 && world.provider.isSurfaceWorld() && rand.nextInt(100) < 3D + world.difficultySetting * 0.5D) {
 			int yy;
-			for (yy = y; !world.doesBlockHaveSolidTopSurface(x, yy, z) && yy > 0; --yy);
+			for (yy = y; !world.doesBlockHaveSolidTopSurface(x, yy, z) && yy > 0; --yy)
+				;
 
 			if (yy > 0 && !world.isBlockNormalCube(x, yy + 1, z)) {
 				EntityLiving entity = rand.nextInt(2) == 0 ? new EntityBeetle(world) : new EntityBeetleLarva(world);
@@ -93,83 +98,31 @@ public class BlockPortalErebus extends BlockBreakable {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborID) {
-		byte b0 = 0;
-		byte b1 = 1;
+	public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID) {
+		int meta = getMetadata(world.getBlockMetadata(x, y, z));
+		Size size = new Size(world, x, y, z, 1);
+		Size size1 = new Size(world, x, y, z, 2);
 
-		if (world.getBlockId(x - 1, y, z) == blockID || world.getBlockId(x + 1, y, z) == blockID) {
-			b0 = 1;
-			b1 = 0;
-		}
-
-		int i1;
-
-		for (i1 = y; world.getBlockId(x, i1 - 1, z) == blockID; --i1) {
-		}
-
-		if (world.getBlockId(x, i1 - 1, z) != Block.stoneBrick.blockID)
+		if (meta == 1 && (!size.isValidSize() || size.field_150864_e < size.width * size.height))
 			world.setBlockToAir(x, y, z);
-		else {
-			int j1;
-
-			for (j1 = 1; j1 < 4 && world.getBlockId(x, i1 + j1, z) == blockID; ++j1) {
-			}
-
-			if (j1 == 3 && world.getBlockId(x, i1 + j1, z) == Block.stoneBrick.blockID) {
-				boolean flag = world.getBlockId(x - 1, y, z) == blockID || world.getBlockId(x + 1, y, z) == blockID;
-				boolean flag1 = world.getBlockId(x, y, z - 1) == blockID || world.getBlockId(x, y, z + 1) == blockID;
-
-				if (flag && flag1)
-					world.setBlockToAir(x, y, z);
-				else if ((world.getBlockId(x + b0, y, z + b1) != Block.stoneBrick.blockID || world.getBlockId(x - b0, y, z - b1) != blockID) && (world.getBlockId(x - b0, y, z - b1) != Block.stoneBrick.blockID || world.getBlockId(x + b0, y, z + b1) != blockID))
-					world.setBlockToAir(x, y, z);
-			} else
-				world.setBlockToAir(x, y, z);
-		}
+		else if (meta == 2 && (!size1.isValidSize() || size1.field_150864_e < size1.width * size1.height))
+			world.setBlockToAir(x, y, z);
+		else if (meta == 0 && !size.isValidSize() && !size1.isValidSize())
+			world.setBlockToAir(x, y, z);
 	}
 
 	public boolean tryToCreatePortal(World world, int x, int y, int z) {
-		byte b0 = 0;
-		byte b1 = 0;
+		Size size = new Size(world, x, y, z, 1);
+		Size size1 = new Size(world, x, y, z, 2);
 
-		if (world.getBlockId(x - 1, y, z) == Block.stoneBrick.blockID || world.getBlockId(x + 1, y, z) == Block.stoneBrick.blockID)
-			b0 = 1;
-
-		if (world.getBlockId(x, y, z - 1) == Block.stoneBrick.blockID || world.getBlockId(x, y, z + 1) == Block.stoneBrick.blockID)
-			b1 = 1;
-
-		if (b0 == b1)
-			return false;
-		else {
-			if (world.getBlockId(x - b0, y, z - b1) == 0) {
-				x -= b0;
-				z -= b1;
-			}
-
-			int l;
-			int i1;
-
-			for (l = -1; l <= 2; ++l)
-				for (i1 = -1; i1 <= 3; ++i1) {
-					boolean flag = l == -1 || l == 2 || i1 == -1 || i1 == 3;
-
-					if (l != -1 && l != 2 || i1 != -1 && i1 != 3) {
-						int j1 = world.getBlockId(x + b0 * l, y + i1, z + b1 * l);
-
-						if (flag) {
-							if (j1 != Block.stoneBrick.blockID)
-								return false;
-						} else if (j1 != 0 && j1 != Block.fire.blockID)
-							return false;
-					}
-				}
-
-			for (l = 0; l < 2; ++l)
-				for (i1 = 0; i1 < 3; ++i1)
-					world.setBlock(x + b0 * l, y + i1, z + b1 * l, ModBlocks.portalErebus.blockID, 0, 2);
-
+		if (size.isValidSize() && size.field_150864_e == 0) {
+			size.makePortal();
 			return true;
-		}
+		} else if (size1.isValidSize() && size1.field_150864_e == 0) {
+			size1.makePortal();
+			return true;
+		} else
+			return false;
 	}
 
 	@Override
@@ -202,11 +155,6 @@ public class BlockPortalErebus extends BlockBreakable {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if (rand.nextInt(100) == 0) {
-			// TODO world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D,
-			// (double)z + 0.5D, "portalambiance", 0.5F, rand.nextFloat() *
-			// 0.4F + 0.8F);
-		}
 		for (int l = 0; l < 4; l++) {
 			double d = x + rand.nextFloat();
 			double d1 = y + rand.nextFloat();
@@ -229,4 +177,140 @@ public class BlockPortalErebus extends BlockBreakable {
 		}
 	}
 
+	public static class Size {
+
+		private final World world;
+		private final int type, field_150866_c, field_150863_d;
+		private int field_150864_e = 0;
+		private ChunkCoordinates porition;
+		private int height;
+		private int width;
+
+		public Size(World world, int x, int y, int z, int type) {
+			this.world = world;
+			this.type = type;
+			field_150863_d = types[type][0];
+			field_150866_c = types[type][1];
+
+			for (int i1 = y; y > i1 - 21 && y > 0 && isBlockRepleaceable(world.getBlockId(x, y - 1, z)); --y)
+				;
+
+			int j1 = getSize(x, y, z, field_150863_d) - 1;
+
+			if (j1 >= 0) {
+				porition = new ChunkCoordinates(x + j1 * Direction.offsetX[field_150863_d], y, z + j1 * Direction.offsetZ[field_150863_d]);
+				width = getSize(porition.posX, porition.posY, porition.posZ, field_150866_c);
+
+				if (width < 2 || width > 21) {
+					porition = null;
+					width = 0;
+				}
+			}
+
+			if (porition != null)
+				height = func_150858_a();
+		}
+
+		protected int getSize(int x, int y, int z, int type) {
+			int j1 = Direction.offsetX[type];
+			int k1 = Direction.offsetZ[type];
+			int i1;
+			int block;
+
+			for (i1 = 0; i1 < 22; ++i1) {
+				block = world.getBlockId(x + j1 * i1, y, z + k1 * i1);
+
+				if (!isBlockRepleaceable(block))
+					break;
+
+				int block1 = world.getBlockId(x + j1 * i1, y - 1, z + k1 * i1);
+
+				if (block1 != Block.stoneBrick.blockID)
+					break;
+			}
+
+			block = world.getBlockId(x + j1 * i1, y, z + k1 * i1);
+			return block == Block.stoneBrick.blockID ? i1 : 0;
+		}
+
+		protected int func_150858_a() {
+			int i;
+			int j;
+			int k;
+			int l;
+			label56:
+
+			for (height = 0; height < 21; height++) {
+				i = porition.posY + height;
+
+				for (j = 0; j < width; j++) {
+					k = porition.posX + j * Direction.offsetX[types[type][1]];
+					l = porition.posZ + j * Direction.offsetZ[types[type][1]];
+					int block = world.getBlockId(k, i, l);
+
+					if (!isBlockRepleaceable(block))
+						break label56;
+
+					if (block == ModBlocks.portalErebus.blockID)
+						field_150864_e++;
+
+					if (j == 0) {
+						block = world.getBlockId(k + Direction.offsetX[types[type][0]], i, l + Direction.offsetZ[types[type][0]]);
+
+						if (block != Block.stoneBrick.blockID)
+							break label56;
+					} else if (j == width - 1) {
+						block = world.getBlockId(k + Direction.offsetX[types[type][1]], i, l + Direction.offsetZ[types[type][1]]);
+
+						if (block != Block.stoneBrick.blockID)
+							break label56;
+					}
+				}
+			}
+
+			for (i = 0; i < width; ++i) {
+				j = porition.posX + i * Direction.offsetX[types[type][1]];
+				k = porition.posY + height;
+				l = porition.posZ + i * Direction.offsetZ[types[type][1]];
+
+				if (world.getBlockId(j, k, l) != Block.stoneBrick.blockID) {
+					height = 0;
+					break;
+				}
+			}
+
+			if (height <= 21 && height >= 3)
+				return height;
+			else {
+				porition = null;
+				width = 0;
+				height = 0;
+				return 0;
+			}
+		}
+
+		protected boolean isBlockRepleaceable(int block) {
+			return Block.blocksList[block] == null || Block.blocksList[block].blockMaterial == Material.air || block == Block.fire.blockID || block == ModBlocks.portalErebus.blockID;
+		}
+
+		public boolean isValidSize() {
+			return porition != null && width >= 2 && width <= 21 && height >= 3 && height <= 21;
+		}
+
+		public void makePortal() {
+			for (int i = 0; i < width; i++) {
+				int j = porition.posX + Direction.offsetX[field_150866_c] * i;
+				int k = porition.posZ + Direction.offsetZ[field_150866_c] * i;
+
+				for (int l = 0; l < height; l++) {
+					int i1 = porition.posY + l;
+					world.setBlock(j, i1, k, ModBlocks.portalErebus.blockID, type, 2);
+				}
+			}
+		}
+	}
+
+	public static int getMetadata(int meta) {
+		return meta & 3;
+	}
 }
