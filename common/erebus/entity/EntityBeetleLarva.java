@@ -160,9 +160,23 @@ public class EntityBeetleLarva extends EntityAnimal {
 	}
 
 	private void spawnBeetle() {
+		if(getTame()==0) {
 		EntityBeetle entityBeetle = new EntityBeetle(worldObj);
 		entityBeetle.setPosition(posX, posY, posZ);
 		worldObj.spawnEntityInWorld(entityBeetle);
+		}
+		if(getTame()==1) {
+		EntityBeetle entityBeetle = new EntityBeetle(worldObj);
+		entityBeetle.setPosition(posX, posY, posZ);
+		entityBeetle.setTame((byte) 1);
+		worldObj.spawnEntityInWorld(entityBeetle);
+		}
+		else if(getTame()==2) {
+		EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(worldObj);
+		entityRhinoBeetle.setPosition(posX, posY, posZ);
+		entityRhinoBeetle.setTameState((byte) 1);
+		worldObj.spawnEntityInWorld(entityRhinoBeetle);
+		}
 	}
 
 	@Override

@@ -312,7 +312,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 
 	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {
 		EntityBeetleLarva entityBeetleLarva = new EntityBeetleLarva(worldObj);
-		entityBeetleLarva.setTame((byte) 1);
+		entityBeetleLarva.setTame((byte) 2);
 		return entityBeetleLarva;
 	}
 
