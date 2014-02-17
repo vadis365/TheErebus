@@ -27,6 +27,11 @@ public class ItemArmorGlider extends ItemArmor {
 	}
 
 	@Override
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataGliderWing;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
 		return "erebus:textures/models/armor/glider.png";

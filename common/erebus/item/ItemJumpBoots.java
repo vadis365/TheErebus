@@ -28,6 +28,11 @@ public class ItemJumpBoots extends ItemArmor {
 	}
 
 	@Override
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataElasticFibre;
+	}
+
+	@Override
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack) {
 		player.fallDistance = 0.0F;
 	}

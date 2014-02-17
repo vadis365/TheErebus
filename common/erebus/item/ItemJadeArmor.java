@@ -19,4 +19,9 @@ public class ItemJadeArmor extends ItemArmor {
 		else
 			return "erebus:textures/models/armor/jade2.png";
 	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataJade;
+	}
 }

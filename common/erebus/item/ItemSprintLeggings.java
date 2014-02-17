@@ -1,6 +1,7 @@
 package erebus.item;
 
 import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +25,11 @@ public class ItemSprintLeggings extends ItemArmor {
 	public ItemSprintLeggings(int i, EnumArmorMaterial enumarmormaterial, int k) {
 		super(i, enumarmormaterial, 2, k);
 		setCreativeTab(Erebus.tabErebusGear);
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataBioVelocity;
 	}
 
 	@Override
@@ -56,15 +62,14 @@ public class ItemSprintLeggings extends ItemArmor {
 		if (armtick > 60 || player.isSprinting())
 			armtick = 0;
 	}
-	
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int id, CreativeTabs tab, List list) {
-		list.add(new ItemStack(id,1,0));
+		list.add(new ItemStack(id, 1, 0));
 
-		ItemStack is=new ItemStack(id,1,0);
-		(is.stackTagCompound=new NBTTagCompound()).setByte("upgradeTier",(byte)8);
+		ItemStack is = new ItemStack(id, 1, 0);
+		(is.stackTagCompound = new NBTTagCompound()).setByte("upgradeTier", (byte) 8);
 		list.add(is);
 	}
 }
