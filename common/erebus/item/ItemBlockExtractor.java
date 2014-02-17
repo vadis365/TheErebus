@@ -2,8 +2,6 @@ package erebus.item;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPane;
@@ -13,8 +11,11 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityExtractedBlock;
 
 public class ItemBlockExtractor extends Item {
@@ -70,22 +71,22 @@ public class ItemBlockExtractor extends Item {
 			double targetZ = player.posZ;
 
 			int range = 0;
-			while (world.isAirBlock((int) targetX, (int) targetY, (int) targetZ) && range <= 15) { // range of 16
+			while (world.isAirBlock(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)) && range <= 15) { // range of 16
 				range++;
 				targetX += vec3.xCoord;
 				targetY += vec3.yCoord;
 				targetZ += vec3.zCoord;
-				if (!world.isAirBlock((int) targetX, (int) targetY, (int) targetZ)) {
-					stack.getTagCompound().setInteger("targetX", (int) targetX);
-					stack.getTagCompound().setInteger("targetY", (int) targetY);
-					stack.getTagCompound().setInteger("targetZ", (int) targetZ);
-					stack.getTagCompound().setInteger("blockID", world.getBlockId((int) targetX, (int) targetY, (int) targetZ));
-					stack.getTagCompound().setInteger("blockMeta", world.getBlockMetadata((int) targetX, (int) targetY, (int) targetZ));
+				if (!world.isAirBlock(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ))) {
+					stack.getTagCompound().setInteger("targetX", MathHelper.floor_double(targetX));
+					stack.getTagCompound().setInteger("targetY", MathHelper.floor_double(targetY));
+					stack.getTagCompound().setInteger("targetZ", MathHelper.floor_double(targetZ));
+					stack.getTagCompound().setInteger("blockID", world.getBlockId(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
+					stack.getTagCompound().setInteger("blockMeta", world.getBlockMetadata(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
 					Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
 					if (block != null) {
-						stack.getTagCompound().setFloat("blockHardness", block.getBlockHardness(world, (int) targetX, (int) targetY, (int) targetZ));
+						stack.getTagCompound().setFloat("blockHardness", block.getBlockHardness(world, MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
 					}
-				}	
+				}
 			}
 		}
 	}
