@@ -44,6 +44,6 @@ public class BlockUmberPaver extends Block {
 	public void registerIcons(IconRegister reg) {
 		blockIcon = new Icon[types.length];
 		for (int i = 0; i < blockIcon.length; i++)
-			blockIcon[i] = reg.registerIcon("erebus:Umberpaver" + types[i]);
+			blockIcon[i] = reg.registerIcon("erebus:umberpaver" + types[i]);
 	}
 }
