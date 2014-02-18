@@ -5,7 +5,6 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerAddIsland;
 import net.minecraft.world.gen.layer.GenLayerAddSnow;
 import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
-import net.minecraft.world.gen.layer.GenLayerHills;
 import net.minecraft.world.gen.layer.GenLayerIsland;
 import net.minecraft.world.gen.layer.GenLayerRiverInit;
 import net.minecraft.world.gen.layer.GenLayerRiverMix;
@@ -56,7 +55,7 @@ public abstract class GenLayerErebus extends GenLayer {
 		GenLayerBiomeErebus genlayerbiome = new GenLayerBiomeErebus(200L, genlayer1);
 
 		genlayer1 = GenLayerZoom.magnify(1000L, genlayerbiome, 2);
-		Object object = new GenLayerHills(1000L, genlayer1);
+		Object object = new GenLayerSubBiomes(1000L, genlayer1);
 
 		for (int j = 0; j < biomeSize; ++j) {
 			object = new GenLayerZoom((long) (1000 + j), (GenLayer) object);

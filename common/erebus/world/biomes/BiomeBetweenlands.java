@@ -2,8 +2,8 @@ package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.world.World;
 
-public class BiomeGenBetweenlands extends BiomeGenBaseErebus{
-	public BiomeGenBetweenlands(int biomeID){
+public class BiomeBetweenlands extends BiomeBaseErebus{
+	public BiomeBetweenlands(int biomeID){
 		super(biomeID);
 		
 		setBiomeName("Betweenlands");

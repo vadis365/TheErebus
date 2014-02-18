@@ -2,8 +2,8 @@ package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.world.World;
 
-public class BiomeGenUlteriorOutback extends BiomeGenBaseErebus{
-	public BiomeGenUlteriorOutback(int biomeID){
+public class BiomeUlteriorOutback extends BiomeBaseErebus{
+	public BiomeUlteriorOutback(int biomeID){
 		super(biomeID);
 		
 		setBiomeName("Ulterior Outback");

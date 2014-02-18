@@ -26,8 +26,8 @@ import erebus.world.feature.tree.WorldGenSavannaTree;
 import erebus.world.feature.util.FeatureType;
 
 //@formatter:off
-public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
-	public BiomeGenSubterraneanSavannah(int biomeID){
+public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
+	public BiomeSubterraneanSavannah(int biomeID){
 		super(biomeID);
 		
 		setBiomeName("Subterranean Savannah");

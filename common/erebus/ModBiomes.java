@@ -1,26 +1,26 @@
 package erebus;
 
-import net.minecraft.world.biome.BiomeGenBase;
-import erebus.world.biomes.BiomeGenBaseErebus;
-import erebus.world.biomes.BiomeGenBetweenlands;
-import erebus.world.biomes.BiomeGenElysianFields;
-import erebus.world.biomes.BiomeGenFungalForest;
-import erebus.world.biomes.BiomeGenSubterraneanSavannah;
-import erebus.world.biomes.BiomeGenUlteriorOutback;
-import erebus.world.biomes.BiomeGenUndergroundJungle;
-import erebus.world.biomes.BiomeGenVolcanicDesert;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.biomes.BiomeBetweenlands;
+import erebus.world.biomes.BiomeElysianFields;
+import erebus.world.biomes.BiomeFungalForest;
+import erebus.world.biomes.BiomeSubterraneanSavannah;
+import erebus.world.biomes.BiomeUlteriorOutback;
+import erebus.world.biomes.BiomeUndergroundJungle;
+import erebus.world.biomes.BiomeUndergroundJungleSubTest;
+import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.loot.WeightedList;
 
 public class ModBiomes {
-	public static WeightedList<BiomeGenBaseErebus> biomeList = new WeightedList<BiomeGenBaseErebus>();
+	public static WeightedList<BiomeBaseErebus> biomeList = new WeightedList<BiomeBaseErebus>();
 	
-	public static BiomeGenBase undergroundJungle;
-	public static BiomeGenBase volcanicDesert;
-	public static BiomeGenBase subterraneanSavannah;
-	public static BiomeGenBase elysianFields;
-	public static BiomeGenBase ulteriorOutback;
-	public static BiomeGenBase fungalForest;
-	public static BiomeGenBase betweenlands;
+	public static BiomeBaseErebus undergroundJungle;
+	public static BiomeBaseErebus volcanicDesert;
+	public static BiomeBaseErebus subterraneanSavannah;
+	public static BiomeBaseErebus elysianFields;
+	public static BiomeBaseErebus ulteriorOutback;
+	public static BiomeBaseErebus fungalForest;
+	public static BiomeBaseErebus betweenlands;
 	
 	public static int undergroundJungleID;
 	public static int volcanicDesertID;
@@ -29,14 +29,20 @@ public class ModBiomes {
 	public static int ulteriorOutbackID;
 	public static int fungalForestID;
 	public static int betweenlandsID;
+	
+	public static BiomeBaseErebus undergroundJungleSubTest;
+	
+	public static int undergroundJungleSubTestID = 158;
 
 	public static void init() {
-		undergroundJungle = new BiomeGenUndergroundJungle(undergroundJungleID);
-		volcanicDesert = new BiomeGenVolcanicDesert(volcanicDesertID);
-		subterraneanSavannah = new BiomeGenSubterraneanSavannah(subterraneanSavannahID);
-		elysianFields = new BiomeGenElysianFields(elysianFieldsID);
-		ulteriorOutback = new BiomeGenUlteriorOutback(ulteriorOutbackID);
-		fungalForest = new BiomeGenFungalForest(fungalForestID);
-		betweenlands = new BiomeGenBetweenlands(betweenlandsID);
+		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
+		volcanicDesert = new BiomeVolcanicDesert(volcanicDesertID);
+		subterraneanSavannah = new BiomeSubterraneanSavannah(subterraneanSavannahID);
+		elysianFields = new BiomeElysianFields(elysianFieldsID);
+		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
+		fungalForest = new BiomeFungalForest(fungalForestID);
+		betweenlands = new BiomeBetweenlands(betweenlandsID);
+		
+		undergroundJungleSubTest = new BiomeUndergroundJungleSubTest(undergroundJungleSubTestID);
 	}
 }

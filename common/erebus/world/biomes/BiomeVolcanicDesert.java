@@ -21,8 +21,8 @@ import erebus.world.feature.structure.WorldGenAntlionLair;
 import erebus.world.feature.util.FeatureType;
 
 //@formatter:off
-public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
-	public BiomeGenVolcanicDesert(int biomeID){
+public class BiomeVolcanicDesert extends BiomeBaseErebus{
+	public BiomeVolcanicDesert(int biomeID){
 		super(biomeID);
 		
 		setBiomeName("Volcanic Desert");

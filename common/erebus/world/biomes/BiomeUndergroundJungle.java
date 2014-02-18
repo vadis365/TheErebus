@@ -10,6 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
@@ -40,8 +41,8 @@ import erebus.world.feature.tree.WorldGenMossbarkTree;
 import erebus.world.feature.tree.WorldGenTallJungleTree;
 
 //@formatter:off
-public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
-	public BiomeGenUndergroundJungle(int biomeID){
+public class BiomeUndergroundJungle extends BiomeBaseErebus{
+	public BiomeUndergroundJungle(int biomeID){
 		super(biomeID);
 		
 		setBiomeName("Undergound Jungle");
@@ -232,6 +233,12 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 				}
 			}
 		}
+	}
+	
+	@Override
+	public BiomeBaseErebus getRandomSubBiome(int randomValue){
+		if (randomValue<10)return ModBiomes.undergroundJungleSubTest;
+		return null;
 	}
 }
 //@formatter:on

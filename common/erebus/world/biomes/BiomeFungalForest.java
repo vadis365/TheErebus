@@ -2,8 +2,8 @@ package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.world.World;
 
-public class BiomeGenFungalForest extends BiomeGenBaseErebus{
-	public BiomeGenFungalForest(int biomeID){
+public class BiomeFungalForest extends BiomeBaseErebus{
+	public BiomeFungalForest(int biomeID){
 		super(biomeID);
 		
 		setBiomeName("Fungal Forest");

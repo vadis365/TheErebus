@@ -3,8 +3,8 @@ import java.util.Random;
 import net.minecraft.world.World;
 
 //@formatter:off
-public class BiomeGenElysianFields extends BiomeGenBaseErebus{
-	public BiomeGenElysianFields(int biomeID){
+public class BiomeElysianFields extends BiomeBaseErebus{
+	public BiomeElysianFields(int biomeID){
 		super(biomeID);
 		
 		setBiomeName("Elysian Fields");
