@@ -27,3 +27,4 @@ Bugfixes
 - Erebus logs, planks, leaves and some other blocks catch on fire
 - Leaves now give correct metadata values when picked
 - Bamboo torches now render correctly
+- Erebus had same terrain as Nether

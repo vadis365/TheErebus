@@ -8,7 +8,6 @@ import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
 import net.minecraft.world.gen.layer.GenLayerIsland;
 import net.minecraft.world.gen.layer.GenLayerRiverInit;
 import net.minecraft.world.gen.layer.GenLayerRiverMix;
-import net.minecraft.world.gen.layer.GenLayerShore;
 import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
@@ -35,12 +34,8 @@ public abstract class GenLayerErebus extends GenLayer {
 		genlayeraddisland = new GenLayerAddIsland(3L, genlayerzoom);
 		genlayerzoom = new GenLayerZoom(2003L, genlayeraddisland);
 		genlayeraddisland = new GenLayerAddIsland(4L, genlayerzoom);
-		//GenLayerAddMushroomIsland genlayeraddmushroomisland = new GenLayerAddMushroomIsland(5L, genlayeraddisland);
-		byte biomeSize = 4;
 
-		if (worldType == WorldType.LARGE_BIOMES)
-			biomeSize = 6;
-		biomeSize = getModdedBiomeSize(worldType, biomeSize);
+		byte biomeSize = getModdedBiomeSize(worldType, (byte)(worldType == WorldType.LARGE_BIOMES ? 6 : 4));
 
 		GenLayer genlayer = GenLayerZoom.magnify(1000L, genlayeraddisland, 0);
 		GenLayerRiverInit genlayerriverinit = new GenLayerRiverInit(100L, genlayer);
@@ -63,9 +58,9 @@ public abstract class GenLayerErebus extends GenLayer {
 			if (j == 0)
 				object = new GenLayerAddIsland(3L, (GenLayer) object);
 
-			if (j == 1)
+			/*if (j == 1)
 				object = new GenLayerShore(1000L, (GenLayer) object);
-
+*/
 			/*if (j == 1)
 				object = new GenLayerSwampRivers(1000L, (GenLayer) object);*/
 		}
