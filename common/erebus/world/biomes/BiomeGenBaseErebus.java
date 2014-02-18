@@ -18,6 +18,8 @@ import erebus.world.loot.IWeightProvider;
 
 // @formatter:off
 public abstract class BiomeGenBaseErebus extends BiomeGenBase implements IWeightProvider{
+	private short biomeWeight;
+	
 	public BiomeGenBaseErebus(int biomeID){
 		super(biomeID);
 		ModBiomes.biomeList.add(this);
@@ -28,11 +30,21 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase implements IWeight
 		spawnableCaveCreatureList.clear();
 	}
 	
-	protected abstract short getBiomeWeight();
+	@Override
+	public BiomeGenBaseErebus setColor(int color){
+		super.setColor(color);
+		super.func_76733_a(color);
+		return this;
+	}
+	
+	public BiomeGenBaseErebus setWeight(int weight){
+		this.biomeWeight=(short)weight;
+		return this;
+	}
 	
 	@Override
 	public final short getWeight(){
-		return getBiomeWeight();
+		return biomeWeight;
 	}
 
 	@Override

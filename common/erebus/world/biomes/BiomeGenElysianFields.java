@@ -9,11 +9,6 @@ public class BiomeGenElysianFields extends BiomeGenBaseErebus{
 	public BiomeGenElysianFields(int biomeID){
 		super(biomeID);
 	}
-
-	@Override
-	protected short getBiomeWeight(){
-		return 50;
-	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)

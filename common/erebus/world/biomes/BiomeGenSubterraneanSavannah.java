@@ -45,11 +45,6 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 		topBlock=(byte)Block.grass.blockID;
 		fillerBlock=(byte)Block.dirt.blockID;
 	}
-	
-	@Override
-	public short getBiomeWeight(){
-		return 10;
-	}
 
 	@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){

@@ -39,11 +39,6 @@ public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
 		topBlock=(byte)Block.sand.blockID;
 		fillerBlock=(byte)Block.sandStone.blockID;
 	}
-	
-	@Override
-	public short getBiomeWeight(){
-		return 7;
-	}
 
 	@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){

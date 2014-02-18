@@ -60,6 +60,7 @@ public class ItemBlockExtractor extends Item {
 		return stack;
 	}
 	
+	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
 		resetStats(stack);
 	}

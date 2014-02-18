@@ -189,6 +189,9 @@ public class ConfigHandler {
 			ModBiomes.volcanicDesertID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Volcanic Desert", 152).getInt(152);
 			ModBiomes.subterraneanSavannahID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Subterranean Savannah", 153).getInt(153);
 			ModBiomes.elysianFieldsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Elysian Fields", 154).getInt(154);
+			ModBiomes.ulteriorOutbackID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Ulterior Outback", 155).getInt(155);
+			ModBiomes.fungalForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Fungal Forest", 156).getInt(156);
+			ModBiomes.betweenlandsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Betweenlands", 157).getInt(157);
 
 			erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
 			spawnPortalMobs = config.get(Configuration.CATEGORY_GENERAL, "Should spawn beetles and larvae in the portal", true).getBoolean(true);

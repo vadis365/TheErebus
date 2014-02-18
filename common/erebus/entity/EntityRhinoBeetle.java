@@ -194,7 +194,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 				super.setAttackTarget((EntityLivingBase) null);
 		}
 		else
-			super.setAttackTarget((EntityLivingBase) entity);
+			super.setAttackTarget(entity);
     }
 
 	@Override
