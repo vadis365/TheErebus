@@ -28,6 +28,12 @@ import erebus.world.feature.util.FeatureType;
 public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 	public BiomeGenSubterraneanSavannah(int biomeID){
 		super(biomeID);
+		
+		setBiomeName("Subterranean Savannah");
+		setColors(0xB6B957,0xA3A52D);
+		setTemperatureRainfall(0.95F, 0.05F);
+		setWeight(22);
+		
 		spawnableCreatureList.add(new SpawnListEntry(EntityGrasshopper.class,14,4,8));
 		spawnableCreatureList.add(new SpawnListEntry(EntityGlowWorm.class,14,4,8));
 

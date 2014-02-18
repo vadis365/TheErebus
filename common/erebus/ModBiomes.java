@@ -31,18 +31,12 @@ public class ModBiomes {
 	public static int betweenlandsID;
 
 	public static void init() {
-		undergroundJungle = new BiomeGenUndergroundJungle(undergroundJungleID).setWeight(25).setColor(5470985).setTemperatureRainfall(1.35F, 0.9F).setBiomeName("Undergound Jungle");
-		volcanicDesert = new BiomeGenVolcanicDesert(volcanicDesertID).setWeight(15).setColor(5470985).setDisableRain().setTemperatureRainfall(2.2F, 0.2F).setBiomeName("Volcanic Desert");
-		subterraneanSavannah = new BiomeGenSubterraneanSavannah(subterraneanSavannahID).setWeight(22).setColor(5470985).setDisableRain().setTemperatureRainfall(0.95F, 0.05F).setBiomeName("Subterranean Savannah");
-		elysianFields = new BiomeGenElysianFields(elysianFieldsID).setWeight(20).setColor(8365877).setDisableRain().setTemperatureRainfall(0.85F, 0.5F).setBiomeName("Elysian Fields");
-		ulteriorOutback = new BiomeGenUlteriorOutback(ulteriorOutbackID).setWeight(15).setBiomeName("Ulterior Outback");
-		fungalForest = new BiomeGenFungalForest(fungalForestID).setWeight(10).setBiomeName("Fungal Forest");
-		betweenlands = new BiomeGenBetweenlands(betweenlandsID).setWeight(15).setBiomeName("Betweenlands");
-		
-		// TODO
-		/*BiomeDictionary.registerBiomeType(undergroundJungle, BiomeDictionary.Type.JUNGLE);
-		BiomeDictionary.registerBiomeType(volcanicDesert, BiomeDictionary.Type.DESERT);
-		BiomeDictionary.registerBiomeType(subterraneanSavannah, BiomeDictionary.Type.PLAINS);
-		BiomeDictionary.registerBiomeType(elysianFields, BiomeDictionary.Type.PLAINS);*/
+		undergroundJungle = new BiomeGenUndergroundJungle(undergroundJungleID);
+		volcanicDesert = new BiomeGenVolcanicDesert(volcanicDesertID);
+		subterraneanSavannah = new BiomeGenSubterraneanSavannah(subterraneanSavannahID);
+		elysianFields = new BiomeGenElysianFields(elysianFieldsID);
+		ulteriorOutback = new BiomeGenUlteriorOutback(ulteriorOutbackID);
+		fungalForest = new BiomeGenFungalForest(fungalForestID);
+		betweenlands = new BiomeGenBetweenlands(betweenlandsID);
 	}
 }

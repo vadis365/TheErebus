@@ -24,6 +24,11 @@ import erebus.world.feature.util.FeatureType;
 public class BiomeGenVolcanicDesert extends BiomeGenBaseErebus{
 	public BiomeGenVolcanicDesert(int biomeID){
 		super(biomeID);
+		
+		setBiomeName("Volcanic Desert");
+		setColors(0xA6BB4E,0x91A922);
+		setTemperatureRainfall(1.9F, 0.2F);
+		setWeight(15);
 
 		spawnableMonsterList.add(new SpawnListEntry(EntityScorpion.class,30,1,8));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySolifuge.class,30,1,8));

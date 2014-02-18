@@ -1,6 +1,8 @@
 package erebus.world.biomes;
 import static erebus.core.handler.ConfigHandler.*;
 import java.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -19,10 +21,13 @@ import erebus.world.loot.IWeightProvider;
 // @formatter:off
 public abstract class BiomeGenBaseErebus extends BiomeGenBase implements IWeightProvider{
 	private short biomeWeight;
+	private int grassColor,foliageColor;
 	
 	public BiomeGenBaseErebus(int biomeID){
 		super(biomeID);
 		ModBiomes.biomeList.add(this);
+		
+		setDisableRain();
 		
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
@@ -30,16 +35,34 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase implements IWeight
 		spawnableCaveCreatureList.clear();
 	}
 	
-	@Override
-	public BiomeGenBaseErebus setColor(int color){
-		super.setColor(color);
-		super.func_76733_a(color);
+	protected BiomeGenBaseErebus setColors(int grassAndFoliage){
+		setColors(grassAndFoliage,grassAndFoliage);
 		return this;
 	}
 	
-	public BiomeGenBaseErebus setWeight(int weight){
+	protected BiomeGenBaseErebus setColors(int grass, int foliage){
+		setColor(grass);
+		func_76733_a(grass);
+		grassColor=grass;
+		foliageColor=foliage;
+		return this;
+	}
+	
+	protected BiomeGenBaseErebus setWeight(int weight){
 		this.biomeWeight=(short)weight;
 		return this;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeGrassColor(){
+		return grassColor;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBiomeFoliageColor(){
+		return foliageColor;
 	}
 	
 	@Override

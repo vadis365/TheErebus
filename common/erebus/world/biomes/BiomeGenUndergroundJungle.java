@@ -43,6 +43,11 @@ import erebus.world.feature.tree.WorldGenTallJungleTree;
 public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 	public BiomeGenUndergroundJungle(int biomeID){
 		super(biomeID);
+		
+		setBiomeName("Undergound Jungle");
+		setColors(0x53CA37,0x29BC05);
+		setTemperatureRainfall(1.35F, 0.9F);
+		setWeight(25);
 
 		spawnableMonsterList.add(new SpawnListEntry(EntityWasp.class,30,4,8));
 		spawnableMonsterList.add(new SpawnListEntry(EntityCentipede.class,10,4,8));
