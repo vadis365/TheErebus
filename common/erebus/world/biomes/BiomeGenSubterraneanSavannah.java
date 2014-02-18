@@ -17,6 +17,7 @@ import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
+import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannaRock;
 import erebus.world.feature.plant.WorldGenBamboo;
@@ -54,6 +55,29 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 
 	@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){
+		if (rand.nextBoolean() && rand.nextBoolean()){
+			for(int attempt=0; attempt<8; attempt++){
+				int xx=x+getRandomXZOffset(rand),
+					yy=rand.nextInt(120),
+					zz=z+getRandomXZOffset(rand);
+				
+				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+					new WorldGenPonds((rand.nextDouble()+0.75D)*1.2D).generate(world,rand,xx,yy,zz);
+				}
+			}
+			
+			if (rand.nextInt(3)!=0){
+				for(int yy=100; yy>20; yy--){
+					int xx=x+getRandomXZOffset(rand),
+						zz=z+getRandomXZOffset(rand);
+					
+					if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+						new WorldGenBamboo(7,true).generate(world,rand,xx,yy,zz);
+					}
+				}
+			}
+		}
+		
 		for(int attempt=0; attempt<65; attempt++){
 			int xx=x+getRandomXZOffset(rand),
 				yy=15+rand.nextInt(90),
@@ -64,24 +88,13 @@ public class BiomeGenSubterraneanSavannah extends BiomeGenBaseErebus{
 			}
 		}
 
-		if (rand.nextInt(3)==0){
+		if (rand.nextBoolean() && rand.nextBoolean()){
 			for(int yy=100; yy>20; yy--){
 				int xx=x+getRandomXZOffset(rand),
 					zz=z+getRandomXZOffset(rand);
 
 				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
 					new WorldGenSavannaRock().generate(world,rand,xx,yy,zz);
-				}
-			}
-		}
-
-		if (rand.nextInt(26)==0){
-			for(int yy=100; yy>20; yy--){
-				int xx=x+getRandomXZOffset(rand),
-					zz=z+getRandomXZOffset(rand);
-				
-				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
-					new WorldGenBamboo(7).generate(world,rand,xx,yy,zz);
 				}
 			}
 		}

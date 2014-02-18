@@ -3,6 +3,7 @@ package erebus.world.feature.plant;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
@@ -11,13 +12,28 @@ import erebus.ModBlocks;
 public class WorldGenBamboo extends WorldGenerator{
 
 	private final int bambooAmount;
+	private final boolean checkForWater;
 
-	public WorldGenBamboo(int bambooAmount){
+	public WorldGenBamboo(int bambooAmount, boolean checkForWater){
 		this.bambooAmount=bambooAmount;
+		this.checkForWater=checkForWater;
 	}
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
+		if (checkForWater){
+			boolean canSpawn=false;
+			
+			for(int waterAttempt=0; waterAttempt<40; waterAttempt++){
+				if (world.getBlockMaterial(x+rand.nextInt(8)-rand.nextInt(8),y+rand.nextInt(3)-rand.nextInt(6),z+rand.nextInt(8)-rand.nextInt(8))==Material.water){
+					canSpawn=true;
+					break;
+				}
+			}
+			
+			if (!canSpawn)return false;
+		}
+		
 		for(int xx,yy,zz,attempt=0,bambooPlaced=0; attempt<bambooAmount*2&&bambooPlaced<bambooAmount; attempt++){
 			xx=x+rand.nextInt(8)-rand.nextInt(8);
 			zz=z+rand.nextInt(8)-rand.nextInt(8);

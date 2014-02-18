@@ -30,7 +30,7 @@ public class WorldGenPonds extends WorldGenerator{
 		
 		boolean[] placeWater=new boolean[2048];
 
-		for(int iteration=0,iterAmount=rand.nextInt(3)+4; iteration<iterAmount; ++iteration){
+		for(int iteration=0,iterAmount=rand.nextInt(3)+5; iteration<iterAmount; ++iteration){
 			double d0=(rand.nextDouble()*6D+3D)*size*(0.4D+rand.nextDouble()*0.6D);
 			double d1=(rand.nextDouble()*4D+2D)*size/2.5D;
 			double d2=(rand.nextDouble()*6D+3D)*size*(0.4D+rand.nextDouble()*0.6D);
