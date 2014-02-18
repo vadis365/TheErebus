@@ -44,7 +44,7 @@ public class BlockPortalErebus extends BlockBreakable {
 				;
 
 			if (yy > 0 && !world.isBlockNormalCube(x, yy + 1, z)) {
-				EntityLiving entity = rand.nextInt(2) == 0 ? new EntityBeetle(world) : new EntityBeetleLarva(world);
+				EntityLiving entity = rand.nextBoolean() ? new EntityBeetle(world) : new EntityBeetleLarva(world);
 				entity.setLocationAndAngles(x + 0.5D, yy + 1.1D, z + 0.5D, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
 				entity.rotationYawHead = entity.renderYawOffset = entity.rotationYaw;
 				entity.onSpawnWithEgg(null);

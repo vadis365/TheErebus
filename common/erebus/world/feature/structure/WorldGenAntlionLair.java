@@ -65,7 +65,7 @@ public class WorldGenAntlionLair extends WorldGenerator{
 	}).setPostProcessor(new IPostProcess(){
 		@Override
 		public ItemStack postProcessItem(ItemStack is, Random rand){
-			if (rand.nextInt(2)==0&&(is.itemID==Item.enchantedBook.itemID||(is.getItem() instanceof ItemTool||is.getItem() instanceof ItemArmor||is.getItem() instanceof ItemSword))){
+			if (rand.nextBoolean()&&(is.itemID==Item.enchantedBook.itemID||(is.getItem() instanceof ItemTool||is.getItem() instanceof ItemArmor||is.getItem() instanceof ItemSword))){
 				boolean enchBook=is.itemID==Item.enchantedBook.itemID;
 				if (enchBook)is.itemID=Item.book.itemID;
 				List enchList=EnchantmentHelper.buildEnchantmentList(rand,is,7+rand.nextInt(10));

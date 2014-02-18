@@ -76,7 +76,7 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 				zz=z+getRandomXZOffset(rand);
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
-				new WorldGenPonds((rand.nextDouble()+0.7D)*2.2D).generate(world,rand,xx,yy,zz);
+				new WorldGenPonds((rand.nextDouble()+0.7D)*1.5D).generate(world,rand,xx,yy,zz);
 			}
 		}
 
@@ -192,7 +192,7 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 			zz=z+getRandomXZOffset(rand);
 
 			if (world.isAirBlock(xx,yy,zz)){
-				block=rand.nextInt(2)==0?Block.vine.blockID:ModBlocks.thorns.blockID;
+				block=rand.nextBoolean()?Block.vine.blockID:ModBlocks.thorns.blockID;
 				offset=rand.nextInt(4);
 				
 				if (!Block.isNormalCube(world.getBlockId(xx+offsetX[offset],yy,zz+offsetZ[offset])))continue;
@@ -216,7 +216,7 @@ public class BiomeGenUndergroundJungle extends BiomeGenBaseErebus{
 				}
 			}
 		}
-		else if (rand.nextInt(2)==0){
+		else if (rand.nextBoolean()){
 			for(int attempt=0; attempt<3; ++attempt){
 				int xx=x+getRandomXZOffset(rand),
 					yy=15+rand.nextInt(90),

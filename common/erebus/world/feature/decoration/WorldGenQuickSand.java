@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 
 //@formatter:off
-public class WorldGenQuickSand extends WorldGenerator{ // TODO
+public class WorldGenQuickSand extends WorldGenerator{ // TODO tweak?
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
@@ -45,55 +45,55 @@ public class WorldGenQuickSand extends WorldGenerator{ // TODO
 		world.setBlock(x+1,y,z-1,ModBlocks.quickSand.blockID);
 
 		// Top Layer
-		if (rand.nextInt(2)==0) world.setBlock(x+1,y-2,z+0,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+1,y-2,z+0,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x+0,y-2,z+1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+0,y-2,z+1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-0,y-2,z-1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-0,y-2,z-1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-1,y-2,z+0,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-1,y-2,z+0,ModBlocks.quickSand.blockID);
 
 		// Middle Layer
-		if (rand.nextInt(2)==0) world.setBlock(x+2,y-1,z+0,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+2,y-1,z+0,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x+1,y-1,z+1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+1,y-1,z+1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-0,y-1,z+2,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-0,y-1,z+2,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-1,y-1,z+1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-1,y-1,z+1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-2,y-1,z-0,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-2,y-1,z-0,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x+1,y-1,z-1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+1,y-1,z-1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-0,y-1,z-2,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-0,y-1,z-2,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-1,y-1,z-1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-1,y-1,z-1,ModBlocks.quickSand.blockID);
 
 		// Bottom Layer
-		if (rand.nextInt(2)==0) world.setBlock(x+3,y,z+0,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+3,y,z+0,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x+2,y,z+1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+2,y,z+1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x+1,y,z+2,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+1,y,z+2,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-3,y,z+0,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-3,y,z+0,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-2,y,z+1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-2,y,z+1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-1,y,z+2,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-1,y,z+2,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x+0,y,z-3,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+0,y,z-3,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x+2,y,z-1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+2,y,z-1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x+1,y,z-2,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x+1,y,z-2,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-0,y,z+3,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-0,y,z+3,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-2,y,z-1,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-2,y,z-1,ModBlocks.quickSand.blockID);
 
-		if (rand.nextInt(2)==0) world.setBlock(x-1,y,z-2,ModBlocks.quickSand.blockID);
+		if (rand.nextBoolean()) world.setBlock(x-1,y,z-2,ModBlocks.quickSand.blockID);
 
 		return true;
 	}

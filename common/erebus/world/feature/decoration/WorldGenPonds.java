@@ -30,7 +30,7 @@ public class WorldGenPonds extends WorldGenerator{
 		
 		boolean[] placeWater=new boolean[2048];
 
-		for(int iteration=0,iterAmount=rand.nextInt(4)+4; iteration<iterAmount; ++iteration){
+		for(int iteration=0,iterAmount=rand.nextInt(3)+4; iteration<iterAmount; ++iteration){
 			double d0=(rand.nextDouble()*6D+3D)*size*(0.4D+rand.nextDouble()*0.6D);
 			double d1=(rand.nextDouble()*4D+2D)*size/2.5D;
 			double d2=(rand.nextDouble()*6D+3D)*size*(0.4D+rand.nextDouble()*0.6D);
@@ -44,9 +44,9 @@ public class WorldGenPonds extends WorldGenerator{
 						double d6=(xx-d3)/(d0/2.0D);
 						double d7=(yy-d4)/(d1/2.0D);
 						double d8=(zz-d5)/(d2/2.0D);
-						double d9=d6*d6+d7*d7+d8*d8;
+						double dist=d6*d6+d7*d7+d8*d8;
 
-						if (d9<1D)placeWater[(xx*16+zz)*8+yy]=true;
+						if (dist<1D)placeWater[(xx*16+zz)*8+yy]=true;
 					}
 				}
 			}
@@ -96,8 +96,34 @@ public class WorldGenPonds extends WorldGenerator{
 				for(int yy=0; yy<8; ++yy){
 					boolean flag=!placeWater[(xx*16+zz)*8+yy]&&(xx<15&&placeWater[((xx+1)*16+zz)*8+yy]||xx>0&&placeWater[((xx-1)*16+zz)*8+yy]||zz<15&&placeWater[(xx*16+zz+1)*8+yy]||zz>0&&placeWater[(xx*16+zz-1)*8+yy]||yy<7&&placeWater[(xx*16+zz)*8+yy+1]||yy>0&&placeWater[(xx*16+zz)*8+yy-1]);
 
-					if (flag && (yy<4||rand.nextInt(2)!=0) && world.getBlockMaterial(x+xx,y+yy,z+zz).isSolid()){
-						world.setBlock(x+xx,y+yy,z+zz,Block.blockClay.blockID,0,2);
+					if (flag && (yy<4||rand.nextBoolean()) && world.getBlockMaterial(x+xx,y+yy,z+zz).isSolid()){
+						world.setBlock(x+xx,y+yy,z+zz,Block.sand.blockID,0,2);
+					}
+				}
+			}
+		}
+		
+		if (rand.nextBoolean()){
+			for(int attempt=0,xx,zz; attempt<2+rand.nextInt(6); attempt++){
+				xx=x+rand.nextInt(8)+4;
+				zz=z+rand.nextInt(8)+4;
+				
+				for(int yy=0; yy<8; yy++){
+					if (world.getBlockId(xx,y+yy,zz)==Block.sand.blockID){
+						double rad=rand.nextDouble()*1.3D+1.8D;
+						int irad=(int)Math.ceil(rad);
+						
+						for(int px=xx-irad; px<=xx+irad; px++){
+							for(int pz=zz-irad; pz<=zz+irad; pz++){
+								for(int py=y+yy-irad; py<=y+yy+irad; py++){
+									if (world.getBlockId(px,py,pz)==Block.sand.blockID && Math.sqrt(Math.pow(px-xx,2)+Math.pow(pz-zz,2)+Math.pow(py-y+yy,2))<=rad+rand.nextFloat()*0.3F){
+										world.setBlock(px,py,pz,Block.blockClay.blockID);
+									}
+								}
+							}
+						}
+						
+						break;
 					}
 				}
 			}

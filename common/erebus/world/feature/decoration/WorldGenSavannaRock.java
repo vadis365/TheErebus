@@ -19,7 +19,7 @@ public class WorldGenSavannaRock extends WorldGenerator{
 
 		float radX,radY,radZ;
 
-		if (rand.nextInt(2)==0){
+		if (rand.nextBoolean()){
 			radX=rand.nextFloat()*0.3F+1.85F;
 			radZ=rand.nextFloat()*0.2F+1.5F;
 		}

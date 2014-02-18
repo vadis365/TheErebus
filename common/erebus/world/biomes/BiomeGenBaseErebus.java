@@ -111,7 +111,7 @@ public abstract class BiomeGenBaseErebus extends BiomeGenBase implements IWeight
 				if (rand.nextInt(3)!=0)generateOreCluster(2+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataDiamond,1,world,rand,x,z,6,112,1); break;
 				
 			case JADE:
-				if (rand.nextInt(2)==0)generateOreCluster(1+rand.nextInt(4),ModBlocks.umberOreBlock,BlockErebusOre.dataJade,4,world,rand,x,z,6,112,2); break;
+				if (rand.nextBoolean())generateOreCluster(1+rand.nextInt(4),ModBlocks.umberOreBlock,BlockErebusOre.dataJade,4,world,rand,x,z,6,112,2); break;
 				
 			case PETRIFIED_WOOD:
 				generateOreCluster((extraOres?3:4)+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataPetrifiedWood,7,9,world,rand,x,z,6,112,2); break;

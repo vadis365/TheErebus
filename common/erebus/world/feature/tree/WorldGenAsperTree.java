@@ -47,7 +47,7 @@ public class WorldGenAsperTree extends WorldGenerator{
 				if (yy>0&&!world.isAirBlock(x+offsetX[dir],y+yy-1,z+offsetZ[dir]))continue;
 
 				world.setBlock(x+offsetX[dir],y+yy,z+offsetZ[dir],ModBlocks.logErebusGroup2.blockID,BlockLogErebus.dataAsper+(dir<2?4:8),3);
-				if (yy>0&&random.nextInt(2)==0){
+				if (yy>0&&random.nextBoolean()){
 					world.setBlock(x+offsetX[dir]*2,y+yy,z+offsetZ[dir]*2,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataAsperDecay,3);
 				}
 				++extraWood;
