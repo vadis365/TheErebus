@@ -24,6 +24,8 @@ public abstract class GenLayerErebus extends GenLayer {
 	private long baseSeed;
 
 	public static GenLayer[] initializeAllBiomeGenerators(long seed, WorldType worldType) {
+		seed+=1;
+		
 		GenLayerIsland genlayerisland = new GenLayerIsland(1L);
 		GenLayerFuzzyZoom genlayerfuzzyzoom = new GenLayerFuzzyZoom(2000L, genlayerisland);
 		GenLayerAddIsland genlayeraddisland = new GenLayerAddIsland(1L, genlayerfuzzyzoom);

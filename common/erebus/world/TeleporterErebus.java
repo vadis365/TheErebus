@@ -31,7 +31,7 @@ public class TeleporterErebus extends Teleporter {
 	private TeleporterErebus(WorldServer worldServer) {
 		super(worldServer);
 		worldServerInstance = worldServer;
-		random = new Random(worldServer.getSeed());
+		random = new Random(worldServer.getSeed()+1);
 	}
 
 	@Override
