@@ -2,7 +2,6 @@ package erebus.world;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.entity.EnumCreatureType;
@@ -105,8 +104,9 @@ public class ChunkProviderErebus implements IChunkProvider {
 								int j2 = 0;
 
 								// Underground Water
-								if (i1 * 8 + j1 < byte1)
-									j2 = ModBlocks.umberstone.blockID;
+								if (i1 * 8 + j1 < byte1) {
+									j2 = 0;
+								}
 
 								if (d15 > 0.0D)
 									j2 = ModBlocks.umberstone.blockID;
@@ -205,7 +205,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 					if (d5 < -1D)
 						d5 = -1D;
 
-					d5 /= 1.3999999999999999D;
+					d5 /= 1.4D;
 					d5 *= 0.5D;
 					d3 = 0.0D;
 				} else {

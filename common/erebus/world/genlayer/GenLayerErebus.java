@@ -3,11 +3,9 @@ package erebus.world.genlayer;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerAddIsland;
-import net.minecraft.world.gen.layer.GenLayerAddSnow;
 import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
 import net.minecraft.world.gen.layer.GenLayerIsland;
 import net.minecraft.world.gen.layer.GenLayerRiverInit;
-import net.minecraft.world.gen.layer.GenLayerRiverMix;
 import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
@@ -29,8 +27,7 @@ public abstract class GenLayerErebus extends GenLayer {
 		GenLayerAddIsland genlayeraddisland = new GenLayerAddIsland(1L, genlayerfuzzyzoom);
 		GenLayerZoom genlayerzoom = new GenLayerZoom(2001L, genlayeraddisland);
 		genlayeraddisland = new GenLayerAddIsland(2L, genlayerzoom);
-		GenLayerAddSnow genlayeraddsnow = new GenLayerAddSnow(2L, genlayeraddisland);
-		genlayerzoom = new GenLayerZoom(2002L, genlayeraddsnow);
+		genlayerzoom = new GenLayerZoom(2002L, genlayeraddisland);
 		genlayeraddisland = new GenLayerAddIsland(3L, genlayerzoom);
 		genlayerzoom = new GenLayerZoom(2003L, genlayeraddisland);
 		genlayeraddisland = new GenLayerAddIsland(4L, genlayerzoom);
@@ -57,7 +54,7 @@ public abstract class GenLayerErebus extends GenLayer {
 
 			if (j == 0)
 				object = new GenLayerAddIsland(3L, (GenLayer) object);
-
+			
 			/*if (j == 1)
 				object = new GenLayerShore(1000L, (GenLayer) object);
 */
@@ -67,7 +64,7 @@ public abstract class GenLayerErebus extends GenLayer {
 
 		// TODO find the fucker that makes random stripes of mixed biome blocks
 		GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer) object);
-		GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
+		GenLayerCustomRiverMix genlayerrivermix = new GenLayerCustomRiverMix(100L, genlayersmooth1);
 		GenLayerVoronoiZoom genlayervoronoizoom = new GenLayerVoronoiZoom(10L, genlayerrivermix);
 		genlayerrivermix.initWorldGenSeed(seed);
 		genlayervoronoizoom.initWorldGenSeed(seed);
