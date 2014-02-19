@@ -155,9 +155,9 @@ public class ChunkProviderErebus implements IChunkProvider {
 		return chunk;
 	}
 
-	private double[] initializeNoiseField(double[] par1ArrayOfDouble, int x, int y, int z, int sizeX, int sizeY, int sizeZ) {
-		if (par1ArrayOfDouble == null)
-			par1ArrayOfDouble = new double[sizeX * sizeY * sizeZ];
+	private double[] initializeNoiseField(double[] noise, int x, int y, int z, int sizeX, int sizeY, int sizeZ) {
+		if (noise == null)
+			noise = new double[sizeX * sizeY * sizeZ];
 
 		double d = 684.412D;
 		double d1 = 2053.236D;
@@ -166,10 +166,11 @@ public class ChunkProviderErebus implements IChunkProvider {
 		noiseData1 = noiseGen3.generateNoiseOctaves(noiseData1, x, y, z, sizeX, sizeY, sizeZ, d * 0.0125D, d1 / 60D, d * 0.0125D);
 		noiseData2 = noiseGen1.generateNoiseOctaves(noiseData2, x, y, z, sizeX, sizeY, sizeZ, d, d1, d);
 		noiseData3 = noiseGen2.generateNoiseOctaves(noiseData3, x, y, z, sizeX, sizeY, sizeZ, d, d1, d);
-		int i = 0;
+		int index = 0;
 		int j = 0;
 		double ad[] = new double[sizeY];
 		double oneOver512 = 1D / 512D;
+		double groundNoiseMp = 1D / 2048D;
 
 		for (int k = 0; k < sizeY; k++) {
 			ad[k] = Math.cos(k * Math.PI * 6D / sizeY) * 2D;
@@ -184,8 +185,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 			}
 		}
 
-		for (int l = 0; l < sizeX; l++)
-			for (int i1 = 0; i1 < sizeZ; i1++) {
+		for (int xx = 0; xx < sizeX; xx++)
+			for (int zz = 0; zz < sizeZ; zz++) {
 				double d3 = (noiseData4[j] + 256D) * oneOver512;
 
 				if (d3 > 1.0D)
@@ -219,12 +220,12 @@ public class ChunkProviderErebus implements IChunkProvider {
 				d5 = d5 * sizeY * 0.0625D;
 				j++;
 
-				for (int j1 = 0; j1 < sizeY; j1++) {
+				for (int yy = 0; yy < sizeY; yy++) {
 					double d6 = 0.0D;
-					double d7 = ad[j1];
-					double d8 = noiseData2[i] * oneOver512;
-					double d9 = noiseData3[i] * oneOver512;
-					double d10 = (noiseData1[i] * 0.1D + 1.0D) * 0.5D;
+					double d7 = ad[yy];
+					double d8 = noiseData2[index] * groundNoiseMp;
+					double d9 = noiseData3[index] * groundNoiseMp;
+					double d10 = (noiseData1[index] * 0.1D + 1.0D) * 0.5D;
 
 					if (d10 < 0.0D)
 						d6 = d8;
@@ -235,13 +236,13 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 					d6 -= d7;
 
-					if (j1 > sizeY - 4) {
-						double d11 = (j1 - (sizeY - 4)) / 3F;
+					if (yy > sizeY - 4) {
+						double d11 = (yy - (sizeY - 4)) / 3F;
 						d6 = d6 * (1.0D - d11) + -10D * d11;
 					}
 
-					if (j1 < d4) {
-						double d12 = (d4 - j1) * 0.25D;
+					if (yy < d4) {
+						double d12 = (d4 - yy) * 0.25D;
 
 						if (d12 < 0.0D)
 							d12 = 0.0D;
@@ -252,12 +253,12 @@ public class ChunkProviderErebus implements IChunkProvider {
 						d6 = d6 * (1.0D - d12) + -10D * d12;
 					}
 
-					par1ArrayOfDouble[i] = d6;
-					i++;
+					noise[index] = d6;
+					index++;
 				}
 			}
 
-		return par1ArrayOfDouble;
+		return noise;
 	}
 
 	public void replaceBlocksForBiome(int x, int z, byte[] blocks, BiomeGenBase[] biomes) {
