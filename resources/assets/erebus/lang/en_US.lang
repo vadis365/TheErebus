@@ -168,6 +168,7 @@ erebusFlower_item_12.name=Light Blue Petal
 erebusFlower_item_13.name=Magenta Petal
 erebusFlower_item_14.name=Orange Petal
 erebusFlower_item_15.name=White Petal
+tile.honeyCombBlock.name=Honey Comb
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

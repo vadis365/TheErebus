@@ -29,6 +29,7 @@ import erebus.block.BlockFiddlehead;
 import erebus.block.BlockGhostSand;
 import erebus.block.BlockGlowingJar;
 import erebus.block.BlockHollowLog;
+import erebus.block.BlockHoneyComb;
 import erebus.block.BlockInsectRepellent;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
@@ -99,7 +100,7 @@ public class ModBlocks {
 	public static Block umberPaver, insectRepellent, bambooShoot, bambooCrop, bambooTorch, erebusAltar, erebusAltarLightning;
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
-	public static Block velocityBlock;
+	public static Block velocityBlock, honeyCombBlock;
 
 	// STAIRS, SLABS, WALLS
 	public static Block[] umbercobbleStairs, plankStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab;
@@ -172,6 +173,7 @@ public class ModBlocks {
 		bambooPole = new BlockBambooPole(ConfigHandler.bambooPoleID).setHardness(0.4F).setUnlocalizedName("bambooPole").setTextureName("erebus:blockBambooPole");
 		umberstonePillar = new BlockUmberstonePillar(ConfigHandler.umberstonePillarID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstonePillar").setTextureName("erebus:umberstonePillarSides");
 		velocityBlock = new BlockVelocity(ConfigHandler.velocityBlockID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("velocityBlock").setTextureName("erebus:blockSpeed0");
+		honeyCombBlock = new BlockHoneyComb(ConfigHandler.honeyCombBlockID).setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("honeyCombBlock").setTextureName("erebus:honeyCombTop");
 
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -206,7 +208,7 @@ public class ModBlocks {
 		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
 		Erebus.tabErebusBlock.add(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		Erebus.tabErebusBlock.add(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
-		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock);
+		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock, honeyCombBlock);
 		for (Block b : umbercobbleStairs)
 			Erebus.tabErebusBlock.add(b);
 		for (Block b : plankStairs)
@@ -272,6 +274,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(bambooPole, "erebus.bambooPole");
 		GameRegistry.registerBlock(umberstonePillar, "erebus.umberstonePillar");
 		GameRegistry.registerBlock(velocityBlock, "erebus.velocityBlock");
+		GameRegistry.registerBlock(honeyCombBlock, "erebus.honeyCombBlock");
 
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			GameRegistry.registerBlock(umbercobbleStairs[i], "erebus.umbercobbleStairs" + i);
