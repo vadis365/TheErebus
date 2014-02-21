@@ -221,6 +221,7 @@ item.erebusMaterials.19.name=Camouflage Powder
 item.erebusMaterials.20.name=Nectar
 item.erebusSpecialItem.0.name=Rhino Riding Kit
 item.erebusSpecialItem.1.name=Beetle Taming Amulet
+item.erebusSpecialItem.2.name=Bee Taming Amulet
 item.erebusFood.0.name=Beetle Larva
 item.erebusFood.1.name=Cooked Beetle Larva
 item.erebusFood.2.name=Grasshopper Leg
@@ -247,6 +248,7 @@ item.bucketOfBeetleJuice.name=Bucket Of Beetle Juice
 item.hornOfSummoning.name=Horn of The Swarm
 item.webSlinger.name=Web Slinger
 item.blockExtractor.name=Block Extractor
+item.nectarCollector.name=Nectar Collector
 
 #Entities
 entity.Erebus.BeetleLarva.name=Beetle Larva

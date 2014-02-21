@@ -187,11 +187,10 @@ public class EntityWorkerBee extends EntityAnimal {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is.itemID == Item.sugar.itemID)
+		if (!worldObj.isRemote && is != null && is.itemID == ModItems.nectarCollector.itemID)
 			if (getNectarPoints() > 0) {
-				player.swingItem();
 				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataNectar), 0.0F);
-				--is.stackSize;
+				is.damageItem(1, player);
 				setNectarPoints(getNectarPoints() - 1);
 				setAttackTarget((EntityLivingBase) null);
 				return true;
