@@ -1,13 +1,16 @@
 package erebus.entity.ai;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.entity.EntityWorkerBee;
+import erebus.item.ItemErebusMaterial;
 
-public class EntityAIPolinate extends EntityAIFindFlower {
+public class EntityAICollectNectar extends EntityAIFindFlower {
 
-	public EntityAIPolinate(EntityLiving entity, int pollinateSpeed) {
+	public EntityAICollectNectar(EntityLiving entity, int pollinateSpeed) {
 		super(entity, null, 0, pollinateSpeed);
 	}
 
@@ -16,11 +19,8 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		if (blockID == 0)
 			return false;
-		
-		if (bee.getTameState()==1 && bee.getNectarPoints()>0)
-			return false;
 
-		else if (blockID == ModBlocks.erebusFlower.blockID && blockMeta == 0)
+		else if (bee.getTameState()==1 && bee.getNectarPoints() > 0 && blockID == ModBlocks.honeyCombBlock.blockID)
 			return true;
 
 		return false;
@@ -34,7 +34,7 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	@Override
 	protected void moveToLocation() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
-		bee.setBeePollinating(true);
+		bee.setBeeCollecting(true);
 		bee.setBeeFlying(false);
 		bee.currentFlightTarget = new ChunkCoordinates(flowerX, flowerY, flowerZ);
 		bee.flyToTarget();
@@ -48,7 +48,7 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	@Override
 	protected void pollinationInterupted() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
-		bee.setBeePollinating(false);
+		bee.setBeeCollecting(false);
 		bee.setBeeFlying(true);
 		bee.flyAbout();
 	}
@@ -56,10 +56,12 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	@Override
 	protected void afterPollination() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
-		bee.setBeePollinating(false);
+		bee.setBeeCollecting(false);
 		bee.setBeeFlying(true);
-		if(bee.getNectarPoints() < 127)
-			bee.setNectarPoints(bee.getNectarPoints() + 1);
+		if(bee.getNectarPoints() >0){
+			bee.entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataNectar), 0.0F);
+			bee.setNectarPoints(bee.getNectarPoints() - 1);
+		}
 		bee.flyAbout();
 	}
 

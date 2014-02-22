@@ -12,7 +12,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,25 +25,26 @@ import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
+import erebus.entity.ai.EntityAICollectNectar;
 import erebus.entity.ai.EntityAIPolinate;
 import erebus.item.ItemErebusMaterial;
 
-public class EntityWorkerBee extends EntityAnimal {
+public class EntityWorkerBee extends EntityTameable {
 	public ChunkCoordinates currentFlightTarget;
-	public EntityAIPolinate aiPollinate = new EntityAIPolinate(this, 10);
 
 	public float wingFloat;
 	private final AnimationMathHelper mathWings = new AnimationMathHelper();
 	public boolean beeFlying;
 	public boolean beePollinating;
+	public boolean beeCollecting;
 
 	public EntityWorkerBee(World world) {
 		super(world);
 		setSize(1.5F, 1.0F);
-		tasks.addTask(0, aiPollinate);
-		tasks.addTask(1, new EntityAISwimming(this));
-		tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.3D, true));
-		tasks.addTask(3, new EntityAITempt(this, 0.5D, Item.sugar.itemID, false));
+		tasks.addTask(1, new EntityAIPolinate(this, 10));
+		tasks.addTask(2, new EntityAISwimming(this));
+		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.3D, true));
+		tasks.addTask(4, new EntityAITempt(this, 0.5D, Item.sugar.itemID, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.4D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(7, new EntityAILookIdle(this));
@@ -54,6 +55,7 @@ public class EntityWorkerBee extends EntityAnimal {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(22, new Integer(0));
+		dataWatcher.addObject(23, new Byte((byte) 0));
 	}
 
 	@Override
@@ -72,6 +74,19 @@ public class EntityWorkerBee extends EntityAnimal {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
+	
+	@Override
+	protected boolean canDespawn() {
+		if (getTameState() != 0)
+			return false;
+		else
+			return true;
+	}
+	
+	@Override
+    public boolean allowLeashing() {
+        return !canDespawn() && super.allowLeashing();
+    }
 
 	@Override
 	protected void fall(float par1) {
@@ -118,14 +133,14 @@ public class EntityWorkerBee extends EntityAnimal {
 			motionY *= 0.5D;
 
 		if (!worldObj.isRemote) {
-			if (getEntityToAttack() == null) {
-				if (rand.nextInt(200) == 0 && !beePollinating)
+			if (getEntityToAttack() == null && !beePollinating && !beeCollecting) {
+				if (rand.nextInt(200) == 0)
 					if (!beeFlying)
 						setBeeFlying(true);
 					else
 						setBeeFlying(false);
 
-				if (beeFlying && !beePollinating)
+				if (beeFlying && !beePollinating && !beeCollecting)
 					flyAbout();
 				else
 					land();
@@ -137,6 +152,7 @@ public class EntityWorkerBee extends EntityAnimal {
 				flyToTarget();
 			}
 		}
+		
 		super.onUpdate();
 	}
 
@@ -147,26 +163,37 @@ public class EntityWorkerBee extends EntityAnimal {
 	public void setBeePollinating(boolean state) {
 		beePollinating = state;
 	}
+	
+	public void setBeeCollecting(boolean state) {
+		beeCollecting = state;
+		
+	}
 
 	public void flyAbout() {
-		if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
+		if(beeFlying){
+		if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ)|| currentFlightTarget.posY < 1))
 			currentFlightTarget = null;
 
-		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10.0F)
+		if (currentFlightTarget == null|| rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
 			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
+		}
+		
 		flyToTarget();
 	}
 
 	public void flyToTarget() {
-		if (currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusFlower.blockID && isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
-			if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ, currentFlightTarget.posX + 1, currentFlightTarget.posY + 2, currentFlightTarget.posZ + 1)).isEmpty())
-				setPosition(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ);
+		if (currentFlightTarget != null && getEntityToAttack() == null &&  isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
+			if(worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusFlower.blockID || worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.honeyCombBlock.blockID) {
+				if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ, currentFlightTarget.posX + 1, currentFlightTarget.posY + 2, currentFlightTarget.posZ + 1)).isEmpty())
+					setPosition(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ);
+			}
 			else {
 				currentFlightTarget = null;
 				setBeePollinating(false);
+				setBeeCollecting(false);
 				setBeeFlying(true);
 			}
-		else {
+		else if (currentFlightTarget != null && getEntityToAttack() == null) {
 			double targetX = currentFlightTarget.posX + 0.5D - posX;
 			double targetY = currentFlightTarget.posY + 1D - posY;
 			double targetZ = currentFlightTarget.posZ + 0.5D - posZ;
@@ -195,7 +222,25 @@ public class EntityWorkerBee extends EntityAnimal {
 				setAttackTarget((EntityLivingBase) null);
 				return true;
 			}
+		
+		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 2 && getTameState() == 0) {
+			is.stackSize--;
+			setTameState((byte) 1);
+			playTameEffect(true);
+			player.swingItem();
+			setAttackTarget((EntityLivingBase) null);
+			tasks.addTask(0, new EntityAICollectNectar(this, 1));
+			return true;
+		}
 		return super.interact(player);
+	}
+	
+	public void setTameState(byte state) {
+		dataWatcher.updateObject(23, Byte.valueOf(state));
+	}
+
+	public byte getTameState() {
+		return dataWatcher.getWatchableObjectByte(23);
 	}
 
 	@Override
@@ -226,11 +271,16 @@ public class EntityWorkerBee extends EntityAnimal {
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger("nectarPoints", getNectarPoints());
+		nbt.setByte("tameState", getTameState());
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		setNectarPoints(nbt.getInteger("nectarPoints"));
+		setTameState(nbt.getByte("tameState"));
+		if(getTameState()==1){
+		tasks.addTask(0, new EntityAICollectNectar(this, 1));
+		}
 	}
 }
