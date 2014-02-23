@@ -26,7 +26,7 @@ public class EntityVelvetWorm extends EntityMob implements IRangedAttackMob {
 		super(world);
 		setSize(0.9F, 0.9F);
 		getNavigator().setAvoidsWater(false);
-		experienceValue = 15;
+		experienceValue = 15; 
 		fireResistance = 10;
 		isImmuneToFire = false;
 		tasks.addTask(0, new EntityAISwimming(this));
