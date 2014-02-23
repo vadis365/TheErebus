@@ -14,6 +14,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.item.ItemErebusMaterial;
 
 public class EntityTarantula extends EntityMob {
 	public int skin = rand.nextInt(99);
@@ -169,6 +170,7 @@ public class EntityTarantula extends EntityMob {
 		else
 			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 4), 0.0F);
 		dropItem(Item.spiderEye.itemID, chanceFiftyFifty + looting);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), ItemErebusMaterial.dataPoisonGland), 0.0F);
 	}
 
 	@Override

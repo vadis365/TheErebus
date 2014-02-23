@@ -104,6 +104,7 @@ public class EntityCentipede extends EntityMob {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2)+looting, ItemErebusMaterial.dataBioVelocity), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), ItemErebusMaterial.dataPoisonGland), 0.0F);
 	}
 
 	@Override

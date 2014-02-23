@@ -97,6 +97,7 @@ public class EntityScorpion extends EntityMob {
 		int var5 = rand.nextInt(30);
 		if (var5 == 0)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataScorpPincer), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), ItemErebusMaterial.dataPoisonGland), 0.0F);
 	}
 
 	@Override

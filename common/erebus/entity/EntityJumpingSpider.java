@@ -1,10 +1,13 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.item.ItemErebusMaterial;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
@@ -65,6 +68,11 @@ public class EntityJumpingSpider extends EntitySpider {
 	@Override
 	protected int getDropItemId() {
 		return 0;
+	}
+	
+	@Override
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), ItemErebusMaterial.dataPoisonGland), 0.0F);
 	}
 
 	@Override
