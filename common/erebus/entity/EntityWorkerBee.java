@@ -184,11 +184,11 @@ public class EntityWorkerBee extends EntityTameable {
 		
 		if (getTameState()==0)
 			if (currentFlightTarget == null|| rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
-				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(3) - rand.nextInt(3), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(3) - rand.nextInt(3));
+				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
 		
 		if (getTameState()==1)
 			if (currentFlightTarget == null|| rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
-				currentFlightTarget = new ChunkCoordinates(getDropPointX() + rand.nextInt(24) - rand.nextInt(24), getDropPointY() + rand.nextInt(6) - 2, getDropPointZ() + rand.nextInt(24) - rand.nextInt(24));
+				currentFlightTarget = new ChunkCoordinates(getDropPointX() + rand.nextInt(32) - rand.nextInt(32), getDropPointY() + rand.nextInt(8) - 2, getDropPointZ() + rand.nextInt(32) - rand.nextInt(32));
 
 		flyToTarget();
 	}
