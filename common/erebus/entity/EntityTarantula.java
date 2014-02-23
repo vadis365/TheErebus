@@ -70,10 +70,10 @@ public class EntityTarantula extends EntityMob {
 		return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
 	}
 
-	public void setBesideClimbableBlock(boolean par1) {
+	public void setBesideClimbableBlock(boolean besideBlock) {
 		byte b0 = dataWatcher.getWatchableObjectByte(16);
 
-		if (par1)
+		if (besideBlock)
 			b0 = (byte) (b0 | 1);
 		else
 			b0 &= -2;
@@ -127,20 +127,19 @@ public class EntityTarantula extends EntityMob {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-
 		if (super.attackEntityAsMob(entity)) {
-
+			
 			if (entity instanceof EntityLiving) {
-				byte var2 = 0;
+				byte duration = 0;
 
 				if (worldObj.difficultySetting > 1 && rand.nextInt(19) == 0)
 					if (worldObj.difficultySetting == 2)
-						var2 = 5;
+						duration = 5;
 					else if (worldObj.difficultySetting == 3)
-						var2 = 10;
+						duration = 10;
 
-				if (var2 > 0)
-					((EntityLiving) entity).addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
+				if (duration> 0)
+					((EntityLiving) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
 			}
 			return true;
 		} else
@@ -148,29 +147,10 @@ public class EntityTarantula extends EntityMob {
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2) {
+	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chanceFiftyFifty = rand.nextInt(1) + 1;
-
-		int chance40x40x20 = rand.nextInt(4);
-		int stringDrop = 0;
-
-		switch (chance40x40x20) {
-			case 0:
-			case 1:
-				stringDrop = 1;
-				break;
-			case 2:
-			case 3:
-				stringDrop = 2;
-				break;
-			case 4:
-				stringDrop = 3;
-				break;
-		}
-
 		int chance20x60x20 = rand.nextInt(4);
 		int legDrop = 0;
-
 		switch (chance20x60x20) {
 			case 0:
 				legDrop = 1;
@@ -184,15 +164,11 @@ public class EntityTarantula extends EntityMob {
 				legDrop = 3;
 				break;
 		}
-
-		dropItem(Item.silk.itemID, stringDrop + par2);
-
 		if (isBurning())
-			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + par2, 5), 0.0F);
+			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 5), 0.0F);
 		else
-			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + par2, 4), 0.0F);
-
-		dropItem(Item.spiderEye.itemID, chanceFiftyFifty + par2);
+			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 4), 0.0F);
+		dropItem(Item.spiderEye.itemID, chanceFiftyFifty + looting);
 	}
 
 	@Override

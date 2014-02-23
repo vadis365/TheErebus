@@ -89,9 +89,7 @@ public class EntitySolifuge extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if (rand.nextInt(8) <= 2 + (looting >> 1))
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataBioVelocity), 0.0F);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, ItemErebusMaterial.dataExoPlate), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1 + looting, ItemErebusMaterial.dataBioVelocity), 0.0F);
 	}
 
 	@Override

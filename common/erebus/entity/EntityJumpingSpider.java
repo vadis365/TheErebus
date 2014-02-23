@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
@@ -60,6 +61,11 @@ public class EntityJumpingSpider extends EntitySpider {
 			return true;
 		} else
 			return false;
+	}
+	
+	@Override
+	protected int getDropItemId() {
+		return 0;
 	}
 
 	@Override

@@ -92,10 +92,9 @@ public class EntityScorpion extends EntityMob {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int var3 = rand.nextInt(4) + rand.nextInt(1 + looting);
-		int var4;
-		for (var4 = 0; var4 < var3; ++var4)
+		for (int var4 = 0; var4 < var3; ++var4)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), 0.0F);
-		int var5 = rand.nextInt(99);
+		int var5 = rand.nextInt(30);
 		if (var5 == 0)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataScorpPincer), 0.0F);
 	}

@@ -244,10 +244,9 @@ public class EntityBotFly extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if (rand.nextInt(4) == 0)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, ItemErebusMaterial.dataFlyWing), 0.0F);
-		if (rand.nextInt(8) == 0)
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3), ItemErebusMaterial.dataCompoundEyes), 0.0F);
+		if (rand.nextInt(5) == 0)
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1)+1, ItemErebusMaterial.dataCompoundEyes), 0.0F);
 	}
 
 	@Override
