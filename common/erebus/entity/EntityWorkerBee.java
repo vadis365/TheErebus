@@ -313,10 +313,5 @@ public class EntityWorkerBee extends EntityTameable {
 		setNectarPoints(nbt.getInteger("nectarPoints"));
 		setTameState(nbt.getByte("tameState"));
 		setDropPoint(nbt.getInteger("dropPointX"),nbt.getInteger("dropPointY"),nbt.getInteger("dropPointZ"));
-		if(getTameState()==1) {
-			System.out.println("DropX: "+ getDropPointX());
-			System.out.println("DropY: "+ getDropPointY());
-			System.out.println("DropZ: "+ getDropPointZ());
-		}
 	}
 }
