@@ -30,7 +30,6 @@ import erebus.item.ItemErebusMaterial;
 
 public class EntityWorkerBee extends EntityTameable {
 	public ChunkCoordinates currentFlightTarget;
-
 	public float wingFloat;
 	private final AnimationMathHelper mathWings = new AnimationMathHelper();
 	public boolean beeFlying;
@@ -163,7 +162,6 @@ public class EntityWorkerBee extends EntityTameable {
 					setBeeCollecting(false);
 				}
 		}
-		
 		super.onUpdate();
 	}
 
@@ -176,8 +174,7 @@ public class EntityWorkerBee extends EntityTameable {
 	}
 	
 	public void setBeeCollecting(boolean state) {
-		beeCollecting = state;
-		
+		beeCollecting = state;	
 	}
 
 	public void flyAbout() {
@@ -216,10 +213,10 @@ public class EntityWorkerBee extends EntityTameable {
 			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
 			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
 			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
-			float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
+			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
 			moveForward = 0.5F;
-			rotationYaw += var8;
+			rotationYaw += rotation;
 		}
 	}
 
@@ -316,7 +313,7 @@ public class EntityWorkerBee extends EntityTameable {
 		setNectarPoints(nbt.getInteger("nectarPoints"));
 		setTameState(nbt.getByte("tameState"));
 		setDropPoint(nbt.getInteger("dropPointX"),nbt.getInteger("dropPointY"),nbt.getInteger("dropPointZ"));
-		if(getTameState()==1){
+		if(getTameState()==1) {
 			System.out.println("DropX: "+ getDropPointX());
 			System.out.println("DropY: "+ getDropPointY());
 			System.out.println("DropZ: "+ getDropPointZ());
