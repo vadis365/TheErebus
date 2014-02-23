@@ -24,7 +24,7 @@ public class EntityVelvetWorm extends EntityMob implements IRangedAttackMob {
 
 	public EntityVelvetWorm(World world) {
 		super(world);
-		setSize(1.35F, 1.0F);
+		setSize(0.9F, 0.9F);
 		getNavigator().setAvoidsWater(false);
 		experienceValue = 15;
 		fireResistance = 10;
@@ -42,7 +42,6 @@ public class EntityVelvetWorm extends EntityMob implements IRangedAttackMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(13, new Byte((byte) 0));
 	}
 
 	@Override
