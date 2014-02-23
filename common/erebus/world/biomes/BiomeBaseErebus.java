@@ -1,11 +1,11 @@
 package erebus.world.biomes;
 import static erebus.core.handler.ConfigHandler.*;
 import java.util.Random;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.block.BlockErebusOre;

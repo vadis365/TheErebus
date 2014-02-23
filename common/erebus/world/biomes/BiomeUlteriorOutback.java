@@ -7,7 +7,9 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		super(biomeID);
 		
 		setBiomeName("Ulterior Outback");
-		setColors(0xC47C2A);
+		setColors(0xEEAA55);
+		setFog(234,194,114);
+		setTemperatureRainfall(1.1F,0.2F);
 		setWeight(15);
 	}
 
