@@ -22,6 +22,7 @@ import erebus.world.loot.IWeightProvider;
 public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightProvider{
 	private short biomeWeight;
 	private int grassColor,foliageColor;
+	private short[] fogColorRGB = new short[]{ 255,255,255 };
 	
 	public BiomeBaseErebus(int biomeID){
 		super(biomeID);
@@ -51,6 +52,11 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 		return this;
 	}
 	
+	protected final BiomeBaseErebus setFog(int red, int green, int blue){
+		this.fogColorRGB=new short[]{ (short)red, (short)green, (short)blue };
+		return this;
+	}
+	
 	protected final BiomeBaseErebus setWeight(int weight){
 		this.biomeWeight=(short)weight;
 		return this;
@@ -66,6 +72,12 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	@SideOnly(Side.CLIENT)
 	public final int getBiomeFoliageColor(){
 		return foliageColor;
+	}
+	
+
+	@SideOnly(Side.CLIENT)
+	public final short[] getFogRGB(){
+		return fogColorRGB;
 	}
 	
 	@Override

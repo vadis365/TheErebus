@@ -7,7 +7,6 @@ import erebus.world.biomes.BiomeFungalForest;
 import erebus.world.biomes.BiomeSubterraneanSavannah;
 import erebus.world.biomes.BiomeUlteriorOutback;
 import erebus.world.biomes.BiomeUndergroundJungle;
-import erebus.world.biomes.BiomeUndergroundJungleSubTest;
 import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.loot.WeightedList;
 
@@ -30,9 +29,19 @@ public class ModBiomes {
 	public static int fungalForestID;
 	public static int betweenlandsID;
 	
-	public static BiomeBaseErebus undergroundJungleSubTest;
+	public static BiomeBaseErebus jungleSubLake;
+	public static BiomeBaseErebus jungleSubAsperGrove;
+	public static BiomeBaseErebus desertSubCharredForest;
+	public static BiomeBaseErebus savannahSubRockyWasteland;
+	public static BiomeBaseErebus savannahSubAsperGrove;
+	public static BiomeBaseErebus savannahSubSteppe;
 	
-	public static int undergroundJungleSubTestID = 158;
+	public static int jungleSubLakeID;
+	public static int jungleSubAsperGroveID;
+	public static int desertSubCharredForestID;
+	public static int savannahSubRockyWastelandID;
+	public static int savannahSubAsperGroveID;
+	public static int savannahSubSteppeID;
 
 	public static void init() {
 		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
@@ -43,6 +52,6 @@ public class ModBiomes {
 		fungalForest = new BiomeFungalForest(fungalForestID);
 		betweenlands = new BiomeBetweenlands(betweenlandsID);
 		
-		undergroundJungleSubTest = new BiomeUndergroundJungleSubTest(undergroundJungleSubTestID);
+		//undergroundJungleSubTest = new BiomeUndergroundJungleSubTest(undergroundJungleSubTestID);
 	}
 }

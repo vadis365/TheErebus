@@ -10,7 +10,6 @@ import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
@@ -47,7 +46,8 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 		
 		setBiomeName("Undergound Jungle");
 		setColors(0x53CA37,0x29BC05);
-		setTemperatureRainfall(1.35F, 0.9F);
+		setFog(8,128,8);
+		setTemperatureRainfall(1.35F,0.9F);
 		setWeight(25);
 
 		spawnableMonsterList.add(new SpawnListEntry(EntityWasp.class,30,4,8));
@@ -237,7 +237,6 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 	
 	@Override
 	public BiomeBaseErebus getRandomSubBiome(int randomValue){
-		if (randomValue<10)return ModBiomes.undergroundJungleSubTest;
 		return null;
 	}
 }

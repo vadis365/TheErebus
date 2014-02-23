@@ -1,21 +1,23 @@
 package erebus.world;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumGameType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBiomes;
 import erebus.core.handler.ConfigHandler;
+import erebus.world.biomes.BiomeBaseErebus;
 
 public class WorldProviderErebus extends WorldProvider {
 
 	@SideOnly(Side.CLIENT)
-	private double[] currentFogColor, targetFogColor;
+	private double[] currentFogColor;
+	@SideOnly(Side.CLIENT)
+	private short[] targetFogColor;
 
 	@Override
 	public boolean canRespawnHere() {
@@ -35,23 +37,9 @@ public class WorldProviderErebus extends WorldProvider {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Vec3 getFogColor(float celestialAngle, float partialTickTime) {
-		BiomeGenBase b = worldObj.getBiomeGenForCoords((int) Minecraft.getMinecraft().thePlayer.posX, (int) Minecraft.getMinecraft().thePlayer.posZ);
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
-		if (targetFogColor == null)
-			targetFogColor = new double[3];
-		targetFogColor[0] = 0.03D * 255D;
-		targetFogColor[1] = 0.5D * 255D;
-		targetFogColor[2] = 0.03D * 255D;
-
-		if (b == ModBiomes.subterraneanSavannah) {
-			targetFogColor[0] = 140D;
-			targetFogColor[1] = 116D;
-			targetFogColor[2] = 9D;
-		} else if (b == ModBiomes.volcanicDesert) {
-			targetFogColor[0] = 255D;
-			targetFogColor[1] = 231D;
-			targetFogColor[2] = 10D;
-		}
+		targetFogColor = ((BiomeBaseErebus)worldObj.getBiomeGenForCoords((int)player.posX, (int)player.posZ)).getFogRGB();
 
 		if (currentFogColor == null) {
 			currentFogColor = new double[3];

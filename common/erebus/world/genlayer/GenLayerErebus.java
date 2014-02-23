@@ -54,12 +54,6 @@ public abstract class GenLayerErebus extends GenLayer {
 
 			if (j == 0)
 				object = new GenLayerAddIsland(3L, (GenLayer) object);
-			
-			/*if (j == 1)
-				object = new GenLayerShore(1000L, (GenLayer) object);
-*/
-			/*if (j == 1)
-				object = new GenLayerSwampRivers(1000L, (GenLayer) object);*/
 		}
 
 		// TODO find the fucker that makes random stripes of mixed biome blocks

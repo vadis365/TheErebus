@@ -8,7 +8,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		super(biomeID);
 		
 		setBiomeName("Elysian Fields");
-		setColors(0x7FA735);
+		setColors(0xC6FF54);
 		setTemperatureRainfall(0.85F, 0.5F);
 		setWeight(20);
 	}

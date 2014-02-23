@@ -32,7 +32,8 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		
 		setBiomeName("Subterranean Savannah");
 		setColors(0xB6B957,0xA3A52D);
-		setTemperatureRainfall(0.95F, 0.05F);
+		setFog(140,116,9);
+		setTemperatureRainfall(0.95F,0.05F);
 		setWeight(22);
 		
 		spawnableCreatureList.add(new SpawnListEntry(EntityGrasshopper.class,14,4,8));
