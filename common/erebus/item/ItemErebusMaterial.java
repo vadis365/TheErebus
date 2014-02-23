@@ -23,9 +23,9 @@ import erebus.network.packet.PacketSound;
 
 public class ItemErebusMaterial extends Item {
 
-	public static final String[] iconPaths = new String[] { "plateExo", "jade", "shardBone", "bamboo", "compoundEyes", "compoundLens", "flyWing", "itemPetrifiedWood", "bioVelocity", "elasticFibre", "waspSting", "bambooShoot", "redGem", "bioLuminescence", "supernaturalvelocity", "altarFragment", "reinforcedPlateExo", "gliderWing", "scorpionPincer", "camoPowder", "nectar"};
+	public static final String[] iconPaths = new String[] { "plateExo", "jade", "shardBone", "bamboo", "compoundEyes", "compoundLens", "flyWing", "itemPetrifiedWood", "bioVelocity", "elasticFibre", "waspSting", "bambooShoot", "redGem", "bioLuminescence", "supernaturalvelocity", "altarFragment", "reinforcedPlateExo", "gliderWing", "scorpionPincer", "camoPowder", "nectar", "poisonGland"};
 
-	public static final short dataExoPlate = 0, dataJade = 1, dataBoneShard = 2, dataBamboo = 3, dataCompoundEyes = 4, dataCompoundLens = 5, dataFlyWing = 6, dataPetrifiedWood = 7, dataBioVelocity = 8, dataElasticFibre = 9, dataWaspSting = 10, dataBambooShoot = 11, dataRedGem = 12, dataBioluminescence = 13, dataSupernaturalVelocity = 14, dataAltarFragment = 15, dataReinforcedPlateExo = 16, dataGliderWing = 17, dataScorpPincer = 18, dataCamoPowder = 19, dataNectar = 20;
+	public static final short dataExoPlate = 0, dataJade = 1, dataBoneShard = 2, dataBamboo = 3, dataCompoundEyes = 4, dataCompoundLens = 5, dataFlyWing = 6, dataPetrifiedWood = 7, dataBioVelocity = 8, dataElasticFibre = 9, dataWaspSting = 10, dataBambooShoot = 11, dataRedGem = 12, dataBioluminescence = 13, dataSupernaturalVelocity = 14, dataAltarFragment = 15, dataReinforcedPlateExo = 16, dataGliderWing = 17, dataScorpPincer = 18, dataCamoPowder = 19, dataNectar = 20, poisonGland = 21;
 
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
