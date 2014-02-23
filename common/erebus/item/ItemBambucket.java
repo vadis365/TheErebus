@@ -23,7 +23,8 @@ public class ItemBambucket extends Item {
 	public Icon bambucket;
 	public Icon waterBambucket;
 	public Icon bambucketOfBeetleJuice;
-
+	public Icon bambucketHoney;
+	
 	public ItemBambucket(int id) {
 		super(id);
 		maxStackSize = 16;
@@ -162,6 +163,7 @@ public class ItemBambucket extends Item {
 		bambucket = iconRegister.registerIcon("erebus:bambucket");
 		waterBambucket = iconRegister.registerIcon("erebus:bambucketWater");
 		bambucketOfBeetleJuice = iconRegister.registerIcon("erebus:bambucketOfBeetleJuice");
+		bambucketHoney = iconRegister.registerIcon("erebus:bambucketHoney");
 	}
 
 	@Override
@@ -173,6 +175,8 @@ public class ItemBambucket extends Item {
 				return waterBambucket;
 			case 2:
 				return bambucketOfBeetleJuice;
+			case 3:
+				return bambucketHoney;
 			default:
 				return null;
 		}
@@ -184,6 +188,7 @@ public class ItemBambucket extends Item {
 		list.add(new ItemStack(id, 1, 0));
 		list.add(new ItemStack(id, 1, 1));
 		list.add(new ItemStack(id, 1, 2));
+		list.add(new ItemStack(id, 1, 3));
 	}
 
 	@Override
