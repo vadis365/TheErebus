@@ -15,10 +15,8 @@ import erebus.entity.EntityVelvetWorm;
 
 @SideOnly(Side.CLIENT)
 public class RenderVelvetWorm extends RenderLiving {
-	private final ResourceLocation resource1 = new ResourceLocation("erebus:textures/entity/Velvet worm.png");
-	private final ResourceLocation resource2 = new ResourceLocation("erebus:textures/entity/Velvet worm2.png");
-
-	private final float scale = 1F;
+	private final ResourceLocation resource1 = new ResourceLocation("erebus:textures/entity/velvetworm.png");
+	private final ResourceLocation resource2 = new ResourceLocation("erebus:textures/entity/velvetworm2.png");
 
 	public RenderVelvetWorm() {
 		super(new ModelVelvetWorm(), 0.6F);
@@ -40,7 +38,7 @@ public class RenderVelvetWorm extends RenderLiving {
 
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityLiving, float par2) {
-		GL11.glScalef(scale, scale, scale);
+		GL11.glScalef(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override

@@ -101,8 +101,7 @@ public class ModEntities {
 		registerEntity(21, EntityJumpingSpider.class, "JumpingSpider", 0xE82066, 0x06B900);
 		registerEntity(22, EntityFireAnt.class, "FireAnt", 0xFF0000, 0xFFEE00);
 		registerEntity(23, EntityWorkerBee.class, "WorkerBee", 0xFFA200, 0x000000);
-		// registerEntity(EntityVelvetWorm.class, "VelvetWorm",
-		// EntityRegistry.findGlobalUniqueEntityId(), 894731, 000000);
+		//registerEntity(24, EntityVelvetWorm.class, "VelvetWorm", 894731, 000000);
 
 		registerEntity(50, EntityAnimatedBlock.class, "AnimatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "AnimatedChest");
