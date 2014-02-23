@@ -16,9 +16,6 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		if (blockID == 0)
 			return false;
-		
-		if (bee.getTameState()==1 && bee.getNectarPoints()>0)
-			return false;
 
 		else if (blockID == ModBlocks.erebusFlower.blockID && blockMeta == 0)
 			return true;
@@ -56,11 +53,16 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	@Override
 	protected void afterPollination() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
-		bee.setBeePollinating(false);
-		bee.setBeeFlying(true);
 		if(bee.getNectarPoints() < 127)
 			bee.setNectarPoints(bee.getNectarPoints() + 1);
+	if (bee.getTameState()==0) {
+		bee.setBeePollinating(false);
+		bee.setBeeFlying(true);
 		bee.flyAbout();
+		}
+	else if (bee.getTameState()==1) {
+		bee.setBeePollinating(false);
+		bee.setBeeCollecting(true);
+		}
 	}
-
 }
