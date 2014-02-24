@@ -43,6 +43,7 @@ import erebus.item.ItemWandOfAnimation;
 import erebus.item.ItemWaspDagger;
 import erebus.item.ItemWaspSword;
 import erebus.item.ItemWebSlinger;
+import erebus.item.block.ItemBlockDoorAmber;
 
 public class ModItems {
 
@@ -58,7 +59,7 @@ public class ModItems {
 	public static Item reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots;
 
 	// MISC WEAPONS
-	public static Item fossilClub, waspSword, maxSpeedBow, waspDagger, scorpionPincer, webSlinger;
+	public static Item fossilClub, waspSword, maxSpeedBow, waspDagger, scorpionPincer, webSlinger, doorAmberItem;
 
 	// MISC ARMOR
 	public static Item reinCompoundGoggles, compoundGoggles, sprintLeggings, jumpBoots, armorGlider;
@@ -88,6 +89,7 @@ public class ModItems {
 		hornOfSummoning = new ItemHornOfSummoning(ConfigHandler.hornOfSummoningID).setUnlocalizedName("hornOfSummoning").setTextureName("erebus:hornOfSummoning");
 		nectarCollector = new ItemNectarCollector(ConfigHandler.nectarCollectorID).setUnlocalizedName("nectarCollector").setTextureName("erebus:nectarCollector");
 		beeTamingAmulet = new ItemBeeTamingAmulet(ConfigHandler.beeTamingAmuletID).setUnlocalizedName("beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
+		doorAmberItem = new ItemBlockDoorAmber(ConfigHandler.doorAmberItemID, ModBlocks.doorAmber).setUnlocalizedName("doorAmberItem").setTextureName("erebus:doorAmber");
 
 		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
@@ -137,6 +139,9 @@ public class ModItems {
 		Erebus.tabErebusGear.add(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger);
 		Erebus.tabErebusGear.add(compoundGoggles, reinCompoundGoggles, armorGlider, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
 		Erebus.tabErebusSpecial.add(portalActivator, bamBucket, bucketOfBeetleJuice, erebusSpecialItem, beeTamingAmulet, sprayCan, hornOfSummoning, spawnEggs);
+	
+		// Special Case
+		Erebus.tabErebusBlock.add(doorAmberItem);	
 	}
 
 	private static void registerItems() {

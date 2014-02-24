@@ -169,6 +169,7 @@ erebusFlower_item_13.name=Magenta Petal
 erebusFlower_item_14.name=Orange Petal
 erebusFlower_item_15.name=White Petal
 tile.honeyCombBlock.name=Honey Comb
+tile.doorAmber.name=Amber Door
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet
@@ -251,6 +252,7 @@ item.webSlinger.name=Web Slinger
 item.blockExtractor.name=Block Extractor
 item.nectarCollector.name=Nectar Collector
 item.beeTamingAmulet.name=Bee Taming Amulet
+item.doorAmberItem.name=Amber Door
 
 #Entities
 entity.Erebus.BeetleLarva.name=Beetle Larva

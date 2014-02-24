@@ -1,6 +1,7 @@
 package erebus;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,6 +15,7 @@ import erebus.block.BlockBambooShoot;
 import erebus.block.BlockBambooTorch;
 import erebus.block.BlockBones;
 import erebus.block.BlockButtonUmberstone;
+import erebus.block.BlockDoorAmber;
 import erebus.block.BlockErebusAltar;
 import erebus.block.BlockErebusAltarHealing;
 import erebus.block.BlockErebusAltarLightning;
@@ -100,7 +102,7 @@ public class ModBlocks {
 	public static Block umberPaver, insectRepellent, bambooShoot, bambooCrop, bambooTorch, erebusAltar, erebusAltarLightning;
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
-	public static Block velocityBlock, honeyCombBlock;
+	public static Block velocityBlock, honeyCombBlock, doorAmber;
 
 	// STAIRS, SLABS, WALLS
 	public static Block[] umbercobbleStairs, plankStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab;
@@ -174,7 +176,8 @@ public class ModBlocks {
 		umberstonePillar = new BlockUmberstonePillar(ConfigHandler.umberstonePillarID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstonePillar").setTextureName("erebus:umberstonePillarSides");
 		velocityBlock = new BlockVelocity(ConfigHandler.velocityBlockID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("velocityBlock").setTextureName("erebus:blockSpeed0");
 		honeyCombBlock = new BlockHoneyComb(ConfigHandler.honeyCombBlockID).setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("honeyCombBlock").setTextureName("erebus:honeyCombTop");
-
+		doorAmber = new BlockDoorAmber(ConfigHandler.doorAmberID, Material.glass).setUnlocalizedName("doorAmber").setTextureName("erebus:doorAmber");
+		
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			umbercobbleStairs[i] = new BlockStairsErebus(ConfigHandler.umbercobbleStairsID[i], umberstone, i).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umbercobbleStairs" + i);
@@ -275,6 +278,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(umberstonePillar, "erebus.umberstonePillar");
 		GameRegistry.registerBlock(velocityBlock, "erebus.velocityBlock");
 		GameRegistry.registerBlock(honeyCombBlock, "erebus.honeyCombBlock");
+		GameRegistry.registerBlock(doorAmber, "erebus.doorAmber");
 
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			GameRegistry.registerBlock(umbercobbleStairs[i], "erebus.umbercobbleStairs" + i);
