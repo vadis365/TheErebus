@@ -22,6 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
 import erebus.client.sound.EntitySoundEvent;
+import erebus.core.handler.BucketHandler;
 import erebus.core.handler.CommonTickHandler;
 import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.PlayerTeleportHandler;
@@ -93,7 +94,9 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModBlocks.erebusHoneyBlock);
 		MinecraftForge.EVENT_BUS.register(ModItems.armorGlider);
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
-
+		BucketHandler.INSTANCE.buckets.put(ModBlocks.erebusHoneyBlock, ModItems.bucketHoney);
+		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		
 		if (ConfigHandler.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 

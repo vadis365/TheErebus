@@ -186,7 +186,7 @@ public class ModBlocks {
 		velocityBlock = new BlockVelocity(ConfigHandler.velocityBlockID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("velocityBlock").setTextureName("erebus:blockSpeed0");
 		honeyCombBlock = new BlockHoneyComb(ConfigHandler.honeyCombBlockID).setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("honeyCombBlock").setTextureName("erebus:honeyCombTop");
 		doorAmber = new BlockDoorAmber(ConfigHandler.doorAmberID, Material.glass).setUnlocalizedName("doorAmber").setTextureName("erebus:doorAmber");
-		erebusHoneyBlock = new BlockErebusHoney(ConfigHandler.erebusHoneyFluidID, erebusHoney, Material.water);
+		erebusHoneyBlock = new BlockErebusHoney(ConfigHandler.erebusHoneyFluidID, erebusHoney, ModMaterials.honey);
 		
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)

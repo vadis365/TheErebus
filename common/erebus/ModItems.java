@@ -20,6 +20,7 @@ import erebus.item.ItemBambucket;
 import erebus.item.ItemBeeTamingAmulet;
 import erebus.item.ItemBlockExtractor;
 import erebus.item.ItemBucketOfBeetleJuice;
+import erebus.item.ItemBucketOfHoney;
 import erebus.item.ItemCavemanClub;
 import erebus.item.ItemCompoundGoggles;
 import erebus.item.ItemErebusFood;
@@ -49,7 +50,7 @@ public class ModItems {
 
 	// BASIC MATERIALS
 	public static Item portalActivator, erebusMaterials, erebusFood, metalIngot, bamBucket, turnip, sprayCan, wandOfAnimation;
-	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor, nectarCollector, beeTamingAmulet;
+	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor, nectarCollector, beeTamingAmulet, bucketHoney;
 
 	// JADE STUFF
 	public static Item jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe;
@@ -90,7 +91,8 @@ public class ModItems {
 		nectarCollector = new ItemNectarCollector(ConfigHandler.nectarCollectorID).setUnlocalizedName("nectarCollector").setTextureName("erebus:nectarCollector");
 		beeTamingAmulet = new ItemBeeTamingAmulet(ConfigHandler.beeTamingAmuletID).setUnlocalizedName("beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
 		doorAmberItem = new ItemBlockDoorAmber(ConfigHandler.doorAmberItemID, ModBlocks.doorAmber).setUnlocalizedName("doorAmberItem").setTextureName("erebus:doorAmber");
-
+	    bucketHoney = new ItemBucketOfHoney(ConfigHandler.bucketHoneyID, ModBlocks.erebusHoneyBlock.blockID).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
+	    
 		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
 		jadeLegs = new ItemJadeArmor(ConfigHandler.jadeLegsID, 2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
@@ -138,7 +140,7 @@ public class ModItems {
 		Erebus.tabErebusGear.add(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		Erebus.tabErebusGear.add(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger);
 		Erebus.tabErebusGear.add(compoundGoggles, reinCompoundGoggles, armorGlider, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
-		Erebus.tabErebusSpecial.add(portalActivator, bamBucket, bucketOfBeetleJuice, erebusSpecialItem, beeTamingAmulet, sprayCan, hornOfSummoning, spawnEggs);
+		Erebus.tabErebusSpecial.add(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, sprayCan, hornOfSummoning, spawnEggs);
 	
 		// Special Case
 		Erebus.tabErebusBlock.add(doorAmberItem);	
@@ -160,6 +162,7 @@ public class ModItems {
 		GameRegistry.registerItem(hornOfSummoning, "hornOfSummoning");
 		GameRegistry.registerItem(nectarCollector, "nectarCollector");
 		GameRegistry.registerItem(beeTamingAmulet, "beeTamingAmulet");
+		GameRegistry.registerItem(bucketHoney, "bucketHoney");
 
 		GameRegistry.registerItem(jadeHelmet, "erebus.helmetJade");
 		GameRegistry.registerItem(jadeBody, "erebus.chestplateJade");
@@ -194,6 +197,8 @@ public class ModItems {
 		GameRegistry.registerItem(sprintLeggings, "erebus.sprintLeggings");
 		GameRegistry.registerItem(jumpBoots, "erebus.jumpBoots");
 		GameRegistry.registerItem(armorGlider, "erebus.armorGlider");
+		
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("erebushoney", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketHoney), new ItemStack(Item.bucketEmpty));
 	}
 
 	private static void registerProperties() {
