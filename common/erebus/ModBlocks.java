@@ -3,6 +3,8 @@ package erebus;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
 import erebus.block.BlockBambooBridge;
@@ -22,6 +24,7 @@ import erebus.block.BlockErebusAltarRepair;
 import erebus.block.BlockErebusAltarXP;
 import erebus.block.BlockErebusFlower;
 import erebus.block.BlockErebusGrass;
+import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockErebusOreExtras;
 import erebus.block.BlockExtenderThingy;
@@ -83,6 +86,9 @@ import erebus.item.block.ItemBlockUmberpaver;
 import erebus.item.block.ItemBlockWallErebus;
 
 public class ModBlocks {
+	
+	// FLUIDS
+	public static Fluid erebusHoney;
 
 	// PORTAL
 	public static BlockPortalErebus portalErebus;
@@ -103,7 +109,7 @@ public class ModBlocks {
 	public static Block umberPaver, insectRepellent, bambooShoot, bambooCrop, bambooTorch, erebusAltar, erebusAltarLightning;
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
-	public static Block velocityBlock, honeyCombBlock, doorAmber;
+	public static Block velocityBlock, honeyCombBlock, doorAmber, erebusHoneyBlock;
 
 	// STAIRS, SLABS, WALLS
 	public static Block[] umbercobbleStairs, plankStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab, gneissStairs;
@@ -111,12 +117,13 @@ public class ModBlocks {
 
 	// DUNGEONS
 	public static Block spiderSpawner, jumpingSpiderSpawner, waspSpawner, waspNestBlock, gneiss;
-
+	
 	public static void init() {
+		registerFluids();
 		initBlocks();
 		initCreativeTabs();
 		registerBlocks();
-		registerProperties();
+		registerProperties();	
 	}
 
 	private static void initBlocks() {
@@ -179,6 +186,7 @@ public class ModBlocks {
 		velocityBlock = new BlockVelocity(ConfigHandler.velocityBlockID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("velocityBlock").setTextureName("erebus:blockSpeed0");
 		honeyCombBlock = new BlockHoneyComb(ConfigHandler.honeyCombBlockID).setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("honeyCombBlock").setTextureName("erebus:honeyCombTop");
 		doorAmber = new BlockDoorAmber(ConfigHandler.doorAmberID, Material.glass).setUnlocalizedName("doorAmber").setTextureName("erebus:doorAmber");
+		erebusHoneyBlock = new BlockErebusHoney(ConfigHandler.erebusHoneyFluidID, erebusHoney, Material.water);
 		
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -216,7 +224,7 @@ public class ModBlocks {
 		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
 		Erebus.tabErebusBlock.add(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		Erebus.tabErebusBlock.add(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
-		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock, honeyCombBlock, gneiss);
+		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock, honeyCombBlock, erebusHoneyBlock, gneiss);
 		for (Block b : umbercobbleStairs)
 			Erebus.tabErebusBlock.add(b);
 		for (Block b : plankStairs)
@@ -310,6 +318,8 @@ public class ModBlocks {
 		GameRegistry.registerBlock(spiderSpawner, "erebus.spiderSpawner");
 		GameRegistry.registerBlock(jumpingSpiderSpawner, "erebus.jumpingSpiderSpawner");
 		GameRegistry.registerBlock(waspSpawner, "erebus.waspSpawner");
+		
+		GameRegistry.registerBlock(erebusHoneyBlock, "erebus.erebusHoney");
 	}
 
 	private static void registerProperties() {
@@ -358,5 +368,10 @@ public class ModBlocks {
 		Block.setBurnProperties(fern.blockID, 60, 100);
 		Block.setBurnProperties(fiddlehead.blockID, 60, 100);
 		Block.setBurnProperties(thorns.blockID, 15, 100);
+	}
+	
+	private static void registerFluids() {
+		erebusHoney = new Fluid("erebusHoney").setBlockID(ConfigHandler.erebusHoneyFluidID).setDensity(6000).setViscosity(6000).setUnlocalizedName("erebus.erebusHoney");
+		FluidRegistry.registerFluid(erebusHoney);
 	}
 }
