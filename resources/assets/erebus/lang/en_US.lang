@@ -170,6 +170,26 @@ erebusFlower_item_14.name=Orange Petal
 erebusFlower_item_15.name=White Petal
 tile.honeyCombBlock.name=Honey Comb
 tile.doorAmber.name=Amber Door
+gneiss_item_0.name=Gneiss
+gneiss_item_1.name=Gneiss Carved
+gneiss_item_2.name=Gneiss Relief 1
+gneiss_item_3.name=Gneiss Relief 2
+gneiss_item_4.name=Gneiss Slab
+gneiss_item_5.name=Gneiss Smooth 1
+gneiss_item_6.name=Gneiss Smooth 2
+gneiss_item_7.name=Gneiss Tiles
+gneiss_item_8.name=Gneiss Up
+gneiss_item_9.name=Gneiss Wifi
+tile.gneissStairs0.name=Gneiss Stairs
+tile.gneissStairs1.name=Gneiss Carved Stairs
+tile.gneissStairs2.name=Gneiss Relief 1 Stairs
+tile.gneissStairs3.name=Gneiss Relief 2 Stairs
+tile.gneissStairs4.name=Gneiss Slab Stairs
+tile.gneissStairs5.name=Gneiss Smooth 1 Stairs
+tile.gneissStairs6.name=Gneiss Smooth 2 Stairs
+tile.gneissStairs7.name=Gneiss Tiles Stairs
+tile.gneissStairs8.name=Gneiss Up Stairs
+tile.gneissStairs9.name=Gneiss Wifi Stairs
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

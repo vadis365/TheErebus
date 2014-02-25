@@ -7,6 +7,7 @@ import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import erebus.ModBiomes;
+import erebus.block.BlockGneiss;
 import erebus.block.BlockPlanksErebus;
 import erebus.block.BlockUmberstone;
 import erebus.lib.Reference;
@@ -28,8 +29,8 @@ public class ConfigHandler {
 	public static int reinExoID, bambooLadderID, bambooBridgeID, umberGolemStatueID, petrifiedWoodChestID, blockBonesID;
 	public static int blockWitherWebID, extenderThingyID, bambooPoleID, umberstonePillarID, velocityBlockID, petrifiedWoodStairsID;
 	public static int wallErebusID, amberBrickStairsID, waspNestStairsID, spiderSpawnerID, jumpingSpiderSpawnerID, waspSpawnerID;
-	public static int waspNestBlockID, honeyCombBlockID, doorAmberID;
-	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID;
+	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID;
+	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID, gneissStairsID;
 
 	// ITEMS
 	public static int portalActivatorID, erebusMaterialsID, erebusFoodID, metalIngotID, bamBucketID, turnipID, sprayCanID;
@@ -58,7 +59,8 @@ public class ConfigHandler {
 			ghostSandID = config.getBlock("Block ID of Ghost Sand", 2554).getInt(2554);
 			erebusOreExtraID = config.getBlock("Block ID of Extra Erebus Ores", 2506).getInt(2506);
 			umberstoneButtonID = config.getBlock("Block ID of Umberstone Button", 2561).getInt(2561);
-
+			gneissID = config.getBlock("Block ID of Gneiss", 2586).getInt(2586);
+			
 			logErebusGroup1ID = config.getBlock("Block ID of Log - group 1", 2507).getInt(2507);
 			logErebusGroup2ID = config.getBlock("Block ID of Log - group 2", 2508).getInt(2508);
 			planksErebusID = config.getBlock("Block ID of Planks", 2509).getInt(2509);
@@ -127,12 +129,15 @@ public class ConfigHandler {
 				petrifiedWoodSlabID[i] = config.getBlock("Block ID of Petrified Wood Slab" + i, 2556 + i).getInt(2556 + i);
 			amberBrickStairsID = config.getBlock("Block ID of Amber Brick Stairs", 2558).getInt(2558);
 			waspNestStairsID = config.getBlock("Block ID of Wasp Nest Stairs", 2573).getInt(2573);
-
+			gneissStairsID = new int[BlockGneiss.iconPaths.length];
+			for (int i = 0; i <gneissStairsID.length; i++)
+				gneissStairsID[i] = config.getBlock("Block ID of Gneiss Stairs " + i, 2587 + i).getInt(2587 + i);
+				
 			spiderSpawnerID = config.getBlock("Block ID of Scytodes Spawners", 2552).getInt(2552);
 			jumpingSpiderSpawnerID = config.getBlock("Block ID of Jumping Spider Spawners", 2553).getInt(2553);
 			waspSpawnerID = config.getBlock("Block ID of Wasp Spawners", 2572).getInt(2572);
 
-			// latest ID used (please update after adding new blocks!) >>> 2585
+			// latest ID used (please update after adding new blocks!) >>> 2587
 
 			// Items
 			portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
