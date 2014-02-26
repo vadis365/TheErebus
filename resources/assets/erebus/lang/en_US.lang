@@ -190,6 +190,7 @@ tile.gneissStairs6.name=Gneiss Smooth 2 Stairs
 tile.gneissStairs7.name=Gneiss Tiles Stairs
 tile.gneissStairs8.name=Gneiss Up Stairs
 tile.gneissStairs9.name=Gneiss Wifi Stairs
+tile.erebusHoney.name=Honey
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet
@@ -273,6 +274,7 @@ item.blockExtractor.name=Block Extractor
 item.nectarCollector.name=Nectar Collector
 item.beeTamingAmulet.name=Bee Taming Amulet
 item.doorAmberItem.name=Amber Door
+item.bucketHoney.name=Bucket Of Honey
 
 #Entities
 entity.Erebus.BeetleLarva.name=Beetle Larva
