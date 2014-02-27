@@ -40,6 +40,7 @@ public class ConfigHandler {
 	public static int reinExoskeletonHelmetID, reinExoskeletonBodyID, reinExoskeletonLegsID, reinExoskeletonBootsID, fossilClubID;
 	public static int waspSwordID, maxSpeedBowID, waspDaggerID, scorpionPincerID, webSlingerID, reinCompoundGogglesID, compoundGogglesID;
 	public static int sprintLeggingsID, jumpBootsID, armorGliderID, spawnEggsID, nectarCollectorID, beeTamingAmuletID, doorAmberItemID, bucketHoneyID;
+	public static int homingBeeconID;
 
 	public static void loadConfig(FMLPreInitializationEvent event) {
 		config = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
@@ -152,11 +153,12 @@ public class ConfigHandler {
 			sprayCanID = config.getItem("Item ID of Insect Repellent", 9712).getInt(9712);
 			wandOfAnimationID = config.getItem("ItemID of Wand of Animation", 9734).getInt(9734);
 			bucketOfBeetleJuiceID = config.getItem("ItemID of Bucket Of Beetle Juice", 9742).getInt(9742);
-			hornOfSummoningID = config.getItem("ItemID of Horn of The Swarm", 9744).getInt(9744);
-			nectarCollectorID = config.getItem("ItemID of Nectar Collector", 9748).getInt(9748);
-			beeTamingAmuletID = config.getItem("ItemID of Bee Taming Amulet", 9749).getInt(9749);
-			doorAmberItemID = config.getItem("ItemID of Amber Door", 9750).getInt(9750);
-			bucketHoneyID = config.getItem("ItemID of Bucket of Honey", 9751).getInt(9751);
+			hornOfSummoningID = config.getItem("Item ID of Horn of The Swarm", 9744).getInt(9744);
+			nectarCollectorID = config.getItem("Item ID of Nectar Collector", 9748).getInt(9748);
+			beeTamingAmuletID = config.getItem("Item ID of Bee Taming Amulet", 9749).getInt(9749);
+			doorAmberItemID = config.getItem("Item ID of Amber Door", 9750).getInt(9750);
+			bucketHoneyID = config.getItem("Item ID of Bucket of Honey", 9751).getInt(9751);
+			homingBeeconID = config.getItem("Item ID of Homing Beecon", 9752).getInt(9752);
 			
 			jadeHelmetID = config.getItem("Item ID of Jade Helmet", 9713).getInt(9713);
 			jadeBodyID = config.getItem("Item ID of Jade Chestplate", 9714).getInt(9714);
@@ -195,7 +197,7 @@ public class ConfigHandler {
 
 			spawnEggsID = config.getItem("Item ID of Spawn Eggs", 9743).getInt(9743);
 
-			// latest ID used (please update after adding new items!) >>> 9751
+			// latest ID used (please update after adding new items!) >>> 9752
 
 			// Biomes & misc
 			ModBiomes.undergroundJungleID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 151).getInt(151);

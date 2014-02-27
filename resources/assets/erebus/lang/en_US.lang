@@ -275,6 +275,7 @@ item.nectarCollector.name=Nectar Collector
 item.beeTamingAmulet.name=Bee Taming Amulet
 item.doorAmberItem.name=Amber Door
 item.bucketHoney.name=Bucket Of Honey
+item.homingBeecon.name=Homing Beecon
 
 #Entities
 entity.Erebus.BeetleLarva.name=Beetle Larva

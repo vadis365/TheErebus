@@ -25,6 +25,7 @@ import erebus.client.sound.EntitySoundEvent;
 import erebus.core.handler.BucketHandler;
 import erebus.core.handler.CommonTickHandler;
 import erebus.core.handler.ConfigHandler;
+import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.handler.PlayerTeleportHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.creativetab.CreativeTabErebus;
@@ -64,6 +65,7 @@ public class Erebus {
 		if (event.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.register(new EntitySoundEvent());
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
+			MinecraftForge.EVENT_BUS.register(new HomingBeeconTextureHandler());
 			AmbientMusicManager.register();
 		}
 
