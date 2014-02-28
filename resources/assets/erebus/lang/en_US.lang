@@ -304,6 +304,7 @@ entity.Erebus.JumpingSpider.name=Jumping Spider
 entity.Erebus.FireAnt.name=Fire Ant
 entity.Erebus.RhinoBeetle.name=Rhinoceros Beetle
 entity.Erebus.WorkerBee.name=Worker Bee
+entity.Erebus.Dragonfly.name=Dragonfly
 
 #Other
 itemGroup.erebus.block=Erebus Blocks
