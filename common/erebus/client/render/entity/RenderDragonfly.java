@@ -37,7 +37,8 @@ public class RenderDragonfly extends RenderLiving {
 
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		GL11.glScalef(0.75F, 0.75F, 0.75F);
+		//Other sizes to be added 
+		GL11.glScalef(1.0F, 1.0F, 1.0F);
 	}
 
 	@Override

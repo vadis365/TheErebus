@@ -21,7 +21,7 @@ public class EntityDragonfly extends EntityAmbientCreature {
 
 	public EntityDragonfly(World world) {
 		super(world);
-		setSize(1.8F, 0.5F);
+		setSize(2.5F, 1.0F);
 	}
 
 	@Override
