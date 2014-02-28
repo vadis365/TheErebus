@@ -39,7 +39,6 @@ public class EntityGrasshopper extends EntityCreature {
 		tasks.addTask(3, aiEatCrops);
 		tasks.addTask(4, new EntityAIPanic(this, 0.8D));
 		tasks.addTask(5, new EntityAILookIdle(this));
-
 	}
 
 	@Override

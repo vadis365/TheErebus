@@ -15,7 +15,11 @@ import erebus.entity.EntityDragonfly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDragonfly extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/dragonflyGreen.png");
+	private static final ResourceLocation texture1 = new ResourceLocation("erebus:textures/entity/dragonflyGreen.png");
+	private static final ResourceLocation texture2 = new ResourceLocation("erebus:textures/entity/dragonflyRed.png");
+	private static final ResourceLocation texture3 = new ResourceLocation("erebus:textures/entity/dragonflyPurple.png");
+	private static final ResourceLocation texture4 = new ResourceLocation("erebus:textures/entity/dragonflyBlue.png");
+	private static final ResourceLocation texture5 = new ResourceLocation("erebus:textures/entity/dragonflyTan.png");
 
 	public RenderDragonfly() {
 		super(new ModelDragonfly(), 0.3F);
@@ -43,6 +47,19 @@ public class RenderDragonfly extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+		EntityDragonfly entityDragonfly = (EntityDragonfly) entity;
+		switch (entityDragonfly.skin) {
+			case 0:
+				return texture1;
+			case 1:
+				return texture2;
+			case 2:
+				return texture3;
+			case 3:
+				return texture4;
+			case 4:
+				return texture5;
+		}
+		return texture1;
 	}
 }

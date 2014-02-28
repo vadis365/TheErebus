@@ -18,7 +18,8 @@ public class EntityDragonfly extends EntityAmbientCreature {
 	private ChunkCoordinates currentFlightTarget;
 	public float wingFloat;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
-
+	public int skin = rand.nextInt(5);
+	
 	public EntityDragonfly(World world) {
 		super(world);
 		setSize(2.5F, 1.0F);

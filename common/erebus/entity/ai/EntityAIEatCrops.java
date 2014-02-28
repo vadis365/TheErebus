@@ -73,7 +73,6 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 		grasshopper.setMoveTasks(true);
 		grasshopper.setIsEating(false);
 		reproCap++;
-		System.out.println("Repro Number: "+reproCap);
 		if (reproCap == 6)
 			if (grasshopper.worldObj.countEntities(EntityGrasshopper.class) < 80) {
 				EntityGrasshopper entityGrasshopper = new EntityGrasshopper(grasshopper.worldObj);
