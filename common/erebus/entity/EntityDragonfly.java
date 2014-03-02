@@ -2,148 +2,286 @@ package erebus.entity;
 
 import java.util.Calendar;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.item.Item;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemErebusMaterial;
 
-public class EntityDragonfly extends EntityAmbientCreature {
+public class EntityDragonfly extends EntityMob {
 
 	private ChunkCoordinates currentFlightTarget;
-	public float wingFloat;
+	private double heightOffset = -1.5D;
+	EntityLivingBase entityToAttack;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
+	public float wingFloat;
+
 	public int skin = rand.nextInt(5);
-	
+	public double pickupHeight;
+	private boolean dropped;
+	private int droptime=0;
+
 	public EntityDragonfly(World world) {
 		super(world);
 		setSize(2.5F, 1.0F);
-	}
+		}
 
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-	}
+		@Override
+		protected void entityInit() {
+			super.entityInit();
+		}
 
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(4.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
-	}
+		@Override
+		protected void applyEntityAttributes() {
+			super.applyEntityAttributes();
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15.0D);
+			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
+			getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(8.0D);
+		}
 
-	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
-		return EnumCreatureAttribute.ARTHROPOD;
-	}
+		@Override
+		public EnumCreatureAttribute getCreatureAttribute() {
+			return EnumCreatureAttribute.ARTHROPOD;
+		}
 
-	@Override
-	protected float getSoundVolume() {
-		return 0.1F;
-	}
-
-	@Override
-	protected float getSoundPitch() {
-		return super.getSoundPitch() * 0.95F;
-	}
-
-	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
-	}
-
-	@Override
-	public boolean canBePushed() {
-		return false;
-	}
-
-	@Override
-	protected boolean isAIEnabled() {
-		return true;
-	}
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-			wingFloat = mathWings.swing(4.0F, 0.1F);
-			motionY *= 0.6000000238418579D;
-	}
-
-	@Override
-	protected void updateAITasks() {
-		super.updateAITasks();
-			if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
-				currentFlightTarget = null;
-
-			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
-				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
-
-			double var1 = currentFlightTarget.posX + 0.5D - posX;
-			double var3 = currentFlightTarget.posY + 0.1D - posY;
-			double var5 = currentFlightTarget.posZ + 0.5D - posZ;
-			motionX += (Math.signum(var1) * 0.5D - motionX) * 0.10000000149011612D;
-			motionY += (Math.signum(var3) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-			motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.10000000149011612D;
-			float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
-			moveForward = 0.5F;
-			rotationYaw += var8;
-	}
-
-	@Override
-	protected boolean canTriggerWalking() {
-		return false;
-	}
-
-	@Override
-	protected void fall(float par1) {
-	}
-
-	@Override
-	protected void updateFallState(double par1, boolean par3) {
-	}
-
-	@Override
-	public boolean doesEntityNotTriggerPressurePlate() {
-		return true;
-	}
-
-	@Override
-	public boolean attackEntityFrom(DamageSource source, float par2) {
-			return super.attackEntityFrom(source, par2);
-	}
-
-	@Override
-	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(boundingBox.minY);
-
-		if (var1 >= 63)
+		@Override
+		public boolean canBePushed() {
 			return false;
-		else {
-			int var2 = MathHelper.floor_double(posX);
-			int var3 = MathHelper.floor_double(posZ);
-			int var4 = worldObj.getBlockLightValue(var2, var1, var3);
-			byte var5 = 4;
-			Calendar var6 = worldObj.getCurrentDate();
+		}
 
-			if ((var6.get(2) + 1 != 10 || var6.get(5) < 20) && (var6.get(2) + 1 != 11 || var6.get(5) > 3)) {
-				if (rand.nextBoolean())
-					return false;
+		@Override
+		protected void collideWithEntity(Entity entity) {
+		}
+
+		@Override
+	    public boolean shouldRiderSit() {
+	        return false;
+	    }
+
+		@Override
+		protected boolean isAIEnabled() {
+			return false;
+		}
+		@Override
+		protected boolean canTriggerWalking() {
+			return false;
+		}
+
+		@Override
+		protected void fall(float par1) {
+		}
+
+		@Override
+		protected void updateFallState(double par1, boolean par3) {
+		}
+
+		@Override
+		public boolean doesEntityNotTriggerPressurePlate() {
+			return true;
+		}
+		
+
+		@Override
+		protected float getSoundVolume() {
+			return 0.1F;
+		}
+
+		@Override
+		protected float getSoundPitch() {
+			return super.getSoundPitch() * 0.95F;
+		}
+
+		@Override
+		protected String getLivingSound() {
+			return rand.nextInt(4) != 0 ? null : "erebus:FlySound";
+		}
+
+		@Override
+		protected String getHurtSound() {
+			return "erebus:FlyHurt";
+		}
+
+		@Override
+		protected String getDeathSound() {
+			return "erebus:squish";
+		}
+
+		@Override
+		public void onUpdate() {
+			super.onUpdate();
+				wingFloat = mathWings.swing(4.0F, 0.1F);
+				motionY *= 0.6000000238418579D;
+				if (getEntityToAttack() == null)
+					flyAbout();
+				if (riddenByEntity != null) {
+				if (!worldObj.isRemote && captured() && posY > pickupHeight + 10D){
+					setDropped(true);
+					riddenByEntity.mountEntity(null);
+				}
+				}
+				if(dropped) {
+					droptime++;
+					if(droptime >= 20) {
+						setDropped(false);
+						droptime = 0;
+						yOffset = 0F;
+					}
+				}
+				if (getEntityToAttack() != null) {
+					currentFlightTarget = new ChunkCoordinates((int) getEntityToAttack().posX, (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()), (int) getEntityToAttack().posZ);
+					flyToTarget();
+				}
+		}
+		
+		public void flyAbout() {
+		if (rand.nextInt(200) == 0)
+			rotationYawHead = rand.nextInt(360);
+		if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) && (worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY-3, currentFlightTarget.posZ)|| currentFlightTarget.posY < 1)))
+			currentFlightTarget = null;
+		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
+			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(10) - rand.nextInt(10), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(10) - rand.nextInt(10));
+		if (currentFlightTarget != null && !(worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY-3, currentFlightTarget.posZ))|| currentFlightTarget.posY < pickupHeight+10D)
+			currentFlightTarget.posY++;
+			flyToTarget();
+		}
+		
+		public void flyToTarget() {
+			double targetX = currentFlightTarget.posX + 0.5D - posX;
+			double targetY = currentFlightTarget.posY + 1D - posY;
+			double targetZ = currentFlightTarget.posZ + 0.5D - posZ;
+			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.20000000149011612D;
+			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.30000000149011612D;
+			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.20000000149011612D;
+			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+			moveForward = 0.5F;
+			rotationYaw += rotation;
+		}
+		
+		public boolean captured() {
+			return riddenByEntity != null;
+		}
+		
+		@Override
+		public void onCollideWithPlayer(EntityPlayer player) {
+			super.onCollideWithPlayer(player);
+			if (!worldObj.isRemote && !captured() && rand.nextInt(20) == 0 && !getDropped()){
+				player.mountEntity(this);
+				pickupHeight = posY;
+				yOffset = 3F;
+			}
+		}
+
+		private void setDropped(boolean dropstate) {
+			dropped = dropstate;
+		}
+		
+		private boolean getDropped() {
+			return dropped;
+		}
+	
+		@Override
+		public void updateRiderPosition() {
+			super.updateRiderPosition();
+			if (riddenByEntity instanceof EntityLivingBase) {
+				double a = Math.toRadians(renderYawOffset);
+				double offSetX = -Math.sin(a) * -0.6D;
+				double offSetZ = Math.cos(a) * -0.6D;
+				riddenByEntity.setPosition(posX - offSetX, posY + yOffset, posZ - offSetZ);
+			}
+		}
+
+		@Override	
+	    protected Entity findPlayerToAttack() {
+			return this.worldObj.getClosestVulnerablePlayerToEntity(this, 16D);
+	    }
+
+		@Override
+		public boolean attackEntityFrom(DamageSource source, float amp) {
+			if (isEntityInvulnerable())
+				return false;
+			else if (super.attackEntityFrom(source, amp)) {
+				Entity entity = source.getEntity();
+				if (riddenByEntity != entity && ridingEntity != entity) {
+					if (entity != this)
+						entityToAttack = (EntityLivingBase) entity;
+					return true;
+				} else if (riddenByEntity == entity && !worldObj.isRemote) {
+					riddenByEntity.mountEntity(null);
+					setDropped(true);
+					motionY += 0.5F;
+					return true;
+				} else
+					return true;
 			} else
-				var5 = 7;
+				return false;
+		}
 
-			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
+		@Override
+		public boolean getCanSpawnHere() {
+			int var1 = MathHelper.floor_double(boundingBox.minY);
+
+			if (var1 >= 63)
+				return false;
+			else {
+				int var2 = MathHelper.floor_double(posX);
+				int var3 = MathHelper.floor_double(posZ);
+				int var4 = worldObj.getBlockLightValue(var2, var1, var3);
+				byte var5 = 4;
+				Calendar var6 = worldObj.getCurrentDate();
+
+				if ((var6.get(2) + 1 != 10 || var6.get(5) < 20) && (var6.get(2) + 1 != 11 || var6.get(5) > 3)) {
+					if (rand.nextBoolean())
+						return false;
+				} else
+					var5 = 7;
+
+				return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
+			}
+		}
+
+		@Override
+		protected void dropFewItems(boolean recentlyHit, int looting) {
+				entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, ItemErebusMaterial.dataFlyWing), 0.0F);
+			if (rand.nextInt(5) == 0)
+				entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1)+1, ItemErebusMaterial.dataCompoundEyes), 0.0F);
+		}
+
+		@Override
+		public boolean attackEntityAsMob(Entity entity) {
+			if (super.attackEntityAsMob(entity)) {
+				if (entity instanceof EntityLivingBase) {
+					byte effectTime = 0;
+					if (worldObj.difficultySetting > 1)
+						if (worldObj.difficultySetting == 2)
+							effectTime = 7;
+						else if (worldObj.difficultySetting == 3)
+							effectTime = 15;
+					if (effectTime > 0)
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, effectTime * 20, 0));
+				}
+
+				return true;
+			}
+
+			return false;
+		}
+
+		@Override
+		protected void attackEntity(Entity entity, float distance) {
+			if (distance < 1.2F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
+				attackEntityAsMob(entity);
 		}
 	}
-
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		if (rand.nextInt(5) == 0)
-			entityDropItem(new ItemStack(Item.glowstone, 1, 0), 0.0F);
-	}
-}
