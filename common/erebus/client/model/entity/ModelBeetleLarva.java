@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.entity.EntityBeetleLarva;
 
 @SideOnly(Side.CLIENT)
 public class ModelBeetleLarva extends ModelBase {
@@ -31,7 +32,10 @@ public class ModelBeetleLarva extends ModelBase {
 	ModelRenderer mouthjaw;
 	ModelRenderer sensorleft;
 	ModelRenderer sensorright;
-
+	ModelRenderer horn1;
+    ModelRenderer horn2;
+    ModelRenderer horn3;
+    
 	public ModelBeetleLarva() {
 		textureWidth = 128;
 		textureHeight = 64;
@@ -156,13 +160,31 @@ public class ModelBeetleLarva extends ModelBase {
 		sensorright.setTextureSize(128, 64);
 		sensorright.mirror = true;
 		setRotation(sensorright, -0.7063936F, 0.1487195F, 0F);
+		horn1 = new ModelRenderer(this, 44, 3);
+		horn1.addBox(-1F, -0.5F, -2.6F, 2, 2, 2);
+		horn1.setRotationPoint(0F, 20F, -10F);
+		horn1.setTextureSize(128, 64);
+		horn1.mirror = true;
+		setRotation(horn1, 0.3490659F, 0F, 0F);
+		horn2 = new ModelRenderer(this, 45, 3);
+		horn2.addBox(-0.5F, -1F, -2.4F, 1, 2, 2);
+		horn2.setRotationPoint(0F, 20F, -10F);
+		horn2.setTextureSize(128, 64);
+		horn2.mirror = true;
+		setRotation(horn2, -0.1396263F, 0F, 0F);
+		horn3 = new ModelRenderer(this, 46, 4);
+		horn3.addBox(-0.5F, -3F, -2.4F, 1, 2, 1);
+		horn3.setRotationPoint(0F, 20F, -10F);
+		horn3.setTextureSize(128, 64);
+		horn3.mirror = true;
+		setRotation(horn3, -0.1396263F, 0F, 0F);
 	}
 
 	@Override
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-
+		EntityBeetleLarva larva = (EntityBeetleLarva) entity;
 		torso1.render(unitPixel);
 		torso2.render(unitPixel);
 		torso3.render(unitPixel);
@@ -183,6 +205,11 @@ public class ModelBeetleLarva extends ModelBase {
 		mouthjaw.render(unitPixel);
 		sensorleft.render(unitPixel);
 		sensorright.render(unitPixel);
+		if(larva.getTame()==2){
+			horn1.render(unitPixel);
+			horn2.render(unitPixel);
+			horn3.render(unitPixel);
+		}
 
 	}
 
@@ -207,7 +234,10 @@ public class ModelBeetleLarva extends ModelBase {
 		mouthjaw.rotationPointX = bf;
 		sensorleft.rotationPointX = bf;
 		sensorright.rotationPointX = bf;
-
+		horn1.rotationPointX = bf;
+		horn2.rotationPointX = bf;
+		horn3.rotationPointX = bf;
+		
 		torso1.rotationPointY = ba + 20F;
 
 		torso2.rotationPointY = bb + 20F;

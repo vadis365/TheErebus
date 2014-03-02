@@ -69,7 +69,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	protected boolean canDespawn() {
-		if (getTame() == 1)
+		if (getTame() != 0)
 			return false;
 		else
 			return true;
