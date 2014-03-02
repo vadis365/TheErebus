@@ -16,7 +16,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.ModMaterials;
 
 public class ItemBambucket extends Item {
 
@@ -70,6 +72,21 @@ public class ItemBambucket extends Item {
 
 					return is;
 				}
+				
+				if (world.getBlockMaterial(i, j, k) == ModMaterials.honey && world.getBlockMetadata(i, j, k) == 0) {
+					world.setBlockToAir(i, j, k);
+
+					if (player.capabilities.isCreativeMode)
+						return is;
+
+					if (--is.stackSize <= 0)
+						return new ItemStack(itemID, 1, 3);
+
+					if (!player.inventory.addItemStackToInventory(new ItemStack(itemID, 1, 3)))
+						player.dropPlayerItem(new ItemStack(itemID, 1, 3));
+
+					return is;	
+			}
 			} else {
 				if (is.getItemDamage() < 0)
 					return new ItemStack(itemID, 1, 0);
@@ -132,8 +149,12 @@ public class ItemBambucket extends Item {
 			} else {
 				if (!world.isRemote && flag && !material.isLiquid())
 					world.destroyBlock(x, y, z, true);
-
+			if (item.getItemDamage() == 1) {
 				world.setBlock(x, y, z, Block.waterMoving.blockID, 0, 3);
+			}
+			else if (item.getItemDamage() == 3) {
+				world.setBlock(x, y, z, ModBlocks.erebusHoneyBlock.blockID, 0, 3);
+				}
 			}
 		return true;
 	}
