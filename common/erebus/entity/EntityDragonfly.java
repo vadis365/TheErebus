@@ -281,6 +281,7 @@ public class EntityDragonfly extends EntityMob {
 
 		@Override
 		protected void attackEntity(Entity entity, float distance) {
+			super.attackEntity(entity, distance);
 			if (distance < 1.2F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
 				attackEntityAsMob(entity);
 		}
