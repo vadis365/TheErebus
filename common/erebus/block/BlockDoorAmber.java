@@ -15,6 +15,7 @@ import erebus.ModItems;
 
 public class BlockDoorAmber extends BlockDoor {
 	public Icon topDoorIcon;
+	public Icon crapFixIcon;
 	public Icon[] flippedIcons = new Icon[2];
 
 	public BlockDoorAmber(int id, Material material) {
@@ -26,8 +27,11 @@ public class BlockDoorAmber extends BlockDoor {
 	}
 
 	public Icon getBlockTexture(IBlockAccess iBlockAccess, int x, int y, int z, int direction) {
-		if (direction == 1 || direction == 0) {
+		if (direction == 1) {
 			return this.blockIcon;
+		}
+		if (direction == 0) {
+			return this.crapFixIcon;
 		}
 		int meta = getFullMetadata(iBlockAccess, x, y, z);
 		boolean flag = (meta & 4) != 0;
@@ -70,6 +74,7 @@ public class BlockDoorAmber extends BlockDoor {
 	public void registerIcons(IconRegister icon) {
 		this.blockIcon = icon.registerIcon("erebus:doorAmberLower");
 		this.topDoorIcon = icon.registerIcon("erebus:doorAmberUpper");
+		this.crapFixIcon = icon.registerIcon("erebus:doorAmberBlank");
 		this.flippedIcons[0] = new IconFlipped(blockIcon, true, false);
 		this.flippedIcons[1] = new IconFlipped(topDoorIcon, true, false);
 	}
