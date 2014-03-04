@@ -202,7 +202,7 @@ public class ModItems {
 		GameRegistry.registerItem(jumpBoots, "erebus.jumpBoots");
 		GameRegistry.registerItem(armorGlider, "erebus.armorGlider");
 		
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("erebushoney", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketHoney), new ItemStack(Item.bucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketHoney), new ItemStack(Item.bucketEmpty));
 	}
 
 	private static void registerProperties() {

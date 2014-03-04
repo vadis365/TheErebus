@@ -86,7 +86,7 @@ import erebus.item.block.ItemBlockUmberpaver;
 import erebus.item.block.ItemBlockWallErebus;
 
 public class ModBlocks {
-	
+
 	// FLUIDS
 	public static Fluid erebusHoney;
 
@@ -117,13 +117,13 @@ public class ModBlocks {
 
 	// DUNGEONS
 	public static Block spiderSpawner, jumpingSpiderSpawner, waspSpawner, waspNestBlock, gneiss;
-	
+
 	public static void init() {
 		registerFluids();
 		initBlocks();
 		initCreativeTabs();
 		registerBlocks();
-		registerProperties();	
+		registerProperties();
 	}
 
 	private static void initBlocks() {
@@ -139,7 +139,7 @@ public class ModBlocks {
 		erebusOreExtra = new BlockErebusOreExtras(ConfigHandler.erebusOreExtraID).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("erebusOreExtras");
 		umberstoneButton = new BlockButtonUmberstone(ConfigHandler.umberstoneButtonID).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umberstoneButton");
 		gneiss = new BlockGneiss(ConfigHandler.gneissID).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("gneiss");
-		
+
 		logErebusGroup1 = new BlockLogErebus(ConfigHandler.logErebusGroup1ID, 0).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus1");
 		logErebusGroup2 = new BlockLogErebus(ConfigHandler.logErebusGroup2ID, 1).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus2");
 		planksErebus = new BlockPlanksErebus(ConfigHandler.planksErebusID).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("planksErebus");
@@ -187,7 +187,7 @@ public class ModBlocks {
 		honeyCombBlock = new BlockHoneyComb(ConfigHandler.honeyCombBlockID).setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("honeyCombBlock").setTextureName("erebus:honeyCombTop");
 		doorAmber = new BlockDoorAmber(ConfigHandler.doorAmberID, Material.glass).setUnlocalizedName("doorAmber").setTextureName("erebus:doorAmber");
 		erebusHoneyBlock = new BlockErebusHoney(ConfigHandler.erebusHoneyFluidID, erebusHoney, ModMaterials.honey).setUnlocalizedName("erebusHoney");
-		
+
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			umbercobbleStairs[i] = new BlockStairsErebus(ConfigHandler.umbercobbleStairsID[i], umberstone, i).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("umbercobbleStairs" + i);
@@ -209,7 +209,7 @@ public class ModBlocks {
 		waspNestStairs = new BlockStairsErebus(ConfigHandler.waspNestStairsID, waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestStairs");
 		gneissStairs = new Block[BlockGneiss.iconPaths.length];
 		for (int i = 0; i < gneissStairs.length; i++)
-			gneissStairs[i] = new BlockStairsErebus(ConfigHandler.gneissStairsID[i], gneiss, i).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("gneissStairs" + i);	
+			gneissStairs[i] = new BlockStairsErebus(ConfigHandler.gneissStairsID[i], gneiss, i).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("gneissStairs" + i);
 		//
 		spiderSpawner = new BlockSpiderSpawner(ConfigHandler.spiderSpawnerID, "Scytodes - Erebus").setUnlocalizedName("spiderSpawner").setTextureName("erebus:spiderSpawner");
 		jumpingSpiderSpawner = new BlockSpiderSpawner(ConfigHandler.jumpingSpiderSpawnerID, "JumpingSpider - Erebus").setUnlocalizedName("jumpingSpiderSpawner").setTextureName("erebus:spiderSpawner");
@@ -318,7 +318,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(spiderSpawner, "erebus.spiderSpawner");
 		GameRegistry.registerBlock(jumpingSpiderSpawner, "erebus.jumpingSpiderSpawner");
 		GameRegistry.registerBlock(waspSpawner, "erebus.waspSpawner");
-		
+
 		GameRegistry.registerBlock(erebusHoneyBlock, "erebus.erebusHoney");
 	}
 
@@ -369,9 +369,9 @@ public class ModBlocks {
 		Block.setBurnProperties(fiddlehead.blockID, 60, 100);
 		Block.setBurnProperties(thorns.blockID, 15, 100);
 	}
-	
+
 	private static void registerFluids() {
-		erebusHoney = new Fluid("erebusHoney").setBlockID(ConfigHandler.erebusHoneyFluidID).setDensity(6000).setViscosity(6000).setUnlocalizedName("erebus.erebusHoney");
+		erebusHoney = new Fluid("honey").setBlockID(ConfigHandler.erebusHoneyFluidID).setDensity(6000).setViscosity(6000).setUnlocalizedName("erebus.honey");
 		FluidRegistry.registerFluid(erebusHoney);
 	}
 }

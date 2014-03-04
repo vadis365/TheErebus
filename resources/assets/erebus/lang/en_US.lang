@@ -306,6 +306,9 @@ entity.Erebus.RhinoBeetle.name=Rhinoceros Beetle
 entity.Erebus.WorkerBee.name=Worker Bee
 entity.Erebus.Dragonfly.name=Dragonfly
 
+#Fluids
+fluid.erebus.honey=Honey
+
 #Other
 itemGroup.erebus.block=Erebus Blocks
 itemGroup.erebus.item=Erebus Items
