@@ -2,6 +2,10 @@ package erebus.block;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -55,4 +59,9 @@ public class BlockErebusHoney extends BlockFluidClassic {
            ModBlocks.erebusHoney.setIcons(this.getBlockTextureFromSide(0), this.getBlockTextureFromSide(1));
         }
         
+    	@Override
+    	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+    		if (entity instanceof EntityLivingBase)
+    			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1 * 20, 4));
+    	}     
 }
