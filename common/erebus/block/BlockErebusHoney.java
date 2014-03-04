@@ -61,7 +61,9 @@ public class BlockErebusHoney extends BlockFluidClassic {
         
     	@Override
     	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-    		if (entity instanceof EntityLivingBase)
-    			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1 * 20, 4));
+    		if (entity instanceof EntityLivingBase){
+    			entity.motionX *= 0.005D;
+    			entity.motionZ *= 0.005D;
+    		}
     	}     
 }
