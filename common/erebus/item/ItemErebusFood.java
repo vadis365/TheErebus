@@ -18,9 +18,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemErebusFood extends ItemFood {
 
-	public static final String[] iconPaths = new String[] { "larvaRaw", "beetleLarvaCooked", "grasshopperLegRaw", "grasshopperLegCooked", "legTarantula", "legTarantulaCooked", "bambooSoup", "melonade", "melonadeSparkly", "larvaeOnStick" };
+	public static final String[] iconPaths = new String[] { "larvaRaw", "beetleLarvaCooked", "grasshopperLegRaw", "grasshopperLegCooked", "legTarantula", "legTarantulaCooked", "bambooSoup", "melonade", "melonadeSparkly", "larvaeOnStick", "honeySandwich" };
 
-	public static final short dataLarvaRaw = 0, dataLarvaCooked = 1, dataGrasshopperLegRaw = 2, dataGrasshopperLegCooked = 3, dataLegTarantula = 4, dataLegTarantulaCooked = 5, dataBambooSoup = 6, dataMelonade = 7, dataMelonadeSparkly = 8, dataLarvaeOnStick = 9;
+	public static final short dataLarvaRaw = 0, dataLarvaCooked = 1, dataGrasshopperLegRaw = 2, dataGrasshopperLegCooked = 3, dataLegTarantula = 4, dataLegTarantulaCooked = 5, dataBambooSoup = 6, dataMelonade = 7, dataMelonadeSparkly = 8, dataLarvaeOnStick = 9, dataHoneySandwich = 10;
 
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
@@ -53,6 +53,8 @@ public class ItemErebusFood extends ItemFood {
 				return 6;
 			case dataLarvaeOnStick:
 				return 9;
+			case dataHoneySandwich:
+				return 6;
 			default:
 				return 0;
 		}
@@ -79,6 +81,8 @@ public class ItemErebusFood extends ItemFood {
 			case dataMelonadeSparkly:
 				return 0.85F;
 			case dataLarvaeOnStick:
+				return 0.85F;
+			case dataHoneySandwich:
 				return 0.85F;
 			default:
 				return 0.0F;
