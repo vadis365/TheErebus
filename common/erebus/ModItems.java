@@ -94,7 +94,7 @@ public class ModItems {
 		beeTamingAmulet = new ItemBeeTamingAmulet(ConfigHandler.beeTamingAmuletID).setUnlocalizedName("beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
 		doorAmberItem = new ItemBlockDoorAmber(ConfigHandler.doorAmberItemID, ModBlocks.doorAmber).setUnlocalizedName("doorAmberItem").setTextureName("erebus:doorAmber");
 	    bucketHoney = new ItemBucketOfHoney(ConfigHandler.bucketHoneyID, ModBlocks.erebusHoneyBlock.blockID).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
-	    homingBeecon = new ItemHomingBeecon(ConfigHandler.homingBeeconID).setUnlocalizedName("homingBeecon");
+	    homingBeecon = new ItemHomingBeecon(ConfigHandler.homingBeeconID).setUnlocalizedName("homingBeecon").setTextureName("paper");
 	    
 		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
