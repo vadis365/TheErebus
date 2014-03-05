@@ -34,6 +34,7 @@ import erebus.creativetab.CreativeTabErebusGear;
 import erebus.creativetab.CreativeTabErebusItem;
 import erebus.creativetab.CreativeTabErebusSpecialItem;
 import erebus.entity.util.RandomMobNames;
+import erebus.integration.FMBIntegration;
 import erebus.integration.IModIntegration;
 import erebus.lib.Reference;
 import erebus.network.PacketHandler;
@@ -98,12 +99,13 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.erebusHoneyBlock, ModItems.bucketHoney);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-		
+
 		if (ConfigHandler.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		BCFacadeManager.registerFacades();
+		FMBIntegration.integrate();
 	}
 
 	@EventHandler
