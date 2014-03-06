@@ -2,7 +2,7 @@ package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.world.World;
 
-//@formatter:off
+// @formatter:off
 public class BiomeElysianFields extends BiomeBaseErebus{
 	public BiomeElysianFields(int biomeID){
 		super(biomeID);
@@ -18,4 +18,4 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		
 	}
 }
-//@formatter:on
+// @formatter:on

@@ -1,9 +1,7 @@
 package erebus.world.biomes;
-
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 import net.minecraft.world.gen.feature.WorldGenHugeTrees;
@@ -39,7 +37,7 @@ import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
 import erebus.world.feature.tree.WorldGenTallJungleTree;
 
-//@formatter:off
+// @formatter:off
 public class BiomeUndergroundJungle extends BiomeBaseErebus{
 	public BiomeUndergroundJungle(int biomeID){
 		super(biomeID);
@@ -50,20 +48,20 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 		setTemperatureRainfall(1.35F,0.9F);
 		setWeight(25);
 
-		spawnableMonsterList.add(new SpawnListEntry(EntityWasp.class,30,4,8));
-		spawnableMonsterList.add(new SpawnListEntry(EntityCentipede.class,10,4,8));
-		spawnableMonsterList.add(new SpawnListEntry(EntityPrayingMantis.class,10,4,8));
-		spawnableMonsterList.add(new SpawnListEntry(EntityScytodes.class,35,1,4));
-		spawnableMonsterList.add(new SpawnListEntry(EntityJumpingSpider.class,10,1,4));
-		spawnableMonsterList.add(new SpawnListEntry(EntityTarantula.class,5,4,8));
-		spawnableMonsterList.add(new SpawnListEntry(EntityBombardierBeetle.class,4,1,1));
+		spawnableMonsterList.add(new SpawnEntry(EntityWasp.class,30,4,8));
+		spawnableMonsterList.add(new SpawnEntry(EntityCentipede.class,10,4,8));
+		spawnableMonsterList.add(new SpawnEntry(EntityPrayingMantis.class,10,4,8));
+		spawnableMonsterList.add(new SpawnEntry(EntityScytodes.class,35,1,4));
+		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,1,4));
+		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,5,4,8));
+		spawnableMonsterList.add(new SpawnEntry(EntityBombardierBeetle.class,4,1,1));
 
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBotFly.class,10,2,3));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetle.class,8,1,2));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetleLarva.class,8,2,4));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class,10,8,8));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityMoth.class,5,4,4));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityMosquito.class,60,1,3));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,8,1,2));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityMoth.class,5,4,4));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityMosquito.class,60,1,3));
 
 		topBlock=(byte)Block.grass.blockID;
 		fillerBlock=(byte)Block.dirt.blockID;
@@ -240,4 +238,4 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 		return null;
 	}
 }
-//@formatter:on
+// @formatter:on

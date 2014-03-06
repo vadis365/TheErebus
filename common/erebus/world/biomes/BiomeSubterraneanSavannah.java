@@ -1,9 +1,7 @@
 package erebus.world.biomes;
-
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import erebus.ModBlocks;
 import erebus.entity.EntityBeetle;
@@ -25,7 +23,7 @@ import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenSavannaTree;
 import erebus.world.feature.util.FeatureType;
 
-//@formatter:off
+// @formatter:off
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 	public BiomeSubterraneanSavannah(int biomeID){
 		super(biomeID);
@@ -36,19 +34,19 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		setTemperatureRainfall(0.95F,0.05F);
 		setWeight(22);
 		
-		spawnableCreatureList.add(new SpawnListEntry(EntityGrasshopper.class,14,4,8));
-		spawnableCreatureList.add(new SpawnListEntry(EntityGlowWorm.class,14,4,8));
+		spawnableCreatureList.add(new SpawnEntry(EntityGrasshopper.class,14,4,8));
+		spawnableCreatureList.add(new SpawnEntry(EntityGlowWorm.class,14,4,8));
 
-		spawnableMonsterList.add(new SpawnListEntry(EntityScorpion.class,10,4,8));
-		spawnableMonsterList.add(new SpawnListEntry(EntityWasp.class,30,4,8));
-		spawnableMonsterList.add(new SpawnListEntry(EntityScytodes.class,35,1,4));
-		spawnableMonsterList.add(new SpawnListEntry(EntityJumpingSpider.class,10,1,4));
-		spawnableMonsterList.add(new SpawnListEntry(EntityTarantula.class,18,4,8));
-		spawnableMonsterList.add(new SpawnListEntry(EntitySolifuge.class,5,1,3));
+		spawnableMonsterList.add(new SpawnEntry(EntityScorpion.class,10,4,8));
+		spawnableMonsterList.add(new SpawnEntry(EntityWasp.class,30,4,8));
+		spawnableMonsterList.add(new SpawnEntry(EntityScytodes.class,35,1,4));
+		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,1,4));
+		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,18,4,8));
+		spawnableMonsterList.add(new SpawnEntry(EntitySolifuge.class,5,1,3));
 
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityFly.class,10,8,8));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetle.class,8,1,2));
-		spawnableCaveCreatureList.add(new SpawnListEntry(EntityBeetleLarva.class,8,2,4));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,8,1,2));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
 
 		topBlock=(byte)Block.grass.blockID;
 		fillerBlock=(byte)Block.dirt.blockID;
@@ -137,4 +135,4 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		super.generateFeature(world,rand,x,z,featureType);
 	}
 }
-//@formatter:on
+// @formatter:on

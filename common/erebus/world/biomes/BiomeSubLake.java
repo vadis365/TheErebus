@@ -1,8 +1,8 @@
 package erebus.world.biomes;
-
 import java.util.Random;
 import net.minecraft.world.World;
 
+//@formatter:off
 public class BiomeSubLake extends BiomeUndergroundJungle{
 	public BiomeSubLake(int biomeID){
 		super(biomeID);
@@ -15,3 +15,4 @@ public class BiomeSubLake extends BiomeUndergroundJungle{
 		
 	}
 }
+//@formatter:on

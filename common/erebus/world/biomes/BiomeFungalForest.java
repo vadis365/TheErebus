@@ -2,6 +2,7 @@ package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.world.World;
 
+// @formatter:off
 public class BiomeFungalForest extends BiomeBaseErebus{
 	public BiomeFungalForest(int biomeID){
 		super(biomeID);
@@ -15,3 +16,4 @@ public class BiomeFungalForest extends BiomeBaseErebus{
 	@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){}
 }
+//@formatter:on

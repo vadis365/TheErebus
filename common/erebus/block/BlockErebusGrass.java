@@ -17,6 +17,11 @@ public class BlockErebusGrass extends BlockTallGrass {
 	public BlockErebusGrass(int id) {
 		super(id);
 	}
+	
+	@Override
+	protected boolean canThisPlantGrowOnThisBlockID(int blockID){
+		return blockID == Block.grass.blockID || blockID == Block.dirt.blockID || blockID == Block.tilledField.blockID || blockID == Block.sand.blockID;
+	}
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
