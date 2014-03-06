@@ -20,7 +20,7 @@ import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannaRock;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.tree.WorldGenAsperTree;
-import erebus.world.feature.tree.WorldGenSavannaTree;
+import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.util.FeatureType;
 
 // @formatter:off
@@ -83,7 +83,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 				zz=z+getRandomXZOffset(rand);
 
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
-				new WorldGenSavannaTree().generate(world,rand,xx,yy,zz);
+				new WorldGenAcaciaTree().generate(world,rand,xx,yy,zz);
 			}
 		}
 

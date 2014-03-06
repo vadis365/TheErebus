@@ -1,5 +1,4 @@
 package erebus.world.feature.tree;
-
 import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -8,7 +7,7 @@ import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
 
 // @formatter:off
-public class WorldGenSavannaTree extends WorldGenerator{
+public class WorldGenAcaciaTree extends WorldGenerator{
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
 		int extraHeight=rand.nextInt(3);

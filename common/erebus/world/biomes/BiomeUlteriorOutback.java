@@ -14,7 +14,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		setColors(0xEEAA55);
 		setFog(234,194,114);
 		setTemperatureRainfall(1.1F,0.2F);
-		setWeight(150);
+		setWeight(15);
 		
 		topBlock = (byte)Block.sand.blockID;
 	}

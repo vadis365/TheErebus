@@ -24,7 +24,7 @@ import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import erebus.world.feature.tree.WorldGenErebusTrees;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
-import erebus.world.feature.tree.WorldGenSavannaTree;
+import erebus.world.feature.tree.WorldGenAcaciaTree;
 
 public class BlockSaplingErebus extends BlockSapling {
 
@@ -74,7 +74,7 @@ public class BlockSaplingErebus extends BlockSapling {
 		if (meta == dataEucalyptus)
 			worldGen = new WorldGenEucalyptusTree();
 		else if (meta == dataAcacia)
-			worldGen = new WorldGenSavannaTree();
+			worldGen = new WorldGenAcaciaTree();
 		else if (meta == dataMossbark)
 			worldGen = new WorldGenMossbarkTree();
 		else if (meta == dataAsper)
