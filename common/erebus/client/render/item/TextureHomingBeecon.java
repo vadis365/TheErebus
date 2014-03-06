@@ -24,7 +24,7 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
     public void updateAnimation() {
         Minecraft minecraft = Minecraft.getMinecraft();
         if (minecraft.theWorld != null && minecraft.thePlayer != null) {
-            this.updateCompass(minecraft.theWorld, minecraft.thePlayer.posX, minecraft.thePlayer.posZ, (double)minecraft.thePlayer.rotationYaw, false, false);
+            this.updateCompass(minecraft.theWorld, minecraft.thePlayer.posX, minecraft.thePlayer.posZ, minecraft.thePlayer.rotationYaw, false, false);
         }
         else {
             this.updateCompass((World)null, 0.0D, 0.0D, 0.0D, true, false);
@@ -36,8 +36,8 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
     	if (!this.framesTextureData.isEmpty()) {
             double angle = 0.0D;
             if (world != null && !flag1) {
-                double locationX = (double)targetX - x;
-                double locationZ = (double)targetZ - z;
+                double locationX = targetX - x;
+                double locationZ = targetZ - z;
                 rotation %= 360.0D;
                 angle = -((rotation - 90.0D) * Math.PI / 180.0D - Math.atan2(locationZ, locationX));
             }
@@ -69,7 +69,7 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
             }
 
             int i;
-            for (i = (int)((this.currentAngle / (Math.PI * 2D) + 1.0D) * (double)this.framesTextureData.size()) % this.framesTextureData.size(); i < 0; i = (i + this.framesTextureData.size()) % this.framesTextureData.size()) {
+            for (i = (int)((this.currentAngle / (Math.PI * 2D) + 1.0D) * this.framesTextureData.size()) % this.framesTextureData.size(); i < 0; i = (i + this.framesTextureData.size()) % this.framesTextureData.size()) {
                 ;
             }
 

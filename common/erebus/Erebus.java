@@ -105,8 +105,8 @@ public class Erebus {
 
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		BCFacadeManager.registerFacades();
-		if(Loader.isModLoaded("ForgeMicroblock"))
-				FMBIntegration.integrate();
+		if (Loader.isModLoaded("ForgeMicroblock"))
+			FMBIntegration.integrate();
 	}
 
 	@EventHandler

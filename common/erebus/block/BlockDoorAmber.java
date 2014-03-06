@@ -26,6 +26,7 @@ public class BlockDoorAmber extends BlockDoor {
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
 	}
 
+	@Override
 	public Icon getBlockTexture(IBlockAccess iBlockAccess, int x, int y, int z, int direction) {
 		if (direction == 1) {
 			return this.blockIcon;
@@ -66,6 +67,7 @@ public class BlockDoorAmber extends BlockDoor {
 			return (meta & 8) != 0 ? this.topDoorIcon : this.blockIcon;
 	}
 
+	@Override
 	public Icon getIcon(int par1, int par2) {
 		return this.blockIcon;
 	}
@@ -79,10 +81,12 @@ public class BlockDoorAmber extends BlockDoor {
 		this.flippedIcons[1] = new IconFlipped(topDoorIcon, true, false);
 	}
 
+	@Override
 	public int idPicked(World world, int x, int y, int z) {
 		return ModItems.doorAmberItem.itemID;
 	}
 
+	@Override
 	public int idDropped(int id, Random random, int something) {
 		return (id & 8) != 0 ? 0 : (ModItems.doorAmberItem.itemID);
 	}
