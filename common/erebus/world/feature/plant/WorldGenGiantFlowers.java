@@ -13,7 +13,7 @@ public class WorldGenGiantFlowers extends WorldGenerator
 	private int[] petalY={9,9,9,10,10,8,8,8,9,9,9,7,7,7,8,8,8,9,9,10,10,7,7,7,8,8,8,8,8,9,9,9,9,7,7,7,8,8,8,9,9,10,10,8,8,8,9,9,9,9,9,9,10,10};
 	private int[] petalZ={2,3,4,2,4,2,3,4,1,3,5,2,3,4,1,3,5,0,6,0,6,2,3,4,1,2,3,4,5,0,1,5,6,2,3,4,1,3,5,0,6,0,6,2,3,4,1,3,5,2,3,4,2,4};
 	Random rand = new Random();
-	private int colour=rand.nextInt(15)+2;
+	private int colour=rand.nextInt(14)+2;
 	protected int[] GetValidSpawnBlocks() {
 		return new int[] {
 			Block.grass.blockID
