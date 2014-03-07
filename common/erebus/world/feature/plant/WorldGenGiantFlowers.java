@@ -53,13 +53,13 @@ public class WorldGenGiantFlowers extends WorldGenerator
 	public WorldGenGiantFlowers() { }
 
 	public boolean generate(World world, Random rand, int i, int j, int k) {
-		if(!LocationIsValidSpawn(world, i, j, k) || !LocationIsValidSpawn(world, i + 7, j, k) || !LocationIsValidSpawn(world, i + 7, j, k + 6) || !LocationIsValidSpawn(world, i, j, k + 6))
+		if(!LocationIsValidSpawn(world, i, j, k) || !LocationIsValidSpawn(world, i + 7, j, k) || !LocationIsValidSpawn(world, i + 7, j, k + 7) || !LocationIsValidSpawn(world, i, j, k + 7)|| !world.isAirBlock(i + 3, j + 11, k + 3))
 		{
 			return false;
 		}
 		
 		for(int airX=i;airX<i+7;airX++) {
-			for(int airY=j;airY<j+10;airY++) {
+			for(int airY=j;airY<j+11;airY++) {
 				for(int airZ=k;airZ<k+7;airZ++) {
 					setBlock(world, airX, airY, airZ, 0);
 				}
