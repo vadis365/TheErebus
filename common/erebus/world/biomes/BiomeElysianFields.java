@@ -28,16 +28,6 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 				new WorldGenCypressTree().generate(world,rand,xx,yy,zz);
 			}
 		}
-		
-		for(int attempt=0; attempt<65; attempt++){
-			int xx=x+getRandomXZOffset(rand),
-				yy=15+rand.nextInt(90),
-				zz=z+getRandomXZOffset(rand);
-
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
-				new WorldGenGiantFlowers().generate(world,rand,xx,yy,zz);
-			}
-		}
 	}
 }
 // @formatter:on
