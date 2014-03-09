@@ -15,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemSprintLeggings extends ItemArmor {
 	public static final byte maxTier = 9;
@@ -29,7 +30,7 @@ public class ItemSprintLeggings extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataBioVelocity;
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.bioVelocity.ordinal();
 	}
 
 	@Override

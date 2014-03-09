@@ -18,14 +18,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class BlockBambooShoot extends BlockFlower implements IPlantable {
 	public static byte calculateBambooHappiness(World world, int x, int y, int z, int blockID) {
 		double happiness = 0;
 		int bottomY = y;
 
-		while (world.getBlockId(x, --bottomY, z) == blockID);
+		while (world.getBlockId(x, --bottomY, z) == blockID)
+			;
 		++bottomY;
 
 		// CLIMATE
@@ -125,7 +126,7 @@ public class BlockBambooShoot extends BlockFlower implements IPlantable {
 
 	@Override
 	public int damageDropped(int meta) {
-		return ItemErebusMaterial.dataBambooShoot;
+		return DATA.bambooShoot.ordinal();
 	}
 
 	@Override
@@ -139,10 +140,7 @@ public class BlockBambooShoot extends BlockFlower implements IPlantable {
 		if (!e.world.isRemote && e.ID == blockID) {
 			int meta = e.world.getBlockMetadata(e.X, e.Y, e.Z);
 			if (meta < 7) {
-				e.world.setBlockMetadataWithNotify(e.X, e.Y, e.Z, meta + 9, 4); // prevent
-																				// autogrowing
-																				// full
-																				// bamboo
+				e.world.setBlockMetadataWithNotify(e.X, e.Y, e.Z, meta + 9, 4);
 				e.setResult(Result.ALLOW);
 			}
 		}

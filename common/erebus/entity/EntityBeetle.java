@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityBeetle extends EntityAnimal {
 	public EntityBeetle(World world) {
@@ -121,7 +121,7 @@ public class EntityBeetle extends EntityAnimal {
 	protected void dropFewItems(boolean par1, int par2) {
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + par2);
 		for (int a = 0; a < var3; ++a)
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), 0.0F);
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
 	@Override

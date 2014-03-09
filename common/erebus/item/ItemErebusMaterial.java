@@ -23,9 +23,33 @@ import erebus.network.packet.PacketSound;
 
 public class ItemErebusMaterial extends Item {
 
-	public static final String[] iconPaths = new String[] { "plateExo", "jade", "shardBone", "bamboo", "compoundEyes", "compoundLens", "flyWing", "itemPetrifiedWood", "bioVelocity", "elasticFibre", "waspSting", "bambooShoot", "redGem", "bioLuminescence", "supernaturalvelocity", "altarFragment", "reinforcedPlateExo", "gliderWing", "scorpionPincer", "camoPowder", "nectar", "poisonGland"};
-
-	public static final short dataExoPlate = 0, dataJade = 1, dataBoneShard = 2, dataBamboo = 3, dataCompoundEyes = 4, dataCompoundLens = 5, dataFlyWing = 6, dataPetrifiedWood = 7, dataBioVelocity = 8, dataElasticFibre = 9, dataWaspSting = 10, dataBambooShoot = 11, dataRedGem = 12, dataBioluminescence = 13, dataSupernaturalVelocity = 14, dataAltarFragment = 15, dataReinforcedPlateExo = 16, dataGliderWing = 17, dataScorpPincer = 18, dataCamoPowder = 19, dataNectar = 20, dataPoisonGland = 21;
+	// @formatter:off
+	public enum DATA {
+		plateExo,
+		jade,
+		shardBone,
+		bamboo,
+		compoundEyes,
+		compoundLens,
+		flyWing,
+		itemPetrifiedWood,
+		bioVelocity,
+		elasticFibre,
+		waspSting,
+		bambooShoot,
+		redGem,
+		bioLuminescence,
+		supernaturalvelocity,
+		altarFragment,
+		reinforcedPlateExo,
+		gliderWing,
+		scorpionPincer,
+		camoPowder,
+		nectar,
+		poisonGland,
+		mudBrick;
+	}
+	// @formatter:on
 
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
@@ -38,7 +62,7 @@ public class ItemErebusMaterial extends Item {
 
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (side == 1 && is.getItemDamage() == dataBambooShoot && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
+		if (side == 1 && is.getItemDamage() == DATA.bambooShoot.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
 			Block soil = Block.blocksList[world.getBlockId(x, y, z)];
 
 			if (soil != null && soil.canSustainPlant(world, x, y, z, ForgeDirection.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(x, y + 1, z)) {
@@ -58,21 +82,21 @@ public class ItemErebusMaterial extends Item {
 		if (!world.isRemote) {
 			int damage = is.getItemDamage();
 
-			if (damage == dataBioVelocity || damage == dataSupernaturalVelocity) {
+			if (damage == DATA.bioVelocity.ordinal() || damage == DATA.supernaturalvelocity.ordinal()) {
 				PotionEffect currentSpeed = player.getActivePotionEffect(Potion.moveSpeed);
 
-				if (currentSpeed == null || damage == dataBioVelocity && currentSpeed.getAmplifier() < 1 || damage == dataSupernaturalVelocity && currentSpeed.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, damage == dataBioVelocity ? 280 : 210, damage == dataBioVelocity ? 1 : 3, true));
+				if (currentSpeed == null || damage == DATA.bioVelocity.ordinal() && currentSpeed.getAmplifier() < 1 || damage == DATA.supernaturalvelocity.ordinal() && currentSpeed.getAmplifier() < 3) {
+					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, damage == DATA.bioVelocity.ordinal() ? 280 : 210, damage == DATA.bioVelocity.ordinal() ? 1 : 3, true));
 					PacketDispatcher.sendPacketToAllAround(player.posX, player.posY, player.posZ, 32D, player.dimension, PacketHandler.buildPacket(3, PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 				} else
 					return is;
 			}
 
-			if (damage == dataCamoPowder) {
+			if (damage == DATA.camoPowder.ordinal()) {
 				PotionEffect currentVisibility = player.getActivePotionEffect(Potion.invisibility);
 
-				if (currentVisibility == null || damage == dataCamoPowder && currentVisibility.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(Potion.invisibility.id, damage == dataCamoPowder ? 280 : 210, damage == dataCamoPowder ? 1 : 3, true));
+				if (currentVisibility == null || damage == DATA.camoPowder.ordinal() && currentVisibility.getAmplifier() < 3) {
+					player.addPotionEffect(new PotionEffect(Potion.invisibility.id, damage == DATA.camoPowder.ordinal() ? 280 : 210, damage == DATA.camoPowder.ordinal() ? 1 : 3, true));
 					PacketDispatcher.sendPacketToAllAround(player.posX, player.posY, player.posZ, 32D, player.dimension, PacketHandler.buildPacket(3, PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 				} else
 					return is;
@@ -89,10 +113,10 @@ public class ItemErebusMaterial extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
-		icons = new Icon[iconPaths.length];
+		icons = new Icon[DATA.values().length];
 		int i = 0;
-		for (String path : iconPaths)
-			icons[i++] = iconRegister.registerIcon("erebus:" + path);
+		for (DATA d : DATA.values())
+			icons[i++] = iconRegister.registerIcon("erebus:" + d.name());
 	}
 
 	@Override
@@ -106,8 +130,8 @@ public class ItemErebusMaterial extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int id, CreativeTabs tab, List list) {
-		for (int a = 0; a < iconPaths.length; a++)
-			list.add(new ItemStack(id, 1, a));
+		for (int i = 0; i < DATA.values().length; i++)
+			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override

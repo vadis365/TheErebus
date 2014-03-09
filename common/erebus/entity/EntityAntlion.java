@@ -24,7 +24,7 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityAntlion extends EntityMob implements IEntityAdditionalSpawnData {
 	private boolean areAttributesSetup = false;
@@ -100,7 +100,7 @@ public class EntityAntlion extends EntityMob implements IEntityAdditionalSpawnDa
 		int var3 = rand.nextInt(4) + rand.nextInt(1 + par2);
 		int var4;
 		for (var4 = 0; var4 < var3; ++var4)
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataExoPlate), 0.0F);
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
 	@Override

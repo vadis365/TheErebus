@@ -29,7 +29,7 @@ public class ConfigHandler {
 	public static int reinExoID, bambooLadderID, bambooBridgeID, umberGolemStatueID, petrifiedWoodChestID, blockBonesID;
 	public static int blockWitherWebID, extenderThingyID, bambooPoleID, umberstonePillarID, velocityBlockID, petrifiedWoodStairsID;
 	public static int wallErebusID, amberBrickStairsID, waspNestStairsID, spiderSpawnerID, jumpingSpiderSpawnerID, waspSpawnerID;
-	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID, erebusHoneyFluidID;
+	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID, erebusHoneyFluidID, mudID, mudBricksID;
 	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID, gneissStairsID;
 
 	// ITEMS
@@ -47,8 +47,8 @@ public class ConfigHandler {
 
 		try {
 			config.load();
-			
-			erebusHoneyFluidID = config.get(Configuration.CATEGORY_GENERAL,"Fluid and Block ID of Erebus Honey", 2597).getInt(2597);
+
+			erebusHoneyFluidID = config.get(Configuration.CATEGORY_GENERAL, "Fluid and Block ID of Erebus Honey", 2597).getInt(2597);
 
 			// Blocks
 			portalErebusID = config.getBlock("Block ID of Erebus Portal", 2500).getInt();
@@ -63,7 +63,7 @@ public class ConfigHandler {
 			erebusOreExtraID = config.getBlock("Block ID of Extra Erebus Ores", 2506).getInt(2506);
 			umberstoneButtonID = config.getBlock("Block ID of Umberstone Button", 2561).getInt(2561);
 			gneissID = config.getBlock("Block ID of Gneiss", 2586).getInt(2586);
-			
+
 			logErebusGroup1ID = config.getBlock("Block ID of Log - group 1", 2507).getInt(2507);
 			logErebusGroup2ID = config.getBlock("Block ID of Log - group 2", 2508).getInt(2508);
 			planksErebusID = config.getBlock("Block ID of Planks", 2509).getInt(2509);
@@ -110,7 +110,9 @@ public class ConfigHandler {
 			velocityBlockID = config.getBlock("Block ID of Velocity Block", 2581).getInt(2581);
 			honeyCombBlockID = config.getBlock("Block ID of Honey Comb Block", 2584).getInt(2584);
 			doorAmberID = config.getBlock("Block ID of Amber Door", 2585).getInt(2585);
-			
+			mudID = config.getBlock("Block ID of Mud", 2598).getInt(2598);
+			mudBricksID = config.getBlock("Block ID of Mud Bricks", 2599).getInt(2599);
+
 			int id = 2527;
 			umbercobbleStairsID = new int[BlockUmberstone.iconPaths.length];
 			for (int i = 0; i < umbercobbleStairsID.length; i++)
@@ -133,14 +135,14 @@ public class ConfigHandler {
 			amberBrickStairsID = config.getBlock("Block ID of Amber Brick Stairs", 2558).getInt(2558);
 			waspNestStairsID = config.getBlock("Block ID of Wasp Nest Stairs", 2573).getInt(2573);
 			gneissStairsID = new int[BlockGneiss.iconPaths.length];
-			for (int i = 0; i <gneissStairsID.length; i++)
+			for (int i = 0; i < gneissStairsID.length; i++)
 				gneissStairsID[i] = config.getBlock("Block ID of Gneiss Stairs " + i, 2587 + i).getInt(2587 + i);
-				
+
 			spiderSpawnerID = config.getBlock("Block ID of Scytodes Spawners", 2552).getInt(2552);
 			jumpingSpiderSpawnerID = config.getBlock("Block ID of Jumping Spider Spawners", 2553).getInt(2553);
 			waspSpawnerID = config.getBlock("Block ID of Wasp Spawners", 2572).getInt(2572);
-			
-			// latest ID used (please update after adding new blocks!) >>> 2597
+
+			// latest ID used (please update after adding new blocks!) >>> 2599
 
 			// Items
 			portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
@@ -159,7 +161,7 @@ public class ConfigHandler {
 			doorAmberItemID = config.getItem("Item ID of Amber Door", 9750).getInt(9750);
 			bucketHoneyID = config.getItem("Item ID of Bucket of Honey", 9751).getInt(9751);
 			homingBeeconID = config.getItem("Item ID of Homing Beecon", 9752).getInt(9752);
-			
+
 			jadeHelmetID = config.getItem("Item ID of Jade Helmet", 9713).getInt(9713);
 			jadeBodyID = config.getItem("Item ID of Jade Chestplate", 9714).getInt(9714);
 			jadeLegsID = config.getItem("Item ID of Jade Leggings", 9715).getInt(9715);
@@ -207,7 +209,7 @@ public class ConfigHandler {
 			ModBiomes.ulteriorOutbackID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Ulterior Outback", 155).getInt(155);
 			ModBiomes.fungalForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Fungal Forest", 156).getInt(156);
 			ModBiomes.betweenlandsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Betweenlands", 157).getInt(157);
-			
+
 			ModBiomes.jungleSubLakeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 161).getInt(161);
 			ModBiomes.jungleSubAsperGroveID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 162).getInt(162);
 			ModBiomes.desertSubCharredForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 163).getInt(163);

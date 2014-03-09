@@ -2,6 +2,7 @@ package erebus.world.feature.structure;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -16,7 +17,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.EntityAntlion;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
@@ -29,8 +30,8 @@ public class WorldGenAntlionLair extends WorldGenerator{
 		new LootItemStack(Item.book).setAmount(1,4).setWeight(18),
 		new LootItemStack(Item.paper).setAmount(2,6).setWeight(16),
 		new LootItemStack(Block.web).setAmount(2,7).setWeight(13),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(1,3).setDamage(ItemErebusMaterial.dataJade).setWeight(10),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(4,8).setDamage(ItemErebusMaterial.dataExoPlate).setWeight(9),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(1,3).setDamage(DATA.jade.ordinal()).setWeight(10),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(4,8).setDamage(DATA.plateExo.ordinal()).setWeight(9),
 		new LootItemStack(Item.enchantedBook).setWeight(8),
 		new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1),
 		new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
@@ -65,19 +66,18 @@ public class WorldGenAntlionLair extends WorldGenerator{
 	}).setPostProcessor(new IPostProcess(){
 		@Override
 		public ItemStack postProcessItem(ItemStack is, Random rand){
-			if (rand.nextBoolean()&&(is.itemID==Item.enchantedBook.itemID||(is.getItem() instanceof ItemTool||is.getItem() instanceof ItemArmor||is.getItem() instanceof ItemSword))){
+			if (rand.nextBoolean()&&(is.itemID==Item.enchantedBook.itemID||is.getItem() instanceof ItemTool||is.getItem() instanceof ItemArmor||is.getItem() instanceof ItemSword)){
 				boolean enchBook=is.itemID==Item.enchantedBook.itemID;
 				if (enchBook)is.itemID=Item.book.itemID;
 				List enchList=EnchantmentHelper.buildEnchantmentList(rand,is,7+rand.nextInt(10));
 				if (enchBook)is.itemID=Item.enchantedBook.itemID;
 
-				if (enchList!=null&&enchList.size()>0){
+				if (enchList!=null&&enchList.size()>0)
 					for(int a=0; a<enchList.size(); ++a){
 						EnchantmentData data=(EnchantmentData)enchList.get(a);
 						if (is.itemID==Item.enchantedBook.itemID)Item.enchantedBook.addEnchantment(is,data);
 						else is.addEnchantment(data.enchantmentobj,data.enchantmentLevel);
 					}
-				}
 			}
 			
 			return is;
@@ -90,11 +90,9 @@ public class WorldGenAntlionLair extends WorldGenerator{
 
 		for(int a=0; a<15; a++){
 			if (world.isAirBlock(x,y,z)&&world.getBlockId(x,y-1,z)==Block.sand.blockID){
-				for(int xx=x-4; xx<=x+4; xx++){
-					for(int zz=z-4; zz<=z+4; zz++){
+				for(int xx=x-4; xx<=x+4; xx++)
+					for(int zz=z-4; zz<=z+4; zz++)
 						if (!world.isAirBlock(x,y,z)||world.getBlockId(xx,y-1,zz)!=Block.sand.blockID)return false;
-					}
-				}
 				
 				found=true;
 				break;
@@ -104,15 +102,13 @@ public class WorldGenAntlionLair extends WorldGenerator{
 		}
 		if (!found)return false;
 
-		for(int xx=x-5; xx<=x+5; xx++){
-			for(int zz=z-5; zz<=z+5; zz++){
+		for(int xx=x-5; xx<=x+5; xx++)
+			for(int zz=z-5; zz<=z+5; zz++)
 				for(int yy=y-1,layer=0; yy>=y-7; yy--,layer++){
 					if (Math.sqrt(Math.pow(xx-x,2)+Math.pow(zz-z,2))<4.9D&&yy!=y-7) if (yy>=y-3||Math.abs(xx-x)<=1+6-layer&&Math.abs(zz-z)<=1+6-layer) world.setBlock(xx,yy,zz,yy==y-1?ModBlocks.ghostSand.blockID:0);
 
 					if (layer>0&&world.getBlockId(xx,yy,zz)!=0) world.setBlock(xx,yy,zz,Block.sand.blockID);
 				}
-			}
-		}
 
 		world.setBlock(x,y-7,z,Block.chest.blockID,0,2);
 		TileEntityChest chest=(TileEntityChest)world.getBlockTileEntity(x,y-7,z);

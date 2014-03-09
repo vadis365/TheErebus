@@ -21,7 +21,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
 
@@ -49,23 +49,22 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	protected void updateBossAttributes() {
-		if (worldObj!=null && !worldObj.isRemote) {
+		if (worldObj != null && !worldObj.isRemote)
 			if (getIsBoss() == 1) {
 				setSize(3F, 2F);
-				this.experienceValue = 25;
+				experienceValue = 25;
 				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
 				getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
 				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
 				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
 			} else {
 				setSize(1.5F, 1.0F);
-				this.experienceValue = 10;
+				experienceValue = 10;
 				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
 				getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
 				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
 				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
 			}
-		}
 	}
 
 	@Override
@@ -104,8 +103,8 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataWaspSting), 0.0F);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, ItemErebusMaterial.dataExoPlate), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.waspSting.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
 	public boolean isFlying() {
@@ -117,11 +116,10 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		byte i;
 		if (worldObj.isRemote) {
 			i = getIsBoss();
-			if (i == 1){
+			if (i == 1) {
 				setSize(3F, 2F);
 				setCustomNameTag("Hornet of Despair");
-		}		
-			else
+			} else
 				setSize(1.5F, 1.0F);
 		}
 		if (!isFlying())
@@ -187,8 +185,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 					else if (worldObj.difficultySetting == 3)
 						var2 = 15;
 				if (var2 > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id,
-									var2 * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
 			}
 			return true;
 		}

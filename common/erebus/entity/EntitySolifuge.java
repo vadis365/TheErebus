@@ -16,7 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntitySolifuge extends EntityMob {
 
@@ -89,12 +89,12 @@ public class EntitySolifuge extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1 + looting, ItemErebusMaterial.dataBioVelocity), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1 + looting, DATA.bioVelocity.ordinal()), 0.0F);
 	}
 
 	@Override
 	protected void dropRareDrop(int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataSupernaturalVelocity), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
 	}
 
 	@Override

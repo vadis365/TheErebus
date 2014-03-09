@@ -17,7 +17,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.handler.ConfigHandler;
 import erebus.entity.ai.EntityAIExplodeAttackOnCollide;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityBombardierBeetle extends EntityMob {
 	private final float explosionRadius = 1;
@@ -97,7 +97,7 @@ public class EntityBombardierBeetle extends EntityMob {
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		dropItem(Item.gunpowder.itemID, 1);
 		dropItem(Item.blazePowder.itemID, 1);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, ItemErebusMaterial.dataExoPlate), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
 	private void clearpath() {

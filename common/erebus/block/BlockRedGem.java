@@ -16,7 +16,7 @@ import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class BlockRedGem extends Block {
 
@@ -53,7 +53,7 @@ public class BlockRedGem extends Block {
 
 	@Override
 	public int damageDropped(int meta) {
-		return meta == 1 || meta == 2 ? 1 : ItemErebusMaterial.dataRedGem;
+		return meta == 1 || meta == 2 ? 1 : DATA.redGem.ordinal();
 	}
 
 	@Override

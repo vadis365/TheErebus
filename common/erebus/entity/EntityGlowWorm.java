@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityGlowWorm extends EntityCreature {
 	public int lastX;
@@ -84,7 +84,7 @@ public class EntityGlowWorm extends EntityCreature {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataBioluminescence), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()), 0.0F);
 	}
 
 	@Override

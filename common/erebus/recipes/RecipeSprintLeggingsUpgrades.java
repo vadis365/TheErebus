@@ -6,7 +6,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 import erebus.item.ItemSprintLeggings;
 
 public class RecipeSprintLeggingsUpgrades implements IRecipe {
@@ -25,7 +25,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 				continue;
 			++cnt;
 
-			if (is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == ItemErebusMaterial.dataSupernaturalVelocity)
+			if (is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == DATA.supernaturalvelocity.ordinal())
 				hasVelocity = true;
 			else if (is.itemID == ModItems.sprintLeggings.itemID)
 				leggings = is;
@@ -45,7 +45,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 			if (a == 4) {
 				if (!(is.itemID == ModItems.sprintLeggings.itemID && (is.stackTagCompound == null || is.stackTagCompound.getByte("upgradeTier") < ItemSprintLeggings.maxTier)))
 					return false;
-			} else if (!(is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == ItemErebusMaterial.dataBioVelocity))
+			} else if (!(is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == DATA.bioVelocity.ordinal()))
 				return false;
 		}
 

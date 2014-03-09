@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.client.model.armor.ModelArmorGlider;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemArmorGlider extends ItemArmor {
 
@@ -28,7 +29,7 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataGliderWing;
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.gliderWing.ordinal();
 	}
 
 	@Override

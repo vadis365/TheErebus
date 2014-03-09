@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class BlockOreFossil extends Block {
 
@@ -32,7 +32,7 @@ public class BlockOreFossil extends Block {
 		}
 
 		if (world.rand.nextInt(30 - Math.min(6, fortune * 2)) == 0) {
-			ret.add(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataAltarFragment));
+			ret.add(new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()));
 			return ret;
 		}
 

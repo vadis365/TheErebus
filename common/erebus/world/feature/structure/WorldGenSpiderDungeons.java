@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
@@ -23,15 +23,15 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 		new LootItemStack(Block.web).setAmount(3,8).setWeight(13),
 		new LootItemStack(Item.stick).setAmount(1,8).setWeight(12),
 		new LootItemStack(Item.goldNugget).setAmount(3,11).setWeight(12),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(3,8).setDamage(ItemErebusMaterial.dataBoneShard).setWeight(12),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(3,8).setDamage(DATA.shardBone.ordinal()).setWeight(12),
 		new LootItemStack(Item.bone).setAmount(1,3).setWeight(11),
 		new LootItemStack(Item.ingotIron).setAmount(1,3).setWeight(10),
 		new LootItemStack(Item.ingotGold).setAmount(1,2).setWeight(10),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(1,5).setDamage(ItemErebusMaterial.dataFlyWing).setWeight(10),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(1).setDamage(ItemErebusMaterial.dataJade).setWeight(9),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(3,6).setDamage(ItemErebusMaterial.dataExoPlate).setWeight(8),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(2,6).setDamage(ItemErebusMaterial.dataCompoundEyes).setWeight(7),
-		new LootItemStack(ModItems.erebusMaterials).setDamage(ItemErebusMaterial.dataCompoundLens).setWeight(2),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(1,5).setDamage(DATA.flyWing.ordinal()).setWeight(10),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(1).setDamage(DATA.jade.ordinal()).setWeight(9),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(3,6).setDamage(DATA.plateExo.ordinal()).setWeight(8),
+		new LootItemStack(ModItems.erebusMaterials).setAmount(2,6).setDamage(DATA.compoundEyes.ordinal()).setWeight(7),
+		new LootItemStack(ModItems.erebusMaterials).setDamage(DATA.compoundLens.ordinal()).setWeight(2),
 		new LootItemStack(ModItems.maxSpeedBow).setWeight(1),
 		new LootItemStack(ModBlocks.umberGolemStatue).setWeight(1),
 		new LootItemStack(ModItems.webSlinger).setWeight(1)
@@ -47,21 +47,19 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 		int l1;
 		int i2;
 
-		for(int xx=x-halfSizeX-1; xx<=x+halfSizeX+1; ++xx){
-			for(int yy=y-1; yy<=y+height+1; ++yy){
+		for(int xx=x-halfSizeX-1; xx<=x+halfSizeX+1; ++xx)
+			for(int yy=y-1; yy<=y+height+1; ++yy)
 				for(int zz=z-halfSizeZ-1; zz<=z+halfSizeZ+1; ++zz){
 					Material mat=world.getBlockMaterial(xx,yy,zz);
 
 					if ((yy==y-1||yy==y+height+1)&&!mat.isSolid())return false;
 					if ((xx==x-halfSizeX-1||xx==x+halfSizeX+1||zz==z-halfSizeZ-1||zz==z+halfSizeZ+1)&&yy==y&&world.isAirBlock(xx,yy,zz)&&world.isAirBlock(xx,yy+1,zz))++j1;
 				}
-			}
-		}
 
 		if (j1>=1&&j1<=5){
-			for(int xx=x-halfSizeX-1; xx<=x+halfSizeX+1; ++xx){
-				for(int yy=y+height; yy>=y-1; --yy){
-					for(int zz=z-halfSizeZ-1; zz<=z+halfSizeZ+1; ++zz){
+			for(int xx=x-halfSizeX-1; xx<=x+halfSizeX+1; ++xx)
+				for(int yy=y+height; yy>=y-1; --yy)
+					for(int zz=z-halfSizeZ-1; zz<=z+halfSizeZ+1; ++zz)
 						if (xx!=x-halfSizeX-1 && yy!=y-1 && zz!=z-halfSizeZ-1 && xx!=x+halfSizeX+1 && yy!=y+height+1 && zz!=z+halfSizeZ+1)world.setBlockToAir(xx,yy,zz);
 						else if (yy>=0 && !world.getBlockMaterial(xx,yy-1,zz).isSolid())world.setBlockToAir(xx,yy,zz);
 						else if (world.getBlockMaterial(xx,yy,zz).isSolid()){
@@ -69,11 +67,8 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 						}
 						else if (yy==y-1 && rand.nextInt(4)!=0) world.setBlock(xx,yy,zz,ModBlocks.umberstone.blockID,2,2); // umbercobbleMossy
 						else world.setBlock(xx,yy,zz,ModBlocks.umberstone.blockID,1,2); // umbercobble
-					}
-				}
-			}
 
-			for(int iteration=0; iteration<2; iteration++){
+			for(int iteration=0; iteration<2; iteration++)
 				for(int attempt=0; attempt<(iteration==0?Integer.MAX_VALUE:3); attempt++){
 
 					i2=x+rand.nextInt(halfSizeX*2+1)-halfSizeX;
@@ -97,7 +92,6 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 						}
 					}
 				}
-			}
 
 			world.setBlock(x+1,y,z,Block.web.blockID,0,2);
 			world.setBlock(x-1,y,z,Block.web.blockID,0,2);

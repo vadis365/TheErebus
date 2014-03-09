@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class BlockBambooCrop extends Block {
 
@@ -35,7 +35,7 @@ public class BlockBambooCrop extends Block {
 
 	@Override
 	public int damageDropped(int meta) {
-		return ItemErebusMaterial.dataBamboo;
+		return DATA.bamboo.ordinal();
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class BlockBambooCrop extends Block {
 	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
 		if (metadata == 0 && world.rand.nextInt(metadata >= 8 ? 35 : 20) == 0) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(new ItemStack(ModItems.erebusMaterials.itemID, 1, ItemErebusMaterial.dataBambooShoot));
+			ret.add(new ItemStack(ModItems.erebusMaterials.itemID, 1, DATA.bambooShoot.ordinal()));
 			return ret;
 		}
 		return super.getBlockDropped(world, x, y, z, metadata, fortune);

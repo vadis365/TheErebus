@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
@@ -12,6 +10,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityJumpingSpider extends EntitySpider {
 	public int skin = rand.nextInt(3);
@@ -64,15 +64,15 @@ public class EntityJumpingSpider extends EntitySpider {
 		} else
 			return false;
 	}
-	
+
 	@Override
 	protected int getDropItemId() {
 		return 0;
 	}
-	
+
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), ItemErebusMaterial.dataPoisonGland), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override

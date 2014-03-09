@@ -15,7 +15,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityCentipede extends EntityMob {
 
@@ -55,14 +55,14 @@ public class EntityCentipede extends EntityMob {
 
 	public double getAttackStrength() {
 		switch (worldObj.difficultySetting) {
-			default:
-				return 2.0D;
-			case 1:
-				return 2.0D;
-			case 2:
-				return 2.0D;
-			case 3:
-				return 4.0D;
+		default:
+			return 2.0D;
+		case 1:
+			return 2.0D;
+		case 2:
+			return 2.0D;
+		case 3:
+			return 4.0D;
 		}
 	}
 
@@ -103,13 +103,13 @@ public class EntityCentipede extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2)+looting, ItemErebusMaterial.dataBioVelocity), 0.0F);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), ItemErebusMaterial.dataPoisonGland), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + looting, DATA.bioVelocity.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override
 	protected void dropRareDrop(int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataSupernaturalVelocity), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
 	}
 
 	@Override

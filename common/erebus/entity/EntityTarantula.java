@@ -14,7 +14,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityTarantula extends EntityMob {
 	public int skin = rand.nextInt(99);
@@ -81,7 +81,7 @@ public class EntityTarantula extends EntityMob {
 
 		dataWatcher.updateObject(16, Byte.valueOf(b0));
 	}
-	
+
 	@Override
 	protected String getLivingSound() {
 		return "mob.spider.say";
@@ -129,7 +129,7 @@ public class EntityTarantula extends EntityMob {
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (super.attackEntityAsMob(entity)) {
-			
+
 			if (entity instanceof EntityLiving) {
 				byte duration = 0;
 
@@ -139,7 +139,7 @@ public class EntityTarantula extends EntityMob {
 					else if (worldObj.difficultySetting == 3)
 						duration = 10;
 
-				if (duration> 0)
+				if (duration > 0)
 					((EntityLiving) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
 			}
 			return true;
@@ -153,24 +153,24 @@ public class EntityTarantula extends EntityMob {
 		int chance20x60x20 = rand.nextInt(4);
 		int legDrop = 0;
 		switch (chance20x60x20) {
-			case 0:
-				legDrop = 1;
-				break;
-			case 1:
-			case 2:
-			case 3:
-				legDrop = 2;
-				break;
-			case 4:
-				legDrop = 3;
-				break;
+		case 0:
+			legDrop = 1;
+			break;
+		case 1:
+		case 2:
+		case 3:
+			legDrop = 2;
+			break;
+		case 4:
+			legDrop = 3;
+			break;
 		}
 		if (isBurning())
 			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 5), 0.0F);
 		else
 			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 4), 0.0F);
 		dropItem(Item.spiderEye.itemID, chanceFiftyFifty + looting);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), ItemErebusMaterial.dataPoisonGland), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override

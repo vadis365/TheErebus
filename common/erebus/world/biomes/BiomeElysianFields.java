@@ -1,4 +1,5 @@
 package erebus.world.biomes;
+
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -23,9 +24,8 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 			zz = z+getRandomXZOffset(rand);
 			yy = 20+rand.nextInt(80);
 			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz) == Block.grass.blockID){
+			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz) == Block.grass.blockID)
 				new WorldGenCypressTree().generate(world,rand,xx,yy,zz);
-			}
 		}
 	}
 }

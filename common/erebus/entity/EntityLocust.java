@@ -10,7 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityLocust extends EntityMob {
 
@@ -62,7 +62,7 @@ public class EntityLocust extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataElasticFibre), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.elasticFibre.ordinal()), 0.0F);
 	}
 
 	public boolean randJump() {

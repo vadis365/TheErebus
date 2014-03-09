@@ -17,10 +17,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityBotFly extends EntityMob {
-//AKA ButtFly
+	//AKA ButtFly
 	private ChunkCoordinates currentFlightTarget;
 	private float heightOffset = 0.5F;
 	public float wingFloat;
@@ -244,9 +244,9 @@ public class EntityBotFly extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, ItemErebusMaterial.dataFlyWing), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, DATA.flyWing.ordinal()), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1)+1, ItemErebusMaterial.dataCompoundEyes), 0.0F);
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1, DATA.compoundEyes.ordinal()), 0.0F);
 	}
 
 	@Override

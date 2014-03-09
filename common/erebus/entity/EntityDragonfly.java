@@ -15,7 +15,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityDragonfly extends EntityMob {
 
@@ -94,7 +94,7 @@ public class EntityDragonfly extends EntityMob {
 	public boolean captured() {
 		return riddenByEntity != null;
 	}
-	
+
 	private void setCountdown(int count) {
 		countDown = count;
 	}
@@ -106,7 +106,7 @@ public class EntityDragonfly extends EntityMob {
 	public boolean getDropped() {
 		return dropped;
 	}
-	
+
 	@Override
 	protected float getSoundVolume() {
 		return 0.1F;
@@ -139,12 +139,11 @@ public class EntityDragonfly extends EntityMob {
 		motionY *= 0.6000000238418579D;
 		if (getEntityToAttack() == null)
 			flyAbout();
-		if (riddenByEntity != null) {
+		if (riddenByEntity != null)
 			if (!worldObj.isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0)) {
 				setDropped(true);
 				riddenByEntity.mountEntity(null);
 			}
-		}
 		if (dropped) {
 			droptime++;
 			if (droptime >= 20) {
@@ -163,11 +162,11 @@ public class EntityDragonfly extends EntityMob {
 	public void flyAbout() {
 		if (rand.nextInt(200) == 0)
 			rotationYawHead = rand.nextInt(360);
-		if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) && (worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget.posY < 1)))
+		if (currentFlightTarget != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) && (worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
 			currentFlightTarget = null;
 		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
 			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(10) - rand.nextInt(10), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(10) - rand.nextInt(10));
-		if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ)) || currentFlightTarget.posY < pickupHeight + 10D)
+		if (currentFlightTarget != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget.posY < pickupHeight + 10D)
 			currentFlightTarget.posY++;
 		flyToTarget();
 	}
@@ -210,7 +209,7 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	protected Entity findPlayerToAttack() {
-		return this.worldObj.getClosestVulnerablePlayerToEntity(this, 16D);
+		return worldObj.getClosestVulnerablePlayerToEntity(this, 16D);
 	}
 
 	@Override
@@ -251,9 +250,9 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, ItemErebusMaterial.dataFlyWing), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, DATA.flyWing.ordinal()), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1, ItemErebusMaterial.dataCompoundEyes), 0.0F);
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1, DATA.compoundEyes.ordinal()), 0.0F);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import erebus.ModItems;
 import erebus.ModMaterials;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemJadeArmor extends ItemArmor {
 
@@ -22,6 +23,6 @@ public class ItemJadeArmor extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataJade;
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.jade.ordinal();
 	}
 }

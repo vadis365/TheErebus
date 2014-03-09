@@ -2,9 +2,6 @@ package erebus.entity;
 
 import java.util.List;
 
-import erebus.ModItems;
-import erebus.item.ItemErebusMaterial;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -18,6 +15,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityBlackWidow extends EntityMob {
 
@@ -162,7 +161,7 @@ public class EntityBlackWidow extends EntityMob {
 		super.dropFewItems(attackedByPlayer, looting);
 		if (attackedByPlayer && (rand.nextInt(3) == 0 || rand.nextInt(1 + looting) > 0))
 			dropItem(Item.spiderEye.itemID, 1);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), ItemErebusMaterial.dataPoisonGland), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override

@@ -26,7 +26,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
 import erebus.entity.ai.EntityAIPolinate;
-import erebus.item.ItemErebusMaterial;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityWorkerBee extends EntityTameable {
 	public ChunkCoordinates currentFlightTarget;
@@ -75,7 +75,7 @@ public class EntityWorkerBee extends EntityTameable {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-	
+
 	@Override
 	protected boolean canDespawn() {
 		if (getTameState() != 0)
@@ -83,11 +83,11 @@ public class EntityWorkerBee extends EntityTameable {
 		else
 			return true;
 	}
-	
+
 	@Override
-    public boolean allowLeashing() {
-        return !canDespawn() && super.allowLeashing();
-    }
+	public boolean allowLeashing() {
+		return !canDespawn() && super.allowLeashing();
+	}
 
 	@Override
 	protected void fall(float par1) {
@@ -115,8 +115,8 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, getNectarPoints(), ItemErebusMaterial.dataNectar), 0.0F);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, ItemErebusMaterial.dataExoPlate), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, getNectarPoints(), DATA.nectar.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
 	public boolean isFlying() {
@@ -152,15 +152,15 @@ public class EntityWorkerBee extends EntityTameable {
 				setBeeFlying(false);
 				flyToTarget();
 			}
-			
+
 			if (getTameState() == 1 && beeCollecting)
-				currentFlightTarget = new ChunkCoordinates(getDropPointX(), getDropPointY(),getDropPointZ());
-				flyToTarget();
-				if((int)posX==getDropPointX() && (int)posY==getDropPointY()+1 && (int)posZ==getDropPointZ() && getNectarPoints() >0) {
-					entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataNectar), 0.0F);
-					setNectarPoints(getNectarPoints() - 1);
-					setBeeCollecting(false);
-				}
+				currentFlightTarget = new ChunkCoordinates(getDropPointX(), getDropPointY(), getDropPointZ());
+			flyToTarget();
+			if ((int) posX == getDropPointX() && (int) posY == getDropPointY() + 1 && (int) posZ == getDropPointZ() && getNectarPoints() > 0) {
+				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.0F);
+				setNectarPoints(getNectarPoints() - 1);
+				setBeeCollecting(false);
+			}
 		}
 		super.onUpdate();
 	}
@@ -172,40 +172,39 @@ public class EntityWorkerBee extends EntityTameable {
 	public void setBeePollinating(boolean state) {
 		beePollinating = state;
 	}
-	
+
 	public void setBeeCollecting(boolean state) {
-		beeCollecting = state;	
+		beeCollecting = state;
 	}
 
 	public void flyAbout() {
-		if (currentFlightTarget != null && currentFlightTarget.posX !=getDropPointX() && currentFlightTarget.posY !=getDropPointY() && currentFlightTarget.posZ !=getDropPointZ() )
-			if (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ)|| currentFlightTarget.posY < 1)
+		if (currentFlightTarget != null && currentFlightTarget.posX != getDropPointX() && currentFlightTarget.posY != getDropPointY() && currentFlightTarget.posZ != getDropPointZ())
+			if (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1)
 				currentFlightTarget = null;
-		
-		if (getTameState()==0)
-			if (currentFlightTarget == null|| rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
+
+		if (getTameState() == 0)
+			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
 				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
-		
-		if (getTameState()==1)
-			if (currentFlightTarget == null|| rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
+
+		if (getTameState() == 1)
+			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
 				currentFlightTarget = new ChunkCoordinates(getDropPointX() + rand.nextInt(32) - rand.nextInt(32), getDropPointY() + rand.nextInt(8) - 2, getDropPointZ() + rand.nextInt(32) - rand.nextInt(32));
 
 		flyToTarget();
 	}
 
 	public void flyToTarget() {
-		if (currentFlightTarget != null && getEntityToAttack() == null &&  isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
-			if(worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusFlower.blockID || worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.honeyCombBlock.blockID) {
+		if (currentFlightTarget != null && getEntityToAttack() == null && isCollidedHorizontally && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
+			if (worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusFlower.blockID || worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.honeyCombBlock.blockID) {
 				if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ, currentFlightTarget.posX + 1, currentFlightTarget.posY + 2, currentFlightTarget.posZ + 1)).isEmpty())
 					setPosition(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ);
-			}
-			else {
+			} else {
 				currentFlightTarget = null;
 				setBeePollinating(false);
 				setBeeCollecting(false);
 				setBeeFlying(true);
-				
-				}
+
+			}
 		else if (currentFlightTarget != null && getEntityToAttack() == null) {
 			double targetX = currentFlightTarget.posX + 0.5D - posX;
 			double targetY = currentFlightTarget.posY + 1D - posY;
@@ -229,15 +228,15 @@ public class EntityWorkerBee extends EntityTameable {
 		ItemStack is = player.inventory.getCurrentItem();
 		if (!worldObj.isRemote && is != null && is.itemID == ModItems.nectarCollector.itemID)
 			if (getNectarPoints() > 0) {
-				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.dataNectar), 0.0F);
+				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.0F);
 				is.damageItem(1, player);
 				setNectarPoints(getNectarPoints() - 1);
 				setAttackTarget((EntityLivingBase) null);
 				return true;
 			}
-		
+
 		if (is != null && is.itemID == ModItems.beeTamingAmulet.itemID && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
-			setDropPoint(is.getTagCompound().getInteger("homeX"),is.getTagCompound().getInteger("homeY"),is.getTagCompound().getInteger("homeZ"));
+			setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
 			setTameState((byte) 1);
 			playTameEffect(true);
 			player.swingItem();
@@ -246,21 +245,21 @@ public class EntityWorkerBee extends EntityTameable {
 		}
 		return super.interact(player);
 	}
-	
+
 	public void setDropPoint(int x, int y, int z) {
 		dataWatcher.updateObject(24, Integer.valueOf(x));
 		dataWatcher.updateObject(25, Integer.valueOf(y));
 		dataWatcher.updateObject(26, Integer.valueOf(z));
 	}
-	
+
 	public int getDropPointX() {
 		return dataWatcher.getWatchableObjectInt(24);
 	}
-	
+
 	public int getDropPointY() {
 		return dataWatcher.getWatchableObjectInt(25);
 	}
-	
+
 	public int getDropPointZ() {
 		return dataWatcher.getWatchableObjectInt(26);
 	}
@@ -312,6 +311,6 @@ public class EntityWorkerBee extends EntityTameable {
 		super.readEntityFromNBT(nbt);
 		setNectarPoints(nbt.getInteger("nectarPoints"));
 		setTameState(nbt.getByte("tameState"));
-		setDropPoint(nbt.getInteger("dropPointX"),nbt.getInteger("dropPointY"),nbt.getInteger("dropPointZ"));
+		setDropPoint(nbt.getInteger("dropPointX"), nbt.getInteger("dropPointY"), nbt.getInteger("dropPointZ"));
 	}
 }

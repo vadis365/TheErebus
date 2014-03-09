@@ -191,6 +191,8 @@ tile.gneissStairs7.name=Gneiss Tiles Stairs
 tile.gneissStairs8.name=Gneiss Up Stairs
 tile.gneissStairs9.name=Gneiss Wifi Stairs
 tile.erebusHoney.name=Honey
+tile.erebusMud.name=Mud
+tile.erebus.mudBricks.name=Mud Bricks
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet
@@ -242,6 +244,7 @@ item.erebusMaterials.18.name=Scorpion Pincer
 item.erebusMaterials.19.name=Camouflage Powder
 item.erebusMaterials.20.name=Nectar
 item.erebusMaterials.21.name=Poison Gland
+item.erebusMaterials.22.name=Mud Brick
 item.erebusSpecialItem.0.name=Rhino Riding Kit
 item.erebusSpecialItem.1.name=Beetle Taming Amulet
 item.erebusFood.0.name=Beetle Larva

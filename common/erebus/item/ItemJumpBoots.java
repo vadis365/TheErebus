@@ -11,6 +11,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import erebus.Erebus;
 import erebus.ModItems;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemJumpBoots extends ItemArmor {
 
@@ -29,7 +30,7 @@ public class ItemJumpBoots extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == ItemErebusMaterial.dataElasticFibre;
+		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.elasticFibre.ordinal();
 	}
 
 	@Override

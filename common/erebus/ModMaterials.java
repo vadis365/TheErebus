@@ -8,6 +8,7 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraftforge.common.EnumHelper;
 
 public class ModMaterials {
+
 	public static EnumArmorMaterial armorEXOSKELETON = EnumHelper.addArmorMaterial("EXOSKELETON", 11, new int[] { 2, 4, 3, 2 }, 15);
 	public static EnumArmorMaterial armorREINEXOSKELETON = EnumHelper.addArmorMaterial("REINEXOSKELETON", 11, new int[] { 3, 8, 6, 3 }, 2);
 	public static EnumArmorMaterial armorREINEXOSPECIAL = EnumHelper.addArmorMaterial("REINEXOSPECIAL", 11, new int[] { 2, 7, 5, 2 }, 2);
@@ -18,5 +19,5 @@ public class ModMaterials {
 	public static EnumToolMaterial weaponWaspDagger = EnumHelper.addToolMaterial("WASPDAGGER", 0, 1, 1.0F, 0.0F, 12);
 	public static EnumToolMaterial weaponWaspSword = EnumHelper.addToolMaterial("WASPSWORD", 0, 863, 1.0F, 6.0F, 18);
 	public static EnumToolMaterial weaponScorpionPincer = EnumHelper.addToolMaterial("SCORPIONPINCER", 0, 863, 1.0F, 4.0F, 2);
-	public static Material honey = (new MaterialLiquid(MapColor.mapColorArray[14]));   
+	public static Material honey = new MaterialLiquid(MapColor.mapColorArray[14]);
 }
