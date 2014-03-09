@@ -280,6 +280,21 @@ item.beeTamingAmulet.name=Bee Taming Amulet
 item.doorAmberItem.name=Amber Door
 item.bucketHoney.name=Bucket Of Honey
 item.homingBeecon.name=Homing Beecon
+item.erebusFlowerSeeds.0.name=Giant Flower Seed Black
+item.erebusFlowerSeeds.1.name=Giant Flower Seed Red
+item.erebusFlowerSeeds.2.name=Giant Flower Seed Brown
+item.erebusFlowerSeeds.3.name=Giant Flower Seed Blue
+item.erebusFlowerSeeds.4.name=Giant Flower Seed Purple
+item.erebusFlowerSeeds.5.name=Giant Flower Seed Cyan
+item.erebusFlowerSeeds.6.name=Giant Flower Seed Lt Gray
+item.erebusFlowerSeeds.7.name=Giant Flower Seed Gray
+item.erebusFlowerSeeds.8.name=Giant Flower Seed Pink
+item.erebusFlowerSeeds.9.name=Giant Flower Seed Yellow
+item.erebusFlowerSeeds.10.name=Giant Flower Seed Lt Blue
+item.erebusFlowerSeeds.11.name=Giant Flower Seed Magenta
+item.erebusFlowerSeeds.12.name=Giant Flower Seed Orange
+item.erebusFlowerSeeds.13.name=Giant Flower Seed White
+
 
 #Entities
 entity.Erebus.BeetleLarva.name=Beetle Larva

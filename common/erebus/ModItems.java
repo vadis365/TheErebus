@@ -23,6 +23,7 @@ import erebus.item.ItemBucketOfBeetleJuice;
 import erebus.item.ItemBucketOfHoney;
 import erebus.item.ItemCavemanClub;
 import erebus.item.ItemCompoundGoggles;
+import erebus.item.ItemErebusFlowerSeeds;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemErebusMaterial;
 import erebus.item.ItemErebusMaterial.DATA;
@@ -53,7 +54,7 @@ public class ModItems {
 	// BASIC MATERIALS
 	public static Item portalActivator, erebusMaterials, erebusFood, metalIngot, bamBucket, turnip, sprayCan, wandOfAnimation;
 	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor, nectarCollector, beeTamingAmulet, bucketHoney;
-	public static Item homingBeecon;
+	public static Item homingBeecon, flowerSeeds;
 
 	// JADE STUFF
 	public static Item jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe;
@@ -96,7 +97,8 @@ public class ModItems {
 		doorAmberItem = new ItemBlockDoorAmber(ConfigHandler.doorAmberItemID, ModBlocks.doorAmber).setUnlocalizedName("doorAmberItem").setTextureName("erebus:doorAmber");
 		bucketHoney = new ItemBucketOfHoney(ConfigHandler.bucketHoneyID, ModBlocks.erebusHoneyBlock.blockID).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
 		homingBeecon = new ItemHomingBeecon(ConfigHandler.homingBeeconID).setUnlocalizedName("homingBeecon").setTextureName("paper");
-
+		flowerSeeds = new ItemErebusFlowerSeeds(ConfigHandler.flowerSeedsID).setUnlocalizedName("erebusFlowerSeeds");
+		
 		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
 		jadeLegs = new ItemJadeArmor(ConfigHandler.jadeLegsID, 2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
@@ -144,7 +146,7 @@ public class ModItems {
 		Erebus.tabErebusGear.add(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		Erebus.tabErebusGear.add(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger);
 		Erebus.tabErebusGear.add(compoundGoggles, reinCompoundGoggles, armorGlider, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
-		Erebus.tabErebusSpecial.add(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, sprayCan, hornOfSummoning, spawnEggs);
+		Erebus.tabErebusSpecial.add(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
 
 		// Special Case
 		Erebus.tabErebusBlock.add(doorAmberItem);
@@ -162,13 +164,14 @@ public class ModItems {
 		GameRegistry.registerItem(turnip, "erebus.turnips");
 		GameRegistry.registerItem(sprayCan, "erebus.sprayCan");
 		GameRegistry.registerItem(wandOfAnimation, "erebus.wandOfAnimation");
-		GameRegistry.registerItem(bucketOfBeetleJuice, "bucketOfBeetleJuice");
-		GameRegistry.registerItem(hornOfSummoning, "hornOfSummoning");
-		GameRegistry.registerItem(nectarCollector, "nectarCollector");
-		GameRegistry.registerItem(beeTamingAmulet, "beeTamingAmulet");
-		GameRegistry.registerItem(bucketHoney, "bucketHoney");
-		GameRegistry.registerItem(homingBeecon, "homingBeecon");
-
+		GameRegistry.registerItem(bucketOfBeetleJuice, "erebus.bucketOfBeetleJuice");
+		GameRegistry.registerItem(hornOfSummoning, "erebus.hornOfSummoning");
+		GameRegistry.registerItem(nectarCollector, "erebus.nectarCollector");
+		GameRegistry.registerItem(beeTamingAmulet, "erebus.beeTamingAmulet");
+		GameRegistry.registerItem(bucketHoney, "erebus.bucketHoney");
+		GameRegistry.registerItem(homingBeecon, "erebus.homingBeecon");
+		GameRegistry.registerItem(flowerSeeds, "erebus.erebusFlowerSeeds");
+		
 		GameRegistry.registerItem(jadeHelmet, "erebus.helmetJade");
 		GameRegistry.registerItem(jadeBody, "erebus.chestplateJade");
 		GameRegistry.registerItem(jadeLegs, "erebus.leggingsJade");

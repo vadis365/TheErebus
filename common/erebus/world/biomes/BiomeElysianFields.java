@@ -4,6 +4,8 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import erebus.world.feature.plant.WorldGenGiantFlowers;
+import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenCypressTree;
 
 // @formatter:off
@@ -26,6 +28,16 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 			
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz) == Block.grass.blockID)
 				new WorldGenCypressTree().generate(world,rand,xx,yy,zz);
+		}
+		
+		for(int attempt=0; attempt<65; attempt++){
+			int xx=x+getRandomXZOffset(rand),
+				yy=15+rand.nextInt(90),
+				zz=z+getRandomXZOffset(rand);
+
+			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+				new WorldGenGiantFlowers().generate(world,rand,xx,yy,zz);
+			}
 		}
 	}
 }
