@@ -18,6 +18,7 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
 
 public class BlockPlantedGiantFlower extends BlockSapling {
@@ -56,16 +57,15 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 
 	@Override
 	public void growTree(World world, int x, int y, int z, Random rand) {
-		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z))
-			return;
-
 		int meta = world.getBlockMetadata(x, y, z);
-		WorldGenerator worldGen = null;
+		WorldGenerator worldGen = new WorldGenGiantFlowers();
 
 		if (meta >=0 && meta <=13){
-			worldGen = new WorldGenGiantFlowers();
 			((WorldGenGiantFlowers) worldGen).setFlowerColour(meta+2);
-			((WorldGenGiantFlowers) worldGen).generate(world,rand,x,y,z);
+			world.setBlockToAir(x, y, z);
+			if (!worldGen.generate(world, rand, x-4, y, z-3))
+				world.setBlock(x, y, z, ModBlocks.flowerPlanted.blockID, meta, 3);
+			worldGen.generate(world, rand, x-4, y, z-3);
 			}
 	}
 
