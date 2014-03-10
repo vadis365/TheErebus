@@ -1,5 +1,6 @@
 package erebus.block;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -15,10 +16,10 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
 
 public class BlockPlantedGiantFlower extends BlockSapling {
@@ -45,7 +46,6 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		if (!world.isRemote) {
 			super.updateTick(world, x, y, z, rand);
-
 			if (rand.nextInt(13 - (world.getBlockLightValue(x, y + 1, z) >> 1)) == 0)
 				growTree(world, x, y, z, rand);
 		}
@@ -59,7 +59,6 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	public void growTree(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = new WorldGenGiantFlowers();
-
 		if (meta >=0 && meta <=13){
 			((WorldGenGiantFlowers) worldGen).setFlowerColour(meta+2);
 			world.setBlockToAir(x, y, z);
@@ -78,6 +77,13 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
+	}
+	
+	@Override
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int meta, int fortune) {
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ret.add(new ItemStack(ModItems.flowerSeeds.itemID, 1, meta));
+		return ret;
 	}
 
 	@Override
