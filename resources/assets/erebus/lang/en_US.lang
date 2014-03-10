@@ -193,6 +193,20 @@ tile.gneissStairs9.name=Gneiss Wifi Stairs
 tile.erebusHoney.name=Honey
 tile.erebusMud.name=Mud
 tile.erebus.mudBricks.name=Mud Bricks
+flowerPlanted_item_0.name=Black Flower
+flowerPlanted_item_1.name=Red Flower
+flowerPlanted_item_2.name=Brown Flower
+flowerPlanted_item_3.name=Blue Flower
+flowerPlanted_item_4.name=Purple Flower
+flowerPlanted_item_5.name=Cyan Flower
+flowerPlanted_item_6.name=Lt Gray Flower
+flowerPlanted_item_7.name=Gray Flower
+flowerPlanted_item_8.name=Pink Flower
+flowerPlanted_item_9.name=Yellow Flower
+flowerPlanted_item_10.name=Lt Blue Flower
+flowerPlanted_item_11.name=Magenta Flower
+flowerPlanted_item_12.name=Orange Flower
+flowerPlanted_item_13.name=White Flower
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

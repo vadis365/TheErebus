@@ -34,8 +34,8 @@ public class ItemErebusFlowerSeeds extends Item {
 	        else if (player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
 	            int block = world.getBlockId(x, y, z);
 	            Block soil = Block.blocksList[block];
-	            if (soil != null && soil.blockID == Block.tilledField.blockID && world.isAirBlock(x, y + 1, z)) {
-	                world.setBlock(x, y + 1, z, ModBlocks.erebusFlower.blockID, is.getItemDamage()+2, 3);
+	            if (soil != null && soil.blockID == Block.grass.blockID && world.isAirBlock(x, y + 1, z)) {
+	                world.setBlock(x, y + 1, z, ModBlocks.flowerPlanted.blockID, is.getItemDamage(), 3);
 	                --is.stackSize;
 	                return true;
 	            }

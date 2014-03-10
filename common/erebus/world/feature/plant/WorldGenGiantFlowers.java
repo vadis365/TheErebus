@@ -72,10 +72,19 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 		}
 
 		for (int petalGen = 0; petalGen < 54; petalGen++) {
-			setBlockAndMetadata(world, i + petalX[petalGen], j + petalY[petalGen], k + petalZ[petalGen], ModBlocks.erebusFlower.blockID, colour);
+			setBlockAndMetadata(world, i + petalX[petalGen], j + petalY[petalGen], k + petalZ[petalGen], ModBlocks.erebusFlower.blockID, getFlowerColour());
 		}
 
 		setBlockAndMetadata(world, i + 4, j + 9, k + 3, ModBlocks.erebusFlower.blockID, 0);
 		return true;
 	}
+	
+	public void setFlowerColour(int type) {
+		colour=type;
+	}
+	
+	public int getFlowerColour() {
+		return colour;
+	}
+	
 }
