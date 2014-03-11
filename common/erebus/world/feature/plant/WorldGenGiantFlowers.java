@@ -8,13 +8,16 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 
 public class WorldGenGiantFlowers extends WorldGenerator {
-	private int[] stem = { 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 6, 6, 0, 7, 1, 6, 0, 0, 0, 1, 1, 1, 2, 3, 4, 5, 6, 6, 6, 7, 7, 1, 6, 0, 7, 3, 3, 3, 3, 1, 3, 5, 2, 3, 4, 3, 3, 3, 3, 2, 3, 4, 1, 5, 3, 3, 3, 3 };
+	private int[] stemXZ = { 2, 5, 3, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 2, 6, 3, 3, 3, 3, 3, 1, 3, 5, 2, 3, 4, 3, 3, 3, 3, 2, 3, 4, 1, 5, 3, 3, 3, 3 };
+	private int[] stemY = { 0, 1, 1, 0, 0, 0, 0, 1, 1, 1,  2, 3, 4, 5, 6, 6, 6, 7, 7, 6, 7, 7, 6 };
+	
 	private int[] petalX = { 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7 };
 	private int[] petalY = { 9, 9, 9, 10, 10, 8, 8, 8, 9, 9, 9, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 7, 7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10 };
 	private int[] petalZ = { 2, 3, 4, 2, 4, 2, 3, 4, 1, 3, 5, 2, 3, 4, 1, 3, 5, 0, 6, 0, 6, 2, 3, 4, 1, 2, 3, 4, 5, 0, 1, 5, 6, 2, 3, 4, 1, 3, 5, 0, 6, 0, 6, 2, 3, 4, 1, 3, 5, 2, 3, 4, 2, 4 };
 	Random rand = new Random();
 	public int colour= rand.nextInt(14) + 2;
-
+	public int stemHeight= rand.nextInt(5);
+	
 	protected int[] GetValidSpawnBlocks() {
 		return new int[] { Block.grass.blockID };
 	}
@@ -59,23 +62,25 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 		}
 
 		for (int airX = i; airX < i + 7; airX++) {
-			for (int airY = j; airY < j + 11; airY++) {
+			for (int airY = j; airY < j + 11 -stemHeight; airY++) {
 				for (int airZ = k; airZ < k + 7; airZ++) {
 					if (!world.isAirBlock(airX, airY, airZ))
 						return false;
 				}
 			}
 		}
-
-		for (int stemGen = 0; stemGen < 23; stemGen++) {
-			setBlockAndMetadata(world, i + stem[stemGen], j + stem[stemGen + 23], k + stem[stemGen + 46], ModBlocks.erebusFlower.blockID, 1);
+		for (int stemGenBase = 0; stemGenBase < 10; stemGenBase++) {
+			setBlockAndMetadata(world, i + stemXZ[stemGenBase], j + stemY[stemGenBase], k + stemXZ[stemGenBase + 23], ModBlocks.erebusFlower.blockID, 1);
+		}
+		for (int stemGen = 10; stemGen < 23; stemGen++) {
+			setBlockAndMetadata(world, i + stemXZ[stemGen], j + stemY[stemGen] -stemHeight, k + stemXZ[stemGen + 23], ModBlocks.erebusFlower.blockID, 1);
 		}
 
 		for (int petalGen = 0; petalGen < 54; petalGen++) {
-			setBlockAndMetadata(world, i + petalX[petalGen], j + petalY[petalGen], k + petalZ[petalGen], ModBlocks.erebusFlower.blockID, getFlowerColour());
+			setBlockAndMetadata(world, i + petalX[petalGen], j + petalY[petalGen] -stemHeight, k + petalZ[petalGen], ModBlocks.erebusFlower.blockID, getFlowerColour());
 		}
 
-		setBlockAndMetadata(world, i + 4, j + 9, k + 3, ModBlocks.erebusFlower.blockID, 0);
+		setBlockAndMetadata(world, i + 4, j + 9 -stemHeight, k + 3, ModBlocks.erebusFlower.blockID, 0);
 		return true;
 	}
 	
