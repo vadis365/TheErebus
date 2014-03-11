@@ -23,30 +23,27 @@ public class ItemErebusFlowerSeeds extends Item {
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
 
-	    public ItemErebusFlowerSeeds(int id) {
-	        super(id);
-	    }
-	    
-		public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-	        if (side != 1) {
-	            return false;
-	        }
-	        else if (player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
-	            int block = world.getBlockId(x, y, z);
-	            Block soil = Block.blocksList[block];
-	            if (soil != null && soil.blockID == Block.grass.blockID && world.isAirBlock(x, y + 1, z)) {
-	                world.setBlock(x, y + 1, z, ModBlocks.flowerPlanted.blockID, is.getItemDamage(), 3);
-	                --is.stackSize;
-	                return true;
-	            }
-	            else {
-	                return false;
-	            }
-	        }
-	        else {
-	            return false;
-	        }
-	    }
+	public ItemErebusFlowerSeeds(int id) {
+		super(id);
+		setHasSubtypes(true);
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (side != 1)
+			return false;
+		else if (player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
+			int block = world.getBlockId(x, y, z);
+			Block soil = Block.blocksList[block];
+			if (soil != null && soil.blockID == Block.grass.blockID && world.isAirBlock(x, y + 1, z)) {
+				world.setBlock(x, y + 1, z, ModBlocks.flowerPlanted.blockID, is.getItemDamage(), 3);
+				--is.stackSize;
+				return true;
+			} else
+				return false;
+		} else
+			return false;
+	}
 
 	@Override
 	public void registerIcons(IconRegister iconRegister) {
