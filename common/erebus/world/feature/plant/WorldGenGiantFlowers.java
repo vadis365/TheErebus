@@ -71,7 +71,7 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 		for (int stemGenBase = 0; stemGenBase < 10; stemGenBase++) {
 			setBlockAndMetadata(world, i + stemXZ[stemGenBase], j + stemY[stemGenBase], k + stemXZ[stemGenBase + 23], ModBlocks.erebusFlower.blockID, 1);
 		}
-		for (int stemGen = 10; stemGen < 23; stemGen++) {
+		for (int stemGen = 10 + stemHeight; stemGen < 23; stemGen++) {
 			setBlockAndMetadata(world, i + stemXZ[stemGen], j + stemY[stemGen] -stemHeight, k + stemXZ[stemGen + 23], ModBlocks.erebusFlower.blockID, 1);
 		}
 
