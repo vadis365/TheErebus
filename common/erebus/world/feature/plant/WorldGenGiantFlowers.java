@@ -16,6 +16,7 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 	Random rand = new Random();
 	public int colour= rand.nextInt(14) + 2;
 	public int stemHeight= rand.nextInt(5);
+	private boolean rainbow = false;
 	
 	protected int[] GetValidSpawnBlocks() {
 		return new int[] { Block.grass.blockID };
@@ -86,8 +87,13 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 	public void setFlowerColour(int type) {
 		colour = type;
 	}
+	public void setRainbow(boolean allColours) {
+		rainbow = allColours;
+	}
 	
 	public int getFlowerColour() {
+		if(rainbow)
+			return rand.nextInt(14) + 2;
 		return colour;
 	}
 	

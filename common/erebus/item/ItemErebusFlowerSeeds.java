@@ -16,9 +16,9 @@ import erebus.ModBlocks;
 
 public class ItemErebusFlowerSeeds extends Item {
 
-	public static final String[] iconPaths = new String[] { "flowerSeedBlack", "flowerSeedRed", "flowerSeedBrown", "flowerSeedBlue", "flowerSeedPurple", "flowerSeedCyan", "flowerSeedLtGray", "flowerSeedGray", "flowerSeedPink", "flowerSeedYellow", "flowerSeedLtBlue", "flowerSeedMagenta", "flowerSeedOrange", "flowerSeedWhite" };
+	public static final String[] iconPaths = new String[] { "flowerSeedBlack", "flowerSeedRed", "flowerSeedBrown", "flowerSeedBlue", "flowerSeedPurple", "flowerSeedCyan", "flowerSeedLtGray", "flowerSeedGray", "flowerSeedPink", "flowerSeedYellow", "flowerSeedLtBlue", "flowerSeedMagenta", "flowerSeedOrange", "flowerSeedWhite", "flowerSeedRainbow" };
 
-	public static final short dataFlowerSeedBlack = 0, dataFlowerSeedRed = 1, dataFlowerSeedBrown = 2, dataFlowerSeedBlue = 3, dataFlowerSeedPurple = 4, dataFlowerSeedCyan = 5, dataFlowerSeedLtGray = 6, dataFlowerSeedGray = 7, dataFlowerSeedPink = 8, dataFlowerSeedYellow = 9, dataFlowerSeedLtBlue = 10, dataFlowerSeedMagenta = 11, dataFlowerSeedOrange = 12, dataFlowerSeedWhite = 13;
+	public static final short dataFlowerSeedBlack = 0, dataFlowerSeedRed = 1, dataFlowerSeedBrown = 2, dataFlowerSeedBlue = 3, dataFlowerSeedPurple = 4, dataFlowerSeedCyan = 5, dataFlowerSeedLtGray = 6, dataFlowerSeedGray = 7, dataFlowerSeedPink = 8, dataFlowerSeedYellow = 9, dataFlowerSeedLtBlue = 10, dataFlowerSeedMagenta = 11, dataFlowerSeedOrange = 12, dataFlowerSeedWhite = 13, dataFlowerSeedRainbow = 14;
 
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;

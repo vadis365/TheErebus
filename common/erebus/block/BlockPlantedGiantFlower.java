@@ -24,8 +24,8 @@ import erebus.world.feature.plant.WorldGenGiantFlowers;
 
 public class BlockPlantedGiantFlower extends BlockSapling {
 
-	public static final String[] flowerTypes = new String[] { "Black", "Red", "Brown", "Blue", "Purple", "Cyan", "LtGray", "Gray", "Pink", "Yellow", "LtBlue", "Magenta", "Orange", "White"  };
-	public static final byte dataBlack = 0, dataRed = 1, dataBrown = 2, dataBlue = 3, dataPurple = 4, dataCyan = 5, dataLtGray = 6, dataGray = 7, dataPink = 8, dataYellow = 9, dataLtBlue = 10, dataMagenta = 11, dataOrange = 12, dataWhite = 13;
+	public static final String[] flowerTypes = new String[] { "Black", "Red", "Brown", "Blue", "Purple", "Cyan", "LtGray", "Gray", "Pink", "Yellow", "LtBlue", "Magenta", "Orange", "White", "Rainbow"  };
+	public static final byte dataBlack = 0, dataRed = 1, dataBrown = 2, dataBlue = 3, dataPurple = 4, dataCyan = 5, dataLtGray = 6, dataGray = 7, dataPink = 8, dataYellow = 9, dataLtBlue = 10, dataMagenta = 11, dataOrange = 12, dataWhite = 13, dataRainbow = 14;
 
 	@SideOnly(Side.CLIENT)
 	private Icon[] iconArray;
@@ -59,13 +59,14 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	public void growTree(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = new WorldGenGiantFlowers();
-		if (meta >=0 && meta <=13){
+		if (meta >=0 && meta <=13)
 			((WorldGenGiantFlowers) worldGen).setFlowerColour(meta+2);
-			world.setBlockToAir(x, y, z);
-			if (!worldGen.generate(world, rand, x-4, y, z-3))
-				world.setBlock(x, y, z, ModBlocks.flowerPlanted.blockID, meta, 3);
+		else if (meta == 14)
+			((WorldGenGiantFlowers) worldGen).setRainbow(true);
+		world.setBlockToAir(x, y, z);
+		if (!worldGen.generate(world, rand, x-4, y, z-3))
+			world.setBlock(x, y, z, ModBlocks.flowerPlanted.blockID, meta, 3);
 			worldGen.generate(world, rand, x-4, y, z-3);
-			}
 	}
 
 	@Override
