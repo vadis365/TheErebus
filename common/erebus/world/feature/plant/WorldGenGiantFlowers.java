@@ -18,11 +18,11 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 	public int stemHeight= rand.nextInt(5);
 	private boolean rainbow = false;
 	
-	protected int[] GetValidSpawnBlocks() {
+	protected int[] getValidSpawnBlocks() {
 		return new int[] { Block.grass.blockID };
 	}
 
-	public boolean LocationIsValidSpawn(World world, int i, int j, int k) {
+	public boolean locationIsValidSpawn(World world, int i, int j, int k) {
 		int distanceToAir = 0;
 		int checkID = world.getBlockId(i, j, k);
 
@@ -39,7 +39,7 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 		int blockID = world.getBlockId(i, j, k);
 		int blockIDAbove = world.getBlockId(i, j + 1, k);
 		int blockIDBelow = world.getBlockId(i, j - 1, k);
-		for (int x : GetValidSpawnBlocks()) {
+		for (int x : getValidSpawnBlocks()) {
 			if (blockIDAbove != 0) {
 				return false;
 			}
@@ -57,7 +57,7 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 
 	@Override
 	public boolean generate(World world, Random rand, int i, int j, int k) {
-		if (!LocationIsValidSpawn(world, i, j, k) || !LocationIsValidSpawn(world, i + 7, j, k) || !LocationIsValidSpawn(world, i + 7, j, k + 7) || !LocationIsValidSpawn(world, i, j, k + 7)) {
+		if (!locationIsValidSpawn(world, i, j, k) || !locationIsValidSpawn(world, i + 7, j, k) || !locationIsValidSpawn(world, i + 7, j, k + 7) || !locationIsValidSpawn(world, i, j, k + 7)) {
 			return false;
 		}
 
@@ -69,9 +69,11 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 				}
 			}
 		}
+		
 		for (int stemGenBase = 0; stemGenBase < 10; stemGenBase++) {
 			setBlockAndMetadata(world, i + stemXZ[stemGenBase], j + stemY[stemGenBase], k + stemXZ[stemGenBase + 23], ModBlocks.erebusFlower.blockID, 1);
 		}
+		
 		for (int stemGen = 10 + stemHeight; stemGen < 23; stemGen++) {
 			setBlockAndMetadata(world, i + stemXZ[stemGen], j + stemY[stemGen] -stemHeight, k + stemXZ[stemGen + 23], ModBlocks.erebusFlower.blockID, 1);
 		}
@@ -96,5 +98,4 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 			return rand.nextInt(14) + 2;
 		return colour;
 	}
-	
 }
