@@ -71,13 +71,14 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 		switch(petalShape){
 			case DENSE_HEMISPHERE:
 				
-				// LAYER 1
+				// LAYER 0 & 1
 				
 				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
 				
 				for(int a = 0; a < 4; a++){
 					world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
 					world.setBlock(x+Direction.offsetX[a]*2,y+1,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower.blockID,1,2);
+					if (rand.nextInt(3) == 0)world.setBlock(x+Direction.offsetX[a]*3,y+2,z+Direction.offsetZ[a]*3,ModBlocks.erebusFlower.blockID,1,2);
 				}
 				
 				for(int xx = x-1; xx <= x+1; xx++){
@@ -132,6 +133,50 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				}
 				
 				break;
+				
+			case DISPERSE_HEMISPHERE:
+				
+				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
+				world.setBlock(x,y+1,z,ModBlocks.erebusFlower.blockID,0,2);
+				
+				for(int a = 0; a < 4; a++){
+					for(int b = 1; b <= 3; b++)world.setBlock(x+Direction.offsetX[a]*b,y+b-1,z+Direction.offsetZ[a]*b,ModBlocks.erebusFlower.blockID,petalColor,2);
+				}
+				
+				for(int a = 0; a < 2; a++){
+					for(int b = 0; b < 2; b++){
+						world.setBlock(x-1+a*2,y+1,z-1+b*2,ModBlocks.erebusFlower.blockID,petalColor,2);
+						world.setBlock(x-2+a*4,y+2,z-2+b*4,ModBlocks.erebusFlower.blockID,petalColor,2);
+					}
+				}
+				
+				break;
+				
+			case UMBRELLA:
+				
+				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
+				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
+
+				world.setBlock(x,y+1,z,ModBlocks.erebusFlower.blockID,petalColor,2);
+				world.setBlock(x,y+2,z,ModBlocks.erebusFlower.blockID,0,2);
+				
+				for(int a = 0; a < 3; a++){
+					world.setBlock(x-3+a,y+1,z,ModBlocks.erebusFlower.blockID,petalColor,2);
+					world.setBlock(x+3-a,y+1,z,ModBlocks.erebusFlower.blockID,petalColor,2);
+					world.setBlock(x,y+1,z-3+a,ModBlocks.erebusFlower.blockID,petalColor,2);
+					world.setBlock(x,y+1,z+3-a,ModBlocks.erebusFlower.blockID,petalColor,2);
+				}
+				
+				boolean reversedUmbrella = rand.nextInt(3) == 0;
+				
+				for(int a = 0; a < 2; a++){
+					for(int b = 0; b < 2; b++){
+						world.setBlock(x-1+a*2,y+1,z-1+b*2,ModBlocks.erebusFlower.blockID,petalColor,2);
+						world.setBlock(x-2+a*4,y+1,z-2+b*4,ModBlocks.erebusFlower.blockID,petalColor,2);
+						world.setBlock(x-3+a*6,y+(reversedUmbrella?2:0),z-3+b*6,ModBlocks.erebusFlower.blockID,petalColor,2);
+						world.setBlock(x+Direction.offsetX[a*2+b]*4,y+(reversedUmbrella?2:0),z+Direction.offsetZ[a*2+b]*4,ModBlocks.erebusFlower.blockID,petalColor,2);
+					}
+				}
 		}
 		
 		return true;
@@ -153,7 +198,7 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 	}
 	
 	private enum PetalShape{
-		DENSE_HEMISPHERE(3,5)/*, DISPERSE_HEMISPHERE(3,3), UMBRELLA(4,3)*/;
+		DENSE_HEMISPHERE(3,5), DISPERSE_HEMISPHERE(3,3), UMBRELLA(4,3);
 		
 		byte rad,height;
 		
