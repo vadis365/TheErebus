@@ -5,12 +5,11 @@ import net.minecraft.world.World;
 public class BasicShapeGen {
 
 	public final void createSphere(World world, int blockId, int metaData, boolean isHollow, int x, int y, int z, int radius) {
-		double maxDistance = Math.sqrt(Math.pow(radius, 2.0D));
 		for (int x1 = x - radius; x1 <= x + radius; x1++)
 			for (int z1 = z - radius; z1 <= z + radius; z1++)
 				for (int y1 = y - radius; y1 < y + radius; y1++) {
 					double dSq = Math.pow(x1 - x, 2.0D) + Math.pow(z1 - z, 2.0D) + Math.pow(y1 - y, 2.0D);
-					if (Math.round(Math.sqrt(dSq)) < maxDistance)
+					if (Math.round(Math.sqrt(dSq)) < radius)
 						if (dSq >= Math.pow(radius - 2, 2.0D))
 							world.setBlock(x1, y1, z1, blockId, metaData, 3);
 						else if (isHollow)
@@ -19,12 +18,11 @@ public class BasicShapeGen {
 	}
 
 	public final void createSemiSphereBottom(World world, int blockId, int metaData, boolean isHollow, int x, int y, int z, int radius) {
-		double maxDistance = Math.sqrt(Math.pow(radius, 2.0D));
 		for (int x1 = x - radius; x1 <= x + radius; x1++)
 			for (int z1 = z - radius; z1 <= z + radius; z1++)
 				for (int y1 = y; y1 > y - radius; y1--) {
 					double dSq = Math.pow(x1 - x, 2.0D) + Math.pow(z1 - z, 2.0D) + Math.pow(y1 - y, 2.0D);
-					if (Math.round(Math.sqrt(dSq)) < maxDistance)
+					if (Math.round(Math.sqrt(dSq)) < radius)
 						if ((dSq >= Math.pow(radius - 2, 2.0D)) || (y1 == y))
 							world.setBlock(x1, y1, z1, blockId, metaData, 3);
 						else if (isHollow)
@@ -33,12 +31,11 @@ public class BasicShapeGen {
 	}
 
 	public final void createSemiSphereTop(World world, int blockId, int metaData, boolean isHollow, int x, int y, int z, int radius) {
-		double maxDistance = Math.sqrt(Math.pow(radius, 2.0D));
 		for (int x1 = x - radius; x1 <= x + radius; x1++)
 			for (int z1 = z - radius; z1 <= z + radius; z1++)
 				for (int y1 = y; y1 < y + radius; y1++) {
 					double dSq = Math.pow(x1 - x, 2.0D) + Math.pow(z1 - z, 2.0D) + Math.pow(y1 - y, 2.0D);
-					if (Math.round(Math.sqrt(dSq)) < maxDistance)
+					if (Math.round(Math.sqrt(dSq)) < radius)
 						if ((dSq >= Math.pow(radius - 2, 2.0D)) || (y1 == y))
 							world.setBlock(x1, y1, z1, blockId, metaData, 3);
 						else if (isHollow)

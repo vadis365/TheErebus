@@ -24,8 +24,8 @@ import erebus.world.feature.plant.WorldGenGiantFlowers;
 
 public class BlockPlantedGiantFlower extends BlockSapling {
 
-	public static final String[] flowerTypes = new String[] { "Black", "Red", "Brown", "Blue", "Purple", "Cyan", "LtGray", "Gray", "Pink", "Yellow", "LtBlue", "Magenta", "Orange", "White", "Rainbow"  };
-	public static final byte dataBlack = 0, dataRed = 1, dataBrown = 2, dataBlue = 3, dataPurple = 4, dataCyan = 5, dataLtGray = 6, dataGray = 7, dataPink = 8, dataYellow = 9, dataLtBlue = 10, dataMagenta = 11, dataOrange = 12, dataWhite = 13, dataRainbow = 14;
+	public static final String[] flowerTypes = new String[] { "Black", "Red", "Brown", "Blue", "Purple", "Cyan", "LtGray", "Gray", "Pink", "Yellow", "LtBlue", "Magenta", "Orange", "White"  };
+	public static final byte dataBlack = 0, dataRed = 1, dataBrown = 2, dataBlue = 3, dataPurple = 4, dataCyan = 5, dataLtGray = 6, dataGray = 7, dataPink = 8, dataYellow = 9, dataLtBlue = 10, dataMagenta = 11, dataOrange = 12, dataWhite = 13;
 
 	@SideOnly(Side.CLIENT)
 	private Icon[] iconArray;
@@ -60,13 +60,10 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 		int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = new WorldGenGiantFlowers();
 		if (meta >=0 && meta <=13)
-			((WorldGenGiantFlowers) worldGen).setFlowerColour(meta+2);
-		else if (meta == 14)
-			((WorldGenGiantFlowers) worldGen).setRainbow(true);
+			((WorldGenGiantFlowers) worldGen).setFlowerColor(meta+2);
 		world.setBlockToAir(x, y, z);
-		if (!worldGen.generate(world, rand, x-4, y, z-3))
+		if (!worldGen.generate(world, rand, x, y, z))
 			world.setBlock(x, y, z, ModBlocks.flowerPlanted.blockID, meta, 3);
-			worldGen.generate(world, rand, x-4, y, z-3);
 	}
 
 	@Override
@@ -90,7 +87,7 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int id, CreativeTabs creativeTabs, List list) {
-		for (int a = 0; a < iconArray.length; a++)
+		for (int a = 0; a < flowerTypes.length; a++)
 			list.add(new ItemStack(id, 1, a));
 	}
 

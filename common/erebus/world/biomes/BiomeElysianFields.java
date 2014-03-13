@@ -1,11 +1,8 @@
 package erebus.world.biomes;
-
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
-import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenCypressTree;
 
 // @formatter:off

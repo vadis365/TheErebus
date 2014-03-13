@@ -1,101 +1,166 @@
 package erebus.world.feature.plant;
-
 import java.util.Random;
-
-import net.minecraft.block.Block;
+import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 
-public class WorldGenGiantFlowers extends WorldGenerator {
-	private int[] stemXZ = { 2, 5, 3, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 2, 6, 3, 3, 3, 3, 3, 1, 3, 5, 2, 3, 4, 3, 3, 3, 3, 2, 3, 4, 1, 5, 3, 3, 3, 3 };
-	private int[] stemY = { 0, 1, 1, 0, 0, 0, 0, 1, 1, 1,  2, 3, 4, 5, 6, 6, 6, 7, 7, 6, 7, 7, 6 };
-	private int[] petalX = { 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7 };
-	private int[] petalY = { 9, 9, 9, 10, 10, 8, 8, 8, 9, 9, 9, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 7, 7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10 };
-	private int[] petalZ = { 2, 3, 4, 2, 4, 2, 3, 4, 1, 3, 5, 2, 3, 4, 1, 3, 5, 0, 6, 0, 6, 2, 3, 4, 1, 2, 3, 4, 5, 0, 1, 5, 6, 2, 3, 4, 1, 3, 5, 0, 6, 0, 6, 2, 3, 4, 1, 3, 5, 2, 3, 4, 2, 4 };
-	Random rand = new Random();
-	public int colour= rand.nextInt(14) + 2;
-	public int stemHeight= rand.nextInt(5);
-	private boolean rainbow = false;
-	
-	protected int[] getValidSpawnBlocks() {
-		return new int[] { Block.grass.blockID };
-	}
-
-	public boolean locationIsValidSpawn(World world, int i, int j, int k) {
-		int distanceToAir = 0;
-		int checkID = world.getBlockId(i, j, k);
-
-		while (checkID != 0) {
-			distanceToAir++;
-			checkID = world.getBlockId(i, j + distanceToAir, k);
-		}
-
-		if (distanceToAir > 0) {
-			return false;
-		}
-		j += distanceToAir - 1;
-
-		int blockID = world.getBlockId(i, j, k);
-		int blockIDAbove = world.getBlockId(i, j + 1, k);
-		int blockIDBelow = world.getBlockId(i, j - 1, k);
-		for (int x : getValidSpawnBlocks()) {
-			if (blockIDAbove != 0) {
-				return false;
-			}
-			if (blockID == x) {
-				return true;
-			} else if (blockID == Block.snow.blockID && blockIDBelow == x) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public WorldGenGiantFlowers() {
-	}
+// @formatter:off
+public class WorldGenGiantFlowers extends WorldGenerator{
+	private int petalColor = -1;
 
 	@Override
-	public boolean generate(World world, Random rand, int i, int j, int k) {
-		if (!locationIsValidSpawn(world, i, j, k) || !locationIsValidSpawn(world, i + 7, j, k) || !locationIsValidSpawn(world, i + 7, j, k + 7) || !locationIsValidSpawn(world, i, j, k + 7)) {
-			return false;
+	public boolean generate(World world, Random rand, int x, int y, int z){
+		StemShape stemShape = StemShape.values()[rand.nextInt(StemShape.values().length)];
+		PetalShape petalShape = PetalShape.values()[rand.nextInt(PetalShape.values().length)];
+		int stemHeight = rand.nextInt(6)+2;
+		
+		if (petalColor == -1)petalColor = rand.nextInt(13)+2;
+		
+		// CHECK AIR
+		
+		for(int yy = y+2; yy <= y+stemHeight; yy++){
+			if (!world.isAirBlock(x,yy,z))return false;
 		}
-
-		for (int airX = i; airX < i + 7; airX++) {
-			for (int airY = j; airY < j + 11 -stemHeight; airY++) {
-				for (int airZ = k; airZ < k + 7; airZ++) {
-					if (!world.isAirBlock(airX, airY, airZ))
-						return false;
+		
+		for(int xx = x-stemShape.rad; xx <= x+stemShape.rad; xx++){
+			for(int zz = z-stemShape.rad; zz <= z+stemShape.rad; zz++){
+				for(int yy = y; yy <= y+stemShape.height; yy++){
+					if (!world.isAirBlock(xx,yy,zz))return false;
+				}
+				
+				if (world.isAirBlock(xx,y-1,zz))return false;
+			}
+		}
+		
+		for(int xx = x-petalShape.rad; xx <= x+petalShape.rad; xx++){
+			for(int zz = z-petalShape.rad; zz <= z+petalShape.rad; zz++){
+				for(int yy = y+stemHeight+1; yy <= y+stemHeight+1+petalShape.height; yy++){
+					if (!world.isAirBlock(xx,yy,zz))return false;
 				}
 			}
 		}
 		
-		for (int stemGenBase = 0; stemGenBase < 10; stemGenBase++) {
-			setBlockAndMetadata(world, i + stemXZ[stemGenBase], j + stemY[stemGenBase], k + stemXZ[stemGenBase + 23], ModBlocks.erebusFlower.blockID, 1);
+		// GENERATE STEM
+		
+		switch(stemShape){
+			case SMALL_X:
+				for(int a = 0; a < 2; a++){
+					for(int b = 0; b < 2; b++)world.setBlock(x-1+a*2,y,z-1+b*2,ModBlocks.erebusFlower.blockID,1,2);
+				}
+				break;
+				
+			case SMALL_PLUS:
+				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
+				break;
+				
+			case LARGE_PLUS:
+				for(int a = 0; a < 4; a++){
+					world.setBlock(x+Direction.offsetX[a]*2,y,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower.blockID,1,2);
+					world.setBlock(x+Direction.offsetX[a],y+1,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
+				}
+				break;
 		}
 		
-		for (int stemGen = 10 + stemHeight; stemGen < 23; stemGen++) {
-			setBlockAndMetadata(world, i + stemXZ[stemGen], j + stemY[stemGen] -stemHeight, k + stemXZ[stemGen + 23], ModBlocks.erebusFlower.blockID, 1);
-		}
+		for(int yy = y; yy <= y+stemHeight; yy++)world.setBlock(x,yy,z,ModBlocks.erebusFlower.blockID,1,2);
+		
+		// GENERATE PETALS
+		
+		y += stemHeight+1;
+		
+		switch(petalShape){
+			case DENSE_HEMISPHERE:
+				
+				// LAYER 1
+				
+				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
+				
+				for(int a = 0; a < 4; a++){
+					world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
+					world.setBlock(x+Direction.offsetX[a]*2,y+1,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower.blockID,1,2);
+				}
+				
+				for(int xx = x-1; xx <= x+1; xx++){
+					for(int zz = z-1; zz <= z+1; zz++)world.setBlock(xx,y+1,zz,ModBlocks.erebusFlower.blockID,petalColor,2);
+				}
+				
+				// LAYER 2
+				
+				for(int a = 0; a < 3; a++){
+					for(int b = 0; b < 2; b++){
+						world.setBlock(x-2+b*4,y+2,z-1+a,ModBlocks.erebusFlower.blockID,petalColor,2);
+						world.setBlock(x-1+a,y+2,z-2+b*4,ModBlocks.erebusFlower.blockID,petalColor,2);
+					}
+					world.setBlock(x-1+a,y+2,z,ModBlocks.erebusFlower.blockID,petalColor,2);
+				}
+				
+				for(int a = 0; a < 2; a++)world.setBlock(x,y+2,z-1+a*2,ModBlocks.erebusFlower.blockID,petalColor,2);
+				
+				// LAYER 3
+				
+				world.setBlock(x,y+3,z,ModBlocks.erebusFlower.blockID,0,2);
+				
+				for(int a = 0; a < 3; a++){
+					for(int b = 0; b < 2; b++){
+						world.setBlock(x-3+b*6,y+3,z-1+a,ModBlocks.erebusFlower.blockID,petalColor,2);
+						world.setBlock(x-1+a,y+3,z-3+b*6,ModBlocks.erebusFlower.blockID,petalColor,2);
+					}
+				}
+				
+				for(int a = -1; a <= 1; a++){
+					for(int b = -1; b <= 1; b++){
+						if (a == 0 && b == 0)continue;
+						world.setBlock(x+a*2,y+3,z+b*2,ModBlocks.erebusFlower.blockID,petalColor,2);
+					}
+				}
+				
+				// LAYER 4
+				
+				boolean petalFormation = rand.nextBoolean();
 
-		for (int petalGen = 0; petalGen < 54; petalGen++) {
-			setBlockAndMetadata(world, i + petalX[petalGen], j + petalY[petalGen] -stemHeight, k + petalZ[petalGen], ModBlocks.erebusFlower.blockID, getFlowerColour());
+				for(int a = 0; a < 2; a++){
+					for(int b = 0; b < 2; b++){
+						if (petalFormation){
+							world.setBlock(x-3+a*6,y+4,z-1+b*2,ModBlocks.erebusFlower.blockID,petalColor,2);
+							world.setBlock(x-1+a*2,y+4,z-3+b*6,ModBlocks.erebusFlower.blockID,petalColor,2);
+						}
+						else{
+							world.setBlock(x-2+a*4,y+4,z-2+b*4,ModBlocks.erebusFlower.blockID,petalColor,2);
+							world.setBlock(x+Direction.offsetX[a*2+b]*3,y+4,z+Direction.offsetZ[a*2+b]*3,ModBlocks.erebusFlower.blockID,petalColor,2);
+						}
+					}
+				}
+				
+				break;
 		}
-
-		setBlockAndMetadata(world, i + 4, j + 9 -stemHeight, k + 3, ModBlocks.erebusFlower.blockID, 0);
+		
 		return true;
 	}
 	
-	public void setFlowerColour(int type) {
-		colour = type;
-	}
-	public void setRainbow(boolean allColours) {
-		rainbow = allColours;
+	public void setFlowerColor(int color){
+		this.petalColor = color;
 	}
 	
-	public int getFlowerColour() {
-		if(rainbow)
-			return rand.nextInt(14) + 2;
-		return colour;
+	private enum StemShape{
+		SMALL_X(1,1), SMALL_PLUS(1,1), LARGE_PLUS(1,2);
+		
+		byte rad,height;
+		
+		StemShape(int rad, int height){
+			this.rad = (byte)rad;
+			this.height = (byte)height;
+		}
+	}
+	
+	private enum PetalShape{
+		DENSE_HEMISPHERE(3,5)/*, DISPERSE_HEMISPHERE(3,3), UMBRELLA(4,3)*/;
+		
+		byte rad,height;
+		
+		PetalShape(int rad, int height){
+			this.rad = (byte)rad;
+			this.height = (byte)height;
+		}
 	}
 }
+// @formatter:on

@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-//@formatter:off
+// @formatter:off
 public class WorldGenMelon extends WorldGenerator {
 
 	@Override
@@ -38,4 +38,4 @@ public class WorldGenMelon extends WorldGenerator {
 		return true;
 	}
 }
-//@formatter:on
+// @formatter:on
