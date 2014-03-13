@@ -339,6 +339,7 @@ entity.Erebus.FireAnt.name=Fire Ant
 entity.Erebus.RhinoBeetle.name=Rhinoceros Beetle
 entity.Erebus.WorkerBee.name=Worker Bee
 entity.Erebus.Dragonfly.name=Dragonfly
+entity.Erebus.BloodSnail.name=Blood Snail
 
 #Fluids
 fluid.erebus.honey=Honey
