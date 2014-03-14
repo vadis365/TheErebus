@@ -1,10 +1,11 @@
-package erebus.world.biomes;
+package erebus.world.biomes.sub;
 import java.util.Random;
+import erebus.world.biomes.BiomeUndergroundJungle;
 import net.minecraft.world.World;
 
 //@formatter:off
-public class BiomeSubLake extends BiomeUndergroundJungle{
-	public BiomeSubLake(int biomeID){
+public class BiomeLake extends BiomeUndergroundJungle{
+	public BiomeLake(int biomeID){
 		super(biomeID);
 		
 		setBiomeName("Underground Jungle - Lake");
