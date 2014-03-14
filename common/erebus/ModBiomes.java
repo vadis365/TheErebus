@@ -8,6 +8,7 @@ import erebus.world.biomes.BiomeSubterraneanSavannah;
 import erebus.world.biomes.BiomeUlteriorOutback;
 import erebus.world.biomes.BiomeUndergroundJungle;
 import erebus.world.biomes.BiomeVolcanicDesert;
+import erebus.world.biomes.sub.BiomeLake;
 import erebus.world.loot.WeightedList;
 
 public class ModBiomes {
@@ -52,6 +53,6 @@ public class ModBiomes {
 		fungalForest = new BiomeFungalForest(fungalForestID);
 		betweenlands = new BiomeBetweenlands(betweenlandsID);
 		
-		//undergroundJungleSubTest = new BiomeUndergroundJungleSubTest(undergroundJungleSubTestID);
+		jungleSubLake = new BiomeLake(jungleSubLakeID);
 	}
 }

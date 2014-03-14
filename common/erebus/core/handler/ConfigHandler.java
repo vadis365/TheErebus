@@ -212,12 +212,12 @@ public class ConfigHandler {
 			ModBiomes.fungalForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Fungal Forest", 156).getInt(156);
 			ModBiomes.betweenlandsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Betweenlands", 157).getInt(157);
 
-			ModBiomes.jungleSubLakeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 161).getInt(161);
-			ModBiomes.jungleSubAsperGroveID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 162).getInt(162);
-			ModBiomes.desertSubCharredForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 163).getInt(163);
-			ModBiomes.savannahSubRockyWastelandID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 164).getInt(164);
-			ModBiomes.savannahSubAsperGroveID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 165).getInt(165);
-			ModBiomes.savannahSubSteppeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 166).getInt(166);
+			ModBiomes.jungleSubLakeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle - Lake", 161).getInt(161);
+			ModBiomes.jungleSubAsperGroveID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle - Asper Grove", 162).getInt(162);
+			ModBiomes.desertSubCharredForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Volcanic Desert - Charred Forest", 163).getInt(163);
+			ModBiomes.savannahSubRockyWastelandID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Savannah - Rocky Wasteland", 164).getInt(164);
+			ModBiomes.savannahSubAsperGroveID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Savannah - Asper Grove", 165).getInt(165);
+			ModBiomes.savannahSubSteppeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Savannah - Steppe", 166).getInt(166);
 
 			erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
 			spawnPortalMobs = config.get(Configuration.CATEGORY_GENERAL, "Should spawn beetles and larvae in the portal", true).getBoolean(true);

@@ -8,6 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
@@ -235,7 +236,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 	
 	@Override
 	public BiomeBaseErebus getRandomSubBiome(int randomValue){
-		return null;
+		return ModBiomes.jungleSubLake;
 	}
 }
 // @formatter:on

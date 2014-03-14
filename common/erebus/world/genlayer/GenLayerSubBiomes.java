@@ -6,6 +6,8 @@ import net.minecraft.world.gen.layer.IntCache;
 import erebus.world.biomes.BiomeBaseErebus;
 
 public class GenLayerSubBiomes extends GenLayerErebus{
+	private static final byte[] offsetX = new byte[]{ 0, 1, -1, 0, 0 }, offsetZ = new byte[]{ 0, 0, 0, 1, -1 };
+	
 	public GenLayerSubBiomes(long seed, GenLayer parentGenLayer){
 		super(seed);
 		this.parent = parentGenLayer;
@@ -13,36 +15,45 @@ public class GenLayerSubBiomes extends GenLayerErebus{
 
 	@Override
 	public int[] getInts(int x, int z, int sizeX, int sizeZ){
-		int[] currentBiomeInts = parent.getInts(x - 1,z - 1,sizeX + 2,sizeZ + 2);
+		int[] currentBiomeInts = parent.getInts(x - 2,z - 2,sizeX + 4,sizeZ + 4);
 		int[] biomeInts = IntCache.getIntCache(sizeX * sizeZ);
 
 		for(int zz = 0; zz < sizeZ; ++zz){
 			for(int xx = 0; xx < sizeX; ++xx){
 				initChunkSeed(xx + x,zz + z);
-				int biomeID = currentBiomeInts[xx + 1 + (zz + 1) * (sizeX + 2)];
+				biomeInts[xx + zz * sizeX] = currentBiomeInts[xx + 2 + (zz + 2) * (sizeX + 4)];
+			}
+		}
+		
+		initChunkSeed(x,z);
+		
+		for(int attempt = 0, xx, zz; attempt < 6; attempt++){
+			xx = 1 + nextInt(sizeX - 2);
+			zz = 1 + nextInt(sizeZ - 2);
 
-				BiomeBaseErebus biome = (BiomeBaseErebus)BiomeGenBase.biomeList[biomeID];
-				BiomeBaseErebus subBiome = biome.getRandomSubBiome(nextInt(101));
+			int biomeID = currentBiomeInts[xx + 2 + (zz + 2) * (sizeX + 4)];
 
-				if (subBiome == null){
-					biomeInts[xx + zz * sizeX] = biomeID;
-				}
-				else{
-					int i2 = currentBiomeInts[xx + 1 + (zz + 1 - 1) * (sizeX + 2)];
-					int j2 = currentBiomeInts[xx + 1 + 1 + (zz + 1) * (sizeX + 2)];
-					int k2 = currentBiomeInts[xx + 1 - 1 + (zz + 1) * (sizeX + 2)];
-					int l2 = currentBiomeInts[xx + 1 + (zz + 1 + 1) * (sizeX + 2)];
-
-					if (i2 == biomeID && j2 == biomeID && k2 == biomeID && l2 == biomeID){
-						biomeInts[xx + zz * sizeX] = subBiome.biomeID;
+			BiomeBaseErebus biome = (BiomeBaseErebus)BiomeGenBase.biomeList[biomeID];
+			BiomeBaseErebus subBiome = biome.getRandomSubBiome(nextInt(101));
+	
+			if (subBiome != null && biome != subBiome){
+				for(int a = 0, bx1, bx2, bz1, bz2, nx, nz; a < 5; a++){
+					nx = xx + offsetX[a];
+					nz = zz + offsetZ[a];
+					bz1 = currentBiomeInts[nx + 2 + (nz + 2 - 1) * (sizeX + 4)];
+					bx1 = currentBiomeInts[nx + 2 + 1 + (nz + 2) * (sizeX + 4)];
+					bx2 = currentBiomeInts[nx + 2 - 1 + (nz + 2) * (sizeX + 4)];
+					bz2 = currentBiomeInts[nx + 2 + (nz + 2 + 1) * (sizeX + 4)];
+		
+					if (bx1 == biomeID && bx2 == biomeID && bz1 == biomeID && bz2 == biomeID && (a == 0 || nextInt(2) == 0)){
+						biomeInts[nx + nz * sizeX] = subBiome.biomeID;
+						attempt = 999;
 					}
-					else{
-						biomeInts[xx + zz * sizeX] = biomeID;
-					}
+					else if (a == 0)break;
 				}
 			}
 		}
-
+		
 		return biomeInts;
 	}
 }
