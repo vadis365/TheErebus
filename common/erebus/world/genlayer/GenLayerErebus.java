@@ -2,11 +2,8 @@ package erebus.world.genlayer;
 
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.GenLayerAddIsland;
 import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
 import net.minecraft.world.gen.layer.GenLayerIsland;
-import net.minecraft.world.gen.layer.GenLayerRiverInit;
-import net.minecraft.world.gen.layer.GenLayerSmooth;
 import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,98 +12,26 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 public abstract class GenLayerErebus extends GenLayer {
 
 	private long worldGenSeed;
-	protected GenLayerErebus parent;
+	protected GenLayer parent;
 	private long chunkSeed;
 	private long baseSeed;
 
 	public static GenLayer[] initializeAllBiomeGenerators(long seed, WorldType worldType) {
-		seed+=1;
-		
-		GenLayerIsland genlayerisland = new GenLayerIsland(1L);
-		GenLayerFuzzyZoom genlayerfuzzyzoom = new GenLayerFuzzyZoom(2000L, genlayerisland);
-		GenLayerAddIsland genlayeraddisland = new GenLayerAddIsland(1L, genlayerfuzzyzoom);
-		GenLayerZoom genlayerzoom = new GenLayerZoom(2001L, genlayeraddisland);
-		genlayeraddisland = new GenLayerAddIsland(2L, genlayerzoom);
-		genlayerzoom = new GenLayerZoom(2002L, genlayeraddisland);
-		genlayeraddisland = new GenLayerAddIsland(3L, genlayerzoom);
-		genlayerzoom = new GenLayerZoom(2003L, genlayeraddisland);
-		genlayeraddisland = new GenLayerAddIsland(4L, genlayerzoom);
+		byte biomeSize = getModdedBiomeSize(worldType, (byte)(worldType == WorldType.LARGE_BIOMES ? 7 : 5));
 
-		byte biomeSize = getModdedBiomeSize(worldType, (byte)(worldType == WorldType.LARGE_BIOMES ? 6 : 4));
-
-		GenLayer genlayer = GenLayerZoom.magnify(1000L, genlayeraddisland, 0);
-		GenLayerRiverInit genlayerriverinit = new GenLayerRiverInit(100L, genlayer);
-		genlayer = GenLayerZoom.magnify(1000L, genlayerriverinit, biomeSize + 2);
-
-		GenLayerRiverErebus genlayerriver = new GenLayerRiverErebus(1L, genlayer);
-
-		GenLayerSmooth genlayersmooth = new GenLayerSmooth(1000L, genlayerriver);
-
-		GenLayer genlayer1 = GenLayerZoom.magnify(1000L, genlayeraddisland, 0);
-
-		GenLayerBiomeErebus genlayerbiome = new GenLayerBiomeErebus(200L, genlayer1);
-
-		genlayer1 = GenLayerZoom.magnify(1000L, genlayerbiome, 2);
-		Object object = new GenLayerSubBiomes(1000L, genlayer1);
-
-		for (int j = 0; j < biomeSize; ++j) {
-			object = new GenLayerZoom((long) (1000 + j), (GenLayer) object);
-
-			if (j == 0)
-				object = new GenLayerAddIsland(3L, (GenLayer) object);
-		}
-
-		// TODO find the fucker that makes random stripes of mixed biome blocks
-		GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer) object);
-		GenLayerCustomRiverMix genlayerrivermix = new GenLayerCustomRiverMix(100L, genlayersmooth1);
-		GenLayerVoronoiZoom genlayervoronoizoom = new GenLayerVoronoiZoom(10L, genlayerrivermix);
-		genlayerrivermix.initWorldGenSeed(seed);
-		genlayervoronoizoom.initWorldGenSeed(seed);
-		return new GenLayer[] { genlayerrivermix, genlayervoronoizoom, genlayerrivermix };
+		GenLayer genLayer = new GenLayerIsland(1L);
+		genLayer = new GenLayerFuzzyZoom(2000L,genLayer);
+		genLayer = new GenLayerBiomes(100L,genLayer);
+		genLayer = GenLayerZoom.magnify(2000L,genLayer,5);
+		genLayer = new GenLayerSubBiomes(101L,genLayer);
+		genLayer = GenLayerZoom.magnify(2100L,genLayer,biomeSize);	
+		genLayer = new GenLayerVoronoiZoom(10L,genLayer);
+		genLayer.initWorldGenSeed(seed);
+		return new GenLayer[] { null, genLayer, null };
 	}
 
 	public GenLayerErebus(long seed) {
 		super(seed);
-	}
-
-	@Override
-	public void initWorldGenSeed(long seed) {
-		worldGenSeed = seed;
-
-		if (parent != null)
-			parent.initWorldGenSeed(seed);
-
-		worldGenSeed *= worldGenSeed * 6364136223846793005L + 1442695040888963407L;
-		worldGenSeed += baseSeed;
-		worldGenSeed *= worldGenSeed * 6364136223846793005L + 1442695040888963407L;
-		worldGenSeed += baseSeed;
-		worldGenSeed *= worldGenSeed * 6364136223846793005L + 1442695040888963407L;
-		worldGenSeed += baseSeed;
-	}
-
-	@Override
-	public void initChunkSeed(long x, long z) {
-		chunkSeed = worldGenSeed;
-		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += x;
-		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += z;
-		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += x;
-		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += z;
-	}
-
-	@Override
-	protected int nextInt(int range) {
-		int j = (int) ((chunkSeed >> 24) % range);
-
-		if (j < 0)
-			j += range;
-
-		chunkSeed *= chunkSeed * 6364136223846793005L + 1442695040888963407L;
-		chunkSeed += worldGenSeed;
-		return j;
 	}
 
 	@Override

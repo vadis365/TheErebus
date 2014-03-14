@@ -50,7 +50,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 	public ChunkProviderErebus(World world, long seed) {
 		worldObj = world;
 
-		rand = new Random(seed);
+		rand = new Random(seed+1);
 
 		noiseGen1 = new NoiseGeneratorOctaves(rand, 16);
 		noiseGen2 = new NoiseGeneratorOctaves(rand, 16);
@@ -70,7 +70,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 		int i = byte0 + 1;
 		byte byte2 = 17;
 		int j = byte0 + 1;
-		biomesForGeneration = worldObj.getWorldChunkManager().getBiomesForGeneration(biomesForGeneration, x * 4 - 2, z * 4 - 2, i + 5, j + 5);
+		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+        
 		noiseArray = initializeNoiseField(noiseArray, x * byte0, 0, z * byte0, i, byte2, j);
 
 		for (int k = 0; k < byte0; k++)
@@ -138,6 +139,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		byte[] blocks = new byte[32768];
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		
 		generateTerrain(x, z, blocks);
 		replaceBlocksForBiome(x, z, blocks, biomesForGeneration);
 
@@ -147,8 +149,9 @@ public class ChunkProviderErebus implements IChunkProvider {
 		Chunk chunk = new Chunk(worldObj, blocks, x, z);
 		byte[] biomeArrayReference = chunk.getBiomeArray();
 
-		for (int k = 0; k < biomeArrayReference.length; ++k)
-			biomeArrayReference[k] = (byte) biomesForGeneration[k].biomeID;
+		for(int a = 0; a < biomeArrayReference.length; ++a){
+			biomeArrayReference[a] = (byte) biomesForGeneration[a].biomeID;
+		}
 
 		chunk.generateSkylightMap();
 		chunk.resetRelightChecks();

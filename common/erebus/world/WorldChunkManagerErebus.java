@@ -26,17 +26,14 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	
 	private final List biomesToSpawnIn;
 	private final BiomeCache biomeCache;
-	private final GenLayer biomeIndexLayer;
-	private final GenLayer genBiomes;
+	private final GenLayer biomeGenLayer;
 
 
 	public WorldChunkManagerErebus(World world) {
 		biomesToSpawnIn = new ArrayList(allowedBiomes);
 		biomeCache = new BiomeCache(this);
 		GenLayer[] layers = GenLayerErebus.initializeAllBiomeGenerators(world.getSeed(), world.getWorldInfo().getTerrainType());
-		layers = getModdedBiomeGenerators(world.getWorldInfo().getTerrainType(), world.getSeed(), layers);
-		genBiomes = layers[0];
-		biomeIndexLayer = layers[1];
+		biomeGenLayer = getModdedBiomeGenerators(world.getWorldInfo().getTerrainType(), world.getSeed(), layers)[1];
 	}
 
 	@Override
@@ -50,7 +47,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 
 		if (biomesForGeneration == null || biomesForGeneration.length < sizeX * sizeZ) biomesForGeneration = new BiomeGenBase[sizeX * sizeZ];
 
-		int[] biomeArray = genBiomes.getInts(x, z, sizeX, sizeZ);
+		int[] biomeArray = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 
 		for (int index = 0; index < sizeX * sizeZ; ++index)
 			biomesForGeneration[index] = BiomeGenBase.biomeList[biomeArray[index]];
@@ -91,7 +88,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 			System.arraycopy(cachedBiomes, 0, biomesForGeneration, 0, sizeX * sizeZ);
 			return biomesForGeneration;
 		} else {
-			int[] generatedBiomes = biomeIndexLayer.getInts(x, z, sizeX, sizeZ);
+			int[] generatedBiomes = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 			for (int index = 0; index < sizeX * sizeZ; ++index)
 				biomesForGeneration[index] = BiomeGenBase.biomeList[generatedBiomes[index]];
 
@@ -108,7 +105,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		int maxZ = z + checkRadius >> 2;
 		int sizeX = maxX - minX + 1;
 		int sizeZ = maxZ - minZ + 1;
-		int[] biomeArray = genBiomes.getInts(minX, minZ, sizeX, sizeZ);
+		int[] biomeArray = biomeGenLayer.getInts(minX, minZ, sizeX, sizeZ);
 		ChunkPosition pos = null;
 		int attempts = 0;
 
@@ -134,7 +131,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		int maxZ = z + checkRadius >> 2;
 		int sizeX = maxX - minX + 1;
 		int sizeZ = maxZ - minZ + 1;
-		int[] biomeArray = genBiomes.getInts(minX, minZ, sizeX, sizeZ);
+		int[] biomeArray = biomeGenLayer.getInts(minX, minZ, sizeX, sizeZ);
 
 		for (int index = 0; index < sizeX * sizeZ; ++index) {
 			if (!viableBiomes.contains(BiomeGenBase.biomeList[biomeArray[index]]))
