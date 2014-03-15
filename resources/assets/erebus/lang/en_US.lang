@@ -207,7 +207,6 @@ flowerPlanted_item_10.name=Lt Blue Flower
 flowerPlanted_item_11.name=Magenta Flower
 flowerPlanted_item_12.name=Orange Flower
 flowerPlanted_item_13.name=White Flower
-flowerPlanted_item_14.name=Rainbow Flower
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet
@@ -309,7 +308,6 @@ item.erebusFlowerSeeds.10.name=Giant Flower Seed Lt Blue
 item.erebusFlowerSeeds.11.name=Giant Flower Seed Magenta
 item.erebusFlowerSeeds.12.name=Giant Flower Seed Orange
 item.erebusFlowerSeeds.13.name=Giant Flower Seed White
-item.erebusFlowerSeeds.14.name=Giant Flower Seed Rainbow
 
 #Entities
 entity.Erebus.BeetleLarva.name=Beetle Larva
