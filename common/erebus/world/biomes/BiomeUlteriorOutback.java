@@ -3,10 +3,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.entity.EntityCentipede;
-import erebus.entity.EntityDragonfly;
-import erebus.entity.EntityJumpingSpider;
-import erebus.entity.EntityMosquito;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 
 // @formatter:off
@@ -20,11 +16,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		setTemperatureRainfall(1.1F,0.2F);
 		setWeight(15);
 		
-		spawnableMonsterList.add(new SpawnEntry(EntityCentipede.class,10,4,8));
-		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,2,6));
-		
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityMosquito.class,20,1,2));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityDragonfly.class,20,1,2));
+		// TODO grab from #59
 		
 		topBlock = (byte)Block.sand.blockID;
 	}
