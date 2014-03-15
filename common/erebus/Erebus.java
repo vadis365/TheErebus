@@ -121,7 +121,7 @@ public class Erebus {
 						IModIntegration obj = (IModIntegration) cls.newInstance();
 						if (Loader.isModLoaded(obj.getModId()))
 							obj.integrate();
-					} catch (Exception e) {
+					} catch (Throwable e) {
 						e.printStackTrace();
 					}
 			}

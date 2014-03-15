@@ -13,7 +13,7 @@ public class BiomeLake extends BiomeUndergroundJungle{
 	}
 
 	@Override
-	public void generateBiomeFeatures(World world, Random rand, int x, int z){System.out.println("gen at "+x+","+z);
+	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		for(int xx = x; xx < x+16; xx++){
 			for(int zz = z; zz < z+16; zz++){
 				for(int yy = 10; yy < 28; yy++){
