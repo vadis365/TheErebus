@@ -8,6 +8,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -42,11 +43,13 @@ public class EntityWorkerBee extends EntityTameable {
 		tasks.addTask(1, new EntityAIPolinate(this, 10));
 		tasks.addTask(2, new EntityAISwimming(this));
 		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.3D, true));
-		tasks.addTask(4, new EntityAITempt(this, 0.5D, Item.sugar.itemID, false));
-		tasks.addTask(5, new EntityAIWander(this, 0.4D));
-		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(7, new EntityAILookIdle(this));
+		tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityWasp.class, 0.3D, true));
+		tasks.addTask(5, new EntityAITempt(this, 0.5D, Item.sugar.itemID, false));
+		tasks.addTask(6, new EntityAIWander(this, 0.4D));
+		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(8, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityWasp.class, 0, true));
 	}
 
 	@Override
@@ -293,7 +296,7 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2);
+		return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 4);
 	}
 
 	public void setNectarPoints(int count) {

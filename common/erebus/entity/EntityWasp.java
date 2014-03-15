@@ -28,7 +28,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	private float heightOffset = 0.0F;
 	public float wingFloat;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
-	Class[] preys = { EntityGrasshopper.class, EntityBeetle.class, EntityBeetleLarva.class };
+	Class[] preys = { EntityGrasshopper.class, EntityBeetle.class, EntityBeetleLarva.class, EntityWorkerBee.class};
 	private boolean areAttributesSetup = false;
 
 	public EntityWasp(World world) {
