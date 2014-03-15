@@ -216,7 +216,7 @@ public class EntityWorkerBee extends EntityTameable {
 				setBeeFlying(true);
 
 			}
-		else if (currentFlightTarget != null && getEntityToAttack() == null) {
+		else if (currentFlightTarget != null) {
 			double targetX = currentFlightTarget.posX + 0.5D - posX;
 			double targetY = currentFlightTarget.posY + 1D - posY;
 			double targetZ = currentFlightTarget.posZ + 0.5D - posZ;
