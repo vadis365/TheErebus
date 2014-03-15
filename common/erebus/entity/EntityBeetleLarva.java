@@ -89,10 +89,11 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float f1 = getBrightness(1.0F);
-		if (f1 >= 0F)
-			return true;
-		return super.getCanSpawnHere();
+		float light = this.getBrightness(1.0F);
+		if (light >= 0F) {
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(this.boundingBox);
+	    }
+	    return super.getCanSpawnHere();
 	}
 
 	@Override
