@@ -140,7 +140,7 @@ public class EntityWorkerBee extends EntityTameable {
 			wingFloat = mathWings.swing(4.0F, 0.1F);
 
 		if (motionY < 0.0D)
-			motionY *= 0.5D;
+			motionY *= 0.6D;
 
 		if (!worldObj.isRemote) {
 			if (getEntityToAttack() == null && !beePollinating && !beeCollecting) {
@@ -162,9 +162,11 @@ public class EntityWorkerBee extends EntityTameable {
 				flyToTarget();
 			}
 
-			if (getTameState() == 1 && beeCollecting)
+			if (getTameState() == 1 && beeCollecting) {
 				currentFlightTarget = new ChunkCoordinates(getDropPointX(), getDropPointY(), getDropPointZ());
-			flyToTarget();
+				flyToTarget();
+			}
+			
 			if ((int) posX == getDropPointX() && (int) posY == getDropPointY() + 1 && (int) posZ == getDropPointZ() && getNectarPoints() > 0) {
 				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.0F);
 				setNectarPoints(getNectarPoints() - 1);
