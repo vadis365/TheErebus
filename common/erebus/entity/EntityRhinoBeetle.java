@@ -106,6 +106,15 @@ public class EntityRhinoBeetle extends EntityTameable {
 	public boolean isOnLadder() {
 		return riddenByEntity != null && isCollidedHorizontally;
 	}
+	
+	@Override
+	public boolean getCanSpawnHere() {
+		float light = this.getBrightness(1.0F);
+		if (light >= 0F) {
+			return true;
+	    }
+	    return super.getCanSpawnHere();
+	}
 
 	@Override
 	protected boolean canDespawn() {

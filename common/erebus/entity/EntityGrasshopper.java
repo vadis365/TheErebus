@@ -61,7 +61,11 @@ public class EntityGrasshopper extends EntityCreature {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		return super.getCanSpawnHere();
+		float light = this.getBrightness(1.0F);
+		if (light >= 0F) {
+			return true;
+	    }
+	    return super.getCanSpawnHere();
 	}
 
 	@Override

@@ -75,6 +75,15 @@ public class EntityWorkerBee extends EntityTameable {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
+	
+	@Override
+	public boolean getCanSpawnHere() {
+		float light = this.getBrightness(1.0F);
+		if (light >= 0F) {
+			return true;
+	    }
+	    return super.getCanSpawnHere();
+	}
 
 	@Override
 	protected boolean canDespawn() {
