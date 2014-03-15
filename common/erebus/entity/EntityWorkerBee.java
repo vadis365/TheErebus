@@ -242,6 +242,7 @@ public class EntityWorkerBee extends EntityTameable {
 				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.0F);
 				is.damageItem(1, player);
 				setNectarPoints(getNectarPoints() - 1);
+				setTarget(null);
 				setAttackTarget((EntityLivingBase) null);
 				return true;
 			}
@@ -251,6 +252,7 @@ public class EntityWorkerBee extends EntityTameable {
 			setTameState((byte) 1);
 			playTameEffect(true);
 			player.swingItem();
+			setTarget(null);
 			setAttackTarget((EntityLivingBase) null);
 			return true;
 		}
@@ -285,6 +287,7 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	public void setAttackTarget(EntityLivingBase entity) {
+		setTarget(entity);
 		super.setAttackTarget(entity);
 	}
 
