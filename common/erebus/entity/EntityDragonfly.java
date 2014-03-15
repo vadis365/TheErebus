@@ -258,11 +258,12 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		return super.attackEntityAsMob(entity);
-		// I know this and the below do nothing! - But they may soon!
+		// I know this does nothing! - But it may soon!
 	}
 
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
-		super.attackEntity(entity, distance);
+		if (distance < 2.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
+			super.attackEntity(entity, distance);
 	}
 }
