@@ -1,5 +1,6 @@
 package erebus.world.biomes;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import erebus.entity.EntityBeetle;
@@ -26,8 +27,8 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		spawnableCreatureList.add(new SpawnEntry(EntityGlowWorm.class,14,4,8));
 		
 		spawnableMonsterList.add(new SpawnEntry(EntityWorkerBee.class,14,4,8));
-		spawnableMonsterList.add(new SpawnEntry(EntityMoth.class,5,4,4));
 		
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityMoth.class,10,2,3));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,6,1,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
