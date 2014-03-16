@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
+import erebus.block.BlockErebusOre;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBotFly;
@@ -17,6 +18,7 @@ import erebus.world.feature.decoration.WorldGenRedGem;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.structure.WorldGenAntlionLair;
 import erebus.world.feature.util.FeatureType;
+import erebus.world.feature.util.OreType;
 
 // @formatter:off
 public class BiomeVolcanicDesert extends BiomeBaseErebus{
@@ -27,7 +29,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 		setColors(0xA6BB4E,0x91A922);
 		setFog(255,231,10);
 		setTemperatureRainfall(1.9F,0.2F);
-		setWeight(15);
+		setWeight(16);
 
 		spawnableMonsterList.add(new SpawnEntry(EntityScytodes.class,35,1,4));
 		spawnableMonsterList.add(new SpawnEntry(EntityScorpion.class,30,1,8));
@@ -97,6 +99,22 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 			}
 		}
 		else super.generateFeature(world,rand,x,z,featureType);
+	}
+	
+	@Override
+	public void generateOre(World world, Random rand, int x, int z, OreType oreType, boolean extraOres){
+		if (oreType == OreType.PETRIFIED_WOOD){
+			generateOreCluster((extraOres?3:4)+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataPetrifiedWood,8,9,world,rand,x,z,6,112,2);
+		}
+		else if (oreType == OreType.FOSSIL){
+			if (rand.nextInt(6)==0)generateOreCluster(1+rand.nextInt(2)*rand.nextInt(2),ModBlocks.oreFossil,3,8,11,world,rand,x,z,36,112,3);
+		}
+		else super.generateOre(world,rand,x,z,oreType,extraOres);
+	}
+	
+	@Override
+	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){
+		return blockID == (byte)ModBlocks.umberstone.blockID || blockID == topBlock || blockID == fillerBlock || blockID == Block.sandStone.blockID ? (y < 17 ? (byte)Block.lavaMoving.blockID : 0) : blockID;
 	}
 }
 // @formatter:on

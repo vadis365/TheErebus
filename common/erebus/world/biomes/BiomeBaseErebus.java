@@ -92,8 +92,9 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 		for(FeatureType featureType:FeatureType.values()){
 			if (featureType.canGenerateIn(this))generateFeature(world,rand,x,z,featureType);
 		}
-		
-		for(OreType oreType:OreType.values())generateOre(world,rand,x,z,oreType);
+
+		boolean extraOres = lead||silver||copper||tin||aluminium;
+		for(OreType oreType:OreType.values())generateOre(world,rand,x,z,oreType,extraOres);
 		
 		generateBiomeFeatures(world,rand,x,z);
 	}
@@ -128,15 +129,13 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 		}
 	}
 	
-	public void generateOre(World world, Random rand, int x, int z, OreType oreType){
-		boolean extraOres=lead||silver||copper||tin||aluminium;
-
+	public void generateOre(World world, Random rand, int x, int z, OreType oreType, boolean extraOres){
 		switch(oreType){
 			case COAL:
-				generateOreCluster(extraOres?8:10,ModBlocks.umberOreBlock,BlockErebusOre.dataCoal,11,14,world,rand,x,z,6,112,3); break;
+				generateOreCluster(extraOres?6:8,ModBlocks.umberOreBlock,BlockErebusOre.dataCoal,9,12,world,rand,x,z,6,112,3); break;
 				
 			case IRON:
-				generateOreCluster((extraOres?9:11)+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataIron,7,11,world,rand,x,z,6,112,3); break;
+				generateOreCluster((extraOres?7:9)+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataIron,6,10,world,rand,x,z,6,112,3); break;
 			
 			case GOLD:
 				generateOreCluster(extraOres?4:5,ModBlocks.umberOreBlock,BlockErebusOre.dataGold,6,world,rand,x,z,6,112,3); break;
@@ -145,7 +144,7 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 				generateOreCluster(3,ModBlocks.umberOreBlock,BlockErebusOre.dataLapis,5,world,rand,x,z,6,112,2); break;
 				
 			case EMERALD:
-				generateOreCluster(1+rand.nextInt(3),ModBlocks.umberOreBlock,BlockErebusOre.dataEmerald,3,world,rand,x,z,6,112,1); break;
+				generateOreCluster(rand.nextInt(3),ModBlocks.umberOreBlock,BlockErebusOre.dataEmerald,3,world,rand,x,z,6,112,1); break;
 				
 			case DIAMOND:
 				if (rand.nextInt(3)!=0)generateOreCluster(2+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataDiamond,1,world,rand,x,z,6,112,1); break;
@@ -154,26 +153,30 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 				if (rand.nextBoolean())generateOreCluster(1+rand.nextInt(4),ModBlocks.umberOreBlock,BlockErebusOre.dataJade,4,world,rand,x,z,6,112,2); break;
 				
 			case PETRIFIED_WOOD:
-				generateOreCluster((extraOres?3:4)+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataPetrifiedWood,7,9,world,rand,x,z,6,112,2); break;
+				generateOreCluster((extraOres?2:3)+rand.nextInt(2)-rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataPetrifiedWood,7,9,world,rand,x,z,6,112,2); break;
 				
 			case FOSSIL:
-				if (rand.nextInt(5)==0)generateOreCluster(1+rand.nextInt(3),ModBlocks.oreFossil,3,8,11,world,rand,x,z,36,112,3); break;
+				if (rand.nextInt(8)==0)generateOreCluster(1+rand.nextInt(2)*rand.nextInt(2),ModBlocks.oreFossil,3,8,11,world,rand,x,z,36,112,3); break;
 				
 			case ALUMINIUM:
 				if (aluminium)generateOreCluster(2+rand.nextInt(2),ModBlocks.erebusOreExtra,BlockErebusOreExtras.dataAluminium,3,4,world,rand,x,z,6,112,2); break;
 				
 			case COPPER:
-				if (copper)generateOreCluster(8+rand.nextInt(3),ModBlocks.erebusOreExtra,BlockErebusOreExtras.dataCopper,5,7,world,rand,x,z,6,112,3); break;
+				if (copper)generateOreCluster(7+rand.nextInt(3),ModBlocks.erebusOreExtra,BlockErebusOreExtras.dataCopper,5,7,world,rand,x,z,6,112,3); break;
 				
 			case LEAD:
 				if (lead)generateOreCluster(4,ModBlocks.erebusOreExtra,BlockErebusOreExtras.dataLead,3,world,rand,x,z,6,112,2); break;
 				
 			case SILVER:
-				if (silver)generateOreCluster(6,ModBlocks.erebusOreExtra,BlockErebusOreExtras.dataSilver,6,8,world,rand,x,z,6,112,3); break;
+				if (silver)generateOreCluster(5,ModBlocks.erebusOreExtra,BlockErebusOreExtras.dataSilver,6,8,world,rand,x,z,6,112,3); break;
 				
 			case TIN:
 				if (tin)generateOreCluster(2+rand.nextInt(3),ModBlocks.erebusOreExtra,BlockErebusOreExtras.dataTin,3,4,world,rand,x,z,6,112,2); break;
 		}
+	}
+	
+	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){
+		return blockID == (byte)ModBlocks.umberstone.blockID || blockID == topBlock || blockID == fillerBlock || blockID == Block.sandStone.blockID ? 0 : blockID;
 	}
 	
 	protected final int getRandomXZOffset(Random rand){

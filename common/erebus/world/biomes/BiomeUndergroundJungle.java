@@ -47,7 +47,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 		setColors(0x53CA37,0x29BC05);
 		setFog(8,128,8);
 		setTemperatureRainfall(1.35F,0.9F);
-		setWeight(25);
+		setWeight(22);
 
 		spawnableMonsterList.add(new SpawnEntry(EntityScytodes.class,35,1,4));
 		spawnableMonsterList.add(new SpawnEntry(EntityWasp.class,30,4,8));
@@ -232,6 +232,11 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 				}
 			}
 		}
+	}
+	
+	@Override
+	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){
+		return blockID == (byte)ModBlocks.umberstone.blockID || blockID == topBlock || blockID == fillerBlock || blockID == Block.sandStone.blockID ? (y < 24 ? (byte)Block.waterMoving.blockID : 0) : blockID;
 	}
 	
 	@Override

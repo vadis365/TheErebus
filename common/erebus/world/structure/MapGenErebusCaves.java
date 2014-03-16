@@ -1,12 +1,10 @@
 package erebus.world.structure;
 
 import java.util.Random;
-import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.MapGenBase;
-import erebus.ModBlocks;
+import erebus.world.biomes.BiomeBaseErebus;
 
 public class MapGenErebusCaves extends MapGenBase{
 	protected void generateLargeCaveNode(long seed, int chunkX, int chunkZ, byte[] blocks, double xx, double yy, double zz){
@@ -84,7 +82,7 @@ public class MapGenErebusCaves extends MapGenBase{
 					if (minX < 0)minX = 0;
 					if (maxX > 16)maxX = 16;
 					if (minY < 6)minY = 6;
-					if (maxY > 122)maxY = 122;
+					if (maxY > 124)maxY = 124;
 					if (minZ < 0)minZ = 0;
 					if (maxZ > 16)maxZ = 16;
 
@@ -122,11 +120,8 @@ public class MapGenErebusCaves extends MapGenBase{
 
 										if (yDiff > -0.7D && xDiff * xDiff + yDiff * yDiff + zDiff * zDiff < 1D){
 											byte id = blocks[index];
-											BiomeGenBase biome = worldObj.getBiomeGenForCoords(px + chunkX * 16,pz + chunkZ * 16);
-											
-											if (id == (byte)ModBlocks.umberstone.blockID || id == biome.topBlock || id == biome.fillerBlock || id == Block.sandStone.blockID){
-												blocks[index] = 0;
-											}
+											BiomeBaseErebus biome = (BiomeBaseErebus)worldObj.getBiomeGenForCoords(px + chunkX * 16,pz + chunkZ * 16);
+											blocks[index] = biome.placeCaveBlock(id,px,py,pz,rand);
 										}
 
 										--index;

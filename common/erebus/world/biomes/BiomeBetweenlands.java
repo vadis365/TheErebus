@@ -1,10 +1,14 @@
 package erebus.world.biomes;
 import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
+import erebus.world.feature.util.FeatureType;
+import erebus.world.feature.util.OreType;
 
 // @formatter:off
 public class BiomeBetweenlands extends BiomeBaseErebus{
@@ -25,5 +29,23 @@ public class BiomeBetweenlands extends BiomeBaseErebus{
 
 	@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){}
+	
+	@Override
+	public void generateFeature(World world, Random rand, int x, int z, FeatureType featureType){
+		if (featureType != FeatureType.REDGEM)generateFeature(world,rand,x,z,featureType);
+	}
+	
+	@Override
+	public void generateOre(World world, Random rand, int x, int z, OreType oreType, boolean extraOres){
+		if (oreType == OreType.FOSSIL){
+			if (rand.nextInt(7)==0)generateOreCluster(1+rand.nextInt(2)*rand.nextInt(2),ModBlocks.oreFossil,3,9,12,world,rand,x,z,36,112,3);
+		}
+		else super.generateOre(world,rand,x,z,oreType,extraOres);
+	}
+	
+	@Override
+	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){
+		return blockID == (byte)ModBlocks.umberstone.blockID || blockID == topBlock || blockID == fillerBlock || blockID == Block.sandStone.blockID ? (y < 20 ? (byte)Block.waterMoving.blockID : 0) : blockID;
+	}
 }
 //@formatter:on
