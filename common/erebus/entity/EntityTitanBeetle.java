@@ -17,29 +17,28 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.AnimalChest;
-import net.minecraft.inventory.IInvBasic;
-import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.Erebus;
 import erebus.ModItems;
-import erebus.core.proxy.CommonProxy;
+import erebus.core.helper.Utils;
 import erebus.item.ItemErebusMaterial.DATA;
 import erebus.item.ItemErebusSpecial;
+import erebus.tileentity.TileEntityTitanChest;
 
-public class EntityTitanBeetle extends EntityTameable implements IInvBasic {
+public class EntityTitanBeetle extends EntityTameable {
 
-	public AnimalChest beetleChest;
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	boolean isOpen;
 	float openticks;
-
+	public ItemStack[] inventory;
+	
 	public EntityTitanBeetle(World world) {
 		super(world);
+		inventory = new ItemStack[27];
 		stepHeight = 2.0F;
 		setSize(3F, 1.2F);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -51,7 +50,6 @@ public class EntityTitanBeetle extends EntityTameable implements IInvBasic {
 		tasks.addTask(7, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, aiNearestAttackableTarget);
-		createChest();
 	}
 
 	@Override
@@ -59,6 +57,20 @@ public class EntityTitanBeetle extends EntityTameable implements IInvBasic {
 		super.entityInit();
 		dataWatcher.addObject(21, 0.0F);
 		dataWatcher.addObject(31, new Byte((byte) 0));
+	}
+	
+	public EntityTitanBeetle setContents(IInventory chest) {
+		if (chest == null)
+			return this;
+
+		inventory = new ItemStack[chest.getSizeInventory()];
+		for (int i = 0; i < chest.getSizeInventory(); i++) {
+			if (chest.getStackInSlot(i) == null)
+				continue;
+			inventory[i] = chest.getStackInSlot(i).copy();
+			chest.setInventorySlotContents(i, null);
+		}
+		return this;
 	}
 
 	@Override
@@ -154,7 +166,7 @@ public class EntityTitanBeetle extends EntityTameable implements IInvBasic {
 			entityDropItem(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), 0.0F);
 		if (getTameState() == 3) {
 			dropChests();
-			dropItemsInChest(this, beetleChest);
+			dropItemsInChest();
 		}
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
@@ -164,41 +176,16 @@ public class EntityTitanBeetle extends EntityTameable implements IInvBasic {
 			dropItem(Block.chest.blockID, 1);
 	}
 
-	private void dropItemsInChest(Entity entity, AnimalChest animalChest) {
-		if (animalChest != null && !worldObj.isRemote)
-			for (int i = 0; i < animalChest.getSizeInventory(); ++i) {
-				ItemStack itemstack = animalChest.getStackInSlot(i);
-				if (itemstack != null)
-					entityDropItem(itemstack, 0.0F);
-			}
-	}
-
-	private void createChest() {
-		AnimalChest animalchest = beetleChest;
-		beetleChest = new AnimalChest("beetleChest", 27);
-		beetleChest.func_110133_a(getEntityName());
-		if (animalchest != null) {
-			animalchest.func_110132_b(this);
-			int i = Math.min(animalchest.getSizeInventory(), beetleChest.getSizeInventory());
-			for (int j = 0; j < i; ++j) {
-				ItemStack itemstack = animalchest.getStackInSlot(j);
-				if (itemstack != null)
-					beetleChest.setInventorySlotContents(j, itemstack.copy());
-			}
-			animalchest = null;
-		}
-		beetleChest.func_110134_a(this);
-	}
-
-	@Override
-	public void onInventoryChanged(InventoryBasic inventoryBasic) {
-
+	private void dropItemsInChest() {
+		if (!worldObj.isRemote && isDead)
+			for (ItemStack is : inventory)
+				if (is != null)
+					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
 	}
 
 	public void openGUI(EntityPlayer player) {
 		if (!worldObj.isRemote && (riddenByEntity == null || riddenByEntity == player) && getTameState() != 0) {
-			beetleChest.func_110133_a(getEntityName());
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_TITAN_BEETLE, worldObj, entityId, 0, 0);
+			player.displayGUIChest(new TileEntityTitanChest(this));
 		}
 	}
 
@@ -208,11 +195,9 @@ public class EntityTitanBeetle extends EntityTameable implements IInvBasic {
 		float healingBuff = 0.0F;
 		if (getTameState() == 3 && player.isSneaking()) {
 			worldObj.playSoundEffect(posX, posY + 0.5D, posZ, "random.chestopen", 0.5F, 0.9F);
-			setOpen(true);
 			openGUI(player);
 			return true;
-		} else
-			setOpen(false);
+			}
 		if (is != null && is.itemID == ModItems.erebusSpecialItem.itemID && is.getItemDamage() == 1 && getTameState() == 0) {
 			healingBuff = 20F;
 			is.stackSize--;
@@ -259,7 +244,7 @@ public class EntityTitanBeetle extends EntityTameable implements IInvBasic {
 				setTameState((byte) 3);
 				playSound("mob.chickenplop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 				flag = true;
-				createChest();
+				//createChest();
 			}
 			if (flag) {
 				if (!player.capabilities.isCreativeMode && --is.stackSize == 0)
@@ -358,38 +343,36 @@ public class EntityTitanBeetle extends EntityTameable implements IInvBasic {
 	public byte getTameState() {
 		return dataWatcher.getWatchableObjectByte(31);
 	}
-
+	
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
-		super.writeEntityToNBT(nbt);
-		nbt.setByte("tameState", getTameState());
+	public void writeEntityToNBT(NBTTagCompound data) {
+		super.writeEntityToNBT(data);
+		data.setByte("tameState", getTameState());
 		if (getTameState() == 3) {
-			NBTTagList nbttaglist = new NBTTagList();
-			for (int i = 2; i < beetleChest.getSizeInventory(); ++i) {
-				ItemStack itemstack = beetleChest.getStackInSlot(i);
-				if (itemstack != null) {
-					NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-					nbttagcompound1.setByte("Slot", (byte) i);
-					itemstack.writeToNBT(nbttagcompound1);
-					nbttaglist.appendTag(nbttagcompound1);
-				}
+		NBTTagList nbttaglist = new NBTTagList();
+		for (int i = 0; i < inventory.length; i++)
+			if (inventory[i] != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) i);
+				inventory[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
 			}
-			nbt.setTag("Items", nbttaglist);
+		data.setTag("Items", nbttaglist);
 		}
 	}
-
+	
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
-		super.readEntityFromNBT(nbt);
-		setTameState(nbt.getByte("tameState"));
+	public void readEntityFromNBT(NBTTagCompound data) {
+		super.readEntityFromNBT(data);
+		setTameState(data.getByte("tameState"));
 		if (getTameState() == 3) {
-			NBTTagList nbttaglist = nbt.getTagList("Items");
-			createChest();
-			for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-				NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
-				int j = nbttagcompound1.getByte("Slot") & 255;
-				if (j >= 2 && j < beetleChest.getSizeInventory())
-					beetleChest.setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(nbttagcompound1));
+		NBTTagList nbttaglist = data.getTagList("Items");
+		inventory = new ItemStack[27];
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+			byte b0 = nbttagcompound1.getByte("Slot");
+			if (b0 >= 0 && b0 < inventory.length)
+				inventory[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
 	}
