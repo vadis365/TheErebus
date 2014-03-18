@@ -1,8 +1,6 @@
 package erebus.client.render.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,26 +15,13 @@ import erebus.entity.EntityTitanBeetle;
 
 @SideOnly(Side.CLIENT)
 public class RenderTitanBeetle extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/titanBeetle.png");
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/titanBeetle.png"), new ResourceLocation("erebus:textures/entity/titanBeetleKit.png"), new ResourceLocation("erebus:textures/entity/titanBeetleChested.png") };
 
 	public RenderTitanBeetle() {
 		super(new ModelTitanBeetle(), 1.5F);
 	}
 
 	public void renderTitanBeetle(EntityTitanBeetle entityTitanBeetle, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		if(entityTitanBeetle.getTameState()==3) {
-			double a = Math.toRadians(entityTitanBeetle.renderYawOffset);
-			double offSetX = -Math.sin(a) * -1.D;
-			double offSetZ = Math.cos(a) * -1.D;
-			GL11.glPushMatrix();
-			GL11.glTranslatef((float) x, (float) y, (float) z);
-			GL11.glTranslated(offSetX, 1.5D, offSetZ);
-			GL11.glRotatef(-entityTitanBeetle.renderYawOffset+90F, 0.0F, 1.0F, 0.0F);
-			GL11.glRotatef(-5F, 0.0F, 0.0F, 1.0F);
-			bindTexture(TextureMap.locationBlocksTexture);
-			renderBlocks.renderBlockAsItem(Block.chest, 0, 1.0F);
-			GL11.glPopMatrix();
-		}
 		super.doRenderLiving(entityTitanBeetle, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -63,6 +48,12 @@ public class RenderTitanBeetle extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+		EntityTitanBeetle beetle = (EntityTitanBeetle) entity;
+		if(beetle.getTameState()<2)
+			return textures[0];
+		if(beetle.getTameState()==2)
+			return textures[1];
+		else 
+			return textures[2];
 	}
 }
