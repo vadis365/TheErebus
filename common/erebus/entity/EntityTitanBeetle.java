@@ -244,7 +244,6 @@ public class EntityTitanBeetle extends EntityTameable {
 				setTameState((byte) 3);
 				playSound("mob.chickenplop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 				flag = true;
-				//createChest();
 			}
 			if (flag) {
 				if (!player.capabilities.isCreativeMode && --is.stackSize == 0)
