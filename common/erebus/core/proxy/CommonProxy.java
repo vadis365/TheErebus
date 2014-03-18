@@ -3,6 +3,7 @@ package erebus.core.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -24,11 +25,13 @@ import erebus.client.gui.GuiPetrifiedChest;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.client.gui.GuiUmberFurnace;
 import erebus.entity.EntityAnimatedBambooCrate;
+import erebus.entity.EntityTitanBeetle;
 import erebus.inventory.ContainerBambooCrate;
 import erebus.inventory.ContainerColossalCrate;
 import erebus.inventory.ContainerExtenderThingy;
 import erebus.inventory.ContainerPetrifiedCraftingTable;
 import erebus.inventory.ContainerPetrifiedWoodChest;
+import erebus.inventory.ContainerTitanBeetle;
 import erebus.inventory.ContainerUmberFurnace;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
@@ -57,6 +60,7 @@ public class CommonProxy implements IGuiHandler {
 	public static final int GUI_ID_PETRIFIED_CHEST = 5;
 	public static final int GUI_ID_ANIMATED_BAMBOO_CRATE = 6;
 	public static final int GUI_ID_EXTENDER_THINGY = 7;
+	public static final int GUI_ID_TITAN_BEETLE = 8;
 	public final int bambooCropRenderID = RenderingRegistry.getNextAvailableRenderId();
 	public final int hollowLogRenderID = RenderingRegistry.getNextAvailableRenderId();
 
@@ -146,6 +150,12 @@ public class CommonProxy implements IGuiHandler {
 		else if (ID == GUI_ID_EXTENDER_THINGY)
 			return new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) world.getBlockTileEntity(x, y, z));
 
+		else if (ID == GUI_ID_TITAN_BEETLE) {
+			Entity entity = world.getEntityByID(x);
+			if (entity != null && entity instanceof EntityTitanBeetle)
+				return new ContainerTitanBeetle(player.inventory, ((EntityTitanBeetle) entity).beetleChest);
+		}
+
 		return null;
 	}
 
@@ -190,6 +200,12 @@ public class CommonProxy implements IGuiHandler {
 
 		else if (ID == GUI_ID_EXTENDER_THINGY)
 			return new GuiExtenderThingy(player.inventory, (TileEntityExtenderThingy) world.getBlockTileEntity(x, y, z));
+
+		else if (ID == GUI_ID_TITAN_BEETLE) {
+			Entity entity = world.getEntityByID(x);
+			if (entity != null && entity instanceof EntityTitanBeetle)
+				return new GuiChest(player.inventory, ((EntityTitanBeetle) entity).beetleChest);
+		}
 
 		return null;
 	}
