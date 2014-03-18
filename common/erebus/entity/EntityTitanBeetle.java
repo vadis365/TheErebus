@@ -85,6 +85,10 @@ public class EntityTitanBeetle extends EntityTameable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+		if (!worldObj.isRemote && isDead)
+			for (ItemStack is : inventory)
+				if (is != null)
+					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
 	}
 
 	@Override
@@ -166,7 +170,6 @@ public class EntityTitanBeetle extends EntityTameable {
 			entityDropItem(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), 0.0F);
 		if (getTameState() == 3) {
 			dropChests();
-			dropItemsInChest();
 		}
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
@@ -174,13 +177,6 @@ public class EntityTitanBeetle extends EntityTameable {
 	public void dropChests() {
 		if (!worldObj.isRemote)
 			dropItem(Block.chest.blockID, 1);
-	}
-
-	private void dropItemsInChest() {
-		if (!worldObj.isRemote && isDead)
-			for (ItemStack is : inventory)
-				if (is != null)
-					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
 	}
 
 	public void openGUI(EntityPlayer player) {
