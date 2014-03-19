@@ -168,9 +168,8 @@ public class EntityTitanBeetle extends EntityTameable {
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() >= 2)
 			entityDropItem(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), 0.0F);
-		if (getTameState() == 3) {
+		if (getTameState() == 3)
 			dropChests();
-		}
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
