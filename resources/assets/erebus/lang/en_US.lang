@@ -207,6 +207,20 @@ flowerPlanted_item_10.name=Lt Blue Flower
 flowerPlanted_item_11.name=Magenta Flower
 flowerPlanted_item_12.name=Orange Flower
 flowerPlanted_item_13.name=White Flower
+erebusStigma_item_0.name=Black Flower Stigma
+erebusStigma_item_1.name=Red Flower Stigma
+erebusStigma_item_2.name=Brown Flower Stigma
+erebusStigma_item_3.name=Blue Flower Stigma
+erebusStigma_item_4.name=Purple Flower Stigma
+erebusStigma_item_5.name=Cyan Flower Stigma
+erebusStigma_item_6.name=Light Gray Flower Stigma
+erebusStigma_item_7.name=Gray Flower Stigma
+erebusStigma_item_8.name=Pink Flower Stigma
+erebusStigma_item_9.name=Yellow Flower Stigma
+erebusStigma_item_10.name=Light Blue Flower Stigma
+erebusStigma_item_11.name=Magenta Flower Stigma
+erebusStigma_item_12.name=Orange Flower Stigma
+erebusStigma_item_13.name=White Flower Stigma
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

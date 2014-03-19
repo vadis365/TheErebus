@@ -17,7 +17,7 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 		if (blockID == 0)
 			return false;
 
-		else if (blockID == ModBlocks.erebusFlower.blockID && blockMeta == 0)
+		else if (blockID == ModBlocks.erebusStigma.blockID)
 			return true;
 
 		return false;

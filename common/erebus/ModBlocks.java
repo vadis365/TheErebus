@@ -27,6 +27,7 @@ import erebus.block.BlockErebusGrass;
 import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockErebusOreExtras;
+import erebus.block.BlockErebusStigma;
 import erebus.block.BlockExtenderThingy;
 import erebus.block.BlockFern;
 import erebus.block.BlockFiddlehead;
@@ -71,6 +72,7 @@ import erebus.item.block.ItemBlockAmber;
 import erebus.item.block.ItemBlockColoredSingle;
 import erebus.item.block.ItemBlockErebusFlower;
 import erebus.item.block.ItemBlockErebusOreExtras;
+import erebus.item.block.ItemBlockErebusStigma;
 import erebus.item.block.ItemBlockFlowerPlanted;
 import erebus.item.block.ItemBlockGneiss;
 import erebus.item.block.ItemBlockLeavesErebus;
@@ -100,7 +102,7 @@ public class ModBlocks {
 	public static Block umberstone, umberOreBlock, oreFossil, redGem, blockAmber, quickSand, ghostSand, erebusOreExtra, umberstoneButton;
 
 	// WOOD
-	public static Block logErebusGroup1, logErebusGroup2, planksErebus, erebusSapling, hollowLogAcacia, erebusFlower;
+	public static Block logErebusGroup1, logErebusGroup2, planksErebus, erebusSapling, hollowLogAcacia, erebusFlower, erebusStigma;
 	public static BlockLeavesErebus leavesErebus;
 
 	// UNDERGROWTH
@@ -151,6 +153,8 @@ public class ModBlocks {
 		hollowLogAcacia = new BlockHollowLog(ConfigHandler.hollowLogAcaciaID).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hollowLogAcacia");
 		erebusFlower = new BlockErebusFlower(ConfigHandler.erebusFlowerID).setHardness(1.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFlower");
 		flowerPlanted = new BlockPlantedGiantFlower(ConfigHandler.flowerPlantedID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("flowerPlanted");
+		erebusStigma = new BlockErebusStigma(ConfigHandler.erebusStigmaID).setHardness(1.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusStigma");
+		
 		
 		erebusGrass = new BlockErebusGrass(ConfigHandler.erebusGrassID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusTallGrass").setTextureName("erebus:tallgrass");
 		thorns = new BlockThorns(ConfigHandler.thornsID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("thorns").setTextureName("erebus:thorns");
@@ -226,11 +230,11 @@ public class ModBlocks {
 		// Break down long lines
 		Erebus.tabErebusBlock.add(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
 		Erebus.tabErebusBlock.add(logErebusGroup1, logErebusGroup2, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
-		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns, erebusFlower);
+		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns, erebusFlower, erebusStigma, flowerPlanted);
 		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
 		Erebus.tabErebusBlock.add(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		Erebus.tabErebusBlock.add(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
-		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock, honeyCombBlock, erebusHoneyBlock, gneiss, mud, mudBricks, flowerPlanted);
+		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock, honeyCombBlock, erebusHoneyBlock, gneiss, mud, mudBricks);
 		for (Block b : umbercobbleStairs)
 			Erebus.tabErebusBlock.add(b);
 		for (Block b : plankStairs)
@@ -262,7 +266,8 @@ public class ModBlocks {
 		GameRegistry.registerBlock(erebusSapling, ItemBlockSapling.class, "erebus.erebusSapling");
 		GameRegistry.registerBlock(hollowLogAcacia, "erebus.hollowLogAcacia");
 		GameRegistry.registerBlock(erebusFlower, ItemBlockErebusFlower.class, "erebus.erebusFlower");
-
+		GameRegistry.registerBlock(erebusStigma, ItemBlockErebusStigma.class, "erebus.erebusStigma");
+		
 		GameRegistry.registerBlock(erebusGrass, "erebus.erebusGrass");
 		GameRegistry.registerBlock(thorns, "erebus.thorns");
 		GameRegistry.registerBlock(fern, ItemBlockColoredSingle.class, "erebus.fern");
