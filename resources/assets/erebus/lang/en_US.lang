@@ -339,7 +339,6 @@ entity.Erebus.Grasshopper.name=Grasshopper
 entity.Erebus.Locust.name=Locust
 entity.Erebus.Solifuge.name=Solifuge
 entity.Erebus.Moth.name=Moth
-entity.Erebus.Firebrat.name=Firebrat
 entity.Erebus.Antlion.name=Antlion
 entity.Erebus.GlowWorm.name=Glowworm
 entity.Erebus.BombardierBeetle.name=Bombardier Beetle
@@ -353,6 +352,7 @@ entity.Erebus.WorkerBee.name=Worker Bee
 entity.Erebus.Dragonfly.name=Dragonfly
 entity.Erebus.BloodSnail.name=Blood Snail
 entity.Erebus.TitanBeetle.name=Titan Beetle
+entity.Erebus.BotFlyLarva.name=Bot Fly Larva
 
 #Fluids
 fluid.erebus.honey=Honey

@@ -16,6 +16,7 @@ import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBloodSnail;
 import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBotFly;
+import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityExtractedBlock;
@@ -81,6 +82,7 @@ public class ModEntities {
 		EntityList.stringToClassMapping.put("Dragonfly - Erebus", EntityDragonfly.class);
 		EntityList.stringToClassMapping.put("BloodSnail - Erebus", EntityBloodSnail.class);
 		EntityList.stringToClassMapping.put("TitanBeetle - Erebus", EntityTitanBeetle.class);
+		EntityList.stringToClassMapping.put("BotFlyLarva - Erebus", EntityBotFlyLarva.class);
 		
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "BeetleLarva", -1251634, -13032944);
@@ -111,6 +113,7 @@ public class ModEntities {
 		registerEntity(25, EntityDragonfly.class, "Dragonfly", 894731, 000000);
 		registerEntity(26, EntityBloodSnail.class, "BloodSnail", 000000, 000000);
 		registerEntity(27, EntityTitanBeetle.class, "TitanBeetle", 000000, 000000);
+		registerEntity(28, EntityBotFlyLarva.class, "BotFlyLarva", -6750208, -13165534);
 
 		registerEntity(50, EntityAnimatedBlock.class, "AnimatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "AnimatedChest");
