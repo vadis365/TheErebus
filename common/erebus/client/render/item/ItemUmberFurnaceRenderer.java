@@ -28,7 +28,8 @@ public class ItemUmberFurnaceRenderer implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef(0.0F, 0.0F, 0.0F);
+		if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
+			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		blockRenderer.renderBlockAsItem(ModBlocks.umberFurnace, 3, 1.0F);
 		GL11.glPopMatrix();
 	}
