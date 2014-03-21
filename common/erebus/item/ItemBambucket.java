@@ -131,8 +131,10 @@ public class ItemBambucket extends Item {
 			if (!world.isRemote)
 				player.curePotionEffects(new ItemStack(Item.bucketMilk));
 			
-			if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva)
-				player.riddenByEntity.attackEntityFrom(DamageSource.generic, 8);
+			if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva) {
+				if(((EntityBotFlyLarva) player.riddenByEntity).getParasiteCount()>0)
+					((EntityBotFlyLarva) player.riddenByEntity).setABitDead();
+			}
 
 			player.inventory.addItemStackToInventory(new ItemStack(ModItems.bamBucket));
 			return is;

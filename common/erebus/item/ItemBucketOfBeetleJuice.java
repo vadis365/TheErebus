@@ -23,8 +23,10 @@ public class ItemBucketOfBeetleJuice extends ItemBucketMilk {
 		if (!world.isRemote)
 			player.curePotionEffects(new ItemStack(Item.bucketMilk));
 		
-			if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva)
-				player.riddenByEntity.attackEntityFrom(DamageSource.generic, 8);
+		if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva) {
+			if(((EntityBotFlyLarva) player.riddenByEntity).getParasiteCount()>0)
+				((EntityBotFlyLarva) player.riddenByEntity).setABitDead();
+		}
 			
 		return is.stackSize <= 0 ? new ItemStack(Item.bucketEmpty) : is;
 	}

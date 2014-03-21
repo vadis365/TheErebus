@@ -4,8 +4,12 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.entity.EntityBotFlyLarva;
 
 @SideOnly(Side.CLIENT)
 public class ModelBotFlyLarva extends ModelBase {
@@ -35,10 +39,30 @@ public class ModelBotFlyLarva extends ModelBase {
 	@Override
 	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
 		setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
+		EntityBotFlyLarva larva = (EntityBotFlyLarva) entity;
 		int i;
-
+		
+		if(larva.getParasiteCount()>0){
 		for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
 			botFlyLarvaBodyParts[i].render(par7);
+		}
+		
+		if(larva.getParasiteCount()>1) {
+		GL11.glPushMatrix();
+		GL11.glTranslatef(0.5F, -0.4F, 0.0F);
+		for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
+			botFlyLarvaBodyParts[i].render(par7);
+		GL11.glPopMatrix();
+		}
+		
+		if(larva.getParasiteCount()==3) {
+		GL11.glPushMatrix();
+		GL11.glTranslatef(-0.5F, -0.4F, 0.0F);
+		for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
+			botFlyLarvaBodyParts[i].render(par7);
+		GL11.glPopMatrix();
+		}
+		
 	}
 
 	@Override

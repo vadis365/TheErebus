@@ -264,11 +264,17 @@ public class EntityBotFly extends EntityMob {
 					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, var2 * 20, 0));
 			}
 			if (entity instanceof EntityPlayer)
-				if (rand.nextInt(100) == 0 && entity.riddenByEntity==null) {
+				if (rand.nextInt(50) == 0 && entity.riddenByEntity==null) {
 					EntityBotFlyLarva entityBotFlyLarva = new EntityBotFlyLarva(worldObj);
 					entityBotFlyLarva.setPosition(entity.posX, entity.posY + 1, entity.posZ);
+					entityBotFlyLarva.setParasiteCount((byte) 1);
 					worldObj.spawnEntityInWorld(entityBotFlyLarva);	
 			}
+				else if (rand.nextInt(50) == 0 && entity.riddenByEntity!=null && entity.riddenByEntity instanceof EntityBotFlyLarva) {
+					if(((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount()<3) {
+						((EntityBotFlyLarva) entity.riddenByEntity).setParasiteCount((byte) (((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount()+1));
+					}
+				}
 			return true;
 		}
 		return false;
