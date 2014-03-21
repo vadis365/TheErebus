@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
@@ -19,6 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModMaterials;
+import erebus.entity.EntityBotFlyLarva;
 
 public class ItemBambucket extends Item {
 
@@ -128,6 +130,9 @@ public class ItemBambucket extends Item {
 
 			if (!world.isRemote)
 				player.curePotionEffects(new ItemStack(Item.bucketMilk));
+			
+			if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva)
+				player.riddenByEntity.attackEntityFrom(DamageSource.generic, 8);
 
 			player.inventory.addItemStackToInventory(new ItemStack(ModItems.bamBucket));
 			return is;

@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -254,20 +255,22 @@ public class EntityBotFly extends EntityMob {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLivingBase) {
 				byte var2 = 0;
-
 				if (worldObj.difficultySetting > 1)
 					if (worldObj.difficultySetting == 2)
 						var2 = 7;
 					else if (worldObj.difficultySetting == 3)
 						var2 = 15;
-
 				if (var2 > 0)
 					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, var2 * 20, 0));
 			}
-
+			if (entity instanceof EntityPlayer)
+				if (rand.nextInt(100) == 0 && entity.riddenByEntity==null) {
+					EntityBotFlyLarva entityBotFlyLarva = new EntityBotFlyLarva(worldObj);
+					entityBotFlyLarva.setPosition(entity.posX, entity.posY + 1, entity.posZ);
+					worldObj.spawnEntityInWorld(entityBotFlyLarva);	
+			}
 			return true;
 		}
-
 		return false;
 	}
 

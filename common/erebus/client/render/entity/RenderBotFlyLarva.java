@@ -16,7 +16,7 @@ import erebus.entity.EntityBotFlyLarva;
 @SideOnly(Side.CLIENT)
 public class RenderBotFlyLarva extends RenderLiving {
 
-	private static final ResourceLocation Texture = new ResourceLocation("erebus:textures/mob/botFlyLarva.png");
+	private static final ResourceLocation Texture = new ResourceLocation("erebus:textures/entity/botFlyLarva.png");
 
 	public RenderBotFlyLarva() {
 		super(new ModelBotFlyLarva(), 0.5F);
@@ -60,7 +60,9 @@ public class RenderBotFlyLarva extends RenderLiving {
 	protected void scaleBotFlyLarva(EntityBotFlyLarva entityBotFlyLarva, float f) {
 		float f1 = 0.6F;
 		GL11.glScalef(f1, f1, f1);
-		GL11.glTranslatef(0F, 0.5F, -0.2F);
+		if(entityBotFlyLarva.ridingEntity != null) {
+		GL11.glTranslatef(0F, 0F, -0.2F);
 		GL11.glRotatef(180, 0F, 1F, 0F);
+		}
 	}
 }
