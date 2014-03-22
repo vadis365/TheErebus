@@ -176,10 +176,14 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.book, 1, 0), new Object[] { new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), new ItemStack(Item.paper, 1, 0), new ItemStack(Item.paper, 1, 0), new ItemStack(Item.paper, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.velocityBlock), "xxx", "xxx", "xxx", 'x', new ItemStack(ModItems.erebusMaterials, 1, DATA.bioVelocity.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mudBricks), "xx", "xx", 'x', new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()));
-
+		GameRegistry.addRecipe(new ItemStack(ModItems.homingBeecon), "GNG", "NCN", "GNG", 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 'G', Item.ingotGold, 'C', Item.compass);
+		GameRegistry.addRecipe(new ItemStack(ModItems.nectarCollector), "  B", " S ", "S  ", 'B', Item.bowlEmpty, 'S', Item.stick);
+		GameRegistry.addRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()), 'D', Item.pickaxeDiamond, 'C', Block.chest);
+		
 		// Special Items - for future expansion
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL", 'S', Item.silk, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Block.carpet, 1, 0), 'L', new ItemStack(Item.dyePowder, 1, 4) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataBeetleTamingAmulet), new Object[] { " N ", "NJN", " F ", 'N', Item.goldNugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.beeTamingAmulet, 1), new Object[] { " n ", "nJn", " N ", 'n', Item.goldNugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()) });
 
 		// Furnace smelting
 		GameRegistry.addSmelting(ModBlocks.logErebusGroup1.blockID, new ItemStack(Item.coal, 1, 1), 1.0F);
