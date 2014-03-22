@@ -46,6 +46,11 @@ public class EntityBotFlyLarva extends EntityMob {
     public boolean canBeCollidedWith() {
         return false;
     }
+	
+	@Override
+    public boolean isEntityInvulnerable() {
+        return true;
+    }
 
 	@Override
 	protected String getLivingSound() {
@@ -65,7 +70,7 @@ public class EntityBotFlyLarva extends EntityMob {
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		if (!player.capabilities.isCreativeMode && !worldObj.isRemote)
+		if (!worldObj.isRemote)
 			if (player.riddenByEntity==null) {
 				mountEntity(player);
 				setPosition(player.posX, player.posY+ ridingEntity.getYOffset(), player.posZ);
@@ -152,9 +157,9 @@ public class EntityBotFlyLarva extends EntityMob {
 		super.readEntityFromNBT(nbt);
 		setParasiteCount(nbt.getByte("parasites"));
 		setPersistanceOnPlayer(nbt.getString("playerName"));
-		if(((EntityPlayer) playerName()!=null)) {
+		if((EntityPlayer) playerName()!=null) {
 			EntityPlayer player = ((EntityPlayer) playerName());
-			if (!player.capabilities.isCreativeMode && !worldObj.isRemote)
+			if (!worldObj.isRemote)
 				if (player.riddenByEntity==null) {
 					mountEntity(player);
 					setPosition(player.posX, player.posY+ ridingEntity.getYOffset(), player.posZ);

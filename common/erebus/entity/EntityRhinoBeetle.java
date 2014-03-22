@@ -189,7 +189,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 
 	@Override
 	protected void collideWithEntity(Entity entity) {
-		if (riddenByEntity != null && entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) && ramming){
+		if (riddenByEntity != null && entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) && !(entity instanceof EntityBotFlyLarva)&& ramming){
 			ram(entity, getRammingCharge() * 0.2F, getRammingCharge() * 0.4F);
 			setRammingCharge((byte) 0);
 		}
