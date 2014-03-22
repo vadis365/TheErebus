@@ -1,5 +1,6 @@
 package erebus.world.feature.plant;
 import java.util.Random;
+
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -100,8 +101,11 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				
 				// LAYER 3
 				
-				world.setBlock(x,y+3,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);
-				
+				if(rand.nextInt(10)==0)
+					world.setBlock(x,y+3,z,ModBlocks.erebusFlower.blockID,0,2);
+				else
+					world.setBlock(x,y+3,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);
+					
 				for(int a = 0; a < 3; a++){
 					for(int b = 0; b < 2; b++){
 						world.setBlock(x-3+b*6,y+3,z-1+a,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
@@ -138,7 +142,11 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 			case DISPERSE_HEMISPHERE:
 				
 				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
-				world.setBlock(x,y+1,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);
+				
+				if(rand.nextInt(10)==0)
+					world.setBlock(x,y+1,z,ModBlocks.erebusFlower.blockID,0,2);	
+				else
+					world.setBlock(x,y+1,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);
 				
 				for(int a = 0; a < 4; a++){
 					for(int b = 1; b <= 3; b++)world.setBlock(x+Direction.offsetX[a]*b,y+b-1,z+Direction.offsetZ[a]*b,ModBlocks.erebusFlower.blockID,secondaryPetalColor,2);
@@ -159,7 +167,11 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
 
 				world.setBlock(x,y+1,z,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-				world.setBlock(x,y+2,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);
+				
+				if(rand.nextInt(10)==0)
+					world.setBlock(x,y+2,z,ModBlocks.erebusFlower.blockID,0,2);	
+				else
+					world.setBlock(x,y+2,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);		
 				
 				for(int a = 0; a < 3; a++){
 					world.setBlock(x-3+a,y+1,z,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
