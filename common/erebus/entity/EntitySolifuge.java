@@ -12,20 +12,25 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
+
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ItemErebusMaterial.DATA;
 
-public class EntitySolifuge extends EntityMob {
+public class EntitySolifuge extends EntityMob implements IEntityAdditionalSpawnData {
 
 	protected EntityLiving theEntity;
-
+	private boolean areAttributesSetup = false;
 	public EntitySolifuge(World world) {
 		super(world);
 		isImmuneToFire = true;
-		setSize(2.0F, 1.0F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.3D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -37,6 +42,7 @@ public class EntitySolifuge extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataWatcher.addObject(25, new Byte((byte) 0));
 	}
 
 	@Override
@@ -47,11 +53,28 @@ public class EntitySolifuge extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.5); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(30.0D); // MaxHealth
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D); // atkDmg
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D); // followRange
-
+		areAttributesSetup = true;
+		updateAttributes();
+	}
+	
+	protected void updateAttributes() {
+		if (worldObj != null && !worldObj.isRemote) {
+			if (getIsAdult() == 0) {
+				setSize(2.0F, 1.0F);
+				experienceValue = 10;
+				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.5D);
+				getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(30.0D);
+				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
+				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+			} else {
+				setSize(1.0F, 0.5F);
+				experienceValue = 3;
+				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.5D);
+				getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
+				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
+				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+			}
+		}
 	}
 
 	@Override
@@ -89,17 +112,46 @@ public class EntitySolifuge extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1 + looting, DATA.bioVelocity.ordinal()), 0.0F);
+		if(getIsAdult() == 0)
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1 + looting, DATA.bioVelocity.ordinal()), 0.0F);
 	}
 
 	@Override
 	protected void dropRareDrop(int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
+		if(getIsAdult() == 0)
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
 	}
 
 	@Override
 	public boolean isOnLadder() {
 		return isCollidedHorizontally;
+	}
+	
+	@Override
+	public void onUpdate() {
+		if (worldObj.isRemote) {
+			if (getIsAdult() == 0)
+				setSize(2.0F, 1.0F);
+			 else
+				setSize(1.0F, 0.5F);
+		}
+		super.onUpdate();
+	}
+	
+	@Override
+	public void setDead() {
+		super.setDead();
+		if (getIsAdult() == 0) {
+			if (!worldObj.isRemote) {
+				for (int a = 0; a < 4; a++) {
+					EntitySolifuge entitySolifuge = new EntitySolifuge(worldObj);
+					entitySolifuge.setPosition(posX + (rand.nextFloat()*0.03D -rand.nextFloat()*0.03D), posY + 1, posZ +(rand.nextFloat()*0.03D-rand.nextFloat()*0.03D));
+					entitySolifuge.setIsAdult(Byte.valueOf((byte) 1));
+					entitySolifuge.updateAttributes();
+					worldObj.spawnEntityInWorld(entitySolifuge);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -115,5 +167,37 @@ public class EntitySolifuge extends EntityMob {
 			}
 		} else
 			super.attackEntity(entity, par2);
+	}
+	public byte getIsAdult() {
+		return dataWatcher.getWatchableObjectByte(25);
+	}
+
+	public void setIsAdult(byte type) {
+		dataWatcher.updateObject(25, Byte.valueOf(type));
+		worldObj.setEntityState(this, (byte) 25);
+		if (areAttributesSetup)
+			updateAttributes();
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setByte("mobType", getIsAdult());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setIsAdult(nbt.getByte("mobType"));
+	}
+
+	@Override
+	public void writeSpawnData(ByteArrayDataOutput data) {
+		data.writeByte(getIsAdult());
+	}
+
+	@Override
+	public void readSpawnData(ByteArrayDataInput data) {
+		setIsAdult(data.readByte());
 	}
 }
