@@ -14,9 +14,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemErebusSpecial extends Item {
 
-	public static final String[] iconPaths = new String[] { "rhinoRidingKit", "beetleTamingAmulet"};
+	public static final String[] iconPaths = new String[] { "rhinoRidingKit", "beetleTamingAmulet", "umberGolemCore", "umberGolemHead", "umberGolemLClaw", "umberGolemRClaw", "umberGolemLegs" };
 
-	public static final short dataRhinoRidingKit = 0, dataBeetleTamingAmulet = 1;
+	public static final short dataRhinoRidingKit = 0, dataBeetleTamingAmulet = 1, dataGolemCore = 2, dataGolemHead = 3, dataGolemLClaw = 4, dataGolemRClaw = 5, dataGolemLegs = 6;
 
 	@SideOnly(Side.CLIENT)
 	public static Icon[] icons;
