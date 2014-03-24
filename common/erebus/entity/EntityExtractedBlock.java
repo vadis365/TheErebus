@@ -3,7 +3,6 @@ package erebus.entity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,7 +19,6 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 	
 	public int blockID, blockMeta;
 	public double targetX, targetY, targetZ;
-	EntityLivingBase entityToAttack;
 	
 	public EntityExtractedBlock(World world) {
 		super(world);
