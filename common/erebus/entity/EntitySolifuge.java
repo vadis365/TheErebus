@@ -2,6 +2,7 @@ package erebus.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -13,6 +14,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -28,6 +31,9 @@ public class EntitySolifuge extends EntityMob implements IEntityAdditionalSpawnD
 
 	protected EntityLiving theEntity;
 	private boolean areAttributesSetup = false;
+	public final String[] potionName = new String[] { "Move Slowdown", "Dig Slowdown", "Harm", "Confusion", "Blindness", "Hunger", "Weakness", "Poison", "Wither" };
+	public final byte[] potionIds = new byte[] { 2, 4, 7, 9, 15, 17, 18, 19, 20 };
+	
 	public EntitySolifuge(World world) {
 		super(world);
 		isImmuneToFire = true;
@@ -132,8 +138,10 @@ public class EntitySolifuge extends EntityMob implements IEntityAdditionalSpawnD
 		if (worldObj.isRemote) {
 			if (getIsAdult() == 0)
 				setSize(2.0F, 1.0F);
-			 else
+			else {
+				setCustomNameTag(""+potionName[getIsAdult()-1]);
 				setSize(1.0F, 0.5F);
+				}
 		}
 		super.onUpdate();
 	}
@@ -146,7 +154,7 @@ public class EntitySolifuge extends EntityMob implements IEntityAdditionalSpawnD
 				for (int a = 0; a < 4; a++) {
 					EntitySolifuge entitySolifuge = new EntitySolifuge(worldObj);
 					entitySolifuge.setPosition(posX + (rand.nextFloat()*0.03D -rand.nextFloat()*0.03D), posY + 1, posZ +(rand.nextFloat()*0.03D-rand.nextFloat()*0.03D));
-					entitySolifuge.setIsAdult(Byte.valueOf((byte) 1));
+					entitySolifuge.setIsAdult(Byte.valueOf((byte) ((byte) 1 + rand.nextInt(9))));
 					entitySolifuge.updateAttributes();
 					worldObj.spawnEntityInWorld(entitySolifuge);
 				}
@@ -155,19 +163,40 @@ public class EntitySolifuge extends EntityMob implements IEntityAdditionalSpawnD
 	}
 
 	@Override
-	protected void attackEntity(Entity entity, float par2) {
-		if (par2 > 2.0F && par2 < 6.0F && rand.nextInt(10) == 0) {
-			if (onGround) {
-				double d0 = entity.posX - posX;
-				double d1 = entity.posZ - posZ;
-				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-				motionX = d0 / f2 * 0.5D * 0.900000011920929D + motionX * 0.60000000298023224D;
-				motionZ = d1 / f2 * 0.5D * 0.900000011920929D + motionZ * 0.60000000298023224D;
-				motionY = 0.5000000059604645D;
+	protected void attackEntity(Entity entity, float distance) {
+		if (distance < 2.0F) {
+			super.attackEntity(entity, distance);
+			attackEntityAsMob(entity);
 			}
-		} else
-			super.attackEntity(entity, par2);
+			if (distance > 2.0F && distance < 6.0F && rand.nextInt(10) == 0)
+				if (onGround) {
+					double d0 = entity.posX - posX;
+					double d1 = entity.posZ - posZ;
+					float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+					motionX = d0 / f2 * 0.5D * 1.900000011920929D + motionX * 0.70000000298023224D;
+					motionZ = d1 / f2 * 0.5D * 1.900000011920929D + motionZ * 0.70000000298023224D;
+					motionY = 0.5000000059604645D;
+				}
 	}
+	
+	@Override
+	public boolean attackEntityAsMob(Entity entity) {
+		if (super.attackEntityAsMob(entity)) {
+			if (entity instanceof EntityLivingBase && getIsAdult() !=0 ) {
+				byte duration = 0;
+				if (worldObj.difficultySetting > 1)
+					if (worldObj.difficultySetting == 2)
+						duration = 5;
+					else if (worldObj.difficultySetting == 3)
+						duration = 10;
+				if (duration > 0)
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.potionTypes[potionIds[getIsAdult()-1]].id, duration * 20, 0));
+			}
+			return true;
+		} else
+			return false;
+	}
+	
 	public byte getIsAdult() {
 		return dataWatcher.getWatchableObjectByte(25);
 	}

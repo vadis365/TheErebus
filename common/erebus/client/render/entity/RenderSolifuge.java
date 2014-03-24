@@ -48,7 +48,7 @@ public class RenderSolifuge extends RenderLiving {
 			shadowSize = f1;
 			GL11.glScalef(f1, f1, f1);
 		}
-		if (entitySolifuge.getIsAdult() == 1) {
+		if (entitySolifuge.getIsAdult() != 0) {
 			float f1 = 0.5F;
 			shadowSize = f1;
 			GL11.glScalef(f1, f1, f1);
