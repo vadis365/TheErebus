@@ -1,17 +1,23 @@
 package erebus.entity;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -24,15 +30,25 @@ import erebus.client.render.entity.AnimationMathHelper;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
-
-	private float heightOffset = 0.0F;
+	public ChunkCoordinates currentFlightTarget;
 	public float wingFloat;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
-	Class[] preys = { EntityGrasshopper.class, EntityBeetle.class, EntityBeetleLarva.class, EntityWorkerBee.class};
 	private boolean areAttributesSetup = false;
+	public boolean waspFlying;
 
 	public EntityWasp(World world) {
 		super(world);
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.3D, true));
+		tasks.addTask(2, new EntityAIWander(this, 0.4D));
+		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(4, new EntityAILookIdle(this));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGrasshopper.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityBeetle.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityBeetleLarva.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWorkerBee.class, 0, true));
 	}
 
 	@Override
@@ -65,6 +81,11 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
 				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
 			}
+	}
+	
+	@Override
+	public boolean isAIEnabled() {
+		return true;
 	}
 
 	@Override
@@ -110,7 +131,11 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	public boolean isFlying() {
 		return !onGround;
 	}
-
+	
+	public void setWaspFlying(boolean state) {
+		waspFlying = state;
+	}
+	
 	@Override
 	public void onUpdate() {
 		byte i;
@@ -122,56 +147,72 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			} else
 				setSize(1.5F, 1.0F);
 		}
+		
 		if (!isFlying())
 			wingFloat = 0.0F;
-		if (isFlying())
-			wingFloat = mathWings.swing(4.0F, 0.1F);
-		if (findPlayerToAttack() != null)
-			entityToAttack = findPlayerToAttack();
-		else if (findEnemyToAttack() != null)
-			entityToAttack = findEnemyToAttack();
 		else
-			entityToAttack = null;
+			wingFloat = mathWings.swing(4.0F, 0.1F);
+
+		if (motionY < 0.0D)
+			motionY *= 0.6D;
+
 		if (!worldObj.isRemote) {
-			heightOffset = 1.0F + (float) rand.nextGaussian() * 5.0F;
-			if (getEntityToAttack() != null && getEntityToAttack().posY + getEntityToAttack().getEyeHeight() > posY + getEyeHeight() + heightOffset) {
-				double var1 = getEntityToAttack().posX + 0.5D - posX;
-				double var3 = getEntityToAttack().posY + 1.D - posY;
-				double var5 = getEntityToAttack().posZ + 0.5D - posZ;
-				motionY += (0.350000011920929D - motionY) * 0.350000011920929D;
-				motionX += (Math.signum(var1) * 0.5D - motionX) * 0.10000000149011612D;
-				motionY += (Math.signum(var3) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-				motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.10000000149011612D;
-				float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-				float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
-				moveForward = 0.5F;
-				rotationYaw += var8;
+			if (getEntityToAttack() == null) {
+				if (rand.nextInt(200) == 0)
+					if (!waspFlying)
+						setWaspFlying(true);
+					else
+						setWaspFlying(false);
+
+				if (waspFlying)
+					flyAbout();
+				else
+					land();
+			}
+
+			if (getEntityToAttack() != null) {
+				currentFlightTarget = new ChunkCoordinates((int) getEntityToAttack().posX, (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()), (int) getEntityToAttack().posZ);
+				setWaspFlying(false);
+				flyToTarget();
 			}
 		}
-		if (motionY < 0.0D)
-			motionY *= 0.5D;
 		super.onUpdate();
 	}
+	
+	public void flyAbout() {
+		if (currentFlightTarget != null)
+			if (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1)
+				currentFlightTarget = null;
+		
+			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
+				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
 
-	@Override
-	protected Entity findPlayerToAttack() {
-		EntityPlayer var1 = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
-		return var1 != null && canEntityBeSeen(var1) ? var1 : null;
+		flyToTarget();
 	}
 
-	protected Entity findEnemyToAttack() {
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(10D, 10D, 10D));
-		for (int i = 0; i < list.size(); i++) {
-			Entity entity = (Entity) list.get(i);
-			if (entity != null) {
-				if (!(entity instanceof EntityLivingBase))
-					continue;
-				for (int j = 0; j < preys.length; j++)
-					if (entity.getClass() == preys[j])
-						return entity;
-			}
+	public void flyToTarget() {
+		if (currentFlightTarget != null) {
+			double targetX = currentFlightTarget.posX + 0.5D - posX;
+			double targetY = currentFlightTarget.posY + 1D - posY;
+			double targetZ = currentFlightTarget.posZ + 0.5D - posZ;
+			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
+			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
+			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
+			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+			moveForward = 0.5F;
+			rotationYaw += rotation;
 		}
-		return null;
+}
+
+	private void land() {
+		//Nothing to see here - yet
+	}
+	
+	@Override
+	public void setAttackTarget(EntityLivingBase entity) {
+		setTarget(entity);
+		super.setAttackTarget(entity);
 	}
 
 	@Override
@@ -194,7 +235,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	@Override
 	protected void attackEntity(Entity entity, float par2) {
-		if (par2 < 2.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
+		if (par2 < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
 			attackEntityAsMob(entity);
 	}
 
