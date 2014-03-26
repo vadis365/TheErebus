@@ -1,7 +1,6 @@
 package erebus.entity;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -29,7 +28,6 @@ import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntitySolifuge extends EntityMob implements IEntityAdditionalSpawnData {
 
-	protected EntityLiving theEntity;
 	private boolean areAttributesSetup = false;
 	public final String[] potionName = new String[] { "Move Slowdown", "Dig Slowdown", "Harm", "Confusion", "Blindness", "Hunger", "Weakness", "Poison", "Wither" };
 	public final byte[] potionIds = new byte[] { 2, 4, 7, 9, 15, 17, 18, 19, 20 };

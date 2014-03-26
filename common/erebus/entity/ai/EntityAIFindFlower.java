@@ -81,7 +81,7 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 					afterPollination();
 				}
 			}
-			if (!flag && collectTicks>0) {
+			if (!flag && collectTicks>1) {
 				pollinationInterupted();
 				hasTarget = false;
 				collectTicks = 0;
