@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
+import erebus.ModBlocks;
 
 public class EntitySporeling extends EntityAnimal { 
 	private boolean areParticlesActive;
@@ -72,8 +73,13 @@ public class EntitySporeling extends EntityAnimal {
         	 int y = MathHelper.floor_double(this.posY);
              int z = MathHelper.floor_double(this.posZ);
              
-        	 if (this.worldObj.getBlockId(x, y, z) == 0 && this.worldObj.getBiomeGenForCoords(x, z).biomeID == ModBiomes.fungalForestID && Block.mushroomBrown.canPlaceBlockAt(this.worldObj, x, y, z))
-        		this.worldObj.setBlock(x, y, z, Block.mushroomBrown.blockID + rand.nextInt(2));
+        	 if (this.worldObj.getBlockId(x, y, z) == 0 && this.worldObj.getBiomeGenForCoords(x, z).biomeID == ModBiomes.fungalForestID && Block.mushroomBrown.canPlaceBlockAt(this.worldObj, x, y, z)) {
+        		 int mush = rand.nextInt(3);
+        		 if (mush != 0)
+        			 this.worldObj.setBlock(x, y, z, Block.mushroomBrown.blockID + rand.nextInt(2));
+        		 else
+        			 this.worldObj.setBlock(x, y, z, ModBlocks.bulbCappedMushroom.blockID);
+        		 }
          }
     	super.onLivingUpdate();
     }

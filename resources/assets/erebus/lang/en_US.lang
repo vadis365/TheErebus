@@ -222,6 +222,8 @@ erebusStigma_item_10.name=Light Blue Flower Stigma
 erebusStigma_item_11.name=Magenta Flower Stigma
 erebusStigma_item_12.name=Orange Flower Stigma
 erebusStigma_item_13.name=White Flower Stigma
+tile.giantBulbCappedShroom.name=Giant Bulb Capped Mushroom
+tile.bulbCappedShroom.name=Bulb Capped Mushroom
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet
