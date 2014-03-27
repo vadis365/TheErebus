@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBlocks;
 import erebus.entity.EntitySporeling;
 
 // @formatter:off
@@ -35,7 +36,7 @@ public class WorldGenMushroomHouse extends WorldGenerator {
 					if (Math.round(Math.sqrt(dSq)) < 6)
 						if ((dSq >= Math.pow(6 - 2, 2.0D)) || (y1 == y))
 							world.setBlock(x1, y1, z1,
-									Block.mushroomCapRed.blockID, 5, 3);
+									ModBlocks.planksErebus.blockID, 10, 3);
 						else
 							world.setBlock(x1, y1, z1, 0);
 				}
