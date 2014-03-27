@@ -33,6 +33,7 @@ import erebus.client.model.entity.ModelJumpingSpider;
 import erebus.client.model.entity.ModelPrayingMantis;
 import erebus.client.model.entity.ModelRhinoBeetle;
 import erebus.client.model.entity.ModelScytodes;
+import erebus.client.model.entity.ModelSporeling;
 import erebus.client.model.entity.ModelUmberGolem;
 import erebus.client.render.block.BlockBambooCropRender;
 import erebus.client.render.block.BlockHollowLogRender;
@@ -64,6 +65,7 @@ import erebus.client.render.entity.RenderRhinoBeetle;
 import erebus.client.render.entity.RenderScorpion;
 import erebus.client.render.entity.RenderScytodes;
 import erebus.client.render.entity.RenderSolifuge;
+import erebus.client.render.entity.RenderSporeling;
 import erebus.client.render.entity.RenderTarantula;
 import erebus.client.render.entity.RenderTitanBeetle;
 import erebus.client.render.entity.RenderUmberGolem;
@@ -133,6 +135,7 @@ import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
+import erebus.entity.EntitySporeling;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityUmberGolem;
@@ -208,7 +211,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBloodSnail.class, new RenderBloodSnail());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTitanBeetle.class, new RenderTitanBeetle());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBotFlyLarva.class, new RenderBotFlyLarva());
-		
+		RenderingRegistry.registerEntityRenderingHandler(EntitySporeling.class, new RenderSporeling(new ModelSporeling(), 0.3F));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());

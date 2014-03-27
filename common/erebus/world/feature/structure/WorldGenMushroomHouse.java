@@ -3,9 +3,9 @@ package erebus.world.feature.structure;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.entity.EntitySporeling;
 
 // @formatter:off
 public class WorldGenMushroomHouse extends WorldGenerator {
@@ -71,11 +71,12 @@ public class WorldGenMushroomHouse extends WorldGenerator {
 		world.setBlock(x + airX, y + 2, z + airZ, 0);
 		world.setBlock(x + doorX, y + 1, z + doorZ, Block.doorWood.blockID, direction, 3);
 		world.setBlock(x + doorX, y + 2, z + doorZ, Block.doorWood.blockID, direction + 8, 3);
-		
-		EntityVillager villager =new EntityVillager(world);
-		villager.setLocationAndAngles(x,y+1,z,rand.nextFloat()*360F,0F);
-		villager.forceSpawn=true;
-		world.spawnEntityInWorld(villager);
+
+		for (int a = 0; a < 10; a++) {
+			EntitySporeling entitySporeling = new EntitySporeling(world);
+			entitySporeling.setPosition(x + (rand.nextFloat()*0.03D -rand.nextFloat()*0.03D), y + 1, z +(rand.nextFloat()*0.03D-rand.nextFloat()*0.03D));
+			world.spawnEntityInWorld(entitySporeling);
+		}
 		return true;
 	}
 }

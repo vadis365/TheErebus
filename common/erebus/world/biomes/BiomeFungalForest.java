@@ -29,7 +29,7 @@ public class BiomeFungalForest extends BiomeBaseErebus{
 		new WorldGenFlowers(Block.mushroomBrown.blockID).generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
 		new WorldGenFlowers(Block.mushroomRed.blockID).generate(world,rand,x+getRandomXZOffset(rand),rand.nextInt(128),z+getRandomXZOffset(rand));
 
-		for(int attempt=0; attempt<12; attempt++){
+		for(int attempt=0; attempt<40; attempt++){
 			int xx=x+getRandomXZOffset(rand),
 				yy=15+rand.nextInt(90),
 				zz=z+getRandomXZOffset(rand);
@@ -39,7 +39,7 @@ public class BiomeFungalForest extends BiomeBaseErebus{
 			}
 		}
 
-		for(int attempt=0; attempt<20; attempt++){
+		for(int attempt=0; attempt<40; attempt++){
 			int xx=x+getRandomXZOffset(rand),
 				yy=15+rand.nextInt(90),
 				zz=z+getRandomXZOffset(rand);
