@@ -19,7 +19,6 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.hideItem(ModBlocks.blockTurnip.blockID);
 		API.hideItem(ModBlocks.insectRepellent.blockID);
 		API.hideItem(ModBlocks.umberFurnace_on.blockID);
-		API.hideItem(ModBlocks.umberGolemStatue.blockID);
 	}
 
 	@Override
@@ -32,5 +31,3 @@ public class NEIErebusConfig implements IConfigureNEI {
 		return Reference.MOD_VERSION;
 	}
 }
-
-// Here: http://adf.ly/WAp6y
