@@ -1,6 +1,5 @@
 package erebus.client.render.item;
 
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -29,46 +28,33 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		switch (type) {
 			case ENTITY:
-				renderBlock(0.0F, 1.75F, 0.0F, 1.0D);
+				renderBlock(0.0F, 0.5F, 0.0F, 1.0D);
 				break;
 			case EQUIPPED:
 				renderEquipped(0.3F, 2.3F, 0.7F, 1.0D);
 				break;
 			case EQUIPPED_FIRST_PERSON:
-				renderFirstPerson(0.5F, 2.0F, 0.5F, 1.0D);
+				renderFirstPerson(0.5F, 1.5F, 0.5F, 1.0D);
 				break;
 			case INVENTORY:
 				renderInventory(-0.25F, 0.75F, 0.0F, 0.8D);
-				break;
-			default:
 				break;
 		}
 	}
 
 	private void renderBlock(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
-		if (RenderItem.renderInFrame) {
-			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 1.1F, z);
-			GL11.glRotatef(180F, 1F, 0, 0);
-			GL11.glScaled(0.5F, 0.625F, 0.5F);
-			ModelUmberGolemStatue.render();
-			GL11.glPopMatrix();
-		} else {
-			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y, z);
-			GL11.glRotatef(180F, 1F, 0, 0);
-			GL11.glRotatef(90F, 0, 1F, 0);
-			GL11.glScaled(size, size * 1.25F, size);
-			ModelUmberGolemStatue.render();
-			GL11.glPopMatrix();
-		}
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, z);
+		GL11.glRotatef(180F, 1F, 0, 0);
+		GL11.glScaled(0.5D, 0.5D, 0.5D);
+		ModelUmberGolemStatue.render();
+		GL11.glPopMatrix();
 	}
 
 	private void renderEquipped(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -79,7 +65,6 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 	}
 
 	private void renderFirstPerson(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -90,7 +75,6 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 	}
 
 	private void renderInventory(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -99,5 +83,4 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 		ModelUmberGolemStatue.render();
 		GL11.glPopMatrix();
 	}
-
 }
