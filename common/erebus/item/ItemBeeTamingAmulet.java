@@ -42,7 +42,7 @@ public class ItemBeeTamingAmulet extends Item {
 			int blockID = world.getBlockId(x, y, z);
 			Block block = Block.blocksList[blockID];
 			if (!world.isRemote && block !=null) {
-				if (block.blockID == ModBlocks.honeyCombBlock.blockID){
+				if (block.blockID == Block.chest.blockID){
 					is.getTagCompound().setInteger("homeX", x);
 					is.getTagCompound().setInteger("homeY", y);
 					is.getTagCompound().setInteger("homeZ", z);

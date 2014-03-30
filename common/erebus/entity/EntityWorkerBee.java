@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
@@ -176,12 +178,24 @@ public class EntityWorkerBee extends EntityTameable {
 			}
 			
 			if ((int) posX == getDropPointX() && (int) posY == getDropPointY() + 1 && (int) posZ == getDropPointZ() && getNectarPoints() > 0) {
-				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.0F);
-				setNectarPoints(getNectarPoints() - 1);
+				addHoneyToChest(getDropPointX(),getDropPointY(),getDropPointZ());
 				setBeeCollecting(false);
 			}
 		}
 		super.onUpdate();
+	}
+
+	private void addHoneyToChest(int x, int y, int z) {
+		TileEntityChest chest = (TileEntityChest)worldObj.getBlockTileEntity(x,y,z);
+		if (chest !=null)
+			for (int i = 0; i < chest.getSizeInventory(); ++i) {
+				if (chest.getStackInSlot(i) != null && chest.getStackInSlot(i).isStackable() && getNectarPoints()>0 && chest.getStackInSlot(i).stackSize < chest.getStackInSlot(i).getMaxStackSize()) {
+					chest.setInventorySlotContents(i, new ItemStack(ModItems.erebusMaterials, chest.getStackInSlot(i).stackSize+1, DATA.nectar.ordinal()));
+					setNectarPoints(getNectarPoints() - 1);
+				}
+			}
+		else
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.0F);
 	}
 
 	public void setBeeFlying(boolean state) {
@@ -214,7 +228,7 @@ public class EntityWorkerBee extends EntityTameable {
 
 	public void flyToTarget() {
 		if (currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlockId((int)posX, (int)posY + 1, (int)posZ)== ModBlocks.erebusFlower.blockID && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
-			if (worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusStigma.blockID || worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.honeyCombBlock.blockID) {
+			if (worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusStigma.blockID || worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == Block.chest.blockID) {
 				if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ, currentFlightTarget.posX + 1, currentFlightTarget.posY + 2, currentFlightTarget.posZ + 1)).isEmpty())
 					setPosition(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ);
 			} else
