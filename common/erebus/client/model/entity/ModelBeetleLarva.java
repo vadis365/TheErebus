@@ -35,6 +35,10 @@ public class ModelBeetleLarva extends ModelBase {
 	ModelRenderer horn1;
     ModelRenderer horn2;
     ModelRenderer horn3;
+    ModelRenderer titanL1;
+    ModelRenderer titanL2;
+    ModelRenderer titanR1;
+    ModelRenderer titanR2;
     
 	public ModelBeetleLarva() {
 		textureWidth = 128;
@@ -178,6 +182,22 @@ public class ModelBeetleLarva extends ModelBase {
 		horn3.setTextureSize(128, 64);
 		horn3.mirror = true;
 		setRotation(horn3, -0.1396263F, 0F, 0F);
+		titanL1 = new ModelRenderer(this, 45, 3);
+		titanL1.addBox(0.5F, -1F, -1.4F, 1, 2, 2);
+		titanL1.setRotationPoint(0F, 20F, -10F);
+		setRotation(titanL1, -0.1396263F, 0F, 0F);
+		titanL2 = new ModelRenderer(this, 44, 0);
+		titanL2.addBox(0.5F, -4F, -1.4F, 1, 3, 1);
+		titanL2.setRotationPoint(0F, 20F, -10F);
+		setRotation(titanL2, -0.1396263F, 0F, 0F);
+		titanR1 = new ModelRenderer(this, 45, 3);
+		titanR1.addBox(-1.5F, -1F, -1.4F, 1, 2, 2);
+		titanR1.setRotationPoint(0F, 20F, -10F);
+		setRotation(titanR1, -0.1396263F, 0F, 0F);
+		titanR2 = new ModelRenderer(this, 44, 0);
+		titanR2.addBox(-1.5F, -4F, -1.4F, 1, 3, 1);
+		titanR2.setRotationPoint(0F, 20F, -10F);
+		setRotation(titanR2, -0.1396263F, 0F, 0F);
 	}
 
 	@Override
@@ -210,6 +230,12 @@ public class ModelBeetleLarva extends ModelBase {
 			horn2.render(unitPixel);
 			horn3.render(unitPixel);
 		}
+		if(larva.getTame()==3){
+			titanL1.render(unitPixel);
+			titanL2.render(unitPixel);
+			titanR1.render(unitPixel);
+			titanR2.render(unitPixel);
+		}
 
 	}
 
@@ -237,6 +263,10 @@ public class ModelBeetleLarva extends ModelBase {
 		horn1.rotationPointX = bf;
 		horn2.rotationPointX = bf;
 		horn3.rotationPointX = bf;
+		titanL1.rotationPointX = bf;
+		titanL2.rotationPointX = bf;
+		titanR1.rotationPointX = bf;
+		titanR2.rotationPointX = bf;
 		
 		torso1.rotationPointY = ba + 20F;
 
