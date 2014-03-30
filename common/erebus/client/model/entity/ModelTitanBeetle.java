@@ -266,7 +266,7 @@ public class ModelTitanBeetle extends ModelBase {
 		RFL1.render(unitPixel);
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
-		if(beetle.getTameState()==3){
+		if(beetle.getTameState()>=3){
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0F, 0.27F, 0.15F);
 			GL11.glScalef(0.67F, 0.67F, 0.67F);

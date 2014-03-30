@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -18,11 +20,14 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.ItemErebusMaterial.DATA;
@@ -89,6 +94,12 @@ public class EntityTitanBeetle extends EntityTameable {
 			for (ItemStack is : inventory)
 				if (is != null)
 					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
+		if (worldObj.isRemote && getTameState()==4) {
+			double a = Math.toRadians(renderYawOffset);
+			double offSetX = -Math.sin(a) * 1.5D;
+			double offSetZ = Math.cos(a) * 1.5D;
+			randomDisplayTick(worldObj, posX - offSetX, posY+1, posZ - offSetZ, rand);
+		}
 	}
 
 	@Override
@@ -139,7 +150,7 @@ public class EntityTitanBeetle extends EntityTameable {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int par4) {
+	protected void playStepSound(int x, int y, int z, int blockID) {
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
@@ -168,19 +179,27 @@ public class EntityTitanBeetle extends EntityTameable {
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() >= 2)
 			entityDropItem(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), 0.0F);
-		if (getTameState() == 3)
-			dropChests();
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
+		dropChests();
 	}
 
 	public void dropChests() {
-		if (!worldObj.isRemote)
-			dropItem(Block.chest.blockID, 1);
+		if (!worldObj.isRemote) {
+			if (getTameState() == 3)
+				dropItem(Block.chest.blockID, 1);
+			if (getTameState() == 4)
+				dropItem(Block.enderChest.blockID, 1);
+		}
 	}
 
 	public void openGUI(EntityPlayer player) {
 		if (!worldObj.isRemote && (riddenByEntity == null || riddenByEntity == player) && getTameState() != 0) {
-			player.displayGUIChest(new TileEntityTitanChest(this));
+			if(getTameState()==3)
+				player.displayGUIChest(new TileEntityTitanChest(this));
+			if(getTameState()==4) {
+				InventoryEnderChest inventoryenderchest = player.getInventoryEnderChest();
+				player.displayGUIChest(inventoryenderchest);
+			}
 		}
 	}
 
@@ -190,6 +209,10 @@ public class EntityTitanBeetle extends EntityTameable {
 		float healingBuff = 0.0F;
 		if (getTameState() == 3 && player.isSneaking()) {
 			worldObj.playSoundEffect(posX, posY + 0.5D, posZ, "random.chestopen", 0.5F, 0.9F);
+			openGUI(player);
+			return true;
+			}
+		if (getTameState() == 4 && player.isSneaking()) {
 			openGUI(player);
 			return true;
 			}
@@ -240,7 +263,17 @@ public class EntityTitanBeetle extends EntityTameable {
 				playSound("mob.chickenplop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 				flag = true;
 			}
-			if (flag) {
+			if (flag && getTameState() == 3) {
+				if (!player.capabilities.isCreativeMode && --is.stackSize == 0)
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
+				return true;
+			}
+			if (!flag && getTameState() == 2 && is.itemID == Block.enderChest.blockID) {
+				setTameState((byte) 4);
+				playSound("mob.chickenplop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				flag = true;
+			}
+			if (flag && getTameState() == 4) {
 				if (!player.capabilities.isCreativeMode && --is.stackSize == 0)
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
 				return true;
@@ -291,6 +324,28 @@ public class EntityTitanBeetle extends EntityTameable {
 			riddenByEntity.setPosition(posX - offSetX, posY + 1.1D + riddenByEntity.getYOffset(), posZ - offSetZ);
 		}
 	}
+	
+	@SideOnly(Side.CLIENT)
+	   public void randomDisplayTick(World world, double d, double f, double e, Random rand) {
+	        for (int l = 0; l < 3; ++l) {
+	            double d0 = (double)((float)d + rand.nextFloat());
+	            double d1 = (double)((float)f + rand.nextFloat());
+	            d0 = (double)((float)e + rand.nextFloat());
+	            double d2 = 0.0D;
+	            double d3 = 0.0D;
+	            double d4 = 0.0D;
+	            int i1 = rand.nextInt(2) * 2 - 1;
+	            int j1 = rand.nextInt(2) * 2 - 1;
+	            d2 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
+	            d3 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
+	            d4 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
+	            double d5 = (double)e + 0.5D + 0.25D * (double)j1;
+	            d4 = (double)(rand.nextFloat() * 1.0F * (float)j1);
+	            double d6 = (double)d + 0.5D + 0.25D * (double)i1;
+	            d2 = (double)(rand.nextFloat() * 1.0F * (float)i1);
+	            world.spawnParticle("portal", d6, d1, d5, d2, d3, d4);
+	        }
+	    }
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityageable) {
