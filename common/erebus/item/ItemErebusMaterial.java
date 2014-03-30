@@ -46,6 +46,7 @@ public class ItemErebusMaterial extends Item {
 		scorpionPincer,
 		camoPowder,
 		nectar,
+		honeyDrip,
 		poisonGland,
 		mudBrick;
 	}

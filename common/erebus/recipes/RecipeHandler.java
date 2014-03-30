@@ -144,6 +144,7 @@ public class RecipeHandler {
 
 		// Bamboo
 		GameRegistry.addRecipe(new ItemStack(ModItems.bamBucket, 1, 0), new Object[] { "S", "B", 'S', Item.silk, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.bamBucket, 1, 3), new Object[] { "RRR", "RBR", "RRR", 'B', new ItemStack(ModItems.bamBucket, 1, 0), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 1, BlockPlanksErebus.dataBamboo), new Object[] { "##", "##", '#', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooCrate), new Object[] { "bpb", "p p", "bpb", 'p', new ItemStack(ModBlocks.planksErebus, 1, BlockPlanksErebus.dataBamboo), 'b', new ItemStack(ModItems.erebusMaterials, 1, 3) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooLadder, 1), new Object[] { "BBB", "S S", "BBB", 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), 'S', Item.silk });
@@ -156,6 +157,7 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataMelonade), new Object[] { new ItemStack(Item.potion, 1, 0), new ItemStack(Item.melon) });
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataMelonadeSparkly), new Object[] { new ItemStack(Item.potion, 1, 0), new ItemStack(Item.speckledMelon) });
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaeOnStick), new Object[] { new ItemStack(Item.stick), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusFood, 2, ItemErebusFood.dataHoneySandwich), new Object[] { " B ", "RRR", " B ", 'B', new ItemStack(Item.bread),'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()) });
 
 		// Miscellaneous
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockSilk, 1), new Object[] { "sss", "sss", "sss", 's', Item.silk });
@@ -178,6 +180,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.homingBeecon), "GNG", "NCN", "GNG", 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 'G', Item.ingotGold, 'C', Item.compass);
 		GameRegistry.addRecipe(new ItemStack(ModItems.nectarCollector), "  B", " S ", "S  ", 'B', Item.bowlEmpty, 'S', Item.stick);
 		GameRegistry.addRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()), 'D', Item.pickaxeDiamond, 'C', Block.chest);
+		GameRegistry.addRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), 'B', Item.bucketEmpty);
 		
 		// Special Items - for future expansion
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL", 'S', Item.silk, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Block.carpet, 1, 0), 'L', new ItemStack(Item.dyePowder, 1, 4) });
@@ -222,6 +225,7 @@ public class RecipeHandler {
 		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 5, new ItemStack(Item.emerald, 1), 1.0F);
 		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 6, new ItemStack(ModItems.erebusMaterials, 1, 1), 1.0F);
 		FurnaceRecipes.smelting().addSmelting(ModBlocks.mud.blockID, 0, new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()), 0.2F);
+		FurnaceRecipes.smelting().addSmelting(ModItems.erebusMaterials.itemID, DATA.nectar.ordinal(), new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), 0.2F);
 
 		// Ore dictionary registrations
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
