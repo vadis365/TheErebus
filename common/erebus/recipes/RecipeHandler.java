@@ -158,6 +158,7 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataMelonadeSparkly), new Object[] { new ItemStack(Item.potion, 1, 0), new ItemStack(Item.speckledMelon) });
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaeOnStick), new Object[] { new ItemStack(Item.stick), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusFood, 2, ItemErebusFood.dataHoneySandwich), new Object[] { " B ", "RRR", " B ", 'B', new ItemStack(Item.bread),'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.honeyTreat, 1), new Object[] { "SRS", "RBR", "SRS", 'S', new ItemStack(Item.sugar), 'B', new ItemStack(Item.bread),'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()) });
 
 		// Miscellaneous
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockSilk, 1), new Object[] { "sss", "sss", "sss", 's', Item.silk });

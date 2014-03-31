@@ -30,7 +30,7 @@ public class ConfigHandler {
 	public static int blockWitherWebID, extenderThingyID, bambooPoleID, umberstonePillarID, velocityBlockID, petrifiedWoodStairsID;
 	public static int wallErebusID, amberBrickStairsID, waspNestStairsID, spiderSpawnerID, jumpingSpiderSpawnerID, waspSpawnerID;
 	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID, erebusHoneyFluidID, mudID, mudBricksID, flowerPlantedID;
-	public static int giantBulbCappedMushroomID, bulbCappedMushroomID;
+	public static int giantBulbCappedMushroomID, bulbCappedMushroomID, honeyTreatID;
 	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID, gneissStairsID;
 
 	// ITEMS
@@ -117,6 +117,7 @@ public class ConfigHandler {
 			flowerPlantedID = config.getBlock("Block ID of Planted Flower", 2600).getInt(2600);
 			giantBulbCappedMushroomID = config.getBlock("Block ID of Giant Bulb Capped Mushroom", 2602).getInt(2602);
 			bulbCappedMushroomID = config.getBlock("Block ID of Bulb Capped Mushroom", 2603).getInt(2603);
+			honeyTreatID = config.getBlock("Block ID of Honey Treat", 2604).getInt(2604);
 			
 			int id = 2527;
 			umbercobbleStairsID = new int[BlockUmberstone.iconPaths.length];
@@ -147,7 +148,7 @@ public class ConfigHandler {
 			jumpingSpiderSpawnerID = config.getBlock("Block ID of Jumping Spider Spawners", 2553).getInt(2553);
 			waspSpawnerID = config.getBlock("Block ID of Wasp Spawners", 2572).getInt(2572);
 
-			// latest ID used (please update after adding new blocks!) >>> 2603
+			// latest ID used (please update after adding new blocks!) >>> 2604
 
 			// Items
 			portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
