@@ -19,6 +19,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
 import erebus.client.sound.EntitySoundEvent;
@@ -67,6 +68,7 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new EntitySoundEvent());
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			MinecraftForge.EVENT_BUS.register(new HomingBeeconTextureHandler());
+			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
 			AmbientMusicManager.register();
 		}
 

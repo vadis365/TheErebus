@@ -40,3 +40,4 @@ Bugfixes
 - Erebus had same terrain as Nether
 - Biomes no longer have stripes of tiny biomes at biome borders
 - Fixed biome decoration generating 16 blocks off
+- Fixed Scorpion (and Dragonfly) health being displayed whilst grappled
