@@ -125,7 +125,6 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.waspSting.ordinal()), 0.0F);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
 	public boolean isFlying() {

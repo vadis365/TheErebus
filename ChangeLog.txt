@@ -12,6 +12,13 @@ Additions
 - Added Rhino Beetle mob as a tamable mount and associated items
 - Added 'Special Items' Tab and tidied creative menu 
 - Implemented new block 'eating' AI to Larva and Grasshopper
+- Added Titan Beetle mob as a tamable mount and associated items
+- Added Bot Fly Larva Mob
+- Added Blood Snail Mob
+- Added Dragon Fly mob
+- Added Bee mob and associated items (many)
+- Added Sporeling Mob
+- Added Crafting recipe for Umber Golem
 
 Changes
 =======
@@ -23,6 +30,7 @@ Changes
 - Bamboo torches now are breakable from both blocks
 - Removed Bamboo from Beetle Larva 'eating'
 - Changed the way Glowing jars are rendered
+- Removed Exoskeleton from any mob that is not deemed a Beetle
 
 Bugfixes
 ========

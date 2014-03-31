@@ -134,7 +134,6 @@ public class EntityWorkerBee extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, getNectarPoints(), DATA.nectar.ordinal()), 0.0F);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
 	public boolean isFlying() {
