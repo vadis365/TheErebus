@@ -13,7 +13,6 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 
 	@Override
 	protected boolean canPolinate(int blockID, int blockMeta) {
-		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		if (blockID == 0)
 			return false;
 
