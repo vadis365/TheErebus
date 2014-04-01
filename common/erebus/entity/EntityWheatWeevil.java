@@ -13,6 +13,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityWheatWeevil extends EntityCreature {
 
@@ -77,9 +79,58 @@ public class EntityWheatWeevil extends EntityCreature {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(Item.seeds, 1 + rand.nextInt(3)+looting), 0F);
-		if(rand.nextInt(10)==0) {
-			entityDropItem(new ItemStack(Item.wheat, 1 +looting), 0F);
+		int dropType = rand.nextInt(5);
+		switch(dropType) {
+		case 0:
+			entityDropItem(new ItemStack(ModItems.flowerSeeds, 1 + rand.nextInt(3) + looting, rand.nextInt(14)), 0F);
+			break;
+		case 1:
+			entityDropItem(new ItemStack(Item.seeds, 1 + rand.nextInt(3) + looting), 0F);
+			break;
+			
+		case 2:
+			entityDropItem(new ItemStack(Item.pumpkinSeeds, 1 + rand.nextInt(3) + looting), 0F);
+			break;
+			
+		case 3:
+			entityDropItem(new ItemStack(Item.melonSeeds, 1 + rand.nextInt(3) + looting), 0F);
+			break;
+			
+		case 4:
+			entityDropItem(new ItemStack(Item.dyePowder, 1 + rand.nextInt(3) + looting, 3), 0F);
+			break;
+		}
+
+		if(rand.nextInt(10) == 0) {
+			int dropRareishType = rand.nextInt(7);
+			switch(dropRareishType) {
+			case 0:
+				entityDropItem(new ItemStack(ModItems.turnip, 1 + looting), 0F);
+				break;
+			case 1:
+				entityDropItem(new ItemStack(Item.netherStalkSeeds, 1 + looting), 0F);
+				break;
+				
+			case 2:
+				entityDropItem(new ItemStack(Item.wheat, 1 + looting), 0F);
+				break;
+				
+			case 3:
+				entityDropItem(new ItemStack(Item.reed, 1 + looting), 0F);
+				break;
+				
+			case 4:
+				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.bambooShoot.ordinal()), 0F);
+				break;
+				
+			case 5:
+				entityDropItem(new ItemStack(Item.carrot, 1 + looting), 0F);
+				break;
+				
+			case 6:
+				entityDropItem(new ItemStack(Item.potato, 1 + looting), 0F);
+				break;
+			}
 		}
 	}
 }
