@@ -91,7 +91,53 @@ public class ItemArmorGlider extends ItemArmor {
 			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround) {
 				// Unimplemented for the time being.
 				// Method is fixed but rotations need working out!
-				// GL11.glRotatef(-60.0F, 1.0F, 0.0F, 0.0F);
+			     int yaw = (int)player.rotationYaw;
+		           if (yaw<0)
+		              yaw+=360;
+		           
+		           yaw+=22;
+		           yaw%=360;
+
+		           int facing = yaw/45;   //  360degrees divided by 45 == 8 zones
+		        
+		           float x = 0;
+		           float y = 0;
+		           switch (facing) {
+		           case 0:
+		        	   x=1;
+		        	   y=0;
+		        	   break;
+		           case 1:
+		        	   x=1;
+		        	   y=1;
+		        	   break;
+		           case 2:
+		        	   x=0;
+		        	   y=1;
+		        	   break;
+		           case 3:
+		        	   x=-1;
+		        	   y=1;
+		        	   break;
+		           case 4:
+		        	   x=-1;
+		        	   y=0;
+		        	   break;
+		           case 5:
+		        	   x=-1;
+		        	   y=-1;
+		        	   break;
+		           case 6:
+		        	   x=0;
+		        	   y=-1;
+		        	   break;
+		           case 7:
+		        	   x=1;
+		        	   y=-1;
+		        	   break;	 
+		         }
+		         GL11.glRotatef(60.0F, x, 0.0F, y);
+		         player.limbSwingAmount=0;
 			}
 		}
 	}
