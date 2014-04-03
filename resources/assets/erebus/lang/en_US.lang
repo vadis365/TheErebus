@@ -225,6 +225,7 @@ erebusStigma_item_13.name=White Flower Stigma
 tile.giantBulbCappedShroom.name=Giant Bulb Capped Mushroom
 tile.bulbCappedShroom.name=Bulb Capped Mushroom
 tile.honeyTreat.name=Honey Treat - much yum
+tile.erebus.jarOHoney.name=Jar O'Honey
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

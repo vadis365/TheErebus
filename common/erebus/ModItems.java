@@ -98,7 +98,7 @@ public class ModItems {
 		bucketHoney = new ItemBucketOfHoney(ConfigHandler.bucketHoneyID, ModBlocks.erebusHoneyBlock.blockID).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
 		homingBeecon = new ItemHomingBeecon(ConfigHandler.homingBeeconID).setUnlocalizedName("homingBeecon").setTextureName("paper");
 		flowerSeeds = new ItemErebusFlowerSeeds(ConfigHandler.flowerSeedsID).setUnlocalizedName("erebusFlowerSeeds");
-		
+
 		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
 		jadeLegs = new ItemJadeArmor(ConfigHandler.jadeLegsID, 2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
@@ -160,7 +160,6 @@ public class ModItems {
 		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
 			GameRegistry.registerItem(metalIngot, "erebus.metalIngot");
 		GameRegistry.registerItem(bamBucket, "erebus.bamBucket");
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(bamBucket, 1, 1), new ItemStack(bamBucket, 1, 0));
 		GameRegistry.registerItem(turnip, "erebus.turnips");
 		GameRegistry.registerItem(sprayCan, "erebus.sprayCan");
 		GameRegistry.registerItem(wandOfAnimation, "erebus.wandOfAnimation");
@@ -171,7 +170,7 @@ public class ModItems {
 		GameRegistry.registerItem(bucketHoney, "erebus.bucketHoney");
 		GameRegistry.registerItem(homingBeecon, "erebus.homingBeecon");
 		GameRegistry.registerItem(flowerSeeds, "erebus.erebusFlowerSeeds");
-		
+
 		GameRegistry.registerItem(jadeHelmet, "erebus.helmetJade");
 		GameRegistry.registerItem(jadeBody, "erebus.chestplateJade");
 		GameRegistry.registerItem(jadeLegs, "erebus.leggingsJade");
@@ -206,6 +205,8 @@ public class ModItems {
 		GameRegistry.registerItem(jumpBoots, "erebus.jumpBoots");
 		GameRegistry.registerItem(armorGlider, "erebus.armorGlider");
 
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(bamBucket, 1, 1), new ItemStack(bamBucket));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bamBucket, 1, 3), new ItemStack(bamBucket));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketHoney), new ItemStack(Item.bucketEmpty));
 	}
 

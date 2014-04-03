@@ -30,7 +30,7 @@ public class ConfigHandler {
 	public static int blockWitherWebID, extenderThingyID, bambooPoleID, umberstonePillarID, velocityBlockID, petrifiedWoodStairsID;
 	public static int wallErebusID, amberBrickStairsID, waspNestStairsID, spiderSpawnerID, jumpingSpiderSpawnerID, waspSpawnerID;
 	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID, erebusHoneyFluidID, mudID, mudBricksID, flowerPlantedID;
-	public static int giantBulbCappedMushroomID, bulbCappedMushroomID, honeyTreatID;
+	public static int giantBulbCappedMushroomID, bulbCappedMushroomID, honeyTreatID, jarOHoneyID;
 	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID, gneissStairsID;
 
 	// ITEMS
@@ -73,7 +73,7 @@ public class ConfigHandler {
 			hollowLogAcaciaID = config.getBlock("Block ID of Hollow Log", 2512).getInt(2512);
 			erebusFlowerID = config.getBlock("Block ID of Erebus Flower Blocks", 2582).getInt(2582);
 			erebusStigmaID = config.getBlock("Block ID of Erebus Stigma Blocks", 2601).getInt(2601);
-					
+
 			erebusGrassID = config.getBlock("Block ID of Erebus Grass", 2513).getInt(2513);
 			thornsID = config.getBlock("Block ID of Thorns", 2514).getInt(2514);
 			fernID = config.getBlock("Block ID of Ferns", 2515).getInt(2515);
@@ -118,7 +118,8 @@ public class ConfigHandler {
 			giantBulbCappedMushroomID = config.getBlock("Block ID of Giant Bulb Capped Mushroom", 2602).getInt(2602);
 			bulbCappedMushroomID = config.getBlock("Block ID of Bulb Capped Mushroom", 2603).getInt(2603);
 			honeyTreatID = config.getBlock("Block ID of Honey Treat", 2604).getInt(2604);
-			
+			jarOHoneyID = config.getBlock("Block ID of Jar O'Honey", 2605).getInt(2605);
+
 			int id = 2527;
 			umbercobbleStairsID = new int[BlockUmberstone.iconPaths.length];
 			for (int i = 0; i < umbercobbleStairsID.length; i++)
@@ -148,7 +149,7 @@ public class ConfigHandler {
 			jumpingSpiderSpawnerID = config.getBlock("Block ID of Jumping Spider Spawners", 2553).getInt(2553);
 			waspSpawnerID = config.getBlock("Block ID of Wasp Spawners", 2572).getInt(2572);
 
-			// latest ID used (please update after adding new blocks!) >>> 2604
+			// latest ID used (please update after adding new blocks!) >>> 2605
 
 			// Items
 			portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
@@ -168,7 +169,7 @@ public class ConfigHandler {
 			bucketHoneyID = config.getItem("Item ID of Bucket of Honey", 9751).getInt(9751);
 			homingBeeconID = config.getItem("Item ID of Homing Beecon", 9752).getInt(9752);
 			flowerSeedsID = config.getItem("Item ID of Giant Flower Seeds", 9753).getInt(9753);
-			
+
 			jadeHelmetID = config.getItem("Item ID of Jade Helmet", 9713).getInt(9713);
 			jadeBodyID = config.getItem("Item ID of Jade Chestplate", 9714).getInt(9714);
 			jadeLegsID = config.getItem("Item ID of Jade Leggings", 9715).getInt(9715);

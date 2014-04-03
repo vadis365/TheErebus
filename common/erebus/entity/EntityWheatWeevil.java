@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
 
@@ -35,14 +36,13 @@ public class EntityWheatWeevil extends EntityCreature {
 	public boolean isAIEnabled() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = this.getBrightness(1.0F);
-		if (light >= 0F) {
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(this.boundingBox);
-	    }
-	    return super.getCanSpawnHere();
+		float light = getBrightness(1.0F);
+		if (light >= 0F)
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		return super.getCanSpawnHere();
 	}
 
 	@Override
@@ -79,54 +79,54 @@ public class EntityWheatWeevil extends EntityCreature {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int dropType = rand.nextInt(5);
-		switch(dropType) {
+		switch (rand.nextInt(5)) {
 		case 0:
 			entityDropItem(new ItemStack(ModItems.flowerSeeds, 1 + rand.nextInt(3) + looting, rand.nextInt(14)), 0F);
 			break;
 		case 1:
-			entityDropItem(new ItemStack(Item.seeds, 1 + rand.nextInt(3) + looting), 0F);
+			ItemStack seed = ForgeHooks.getGrassSeed(worldObj);
+			seed.stackSize = 1 + rand.nextInt(3) + looting;
+			entityDropItem(seed, 0F);
 			break;
-			
 		case 2:
 			entityDropItem(new ItemStack(Item.pumpkinSeeds, 1 + rand.nextInt(3) + looting), 0F);
 			break;
-			
+
 		case 3:
 			entityDropItem(new ItemStack(Item.melonSeeds, 1 + rand.nextInt(3) + looting), 0F);
 			break;
-			
+
 		case 4:
 			entityDropItem(new ItemStack(Item.dyePowder, 1 + rand.nextInt(3) + looting, 3), 0F);
 			break;
 		}
 
-		if(rand.nextInt(10) == 0) {
+		if (rand.nextInt(10) == 0) {
 			int dropRareishType = rand.nextInt(7);
-			switch(dropRareishType) {
+			switch (dropRareishType) {
 			case 0:
 				entityDropItem(new ItemStack(ModItems.turnip, 1 + looting), 0F);
 				break;
 			case 1:
 				entityDropItem(new ItemStack(Item.netherStalkSeeds, 1 + looting), 0F);
 				break;
-				
+
 			case 2:
 				entityDropItem(new ItemStack(Item.wheat, 1 + looting), 0F);
 				break;
-				
+
 			case 3:
 				entityDropItem(new ItemStack(Item.reed, 1 + looting), 0F);
 				break;
-				
+
 			case 4:
 				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.bambooShoot.ordinal()), 0F);
 				break;
-				
+
 			case 5:
 				entityDropItem(new ItemStack(Item.carrot, 1 + looting), 0F);
 				break;
-				
+
 			case 6:
 				entityDropItem(new ItemStack(Item.potato, 1 + looting), 0F);
 				break;

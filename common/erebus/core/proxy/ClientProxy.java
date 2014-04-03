@@ -216,7 +216,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBotFlyLarva.class, new RenderBotFlyLarva());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySporeling.class, new RenderSporeling(new ModelSporeling(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWheatWeevil.class, new RenderWheatWeevil(new ModelWheatWeevil(), 0.3F));
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarHealing.class, new TileEntityErebusAltarHealingRenderer());
@@ -232,7 +232,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBones.class, new TileEntityBoneBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooPole.class, new TileEntityBambooPoleRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtenderThingy.class, new TileEntityExtenderThingyRenderer());
-	
+
 		RenderingRegistry.registerBlockHandler(bambooCropRenderID, new BlockBambooCropRender());
 		RenderingRegistry.registerBlockHandler(hollowLogRenderID, new BlockHollowLogRender());
 
@@ -256,7 +256,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.bambooBridge.blockID, new BambooBridgeItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.extenderThingy.blockID, new ExtenderThingyItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.bambooPole.blockID, new BambooPoleItemRenderer());
-
+		MinecraftForgeClient.registerItemRenderer(ModBlocks.jarOHoney.blockID, new ItemGlowingJarRenderer());
 	}
 
 	@Override

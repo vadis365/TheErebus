@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
@@ -28,12 +27,27 @@ public class ItemBambucket extends Item {
 	public Icon waterBambucket;
 	public Icon bambucketOfBeetleJuice;
 	public Icon bambucketHoney;
-	
+
 	public ItemBambucket(int id) {
 		super(id);
 		maxStackSize = 16;
 		setHasSubtypes(true);
 		setMaxDamage(0);
+	}
+
+	@Override
+	public boolean hasContainerItem() {
+		return true;
+	}
+
+	@Override
+	public Item getContainerItem() {
+		return this;
+	}
+
+	@Override
+	public ItemStack getContainerItemStack(ItemStack stack) {
+		return new ItemStack(this);
 	}
 
 	@Override
@@ -74,7 +88,7 @@ public class ItemBambucket extends Item {
 
 					return is;
 				}
-				
+
 				if (world.getBlockMaterial(i, j, k) == ModMaterials.honey && world.getBlockMetadata(i, j, k) == 0) {
 					world.setBlockToAir(i, j, k);
 
@@ -87,8 +101,8 @@ public class ItemBambucket extends Item {
 					if (!player.inventory.addItemStackToInventory(new ItemStack(itemID, 1, 3)))
 						player.dropPlayerItem(new ItemStack(itemID, 1, 3));
 
-					return is;	
-			}
+					return is;
+				}
 			} else {
 				if (is.getItemDamage() < 0)
 					return new ItemStack(itemID, 1, 0);
@@ -130,11 +144,10 @@ public class ItemBambucket extends Item {
 
 			if (!world.isRemote)
 				player.curePotionEffects(new ItemStack(Item.bucketMilk));
-			
-			if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva) {
-				if(((EntityBotFlyLarva) player.riddenByEntity).getParasiteCount()>0)
+
+			if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva)
+				if (((EntityBotFlyLarva) player.riddenByEntity).getParasiteCount() > 0)
 					((EntityBotFlyLarva) player.riddenByEntity).setABitDead();
-			}
 
 			player.inventory.addItemStackToInventory(new ItemStack(ModItems.bamBucket));
 			return is;
@@ -156,12 +169,10 @@ public class ItemBambucket extends Item {
 			} else {
 				if (!world.isRemote && flag && !material.isLiquid())
 					world.destroyBlock(x, y, z, true);
-			if (item.getItemDamage() == 1) {
-				world.setBlock(x, y, z, Block.waterMoving.blockID, 0, 3);
-			}
-			else if (item.getItemDamage() == 3) {
-				world.setBlock(x, y, z, ModBlocks.erebusHoneyBlock.blockID, 0, 3);
-				}
+				if (item.getItemDamage() == 1)
+					world.setBlock(x, y, z, Block.waterMoving.blockID, 0, 3);
+				else if (item.getItemDamage() == 3)
+					world.setBlock(x, y, z, ModBlocks.erebusHoneyBlock.blockID, 0, 3);
 			}
 		return true;
 	}
@@ -197,16 +208,16 @@ public class ItemBambucket extends Item {
 	@Override
 	public Icon getIconFromDamage(int meta) {
 		switch (meta) {
-			case 0:
-				return bambucket;
-			case 1:
-				return waterBambucket;
-			case 2:
-				return bambucketOfBeetleJuice;
-			case 3:
-				return bambucketHoney;
-			default:
-				return null;
+		case 0:
+			return bambucket;
+		case 1:
+			return waterBambucket;
+		case 2:
+			return bambucketOfBeetleJuice;
+		case 3:
+			return bambucketHoney;
+		default:
+			return null;
 		}
 	}
 

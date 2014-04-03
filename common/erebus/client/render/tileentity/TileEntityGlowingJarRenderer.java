@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.client.model.block.ModelGlowingJar;
+import erebus.tileentity.TileEntityJarOHoney;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
@@ -34,14 +35,18 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
-		EntityItem ghostEntityItem = new EntityItem(tile.worldObj);
-		ghostEntityItem.hoverStart = 0.0F;
-		ghostEntityItem.setEntityItemStack(glowThingy);
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
-		GL11.glScalef(1.2F, 1.2F, 1.2F);
-		renderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
-		GL11.glPopMatrix();
+		if (tile instanceof TileEntityJarOHoney) {
+			// TODO render honey or whatever
+		} else {
+			EntityItem ghostEntityItem = new EntityItem(tile.worldObj);
+			ghostEntityItem.hoverStart = 0.0F;
+			ghostEntityItem.setEntityItemStack(glowThingy);
+			GL11.glPushMatrix();
+			GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
+			GL11.glScalef(1.2F, 1.2F, 1.2F);
+			renderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
+			GL11.glPopMatrix();
+		}
 
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/glowingJar.png"));
 		GL11.glPushMatrix();

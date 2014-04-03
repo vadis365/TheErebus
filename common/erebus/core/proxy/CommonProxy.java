@@ -42,6 +42,7 @@ import erebus.tileentity.TileEntityErebusAltarRepair;
 import erebus.tileentity.TileEntityErebusAltarXP;
 import erebus.tileentity.TileEntityExtenderThingy;
 import erebus.tileentity.TileEntityGlowingJar;
+import erebus.tileentity.TileEntityJarOHoney;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import erebus.tileentity.TileEntitySpawner;
@@ -88,6 +89,7 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityBones.class, "Block o' Bones (Erebus)");
 		GameRegistry.registerTileEntity(TileEntityExtenderThingy.class, "erebus.extenderThingy");
 		GameRegistry.registerTileEntity(TileEntityBambooPole.class, "erebus.bambooPole");
+		GameRegistry.registerTileEntity(TileEntityJarOHoney.class, "erebus.jarOHoney");
 	}
 
 	public void handleParticlePacket(INetworkManager manager, Packet250CustomPayload packet, EntityPlayer player, ByteArrayDataInput data) {
