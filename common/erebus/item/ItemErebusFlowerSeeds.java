@@ -3,8 +3,10 @@ package erebus.item;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,15 +15,16 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.core.helper.Utils;
 
 public class ItemErebusFlowerSeeds extends Item {
 
-	public static final String[] iconPaths = new String[] { "flowerSeedBlack", "flowerSeedRed", "flowerSeedBrown", "flowerSeedBlue", "flowerSeedPurple", "flowerSeedCyan", "flowerSeedLtGray", "flowerSeedGray", "flowerSeedPink", "flowerSeedYellow", "flowerSeedLtBlue", "flowerSeedMagenta", "flowerSeedOrange", "flowerSeedWhite"};
-
-	public static final short dataFlowerSeedBlack = 0, dataFlowerSeedRed = 1, dataFlowerSeedBrown = 2, dataFlowerSeedBlue = 3, dataFlowerSeedPurple = 4, dataFlowerSeedCyan = 5, dataFlowerSeedLtGray = 6, dataFlowerSeedGray = 7, dataFlowerSeedPink = 8, dataFlowerSeedYellow = 9, dataFlowerSeedLtBlue = 10, dataFlowerSeedMagenta = 11, dataFlowerSeedOrange = 12, dataFlowerSeedWhite = 13;
+	public enum SEED_TYPE {
+		BLACK, RED, BROWN, BLUE, PURPLE, CYAN, LIGHT_GRAY, GRAY, PINK, YELLOW, LIGHT_BLUE, MAGENTA, ORANGE, WHITE, RAINBOW;
+	}
 
 	@SideOnly(Side.CLIENT)
-	public static Icon[] icons;
+	public Icon normal, rainbow;
 
 	public ItemErebusFlowerSeeds(int id) {
 		super(id);
@@ -29,15 +32,22 @@ public class ItemErebusFlowerSeeds extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack stack, int pass) {
+		float[] colour = EntitySheep.fleeceColorTable[BlockColored.getBlockFromDye(Utils.getFlowerMetadata(stack))];
+		return Utils.getColour((int) (colour[0] * 255), (int) (colour[1] * 255), (int) (colour[2] * 255));
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (side != 1)
 			return false;
-		else if (player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
+		else if (player.canPlayerEdit(x, y, z, side, stack) && player.canPlayerEdit(x, y + 1, z, side, stack)) {
 			int block = world.getBlockId(x, y, z);
 			Block soil = Block.blocksList[block];
 			if (soil != null && soil.blockID == Block.grass.blockID && world.isAirBlock(x, y + 1, z)) {
-				world.setBlock(x, y + 1, z, ModBlocks.flowerPlanted.blockID, is.getItemDamage(), 3);
-				--is.stackSize;
+				world.setBlock(x, y + 1, z, ModBlocks.flowerPlanted.blockID, stack.getItemDamage(), 3);
+				stack.stackSize--;
 				return true;
 			} else
 				return false;
@@ -46,30 +56,25 @@ public class ItemErebusFlowerSeeds extends Item {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister) {
-		icons = new Icon[iconPaths.length];
-		int i = 0;
-		for (String path : iconPaths)
-			icons[i++] = iconRegister.registerIcon("erebus:" + path);
+	public void registerIcons(IconRegister reg) {
+		normal = reg.registerIcon("erebus:flowerSeed0");
+		rainbow = reg.registerIcon("erebus:flowerSeed1");
 	}
 
 	@Override
 	public Icon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= icons.length)
-			return null;
-		return icons[meta];
+		return meta == SEED_TYPE.RAINBOW.ordinal() ? rainbow : normal;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int id, CreativeTabs tab, List list) {
-		for (int a = 0; a < iconPaths.length; a++)
-			list.add(new ItemStack(id, 1, a));
+		for (int i = 0; i < SEED_TYPE.values().length; i++)
+			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack is) {
-		int i = is.getItemDamage();
-		return super.getUnlocalizedName() + "." + i;
+	public String getUnlocalizedName(ItemStack stack) {
+		return super.getUnlocalizedName() + "." + stack.getItemDamage();
 	}
 }

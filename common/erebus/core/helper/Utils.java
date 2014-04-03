@@ -10,6 +10,21 @@ import net.minecraft.world.World;
 
 public class Utils {
 
+	public static final int getFlowerMetadata(Object obj) {
+		int meta = -1;
+		if (obj instanceof ItemStack)
+			meta = ((ItemStack) obj).getItemDamage();
+		else if (obj instanceof Integer)
+			meta = (Integer) obj;
+
+		if (meta >= 2 && meta <= 8 || meta == 14)
+			meta++;
+		else if (meta >= 9 && meta <= 13)
+			meta += 2;
+
+		return meta;
+	}
+
 	public static final void dropStack(World world, int x, int y, int z, ItemStack is) {
 		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
 			float f = 0.7F;
