@@ -6,11 +6,12 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import erebus.ModBlocks;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
 public class BlockHollowLogRender implements ISimpleBlockRenderingHandler {
+
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		float pixel = 0.0625F;
@@ -63,6 +64,6 @@ public class BlockHollowLogRender implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return Erebus.proxy.hollowLogRenderID;
+		return BlockRenderIDs.HOLLOW_LOG.id();
 	}
 }

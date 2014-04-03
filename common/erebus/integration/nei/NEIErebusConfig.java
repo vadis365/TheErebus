@@ -19,6 +19,7 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.hideItem(ModBlocks.blockTurnip.blockID);
 		API.hideItem(ModBlocks.insectRepellent.blockID);
 		API.hideItem(ModBlocks.umberFurnace_on.blockID);
+		API.hideItem(ModBlocks.flowerPlanted.blockID);
 	}
 
 	@Override

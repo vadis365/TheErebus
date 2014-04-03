@@ -22,7 +22,7 @@ import erebus.core.helper.Utils;
 
 public class BlockErebusFlower extends Block {
 
-	public enum FLOWER_BLOCK_TYPE {
+	public enum FLOWER_TYPE {
 		EXPLODING_STIGMA, STEM, BLACK_PETAL, RED_PETAL, BROWN_PETAL, BLUE_PETAL, PURPLE_PETAL, CYAN_PETAL, LIGHT_GRAY_PETAL, GRAY_PETAL, PINK_PETAL, YELLOW_PETAL, LIGHT_BLUE_PETAL, MAGENTA_PETAL, ORANGE_PETAL, WHITE_PETAL
 	}
 
@@ -45,7 +45,7 @@ public class BlockErebusFlower extends Block {
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
-		if (meta == FLOWER_BLOCK_TYPE.EXPLODING_STIGMA.ordinal())
+		if (meta == FLOWER_TYPE.EXPLODING_STIGMA.ordinal())
 			world.createExplosion(player, x, y, z, 3, world.getGameRules().getGameRuleBooleanValue("mobGriefing"));
 	}
 
@@ -53,7 +53,7 @@ public class BlockErebusFlower extends Block {
 	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int meta, int fortune) {
 		ArrayList<ItemStack> ret = super.getBlockDropped(world, x, y, z, meta, fortune);
 
-		if (meta == FLOWER_BLOCK_TYPE.EXPLODING_STIGMA.ordinal())
+		if (meta == FLOWER_TYPE.EXPLODING_STIGMA.ordinal())
 			ret.add(new ItemStack(Item.gunpowder));
 		else
 			ret.add(new ItemStack(blockID, 1 + new Random().nextInt(3), meta));
@@ -70,6 +70,9 @@ public class BlockErebusFlower extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderColor(int meta) {
+		if (meta == FLOWER_TYPE.EXPLODING_STIGMA.ordinal() || meta == FLOWER_TYPE.STEM.ordinal())
+			return super.getRenderColor(meta);
+
 		float[] colour = EntitySheep.fleeceColorTable[BlockColored.getBlockFromDye(Utils.getFlowerMetadata(meta - 2))];
 		return Utils.getColour((int) (colour[0] * 255), (int) (colour[1] * 255), (int) (colour[2] * 255));
 	}

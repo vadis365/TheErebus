@@ -38,6 +38,7 @@ import erebus.client.model.entity.ModelUmberGolem;
 import erebus.client.model.entity.ModelWheatWeevil;
 import erebus.client.render.block.BlockBambooCropRender;
 import erebus.client.render.block.BlockHollowLogRender;
+import erebus.client.render.block.BlockPlantedFlowerRender;
 import erebus.client.render.entity.RenderAnimatedBlock;
 import erebus.client.render.entity.RenderAnimatedChest;
 import erebus.client.render.entity.RenderAntlion;
@@ -166,6 +167,21 @@ import erebus.tileentity.TileEntitySpawner;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
 public class ClientProxy extends CommonProxy {
+
+	public enum BlockRenderIDs {
+		BAMBOO_CROP, HOLLOW_LOG, PLANTED_FLOWER;
+
+		private final int ID;
+
+		BlockRenderIDs() {
+			ID = RenderingRegistry.getNextAvailableRenderId();
+		}
+
+		public int id() {
+			return ID;
+		}
+	}
+
 	@Override
 	public void registerKeyHandlers() {
 		KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
@@ -233,8 +249,9 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooPole.class, new TileEntityBambooPoleRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtenderThingy.class, new TileEntityExtenderThingyRenderer());
 
-		RenderingRegistry.registerBlockHandler(bambooCropRenderID, new BlockBambooCropRender());
-		RenderingRegistry.registerBlockHandler(hollowLogRenderID, new BlockHollowLogRender());
+		RenderingRegistry.registerBlockHandler(BlockRenderIDs.BAMBOO_CROP.id(), new BlockBambooCropRender());
+		RenderingRegistry.registerBlockHandler(BlockRenderIDs.HOLLOW_LOG.id(), new BlockHollowLogRender());
+		RenderingRegistry.registerBlockHandler(BlockRenderIDs.PLANTED_FLOWER.id(), new BlockPlantedFlowerRender());
 
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.bambooCrate.blockID, new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.erebusAltar.blockID, new ItemErebusAltarRenderer());

@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import erebus.ModItems;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class BlockBambooCrop extends Block {
@@ -63,7 +63,7 @@ public class BlockBambooCrop extends Block {
 
 	@Override
 	public int getRenderType() {
-		return Erebus.proxy.bambooCropRenderID;
+		return BlockRenderIDs.BAMBOO_CROP.id();
 	}
 
 	@Override

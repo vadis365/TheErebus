@@ -20,15 +20,17 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
 
 public class BlockPlantedGiantFlower extends BlockSapling {
 
-	public static final String[] flowerTypes = new String[] { "Black", "Red", "Brown", "Blue", "Purple", "Cyan", "LtGray", "Gray", "Pink", "Yellow", "LtBlue", "Magenta", "Orange", "White"  };
-	public static final byte dataBlack = 0, dataRed = 1, dataBrown = 2, dataBlue = 3, dataPurple = 4, dataCyan = 5, dataLtGray = 6, dataGray = 7, dataPink = 8, dataYellow = 9, dataLtBlue = 10, dataMagenta = 11, dataOrange = 12, dataWhite = 13;
+	public enum FLOWER_TYPE {
+		BLACK, RED, BROWN, BLUE, PURPLE, CYAN, LIGHT_GRAY, GRAY, PINK, YELLOW, LIGHT_BLUE, MAGENTA, ORANGE, WHITE, RAINBOW
+	}
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] iconArray;
+	private Icon main, petals, rainbowPetals;
 
 	public BlockPlantedGiantFlower(int id) {
 		super(id);
@@ -59,8 +61,8 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	public void growTree(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = new WorldGenGiantFlowers();
-		if (meta >=0 && meta <=13)
-			((WorldGenGiantFlowers) worldGen).setFlowerColor(meta+2);
+		if (meta >= 0 && meta <= 13)
+			((WorldGenGiantFlowers) worldGen).setFlowerColor(meta + 2);
 		world.setBlockToAir(x, y, z);
 		if (!worldGen.generate(world, rand, x, y, z))
 			world.setBlock(x, y, z, ModBlocks.flowerPlanted.blockID, meta, 3);
@@ -69,14 +71,25 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
-		return iconArray[meta < 0 || meta >= iconArray.length ? 0 : meta];
+		return side == 0 ? main : meta == FLOWER_TYPE.RAINBOW.ordinal() ? rainbowPetals : petals;
+	}
+
+	@Override
+	public int getRenderType() {
+		return BlockRenderIDs.PLANTED_FLOWER.id();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int idPicked(World world, int x, int y, int z) {
+		return ModItems.flowerSeeds.itemID;
 	}
 
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
 	}
-	
+
 	@Override
 	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int meta, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
@@ -87,17 +100,16 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int id, CreativeTabs creativeTabs, List list) {
-		for (int a = 0; a < flowerTypes.length; a++)
-			list.add(new ItemStack(id, 1, a));
+		for (int i = 0; i < FLOWER_TYPE.values().length; i++)
+			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		iconArray = new Icon[flowerTypes.length];
-
-		for (int i = 0; i < iconArray.length; i++)
-			iconArray[i] = iconRegister.registerIcon("erebus:flowerPlanted" + flowerTypes[i]);
+	public void registerIcons(IconRegister reg) {
+		main = reg.registerIcon("erebus:flowerPlanted0");
+		petals = reg.registerIcon("erebus:flowerPlanted1");
+		rainbowPetals = reg.registerIcon("erebus:flowerPlanted2");
 	}
 
 	@ForgeSubscribe
