@@ -30,8 +30,8 @@ public class ItemBeeTamingAmulet extends Item {
 				list.add("Honey Comb Block Z: "+is.getTagCompound().getInteger("homeZ"));
 			}
 			else {
-				list.add("Click on Honey Comb Block");
-				list.add("to set as target for Bee.");
+				list.add("Click on a Chest to set");
+				list.add("as target for Bee drops.");
 				list.add("Then click on Bee to tame.");
 			}
 	}
