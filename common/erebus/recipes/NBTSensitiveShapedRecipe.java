@@ -65,7 +65,7 @@ public class NBTSensitiveShapedRecipe extends ShapedRecipes {
 	private boolean checkNBTs(ItemStack stack1, ItemStack stack2) {
 		if (stack1.hasTagCompound() && stack2.hasTagCompound())
 			return stack1.stackTagCompound.equals(stack2.stackTagCompound);
-		return true;
+		return stack1.hasTagCompound() == stack2.hasTagCompound();
 	}
 
 	public static NBTSensitiveShapedRecipe makeRecipe(ItemStack result, Object... recipe) {
