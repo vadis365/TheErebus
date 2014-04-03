@@ -8,7 +8,7 @@ import erebus.ModBlocks;
 
 public class TileEntityJarOHoney extends TileEntityGlowingJar {
 
-	public static final int HONEY_MAX_AMOUNT = 1000;
+	public static final int HONEY_MAX_AMOUNT = 4000;
 	private final FluidTank tank = new FluidTank(ModBlocks.erebusHoney, 0, HONEY_MAX_AMOUNT);
 
 	public int addHoney(int amount) {
