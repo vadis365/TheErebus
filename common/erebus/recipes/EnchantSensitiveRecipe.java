@@ -9,10 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import erebus.core.helper.Utils;
 
-public class NBTSensitiveShapedRecipe extends ShapedRecipes {
+public class EnchantSensitiveRecipe extends ShapedRecipes {
 
-	public NBTSensitiveShapedRecipe(int width, int height, ItemStack[] items, ItemStack result) {
+	public EnchantSensitiveRecipe(int width, int height, ItemStack[] items, ItemStack result) {
 		super(width, height, items, result);
 	}
 
@@ -54,7 +55,7 @@ public class NBTSensitiveShapedRecipe extends ShapedRecipes {
 					if (stack.getItemDamage() != OreDictionary.WILDCARD_VALUE && stack.getItemDamage() != stack2.getItemDamage())
 						return false;
 
-					if (!checkNBTs(stack, stack2))
+					if (!checkEnchants(stack, stack2))
 						return false;
 				}
 			}
@@ -62,13 +63,13 @@ public class NBTSensitiveShapedRecipe extends ShapedRecipes {
 		return true;
 	}
 
-	private boolean checkNBTs(ItemStack stack1, ItemStack stack2) {
+	private boolean checkEnchants(ItemStack stack1, ItemStack stack2) {
 		if (stack1.hasTagCompound() && stack2.hasTagCompound())
-			return stack1.stackTagCompound.equals(stack2.stackTagCompound);
+			return Utils.getEnchantments(stack1).equals(Utils.getEnchantments(stack2));
 		return stack1.hasTagCompound() == stack2.hasTagCompound();
 	}
 
-	public static NBTSensitiveShapedRecipe makeRecipe(ItemStack result, Object... recipe) {
+	public static EnchantSensitiveRecipe makeRecipe(ItemStack result, Object... recipe) {
 		String s = "";
 		int i = 0;
 		int width = 0;
@@ -118,6 +119,6 @@ public class NBTSensitiveShapedRecipe extends ShapedRecipes {
 				aitemstack[i1] = null;
 		}
 
-		return new NBTSensitiveShapedRecipe(width, height, aitemstack, result);
+		return new EnchantSensitiveRecipe(width, height, aitemstack, result);
 	}
 }

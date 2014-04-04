@@ -1,10 +1,14 @@
 package erebus.core.helper;
 
 import java.awt.Color;
+import java.util.LinkedHashMap;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -99,5 +103,18 @@ public class Utils {
 			return true;
 		else
 			return stack1.getTagCompound().equals(stack2.getTagCompound());
+	}
+
+	public static final LinkedHashMap<Short, Short> getEnchantments(ItemStack stack) {
+		LinkedHashMap<Short, Short> map = new LinkedHashMap<Short, Short>();
+		NBTTagList list = stack.itemID == Item.enchantedBook.itemID ? Item.enchantedBook.func_92110_g(stack) : stack.getEnchantmentTagList();
+
+		if (list != null)
+			for (int i = 0; i < list.tagCount(); i++) {
+				NBTTagCompound tag = (NBTTagCompound) list.tagAt(i);
+				map.put(tag.getShort("id"), tag.getShort("lvl"));
+			}
+
+		return map;
 	}
 }
