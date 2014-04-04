@@ -45,14 +45,18 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 			GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
 			GL11.glScalef(1.2F, 1.2F, 1.2F);
 			renderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
+			GL11.glRotatef(90, 0, 1, 0);
+			renderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
 			GL11.glPopMatrix();
 		}
 
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/glowingJar.png"));
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
 		GL11.glScalef(0.7F, -1F, -0.7F);
+		GL11.glDisable(GL11.GL_CULL_FACE);
 		glowingJar.render();
+		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glPopMatrix();
 	}
 }

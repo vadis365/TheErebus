@@ -54,7 +54,8 @@ public class BlockErebusHoney extends BlockFluidClassic {
 
 	@ForgeSubscribe
 	public void postStitch(TextureStitchEvent.Post event) {
-		ModBlocks.erebusHoney.setIcons(getBlockTextureFromSide(0), getBlockTextureFromSide(1));
+		if (event.map.textureType == 0)
+			ModBlocks.erebusHoney.setIcons(getBlockTextureFromSide(0), getBlockTextureFromSide(1));
 	}
 
 	@Override
