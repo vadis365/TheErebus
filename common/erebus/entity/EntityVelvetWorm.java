@@ -1,59 +1,38 @@
 package erebus.entity;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class EntityVelvetWorm extends EntityMob implements IRangedAttackMob {
+public class EntityVelvetWorm extends EntityMob {
 
-	private final EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 0.25F, 20, 60, 15.0F);
-	public int skin = rand.nextInt(99);
-
+public int skin = rand.nextInt(99);
+	private int shouldDo;
+	
 	public EntityVelvetWorm(World world) {
 		super(world);
-		setSize(0.9F, 0.9F);
+		setSize(2F, 0.7F);
 		getNavigator().setAvoidsWater(false);
 		experienceValue = 15; 
 		fireResistance = 10;
 		isImmuneToFire = false;
-		tasks.addTask(0, new EntityAISwimming(this));
-		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(5, new EntityAIWander(this, 0.5D));
-		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-
-		if (world != null && !world.isRemote)
-			tasks.addTask(4, aiArrowAttack);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-	}
-
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		dataWatcher.addObject(20, new Integer(0));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(getAttackStrength()); // atkDmg
 	}
 
@@ -65,18 +44,26 @@ public class EntityVelvetWorm extends EntityMob implements IRangedAttackMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+		if(getEntityToAttack() !=null) {
+			if(getInflateSize()<100)
+				setInflateSize(getInflateSize()+2);
+		
+		if(getEntityToAttack() == null)
+			setInflateSize(0);
+		}
 	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-
-	public String getTexture() {
-		if (skin <= 10)
-			return "/Erebus/Textures/Mob/Velvet worm2.png";
-		else
-			return "/Erebus/Textures/Mob/Velvet worm.png";
+	
+	@Override
+	public void setInWeb() {
+	}
+	
+	protected String getWebSlingThrowSound() {
+		return "erebus:webslingthrow";
 	}
 
 	public double getAttackStrength() {
@@ -93,24 +80,48 @@ public class EntityVelvetWorm extends EntityMob implements IRangedAttackMob {
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		if (super.attackEntityAsMob(entity))
-			return true;
-		else
-			return false;
-	}
-
-	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		int chanceFiftyFifty = rand.nextInt(1) + 1;
+		int chanceFiftyFifty = rand.nextInt(2) + 1;
 
 		dropItem(Item.slimeBall.itemID, chanceFiftyFifty + par2);
 	}
+	
+	@Override
+	protected Entity findPlayerToAttack() {
+		float f = getBrightness(1.0F);
+		if (f < 0.5F) {
+			double d0 = 16.0D;
+			return worldObj.getClosestVulnerablePlayerToEntity(this, d0);
+		} else
+			return null;
+	}
 
 	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase entityLiving, float par2) {
-		EntityArrow entityarrow = new EntityArrow(worldObj, this, entityLiving, 1.0F, 14 - worldObj.difficultySetting * 4);
-		entityarrow.setDamage(par2 * 2.0F + rand.nextGaussian() * 0.25D + worldObj.difficultySetting * 0.11F);
-		worldObj.spawnEntityInWorld(entityarrow);
+	protected void attackEntity(Entity entity, float distance) {
+		if (distance < 2.0F) {
+			setInflateSize(0);
+			super.attackEntity(entity, distance);
+			attackEntityAsMob(entity);
+		}
+
+		if (distance >= 2.0F & distance < 16.0F)
+			if (entity instanceof EntityPlayer && getInflateSize()>=100) {
+				worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
+				setInflateSize(0);
+				for (int var10 = 0; var10 < 1; ++var10) {
+					EntityWebSling var11 = new EntityWebSling(worldObj, this);
+					var11.posY = posY + height / 2.0F + 0.5D;
+					var11.setType((byte) 0);
+					worldObj.spawnEntityInWorld(var11);
+				}
+			}
+		}
+
+	public void setInflateSize(int size) {
+		dataWatcher.updateObject(20, Integer.valueOf(size));
+	}
+	
+	public int getInflateSize() {
+		return  dataWatcher.getWatchableObjectInt(20);
 	}
 }

@@ -38,7 +38,9 @@ public class RenderVelvetWorm extends RenderLiving {
 
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityLiving, float par2) {
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
+		EntityVelvetWorm worm = (EntityVelvetWorm) entityLiving;
+		int size = worm.getInflateSize();
+		GL11.glScalef((float) (size*0.005 +1F),(float) (size*0.005 +1F), (float) (-size*0.0025 +1F));
 	}
 
 	@Override
