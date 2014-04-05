@@ -38,6 +38,7 @@ import erebus.entity.EntitySporeling;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityUmberGolem;
+import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWaspDagger;
 import erebus.entity.EntityWebSling;
@@ -87,6 +88,7 @@ public class ModEntities {
 		EntityList.stringToClassMapping.put("BotFlyLarva - Erebus", EntityBotFlyLarva.class);
 		EntityList.stringToClassMapping.put("Sporeling - Erebus", EntitySporeling.class);
 		EntityList.stringToClassMapping.put("WheatWeevil - Erebus", EntityWheatWeevil.class);
+		EntityList.stringToClassMapping.put("VelvetWorm - Erebus", EntityVelvetWorm.class);
 		
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "BeetleLarva", -1251634, -13032944);
@@ -113,7 +115,7 @@ public class ModEntities {
 		registerEntity(21, EntityJumpingSpider.class, "JumpingSpider", 0xE82066, 0x06B900);
 		registerEntity(22, EntityFireAnt.class, "FireAnt", 0xFF0000, 0xFFEE00);
 		registerEntity(23, EntityWorkerBee.class, "WorkerBee", 0xFFA200, 0x000000);
-		//registerEntity(24, EntityVelvetWorm.class, "VelvetWorm", 894731, 000000);
+		registerEntity(24, EntityVelvetWorm.class, "VelvetWorm", 894731, 000000);
 		registerEntity(25, EntityDragonfly.class, "Dragonfly", 894731, 000000);
 		registerEntity(26, EntityBloodSnail.class, "BloodSnail", 000000, 000000);
 		registerEntity(27, EntityTitanBeetle.class, "TitanBeetle", 000000, 000000);
