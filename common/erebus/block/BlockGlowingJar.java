@@ -14,8 +14,9 @@ public class BlockGlowingJar extends BlockContainer {
 
 	public BlockGlowingJar(int id) {
 		super(id, Material.glass);
-		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);
 		setLightValue(1.0F);
+		setStepSound(soundGlassFootstep);
+		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);
 	}
 
 	@Override
@@ -45,11 +46,6 @@ public class BlockGlowingJar extends BlockContainer {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return world.doesBlockHaveSolidTopSurface(x, y - 1, z) || BlockFence.isIdAFence(world.getBlockId(x, y - 1, z)) || isIdAJar(world.getBlockId(x, y - 1, z));
-	}
-
-	public static boolean isIdAJar(int id) {
-		Block block = Block.blocksList[id];
-		return block instanceof BlockGlowingJar;
+		return world.doesBlockHaveSolidTopSurface(x, y - 1, z) || BlockFence.isIdAFence(world.getBlockId(x, y - 1, z)) || Block.blocksList[world.getBlockId(x, y - 1, z)] instanceof BlockGlowingJar;
 	}
 }
