@@ -48,7 +48,8 @@ public class ItemErebusMaterial extends Item {
 		nectar,
 		honeyDrip,
 		poisonGland,
-		mudBrick;
+		mudBrick,
+		whetstonePowder,
 	}
 	// @formatter:on
 
@@ -140,4 +141,14 @@ public class ItemErebusMaterial extends Item {
 		int i = is.getItemDamage();
 		return super.getUnlocalizedName() + "." + i;
 	}
+	
+	@Override
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack is, int pass) {
+		int damage = is.getItemDamage();
+		if(damage == DATA.whetstonePowder.ordinal())
+			return true;
+
+		return false;	
+    }
 }

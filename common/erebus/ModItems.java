@@ -47,6 +47,7 @@ import erebus.item.ItemWandOfAnimation;
 import erebus.item.ItemWaspDagger;
 import erebus.item.ItemWaspSword;
 import erebus.item.ItemWebSlinger;
+import erebus.item.ItemWhetstone;
 import erebus.item.block.ItemBlockDoorAmber;
 
 public class ModItems {
@@ -54,7 +55,7 @@ public class ModItems {
 	// BASIC MATERIALS
 	public static Item portalActivator, erebusMaterials, erebusFood, metalIngot, bamBucket, turnip, sprayCan, wandOfAnimation;
 	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor, nectarCollector, beeTamingAmulet, bucketHoney;
-	public static Item homingBeecon, flowerSeeds;
+	public static Item homingBeecon, flowerSeeds, whetstone;
 
 	// JADE STUFF
 	public static Item jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe;
@@ -98,6 +99,7 @@ public class ModItems {
 		bucketHoney = new ItemBucketOfHoney(ConfigHandler.bucketHoneyID, ModBlocks.erebusHoneyBlock.blockID).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
 		homingBeecon = new ItemHomingBeecon(ConfigHandler.homingBeeconID).setUnlocalizedName("homingBeecon").setTextureName("paper");
 		flowerSeeds = new ItemErebusFlowerSeeds(ConfigHandler.flowerSeedsID).setUnlocalizedName("erebusFlowerSeeds");
+		whetstone = new ItemWhetstone(ConfigHandler.whetstoneID).setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
 
 		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
@@ -138,7 +140,7 @@ public class ModItems {
 	}
 
 	private static void initCreativeTabs() {
-		Erebus.tabErebusItem.add(erebusMaterials, erebusFood, turnip);
+		Erebus.tabErebusItem.add(erebusMaterials, whetstone, erebusFood, turnip);
 		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
 			Erebus.tabErebusItem.add(metalIngot);
 
@@ -170,6 +172,7 @@ public class ModItems {
 		GameRegistry.registerItem(bucketHoney, "erebus.bucketHoney");
 		GameRegistry.registerItem(homingBeecon, "erebus.homingBeecon");
 		GameRegistry.registerItem(flowerSeeds, "erebus.erebusFlowerSeeds");
+		GameRegistry.registerItem(whetstone, "erebus.whetstone");
 
 		GameRegistry.registerItem(jadeHelmet, "erebus.helmetJade");
 		GameRegistry.registerItem(jadeBody, "erebus.chestplateJade");

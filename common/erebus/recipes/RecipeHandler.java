@@ -20,6 +20,9 @@ import erebus.item.ItemErebusSpecial;
 
 public class RecipeHandler {
 
+	public static Item[] swordType =  new Item [] { Item.swordWood, Item.swordStone, Item.swordIron, Item.swordGold, Item.swordDiamond, ModItems.jadeSword, ModItems.scorpionPincer, ModItems.waspSword };
+	public static Item[] axeType =  new Item [] { Item.axeWood, Item.axeStone, Item.axeIron, Item.axeGold, Item.axeDiamond, ModItems.jadeAxe };
+	
 	public static void init() {
 		// Wood
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataAcacia), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataAcacia) });
@@ -137,6 +140,8 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.waspDagger), new Object[] { "   ", " W ", " S ", 'W', new ItemStack(ModItems.erebusMaterials, 1, 10), 'S', new ItemStack(Item.stick) });
 
 		GameRegistry.addRecipe(new RecipeSprintLeggingsUpgrades());
+		
+		GameRegistry.addRecipe(new RecipeWhetstoneUpgrades());
 
 		// Red Gem
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.redstone, 2, 0), new Object[] { new ItemStack(ModItems.erebusMaterials, 1, DATA.redGem.ordinal()) });
@@ -186,7 +191,30 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(EnchantSensitiveRecipe.makeRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()), 'D', diamondPick, 'C', Block.chest));
 		GameRegistry.addRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), 'B', Item.bucketEmpty);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', Item.ingotIron, '$', new ItemStack(ModBlocks.blockAmber, 1, 1), '0', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()));
+		
+		// Whetstone Sharpening Enchanting Stuff
+		GameRegistry.addRecipe(new ItemStack(ModItems.whetstone, 1, 0), "WWW", "WWW", "WWW", 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.whetstonePowder.ordinal()));
+		
+		// Sharp Swords
+		for (int i=0; i<swordType.length; i++) {
+			for (int j=0; j<5; j++) {
+				ItemStack swordSharp = new ItemStack(swordType[i]);
+				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
+				swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
+				GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(swordType[i]));
+			}
+		}
 
+		// Sharp Axes
+		for (int i=0; i<axeType.length; i++) {
+			for (int j=0; j<5; j++) {
+				ItemStack axeSharp = new ItemStack(axeType[i]);
+				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
+				axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
+				GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(axeType[i]));
+			}
+		}
+		
 		// Special Items - for future expansion
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL", 'S', Item.silk, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Block.carpet, 1, 0), 'L', new ItemStack(Item.dyePowder, 1, 4) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataBeetleTamingAmulet), new Object[] { " N ", "NJN", " F ", 'N', Item.goldNugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()) });
