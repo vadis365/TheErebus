@@ -109,9 +109,8 @@ public int skin = rand.nextInt(99);
 				worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
 				setInflateSize(0);
 				for (int var10 = 0; var10 < 1; ++var10) {
-					EntityWebSling var11 = new EntityWebSling(worldObj, this);
-					var11.posY = posY + height / 2.0F + 0.5D;
-					var11.setType((byte) 0);
+					EntityGooBall var11 = new EntityGooBall(worldObj, this);
+					var11.posY = posY + height / 2.0F + 0.3D;
 					worldObj.spawnEntityInWorld(var11);
 				}
 			}

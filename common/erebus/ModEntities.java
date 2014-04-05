@@ -23,6 +23,7 @@ import erebus.entity.EntityExtractedBlock;
 import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGlowWorm;
+import erebus.entity.EntityGooBall;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLocust;
@@ -89,6 +90,7 @@ public class ModEntities {
 		EntityList.stringToClassMapping.put("Sporeling - Erebus", EntitySporeling.class);
 		EntityList.stringToClassMapping.put("WheatWeevil - Erebus", EntityWheatWeevil.class);
 		EntityList.stringToClassMapping.put("VelvetWorm - Erebus", EntityVelvetWorm.class);
+		EntityList.stringToClassMapping.put("GooBall", EntityGooBall.class);
 		
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "BeetleLarva", -1251634, -13032944);
@@ -132,6 +134,7 @@ public class ModEntities {
 		registerEntity(71, EntityWebSling.class, "WebSling");
 		registerEntity(72, EntityErebusLightningBolt.class, "ErebusLightning");
 		registerEntity(73, EntityExtractedBlock.class, "ExtractedBlock");
+		registerEntity(74, EntityGooBall.class, "GooBall");
 		
 		// Spawn conditions
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);
