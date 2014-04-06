@@ -50,6 +50,7 @@ public class ItemErebusMaterial extends Item {
 		poisonGland,
 		mudBrick,
 		whetstonePowder,
+		dragonflyWing,
 	}
 	// @formatter:on
 
