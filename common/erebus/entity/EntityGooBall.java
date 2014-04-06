@@ -2,21 +2,16 @@ package erebus.entity;
 
 import java.util.Random;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
 import erebus.network.PacketHandler;
 import erebus.network.packet.PacketParticle;
 
@@ -24,11 +19,11 @@ public class EntityGooBall extends EntityThrowable {
 
 	public EntityGooBall(World world) {
 		super(world);
-		setSize(1F, 1F);
+		setSize(0.7F, 0.7F);
 	}
 
-	public EntityGooBall(World world, EntityLiving par2EntityLiving) {
-		super(world, par2EntityLiving);
+	public EntityGooBall(World world, EntityLiving entity) {
+		super(world, entity);
 	}
 
 	public EntityGooBall(World world, double x, double y, double z) {
@@ -40,20 +35,14 @@ public class EntityGooBall extends EntityThrowable {
 	}
 
 	@Override
-	protected void entityInit() {
-		super.entityInit();
-	}
-	
-	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (worldObj.isRemote) {
-			randomDisplayTick(worldObj, posX, posY, posZ, rand);
-		}
+		if (worldObj.isRemote)
+			trailParticles(worldObj, posX-0.5D, posY, posZ-0.5D, rand);
 	}
 
-	protected String getWebSlingSplatSound() {
-		return "erebus:webslingsplat";
+	protected String getJumpedOnSound() {
+		return "erebus:beetlelarvasplat";
 	}
 
 	@Override
@@ -67,7 +56,7 @@ public class EntityGooBall extends EntityThrowable {
 			} 
 				setDead();
 		}
-		worldObj.playSoundAtEntity(this, getWebSlingSplatSound(), 1.0F, 1.0F);
+		worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
 	}
 
 	@Override
@@ -75,27 +64,24 @@ public class EntityGooBall extends EntityThrowable {
 		return false;
 	}
 
-	public boolean attackEntityFrom(DamageSource source, int par2) {
+	public boolean attackEntityFrom(DamageSource source, int amount) {
 		return false;
 	}
-	   public void randomDisplayTick(World world, double d, double f, double e, Random rand) {
-	        for (int l = 0; l < 3; ++l) {
-	            double d0 = (double)((float)d + rand.nextFloat());
-	            double d1 = (double)((float)f + rand.nextFloat());
-	            d0 = (double)((float)e + rand.nextFloat());
-	            double d2 = 0.0D;
-	            double d3 = 0.0D;
-	            double d4 = 0.0D;
-	            int i1 = rand.nextInt(2) * 2 - 1;
-	            int j1 = rand.nextInt(2) * 2 - 1;
-	            d2 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
-	            d3 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
-	            d4 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
-	            double d5 = (double)e + 0.5D + 0.25D * (double)j1;
-	            d4 = (double)(rand.nextFloat() * 1.0F * (float)j1);
-	            double d6 = (double)d + 0.5D + 0.25D * (double)i1;
-	            d2 = (double)(rand.nextFloat() * 1.0F * (float)i1);
-	            world.spawnParticle("slime", d6, d1, d5, d2, d3, d4);
-	        }
-	    }
+	
+	public void trailParticles(World world, double posX, double posY, double posZ, Random rand) {
+		for (int count = 0; count < 20; ++count) {
+			double velX = 0.0D;
+			double velY = 0.0D;
+			double velZ = 0.0D;
+			int motionX = rand.nextInt(2) * 2 - 1;
+			int motionZ = rand.nextInt(2) * 2 - 1;
+			double y = (double)((float)posY + rand.nextFloat());
+			velY = ((double)rand.nextFloat() - 0.5D) * 0.125D;
+			double z = posZ + 0.5D + 0.25D * (double)motionZ;
+			velZ = (double)(rand.nextFloat() * 1.0F * (float)motionZ);
+			double x = posX + 0.5D + 0.25D * (double)motionX;
+			velX = (double)(rand.nextFloat() * 1.0F * (float)motionX);
+			world.spawnParticle("slime", x, y, z, velX, velY, velZ);
+		}
+	}
 }

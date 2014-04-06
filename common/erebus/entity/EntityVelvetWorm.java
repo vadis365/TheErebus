@@ -10,8 +10,7 @@ import net.minecraft.world.World;
 
 public class EntityVelvetWorm extends EntityMob {
 
-public int skin = rand.nextInt(99);
-	private int shouldDo;
+public int skin = rand.nextInt(2);
 	
 	public EntityVelvetWorm(World world) {
 		super(world);
@@ -80,10 +79,10 @@ public int skin = rand.nextInt(99);
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2) {
+	protected void dropFewItems(boolean hit, int looting) {
 		int chanceFiftyFifty = rand.nextInt(2) + 1;
 
-		dropItem(Item.slimeBall.itemID, chanceFiftyFifty + par2);
+		dropItem(Item.slimeBall.itemID, chanceFiftyFifty + looting);
 	}
 	
 	@Override
@@ -108,11 +107,9 @@ public int skin = rand.nextInt(99);
 			if (entity instanceof EntityPlayer && getInflateSize()>=100) {
 				worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
 				setInflateSize(0);
-				for (int var10 = 0; var10 < 1; ++var10) {
-					EntityGooBall var11 = new EntityGooBall(worldObj, this);
-					var11.posY = posY + height / 2.0F + 0.3D;
-					worldObj.spawnEntityInWorld(var11);
-				}
+				EntityGooBall gooBall = new EntityGooBall(worldObj, this);
+				gooBall.posY = posY + height / 2.0F + 0.3D;
+				worldObj.spawnEntityInWorld(gooBall);
 			}
 		}
 

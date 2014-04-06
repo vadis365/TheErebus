@@ -231,5 +231,7 @@ public class ModelVelvetWorm extends ModelBase {
 		Head3.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
 		RAnt.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
 		LAnt.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
+		BodF1.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
+		BodF2.rotateAngleX = rotationPitch / (180F / (float) Math.PI);
 	}
 }

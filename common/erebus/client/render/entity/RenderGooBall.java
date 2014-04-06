@@ -18,8 +18,7 @@ import erebus.entity.EntityGooBall;
 @SideOnly(Side.CLIENT)
 public class RenderGooBall extends Render {
 	private final RenderItem renderItem = new RenderItem();
-	private final ItemStack gooBall = new ItemStack(Item.slimeBall,1);
-	private static ResourceLocation texture;
+	private final ItemStack gooBall = new ItemStack(Item.slimeBall);
 	
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float yaw, float tick) {
@@ -32,8 +31,8 @@ public class RenderGooBall extends Render {
 		slimeballItem.hoverStart = 0.0F;
 		slimeballItem.setEntityItemStack(gooBall);
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
-		GL11.glScalef(1.2F, 1.2F, 1.2F);
+		GL11.glTranslated(x, y, z);
+		GL11.glScalef(2F, 2F, 2F);
 		renderItem.doRenderItem(slimeballItem, 0, 0, 0, 0, 0);
 		GL11.glRotatef(90, 0, 1, 0);
 		renderItem.doRenderItem(slimeballItem, 0, 0, 0, 0, 0);
@@ -42,7 +41,6 @@ public class RenderGooBall extends Render {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-			texture = new ResourceLocation("");
-		return texture;
+		return null;
 	}
 }
