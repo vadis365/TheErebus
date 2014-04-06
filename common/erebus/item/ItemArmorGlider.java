@@ -63,8 +63,8 @@ public class ItemArmorGlider extends ItemArmor {
 		} else if (itemStack.getTagCompound().getBoolean("isGliding")) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
-				player.motionX *= 1.0D;
-				player.motionZ *= 1.0D;
+				player.motionX *= 1.05D;
+				player.motionZ *= 1.05D;
 				player.motionY *= 0.5D;
 			}
 		}
