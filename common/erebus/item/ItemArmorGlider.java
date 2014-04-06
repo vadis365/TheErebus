@@ -1,6 +1,5 @@
 package erebus.item;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +21,6 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.client.model.armor.ModelArmorGlider;
-import erebus.core.handler.ConfigHandler;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemArmorGlider extends ItemArmor {
