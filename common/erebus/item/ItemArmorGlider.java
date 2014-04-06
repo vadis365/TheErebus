@@ -151,7 +151,7 @@ public class ItemArmorGlider extends ItemArmor {
 		        	   break;	 
 		         }
 		         GL11.glRotatef(60.0F, x, 0.0F, y);
-		         player.limbSwingAmount=0;
+		         player.limbSwingAmount=0.001F;
 			}
 		}
 	}
