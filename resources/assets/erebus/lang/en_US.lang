@@ -255,6 +255,7 @@ item.reinCompoundGoggles.name=Reinforced Compound Goggles
 item.jumpBoots.name=Jump Boots
 item.sprintLeggings.name=Sprint Leggings
 item.armorGlider.name=Glider Chestplate
+item.armorGliderPowered.name=Glider Chestplate Powered
 item.erebusMaterials.0.name=Exoskeleton Plate
 item.erebusMaterials.1.name=Jade
 item.erebusMaterials.2.name=Bone Shard

@@ -1,9 +1,11 @@
 package erebus.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,9 +18,11 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.client.model.armor.ModelArmorGlider;
+import erebus.core.handler.ConfigHandler;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemArmorGlider extends ItemArmor {
@@ -58,13 +62,13 @@ public class ItemArmorGlider extends ItemArmor {
 	}
 
 	@Override
-	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack itemStack) {
-		if (!itemStack.hasTagCompound()) {
-			itemStack.stackTagCompound = new NBTTagCompound();
+	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack is) {
+		if (!is.hasTagCompound()) {
+			is.stackTagCompound = new NBTTagCompound();
 			return;
 			}
 		
-		if (itemStack.getTagCompound().getBoolean("isGliding")) {
+		if (is.getTagCompound().getBoolean("isGliding")) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
@@ -73,12 +77,20 @@ public class ItemArmorGlider extends ItemArmor {
 			}
 		}
 		
-		if (itemStack.getTagCompound().getBoolean("isPowered")) {
+		if (is.getTagCompound().getBoolean("isPowered") && canFly() && player.capabilities.isCreativeMode ||  is.getTagCompound().getBoolean("isPowered") && canFly() && player.inventory.hasItem(Item.itemsList[ModBlocks.redGem.blockID].itemID)) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
 				player.motionZ *= 1.05D;
 				player.motionY += 0.1D;
+				if (is.hasTagCompound()) {
+					is.stackTagCompound.setInteger("fuelTicks", is.getTagCompound().getInteger("fuelTicks")+1);
+						if(is.getTagCompound().getInteger("fuelTicks")>=80) {
+							is.stackTagCompound.setInteger("fuelTicks", 0);
+							if (!player.capabilities.isCreativeMode)
+								player.inventory.consumeInventoryItem(Item.itemsList[ModBlocks.redGem.blockID].itemID);
+						}
+				}
 			}
 		}
 	}
@@ -89,6 +101,8 @@ public class ItemArmorGlider extends ItemArmor {
 			is.setTagCompound(new NBTTagCompound());
 		is.stackTagCompound.setBoolean("isGliding", false);
 		is.stackTagCompound.setBoolean("isPowered", false);
+		is.stackTagCompound.setInteger("fuelTicks", 0);
+		
 	}
 
 	@ForgeSubscribe
@@ -97,7 +111,7 @@ public class ItemArmorGlider extends ItemArmor {
 		GL11.glPushMatrix();
 		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 		ItemStack chestPlate = player.inventory.armorInventory[2];
-		if (chestPlate != null && chestPlate.getItem().itemID == ModItems.armorGlider.itemID) {
+		if (chestPlate != null && chestPlate.getItem().itemID == ModItems.armorGlider.itemID || chestPlate != null && chestPlate.getItem().itemID == ModItems.armorGliderPowered.itemID) {
 			if (!chestPlate.hasTagCompound()) {
 				chestPlate.stackTagCompound = new NBTTagCompound();
 				return;
@@ -154,6 +168,10 @@ public class ItemArmorGlider extends ItemArmor {
 		         player.limbSwingAmount=0.001F;
 			}
 		}
+	}
+	
+	public boolean canFly() {
+		return itemID==ModItems.armorGliderPowered.itemID;	
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -42,7 +42,7 @@ public class KeyBindingHandler extends KeyHandler {
 					return;
 
 				ItemStack chestPlate = player.inventory.armorInventory[2];
-				if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider) {
+				if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider ||chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 					if (!chestPlate.hasTagCompound())
 						chestPlate.stackTagCompound = new NBTTagCompound();
 
@@ -57,7 +57,7 @@ public class KeyBindingHandler extends KeyHandler {
 				return;
 
 			ItemStack chestPlate = player.inventory.armorInventory[2];
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider) {
+			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 				if (!chestPlate.hasTagCompound())
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
@@ -85,7 +85,7 @@ public class KeyBindingHandler extends KeyHandler {
 				return;
 
 			ItemStack chestPlate = player.inventory.armorInventory[2];
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider) {
+			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 				if (!chestPlate.hasTagCompound())
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
@@ -93,7 +93,7 @@ public class KeyBindingHandler extends KeyHandler {
 				PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(4, false));
 			}
 			
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider) {
+			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 				if (!chestPlate.hasTagCompound())
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
