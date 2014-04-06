@@ -18,10 +18,11 @@ import erebus.entity.EntityRhinoBeetle;
 import erebus.network.PacketHandler;
 
 public class KeyBindingHandler extends KeyHandler {
-	public static KeyBinding glide = new KeyBinding("Glide", Keyboard.KEY_LMENU);
+	public static KeyBinding glide = new KeyBinding("Glide", Keyboard.KEY_G);
+	public static KeyBinding poweredGlide = new KeyBinding("Glider Lift", Keyboard.KEY_F);
 	public static KeyBinding beetleRam = new KeyBinding("Beetle Ram Attack", Keyboard.KEY_R);
-	public static KeyBinding[] arrayOfKeys = new KeyBinding[] { glide, beetleRam };
-	public static boolean[] areRepeating = new boolean[] { false, false };
+	public static KeyBinding[] arrayOfKeys = new KeyBinding[] { glide, beetleRam, poweredGlide };
+	public static boolean[] areRepeating = new boolean[] { false, false, false };
 
 	public KeyBindingHandler() {
 		super(arrayOfKeys, areRepeating);
@@ -50,6 +51,21 @@ public class KeyBindingHandler extends KeyHandler {
 				}
 			}
 		
+		if (kb.keyCode == poweredGlide.keyCode) {
+			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+			if (player == null)
+				return;
+
+			ItemStack chestPlate = player.inventory.armorInventory[2];
+			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider) {
+				if (!chestPlate.hasTagCompound())
+					chestPlate.stackTagCompound = new NBTTagCompound();
+
+				chestPlate.getTagCompound().setBoolean("isPowered", true);
+				PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(6, true));
+			}
+		}
+		
 		if (kb.keyCode == beetleRam.keyCode) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
@@ -75,6 +91,14 @@ public class KeyBindingHandler extends KeyHandler {
 
 				chestPlate.getTagCompound().setBoolean("isGliding", false);
 				PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(4, false));
+			}
+			
+			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider) {
+				if (!chestPlate.hasTagCompound())
+					chestPlate.stackTagCompound = new NBTTagCompound();
+
+				chestPlate.getTagCompound().setBoolean("isPowered", false);
+				PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(6, false));
 			}
 			
 			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle) {

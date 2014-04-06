@@ -19,6 +19,7 @@ import erebus.lib.Reference;
 import erebus.network.packet.PacketBeetleRamAttack;
 import erebus.network.packet.PacketColossalCratePage;
 import erebus.network.packet.PacketGlider;
+import erebus.network.packet.PacketGliderPowered;
 import erebus.network.packet.PacketParticle;
 import erebus.network.packet.PacketSound;
 import erebus.network.packet.PacketTeleport;
@@ -34,6 +35,7 @@ public class PacketHandler implements IPacketHandler {
 		register(3, new PacketSound());
 		register(4, new PacketGlider());
 		register(5, new PacketBeetleRamAttack());
+		register(6, new PacketGliderPowered());
 	}
 
 	private void register(int packetID, IPacket packet) {

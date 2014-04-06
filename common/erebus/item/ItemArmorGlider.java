@@ -51,6 +51,8 @@ public class ItemArmorGlider extends ItemArmor {
 		model.bipedLeftLeg.showModel = false;
 		if (is.hasTagCompound())
 			model.isGliding = is.getTagCompound().getBoolean("isGliding");
+		if (is.hasTagCompound())
+			model.isPowered = is.getTagCompound().getBoolean("isPowered");
 
 		return model;
 	}
@@ -60,12 +62,23 @@ public class ItemArmorGlider extends ItemArmor {
 		if (!itemStack.hasTagCompound()) {
 			itemStack.stackTagCompound = new NBTTagCompound();
 			return;
-		} else if (itemStack.getTagCompound().getBoolean("isGliding")) {
+			}
+		
+		if (itemStack.getTagCompound().getBoolean("isGliding")) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
 				player.motionZ *= 1.05D;
 				player.motionY *= 0.5D;
+			}
+		}
+		
+		if (itemStack.getTagCompound().getBoolean("isPowered")) {
+			player.fallDistance = 0.0F;
+			if (!player.onGround) {
+				player.motionX *= 1.05D;
+				player.motionZ *= 1.05D;
+				player.motionY += 0.1D;
 			}
 		}
 	}
@@ -75,6 +88,7 @@ public class ItemArmorGlider extends ItemArmor {
 		if (!is.hasTagCompound())
 			is.setTagCompound(new NBTTagCompound());
 		is.stackTagCompound.setBoolean("isGliding", false);
+		is.stackTagCompound.setBoolean("isPowered", false);
 	}
 
 	@ForgeSubscribe
@@ -88,7 +102,7 @@ public class ItemArmorGlider extends ItemArmor {
 				chestPlate.stackTagCompound = new NBTTagCompound();
 				return;
 			}
-			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround) {
+			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround || chestPlate.getTagCompound().getBoolean("isPowered") && !player.onGround) {
 				// Unimplemented for the time being.
 				// Method is fixed but rotations need working out!
 			     int yaw = (int)player.rotationYaw;
