@@ -34,6 +34,7 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 
 	public BlockPlantedGiantFlower(int id) {
 		super(id);
+		setCreativeTab(null);
 		float var3 = 0.4F;
 		setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1F, 0.5F + var3);
 	}

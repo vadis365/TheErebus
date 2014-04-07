@@ -20,10 +20,16 @@ import erebus.item.ItemErebusSpecial;
 
 public class RecipeHandler {
 
-	public static Item[] swordType =  new Item [] { Item.swordWood, Item.swordStone, Item.swordIron, Item.swordGold, Item.swordDiamond, ModItems.jadeSword, ModItems.scorpionPincer, ModItems.waspSword };
-	public static Item[] axeType =  new Item [] { Item.axeWood, Item.axeStone, Item.axeIron, Item.axeGold, Item.axeDiamond, ModItems.jadeAxe };
-	
+	public static Item[] swordType = new Item[] { Item.swordWood, Item.swordStone, Item.swordIron, Item.swordGold, Item.swordDiamond, ModItems.jadeSword, ModItems.scorpionPincer, ModItems.waspSword };
+	public static Item[] axeType = new Item[] { Item.axeWood, Item.axeStone, Item.axeIron, Item.axeGold, Item.axeDiamond, ModItems.jadeAxe };
+
 	public static void init() {
+		registerOreDictionary();
+		registerRecipes();
+		registerSmelting();
+	}
+
+	private static void registerRecipes() {
 		// Wood
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataAcacia), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataAcacia) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataEucalyptus), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataEucalyptus) });
@@ -140,7 +146,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.waspDagger), new Object[] { "   ", " W ", " S ", 'W', new ItemStack(ModItems.erebusMaterials, 1, 10), 'S', new ItemStack(Item.stick) });
 
 		GameRegistry.addRecipe(new RecipeSprintLeggingsUpgrades());
-		
+
 		GameRegistry.addRecipe(new RecipeWhetstoneUpgrades());
 
 		// Red Gem
@@ -191,30 +197,28 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(EnchantSensitiveRecipe.makeRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()), 'D', diamondPick, 'C', Block.chest));
 		GameRegistry.addRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), 'B', Item.bucketEmpty);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', Item.ingotIron, '$', new ItemStack(ModBlocks.blockAmber, 1, 1), '0', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()));
-		
+
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addRecipe(new ItemStack(ModItems.whetstone, 1, 0), "WWW", "WWW", "WWW", 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.whetstonePowder.ordinal()));
-		
+
 		// Sharp Swords
-		for (int i=0; i<swordType.length; i++) {
-			for (int j=0; j<5; j++) {
+		for (int i = 0; i < swordType.length; i++)
+			for (int j = 0; j < 5; j++) {
 				ItemStack swordSharp = new ItemStack(swordType[i]);
 				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
 				swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
 				GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(swordType[i]));
 			}
-		}
 
 		// Sharp Axes
-		for (int i=0; i<axeType.length; i++) {
-			for (int j=0; j<5; j++) {
+		for (int i = 0; i < axeType.length; i++)
+			for (int j = 0; j < 5; j++) {
 				ItemStack axeSharp = new ItemStack(axeType[i]);
 				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
 				axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
 				GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(axeType[i]));
 			}
-		}
-		
+
 		// Special Items - for future expansion
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL", 'S', Item.silk, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Block.carpet, 1, 0), 'L', new ItemStack(Item.dyePowder, 1, 4) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataBeetleTamingAmulet), new Object[] { " N ", "NJN", " F ", 'N', Item.goldNugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()) });
@@ -236,26 +240,50 @@ public class RecipeHandler {
 		// Umbergolem Statue
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.umberGolemStatue, 1), new Object[] { " H ", "LCR", " X ", 'H', new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemHead), 'L', new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemLClaw), 'C', new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemCore), 'R', new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemRClaw), 'X',
 				new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemLegs) });
+	}
 
-		// Furnace smelting
-		GameRegistry.addSmelting(ModBlocks.logErebusGroup1.blockID, new ItemStack(Item.coal, 1, 1), 1.0F);
-		GameRegistry.addSmelting(ModBlocks.logErebusGroup2.blockID, new ItemStack(Item.coal, 1, 1), 1.0F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.blockAmber.blockID, 0, new ItemStack(ModBlocks.blockAmber, 1, 1), 0.3F);
-		FurnaceRecipes.smelting().addSmelting(ModItems.erebusFood.itemID, 0, new ItemStack(ModItems.erebusFood, 1, 1), 0.2F);
-		FurnaceRecipes.smelting().addSmelting(ModItems.erebusFood.itemID, 2, new ItemStack(ModItems.erebusFood, 1, 3), 0.2F);
-		FurnaceRecipes.smelting().addSmelting(ModItems.erebusFood.itemID, 4, new ItemStack(ModItems.erebusFood, 1, 5), 0.2F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberstone.blockID, 1, new ItemStack(ModBlocks.umberstone, 1), 0.2F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 0, new ItemStack(Item.coal, 1), 0.1F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 1, new ItemStack(Item.ingotIron, 1), 0.7F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 2, new ItemStack(Item.ingotGold, 1), 1.0F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 3, new ItemStack(Item.dyePowder, 1, 4), 0.2F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 4, new ItemStack(Item.diamond, 1), 1.0F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 5, new ItemStack(Item.emerald, 1), 1.0F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.umberOreBlock.blockID, 6, new ItemStack(ModItems.erebusMaterials, 1, 1), 1.0F);
-		FurnaceRecipes.smelting().addSmelting(ModBlocks.mud.blockID, 0, new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()), 0.2F);
-		FurnaceRecipes.smelting().addSmelting(ModItems.erebusMaterials.itemID, DATA.nectar.ordinal(), new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), 0.2F);
+	private static void registerSmelting() {
+		addSmelting(new ItemStack(Item.coal, 1, 1), "logWood", 1.0F);
+		addSmelting(new ItemStack(ModBlocks.blockAmber, 1, 1), ModBlocks.blockAmber, 0.3F);
+		addSmelting(new ItemStack(ModItems.erebusFood, 1, 1), new ItemStack(ModItems.erebusFood.itemID, 1, 0), 0.2F);
+		addSmelting(new ItemStack(ModItems.erebusFood, 1, 3), new ItemStack(ModItems.erebusFood.itemID, 1, 2), 0.2F);
+		addSmelting(new ItemStack(ModItems.erebusFood, 1, 5), new ItemStack(ModItems.erebusFood.itemID, 1, 4), 0.2F);
+		addSmelting(new ItemStack(ModBlocks.umberstone, 1), new ItemStack(ModBlocks.umberstone.blockID, 1, 1), 0.2F);
+		addSmelting(new ItemStack(Item.coal, 1), new ItemStack(ModBlocks.umberOreBlock.blockID, 1, 0), 0.1F);
+		addSmelting(new ItemStack(Item.ingotIron, 1), new ItemStack(ModBlocks.umberOreBlock.blockID, 1, 1), 0.7F);
+		addSmelting(new ItemStack(Item.ingotGold, 1), new ItemStack(ModBlocks.umberOreBlock.blockID, 1, 2), 1.0F);
+		addSmelting(new ItemStack(Item.dyePowder, 1, 4), new ItemStack(ModBlocks.umberOreBlock.blockID, 1, 3), 0.2F);
+		addSmelting(new ItemStack(Item.diamond, 1), new ItemStack(ModBlocks.umberOreBlock.blockID, 1, 4), 1.0F);
+		addSmelting(new ItemStack(Item.emerald, 1), new ItemStack(ModBlocks.umberOreBlock.blockID, 1, 5), 1.0F);
+		addSmelting(new ItemStack(ModItems.erebusMaterials, 1, 1), new ItemStack(ModBlocks.umberOreBlock.blockID, 1, 6), 1.0F);
+		addSmelting(new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()), ModBlocks.mud, 0.2F);
+		addSmelting(new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), new ItemStack(ModItems.erebusMaterials.itemID, 1, DATA.nectar.ordinal()), 0.2F);
+		if (ConfigHandler.lead)
+			addSmelting(new ItemStack(ModItems.metalIngot, 1, 1), new ItemStack(ModBlocks.erebusOreExtra.blockID, 1, 2), 1.0F);
+		if (ConfigHandler.silver)
+			addSmelting(new ItemStack(ModItems.metalIngot, 1, 2), new ItemStack(ModBlocks.erebusOreExtra.blockID, 1, 3), 1.0F);
+		if (ConfigHandler.copper)
+			addSmelting(new ItemStack(ModItems.metalIngot, 1, 0), new ItemStack(ModBlocks.erebusOreExtra.blockID, 1, 1), 1.0F);
+		if (ConfigHandler.tin)
+			addSmelting(new ItemStack(ModItems.metalIngot, 1, 3), new ItemStack(ModBlocks.erebusOreExtra.blockID, 1, 4), 1.0F);
+	}
 
-		// Ore dictionary registrations
+	private static void addSmelting(ItemStack output, Object input, float xp) {
+		if (input instanceof ItemStack) {
+			if (((ItemStack) input).getItemDamage() == OreDictionary.WILDCARD_VALUE)
+				GameRegistry.addSmelting(((ItemStack) input).itemID, output, xp);
+			else
+				FurnaceRecipes.smelting().addSmelting(((ItemStack) input).itemID, ((ItemStack) input).getItemDamage(), output, xp);
+		} else if (input instanceof Item)
+			addSmelting(output, new ItemStack((Item) input), xp);
+		else if (input instanceof Block)
+			addSmelting(output, new ItemStack((Block) input), xp);
+		else if (input instanceof String)
+			for (ItemStack stack : OreDictionary.getOres((String) input))
+				addSmelting(output, stack, xp);
+	}
+
+	private static void registerOreDictionary() {
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.logErebusGroup1, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.logErebusGroup2, 1, OreDictionary.WILDCARD_VALUE));
@@ -288,22 +316,18 @@ public class RecipeHandler {
 		if (ConfigHandler.lead) {
 			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));
 			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.erebusOreExtra, 1, 2));
-			FurnaceRecipes.smelting().addSmelting(ModBlocks.erebusOreExtra.blockID, 2, new ItemStack(ModItems.metalIngot, 1, 1), 1.0F);
 		}
 		if (ConfigHandler.silver) {
 			OreDictionary.registerOre("ingotSilver", new ItemStack(ModItems.metalIngot, 1, 2));
 			OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.erebusOreExtra, 1, 3));
-			FurnaceRecipes.smelting().addSmelting(ModBlocks.erebusOreExtra.blockID, 3, new ItemStack(ModItems.metalIngot, 1, 2), 1.0F);
 		}
 		if (ConfigHandler.copper) {
 			OreDictionary.registerOre("ingotCopper", new ItemStack(ModItems.metalIngot, 1, 0));
 			OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.erebusOreExtra, 1, 1));
-			FurnaceRecipes.smelting().addSmelting(ModBlocks.erebusOreExtra.blockID, 1, new ItemStack(ModItems.metalIngot, 1, 0), 1.0F);
 		}
 		if (ConfigHandler.tin) {
 			OreDictionary.registerOre("ingotTin", new ItemStack(ModItems.metalIngot, 1, 3));
 			OreDictionary.registerOre("oreTin", new ItemStack(ModBlocks.erebusOreExtra, 1, 4));
-			FurnaceRecipes.smelting().addSmelting(ModBlocks.erebusOreExtra.blockID, 4, new ItemStack(ModItems.metalIngot, 1, 3), 1.0F);
 		}
 		if (ConfigHandler.aluminium)
 			OreDictionary.registerOre("oreAluminum", new ItemStack(ModBlocks.erebusOreExtra, 1, 0));
