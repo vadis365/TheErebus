@@ -11,10 +11,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.block.BlockErebusFlower.FLOWER_TYPE;
+import erebus.block.BlockErebusOre;
 import erebus.block.BlockLogErebus;
 import erebus.block.BlockPlanksErebus;
 import erebus.core.handler.ConfigHandler;
 import erebus.item.ItemErebusFood;
+import erebus.item.ItemErebusMaterial;
 import erebus.item.ItemErebusMaterial.DATA;
 import erebus.item.ItemErebusSpecial;
 
@@ -290,14 +292,16 @@ public class RecipeHandler {
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.planksErebus, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("treeSapling", new ItemStack(ModBlocks.erebusSapling, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("treeLeaves", new ItemStack(ModBlocks.leavesErebus, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("oreCoal", new ItemStack(ModBlocks.umberOreBlock, 1, 0));
-		OreDictionary.registerOre("oreIron", new ItemStack(ModBlocks.umberOreBlock, 1, 1));
-		OreDictionary.registerOre("oreGold", new ItemStack(ModBlocks.umberOreBlock, 1, 2));
-		OreDictionary.registerOre("oreLapis", new ItemStack(ModBlocks.umberOreBlock, 1, 3));
-		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.umberOreBlock, 1, 4));
-		OreDictionary.registerOre("oreEmerald", new ItemStack(ModBlocks.umberOreBlock, 1, 5));
+		OreDictionary.registerOre("oreCoal", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataCoal));
+		OreDictionary.registerOre("oreIron", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataIron));
+		OreDictionary.registerOre("oreGold", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataGold));
+		OreDictionary.registerOre("oreLapis", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataLapis));
+		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataDiamond));
+		OreDictionary.registerOre("oreEmerald", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataEmerald));
+		OreDictionary.registerOre("oreJade", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataJade));
 		OreDictionary.registerOre("craftingtable", new ItemStack(ModBlocks.petrifiedCraftingTable));
 		OreDictionary.registerOre("mobEgg", new ItemStack(ModItems.spawnEggs, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("gemJade", new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.DATA.jade.ordinal()));
 
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.BLACK_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeRed", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.RED_PETAL.ordinal()));
