@@ -226,6 +226,14 @@ tile.giantBulbCappedShroom.name=Giant Bulb Capped Mushroom
 tile.bulbCappedShroom.name=Bulb Capped Mushroom
 tile.honeyTreat.name=Honey Treat - much yum
 tile.erebus.jarOHoney.name=Jar O'Honey
+doubleHeightPlant_item_0.name=Type 1 (Insert name here)
+doubleHeightPlant_item_1.name=Type 2 (Insert name here)
+doubleHeightPlant_item_2.name=Type 3 (Insert name here)
+doubleHeightPlant_item_3.name=Type 4 (Insert name here)
+doubleHeightPlant_item_4.name=Type 5 (Insert name here)
+doubleHeightPlant_item_5.name=Type 6 (Insert name here)
+doubleHeightPlant_item_6.name=Type 7 (Insert name here)
+doubleHeightPlant_item_7.name=Type 8 (Insert name here)
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet
