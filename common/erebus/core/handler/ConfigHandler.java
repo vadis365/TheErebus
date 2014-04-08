@@ -79,7 +79,7 @@ public class ConfigHandler {
 			fernID = config.getBlock("Block ID of Ferns", 2515).getInt(2515);
 			fiddleheadID = config.getBlock("Block ID of Fiddlehead", 2516).getInt(2516);
 			blockTurnipID = config.getBlock("Block ID of Turnips", 2517).getInt(2517);
-			doubleHeightPlantID = config.getBlock("Block ID of Double Height Plant", 2606).getInt(2606);
+			doubleHeightPlantID = config.getBlock("Block ID of Double Height Plant", 2607).getInt(2607);
 
 			blockSilkID = config.getBlock("Block ID of Silk", 2518).getInt(2518);
 			mirBrickID = config.getBlock("Block ID of Mirbrick", 2519).getInt(2519);
@@ -151,7 +151,7 @@ public class ConfigHandler {
 			jumpingSpiderSpawnerID = config.getBlock("Block ID of Jumping Spider Spawners", 2553).getInt(2553);
 			waspSpawnerID = config.getBlock("Block ID of Wasp Spawners", 2572).getInt(2572);
 
-			// latest ID used (please update after adding new blocks!) >>> 2606
+			// latest ID used (please update after adding new blocks!) >>> 2607
 
 			// Items
 			portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
