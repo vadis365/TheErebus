@@ -166,7 +166,7 @@ public class ModBlocks {
 		giantBulbCappedMushroom = new BlockGiantBulbCappedMushroom(ConfigHandler.giantBulbCappedMushroomID, Material.wood).setHardness(0.2F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("giantBulbCappedShroom");
 		bulbCappedMushroom = new BlockBulbCappedShroom(ConfigHandler.bulbCappedMushroomID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("bulbCappedShroom").setTextureName("bulbCappedShroom");
 		doubleHeightPlant = new BlockDoubleHeightPlant(ConfigHandler.doubleHeightPlantID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("doubleHeightPlant");
-		
+
 		erebusGrass = new BlockErebusGrass(ConfigHandler.erebusGrassID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusTallGrass").setTextureName("erebus:tallgrass");
 		thorns = new BlockThorns(ConfigHandler.thornsID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("thorns").setTextureName("erebus:thorns");
 		fern = (BlockFern) new BlockFern(ConfigHandler.fernID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFern");
@@ -185,11 +185,11 @@ public class ModBlocks {
 		bambooShoot = new BlockBambooShoot(ConfigHandler.bambooShootID).setCreativeTab(null).setUnlocalizedName("bambooShoot").setTextureName("erebus:bambooShoot");
 		bambooCrop = new BlockBambooCrop(ConfigHandler.bambooCropID).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("bambooCrop").setTextureName("erebus:bambooCropBase");
 		bambooTorch = new BlockBambooTorch(ConfigHandler.bambooTorchID).setHardness(0.0F).setUnlocalizedName("bambooTorch");
-		erebusAltar = new BlockErebusAltar(ConfigHandler.erebusAltarID).setUnlocalizedName("erebusAltar");
-		erebusAltarLightning = new BlockErebusAltarLightning(ConfigHandler.erebusAltarLightningID).setUnlocalizedName("erebusAltarLightning");
-		erebusAltarHealing = new BlockErebusAltarHealing(ConfigHandler.erebusAltarHealingID).setUnlocalizedName("erebusAltarHealing");
-		erebusAltarXP = new BlockErebusAltarXP(ConfigHandler.erebusAltarXPID).setUnlocalizedName("erebusAltarXP");
-		erebusAltarRepair = new BlockErebusAltarRepair(ConfigHandler.erebusAltarRepairID).setUnlocalizedName("erebusAltarRepair");
+		erebusAltar = new BlockErebusAltar(ConfigHandler.erebusAltarID).setHardness(20.0F).setUnlocalizedName("erebusAltar");
+		erebusAltarLightning = new BlockErebusAltarLightning(ConfigHandler.erebusAltarLightningID).setHardness(20.0F).setUnlocalizedName("erebusAltarLightning");
+		erebusAltarHealing = new BlockErebusAltarHealing(ConfigHandler.erebusAltarHealingID).setHardness(20.0F).setUnlocalizedName("erebusAltarHealing");
+		erebusAltarXP = new BlockErebusAltarXP(ConfigHandler.erebusAltarXPID).setHardness(20.0F).setUnlocalizedName("erebusAltarXP");
+		erebusAltarRepair = new BlockErebusAltarRepair(ConfigHandler.erebusAltarRepairID).setHardness(20.0F).setUnlocalizedName("erebusAltarRepair");
 		glowingJar = new BlockGlowingJar(ConfigHandler.glowingJarID).setUnlocalizedName("glowingJar").setTextureName("erebus:glassAmber");
 		reinExo = new BlockReinExo(ConfigHandler.reinExoID).setHardness(1.5F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("reinExo").setTextureName("erebus:blockReinExo");
 		bambooLadder = new BlockBambooLadder(ConfigHandler.bambooLadderID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("bambooLadder").setTextureName("erebus:bambooLadder");
