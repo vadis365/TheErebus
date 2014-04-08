@@ -22,7 +22,7 @@ public class ConfigHandler {
 	// BLOCKS
 	public static int portalErebusID, umberstoneID, umberOreBlockID, oreFossilID, redGemID, blockAmberID, quickSandID, ghostSandID;
 	public static int erebusOreExtraID, umberstoneButtonID, logErebusGroup1ID, logErebusGroup2ID, planksErebusID, leavesErebusID;
-	public static int erebusSaplingID, hollowLogAcaciaID, erebusFlowerID, erebusStigmaID, erebusGrassID, thornsID, fernID, blockTurnipID;
+	public static int erebusSaplingID, hollowLogAcaciaID, erebusFlowerID, erebusStigmaID, erebusGrassID, doubleHeightPlantID, thornsID, fernID, blockTurnipID;
 	public static int fiddleheadID, blockSilkID, mirBrickID, petrifiedWoodPlanksID, petrifiedCraftingTableID, bambooCrateID;
 	public static int umberFurnaceID, umberFurnace_onID, umberPaverID, insectRepellentID, bambooShootID, bambooCropID, bambooTorchID;
 	public static int erebusAltarID, erebusAltarLightningID, erebusAltarHealingID, erebusAltarXPID, erebusAltarRepairID, glowingJarID;
@@ -79,6 +79,7 @@ public class ConfigHandler {
 			fernID = config.getBlock("Block ID of Ferns", 2515).getInt(2515);
 			fiddleheadID = config.getBlock("Block ID of Fiddlehead", 2516).getInt(2516);
 			blockTurnipID = config.getBlock("Block ID of Turnips", 2517).getInt(2517);
+			doubleHeightPlantID = config.getBlock("Block ID of Double Height Plant", 2606).getInt(2606);
 
 			blockSilkID = config.getBlock("Block ID of Silk", 2518).getInt(2518);
 			mirBrickID = config.getBlock("Block ID of Mirbrick", 2519).getInt(2519);
