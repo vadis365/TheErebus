@@ -226,6 +226,7 @@ tile.giantBulbCappedShroom.name=Giant Bulb Capped Mushroom
 tile.bulbCappedShroom.name=Bulb Capped Mushroom
 tile.honeyTreat.name=Honey Treat - much yum
 tile.erebus.jarOHoney.name=Jar O'Honey
+tile.erebus.blockJade.name=Jade Block
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

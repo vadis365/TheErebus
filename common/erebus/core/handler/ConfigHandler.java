@@ -30,7 +30,7 @@ public class ConfigHandler {
 	public static int blockWitherWebID, extenderThingyID, bambooPoleID, umberstonePillarID, velocityBlockID, petrifiedWoodStairsID;
 	public static int wallErebusID, amberBrickStairsID, waspNestStairsID, spiderSpawnerID, jumpingSpiderSpawnerID, waspSpawnerID;
 	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID, erebusHoneyFluidID, mudID, mudBricksID, flowerPlantedID;
-	public static int giantBulbCappedMushroomID, bulbCappedMushroomID, honeyTreatID, jarOHoneyID;
+	public static int giantBulbCappedMushroomID, bulbCappedMushroomID, honeyTreatID, jarOHoneyID, jadeBlockID;
 	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID, gneissStairsID;
 
 	// ITEMS
@@ -119,6 +119,7 @@ public class ConfigHandler {
 			bulbCappedMushroomID = config.getBlock("Block ID of Bulb Capped Mushroom", 2603).getInt(2603);
 			honeyTreatID = config.getBlock("Block ID of Honey Treat", 2604).getInt(2604);
 			jarOHoneyID = config.getBlock("Block ID of Jar O'Honey", 2605).getInt(2605);
+			jadeBlockID = config.getBlock("BlockID of Jade Block", 2606).getInt(2606);
 
 			int id = 2527;
 			umbercobbleStairsID = new int[BlockUmberstone.iconPaths.length];
@@ -149,7 +150,7 @@ public class ConfigHandler {
 			jumpingSpiderSpawnerID = config.getBlock("Block ID of Jumping Spider Spawners", 2553).getInt(2553);
 			waspSpawnerID = config.getBlock("Block ID of Wasp Spawners", 2572).getInt(2572);
 
-			// latest ID used (please update after adding new blocks!) >>> 2605
+			// latest ID used (please update after adding new blocks!) >>> 2606
 
 			// Items
 			portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
@@ -170,7 +171,7 @@ public class ConfigHandler {
 			homingBeeconID = config.getItem("Item ID of Homing Beecon", 9752).getInt(9752);
 			flowerSeedsID = config.getItem("Item ID of Giant Flower Seeds", 9753).getInt(9753);
 			whetstoneID = config.getItem("Item ID of Whetstone", 9754).getInt(9754);
-			
+
 			jadeHelmetID = config.getItem("Item ID of Jade Helmet", 9713).getInt(9713);
 			jadeBodyID = config.getItem("Item ID of Jade Chestplate", 9714).getInt(9714);
 			jadeLegsID = config.getItem("Item ID of Jade Leggings", 9715).getInt(9715);
@@ -201,7 +202,7 @@ public class ConfigHandler {
 			jumpBootsID = config.getItem("Item ID of Jump Boots", 9732).getInt(9732);
 			armorGliderID = config.getItem("Item ID of Chest Armour Glider", 9735).getInt(9735);
 			armorGliderPoweredID = config.getItem("Item ID of Chest Armour Glider Powered", 9755).getInt(9755);
-			
+
 			reinExoskeletonHelmetID = config.getItem("Item ID of Reinforced Exoskeleton Helmet", 9736).getInt(9736);
 			reinExoskeletonBodyID = config.getItem("Item ID of Reinforced Exoskeleton Chestplate", 9737).getInt(9737);
 			reinExoskeletonLegsID = config.getItem("Item ID of Reinforced Exoskeleton Leggings", 9738).getInt(9738);

@@ -1,6 +1,7 @@
 package erebus;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockOreStorage;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -119,6 +120,7 @@ public class ModBlocks {
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
 	public static Block velocityBlock, honeyCombBlock, doorAmber, erebusHoneyBlock, honeyTreat, mud, mudBricks, flowerPlanted, jarOHoney;
+	public static Block jadeBlock;
 
 	// STAIRS, SLABS, WALLS
 	public static Block[] umbercobbleStairs, plankStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab, gneissStairs;
@@ -204,6 +206,7 @@ public class ModBlocks {
 		mudBricks = new Block(ConfigHandler.mudBricksID, Material.rock).setUnlocalizedName("erebus.mudBricks").setTextureName("erebus:mudBricks").setHardness(0.8F).setResistance(1.0F);
 		honeyTreat = new BlockHoneyTreat(ConfigHandler.honeyTreatID).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("honeyTreat").setTextureName("erebus:honeyTreat");
 		jarOHoney = new JarOHoney(ConfigHandler.jarOHoneyID).setHardness(0.5F).setUnlocalizedName("erebus.jarOHoney").setTextureName("erebus:glassAmber");
+		jadeBlock = new BlockOreStorage(ConfigHandler.jadeBlockID).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("erebus.blockJade").setTextureName("erebus:blockJade");
 
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -242,6 +245,7 @@ public class ModBlocks {
 		Erebus.tabErebusBlock.add(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		Erebus.tabErebusBlock.add(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, erebusHoneyBlock, gneiss, mud, mudBricks, jarOHoney);
+		Erebus.tabErebusBlock.add(jadeBlock);
 		for (Block b : umbercobbleStairs)
 			Erebus.tabErebusBlock.add(b);
 		for (Block b : plankStairs)
@@ -320,6 +324,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(bulbCappedMushroom, "erebus.bulbCappedShroom");
 		GameRegistry.registerBlock(honeyTreat, "erebus.honeyTreat");
 		GameRegistry.registerBlock(jarOHoney, "erebus.jarOHoney");
+		GameRegistry.registerBlock(jadeBlock, "erebus.jadeBlock");
 
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			GameRegistry.registerBlock(umbercobbleStairs[i], "erebus.umbercobbleStairs" + i);
@@ -372,6 +377,7 @@ public class ModBlocks {
 		MinecraftForge.setBlockHarvestLevel(ghostSand, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(reinExo, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(petrifiedWoodChest, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(jadeBlock, "pickaxe", 2);
 
 		if (ConfigHandler.aluminium)
 			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 0, "pickaxe", 1);

@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
@@ -14,6 +15,7 @@ import erebus.block.BlockErebusFlower.FLOWER_TYPE;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockLogErebus;
 import erebus.block.BlockPlanksErebus;
+import erebus.block.BlockSlabPlanksErebus;
 import erebus.core.handler.ConfigHandler;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemErebusMaterial;
@@ -199,6 +201,8 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(EnchantSensitiveRecipe.makeRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()), 'D', diamondPick, 'C', Block.chest));
 		GameRegistry.addRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), 'B', Item.bucketEmpty);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', Item.ingotIron, '$', new ItemStack(ModBlocks.blockAmber, 1, 1), '0', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.jadeBlock), "xxx", "xxx", "xxx", 'x', "gemJade"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.erebusMaterials, 9, ItemErebusMaterial.DATA.jade.ordinal()), "blockJade"));
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addRecipe(new ItemStack(ModItems.whetstone, 1, 0), "WWW", "WWW", "WWW", 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.whetstonePowder.ordinal()));
@@ -299,9 +303,9 @@ public class RecipeHandler {
 		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataDiamond));
 		OreDictionary.registerOre("oreEmerald", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataEmerald));
 		OreDictionary.registerOre("oreJade", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataJade));
-		OreDictionary.registerOre("craftingtable", new ItemStack(ModBlocks.petrifiedCraftingTable));
 		OreDictionary.registerOre("mobEgg", new ItemStack(ModItems.spawnEggs, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("gemJade", new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.DATA.jade.ordinal()));
+		OreDictionary.registerOre("blockJade", new ItemStack(ModBlocks.jadeBlock));
 
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.BLACK_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeRed", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.RED_PETAL.ordinal()));
@@ -317,6 +321,13 @@ public class RecipeHandler {
 		OreDictionary.registerOre("dyeMagenta", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.MAGENTA_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.WHITE_PETAL.ordinal()));
+
+		for (Block stair : ModBlocks.plankStairs)
+			OreDictionary.registerOre("stairWood", stair);
+		for (int i = 0; i <= BlockSlabPlanksErebus.dataAsper; i++)
+			OreDictionary.registerOre("slabWood", new ItemStack(ModBlocks.plankSlabs[0], 1, i));
+		for (int i = 0; i <= BlockSlabPlanksErebus.dataBamboo; i++)
+			OreDictionary.registerOre("slabWood", new ItemStack(ModBlocks.plankSlabs[2], 1, i));
 
 		if (ConfigHandler.lead) {
 			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));
