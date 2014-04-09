@@ -60,8 +60,8 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@Override
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack is) {
-		if (world.isRemote)
-			return;
+		//if (world.isRemote)
+		//	return;
 
 		if (!is.hasTagCompound()) {
 			is.stackTagCompound = new NBTTagCompound();
