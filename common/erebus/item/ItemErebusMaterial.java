@@ -51,6 +51,8 @@ public class ItemErebusMaterial extends Item {
 		mudBrick,
 		whetstonePowder,
 		dragonflyWing,
+		weepingBluePetal,
+		papyrus
 	}
 	// @formatter:on
 

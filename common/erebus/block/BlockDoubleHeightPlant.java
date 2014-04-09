@@ -87,7 +87,7 @@ public class BlockDoubleHeightPlant extends Block {
 		Block block = Block.blocksList[l];
 		if (block == null || m != 0)
 			return false;
-		if (block == this)
+		if (block == this && world.getBlockMetadata(x, y-1, z)<8)
 			return true;	
 		if (!block.isLeaves(world, x, y -1, z) && !block.isOpaqueCube())
 			return false;
