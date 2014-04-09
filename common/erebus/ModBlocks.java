@@ -97,6 +97,7 @@ import erebus.item.block.ItemBlockUmberOre;
 import erebus.item.block.ItemBlockUmberStone;
 import erebus.item.block.ItemBlockUmberpaver;
 import erebus.item.block.ItemBlockWallErebus;
+import erebus.item.block.ItemBlockWitherWeb;
 
 public class ModBlocks {
 
@@ -198,7 +199,7 @@ public class ModBlocks {
 		waspNestBlock = new BlockWaspNest(ConfigHandler.waspNestBlockID).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestBlock").setTextureName("erebus:waspNestBlock");
 		petrifiedWoodChest = new BlockPetrifiedChest(ConfigHandler.petrifiedWoodChestID).setHardness(2.0F).setUnlocalizedName("petrifiedWoodChest").setTextureName("erebus:petrifiedWoodPlanks");
 		blockBones = new BlockBones(ConfigHandler.blockBonesID).setUnlocalizedName("blockBones");
-		blockWitherWeb = new BlockWitherWeb(ConfigHandler.blockWitherWebID).setHardness(4.0F).setUnlocalizedName("witherWeb").setTextureName("erebus:witherWeb");
+		blockWitherWeb = new BlockWitherWeb(ConfigHandler.blockWitherWebID).setHardness(4.0F).setUnlocalizedName("witherWeb").setTextureName("web");
 		bambooBridge = new BlockBambooBridge(ConfigHandler.bambooBridgeID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("bambooBridge").setTextureName("erebus:bambooBridge");
 		extenderThingy = new BlockExtenderThingy(ConfigHandler.extenderThingyID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("extenderThingy").setTextureName("erebus:extenderThingy");
 		bambooPole = new BlockBambooPole(ConfigHandler.bambooPoleID).setHardness(0.4F).setUnlocalizedName("bambooPole").setTextureName("erebus:blockBambooPole");
@@ -315,7 +316,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(waspNestBlock, "erebus.waspNestBlock");
 		GameRegistry.registerBlock(petrifiedWoodChest, "erebus.petrifiedWoodChest");
 		GameRegistry.registerBlock(blockBones, "erebus.blockBones");
-		GameRegistry.registerBlock(blockWitherWeb, "erebus.witherWeb");
+		GameRegistry.registerBlock(blockWitherWeb, ItemBlockWitherWeb.class, "erebus.witherWeb");
 		GameRegistry.registerBlock(bambooBridge, "erebus.bambooBridge");
 		GameRegistry.registerBlock(extenderThingy, "erebus.extenderThingy");
 		GameRegistry.registerBlock(bambooPole, "erebus.bambooPole");
