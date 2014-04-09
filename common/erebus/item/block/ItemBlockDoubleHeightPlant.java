@@ -1,21 +1,27 @@
 package erebus.item.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
 
 public class ItemBlockDoubleHeightPlant extends ItemBlockGeneric {
-	private final Block blockID;
-	
+
 	public ItemBlockDoubleHeightPlant(int id) {
 		super(id, "doubleHeightPlant");
-		blockID = Block.blocksList[id + 256];
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int damage) {
-		return blockID.getIcon(2, damage+8);
+		return Block.blocksList[getBlockID()].getIcon(2, damage < 8 ? damage + 8 : damage);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack stack, int pass) {
+		return Utils.getColour(150, 10, 75);
 	}
 }
