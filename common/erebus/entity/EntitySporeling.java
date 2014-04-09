@@ -78,7 +78,7 @@ public class EntitySporeling extends EntityAnimal {
         		 if (mush != 0)
         			 this.worldObj.setBlock(x, y, z, Block.mushroomBrown.blockID + rand.nextInt(2));
         		 else
-        			 this.worldObj.setBlock(x, y, z, ModBlocks.bulbCappedMushroom.blockID);
+        			 this.worldObj.setBlock(x, y, z, ModBlocks.erebusMushroomSmall.blockID,rand.nextInt(5), 3);
         		 }
          }
     	super.onLivingUpdate();

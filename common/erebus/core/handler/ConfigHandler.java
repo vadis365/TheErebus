@@ -30,7 +30,7 @@ public class ConfigHandler {
 	public static int blockWitherWebID, extenderThingyID, bambooPoleID, umberstonePillarID, velocityBlockID, petrifiedWoodStairsID;
 	public static int wallErebusID, amberBrickStairsID, waspNestStairsID, spiderSpawnerID, jumpingSpiderSpawnerID, waspSpawnerID;
 	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID, erebusHoneyFluidID, mudID, mudBricksID, flowerPlantedID;
-	public static int giantBulbCappedMushroomID, bulbCappedMushroomID, honeyTreatID, jarOHoneyID, jadeBlockID;
+	public static int giantBulbCappedMushroomID, erebusMushroomSmallID, honeyTreatID, jarOHoneyID, jadeBlockID;
 	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID, gneissStairsID;
 
 	// ITEMS
@@ -117,7 +117,7 @@ public class ConfigHandler {
 			mudBricksID = config.getBlock("Block ID of Mud Bricks", 2599).getInt(2599);
 			flowerPlantedID = config.getBlock("Block ID of Planted Flower", 2600).getInt(2600);
 			giantBulbCappedMushroomID = config.getBlock("Block ID of Giant Bulb Capped Mushroom", 2602).getInt(2602);
-			bulbCappedMushroomID = config.getBlock("Block ID of Bulb Capped Mushroom", 2603).getInt(2603);
+			erebusMushroomSmallID = config.getBlock("Block ID of Small Mushrooms", 2603).getInt(2603);
 			honeyTreatID = config.getBlock("Block ID of Honey Treat", 2604).getInt(2604);
 			jarOHoneyID = config.getBlock("Block ID of Jar O'Honey", 2605).getInt(2605);
 			jadeBlockID = config.getBlock("BlockID of Jade Block", 2606).getInt(2606);

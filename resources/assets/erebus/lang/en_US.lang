@@ -235,6 +235,11 @@ doubleHeightPlant_item_4.name=Tall Erebus Grass
 doubleHeightPlant_item_5.name=Tangled Stalk Mushrooms
 doubleHeightPlant_item_6.name=High Capped Mushroom
 doubleHeightPlant_item_7.name=Tall Fern
+erebusMushroomSmall_item_0.name=Bulb Capped Mushroom
+erebusMushroomSmall_item_1.name=Small Shroom1 
+erebusMushroomSmall_item_2.name=Small Shroom2
+erebusMushroomSmall_item_3.name=Small Shroom3
+erebusMushroomSmall_item_4.name=Small Shroom4
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet
