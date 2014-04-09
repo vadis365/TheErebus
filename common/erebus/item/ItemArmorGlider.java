@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -61,11 +60,14 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@Override
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack is) {
+		if (world.isRemote)
+			return;
+
 		if (!is.hasTagCompound()) {
 			is.stackTagCompound = new NBTTagCompound();
 			return;
-			}
-		
+		}
+
 		if (is.getTagCompound().getBoolean("isGliding")) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
@@ -74,24 +76,20 @@ public class ItemArmorGlider extends ItemArmor {
 				player.motionY *= 0.5D;
 			}
 		}
-		
-		if (is.getTagCompound().getBoolean("isPowered") && canFly() && player.capabilities.isCreativeMode ||  is.getTagCompound().getBoolean("isPowered") && canFly() && player.inventory.hasItem(Item.itemsList[ModBlocks.redGem.blockID].itemID)) {
+
+		if (is.getTagCompound().getBoolean("isPowered") && canFly() && player.capabilities.isCreativeMode || is.getTagCompound().getBoolean("isPowered") && canFly() && player.inventory.hasItem(ModBlocks.redGem.blockID)) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
 				player.motionZ *= 1.05D;
 				player.motionY += 0.1D;
 				if (is.hasTagCompound()) {
-					is.stackTagCompound.setInteger("fuelTicks", is.getTagCompound().getInteger("fuelTicks")+1);
-						if(is.getTagCompound().getInteger("fuelTicks")>=80) {
-							is.stackTagCompound.setInteger("fuelTicks", 0);
-							if (!player.capabilities.isCreativeMode)
-								player.inventory.consumeInventoryItem(Item.itemsList[ModBlocks.redGem.blockID].itemID);
-				 		/* The above consuming of the redgem blocks seems to work.
-						 * One problem Dylan found is, if you die, you drop full stack
-						 * of redgem blocks not the decremented amount you should.
-						 * Is this some sort de-sync problem and can it be fixed? */
-						}
+					is.stackTagCompound.setInteger("fuelTicks", is.getTagCompound().getInteger("fuelTicks") + 1);
+					if (is.getTagCompound().getInteger("fuelTicks") >= 80) {
+						is.stackTagCompound.setInteger("fuelTicks", 0);
+						if (!player.capabilities.isCreativeMode)
+							player.inventory.consumeInventoryItem(ModBlocks.redGem.blockID);
+					}
 				}
 			}
 		}
@@ -104,7 +102,7 @@ public class ItemArmorGlider extends ItemArmor {
 		is.stackTagCompound.setBoolean("isGliding", false);
 		is.stackTagCompound.setBoolean("isPowered", false);
 		is.stackTagCompound.setInteger("fuelTicks", 0);
-		
+
 	}
 
 	@ForgeSubscribe
@@ -121,63 +119,63 @@ public class ItemArmorGlider extends ItemArmor {
 			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround || chestPlate.getTagCompound().getBoolean("isPowered") && !player.onGround) {
 				// Unimplemented for the time being.
 				// Method is fixed but rotations need working out!
-			     int yaw = (int)player.rotationYaw;
-		           if (yaw<0)
-		              yaw+=360;
-		           
-		           yaw+=22;
-		           yaw%=360;
+				int yaw = (int) player.rotationYaw;
+				if (yaw < 0)
+					yaw += 360;
 
-		           int facing = yaw/45;   //  360degrees divided by 45 == 8 zones
-		        
-		           float x = 0;
-		           float y = 0;
-		           switch (facing) {
-		           case 0:
-		        	   x=1;
-		        	   y=0;
-		        	   break;
-		           case 1:
-		        	   x=1;
-		        	   y=1;
-		        	   break;
-		           case 2:
-		        	   x=0;
-		        	   y=1;
-		        	   break;
-		           case 3:
-		        	   x=-1;
-		        	   y=1;
-		        	   break;
-		           case 4:
-		        	   x=-1;
-		        	   y=0;
-		        	   break;
-		           case 5:
-		        	   x=-1;
-		        	   y=-1;
-		        	   break;
-		           case 6:
-		        	   x=0;
-		        	   y=-1;
-		        	   break;
-		           case 7:
-		        	   x=1;
-		        	   y=-1;
-		        	   break;	 
-		         }
-		         GL11.glRotatef(60.0F, x, 0.0F, y);
-		         player.limbSwingAmount=0.001F;
+				yaw += 22;
+				yaw %= 360;
+
+				int facing = yaw / 45; //  360degrees divided by 45 == 8 zones
+
+				float x = 0;
+				float y = 0;
+				switch (facing) {
+				case 0:
+					x = 1;
+					y = 0;
+					break;
+				case 1:
+					x = 1;
+					y = 1;
+					break;
+				case 2:
+					x = 0;
+					y = 1;
+					break;
+				case 3:
+					x = -1;
+					y = 1;
+					break;
+				case 4:
+					x = -1;
+					y = 0;
+					break;
+				case 5:
+					x = -1;
+					y = -1;
+					break;
+				case 6:
+					x = 0;
+					y = -1;
+					break;
+				case 7:
+					x = 1;
+					y = -1;
+					break;
+				}
+				GL11.glRotatef(60.0F, x, 0.0F, y);
+				player.limbSwingAmount = 0.001F;
 			}
 		}
 	}
-	
+
 	public boolean canFly() {
-		return itemID==ModItems.armorGliderPowered.itemID;	
+		return itemID == ModItems.armorGliderPowered.itemID;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@ForgeSubscribe
+	@SideOnly(Side.CLIENT)
 	public void onPlayerRenderPost(RenderPlayerEvent.Post e) {
 		GL11.glPopMatrix();
 	}
