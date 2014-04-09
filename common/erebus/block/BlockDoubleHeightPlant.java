@@ -12,13 +12,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDoubleHeightPlant extends Block {
 
-    public static final String[] plantName = new String[] {"test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8"};
+    public static final String[] plantName = new String[] {"Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "Grass", "Shroom1", "Shroom2", "Fern"};
     @SideOnly(Side.CLIENT)
     private Icon[] doublePlantBottomIcons;
     @SideOnly(Side.CLIENT)
@@ -36,8 +37,8 @@ public class BlockDoubleHeightPlant extends Block {
         doublePlantTopIcons = new Icon[plantName.length];
 
         for (int i = 0; i < doublePlantBottomIcons.length; ++i) {
-            doublePlantBottomIcons[i] = reg.registerIcon("erebus:double_plant_" + plantName[i] + "_bottom");
-            doublePlantTopIcons[i] = reg.registerIcon("erebus:double_plant_" + plantName[i] + "_top");
+            doublePlantBottomIcons[i] = reg.registerIcon("erebus:doublePlant" + plantName[i] + "Bottom");
+            doublePlantTopIcons[i] = reg.registerIcon("erebus:doublePlant" + plantName[i] + "Top");
         }
     }
 
@@ -71,6 +72,15 @@ public class BlockDoubleHeightPlant extends Block {
     }
 	
 	@Override
+	@SideOnly(Side.CLIENT)
+	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
+		int meta = access.getBlockMetadata(x, y, z);
+		if(meta == 4 || meta == 12 || meta == 7 || meta == 15)
+			return access.getBiomeGenForCoords(x, z).getBiomeGrassColor();
+		return 16777215;
+	}
+	
+	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		int l = world.getBlockId(x, y -1, z);
 		int m = world.getBlockId(x, y +1, z);
@@ -79,7 +89,7 @@ public class BlockDoubleHeightPlant extends Block {
 			return false;
 		if (block == this)
 			return true;	
-		if (!block.isLeaves(world, x, y -1, z) && !Block.blocksList[l].isOpaqueCube())
+		if (!block.isLeaves(world, x, y -1, z) && !block.isOpaqueCube())
 			return false;
 		else
 		return world.getBlockMaterial(x, y -1, z).blocksMovement();
@@ -109,8 +119,10 @@ public class BlockDoubleHeightPlant extends Block {
 	@Override
     public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
 		int meta = world.getBlockMetadata(x, y, z);
-    	   if(meta <= 7)
-    		   world.setBlockToAir(x, y +1, z);      
+    	   if(meta <= 7) {
+    		   world.setBlockToAir(x, y +1, z);
+    		   dropBlockAsItem(world, x, y, z, meta, 1);
+    	   }
     	   else {
     		   dropBlockAsItem(world, x, y, z, meta-8, 1);
     		   world.setBlockToAir(x, y -1, z);      
