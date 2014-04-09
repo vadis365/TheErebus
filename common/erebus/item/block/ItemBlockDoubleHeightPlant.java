@@ -22,6 +22,9 @@ public class ItemBlockDoubleHeightPlant extends ItemBlockGeneric {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int pass) {
-		return Utils.getColour(150, 10, 75);
+		int meta = stack.getItemDamage();
+		if(meta == 4 || meta == 12 || meta == 7 || meta == 15)
+			return Utils.getColour(94, 157, 52);
+		return 16777215;
 	}
 }
