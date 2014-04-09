@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.helper.Utils;
 
 public class ItemBlockDoubleHeightPlant extends ItemBlockGeneric {
 
@@ -24,7 +23,7 @@ public class ItemBlockDoubleHeightPlant extends ItemBlockGeneric {
 	public int getColorFromItemStack(ItemStack stack, int pass) {
 		int meta = stack.getItemDamage();
 		if(meta == 4 || meta == 12 || meta == 7 || meta == 15)
-			return Utils.getColour(94, 157, 52);
+			return 9415752;
 		return 16777215;
 	}
 }
