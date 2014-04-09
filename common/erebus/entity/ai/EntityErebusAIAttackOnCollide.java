@@ -11,6 +11,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityVelvetWorm;
 
 public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 
@@ -102,6 +103,8 @@ public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 						entitylivingbase.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 0));
 					else if (((EntityAntlion) attacker).isBoss())
 						entitylivingbase.addPotionEffect(new PotionEffect(Potion.weakness.id, 10 + 5 * 20, 0));
+				if (attacker instanceof EntityVelvetWorm)
+					((EntityVelvetWorm) attacker).setInflateSize(0);
 				attacker.attackEntityAsMob(entitylivingbase);
 			}
 	}
