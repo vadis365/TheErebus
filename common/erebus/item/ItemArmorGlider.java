@@ -87,6 +87,10 @@ public class ItemArmorGlider extends ItemArmor {
 							is.stackTagCompound.setInteger("fuelTicks", 0);
 							if (!player.capabilities.isCreativeMode)
 								player.inventory.consumeInventoryItem(Item.itemsList[ModBlocks.redGem.blockID].itemID);
+				 		/* The above consuming of the redgem blocks seems to work.
+						 * One problem Dylan found is, if you die, you drop full stack
+						 * of redgem blocks not the decremented amount you should.
+						 * Is this some sort de-sync problem and can it be fixed? */
 						}
 				}
 			}
