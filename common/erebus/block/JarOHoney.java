@@ -39,13 +39,24 @@ public class JarOHoney extends BlockGlowingJar {
 					return true;
 				else {
 					tile.addHoney(fluidStack.amount);
-					player.setCurrentItemOrArmor(0, stack.getItem().getContainerItemStack(stack));
+					ItemStack container = stack.getItem().getContainerItemStack(stack);
+					stack.stackSize--;
+					if (stack.stackSize <= 0)
+						player.setCurrentItemOrArmor(0, container);
+					else if (!player.inventory.addItemStackToInventory(container))
+						Utils.dropStack(world, x, y, z, container);
+
 					return true;
 				}
 		} else if (FluidContainerRegistry.isEmptyContainer(stack)) {
 			ItemStack filledContainer = FluidContainerRegistry.fillFluidContainer(tile.getHoney(), stack);
 			if (filledContainer != null) {
-				player.setCurrentItemOrArmor(0, filledContainer);
+				stack.stackSize--;
+				if (stack.stackSize <= 0)
+					player.setCurrentItemOrArmor(0, filledContainer);
+				else if (!player.inventory.addItemStackToInventory(filledContainer))
+					Utils.dropStack(world, x, y, z, filledContainer);
+
 				tile.drainHoney(FluidContainerRegistry.getFluidForFilledItem(filledContainer).amount);
 				return true;
 			}
