@@ -18,11 +18,10 @@ public class PacketGlider implements IPacket {
 		boolean isGliding = data.readBoolean();
 		ItemStack chestplate = player.inventory.armorInventory[2];
 
-		if (chestplate != null && chestplate.getItem() == ModItems.armorGlider)
-			if (!chestplate.hasTagCompound()) {
+		if (chestplate != null && chestplate.getItem() == ModItems.armorGlider) {
+			if (!chestplate.hasTagCompound())
 				chestplate.stackTagCompound = new NBTTagCompound();
-				return;
-			} else
-				chestplate.getTagCompound().setBoolean("isGliding", isGliding);
+			chestplate.getTagCompound().setBoolean("isGliding", isGliding);
+		}
 	}
 }

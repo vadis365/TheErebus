@@ -60,8 +60,8 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@Override
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack is) {
-		//if (world.isRemote)
-		// 	return;
+		if (world.isRemote)
+			return;
 
 		if (!is.hasTagCompound()) {
 			is.stackTagCompound = new NBTTagCompound();
@@ -77,22 +77,26 @@ public class ItemArmorGlider extends ItemArmor {
 			}
 		}
 
-		if (is.getTagCompound().getBoolean("isPowered") && canFly() && player.capabilities.isCreativeMode || is.getTagCompound().getBoolean("isPowered") && canFly() && player.inventory.hasItem(ModBlocks.redGem.blockID)) {
+		if (is.getTagCompound().getBoolean("isPowered") && canFly() && hasGemOrIsCreative(player)) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
 				player.motionZ *= 1.05D;
 				player.motionY += 0.1D;
-				if (is.hasTagCompound()) {
+
+				if (!player.capabilities.isCreativeMode) {
 					is.stackTagCompound.setInteger("fuelTicks", is.getTagCompound().getInteger("fuelTicks") + 1);
 					if (is.getTagCompound().getInteger("fuelTicks") >= 80) {
 						is.stackTagCompound.setInteger("fuelTicks", 0);
-						if (!player.capabilities.isCreativeMode)
-							player.inventory.consumeInventoryItem(ModBlocks.redGem.blockID);
+						player.inventory.consumeInventoryItem(ModBlocks.redGem.blockID);
 					}
 				}
 			}
 		}
+	}
+
+	private boolean hasGemOrIsCreative(EntityPlayer player) {
+		return player.capabilities.isCreativeMode || player.inventory.hasItem(ModBlocks.redGem.blockID);
 	}
 
 	@Override

@@ -18,11 +18,10 @@ public class PacketGliderPowered implements IPacket {
 		boolean isPowered = data.readBoolean();
 		ItemStack chestplate = player.inventory.armorInventory[2];
 
-		if (chestplate != null && chestplate.getItem() == ModItems.armorGlider)
-			if (!chestplate.hasTagCompound()) {
+		if (chestplate != null && chestplate.getItem().itemID == ModItems.armorGliderPowered.itemID) {
+			if (!chestplate.hasTagCompound())
 				chestplate.stackTagCompound = new NBTTagCompound();
-				return;
-			} else
-				chestplate.getTagCompound().setBoolean("isPowered", isPowered);
+			chestplate.getTagCompound().setBoolean("isPowered", isPowered);
+		}
 	}
 }
