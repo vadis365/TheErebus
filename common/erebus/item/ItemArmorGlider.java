@@ -67,8 +67,9 @@ public class ItemArmorGlider extends ItemArmor {
 			is.stackTagCompound = new NBTTagCompound();
 			return;
 		}
+		NBTTagCompound nbt = is.getTagCompound();
 
-		if (is.getTagCompound().getBoolean("isGliding")) {
+		if (nbt.getBoolean("isGliding")) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
@@ -77,7 +78,7 @@ public class ItemArmorGlider extends ItemArmor {
 			}
 		}
 
-		if (is.getTagCompound().getBoolean("isPowered") && canFly() && hasGemOrIsCreative(player)) {
+		if (nbt.getBoolean("isPowered") && canFly() && hasGemOrIsCreative(player)) {
 			player.fallDistance = 0.0F;
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
@@ -85,9 +86,9 @@ public class ItemArmorGlider extends ItemArmor {
 				player.motionY += 0.1D;
 
 				if (!player.capabilities.isCreativeMode) {
-					is.stackTagCompound.setInteger("fuelTicks", is.getTagCompound().getInteger("fuelTicks") + 1);
-					if (is.getTagCompound().getInteger("fuelTicks") >= 80) {
-						is.stackTagCompound.setInteger("fuelTicks", 0);
+					nbt.setInteger("fuelTicks", nbt.getInteger("fuelTicks") + 1);
+					if (nbt.getInteger("fuelTicks") >= 80) {
+						nbt.setInteger("fuelTicks", 0);
 						player.inventory.consumeInventoryItem(ModBlocks.redGem.blockID);
 					}
 				}
