@@ -4,8 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
@@ -30,22 +31,28 @@ public class BlockVelocity extends Block {
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-		if (entity instanceof EntityPlayer) {
-			double speed = 0.5D;
-			int meta = world.getBlockMetadata(x, y, z);
-			int[] factorX = { 0, 1, 0, -1 };
-			int[] factorZ = { -1, 0, 1, 0 };
+		if (entity.isSneaking())
+			return;
 
-			if (entity.posY > y + 0.5D) {
-				if (factorX[meta] == 0 && Math.abs(x + 0.5D - entity.posX) < 0.5D && Math.abs(x + 0.5D - entity.posX) > 0.1D)
-					entity.motionX += Math.signum(x + 0.5D - entity.posX) * Math.min(speed, Math.abs(x + 0.5D - entity.posX)) / 1.2D;
+		if (entity instanceof EntityLiving)
+			((EntityLiving) entity).func_110163_bv();
+		else if (entity instanceof EntityItem)
+			((EntityItem) entity).age = 0;
 
-				if (factorZ[meta] == 0 && Math.abs(z + 0.5D - entity.posZ) < 0.5D && Math.abs(z + 0.5D - entity.posZ) > 0.1D)
-					entity.motionZ += Math.signum(z + 0.5D - entity.posZ) * Math.min(speed, Math.abs(z + 0.5D - entity.posZ)) / 1.2D;
+		double speed = 0.5D;
+		int meta = world.getBlockMetadata(x, y, z);
+		int[] factorX = { 0, 1, 0, -1 };
+		int[] factorZ = { -1, 0, 1, 0 };
 
-				entity.motionX += factorX[meta] * speed;
-				entity.motionZ += factorZ[meta] * speed;
-			}
+		if (entity.posY > y + 0.5D) {
+			if (factorX[meta] == 0 && Math.abs(x + 0.5D - entity.posX) < 0.5D && Math.abs(x + 0.5D - entity.posX) > 0.1D)
+				entity.motionX += Math.signum(x + 0.5D - entity.posX) * Math.min(speed, Math.abs(x + 0.5D - entity.posX)) / 1.2D;
+
+			if (factorZ[meta] == 0 && Math.abs(z + 0.5D - entity.posZ) < 0.5D && Math.abs(z + 0.5D - entity.posZ) > 0.1D)
+				entity.motionZ += Math.signum(z + 0.5D - entity.posZ) * Math.min(speed, Math.abs(z + 0.5D - entity.posZ)) / 1.2D;
+
+			entity.motionX += factorX[meta] * speed;
+			entity.motionZ += factorZ[meta] * speed;
 		}
 	}
 
