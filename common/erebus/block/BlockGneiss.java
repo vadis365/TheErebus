@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockGneiss extends Block {
 
-	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissRelief2", "gneissSlab", "gneissSmooth", "gneissSmooth2", "gneissTiles", "gneissUp", "gneissWifi" };
+	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissSlab", "gneissSmooth", "gneissTiles" };
 	public static final Icon[] icons = new Icon[iconPaths.length];
 
 	public BlockGneiss(int id) {
@@ -61,10 +61,10 @@ public class BlockGneiss extends Block {
 		return 0;
 	}
 
-	@Override	
-	 public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-		 world.setBlock(x, y, z, Block.lavaMoving.blockID);
-	 }
+	@Override
+	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
+		world.setBlock(x, y, z, Block.lavaMoving.blockID);
+	}
 
 	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
