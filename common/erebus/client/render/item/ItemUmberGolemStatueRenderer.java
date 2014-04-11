@@ -42,6 +42,8 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 			case INVENTORY:
 				renderInventory(-0.25F, 0.75F, 0.0F, 0.8D);
 				break;
+			case FIRST_PERSON_MAP:
+				break;
 		}
 	}
 
