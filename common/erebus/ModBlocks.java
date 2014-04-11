@@ -34,7 +34,7 @@ import erebus.block.BlockExtenderThingy;
 import erebus.block.BlockFern;
 import erebus.block.BlockFiddlehead;
 import erebus.block.BlockGhostSand;
-import erebus.block.BlockGiantBulbCappedMushroom;
+import erebus.block.BlockErebusMushroomCap;
 import erebus.block.BlockGlowingJar;
 import erebus.block.BlockGneiss;
 import erebus.block.BlockHollowLog;
@@ -111,13 +111,13 @@ public class ModBlocks {
 	public static Block umberstone, umberOreBlock, oreFossil, redGem, blockAmber, quickSand, ghostSand, erebusOreExtra, umberstoneButton;
 
 	// WOOD
-	public static Block logErebusGroup1, logErebusGroup2, planksErebus, erebusSapling, hollowLogAcacia, erebusFlower, erebusStigma, giantBulbCappedMushroom;
+	public static Block logErebusGroup1, logErebusGroup2, planksErebus, erebusSapling, hollowLogAcacia, erebusFlower, erebusStigma;
 	public static BlockLeavesErebus leavesErebus;
 
 	// UNDERGROWTH
 	public static Block erebusGrass, thorns, blockTurnip, fiddlehead, erebusMushroomSmall;
 	public static BlockFern fern;
-	public static Block doubleHeightPlant;
+	public static Block doubleHeightPlant, erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4;
 
 	// DECORATIONS AND UTILITIES
 	public static Block blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, umberFurnace, umberFurnace_on;
@@ -164,11 +164,14 @@ public class ModBlocks {
 		hollowLogAcacia = new BlockHollowLog(ConfigHandler.hollowLogAcaciaID).setHardness(0.7F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("hollowLogAcacia");
 		erebusFlower = new BlockErebusFlower(ConfigHandler.erebusFlowerID).setHardness(1.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFlower");
 		flowerPlanted = new BlockPlantedGiantFlower(ConfigHandler.flowerPlantedID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("flowerPlanted");
-		erebusStigma = new BlockErebusStigma(ConfigHandler.erebusStigmaID).setHardness(1.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusStigma");
-		giantBulbCappedMushroom = new BlockGiantBulbCappedMushroom(ConfigHandler.giantBulbCappedMushroomID, Material.wood).setHardness(0.2F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("giantBulbCappedShroom");
+		erebusStigma = new BlockErebusStigma(ConfigHandler.erebusStigmaID).setHardness(1.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusStigma");	
 		erebusMushroomSmall = new ErebusMushroomSmall(ConfigHandler.erebusMushroomSmallID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusMushroomSmall");
+		erebusMushroomCap0 = new BlockErebusMushroomCap(ConfigHandler.erebusMushroomCap0ID, Material.wood, 0).setHardness(0.2F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("mushroomBulbCap");
+		erebusMushroomCap1 = new BlockErebusMushroomCap(ConfigHandler.erebusMushroomCap1ID, Material.wood, 1).setHardness(0.2F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("mushroom1Cap");
+		erebusMushroomCap2 = new BlockErebusMushroomCap(ConfigHandler.erebusMushroomCap2ID, Material.wood, 2).setHardness(0.2F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("mushroom2Cap");
+		erebusMushroomCap3 = new BlockErebusMushroomCap(ConfigHandler.erebusMushroomCap3ID, Material.wood, 3).setHardness(0.2F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("mushroom3Cap");
+		erebusMushroomCap4 = new BlockErebusMushroomCap(ConfigHandler.erebusMushroomCap4ID, Material.wood, 4).setHardness(0.2F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("mushroom4Cap");	
 		doubleHeightPlant = new BlockDoubleHeightPlant(ConfigHandler.doubleHeightPlantID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("doubleHeightPlant");
-
 		erebusGrass = new BlockErebusGrass(ConfigHandler.erebusGrassID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusTallGrass").setTextureName("erebus:tallgrass");
 		thorns = new BlockThorns(ConfigHandler.thornsID).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("thorns").setTextureName("erebus:thorns");
 		fern = (BlockFern) new BlockFern(ConfigHandler.fernID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("erebusFern");
@@ -246,7 +249,8 @@ public class ModBlocks {
 		// Break down long lines
 		Erebus.tabErebusBlock.add(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
 		Erebus.tabErebusBlock.add(logErebusGroup1, logErebusGroup2, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
-		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusMushroomSmall, giantBulbCappedMushroom);
+		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusMushroomSmall);
+		Erebus.tabErebusBlock.add(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4);
 		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
 		Erebus.tabErebusBlock.add(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		Erebus.tabErebusBlock.add(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
@@ -327,7 +331,11 @@ public class ModBlocks {
 		GameRegistry.registerBlock(gneiss, ItemBlockGneiss.class, "erebus.gneiss");
 		GameRegistry.registerBlock(mud, "erebus.mud");
 		GameRegistry.registerBlock(mudBricks, "erebus.mudBricks");
-		GameRegistry.registerBlock(giantBulbCappedMushroom, "erebus.giantBulbCappedShroom");
+		GameRegistry.registerBlock(erebusMushroomCap0, "erebus.mushroomBulbCap");
+		GameRegistry.registerBlock(erebusMushroomCap1, "erebus.mushroom1Cap");
+		GameRegistry.registerBlock(erebusMushroomCap2, "erebus.mushroom2Cap");
+		GameRegistry.registerBlock(erebusMushroomCap3, "erebus.mushroom3Cap");
+		GameRegistry.registerBlock(erebusMushroomCap4, "erebus.mushroom4Cap");
 		GameRegistry.registerBlock(erebusMushroomSmall, ItemBlockErebusMushroomSmall.class, "erebus.erebusMushroomSmall");
 		GameRegistry.registerBlock(honeyTreat, "erebus.honeyTreat");
 		GameRegistry.registerBlock(jarOHoney, "erebus.jarOHoney");
