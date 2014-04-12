@@ -79,24 +79,22 @@ public class ItemArmorGlider extends ItemArmor {
 	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack is) {
 		//if (world.isRemote)
 		//	return;
-
+		player.fallDistance = 0.0F;
+		
 		if (!is.hasTagCompound()) {
 			is.stackTagCompound = new NBTTagCompound();
 			return;
 		}
 		NBTTagCompound nbt = is.getTagCompound();
 
-		if (nbt.getBoolean("isGliding")) {
-			player.fallDistance = 0.0F;
+		if (nbt.getBoolean("isGliding"))
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
 				player.motionZ *= 1.05D;
 				player.motionY *= 0.5D;
 			}
-		}
 
-		if (nbt.getBoolean("isPowered") && canFly() && hasGemOrIsCreative(player)) {
-			player.fallDistance = 0.0F;
+		if (nbt.getBoolean("isPowered") && canFly() && hasGemOrIsCreative(player))
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
 				player.motionZ *= 1.05D;
@@ -110,7 +108,6 @@ public class ItemArmorGlider extends ItemArmor {
 					}
 				}
 			}
-		}
 	}
 
 	private boolean hasGemOrIsCreative(EntityPlayer player) {
