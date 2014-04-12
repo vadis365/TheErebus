@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class ModelArmorGlider extends ModelBiped {
-	// fields
 	ModelRenderer Body;
 	ModelRenderer RArm;
 	ModelRenderer LArm;
@@ -21,7 +20,6 @@ public class ModelArmorGlider extends ModelBiped {
 	ModelRenderer LWing;
 
 	public boolean isGliding;
-	public boolean isPowered;
 
 	public ModelArmorGlider() {
 		textureWidth = 64;
@@ -108,7 +106,7 @@ public class ModelArmorGlider extends ModelBiped {
 		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 		RArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * prevLimbSwing * 0.5F;
 		LArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * prevLimbSwing * 0.5F;
-		if (!isGliding && !isPowered) {
+		if (!isGliding) {
 			RWing.rotateAngleZ = 0F;
 			LWing.rotateAngleZ = 0F;
 			if (player.prevPosX != player.posX || player.prevPosZ != player.posZ) {
@@ -119,13 +117,9 @@ public class ModelArmorGlider extends ModelBiped {
 				LWing.rotateAngleX = 0.0F;
 			}
 		}
-		if (isGliding|| isPowered && !player.onGround) {
+		if (isGliding && !player.onGround) {
 			RWing.rotateAngleZ = 1.570796F;
 			LWing.rotateAngleZ = -1.570796F;
-			if(isPowered) {
-				RWing.rotateAngleX =0.3F+ MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
-				LWing.rotateAngleX =0.3F+ MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
-			}
 		}
 		if (player.isSneaking()) {
 			Body.rotateAngleX = 0.4F;
@@ -133,7 +127,7 @@ public class ModelArmorGlider extends ModelBiped {
 			LArm.rotateAngleX += 0.4F;
 			RWingbase.rotateAngleX = 0.5F;
 			LWingbase.rotateAngleX = 0.5F;
-			if (!isGliding || !isPowered) {
+			if (!isGliding) {
 				RWing.rotateAngleX = 0.5F;
 				LWing.rotateAngleX = 0.5F;
 			}

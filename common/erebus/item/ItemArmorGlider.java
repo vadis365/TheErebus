@@ -20,6 +20,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.client.model.armor.ModelArmorGlider;
+import erebus.client.model.armor.ModelArmorPowered;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemArmorGlider extends ItemArmor {
@@ -43,6 +44,7 @@ public class ItemArmorGlider extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase player, ItemStack is, int slot) {
 		ModelArmorGlider model = new ModelArmorGlider();
+		ModelArmorPowered modelPower = new ModelArmorPowered();
 		model.bipedHead.showModel = false;
 		model.bipedHeadwear.showModel = false;
 		model.bipedBody.showModel = false;
@@ -50,11 +52,26 @@ public class ItemArmorGlider extends ItemArmor {
 		model.bipedLeftArm.showModel = false;
 		model.bipedRightLeg.showModel = false;
 		model.bipedLeftLeg.showModel = false;
-		if (is.hasTagCompound())
-			model.isGliding = is.getTagCompound().getBoolean("isGliding");
-		if (is.hasTagCompound())
-			model.isPowered = is.getTagCompound().getBoolean("isPowered");
 
+		modelPower.bipedHead.showModel = false;
+		modelPower.bipedHeadwear.showModel = false;
+		modelPower.bipedBody.showModel = false;
+		modelPower.bipedRightArm.showModel = false;
+		modelPower.bipedLeftArm.showModel = false;
+		modelPower.bipedRightLeg.showModel = false;
+		modelPower.bipedLeftLeg.showModel = false;
+		
+		if (is.hasTagCompound()) {
+			model.isGliding = is.getTagCompound().getBoolean("isGliding");
+			modelPower.isGliding = is.getTagCompound().getBoolean("isGliding");
+		}
+		
+		if (is.hasTagCompound())
+			modelPower.isPowered = is.getTagCompound().getBoolean("isPowered");
+		
+		if(canFly())
+			return modelPower;
+		
 		return model;
 	}
 
@@ -122,7 +139,6 @@ public class ItemArmorGlider extends ItemArmor {
 				return;
 			}
 			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround || chestPlate.getTagCompound().getBoolean("isPowered") && !player.onGround) {
-				// Unimplemented for the time being.
 				// Method is fixed but rotations need working out!
 				int yaw = (int) player.rotationYaw;
 				if (yaw < 0)
