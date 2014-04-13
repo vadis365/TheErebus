@@ -1,10 +1,14 @@
 package erebus.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.ModBlocks;
+import erebus.network.PacketTypeHandler;
+import erebus.network.packet.PacketJarOHoney;
 
 public class TileEntityJarOHoney extends TileEntityGlowingJar {
 
@@ -30,8 +34,15 @@ public class TileEntityJarOHoney extends TileEntityGlowingJar {
 	}
 
 	private void sendUpdatesToClients() {
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		PacketDispatcher.sendPacketToAllPlayers(getDescriptionPacket());
 	}
-	
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return PacketTypeHandler.populatePacket(new PacketJarOHoney(xCoord, yCoord, zCoord, tank.getFluid()));
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
