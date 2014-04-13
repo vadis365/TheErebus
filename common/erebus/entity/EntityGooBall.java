@@ -12,7 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.PacketDispatcher;
-import erebus.network.PacketHandler;
+import erebus.network.PacketTypeHandler;
 import erebus.network.packet.PacketParticle;
 
 public class EntityGooBall extends EntityThrowable {
@@ -38,7 +38,7 @@ public class EntityGooBall extends EntityThrowable {
 	public void onUpdate() {
 		super.onUpdate();
 		if (worldObj.isRemote)
-			trailParticles(worldObj, posX-0.5D, posY, posZ-0.5D, rand);
+			trailParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
 	}
 
 	protected String getJumpedOnSound() {
@@ -48,13 +48,12 @@ public class EntityGooBall extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
 		if (!worldObj.isRemote) {
-			if (mop.entityHit != null) {
-				if (mop.entityHit instanceof EntityLivingBase) { 
+			if (mop.entityHit != null)
+				if (mop.entityHit instanceof EntityLivingBase) {
 					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 5 * 20, 3));
-					PacketDispatcher.sendPacketToAllAround(mop.entityHit.posX, mop.entityHit.posY+2D, mop.entityHit.posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_SQUISH, mop.entityHit.entityId));	
-				}	
-			} 
-				setDead();
+					PacketDispatcher.sendPacketToAllAround(mop.entityHit.posX, mop.entityHit.posY + 2D, mop.entityHit.posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, mop.entityHit.entityId)));
+				}
+			setDead();
 		}
 		worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
 	}
@@ -67,7 +66,7 @@ public class EntityGooBall extends EntityThrowable {
 	public boolean attackEntityFrom(DamageSource source, int amount) {
 		return false;
 	}
-	
+
 	public void trailParticles(World world, double posX, double posY, double posZ, Random rand) {
 		for (int count = 0; count < 20; ++count) {
 			double velX = 0.0D;
@@ -75,12 +74,12 @@ public class EntityGooBall extends EntityThrowable {
 			double velZ = 0.0D;
 			int motionX = rand.nextInt(2) * 2 - 1;
 			int motionZ = rand.nextInt(2) * 2 - 1;
-			double y = (double)((float)posY + rand.nextFloat());
-			velY = ((double)rand.nextFloat() - 0.5D) * 0.125D;
-			double z = posZ + 0.5D + 0.25D * (double)motionZ;
-			velZ = (double)(rand.nextFloat() * 1.0F * (float)motionZ);
-			double x = posX + 0.5D + 0.25D * (double)motionX;
-			velX = (double)(rand.nextFloat() * 1.0F * (float)motionX);
+			double y = (float) posY + rand.nextFloat();
+			velY = (rand.nextFloat() - 0.5D) * 0.125D;
+			double z = posZ + 0.5D + 0.25D * motionZ;
+			velZ = rand.nextFloat() * 1.0F * motionZ;
+			double x = posX + 0.5D + 0.25D * motionX;
+			velX = rand.nextFloat() * 1.0F * motionX;
 			world.spawnParticle("slime", x, y, z, velX, velY, velZ);
 		}
 	}

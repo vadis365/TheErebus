@@ -15,7 +15,10 @@ import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.ModItems;
 import erebus.entity.EntityRhinoBeetle;
-import erebus.network.PacketHandler;
+import erebus.network.PacketTypeHandler;
+import erebus.network.packet.PacketBeetleRamAttack;
+import erebus.network.packet.PacketGlider;
+import erebus.network.packet.PacketGliderPowered;
 
 public class KeyBindingHandler extends KeyHandler {
 	public static KeyBinding glide = new KeyBinding("Glide", Keyboard.KEY_G);
@@ -42,15 +45,15 @@ public class KeyBindingHandler extends KeyHandler {
 					return;
 
 				ItemStack chestPlate = player.inventory.armorInventory[2];
-				if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider ||chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
+				if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 					if (!chestPlate.hasTagCompound())
 						chestPlate.stackTagCompound = new NBTTagCompound();
 
 					chestPlate.getTagCompound().setBoolean("isGliding", true);
-					PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(4, true));
+					PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketGlider(true)));
 				}
 			}
-		
+
 		if (kb.keyCode == poweredGlide.keyCode) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
@@ -62,19 +65,18 @@ public class KeyBindingHandler extends KeyHandler {
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
 				chestPlate.getTagCompound().setBoolean("isPowered", true);
-				PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(6, true));
+				PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketGliderPowered(true)));
 			}
 		}
-		
+
 		if (kb.keyCode == beetleRam.keyCode) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
 				return;
 
-			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle) {
-			PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(5, true));
-			}
-		}		
+			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
+				PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketBeetleRamAttack(true)));
+		}
 	}
 
 	@Override
@@ -90,20 +92,19 @@ public class KeyBindingHandler extends KeyHandler {
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
 				chestPlate.getTagCompound().setBoolean("isGliding", false);
-				PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(4, false));
+				PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketGlider(false)));
 			}
-			
+
 			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 				if (!chestPlate.hasTagCompound())
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
 				chestPlate.getTagCompound().setBoolean("isPowered", false);
-				PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(6, false));
+				PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketGliderPowered(false)));
 			}
-			
-			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle) {
-			PacketDispatcher.sendPacketToServer(PacketHandler.buildPacket(5, false));
-			}	
+
+			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
+				PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketBeetleRamAttack(false)));
 		}
 	}
 

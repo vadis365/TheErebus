@@ -15,7 +15,8 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.inventory.ContainerColossalCrate;
-import erebus.network.PacketHandler;
+import erebus.network.PacketTypeHandler;
+import erebus.network.packet.PacketColossalCratePage;
 import erebus.tileentity.TileEntityBambooCrate;
 
 @SideOnly(Side.CLIENT)
@@ -24,20 +25,8 @@ public class GuiColossalCrate extends GuiContainer {
 	public static final boolean hasInventoryTweaks = Loader.isModLoaded("inventorytweaks");
 	private static final ResourceLocation GUI_BAMBOO_CRATE = new ResourceLocation("erebus:textures/gui/container/collosalcrate.png");
 
-	/*
-	 * public TileEntityBambooCrate crate1; public TileEntityBambooCrate crate2;
-	 * public TileEntityBambooCrate crate3; public TileEntityBambooCrate crate4;
-	 * public TileEntityBambooCrate crate5; public TileEntityBambooCrate crate6;
-	 * public TileEntityBambooCrate crate7; public TileEntityBambooCrate crate8;
-	 */
-
 	public GuiColossalCrate(InventoryPlayer playerInventory, List<TileEntityBambooCrate> list) {
 		super(new ContainerColossalCrate(playerInventory, list));
-		/*
-		 * crate1 = list.get(0); crate2 = list.get(1); crate3 = list.get(2);
-		 * crate4 = list.get(3); crate5 = list.get(4); crate6 = list.get(5);
-		 * crate7 = list.get(6); crate8 = list.get(7);
-		 */
 		allowUserInput = false;
 		ySize = 220;
 		xSize = 230;
@@ -69,12 +58,12 @@ public class GuiColossalCrate extends GuiContainer {
 			switch (button.id) {
 				case 0:
 					newPage = getPageNumber() - 1;
-					mc.getNetHandler().addToSendQueue(PacketHandler.buildPacket(1, newPage));
+					mc.getNetHandler().addToSendQueue(PacketTypeHandler.populatePacket(new PacketColossalCratePage(newPage)));
 					((ContainerColossalCrate) inventorySlots).changePage(newPage);
 					break;
 				case 1:
 					newPage = getPageNumber() + 1;
-					mc.getNetHandler().addToSendQueue(PacketHandler.buildPacket(1, newPage));
+					mc.getNetHandler().addToSendQueue(PacketTypeHandler.populatePacket(new PacketColossalCratePage(newPage)));
 					((ContainerColossalCrate) inventorySlots).changePage(newPage);
 					break;
 			}

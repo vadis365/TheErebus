@@ -1,21 +1,61 @@
 package erebus.network.packet;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.world.World;
+import erebus.network.PacketTypeHandler;
 
-import com.google.common.io.ByteArrayDataInput;
+public class PacketSound extends CustomPacket {
 
-import erebus.network.IPacket;
+	public static final byte SOUND_VELOCITY_USE = 0;
+	public static final byte SOUND_CAMO_USE = 1;
 
-public class PacketSound implements IPacket {
-	public static final byte SOUND_VELOCITY_USE = 1;
-	public static final byte SOUND_CAMO_USE = 2;
+	private byte type;
+	private double x, y, z;
+	private float loudness, pitch;
+
+	public PacketSound() {
+		super(PacketTypeHandler.SOUND);
+	}
+
+	public PacketSound(byte type, double x, double y, double z, float loudness, float pitch) {
+		this();
+		this.type = type;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.loudness = loudness;
+		this.pitch = pitch;
+	}
 
 	@Override
-	public void handle(INetworkManager manager, Packet250CustomPayload packet, EntityPlayer player, ByteArrayDataInput data) {
+	public void readData(DataInputStream data) throws IOException {
+		type = data.readByte();
+		x = data.readDouble();
+		y = data.readDouble();
+		z = data.readDouble();
+		loudness = data.readFloat();
+		pitch = data.readFloat();
+	}
+
+	@Override
+	public void writeData(DataOutputStream dos) throws IOException {
+		dos.writeByte(type);
+		dos.writeDouble(x);
+		dos.writeDouble(y);
+		dos.writeDouble(z);
+		dos.writeFloat(loudness);
+		dos.writeFloat(pitch);
+	}
+
+	@Override
+	public void execute(World world, EntityPlayer player) {
 		String s = null;
-		switch (data.readByte()) {
+
+		switch (type) {
 			case SOUND_VELOCITY_USE:
 				s = "erebus:CentipedeSound";
 				break;
@@ -25,6 +65,6 @@ public class PacketSound implements IPacket {
 		}
 
 		if (s != null)
-			player.worldObj.playSound(data.readDouble(), data.readDouble(), data.readDouble(), s, data.readFloat(), data.readFloat(), true);
+			player.worldObj.playSound(x, y, z, s, loudness, pitch, true);
 	}
 }

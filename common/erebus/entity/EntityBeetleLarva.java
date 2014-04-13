@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.ModItems;
 import erebus.entity.ai.EntityAIEatWoodenItem;
-import erebus.network.PacketHandler;
+import erebus.network.PacketTypeHandler;
 import erebus.network.packet.PacketParticle;
 
 public class EntityBeetleLarva extends EntityAnimal {
@@ -89,11 +89,10 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = this.getBrightness(1.0F);
-		if (light >= 0F) {
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(this.boundingBox);
-	    }
-	    return super.getCanSpawnHere();
+		float light = getBrightness(1.0F);
+		if (light >= 0F)
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		return super.getCanSpawnHere();
 	}
 
 	@Override
@@ -161,28 +160,26 @@ public class EntityBeetleLarva extends EntityAnimal {
 	}
 
 	private void spawnBeetle() {
-		if(getTame()==0) {
-		EntityBeetle entityBeetle = new EntityBeetle(worldObj);
-		entityBeetle.setPosition(posX, posY, posZ);
-		worldObj.spawnEntityInWorld(entityBeetle);
+		if (getTame() == 0) {
+			EntityBeetle entityBeetle = new EntityBeetle(worldObj);
+			entityBeetle.setPosition(posX, posY, posZ);
+			worldObj.spawnEntityInWorld(entityBeetle);
 		}
-		if(getTame()==1) {
-		EntityBeetle entityBeetle = new EntityBeetle(worldObj);
-		entityBeetle.setPosition(posX, posY, posZ);
-		entityBeetle.setTame((byte) 1);
-		worldObj.spawnEntityInWorld(entityBeetle);
-		}
-		else if(getTame()==2) {
-		EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(worldObj);
-		entityRhinoBeetle.setPosition(posX, posY, posZ);
-		entityRhinoBeetle.setTameState((byte) 1);
-		worldObj.spawnEntityInWorld(entityRhinoBeetle);
-		}
-		else if(getTame()==3) {
-		EntityTitanBeetle entityTitanBeetle = new EntityTitanBeetle(worldObj);
-		entityTitanBeetle.setPosition(posX, posY, posZ);
-		entityTitanBeetle.setTameState((byte) 1);
-		worldObj.spawnEntityInWorld(entityTitanBeetle);
+		if (getTame() == 1) {
+			EntityBeetle entityBeetle = new EntityBeetle(worldObj);
+			entityBeetle.setPosition(posX, posY, posZ);
+			entityBeetle.setTame((byte) 1);
+			worldObj.spawnEntityInWorld(entityBeetle);
+		} else if (getTame() == 2) {
+			EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(worldObj);
+			entityRhinoBeetle.setPosition(posX, posY, posZ);
+			entityRhinoBeetle.setTameState((byte) 1);
+			worldObj.spawnEntityInWorld(entityRhinoBeetle);
+		} else if (getTame() == 3) {
+			EntityTitanBeetle entityTitanBeetle = new EntityTitanBeetle(worldObj);
+			entityTitanBeetle.setPosition(posX, posY, posZ);
+			entityTitanBeetle.setTameState((byte) 1);
+			worldObj.spawnEntityInWorld(entityTitanBeetle);
 		}
 	}
 
@@ -190,7 +187,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onDeathUpdate() {
 		super.onDeathUpdate();
 		if (isSquashed) {
-			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketHandler.buildPacket(2, PacketParticle.BEETLE_LARVA_SQUISH, entityId));
+			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, entityId)));
 			worldObj.playSoundEffect(posX, posY, posZ, getJumpedOnSound(), 1.0F, 0.5F);
 			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
 			if (!worldObj.isRemote) {

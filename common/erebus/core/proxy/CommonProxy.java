@@ -6,13 +6,8 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import com.google.common.io.ByteArrayDataInput;
-
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockPetrifiedChest;
@@ -87,10 +82,6 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityExtenderThingy.class, "erebus.extenderThingy");
 		GameRegistry.registerTileEntity(TileEntityBambooPole.class, "erebus.bambooPole");
 		GameRegistry.registerTileEntity(TileEntityJarOHoney.class, "erebus.jarOHoney");
-	}
-
-	public void handleParticlePacket(INetworkManager manager, Packet250CustomPayload packet, EntityPlayer player, ByteArrayDataInput data) {
-		// Unused server side. -- see ClientProxy for implementation
 	}
 
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {

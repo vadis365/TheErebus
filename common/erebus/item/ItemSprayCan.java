@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.Erebus;
 import erebus.ModBlocks;
-import erebus.network.PacketHandler;
+import erebus.network.PacketTypeHandler;
 import erebus.network.packet.PacketParticle;
 
 public class ItemSprayCan extends Item {
@@ -32,8 +32,8 @@ public class ItemSprayCan extends Item {
 			int i2 = ModBlocks.insectRepellent.blockID;
 			if (block != null && world.doesBlockHaveSolidTopSurface(x, y, z) && i1 != i2) {
 				world.setBlock(x, y + 1, z, i2);
-				PacketDispatcher.sendPacketToAllAround(x, y, z, 64D, world.provider.dimensionId, PacketHandler.buildPacket(2, PacketParticle.SPRAY_CAN));
-				--is.stackSize;
+				PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketParticle((byte) 1, player.entityId)));
+				is.stackSize--;
 				world.playSoundEffect(x, y + 1, z, getSprayCanSound(), 1.0F, 1.0F);
 				return true;
 			} else
