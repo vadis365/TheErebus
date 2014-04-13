@@ -55,7 +55,7 @@ public class ItemGlowingJarRenderer implements IItemRenderer {
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
 		GL11.glScaled(1.0D, 1.25D, 1.0D);
-		model.render();
+		model.render(null);
 		GL11.glPopMatrix();
 	}
 }

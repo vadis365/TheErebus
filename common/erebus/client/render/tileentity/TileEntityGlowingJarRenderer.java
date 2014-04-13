@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.client.model.block.ModelGlowingJar;
+import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityJarOHoney;
 
 @SideOnly(Side.CLIENT)
@@ -55,7 +56,7 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
 		GL11.glScalef(0.7F, -1F, -0.7F);
 		GL11.glDisable(GL11.GL_CULL_FACE);
-		glowingJar.render();
+		glowingJar.render(tile);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glPopMatrix();
 	}
