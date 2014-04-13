@@ -5,7 +5,7 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
-
+// use this!
 public abstract class TileEntityErebusAltar extends TileEntity {
 
 	protected abstract void writeTileToNBT(NBTTagCompound nbt);
