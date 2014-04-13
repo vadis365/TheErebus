@@ -81,7 +81,6 @@ public enum PacketTypeHandler {
 	}
 
 	public static void writeFluidStack(FluidStack fluid, DataOutput dos) throws IOException {
-		System.out.println(fluid);
 		if (fluid == null)
 			dos.writeInt(-1);
 		else {
@@ -94,7 +93,6 @@ public enum PacketTypeHandler {
 	public static FluidStack readFluidStack(DataInputStream data) throws IOException {
 		FluidStack fluid = null;
 		int id = data.readInt();
-		System.out.println(id);
 		if (id > 0) {
 			int amount = data.readInt();
 			fluid = new FluidStack(id, amount);
