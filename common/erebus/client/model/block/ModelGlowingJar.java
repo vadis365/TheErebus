@@ -43,7 +43,7 @@ public class ModelGlowingJar extends ModelBase {
 			int capacity = ((TileEntityJarOHoney)tile).tank.getCapacity();
 			System.out.println("Fluid: "+amount);
 			System.out.println("Capacity: "+capacity);
-			float size = 12F;///capacity*amount;
+			float size = 12F/capacity*amount;
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0F, 9.75F, 0F);
 			GL11.glScalef(1F, -size, -1F);
