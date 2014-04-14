@@ -1,6 +1,5 @@
 package erebus.block;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
@@ -16,6 +16,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class BlockDoubleHeightPlant extends Block {
 
@@ -118,27 +122,54 @@ public class BlockDoubleHeightPlant extends Block {
 	
 	@Override
     public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+		ItemStack item = null;
 		int meta = world.getBlockMetadata(x, y, z);
-    	   if(meta <= 7) {
-    		   world.setBlockToAir(x, y +1, z);
-    		   dropBlockAsItem(world, x, y, z, meta, 1);
-    	   }
-    	   else {
-    		   dropBlockAsItem(world, x, y, z, meta-8, 1);
-    		   world.setBlockToAir(x, y -1, z);      
-       }
+		
+ 	   if(meta <= 7) 
+		   world.setBlockToAir(x, y +1, z);
+	   else 
+		  world.setBlockToAir(x, y -1, z);
+ 	   
+		if(meta > 7) 
+			meta-=8;
+		
+		switch(meta) {
+		
+		case 0:
+			item = new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal());
+			break;
+			
+		case 1:
+			item = new ItemStack(ModItems.erebusMaterials, 1, DATA.weepingBluePetal.ordinal());
+			break;
+			
+		case 2:
+			item = new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal());
+			break;
+		
+		case 3:
+			item = new ItemStack(Item.seeds, 1);
+			break;
+			
+		case 4:
+			item = new ItemStack(Item.seeds, 1);
+			break;
+			
+		case 5:
+			item = new ItemStack(ModBlocks.doubleHeightPlant, 1, meta);
+			break;
+			
+		case 6:
+			item = new ItemStack(ModBlocks.doubleHeightPlant, 1, meta);
+			break;
+			
+		case 7:
+			item = new ItemStack(Item.seeds, 1);
+			break;	
+		}
+		  Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);		  
     }
 
-	@Override
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int meta, int fortune) {
-		ArrayList<ItemStack> ret = super.getBlockDropped(world, x, y, z, meta, fortune);
-		if(meta<=7)
-			ret.add(new ItemStack(blockID, 1, meta));
-		if(meta>7)
-			ret.add(new ItemStack(blockID, 1, meta-8));
-		return ret;
-	}
-	
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
