@@ -62,7 +62,6 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 			renderItem.doRenderItem(ghostEntityItem, 0, 0, 0, 0, 0);
 			GL11.glPopMatrix();
 		}
-
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/glowingJar.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
