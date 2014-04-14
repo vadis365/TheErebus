@@ -6,10 +6,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
-public class ItemBlockErebusMushroomSmall extends ItemBlockGeneric {
+public class ItemBlockErebusPlantSmall extends ItemBlockGeneric {
 
-	public ItemBlockErebusMushroomSmall(int id) {
-		super(id, "erebusMushroomSmall");
+	public ItemBlockErebusPlantSmall(int id) {
+		super(id, "erebusPlantSmall");
 	}
 	
 	@Override

@@ -30,7 +30,7 @@ public class ConfigHandler {
 	public static int blockWitherWebID, extenderThingyID, bambooPoleID, umberstonePillarID, velocityBlockID, petrifiedWoodStairsID;
 	public static int wallErebusID, amberBrickStairsID, waspNestStairsID, spiderSpawnerID, jumpingSpiderSpawnerID, waspSpawnerID;
 	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID, erebusHoneyFluidID, mudID, mudBricksID, flowerPlantedID;
-	public static int erebusMushroomCap0ID, erebusMushroomCap1ID, erebusMushroomCap2ID, erebusMushroomCap3ID, erebusMushroomCap4ID, erebusMushroomSmallID;
+	public static int erebusMushroomCap0ID, erebusMushroomCap1ID, erebusMushroomCap2ID, erebusMushroomCap3ID, erebusMushroomCap4ID, erebusPlantSmallID;
 	public static int honeyTreatID, jarOHoneyID, jadeBlockID;
 	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID, gneissStairsID;
 
@@ -122,7 +122,7 @@ public class ConfigHandler {
 			erebusMushroomCap2ID = config.getBlock("Block ID of Giant Mushroom 2", 2610).getInt(2610);
 			erebusMushroomCap3ID = config.getBlock("Block ID of Giant Mushroom 3", 2611).getInt(2611);
 			erebusMushroomCap4ID = config.getBlock("Block ID of Giant Mushroom 4", 2612).getInt(2612);
-			erebusMushroomSmallID = config.getBlock("Block ID of Small Mushrooms", 2603).getInt(2603);
+			erebusPlantSmallID = config.getBlock("Block ID of Small Plants and Mushrooms", 2603).getInt(2603);
 			honeyTreatID = config.getBlock("Block ID of Honey Treat", 2604).getInt(2604);
 			jarOHoneyID = config.getBlock("Block ID of Jar O'Honey", 2605).getInt(2605);
 			jadeBlockID = config.getBlock("BlockID of Jade Block", 2606).getInt(2606);

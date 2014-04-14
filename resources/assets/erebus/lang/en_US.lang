@@ -230,11 +230,19 @@ doubleHeightPlant_item_4.name=Tall Erebus Grass
 doubleHeightPlant_item_5.name=Tangled Stalk Mushrooms
 doubleHeightPlant_item_6.name=High Capped Mushroom
 doubleHeightPlant_item_7.name=Tall Fern
-erebusMushroomSmall_item_0.name=Bulb Capped Mushroom
-erebusMushroomSmall_item_1.name=Small Shroom1 
-erebusMushroomSmall_item_2.name=Small Shroom2
-erebusMushroomSmall_item_3.name=Small Shroom3
-erebusMushroomSmall_item_4.name=Small Shroom4
+erebusPlantSmall_item_0.name=Bulb Capped Mushroom
+erebusPlantSmall_item_1.name=Small Shroom1 
+erebusPlantSmall_item_2.name=Small Shroom2
+erebusPlantSmall_item_3.name=Small Shroom3
+erebusPlantSmall_item_4.name=Small Shroom4
+erebusPlantSmall_item_5.name=Cat Tail
+erebusPlantSmall_item_6.name=Desert Shrub 
+erebusPlantSmall_item_7.name=Hanger
+erebusPlantSmall_item_8.name=Hanger Seeded
+erebusPlantSmall_item_9.name=Mire Coral
+erebusPlantSmall_item_10.name=Nettle
+erebusPlantSmall_item_11.name=Nettle Flowered 
+erebusPlantSmall_item_12.name=Swamp Plant
 
 #Items
 item.helmetExo.name=Exoskeleton Helmet

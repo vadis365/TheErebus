@@ -43,7 +43,7 @@ public class BlockErebusMushroomCap extends Block {
 
 	@Override
 	public int idDropped(int meta, Random rand, int fortune) {
-        return ModBlocks.erebusMushroomSmall.blockID;
+        return ModBlocks.erebusPlantSmall.blockID;
     }
 	
 	@Override
