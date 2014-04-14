@@ -306,6 +306,9 @@ public class RecipeHandler {
 		OreDictionary.registerOre("mobEgg", new ItemStack(ModItems.spawnEggs, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("gemJade", new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.DATA.jade.ordinal()));
 		OreDictionary.registerOre("blockJade", new ItemStack(ModBlocks.jadeBlock));
+		OreDictionary.registerOre("blockSpawner", ModBlocks.spiderSpawner);
+		OreDictionary.registerOre("blockSpawner", ModBlocks.jumpingSpiderSpawner);
+		OreDictionary.registerOre("blockSpawner", ModBlocks.waspSpawner);
 
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.BLACK_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeRed", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.RED_PETAL.ordinal()));
