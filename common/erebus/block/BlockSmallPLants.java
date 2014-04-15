@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSmallPLants extends BlockMushroom {
 	
-	public static final String[] iconPaths = new String[] { "bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "mushroomSmall4", "cattail", "desertShrub", "hanger", "hangerSeed", "mireCoral", "nettle", "nettleFlowered", "swampPlant"};
+	public static final String[] iconPaths = new String[] { "bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "dutchCapShroom", "cattail", "desertShrub", "hanger", "hangerSeed", "mireCoral", "nettle", "nettleFlowered", "swampPlant"};
 	public static final Icon[] icons = new Icon[iconPaths.length];
 	
     public BlockSmallPLants(int id) {
@@ -41,7 +41,7 @@ public class BlockSmallPLants extends BlockMushroom {
 			widthReduced = 0.125F; height = 0.625F;
 			break;
 		case 4:
-			widthReduced = 0; height = 1F;
+			widthReduced = 0.0625F; height = 0.875F;
 			break;	
 		case 5:
 			widthReduced = 0; height = 0.9375F;
