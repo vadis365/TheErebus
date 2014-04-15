@@ -135,7 +135,7 @@ public class ModItems {
 		sprintLeggings = new ItemSprintLeggings(ConfigHandler.sprintLeggingsID, ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("sprintLeggings").setTextureName("erebus:sprintLeggings");
 		jumpBoots = new ItemJumpBoots(ConfigHandler.jumpBootsID, ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("jumpBoots").setTextureName("erebus:jumpBoots");
 		armorGlider = new ItemArmorGlider(ConfigHandler.armorGliderID, 1).setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
-		armorGliderPowered = new ItemArmorGlider(ConfigHandler.armorGliderPoweredID, 1).setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGlider");
+		armorGliderPowered = new ItemArmorGlider(ConfigHandler.armorGliderPoweredID, 1).setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 		
 		spawnEggs = new ItemSpawnEggs(ConfigHandler.spawnEggsID).setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
 	}

@@ -103,12 +103,16 @@ public class ModelArmorPowered extends ModelBiped {
 		GL11.glPopMatrix();	
 		RWingbase.render(unitPixel);
 		LWingbase.render(unitPixel);
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
 	    RWingUpgradeTop.render(unitPixel);
 	    RWingUpgradeMid.render(unitPixel);
 	    RWingUpgradeBottom.render(unitPixel);
 	    LWingUpgradeTop.render(unitPixel);
 	    LWingUpgradeMid.render(unitPixel);
 	    LWingUpgradeBottom.render(unitPixel);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glPopMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

@@ -27,7 +27,6 @@ import com.google.common.io.ByteArrayDataOutput;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.entity.ai.EntityAISeekHoneyTreat;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
@@ -36,18 +35,16 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	AnimationMathHelper mathWings = new AnimationMathHelper();
 	private boolean areAttributesSetup = false;
 	public boolean waspFlying;
-	public boolean waspEating;
 	public final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	public final EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.3D, true);
 	
 	public EntityWasp(World world) {
 		super(world);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAISeekHoneyTreat(this, 10));
-		tasks.addTask(2, aiAttackOnCollide);
-		tasks.addTask(3, new EntityAIWander(this, 0.4D));
-		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(5, new EntityAILookIdle(this));
+		tasks.addTask(1, aiAttackOnCollide);
+		tasks.addTask(2, new EntityAIWander(this, 0.4D));
+		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(1, aiNearestAttackableTarget);
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGrasshopper.class, 0, true));
@@ -140,10 +137,6 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		waspFlying = state;
 	}
 	
-	public void setWaspEating(boolean state) {
-		waspEating = state;
-	}
-	
 	@Override
 	public void onUpdate() {
 		byte i;
@@ -165,7 +158,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			motionY *= 0.6D;
 
 		if (!worldObj.isRemote) {
-			if (getEntityToAttack() == null && !waspEating) {
+			if (getEntityToAttack() == null) {
 				if (rand.nextInt(200) == 0)
 					if (!waspFlying)
 						setWaspFlying(true);
