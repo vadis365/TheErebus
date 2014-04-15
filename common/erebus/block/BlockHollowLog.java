@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityWoodlouse;
 
 public class BlockHollowLog extends Block {
 
@@ -80,13 +80,12 @@ public class BlockHollowLog extends Block {
 
 		world.setBlockMetadataWithNotify(x, y, z, l == 0 || l == 2 ? 0 : 1, 2);
 	}
-	
-// Debug placeholder code until woodlouse mob is added
+
 	@Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
         if (!world.isRemote) {
-        	if(world.rand.nextInt(2)==0) { // will be 1:20 not 1:2
-            EntityBeetleLarva entity = new EntityBeetleLarva(world);
+        	if(world.rand.nextInt(5)==0) {
+            EntityWoodlouse entity = new EntityWoodlouse(world);
             entity.setLocationAndAngles((double)x + 0.5D, (double)y, (double)z + 0.5D, 0.0F, 0.0F);
             world.spawnEntityInWorld(entity);
             }

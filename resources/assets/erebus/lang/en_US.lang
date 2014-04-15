@@ -390,6 +390,7 @@ entity.Erebus.TitanBeetle.name=Titan Beetle
 entity.Erebus.BotFlyLarva.name=Bot Fly Larva
 entity.Erebus.Sporeling.name=Sporeling
 entity.Erebus.WheatWeevil.name=Crop Weevil
+entity.Erebus.Woodlouse.name=Woodlouse
 
 #Fluids
 fluid.erebus.honey=Honey
