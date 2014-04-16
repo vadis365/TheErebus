@@ -42,7 +42,7 @@ public class ConfigHandler {
 	public static int reinExoskeletonHelmetID, reinExoskeletonBodyID, reinExoskeletonLegsID, reinExoskeletonBootsID, fossilClubID;
 	public static int waspSwordID, maxSpeedBowID, waspDaggerID, scorpionPincerID, webSlingerID, reinCompoundGogglesID, compoundGogglesID;
 	public static int sprintLeggingsID, jumpBootsID, armorGliderID, spawnEggsID, nectarCollectorID, beeTamingAmuletID, doorAmberItemID, bucketHoneyID;
-	public static int homingBeeconID, flowerSeedsID, whetstoneID, armorGliderPoweredID;
+	public static int homingBeeconID, flowerSeedsID, whetstoneID, armorGliderPoweredID, woodlouseBallID;
 
 	public static void loadConfig(FMLPreInitializationEvent event) {
 		config = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
@@ -201,7 +201,8 @@ public class ConfigHandler {
 			scorpionPincerID = config.getItem("Item ID of Scorpion Pincer", 9741).getInt(9741);
 			webSlingerID = config.getItem("Item ID of Web Slinger", 9745).getInt(9745);
 			blockExtractorID = config.getItem("Item ID of Block Extractor", 9747).getInt(9747);
-
+			woodlouseBallID = config.getItem("Item ID of Woodlouse Ball", 9756).getInt(9756);
+			
 			compoundGogglesID = config.getItem("Item ID of Compound Goggles", 9730).getInt(9730);
 			reinCompoundGogglesID = config.getItem("Item ID of Reinforced Compound Goggles", 9740).getInt(9740);
 			sprintLeggingsID = config.getItem("Item ID of Sprint Leggings", 9731).getInt(9731);
@@ -216,7 +217,7 @@ public class ConfigHandler {
 
 			spawnEggsID = config.getItem("Item ID of Spawn Eggs", 9743).getInt(9743);
 
-			// latest ID used (please update after adding new items!) >>> 9755
+			// latest ID used (please update after adding new items!) >>> 9756
 
 			// Biomes & misc
 			ModBiomes.undergroundJungleID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 151).getInt(151);

@@ -45,6 +45,7 @@ import erebus.entity.EntityWaspDagger;
 import erebus.entity.EntityWebSling;
 import erebus.entity.EntityWheatWeevil;
 import erebus.entity.EntityWoodlouse;
+import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.item.ItemSpawnEggs;
@@ -138,6 +139,7 @@ public class ModEntities {
 		registerEntity(72, EntityErebusLightningBolt.class, "ErebusLightning");
 		registerEntity(73, EntityExtractedBlock.class, "ExtractedBlock");
 		registerEntity(74, EntityGooBall.class, "GooBall");
+		registerEntity(75, EntityWoodlouseBall.class, "WoodlouseBall");
 		
 		// Spawn conditions
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);

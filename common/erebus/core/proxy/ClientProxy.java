@@ -85,6 +85,7 @@ import erebus.client.render.item.WandOfAnimationItemRenderer;
 import erebus.client.render.item.WaspDaggerItemRenderer;
 import erebus.client.render.item.WaspSwordItemRenderer;
 import erebus.client.render.item.WebSlingerItemRenderer;
+import erebus.client.render.item.WoodlouseBallItemRenderer;
 import erebus.client.render.tileentity.TileEntityBambooBridgeRenderer;
 import erebus.client.render.tileentity.TileEntityBambooPoleRenderer;
 import erebus.client.render.tileentity.TileEntityBoneBlockRenderer;
@@ -142,6 +143,7 @@ import erebus.entity.EntityWaspDagger;
 import erebus.entity.EntityWebSling;
 import erebus.entity.EntityWheatWeevil;
 import erebus.entity.EntityWoodlouse;
+import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.tileentity.TileEntityBambooBridge;
@@ -228,6 +230,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityWheatWeevil.class, new RenderWheatWeevil(new ModelWheatWeevil(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGooBall.class, new RenderGooBall());
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodlouse.class, new RenderWoodlouse(new ModelWoodlouse(), 0.3F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWoodlouseBall.class, new WoodlouseBallItemRenderer());
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());
@@ -270,6 +273,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.extenderThingy.blockID, new ExtenderThingyItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.bambooPole.blockID, new BambooPoleItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.jarOHoney.blockID, new ItemGlowingJarRenderer());
+		MinecraftForgeClient.registerItemRenderer(ModItems.woodlouseBall.itemID, new WoodlouseBallItemRenderer());
 	}
 
 	@Override
