@@ -71,11 +71,11 @@ public class Utils {
 				itemStack3.stackSize += hold;
 			} else if (inventory.getStackInSlot(i) == null && openSlot == -1)
 				openSlot = i;
-		if (stack != null) {
-			if (openSlot <= -1)
-				return false;
-			inventory.setInventorySlotContents(openSlot, stack);
-		}
+		
+		if (openSlot <= -1)
+			return false;
+		inventory.setInventorySlotContents(openSlot, stack);
+		
 		return true;
 	}
 

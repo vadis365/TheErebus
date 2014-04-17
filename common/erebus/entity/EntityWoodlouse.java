@@ -10,7 +10,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
@@ -18,7 +17,6 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.ItemErebusMaterial.DATA;
-import erebus.tileentity.TileEntityAnimatedChest;
 
 public class EntityWoodlouse extends EntityCreature {
 
@@ -97,7 +95,7 @@ public class EntityWoodlouse extends EntityCreature {
 	            double velX = this.rand.nextGaussian() * 0.02D;
 	            double velY = this.rand.nextGaussian() * 0.02D;
 	            double velZ = this.rand.nextGaussian() * 0.02D;
-	            this.worldObj.spawnParticle("smoke", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, velX, velY, velZ);
+	            this.worldObj.spawnParticle("smoke", this.posX + (this.rand.nextFloat() * this.width * 2.0F) - this.width, this.posY + 0.5D + (this.rand.nextFloat() * this.height), this.posZ + (this.rand.nextFloat() * this.width * 2.0F) - this.width, velX, velY, velZ);
 	        }
 	}
 	

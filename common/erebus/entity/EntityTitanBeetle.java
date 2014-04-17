@@ -330,21 +330,21 @@ public class EntityTitanBeetle extends EntityTameable {
 	@SideOnly(Side.CLIENT)
 	   public void randomDisplayTick(World world, double d, double f, double e, Random rand) {
 	        for (int l = 0; l < 3; ++l) {
-	            double d0 = (double)((float)d + rand.nextFloat());
-	            double d1 = (double)((float)f + rand.nextFloat());
-	            d0 = (double)((float)e + rand.nextFloat());
+	            double d0 = ((float)d + rand.nextFloat());
+	            double d1 = ((float)f + rand.nextFloat());
+	            d0 = ((float)e + rand.nextFloat());
 	            double d2 = 0.0D;
 	            double d3 = 0.0D;
 	            double d4 = 0.0D;
 	            int i1 = rand.nextInt(2) * 2 - 1;
 	            int j1 = rand.nextInt(2) * 2 - 1;
-	            d2 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
-	            d3 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
-	            d4 = ((double)rand.nextFloat() - 0.5D) * 0.125D;
-	            double d5 = (double)e + 0.5D + 0.25D * (double)j1;
-	            d4 = (double)(rand.nextFloat() * 1.0F * (float)j1);
-	            double d6 = (double)d + 0.5D + 0.25D * (double)i1;
-	            d2 = (double)(rand.nextFloat() * 1.0F * (float)i1);
+	            d2 = (rand.nextFloat() - 0.5D) * 0.125D;
+	            d3 = (rand.nextFloat() - 0.5D) * 0.125D;
+	            d4 = (rand.nextFloat() - 0.5D) * 0.125D;
+	            double d5 = e + 0.5D + 0.25D * j1;
+	            d4 = (rand.nextFloat() * 1.0F * j1);
+	            double d6 = d + 0.5D + 0.25D * i1;
+	            d2 = (rand.nextFloat() * 1.0F * i1);
 	            world.spawnParticle("portal", d6, d1, d5, d2, d3, d4);
 	        }
 	    }

@@ -86,7 +86,7 @@ public class BlockHollowLog extends Block {
         if (!world.isRemote) {
         	if(world.rand.nextInt(5)==0) {
             EntityWoodlouse entity = new EntityWoodlouse(world);
-            entity.setLocationAndAngles((double)x + 0.5D, (double)y, (double)z + 0.5D, 0.0F, 0.0F);
+            entity.setLocationAndAngles(x + 0.5D, y, z + 0.5D, 0.0F, 0.0F);
             world.spawnEntityInWorld(entity);
             }
         }

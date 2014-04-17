@@ -24,7 +24,8 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator
         super(false);
     }
 
-    public boolean generate(World world, Random rand, int x, int y, int z)
+    @Override
+	public boolean generate(World world, Random rand, int x, int y, int z)
     {
         int type = this.mushroomType;
 
