@@ -21,3 +21,7 @@ Only use one tag from each of the following categories:
 ### Issue priorities
 
 **Major** - important task to prioritize
+
+### Issue statuses
+
+**Invalid** - lack of information, invalid request
