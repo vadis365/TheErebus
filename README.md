@@ -8,7 +8,7 @@ Only use one tag from each of the following categories:
 
 ### Issue types
 
-**New feature** - an addition
+**New feature** - addition of a feature
 
 **Enhancement** - medium or large improvement of existing feature
 
