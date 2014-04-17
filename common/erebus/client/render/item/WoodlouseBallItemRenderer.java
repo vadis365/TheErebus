@@ -31,26 +31,26 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-		return helper != ItemRendererHelper.BLOCK_3D;
+		return helper != ItemRendererHelper.ENTITY_BOBBING && helper != ItemRendererHelper.ENTITY_ROTATION;
 	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
-			case ENTITY:
-				renderBall(0.0F, 1.0F, 0.0F, 1D);
-				break;
-			case EQUIPPED:
-				renderEquipped(0.6F, 1.5F, 0.4F, 0.75D);
-				break;
-			case EQUIPPED_FIRST_PERSON:
-				renderBallFirstPerson(0F, 0F, 1.7F, 1.75D);
-				break;
-			case INVENTORY:
-				renderBallInventory(0F, -1.7F, 0.0F, 1.5D);
-				break;
-			default:
-				break;
+		case ENTITY:
+			renderBall(0.0F, 0.0F, 0.0F, 1.2D);
+			break;
+		case EQUIPPED:
+			renderEquipped(0.6F, 1.5F, 0.4F, 0.75D);
+			break;
+		case EQUIPPED_FIRST_PERSON:
+			renderBallFirstPerson(0F, 0F, 1.7F, 1.75D);
+			break;
+		case INVENTORY:
+			renderBallInventory(0F, -1.7F, 0.0F, 1.5D);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -68,14 +68,14 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y-1.7F, z);
-			GL11.glRotatef(-90F, 0, 1F, 0);
+			GL11.glTranslatef(x, y - 0.7F, z);
 			GL11.glScaled(0.8F, 0.8F, 0.8F);
 			ModelWoodlouseBall.render(0.0625F);
 			GL11.glPopMatrix();
 		} else {
 			GL11.glPushMatrix();
 			GL11.glScaled(size, size, size);
+			GL11.glTranslatef(x, y - 0.9F, z);
 			ModelWoodlouseBall.render(0.0625F);
 			GL11.glPopMatrix();
 		}
@@ -109,7 +109,7 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 	public void renderWoodlouseBall(EntityWoodlouseBall entityWoodlouseBall, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x, (float) y-0.3F, (float) z);
+		GL11.glTranslatef((float) x, (float) y - 0.3F, (float) z);
 		GL11.glRotatef(entityWoodlouseBall.prevRotationYaw + (entityWoodlouseBall.rotationYaw - entityWoodlouseBall.prevRotationYaw) * partialTickTime, 0.0F, 1.0F, 0.0F);
 		GL11.glScaled(0.4F, 0.4F, 0.4F);
 		ModelWoodlouseBall.render(0.0625F);
