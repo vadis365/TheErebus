@@ -36,6 +36,7 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		switch (type) {
 		case ENTITY:
 			renderBall(0.0F, 0.0F, 0.0F, 1.2D);
@@ -55,17 +56,15 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 	}
 
 	private void renderEquipped(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x, y, z);
-		GL11.glRotatef(-45F, 0, 1F, 0);
+		GL11.glTranslatef(x, y-0.2F, z+0.2F);
+		GL11.glRotatef(45F, 0, 1F, 0);
 		GL11.glScaled(-size, -size, size);
 		ModelWoodlouseBall.render(0.0625F);
 		GL11.glPopMatrix();
 	}
 
 	private void renderBall(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y - 0.7F, z);
@@ -75,14 +74,14 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 		} else {
 			GL11.glPushMatrix();
 			GL11.glScaled(size, size, size);
-			GL11.glTranslatef(x, y - 0.9F, z);
+			GL11.glRotatef(180F, 0, 0, 1F);
+			GL11.glTranslatef(x, y - 1.4F, z);
 			ModelWoodlouseBall.render(0.0625F);
 			GL11.glPopMatrix();
 		}
 	}
 
 	private void renderBallFirstPerson(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(90F, 1F, 0, 0);
@@ -93,7 +92,6 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 	}
 
 	private void renderBallInventory(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glScaled(size, size, size);
