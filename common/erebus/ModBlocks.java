@@ -202,7 +202,7 @@ public class ModBlocks {
 		waspNestBlock = new BlockWaspNest(ConfigHandler.waspNestBlockID).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("waspNestBlock").setTextureName("erebus:waspNestBlock");
 		petrifiedWoodChest = new BlockPetrifiedChest(ConfigHandler.petrifiedWoodChestID).setHardness(2.0F).setUnlocalizedName("petrifiedWoodChest").setTextureName("erebus:petrifiedWoodPlanks");
 		blockBones = new BlockBones(ConfigHandler.blockBonesID).setUnlocalizedName("blockBones");
-		blockWitherWeb = new BlockWitherWeb(ConfigHandler.blockWitherWebID).setHardness(4.0F).setUnlocalizedName("witherWeb").setTextureName("web");
+		blockWitherWeb = new BlockWitherWeb(ConfigHandler.blockWitherWebID).setHardness(4.0F).setUnlocalizedName("witherWeb").setTextureName("erebus:witherWeb");
 		bambooBridge = new BlockBambooBridge(ConfigHandler.bambooBridgeID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("bambooBridge").setTextureName("erebus:bambooBridge");
 		extenderThingy = new BlockExtenderThingy(ConfigHandler.extenderThingyID).setHardness(0.4F).setStepSound(Block.soundLadderFootstep).setUnlocalizedName("extenderThingy").setTextureName("erebus:extenderThingy");
 		bambooPole = new BlockBambooPole(ConfigHandler.bambooPoleID).setHardness(0.4F).setUnlocalizedName("bambooPole").setTextureName("erebus:blockBambooPole");
