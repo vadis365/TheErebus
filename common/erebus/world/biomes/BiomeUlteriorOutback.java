@@ -36,6 +36,24 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 				}
 			}
 		}
+		
+		for(int attempt = 0, xx, yy, zz, id; attempt < 420; attempt++){
+			xx = x + getRandomXZOffset(rand);
+			yy = 20 + rand.nextInt(80);
+			zz = z + getRandomXZOffset(rand);
+
+			if (!world.isAirBlock(xx,yy,zz) || !world.isAirBlock(xx,yy+1,zz))continue;
+			id = world.getBlockId(xx,yy - 1,zz);
+			
+			if (id == Block.grass.blockID){
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,4,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,4+8,2);
+			}
+			else if (id == Block.sand.blockID){
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,3,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,3+8,2);
+			}
+		}
 
 		for(int attempt = 0, xx, zz, id; attempt < 164; attempt++){
 			xx = x + getRandomXZOffset(rand);
