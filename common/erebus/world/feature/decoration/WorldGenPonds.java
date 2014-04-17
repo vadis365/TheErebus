@@ -1,5 +1,4 @@
 package erebus.world.feature.decoration;
-
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -133,6 +132,20 @@ public class WorldGenPonds extends WorldGenerator{
 		for(int attempt=0; attempt<5; attempt++){
 			genLily.generate(world,rand,x+rand.nextInt(8)-rand.nextInt(8)+8,y+2+rand.nextInt(6),z+rand.nextInt(8)-rand.nextInt(8)+8);
 		}
+		
+		/*for(int sugarCaneAttempt = 0, xx, yy, zz; sugarCaneAttempt < 45; sugarCaneAttempt++){
+			xx = x+rand.nextInt(16);
+			yy = y+rand.nextInt(8);
+			zz = z+rand.nextInt(16);
+			
+			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && Block.reed.canPlaceBlockAt(world,xx,yy,zz)){
+				for(int height = 0; height < 1+rand.nextInt(10); height++){
+					if (world.isAirBlock(xx,yy+height,zz))world.setBlock(xx,yy+height,zz,Block.reed.blockID);
+					else break;
+				}
+			}
+		}*/
+		// TODO reed cannot spawn on sand, which is what majority of pond area is made of
 		
 		return true;
 	}
