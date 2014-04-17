@@ -66,7 +66,7 @@ public class WorldGenPonds extends WorldGenerator{
 		for(int xx=0; xx<16; ++xx){
 			for(int zz=0; zz<16; ++zz){
 				for(int yy=0; yy<8; ++yy){
-					if (placeWater[(xx*16+zz)*8+yy])world.setBlock(x+xx,y+yy,z+zz,yy>=4?0:Block.waterMoving.blockID,0,2);
+					if (placeWater[(xx*16+zz)*8+yy])world.setBlock(x+xx,y+yy,z+zz,yy>=4?0:Block.waterMoving.blockID,0,3);
 				}
 			}
 		}
@@ -133,19 +133,19 @@ public class WorldGenPonds extends WorldGenerator{
 			genLily.generate(world,rand,x+rand.nextInt(8)-rand.nextInt(8)+8,y+2+rand.nextInt(6),z+rand.nextInt(8)-rand.nextInt(8)+8);
 		}
 		
-		/*for(int sugarCaneAttempt = 0, xx, yy, zz; sugarCaneAttempt < 45; sugarCaneAttempt++){
+		for(int sugarCaneAttempt = 0, xx, yy, zz, id; sugarCaneAttempt < 60; sugarCaneAttempt++){
 			xx = x+rand.nextInt(16);
-			yy = y+rand.nextInt(8);
+			yy = y+3+rand.nextInt(5);
 			zz = z+rand.nextInt(16);
+			id = world.getBlockId(xx,yy-1,zz);
 			
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && Block.reed.canPlaceBlockAt(world,xx,yy,zz)){
-				for(int height = 0; height < 1+rand.nextInt(10); height++){
+			if ((id == Block.grass.blockID || id == Block.sand.blockID) && Block.reed.canPlaceBlockAt(world,xx,yy,zz)){
+				for(int height = 0; height < 1+rand.nextInt(7); height++){
 					if (world.isAirBlock(xx,yy+height,zz))world.setBlock(xx,yy+height,zz,Block.reed.blockID);
 					else break;
 				}
 			}
-		}*/
-		// TODO reed cannot spawn on sand, which is what majority of pond area is made of
+		}
 		
 		return true;
 	}
