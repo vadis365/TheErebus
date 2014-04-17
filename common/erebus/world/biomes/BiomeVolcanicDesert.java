@@ -53,7 +53,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 			int yy=15+rand.nextInt(90);
 			int zz=z+getRandomXZOffset(rand);
 			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.sand.blockID){
+			if (world.getBlockId(xx,yy-1,zz)==Block.sand.blockID && world.isAirBlock(xx,yy,zz)){
 				new WorldGenLakes(Block.lavaMoving.blockID).generate(world,world.rand,xx,yy,zz);
 			}
 		}
@@ -76,7 +76,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 			int yy=rand.nextInt(120);
 			int zz=z+getRandomXZOffset(rand);
 			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.sand.blockID && !world.isAirBlock(xx,yy-2,zz)){
+			if (world.getBlockId(xx,yy-1,zz)==Block.sand.blockID && world.isAirBlock(xx,yy,zz) && !world.isAirBlock(xx,yy-2,zz)){
 				new WorldGenScorchedWood().generate(world,rand,xx,yy,zz);
 				if (rand.nextInt(4)!=0) break;
 			}

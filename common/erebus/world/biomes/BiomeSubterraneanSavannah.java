@@ -60,7 +60,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 					yy=rand.nextInt(120),
 					zz=z+getRandomXZOffset(rand);
 				
-				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+				if (world.getBlockId(xx,yy-1,zz)==Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 					new WorldGenPonds((rand.nextDouble()+0.75D)*1.2D).generate(world,rand,xx,yy,zz);
 				}
 			}
@@ -70,7 +70,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 					int xx=x+getRandomXZOffset(rand),
 						zz=z+getRandomXZOffset(rand);
 					
-					if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+					if (world.getBlockId(xx,yy-1,zz)==Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 						new WorldGenBamboo(7,true).generate(world,rand,xx,yy,zz);
 					}
 				}
@@ -82,7 +82,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 				yy=15+rand.nextInt(90),
 				zz=z+getRandomXZOffset(rand);
 
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+			if (world.getBlockId(xx,yy-1,zz)==Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 				new WorldGenAcaciaTree().generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -92,7 +92,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 				int xx=x+getRandomXZOffset(rand),
 					zz=z+getRandomXZOffset(rand);
 
-				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+				if (world.getBlockId(xx,yy-1,zz)==Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 					new WorldGenSavannaRock().generate(world,rand,xx,yy,zz);
 				}
 			}
@@ -103,7 +103,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 				yy=rand.nextInt(120),
 				zz=z+getRandomXZOffset(rand);
 			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+			if (world.getBlockId(xx,yy-1,zz)==Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 				new WorldGenAsperTree().generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -113,7 +113,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 				yy=15+rand.nextInt(90),
 				zz=z+getRandomXZOffset(rand);
 			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+			if (world.getBlockId(xx,yy-1,zz)==Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 				new WorldGenRottenAcacia().generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -123,7 +123,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 				yy=15+rand.nextInt(90),
 				zz=z+getRandomXZOffset(rand);
 			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz)==Block.grass.blockID){
+			if (world.getBlockId(xx,yy-1,zz)==Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 				new WorldGenTallGrass(ModBlocks.erebusGrass.blockID,1).generate(world,rand,xx,yy,zz);
 			}
 		}

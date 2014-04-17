@@ -42,7 +42,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 			zz = z + getRandomXZOffset(rand);
 			yy = 20 + rand.nextInt(80);
 
-			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID){
+			if (world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 				new WorldGenCypressTree().generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -53,7 +53,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 				yy = 15 + rand.nextInt(90);
 				zz = z + getRandomXZOffset(rand);
 
-				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID){
+				if (world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 					new WorldGenGiantFlowers().generate(world,rand,xx,yy,zz);
 				}
 			}

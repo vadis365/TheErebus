@@ -3,7 +3,14 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.entity.EntityBeetle;
+import erebus.entity.EntityBlackWidow;
+import erebus.entity.EntityRhinoBeetle;
+import erebus.entity.EntityScorpion;
+import erebus.entity.EntityScytodes;
+import erebus.entity.EntitySolifuge;
 import erebus.world.feature.decoration.WorldGenRedGem;
+import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.util.FeatureType;
 
@@ -18,7 +25,13 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		setTemperatureRainfall(1.1F,0.2F);
 		setWeight(15);
 
-		// TODO grab from #59
+		spawnableMonsterList.add(new SpawnEntry(EntityScytodes.class,30,1,4));
+		spawnableMonsterList.add(new SpawnEntry(EntityScorpion.class,10,2,2));
+		spawnableMonsterList.add(new SpawnEntry(EntitySolifuge.class,8,1,2));
+		spawnableMonsterList.add(new SpawnEntry(EntityBlackWidow.class,5,1,1));
+		
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,8,1,2));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityRhinoBeetle.class,5,1,1));
 
 		topBlock = (byte)Block.sand.blockID;
 	}
@@ -37,31 +50,42 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 			}
 		}
 		
-		for(int attempt = 0, xx, yy, zz, id; attempt < 420; attempt++){
+		if (rand.nextBoolean()){
+			for(int attempt = 0, xx, yy, zz, id; attempt < 20; attempt++){
+				xx = x + getRandomXZOffset(rand);
+				yy = 20 + rand.nextInt(80);
+				zz = z + getRandomXZOffset(rand);
+				
+				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz) == Block.grass.blockID){
+					new WorldGenAcaciaTree().generate(world,rand,xx,yy,zz);
+					if (rand.nextBoolean())break;
+				}
+			}
+		}
+		
+		for(int attempt = 0, xx, yy, zz; attempt < 420; attempt++){
 			xx = x + getRandomXZOffset(rand);
 			yy = 20 + rand.nextInt(80);
 			zz = z + getRandomXZOffset(rand);
 
-			if (!world.isAirBlock(xx,yy,zz) || !world.isAirBlock(xx,yy+1,zz))continue;
-			id = world.getBlockId(xx,yy - 1,zz);
-			
-			if (id == Block.grass.blockID){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,4,2);
-				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,4+8,2);
-			}
-			else if (id == Block.sand.blockID){
+			if (world.getBlockId(xx,yy-1,zz) == Block.sand.blockID && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
 				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,3,2);
 				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,3+8,2);
 			}
 		}
 
-		for(int attempt = 0, xx, zz, id; attempt < 164; attempt++){
+		for(int attempt = 0, xx, zz, id; attempt < 194; attempt++){
 			xx = x + getRandomXZOffset(rand);
 			zz = z + getRandomXZOffset(rand);
 
-			for(int yy = 20; yy < 100; yy += rand.nextInt(2) + 1){
-				if (world.isAirBlock(xx,yy,zz) && (((id = world.getBlockId(xx,yy - 1,zz)) == Block.sand.blockID) || id == Block.grass.blockID)){
-					world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
+			for(int yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
+				if ((((id = world.getBlockId(xx,yy - 1,zz)) == Block.sand.blockID) || id == Block.grass.blockID) && world.isAirBlock(xx,yy,zz)){
+					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
+						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,4,2);
+						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,4+8,2);
+					}
+					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
+					
 					break;
 				}
 			}
@@ -73,7 +97,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 				yy = 20 + rand.nextInt(80);
 				zz = z + getRandomXZOffset(rand);
 
-				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID){
+				if (world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 					if (new WorldGenEucalyptusTree().generate(world,rand,xx,yy,zz) && rand.nextBoolean()) break;
 				}
 			}
