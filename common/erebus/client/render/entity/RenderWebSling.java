@@ -2,6 +2,7 @@ package erebus.client.render.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
@@ -31,9 +32,14 @@ public class RenderWebSling extends Render {
 		GL11.glScaled(1.0D, 1.0D, 1.0D);
 		bindTexture(TextureMap.locationBlocksTexture);
 		if (entityWebSling.getDataWatcher().getWatchableObjectByte(24) == 1)
-			GL11.glColor3f(0, 0, 0);
+			GL11.glColor3f(0F, 0F, 0F);
 
-		blockRenderer.renderBlockAsItem(Block.web, 3, 1.0F);
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, -1.0F, 0.0F);
+		blockRenderer.drawCrossedSquares(Block.web, 3, -0.5D, -0.5D, -0.5D, 1.0F);
+		tessellator.draw();
+
 		GL11.glPopMatrix();
 	}
 
