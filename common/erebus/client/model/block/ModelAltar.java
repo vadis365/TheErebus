@@ -2,39 +2,14 @@ package erebus.client.model.block;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelAltar extends ModelBase {
 
-	ModelRenderer altar1;
-	ModelRenderer altar2;
-	ModelRenderer altar3;
-	ModelRenderer altar4;
-	ModelRenderer altar5;
-	ModelRenderer altar6;
-	ModelRenderer altar7;
-	ModelRenderer altar8;
-	ModelRenderer altar9;
-	ModelRenderer altar10;
-	ModelRenderer altar11;
-	ModelRenderer altar12;
-	ModelRenderer altar13;
-	ModelRenderer altar14;
-	ModelRenderer altar15;
-	ModelRenderer stone1;
-	ModelRenderer stone2;
-	ModelRenderer stone3;
-	ModelRenderer stone4;
-	ModelRenderer grass;
-	ModelRenderer shroom1;
-	ModelRenderer shroom2;
-	ModelRenderer shroom3;
-	ModelRenderer shroom4;
-	ModelRenderer shroom5;
-	ModelRenderer shroom6;
+	private final ModelRenderer altar1, altar2, altar3, altar4, altar5, altar6, altar7, altar8, altar9, altar10, altar11, altar12;
+	private final ModelRenderer altar13, altar14, altar15, grass, shroom1, shroom2, shroom3, shroom4, shroom5, shroom6;
 
 	public ModelAltar() {
 		textureWidth = 256;
@@ -174,65 +149,33 @@ public class ModelAltar extends ModelBase {
 		setRotation(shroom6, 0F, -0.2230705F, 0F);
 	}
 
-	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5);
-		altar1.render(f5);
-		altar2.render(f5);
-		altar3.render(f5);
-		altar4.render(f5);
-		altar5.render(f5);
-		altar6.render(f5);
-		altar7.render(f5);
-		altar8.render(f5);
-		altar9.render(f5);
-		altar10.render(f5);
-		altar11.render(f5);
-		altar12.render(f5);
-		altar13.render(f5);
-		altar14.render(f5);
-		altar15.render(f5);
-		grass.render(f5);
-		shroom1.render(f5);
-		shroom2.render(f5);
-		shroom3.render(f5);
-		shroom4.render(f5);
-		shroom5.render(f5);
-		shroom6.render(f5);
-	}
-
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
-	}
-
-	public void renderModel(float f5) {
-		altar1.render(f5);
-		altar2.render(f5);
-		altar3.render(f5);
-		altar4.render(f5);
-		altar5.render(f5);
-		altar6.render(f5);
-		altar7.render(f5);
-		altar8.render(f5);
-		altar9.render(f5);
-		altar10.render(f5);
-		altar11.render(f5);
-		altar12.render(f5);
-		altar13.render(f5);
-		altar14.render(f5);
-		altar15.render(f5);
-		grass.render(f5);
-		shroom1.render(f5);
-		shroom2.render(f5);
-		shroom3.render(f5);
-		shroom4.render(f5);
-		shroom5.render(f5);
+	public void renderAll() {
+		altar1.render(0.0625F);
+		altar2.render(0.0625F);
+		altar3.render(0.0625F);
+		altar4.render(0.0625F);
+		altar5.render(0.0625F);
+		altar6.render(0.0625F);
+		altar7.render(0.0625F);
+		altar8.render(0.0625F);
+		altar9.render(0.0625F);
+		altar10.render(0.0625F);
+		altar11.render(0.0625F);
+		altar12.render(0.0625F);
+		altar13.render(0.0625F);
+		altar14.render(0.0625F);
+		altar15.render(0.0625F);
+		grass.render(0.0625F);
+		shroom1.render(0.0625F);
+		shroom2.render(0.0625F);
+		shroom3.render(0.0625F);
+		shroom4.render(0.0625F);
+		shroom5.render(0.0625F);
 	}
 }

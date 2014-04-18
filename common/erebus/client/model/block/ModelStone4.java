@@ -8,10 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModelStone4 extends ModelBase {
 
-	ModelRenderer stone4;
-	ModelRenderer stone1;
-	ModelRenderer stone2;
-	ModelRenderer stone3;
+	private final ModelRenderer stone4, stone1, stone2, stone3;
 
 	public ModelStone4() {
 		textureWidth = 256;
@@ -49,14 +46,10 @@ public class ModelStone4 extends ModelBase {
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
-	}
-
-	public void renderModel(float f5) {
-		stone4.render(f5);
-		stone1.render(f5);
-		stone2.render(f5);
-		stone3.render(f5);
+	public void renderAll() {
+		stone4.render(0.0625F);
+		stone1.render(0.0625F);
+		stone2.render(0.0625F);
+		stone3.render(0.0625F);
 	}
 }
