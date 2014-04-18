@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
 import erebus.entity.EntityWebSling;
 
 @SideOnly(Side.CLIENT)
@@ -31,10 +30,10 @@ public class RenderWebSling extends Render {
 		GL11.glRotatef(-90F, 0, 1F, 0);
 		GL11.glScaled(1.0D, 1.0D, 1.0D);
 		bindTexture(TextureMap.locationBlocksTexture);
-		if (entityWebSling.getDataWatcher().getWatchableObjectByte(24) == 0)
-			blockRenderer.renderBlockAsItem(Block.web, 3, 1.0F);
 		if (entityWebSling.getDataWatcher().getWatchableObjectByte(24) == 1)
-			blockRenderer.renderBlockAsItem(ModBlocks.blockWitherWeb, 3, 1.0F);
+			GL11.glColor3f(0, 0, 0);
+
+		blockRenderer.renderBlockAsItem(Block.web, 3, 1.0F);
 		GL11.glPopMatrix();
 	}
 
