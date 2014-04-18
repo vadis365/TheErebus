@@ -22,9 +22,9 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer {
 
 	public void renderAModelAt(TileEntityAltar tile, double x, double y, double z, float partialTick) {
 		if (tile.blockMetadata == 1)
-			bindTexture(new ResourceLocation("erebus:textures/special/tiles/AltarActive.png"));
+			bindTexture(new ResourceLocation("erebus:textures/special/tiles/altarActive.png"));
 		else
-			bindTexture(new ResourceLocation("erebus:textures/special/tiles/Altar.png"));
+			bindTexture(new ResourceLocation("erebus:textures/special/tiles/altar.png"));
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5F, y + 1.5F, z + 0.5F);
@@ -34,7 +34,6 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer {
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5F, y + 1.5F, z + 0.5F);
-		bindTexture(new ResourceLocation("erebus:textures/special/tiles/Altar.png"));
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
 		stone4.renderAll();
