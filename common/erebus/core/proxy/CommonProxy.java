@@ -24,6 +24,7 @@ import erebus.inventory.ContainerExtenderThingy;
 import erebus.inventory.ContainerPetrifiedCraftingTable;
 import erebus.inventory.ContainerPetrifiedWoodChest;
 import erebus.inventory.ContainerUmberFurnace;
+import erebus.tileentity.TileEntityAltar;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
@@ -82,6 +83,7 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityExtenderThingy.class, "erebus.extenderThingy");
 		GameRegistry.registerTileEntity(TileEntityBambooPole.class, "erebus.bambooPole");
 		GameRegistry.registerTileEntity(TileEntityJarOHoney.class, "erebus.jarOHoney");
+		GameRegistry.registerTileEntity(TileEntityAltar.class, "erebus.altar");
 	}
 
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {

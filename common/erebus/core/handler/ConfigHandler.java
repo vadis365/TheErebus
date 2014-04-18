@@ -31,7 +31,7 @@ public class ConfigHandler {
 	public static int wallErebusID, amberBrickStairsID, waspNestStairsID, spiderSpawnerID, jumpingSpiderSpawnerID, waspSpawnerID;
 	public static int waspNestBlockID, honeyCombBlockID, doorAmberID, gneissID, erebusHoneyFluidID, mudID, mudBricksID, flowerPlantedID;
 	public static int erebusMushroomCap0ID, erebusMushroomCap1ID, erebusMushroomCap2ID, erebusMushroomCap3ID, erebusMushroomCap4ID, erebusPlantSmallID;
-	public static int honeyTreatID, jarOHoneyID, jadeBlockID;
+	public static int honeyTreatID, jarOHoneyID, jadeBlockID, altarID;
 	public static int[] umbercobbleStairsID, plankStairsID, stoneSlabsID, plankSlabsID, petrifiedWoodSlabID, gneissStairsID;
 
 	// ITEMS
@@ -126,6 +126,7 @@ public class ConfigHandler {
 			honeyTreatID = config.getBlock("Block ID of Honey Treat", 2604).getInt(2604);
 			jarOHoneyID = config.getBlock("Block ID of Jar O'Honey", 2605).getInt(2605);
 			jadeBlockID = config.getBlock("BlockID of Jade Block", 2606).getInt(2606);
+			altarID = config.getBlock("BlockID of Altar Block", 2865).getInt(2865); // nothing was working so I don't care anymore
 
 			int id = 2527;
 			umbercobbleStairsID = new int[BlockUmberstone.iconPaths.length];
@@ -156,7 +157,7 @@ public class ConfigHandler {
 			jumpingSpiderSpawnerID = config.getBlock("Block ID of Jumping Spider Spawners", 2553).getInt(2553);
 			waspSpawnerID = config.getBlock("Block ID of Wasp Spawners", 2572).getInt(2572);
 
-			// latest ID used (please update after adding new blocks!) >>> 2612 (2602 is now free)
+			// latest ID used (please update after adding new blocks!) >>> 2613
 
 			// Items
 			portalActivatorID = config.getItem("Item ID of Portal Activator", 9706).getInt(9706);
@@ -202,7 +203,7 @@ public class ConfigHandler {
 			webSlingerID = config.getItem("Item ID of Web Slinger", 9745).getInt(9745);
 			blockExtractorID = config.getItem("Item ID of Block Extractor", 9747).getInt(9747);
 			woodlouseBallID = config.getItem("Item ID of Woodlouse Ball", 9756).getInt(9756);
-			
+
 			compoundGogglesID = config.getItem("Item ID of Compound Goggles", 9730).getInt(9730);
 			reinCompoundGogglesID = config.getItem("Item ID of Reinforced Compound Goggles", 9740).getInt(9740);
 			sprintLeggingsID = config.getItem("Item ID of Sprint Leggings", 9731).getInt(9731);
