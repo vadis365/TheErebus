@@ -17,26 +17,18 @@ public class ModelStone4 extends ModelBase {
 		stone4 = new ModelRenderer(this, 160, 30);
 		stone4.addBox(-1F, -1F, -2F, 3, 3, 3);
 		stone4.setRotationPoint(-2F, -4F, 5F);
-		stone4.setTextureSize(64, 32);
-		stone4.mirror = true;
 		setRotation(stone4, 0.7807508F, -0.7261189F, 0.3346075F);
 		stone1 = new ModelRenderer(this, 160, 0);
 		stone1.addBox(-1F, -1F, -1F, 4, 4, 4);
 		stone1.setRotationPoint(0F, -12F, -2F);
-		stone1.setTextureSize(64, 32);
-		stone1.mirror = true;
 		setRotation(stone1, 0.5711987F, 0.3046393F, -0.1903996F);
 		stone2 = new ModelRenderer(this, 160, 10);
 		stone2.addBox(-1F, -2F, -2F, 3, 3, 3);
 		stone2.setRotationPoint(-4F, -4F, -3F);
-		stone2.setTextureSize(64, 32);
-		stone2.mirror = true;
 		setRotation(stone2, -0.4089647F, 0F, 0.2602503F);
 		stone3 = new ModelRenderer(this, 160, 18);
 		stone3.addBox(-2F, -2F, -2F, 5, 5, 5);
 		stone3.setRotationPoint(4F, 1F, -1F);
-		stone3.setTextureSize(64, 32);
-		stone3.mirror = true;
 		setRotation(stone3, 0F, -0.4089647F, 0.3892394F);
 	}
 

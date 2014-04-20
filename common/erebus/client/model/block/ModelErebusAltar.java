@@ -20,20 +20,14 @@ public class ModelErebusAltar extends ModelBase {
 		Mid = new ModelRenderer(this, 130, 0);
 		Mid.addBox(-12F, 0F, -12F, 24, 24, 24);
 		Mid.setRotationPoint(0F, -4F, 0F);
-		Mid.setTextureSize(256, 320);
-		Mid.mirror = true;
 		setRotation(Mid, 0F, 0F, 0F);
 		Top = new ModelRenderer(this, 0, 0);
 		Top.addBox(-16F, 0F, -16F, 32, 4, 32);
 		Top.setRotationPoint(0F, -8F, 0F);
-		Top.setTextureSize(256, 320);
-		Top.mirror = true;
 		setRotation(Top, 0F, 0F, 0F);
 		Bot = new ModelRenderer(this, 0, 0);
 		Bot.addBox(-16F, 0F, -16F, 32, 4, 32);
 		Bot.setRotationPoint(0F, 20F, 0F);
-		Bot.setTextureSize(256, 320);
-		Bot.mirror = true;
 	}
 
 	public void render() {

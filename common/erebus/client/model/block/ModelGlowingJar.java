@@ -19,15 +19,12 @@ public class ModelGlowingJar extends ModelBase {
 		jar = new ModelRenderer(this, 0, 27);
 		jar.addBox(-6F, -1F, -6F, 12, 1, 12);
 		jar.setRotationPoint(0F, 12F, 0F);
-		jar.setTextureSize(128, 64);
 		lid = new ModelRenderer(this, 0, 41);
 		lid.addBox(-7F, -3F, -7F, 14, 3, 14);
 		lid.setRotationPoint(0F, 11F, 0F);
-		lid.setTextureSize(128, 64);
 		neck = new ModelRenderer(this, 0, 0);
 		neck.addBox(-7F, 0F, -7F, 14, 12, 14);
 		neck.setRotationPoint(0F, 12F, 0F);
-		neck.setTextureSize(128, 64);
 	}
 
 	@SideOnly(Side.CLIENT)
