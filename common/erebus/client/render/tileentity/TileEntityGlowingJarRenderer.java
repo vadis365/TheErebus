@@ -44,10 +44,13 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 			float size = 0.70F / capacity * amount;
 			if (amount >= 100) {
 			GL11.glPushMatrix();
+			GL11.glEnable(3042);
+			GL11.glBlendFunc(770, 771);
 			GL11.glTranslated((float) x + 0.5F, (float) (y + 0.030F + size * 0.5F), (float) z + 0.5F);
 			GL11.glScalef(0.55F, -size, -0.55F);
 			bindTexture(new ResourceLocation("erebus:textures/blocks/blockAmber.png"));
 			blockRenderer.renderBlockAsItem(ModBlocks.blockAmber, 0, 1.0F);
+			GL11.glDisable(3042);
 			GL11.glPopMatrix();
 			}
 		} else {
