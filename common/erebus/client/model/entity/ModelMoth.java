@@ -10,7 +10,6 @@ import erebus.entity.EntityMoth;
 @SideOnly(Side.CLIENT)
 public class ModelMoth extends ModelBase {
 
-	// fields
 	ModelRenderer body;
 	ModelRenderer head;
 	ModelRenderer rearend;
@@ -25,38 +24,26 @@ public class ModelMoth extends ModelBase {
 		body = new ModelRenderer(this, 0, 0);
 		body.addBox(-4F, -4F, 0F, 8, 7, 10);
 		body.setRotationPoint(0F, 7F, 0F);
-		body.setTextureSize(128, 128);
-		body.mirror = true;
 		setRotation(body, 0F, 0F, 0F);
 		head = new ModelRenderer(this, 70, 0);
 		head.addBox(-3F, -3F, -5F, 6, 5, 5);
 		head.setRotationPoint(0F, 7F, 0F);
-		head.setTextureSize(128, 128);
-		head.mirror = true;
 		setRotation(head, 0F, 0F, 0F);
 		rearend = new ModelRenderer(this, 37, 0);
 		rearend.addBox(-3F, -3F, 0F, 6, 6, 10);
 		rearend.setRotationPoint(0F, 7F, 10F);
-		rearend.setTextureSize(128, 128);
-		rearend.mirror = true;
 		setRotation(rearend, 0F, 0F, 0.7853982F);
 		head2 = new ModelRenderer(this, -4, 18);
 		head2.addBox(-7F, -2F, -15F, 14, 0, 11);
 		head2.setRotationPoint(0F, 7F, 0F);
-		head2.setTextureSize(128, 128);
-		head2.mirror = true;
 		setRotation(head2, -0.2602503F, 0F, 0F);
 		rightwing = new ModelRenderer(this, -28, 30);
 		rightwing.addBox(-32F, 0F, -15F, 33, 0, 37);
 		rightwing.setRotationPoint(-4F, 4F, 3F);
-		rightwing.setTextureSize(128, 128);
-		rightwing.mirror = true;
 		setRotation(rightwing, 0F, 0F, 0F);
 		leftwing = new ModelRenderer(this, -28, 70);
 		leftwing.addBox(0F, 0F, -15F, 33, 0, 37);
 		leftwing.setRotationPoint(4F, 4F, 3F);
-		leftwing.setTextureSize(128, 128);
-		leftwing.mirror = true;
 		setRotation(leftwing, 0F, 0F, 0F);
 	}
 
