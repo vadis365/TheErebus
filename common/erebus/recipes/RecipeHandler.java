@@ -146,6 +146,8 @@ public class RecipeHandler {
 
 		GameRegistry.addRecipe(new ItemStack(ModItems.scorpionPincer), new Object[] { "I I", "XIX", "XPX", 'I', Item.ingotIron, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()), 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
 
+		GameRegistry.addRecipe(new ItemStack(ModItems.rolledNewspaper), new Object[] { "PWP", "PIP", "PWP", 'I', new ItemStack(Item.dyePowder, 1, 0), 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal()), 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.whetstonePowder.ordinal()) });
+		
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.gliderWing.ordinal()), new Object[] { "SSS", "FFF", "FFF", 'S', Item.stick, 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.flyWing.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.enhancedGliderWing.ordinal()), new Object[] { "BBB", "WWW", "WWW", 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.dragonflyWing.ordinal()) });
 

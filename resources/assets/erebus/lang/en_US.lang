@@ -358,6 +358,7 @@ item.erebusFlowerSeeds.12.name=Orange Flower Bulb
 item.erebusFlowerSeeds.13.name=White Flower Bulb
 item.whetstone.name=Whetstone
 item.woodlouseBall.name=Woodlouse Ball
+item.rolledNewspaper.name=Rolled Up Newspaper
 
 #Entities
 entity.Erebus.BeetleLarva.name=Beetle Larva
