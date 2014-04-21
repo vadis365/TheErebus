@@ -3,6 +3,8 @@ import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.world.biomes.decorators.type.OreSettings;
+import erebus.world.biomes.decorators.type.OreSettings.OreType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenPonds;
@@ -115,6 +117,22 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			if (world.getBlockId(xx,yy-1,zz)  ==  Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 				genGrass.generate(world,rand,xx,yy,zz);
 			}
+		}
+	}
+	
+	@Override
+	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
+		switch(oreType){
+			case GOLD:
+				oreGen.setChance(0.75F).setIterations(extraOres?1:2).setY(50,126).generate(world,rand,x,z); // split into 3 parts, higher areas have less gold
+				oreGen.setChance(0.9F).setIterations(extraOres?1:2,extraOres?2:3).setY(25,50).generate(world,rand,x,z); // balanced so there are more veins per chunk
+				oreGen.setIterations(extraOres?2:3,extraOres?3:4).setY(5,25);
+				break;
+			
+			case EMERALD: oreGen.setChance(0.22F); break; // less common
+			case DIAMOND: oreGen.setChance(0.4F).setIterations(1,2).setOreAmount(2).setY(5,16); break; // 2 diamonds per cluster, ~7-8 times smaller area thus lowered chance and iterations
+			case JADE: oreGen.setChance(0.3F).setIterations(0,3); break; // less common
+			case PETRIFIED_WOOD: oreGen.setChance(0.5F).setIterations(0,extraOres?2:3).setY(5,64); break; // less common and lowered area ~2 times, thus lowered chance and iterations
 		}
 	}
 }

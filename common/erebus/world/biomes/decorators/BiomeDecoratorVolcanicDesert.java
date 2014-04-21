@@ -3,6 +3,8 @@ import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
 import erebus.world.biomes.decorators.type.FeatureType;
+import erebus.world.biomes.decorators.type.OreSettings;
+import erebus.world.biomes.decorators.type.OreSettings.OreType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.structure.WorldGenAntlionLair;
 
@@ -67,14 +69,15 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus{
 		else super.generateFeature(featureType);
 	}
 	
-	/*@Override
-	public void generateOre(OreType oreType, boolean extraOres){
-		if (oreType == OreType.PETRIFIED_WOOD){
-			generateOreCluster((extraOres?3:4)+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataPetrifiedWood,8,9,world,rand,x,z,6,112,2);
+	@Override
+	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
+		switch(oreType){
+			case COAL: oreGen.setChance(0F); break;
+			case GOLD: oreGen.setIterations(extraOres?1:2,extraOres?2:3); break; // less common
+			case DIAMOND: oreGen.setChance(0.6F).setIterations(1).setOreAmount(4).setY(5,16); break; // clusters of 4, ~7 times smaller area thus lowered chance and iterations // TODO special ore
+			case JADE: oreGen.setIterations(0,2); break; // less common
+			case FOSSIL: oreGen.setChance(0.04F).setIterations(0,1); break; // much more rare
+			
 		}
-		else if (oreType == OreType.FOSSIL){
-			if (rand.nextInt(6) == 0)generateOreCluster(1+rand.nextInt(2)*rand.nextInt(2),ModBlocks.oreFossil,3,8,11,world,rand,x,z,36,112,3);
-		}
-		else super.generateOre(oreType,extraOres);
-	}*/
+	}
 }

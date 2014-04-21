@@ -2,6 +2,8 @@ package erebus.world.biomes.decorators;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.type.FeatureType;
+import erebus.world.biomes.decorators.type.OreSettings;
+import erebus.world.biomes.decorators.type.OreSettings.OreType;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
 import erebus.world.feature.tree.WorldGenCypressTree;
 
@@ -33,6 +35,19 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			}
 		}
 	}
+	
+	@Override
+	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
+		switch(oreType){
+			case COAL: oreGen.setIterations(extraOres?2:3,extraOres?3:4).setY(5,48); break; // ~2.5 times smaller area, thus less iterations
+			case IRON: oreGen.setChance(0.75F).setIterations(extraOres?2:3,extraOres?4:5).setY(5,42); break; // ~3 times smaller area, thus lower chance and iterations
+			case GOLD: oreGen.setIterations(extraOres?2:3); break; // 2 veins less
+			case EMERALD: oreGen.setIterations(2,4).setCheckArea(2); break; // 2 veins more
+			case JADE: oreGen.setIterations(2,5); break; // 1 vein more
+			case PETRIFIED_WOOD: oreGen.setChance(0F); break;
+			case FOSSIL: oreGen.setChance(0.25F).setOreAmount(5,8); break; // double chance, lower amount per vein
+		}
+	}
 
 	@Override
 	public void generateFeature(FeatureType featureType){
@@ -43,9 +58,4 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 		}
 		else super.generateFeature(featureType);
 	}
-	
-	/*@Override
-	public void generateOre(OreType oreType, boolean extraOres){
-		if (oreType != OreType.FOSSIL)super.generateOre(oreType,extraOres);
-	}*/
 }

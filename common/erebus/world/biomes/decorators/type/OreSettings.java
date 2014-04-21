@@ -29,7 +29,7 @@ public final class OreSettings{
 	
 	public OreSettings reset(){
 		this.chance = 1F;
-		this.minY = 6;
+		this.minY = 5;
 		this.maxY = 112;
 		this.checkArea = 3;
 		return this;
@@ -146,15 +146,15 @@ public final class OreSettings{
 				case COAL: settings.setIterations(extraOres?6:8).setOreAmount(9,12); break;
 				case IRON: settings.setIterations(extraOres?7:9,extraOres?8:10).setOreAmount(6,10); break;
 				case GOLD: settings.setIterations(extraOres?4:5).setOreAmount(6); break;
-				case LAPIS: settings.setIterations(3).setOreAmount(5).setCheckArea(2); break;	
-				case EMERALD: settings.setChance(0.33F).setOreAmount(3).setCheckArea(1); break;	
+				case LAPIS: settings.setIterations(3).setOreAmount(5).setCheckArea(2); break;
+				case EMERALD: settings.setChance(0.33F).setIterations(0,2).setOreAmount(3).setCheckArea(1); break;
 				case DIAMOND: settings.setChance(0.66F).setIterations(2,4).setOreAmount(1).setCheckArea(1); break;
 				case JADE: settings.setChance(0.5F).setIterations(1,4).setOreAmount(4).setCheckArea(2); break;
-				case PETRIFIED_WOOD: settings.setIterations(extraOres?1:2,extraOres?3:4).setOreAmount(7,9).setCheckArea(2); break;	
+				case PETRIFIED_WOOD: settings.setIterations(extraOres?1:2,extraOres?3:4).setOreAmount(7,9).setCheckArea(2); break;
 				case FOSSIL: settings.setChance(0.125F).setIterations(0,2).setOreAmount(8,11).setY(36,112); break;
 				case ALUMINIUM: settings.setChance(aluminium?1F:0F).setIterations(2,3).setOreAmount(3,4).setCheckArea(2); break;
 				case COPPER: settings.setChance(copper?1F:0F).setIterations(7,9).setOreAmount(5,7); break;
-				case LEAD: settings.setChance(lead?1F:0F).setIterations(4).setOreAmount(3).setCheckArea(2); break;	
+				case LEAD: settings.setChance(lead?1F:0F).setIterations(4).setOreAmount(3).setCheckArea(2); break;
 				case SILVER: settings.setChance(silver?1F:0F).setIterations(5).setOreAmount(6,8); break;
 				case TIN: settings.setChance(tin?1F:0F).setIterations(2,4).setOreAmount(3,4).setCheckArea(2); break;
 			}

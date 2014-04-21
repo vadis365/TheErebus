@@ -3,6 +3,8 @@ import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.world.biomes.decorators.type.FeatureType;
+import erebus.world.biomes.decorators.type.OreSettings;
+import erebus.world.biomes.decorators.type.OreSettings.OreType;
 import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 
@@ -76,6 +78,17 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 					if (genTreeEucalyptus.generate(world,rand,xx,yy,zz) && rand.nextBoolean())break;
 				}
 			}
+		}
+	}
+	
+	@Override
+	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
+		switch(oreType){
+			case COAL: oreGen.setChance(0.85F).setIterations(extraOres?2:3).setOreAmount(7,10).setY(5,56); break; // less common, lowered amount too, also ~2 times smaller area
+			case EMERALD: oreGen.setIterations(1,3); break; // one more vein
+			case DIAMOND: oreGen.setIterations(3,4); break; // one more vein
+			case PETRIFIED_WOOD: oreGen.setIterations(extraOres?1:2,extraOres?2:3).setY(20,64).setCheckArea(3); break; // more common, but ~1.5 times smaller area
+			case FOSSIL: oreGen.setChance(0.06F); break; // more rare
 		}
 	}
 

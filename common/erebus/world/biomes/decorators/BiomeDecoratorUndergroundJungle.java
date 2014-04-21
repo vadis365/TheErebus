@@ -246,9 +246,9 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 				oreGen.setIterations(extraOres?4:6).setOreAmount(12,14).setY(6,24); // setup more & bigger clusters below caves, let the base code generate
 				break;
 				
-			case DIAMOND: oreGen.setChance(0.1F).setY(6,16); break; // 7 times smaller area, thus lowered chance
+			case DIAMOND: oreGen.setChance(0.1F).setY(6,16); break; // ~7 times smaller area, thus lowered chance
 			case JADE: oreGen.setOreAmount(5); break; // 1 more vein
-			case PETRIFIED_WOOD: oreGen.setChance(0.65F).setY(6,64); break; // 1.75 times smaller area, thus lowered chance
+			case PETRIFIED_WOOD: oreGen.setChance(0.65F).setY(6,64); break; // ~2 times smaller area, thus lowered chance
 			case FOSSIL: oreGen.setChance(0.041F); break; // ~ 1/3 chance
 		}
 	}
