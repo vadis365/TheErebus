@@ -140,6 +140,7 @@ public final class OreSettings{
 		
 		public void setupDefault(OreSettings settings, boolean extraOres){
 			settings.reset();
+			settings.setType(this);
 			
 			switch(this){
 				case COAL: settings.setIterations(extraOres?6:8).setOreAmount(9,12); break;

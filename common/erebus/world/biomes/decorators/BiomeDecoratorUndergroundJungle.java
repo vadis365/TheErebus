@@ -10,6 +10,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
+import erebus.world.biomes.decorators.type.OreSettings;
+import erebus.world.biomes.decorators.type.OreSettings.OreType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenPonds;
@@ -233,6 +235,21 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 					genMelons.generate(world,rand,xx,yy,zz);
 				}
 			}
+		}
+	}
+	
+	@Override
+	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
+		switch(oreType){
+			case COAL:
+				oreGen.setIterations(extraOres?3:4).setY(27,48).generate(world,rand,x,z); // generate first half above caves
+				oreGen.setIterations(extraOres?4:6).setOreAmount(12,14).setY(6,24); // setup more & bigger clusters below caves, let the base code generate
+				break;
+				
+			case DIAMOND: oreGen.setChance(0.1F).setY(6,16); break; // 7 times smaller area, thus lowered chance
+			case JADE: oreGen.setOreAmount(5); break; // 1 more vein
+			case PETRIFIED_WOOD: oreGen.setChance(0.65F).setY(6,64); break; // 1.75 times smaller area, thus lowered chance
+			case FOSSIL: oreGen.setChance(0.041F); break; // ~ 1/3 chance
 		}
 	}
 }
