@@ -151,7 +151,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.gliderWing.ordinal()), new Object[] { "SSS", "FFF", "FFF", 'S', Item.stick, 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.flyWing.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.enhancedGliderWing.ordinal()), new Object[] { "BBB", "WWW", "WWW", 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.dragonflyWing.ordinal()) });
 
-		GameRegistry.addRecipe(new ItemStack(ModItems.waspDagger), new Object[] { "   ", " W ", " S ", 'W', new ItemStack(ModItems.erebusMaterials, 1, 10), 'S', new ItemStack(Item.stick) });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.waspDagger), new Object[] {new ItemStack(ModItems.erebusMaterials, 1, 10), new ItemStack(Item.stick) });
 
 		GameRegistry.addRecipe(new RecipeSprintLeggingsUpgrades());
 
