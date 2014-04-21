@@ -1,10 +1,5 @@
 package erebus.world.biomes;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
-import erebus.world.feature.plant.WorldGenBigMushroomErebusMany;
+import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeFungalForest extends BiomeBaseErebus{

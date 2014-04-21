@@ -1,15 +1,12 @@
 package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.block.Block;
-import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
-import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
-import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.biomes.decorators.type.OreType;
+import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeBetweenlands extends BiomeBaseErebus{

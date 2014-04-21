@@ -1,19 +1,12 @@
 package erebus.world.biomes;
-import java.util.Random;
 import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import erebus.ModBlocks;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
-import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
-import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.feature.decoration.WorldGenRedGem;
-import erebus.world.feature.tree.WorldGenAcaciaTree;
-import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeUlteriorOutback extends BiomeBaseErebus{

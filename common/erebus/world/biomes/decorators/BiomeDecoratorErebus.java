@@ -18,6 +18,7 @@ public abstract class BiomeDecoratorErebus{
 	protected Random rand;
 	protected int x,z;
 	protected int xx,yy,zz,attempt;
+	private boolean isDecorating = false;
 	
 	protected static final WorldGenErebusMinable genMinable = new WorldGenErebusMinable();
 	protected static final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
@@ -26,8 +27,17 @@ public abstract class BiomeDecoratorErebus{
 	
 	protected BiomeDecoratorErebus(){}
 	
+	public final void populate(World world, Random rand, int x, int z){
+		this.world = world;
+		this.rand = rand;
+		this.x = x;
+		this.z = z;
+		populate();
+	}
+	
 	public final void decorate(World world, Random rand, int x, int z){
-		// TODO if (this.world != null)throw new RuntimeException("Already decorating Erebus!");
+		if (this.isDecorating)throw new RuntimeException("Already decorating Erebus!");
+		this.isDecorating = true;
 		this.world = world;
 		this.rand = rand;
 		this.x = x;
@@ -38,12 +48,14 @@ public abstract class BiomeDecoratorErebus{
 		boolean extraOres = lead||silver||copper||tin||aluminium;
 		for(OreType oreType:OreType.values())generateOre(oreType,extraOres);
 		
-		generateBiomeFeatures();
+		decorate();
 		
-		//this.world = null;
+		this.isDecorating = false;
 	}
 	
-	protected abstract void generateBiomeFeatures();
+	
+	protected void populate(){}
+	protected void decorate(){}
 
 	protected void generateFeature(FeatureType featureType){
 		switch(featureType){
@@ -66,9 +78,7 @@ public abstract class BiomeDecoratorErebus{
 				break;
 				
 			case REDGEM:
-				for(attempt = 0; attempt < 5; attempt++){
-					genRedGem.generate(world,rand,x+offsetXZ(),64+rand.nextInt(60),z+offsetXZ());
-				}
+				for(attempt = 0; attempt < 5; attempt++)genRedGem.generate(world,rand,x+offsetXZ(),64+rand.nextInt(60),z+offsetXZ());
 				
 				break;
 		}
@@ -135,8 +145,8 @@ public abstract class BiomeDecoratorErebus{
 	protected void generateOreCluster(int iterations, Block oreBlock, int oreMeta, int minOreAmount, int maxOreAmount, World world, Random rand, int x, int z, int minY, int maxY, int checkArea){
 		for(int iteration = 0, oreAmount; iteration < iterations; iteration++){
 			for(attempt = 0; attempt < 12; attempt++){
-				xx = x+2+rand.nextInt(12);
-				zz = z+2+rand.nextInt(12);
+				xx = x+rand.nextInt(16);
+				zz = z+rand.nextInt(16);
 				yy = minY+rand.nextInt(Math.max(1,1+maxY-minY));
 	
 				for(int a = 0; a < 6; a++){
@@ -160,4 +170,6 @@ public abstract class BiomeDecoratorErebus{
 			}
 		}
 	}
+	
+	public static class BiomeDecoratorEmpty extends BiomeDecoratorErebus{}
 }

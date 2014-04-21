@@ -1,7 +1,4 @@
 package erebus.world.biomes;
-import java.util.Random;
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityFly;
@@ -9,12 +6,7 @@ import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityWorkerBee;
-import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
-import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.biomes.decorators.type.OreType;
-import erebus.world.feature.decoration.WorldGenRedGem;
-import erebus.world.feature.plant.WorldGenGiantFlowers;
-import erebus.world.feature.tree.WorldGenCypressTree;
+import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeElysianFields extends BiomeBaseErebus{

@@ -3,7 +3,6 @@ import net.minecraft.block.Block;
 import net.minecraft.util.Direction;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
-import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -51,18 +50,21 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorErebus{
 	private final WorldGenMelon genMelons = new WorldGenMelon();
 	
 	@Override
-	protected void generateBiomeFeatures(){
-		for(attempt = 0; attempt < 20; attempt++){
-			xx = x+offsetXZ();
+	protected void populate(){
+		for(attempt = 0; attempt < 35; attempt++){
+			xx = x+16;
 			yy = rand.nextInt(120);
-			zz = z+offsetXZ();
+			zz = z+16;
 
 			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 				genPonds.prepare((rand.nextDouble()+0.7D)*1.5D);
 				genPonds.generate(world,rand,xx,yy,zz);
 			}
 		}
-
+	}
+	
+	@Override
+	protected void decorate(){
 		if (rand.nextInt(37) == 0){
 			for(attempt = 0; attempt < 5; attempt++){
 				if (genWaspDungeon.generate(world,rand,x+offsetXZ(),127,z+offsetXZ())) break;
@@ -88,11 +90,11 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorErebus{
 				WorldGenerator treeGen = null;
 				int r = rand.nextInt(31);
 
-				if (r <= 6)treeGen = new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3); // TODO
+				if (r <= 6)treeGen = null;//new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3); // TODO
 				else if (r <= 11)treeGen = genTreeMahogany;
 				else if (r <= 16){
 					((WorldGenErebusHugeTree)genTreeMahoganyLarge).prepare(20+rand.nextInt(5));
-					treeGen = genTreeMahoganyLarge;
+					//treeGen = genTreeMahoganyLarge;
 				}
 				else if (r <= 20)treeGen = genTreeAsper;
 				else if (r <= 23)treeGen = genTreeJungle;
@@ -100,7 +102,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorErebus{
 				else if (r <= 28)treeGen = genTreeJungleTall;
 				else treeGen = genTreeEucalyptus;
 
-				treeGen.generate(world,rand,xx,yy,zz);
+				if (treeGen != null)treeGen.generate(world,rand,xx,yy,zz);
 			}
 		}
 

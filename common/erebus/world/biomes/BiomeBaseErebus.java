@@ -80,6 +80,10 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	public final short getWeight(){
 		return biomeWeight;
 	}
+	
+	public void populate(World world, Random rand, int x, int z){
+		decorator.populate(world,rand,x,z);
+	}
 
 	@Override
 	public void decorate(World world, Random rand, int x, int z){

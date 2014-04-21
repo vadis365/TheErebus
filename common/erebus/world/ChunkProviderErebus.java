@@ -18,6 +18,7 @@ import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import erebus.ModBlocks;
 import erebus.core.handler.ConfigHandler;
+import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.feature.structure.WorldGenSpiderDungeons;
 import erebus.world.structure.MapGenErebusCaves;
 import erebus.world.structure.MapGenErebusRavine;
@@ -317,16 +318,17 @@ public class ChunkProviderErebus implements IChunkProvider{
 	public void populate(IChunkProvider chunkProvider, int x, int z){
 		BlockSand.fallInstantly = true;
 
-		int worldCoordX = x * 16;
-		int worldCoordZ = z * 16;
+		int blockCoordX = x * 16;
+		int blockCoordZ = z * 16;
 
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords(worldCoordX + 16,worldCoordZ + 16);
+		BiomeBaseErebus biome = (BiomeBaseErebus)worldObj.getBiomeGenForCoords(blockCoordX + 16,blockCoordZ + 16);
 		rand.setSeed(worldObj.getSeed());
 		rand.setSeed(x * (rand.nextLong() / 2L * 2L + 1L) + z * (rand.nextLong() / 2L * 2L + 1L) ^ worldObj.getSeed());
-		biome.decorate(worldObj,rand,worldCoordX,worldCoordZ);
+		biome.populate(worldObj,rand,blockCoordX,blockCoordZ);
+		biome.decorate(worldObj,rand,blockCoordX,blockCoordZ);
 
 		for(int attempt = 0; attempt < 14; ++attempt){
-			new WorldGenSpiderDungeons().generate(worldObj,rand,worldCoordX + rand.nextInt(16) + 8,rand.nextInt(128),worldCoordZ + rand.nextInt(16) + 8);
+			new WorldGenSpiderDungeons().generate(worldObj,rand,blockCoordX + rand.nextInt(16) + 8,rand.nextInt(128),blockCoordZ + rand.nextInt(16) + 8);
 		}
 
 		BlockSand.fallInstantly = false;

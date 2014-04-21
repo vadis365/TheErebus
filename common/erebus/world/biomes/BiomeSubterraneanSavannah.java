@@ -1,9 +1,5 @@
 package erebus.world.biomes;
-import java.util.Random;
 import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import erebus.ModBlocks;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityFly;
@@ -15,14 +11,7 @@ import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
-import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
-import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.feature.decoration.WorldGenPonds;
-import erebus.world.feature.decoration.WorldGenRottenAcacia;
-import erebus.world.feature.decoration.WorldGenSavannaRock;
-import erebus.world.feature.plant.WorldGenBamboo;
-import erebus.world.feature.tree.WorldGenAsperTree;
-import erebus.world.feature.tree.WorldGenAcaciaTree;
+import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus{

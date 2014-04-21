@@ -1,10 +1,7 @@
 package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
-import erebus.block.BlockErebusOre;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBotFly;
@@ -14,12 +11,7 @@ import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
-import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
-import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.biomes.decorators.type.OreType;
-import erebus.world.feature.decoration.WorldGenRedGem;
-import erebus.world.feature.decoration.WorldGenScorchedWood;
-import erebus.world.feature.structure.WorldGenAntlionLair;
+import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeVolcanicDesert extends BiomeBaseErebus{
