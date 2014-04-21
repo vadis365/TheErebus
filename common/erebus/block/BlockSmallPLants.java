@@ -1,7 +1,9 @@
 package erebus.block;
+
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -9,68 +11,82 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSmallPLants extends BlockMushroom {
-	
-	public static final String[] iconPaths = new String[] { "bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "dutchCapShroom", "cattail", "desertShrub", "hanger", "hangerSeed", "mireCoral", "nettle", "nettleFlowered", "swampPlant"};
+
+	public static final String[] iconPaths = new String[] { "bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "dutchCapShroom", "cattail", "desertShrub", "hanger", "hangerSeed", "mireCoral", "nettle", "nettleFlowered", "swampPlant" };
 	public static final Icon[] icons = new Icon[iconPaths.length];
-	
-    public BlockSmallPLants(int id) {
-        super(id);
-        this.setTickRandomly(true);
-    }
-    
+
+	public BlockSmallPLants(int id) {
+		super(id);
+		this.setTickRandomly(true);
+	}
+
 	@Override
-    public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
-    	int meta = access.getBlockMetadata(x, y, z);
-    	float widthReduced = 0, height = 0;
-    	
-		switch(meta) {	
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
+		int meta = access.getBlockMetadata(x, y, z);
+		float widthReduced = 0, height = 0;
+
+		switch (meta) {
 		case 0:
-			widthReduced = 0.3125F; height = 0.6875F;
+			widthReduced = 0.3125F;
+			height = 0.6875F;
 			break;
 		case 1:
-			widthReduced = 0.0625F; height = 0.75F;
+			widthReduced = 0.0625F;
+			height = 0.75F;
 			break;
 		case 2:
-			widthReduced = 0.0625F; height = 0.75F;
+			widthReduced = 0.0625F;
+			height = 0.75F;
 			break;
 		case 3:
-			widthReduced = 0.125F; height = 0.625F;
+			widthReduced = 0.125F;
+			height = 0.625F;
 			break;
 		case 4:
-			widthReduced = 0.0625F; height = 0.875F;
-			break;	
+			widthReduced = 0.0625F;
+			height = 0.875F;
+			break;
 		case 5:
-			widthReduced = 0; height = 0.9375F;
-			break;	
+			widthReduced = 0;
+			height = 0.9375F;
+			break;
 		case 6:
-			widthReduced = 0; height = 1F;
+			widthReduced = 0;
+			height = 1F;
 			break;
 		case 7:
-			widthReduced = 0.1875F; height = 1F;
+			widthReduced = 0.1875F;
+			height = 1F;
 			break;
 		case 8:
-			widthReduced = 0.125F; height = 1F;
+			widthReduced = 0.125F;
+			height = 1F;
 			break;
 		case 9:
-			widthReduced = 0; height = 0.9375F;
+			widthReduced = 0;
+			height = 0.9375F;
 			break;
 		case 10:
-			widthReduced = 0.125F; height = 1F;
+			widthReduced = 0.125F;
+			height = 1F;
 			break;
 		case 11:
-			widthReduced = 0.125F; height = 1F;
+			widthReduced = 0.125F;
+			height = 1F;
 			break;
 		case 12:
-			widthReduced = 0.0625F; height = 0.4375F;
+			widthReduced = 0.0625F;
+			height = 0.4375F;
 			break;
 		}
-		setBlockBounds(0F + widthReduced, 0.0F, 0F + widthReduced, 1F - widthReduced, height, 1F - widthReduced);	
-    }
-    
+		setBlockBounds(0F + widthReduced, 0.0F, 0F + widthReduced, 1F - widthReduced, height, 1F - widthReduced);
+	}
+
 	@Override
 	public void registerIcons(IconRegister reg) {
 		int i = 0;
@@ -94,7 +110,7 @@ public class BlockSmallPLants extends BlockMushroom {
 
 	@Override
 	public int damageDropped(int meta) {
-			return meta;
+		return meta;
 	}
 
 	@Override
@@ -111,5 +127,22 @@ public class BlockSmallPLants extends BlockMushroom {
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}
-	
+
+	@Override
+    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+        return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
+    }
+
+	@Override
+	public boolean canBlockStay(World world, int x, int y, int z) {
+		int meta = world.getBlockMetadata(x, y, z);
+		int blockBelow = world.getBlockId(x, y - 1, z);
+		Block soil = Block.blocksList[blockBelow];
+		if (y >= 0 && y < 256 && meta < 5) {
+			return (blockBelow == Block.mycelium.blockID || world.getFullBlockLightValue(x, y, z) < 13) && (soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this));
+		} else if (y >= 0 && y < 256 && meta >= 5){
+			return (soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this));
+		}
+		return false;
+	}
 }
