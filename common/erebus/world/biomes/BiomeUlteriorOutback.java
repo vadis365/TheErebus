@@ -6,12 +6,12 @@ import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
-import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 
 // @formatter:off
 public class BiomeUlteriorOutback extends BiomeBaseErebus{
 	public BiomeUlteriorOutback(int biomeID){
-		super(biomeID,new BiomeDecoratorEmpty());
+		super(biomeID,new BiomeDecoratorUlteriorOutback());
 
 		setBiomeName("Ulterior Outback");
 		setColors(0xEEAA55);
@@ -29,83 +29,5 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 
 		topBlock = (byte)Block.sand.blockID;
 	}
-
-	/*@Override
-	public void generateBiomeFeatures(World world, Random rand, int x, int z){
-		for(int attempt = 0, xx, zz; attempt < 112; attempt++){
-			xx = x + getRandomXZOffset(rand);
-			zz = z + getRandomXZOffset(rand);
-
-			for(int yy = 20; yy < 100; yy += rand.nextInt(2) + 1){
-				if (world.getBlockId(xx,yy,zz) == Block.sand.blockID && world.isAirBlock(xx,yy + 1,zz)){
-					world.setBlock(xx,yy,zz,Block.grass.blockID);
-					break;
-				}
-			}
-		}
-		
-		if (rand.nextBoolean()){
-			for(int attempt = 0, xx, yy, zz, id; attempt < 20; attempt++){
-				xx = x + getRandomXZOffset(rand);
-				yy = 20 + rand.nextInt(80);
-				zz = z + getRandomXZOffset(rand);
-				
-				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz) == Block.grass.blockID){
-					new WorldGenAcaciaTree().generate(world,rand,xx,yy,zz);
-					if (rand.nextBoolean())break;
-				}
-			}
-		}
-		
-		for(int attempt = 0, xx, yy, zz; attempt < 420; attempt++){
-			xx = x + getRandomXZOffset(rand);
-			yy = 20 + rand.nextInt(80);
-			zz = z + getRandomXZOffset(rand);
-
-			if (world.getBlockId(xx,yy-1,zz) == Block.sand.blockID && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,3,2);
-				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,3+8,2);
-			}
-		}
-
-		for(int attempt = 0, xx, zz, id; attempt < 194; attempt++){
-			xx = x + getRandomXZOffset(rand);
-			zz = z + getRandomXZOffset(rand);
-
-			for(int yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
-				if ((((id = world.getBlockId(xx,yy - 1,zz)) == Block.sand.blockID) || id == Block.grass.blockID) && world.isAirBlock(xx,yy,zz)){
-					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
-						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,4,2);
-						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,4+8,2);
-					}
-					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
-					
-					break;
-				}
-			}
-		}
-
-		if (rand.nextBoolean()){
-			for(int attempt = 0, xx, yy, zz; attempt < 180; attempt++){
-				xx = x + getRandomXZOffset(rand);
-				yy = 20 + rand.nextInt(80);
-				zz = z + getRandomXZOffset(rand);
-
-				if (world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
-					if (new WorldGenEucalyptusTree().generate(world,rand,xx,yy,zz) && rand.nextBoolean()) break;
-				}
-			}
-		}
-	}
-
-	@Override
-	public void generateFeature(World world, Random rand, int x, int z, FeatureType featureType){
-		if (featureType == FeatureType.REDGEM){
-			for(int attempt = 0; attempt < 8; attempt++){
-				new WorldGenRedGem().generate(world,rand,x + getRandomXZOffset(rand),64 + rand.nextInt(60),z + getRandomXZOffset(rand));
-			}
-		}
-		else generateFeature(world,rand,x,z,featureType);
-	}*/
 }
 // @formatter:on

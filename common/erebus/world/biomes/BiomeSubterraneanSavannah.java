@@ -22,7 +22,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		setColors(0xB6B957,0xA3A52D);
 		setFog(140,116,9);
 		setTemperatureRainfall(0.95F,0.05F);
-		setWeight(180);
+		setWeight(18);
 		
 		spawnableCreatureList.add(new SpawnEntry(EntityGrasshopper.class,14,4,8));
 		spawnableCreatureList.add(new SpawnEntry(EntityGlowWorm.class,14,4,8));
@@ -38,8 +38,8 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,8,1,2));
 
-		topBlock=(byte)Block.grass.blockID;
-		fillerBlock=(byte)Block.dirt.blockID;
+		topBlock = (byte)Block.grass.blockID;
+		fillerBlock = (byte)Block.dirt.blockID;
 	}
 }
 // @formatter:on
