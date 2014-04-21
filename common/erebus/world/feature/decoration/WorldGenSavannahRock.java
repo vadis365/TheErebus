@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 //@formatter:off
-public class WorldGenSavannaRock extends WorldGenerator{
+public class WorldGenSavannahRock extends WorldGenerator{
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){

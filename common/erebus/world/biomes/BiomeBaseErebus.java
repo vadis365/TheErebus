@@ -10,17 +10,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.core.helper.TimeMeasurement;
-import erebus.world.biomes.decorators.BiomeDecoratorErebus;
+import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.loot.IWeightProvider;
 
 // @formatter:off
 public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightProvider{
-	private final BiomeDecoratorErebus decorator;
+	private final BiomeDecoratorBaseErebus decorator;
 	private short biomeWeight;
 	private int grassColor,foliageColor;
 	private short[] fogColorRGB = new short[]{ 255,255,255 };
 	
-	public BiomeBaseErebus(int biomeID, BiomeDecoratorErebus decorator){
+	public BiomeBaseErebus(int biomeID, BiomeDecoratorBaseErebus decorator){
 		super(biomeID);
 		this.decorator = decorator;
 		

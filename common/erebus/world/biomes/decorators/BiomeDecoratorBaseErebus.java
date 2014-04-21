@@ -13,7 +13,7 @@ import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenErebusMinable;
 import erebus.world.feature.decoration.WorldGenRedGem;
 
-public abstract class BiomeDecoratorErebus{
+public abstract class BiomeDecoratorBaseErebus{
 	protected World world;
 	protected Random rand;
 	protected int x,z;
@@ -25,7 +25,7 @@ public abstract class BiomeDecoratorErebus{
 	protected static final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
 	protected static final WorldGenRedGem genRedGem = new WorldGenRedGem();
 	
-	protected BiomeDecoratorErebus(){}
+	protected BiomeDecoratorBaseErebus(){}
 	
 	public final void populate(World world, Random rand, int x, int z){
 		this.world = world;
@@ -171,5 +171,5 @@ public abstract class BiomeDecoratorErebus{
 		}
 	}
 	
-	public static class BiomeDecoratorEmpty extends BiomeDecoratorErebus{}
+	public static class BiomeDecoratorEmpty extends BiomeDecoratorBaseErebus{}
 }

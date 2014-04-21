@@ -6,7 +6,7 @@ import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
-import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeUlteriorOutback extends BiomeBaseErebus{

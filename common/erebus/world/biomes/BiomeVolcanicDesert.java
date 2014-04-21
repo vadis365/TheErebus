@@ -11,7 +11,7 @@ import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
-import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeVolcanicDesert extends BiomeBaseErebus{

@@ -6,7 +6,7 @@ import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
-import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeBetweenlands extends BiomeBaseErebus{

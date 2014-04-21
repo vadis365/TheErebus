@@ -3,6 +3,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.Direction;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
+import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -22,7 +23,7 @@ import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
 import erebus.world.feature.tree.WorldGenTallJungleTree;
 
-public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorErebus{
+public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
@@ -39,15 +40,14 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorErebus{
 	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID,ModBlocks.thorns.blockID);
 	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1.blockID,ModBlocks.leavesErebus.blockID);
 	private final WorldGenerator genTreeJungle = new WorldGenTrees(true,6,3,3,true);
-	//private final WorldGenerator genTreeJungleLarge = new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
 	private final WorldGenerator genTreeJungleTall = new WorldGenTallJungleTree();
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 	
-	private final WorldGenBamboo genBamboo = new WorldGenBamboo(13,false);
-	private final WorldGenTurnips genTurnips = new WorldGenTurnips();
-	private final WorldGenMelon genMelons = new WorldGenMelon();
+	private final WorldGenerator genBamboo = new WorldGenBamboo(13,false);
+	private final WorldGenerator genTurnips = new WorldGenTurnips();
+	private final WorldGenerator genMelons = new WorldGenMelon();
 	
 	@Override
 	protected void populate(){
@@ -90,11 +90,17 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorErebus{
 				WorldGenerator treeGen = null;
 				int r = rand.nextInt(31);
 
-				if (r <= 6)treeGen = null;//new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3); // TODO
+				if (r <= 6){
+					xx = x+9+rand.nextInt(14);
+					zz = z+9+rand.nextInt(14);
+					treeGen = new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3);
+				}
 				else if (r <= 11)treeGen = genTreeMahogany;
 				else if (r <= 16){
+					xx = x+9+rand.nextInt(14);
+					zz = z+9+rand.nextInt(14);
 					((WorldGenErebusHugeTree)genTreeMahoganyLarge).prepare(20+rand.nextInt(5));
-					//treeGen = genTreeMahoganyLarge;
+					treeGen = genTreeMahoganyLarge;
 				}
 				else if (r <= 20)treeGen = genTreeAsper;
 				else if (r <= 23)treeGen = genTreeJungle;

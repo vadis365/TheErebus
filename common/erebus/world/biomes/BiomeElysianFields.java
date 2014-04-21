@@ -6,7 +6,7 @@ import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityWorkerBee;
-import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeElysianFields extends BiomeBaseErebus{

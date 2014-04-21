@@ -1,8 +1,5 @@
 package erebus.world.biomes.sub;
-import java.util.Random;
 import erebus.world.biomes.BiomeUndergroundJungle;
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
 
 // @formatter:off
 public class BiomeLake extends BiomeUndergroundJungle{

@@ -1,5 +1,5 @@
 package erebus.world.biomes;
-import erebus.world.biomes.decorators.BiomeDecoratorErebus.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus.BiomeDecoratorEmpty;
 
 // @formatter:off
 public class BiomeFungalForest extends BiomeBaseErebus{
