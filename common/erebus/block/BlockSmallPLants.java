@@ -138,11 +138,11 @@ public class BlockSmallPLants extends BlockMushroom {
 		int meta = world.getBlockMetadata(x, y, z);
 		int blockBelow = world.getBlockId(x, y - 1, z);
 		Block soil = Block.blocksList[blockBelow];
-		if (y >= 0 && y < 256 && meta < 5) {
+		if (y >= 0 && y < 256 && meta < 5) 
 			return (blockBelow == Block.mycelium.blockID || world.getFullBlockLightValue(x, y, z) < 13) && (soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this));
-		} else if (y >= 0 && y < 256 && meta >= 5){
-			return (soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this));
-		}
+		 else if (y >= 0 && y < 256 && meta >= 5)
+			return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
+		
 		return false;
 	}
 }
