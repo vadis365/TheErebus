@@ -10,6 +10,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
+import erebus.world.feature.decoration.WorldGenAmberGround;
+import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.plant.WorldGenBamboo;
@@ -27,6 +29,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
+	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
+	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
 	
 	private final WorldGenFlowers genMushroomsBrown = new WorldGenFlowers(Block.mushroomBrown.blockID);
 	private final WorldGenFlowers genMushroomsRed = new WorldGenFlowers(Block.mushroomRed.blockID);
@@ -65,6 +69,18 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	
 	@Override
 	protected void decorate(){
+		if (rand.nextInt(3) == 0){
+			for(attempt = 0; attempt < 5; attempt++){
+				if (genAmberUmberstone.generate(world,rand,x+offsetXZ(),rand.nextInt(120),z+offsetXZ()))break;
+			}
+		}
+		
+		if (rand.nextInt(6) == 0){
+			for(attempt = 0; attempt < 4; attempt++){
+				if (genAmberGround.generate(world,rand,x+offsetXZ(),10+rand.nextInt(40),z+offsetXZ()))break;
+			}
+		}
+		
 		if (rand.nextInt(37) == 0){
 			for(attempt = 0; attempt < 5; attempt++){
 				if (genWaspDungeon.generate(world,rand,x+offsetXZ(),127,z+offsetXZ())) break;

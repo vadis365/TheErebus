@@ -2,9 +2,7 @@ package erebus.world.biomes.decorators;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
-import erebus.block.BlockErebusOre;
 import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.biomes.decorators.type.OreType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.structure.WorldGenAntlionLair;
 
@@ -69,7 +67,7 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus{
 		else super.generateFeature(featureType);
 	}
 	
-	@Override
+	/*@Override
 	public void generateOre(OreType oreType, boolean extraOres){
 		if (oreType == OreType.PETRIFIED_WOOD){
 			generateOreCluster((extraOres?3:4)+rand.nextInt(2),ModBlocks.umberOreBlock,BlockErebusOre.dataPetrifiedWood,8,9,world,rand,x,z,6,112,2);
@@ -78,5 +76,5 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus{
 			if (rand.nextInt(6) == 0)generateOreCluster(1+rand.nextInt(2)*rand.nextInt(2),ModBlocks.oreFossil,3,8,11,world,rand,x,z,36,112,3);
 		}
 		else super.generateOre(oreType,extraOres);
-	}
+	}*/
 }

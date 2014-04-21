@@ -6,12 +6,12 @@ import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityWorkerBee;
-import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
 
 // @formatter:off
 public class BiomeElysianFields extends BiomeBaseErebus{
 	public BiomeElysianFields(int biomeID){
-		super(biomeID,new BiomeDecoratorEmpty());
+		super(biomeID,new BiomeDecoratorElysianFields());
 
 		setBiomeName("Elysian Fields");
 		setColors(0xC6FF54);
@@ -27,45 +27,5 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,6,1,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
 	}
-
-	/*@Override
-	public void generateBiomeFeatures(World world, Random rand, int x, int z){
-		for(int attempt = 0, xx, yy, zz; attempt < 200; attempt++){
-			xx = x + getRandomXZOffset(rand);
-			zz = z + getRandomXZOffset(rand);
-			yy = 20 + rand.nextInt(80);
-
-			if (world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
-				new WorldGenCypressTree().generate(world,rand,xx,yy,zz);
-			}
-		}
-
-		if (rand.nextBoolean()){
-			for(int attempt = 0, xx, yy, zz; attempt < 65; attempt++){
-				xx = x + getRandomXZOffset(rand);
-				yy = 15 + rand.nextInt(90);
-				zz = z + getRandomXZOffset(rand);
-
-				if (world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
-					new WorldGenGiantFlowers().generate(world,rand,xx,yy,zz);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void generateFeature(World world, Random rand, int x, int z, FeatureType featureType){
-		if (featureType == FeatureType.REDGEM){
-			for(int attempt = 0; attempt < 2 + rand.nextInt(2); attempt++){
-				new WorldGenRedGem().generate(world,rand,x + getRandomXZOffset(rand),64 + rand.nextInt(60),z + getRandomXZOffset(rand));
-			}
-		}
-		else generateFeature(world,rand,x,z,featureType);
-	}
-	
-	@Override
-	public void generateOre(World world, Random rand, int x, int z, OreType oreType, boolean extraOres){
-		if (oreType != OreType.FOSSIL)super.generateOre(world,rand,x,z,oreType,extraOres);
-	}*/
 }
 // @formatter:on

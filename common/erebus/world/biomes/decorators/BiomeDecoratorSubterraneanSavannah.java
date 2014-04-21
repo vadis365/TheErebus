@@ -3,7 +3,8 @@ import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.world.biomes.decorators.type.FeatureType;
+import erebus.world.feature.decoration.WorldGenAmberGround;
+import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
@@ -16,6 +17,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	private final WorldGenBamboo genBamboo = new WorldGenBamboo(7,true);
 	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
+	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
 	
 	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(ModBlocks.erebusGrass.blockID,1);
 	
@@ -51,6 +54,18 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	
 	@Override
 	public void decorate(){
+		if (rand.nextInt(12) == 0){
+			for(attempt = 0; attempt < 5; attempt++){
+				if (genAmberUmberstone.generate(world,rand,x+offsetXZ(),rand.nextInt(120),z+offsetXZ()))break;
+			}
+		}
+		
+		if (rand.nextInt(24) == 0){
+			for(attempt = 0; attempt < 4; attempt++){
+				if (genAmberGround.generate(world,rand,x+offsetXZ(),10+rand.nextInt(40),z+offsetXZ()))break;
+			}
+		}
+		
 		for(attempt = 0; attempt < 65; attempt++){
 			xx = x+offsetXZ();
 			yy = 15+rand.nextInt(90);
@@ -101,11 +116,5 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				genGrass.generate(world,rand,xx,yy,zz);
 			}
 		}
-	}
-	
-	@Override
-	public void generateFeature(FeatureType featureType){
-		if ((featureType == FeatureType.AMBER_GROUND || featureType == FeatureType.AMBER_UMBERSTONE) && rand.nextInt(4) != 0)return;
-		super.generateFeature(featureType);
 	}
 }

@@ -86,6 +86,6 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 				genRedGem.generate(world,rand,x+offsetXZ(),64+rand.nextInt(60),z+offsetXZ());
 			}
 		}
-		else generateFeature(featureType);
+		else super.generateFeature(featureType);
 	}
 }
