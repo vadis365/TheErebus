@@ -140,7 +140,6 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				break;
 				
 			case DISPERSE_HEMISPHERE:
-				
 				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
 				
 				if(rand.nextInt(10)==0)
@@ -162,7 +161,6 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				break;
 				
 			case UMBRELLA:
-				
 				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
 				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
 
@@ -191,6 +189,8 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 					}
 				}
 		}
+		
+		primaryPetalColor = secondaryPetalColor = -1;
 		
 		return true;
 	}
