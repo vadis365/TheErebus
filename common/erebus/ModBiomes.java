@@ -11,7 +11,7 @@ import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.biomes.sub.BiomeLake;
 import erebus.world.loot.WeightedList;
 
-public class ModBiomes {
+public class ModBiomes{
 	public static WeightedList<BiomeBaseErebus> biomeList = new WeightedList<BiomeBaseErebus>();
 	
 	public static BiomeBaseErebus undergroundJungle;
@@ -44,7 +44,7 @@ public class ModBiomes {
 	public static int savannahSubAsperGroveID;
 	public static int savannahSubSteppeID;
 
-	public static void init() {
+	public static void init(){
 		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
 		volcanicDesert = new BiomeVolcanicDesert(volcanicDesertID);
 		subterraneanSavannah = new BiomeSubterraneanSavannah(subterraneanSavannahID);

@@ -15,18 +15,19 @@ import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
+import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.type.FeatureType;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannaRock;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenAcaciaTree;
-import erebus.world.feature.util.FeatureType;
 
 // @formatter:off
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 	public BiomeSubterraneanSavannah(int biomeID){
-		super(biomeID);
+		super(biomeID,new BiomeDecoratorEmpty());
 		
 		setBiomeName("Subterranean Savannah");
 		setColors(0xB6B957,0xA3A52D);
@@ -52,7 +53,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		fillerBlock=(byte)Block.dirt.blockID;
 	}
 
-	@Override
+	/*@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		if (rand.nextBoolean() && rand.nextBoolean()){
 			for(int attempt=0; attempt<8; attempt++){
@@ -133,6 +134,6 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 	public void generateFeature(World world, Random rand, int x, int z, FeatureType featureType){
 		if ((featureType==FeatureType.AMBER_GROUND||featureType==FeatureType.AMBER_UMBERSTONE)&&rand.nextInt(4)!=0)return;
 		super.generateFeature(world,rand,x,z,featureType);
-	}
+	}*/
 }
 // @formatter:on

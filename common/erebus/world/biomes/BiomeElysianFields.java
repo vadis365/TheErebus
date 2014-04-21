@@ -9,16 +9,17 @@ import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityWorkerBee;
+import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.type.FeatureType;
+import erebus.world.biomes.decorators.type.OreType;
 import erebus.world.feature.decoration.WorldGenRedGem;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
 import erebus.world.feature.tree.WorldGenCypressTree;
-import erebus.world.feature.util.FeatureType;
-import erebus.world.feature.util.OreType;
 
 // @formatter:off
 public class BiomeElysianFields extends BiomeBaseErebus{
 	public BiomeElysianFields(int biomeID){
-		super(biomeID);
+		super(biomeID,new BiomeDecoratorEmpty());
 
 		setBiomeName("Elysian Fields");
 		setColors(0xC6FF54);
@@ -35,7 +36,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
 	}
 
-	@Override
+	/*@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		for(int attempt = 0, xx, yy, zz; attempt < 200; attempt++){
 			xx = x + getRandomXZOffset(rand);
@@ -73,6 +74,6 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 	@Override
 	public void generateOre(World world, Random rand, int x, int z, OreType oreType, boolean extraOres){
 		if (oreType != OreType.FOSSIL)super.generateOre(world,rand,x,z,oreType,extraOres);
-	}
+	}*/
 }
 // @formatter:on

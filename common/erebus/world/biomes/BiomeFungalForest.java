@@ -3,12 +3,13 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
 import erebus.world.feature.plant.WorldGenBigMushroomErebusMany;
 
 // @formatter:off
 public class BiomeFungalForest extends BiomeBaseErebus{
 	public BiomeFungalForest(int biomeID){
-		super(biomeID);
+		super(biomeID,new BiomeDecoratorEmpty());
 		
 		setBiomeName("Fungal Forest");
 		setColors(0x4E8833);
@@ -16,7 +17,7 @@ public class BiomeFungalForest extends BiomeBaseErebus{
 		setWeight(12);
 	}
 	
-	@Override
+	/*@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z) {
 		
 		for(int attempt=0; attempt<12; attempt++){
@@ -68,6 +69,6 @@ public class BiomeFungalForest extends BiomeBaseErebus{
 				new WorldGenBigMushroomErebusMany(4).generate(world,rand,xx,yy,zz);
 			}
 		}
-	}
+	}*/
 }
 //@formatter:on

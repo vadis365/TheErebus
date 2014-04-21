@@ -9,15 +9,16 @@ import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
+import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.type.FeatureType;
 import erebus.world.feature.decoration.WorldGenRedGem;
 import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
-import erebus.world.feature.util.FeatureType;
 
 // @formatter:off
 public class BiomeUlteriorOutback extends BiomeBaseErebus{
 	public BiomeUlteriorOutback(int biomeID){
-		super(biomeID);
+		super(biomeID,new BiomeDecoratorEmpty());
 
 		setBiomeName("Ulterior Outback");
 		setColors(0xEEAA55);
@@ -36,7 +37,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		topBlock = (byte)Block.sand.blockID;
 	}
 
-	@Override
+	/*@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		for(int attempt = 0, xx, zz; attempt < 112; attempt++){
 			xx = x + getRandomXZOffset(rand);
@@ -112,6 +113,6 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 			}
 		}
 		else generateFeature(world,rand,x,z,featureType);
-	}
+	}*/
 }
 // @formatter:on

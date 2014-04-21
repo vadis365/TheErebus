@@ -7,13 +7,14 @@ import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
-import erebus.world.feature.util.FeatureType;
-import erebus.world.feature.util.OreType;
+import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.type.FeatureType;
+import erebus.world.biomes.decorators.type.OreType;
 
 // @formatter:off
 public class BiomeBetweenlands extends BiomeBaseErebus{
 	public BiomeBetweenlands(int biomeID){
-		super(biomeID);
+		super(biomeID,new BiomeDecoratorEmpty());
 		
 		setBiomeName("Betweenlands");
 		setColors(0x314D31);
@@ -27,7 +28,7 @@ public class BiomeBetweenlands extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityDragonfly.class,20,1,2));
 	}
 
-	@Override
+	/*@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){}
 	
 	@Override
@@ -41,7 +42,7 @@ public class BiomeBetweenlands extends BiomeBaseErebus{
 			if (rand.nextInt(7)==0)generateOreCluster(1+rand.nextInt(2)*rand.nextInt(2),ModBlocks.oreFossil,3,9,12,world,rand,x,z,36,112,3);
 		}
 		else super.generateOre(world,rand,x,z,oreType,extraOres);
-	}
+	}*/
 	
 	@Override
 	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){

@@ -10,21 +10,24 @@ import erebus.ModBlocks;
 
 public class WorldGenErebusHugeTree extends WorldGenerator { // TODO
 
-	private final int baseHeight;
+	private int baseHeight;
 	private final int woodMetadata;
 	private final int leavesMetadata;
 	private final boolean thorns;
 	private final int woodID;
 	private final int leavesID;
 
-	public WorldGenErebusHugeTree(boolean par1, int par2, int par3, int par4, boolean par5, int par6, int par7) {
+	public WorldGenErebusHugeTree(boolean par1, int par3, int par4, boolean par5, int par6, int par7) {
 		super(par1);
-		baseHeight = par2;
 		woodMetadata = par3;
 		leavesMetadata = par4;
 		thorns = par5;
 		woodID = par6;
 		leavesID = par7;
+	}
+	
+	public void prepare(int baseHeight){
+		this.baseHeight = baseHeight;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public class BiomeLake extends BiomeUndergroundJungle{
 		setBiomeName("Underground Jungle - Lake");
 	}
 
-	@Override
+	/*@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		for(int xx = x; xx < x+16; xx++){
 			for(int zz = z; zz < z+16; zz++){
@@ -24,6 +24,6 @@ public class BiomeLake extends BiomeUndergroundJungle{
 				}
 			}
 		}
-	}
+	}*/
 }
 // @formatter:on

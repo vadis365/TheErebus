@@ -14,16 +14,17 @@ import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
+import erebus.world.biomes.decorators.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.type.FeatureType;
+import erebus.world.biomes.decorators.type.OreType;
 import erebus.world.feature.decoration.WorldGenRedGem;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.structure.WorldGenAntlionLair;
-import erebus.world.feature.util.FeatureType;
-import erebus.world.feature.util.OreType;
 
 // @formatter:off
 public class BiomeVolcanicDesert extends BiomeBaseErebus{
 	public BiomeVolcanicDesert(int biomeID){
-		super(biomeID);
+		super(biomeID,new BiomeDecoratorEmpty());
 		
 		setBiomeName("Volcanic Desert");
 		setColors(0xA6BB4E,0x91A922);
@@ -46,7 +47,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 		fillerBlock=(byte)Block.sandStone.blockID;
 	}
 
-	@Override
+	/*@Override
 	public void generateBiomeFeatures(World world, Random rand, int x, int z){
 		for(int attempt=0; attempt<35; attempt++){
 			int xx=x+getRandomXZOffset(rand);
@@ -110,7 +111,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 			if (rand.nextInt(6)==0)generateOreCluster(1+rand.nextInt(2)*rand.nextInt(2),ModBlocks.oreFossil,3,8,11,world,rand,x,z,36,112,3);
 		}
 		else super.generateOre(world,rand,x,z,oreType,extraOres);
-	}
+	}*/
 	
 	@Override
 	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){

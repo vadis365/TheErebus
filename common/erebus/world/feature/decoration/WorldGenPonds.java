@@ -10,11 +10,10 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 //@formatter:off
 public class WorldGenPonds extends WorldGenerator{
+	private double size;
 
-	private final double size;
-
-	public WorldGenPonds(double size){
-		this.size=size;
+	public void prepare(double size){
+		this.size = size;
 	}
 
 	@Override
