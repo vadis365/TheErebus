@@ -37,7 +37,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 		super(world);
 		setSize(2.3F, 1.4F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
+		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.7D, true));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));
 		tasks.addTask(3, new EntityAITempt(this, 0.5D, ModItems.turnip.itemID, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.5D));
@@ -62,7 +62,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(8.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.75D);

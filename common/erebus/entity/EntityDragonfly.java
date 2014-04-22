@@ -139,14 +139,15 @@ public class EntityDragonfly extends EntityMob {
 	public void onUpdate() {
 		super.onUpdate();
 		wingFloat = mathWings.swing(4.0F, 0.1F);
-		motionY *= 0.6000000238418579D;
 		if (getEntityToAttack() == null)
 			flyAbout();
-		if (riddenByEntity != null)
+		if (riddenByEntity != null) {
+			motionY *= 0.6000000238418579D;
 			if (!worldObj.isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0)) {
 				setDropped(true);
 				riddenByEntity.mountEntity(null);
 			}
+		}
 		if (dropped) {
 			droptime++;
 			if (droptime >= 20) {

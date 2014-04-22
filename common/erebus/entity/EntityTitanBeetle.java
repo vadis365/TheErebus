@@ -24,6 +24,7 @@ import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -384,6 +385,7 @@ public class EntityTitanBeetle extends EntityTameable {
 				setAttackTarget((EntityLivingBase) null);
 				return false;
 			}
+		entity.attackEntityFrom(DamageSource.causeMobDamage(this), 4);
 		return super.attackEntityAsMob(entity);
 	}
 

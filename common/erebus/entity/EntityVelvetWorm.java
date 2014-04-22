@@ -31,7 +31,7 @@ public int skin = rand.nextInt(2);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.7D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 4.0F));
-		tasks.addTask(3, new EntityAIWander(this, 0.4D));
+		tasks.addTask(3, new EntityAIWander(this, 0.5D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		}
@@ -51,14 +51,14 @@ public int skin = rand.nextInt(2);
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(getAttackStrength()); // atkDmg
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
-		return super.getCanSpawnHere();
-	}
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	public void onUpdate() {
