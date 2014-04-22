@@ -144,7 +144,8 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			i = getIsBoss();
 			if (i == 1) {
 				setSize(3F, 2F);
-				setCustomNameTag("Hornet of Despair");
+				if(!hasCustomNameTag())
+					setCustomNameTag("Hornet of Despair");
 			} else
 				setSize(1.5F, 1.0F);
 		}

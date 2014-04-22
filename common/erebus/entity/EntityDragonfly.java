@@ -161,8 +161,11 @@ public class EntityDragonfly extends EntityMob {
 			flyToTarget();
 		}
 		if (worldObj.isRemote)
-			if(getSkin() == 0)
+			if(getSkin() == 0) {
 				spawnParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
+				if(!hasCustomNameTag())
+					setCustomNameTag("Ender Dragonfly");
+		}
 	}
 
 	public void spawnParticles(World world, double posX, double posY, double posZ, Random rand) {
@@ -273,9 +276,9 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, DATA.dragonflyWing.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.dragonflyWing.ordinal()), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1, DATA.compoundEyes.ordinal()), 0.0F);
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1 + looting, DATA.compoundEyes.ordinal()), 0.0F);
 		if (getSkin() == 0)
 			entityDropItem(new ItemStack(Item.enderPearl, rand.nextInt(1) + 1 + looting), 0.0F);	
 	}
