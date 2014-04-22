@@ -27,7 +27,6 @@ public class EntityDragonfly extends EntityMob {
 	AnimationMathHelper mathWings = new AnimationMathHelper();
 	public float wingFloat;
 
-	public int skin = rand.nextInt(5);
 	public double pickupHeight;
 	private boolean dropped;
 	private int droptime = 0;// cool-down for picking up
