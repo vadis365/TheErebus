@@ -49,7 +49,7 @@ public class EntityDragonfly extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(128.0D);
 	}
 
 	@Override
@@ -139,10 +139,10 @@ public class EntityDragonfly extends EntityMob {
 	public void onUpdate() {
 		super.onUpdate();
 		wingFloat = mathWings.swing(4.0F, 0.1F);
+		motionY *= 0.6000000238418579D;
 		if (getEntityToAttack() == null)
 			flyAbout();
 		if (riddenByEntity != null) {
-			motionY *= 0.6000000238418579D;
 			if (!worldObj.isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0)) {
 				setDropped(true);
 				riddenByEntity.mountEntity(null);
@@ -193,7 +193,7 @@ public class EntityDragonfly extends EntityMob {
 			currentFlightTarget = null;
 		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
 			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(10) - rand.nextInt(10), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(10) - rand.nextInt(10));
-		if (currentFlightTarget != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget.posY < pickupHeight + 10D)
+		if (currentFlightTarget != null && getEntityToAttack() != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget.posY < pickupHeight + 10D)
 			currentFlightTarget.posY++;
 		flyToTarget();
 	}
