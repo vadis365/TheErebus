@@ -147,11 +147,11 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.scorpionPincer), new Object[] { "I I", "XIX", "XPX", 'I', Item.ingotIron, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()), 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
 
 		GameRegistry.addRecipe(new ItemStack(ModItems.rolledNewspaper), new Object[] { "PWP", "PIP", "PWP", 'I', new ItemStack(Item.dyePowder, 1, 0), 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal()), 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.whetstonePowder.ordinal()) });
-		
+
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.gliderWing.ordinal()), new Object[] { "SSS", "FFF", "FFF", 'S', Item.stick, 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.flyWing.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.enhancedGliderWing.ordinal()), new Object[] { "BBB", "WWW", "WWW", 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.dragonflyWing.ordinal()) });
 
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.waspDagger), new Object[] {new ItemStack(ModItems.erebusMaterials, 1, 10), new ItemStack(Item.stick) });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.waspDagger), new Object[] { new ItemStack(ModItems.erebusMaterials, 1, 10), new ItemStack(Item.stick) });
 
 		GameRegistry.addRecipe(new RecipeSprintLeggingsUpgrades());
 
@@ -168,7 +168,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 1, BlockPlanksErebus.dataBamboo), new Object[] { "##", "##", '#', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooCrate), new Object[] { "bpb", "p p", "bpb", 'p', new ItemStack(ModBlocks.planksErebus, 1, BlockPlanksErebus.dataBamboo), 'b', new ItemStack(ModItems.erebusMaterials, 1, 3) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooLadder, 1), new Object[] { "BBB", "S S", "BBB", 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), 'S', Item.silk });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooTorch, 4), new Object[] { " C ", " B ", " B ", 'C', Item.coal, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooTorch, 4), new Object[] { "C", "B", "B", 'C', Item.coal, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooBridge, 3), new Object[] { "SSS", "B B", "LLL", 'S', Item.silk, 'L', new ItemStack(ModBlocks.bambooLadder, 1), 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooPole, 4), new Object[] { " S ", " B ", " B ", 'S', Item.slimeBall, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.extenderThingy, 1), new Object[] { "BSB", "PDP", "BRB", 'S', Item.silk, 'R', Item.redstone, 'D', Block.dispenser, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), 'P', new ItemStack(ModBlocks.planksErebus, 1, BlockPlanksErebus.dataBamboo) });
@@ -217,9 +217,9 @@ public class RecipeHandler {
 			for (int j = 0; j < 6; j++) {
 				ItemStack swordSharp = new ItemStack(swordType[i]);
 				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if(stoneLevel.getItemDamage()>0) {
-				swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
-				GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(swordType[i]));
+				if (stoneLevel.getItemDamage() > 0) {
+					swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
+					GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(swordType[i]));
 				}
 			}
 
@@ -228,9 +228,9 @@ public class RecipeHandler {
 			for (int j = 0; j < 6; j++) {
 				ItemStack axeSharp = new ItemStack(axeType[i]);
 				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if(stoneLevel.getItemDamage()>0) {
-				axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
-				GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(axeType[i]));
+				if (stoneLevel.getItemDamage() > 0) {
+					axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
+					GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(axeType[i]));
 				}
 			}
 
