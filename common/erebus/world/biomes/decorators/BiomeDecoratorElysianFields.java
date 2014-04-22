@@ -1,6 +1,7 @@
 package erebus.world.biomes.decorators;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBlocks;
 import erebus.world.biomes.decorators.type.FeatureType;
 import erebus.world.biomes.decorators.type.OreSettings;
 import erebus.world.biomes.decorators.type.OreSettings.OreType;
@@ -32,6 +33,63 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 				if (world.getBlockId(xx,yy - 1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
 					genGiantFlowers.generate(world,rand,xx,yy,zz);
 				}
+			}
+		}
+		
+		int id;
+		for(attempt = 0; attempt < 20; attempt++){
+			xx = x + offsetXZ();
+			zz = z + offsetXZ();
+
+			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
+				if ((((id = world.getBlockId(xx,yy-1,zz)) == Block.dirt.blockID) || id == Block.grass.blockID) && world.isAirBlock(xx,yy,zz)){
+					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
+						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,4,2);
+						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,4+8,2);
+					}
+					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
+					
+					break;
+				}
+			}
+		}
+		
+		for(attempt = 0; attempt < 8; attempt++){
+			xx = x + offsetXZ();
+			zz = z + offsetXZ();
+
+			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
+				if ((((id = world.getBlockId(xx,yy-1,zz)) == Block.dirt.blockID) || id == Block.grass.blockID) && world.isAirBlock(xx,yy,zz)){
+					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
+						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,7,2);
+						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,7+8,2);
+					}
+					else world.setBlock(xx,yy,zz,ModBlocks.fern.blockID,0,2);
+					
+					break;
+				}
+			}
+		}
+		
+		for(attempt = 0; attempt < 4; attempt++){
+			xx = x+offsetXZ();
+			yy = 20+rand.nextInt(80);
+			zz = z+offsetXZ();
+
+			if (world.getBlockId(xx,yy-1,zz)  == Block.grass.blockID && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,0,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,0+8,2);
+			}
+		}
+		
+		for(attempt = 0; attempt < 4; attempt++){
+			xx = x+offsetXZ();
+			yy = 20+rand.nextInt(80);
+			zz = z+offsetXZ();
+
+			if (world.getBlockId(xx,yy-1,zz)  == Block.grass.blockID && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,1,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,1+8,2);
 			}
 		}
 	}
