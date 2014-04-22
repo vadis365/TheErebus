@@ -1,6 +1,7 @@
 package erebus.entity;
 
 import java.util.Calendar;
+import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -8,7 +9,9 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -38,6 +41,7 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataWatcher.addObject(30, new Integer(rand.nextInt(51)));
 	}
 
 	@Override
@@ -157,6 +161,26 @@ public class EntityDragonfly extends EntityMob {
 			currentFlightTarget = new ChunkCoordinates((int) getEntityToAttack().posX, (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()), (int) getEntityToAttack().posZ);
 			flyToTarget();
 		}
+		if (worldObj.isRemote)
+			if(getSkin() == 0)
+				spawnParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
+	}
+
+	public void spawnParticles(World world, double posX, double posY, double posZ, Random rand) {
+		for (int count = 0; count < 20; ++count) {
+			double velX = 0.0D;
+			double velY = 0.0D;
+			double velZ = 0.0D;
+			int motionX = rand.nextInt(2) * 2 - 1;
+			int motionZ = rand.nextInt(2) * 2 - 1;
+			double y = (float) posY + rand.nextFloat();
+			velY = (rand.nextFloat() - 0.5D) * 0.125D;
+			double z = posZ + 0.5D + 0.25D * motionZ;
+			velZ = rand.nextFloat() * 1.0F * motionZ;
+			double x = posX + 0.5D + 0.25D * motionX;
+			velX = rand.nextFloat() * 1.0F * motionX;
+			world.spawnParticle("portal", x, y, z, velX, velY, velZ);
+		}
 	}
 
 	public void flyAbout() {
@@ -253,6 +277,8 @@ public class EntityDragonfly extends EntityMob {
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, DATA.dragonflyWing.ordinal()), 0.0F);
 		if (rand.nextInt(5) == 0)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1, DATA.compoundEyes.ordinal()), 0.0F);
+		if (getSkin() == 0)
+			entityDropItem(new ItemStack(Item.enderPearl, rand.nextInt(1) + 1 + looting), 0.0F);	
 	}
 
 	@Override
@@ -265,5 +291,25 @@ public class EntityDragonfly extends EntityMob {
 	protected void attackEntity(Entity entity, float distance) {
 		if (distance < 2.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
 			super.attackEntity(entity, distance);
+	}
+	
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+	
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("dragonflySkin", getSkin());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setSkin(nbt.getInteger("dragonflySkin"));
 	}
 }

@@ -15,11 +15,7 @@ import erebus.entity.EntityDragonfly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDragonfly extends RenderLiving {
-	private static final ResourceLocation texture1 = new ResourceLocation("erebus:textures/entity/dragonflyGreen.png");
-	private static final ResourceLocation texture2 = new ResourceLocation("erebus:textures/entity/dragonflyRed.png");
-	private static final ResourceLocation texture3 = new ResourceLocation("erebus:textures/entity/dragonflyPurple.png");
-	private static final ResourceLocation texture4 = new ResourceLocation("erebus:textures/entity/dragonflyBlue.png");
-	private static final ResourceLocation texture5 = new ResourceLocation("erebus:textures/entity/dragonflyTan.png");
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/dragonflyEnder.png"), new ResourceLocation("erebus:textures/entity/dragonflyGreen.png"), new ResourceLocation("erebus:textures/entity/dragonflyRed.png"), new ResourceLocation("erebus:textures/entity/dragonflyPurple.png"), new ResourceLocation("erebus:textures/entity/dragonflyBlue.png"), new ResourceLocation("erebus:textures/entity/dragonflyTan.png") };
 
 	public RenderDragonfly() {
 		super(new ModelDragonfly(), 0.3F);
@@ -47,19 +43,20 @@ public class RenderDragonfly extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityDragonfly entityDragonfly = (EntityDragonfly) entity;
-		switch (entityDragonfly.skin) {
-			case 0:
-				return texture1;
-			case 1:
-				return texture2;
-			case 2:
-				return texture3;
-			case 3:
-				return texture4;
-			case 4:
-				return texture5;
-		}
-		return texture1;
+		EntityDragonfly dragonfly = (EntityDragonfly) entity;
+		if (dragonfly.getSkin() > 0 && dragonfly.getSkin() <= 10)
+			return textures[1];
+		else if (dragonfly.getSkin() > 10 && dragonfly.getSkin() <= 20)
+			return textures[2];
+		else if (dragonfly.getSkin() > 20 && dragonfly.getSkin() <= 30)
+			return textures[3];
+		else if (dragonfly.getSkin() > 30 && dragonfly.getSkin() <= 40)
+			return textures[4];
+		else if (dragonfly.getSkin() > 40 && dragonfly.getSkin() <= 50)
+			return textures[5];
+		else if (dragonfly.getSkin() == 0)
+			return textures[0];
+		else
+			return null;
 	}
 }
