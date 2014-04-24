@@ -42,7 +42,7 @@ public class ConfigHandler {
 	public static int reinExoskeletonHelmetID, reinExoskeletonBodyID, reinExoskeletonLegsID, reinExoskeletonBootsID, fossilClubID;
 	public static int waspSwordID, maxSpeedBowID, waspDaggerID, scorpionPincerID, webSlingerID, reinCompoundGogglesID, compoundGogglesID;
 	public static int sprintLeggingsID, jumpBootsID, armorGliderID, spawnEggsID, nectarCollectorID, beeTamingAmuletID, doorAmberItemID, bucketHoneyID;
-	public static int homingBeeconID, flowerSeedsID, whetstoneID, armorGliderPoweredID, woodlouseBallID, rolledNewspaperID;
+	public static int homingBeeconID, flowerSeedsID, whetstoneID, armorGliderPoweredID, woodlouseBallID, rolledNewspaperID, lightCrownID;
 
 	public static void loadConfig(FMLPreInitializationEvent event) {
 		config = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MOD_ID + ".cfg"));
@@ -211,7 +211,8 @@ public class ConfigHandler {
 			jumpBootsID = config.getItem("Item ID of Jump Boots", 9732).getInt(9732);
 			armorGliderID = config.getItem("Item ID of Chest Armour Glider", 9735).getInt(9735);
 			armorGliderPoweredID = config.getItem("Item ID of Chest Armour Glider Powered", 9755).getInt(9755);
-
+			lightCrownID = config.getItem("Item ID of Crown of Luminosity", 9758).getInt(9758);
+			
 			reinExoskeletonHelmetID = config.getItem("Item ID of Reinforced Exoskeleton Helmet", 9736).getInt(9736);
 			reinExoskeletonBodyID = config.getItem("Item ID of Reinforced Exoskeleton Chestplate", 9737).getInt(9737);
 			reinExoskeletonLegsID = config.getItem("Item ID of Reinforced Exoskeleton Leggings", 9738).getInt(9738);
@@ -219,7 +220,7 @@ public class ConfigHandler {
 
 			spawnEggsID = config.getItem("Item ID of Spawn Eggs", 9743).getInt(9743);
 
-			// latest ID used (please update after adding new items!) >>> 9757
+			// latest ID used (please update after adding new items!) >>> 9758
 
 			// Biomes & misc
 			ModBiomes.undergroundJungleID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle", 151).getInt(151);
