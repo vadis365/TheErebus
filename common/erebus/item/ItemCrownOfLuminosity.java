@@ -53,8 +53,8 @@ public class ItemCrownOfLuminosity extends ItemArmor {
 
 	@Override
     public void onUpdate(ItemStack is, World world, Entity entity, int id, boolean map) {
-    	ItemStack slot = ((EntityPlayer) entity).inventory.armorInventory[3];
-    	EntityPlayer player = (EntityPlayer) entity;
+		EntityPlayer player = (EntityPlayer) entity;
+    	ItemStack slot = player.inventory.armorInventory[3];
     	if (slot == null && hasTag(is) && is.getTagCompound().getBoolean("isWorn") || slot != null && slot.itemID != itemID && hasTag(is) && is.getTagCompound().getBoolean("isWorn")) {
 			world.updateLightByType(EnumSkyBlock.Block, (int)player.prevPosX, (int)player.prevPosY, (int)player.prevPosZ);
 			world.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ));
