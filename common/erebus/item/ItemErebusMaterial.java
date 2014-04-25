@@ -53,7 +53,8 @@ public class ItemErebusMaterial extends Item {
 		dragonflyWing,
 		weepingBluePetal,
 		papyrus,
-		enhancedGliderWing
+		enhancedGliderWing,
+		glowGem
 	}
 	// @formatter:on
 
