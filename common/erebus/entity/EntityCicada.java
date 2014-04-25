@@ -43,7 +43,7 @@ public class EntityCicada extends EntityMob {
 	
 	@Override
     protected int getDropItemId() {
-        return 0;// TheBetweenlands.RedShell.itemID;
+        return 0;
     }
 	
 	@Override	 

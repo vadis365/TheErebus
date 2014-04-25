@@ -27,7 +27,7 @@ public class ModelCicada extends ModelBase {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GL11.glPushMatrix();
-		GL11.glTranslated(0F, -0.5F, 0 );
+		GL11.glTranslated(0F, 0 ,-0.7F);
 		Test.render(unitPixel);
 		GL11.glPopMatrix();
 	}
