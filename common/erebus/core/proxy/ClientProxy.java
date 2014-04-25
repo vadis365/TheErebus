@@ -17,6 +17,7 @@ import erebus.client.model.entity.ModelAnimatedBlock;
 import erebus.client.model.entity.ModelAnimatedChest;
 import erebus.client.model.entity.ModelAntlion;
 import erebus.client.model.entity.ModelBombardierBeetle;
+import erebus.client.model.entity.ModelCicada;
 import erebus.client.model.entity.ModelFireAnt;
 import erebus.client.model.entity.ModelGlowWorm;
 import erebus.client.model.entity.ModelJumpingSpider;
@@ -41,6 +42,7 @@ import erebus.client.render.entity.RenderBombardierBeetle;
 import erebus.client.render.entity.RenderBotFly;
 import erebus.client.render.entity.RenderBotFlyLarva;
 import erebus.client.render.entity.RenderCentipede;
+import erebus.client.render.entity.RenderCicada;
 import erebus.client.render.entity.RenderDragonfly;
 import erebus.client.render.entity.RenderErebusLightningBolt;
 import erebus.client.render.entity.RenderExtractedBlock;
@@ -117,6 +119,7 @@ import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
+import erebus.entity.EntityCicada;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityExtractedBlock;
 import erebus.entity.EntityFireAnt;
@@ -233,7 +236,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGooBall.class, new RenderGooBall());
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodlouse.class, new RenderWoodlouse(new ModelWoodlouse(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodlouseBall.class, new WoodlouseBallItemRenderer());
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityCicada.class, new RenderCicada(new ModelCicada(), 0.3F));
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarHealing.class, new TileEntityErebusAltarHealingRenderer());
