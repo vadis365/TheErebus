@@ -44,12 +44,6 @@ public class EntityCicada extends EntityCreature {
     protected int getDropItemId() {
         return 0;
     }
-	
-	@Override	 
-    protected Entity findPlayerToAttack() {
-        EntityPlayer player = this.worldObj.getClosestVulnerablePlayerToEntity(this, 8.0D);
-        return player != null && this.canEntityBeSeen(player) ? player : null;
-    }
     
 	@Override
 	public void onUpdate() {
@@ -61,15 +55,6 @@ public class EntityCicada extends EntityCreature {
 				sonics=0;
 			if(sonics>10)
 				entityToAttack = null;	
-
-		if (!worldObj.isRemote) {
-			if (findPlayerToAttack() != null)
-				entityToAttack = (EntityLivingBase) findPlayerToAttack();
-			else if (findEnemyToAttack() != null)
-				entityToAttack = (EntityLivingBase) findEnemyToAttack();
-			else
-				entityToAttack = null;
-		}
 	}
 	
 	protected Entity findEnemyToAttack() {
@@ -77,7 +62,7 @@ public class EntityCicada extends EntityCreature {
 			for (int i = 0; i < list.size(); i++) {
 				Entity entity = (Entity) list.get(i);
 				if (entity != null)
-					if (entity instanceof EntityLivingBase && !(entity instanceof EntityCicada) ) {
+					if (entity instanceof EntityPlayer && !(entity instanceof EntityCicada) ) {
 						if(sonics==20) {
 							if(worldObj.isRemote)
 									spawnSonicParticles();
