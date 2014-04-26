@@ -37,7 +37,6 @@ public class RenderCicada extends RenderLiving {
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
 		scaleCicada((EntityCicada) entityliving, partialTickTime);
-		GL11.glRotatef(90.0F, -1.0F, 0.0F, 0.0F);
 	}
 
 	protected void scaleCicada(EntityCicada entityCicada, float partialTickTime) {
