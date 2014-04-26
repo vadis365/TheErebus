@@ -1,6 +1,7 @@
 package erebus.world.biomes;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityCicada;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGlowWorm;
@@ -30,6 +31,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,6,1,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityCicada.class,14,1,2));
 		
 		spawnableMonsterList.add(new SpawnEntry(EntityDragonfly.class,5,1,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityVelvetWorm.class,10,1,2));

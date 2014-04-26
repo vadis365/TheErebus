@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,6 +14,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.Erebus;
+import erebus.ModBlocks;
 
 public class EntityCicada extends EntityCreature {
 	private int sonics;
@@ -31,9 +33,31 @@ public class EntityCicada extends EntityCreature {
 	}
 	
 	@Override
+	public boolean isOnLadder() {
+		return isCollidedHorizontally;
+	}
+	
+	@Override
     public boolean getCanSpawnHere() {
-    	return worldObj.difficultySetting > 0 && !worldObj.isAnyLiquid(boundingBox);
-    }
+			AxisAlignedBB axisalignedbb = boundingBox.expand(1D, 1D, 1D);
+			int n = MathHelper.floor_double(axisalignedbb.minX);
+			int o = MathHelper.floor_double(axisalignedbb.maxX + 1.0D);
+			int p = MathHelper.floor_double(axisalignedbb.minY);
+			int q = MathHelper.floor_double(axisalignedbb.maxY + 1.0D);
+			int n1 = MathHelper.floor_double(axisalignedbb.minZ);
+			int o1 = MathHelper.floor_double(axisalignedbb.maxZ + 1.0D);
+			for (int p1 = n; p1 < o; p1++)
+				for (int q1 = p; q1 < q; q1++)
+					for (int n2 = n1; n2 < o1; n2++) {
+						int o2 = worldObj.getBlockId(p1, q1, n2);
+						if (o2 == 0)
+							continue;
+						if (o2 == ModBlocks.logErebusGroup1.blockID)
+							//if(worldObj.isAirBlock(p1, q1+1, n2) && worldObj.isAirBlock(p1, q1-1, n2))
+								return true;
+					}
+			return false;
+		}
 	
 	@Override 
     public int getMaxSpawnedInChunk() {
