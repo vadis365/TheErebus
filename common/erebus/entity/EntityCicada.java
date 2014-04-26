@@ -2,20 +2,17 @@
 
 import java.util.List;
 
-import erebus.Erebus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.Erebus;
 
 public class EntityCicada extends EntityCreature {
 	private int sonics;
@@ -87,6 +84,7 @@ public class EntityCicada extends EntityCreature {
 							((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 8*20, 0));
 							((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 8*20, 0));
 							entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 0D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 2.0D);
+							worldObj.playSoundAtEntity(this, "erebus:locustspawn", 1.0F, 6.0F);
 						}
 						return canEntityBeSeen(entity) ? entity : null;
 					}
