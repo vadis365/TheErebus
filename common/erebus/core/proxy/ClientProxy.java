@@ -2,9 +2,11 @@ package erebus.core.proxy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -13,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.client.fx.EntityRepellentFX;
+import erebus.client.fx.EntitySonicFX;
 import erebus.client.model.entity.ModelAnimatedBlock;
 import erebus.client.model.entity.ModelAnimatedChest;
 import erebus.client.model.entity.ModelAntlion;
@@ -289,7 +292,10 @@ public class ClientProxy extends CommonProxy {
 
 		if (particleName.equals("repellent"))
 			fx = new EntityRepellentFX(world, x, y, z, 0.0F, 0.0F, 0.0F);
-
+		
+		if (particleName.equals("sonic"))
+			fx = new EntitySonicFX(world, x, y, z, vecX, vecY, vecZ);
+		
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 	}
