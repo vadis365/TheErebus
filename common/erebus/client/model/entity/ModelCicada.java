@@ -83,10 +83,10 @@ public class ModelCicada extends ModelBase {
 		setRotation(HeadR, 0F, 0F, 0.2617994F);
 		HeadFront = new ModelRenderer(this, 24, 0);
 		HeadFront.addBox(-6F, -4F, -6F, 4, 3, 4);
-		HeadFront.setRotationPoint(0F, 18F, -7F);
+		HeadFront.setRotationPoint(0F, 19F, -7F);
 		HeadFront.setTextureSize(64, 32);
 		HeadFront.mirror = true;
-		setRotation(HeadFront, 0.2443461F, -0.7853982F, -0.2617994F);
+		setRotation(HeadFront, 0.2617994F, -0.7853982F, -0.2150F);
 		HeadMain = new ModelRenderer(this, 23, 9);
 		HeadMain.addBox(-3F, -4F, -7F, 6, 5, 3);
 		HeadMain.setRotationPoint(0F, 19F, -7F);

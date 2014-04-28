@@ -2,7 +2,6 @@
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -73,12 +72,12 @@ public class EntityCicada extends EntityCreature {
 	public void onUpdate() {
 		super.onUpdate();
 		findEnemyToAttack();
-			if(sonics<=20)
-				sonics++;
-			if(sonics>20)
-				sonics=0;
-			if(sonics>10)
-				entityToAttack = null;	
+		if(sonics<=20)
+			sonics++;
+		if(sonics>20)
+			sonics=0;
+		if(sonics>10)
+			entityToAttack = null;	
 	}
 	
 	protected Entity findEnemyToAttack() {
@@ -86,7 +85,7 @@ public class EntityCicada extends EntityCreature {
 			for (int i = 0; i < list.size(); i++) {
 				Entity entity = (Entity) list.get(i);
 				if (entity != null)
-					if (entity instanceof EntityPlayer && !(entity instanceof EntityCicada) ) {
+					if (entity instanceof EntityPlayer && !(entity instanceof EntityCicada)) {
 						if(sonics==20) {
 							if(worldObj.isRemote)
 									spawnSonicParticles();
