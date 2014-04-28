@@ -61,7 +61,7 @@ public class EntityCicada extends EntityCreature {
 	
 	@Override 
     public int getMaxSpawnedInChunk() {
-		return 3;
+		return 10;
 	}
 	
 	@Override
