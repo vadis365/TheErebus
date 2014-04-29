@@ -1,7 +1,6 @@
 package erebus.item;
 
 import java.util.List;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -46,9 +45,9 @@ public class ItemRolledNewspaper extends Item {
 		is.addEnchantment(Enchantment.baneOfArthropods, 5);
 	}
 	
-	 public void onUpdate(ItemStack is, World world, Entity entity, int id, boolean map) {
-		 if(!is.isItemEnchanted())
-			 is.addEnchantment(Enchantment.baneOfArthropods, 5);
-	 }
+	@Override
+	public void onUpdate(ItemStack is, World world, Entity entity, int id, boolean map){
+		if (!is.isItemEnchanted())is.addEnchantment(Enchantment.baneOfArthropods,5);
+	}
 
 }

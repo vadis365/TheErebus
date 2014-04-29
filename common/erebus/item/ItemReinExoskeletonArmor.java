@@ -15,6 +15,7 @@ public class ItemReinExoskeletonArmor extends ItemArmor {
 		super(id, ModMaterials.armorREINEXOSKELETON, 2, armorType);
 	}
 
+	@Deprecated
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {

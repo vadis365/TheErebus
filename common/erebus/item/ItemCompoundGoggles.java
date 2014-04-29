@@ -13,6 +13,7 @@ public class ItemCompoundGoggles extends ItemArmor {
 		super(i, enumarmormaterial, j, k);
 	}
 
+	@Deprecated
 	@Override
 	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
 		if (is.itemID == ModItems.compoundGoggles.itemID)

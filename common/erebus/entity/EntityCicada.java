@@ -81,7 +81,7 @@ public class EntityCicada extends EntityCreature {
 	}
 	
 	protected Entity findEnemyToAttack() {
-		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX + 0.5D, posY + 0.5D, posZ+ 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand((float) sonics *0.2D, 0.5D, (float) sonics *0.2D));
+		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX + 0.5D, posY + 0.5D, posZ+ 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(sonics *0.2D, 0.5D, sonics *0.2D));
 			for (int i = 0; i < list.size(); i++) {
 				Entity entity = (Entity) list.get(i);
 				if (entity != null)

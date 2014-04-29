@@ -3,7 +3,6 @@ package erebus.item;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;

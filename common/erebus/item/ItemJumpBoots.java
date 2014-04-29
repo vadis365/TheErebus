@@ -1,5 +1,7 @@
 package erebus.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +22,9 @@ public class ItemJumpBoots extends ItemArmor {
 		setCreativeTab(Erebus.tabErebusGear);
 	}
 
+	@Deprecated
 	@Override
+	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
 		if (is.itemID == ModItems.jumpBoots.itemID)
 			return "erebus:textures/models/armor/hopper1.png";

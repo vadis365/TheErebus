@@ -21,9 +21,9 @@ public class EntitySonicFX extends EntityFX
         this.motionX = this.motionX * 0.009999999776482582D + par8;
         this.motionY = this.motionY * 0.009999999776482582D + par10;
         this.motionZ = this.motionZ * 0.009999999776482582D + par12;
-        double d6 = par2 + (double)((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
-        d6 = par4 + (double)((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
-        d6 = par6 + (double)((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
+        double d6 = par2 + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
+        d6 = par4 + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
+        d6 = par6 + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.05F);
         this.flameScale = this.particleScale;
         this.particleRed = this.particleGreen = this.particleBlue = 1.0F;
         this.particleMaxAge = 20;
@@ -40,7 +40,7 @@ public class EntitySonicFX extends EntityFX
     Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/particle/particles.png"));
     par1Tessellator.startDrawingQuads();
     par1Tessellator.setBrightness(200);
-    float f6 = ((float)this.particleAge + par2) / (float)this.particleMaxAge;
+    float f6 = (this.particleAge + par2) / this.particleMaxAge;
     this.particleScale = this.flameScale * (1.0F - f6 * f6 * 0.5F);
     super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
     par1Tessellator.draw();
@@ -51,7 +51,7 @@ public class EntitySonicFX extends EntityFX
     @Override
     public int getBrightnessForRender(float par1)
     {
-        float f1 = ((float)this.particleAge + par1) / (float)this.particleMaxAge;
+        float f1 = (this.particleAge + par1) / this.particleMaxAge;
 
         if (f1 < 0.0F)
         {
@@ -79,7 +79,7 @@ public class EntitySonicFX extends EntityFX
     @Override
     public float getBrightness(float par1)
     {
-        float f1 = ((float)this.particleAge + par1) / (float)this.particleMaxAge;
+        float f1 = (this.particleAge + par1) / this.particleMaxAge;
 
         if (f1 < 0.0F)
         {
