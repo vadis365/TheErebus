@@ -14,7 +14,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 	
 	@Override
 	public void decorate(){
-		for(int attempt = 0, xx, yy, zz; attempt < 200; attempt++){
+		for(attempt = 0; attempt < 105; attempt++){
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 			yy = 20 + rand.nextInt(80);

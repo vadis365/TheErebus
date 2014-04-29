@@ -1,5 +1,6 @@
 package erebus.world.feature.tree;
 import java.util.Random;
+import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -9,45 +10,169 @@ import erebus.ModBlocks;
 public class WorldGenCypressTree extends WorldGenerator{
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
-		int height = rand.nextInt(4)+4;
-		float rad = 0.65F+rand.nextFloat()*0.5F+height/10F;
-		int irad = (int)Math.ceil(rad);
+		float treeRand = rand.nextFloat();
 		
-		for(int xx = x-irad; xx <= x+irad; xx++){
-			for(int zz = z-irad; zz <= z+irad; zz++){
-				for(int yy = y; yy <= y+height+4; yy++){
-					if (!world.isAirBlock(xx,yy,zz))return false;
+		if (treeRand >= 0.5F)return generateMediumTree(world,rand,x,y,z);
+		else if (treeRand >= 0.3F)return generateLargeTree(world,rand,x,y,z);
+		else return generateSmallTree(world,rand,x,y,z);
+	}
+	
+	private boolean checkEmptyArea(World world, int x, int y, int z, int totalHeight, int rad){
+		if (world.getBlockMaterial(x,y,z) != Material.air)return false;
+		
+		for(int xx = x-rad; xx <= x+rad; xx++){
+			for(int zz = z-rad; zz <= z+rad; zz++){
+				for(int yy = y+1; yy <= y+totalHeight; yy++){
+					if (world.getBlockMaterial(xx,yy,zz) != Material.air)return false;
 				}
 			}
 		}
-		
-		generateEllipsoidAt(world,rand,x,y+2+(height-2)/2+rand.nextInt(2),z,rad,height/2F-(height>6?0.25F:0F));
-		
-		for(int yy = y; yy <= y+height; yy++)world.setBlock(x,yy,z,ModBlocks.logErebusGroup1.blockID);
-		for(int yy = y+height+1; yy < y+height+1+(rand.nextBoolean()?2:1); yy++){
-			for(int xx = x-1; xx <= x+1; xx++){
-				for(int zz = z-1; zz <= z+1; zz++){
-					if (xx == x && zz == z)continue;
-					world.setBlockToAir(xx,yy,zz);
-				}
-			}
-			world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID);
-		}
-		for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y+height,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID);
 		
 		return true;
 	}
-
-	private void generateEllipsoidAt(World world, Random rand, float x, float y, float z, float radXZ, float radY){
-		for(float xf=x-radXZ; xf<=x+radXZ; xf+=0.5F){
-			for(float zf=z-radXZ; zf<=z+radXZ; zf+=0.5F){
-				for(float yf=y-radY; yf<=y+radY; yf++){
-					if (Math.pow(xf-x,2)/(radXZ*radXZ)+Math.pow(yf-y,2)/(radY*radY)+Math.pow(zf-z,2)/(radXZ*radXZ)<=0.9+rand.nextFloat()*0.1F){
-						world.setBlock(Math.round(xf),Math.round(yf),Math.round(zf),ModBlocks.leavesErebus.blockID);
+	
+	/*
+	 * SMALL
+	 */
+	
+	private boolean generateSmallTree(World world, Random rand, int x, int y, int z){
+		int trunkH = rand.nextInt(4)+5;
+		int nakedTrunkH = rand.nextInt(2)+1;
+		int leafH = trunkH-nakedTrunkH;
+		
+		if (!checkEmptyArea(world,x,y,z,trunkH+2,2))return false;
+		
+		for(int yy = y; yy <= y+trunkH; yy++)world.setBlock(x,yy,z,ModBlocks.logErebusGroup1.blockID);
+		for(int yy = y+trunkH+1; yy <= y+trunkH+2; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID);
+		
+		for(int a = 0; a < 4; a++){
+			for(int yy = y+nakedTrunkH; yy <= y+trunkH; yy++)world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID);
+			
+			if (leafH-4 > 1){
+				for(int yy = y+nakedTrunkH+2; yy <= y+trunkH-2; yy++){
+					if ((yy == y+nakedTrunkH+2 || yy == y+trunkH-2) && leafH-4 > 3 && rand.nextInt(11) == 0)continue;
+					world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID);
+				}
+			}
+		}
+		
+		for(int a = 0; a < 2; a++){
+			for(int b = 0; b < 2; b++){
+				for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-1; yy++){
+					if ((yy == y+nakedTrunkH+1 || yy == y+trunkH-1) && leafH-2 > 3 && rand.nextInt(8) == 0)continue;
+					world.setBlock(x-1+2*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID);
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * MEDIUM
+	 */
+	
+	private boolean generateMediumTree(World world, Random rand, int x, int y, int z){
+		int trunkH = rand.nextInt(5)+8;
+		int nakedTrunkH = rand.nextInt(3)+1;
+		int leafH = trunkH-nakedTrunkH;
+		
+		if (!checkEmptyArea(world,x,y,z,trunkH+3,3))return false;
+		
+		for(int yy = y; yy <= y+trunkH; yy++)world.setBlock(x,yy,z,ModBlocks.logErebusGroup1.blockID);
+		for(int yy = y+trunkH+1; yy <= y+trunkH+3; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID);
+		
+		for(int a = 0; a < 4; a++){
+			for(int yy = y+nakedTrunkH; yy <= y+trunkH+1; yy++)world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID);
+			for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-2; yy++)world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID);
+			
+			if (leafH-7 > 1){
+				for(int yy = y+nakedTrunkH+3; yy <= y+trunkH-4; yy++){
+					if ((yy == y+nakedTrunkH+3 || yy == y+trunkH-4) && leafH-7 > 3 && rand.nextInt(10) == 0)continue;
+					world.setBlock(x+Direction.offsetX[a]*3,yy,z+Direction.offsetZ[a]*3,ModBlocks.leavesErebus.blockID);
+				}
+			}
+		}
+		
+		for(int a = 0; a < 2; a++){
+			for(int b = 0; b < 2; b++){
+				for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-1; yy++){
+					if ((yy == y+nakedTrunkH+1 || yy == y+trunkH-1) && rand.nextInt(14) == 0)continue;
+					world.setBlock(x-1+2*a,yy,z+-1+2*b,ModBlocks.leavesErebus.blockID);
+				}
+				
+				for(int yy = y+nakedTrunkH+2; yy <= y+trunkH-3; yy++){
+					boolean canSkip = yy == y+nakedTrunkH+2 || yy == y+trunkH-3;
+					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-2+4*a,yy,z+-1+2*b,ModBlocks.leavesErebus.blockID);
+					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-1+2*a,yy,z+-2+4*b,ModBlocks.leavesErebus.blockID);
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * LARGE
+	 */
+	
+	private boolean generateLargeTree(World world, Random rand, int x, int y, int z){
+		int trunkH = rand.nextInt(6)+12;
+		int nakedTrunkH = rand.nextInt(3)+2;
+		int leafH = trunkH-nakedTrunkH;
+		
+		if (!checkEmptyArea(world,x,y,z,trunkH+4,3))return false;
+		
+		for(int yy = y; yy <= y+trunkH; yy++){
+			world.setBlock(x,yy,z,ModBlocks.logErebusGroup1.blockID);
+			
+			if (yy <= y+trunkH-2){
+				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],((yy >= y+trunkH-3 && rand.nextBoolean() || yy < y+trunkH-3) ? ModBlocks.logErebusGroup1.blockID : ModBlocks.leavesErebus.blockID));
+			}
+		}
+		
+		for(int yy = y+trunkH+1; yy <= y+trunkH+4; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID);
+		
+		for(int a = 0; a < 4; a++){
+			for(int yy = y+trunkH-1; yy <= y+trunkH+2; yy++){
+				if (yy == y+trunkH+2 && rand.nextInt(5) == 0)continue;
+				world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID);
+			}
+			
+			for(int yy = y+nakedTrunkH; yy <= y+trunkH; yy++){
+				if (yy == y+trunkH && rand.nextInt(6) == 0)continue;
+				world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID);
+			}
+			
+			for(int yy = y+nakedTrunkH+2; yy <= y+trunkH-3; yy++)world.setBlock(x+Direction.offsetX[a]*3,yy,z+Direction.offsetZ[a]*3,ModBlocks.leavesErebus.blockID);
+		}
+		
+		for(int a = 0; a < 2; a++){
+			for(int b = 0; b < 2; b++){
+				for(int yy = y+nakedTrunkH; yy <= y+trunkH+1; yy++)world.setBlock(x-1+2*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID);
+				
+				for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-2; yy++){
+					boolean canSkip = (yy == y+nakedTrunkH+1 || yy == y+trunkH-2);
+					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-2+4*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID);
+					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-1+2*a,yy,z-2+4*b,ModBlocks.leavesErebus.blockID);
+				}
+				
+				for(int yy = y+nakedTrunkH+3; yy <= y+trunkH-3; yy++){
+					if (yy == y+trunkH-3 && rand.nextInt(7) == 0)continue;
+					world.setBlock(x-2+4*a,yy,z-2+4*b,ModBlocks.leavesErebus.blockID);
+				}
+				
+				if (leafH-9 > 1){
+					for(int yy = y+nakedTrunkH+4; yy <= y+trunkH-5; yy++){
+						boolean canSkip = (yy == y+nakedTrunkH+4 || yy == y+trunkH-5) && leafH-9 > 2;
+						if (!canSkip || rand.nextInt(12) != 0)world.setBlock(x-3+6*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID);
+						if (!canSkip || rand.nextInt(12) != 0)world.setBlock(x-1+2*a,yy,z-3+6*b,ModBlocks.leavesErebus.blockID);
 					}
 				}
 			}
 		}
+		
+		return true;
 	}
 }
 //@formatter:on

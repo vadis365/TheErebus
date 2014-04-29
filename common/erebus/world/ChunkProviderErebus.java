@@ -320,12 +320,15 @@ public class ChunkProviderErebus implements IChunkProvider{
 
 		int blockCoordX = x * 16;
 		int blockCoordZ = z * 16;
-
-		BiomeBaseErebus biome = (BiomeBaseErebus)worldObj.getBiomeGenForCoords(blockCoordX + 16,blockCoordZ + 16);
-		rand.setSeed(worldObj.getSeed());
-		rand.setSeed(x * (rand.nextLong() / 2L * 2L + 1L) + z * (rand.nextLong() / 2L * 2L + 1L) ^ worldObj.getSeed());
-		biome.populate(worldObj,rand,blockCoordX,blockCoordZ);
-		biome.decorate(worldObj,rand,blockCoordX,blockCoordZ);
+		
+		BiomeGenBase biomeBase = worldObj.getBiomeGenForCoords(blockCoordX + 16,blockCoordZ + 16);
+		if (biomeBase instanceof BiomeBaseErebus){
+			BiomeBaseErebus biome = (BiomeBaseErebus)biomeBase;
+			rand.setSeed(worldObj.getSeed());
+			rand.setSeed(x * (rand.nextLong() / 2L * 2L + 1L) + z * (rand.nextLong() / 2L * 2L + 1L) ^ worldObj.getSeed());
+			biome.populate(worldObj,rand,blockCoordX,blockCoordZ);
+			biome.decorate(worldObj,rand,blockCoordX,blockCoordZ);
+		}
 
 		for(int attempt = 0; attempt < 14; ++attempt){
 			new WorldGenSpiderDungeons().generate(worldObj,rand,blockCoordX + rand.nextInt(16) + 8,rand.nextInt(128),blockCoordZ + rand.nextInt(16) + 8);
