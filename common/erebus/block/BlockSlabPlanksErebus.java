@@ -16,8 +16,8 @@ import erebus.ModBlocks;
 
 public class BlockSlabPlanksErebus extends BlockHalfSlab {
 
-	public static final String[][] slabTypes = new String[][] { new String[] { "acacia", "eucalyptus", "mahogany", "baobab", "mossbark", "pink", "scorched", "asper" }, new String[] { "white", "bamboo" } };
-	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataBaobab = 3, dataMossbark = 4, dataPink = 5, dataScorched = 6, dataAsper = 7, dataWhite = 0, dataBamboo = 1;
+	public static final String[][] slabTypes = new String[][] { new String[] { "acacia", "eucalyptus", "mahogany", "baobab", "mossbark", "pink", "scorched", "asper" }, new String[] { "white", "bamboo", "cypress" } };
+	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataBaobab = 3, dataMossbark = 4, dataPink = 5, dataScorched = 6, dataAsper = 7, dataWhite = 0, dataBamboo = 1, dataCypress = 2;
 
 	private final int slabGroup;
 

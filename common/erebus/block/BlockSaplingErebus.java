@@ -19,17 +19,17 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import erebus.world.feature.tree.WorldGenErebusTrees;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
-import erebus.world.feature.tree.WorldGenAcaciaTree;
 
 public class BlockSaplingErebus extends BlockSapling {
 
-	public static final String[] saplingTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Mossbark", "Asper" };
-	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataMossbark = 3, dataAsper = 4;
+	public static final String[] saplingTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Mossbark", "Asper", "Cypress" };
+	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataMossbark = 3, dataAsper = 4, dataCypress = 5;
 
 	@SideOnly(Side.CLIENT)
 	private Icon[] iconArray;
@@ -84,7 +84,7 @@ public class BlockSaplingErebus extends BlockSapling {
 				for (var9 = 0; var9 >= -1; --var9)
 					if (isSameSapling(world, x + var8, y, z + var9, 0) && isSameSapling(world, x + var8 + 1, y, z + var9, 0) && isSameSapling(world, x + var8, y, z + var9 + 1, 0) && isSameSapling(world, x + var8 + 1, y, z + var9 + 1, 0)) {
 						worldGen = new WorldGenErebusHugeTree(true, BlockLogErebus.dataMahogany, BlockLeavesErebus.dataMahoganyDecay, true, ModBlocks.logErebusGroup1.blockID, ModBlocks.leavesErebus.blockID);
-						((WorldGenErebusHugeTree)worldGen).prepare(20 + rand.nextInt(5));
+						((WorldGenErebusHugeTree) worldGen).prepare(20 + rand.nextInt(5));
 						var10 = true;
 						break;
 					}

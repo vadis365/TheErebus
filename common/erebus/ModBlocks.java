@@ -87,6 +87,7 @@ import erebus.item.block.ItemBlockGneiss;
 import erebus.item.block.ItemBlockLeavesErebus;
 import erebus.item.block.ItemBlockLogErebus1;
 import erebus.item.block.ItemBlockLogErebus2;
+import erebus.item.block.ItemBlockLogErebus3;
 import erebus.item.block.ItemBlockPlanksErebus;
 import erebus.item.block.ItemBlockRedGem;
 import erebus.item.block.ItemBlockSapling;
@@ -112,7 +113,7 @@ public class ModBlocks {
 	public static Block umberstone, umberOreBlock, oreFossil, redGem, blockAmber, quickSand, ghostSand, erebusOreExtra, umberstoneButton;
 
 	// WOOD
-	public static Block logErebusGroup1, logErebusGroup2, planksErebus, erebusSapling, hollowLogAcacia, erebusFlower, erebusStigma;
+	public static Block logErebusGroup1, logErebusGroup2, logErebusGroup3, planksErebus, erebusSapling, hollowLogAcacia, erebusFlower, erebusStigma;
 	public static BlockLeavesErebus leavesErebus;
 
 	// UNDERGROWTH
@@ -159,6 +160,7 @@ public class ModBlocks {
 
 		logErebusGroup1 = new BlockLogErebus(ConfigHandler.logErebusGroup1ID, 0).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus1");
 		logErebusGroup2 = new BlockLogErebus(ConfigHandler.logErebusGroup2ID, 1).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus2");
+		logErebusGroup3 = new BlockLogErebus(ConfigHandler.logErebusGroup3ID, 2).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("logErebus3");
 		planksErebus = new BlockPlanksErebus(ConfigHandler.planksErebusID).setHardness(2.0F).setStepSound(Block.soundWoodFootstep).setUnlocalizedName("planksErebus");
 		leavesErebus = (BlockLeavesErebus) new BlockLeavesErebus(ConfigHandler.leavesErebusID).setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("leavesErebus");
 		erebusSapling = new BlockSaplingErebus(ConfigHandler.erebusSaplingID).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setUnlocalizedName("sapling_mahogany");
@@ -241,7 +243,7 @@ public class ModBlocks {
 		gneissStairs = new Block[BlockGneiss.iconPaths.length];
 		for (int i = 0; i < gneissStairs.length; i++)
 			gneissStairs[i] = new BlockStairsErebus(ConfigHandler.gneissStairsID[i], gneiss, i).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("gneissStairs" + i);
-		//
+
 		spiderSpawner = new BlockSpiderSpawner(ConfigHandler.spiderSpawnerID, "Scytodes - Erebus").setUnlocalizedName("spiderSpawner").setTextureName("erebus:spiderSpawner");
 		jumpingSpiderSpawner = new BlockSpiderSpawner(ConfigHandler.jumpingSpiderSpawnerID, "JumpingSpider - Erebus").setUnlocalizedName("jumpingSpiderSpawner").setTextureName("erebus:spiderSpawner");
 		waspSpawner = new BlockWaspSpawner(ConfigHandler.waspSpawnerID, "Wasp - Erebus").setUnlocalizedName("waspSpawner").setTextureName("erebus:waspNestSpawner");
@@ -250,7 +252,7 @@ public class ModBlocks {
 	private static void initCreativeTabs() {
 		// Break down long lines
 		Erebus.tabErebusBlock.add(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
-		Erebus.tabErebusBlock.add(logErebusGroup1, logErebusGroup2, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
+		Erebus.tabErebusBlock.add(logErebusGroup1, logErebusGroup2, logErebusGroup3, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
 		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusPlantSmall);
 		Erebus.tabErebusBlock.add(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4);
 		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
@@ -284,6 +286,7 @@ public class ModBlocks {
 
 		GameRegistry.registerBlock(logErebusGroup1, ItemBlockLogErebus1.class, "erebus.logErebus1");
 		GameRegistry.registerBlock(logErebusGroup2, ItemBlockLogErebus2.class, "erebus.logErebus2");
+		GameRegistry.registerBlock(logErebusGroup3, ItemBlockLogErebus3.class, "erebus.logErebus3");
 		GameRegistry.registerBlock(planksErebus, ItemBlockPlanksErebus.class, "erebus.planksErebus");
 		GameRegistry.registerBlock(leavesErebus, ItemBlockLeavesErebus.class, "erebus.leavesErebus");
 		GameRegistry.registerBlock(erebusSapling, ItemBlockSapling.class, "erebus.erebusSapling");
@@ -410,6 +413,7 @@ public class ModBlocks {
 
 		Block.setBurnProperties(logErebusGroup1.blockID, 5, 5);
 		Block.setBurnProperties(logErebusGroup2.blockID, 5, 5);
+		Block.setBurnProperties(logErebusGroup3.blockID, 5, 5);
 		Block.setBurnProperties(planksErebus.blockID, 5, 20);
 		Block.setBurnProperties(leavesErebus.blockID, 30, 60);
 		Block.setBurnProperties(blockWitherWeb.blockID, 20, 50);

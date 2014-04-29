@@ -15,7 +15,6 @@ import erebus.block.BlockErebusFlower.FLOWER_TYPE;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockLogErebus;
 import erebus.block.BlockPlanksErebus;
-import erebus.block.BlockSlabPlanksErebus;
 import erebus.core.handler.ConfigHandler;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemErebusMaterial;
@@ -35,14 +34,15 @@ public class RecipeHandler {
 
 	private static void registerRecipes() {
 		// Wood
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataAcacia), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataAcacia) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataEucalyptus), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataEucalyptus) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataMahogany), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataMahogany) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataBaobab), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataBaobab) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataMossbark), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup2, 1, BlockLogErebus.dataMossbark) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataPink), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup2, 1, BlockLogErebus.dataPink) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataScorched), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup2, 1, BlockLogErebus.dataScorched) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataAsper), new Object[] { "#", '#', new ItemStack(ModBlocks.logErebusGroup2, 1, BlockLogErebus.dataAsper) });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataAcacia), new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataAcacia));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataEucalyptus), new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataEucalyptus));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataMahogany), new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataMahogany));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataBaobab), new ItemStack(ModBlocks.logErebusGroup1, 1, BlockLogErebus.dataBaobab));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataMossbark), new ItemStack(ModBlocks.logErebusGroup2, 1, BlockLogErebus.dataMossbark));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataPink), new ItemStack(ModBlocks.logErebusGroup2, 1, BlockLogErebus.dataPink));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataScorched), new ItemStack(ModBlocks.logErebusGroup2, 1, BlockLogErebus.dataScorched));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataAsper), new ItemStack(ModBlocks.logErebusGroup2, 1, BlockLogErebus.dataAsper));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, BlockPlanksErebus.dataCypress), new ItemStack(ModBlocks.logErebusGroup3, 1, BlockLogErebus.dataCypress));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModBlocks.planksErebus, 1, BlockPlanksErebus.dataWhite), "plankWood", "dyeWhite"));
 
 		// Umber stuff
@@ -302,6 +302,7 @@ public class RecipeHandler {
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.logErebusGroup1, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.logErebusGroup2, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.logErebusGroup3, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.planksErebus, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("treeSapling", new ItemStack(ModBlocks.erebusSapling, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("treeLeaves", new ItemStack(ModBlocks.leavesErebus, 1, OreDictionary.WILDCARD_VALUE));
@@ -336,10 +337,8 @@ public class RecipeHandler {
 
 		for (Block stair : ModBlocks.plankStairs)
 			OreDictionary.registerOre("stairWood", stair);
-		for (int i = 0; i <= BlockSlabPlanksErebus.dataAsper; i++)
-			OreDictionary.registerOre("slabWood", new ItemStack(ModBlocks.plankSlabs[0], 1, i));
-		for (int i = 0; i <= BlockSlabPlanksErebus.dataBamboo; i++)
-			OreDictionary.registerOre("slabWood", new ItemStack(ModBlocks.plankSlabs[2], 1, i));
+		for (Block slab : ModBlocks.plankSlabs)
+			OreDictionary.registerOre("slabWood", new ItemStack(slab, 1, OreDictionary.WILDCARD_VALUE));
 
 		if (ConfigHandler.lead) {
 			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));

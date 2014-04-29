@@ -3,6 +3,7 @@ package erebus.block;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -17,10 +18,11 @@ import erebus.ModBlocks;
 
 public class BlockLeavesErebus extends BlockLeaves {
 
-	public static final String[] leafTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Asper", "Mossbark", "Pink" };
-	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataAsper = 3, dataMossbark = 4, dataPink = 5;
-	public static final byte dataAcaciaDecay = 8, dataEucalyptusDecay = 9, dataMahoganyDecay = 10, dataAsperDecay = 11, dataMossbarkDecay = 12, dataPinkDecay = 13;
+	public static final String[] leafTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Asper", "Mossbark", "Pink", "Cypress" };
+	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataAsper = 3, dataMossbark = 4, dataPink = 5, dataCypress = 6;
+	public static final byte dataAcaciaDecay = 8, dataEucalyptusDecay = 9, dataMahoganyDecay = 10, dataAsperDecay = 11, dataMossbarkDecay = 12, dataPinkDecay = 13, dataCypressDecay = 12;
 
+	@SideOnly(Side.CLIENT)
 	private Icon[] iconArray;
 	private int[] adjacentTreeBlocks;
 
@@ -158,14 +160,16 @@ public class BlockLeavesErebus extends BlockLeaves {
 				return BlockSaplingErebus.dataMossbark;
 			case dataAsper:
 				return BlockSaplingErebus.dataAsper;
+			case dataCypress:
+				return BlockSaplingErebus.dataCypress;
 			default:
 				return -1;
 		}
 	}
-	
+
 	@Override
-	public int getDamageValue(World world, int x, int y, int z){
-		return world.getBlockMetadata(x,y,z)&~8;
+	public int getDamageValue(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z) & ~8;
 	}
 
 	@Override
