@@ -20,7 +20,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		setBiomeName("Elysian Fields");
 		setColors(0xC6FF54);
 		setTemperatureRainfall(0.85F,0.5F);
-		setWeight(200); // TODO 20
+		setWeight(20);
 
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityGrasshopper.class,4,1,3));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityGlowWorm.class,4,1,3));
