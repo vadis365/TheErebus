@@ -51,7 +51,7 @@ public class EntityCicada extends EntityCreature {
 						int o2 = worldObj.getBlockId(p1, q1, n2);
 						if (o2 == 0)
 							continue;
-						if (o2 == ModBlocks.logErebusGroup1.blockID)
+						if (o2 == ModBlocks.logErebusGroup3.blockID)
 							//if(worldObj.isAirBlock(p1, q1+1, n2) && worldObj.isAirBlock(p1, q1-1, n2))
 								return true;
 					}
