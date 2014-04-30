@@ -2,6 +2,9 @@
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -100,6 +103,7 @@ public class EntityCicada extends EntityCreature {
 		return null;
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public void spawnSonicParticles() {
 		for(int a=0; a<360; a+=4) {
 		    double ang=a*Math.PI/180D;

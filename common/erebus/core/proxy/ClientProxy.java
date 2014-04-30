@@ -1,7 +1,10 @@
 package erebus.core.proxy;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityPortalFX;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -294,6 +297,12 @@ public class ClientProxy extends CommonProxy {
 		if (particleName.equals("sonic"))
 			fx = new EntitySonicFX(world, x, y, z, vecX, vecY, vecZ);
 		
+		if (particleName.equals("portal"))
+			fx = new EntityPortalFX(world, x, y, z, vecX, vecY, vecZ);
+		
+		if (particleName.equals("slime"))
+			fx = new EntityBreakingFX(world, x, y, z, vecX, vecY, vecZ, Item.slimeBall, 0); 
+
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 	}

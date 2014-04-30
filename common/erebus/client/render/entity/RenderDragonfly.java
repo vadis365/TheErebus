@@ -57,6 +57,6 @@ public class RenderDragonfly extends RenderLiving {
 		else if (dragonfly.getSkin() == 0)
 			return textures[0];
 		else
-			return null;
+			return textures[1];
 	}
 }

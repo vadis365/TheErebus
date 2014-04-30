@@ -12,6 +12,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 import erebus.network.PacketTypeHandler;
 import erebus.network.packet.PacketParticle;
 
@@ -66,21 +69,19 @@ public class EntityGooBall extends EntityThrowable {
 	public boolean attackEntityFrom(DamageSource source, int amount) {
 		return false;
 	}
-
-	public void trailParticles(World world, double posX, double posY, double posZ, Random rand) {
+	
+	@SideOnly(Side.CLIENT)
+	public void trailParticles(World world, double x, double y, double z, Random rand) {
 		for (int count = 0; count < 20; ++count) {
 			double velX = 0.0D;
 			double velY = 0.0D;
 			double velZ = 0.0D;
 			int motionX = rand.nextInt(2) * 2 - 1;
 			int motionZ = rand.nextInt(2) * 2 - 1;
-			double y = (float) posY + rand.nextFloat();
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
-			double z = posZ + 0.5D + 0.25D * motionZ;
 			velZ = rand.nextFloat() * 1.0F * motionZ;
-			double x = posX + 0.5D + 0.25D * motionX;
 			velX = rand.nextFloat() * 1.0F * motionX;
-			world.spawnParticle("slime", x, y, z, velX, velY, velZ);
+			Erebus.proxy.spawnCustomParticle("slime", worldObj, x, y, z, velX, velY, velZ);
 		}
 	}
 }
