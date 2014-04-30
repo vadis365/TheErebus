@@ -44,7 +44,6 @@ public class EntitySonicFX extends EntityFX
     this.particleScale = this.flameScale * (1.0F - f6 * f6 * 0.5F);
     super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
     par1Tessellator.draw();
-    Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/particle/particles.png"));
     par1Tessellator.startDrawingQuads();
     }
     
