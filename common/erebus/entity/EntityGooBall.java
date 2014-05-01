@@ -50,15 +50,19 @@ public class EntityGooBall extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
-		if (!worldObj.isRemote) {
+		
 			if (mop.entityHit != null)
 				if (mop.entityHit instanceof EntityPlayer) {
+					
+					if (!worldObj.isRemote) {
 					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 5 * 20, 3));
-					PacketDispatcher.sendPacketToAllAround(mop.entityHit.posX, mop.entityHit.posY + 2D, mop.entityHit.posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, mop.entityHit.entityId)));
+					setDead();
+					}
+					
+					if (worldObj.isRemote)
+						PacketDispatcher.sendPacketToAllAround(mop.entityHit.posX, mop.entityHit.posY + 2D, mop.entityHit.posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, mop.entityHit.entityId)));
 				}
-			setDead();
-		}
-		worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
+					worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
 	}
 
 	@Override
