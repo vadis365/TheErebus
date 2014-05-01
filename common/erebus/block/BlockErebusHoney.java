@@ -51,7 +51,8 @@ public class BlockErebusHoney extends BlockFluidClassic {
 			return false;
 		return super.displaceIfPossible(world, x, y, z);
 	}
-
+	
+	@SideOnly(Side.CLIENT)
 	@ForgeSubscribe
 	public void postStitch(TextureStitchEvent.Post event) {
 		if (event.map.textureType == 0)
