@@ -94,6 +94,7 @@ umberOre_item_4.name=Diamond Ore
 umberOre_item_5.name=Emerald Ore
 umberOre_item_6.name=Jade Ore
 umberOre_item_7.name=Petrified Wood Ore
+umberOre_item_8.name=Volcanic Diamond Ore
 tile.oreFossilU.name=Fossil Ore
 umberStone_item_0.name=Umberstone
 umberStone_item_1.name=Umbercobble
@@ -250,6 +251,7 @@ erebusPlantSmall_item_11.name=Nettle Flowered
 erebusPlantSmall_item_12.name=Swamp Plant
 
 #Items
+item.encrustedDiamond.name=Encrusted Diamond
 item.helmetExo.name=Exoskeleton Helmet
 item.chestplateExo.name=Exoskeleton Chestplate
 item.leggingsExo.name=Exoskeleton Leggings

@@ -15,6 +15,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.core.handler.ConfigHandler;
+import erebus.item.EncrustedDiamond;
 import erebus.item.ItemArmorGlider;
 import erebus.item.ItemBambucket;
 import erebus.item.ItemBeeTamingAmulet;
@@ -23,11 +24,11 @@ import erebus.item.ItemBucketOfBeetleJuice;
 import erebus.item.ItemBucketOfHoney;
 import erebus.item.ItemCavemanClub;
 import erebus.item.ItemCompoundGoggles;
+import erebus.item.ItemCrownOfLuminosity;
 import erebus.item.ItemErebusFlowerSeeds;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemErebusMaterial;
 import erebus.item.ItemErebusMaterial.DATA;
-import erebus.item.ItemCrownOfLuminosity;
 import erebus.item.ItemErebusSpecial;
 import erebus.item.ItemExoskeletonArmor;
 import erebus.item.ItemHomingBeecon;
@@ -58,7 +59,7 @@ public class ModItems {
 	// BASIC MATERIALS
 	public static Item portalActivator, erebusMaterials, erebusFood, metalIngot, bamBucket, turnip, sprayCan, wandOfAnimation;
 	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor, nectarCollector, beeTamingAmulet, bucketHoney;
-	public static Item homingBeecon, flowerSeeds, whetstone;
+	public static Item homingBeecon, flowerSeeds, whetstone, encrustedDiamond;
 
 	// JADE STUFF
 	public static Item jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe;
@@ -103,6 +104,7 @@ public class ModItems {
 		homingBeecon = new ItemHomingBeecon(ConfigHandler.homingBeeconID).setUnlocalizedName("homingBeecon").setTextureName("paper");
 		flowerSeeds = new ItemErebusFlowerSeeds(ConfigHandler.flowerSeedsID).setUnlocalizedName("erebusFlowerSeeds");
 		whetstone = new ItemWhetstone(ConfigHandler.whetstoneID).setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
+		encrustedDiamond = new EncrustedDiamond(ConfigHandler.encrustedDiamondID).setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
 
 		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
@@ -134,7 +136,7 @@ public class ModItems {
 		blockExtractor = new ItemBlockExtractor(ConfigHandler.blockExtractorID).setFull3D().setUnlocalizedName("blockExtractor").setTextureName("erebus:blockExtractor");
 		woodlouseBall = new ItemWoodlouseBall(ConfigHandler.woodlouseBallID).setUnlocalizedName("woodlouseBall");
 		rolledNewspaper = new ItemRolledNewspaper(ConfigHandler.rolledNewspaperID).setUnlocalizedName("rolledNewspaper").setTextureName("erebus:rolledNewspaper");
-		
+
 		reinCompoundGoggles = new ItemCompoundGoggles(ConfigHandler.reinCompoundGogglesID, ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
 		compoundGoggles = new ItemCompoundGoggles(ConfigHandler.compoundGogglesID, ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("compoundGoggles").setTextureName("erebus:compoundGoggles");
 		sprintLeggings = new ItemSprintLeggings(ConfigHandler.sprintLeggingsID, ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("sprintLeggings").setTextureName("erebus:sprintLeggings");
@@ -142,12 +144,12 @@ public class ModItems {
 		armorGlider = new ItemArmorGlider(ConfigHandler.armorGliderID, 1).setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
 		armorGliderPowered = new ItemArmorGlider(ConfigHandler.armorGliderPoweredID, 1).setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 		lightCrown = new ItemCrownOfLuminosity(ConfigHandler.lightCrownID, 0).setUnlocalizedName("lightCrown").setTextureName("erebus:lightCrown");
-		
+
 		spawnEggs = new ItemSpawnEggs(ConfigHandler.spawnEggsID).setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
 	}
 
 	private static void initCreativeTabs() {
-		Erebus.tabErebusItem.add(erebusMaterials, whetstone, erebusFood, turnip);
+		Erebus.tabErebusItem.add(erebusMaterials, whetstone, erebusFood, turnip, encrustedDiamond);
 		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
 			Erebus.tabErebusItem.add(metalIngot);
 
@@ -180,6 +182,7 @@ public class ModItems {
 		GameRegistry.registerItem(homingBeecon, "erebus.homingBeecon");
 		GameRegistry.registerItem(flowerSeeds, "erebus.erebusFlowerSeeds");
 		GameRegistry.registerItem(whetstone, "erebus.whetstone");
+		GameRegistry.registerItem(encrustedDiamond, "erebus.encrustedDiamond");
 
 		GameRegistry.registerItem(jadeHelmet, "erebus.helmetJade");
 		GameRegistry.registerItem(jadeBody, "erebus.chestplateJade");

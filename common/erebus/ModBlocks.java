@@ -394,6 +394,7 @@ public class ModBlocks {
 		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 4, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 5, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 6, "pickaxe", 2);
+		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 8, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(quickSand, "shovel", 2);
 		MinecraftForge.setBlockHarvestLevel(ghostSand, "shovel", 0);
 		MinecraftForge.setBlockHarvestLevel(reinExo, "pickaxe", 2);

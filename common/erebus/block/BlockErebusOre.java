@@ -18,8 +18,8 @@ import erebus.ModItems;
 
 public class BlockErebusOre extends Block {
 
-	protected String[] iconPaths = new String[] { "oreCoalU", "oreIronU", "oreGoldU", "oreLapisU", "oreDiamondU", "oreEmeraldU", "oreJadeU", "petrifiedWoodOre" };
-	public static final byte dataCoal = 0, dataIron = 1, dataGold = 2, dataLapis = 3, dataDiamond = 4, dataEmerald = 5, dataJade = 6, dataPetrifiedWood = 7;
+	protected String[] iconPaths = new String[] { "oreCoalU", "oreIronU", "oreGoldU", "oreLapisU", "oreDiamondU", "oreEmeraldU", "oreJadeU", "petrifiedWoodOre", "oreVolcanicDiamond" };
+	public static final byte dataCoal = 0, dataIron = 1, dataGold = 2, dataLapis = 3, dataDiamond = 4, dataEmerald = 5, dataJade = 6, dataPetrifiedWood = 7, dataEncrustedDiamond = 8;
 
 	@SideOnly(Side.CLIENT)
 	protected Icon[] icons;
@@ -53,15 +53,16 @@ public class BlockErebusOre extends Block {
 	@Override
 	public int damageDropped(int meta) {
 		switch (meta) {
-			case 0:
-			case 4:
-			case 5:
+			case dataCoal:
+			case dataDiamond:
+			case dataEmerald:
+			case dataEncrustedDiamond:
 				return 0;
-			case 3:
+			case dataLapis:
 				return 4;
-			case 6:
+			case dataJade:
 				return 1;
-			case 7:
+			case dataPetrifiedWood:
 				return 7;
 		}
 		return meta;
@@ -69,7 +70,7 @@ public class BlockErebusOre extends Block {
 
 	@Override
 	public int quantityDropped(int meta, int fortune, Random random) {
-		int _default = meta == 3 ? 4 + random.nextInt(5) : 1;
+		int _default = meta == dataLapis ? 4 + random.nextInt(5) : 1;
 
 		if (blockID != idDropped(meta, random, fortune)) {
 			int j = random.nextInt(fortune + 2) - 1;
@@ -98,6 +99,8 @@ public class BlockErebusOre extends Block {
 				return ModItems.erebusMaterials.itemID;
 			case 7:
 				return ModItems.erebusMaterials.itemID;
+			case dataEncrustedDiamond:
+				return ModItems.encrustedDiamond.itemID;
 		}
 		return blockID;
 	}
