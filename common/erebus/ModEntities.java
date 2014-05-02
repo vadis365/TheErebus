@@ -22,6 +22,7 @@ import erebus.entity.EntityCicada;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityExtractedBlock;
 import erebus.entity.EntityFireAnt;
+import erebus.entity.EntityFireResistent;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGooBall;
@@ -96,7 +97,7 @@ public class ModEntities {
 		EntityList.stringToClassMapping.put("GooBall", EntityGooBall.class);
 		EntityList.stringToClassMapping.put("Woodlouse - Erebus", EntityWoodlouse.class);
 		EntityList.stringToClassMapping.put("Cicada - Erebus", EntityCicada.class);
-		
+
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "BeetleLarva", -1251634, -13032944);
 		registerEntity(1, EntityWasp.class, "Wasp", -256, -16382458);
@@ -136,6 +137,7 @@ public class ModEntities {
 		registerEntity(51, EntityAnimatedChest.class, "AnimatedChest");
 		registerEntity(52, EntityAnimatedBambooCrate.class, "AnimatedBambooCrate");
 		registerEntity(53, EntityUmberGolem.class, "UmberGolem");
+		registerEntity(54, EntityFireResistent.class, "FireResistentItem");
 
 		registerEntity(70, EntityWaspDagger.class, "WaspDagger");
 		registerEntity(71, EntityWebSling.class, "WebSling");
@@ -143,7 +145,7 @@ public class ModEntities {
 		registerEntity(73, EntityExtractedBlock.class, "ExtractedBlock");
 		registerEntity(74, EntityGooBall.class, "GooBall");
 		registerEntity(75, EntityWoodlouseBall.class, "WoodlouseBall");
-		
+
 		// Spawn conditions
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);
 	}
