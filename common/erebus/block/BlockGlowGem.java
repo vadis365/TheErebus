@@ -49,54 +49,55 @@ public class BlockGlowGem extends BlockContainer {
 
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-		int j1 = meta;
 		
 		if ((side == 0) && world.isBlockSolidOnSide(x, y + 1, z, DOWN))
-			j1 = 0;
+			meta = 0;
 
 		if ((side == 1) && world.isBlockSolidOnSide(x, y - 1, z, UP))
-			j1 = 1;
+			meta = 1;
 
 		if ((side == 2) && world.isBlockSolidOnSide(x, y, z + 1, NORTH))
-			j1 = 2;
+			meta = 2;
 
 		if ((side == 3) && world.isBlockSolidOnSide(x, y, z - 1, SOUTH))
-			j1 = 3;
+			meta = 3;
 
 		if ((side == 4) && world.isBlockSolidOnSide(x + 1, y, z, WEST))
-			j1 = 4;
+			meta = 4;
 
 		if ((side == 5) && world.isBlockSolidOnSide(x - 1, y, z, EAST))
-			j1 = 5;
+			meta = 5;
 
-		System.out.println("Meta: "+j1);
-		return j1;
+		return meta;
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID) {
-		int i1 = world.getBlockMetadata(x, y, z);
+		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
-		if (i1 == 0 && world.isBlockSolidOnSide(x, y + 1, z, DOWN))
-			flag = true;
 		
-		if (i1 == 1 && world.isBlockSolidOnSide(x, y -1 , z, UP))
+		if (meta == 0 || meta == 6 || meta == 7 || meta == 8 || meta == 9)
+			if(world.isBlockSolidOnSide(x, y + 1, z, DOWN))
+				flag = true;
+		
+		if (meta == 1 || meta == 10 || meta == 11 || meta == 12 || meta == 13)
+			if(world.isBlockSolidOnSide(x, y -1 , z, UP))
+				flag = true;
+
+		if (meta == 2 && world.isBlockSolidOnSide(x, y, z + 1, NORTH))
 			flag = true;
 
-		if (i1 == 2 && world.isBlockSolidOnSide(x, y, z + 1, NORTH))
+		if (meta == 3 && world.isBlockSolidOnSide(x, y, z - 1, SOUTH))
 			flag = true;
 
-		if (i1 == 3 && world.isBlockSolidOnSide(x, y, z - 1, SOUTH))
+		if (meta == 4 && world.isBlockSolidOnSide(x + 1, y, z, WEST))
 			flag = true;
 
-		if (i1 == 4 && world.isBlockSolidOnSide(x + 1, y, z, WEST))
-			flag = true;
-
-		if (i1 == 5 && world.isBlockSolidOnSide(x - 1, y, z, EAST))
+		if (meta == 5 && world.isBlockSolidOnSide(x - 1, y, z, EAST))
 			flag = true;
 
 		if (!flag) {
-			dropBlockAsItem(world, x, y, z, i1, 0);
+			dropBlockAsItem(world, x, y, z, meta, 0);
 			world.setBlockToAir(x, y, z);
 		}
 
@@ -105,11 +106,12 @@ public class BlockGlowGem extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote)
-			return true;
-
-		//TODO some switching code here for off and on
-
+		
+		TileEntityGlowGem tile = (TileEntityGlowGem) world.getBlockTileEntity(x, y, z);
+		if (tile == null)
+			return false;
+		
+		tile.toggleLight();
 		return true;
 	}
 
@@ -149,9 +151,7 @@ public class BlockGlowGem extends BlockContainer {
 				newMeta=13;
 				break;	
 			}
-			System.out.println("New Meta would be: "+newMeta);
-
-			world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);
+			world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);	
 	}
 
 	@Override
@@ -160,9 +160,10 @@ public class BlockGlowGem extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-		//TODO remove light here
-		super.breakBlock(world, x, y, z, par5, par6);
+	public void breakBlock(World world, int x, int y, int z, int oldID, int oldMeta) {
+		TileEntityGlowGem tile = (TileEntityGlowGem) world.getBlockTileEntity(x, y, z);
+			tile.setIlluminated(false);
+		super.breakBlock(world, x, y, z, oldID, oldMeta);
 	}
 
 	@Override
