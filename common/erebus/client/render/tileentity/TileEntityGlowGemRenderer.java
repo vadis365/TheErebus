@@ -28,10 +28,7 @@ public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer {
 				GL11.glRotatef(-180F, 0.0F, 1F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 0.5625F, z + 0.5D);
-				GL11.glScaled(1.0D, 0.875D, 1.0D);
-				GL11.glPopMatrix();
+
 				break;
 			case 1:
 				GL11.glPushMatrix();
@@ -74,6 +71,74 @@ public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer {
 				GL11.glScalef(1F, -1F, -1F);
 				GL11.glRotatef(-90F, 0.0F, 1F, 0F);
 				GL11.glRotatef(90F, 1.0F, 0F, 0F);
+				ModelGlowGem.render(tile);
+				GL11.glPopMatrix();
+				break;	
+			case 6:
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5D, y - 0.5F, z + 0.5D);
+				GL11.glScalef(1F, -1F, -1F);
+				GL11.glRotatef(180F, 0.0F, 0F, 1F);
+				GL11.glRotatef(0F, 0.0F, 1F, 0F);
+				ModelGlowGem.render(tile);
+				GL11.glPopMatrix();
+				break;
+			case 7:
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5D, y - 0.5F, z + 0.5D);
+				GL11.glScalef(1F, -1F, -1F);
+				GL11.glRotatef(180F, 0.0F, 0F, 1F);
+				GL11.glRotatef(-90F, 0.0F, 1F, 0F);
+				ModelGlowGem.render(tile);
+				GL11.glPopMatrix();
+				break;
+			case 8:
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5D, y - 0.5F, z + 0.5D);
+				GL11.glScalef(1F, -1F, -1F);
+				GL11.glRotatef(180F, 0.0F, 0F, 1F);
+				GL11.glRotatef(-180F, 0.0F, 1F, 0F);
+				ModelGlowGem.render(tile);
+				GL11.glPopMatrix();
+				break;
+			case 9:
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5D, y - 0.5F, z + 0.5D);
+				GL11.glScalef(1F, -1F, -1F);
+				GL11.glRotatef(180F, 0.0F, 0F, 1F);
+				GL11.glRotatef(90F, 0.0F, 1F, 0F);
+				ModelGlowGem.render(tile);
+				GL11.glPopMatrix();
+				break;
+			case 10:
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
+				GL11.glScalef(1F, -1F, -1F);
+				GL11.glRotatef(180F, 0.0F, 1F, 0F);
+				ModelGlowGem.render(tile);
+				GL11.glPopMatrix();
+				break;
+			case 11:
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
+				GL11.glScalef(1F, -1F, -1F);
+				GL11.glRotatef(-90F, 0.0F, 1F, 0F);
+				ModelGlowGem.render(tile);
+				GL11.glPopMatrix();
+				break;
+			case 12:
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
+				GL11.glScalef(1F, -1F, -1F);
+				GL11.glRotatef(0F, 0.0F, 1F, 0F);
+				ModelGlowGem.render(tile);
+				GL11.glPopMatrix();
+				break;
+			case 13:
+				GL11.glPushMatrix();
+				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
+				GL11.glScalef(1F, -1F, -1F);
+				GL11.glRotatef(90F, 0.0F, 1F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
 				break;
