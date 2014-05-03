@@ -28,7 +28,6 @@ public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer {
 				GL11.glRotatef(-180F, 0.0F, 1F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
-
 				break;
 			case 1:
 				GL11.glPushMatrix();

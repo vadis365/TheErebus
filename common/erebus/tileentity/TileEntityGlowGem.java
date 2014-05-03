@@ -10,17 +10,17 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityGlowGem extends TileEntity {
-	public boolean lightOn=true;
+	public boolean lightOn = true;
 
 	@Override
 	public void updateEntity() {
-		if(worldObj.isRemote)
-		if (lightOn)
+		if (worldObj.isRemote)
+			if (lightOn)
 				lightUp();
 			else
-				switchOff();	
+				switchOff();
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public void lightUp() {
 		worldObj.setLightValue(EnumSkyBlock.Block, xCoord, yCoord, zCoord, 9);
@@ -37,13 +37,12 @@ public class TileEntityGlowGem extends TileEntity {
 		if (!lightOn) {
 			setIlluminated(true);
 			lightUp();
-		}
-		else {
+		} else {
 			setIlluminated(false);
 			switchOff();
 		}
 	}
-	
+
 	public void setIlluminated(boolean state) {
 		lightOn = state;
 	}
@@ -71,7 +70,7 @@ public class TileEntityGlowGem extends TileEntity {
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
 		readTileFromNBT(packet.data);
 	}
-	
+
 	protected void writeTileToNBT(NBTTagCompound nbt) {
 		nbt.setBoolean("state", lightOn);
 	}

@@ -1,4 +1,5 @@
 package erebus.block;
+
 import static net.minecraftforge.common.ForgeDirection.DOWN;
 import static net.minecraftforge.common.ForgeDirection.EAST;
 import static net.minecraftforge.common.ForgeDirection.NORTH;
@@ -27,12 +28,12 @@ public class BlockGlowGem extends BlockContainer {
 	public BlockGlowGem(int id) {
 		super(id, Material.glass);
 	}
-	
+
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
 		int meta = access.getBlockMetadata(x, y, z);
-		float widthMin= 0, heightMin = 0, depthMin = 0;
-		float widthMax= 0, heightMax = 0, depthMax = 0;
+		float widthMin = 0, heightMin = 0, depthMin = 0;
+		float widthMax = 0, heightMax = 0, depthMax = 0;
 		switch (meta) {
 		case 0:
 			break;
@@ -152,15 +153,15 @@ public class BlockGlowGem extends BlockContainer {
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return world.isBlockSolidOnSide(x, y + 1, z, DOWN) || world.isBlockSolidOnSide(x, y - 1, z, UP) ||world.isBlockSolidOnSide(x - 1, y, z, EAST) || world.isBlockSolidOnSide(x + 1, y, z, WEST) || world.isBlockSolidOnSide(x, y, z - 1, SOUTH) || world.isBlockSolidOnSide(x, y, z + 1, NORTH);
+		return world.isBlockSolidOnSide(x, y + 1, z, DOWN) || world.isBlockSolidOnSide(x, y - 1, z, UP) || world.isBlockSolidOnSide(x - 1, y, z, EAST) || world.isBlockSolidOnSide(x + 1, y, z, WEST) || world.isBlockSolidOnSide(x, y, z - 1, SOUTH) || world.isBlockSolidOnSide(x, y, z + 1, NORTH);
 	}
 
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-		
+
 		if ((side == 0) && world.isBlockSolidOnSide(x, y + 1, z, DOWN))
 			meta = 0;
 
@@ -186,13 +187,13 @@ public class BlockGlowGem extends BlockContainer {
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID) {
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
-		
+
 		if (meta == 0 || meta == 6 || meta == 7 || meta == 8 || meta == 9)
-			if(world.isBlockSolidOnSide(x, y + 1, z, DOWN))
+			if (world.isBlockSolidOnSide(x, y + 1, z, DOWN))
 				flag = true;
-		
+
 		if (meta == 1 || meta == 10 || meta == 11 || meta == 12 || meta == 13)
-			if(world.isBlockSolidOnSide(x, y -1 , z, UP))
+			if (world.isBlockSolidOnSide(x, y - 1, z, UP))
 				flag = true;
 
 		if (meta == 2 && world.isBlockSolidOnSide(x, y, z + 1, NORTH))
@@ -217,53 +218,54 @@ public class BlockGlowGem extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		
-		TileEntityGlowGem tile = (TileEntityGlowGem) world.getBlockTileEntity(x, y, z);
+
+		TileEntityGlowGem tile = (TileEntityGlowGem) world.getBlockTileEntity(
+				x, y, z);
 		if (tile == null)
 			return false;
-		
+
 		tile.toggleLight();
 		return true;
 	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
-		int direction = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		int direction = MathHelper .floor_double((double) ((player.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 		int meta = world.getBlockMetadata(x, y, z);
-		int newMeta=meta;
-		if(meta==0)
-			switch (direction){
+		int newMeta = meta;
+		if (meta == 0)
+			switch (direction) {
 			case 0:
-				newMeta=6;
+				newMeta = 6;
 				break;
 			case 1:
-				newMeta=7;
+				newMeta = 7;
 				break;
 			case 2:
-				newMeta=8;
+				newMeta = 8;
 				break;
 			case 3:
-				newMeta=9;
+				newMeta = 9;
 				break;
 			}
-		
-		if(meta==1)
-			switch (direction){
+
+		if (meta == 1)
+			switch (direction) {
 			case 0:
-				newMeta=10;
+				newMeta = 10;
 				break;
 			case 1:
-				newMeta=11;
+				newMeta = 11;
 				break;
 			case 2:
-				newMeta=12;
+				newMeta = 12;
 				break;
 			case 3:
-				newMeta=13;
-				break;	
+				newMeta = 13;
+				break;
 			}
-			world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);
-			System.out.println("META: "+newMeta);
+		world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);
+		System.out.println("META: " + newMeta);
 	}
 
 	@Override
@@ -274,7 +276,7 @@ public class BlockGlowGem extends BlockContainer {
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int oldID, int oldMeta) {
 		TileEntityGlowGem tile = (TileEntityGlowGem) world.getBlockTileEntity(x, y, z);
-			tile.setIlluminated(false);
+		tile.setIlluminated(false);
 		super.breakBlock(world, x, y, z, oldID, oldMeta);
 	}
 
