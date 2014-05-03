@@ -1,6 +1,7 @@
 package erebus.item;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -53,7 +54,6 @@ public class ItemErebusMaterial extends Item {
 		weepingBluePetal,
 		papyrus,
 		enhancedGliderWing,
-		glowGem
 	}
 	// @formatter:on
 

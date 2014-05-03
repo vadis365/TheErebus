@@ -221,7 +221,7 @@ public class ModBlocks {
 		jarOHoney = new JarOHoney(ConfigHandler.jarOHoneyID).setHardness(0.5F).setUnlocalizedName("erebus.jarOHoney").setTextureName("erebus:glassAmber");
 		jadeBlock = new BlockOreStorage(ConfigHandler.jadeBlockID).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("erebus.blockJade").setTextureName("erebus:blockJade");
 		altar = new BlockAltar(ConfigHandler.altarID).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("erebus.altar").setTextureName("stone");
-		glowGemBlock = new BlockGlowGem(ConfigHandler.glowGemBlockID).setUnlocalizedName("erebus.glowGemBlock").setTextureName("erebus:glowingGem");
+		glowGemBlock = new BlockGlowGem(ConfigHandler.glowGemBlockID).setUnlocalizedName("erebus.glowGemBlock").setTextureName("erebus:glowGem");
 
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
