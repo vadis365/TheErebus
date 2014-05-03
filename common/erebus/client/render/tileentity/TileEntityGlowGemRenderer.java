@@ -40,40 +40,40 @@ public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer {
 				GL11.glRotatef(180F, 0.0F, 1F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 0.4375F, z + 0.5D);
-				GL11.glScaled(1.0D, 0.875D, 1.0D);
-				GL11.glPopMatrix();
 				break;
 			case 2:
 				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
+				GL11.glTranslated(x + 0.5D, y + 0.5F, z - 0.5D);
 				GL11.glScalef(1F, -1F, -1F);
 				GL11.glRotatef(180F, 0.0F, 1F, 0F);
+				GL11.glRotatef(90F, 1.0F, 0F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
 				break;
 			case 3:
 				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
+				GL11.glTranslated(x + 0.5D, y + 0.5F, z + 1.5D);
 				GL11.glScalef(1F, -1F, -1F);
 				GL11.glRotatef(0F, 0.0F, 1F, 0F);
+				GL11.glRotatef(90F, 1.0F, 0F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
 				break;
 			case 4:
 				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
+				GL11.glTranslated(x - 0.5D, y + 0.5F, z + 0.5D);
 				GL11.glScalef(1F, -1F, -1F);
 				GL11.glRotatef(90F, 0.0F, 1F, 0F);
+				GL11.glRotatef(90F, 1.0F, 0F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
 				break;
 			case 5:
 				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
+				GL11.glTranslated(x + 1.5D, y + 0.5F, z + 0.5D);
 				GL11.glScalef(1F, -1F, -1F);
 				GL11.glRotatef(-90F, 0.0F, 1F, 0F);
+				GL11.glRotatef(90F, 1.0F, 0F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
 				break;
