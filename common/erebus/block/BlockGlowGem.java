@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,6 +26,116 @@ public class BlockGlowGem extends BlockContainer {
 
 	public BlockGlowGem(int id) {
 		super(id, Material.glass);
+	}
+	
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
+		int meta = access.getBlockMetadata(x, y, z);
+		float widthMin= 0, heightMin = 0, depthMin = 0;
+		float widthMax= 0, heightMax = 0, depthMax = 0;
+		switch (meta) {
+		case 0:
+			break;
+		case 1:
+			break;
+		case 2:
+			widthMin = 0.125F;
+			heightMin = 0.1875F;
+			depthMin = 0.8125F;
+			widthMax = 0.125F;
+			heightMax = 0.1875F;
+			depthMax = 0F;
+			break;
+		case 3:
+			widthMin = 0.125F;
+			heightMin = 0.1875F;
+			depthMin = 0F;
+			widthMax = 0.125F;
+			heightMax = 0.1875F;
+			depthMax = 0.8125F;
+			break;
+		case 4:
+			widthMin = 0.8125F;
+			heightMin = 0.1875F;
+			depthMin = 0.125F;
+			widthMax = 0F;
+			heightMax = 0.1875F;
+			depthMax = 0.125F;
+			break;
+		case 5:
+			widthMin = 0F;
+			heightMin = 0.1875F;
+			depthMin = 0.125F;
+			widthMax = 0.8125F;
+			heightMax = 0.1875F;
+			depthMax = 0.125F;
+			break;
+		case 6:
+			widthMin = 0.125F;
+			heightMin = 0.8125F;
+			depthMin = 0.1875F;
+			widthMax = 0.125F;
+			heightMax = 0F;
+			depthMax = 0.1875F;
+			break;
+		case 7:
+			widthMin = 0.1875F;
+			heightMin = 0.8125F;
+			depthMin = 0.125F;
+			widthMax = 0.1875F;
+			heightMax = 0F;
+			depthMax = 0.125F;
+			break;
+		case 8:
+			widthMin = 0.125F;
+			heightMin = 0.8125F;
+			depthMin = 0.1875F;
+			widthMax = 0.125F;
+			heightMax = 0F;
+			depthMax = 0.1875F;
+			break;
+		case 9:
+			widthMin = 0.1875F;
+			heightMin = 0.8125F;
+			depthMin = 0.125F;
+			widthMax = 0.1875F;
+			heightMax = 0F;
+			depthMax = 0.125F;
+			break;
+		case 10:
+			widthMin = 0.125F;
+			heightMin = 0F;
+			depthMin = 0.1875F;
+			widthMax = 0.125F;
+			heightMax = 0.8125F;
+			depthMax = 0.1875F;
+			break;
+		case 11:
+			widthMin = 0.1875F;
+			heightMin = 0F;
+			depthMin = 0.125F;
+			widthMax = 0.1875F;
+			heightMax = 0.8125F;
+			depthMax = 0.125F;
+			break;
+		case 12:
+			widthMin = 0.125F;
+			heightMin = 0F;
+			depthMin = 0.1875F;
+			widthMax = 0.125F;
+			heightMax = 0.8125F;
+			depthMax = 0.1875F;
+			break;
+		case 13:
+			widthMin = 0.1875F;
+			heightMin = 0F;
+			depthMin = 0.125F;
+			widthMax = 0.1875F;
+			heightMax = 0.8125F;
+			depthMax = 0.125F;
+			break;
+		}
+		setBlockBounds(0F + widthMin, 0F + heightMin, 0F + depthMin, 1F - widthMax, 1F - heightMax, 1F - depthMax);
 	}
 
 	@Override
@@ -151,7 +262,8 @@ public class BlockGlowGem extends BlockContainer {
 				newMeta=13;
 				break;	
 			}
-			world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);	
+			world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);
+			System.out.println("META: "+newMeta);
 	}
 
 	@Override
