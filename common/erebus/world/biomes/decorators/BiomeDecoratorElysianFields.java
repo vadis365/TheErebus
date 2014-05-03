@@ -95,6 +95,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 	}
 	
 	@Override
+	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
 		switch(oreType){
 			case COAL: oreGen.setIterations(extraOres?2:3,extraOres?3:4).setY(5,48); break; // ~2.5 times smaller area, thus less iterations

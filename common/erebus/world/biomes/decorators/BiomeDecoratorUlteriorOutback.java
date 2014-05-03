@@ -82,6 +82,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 	}
 	
 	@Override
+	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
 		switch(oreType){
 			case COAL: oreGen.setChance(0.85F).setIterations(extraOres?2:3).setOreAmount(7,10).setY(5,56); break; // less common, lowered amount too, also ~2 times smaller area

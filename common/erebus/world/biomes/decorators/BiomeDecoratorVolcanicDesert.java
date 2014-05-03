@@ -70,6 +70,7 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus{
 	}
 	
 	@Override
+	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
 		switch(oreType){
 			case COAL: oreGen.setChance(0F); break;
