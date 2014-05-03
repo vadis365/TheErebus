@@ -18,6 +18,8 @@ public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer {
 
 	public void renderAModelAt(TileEntityGlowGem tile, double x, double y, double z, float f) {
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/glowGem.png"));
+		if (!tile.lightOn)
+			GL11.glColor3f(255F, 0F, 0F);
 		int meta = tile.getBlockMetadata();
 		switch (meta) {
 			case 0:
