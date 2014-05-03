@@ -39,6 +39,7 @@ import erebus.integration.FMBIntegration;
 import erebus.integration.IModIntegration;
 import erebus.lib.Reference;
 import erebus.network.PacketHandler;
+import erebus.recipes.AltarRecipe;
 import erebus.recipes.BCFacadeManager;
 import erebus.recipes.RecipeHandler;
 import erebus.world.WorldProviderErebus;
@@ -91,6 +92,7 @@ public class Erebus {
 
 		ModBiomes.init();
 		RecipeHandler.init();
+		AltarRecipe.init();
 
 		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.erebusSapling);
