@@ -2,6 +2,7 @@ package erebus.world.biomes.decorators;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.block.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -45,8 +46,8 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
-						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,4,2);
-						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,4+8,2);
+						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassBottom,2);
+						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassTop,2);
 					}
 					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
 					
@@ -62,8 +63,8 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
-						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,7,2);
-						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,7+8,2);
+						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataFernBottom,2);
+						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataFernTop,2);
 					}
 					else world.setBlock(xx,yy,zz,ModBlocks.fern.blockID,0,2);
 					
@@ -78,8 +79,8 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			zz = z+offsetXZ();
 
 			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,0,2);
-				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,0+8,2);
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataSundewBottom,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataSundewTop,2);
 			}
 		}
 		
@@ -89,8 +90,8 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			zz = z+offsetXZ();
 
 			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,1,2);
-				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,1+8,2);
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataWeepingBlueBottom,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataWeepingBlueTop,2);
 			}
 		}
 	}

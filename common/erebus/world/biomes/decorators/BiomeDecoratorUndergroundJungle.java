@@ -8,6 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.block.BlockDoubleHeightPlant;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -167,7 +168,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 
 		for(attempt = 0; attempt < 40; attempt++){
 			xx = x+offsetXZ();
-			yy = 15+rand.nextInt(90);
+			yy = 20+rand.nextInt(80);
 			zz = z+offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
@@ -175,19 +176,31 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			}
 		}
 
-		for(attempt = 0; attempt<16; attempt++){
+		for(attempt = 0; attempt < 16; attempt++){
 			xx = x+offsetXZ();
-			yy = 15+rand.nextInt(90);
+			yy = 20+rand.nextInt(80);
 			zz = z+offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genFiddleheads.generate(world,rand,xx,yy,zz);
 			}
 		}
-
-		for(attempt = 0; attempt < 900; attempt++){
+		
+		for(attempt = 0; attempt < 100; attempt++){
 			xx = x+offsetXZ();
-			yy = 15+rand.nextInt(90);
+			yy = 20+rand.nextInt(80);
+			zz = z+offsetXZ();
+
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
+				boolean fern = rand.nextInt(3) == 0;
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,fern ? BlockDoubleHeightPlant.dataFernBottom : BlockDoubleHeightPlant.dataTallGrassBottom,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,fern ? BlockDoubleHeightPlant.dataFernTop : BlockDoubleHeightPlant.dataTallGrassTop,2);
+			}
+		}
+
+		for(attempt = 0; attempt < 850; attempt++){
+			xx = x+offsetXZ();
+			yy = 20+rand.nextInt(80);
 			zz = z+offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){

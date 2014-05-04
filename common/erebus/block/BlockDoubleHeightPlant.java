@@ -24,6 +24,13 @@ import erebus.item.ItemErebusMaterial.DATA;
 public class BlockDoubleHeightPlant extends Block {
 
 	public static final String[] plantName = new String[] { "Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "Grass", "Shroom1", "Shroom2", "Fern" };
+	
+	public static final int dataSundewBottom = 0, dataWeepingBlueBottom = 1, dataBullrushBottom = 2, dataDroughtedShrubBottom = 3,
+							dataTallGrassBottom = 4, dataShroom1Bottom = 5, dataShroom2Bottom = 6, dataFernBottom = 7;
+	
+	public static final int dataSundewTop = 8, dataWeepingBlueTop = 9, dataBullrushTop = 10, dataDroughtedShrubTop = 11,
+							dataTallGrassTop = 12, dataShroom1Top = 13, dataShroom2Top = 14, dataFernTop = 15;
+	
 	@SideOnly(Side.CLIENT)
 	private Icon[] doublePlantBottomIcons;
 	@SideOnly(Side.CLIENT)

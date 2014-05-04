@@ -2,6 +2,7 @@ package erebus.world.biomes.decorators;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.block.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -116,6 +117,17 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genGrass.generate(world,rand,xx,yy,zz);
+			}
+		}
+		
+		for(attempt = 0; attempt < 40; attempt++){
+			xx = x+offsetXZ();
+			yy = 20+rand.nextInt(80);
+			zz = z+offsetXZ();
+
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassBottom,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassTop,2);
 			}
 		}
 	}

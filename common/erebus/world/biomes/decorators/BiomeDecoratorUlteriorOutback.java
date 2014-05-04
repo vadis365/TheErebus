@@ -2,6 +2,7 @@ package erebus.world.biomes.decorators;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.block.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -25,7 +26,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 
 			for(yy = 20; yy < 100; yy += rand.nextInt(2)+1){
 				if (world.getBlockId(xx,yy,zz) == Block.sand.blockID && world.isAirBlock(xx,yy+1,zz)){
-					world.setBlock(xx,yy,zz,Block.grass.blockID);
+					world.setBlock(xx,yy,zz,Block.grass.blockID); // TODO 1.7 - add ungrowing dirt and red sand
 					break;
 				}
 			}
@@ -59,9 +60,9 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			yy = 20+rand.nextInt(80);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.sand.blockID && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,3,2);
-				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,3+8,2);
+			if (checkSurface(SurfaceType.SAND,xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataDroughtedShrubBottom,2);
+				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataDroughtedShrubTop,2);
 			}
 		}
 
@@ -72,8 +73,8 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
-						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,4,2);
-						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,4+8,2);
+						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassBottom,2);
+						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassTop,2);
 					}
 					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
 					
