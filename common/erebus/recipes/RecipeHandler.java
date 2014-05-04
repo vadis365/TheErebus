@@ -161,6 +161,7 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.redstone, 2, 0), new Object[] { new ItemStack(ModItems.erebusMaterials, 1, DATA.redGem.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.redGem, 1, 0), new Object[] { "##", "##", '#', new ItemStack(ModItems.erebusMaterials, 1, DATA.redGem.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.redGem, 1, 1), new Object[] { " S ", "S#S", " S ", '#', new ItemStack(ModBlocks.redGem, 1, 0), 'S', new ItemStack(Item.stick, 1, 0) });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.glowGemBlock, 3, 0), new Object[] { "BBB", "BGB", "BBB", 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()), 'G', new ItemStack(ModItems.erebusMaterials, 1, DATA.redGem.ordinal()) });
 
 		// Bamboo
 		GameRegistry.addRecipe(new ItemStack(ModItems.bamBucket, 1, 0), new Object[] { "S", "B", 'S', Item.silk, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
@@ -190,7 +191,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(Item.arrow, 4), new Object[] { "T", "S", "F", 'F', new ItemStack(Item.feather, 1, 0), 'S', new ItemStack(Item.stick, 1, 0), 'T', new ItemStack(ModItems.erebusMaterials, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(Item.arrow, 4), new Object[] { "T", "S", "F", 'F', new ItemStack(ModItems.erebusMaterials, 1, 6), 'S', new ItemStack(Item.stick, 1, 0), 'T', new ItemStack(ModItems.erebusMaterials, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(Item.arrow, 4), new Object[] { "T", "S", "F", 'F', new ItemStack(ModItems.erebusMaterials, 1, 6), 'S', new ItemStack(Item.stick, 1, 0), 'T', new ItemStack(Item.flint, 1, 0) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.sprayCan, 9), new Object[] { " B ", "XRX", "XXX", 'X', Item.ingotIron, 'B', Block.woodenButton, 'R', Item.redstone });
+		GameRegistry.addRecipe(new ItemStack(ModItems.sprayCan, 9), new Object[] { " B ", "XRX", "XXX", 'X', Item.ingotIron, 'B', Block.woodenButton, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.repellent.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.wandOfAnimation, 1), new Object[] { "  N", " S ", "D  ", 'D', Item.diamond, 'S', Item.stick, 'N', Item.netherStar });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.erebusAltar, 1), new Object[] { "XXX", "XOX", "XXX", 'O', Block.obsidian, 'X', new ItemStack(ModItems.erebusMaterials, 1, 15) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.glowingJar, 1), new Object[] { "XXX", "GBG", "GGG", 'X', Item.ingotIron, 'G', new ItemStack(ModBlocks.blockAmber, 1, 1), 'B', new ItemStack(ModItems.erebusMaterials, 1, 13) });
