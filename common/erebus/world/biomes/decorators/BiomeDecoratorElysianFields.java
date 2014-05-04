@@ -5,12 +5,15 @@ import erebus.ModBlocks;
 import erebus.block.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
+import erebus.world.feature.plant.WorldGenNettlePatch;
 import erebus.world.feature.tree.WorldGenCypressTree;
 
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
+	private final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
+	
 	private final WorldGenerator genTreeCypress = new WorldGenCypressTree();
 	private final WorldGenerator genGiantFlowers = new WorldGenGiantFlowers();
 	
@@ -38,12 +41,27 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			}
 		}
 		
+		if (rand.nextInt(6) == 0){
+			for(attempt = 0; attempt < rand.nextInt(4); attempt++){
+				xx = x + offsetXZ();
+				yy = 25+rand.nextInt(75);
+				zz = z + offsetXZ();
+				
+				for(; yy > 20; yy--){
+					if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+						genNettle.generate(world,rand,xx,yy,zz);
+						break;
+					}
+				}
+			}
+		}
+		
 		int id;
-		for(attempt = 0; attempt < 25; attempt++){
+		for(attempt = 0; attempt < 35; attempt++){
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
-			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
+			for(yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
 						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassBottom,2);

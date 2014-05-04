@@ -22,8 +22,9 @@ public class BlockSmallPLants extends BlockMushroom {
 		"desertShrub", "hanger", "hangerSeed", "mireCoral", "nettle", "nettleFlowered", "swampPlant" 
 	};
 	
-	public static final int dataBulbCappedShroom = 0, dataMushroom1 = 1, dataMushroom2 = 2, dataMushroom3 = 3, dutchCapShroom = 4, cattail = 5,
-							desertShrub = 6, hanger = 7, hangerSeed = 8, mireCoral = 9, nettle = 10, nettleFlowered = 11, swampPlant = 12;
+	public static final int
+		dataBulbCappedShroom = 0, dataMushroom1 = 1, dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4, dataCattail = 5,
+		dataDesertShrub = 6, dataHanger = 7, dataHangerSeed = 8, dataMireCoral = 9, dataNettle = 10, dataNettleFlowered = 11, dataSwampPlant = 12;
 	
 	public static final Icon[] icons = new Icon[iconPaths.length];
 

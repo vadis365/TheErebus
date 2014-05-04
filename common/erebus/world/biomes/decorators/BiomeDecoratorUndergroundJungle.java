@@ -186,13 +186,13 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			}
 		}
 		
-		for(attempt = 0; attempt < 100; attempt++){
+		for(attempt = 0; attempt < 180; attempt++){
 			xx = x+offsetXZ();
 			yy = 20+rand.nextInt(80);
 			zz = z+offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
-				boolean fern = rand.nextInt(3) == 0;
+				boolean fern = rand.nextInt(4) == 0;
 				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,fern ? BlockDoubleHeightPlant.dataFernBottom : BlockDoubleHeightPlant.dataTallGrassBottom,2);
 				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,fern ? BlockDoubleHeightPlant.dataFernTop : BlockDoubleHeightPlant.dataTallGrassTop,2);
 			}
