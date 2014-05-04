@@ -39,32 +39,24 @@ public class TileEntityGlowGem extends TileEntity {
 	@Override
 	public final void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		writeTileToNBT(nbt);
+		nbt.setBoolean("state", lightOn);
 	}
 
 	@Override
 	public final void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		readTileFromNBT(nbt);
+		lightOn = nbt.getBoolean("state");
 	}
 
 	@Override
 	public Packet getDescriptionPacket() {
-		NBTTagCompound data = new NBTTagCompound();
-		writeTileToNBT(data);
-		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, data);
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setBoolean("state", lightOn);
+		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-		readTileFromNBT(packet.data);
-	}
-
-	protected void writeTileToNBT(NBTTagCompound nbt) {
-		nbt.setBoolean("state", lightOn);
-	}
-
-	protected void readTileFromNBT(NBTTagCompound nbt) {
-		lightOn = nbt.getBoolean("state");
+		lightOn = packet.data.getBoolean("state");
 	}
 }
