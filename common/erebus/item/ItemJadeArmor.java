@@ -15,10 +15,9 @@ public class ItemJadeArmor extends ItemArmor {
 		super(id, ModMaterials.armorJADE, 2, armorType);
 	}
 
-	@Deprecated
 	@Override
 	@SideOnly(Side.CLIENT)
-	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
+	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
 		if (is.itemID == ModItems.jadeHelmet.itemID || is.itemID == ModItems.jadeBody.itemID || is.itemID == ModItems.jadeBoots.itemID)
 			return "erebus:textures/models/armor/jade1.png";
 		else

@@ -15,10 +15,9 @@ public class ItemExoskeletonArmor extends ItemArmor {
 		super(id, ModMaterials.armorEXOSKELETON, 2, armorType);
 	}
 
-	@Deprecated
 	@Override
 	@SideOnly(Side.CLIENT)
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		if (stack.itemID == ModItems.exoskeletonLegs.itemID)
 			return "erebus:textures/models/armor/exoskeleton2.png";
 		else

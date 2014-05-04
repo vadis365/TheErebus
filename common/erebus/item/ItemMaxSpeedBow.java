@@ -128,9 +128,8 @@ public class ItemMaxSpeedBow extends Item {
 		return false;
 	}
 
-	@Deprecated
 	@Override
-	public boolean hasEffect(ItemStack is) {
+	public boolean hasEffect(ItemStack is, int pass){
 		return true;
 	}
 

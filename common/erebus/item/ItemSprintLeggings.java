@@ -38,9 +38,8 @@ public class ItemSprintLeggings extends ItemArmor {
 		textLines.add(EnumChatFormatting.GRAY + "Tier " + (1 + (is.stackTagCompound == null ? 0 : is.stackTagCompound.getByte("upgradeTier"))));
 	}
 
-	@Deprecated
 	@Override
-	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
+	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
 		if (is.itemID == ModItems.sprintLeggings.itemID) {
 			if (armtick >= 0 && armtick <= 20)
 				texture = "erebus:textures/models/armor/centipede0.png";

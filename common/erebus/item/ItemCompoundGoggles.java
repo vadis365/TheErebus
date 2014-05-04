@@ -13,9 +13,8 @@ public class ItemCompoundGoggles extends ItemArmor {
 		super(i, enumarmormaterial, j, k);
 	}
 
-	@Deprecated
 	@Override
-	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
+	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
 		if (is.itemID == ModItems.compoundGoggles.itemID)
 			return "erebus:textures/models/armor/goggles1.png";
 		if (is.itemID == ModItems.reinCompoundGoggles.itemID)

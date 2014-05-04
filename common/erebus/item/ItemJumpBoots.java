@@ -22,10 +22,9 @@ public class ItemJumpBoots extends ItemArmor {
 		setCreativeTab(Erebus.tabErebusGear);
 	}
 
-	@Deprecated
 	@Override
 	@SideOnly(Side.CLIENT)
-	public String getArmorTexture(ItemStack is, Entity entity, int slot, int layer) {
+	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
 		if (is.itemID == ModItems.jumpBoots.itemID)
 			return "erebus:textures/models/armor/hopper1.png";
 		else
