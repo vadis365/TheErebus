@@ -1,5 +1,6 @@
 package erebus.world.biomes.decorators;
 import net.minecraft.block.Block;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.BlockDoubleHeightPlant;
@@ -7,15 +8,18 @@ import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
 import erebus.world.feature.plant.WorldGenNettlePatch;
 import erebus.world.feature.tree.WorldGenCypressTree;
 
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
-	private final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
+	protected final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
 	
-	private final WorldGenerator genTreeCypress = new WorldGenCypressTree();
-	private final WorldGenerator genGiantFlowers = new WorldGenGiantFlowers();
+	protected final WorldGenerator genTreeCypress = new WorldGenCypressTree();
+	protected final WorldGenerator genGiantFlowers = new WorldGenGiantFlowers();
+	
+	protected boolean generateFlowers = true;
 	
 	@Override
 	public void decorate(){
@@ -29,7 +33,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			}
 		}
 
-		if (rand.nextBoolean()){
+		if (generateFlowers && rand.nextBoolean()){
 			for(int attempt = 0, xx, yy, zz; attempt < 65; attempt++){
 				xx = x + offsetXZ();
 				yy = 15 + rand.nextInt(90);
@@ -136,5 +140,67 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			}
 		}
 		else super.generateFeature(featureType);
+	}
+	
+	/*
+	 * SUB-BIOME - ELYSIAN FOREST
+	 */
+	
+	public static class BiomeDecoratorElysianForest extends BiomeDecoratorElysianFields{
+		private final WorldGenPonds genPonds = new WorldGenPonds();
+		
+		private final WorldGenerator genOakTree = new WorldGenTrees(false,5,0,0,false);
+		private final WorldGenerator genBirchTree = new WorldGenTrees(false,5,2,2,false);
+		
+		public BiomeDecoratorElysianForest(){
+			generateFlowers = false;
+		}
+		
+		@Override
+		protected void populate(){
+			if (rand.nextInt(4) == 0){
+				for(attempt = 0; attempt < 45; attempt++){
+					xx = x+16;
+					yy = rand.nextInt(120);
+					zz = z+16;
+	
+					if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+						genPonds.prepare((rand.nextDouble()+0.7D)*1.5D);
+						genPonds.generate(world,rand,xx,yy,zz);
+						if (rand.nextBoolean())break;
+					}
+				}
+			}
+			
+			super.populate();
+		}
+		
+		@Override
+		public void decorate(){
+			System.out.println("decorating at "+x+","+z);
+			
+			for(attempt = 0; attempt < 400; attempt++){
+				xx = x + offsetXZ();
+				zz = z + offsetXZ();
+				yy = 20 + rand.nextInt(80);
+				
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+					if (rand.nextBoolean())genOakTree.generate(world,rand,xx,yy,zz);
+					else genBirchTree.generate(world,rand,xx,yy,zz);
+				}
+			}
+			
+			for(attempt = 0; attempt < 300; attempt++){
+				xx = x + offsetXZ();
+				zz = z + offsetXZ();
+				yy = 20 + rand.nextInt(80);
+
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+					genTreeCypress.generate(world,rand,xx,yy,zz);
+				}
+			}
+			
+			super.decorate();
+		}
 	}
 }

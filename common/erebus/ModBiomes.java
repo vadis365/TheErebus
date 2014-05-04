@@ -6,7 +6,6 @@ import erebus.world.biomes.BiomeSubterraneanSavannah;
 import erebus.world.biomes.BiomeUlteriorOutback;
 import erebus.world.biomes.BiomeUndergroundJungle;
 import erebus.world.biomes.BiomeVolcanicDesert;
-import erebus.world.biomes.sub.BiomeLake;
 import erebus.world.loot.WeightedList;
 
 public class ModBiomes{
@@ -34,6 +33,7 @@ public class ModBiomes{
 	public static BiomeBaseErebus savannahSubRockyWasteland;
 	public static BiomeBaseErebus savannahSubAsperGrove;
 	public static BiomeBaseErebus savannahSubSteppe;
+	public static BiomeBaseErebus fieldsSubForest;
 	
 	public static int jungleSubLakeID;
 	public static int jungleSubAsperGroveID;
@@ -41,6 +41,7 @@ public class ModBiomes{
 	public static int savannahSubRockyWastelandID;
 	public static int savannahSubAsperGroveID;
 	public static int savannahSubSteppeID;
+	public static int fieldsSubForestID;
 
 	public static void init(){
 		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
@@ -50,6 +51,8 @@ public class ModBiomes{
 		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
 		//fungalForest = new BiomeFungalForest(fungalForestID);
 		//betweenlands = new BiomeBetweenlands(betweenlandsID);
-		jungleSubLake = new BiomeLake(jungleSubLakeID);
+		
+		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);
+		//jungleSubLake = new BiomeLake(jungleSubLakeID);
 	}
 }

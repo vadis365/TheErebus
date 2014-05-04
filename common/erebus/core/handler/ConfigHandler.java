@@ -232,15 +232,17 @@ public class ConfigHandler {
 			ModBiomes.subterraneanSavannahID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Subterranean Savannah", 153).getInt(153);
 			ModBiomes.elysianFieldsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Elysian Fields", 154).getInt(154);
 			ModBiomes.ulteriorOutbackID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Ulterior Outback", 155).getInt(155);
-			ModBiomes.fungalForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Fungal Forest", 156).getInt(156);
-			ModBiomes.betweenlandsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Betweenlands", 157).getInt(157);
+			/*ModBiomes.fungalForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Fungal Forest", 156).getInt(156);
+			ModBiomes.betweenlandsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Betweenlands", 157).getInt(157);*/
 
-			ModBiomes.jungleSubLakeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle - Lake", 161).getInt(161);
+			
+			/*ModBiomes.jungleSubLakeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle - Lake", 161).getInt(161);
 			ModBiomes.jungleSubAsperGroveID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle - Asper Grove", 162).getInt(162);
 			ModBiomes.desertSubCharredForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Volcanic Desert - Charred Forest", 163).getInt(163);
 			ModBiomes.savannahSubRockyWastelandID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Savannah - Rocky Wasteland", 164).getInt(164);
 			ModBiomes.savannahSubAsperGroveID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Savannah - Asper Grove", 165).getInt(165);
-			ModBiomes.savannahSubSteppeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Savannah - Steppe", 166).getInt(166);
+			ModBiomes.savannahSubSteppeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Savannah - Steppe", 166).getInt(166);*/
+			ModBiomes.fieldsSubForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Fields - Forest", 167).getInt(167);
 
 			erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
 			spawnPortalMobs = config.get(Configuration.CATEGORY_GENERAL, "Should spawn beetles and larvae in the portal", true).getBoolean(true);

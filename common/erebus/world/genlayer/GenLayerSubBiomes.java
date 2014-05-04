@@ -45,7 +45,7 @@ public class GenLayerSubBiomes extends GenLayerErebus{
 					bx2 = currentBiomeInts[nx + 2 - 1 + (nz + 2) * (sizeX + 4)];
 					bz2 = currentBiomeInts[nx + 2 + (nz + 2 + 1) * (sizeX + 4)];
 		
-					if (bx1 == biomeID && bx2 == biomeID && bz1 == biomeID && bz2 == biomeID && (a == 0 || nextInt(2) == 0)){
+					if (bx1 == biomeID && bx2 == biomeID && bz1 == biomeID && bz2 == biomeID && (a == 0 || nextInt(3) != 0)){
 						biomeInts[nx + nz * sizeX] = subBiome.biomeID;
 						attempt = 999;
 					}

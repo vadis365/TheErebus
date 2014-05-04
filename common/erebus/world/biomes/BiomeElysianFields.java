@@ -1,4 +1,5 @@
 package erebus.world.biomes;
+import erebus.ModBiomes;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityCicada;
@@ -10,18 +11,23 @@ import erebus.entity.EntityMoth;
 import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWorkerBee;
+import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
 
 // @formatter:off
 public class BiomeElysianFields extends BiomeBaseErebus{
 	public BiomeElysianFields(int biomeID){
-		super(biomeID,new BiomeDecoratorElysianFields());
+		this(biomeID,new BiomeDecoratorElysianFields());
+	}
+	
+	public BiomeElysianFields(int biomeID, BiomeDecoratorBaseErebus decorator){
+		super(biomeID,decorator);
 
 		setBiomeName("Elysian Fields");
 		setColors(0xC6FF54);
 		setFog(213,228,127);
 		setTemperatureRainfall(0.85F,0.5F);
-		setWeight(20);
+		setWeight(200); // TODO
 
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityGrasshopper.class,4,1,3));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityGlowWorm.class,4,1,3));
@@ -35,6 +41,20 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		
 		spawnableMonsterList.add(new SpawnEntry(EntityDragonfly.class,5,1,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityVelvetWorm.class,10,1,2));
+	}
+	
+	@Override
+	public BiomeBaseErebus getRandomSubBiome(int randomValue){
+		return randomValue < 40 ? ModBiomes.fieldsSubForest : null;
+	}
+	
+	public static class BiomeElysianForest extends BiomeElysianFields{
+		public BiomeElysianForest(int biomeID){
+			super(biomeID,new BiomeDecoratorElysianFields.BiomeDecoratorElysianForest());
+
+			setBiomeName("Elysian Forest");
+			setColors(0x74BF26);
+		}
 	}
 }
 // @formatter:on

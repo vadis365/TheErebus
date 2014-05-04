@@ -205,7 +205,7 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 	}
 	
 	private enum StemShape{
-		SMALL_X(1,1), SMALL_PLUS(1,1), LARGE_PLUS(1,2);
+		SMALL_X(1,1), SMALL_PLUS(1,1), LARGE_PLUS(2,2);
 		
 		final byte rad,height;
 		

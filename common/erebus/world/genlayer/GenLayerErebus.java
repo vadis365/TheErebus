@@ -21,10 +21,13 @@ public abstract class GenLayerErebus extends GenLayer{
 
 		GenLayer genLayer = new GenLayerIsland(1L);
 		genLayer = new GenLayerFuzzyZoom(2000L,genLayer);
+		
 		genLayer = new GenLayerBiomes(100L,genLayer);
 		genLayer = GenLayerZoom.magnify(2000L,genLayer,1);
+		
 		genLayer = new GenLayerSubBiomes(101L,genLayer);
 		genLayer = GenLayerZoom.magnify(2100L,genLayer,biomeSize);
+		
 		genLayer = new GenLayerVoronoiZoom(10L,genLayer);
 		genLayer.initWorldGenSeed(seed);
 		return new GenLayer[]{null, genLayer, null};
