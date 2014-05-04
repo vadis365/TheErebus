@@ -268,7 +268,6 @@ public class BlockGlowGem extends BlockContainer {
 					break;
 			}
 		world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);
-		System.out.println("META: " + newMeta);
 	}
 
 	@Override
