@@ -193,8 +193,8 @@ public class EntityDragonfly extends EntityMob {
 		if (currentFlightTarget != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) && (worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
 			currentFlightTarget = null;
 		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
-			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(10) - rand.nextInt(10), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(10) - rand.nextInt(10));
-		if (currentFlightTarget != null && getEntityToAttack() != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget.posY < pickupHeight + 10D)
+			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(10) - rand.nextInt(10), (int) posY + rand.nextInt(4) - rand.nextInt(4), (int) posZ + rand.nextInt(10) - rand.nextInt(10));
+		if (currentFlightTarget != null && getEntityToAttack() != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget != null && !getDropped() && currentFlightTarget.posY < pickupHeight + 10D)
 			currentFlightTarget.posY++;
 		flyToTarget();
 	}
