@@ -19,7 +19,7 @@ public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer {
 	public void renderAModelAt(TileEntityGlowGem tile, double x, double y, double z, float f) {
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/glowGem.png"));
 		if (!tile.lightOn)
-			GL11.glColor3f(255F, 0F, 0F);
+			GL11.glColor3f(1F, 0F, 0F);
 		int meta = tile.getBlockMetadata();
 		switch (meta) {
 			case 0:
@@ -74,7 +74,7 @@ public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer {
 				GL11.glRotatef(90F, 1.0F, 0F, 0F);
 				ModelGlowGem.render(tile);
 				GL11.glPopMatrix();
-				break;	
+				break;
 			case 6:
 				GL11.glPushMatrix();
 				GL11.glTranslated(x + 0.5D, y - 0.5F, z + 0.5D);

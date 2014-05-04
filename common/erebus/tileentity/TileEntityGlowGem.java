@@ -5,46 +5,35 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.EnumSkyBlock;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityGlowGem extends TileEntity {
+
 	public boolean lightOn = true;
 
 	@Override
-	public void updateEntity() {
-		if (worldObj.isRemote)
-			if (lightOn)
-				lightUp();
-			else
-				switchOff();
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void lightUp() {
-		worldObj.setLightValue(EnumSkyBlock.Block, xCoord, yCoord, zCoord, 9);
-		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void switchOff() {
-		worldObj.updateLightByType(EnumSkyBlock.Block, xCoord, yCoord, zCoord);
-		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	public boolean canUpdate() {
+		return false;
 	}
 
 	public void toggleLight() {
-		if (!lightOn) {
-			setIlluminated(true);
-			lightUp();
-		} else {
-			setIlluminated(false);
-			switchOff();
-		}
+		setIlluminated(!lightOn);
 	}
 
 	public void setIlluminated(boolean state) {
 		lightOn = state;
+		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType().blockID, 0, lightOn ? 1 : 0);
+	}
+
+	@Override
+	public boolean receiveClientEvent(int eventId, int eventData) {
+		switch (eventId) {
+			case 0:
+				lightOn = eventData == 1;
+				worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	@Override
@@ -78,5 +67,4 @@ public class TileEntityGlowGem extends TileEntity {
 	protected void readTileFromNBT(NBTTagCompound nbt) {
 		lightOn = nbt.getBoolean("state");
 	}
-
 }
