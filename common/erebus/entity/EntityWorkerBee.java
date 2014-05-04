@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -108,7 +109,12 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	public boolean isOnLadder() {
-		return isCollidedHorizontally && worldObj.getBlockId((int) posX, (int) posY - 1, (int) posZ) != ModBlocks.erebusStigma.blockID;
+		int blockID = worldObj.getBlockId((int) posX, (int) posY - 1, (int) posZ);
+		Block block = Block.blocksList[blockID];
+		if(isCollidedHorizontally)
+			if(blockID != ModBlocks.erebusStigma.blockID || !block.hasTileEntity(worldObj.getBlockMetadata((int) posX, (int) posY - 1, (int) posZ)))
+				return true;
+		return false;
 	}
 
 	@Override
@@ -175,7 +181,7 @@ public class EntityWorkerBee extends EntityTameable {
 				flyToTarget();
 			}
 
-			if ((int) posX == getDropPointX() && (int) posY == getDropPointY() + 1 && (int) posZ == getDropPointZ() && getNectarPoints() > 0) {
+			if (MathHelper.floor_double(posX) == getDropPointX() && MathHelper.floor_double(posY) == getDropPointY() + 1 && MathHelper.floor_double(posZ) == getDropPointZ() && getNectarPoints() > 0) {
 				addHoneyToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 				setBeeCollecting(false);
 			}
@@ -217,7 +223,7 @@ public class EntityWorkerBee extends EntityTameable {
 	}
 
 	public void flyToTarget() {
-		if (currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlockId((int) posX, (int) posY + 1, (int) posZ) == ModBlocks.erebusFlower.blockID && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
+		if (currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 1, MathHelper.floor_double(posZ)) == ModBlocks.erebusFlower.blockID && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
 			if (worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusStigma.blockID || Utils.getTileEntity(worldObj, currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ, IInventory.class) != null) {
 				if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ, currentFlightTarget.posX + 1, currentFlightTarget.posY + 2, currentFlightTarget.posZ + 1)).isEmpty())
 					setPosition(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ);
