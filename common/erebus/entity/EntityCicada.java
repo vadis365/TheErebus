@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -17,6 +18,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.Erebus;
 import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityCicada extends EntityCreature {
 	private int sonics;
@@ -67,9 +70,9 @@ public class EntityCicada extends EntityCreature {
 	}
 	
 	@Override
-    protected int getDropItemId() {
-        return 0;
-    }
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.repellent.ordinal()), 0.0F);
+	}
     
 	@Override
 	public void onUpdate() {
@@ -105,6 +108,10 @@ public class EntityCicada extends EntityCreature {
 	
 	@SideOnly(Side.CLIENT)
 	public void spawnSonicParticles() {
+		for(int a=0; a<360; a+=6) {
+		    double ang=a*Math.PI/180D;
+		   Erebus.proxy.spawnCustomParticle("repellent", worldObj, this.posX+-MathHelper.sin((float) ang)*1.0, this.posY+0.5D, this.posZ+MathHelper.cos((float) ang)*1.0, -MathHelper.sin((float) ang)*0.3, 0D , MathHelper.cos((float) ang)*0.3);
+		}
 		for(int a=0; a<360; a+=4) {
 		    double ang=a*Math.PI/180D;
 		    Erebus.proxy.spawnCustomParticle("sonic", worldObj, this.posX+-MathHelper.sin((float) ang)*1.0, this.posY+0.5D, this.posZ+MathHelper.cos((float) ang)*1.0, -MathHelper.sin((float) ang)*0.3, 0D , MathHelper.cos((float) ang)*0.3);
