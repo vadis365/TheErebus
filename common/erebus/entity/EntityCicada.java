@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -40,6 +41,11 @@ public class EntityCicada extends EntityCreature {
 	@Override
 	public boolean isOnLadder() {
 		return isCollidedHorizontally;
+	}
+	
+	@Override
+	public EnumCreatureAttribute getCreatureAttribute() {
+		return EnumCreatureAttribute.ARTHROPOD;
 	}
 	
 	@Override
@@ -112,6 +118,7 @@ public class EntityCicada extends EntityCreature {
 		    double ang=a*Math.PI/180D;
 		   Erebus.proxy.spawnCustomParticle("repellent", worldObj, this.posX+-MathHelper.sin((float) ang)*1.0, this.posY+0.5D, this.posZ+MathHelper.cos((float) ang)*1.0, -MathHelper.sin((float) ang)*0.3, 0D , MathHelper.cos((float) ang)*0.3);
 		}
+		
 		for(int a=0; a<360; a+=4) {
 		    double ang=a*Math.PI/180D;
 		    Erebus.proxy.spawnCustomParticle("sonic", worldObj, this.posX+-MathHelper.sin((float) ang)*1.0, this.posY+0.5D, this.posZ+MathHelper.cos((float) ang)*1.0, -MathHelper.sin((float) ang)*0.3, 0D , MathHelper.cos((float) ang)*0.3);
