@@ -10,8 +10,9 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
-import erebus.world.biomes.decorators.type.OreSettings;
-import erebus.world.biomes.decorators.type.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenPonds;
@@ -62,7 +63,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = rand.nextInt(120);
 			zz = z+16;
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genPonds.prepare((rand.nextDouble()+0.7D)*1.5D);
 				genPonds.generate(world,rand,xx,yy,zz);
 			}
@@ -94,7 +95,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = rand.nextInt(120);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genQuickSand.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -104,7 +105,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				WorldGenerator treeGen = null;
 				int r = rand.nextInt(31);
 
@@ -138,7 +139,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genBigMushroomRed.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -148,7 +149,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genBigMushroomBrown.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -158,7 +159,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			zz = z+offsetXZ();
 			
 			for(yy = 90; yy > 20; yy--){
-				if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 					if (genBamboo.generate(world,rand,xx,yy,zz))break;
 				}
 			}
@@ -169,7 +170,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genFerns.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -179,7 +180,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genFiddleheads.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -189,7 +190,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genGrass.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -220,7 +221,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 				yy = 15+rand.nextInt(90);
 				zz = z+offsetXZ();
 
-				if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 					genTurnips.generate(world,rand,xx,yy,zz);
 				}
 			}
@@ -231,7 +232,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 				yy = 15+rand.nextInt(90);
 				zz = z+offsetXZ();
 
-				if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 					genMelons.generate(world,rand,xx,yy,zz);
 				}
 			}

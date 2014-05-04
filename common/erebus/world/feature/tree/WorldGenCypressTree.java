@@ -5,6 +5,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.block.BlockLeavesErebus;
+import erebus.block.BlockLogErebus;
 
 //@formatter:off
 public class WorldGenCypressTree extends WorldGenerator{
@@ -42,16 +44,16 @@ public class WorldGenCypressTree extends WorldGenerator{
 		
 		if (!checkEmptyArea(world,x,y,z,trunkH+2,2))return false;
 		
-		for(int yy = y; yy <= y+trunkH; yy++)world.setBlock(x,yy,z,ModBlocks.logErebusGroup1.blockID);
-		for(int yy = y+trunkH+1; yy <= y+trunkH+2; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID);
+		for(int yy = y; yy <= y+trunkH; yy++)world.setBlock(x,yy,z,ModBlocks.logErebusGroup3.blockID,BlockLogErebus.dataCypress,2);
+		for(int yy = y+trunkH+1; yy <= y+trunkH+2; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 		
 		for(int a = 0; a < 4; a++){
-			for(int yy = y+nakedTrunkH; yy <= y+trunkH; yy++)world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID);
+			for(int yy = y+nakedTrunkH; yy <= y+trunkH; yy++)world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 			
 			if (leafH-4 > 1){
 				for(int yy = y+nakedTrunkH+2; yy <= y+trunkH-2; yy++){
 					if ((yy == y+nakedTrunkH+2 || yy == y+trunkH-2) && leafH-4 > 3 && rand.nextInt(11) == 0)continue;
-					world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID);
+					world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 				}
 			}
 		}
@@ -60,7 +62,7 @@ public class WorldGenCypressTree extends WorldGenerator{
 			for(int b = 0; b < 2; b++){
 				for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-1; yy++){
 					if ((yy == y+nakedTrunkH+1 || yy == y+trunkH-1) && leafH-2 > 3 && rand.nextInt(8) == 0)continue;
-					world.setBlock(x-1+2*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID);
+					world.setBlock(x-1+2*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 				}
 			}
 		}
@@ -79,17 +81,17 @@ public class WorldGenCypressTree extends WorldGenerator{
 		
 		if (!checkEmptyArea(world,x,y,z,trunkH+3,3))return false;
 		
-		for(int yy = y; yy <= y+trunkH; yy++)world.setBlock(x,yy,z,ModBlocks.logErebusGroup1.blockID);
-		for(int yy = y+trunkH+1; yy <= y+trunkH+3; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID);
+		for(int yy = y; yy <= y+trunkH; yy++)world.setBlock(x,yy,z,ModBlocks.logErebusGroup3.blockID,BlockLogErebus.dataCypress,2);
+		for(int yy = y+trunkH+1; yy <= y+trunkH+3; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 		
 		for(int a = 0; a < 4; a++){
-			for(int yy = y+nakedTrunkH; yy <= y+trunkH+1; yy++)world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID);
-			for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-2; yy++)world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID);
+			for(int yy = y+nakedTrunkH; yy <= y+trunkH+1; yy++)world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
+			for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-2; yy++)world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 			
 			if (leafH-7 > 1){
 				for(int yy = y+nakedTrunkH+3; yy <= y+trunkH-4; yy++){
 					if ((yy == y+nakedTrunkH+3 || yy == y+trunkH-4) && leafH-7 > 3 && rand.nextInt(10) == 0)continue;
-					world.setBlock(x+Direction.offsetX[a]*3,yy,z+Direction.offsetZ[a]*3,ModBlocks.leavesErebus.blockID);
+					world.setBlock(x+Direction.offsetX[a]*3,yy,z+Direction.offsetZ[a]*3,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 				}
 			}
 		}
@@ -98,13 +100,13 @@ public class WorldGenCypressTree extends WorldGenerator{
 			for(int b = 0; b < 2; b++){
 				for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-1; yy++){
 					if ((yy == y+nakedTrunkH+1 || yy == y+trunkH-1) && rand.nextInt(14) == 0)continue;
-					world.setBlock(x-1+2*a,yy,z+-1+2*b,ModBlocks.leavesErebus.blockID);
+					world.setBlock(x-1+2*a,yy,z+-1+2*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 				}
 				
 				for(int yy = y+nakedTrunkH+2; yy <= y+trunkH-3; yy++){
 					boolean canSkip = yy == y+nakedTrunkH+2 || yy == y+trunkH-3;
-					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-2+4*a,yy,z+-1+2*b,ModBlocks.leavesErebus.blockID);
-					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-1+2*a,yy,z+-2+4*b,ModBlocks.leavesErebus.blockID);
+					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-2+4*a,yy,z+-1+2*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
+					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-1+2*a,yy,z+-2+4*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 				}
 			}
 		}
@@ -124,49 +126,52 @@ public class WorldGenCypressTree extends WorldGenerator{
 		if (!checkEmptyArea(world,x,y,z,trunkH+4,3))return false;
 		
 		for(int yy = y; yy <= y+trunkH; yy++){
-			world.setBlock(x,yy,z,ModBlocks.logErebusGroup1.blockID);
+			world.setBlock(x,yy,z,ModBlocks.logErebusGroup3.blockID,BlockLogErebus.dataCypress,2);
 			
 			if (yy <= y+trunkH-2){
-				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],((yy >= y+trunkH-3 && rand.nextBoolean() || yy < y+trunkH-3) ? ModBlocks.logErebusGroup1.blockID : ModBlocks.leavesErebus.blockID));
+				for(int a = 0; a < 4; a++){
+					boolean genLog = (yy >= y+trunkH-3 && rand.nextBoolean() || yy < y+trunkH-3);
+					world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],genLog ? ModBlocks.logErebusGroup3.blockID : ModBlocks.leavesErebus.blockID,genLog ? BlockLogErebus.dataCypress : BlockLeavesErebus.dataCypressDecay,2);
+				}
 			}
 		}
 		
-		for(int yy = y+trunkH+1; yy <= y+trunkH+4; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID);
+		for(int yy = y+trunkH+1; yy <= y+trunkH+4; yy++)world.setBlock(x,yy,z,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 		
 		for(int a = 0; a < 4; a++){
 			for(int yy = y+trunkH-1; yy <= y+trunkH+2; yy++){
 				if (yy == y+trunkH+2 && rand.nextInt(5) == 0)continue;
-				world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID);
+				world.setBlock(x+Direction.offsetX[a],yy,z+Direction.offsetZ[a],ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 			}
 			
 			for(int yy = y+nakedTrunkH; yy <= y+trunkH; yy++){
 				if (yy == y+trunkH && rand.nextInt(6) == 0)continue;
-				world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID);
+				world.setBlock(x+Direction.offsetX[a]*2,yy,z+Direction.offsetZ[a]*2,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 			}
 			
-			for(int yy = y+nakedTrunkH+2; yy <= y+trunkH-3; yy++)world.setBlock(x+Direction.offsetX[a]*3,yy,z+Direction.offsetZ[a]*3,ModBlocks.leavesErebus.blockID);
+			for(int yy = y+nakedTrunkH+2; yy <= y+trunkH-3; yy++)world.setBlock(x+Direction.offsetX[a]*3,yy,z+Direction.offsetZ[a]*3,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 		}
 		
 		for(int a = 0; a < 2; a++){
 			for(int b = 0; b < 2; b++){
-				for(int yy = y+nakedTrunkH; yy <= y+trunkH+1; yy++)world.setBlock(x-1+2*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID);
+				for(int yy = y+nakedTrunkH; yy <= y+trunkH+1; yy++)world.setBlock(x-1+2*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 				
 				for(int yy = y+nakedTrunkH+1; yy <= y+trunkH-2; yy++){
 					boolean canSkip = (yy == y+nakedTrunkH+1 || yy == y+trunkH-2);
-					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-2+4*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID);
-					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-1+2*a,yy,z-2+4*b,ModBlocks.leavesErebus.blockID);
+					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-2+4*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
+					if (!canSkip || rand.nextInt(10) != 0)world.setBlock(x-1+2*a,yy,z-2+4*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 				}
 				
 				for(int yy = y+nakedTrunkH+3; yy <= y+trunkH-3; yy++){
 					if (yy == y+trunkH-3 && rand.nextInt(7) == 0)continue;
-					world.setBlock(x-2+4*a,yy,z-2+4*b,ModBlocks.leavesErebus.blockID);
+					world.setBlock(x-2+4*a,yy,z-2+4*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 				}
 				
 				if (leafH-9 > 1){
 					for(int yy = y+nakedTrunkH+4; yy <= y+trunkH-5; yy++){
 						boolean canSkip = (yy == y+nakedTrunkH+4 || yy == y+trunkH-5) && leafH-9 > 2;
-						if (!canSkip || rand.nextInt(12) != 0)world.setBlock(x-3+6*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID);
-						if (!canSkip || rand.nextInt(12) != 0)world.setBlock(x-1+2*a,yy,z-3+6*b,ModBlocks.leavesErebus.blockID);
+						if (!canSkip || rand.nextInt(12) != 0)world.setBlock(x-3+6*a,yy,z-1+2*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
+						if (!canSkip || rand.nextInt(12) != 0)world.setBlock(x-1+2*a,yy,z-3+6*b,ModBlocks.leavesErebus.blockID,BlockLeavesErebus.dataCypressDecay,2);
 					}
 				}
 			}

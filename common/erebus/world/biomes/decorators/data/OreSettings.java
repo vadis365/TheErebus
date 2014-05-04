@@ -1,4 +1,4 @@
-package erebus.world.biomes.decorators.type;
+package erebus.world.biomes.decorators.data;
 import static erebus.core.handler.ConfigHandler.*;
 import java.util.Random;
 import net.minecraft.block.Block;

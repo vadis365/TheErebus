@@ -2,9 +2,10 @@ package erebus.world.biomes.decorators;
 import static erebus.core.handler.ConfigHandler.*;
 import java.util.Random;
 import net.minecraft.world.World;
-import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.biomes.decorators.type.OreSettings;
-import erebus.world.biomes.decorators.type.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.FeatureType;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRedGem;
 
 public abstract class BiomeDecoratorBaseErebus{
@@ -51,7 +52,6 @@ public abstract class BiomeDecoratorBaseErebus{
 		this.isDecorating = false;
 	}
 	
-	
 	protected void populate(){}
 	protected void decorate(){}
 	
@@ -67,6 +67,10 @@ public abstract class BiomeDecoratorBaseErebus{
 
 	protected final int offsetXZ(){
 		return rand.nextInt(16)+8;
+	}
+	
+	protected boolean checkSurface(SurfaceType surfaceType, int x, int y, int z){
+		return surfaceType.matchBlock(world.getBlockId(x,y-1,z)) && world.isAirBlock(x,y,z);
 	}
 	
 	public static class BiomeDecoratorEmpty extends BiomeDecoratorBaseErebus{}

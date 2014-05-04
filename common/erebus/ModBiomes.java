@@ -50,7 +50,6 @@ public class ModBiomes{
 		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
 		//fungalForest = new BiomeFungalForest(fungalForestID);
 		//betweenlands = new BiomeBetweenlands(betweenlandsID);
-		
 		jungleSubLake = new BiomeLake(jungleSubLakeID);
 	}
 }

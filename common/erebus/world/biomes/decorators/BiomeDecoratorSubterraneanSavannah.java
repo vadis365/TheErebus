@@ -1,10 +1,10 @@
 package erebus.world.biomes.decorators;
-import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.world.biomes.decorators.type.OreSettings;
-import erebus.world.biomes.decorators.type.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenPonds;
@@ -35,7 +35,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				yy = rand.nextInt(120);
 				zz = z+16;
 				
-				if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 					genPonds.prepare((rand.nextDouble()+0.75D)*1.2D);
 					genPonds.generate(world,rand,xx,yy,zz);
 				}
@@ -46,7 +46,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 					xx = x+offsetXZ();
 					zz = z+offsetXZ();
 					
-					if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+					if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 						genBamboo.generate(world,rand,xx,yy,zz);
 					}
 				}
@@ -73,7 +73,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genTreeAcacia.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -83,7 +83,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			zz = z+offsetXZ();
 			
 			for(yy = 100; yy > 20; yy--){
-				if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 					genRocks.generate(world,rand,xx,yy,zz);
 				}
 			}
@@ -94,7 +94,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			yy = rand.nextInt(120);
 			zz = z+offsetXZ();
 			
-			if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genTreeAsper.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -104,7 +104,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 			
-			if (world.getBlockId(xx,yy-1,zz)  ==  Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genRottenAcacia.generate(world,rand,xx,yy,zz);
 			}
 		}
@@ -113,8 +113,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			xx = x+offsetXZ();
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
-			
-			if (world.getBlockId(xx,yy-1,zz)  ==  Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 				genGrass.generate(world,rand,xx,yy,zz);
 			}
 		}

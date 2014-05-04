@@ -2,18 +2,23 @@ package erebus.world.biomes.decorators;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.biomes.decorators.type.OreSettings;
-import erebus.world.biomes.decorators.type.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.FeatureType;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
+	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+	
 	private final WorldGenerator genTreeAcacia = new WorldGenAcaciaTree();
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 	
 	@Override
 	public void decorate(){
+		
 		for(attempt = 0; attempt < 112; attempt++){
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
@@ -26,13 +31,23 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			}
 		}
 		
+		for(attempt = 0; attempt < rand.nextInt(3); attempt++){
+			xx = x+offsetXZ();
+			yy = 20+rand.nextInt(25)*(1+rand.nextInt(3)); // more likely in lower levels
+			zz = z+offsetXZ();
+			
+			if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
+				genRottenAcacia.generate(world,rand,xx,yy,zz);
+			}
+		}
+		
 		if (rand.nextBoolean()){
 			for(attempt = 0; attempt < 20; attempt++){
 				xx = x+offsetXZ();
 				yy = 20+rand.nextInt(80);
 				zz = z+offsetXZ();
 				
-				if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz) == Block.grass.blockID){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 					genTreeAcacia.generate(world,rand,xx,yy,zz);
 					if (rand.nextBoolean())break;
 				}
@@ -50,13 +65,12 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			}
 		}
 
-		int id;
 		for(attempt = 0; attempt < 194; attempt++){
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
 			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
-				if ((((id = world.getBlockId(xx,yy-1,zz)) == Block.sand.blockID) || id == Block.grass.blockID) && world.isAirBlock(xx,yy,zz)){
+				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
 						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,4,2);
 						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,4+8,2);
@@ -74,7 +88,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 				yy = 20+rand.nextInt(80);
 				zz = z+offsetXZ();
 
-				if (world.getBlockId(xx,yy-1,zz) == Block.grass.blockID && world.isAirBlock(xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 					if (genTreeEucalyptus.generate(world,rand,xx,yy,zz) && rand.nextBoolean())break;
 				}
 			}

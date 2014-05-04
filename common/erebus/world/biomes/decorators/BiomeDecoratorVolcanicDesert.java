@@ -2,9 +2,10 @@ package erebus.world.biomes.decorators;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
-import erebus.world.biomes.decorators.type.FeatureType;
-import erebus.world.biomes.decorators.type.OreSettings;
-import erebus.world.biomes.decorators.type.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.FeatureType;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.structure.WorldGenAntlionLair;
 
@@ -20,7 +21,7 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 			
-			if (world.getBlockId(xx,yy-1,zz) == Block.sand.blockID && world.isAirBlock(xx,yy,zz)){
+			if (checkSurface(SurfaceType.SAND,xx,yy,zz)){
 				genLavaLakes.generate(world,world.rand,xx,yy,zz);
 			}
 		}
@@ -46,7 +47,7 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus{
 			yy = rand.nextInt(120);
 			zz = z+offsetXZ();
 			
-			if (world.getBlockId(xx,yy-1,zz) == Block.sand.blockID && world.isAirBlock(xx,yy,zz) && !world.isAirBlock(xx,yy-2,zz)){
+			if (checkSurface(SurfaceType.SAND,xx,yy,zz) && !world.isAirBlock(xx,yy-2,zz)){
 				genScorchedWood.generate(world,rand,xx,yy,zz);
 				if (rand.nextInt(4)!=0)break;
 			}

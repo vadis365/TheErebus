@@ -24,10 +24,6 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 		super(biomeID);
 		this.decorator = decorator;
 		
-		if (getClass().getGenericSuperclass() == BiomeBaseErebus.class){
-			ModBiomes.biomeList.add(this);
-		}
-		
 		setDisableRain();
 		
 		spawnableMonsterList.clear();
@@ -55,7 +51,9 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	}
 	
 	protected final BiomeBaseErebus setWeight(int weight){
+		if (this.biomeWeight != 0)throw new RuntimeException("Cannot set biome weight twice!");
 		this.biomeWeight = (short)weight;
+		if (getClass().getGenericSuperclass() == BiomeBaseErebus.class)ModBiomes.biomeList.add(this); // add to list once weight is known
 		return this;
 	}
 	

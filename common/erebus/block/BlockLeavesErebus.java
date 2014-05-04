@@ -20,7 +20,7 @@ public class BlockLeavesErebus extends BlockLeaves {
 
 	public static final String[] leafTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Asper", "Mossbark", "Pink", "Cypress" };
 	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataAsper = 3, dataMossbark = 4, dataPink = 5, dataCypress = 6;
-	public static final byte dataAcaciaDecay = 8, dataEucalyptusDecay = 9, dataMahoganyDecay = 10, dataAsperDecay = 11, dataMossbarkDecay = 12, dataPinkDecay = 13, dataCypressDecay = 12;
+	public static final byte dataAcaciaDecay = 8, dataEucalyptusDecay = 9, dataMahoganyDecay = 10, dataAsperDecay = 11, dataMossbarkDecay = 12, dataPinkDecay = 13, dataCypressDecay = 14;
 
 	@SideOnly(Side.CLIENT)
 	private Icon[] iconArray;
