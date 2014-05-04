@@ -321,8 +321,8 @@ public class ModelCicada extends ModelBase {
 			LWingFront.rotateAngleX = 0F;
 			RWingFront.rotateAngleY = 0F;
 			LWingFront.rotateAngleY = 0F;
-			RWingFront.rotateAngleZ = 0F;
-			LWingFront.rotateAngleZ = 0F;
+			RWingFront.rotateAngleZ = 0.3F;
+			LWingFront.rotateAngleZ = -0.3F;
 		}
 
 		if (cicada.isFlying()) {
