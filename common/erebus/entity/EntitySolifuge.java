@@ -85,6 +85,11 @@ public class EntitySolifuge extends EntityMob implements IEntityAdditionalSpawnD
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	protected void fall(float par1) {

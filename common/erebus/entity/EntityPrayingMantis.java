@@ -43,6 +43,11 @@ public class EntityPrayingMantis extends EntityMob {
 	public boolean isAIEnabled() {
 		return true;
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {

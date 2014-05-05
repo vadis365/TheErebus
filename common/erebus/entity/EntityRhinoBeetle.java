@@ -116,6 +116,11 @@ public class EntityRhinoBeetle extends EntityTameable {
 	    }
 	    return super.getCanSpawnHere();
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	protected boolean canDespawn() {

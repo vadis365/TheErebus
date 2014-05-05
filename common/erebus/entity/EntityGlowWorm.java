@@ -49,6 +49,11 @@ public class EntityGlowWorm extends EntityCreature {
 	    }
 	    return super.getCanSpawnHere();
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	public boolean canDeSpawn() {
 		return false;

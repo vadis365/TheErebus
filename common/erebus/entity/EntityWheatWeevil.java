@@ -44,6 +44,11 @@ public class EntityWheatWeevil extends EntityCreature {
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
 		return super.getCanSpawnHere();
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	protected void applyEntityAttributes() {

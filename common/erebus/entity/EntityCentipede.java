@@ -52,6 +52,11 @@ public class EntityCentipede extends EntityMob {
 	public boolean getCanSpawnHere() {
 		return super.getCanSpawnHere();
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	public double getAttackStrength() {
 		switch (worldObj.difficultySetting) {

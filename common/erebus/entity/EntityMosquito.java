@@ -314,4 +314,9 @@ public class EntityMosquito extends EntityMob {
 				}
 		return false;
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 }

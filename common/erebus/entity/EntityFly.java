@@ -217,6 +217,11 @@ public class EntityFly extends EntityAmbientCreature {
 			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
 		}
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 5;
+    }
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {

@@ -79,4 +79,9 @@ public class EntityJumpingSpider extends EntitySpider {
 	public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData) {
 		return par1EntityLivingData;
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 }

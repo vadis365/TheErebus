@@ -45,6 +45,11 @@ public class EntityBombardierBeetle extends EntityMob {
 	public boolean isAIEnabled() {
 		return true;
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	public void onUpdate() {

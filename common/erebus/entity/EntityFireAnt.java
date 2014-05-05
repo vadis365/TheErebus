@@ -94,6 +94,11 @@ public class EntityFireAnt extends EntityMob {
 	public boolean isOnLadder() {
 		return isCollidedHorizontally;
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 5;
+    }
 
 	@Override
 	protected void attackEntity(Entity entity, float distance) {

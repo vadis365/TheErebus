@@ -139,6 +139,11 @@ public class EntityScytodes extends EntityMob {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 3;
+    }
 
 	@Override
 	public boolean isPotionApplicable(PotionEffect potionEffect) {

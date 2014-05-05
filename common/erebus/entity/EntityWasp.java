@@ -94,6 +94,11 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	public boolean getCanSpawnHere() {
 		return super.getCanSpawnHere();
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {

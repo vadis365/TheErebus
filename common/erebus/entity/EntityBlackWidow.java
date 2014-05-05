@@ -104,6 +104,11 @@ public class EntityBlackWidow extends EntityMob {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	protected void fall(float distance) {

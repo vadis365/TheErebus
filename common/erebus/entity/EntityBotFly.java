@@ -242,6 +242,11 @@ public class EntityBotFly extends EntityMob {
 			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
 		}
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 2;
+    }
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {

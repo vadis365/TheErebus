@@ -275,6 +275,11 @@ public class EntityDragonfly extends EntityMob {
 			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
 		}
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 3;
+    }
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {

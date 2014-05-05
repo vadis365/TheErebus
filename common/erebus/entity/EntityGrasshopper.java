@@ -67,6 +67,11 @@ public class EntityGrasshopper extends EntityCreature {
 	    }
 	    return super.getCanSpawnHere();
 	}
+	
+	@Override
+    public int getMaxSpawnedInChunk() {
+        return 3;
+    }
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
