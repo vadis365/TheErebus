@@ -54,7 +54,8 @@ public class ItemErebusMaterial extends Item {
 		weepingBluePetal,
 		papyrus,
 		enhancedGliderWing,
-		repellent
+		repellent,
+		mucusCharge
 	}
 	// @formatter:on
 
