@@ -1,8 +1,13 @@
 package erebus.entity;
 
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -73,7 +78,7 @@ public class EntityMucusBombPrimed extends Entity {
 				this.explode();
 			}
 			if (this.worldObj.isRemote) {
-				spawnSonicParticles();
+				spawnGooeyTypeParticles();
 			}
 			
 		} else {
@@ -82,8 +87,18 @@ public class EntityMucusBombPrimed extends Entity {
 	}
 
 	private void explode() {
-		//float f = 4.0F;
-		//this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
+		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX - 0.5D, posY - 0.5D, posZ - 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(4D, 4D, 4D));
+		for (int i = 0; i < list.size(); i++) {
+			Entity entity = (Entity) list.get(i);
+			if (entity != null)
+				if (entity instanceof EntityLivingBase) {
+					entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 1D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) *  2.0D);
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 10*20, 3));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 10*20, 0));
+					worldObj.playSoundAtEntity(this, "erebus:beetlelarvasplat", 1.0F, 0.5F);
+					worldObj.playSoundAtEntity(this, "erebus:squish", 1.0F, 0.7F);
+				}
+		}
 	}
 
 	@Override
@@ -106,7 +121,7 @@ public class EntityMucusBombPrimed extends Entity {
 		return this.mucusBombPlacedBy;
 	}
 	@SideOnly(Side.CLIENT)
-	public void spawnSonicParticles() {
+	public void spawnGooeyTypeParticles() {
 		for (int a = 0; a < 360; a += 6) {
 			double ang = a * Math.PI / 180D;
 			Erebus.proxy.spawnCustomParticle("repellent", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 0.5D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
