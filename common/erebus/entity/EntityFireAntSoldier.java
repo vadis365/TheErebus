@@ -1,37 +1,35 @@
 package erebus.entity;
 
-import java.util.Random;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntitySmallFireball;
+import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityFireAnt extends EntityMob {
+public class EntityFireAntSoldier extends EntityMob {
 	private int shouldDo;
-
-	public EntityFireAnt(World world) {
+	
+	public EntityFireAntSoldier(World world) {
 		super(world);
-		stepHeight = 0.0F;
-		isImmuneToFire = true;
-		setSize(0.75F, 0.25F);
+		this.stepHeight = 0.1F;
+		this.isImmuneToFire = true;
+		this.setSize(0.9F, 0.5F);
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.8D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(30.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
 	}
 
-	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
@@ -57,23 +55,18 @@ public class EntityFireAnt extends EntityMob {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return Item.magmaCream.itemID;
-	}
-
-	@Override
-	protected void dropRareDrop(int fortune) {
-		for (int i = 0; i < 1 + new Random().nextInt(1 + fortune); i++)
-			dropItem(Item.magmaCream.itemID, 1);
-	}
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		entityDropItem(new ItemStack(Item.magmaCream.itemID, rand.nextInt(1) + 1 + looting, 0), 0.0F);
+		if (rand.nextInt(5) == 0)
+			entityDropItem(new ItemStack(Item.blazePowder.itemID, rand.nextInt(1) + 1 + looting, 0), 0.0F);
+		}
 
 	public boolean isClimbing() {
-		return !onGround && isOnLadder();
+		return (!this.onGround) && (isOnLadder());
 	}
 
-	@Override
 	public boolean isOnLadder() {
-		return isCollidedHorizontally;
+		return (this.isCollidedHorizontally);
 	}
 	
 	@Override
@@ -84,6 +77,8 @@ public class EntityFireAnt extends EntityMob {
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
 		if (attackTime <= 0 && distance < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY) {
+			this.setFire(1);
+			entity.setFire(10);
 			attackTime = 20;
 			attackEntityAsMob(entity);
 		} else if (distance >= 5.0F & distance <= 16.0F) {
@@ -101,7 +96,7 @@ public class EntityFireAnt extends EntityMob {
 				if (shouldDo > 1) {
 					float targetAreaOffset = MathHelper.sqrt_float(distance) * 0.5F;
 					worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1009, (int) posX, (int) posY, (int) posZ, 0);
-						EntitySmallFireball fireball = new EntitySmallFireball(worldObj, this, distanceX + rand.nextGaussian() * targetAreaOffset, distanceY, distanceZ + rand.nextGaussian() * targetAreaOffset);
+						EntityLargeFireball fireball = new EntityLargeFireball(worldObj, this, distanceX + rand.nextGaussian() * targetAreaOffset, distanceY, distanceZ + rand.nextGaussian() * targetAreaOffset);
 						fireball.posY = posY + height / 2.0F + 0.5D;
 						worldObj.spawnEntityInWorld(fireball);
 				}

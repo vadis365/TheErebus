@@ -404,6 +404,7 @@ entity.Erebus.Sporeling.name=Sporeling
 entity.Erebus.WheatWeevil.name=Crop Weevil
 entity.Erebus.Woodlouse.name=Woodlouse
 entity.Erebus.Cicada.name=Cicada
+entity.Erebus.FireAntSoldier.name=Fire Ant Soldier
 
 #Fluids
 fluid.erebus.honey=Honey
