@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
@@ -17,6 +16,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.entity.EntityMucusBombPrimed;
 
 public class BlockMucusBomb extends Block {
 	@SideOnly(Side.CLIENT)
@@ -60,9 +60,9 @@ public class BlockMucusBomb extends Block {
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion) {
 		if (!world.isRemote) {
-			EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, (double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), explosion.getExplosivePlacedBy());
-			entitytntprimed.fuse = world.rand.nextInt(entitytntprimed.fuse / 4)+ entitytntprimed.fuse/ 8;
-			world.spawnEntityInWorld(entitytntprimed);
+			EntityMucusBombPrimed entitymucusbombprimed = new EntityMucusBombPrimed(world, (double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), explosion.getExplosivePlacedBy());
+			entitymucusbombprimed.fuse = world.rand.nextInt(entitymucusbombprimed.fuse / 4)+ entitymucusbombprimed.fuse/ 8;
+			world.spawnEntityInWorld(entitymucusbombprimed );
 		}
 	}
 
@@ -74,9 +74,9 @@ public class BlockMucusBomb extends Block {
 	public void primeTnt(World world, int x, int y, int z, int meta, EntityLivingBase entity) {
 		if (!world.isRemote) {
 			if ((meta & 1) == 1) {
-				EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, (double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), entity);
-				world.spawnEntityInWorld(entitytntprimed);
-				world.playSoundAtEntity(entitytntprimed, "random.fuse", 1.0F, 1.0F);
+				EntityMucusBombPrimed entitymucusbombprimed = new EntityMucusBombPrimed(world, (double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), entity);
+				world.spawnEntityInWorld(entitymucusbombprimed );
+				world.playSoundAtEntity(entitymucusbombprimed , "random.fuse", 1.0F, 1.0F);
 			}
 		}
 	}
