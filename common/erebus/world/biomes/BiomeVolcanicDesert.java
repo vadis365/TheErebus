@@ -24,12 +24,10 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 		setTemperatureRainfall(1.9F,0.2F);
 		setWeight(16);
 
-		spawnableMonsterList.add(new SpawnEntry(EntityScytodes.class,35,1,4));
 		spawnableMonsterList.add(new SpawnEntry(EntityScorpion.class,30,1,8));
 		spawnableMonsterList.add(new SpawnEntry(EntitySolifuge.class,30,1,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityFireAnt.class,30,1,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityAntlion.class,30,1,8));
-		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,1,4));
 		spawnableMonsterList.add(new SpawnEntry(EntityBlackWidow.class,5,1,1));
 
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));

@@ -2,6 +2,7 @@ package erebus.world.biomes;
 import erebus.ModBiomes;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityBotFly;
 import erebus.entity.EntityCicada;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
@@ -10,7 +11,9 @@ import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityVelvetWorm;
+import erebus.entity.EntityWheatWeevil;
 import erebus.entity.EntityWorkerBee;
+import erebus.world.biomes.BiomeBaseErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
 
@@ -38,9 +41,11 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,6,1,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityCicada.class,100,1,1));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityWheatWeevil.class,6,1,2));
 		
 		spawnableMonsterList.add(new SpawnEntry(EntityDragonfly.class,5,1,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityVelvetWorm.class,10,1,2));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
 	}
 	
 	@Override

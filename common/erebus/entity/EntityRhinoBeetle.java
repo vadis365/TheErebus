@@ -119,7 +119,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	
 	@Override
     public int getMaxSpawnedInChunk() {
-        return 2;
+        return 1;
     }
 
 	@Override

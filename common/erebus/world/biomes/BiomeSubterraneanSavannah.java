@@ -6,11 +6,14 @@ import erebus.entity.EntityFly;
 import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityJumpingSpider;
+import erebus.entity.EntityMosquito;
+import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
+import erebus.world.biomes.BiomeBaseErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
 
 // @formatter:off
@@ -32,7 +35,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,18,4,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityScorpion.class,10,4,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,1,4));
-		spawnableMonsterList.add(new SpawnEntry(EntitySolifuge.class,5,1,3));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityMosquito.class,60,1,3));
 
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));

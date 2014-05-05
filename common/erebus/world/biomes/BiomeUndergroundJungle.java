@@ -15,7 +15,9 @@ import erebus.entity.EntityMoth;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
+import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
+import erebus.world.biomes.BiomeBaseErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
 
 // @formatter:off
@@ -36,13 +38,13 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,1,4));
 		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,5,4,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityBombardierBeetle.class,4,1,1));
+		spawnableMonsterList.add(new SpawnEntry(EntityVelvetWorm.class,10,1,2));
 
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityMosquito.class,60,1,3));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,8,1,2));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityMoth.class,5,4,4));
 
 		topBlock = (byte)Block.grass.blockID;
 		fillerBlock = (byte)Block.dirt.blockID;
