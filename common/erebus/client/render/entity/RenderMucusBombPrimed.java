@@ -54,6 +54,7 @@ public class RenderMucusBombPrimed extends Render {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_DST_ALPHA);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, f2);
+			bindTexture(TextureMap.locationBlocksTexture);
 			this.blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_BLEND);

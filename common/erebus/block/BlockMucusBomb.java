@@ -26,7 +26,6 @@ public class BlockMucusBomb extends Block {
 
 	public BlockMucusBomb(int par1) {
 		super(par1, Material.tnt);
-		this.setCreativeTab(CreativeTabs.tabRedstone);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -62,7 +61,7 @@ public class BlockMucusBomb extends Block {
 		if (!world.isRemote) {
 			EntityMucusBombPrimed entitymucusbombprimed = new EntityMucusBombPrimed(world, (double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), explosion.getExplosivePlacedBy());
 			entitymucusbombprimed.fuse = world.rand.nextInt(entitymucusbombprimed.fuse / 4)+ entitymucusbombprimed.fuse/ 8;
-			world.spawnEntityInWorld(entitymucusbombprimed );
+			world.spawnEntityInWorld(entitymucusbombprimed);
 		}
 	}
 

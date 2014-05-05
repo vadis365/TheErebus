@@ -3,13 +3,15 @@ package erebus.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 
 public class EntityMucusBombPrimed extends Entity {
 	/** How long the fuse is */
-	public int fuse;
+	public int fuse=80;
 	private EntityLivingBase mucusBombPlacedBy;
 
 	public EntityMucusBombPrimed(World world) {
@@ -70,14 +72,18 @@ public class EntityMucusBombPrimed extends Entity {
 			if (!this.worldObj.isRemote) {
 				this.explode();
 			}
+			if (this.worldObj.isRemote) {
+				spawnSonicParticles();
+			}
+			
 		} else {
-			this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
+			this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);	
 		}
 	}
 
 	private void explode() {
-		float f = 4.0F;
-		this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
+		//float f = 4.0F;
+		//this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, f, true);
 	}
 
 	@Override
@@ -98,5 +104,18 @@ public class EntityMucusBombPrimed extends Entity {
 
 	public EntityLivingBase getTntPlacedBy() {
 		return this.mucusBombPlacedBy;
+	}
+	@SideOnly(Side.CLIENT)
+	public void spawnSonicParticles() {
+		for (int a = 0; a < 360; a += 6) {
+			double ang = a * Math.PI / 180D;
+			Erebus.proxy.spawnCustomParticle("repellent", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 0.5D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
+		}
+
+		for (int a = 0; a < 360; a += 4) {
+			double ang = a * Math.PI / 180D;
+			Erebus.proxy.spawnCustomParticle("slime", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 1D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0.1D, MathHelper.cos((float) ang) * 0.3);
+			Erebus.proxy.spawnCustomParticle("slime", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 0.5D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.4, 0D, MathHelper.cos((float) ang) * 0.4);
+		}
 	}
 }
