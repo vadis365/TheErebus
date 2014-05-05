@@ -1,5 +1,6 @@
 package erebus.world.biomes;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import erebus.ModBlocks;
 import erebus.entity.EntityAntlion;
@@ -7,9 +8,7 @@ import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFly;
-import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityScorpion;
-import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
 

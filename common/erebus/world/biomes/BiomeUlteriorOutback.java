@@ -1,6 +1,5 @@
 package erebus.world.biomes;
 import net.minecraft.block.Block;
-import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBotFly;
@@ -11,7 +10,6 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
-import erebus.world.biomes.BiomeBaseErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 
 // @formatter:off

@@ -13,7 +13,6 @@ import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWheatWeevil;
 import erebus.entity.EntityWorkerBee;
-import erebus.world.biomes.BiomeBaseErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
 

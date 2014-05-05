@@ -7,13 +7,10 @@ import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
-import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
-import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
-import erebus.world.biomes.BiomeBaseErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
 
 // @formatter:off

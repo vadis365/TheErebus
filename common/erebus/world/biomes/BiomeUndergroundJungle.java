@@ -1,5 +1,6 @@
 package erebus.world.biomes;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
@@ -11,13 +12,11 @@ import erebus.entity.EntityCentipede;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
-import erebus.entity.EntityMoth;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
-import erebus.world.biomes.BiomeBaseErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
 
 // @formatter:off
