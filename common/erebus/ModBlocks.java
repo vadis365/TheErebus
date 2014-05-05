@@ -45,6 +45,7 @@ import erebus.block.BlockHoneyTreat;
 import erebus.block.BlockInsectRepellent;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
+import erebus.block.BlockMucusBomb;
 import erebus.block.BlockMud;
 import erebus.block.BlockOreFossil;
 import erebus.block.BlockPetrifiedChest;
@@ -89,6 +90,7 @@ import erebus.item.block.ItemBlockLeavesErebus;
 import erebus.item.block.ItemBlockLogErebus1;
 import erebus.item.block.ItemBlockLogErebus2;
 import erebus.item.block.ItemBlockLogErebus3;
+import erebus.item.block.ItemBlockMucusBomb;
 import erebus.item.block.ItemBlockPlanksErebus;
 import erebus.item.block.ItemBlockRedGem;
 import erebus.item.block.ItemBlockSapling;
@@ -128,7 +130,7 @@ public class ModBlocks {
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
 	public static Block velocityBlock, honeyCombBlock, doorAmber, erebusHoneyBlock, honeyTreat, mud, mudBricks, flowerPlanted, jarOHoney;
-	public static Block jadeBlock, altar, glowGemBlock;
+	public static Block jadeBlock, altar, glowGemBlock, mucusBomb;
 
 	// STAIRS, SLABS, WALLS
 	public static Block[] umbercobbleStairs, plankStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab, gneissStairs;
@@ -222,6 +224,7 @@ public class ModBlocks {
 		jadeBlock = new BlockOreStorage(ConfigHandler.jadeBlockID).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("erebus.blockJade").setTextureName("erebus:blockJade");
 		altar = new BlockAltar(ConfigHandler.altarID).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("erebus.altar").setTextureName("stone");
 		glowGemBlock = new BlockGlowGem(ConfigHandler.glowGemBlockID).setUnlocalizedName("erebus.glowGemBlock").setTextureName("erebus:glowGem");
+		mucusBomb = new BlockMucusBomb(ConfigHandler.mucusBombID).setUnlocalizedName("erebus.mucusBomb");
 
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -261,7 +264,7 @@ public class ModBlocks {
 		Erebus.tabErebusBlock.add(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		Erebus.tabErebusBlock.add(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, erebusHoneyBlock, gneiss, mud, mudBricks, jarOHoney);
-		Erebus.tabErebusBlock.add(jadeBlock, altar, glowGemBlock);
+		Erebus.tabErebusBlock.add(jadeBlock, altar, glowGemBlock, mucusBomb);
 		for (Block b : umbercobbleStairs)
 			Erebus.tabErebusBlock.add(b);
 		for (Block b : plankStairs)
@@ -349,6 +352,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(jadeBlock, "erebus.jadeBlock");
 		GameRegistry.registerBlock(altar, "erebus.altar");
 		GameRegistry.registerBlock(glowGemBlock, "erebus.glowgemBlock");
+		GameRegistry.registerBlock(mucusBomb, ItemBlockMucusBomb.class, "erebus.mucusBomb");
 
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			GameRegistry.registerBlock(umbercobbleStairs[i], "erebus.umbercobbleStairs" + i);
