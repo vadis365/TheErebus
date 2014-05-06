@@ -27,7 +27,7 @@ public class RenderWebSling extends Render {
 	public void renderWebSling(EntityWebSling entityWebSling, double x, double y, double z, float yaw, float tick) {
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y + 0.5D, z);
-		GL11.glRotatef(180F, 1F, 0, 0);
+		GL11.glRotatef(0F, 1F, 0, 0);
 		GL11.glRotatef(-90F, 0, 1F, 0);
 		GL11.glScaled(1.0D, 1.0D, 1.0D);
 		bindTexture(TextureMap.locationBlocksTexture);
@@ -37,7 +37,10 @@ public class RenderWebSling extends Render {
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1.0F, 0.0F);
-		blockRenderer.drawCrossedSquares(Block.web, 3, -0.5D, -0.5D, -0.5D, 1.0F);
+		if (entityWebSling.getDataWatcher().getWatchableObjectByte(24) < 2)
+			blockRenderer.drawCrossedSquares(Block.web, 3, -0.5D, -0.5D, -0.5D, 1.0F);
+		else
+			blockRenderer.drawCrossedSquares(Block.fire, 3, -0.5D, -0.5D, -0.5D, 1.0F);
 		tessellator.draw();
 
 		GL11.glPopMatrix();

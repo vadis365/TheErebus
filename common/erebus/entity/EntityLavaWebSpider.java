@@ -2,9 +2,8 @@ package erebus.entity;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -17,6 +16,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 
 public class EntityLavaWebSpider extends EntityMob {
 	private int shouldDo;
@@ -24,6 +26,7 @@ public class EntityLavaWebSpider extends EntityMob {
 	public EntityLavaWebSpider(World world) {
 		super(world);
 		setSize(3F, 1.5F);
+		isImmuneToFire = true;
 	}
 
 	@Override
@@ -40,6 +43,23 @@ public class EntityLavaWebSpider extends EntityMob {
 		if (worldObj.isRemote && worldObj.getWorldTime() % 5 == 0)
 			lavaParticles(worldObj, posX, posY + 1.3D, posZ, rand);
 	}
+	
+	@Override
+    public void onLivingUpdate() {
+		if (rand.nextInt(50) == 0) {
+			int x = MathHelper.floor_double(this.posX);
+			int y = MathHelper.floor_double(this.posY);
+			int z = MathHelper.floor_double(this.posZ);
+			
+			double a = Math.toRadians(renderYawOffset);
+			double offSetX = -Math.sin(a) * -2D;
+			double offSetZ = Math.cos(a) * -2D;
+             
+			if (this.worldObj.getBlockId(x, y, z) == 0 && Block.fire.canPlaceBlockAt(this.worldObj, x + MathHelper.floor_double(offSetX), y, z + MathHelper.floor_double(offSetZ)))
+				this.worldObj.setBlock(x + MathHelper.floor_double(offSetX), y, z + MathHelper.floor_double(offSetZ), Block.fire.blockID);
+         }
+    	super.onLivingUpdate();
+    }
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -84,8 +104,9 @@ public class EntityLavaWebSpider extends EntityMob {
 
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
-		if (distance < 2.0F) {
-			super.attackEntity(entity, distance);
+		if (attackTime <= 0 && distance < 2.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY) {
+			entity.setFire(10);
+			attackTime = 20;
 			attackEntityAsMob(entity);
 		}
 		if (distance > 2.0F && distance < 6.0F && rand.nextInt(10) == 0)
@@ -97,7 +118,7 @@ public class EntityLavaWebSpider extends EntityMob {
 				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
 				motionY = 0.4000000059604645D;
 			}
-		/*if (distance >= 5 & distance < 8.0F)
+		if (distance >= 5 & distance <= 16.0F)
 			if (attackTime == 0) {
 				++shouldDo;
 				if (shouldDo == 1)
@@ -108,16 +129,16 @@ public class EntityLavaWebSpider extends EntityMob {
 					attackTime = 20;
 					shouldDo = 0;
 				}
-				if (shouldDo > 1 && entity instanceof EntityPlayer) {
-					worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
-					for (int var10 = 0; var10 < 1; ++var10) {
-						EntityWebSling var11 = new EntityWebSling(worldObj, this);
-						var11.posY = posY + height / 2.0F + 0.5D;
-						var11.setType((byte) 0);
-						worldObj.spawnEntityInWorld(var11);
+				if (shouldDo > 1) {
+					worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1009, (int) posX, (int) posY, (int) posZ, 0);
+					for (int count = 0; count < 1; ++count) {
+						EntityWebSling websling = new EntityWebSling(worldObj, this);
+						websling.posY = posY + height / 2.0F + 0.5D;
+						websling.setType((byte) 2);
+						worldObj.spawnEntityInWorld(websling);
 					}
 				}
-			}*/
+			}
 	}
 
 	@Override
@@ -148,8 +169,13 @@ public class EntityLavaWebSpider extends EntityMob {
 	
 	@Override
     public int getMaxSpawnedInChunk() {
-        return 3;
+        return 1;
     }
+	
+	@Override
+	public boolean getCanSpawnHere() {
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && worldObj.isMaterialInBB(boundingBox, Material.lava);
+	}
 
 	@Override
 	public boolean isPotionApplicable(PotionEffect potionEffect) {

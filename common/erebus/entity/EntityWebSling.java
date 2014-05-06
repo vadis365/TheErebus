@@ -19,8 +19,8 @@ public class EntityWebSling extends EntityThrowable {
 		setSize(1F, 1F);
 	}
 
-	public EntityWebSling(World world, EntityLiving par2EntityLiving) {
-		super(world, par2EntityLiving);
+	public EntityWebSling(World world, EntityLiving entity) {
+		super(world, entity);
 	}
 
 	public EntityWebSling(World world, double x, double y, double z) {
@@ -36,7 +36,7 @@ public class EntityWebSling extends EntityThrowable {
 		super.entityInit();
 		dataWatcher.addObject(24, new Byte((byte) 0));
 	}
-
+	
 	protected String getWebSlingSplatSound() {
 		return "erebus:webslingsplat";
 	}
@@ -44,25 +44,30 @@ public class EntityWebSling extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
 		if (!worldObj.isRemote) {
-			int var1 = MathHelper.floor_double(posX);
-			int var2 = MathHelper.floor_double(posY);
-			int var3 = MathHelper.floor_double(posZ);
+			int x = MathHelper.floor_double(posX);
+			int y = MathHelper.floor_double(posY);
+			int z = MathHelper.floor_double(posZ);
 
 			if (mop.entityHit != null) {
 				if (type == 0)
-					worldObj.setBlock(var1, var2, var3, Block.web.blockID);
+					worldObj.setBlock(x, y, z, Block.web.blockID);
 				if (type == 1)
-					worldObj.setBlock(var1, var2, var3, ModBlocks.blockWitherWeb.blockID);
-			} else if (mop.entityHit == null && Block.web.canPlaceBlockAt(worldObj, var1, var2, var3)) {
+					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb.blockID);
+				if (type == 2)
+					mop.entityHit.setFire(10);
+			} else if (mop.entityHit == null && Block.web.canPlaceBlockAt(worldObj, x, y, z) || mop.entityHit == null && Block.fire.canPlaceBlockAt(worldObj, x, y, z)) {
 				if (type == 0)
-					worldObj.setBlock(var1, var2, var3, Block.web.blockID);
+					worldObj.setBlock(x, y, z, Block.web.blockID);
 				if (type == 1)
-					worldObj.setBlock(var1, var2, var3, ModBlocks.blockWitherWeb.blockID);
+					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb.blockID);
+				if (type == 2)
+					worldObj.setBlock(x, y, z, Block.fire.blockID);
 			}
 			if (!worldObj.isRemote)
 				setDead();
 		}
-		worldObj.playSoundAtEntity(this, getWebSlingSplatSound(), 1.0F, 1.0F);
+		if (type != 2)
+			worldObj.playSoundAtEntity(this, getWebSlingSplatSound(), 1.0F, 1.0F);
 	}
 
 	@Override

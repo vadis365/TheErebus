@@ -9,6 +9,7 @@ import erebus.entity.EntityBotFly;
 import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFly;
+import erebus.entity.EntityLavaWebSpider;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntitySolifuge;
 import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
@@ -30,6 +31,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityFireAntSoldier.class,30,1,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityAntlion.class,30,1,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityBlackWidow.class,5,1,1));
+		spawnableMonsterList.add(new SpawnEntry(EntityLavaWebSpider.class,300,1,1));
 
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
