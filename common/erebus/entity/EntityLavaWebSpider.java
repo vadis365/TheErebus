@@ -1,5 +1,10 @@
 package erebus.entity;
 
+import java.util.Random;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -32,6 +37,8 @@ public class EntityLavaWebSpider extends EntityMob {
 		super.onUpdate();
 		if (!worldObj.isRemote)
 			setBesideClimbableBlock(isCollidedHorizontally);
+		if (worldObj.isRemote && worldObj.getWorldTime() % 5 == 0)
+			lavaParticles(worldObj, posX, posY + 1.3D, posZ, rand);
 	}
 
 	@Override
@@ -186,5 +193,10 @@ public class EntityLavaWebSpider extends EntityMob {
 				addPotionEffect(new PotionEffect(i, Integer.MAX_VALUE));
 		}
 		return (EntityLivingData) entityLivingData1;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void lavaParticles(World world, double x, double y, double z, Random rand) {
+		Erebus.proxy.spawnCustomParticle("lava", worldObj, x, y, z, 0F, 0F, 0F);
 	}
 }

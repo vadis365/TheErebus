@@ -3,6 +3,7 @@ package erebus.core.proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -313,6 +314,9 @@ public class ClientProxy extends CommonProxy {
 		
 		if (particleName.equals("portal"))
 			fx = new EntityPortalFX(world, x, y, z, vecX, vecY, vecZ);
+		
+		if (particleName.equals("lava"))
+			fx = new EntityLavaFX(world, x, y, z);
 		
 		if (particleName.equals("slime"))
 			fx = new EntityBreakingFX(world, x, y, z, vecX, vecY, vecZ, Item.slimeBall, 0); 
