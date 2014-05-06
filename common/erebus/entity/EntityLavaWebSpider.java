@@ -13,14 +13,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityScytodes extends EntityMob {
+public class EntityLavaWebSpider extends EntityMob {
 	private int shouldDo;
-	public int skin = rand.nextInt(4);
 
-	public EntityScytodes(World world) {
+	public EntityLavaWebSpider(World world) {
 		super(world);
 		setSize(3F, 1.5F);
-		isImmuneToFire = true;
 	}
 
 	@Override
@@ -39,10 +37,8 @@ public class EntityScytodes extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.800000011920929D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(32.0D);
 	}
 
 	@Override
