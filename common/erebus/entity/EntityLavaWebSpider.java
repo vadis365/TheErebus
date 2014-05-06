@@ -38,7 +38,7 @@ public class EntityLavaWebSpider extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.800000011920929D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1D);
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class EntityLavaWebSpider extends EntityMob {
 				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
 				motionY = 0.4000000059604645D;
 			}
-		if (distance >= 5 & distance < 8.0F)
+		/*if (distance >= 5 & distance < 8.0F)
 			if (attackTime == 0) {
 				++shouldDo;
 				if (shouldDo == 1)
@@ -110,7 +110,7 @@ public class EntityLavaWebSpider extends EntityMob {
 						worldObj.spawnEntityInWorld(var11);
 					}
 				}
-			}
+			}*/
 	}
 
 	@Override
