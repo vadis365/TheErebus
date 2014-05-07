@@ -14,6 +14,7 @@ public class TileEntityJarOHoney extends TileEntityGlowingJar {
 
 	public static final int HONEY_MAX_AMOUNT = 4000;
 	public final FluidTank tank = new FluidTank(ModBlocks.erebusHoney, 0, HONEY_MAX_AMOUNT);
+	private String owner = "Boo Boo";
 
 	public int addHoney(int amount) {
 		int result = tank.fill(FluidRegistry.getFluidStack("honey", amount), true);
@@ -38,20 +39,32 @@ public class TileEntityJarOHoney extends TileEntityGlowingJar {
 		PacketDispatcher.sendPacketToAllPlayers(getDescriptionPacket());
 	}
 
+	public void setOwner(String name) {
+		owner = name;
+		if (!worldObj.isRemote)
+			PacketDispatcher.sendPacketToAllPlayers(getDescriptionPacket());
+	}
+
+	public String getOwnerName() {
+		return owner;
+	}
+
 	@Override
 	public Packet getDescriptionPacket() {
-		return PacketTypeHandler.populatePacket(new PacketJarOHoney(xCoord, yCoord, zCoord, tank.getFluid()));
+		return PacketTypeHandler.populatePacket(new PacketJarOHoney(xCoord, yCoord, zCoord, tank.getFluid(), owner));
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
 		tank.readFromNBT(data);
+		owner = data.getString("owner");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound data) {
 		super.writeToNBT(data);
 		tank.writeToNBT(data);
+		data.setString("owner", owner);
 	}
 }

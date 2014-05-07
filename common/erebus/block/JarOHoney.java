@@ -1,5 +1,6 @@
 package erebus.block;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -21,6 +22,16 @@ public class JarOHoney extends BlockGlowingJar {
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityJarOHoney();
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
+		TileEntityJarOHoney tile = Utils.getTileEntity(world, x, y, z, TileEntityJarOHoney.class);
+		if (tile != null)
+			if (player instanceof EntityPlayer)
+				tile.setOwner(((EntityPlayer) player).getCommandSenderName());
+			else
+				tile.setOwner("Boo Boo");
 	}
 
 	@Override

@@ -15,17 +15,19 @@ public class PacketJarOHoney extends CustomPacket {
 
 	private int x, y, z;
 	private FluidStack fluid;
+	private String name;
 
 	public PacketJarOHoney() {
 		super(PacketTypeHandler.JAR_O_HONEY);
 	}
 
-	public PacketJarOHoney(int x, int y, int z, FluidStack fluid) {
+	public PacketJarOHoney(int x, int y, int z, FluidStack fluid, String name) {
 		this();
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.fluid = fluid;
+		this.name = name;
 	}
 
 	@Override
@@ -34,6 +36,7 @@ public class PacketJarOHoney extends CustomPacket {
 		y = data.readInt();
 		z = data.readInt();
 		fluid = PacketTypeHandler.readFluidStack(data);
+		name = data.readUTF();
 	}
 
 	@Override
@@ -42,12 +45,15 @@ public class PacketJarOHoney extends CustomPacket {
 		dos.writeInt(y);
 		dos.writeInt(z);
 		PacketTypeHandler.writeFluidStack(fluid, dos);
+		dos.writeUTF(name);
 	}
 
 	@Override
 	public void execute(World world, EntityPlayer player) {
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
-		if (tile instanceof TileEntityJarOHoney)
+		if (tile instanceof TileEntityJarOHoney) {
 			((TileEntityJarOHoney) tile).tank.setFluid(fluid);
+			((TileEntityJarOHoney) tile).setOwner(name);
+		}
 	}
 }

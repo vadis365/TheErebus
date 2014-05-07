@@ -56,7 +56,7 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 				GL11.glDisable(3042);
 				GL11.glPopMatrix();
 			}
-			renderNameTag("Boo Boo", x, y, z);
+			renderNameTag(((TileEntityJarOHoney) tile).getOwnerName(), x, y, z);
 		} else {
 			EntityItem ghostEntityItem = new EntityItem(tile.worldObj);
 			ghostEntityItem.hoverStart = 0.0F;
