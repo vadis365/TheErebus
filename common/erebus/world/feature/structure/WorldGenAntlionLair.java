@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.entity.EntityAntlion;
+import erebus.entity.EntityAntlionMiniBoss;
 import erebus.item.ItemErebusMaterial.DATA;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
@@ -114,8 +114,7 @@ public class WorldGenAntlionLair extends WorldGenerator{
 		TileEntityChest chest=(TileEntityChest)world.getBlockTileEntity(x,y-7,z);
 		if (chest!=null)LootUtil.generateLoot(chest,rand,chestLoot,10,14);
 
-		EntityAntlion antlion=new EntityAntlion(world);
-		antlion.setIsBoss(true);
+		EntityAntlionMiniBoss antlion=new EntityAntlionMiniBoss (world);
 		antlion.setLocationAndAngles(x,y-5,z,rand.nextFloat()*360F,0F);
 		antlion.forceSpawn=true;
 		world.spawnEntityInWorld(antlion);

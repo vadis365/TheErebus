@@ -11,14 +11,14 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelAntlion;
-import erebus.entity.EntityAntlion;
+import erebus.entity.EntityAntlionMiniBoss;
 
 @SideOnly(Side.CLIENT)
-public class RenderAntlion extends RenderLiving {
+public class RenderAntlionMiniBoss extends RenderLiving {
 
-	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/antlion.png");;
+	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/antlionSandstone.png");
 
-	public RenderAntlion(ModelAntlion model, float shadowSize) {
+	public RenderAntlionMiniBoss(ModelAntlion model, float shadowSize) {
 		super(model, shadowSize);
 	}
 
@@ -29,16 +29,16 @@ public class RenderAntlion extends RenderLiving {
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving((EntityAntlion) entity, x, y, z, rotationYaw, partialTickTime);
+		super.doRenderLiving((EntityAntlionMiniBoss) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		scaleAntlion((EntityAntlion) entityliving, f);
+		scaleAntlionMiniBoss((EntityAntlionMiniBoss) entityliving, f);
 	}
 
-	protected void scaleAntlion(EntityAntlion entityAntlion, float f) {
-		float f1 = 0.75F;
+	protected void scaleAntlionMiniBoss(EntityAntlionMiniBoss entityAntlionMiniBoss, float f) {
+		float f1 = 1.0F;
 		shadowSize = f1;
 		GL11.glScalef(f1, f1, f1);
 	}

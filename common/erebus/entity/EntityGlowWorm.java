@@ -55,7 +55,8 @@ public class EntityGlowWorm extends EntityCreature {
         return 2;
     }
 
-	public boolean canDeSpawn() {
+	@Override
+	protected boolean canDespawn() {
 		return false;
 	}
 

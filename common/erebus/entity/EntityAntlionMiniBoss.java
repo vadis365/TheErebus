@@ -13,19 +13,19 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ItemErebusMaterial.DATA;
 
-public class EntityAntlion extends EntityMob {
+public class EntityAntlionMiniBoss extends EntityMob {
 
-	public EntityAntlion(World world) {
+	public EntityAntlionMiniBoss(World world) {
 		super(world);
-		setSize(2.0F, 0.9F);
+		setSize(2.75F, 1.2F);
 		isImmuneToFire = true;
-		experienceValue = 17;
+		experienceValue = 35;
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.7D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -33,15 +33,15 @@ public class EntityAntlion extends EntityMob {
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
-
+	
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.75D);	
 	}
 
 	@Override
@@ -51,7 +51,12 @@ public class EntityAntlion extends EntityMob {
 
 	@Override
 	public int getTotalArmorValue() {
-		return 8;
+		return 15;
+	}
+	
+	@Override
+	protected boolean canDespawn() {
+		return false;
 	}
 
 	@Override
@@ -91,12 +96,8 @@ public class EntityAntlion extends EntityMob {
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
-		return isOnSand() && super.getCanSpawnHere();
-	}
-
-	public boolean isOnSand() {
-		return worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == Block.sand.blockID;
+	protected void dropRareDrop(int par1) {
+		dropItem(ModBlocks.ghostSand.blockID, 4);
 	}
 
 	@Override
@@ -106,11 +107,10 @@ public class EntityAntlion extends EntityMob {
 			entityToAttack = findPlayerToAttack();
 		else
 			entityToAttack = null;
-
-		if (!worldObj.isRemote && getEntityToAttack() == null && isOnSand())
-			yOffset = -1;
-		else
-			yOffset = 0;
+		int difficulty = worldObj.difficultySetting;
+			if (difficulty == 0)
+				worldObj.difficultySetting = 1;
+			worldObj.difficultySetting = difficulty;
 	}
 
 	@Override

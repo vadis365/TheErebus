@@ -408,6 +408,7 @@ entity.Erebus.Woodlouse.name=Woodlouse
 entity.Erebus.Cicada.name=Cicada
 entity.Erebus.FireAntSoldier.name=Fire Ant Soldier
 entity.Erebus.LavaWebSpider.name=Lava Web Spider
+entity.Erebus.AntlionMiniBoss.name=Antlion Mini Boss
 
 #Fluids
 fluid.erebus.honey=Honey
