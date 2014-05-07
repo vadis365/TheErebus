@@ -15,29 +15,27 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 
 public class EntityMucusBombPrimed extends Entity {
-	/** How long the fuse is */
-	public int fuse=80;
-	private EntityLivingBase mucusBombPlacedBy;
+
+	public int fuse = 80;
 
 	public EntityMucusBombPrimed(World world) {
 		super(world);
-		this.preventEntitySpawning = true;
-		this.setSize(0.98F, 0.98F);
-		this.yOffset = this.height / 2.0F;
+		setSize(0.98F, 0.98F);
+		yOffset = height / 2.0F;
+		preventEntitySpawning = true;
 	}
 
-	public EntityMucusBombPrimed(World world, double x, double y, double z, EntityLivingBase entity) {
+	public EntityMucusBombPrimed(World world, double x, double y, double z) {
 		this(world);
-		this.setPosition(x, y, z);
+		setPosition(x, y, z);
 		float f = (float) (Math.random() * Math.PI * 2.0D);
-		this.motionX = (double) (-((float) Math.sin((double) f)) * 0.02F);
-		this.motionY = 0.20000000298023224D;
-		this.motionZ = (double) (-((float) Math.cos((double) f)) * 0.02F);
-		this.fuse = 80;
-		this.prevPosX = x;
-		this.prevPosY = y;
-		this.prevPosZ = z;
-		this.mucusBombPlacedBy = entity;
+		motionX = -((float) Math.sin(f)) * 0.02F;
+		motionY = 0.20000000298023224D;
+		motionZ = -((float) Math.cos(f)) * 0.02F;
+		fuse = 80;
+		prevPosX = x;
+		prevPosY = y;
+		prevPosZ = z;
 	}
 
 	@Override
@@ -51,39 +49,36 @@ public class EntityMucusBombPrimed extends Entity {
 
 	@Override
 	public boolean canBeCollidedWith() {
-		return !this.isDead;
+		return !isDead;
 	}
 
 	@Override
 	public void onUpdate() {
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
-		this.motionY -= 0.03999999910593033D;
-		this.moveEntity(this.motionX, this.motionY, this.motionZ);
-		this.motionX *= 0.9800000190734863D;
-		this.motionY *= 0.9800000190734863D;
-		this.motionZ *= 0.9800000190734863D;
+		prevPosX = posX;
+		prevPosY = posY;
+		prevPosZ = posZ;
+		motionY -= 0.03999999910593033D;
+		moveEntity(motionX, motionY, motionZ);
+		motionX *= 0.9800000190734863D;
+		motionY *= 0.9800000190734863D;
+		motionZ *= 0.9800000190734863D;
 
-		if (this.onGround) {
-			this.motionX *= 0.699999988079071D;
-			this.motionZ *= 0.699999988079071D;
-			this.motionY *= -0.5D;
+		if (onGround) {
+			motionX *= 0.699999988079071D;
+			motionZ *= 0.699999988079071D;
+			motionY *= -0.5D;
 		}
 
-		if (this.fuse-- <= 0) {
-			this.setDead();
+		if (fuse-- <= 0) {
+			setDead();
 
-			if (!this.worldObj.isRemote) {
-				this.explode();
-			}
-			if (this.worldObj.isRemote) {
+			if (!worldObj.isRemote)
+				explode();
+			if (worldObj.isRemote)
 				spawnGooeyTypeParticles();
-			}
-			
-		} else {
-			this.worldObj.spawnParticle("smoke", this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);	
-		}
+
+		} else
+			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, 0.0D, 0.0D, 0.0D);
 	}
 
 	private void explode() {
@@ -92,9 +87,9 @@ public class EntityMucusBombPrimed extends Entity {
 			Entity entity = (Entity) list.get(i);
 			if (entity != null)
 				if (entity instanceof EntityLivingBase) {
-					entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 1D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) *  2.0D);
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 10*20, 3));
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 10*20, 0));
+					entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 1D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 2.0D);
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 10 * 20, 3));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 10 * 20, 0));
 					worldObj.playSoundAtEntity(this, "erebus:beetlelarvasplat", 1.0F, 0.5F);
 					worldObj.playSoundAtEntity(this, "erebus:squish", 1.0F, 0.7F);
 				}
@@ -103,12 +98,12 @@ public class EntityMucusBombPrimed extends Entity {
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
-		nbt.setByte("Fuse", (byte) this.fuse);
+		nbt.setByte("Fuse", (byte) fuse);
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
-		this.fuse = nbt.getByte("Fuse");
+		fuse = nbt.getByte("Fuse");
 	}
 
 	@Override
@@ -117,20 +112,17 @@ public class EntityMucusBombPrimed extends Entity {
 		return 0.0F;
 	}
 
-	public EntityLivingBase getTntPlacedBy() {
-		return this.mucusBombPlacedBy;
-	}
 	@SideOnly(Side.CLIENT)
 	public void spawnGooeyTypeParticles() {
 		for (int a = 0; a < 360; a += 6) {
 			double ang = a * Math.PI / 180D;
-			Erebus.proxy.spawnCustomParticle("repellent", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 0.5D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
+			Erebus.proxy.spawnCustomParticle("repellent", worldObj, posX + -MathHelper.sin((float) ang) * 1.0, posY + 0.5D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
 		}
 
 		for (int a = 0; a < 360; a += 4) {
 			double ang = a * Math.PI / 180D;
-			Erebus.proxy.spawnCustomParticle("slime", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 1D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0.1D, MathHelper.cos((float) ang) * 0.3);
-			Erebus.proxy.spawnCustomParticle("slime", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 0.5D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.4, 0D, MathHelper.cos((float) ang) * 0.4);
+			Erebus.proxy.spawnCustomParticle("slime", worldObj, posX + -MathHelper.sin((float) ang) * 1.0, posY + 1D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0.1D, MathHelper.cos((float) ang) * 0.3);
+			Erebus.proxy.spawnCustomParticle("slime", worldObj, posX + -MathHelper.sin((float) ang) * 1.0, posY + 0.5D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.4, 0D, MathHelper.cos((float) ang) * 0.4);
 		}
 	}
 }
