@@ -2,6 +2,7 @@ package erebus.world.biomes;
 import net.minecraft.block.Block;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
@@ -32,6 +33,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,18,4,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityScorpion.class,10,4,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,1,4));
+		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityMosquito.class,60,1,3));
 
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));

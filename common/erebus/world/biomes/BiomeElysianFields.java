@@ -3,6 +3,7 @@ import erebus.ModBiomes;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBotFly;
+import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityCicada;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
@@ -45,6 +46,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityDragonfly.class,5,1,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityVelvetWorm.class,10,1,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
+		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
 	}
 	
 	@Override

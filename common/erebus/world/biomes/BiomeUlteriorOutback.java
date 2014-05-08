@@ -4,6 +4,7 @@ import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityCentipede;
+import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
@@ -31,6 +32,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityCentipede.class,10,4,8));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,8,4,8));
+		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
 		
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityRhinoBeetle.class,5,1,1));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));

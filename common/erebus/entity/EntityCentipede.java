@@ -31,7 +31,6 @@ public class EntityCentipede extends EntityMob {
 		tasks.addTask(3, new EntityAIWander(this, 0.3D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-
 	}
 
 	@Override
