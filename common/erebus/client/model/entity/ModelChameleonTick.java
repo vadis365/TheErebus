@@ -5,6 +5,10 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
+import org.lwjgl.opengl.GL11;
+
+import erebus.entity.EntityChameleonTick;
+
 public class ModelChameleonTick extends ModelBase {
 	ModelRenderer LBL1;
 	ModelRenderer LBL2;
@@ -181,6 +185,11 @@ public class ModelChameleonTick extends ModelBase {
 	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		EntityChameleonTick chameleonTick = (EntityChameleonTick) entity;
+		float x = chameleonTick.animation;
+		GL11.glPushMatrix();
+		GL11.glTranslated(0F, 1.0F - 0.1F * x, 0F);
+		GL11.glScalef(0.1F * x, 0.1F * x, 0.1F * x);
 		LBL1.render(unitPixel);
 		LBL2.render(unitPixel);
 		LBL3.render(unitPixel);
@@ -211,6 +220,7 @@ public class ModelChameleonTick extends ModelBase {
 		Rmand.render(unitPixel);
 		Lmand.render(unitPixel);
 		HeadFront.render(unitPixel);
+		GL11.glPopMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

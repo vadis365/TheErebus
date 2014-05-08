@@ -5,7 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -20,6 +20,8 @@ import erebus.core.helper.Utils;
 public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditionalSpawnData {
 
 	public int blockID, blockMeta;
+	public int animation;
+	public boolean active = false;
 	
 	public EntityChameleonTick(World world) {
 		super(world);
@@ -101,6 +103,24 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 			blockID = newBlockID;
 			blockMeta = newBlockMeta;
 		}
+		
+		if (findPlayerToAttack() != null) {
+			entityToAttack = findPlayerToAttack();
+			animation++;
+			if(animation >=10)
+				animation = 10;
+		} else {
+			entityToAttack = null;
+			animation--;
+			if(animation <=0)
+				animation = 0;
+			}
+	}
+	
+	@Override
+	protected Entity findPlayerToAttack() {
+		EntityPlayer var1 = worldObj.getClosestVulnerablePlayerToEntity(this, 8.0D);
+		return var1;
 	}
 	
 	@Override
