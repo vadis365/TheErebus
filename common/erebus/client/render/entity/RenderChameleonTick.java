@@ -19,8 +19,8 @@ import erebus.entity.EntityChameleonTick;
 public class RenderChameleonTick extends RenderLiving {
 
 
-	public RenderChameleonTick(ModelChameleonTick model, float scale) {
-		super(model, scale);
+	public RenderChameleonTick(ModelChameleonTick model, float shadowsize) {
+		super(model, shadowsize);
 	}
 
 	public void renderChameleonTick(EntityChameleonTick entity, double x, double y, double z, float rotationYaw, float partialTickTime) {

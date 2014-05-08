@@ -97,7 +97,7 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 		int newBlockID = worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(posY)-1, MathHelper.floor_double(posZ));
 		int newBlockMeta = worldObj.getBlockMetadata(MathHelper.floor_double(posX), MathHelper.floor_double(posY)-1, MathHelper.floor_double(posZ));
 		
-		if (onGround && newBlockID !=0 && newBlockID != blockID) {
+		if (onGround && newBlockID != 0 && newBlockID != blockID) {
 			blockID = newBlockID;
 			blockMeta = newBlockMeta;
 		}
@@ -111,13 +111,7 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		boolean atk = false;
-		if (super.attackEntityAsMob(entity))
-			if (entity instanceof EntityMob)
-				atk = true;
-			else
-				atk = false;
-		return atk;
+		return super.attackEntityAsMob(entity);
 	}
 
 
