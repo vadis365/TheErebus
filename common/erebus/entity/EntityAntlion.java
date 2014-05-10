@@ -2,6 +2,7 @@ package erebus.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -27,18 +28,20 @@ public class EntityAntlion extends EntityMob {
 		isImmuneToFire = true;
 		experienceValue = 17;
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.7D, false));
+		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityLivingBase.class, 0.7D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(3, new EntityAIWander(this, 0.7D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityFireAnt.class, 0, true));
+		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityFireAntSoldier.class, 0, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(35.0D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);

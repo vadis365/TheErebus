@@ -25,7 +25,7 @@ public class EntityFireAntSoldier extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.8D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(30.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
 	}
