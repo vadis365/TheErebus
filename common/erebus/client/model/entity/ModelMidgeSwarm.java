@@ -220,6 +220,8 @@ public class ModelMidgeSwarm extends ModelBase {
 		AB2.render(unitPixel);
 		AB3.render(unitPixel);
 		AB4.render(unitPixel);
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
 		WingL.render(unitPixel);
 		WingL2.render(unitPixel);
 		WingL3.render(unitPixel);
@@ -228,6 +230,8 @@ public class ModelMidgeSwarm extends ModelBase {
 		WingR2.render(unitPixel);
 		WingR3.render(unitPixel);
 		WingR4.render(unitPixel);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glPopMatrix();
 		MidWing.render(unitPixel);
 	}
 
