@@ -42,6 +42,7 @@ import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
+import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntitySporeling;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTitanBeetle;
@@ -107,6 +108,7 @@ public class ModEntities {
 		EntityList.stringToClassMapping.put("LavaWebSpider - Erebus", EntityLavaWebSpider.class);
 		EntityList.stringToClassMapping.put("AntlionMiniBoss - Erebus", EntityAntlionMiniBoss.class);
 		EntityList.stringToClassMapping.put("ChameleonTick - Erebus", EntityChameleonTick.class);
+		EntityList.stringToClassMapping.put("SolifugeSmall - Erebus", EntitySolifugeSmall.class);
 		
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "BeetleLarva", -1251634, -13032944);
@@ -137,7 +139,7 @@ public class ModEntities {
 		registerEntity(25, EntityDragonfly.class, "Dragonfly", 894731, 000000);
 		registerEntity(26, EntityBloodSnail.class, "BloodSnail", 000000, 000000);
 		registerEntity(27, EntityTitanBeetle.class, "TitanBeetle", 000000, 000000);
-		registerEntity(28, EntityBotFlyLarva.class, "BotFlyLarva", -6750208, -13165534);
+		registerEntity(28, EntityBotFlyLarva.class, "BotFlyLarva");
 		registerEntity(29, EntitySporeling.class, "Sporeling", 0xFFFFFF, 0xFF0000);
 		registerEntity(30, EntityWheatWeevil.class, "WheatWeevil", 0x000000, 0xFFA200);
 		registerEntity(31, EntityWoodlouse.class, "Woodlouse", 0x747474, 0x222222);
@@ -146,6 +148,7 @@ public class ModEntities {
 		registerEntity(34, EntityLavaWebSpider.class, "LavaWebSpider", 0xFF0000, 0x06B900);
 		registerEntity(35, EntityAntlionMiniBoss.class, "AntlionMiniBoss", 0x000000, 0xFFFFFF);
 		registerEntity(36, EntityChameleonTick.class, "ChameleonTick", 894731, 000000);
+		registerEntity(37, EntitySolifugeSmall.class, "SolifugeSmall");
 		
 		registerEntity(50, EntityAnimatedBlock.class, "AnimatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "AnimatedChest");

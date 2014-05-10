@@ -410,6 +410,7 @@ entity.Erebus.FireAntSoldier.name=Fire Ant Soldier
 entity.Erebus.LavaWebSpider.name=Lava Web Spider
 entity.Erebus.AntlionMiniBoss.name=Antlion Mini Boss
 entity.Erebus.ChameleonTick.name=Chameleon Tick
+entity.Erebus.SolifugeSmall.name=Solifuge Small
 
 #Fluids
 fluid.erebus.honey=Honey

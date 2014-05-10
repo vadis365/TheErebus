@@ -11,39 +11,39 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelSolifuge;
-import erebus.entity.EntitySolifuge;
+import erebus.entity.EntitySolifugeSmall;
 
 @SideOnly(Side.CLIENT)
-public class RenderSolifuge extends RenderLiving {
+public class RenderSolifugeSmall extends RenderLiving {
 
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/solifuge.png");
 
-	public RenderSolifuge() {
+	public RenderSolifugeSmall() {
 		super(new ModelSolifuge(), 0.5F);
 
 	}
 
-	public void renderSolifuge(EntitySolifuge entitySolifuge, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entitySolifuge, x, y, z, rotationYaw, partialTickTime);
+	public void renderSolifugeSmall(EntitySolifugeSmall entitySolifugeSmall, double x, double y, double z, float rotationYaw, float partialTickTime) {
+		super.doRenderLiving(entitySolifugeSmall, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
 	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderSolifuge((EntitySolifuge) entityLiving, x, y, z, rotationYaw, partialTickTime);
+		renderSolifugeSmall((EntitySolifugeSmall) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderSolifuge((EntitySolifuge) entity, x, y, z, rotationYaw, partialTickTime);
+		renderSolifugeSmall((EntitySolifugeSmall) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 	
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		scaleSolifuge((EntitySolifuge) entityliving, f);
+		scaleSolifugeSmall((EntitySolifugeSmall) entityliving, f);
 	}
 
-	protected void scaleSolifuge(EntitySolifuge entitySolifuge, float f) {
-		float f1 = 1F;
+	protected void scaleSolifugeSmall(EntitySolifugeSmall entitySolifugeSmall, float f) {
+		float f1 = 0.5F;
 		shadowSize = f1;
 		GL11.glScalef(f1, f1, f1);
 	}
