@@ -21,7 +21,7 @@ import erebus.item.ItemErebusMaterial.DATA;
 public class EntityBlackWidow extends EntityMob {
 
 	private int shouldDo;
-	Class[] preys = { EntityFly.class, EntityBotFly.class };
+	Class[] preys = { EntityFly.class, EntityBotFly.class, EntityMidgeSwarm.class };
 
 	public EntityBlackWidow(World world) {
 		super(world);
