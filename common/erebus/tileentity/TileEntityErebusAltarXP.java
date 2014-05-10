@@ -2,6 +2,7 @@ package erebus.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import erebus.Erebus;
 import erebus.ModBlocks;
 
 public class TileEntityErebusAltarXP extends TileEntityErebusAltar {
@@ -39,13 +40,13 @@ public class TileEntityErebusAltarXP extends TileEntityErebusAltar {
 			double d0 = x + 0.53125F;
 			double d1 = y + 1.25F;
 			double d2 = z + 0.53125F;
-			world.spawnParticle("cloud", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

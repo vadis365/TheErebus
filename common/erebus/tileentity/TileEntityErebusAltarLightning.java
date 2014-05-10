@@ -8,6 +8,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.entity.EntityMobBlock;
 import erebus.entity.EntityUmberGolem;
@@ -55,20 +56,20 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
 			double d0 = x + 0.53125F;
 			double d1 = y + 1.25F;
 			double d2 = z + 0.53125F;
-			world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("smoke", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("smoke", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("smoke", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("smoke", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("smoke", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("smoke", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("smoke", world, d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("flame", world, d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("smoke", world, d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("flame", world, d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("flame", world, d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("flame", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

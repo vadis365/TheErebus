@@ -4,6 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 import erebus.ModBlocks;
 
 public class TileEntityErebusAltarRepair extends TileEntityErebusAltar {
@@ -44,13 +45,13 @@ public class TileEntityErebusAltarRepair extends TileEntityErebusAltar {
 			double d0 = x + 0.53125F;
 			double d1 = y + 1.25F;
 			double d2 = z + 0.53125F;
-			world.spawnParticle("cloud", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("cloud", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -83,11 +84,11 @@ public class TileEntityErebusAltarRepair extends TileEntityErebusAltar {
 		double d0 = x + 0.53125F;
 		double d1 = y + 1.5F;
 		double d2 = z + 0.53125F;
-		world.spawnParticle("enchantmenttable", d0, d1, d2, 0.5D, 0.0D, -0.5D);
-		world.spawnParticle("enchantmenttable", d0, d1, d2, -0.5D, 0.0D, 0.5D);
-		world.spawnParticle("enchantmenttable", d0, d1, d2, -0.5D, 0.0D, -0.5D);
-		world.spawnParticle("enchantmenttable", d0, d1, d2, 0.5D, 0.0D, 0.5D);
-		world.spawnParticle("portal", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+		Erebus.proxy.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, 0.5D, 0.0D, -0.5D);
+		Erebus.proxy.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, -0.5D, 0.0D, 0.5D);
+		Erebus.proxy.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, -0.5D, 0.0D, -0.5D);
+		Erebus.proxy.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, 0.5D, 0.0D, 0.5D);
+		Erebus.proxy.spawnCustomParticle("portal", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
 	}
 
 	@Override

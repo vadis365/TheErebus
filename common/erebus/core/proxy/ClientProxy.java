@@ -2,9 +2,14 @@ package erebus.core.proxy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityBreakingFX;
+import net.minecraft.client.particle.EntityCloudFX;
+import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityFlameFX;
+import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.client.particle.EntityPortalFX;
+import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -321,6 +326,21 @@ public class ClientProxy extends CommonProxy {
 		
 		if (particleName.equals("portal"))
 			fx = new EntityPortalFX(world, x, y, z, vecX, vecY, vecZ);
+		
+		if (particleName.equals("cloud"))
+			fx = new EntityCloudFX(world, x, y, z, vecX, vecY, vecZ);
+		
+		if (particleName.equals("heart"))
+			fx = new EntityHeartFX(world, x, y, z, vecX, vecY, vecZ);
+		
+		if (particleName.equals("smoke"))
+			fx = new EntitySmokeFX(world, x, y, z, vecX, vecY, vecZ);
+		
+		if (particleName.equals("flame"))
+			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
+		
+		if (particleName.equals("enchantmenttable"))
+			fx = new EntityEnchantmentTableParticleFX(world, x, y, z, vecX, vecY, vecZ);
 		
 		if (particleName.equals("lava"))
 			fx = new EntityLavaFX(world, x, y, z);

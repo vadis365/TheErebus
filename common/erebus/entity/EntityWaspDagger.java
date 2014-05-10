@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.Erebus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -33,7 +34,7 @@ public class EntityWaspDagger extends EntityThrowable {
 			if (isBurning() && !(MovingObjectPosition.entityHit instanceof EntityEnderman))
 				MovingObjectPosition.entityHit.setFire(5);
 			for (int i = 0; i < 8; i++)
-				worldObj.spawnParticle("reddust", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+				Erebus.proxy.spawnCustomParticle("reddust", worldObj, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 			if (!worldObj.isRemote)
 				setDead();
 		}
