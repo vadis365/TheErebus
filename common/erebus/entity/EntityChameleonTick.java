@@ -18,7 +18,8 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import erebus.core.helper.Utils;
+import erebus.ModItems;
+import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditionalSpawnData {
 
@@ -31,7 +32,7 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 	public EntityChameleonTick(World world) {
 		super(world);
 		setSize(1.0F, 1.5F);
-		setBlock(Block.stone.blockID, 0);
+		setBlock(Block.grass.blockID, 0);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
@@ -92,20 +93,17 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 	}
 */
 	@Override
-	protected int getDropItemId() {
-		return 0;
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.camoPowder.ordinal()), 0.0F);
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!worldObj.isRemote && isDead)
-			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(Block.blocksList[blockID], 1, blockMeta));
+		int newBlockID = worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
+		int newBlockMeta = worldObj.getBlockMetadata(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
 		
-		int newBlockID = worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(posY)-1, MathHelper.floor_double(posZ));
-		int newBlockMeta = worldObj.getBlockMetadata(MathHelper.floor_double(posX), MathHelper.floor_double(posY)-1, MathHelper.floor_double(posZ));
-		
-		if (onGround && newBlockID != 0 && newBlockID != blockID) {
+		if (onGround && newBlockID != 0 && newBlockID != blockID && worldObj.doesBlockHaveSolidTopSurface(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ))) {
 			blockID = newBlockID;
 			blockMeta = newBlockMeta;
 		}
