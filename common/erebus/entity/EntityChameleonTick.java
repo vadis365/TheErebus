@@ -31,7 +31,7 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 
 	public EntityChameleonTick(World world) {
 		super(world);
-		setSize(1.0F, 1.5F);
+		setSize(1.0F, 1.0F);
 		setBlock(Block.grass.blockID, 0);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
