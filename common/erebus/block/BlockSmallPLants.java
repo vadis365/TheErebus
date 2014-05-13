@@ -19,12 +19,12 @@ public class BlockSmallPLants extends BlockMushroom {
 
 	public static final String[] iconPaths = new String[] {
 		"bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "dutchCapShroom", "cattail",
-		"desertShrub", "hanger", "hangerSeed", "mireCoral", "nettle", "nettleFlowered", "swampPlant" 
+		"desertShrub", "hanger", "hangerSeed", "mireCoral", "nettle", "nettleFlowered", "swampPlant", "fireBloom" 
 	};
 	
 	public static final int
 		dataBulbCappedShroom = 0, dataMushroom1 = 1, dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4, dataCattail = 5,
-		dataDesertShrub = 6, dataHanger = 7, dataHangerSeed = 8, dataMireCoral = 9, dataNettle = 10, dataNettleFlowered = 11, dataSwampPlant = 12;
+		dataDesertShrub = 6, dataHanger = 7, dataHangerSeed = 8, dataMireCoral = 9, dataNettle = 10, dataNettleFlowered = 11, dataSwampPlant = 12, dataFireBloom = 13;
 	
 	public static final Icon[] icons = new Icon[iconPaths.length];
 
@@ -90,6 +90,10 @@ public class BlockSmallPLants extends BlockMushroom {
 		case 12:
 			widthReduced = 0.0625F;
 			height = 0.4375F;
+			break;
+		case 13:
+			widthReduced = 0.1875F;
+			height = 1F;
 			break;
 		}
 		setBlockBounds(0F + widthReduced, 0.0F, 0F + widthReduced, 1F - widthReduced, height, 1F - widthReduced);
