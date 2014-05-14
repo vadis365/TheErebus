@@ -1,5 +1,8 @@
 package erebus.world.feature.decoration;
 import java.util.Random;
+
+import erebus.ModBlocks;
+import erebus.block.BlockDoubleHeightPlant;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.EnumSkyBlock;
@@ -141,6 +144,23 @@ public class WorldGenPonds extends WorldGenerator{
 			if ((id == Block.grass.blockID || id == Block.sand.blockID) && Block.reed.canPlaceBlockAt(world,xx,yy,zz)){
 				for(int height = 0; height < 1+rand.nextInt(7); height++){
 					if (world.isAirBlock(xx,yy+height,zz))world.setBlock(xx,yy+height,zz,Block.reed.blockID);
+					else break;
+				}
+			}
+		}
+		
+		for(int bullRushAttempt = 0, xx, yy, zz, id; bullRushAttempt < 150; bullRushAttempt++){
+			xx = x+rand.nextInt(16);
+			yy = y+3+rand.nextInt(5);
+			zz = z+rand.nextInt(16);
+			id = world.getBlockId(xx,yy-1,zz);
+			
+			if ((id == Block.sand.blockID) && ModBlocks.doubleHeightPlant.canPlaceBlockAt(world,xx,yy,zz)){
+				for(int height = 0; height < 1; height++){
+					if (world.isAirBlock(xx,yy+height,zz)) {
+						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataBullrushBottom,2);
+						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataBullrushTop,2);
+					}
 					else break;
 				}
 			}
