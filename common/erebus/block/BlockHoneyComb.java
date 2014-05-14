@@ -25,6 +25,7 @@ public class BlockHoneyComb extends BlockContainer {
 
 	public BlockHoneyComb(int id) {
 		super(id, Material.rock);
+		setLightValue(0.5F);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
 	}
 
