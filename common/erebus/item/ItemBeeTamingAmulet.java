@@ -1,6 +1,7 @@
 package erebus.item;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -9,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 
 public class ItemBeeTamingAmulet extends Item {
 
@@ -28,8 +30,8 @@ public class ItemBeeTamingAmulet extends Item {
 				list.add("Honey Comb Block Z: "+is.getTagCompound().getInteger("homeZ"));
 			}
 			else {
-				list.add("Click on a Chest to set");
-				list.add("as target for Bee drops.");
+				list.add("Click on a Honey Comb Block to");
+				list.add("set as target for Bee drops.");
 				list.add("Then click on Bee to tame.");
 			}
 	}
@@ -40,7 +42,7 @@ public class ItemBeeTamingAmulet extends Item {
 			int blockID = world.getBlockId(x, y, z);
 			Block block = Block.blocksList[blockID];
 			if (!world.isRemote && block !=null) {
-				if (block.blockID == Block.chest.blockID){
+				if (block.blockID == ModBlocks.honeyCombBlock.blockID){
 					is.getTagCompound().setInteger("homeX", x);
 					is.getTagCompound().setInteger("homeY", y);
 					is.getTagCompound().setInteger("homeZ", z);

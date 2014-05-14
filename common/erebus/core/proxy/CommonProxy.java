@@ -14,6 +14,7 @@ import erebus.block.BlockPetrifiedChest;
 import erebus.client.gui.GuiBambooCrate;
 import erebus.client.gui.GuiColossalCrate;
 import erebus.client.gui.GuiExtenderThingy;
+import erebus.client.gui.GuiHoneyComb;
 import erebus.client.gui.GuiPetrifiedChest;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.client.gui.GuiUmberFurnace;
@@ -21,6 +22,7 @@ import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.inventory.ContainerBambooCrate;
 import erebus.inventory.ContainerColossalCrate;
 import erebus.inventory.ContainerExtenderThingy;
+import erebus.inventory.ContainerHoneyComb;
 import erebus.inventory.ContainerPetrifiedCraftingTable;
 import erebus.inventory.ContainerPetrifiedWoodChest;
 import erebus.inventory.ContainerUmberFurnace;
@@ -38,6 +40,7 @@ import erebus.tileentity.TileEntityErebusAltarXP;
 import erebus.tileentity.TileEntityExtenderThingy;
 import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
+import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntityJarOHoney;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
@@ -54,6 +57,7 @@ public class CommonProxy implements IGuiHandler {
 	public static final int GUI_ID_PETRIFIED_CHEST = 5;
 	public static final int GUI_ID_ANIMATED_BAMBOO_CRATE = 6;
 	public static final int GUI_ID_EXTENDER_THINGY = 7;
+	public static final int GUI_ID_HONEY_COMB = 9;
 
 	private final int[][] places = new int[][] { { 1, 0, 0 }, { 1, 0, 1 }, { 0, 0, 1 }, { 1, 1, 0 }, { 1, 1, 1 }, { 0, 1, 1 }, { 0, 1, 0 }, { 0, 0, 0 } };
 
@@ -86,6 +90,7 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityJarOHoney.class, "erebus.jarOHoney");
 		GameRegistry.registerTileEntity(TileEntityAltar.class, "erebus.altar");
 		GameRegistry.registerTileEntity(TileEntityGlowGem.class, "erebus.glowGemBlock");
+		GameRegistry.registerTileEntity(TileEntityHoneyComb.class, "Honey Comb (Erebus)");
 	}
 
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {
@@ -139,7 +144,12 @@ public class CommonProxy implements IGuiHandler {
 
 		else if (ID == GUI_ID_EXTENDER_THINGY)
 			return new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) world.getBlockTileEntity(x, y, z));
-
+		
+		else if (ID == GUI_ID_HONEY_COMB) {
+			TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+			if (tileentity instanceof TileEntityHoneyComb)
+				return new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tileentity);
+		}
 		return null;
 	}
 
@@ -184,6 +194,12 @@ public class CommonProxy implements IGuiHandler {
 
 		else if (ID == GUI_ID_EXTENDER_THINGY)
 			return new GuiExtenderThingy(player.inventory, (TileEntityExtenderThingy) world.getBlockTileEntity(x, y, z));
+		
+		else if (ID == GUI_ID_HONEY_COMB) {
+			TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+			if (tileentity instanceof TileEntityHoneyComb)
+				return new GuiHoneyComb(player.inventory, (TileEntityHoneyComb) tileentity);
+		}
 
 		return null;
 	}
