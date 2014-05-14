@@ -157,4 +157,16 @@ public class BlockSmallPLants extends BlockMushroom {
 		
 		return false;
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+		int meta = world.getBlockMetadata(x, y, z);
+		if(meta==13){
+		double xx = x + 0.5F;
+		double yy = y + 1F;
+		double zz = z + 0.5F;
+		world.spawnParticle("flame", xx, yy, zz, 0.0D, 0.0D, 0.0D);
+		}
+	}
 }

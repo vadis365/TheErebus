@@ -3,10 +3,11 @@ import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.BlockDoubleHeightPlant;
+import erebus.block.BlockSmallPLants;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
@@ -76,7 +77,10 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassBottom,2);
 						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassTop,2);
 					}
-					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
+					else if (rand.nextInt(80) == 0)
+							world.setBlock(xx,yy,zz, ModBlocks.erebusPlantSmall.blockID, BlockSmallPLants.dataFireBloom, 2);
+					else
+						world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
 					
 					break;
 				}
