@@ -181,4 +181,17 @@ public class BlockDoubleHeightPlant extends Block {
 		for (int i = 0; i < doublePlantBottomIcons.length; ++i)
 			list.add(new ItemStack(id, 1, i));
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public int idPicked(World world, int x, int y, int z) {
+        return this.blockID;
+    }
+
+	@Override
+    public int getDamageValue(World world, int x, int y, int z) {
+    	if (world.getBlockMetadata(x, y, z) > 7)
+    		return damageDropped(world.getBlockMetadata(x, y, z)-8);
+    	return damageDropped(world.getBlockMetadata(x, y, z));
+    }
 }
