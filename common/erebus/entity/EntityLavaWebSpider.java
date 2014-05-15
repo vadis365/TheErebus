@@ -143,7 +143,7 @@ public class EntityLavaWebSpider extends EntityMob {
 
 	@Override
 	protected int getDropItemId() {
-		return Item.silk.itemID;
+		return Item.fireballCharge.itemID;
 	}
 
 	@Override
