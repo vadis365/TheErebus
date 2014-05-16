@@ -102,7 +102,7 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 			world.setBlock(x,y+1,z,Block.web.blockID,0,2);
 			world.setBlock(x,y-1,z,Block.web.blockID,0,2);
 			world.setBlock(x,y,z,ModBlocks.spiderSpawner.blockID,0,2);
-			System.out.println("Spider Dungeon Here: " + x + " "+ y + " "+ z);
+			//System.out.println("Spider Dungeon Here: " + x + " "+ y + " "+ z);
 			return true;
 		}
 		
