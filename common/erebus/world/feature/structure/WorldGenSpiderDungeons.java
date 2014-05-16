@@ -46,7 +46,10 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 		int k1;
 		int l1;
 		int i2;
-
+		
+		if(y+height+1>=127)
+			return false;
+		
 		for(int xx=x-halfSizeX-1; xx<=x+halfSizeX+1; ++xx)
 			for(int yy=y-1; yy<=y+height+1; ++yy)
 				for(int zz=z-halfSizeZ-1; zz<=z+halfSizeZ+1; ++zz){
