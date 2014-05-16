@@ -39,9 +39,9 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
-		byte height=3;
-		int halfSizeX=rand.nextInt(2)+2;
-		int halfSizeZ=rand.nextInt(2)+2;
+		byte height=4;
+		int halfSizeX=rand.nextInt(4)+4;
+		int halfSizeZ=rand.nextInt(4)+4;
 		int j1=0;
 		int k1;
 		int l1;
@@ -58,16 +58,15 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 
 		if (j1>=1&&j1<=5){
 			for(int xx=x-halfSizeX-1; xx<=x+halfSizeX+1; ++xx)
-				for(int yy=y+height; yy>=y-1; --yy)
+				for(int yy=y+height+1; yy>=y-1; --yy)
 					for(int zz=z-halfSizeZ-1; zz<=z+halfSizeZ+1; ++zz)
 						if (xx!=x-halfSizeX-1 && yy!=y-1 && zz!=z-halfSizeZ-1 && xx!=x+halfSizeX+1 && yy!=y+height+1 && zz!=z+halfSizeZ+1)world.setBlockToAir(xx,yy,zz);
 						else if (yy>=0 && !world.getBlockMaterial(xx,yy-1,zz).isSolid())world.setBlockToAir(xx,yy,zz);
 						else if (world.getBlockMaterial(xx,yy,zz).isSolid()){
-							if (yy==y-1 && rand.nextInt(4)==0) world.setBlock(xx,yy,zz,ModBlocks.umberstone.blockID,3,2); // umbercobbleWebbed
+							if (yy==y-1 && rand.nextInt(4)==0 || yy==y+height+1 && rand.nextInt(4)==0) world.setBlock(xx,yy,zz,ModBlocks.umberstone.blockID,3,2); // umbercobbleWebbed
+							else if (yy==y-1 && rand.nextInt(4)==0 || yy==y+height+1 && rand.nextInt(4)==0) world.setBlock(xx,yy,zz,ModBlocks.umberstone.blockID,2,2); // umbercobbleMossy
+							else world.setBlock(xx,yy,zz,ModBlocks.umberstone.blockID,1,2); // umbercobble
 						}
-						else if (yy==y-1 && rand.nextInt(4)!=0) world.setBlock(xx,yy,zz,ModBlocks.umberstone.blockID,2,2); // umbercobbleMossy
-						else world.setBlock(xx,yy,zz,ModBlocks.umberstone.blockID,1,2); // umbercobble
-
 			for(int iteration=0; iteration<2; iteration++)
 				for(int attempt=0; attempt<(iteration==0?Integer.MAX_VALUE:3); attempt++){
 
@@ -100,7 +99,7 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 			world.setBlock(x,y+1,z,Block.web.blockID,0,2);
 			world.setBlock(x,y-1,z,Block.web.blockID,0,2);
 			world.setBlock(x,y,z,ModBlocks.spiderSpawner.blockID,0,2);
-			
+			System.out.println("Spider Dungeon Here: " + x + " "+ y + " "+ z);
 			return true;
 		}
 		
