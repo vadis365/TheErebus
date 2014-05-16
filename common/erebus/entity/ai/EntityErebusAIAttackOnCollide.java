@@ -9,7 +9,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import AntlionBoss.EntityAntlionBoss;
+import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityVelvetWorm;
 
@@ -98,8 +98,8 @@ public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 					attacker.swingItem();
 				if (attacker instanceof EntityPrayingMantis)
 					((EntityPrayingMantis) attacker).setAttackAnimation(0, (byte) 0);
-				if (attacker instanceof EntityAntlionBoss)
-						entitylivingbase.addPotionEffect(new PotionEffect(Potion.weakness.id, 15 * 20, 0));
+				if (attacker instanceof EntityAntlionMiniBoss)
+					entitylivingbase.addPotionEffect(new PotionEffect(Potion.weakness.id, 15 * 20, 0));
 				if (attacker instanceof EntityVelvetWorm)
 					((EntityVelvetWorm) attacker).setInflateSize(0);
 				attacker.attackEntityAsMob(entitylivingbase);
