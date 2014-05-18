@@ -13,13 +13,14 @@ public final class TimeMeasurement{
 	public static void finish(String id){
 		if (!times.containsKey(id))return;
 		long time = System.nanoTime()-times.remove(id);
-		if (time >= 10000000)System.out.println("Finished '"+id+"' in "+time+" ns ("+TimeUnit.NANOSECONDS.toMillis(time)+" ms)");
+		if (time >= 10000000);
+			//System.out.println("Finished '"+id+"' in "+time+" ns ("+TimeUnit.NANOSECONDS.toMillis(time)+" ms)");
 		
 		Counter counter = counters.get(id);
 		if (counter == null)counters.put(id,counter = new Counter());
 		if (counter.add(time)){
 			long avg = counter.getAverageTime();
-			System.out.println("Average time for '"+id+"' is "+avg+" ns ("+TimeUnit.NANOSECONDS.toMillis(avg)+" ms)");
+			//System.out.println("Average time for '"+id+"' is "+avg+" ns ("+TimeUnit.NANOSECONDS.toMillis(avg)+" ms)");
 			counter.reset();
 		}
 	}

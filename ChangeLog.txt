@@ -4,6 +4,8 @@ Additions
 =========
 - New biomes and sub-biomes
 - Added caves
+- Giant Flowers added to Elysium Biome
+- Cypress trees added to Elysium Biome
 - Added "Hornet of Despair" a double sized random spawn Wasp
 - Added spider sounds to Tarantula
 - Added Smooth Umbertile, Smooth Umbertiles and Umberstone Pillar
@@ -13,12 +15,28 @@ Additions
 - Added 'Special Items' Tab and tidied creative menu 
 - Implemented new block 'eating' AI to Larva and Grasshopper
 - Added Titan Beetle mob as a tamable mount and associated items
-- Added Bot Fly Larva Mob
-- Added Blood Snail Mob
-- Added Dragon Fly mob
+- Added Bot Fly Larva Mob (can only be removed by drinking Beetle juice)
+- Added Blood Snail Mob (not yet implemented)
+- Added Dragon Fly Mob
 - Added Bee mob and associated items (many)
-- Added Sporeling Mob
+- Added Sporeling Mob (not yet implemented)
 - Added Crafting recipe for Umber Golem
+- Added Velvet Worm Mob
+- Added Crop Weevil Mob
+- Added Fire Ant Soldier Mob
+- Added Midge Swarm Mob
+- Bucket and Bambucket of honey added
+- Bee taming amulet added (bees tamed will polinate giant flowers)
+- Honeycomb block added for bees to drop nectar in
+- Jar O' Honey block added as honey storage tank - stores buckets of honey
+- Homing Beecon added as a programmable compass
+- Double Height plants added to biomes (pre - 1.7!)
+- Various small plants and mushrooms added
+- Powered Glider added (uses redgem blocks as fuel) - Yup, sort of flight
+- Block extractor added for those hard to reach blocks ;)
+- Lots of other additions blah, blah, blah...
+- We recommend installing NEI
+- Alternatively constantly bug Dylan because he is to lazy to make a decent changelog!
 
 Changes
 =======
@@ -31,6 +49,10 @@ Changes
 - Removed Bamboo from Beetle Larva 'eating'
 - Changed the way Glowing jars are rendered
 - Removed Exoskeleton from any mob that is not deemed a Beetle
+- Antlions will attack Ants
+- Wasp AI has had complete overhaul (no one would even notice)
+- Bot flies may now infect you with larva
+- Lots of other things we can't remember
 
 Bugfixes
 ========
@@ -41,3 +63,4 @@ Bugfixes
 - Biomes no longer have stripes of tiny biomes at biome borders
 - Fixed biome decoration generating 16 blocks off
 - Fixed Scorpion (and Dragonfly) health being displayed whilst grappled
+- Tell us and we will try to fix 'em

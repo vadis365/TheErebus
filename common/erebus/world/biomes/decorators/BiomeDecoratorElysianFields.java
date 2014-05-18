@@ -177,7 +177,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 		
 		@Override
 		public void decorate(){
-			System.out.println("decorating at "+x+","+z);
+			//System.out.println("decorating at "+x+","+z);
 			
 			for(attempt = 0; attempt < 400; attempt++){
 				xx = x + offsetXZ();
