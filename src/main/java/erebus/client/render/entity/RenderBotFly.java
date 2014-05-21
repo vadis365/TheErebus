@@ -22,11 +22,11 @@ public class RenderBotFly extends RenderLiving {
 	}
 
 	public void renderBotFly(EntityBotFly entityBotFly, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityBotFly, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityBotFly, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderBotFly((EntityBotFly) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

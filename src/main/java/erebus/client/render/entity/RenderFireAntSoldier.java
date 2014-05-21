@@ -17,16 +17,16 @@ public class RenderFireAntSoldier extends RenderLiving {
 
 	public RenderFireAntSoldier(ModelFireAntSoldier modelBase, float shadowSize) {
 		super(modelBase, shadowSize);
-		model = ((ModelFireAntSoldier) mainModel);
+		model = (ModelFireAntSoldier) mainModel;
 	}
 
 	public void renderFireAntSoldier(EntityFireAntSoldier entityFireAntSoldier, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityFireAntSoldier, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityFireAntSoldier, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		this.renderFireAntSoldier((EntityFireAntSoldier) entityLiving, x, y, z, rotationYaw, partialTickTime);
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+		renderFireAntSoldier((EntityFireAntSoldier) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
@@ -42,14 +42,13 @@ public class RenderFireAntSoldier extends RenderLiving {
 			rotateAnt(entityliving);
 	}
 
-
 	protected void rotateAnt(EntityLivingBase entityliving) {
 		GL11.glRotatef(90.0F, -1.0F, 0.0F, 0.0F);
 	}
 
-	protected void scaleFireAntSoldier(EntityFireAntSoldier entityFireAntSoldier, float partialTickTime){
+	protected void scaleFireAntSoldier(EntityFireAntSoldier entityFireAntSoldier, float partialTickTime) {
 		float f1 = 0.75F;
-		this.shadowSize = 0.5F;
+		shadowSize = 0.5F;
 		GL11.glScalef(f1, f1, f1);
 	}
 

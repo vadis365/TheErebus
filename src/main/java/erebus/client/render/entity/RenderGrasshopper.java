@@ -19,11 +19,11 @@ public class RenderGrasshopper extends RenderLiving {
 	}
 
 	public void renderGrasshopper(EntityGrasshopper entityGrasshopper, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityGrasshopper, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityGrasshopper, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderGrasshopper((EntityGrasshopper) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

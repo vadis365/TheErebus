@@ -6,10 +6,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.entity.EntityVelvetWorm;
 
 @SideOnly(Side.CLIENT)
 public class ModelVelvetWorm extends ModelBase {
+
 	ModelRenderer Head1;
 	ModelRenderer Head2;
 	ModelRenderer Head3;
@@ -130,7 +130,6 @@ public class ModelVelvetWorm extends ModelBase {
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		float size = ((EntityVelvetWorm) entity).getInflateSize();
 		Head1.render(unitPixel);
 		Head2.render(unitPixel);
 		Head3.render(unitPixel);

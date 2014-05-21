@@ -22,11 +22,11 @@ public class RenderWasp extends RenderLiving {
 	}
 
 	public void renderWasp(EntityWasp entityWasp, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityWasp, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityWasp, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderWasp((EntityWasp) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -34,19 +34,19 @@ public class RenderWasp extends RenderLiving {
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderWasp((EntityWasp) entity, x, y, z, rotationYaw, partialTickTime);
 	}
-	
+
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		scaleWasp((EntityWasp) entityliving, f);
 	}
 
 	protected void scaleWasp(EntityWasp entityWasp, float f) {
-		if (entityWasp.getIsBoss()==0) {
+		if (entityWasp.getIsBoss() == 0) {
 			float f1 = 1F;
 			shadowSize = f1;
 			GL11.glScalef(f1, f1, f1);
 		}
-		if (entityWasp.getIsBoss()==1) {
+		if (entityWasp.getIsBoss() == 1) {
 			float f1 = 2.0F;
 			shadowSize = f1;
 			GL11.glScalef(f1, f1, f1);

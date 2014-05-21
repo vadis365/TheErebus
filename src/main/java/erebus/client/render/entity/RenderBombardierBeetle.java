@@ -23,11 +23,11 @@ public class RenderBombardierBeetle extends RenderLiving {
 	}
 
 	public void renderBombardierBeetle(EntityBombardierBeetle entityBombardierBeetle, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityBombardierBeetle, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityBombardierBeetle, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderBombardierBeetle((EntityBombardierBeetle) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

@@ -24,11 +24,11 @@ public class RenderSolifuge extends RenderLiving {
 	}
 
 	public void renderSolifuge(EntitySolifuge entitySolifuge, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entitySolifuge, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entitySolifuge, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderSolifuge((EntitySolifuge) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -36,7 +36,7 @@ public class RenderSolifuge extends RenderLiving {
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderSolifuge((EntitySolifuge) entity, x, y, z, rotationYaw, partialTickTime);
 	}
-	
+
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		scaleSolifuge((EntitySolifuge) entityliving, f);

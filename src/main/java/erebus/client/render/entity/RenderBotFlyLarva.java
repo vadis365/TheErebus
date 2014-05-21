@@ -23,11 +23,11 @@ public class RenderBotFlyLarva extends RenderLiving {
 	}
 
 	public void renderBotFlyLarva(EntityBotFlyLarva entityBotFlyLarva, double par2, double par4, double par6, float par8, float par9) {
-		super.doRenderLiving(entityBotFlyLarva, par2, par4, par6, par8, par9);
+		super.doRender(entityBotFlyLarva, par2, par4, par6, par8, par9);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9) {
+	public void doRender(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9) {
 		renderBotFlyLarva((EntityBotFlyLarva) entityLiving, par2, par4, par6, par8, par9);
 	}
 
@@ -50,19 +50,19 @@ public class RenderBotFlyLarva extends RenderLiving {
 	public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9) {
 		renderBotFlyLarva((EntityBotFlyLarva) entity, par2, par4, par6, par8, par9);
 	}
-	
+
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		scaleBotFlyLarva((EntityBotFlyLarva) entityliving, f);
-		
+
 	}
 
 	protected void scaleBotFlyLarva(EntityBotFlyLarva entityBotFlyLarva, float f) {
 		float f1 = 0.6F;
 		GL11.glScalef(f1, f1, f1);
-		if(entityBotFlyLarva.ridingEntity != null) {
-		GL11.glTranslatef(0F, 0F, -0.2F);
-		GL11.glRotatef(180, 0F, 1F, 0F);
+		if (entityBotFlyLarva.ridingEntity != null) {
+			GL11.glTranslatef(0F, 0F, -0.2F);
+			GL11.glRotatef(180, 0F, 1F, 0F);
 		}
 	}
 }

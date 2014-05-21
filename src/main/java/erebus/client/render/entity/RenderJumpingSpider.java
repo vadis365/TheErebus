@@ -19,11 +19,11 @@ public class RenderJumpingSpider extends RenderLiving {
 	}
 
 	public void renderJumpingSpider(EntityJumpingSpider entityJumpingSpider, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityJumpingSpider, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityJumpingSpider, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderJumpingSpider((EntityJumpingSpider) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

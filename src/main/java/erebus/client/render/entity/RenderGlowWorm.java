@@ -24,11 +24,11 @@ public class RenderGlowWorm extends RenderLiving {
 	}
 
 	public void renderGlowWorm(EntityGlowWorm entityGlowWorm, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityGlowWorm, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityGlowWorm, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderGlowWorm((EntityGlowWorm) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

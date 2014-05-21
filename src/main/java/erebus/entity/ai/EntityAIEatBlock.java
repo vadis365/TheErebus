@@ -14,7 +14,6 @@ import erebus.core.helper.Utils;
 
 public abstract class EntityAIEatBlock extends EntityAIBase {
 
-	private final double moveSpeed;
 	private final int EAT_SPEED;
 	protected final EntityLiving entity;
 	private final int maxGrowthMetadata;
@@ -84,9 +83,9 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 				prepareToEat();
 				eatTicks++;
 				entity.worldObj.destroyBlockInWorldPartially(entity.entityId, cropX, cropY, cropZ, getScaledEatTicks());
-				if (!canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ))) {
+				if (!canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
 					hasTarget = false;
-				} else if (EAT_SPEED <= eatTicks) {
+				else if (EAT_SPEED <= eatTicks) {
 					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, entity.worldObj.getBlockId(cropX, cropY, cropZ) + (maxGrowthMetadata << 12));
 					entity.worldObj.setBlockToAir(cropX, cropY, cropZ);
 					if (seed != null)
@@ -96,7 +95,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 					afterEaten();
 				}
 			}
-			if (!flag && eatTicks>0) {
+			if (!flag && eatTicks > 0) {
 				eatingInterupted();
 				hasTarget = false;
 				eatTicks = 0;
@@ -140,8 +139,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	 * @return true to allow block to be eaten. false to deny it.
 	 */
 	protected abstract boolean isEntityReady();
-	
-	
+
 	/**
 	 * Allows you to set mob specific move tasks.
 	 */

@@ -15,6 +15,7 @@ import erebus.entity.EntityMidgeSwarm;
 
 @SideOnly(Side.CLIENT)
 public class RenderMidgeSwarm extends RenderLiving {
+
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/midgeSwarm.png");
 
 	public RenderMidgeSwarm() {
@@ -22,11 +23,11 @@ public class RenderMidgeSwarm extends RenderLiving {
 	}
 
 	public void renderMidgeSwarm(EntityMidgeSwarm entityMidgeSwarm, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityMidgeSwarm, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityMidgeSwarm, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderMidgeSwarm((EntityMidgeSwarm) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -34,7 +35,7 @@ public class RenderMidgeSwarm extends RenderLiving {
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderMidgeSwarm((EntityMidgeSwarm) entity, x, y, z, rotationYaw, partialTickTime);
 	}
-	
+
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityLiving, float partialTickTime) {
 		GL11.glScalef(0.5F, 0.5F, 0.5F);

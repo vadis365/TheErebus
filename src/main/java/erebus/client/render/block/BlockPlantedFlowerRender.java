@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -57,7 +57,7 @@ public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler {
 		drawCrossedSquares(ModBlocks.flowerPlanted.getIcon(1, meta), x, y, z);
 	}
 
-	private void drawCrossedSquares(Icon icon, int x, int y, int z) {
+	private void drawCrossedSquares(IIcon icon, int x, int y, int z) {
 		Tessellator tess = Tessellator.instance;
 
 		double minU = icon.getMinU();
@@ -87,7 +87,7 @@ public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory() {
+	public boolean shouldRender3DInInventory(int modelId) {
 		return true;
 	}
 

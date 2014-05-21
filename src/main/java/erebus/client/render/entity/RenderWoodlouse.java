@@ -24,11 +24,11 @@ public class RenderWoodlouse extends RenderLiving {
 	}
 
 	public void renderWoodlouse(EntityWoodlouse entityWoodlouse, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityWoodlouse, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityWoodlouse, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderWoodlouse((EntityWoodlouse) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

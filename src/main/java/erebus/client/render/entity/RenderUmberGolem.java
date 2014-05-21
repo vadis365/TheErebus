@@ -16,15 +16,14 @@ public class RenderUmberGolem extends RenderLiving {
 
 	public RenderUmberGolem(ModelUmberGolem model, float shadowSize) {
 		super(model, shadowSize);
-
 	}
 
 	public void renderUmberGolem(EntityUmberGolem entityUmberGolem, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityUmberGolem, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityUmberGolem, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderUmberGolem((EntityUmberGolem) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -48,5 +47,4 @@ public class RenderUmberGolem extends RenderLiving {
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
-
 }

@@ -22,11 +22,11 @@ public class RenderTitanBeetle extends RenderLiving {
 	}
 
 	public void renderTitanBeetle(EntityTitanBeetle entityTitanBeetle, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityTitanBeetle, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityTitanBeetle, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderTitanBeetle((EntityTitanBeetle) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -38,7 +38,7 @@ public class RenderTitanBeetle extends RenderLiving {
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		scaleTitanBeetle((EntityTitanBeetle) entityliving, f);
-		
+
 	}
 
 	protected void scaleTitanBeetle(EntityTitanBeetle entityTitanBeetle, float f) {
@@ -49,13 +49,13 @@ public class RenderTitanBeetle extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityTitanBeetle beetle = (EntityTitanBeetle) entity;
-		if(beetle.getTameState()<2)
+		if (beetle.getTameState() < 2)
 			return textures[0];
-		if(beetle.getTameState()==2)
+		if (beetle.getTameState() == 2)
 			return textures[1];
-		if(beetle.getTameState()==3)
+		if (beetle.getTameState() == 3)
 			return textures[2];
-		else 
+		else
 			return textures[3];
 	}
 }

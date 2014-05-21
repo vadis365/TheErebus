@@ -22,11 +22,11 @@ public class RenderMoneySpider extends RenderLiving {
 	}
 
 	public void renderMoneySpider(EntityMoneySpider entityMoneySpider, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityMoneySpider, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityMoneySpider, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderMoneySpider((EntityMoneySpider) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

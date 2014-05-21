@@ -15,11 +15,11 @@ public class RenderAnimatedChest extends RenderLiving {
 	}
 
 	public void renderAnimatedChest(EntityAnimatedChest entityAnimatedChest, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityAnimatedChest, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityAnimatedChest, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderAnimatedChest((EntityAnimatedChest) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -32,5 +32,4 @@ public class RenderAnimatedChest extends RenderLiving {
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
-
 }

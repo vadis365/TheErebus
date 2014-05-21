@@ -21,11 +21,11 @@ public class RenderLavaWebSpider extends RenderLiving {
 	}
 
 	public void renderLavaWebSpider(EntityLavaWebSpider entityLavaWebSpider, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityLavaWebSpider, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityLavaWebSpider, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderLavaWebSpider((EntityLavaWebSpider) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -50,4 +50,3 @@ public class RenderLavaWebSpider extends RenderLiving {
 		return texture;
 	}
 }
-

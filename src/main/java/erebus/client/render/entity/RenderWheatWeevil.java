@@ -24,11 +24,11 @@ public class RenderWheatWeevil extends RenderLiving {
 	}
 
 	public void renderWheatWeevil(EntityWheatWeevil entityWheatWeevil, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityWheatWeevil, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityWheatWeevil, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderWheatWeevil((EntityWheatWeevil) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

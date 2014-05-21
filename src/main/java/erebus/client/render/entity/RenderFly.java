@@ -31,7 +31,7 @@ public class RenderFly extends RenderLiving {
 			mainModel = new ModelFly();
 		}
 
-		super.doRenderLiving(entityFly, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityFly, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	protected void func_82445_a(EntityFly entityFly, double x, double y, double z) {
@@ -60,7 +60,7 @@ public class RenderFly extends RenderLiving {
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		func_82443_a((EntityFly) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

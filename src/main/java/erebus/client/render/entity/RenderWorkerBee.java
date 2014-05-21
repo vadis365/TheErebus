@@ -22,11 +22,11 @@ public class RenderWorkerBee extends RenderLiving {
 	}
 
 	public void renderWorkerBee(EntityWorkerBee entityWorkerBee, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityWorkerBee, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityWorkerBee, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderWorkerBee((EntityWorkerBee) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -34,16 +34,16 @@ public class RenderWorkerBee extends RenderLiving {
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderWorkerBee((EntityWorkerBee) entity, x, y, z, rotationYaw, partialTickTime);
 	}
-	
+
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		scaleWorkerBee((EntityWorkerBee) entityliving, f);
 	}
 
 	protected void scaleWorkerBee(EntityWorkerBee entityWorkerBee, float f) {
-			float f1 = 1F;
-			shadowSize = f1;
-			GL11.glScalef(f1, f1, f1);
+		float f1 = 1F;
+		shadowSize = f1;
+		GL11.glScalef(f1, f1, f1);
 	}
 
 	@Override

@@ -21,11 +21,11 @@ public class RenderFireAnt extends RenderLiving {
 	}
 
 	public void renderFireAnt(EntityFireAnt entityFireAnt, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityFireAnt, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityFireAnt, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderFireAnt((EntityFireAnt) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

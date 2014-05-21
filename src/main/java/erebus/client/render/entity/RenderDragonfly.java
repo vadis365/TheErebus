@@ -22,11 +22,11 @@ public class RenderDragonfly extends RenderLiving {
 	}
 
 	public void renderDragonfly(EntityDragonfly entityDragonfly, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityDragonfly, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityDragonfly, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderDragonfly((EntityDragonfly) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

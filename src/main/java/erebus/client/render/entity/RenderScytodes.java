@@ -19,11 +19,11 @@ public class RenderScytodes extends RenderLiving {
 	}
 
 	public void renderScytodes(EntityScytodes entityScytodes, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityScytodes, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityScytodes, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderScytodes((EntityScytodes) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

@@ -3,7 +3,6 @@ package erebus.client.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
@@ -13,6 +12,7 @@ import erebus.entity.EntityCicada;
 
 @SideOnly(Side.CLIENT)
 public class ModelCicada extends ModelBase {
+
 	ModelRenderer LEye;
 	ModelRenderer REye;
 	ModelRenderer HeadL;
@@ -232,7 +232,7 @@ public class ModelCicada extends ModelBase {
 		LWingBack = new ModelRenderer(this, 16, 63);
 		LWingBack.addBox(0F, -2F, 18F, 1, 4, 1);
 		setRotation(LWingBack, 0F, 0F, 0F);
-		
+
 		RWingFront.addChild(RWingTop);
 		RWingFront.addChild(RWingMain);
 		RWingFront.addChild(RWingBack);
@@ -246,7 +246,7 @@ public class ModelCicada extends ModelBase {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityCicada cicada = (EntityCicada) entity;
-		
+
 		LEye.render(unitPixel);
 		REye.render(unitPixel);
 		HeadL.render(unitPixel);
@@ -285,7 +285,7 @@ public class ModelCicada extends ModelBase {
 		RMLeg4.render(unitPixel);
 		RWingFront.render(unitPixel);
 		LWingFront.render(unitPixel);
-		
+
 		if (cicada.isFlying()) {
 
 			GL11.glPushMatrix();
@@ -294,7 +294,7 @@ public class ModelCicada extends ModelBase {
 			GL11.glScalef(0.7F, 0.7F, 0.7F);
 			RWingFront.render(unitPixel);
 			GL11.glPopMatrix();
-			
+
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-0.05F, 0.4F, 0.1F);
 			GL11.glRotatef(-20F, 0F, 1F, 0F);
@@ -316,7 +316,6 @@ public class ModelCicada extends ModelBase {
 		EntityCicada cicada = (EntityCicada) entity;
 
 		if (cicada.onGround) {
-			float legMovement = MathHelper.cos(limbSwing * 2.0F) * 0.7F * limbSwingAngle;
 			RWingFront.rotateAngleX = 0F;
 			LWingFront.rotateAngleX = 0F;
 			RWingFront.rotateAngleY = 0F;
@@ -326,13 +325,13 @@ public class ModelCicada extends ModelBase {
 		}
 
 		if (cicada.isFlying()) {
-			RWingFront.rotateAngleZ = 1.8F -cicada.wingFloat;;
+			RWingFront.rotateAngleZ = 1.8F - cicada.wingFloat;;
 			LWingFront.rotateAngleZ = -1.8F + cicada.wingFloat;;
 			RWingFront.rotateAngleX = -1.8F;
 			LWingFront.rotateAngleX = -1.8F;
 			RWingFront.rotateAngleY = 0F;
 			LWingFront.rotateAngleY = 0F;
-			
+
 		}
 	}
 }

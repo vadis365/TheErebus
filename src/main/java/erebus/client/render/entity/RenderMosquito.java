@@ -22,11 +22,11 @@ public class RenderMosquito extends RenderLiving {
 	}
 
 	public void renderMosquito(EntityMosquito entityMosquito, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityMosquito, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityMosquito, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderMosquito((EntityMosquito) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

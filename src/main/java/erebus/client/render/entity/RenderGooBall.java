@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -18,8 +18,8 @@ import erebus.entity.EntityGooBall;
 @SideOnly(Side.CLIENT)
 public class RenderGooBall extends Render {
 	private final RenderItem renderItem = new RenderItem();
-	private final ItemStack gooBall = new ItemStack(Item.slimeBall);
-	
+	private final ItemStack gooBall = new ItemStack(Items.slime_ball);
+
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float yaw, float tick) {
 		renderGooBall((EntityGooBall) entity, x, y, z, yaw, tick);
@@ -33,9 +33,9 @@ public class RenderGooBall extends Render {
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(2F, 2F, 2F);
-		renderItem.doRenderItem(slimeballItem, 0, 0, 0, 0, 0);
+		renderItem.doRender(slimeballItem, 0, 0, 0, 0, 0);
 		GL11.glRotatef(90, 0, 1, 0);
-		renderItem.doRenderItem(slimeballItem, 0, 0, 0, 0, 0);
+		renderItem.doRender(slimeballItem, 0, 0, 0, 0, 0);
 		GL11.glPopMatrix();
 	}
 

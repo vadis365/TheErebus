@@ -24,11 +24,11 @@ public class RenderMoth extends RenderLiving {
 	}
 
 	public void renderMoth(EntityMoth entityMoth, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityMoth, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityMoth, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderMoth((EntityMoth) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

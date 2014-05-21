@@ -21,11 +21,11 @@ public class RenderCicada extends RenderLiving {
 	}
 
 	public void renderCicada(EntityCicada entityCicada, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityCicada, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityCicada, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderCicada((EntityCicada) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

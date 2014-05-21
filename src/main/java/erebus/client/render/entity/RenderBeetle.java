@@ -18,11 +18,11 @@ public class RenderBeetle extends RenderLiving {
 	}
 
 	public void renderBeetle(EntityBeetle entityBeetle, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityBeetle, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityBeetle, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderBeetle((EntityBeetle) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 

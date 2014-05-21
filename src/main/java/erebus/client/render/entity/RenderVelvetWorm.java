@@ -23,11 +23,11 @@ public class RenderVelvetWorm extends RenderLiving {
 	}
 
 	public void renderEntityVelvetWorm(EntityVelvetWorm entityEntityVelvetWorm, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityEntityVelvetWorm, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityEntityVelvetWorm, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderEntityVelvetWorm((EntityVelvetWorm) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -40,7 +40,7 @@ public class RenderVelvetWorm extends RenderLiving {
 	protected void preRenderCallback(EntityLivingBase entityLiving, float par2) {
 		EntityVelvetWorm worm = (EntityVelvetWorm) entityLiving;
 		int size = worm.getInflateSize();
-		GL11.glScalef((float) (size*0.009 +1F),(float) (size*0.009 +1F), (float) (-size*0.0025 +1F));
+		GL11.glScalef((float) (size * 0.009 + 1F), (float) (size * 0.009 + 1F), (float) (-size * 0.0025 + 1F));
 	}
 
 	@Override

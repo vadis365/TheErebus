@@ -3,7 +3,8 @@ package erebus.entity.ai;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import erebus.ModBlocks;
 import erebus.entity.EntityGrasshopper;
@@ -11,17 +12,16 @@ import erebus.entity.EntityLocust;
 
 public class EntityAIEatCrops extends EntityAIEatBlock {
 
-	private double moveSpeed;
+	private final double moveSpeed;
 	private int reproCap = 0;
-	
+
 	public EntityAIEatCrops(EntityLiving entity, double moveSpeed, int eatSpeed) {
-		super(entity, Block.crops, 7, new ItemStack(Item.seeds), moveSpeed, eatSpeed);
-		this.moveSpeed=moveSpeed;
+		super(entity, Blocks.wheat, 7, new ItemStack(Items.wheat_seeds), moveSpeed, eatSpeed);
+		this.moveSpeed = moveSpeed;
 	}
-	
+
 	@Override
 	protected boolean canEatBlock(int blockID, int blockMeta) {
-		
 		if (blockID == 0)
 			return false;
 
@@ -29,7 +29,6 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 			return true;
 		return false;
 	}
-	
 
 	@Override
 	public boolean continueExecuting() {
@@ -40,14 +39,13 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 	protected boolean isEntityReady() {
 		return true;
 	}
-	
+
 	@Override
 	protected void moveToLocation() {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
-		if (!grasshopper.isEating){
-			if(!entity.getNavigator().tryMoveToXYZ(cropX+ 0.5D, cropY, cropZ+ 0.5D, moveSpeed))
+		if (!grasshopper.isEating)
+			if (!entity.getNavigator().tryMoveToXYZ(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed))
 				entity.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed);
-		}
 	}
 
 	@Override
@@ -55,7 +53,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
 		grasshopper.setCanJump(false);
 		grasshopper.setMoveTasks(false);
-		grasshopper.setIsEating(true);	
+		grasshopper.setIsEating(true);
 	}
 
 	@Override
@@ -63,9 +61,9 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
 		grasshopper.setCanJump(true);
 		grasshopper.setMoveTasks(true);
-		grasshopper.setIsEating(false);	
+		grasshopper.setIsEating(false);
 	}
-	
+
 	@Override
 	protected void afterEaten() {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;

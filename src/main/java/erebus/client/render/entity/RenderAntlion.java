@@ -23,13 +23,13 @@ public class RenderAntlion extends RenderLiving {
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityLiving, x, y, z, rotationYaw, partialTickTime);
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+		super.doRender(entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving((EntityAntlion) entity, x, y, z, rotationYaw, partialTickTime);
+		super.doRender((EntityAntlion) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

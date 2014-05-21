@@ -22,11 +22,11 @@ public class RenderLocust extends RenderLiving {
 	}
 
 	public void renderLocust(EntityLocust entityLocust, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRenderLiving(entityLocust, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entityLocust, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderLocust((EntityLocust) entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
