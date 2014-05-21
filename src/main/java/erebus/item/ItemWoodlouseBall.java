@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 import erebus.entity.EntityWoodlouseBall;
 
 public class ItemWoodlouseBall extends Item {
-	public ItemWoodlouseBall(int id) {
-		super(id);
+
+	public ItemWoodlouseBall() {
 		maxStackSize = 16;
 		setTextureName("paper");
 	}

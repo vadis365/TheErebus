@@ -11,8 +11,8 @@ import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemJadeArmor extends ItemArmor {
 
-	public ItemJadeArmor(int id, int armorType) {
-		super(id, ModMaterials.armorJADE, 2, armorType);
+	public ItemJadeArmor(int armorType) {
+		super(ModMaterials.armorJADE, 2, armorType);
 	}
 
 	@Override

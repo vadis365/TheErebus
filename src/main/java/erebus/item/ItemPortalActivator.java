@@ -8,8 +8,7 @@ import erebus.ModBlocks;
 
 public class ItemPortalActivator extends Item {
 
-	public ItemPortalActivator(int i) {
-		super(i);
+	public ItemPortalActivator() {
 		maxStackSize = 1;
 		setMaxDamage(64);
 		setFull3D();

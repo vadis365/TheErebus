@@ -1,12 +1,14 @@
 package erebus.item;
 
 import java.util.List;
-import net.minecraft.client.renderer.texture.IconRegister;
+
+import javax.swing.Icon;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,10 +20,9 @@ public class ItemErebusSpecial extends Item {
 	public static final short dataRhinoRidingKit = 0, dataBeetleTamingAmulet = 1, dataGolemCore = 2, dataGolemHead = 3, dataGolemLClaw = 4, dataGolemRClaw = 5, dataGolemLegs = 6;
 
 	@SideOnly(Side.CLIENT)
-	public static Icon[] icons;
+	public static IIcon[] icons;
 
-	public ItemErebusSpecial(int id) {
-		super(id);
+	public ItemErebusSpecial() {
 		setHasSubtypes(true);
 		setMaxDamage(0);
 	}

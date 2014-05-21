@@ -1,11 +1,12 @@
 package erebus.item;
 
 import java.util.List;
-import net.minecraft.client.renderer.texture.IconRegister;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.handler.ConfigHandler;
@@ -13,10 +14,9 @@ import erebus.core.handler.ConfigHandler;
 public class ItemMetalIngots extends Item {
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] icons;
+	private IIcon[] icons;
 
-	public ItemMetalIngots(int id) {
-		super(id);
+	public ItemMetalIngots() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}
@@ -28,13 +28,14 @@ public class ItemMetalIngots extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int i) {
+	public IIcon getIconFromDamage(int i) {
 		return icons[i];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tabs, List list) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubItems(Item id, CreativeTabs tabs, List list) {
 		if (ConfigHandler.copper)
 			list.add(new ItemStack(id, 1, 0));
 		if (ConfigHandler.lead)
@@ -47,8 +48,8 @@ public class ItemMetalIngots extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		icons = new Icon[4];
+	public void registerIcons(IIconRegister reg) {
+		icons = new IIcon[4];
 
 		for (int i = 0; i < icons.length; i++)
 			icons[i] = reg.registerIcon("erebus:metalIngot" + i);

@@ -9,8 +9,7 @@ import erebus.entity.EntityBotFlyLarva;
 
 public class ItemBucketOfBeetleJuice extends ItemBucketMilk {
 
-	public ItemBucketOfBeetleJuice(int id) {
-		super(id);
+	public ItemBucketOfBeetleJuice() {
 		setMaxStackSize(1);
 	}
 
@@ -21,12 +20,11 @@ public class ItemBucketOfBeetleJuice extends ItemBucketMilk {
 
 		if (!world.isRemote)
 			player.curePotionEffects(new ItemStack(Item.bucketMilk));
-		
-		if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva) {
-			if(((EntityBotFlyLarva) player.riddenByEntity).getParasiteCount()>0)
+
+		if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva)
+			if (((EntityBotFlyLarva) player.riddenByEntity).getParasiteCount() > 0)
 				((EntityBotFlyLarva) player.riddenByEntity).setABitDead();
-		}
-			
+
 		return is.stackSize <= 0 ? new ItemStack(Item.bucketEmpty) : is;
 	}
 }

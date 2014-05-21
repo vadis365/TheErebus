@@ -7,8 +7,8 @@ import erebus.ModMaterials;
 
 public class ItemCavemanClub extends ItemSword {
 
-	public ItemCavemanClub(int id) {
-		super(id, ModMaterials.toolCAVEMANCLUB);
+	public ItemCavemanClub() {
+		super(ModMaterials.toolCAVEMANCLUB);
 	}
 
 	@Override

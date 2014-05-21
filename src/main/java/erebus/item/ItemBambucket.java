@@ -1,16 +1,16 @@
 package erebus.item;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumMovingObjectType;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -22,13 +22,12 @@ import erebus.entity.EntityBotFlyLarva;
 
 public class ItemBambucket extends Item {
 
-	public Icon bambucket;
-	public Icon waterBambucket;
-	public Icon bambucketOfBeetleJuice;
-	public Icon bambucketHoney;
+	public IIcon bambucket;
+	public IIcon waterBambucket;
+	public IIcon bambucketOfBeetleJuice;
+	public IIcon bambucketHoney;
 
-	public ItemBambucket(int id) {
-		super(id);
+	public ItemBambucket() {
 		maxStackSize = 16;
 		setHasSubtypes(true);
 		setMaxDamage(0);
@@ -197,32 +196,32 @@ public class ItemBambucket extends Item {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister) {
-		bambucket = iconRegister.registerIcon("erebus:bambucket");
-		waterBambucket = iconRegister.registerIcon("erebus:bambucketWater");
-		bambucketOfBeetleJuice = iconRegister.registerIcon("erebus:bambucketOfBeetleJuice");
-		bambucketHoney = iconRegister.registerIcon("erebus:bambucketHoney");
+	public void registerIIcons(IIconRegister IIconRegister) {
+		bambucket = IIconRegister.registerIIcon("erebus:bambucket");
+		waterBambucket = IIconRegister.registerIIcon("erebus:bambucketWater");
+		bambucketOfBeetleJuice = IIconRegister.registerIIcon("erebus:bambucketOfBeetleJuice");
+		bambucketHoney = IIconRegister.registerIIcon("erebus:bambucketHoney");
 	}
 
 	@Override
-	public Icon getIconFromDamage(int meta) {
+	public IIcon getIconFromDamage(int meta) {
 		switch (meta) {
-		case 0:
-			return bambucket;
-		case 1:
-			return waterBambucket;
-		case 2:
-			return bambucketOfBeetleJuice;
-		case 3:
-			return bambucketHoney;
-		default:
-			return null;
+			case 0:
+				return bambucket;
+			case 1:
+				return waterBambucket;
+			case 2:
+				return bambucketOfBeetleJuice;
+			case 3:
+				return bambucketHoney;
+			default:
+				return null;
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
 		list.add(new ItemStack(id, 1, 1));
 		list.add(new ItemStack(id, 1, 2));

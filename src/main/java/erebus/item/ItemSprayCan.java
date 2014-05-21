@@ -5,15 +5,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.network.PacketTypeHandler;
 import erebus.network.packet.PacketParticle;
 
 public class ItemSprayCan extends Item {
-	public ItemSprayCan(int id) {
-		super(id);
+
+	public ItemSprayCan() {
 		maxStackSize = 9;
 		setCreativeTab(Erebus.tabErebusGear);
 	}

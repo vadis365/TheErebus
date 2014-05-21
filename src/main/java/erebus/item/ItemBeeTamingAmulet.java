@@ -14,8 +14,7 @@ import erebus.ModBlocks;
 
 public class ItemBeeTamingAmulet extends Item {
 
-	public ItemBeeTamingAmulet(int id) {
-		super(id);
+	public ItemBeeTamingAmulet() {
 		setMaxDamage(16);
 		setMaxStackSize(1);
 	}
@@ -24,25 +23,24 @@ public class ItemBeeTamingAmulet extends Item {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
 		if (hasTag(is))
-			if (is.stackTagCompound!=null && is.stackTagCompound.hasKey("homeX")) {
-				list.add("Honey Comb Block X: "+is.getTagCompound().getInteger("homeX"));
-				list.add("Honey Comb Block Y: "+is.getTagCompound().getInteger("homeY"));
-				list.add("Honey Comb Block Z: "+is.getTagCompound().getInteger("homeZ"));
-			}
-			else {
+			if (is.stackTagCompound != null && is.stackTagCompound.hasKey("homeX")) {
+				list.add("Honey Comb Block X: " + is.getTagCompound().getInteger("homeX"));
+				list.add("Honey Comb Block Y: " + is.getTagCompound().getInteger("homeY"));
+				list.add("Honey Comb Block Z: " + is.getTagCompound().getInteger("homeZ"));
+			} else {
 				list.add("Click on a Honey Comb Block to");
 				list.add("set as target for Bee drops.");
 				list.add("Then click on Bee to tame.");
 			}
 	}
-	
+
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote && hasTag(is)) {
 			int blockID = world.getBlockId(x, y, z);
 			Block block = Block.blocksList[blockID];
-			if (!world.isRemote && block !=null) {
-				if (block.blockID == ModBlocks.honeyCombBlock.blockID){
+			if (!world.isRemote && block != null) {
+				if (block.blockID == ModBlocks.honeyCombBlock.blockID) {
 					is.getTagCompound().setInteger("homeX", x);
 					is.getTagCompound().setInteger("homeY", y);
 					is.getTagCompound().setInteger("homeZ", z);

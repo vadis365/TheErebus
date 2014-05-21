@@ -14,10 +14,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
@@ -38,14 +36,12 @@ import erebus.entity.util.RandomMobNames;
 import erebus.integration.FMBIntegration;
 import erebus.integration.IModIntegration;
 import erebus.lib.Reference;
-import erebus.network.PacketHandler;
 import erebus.recipes.AltarRecipe;
 import erebus.recipes.BCFacadeManager;
 import erebus.recipes.RecipeHandler;
 import erebus.world.WorldProviderErebus;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
-@NetworkMod(channels = { Reference.CHANNEL }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class Erebus {
 
 	@SidedProxy(clientSide = Reference.SP_CLIENT, serverSide = Reference.SP_SERVER)
@@ -78,7 +74,7 @@ public class Erebus {
 		ModEntities.init();
 
 		GameRegistry.registerPlayerTracker(teleportHandler);
-		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
 		DimensionManager.registerProviderType(ConfigHandler.erebusDimensionID, WorldProviderErebus.class, true);
 		DimensionManager.registerDimension(ConfigHandler.erebusDimensionID, ConfigHandler.erebusDimensionID);
@@ -118,7 +114,7 @@ public class Erebus {
 	public void postInit(FMLPostInitializationEvent event) {
 		try {
 			for (ClassInfo clsInfo : ClassPath.from(getClass().getClassLoader()).getTopLevelClasses("erebus.integration")) {
-				Class cls = clsInfo.load();
+				Class<?> cls = clsInfo.load();
 
 				if (IModIntegration.class.isAssignableFrom(cls) && !cls.isInterface())
 					try {

@@ -1,24 +1,22 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemJumpBoots extends ItemArmor {
 
-	public ItemJumpBoots(int i, EnumArmorMaterial enumarmormaterial, int k) {
-		super(i, enumarmormaterial, 2, k);
+	public ItemJumpBoots(ArmorMaterial enumarmormaterial, int k) {
+		super(enumarmormaterial, 2, k);
 		setCreativeTab(Erebus.tabErebusGear);
 	}
 

@@ -1,10 +1,10 @@
 package erebus.item;
 
 import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,8 +22,8 @@ public class ItemSprintLeggings extends ItemArmor {
 	private int armtick;
 	private String texture;
 
-	public ItemSprintLeggings(int i, EnumArmorMaterial enumarmormaterial, int k) {
-		super(i, enumarmormaterial, 2, k);
+	public ItemSprintLeggings(ArmorMaterial enumarmormaterial, int k) {
+		super(enumarmormaterial, 2, k);
 		setCreativeTab(Erebus.tabErebusGear);
 	}
 

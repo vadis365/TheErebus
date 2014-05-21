@@ -1,9 +1,9 @@
 package erebus.item;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockFluid;
 import net.minecraft.block.BlockPane;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,12 +20,11 @@ import erebus.entity.EntityExtractedBlock;
 
 public class ItemBlockExtractor extends Item {
 
-	public ItemBlockExtractor(int id) {
-		super(id);
+	public ItemBlockExtractor() {
 		maxStackSize = 1;
 		setMaxDamage(128);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
@@ -49,16 +48,16 @@ public class ItemBlockExtractor extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown")<=0)
+		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown") <= 0)
 			getBlockInfo(world, player, stack);
-		if (hasTag(stack)){
+		if (hasTag(stack)) {
 			Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
-			if(block != null)
+			if (block != null)
 				player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
 		return stack;
 	}
-	
+
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
 		resetStats(stack);
@@ -84,9 +83,8 @@ public class ItemBlockExtractor extends Item {
 					stack.getTagCompound().setInteger("blockID", world.getBlockId(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
 					stack.getTagCompound().setInteger("blockMeta", world.getBlockMetadata(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
 					Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
-					if (block != null) {
+					if (block != null)
 						stack.getTagCompound().setFloat("blockHardness", block.getBlockHardness(world, MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
-					}
 				}
 			}
 		}
@@ -117,13 +115,13 @@ public class ItemBlockExtractor extends Item {
 			entityExtractedBlock.setBlock(stack.getTagCompound().getInteger("blockID"), stack.getTagCompound().getInteger("blockMeta"));
 			entityExtractedBlock.setHeading(player.posX, player.posY, player.posZ);
 			world.spawnEntityInWorld(entityExtractedBlock);
-		}	
+		}
 	}
 
 	private boolean canExtract(Block block) {
 		return !(block instanceof BlockContainer) && !(block instanceof BlockFluid) && !(block instanceof BlockPane) && block.blockHardness >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
 	}
-	
+
 	public void resetStats(ItemStack stack) {
 		stack.getTagCompound().setInteger("blockID", 0);
 		stack.getTagCompound().setInteger("coolDown", 20);
@@ -136,11 +134,11 @@ public class ItemBlockExtractor extends Item {
 		}
 		return true;
 	}
-	
+
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int aNumber, boolean aBoolean ) {
-		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown")>=0)
-			stack.getTagCompound().setInteger("coolDown", stack.getTagCompound().getInteger("coolDown")-1);	
-	 }
+	public void onUpdate(ItemStack stack, World world, Entity entity, int aNumber, boolean aBoolean) {
+		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown") >= 0)
+			stack.getTagCompound().setInteger("coolDown", stack.getTagCompound().getInteger("coolDown") - 1);
+	}
 
 }

@@ -9,9 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.event.ForgeSubscribe;
+
 import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -23,13 +25,13 @@ import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemArmorGlider extends ItemArmor {
 
-	public ItemArmorGlider(int id, int armorType) {
-		super(id, ModMaterials.armorREINEXOSPECIAL, 2, armorType);
+	public ItemArmorGlider(int armorType) {
+		super(ModMaterials.armorREINEXOSPECIAL, 2, armorType);
 	}
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.gliderWing.ordinal();
+		return material.getItem() == ModItems.erebusMaterials && material.getItemDamage() == DATA.gliderWing.ordinal();
 	}
 
 	@Override
@@ -58,18 +60,18 @@ public class ItemArmorGlider extends ItemArmor {
 		modelPower.bipedLeftArm.showModel = false;
 		modelPower.bipedRightLeg.showModel = false;
 		modelPower.bipedLeftLeg.showModel = false;
-		
+
 		if (is.hasTagCompound()) {
 			model.isGliding = is.getTagCompound().getBoolean("isGliding");
 			modelPower.isGliding = is.getTagCompound().getBoolean("isGliding");
 		}
-		
+
 		if (is.hasTagCompound())
 			modelPower.isPowered = is.getTagCompound().getBoolean("isPowered");
-		
-		if(canFly())
+
+		if (canFly())
 			return modelPower;
-		
+
 		return model;
 	}
 
@@ -78,7 +80,7 @@ public class ItemArmorGlider extends ItemArmor {
 		//if (world.isRemote)
 		//	return;
 		player.fallDistance = 0.0F;
-		
+
 		if (!is.hasTagCompound()) {
 			is.stackTagCompound = new NBTTagCompound();
 			return;
@@ -122,7 +124,7 @@ public class ItemArmorGlider extends ItemArmor {
 
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onPlayerRenderPre(RenderPlayerEvent.Pre e) {
 		GL11.glPushMatrix();
@@ -147,38 +149,38 @@ public class ItemArmorGlider extends ItemArmor {
 				float x = 0;
 				float y = 0;
 				switch (facing) {
-				case 0:
-					x = 1;
-					y = 0;
-					break;
-				case 1:
-					x = 1;
-					y = 1;
-					break;
-				case 2:
-					x = 0;
-					y = 1;
-					break;
-				case 3:
-					x = -1;
-					y = 1;
-					break;
-				case 4:
-					x = -1;
-					y = 0;
-					break;
-				case 5:
-					x = -1;
-					y = -1;
-					break;
-				case 6:
-					x = 0;
-					y = -1;
-					break;
-				case 7:
-					x = 1;
-					y = -1;
-					break;
+					case 0:
+						x = 1;
+						y = 0;
+						break;
+					case 1:
+						x = 1;
+						y = 1;
+						break;
+					case 2:
+						x = 0;
+						y = 1;
+						break;
+					case 3:
+						x = -1;
+						y = 1;
+						break;
+					case 4:
+						x = -1;
+						y = 0;
+						break;
+					case 5:
+						x = -1;
+						y = -1;
+						break;
+					case 6:
+						x = 0;
+						y = -1;
+						break;
+					case 7:
+						x = 1;
+						y = -1;
+						break;
 				}
 				GL11.glRotatef(60.0F, x, 0.0F, y);
 				player.limbSwingAmount = 0.001F;
@@ -190,7 +192,7 @@ public class ItemArmorGlider extends ItemArmor {
 		return itemID == ModItems.armorGliderPowered.itemID;
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onPlayerRenderPost(RenderPlayerEvent.Post e) {
 		GL11.glPopMatrix();

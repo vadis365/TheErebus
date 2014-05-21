@@ -13,8 +13,8 @@ import erebus.entity.EntityScorpion;
 
 public class ItemScorpionPincer extends ItemSword {
 
-	public ItemScorpionPincer(int id) {
-		super(id, ModMaterials.weaponScorpionPincer);
+	public ItemScorpionPincer() {
+		super(ModMaterials.weaponScorpionPincer);
 		maxStackSize = 1;
 	}
 

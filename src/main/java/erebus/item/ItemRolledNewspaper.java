@@ -1,6 +1,7 @@
 package erebus.item;
 
 import java.util.List;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,8 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemRolledNewspaper extends Item {
 
-	public ItemRolledNewspaper(int id) {
-		super(id);
+	public ItemRolledNewspaper() {
 		maxStackSize = 1;
 	}
 
@@ -23,10 +23,10 @@ public class ItemRolledNewspaper extends Item {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
 		list.add("+10 Attack Damage");
-		if(!is.isItemEnchanted())
+		if (!is.isItemEnchanted())
 			list.add("Bane of Arthropods V");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack is, int pass) {
@@ -44,10 +44,11 @@ public class ItemRolledNewspaper extends Item {
 	public void onCreated(ItemStack is, World world, EntityPlayer player) {
 		is.addEnchantment(Enchantment.baneOfArthropods, 5);
 	}
-	
+
 	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int id, boolean map){
-		if (!is.isItemEnchanted())is.addEnchantment(Enchantment.baneOfArthropods,5);
+	public void onUpdate(ItemStack is, World world, Entity entity, int id, boolean map) {
+		if (!is.isItemEnchanted())
+			is.addEnchantment(Enchantment.baneOfArthropods, 5);
 	}
 
 }

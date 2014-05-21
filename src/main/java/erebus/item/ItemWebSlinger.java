@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 import erebus.entity.EntityWebSling;
 
 public class ItemWebSlinger extends Item {
-	public ItemWebSlinger(int id) {
-		super(id);
+
+	public ItemWebSlinger() {
 		maxStackSize = 1;
 		setMaxDamage(128);
 	}

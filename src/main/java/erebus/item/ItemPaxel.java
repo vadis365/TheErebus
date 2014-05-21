@@ -3,8 +3,8 @@ package erebus.item;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+
 import net.minecraft.block.Block;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
@@ -13,8 +13,8 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class ItemPaxel extends ItemTool {
 
-	public ItemPaxel(int id, EnumToolMaterial material) {
-		super(id, 1.0F, material, new Block[0]);
+	public ItemPaxel(ToolMaterial material) {
+		super(1.0F, material, null);
 	}
 
 	@Override

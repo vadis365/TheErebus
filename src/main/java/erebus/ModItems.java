@@ -1,15 +1,13 @@
 package erebus;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSeedFood;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IFuelHandler;
@@ -52,6 +50,8 @@ import erebus.item.ItemWaspSword;
 import erebus.item.ItemWebSlinger;
 import erebus.item.ItemWhetstone;
 import erebus.item.ItemWoodlouseBall;
+import erebus.item.JadeAxe;
+import erebus.item.JadePickaxe;
 import erebus.item.block.ItemBlockDoorAmber;
 
 public class ModItems {
@@ -85,67 +85,66 @@ public class ModItems {
 	}
 
 	private static void initItems() {
-		portalActivator = new ItemPortalActivator(ConfigHandler.portalActivatorID).setUnlocalizedName("portalActivator").setTextureName("erebus:portalActivator");
-		erebusMaterials = new ItemErebusMaterial(ConfigHandler.erebusMaterialsID).setUnlocalizedName("erebusMaterials");
-		erebusSpecialItem = new ItemErebusSpecial(ConfigHandler.erebusSpecialItemID).setUnlocalizedName("erebusSpecialItem");
-		erebusFood = new ItemErebusFood(ConfigHandler.erebusFoodID).setUnlocalizedName("erebusFood");
-		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
-			metalIngot = new ItemMetalIngots(ConfigHandler.metalIngotID);
-		bamBucket = new ItemBambucket(ConfigHandler.bamBucketID).setUnlocalizedName("bamBucket");
-		turnip = new ItemSeedFood(ConfigHandler.turnipID, 4, 0.6F, ModBlocks.blockTurnip.blockID, Block.tilledField.blockID).setUnlocalizedName("turnips").setTextureName("erebus:turnips");
-		sprayCan = new ItemSprayCan(ConfigHandler.sprayCanID).setUnlocalizedName("sprayCan").setTextureName("erebus:sprayCan");
-		wandOfAnimation = new ItemWandOfAnimation(ConfigHandler.wandOfAnimationID).setUnlocalizedName("wandOfAnimation");
-		bucketOfBeetleJuice = new ItemBucketOfBeetleJuice(ConfigHandler.bucketOfBeetleJuiceID).setUnlocalizedName("bucketOfBeetleJuice").setTextureName("erebus:bucketOfBeetleJuice");
-		hornOfSummoning = new ItemHornOfSummoning(ConfigHandler.hornOfSummoningID).setUnlocalizedName("hornOfSummoning").setTextureName("erebus:hornOfSummoning");
-		nectarCollector = new ItemNectarCollector(ConfigHandler.nectarCollectorID).setUnlocalizedName("nectarCollector").setTextureName("erebus:nectarCollector");
-		beeTamingAmulet = new ItemBeeTamingAmulet(ConfigHandler.beeTamingAmuletID).setUnlocalizedName("beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
-		doorAmberItem = new ItemBlockDoorAmber(ConfigHandler.doorAmberItemID, ModBlocks.doorAmber).setUnlocalizedName("doorAmberItem").setTextureName("erebus:doorAmber");
-		bucketHoney = new ItemBucketOfHoney(ConfigHandler.bucketHoneyID, ModBlocks.erebusHoneyBlock.blockID).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
-		homingBeecon = new ItemHomingBeecon(ConfigHandler.homingBeeconID).setUnlocalizedName("homingBeecon").setTextureName("paper");
-		flowerSeeds = new ItemErebusFlowerSeeds(ConfigHandler.flowerSeedsID).setUnlocalizedName("erebusFlowerSeeds");
-		whetstone = new ItemWhetstone(ConfigHandler.whetstoneID).setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
-		encrustedDiamond = new EncrustedDiamond(ConfigHandler.encrustedDiamondID).setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
+		portalActivator = new ItemPortalActivator().setUnlocalizedName("portalActivator").setTextureName("erebus:portalActivator");
+		erebusMaterials = new ItemErebusMaterial().setUnlocalizedName("erebusMaterials");
+		erebusSpecialItem = new ItemErebusSpecial().setUnlocalizedName("erebusSpecialItem");
+		erebusFood = new ItemErebusFood().setUnlocalizedName("erebusFood");
+		metalIngot = new ItemMetalIngots();
+		bamBucket = new ItemBambucket().setUnlocalizedName("bamBucket");
+		turnip = new ItemSeedFood(4, 0.6F, ModBlocks.blockTurnip, Blocks.farmland).setUnlocalizedName("turnips").setTextureName("erebus:turnips");
+		sprayCan = new ItemSprayCan().setUnlocalizedName("sprayCan").setTextureName("erebus:sprayCan");
+		wandOfAnimation = new ItemWandOfAnimation().setUnlocalizedName("wandOfAnimation");
+		bucketOfBeetleJuice = new ItemBucketOfBeetleJuice().setUnlocalizedName("bucketOfBeetleJuice").setTextureName("erebus:bucketOfBeetleJuice");
+		hornOfSummoning = new ItemHornOfSummoning().setUnlocalizedName("hornOfSummoning").setTextureName("erebus:hornOfSummoning");
+		nectarCollector = new ItemNectarCollector().setUnlocalizedName("nectarCollector").setTextureName("erebus:nectarCollector");
+		beeTamingAmulet = new ItemBeeTamingAmulet().setUnlocalizedName("beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
+		doorAmberItem = new ItemBlockDoorAmber(ModBlocks.doorAmber).setUnlocalizedName("doorAmberItem").setTextureName("erebus:doorAmber");
+		bucketHoney = new ItemBucketOfHoney(ModBlocks.erebusHoneyBlock).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
+		homingBeecon = new ItemHomingBeecon().setUnlocalizedName("homingBeecon").setTextureName("paper");
+		flowerSeeds = new ItemErebusFlowerSeeds().setUnlocalizedName("erebusFlowerSeeds");
+		whetstone = new ItemWhetstone().setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
+		encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
 
-		jadeHelmet = new ItemJadeArmor(ConfigHandler.jadeHelmetID, 0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
-		jadeBody = new ItemJadeArmor(ConfigHandler.jadeBodyID, 1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
-		jadeLegs = new ItemJadeArmor(ConfigHandler.jadeLegsID, 2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
-		jadeBoots = new ItemJadeArmor(ConfigHandler.jadeBootsID, 3).setUnlocalizedName("bootsJade").setTextureName("erebus:bootsJade");
-		jadeSword = new ItemSword(ConfigHandler.jadeSwordID, ModMaterials.toolJADE).setUnlocalizedName("swordJade").setTextureName("erebus:swordJade");
-		jadePickaxe = new ItemPickaxe(ConfigHandler.jadePickaxeID, ModMaterials.toolJADE).setUnlocalizedName("pickaxeJade").setTextureName("erebus:pickaxeJade");
-		jadeAxe = new ItemAxe(ConfigHandler.jadeAxeID, ModMaterials.toolJADE).setUnlocalizedName("axeJade").setTextureName("erebus:axeJade");
-		jadeShovel = new ItemSpade(ConfigHandler.jadeShovelID, ModMaterials.toolJADE).setUnlocalizedName("shovelJade").setTextureName("erebus:shovelJade");
-		jadePaxel = new ItemPaxel(ConfigHandler.jadePaxelID, ModMaterials.toolJADEPAXEL).setUnlocalizedName("paxelJade").setTextureName("erebus:paxelJade");
-		jadeHoe = new ItemHoe(ConfigHandler.jadeHoeID, ModMaterials.toolJADE).setUnlocalizedName("hoeJade").setTextureName("erebus:hoeJade");
+		jadeHelmet = new ItemJadeArmor(0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
+		jadeBody = new ItemJadeArmor(1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
+		jadeLegs = new ItemJadeArmor(2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
+		jadeBoots = new ItemJadeArmor(3).setUnlocalizedName("bootsJade").setTextureName("erebus:bootsJade");
+		jadeSword = new ItemSword(ModMaterials.toolJADE).setUnlocalizedName("swordJade").setTextureName("erebus:swordJade");
+		jadePickaxe = new JadePickaxe().setUnlocalizedName("pickaxeJade").setTextureName("erebus:pickaxeJade");
+		jadeAxe = new JadeAxe().setUnlocalizedName("axeJade").setTextureName("erebus:axeJade");
+		jadeShovel = new ItemSpade(ModMaterials.toolJADE).setUnlocalizedName("shovelJade").setTextureName("erebus:shovelJade");
+		jadePaxel = new ItemPaxel(ModMaterials.toolJADEPAXEL).setUnlocalizedName("paxelJade").setTextureName("erebus:paxelJade");
+		jadeHoe = new ItemHoe(ModMaterials.toolJADE).setUnlocalizedName("hoeJade").setTextureName("erebus:hoeJade");
 
-		exoskeletonHelmet = new ItemExoskeletonArmor(ConfigHandler.exoskeletonHelmetID, 0).setUnlocalizedName("helmetExo").setTextureName("erebus:helmetExo");
-		exoskeletonBody = new ItemExoskeletonArmor(ConfigHandler.exoskeletonBodyID, 1).setUnlocalizedName("chestplateExo").setTextureName("erebus:chestplateExo");
-		exoskeletonLegs = new ItemExoskeletonArmor(ConfigHandler.exoskeletonLegsID, 2).setUnlocalizedName("leggingsExo").setTextureName("erebus:leggingsExo");
-		exoskeletonBoots = new ItemExoskeletonArmor(ConfigHandler.exoskeletonBootsID, 3).setUnlocalizedName("bootsExo").setTextureName("erebus:bootsExo");
+		exoskeletonHelmet = new ItemExoskeletonArmor(0).setUnlocalizedName("helmetExo").setTextureName("erebus:helmetExo");
+		exoskeletonBody = new ItemExoskeletonArmor(1).setUnlocalizedName("chestplateExo").setTextureName("erebus:chestplateExo");
+		exoskeletonLegs = new ItemExoskeletonArmor(2).setUnlocalizedName("leggingsExo").setTextureName("erebus:leggingsExo");
+		exoskeletonBoots = new ItemExoskeletonArmor(3).setUnlocalizedName("bootsExo").setTextureName("erebus:bootsExo");
 
-		reinExoskeletonHelmet = new ItemReinExoskeletonArmor(ConfigHandler.reinExoskeletonHelmetID, 0).setUnlocalizedName("exoHelmetRein").setTextureName("erebus:exoHelmetRein");
-		reinExoskeletonBody = new ItemReinExoskeletonArmor(ConfigHandler.reinExoskeletonBodyID, 1).setUnlocalizedName("exoChestplateRein").setTextureName("erebus:exoChestplateRein");
-		reinExoskeletonLegs = new ItemReinExoskeletonArmor(ConfigHandler.reinExoskeletonLegsID, 2).setUnlocalizedName("exoLeggingsRein").setTextureName("erebus:exoLeggingsRein");
-		reinExoskeletonBoots = new ItemReinExoskeletonArmor(ConfigHandler.reinExoskeletonBootsID, 3).setUnlocalizedName("exoBootsRein").setTextureName("erebus:exoBootsRein");
+		reinExoskeletonHelmet = new ItemReinExoskeletonArmor(0).setUnlocalizedName("exoHelmetRein").setTextureName("erebus:exoHelmetRein");
+		reinExoskeletonBody = new ItemReinExoskeletonArmor(1).setUnlocalizedName("exoChestplateRein").setTextureName("erebus:exoChestplateRein");
+		reinExoskeletonLegs = new ItemReinExoskeletonArmor(2).setUnlocalizedName("exoLeggingsRein").setTextureName("erebus:exoLeggingsRein");
+		reinExoskeletonBoots = new ItemReinExoskeletonArmor(3).setUnlocalizedName("exoBootsRein").setTextureName("erebus:exoBootsRein");
 
-		fossilClub = new ItemCavemanClub(ConfigHandler.fossilClubID).setFull3D().setUnlocalizedName("clubBone").setTextureName("erebus:clubBone");
-		waspSword = new ItemWaspSword(ConfigHandler.waspSwordID).setUnlocalizedName("waspSword").setTextureName("paper");
-		maxSpeedBow = new ItemMaxSpeedBow(ConfigHandler.maxSpeedBowID).setUnlocalizedName("maxSpeedBow").setTextureName("erebus:maxSpeedBow");
-		waspDagger = new ItemWaspDagger(ConfigHandler.waspDaggerID).setUnlocalizedName("waspDagger");
-		scorpionPincer = new ItemScorpionPincer(ConfigHandler.scorpionPincerID).setUnlocalizedName("scorpionPincer").setTextureName("paper");
-		webSlinger = new ItemWebSlinger(ConfigHandler.webSlingerID).setUnlocalizedName("webSlinger").setTextureName("paper");
-		blockExtractor = new ItemBlockExtractor(ConfigHandler.blockExtractorID).setFull3D().setUnlocalizedName("blockExtractor").setTextureName("erebus:blockExtractor");
-		woodlouseBall = new ItemWoodlouseBall(ConfigHandler.woodlouseBallID).setUnlocalizedName("woodlouseBall");
-		rolledNewspaper = new ItemRolledNewspaper(ConfigHandler.rolledNewspaperID).setUnlocalizedName("rolledNewspaper").setTextureName("erebus:rolledNewspaper");
+		fossilClub = new ItemCavemanClub().setFull3D().setUnlocalizedName("clubBone").setTextureName("erebus:clubBone");
+		waspSword = new ItemWaspSword().setUnlocalizedName("waspSword").setTextureName("paper");
+		maxSpeedBow = new ItemMaxSpeedBow().setUnlocalizedName("maxSpeedBow").setTextureName("erebus:maxSpeedBow");
+		waspDagger = new ItemWaspDagger().setUnlocalizedName("waspDagger");
+		scorpionPincer = new ItemScorpionPincer().setUnlocalizedName("scorpionPincer").setTextureName("paper");
+		webSlinger = new ItemWebSlinger().setUnlocalizedName("webSlinger").setTextureName("paper");
+		blockExtractor = new ItemBlockExtractor().setFull3D().setUnlocalizedName("blockExtractor").setTextureName("erebus:blockExtractor");
+		woodlouseBall = new ItemWoodlouseBall().setUnlocalizedName("woodlouseBall");
+		rolledNewspaper = new ItemRolledNewspaper().setUnlocalizedName("rolledNewspaper").setTextureName("erebus:rolledNewspaper");
 
-		reinCompoundGoggles = new ItemCompoundGoggles(ConfigHandler.reinCompoundGogglesID, ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
-		compoundGoggles = new ItemCompoundGoggles(ConfigHandler.compoundGogglesID, ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("compoundGoggles").setTextureName("erebus:compoundGoggles");
-		sprintLeggings = new ItemSprintLeggings(ConfigHandler.sprintLeggingsID, ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("sprintLeggings").setTextureName("erebus:sprintLeggings");
-		jumpBoots = new ItemJumpBoots(ConfigHandler.jumpBootsID, ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("jumpBoots").setTextureName("erebus:jumpBoots");
-		armorGlider = new ItemArmorGlider(ConfigHandler.armorGliderID, 1).setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
-		armorGliderPowered = new ItemArmorGlider(ConfigHandler.armorGliderPoweredID, 1).setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
-		lightCrown = new ItemCrownOfLuminosity(ConfigHandler.lightCrownID, 0).setUnlocalizedName("lightCrown").setTextureName("erebus:lightCrown");
+		reinCompoundGoggles = new ItemCompoundGoggles(ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
+		compoundGoggles = new ItemCompoundGoggles(ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("compoundGoggles").setTextureName("erebus:compoundGoggles");
+		sprintLeggings = new ItemSprintLeggings(ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("sprintLeggings").setTextureName("erebus:sprintLeggings");
+		jumpBoots = new ItemJumpBoots(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("jumpBoots").setTextureName("erebus:jumpBoots");
+		armorGlider = new ItemArmorGlider(1).setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
+		armorGliderPowered = new ItemArmorGlider(1).setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
+		lightCrown = new ItemCrownOfLuminosity(0).setUnlocalizedName("lightCrown").setTextureName("erebus:lightCrown");
 
-		spawnEggs = new ItemSpawnEggs(ConfigHandler.spawnEggsID).setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
+		spawnEggs = new ItemSpawnEggs().setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
 	}
 
 	private static void initCreativeTabs() {
@@ -168,8 +167,7 @@ public class ModItems {
 		GameRegistry.registerItem(erebusMaterials, "erebus.erebusMaterials");
 		GameRegistry.registerItem(erebusFood, "erebus.erebusFood");
 		GameRegistry.registerItem(erebusSpecialItem, "erebus.erebusSpecialItem");
-		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
-			GameRegistry.registerItem(metalIngot, "erebus.metalIngot");
+		GameRegistry.registerItem(metalIngot, "erebus.metalIngot");
 		GameRegistry.registerItem(bamBucket, "erebus.bamBucket");
 		GameRegistry.registerItem(turnip, "erebus.turnips");
 		GameRegistry.registerItem(sprayCan, "erebus.sprayCan");
@@ -224,19 +222,15 @@ public class ModItems {
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(bamBucket, 1, 1), new ItemStack(bamBucket));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bamBucket, 1, 3), new ItemStack(bamBucket));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketHoney), new ItemStack(Item.bucketEmpty));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketHoney), new ItemStack(Items.bucket));
 	}
 
 	private static void registerProperties() {
-		MinecraftForge.setToolClass(jadeAxe, "axe", 2);
-		MinecraftForge.setToolClass(jadePickaxe, "pickaxe", 2);
-		MinecraftForge.setToolClass(jadeShovel, "shovel", 2);
-
 		GameRegistry.registerFuelHandler(new IFuelHandler() {
 
 			@Override
 			public int getBurnTime(ItemStack fuel) {
-				return fuel.itemID == erebusMaterials.itemID && fuel.getItemDamage() == DATA.bamboo.ordinal() ? 300 : 0;
+				return fuel.getItem() == erebusMaterials && fuel.getItemDamage() == DATA.bamboo.ordinal() ? 300 : 0;
 			}
 		});
 	}

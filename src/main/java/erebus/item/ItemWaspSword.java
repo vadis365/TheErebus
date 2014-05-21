@@ -10,8 +10,8 @@ import erebus.entity.EntityWasp;
 
 public class ItemWaspSword extends ItemSword {
 
-	public ItemWaspSword(int id) {
-		super(id, ModMaterials.weaponWaspSword);
+	public ItemWaspSword() {
+		super(ModMaterials.weaponWaspSword);
 		maxStackSize = 1;
 	}
 

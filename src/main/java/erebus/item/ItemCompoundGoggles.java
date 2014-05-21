@@ -1,7 +1,6 @@
 package erebus.item;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import erebus.ModItems;
@@ -9,8 +8,8 @@ import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemCompoundGoggles extends ItemArmor {
 
-	public ItemCompoundGoggles(int i, EnumArmorMaterial enumarmormaterial, int j, int k) {
-		super(i, enumarmormaterial, j, k);
+	public ItemCompoundGoggles(ArmorMaterial enumarmormaterial, int j, int k) {
+		super(enumarmormaterial, j, k);
 	}
 
 	@Override

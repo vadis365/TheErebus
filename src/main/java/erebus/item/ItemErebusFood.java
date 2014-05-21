@@ -1,7 +1,9 @@
 package erebus.item;
 
 import java.util.List;
-import net.minecraft.client.renderer.texture.IconRegister;
+
+import javax.swing.Icon;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -10,7 +12,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,10 +24,10 @@ public class ItemErebusFood extends ItemFood {
 	public static final short dataLarvaRaw = 0, dataLarvaCooked = 1, dataGrasshopperLegRaw = 2, dataGrasshopperLegCooked = 3, dataLegTarantula = 4, dataLegTarantulaCooked = 5, dataBambooSoup = 6, dataMelonade = 7, dataMelonadeSparkly = 8, dataLarvaeOnStick = 9, dataHoneySandwich = 10;
 
 	@SideOnly(Side.CLIENT)
-	public static Icon[] icons;
+	public static IIcon[] icons;
 
-	public ItemErebusFood(int id) {
-		super(id, 3, 0.5F, false);
+	public ItemErebusFood() {
+		super(3, 0.5F, false);
 		setHasSubtypes(true);
 		setMaxDamage(0);
 	}

@@ -11,8 +11,7 @@ import erebus.entity.EntityLocust;
 
 public class ItemHornOfSummoning extends Item {
 
-	public ItemHornOfSummoning(int id) {
-		super(id);
+	public ItemHornOfSummoning() {
 		maxStackSize = 1;
 		setCreativeTab(Erebus.tabErebusGear);
 	}

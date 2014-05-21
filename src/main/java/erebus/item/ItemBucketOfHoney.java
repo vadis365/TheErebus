@@ -1,13 +1,14 @@
 package erebus.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 
 public class ItemBucketOfHoney extends ItemBucket {
 
-	public ItemBucketOfHoney(int id, int full) {
-		super(id, full);
+	public ItemBucketOfHoney(Block full) {
+		super(full);
 		setMaxStackSize(1);
 	}
 

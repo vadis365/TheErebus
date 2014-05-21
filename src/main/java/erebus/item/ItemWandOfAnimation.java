@@ -1,6 +1,7 @@
 package erebus.item;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,8 +19,7 @@ import erebus.tileentity.TileEntityBambooCrate;
 
 public class ItemWandOfAnimation extends Item {
 
-	public ItemWandOfAnimation(int id) {
-		super(id);
+	public ItemWandOfAnimation() {
 		setFull3D();
 		setTextureName("paper");
 		setMaxDamage(64);

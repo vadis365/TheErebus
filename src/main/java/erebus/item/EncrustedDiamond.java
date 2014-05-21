@@ -8,10 +8,6 @@ import erebus.entity.EntityFireResistent;
 
 public class EncrustedDiamond extends Item {
 
-	public EncrustedDiamond(int id) {
-		super(id);
-	}
-
 	@Override
 	public boolean hasCustomEntity(ItemStack stack) {
 		return true;

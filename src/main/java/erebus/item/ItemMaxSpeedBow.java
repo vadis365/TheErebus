@@ -18,8 +18,7 @@ public class ItemMaxSpeedBow extends Item {
 
 	private final int weaponEnchantibility;
 
-	public ItemMaxSpeedBow(int id) {
-		super(id);
+	public ItemMaxSpeedBow() {
 		maxStackSize = 1;
 		setMaxDamage(301);
 		weaponEnchantibility = 0;
@@ -129,7 +128,7 @@ public class ItemMaxSpeedBow extends Item {
 	}
 
 	@Override
-	public boolean hasEffect(ItemStack is, int pass){
+	public boolean hasEffect(ItemStack is, int pass) {
 		return true;
 	}
 

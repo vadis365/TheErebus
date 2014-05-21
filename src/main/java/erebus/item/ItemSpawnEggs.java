@@ -3,15 +3,14 @@ package erebus.item;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -31,8 +30,7 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 		return eggTypes.get((short) is.getItemDamage());
 	}
 
-	public ItemSpawnEggs(int id) {
-		super(id);
+	public ItemSpawnEggs() {
 		setHasSubtypes(true);
 	}
 

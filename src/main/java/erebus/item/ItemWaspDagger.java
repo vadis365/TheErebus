@@ -9,8 +9,9 @@ import erebus.ModMaterials;
 import erebus.entity.EntityWaspDagger;
 
 public class ItemWaspDagger extends ItemSword {
-	public ItemWaspDagger(int id) {
-		super(id, ModMaterials.weaponWaspDagger);
+
+	public ItemWaspDagger() {
+		super(ModMaterials.weaponWaspDagger);
 		maxStackSize = 16;
 		setTextureName("paper");
 	}

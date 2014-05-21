@@ -1,21 +1,22 @@
 package erebus.core.handler;
 
+import javax.swing.Icon;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.util.Icon;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModBlocks;
 import erebus.core.teleport.TeleportClient;
 
 public class PortalOverlayHandler {
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onPreRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
 		Minecraft mc = Minecraft.getMinecraft();
 		if (mc.thePlayer != null)
