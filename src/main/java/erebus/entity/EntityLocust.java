@@ -29,11 +29,11 @@ public class EntityLocust extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(100.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
 	}
 
 	@Override

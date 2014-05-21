@@ -73,8 +73,8 @@ public class EntityWorkerBee extends EntityTameable {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
 	}
 
 	@Override

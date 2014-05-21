@@ -32,10 +32,10 @@ public class EntityScorpion extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(30.0D); // MaxHealth
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(3.0D); // atkDmg
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D); // followRange
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D); // Movespeed
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D); // atkDmg
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
 	}
 
 	@Override

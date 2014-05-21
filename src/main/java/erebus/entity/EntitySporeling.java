@@ -51,9 +51,9 @@ public class EntitySporeling extends EntityAnimal {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4D); 
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4D); 
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override

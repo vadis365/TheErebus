@@ -50,9 +50,9 @@ public int skin = rand.nextInt(2);
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(getAttackStrength()); // atkDmg
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength()); // atkDmg
 	}
 
 	@Override

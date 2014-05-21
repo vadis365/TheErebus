@@ -52,9 +52,9 @@ public class EntityUmberGolem extends EntityCreature implements IMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(75.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(75.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override

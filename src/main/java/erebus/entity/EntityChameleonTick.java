@@ -51,10 +51,10 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(30.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override
@@ -152,12 +152,12 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 	
 	public void setAIs(boolean active) {
 		if (!active) {
-			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.0D);
+			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
 			tasks.removeTask(aiAttackOnCollide);
 			tasks.removeTask(aiAttackTarget);
 		}
 		if (active) {
-			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.65D);
+			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.65D);
 			tasks.addTask(1, aiAttackOnCollide);
 			targetTasks.addTask(1, aiAttackTarget);	
 		}

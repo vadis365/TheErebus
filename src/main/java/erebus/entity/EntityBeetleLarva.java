@@ -78,8 +78,8 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0F);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.35D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0F);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
 	}
 
 	@Override

@@ -54,8 +54,8 @@ public class EntityGrasshopper extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.6D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D); // Max
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D); // Movespeed
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D); // Max
 		// Health
 	}
 

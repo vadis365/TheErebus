@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -12,7 +13,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -27,7 +28,7 @@ public class EntityBeetle extends EntityAnimal {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIPanic(this, 0.6D));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));
-		tasks.addTask(3, new EntityAITempt(this, 0.5D, ModItems.turnip.itemID, false));
+		tasks.addTask(3, new EntityAITempt(this, 0.5D, ModItems.turnip, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.5D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(7, new EntityAILookIdle(this));
@@ -48,8 +49,8 @@ public class EntityBeetle extends EntityAnimal {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 	}
 
 	@Override
@@ -92,32 +93,33 @@ public class EntityBeetle extends EntityAnimal {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-	}
+    }
 
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
 
-		if (is != null && is.itemID == Item.bucketEmpty.itemID && !player.capabilities.isCreativeMode) {
+		if (is != null && is == new ItemStack(Items.bucket, 1) && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bucketOfBeetleJuice));
 			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bucketOfBeetleJuice)))
-				player.dropPlayerItem(new ItemStack(ModItems.bucketOfBeetleJuice.itemID, 1, 0));
+				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bucketOfBeetleJuice, 1, 0), false);
 			return true;
 		}
-		if (is != null && is.itemID == ModItems.bamBucket.itemID && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
+		if (is != null && is == new ItemStack(ModItems.bamBucket) && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bamBucket, 1, 2));
 			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bamBucket, 1, 2)))
-				player.dropPlayerItem(new ItemStack(ModItems.bamBucket.itemID, 1, 2));
+				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bamBucket, 1, 2), false);
 			return true;
 		}
-		if (is != null && is.itemID == ModItems.turnip.itemID && !isInLove()) {
+		if (is != null && is == new ItemStack(ModItems.turnip) && !isInLove()) {
 			is.stackSize--;
 			setTame((byte) 1);
-			inLove = 600;
+			//TODO (broken)
+			//inLove = 600;
 			return true;
 		} else
 			return super.interact(player);
@@ -132,7 +134,7 @@ public class EntityBeetle extends EntityAnimal {
 
 	@Override
 	public boolean isBreedingItem(ItemStack is) {
-		return is != null && is.itemID == ModItems.turnip.itemID;
+		return is != null && is == new ItemStack(ModItems.turnip);
 	}
 
 	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {

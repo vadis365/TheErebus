@@ -37,10 +37,10 @@ public class EntityMidgeSwarm extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D);
 	}
 
 	@Override

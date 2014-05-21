@@ -12,6 +12,8 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -40,11 +42,11 @@ public class EntityAntlion extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(35.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(35.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
 	}
 
 	@Override
@@ -63,10 +65,11 @@ public class EntityAntlion extends EntityMob {
 	}
 
 	/*
-	 * @Override protected String getLivingSound() { return
-	 * "erebus:AntlionSound"; }
+	 * @Override protected String getLivingSound() {
+	 * return "erebus:AntlionSound"; }
 	 * 
-	 * @Override protected String getHurtSound() { return "erebus:Antlionhurt";
+	 * @Override protected String getHurtSound() {
+	 * return "erebus:Antlionhurt";
 	 * }
 	 */
 	
@@ -74,15 +77,15 @@ public class EntityAntlion extends EntityMob {
 	protected String getDeathSound() {
 		return "erebus:squish";
 	}
-
+	
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-	}
-
+    }
+	
 	@Override
-	protected int getDropItemId() {
-		return Block.sand.blockID;
+	protected Item getDropItem() {
+	  return Item.getItemFromBlock(Blocks.sand);
 	}
 
 	@Override
@@ -99,7 +102,7 @@ public class EntityAntlion extends EntityMob {
 	}
 
 	public boolean isOnSand() {
-		return worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == Block.sand.blockID;
+		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == Blocks.sand;
 	}
 
 	@Override

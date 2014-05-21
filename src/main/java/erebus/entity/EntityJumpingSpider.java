@@ -24,7 +24,7 @@ public class EntityJumpingSpider extends EntitySpider {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
 	}
 
 	@Override

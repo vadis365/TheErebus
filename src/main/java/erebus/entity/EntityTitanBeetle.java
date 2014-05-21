@@ -125,10 +125,10 @@ public class EntityTitanBeetle extends EntityTameable {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.75D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);
 	}
 
 	@Override
@@ -233,7 +233,7 @@ public class EntityTitanBeetle extends EntityTameable {
 			player.swingItem();
 			tasks.removeTask(aiNearestAttackableTarget);
 			setAttackTarget((EntityLivingBase) null);
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(80.0D);
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
 			heal(healingBuff);
 			return true;
 		}

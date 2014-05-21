@@ -24,10 +24,10 @@ public class EntityFireAntSoldier extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.8D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.8D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	public EnumCreatureAttribute getCreatureAttribute() {

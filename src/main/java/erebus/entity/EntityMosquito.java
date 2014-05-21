@@ -227,8 +227,8 @@ public class EntityMosquito extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10 + maxBloodLevel);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10 + maxBloodLevel);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
 	}
 
 	@Override

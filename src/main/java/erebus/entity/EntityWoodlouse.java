@@ -49,8 +49,8 @@ public class EntityWoodlouse extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
 	}
 
 	@Override

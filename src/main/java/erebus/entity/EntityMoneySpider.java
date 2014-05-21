@@ -17,8 +17,8 @@ public class EntityMoneySpider extends EntitySpider {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.800000011920929D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.800000011920929D);
 	}
 
 	@Override

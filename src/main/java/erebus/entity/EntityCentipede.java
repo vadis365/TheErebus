@@ -36,10 +36,10 @@ public class EntityCentipede extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D); // MaxHealth
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(getAttackStrength()); // atkDmg
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D); // followRange
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D); // Movespeed
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength()); // atkDmg
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
 	}
 
 	@Override

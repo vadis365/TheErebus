@@ -57,10 +57,10 @@ public class EntityPrayingMantis extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.6D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0D);
 	}
 
 	@Override

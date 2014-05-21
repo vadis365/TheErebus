@@ -32,9 +32,9 @@ public class EntityBotFlyLarva extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.6000000238418579D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6000000238418579D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.0D);
 	}
 	
 	@Override

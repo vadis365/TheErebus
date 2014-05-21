@@ -11,8 +11,11 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModItems;
@@ -37,11 +40,11 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.75D);	
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);	
 	}
 
 	@Override
@@ -78,13 +81,13 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-	}
+    }
 
 	@Override
-	protected int getDropItemId() {
-		return Block.sand.blockID;
+	protected Item getDropItem() {
+	  return Item.getItemFromBlock(Blocks.sand);
 	}
 
 	@Override
@@ -97,7 +100,7 @@ public class EntityAntlionMiniBoss extends EntityMob {
 
 	@Override
 	protected void dropRareDrop(int par1) {
-		dropItem(ModBlocks.ghostSand.blockID, 4);
+		dropItem(Item.getItemFromBlock(ModBlocks.ghostSand), 4);
 	}
 
 	@Override
@@ -107,9 +110,9 @@ public class EntityAntlionMiniBoss extends EntityMob {
 			entityToAttack = findPlayerToAttack();
 		else
 			entityToAttack = null;
-		int difficulty = worldObj.difficultySetting;
-			if (difficulty == 0)
-				worldObj.difficultySetting = 1;
+		EnumDifficulty difficulty = worldObj.difficultySetting;
+			if (difficulty == EnumDifficulty.PEACEFUL)
+				worldObj.difficultySetting = EnumDifficulty.EASY;
 			worldObj.difficultySetting = difficulty;
 	}
 

@@ -39,9 +39,9 @@ public class EntityCicada extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D);
 	}
 
 	@Override

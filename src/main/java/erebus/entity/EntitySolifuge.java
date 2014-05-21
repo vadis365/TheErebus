@@ -44,10 +44,10 @@ public class EntitySolifuge extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(30.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.5D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override

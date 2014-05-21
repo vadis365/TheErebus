@@ -44,10 +44,10 @@ public class EntityBlackWidow extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D); // MaxHealth
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2.0D); // atkDmg
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D); // followRange
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D); // atkDmg
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D); // Movespeed
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
 	}
 
 	@Override
@@ -87,16 +87,16 @@ public class EntityBlackWidow extends EntityMob {
 			entityToAttack = null;
 
 		if (!worldObj.isRemote && getWidowSize() == 1) {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15.0D); // MaxHealth
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D); // atkDmg
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D); // MaxHealth
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D); // atkDmg
 		}
 		if (!worldObj.isRemote && getWidowSize() == 2) {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D); // MaxHealth
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.5D); // atkDmg
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D); // MaxHealth
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.5D); // atkDmg
 		}
 		if (!worldObj.isRemote && getWidowSize() == 4) {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D); // MaxHealth
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2.0D); // atkDmg
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D); // MaxHealth
+			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D); // atkDmg
 		}
 	}
 

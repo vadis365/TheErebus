@@ -20,10 +20,10 @@ public class EntityBloodSnail extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.2D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D); // MaxHealth
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(2.0D); // atkDmg
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D); // followRange
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D); // Movespeed
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D); // atkDmg
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
 	}
 	
 	@Override

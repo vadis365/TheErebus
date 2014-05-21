@@ -64,8 +64,8 @@ public class EntityLavaWebSpider extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1D);
 	}
 
 	@Override

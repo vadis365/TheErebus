@@ -71,17 +71,17 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			if (getIsBoss() == 1) {
 				setSize(3F, 2F);
 				experienceValue = 25;
-				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.9D);
-				getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
-				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(8.0D);
-				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
+				getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
+				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
+				getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 			} else {
 				setSize(1.5F, 1.0F);
 				experienceValue = 10;
-				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.75D);
-				getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(25.0D);
-				getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-				getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D);
+				getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+				getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 			}
 	}
 	

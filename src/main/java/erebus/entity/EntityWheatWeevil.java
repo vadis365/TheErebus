@@ -53,8 +53,8 @@ public class EntityWheatWeevil extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D); // Movespeed
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D); // MaxHealth
 	}
 
 	@Override

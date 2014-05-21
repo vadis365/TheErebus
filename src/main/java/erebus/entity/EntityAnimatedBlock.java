@@ -66,10 +66,10 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override
