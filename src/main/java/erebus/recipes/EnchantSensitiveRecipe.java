@@ -49,7 +49,7 @@ public class EnchantSensitiveRecipe extends ShapedRecipes {
 					if (stack2 == null && stack != null || stack2 != null && stack == null)
 						return false;
 
-					if (stack.itemID != stack2.itemID)
+					if (stack.getItem() != stack2.getItem())
 						return false;
 
 					if (stack.getItemDamage() != OreDictionary.WILDCARD_VALUE && stack.getItemDamage() != stack2.getItemDamage())
@@ -69,6 +69,7 @@ public class EnchantSensitiveRecipe extends ShapedRecipes {
 		return stack1.hasTagCompound() == stack2.hasTagCompound();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static EnchantSensitiveRecipe makeRecipe(ItemStack result, Object... recipe) {
 		String s = "";
 		int i = 0;

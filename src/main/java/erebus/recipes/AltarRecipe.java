@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -18,7 +18,7 @@ public class AltarRecipe {
 
 	public static void init() {
 		//example recipe, delete when real ones are added
-		addRecipe(new ItemStack(Item.arrow), new ItemStack(Block.anvil), new ItemStack(Item.appleRed));
+		addRecipe(new ItemStack(Items.arrow), new ItemStack(Blocks.anvil), new ItemStack(Items.apple));
 	}
 
 	/**

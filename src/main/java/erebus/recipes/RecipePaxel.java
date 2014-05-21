@@ -1,5 +1,6 @@
 package erebus.recipes;
 
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,12 +12,12 @@ import erebus.ModMaterials;
 public class RecipePaxel implements IRecipe {
 	@Override
 	public boolean matches(InventoryCrafting matrix, World world) {
-		return checkItemInSlot(matrix, 0, ModItems.jadeAxe.itemID) && checkItemInSlot(matrix, 1, ModItems.jadeShovel.itemID) && checkItemInSlot(matrix, 2, ModItems.jadePickaxe.itemID) && checkItemInSlot(matrix, 4, Item.stick.itemID) && checkItemInSlot(matrix, 7, Item.stick.itemID);
+		return checkItemInSlot(matrix, 0, ModItems.jadeAxe) && checkItemInSlot(matrix, 1, ModItems.jadeShovel) && checkItemInSlot(matrix, 2, ModItems.jadePickaxe) && checkItemInSlot(matrix, 4, Items.stick) && checkItemInSlot(matrix, 7, Items.stick);
 	}
 
-	private boolean checkItemInSlot(InventoryCrafting matrix, int slot, int itemID) {
+	private boolean checkItemInSlot(InventoryCrafting matrix, int slot, Item itemID) {
 		ItemStack is = matrix.getStackInSlot(slot);
-		return is != null && is.itemID == itemID;
+		return is != null && is.getItem() == itemID;
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class RecipePaxel implements IRecipe {
 			currentDurability += is.getMaxDamage() - is.getItemDamage();
 		}
 
-		return new ItemStack(ModItems.jadePaxel.itemID, 1, ModMaterials.toolJADEPAXEL.getMaxUses() - (int) Math.floor((float) currentDurability * ModMaterials.toolJADEPAXEL.getMaxUses() / totalDurability));
+		return new ItemStack(ModItems.jadePaxel, 1, ModMaterials.toolJADEPAXEL.getMaxUses() - (int) Math.floor((float) currentDurability * ModMaterials.toolJADEPAXEL.getMaxUses() / totalDurability));
 	}
 
 	@Override

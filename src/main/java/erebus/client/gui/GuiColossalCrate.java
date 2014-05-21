@@ -4,9 +4,9 @@ import java.util.List;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -33,6 +33,7 @@ public class GuiColossalCrate extends GuiContainer {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void initGui() {
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
@@ -72,10 +73,10 @@ public class GuiColossalCrate extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRenderer.drawString(I18n.getString("container.colossalCrate"), 28, 6, 4210752);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.colossalCrate"), 28, 6, 4210752);
 		String str = getPageNumber() + "/3";
-		fontRenderer.drawString(str, xSize / 2 - fontRenderer.getStringWidth(str) / 2, 6, 4210752);
-		fontRenderer.drawString(I18n.getString("container.inventory"), 32, ySize - 96 + 3, 4210752);
+		fontRendererObj.drawString(str, xSize / 2 - fontRendererObj.getStringWidth(str) / 2, 6, 4210752);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 32, ySize - 96 + 3, 4210752);
 	}
 
 	@Override

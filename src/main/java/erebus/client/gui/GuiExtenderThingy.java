@@ -1,9 +1,9 @@
 package erebus.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -27,8 +27,8 @@ public class GuiExtenderThingy extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		int color = Utils.getColour(0, 0, 0);
-		fontRenderer.drawString(I18n.getString("container.extenderThingy"), xSize / 2 - fontRenderer.getStringWidth(I18n.getString("container.extenderThingy")) / 2, 6, color);
-		fontRenderer.drawString(I18n.getString("container.inventory"), xSize - 170, ySize - 96 + 2, color);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.extenderThingy"), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal("container.extenderThingy")) / 2, 6, color);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), xSize - 170, ySize - 96 + 2, color);
 	}
 
 	@Override

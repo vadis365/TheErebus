@@ -1,9 +1,9 @@
 package erebus.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiCrafting;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -21,8 +21,8 @@ public class GuiPetrifiedWorkbench extends GuiCrafting {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRenderer.drawString(I18n.getString("container.crafting"), 28, 6, Utils.getColour(255, 255, 255));
-		fontRenderer.drawString(I18n.getString("container.inventory"), 8, ySize - 96 + 2, Utils.getColour(255, 255, 255));
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.crafting"), 28, 6, Utils.getColour(255, 255, 255));
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, Utils.getColour(255, 255, 255));
 	}
 
 	@Override

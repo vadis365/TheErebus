@@ -2,9 +2,9 @@ package erebus.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -30,8 +30,8 @@ public class GuiUmberFurnace extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		int color = Utils.getColour(255, 255, 255);
-		fontRenderer.drawString(I18n.getString(furnace.getInvName()), xSize / 2 - fontRenderer.getStringWidth(I18n.getString(furnace.getInvName())) / 2, 6, color);
-		fontRenderer.drawString(I18n.getString("container.inventory"), xSize - 60, ySize - 96 + 2, color, true);
+		fontRendererObj.drawString(StatCollector.translateToLocal(furnace.getInvName()), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal(furnace.getInvName())) / 2, 6, color);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), xSize - 60, ySize - 96 + 2, color, true);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class GuiUmberFurnace extends GuiContainer {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		int k = 0;
-		int l = fontRenderer.getStringWidth(text);
+		int l = fontRendererObj.getStringWidth(text);
 
 		if (l > k)
 			k = l;
@@ -88,7 +88,7 @@ public class GuiUmberFurnace extends GuiContainer {
 			j1 = height - k1 - 6;
 
 		zLevel = 300.0F;
-		itemRenderer.zLevel = 300.0F;
+		itemRender.zLevel = 300.0F;
 		int l1 = -267386864;
 		drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
 		drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
@@ -102,10 +102,10 @@ public class GuiUmberFurnace extends GuiContainer {
 		drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
 		drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
 
-		fontRenderer.drawStringWithShadow(text, i1, j1, -1);
+		fontRendererObj.drawStringWithShadow(text, i1, j1, -1);
 
 		zLevel = 0.0F;
-		itemRenderer.zLevel = 0.0F;
+		itemRender.zLevel = 0.0F;
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		RenderHelper.enableStandardItemLighting();

@@ -21,9 +21,9 @@ public class RecipeWhetstoneUpgrades implements IRecipe {
 				return false;
 
 			if (a == 4) {
-				if (!(is.itemID == ModItems.whetstone.itemID && is.getItemDamage() < ItemWhetstone.maxTier))
+				if (!(is.getItem() == ModItems.whetstone && is.getItemDamage() < ItemWhetstone.maxTier))
 					return false;
-			} else if (!(is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == DATA.whetstonePowder.ordinal()))
+			} else if (!(is.getItem() == ModItems.erebusMaterials && is.getItemDamage() == DATA.whetstonePowder.ordinal()))
 				return false;
 		}
 
@@ -36,13 +36,13 @@ public class RecipeWhetstoneUpgrades implements IRecipe {
 
 		for (int a = 0; a < craftMatrix.getSizeInventory(); a++) {
 			is = craftMatrix.getStackInSlot(a);
-			if (is != null && is.itemID == ModItems.whetstone.itemID)
+			if (is != null && is.getItem() == ModItems.whetstone)
 				break;
 		}
 
 		if (is == null)
 			return null;
-		
+
 		return new ItemStack(ModItems.whetstone, 1, is.getItemDamage() + 1);
 	}
 

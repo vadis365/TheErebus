@@ -1,9 +1,9 @@
 package erebus.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -31,8 +31,8 @@ public class GuiPetrifiedChest extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRenderer.drawString(lowerChestInventory.isInvNameLocalized() ? lowerChestInventory.getInvName() : I18n.getString(lowerChestInventory.getInvName()), 8, 6, Utils.getColour(255, 255, 255));
-		fontRenderer.drawString(upperChestInventory.isInvNameLocalized() ? upperChestInventory.getInvName() : I18n.getString(upperChestInventory.getInvName()), 8, ySize - 96 + 2, Utils.getColour(255, 255, 255));
+		fontRendererObj.drawString(lowerChestInventory.isInvNameLocalized() ? lowerChestInventory.getInvName() : StatCollector.translateToLocal(lowerChestInventory.getInvName()), 8, 6, Utils.getColour(255, 255, 255));
+		fontRendererObj.drawString(upperChestInventory.isInvNameLocalized() ? upperChestInventory.getInvName() : StatCollector.translateToLocal(upperChestInventory.getInvName()), 8, ySize - 96 + 2, Utils.getColour(255, 255, 255));
 	}
 
 	@Override

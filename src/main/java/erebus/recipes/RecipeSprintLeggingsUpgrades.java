@@ -25,9 +25,9 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 				continue;
 			++cnt;
 
-			if (is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == DATA.supernaturalvelocity.ordinal())
+			if (is.getItem() == ModItems.erebusMaterials && is.getItemDamage() == DATA.supernaturalvelocity.ordinal())
 				hasVelocity = true;
-			else if (is.itemID == ModItems.sprintLeggings.itemID)
+			else if (is.getItem() == ModItems.sprintLeggings)
 				leggings = is;
 		}
 
@@ -43,9 +43,9 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 				return false;
 
 			if (a == 4) {
-				if (!(is.itemID == ModItems.sprintLeggings.itemID && (is.stackTagCompound == null || is.stackTagCompound.getByte("upgradeTier") < ItemSprintLeggings.maxTier)))
+				if (!(is.getItem() == ModItems.sprintLeggings && (is.stackTagCompound == null || is.stackTagCompound.getByte("upgradeTier") < ItemSprintLeggings.maxTier)))
 					return false;
-			} else if (!(is.itemID == ModItems.erebusMaterials.itemID && is.getItemDamage() == DATA.bioVelocity.ordinal()))
+			} else if (!(is.getItem() == ModItems.erebusMaterials && is.getItemDamage() == DATA.bioVelocity.ordinal()))
 				return false;
 		}
 
@@ -58,7 +58,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 
 		for (int a = 0; a < craftMatrix.getSizeInventory(); a++) {
 			is = craftMatrix.getStackInSlot(a);
-			if (is != null && is.itemID == ModItems.sprintLeggings.itemID)
+			if (is != null && is.getItem() == ModItems.sprintLeggings)
 				break;
 		}
 

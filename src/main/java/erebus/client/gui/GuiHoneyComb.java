@@ -1,9 +1,9 @@
 package erebus.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -27,8 +27,8 @@ public class GuiHoneyComb extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		fontRenderer.drawString(honeyCombInventory.isInvNameLocalized() ? honeyCombInventory.getInvName() : I18n.getString(honeyCombInventory.getInvName()), 8, 6, 4210752);
-		fontRenderer.drawString(I18n.getString("container.inventory"), 8, ySize - 96 + 2, 4210752);
+		fontRendererObj.drawString(honeyCombInventory.isInvNameLocalized() ? honeyCombInventory.getInvName() : StatCollector.translateToLocal(honeyCombInventory.getInvName()), 8, 6, 4210752);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override
