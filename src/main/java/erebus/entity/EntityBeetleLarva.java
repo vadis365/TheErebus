@@ -10,18 +10,16 @@ import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.ModItems;
 import erebus.entity.ai.EntityAIEatWoodenItem;
-import erebus.network.PacketTypeHandler;
-import erebus.network.packet.PacketParticle;
 
 public class EntityBeetleLarva extends EntityAnimal {
 	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
@@ -35,7 +33,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, aiEatWoodItem);
-		tasks.addTask(2, new EntityAITempt(this, 0.48D, Item.stick.itemID, false));
+		tasks.addTask(2, new EntityAITempt(this, 0.48D, Items.stick, false));
 		tasks.addTask(3, aiWander);
 		tasks.addTask(4, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIPanic(this, 0.48D));
@@ -98,16 +96,14 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		byte var2 = 0;
+		byte duration = 0;
 		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && player.boundingBox.maxX >= boundingBox.minX && player.boundingBox.minX <= boundingBox.maxX && player.boundingBox.maxZ >= boundingBox.minZ && player.boundingBox.minZ <= boundingBox.maxZ && player.lastTickPosY > player.posY) {
-			if (worldObj.difficultySetting > 1)
-				if (worldObj.difficultySetting == 2)
-					var2 = 7;
-				else if (worldObj.difficultySetting == 3)
-					var2 = 15;
-
-			if (var2 > 0)
-				player.addPotionEffect(new PotionEffect(Potion.confusion.id, var2 * 20, 0));
+				if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL)
+					duration = 7;
+				else if (this.worldObj.difficultySetting == EnumDifficulty.HARD)
+					duration = 15;
+			if (duration > 0)
+				player.addPotionEffect(new PotionEffect(Potion.confusion.id, duration * 20, 0));
 			setisSquashed(true);
 			setDead();
 			onDeathUpdate();
@@ -187,13 +183,14 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onDeathUpdate() {
 		super.onDeathUpdate();
 		if (isSquashed) {
-			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, entityId)));
+			//TODO
+			//PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, entityId)));
 			worldObj.playSoundEffect(posX, posY, posZ, getJumpedOnSound(), 1.0F, 0.5F);
 			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
 			if (!worldObj.isRemote) {
 				if (rand.nextInt(200) == 0)
-					entityDropItem(new ItemStack(Item.diamond), 0.0F);
-				entityDropItem(new ItemStack(Item.slimeBall), 0.0F);
+					entityDropItem(new ItemStack(Items.diamond), 0.0F);
+				entityDropItem(new ItemStack(Items.slime_ball), 0.0F);
 			}
 		}
 	}
@@ -209,7 +206,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is.itemID == Item.stick.itemID) {
+		if (!worldObj.isRemote && is != null && is == new ItemStack(Items.stick)) {
 			setLarvaSize(getLarvaSize() + 0.1F);
 			--is.stackSize;
 			return true;
