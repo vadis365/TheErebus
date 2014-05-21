@@ -4,7 +4,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -12,24 +11,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatMessageComponent;
-import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.tileentity.TileEntityErebusAltarEmpty;
 
 public class BlockErebusAltar extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
-	private Icon a, b;
-	String message;
+	private String message;
 
-	public BlockErebusAltar(int id) {
-		super(id, Material.rock);
+	public BlockErebusAltar() {
+		super(Material.rock);
+		setBlockTextureName("erebus:blockErebusAltarBreak");
 	}
 
 	@Override
@@ -48,27 +42,13 @@ public class BlockErebusAltar extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityErebusAltarEmpty();
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return world.doesBlockHaveSolidTopSurface(x, y - 1, z) || BlockFence.isIdAFence(world.getBlockId(x, y - 1, z));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		return side == 0 ? b : side == 1 ? a : blockIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:blockErebusAltarBreak");
-		a = reg.registerIcon("erebus:blockErebusAltarBreak");
-		b = reg.registerIcon("erebus:blockErebusAltarBreak");
+		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z));
 	}
 
 	@Override
@@ -119,33 +99,33 @@ public class BlockErebusAltar extends BlockContainer {
 
 	private void chooseAltar(World world, int x, int y, int z, int damage) {
 		switch (damage) {
-		case 8:
-			if (!world.isRemote)
-				world.setBlock(x, y, z, ModBlocks.erebusAltarXP.blockID, world.getBlockMetadata(x, y, z), 3);
-			if (world.isRemote)
-				message = "Altar of Experience Summoned.";
-			break;
+			case 8:
+				if (!world.isRemote)
+					world.setBlock(x, y, z, ModBlocks.erebusAltarXP.blockID, world.getBlockMetadata(x, y, z), 3);
+				if (world.isRemote)
+					message = "Altar of Experience Summoned.";
+				break;
 
-		case 9:
-			if (!world.isRemote)
-				world.setBlock(x, y, z, ModBlocks.erebusAltarRepair.blockID, world.getBlockMetadata(x, y, z), 3);
-			if (world.isRemote)
-				message = "Altar of Repair Summoned.";
-			break;
+			case 9:
+				if (!world.isRemote)
+					world.setBlock(x, y, z, ModBlocks.erebusAltarRepair.blockID, world.getBlockMetadata(x, y, z), 3);
+				if (world.isRemote)
+					message = "Altar of Repair Summoned.";
+				break;
 
-		case 12:
-			if (!world.isRemote)
-				world.setBlock(x, y, z, ModBlocks.erebusAltarLightning.blockID, world.getBlockMetadata(x, y, z), 3);
-			if (world.isRemote)
-				message = "Altar of Lightning Summoned.";
-			break;
+			case 12:
+				if (!world.isRemote)
+					world.setBlock(x, y, z, ModBlocks.erebusAltarLightning.blockID, world.getBlockMetadata(x, y, z), 3);
+				if (world.isRemote)
+					message = "Altar of Lightning Summoned.";
+				break;
 
-		case 13:
-			if (!world.isRemote)
-				world.setBlock(x, y, z, ModBlocks.erebusAltarHealing.blockID, world.getBlockMetadata(x, y, z), 3);
-			if (world.isRemote)
-				message = "Altar of Healing Summoned.";
-			break;
+			case 13:
+				if (!world.isRemote)
+					world.setBlock(x, y, z, ModBlocks.erebusAltarHealing.blockID, world.getBlockMetadata(x, y, z), 3);
+				if (world.isRemote)
+					message = "Altar of Healing Summoned.";
+				break;
 		}
 	}
 }

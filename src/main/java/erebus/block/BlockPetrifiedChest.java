@@ -1,7 +1,5 @@
 package erebus.block;
 
-import static net.minecraftforge.common.ForgeDirection.DOWN;
-
 import java.util.Iterator;
 
 import net.minecraft.block.Block;
@@ -28,7 +26,7 @@ import erebus.tileentity.TileEntityPetrifiedWoodChest;
 public class BlockPetrifiedChest extends BlockContainer {
 
 	public BlockPetrifiedChest(int id) {
-		super(id, Material.rock);
+		super(Material.rock);
 		setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 	}
 
@@ -49,13 +47,13 @@ public class BlockPetrifiedChest extends BlockContainer {
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		if (world.getBlockId(x, y, z - 1) == blockID)
+		if (world.getBlock(x, y, z - 1) == this)
 			setBlockBounds(0.0625F, 0.0F, 0.0F, 0.9375F, 0.875F, 0.9375F);
-		else if (world.getBlockId(x, y, z + 1) == blockID)
+		else if (world.getBlock(x, y, z + 1) == this)
 			setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 1.0F);
-		else if (world.getBlockId(x - 1, y, z) == blockID)
+		else if (world.getBlock(x - 1, y, z) == this)
 			setBlockBounds(0.0F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
-		else if (world.getBlockId(x + 1, y, z) == blockID)
+		else if (world.getBlock(x + 1, y, z) == this)
 			setBlockBounds(0.0625F, 0.0F, 0.0625F, 1.0F, 0.875F, 0.9375F);
 		else
 			setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);

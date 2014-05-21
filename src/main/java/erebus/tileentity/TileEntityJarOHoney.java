@@ -1,11 +1,10 @@
 package erebus.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet;
+import net.minecraft.network.Packet;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import erebus.ModBlocks;
 import erebus.network.PacketTypeHandler;
 import erebus.network.packet.PacketJarOHoney;

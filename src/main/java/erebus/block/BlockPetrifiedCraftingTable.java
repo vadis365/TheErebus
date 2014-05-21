@@ -2,9 +2,9 @@ package erebus.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,10 +14,10 @@ import erebus.core.proxy.CommonProxy;
 public class BlockPetrifiedCraftingTable extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private Icon blockTop, blockBottom;
+	private IIcon blockTop, blockBottom;
 
-	public BlockPetrifiedCraftingTable(int id) {
-		super(id, Material.rock);
+	public BlockPetrifiedCraftingTable() {
+		super(Material.rock);
 	}
 
 	@Override
@@ -32,13 +32,13 @@ public class BlockPetrifiedCraftingTable extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int m) {
+	public IIcon getIcon(int side, int m) {
 		return side == 1 ? blockTop : side == 0 ? blockBottom : blockIcon;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg) {
 		blockIcon = reg.registerIcon("erebus:petrifiedCraft_side");
 		blockTop = reg.registerIcon("erebus:petrifiedCraft_top");
 		blockBottom = reg.registerIcon("erebus:petrifiedCraft_bottom");

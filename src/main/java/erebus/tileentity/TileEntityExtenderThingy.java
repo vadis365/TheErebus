@@ -3,11 +3,12 @@ package erebus.tileentity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import erebus.ModBlocks;
 
 public class TileEntityExtenderThingy extends TileEntity implements IInventory {
@@ -24,14 +25,14 @@ public class TileEntityExtenderThingy extends TileEntity implements IInventory {
 		if (dir == null)
 			dir = getDirectionFromMetadata(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
 
-		int blockID;
+		Block blockID;
 		Block extension = getExtension(dir);
 		int index = getIndex(extension);
 
 		if (extending)
-			blockID = extension.blockID;
+			blockID = extension;
 		else {
-			blockID = 0;
+			blockID = null;
 			index--;
 		}
 
@@ -41,8 +42,8 @@ public class TileEntityExtenderThingy extends TileEntity implements IInventory {
 		if (x == xCoord && y == yCoord && z == zCoord)
 			return;
 
-		Block block = Block.blocksList[worldObj.getBlockId(x, y, z)];
-		if (block == null || block.isBlockReplaceable(worldObj, x, y, z) || !extending)
+		Block block = worldObj.getBlock(x, y, z);
+		if (block == null || block.isReplaceable(worldObj, x, y, z) || !extending)
 			if (decreaseInventory(blockID))
 				if (addToInventory(x, y, z)) {
 					worldObj.setBlock(x, y, z, blockID, getMetaFromDirection(dir), 3);
@@ -90,11 +91,11 @@ public class TileEntityExtenderThingy extends TileEntity implements IInventory {
 		return false;
 	}
 
-	private boolean decreaseInventory(int blockID) {
-		if (blockID == 0)
+	private boolean decreaseInventory(Block blockID) {
+		if (blockID == null)
 			return true;
 		for (int i = 0; i < inventory.length; i++)
-			if (inventory[i] != null && inventory[i].itemID == blockID) {
+			if (inventory[i] != null && inventory[i].getItem() == Item.getItemFromBlock(blockID)) {
 				inventory[i].stackSize--;
 				if (inventory[i].stackSize <= 0)
 					inventory[i] = null;
@@ -164,7 +165,7 @@ public class TileEntityExtenderThingy extends TileEntity implements IInventory {
 			if (inventory[slot].stackSize <= amount) {
 				is = inventory[slot];
 				inventory[slot] = null;
-				onInventoryChanged();
+				markDirty();
 				return is;
 			} else {
 				is = inventory[slot].splitStack(amount);
@@ -172,7 +173,7 @@ public class TileEntityExtenderThingy extends TileEntity implements IInventory {
 				if (inventory[slot].stackSize == 0)
 					inventory[slot] = null;
 
-				onInventoryChanged();
+				markDirty();
 				return is;
 			}
 		} else
@@ -196,7 +197,7 @@ public class TileEntityExtenderThingy extends TileEntity implements IInventory {
 		if (is != null && is.stackSize > getInventoryStackLimit())
 			is.stackSize = getInventoryStackLimit();
 
-		onInventoryChanged();
+		markDirty();
 	}
 
 	@Override
@@ -256,11 +257,11 @@ public class TileEntityExtenderThingy extends TileEntity implements IInventory {
 
 		extending = data.getBoolean("extending");
 
-		NBTTagList nbttaglist = data.getTagList("Items");
+		NBTTagList nbttaglist = data.getTagList("Items", 10);
 		inventory = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			int j = nbttagcompound1.getByte("Slot") & 255;
 
 			if (j >= 0 && j < inventory.length)

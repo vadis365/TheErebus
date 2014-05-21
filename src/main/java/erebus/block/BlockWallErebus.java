@@ -4,21 +4,22 @@ import java.util.List;
 
 import net.minecraft.block.BlockWall;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 
 public class BlockWallErebus extends BlockWall {
 
-	public BlockWallErebus(int id) {
-		super(id, ModBlocks.umberstone);
+	public BlockWallErebus() {
+		super(ModBlocks.umberstone);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		switch (meta) {
 			default:
 				return ModBlocks.umberstone.getIcon(side, 0); // Umberstone
@@ -48,7 +49,8 @@ public class BlockWallErebus extends BlockWall {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs creativeTab, List list) {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list) {
 		for (int a = 0; a < 9; a++)
 			list.add(new ItemStack(id, 1, a));
 	}

@@ -16,7 +16,7 @@ public class JarOHoney extends BlockGlowingJar {
 
 	public JarOHoney(int id) {
 		super(id);
-		setLightValue(0);
+		setLightLevel(0);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class JarOHoney extends BlockGlowingJar {
 					return true;
 				else {
 					tile.addHoney(fluidStack.amount);
-					ItemStack container = stack.getItem().getContainerItemStack(stack);
+					ItemStack container = stack.getItem().getContainerItem(stack);
 					stack.stackSize--;
 					if (stack.stackSize <= 0)
 						player.setCurrentItemOrArmor(0, container);

@@ -1,9 +1,6 @@
 package erebus.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityGlowGem extends TileEntity {
@@ -21,7 +18,7 @@ public class TileEntityGlowGem extends TileEntity {
 
 	public void setIlluminated(boolean state) {
 		lightOn = state;
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType().blockID, 0, lightOn ? 1 : 0);
+		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 0, lightOn ? 1 : 0);
 	}
 
 	@Override

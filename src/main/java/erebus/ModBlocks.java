@@ -59,7 +59,7 @@ import erebus.block.BlockSaplingErebus;
 import erebus.block.BlockSlabPetrifiedWood;
 import erebus.block.BlockSlabPlanksErebus;
 import erebus.block.BlockSlabStoneErebus;
-import erebus.block.BlockSmallPLants;
+import erebus.block.BlockSmallPlants;
 import erebus.block.BlockSpiderSpawner;
 import erebus.block.BlockStairsErebus;
 import erebus.block.BlockThorns;
@@ -169,7 +169,7 @@ public class ModBlocks {
 		erebusFlower = new BlockErebusFlower().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFlower");
 		flowerPlanted = new BlockPlantedGiantFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("flowerPlanted");
 		erebusStigma = new BlockErebusStigma().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusStigma");
-		erebusPlantSmall = new BlockSmallPLants().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusPlantSmall");
+		erebusPlantSmall = new BlockSmallPlants().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusPlantSmall");
 		erebusMushroomCap0 = new BlockErebusMushroomCap(Material.wood, 0).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroomBulbCap");
 		erebusMushroomCap1 = new BlockErebusMushroomCap(Material.wood, 1).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom1Cap");
 		erebusMushroomCap2 = new BlockErebusMushroomCap(Material.wood, 2).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom2Cap");

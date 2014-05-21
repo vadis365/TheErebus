@@ -2,8 +2,6 @@ package erebus.block;
 
 import java.util.List;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -12,12 +10,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityBambooBridge;
 
 public class BlockBambooBridge extends BlockContainer {
@@ -27,11 +23,9 @@ public class BlockBambooBridge extends BlockContainer {
 	public boolean left;
 	public boolean right;
 
-	@SideOnly(Side.CLIENT)
-	private IIcon a, b;
-
 	public BlockBambooBridge() {
 		super(Material.wood);
+		setBlockTextureName("erebus:bambooBridge");
 	}
 
 	@Override
@@ -50,22 +44,8 @@ public class BlockBambooBridge extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityBambooBridge();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		return side == 0 ? b : side == 1 ? a : blockIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:bambooBridge");
-		a = reg.registerIcon("erebus:bambooBridge");
-		b = reg.registerIcon("erebus:bambooBridge");
 	}
 
 	@Override
@@ -86,7 +66,7 @@ public class BlockBambooBridge extends BlockContainer {
 
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
-		TileEntityBambooBridge te = (TileEntityBambooBridge) world.getBlockTileEntity(x, y, z);
+		TileEntityBambooBridge te = Utils.getTileEntity(world, x, y, z, TileEntityBambooBridge.class);
 		int meta = world.getBlockMetadata(x, y, z);
 		front = canConnectBridgeTo(world, x, y, z - 1);
 		back = canConnectBridgeTo(world, x, y, z + 1);
@@ -141,7 +121,7 @@ public class BlockBambooBridge extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		onBlockAdded(world, x, y, z);
 	}
 
@@ -184,11 +164,10 @@ public class BlockBambooBridge extends BlockContainer {
 	}
 
 	public boolean canConnectBridgeTo(IBlockAccess IblockAccess, int x, int y, int z) {
-		int l = IblockAccess.getBlockId(x, y, z);
-		if (l != blockID) {
-			Block block = Block.blocksList[l];
-			return block != null && block.renderAsNormalBlock() ? block.blockMaterial != Material.pumpkin : false;
-		} else
+		Block block = IblockAccess.getBlock(x, y, z);
+		if (block != this)
+			return block != null && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
+		else
 			return true;
 	}
 }

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,15 +17,11 @@ import erebus.ModItems;
 public class BlockTurnip extends BlockCrops {
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] iconArray;
-
-	public BlockTurnip(int id) {
-		super(id);
-	}
+	private IIcon[] iconArray;
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		if (meta < 7) {
 			if (meta == 6)
 				meta = 5;
@@ -34,7 +32,7 @@ public class BlockTurnip extends BlockCrops {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
 		int dropAmount = 1;
@@ -51,14 +49,14 @@ public class BlockTurnip extends BlockCrops {
 	}
 
 	@Override
-	protected int getSeedItem() {
+	protected Item getSeedItem() {
 		return ModItems.turnip.itemID;
 	}
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
-		Block soil = blocksList[world.getBlockId(x, y - 1, z)];
-		return soil != null && soil == Block.grass || soil == Block.tilledField || soil == Block.dirt;
+		Block soil = world.getBlock(x, y - 1, z);
+		return soil != null && soil == Blocks.grass || soil == Blocks.farmland || soil == Blocks.dirt;
 	}
 
 	@Override
@@ -68,8 +66,8 @@ public class BlockTurnip extends BlockCrops {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		iconArray = new Icon[4];
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		iconArray = new IIcon[4];
 
 		for (int i = 0; i < iconArray.length; ++i)
 			iconArray[i] = iconRegister.registerIcon("erebus:turnips" + i);

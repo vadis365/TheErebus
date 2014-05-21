@@ -2,6 +2,7 @@ package erebus.block;
 
 import java.util.Random;
 
+import net.minecraft.item.Item;
 import erebus.ModItems;
 
 public class BlockWaspSpawner extends BlockSpawner {
@@ -11,8 +12,8 @@ public class BlockWaspSpawner extends BlockSpawner {
 	}
 
 	@Override
-	public int idDropped(int id, Random rand, int fortune) {
-		return ModItems.waspSword.itemID;
+	public Item getItemDropped(int id, Random rand, int fortune) {
+		return ModItems.waspSword;
 	}
 
 	@Override

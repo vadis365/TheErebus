@@ -4,18 +4,19 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
+import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWaspNest extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private Icon Top, Bottom;
+	private IIcon Top, Bottom;
 
-	public BlockWaspNest(int id) {
-		super(id, Material.rock);
+	public BlockWaspNest() {
+		super(Material.rock);
 	}
 
 	@Override
@@ -29,8 +30,8 @@ public class BlockWaspNest extends Block {
 	}
 
 	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
-		return 0;
+	public Item getItemDropped(int meta, Random rand, int fortune) {
+		return null;
 	}
 
 	@Override
@@ -45,13 +46,13 @@ public class BlockWaspNest extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return side == 0 ? Bottom : side == 1 ? Top : blockIcon;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg) {
 		blockIcon = reg.registerIcon("erebus:waspNestBlock");// Side
 		Top = reg.registerIcon("erebus:waspNestBlock");// Top
 		Bottom = reg.registerIcon("erebus:waspNestBlock");

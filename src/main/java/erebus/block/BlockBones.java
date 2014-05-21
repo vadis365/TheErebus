@@ -5,27 +5,22 @@ import java.util.ArrayList;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.tileentity.TileEntityBones;
 
 public class BlockBones extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
-	private Icon a, b;
-
-	public BlockBones(int id) {
-		super(id, Material.rock);
+	public BlockBones() {
+		super(Material.rock);
+		setBlockTextureName("erebus:blockBonesBreak");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.6875F, 1.0F);
 	}
 
@@ -45,27 +40,13 @@ public class BlockBones extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityBones();
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return world.doesBlockHaveSolidTopSurface(x, y - 1, z) || BlockFence.isIdAFence(world.getBlockId(x, y - 1, z));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		return side == 0 ? b : side == 1 ? a : blockIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:blockBonesBreak");
-		a = reg.registerIcon("erebus:blockBonesBreak");
-		b = reg.registerIcon("erebus:blockBonesBreak");
+		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z));
 	}
 
 	@Override
@@ -89,19 +70,19 @@ public class BlockBones extends BlockContainer {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		int count = 1 + world.rand.nextInt(3);
 		for (int i = 0; i < count; i++) {
-			int id = -1;
+			Item id = null;
 			int damage = 0;
 			if (world.rand.nextInt(3) == 0)
-				id = Item.bone.itemID;
+				id = Items.bone;
 			else {
-				id = ModItems.erebusMaterials.itemID;
+				id = ModItems.erebusMaterials;
 				damage = 2;
 			}
-			if (id > 0)
+			if (id != null)
 				ret.add(new ItemStack(id, 1, damage));
 		}
 		return ret;

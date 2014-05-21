@@ -3,7 +3,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.BlockDoubleHeightPlant;
-import erebus.block.BlockSmallPLants;
+import erebus.block.BlockSmallPlants;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -78,7 +78,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant.blockID,BlockDoubleHeightPlant.dataTallGrassTop,2);
 					}
 					else if (rand.nextInt(80) == 0)
-							world.setBlock(xx,yy,zz, ModBlocks.erebusPlantSmall.blockID, BlockSmallPLants.dataFireBloom, 2);
+							world.setBlock(xx,yy,zz, ModBlocks.erebusPlantSmall.blockID, BlockSmallPlants.dataFireBloom, 2);
 					else
 						world.setBlock(xx,yy,zz,ModBlocks.erebusGrass.blockID,1,2);
 					

@@ -3,7 +3,8 @@ package erebus.block;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.ColorizerGrass;
@@ -40,13 +41,13 @@ public class BlockFern extends BlockUndergroundFlower implements IShearable {
 	}
 
 	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
+	public Item getItemDropped(int meta, Random rand, int fortune) {
 		if (rand.nextInt(16) == 0)
-			return Item.seeds.itemID;
+			return Items.wheat_seeds;
 		else if (rand.nextInt(15) == 0)
-			return Item.melonSeeds.itemID;
+			return Items.melon_seeds;
 		else
-			return 0;
+			return null;
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class BlockFern extends BlockUndergroundFlower implements IShearable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
+	public void registerBlockIcons(IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon("erebus:erebusfern");
 	}
 

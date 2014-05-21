@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -18,8 +19,8 @@ import net.minecraftforge.common.IShearable;
 
 public class BlockThorns extends Block implements IShearable {
 
-	public BlockThorns(int id) {
-		super(id, Material.vine);
+	public BlockThorns() {
+		super(Material.vine);
 		setTickRandomly(true);
 	}
 
@@ -115,27 +116,22 @@ public class BlockThorns extends Block implements IShearable {
 	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
 		switch (side) {
 			case 1:
-				return canBePlacedOn(world.getBlockId(x, y + 1, z));
+				return canBePlacedOn(world.getBlock(x, y + 1, z));
 			case 2:
-				return canBePlacedOn(world.getBlockId(x, y, z + 1));
+				return canBePlacedOn(world.getBlock(x, y, z + 1));
 			case 3:
-				return canBePlacedOn(world.getBlockId(x, y, z - 1));
+				return canBePlacedOn(world.getBlock(x, y, z - 1));
 			case 4:
-				return canBePlacedOn(world.getBlockId(x + 1, y, z));
+				return canBePlacedOn(world.getBlock(x + 1, y, z));
 			case 5:
-				return canBePlacedOn(world.getBlockId(x - 1, y, z));
+				return canBePlacedOn(world.getBlock(x - 1, y, z));
 			default:
 				return false;
 		}
 	}
 
-	private boolean canBePlacedOn(int blockID) {
-		if (blockID == 0)
-			return false;
-		else {
-			Block var2 = Block.blocksList[blockID];
-			return var2.renderAsNormalBlock() && var2.blockMaterial.blocksMovement();
-		}
+	private boolean canBePlacedOn(Block block) {
+		return block.renderAsNormalBlock() && block.getMaterial().blocksMovement();
 	}
 
 	private boolean canVineStay(World world, int x, int y, int z) {
@@ -143,14 +139,14 @@ public class BlockThorns extends Block implements IShearable {
 		int var6 = var5;
 
 		if (var5 > 0)
-			for (int var7 = 0; var7 <= 3; ++var7) {
-				int var8 = 1 << var7;
+			for (int i = 0; i <= 3; i++) {
+				int var8 = 1 << i;
 
-				if ((var5 & var8) != 0 && !canBePlacedOn(world.getBlockId(x + Direction.offsetX[var7], y, z + Direction.offsetZ[var7])) && (world.getBlockId(x, y + 1, z) != blockID || (world.getBlockMetadata(x, y + 1, z) & var8) == 0))
+				if ((var5 & var8) != 0 && !canBePlacedOn(world.getBlock(x + Direction.offsetX[i], y, z + Direction.offsetZ[i])) && (world.getBlock(x, y + 1, z) != this || (world.getBlockMetadata(x, y + 1, z) & var8) == 0))
 					var6 &= ~var8;
 			}
 
-		if (var6 == 0 && !canBePlacedOn(world.getBlockId(x, y + 1, z)))
+		if (var6 == 0 && !canBePlacedOn(world.getBlock(x, y + 1, z)))
 			return false;
 		else {
 			if (var6 != var5)
@@ -161,7 +157,7 @@ public class BlockThorns extends Block implements IShearable {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborID) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		if (!world.isRemote && !canVineStay(world, x, y, z)) {
 			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 			world.setBlockToAir(x, y, z);
@@ -182,7 +178,7 @@ public class BlockThorns extends Block implements IShearable {
 			for (i1 = x - b0; i1 <= x + b0; ++i1)
 				for (j1 = z - b0; j1 <= z + b0; ++j1)
 					for (k1 = y - 1; k1 <= y + 1; ++k1)
-						if (world.getBlockId(i1, k1, j1) == blockID) {
+						if (world.getBlock(i1, k1, j1) == this) {
 							--l;
 
 							if (l <= 0) {
@@ -281,8 +277,8 @@ public class BlockThorns extends Block implements IShearable {
 	}
 
 	@Override
-	public int idDropped(int id, Random rand, int fortune) {
-		return 0;
+	public Item getItemDropped(int id, Random rand, int fortune) {
+		return null;
 	}
 
 	@Override

@@ -14,8 +14,8 @@ import erebus.entity.EntityBlackWidow;
 
 public class BlockWitherWeb extends BlockWeb {
 
-	public BlockWitherWeb(int id) {
-		super(id);
+	public BlockWitherWeb() {
+		setCreativeTab(null);
 	}
 
 	@Override

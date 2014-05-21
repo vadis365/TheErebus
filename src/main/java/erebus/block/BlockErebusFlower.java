@@ -7,13 +7,14 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -27,10 +28,10 @@ public class BlockErebusFlower extends Block {
 	}
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] icons;
+	private IIcon[] icons;
 
-	public BlockErebusFlower(int id) {
-		super(id, Material.plants);
+	public BlockErebusFlower() {
+		super(Material.plants);
 	}
 
 	@Override
@@ -50,13 +51,13 @@ public class BlockErebusFlower extends Block {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int meta, int fortune) {
-		ArrayList<ItemStack> ret = super.getBlockDropped(world, x, y, z, meta, fortune);
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
+		ArrayList<ItemStack> ret = super.getDrops(world, x, y, z, meta, fortune);
 
 		if (meta == FLOWER_TYPE.EXPLODING_STIGMA.ordinal())
-			ret.add(new ItemStack(Item.gunpowder));
+			ret.add(new ItemStack(Items.gunpowder));
 		else
-			ret.add(new ItemStack(blockID, 1 + new Random().nextInt(3), meta));
+			ret.add(new ItemStack(this, 1 + new Random().nextInt(3), meta));
 
 		return ret;
 	}
@@ -73,27 +74,28 @@ public class BlockErebusFlower extends Block {
 		if (meta == FLOWER_TYPE.EXPLODING_STIGMA.ordinal() || meta == FLOWER_TYPE.STEM.ordinal())
 			return super.getRenderColor(meta);
 
-		float[] colour = EntitySheep.fleeceColorTable[BlockColored.getBlockFromDye(Utils.getFlowerMetadata(meta - 2))];
+		float[] colour = EntitySheep.fleeceColorTable[BlockColored.func_150032_b(Utils.getFlowerMetadata(meta - 2))];
 		return Utils.getColour((int) (colour[0] * 255), (int) (colour[1] * 255), (int) (colour[2] * 255));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
 		for (int i = 0; i < 16; i++)
-			list.add(new ItemStack(id, 1, i));
+			list.add(new ItemStack(item, 1, i));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return icons[Math.min(meta, 2)];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		icons = new Icon[3];
+	public void registerBlockIcons(IIconRegister reg) {
+		icons = new IIcon[3];
 		for (int i = 0; i < icons.length; i++)
 			icons[i] = reg.registerIcon("erebus:erebusFlower" + i);
 	}

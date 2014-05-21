@@ -2,6 +2,7 @@ package erebus.tileentity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -24,7 +25,7 @@ public class TileEntityTitanChest extends TileEntity implements IInventory {
 
 	@Override
 	public Block getBlockType() {
-		return Block.chest;
+		return Blocks.chest;
 	}
 
 	@Override

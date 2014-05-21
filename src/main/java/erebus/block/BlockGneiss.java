@@ -5,10 +5,12 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,21 +18,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockGneiss extends Block {
 
 	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissSlab", "gneissSmooth", "gneissTiles" };
-	public static final Icon[] icons = new Icon[iconPaths.length];
+	@SideOnly(Side.CLIENT)
+	public IIcon[] icons;
 
-	public BlockGneiss(int id) {
-		super(id, Material.rock);
+	public BlockGneiss() {
+		super(Material.rock);
 	}
 
 	@Override
-	public void registerIcons(IconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg) {
+		icons = new IIcon[iconPaths.length];
 		int i = 0;
 		for (String path : iconPaths)
 			icons[i++] = reg.registerIcon("erebus:" + path);
 	}
 
 	@Override
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		if (meta < 0 || meta >= icons.length)
 			return null;
 		return icons[meta];
@@ -38,7 +42,8 @@ public class BlockGneiss extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
 		for (int i = 0; i < icons.length; i++)
 			list.add(new ItemStack(id, 1, i));
 	}
@@ -57,13 +62,13 @@ public class BlockGneiss extends Block {
 	}
 
 	@Override
-	public int idDropped(int meta, Random random, int fortune) {
-		return 0;
+	public Item getItemDropped(int meta, Random random, int fortune) {
+		return null;
 	}
 
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-		world.setBlock(x, y, z, Block.lavaMoving.blockID);
+		world.setBlock(x, y, z, Blocks.flowing_lava);
 	}
 
 	@Override

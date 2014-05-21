@@ -2,26 +2,27 @@ package erebus.block;
 
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockUmberstonePillar extends BlockRotatedPillar {
 
-	public BlockUmberstonePillar(int id) {
-		super(id, Material.rock);
+	public BlockUmberstonePillar() {
+		super(Material.rock);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	protected Icon getSideIcon(int side) {
+	protected IIcon getSideIcon(int side) {
 		return blockIcon;
 	}
 
 	@Override
-	public void registerIcons(IconRegister reg) {
-		super.registerIcons(reg);
-		field_111051_a = reg.registerIcon("erebus:umberstonePillarEnd");
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg) {
+		super.registerBlockIcons(reg);
+		field_150164_N = reg.registerIcon("erebus:umberstonePillarEnd");
 	}
 }

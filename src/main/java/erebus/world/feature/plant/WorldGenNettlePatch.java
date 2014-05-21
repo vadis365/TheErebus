@@ -5,7 +5,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.BlockSmallPLants;
+import erebus.block.BlockSmallPlants;
 
 //@formatter:off
 public class WorldGenNettlePatch extends WorldGenerator {
@@ -22,7 +22,7 @@ public class WorldGenNettlePatch extends WorldGenerator {
 			zz = (int)(z+0.5F+MathHelper.sin(ang)*len);
 
 			if (world.isAirBlock(xx,yy,zz) && world.getBlockId(xx,yy-1,zz) == Block.grass.blockID){
-				world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall.blockID,rand.nextBoolean() ? BlockSmallPLants.dataNettle : BlockSmallPLants.dataNettleFlowered,2);
+				world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall.blockID,rand.nextBoolean() ? BlockSmallPlants.dataNettle : BlockSmallPlants.dataNettleFlowered,2);
 				++placed;
 			}
 		}

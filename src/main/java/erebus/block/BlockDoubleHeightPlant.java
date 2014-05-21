@@ -5,12 +5,12 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
@@ -24,28 +24,26 @@ import erebus.item.ItemErebusMaterial.DATA;
 public class BlockDoubleHeightPlant extends Block {
 
 	public static final String[] plantName = new String[] { "Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "Grass", "Shroom1", "Shroom2", "Fern" };
-	
-	public static final int dataSundewBottom = 0, dataWeepingBlueBottom = 1, dataBullrushBottom = 2, dataDroughtedShrubBottom = 3,
-							dataTallGrassBottom = 4, dataShroom1Bottom = 5, dataShroom2Bottom = 6, dataFernBottom = 7;
-	
-	public static final int dataSundewTop = 8, dataWeepingBlueTop = 9, dataBullrushTop = 10, dataDroughtedShrubTop = 11,
-							dataTallGrassTop = 12, dataShroom1Top = 13, dataShroom2Top = 14, dataFernTop = 15;
-	
-	@SideOnly(Side.CLIENT)
-	private Icon[] doublePlantBottomIcons;
-	@SideOnly(Side.CLIENT)
-	private Icon[] doublePlantTopIcons;
 
-	public BlockDoubleHeightPlant(int id) {
-		super(id, Material.plants);
+	public static final int dataSundewBottom = 0, dataWeepingBlueBottom = 1, dataBullrushBottom = 2, dataDroughtedShrubBottom = 3, dataTallGrassBottom = 4, dataShroom1Bottom = 5, dataShroom2Bottom = 6, dataFernBottom = 7;
+
+	public static final int dataSundewTop = 8, dataWeepingBlueTop = 9, dataBullrushTop = 10, dataDroughtedShrubTop = 11, dataTallGrassTop = 12, dataShroom1Top = 13, dataShroom2Top = 14, dataFernTop = 15;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon[] doublePlantBottomIcons;
+	@SideOnly(Side.CLIENT)
+	private IIcon[] doublePlantTopIcons;
+
+	public BlockDoubleHeightPlant() {
+		super(Material.plants);
 		setBlockBounds(0F, 0F, 0F, 1F, 1.F, 1F);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		doublePlantBottomIcons = new Icon[plantName.length];
-		doublePlantTopIcons = new Icon[plantName.length];
+	public void registerBlockIcons(IIconRegister reg) {
+		doublePlantBottomIcons = new IIcon[plantName.length];
+		doublePlantTopIcons = new IIcon[plantName.length];
 
 		for (int i = 0; i < doublePlantBottomIcons.length; ++i) {
 			doublePlantBottomIcons[i] = reg.registerIcon("erebus:doublePlant" + plantName[i] + "Bottom");
@@ -55,7 +53,7 @@ public class BlockDoubleHeightPlant extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		if (meta <= 7)
 			return doublePlantBottomIcons[meta];
 		else
@@ -181,17 +179,17 @@ public class BlockDoubleHeightPlant extends Block {
 		for (int i = 0; i < doublePlantBottomIcons.length; ++i)
 			list.add(new ItemStack(id, 1, i));
 	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-    public int idPicked(World world, int x, int y, int z) {
-        return this.blockID;
-    }
 
 	@Override
-    public int getDamageValue(World world, int x, int y, int z) {
-    	if (world.getBlockMetadata(x, y, z) > 7)
-    		return damageDropped(world.getBlockMetadata(x, y, z)-8);
-    	return damageDropped(world.getBlockMetadata(x, y, z));
-    }
+	@SideOnly(Side.CLIENT)
+	public int idPicked(World world, int x, int y, int z) {
+		return blockID;
+	}
+
+	@Override
+	public int getDamageValue(World world, int x, int y, int z) {
+		if (world.getBlockMetadata(x, y, z) > 7)
+			return damageDropped(world.getBlockMetadata(x, y, z) - 8);
+		return damageDropped(world.getBlockMetadata(x, y, z));
+	}
 }

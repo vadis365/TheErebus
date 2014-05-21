@@ -2,14 +2,14 @@ package erebus.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -18,10 +18,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockVelocity extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] icons;
+	private IIcon[] icons;
 
-	public BlockVelocity(int id) {
-		super(id, Material.rock);
+	public BlockVelocity() {
+		super(Material.rock);
 	}
 
 	@Override
@@ -64,14 +64,14 @@ public class BlockVelocity extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return icons[meta];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		icons = new Icon[4];
+	public void registerBlockIcons(IIconRegister reg) {
+		icons = new IIcon[4];
 
 		for (int i = 0; i < icons.length; i++)
 			icons[i] = reg.registerIcon("erebus:blockSpeed" + i);

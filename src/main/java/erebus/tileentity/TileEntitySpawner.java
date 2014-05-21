@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLivingData;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -87,7 +87,7 @@ public class TileEntitySpawner extends TileEntity {
 
 	public Entity spawnEntity(Entity entity) {
 		if (entity instanceof EntityLivingBase && entity.worldObj != null) {
-			((EntityLiving) entity).onSpawnWithEgg((EntityLivingData) null);
+			((EntityLiving) entity).onSpawnWithEgg((IEntityLivingData) null);
 			worldObj.spawnEntityInWorld(entity);
 		}
 		return entity;

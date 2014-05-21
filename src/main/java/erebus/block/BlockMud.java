@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 
 public class BlockMud extends Block {
 
-	public BlockMud(int id) {
-		super(id, Material.clay);
+	public BlockMud() {
+		super(Material.clay);
 	}
 
 	@Override

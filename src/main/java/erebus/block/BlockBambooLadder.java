@@ -1,12 +1,8 @@
 package erebus.block;
 
-import static net.minecraftforge.common.ForgeDirection.EAST;
-import static net.minecraftforge.common.ForgeDirection.NORTH;
-import static net.minecraftforge.common.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.ForgeDirection.WEST;
-
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,19 +10,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityLadder;
 
 public class BlockBambooLadder extends BlockContainer {
 
-	public BlockBambooLadder(int id) {
-		super(id, Material.circuits);
-	}
-
-	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
-		return blockID;
+	public BlockBambooLadder() {
+		super(Material.circuits);
 	}
 
 	@Override
@@ -77,43 +69,38 @@ public class BlockBambooLadder extends BlockContainer {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return world.isBlockSolidOnSide(x - 1, y, z, EAST) || world.isBlockSolidOnSide(x + 1, y, z, WEST) || world.isBlockSolidOnSide(x, y, z - 1, SOUTH) || world.isBlockSolidOnSide(x, y, z + 1, NORTH);
+		return world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) || world.isSideSolid(x + 1, y, z, ForgeDirection.WEST) || world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH) || world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH);
 	}
 
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-		int j1 = meta;
+		if ((meta == 0 || side == 2) && world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH))
+			meta = 2;
+		if ((meta == 0 || side == 3) && world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH))
+			meta = 3;
+		if ((meta == 0 || side == 4) && world.isSideSolid(x + 1, y, z, ForgeDirection.WEST))
+			meta = 4;
+		if ((meta == 0 || side == 5) && world.isSideSolid(x - 1, y, z, ForgeDirection.EAST))
+			meta = 5;
 
-		if ((j1 == 0 || side == 2) && world.isBlockSolidOnSide(x, y, z + 1, NORTH))
-			j1 = 2;
-
-		if ((j1 == 0 || side == 3) && world.isBlockSolidOnSide(x, y, z - 1, SOUTH))
-			j1 = 3;
-
-		if ((j1 == 0 || side == 4) && world.isBlockSolidOnSide(x + 1, y, z, WEST))
-			j1 = 4;
-
-		if ((j1 == 0 || side == 5) && world.isBlockSolidOnSide(x - 1, y, z, EAST))
-			j1 = 5;
-
-		return j1;
+		return meta;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int i1 = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
 
-		if (i1 == 2 && world.isBlockSolidOnSide(x, y, z + 1, NORTH))
+		if (i1 == 2 && world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH))
 			flag = true;
 
-		if (i1 == 3 && world.isBlockSolidOnSide(x, y, z - 1, SOUTH))
+		if (i1 == 3 && world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH))
 			flag = true;
 
-		if (i1 == 4 && world.isBlockSolidOnSide(x + 1, y, z, WEST))
+		if (i1 == 4 && world.isSideSolid(x + 1, y, z, ForgeDirection.WEST))
 			flag = true;
 
-		if (i1 == 5 && world.isBlockSolidOnSide(x - 1, y, z, EAST))
+		if (i1 == 5 && world.isSideSolid(x - 1, y, z, ForgeDirection.EAST))
 			flag = true;
 
 		if (!flag) {
@@ -121,7 +108,7 @@ public class BlockBambooLadder extends BlockContainer {
 			world.setBlockToAir(x, y, z);
 		}
 
-		super.onNeighborBlockChange(world, x, y, z, neighbourID);
+		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
 	@Override
@@ -130,12 +117,12 @@ public class BlockBambooLadder extends BlockContainer {
 	}
 
 	@Override
-	public boolean isLadder(World world, int x, int y, int z, EntityLivingBase entity) {
+	public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity) {
 		return true;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityLadder();
 	}
 }

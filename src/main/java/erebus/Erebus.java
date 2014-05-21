@@ -37,7 +37,6 @@ import erebus.integration.FMBIntegration;
 import erebus.integration.IModIntegration;
 import erebus.lib.Reference;
 import erebus.recipes.AltarRecipe;
-import erebus.recipes.BCFacadeManager;
 import erebus.recipes.RecipeHandler;
 import erebus.world.WorldProviderErebus;
 
@@ -105,7 +104,6 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
 		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
-		BCFacadeManager.registerFacades();
 		if (Loader.isModLoaded("ForgeMicroblock"))
 			FMBIntegration.integrate();
 	}

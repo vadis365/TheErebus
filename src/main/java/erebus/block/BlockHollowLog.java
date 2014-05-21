@@ -5,13 +5,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -23,20 +24,20 @@ import erebus.entity.EntityWoodlouse;
 public class BlockHollowLog extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private Icon iconTop, iconSide, iconMoss;
+	private IIcon iconTop, iconSide, iconMoss;
 
 	public BlockHollowLog(int id) {
-		super(id, Material.wood);
+		super(Material.wood);
 	}
 
 	@Override
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return side == 0 || side == 1 ? iconTop : (side == 2 || side == 3) && meta == 1 || (side == 4 || side == 5) && meta == 0 ? iconSide : iconMoss;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg) {
 		iconTop = reg.registerIcon("erebus:hollowLogTop");
 		iconSide = reg.registerIcon("erebus:hollowLogSide");
 		iconMoss = reg.registerIcon("erebus:hollowLogMoss");
@@ -53,6 +54,7 @@ public class BlockHollowLog extends Block {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public void addCollisionBoxesToList(World world, int x, int y, int s, AxisAlignedBB box, List list, Entity entity) {
 		float pixel = 0.0625F; // 1 pixel
 		// bottom
@@ -82,16 +84,15 @@ public class BlockHollowLog extends Block {
 	}
 
 	@Override
-    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-        if (!world.isRemote) {
-        	if(world.rand.nextInt(5)==0) {
-            EntityWoodlouse entity = new EntityWoodlouse(world);
-            entity.setLocationAndAngles(x + 0.5D, y, z + 0.5D, 0.0F, 0.0F);
-            world.spawnEntityInWorld(entity);
-            }
-        }
-        super.onBlockDestroyedByPlayer(world, x, y, z, meta);
-    }
+	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
+		if (!world.isRemote)
+			if (world.rand.nextInt(5) == 0) {
+				EntityWoodlouse entity = new EntityWoodlouse(world);
+				entity.setLocationAndAngles(x + 0.5D, y, z + 0.5D, 0.0F, 0.0F);
+				world.spawnEntityInWorld(entity);
+			}
+		super.onBlockDestroyedByPlayer(world, x, y, z, meta);
+	}
 
 	@Override
 	public boolean isOpaqueCube() {
@@ -104,8 +105,8 @@ public class BlockHollowLog extends Block {
 	}
 
 	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
-		return Item.stick.itemID;
+	public Item getItemDropped(int meta, Random rand, int fortune) {
+		return Items.stick;
 	}
 
 	@Override
