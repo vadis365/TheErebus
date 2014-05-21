@@ -16,8 +16,8 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -47,7 +47,7 @@ public class EntityWorkerBee extends EntityTameable {
 		tasks.addTask(2, new EntityAISwimming(this));
 		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.3D, true));
 		tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityWasp.class, 0.3D, true));
-		tasks.addTask(5, new EntityAITempt(this, 0.5D, Item.sugar.itemID, false));
+		tasks.addTask(5, new EntityAITempt(this, 0.5D, Items.sugar, false));
 		tasks.addTask(6, new EntityAIWander(this, 0.4D));
 		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(8, new EntityAILookIdle(this));
@@ -89,11 +89,11 @@ public class EntityWorkerBee extends EntityTameable {
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
 		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 3;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 3;
+	}
 
 	@Override
 	protected boolean canDespawn() {
@@ -114,10 +114,9 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	public boolean isOnLadder() {
-		int blockID = worldObj.getBlockId((int) posX, (int) posY - 1, (int) posZ);
-		Block block = Block.blocksList[blockID];
-		if(isCollidedHorizontally)
-			if(blockID != ModBlocks.erebusStigma.blockID || !block.hasTileEntity(worldObj.getBlockMetadata((int) posX, (int) posY - 1, (int) posZ)))
+		Block block = worldObj.getBlock((int) posX, (int) posY - 1, (int) posZ);
+		if (isCollidedHorizontally)
+			if (block != ModBlocks.erebusStigma || !block.hasTileEntity(worldObj.getBlockMetadata((int) posX, (int) posY - 1, (int) posZ)))
 				return true;
 		return false;
 	}
@@ -138,7 +137,7 @@ public class EntityWorkerBee extends EntityTameable {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
@@ -228,8 +227,8 @@ public class EntityWorkerBee extends EntityTameable {
 	}
 
 	public void flyToTarget() {
-		if (currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 2, MathHelper.floor_double(posZ)) == ModBlocks.erebusFlower.blockID && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
-			if (worldObj.getBlockId(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusStigma.blockID || Utils.getTileEntity(worldObj, currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ, IInventory.class) != null) {
+		if (currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 2, MathHelper.floor_double(posZ)) == ModBlocks.erebusFlower && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ))
+			if (worldObj.getBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusStigma || Utils.getTileEntity(worldObj, currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ, IInventory.class) != null) {
 				if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ, currentFlightTarget.posX + 1, currentFlightTarget.posY + 2, currentFlightTarget.posZ + 1)).isEmpty())
 					setPosition(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ);
 			} else
@@ -256,7 +255,7 @@ public class EntityWorkerBee extends EntityTameable {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is.itemID == ModItems.nectarCollector.itemID)
+		if (!worldObj.isRemote && is != null && is.getItem() == ModItems.nectarCollector)
 			if (getNectarPoints() > 0) {
 				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.0F);
 				is.damageItem(1, player);
@@ -266,7 +265,7 @@ public class EntityWorkerBee extends EntityTameable {
 				return true;
 			}
 
-		if (is != null && is.itemID == ModItems.beeTamingAmulet.itemID && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
+		if (is != null && is.getItem() == ModItems.beeTamingAmulet && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
 			setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
 			setTameState((byte) 1);
 			playTameEffect(true);

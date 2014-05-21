@@ -1,9 +1,9 @@
 package erebus.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -36,7 +36,7 @@ public class EntityWebSling extends EntityThrowable {
 		super.entityInit();
 		dataWatcher.addObject(24, new Byte((byte) 0));
 	}
-	
+
 	protected String getWebSlingSplatSound() {
 		return "erebus:webslingsplat";
 	}
@@ -50,18 +50,18 @@ public class EntityWebSling extends EntityThrowable {
 
 			if (mop.entityHit != null) {
 				if (type == 0)
-					worldObj.setBlock(x, y, z, Block.web.blockID);
+					worldObj.setBlock(x, y, z, Blocks.web);
 				if (type == 1)
-					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb.blockID);
+					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb);
 				if (type == 2)
 					mop.entityHit.setFire(10);
-			} else if (mop.entityHit == null && Block.web.canPlaceBlockAt(worldObj, x, y, z) || mop.entityHit == null && Block.fire.canPlaceBlockAt(worldObj, x, y, z)) {
+			} else if (mop.entityHit == null && Blocks.web.canPlaceBlockAt(worldObj, x, y, z) || mop.entityHit == null && Blocks.fire.canPlaceBlockAt(worldObj, x, y, z)) {
 				if (type == 0)
-					worldObj.setBlock(x, y, z, Block.web.blockID);
+					worldObj.setBlock(x, y, z, Blocks.web);
 				if (type == 1)
-					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb.blockID);
+					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb);
 				if (type == 2)
-					worldObj.setBlock(x, y, z, Block.fire.blockID);
+					worldObj.setBlock(x, y, z, Blocks.fire);
 			}
 			if (!worldObj.isRemote)
 				setDead();

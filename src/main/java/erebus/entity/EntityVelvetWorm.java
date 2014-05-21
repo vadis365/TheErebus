@@ -11,20 +11,20 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 
 public class EntityVelvetWorm extends EntityMob {
 
-public int skin = rand.nextInt(2);
-	
+	public int skin = rand.nextInt(2);
+
 	public EntityVelvetWorm(World world) {
 		super(world);
 		setSize(2F, 0.7F);
 		getNavigator().setAvoidsWater(false);
-		experienceValue = 15; 
+		experienceValue = 15;
 		fireResistance = 10;
 		isImmuneToFire = false;
 		getNavigator().setAvoidsWater(true);
@@ -34,14 +34,14 @@ public int skin = rand.nextInt(2);
 		tasks.addTask(3, new EntityAIWander(this, 0.5D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-		}
+	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(20, new Integer(0));
 	}
-	
+
 	@Override
 	public boolean isAIEnabled() {
 		return true;
@@ -56,21 +56,22 @@ public int skin = rand.nextInt(2);
 	}
 
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if(getAttackTarget() !=null) {
+		if (getAttackTarget() != null) {
 			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
-			if(getInflateSize()<100 && distance >3)
-				setInflateSize(getInflateSize()+2);
-			if(getInflateSize()>=100 && distance >3)
+			if (getInflateSize() < 100 && distance > 3)
+				setInflateSize(getInflateSize() + 2);
+			if (getInflateSize() >= 100 && distance > 3)
 				shootGooBall(getAttackTarget(), distance);
-			if(getInflateSize()==0);
-				forceCollideWithPlayer(getAttackTarget(), distance);
+			if (getInflateSize() == 0)
+				;
+			forceCollideWithPlayer(getAttackTarget(), distance);
 		}
 	}
 
@@ -78,11 +79,11 @@ public int skin = rand.nextInt(2);
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-	
+
 	@Override
 	public void setInWeb() {
 	}
-	
+
 	protected String getWebSlingThrowSound() {
 		return "erebus:webslingthrow";
 	}
@@ -91,11 +92,11 @@ public int skin = rand.nextInt(2);
 		switch (worldObj.difficultySetting) {
 			default:
 				return 4.0D;
-			case 1:
+			case EASY:
 				return 4.0D;
-			case 2:
+			case NORMAL:
 				return 5.0D;
-			case 3:
+			case HARD:
 				return 6.0D;
 		}
 	}
@@ -104,7 +105,7 @@ public int skin = rand.nextInt(2);
 	protected void dropFewItems(boolean hit, int looting) {
 		int chanceFiftyFifty = rand.nextInt(2) + 1;
 
-		dropItem(Item.slimeBall.itemID, chanceFiftyFifty + looting);
+		dropItem(Items.slime_ball, chanceFiftyFifty + looting);
 	}
 
 	protected void shootGooBall(Entity entity, float distance) {
@@ -116,10 +117,10 @@ public int skin = rand.nextInt(2);
 				gooBall.posY = posY + height / 2.0F + 0.3D;
 				worldObj.spawnEntityInWorld(gooBall);
 			}
-		}
+	}
 
 	public void forceCollideWithPlayer(EntityLivingBase entity, float distance) {
-		if (distance > 2.0F && distance < 4.0F) {
+		if (distance > 2.0F && distance < 4.0F)
 			if (onGround) {
 				double distanceX = entity.posX - posX;
 				double distanceZ = entity.posZ - posZ;
@@ -128,14 +129,13 @@ public int skin = rand.nextInt(2);
 				motionZ = distanceZ / squareRoot * 0.5D * 0.300000011920929D + motionZ * 0.10000000298023224D;
 				motionY = 0D;
 			}
-		}	
 	}
-	
+
 	public void setInflateSize(int size) {
 		dataWatcher.updateObject(20, Integer.valueOf(size));
 	}
-	
+
 	public int getInflateSize() {
-		return  dataWatcher.getWatchableObjectInt(20);
+		return dataWatcher.getWatchableObjectInt(20);
 	}
 }

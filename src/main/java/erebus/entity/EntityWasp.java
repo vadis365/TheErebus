@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -19,6 +20,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 import com.google.common.io.ByteArrayDataInput;
@@ -30,6 +32,7 @@ import erebus.client.render.entity.AnimationMathHelper;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
+
 	public ChunkCoordinates currentFlightTarget;
 	public float wingFloat;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
@@ -37,7 +40,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	public boolean waspFlying;
 	public final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	public final EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.3D, true);
-	
+
 	public EntityWasp(World world) {
 		super(world);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -84,7 +87,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 				getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 			}
 	}
-	
+
 	@Override
 	public boolean isAIEnabled() {
 		return true;
@@ -94,11 +97,11 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	public boolean getCanSpawnHere() {
 		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -125,7 +128,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
@@ -137,11 +140,11 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	public boolean isFlying() {
 		return !onGround;
 	}
-	
+
 	public void setWaspFlying(boolean state) {
 		waspFlying = state;
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		byte i;
@@ -149,12 +152,12 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			i = getIsBoss();
 			if (i == 1) {
 				setSize(3F, 2F);
-				if(!hasCustomNameTag())
+				if (!hasCustomNameTag())
 					setCustomNameTag("Hornet of Despair");
 			} else
 				setSize(1.5F, 1.0F);
 		}
-		
+
 		if (!isFlying())
 			wingFloat = 0.0F;
 		else
@@ -185,14 +188,14 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		}
 		super.onUpdate();
 	}
-	
+
 	public void flyAbout() {
 		if (currentFlightTarget != null)
 			if (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1)
 				currentFlightTarget = null;
-		
-			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
-				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
+
+		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
+			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
 
 		flyToTarget();
 	}
@@ -210,12 +213,12 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			moveForward = 0.5F;
 			rotationYaw += rotation;
 		}
-}
+	}
 
 	private void land() {
 		//Nothing to see here - yet
 	}
-	
+
 	@Override
 	public void setAttackTarget(EntityLivingBase entity) {
 		setTarget(entity);
@@ -227,11 +230,10 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLivingBase) {
 				byte var2 = 0;
-				if (worldObj.difficultySetting > 1)
-					if (worldObj.difficultySetting == 2)
-						var2 = 7;
-					else if (worldObj.difficultySetting == 3)
-						var2 = 15;
+				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+					var2 = 7;
+				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					var2 = 15;
 				if (var2 > 0)
 					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
 			}

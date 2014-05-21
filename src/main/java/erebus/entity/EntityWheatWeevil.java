@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,7 +11,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
@@ -44,11 +45,11 @@ public class EntityWheatWeevil extends EntityCreature {
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
 		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -78,63 +79,63 @@ public class EntityWheatWeevil extends EntityCreature {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		switch (rand.nextInt(5)) {
-		case 0:
-			entityDropItem(new ItemStack(ModItems.flowerSeeds, 1 + rand.nextInt(3) + looting, rand.nextInt(14)), 0F);
-			break;
-		case 1:
-			ItemStack seed = ForgeHooks.getGrassSeed(worldObj);
-			seed.stackSize = 1 + rand.nextInt(3) + looting;
-			entityDropItem(seed, 0F);
-			break;
-		case 2:
-			entityDropItem(new ItemStack(Item.pumpkinSeeds, 1 + rand.nextInt(3) + looting), 0F);
-			break;
+			case 0:
+				entityDropItem(new ItemStack(ModItems.flowerSeeds, 1 + rand.nextInt(3) + looting, rand.nextInt(14)), 0F);
+				break;
+			case 1:
+				ItemStack seed = ForgeHooks.getGrassSeed(worldObj);
+				seed.stackSize = 1 + rand.nextInt(3) + looting;
+				entityDropItem(seed, 0F);
+				break;
+			case 2:
+				entityDropItem(new ItemStack(Items.pumpkin_seeds, 1 + rand.nextInt(3) + looting), 0F);
+				break;
 
-		case 3:
-			entityDropItem(new ItemStack(Item.melonSeeds, 1 + rand.nextInt(3) + looting), 0F);
-			break;
+			case 3:
+				entityDropItem(new ItemStack(Items.melon_seeds, 1 + rand.nextInt(3) + looting), 0F);
+				break;
 
-		case 4:
-			entityDropItem(new ItemStack(Item.dyePowder, 1 + rand.nextInt(3) + looting, 3), 0F);
-			break;
+			case 4:
+				entityDropItem(new ItemStack(Items.dye, 1 + rand.nextInt(3) + looting, 3), 0F);
+				break;
 		}
 
 		if (rand.nextInt(10) == 0) {
 			int dropRareishType = rand.nextInt(7);
 			switch (dropRareishType) {
-			case 0:
-				entityDropItem(new ItemStack(ModItems.turnip, 1 + looting), 0F);
-				break;
-			case 1:
-				entityDropItem(new ItemStack(Item.netherStalkSeeds, 1 + looting), 0F);
-				break;
+				case 0:
+					entityDropItem(new ItemStack(ModItems.turnip, 1 + looting), 0F);
+					break;
+				case 1:
+					entityDropItem(new ItemStack(Items.nether_wart, 1 + looting), 0F);
+					break;
 
-			case 2:
-				entityDropItem(new ItemStack(Item.wheat, 1 + looting), 0F);
-				break;
+				case 2:
+					entityDropItem(new ItemStack(Items.wheat, 1 + looting), 0F);
+					break;
 
-			case 3:
-				entityDropItem(new ItemStack(Item.reed, 1 + looting), 0F);
-				break;
+				case 3:
+					entityDropItem(new ItemStack(Items.reeds, 1 + looting), 0F);
+					break;
 
-			case 4:
-				entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.bambooShoot.ordinal()), 0F);
-				break;
+				case 4:
+					entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.bambooShoot.ordinal()), 0F);
+					break;
 
-			case 5:
-				entityDropItem(new ItemStack(Item.carrot, 1 + looting), 0F);
-				break;
+				case 5:
+					entityDropItem(new ItemStack(Items.carrot, 1 + looting), 0F);
+					break;
 
-			case 6:
-				entityDropItem(new ItemStack(Item.potato, 1 + looting), 0F);
-				break;
+				case 6:
+					entityDropItem(new ItemStack(Items.potato, 1 + looting), 0F);
+					break;
 			}
 		}
 	}
