@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.util.LinkedHashMap;
 
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -45,8 +45,9 @@ public class Utils {
 		return new Color(R, G, B).getRGB() & 0x00ffffff;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static final <T> T getTileEntity(World world, int x, int y, int z, Class<T> cls) {
-		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		TileEntity tile = world.getTileEntity(x, y, z);
 		if (!cls.isInstance(tile))
 			return null;
 		return (T) tile;
@@ -71,11 +72,11 @@ public class Utils {
 				itemStack3.stackSize += hold;
 			} else if (inventory.getStackInSlot(i) == null && openSlot == -1)
 				openSlot = i;
-		
+
 		if (openSlot <= -1)
 			return false;
 		inventory.setInventorySlotContents(openSlot, stack);
-		
+
 		return true;
 	}
 
@@ -86,7 +87,7 @@ public class Utils {
 	public static final boolean compareStacks(ItemStack stack1, ItemStack stack2, boolean testSize) {
 		if (stack1 == null || stack2 == null)
 			return false;
-		if (stack1.itemID == stack2.itemID)
+		if (stack1.getItem() == stack2.getItem())
 			if (stack1.getItemDamage() == stack2.getItemDamage())
 				if (compareNBT(stack1, stack2))
 					if (!testSize || stack1.stackSize == stack2.stackSize)
@@ -107,14 +108,13 @@ public class Utils {
 
 	public static final LinkedHashMap<Short, Short> getEnchantments(ItemStack stack) {
 		LinkedHashMap<Short, Short> map = new LinkedHashMap<Short, Short>();
-		NBTTagList list = stack.itemID == Item.enchantedBook.itemID ? Item.enchantedBook.func_92110_g(stack) : stack.getEnchantmentTagList();
+		NBTTagList list = stack.getItem() == Items.enchanted_book ? Items.enchanted_book.func_92110_g(stack) : stack.getEnchantmentTagList();
 
 		if (list != null)
 			for (int i = 0; i < list.tagCount(); i++) {
-				NBTTagCompound tag = (NBTTagCompound) list.tagAt(i);
+				NBTTagCompound tag = list.getCompoundTagAt(i);
 				map.put(tag.getShort("id"), tag.getShort("lvl"));
 			}
-
 		return map;
 	}
 }

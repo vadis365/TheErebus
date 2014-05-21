@@ -31,7 +31,7 @@ public class TileEntitySpawnerRender extends TileEntitySpecialRenderer {
 		rotation0 = (rotation0 + 1000.0F / (tile.getSpawnDelay() + 200.0F)) % 360.0D;
 
 		if (entity != null) {
-			entity.setWorld(tile.worldObj);
+			entity.setWorld(tile.getWorldObj());
 			float f1 = 0.4375F;
 			GL11.glTranslatef(0.0F, 0.4F, 0.0F);
 			GL11.glRotatef((float) (rotation1 + (rotation0 - rotation1) * rotation) * 10.0F, 0.0F, 1.0F, 0.0F);

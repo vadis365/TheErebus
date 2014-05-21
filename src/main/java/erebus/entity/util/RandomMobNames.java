@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.entity.EntityLiving;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBotFly;
@@ -15,6 +15,7 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntitySolifuge;
 
 public final class RandomMobNames {
+
 	public static final RandomMobNames instance = new RandomMobNames();
 
 	private static final Map<Class<? extends EntityLiving>, NameData> names = new HashMap<Class<? extends EntityLiving>, NameData>();
@@ -29,10 +30,7 @@ public final class RandomMobNames {
 		names.put(EntityScorpion.class, new NameData(150, new String[] { "Nippletwister" }));
 	};
 
-	private RandomMobNames() {
-	}
-
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onLivingSpawn(LivingSpawnEvent e) {
 		EntityLiving entity = (EntityLiving) e.entityLiving;
 
