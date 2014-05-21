@@ -21,11 +21,11 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 	}
 
 	@Override
-	protected boolean canEatBlock(int blockID, int blockMeta) {
-		if (blockID == 0)
+	protected boolean canEatBlock(Block block, int blockMeta) {
+		if (block == null)
 			return false;
 
-		else if (blockID == Block.tallGrass.blockID || blockID == ModBlocks.erebusGrass.blockID || blockID == ModBlocks.blockTurnip.blockID || blockID == Block.crops.blockID)
+		else if (block == Blocks.double_plant || block == ModBlocks.erebusGrass || block == ModBlocks.blockTurnip || block == Blocks.wheat)
 			return true;
 		return false;
 	}

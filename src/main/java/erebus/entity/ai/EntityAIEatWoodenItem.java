@@ -2,7 +2,6 @@ package erebus.entity.ai;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockMushroomCap;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.passive.EntityAnimal;
 import erebus.ModBlocks;
@@ -14,34 +13,30 @@ import erebus.entity.EntityBeetleLarva;
 
 public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
-	private double moveSpeed;
+	private final double moveSpeed;
 
 	public EntityAIEatWoodenItem(EntityAnimal entity, double moveSpeed, int eatSpeed) {
 		super(entity, null, 0, null, moveSpeed, eatSpeed);
-		this.moveSpeed=moveSpeed;
+		this.moveSpeed = moveSpeed;
 	}
 
 	@Override
-	protected boolean canEatBlock(int blockID, int blockMeta) {
-		if (blockID == 0)
+	protected boolean canEatBlock(Block block, int blockMeta) {
+		if (block == null)
 			return false;
 
-		Block block = Block.blocksList[blockID];
-		if (block.blockHardness == -1)
+		if (block == ModBlocks.planksErebus && blockMeta == 9)
 			return false;
 
-		if (blockID == ModBlocks.planksErebus.blockID && blockMeta == 9)
+		if (block == ModBlocks.plankSlabs[2] && blockMeta == 1)
 			return false;
 
-		if (blockID == ModBlocks.plankSlabs[2].blockID && blockMeta == 1)
-			return false;
-
-		if (blockID == ModBlocks.plankStairs[9].blockID)
+		if (block == ModBlocks.plankStairs[9])
 			return false;
 
 		if (ConfigHandler.beetleLarvaEating == 2)
 			return true;
-		else if (block.blockMaterial != Material.wood || block instanceof BlockLog || block instanceof BlockBambooCrop || block instanceof BlockHollowLog || block instanceof BlockMushroomCap || block instanceof BlockBambooTorch)
+		else if (block.getMaterial() != Material.wood || block instanceof BlockLog || block instanceof BlockBambooCrop || block instanceof BlockHollowLog || block instanceof BlockMushroomCap || block instanceof BlockBambooTorch)
 			return false;
 		else if (ConfigHandler.beetleLarvaEating == 0 && block.hasTileEntity(blockMeta))
 			return false;
@@ -53,13 +48,12 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 	protected boolean isEntityReady() {
 		return true;
 	}
-	
+
 	@Override
 	protected void moveToLocation() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
-		if (!beetleLarva.isEating){
+		if (!beetleLarva.isEating)
 			entity.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed);
-		}
 	}
 
 	@Override
@@ -75,7 +69,7 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		beetleLarva.setIsEating(false);
 		beetleLarva.setMoveTasks(true);
 	}
-	
+
 	@Override
 	protected void afterEaten() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;

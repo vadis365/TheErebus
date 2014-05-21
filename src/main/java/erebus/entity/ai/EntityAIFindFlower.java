@@ -40,7 +40,7 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
-		return entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, AxisAlignedBB.getBoundingBox(flowerX,flowerY+1,flowerZ,flowerX+1,flowerY+2,flowerZ+1)).isEmpty();
+		return entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, AxisAlignedBB.getBoundingBox(flowerX, flowerY + 1, flowerZ, flowerX + 1, flowerY + 2, flowerZ + 1)).isEmpty();
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 
 			Point p = getNextPoint();
 			for (int y = -8; y < 8; y++)
-				if (canPolinate(entity.worldObj.getBlockId(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
+				if (canPolinate(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 					flowerX = xCoord + p.x;
 					flowerY = yCoord + y;
 					flowerZ = zCoord + p.y;
@@ -72,16 +72,16 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 			if (flag) {
 				prepareToPollinate();
 				collectTicks++;
-				entity.worldObj.destroyBlockInWorldPartially(entity.entityId, flowerX, flowerY, flowerZ, getScaledcollectTicks());
-				if (!canPolinate(entity.worldObj.getBlockId(flowerX, flowerY, flowerZ), entity.worldObj.getBlockMetadata(flowerX, flowerY, flowerZ))) {
+				entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), flowerX, flowerY, flowerZ, getScaledcollectTicks());
+				if (!canPolinate(entity.worldObj.getBlock(flowerX, flowerY, flowerZ), entity.worldObj.getBlockMetadata(flowerX, flowerY, flowerZ)))
 					hasTarget = false;
-				} else if (COLLECT_SPEED <= collectTicks) {
+				else if (COLLECT_SPEED <= collectTicks) {
 					hasTarget = false;
 					collectTicks = 0;
 					afterPollination();
 				}
 			}
-			if (!flag && collectTicks>1) {
+			if (!flag && collectTicks > 1) {
 				pollinationInterupted();
 				hasTarget = false;
 				collectTicks = 0;
@@ -103,16 +103,16 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 		return spiral.get(spiralIndex);
 	}
 
-	public int getTargetBlockID() {
-		return entity.worldObj.getBlockId(flowerX, flowerY, flowerZ);
+	public Block getTargetBlockID() {
+		return entity.worldObj.getBlock(flowerX, flowerY, flowerZ);
 	}
 
-	protected boolean canPolinate(int blockID, int meta) {
-		return blockID == block.blockID && meta == blockMetadata;
+	protected boolean canPolinate(Block blockID, int meta) {
+		return blockID == block && meta == blockMetadata;
 	}
 
 	protected abstract boolean isEntityReady();
-	
+
 	protected abstract void moveToLocation();
 
 	protected abstract void prepareToPollinate();

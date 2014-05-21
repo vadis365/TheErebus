@@ -35,7 +35,6 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 		this.seed = seed;
 		hasTarget = false;
 		spiralIndex = 0;
-		this.moveSpeed = moveSpeed;
 		EAT_SPEED = eatSpeed * 20;
 	}
 
@@ -67,7 +66,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 			Point p = getNextPoint();
 			for (int y = -2; y < 2; y++)
-				if (canEatBlock(entity.worldObj.getBlockId(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
+				if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 					cropX = xCoord + p.x;
 					cropY = yCoord + y;
 					cropZ = zCoord + p.y;
@@ -82,11 +81,11 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 			if (flag) {
 				prepareToEat();
 				eatTicks++;
-				entity.worldObj.destroyBlockInWorldPartially(entity.entityId, cropX, cropY, cropZ, getScaledEatTicks());
-				if (!canEatBlock(entity.worldObj.getBlockId(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
+				entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), cropX, cropY, cropZ, getScaledEatTicks());
+				if (!canEatBlock(entity.worldObj.getBlock(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
 					hasTarget = false;
 				else if (EAT_SPEED <= eatTicks) {
-					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, entity.worldObj.getBlockId(cropX, cropY, cropZ) + (maxGrowthMetadata << 12));
+					entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
 					entity.worldObj.setBlockToAir(cropX, cropY, cropZ);
 					if (seed != null)
 						Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
@@ -117,20 +116,20 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 		return spiral.get(spiralIndex);
 	}
 
-	public int getTargetBlockID() {
-		return entity.worldObj.getBlockId(cropX, cropY, cropZ);
+	public Block getTargetBlock() {
+		return entity.worldObj.getBlock(cropX, cropY, cropZ);
 	}
 
 	/**
 	 * Override this if you wish to do a more advanced checking on which blocks
 	 * should be eaten
 	 * 
-	 * @param blockID
+	 * @param block
 	 * @param meta
 	 * @return true is should eat block, false is it shouldn't
 	 */
-	protected boolean canEatBlock(int blockID, int meta) {
-		return blockID == block.blockID && meta == maxGrowthMetadata;
+	protected boolean canEatBlock(Block block, int meta) {
+		return block == this.block && meta == maxGrowthMetadata;
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package erebus.entity.ai;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ChunkCoordinates;
 import erebus.ModBlocks;
@@ -12,11 +13,11 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	}
 
 	@Override
-	protected boolean canPolinate(int blockID, int blockMeta) {
-		if (blockID == 0)
+	protected boolean canPolinate(Block blockID, int blockMeta) {
+		if (blockID == null)
 			return false;
 
-		else if (blockID == ModBlocks.erebusStigma.blockID)
+		else if (blockID == ModBlocks.erebusStigma)
 			return true;
 
 		return false;
@@ -52,16 +53,15 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	@Override
 	protected void afterPollination() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
-		if(bee.getNectarPoints() < 127)
+		if (bee.getNectarPoints() < 127)
 			bee.setNectarPoints(bee.getNectarPoints() + 1);
-	if (bee.getTameState()==0) {
-		bee.setBeePollinating(false);
-		bee.setBeeFlying(true);
-		bee.flyAbout();
-		}
-	else if (bee.getTameState()==1) {
-		bee.setBeePollinating(false);
-		bee.setBeeCollecting(true);
+		if (bee.getTameState() == 0) {
+			bee.setBeePollinating(false);
+			bee.setBeeFlying(true);
+			bee.flyAbout();
+		} else if (bee.getTameState() == 1) {
+			bee.setBeePollinating(false);
+			bee.setBeeCollecting(true);
 		}
 	}
 }

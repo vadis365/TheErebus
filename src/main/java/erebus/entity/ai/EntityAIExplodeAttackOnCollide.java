@@ -9,6 +9,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAIExplodeAttackOnCollide extends EntityAIBase {
+
 	World worldObj;
 	EntityCreature attacker;
 	int attackTick;
