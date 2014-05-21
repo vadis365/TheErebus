@@ -11,28 +11,28 @@ public abstract class ItemBlockSlabGeneric extends ItemBlockGeneric {
 	private final Block[] slabArray;
 	private final int groupId;
 
-	public ItemBlockSlabGeneric(int id, String unlocalizedName, Block[] slabArray, int groupId) {
-		super(id, unlocalizedName + groupId);
+	public ItemBlockSlabGeneric(Block block, String unlocalizedName, Block[] slabArray, int groupId) {
+		super(block, unlocalizedName + groupId);
 		this.slabArray = slabArray;
 		this.groupId = groupId;
 	}
 
 	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (getBlockID() == slabArray[1 + groupId * 2].blockID)
+		if (getBlock() == slabArray[1 + groupId * 2])
 			return super.onItemUse(itemStack, player, world, x, y, z, side, hitX, hitY, hitZ);
 		else if (itemStack.stackSize == 0)
 			return false;
 		else if (!player.canPlayerEdit(x, y, z, side, itemStack))
 			return false;
 		else {
-			int i1 = world.getBlockId(x, y, z);
+			Block i1 = world.getBlock(x, y, z);
 			int j1 = world.getBlockMetadata(x, y, z);
 			int k1 = j1 & 7;
 			boolean flag = (j1 & 8) != 0;
 
-			if ((side == 1 && !flag || side == 0 && flag) && i1 == slabArray[0 + groupId * 2].blockID && k1 == itemStack.getItemDamage()) {
-				if (world.checkNoEntityCollision(slabArray[1 + groupId * 2].getCollisionBoundingBoxFromPool(world, x, y, z)) && world.setBlock(x, y, z, slabArray[1 + groupId * 2].blockID, k1, 3)) {
+			if ((side == 1 && !flag || side == 0 && flag) && i1 == slabArray[0 + groupId * 2] && k1 == itemStack.getItemDamage()) {
+				if (world.checkNoEntityCollision(slabArray[1 + groupId * 2].getCollisionBoundingBoxFromPool(world, x, y, z)) && world.setBlock(x, y, z, slabArray[1 + groupId * 2], k1, 3)) {
 					world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, slabArray[1 + groupId * 2].stepSound.getPlaceSound(), (slabArray[1 + groupId * 2].stepSound.getVolume() + 1.0F) / 2.0F, slabArray[1 + groupId * 2].stepSound.getPitch() * 0.8F);
 					--itemStack.stackSize;
 				}

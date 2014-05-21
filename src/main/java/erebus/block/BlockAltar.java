@@ -8,12 +8,12 @@ import erebus.tileentity.TileEntityAltar;
 
 public class BlockAltar extends BlockContainer {
 
-	public BlockAltar(int id) {
-		super(id, Material.rock);
+	public BlockAltar() {
+		super(Material.rock);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityAltar();
 	}
 

@@ -1,8 +1,10 @@
 package erebus.item.block;
 
+import net.minecraft.block.Block;
+
 public class ItemBlockUmberOre extends ItemBlockGeneric {
 
-	public ItemBlockUmberOre(int id) {
-		super(id, "umberOre");
+	public ItemBlockUmberOre(Block block) {
+		super(block, "umberOre");
 	}
 }

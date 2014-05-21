@@ -1,6 +1,7 @@
 package erebus.item.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
@@ -40,7 +41,7 @@ public class ItemBlockDoorAmber extends Item {
 	}
 
 	@Override
-	public void registerIcons(IconRegister icon) {
+	public void registerIcons(IIconRegister icon) {
 		itemIcon = icon.registerIcon("erebus:doorAmber");
 	}
 }

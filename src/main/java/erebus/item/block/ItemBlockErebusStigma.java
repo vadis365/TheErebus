@@ -1,9 +1,10 @@
 package erebus.item.block;
 
+import net.minecraft.block.Block;
 
 public class ItemBlockErebusStigma extends ItemBlockGeneric {
 
-	public ItemBlockErebusStigma(int id) {
-		super(id, "erebusStigma");
+	public ItemBlockErebusStigma(Block block) {
+		super(block, "erebusStigma");
 	}
 }

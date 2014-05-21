@@ -1,8 +1,10 @@
 package erebus.item.block;
 
+import net.minecraft.block.Block;
+
 public class ItemBlockAmber extends ItemBlockGeneric {
 
-	public ItemBlockAmber(int id) {
-		super(id, "blockAmber");
+	public ItemBlockAmber(Block block) {
+		super(block, "blockAmber");
 	}
 }

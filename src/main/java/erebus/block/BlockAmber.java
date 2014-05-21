@@ -2,24 +2,27 @@ package erebus.block;
 
 import java.util.List;
 
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockAmber extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private Icon blockAmber, glassAmber, brickAmber;
+	private IIcon blockAmber, glassAmber, brickAmber;
 	@SideOnly(Side.CLIENT)
-	private Icon[] connectedGlass;
+	private IIcon[] connectedGlass;
 
 	private final String[] connectedGlassStr = new String[] { "center", "bottomleft", "bottomright", "topleft", "topright", "sidingleft", "sidingright", "sidingbottom", "sidingtop", // 8
 	"sidestopbottom", "sidesleftright", "fullsideleft", "fullsideright", "fullsidebottom", "fullsidetop", // 14
@@ -31,8 +34,8 @@ public class BlockAmber extends Block {
 	"sidingleft_t", "sidingleft_b", "sidingleft_tb", "sidingright_t", "sidingright_b", "sidingright_tb" // 45
 	};
 
-	public BlockAmber(int id) {
-		super(id, Material.rock);
+	public BlockAmber() {
+		super(Material.rock);
 	}
 
 	@Override
@@ -49,7 +52,7 @@ public class BlockAmber extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		return world.getBlockId(x, y, z) == blockID ? false : super.shouldSideBeRendered(world, x, y, z, side);
+		return world.getBlock(x, y, z) == this ? false : super.shouldSideBeRendered(world, x, y, z, side);
 	}
 
 	@Override
@@ -196,12 +199,12 @@ public class BlockAmber extends Block {
 	}
 
 	private boolean isGlass(IBlockAccess world, int x, int y, int z) {
-		return world.getBlockId(x, y, z) == blockID && world.getBlockMetadata(x, y, z) == 1;
+		return world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) == 1;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		switch (meta) {
 			case 0:
 				return blockAmber;
@@ -214,19 +217,20 @@ public class BlockAmber extends Block {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister) {
+	public void registerBlockIcons(IIconRegister iconRegister) {
 		blockAmber = iconRegister.registerIcon("erebus:blockAmber");
 		glassAmber = iconRegister.registerIcon("erebus:glassAmber");
 		brickAmber = iconRegister.registerIcon("erebus:brickAmber");
 
-		connectedGlass = new Icon[connectedGlassStr.length];
+		connectedGlass = new IIcon[connectedGlassStr.length];
 		for (int a = 0; a < connectedGlassStr.length; a++)
 			connectedGlass[a] = iconRegister.registerIcon("erebus:glassAmber_" + connectedGlassStr[a]);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
 		list.add(new ItemStack(id, 1, 1));
 		list.add(new ItemStack(id, 1, 2));

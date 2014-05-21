@@ -1,10 +1,11 @@
 package erebus.item.block;
 
+import net.minecraft.block.Block;
 import erebus.ModBlocks;
 
 public class ItemBlockSlabStoneErebus extends ItemBlockSlabGeneric {
 
-	public ItemBlockSlabStoneErebus(int id) {
-		super(id, "slabStoneErebus", ModBlocks.stoneSlabs, 0);
+	public ItemBlockSlabStoneErebus(Block block) {
+		super(block, "slabStoneErebus", ModBlocks.stoneSlabs, 0);
 	}
 }

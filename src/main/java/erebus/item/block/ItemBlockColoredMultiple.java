@@ -1,10 +1,11 @@
 package erebus.item.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemColored;
 
 public class ItemBlockColoredMultiple extends ItemColored {
 
-	public ItemBlockColoredMultiple(int id) {
-		super(id, true);
+	public ItemBlockColoredMultiple(Block block) {
+		super(block, true);
 	}
 }
