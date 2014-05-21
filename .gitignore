@@ -6,9 +6,5 @@ bin/
 Thumbs.db
 /build
 .gradle
-config/forge.cfg
-logs/fml-client-1.log
-logs/fml-client-latest.log
-logs/latest.log
-logs/fml-junk-earlystartup.log
-logs/2014-05-21-1.log.gz
+config/
+logs/
