@@ -1,12 +1,13 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -74,7 +75,7 @@ public class EntityBotFlyLarva extends EntityMob {
 			if (player.riddenByEntity==null) {
 				mountEntity(player);
 				setPosition(player.posX, player.posY+ ridingEntity.getYOffset(), player.posZ);
-			setPersistanceOnPlayer(player.getEntityName());
+			setPersistanceOnPlayer(player.getCommandSenderName()); //may not work
 			}
 		setRotation(player.renderYawOffset, player.rotationPitch);
 	}
@@ -91,7 +92,7 @@ public class EntityBotFlyLarva extends EntityMob {
 	}
 
 	@Override
-	protected void playStepSound(int par1, int par2, int par3, int par4) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		playSound("mob.silverfish.step", 0.15F, 1.0F);
 	}
 
@@ -116,7 +117,7 @@ public class EntityBotFlyLarva extends EntityMob {
 		if (worldObj.isRemote)
 			worldObj.spawnParticle("smoke", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 		if (!worldObj.isRemote)
-			entityDropItem(new ItemStack(Item.slimeBall), 0.0F);
+			entityDropItem(new ItemStack(Items.slime_ball), 0.0F);
 		setParasiteCount((byte) (getParasiteCount()-1));
 	}
 

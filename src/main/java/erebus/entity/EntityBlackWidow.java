@@ -2,18 +2,21 @@ package erebus.entity;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
@@ -152,20 +155,20 @@ public class EntityBlackWidow extends EntityMob {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-	}
+    }
 
 	@Override
-	protected int getDropItemId() {
-		return Item.silk.itemID;
+	protected Item getDropItem() {
+		return Items.string;
 	}
 
 	@Override
 	protected void dropFewItems(boolean attackedByPlayer, int looting) {
 		super.dropFewItems(attackedByPlayer, looting);
 		if (attackedByPlayer && (rand.nextInt(3) == 0 || rand.nextInt(1 + looting) > 0))
-			dropItem(Item.spiderEye.itemID, 1);
+			dropItem(Items.spider_eye, 1);
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
@@ -201,11 +204,11 @@ public class EntityBlackWidow extends EntityMob {
 				}
 				if (shouldDo > 1 && getWidowSize() > 1 && entity instanceof EntityPlayer) {
 					worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
-					for (int var10 = 0; var10 < 1; ++var10) {
-						EntityWebSling var11 = new EntityWebSling(worldObj, this);
-						var11.posY = posY + height / 2.0F + 0.5D;
-						var11.setType((byte) 1);
-						worldObj.spawnEntityInWorld(var11);
+					for (int count = 0; count < 1; ++count) {
+						EntityWebSling webSling = new EntityWebSling(worldObj, this);
+						webSling.posY = posY + height / 2.0F + 0.5D;
+						webSling.setType((byte) 1);
+						worldObj.spawnEntityInWorld(webSling);
 					}
 				}
 			}
@@ -215,16 +218,15 @@ public class EntityBlackWidow extends EntityMob {
 	public boolean attackEntityAsMob(Entity entity) {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLivingBase) {
-				byte var2 = 0;
-				if (worldObj.difficultySetting > 1)
-					if (worldObj.difficultySetting == 2)
-						var2 = 7;
-					else if (worldObj.difficultySetting == 3)
-						var2 = 15;
-				if (var2 > 0) {
+				byte duration = 0;
+				if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL)
+					duration = 7;
+				else if (this.worldObj.difficultySetting == EnumDifficulty.HARD)
+						duration = 15;
+				if (duration > 0) {
 					int chanceFiftyFifty = rand.nextInt(2);
 					if (chanceFiftyFifty == 1)
-						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.wither.id, var2 * 20, 0));
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.wither.id, duration * 20, 0));
 				}
 			}
 			return true;

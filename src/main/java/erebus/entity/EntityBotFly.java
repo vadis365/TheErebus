@@ -15,6 +15,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
@@ -92,12 +93,12 @@ public class EntityBotFly extends EntityMob {
 	}
 
 	public void setIsFlyHanging(boolean par1) {
-		byte var2 = dataWatcher.getWatchableObjectByte(16);
+		byte duration = dataWatcher.getWatchableObjectByte(16);
 
 		if (par1)
-			dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 | 1)));
+			dataWatcher.updateObject(16, Byte.valueOf((byte) (duration | 1)));
 		else
-			dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 & -2)));
+			dataWatcher.updateObject(16, Byte.valueOf((byte) (duration & -2)));
 	}
 
 	@Override
@@ -146,7 +147,7 @@ public class EntityBotFly extends EntityMob {
 	protected void flyAbout() {
 
 		if (getIsFlyHanging()) {
-			if (!worldObj.isBlockNormalCube(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)))
+			if (!worldObj.getBlock(MathHelper.floor_double(this.posX), (int)this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
 				setIsFlyHanging(false);
 			else {
 				if (rand.nextInt(200) == 0)
@@ -173,7 +174,7 @@ public class EntityBotFly extends EntityMob {
 			moveForward = 0.5F;
 			rotationYaw += var8;
 
-			if (rand.nextInt(100) == 0 && worldObj.isBlockNormalCube(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)))
+			if (rand.nextInt(100) == 0 && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int)this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
 				setIsFlyHanging(false);
 		}
 	}
@@ -227,9 +228,9 @@ public class EntityBotFly extends EntityMob {
 		if (var1 >= 63)
 			return false;
 		else {
-			int var2 = MathHelper.floor_double(posX);
+			int duration = MathHelper.floor_double(posX);
 			int var3 = MathHelper.floor_double(posZ);
-			int var4 = worldObj.getBlockLightValue(var2, var1, var3);
+			int var4 = worldObj.getBlockLightValue(duration, var1, var3);
 			byte var5 = 4;
 			Calendar var6 = worldObj.getCurrentDate();
 
@@ -259,14 +260,13 @@ public class EntityBotFly extends EntityMob {
 	public boolean attackEntityAsMob(Entity entity) {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLivingBase) {
-				byte var2 = 0;
-				if (worldObj.difficultySetting > 1)
-					if (worldObj.difficultySetting == 2)
-						var2 = 7;
-					else if (worldObj.difficultySetting == 3)
-						var2 = 15;
-				if (var2 > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, var2 * 20, 0));
+				byte duration = 0;
+			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				duration = 7;
+			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					duration = 15;
+			if (duration > 0)
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, duration * 20, 0));
 			}
 			if (entity instanceof EntityPlayer)
 				if (rand.nextInt(20) == 0 && entity.riddenByEntity==null) {

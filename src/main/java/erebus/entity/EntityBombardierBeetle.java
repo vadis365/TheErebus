@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -10,7 +11,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
@@ -94,14 +95,14 @@ public class EntityBombardierBeetle extends EntityMob {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int par4) {
+	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-	}
+    }
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		dropItem(Item.gunpowder.itemID, 1);
-		dropItem(Item.blazePowder.itemID, 1);
+		dropItem(Items.gunpowder, 1);
+		dropItem(Items.blaze_powder, 1);
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
@@ -111,10 +112,10 @@ public class EntityBombardierBeetle extends EntityMob {
 		int x = (int) (posX - Math.sin(direction) * 2.0D);
 		int y = (int) posY;
 		int z = (int) (posZ + Math.cos(direction) * 2.0D);
-		if (worldObj.getBlockId(x, y, z) != ModBlocks.reinExo.blockID)
+		if (worldObj.getBlock(x, y, z) != ModBlocks.reinExo)
 			if (ConfigHandler.bombardierBlockDestroy == true) {
 				worldObj.createExplosion(this, posX - Math.sin(direction) * 1.5D, posY + 1, posZ + Math.cos(direction) * 1.5D, explosionRadius, rule);
-				worldObj.destroyBlock(x, y, z, true);
+				worldObj.func_147480_a(x, y, z, true);
 			}
 	}
 }

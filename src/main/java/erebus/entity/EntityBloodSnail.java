@@ -5,8 +5,10 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityBloodSnail extends EntityMob {
@@ -28,7 +30,7 @@ public class EntityBloodSnail extends EntityMob {
 	
 	@Override
     public boolean getCanSpawnHere() {
-    	return worldObj.difficultySetting > 0 && !worldObj.isAnyLiquid(boundingBox);
+    	return !worldObj.isAnyLiquid(boundingBox);
     }
 	
 	@Override 
@@ -52,8 +54,8 @@ public class EntityBloodSnail extends EntityMob {
     }
 	
 	@Override
-    protected int getDropItemId() {
-        return 0;// TheBetweenlands.RedShell.itemID;
+    protected Item getDropItem() {
+		return null;// TheBetweenlands.RedShell.itemID;
     }
 	
 	@Override	 
@@ -66,18 +68,16 @@ public class EntityBloodSnail extends EntityMob {
 	public boolean attackEntityAsMob(Entity entity) {
     	if (super.attackEntityAsMob(entity)) {
             if (entity instanceof EntityLiving) {
-                byte byte0 = 0;
-                if (worldObj.difficultySetting > 1) {
-                    if (worldObj.difficultySetting == 2) {
-                        byte0 = 7;
-                    }
-                    else if (worldObj.difficultySetting == 3) {
-                        byte0 = 15;
-                    }
-                }
-                if (byte0 > 0) {
-                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.poison.id, byte0 * 20, 0));
-                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.confusion.id, byte0 * 20, 0));
+                byte duration = 0;
+                if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL)
+                	duration = 7;
+
+                else if (this.worldObj.difficultySetting == EnumDifficulty.HARD)
+                	duration = 15;
+
+                if (duration > 0) {
+                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
+                    ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.confusion.id, duration * 20, 0));
                 }
             }
             return true;
@@ -86,7 +86,4 @@ public class EntityBloodSnail extends EntityMob {
             return false;
         }
     }
-	
-
-
 }
