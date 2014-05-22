@@ -5,9 +5,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -27,8 +25,8 @@ public class RenderMucusBombPrimed extends Render {
 		GL11.glTranslated(x, y, z);
 		float f2;
 
-		if ((float) entityMucusBombPrimed.fuse - partialTickTime + 1.0F < 10.0F) {
-			f2 = 1.0F - ((float) entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 10.0F;
+		if (entityMucusBombPrimed.fuse - partialTickTime + 1.0F < 10.0F) {
+			f2 = 1.0F - (entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 10.0F;
 
 			if (f2 < 0.0F) {
 				f2 = 0.0F;
@@ -44,7 +42,7 @@ public class RenderMucusBombPrimed extends Render {
 			GL11.glScalef(f3, f3, f3);
 		}
 
-		f2 = (1.0F - ((float) entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 100.0F) * 0.8F;
+		f2 = (1.0F - (entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 100.0F) * 0.8F;
 		bindTexture(TextureMap.locationBlocksTexture);
 		this.blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, entityMucusBombPrimed.getBrightness(partialTickTime));
 

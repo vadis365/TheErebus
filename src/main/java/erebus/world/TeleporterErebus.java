@@ -328,7 +328,7 @@ public class TeleporterErebus extends Teleporter {
 						j3 = j5 + l2;
 						i4 = j2 + (i3 - 1) * l5 - k2 * k5;
 						flag = l2 < 0;
-						worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.stonebrick : 0, flag ? 1 : 0, 3);
+						worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.stonebrick : Blocks.air, flag ? 1 : 0, 3);
 					}
 		}
 

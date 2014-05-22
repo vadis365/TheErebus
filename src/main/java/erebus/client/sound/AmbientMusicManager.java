@@ -1,24 +1,8 @@
 package erebus.client.sound;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SoundManager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.ConfigHandler;
-import erebus.lib.Reference;
 
 @SideOnly(Side.CLIENT)
 public class AmbientMusicManager {
@@ -35,7 +19,7 @@ public class AmbientMusicManager {
 		MinecraftForge.EVENT_BUS.register(instance);
 		//TickRegistry.registerScheduledTickHandler(instance, Side.CLIENT);
 	}
-
+/*
 	private SoundManager sndMan;
 	private final Random rand = new Random();
 	private final Map<String, URL> poolAmbient = new HashMap<String, URL>();
@@ -107,5 +91,5 @@ public class AmbientMusicManager {
 	@Override
 	public int nextTickSpacing() {
 		return 200;
-	}
+	}*/
 }

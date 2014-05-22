@@ -2,6 +2,7 @@ package erebus.world.feature.plant;
 
 import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -25,6 +26,7 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 
 		int i1 = rand.nextInt(3) + 4;
 		boolean flag = true;
+		Block block;
 
 		if (y >= 1 && y + i1 + 1 < 256) {
 			int j1;
@@ -42,11 +44,9 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 				for (k1 = x - b0; k1 <= x + b0 && flag; ++k1) {
 					for (l1 = z - b0; l1 <= z + b0 && flag; ++l1) {
 						if (j1 >= 0 && j1 < 256) {
-							i2 = world.getBlock(k1, j1, l1);
+							block = world.getBlock(k1, j1, l1);
 
-							Block block = Blocks.blocksList[i2];
-
-							if (block != null && !block.isAirBlock(world, k1, j1, l1) && !block.isLeaves(world, k1, j1, l1)) {
+							if (block.getMaterial() != Material.air && !block.isLeaves(world, k1, j1, l1)) {
 								flag = false;
 							}
 						} else {
@@ -59,9 +59,9 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 			if (!flag) {
 				return false;
 			} else {
-				j1 = world.getBlock(x, y - 1, z);
+				block = world.getBlock(x, y - 1, z);
 
-				if (j1 != Blocks.dirt && j1 != Blocks.grass && j1 != Blocks.mycelium) {
+				if (block != Blocks.dirt && block != Blocks.grass && block != Blocks.mycelium) {
 					return false;
 				} else {
 					int j2 = y + i1;
@@ -143,22 +143,20 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 									l2 = 0;
 								}
 
-								Block block = Blocks.blocksList[world.getBlock(i2, k1, k2)];
+								block = world.getBlock(i2, k1, k2);
 
-								if ((l2 != 0 || y >= y + i1 - 1) && (block == null || block.canBeReplacedByLeaves(world, i2, k1, k2))) {
-									this.setBlockAndMetadata(world, i2, k1, k2, ModBlocks.erebusMushroomCap0 + type, l2);
+								if ((l2 != 0 || y >= y + i1 - 1) && (block.getMaterial() == Material.air || block.canBeReplacedByLeaves(world, i2, k1, k2))) {
+									world.setBlock(i2, k1, k2, getMushroomCap(type), l2, 3);
 								}
 							}
 						}
 					}
 
 					for (k1 = 0; k1 < i1; ++k1) {
-						l1 = world.getBlock(x, y + k1, z);
+						block = world.getBlock(x, y + k1, z);
 
-						Block block = Blocks.blocksList[l1];
-
-						if (block == null || block.canBeReplacedByLeaves(world, x, y + k1, z)) {
-							this.setBlockAndMetadata(world, x, y + k1, z, ModBlocks.erebusMushroomCap0 + type, 10);
+						if (block.getMaterial() == Material.air || block.canBeReplacedByLeaves(world, x, y + k1, z)) {
+							world.setBlock(x, y + k1, z, getMushroomCap(type), 10, 3);
 						}
 					}
 
@@ -167,6 +165,17 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 			}
 		} else {
 			return false;
+		}
+	}
+	
+	private Block getMushroomCap(int type){
+		switch(type){
+			case 0: return ModBlocks.erebusMushroomCap0;
+			case 1: return ModBlocks.erebusMushroomCap1;
+			case 2: return ModBlocks.erebusMushroomCap2;
+			case 3: return ModBlocks.erebusMushroomCap3;
+			case 4: return ModBlocks.erebusMushroomCap4;
+			default: return null;
 		}
 	}
 }

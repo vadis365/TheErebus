@@ -2,6 +2,7 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
@@ -17,29 +18,30 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 	private final boolean vinesGrow;
 	private final int metaWood;
 	private final int metaLeaves;
-	private final int woodID;
-	private final int leavesID;
-	private final int vinesID;
+	private final Block woodBlock;
+	private final Block leafBlock;
+	private final Block vineBlock;
 
 	public WorldGenErebusTrees(boolean par1) {
-		this(par1, 6, BlockLogErebus.dataMahogany, BlockLeavesErebus.dataMahoganyDecay, false, ModBlocks.logErebusGroup1, ModBlocks.leavesErebus, ModBlocks.thorns);
+		this(par1,6,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1,ModBlocks.leavesErebus,ModBlocks.thorns);
 	}
 
-	public WorldGenErebusTrees(boolean par1, int par2, int par3, int par4, boolean par5, int par6, int par7, int par8) {
+	public WorldGenErebusTrees(boolean par1, int par2, int par3, int par4, boolean par5, Block woodBlock, Block leafBlock, Block vineBlock){
 		super(par1);
 		minTreeHeight = par2;
 		metaWood = par3;
 		metaLeaves = par4;
 		vinesGrow = par5;
-		woodID = par6;
-		leavesID = par7;
-		vinesID = par8;
+		this.woodBlock = woodBlock;
+		this.leafBlock = leafBlock;
+		this.vineBlock = vineBlock;
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, int x, int y, int z){
 		int var6 = rand.nextInt(3) + minTreeHeight;
 		boolean var7 = true;
+		Block block;
 
 		if (y >= 1 && y + var6 + 1 <= 256) {
 			int var8;
@@ -59,11 +61,9 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 				for (int var10 = x - var9; var10 <= x + var9 && var7; ++var10)
 					for (var11 = z - var9; var11 <= z + var9 && var7; ++var11)
 						if (var8 >= 0 && var8 < 256) {
-							var12 = world.getBlock(var10, var8, var11);
+							block = world.getBlock(var10,var8,var11);
 
-							Block block = Blocks.blocksList[var12];
-
-							if (var12 != 0 && !block.isLeaves(world, var10, var8, var11) && var12 != Blocks.grass && var12 != Blocks.dirt && !block.isWood(world, var10, var8, var11))
+							if (!block.isLeaves(world,var10,var8,var11) && block != Blocks.grass && block != Blocks.dirt && !block.isWood(world,var10,var8,var11))
 								var7 = false;
 						} else
 							var7 = false;
@@ -72,10 +72,10 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 			if (!var7)
 				return false;
 			else {
-				var8 = world.getBlock(x, y - 1, z);
+				block = world.getBlock(x,y - 1,z);
 
-				if ((var8 == Blocks.grass || var8 == Blocks.dirt) && y < 256 - var6 - 1) {
-					setBlock(world, x, y - 1, z, Blocks.dirt);
+				if ((block == Blocks.grass || block == Blocks.dirt) && y < 256 - var6 - 1) {
+					world.setBlock(x,y-1,z,Blocks.dirt);
 					var9 = 3;
 					byte var18 = 0;
 					int var13;
@@ -92,34 +92,32 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 							for (int var16 = z - var13; var16 <= z + var13; ++var16) {
 								int var17 = var16 - z;
 
-								Block block = Blocks.blocksList[world.getBlock(var14, var11, var16)];
+								block = world.getBlock(var14,var11,var16);
 
-								if ((Math.abs(var15) != var13 || Math.abs(var17) != var13 || rand.nextInt(2) != 0 && var12 != 0) && (block == null || block.canBeReplacedByLeaves(world, var14, var11, var16)))
-									setBlockAndMetadata(world, var14, var11, var16, leavesID, metaLeaves);
+								if ((Math.abs(var15) != var13 || Math.abs(var17) != var13 || rand.nextInt(2) != 0 && var12 != 0) && (block.getMaterial() == Material.air || block.canBeReplacedByLeaves(world,var14,var11,var16)))
+									world.setBlock(var14,var11,var16,leafBlock,metaLeaves,2);
 							}
 						}
 					}
 
 					for (var11 = 0; var11 < var6; ++var11) {
-						var12 = world.getBlock(x, y + var11, z);
+						block = world.getBlock(x,y + var11,z);
 
-						Block block = Blocks.blocksList[var12];
-
-						if (var12 == 0 || block == null || block.isLeaves(world, x, y + var11, z)) {
-							setBlockAndMetadata(world, x, y + var11, z, woodID, metaWood);
+						if (block.getMaterial() == Material.air || block.isLeaves(world,x,y + var11,z)) {
+							world.setBlock(x,y + var11,z,woodBlock,metaWood,2);
 
 							if (vinesGrow && var11 > 0) {
-								if (rand.nextInt(3) > 0 && world.isAirBlock(x - 1, y + var11, z))
-									setBlockAndMetadata(world, x - 1, y + var11, z, vinesID, 8);
+								if (rand.nextInt(3) > 0 && world.isAirBlock(x - 1,y + var11,z))
+									world.setBlock(x - 1,y + var11,z,vineBlock,8,2);
 
-								if (rand.nextInt(3) > 0 && world.isAirBlock(x + 1, y + var11, z))
-									setBlockAndMetadata(world, x + 1, y + var11, z, vinesID, 2);
+								if (rand.nextInt(3) > 0 && world.isAirBlock(x + 1,y + var11,z))
+									world.setBlock(x + 1,y + var11,z,vineBlock,2,2);
 
-								if (rand.nextInt(3) > 0 && world.isAirBlock(x, y + var11, z - 1))
-									setBlockAndMetadata(world, x, y + var11, z - 1, vinesID, 1);
+								if (rand.nextInt(3) > 0 && world.isAirBlock(x,y + var11,z - 1))
+									world.setBlock(x,y + var11,z - 1,vineBlock,1,2);
 
-								if (rand.nextInt(3) > 0 && world.isAirBlock(x, y + var11, z + 1))
-									setBlockAndMetadata(world, x, y + var11, z + 1, vinesID, 4);
+								if (rand.nextInt(3) > 0 && world.isAirBlock(x,y + var11,z + 1))
+									world.setBlock(x,y + var11,z + 1,vineBlock,4,2);
 							}
 						}
 					}
@@ -131,19 +129,20 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 
 							for (var14 = x - var13; var14 <= x + var13; ++var14)
 								for (var15 = z - var13; var15 <= z + var13; ++var15) {
-									Block block = world.getBlock(var14, var11, var15);
-									if (block != null && block.isLeaves(world, var14, var11, var15)) {
-										if (rand.nextInt(4) == 0 && world.isAirBlock(var14 - 1, var11, var15))
-											growVines(world, var14 - 1, var11, var15, 8);
+									block = world.getBlock(var14,var11,var15);
+									
+									if (block.isLeaves(world,var14,var11,var15)) {
+										if (rand.nextInt(4) == 0 && world.isAirBlock(var14 - 1,var11,var15))
+											growVines(world,var14 - 1,var11,var15,8);
 
-										if (rand.nextInt(4) == 0 && world.isAirBlock(var14 + 1, var11, var15))
-											growVines(world, var14 + 1, var11, var15, 2);
+										if (rand.nextInt(4) == 0 && world.isAirBlock(var14 + 1,var11,var15))
+											growVines(world,var14 + 1,var11,var15,2);
 
-										if (rand.nextInt(4) == 0 && world.isAirBlock(var14, var11, var15 - 1))
-											growVines(world, var14, var11, var15 - 1, 1);
+										if (rand.nextInt(4) == 0 && world.isAirBlock(var14,var11,var15 - 1))
+											growVines(world,var14,var11,var15 - 1,1);
 
-										if (rand.nextInt(4) == 0 && world.isAirBlock(var14, var11, var15 + 1))
-											growVines(world, var14, var11, var15 + 1, 4);
+										if (rand.nextInt(4) == 0 && world.isAirBlock(var14,var11,var15 + 1))
+											growVines(world,var14,var11,var15 + 1,4);
 									}
 								}
 						}
@@ -153,7 +152,7 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 								for (var12 = 0; var12 < 4; ++var12)
 									if (rand.nextInt(4 - var11) == 0) {
 										var13 = rand.nextInt(3);
-										setBlockAndMetadata(world, x + Direction.offsetX[ForgeDirection.OPPOSITES[var12]], y + var6 - 5 + var11, z + Direction.offsetZ[ForgeDirection.OPPOSITES[var12]], Blocks.cocoaPlant, var13 << 2 | var12);
+										world.setBlock(x + Direction.offsetX[ForgeDirection.OPPOSITES[var12]],y + var6 - 5 + var11,z + Direction.offsetZ[ForgeDirection.OPPOSITES[var12]],Blocks.cocoa,var13 << 2 | var12,2);
 									}
 					}
 
@@ -165,17 +164,17 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 			return false;
 	}
 
-	private void growVines(World world, int x, int y, int z, int flags) {
-		setBlockAndMetadata(world, x, y, z, vinesID, flags);
+	private void growVines(World world,int x,int y,int z,int flags) {
+		world.setBlock(x,y,z,vineBlock,flags,2);
 		int var6 = 4;
 
 		while (true) {
 			--y;
 
-			if (world.getBlock(x, y, z) != 0 || var6 <= 0)
+			if (!world.isAirBlock(x,y,z) || var6 <= 0)
 				return;
 
-			setBlockAndMetadata(world, x, y, z, vinesID, flags);
+			world.setBlock(x,y,z,vineBlock,flags,2);
 			--var6;
 		}
 	}

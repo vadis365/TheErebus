@@ -31,8 +31,8 @@ public class GuiPetrifiedChest extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRendererObj.drawString(lowerChestInventory.isInvNameLocalized() ? lowerChestInventory.getInvName() : StatCollector.translateToLocal(lowerChestInventory.getInvName()), 8, 6, Utils.getColour(255, 255, 255));
-		fontRendererObj.drawString(upperChestInventory.isInvNameLocalized() ? upperChestInventory.getInvName() : StatCollector.translateToLocal(upperChestInventory.getInvName()), 8, ySize - 96 + 2, Utils.getColour(255, 255, 255));
+		fontRendererObj.drawString(lowerChestInventory.hasCustomInventoryName() ? lowerChestInventory.getInventoryName() : StatCollector.translateToLocal(lowerChestInventory.getInventoryName()), 8, 6, Utils.getColour(255, 255, 255));
+		fontRendererObj.drawString(upperChestInventory.hasCustomInventoryName() ? upperChestInventory.getInventoryName() : StatCollector.translateToLocal(upperChestInventory.getInventoryName()), 8, ySize - 96 + 2, Utils.getColour(255, 255, 255));
 	}
 
 	@Override
