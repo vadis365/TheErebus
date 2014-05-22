@@ -10,3 +10,4 @@ config/
 logs/
 eclipse/
 gradlew.bat
+crash-reports/crash-2014-05-22_23.41.31-client.txt
