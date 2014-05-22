@@ -17,7 +17,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.relauncher.Side;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.client.fx.EntityRepellentFX;
@@ -124,8 +123,6 @@ import erebus.client.render.tileentity.TileEntityPetrifiedWoodChestRenderer;
 import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
 import erebus.client.render.tileentity.TileEntitySpawnerRender;
 import erebus.client.render.tileentity.TileEntityUmberGolemStatueRenderer;
-import erebus.core.handler.ClientTickHandler;
-import erebus.core.handler.KeyBindingHandler;
 import erebus.core.handler.PortalOverlayHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -213,14 +210,14 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerKeyHandlers() {
-		KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
+		//KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
 	}
 
 	@Override
 	public void registerRenderInformation() {
 		MinecraftForge.EVENT_BUS.register(new PortalOverlayHandler());
 
-		TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
+		//TickRegistry.registerTickHandler(new ClientTickHandler(), Side.CLIENT);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeetle.class, new RenderBeetle());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFly.class, new RenderFly());

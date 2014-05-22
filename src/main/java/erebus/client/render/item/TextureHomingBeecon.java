@@ -65,7 +65,7 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
 
 			if (i != frameCounter) {
 				frameCounter = i;
-				TextureUtil.uploadTextureSub((int[]) framesTextureData.get(frameCounter), width, height, originX, originY, false, false);
+				TextureUtil.uploadTextureMipmap((int[][]) framesTextureData.get(frameCounter), width, height, originX, originY, false, false);
 			}
 		}
 	}

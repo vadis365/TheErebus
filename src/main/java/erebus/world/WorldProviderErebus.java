@@ -4,8 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.EnumGameType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldSettings.GameType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.relauncher.Side;
@@ -108,7 +108,7 @@ public class WorldProviderErebus extends WorldProvider {
 	public ChunkCoordinates getRandomizedSpawnPoint() {
 		ChunkCoordinates chunkcoordinates = new ChunkCoordinates(worldObj.getSpawnPoint());
 
-		boolean isAdventure = worldObj.getWorldInfo().getGameType() == EnumGameType.ADVENTURE;
+		boolean isAdventure = worldObj.getWorldInfo().getGameType() == GameType.ADVENTURE;
 		int spawnFuzz = 100;
 		int spawnFuzzHalf = spawnFuzz / 2;
 

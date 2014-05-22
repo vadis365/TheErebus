@@ -33,6 +33,7 @@ public class BlockAmber extends Block {
 
 	public BlockAmber() {
 		super(Material.rock);
+		setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override

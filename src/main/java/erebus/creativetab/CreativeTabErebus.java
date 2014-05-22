@@ -17,21 +17,23 @@ public class CreativeTabErebus extends CreativeTabs {
 	}
 
 	public void add(Block... blocks) {
-		for (Block block : blocks) {
-			blockList.add(new ItemStack(block));
-			block.setCreativeTab(this);
-		}
+		for (Block block : blocks)
+			if (block != null) {
+				blockList.add(new ItemStack(block));
+				block.setCreativeTab(this);
+			}
 	}
 
 	public void add(Item... items) {
-		for (Item item : items) {
-			blockList.add(new ItemStack(item));
-			item.setCreativeTab(this);
-		}
+		for (Item item : items)
+			if (item != null) {
+				blockList.add(new ItemStack(item));
+				item.setCreativeTab(this);
+			}
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
+	@SuppressWarnings("rawtypes")
 	public void displayAllReleventItems(List list) {
 		for (ItemStack s : blockList)
 			if (s != null)

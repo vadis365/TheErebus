@@ -1,6 +1,8 @@
 package erebus;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCompressed;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -54,8 +56,8 @@ import erebus.block.BlockPlantedGiantFlower;
 import erebus.block.BlockPortalErebus;
 import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
-import erebus.block.BlockReinExo;
 import erebus.block.BlockSaplingErebus;
+import erebus.block.BlockSimple;
 import erebus.block.BlockSlabPetrifiedWood;
 import erebus.block.BlockSlabPlanksErebus;
 import erebus.block.BlockSlabStoneErebus;
@@ -142,7 +144,7 @@ public class ModBlocks {
 		initBlocks();
 		initCreativeTabs();
 		registerBlocks();
-		registerProperties();
+		//registerProperties();
 	}
 
 	private static void initBlocks() {
@@ -182,9 +184,9 @@ public class ModBlocks {
 		blockTurnip = new BlockTurnip().setBlockName("turnips");
 		fiddlehead = new BlockFiddlehead().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFiddlehead");
 
-		blockSilk = new Block(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("blockSilk").setBlockTextureName("erebus:blockSilk");
-		mirBrick = new Block(Material.rock).setHardness(1.5F).setResistance(100.0F).setStepSound(Block.soundTypeStone).setBlockName("mirbrick").setBlockTextureName("erebus:mirbrick");
-		petrifiedWoodPlanks = new Block(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodPlanks").setBlockTextureName("erebus:petrifiedWoodPlanks");
+		blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("blockSilk").setBlockTextureName("erebus:blockSilk");
+		mirBrick = new BlockSimple(Material.rock).setHardness(1.5F).setResistance(100.0F).setStepSound(Block.soundTypeStone).setBlockName("mirbrick").setBlockTextureName("erebus:mirbrick");
+		petrifiedWoodPlanks = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodPlanks").setBlockTextureName("erebus:petrifiedWoodPlanks");
 		petrifiedCraftingTable = new BlockPetrifiedCraftingTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("petrifiedCraftingTable");
 		bambooCrate = new BlockBambooCrate().setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("bambooCrate");
 		umberFurnace = new BlockUmberFurnace(false).setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("umberFurnaceOFF");
@@ -200,7 +202,7 @@ public class ModBlocks {
 		erebusAltarXP = new BlockErebusAltarXP().setHardness(20.0F).setBlockName("erebusAltarXP");
 		erebusAltarRepair = new BlockErebusAltarRepair().setHardness(20.0F).setBlockName("erebusAltarRepair");
 		glowingJar = new BlockGlowingJar().setBlockName("glowingJar").setBlockTextureName("erebus:glassAmber");
-		reinExo = new BlockReinExo().setHardness(1.5F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("reinExo").setBlockTextureName("erebus:blockReinExo");
+		reinExo = new BlockSimple(Material.rock).setHardness(1.5F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("reinExo").setBlockTextureName("erebus:blockReinExo");
 		bambooLadder = new BlockBambooLadder().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("bambooLadder").setBlockTextureName("erebus:bambooLadder");
 		umberGolemStatue = new BlockUmberGolemStatue().setBlockName("umberGolemStatue");
 		waspNestBlock = new BlockWaspNest().setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("waspNestBlock").setBlockTextureName("erebus:waspNestBlock");
@@ -216,10 +218,10 @@ public class ModBlocks {
 		doorAmber = new BlockDoorAmber(Material.glass).setBlockName("doorAmber").setBlockTextureName("erebus:doorAmber");
 		erebusHoneyBlock = new BlockErebusHoney(erebusHoney).setBlockName("erebusHoney");
 		mud = new BlockMud().setBlockName("erebusMud").setBlockTextureName("erebus:mud");
-		mudBricks = new Block(Material.rock).setBlockName("erebus.mudBricks").setBlockTextureName("erebus:mudBricks").setHardness(0.8F).setResistance(1.0F);
+		mudBricks = new BlockSimple(Material.rock).setBlockName("erebus.mudBricks").setBlockTextureName("erebus:mudBricks").setHardness(0.8F).setResistance(1.0F);
 		honeyTreat = new BlockHoneyTreat().setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("honeyTreat").setBlockTextureName("erebus:honeyTreat");
 		jarOHoney = new JarOHoney().setHardness(0.5F).setBlockName("erebus.jarOHoney").setBlockTextureName("erebus:glassAmber");
-		jadeBlock = new BlockOreStorage().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.blockJade").setBlockTextureName("erebus:blockJade");
+		jadeBlock = new BlockCompressed(MapColor.greenColor).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.blockJade").setBlockTextureName("erebus:blockJade");
 		altar = new BlockAltar().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.altar").setBlockTextureName("stone");
 		glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 		mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
@@ -378,7 +380,6 @@ public class ModBlocks {
 	}
 
 	private static void registerProperties() {
-		MinecraftForge.setBlockHarvestLevel(blockAmber, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(oreFossil, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(mirBrick, "pickaxe", 1);
 		MinecraftForge.setBlockHarvestLevel(spiderSpawner, 0, "pickaxe", 0);

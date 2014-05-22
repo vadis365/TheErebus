@@ -14,17 +14,14 @@ import net.minecraft.client.audio.SoundManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
-import cpw.mods.fml.common.IScheduledTickHandler;
-import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.handler.ConfigHandler;
 import erebus.lib.Reference;
 
 @SideOnly(Side.CLIENT)
-public class AmbientMusicManager implements IScheduledTickHandler {
+public class AmbientMusicManager {
 
 	private static AmbientMusicManager instance;
 
@@ -36,7 +33,7 @@ public class AmbientMusicManager implements IScheduledTickHandler {
 		instance = new AmbientMusicManager();
 
 		MinecraftForge.EVENT_BUS.register(instance);
-		TickRegistry.registerScheduledTickHandler(instance, Side.CLIENT);
+		//TickRegistry.registerScheduledTickHandler(instance, Side.CLIENT);
 	}
 
 	private SoundManager sndMan;
@@ -46,7 +43,7 @@ public class AmbientMusicManager implements IScheduledTickHandler {
 	private AmbientMusicManager() {
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onSound(SoundLoadEvent event) {
 		String[] ambientMusicList = new String[] { "bugInTheSystem.ogg", "feint_sleepless.ogg" };
 

@@ -1,7 +1,6 @@
 package erebus.item;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -45,10 +44,6 @@ public class ItemJumpBoots extends ItemArmor {
 		if (e.entityLiving instanceof EntityPlayer) {
 			ItemStack is = ((EntityPlayer) e.entityLiving).inventory.armorInventory[0];
 			if (is != null && is.getItem() == this && !e.entityLiving.isSneaking())
-				e.entityLiving.motionY += 0.4D;
-		} else if (e.entityLiving instanceof EntityLiving) {
-			ItemStack is = ((EntityLiving) e.entityLiving).getCurrentItemOrArmor(1);
-			if (is != null && is.getItem() == this)
 				e.entityLiving.motionY += 0.4D;
 		}
 	}

@@ -1,6 +1,5 @@
 package erebus;
 
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.google.common.reflect.ClassPath;
@@ -23,7 +22,6 @@ import erebus.client.sound.EntitySoundEvent;
 import erebus.core.handler.BucketHandler;
 import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
-import erebus.core.handler.PlayerTeleportHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.creativetab.CreativeTabErebus;
 import erebus.creativetab.CreativeTabErebusBlock;
@@ -36,7 +34,6 @@ import erebus.integration.IModIntegration;
 import erebus.lib.Reference;
 import erebus.recipes.AltarRecipe;
 import erebus.recipes.RecipeHandler;
-import erebus.world.WorldProviderErebus;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
 public class Erebus {
@@ -52,7 +49,7 @@ public class Erebus {
 	public static CreativeTabErebus tabErebusGear = new CreativeTabErebusGear("erebus.gear");
 	public static CreativeTabErebus tabErebusSpecial = new CreativeTabErebusSpecialItem("erebus.special");
 
-	public static PlayerTeleportHandler teleportHandler = new PlayerTeleportHandler();
+	//public static PlayerTeleportHandler teleportHandler = new PlayerTeleportHandler();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -73,8 +70,8 @@ public class Erebus {
 		//GameRegistry.registerPlayerTracker(teleportHandler);
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
-		DimensionManager.registerProviderType(ConfigHandler.erebusDimensionID, WorldProviderErebus.class, true);
-		DimensionManager.registerDimension(ConfigHandler.erebusDimensionID, ConfigHandler.erebusDimensionID);
+		//		DimensionManager.registerProviderType(ConfigHandler.erebusDimensionID, WorldProviderErebus.class, true);
+		//		DimensionManager.registerDimension(ConfigHandler.erebusDimensionID, ConfigHandler.erebusDimensionID);
 	}
 
 	@EventHandler

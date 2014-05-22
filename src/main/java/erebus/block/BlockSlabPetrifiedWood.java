@@ -2,55 +2,57 @@ package erebus.block;
 
 import java.util.Random;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 
-public class BlockSlabPetrifiedWood extends BlockHalfSlab {
+public class BlockSlabPetrifiedWood extends BlockSlab {
 
 	public BlockSlabPetrifiedWood(boolean isDouble) {
 		super(isDouble, Material.rock);
 		setHardness(2.0F);
 		setLightOpacity(0);
-		setStepSound(Block.soundWoodFootstep);
-		setTextureName("erebus:petrifiedWoodPlanks");
+		setStepSound(Block.soundTypeWood);
+		setBlockTextureName("erebus:petrifiedWoodPlanks");
 	}
 
 	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
-		return ModBlocks.petrifiedWoodSlab[0].blockID;
+	public Item getItemDropped(int meta, Random rand, int fortune) {
+		return Item.getItemFromBlock(ModBlocks.petrifiedWoodSlab[0]);
 	}
 
 	@Override
 	protected ItemStack createStackedBlock(int meta) {
-		return new ItemStack(ModBlocks.petrifiedWoodSlab[0], isDoubleSlab ? 2 : 1);
+		return new ItemStack(ModBlocks.petrifiedWoodSlab[0], field_150004_a ? 2 : 1);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int idPicked(World world, int x, int y, int z) {
-		return ModBlocks.petrifiedWoodSlab[0].blockID;
+	public Item getItem(World world, int x, int y, int z) {
+		return Item.getItemFromBlock(ModBlocks.petrifiedWoodSlab[0]);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return ModBlocks.petrifiedWoodPlanks.getIcon(side, 0);
 	}
 
 	@Override
-	public String getFullSlabName(int meta) {
+	public String func_150002_b(int meta) {
 		return super.getUnlocalizedName();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg) {
 	}
 }

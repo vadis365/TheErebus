@@ -2,6 +2,7 @@ package erebus.world;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.entity.EnumCreatureType;
@@ -14,8 +15,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import erebus.ModBlocks;
 import erebus.core.handler.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
@@ -106,9 +107,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 								int j2 = 0;
 
 								// Underground Water
-								if (i1 * 8 + j1 < byte1) {
+								if (i1 * 8 + j1 < byte1)
 									j2 = 0;
-								}
 
 								if (d15 > 0.0D)
 									j2 = ModBlocks.umberstone.blockID;
@@ -150,9 +150,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 		Chunk chunk = new Chunk(worldObj, blocks, x, z);
 		byte[] biomeArrayReference = chunk.getBiomeArray();
 
-		for (int a = 0; a < biomeArrayReference.length; ++a) {
+		for (int a = 0; a < biomeArrayReference.length; ++a)
 			biomeArrayReference[a] = (byte) biomesForGeneration[a].biomeID;
-		}
 
 		chunk.generateSkylightMap();
 		chunk.resetRelightChecks();
@@ -189,7 +188,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 			}
 		}
 
-		for (int xx = 0; xx < sizeX; xx++) {
+		for (int xx = 0; xx < sizeX; xx++)
 			for (int zz = 0; zz < sizeZ; zz++) {
 				double d3 = (noiseData4[j] + 256D) * oneOver512;
 
@@ -259,7 +258,6 @@ public class ChunkProviderErebus implements IChunkProvider {
 					index++;
 				}
 			}
-		}
 
 		return noise;
 	}
@@ -285,9 +283,9 @@ public class ChunkProviderErebus implements IChunkProvider {
 				for (int yInChunk = 127; yInChunk >= 0; --yInChunk) {
 					int index = (zInChunk * 16 + xInChunk) * 128 + yInChunk;
 
-					if ((yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5)) || (yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))) {
+					if (yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))
 						blocks[index] = (byte) Block.bedrock.blockID;
-					} else {
+					else {
 						byte block = blocks[index];
 
 						if (block == 0)
@@ -345,9 +343,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 			biome.decorate(worldObj, rand, blockCoordX, blockCoordZ);
 		}
 
-		for (int attempt = 0; attempt < 14; ++attempt) {
+		for (int attempt = 0; attempt < 14; ++attempt)
 			new WorldGenSpiderDungeons().generate(worldObj, rand, blockCoordX + rand.nextInt(16) + 8, rand.nextInt(128), blockCoordZ + rand.nextInt(16) + 8);
-		}
 
 		BlockSand.fallInstantly = false;
 	}
