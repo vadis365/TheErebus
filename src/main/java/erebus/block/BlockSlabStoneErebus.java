@@ -3,12 +3,11 @@ package erebus.block;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.BlockHalfSlab;
+import javax.swing.Icon;
+
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,8 +18,8 @@ public class BlockSlabStoneErebus extends BlockHalfSlab {
 	public static final String[] slabTypes = new String[] { "umberstone", "umbercobble", "umbercobbleMossy", "umbercobbleWebbed", "umbrick", "umberpaver", "umberpaverMossy", "umberpaverWebbed" };
 	public static final byte dataUmberstone = 0, dataUmbercobble = 1, dataUmbercobbleMossy = 2, dataUmbercobbleWebbed = 3, dataUmbrick = 4, dataUmberpaver = 5, dataUmberpaverMossy = 6, dataUmberpaverWebbed = 7;
 
-	public BlockSlabStoneErebus(int id, boolean isDouble) {
-		super(id, isDouble, Material.rock);
+	public BlockSlabStoneErebus(boolean isDouble) {
+		super(isDouble, Material.rock);
 		setLightOpacity(0);
 	}
 

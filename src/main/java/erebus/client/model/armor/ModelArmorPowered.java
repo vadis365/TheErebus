@@ -16,13 +16,13 @@ public class ModelArmorPowered extends ModelBiped {
 	ModelRenderer LArm;
 	ModelRenderer RWingbase;
 	ModelRenderer LWingbase;
-    ModelRenderer ChestEngine;
-    ModelRenderer RWingUpgradeTop;
-    ModelRenderer RWingUpgradeMid;
-    ModelRenderer RWingUpgradeBottom;
-    ModelRenderer LWingUpgradeTop;
-    ModelRenderer LWingUpgradeMid;
-    ModelRenderer LWingUpgradeBottom;
+	ModelRenderer ChestEngine;
+	ModelRenderer RWingUpgradeTop;
+	ModelRenderer RWingUpgradeMid;
+	ModelRenderer RWingUpgradeBottom;
+	ModelRenderer LWingUpgradeTop;
+	ModelRenderer LWingUpgradeMid;
+	ModelRenderer LWingUpgradeBottom;
 
 	public boolean isGliding;
 	public boolean isPowered;
@@ -78,7 +78,7 @@ public class ModelArmorPowered extends ModelBiped {
 		LWingUpgradeBottom = new ModelRenderer(this, 20, 49);
 		LWingUpgradeBottom.addBox(-4.5F, 0F, -0.5F, 2, 7, 1);
 		LWingUpgradeBottom.setRotationPoint(2F, 3F, 3.5F);
-		setRotation(LWingUpgradeBottom, 0F, 0F, -1.570796F);  
+		setRotation(LWingUpgradeBottom, 0F, 0F, -1.570796F);
 	}
 
 	@Override
@@ -100,17 +100,17 @@ public class ModelArmorPowered extends ModelBiped {
 		GL11.glTranslatef(-0.15F, -0.05F, 0.0F);
 		GL11.glScalef(1.5F, 1.2F, 1.3F);
 		LArm.render(unitPixel);
-		GL11.glPopMatrix();	
+		GL11.glPopMatrix();
 		RWingbase.render(unitPixel);
 		LWingbase.render(unitPixel);
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
-	    RWingUpgradeTop.render(unitPixel);
-	    RWingUpgradeMid.render(unitPixel);
-	    RWingUpgradeBottom.render(unitPixel);
-	    LWingUpgradeTop.render(unitPixel);
-	    LWingUpgradeMid.render(unitPixel);
-	    LWingUpgradeBottom.render(unitPixel);
+		RWingUpgradeTop.render(unitPixel);
+		RWingUpgradeMid.render(unitPixel);
+		RWingUpgradeBottom.render(unitPixel);
+		LWingUpgradeTop.render(unitPixel);
+		LWingUpgradeMid.render(unitPixel);
+		LWingUpgradeBottom.render(unitPixel);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}
@@ -134,7 +134,7 @@ public class ModelArmorPowered extends ModelBiped {
 			LWingUpgradeTop.rotateAngleZ = 0F;
 			LWingUpgradeMid.rotateAngleZ = 0F;
 			LWingUpgradeBottom.rotateAngleZ = 0F;
-			
+
 			if (player.prevPosX != player.posX || player.prevPosZ != player.posZ) {
 				RWingUpgradeTop.rotateAngleX = 0.7F;
 				RWingUpgradeMid.rotateAngleX = 0.7F;
@@ -142,8 +142,7 @@ public class ModelArmorPowered extends ModelBiped {
 				LWingUpgradeTop.rotateAngleX = 0.7F;
 				LWingUpgradeMid.rotateAngleX = 0.7F;
 				LWingUpgradeBottom.rotateAngleX = 0.7F;
-			
-			
+
 			} else {
 				RWingUpgradeTop.rotateAngleX = 0F;
 				RWingUpgradeMid.rotateAngleX = 0F;
@@ -153,21 +152,21 @@ public class ModelArmorPowered extends ModelBiped {
 				LWingUpgradeBottom.rotateAngleX = 0F;
 			}
 		}
-		if (isGliding|| isPowered && !player.onGround) {
+		if (isGliding || isPowered && !player.onGround) {
 			RWingUpgradeTop.rotateAngleZ = 1.570796F;
 			RWingUpgradeMid.rotateAngleZ = 1.570796F;
 			RWingUpgradeBottom.rotateAngleZ = 1.570796F;
 			LWingUpgradeTop.rotateAngleZ = -1.570796F;
 			LWingUpgradeMid.rotateAngleZ = -1.570796F;
 			LWingUpgradeBottom.rotateAngleZ = -1.570796F;
-			if(isPowered) {
-				RWingUpgradeTop.rotateAngleX = 0.3F+ MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
-				RWingUpgradeMid.rotateAngleX = 0.3F+ MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
-				RWingUpgradeBottom.rotateAngleX = 0.3F+ MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
-				LWingUpgradeTop.rotateAngleX = 0.3F+ MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;;
-				LWingUpgradeMid.rotateAngleX = 0.3F+ MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
-				LWingUpgradeBottom.rotateAngleX = 0.3F+ MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
-				}
+			if (isPowered) {
+				RWingUpgradeTop.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
+				RWingUpgradeMid.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
+				RWingUpgradeBottom.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
+				LWingUpgradeTop.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;;
+				LWingUpgradeMid.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
+				LWingUpgradeBottom.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
+			}
 		}
 		if (player.isSneaking()) {
 			Body.rotateAngleX = 0.4F;
@@ -190,7 +189,7 @@ public class ModelArmorPowered extends ModelBiped {
 			RWingUpgradeBottom.rotationPointZ = 4.5F;
 			LWingUpgradeTop.rotationPointZ = 4.5F;
 			LWingUpgradeMid.rotationPointZ = 4.5F;
-			LWingUpgradeBottom.rotationPointZ = 4.5F;	
+			LWingUpgradeBottom.rotationPointZ = 4.5F;
 		} else {
 			Body.rotateAngleX = 0.0F;
 			RWingbase.rotateAngleX = 0.0F;

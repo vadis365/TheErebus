@@ -46,11 +46,11 @@ public class EntityBombardierBeetle extends EntityMob {
 	public boolean isAIEnabled() {
 		return true;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public void onUpdate() {
@@ -97,7 +97,7 @@ public class EntityBombardierBeetle extends EntityMob {
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-    }
+	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {

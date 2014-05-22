@@ -3,7 +3,7 @@ package erebus.item;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.Vec3;
@@ -31,9 +31,9 @@ public class ItemScorpionPincer extends ItemSword {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
-		if (!player.capabilities.isCreativeMode && player.inventory.hasItem(Item.fireballCharge.itemID))
+		if (!player.capabilities.isCreativeMode && player.inventory.hasItem(Items.fire_charge))
 			is.damageItem(10, player);
-		if (player.capabilities.isCreativeMode || player.inventory.hasItem(Item.fireballCharge.itemID)) {
+		if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.fire_charge)) {
 			world.playSoundAtEntity(player, "mob.ghast.fireball", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.isRemote) {
 				Vec3 look = player.getLookVec();
@@ -46,10 +46,9 @@ public class ItemScorpionPincer extends ItemSword {
 				fireball.accelerationZ = look.zCoord * 0.1;
 				world.spawnEntityInWorld(fireball);
 			}
-			player.inventory.consumeInventoryItem(Item.fireballCharge.itemID);
+			player.inventory.consumeInventoryItem(Items.fire_charge);
 		}
 		player.swingItem();
 		return is;
 	}
-
 }

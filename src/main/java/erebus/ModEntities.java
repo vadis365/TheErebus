@@ -111,7 +111,7 @@ public class ModEntities {
 		EntityList.stringToClassMapping.put("ChameleonTick - Erebus", EntityChameleonTick.class);
 		EntityList.stringToClassMapping.put("SolifugeSmall - Erebus", EntitySolifugeSmall.class);
 		EntityList.stringToClassMapping.put("MidgeSwarm - Erebus", EntityMidgeSwarm.class);
-		
+
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "BeetleLarva", -1251634, -13032944);
 		registerEntity(1, EntityWasp.class, "Wasp", -256, -16382458);
@@ -152,7 +152,7 @@ public class ModEntities {
 		registerEntity(36, EntityChameleonTick.class, "ChameleonTick", 0x804E3D, 0x3D6F80);
 		registerEntity(37, EntitySolifugeSmall.class, "SolifugeSmall");
 		registerEntity(38, EntityMidgeSwarm.class, "MidgeSwarm", -14803180, -13816034);
-		
+
 		registerEntity(50, EntityAnimatedBlock.class, "AnimatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "AnimatedChest");
 		registerEntity(52, EntityAnimatedBambooCrate.class, "AnimatedBambooCrate");

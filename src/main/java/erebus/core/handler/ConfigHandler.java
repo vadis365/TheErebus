@@ -12,7 +12,6 @@ public class ConfigHandler {
 	public static byte beetleLarvaEating = 0;
 	public static boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium;
 
-
 	public static void loadConfig(FMLPreInitializationEvent event) {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 
@@ -28,7 +27,6 @@ public class ConfigHandler {
 			/*ModBiomes.fungalForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Fungal Forest", 156).getInt(156);
 			ModBiomes.betweenlandsID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Betweenlands", 157).getInt(157);*/
 
-			
 			/*ModBiomes.jungleSubLakeID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle - Lake", 161).getInt(161);
 			ModBiomes.jungleSubAsperGroveID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Underground Jungle - Asper Grove", 162).getInt(162);
 			ModBiomes.desertSubCharredForestID = config.get(Configuration.CATEGORY_GENERAL, "Biome ID of Volcanic Desert - Charred Forest", 163).getInt(163);

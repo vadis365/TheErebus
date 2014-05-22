@@ -18,7 +18,7 @@ public class ItemReinExoskeletonArmor extends ItemArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		if (stack.itemID == ModItems.reinExoskeletonLegs.itemID)
+		if (stack.getItem() == ModItems.reinExoskeletonLegs)
 			return "erebus:textures/models/armor/reinforcedExoskeleton2.png";
 		else
 			return "erebus:textures/models/armor/reinforcedExoskeleton1.png";
@@ -26,6 +26,6 @@ public class ItemReinExoskeletonArmor extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.reinforcedPlateExo.ordinal();
+		return material.getItem() == ModItems.erebusMaterials && material.getItemDamage() == DATA.reinforcedPlateExo.ordinal();
 	}
 }

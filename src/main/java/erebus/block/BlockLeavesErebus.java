@@ -6,10 +6,11 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -23,12 +24,8 @@ public class BlockLeavesErebus extends BlockLeaves {
 	public static final byte dataAcaciaDecay = 8, dataEucalyptusDecay = 9, dataMahoganyDecay = 10, dataAsperDecay = 11, dataMossbarkDecay = 12, dataPinkDecay = 13, dataCypressDecay = 14;
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] iconArray;
+	private IIcon[] iconArray;
 	private int[] adjacentTreeBlocks;
-
-	public BlockLeavesErebus(int id) {
-		super(id);
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -72,7 +69,7 @@ public class BlockLeavesErebus extends BlockLeaves {
 					for (l1 = -b0; l1 <= b0; ++l1)
 						for (i2 = -b0; i2 <= b0; ++i2)
 							for (j2 = -b0; j2 <= b0; ++j2) {
-								k2 = world.getBlockId(x + l1, y + i2, z + j2);
+								k2 = world.getBlock(x + l1, y + i2, z + j2);
 
 								Block block = Block.blocksList[k2];
 
@@ -143,8 +140,8 @@ public class BlockLeavesErebus extends BlockLeaves {
 	}
 
 	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
-		return ModBlocks.erebusSapling.blockID;
+	public Item getItemDropped(int meta, Random rand, int fortune) {
+		return Item.getItemFromBlock(ModBlocks.erebusSapling);
 	}
 
 	@Override
@@ -176,25 +173,26 @@ public class BlockLeavesErebus extends BlockLeaves {
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float chance, int fortune) {
 		if (!world.isRemote)
 			if (world.rand.nextInt(20) == 0 && damageDropped(meta) != -1)
-				dropBlockAsItem_do(world, x, y, z, new ItemStack(idDropped(meta, world.rand, fortune), 1, damageDropped(meta)));
+				dropBlockAsItem(world, x, y, z, new ItemStack(getItemDropped(meta, world.rand, fortune), 1, damageDropped(meta)));
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs creativeTab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list) {
 		for (int i = 0; i < leafTypes.length; i++)
 			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override
 	protected ItemStack createStackedBlock(int meta) {
-		return new ItemStack(blockID, 1, meta & ~8);
+		return new ItemStack(this, 1, meta & ~8);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		iconArray = new Icon[leafTypes.length];
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		iconArray = new IIcon[leafTypes.length];
 
 		for (int i = 0; i < leafTypes.length; i++)
 			iconArray[i] = iconRegister.registerIcon("erebus:leaves" + leafTypes[i]);
@@ -202,12 +200,12 @@ public class BlockLeavesErebus extends BlockLeaves {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return iconArray[(meta &= ~8) >= leafTypes.length ? 0 : meta];
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, World world, int x, int y, int z, int fortune) {
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z) & ~8));
 		return ret;
@@ -215,5 +213,10 @@ public class BlockLeavesErebus extends BlockLeaves {
 
 	@Override
 	public void beginLeavesDecay(World world, int x, int y, int z) {
+	}
+
+	@Override
+	public String[] func_150125_e() {
+		return leafTypes;
 	}
 }

@@ -19,6 +19,7 @@ public class ItemBeeTamingAmulet extends Item {
 		setMaxStackSize(1);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
@@ -37,10 +38,9 @@ public class ItemBeeTamingAmulet extends Item {
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote && hasTag(is)) {
-			int blockID = world.getBlockId(x, y, z);
-			Block block = Block.blocksList[blockID];
+			Block block = world.getBlock(x, y, z);
 			if (!world.isRemote && block != null) {
-				if (block.blockID == ModBlocks.honeyCombBlock.blockID) {
+				if (block == ModBlocks.honeyCombBlock) {
 					is.getTagCompound().setInteger("homeX", x);
 					is.getTagCompound().setInteger("homeY", y);
 					is.getTagCompound().setInteger("homeZ", z);

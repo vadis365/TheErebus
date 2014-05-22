@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class Utils {
@@ -46,7 +47,7 @@ public class Utils {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static final <T> T getTileEntity(World world, int x, int y, int z, Class<T> cls) {
+	public static final <T> T getTileEntity(IBlockAccess world, int x, int y, int z, Class<T> cls) {
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if (!cls.isInstance(tile))
 			return null;

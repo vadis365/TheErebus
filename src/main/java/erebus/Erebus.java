@@ -15,14 +15,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
 import erebus.client.sound.EntitySoundEvent;
 import erebus.core.handler.BucketHandler;
-import erebus.core.handler.CommonTickHandler;
 import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.handler.PlayerTeleportHandler;
@@ -72,7 +70,7 @@ public class Erebus {
 		ModItems.init();
 		ModEntities.init();
 
-		GameRegistry.registerPlayerTracker(teleportHandler);
+		//GameRegistry.registerPlayerTracker(teleportHandler);
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
 		DimensionManager.registerProviderType(ConfigHandler.erebusDimensionID, WorldProviderErebus.class, true);
@@ -103,7 +101,7 @@ public class Erebus {
 		if (ConfigHandler.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
-		TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
+		//TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
 		if (Loader.isModLoaded("ForgeMicroblock"))
 			FMBIntegration.integrate();
 	}

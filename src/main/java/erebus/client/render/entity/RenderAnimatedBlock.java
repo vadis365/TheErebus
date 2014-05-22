@@ -1,6 +1,5 @@
 package erebus.client.render.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
@@ -27,8 +26,8 @@ public class RenderAnimatedBlock extends RenderLiving {
 	}
 
 	public void renderAnimatedBlock(EntityAnimatedBlock entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		boolean alpha = Block.blocksList[entity.blockID].getRenderBlockPass() == 1;
-		if (entity.blockID == ModBlocks.bambooCrate.blockID) {
+		boolean alpha = entity.blockID.getRenderBlockPass() == 1;
+		if (entity.blockID == ModBlocks.bambooCrate) {
 			bindTexture(new ResourceLocation("erebus:textures/special/tiles/bambooCrate.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(x, y + 1.75F, z);
@@ -46,7 +45,7 @@ public class RenderAnimatedBlock extends RenderLiving {
 			GL11.glTranslatef(0.0F, 0.75F, 0.0F);
 			GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 			bindTexture(TextureMap.locationBlocksTexture);
-			renderBlocks.renderBlockAsItem(Block.blocksList[entity.blockID], entity.blockMeta, 1.0F);
+			field_147909_c.renderBlockAsItem(entity.blockID, entity.blockMeta, 1.0F);
 			if (alpha)
 				GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();
@@ -55,13 +54,13 @@ public class RenderAnimatedBlock extends RenderLiving {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glEnable(GL11.GL_BLEND);
 		}
-		super.doRenderLiving(entity, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entity, x, y, z, rotationYaw, partialTickTime);
 		if (alpha)
 			GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLiving entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderAnimatedBlock((EntityAnimatedBlock) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
@@ -87,7 +86,7 @@ public class RenderAnimatedBlock extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityAnimatedBlock animatedblock = (EntityAnimatedBlock) entity;
-		String blockPath = Block.blocksList[animatedblock.blockID].getIcon(0, animatedblock.blockMeta).getIconName();
+		String blockPath = animatedblock.blockID.getIcon(0, animatedblock.blockMeta).getIconName();
 		String modName = "minecraft";
 		if (blockPath.contains(":")) {
 			modName = blockPath.split(":")[0];

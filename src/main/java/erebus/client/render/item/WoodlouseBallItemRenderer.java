@@ -38,26 +38,26 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		switch (type) {
-		case ENTITY:
-			renderBall(0.0F, 0.0F, 0.0F, 1.2D);
-			break;
-		case EQUIPPED:
-			renderEquipped(0.6F, 1.5F, 0.4F, 0.75D);
-			break;
-		case EQUIPPED_FIRST_PERSON:
-			renderBallFirstPerson(0F, 0F, 1.7F, 1.75D);
-			break;
-		case INVENTORY:
-			renderBallInventory(0F, -1.7F, 0.0F, 1.5D);
-			break;
-		default:
-			break;
+			case ENTITY:
+				renderBall(0.0F, 0.0F, 0.0F, 1.2D);
+				break;
+			case EQUIPPED:
+				renderEquipped(0.6F, 1.5F, 0.4F, 0.75D);
+				break;
+			case EQUIPPED_FIRST_PERSON:
+				renderBallFirstPerson(0F, 0F, 1.7F, 1.75D);
+				break;
+			case INVENTORY:
+				renderBallInventory(0F, -1.7F, 0.0F, 1.5D);
+				break;
+			default:
+				break;
 		}
 	}
 
 	private void renderEquipped(float x, float y, float z, double size) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x, y-0.2F, z+0.2F);
+		GL11.glTranslatef(x, y - 0.2F, z + 0.2F);
 		GL11.glRotatef(45F, 0, 1F, 0);
 		GL11.glScaled(-size, -size, size);
 		ModelWoodlouseBall.render(0.0625F);

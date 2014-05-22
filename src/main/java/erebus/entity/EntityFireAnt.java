@@ -77,11 +77,11 @@ public class EntityFireAnt extends EntityMob {
 	public boolean isOnLadder() {
 		return isCollidedHorizontally;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 5;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 5;
+	}
 
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
@@ -103,9 +103,9 @@ public class EntityFireAnt extends EntityMob {
 				if (shouldDo > 1) {
 					float targetAreaOffset = MathHelper.sqrt_float(distance) * 0.5F;
 					worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1009, (int) posX, (int) posY, (int) posZ, 0);
-						EntitySmallFireball fireball = new EntitySmallFireball(worldObj, this, distanceX + rand.nextGaussian() * targetAreaOffset, distanceY, distanceZ + rand.nextGaussian() * targetAreaOffset);
-						fireball.posY = posY + height / 2.0F + 0.5D;
-						worldObj.spawnEntityInWorld(fireball);
+					EntitySmallFireball fireball = new EntitySmallFireball(worldObj, this, distanceX + rand.nextGaussian() * targetAreaOffset, distanceY, distanceZ + rand.nextGaussian() * targetAreaOffset);
+					fireball.posY = posY + height / 2.0F + 0.5D;
+					worldObj.spawnEntityInWorld(fireball);
 				}
 			}
 		}

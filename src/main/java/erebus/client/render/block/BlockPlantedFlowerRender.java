@@ -47,7 +47,7 @@ public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler {
 
 	private void setPetalColour(int meta) {
 		Tessellator tess = Tessellator.instance;
-		float[] colour = EntitySheep.fleeceColorTable[BlockColored.getBlockFromDye(Utils.getFlowerMetadata(meta))];
+		float[] colour = EntitySheep.fleeceColorTable[BlockColored.func_150032_b(Utils.getFlowerMetadata(meta))];
 		tess.setColorOpaque_F(colour[0], colour[1], colour[2]);
 	}
 

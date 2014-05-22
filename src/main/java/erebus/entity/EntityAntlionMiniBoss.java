@@ -36,7 +36,7 @@ public class EntityAntlionMiniBoss extends EntityMob {
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
-	
+
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
@@ -44,7 +44,7 @@ public class EntityAntlionMiniBoss extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);	
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	public int getTotalArmorValue() {
 		return 15;
 	}
-	
+
 	@Override
 	protected boolean canDespawn() {
 		return false;
@@ -74,7 +74,7 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	 * @Override protected String getHurtSound() { return "erebus:Antlionhurt";
 	 * }
 	 */
-	
+
 	@Override
 	protected String getDeathSound() {
 		return "erebus:squish";
@@ -83,18 +83,18 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-    }
+	}
 
 	@Override
 	protected Item getDropItem() {
-	  return Item.getItemFromBlock(Blocks.sand);
+		return Item.getItemFromBlock(Blocks.sand);
 	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
-		for (amount= 0; amount < chance; ++amount)
+		for (amount = 0; amount < chance; ++amount)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 
@@ -111,9 +111,9 @@ public class EntityAntlionMiniBoss extends EntityMob {
 		else
 			entityToAttack = null;
 		EnumDifficulty difficulty = worldObj.difficultySetting;
-			if (difficulty == EnumDifficulty.PEACEFUL)
-				worldObj.difficultySetting = EnumDifficulty.EASY;
-			worldObj.difficultySetting = difficulty;
+		if (difficulty == EnumDifficulty.PEACEFUL)
+			worldObj.difficultySetting = EnumDifficulty.EASY;
+		worldObj.difficultySetting = difficulty;
 	}
 
 	@Override

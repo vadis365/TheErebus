@@ -52,6 +52,7 @@ public class ItemPaxel extends ItemTool {
 		return getStrVsBlock(is, block);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean isToolEffective(Block block, int metadata) {
 		try {
 			List tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Item.pickaxeIron);

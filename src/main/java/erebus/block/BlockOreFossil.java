@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -13,17 +14,17 @@ import erebus.item.ItemErebusMaterial.DATA;
 
 public class BlockOreFossil extends Block {
 
-	public BlockOreFossil(int id) {
-		super(id, Material.rock);
+	public BlockOreFossil() {
+		super(Material.rock);
 	}
 
 	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
-		return Item.bone.itemID;
+	public Item getItemDropped(int meta, Random rand, int fortune) {
+		return Items.bone;
 	}
 
 	@Override
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
 		if (world.rand.nextInt(50 - Math.min(6, fortune * 2)) == 0) {
@@ -39,17 +40,17 @@ public class BlockOreFossil extends Block {
 		int count = 1 + world.rand.nextInt(3);
 
 		for (int i = 0; i < count; i++) {
-			int id = -1;
+			Item id = null;
 			int damage = 0;
 
 			if (world.rand.nextInt(3) == 0)
-				id = Item.bone.itemID;
+				id = Items.bone;
 			else {
-				id = ModItems.erebusMaterials.itemID;
+				id = ModItems.erebusMaterials;
 				damage = 2;
 			}
 
-			if (id > 0)
+			if (id != null)
 				ret.add(new ItemStack(id, 1, damage));
 		}
 		return ret;

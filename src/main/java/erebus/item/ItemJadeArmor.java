@@ -18,7 +18,7 @@ public class ItemJadeArmor extends ItemArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
-		if (is.itemID == ModItems.jadeHelmet.itemID || is.itemID == ModItems.jadeBody.itemID || is.itemID == ModItems.jadeBoots.itemID)
+		if (is.getItem() == ModItems.jadeHelmet || is.getItem() == ModItems.jadeBody || is.getItem() == ModItems.jadeBoots)
 			return "erebus:textures/models/armor/jade1.png";
 		else
 			return "erebus:textures/models/armor/jade2.png";
@@ -26,6 +26,6 @@ public class ItemJadeArmor extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.jade.ordinal();
+		return material.getItem() == ModItems.erebusMaterials && material.getItemDamage() == DATA.jade.ordinal();
 	}
 }

@@ -21,7 +21,7 @@ public class BlockErebusHoney extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	protected IIcon stillIcon, flowingIcon;
 
-	public BlockErebusHoney(int id, Fluid fluid) {
+	public BlockErebusHoney(Fluid fluid) {
 		super(fluid, ModMaterials.honey);
 		setCreativeTab(Erebus.tabErebusBlock);
 	}

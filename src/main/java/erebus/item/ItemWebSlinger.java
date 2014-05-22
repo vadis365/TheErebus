@@ -1,8 +1,8 @@
 package erebus.item;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ public class ItemWebSlinger extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		player.setItemInUse(stack, getMaxItemUseDuration(stack));
-		if (player.capabilities.isCreativeMode || player.inventory.hasItem(Item.itemsList[Block.web.blockID].itemID)) {
+		if (player.capabilities.isCreativeMode || player.inventory.hasItem(Item.getItemFromBlock(Blocks.web))) {
 			world.playSoundAtEntity(player, "erebus:webslingthrow", 1.0F, 1.0F);
 			if (!world.isRemote) {
 				EntityWebSling var11 = new EntityWebSling(world, player);
@@ -29,7 +29,7 @@ public class ItemWebSlinger extends Item {
 			}
 		}
 		if (!player.capabilities.isCreativeMode) {
-			player.inventory.consumeInventoryItem(Item.itemsList[Block.web.blockID].itemID);
+			player.inventory.consumeInventoryItem(Item.getItemFromBlock(Blocks.web));
 			stack.damageItem(1, player);
 		}
 		return stack;

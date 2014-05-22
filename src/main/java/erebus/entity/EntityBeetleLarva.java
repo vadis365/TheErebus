@@ -98,10 +98,10 @@ public class EntityBeetleLarva extends EntityAnimal {
 		super.onCollideWithPlayer(player);
 		byte duration = 0;
 		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && player.boundingBox.maxX >= boundingBox.minX && player.boundingBox.minX <= boundingBox.maxX && player.boundingBox.maxZ >= boundingBox.minZ && player.boundingBox.minZ <= boundingBox.maxZ && player.lastTickPosY > player.posY) {
-				if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL)
-					duration = 7;
-				else if (this.worldObj.difficultySetting == EnumDifficulty.HARD)
-					duration = 15;
+			if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				duration = 7;
+			else if (this.worldObj.difficultySetting == EnumDifficulty.HARD)
+				duration = 15;
 			if (duration > 0)
 				player.addPotionEffect(new PotionEffect(Potion.confusion.id, duration * 20, 0));
 			setisSquashed(true);

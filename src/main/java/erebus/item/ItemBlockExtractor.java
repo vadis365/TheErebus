@@ -25,6 +25,7 @@ public class ItemBlockExtractor extends Item {
 		setMaxDamage(128);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
@@ -51,7 +52,7 @@ public class ItemBlockExtractor extends Item {
 		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown") <= 0)
 			getBlockInfo(world, player, stack);
 		if (hasTag(stack)) {
-			Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
+			Block block = Block.getBlockById(stack.getTagCompound().getInteger("blockID"));
 			if (block != null)
 				player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
@@ -80,9 +81,9 @@ public class ItemBlockExtractor extends Item {
 					stack.getTagCompound().setInteger("targetX", MathHelper.floor_double(targetX));
 					stack.getTagCompound().setInteger("targetY", MathHelper.floor_double(targetY));
 					stack.getTagCompound().setInteger("targetZ", MathHelper.floor_double(targetZ));
-					stack.getTagCompound().setInteger("blockID", world.getBlockId(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
+					stack.getTagCompound().setInteger("blockID", Block.getIdFromBlock(world.getBlock(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ))));
 					stack.getTagCompound().setInteger("blockMeta", world.getBlockMetadata(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
-					Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
+					Block block = Block.getBlockById(stack.getTagCompound().getInteger("blockID"));
 					if (block != null)
 						stack.getTagCompound().setFloat("blockHardness", block.getBlockHardness(world, MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
 				}
@@ -93,7 +94,7 @@ public class ItemBlockExtractor extends Item {
 	@Override
 	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
 		if (!world.isRemote && hasTag(stack)) {
-			Block block = Block.blocksList[stack.getTagCompound().getInteger("blockID")];
+			Block block = Block.getBlockById(stack.getTagCompound().getInteger("blockID"));
 			if (block != null && canExtract(block))
 				extractBlock(stack, world, player);
 		}
@@ -110,9 +111,9 @@ public class ItemBlockExtractor extends Item {
 			int targetY = stack.getTagCompound().getInteger("targetY");
 			int targetZ = stack.getTagCompound().getInteger("targetZ");
 
-			world.setBlock(targetX, targetY, targetZ, 0);
+			world.setBlockToAir(targetX, targetY, targetZ);
 			entityExtractedBlock.setLocationAndAngles(targetX + 0.5D, targetY, targetZ + 0.5D, 0.0F, 0.0F);
-			entityExtractedBlock.setBlock(stack.getTagCompound().getInteger("blockID"), stack.getTagCompound().getInteger("blockMeta"));
+			entityExtractedBlock.setBlock(Block.getBlockById(stack.getTagCompound().getInteger("blockID")), stack.getTagCompound().getInteger("blockMeta"));
 			entityExtractedBlock.setHeading(player.posX, player.posY, player.posZ);
 			world.spawnEntityInWorld(entityExtractedBlock);
 		}
@@ -140,5 +141,4 @@ public class ItemBlockExtractor extends Item {
 		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown") >= 0)
 			stack.getTagCompound().setInteger("coolDown", stack.getTagCompound().getInteger("coolDown") - 1);
 	}
-
 }

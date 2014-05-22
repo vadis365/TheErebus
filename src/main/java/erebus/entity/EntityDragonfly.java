@@ -165,13 +165,13 @@ public class EntityDragonfly extends EntityMob {
 			flyToTarget();
 		}
 		if (worldObj.isRemote)
-			if(getSkin() == 0) {
+			if (getSkin() == 0) {
 				spawnParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
-				if(!hasCustomNameTag())
+				if (!hasCustomNameTag())
 					setCustomNameTag("Ender Dragonfly");
-		}
+			}
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public void spawnParticles(World world, double x, double y, double z, Random rand) {
 		for (int count = 0; count < 20; ++count) {
@@ -183,7 +183,7 @@ public class EntityDragonfly extends EntityMob {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 1.0F * motionZ;
 			velX = rand.nextFloat() * 1.0F * motionX;
-		    Erebus.proxy.spawnCustomParticle("portal", worldObj, x, y, z, velX, velY, velZ);
+			Erebus.proxy.spawnCustomParticle("portal", worldObj, x, y, z, velX, velY, velZ);
 		}
 	}
 
@@ -275,11 +275,11 @@ public class EntityDragonfly extends EntityMob {
 			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
 		}
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 3;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 3;
+	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
@@ -287,7 +287,7 @@ public class EntityDragonfly extends EntityMob {
 		if (rand.nextInt(5) == 0)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1 + looting, DATA.compoundEyes.ordinal()), 0.0F);
 		if (getSkin() == 0)
-			entityDropItem(new ItemStack(Items.ender_pearl, rand.nextInt(1) + 1 + looting), 0.0F);	
+			entityDropItem(new ItemStack(Items.ender_pearl, rand.nextInt(1) + 1 + looting), 0.0F);
 	}
 
 	@Override
@@ -301,15 +301,15 @@ public class EntityDragonfly extends EntityMob {
 		if (distance < 2.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
 			super.attackEntity(entity, distance);
 	}
-	
+
 	public void setSkin(int skinType) {
 		dataWatcher.updateObject(30, new Integer(skinType));
 	}
-	
+
 	public int getSkin() {
 		return dataWatcher.getWatchableObjectInt(30);
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);

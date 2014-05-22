@@ -2,16 +2,18 @@ package erebus.item;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -44,7 +46,7 @@ public class ItemBambucket extends Item {
 	}
 
 	@Override
-	public ItemStack getContainerItemStack(ItemStack stack) {
+	public ItemStack getContainerItem(ItemStack stack) {
 		return new ItemStack(this);
 	}
 
@@ -60,7 +62,7 @@ public class ItemBambucket extends Item {
 
 		if (movingobjectposition == null)
 			return is;
-		else if (movingobjectposition.typeOfHit == EnumMovingObjectType.TILE) {
+		else if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
 			int i = movingobjectposition.blockX;
 			int j = movingobjectposition.blockY;
 			int k = movingobjectposition.blockZ;
@@ -72,38 +74,38 @@ public class ItemBambucket extends Item {
 				if (!player.canPlayerEdit(i, j, k, movingobjectposition.sideHit, is))
 					return is;
 
-				if (world.getBlockMaterial(i, j, k) == Material.water && world.getBlockMetadata(i, j, k) == 0) {
+				if (world.getBlock(i, j, k).getMaterial() == Material.water && world.getBlockMetadata(i, j, k) == 0) {
 					world.setBlockToAir(i, j, k);
 
 					if (player.capabilities.isCreativeMode)
 						return is;
 
 					if (--is.stackSize <= 0)
-						return new ItemStack(itemID, 1, 1);
+						return new ItemStack(this, 1, 1);
 
-					if (!player.inventory.addItemStackToInventory(new ItemStack(itemID, 1, 1)))
-						player.dropPlayerItem(new ItemStack(itemID, 1, 1));
+					if (!player.inventory.addItemStackToInventory(new ItemStack(this, 1, 1)))
+						player.dropPlayerItem(new ItemStack(this, 1, 1));
 
 					return is;
 				}
 
-				if (world.getBlockMaterial(i, j, k) == ModMaterials.honey && world.getBlockMetadata(i, j, k) == 0) {
+				if (world.getBlock(i, j, k).getMaterial() == ModMaterials.honey && world.getBlockMetadata(i, j, k) == 0) {
 					world.setBlockToAir(i, j, k);
 
 					if (player.capabilities.isCreativeMode)
 						return is;
 
 					if (--is.stackSize <= 0)
-						return new ItemStack(itemID, 1, 3);
+						return new ItemStack(this, 1, 3);
 
-					if (!player.inventory.addItemStackToInventory(new ItemStack(itemID, 1, 3)))
-						player.dropPlayerItem(new ItemStack(itemID, 1, 3));
+					if (!player.inventory.addItemStackToInventory(new ItemStack(this, 1, 3)))
+						player.dropPlayerItem(new ItemStack(this, 1, 3));
 
 					return is;
 				}
 			} else {
 				if (is.getItemDamage() < 0)
-					return new ItemStack(itemID, 1, 0);
+					return new ItemStack(this, 1, 0);
 
 				if (movingobjectposition.sideHit == 0)
 					--j;
@@ -141,7 +143,7 @@ public class ItemBambucket extends Item {
 				is.stackSize--;
 
 			if (!world.isRemote)
-				player.curePotionEffects(new ItemStack(Item.bucketMilk));
+				player.curePotionEffects(new ItemStack(Items.milk_bucket));
 
 			if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva)
 				if (((EntityBotFlyLarva) player.riddenByEntity).getParasiteCount() > 0)
@@ -154,7 +156,7 @@ public class ItemBambucket extends Item {
 	}
 
 	public boolean tryPlaceContainedLiquid(World world, int x, int y, int z, ItemStack item) {
-		Material material = world.getBlockMaterial(x, y, z);
+		Material material = world.getBlock(x, y, z).getMaterial();
 		boolean flag = !material.isSolid();
 		if (!world.isRemote && item.getItemDamage() != 2)
 			if (!world.isAirBlock(x, y, z) && !flag)
@@ -168,9 +170,9 @@ public class ItemBambucket extends Item {
 				if (!world.isRemote && flag && !material.isLiquid())
 					world.destroyBlock(x, y, z, true);
 				if (item.getItemDamage() == 1)
-					world.setBlock(x, y, z, Block.waterMoving.blockID, 0, 3);
+					world.setBlock(x, y, z, Blocks.flowing_water, 0, 3);
 				else if (item.getItemDamage() == 3)
-					world.setBlock(x, y, z, ModBlocks.erebusHoneyBlock.blockID, 0, 3);
+					world.setBlock(x, y, z, ModBlocks.erebusHoneyBlock, 0, 3);
 			}
 		return true;
 	}
@@ -196,11 +198,11 @@ public class ItemBambucket extends Item {
 	}
 
 	@Override
-	public void registerIIcons(IIconRegister IIconRegister) {
-		bambucket = IIconRegister.registerIIcon("erebus:bambucket");
-		waterBambucket = IIconRegister.registerIIcon("erebus:bambucketWater");
-		bambucketOfBeetleJuice = IIconRegister.registerIIcon("erebus:bambucketOfBeetleJuice");
-		bambucketHoney = IIconRegister.registerIIcon("erebus:bambucketHoney");
+	public void registerIcons(IIconRegister reg) {
+		bambucket = reg.registerIcon("erebus:bambucket");
+		waterBambucket = reg.registerIcon("erebus:bambucketWater");
+		bambucketOfBeetleJuice = reg.registerIcon("erebus:bambucketOfBeetleJuice");
+		bambucketHoney = reg.registerIcon("erebus:bambucketHoney");
 	}
 
 	@Override
@@ -221,6 +223,7 @@ public class ItemBambucket extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
 		list.add(new ItemStack(id, 1, 1));
@@ -230,7 +233,6 @@ public class ItemBambucket extends Item {
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		int i = is.getItemDamage();
-		return super.getUnlocalizedName() + "." + i;
+		return super.getUnlocalizedName() + "." + is.getItemDamage();
 	}
 }

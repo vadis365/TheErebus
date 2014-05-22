@@ -38,17 +38,16 @@ public class EntityWoodlouseBall extends EntityThrowable {
 				target.entityHit.addVelocity(-MathHelper.sin(getThrower().rotationYaw * 3.141593F / 180.0F) * 0.5F, 0.1D, MathHelper.cos(getThrower().rotationYaw * 3.141593F / 180.0F) * 0.5F);
 				spawnWoodlouse();
 			}
-		}
-		else if (!worldObj.isRemote)
-				spawnWoodlouse();
+		} else if (!worldObj.isRemote)
+			spawnWoodlouse();
 	}
 
 	private void spawnWoodlouse() {
 		if (!worldObj.isRemote) {
 			setDead();
 			EntityWoodlouse entity = new EntityWoodlouse(worldObj);
-			entity.setLocationAndAngles(posX,  posY, posZ, 0.0F, 0.0F);
+			entity.setLocationAndAngles(posX, posY, posZ, 0.0F, 0.0F);
 			worldObj.spawnEntityInWorld(entity);
-		}	
+		}
 	}
 }

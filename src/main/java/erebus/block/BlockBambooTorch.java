@@ -17,7 +17,7 @@ public class BlockBambooTorch extends Block {
 	public static final String[] iconPaths = new String[] { "bambooTorchLower", "bambooTorch", "bambooTorchTop", "bambooTorchBottom" };
 	public static IIcon[] icons;
 
-	public BlockBambooTorch(int id) {
+	public BlockBambooTorch() {
 		super(Material.wood);
 		setTickRandomly(true);
 		setLightLevel(0.9F);

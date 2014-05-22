@@ -59,35 +59,36 @@ public class EntityChameleonTick extends EntityMobBlock {
 	}
 
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-/*
-	@Override
-	protected String getLivingSound() {
-		return "";
-	}
 
-	@Override
-	protected String getHurtSound() {
-		return "";
-	}
+	/*
+		@Override
+		protected String getLivingSound() {
+			return "";
+		}
 
-	@Override
-	protected String getDeathSound() {
-		return "";
-	}
+		@Override
+		protected String getHurtSound() {
+			return "";
+		}
 
-	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
-	}
-*/
+		@Override
+		protected String getDeathSound() {
+			return "";
+		}
+
+		@Override
+		protected void func_145780_a(int x, int y, int z, Block block) {
+			worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+		}
+	*/
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.camoPowder.ordinal()), 0.0F);
@@ -98,54 +99,54 @@ public class EntityChameleonTick extends EntityMobBlock {
 		super.onUpdate();
 		Block newblockType = worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
 		int newBlockMeta = worldObj.getBlockMetadata(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
-		
+
 		if (onGround && newblockType != null && newblockType != blockType && World.doesBlockHaveSolidTopSurface(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ))) {
 			blockType = newblockType;
 			blockMeta = newBlockMeta;
 		}
-		
+
 		if (findPlayerToAttack() != null) {
 			entityToAttack = findPlayerToAttack();
-			if(!active)
+			if (!active)
 				active = true;
 			animation++;
-			if(animation >=10)
+			if (animation >= 10)
 				animation = 10;
-			
+
 		} else {
 			entityToAttack = null;
-			if(active)
+			if (active)
 				active = false;
 			animation--;
-			if(animation <=0)
+			if (animation <= 0)
 				animation = 0;
 		}
-		
-		if(!worldObj.isRemote && animation==9 && active)
+
+		if (!worldObj.isRemote && animation == 9 && active)
 			setAIs(true);
-		
-		if(!worldObj.isRemote && !active){
+
+		if (!worldObj.isRemote && !active) {
 			stationaryEntity();
-			if(animation==1)
+			if (animation == 1)
 				setAIs(false);
-		}	
+		}
 	}
-	
+
 	public void stationaryEntity() {
 		posX = MathHelper.floor_double(posX) + 0.5;
 		posY = MathHelper.floor_double(posY);
 		posZ = MathHelper.floor_double(posZ) + 0.5;
 		rotationYaw = prevRotationYaw = 0F;
 		renderYawOffset = prevRenderYawOffset = 0F;
-		
+
 		int x = MathHelper.floor_double(posX);
 		int y = MathHelper.floor_double(posY) - 1;
 		int z = MathHelper.floor_double(posZ);
-		
+
 		if (worldObj.getBlock(x, y, z) == null)
 			posY -= 1;
 	}
-	
+
 	public void setAIs(boolean active) {
 		if (!active) {
 			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
@@ -155,16 +156,16 @@ public class EntityChameleonTick extends EntityMobBlock {
 		if (active) {
 			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.65D);
 			tasks.addTask(1, aiAttackOnCollide);
-			targetTasks.addTask(1, aiAttackTarget);	
+			targetTasks.addTask(1, aiAttackTarget);
 		}
 	}
-	
+
 	@Override
 	protected Entity findPlayerToAttack() {
 		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 8.0D);
 		return player;
 	}
-	
+
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
 		if (distance > 0.0F && distance < 2.0F)

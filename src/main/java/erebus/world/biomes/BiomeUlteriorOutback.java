@@ -1,5 +1,6 @@
 package erebus.world.biomes;
-import net.minecraft.block.Block;
+
+import net.minecraft.init.Blocks;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBotFly;
@@ -16,6 +17,8 @@ import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 
 // @formatter:off
 public class BiomeUlteriorOutback extends BiomeBaseErebus{
+	
+	@SuppressWarnings("unchecked")
 	public BiomeUlteriorOutback(int biomeID){
 		super(biomeID,new BiomeDecoratorUlteriorOutback());
 
@@ -40,7 +43,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
 		
-		topBlock = (byte)Block.sand.blockID;
+		topBlock = Blocks.sand;
 	}
 }
 // @formatter:on

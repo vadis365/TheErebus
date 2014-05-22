@@ -8,9 +8,9 @@ import erebus.world.biomes.BiomeUndergroundJungle;
 import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.loot.WeightedList;
 
-public class ModBiomes{
+public class ModBiomes {
 	public static WeightedList<BiomeBaseErebus> biomeList = new WeightedList<BiomeBaseErebus>();
-	
+
 	public static BiomeBaseErebus undergroundJungle;
 	public static BiomeBaseErebus volcanicDesert;
 	public static BiomeBaseErebus subterraneanSavannah;
@@ -18,7 +18,7 @@ public class ModBiomes{
 	public static BiomeBaseErebus ulteriorOutback;
 	public static BiomeBaseErebus fungalForest;
 	public static BiomeBaseErebus betweenlands;
-	
+
 	public static int undergroundJungleID;
 	public static int volcanicDesertID;
 	public static int subterraneanSavannahID;
@@ -26,7 +26,7 @@ public class ModBiomes{
 	public static int ulteriorOutbackID;
 	public static int fungalForestID;
 	public static int betweenlandsID;
-	
+
 	public static BiomeBaseErebus jungleSubLake;
 	public static BiomeBaseErebus jungleSubAsperGrove;
 	public static BiomeBaseErebus desertSubCharredForest;
@@ -34,7 +34,7 @@ public class ModBiomes{
 	public static BiomeBaseErebus savannahSubAsperGrove;
 	public static BiomeBaseErebus savannahSubSteppe;
 	public static BiomeBaseErebus fieldsSubForest;
-	
+
 	public static int jungleSubLakeID;
 	public static int jungleSubAsperGroveID;
 	public static int desertSubCharredForestID;
@@ -43,7 +43,7 @@ public class ModBiomes{
 	public static int savannahSubSteppeID;
 	public static int fieldsSubForestID;
 
-	public static void init(){
+	public static void init() {
 		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
 		volcanicDesert = new BiomeVolcanicDesert(volcanicDesertID);
 		subterraneanSavannah = new BiomeSubterraneanSavannah(subterraneanSavannahID);
@@ -51,7 +51,7 @@ public class ModBiomes{
 		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
 		//fungalForest = new BiomeFungalForest(fungalForestID);
 		//betweenlands = new BiomeBetweenlands(betweenlandsID);
-		
+
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);
 		//jungleSubLake = new BiomeLake(jungleSubLakeID);
 	}

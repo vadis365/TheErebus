@@ -9,7 +9,7 @@ public class BlockSpawner extends BlockMobSpawner {
 
 	private final String mobName;
 
-	public BlockSpawner(int id, String mobName) {
+	public BlockSpawner(String mobName) {
 		disableStats();
 		setHardness(5.0F);
 		this.mobName = mobName;

@@ -6,16 +6,17 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockUndergroundFlower extends Block implements IPlantable {
 
-	protected BlockUndergroundFlower(int id) {
-		super(id, Material.vine);
+	protected BlockUndergroundFlower() {
+		super(Material.vine);
 		setTickRandomly(true);
 		float var4 = 0.2F;
 		setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
@@ -26,13 +27,13 @@ public class BlockUndergroundFlower extends Block implements IPlantable {
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
 	}
 
-	protected boolean canThisPlantGrowOnThisBlockID(int blockID) {
-		return blockID == Block.grass.blockID || blockID == Block.dirt.blockID || blockID == Block.tilledField.blockID;
+	protected boolean canThisPlantGrowOnThisBlockID(Block blockID) {
+		return blockID == Blocks.grass || blockID == Blocks.dirt || blockID == Blocks.farmland;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborID) {
-		super.onNeighborBlockChange(world, x, y, z, neighborID);
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+		super.onNeighborBlockChange(world, x, y, z, neighbour);
 		checkFlowerChange(world, x, y, z);
 	}
 
@@ -50,7 +51,7 @@ public class BlockUndergroundFlower extends Block implements IPlantable {
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
-		Block soil = blocksList[world.getBlockId(x, y - 1, z)];
+		Block soil = world.getBlock(x, y - 1, z);
 		return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 	}
 

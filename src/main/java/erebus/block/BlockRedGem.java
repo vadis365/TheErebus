@@ -5,14 +5,15 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
@@ -22,15 +23,15 @@ public class BlockRedGem extends Block {
 
 	public static final String[] iconPaths = new String[] { "redgem", "redlampOn", "redlampOff" };
 	@SideOnly(Side.CLIENT)
-	public static Icon[] icons;
+	public static IIcon[] icons;
 
-	public BlockRedGem(int id) {
-		super(id, Material.glass);
+	public BlockRedGem() {
+		super(Material.glass);
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister) {
-		icons = new Icon[iconPaths.length];
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		icons = new IIcon[iconPaths.length];
 
 		int i = 0;
 		for (String path : iconPaths)
@@ -38,15 +39,16 @@ public class BlockRedGem extends Block {
 	}
 
 	@Override
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		if (meta < 0 || meta >= icons.length)
 			return null;
 		return icons[meta];
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
 		list.add(new ItemStack(id, 1, 1));
 	}
@@ -64,8 +66,8 @@ public class BlockRedGem extends Block {
 	}
 
 	@Override
-	public int idDropped(int meta, Random random, int fortune) {
-		return meta == 0 ? ModItems.erebusMaterials.itemID : blockID;
+	public Item getItemDropped(int meta, Random random, int fortune) {
+		return meta == 0 ? ModItems.erebusMaterials : Item.getItemFromBlock(this);
 	}
 
 	@Override
@@ -95,30 +97,30 @@ public class BlockRedGem extends Block {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (!world.isRemote && (meta == 1 || meta == 2))
 			if (meta == 2 && !world.isBlockIndirectlyGettingPowered(x, y, z))
-				world.scheduleBlockUpdate(x, y, z, blockID, 4);
+				world.scheduleBlockUpdate(x, y, z, this, 4);
 			else if (meta != 2 && world.isBlockIndirectlyGettingPowered(x, y, z))
-				world.setBlock(x, y, z, blockID, 2, 2);
+				world.setBlock(x, y, z, this, 2, 2);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborID) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborID) {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (!world.isRemote && (meta == 1 || meta == 2))
 			if (meta == 2 && !world.isBlockIndirectlyGettingPowered(x, y, z))
-				world.scheduleBlockUpdate(x, y, z, blockID, 4);
+				world.scheduleBlockUpdate(x, y, z, this, 4);
 			else if (meta != 2 && world.isBlockIndirectlyGettingPowered(x, y, z))
-				world.setBlock(x, y, z, blockID, meta + 1, 2);
+				world.setBlock(x, y, z, this, meta + 1, 2);
 	}
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (!world.isRemote && meta == 2 && !world.isBlockIndirectlyGettingPowered(x, y, z))
-			world.setBlock(x, y, z, blockID, 1, 2);
+			world.setBlock(x, y, z, this, 1, 2);
 	}
 
 	@Override
-	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side) {
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (meta == 0 && side == ForgeDirection.UP)
 			return true;

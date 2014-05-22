@@ -6,16 +6,17 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.BonemealEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -30,10 +31,9 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	}
 
 	@SideOnly(Side.CLIENT)
-	private Icon main, petals, rainbowPetals;
+	private IIcon main, petals, rainbowPetals;
 
-	public BlockPlantedGiantFlower(int id) {
-		super(id);
+	public BlockPlantedGiantFlower() {
 		setCreativeTab(null);
 		float var3 = 0.4F;
 		setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1F, 0.5F + var3);
@@ -41,7 +41,7 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
-		Block soil = blocksList[world.getBlockId(x, y - 1, z)];
+		Block soil = world.getBlock(x, y - 1, z);
 		return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 	}
 
@@ -66,12 +66,12 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 			((WorldGenGiantFlowers) worldGen).setFlowerColor(meta + 2);
 		world.setBlockToAir(x, y, z);
 		if (!worldGen.generate(world, rand, x, y, z))
-			world.setBlock(x, y, z, ModBlocks.flowerPlanted.blockID, meta, 3);
+			world.setBlock(x, y, z, ModBlocks.flowerPlanted, meta, 3);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return side == 0 ? main : meta == FLOWER_TYPE.RAINBOW.ordinal() ? rainbowPetals : petals;
 	}
 
@@ -83,7 +83,7 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int idPicked(World world, int x, int y, int z) {
-		return ModItems.flowerSeeds.itemID;
+		return ModItems.flowerSeeds;
 	}
 
 	@Override
@@ -92,32 +92,33 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int meta, int fortune) {
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(new ItemStack(ModItems.flowerSeeds.itemID, 1, meta));
+		ret.add(new ItemStack(ModItems.flowerSeeds, 1, meta));
 		return ret;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs creativeTabs, List list) {
+	public void getSubBlocks(Item id, CreativeTabs creativeTabs, List list) {
 		for (int i = 0; i < FLOWER_TYPE.values().length; i++)
 			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg) {
 		main = reg.registerIcon("erebus:flowerPlanted0");
 		petals = reg.registerIcon("erebus:flowerPlanted1");
 		rainbowPetals = reg.registerIcon("erebus:flowerPlanted2");
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onBonemeal(BonemealEvent event) {
-		if (!event.world.isRemote && event.ID == blockID) {
+		if (!event.world.isRemote && event.block == this) {
 			if (event.world.rand.nextFloat() < 0.45D)
-				growTree(event.world, event.X, event.Y, event.Z, event.world.rand);
+				growTree(event.world, event.x, event.y, event.z, event.world.rand);
 			event.setResult(Result.ALLOW);
 		}
 	}

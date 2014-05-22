@@ -1,9 +1,9 @@
 package erebus.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemStack;
 
 public class ItemBucketOfHoney extends ItemBucket {
 
@@ -19,11 +19,6 @@ public class ItemBucketOfHoney extends ItemBucket {
 
 	@Override
 	public Item getContainerItem() {
-		return Item.bucketEmpty;
-	}
-
-	@Override
-	public ItemStack getContainerItemStack(ItemStack stack) {
-		return new ItemStack(Item.bucketEmpty);
+		return Items.bucket;
 	}
 }

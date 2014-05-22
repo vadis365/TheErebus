@@ -14,22 +14,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityErebusLightningBolt extends EntityWeatherEffect {
-	/**
-	 * Declares which state the lightning bolt is in. Whether it's in the air,
-	 * hit the ground, etc.
-	 */
+
 	private int lightningState;
-
-	/**
-	 * A random long that is used to change the vertex of the lightning rendered
-	 * in RenderLightningBolt
-	 */
 	public long boltVertex;
-
-	/**
-	 * Determines the time before the EntityLightningBolt is destroyed. It is a
-	 * random integer decremented over time.
-	 */
 	private int boltLivingTime;
 
 	public EntityErebusLightningBolt(World world, double x, double y, double z) {
@@ -40,9 +27,7 @@ public class EntityErebusLightningBolt extends EntityWeatherEffect {
 		boltLivingTime = rand.nextInt(3) + 1;
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
@@ -72,10 +57,10 @@ public class EntityErebusLightningBolt extends EntityWeatherEffect {
 				worldObj.lastLightningBolt = 2;
 			else {
 				double d0 = 3.0D;
-				List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getAABBPool().getAABB(posX - d0, posY - d0, posZ - d0, posX + d0, posY + 6.0D + d0, posZ + d0));
+				List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getAABBPool().getAABB(posX - d0, posY - d0, posZ - d0, posX + d0, posY + 6.0D + d0, posZ + d0));
 
 				for (int l = 0; l < list.size(); ++l) {
-					Entity entity = (Entity) list.get(l);
+					Entity entity = list.get(l);
 					if (entity != null)
 						if (entity instanceof EntityLivingBase) {
 							entity.setFire(5);
@@ -89,25 +74,16 @@ public class EntityErebusLightningBolt extends EntityWeatherEffect {
 	protected void entityInit() {
 	}
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
 	}
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/**
-	 * Checks using a Vec3d to determine if this entity is within range of that vector to be rendered. Args: vec3D
-	 */
 	public boolean isInRangeToRenderVec3D(Vec3 vec) {
 		return lightningState >= 0;
 	}

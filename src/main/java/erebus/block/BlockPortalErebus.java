@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -31,17 +32,16 @@ public class BlockPortalErebus extends BlockBreakable {
 
 	public static final int[][] types = new int[][] { new int[0], { 3, 1 }, { 2, 0 } };
 
-	public BlockPortalErebus(int id) {
-		super(id, "erebus:portalErebus", Material.portal, false);
+	public BlockPortalErebus() {
+		super("erebus:portalErebus", Material.portal, false);
 		setTickRandomly(true);
 	}
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
-		if (ConfigHandler.spawnPortalMobs && world.difficultySetting > 0 && world.provider.isSurfaceWorld() && rand.nextInt(100) < 3D + world.difficultySetting * 0.5D) {
+		if (ConfigHandler.spawnPortalMobs && world.difficultySetting.ordinal() > 0 && world.provider.isSurfaceWorld() && rand.nextInt(100) < 3D + world.difficultySetting * 0.5D) {
 			int yy;
-			for (yy = y; !world.doesBlockHaveSolidTopSurface(x, yy, z) && yy > 0; --yy)
-				;
+			for (yy = y; !World.doesBlockHaveSolidTopSurface(world, x, yy, z) && yy > 0; --yy);
 
 			if (yy > 0 && !world.isBlockNormalCube(x, yy + 1, z)) {
 				EntityLiving entity = rand.nextBoolean() ? new EntityBeetle(world) : new EntityBeetleLarva(world);
@@ -61,7 +61,7 @@ public class BlockPortalErebus extends BlockBreakable {
 		if (side == Side.SERVER) {
 			if (entity.ridingEntity == null && entity.riddenByEntity == null && entity instanceof EntityPlayerMP) {
 				EntityPlayerMP player = (EntityPlayerMP) entity;
-				Erebus.teleportHandler.getPlayer(player.username).setInPortal();
+				Erebus.teleportHandler.getPlayer(player.getCommandSenderName()).setInPortal();
 			}
 		} else if (side == Side.CLIENT && entity instanceof EntityPlayer) {
 			TeleportClient.setInPortal();
@@ -76,7 +76,7 @@ public class BlockPortalErebus extends BlockBreakable {
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		if (world.getBlockId(x - 1, y, z) != blockID && world.getBlockId(x + 1, y, z) != blockID) {
+		if (world.getBlock(x - 1, y, z) != this && world.getBlock(x + 1, y, z) != this) {
 			float f = 0.125F;
 			float f2 = 0.5F;
 			setBlockBounds(0.5F - f, 0.0F, 0.5F - f2, 0.5F + f, 1.0F, 0.5F + f2);
@@ -98,7 +98,7 @@ public class BlockPortalErebus extends BlockBreakable {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = getMetadata(world.getBlockMetadata(x, y, z));
 		Size size = new Size(world, x, y, z, 1);
 		Size size1 = new Size(world, x, y, z, 2);
@@ -128,13 +128,13 @@ public class BlockPortalErebus extends BlockBreakable {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		if (world.getBlockId(x, y, z) == blockID)
+		if (world.getBlock(x, y, z) == this)
 			return false;
 		else {
-			boolean flag = world.getBlockId(x - 1, y, z) == blockID && world.getBlockId(x - 2, y, z) != blockID;
-			boolean flag1 = world.getBlockId(x + 1, y, z) == blockID && world.getBlockId(x + 2, y, z) != blockID;
-			boolean flag2 = world.getBlockId(x, y, z - 1) == blockID && world.getBlockId(x, y, z - 2) != blockID;
-			boolean flag3 = world.getBlockId(x, y, z + 1) == blockID && world.getBlockId(x, y, z + 2) != blockID;
+			boolean flag = world.getBlock(x - 1, y, z) == this && world.getBlock(x - 2, y, z) != this;
+			boolean flag1 = world.getBlock(x + 1, y, z) == this && world.getBlock(x + 2, y, z) != this;
+			boolean flag2 = world.getBlock(x, y, z - 1) == this && world.getBlock(x, y, z - 2) != this;
+			boolean flag3 = world.getBlock(x, y, z + 1) == this && world.getBlock(x, y, z + 2) != this;
 			boolean flag4 = flag || flag1;
 			boolean flag5 = flag2 || flag3;
 			return !flag4 || side != 4 ? !flag4 || side != 5 ? !flag5 || side != 2 ? flag5 && side == 3 : true : true : true;
@@ -166,7 +166,7 @@ public class BlockPortalErebus extends BlockBreakable {
 			d3 = (rand.nextFloat() - 0.5D) * 0.5D;
 			d4 = (rand.nextFloat() - 0.5D) * 0.5D;
 			d5 = (rand.nextFloat() - 0.5D) * 0.5D;
-			if (world.getBlockId(x - 1, y, z) != blockID && world.getBlockId(x + 1, y, z) != blockID) {
+			if (world.getBlock(x - 1, y, z) != this && world.getBlock(x + 1, y, z) != this) {
 				d = x + 0.5D + 0.25D * i1;
 				d3 = rand.nextFloat() * 2.0F * i1;
 			} else {
@@ -192,8 +192,7 @@ public class BlockPortalErebus extends BlockBreakable {
 			field_150863_d = types[type][0];
 			field_150866_c = types[type][1];
 
-			for (int i1 = y; y > i1 - 21 && y > 0 && isBlockRepleaceable(world.getBlockId(x, y - 1, z)); --y)
-				;
+			for (int i1 = y; y > i1 - 21 && y > 0 && isBlockRepleaceable(world.getBlock(x, y - 1, z)); --y);
 
 			int j1 = getSize(x, y, z, field_150863_d) - 1;
 
@@ -215,22 +214,22 @@ public class BlockPortalErebus extends BlockBreakable {
 			int j1 = Direction.offsetX[type];
 			int k1 = Direction.offsetZ[type];
 			int i1;
-			int block;
+			Block block;
 
 			for (i1 = 0; i1 < 22; ++i1) {
-				block = world.getBlockId(x + j1 * i1, y, z + k1 * i1);
+				block = world.getBlock(x + j1 * i1, y, z + k1 * i1);
 
 				if (!isBlockRepleaceable(block))
 					break;
 
-				int block1 = world.getBlockId(x + j1 * i1, y - 1, z + k1 * i1);
+				Block block1 = world.getBlock(x + j1 * i1, y - 1, z + k1 * i1);
 
-				if (block1 != Block.stoneBrick.blockID)
+				if (block1 != Blocks.stonebrick)
 					break;
 			}
 
-			block = world.getBlockId(x + j1 * i1, y, z + k1 * i1);
-			return block == Block.stoneBrick.blockID ? i1 : 0;
+			block = world.getBlock(x + j1 * i1, y, z + k1 * i1);
+			return block == Blocks.stonebrick ? i1 : 0;
 		}
 
 		protected int func_150858_a() {
@@ -246,23 +245,23 @@ public class BlockPortalErebus extends BlockBreakable {
 				for (j = 0; j < width; j++) {
 					k = porition.posX + j * Direction.offsetX[types[type][1]];
 					l = porition.posZ + j * Direction.offsetZ[types[type][1]];
-					int block = world.getBlockId(k, i, l);
+					Block block = world.getBlock(k, i, l);
 
 					if (!isBlockRepleaceable(block))
 						break label56;
 
-					if (block == ModBlocks.portalErebus.blockID)
+					if (block == ModBlocks.portalErebus)
 						field_150864_e++;
 
 					if (j == 0) {
-						block = world.getBlockId(k + Direction.offsetX[types[type][0]], i, l + Direction.offsetZ[types[type][0]]);
+						block = world.getBlock(k + Direction.offsetX[types[type][0]], i, l + Direction.offsetZ[types[type][0]]);
 
-						if (block != Block.stoneBrick.blockID)
+						if (block != Blocks.stonebrick)
 							break label56;
 					} else if (j == width - 1) {
-						block = world.getBlockId(k + Direction.offsetX[types[type][1]], i, l + Direction.offsetZ[types[type][1]]);
+						block = world.getBlock(k + Direction.offsetX[types[type][1]], i, l + Direction.offsetZ[types[type][1]]);
 
-						if (block != Block.stoneBrick.blockID)
+						if (block != Blocks.stonebrick)
 							break label56;
 					}
 				}
@@ -273,7 +272,7 @@ public class BlockPortalErebus extends BlockBreakable {
 				k = porition.posY + height;
 				l = porition.posZ + i * Direction.offsetZ[types[type][1]];
 
-				if (world.getBlockId(j, k, l) != Block.stoneBrick.blockID) {
+				if (world.getBlock(j, k, l) != Blocks.stonebrick) {
 					height = 0;
 					break;
 				}
@@ -289,8 +288,8 @@ public class BlockPortalErebus extends BlockBreakable {
 			}
 		}
 
-		protected boolean isBlockRepleaceable(int block) {
-			return Block.blocksList[block] == null || Block.blocksList[block].blockMaterial == Material.air || block == Block.fire.blockID || block == ModBlocks.portalErebus.blockID;
+		protected boolean isBlockRepleaceable(Block block) {
+			return block.getMaterial() == Material.air || block == Blocks.fire || block == ModBlocks.portalErebus;
 		}
 
 		public boolean isValidSize() {
@@ -304,7 +303,7 @@ public class BlockPortalErebus extends BlockBreakable {
 
 				for (int l = 0; l < height; l++) {
 					int i1 = porition.posY + l;
-					world.setBlock(j, i1, k, ModBlocks.portalErebus.blockID, type, 2);
+					world.setBlock(j, i1, k, ModBlocks.portalErebus, type, 2);
 				}
 			}
 		}

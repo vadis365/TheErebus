@@ -23,11 +23,10 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	private static final float temperature = 1F;
 	private static final float rainfall = 0F;
 	private static final ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah));
-	
+
 	private final List biomesToSpawnIn;
 	private final BiomeCache biomeCache;
 	private final GenLayer biomeGenLayer;
-
 
 	public WorldChunkManagerErebus(World world) {
 		biomesToSpawnIn = new ArrayList(allowedBiomes);
@@ -45,7 +44,8 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase biomesForGeneration[], int x, int z, int sizeX, int sizeZ) {
 		IntCache.resetIntCache();
 
-		if (biomesForGeneration == null || biomesForGeneration.length < sizeX * sizeZ) biomesForGeneration = new BiomeGenBase[sizeX * sizeZ];
+		if (biomesForGeneration == null || biomesForGeneration.length < sizeX * sizeZ)
+			biomesForGeneration = new BiomeGenBase[sizeX * sizeZ];
 
 		int[] biomeArray = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 
@@ -57,7 +57,8 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 
 	@Override
 	public float[] getTemperatures(float temperatureArray[], int x, int z, int sizeX, int sizeZ) {
-		if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ) temperatureArray = new float[sizeX * sizeZ];
+		if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ)
+			temperatureArray = new float[sizeX * sizeZ];
 
 		Arrays.fill(temperatureArray, 0, sizeX * sizeZ, temperature);
 		return temperatureArray;
@@ -65,7 +66,8 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 
 	@Override
 	public float[] getRainfall(float rainfallArray[], int x, int z, int sizeX, int sizeZ) {
-		if (rainfallArray == null || rainfallArray.length < sizeX * sizeZ) rainfallArray = new float[sizeX * sizeZ];
+		if (rainfallArray == null || rainfallArray.length < sizeX * sizeZ)
+			rainfallArray = new float[sizeX * sizeZ];
 
 		Arrays.fill(rainfallArray, 0, sizeX * sizeZ, rainfall);
 		return rainfallArray;

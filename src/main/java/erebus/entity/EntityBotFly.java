@@ -147,7 +147,7 @@ public class EntityBotFly extends EntityMob {
 	protected void flyAbout() {
 
 		if (getIsFlyHanging()) {
-			if (!worldObj.getBlock(MathHelper.floor_double(this.posX), (int)this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
+			if (!worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
 				setIsFlyHanging(false);
 			else {
 				if (rand.nextInt(200) == 0)
@@ -174,7 +174,7 @@ public class EntityBotFly extends EntityMob {
 			moveForward = 0.5F;
 			rotationYaw += var8;
 
-			if (rand.nextInt(100) == 0 && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int)this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
+			if (rand.nextInt(100) == 0 && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
 				setIsFlyHanging(false);
 		}
 	}
@@ -243,11 +243,11 @@ public class EntityBotFly extends EntityMob {
 			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
 		}
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
@@ -261,23 +261,22 @@ public class EntityBotFly extends EntityMob {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLivingBase) {
 				byte duration = 0;
-			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-				duration = 7;
-			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+					duration = 7;
+				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 					duration = 15;
-			if (duration > 0)
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, duration * 20, 0));
+				if (duration > 0)
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, duration * 20, 0));
 			}
 			if (entity instanceof EntityPlayer)
-				if (rand.nextInt(20) == 0 && entity.riddenByEntity==null) {
+				if (rand.nextInt(20) == 0 && entity.riddenByEntity == null) {
 					EntityBotFlyLarva entityBotFlyLarva = new EntityBotFlyLarva(worldObj);
 					entityBotFlyLarva.setPosition(entity.posX, entity.posY + 1, entity.posZ);
 					entityBotFlyLarva.setParasiteCount((byte) 1);
-					worldObj.spawnEntityInWorld(entityBotFlyLarva);	
-			}
-				else if (rand.nextInt(20) == 0 && entity.riddenByEntity!=null && entity.riddenByEntity instanceof EntityBotFlyLarva) {
-					if(((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount()<3) {
-						((EntityBotFlyLarva) entity.riddenByEntity).setParasiteCount((byte) (((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount()+1));
+					worldObj.spawnEntityInWorld(entityBotFlyLarva);
+				} else if (rand.nextInt(20) == 0 && entity.riddenByEntity != null && entity.riddenByEntity instanceof EntityBotFlyLarva) {
+					if (((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount() < 3) {
+						((EntityBotFlyLarva) entity.riddenByEntity).setParasiteCount((byte) (((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount() + 1));
 					}
 				}
 			return true;

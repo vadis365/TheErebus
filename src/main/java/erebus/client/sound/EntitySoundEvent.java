@@ -1,11 +1,11 @@
 package erebus.client.sound;
 
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
-import net.minecraftforge.event.ForgeSubscribe;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EntitySoundEvent {
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onSound(SoundLoadEvent event) {
 		try {
 			// Squish sound
@@ -69,12 +69,12 @@ public class EntitySoundEvent {
 			// Beetle
 			event.manager.addSound("erebus:beetleSound.ogg");
 			event.manager.addSound("erebus:beetleHurt.ogg");
-			
+
 			// Blood Snail
 			event.manager.addSound("erebus:snailLiving.ogg");
 			event.manager.addSound("erebus:snailHurt.ogg");
 			event.manager.addSound("erebus:snailDeath.ogg");
-			
+
 			// Sporeling
 			event.manager.addSound("erebus:sporelingLiving.ogg");
 			event.manager.addSound("erebus:sporelingHurt.ogg");

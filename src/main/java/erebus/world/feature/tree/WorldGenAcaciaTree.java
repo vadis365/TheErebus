@@ -1,4 +1,5 @@
 package erebus.world.feature.tree;
+
 import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;

@@ -17,6 +17,7 @@ public class ItemWhetstone extends Item {
 		setHasSubtypes(true);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List textLines, boolean showAdvancedInfo) {
@@ -34,9 +35,10 @@ public class ItemWhetstone extends Item {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		for (int i = 0; i < 6; i++)
 			list.add(new ItemStack(id, 1, i));
 	}

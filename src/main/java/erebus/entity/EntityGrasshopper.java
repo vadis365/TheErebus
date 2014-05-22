@@ -64,14 +64,14 @@ public class EntityGrasshopper extends EntityCreature {
 		float light = this.getBrightness(1.0F);
 		if (light >= 0F) {
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(this.boundingBox);
-	    }
-	    return super.getCanSpawnHere();
+		}
+		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 3;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 3;
+	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -119,11 +119,11 @@ public class EntityGrasshopper extends EntityCreature {
 	}
 
 	public void setMoveTasks(boolean par1) {
-		if (par1 == false){
+		if (par1 == false) {
 			tasks.removeTask(aiWander);
 			tasks.removeTask(aiWatchClosest);
 		}
-		if (par1 == true){
+		if (par1 == true) {
 			tasks.addTask(2, aiWander);
 			tasks.addTask(2, aiWatchClosest);
 		}

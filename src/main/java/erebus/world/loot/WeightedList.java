@@ -3,7 +3,7 @@ package erebus.world.loot;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WeightedList<T extends IWeightProvider> extends ArrayList<T>{
+public class WeightedList<T extends IWeightProvider> extends ArrayList<T> {
 	private int totalWeight = 0;
 
 	@Override
@@ -29,10 +29,11 @@ public class WeightedList<T extends IWeightProvider> extends ArrayList<T>{
 
 	private void recalculateWeight() {
 		totalWeight = 0;
-		for (T obj : this)totalWeight += obj.getWeight();
+		for (T obj : this)
+			totalWeight += obj.getWeight();
 	}
-	
-	public int getTotalWeight(){
+
+	public int getTotalWeight() {
 		return totalWeight;
 	}
 
@@ -48,7 +49,7 @@ public class WeightedList<T extends IWeightProvider> extends ArrayList<T>{
 		}
 		return null;
 	}
-	
+
 	public T getRandomItem(int weight) {
 		if (totalWeight == 0)
 			return null;

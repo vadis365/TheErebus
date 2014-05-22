@@ -25,8 +25,8 @@ public class WorldGenErebusHugeTree extends WorldGenerator { // TODO
 		woodID = par6;
 		leavesID = par7;
 	}
-	
-	public void prepare(int baseHeight){
+
+	public void prepare(int baseHeight) {
 		this.baseHeight = baseHeight;
 	}
 

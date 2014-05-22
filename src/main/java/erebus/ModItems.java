@@ -1,5 +1,7 @@
 package erebus;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -163,66 +165,28 @@ public class ModItems {
 	}
 
 	private static void registerItems() {
-		GameRegistry.registerItem(portalActivator, "erebus.portalActivator");
-		GameRegistry.registerItem(erebusMaterials, "erebus.erebusMaterials");
-		GameRegistry.registerItem(erebusFood, "erebus.erebusFood");
-		GameRegistry.registerItem(erebusSpecialItem, "erebus.erebusSpecialItem");
-		GameRegistry.registerItem(metalIngot, "erebus.metalIngot");
-		GameRegistry.registerItem(bamBucket, "erebus.bamBucket");
-		GameRegistry.registerItem(turnip, "erebus.turnips");
-		GameRegistry.registerItem(sprayCan, "erebus.sprayCan");
-		GameRegistry.registerItem(wandOfAnimation, "erebus.wandOfAnimation");
-		GameRegistry.registerItem(bucketOfBeetleJuice, "erebus.bucketOfBeetleJuice");
-		GameRegistry.registerItem(hornOfSummoning, "erebus.hornOfSummoning");
-		GameRegistry.registerItem(nectarCollector, "erebus.nectarCollector");
-		GameRegistry.registerItem(beeTamingAmulet, "erebus.beeTamingAmulet");
-		GameRegistry.registerItem(bucketHoney, "erebus.bucketHoney");
-		GameRegistry.registerItem(homingBeecon, "erebus.homingBeecon");
-		GameRegistry.registerItem(flowerSeeds, "erebus.erebusFlowerSeeds");
-		GameRegistry.registerItem(whetstone, "erebus.whetstone");
-		GameRegistry.registerItem(encrustedDiamond, "erebus.encrustedDiamond");
-
-		GameRegistry.registerItem(jadeHelmet, "erebus.helmetJade");
-		GameRegistry.registerItem(jadeBody, "erebus.chestplateJade");
-		GameRegistry.registerItem(jadeLegs, "erebus.leggingsJade");
-		GameRegistry.registerItem(jadeBoots, "erebus.bootsJade");
-		GameRegistry.registerItem(jadeSword, "erebus.swordJade");
-		GameRegistry.registerItem(jadePickaxe, "erebus.pickaxeJade");
-		GameRegistry.registerItem(jadeAxe, "erebus.axeJade");
-		GameRegistry.registerItem(jadeShovel, "erebus.shovelJade");
-		GameRegistry.registerItem(jadePaxel, "erebus.paxelJade");
-		GameRegistry.registerItem(jadeHoe, "erebus.hoeJade");
-
-		GameRegistry.registerItem(exoskeletonHelmet, "erebus.helmetExo");
-		GameRegistry.registerItem(exoskeletonBody, "erebus.chestplateExo");
-		GameRegistry.registerItem(exoskeletonLegs, "erebus.leggingsExo");
-		GameRegistry.registerItem(exoskeletonBoots, "erebus.bootsExo");
-
-		GameRegistry.registerItem(reinExoskeletonHelmet, "erebus.exoHelmetRein");
-		GameRegistry.registerItem(reinExoskeletonBody, "erebus.exoChestplateRein");
-		GameRegistry.registerItem(reinExoskeletonLegs, "erebus.exoLeggingsRein");
-		GameRegistry.registerItem(reinExoskeletonBoots, "erebus.exoBootsRein");
-
-		GameRegistry.registerItem(fossilClub, "erebus.clubBone");
-		GameRegistry.registerItem(waspSword, "erebus.waspSword");
-		GameRegistry.registerItem(maxSpeedBow, "erebus.maxSpeedBow");
-		GameRegistry.registerItem(waspDagger, "erebus.waspDagger");
-		GameRegistry.registerItem(scorpionPincer, "erebus.scorpionPincer");
-		GameRegistry.registerItem(webSlinger, "erebus.webSlinger");
-		GameRegistry.registerItem(blockExtractor, "erebus.blockExtractor");
-		GameRegistry.registerItem(woodlouseBall, "erebus.woodlouseBall");
-		GameRegistry.registerItem(rolledNewspaper, "erebus.rolledNewspaper");
-
-		GameRegistry.registerItem(compoundGoggles, "erebus.compoundGoggles");
-		GameRegistry.registerItem(sprintLeggings, "erebus.sprintLeggings");
-		GameRegistry.registerItem(jumpBoots, "erebus.jumpBoots");
-		GameRegistry.registerItem(armorGlider, "erebus.armorGlider");
-		GameRegistry.registerItem(armorGliderPowered, "erebus.armorGliderPowered");
-		GameRegistry.registerItem(lightCrown, "erebus.lightCrown");
+		try {
+			for (Field f : ModItems.class.getDeclaredFields()) {
+				Object obj = f.get(null);
+				if (obj instanceof Item)
+					registerItem((Item) obj);
+				else if (obj instanceof Item[])
+					for (Item item : (Item[]) obj)
+						registerItem(item);
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(bamBucket, 1, 1), new ItemStack(bamBucket));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bamBucket, 1, 3), new ItemStack(bamBucket));
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketHoney), new ItemStack(Items.bucket));
+	}
+
+	private static void registerItem(Item item) {
+		String name = item.getUnlocalizedName();
+		String[] strings = name.split("\\.");
+		GameRegistry.registerItem(item, strings[strings.length - 1]);
 	}
 
 	private static void registerProperties() {

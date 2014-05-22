@@ -25,7 +25,7 @@ import erebus.tileentity.TileEntityPetrifiedWoodChest;
 
 public class BlockPetrifiedChest extends BlockContainer {
 
-	public BlockPetrifiedChest(int id) {
+	public BlockPetrifiedChest() {
 		super(Material.rock);
 		setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 	}

@@ -25,6 +25,7 @@ public class ItemHomingBeecon extends Item {
 		return HomingBeeconTextureHandler.beecon;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
@@ -41,8 +42,7 @@ public class ItemHomingBeecon extends Item {
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote && hasTag(is)) {
-			int blockID = world.getBlockId(x, y, z);
-			Block block = Block.blocksList[blockID];
+			Block block = world.getBlock(x, y, z);
 			if (!world.isRemote && block != null) {
 				is.getTagCompound().setInteger("homeX", x);
 				is.getTagCompound().setInteger("homeZ", z);

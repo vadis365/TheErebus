@@ -53,22 +53,22 @@ public class EntityCentipede extends EntityMob {
 	public boolean getCanSpawnHere() {
 		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	public double getAttackStrength() {
 		switch (worldObj.difficultySetting) {
-		default:
-			return 2.0D;
-		case EASY:
-			return 2.0D;
-		case NORMAL:
-			return 2.0D;
-		case HARD:
-			return 4.0D;
+			default:
+				return 2.0D;
+			case EASY:
+				return 2.0D;
+			case NORMAL:
+				return 2.0D;
+			case HARD:
+				return 4.0D;
 		}
 	}
 
@@ -122,11 +122,11 @@ public class EntityCentipede extends EntityMob {
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
 		if (player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY) {
-				byte duration = 0;
+			byte duration = 0;
 			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 				duration = 7;
 			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-					duration = 15;
+				duration = 15;
 			if (duration > 0)
 				player.addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
 		}

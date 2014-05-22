@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 public class EntityFireAntSoldier extends EntityMob {
 	private int shouldDo;
-	
+
 	public EntityFireAntSoldier(World world) {
 		super(world);
 		this.stepHeight = 0.1F;
@@ -60,7 +60,7 @@ public class EntityFireAntSoldier extends EntityMob {
 		entityDropItem(new ItemStack(Items.magma_cream, rand.nextInt(1) + 1 + looting, 0), 0.0F);
 		if (rand.nextInt(5) == 0)
 			entityDropItem(new ItemStack(Items.blaze_powder, rand.nextInt(1) + 1 + looting, 0), 0.0F);
-		}
+	}
 
 	public boolean isClimbing() {
 		return (!this.onGround) && (isOnLadder());
@@ -69,11 +69,11 @@ public class EntityFireAntSoldier extends EntityMob {
 	public boolean isOnLadder() {
 		return (this.isCollidedHorizontally);
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 5;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 5;
+	}
 
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
@@ -97,9 +97,9 @@ public class EntityFireAntSoldier extends EntityMob {
 				if (shouldDo > 1) {
 					float targetAreaOffset = MathHelper.sqrt_float(distance) * 0.5F;
 					worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1009, (int) posX, (int) posY, (int) posZ, 0);
-						EntityLargeFireball fireball = new EntityLargeFireball(worldObj, this, distanceX + rand.nextGaussian() * targetAreaOffset, distanceY, distanceZ + rand.nextGaussian() * targetAreaOffset);
-						fireball.posY = posY + height / 2.0F + 0.5D;
-						worldObj.spawnEntityInWorld(fireball);
+					EntityLargeFireball fireball = new EntityLargeFireball(worldObj, this, distanceX + rand.nextGaussian() * targetAreaOffset, distanceY, distanceZ + rand.nextGaussian() * targetAreaOffset);
+					fireball.posY = posY + height / 2.0F + 0.5D;
+					worldObj.spawnEntityInWorld(fireball);
 				}
 			}
 		}

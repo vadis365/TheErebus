@@ -2,17 +2,18 @@ package erebus.block;
 
 import java.util.Random;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class BlockSpiderSpawner extends BlockSpawner {
 
-	public BlockSpiderSpawner(int id, String mobName) {
-		super(id, mobName);
+	public BlockSpiderSpawner(String mobName) {
+		super(mobName);
 	}
 
 	@Override
-	public int idDropped(int id, Random rand, int fortune) {
-		return Item.silk.itemID;
+	public Item getItemDropped(int id, Random rand, int fortune) {
+		return Items.string;
 	}
 
 	@Override

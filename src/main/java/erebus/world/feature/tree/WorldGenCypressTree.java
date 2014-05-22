@@ -1,4 +1,5 @@
 package erebus.world.feature.tree;
+
 import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;

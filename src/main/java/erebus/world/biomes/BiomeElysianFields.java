@@ -1,4 +1,5 @@
 package erebus.world.biomes;
+
 import erebus.ModBiomes;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
@@ -23,6 +24,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		this(biomeID,new BiomeDecoratorElysianFields());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public BiomeElysianFields(int biomeID, BiomeDecoratorBaseErebus decorator){
 		super(biomeID,decorator);
 

@@ -5,17 +5,18 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -32,17 +33,16 @@ public class BlockSaplingErebus extends BlockSapling {
 	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataMossbark = 3, dataAsper = 4, dataCypress = 5;
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] iconArray;
+	private IIcon[] iconArray;
 
-	public BlockSaplingErebus(int id) {
-		super(id);
+	public BlockSaplingErebus() {
 		float var3 = 0.4F;
 		setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
 	}
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
-		Block soil = blocksList[world.getBlockId(x, y - 1, z)];
+		Block soil = world.getBlock(x, y - 1, z);
 		return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 	}
 
@@ -124,7 +124,7 @@ public class BlockSaplingErebus extends BlockSapling {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return iconArray[meta < 0 || meta >= iconArray.length ? 0 : meta];
 	}
 
@@ -133,27 +133,28 @@ public class BlockSaplingErebus extends BlockSapling {
 		return meta;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs creativeTabs, List list) {
+	public void getSubBlocks(Item id, CreativeTabs creativeTabs, List list) {
 		for (int a = 0; a < iconArray.length; a++)
 			list.add(new ItemStack(id, 1, a));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		iconArray = new Icon[saplingTypes.length];
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		iconArray = new IIcon[saplingTypes.length];
 
 		for (int i = 0; i < iconArray.length; i++)
 			iconArray[i] = iconRegister.registerIcon("erebus:sapling" + saplingTypes[i]);
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onBonemeal(BonemealEvent event) {
-		if (!event.world.isRemote && event.ID == blockID) {
+		if (!event.world.isRemote && event.block == this) {
 			if (event.world.rand.nextFloat() < 0.45D)
-				growTree(event.world, event.X, event.Y, event.Z, event.world.rand);
+				growTree(event.world, event.x, event.y, event.z, event.world.rand);
 			event.setResult(Result.ALLOW);
 		}
 	}

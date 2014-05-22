@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,9 +30,10 @@ public class ItemSprintLeggings extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.bioVelocity.ordinal();
+		return material.getItem() == ModItems.erebusMaterials && material.getItemDamage() == DATA.bioVelocity.ordinal();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List textLines, boolean showAdvancedInfo) {
@@ -40,7 +42,7 @@ public class ItemSprintLeggings extends ItemArmor {
 
 	@Override
 	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
-		if (is.itemID == ModItems.sprintLeggings.itemID) {
+		if (is.getItem() == ModItems.sprintLeggings) {
 			if (armtick >= 0 && armtick <= 20)
 				texture = "erebus:textures/models/armor/centipede0.png";
 			if (armtick > 20 && armtick <= 40)
@@ -52,7 +54,7 @@ public class ItemSprintLeggings extends ItemArmor {
 	}
 
 	@Override
-	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack is) {
+	public void onArmorTick(World world, EntityPlayer player, ItemStack is) {
 		if (player.isSprinting() && player.onGround) {
 			byte tier = (byte) (3 + (is.stackTagCompound == null ? 0 : is.stackTagCompound.getByte("upgradeTier")));
 			player.motionX *= 1D + tier * .0425D;
@@ -63,9 +65,10 @@ public class ItemSprintLeggings extends ItemArmor {
 			armtick = 0;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
 
 		ItemStack is = new ItemStack(id, 1, 0);

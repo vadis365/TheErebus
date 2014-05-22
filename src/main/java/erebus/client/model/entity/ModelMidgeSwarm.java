@@ -171,36 +171,36 @@ public class ModelMidgeSwarm extends ModelBase {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityMidgeSwarm midge = (EntityMidgeSwarm) entity;
-		
-		if(midge.getHealth() > 0 ) {
+
+		if (midge.getHealth() > 0) {
 			GL11.glPushMatrix();
 			GL11.glTranslated(0F + -midge.wingFloat, -1F + midge.wingFloat, 0F - midge.wingFloat);
 			renderMultiBits(unitPixel);
 			GL11.glPopMatrix();
 		}
-		
-		if(midge.getHealth() > 3) {
+
+		if (midge.getHealth() > 3) {
 			GL11.glPushMatrix();
 			GL11.glTranslated(0.5F + midge.wingFloat, -1.5F + midge.wingFloat, 0.5F + midge.wingFloat);
 			renderMultiBits(unitPixel);
 			GL11.glPopMatrix();
 		}
-		
-		if(midge.getHealth() > 6) {
+
+		if (midge.getHealth() > 6) {
 			GL11.glPushMatrix();
 			GL11.glTranslated(-0.5F - midge.wingFloat, 0F - midge.wingFloat, -0.5F - midge.wingFloat);
 			renderMultiBits(unitPixel);
 			GL11.glPopMatrix();
 		}
-		
-		if(midge.getHealth() > 9) {
+
+		if (midge.getHealth() > 9) {
 			GL11.glPushMatrix();
 			GL11.glTranslated(0.5F + midge.wingFloat, 0F + midge.wingFloat, -0.5F + midge.wingFloat);
 			renderMultiBits(unitPixel);
 			GL11.glPopMatrix();
 		}
-		
-		if(midge.getHealth() > 12) {
+
+		if (midge.getHealth() > 12) {
 			GL11.glPushMatrix();
 			GL11.glTranslated(-0.5F - midge.wingFloat, -1.5D - midge.wingFloat, -0.5F - midge.wingFloat);
 			renderMultiBits(unitPixel);

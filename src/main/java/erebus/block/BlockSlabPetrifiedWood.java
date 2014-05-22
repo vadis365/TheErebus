@@ -2,12 +2,11 @@ package erebus.block;
 
 import java.util.Random;
 
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,8 +14,8 @@ import erebus.ModBlocks;
 
 public class BlockSlabPetrifiedWood extends BlockHalfSlab {
 
-	public BlockSlabPetrifiedWood(int id, boolean isDouble) {
-		super(id, isDouble, Material.rock);
+	public BlockSlabPetrifiedWood(boolean isDouble) {
+		super(isDouble, Material.rock);
 		setHardness(2.0F);
 		setLightOpacity(0);
 		setStepSound(Block.soundWoodFootstep);

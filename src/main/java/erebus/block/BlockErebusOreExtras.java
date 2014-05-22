@@ -4,10 +4,11 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.handler.ConfigHandler;
@@ -18,10 +19,10 @@ public class BlockErebusOreExtras extends Block {
 	public static final byte dataAluminium = 0, dataCopper = 1, dataLead = 2, dataSilver = 3, dataTin = 4;
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] blockIcon;
+	private IIcon[] blockIcon;
 
-	public BlockErebusOreExtras(int id) {
-		super(id, Material.rock);
+	public BlockErebusOreExtras() {
+		super(Material.rock);
 	}
 
 	@Override
@@ -29,9 +30,10 @@ public class BlockErebusOreExtras extends Block {
 		return meta;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs tab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
 		if (ConfigHandler.aluminium)
 			list.add(new ItemStack(id, 1, 0));
 		if (ConfigHandler.copper)
@@ -46,14 +48,14 @@ public class BlockErebusOreExtras extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return blockIcon[meta];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		blockIcon = new Icon[types.length];
+	public void registerBlockIcons(IIconRegister reg) {
+		blockIcon = new IIcon[types.length];
 		for (int i = 0; i < blockIcon.length; i++)
 			blockIcon[i] = reg.registerIcon("erebus:" + types[i]);
 	}

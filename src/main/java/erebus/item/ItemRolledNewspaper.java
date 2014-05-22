@@ -19,6 +19,7 @@ public class ItemRolledNewspaper extends Item {
 		maxStackSize = 1;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
@@ -50,5 +51,4 @@ public class ItemRolledNewspaper extends Item {
 		if (!is.isItemEnchanted())
 			is.addEnchantment(Enchantment.baneOfArthropods, 5);
 	}
-
 }

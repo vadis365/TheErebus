@@ -1,4 +1,5 @@
 package erebus.world.feature.decoration;
+
 import java.util.Random;
 
 import erebus.ModBlocks;

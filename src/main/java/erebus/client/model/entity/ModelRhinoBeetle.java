@@ -202,7 +202,6 @@ public class ModelRhinoBeetle extends ModelBase {
 		Neck.setRotationPoint(0F, 17F, -4F);
 		setRotation(Neck, 0F, 0F, 0F);
 
-
 		LFL1.addChild(LFL2);
 		LFL1.addChild(LFL3);
 		LFL1.addChild(LFL4);
@@ -278,8 +277,8 @@ public class ModelRhinoBeetle extends ModelBase {
 		EntityRhinoBeetle beetle = (EntityRhinoBeetle) entity;
 		float cos1 = MathHelper.cos(limbSwing * 1.0F + (float) Math.PI) * 0.5F * prevLimbSwing;
 		float cos2 = MathHelper.cos(limbSwing * 1.0F) * 0.5F * prevLimbSwing;
-		float headAngle = beetle.getRammingCharge()*0.01F;
-		
+		float headAngle = beetle.getRammingCharge() * 0.01F;
+
 		HeadA.rotateAngleX = headAngle;
 		HeadB.rotateAngleX = headAngle;
 		HeadC.rotateAngleX = headAngle;
@@ -292,7 +291,7 @@ public class ModelRhinoBeetle extends ModelBase {
 		NoseA.rotateAngleX = headAngle + 0.3490659F;
 		NoseB.rotateAngleX = headAngle - 0.1396263F;
 		NoseC.rotateAngleX = headAngle - 0.1396263F;
-			
+
 		LBL1.rotateAngleX = cos1;
 		LML1.rotateAngleX = cos2;
 		LFL1.rotateAngleX = cos1;

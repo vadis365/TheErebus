@@ -55,9 +55,9 @@ public class ModelTitanBeetle extends ModelBase {
 	ModelRenderer RBL2;
 	ModelRenderer RBL3;
 	ModelRenderer RBL4;
-    ModelRenderer Lid;
-    ModelRenderer Body;
-    ModelRenderer Lock;
+	ModelRenderer Lid;
+	ModelRenderer Body;
+	ModelRenderer Lock;
 
 	public ModelTitanBeetle() {
 		textureWidth = 128;
@@ -124,7 +124,7 @@ public class ModelTitanBeetle extends ModelBase {
 		RMandible2 = new ModelRenderer(this, 107, 30);
 		RMandible2.addBox(0F, 0F, -11.5F, 3, 1, 1);
 		setRotation(RMandible2, 0F, 0.3316126F, 0F);
-		
+
 		float correction = 0.3490659F;
 		LBL1 = new ModelRenderer(this, 42, 53);
 		LBL1.addBox(-1F, -1F, -1F, 7, 2, 2);
@@ -204,19 +204,19 @@ public class ModelTitanBeetle extends ModelBase {
 		RBL4 = new ModelRenderer(this, 16, 53);
 		RBL4.addBox(-3.5F, 9F, -0.5F, 1, 4, 1);
 		setRotation(RBL4, 0F, 0F, 0.8726646F - correction);
-	    Lid = new ModelRenderer(this, 0, 65);
-	    Lid.addBox(-7F, -4F, -14F, 14, 5, 14);
-	    Lid.setRotationPoint(0F, 3F, 4F);
-	    setRotation(Lid, 0.0872665F, 3.141593F, 0F);
-	    Body = new ModelRenderer(this, 0, 85);
-	    Body.addBox(-7F, 0F, -14F, 14, 10, 14);
-	    Body.setRotationPoint(0F, 3F, 4F);
-	    setRotation(Body, 0.0872665F, 3.141593F, 0F);
-	    Lock = new ModelRenderer(this, 0, 110);
-	    Lock.addBox(-1F, -1F, -15F, 2, 4, 1);
-	    Lock.setRotationPoint(0F, 3F, 4F);
-	    setRotation(Lock, 0.0872665F, 3.141593F, 0F);
-		
+		Lid = new ModelRenderer(this, 0, 65);
+		Lid.addBox(-7F, -4F, -14F, 14, 5, 14);
+		Lid.setRotationPoint(0F, 3F, 4F);
+		setRotation(Lid, 0.0872665F, 3.141593F, 0F);
+		Body = new ModelRenderer(this, 0, 85);
+		Body.addBox(-7F, 0F, -14F, 14, 10, 14);
+		Body.setRotationPoint(0F, 3F, 4F);
+		setRotation(Body, 0.0872665F, 3.141593F, 0F);
+		Lock = new ModelRenderer(this, 0, 110);
+		Lock.addBox(-1F, -1F, -15F, 2, 4, 1);
+		Lock.setRotationPoint(0F, 3F, 4F);
+		setRotation(Lock, 0.0872665F, 3.141593F, 0F);
+
 		LFL1.addChild(LFL2);
 		LFL1.addChild(LFL3);
 		LFL1.addChild(LFL4);
@@ -266,7 +266,7 @@ public class ModelTitanBeetle extends ModelBase {
 		RFL1.render(unitPixel);
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
-		if(beetle.getTameState()>=3){
+		if (beetle.getTameState() >= 3) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0F, 0.27F, 0.15F);
 			GL11.glScalef(0.67F, 0.67F, 0.67F);
@@ -296,7 +296,7 @@ public class ModelTitanBeetle extends ModelBase {
 		RBL1.rotateAngleX = legMovement + correction;
 		RML1.rotateAngleX = -legMovement;
 		RFL1.rotateAngleX = legMovement - correction;
-		Lid.rotateAngleX = beetle.getDataWatcher().getWatchableObjectFloat(21)+0.087F;
-		Lock.rotateAngleX = beetle.getDataWatcher().getWatchableObjectFloat(21)+0.087F;
+		Lid.rotateAngleX = beetle.getDataWatcher().getWatchableObjectFloat(21) + 0.087F;
+		Lock.rotateAngleX = beetle.getDataWatcher().getWatchableObjectFloat(21) + 0.087F;
 	}
 }

@@ -8,21 +8,22 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.Erebus;
 import erebus.ModBlocks;
 
 public class BlockInsectRepellent extends Block {
 
-	public BlockInsectRepellent(int id) {
-		super(id, Material.air);
+	public BlockInsectRepellent() {
+		super(Material.air);
 		setTickRandomly(true);
-		setTextureName("erebus:blockInsectRepellent");
+		setBlockTextureName("erebus:blockInsectRepellent");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
 	}
 
@@ -43,21 +44,19 @@ public class BlockInsectRepellent extends Block {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		int l = world.getBlockId(x, y - 1, z);
-		Block block = Block.blocksList[l];
+		Block block = world.getBlock(x, y - 1, z);
 		if (block == null)
 			return false;
 		if (block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
 			return true;
-		if (!block.isLeaves(world, x, y - 1, z) && !Block.blocksList[l].isOpaqueCube())
+		if (!block.isLeaves(world, x, y - 1, z) && !block.isOpaqueCube())
 			return false;
-		return world.getBlockMaterial(x, y - 1, z).blocksMovement();
+		return block.getMaterial().blocksMovement();
 	}
 
 	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
-		return 0;
-
+	public Item getItemDropped(int meta, Random rand, int fortune) {
+		return null;
 	}
 
 	@Override
@@ -101,17 +100,17 @@ public class BlockInsectRepellent extends Block {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
 		if (!world.isRemote && entity instanceof EntityLiving)
-			if (entity.worldObj.getBlockId(x, y, z) == ModBlocks.insectRepellent.blockID && ((EntityLiving) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD)) {
+			if (entity.worldObj.getBlock(x, y, z) == ModBlocks.insectRepellent && ((EntityLiving) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD)) {
 				int Knockback = 1;
 				entity.addVelocity(MathHelper.sin(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F, 0.1D, MathHelper.cos(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F);
 				entity.worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
 			}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onArthropodSpawn(LivingSpawnEvent.CheckSpawn e) {
 		if (e.entity instanceof EntityLivingBase)
-			if (e.entity.worldObj.getBlockId((int) e.x, (int) e.y, (int) e.z) == ModBlocks.insectRepellent.blockID)
+			if (e.entity.worldObj.getBlock((int) e.x, (int) e.y, (int) e.z) == ModBlocks.insectRepellent)
 				if (((EntityLivingBase) e.entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD))
 					e.setResult(Result.DENY);
 	}

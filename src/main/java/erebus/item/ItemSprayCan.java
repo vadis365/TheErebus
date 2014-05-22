@@ -26,12 +26,11 @@ public class ItemSprayCan extends Item {
 		if (side != 1)
 			return false;
 		else if (player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
-			int i1 = world.getBlockId(x, y, z);
-			Block block = Block.blocksList[i1];
-			int i2 = ModBlocks.insectRepellent.blockID;
-			if (block != null && world.doesBlockHaveSolidTopSurface(x, y, z) && i1 != i2) {
+			Block i1 = world.getBlock(x, y, z);
+			Block i2 = ModBlocks.insectRepellent;
+			if (i1 != null && World.doesBlockHaveSolidTopSurface(world, x, y, z) && i1 != i2) {
 				world.setBlock(x, y + 1, z, i2);
-				PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketParticle((byte) 1, player.entityId)));
+				PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketParticle((byte) 1, player.getEntityId())));
 				is.stackSize--;
 				world.playSoundEffect(x, y + 1, z, getSprayCanSound(), 1.0F, 1.0F);
 				return true;

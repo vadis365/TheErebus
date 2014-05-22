@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -76,7 +77,7 @@ public class ItemArmorGlider extends ItemArmor {
 	}
 
 	@Override
-	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack is) {
+	public void onArmorTick(World world, EntityPlayer player, ItemStack is) {
 		//if (world.isRemote)
 		//	return;
 		player.fallDistance = 0.0F;
@@ -104,14 +105,14 @@ public class ItemArmorGlider extends ItemArmor {
 					nbt.setInteger("fuelTicks", nbt.getInteger("fuelTicks") + 1);
 					if (nbt.getInteger("fuelTicks") >= 80) {
 						nbt.setInteger("fuelTicks", 0);
-						player.inventory.consumeInventoryItem(ModBlocks.redGem.blockID);
+						player.inventory.consumeInventoryItem(Item.getItemFromBlock(ModBlocks.redGem));
 					}
 				}
 			}
 	}
 
 	private boolean hasGemOrIsCreative(EntityPlayer player) {
-		return player.capabilities.isCreativeMode || player.inventory.hasItem(ModBlocks.redGem.blockID);
+		return player.capabilities.isCreativeMode || player.inventory.hasItem(Item.getItemFromBlock(ModBlocks.redGem));
 	}
 
 	@Override
@@ -130,7 +131,7 @@ public class ItemArmorGlider extends ItemArmor {
 		GL11.glPushMatrix();
 		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 		ItemStack chestPlate = player.inventory.armorInventory[2];
-		if (chestPlate != null && chestPlate.getItem().itemID == ModItems.armorGlider.itemID || chestPlate != null && chestPlate.getItem().itemID == ModItems.armorGliderPowered.itemID) {
+		if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 			if (!chestPlate.hasTagCompound()) {
 				chestPlate.stackTagCompound = new NBTTagCompound();
 				return;
@@ -189,7 +190,7 @@ public class ItemArmorGlider extends ItemArmor {
 	}
 
 	public boolean canFly() {
-		return itemID == ModItems.armorGliderPowered.itemID;
+		return this == ModItems.armorGliderPowered;
 	}
 
 	@SubscribeEvent

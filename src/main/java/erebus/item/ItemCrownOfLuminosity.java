@@ -34,11 +34,11 @@ public class ItemCrownOfLuminosity extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.itemID == ModItems.erebusMaterials.itemID && material.getItemDamage() == DATA.plateExo.ordinal();
+		return material.getItem() == ModItems.erebusMaterials && material.getItemDamage() == DATA.plateExo.ordinal();
 	}
 
 	@Override
-	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack is) {
+	public void onArmorTick(World world, EntityPlayer player, ItemStack is) {
 		if (hasTag(is) && !is.getTagCompound().getBoolean("isWorn"))
 			is.stackTagCompound.setBoolean("isWorn", true);
 		if (hasTag(is) && is.getTagCompound().getBoolean("isWorn")) {
@@ -55,7 +55,7 @@ public class ItemCrownOfLuminosity extends ItemArmor {
 	public void onUpdate(ItemStack is, World world, Entity entity, int id, boolean map) {
 		EntityPlayer player = (EntityPlayer) entity;
 		ItemStack slot = player.inventory.armorInventory[3];
-		if (slot == null && hasTag(is) && is.getTagCompound().getBoolean("isWorn") || slot != null && slot.itemID != itemID && hasTag(is) && is.getTagCompound().getBoolean("isWorn")) {
+		if (slot == null && hasTag(is) && is.getTagCompound().getBoolean("isWorn") || slot != null && slot.getItem() != this && hasTag(is) && is.getTagCompound().getBoolean("isWorn")) {
 			world.updateLightByType(EnumSkyBlock.Block, (int) player.prevPosX, (int) player.prevPosY, (int) player.prevPosZ);
 			world.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ));
 			is.stackTagCompound.setBoolean("isWorn", false);
@@ -69,5 +69,4 @@ public class ItemCrownOfLuminosity extends ItemArmor {
 		}
 		return true;
 	}
-
 }

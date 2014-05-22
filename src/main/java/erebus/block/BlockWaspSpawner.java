@@ -7,8 +7,8 @@ import erebus.ModItems;
 
 public class BlockWaspSpawner extends BlockSpawner {
 
-	public BlockWaspSpawner(int id, String mobName) {
-		super(id, mobName);
+	public BlockWaspSpawner(String mobName) {
+		super(mobName);
 	}
 
 	@Override

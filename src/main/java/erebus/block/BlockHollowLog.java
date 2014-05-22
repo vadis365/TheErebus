@@ -26,7 +26,7 @@ public class BlockHollowLog extends Block {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconTop, iconSide, iconMoss;
 
-	public BlockHollowLog(int id) {
+	public BlockHollowLog() {
 		super(Material.wood);
 	}
 

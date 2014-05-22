@@ -14,8 +14,8 @@ import erebus.tileentity.TileEntityJarOHoney;
 
 public class JarOHoney extends BlockGlowingJar {
 
-	public JarOHoney(int id) {
-		super(id);
+	public JarOHoney() {
+		super();
 		setLightLevel(0);
 	}
 

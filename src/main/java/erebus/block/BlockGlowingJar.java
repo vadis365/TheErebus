@@ -1,8 +1,5 @@
 package erebus.block;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
@@ -12,16 +9,11 @@ import erebus.tileentity.TileEntityGlowingJar;
 
 public class BlockGlowingJar extends BlockContainer {
 
-	public BlockGlowingJar(int id) {
-		super(id, Material.glass);
-		setLightValue(1.0F);
-		setStepSound(soundGlassFootstep);
+	public BlockGlowingJar() {
+		super(Material.glass);
+		setLightLevel(1.0F);
+		setStepSound(soundTypeGlass);
 		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);
-	}
-
-	@Override
-	public int idDropped(int meta, Random rand, int fortune) {
-		return blockID;
 	}
 
 	@Override
@@ -40,12 +32,12 @@ public class BlockGlowingJar extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityGlowingJar();
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return world.doesBlockHaveSolidTopSurface(x, y - 1, z) || BlockFence.isIdAFence(world.getBlockId(x, y - 1, z)) || Block.blocksList[world.getBlockId(x, y - 1, z)] instanceof BlockGlowingJar;
+		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z)) || world.getBlock(x, y - 1, z) instanceof BlockGlowingJar;
 	}
 }

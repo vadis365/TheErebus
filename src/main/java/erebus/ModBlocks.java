@@ -170,11 +170,11 @@ public class ModBlocks {
 		flowerPlanted = new BlockPlantedGiantFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("flowerPlanted");
 		erebusStigma = new BlockErebusStigma().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusStigma");
 		erebusPlantSmall = new BlockSmallPlants().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusPlantSmall");
-		erebusMushroomCap0 = new BlockErebusMushroomCap(Material.wood, 0).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroomBulbCap");
-		erebusMushroomCap1 = new BlockErebusMushroomCap(Material.wood, 1).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom1Cap");
-		erebusMushroomCap2 = new BlockErebusMushroomCap(Material.wood, 2).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom2Cap");
-		erebusMushroomCap3 = new BlockErebusMushroomCap(Material.wood, 3).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom3Cap");
-		erebusMushroomCap4 = new BlockErebusMushroomCap(Material.wood, 4).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom4Cap");
+		erebusMushroomCap0 = new BlockErebusMushroomCap(0).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroomBulbCap");
+		erebusMushroomCap1 = new BlockErebusMushroomCap(1).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom1Cap");
+		erebusMushroomCap2 = new BlockErebusMushroomCap(2).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom2Cap");
+		erebusMushroomCap3 = new BlockErebusMushroomCap(3).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom3Cap");
+		erebusMushroomCap4 = new BlockErebusMushroomCap(4).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom4Cap");
 		doubleHeightPlant = new BlockDoubleHeightPlant().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("doubleHeightPlant");
 		erebusGrass = new BlockErebusGrass().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusTallGrass").setBlockTextureName("erebus:tallgrass");
 		thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
@@ -404,17 +404,11 @@ public class ModBlocks {
 		MinecraftForge.setBlockHarvestLevel(reinExo, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(petrifiedWoodChest, "pickaxe", 0);
 		MinecraftForge.setBlockHarvestLevel(jadeBlock, "pickaxe", 2);
-
-		if (aluminium)
-			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 0, "pickaxe", 1);
-		if (copper)
-			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 1, "pickaxe", 1);
-		if (lead)
-			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 2, "pickaxe", 2);
-		if (silver)
-			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 3, "pickaxe", 2);
-		if (tin)
-			MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 4, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 0, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 1, "pickaxe", 1);
+		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 2, "pickaxe", 2);
+		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 3, "pickaxe", 2);
+		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 4, "pickaxe", 1);
 
 		Block.setBurnProperties(logErebusGroup1.blockID, 5, 5);
 		Block.setBurnProperties(logErebusGroup2.blockID, 5, 5);
@@ -429,7 +423,7 @@ public class ModBlocks {
 	}
 
 	private static void registerFluids() {
-		erebusHoney = new Fluid("honey").setBlockID(erebusHoneyFluidID).setDensity(6000).setViscosity(6000).setBlockName("erebus.honey");
+		erebusHoney = new Fluid("honey").setBlock(erebusHoneyBlock).setDensity(6000).setViscosity(6000).setUnlocalizedName("erebus.honey");
 		FluidRegistry.registerFluid(erebusHoney);
 	}
 }

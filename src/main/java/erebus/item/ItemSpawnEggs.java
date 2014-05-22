@@ -8,12 +8,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -35,7 +38,7 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 	}
 
 	@Override
-	public String getItemDisplayName(ItemStack is) {
+	public String getItemStackDisplayName(ItemStack is) {
 		String s = StatCollector.translateToLocal(getUnlocalizedName() + ".name").trim();
 
 		EggData egg = getEggData(is);
@@ -50,7 +53,7 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 		if (world.isRemote)
 			return true;
 
-		Block block = Block.blocksList[world.getBlockId(x, y, z)];
+		Block block = world.getBlock(x, y, z);
 		x += Facing.offsetsXForSide[side];
 		y += Facing.offsetsYForSide[side];
 		z += Facing.offsetsZForSide[side];
@@ -73,13 +76,13 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 
 		MovingObjectPosition mop = getMovingObjectPositionFromPlayer(world, player, true);
 
-		if (mop != null && mop.typeOfHit == EnumMovingObjectType.TILE) {
+		if (mop != null && mop.typeOfHit == MovingObjectType.BLOCK) {
 			int x = mop.blockX, y = mop.blockY, z = mop.blockZ;
 
 			if (!world.canMineBlock(player, x, y, z) || !player.canPlayerEdit(x, y, z, mop.sideHit, is))
 				return is;
 
-			if (world.getBlockMaterial(x, y, z) == Material.water) {
+			if (world.getBlock(x, y, z).getMaterial() == Material.water) {
 				EggData egg = getEggData(is);
 				if (egg != null) {
 					egg.spawnMob(world, x, y, z, is);
@@ -100,9 +103,10 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 		return egg != null ? pass == 0 ? egg.primaryColor : egg.secondaryColor : 16777215;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		for (Short s : eggTypes.keySet())
 			list.add(new ItemStack(id, 1, s));
 	}
@@ -143,7 +147,7 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 			e.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360F), 0F);
 			e.rotationYawHead = e.rotationYaw;
 			e.renderYawOffset = e.rotationYaw;
-			e.onSpawnWithEgg((EntityLivingData) null);
+			e.onSpawnWithEgg((IEntityLivingData) null);
 			world.spawnEntityInWorld(e);
 			e.playLivingSound();
 

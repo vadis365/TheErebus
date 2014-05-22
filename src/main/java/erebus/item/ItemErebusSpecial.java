@@ -2,8 +2,7 @@ package erebus.item;
 
 import java.util.List;
 
-import javax.swing.Icon;
-
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -39,8 +38,8 @@ public class ItemErebusSpecial extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		icons = new Icon[iconPaths.length];
+	public void registerIcons(IIconRegister iconRegister) {
+		icons = new IIcon[iconPaths.length];
 		int i = 0;
 		for (String path : iconPaths)
 			icons[i++] = iconRegister.registerIcon("erebus:" + path);
@@ -48,22 +47,22 @@ public class ItemErebusSpecial extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int meta) {
+	public IIcon getIconFromDamage(int meta) {
 		if (meta < 0 || meta >= icons.length)
 			return null;
 		return icons[meta];
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		for (int a = 0; a < iconPaths.length; a++)
 			list.add(new ItemStack(id, 1, a));
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		int i = is.getItemDamage();
-		return super.getUnlocalizedName() + "." + i;
+		return super.getUnlocalizedName() + "." + is.getItemDamage();
 	}
 }

@@ -74,7 +74,7 @@ public class ModelAltar extends ModelBase {
 		altar15 = new ModelRenderer(this, 129, 72);
 		altar15.addBox(5F, -12F, -5F, 3, 1, 10);
 		altar15.setRotationPoint(0F, 21F, 0F);
-		setRotation(altar15, 0F, 0F, 0F);	
+		setRotation(altar15, 0F, 0F, 0F);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -99,5 +99,5 @@ public class ModelAltar extends ModelBase {
 		altar13.render(0.0625F);
 		altar14.render(0.0625F);
 		altar15.render(0.0625F);
-		}
+	}
 }

@@ -1,4 +1,5 @@
 package erebus.world.biomes;
+
 import net.minecraft.block.Block;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;

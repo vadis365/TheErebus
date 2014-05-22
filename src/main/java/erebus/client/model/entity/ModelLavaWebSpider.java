@@ -86,7 +86,7 @@ public class ModelLavaWebSpider extends ModelBase {
 		AbBack.addBox(-3.5F, -2F, 12F, 7, 5, 1);
 		AbBack.setRotationPoint(0F, 17F, 10F);
 		setRotation(AbBack, 0F, 0F, 0F);
-		
+
 		float correction = 0.3490659F;
 		LBL1 = new ModelRenderer(this, 0, 95);
 		LBL1.addBox(0F, -1F, -1F, 5, 2, 2);
@@ -200,7 +200,7 @@ public class ModelLavaWebSpider extends ModelBase {
 		Rmand.addBox(-1F, -1.5F, -1.5F, 2, 4, 2);
 		Rmand.setRotationPoint(-1.5F, 17F, -6F);
 		setRotation(Rmand, -0.6981317F, 0F, 0F);
-		
+
 		LFL1.addChild(LFL2);
 		LFL1.addChild(LFL3);
 		LFL1.addChild(LFL4);
@@ -271,7 +271,7 @@ public class ModelLavaWebSpider extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-	
+
 		float cosZ = MathHelper.cos(limbSwing * 1.0F) * 0.5F * limbSwingAngle;
 		float cosY = MathHelper.cos(limbSwing * 1.0F) * 0.5F * limbSwingAngle;
 		float fixZ = 0.3490659F;
@@ -295,10 +295,9 @@ public class ModelLavaWebSpider extends ModelBase {
 		RMBL1.rotateAngleY = cosY + fixY * 0.4F;
 		RMFL1.rotateAngleY = -cosY - fixY * 0.4F;
 		RFL1.rotateAngleY = cosY - fixY;
-		
+
 		Rmand.rotateAngleY = -MathHelper.cos(limbSwing * 0.5F) * 0.4F * limbSwingAngle;
 		Lmand.rotateAngleY = -MathHelper.cos(limbSwing * 0.5F + (float) Math.PI) * 0.4F * limbSwingAngle;
-	
 
 	}
 }

@@ -72,27 +72,27 @@ public class EntityAntlion extends EntityMob {
 	 * return "erebus:Antlionhurt";
 	 * }
 	 */
-	
+
 	@Override
 	protected String getDeathSound() {
 		return "erebus:squish";
 	}
-	
+
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-    }
-	
+	}
+
 	@Override
 	protected Item getDropItem() {
-	  return Item.getItemFromBlock(Blocks.sand);
+		return Item.getItemFromBlock(Blocks.sand);
 	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
-		for (amount= 0; amount < chance; ++amount)
+		for (amount = 0; amount < chance; ++amount)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
 	}
 

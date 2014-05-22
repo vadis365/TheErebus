@@ -2,13 +2,13 @@ package erebus.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
-import net.minecraft.util.Icon;
+import net.minecraft.init.Items;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -18,15 +18,15 @@ import erebus.entity.EntityMucusBombPrimed;
 public class BlockMucusBomb extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private Icon topIcon, bottomIcon;
+	private IIcon topIcon, bottomIcon;
 
-	public BlockMucusBomb(int id) {
-		super(id, Material.tnt);
+	public BlockMucusBomb() {
+		super(Material.tnt);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		return side == 0 ? bottomIcon : side == 1 ? topIcon : blockIcon;
 	}
 
@@ -39,7 +39,7 @@ public class BlockMucusBomb extends Block {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int id) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block id) {
 		if (world.isBlockIndirectlyGettingPowered(x, y, z)) {
 			onBlockDestroyedByPlayer(world, x, y, z, 1);
 			world.setBlockToAir(x, y, z);
@@ -71,7 +71,7 @@ public class BlockMucusBomb extends Block {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Item.flintAndSteel) {
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.flint_and_steel) {
 			primeTnt(world, x, y, z, 1, player);
 			world.setBlockToAir(x, y, z);
 			player.getCurrentEquippedItem().damageItem(1, player);
@@ -99,7 +99,7 @@ public class BlockMucusBomb extends Block {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg) {
 		blockIcon = reg.registerIcon("erebus:mucusBombSides");
 		topIcon = reg.registerIcon("erebus:mucusBombTopOff");
 		bottomIcon = reg.registerIcon("erebus:mucusBombBottom");

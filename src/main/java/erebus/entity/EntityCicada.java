@@ -128,7 +128,7 @@ public class EntityCicada extends EntityCreature {
 	private void land() {
 		// Nothing to see here - yet
 	}
-	
+
 	@Override
 	protected void fall(float par1) {
 	}
@@ -166,13 +166,13 @@ public class EntityCicada extends EntityCreature {
 			if (entity != null)
 				if (entity instanceof EntityPlayer && !(entity instanceof EntityCicada)) {
 					if (sonics == 20) {
-						 if(worldObj.isRemote)
+						if (worldObj.isRemote)
 							spawnSonicParticles();
-						 	((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 8*20, 0));
-						 	((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 8*20, 0));
-						 	entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 0D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) *  2.0D);
-						 	worldObj.playSoundAtEntity(this, "erebus:locustspawn", 1.0F, 6.0F);
-						 	setCicadaFlying(true);
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 8 * 20, 0));
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 8 * 20, 0));
+						entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 0D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 2.0D);
+						worldObj.playSoundAtEntity(this, "erebus:locustspawn", 1.0F, 6.0F);
+						setCicadaFlying(true);
 					}
 					return canEntityBeSeen(entity) ? entity : null;
 				}

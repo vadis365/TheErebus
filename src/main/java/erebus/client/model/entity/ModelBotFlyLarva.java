@@ -41,28 +41,28 @@ public class ModelBotFlyLarva extends ModelBase {
 		setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
 		EntityBotFlyLarva larva = (EntityBotFlyLarva) entity;
 		int i;
-		
-		if(larva.getParasiteCount()>0){
-		for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
-			botFlyLarvaBodyParts[i].render(par7);
+
+		if (larva.getParasiteCount() > 0) {
+			for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
+				botFlyLarvaBodyParts[i].render(par7);
 		}
-		
-		if(larva.getParasiteCount()>1) {
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0.5F, -0.4F, 0.0F);
-		for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
-			botFlyLarvaBodyParts[i].render(par7);
-		GL11.glPopMatrix();
+
+		if (larva.getParasiteCount() > 1) {
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.5F, -0.4F, 0.0F);
+			for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
+				botFlyLarvaBodyParts[i].render(par7);
+			GL11.glPopMatrix();
 		}
-		
-		if(larva.getParasiteCount()==3) {
-		GL11.glPushMatrix();
-		GL11.glTranslatef(-0.5F, -0.4F, 0.0F);
-		for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
-			botFlyLarvaBodyParts[i].render(par7);
-		GL11.glPopMatrix();
+
+		if (larva.getParasiteCount() == 3) {
+			GL11.glPushMatrix();
+			GL11.glTranslatef(-0.5F, -0.4F, 0.0F);
+			for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
+				botFlyLarvaBodyParts[i].render(par7);
+			GL11.glPopMatrix();
 		}
-		
+
 	}
 
 	@Override

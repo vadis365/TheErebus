@@ -23,7 +23,7 @@ public class BlockBambooCrop extends Block {
 	@SideOnly(Side.CLIENT)
 	private IIcon iconTop;
 
-	public BlockBambooCrop(int id) {
+	public BlockBambooCrop() {
 		super(Material.wood);
 		setTickRandomly(true);
 		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);

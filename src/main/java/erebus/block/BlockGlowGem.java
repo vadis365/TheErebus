@@ -1,11 +1,12 @@
 package erebus.block;
 
-import static net.minecraftforge.common.ForgeDirection.DOWN;
-import static net.minecraftforge.common.ForgeDirection.EAST;
-import static net.minecraftforge.common.ForgeDirection.NORTH;
-import static net.minecraftforge.common.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.ForgeDirection.UP;
-import static net.minecraftforge.common.ForgeDirection.WEST;
+import static net.minecraftforge.common.util.ForgeDirection.DOWN;
+import static net.minecraftforge.common.util.ForgeDirection.EAST;
+import static net.minecraftforge.common.util.ForgeDirection.NORTH;
+import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
+import static net.minecraftforge.common.util.ForgeDirection.UP;
+import static net.minecraftforge.common.util.ForgeDirection.WEST;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,12 +17,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityGlowGem;
 
 public class BlockGlowGem extends BlockContainer {
 
-	public BlockGlowGem(int id) {
-		super(id, Material.glass);
+	public BlockGlowGem() {
+		super(Material.glass);
 	}
 
 	@Override
@@ -136,7 +138,7 @@ public class BlockGlowGem extends BlockContainer {
 
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		TileEntityGlowGem tile = (TileEntityGlowGem) world.getBlockTileEntity(x, y, z);
+		TileEntityGlowGem tile = Utils.getTileEntity(world, x, y, z, TileEntityGlowGem.class);
 		if (tile == null)
 			return 0;
 
@@ -160,56 +162,56 @@ public class BlockGlowGem extends BlockContainer {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return world.isBlockSolidOnSide(x, y + 1, z, DOWN) || world.isBlockSolidOnSide(x, y - 1, z, UP) || world.isBlockSolidOnSide(x - 1, y, z, EAST) || world.isBlockSolidOnSide(x + 1, y, z, WEST) || world.isBlockSolidOnSide(x, y, z - 1, SOUTH) || world.isBlockSolidOnSide(x, y, z + 1, NORTH);
+		return world.isSideSolid(x, y + 1, z, DOWN) || world.isSideSolid(x, y - 1, z, UP) || world.isSideSolid(x - 1, y, z, EAST) || world.isSideSolid(x + 1, y, z, WEST) || world.isSideSolid(x, y, z - 1, SOUTH) || world.isSideSolid(x, y, z + 1, NORTH);
 	}
 
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
 
-		if (side == 0 && world.isBlockSolidOnSide(x, y + 1, z, DOWN))
+		if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
 			meta = 0;
 
-		if (side == 1 && world.isBlockSolidOnSide(x, y - 1, z, UP))
+		if (side == 1 && world.isSideSolid(x, y - 1, z, UP))
 			meta = 1;
 
-		if (side == 2 && world.isBlockSolidOnSide(x, y, z + 1, NORTH))
+		if (side == 2 && world.isSideSolid(x, y, z + 1, NORTH))
 			meta = 2;
 
-		if (side == 3 && world.isBlockSolidOnSide(x, y, z - 1, SOUTH))
+		if (side == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
 			meta = 3;
 
-		if (side == 4 && world.isBlockSolidOnSide(x + 1, y, z, WEST))
+		if (side == 4 && world.isSideSolid(x + 1, y, z, WEST))
 			meta = 4;
 
-		if (side == 5 && world.isBlockSolidOnSide(x - 1, y, z, EAST))
+		if (side == 5 && world.isSideSolid(x - 1, y, z, EAST))
 			meta = 5;
 
 		return meta;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
 
 		if (meta == 0 || meta == 6 || meta == 7 || meta == 8 || meta == 9)
-			if (world.isBlockSolidOnSide(x, y + 1, z, DOWN))
+			if (world.isSideSolid(x, y + 1, z, DOWN))
 				flag = true;
 
 		if (meta == 1 || meta == 10 || meta == 11 || meta == 12 || meta == 13)
-			if (world.isBlockSolidOnSide(x, y - 1, z, UP))
+			if (world.isSideSolid(x, y - 1, z, UP))
 				flag = true;
 
-		if (meta == 2 && world.isBlockSolidOnSide(x, y, z + 1, NORTH))
+		if (meta == 2 && world.isSideSolid(x, y, z + 1, NORTH))
 			flag = true;
 
-		if (meta == 3 && world.isBlockSolidOnSide(x, y, z - 1, SOUTH))
+		if (meta == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
 			flag = true;
 
-		if (meta == 4 && world.isBlockSolidOnSide(x + 1, y, z, WEST))
+		if (meta == 4 && world.isSideSolid(x + 1, y, z, WEST))
 			flag = true;
 
-		if (meta == 5 && world.isBlockSolidOnSide(x - 1, y, z, EAST))
+		if (meta == 5 && world.isSideSolid(x - 1, y, z, EAST))
 			flag = true;
 
 		if (!flag) {
@@ -217,13 +219,13 @@ public class BlockGlowGem extends BlockContainer {
 			world.setBlockToAir(x, y, z);
 		}
 
-		super.onNeighborBlockChange(world, x, y, z, neighbourID);
+		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 
-		TileEntityGlowGem tile = (TileEntityGlowGem) world.getBlockTileEntity(x, y, z);
+		TileEntityGlowGem tile = Utils.getTileEntity(world, x, y, z, TileEntityGlowGem.class);
 		if (tile == null)
 			return false;
 
@@ -276,7 +278,7 @@ public class BlockGlowGem extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityGlowGem();
 	}
 }

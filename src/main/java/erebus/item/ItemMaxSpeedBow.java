@@ -4,6 +4,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -36,7 +37,7 @@ public class ItemMaxSpeedBow extends Item {
 
 		boolean var5 = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, is) > 0;
 
-		if (var5 || player.inventory.hasItem(Item.arrow.itemID)) {
+		if (var5 || player.inventory.hasItem(Items.arrow)) {
 			float var7 = var6 / 20.0F;
 			var7 = (var7 * var7 + var7 * 2.0F) / 1.0F;
 
@@ -70,7 +71,7 @@ public class ItemMaxSpeedBow extends Item {
 			if (var5)
 				var8.canBePickedUp = 2;
 			else
-				player.inventory.consumeInventoryItem(Item.arrow.itemID);
+				player.inventory.consumeInventoryItem(Items.arrow);
 
 			if (!world.isRemote)
 				world.spawnEntityInWorld(var8);
@@ -94,7 +95,7 @@ public class ItemMaxSpeedBow extends Item {
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
 		if (!player.isSneaking()) {
-			if (player.capabilities.isCreativeMode || player.inventory.hasItem(Item.arrow.itemID)) {
+			if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.arrow)) {
 				EntityArrow arrow = new EntityArrow(world, player, 2.0F);
 
 				if (world.rand.nextInt(4) == 0)
@@ -106,7 +107,7 @@ public class ItemMaxSpeedBow extends Item {
 				world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + 1.0F * 0.5F);
 
 				if (!player.capabilities.isCreativeMode)
-					player.inventory.consumeInventoryItem(Item.arrow.itemID);
+					player.inventory.consumeInventoryItem(Items.arrow);
 
 				if (!world.isRemote)
 					world.spawnEntityInWorld(arrow);

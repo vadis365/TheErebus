@@ -29,22 +29,22 @@ public class ItemGlowingJarRenderer implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
-		case ENTITY:
-			GL11.glScaled(0.5D, 0.5D, 0.5D);
-			renderBlock(0.0F, 1.5F, 0.0F);
-			break;
-		case EQUIPPED:
-			renderBlock(0.5F, 1.0F, 0.5F);
-			break;
-		case EQUIPPED_FIRST_PERSON:
-			renderBlock(0.5F, 1.5F, 0.5F);
-			break;
-		case INVENTORY:
-			GL11.glScaled(0.9D, 0.9D, 0.9D);
-			renderBlock(0.0F, 1.25F, 0.0F);
-			break;
-		default:
-			break;
+			case ENTITY:
+				GL11.glScaled(0.5D, 0.5D, 0.5D);
+				renderBlock(0.0F, 1.5F, 0.0F);
+				break;
+			case EQUIPPED:
+				renderBlock(0.5F, 1.0F, 0.5F);
+				break;
+			case EQUIPPED_FIRST_PERSON:
+				renderBlock(0.5F, 1.5F, 0.5F);
+				break;
+			case INVENTORY:
+				GL11.glScaled(0.9D, 0.9D, 0.9D);
+				renderBlock(0.0F, 1.25F, 0.0F);
+				break;
+			default:
+				break;
 		}
 	}
 

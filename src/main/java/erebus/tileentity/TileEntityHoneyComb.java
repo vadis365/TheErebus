@@ -67,7 +67,7 @@ public class TileEntityHoneyComb extends TileEntity implements IInventory {
 
 	@Override
 	public String getInvName() {
-		return "Honey Comb X:" + xCoord +" Y:" + yCoord + " Z:" + zCoord;
+		return "Honey Comb X:" + xCoord + " Y:" + yCoord + " Z:" + zCoord;
 	}
 
 	@Override

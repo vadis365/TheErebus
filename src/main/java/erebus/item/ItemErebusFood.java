@@ -2,10 +2,10 @@ package erebus.item;
 
 import java.util.List;
 
-import javax.swing.Icon;
-
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -125,9 +125,9 @@ public class ItemErebusFood extends ItemFood {
 		Item item = null;
 
 		if (damage == dataBambooSoup)
-			item = Item.bowlEmpty;
+			item = Items.bowl;
 		else if (damage == dataMelonade || damage == dataMelonadeSparkly)
-			item = Item.glassBottle;
+			item = Items.glass_bottle;
 		else
 			return is;
 
@@ -145,25 +145,26 @@ public class ItemErebusFood extends ItemFood {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister) {
-		icons = new Icon[iconPaths.length];
+	public void registerIcons(IIconRegister iconRegister) {
+		icons = new IIcon[iconPaths.length];
 		int i = 0;
 		for (String path : iconPaths)
 			icons[i++] = iconRegister.registerIcon("erebus:" + path);
 	}
 
 	@Override
-	public Icon getIconFromDamage(int meta) {
+	public IIcon getIconFromDamage(int meta) {
 		if (meta < 0 || meta >= icons.length)
 			return null;
 		return icons[meta];
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tab, List list) {
-		for (int a = 0; a < iconPaths.length; a++)
-			list.add(new ItemStack(id, 1, a));
+	public void getSubItems(Item id, CreativeTabs tab, List list) {
+		for (int i = 0; i < iconPaths.length; i++)
+			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override

@@ -58,14 +58,14 @@ public class EntityBeetle extends EntityAnimal {
 		float light = this.getBrightness(1.0F);
 		if (light >= 0F) {
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(this.boundingBox);
-	    }
-	    return super.getCanSpawnHere();
+		}
+		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 3;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 3;
+	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -95,7 +95,7 @@ public class EntityBeetle extends EntityAnimal {
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-    }
+	}
 
 	@Override
 	public boolean interact(EntityPlayer player) {

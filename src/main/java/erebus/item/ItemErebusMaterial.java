@@ -2,9 +2,8 @@ package erebus.item;
 
 import java.util.List;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -70,10 +69,10 @@ public class ItemErebusMaterial extends Item {
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (side == 1 && is.getItemDamage() == DATA.bambooShoot.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
-			Block soil = Block.blocksList[world.getBlockId(x, y, z)];
+			Block soil = world.getBlock(x, y, z);
 
 			if (soil != null && soil.canSustainPlant(world, x, y, z, ForgeDirection.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(x, y + 1, z)) {
-				world.setBlock(x, y + 1, z, ModBlocks.bambooShoot.blockID);
+				world.setBlock(x, y + 1, z, ModBlocks.bambooShoot);
 
 				if (!player.capabilities.isCreativeMode)
 					--is.stackSize;
@@ -119,8 +118,8 @@ public class ItemErebusMaterial extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		icons = new Icon[DATA.values().length];
+	public void registerIcons(IIconRegister iconRegister) {
+		icons = new IIcon[DATA.values().length];
 		int i = 0;
 		for (DATA d : DATA.values())
 			icons[i++] = iconRegister.registerIcon("erebus:" + d.name());
@@ -128,23 +127,23 @@ public class ItemErebusMaterial extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int meta) {
+	public IIcon getIconFromDamage(int meta) {
 		if (meta < 0 || meta >= icons.length)
 			return null;
 		return icons[meta];
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		for (int i = 0; i < DATA.values().length; i++)
 			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		int i = is.getItemDamage();
-		return super.getUnlocalizedName() + "." + i;
+		return super.getUnlocalizedName() + "." + is.getItemDamage();
 	}
 
 	@Override

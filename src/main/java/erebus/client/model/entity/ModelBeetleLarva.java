@@ -31,13 +31,13 @@ public class ModelBeetleLarva extends ModelBase {
 	ModelRenderer sensorleft;
 	ModelRenderer sensorright;
 	ModelRenderer horn1;
-    ModelRenderer horn2;
-    ModelRenderer horn3;
-    ModelRenderer titanL1;
-    ModelRenderer titanL2;
-    ModelRenderer titanR1;
-    ModelRenderer titanR2;
-    
+	ModelRenderer horn2;
+	ModelRenderer horn3;
+	ModelRenderer titanL1;
+	ModelRenderer titanL2;
+	ModelRenderer titanR1;
+	ModelRenderer titanR2;
+
 	public ModelBeetleLarva() {
 		textureWidth = 128;
 		textureHeight = 64;
@@ -177,12 +177,12 @@ public class ModelBeetleLarva extends ModelBase {
 		mouthjaw.render(unitPixel);
 		sensorleft.render(unitPixel);
 		sensorright.render(unitPixel);
-		if(larva.getTame()==2){
+		if (larva.getTame() == 2) {
 			horn1.render(unitPixel);
 			horn2.render(unitPixel);
 			horn3.render(unitPixel);
 		}
-		if(larva.getTame()==3){
+		if (larva.getTame() == 3) {
 			titanL1.render(unitPixel);
 			titanL2.render(unitPixel);
 			titanR1.render(unitPixel);
@@ -219,7 +219,7 @@ public class ModelBeetleLarva extends ModelBase {
 		titanL2.rotationPointX = bf;
 		titanR1.rotationPointX = bf;
 		titanR2.rotationPointX = bf;
-		
+
 		torso1.rotationPointY = ba + 20F;
 
 		torso2.rotationPointY = bb + 20F;

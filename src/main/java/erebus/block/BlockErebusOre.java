@@ -5,11 +5,12 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -22,30 +23,31 @@ public class BlockErebusOre extends Block {
 	public static final byte dataCoal = 0, dataIron = 1, dataGold = 2, dataLapis = 3, dataDiamond = 4, dataEmerald = 5, dataJade = 6, dataPetrifiedWood = 7, dataEncrustedDiamond = 8;
 
 	@SideOnly(Side.CLIENT)
-	protected Icon[] icons;
+	protected IIcon[] icons;
 
-	public BlockErebusOre(int id) {
-		super(id, Material.rock);
+	public BlockErebusOre() {
+		super(Material.rock);
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister) {
-		icons = new Icon[iconPaths.length];
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		icons = new IIcon[iconPaths.length];
 
 		for (int a = 0; a < iconPaths.length; a++)
 			icons[a] = iconRegister.registerIcon("erebus:" + iconPaths[a]);
 	}
 
 	@Override
-	public Icon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta) {
 		if (meta < 0 || meta >= icons.length)
 			return null;
 		return icons[meta];
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs creativeTab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list) {
 		for (int a = 0; a < iconPaths.length; a++)
 			list.add(new ItemStack(id, 1, a));
 	}
@@ -72,7 +74,7 @@ public class BlockErebusOre extends Block {
 	public int quantityDropped(int meta, int fortune, Random random) {
 		int _default = meta == dataLapis ? 4 + random.nextInt(5) : 1;
 
-		if (blockID != idDropped(meta, random, fortune)) {
+		if (Item.getItemFromBlock(this) != getItemDropped(meta, random, fortune)) {
 			int j = random.nextInt(fortune + 2) - 1;
 
 			if (j < 0)
@@ -85,29 +87,29 @@ public class BlockErebusOre extends Block {
 	}
 
 	@Override
-	public int idDropped(int meta, Random random, int fortune) {
+	public Item getItemDropped(int meta, Random random, int fortune) {
 		switch (meta) {
 			case 0:
-				return Item.coal.itemID;
+				return Items.coal;
 			case 3:
-				return Item.dyePowder.itemID;
+				return Items.dye;
 			case 4:
-				return Item.diamond.itemID;
+				return Items.diamond;
 			case 5:
-				return Item.emerald.itemID;
+				return Items.emerald;
 			case 6:
-				return ModItems.erebusMaterials.itemID;
+				return ModItems.erebusMaterials;
 			case 7:
-				return ModItems.erebusMaterials.itemID;
+				return ModItems.erebusMaterials;
 			case dataEncrustedDiamond:
-				return ModItems.encrustedDiamond.itemID;
+				return ModItems.encrustedDiamond;
 		}
-		return blockID;
+		return super.getItemDropped(meta, random, fortune);
 	}
 
 	@Override
 	protected ItemStack createStackedBlock(int meta) {
-		return new ItemStack(blockID, 1, meta);
+		return new ItemStack(this, 1, meta);
 	}
 
 	@Override
@@ -119,7 +121,7 @@ public class BlockErebusOre extends Block {
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float chance, int fortune) {
 		super.dropBlockAsItemWithChance(world, x, y, z, meta, chance, fortune);
 
-		if (idDropped(meta, world.rand, fortune) != blockID) {
+		if (getItemDropped(meta, world.rand, fortune) != Item.getItemFromBlock(this)) {
 			int j1 = 0;
 
 			switch (meta) {
