@@ -1,5 +1,5 @@
 package erebus.integration.nei;
-
+/*
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import codechicken.nei.recipe.DefaultOverlayHandler;
@@ -36,4 +36,4 @@ public class NEIErebusConfig implements IConfigureNEI {
 	public String getVersion() {
 		return Reference.MOD_VERSION;
 	}
-}
+}*/

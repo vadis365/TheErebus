@@ -3,6 +3,7 @@ package erebus.world.structure;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -14,7 +15,7 @@ public class MapGenErebusRavine extends MapGenBase {
 
 	private final float[] field_75046_d = new float[1024];
 
-	protected void generateRavine(long seed, int x, int z, byte[] blocks, double par6, double par8, double seed0, float seed2, float seed3, float seed4, int seed5, int seed6, double seed7) {
+	protected void generateRavine(long seed, int x, int z, Block[] blocks, double par6, double par8, double seed0, float seed2, float seed3, float seed4, int seed5, int seed6, double seed7) {
 		Random random = new Random(seed);
 		double blockCoordX = x * 16 + 8;
 		double blockCoordZ = z * 16 + 8;
@@ -145,7 +146,7 @@ public class MapGenErebusRavine extends MapGenBase {
 	}
 
 	@Override
-	protected void recursiveGenerate(World world, int x, int z, int par4, int par5, byte[] blocks) {
+	protected void func_151538_a(World world, int x, int z, int par4, int par5, Block[] blocks) {
 		if (rand.nextInt(50) == 0) {
 			double d0 = x * 16 + rand.nextInt(16);
 			double d1 = rand.nextInt(rand.nextInt(28) + 8) + 10;
@@ -158,30 +159,28 @@ public class MapGenErebusRavine extends MapGenBase {
 		}
 	}
 
-	protected boolean isOceanBlock(byte[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ) {
-		return blocks[index] == Block.waterMoving.blockID || blocks[index] == Block.waterStill.blockID;
+	protected boolean isOceanBlock(Block[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ) {
+		return blocks[index] == Blocks.flowing_water || blocks[index] == Blocks.water;
 	}
 
-	private boolean isTopBlock(byte[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ) {
+	private boolean isTopBlock(Block[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ) {
 		return blocks[index] == worldObj.getBiomeGenForCoords(x + chunkX * 16, z + chunkZ * 16).topBlock;
 	}
 
-	protected void digBlock(byte[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
+	protected void digBlock(Block[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
 		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x + chunkX * 16, z + chunkZ * 16);
-		int top = biome.topBlock;
-		int filler = biome.fillerBlock;
 
 		if (y < 3)
-			blocks[index] = (byte) Block.bedrock.blockID;
+			blocks[index] = Blocks.bedrock;
 		else if (y < 4)
-			blocks[index] = (byte) ModBlocks.umberstone.blockID;
+			blocks[index] = ModBlocks.umberstone;
 		else if (y < 10 && biome.biomeID == ModBiomes.volcanicDesertID)
-			blocks[index] = (byte) Block.lavaMoving.blockID;
+			blocks[index] = Blocks.flowing_lava;
 		else {
-			blocks[index] = 0;
+			blocks[index] = Blocks.air;
 
-			if (foundTop && blocks[index - 1] == filler)
-				blocks[index - 1] = (byte) top;
+			if (foundTop && blocks[index - 1] == biome.fillerBlock)
+				blocks[index - 1] = biome.topBlock;
 		}
 	}
 }

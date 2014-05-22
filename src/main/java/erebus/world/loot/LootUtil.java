@@ -1,38 +1,39 @@
 package erebus.world.loot;
 
 import java.util.Random;
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraftforge.common.util.Constants.NBT;
 
 //@formatter:off
 public class LootUtil {
 
 	public static final WeightedLootList lootFuel = new WeightedLootList(new LootItemStack[]{
-		new LootItemStack(Item.coal).setAmount(1, 16).setWeight(32),
-		new LootItemStack(Item.coal).setDamage(1).setAmount(1, 16).setWeight(30),
-		new LootItemStack(Block.coalBlock).setAmount(1, 6).setWeight(10),
-		new LootItemStack(Item.blazeRod).setAmount(1, 8).setWeight(18),
-		new LootItemStack(Item.bucketLava).setWeight(15),
-		new LootItemStack(Block.sapling).setAmount(1, 20).setDamage(0, 3).setWeight(10),
-		new LootItemStack(Item.stick).setAmount(1, 32).setWeight(8)
+		new LootItemStack(Items.coal).setAmount(1, 16).setWeight(32),
+		new LootItemStack(Items.coal).setDamage(1).setAmount(1, 16).setWeight(30),
+		new LootItemStack(Blocks.coal_block).setAmount(1, 6).setWeight(10),
+		new LootItemStack(Items.blaze_rod).setAmount(1, 8).setWeight(18),
+		new LootItemStack(Items.lava_bucket).setWeight(15),
+		new LootItemStack(Blocks.sapling).setAmount(1, 20).setDamage(0, 3).setWeight(10),
+		new LootItemStack(Items.stick).setAmount(1, 32).setWeight(8)
 	});
 	
 	public static void addLore(ItemStack is, String lore) {
 		NBTTagCompound tag = is.stackTagCompound;
 		if (tag == null)
-			tag = new NBTTagCompound("tag");
+			tag = new NBTTagCompound();
 		if (!tag.hasKey("display"))
-			tag.setCompoundTag("display", new NBTTagCompound());
+			tag.setTag("display", new NBTTagCompound());
 
-		NBTTagList loreTag = tag.getCompoundTag("display").getTagList("Lore");
+		NBTTagList loreTag = tag.getCompoundTag("display").getTagList("Lore",NBT.TAG_STRING);
 		if (lore == null)
 			loreTag = new NBTTagList();
-		loreTag.appendTag(new NBTTagString(lore, lore));
+		loreTag.appendTag(new NBTTagString(lore));
 
 		tag.getCompoundTag("display").setTag("Lore", loreTag);
 		is.setTagCompound(tag);

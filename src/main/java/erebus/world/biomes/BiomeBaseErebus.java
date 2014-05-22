@@ -3,9 +3,9 @@ package erebus.world.biomes;
 import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.SpawnListEntry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
@@ -60,13 +60,13 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public final int getBiomeGrassColor(){
+	public final int getBiomeGrassColor(int a, int b, int c){
 		return grassColor;
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public final int getBiomeFoliageColor(){
+	public final int getBiomeFoliageColor(int a, int b, int c){
 		return foliageColor;
 	}
 
@@ -94,8 +94,8 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 		TimeMeasurement.finish(id);
 	}
 	
-	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){
-		return blockID == (byte)ModBlocks.umberstone.blockID || blockID == topBlock || blockID == fillerBlock || blockID == Block.sandStone.blockID ? 0 : blockID;
+	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand){
+		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? Blocks.air : block;
 	}
 	
 	/**

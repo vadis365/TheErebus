@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.PortalPosition;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -72,8 +71,8 @@ public class TeleporterErebus extends Teleporter {
 					double d6 = l1 + 0.5D - entity.posZ;
 
 					for (int i2 = worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
-						if (worldServerInstance.getBlockId(k1, i2, l1) == ModBlocks.portalErebus.blockID) {
-							while (worldServerInstance.getBlockId(k1, i2 - 1, l1) == ModBlocks.portalErebus.blockID)
+						if (worldServerInstance.getBlock(k1, i2, l1) == ModBlocks.portalErebus) {
+							while (worldServerInstance.getBlock(k1, i2 - 1, l1) == ModBlocks.portalErebus)
 								--i2;
 
 							d4 = i2 + 0.5D - entity.posY;
@@ -100,16 +99,16 @@ public class TeleporterErebus extends Teleporter {
 			d4 = k + 0.5D;
 			int j2 = -1;
 
-			if (worldServerInstance.getBlockId(i - 1, j, k) == ModBlocks.portalErebus.blockID)
+			if (worldServerInstance.getBlock(i - 1, j, k) == ModBlocks.portalErebus)
 				j2 = 2;
 
-			if (worldServerInstance.getBlockId(i + 1, j, k) == ModBlocks.portalErebus.blockID)
+			if (worldServerInstance.getBlock(i + 1, j, k) == ModBlocks.portalErebus)
 				j2 = 0;
 
-			if (worldServerInstance.getBlockId(i, j, k - 1) == ModBlocks.portalErebus.blockID)
+			if (worldServerInstance.getBlock(i, j, k - 1) == ModBlocks.portalErebus)
 				j2 = 3;
 
-			if (worldServerInstance.getBlockId(i, j, k + 1) == ModBlocks.portalErebus.blockID)
+			if (worldServerInstance.getBlock(i, j, k + 1) == ModBlocks.portalErebus)
 				j2 = 1;
 
 			int k2 = entity.getTeleportDirection();
@@ -239,7 +238,7 @@ public class TeleporterErebus extends Teleporter {
 										j4 = k2 + l3;
 										int l4 = j2 + (i4 - 1) * k3 - j3 * l2;
 
-										if (l3 < 0 && !worldServerInstance.getBlockMaterial(k4, j4, l4).isSolid() || l3 >= 0 && !worldServerInstance.isAirBlock(k4, j4, l4))
+										if (l3 < 0 && !worldServerInstance.getBlock(k4, j4, l4).getMaterial().isSolid() || l3 >= 0 && !worldServerInstance.isAirBlock(k4, j4, l4))
 											continue label274;
 									}
 
@@ -281,7 +280,7 @@ public class TeleporterErebus extends Teleporter {
 										k4 = k2 + i4;
 										j4 = j2 + (j3 - 1) * k3;
 
-										if (i4 < 0 && !worldServerInstance.getBlockMaterial(l3, k4, j4).isSolid() || i4 >= 0 && !worldServerInstance.isAirBlock(l3, k4, j4))
+										if (i4 < 0 && !worldServerInstance.getBlock(l3, k4, j4).getMaterial().isSolid() || i4 >= 0 && !worldServerInstance.isAirBlock(l3, k4, j4))
 											continue label222;
 									}
 
@@ -329,7 +328,7 @@ public class TeleporterErebus extends Teleporter {
 						j3 = j5 + l2;
 						i4 = j2 + (i3 - 1) * l5 - k2 * k5;
 						flag = l2 < 0;
-						worldServerInstance.setBlock(k3, j3, i4, flag ? Block.stoneBrick.blockID : 0, flag ? 1 : 0, 3);
+						worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.stonebrick : 0, flag ? 1 : 0, 3);
 					}
 		}
 
@@ -340,7 +339,7 @@ public class TeleporterErebus extends Teleporter {
 					j3 = j5 + l2;
 					i4 = j2 + (i3 - 1) * l5;
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
-					worldServerInstance.setBlock(k3, j3, i4, flag ? Block.stoneBrick.blockID : ModBlocks.portalErebus.blockID, flag ? 1 : 0, 2);
+					worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.stonebrick : ModBlocks.portalErebus, flag ? 1 : 0, 2);
 				}
 
 			for (i3 = 0; i3 < 4; ++i3)
@@ -348,7 +347,7 @@ public class TeleporterErebus extends Teleporter {
 					k3 = i5 + (i3 - 1) * k5;
 					j3 = j5 + l2;
 					i4 = j2 + (i3 - 1) * l5;
-					worldServerInstance.notifyBlocksOfNeighborChange(k3, j3, i4, worldServerInstance.getBlockId(k3, j3, i4));
+					worldServerInstance.notifyBlocksOfNeighborChange(k3, j3, i4, worldServerInstance.getBlock(k3, j3, i4));
 				}
 		}
 

@@ -1,5 +1,5 @@
 package erebus.integration;
-
+/*
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import thaumcraft.api.ThaumcraftApi;
@@ -198,3 +198,4 @@ public class ThaumcraftIntegration implements IModIntegration {
 		return list;
 	}
 }
+*/

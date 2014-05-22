@@ -1,8 +1,8 @@
 package erebus.world.biomes;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityBlackWidow;
@@ -39,13 +39,13 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
 
-		topBlock = (byte)Block.sand.blockID;
-		fillerBlock = (byte)Block.sandStone.blockID;
+		topBlock = Blocks.sand;
+		fillerBlock = Blocks.sandstone;
 	}
 	
 	@Override
-	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){
-		return blockID == (byte)ModBlocks.umberstone.blockID || blockID == topBlock || blockID == fillerBlock || blockID == Block.sandStone.blockID ? (y < 17 ? (byte)Block.lavaMoving.blockID : 0) : blockID;
+	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand){
+		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? (y < 17 ? Blocks.flowing_lava : Blocks.air) : block;
 	}
 }
 // @formatter:on

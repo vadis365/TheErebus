@@ -33,7 +33,7 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 
 			int biomeID = currentBiomeInts[xx + 2 + (zz + 2) * (sizeX + 4)];
 
-			BiomeBaseErebus biome = (BiomeBaseErebus) BiomeGenBase.biomeList[biomeID];
+			BiomeBaseErebus biome = (BiomeBaseErebus) BiomeGenBase.getBiomeGenArray()[biomeID];
 			BiomeBaseErebus subBiome = biome.getRandomSubBiome(nextInt(101));
 
 			if (subBiome != null && biome != subBiome) {

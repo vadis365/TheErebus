@@ -9,20 +9,20 @@ import erebus.ModBlocks;
 
 //@formatter:off
 public class WorldGenErebusMinable extends WorldGenerator{
-	private int minableBlockId;
+	private Block minableBlock;
 	private int minableBlockMeta = 0;
 	private int numberOfBlocks;
-	private int blockToReplace;
+	private Block blockToReplace;
 	
-	public void prepare(int id, int meta, int numberOfBlocks){
-		this.minableBlockId = id;
+	public void prepare(Block block, int meta, int numberOfBlocks){
+		this.minableBlock = block;
 		this.minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
-		this.blockToReplace = ModBlocks.umberstone.blockID;
+		this.blockToReplace = ModBlocks.umberstone;
 	}
 	
-	public void prepare(int id, int meta, int numberOfBlocks, int blockToReplace){
-		this.minableBlockId = id;
+	public void prepare(Block block, int meta, int numberOfBlocks, Block blockToReplace){
+		this.minableBlock = block;
 		this.minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
 		this.blockToReplace = blockToReplace;
@@ -68,9 +68,9 @@ public class WorldGenErebusMinable extends WorldGenerator{
 								
 								if (d12*d12+d13*d13+d14*d14 >= 1D)continue;
 
-								Block block = Block.blocksList[world.getBlockId(xx,yy,zz)];
-								if (block != null && block.isGenMineableReplaceable(world,xx,yy,zz,blockToReplace)){
-									world.setBlock(xx,yy,zz,minableBlockId,minableBlockMeta,2);
+								Block block = world.getBlock(xx,yy,zz);
+								if (block != null && block.isReplaceableOreGen(world,xx,yy,zz,blockToReplace)){
+									world.setBlock(xx,yy,zz,minableBlock,minableBlockMeta,2);
 									++placed;
 								}
 							}

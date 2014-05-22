@@ -1,17 +1,18 @@
 package erebus.world.structure;
 
 import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.MapGenBase;
 import erebus.world.biomes.BiomeBaseErebus;
 
 public class MapGenErebusCaves extends MapGenBase {
-	protected void generateLargeCaveNode(long seed, int chunkX, int chunkZ, byte[] blocks, double xx, double yy, double zz) {
+	protected void generateLargeCaveNode(long seed, int chunkX, int chunkZ, Block[] blocks, double xx, double yy, double zz) {
 		generateCaveNode(seed, chunkX, chunkZ, blocks, xx, yy, zz, 1F + rand.nextFloat() * 3F, 0F, 0F, -1, -1, rand.nextDouble() * 0.5D + 0.3D);
 	}
 
-	protected void generateCaveNode(long seed, int chunkX, int chunkZ, byte[] blocks, double xx, double yy, double zz, float innerSize, float xzAngle, float yAngle, int par15, int par16, double heightMp) {
+	protected void generateCaveNode(long seed, int chunkX, int chunkZ, Block[] blocks, double xx, double yy, double zz, float innerSize, float xzAngle, float yAngle, int par15, int par16, double heightMp) {
 		double centerX = (chunkX * 16 + 8);
 		double centerZ = (chunkZ * 16 + 8);
 		float f3 = 0F;
@@ -124,9 +125,9 @@ public class MapGenErebusCaves extends MapGenBase {
 										double yDiff = (py + 0.5D - yy) / yRange;
 
 										if (yDiff > -0.7D && xDiff * xDiff + yDiff * yDiff + zDiff * zDiff < 1D) {
-											byte id = blocks[index];
+											Block block = blocks[index];
 											BiomeBaseErebus biome = (BiomeBaseErebus) worldObj.getBiomeGenForCoords(px + chunkX * 16, pz + chunkZ * 16);
-											blocks[index] = biome.placeCaveBlock(id, px, py, pz, rand);
+											blocks[index] = biome.placeCaveBlock(block, px, py, pz, rand);
 										}
 
 										--index;
@@ -145,7 +146,7 @@ public class MapGenErebusCaves extends MapGenBase {
 	}
 
 	@Override
-	protected void recursiveGenerate(World world, int localX, int localZ, int chunkX, int chunkZ, byte[] blocks) {
+	protected void func_151538_a(World world, int localX, int localZ, int chunkX, int chunkZ, Block[] blocks) {
 		int caveAmount = rand.nextInt(rand.nextInt(25) + 1);
 		if (rand.nextInt(10) != 0)
 			caveAmount = 0;

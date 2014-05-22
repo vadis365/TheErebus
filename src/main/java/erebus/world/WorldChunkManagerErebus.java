@@ -50,19 +50,19 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		int[] biomeArray = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 
 		for (int index = 0; index < sizeX * sizeZ; ++index)
-			biomesForGeneration[index] = BiomeGenBase.biomeList[biomeArray[index]];
+			biomesForGeneration[index] = BiomeGenBase.getBiomeGenArray()[biomeArray[index]];
 
 		return biomesForGeneration;
 	}
 
-	@Override
+	/*@Override
 	public float[] getTemperatures(float temperatureArray[], int x, int z, int sizeX, int sizeZ) {
 		if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ)
 			temperatureArray = new float[sizeX * sizeZ];
 
 		Arrays.fill(temperatureArray, 0, sizeX * sizeZ, temperature);
 		return temperatureArray;
-	}
+	}*/
 
 	@Override
 	public float[] getRainfall(float rainfallArray[], int x, int z, int sizeX, int sizeZ) {
@@ -92,7 +92,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		} else {
 			int[] generatedBiomes = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 			for (int index = 0; index < sizeX * sizeZ; ++index)
-				biomesForGeneration[index] = BiomeGenBase.biomeList[generatedBiomes[index]];
+				biomesForGeneration[index] = BiomeGenBase.getBiomeGenArray()[generatedBiomes[index]];
 
 			return biomesForGeneration;
 		}
@@ -115,7 +115,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 			int finalX = minX + index % sizeX << 2;
 			int finalZ = minZ + index / sizeX << 2;
 
-			if (viableBiomes.contains(BiomeGenBase.biomeList[biomeArray[index]]) && (pos == null || rand.nextInt(attempts + 1) == 0)) {
+			if (viableBiomes.contains(BiomeGenBase.getBiomeGenArray()[biomeArray[index]]) && (pos == null || rand.nextInt(attempts + 1) == 0)) {
 				pos = new ChunkPosition(finalX, 0, finalZ);
 				++attempts;
 			}
@@ -136,7 +136,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		int[] biomeArray = biomeGenLayer.getInts(minX, minZ, sizeX, sizeZ);
 
 		for (int index = 0; index < sizeX * sizeZ; ++index) {
-			if (!viableBiomes.contains(BiomeGenBase.biomeList[biomeArray[index]]))
+			if (!viableBiomes.contains(BiomeGenBase.getBiomeGenArray()[biomeArray[index]]))
 				return false;
 		}
 

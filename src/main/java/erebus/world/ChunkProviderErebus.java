@@ -2,10 +2,11 @@ package erebus.world;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSand;
+import net.minecraft.block.BlockFalling;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
@@ -18,7 +19,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import erebus.ModBlocks;
-import erebus.core.handler.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.feature.structure.WorldGenSpiderDungeons;
 import erebus.world.structure.MapGenErebusCaves;
@@ -66,7 +66,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 		ravineGenerator = new MapGenErebusRavine();
 	}
 
-	public void generateTerrain(int x, int z, byte[] blocks) {
+	public void generateTerrain(int x, int z, Block[] blocks) {
 		byte byte0 = 4;
 		byte byte1 = 32;
 		int i = byte0 + 1;
@@ -104,16 +104,11 @@ public class ChunkProviderErebus implements IChunkProvider {
 							double d16 = (d11 - d10) * d14;
 
 							for (int i2 = 0; i2 < 4; i2++) {
-								int j2 = 0;
-
-								// Underground Water
-								if (i1 * 8 + j1 < byte1)
-									j2 = 0;
+								blocks[l1] = Blocks.air;
 
 								if (d15 > 0.0D)
-									j2 = ModBlocks.umberstone.blockID;
-
-								blocks[l1] = (byte) j2;
+									blocks[l1] = ModBlocks.umberstone;
+								
 								l1 += c;
 								d15 += d16;
 							}
@@ -138,14 +133,14 @@ public class ChunkProviderErebus implements IChunkProvider {
 	@Override
 	public Chunk provideChunk(int x, int z) {
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
-		byte[] blocks = new byte[32768];
+		Block[] blocks = new Block[32768];
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
 
 		generateTerrain(x, z, blocks);
 		replaceBlocksForBiome(x, z, blocks, biomesForGeneration);
 
-		caveGenerator.generate(this, worldObj, x, z, blocks);
-		ravineGenerator.generate(this, worldObj, x, z, blocks);
+		caveGenerator.func_151539_a(this, worldObj, x, z, blocks);
+		ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
 
 		Chunk chunk = new Chunk(worldObj, blocks, x, z);
 		byte[] biomeArrayReference = chunk.getBiomeArray();
@@ -262,7 +257,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 		return noise;
 	}
 
-	public void replaceBlocksForBiome(int x, int z, byte[] blocks, BiomeGenBase[] biomes) {
+	public void replaceBlocksForBiome(int x, int z, Block[] blocks, BiomeGenBase[] biomes) {
 		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, blocks, biomes);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY)
@@ -274,37 +269,37 @@ public class ChunkProviderErebus implements IChunkProvider {
 		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
 			for (int zInChunk = 0; zInChunk < 16; ++zInChunk) {
 				BiomeGenBase biome = biomes[zInChunk + xInChunk * 16];
-				float temperature = biome.getFloatTemperature();
+				float temperature = biome.getFloatTemperature(0,0,0); // TODO make sure this doesn't break
 				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
-				byte topBlock = biome.topBlock;
-				byte fillerBlock = biome.fillerBlock;
+				Block topBlock = biome.topBlock;
+				Block fillerBlock = biome.fillerBlock;
 
 				for (int yInChunk = 127; yInChunk >= 0; --yInChunk) {
 					int index = (zInChunk * 16 + xInChunk) * 128 + yInChunk;
 
 					if (yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))
-						blocks[index] = (byte) Block.bedrock.blockID;
+						blocks[index] = Blocks.bedrock;
 					else {
-						byte block = blocks[index];
+						Block block = blocks[index];
 
-						if (block == 0)
+						if (block.getMaterial() == Material.air)
 							var13 = -1;
-						else if (block == ModBlocks.umberstone.blockID || block == ConfigHandler.umberstoneID - 256) {
+						else if (block == ModBlocks.umberstone) {
 							if (var13 == -1) {
 								if (var12 <= 0) {
-									topBlock = 0;
-									fillerBlock = (byte) ModBlocks.umberstone.blockID;
+									topBlock = Blocks.air;
+									fillerBlock = ModBlocks.umberstone;
 								} else if (yInChunk >= var5 - 4 && yInChunk <= var5 + 1) {
 									topBlock = biome.topBlock;
 									fillerBlock = biome.fillerBlock;
 								}
 
-								if (yInChunk < var5 && topBlock == 0)
+								if (yInChunk < var5 && topBlock.getMaterial() == Material.air)
 									if (temperature < 0.15F)
-										topBlock = (byte) Block.ice.blockID;
+										topBlock = Blocks.ice;
 									else
-										topBlock = (byte) Block.waterStill.blockID;
+										topBlock = Blocks.water;
 
 								var13 = var12;
 
@@ -317,9 +312,9 @@ public class ChunkProviderErebus implements IChunkProvider {
 							--var13;
 							blocks[index] = fillerBlock;
 
-							if (var13 == 0 && fillerBlock == Block.sand.blockID) {
+							if (var13 == 0 && fillerBlock == Blocks.sand) {
 								var13 = rand.nextInt(4);
-								fillerBlock = (byte) Block.sandStone.blockID;
+								fillerBlock = Blocks.sandstone;
 							}
 						}
 					}
@@ -329,7 +324,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 	@Override
 	public void populate(IChunkProvider chunkProvider, int x, int z) {
-		BlockSand.fallInstantly = true;
+		BlockFalling.fallInstantly = true;
 
 		int blockCoordX = x * 16;
 		int blockCoordZ = z * 16;
@@ -346,16 +341,11 @@ public class ChunkProviderErebus implements IChunkProvider {
 		for (int attempt = 0; attempt < 14; ++attempt)
 			new WorldGenSpiderDungeons().generate(worldObj, rand, blockCoordX + rand.nextInt(16) + 8, rand.nextInt(128), blockCoordZ + rand.nextInt(16) + 8);
 
-		BlockSand.fallInstantly = false;
+		BlockFalling.fallInstantly = false;
 	}
 
 	@Override
 	public void recreateStructures(int x, int z) {
-	}
-
-	@Override
-	public ChunkPosition findClosestStructure(World world, String structureIdentifier, int x, int y, int z) {
-		return null;
 	}
 
 	@Override
@@ -396,5 +386,10 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 	@Override
 	public void saveExtraData() {
+	}
+
+	@Override
+	public ChunkPosition func_147416_a(World world, String structureIdentifier, int x, int y, int z){
+		return null;
 	}
 }

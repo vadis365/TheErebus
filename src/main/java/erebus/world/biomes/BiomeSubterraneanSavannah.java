@@ -1,6 +1,6 @@
 package erebus.world.biomes;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityChameleonTick;
@@ -41,8 +41,8 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,8,1,2));
 
-		topBlock = (byte)Block.grass.blockID;
-		fillerBlock = (byte)Block.dirt.blockID;
+		topBlock = Blocks.grass;
+		fillerBlock = Blocks.dirt;
 	}
 }
 // @formatter:on

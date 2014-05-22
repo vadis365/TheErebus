@@ -8,17 +8,17 @@ import net.minecraft.item.ItemStack;
 
 public class LootItemStack implements IWeightProvider {
 
-	private final short itemID;
+	private final Item item;
 	private short minDamage = 0, maxDamage = 0;
 	private byte minAmount = 1, maxAmount = 1;
 	private short weight = 1;
 
 	public LootItemStack(Block block) {
-		itemID = (short) block.blockID;
+		this.item = Item.getItemFromBlock(block);
 	}
 
 	public LootItemStack(Item item) {
-		itemID = (short) item.itemID;
+		this.item = item;
 	}
 
 	public LootItemStack setDamage(int min, int max) {
@@ -54,6 +54,6 @@ public class LootItemStack implements IWeightProvider {
 	}
 
 	public ItemStack getIS(Random rand) {
-		return new ItemStack(itemID, rand.nextInt(maxAmount - minAmount + 1) + minAmount, rand.nextInt(maxDamage - minDamage + 1) + minDamage);
+		return new ItemStack(item, rand.nextInt(maxAmount - minAmount + 1) + minAmount, rand.nextInt(maxDamage - minDamage + 1) + minDamage);
 	}
 }

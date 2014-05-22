@@ -1,5 +1,5 @@
 package erebus.integration;
-
+/*
 import net.minecraft.block.Block;
 import codechicken.microblock.BlockMicroMaterial;
 import codechicken.microblock.MicroMaterialRegistry;
@@ -34,4 +34,4 @@ public class FMBIntegration {
 		for (int i = metaFrom; i < metaTo; i++)
 			MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(block, i), block.getUnlocalizedName() + "." + i);
 	}
-}
+}*/

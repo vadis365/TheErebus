@@ -96,10 +96,10 @@ public final class OreSettings {
 
 					if (world.isAirBlock(testX, testY, testZ)) {
 						if ((oreAmount = minAmount + rand.nextInt(maxAmount - minAmount + 1)) == 1) {
-							if (world.getBlockId(xx, yy, zz) == ModBlocks.umberstone.blockID)
-								world.setBlock(xx, yy, zz, oreType.oreId, oreType.oreMeta, 2);
+							if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, oreType.oreBlock, oreType.oreMeta, 2);
 						} else {
-							genMinable.prepare(oreType.oreId, oreType.oreMeta, oreAmount);
+							genMinable.prepare(oreType.oreBlock, oreType.oreMeta, oreAmount);
 							genMinable.generate(world, rand, xx, yy, zz);
 						}
 
@@ -115,16 +115,16 @@ public final class OreSettings {
 		COAL(BlockErebusOre.dataCoal), IRON(BlockErebusOre.dataIron), GOLD(BlockErebusOre.dataGold), LAPIS(BlockErebusOre.dataLapis), EMERALD(BlockErebusOre.dataEmerald), DIAMOND(BlockErebusOre.dataDiamond), JADE(BlockErebusOre.dataJade), PETRIFIED_WOOD(BlockErebusOre.dataPetrifiedWood), FOSSIL(ModBlocks.oreFossil, 3), ALUMINIUM(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataAluminium), COPPER(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataCopper), LEAD(ModBlocks.erebusOreExtra,
 		BlockErebusOreExtras.dataLead), SILVER(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataSilver), TIN(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataTin);
 
-		final short oreId;
+		final Block oreBlock;
 		final byte oreMeta;
 
 		OreType(Block oreBlock, int oreMeta) {
-			this.oreId = (short) oreBlock.blockID;
+			this.oreBlock = oreBlock;
 			this.oreMeta = (byte) oreMeta;
 		}
 
 		OreType(int oreMeta) {
-			this.oreId = (short) ModBlocks.umberOreBlock.blockID;
+			this.oreBlock = ModBlocks.umberOreBlock;
 			this.oreMeta = (byte) oreMeta;
 		}
 

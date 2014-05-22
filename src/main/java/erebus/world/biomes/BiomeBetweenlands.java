@@ -2,6 +2,7 @@ package erebus.world.biomes;
 
 import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
@@ -43,8 +44,8 @@ public class BiomeBetweenlands extends BiomeBaseErebus{
 	}*/
 	
 	@Override
-	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){
-		return blockID == (byte)ModBlocks.umberstone.blockID || blockID == topBlock || blockID == fillerBlock || blockID == Block.sandStone.blockID ? (y < 20 ? (byte)Block.waterMoving.blockID : 0) : blockID;
+	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand){
+		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? (y < 20 ? Blocks.flowing_water : Blocks.air) : block;
 	}
 }
 //@formatter:on

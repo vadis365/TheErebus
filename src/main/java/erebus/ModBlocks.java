@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -380,47 +380,48 @@ public class ModBlocks {
 	}
 
 	private static void registerProperties() {
-		MinecraftForge.setBlockHarvestLevel(oreFossil, "pickaxe", 1);
-		MinecraftForge.setBlockHarvestLevel(mirBrick, "pickaxe", 1);
-		MinecraftForge.setBlockHarvestLevel(spiderSpawner, 0, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(jumpingSpiderSpawner, 0, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(waspSpawner, 0, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(umberstone, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(umberPaver, "pickaxe", 0);
+		oreFossil.setHarvestLevel("pickaxe", 1);
+		oreFossil.setHarvestLevel("pickaxe", 1);
+		mirBrick.setHarvestLevel("pickaxe", 1);
+		spiderSpawner.setHarvestLevel("pickaxe", 0, 0);
+		jumpingSpiderSpawner.setHarvestLevel("pickaxe", 0, 0);
+		waspSpawner.setHarvestLevel("pickaxe", 0, 0);
+		umberstone.setHarvestLevel("pickaxe", 0);
+		umberPaver.setHarvestLevel("pickaxe", 0);
 		for (int i = 0; i < stoneSlabs.length; i++)
-			MinecraftForge.setBlockHarvestLevel(stoneSlabs[i], "pickaxe", 0);
+			stoneSlabs[i].setHarvestLevel("pickaxe", 0);
 		for (int i = 0; i < plankSlabs.length; i++)
-			MinecraftForge.setBlockHarvestLevel(plankSlabs[i], "axe", 0);
-		MinecraftForge.setBlockHarvestLevel(wallErebus, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 0, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 1, "pickaxe", 1);
-		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 2, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 3, "pickaxe", 1);
-		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 4, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 5, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 6, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(umberOreBlock, 8, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(quickSand, "shovel", 2);
-		MinecraftForge.setBlockHarvestLevel(ghostSand, "shovel", 0);
-		MinecraftForge.setBlockHarvestLevel(reinExo, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(petrifiedWoodChest, "pickaxe", 0);
-		MinecraftForge.setBlockHarvestLevel(jadeBlock, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 0, "pickaxe", 1);
-		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 1, "pickaxe", 1);
-		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 2, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 3, "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(erebusOreExtra, 4, "pickaxe", 1);
+			plankSlabs[i].setHarvestLevel("axe", 0);
+		wallErebus.setHarvestLevel("pickaxe", 0);
+		umberOreBlock.setHarvestLevel("pickaxe", 0, 0);
+		umberOreBlock.setHarvestLevel("pickaxe", 1, 1);
+		umberOreBlock.setHarvestLevel("pickaxe", 2, 2);
+		umberOreBlock.setHarvestLevel("pickaxe", 1, 3);
+		umberOreBlock.setHarvestLevel("pickaxe", 2, 4);
+		umberOreBlock.setHarvestLevel("pickaxe", 2, 5);
+		umberOreBlock.setHarvestLevel("pickaxe", 2, 6);
+		umberOreBlock.setHarvestLevel("pickaxe", 2, 8);
+		quickSand.setHarvestLevel("shovel", 2);
+		ghostSand.setHarvestLevel("shovel", 0);
+		reinExo.setHarvestLevel("pickaxe", 2);
+		petrifiedWoodChest.setHarvestLevel("pickaxe", 0);
+		jadeBlock.setHarvestLevel("pickaxe", 2);
+		erebusOreExtra.setHarvestLevel("pickaxe", 1, 0);
+		erebusOreExtra.setHarvestLevel("pickaxe", 1, 1);
+		erebusOreExtra.setHarvestLevel("pickaxe", 2, 2);
+		erebusOreExtra.setHarvestLevel("pickaxe", 2, 3);
+		erebusOreExtra.setHarvestLevel("pickaxe", 1, 4);
 
-		Block.setBurnProperties(logErebusGroup1.blockID, 5, 5);
-		Block.setBurnProperties(logErebusGroup2.blockID, 5, 5);
-		Block.setBurnProperties(logErebusGroup3.blockID, 5, 5);
-		Block.setBurnProperties(planksErebus.blockID, 5, 20);
-		Block.setBurnProperties(leavesErebus.blockID, 30, 60);
-		Block.setBurnProperties(blockWitherWeb.blockID, 20, 50);
-		Block.setBurnProperties(erebusGrass.blockID, 60, 100);
-		Block.setBurnProperties(fern.blockID, 60, 100);
-		Block.setBurnProperties(fiddlehead.blockID, 60, 100);
-		Block.setBurnProperties(thorns.blockID, 15, 100);
+		Blocks.fire.setFireInfo(logErebusGroup1, 5, 5);
+		Blocks.fire.setFireInfo(logErebusGroup2, 5, 5);
+		Blocks.fire.setFireInfo(logErebusGroup3, 5, 5);
+		Blocks.fire.setFireInfo(planksErebus, 5, 20);
+		Blocks.fire.setFireInfo(leavesErebus, 30, 60);
+		Blocks.fire.setFireInfo(blockWitherWeb, 20, 50);
+		Blocks.fire.setFireInfo(erebusGrass, 60, 100);
+		Blocks.fire.setFireInfo(fern, 60, 100);
+		Blocks.fire.setFireInfo(fiddlehead, 60, 100);
+		Blocks.fire.setFireInfo(thorns, 15, 100);
 	}
 
 	private static void registerFluids() {

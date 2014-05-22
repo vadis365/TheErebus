@@ -1,8 +1,8 @@
 package erebus.world.biomes;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.entity.EntityBeetle;
@@ -48,8 +48,8 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,8,1,2));
 
-		topBlock = (byte)Block.grass.blockID;
-		fillerBlock = (byte)Block.dirt.blockID;
+		topBlock = Blocks.grass;
+		fillerBlock = Blocks.dirt;
 	}
 
 	@Override
@@ -58,8 +58,8 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 	}
 	
 	@Override
-	public byte placeCaveBlock(byte blockID, int x, int y, int z, Random rand){
-		return blockID == (byte)ModBlocks.umberstone.blockID || blockID == topBlock || blockID == fillerBlock || blockID == Block.sandStone.blockID ? (y < 24 ? (byte)Block.waterMoving.blockID : 0) : blockID;
+	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand){
+		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? (y < 24 ? Blocks.flowing_water : Blocks.air) : block;
 	}
 	
 	@Override
