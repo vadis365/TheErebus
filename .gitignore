@@ -8,3 +8,5 @@ Thumbs.db
 .gradle
 config/
 logs/
+eclipse/
+gradlew.bat
