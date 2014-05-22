@@ -9,7 +9,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
@@ -287,7 +287,7 @@ public class EntityDragonfly extends EntityMob {
 		if (rand.nextInt(5) == 0)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1 + looting, DATA.compoundEyes.ordinal()), 0.0F);
 		if (getSkin() == 0)
-			entityDropItem(new ItemStack(Item.enderPearl, rand.nextInt(1) + 1 + looting), 0.0F);	
+			entityDropItem(new ItemStack(Items.ender_pearl, rand.nextInt(1) + 1 + looting), 0.0F);	
 	}
 
 	@Override

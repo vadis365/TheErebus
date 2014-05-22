@@ -1,12 +1,13 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -50,15 +51,15 @@ public class EntityFireAntSoldier extends EntityMob {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(Item.magmaCream.itemID, rand.nextInt(1) + 1 + looting, 0), 0.0F);
+		entityDropItem(new ItemStack(Items.magma_cream, rand.nextInt(1) + 1 + looting, 0), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(new ItemStack(Item.blazePowder.itemID, rand.nextInt(1) + 1 + looting, 0), 0.0F);
+			entityDropItem(new ItemStack(Items.blaze_powder, rand.nextInt(1) + 1 + looting, 0), 0.0F);
 		}
 
 	public boolean isClimbing() {

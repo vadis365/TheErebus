@@ -2,12 +2,14 @@ package erebus.entity;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -52,19 +54,19 @@ public class EntityFireAnt extends EntityMob {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return Item.magmaCream.itemID;
+	protected Item getDropItem() {
+		return Items.magma_cream;
 	}
 
 	@Override
 	protected void dropRareDrop(int fortune) {
 		for (int i = 0; i < 1 + new Random().nextInt(1 + fortune); i++)
-			dropItem(Item.magmaCream.itemID, 1);
+			dropItem(Items.magma_cream, 1);
 	}
 
 	public boolean isClimbing() {

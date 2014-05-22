@@ -9,21 +9,17 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
 
-public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditionalSpawnData {
+public class EntityChameleonTick extends EntityMobBlock {
 
-	public int blockID, blockMeta;
+	public Block blockType;
+	public int blockMeta;
 	public int animation;
 	public boolean active = false;
 	private final EntityAINearestAttackableTarget aiAttackTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
@@ -32,14 +28,14 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 	public EntityChameleonTick(World world) {
 		super(world);
 		setSize(1.0F, 1.0F);
-		setBlock(Block.grass.blockID, 0);
+		setBlock(Blocks.grass, 0);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 	}
 
-	public void setBlock(int blockID, int blockMeta) {
-		this.blockID = blockID;
+	public void setBlock(Block blockType, int blockMeta) {
+		this.blockType = blockType;
 		this.blockMeta = blockMeta;
 	}
 
@@ -88,7 +84,7 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
 */
@@ -100,11 +96,11 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		int newBlockID = worldObj.getBlockId(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
+		Block newblockType = worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
 		int newBlockMeta = worldObj.getBlockMetadata(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
 		
-		if (onGround && newBlockID != 0 && newBlockID != blockID && worldObj.doesBlockHaveSolidTopSurface(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ))) {
-			blockID = newBlockID;
+		if (onGround && newblockType != null && newblockType != blockType && World.doesBlockHaveSolidTopSurface(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ))) {
+			blockType = newblockType;
 			blockMeta = newBlockMeta;
 		}
 		
@@ -146,7 +142,7 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 		int y = MathHelper.floor_double(posY) - 1;
 		int z = MathHelper.floor_double(posZ);
 		
-		if (worldObj.getBlockId(x, y, z) == 0)
+		if (worldObj.getBlock(x, y, z) == null)
 			posY -= 1;
 	}
 	
@@ -178,31 +174,5 @@ public class EntityChameleonTick extends EntityMobBlock implements IEntityAdditi
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		return super.attackEntityAsMob(entity);
-	}
-
-	@Override
-	public void writeEntityToNBT(NBTTagCompound data) {
-		super.writeEntityToNBT(data);
-		data.setInteger("blockID", blockID);
-		data.setInteger("blockMeta", blockMeta);
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound data) {
-		super.readEntityFromNBT(data);
-		blockID = data.getInteger("blockID");
-		blockMeta = data.getInteger("blockMeta");
-	}
-
-	@Override
-	public void writeSpawnData(ByteArrayDataOutput data) {
-		data.writeInt(blockID);
-		data.writeInt(blockMeta);
-	}
-
-	@Override
-	public void readSpawnData(ByteArrayDataInput data) {
-		blockID = data.readInt();
-		blockMeta = data.readInt();
 	}
 }

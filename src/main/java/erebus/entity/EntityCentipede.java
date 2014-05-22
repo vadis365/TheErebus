@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
@@ -61,11 +63,11 @@ public class EntityCentipede extends EntityMob {
 		switch (worldObj.difficultySetting) {
 		default:
 			return 2.0D;
-		case 1:
+		case EASY:
 			return 2.0D;
-		case 2:
+		case NORMAL:
 			return 2.0D;
-		case 3:
+		case HARD:
 			return 4.0D;
 		}
 	}
@@ -91,7 +93,7 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		worldObj.playSoundAtEntity(this, "erebus:CentipedeWalk", 0.15F, 1.0F);
 	}
 
@@ -120,14 +122,13 @@ public class EntityCentipede extends EntityMob {
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
 		if (player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY) {
-			byte var2 = 0;
-			if (worldObj.difficultySetting > 1)
-				if (worldObj.difficultySetting == 2)
-					var2 = 7;
-				else if (worldObj.difficultySetting == 3)
-					var2 = 15;
-			if (var2 > 0)
-				player.addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
+				byte duration = 0;
+			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				duration = 7;
+			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					duration = 15;
+			if (duration > 0)
+				player.addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
 		}
 	}
 }

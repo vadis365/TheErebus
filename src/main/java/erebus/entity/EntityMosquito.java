@@ -142,7 +142,7 @@ public class EntityMosquito extends EntityMob {
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 	}
 
 	@Override

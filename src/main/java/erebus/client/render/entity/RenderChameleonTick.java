@@ -1,6 +1,6 @@
 package erebus.client.render.entity;
 
-import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
@@ -17,13 +17,14 @@ import erebus.entity.EntityChameleonTick;
 
 @SideOnly(Side.CLIENT)
 public class RenderChameleonTick extends RenderLiving {
-
+	private final RenderBlocks blockRenderer = new RenderBlocks();
+	
 	public RenderChameleonTick(ModelChameleonTick model, float shadowsize) {
 		super(model, shadowsize);
 	}
 
 	public void renderChameleonTick(EntityChameleonTick entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		boolean alpha = Block.blocksList[entity.blockID].getRenderBlockPass() == 1;
+		boolean alpha = entity.blockType.getRenderBlockPass() == 1;
 
 		GL11.glPushMatrix();
 		if (alpha) {
@@ -34,21 +35,21 @@ public class RenderChameleonTick extends RenderLiving {
 		GL11.glTranslatef(0.0F, 0.5F, 0.0F);
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
-		renderBlocks.renderBlockAsItem(Block.blocksList[entity.blockID], entity.blockMeta, 1.0F);
+		blockRenderer.renderBlockAsItem(entity.blockType, entity.blockMeta, 1.0F);
 		if (alpha)
 			GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
-		super.doRenderLiving(entity, x, y, z, rotationYaw, partialTickTime);
+		super.doRender(entity, x, y, z, rotationYaw, partialTickTime);
 		}
-
-	@Override
-	public void doRenderLiving(EntityLiving entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderChameleonTick((EntityChameleonTick) entity, x, y, z, rotationYaw, partialTickTime);
-	}
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderChameleonTick((EntityChameleonTick) entity, x, y, z, rotationYaw, partialTickTime);
+	}
+	
+	@Override
+	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
+		super.doRender(entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
@@ -65,7 +66,7 @@ public class RenderChameleonTick extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityChameleonTick ChameleonTick = (EntityChameleonTick) entity;
-		String blockPath = Block.blocksList[ChameleonTick.blockID].getIcon(0, ChameleonTick.blockMeta).getIconName();
+		String blockPath = ChameleonTick.blockType.getIcon(0, ChameleonTick.blockMeta).getIconName();
 		String modName = "minecraft";
 		if (blockPath.contains(":")) {
 			modName = blockPath.split(":")[0];

@@ -72,7 +72,7 @@ public class EntitySolifugeSmall extends EntityMob implements IEntityAdditionalS
 	}
 
 	@Override
-	protected void playStepSound(int x, int y, int z, int blockID) {
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 

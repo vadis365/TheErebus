@@ -2,6 +2,7 @@ package erebus.entity;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -66,10 +67,10 @@ public class EntityCicada extends EntityCreature {
 		for (int p1 = n; p1 < o; p1++)
 			for (int q1 = p; q1 < q; q1++)
 				for (int n2 = n1; n2 < o1; n2++) {
-					int o2 = worldObj.getBlockId(p1, q1, n2);
-					if (o2 == 0)
+					Block o2 = worldObj.getBlock(p1, q1, n2);
+					if (o2 == null)
 						continue;
-					if (o2 == ModBlocks.logErebusGroup3.blockID)
+					if (o2 == ModBlocks.logErebusGroup3)
 						return true;
 				}
 		return false;
@@ -159,7 +160,7 @@ public class EntityCicada extends EntityCreature {
 	}
 
 	protected Entity findEnemyToAttack() {
-		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX + 0.5D, posY + 0.5D, posZ + 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(sonics * 0.2D, 0.5D, sonics * 0.2D));
+		List<?> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX + 0.5D, posY + 0.5D, posZ + 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(sonics * 0.2D, 0.5D, sonics * 0.2D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = (Entity) list.get(i);
 			if (entity != null)
