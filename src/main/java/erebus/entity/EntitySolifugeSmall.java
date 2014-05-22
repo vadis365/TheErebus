@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import io.netty.buffer.ByteBuf;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -9,18 +11,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntitySolifugeSmall extends EntityMob implements IEntityAdditionalSpawnData {
 
 	public final String[] potionName = new String[] { "Move Slowdown", "Dig Slowdown", "Harm", "Confusion", "Blindness", "Hunger", "Weakness", "Poison", "Wither" };
 	public final byte[] potionIds = new byte[] { 2, 4, 7, 9, 15, 17, 18, 19, 20 };
-	
+
 	public EntitySolifugeSmall(World world) {
 		super(world);
 		setSize(1.0F, 0.5F);
@@ -80,39 +79,39 @@ public class EntitySolifugeSmall extends EntityMob implements IEntityAdditionalS
 	public boolean isOnLadder() {
 		return isCollidedHorizontally;
 	}
-	
+
 	@Override
 	public void onUpdate() {
-		setCustomNameTag(""+potionName[getPotionEffect()]);
+		setCustomNameTag("" + potionName[getPotionEffect()]);
 		super.onUpdate();
 	}
-	
+
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
 		if (distance < 2.0F) {
 			super.attackEntity(entity, distance);
 			attackEntityAsMob(entity);
+		}
+		if (distance > 2.0F && distance < 6.0F && rand.nextInt(10) == 0)
+			if (onGround) {
+				double d0 = entity.posX - posX;
+				double d1 = entity.posZ - posZ;
+				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+				motionX = d0 / f2 * 0.5D * 1.900000011920929D + motionX * 0.70000000298023224D;
+				motionZ = d1 / f2 * 0.5D * 1.900000011920929D + motionZ * 0.70000000298023224D;
+				motionY = 0.5000000059604645D;
 			}
-			if (distance > 2.0F && distance < 6.0F && rand.nextInt(10) == 0)
-				if (onGround) {
-					double d0 = entity.posX - posX;
-					double d1 = entity.posZ - posZ;
-					float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-					motionX = d0 / f2 * 0.5D * 1.900000011920929D + motionX * 0.70000000298023224D;
-					motionZ = d1 / f2 * 0.5D * 1.900000011920929D + motionZ * 0.70000000298023224D;
-					motionY = 0.5000000059604645D;
-				}
 	}
-	
+
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLivingBase) {
 				byte duration = 0;
-				if (worldObj.difficultySetting > 1)
-					if (worldObj.difficultySetting == 2)
+				if (worldObj.difficultySetting.ordinal() > 1)
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 						duration = 5;
-					else if (worldObj.difficultySetting == 3)
+					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 						duration = 10;
 				if (duration > 0)
 					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.potionTypes[potionIds[getPotionEffect()]].id, duration * 20, 0));
@@ -121,7 +120,7 @@ public class EntitySolifugeSmall extends EntityMob implements IEntityAdditionalS
 		} else
 			return false;
 	}
-	
+
 	public byte getPotionEffect() {
 		return dataWatcher.getWatchableObjectByte(25);
 	}
@@ -144,12 +143,12 @@ public class EntitySolifugeSmall extends EntityMob implements IEntityAdditionalS
 	}
 
 	@Override
-	public void writeSpawnData(ByteArrayDataOutput data) {
+	public void writeSpawnData(ByteBuf data) {
 		data.writeByte(getPotionEffect());
 	}
 
 	@Override
-	public void readSpawnData(ByteArrayDataInput data) {
+	public void readSpawnData(ByteBuf data) {
 		setPotionEffect(data.readByte());
 	}
 }

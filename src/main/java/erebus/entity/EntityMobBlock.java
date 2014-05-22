@@ -10,10 +10,12 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 public abstract class EntityMobBlock extends EntityCreature implements IMob {
+
 	public EntityMobBlock(World world) {
 		super(world);
 		experienceValue = 5;
@@ -42,7 +44,7 @@ public abstract class EntityMobBlock extends EntityCreature implements IMob {
 	public void onUpdate() {
 		super.onUpdate();
 
-		if (!worldObj.isRemote && worldObj.difficultySetting == 0)
+		if (!worldObj.isRemote && worldObj.difficultySetting == EnumDifficulty.EASY)
 			setDead();
 	}
 
@@ -160,7 +162,7 @@ public abstract class EntityMobBlock extends EntityCreature implements IMob {
 	 */
 	@Override
 	public boolean getCanSpawnHere() {
-		return worldObj.difficultySetting > 0 && isValidLightLevel() && super.getCanSpawnHere();
+		return worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal() && isValidLightLevel() && super.getCanSpawnHere();
 	}
 
 	@Override

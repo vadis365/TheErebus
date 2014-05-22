@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -43,11 +44,11 @@ public class EntityPrayingMantis extends EntityMob {
 	public boolean isAIEnabled() {
 		return true;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {

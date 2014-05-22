@@ -7,7 +7,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
@@ -207,15 +207,15 @@ public class EntityMoth extends EntityAmbientCreature {
 			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
 		}
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 5;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 5;
+	}
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (rand.nextInt(5) == 0)
-			entityDropItem(new ItemStack(Item.glowstone, 1, 0), 0.0F);
+			entityDropItem(new ItemStack(Items.glowstone_dust, 1, 0), 0.0F);
 	}
 }

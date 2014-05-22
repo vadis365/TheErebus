@@ -16,11 +16,11 @@ public class EntityAIExplodeAttackOnCollide extends EntityAIBase {
 	double speedTowardsTarget;
 	boolean longMemory;
 	PathEntity entityPathEntity;
-	Class classTarget;
+	Class<?> classTarget;
 	private int field_75445_i;
 	private int failedPathFindingPenalty;
 
-	public EntityAIExplodeAttackOnCollide(EntityCreature entityCreature, Class par2Class, double par3, boolean par5) {
+	public EntityAIExplodeAttackOnCollide(EntityCreature entityCreature, Class<?> par2Class, double par3, boolean par5) {
 		this(entityCreature, par3, par5);
 		classTarget = par2Class;
 	}

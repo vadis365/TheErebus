@@ -81,10 +81,11 @@ public class EntityMucusBombPrimed extends Entity {
 			worldObj.spawnParticle("smoke", posX, posY + 0.5D, posZ, 0.0D, 0.0D, 0.0D);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void explode() {
-		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX - 0.5D, posY - 0.5D, posZ - 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(4D, 4D, 4D));
+		List<Entity> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX - 0.5D, posY - 0.5D, posZ - 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(4D, 4D, 4D));
 		for (int i = 0; i < list.size(); i++) {
-			Entity entity = (Entity) list.get(i);
+			Entity entity = list.get(i);
 			if (entity != null)
 				if (entity instanceof EntityLivingBase) {
 					entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 1D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 2.0D);

@@ -1,12 +1,13 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpiderEffectsGroupData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -118,15 +119,15 @@ public class EntityScytodes extends EntityMob {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return Item.silk.itemID;
+	protected Item getDropItem() {
+		return Items.string;
 	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		super.dropFewItems(recentlyHit, looting);
 		if (recentlyHit && (rand.nextInt(3) == 0 || rand.nextInt(1 + looting) > 0))
-			dropItem(Item.spiderEye.itemID, 1);
+			dropItem(Items.spider_eye, 1);
 	}
 
 	@Override
@@ -142,11 +143,11 @@ public class EntityScytodes extends EntityMob {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 3;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 3;
+	}
 
 	@Override
 	public boolean isPotionApplicable(PotionEffect potionEffect) {
@@ -169,7 +170,7 @@ public class EntityScytodes extends EntityMob {
 	}
 
 	@Override
-	public EntityLivingData onSpawnWithEgg(EntityLivingData entityLivingData) {
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		Object entityLivingData1 = super.onSpawnWithEgg(entityLivingData);
 
 		if (worldObj.rand.nextInt(100) == 0) {

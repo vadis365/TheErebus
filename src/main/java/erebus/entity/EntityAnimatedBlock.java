@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -12,15 +13,13 @@ import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,17 +31,18 @@ import erebus.core.proxy.CommonProxy;
 
 public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditionalSpawnData {
 
-	public int blockID, blockMeta;
+	public Block blockID;
+	public int blockMeta;
 	private int lastX = 0, lastY = 0, lastZ = 0;
 	protected final EntityAIWander aiWander = new EntityAIWander(this, 0.5D);
 	protected final EntityAINearestAttackableTarget aiAttackNearestTarget = new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true);
 	protected final EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityMob.class, 0.5D, false);
-	protected final EntityAITempt aiTempt = new EntityAITempt(this, 1.0D, ModItems.wandOfAnimation.itemID, false);
+	protected final EntityAITempt aiTempt = new EntityAITempt(this, 1.0D, ModItems.wandOfAnimation, false);
 
 	public EntityAnimatedBlock(World world) {
 		super(world);
 		setSize(1.0F, 1.5F);
-		setBlock(Block.stone.blockID, 0);
+		setBlock(Blocks.stone, 0);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(2, aiAttackOnCollide);
 		tasks.addTask(3, aiWander);
@@ -51,7 +51,7 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 		experienceValue = 0;
 	}
 
-	public void setBlock(int blockID, int blockMeta) {
+	public void setBlock(Block blockID, int blockMeta) {
 		this.blockID = blockID;
 		this.blockMeta = blockMeta;
 	}
@@ -108,15 +108,15 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return 0;
+	protected Item getDropItem() {
+		return null;
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if (!worldObj.isRemote && isDead)
-			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(Block.blocksList[blockID], 1, blockMeta));
+			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(blockID, 1, blockMeta));
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 
 	@SideOnly(Side.CLIENT)
 	private void lightUp(World world, int x, int y, int z) {
-		world.setLightValue(EnumSkyBlock.Block, x, y, z, Block.lightValue[blockID]);
+		world.setLightValue(EnumSkyBlock.Block, x, y, z, blockID.getLightValue());
 		for (int i = -1; i < 2; i++)
 			for (int j = -1; j < 2; j++)
 				for (int k = -1; k < 2; k++)
@@ -168,12 +168,12 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is.itemID == ModItems.wandOfAnimation.itemID) {
+		if (!worldObj.isRemote && is != null && is.getItem() == ModItems.wandOfAnimation) {
 			setDead();
 			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), blockID, blockMeta, 3);
 			worldObj.playSoundEffect(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), "erebus:altaroffering", 0.2F, 1.0F);
 			return true;
-		} else if (blockID == ModBlocks.petrifiedCraftingTable.blockID && is == null) {
+		} else if (blockID == ModBlocks.petrifiedCraftingTable && is == null) {
 			player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CRAFT, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
 			return true;
 		} else
@@ -198,34 +198,34 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	}
 
 	public void setCanBeTempted() {
-		if (blockID == ModBlocks.petrifiedCraftingTable.blockID)
+		if (blockID == ModBlocks.petrifiedCraftingTable)
 			tasks.addTask(1, aiTempt);
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound data) {
 		super.writeEntityToNBT(data);
-		data.setInteger("blockID", blockID);
+		data.setInteger("blockID", Block.getIdFromBlock(blockID));
 		data.setInteger("blockMeta", blockMeta);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound data) {
 		super.readEntityFromNBT(data);
-		blockID = data.getInteger("blockID");
+		blockID = Block.getBlockById(data.getInteger("blockID"));
 		blockMeta = data.getInteger("blockMeta");
 		setCanBeTempted();
 	}
 
 	@Override
-	public void writeSpawnData(ByteArrayDataOutput data) {
-		data.writeInt(blockID);
-		data.writeInt(blockMeta);
+	public void writeSpawnData(ByteBuf buffer) {
+		buffer.writeInt(Block.getIdFromBlock(blockID));
+		buffer.writeInt(blockMeta);
 	}
 
 	@Override
-	public void readSpawnData(ByteArrayDataInput data) {
-		blockID = data.readInt();
-		blockMeta = data.readInt();
+	public void readSpawnData(ByteBuf buffer) {
+		blockID = Block.getBlockById(buffer.readInt());
+		blockMeta = buffer.readInt();
 	}
 }

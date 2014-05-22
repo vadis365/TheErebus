@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -8,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
@@ -63,11 +65,11 @@ public class EntityScorpion extends EntityMob {
 	public boolean getCanSpawnHere() {
 		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -136,10 +138,10 @@ public class EntityScorpion extends EntityMob {
 			player.setSneaking(false);
 		byte var2 = 0;
 		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && captured())
-			if (worldObj.difficultySetting > 1)
-				if (worldObj.difficultySetting == 2)
+			if (worldObj.difficultySetting.ordinal() > 1)
+				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 					var2 = 7;
-				else if (worldObj.difficultySetting == 3)
+				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 					var2 = 15;
 		if (var2 > 0 && rand.nextInt(200) == 0) {
 			player.addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 10, 0));
@@ -163,10 +165,5 @@ public class EntityScorpion extends EntityMob {
 		super.attackEntity(entity, par2);
 		if (par2 < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
 			attackEntityAsMob(entity);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		return super.attackEntityAsMob(entity);
 	}
 }

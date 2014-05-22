@@ -12,7 +12,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
@@ -36,7 +37,7 @@ public class EntityMosquito extends EntityMob {
 	public float suckFloat;
 	public boolean firstTickCheck;
 	public int hitInterval = 30;
-	Class[] preys = { EntityPig.class, EntityCow.class, EntityBeetleLarva.class };
+	Class<?>[] preys = { EntityPig.class, EntityCow.class, EntityBeetleLarva.class };
 
 	public EntityMosquito(World world) {
 		super(world);
@@ -128,7 +129,7 @@ public class EntityMosquito extends EntityMob {
 		int j = MathHelper.floor_double(posX);
 		int k = MathHelper.floor_double(posY);
 		int l = MathHelper.floor_double(posZ);
-		int m = worldObj.getBlockId(j, k - 1, l);
+		Block m = worldObj.getBlock(j, k - 1, l);
 		if (ridingEntity != null && ridingEntity instanceof EntityLivingBase && getBloodConsumed() < maxBloodLevel) {
 			drainage++;
 			if (drainage >= hitInterval) {
@@ -137,7 +138,7 @@ public class EntityMosquito extends EntityMob {
 				setBloodConsumed(getBloodConsumed() + 1);
 			}
 		}
-		if (m == Block.waterStill.blockID && rand.nextInt(10) == 0 && (motionX > 0.05D || motionZ > 0.05D || motionX < -0.05D || motionZ < -0.05D))
+		if (m == Blocks.water && rand.nextInt(10) == 0 && (motionX > 0.05D || motionZ > 0.05D || motionX < -0.05D || motionZ < -0.05D))
 			motionY = 0.25D;
 	}
 
@@ -206,13 +207,14 @@ public class EntityMosquito extends EntityMob {
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		int i = 1 + getBloodConsumed();
-		dropItem(Item.netherStalkSeeds.itemID, i);
+		dropItem(Items.nether_wart, i);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Entity findEnemyToAttack() {
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(10D, 10D, 10D));
+		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(10D, 10D, 10D));
 		for (int i = 0; i < list.size(); i++) {
-			Entity entity = (Entity) list.get(i);
+			Entity entity = list.get(i);
 			if (entity != null) {
 				if (!(entity instanceof EntityCreature))
 					continue;
@@ -306,17 +308,17 @@ public class EntityMosquito extends EntityMob {
 		for (int p1 = n; p1 < o; p1++)
 			for (int q1 = p; q1 < q; q1++)
 				for (int n2 = n1; n2 < o1; n2++) {
-					int o2 = worldObj.getBlockId(p1, q1, n2);
-					if (o2 == 0)
+					Block o2 = worldObj.getBlock(p1, q1, n2);
+					if (o2.isAir(worldObj, p1, q1, n2))
 						continue;
-					if (o2 == Block.waterStill.blockID)
+					if (o2 == Blocks.water)
 						return true;
 				}
 		return false;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 }

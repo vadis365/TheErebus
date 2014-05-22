@@ -1,17 +1,18 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpiderEffectsGroupData;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
@@ -42,11 +43,11 @@ public class EntityTarantula extends EntityMob {
 	public boolean getCanSpawnHere() {
 		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public int getTotalArmorValue() {
@@ -138,10 +139,10 @@ public class EntityTarantula extends EntityMob {
 			if (entity instanceof EntityLiving) {
 				byte duration = 0;
 
-				if (worldObj.difficultySetting > 1 && rand.nextInt(19) == 0)
-					if (worldObj.difficultySetting == 2)
+				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal() && rand.nextInt(19) == 0)
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 						duration = 5;
-					else if (worldObj.difficultySetting == 3)
+					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 						duration = 10;
 
 				if (duration > 0)
@@ -158,34 +159,34 @@ public class EntityTarantula extends EntityMob {
 		int chance20x60x20 = rand.nextInt(4);
 		int legDrop = 0;
 		switch (chance20x60x20) {
-		case 0:
-			legDrop = 1;
-			break;
-		case 1:
-		case 2:
-		case 3:
-			legDrop = 2;
-			break;
-		case 4:
-			legDrop = 3;
-			break;
+			case 0:
+				legDrop = 1;
+				break;
+			case 1:
+			case 2:
+			case 3:
+				legDrop = 2;
+				break;
+			case 4:
+				legDrop = 3;
+				break;
 		}
 		if (isBurning())
 			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 5), 0.0F);
 		else
 			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 4), 0.0F);
-		dropItem(Item.spiderEye.itemID, chanceFiftyFifty + looting);
+		dropItem(Items.spider_eye, chanceFiftyFifty + looting);
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override
-	public EntityLivingData onSpawnWithEgg(EntityLivingData entityLivingData) {
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		Object entityLivingData1 = super.onSpawnWithEgg(entityLivingData);
 
 		if (worldObj.rand.nextInt(100) == 0) {
 			EntityMoneySpider entityspidermoney = new EntityMoneySpider(worldObj);
 			entityspidermoney.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
-			entityspidermoney.onSpawnWithEgg((EntityLivingData) null);
+			entityspidermoney.onSpawnWithEgg((IEntityLivingData) null);
 			worldObj.spawnEntityInWorld(entityspidermoney);
 			entityspidermoney.mountEntity(this);
 		}

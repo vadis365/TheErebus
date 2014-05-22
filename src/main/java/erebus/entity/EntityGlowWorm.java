@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -40,20 +41,19 @@ public class EntityGlowWorm extends EntityCreature {
 	public boolean isAIEnabled() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = this.getBrightness(1.0F);
-		if (light >= 0F) {
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(this.boundingBox);
-	    }
-	    return super.getCanSpawnHere();
+		float light = getBrightness(1.0F);
+		if (light >= 0F)
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		return super.getCanSpawnHere();
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	protected boolean canDespawn() {

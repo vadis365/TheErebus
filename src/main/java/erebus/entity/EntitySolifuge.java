@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -11,7 +12,6 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ItemErebusMaterial.DATA;
@@ -54,11 +54,11 @@ public class EntitySolifuge extends EntityMob {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	protected void fall(float par1) {
@@ -102,22 +102,21 @@ public class EntitySolifuge extends EntityMob {
 	public boolean isOnLadder() {
 		return isCollidedHorizontally;
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
 	}
-	
+
 	@Override
 	public void setDead() {
 		super.setDead();
-		if (!worldObj.isRemote) {
+		if (!worldObj.isRemote)
 			for (int a = 0; a < 4; a++) {
 				EntitySolifugeSmall entitySolifugeSmall = new EntitySolifugeSmall(worldObj);
-				entitySolifugeSmall.setPosition(posX + (rand.nextFloat()*0.03D -rand.nextFloat()*0.03D), posY + 1, posZ +(rand.nextFloat()*0.03D-rand.nextFloat()*0.03D));
-				entitySolifugeSmall.setPotionEffect(Byte.valueOf((byte)rand.nextInt(9)));
+				entitySolifugeSmall.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
+				entitySolifugeSmall.setPotionEffect(Byte.valueOf((byte) rand.nextInt(9)));
 				worldObj.spawnEntityInWorld(entitySolifugeSmall);
 			}
-		}
-	}	
+	}
 }

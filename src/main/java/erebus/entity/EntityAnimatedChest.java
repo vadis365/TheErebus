@@ -26,7 +26,7 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 		tasks.removeTask(aiWander);
 		tasks.removeTask(aiAttackOnCollide);
 		tasks.removeTask(aiAttackNearestTarget);
-		tasks.addTask(1, new EntityAITempt(this, 1.0D, ModItems.wandOfAnimation.itemID, false));
+		tasks.addTask(1, new EntityAITempt(this, 1.0D, ModItems.wandOfAnimation, false));
 	}
 
 	@Override
@@ -81,11 +81,11 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 		if (worldObj.isRemote)
 			return true;
 		ItemStack is = player.inventory.getCurrentItem();
-		if (is != null && is.itemID == ModItems.wandOfAnimation.itemID) {
+		if (is != null && is.getItem() == ModItems.wandOfAnimation) {
 			setDead();
 			worldObj.playSoundEffect(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), "erebus:altaroffering", 0.2F, 1.0F);
 			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), blockID, blockMeta, 3);
-			TileEntityChest chest = (TileEntityChest) worldObj.getBlockTileEntity(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+			TileEntityChest chest = Utils.getTileEntity(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), TileEntityChest.class);
 			for (int i = 0; i < chest.getSizeInventory(); i++)
 				chest.setInventorySlotContents(i, inventory[i]);
 			return true;
@@ -118,10 +118,10 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound data) {
 		super.readEntityFromNBT(data);
-		NBTTagList nbttaglist = data.getTagList("Items");
+		NBTTagList nbttaglist = data.getTagList("Items", 10);
 		inventory = new ItemStack[27];
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 			if (b0 >= 0 && b0 < inventory.length)
 				inventory[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);

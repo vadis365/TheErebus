@@ -5,12 +5,13 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpiderEffectsGroupData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -43,23 +44,23 @@ public class EntityLavaWebSpider extends EntityMob {
 		if (worldObj.isRemote && worldObj.getWorldTime() % 5 == 0)
 			lavaParticles(worldObj, posX, posY + 1.3D, posZ, rand);
 	}
-	
+
 	@Override
-    public void onLivingUpdate() {
+	public void onLivingUpdate() {
 		if (rand.nextInt(50) == 0) {
-			int x = MathHelper.floor_double(this.posX);
-			int y = MathHelper.floor_double(this.posY);
-			int z = MathHelper.floor_double(this.posZ);
-			
+			int x = MathHelper.floor_double(posX);
+			int y = MathHelper.floor_double(posY);
+			int z = MathHelper.floor_double(posZ);
+
 			double a = Math.toRadians(renderYawOffset);
 			double offSetX = -Math.sin(a) * -2D;
 			double offSetZ = Math.cos(a) * -2D;
-             
-			if (this.worldObj.getBlockId(x, y, z) == 0 && Block.fire.canPlaceBlockAt(this.worldObj, x + MathHelper.floor_double(offSetX), y, z + MathHelper.floor_double(offSetZ)))
-				this.worldObj.setBlock(x + MathHelper.floor_double(offSetX), y, z + MathHelper.floor_double(offSetZ), Block.fire.blockID);
-         }
-    	super.onLivingUpdate();
-    }
+
+			if (worldObj.isAirBlock(x, y, z) && Blocks.fire.canPlaceBlockAt(worldObj, x + MathHelper.floor_double(offSetX), y, z + MathHelper.floor_double(offSetZ)))
+				worldObj.setBlock(x + MathHelper.floor_double(offSetX), y, z + MathHelper.floor_double(offSetZ), Blocks.fire);
+		}
+		super.onLivingUpdate();
+	}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -142,15 +143,15 @@ public class EntityLavaWebSpider extends EntityMob {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return Item.fireballCharge.itemID;
+	protected Item getDropItem() {
+		return Items.fire_charge;
 	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		super.dropFewItems(recentlyHit, looting);
 		if (recentlyHit && (rand.nextInt(3) == 0 || rand.nextInt(1 + looting) > 0))
-			dropItem(Item.spiderEye.itemID, 1);
+			dropItem(Items.spider_eye, 1);
 	}
 
 	@Override
@@ -166,15 +167,15 @@ public class EntityLavaWebSpider extends EntityMob {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 1;
-    }
-	
+	public int getMaxSpawnedInChunk() {
+		return 1;
+	}
+
 	@Override
 	public boolean getCanSpawnHere() {
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && worldObj.isMaterialInBB(boundingBox, Material.lava);
+		return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && worldObj.isMaterialInBB(boundingBox, Material.lava);
 	}
 
 	@Override
@@ -198,13 +199,13 @@ public class EntityLavaWebSpider extends EntityMob {
 	}
 
 	@Override
-	public EntityLivingData onSpawnWithEgg(EntityLivingData entityLivingData) {
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		Object entityLivingData1 = super.onSpawnWithEgg(entityLivingData);
 
 		if (worldObj.rand.nextInt(100) == 0) {
 			EntityMoneySpider entityspidermoney = new EntityMoneySpider(worldObj);
 			entityspidermoney.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
-			entityspidermoney.onSpawnWithEgg((EntityLivingData) null);
+			entityspidermoney.onSpawnWithEgg((IEntityLivingData) null);
 			worldObj.spawnEntityInWorld(entityspidermoney);
 			entityspidermoney.mountEntity(this);
 		}
@@ -218,9 +219,9 @@ public class EntityLavaWebSpider extends EntityMob {
 			if (i > 0 && Potion.potionTypes[i] != null)
 				addPotionEffect(new PotionEffect(i, Integer.MAX_VALUE));
 		}
-		return (EntityLivingData) entityLivingData1;
+		return (IEntityLivingData) entityLivingData1;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public void lavaParticles(World world, double x, double y, double z, Random rand) {
 		Erebus.proxy.spawnCustomParticle("lava", worldObj, x, y, z, 0F, 0F, 0F);

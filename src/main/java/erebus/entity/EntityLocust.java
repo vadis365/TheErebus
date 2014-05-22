@@ -8,6 +8,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
@@ -108,10 +109,10 @@ public class EntityLocust extends EntityMob {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLiving) {
 				byte var2 = 0;
-				if (worldObj.difficultySetting > 1)
-					if (worldObj.difficultySetting == 2)
+				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal())
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 						var2 = 7;
-					else if (worldObj.difficultySetting == 3)
+					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 						var2 = 15;
 				if (var2 > 0)
 					((EntityLiving) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, var2 * 20, 0));

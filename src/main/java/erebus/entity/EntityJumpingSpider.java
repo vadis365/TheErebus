@@ -2,13 +2,15 @@ package erebus.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityLivingData;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
@@ -50,10 +52,10 @@ public class EntityJumpingSpider extends EntitySpider {
 			if (par1Entity instanceof EntityLivingBase) {
 				byte b0 = 0;
 
-				if (worldObj.difficultySetting > 1)
-					if (worldObj.difficultySetting == 2)
+				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal())
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 						b0 = 7;
-					else if (worldObj.difficultySetting == 3)
+					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 						b0 = 15;
 
 				if (b0 > 0)
@@ -66,8 +68,8 @@ public class EntityJumpingSpider extends EntitySpider {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return 0;
+	protected Item getDropItem() {
+		return null;
 	}
 
 	@Override
@@ -76,12 +78,12 @@ public class EntityJumpingSpider extends EntitySpider {
 	}
 
 	@Override
-	public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData) {
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
 		return par1EntityLivingData;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 }

@@ -24,7 +24,7 @@ import erebus.item.ItemErebusMaterial.DATA;
 public class EntityBlackWidow extends EntityMob {
 
 	private int shouldDo;
-	Class[] preys = { EntityFly.class, EntityBotFly.class, EntityMidgeSwarm.class };
+	Class<?>[] preys = { EntityFly.class, EntityBotFly.class, EntityMidgeSwarm.class };
 
 	public EntityBlackWidow(World world) {
 		super(world);
@@ -59,10 +59,11 @@ public class EntityBlackWidow extends EntityMob {
 		return var1;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Entity findEnemyToAttack() {
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(8D, 10D, 8D));
+		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(8D, 10D, 8D));
 		for (int i = 0; i < list.size(); i++) {
-			Entity entity = (Entity) list.get(i);
+			Entity entity = list.get(i);
 			if (entity != null) {
 				if (!(entity instanceof EntityLivingBase))
 					continue;
@@ -107,11 +108,11 @@ public class EntityBlackWidow extends EntityMob {
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	protected void fall(float distance) {
@@ -157,7 +158,7 @@ public class EntityBlackWidow extends EntityMob {
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
-    }
+	}
 
 	@Override
 	protected Item getDropItem() {
@@ -219,10 +220,10 @@ public class EntityBlackWidow extends EntityMob {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLivingBase) {
 				byte duration = 0;
-				if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 					duration = 7;
-				else if (this.worldObj.difficultySetting == EnumDifficulty.HARD)
-						duration = 15;
+				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					duration = 15;
 				if (duration > 0) {
 					int chanceFiftyFifty = rand.nextInt(2);
 					if (chanceFiftyFifty == 1)

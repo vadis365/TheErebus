@@ -1,8 +1,9 @@
 package erebus.entity;
 
-import net.minecraft.entity.EntityLivingData;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
@@ -22,8 +23,8 @@ public class EntityMoneySpider extends EntitySpider {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return Item.goldNugget.itemID;
+	protected Item getDropItem() {
+		return Items.gold_nugget;
 	}
 
 	@Override
@@ -31,11 +32,11 @@ public class EntityMoneySpider extends EntitySpider {
 		super.dropFewItems(par1, par2);
 
 		if (par1 && (rand.nextInt(10) == 0 || rand.nextInt(1 + par2) > 0))
-			dropItem(Item.ingotGold.itemID, 1);
+			dropItem(Items.gold_ingot, 1);
 	}
 
 	@Override
-	public EntityLivingData onSpawnWithEgg(EntityLivingData entityLivingData) {
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		return entityLivingData;
 	}
 }

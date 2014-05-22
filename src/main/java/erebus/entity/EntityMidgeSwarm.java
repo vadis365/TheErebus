@@ -13,6 +13,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
@@ -32,7 +33,7 @@ public class EntityMidgeSwarm extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		}
+	}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -86,8 +87,8 @@ public class EntityMidgeSwarm extends EntityMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-			wingFloat = mathWings.swing(1.5F, 0.2F);
-			motionY *= 0.6000000238418579D;
+		wingFloat = mathWings.swing(1.5F, 0.2F);
+		motionY *= 0.6000000238418579D;
 	}
 
 	@Override
@@ -115,23 +116,23 @@ public class EntityMidgeSwarm extends EntityMob {
 	}
 
 	protected void flyAbout() {
-			if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
-				currentFlightTarget = null;
+		if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
+			currentFlightTarget = null;
 
-			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
-				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
+		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
+			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
 
-			double var1 = currentFlightTarget.posX + 0.5D - posX;
-			double var3 = currentFlightTarget.posY + 0.1D - posY;
-			double var5 = currentFlightTarget.posZ + 0.5D - posZ;
-			motionX += (Math.signum(var1) * 0.5D - motionX) * 0.10000000149011612D;
-			motionY += (Math.signum(var3) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-			motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.10000000149011612D;
-			float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
-			moveForward = 0.5F;
-			rotationYaw += var8;
-		}
+		double var1 = currentFlightTarget.posX + 0.5D - posX;
+		double var3 = currentFlightTarget.posY + 0.1D - posY;
+		double var5 = currentFlightTarget.posZ + 0.5D - posZ;
+		motionX += (Math.signum(var1) * 0.5D - motionX) * 0.10000000149011612D;
+		motionY += (Math.signum(var3) * 0.699999988079071D - motionY) * 0.10000000149011612D;
+		motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.10000000149011612D;
+		float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+		float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
+		moveForward = 0.5F;
+		rotationYaw += var8;
+	}
 
 	@Override
 	protected boolean canTriggerWalking() {
@@ -158,7 +159,6 @@ public class EntityMidgeSwarm extends EntityMob {
 		return super.attackEntityFrom(source, amount);
 	}
 
-
 	@Override
 	public boolean getCanSpawnHere() {
 		int var1 = MathHelper.floor_double(boundingBox.minY);
@@ -181,11 +181,11 @@ public class EntityMidgeSwarm extends EntityMob {
 			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
 		}
 	}
-	
+
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
@@ -196,19 +196,18 @@ public class EntityMidgeSwarm extends EntityMob {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		if (super.attackEntityAsMob(entity)) {
+		if (super.attackEntityAsMob(entity))
 			if (entity instanceof EntityLivingBase) {
 				byte duration = 0;
-				if (worldObj.difficultySetting > 1)
-					if (worldObj.difficultySetting == 2)
+				if (worldObj.difficultySetting.ordinal() > 1)
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 						duration = 7;
-					else if (worldObj.difficultySetting == 3)
+					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 						duration = 15;
 				if (duration > 0)
 					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.weakness.id, duration * 20, 0));
-			return true;
+				return true;
 			}
-		}
 		return false;
 	}
 
