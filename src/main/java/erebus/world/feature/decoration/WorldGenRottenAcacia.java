@@ -17,7 +17,7 @@ public class WorldGenRottenAcacia extends WorldGenerator{
 		}
 		
 		for(int a = 0; a < len; a++){
-			world.setBlock(x+offsetX*a,y,z+offsetZ*a,ModBlocks.hollowLogAcacia.blockID,offsetX == 0 ? 0 : 1,2);
+			world.setBlock(x+offsetX*a,y,z+offsetZ*a,ModBlocks.hollowLogAcacia,offsetX == 0 ? 0 : 1,2);
 		}
 		
 		return true;

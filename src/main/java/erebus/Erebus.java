@@ -24,6 +24,7 @@ import erebus.creativetab.CreativeTabErebusItem;
 import erebus.creativetab.CreativeTabErebusSpecialItem;
 import erebus.entity.util.RandomMobNames;
 import erebus.lib.Reference;
+import erebus.network.PacketPipeline;
 import erebus.recipes.AltarRecipe;
 import erebus.recipes.RecipeHandler;
 
@@ -72,6 +73,7 @@ public class Erebus {
 		proxy.registerTileEntities();
 		proxy.registerRenderInformation();
 
+		PacketPipeline.initializePipeline();
 		ModBiomes.init();
 		RecipeHandler.init();
 		AltarRecipe.init();

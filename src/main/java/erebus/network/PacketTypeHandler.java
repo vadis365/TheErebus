@@ -1,5 +1,5 @@
 package erebus.network;
-
+/*
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutput;
@@ -101,4 +101,4 @@ public enum PacketTypeHandler {
 
 		return fluid;
 	}
-}
+}*/

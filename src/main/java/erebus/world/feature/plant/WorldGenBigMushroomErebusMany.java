@@ -1,14 +1,11 @@
 package erebus.world.feature.plant;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-// Do whatever here....I don't know all the clever stuff
-// This will all need to be re-written
-// MC Vanilla uses a shitty method of blockID+type 
 
 public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 	private int mushroomType = -1;
@@ -45,9 +42,9 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 				for (k1 = x - b0; k1 <= x + b0 && flag; ++k1) {
 					for (l1 = z - b0; l1 <= z + b0 && flag; ++l1) {
 						if (j1 >= 0 && j1 < 256) {
-							i2 = world.getBlockId(k1, j1, l1);
+							i2 = world.getBlock(k1, j1, l1);
 
-							Block block = Block.blocksList[i2];
+							Block block = Blocks.blocksList[i2];
 
 							if (block != null && !block.isAirBlock(world, k1, j1, l1) && !block.isLeaves(world, k1, j1, l1)) {
 								flag = false;
@@ -62,9 +59,9 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 			if (!flag) {
 				return false;
 			} else {
-				j1 = world.getBlockId(x, y - 1, z);
+				j1 = world.getBlock(x, y - 1, z);
 
-				if (j1 != Block.dirt.blockID && j1 != Block.grass.blockID && j1 != Block.mycelium.blockID) {
+				if (j1 != Blocks.dirt && j1 != Blocks.grass && j1 != Blocks.mycelium) {
 					return false;
 				} else {
 					int j2 = y + i1;
@@ -146,22 +143,22 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 									l2 = 0;
 								}
 
-								Block block = Block.blocksList[world.getBlockId(i2, k1, k2)];
+								Block block = Blocks.blocksList[world.getBlock(i2, k1, k2)];
 
 								if ((l2 != 0 || y >= y + i1 - 1) && (block == null || block.canBeReplacedByLeaves(world, i2, k1, k2))) {
-									this.setBlockAndMetadata(world, i2, k1, k2, ModBlocks.erebusMushroomCap0.blockID + type, l2);
+									this.setBlockAndMetadata(world, i2, k1, k2, ModBlocks.erebusMushroomCap0 + type, l2);
 								}
 							}
 						}
 					}
 
 					for (k1 = 0; k1 < i1; ++k1) {
-						l1 = world.getBlockId(x, y + k1, z);
+						l1 = world.getBlock(x, y + k1, z);
 
-						Block block = Block.blocksList[l1];
+						Block block = Blocks.blocksList[l1];
 
 						if (block == null || block.canBeReplacedByLeaves(world, x, y + k1, z)) {
-							this.setBlockAndMetadata(world, x, y + k1, z, ModBlocks.erebusMushroomCap0.blockID + type, 10);
+							this.setBlockAndMetadata(world, x, y + k1, z, ModBlocks.erebusMushroomCap0 + type, 10);
 						}
 					}
 

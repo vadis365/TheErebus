@@ -1,7 +1,6 @@
 package erebus.world.feature.plant;
 
 import java.util.Random;
-
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -49,23 +48,23 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 		switch(stemShape){
 			case SMALL_X:
 				for(int a = 0; a < 2; a++){
-					for(int b = 0; b < 2; b++)world.setBlock(x-1+a*2,y,z-1+b*2,ModBlocks.erebusFlower.blockID,1,2);
+					for(int b = 0; b < 2; b++)world.setBlock(x-1+a*2,y,z-1+b*2,ModBlocks.erebusFlower,1,2);
 				}
 				break;
 				
 			case SMALL_PLUS:
-				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
+				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,1,2);
 				break;
 				
 			case LARGE_PLUS:
 				for(int a = 0; a < 4; a++){
-					world.setBlock(x+Direction.offsetX[a]*2,y,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower.blockID,1,2);
-					world.setBlock(x+Direction.offsetX[a],y+1,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
+					world.setBlock(x+Direction.offsetX[a]*2,y,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower,1,2);
+					world.setBlock(x+Direction.offsetX[a],y+1,z+Direction.offsetZ[a],ModBlocks.erebusFlower,1,2);
 				}
 				break;
 		}
 		
-		for(int yy = y; yy <= y+stemHeight; yy++)world.setBlock(x,yy,z,ModBlocks.erebusFlower.blockID,1,2);
+		for(int yy = y; yy <= y+stemHeight; yy++)world.setBlock(x,yy,z,ModBlocks.erebusFlower,1,2);
 		
 		// GENERATE PETALS
 		
@@ -76,48 +75,48 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				
 				// LAYER 0 & 1
 				
-				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
+				world.setBlock(x,y,z,ModBlocks.erebusFlower,1,2);
 				
 				for(int a = 0; a < 4; a++){
-					world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
-					world.setBlock(x+Direction.offsetX[a]*2,y+1,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower.blockID,1,2);
-					if (rand.nextInt(3) == 0)world.setBlock(x+Direction.offsetX[a]*3,y+2,z+Direction.offsetZ[a]*3,ModBlocks.erebusFlower.blockID,1,2);
+					world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,1,2);
+					world.setBlock(x+Direction.offsetX[a]*2,y+1,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower,1,2);
+					if (rand.nextInt(3) == 0)world.setBlock(x+Direction.offsetX[a]*3,y+2,z+Direction.offsetZ[a]*3,ModBlocks.erebusFlower,1,2);
 				}
 				
 				for(int xx = x-1; xx <= x+1; xx++){
-					for(int zz = z-1; zz <= z+1; zz++)world.setBlock(xx,y+1,zz,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+					for(int zz = z-1; zz <= z+1; zz++)world.setBlock(xx,y+1,zz,ModBlocks.erebusFlower,primaryPetalColor,2);
 				}
 				
 				// LAYER 2
 				
 				for(int a = 0; a < 3; a++){
 					for(int b = 0; b < 2; b++){
-						world.setBlock(x-2+b*4,y+2,z-1+a,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-						world.setBlock(x-1+a,y+2,z-2+b*4,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+						world.setBlock(x-2+b*4,y+2,z-1+a,ModBlocks.erebusFlower,primaryPetalColor,2);
+						world.setBlock(x-1+a,y+2,z-2+b*4,ModBlocks.erebusFlower,primaryPetalColor,2);
 					}
-					world.setBlock(x-1+a,y+2,z,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+					world.setBlock(x-1+a,y+2,z,ModBlocks.erebusFlower,primaryPetalColor,2);
 				}
 				
-				for(int a = 0; a < 2; a++)world.setBlock(x,y+2,z-1+a*2,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+				for(int a = 0; a < 2; a++)world.setBlock(x,y+2,z-1+a*2,ModBlocks.erebusFlower,primaryPetalColor,2);
 				
 				// LAYER 3
 				
-				if(rand.nextInt(10)==0)
-					world.setBlock(x,y+3,z,ModBlocks.erebusFlower.blockID,0,2);
+				if(rand.nextInt(10) == 0)
+					world.setBlock(x,y+3,z,ModBlocks.erebusFlower,0,2);
 				else
-					world.setBlock(x,y+3,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);
+					world.setBlock(x,y+3,z,ModBlocks.erebusStigma,primaryPetalColor-2,2);
 					
 				for(int a = 0; a < 3; a++){
 					for(int b = 0; b < 2; b++){
-						world.setBlock(x-3+b*6,y+3,z-1+a,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-						world.setBlock(x-1+a,y+3,z-3+b*6,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+						world.setBlock(x-3+b*6,y+3,z-1+a,ModBlocks.erebusFlower,primaryPetalColor,2);
+						world.setBlock(x-1+a,y+3,z-3+b*6,ModBlocks.erebusFlower,primaryPetalColor,2);
 					}
 				}
 				
 				for(int a = -1; a <= 1; a++){
 					for(int b = -1; b <= 1; b++){
 						if (a == 0 && b == 0)continue;
-						world.setBlock(x+a*2,y+3,z+b*2,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+						world.setBlock(x+a*2,y+3,z+b*2,ModBlocks.erebusFlower,primaryPetalColor,2);
 					}
 				}
 				
@@ -128,12 +127,12 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				for(int a = 0; a < 2; a++){
 					for(int b = 0; b < 2; b++){
 						if (petalFormation){
-							world.setBlock(x-3+a*6,y+4,z-1+b*2,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-							world.setBlock(x-1+a*2,y+4,z-3+b*6,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+							world.setBlock(x-3+a*6,y+4,z-1+b*2,ModBlocks.erebusFlower,primaryPetalColor,2);
+							world.setBlock(x-1+a*2,y+4,z-3+b*6,ModBlocks.erebusFlower,primaryPetalColor,2);
 						}
 						else{
-							world.setBlock(x-2+a*4,y+4,z-2+b*4,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-							world.setBlock(x+Direction.offsetX[a*2+b]*3,y+4,z+Direction.offsetZ[a*2+b]*3,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+							world.setBlock(x-2+a*4,y+4,z-2+b*4,ModBlocks.erebusFlower,primaryPetalColor,2);
+							world.setBlock(x+Direction.offsetX[a*2+b]*3,y+4,z+Direction.offsetZ[a*2+b]*3,ModBlocks.erebusFlower,primaryPetalColor,2);
 						}
 					}
 				}
@@ -141,52 +140,52 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				break;
 				
 			case DISPERSE_HEMISPHERE:
-				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
+				world.setBlock(x,y,z,ModBlocks.erebusFlower,1,2);
 				
-				if(rand.nextInt(10)==0)
-					world.setBlock(x,y+1,z,ModBlocks.erebusFlower.blockID,0,2);	
+				if(rand.nextInt(10) == 0)
+					world.setBlock(x,y+1,z,ModBlocks.erebusFlower,0,2);	
 				else
-					world.setBlock(x,y+1,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);
+					world.setBlock(x,y+1,z,ModBlocks.erebusStigma,primaryPetalColor-2,2);
 				
 				for(int a = 0; a < 4; a++){
-					for(int b = 1; b <= 3; b++)world.setBlock(x+Direction.offsetX[a]*b,y+b-1,z+Direction.offsetZ[a]*b,ModBlocks.erebusFlower.blockID,secondaryPetalColor,2);
+					for(int b = 1; b <= 3; b++)world.setBlock(x+Direction.offsetX[a]*b,y+b-1,z+Direction.offsetZ[a]*b,ModBlocks.erebusFlower,secondaryPetalColor,2);
 				}
 				
 				for(int a = 0; a < 2; a++){
 					for(int b = 0; b < 2; b++){
-						world.setBlock(x-1+a*2,y+1,z-1+b*2,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-						world.setBlock(x-2+a*4,y+2,z-2+b*4,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+						world.setBlock(x-1+a*2,y+1,z-1+b*2,ModBlocks.erebusFlower,primaryPetalColor,2);
+						world.setBlock(x-2+a*4,y+2,z-2+b*4,ModBlocks.erebusFlower,primaryPetalColor,2);
 					}
 				}
 				
 				break;
 				
 			case UMBRELLA:
-				world.setBlock(x,y,z,ModBlocks.erebusFlower.blockID,1,2);
-				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower.blockID,1,2);
+				world.setBlock(x,y,z,ModBlocks.erebusFlower,1,2);
+				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,1,2);
 
-				world.setBlock(x,y+1,z,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+				world.setBlock(x,y+1,z,ModBlocks.erebusFlower,primaryPetalColor,2);
 				
-				if(rand.nextInt(10)==0)
-					world.setBlock(x,y+2,z,ModBlocks.erebusFlower.blockID,0,2);	
+				if(rand.nextInt(10) == 0)
+					world.setBlock(x,y+2,z,ModBlocks.erebusFlower,0,2);	
 				else
-					world.setBlock(x,y+2,z,ModBlocks.erebusStigma.blockID,primaryPetalColor-2,2);		
+					world.setBlock(x,y+2,z,ModBlocks.erebusStigma,primaryPetalColor-2,2);		
 				
 				for(int a = 0; a < 3; a++){
-					world.setBlock(x-3+a,y+1,z,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-					world.setBlock(x+3-a,y+1,z,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-					world.setBlock(x,y+1,z-3+a,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
-					world.setBlock(x,y+1,z+3-a,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+					world.setBlock(x-3+a,y+1,z,ModBlocks.erebusFlower,primaryPetalColor,2);
+					world.setBlock(x+3-a,y+1,z,ModBlocks.erebusFlower,primaryPetalColor,2);
+					world.setBlock(x,y+1,z-3+a,ModBlocks.erebusFlower,primaryPetalColor,2);
+					world.setBlock(x,y+1,z+3-a,ModBlocks.erebusFlower,primaryPetalColor,2);
 				}
 				
 				boolean reversedUmbrella = rand.nextInt(3) == 0;
 				
 				for(int a = 0; a < 2; a++){
 					for(int b = 0; b < 2; b++){
-						world.setBlock(x-1+a*2,y+1,z-1+b*2,ModBlocks.erebusFlower.blockID,secondaryPetalColor,2);
-						world.setBlock(x-2+a*4,y+1,z-2+b*4,ModBlocks.erebusFlower.blockID,secondaryPetalColor,2);
-						world.setBlock(x-3+a*6,y+(reversedUmbrella?2:0),z-3+b*6,ModBlocks.erebusFlower.blockID,secondaryPetalColor,2);
-						world.setBlock(x+Direction.offsetX[a*2+b]*4,y+(reversedUmbrella?2:0),z+Direction.offsetZ[a*2+b]*4,ModBlocks.erebusFlower.blockID,primaryPetalColor,2);
+						world.setBlock(x-1+a*2,y+1,z-1+b*2,ModBlocks.erebusFlower,secondaryPetalColor,2);
+						world.setBlock(x-2+a*4,y+1,z-2+b*4,ModBlocks.erebusFlower,secondaryPetalColor,2);
+						world.setBlock(x-3+a*6,y+(reversedUmbrella?2:0),z-3+b*6,ModBlocks.erebusFlower,secondaryPetalColor,2);
+						world.setBlock(x+Direction.offsetX[a*2+b]*4,y+(reversedUmbrella?2:0),z+Direction.offsetZ[a*2+b]*4,ModBlocks.erebusFlower,primaryPetalColor,2);
 					}
 				}
 		}
