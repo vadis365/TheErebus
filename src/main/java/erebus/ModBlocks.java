@@ -90,7 +90,6 @@ import erebus.item.block.ItemBlockLeavesErebus;
 import erebus.item.block.ItemBlockLogErebus1;
 import erebus.item.block.ItemBlockLogErebus2;
 import erebus.item.block.ItemBlockLogErebus3;
-import erebus.item.block.ItemBlockMucusBomb;
 import erebus.item.block.ItemBlockPlanksErebus;
 import erebus.item.block.ItemBlockRedGem;
 import erebus.item.block.ItemBlockSapling;
@@ -347,7 +346,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(jadeBlock, "jadeBlock");
 		GameRegistry.registerBlock(altar, "altar");
 		GameRegistry.registerBlock(glowGemBlock, "glowgemBlock");
-		GameRegistry.registerBlock(mucusBomb, ItemBlockMucusBomb.class, "mucusBomb");
+		GameRegistry.registerBlock(mucusBomb, "mucusBomb");
 
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			GameRegistry.registerBlock(umbercobbleStairs[i], "umbercobbleStairs" + i);
