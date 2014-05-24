@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityExtractedBlock;
@@ -120,7 +121,7 @@ public class ItemBlockExtractor extends Item {
 	}
 
 	private boolean canExtract(Block block) {
-		return !(block instanceof BlockContainer) && !(block instanceof BlockFluid) && !(block instanceof BlockPane) && block.blockHardness >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
+		return !(block instanceof BlockContainer) && !(block instanceof BlockFluidBase) && !(block instanceof BlockPane) && block != Block.getBlockFromName("bedrock") && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
 	}
 
 	public void resetStats(ItemStack stack) {
