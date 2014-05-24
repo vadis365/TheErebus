@@ -25,12 +25,12 @@ import erebus.item.ItemBucketOfHoney;
 import erebus.item.ItemCavemanClub;
 import erebus.item.ItemCompoundGoggles;
 import erebus.item.ItemCrownOfLuminosity;
-import erebus.item.ItemErebusFlowerSeeds;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemErebusMaterial;
 import erebus.item.ItemErebusMaterial.DATA;
 import erebus.item.ItemErebusSpecial;
 import erebus.item.ItemExoskeletonArmor;
+import erebus.item.ItemFlowerSeeds;
 import erebus.item.ItemHomingBeecon;
 import erebus.item.ItemHornOfSummoning;
 import erebus.item.ItemJadeArmor;
@@ -103,7 +103,7 @@ public class ModItems {
 		doorAmberItem = new ItemBlockDoorAmber(ModBlocks.doorAmber).setUnlocalizedName("doorAmberItem").setTextureName("erebus:doorAmber");
 		bucketHoney = new ItemBucketOfHoney(ModBlocks.erebusHoneyBlock).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
 		homingBeecon = new ItemHomingBeecon().setUnlocalizedName("homingBeecon").setTextureName("paper");
-		flowerSeeds = new ItemErebusFlowerSeeds().setUnlocalizedName("erebusFlowerSeeds");
+		flowerSeeds = new ItemFlowerSeeds().setUnlocalizedName("flowerSeeds");
 		whetstone = new ItemWhetstone().setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
 		encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
 

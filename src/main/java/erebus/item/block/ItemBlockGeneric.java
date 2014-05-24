@@ -11,12 +11,12 @@ public class ItemBlockGeneric extends ItemBlock {
 	public ItemBlockGeneric(Block block, String unlocalizedName) {
 		super(block);
 		setHasSubtypes(true);
-		name = unlocalizedName + "_item_";
+		name = "";
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		return name + is.getItemDamage();
+		return this.getUnlocalizedName() + "_" + is.getItemDamage();
 	}
 
 	@Override

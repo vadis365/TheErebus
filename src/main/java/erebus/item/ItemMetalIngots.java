@@ -30,7 +30,7 @@ public class ItemMetalIngots extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int i) {
-		return icons[i];
+		return icons[Math.min(icons.length - 1, i)];
 	}
 
 	@Override

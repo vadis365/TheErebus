@@ -1,9 +1,13 @@
 package erebus.item.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
+import erebus.lib.EnumColour;
 
 public class ItemBlockFlowerPlanted extends ItemBlockGeneric {
 
@@ -15,5 +19,11 @@ public class ItemBlockFlowerPlanted extends ItemBlockGeneric {
 	@Override
 	public IIcon getIconFromDamage(int damage) {
 		return getBlock().getIcon(2, damage);
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getTranslatedName();
+		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), colour);
 	}
 }

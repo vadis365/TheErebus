@@ -1,7 +1,7 @@
 package erebus.lib;
 
 public class Reference {
-	public static final String MOD_ID = "Erebus";
+	public static final String MOD_ID = "erebus";
 	public static final String MOD_NAME = "Erebus";
 	public static final String MOD_VERSION = "v0.2.0a";
 	public static final String MOD_DEPENDENCIES = "required-after:Forge@[10.12.0.1075,);";

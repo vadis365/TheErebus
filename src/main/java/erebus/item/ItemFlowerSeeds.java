@@ -17,8 +17,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
+import erebus.lib.EnumColour;
+import erebus.lib.Reference;
 
-public class ItemErebusFlowerSeeds extends Item {
+public class ItemFlowerSeeds extends Item {
 
 	public enum SEED_TYPE {
 		BLACK, RED, BROWN, BLUE, PURPLE, CYAN, LIGHT_GRAY, GRAY, PINK, YELLOW, LIGHT_BLUE, MAGENTA, ORANGE, WHITE, RAINBOW;
@@ -27,7 +29,7 @@ public class ItemErebusFlowerSeeds extends Item {
 	@SideOnly(Side.CLIENT)
 	public IIcon normal, rainbow;
 
-	public ItemErebusFlowerSeeds() {
+	public ItemFlowerSeeds() {
 		setHasSubtypes(true);
 	}
 
@@ -65,16 +67,19 @@ public class ItemErebusFlowerSeeds extends Item {
 		return meta == SEED_TYPE.RAINBOW.ordinal() ? rainbow : normal;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		for (int i = 0; i < SEED_TYPE.values().length; i++)
 			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName() + "." + stack.getItemDamage();
+	public String getItemStackDisplayName(ItemStack stack) {
+		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getTranslatedName();
+		if (stack.getItemDamage() == SEED_TYPE.RAINBOW.ordinal())
+			colour = "colour." + Reference.MOD_ID + ".rainbow";
+		return String.format(super.getItemStackDisplayName(stack), colour);
 	}
 }

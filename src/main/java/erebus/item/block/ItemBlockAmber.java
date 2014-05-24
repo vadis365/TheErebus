@@ -15,7 +15,7 @@ public class ItemBlockAmber extends ItemCloth {
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		return "blockAmber" + is.getItemDamage();
+		return getUnlocalizedName() + is.getItemDamage();
 	}
 
 	@Override

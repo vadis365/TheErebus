@@ -24,7 +24,24 @@ import erebus.core.helper.Utils;
 public class BlockErebusFlower extends Block {
 
 	public enum FLOWER_TYPE {
-		EXPLODING_STIGMA, STEM, BLACK_PETAL, RED_PETAL, BROWN_PETAL, BLUE_PETAL, PURPLE_PETAL, CYAN_PETAL, LIGHT_GRAY_PETAL, GRAY_PETAL, PINK_PETAL, YELLOW_PETAL, LIGHT_BLUE_PETAL, MAGENTA_PETAL, ORANGE_PETAL, WHITE_PETAL
+		//@formatter:off
+		BLACK_PETAL,
+		RED_PETAL,
+		BROWN_PETAL,
+		BLUE_PETAL,
+		PURPLE_PETAL,
+		CYAN_PETAL,
+		LIGHT_GRAY_PETAL,
+		GRAY_PETAL,
+		PINK_PETAL,
+		YELLOW_PETAL,
+		LIGHT_BLUE_PETAL,
+		MAGENTA_PETAL,
+		ORANGE_PETAL,
+		WHITE_PETAL,
+		EXPLODING_STIGMA,
+		STEM
+		//@formatter:on
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -74,7 +91,7 @@ public class BlockErebusFlower extends Block {
 		if (meta == FLOWER_TYPE.EXPLODING_STIGMA.ordinal() || meta == FLOWER_TYPE.STEM.ordinal())
 			return super.getRenderColor(meta);
 
-		float[] colour = EntitySheep.fleeceColorTable[BlockColored.func_150032_b(Utils.getFlowerMetadata(meta - 2))];
+		float[] colour = EntitySheep.fleeceColorTable[BlockColored.func_150032_b(Utils.getFlowerMetadata(meta))];
 		return Utils.getColour((int) (colour[0] * 255), (int) (colour[1] * 255), (int) (colour[2] * 255));
 	}
 
@@ -89,6 +106,10 @@ public class BlockErebusFlower extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
+		if (meta < 14)
+			meta = 2;
+		else
+			meta -= 14;
 		return icons[Math.min(meta, 2)];
 	}
 
