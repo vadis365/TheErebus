@@ -1,6 +1,7 @@
 package erebus.world.biomes;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import erebus.ModBiomes;
@@ -23,6 +24,7 @@ import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
 
 // @formatter:off
 public class BiomeUndergroundJungle extends BiomeBaseErebus{
+	@SuppressWarnings("unchecked")
 	public BiomeUndergroundJungle(int biomeID){
 		super(biomeID,new BiomeDecoratorUndergroundJungle());
 		
@@ -59,7 +61,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 	
 	@Override
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand){
-		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? (y < 24 ? Blocks.flowing_water : Blocks.air) : block;
+		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 24 ? Blocks.flowing_water : Blocks.air : block;
 	}
 	
 	@Override

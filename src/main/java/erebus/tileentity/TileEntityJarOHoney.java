@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import erebus.ModBlocks;
-import erebus.network.PacketTypeHandler;
+import erebus.network.PacketPipeline;
 import erebus.network.packet.PacketJarOHoney;
 
 public class TileEntityJarOHoney extends TileEntityGlowingJar {
@@ -35,13 +35,13 @@ public class TileEntityJarOHoney extends TileEntityGlowingJar {
 
 	private void sendUpdatesToClients() {
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		PacketDispatcher.sendPacketToAllPlayers(getDescriptionPacket());
+		PacketPipeline.sendToAll(getDescriptionPacket());
 	}
 
 	public void setOwner(String name) {
 		owner = name;
 		if (!worldObj.isRemote)
-			PacketDispatcher.sendPacketToAllPlayers(getDescriptionPacket());
+			PacketPipeline.sendToAll(getDescriptionPacket());
 	}
 
 	public String getOwnerName() {

@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.block.BlockBambooShoot;
-import erebus.network.PacketTypeHandler;
+import erebus.network.PacketPipeline;
 import erebus.network.packet.PacketSound;
 
 public class ItemErebusMaterial extends Item {
@@ -93,7 +93,7 @@ public class ItemErebusMaterial extends Item {
 
 				if (currentSpeed == null || damage == DATA.bioVelocity.ordinal() && currentSpeed.getAmplifier() < 1 || damage == DATA.supernaturalvelocity.ordinal() && currentSpeed.getAmplifier() < 3) {
 					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, damage == DATA.bioVelocity.ordinal() ? 280 : 210, damage == DATA.bioVelocity.ordinal() ? 1 : 3, true));
-					PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F)));
+					PacketPipeline.sendPacketToAll(PacketTypeHandler.populatePacket(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F)));
 				} else
 					return is;
 			}
@@ -103,7 +103,7 @@ public class ItemErebusMaterial extends Item {
 
 				if (currentVisibility == null || damage == DATA.camoPowder.ordinal() && currentVisibility.getAmplifier() < 3) {
 					player.addPotionEffect(new PotionEffect(Potion.invisibility.id, damage == DATA.camoPowder.ordinal() ? 280 : 210, damage == DATA.camoPowder.ordinal() ? 1 : 3, true));
-					PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F)));
+					PacketPipeline.sendPacketToAll(PacketTypeHandler.populatePacket(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F)));
 				} else
 					return is;
 			} else

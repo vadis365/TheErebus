@@ -1,7 +1,6 @@
 package erebus;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -62,56 +61,6 @@ import erebus.item.ItemSpawnEggs;
 public class ModEntities {
 
 	public static void init() {
-		// Compatibility with old version
-		EntityList.stringToClassMapping.put("BeetleLarva - Erebus", EntityBeetleLarva.class);
-		EntityList.stringToClassMapping.put("Wasp - Erebus", EntityWasp.class);
-		EntityList.stringToClassMapping.put("Centipede - Erebus", EntityCentipede.class);
-		EntityList.stringToClassMapping.put("Beetle - Erebus", EntityBeetle.class);
-		EntityList.stringToClassMapping.put("Fly - Erebus", EntityFly.class);
-		EntityList.stringToClassMapping.put("Mosquito - Erebus", EntityMosquito.class);
-		EntityList.stringToClassMapping.put("Tarantula - Erebus", EntityTarantula.class);
-		EntityList.stringToClassMapping.put("BotFly - Erebus", EntityBotFly.class);
-		EntityList.stringToClassMapping.put("Scorpion - Erebus", EntityScorpion.class);
-		EntityList.stringToClassMapping.put("Solifuge - Erebus", EntitySolifuge.class);
-		EntityList.stringToClassMapping.put("Grasshopper - Erebus", EntityGrasshopper.class);
-		EntityList.stringToClassMapping.put("Locust - Erebus", EntityLocust.class);
-		EntityList.stringToClassMapping.put("Moth - Erebus", EntityMoth.class);
-		EntityList.stringToClassMapping.put("Antlion - Erebus", EntityAntlion.class);
-		EntityList.stringToClassMapping.put("BlackWidow - Erebus", EntityBlackWidow.class);
-		EntityList.stringToClassMapping.put("GlowWorm - Erebus", EntityGlowWorm.class);
-		EntityList.stringToClassMapping.put("BombardierBeetle - Erebus", EntityBombardierBeetle.class);
-		EntityList.stringToClassMapping.put("Scytodes - Erebus", EntityScytodes.class);
-		EntityList.stringToClassMapping.put("MoneySpider - Erebus", EntityMoneySpider.class);
-		EntityList.stringToClassMapping.put("PrayingMantis - Erebus", EntityPrayingMantis.class);
-		EntityList.stringToClassMapping.put("JumpingSpider - Erebus", EntityJumpingSpider.class);
-		EntityList.stringToClassMapping.put("AnimatedBlock", EntityAnimatedBlock.class);
-		EntityList.stringToClassMapping.put("AnimatedChest", EntityAnimatedChest.class);
-		EntityList.stringToClassMapping.put("AnimatedBambooCrate", EntityAnimatedBambooCrate.class);
-		EntityList.stringToClassMapping.put("UmberGolem", EntityUmberGolem.class);
-		EntityList.stringToClassMapping.put("WaspDagger", EntityWaspDagger.class);
-		EntityList.stringToClassMapping.put("WebSling", EntityWebSling.class);
-		EntityList.stringToClassMapping.put("ErebusLightning", EntityErebusLightningBolt.class);
-		EntityList.stringToClassMapping.put("FireAnt - Erebus", EntityFireAnt.class);
-		EntityList.stringToClassMapping.put("FireAntSoldier - Erebus", EntityFireAntSoldier.class);
-		EntityList.stringToClassMapping.put("RhinoBeetle - Erebus", EntityRhinoBeetle.class);
-		EntityList.stringToClassMapping.put("WorkerBee - Erebus", EntityWorkerBee.class);
-		EntityList.stringToClassMapping.put("Dragonfly - Erebus", EntityDragonfly.class);
-		EntityList.stringToClassMapping.put("BloodSnail - Erebus", EntityBloodSnail.class);
-		EntityList.stringToClassMapping.put("TitanBeetle - Erebus", EntityTitanBeetle.class);
-		EntityList.stringToClassMapping.put("BotFlyLarva - Erebus", EntityBotFlyLarva.class);
-		EntityList.stringToClassMapping.put("Sporeling - Erebus", EntitySporeling.class);
-		EntityList.stringToClassMapping.put("WheatWeevil - Erebus", EntityWheatWeevil.class);
-		EntityList.stringToClassMapping.put("VelvetWorm - Erebus", EntityVelvetWorm.class);
-		EntityList.stringToClassMapping.put("GooBall", EntityGooBall.class);
-		EntityList.stringToClassMapping.put("Woodlouse - Erebus", EntityWoodlouse.class);
-		EntityList.stringToClassMapping.put("Cicada - Erebus", EntityCicada.class);
-		EntityList.stringToClassMapping.put("MucusBombPrimed", EntityMucusBombPrimed.class);
-		EntityList.stringToClassMapping.put("LavaWebSpider - Erebus", EntityLavaWebSpider.class);
-		EntityList.stringToClassMapping.put("AntlionMiniBoss - Erebus", EntityAntlionMiniBoss.class);
-		EntityList.stringToClassMapping.put("ChameleonTick - Erebus", EntityChameleonTick.class);
-		EntityList.stringToClassMapping.put("SolifugeSmall - Erebus", EntitySolifugeSmall.class);
-		EntityList.stringToClassMapping.put("MidgeSwarm - Erebus", EntityMidgeSwarm.class);
-
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "BeetleLarva", -1251634, -13032944);
 		registerEntity(1, EntityWasp.class, "Wasp", -256, -16382458);

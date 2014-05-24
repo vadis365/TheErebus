@@ -1,5 +1,6 @@
 package erebus.integration.nei;
-/*
+
+import net.minecraft.item.ItemStack;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import codechicken.nei.recipe.DefaultOverlayHandler;
@@ -14,17 +15,17 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.registerGuiOverlay(GuiPetrifiedWorkbench.class, "crafting");
 		API.registerGuiOverlayHandler(GuiPetrifiedWorkbench.class, new DefaultOverlayHandler(), "crafting");
 
-		API.hideItem(ModBlocks.erebusGrass.blockID);
-		API.hideItem(ModBlocks.portalErebus.blockID);
-		API.hideItem(ModBlocks.blockTurnip.blockID);
-		API.hideItem(ModBlocks.insectRepellent.blockID);
-		API.hideItem(ModBlocks.umberFurnace_on.blockID);
-		API.hideItem(ModBlocks.flowerPlanted.blockID);
-		API.hideItem(ModBlocks.doorAmber.blockID);
-		API.hideItem(ModBlocks.erebusHoneyBlock.blockID);
-		API.hideItem(ModBlocks.altar.blockID);
-		API.hideItem(ModBlocks.erebusMushroomCap3.blockID);
-		API.hideItem(ModBlocks.erebusMushroomCap4.blockID);
+		API.hideItem(new ItemStack(ModBlocks.erebusGrass));
+		API.hideItem(new ItemStack(ModBlocks.portalErebus));
+		API.hideItem(new ItemStack(ModBlocks.blockTurnip));
+		API.hideItem(new ItemStack(ModBlocks.insectRepellent));
+		API.hideItem(new ItemStack(ModBlocks.umberFurnace_on));
+		API.hideItem(new ItemStack(ModBlocks.flowerPlanted));
+		API.hideItem(new ItemStack(ModBlocks.doorAmber));
+		API.hideItem(new ItemStack(ModBlocks.erebusHoneyBlock));
+		API.hideItem(new ItemStack(ModBlocks.altar));
+		API.hideItem(new ItemStack(ModBlocks.erebusMushroomCap3));
+		API.hideItem(new ItemStack(ModBlocks.erebusMushroomCap4));
 	}
 
 	@Override
@@ -36,4 +37,4 @@ public class NEIErebusConfig implements IConfigureNEI {
 	public String getVersion() {
 		return Reference.MOD_VERSION;
 	}
-}*/
+}

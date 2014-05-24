@@ -1,11 +1,17 @@
 package erebus;
 
 import net.minecraftforge.common.MinecraftForge;
+
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
+
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -23,6 +29,8 @@ import erebus.creativetab.CreativeTabErebusGear;
 import erebus.creativetab.CreativeTabErebusItem;
 import erebus.creativetab.CreativeTabErebusSpecialItem;
 import erebus.entity.util.RandomMobNames;
+import erebus.integration.FMBIntegration;
+import erebus.integration.IModIntegration;
 import erebus.lib.Reference;
 import erebus.network.PacketPipeline;
 import erebus.recipes.AltarRecipe;
@@ -93,12 +101,11 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
 		//TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
-		/*if (Loader.isModLoaded("ForgeMicroblock"))
-			FMBIntegration.integrate();*/
-		// TODO redo integration
+		if (Loader.isModLoaded("ForgeMicroblock"))
+			FMBIntegration.integrate();
 	}
 
-	/*@EventHandler
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		try {
 			for (ClassInfo clsInfo : ClassPath.from(getClass().getClassLoader()).getTopLevelClasses("erebus.integration")) {
@@ -115,5 +122,5 @@ public class Erebus {
 			}
 		} catch (Exception e) {
 		}
-	}*/
+	}
 }

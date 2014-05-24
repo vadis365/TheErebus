@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 
 public class WeightedLootList extends WeightedList<LootItemStack> {
 
+	private static final long serialVersionUID = 6987523146089169906L;
+
 	private static final IPostProcess genericPostProcessor = new IPostProcess() {
 		@Override
 		public ItemStack postProcessItem(ItemStack is, Random rand) {

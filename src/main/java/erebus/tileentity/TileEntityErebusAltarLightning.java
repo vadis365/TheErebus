@@ -43,7 +43,7 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
 			if (animationTicks >= 1)
 				animationTicks--;
 			if (animationTicks == 1)
-				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar.blockID);
+				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar);
 		}
 		if (animationTicks >= 1 && animationTicks <= 24)
 			flameOn(worldObj, xCoord, yCoord, zCoord);
@@ -81,11 +81,12 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
 		spawnTicks = i;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Entity findEnemyToAttack() {
-		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D).expand(6D, 2D, 6D));
+		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D).expand(6D, 2D, 6D));
 		if (active)
 			for (int i = 0; i < list.size(); i++) {
-				Entity entity = (Entity) list.get(i);
+				Entity entity = list.get(i);
 				if (entity != null)
 					if (entity instanceof EntityLivingBase)
 						if (((EntityLivingBase) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD) && !(entity instanceof EntityMobBlock) && !(entity instanceof EntityUmberGolem)) {

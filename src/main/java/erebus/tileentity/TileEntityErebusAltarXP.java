@@ -26,7 +26,7 @@ public class TileEntityErebusAltarXP extends TileEntityErebusAltar {
 			if (animationTicks >= 1)
 				animationTicks--;
 			if (animationTicks == 1)
-				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar.blockID);
+				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar);
 		}
 		if (animationTicks == 6)
 			cloudBurst(worldObj, xCoord, yCoord, zCoord);

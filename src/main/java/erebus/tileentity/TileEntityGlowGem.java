@@ -1,6 +1,9 @@
 package erebus.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityGlowGem extends TileEntity {
@@ -26,7 +29,7 @@ public class TileEntityGlowGem extends TileEntity {
 		switch (eventId) {
 			case 0:
 				lightOn = eventData == 1;
-				worldObj.updateAllLightTypes(xCoord, yCoord, zCoord);
+				worldObj.func_147451_t(xCoord, yCoord, zCoord);
 				return true;
 			default:
 				return false;
@@ -49,11 +52,11 @@ public class TileEntityGlowGem extends TileEntity {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setBoolean("state", lightOn);
-		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-		lightOn = packet.data.getBoolean("state");
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+		lightOn = packet.func_148857_g().getBoolean("state");
 	}
 }

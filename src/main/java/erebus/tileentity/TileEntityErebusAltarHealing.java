@@ -35,7 +35,7 @@ public class TileEntityErebusAltarHealing extends TileEntityErebusAltar {
 			if (animationTicks >= 1)
 				animationTicks--;
 			if (animationTicks == 1)
-				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar.blockID);
+				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar);
 		}
 		if (animationTicks == 6)
 			bigLove(worldObj, xCoord, yCoord, zCoord);
@@ -66,11 +66,12 @@ public class TileEntityErebusAltarHealing extends TileEntityErebusAltar {
 		spawnTicks = i;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Entity findEnemyToAttack() {
-		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D).expand(4D, 2D, 4D));
+		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D).expand(4D, 2D, 4D));
 		if (active)
 			for (int i = 0; i < list.size(); i++) {
-				Entity entity = (Entity) list.get(i);
+				Entity entity = list.get(i);
 				if (entity != null)
 					if (entity instanceof EntityPlayer)
 						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.heal.id, 1 * 20, 0));

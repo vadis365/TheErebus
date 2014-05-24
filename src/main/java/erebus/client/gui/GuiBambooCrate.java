@@ -27,7 +27,7 @@ public class GuiBambooCrate extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		fontRendererObj.drawString(bambooCrateInventory.isInvNameLocalized() ? bambooCrateInventory.getInvName() : StatCollector.translateToLocal(bambooCrateInventory.getInvName()), 8, 6, 4210752);
+		fontRendererObj.drawString(StatCollector.translateToLocal(bambooCrateInventory.getInventoryName()), 8, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 

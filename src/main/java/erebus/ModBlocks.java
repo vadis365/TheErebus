@@ -144,7 +144,7 @@ public class ModBlocks {
 		initBlocks();
 		initCreativeTabs();
 		registerBlocks();
-		//registerProperties();
+		registerProperties();
 	}
 
 	private static void initBlocks() {

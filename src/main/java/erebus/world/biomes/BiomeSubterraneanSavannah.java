@@ -17,6 +17,7 @@ import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
 
 // @formatter:off
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
+	@SuppressWarnings("unchecked")
 	public BiomeSubterraneanSavannah(int biomeID){
 		super(biomeID,new BiomeDecoratorSubterraneanSavannah());
 		

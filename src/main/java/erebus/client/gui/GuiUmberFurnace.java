@@ -30,7 +30,7 @@ public class GuiUmberFurnace extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		int color = Utils.getColour(255, 255, 255);
-		fontRendererObj.drawString(StatCollector.translateToLocal(furnace.getInvName()), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal(furnace.getInvName())) / 2, 6, color);
+		fontRendererObj.drawString(StatCollector.translateToLocal(furnace.getInventoryName()), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal(furnace.getInventoryName())) / 2, 6, color);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), xSize - 60, ySize - 96 + 2, color, true);
 	}
 

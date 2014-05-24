@@ -70,27 +70,31 @@ public class CommonProxy implements IGuiHandler {
 	}
 
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntityWithAlternatives(TileEntitySpawner.class, "Custom Spawner (Erebus)", "Spider Spawner (Erebus)", "Wasp Spawner (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityBambooCrate.class, "Bamboo Crate (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityUmberFurnace.class, "Umber Furnace (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityErebusAltar.class, "Tile Entity Bug Zapper (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityErebusAltarEmpty.class, "Altar - Empty (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityErebusAltarHealing.class, "Altar - Healing (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityErebusAltarLightning.class, "Altar - Lightning (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityErebusAltarRepair.class, "Altar - Repair (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityErebusAltarXP.class, "Altar - XP (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityGlowingJar.class, "Glowing Jar (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityLadder.class, "Bamboo Ladder (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityBambooBridge.class, "Bamboo Bridge (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityUmberGolemStatue.class, "Umber Golem Statue (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityPetrifiedWoodChest.class, "Petrified Wood Chest (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityBones.class, "Block o' Bones (Erebus)");
-		GameRegistry.registerTileEntity(TileEntityExtenderThingy.class, "erebus.extenderThingy");
-		GameRegistry.registerTileEntity(TileEntityBambooPole.class, "erebus.bambooPole");
-		GameRegistry.registerTileEntity(TileEntityJarOHoney.class, "erebus.jarOHoney");
-		GameRegistry.registerTileEntity(TileEntityAltar.class, "erebus.altar");
-		GameRegistry.registerTileEntity(TileEntityGlowGem.class, "erebus.glowGemBlock");
-		GameRegistry.registerTileEntity(TileEntityHoneyComb.class, "Honey Comb (Erebus)");
+		GameRegistry.registerTileEntityWithAlternatives(TileEntitySpawner.class, "tile.erebus.customSpawner", "tile.erebus.spiderSpawner", "tile.erebus.waspSpawner");
+		registerTileEntity(TileEntityBambooCrate.class, "bambooCrate");
+		registerTileEntity(TileEntityUmberFurnace.class, "umberFurnace");
+		registerTileEntity(TileEntityErebusAltar.class, "bugZapper");
+		registerTileEntity(TileEntityErebusAltarEmpty.class, "altarEmpty");
+		registerTileEntity(TileEntityErebusAltarHealing.class, "altarHealing");
+		registerTileEntity(TileEntityErebusAltarLightning.class, "altarLighting");
+		registerTileEntity(TileEntityErebusAltarRepair.class, "altarRepair");
+		registerTileEntity(TileEntityErebusAltarXP.class, "altarXP");
+		registerTileEntity(TileEntityGlowingJar.class, "glowingJar");
+		registerTileEntity(TileEntityLadder.class, "bambooLadder");
+		registerTileEntity(TileEntityBambooBridge.class, "bambooBridge");
+		registerTileEntity(TileEntityUmberGolemStatue.class, "umberGolemStatue");
+		registerTileEntity(TileEntityPetrifiedWoodChest.class, "petrifiedWoodChest");
+		registerTileEntity(TileEntityBones.class, "blockOBones");
+		registerTileEntity(TileEntityExtenderThingy.class, "extenderThingy");
+		registerTileEntity(TileEntityBambooPole.class, "bambooPole");
+		registerTileEntity(TileEntityJarOHoney.class, "jarOHoney");
+		registerTileEntity(TileEntityAltar.class, "altar");
+		registerTileEntity(TileEntityGlowGem.class, "glowGemBlock");
+		registerTileEntity(TileEntityHoneyComb.class, "honeyComb");
+	}
+
+	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
+		GameRegistry.registerTileEntity(cls, "tile.erebus." + baseName);
 	}
 
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {

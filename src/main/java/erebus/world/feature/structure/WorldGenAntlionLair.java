@@ -2,6 +2,7 @@ package erebus.world.feature.structure;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
@@ -63,6 +64,7 @@ public class WorldGenAntlionLair extends WorldGenerator{
 		new LootItemStack(ModItems.jadeBoots).setWeight(1),
 		new LootItemStack(Items.golden_boots).setWeight(1)
 	}).setPostProcessor(new IPostProcess(){
+		@SuppressWarnings("rawtypes")
 		@Override
 		public ItemStack postProcessItem(ItemStack is, Random rand){
 			if (rand.nextBoolean() && (is.getItem() == Items.enchanted_book || is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)){
@@ -104,9 +106,8 @@ public class WorldGenAntlionLair extends WorldGenerator{
 		for(int xx = x-5; xx <= x+5; xx++)
 			for(int zz = z-5; zz <= z+5; zz++)
 				for(int yy = y-1,layer = 0; yy >= y-7; yy--,layer++){
-					if (Math.sqrt(Math.pow(xx-x,2)+Math.pow(zz-z,2))<4.9D && yy != y-7){
+					if (Math.sqrt(Math.pow(xx-x,2)+Math.pow(zz-z,2))<4.9D && yy != y-7)
 						if (yy >= y-3 || Math.abs(xx-x) <= 1+6-layer && Math.abs(zz-z) <= 1+6-layer)world.setBlock(xx,yy,zz,yy == y-1 ? ModBlocks.ghostSand : Blocks.air);
-					}
 
 					if (layer > 0 && !world.isAirBlock(xx,yy,zz)) world.setBlock(xx,yy,zz,Blocks.sand);
 				}

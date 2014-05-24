@@ -20,14 +20,15 @@ import erebus.world.genlayer.GenLayerErebus;
 
 public class WorldChunkManagerErebus extends WorldChunkManager {
 
-	private static final float temperature = 1F;
 	private static final float rainfall = 0F;
 	private static final ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah));
 
+	@SuppressWarnings("rawtypes")
 	private final List biomesToSpawnIn;
 	private final BiomeCache biomeCache;
 	private final GenLayer biomeGenLayer;
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public WorldChunkManagerErebus(World world) {
 		biomesToSpawnIn = new ArrayList(allowedBiomes);
 		biomeCache = new BiomeCache(this);
@@ -99,6 +100,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public ChunkPosition findBiomePosition(int x, int z, int checkRadius, List viableBiomes, Random rand) {
 		IntCache.resetIntCache();
 		int minX = x - checkRadius >> 2;
@@ -125,6 +127,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public boolean areBiomesViable(int x, int z, int checkRadius, List viableBiomes) {
 		IntCache.resetIntCache();
 		int minX = x - checkRadius >> 2;
@@ -135,15 +138,15 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		int sizeZ = maxZ - minZ + 1;
 		int[] biomeArray = biomeGenLayer.getInts(minX, minZ, sizeX, sizeZ);
 
-		for (int index = 0; index < sizeX * sizeZ; ++index) {
+		for (int index = 0; index < sizeX * sizeZ; ++index)
 			if (!viableBiomes.contains(BiomeGenBase.getBiomeGenArray()[biomeArray[index]]))
 				return false;
-		}
 
 		return true;
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List getBiomesToSpawnIn() {
 		return biomesToSpawnIn;
 	}

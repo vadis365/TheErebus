@@ -27,7 +27,7 @@ public class GuiHoneyComb extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		fontRendererObj.drawString(honeyCombInventory.isInvNameLocalized() ? honeyCombInventory.getInvName() : StatCollector.translateToLocal(honeyCombInventory.getInvName()), 8, 6, 4210752);
+		fontRendererObj.drawString(StatCollector.translateToLocal(honeyCombInventory.getInventoryName()), 8, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 

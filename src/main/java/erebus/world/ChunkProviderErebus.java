@@ -2,6 +2,7 @@ package erebus.world;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -68,7 +69,6 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 	public void generateTerrain(int x, int z, Block[] blocks) {
 		byte byte0 = 4;
-		byte byte1 = 32;
 		int i = byte0 + 1;
 		byte byte2 = 17;
 		int j = byte0 + 1;
@@ -108,7 +108,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 								if (d15 > 0.0D)
 									blocks[l1] = ModBlocks.umberstone;
-								
+
 								l1 += c;
 								d15 += d16;
 							}
@@ -269,7 +269,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
 			for (int zInChunk = 0; zInChunk < 16; ++zInChunk) {
 				BiomeGenBase biome = biomes[zInChunk + xInChunk * 16];
-				float temperature = biome.getFloatTemperature(0,0,0); // TODO make sure this doesn't break
+				float temperature = biome.getFloatTemperature(0, 0, 0); // TODO make sure this doesn't break
 				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
 				Block topBlock = biome.topBlock;
@@ -349,6 +349,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType creatureType, int x, int y, int z) {
 		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x, z);
 		return biome == null ? null : biome.getSpawnableList(creatureType);
@@ -389,7 +390,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 	}
 
 	@Override
-	public ChunkPosition func_147416_a(World world, String structureIdentifier, int x, int y, int z){
+	public ChunkPosition func_147416_a(World world, String structureIdentifier, int x, int y, int z) {
 		return null;
 	}
 }

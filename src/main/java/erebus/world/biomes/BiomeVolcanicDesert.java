@@ -1,6 +1,7 @@
 package erebus.world.biomes;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
@@ -18,6 +19,7 @@ import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
 
 // @formatter:off
 public class BiomeVolcanicDesert extends BiomeBaseErebus{
+	@SuppressWarnings("unchecked")
 	public BiomeVolcanicDesert(int biomeID){
 		super(biomeID,new BiomeDecoratorVolcanicDesert());
 		
@@ -45,7 +47,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 	
 	@Override
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand){
-		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? (y < 17 ? Blocks.flowing_lava : Blocks.air) : block;
+		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 17 ? Blocks.flowing_lava : Blocks.air : block;
 	}
 }
 // @formatter:on

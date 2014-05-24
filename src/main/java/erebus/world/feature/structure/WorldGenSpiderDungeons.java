@@ -1,6 +1,7 @@
 package erebus.world.feature.structure;
 
 import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -42,8 +43,6 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 		int halfSizeX = rand.nextInt(4)+4;
 		int halfSizeZ = rand.nextInt(4)+4;
 		int j1 = 0;
-		int k1;
-		int l1;
 		int i2;
 		
 		if(y+height+1 >= 127)
@@ -64,11 +63,10 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 					for(int zz = z-halfSizeZ-1; zz <= z+halfSizeZ+1; ++zz)
 						if (xx != x-halfSizeX-1 && yy != y-1 && zz != z-halfSizeZ-1 && xx != x+halfSizeX+1 && yy != y+height+1 && zz != z+halfSizeZ+1)world.setBlockToAir(xx,yy,zz);
 						else if (yy >= 0 && !world.getBlock(xx,yy-1,zz).getMaterial().isSolid())world.setBlockToAir(xx,yy,zz);
-						else if (world.getBlock(xx,yy,zz).getMaterial().isSolid()){
+						else if (world.getBlock(xx,yy,zz).getMaterial().isSolid())
 							if (yy == y-1 && rand.nextInt(4) == 0 || yy == y+height+1 && rand.nextInt(4) == 0) world.setBlock(xx,yy,zz,ModBlocks.umberstone,3,2); // umbercobbleWebbed
 							else if (yy == y-1 && rand.nextInt(4) == 0 || yy == y+height+1 && rand.nextInt(4) == 0) world.setBlock(xx,yy,zz,ModBlocks.umberstone,2,2); // umbercobbleMossy
 							else world.setBlock(xx,yy,zz,ModBlocks.umberstone,1,2); // umbercobble
-						}
 			for(int iteration = 0; iteration < 2; iteration++)
 				for(int attempt = 0; attempt<(iteration == 0?Integer.MAX_VALUE:3); attempt++){
 

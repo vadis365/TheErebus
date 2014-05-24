@@ -11,10 +11,7 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 
 public abstract class GenLayerErebus extends GenLayer {
 
-	private long worldGenSeed;
 	protected GenLayer parent;
-	private long chunkSeed;
-	private long baseSeed;
 
 	public static GenLayer[] initializeAllBiomeGenerators(long seed, WorldType worldType) {
 		byte biomeSize = getModdedBiomeSize(worldType, (byte) (worldType == WorldType.LARGE_BIOMES ? 7 : 5));
