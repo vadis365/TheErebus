@@ -255,128 +255,124 @@ public class ModBlocks {
 	}
 
 	private static void initCreativeTabs() {
-		// Break down long lines // some items removed for 1.6.4 release hidden in NEI API too
-		Erebus.tabErebusBlock.add(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
-		Erebus.tabErebusBlock.add(logErebusGroup1, logErebusGroup2, logErebusGroup3, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
-		Erebus.tabErebusBlock.add(erebusGrass, fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusPlantSmall);
-		Erebus.tabErebusBlock.add(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2); //,erebusMushroomCap3, erebusMushroomCap4
-		Erebus.tabErebusBlock.add(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
-		Erebus.tabErebusBlock.add(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
-		Erebus.tabErebusBlock.add(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
-		Erebus.tabErebusBlock.add(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
-		Erebus.tabErebusBlock.add(jadeBlock, glowGemBlock, mucusBomb); // altar,
-		for (Block b : umbercobbleStairs)
-			Erebus.tabErebusBlock.add(b);
-		for (Block b : plankStairs)
-			Erebus.tabErebusBlock.add(b);
-		for (Block b : gneissStairs)
-			Erebus.tabErebusBlock.add(b);
-		Erebus.tabErebusBlock.add(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, stoneSlabs[0], plankSlabs[0]);
-		Erebus.tabErebusBlock.add(plankSlabs[2], petrifiedWoodSlab[0], wallErebus);
+		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
+		ModTabs.blocks.setTab(logErebusGroup1, logErebusGroup2, logErebusGroup3, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
+		ModTabs.blocks.setTab(erebusGrass, fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusPlantSmall);
+		ModTabs.blocks.setTab(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2); //,erebusMushroomCap3, erebusMushroomCap4
+		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
+		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
+		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
+		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
+		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb); // altar,
+		ModTabs.blocks.setTab(umbercobbleStairs);
+		ModTabs.blocks.setTab(plankStairs);
+		ModTabs.blocks.setTab(gneissStairs);
+		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, stoneSlabs[0], plankSlabs[0]);
+		ModTabs.blocks.setTab(plankSlabs[2], petrifiedWoodSlab[0], wallErebus);
 	}
 
 	private static void registerBlocks() {
-		GameRegistry.registerBlock(portalErebus, "erebus.portal");
+		GameRegistry.registerBlock(portalErebus, "portal");
 
-		GameRegistry.registerBlock(umberstone, ItemBlockUmberStone.class, "erebus.umberstone");
-		GameRegistry.registerBlock(umberOreBlock, ItemBlockUmberOre.class, "erebus.oreBlockU");
-		GameRegistry.registerBlock(oreFossil, "erebus.oreFossil");
-		GameRegistry.registerBlock(redGem, ItemBlockRedGem.class, "erebus.redGem");
-		GameRegistry.registerBlock(blockAmber, ItemBlockAmber.class, "erebus.blockAmber");
-		GameRegistry.registerBlock(quickSand, "erebus.quickSand");
-		GameRegistry.registerBlock(ghostSand, "erebus.ghostSand");
-		GameRegistry.registerBlock(erebusOreExtra, ItemBlockErebusOreExtras.class, "erebus.erebusOreExtras");
-		GameRegistry.registerBlock(umberstoneButton, "erebus.umberstoneButton");
+		GameRegistry.registerBlock(umberstone, ItemBlockUmberStone.class, "umberstone");
+		GameRegistry.registerBlock(umberOreBlock, ItemBlockUmberOre.class, "oreBlockU");
+		GameRegistry.registerBlock(oreFossil, "oreFossil");
+		GameRegistry.registerBlock(redGem, ItemBlockRedGem.class, "redGem");
+		GameRegistry.registerBlock(blockAmber, ItemBlockAmber.class, "blockAmber");
+		GameRegistry.registerBlock(quickSand, "quickSand");
+		GameRegistry.registerBlock(ghostSand, "ghostSand");
+		GameRegistry.registerBlock(erebusOreExtra, ItemBlockErebusOreExtras.class, "erebusOreExtras");
+		GameRegistry.registerBlock(umberstoneButton, "umberstoneButton");
 
-		GameRegistry.registerBlock(logErebusGroup1, ItemBlockLogErebus1.class, "erebus.logErebus1");
-		GameRegistry.registerBlock(logErebusGroup2, ItemBlockLogErebus2.class, "erebus.logErebus2");
-		GameRegistry.registerBlock(logErebusGroup3, ItemBlockLogErebus3.class, "erebus.logErebus3");
-		GameRegistry.registerBlock(planksErebus, ItemBlockPlanksErebus.class, "erebus.planksErebus");
-		GameRegistry.registerBlock(leavesErebus, ItemBlockLeavesErebus.class, "erebus.leavesErebus");
-		GameRegistry.registerBlock(erebusSapling, ItemBlockSapling.class, "erebus.erebusSapling");
-		GameRegistry.registerBlock(hollowLogAcacia, "erebus.hollowLogAcacia");
-		GameRegistry.registerBlock(erebusFlower, ItemBlockErebusFlower.class, "erebus.erebusFlower");
-		GameRegistry.registerBlock(erebusStigma, ItemBlockErebusStigma.class, "erebus.erebusStigma");
+		GameRegistry.registerBlock(logErebusGroup1, ItemBlockLogErebus1.class, "logErebus1");
+		GameRegistry.registerBlock(logErebusGroup2, ItemBlockLogErebus2.class, "logErebus2");
+		GameRegistry.registerBlock(logErebusGroup3, ItemBlockLogErebus3.class, "logErebus3");
+		GameRegistry.registerBlock(planksErebus, ItemBlockPlanksErebus.class, "planksErebus");
+		GameRegistry.registerBlock(leavesErebus, ItemBlockLeavesErebus.class, "leavesErebus");
+		GameRegistry.registerBlock(erebusSapling, ItemBlockSapling.class, "erebusSapling");
+		GameRegistry.registerBlock(hollowLogAcacia, "hollowLogAcacia");
+		GameRegistry.registerBlock(erebusFlower, ItemBlockErebusFlower.class, "erebusFlower");
+		GameRegistry.registerBlock(erebusStigma, ItemBlockErebusStigma.class, "erebusStigma");
 
-		GameRegistry.registerBlock(erebusGrass, "erebus.erebusGrass");
-		GameRegistry.registerBlock(thorns, "erebus.thorns");
-		GameRegistry.registerBlock(fern, ItemBlockColoredSingle.class, "erebus.fern");
-		GameRegistry.registerBlock(blockTurnip, "erebus.blockTurnip");
-		GameRegistry.registerBlock(fiddlehead, "erebus.fiddlehead");
-		GameRegistry.registerBlock(flowerPlanted, ItemBlockFlowerPlanted.class, "erebus.flowerPlanted");
-		GameRegistry.registerBlock(doubleHeightPlant, ItemBlockDoubleHeightPlant.class, "erebus.doubleHeightPlant");
+		GameRegistry.registerBlock(erebusGrass, "erebusGrass");
+		GameRegistry.registerBlock(thorns, "thorns");
+		GameRegistry.registerBlock(fern, ItemBlockColoredSingle.class, "fern");
+		GameRegistry.registerBlock(blockTurnip, "blockTurnip");
+		GameRegistry.registerBlock(fiddlehead, "fiddlehead");
+		GameRegistry.registerBlock(flowerPlanted, ItemBlockFlowerPlanted.class, "flowerPlanted");
+		GameRegistry.registerBlock(doubleHeightPlant, ItemBlockDoubleHeightPlant.class, "doubleHeightPlant");
 
-		GameRegistry.registerBlock(blockSilk, "erebus.blockSilk");
-		GameRegistry.registerBlock(mirBrick, "erebus.mirBrick");
-		GameRegistry.registerBlock(petrifiedWoodPlanks, "erebus.petrifiedWoodPlanks");
-		GameRegistry.registerBlock(petrifiedCraftingTable, "erebus.petrifiedCraftingTable");
-		GameRegistry.registerBlock(bambooCrate, "erebus.bambooCrate");
-		GameRegistry.registerBlock(umberFurnace, "erebus.umberFurnaceOff");
-		GameRegistry.registerBlock(umberFurnace_on, "erebus.umberFurnaceOn");
-		GameRegistry.registerBlock(umberPaver, ItemBlockUmberpaver.class, "erebus.umberpaver");
-		GameRegistry.registerBlock(bambooShoot, "erebus.bambooShoot");
-		GameRegistry.registerBlock(bambooCrop, "erebus.bambooCrop");
-		GameRegistry.registerBlock(bambooTorch, "erebus.bambooTorch");
-		GameRegistry.registerBlock(erebusAltar, "erebus.erebusAltar");
-		GameRegistry.registerBlock(erebusAltarLightning, "erebus.erebusAltarLightning");
-		GameRegistry.registerBlock(erebusAltarHealing, "erebus.erebusAltarHealing");
-		GameRegistry.registerBlock(erebusAltarXP, "erebus.erebusAltarXP");
-		GameRegistry.registerBlock(erebusAltarRepair, "erebus.erebusAltarRepair");
-		GameRegistry.registerBlock(glowingJar, "erebus.glowingJar");
-		GameRegistry.registerBlock(reinExo, "erebus.reinExo");
-		GameRegistry.registerBlock(bambooLadder, "erebus.bambooLadder");
-		GameRegistry.registerBlock(umberGolemStatue, "erebus.umberGolemStatue");
-		GameRegistry.registerBlock(waspNestBlock, "erebus.waspNestBlock");
-		GameRegistry.registerBlock(petrifiedWoodChest, "erebus.petrifiedWoodChest");
-		GameRegistry.registerBlock(blockBones, "erebus.blockBones");
-		GameRegistry.registerBlock(blockWitherWeb, ItemBlockWitherWeb.class, "erebus.witherWeb");
-		GameRegistry.registerBlock(bambooBridge, "erebus.bambooBridge");
-		GameRegistry.registerBlock(extenderThingy, "erebus.extenderThingy");
-		GameRegistry.registerBlock(bambooPole, "erebus.bambooPole");
-		GameRegistry.registerBlock(umberstonePillar, "erebus.umberstonePillar");
-		GameRegistry.registerBlock(velocityBlock, "erebus.velocityBlock");
-		GameRegistry.registerBlock(honeyCombBlock, "erebus.honeyCombBlock");
-		GameRegistry.registerBlock(doorAmber, "erebus.doorAmber");
-		GameRegistry.registerBlock(gneiss, ItemBlockGneiss.class, "erebus.gneiss");
-		GameRegistry.registerBlock(mud, "erebus.mud");
-		GameRegistry.registerBlock(mudBricks, "erebus.mudBricks");
-		GameRegistry.registerBlock(erebusMushroomCap0, "erebus.mushroomBulbCap");
-		GameRegistry.registerBlock(erebusMushroomCap1, "erebus.mushroom1Cap");
-		GameRegistry.registerBlock(erebusMushroomCap2, "erebus.mushroom2Cap");
-		GameRegistry.registerBlock(erebusMushroomCap3, "erebus.mushroom3Cap");
-		GameRegistry.registerBlock(erebusMushroomCap4, "erebus.mushroom4Cap");
-		GameRegistry.registerBlock(erebusPlantSmall, ItemBlockErebusPlantSmall.class, "erebus.erebusPlantSmall");
-		GameRegistry.registerBlock(honeyTreat, "erebus.honeyTreat");
-		GameRegistry.registerBlock(jarOHoney, "erebus.jarOHoney");
-		GameRegistry.registerBlock(jadeBlock, "erebus.jadeBlock");
-		GameRegistry.registerBlock(altar, "erebus.altar");
-		GameRegistry.registerBlock(glowGemBlock, "erebus.glowgemBlock");
-		GameRegistry.registerBlock(mucusBomb, ItemBlockMucusBomb.class, "erebus.mucusBomb");
+		GameRegistry.registerBlock(blockSilk, "blockSilk");
+		GameRegistry.registerBlock(mirBrick, "mirBrick");
+		GameRegistry.registerBlock(petrifiedWoodPlanks, "petrifiedWoodPlanks");
+		GameRegistry.registerBlock(petrifiedCraftingTable, "petrifiedCraftingTable");
+		GameRegistry.registerBlock(bambooCrate, "bambooCrate");
+		GameRegistry.registerBlock(umberFurnace, "umberFurnaceOff");
+		GameRegistry.registerBlock(umberFurnace_on, "umberFurnaceOn");
+		GameRegistry.registerBlock(umberPaver, ItemBlockUmberpaver.class, "umberpaver");
+		GameRegistry.registerBlock(bambooShoot, "bambooShoot");
+		GameRegistry.registerBlock(bambooCrop, "bambooCrop");
+		GameRegistry.registerBlock(bambooTorch, "bambooTorch");
+		GameRegistry.registerBlock(erebusAltar, "erebusAltar");
+		GameRegistry.registerBlock(erebusAltarLightning, "erebusAltarLightning");
+		GameRegistry.registerBlock(erebusAltarHealing, "erebusAltarHealing");
+		GameRegistry.registerBlock(erebusAltarXP, "erebusAltarXP");
+		GameRegistry.registerBlock(erebusAltarRepair, "erebusAltarRepair");
+		GameRegistry.registerBlock(glowingJar, "glowingJar");
+		GameRegistry.registerBlock(reinExo, "reinExo");
+		GameRegistry.registerBlock(bambooLadder, "bambooLadder");
+		GameRegistry.registerBlock(umberGolemStatue, "umberGolemStatue");
+		GameRegistry.registerBlock(waspNestBlock, "waspNestBlock");
+		GameRegistry.registerBlock(petrifiedWoodChest, "petrifiedWoodChest");
+		GameRegistry.registerBlock(blockBones, "blockBones");
+		GameRegistry.registerBlock(blockWitherWeb, ItemBlockWitherWeb.class, "witherWeb");
+		GameRegistry.registerBlock(bambooBridge, "bambooBridge");
+		GameRegistry.registerBlock(extenderThingy, "extenderThingy");
+		GameRegistry.registerBlock(bambooPole, "bambooPole");
+		GameRegistry.registerBlock(umberstonePillar, "umberstonePillar");
+		GameRegistry.registerBlock(velocityBlock, "velocityBlock");
+		GameRegistry.registerBlock(honeyCombBlock, "honeyCombBlock");
+		GameRegistry.registerBlock(doorAmber, "doorAmber");
+		GameRegistry.registerBlock(gneiss, ItemBlockGneiss.class, "gneiss");
+		GameRegistry.registerBlock(mud, "mud");
+		GameRegistry.registerBlock(mudBricks, "mudBricks");
+		GameRegistry.registerBlock(erebusMushroomCap0, "mushroomBulbCap");
+		GameRegistry.registerBlock(erebusMushroomCap1, "mushroom1Cap");
+		GameRegistry.registerBlock(erebusMushroomCap2, "mushroom2Cap");
+		GameRegistry.registerBlock(erebusMushroomCap3, "mushroom3Cap");
+		GameRegistry.registerBlock(erebusMushroomCap4, "mushroom4Cap");
+		GameRegistry.registerBlock(erebusPlantSmall, ItemBlockErebusPlantSmall.class, "erebusPlantSmall");
+		GameRegistry.registerBlock(honeyTreat, "honeyTreat");
+		GameRegistry.registerBlock(jarOHoney, "jarOHoney");
+		GameRegistry.registerBlock(jadeBlock, "jadeBlock");
+		GameRegistry.registerBlock(altar, "altar");
+		GameRegistry.registerBlock(glowGemBlock, "glowgemBlock");
+		GameRegistry.registerBlock(mucusBomb, ItemBlockMucusBomb.class, "mucusBomb");
 
 		for (int i = 0; i < umbercobbleStairs.length; i++)
-			GameRegistry.registerBlock(umbercobbleStairs[i], "erebus.umbercobbleStairs" + i);
+			GameRegistry.registerBlock(umbercobbleStairs[i], "umbercobbleStairs" + i);
 		for (int i = 0; i < plankStairs.length; i++)
-			GameRegistry.registerBlock(plankStairs[i], "erebus.plankStairs" + i);
+			GameRegistry.registerBlock(plankStairs[i], "plankStairs" + i);
 		for (int i = 0; i < stoneSlabs.length; i++)
-			GameRegistry.registerBlock(stoneSlabs[i], ItemBlockSlabStoneErebus.class, "erebus.slabStone" + i);
+			GameRegistry.registerBlock(stoneSlabs[i], ItemBlockSlabStoneErebus.class, "slabStone" + i);
 		for (int i = 0; i < plankSlabs.length; i++)
-			GameRegistry.registerBlock(plankSlabs[i], i <= 1 ? ItemBlockSlabPlanks0Erebus.class : ItemBlockSlabPlanks1Erebus.class, "erebus.slabPlanks" + i);
-		GameRegistry.registerBlock(petrifiedWoodStairs, "erebus.petrifiedWoodStairs");
+			GameRegistry.registerBlock(plankSlabs[i], i <= 1 ? ItemBlockSlabPlanks0Erebus.class : ItemBlockSlabPlanks1Erebus.class, "slabPlanks" + i);
+		GameRegistry.registerBlock(petrifiedWoodStairs, "petrifiedWoodStairs");
 		for (int i = 0; i < petrifiedWoodSlab.length; i++)
-			GameRegistry.registerBlock(petrifiedWoodSlab[i], ItemBlockSlabPetrifiedWood.class, "erebus.petrifiedWoodSlab" + i);
-		GameRegistry.registerBlock(amberBrickStairs, "erebus.amberBrickStairs");
-		GameRegistry.registerBlock(waspNestStairs, "erebus.waspNestStairs");
+			GameRegistry.registerBlock(petrifiedWoodSlab[i], ItemBlockSlabPetrifiedWood.class, "petrifiedWoodSlab" + i);
+		GameRegistry.registerBlock(amberBrickStairs, "amberBrickStairs");
+		GameRegistry.registerBlock(waspNestStairs, "waspNestStairs");
 		for (int i = 0; i < gneissStairs.length; i++)
-			GameRegistry.registerBlock(gneissStairs[i], "erebus.gneissStairs" + i);
+			GameRegistry.registerBlock(gneissStairs[i], "gneissStairs" + i);
 
-		GameRegistry.registerBlock(wallErebus, ItemBlockWallErebus.class, "erebus.wallErebus");
-		GameRegistry.registerBlock(insectRepellent, "erebus.blockInsectRepellent");
+		GameRegistry.registerBlock(wallErebus, ItemBlockWallErebus.class, "wallErebus");
+		GameRegistry.registerBlock(insectRepellent, "blockInsectRepellent");
 
-		GameRegistry.registerBlock(spiderSpawner, "erebus.spiderSpawner");
-		GameRegistry.registerBlock(jumpingSpiderSpawner, "erebus.jumpingSpiderSpawner");
-		GameRegistry.registerBlock(waspSpawner, "erebus.waspSpawner");
+		GameRegistry.registerBlock(spiderSpawner, "spiderSpawner");
+		GameRegistry.registerBlock(jumpingSpiderSpawner, "jumpingSpiderSpawner");
+		GameRegistry.registerBlock(waspSpawner, "waspSpawner");
 
-		GameRegistry.registerBlock(erebusHoneyBlock, "erebus.erebusHoney");
+		GameRegistry.registerBlock(erebusHoneyBlock, "erebusHoney");
 	}
 
 	private static void registerProperties() {

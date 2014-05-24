@@ -9,12 +9,9 @@ import erebus.tileentity.TileEntityBambooCrate;
 
 public class ContainerBambooCrate extends Container {
 
-	private final TileEntityBambooCrate bambooCrateInventory;
 	public int numRows = 3;
 
 	public ContainerBambooCrate(InventoryPlayer playerInventory, TileEntityBambooCrate tile) {
-		bambooCrateInventory = tile;
-		tile.openChest();
 		int i = (numRows - 4) * 18;
 		int j;
 		int k;
@@ -33,7 +30,7 @@ public class ContainerBambooCrate extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return bambooCrateInventory.isUseableByPlayer(player);
+		return true;
 	}
 
 	@Override

@@ -23,11 +23,6 @@ import erebus.core.handler.BucketHandler;
 import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.proxy.CommonProxy;
-import erebus.creativetab.CreativeTabErebus;
-import erebus.creativetab.CreativeTabErebusBlock;
-import erebus.creativetab.CreativeTabErebusGear;
-import erebus.creativetab.CreativeTabErebusItem;
-import erebus.creativetab.CreativeTabErebusSpecialItem;
 import erebus.entity.util.RandomMobNames;
 import erebus.integration.FMBIntegration;
 import erebus.integration.IModIntegration;
@@ -44,11 +39,6 @@ public class Erebus {
 
 	@Instance(Reference.MOD_ID)
 	public static Erebus instance;
-
-	public static CreativeTabErebus tabErebusBlock = new CreativeTabErebusBlock("erebus.block");
-	public static CreativeTabErebus tabErebusItem = new CreativeTabErebusItem("erebus.item");
-	public static CreativeTabErebus tabErebusGear = new CreativeTabErebusGear("erebus.gear");
-	public static CreativeTabErebus tabErebusSpecial = new CreativeTabErebusSpecialItem("erebus.special");
 
 	//public static PlayerTeleportHandler teleportHandler = new PlayerTeleportHandler();
 

@@ -289,7 +289,7 @@ public class BlockPetrifiedChest extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityPetrifiedWoodChest();
 	}
 

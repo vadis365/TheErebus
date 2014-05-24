@@ -88,7 +88,7 @@ public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean shouldRender3DInInventory(int modelId) {
-		return true;
+		return false;
 	}
 
 	@Override

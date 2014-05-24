@@ -1,19 +1,24 @@
 package erebus.creativetab;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 
 public class CreativeTabErebusItem extends CreativeTabErebus {
 
-	public CreativeTabErebusItem(String name) {
-		super(name);
+	public CreativeTabErebusItem() {
+		super("erebus.item");
+	}
+
+	@Override
+	public Item getTabIconItem() {
+		return ModItems.erebusFood;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ItemStack getIconItemStack() {
-		return new ItemStack(ModItems.erebusFood, 1, 0);
+	public int func_151243_f() {
+		return 0;
 	}
 }

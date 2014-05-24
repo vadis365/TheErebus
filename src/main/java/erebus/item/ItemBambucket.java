@@ -84,7 +84,7 @@ public class ItemBambucket extends Item {
 						return new ItemStack(this, 1, 1);
 
 					if (!player.inventory.addItemStackToInventory(new ItemStack(this, 1, 1)))
-						player.dropPlayerItem(new ItemStack(this, 1, 1));
+						player.entityDropItem(new ItemStack(this, 1, 1), 0.0F);
 
 					return is;
 				}
@@ -99,7 +99,7 @@ public class ItemBambucket extends Item {
 						return new ItemStack(this, 1, 3);
 
 					if (!player.inventory.addItemStackToInventory(new ItemStack(this, 1, 3)))
-						player.dropPlayerItem(new ItemStack(this, 1, 3));
+						player.entityDropItem(new ItemStack(this, 1, 3), 0.0F);
 
 					return is;
 				}

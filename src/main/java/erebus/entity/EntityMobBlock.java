@@ -168,6 +168,6 @@ public abstract class EntityMobBlock extends EntityCreature implements IMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getAttributeMap().func_111150_b(SharedMonsterAttributes.attackDamage);
+		//getAttributeMap().func_111150_b(SharedMonsterAttributes.attackDamage);
 	}
 }

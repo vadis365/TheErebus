@@ -106,7 +106,7 @@ public class BlockBambooCrop extends Block {
 	}
 
 	@Override
-	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side, ItemStack is) {
+	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
 		Block block = world.getBlock(x, y - 1, z);
 		if (!(world.getBlock(x, y - 1, z) == this && world.getBlockMetadata(x, y - 1, z) == 0 || block != null && block.isSideSolid(world, x, y, z, ForgeDirection.UP)))
 			return false;

@@ -19,11 +19,12 @@ public class ItemMetalIngots extends Item {
 	public ItemMetalIngots() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
+		setUnlocalizedName("erebus.metalIngot");
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		return "item.metalIngot" + is.getItemDamage();
+		return super.getUnlocalizedName() + is.getItemDamage();
 	}
 
 	@Override

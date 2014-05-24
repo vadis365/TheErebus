@@ -13,7 +13,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
 
@@ -23,9 +22,8 @@ public class ItemSprintLeggings extends ItemArmor {
 	private int armtick;
 	private String texture;
 
-	public ItemSprintLeggings(ArmorMaterial enumarmormaterial, int k) {
-		super(enumarmormaterial, 2, k);
-		setCreativeTab(Erebus.tabErebusGear);
+	public ItemSprintLeggings(ArmorMaterial material, int k) {
+		super(material, 2, k);
 	}
 
 	@Override

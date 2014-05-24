@@ -12,7 +12,6 @@ import net.minecraftforge.fluids.Fluid;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModMaterials;
 
@@ -23,7 +22,6 @@ public class BlockErebusHoney extends BlockFluidClassic {
 
 	public BlockErebusHoney(Fluid fluid) {
 		super(fluid, ModMaterials.honey);
-		setCreativeTab(Erebus.tabErebusBlock);
 	}
 
 	@Override

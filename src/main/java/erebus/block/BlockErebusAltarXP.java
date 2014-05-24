@@ -58,18 +58,17 @@ public class BlockErebusAltarXP extends BlockErebusAltarLightning {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		TileEntityErebusAltarXP te = (TileEntityErebusAltarXP) world.getBlockTileEntity(x, y, z);
+		TileEntityErebusAltarXP te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarXP.class);
 		if (player.getCurrentEquippedItem() != null)
-			if (player.getCurrentEquippedItem().itemID == ModItems.wandOfAnimation.itemID && !te.active) {
-				player.getCurrentEquippedItem().damageItem(1, player);
-				te.setSpawnTicks(12000);
-				te.setActive(true);
-				return true;
-			}
-		if (player.getCurrentEquippedItem() != null)
-			if (player.getCurrentEquippedItem().itemID == ModItems.wandOfAnimation.itemID && te.active) {
-				player.getCurrentEquippedItem().damageItem(1, player);
-				te.setActive(false);
+			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation) {
+				if (!te.active) {
+					player.getCurrentEquippedItem().damageItem(1, player);
+					te.setSpawnTicks(12000);
+					te.setActive(true);
+				} else {
+					player.getCurrentEquippedItem().damageItem(1, player);
+					te.setActive(false);
+				}
 				return true;
 			}
 		return false;

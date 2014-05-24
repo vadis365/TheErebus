@@ -39,7 +39,7 @@ public class BlockPortalErebus extends BlockBreakable {
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
-		if (ConfigHandler.spawnPortalMobs && world.difficultySetting.ordinal() > 0 && world.provider.isSurfaceWorld() && rand.nextInt(100) < 3D + world.difficultySetting * 0.5D) {
+		if (ConfigHandler.spawnPortalMobs && world.difficultySetting.ordinal() > 0 && world.provider.isSurfaceWorld() && rand.nextInt(100) < 3D + world.difficultySetting.ordinal() * 0.5D) {
 			int yy;
 			for (yy = y; !World.doesBlockHaveSolidTopSurface(world, x, yy, z) && yy > 0; --yy);
 

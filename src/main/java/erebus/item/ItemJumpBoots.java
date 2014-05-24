@@ -9,15 +9,13 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class ItemJumpBoots extends ItemArmor {
 
-	public ItemJumpBoots(ArmorMaterial enumarmormaterial, int k) {
-		super(enumarmormaterial, 2, k);
-		setCreativeTab(Erebus.tabErebusGear);
+	public ItemJumpBoots(ArmorMaterial material, int k) {
+		super(material, 2, k);
 	}
 
 	@Override

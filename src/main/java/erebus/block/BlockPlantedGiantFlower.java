@@ -50,16 +50,16 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 		if (!world.isRemote) {
 			super.updateTick(world, x, y, z, rand);
 			if (rand.nextInt(13 - (world.getBlockLightValue(x, y + 1, z) >> 1)) == 0)
-				growTree(world, x, y, z, rand);
+				func_149878_d(world, x, y, z, rand);
 		}
 	}
 
 	@Override
-	public void markOrGrowMarked(World world, int x, int y, int z, Random rand) {
+	public void func_149879_c(World world, int x, int y, int z, Random rand) {
 	}
 
 	@Override
-	public void growTree(World world, int x, int y, int z, Random rand) {
+	public void func_149878_d(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = new WorldGenGiantFlowers();
 		if (meta >= 0 && meta <= 13)
@@ -118,7 +118,7 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 	public void onBonemeal(BonemealEvent event) {
 		if (!event.world.isRemote && event.block == this) {
 			if (event.world.rand.nextFloat() < 0.45D)
-				growTree(event.world, event.x, event.y, event.z, event.world.rand);
+				func_149878_d(event.world, event.x, event.y, event.z, event.world.rand);
 			event.setResult(Result.ALLOW);
 		}
 	}

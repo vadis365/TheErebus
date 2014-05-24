@@ -1,47 +1,24 @@
 package erebus.creativetab;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
-public class CreativeTabErebus extends CreativeTabs {
+public abstract class CreativeTabErebus extends CreativeTabs {
 
-	private final List<ItemStack> blockList = new ArrayList<ItemStack>();
-
-	public CreativeTabErebus(String name) {
-		super(name);
+	public CreativeTabErebus(String lable) {
+		super(lable);
 	}
 
-	public void add(Block... blocks) {
+	public void setTab(Block... blocks) {
 		for (Block block : blocks)
-			if (block != null) {
-				blockList.add(new ItemStack(block));
+			if (block != null)
 				block.setCreativeTab(this);
-			}
 	}
 
-	public void add(Item... items) {
+	public void setTab(Item... items) {
 		for (Item item : items)
-			if (item != null) {
-				blockList.add(new ItemStack(item));
+			if (item != null)
 				item.setCreativeTab(this);
-			}
-	}
-
-	@Override
-	@SuppressWarnings("rawtypes")
-	public void displayAllReleventItems(List list) {
-		for (ItemStack s : blockList)
-			if (s != null)
-				s.getItem().getSubItems(s.getItem(), this, list);
-	}
-
-	@Override
-	public Item getTabIconItem() {
-		return getIconItemStack().getItem();
 	}
 }

@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
@@ -76,17 +77,17 @@ public class BlockUndergroundFlower extends Block implements IPlantable {
 	}
 
 	@Override
-	public EnumPlantType getPlantType(World world, int x, int y, int z) {
+	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z) {
 		return Plains;
 	}
 
 	@Override
-	public int getPlantID(World world, int x, int y, int z) {
-		return blockID;
+	public Block getPlant(IBlockAccess world, int x, int y, int z) {
+		return this;
 	}
 
 	@Override
-	public int getPlantMetadata(World world, int x, int y, int z) {
+	public int getPlantMetadata(IBlockAccess world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}
 }

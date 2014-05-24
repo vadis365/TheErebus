@@ -57,10 +57,14 @@ public class BlockSaplingErebus extends BlockSapling {
 	}
 
 	@Override
-	public void markOrGrowMarked(World world, int x, int y, int z, Random rand) {
+	public void func_149879_c(World world, int x, int y, int z, Random rand) {
 	}
 
 	@Override
+	public void func_149878_d(World world, int x, int y, int z, Random rand) {
+		growTree(world, x, y, z, rand);
+	}
+
 	public void growTree(World world, int x, int y, int z, Random rand) {
 		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z))
 			return;
@@ -83,7 +87,7 @@ public class BlockSaplingErebus extends BlockSapling {
 			for (var8 = 0; var8 >= -1; --var8) {
 				for (var9 = 0; var9 >= -1; --var9)
 					if (isSameSapling(world, x + var8, y, z + var9, 0) && isSameSapling(world, x + var8 + 1, y, z + var9, 0) && isSameSapling(world, x + var8, y, z + var9 + 1, 0) && isSameSapling(world, x + var8 + 1, y, z + var9 + 1, 0)) {
-						worldGen = new WorldGenErebusHugeTree(true, BlockLogErebus.dataMahogany, BlockLeavesErebus.dataMahoganyDecay, true, ModBlocks.logErebusGroup1.blockID, ModBlocks.leavesErebus.blockID);
+						worldGen = new WorldGenErebusHugeTree(true, BlockLogErebus.dataMahogany, BlockLeavesErebus.dataMahoganyDecay, true, ModBlocks.logErebusGroup1, ModBlocks.leavesErebus);
 						((WorldGenErebusHugeTree) worldGen).prepare(20 + rand.nextInt(5));
 						var10 = true;
 						break;
@@ -96,30 +100,29 @@ public class BlockSaplingErebus extends BlockSapling {
 		if (worldGen == null) {
 			var9 = 0;
 			var8 = 0;
-			worldGen = new WorldGenErebusTrees(true, 5, BlockLogErebus.dataMahogany, BlockLeavesErebus.dataMahoganyDecay, false, ModBlocks.logErebusGroup1.blockID, ModBlocks.leavesErebus.blockID, ModBlocks.thorns.blockID);
+			worldGen = new WorldGenErebusTrees(true, 5, BlockLogErebus.dataMahogany, BlockLeavesErebus.dataMahoganyDecay, false, ModBlocks.logErebusGroup1, ModBlocks.leavesErebus, ModBlocks.thorns);
 		}
 
 		if (var10) {
-			world.setBlock(x + var8, y, z + var9, 0);
-			world.setBlock(x + var8 + 1, y, z + var9, 0);
-			world.setBlock(x + var8, y, z + var9 + 1, 0);
-			world.setBlock(x + var8 + 1, y, z + var9 + 1, 0);
+			world.setBlockToAir(x + var8, y, z + var9);
+			world.setBlockToAir(x + var8 + 1, y, z + var9);
+			world.setBlockToAir(x + var8, y, z + var9 + 1);
+			world.setBlockToAir(x + var8 + 1, y, z + var9 + 1);
 		} else
-			world.setBlock(x, y, z, 0);
+			world.setBlockToAir(x, y, z);
 
 		if (!worldGen.generate(world, rand, x + var8, y, z + var9))
 			if (var10) {
-				world.setBlock(x + var8, y, z + var9, blockID, meta, 3);
-				world.setBlock(x + var8 + 1, y, z + var9, blockID, meta, 3);
-				world.setBlock(x + var8, y, z + var9 + 1, blockID, meta, 3);
-				world.setBlock(x + var8 + 1, y, z + var9 + 1, blockID, meta, 3);
+				world.setBlock(x + var8, y, z + var9, this, meta, 3);
+				world.setBlock(x + var8 + 1, y, z + var9, this, meta, 3);
+				world.setBlock(x + var8, y, z + var9 + 1, this, meta, 3);
+				world.setBlock(x + var8 + 1, y, z + var9 + 1, this, meta, 3);
 			} else
-				world.setBlock(x, y, z, blockID, meta, 3);
+				world.setBlock(x, y, z, this, meta, 3);
 	}
 
-	@Override
 	public boolean isSameSapling(World world, int x, int y, int z, int meta) {
-		return world.getBlockId(x, y, z) == blockID && world.getBlockMetadata(x, y, z) == meta;
+		return super.func_149880_a(world, x, y, z, meta);
 	}
 
 	@Override

@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.ConfigHandler;
 
 public class BlockErebusOreExtras extends Block {
 
@@ -19,7 +18,7 @@ public class BlockErebusOreExtras extends Block {
 	public static final byte dataAluminium = 0, dataCopper = 1, dataLead = 2, dataSilver = 3, dataTin = 4;
 
 	@SideOnly(Side.CLIENT)
-	private IIcon[] blockIcon;
+	private IIcon[] icons;
 
 	public BlockErebusOreExtras() {
 		super(Material.rock);
@@ -30,33 +29,28 @@ public class BlockErebusOreExtras extends Block {
 		return meta;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
-		if (ConfigHandler.aluminium)
-			list.add(new ItemStack(id, 1, 0));
-		if (ConfigHandler.copper)
-			list.add(new ItemStack(id, 1, 1));
-		if (ConfigHandler.lead)
-			list.add(new ItemStack(id, 1, 2));
-		if (ConfigHandler.silver)
-			list.add(new ItemStack(id, 1, 3));
-		if (ConfigHandler.tin)
-			list.add(new ItemStack(id, 1, 4));
+		list.add(new ItemStack(id, 1, dataAluminium));
+		list.add(new ItemStack(id, 1, dataCopper));
+		list.add(new ItemStack(id, 1, dataLead));
+		list.add(new ItemStack(id, 1, dataSilver));
+		list.add(new ItemStack(id, 1, dataTin));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return blockIcon[meta];
+		return icons[meta];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = new IIcon[types.length];
-		for (int i = 0; i < blockIcon.length; i++)
-			blockIcon[i] = reg.registerIcon("erebus:" + types[i]);
+		icons = new IIcon[types.length];
+		for (int i = 0; i < icons.length; i++)
+			icons[i] = reg.registerIcon("erebus:" + types[i]);
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.IconFlipped;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -89,8 +90,8 @@ public class BlockDoorAmber extends BlockDoor {
 	}
 
 	@Override
-	public int idDropped(int id, Random random, int something) {
-		return (id & 8) != 0 ? 0 : ModItems.doorAmberItem.itemID;
+	public Item getItemDropped(int id, Random random, int something) {
+		return (id & 8) != 0 ? null : ModItems.doorAmberItem;
 	}
 
 	@SideOnly(Side.CLIENT)

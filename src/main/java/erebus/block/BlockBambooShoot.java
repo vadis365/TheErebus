@@ -9,6 +9,7 @@ import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumPlantType;
@@ -117,7 +118,7 @@ public class BlockBambooShoot extends BlockFlower implements IPlantable {
 	}
 
 	@Override
-	public EnumPlantType getPlantType(World world, int x, int y, int z) {
+	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z) {
 		return EnumPlantType.Plains;
 	}
 

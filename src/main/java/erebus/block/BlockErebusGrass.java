@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
@@ -16,8 +17,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockErebusGrass extends BlockTallGrass {
 
 	@Override
-	protected boolean canThisPlantGrowOnThisBlockID(int blockID) {
-		return blockID == Block.grass.blockID || blockID == Block.dirt.blockID || blockID == Block.tilledField.blockID || blockID == Block.sand.blockID;
+	protected boolean canPlaceBlockOn(Block blockID) {
+		return blockID == Blocks.grass || blockID == Blocks.dirt || blockID == Blocks.farmland || blockID == Blocks.sand;
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class BlockErebusGrass extends BlockTallGrass {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
-		return access.getBiomeGenForCoords(x, z).getBiomeGrassColor();
+		return access.getBiomeGenForCoords(x, z).getBiomeGrassColor(x, y, z);
 	}
 
 	@Override

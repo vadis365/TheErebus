@@ -116,7 +116,7 @@ public class BlockBambooBridge extends BlockContainer {
 				te.setRenderSide1((byte) 0);
 		}
 		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
-		world.markBlockForRenderUpdate(x, y, z);
+		world.func_147479_m(x, y, z);
 		world.markBlockForUpdate(x, y, z);
 	}
 
@@ -126,6 +126,7 @@ public class BlockBambooBridge extends BlockContainer {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
 		float pixel = 0.0625F; // 1 pixel
 		int meta = world.getBlockMetadata(x, y, z);

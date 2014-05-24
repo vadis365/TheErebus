@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.network.PacketPipeline;
 import erebus.network.packet.PacketParticle;
@@ -14,7 +13,6 @@ public class ItemSprayCan extends Item {
 
 	public ItemSprayCan() {
 		maxStackSize = 9;
-		setCreativeTab(Erebus.tabErebusGear);
 	}
 
 	protected String getSprayCanSound() {

@@ -9,12 +9,9 @@ import erebus.tileentity.TileEntityHoneyComb;
 
 public class ContainerHoneyComb extends Container {
 
-	private final TileEntityHoneyComb honeyCombInventory;
 	public int numRows = 3;
 
 	public ContainerHoneyComb(InventoryPlayer playerInventory, TileEntityHoneyComb tile) {
-		honeyCombInventory = tile;
-		tile.openChest();
 		int i = (numRows - 4) * 18;
 		int j;
 		int k;
@@ -33,7 +30,7 @@ public class ContainerHoneyComb extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return honeyCombInventory.isUseableByPlayer(player);
+		return true;
 	}
 
 	@Override

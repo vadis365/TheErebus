@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -85,40 +86,38 @@ public class BlockDoubleHeightPlant extends Block {
 	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
 		int meta = access.getBlockMetadata(x, y, z);
 		if (meta == 4 || meta == 12 || meta == 7 || meta == 15)
-			return access.getBiomeGenForCoords(x, z).getBiomeGrassColor();
+			return access.getBiomeGenForCoords(x, z).getBiomeGrassColor(x, y, z);
 		return 16777215;
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		int l = world.getBlockId(x, y - 1, z);
-		int m = world.getBlockId(x, y + 1, z);
-		Block block = Block.blocksList[l];
-		if (block == null || m != 0)
+		Block block = world.getBlock(x, y - 1, z);
+		if (block == null || !world.isAirBlock(x, y + 1, z))
 			return false;
 		if (block == this && world.getBlockMetadata(x, y - 1, z) < 8)
 			return true;
 		if (!block.isLeaves(world, x, y - 1, z) && !block.isOpaqueCube())
 			return false;
 		else
-			return world.getBlockMaterial(x, y - 1, z).blocksMovement();
+			return block.getMaterial().blocksMovement();
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborID) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		world(world, x, y, z);
 	}
 
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
-		if (world.getBlockId(x, y + 1, z) == 0 && world.getBlockId(x, y, z) == blockID && world.getBlockMetadata(x, y, z) <= 7) {
+		if (world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) <= 7) {
 			int meta = world.getBlockMetadata(x, y, z);
-			world.setBlock(x, y + 1, z, blockID, meta + 8, 3);
+			world.setBlock(x, y + 1, z, this, meta + 8, 3);
 		}
 	}
 
 	protected boolean world(World world, int x, int y, int z) {
-		if (world.getBlockId(x, y - 1, z) == 0) {
+		if (world.isAirBlock(x, y - 1, z)) {
 			world.setBlockToAir(x, y, z);
 			return false;
 		}
@@ -175,15 +174,10 @@ public class BlockDoubleHeightPlant extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int id, CreativeTabs tab, List list) {
-		for (int i = 0; i < doublePlantBottomIcons.length; ++i)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
+		for (int i = 0; i < doublePlantBottomIcons.length; i++)
 			list.add(new ItemStack(id, 1, i));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int idPicked(World world, int x, int y, int z) {
-		return blockID;
 	}
 
 	@Override

@@ -5,15 +5,13 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.Erebus;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityLocust;
 
 public class ItemHornOfSummoning extends Item {
 
 	public ItemHornOfSummoning() {
-		maxStackSize = 1;
-		setCreativeTab(Erebus.tabErebusGear);
+		setMaxStackSize(1);
 	}
 
 	@Override

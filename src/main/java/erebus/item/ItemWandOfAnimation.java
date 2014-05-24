@@ -29,9 +29,9 @@ public class ItemWandOfAnimation extends Item {
 		setMaxStackSize(1);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
 		list.add("Right click blocks to animate them");
 	}

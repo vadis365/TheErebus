@@ -74,7 +74,7 @@ public class BlockErebusAltar extends BlockContainer {
 			if (entity.boundingBox.minY >= y + offsetY) {
 				ItemStack is = ((EntityItem) entity).getEntityItem();
 
-				if (is.itemID == ModItems.erebusMaterials.itemID && isValidOffering(is.getItemDamage()))
+				if (is.getItem() == ModItems.erebusMaterials && isValidOffering(is.getItemDamage()))
 					if (((EntityItem) entity).age > 20) {
 						chooseAltar(world, x, y, z, is.getItemDamage());
 						entity.setDead();
@@ -101,28 +101,28 @@ public class BlockErebusAltar extends BlockContainer {
 		switch (damage) {
 			case 8:
 				if (!world.isRemote)
-					world.setBlock(x, y, z, ModBlocks.erebusAltarXP.blockID, world.getBlockMetadata(x, y, z), 3);
+					world.setBlock(x, y, z, ModBlocks.erebusAltarXP, world.getBlockMetadata(x, y, z), 3);
 				if (world.isRemote)
 					message = "Altar of Experience Summoned.";
 				break;
 
 			case 9:
 				if (!world.isRemote)
-					world.setBlock(x, y, z, ModBlocks.erebusAltarRepair.blockID, world.getBlockMetadata(x, y, z), 3);
+					world.setBlock(x, y, z, ModBlocks.erebusAltarRepair, world.getBlockMetadata(x, y, z), 3);
 				if (world.isRemote)
 					message = "Altar of Repair Summoned.";
 				break;
 
 			case 12:
 				if (!world.isRemote)
-					world.setBlock(x, y, z, ModBlocks.erebusAltarLightning.blockID, world.getBlockMetadata(x, y, z), 3);
+					world.setBlock(x, y, z, ModBlocks.erebusAltarLightning, world.getBlockMetadata(x, y, z), 3);
 				if (world.isRemote)
 					message = "Altar of Lightning Summoned.";
 				break;
 
 			case 13:
 				if (!world.isRemote)
-					world.setBlock(x, y, z, ModBlocks.erebusAltarHealing.blockID, world.getBlockMetadata(x, y, z), 3);
+					world.setBlock(x, y, z, ModBlocks.erebusAltarHealing, world.getBlockMetadata(x, y, z), 3);
 				if (world.isRemote)
 					message = "Altar of Healing Summoned.";
 				break;

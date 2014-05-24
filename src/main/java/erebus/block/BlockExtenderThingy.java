@@ -71,16 +71,14 @@ public class BlockExtenderThingy extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
-		IInventory tile = (IInventory) world.getBlockTileEntity(x, y, z);
-		if (tile != null) {
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+		IInventory tile = Utils.getTileEntity(world, x, y, z, IInventory.class);
+		if (tile != null)
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack stack = tile.getStackInSlot(i);
 				if (stack != null)
 					Utils.dropStack(world, x, y, z, stack);
 			}
-			world.func_96440_m(x, y, z, par5);
-		}
-		super.breakBlock(world, x, y, z, par5, par6);
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 }

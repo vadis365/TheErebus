@@ -1,11 +1,14 @@
 package erebus.integration.nei;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import codechicken.nei.recipe.DefaultOverlayHandler;
 import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.client.gui.GuiPetrifiedWorkbench;
+import erebus.core.handler.ConfigHandler;
 import erebus.lib.Reference;
 
 public class NEIErebusConfig implements IConfigureNEI {
@@ -20,12 +23,32 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(ModBlocks.blockTurnip));
 		API.hideItem(new ItemStack(ModBlocks.insectRepellent));
 		API.hideItem(new ItemStack(ModBlocks.umberFurnace_on));
-		API.hideItem(new ItemStack(ModBlocks.flowerPlanted));
+		API.hideItem(new ItemStack(ModBlocks.flowerPlanted, 1, OreDictionary.WILDCARD_VALUE));
 		API.hideItem(new ItemStack(ModBlocks.doorAmber));
 		API.hideItem(new ItemStack(ModBlocks.erebusHoneyBlock));
 		API.hideItem(new ItemStack(ModBlocks.altar));
 		API.hideItem(new ItemStack(ModBlocks.erebusMushroomCap3));
 		API.hideItem(new ItemStack(ModBlocks.erebusMushroomCap4));
+		if (!ConfigHandler.aluminium) {
+			API.hideItem(new ItemStack(ModBlocks.erebusOreExtra, 1, 0));
+			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 0));
+		}
+		if (!ConfigHandler.copper) {
+			API.hideItem(new ItemStack(ModBlocks.erebusOreExtra, 1, 1));
+			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 1));
+		}
+		if (!ConfigHandler.lead) {
+			API.hideItem(new ItemStack(ModBlocks.erebusOreExtra, 1, 2));
+			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 2));
+		}
+		if (!ConfigHandler.silver) {
+			API.hideItem(new ItemStack(ModBlocks.erebusOreExtra, 1, 3));
+			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 3));
+		}
+		if (!ConfigHandler.tin) {
+			API.hideItem(new ItemStack(ModBlocks.erebusOreExtra, 1, 4));
+			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 4));
+		}
 	}
 
 	@Override
