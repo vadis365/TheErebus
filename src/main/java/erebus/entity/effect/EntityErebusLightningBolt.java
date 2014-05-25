@@ -8,10 +8,7 @@ import net.minecraft.entity.effect.EntityWeatherEffect;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityErebusLightningBolt extends EntityWeatherEffect {
 
@@ -82,9 +79,4 @@ public class EntityErebusLightningBolt extends EntityWeatherEffect {
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean isInRangeToRenderVec3D(Vec3 vec) {
-		return lightningState >= 0;
-	}
 }

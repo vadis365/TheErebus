@@ -55,11 +55,8 @@ public class EntityGooBall extends EntityThrowable {
 					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 5 * 20, 3));
 					setDead();
 				}
-				//TODO Fix Packets
-				/*
 				if (worldObj.isRemote)
 					PacketDispatcher.sendPacketToAllAround(mop.entityHit.posX, mop.entityHit.posY + 2D, mop.entityHit.posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, mop.entityHit.entityId)));
-			*/
 			}
 		worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
 	}

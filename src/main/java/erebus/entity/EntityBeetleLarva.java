@@ -184,8 +184,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onDeathUpdate() {
 		super.onDeathUpdate();
 		if (isSquashed) {
-			//TODO
-			//PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, entityId)));
+			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, entityId)));
 			worldObj.playSoundEffect(posX, posY, posZ, getJumpedOnSound(), 1.0F, 0.5F);
 			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
 			if (!worldObj.isRemote) {

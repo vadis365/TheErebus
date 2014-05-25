@@ -35,7 +35,7 @@ public class BlockDoorAmber extends BlockDoor {
 			return blockIcon;
 		if (direction == 0)
 			return crapFixIcon;
-		int meta = getFullMetadata(iBlockAccess, x, y, z);
+		int meta = func_150012_g(iBlockAccess, x, y, z);//getFullMetadata
 		boolean flag = (meta & 4) != 0;
 		int halfMeta = meta & 3;
 		boolean flipped = false;
@@ -83,11 +83,11 @@ public class BlockDoorAmber extends BlockDoor {
 		flippedIcons[0] = new IconFlipped(blockIcon, true, false);
 		flippedIcons[1] = new IconFlipped(topDoorIcon, true, false);
 	}
-
-	@Override
-	public int idPicked(World world, int x, int y, int z) {
-		return ModItems.doorAmberItem.itemID;
-	}
+	
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z) {
+        return ModItems.doorAmberItem;
+    }
 
 	@Override
 	public Item getItemDropped(int id, Random random, int something) {
