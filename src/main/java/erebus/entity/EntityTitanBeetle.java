@@ -43,6 +43,7 @@ public class EntityTitanBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	boolean isOpen;
 	float openticks;
+	int shagCount;
 	public ItemStack[] inventory;
 
 	public EntityTitanBeetle(World world) {
@@ -104,6 +105,8 @@ public class EntityTitanBeetle extends EntityTameable {
 			double offSetZ = Math.cos(a) * 1.2D;
 			enderChestParticles(worldObj, posX - offSetX, posY + 1.2, posZ - offSetZ, rand);
 		}
+		if(shagCount > 0)
+			shagCount--;
 	}
 
 	@Override
@@ -245,9 +248,9 @@ public class EntityTitanBeetle extends EntityTameable {
 			setTameState((byte) 2);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.turnip && !isInLove() && getTameState() != 0) {
+		if (is != null && is.getItem() == ModItems.turnip && !shagging() && getTameState() != 0) {
 			is.stackSize--;
-			inLove = 600;
+			shagCount = 600;
 			return true;
 		}
 		if (is == null && getTameState() >= 2) {
@@ -292,6 +295,10 @@ public class EntityTitanBeetle extends EntityTameable {
 		}
 		return super.interact(player);
 	}
+	
+    public boolean shagging() {
+        return shagCount > 0;
+    }
 
 	@Override
 	public void moveEntityWithHeading(float strafe, float forward) {

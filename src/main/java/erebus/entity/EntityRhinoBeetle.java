@@ -34,6 +34,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	private boolean ramming;
 	public int rammingCharge;
+	int shagCount;
 
 	public EntityRhinoBeetle(World world) {
 		super(world);
@@ -167,9 +168,9 @@ public class EntityRhinoBeetle extends EntityTameable {
 			setTameState((byte) 2);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.turnip && !isInLove() && getTameState() != 0) {
+		if (is != null && is.getItem() == ModItems.turnip && !shagging() && getTameState() != 0) {
 			is.stackSize--;
-			inLove = 600;
+			shagCount = 600;
 			return true;
 		}
 		if (is == null && getTameState() == 2) {
@@ -191,6 +192,10 @@ public class EntityRhinoBeetle extends EntityTameable {
 		} else
 			return super.interact(player);
 	}
+	
+    public boolean shagging() {
+        return shagCount > 0;
+    }
 
 	public void setRamAttack(boolean state) {
 		ramming = state;
@@ -237,11 +242,13 @@ public class EntityRhinoBeetle extends EntityTameable {
 
 	@Override
 	public void onUpdate() {
+		super.onUpdate();
 		if (!ramming)
 			if (getTameState() == 0 || riddenByEntity == null)
 				if (worldObj.getWorldTime() % 10 == 0)
 					setRammingCharge((byte) 0);
-		super.onUpdate();
+		if(shagCount > 0)
+			shagCount--;
 	}
 
 	@Override
