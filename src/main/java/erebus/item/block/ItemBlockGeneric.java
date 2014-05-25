@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class ItemBlockGeneric extends ItemBlock {
 
-	public ItemBlockGeneric(Block block, String unlocalizedName) {
+	public ItemBlockGeneric(Block block) {
 		super(block);
 		setHasSubtypes(true);
 	}

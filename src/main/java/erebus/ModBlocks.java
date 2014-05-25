@@ -79,22 +79,15 @@ import erebus.item.block.ItemBlockAmber;
 import erebus.item.block.ItemBlockColoredSingle;
 import erebus.item.block.ItemBlockDoubleHeightPlant;
 import erebus.item.block.ItemBlockErebusFlower;
-import erebus.item.block.ItemBlockErebusOreExtras;
 import erebus.item.block.ItemBlockErebusPlantSmall;
 import erebus.item.block.ItemBlockErebusStigma;
 import erebus.item.block.ItemBlockFlowerPlanted;
-import erebus.item.block.ItemBlockGneiss;
-import erebus.item.block.ItemBlockLeavesErebus;
+import erebus.item.block.ItemBlockGeneric;
 import erebus.item.block.ItemBlockPlanks;
-import erebus.item.block.ItemBlockRedGem;
 import erebus.item.block.ItemBlockSlabPetrifiedWood;
 import erebus.item.block.ItemBlockSlabPlanks0Erebus;
 import erebus.item.block.ItemBlockSlabPlanks1Erebus;
 import erebus.item.block.ItemBlockSlabStoneErebus;
-import erebus.item.block.ItemBlockUmberOre;
-import erebus.item.block.ItemBlockUmberStone;
-import erebus.item.block.ItemBlockUmberpaver;
-import erebus.item.block.ItemBlockWallErebus;
 import erebus.item.block.ItemBlockWitherWeb;
 import erebus.lib.EnumWood;
 
@@ -261,18 +254,18 @@ public class ModBlocks {
 	private static void registerBlocks() {
 		GameRegistry.registerBlock(portalErebus, "portal");
 
-		GameRegistry.registerBlock(umberstone, ItemBlockUmberStone.class, "umberstone");
-		GameRegistry.registerBlock(umberOreBlock, ItemBlockUmberOre.class, "oreBlockU");
+		GameRegistry.registerBlock(umberstone, ItemBlockGeneric.class, "umberstone");
+		GameRegistry.registerBlock(umberOreBlock, ItemBlockGeneric.class, "oreBlockU");
 		GameRegistry.registerBlock(oreFossil, "oreFossil");
-		GameRegistry.registerBlock(redGem, ItemBlockRedGem.class, "redGem");
+		GameRegistry.registerBlock(redGem, ItemBlockGeneric.class, "redGem");
 		GameRegistry.registerBlock(blockAmber, ItemBlockAmber.class, "blockAmber");
 		GameRegistry.registerBlock(quickSand, "quickSand");
 		GameRegistry.registerBlock(ghostSand, "ghostSand");
-		GameRegistry.registerBlock(erebusOreExtra, ItemBlockErebusOreExtras.class, "erebusOreExtras");
+		GameRegistry.registerBlock(erebusOreExtra, ItemBlockGeneric.class, "erebusOreExtras");
 		GameRegistry.registerBlock(umberstoneButton, "umberstoneButton");
 
 		GameRegistry.registerBlock(planksErebus, ItemBlockPlanks.class, "planksErebus");
-		GameRegistry.registerBlock(leavesErebus, ItemBlockLeavesErebus.class, "leavesErebus");
+		GameRegistry.registerBlock(leavesErebus, ItemBlockGeneric.class, "leavesErebus");
 		GameRegistry.registerBlock(hollowLogAcacia, "hollowLogAcacia");
 		GameRegistry.registerBlock(erebusFlower, ItemBlockErebusFlower.class, "erebusFlower");
 		GameRegistry.registerBlock(erebusStigma, ItemBlockErebusStigma.class, "erebusStigma");
@@ -292,7 +285,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(bambooCrate, "bambooCrate");
 		GameRegistry.registerBlock(umberFurnace, "umberFurnaceOff");
 		GameRegistry.registerBlock(umberFurnace_on, "umberFurnaceOn");
-		GameRegistry.registerBlock(umberPaver, ItemBlockUmberpaver.class, "umberpaver");
+		GameRegistry.registerBlock(umberPaver, ItemBlockGeneric.class, "umberpaver");
 		GameRegistry.registerBlock(bambooShoot, "bambooShoot");
 		GameRegistry.registerBlock(bambooCrop, "bambooCrop");
 		GameRegistry.registerBlock(bambooTorch, "bambooTorch");
@@ -316,7 +309,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(velocityBlock, "velocityBlock");
 		GameRegistry.registerBlock(honeyCombBlock, "honeyCombBlock");
 		GameRegistry.registerBlock(doorAmber, "doorAmber");
-		GameRegistry.registerBlock(gneiss, ItemBlockGneiss.class, "gneiss");
+		GameRegistry.registerBlock(gneiss, ItemBlockGeneric.class, "gneiss");
 		GameRegistry.registerBlock(mud, "mud");
 		GameRegistry.registerBlock(mudBricks, "mudBricks");
 		GameRegistry.registerBlock(erebusMushroomCap0, "mushroomBulbCap");
@@ -346,7 +339,7 @@ public class ModBlocks {
 		for (int i = 0; i < gneissStairs.length; i++)
 			GameRegistry.registerBlock(gneissStairs[i], "gneissStairs" + i);
 
-		GameRegistry.registerBlock(wallErebus, ItemBlockWallErebus.class, "wallErebus");
+		GameRegistry.registerBlock(wallErebus, ItemBlockGeneric.class, "wallErebus");
 		GameRegistry.registerBlock(insectRepellent, "blockInsectRepellent");
 
 		GameRegistry.registerBlock(spiderSpawner, "spiderSpawner");

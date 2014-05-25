@@ -6,6 +6,6 @@ import erebus.ModBlocks;
 public class ItemBlockSlabPlanks0Erebus extends ItemBlockSlabGeneric {
 
 	public ItemBlockSlabPlanks0Erebus(Block block) {
-		super(block, "slabPlanksErebus", ModBlocks.plankSlabs, 0);
+		super(block, ModBlocks.plankSlabs, 0);
 	}
 }

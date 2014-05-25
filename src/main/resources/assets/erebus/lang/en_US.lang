@@ -5,13 +5,18 @@ tile.blockAmber0.name=Amber
 tile.blockAmber1.name=Amber Glass
 tile.blockAmber2.name=Amber Bricks
 
-tile.hollowLogAcacia.name=Hollow Acacia Log
-
 tile.erebus.log.name=%s Wood
 tile.erebus.planks.name=%s Planks
 tile.erebus.stairPlanks.name=%s Stairs
 tile.erebus.leaves.name=%s Leaves
 tile.erebus.sapling.name=%s Sapling
+tile.erebus.slabPlanks.name=%s Slab
+
+tile.flowerPlanted.name=%s Flower
+tile.erebusStigma.name=%s Flower Stigma
+tile.erebusFlower.name=%s Petal
+tile.erebusFlower_14.name=Exploding Stigma
+tile.erebusFlower_15.name=Stem
 
 tile.umbercobbleStairs0.name=Umberstone Stairs
 tile.umbercobbleStairs1.name=Umbercobble Stairs
@@ -48,31 +53,13 @@ tile.slabStoneErebus0_4.name=Umbrick Slab
 tile.slabStoneErebus0_5.name=Umberpaver Slab
 tile.slabStoneErebus0_6.name=Mossy Umberpaver Slab
 tile.slabStoneErebus0_7.name=Webbed Umberpaver Slab
-tile.slabPlanksErebus0_0.name=Acacia Slab
-tile.slabPlanksErebus0_1.name=Eucalyptus Slab
-tile.slabPlanksErebus0_2.name=Mahogany Slab
-tile.slabPlanksErebus0_3.name=Baobab Slab
-tile.slabPlanksErebus0_4.name=Mossbark Slab
-tile.slabPlanksErebus0_5.name=Pink Slab
-tile.slabPlanksErebus0_6.name=Scorched Slab
-tile.slabPlanksErebus0_7.name=Asper Slab
-tile.slabPlanksErebus1_0.name=White Slab
-tile.slabPlanksErebus1_1.name=Bamboo Slab
-tile.slabPlanksErebus1_2.name=Cypress Slab
 tile.slabPetrifiedWood0_0.name=Petrified Wood Slab
 
-tile.cobbleWebbed.name=Webbed Cobblestone
-tile.blockSilk.name=Silk
-tile.mirbrick.name=Mirbrick
-tile.spiderSpawner.name=Spider Spawner
-tile.jumpingSpiderSpawner.name=Jumping Spider Spawner
-tile.waspSpawner.name=Wasp Spawner
-tile.blockSpiderSilk.name=Silk
-tile.thorns.name=Thorns
-tile.erebusFern.name=Fern
-tile.tallgrass.name=Tall Grass
-tile.quickSand.name=Quicksand
-tile.ghostSand.name=Ghost Sand
+tile.erebusAltar.name=Erebus Altar
+tile.erebusAltarLightning.name=Altar of Lightning
+tile.erebusAltarHealing.name=Altar of Healing
+tile.erebusAltarXP.name=Altar of Experience
+tile.erebusAltarRepair.name=Altar of Repair
 
 tile.umberOre_0.name=Coal Ore
 tile.umberOre_1.name=Iron Ore
@@ -90,7 +77,6 @@ tile.erebusOreExtra_3.name=Silver Ore
 tile.erebusOreExtra_4.name=Tin Ore
 tile.oreFossilU.name=Fossil Ore
 tile.petrifiedWoodOre.name=Petrified Wood Ore
-
 tile.umberStone_0.name=Umberstone
 tile.umberStone_1.name=Umbercobble
 tile.umberStone_2.name=Mossy Umbercobble
@@ -98,38 +84,32 @@ tile.umberStone_3.name=Webbed Umbercobble
 tile.umberStone_4.name=Umbricks
 tile.umberStone_5.name=Smooth Umbertile
 tile.umberStone_6.name=Smooth Umbertiles
-
 tile.umberstoneButton.name=Umberstone Button
-
 tile.bambooCrop.name=Bamboo Block
 tile.bambooCrate.name=Bamboo Crate
-
 tile.redGem_0.name=Red Gem
 tile.redGem_1.name=Red Lamp
-
 tile.petrifiedCraftingTable.name=Petrified Crafting Table
-
 tile.blockUmberpaver_0.name=Umberpaver
 tile.blockUmberpaver_1.name=Mossy Umberpaver
 tile.blockUmberpaver_2.name=Webbed Umberpaver
-
 tile.umberFurnaceOFF.name=Umber Furnace
 tile.erebusFiddlehead.name=Fiddlehead
 tile.insectRepellent.name=Insect Repellent Block
 tile.bambooTorch.name=Bamboo Torch
-
-tile.erebusAltar.name=Erebus Altar
-tile.erebusAltarLightning.name=Altar of Lightning
-tile.erebusAltarHealing.name=Altar of Healing
-tile.erebusAltarXP.name=Altar of Experience
-tile.erebusAltarRepair.name=Altar of Repair
-
-tile.flowerPlanted.name=%s Flower
-tile.erebusStigma.name=%s Flower Stigma
-tile.erebusFlower.name=%s Petal
-tile.erebusFlower_14.name=Exploding Stigma
-tile.erebusFlower_15.name=Stem
-
+tile.cobbleWebbed.name=Webbed Cobblestone
+tile.blockSilk.name=Silk
+tile.mirbrick.name=Mirbrick
+tile.spiderSpawner.name=Spider Spawner
+tile.jumpingSpiderSpawner.name=Jumping Spider Spawner
+tile.waspSpawner.name=Wasp Spawner
+tile.blockSpiderSilk.name=Silk
+tile.thorns.name=Thorns
+tile.erebusFern.name=Fern
+tile.tallgrass.name=Tall Grass
+tile.quickSand.name=Quicksand
+tile.ghostSand.name=Ghost Sand
+tile.hollowLogAcacia.name=Hollow Acacia Log
 tile.honeyCombBlock.name=Honey Comb
 tile.doorAmber.name=Amber Door
 tile.gneiss_0.name=Gneiss
@@ -303,45 +283,45 @@ item.woodlouseBall.name=Woodlouse Ball
 item.rolledNewspaper.name=Rolled Up Newspaper
 
 # Entities
-entity.erebus.BeetleLarva.name=Beetle Larva
-entity.erebus.Wasp.name=Wasp
-entity.erebus.Centipede.name=Centipede
-entity.erebus.Beetle.name=Beetle
-entity.erebus.Fly.name=Fly
-entity.erebus.Mosquito.name=Mosquito
-entity.erebus.Tarantula.name=Tarantula
-entity.erebus.VelvetWorm.name=Velvet Worm
-entity.erebus.BotFly.name=Bot Fly
-entity.erebus.BlackWidow.name=Black Widow
-entity.erebus.Scorpion.name=Scorpion
-entity.erebus.Grasshopper.name=Grasshopper
-entity.erebus.Locust.name=Locust
-entity.erebus.Solifuge.name=Solifuge
-entity.erebus.Moth.name=Moth
-entity.erebus.Antlion.name=Antlion
-entity.erebus.GlowWorm.name=Glowworm
-entity.erebus.BombardierBeetle.name=Bombardier Beetle
-entity.erebus.Scytodes.name=Scytodes
-entity.erebus.MoneySpider.name=Money Spider
-entity.erebus.PrayingMantis.name=Praying Mantis
-entity.erebus.JumpingSpider.name=Jumping Spider
-entity.erebus.FireAnt.name=Fire Ant
-entity.erebus.RhinoBeetle.name=Rhinoceros Beetle
-entity.erebus.WorkerBee.name=Worker Bee
-entity.erebus.Dragonfly.name=Dragonfly
-entity.erebus.BloodSnail.name=Blood Snail
-entity.erebus.TitanBeetle.name=Titan Beetle
-entity.erebus.BotFlyLarva.name=Bot Fly Larva
-entity.erebus.Sporeling.name=Sporeling
-entity.erebus.WheatWeevil.name=Crop Weevil
-entity.erebus.Woodlouse.name=Woodlouse
-entity.erebus.Cicada.name=Cicada
-entity.erebus.FireAntSoldier.name=Fire Ant Soldier
-entity.erebus.LavaWebSpider.name=Lava Web Spider
-entity.erebus.AntlionMiniBoss.name=Antlion Mini Boss
-entity.erebus.ChameleonTick.name=Chameleon Tick
-entity.erebus.SolifugeSmall.name=Solifuge Small
-entity.erebus.MidgeSwarm.name=Midge Swarm
+entity.erebus.beetleLarva.name=Beetle Larva
+entity.erebus.wasp.name=Wasp
+entity.erebus.centipede.name=Centipede
+entity.erebus.beetle.name=Beetle
+entity.erebus.fly.name=Fly
+entity.erebus.mosquito.name=Mosquito
+entity.erebus.tarantula.name=Tarantula
+entity.erebus.velvetWorm.name=Velvet Worm
+entity.erebus.botFly.name=Bot Fly
+entity.erebus.blackWidow.name=Black Widow
+entity.erebus.scorpion.name=Scorpion
+entity.erebus.grasshopper.name=Grasshopper
+entity.erebus.locust.name=Locust
+entity.erebus.solifuge.name=Solifuge
+entity.erebus.moth.name=Moth
+entity.erebus.antlion.name=Antlion
+entity.erebus.glowWorm.name=Glowworm
+entity.erebus.bombardierBeetle.name=Bombardier Beetle
+entity.erebus.scytodes.name=Scytodes
+entity.erebus.moneySpider.name=Money Spider
+entity.erebus.prayingMantis.name=Praying Mantis
+entity.erebus.jumpingSpider.name=Jumping Spider
+entity.erebus.fireAnt.name=Fire Ant
+entity.erebus.rhinoBeetle.name=Rhinoceros Beetle
+entity.erebus.workerBee.name=Worker Bee
+entity.erebus.dragonfly.name=Dragonfly
+entity.erebus.bloodSnail.name=Blood Snail
+entity.erebus.titanBeetle.name=Titan Beetle
+entity.erebus.botFlyLarva.name=Bot Fly Larva
+entity.erebus.sporeling.name=Sporeling
+entity.erebus.wheatWeevil.name=Crop Weevil
+entity.erebus.woodlouse.name=Woodlouse
+entity.erebus.cicada.name=Cicada
+entity.erebus.fireAntSoldier.name=Fire Ant Soldier
+entity.erebus.lavaWebSpider.name=Lava Web Spider
+entity.erebus.antlionMiniBoss.name=Antlion Mini Boss
+entity.erebus.chameleonTick.name=Chameleon Tick
+entity.erebus.solifugeSmall.name=Solifuge Small
+entity.erebus.midgeSwarm.name=Midge Swarm
 
 # Fluids
 fluid.erebus.honey=Honey

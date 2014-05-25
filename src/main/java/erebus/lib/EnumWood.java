@@ -1,6 +1,6 @@
 package erebus.lib;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -43,35 +43,39 @@ public enum EnumWood {
 		this(true);
 	}
 
+	public Block getLog() {
+		return logs.get(this);
+	}
+
+	public Block getleaves() {
+		return ModBlocks.leavesErebus;
+	}
+
 	public String getTranslatedName() {
 		return StatCollector.translateToLocal("wood." + Reference.MOD_ID + "." + name().toLowerCase());
 	}
 
-	private static ArrayList<Block> logs;
-	private static ArrayList<Block> stairs;
-	private static ArrayList<Block> saplings;
+	private static final HashMap<EnumWood, Block> logs = new HashMap<EnumWood, Block>();
+	private static final HashMap<EnumWood, Block> stairs = new HashMap<EnumWood, Block>();
+	private static final HashMap<EnumWood, Block> saplings = new HashMap<EnumWood, Block>();
 
 	public static void initBlocks() {
-		logs = new ArrayList<Block>();
-		stairs = new ArrayList<Block>();
-		saplings = new ArrayList<Block>();
-
 		for (EnumWood wood : values()) {
 			if (wood.hasLog) {
 				Block log = new BlockLogErebus(wood);
 				GameRegistry.registerBlock(log, ItemBlockLocalised.class, "log" + wood.name());
 				Blocks.fire.setFireInfo(log, 5, 5);
-				logs.add(log);
+				logs.put(wood, log);
 
 				Block sapling = new BlockSaplingErebus(wood);
 				GameRegistry.registerBlock(sapling, ItemBlockLocalised.class, "sapling" + wood.name());
-				saplings.add(sapling);
+				saplings.put(wood, sapling);
 			}
 
 			Block stair = new BlockStairPlanks(ModBlocks.planksErebus, wood);
 			GameRegistry.registerBlock(stair, ItemBlockLocalised.class, "plankStair" + wood.name());
 			Blocks.fire.setFireInfo(stair, 5, 5);
-			stairs.add(stair);
+			stairs.put(wood, stair);
 		}
 	}
 

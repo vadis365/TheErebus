@@ -12,7 +12,7 @@ import erebus.lib.EnumColour;
 public class ItemBlockFlowerPlanted extends ItemBlockGeneric {
 
 	public ItemBlockFlowerPlanted(Block block) {
-		super(block, "flowerPlanted");
+		super(block);
 	}
 
 	@SideOnly(Side.CLIENT)

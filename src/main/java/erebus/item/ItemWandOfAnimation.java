@@ -41,19 +41,19 @@ public class ItemWandOfAnimation extends Item {
 		if (!player.canPlayerEdit(x, y, z, side, is))
 			return false;
 		else {
-			Block blockID = world.getBlock(x, y, z);
+			Block block = world.getBlock(x, y, z);
 			int blockMeta = world.getBlockMetadata(x, y, z);
-			if (!world.isRemote && blockID != null && canAnimate(blockID)) {
+			if (!world.isRemote && block != null && canAnimate(block, world, x, y, z)) {
 				EntityAnimatedBlock entityAnimatedBlock;
-				if (blockID == Blocks.chest)
+				if (block == Blocks.chest)
 					entityAnimatedBlock = new EntityAnimatedChest(world).setContents(Utils.getTileEntity(world, x, y, z, TileEntityChest.class));
-				else if (blockID == ModBlocks.bambooCrate)
+				else if (block == ModBlocks.bambooCrate)
 					entityAnimatedBlock = new EntityAnimatedBambooCrate(world).setContents(Utils.getTileEntity(world, x, y, z, TileEntityBambooCrate.class));
 				else
 					entityAnimatedBlock = new EntityAnimatedBlock(world);
 				world.setBlockToAir(x, y, z);
 				entityAnimatedBlock.setLocationAndAngles((double) x + 0.5F, y, (double) z + 0.5F, 0.0F, 0.0F);
-				entityAnimatedBlock.setBlock(blockID, blockMeta);
+				entityAnimatedBlock.setBlock(block, blockMeta);
 				world.spawnEntityInWorld(entityAnimatedBlock);
 				world.playSoundEffect(x, y, z, "erebus:altaroffering", 0.2F, 1.0F);
 				is.damageItem(1, player);
@@ -63,8 +63,8 @@ public class ItemWandOfAnimation extends Item {
 		return false;
 	}
 
-	private boolean canAnimate(Block block) {
-		return block == Blocks.chest || !(block instanceof BlockContainer) && block.blockHardness >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
+	private boolean canAnimate(Block block, World world, int x, int y, int z) {
+		return block == Blocks.chest || !(block instanceof BlockContainer) && block.getBlockHardness(world, x, y, z) >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
 		// Bamboo Crate removed for now
 		// || block.blockID == ModBlocks.bambooCrate.blockID
 	}

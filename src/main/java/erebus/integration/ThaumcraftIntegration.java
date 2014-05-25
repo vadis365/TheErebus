@@ -25,8 +25,6 @@ public class ThaumcraftIntegration implements IModIntegration {
 		registerBlock(ModBlocks.blockAmber, 2, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
 
 		// planks, leaves
-		registerBlock(ModBlocks.erebusSapling, -1, Aspect.TREE, 1, Aspect.PLANT, 2, Aspect.LIFE, 1);
-
 		registerBlock(ModBlocks.blockSilk, -1, Aspect.CLOTH, 4);
 		registerBlock(ModBlocks.mirBrick, -1, Aspect.ENTROPY, 2, Aspect.MIND, 1);
 		registerBlock(ModBlocks.spiderSpawner, -1, Aspect.BEAST, 5, Aspect.TAINT, 2, Aspect.WEAPON, 2, Aspect.SOUL, 3, Aspect.POISON, 1);
@@ -52,21 +50,6 @@ public class ThaumcraftIntegration implements IModIntegration {
 		registerBlock(ModBlocks.umberstone, 2, Aspect.EARTH, 1, Aspect.ENTROPY, 2, Aspect.PLANT, 2);
 		registerBlock(ModBlocks.umberstone, 3, Aspect.EARTH, 1, Aspect.ENTROPY, 2, Aspect.BEAST, 1);
 		registerBlock(ModBlocks.umberstone, 4, Aspect.ENTROPY, 2);
-
-		// stairs, slabs, walls
-		for (int i = 0; i < ModBlocks.umbercobbleStairs.length; i++)
-			registerBlock(ModBlocks.umbercobbleStairs[i], -1, Aspect.EARTH, 1, Aspect.ENTROPY, 2, Aspect.TRAVEL, 1);
-		// for (int i = 0; i < ModBlocks.plankStairs.length; i++)
-		// registerBlock(ModBlocks.plankStairs[i], -1);
-		for (int i = 0; i < ModBlocks.stoneSlabs.length; i++)
-			registerBlock(ModBlocks.stoneSlabs[i], -1, Aspect.EARTH, 1, Aspect.ENTROPY, 1);
-		// for (int i = 0; i < ModBlocks.plankSlabs.length; i++)
-		// registerBlock(ModBlocks.plankSlabs[i], -1);
-		registerBlock(ModBlocks.petrifiedWoodStairs, -1, Aspect.TREE, 1, Aspect.ENTROPY, 1, Aspect.TRAVEL, 1);
-		for (int i = 0; i < ModBlocks.petrifiedWoodSlab.length; i++)
-			registerBlock(ModBlocks.petrifiedWoodSlab[i], -1, Aspect.TREE, 1, Aspect.ENTROPY, 1);
-		// registerBlock(ModBlocks.amberBrickStairs, -1);
-		// registerBlock(ModBlocks.waspNestStairs, -1);
 
 		registerBlock(ModBlocks.bambooCrop, -1, Aspect.PLANT, 2, Aspect.CROP, 2, Aspect.CRAFT, 1);
 		registerBlock(ModBlocks.bambooCrate, -1, Aspect.PLANT, 4, Aspect.VOID, 3, Aspect.CRAFT, 2);
@@ -149,22 +132,22 @@ public class ThaumcraftIntegration implements IModIntegration {
 		registerItem(ModItems.waspDagger, -1, Aspect.WEAPON, 2, Aspect.AIR, 1, Aspect.POISON, 2);
 		registerItem(ModItems.wandOfAnimation, -1, Aspect.MAGIC, 10, Aspect.ELDRITCH, 8, Aspect.CRYSTAL, 2, Aspect.ENERGY, 4);
 
-		registerEntity("Erebus.BeetleLarva", Aspect.BEAST, 1, Aspect.HUNGER, 1, Aspect.SLIME, 2);
-		registerEntity("Erebus.Wasp", Aspect.AIR, 4, Aspect.POISON, 2);
-		registerEntity("Erebus.Centipede", Aspect.TRAVEL, 3, Aspect.MOTION, 2, Aspect.POISON, 1);
-		registerEntity("Erebus.Beetle", Aspect.BEAST, 1, Aspect.ARMOR, 2);
-		registerEntity("Erebus.Fly", Aspect.AIR, 1, Aspect.FLIGHT, 1);
-		registerEntity("Erebus.Mosquito", Aspect.AIR, 2, Aspect.DARKNESS, 1, Aspect.WATER, 1);
-		registerEntity("Erebus.Tarantula", Aspect.BEAST, 2, Aspect.POISON, 3);
-		registerEntity("Erebus.BotFly", Aspect.HUNGER, 3, Aspect.AIR, 2, Aspect.FLIGHT, 2);
-		registerEntity("Erebus.BlackWidow", Aspect.POISON, 5, Aspect.DARKNESS, 3, Aspect.FIRE, 1);
-		registerEntity("Erebus.Scorpion", Aspect.FIRE, 1, Aspect.POISON, 4, Aspect.WEAPON, 2);
-		registerEntity("Erebus.Grasshopper", Aspect.TRAVEL, 3, Aspect.HUNGER, 1, Aspect.FLIGHT, 2);
-		registerEntity("Erebus.Locust", Aspect.TRAVEL, 3, Aspect.BEAST, 2, Aspect.FLIGHT, 2);
-		registerEntity("Erebus.Solifuge", Aspect.MOTION, 3, Aspect.BEAST, 2);
-		registerEntity("Erebus.Moth", Aspect.FLIGHT, 3, Aspect.LIGHT, 1);
-		registerEntity("Erebus.Firebrat", Aspect.FIRE, 2, Aspect.BEAST, 1);
-		registerEntity("Erebus.Antlion", Aspect.TRAP, 3, Aspect.EARTH, 2);
+		registerEntity("erebus.BeetleLarva", Aspect.BEAST, 1, Aspect.HUNGER, 1, Aspect.SLIME, 2);
+		registerEntity("erebus.Wasp", Aspect.AIR, 4, Aspect.POISON, 2);
+		registerEntity("erebus.Centipede", Aspect.TRAVEL, 3, Aspect.MOTION, 2, Aspect.POISON, 1);
+		registerEntity("erebus.Beetle", Aspect.BEAST, 1, Aspect.ARMOR, 2);
+		registerEntity("erebus.Fly", Aspect.AIR, 1, Aspect.FLIGHT, 1);
+		registerEntity("erebus.Mosquito", Aspect.AIR, 2, Aspect.DARKNESS, 1, Aspect.WATER, 1);
+		registerEntity("erebus.Tarantula", Aspect.BEAST, 2, Aspect.POISON, 3);
+		registerEntity("erebus.BotFly", Aspect.HUNGER, 3, Aspect.AIR, 2, Aspect.FLIGHT, 2);
+		registerEntity("erebus.BlackWidow", Aspect.POISON, 5, Aspect.DARKNESS, 3, Aspect.FIRE, 1);
+		registerEntity("erebus.Scorpion", Aspect.FIRE, 1, Aspect.POISON, 4, Aspect.WEAPON, 2);
+		registerEntity("erebus.Grasshopper", Aspect.TRAVEL, 3, Aspect.HUNGER, 1, Aspect.FLIGHT, 2);
+		registerEntity("erebus.Locust", Aspect.TRAVEL, 3, Aspect.BEAST, 2, Aspect.FLIGHT, 2);
+		registerEntity("erebus.Solifuge", Aspect.MOTION, 3, Aspect.BEAST, 2);
+		registerEntity("erebus.Moth", Aspect.FLIGHT, 3, Aspect.LIGHT, 1);
+		registerEntity("erebus.Firebrat", Aspect.FIRE, 2, Aspect.BEAST, 1);
+		registerEntity("erebus.Antlion", Aspect.TRAP, 3, Aspect.EARTH, 2);
 	}
 
 	private void registerBlock(Block block, int metadata, Object... aspects) {

@@ -4,8 +4,8 @@ import net.minecraft.block.Block;
 import cpw.mods.fml.common.Loader;
 import erebus.ModBlocks;
 import erebus.block.BlockGneiss;
-import erebus.block.BlockPlanksErebus;
 import erebus.block.BlockUmberstone;
+import erebus.lib.EnumWood;
 
 public class FMBIntegration {
 
@@ -18,7 +18,7 @@ public class FMBIntegration {
 			addMicroblock(ModBlocks.blockSilk);
 			addMicroblock(ModBlocks.mirBrick);
 			addMicroblock(ModBlocks.petrifiedWoodPlanks);
-			addMicroblock(ModBlocks.planksErebus, 0, BlockPlanksErebus.plankTypes.length);
+			addMicroblock(ModBlocks.planksErebus, 0, EnumWood.values().length);
 			addMicroblock(ModBlocks.umberPaver, 0, 3);
 			addMicroblock(ModBlocks.umberstonePillar);
 		}

@@ -8,11 +8,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class ItemBlockSlabGeneric extends ItemBlockGeneric {
+
 	private final Block[] slabArray;
 	private final int groupId;
 
-	public ItemBlockSlabGeneric(Block block, String unlocalizedName, Block[] slabArray, int groupId) {
-		super(block, unlocalizedName + groupId);
+	public ItemBlockSlabGeneric(Block block, Block[] slabArray, int groupId) {
+		super(block);
 		this.slabArray = slabArray;
 		this.groupId = groupId;
 	}
@@ -33,7 +34,7 @@ public abstract class ItemBlockSlabGeneric extends ItemBlockGeneric {
 
 			if ((side == 1 && !flag || side == 0 && flag) && i1 == slabArray[0 + groupId * 2] && k1 == itemStack.getItemDamage()) {
 				if (world.checkNoEntityCollision(slabArray[1 + groupId * 2].getCollisionBoundingBoxFromPool(world, x, y, z)) && world.setBlock(x, y, z, slabArray[1 + groupId * 2], k1, 3)) {
-					world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, slabArray[1 + groupId * 2].stepSound.getPlaceSound(), (slabArray[1 + groupId * 2].stepSound.getVolume() + 1.0F) / 2.0F, slabArray[1 + groupId * 2].stepSound.getPitch() * 0.8F);
+					world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, slabArray[1 + groupId * 2].stepSound.getBreakSound(), (slabArray[1 + groupId * 2].stepSound.getVolume() + 1.0F) / 2.0F, slabArray[1 + groupId * 2].stepSound.getPitch() * 0.8F);
 					--itemStack.stackSize;
 				}
 
@@ -45,41 +46,36 @@ public abstract class ItemBlockSlabGeneric extends ItemBlockGeneric {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean canPlaceItemBlockOnSide(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack itemStack) {
+	public boolean func_150936_a(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack itemStack) {
 		int i1 = x;
 		int j1 = y;
 		int k1 = z;
-		int l1 = world.getBlockId(x, y, z);
+		Block l1 = world.getBlock(x, y, z);
 		int i2 = world.getBlockMetadata(x, y, z);
 		int j2 = i2 & 7;
 		boolean flag = (i2 & 8) != 0;
 
-		if ((side == 1 && !flag || side == 0 && flag) && l1 == slabArray[0 + groupId * 2].blockID && j2 == itemStack.getItemDamage())
+		if ((side == 1 && !flag || side == 0 && flag) && l1 == slabArray[0 + groupId * 2] && j2 == itemStack.getItemDamage())
 			return true;
 		else {
 			if (side == 0)
 				--y;
-
 			if (side == 1)
 				++y;
-
 			if (side == 2)
 				--z;
-
 			if (side == 3)
 				++z;
-
 			if (side == 4)
 				--x;
-
 			if (side == 5)
 				++x;
 
-			l1 = world.getBlockId(x, y, z);
+			l1 = world.getBlock(x, y, z);
 			i2 = world.getBlockMetadata(x, y, z);
 			j2 = i2 & 7;
 			flag = (i2 & 8) != 0;
-			return l1 == slabArray[0 + groupId * 2].blockID && j2 == itemStack.getItemDamage() ? true : super.canPlaceItemBlockOnSide(world, i1, j1, k1, side, player, itemStack);
+			return l1 == slabArray[0 + groupId * 2] && j2 == itemStack.getItemDamage() ? true : super.func_150936_a(world, i1, j1, k1, side, player, itemStack);
 		}
 	}
 
@@ -102,13 +98,13 @@ public abstract class ItemBlockSlabGeneric extends ItemBlockGeneric {
 		if (side == 5)
 			++x;
 
-		int i1 = world.getBlockId(x, y, z);
+		Block i1 = world.getBlock(x, y, z);
 		int j1 = world.getBlockMetadata(x, y, z);
 		int k1 = j1 & 7;
 
-		if (i1 == slabArray[0 + groupId * 2].blockID && k1 == itemStack.getItemDamage()) {
-			if (world.checkNoEntityCollision(slabArray[1 + groupId * 2].getCollisionBoundingBoxFromPool(world, x, y, z)) && world.setBlock(x, y, z, slabArray[1 + groupId * 2].blockID, k1, 3)) {
-				world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, slabArray[1 + groupId * 2].stepSound.getPlaceSound(), (slabArray[1 + groupId * 2].stepSound.getVolume() + 1.0F) / 2.0F, slabArray[1 + groupId * 2].stepSound.getPitch() * 0.8F);
+		if (i1 == slabArray[0 + groupId * 2] && k1 == itemStack.getItemDamage()) {
+			if (world.checkNoEntityCollision(slabArray[1 + groupId * 2].getCollisionBoundingBoxFromPool(world, x, y, z)) && world.setBlock(x, y, z, slabArray[1 + groupId * 2], k1, 3)) {
+				world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, slabArray[1 + groupId * 2].stepSound.getBreakSound(), (slabArray[1 + groupId * 2].stepSound.getVolume() + 1.0F) / 2.0F, slabArray[1 + groupId * 2].stepSound.getPitch() * 0.8F);
 				--itemStack.stackSize;
 			}
 

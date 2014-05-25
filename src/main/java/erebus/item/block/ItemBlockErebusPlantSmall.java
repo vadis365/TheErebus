@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBlockErebusPlantSmall extends ItemBlockGeneric {
 
 	public ItemBlockErebusPlantSmall(Block block) {
-		super(block, "erebusPlantSmall");
+		super(block);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import erebus.lib.EnumWood;
 public class ItemBlockPlanks extends ItemBlockGeneric {
 
 	public ItemBlockPlanks(Block block) {
-		super(block, "planks");
+		super(block);
 	}
 
 	@Override

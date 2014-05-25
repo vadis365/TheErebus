@@ -9,7 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBlockDoubleHeightPlant extends ItemBlockGeneric {
 
 	public ItemBlockDoubleHeightPlant(Block block) {
-		super(block, "doubleHeightPlant");
+		super(block);
 	}
 
 	@Override

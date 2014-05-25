@@ -6,6 +6,6 @@ import erebus.ModBlocks;
 public class ItemBlockSlabPetrifiedWood extends ItemBlockSlabGeneric {
 
 	public ItemBlockSlabPetrifiedWood(Block block) {
-		super(block, "slabPetrifiedWood", ModBlocks.petrifiedWoodSlab, 0);
+		super(block, ModBlocks.petrifiedWoodSlab, 0);
 	}
 }

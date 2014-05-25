@@ -9,7 +9,7 @@ import erebus.lib.EnumColour;
 public class ItemBlockErebusStigma extends ItemBlockGeneric {
 
 	public ItemBlockErebusStigma(Block block) {
-		super(block, "erebusStigma");
+		super(block);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.ForgeHooks;
@@ -18,24 +18,24 @@ public class ItemPaxel extends ItemTool {
 	}
 
 	@Override
-	public boolean canHarvestBlock(Block block) {
-		return Item.axeIron.canHarvestBlock(block) || Item.pickaxeIron.canHarvestBlock(block) || Item.shovelIron.canHarvestBlock(block);
+	public int getHarvestLevel(ItemStack stack, String toolClass) {
+		return 2;
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack is, Block par2Block) {
-		float oldSpeedPickaxe = ((ItemTool) Item.pickaxeIron).efficiencyOnProperMaterial;
-		float oldSpeedAxe = ((ItemTool) Item.axeIron).efficiencyOnProperMaterial;
-		float oldSpeedShovel = ((ItemTool) Item.shovelIron).efficiencyOnProperMaterial;
-		((ItemTool) Item.pickaxeIron).efficiencyOnProperMaterial = efficiencyOnProperMaterial;
-		((ItemTool) Item.axeIron).efficiencyOnProperMaterial = efficiencyOnProperMaterial;
-		((ItemTool) Item.shovelIron).efficiencyOnProperMaterial = efficiencyOnProperMaterial;
-		float pickaxeSpeed = Item.pickaxeIron.getStrVsBlock(is, par2Block);
-		float axeSpeed = Item.axeIron.getStrVsBlock(is, par2Block);
-		float shovelSpeed = Item.shovelIron.getStrVsBlock(is, par2Block);
-		((ItemTool) Item.pickaxeIron).efficiencyOnProperMaterial = oldSpeedPickaxe;
-		((ItemTool) Item.axeIron).efficiencyOnProperMaterial = oldSpeedAxe;
-		((ItemTool) Item.shovelIron).efficiencyOnProperMaterial = oldSpeedShovel;
+	public float func_150893_a(ItemStack is, Block par2Block) {
+		float oldSpeedPickaxe = ((ItemTool) Items.iron_pickaxe).efficiencyOnProperMaterial;
+		float oldSpeedAxe = ((ItemTool) Items.iron_axe).efficiencyOnProperMaterial;
+		float oldSpeedShovel = ((ItemTool) Items.iron_shovel).efficiencyOnProperMaterial;
+		((ItemTool) Items.iron_pickaxe).efficiencyOnProperMaterial = efficiencyOnProperMaterial;
+		((ItemTool) Items.iron_axe).efficiencyOnProperMaterial = efficiencyOnProperMaterial;
+		((ItemTool) Items.iron_shovel).efficiencyOnProperMaterial = efficiencyOnProperMaterial;
+		float pickaxeSpeed = Items.iron_pickaxe.func_150893_a(is, par2Block);
+		float axeSpeed = Items.iron_axe.func_150893_a(is, par2Block);
+		float shovelSpeed = Items.iron_shovel.func_150893_a(is, par2Block);
+		((ItemTool) Items.iron_pickaxe).efficiencyOnProperMaterial = oldSpeedPickaxe;
+		((ItemTool) Items.iron_axe).efficiencyOnProperMaterial = oldSpeedAxe;
+		((ItemTool) Items.iron_shovel).efficiencyOnProperMaterial = oldSpeedShovel;
 		if (pickaxeSpeed > 1.0F)
 			return pickaxeSpeed;
 		if (axeSpeed > 1.0F)
@@ -46,24 +46,24 @@ public class ItemPaxel extends ItemTool {
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack is, Block block, int meta) {
+	public float getDigSpeed(ItemStack is, Block block, int meta) {
 		if (isToolEffective(block, meta))
 			return efficiencyOnProperMaterial;
-		return getStrVsBlock(is, block);
+		return func_150893_a(is, block);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean isToolEffective(Block block, int metadata) {
 		try {
-			List tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Item.pickaxeIron);
+			List tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Items.iron_pickaxe);
 			if (tool != null)
 				return ((HashSet<List>) ReflectionHelper.findField(ForgeHooks.class, "toolEffectiveness").get(null)).contains(Arrays.asList(block, metadata, tool.get(0)));
 
-			tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Item.axeIron);
+			tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Items.iron_axe);
 			if (tool != null)
 				return ((HashSet<List>) ReflectionHelper.findField(ForgeHooks.class, "toolEffectiveness").get(null)).contains(Arrays.asList(block, metadata, tool.get(0)));
 
-			tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Item.shovelIron);
+			tool = (List) ReflectionHelper.findField(ForgeHooks.class, "toolClasses").get(Items.iron_shovel);
 			if (tool != null)
 				return ((HashSet<List>) ReflectionHelper.findField(ForgeHooks.class, "toolEffectiveness").get(null)).contains(Arrays.asList(block, metadata, tool.get(0)));
 		} catch (Exception e) {

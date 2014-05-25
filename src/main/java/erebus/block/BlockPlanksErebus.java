@@ -16,10 +16,6 @@ import erebus.lib.Reference;
 
 public class BlockPlanksErebus extends Block {
 
-	public static int dataBamboo = 0;
-
-	public static int dataWhite = 1;
-
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
