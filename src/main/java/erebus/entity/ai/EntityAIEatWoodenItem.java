@@ -32,8 +32,8 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		if (block == ModBlocks.plankSlabs[2] && blockMeta == 1)
 			return false;
 
-		if (block == ModBlocks.plankStairs[9])
-			return false;
+		//if (block == ModBlocks.plankStairs[9]) where's the stairs gone?
+		//	return false;
 
 		if (ConfigHandler.beetleLarvaEating == 2)
 			return true;
