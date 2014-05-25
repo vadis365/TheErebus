@@ -80,19 +80,19 @@ public enum EnumWood {
 	}
 
 	public static void initRecipes() {
-		for (int i = 0; i < values().length; i++) {
-			if (values()[i].hasLog) {
-				Block log = logs.get(i);
+		for (EnumWood wood : values()) {
+			if (wood.hasLog) {
+				Block log = logs.get(wood);
 				OreDictionary.registerOre("logWood", log);
-				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, i), new ItemStack(log));
+				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, wood.ordinal()), new ItemStack(log));
 				GameRegistry.addSmelting(new ItemStack(Items.coal, 1, 1), new ItemStack(log), 1.0F);
 
-				OreDictionary.registerOre("treeSapling", saplings.get(i));
+				OreDictionary.registerOre("treeSapling", saplings.get(wood));
 			}
 
-			Block stair = stairs.get(i);
+			Block stair = stairs.get(wood);
 			OreDictionary.registerOre("stairWood", stair);
-			GameRegistry.addRecipe(new ItemStack(stair, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, i) });
+			GameRegistry.addRecipe(new ItemStack(stair, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
 		}
 	}
 }
