@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -19,20 +18,6 @@ public class RenderDragonfly extends RenderLiving {
 
 	public RenderDragonfly() {
 		super(new ModelDragonfly(), 0.3F);
-	}
-
-	public void renderDragonfly(EntityDragonfly entityDragonfly, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityDragonfly, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderDragonfly((EntityDragonfly) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderDragonfly((EntityDragonfly) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

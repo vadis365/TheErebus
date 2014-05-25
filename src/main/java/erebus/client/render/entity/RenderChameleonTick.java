@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -43,13 +42,8 @@ public class RenderChameleonTick extends RenderLiving {
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLivingBase entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderChameleonTick((EntityChameleonTick) entity, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityLiving, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

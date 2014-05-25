@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -12,26 +11,10 @@ import erebus.client.model.entity.ModelFireAnt;
 import erebus.entity.EntityFireAnt;
 
 public class RenderFireAnt extends RenderLiving {
-	protected ModelFireAnt model;
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/fireAnt.png");
 
 	public RenderFireAnt(ModelFireAnt modelBase, float shadowSize) {
 		super(modelBase, shadowSize);
-		model = (ModelFireAnt) mainModel;
-	}
-
-	public void renderFireAnt(EntityFireAnt entityFireAnt, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityFireAnt, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderFireAnt((EntityFireAnt) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderFireAnt((EntityFireAnt) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

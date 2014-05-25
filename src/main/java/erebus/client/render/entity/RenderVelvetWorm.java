@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -20,20 +19,6 @@ public class RenderVelvetWorm extends RenderLiving {
 
 	public RenderVelvetWorm() {
 		super(new ModelVelvetWorm(), 0.6F);
-	}
-
-	public void renderEntityVelvetWorm(EntityVelvetWorm entityEntityVelvetWorm, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityEntityVelvetWorm, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderEntityVelvetWorm((EntityVelvetWorm) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderEntityVelvetWorm((EntityVelvetWorm) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

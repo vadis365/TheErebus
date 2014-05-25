@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -19,21 +18,6 @@ public class RenderPrayingMantis extends RenderLiving {
 
 	public RenderPrayingMantis(ModelPrayingMantis model, float shadowSize) {
 		super(model, shadowSize);
-
-	}
-
-	public void renderPrayingMantis(EntityPrayingMantis entityPrayingMantis, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityPrayingMantis, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderPrayingMantis((EntityPrayingMantis) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderPrayingMantis((EntityPrayingMantis) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
 
-public class EntityChameleonTick extends EntityMobBlock {
+public class EntityChameleonTick extends EntityMob {
 
 	public Block blockType;
 	public int blockMeta;

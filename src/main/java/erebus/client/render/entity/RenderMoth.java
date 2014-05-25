@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -21,20 +20,6 @@ public class RenderMoth extends RenderLiving {
 
 	public RenderMoth() {
 		super(new ModelMoth(), 0.3F);
-	}
-
-	public void renderMoth(EntityMoth entityMoth, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityMoth, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderMoth((EntityMoth) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderMoth((EntityMoth) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

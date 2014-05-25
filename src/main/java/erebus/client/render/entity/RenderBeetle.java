@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,20 +14,6 @@ public class RenderBeetle extends RenderLiving {
 
 	public RenderBeetle() {
 		super(new ModelBeetle(), 0.5F);
-	}
-
-	public void renderBeetle(EntityBeetle entityBeetle, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityBeetle, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderBeetle((EntityBeetle) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderBeetle((EntityBeetle) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

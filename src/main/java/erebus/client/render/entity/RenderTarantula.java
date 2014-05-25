@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,20 +16,6 @@ public class RenderTarantula extends RenderLiving {
 
 	public RenderTarantula() {
 		super(new ModelTarantula(), 0.5F);
-	}
-
-	public void renderTarantula(EntityTarantula entityTarantula, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityTarantula, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderTarantula((EntityTarantula) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderTarantula((EntityTarantula) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override

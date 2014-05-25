@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -21,27 +20,8 @@ public class RenderTitanBeetle extends RenderLiving {
 		super(new ModelTitanBeetle(), 1.5F);
 	}
 
-	public void renderTitanBeetle(EntityTitanBeetle entityTitanBeetle, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityTitanBeetle, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderTitanBeetle((EntityTitanBeetle) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderTitanBeetle((EntityTitanBeetle) entity, x, y, z, rotationYaw, partialTickTime);
-	}
-
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		scaleTitanBeetle((EntityTitanBeetle) entityliving, f);
-
-	}
-
-	protected void scaleTitanBeetle(EntityTitanBeetle entityTitanBeetle, float f) {
 		float f1 = 1.5F;
 		GL11.glScalef(f1, f1, f1);
 	}
