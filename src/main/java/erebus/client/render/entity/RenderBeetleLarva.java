@@ -21,15 +21,6 @@ public class RenderBeetleLarva extends RenderLiving {
 		super(new ModelBeetleLarva(), 0.3F);
 	}
 
-	public void renderBeetleLarva(EntityBeetleLarva entityBeetleLarva, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		super.doRender(entityBeetleLarva, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(EntityLivingBase entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderBeetleLarva((EntityBeetleLarva) entity, x, y, z, rotationYaw, partialTickTime);
-	}
-
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		float larvaSize = ((EntityBeetleLarva) entityliving).getLarvaSize();
