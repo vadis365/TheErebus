@@ -206,7 +206,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is == new ItemStack(Items.stick)) {
+		if (!worldObj.isRemote && is != null && is.getItem() == Items.stick) {
 			setLarvaSize(getLarvaSize() + 0.1F);
 			--is.stackSize;
 			return true;

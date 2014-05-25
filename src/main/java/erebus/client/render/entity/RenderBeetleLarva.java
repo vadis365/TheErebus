@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -20,7 +19,6 @@ public class RenderBeetleLarva extends RenderLiving {
 
 	public RenderBeetleLarva() {
 		super(new ModelBeetleLarva(), 0.3F);
-
 	}
 
 	public void renderBeetleLarva(EntityBeetleLarva entityBeetleLarva, double x, double y, double z, float rotationYaw, float partialTickTime) {
@@ -28,12 +26,7 @@ public class RenderBeetleLarva extends RenderLiving {
 	}
 
 	@Override
-	public void doRender(EntityLiving entityLiving, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderBeetleLarva((EntityBeetleLarva) entityLiving, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(EntityLivingBase entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderBeetleLarva((EntityBeetleLarva) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
