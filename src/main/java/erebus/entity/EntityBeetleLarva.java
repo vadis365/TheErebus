@@ -19,10 +19,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.entity.ai.EntityAIEatWoodenItem;
 
 public class EntityBeetleLarva extends EntityAnimal {
-	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
+	// broken // public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
 	public boolean isEating;
 	public boolean isSquashed;
@@ -32,7 +31,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 		setSize(0.9F, 0.5F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, aiEatWoodItem);
+		// broken //	tasks.addTask(1, aiEatWoodItem);
 		tasks.addTask(2, new EntityAITempt(this, 0.48D, Items.stick, false));
 		tasks.addTask(3, aiWander);
 		tasks.addTask(4, new EntityAILookIdle(this));
