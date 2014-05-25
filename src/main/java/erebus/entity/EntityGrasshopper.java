@@ -150,7 +150,7 @@ public class EntityGrasshopper extends EntityCreature {
 		float f1 = MathHelper.wrapAngleTo180_float(f - rotationYaw);
 		moveForward = 0.2F;
 		rotationYaw += f1;
-		if (rand.nextInt(100) == 0 && worldObj.isBlockNormalCube(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ))) {
+		if (rand.nextInt(100) == 0 && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube()) {
 			motionY = 0;
 			setPositionAndUpdate(posX, posY, posZ);
 		}

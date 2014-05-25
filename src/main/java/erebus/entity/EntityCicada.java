@@ -19,10 +19,10 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
-import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
 import erebus.item.ItemErebusMaterial.DATA;
+import erebus.lib.EnumWood;
 
 public class EntityCicada extends EntityCreature {
 	private int sonics;
@@ -70,7 +70,7 @@ public class EntityCicada extends EntityCreature {
 					Block o2 = worldObj.getBlock(p1, q1, n2);
 					if (o2 == null)
 						continue;
-					if (o2 == ModBlocks.logErebusGroup3)
+					if (o2 == EnumWood.Cypress.getLog())
 						return true;
 				}
 		return false;

@@ -1,7 +1,6 @@
 package erebus.entity;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -103,9 +102,6 @@ public abstract class EntityMobBlock extends EntityCreature implements IMob {
 
 			if (j > 0)
 				entity.setFire(j * 4);
-
-			if (entity instanceof EntityLivingBase)
-				EnchantmentThorns.func_92096_a(this, (EntityLivingBase) entity, rand);
 		}
 
 		return flag;
@@ -168,6 +164,5 @@ public abstract class EntityMobBlock extends EntityCreature implements IMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		//getAttributeMap().func_111150_b(SharedMonsterAttributes.attackDamage);
 	}
 }

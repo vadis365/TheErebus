@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
@@ -118,17 +117,14 @@ public class EntityFly extends EntityAmbientCreature {
 		super.updateAITasks();
 
 		if (getIsFlyHanging()) {
-			if (!worldObj.isBlockNormalCube(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ))) {
+			if (!worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
 				setIsFlyHanging(false);
-				worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1015, (int) posX, (int) posY, (int) posZ, 0);
-			} else {
+			else {
 				if (rand.nextInt(200) == 0)
 					rotationYawHead = rand.nextInt(360);
 
-				if (worldObj.getClosestPlayerToEntity(this, 4.0D) != null) {
+				if (worldObj.getClosestPlayerToEntity(this, 4.0D) != null)
 					setIsFlyHanging(false);
-					worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1015, (int) posX, (int) posY, (int) posZ, 0);
-				}
 			}
 		} else {
 			if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
@@ -148,7 +144,7 @@ public class EntityFly extends EntityAmbientCreature {
 			moveForward = 0.5F;
 			rotationYaw += var8;
 
-			if (rand.nextInt(100) == 0 && worldObj.isBlockNormalCube(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)))
+			if (rand.nextInt(100) == 0 && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
 				setIsFlyHanging(false);
 		}
 	}

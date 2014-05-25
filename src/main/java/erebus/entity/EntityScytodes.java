@@ -6,12 +6,14 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityScytodes extends EntityMob {
@@ -173,23 +175,24 @@ public class EntityScytodes extends EntityMob {
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		Object entityLivingData1 = super.onSpawnWithEgg(entityLivingData);
 
-		if (worldObj.rand.nextInt(100) == 0) {
+		if(worldObj.rand.nextInt(100) == 0) {
 			EntityMoneySpider entityspidermoney = new EntityMoneySpider(worldObj);
 			entityspidermoney.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
-			entityspidermoney.onSpawnWithEgg((EntityLivingData) null);
+			entityspidermoney.onSpawnWithEgg((IEntityLivingData) null);
 			worldObj.spawnEntityInWorld(entityspidermoney);
 			entityspidermoney.mountEntity(this);
 		}
-		if (entityLivingData1 == null) {
-			entityLivingData1 = new SpiderEffectsGroupData();
-			if (worldObj.difficultySetting > 2 && worldObj.rand.nextFloat() < 0.1F * worldObj.getLocationTensionFactor(posX, posY, posZ))
-				((SpiderEffectsGroupData) entityLivingData1).func_111104_a(worldObj.rand);
-		}
-		if (entityLivingData1 instanceof SpiderEffectsGroupData) {
-			int i = ((SpiderEffectsGroupData) entityLivingData1).field_111105_a;
+		if(entityLivingData1 == null) {
+			entityLivingData1 = new EntitySpider.GroupData();
+			if(this.worldObj.difficultySetting == EnumDifficulty.HARD && this.worldObj.rand.nextFloat() < 0.1F * this.worldObj.func_147462_b(this.posX, this.posY, this.posZ))
+				 ((EntitySpider.GroupData)entityLivingData1).func_111104_a(this.worldObj.rand);
+
+		if(entityLivingData1 instanceof EntitySpider.GroupData) {
+			int i = ((EntitySpider.GroupData) entityLivingData1).field_111105_a;
 			if (i > 0 && Potion.potionTypes[i] != null)
 				addPotionEffect(new PotionEffect(i, Integer.MAX_VALUE));
 		}
-		return (EntityLivingData) entityLivingData1;
-	}
+		}
+		return (IEntityLivingData) entityLivingData1;
+		}
 }
