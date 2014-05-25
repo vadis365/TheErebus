@@ -21,6 +21,7 @@ import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityBeetle extends EntityAnimal {
+	int shagCount;
 	public EntityBeetle(World world) {
 		super(world);
 		setSize(1.6F, 0.9F);
@@ -96,6 +97,13 @@ public class EntityBeetle extends EntityAnimal {
 	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
+	
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+		if(shagCount > 0)
+			shagCount--;
+	}
 
 	@Override
 	public boolean interact(EntityPlayer player) {
@@ -115,15 +123,18 @@ public class EntityBeetle extends EntityAnimal {
 				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bamBucket, 1, 2), false);
 			return true;
 		}
-		if (is != null && is == new ItemStack(ModItems.turnip) && !isInLove()) {
+		if (is != null && is == new ItemStack(ModItems.turnip) && !shagging()) {
 			is.stackSize--;
 			setTame((byte) 1);
-			//TODO (broken)
-			//inLove = 600;
+			shagCount = 600;
 			return true;
 		} else
 			return super.interact(player);
 	}
+	
+    public boolean shagging() {
+        return shagCount > 0;
+    }
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
