@@ -24,8 +24,6 @@ public class ThaumcraftIntegration implements IModIntegration {
 		registerBlock(ModBlocks.blockAmber, 1, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 5);
 		registerBlock(ModBlocks.blockAmber, 2, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
 
-		registerBlock(ModBlocks.logErebusGroup1, -1, Aspect.TREE, 4, Aspect.PLANT, 2, Aspect.ELDRITCH, 1, Aspect.CRAFT, 3, Aspect.LIFE, 1, Aspect.EARTH, 1);
-		registerBlock(ModBlocks.logErebusGroup2, -1, Aspect.TREE, 4, Aspect.PLANT, 2, Aspect.ELDRITCH, 1, Aspect.CRAFT, 3, Aspect.LIFE, 1, Aspect.EARTH, 1);
 		// planks, leaves
 		registerBlock(ModBlocks.erebusSapling, -1, Aspect.TREE, 1, Aspect.PLANT, 2, Aspect.LIFE, 1);
 

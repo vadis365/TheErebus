@@ -10,16 +10,17 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.lib.EnumWood;
+import erebus.lib.Reference;
 import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
@@ -29,15 +30,41 @@ import erebus.world.feature.tree.WorldGenMossbarkTree;
 
 public class BlockSaplingErebus extends BlockSapling {
 
-	public static final String[] saplingTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Mossbark", "Asper", "Cypress" };
-	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataMossbark = 3, dataAsper = 4, dataCypress = 5;
-
 	@SideOnly(Side.CLIENT)
-	private IIcon[] iconArray;
+	private IIcon icon;
+	private final EnumWood wood;
 
-	public BlockSaplingErebus() {
-		float var3 = 0.4F;
-		setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
+	public BlockSaplingErebus(EnumWood wood) {
+		this.wood = wood;
+		setStepSound(Block.soundTypeGrass);
+		setCreativeTab(ModTabs.blocks);
+		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.8F, 0.9F);
+		setBlockName(Reference.MOD_ID + ".sapling." + wood.name());
+		setBlockTextureName(Reference.MOD_ID + ":sapling_" + wood.name().toLowerCase());
+	}
+
+	@Override
+	public String getLocalizedName() {
+		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".sapling.name"), wood.getTranslatedName());
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		return blockIcon;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+		list.add(new ItemStack(item));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg) {
+		blockIcon = reg.registerIcon(getTextureName());
 	}
 
 	@Override
@@ -69,21 +96,37 @@ public class BlockSaplingErebus extends BlockSapling {
 		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z))
 			return;
 
-		int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = null;
 		int var8 = 0;
 		int var9 = 0;
 		boolean var10 = false;
 
-		if (meta == dataEucalyptus)
-			worldGen = new WorldGenEucalyptusTree();
-		else if (meta == dataAcacia)
-			worldGen = new WorldGenAcaciaTree();
-		else if (meta == dataMossbark)
-			worldGen = new WorldGenMossbarkTree();
-		else if (meta == dataAsper)
-			worldGen = new WorldGenAsperTree();
-		else if (meta == dataMahogany)
+		switch (wood) {
+			case Eucalyptus:
+				worldGen = new WorldGenEucalyptusTree();
+				break;
+			case Acacia:
+				worldGen = new WorldGenAcaciaTree();
+				break;
+			case Asper:
+				worldGen = new WorldGenAsperTree();
+				break;
+			case Baobab:
+				break;
+			case Cypress:
+				break;
+			case Mahogany:
+				break;
+			case Mossbark:
+				worldGen = new WorldGenMossbarkTree();
+				break;
+			case Scorched:
+				break;
+			default:
+				break;
+		}
+
+		if (meta == dataMahogany)
 			for (var8 = 0; var8 >= -1; --var8) {
 				for (var9 = 0; var9 >= -1; --var9)
 					if (isSameSapling(world, x + var8, y, z + var9, 0) && isSameSapling(world, x + var8 + 1, y, z + var9, 0) && isSameSapling(world, x + var8, y, z + var9 + 1, 0) && isSameSapling(world, x + var8 + 1, y, z + var9 + 1, 0)) {
@@ -113,52 +156,15 @@ public class BlockSaplingErebus extends BlockSapling {
 
 		if (!worldGen.generate(world, rand, x + var8, y, z + var9))
 			if (var10) {
-				world.setBlock(x + var8, y, z + var9, this, meta, 3);
-				world.setBlock(x + var8 + 1, y, z + var9, this, meta, 3);
-				world.setBlock(x + var8, y, z + var9 + 1, this, meta, 3);
-				world.setBlock(x + var8 + 1, y, z + var9 + 1, this, meta, 3);
+				world.setBlock(x + var8, y, z + var9, this, 0, 3);
+				world.setBlock(x + var8 + 1, y, z + var9, this, 0, 3);
+				world.setBlock(x + var8, y, z + var9 + 1, this, 0, 3);
+				world.setBlock(x + var8 + 1, y, z + var9 + 1, this, 0, 3);
 			} else
-				world.setBlock(x, y, z, this, meta, 3);
+				world.setBlock(x, y, z, this, 0, 3);
 	}
 
 	public boolean isSameSapling(World world, int x, int y, int z, int meta) {
 		return super.func_149880_a(world, x, y, z, meta);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return iconArray[meta < 0 || meta >= iconArray.length ? 0 : meta];
-	}
-
-	@Override
-	public int damageDropped(int meta) {
-		return meta;
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item id, CreativeTabs creativeTabs, List list) {
-		for (int a = 0; a < iconArray.length; a++)
-			list.add(new ItemStack(id, 1, a));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		iconArray = new IIcon[saplingTypes.length];
-
-		for (int i = 0; i < iconArray.length; i++)
-			iconArray[i] = iconRegister.registerIcon("erebus:sapling" + saplingTypes[i]);
-	}
-
-	@SubscribeEvent
-	public void onBonemeal(BonemealEvent event) {
-		if (!event.world.isRemote && event.block == this) {
-			if (event.world.rand.nextFloat() < 0.45D)
-				growTree(event.world, event.x, event.y, event.z, event.world.rand);
-			event.setResult(Result.ALLOW);
-		}
 	}
 }

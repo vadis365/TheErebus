@@ -45,7 +45,6 @@ import erebus.block.BlockHoneyComb;
 import erebus.block.BlockHoneyTreat;
 import erebus.block.BlockInsectRepellent;
 import erebus.block.BlockLeavesErebus;
-import erebus.block.BlockLogErebus;
 import erebus.block.BlockMucusBomb;
 import erebus.block.BlockMud;
 import erebus.block.BlockOreFossil;
@@ -56,14 +55,13 @@ import erebus.block.BlockPlantedGiantFlower;
 import erebus.block.BlockPortalErebus;
 import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
-import erebus.block.BlockSaplingErebus;
 import erebus.block.BlockSimple;
 import erebus.block.BlockSlabPetrifiedWood;
 import erebus.block.BlockSlabPlanksErebus;
 import erebus.block.BlockSlabStoneErebus;
 import erebus.block.BlockSmallPlants;
 import erebus.block.BlockSpiderSpawner;
-import erebus.block.BlockStairsErebus;
+import erebus.block.BlockStairsBase;
 import erebus.block.BlockThorns;
 import erebus.block.BlockTurnip;
 import erebus.block.BlockUmberFurnace;
@@ -87,12 +85,8 @@ import erebus.item.block.ItemBlockErebusStigma;
 import erebus.item.block.ItemBlockFlowerPlanted;
 import erebus.item.block.ItemBlockGneiss;
 import erebus.item.block.ItemBlockLeavesErebus;
-import erebus.item.block.ItemBlockLogErebus1;
-import erebus.item.block.ItemBlockLogErebus2;
-import erebus.item.block.ItemBlockLogErebus3;
-import erebus.item.block.ItemBlockPlanksErebus;
+import erebus.item.block.ItemBlockPlanks;
 import erebus.item.block.ItemBlockRedGem;
-import erebus.item.block.ItemBlockSapling;
 import erebus.item.block.ItemBlockSlabPetrifiedWood;
 import erebus.item.block.ItemBlockSlabPlanks0Erebus;
 import erebus.item.block.ItemBlockSlabPlanks1Erebus;
@@ -102,6 +96,7 @@ import erebus.item.block.ItemBlockUmberStone;
 import erebus.item.block.ItemBlockUmberpaver;
 import erebus.item.block.ItemBlockWallErebus;
 import erebus.item.block.ItemBlockWitherWeb;
+import erebus.lib.EnumWood;
 
 public class ModBlocks {
 
@@ -115,7 +110,7 @@ public class ModBlocks {
 	public static Block umberstone, umberOreBlock, oreFossil, redGem, blockAmber, quickSand, ghostSand, erebusOreExtra, umberstoneButton;
 
 	// WOOD
-	public static Block logErebusGroup1, logErebusGroup2, logErebusGroup3, planksErebus, erebusSapling, hollowLogAcacia, erebusFlower, erebusStigma;
+	public static Block planksErebus, hollowLogAcacia, erebusFlower, erebusStigma;
 	public static BlockLeavesErebus leavesErebus;
 
 	// UNDERGROWTH
@@ -132,7 +127,7 @@ public class ModBlocks {
 	public static Block jadeBlock, altar, glowGemBlock, mucusBomb;
 
 	// STAIRS, SLABS, WALLS
-	public static Block[] umbercobbleStairs, plankStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab, gneissStairs;
+	public static Block[] umbercobbleStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab, gneissStairs;
 	public static Block wallErebus, petrifiedWoodStairs, amberBrickStairs, waspNestStairs;
 
 	// DUNGEONS
@@ -160,12 +155,9 @@ public class ModBlocks {
 		umberstoneButton = new BlockButtonUmberstone().setHardness(0.5F).setStepSound(Block.soundTypeStone).setBlockName("umberstoneButton");
 		gneiss = new BlockGneiss().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("gneiss");
 
-		logErebusGroup1 = new BlockLogErebus(0).setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("logErebus1");
-		logErebusGroup2 = new BlockLogErebus(1).setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("logErebus2");
-		logErebusGroup3 = new BlockLogErebus(2).setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("logErebus3");
-		planksErebus = new BlockPlanksErebus().setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("planksErebus");
+		planksErebus = new BlockPlanksErebus().setHardness(2.0F).setStepSound(Block.soundTypeWood);
+		EnumWood.initBlocks();
 		leavesErebus = (BlockLeavesErebus) new BlockLeavesErebus().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leavesErebus");
-		erebusSapling = new BlockSaplingErebus().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("sapling_mahogany");
 		hollowLogAcacia = new BlockHollowLog().setHardness(0.7F).setStepSound(Block.soundTypeWood).setBlockName("hollowLogAcacia");
 		erebusFlower = new BlockErebusFlower().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFlower");
 		flowerPlanted = new BlockPlantedGiantFlower().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("flowerPlanted");
@@ -227,11 +219,8 @@ public class ModBlocks {
 
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
-			umbercobbleStairs[i] = new BlockStairsErebus(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("umbercobbleStairs" + i);
-		plankStairs = new Block[BlockPlanksErebus.plankTypes.length];
-		for (int i = 0; i < BlockPlanksErebus.plankTypes.length; i++)
-			plankStairs[i] = new BlockStairsErebus(planksErebus, i).setStepSound(Block.soundTypeWood).setBlockName("stairsPlanks" + i);
-		petrifiedWoodStairs = new BlockStairsErebus(petrifiedWoodPlanks, 0).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodStairs");
+			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("umbercobbleStairs" + i);
+		petrifiedWoodStairs = new BlockStairsBase(petrifiedWoodPlanks, 0).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodStairs");
 		stoneSlabs = new Block[2];
 		for (int i = 0; i < 2; i++)
 			stoneSlabs[i] = new BlockSlabStoneErebus(i == 1).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("slabStoneErebus");
@@ -242,11 +231,11 @@ public class ModBlocks {
 		petrifiedWoodSlab = new Block[2];
 		for (int i = 0; i < petrifiedWoodSlab.length; i++)
 			petrifiedWoodSlab[i] = new BlockSlabPetrifiedWood(i == 1).setBlockName("petrifiedWoodSlab");
-		amberBrickStairs = new BlockStairsErebus(blockAmber, 2).setStepSound(Block.soundTypeStone).setBlockName("amberBrickStairs");
-		waspNestStairs = new BlockStairsErebus(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("waspNestStairs");
+		amberBrickStairs = new BlockStairsBase(blockAmber, 2).setStepSound(Block.soundTypeStone).setBlockName("amberBrickStairs");
+		waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("waspNestStairs");
 		gneissStairs = new Block[BlockGneiss.iconPaths.length];
 		for (int i = 0; i < gneissStairs.length; i++)
-			gneissStairs[i] = new BlockStairsErebus(gneiss, i).setStepSound(Block.soundTypeStone).setBlockName("gneissStairs" + i);
+			gneissStairs[i] = new BlockStairsBase(gneiss, i).setStepSound(Block.soundTypeStone).setBlockName("gneissStairs" + i);
 
 		spiderSpawner = new BlockSpiderSpawner("Scytodes - Erebus").setBlockName("spiderSpawner").setBlockTextureName("erebus:spiderSpawner");
 		jumpingSpiderSpawner = new BlockSpiderSpawner("JumpingSpider - Erebus").setBlockName("jumpingSpiderSpawner").setBlockTextureName("erebus:spiderSpawner");
@@ -255,7 +244,7 @@ public class ModBlocks {
 
 	private static void initCreativeTabs() {
 		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
-		ModTabs.blocks.setTab(logErebusGroup1, logErebusGroup2, logErebusGroup3, hollowLogAcacia, planksErebus, leavesErebus, erebusSapling);
+		ModTabs.blocks.setTab(hollowLogAcacia, planksErebus, leavesErebus);
 		ModTabs.blocks.setTab(erebusGrass, fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusPlantSmall);
 		ModTabs.blocks.setTab(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2); //,erebusMushroomCap3, erebusMushroomCap4
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
@@ -264,7 +253,6 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
 		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
-		ModTabs.blocks.setTab(plankStairs);
 		ModTabs.blocks.setTab(gneissStairs);
 		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, stoneSlabs[0], plankSlabs[0]);
 		ModTabs.blocks.setTab(plankSlabs[2], petrifiedWoodSlab[0], wallErebus);
@@ -283,12 +271,8 @@ public class ModBlocks {
 		GameRegistry.registerBlock(erebusOreExtra, ItemBlockErebusOreExtras.class, "erebusOreExtras");
 		GameRegistry.registerBlock(umberstoneButton, "umberstoneButton");
 
-		GameRegistry.registerBlock(logErebusGroup1, ItemBlockLogErebus1.class, "logErebus1");
-		GameRegistry.registerBlock(logErebusGroup2, ItemBlockLogErebus2.class, "logErebus2");
-		GameRegistry.registerBlock(logErebusGroup3, ItemBlockLogErebus3.class, "logErebus3");
-		GameRegistry.registerBlock(planksErebus, ItemBlockPlanksErebus.class, "planksErebus");
+		GameRegistry.registerBlock(planksErebus, ItemBlockPlanks.class, "planksErebus");
 		GameRegistry.registerBlock(leavesErebus, ItemBlockLeavesErebus.class, "leavesErebus");
-		GameRegistry.registerBlock(erebusSapling, ItemBlockSapling.class, "erebusSapling");
 		GameRegistry.registerBlock(hollowLogAcacia, "hollowLogAcacia");
 		GameRegistry.registerBlock(erebusFlower, ItemBlockErebusFlower.class, "erebusFlower");
 		GameRegistry.registerBlock(erebusStigma, ItemBlockErebusStigma.class, "erebusStigma");
@@ -350,8 +334,6 @@ public class ModBlocks {
 
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			GameRegistry.registerBlock(umbercobbleStairs[i], "umbercobbleStairs" + i);
-		for (int i = 0; i < plankStairs.length; i++)
-			GameRegistry.registerBlock(plankStairs[i], "plankStairs" + i);
 		for (int i = 0; i < stoneSlabs.length; i++)
 			GameRegistry.registerBlock(stoneSlabs[i], ItemBlockSlabStoneErebus.class, "slabStone" + i);
 		for (int i = 0; i < plankSlabs.length; i++)
@@ -407,9 +389,6 @@ public class ModBlocks {
 		erebusOreExtra.setHarvestLevel("pickaxe", 2, 3);
 		erebusOreExtra.setHarvestLevel("pickaxe", 1, 4);
 
-		Blocks.fire.setFireInfo(logErebusGroup1, 5, 5);
-		Blocks.fire.setFireInfo(logErebusGroup2, 5, 5);
-		Blocks.fire.setFireInfo(logErebusGroup3, 5, 5);
 		Blocks.fire.setFireInfo(planksErebus, 5, 20);
 		Blocks.fire.setFireInfo(leavesErebus, 30, 60);
 		Blocks.fire.setFireInfo(blockWitherWeb, 20, 50);

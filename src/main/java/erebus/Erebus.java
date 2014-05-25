@@ -19,6 +19,7 @@ import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
 import erebus.client.sound.EntitySoundEvent;
+import erebus.core.handler.BonemealHandler;
 import erebus.core.handler.BucketHandler;
 import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
@@ -76,8 +77,8 @@ public class Erebus {
 		RecipeHandler.init();
 		AltarRecipe.init();
 
+		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
-		MinecraftForge.EVENT_BUS.register(ModBlocks.erebusSapling);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.flowerPlanted);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.insectRepellent);
