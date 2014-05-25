@@ -11,6 +11,7 @@ import erebus.block.BlockBambooTorch;
 import erebus.block.BlockHollowLog;
 import erebus.core.handler.ConfigHandler;
 import erebus.entity.EntityBeetleLarva;
+import erebus.lib.EnumWood;
 
 public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
@@ -32,8 +33,8 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		if (block == ModBlocks.plankSlabs[2] && blockMeta == 1)
 			return false;
 
-		//if (block == ModBlocks.plankStairs[9]) where's the stairs gone?
-		//	return false;
+		if (block == EnumWood.Acacia.getStair())
+			return false;
 
 		if (ConfigHandler.beetleLarvaEating == 2)
 			return true;

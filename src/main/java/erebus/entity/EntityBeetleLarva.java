@@ -19,9 +19,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.entity.ai.EntityAIEatWoodenItem;
 
 public class EntityBeetleLarva extends EntityAnimal {
-	// broken // public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
+
+	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
 	public boolean isEating;
 	public boolean isSquashed;
@@ -31,7 +33,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 		setSize(0.9F, 0.5F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		// broken //	tasks.addTask(1, aiEatWoodItem);
+		tasks.addTask(1, aiEatWoodItem);
 		tasks.addTask(2, new EntityAITempt(this, 0.48D, Items.stick, false));
 		tasks.addTask(3, aiWander);
 		tasks.addTask(4, new EntityAILookIdle(this));
@@ -97,9 +99,9 @@ public class EntityBeetleLarva extends EntityAnimal {
 		super.onCollideWithPlayer(player);
 		byte duration = 0;
 		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && player.boundingBox.maxX >= boundingBox.minX && player.boundingBox.minX <= boundingBox.maxX && player.boundingBox.maxZ >= boundingBox.minZ && player.boundingBox.minZ <= boundingBox.maxZ && player.lastTickPosY > player.posY) {
-			if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL)
+			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 				duration = 7;
-			else if (this.worldObj.difficultySetting == EnumDifficulty.HARD)
+			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 				duration = 15;
 			if (duration > 0)
 				player.addPotionEffect(new PotionEffect(Potion.confusion.id, duration * 20, 0));

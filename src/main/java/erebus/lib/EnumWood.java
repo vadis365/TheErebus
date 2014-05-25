@@ -43,6 +43,10 @@ public enum EnumWood {
 		this(true);
 	}
 
+	public Block getStair() {
+		return stairs.get(this);
+	}
+
 	public Block getLog() {
 		return logs.get(this);
 	}
