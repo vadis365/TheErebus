@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
 import erebus.block.BlockBambooCrop;
 import erebus.block.BlockBambooTorch;
@@ -36,7 +37,7 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
 		if (ConfigHandler.beetleLarvaEating == 2)
 			return true;
-		else if (block.getMaterial() != Material.wood || block instanceof BlockLog || block instanceof BlockBambooCrop || block instanceof BlockHollowLog || block instanceof BlockMushroomCap || block instanceof BlockBambooTorch)
+		else if (block.getMaterial() != Material.wood || block instanceof BlockLog || block instanceof BlockBambooCrop || block instanceof BlockHollowLog || block == Blocks.brown_mushroom_block || block == Blocks.red_mushroom_block || block instanceof BlockBambooTorch)
 			return false;
 		else if (ConfigHandler.beetleLarvaEating == 0 && block.hasTileEntity(blockMeta))
 			return false;
