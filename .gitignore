@@ -10,23 +10,5 @@ config/
 logs/
 eclipse/
 gradlew.bat
-crash-reports/crash-2014-05-22_23.41.31-client.txt
-mods/CodeChickenCore-1.7.2-1.0.0-dev.jar
-options.txt
-libs/Baubles-deobf-1.7.2-1.0.0.11.jar
-crash-reports/crash-2014-05-25_00.39.12-server.txt
-saves/New World/DIM-1/forcedchunks.dat
-saves/New World/DIM1/data/villages.dat
-saves/New World/DIM-1/data/villages.dat
-saves/New World/data/Mineshaft.dat
-saves/New World/DIM1/forcedchunks.dat
-saves/New World/data/Temple.dat
-saves/New World/data/villages.dat
-saves/New World/forcedchunks.dat
-saves/New World/level.dat
-saves/New World/level.dat_mcr
-saves/New World/level.dat_old
-saves/New World/players/vadis365.dat
-saves/New World/region/r.0.0.mca
-saves/New World/session.lock
-saves/New World/stats/vadis365.json
+mods/
+saves/
