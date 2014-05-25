@@ -18,8 +18,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import erebus.ModItems;
 import erebus.entity.ai.EntityAIEatWoodenItem;
+import erebus.network.packet.PacketParticle;
 
 public class EntityBeetleLarva extends EntityAnimal {
 
@@ -206,7 +208,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is.getItem() == Items.stick) {
+		if (!worldObj.isRemote && is != null && OreDictionary.getOreID(is) == OreDictionary.getOreID("stickWood")) {
 			setLarvaSize(getLarvaSize() + 0.1F);
 			--is.stackSize;
 			return true;
