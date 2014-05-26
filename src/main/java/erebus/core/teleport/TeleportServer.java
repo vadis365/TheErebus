@@ -1,8 +1,8 @@
 package erebus.core.teleport;
 
 import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.Packet;
 import erebus.core.handler.ConfigHandler;
 import erebus.network.PacketPipeline;
 import erebus.network.client.C01Teleport;
@@ -36,7 +36,7 @@ public class TeleportServer {
 				timeInPortal = 1.0F;
 				timeUntilPortal = 10;
 				//PacketDispatcher.sendPacketToPlayer(PacketTypeHandler.populatePacket(new PacketTeleport(player.dimension != ConfigHandler.erebusDimensionID)), (Player) player);
-				PacketPipeline.sendToPlayer(player,new C01Teleport());
+				PacketPipeline.sendToPlayer(player, new C01Teleport());
 
 				if (player.dimension == (byte) ConfigHandler.erebusDimensionID)
 					player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, TeleporterErebus.TELEPORTER_TO_OVERWORLD);
@@ -64,12 +64,12 @@ public class TeleportServer {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof TeleportServer)
-			return ((TeleportServer) o).player.username.equals(player.username);
+			return ((TeleportServer) o).player.getCommandSenderName().equals(player.getCommandSenderName());
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return player.username.hashCode();
+		return player.getCommandSenderName().hashCode();
 	}
 }
