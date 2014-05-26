@@ -22,8 +22,8 @@ public class TeleportClient {
 		if (inPortal) {
 			if (mc.currentScreen != null)
 				mc.displayGuiScreen((GuiScreen) null);
-			if (timeInPortal == 0.0F)
-				mc.getSoundHandler().playSoundFX("EternalFrost.portaltravel", 1.0F, random.nextFloat() * 0.4F + 0.8F);
+			//if (timeInPortal == 0.0F)
+			//	mc.getSoundHandler().playSoundFX("EternalFrost.portaltravel", 1.0F, random.nextFloat() * 0.4F + 0.8F);
 			timeInPortal += 0.0125F;
 			if (timeInPortal >= 1.0F)
 				timeInPortal = 1.0F;
