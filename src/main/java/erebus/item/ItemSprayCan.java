@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.network.PacketPipeline;
-import erebus.network.packet.PacketParticle;
 
 public class ItemSprayCan extends Item {
 

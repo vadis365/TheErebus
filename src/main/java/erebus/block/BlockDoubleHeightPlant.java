@@ -24,11 +24,11 @@ import erebus.item.ItemErebusMaterial.DATA;
 
 public class BlockDoubleHeightPlant extends Block {
 
-	public static final String[] plantName = new String[] { "Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "Grass", "Shroom1", "Shroom2", "Fern" };
+	public static final String[] plantName = new String[] { "Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "Shroom1", "Shroom2" };
 
-	public static final int dataSundewBottom = 0, dataWeepingBlueBottom = 1, dataBullrushBottom = 2, dataDroughtedShrubBottom = 3, dataTallGrassBottom = 4, dataShroom1Bottom = 5, dataShroom2Bottom = 6, dataFernBottom = 7;
+	public static final int dataSundewBottom = 0, dataWeepingBlueBottom = 1, dataBullrushBottom = 2, dataDroughtedShrubBottom = 3, dataShroom1Bottom = 4, dataShroom2Bottom = 5;
 
-	public static final int dataSundewTop = 8, dataWeepingBlueTop = 9, dataBullrushTop = 10, dataDroughtedShrubTop = 11, dataTallGrassTop = 12, dataShroom1Top = 13, dataShroom2Top = 14, dataFernTop = 15;
+	public static final int dataSundewTop = 8, dataWeepingBlueTop = 9, dataBullrushTop = 10, dataDroughtedShrubTop = 11, dataShroom1Top = 12, dataShroom2Top = 13;
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] doublePlantBottomIcons;
@@ -126,6 +126,9 @@ public class BlockDoubleHeightPlant extends Block {
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+		if (world.rand.nextInt(8) != 0)
+			return;
+
 		ItemStack item = null;
 		int meta = world.getBlockMetadata(x, y, z);
 
