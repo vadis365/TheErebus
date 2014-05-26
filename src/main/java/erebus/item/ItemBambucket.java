@@ -168,7 +168,7 @@ public class ItemBambucket extends Item {
 					world.spawnParticle("largesmoke", x + Math.random(), y + Math.random(), z + Math.random(), 0.0D, 0.0D, 0.0D);
 			} else {
 				if (!world.isRemote && flag && !material.isLiquid())
-					world.destroyBlock(x, y, z, true);
+					world.func_147480_a(x, y, z, true);//destroyBlock
 				if (item.getItemDamage() == 1)
 					world.setBlock(x, y, z, Blocks.flowing_water, 0, 3);
 				else if (item.getItemDamage() == 3)
