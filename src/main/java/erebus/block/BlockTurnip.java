@@ -43,14 +43,14 @@ public class BlockTurnip extends BlockCrops {
 			dropAmount += world.rand.nextInt(2);
 
 		for (int n = 0; n < dropAmount + fortune; n++)
-			ret.add(new ItemStack(getSeedItem(), 1, 0));
+			ret.add(new ItemStack(func_149866_i(), 1, 0));
 
 		return ret;
 	}
 
 	@Override
-	protected Item getSeedItem() {
-		return ModItems.turnip.itemID;
+	 protected Item func_149866_i() { //getSeedItem()
+		return ModItems.turnip;
 	}
 
 	@Override
@@ -60,8 +60,8 @@ public class BlockTurnip extends BlockCrops {
 	}
 
 	@Override
-	protected int getCropItem() {
-		return ModItems.turnip.itemID;
+	protected Item func_149865_P() { //getCropItem()
+		return ModItems.turnip;
 	}
 
 	@Override
