@@ -23,4 +23,14 @@ public class TileEntityAnimatedChest extends TileEntityBasicInventory {
 	public Block getBlockType() {
 		return Blocks.chest;
 	}
+	
+	@Override
+	public void openInventory() {
+		chester.setOpen(true);
+	}
+
+	@Override
+	public void closeInventory() {
+		chester.setOpen(false);
+	}
 }
