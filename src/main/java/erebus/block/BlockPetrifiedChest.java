@@ -22,6 +22,7 @@ import erebus.ModBlocks;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
+import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockPetrifiedChest extends BlockContainer {
 
@@ -63,30 +64,30 @@ public class BlockPetrifiedChest extends BlockContainer {
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
 		unifyAdjacentChests(world, x, y, z);
-		int l = world.getBlockId(x, y, z - 1);
-		int i1 = world.getBlockId(x, y, z + 1);
-		int j1 = world.getBlockId(x - 1, y, z);
-		int k1 = world.getBlockId(x + 1, y, z);
+		Block l = world.getBlock(x, y, z - 1);
+		Block i1 = world.getBlock(x, y, z + 1);
+		Block j1 = world.getBlock(x - 1, y, z);
+		Block k1 = world.getBlock(x + 1, y, z);
 
-		if (l == blockID)
+		if (l == this)
 			unifyAdjacentChests(world, x, y, z - 1);
 
-		if (i1 == blockID)
+		if (i1 == this)
 			unifyAdjacentChests(world, x, y, z + 1);
 
-		if (j1 == blockID)
+		if (j1 == this)
 			unifyAdjacentChests(world, x - 1, y, z);
 
-		if (k1 == blockID)
+		if (k1 == this)
 			unifyAdjacentChests(world, x + 1, y, z);
 	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack is) {
-		int l = world.getBlockId(x, y, z - 1);
-		int i1 = world.getBlockId(x, y, z + 1);
-		int j1 = world.getBlockId(x - 1, y, z);
-		int k1 = world.getBlockId(x + 1, y, z);
+		Block l = world.getBlock(x, y, z - 1);
+		Block i1 = world.getBlock(x, y, z + 1);
+		Block j1 = world.getBlock(x - 1, y, z);
+		Block k1 = world.getBlock(x + 1, y, z);
 		byte b0 = 0;
 		int l1 = MathHelper.floor_double(entityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
@@ -102,11 +103,11 @@ public class BlockPetrifiedChest extends BlockContainer {
 		if (l1 == 3)
 			b0 = 4;
 
-		if (l != blockID && i1 != blockID && j1 != blockID && k1 != blockID)
+		if (l != this && i1 != this && j1 != this && k1 != this)
 			world.setBlockMetadataWithNotify(x, y, z, b0, 3);
 		else {
-			if ((l == blockID || i1 == blockID) && (b0 == 4 || b0 == 5)) {
-				if (l == blockID)
+			if ((l == this || i1 == this) && (b0 == 4 || b0 == 5)) {
+				if (l == this)
 					world.setBlockMetadataWithNotify(x, y, z - 1, b0, 3);
 				else
 					world.setBlockMetadataWithNotify(x, y, z + 1, b0, 3);
@@ -114,8 +115,8 @@ public class BlockPetrifiedChest extends BlockContainer {
 				world.setBlockMetadataWithNotify(x, y, z, b0, 3);
 			}
 
-			if ((j1 == blockID || k1 == blockID) && (b0 == 2 || b0 == 3)) {
-				if (j1 == blockID)
+			if ((j1 == this || k1 == this) && (b0 == 2 || b0 == 3)) {
+				if (j1 == this)
 					world.setBlockMetadataWithNotify(x - 1, y, z, b0, 3);
 				else
 					world.setBlockMetadataWithNotify(x + 1, y, z, b0, 3);
@@ -125,41 +126,41 @@ public class BlockPetrifiedChest extends BlockContainer {
 		}
 
 		if (is.hasDisplayName())
-			((TileEntityPetrifiedWoodChest) world.getBlockTileEntity(x, y, z)).setChestGuiName(is.getDisplayName());
+			((TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z)).setChestGuiName(is.getDisplayName());
 	}
 
 	public void unifyAdjacentChests(World world, int x, int y, int z) {
 		if (!world.isRemote) {
-			int l = world.getBlockId(x, y, z - 1);
-			int i1 = world.getBlockId(x, y, z + 1);
-			int j1 = world.getBlockId(x - 1, y, z);
-			int k1 = world.getBlockId(x + 1, y, z);
-			int l1;
-			int i2;
+			Block l = world.getBlock(x, y, z - 1);
+			Block i1 = world.getBlock(x, y, z + 1);
+			Block j1 = world.getBlock(x - 1, y, z);
+			Block k1 = world.getBlock(x + 1, y, z);
+			Block l1;
+			Block i2;
 			byte b0;
 			int j2;
 
-			if (l != blockID && i1 != blockID) {
-				if (j1 != blockID && k1 != blockID) {
+			if (l != this && i1 != this) {
+				if (j1 != this && k1 != this) {
 					b0 = 3;
 
-					if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+					if (l.func_149730_j() && !i1.func_149730_j())
 						b0 = 3;
 
-					if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+					if (i1.func_149730_j() && !l.func_149730_j())
 						b0 = 2;
 
-					if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+					if (j1.func_149730_j() && !k1.func_149730_j())
 						b0 = 5;
 
-					if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+					if (k1.func_149730_j() && !j1.func_149730_j())
 						b0 = 4;
 				} else {
-					l1 = world.getBlockId(j1 == blockID ? x - 1 : x + 1, y, z - 1);
-					i2 = world.getBlockId(j1 == blockID ? x - 1 : x + 1, y, z + 1);
+					l1 = world.getBlock(j1 == this ? x - 1 : x + 1, y, z - 1);
+					i2 = world.getBlock(j1 == this ? x - 1 : x + 1, y, z + 1);
 					b0 = 3;
 
-					if (j1 == blockID)
+					if (j1 == this)
 						j2 = world.getBlockMetadata(x - 1, y, z);
 					else
 						j2 = world.getBlockMetadata(x + 1, y, z);
@@ -167,18 +168,18 @@ public class BlockPetrifiedChest extends BlockContainer {
 					if (j2 == 2)
 						b0 = 2;
 
-					if ((Block.opaqueCubeLookup[l] || Block.opaqueCubeLookup[l1]) && !Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[i2])
+					if ((l.func_149730_j() || l1.func_149730_j()) && !i1.func_149730_j() && !i2.func_149730_j())
 						b0 = 3;
 
-					if ((Block.opaqueCubeLookup[i1] || Block.opaqueCubeLookup[i2]) && !Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[l1])
+					if ((i1.func_149730_j() || i2.func_149730_j()) && !l.func_149730_j() && !l1.func_149730_j())
 						b0 = 2;
 				}
 			} else {
-				l1 = world.getBlockId(x - 1, y, l == blockID ? z - 1 : z + 1);
-				i2 = world.getBlockId(x + 1, y, l == blockID ? z - 1 : z + 1);
+				l1 = world.getBlock(x - 1, y, l == this ? z - 1 : z + 1);
+				i2 = world.getBlock(x + 1, y, l == this ? z - 1 : z + 1);
 				b0 = 5;
 
-				if (l == blockID)
+				if (l == this)
 					j2 = world.getBlockMetadata(x, y, z - 1);
 				else
 					j2 = world.getBlockMetadata(x, y, z + 1);
@@ -186,10 +187,10 @@ public class BlockPetrifiedChest extends BlockContainer {
 				if (j2 == 4)
 					b0 = 4;
 
-				if ((Block.opaqueCubeLookup[j1] || Block.opaqueCubeLookup[l1]) && !Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[i2])
+				if ((j1.func_149730_j() || l1.func_149730_j()) && !k1.func_149730_j() && !i2.func_149730_j())
 					b0 = 5;
 
-				if ((Block.opaqueCubeLookup[k1] || Block.opaqueCubeLookup[i2]) && !Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[l1])
+				if ((k1.func_149730_j() || i2.func_149730_j()) && !j1.func_149730_j() && !l1.func_149730_j())
 					b0 = 4;
 			}
 
@@ -201,46 +202,46 @@ public class BlockPetrifiedChest extends BlockContainer {
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		int l = 0;
 
-		if (world.getBlockId(x - 1, y, z) == blockID)
+		if (world.getBlock(x - 1, y, z) == this)
 			++l;
 
-		if (world.getBlockId(x + 1, y, z) == blockID)
+		if (world.getBlock(x + 1, y, z) == this)
 			++l;
 
-		if (world.getBlockId(x, y, z - 1) == blockID)
+		if (world.getBlock(x, y, z - 1) == this)
 			++l;
 
-		if (world.getBlockId(x, y, z + 1) == blockID)
+		if (world.getBlock(x, y, z + 1) == this)
 			++l;
 
 		return l > 1 ? false : isThereANeighborChest(world, x - 1, y, z) ? false : isThereANeighborChest(world, x + 1, y, z) ? false : isThereANeighborChest(world, x, y, z - 1) ? false : !isThereANeighborChest(world, x, y, z + 1);
 	}
 
 	private boolean isThereANeighborChest(World world, int x, int y, int z) {
-		return world.getBlockId(x, y, z) != blockID ? false : world.getBlockId(x - 1, y, z) == blockID ? true : world.getBlockId(x + 1, y, z) == blockID ? true : world.getBlockId(x, y, z - 1) == blockID ? true : world.getBlockId(x, y, z + 1) == blockID;
+		return world.getBlock(x, y, z) != this ? false : world.getBlock(x - 1, y, z) == this ? true : world.getBlock(x + 1, y, z) == this ? true : world.getBlock(x, y, z - 1) == this ? true : world.getBlock(x, y, z + 1) == this;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
-		super.onNeighborBlockChange(world, x, y, z, par5);
-		TileEntityPetrifiedWoodChest tileentitychest = (TileEntityPetrifiedWoodChest) world.getBlockTileEntity(x, y, z);
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+		super.onNeighborBlockChange(world, x, y, z, block);
+		TileEntityPetrifiedWoodChest tileentitychest = (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z);
 
 		if (tileentitychest != null)
 			tileentitychest.updateContainingBlockInfo();
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-		TileEntityPetrifiedWoodChest tile = (TileEntityPetrifiedWoodChest) world.getBlockTileEntity(x, y, z);
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+		TileEntityPetrifiedWoodChest tile = (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z);
 		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack is = tile.getStackInSlot(i);
 				if (is != null)
 					Utils.dropStack(world, x, y, z, is);
 			}
-			world.func_96440_m(x, y, z, par5);
+			world.func_147453_f(x, y, z, block);
 		}
-		super.breakBlock(world, x, y, z, par5, par6);
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	@Override
@@ -254,35 +255,35 @@ public class BlockPetrifiedChest extends BlockContainer {
 	}
 
 	public static IInventory getInventory(World world, int x, int y, int z) {
-		Object object = world.getBlockTileEntity(x, y, z);
-		int blockID = ModBlocks.petrifiedWoodChest.blockID;
+		Object object = world.getTileEntity(x, y, z);
+		Block chest = ModBlocks.petrifiedWoodChest;
 
 		if (object == null)
 			return null;
-		else if (world.isBlockSolidOnSide(x, y + 1, z, DOWN))
+		else if (world.isSideSolid(x, y + 1, z, DOWN))
 			return null;
 		else if (isOcelotBlockingChest(world, x, y, z))
 			return null;
-		else if (world.getBlockId(x - 1, y, z) == blockID && (world.isBlockSolidOnSide(x - 1, y + 1, z, DOWN) || isOcelotBlockingChest(world, x - 1, y, z)))
+		else if (world.getBlock(x - 1, y, z) == chest && (world.isSideSolid(x - 1, y + 1, z, DOWN) || isOcelotBlockingChest(world, x - 1, y, z)))
 			return null;
-		else if (world.getBlockId(x + 1, y, z) == blockID && (world.isBlockSolidOnSide(x + 1, y + 1, z, DOWN) || isOcelotBlockingChest(world, x + 1, y, z)))
+		else if (world.getBlock(x + 1, y, z) == chest && (world.isSideSolid(x + 1, y + 1, z, DOWN) || isOcelotBlockingChest(world, x + 1, y, z)))
 			return null;
-		else if (world.getBlockId(x, y, z - 1) == blockID && (world.isBlockSolidOnSide(x, y + 1, z - 1, DOWN) || isOcelotBlockingChest(world, x, y, z - 1)))
+		else if (world.getBlock(x, y, z - 1) == chest && (world.isSideSolid(x, y + 1, z - 1, DOWN) || isOcelotBlockingChest(world, x, y, z - 1)))
 			return null;
-		else if (world.getBlockId(x, y, z + 1) == blockID && (world.isBlockSolidOnSide(x, y + 1, z + 1, DOWN) || isOcelotBlockingChest(world, x, y, z + 1)))
+		else if (world.getBlock(x, y, z + 1) == chest && (world.isSideSolid(x, y + 1, z + 1, DOWN) || isOcelotBlockingChest(world, x, y, z + 1)))
 			return null;
 		else {
-			if (world.getBlockId(x - 1, y, z) == blockID)
-				object = new InventoryLargeChest("container.petrifiedChestDouble", (TileEntityPetrifiedWoodChest) world.getBlockTileEntity(x - 1, y, z), (IInventory) object);
+			if (world.getBlock(x - 1, y, z) == chest)
+				object = new InventoryLargeChest("container.petrifiedChestDouble", (TileEntityPetrifiedWoodChest) world.getTileEntity(x - 1, y, z), (IInventory) object);
 
-			if (world.getBlockId(x + 1, y, z) == blockID)
-				object = new InventoryLargeChest("container.petrifiedChestDouble", (IInventory) object, (TileEntityPetrifiedWoodChest) world.getBlockTileEntity(x + 1, y, z));
+			if (world.getBlock(x + 1, y, z) == chest)
+				object = new InventoryLargeChest("container.petrifiedChestDouble", (IInventory) object, (TileEntityPetrifiedWoodChest) world.getTileEntity(x + 1, y, z));
 
-			if (world.getBlockId(x, y, z - 1) == blockID)
-				object = new InventoryLargeChest("container.petrifiedChestDouble", (TileEntityPetrifiedWoodChest) world.getBlockTileEntity(x, y, z - 1), (IInventory) object);
+			if (world.getBlock(x, y, z - 1) == chest)
+				object = new InventoryLargeChest("container.petrifiedChestDouble", (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z - 1), (IInventory) object);
 
-			if (world.getBlockId(x, y, z + 1) == blockID)
-				object = new InventoryLargeChest("container.petrifiedChestDouble", (IInventory) object, (TileEntityPetrifiedWoodChest) world.getBlockTileEntity(x, y, z + 1));
+			if (world.getBlock(x, y, z + 1) == chest)
+				object = new InventoryLargeChest("container.petrifiedChestDouble", (IInventory) object, (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z + 1));
 
 			return (IInventory) object;
 		}

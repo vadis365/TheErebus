@@ -31,8 +31,8 @@ public class RenderErebusLightningBolt extends Render {
         for (int i = 7; i >= 0; --i) {
             adouble[i] = d3;
             adouble1[i] = d4;
-            d3 += (double)(random.nextInt(11) - 5);
-            d4 += (double)(random.nextInt(11) - 5);
+            d3 += (random.nextInt(11) - 5);
+            d4 += (random.nextInt(11) - 5);
         }
 
         for (int k1 = 0; k1 < 4; ++k1) {
@@ -56,26 +56,26 @@ public class RenderErebusLightningBolt extends Render {
                     double d8 = d6;
 
                     if (j == 0) {
-                        d5 += (double)(random1.nextInt(11) - 5);
-                        d6 += (double)(random1.nextInt(11) - 5);
+                        d5 += (random1.nextInt(11) - 5);
+                        d6 += (random1.nextInt(11) - 5);
                     }
                     else {
-                        d5 += (double)(random1.nextInt(31) - 15);
-                        d6 += (double)(random1.nextInt(31) - 15);
+                        d5 += (random1.nextInt(31) - 15);
+                        d6 += (random1.nextInt(31) - 15);
                     }
 
                     tessellator.startDrawing(5);
                     float f2 = 0.5F;
                     tessellator.setColorRGBA_F(0.9F * f2, 0.9F * f2, 1.0F * f2, 0.3F);
-                    double d9 = 0.1D + (double)k1 * 0.2D;
+                    double d9 = 0.1D + k1 * 0.2D;
 
                     if (j == 0)
-                        d9 *= (double)i1 * 0.1D + 1.0D;
+                        d9 *= i1 * 0.1D + 1.0D;
 
-                    double d10 = 0.1D + (double)k1 * 0.2D;
+                    double d10 = 0.1D + k1 * 0.2D;
 
                     if (j == 0)
-                        d10 *= (double)(i1 - 1) * 0.1D + 1.0D;
+                        d10 *= (i1 - 1) * 0.1D + 1.0D;
 
                     for (int j1 = 0; j1 < 5; ++j1) {
                         double d11 = x + 0.5D - d9;
@@ -96,8 +96,8 @@ public class RenderErebusLightningBolt extends Render {
                         if (j1 == 2 || j1 == 3)
                             d14 += d10 * 2.0D;
 
-                        tessellator.addVertex(d13 + d5, y + (double)(i1 * 16), d14 + d6);
-                        tessellator.addVertex(d11 + d7, y + (double)((i1 + 1) * 16), d12 + d8);
+                        tessellator.addVertex(d13 + d5, y + (i1 * 16), d14 + d6);
+                        tessellator.addVertex(d11 + d7, y + ((i1 + 1) * 16), d12 + d8);
                     }
 
                     tessellator.draw();

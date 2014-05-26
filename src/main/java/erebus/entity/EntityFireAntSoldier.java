@@ -31,6 +31,7 @@ public class EntityFireAntSoldier extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
+	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
@@ -66,6 +67,7 @@ public class EntityFireAntSoldier extends EntityMob {
 		return (!this.onGround) && (isOnLadder());
 	}
 
+	@Override
 	public boolean isOnLadder() {
 		return (this.isCollidedHorizontally);
 	}

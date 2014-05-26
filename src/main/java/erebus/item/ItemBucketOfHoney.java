@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemStack;
 
 public class ItemBucketOfHoney extends ItemBucket {
 
@@ -13,7 +14,7 @@ public class ItemBucketOfHoney extends ItemBucket {
 	}
 
 	@Override
-	public boolean hasContainerItem() {
+	public boolean hasContainerItem(ItemStack stack) {
 		return true;
 	}
 

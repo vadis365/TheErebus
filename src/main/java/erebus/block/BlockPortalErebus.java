@@ -43,7 +43,7 @@ public class BlockPortalErebus extends BlockBreakable {
 			int yy;
 			for (yy = y; !World.doesBlockHaveSolidTopSurface(world, x, yy, z) && yy > 0; --yy);
 
-			if (yy > 0 && !world.isBlockNormalCube(x, yy + 1, z)) {
+			if (yy > 0 && !world.getBlock(x, yy + 1, z).isNormalCube()) {
 				EntityLiving entity = rand.nextBoolean() ? new EntityBeetle(world) : new EntityBeetleLarva(world);
 				entity.setLocationAndAngles(x + 0.5D, yy + 1.1D, z + 0.5D, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
 				entity.rotationYawHead = entity.renderYawOffset = entity.rotationYaw;

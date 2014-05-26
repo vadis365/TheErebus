@@ -36,7 +36,7 @@ public class ItemBambucket extends Item {
 	}
 
 	@Override
-	public boolean hasContainerItem() {
+	public boolean hasContainerItem(ItemStack stack) {
 		return true;
 	}
 
