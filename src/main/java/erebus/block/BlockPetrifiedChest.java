@@ -223,8 +223,8 @@ public class BlockPetrifiedChest extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-		super.onNeighborBlockChange(world, x, y, z, block);
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+		super.onNeighborBlockChange(world, x, y, z, neighbour);
 		TileEntityPetrifiedWoodChest tileentitychest = (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z);
 
 		if (tileentitychest != null)

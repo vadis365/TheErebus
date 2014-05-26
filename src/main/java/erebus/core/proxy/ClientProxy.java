@@ -125,6 +125,7 @@ import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
 import erebus.client.render.tileentity.TileEntitySpawnerRender;
 import erebus.client.render.tileentity.TileEntityUmberGolemStatueRenderer;
 import erebus.core.handler.ClientTickHandler;
+import erebus.core.handler.KeyBindingHandler;
 import erebus.core.handler.PortalOverlayHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -212,7 +213,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerKeyHandlers() {
-		//KeyBindingRegistry.registerKeyBinding(new KeyBindingHandler());
+		FMLCommonHandler.instance().bus().register(new KeyBindingHandler());
 	}
 
 	@Override
