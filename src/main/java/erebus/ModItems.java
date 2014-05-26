@@ -55,9 +55,7 @@ import erebus.item.ItemWoodlouseBall;
 import erebus.item.JadeAxe;
 import erebus.item.JadePickaxe;
 import erebus.item.block.ItemBlockDoorAmber;
-import erebus.lib.Reference;
 
-@GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModItems {
 
 	// BASIC MATERIALS
