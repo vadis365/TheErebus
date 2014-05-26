@@ -18,8 +18,7 @@ import erebus.ModItems;
 import erebus.item.ItemErebusMaterial.DATA;
 
 public class EntityChameleonTick extends EntityMob {
-
-	public Block blockType;
+	public Block blockID;
 	public int blockMeta;
 	public int animation;
 	public boolean active = false;
@@ -35,8 +34,8 @@ public class EntityChameleonTick extends EntityMob {
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 	}
 
-	public void setBlock(Block blockType, int blockMeta) {
-		this.blockType = blockType;
+	public void setBlock(Block blockID, int blockMeta) {
+		this.blockID = blockID;
 		this.blockMeta = blockMeta;
 	}
 
@@ -98,11 +97,11 @@ public class EntityChameleonTick extends EntityMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		Block newblockType = worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
+		Block newblockID = worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
 		int newBlockMeta = worldObj.getBlockMetadata(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
 
-		if (onGround && newblockType != null && newblockType != blockType && World.doesBlockHaveSolidTopSurface(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ))) {
-			blockType = newblockType;
+		if (onGround && newblockID != null && newblockID != blockID && World.doesBlockHaveSolidTopSurface(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ))) {
+			blockID = newblockID;
 			blockMeta = newBlockMeta;
 		}
 
@@ -177,4 +176,5 @@ public class EntityChameleonTick extends EntityMob {
 	public boolean attackEntityAsMob(Entity entity) {
 		return super.attackEntityAsMob(entity);
 	}
+
 }
