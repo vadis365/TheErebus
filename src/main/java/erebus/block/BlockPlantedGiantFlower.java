@@ -80,12 +80,11 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 		return BlockRenderIDs.PLANTED_FLOWER.id();
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int idPicked(World world, int x, int y, int z) {
-		return ModItems.flowerSeeds;
-	}
-
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z) {
+        return ModItems.flowerSeeds;
+    }
+    
 	@Override
 	public int damageDropped(int meta) {
 		return meta;

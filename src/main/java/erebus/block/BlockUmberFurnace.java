@@ -197,10 +197,11 @@ public class BlockUmberFurnace extends BlockContainer {
 	public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
 		return Container.calcRedstoneFromInventory(Utils.getTileEntity(world, x, y, z, IInventory.class));
 	}
-
+/* broken
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int idPicked(World world, int x, int y, int z) {
 		return ModBlocks.umberFurnace.blockID;
 	}
+	*/
 }

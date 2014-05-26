@@ -74,22 +74,22 @@ public class BlockInsectRepellent extends Block {
 			double particleY = y + random.nextFloat();
 			double particleZ = z + random.nextFloat();
 
-			if (l == 0 && !world.isBlockOpaqueCube(x, y + 1, z))
+			if (l == 0 && !world.getBlock(x, y + 1, z).isOpaqueCube())
 				particleY = y + 1 + d0;
 
-			if (l == 1 && !world.isBlockOpaqueCube(x, y - 1, z))
+			if (l == 1 && !world.getBlock(x, y - 1, z).isOpaqueCube())
 				particleY = y + 0 - d0;
 
-			if (l == 2 && !world.isBlockOpaqueCube(x, y, z + 1))
+			if (l == 2 && !world.getBlock(x, y, z + 1).isOpaqueCube())
 				particleZ = z + 1 + d0;
 
-			if (l == 3 && !world.isBlockOpaqueCube(x, y, z - 1))
+			if (l == 3 && !world.getBlock(x, y, z - 1).isOpaqueCube())
 				particleZ = z + 0 - d0;
 
-			if (l == 4 && !world.isBlockOpaqueCube(x + 1, y, z))
+			if (l == 4 && !world.getBlock(x + 1, y, z).isOpaqueCube())
 				particleX = x + 1 + d0;
 
-			if (l == 5 && !world.isBlockOpaqueCube(x - 1, y, z))
+			if (l == 5 && !world.getBlock(x - 1, y, z).isOpaqueCube())
 				particleX = x + 0 - d0;
 
 			if (particleX < x || particleX > x + 1 || particleY < 0.0D || particleY > y + 1 || particleZ < z || particleZ > z + 1)

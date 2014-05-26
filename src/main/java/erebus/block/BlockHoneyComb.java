@@ -67,18 +67,18 @@ public class BlockHoneyComb extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
+	public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
 
-		TileEntityHoneyComb tile = (TileEntityHoneyComb) world.getBlockTileEntity(x, y, z);
+		TileEntityHoneyComb tile = (TileEntityHoneyComb) world.getTileEntity(x, y, z);
 		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack is = tile.getStackInSlot(i);
 				if (is != null)
 					Utils.dropStack(world, x, y, z, is);
 			}
-			world.func_96440_m(x, y, z, par5);
+			world.func_147453_f(x, y, z, block);
 		}
-		super.breakBlock(world, x, y, z, par5, par6);
+		super.breakBlock(world, x, y, z, block, par6);
 	}
 
 	@Override
