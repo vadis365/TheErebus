@@ -1,22 +1,21 @@
 package erebus.core.handler;
-
-import java.util.EnumSet;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-
 import org.lwjgl.input.Keyboard;
-
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.core.teleport.TeleportClient;
 
-public class ClientTickHandler implements ITickHandler {
-
+@SideOnly(Side.CLIENT)
+public class ClientTickHandler{
 	public static Minecraft mc = FMLClientHandler.instance().getClient();
 	public boolean keyStates[] = new boolean[256];
 
@@ -30,21 +29,17 @@ public class ClientTickHandler implements ITickHandler {
 		else
 			return false;
 	}
-
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-		if (type.equals(EnumSet.of(TickType.RENDER))) {
+	
+	@SubscribeEvent
+	public void onRenderTick(RenderTickEvent e){
+		if (e.phase == Phase.START){
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 			if (player != null && player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem() == ModItems.compoundGoggles)
 				player.addPotionEffect(nightVisionEffect);
 			if (player != null && player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem() == ModItems.reinCompoundGoggles)
 				player.addPotionEffect(nightVisionEffect);
 		}
-	}
-
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if (type.equals(EnumSet.of(TickType.RENDER))) {
+		else if (e.phase == Phase.END){
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 			if (player != null) {
 				PotionEffect eff = player.getActivePotionEffect(Potion.nightVision);
@@ -52,27 +47,18 @@ public class ClientTickHandler implements ITickHandler {
 					player.removePotionEffectClient(Potion.nightVision.id);
 			}
 
-			float ticks = ((Float) tickData[0]).floatValue();
-
-			float time = TeleportClient.prevTimeInPortal + (TeleportClient.timeInPortal - TeleportClient.prevTimeInPortal) * ticks;
+			float time = TeleportClient.prevTimeInPortal + (TeleportClient.timeInPortal - TeleportClient.prevTimeInPortal) * e.renderTickTime;
 
 			if (!(time > 0F && TeleportClient.mc.currentScreen == null) && TeleportClient.mc.thePlayer != null) {
 				PotionEffect eff = TeleportClient.mc.thePlayer.getActivePotionEffect(Potion.confusion);
 				if (eff != null && eff.getAmplifier() == 69)
 					TeleportClient.mc.thePlayer.removePotionEffect(Potion.confusion.id);
 			}
-		} else if (type.equals(EnumSet.of(TickType.PLAYER)))
-			TeleportClient.onTick((EntityPlayer) tickData[0]);
+		}
 	}
-
-	@Override
-	public EnumSet<TickType> ticks() {
-		return EnumSet.of(TickType.RENDER, TickType.PLAYER);
+	
+	@SubscribeEvent
+	public void onPlayerTick(PlayerTickEvent e){
+		TeleportClient.onTick(mc.thePlayer);
 	}
-
-	@Override
-	public String getLabel() {
-		return "Erebus_ClientTickHandler";
-	}
-
 }

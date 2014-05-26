@@ -1,56 +1,32 @@
 package erebus.core.handler;
-
-import java.util.EnumSet;
-
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
 import erebus.Erebus;
 import erebus.world.TeleporterErebus;
 
-public class CommonTickHandler implements ITickHandler {
-
-	public boolean genLairNextTick = false;
-	private int ticksToGo = 5;
-
-	@Override
-	public EnumSet ticks() {
-		return EnumSet.of(TickType.SERVER, TickType.PLAYER, TickType.WORLD);
+public class CommonTickHandler{
+	// wtf is this
+	//public boolean genLairNextTick = false;
+	//private int ticksToGo = 5;
+	
+	@SubscribeEvent
+	public void onPlayerTick(PlayerTickEvent e){
+		Erebus.teleportHandler.onTick(e.player);
 	}
-
-	@Override
-	public String getLabel() {
-		return "Erebus_CommonTickHandler";
-	}
-
-	private void onTickInGame() {
-	}
-
-	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-	}
-
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		if (type.equals(EnumSet.of(TickType.SERVER)))
-			onTickInGame();
-		if (type.equals(EnumSet.of(TickType.PLAYER))) {
-			EntityPlayerMP player = (EntityPlayerMP) tickData[0];
-			Erebus.teleportHandler.onTick(player);
-		} else if (type.equals(EnumSet.of(TickType.WORLD))) {
-			World world = (World) tickData[0];
-			if (world.provider.dimensionId == ConfigHandler.erebusDimensionID) {
-				TeleporterErebus.TELEPORTER_TO_EREBUS.removeStalePortalLocations(world.getTotalWorldTime());
-				TeleporterErebus.TELEPORTER_TO_OVERWORLD.removeStalePortalLocations(world.getTotalWorldTime());
-			}
-
-			if (genLairNextTick) {
-				ticksToGo--;
-				if (ticksToGo <= 0) {
-
-				}
-			}
+	
+	@SubscribeEvent
+	public void onWorldTick(WorldTickEvent e){
+		if (e.world.provider.dimensionId == ConfigHandler.erebusDimensionID) {
+			TeleporterErebus.TELEPORTER_TO_EREBUS.removeStalePortalLocations(e.world.getTotalWorldTime());
+			TeleporterErebus.TELEPORTER_TO_OVERWORLD.removeStalePortalLocations(e.world.getTotalWorldTime());
 		}
+
+		/*if (genLairNextTick) {
+			ticksToGo--;
+			if (ticksToGo <= 0) {
+
+			}
+		}*/
 	}
 }

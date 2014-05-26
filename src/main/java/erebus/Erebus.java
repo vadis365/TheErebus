@@ -1,10 +1,9 @@
 package erebus;
 
 import net.minecraftforge.common.MinecraftForge;
-
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
-
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -21,6 +20,7 @@ import erebus.client.sound.AmbientMusicManager;
 import erebus.client.sound.EntitySoundEvent;
 import erebus.core.handler.BonemealHandler;
 import erebus.core.handler.BucketHandler;
+import erebus.core.handler.CommonTickHandler;
 import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.proxy.CommonProxy;
@@ -91,7 +91,7 @@ public class Erebus {
 		if (ConfigHandler.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
-		//TickRegistry.registerTickHandler(new CommonTickHandler(), Side.SERVER);
+		FMLCommonHandler.instance().bus().register(new CommonTickHandler()); // TODO - this was set to TickType.SERVER, events will be handled on client side unless moved to proxy
 		if (Loader.isModLoaded("ForgeMicroblock"))
 			FMBIntegration.integrate();
 	}
