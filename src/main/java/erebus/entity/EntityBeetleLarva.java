@@ -21,7 +21,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import erebus.ModItems;
 import erebus.entity.ai.EntityAIEatWoodenItem;
-import erebus.network.packet.PacketParticle;
+import erebus.network.PacketPipeline;
+import erebus.network.client.C00EntityParticle;
+import erebus.network.client.C00EntityParticle.ParticleType;
 
 public class EntityBeetleLarva extends EntityAnimal {
 
@@ -186,7 +188,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onDeathUpdate() {
 		super.onDeathUpdate();
 		if (isSquashed) {
-			PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 64D, dimension, PacketTypeHandler.populatePacket(new PacketParticle(PacketParticle.BEETLE_LARVA_SQUISH, entityId)));
+			PacketPipeline.sendToAllAround(this, 64D, new C00EntityParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
 			worldObj.playSoundEffect(posX, posY, posZ, getJumpedOnSound(), 1.0F, 0.5F);
 			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
 			if (!worldObj.isRemote) {

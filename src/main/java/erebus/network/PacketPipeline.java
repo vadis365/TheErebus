@@ -31,6 +31,7 @@ import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.lib.Reference;
 
 @ChannelHandler.Sharable
 public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
@@ -51,18 +52,18 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void load() {
-		channels = NetworkRegistry.INSTANCE.newChannel("hee", instance);
+		channels = NetworkRegistry.INSTANCE.newChannel(Reference.MOD_ID, instance);
 
 		try {
 			ClassPath path = ClassPath.from(PacketPipeline.class.getClassLoader());
 
-			for (ClassInfo clsInfo : path.getTopLevelClasses("chylex.hee.packets.client")) {
+			for (ClassInfo clsInfo : path.getTopLevelClasses("erebus.network.client")) {
 				Class cls = clsInfo.load();
 				if (!cls.getName().endsWith("__"))
 					packets.add(cls);
 			}
 
-			for (ClassInfo clsInfo : path.getTopLevelClasses("chylex.hee.packets.server")) {
+			for (ClassInfo clsInfo : path.getTopLevelClasses("erebus.network.server")) {
 				Class cls = clsInfo.load();
 				if (!cls.getName().endsWith("__"))
 					packets.add(cls);
