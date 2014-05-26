@@ -11,26 +11,24 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
 import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
-import erebus.block.BlockLogErebus;
+import erebus.lib.EnumWood;
 
 public class WorldGenErebusTrees extends WorldGenerator { // TODO
 
 	private final int minTreeHeight;
 	private final boolean vinesGrow;
-	private final int metaWood;
 	private final int metaLeaves;
 	private final Block woodBlock;
 	private final Block leafBlock;
 	private final Block vineBlock;
 
 	public WorldGenErebusTrees(boolean par1) {
-		this(par1, 6, BlockLogErebus.dataMahogany, BlockLeavesErebus.dataMahoganyDecay, false, ModBlocks.logErebusGroup1, ModBlocks.leavesErebus, ModBlocks.thorns);
+		this(par1, 6, BlockLeavesErebus.dataMahoganyDecay, false, EnumWood.Mahogany.getLog(), ModBlocks.leavesErebus, ModBlocks.thorns);
 	}
 
-	public WorldGenErebusTrees(boolean par1, int par2, int par3, int par4, boolean par5, Block woodBlock, Block leafBlock, Block vineBlock) {
+	public WorldGenErebusTrees(boolean par1, int par2, int par4, boolean par5, Block woodBlock, Block leafBlock, Block vineBlock) {
 		super(par1);
 		minTreeHeight = par2;
-		metaWood = par3;
 		metaLeaves = par4;
 		vinesGrow = par5;
 		this.woodBlock = woodBlock;
@@ -105,7 +103,7 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 						block = world.getBlock(x, y + var11, z);
 
 						if (block.getMaterial() == Material.air || block.isLeaves(world, x, y + var11, z)) {
-							world.setBlock(x, y + var11, z, woodBlock, metaWood, 2);
+							world.setBlock(x, y + var11, z, woodBlock, 0, 2);
 
 							if (vinesGrow && var11 > 0) {
 								if (rand.nextInt(3) > 0 && world.isAirBlock(x - 1, y + var11, z))

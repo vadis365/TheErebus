@@ -1,4 +1,5 @@
 package erebus.world.biomes.decorators;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
@@ -9,12 +10,11 @@ import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.BlockDoubleHeightPlant;
 import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockLogErebus;
 import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenPonds;
@@ -75,32 +75,25 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 
 	@Override
 	protected void decorate(){
-		if (rand.nextInt(3) == 0){
-			for(attempt = 0; attempt < 5; attempt++){
+		if (rand.nextInt(3) == 0)
+			for(attempt = 0; attempt < 5; attempt++)
 				if (genAmberUmberstone.generate(world,rand,x+offsetXZ(),rand.nextInt(120),z+offsetXZ()))break;
-			}
-		}
 
-		if (rand.nextInt(6) == 0){
-			for(attempt = 0; attempt < 4; attempt++){
+		if (rand.nextInt(6) == 0)
+			for(attempt = 0; attempt < 4; attempt++)
 				if (genAmberGround.generate(world,rand,x+offsetXZ(),10+rand.nextInt(40),z+offsetXZ()))break;
-			}
-		}
 
-		if (rand.nextInt(37) == 0){
-			for(attempt = 0; attempt < 5; attempt++){
+		if (rand.nextInt(37) == 0)
+			for(attempt = 0; attempt < 5; attempt++)
 				if (genWaspDungeon.generate(world,rand,x+offsetXZ(),127,z+offsetXZ()))break;
-			}
-		}
 
 		for(attempt = 0; attempt < 10; attempt++){
 			xx = x+offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genQuickSand.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		for(attempt = 0; attempt < 2200; attempt++){
@@ -142,9 +135,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genBigMushroomRed.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		for(attempt = 0; attempt < 20; attempt++){
@@ -152,20 +144,17 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genBigMushroomBrown.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		if (rand.nextInt(11) == 0){
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
 
-			for(yy = 90; yy>20; yy--){
-				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			for(yy = 90; yy>20; yy--)
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					if (genBamboo.generate(world,rand,xx,yy,zz))break;
-				}
-			}
 		}
 
 		for(attempt = 0; attempt < 40; attempt++){
@@ -173,9 +162,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 20+rand.nextInt(80);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genFerns.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		for(attempt = 0; attempt < 16; attempt++){
@@ -183,9 +171,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 20+rand.nextInt(80);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genFiddleheads.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		for(attempt = 0; attempt < 180; attempt++){
@@ -195,8 +182,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
 				boolean fern = rand.nextInt(4) == 0;
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,fern ? BlockDoubleHeightPlant.dataFernBottom : BlockDoubleHeightPlant.dataTallGrassBottom,2);
-				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant,fern ? BlockDoubleHeightPlant.dataFernTop : BlockDoubleHeightPlant.dataTallGrassTop,2);
+				world.setBlock(xx,yy,zz,Blocks.double_plant,fern ? 3 : 2,2);
+				world.setBlock(xx,yy+1,zz,Blocks.double_plant,10,2);
 			}
 		}
 
@@ -205,9 +192,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			yy = 20+rand.nextInt(80);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genGrass.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		Block block;
@@ -223,36 +209,30 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 
 				if (!world.getBlock(xx+Direction.offsetX[offset],yy,zz+Direction.offsetZ[offset]).isNormalCube())continue;
 
-				for(int vineY = rand.nextInt(30); vineY>0; vineY--){
-					if (world.isAirBlock(xx+Direction.offsetX[offset],yy-vineY,zz+Direction.offsetZ[offset])){
-						world.setBlock(xx+Direction.offsetX[offset],yy-vineY,zz+Direction.offsetZ[offset],Blocks.vine,(offset == 3 ? 1 : offset == 2 ? 4 : offset == 1 ? 0 : 2),3);
-					}
-				}
+				for(int vineY = rand.nextInt(30); vineY>0; vineY--)
+					if (world.isAirBlock(xx+Direction.offsetX[offset],yy-vineY,zz+Direction.offsetZ[offset]))
+						world.setBlock(xx+Direction.offsetX[offset],yy-vineY,zz+Direction.offsetZ[offset],Blocks.vine,offset == 3 ? 1 : offset == 2 ? 4 : offset == 1 ? 0 : 2,3);
 			}
 		}
 
-		if (rand.nextInt(3) == 0){
+		if (rand.nextInt(3) == 0)
 			for(attempt = 0; attempt < 6; ++attempt){
 				xx = x+offsetXZ();
 				yy = 15+rand.nextInt(90);
 				zz = z+offsetXZ();
 
-				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					genTurnips.generate(world,rand,xx,yy,zz);
-				}
 			}
-		}
-		else if (rand.nextBoolean() || rand.nextBoolean()){
+		else if (rand.nextBoolean() || rand.nextBoolean())
 			for(attempt = 0; attempt < 3; ++attempt){
 				xx = x+offsetXZ();
 				yy = 15+rand.nextInt(90);
 				zz = z+offsetXZ();
 
-				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					genMelons.generate(world,rand,xx,yy,zz);
-				}
 			}
-		}
 	}
 
 	@Override

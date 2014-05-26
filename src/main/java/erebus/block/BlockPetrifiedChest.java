@@ -1,5 +1,7 @@
 package erebus.block;
 
+import static net.minecraftforge.common.util.ForgeDirection.DOWN;
+
 import java.util.Iterator;
 
 import net.minecraft.block.Block;
@@ -17,13 +19,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
-import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockPetrifiedChest extends BlockContainer {
 
@@ -125,9 +125,6 @@ public class BlockPetrifiedChest extends BlockContainer {
 				world.setBlockMetadataWithNotify(x, y, z, b0, 3);
 			}
 		}
-
-		if (is.hasDisplayName())
-			((TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z)).setChestGuiName(is.getDisplayName());
 	}
 
 	public void unifyAdjacentChests(World world, int x, int y, int z) {
@@ -234,7 +231,7 @@ public class BlockPetrifiedChest extends BlockContainer {
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		TileEntityPetrifiedWoodChest tile = Utils.getTileEntity(world, x, y, z, TileEntityPetrifiedWoodChest.class);
-		if (tile != null){
+		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack is = tile.getStackInSlot(i);
 				if (is != null)
@@ -242,7 +239,7 @@ public class BlockPetrifiedChest extends BlockContainer {
 			}
 			world.func_147453_f(x, y, z, block);
 		}
-	
+
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 

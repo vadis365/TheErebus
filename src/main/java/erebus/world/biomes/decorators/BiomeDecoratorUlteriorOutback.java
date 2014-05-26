@@ -1,4 +1,5 @@
 package erebus.world.biomes.decorators;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
@@ -26,12 +27,11 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
 
-			for(yy = 20; yy < 100; yy += rand.nextInt(2)+1){
+			for(yy = 20; yy < 100; yy += rand.nextInt(2)+1)
 				if (world.getBlock(xx,yy,zz) == Blocks.sand && world.isAirBlock(xx,yy+1,zz)){
 					world.setBlock(xx,yy,zz,Blocks.grass); // TODO 1.7 - add ungrowing dirt and red sand
 					break;
 				}
-			}
 		}
 
 		for(attempt = 0; attempt < rand.nextInt(3); attempt++){
@@ -39,12 +39,11 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			yy = 20+rand.nextInt(25)*(1+rand.nextInt(3)); // more likely in lower levels
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
+			if (checkSurface(SurfaceType.MIXED,xx,yy,zz))
 				genRottenAcacia.generate(world,rand,xx,yy,zz);
-			}
 		}
 
-		if (rand.nextBoolean()){
+		if (rand.nextBoolean())
 			for(attempt = 0; attempt < 20; attempt++){
 				xx = x+offsetXZ();
 				yy = 20+rand.nextInt(80);
@@ -55,7 +54,6 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 					if (rand.nextBoolean())break;
 				}
 			}
-		}
 
 		for(attempt = 0; attempt < 420; attempt++){
 			xx = x+offsetXZ();
@@ -72,31 +70,28 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
 
-			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
+			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
-						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataTallGrassBottom,2);
-						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataTallGrassTop,2);
+						world.setBlock(xx,yy,zz,Blocks.double_plant,2,2);
+						world.setBlock(xx,yy+1,zz,Blocks.double_plant,10,2);
 					}
 					else if (rand.nextInt(80) == 0) world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall,BlockSmallPlants.dataFireBloom,2);
 					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass,1,2);
 
 					break;
 				}
-			}
 		}
 
-		if (rand.nextBoolean()){
+		if (rand.nextBoolean())
 			for(attempt = 0; attempt < 180; attempt++){
 				xx = x+offsetXZ();
 				yy = 20+rand.nextInt(80);
 				zz = z+offsetXZ();
 
-				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					if (genTreeEucalyptus.generate(world,rand,xx,yy,zz) && rand.nextBoolean()) break;
-				}
 			}
-		}
 	}
 
 	@Override
@@ -113,11 +108,9 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 
 	@Override
 	public void generateFeature(FeatureType featureType){
-		if (featureType == FeatureType.REDGEM){
-			for(attempt = 0; attempt < 8; attempt++){
+		if (featureType == FeatureType.REDGEM)
+			for(attempt = 0; attempt < 8; attempt++)
 				genRedGem.generate(world,rand,x+offsetXZ(),64+rand.nextInt(60),z+offsetXZ());
-			}
-		}
 		else super.generateFeature(featureType);
 	}
 }

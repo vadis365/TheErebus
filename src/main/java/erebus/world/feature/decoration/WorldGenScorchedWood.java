@@ -1,10 +1,10 @@
 package erebus.world.feature.decoration;
 
 import java.util.Random;
+
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
-import erebus.block.BlockLogErebus;
+import erebus.lib.EnumWood;
 
 //@formatter:off
 public class WorldGenScorchedWood extends WorldGenerator{
@@ -22,24 +22,19 @@ public class WorldGenScorchedWood extends WorldGenerator{
 
 		if (y <= 0 || y+treeHeight > 255)return false;
 
-		for(int testY = y+1; testY <= y+treeHeight; ++testY){
-			for(int testX = x-1; testX <= x+1; ++testX){
-				for(int testZ = z-1; testZ <= z+1; ++testZ){
+		for(int testY = y+1; testY <= y+treeHeight; ++testY)
+			for(int testX = x-1; testX <= x+1; ++testX)
+				for(int testZ = z-1; testZ <= z+1; ++testZ)
 					if (!world.isAirBlock(testX,testY,testZ))return false;
-				}
-			}
-		}
 
 		// generate tree
 
 		for(int part = 0; part < partAmount; part++){
-			for(int a = 0; a < 2; a++){
-				world.setBlock(x,y+part*2+a,z,ModBlocks.logErebusGroup2,BlockLogErebus.dataScorched,3);
-			}
+			for(int a = 0; a < 2; a++)
+				world.setBlock(x,y+part*2+a,z,EnumWood.Scorched.getLog(),0,3);
 			
-			for(int a = 0; a < 4; a++){
-				world.setBlock(x+offsetX[a],y+part*2,z+offsetZ[a],ModBlocks.logErebusGroup2,BlockLogErebus.dataScorched+(a < 2?4:8),3);
-			}
+			for(int a = 0; a < 4; a++)
+				world.setBlock(x+offsetX[a],y+part*2,z+offsetZ[a],EnumWood.Scorched.getLog(),a < 2?4:8,3);
 		}
 
 		return true;

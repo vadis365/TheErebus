@@ -1,4 +1,5 @@
 package erebus.world.biomes.decorators;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -29,71 +30,63 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			zz = z+offsetXZ();
 			yy = 20+rand.nextInt(80);
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genTreeCypress.generate(world,rand,xx,yy,zz);
-			}
 		}
 
-		if (generateFlowers && rand.nextBoolean()){
+		if (generateFlowers && rand.nextBoolean())
 			for(int attempt = 0, xx, yy, zz; attempt < 65; attempt++){
 				xx = x+offsetXZ();
 				yy = 15+rand.nextInt(90);
 				zz = z+offsetXZ();
 
-				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					genGiantFlowers.generate(world,rand,xx,yy,zz);
-				}
 			}
-		}
 
-		if (rand.nextInt(6) == 0){
+		if (rand.nextInt(6) == 0)
 			for(attempt = 0; attempt < rand.nextInt(4); attempt++){
 				xx = x+offsetXZ();
 				yy = 25+rand.nextInt(75);
 				zz = z+offsetXZ();
 
-				for(; yy>20; yy--){
+				for(; yy>20; yy--)
 					if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 						genNettle.generate(world,rand,xx,yy,zz);
 						break;
 					}
-				}
 			}
-		}
 
-		int id;
 		for(attempt = 0; attempt < 35; attempt++){
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
 
-			for(yy = rand.nextInt(3) == 0 ? 40+rand.nextInt(35): 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
+			for(yy = rand.nextInt(3) == 0 ? 40+rand.nextInt(35): 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10)== 0 && world.isAirBlock(xx,yy+1,zz)){
-						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataTallGrassBottom,2);
-						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataTallGrassTop,2);
+						world.setBlock(xx,yy,zz,Blocks.double_plant,2,2);
+						world.setBlock(xx,yy+1,zz,Blocks.double_plant,10,2);
 					}
 					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass,1,2);
 
 					break;
 				}
-			}
 		}
 
 		for(attempt = 0; attempt < 12; attempt++){
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
 
-			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
+			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10)== 0 && world.isAirBlock(xx,yy+1,zz)){
-						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataFernBottom,2);
-						world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataFernTop,2);
+						world.setBlock(xx,yy,zz,Blocks.double_plant,3,2);
+						world.setBlock(xx,yy+1,zz,Blocks.double_plant,10,2);
 					}
 					else world.setBlock(xx,yy,zz,ModBlocks.fern,0,2);
 
 					break;
 				}
-			}
 		}
 
 		for(attempt = 0; attempt < 5; attempt++){
@@ -135,11 +128,9 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 
 	@Override
 	public void generateFeature(FeatureType featureType){
-		if (featureType == FeatureType.REDGEM){
-			for(attempt = 0; attempt < 2+rand.nextInt(2); attempt++){
+		if (featureType == FeatureType.REDGEM)
+			for(attempt = 0; attempt < 2+rand.nextInt(2); attempt++)
 				genRedGem.generate(world,rand,x+offsetXZ(),64+rand.nextInt(60),z+offsetXZ());
-			}
-		}
 		else super.generateFeature(featureType);
 	}
 
@@ -159,7 +150,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 
 		@Override
 		protected void populate(){
-			if (rand.nextInt(4) == 0){
+			if (rand.nextInt(4) == 0)
 				for(attempt = 0; attempt < 45; attempt++){
 					xx = x+16;
 					yy = rand.nextInt(120);
@@ -171,7 +162,6 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 						if (rand.nextBoolean())break;
 					}
 				}
-			}
 
 			super.populate();
 		}
@@ -185,10 +175,9 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 				zz = z+offsetXZ();
 				yy = 20+rand.nextInt(80);
 
-				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					if (rand.nextBoolean())genOakTree.generate(world,rand,xx,yy,zz);
 					else genBirchTree.generate(world,rand,xx,yy,zz);
-				}
 			}
 
 			for(attempt = 0; attempt < 300; attempt++){
@@ -196,9 +185,8 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 				zz = z+offsetXZ();
 				yy = 20+rand.nextInt(80);
 
-				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					genTreeCypress.generate(world,rand,xx,yy,zz);
-				}
 			}
 
 			super.decorate();

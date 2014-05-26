@@ -1,8 +1,9 @@
 package erebus.world.biomes.decorators;
+
+import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -43,52 +44,43 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				}
 			}
 
-			if (rand.nextInt(3) != 0){
+			if (rand.nextInt(3) != 0)
 				for(yy = 100; yy > 20; yy--){
 					xx = x+offsetXZ();
 					zz = z+offsetXZ();
 
-					if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+					if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 						genBamboo.generate(world,rand,xx,yy,zz);
-					}
 				}
-			}
 		}
 	}
 
 	@Override
 	public void decorate(){
-		if (rand.nextInt(12) == 0){
-			for(attempt = 0; attempt < 5; attempt++){
+		if (rand.nextInt(12) == 0)
+			for(attempt = 0; attempt < 5; attempt++)
 				if (genAmberUmberstone.generate(world,rand,x+offsetXZ(),rand.nextInt(120),z+offsetXZ()))break;
-			}
-		}
 
-		if (rand.nextInt(24) == 0){
-			for(attempt = 0; attempt < 4; attempt++){
+		if (rand.nextInt(24) == 0)
+			for(attempt = 0; attempt < 4; attempt++)
 				if (genAmberGround.generate(world,rand,x+offsetXZ(),10+rand.nextInt(40),z+offsetXZ()))break;
-			}
-		}
 
 		for(attempt = 0; attempt < 65; attempt++){
 			xx = x+offsetXZ();
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genTreeAcacia.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		if (rand.nextBoolean() && rand.nextBoolean()){
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
 
-			for(yy = 100; yy > 20; yy--){
-				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			for(yy = 100; yy > 20; yy--)
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					genRocks.generate(world,rand,xx,yy,zz);
-				}
-			}
 		}
 
 		for(attempt = 0; attempt < 10; attempt++){
@@ -96,9 +88,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			yy = rand.nextInt(120);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genTreeAsper.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		for(attempt = 0; attempt < 28; attempt++){
@@ -106,9 +97,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genRottenAcacia.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		for(attempt = 0; attempt < 180; attempt++){
@@ -116,9 +106,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 				genGrass.generate(world,rand,xx,yy,zz);
-			}
 		}
 
 		for(attempt = 0; attempt < 40; attempt++){
@@ -127,8 +116,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			zz = z+offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && world.isAirBlock(xx,yy+1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataTallGrassBottom,2);
-				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataTallGrassTop,2);
+				world.setBlock(xx,yy,zz,Blocks.double_plant,2,2);
+				world.setBlock(xx,yy+1,zz,Blocks.double_plant,10,2);
 			}
 		}
 	}

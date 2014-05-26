@@ -1,8 +1,10 @@
 package erebus;
 
 import net.minecraftforge.common.MinecraftForge;
+
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -23,6 +25,7 @@ import erebus.core.handler.BucketHandler;
 import erebus.core.handler.CommonTickHandler;
 import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
+import erebus.core.handler.PlayerTeleportHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.entity.util.RandomMobNames;
 import erebus.integration.FMBIntegration;
@@ -41,7 +44,7 @@ public class Erebus {
 	@Instance(Reference.MOD_ID)
 	public static Erebus instance;
 
-	//public static PlayerTeleportHandler teleportHandler = new PlayerTeleportHandler();
+	public static PlayerTeleportHandler teleportHandler = new PlayerTeleportHandler();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

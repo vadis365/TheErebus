@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.block.Block;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
@@ -25,7 +25,7 @@ public class TeleporterErebus extends Teleporter {
 	private final WorldServer worldServerInstance;
 	private final Random random;
 	private final LongHashMap destinationCoordinateCache = new LongHashMap();
-	private final List destinationCoordinateKeys = new ArrayList();
+	private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
 
 	private TeleporterErebus(WorldServer worldServer) {
 		super(worldServer);
@@ -90,7 +90,7 @@ public class TeleporterErebus extends Teleporter {
 
 		if (d3 >= 0.0D) {
 			if (flag) {
-				destinationCoordinateCache.add(j1, new PortalPosition(this, i, j, k, worldServerInstance.getTotalWorldTime()));
+				destinationCoordinateCache.add(j1, new PortalPosition(i, j, k, worldServerInstance.getTotalWorldTime()));
 				destinationCoordinateKeys.add(Long.valueOf(j1));
 			}
 
@@ -357,11 +357,11 @@ public class TeleporterErebus extends Teleporter {
 	@Override
 	public void removeStalePortalLocations(long par1) {
 		if (par1 % 100L == 0L) {
-			Iterator iterator = destinationCoordinateKeys.iterator();
+			Iterator<Long> iterator = destinationCoordinateKeys.iterator();
 			long j = par1 - 600L;
 
 			while (iterator.hasNext()) {
-				Long olong = (Long) iterator.next();
+				Long olong = iterator.next();
 				PortalPosition portalposition = (PortalPosition) destinationCoordinateCache.getValueByKey(olong.longValue());
 
 				if (portalposition == null || portalposition.lastUpdateTime < j) {
