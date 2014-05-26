@@ -90,7 +90,9 @@ import erebus.item.block.ItemBlockSlabPlanks1Erebus;
 import erebus.item.block.ItemBlockSlabStoneErebus;
 import erebus.item.block.ItemBlockWitherWeb;
 import erebus.lib.EnumWood;
+import erebus.lib.Reference;
 
+@GameRegistry.ObjectHolder(Reference.MOD_ID)
 public class ModBlocks {
 
 	// FLUIDS
