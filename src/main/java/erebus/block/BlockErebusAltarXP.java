@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -12,7 +13,10 @@ import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarXP;
 
-public class BlockErebusAltarXP extends BlockErebusAltarLightning {
+public class BlockErebusAltarXP extends BlockErebusAltar {
+	
+	private Item item;
+	private int meta;
 
 	public BlockErebusAltarXP() {
 		super();
@@ -42,8 +46,8 @@ public class BlockErebusAltarXP extends BlockErebusAltarLightning {
 		if (entity instanceof EntityItem && entity.boundingBox.minY >= y + offsetY && te.active) {
 			ItemStack is = ((EntityItem) entity).getEntityItem();
 			int metadata = is.getItemDamage();
-			setItemOffering(is.itemID, metadata);
-			if (item == ModItems.erebusMaterials.itemID) {
+			setItemOffering(is.getItem(), metadata);
+			if (is.getItem() == ModItems.erebusMaterials) {
 				te.setUses(te.getUses() + is.stackSize);
 				entity.setDead();
 				if (!world.isRemote)
@@ -72,5 +76,10 @@ public class BlockErebusAltarXP extends BlockErebusAltarLightning {
 				return true;
 			}
 		return false;
+	}
+	
+	private void setItemOffering(Item thing, int metadata) {
+		item = thing;
+		meta = metadata;
 	}
 }
