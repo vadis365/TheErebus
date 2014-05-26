@@ -1,8 +1,14 @@
 {
-  "altarchangestate": {
-    "category": "erebus",
-    "sounds": [
-      "altarchangestate"
-    ]
-  }
+"altarchangestate": {"category": "block","sounds": ["altarchangestate"]},
+"altaroffering": {"category": "block", "sounds": ["altaroffering"]},
+
+"squish": {"category": "neutral","sounds": ["squish"]},
+
+"beetleSound": {"category": "neutral","sounds": ["beetleSound"]},
+"beetleHurt": {"category": "neutral","sounds": ["beetleHurt"]},
+
+"beetlelarvasound": {"category": "neutral","sounds": ["beetlelarvasound"]},
+"beetlelarvahurt": {"category": "neutral", "sounds": ["beetlelarvahurt"]},
+"beetlelarvamunch": {"category": "neutral","sounds": ["beetlelarvamunch"]},
+"beetlelarvasplat": {"category": "neutral","sounds": ["beetlelarvasplat"]}
 }
