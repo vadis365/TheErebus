@@ -125,12 +125,9 @@ public class BlockPetrifiedChest extends BlockContainer {
 				world.setBlockMetadataWithNotify(x, y, z, b0, 3);
 			}
 		}
-<<<<<<< HEAD
 
 		if (is.hasDisplayName())
 			((TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z)).setChestGuiName(is.getDisplayName());
-=======
->>>>>>> ba8b48fdd50602b7e7085e0acd3c4cc86a01b589
 	}
 
 	public void unifyAdjacentChests(World world, int x, int y, int z) {
@@ -226,12 +223,8 @@ public class BlockPetrifiedChest extends BlockContainer {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
 		super.onNeighborBlockChange(world, x, y, z, block);
-=======
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
->>>>>>> ba8b48fdd50602b7e7085e0acd3c4cc86a01b589
 		TileEntityPetrifiedWoodChest tileentitychest = (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z);
 
 		if (tileentitychest != null)
@@ -240,23 +233,16 @@ public class BlockPetrifiedChest extends BlockContainer {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-<<<<<<< HEAD
-		TileEntityPetrifiedWoodChest tile = (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z);
-		if (tile != null) {
-=======
 		TileEntityPetrifiedWoodChest tile = Utils.getTileEntity(world, x, y, z, TileEntityPetrifiedWoodChest.class);
-		if (tile != null)
->>>>>>> ba8b48fdd50602b7e7085e0acd3c4cc86a01b589
+		if (tile != null){
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack is = tile.getStackInSlot(i);
 				if (is != null)
 					Utils.dropStack(world, x, y, z, is);
 			}
-<<<<<<< HEAD
 			world.func_147453_f(x, y, z, block);
 		}
-=======
->>>>>>> ba8b48fdd50602b7e7085e0acd3c4cc86a01b589
+	
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 
@@ -272,7 +258,6 @@ public class BlockPetrifiedChest extends BlockContainer {
 
 	public static IInventory getInventory(World world, int x, int y, int z) {
 		Object object = world.getTileEntity(x, y, z);
-<<<<<<< HEAD
 		Block chest = ModBlocks.petrifiedWoodChest;
 
 		if (object == null)
@@ -300,35 +285,6 @@ public class BlockPetrifiedChest extends BlockContainer {
 				object = new InventoryLargeChest("container.petrifiedChestDouble", (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z - 1), (IInventory) object);
 
 			if (world.getBlock(x, y, z + 1) == chest)
-=======
-		Block block = ModBlocks.petrifiedWoodChest;
-
-		if (object == null)
-			return null;
-		else if (world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN))
-			return null;
-		else if (isOcelotBlockingChest(world, x, y, z))
-			return null;
-		else if (world.getBlock(x - 1, y, z) == block && (world.isSideSolid(x - 1, y + 1, z, ForgeDirection.DOWN) || isOcelotBlockingChest(world, x - 1, y, z)))
-			return null;
-		else if (world.getBlock(x + 1, y, z) == block && (world.isSideSolid(x + 1, y + 1, z, ForgeDirection.DOWN) || isOcelotBlockingChest(world, x + 1, y, z)))
-			return null;
-		else if (world.getBlock(x, y, z - 1) == block && (world.isSideSolid(x, y + 1, z - 1, ForgeDirection.DOWN) || isOcelotBlockingChest(world, x, y, z - 1)))
-			return null;
-		else if (world.getBlock(x, y, z + 1) == block && (world.isSideSolid(x, y + 1, z + 1, ForgeDirection.DOWN) || isOcelotBlockingChest(world, x, y, z + 1)))
-			return null;
-		else {
-			if (world.getBlock(x - 1, y, z) == block)
-				object = new InventoryLargeChest("container.petrifiedChestDouble", (TileEntityPetrifiedWoodChest) world.getTileEntity(x - 1, y, z), (IInventory) object);
-
-			if (world.getBlock(x + 1, y, z) == block)
-				object = new InventoryLargeChest("container.petrifiedChestDouble", (IInventory) object, (TileEntityPetrifiedWoodChest) world.getTileEntity(x + 1, y, z));
-
-			if (world.getBlock(x, y, z - 1) == block)
-				object = new InventoryLargeChest("container.petrifiedChestDouble", (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z - 1), (IInventory) object);
-
-			if (world.getBlock(x, y, z + 1) == block)
->>>>>>> ba8b48fdd50602b7e7085e0acd3c4cc86a01b589
 				object = new InventoryLargeChest("container.petrifiedChestDouble", (IInventory) object, (TileEntityPetrifiedWoodChest) world.getTileEntity(x, y, z + 1));
 
 			return (IInventory) object;
