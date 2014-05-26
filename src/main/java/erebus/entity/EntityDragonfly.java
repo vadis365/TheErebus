@@ -120,17 +120,17 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	protected float getSoundPitch() {
-		return super.getSoundPitch() * 0.95F;
+		return super.getSoundPitch() * 0.5F;
 	}
 
 	@Override
 	protected String getLivingSound() {
-		return rand.nextInt(4) != 0 ? null : "erebus:FlySound";
+		return rand.nextInt(4) != 0 ? null : "erebus:flysound";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:FlyHurt";
+		return "erebus:flyhurt";
 	}
 
 	@Override

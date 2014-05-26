@@ -40,17 +40,17 @@ public class EntityBloodSnail extends EntityMob {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:snailLiving";
+		return "erebus:snailliving";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:snailHurt";
+		return "erebus:snailhurt";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "erebus:snailDeath";
+		return "erebus:snaildeath";
 	}
 
 	@Override

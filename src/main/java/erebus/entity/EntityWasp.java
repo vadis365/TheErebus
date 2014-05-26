@@ -111,12 +111,12 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:WaspSound";
+		return "erebus:waspsound";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:WaspHurt";
+		return "erebus:wasphurt";
 	}
 
 	@Override

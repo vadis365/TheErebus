@@ -80,12 +80,12 @@ public class EntityBeetle extends EntityAnimal {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:beetleSound";
+		return "erebus:beetlesound";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:beetleHurt";
+		return "erebus:beetlehurt";
 	}
 
 	@Override

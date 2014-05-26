@@ -61,12 +61,12 @@ public class EntityMidgeSwarm extends EntityMob {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:mosquito_flying";
+		return "erebus:mosquitoflying";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:FlyHurt";
+		return "erebus:flyhurt";
 	}
 
 	@Override

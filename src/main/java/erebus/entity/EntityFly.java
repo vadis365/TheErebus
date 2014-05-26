@@ -58,12 +58,12 @@ public class EntityFly extends EntityAmbientCreature {
 
 	@Override
 	protected String getLivingSound() {
-		return getIsFlyHanging() && rand.nextInt(4) != 0 ? null : "erebus:FlySound";
+		return getIsFlyHanging() && rand.nextInt(4) != 0 ? null : "erebus:flysound";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:FlyHurt";
+		return "erebus:flyhurt";
 	}
 
 	@Override

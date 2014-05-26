@@ -250,19 +250,19 @@ public class EntityMosquito extends EntityMob {
 	@Override
 	protected String getLivingSound() {
 		if (ridingEntity != null)
-			return "erebus:mosquito_sucking";
+			return "erebus:mosquitosucking";
 		else
-			return "erebus:mosquito_flying";
+			return "erebus:mosquitoflying";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:mosquito_hit";
+		return "erebus:mosquitohit";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "erebus:mosquito_death";
+		return "erebus:mosquitodeath";
 	}
 
 	@Override

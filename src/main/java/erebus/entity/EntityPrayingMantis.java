@@ -66,12 +66,12 @@ public class EntityPrayingMantis extends EntityMob {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:MantisSound";
+		return "erebus:mantissound";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:MantisHurt";
+		return "erebus:mantishurt";
 	}
 
 	@Override

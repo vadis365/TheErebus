@@ -40,12 +40,12 @@ public class EntityFireAnt extends EntityMob {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:FireantSound";
+		return "erebus:fireantsound";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:FireantHurt";
+		return "erebus:fireanthurt";
 	}
 
 	@Override

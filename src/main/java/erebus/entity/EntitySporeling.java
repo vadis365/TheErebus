@@ -92,17 +92,17 @@ public class EntitySporeling extends EntityAnimal {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:sporelingLiving";
+		return "erebus:sporelingliving";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:sporelingHurt";
+		return "erebus:sporelinghurt";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "erebus:sporelingDeath";
+		return "erebus:sporelingdeath";
 	}
 
 	@Override

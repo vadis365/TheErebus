@@ -79,12 +79,12 @@ public class EntityCentipede extends EntityMob {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:CentipedeSound";
+		return "erebus:centipedesound";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:CentipedeHurt";
+		return "erebus:centipedehurt";
 	}
 
 	@Override
@@ -93,8 +93,8 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		worldObj.playSoundAtEntity(this, "erebus:CentipedeWalk", 0.15F, 1.0F);
+	protected void func_145780_a(int x, int y, int z, Block block) {  // playStepSound
+		playSound("erebus:centipedewalk", 0.15F, 1.0F);
 	}
 
 	@Override

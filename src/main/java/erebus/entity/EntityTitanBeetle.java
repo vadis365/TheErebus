@@ -143,12 +143,12 @@ public class EntityTitanBeetle extends EntityTameable {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:BombardierBeetleSound";
+		return "erebus:bombardierbeetlesound";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:BombardierBeetleHurt";
+		return "erebus:bombardierbeetlehurt";
 	}
 
 	@Override
