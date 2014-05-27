@@ -61,7 +61,7 @@ public class EntityWoodlouse extends EntityCreature {
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:beetleHurt";
+		return "erebus:beetlehurt";
 	}
 
 	@Override
