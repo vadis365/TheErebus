@@ -25,7 +25,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 		if (block == null)
 			return false;
 
-		else if (block == Blocks.double_plant || block == Blocks.tallgrass || block == ModBlocks.blockTurnip || block == Blocks.wheat)
+		else if (block == Blocks.tallgrass || block == ModBlocks.blockTurnip || block == Blocks.wheat) // removed for time being block == Blocks.double_plant 
 			return true;
 		return false;
 	}

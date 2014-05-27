@@ -118,14 +118,14 @@ public class EntityGrasshopper extends EntityCreature {
 		this.isEating = isEating;
 	}
 
-	public void setMoveTasks(boolean par1) {
-		if (par1 == false) {
+	public void setMoveTasks(boolean aiStuff) {
+		if (!aiStuff) {
 			tasks.removeTask(aiWander);
 			tasks.removeTask(aiWatchClosest);
 		}
-		if (par1 == true) {
+		if (aiStuff) {
+			tasks.addTask(1, aiWatchClosest);
 			tasks.addTask(2, aiWander);
-			tasks.addTask(2, aiWatchClosest);
 		}
 	}
 
@@ -158,10 +158,10 @@ public class EntityGrasshopper extends EntityCreature {
 
 	@Override
 	public void onLivingUpdate() {
+		super.onLivingUpdate();
 		if (!worldObj.isRemote && onGround && randJump() && !isEating && canJump)
 			jump();
 		if (!worldObj.isRemote && motionY < 0 && !onGround && !isEating)
 			jumpMovevement();
-		super.onLivingUpdate();
 	}
 }
