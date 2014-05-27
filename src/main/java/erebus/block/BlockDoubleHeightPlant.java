@@ -126,8 +126,6 @@ public class BlockDoubleHeightPlant extends Block {
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
-		if (world.rand.nextInt(8) != 0)
-			return;
 
 		ItemStack item = null;
 		int meta = world.getBlockMetadata(x, y, z);
@@ -136,11 +134,13 @@ public class BlockDoubleHeightPlant extends Block {
 			world.setBlockToAir(x, y + 1, z);
 		else
 			world.setBlockToAir(x, y - 1, z);
-
-		if (meta > 7)
-			meta -= 8;
-
-		switch (meta) {
+		
+		if (world.rand.nextInt(4) == 0) {
+			
+			if (meta > 7)
+				meta -= 8;
+			
+			switch (meta) {
 			case 0:
 				item = new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal());
 				break;
@@ -161,8 +161,9 @@ public class BlockDoubleHeightPlant extends Block {
 			case 6:
 				item = new ItemStack(ModBlocks.doubleHeightPlant, 1, meta);
 				break;
+			}
+			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
-		Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 	}
 
 	@Override
