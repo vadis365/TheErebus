@@ -1,5 +1,6 @@
 package erebus;
 
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.google.common.reflect.ClassPath;
@@ -34,6 +35,7 @@ import erebus.lib.Reference;
 import erebus.network.PacketPipeline;
 import erebus.recipes.AltarRecipe;
 import erebus.recipes.RecipeHandler;
+import erebus.world.WorldProviderErebus;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
 public class Erebus {
@@ -62,11 +64,10 @@ public class Erebus {
 		ModItems.init();
 		ModEntities.init();
 
-		//GameRegistry.registerPlayerTracker(teleportHandler);
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
-		//		DimensionManager.registerProviderType(ConfigHandler.erebusDimensionID, WorldProviderErebus.class, true);
-		//		DimensionManager.registerDimension(ConfigHandler.erebusDimensionID, ConfigHandler.erebusDimensionID);
+		DimensionManager.registerProviderType(ConfigHandler.erebusDimensionID, WorldProviderErebus.class, true);
+		DimensionManager.registerDimension(ConfigHandler.erebusDimensionID, ConfigHandler.erebusDimensionID);
 	}
 
 	@EventHandler
@@ -80,6 +81,7 @@ public class Erebus {
 		RecipeHandler.init();
 		AltarRecipe.init();
 
+		MinecraftForge.EVENT_BUS.register(teleportHandler);
 		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.flowerPlanted);
