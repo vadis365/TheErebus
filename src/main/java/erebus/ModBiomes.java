@@ -1,6 +1,11 @@
 package erebus;
 
 import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.biomes.BiomeElysianFields;
+import erebus.world.biomes.BiomeSubterraneanSavannah;
+import erebus.world.biomes.BiomeUlteriorOutback;
+import erebus.world.biomes.BiomeUndergroundJungle;
+import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.loot.WeightedList;
 
 public class ModBiomes {
@@ -39,7 +44,7 @@ public class ModBiomes {
 	public static int fieldsSubForestID;
 
 	public static void init() {
-		/*undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
+		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
 		volcanicDesert = new BiomeVolcanicDesert(volcanicDesertID);
 		subterraneanSavannah = new BiomeSubterraneanSavannah(subterraneanSavannahID);
 		elysianFields = new BiomeElysianFields(elysianFieldsID);
@@ -48,6 +53,6 @@ public class ModBiomes {
 		//betweenlands = new BiomeBetweenlands(betweenlandsID);
 
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);
-		//jungleSubLake = new BiomeLake(jungleSubLakeID);*/
+		//jungleSubLake = new BiomeLake(jungleSubLakeID);
 	}
 }

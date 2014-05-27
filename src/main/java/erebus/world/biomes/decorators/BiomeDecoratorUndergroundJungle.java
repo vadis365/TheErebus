@@ -1,17 +1,15 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
-import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.BlockLeavesErebus;
-import erebus.block.BlockLogErebus;
+import erebus.lib.EnumWood;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -45,10 +43,10 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 
 	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern,1);
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead,1);
-	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(ModBlocks.erebusGrass,1);
+	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass,1);
 
-	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1,ModBlocks.leavesErebus,ModBlocks.thorns);
-	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,BlockLogErebus.dataMahogany,BlockLeavesErebus.dataMahoganyDecay,false,ModBlocks.logErebusGroup1,ModBlocks.leavesErebus);
+	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leavesErebus,ModBlocks.thorns);
+	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leavesErebus);
 	private final WorldGenerator genTreeJungle = new WorldGenTrees(true,6,3,3,true);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
@@ -108,7 +106,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 				if (r <= 6){
 					xx = x+9+rand.nextInt(14);
 					zz = z+9+rand.nextInt(14);
-					treeGen = new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3);
+					//TODO treeGen = new WorldGenHugeTrees(true,4+rand.nextInt(40),3,3);
 				}
 				else if (r <= 11) treeGen = genTreeMahogany;
 				else if (r <= 16){
@@ -196,7 +194,6 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 				genGrass.generate(world,rand,xx,yy,zz);
 		}
 
-		Block block;
 		int offset;
 		for(attempt = 0; attempt < 800; attempt++){
 			xx = x+offsetXZ();
@@ -204,7 +201,6 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			zz = z+offsetXZ();
 
 			if (world.isAirBlock(xx,yy,zz)){
-				block = rand.nextBoolean() ? Blocks.vine : ModBlocks.thorns;
 				offset = rand.nextInt(4);
 
 				if (!world.getBlock(xx+Direction.offsetX[offset],yy,zz+Direction.offsetZ[offset]).isNormalCube())continue;

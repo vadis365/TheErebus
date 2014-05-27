@@ -67,7 +67,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 						world.setBlock(xx,yy,zz,Blocks.double_plant,2,2);
 						world.setBlock(xx,yy+1,zz,Blocks.double_plant,10,2);
 					}
-					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass,1,2);
+					else world.setBlock(xx,yy,zz,Blocks.tallgrass,1,2);
 
 					break;
 				}

@@ -14,8 +14,6 @@ public class WorldGenAcaciaTree extends WorldGenTreeBase {
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
-		super.generate(world, rand, x, y, z);
-
 		int extraHeight = rand.nextInt(3);
 
 		for (int i = 0; i < 6 + extraHeight; i++)

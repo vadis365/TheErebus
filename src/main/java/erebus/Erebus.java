@@ -81,7 +81,7 @@ public class Erebus {
 		RecipeHandler.init();
 		AltarRecipe.init();
 
-		MinecraftForge.EVENT_BUS.register(teleportHandler);
+		FMLCommonHandler.instance().bus().register(teleportHandler);
 		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.flowerPlanted);

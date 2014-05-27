@@ -7,26 +7,22 @@ import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.core.handler.ConfigHandler;
-import erebus.core.teleport.TeleportClient;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
+import erebus.world.TeleporterErebus;
 
 public class BlockPortalErebus extends BlockBreakable {
 
@@ -57,16 +53,22 @@ public class BlockPortalErebus extends BlockBreakable {
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
-		Side side = FMLCommonHandler.instance().getEffectiveSide();
-		if (side == Side.SERVER) {
-			if (entity.ridingEntity == null && entity.riddenByEntity == null && entity instanceof EntityPlayerMP) {
-				EntityPlayerMP player = (EntityPlayerMP) entity;
-				Erebus.teleportHandler.getPlayer(player.getCommandSenderName()).setInPortal();
+		if (world.isRemote)
+			return;
+		if (entity.ridingEntity == null && entity.riddenByEntity == null)
+			if (entity.timeUntilPortal <= 0) {
+				if (entity.dimension == ConfigHandler.erebusDimensionID)
+					if (entity instanceof EntityPlayerMP)
+						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) entity, 0, TeleporterErebus.TELEPORTER_TO_OVERWORLD);
+					else
+						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, 0, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(0));
+				else if (entity.dimension == 0)
+					if (entity instanceof EntityPlayerMP)
+						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) entity, ConfigHandler.erebusDimensionID, TeleporterErebus.TELEPORTER_TO_EREBUS);
+					else
+						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, ConfigHandler.erebusDimensionID, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(ConfigHandler.erebusDimensionID));
+				entity.timeUntilPortal = 300;
 			}
-		} else if (side == Side.CLIENT && entity instanceof EntityPlayer) {
-			TeleportClient.setInPortal();
-			((EntityPlayer) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 80, 69));
-		}
 	}
 
 	@Override

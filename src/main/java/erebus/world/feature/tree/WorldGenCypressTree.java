@@ -16,8 +16,6 @@ public class WorldGenCypressTree extends WorldGenTreeBase {
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
-		super.generate(world, rand, x, y, z);
-
 		float treeRand = rand.nextFloat();
 
 		if (treeRand >= 0.5F)

@@ -18,7 +18,6 @@ public class WorldGenAsperTree extends WorldGenTreeBase {
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
-		super.generate(world, rand, x, y, z);
 		int height = rand.nextInt(2) + 4; // top leaves don't count
 
 		// check for space

@@ -3,7 +3,6 @@ package erebus.world.biomes.decorators;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -25,7 +24,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
 
-	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(ModBlocks.erebusGrass,1);
+	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass,1);
 
 	private final WorldGenerator genTreeAcacia = new WorldGenAcaciaTree();
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();

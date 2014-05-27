@@ -27,7 +27,6 @@ import erebus.block.BlockErebusAltarLightning;
 import erebus.block.BlockErebusAltarRepair;
 import erebus.block.BlockErebusAltarXP;
 import erebus.block.BlockErebusFlower;
-import erebus.block.BlockErebusGrass;
 import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusMushroomCap;
 import erebus.block.BlockErebusOre;
@@ -107,7 +106,7 @@ public class ModBlocks {
 	public static BlockLeavesErebus leavesErebus;
 
 	// UNDERGROWTH
-	public static Block erebusGrass, thorns, blockTurnip, fiddlehead, erebusPlantSmall;
+	public static Block thorns, blockTurnip, fiddlehead, erebusPlantSmall;
 	public static BlockFern fern;
 	public static Block doubleHeightPlant, erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4;
 
@@ -162,7 +161,6 @@ public class ModBlocks {
 		erebusMushroomCap3 = new BlockErebusMushroomCap(3).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom3Cap");
 		erebusMushroomCap4 = new BlockErebusMushroomCap(4).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom4Cap");
 		doubleHeightPlant = new BlockDoubleHeightPlant().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("doubleHeightPlant");
-		erebusGrass = new BlockErebusGrass().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusTallGrass").setBlockTextureName("erebus:tallgrass");
 		thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
 		fern = (BlockFern) new BlockFern().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFern");
 		blockTurnip = new BlockTurnip().setBlockName("turnips");
@@ -238,7 +236,7 @@ public class ModBlocks {
 	private static void initCreativeTabs() {
 		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
 		ModTabs.blocks.setTab(hollowLogAcacia, planksErebus, leavesErebus);
-		ModTabs.blocks.setTab(erebusGrass, fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusPlantSmall);
+		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusPlantSmall);
 		ModTabs.blocks.setTab(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2); //,erebusMushroomCap3, erebusMushroomCap4
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
@@ -270,7 +268,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(erebusFlower, ItemBlockErebusFlower.class, "erebusFlower");
 		GameRegistry.registerBlock(erebusStigma, ItemBlockErebusStigma.class, "erebusStigma");
 
-		GameRegistry.registerBlock(erebusGrass, "erebusGrass");
 		GameRegistry.registerBlock(thorns, "thorns");
 		GameRegistry.registerBlock(fern, ItemBlockColoredSingle.class, "fern");
 		GameRegistry.registerBlock(blockTurnip, "blockTurnip");
@@ -385,7 +382,6 @@ public class ModBlocks {
 		Blocks.fire.setFireInfo(planksErebus, 5, 20);
 		Blocks.fire.setFireInfo(leavesErebus, 30, 60);
 		Blocks.fire.setFireInfo(blockWitherWeb, 20, 50);
-		Blocks.fire.setFireInfo(erebusGrass, 60, 100);
 		Blocks.fire.setFireInfo(fern, 60, 100);
 		Blocks.fire.setFireInfo(fiddlehead, 60, 100);
 		Blocks.fire.setFireInfo(thorns, 15, 100);

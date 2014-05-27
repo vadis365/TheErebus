@@ -77,7 +77,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 						world.setBlock(xx,yy+1,zz,Blocks.double_plant,10,2);
 					}
 					else if (rand.nextInt(80) == 0) world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall,BlockSmallPlants.dataFireBloom,2);
-					else world.setBlock(xx,yy,zz,ModBlocks.erebusGrass,1,2);
+					else world.setBlock(xx,yy,zz,Blocks.tallgrass,1,2);
 
 					break;
 				}
