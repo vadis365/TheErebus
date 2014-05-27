@@ -26,7 +26,7 @@
 "hornblow": {"category": "player","sounds": ["hornblow"]},
 "locusthurt": {"category": "hostile", "sounds": ["locusthurt"]},
 "locustsound": {"category": "hostile","sounds": ["locustsound"]},
-"locustrspawn": {"category": "hostile","sounds": ["locustspawn"]},
+"locustspawn": {"category": "hostile","sounds": ["locustspawn"]},
 "mantishurt": {"category": "hostile", "sounds": ["mantishurt"]},
 "mantissound": {"category": "hostile","sounds": ["mantissound"]},
 "mosquitodeath": {"category": "hostile", "sounds": ["mosquitodeath"]},
