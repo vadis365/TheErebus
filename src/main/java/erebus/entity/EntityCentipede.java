@@ -94,7 +94,7 @@ public class EntityCentipede extends EntityMob {
 
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) {  // playStepSound
-		playSound("erebus:centipedewalk", 0.15F, 1.0F);
+		playSound("erebus:centipedewalk", 0.5F, 1.0F);
 	}
 
 	@Override
