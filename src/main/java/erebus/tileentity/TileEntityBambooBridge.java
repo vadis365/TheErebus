@@ -8,22 +8,21 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBambooBridge extends TileEntity {
 
-	public byte renderSide1;
-	public byte renderSide2;
+	public boolean renderSide1, renderSide2;
 
-	public void setRenderSide1(byte side1) {
+	public void setRenderSide1(boolean side1) {
 		renderSide1 = side1;
 	}
 
-	public void setRenderSide2(byte side2) {
+	public void setRenderSide2(boolean side2) {
 		renderSide2 = side2;
 	}
 
-	public byte getRenderSide1() {
+	public boolean getRenderSide1() {
 		return renderSide1;
 	}
 
-	public byte getRenderSide2() {
+	public boolean getRenderSide2() {
 		return renderSide2;
 	}
 
@@ -33,13 +32,13 @@ public class TileEntityBambooBridge extends TileEntity {
 	}
 
 	protected void writeTileToNBT(NBTTagCompound nbt) {
-		nbt.setByte("renderSide1", renderSide1);
-		nbt.setByte("renderSide2", renderSide2);
+		nbt.setBoolean("renderSide1", renderSide1);
+		nbt.setBoolean("renderSide2", renderSide2);
 	}
 
 	protected void readTileFromNBT(NBTTagCompound nbt) {
-		renderSide1 = nbt.getByte("renderSide1");
-		renderSide2 = nbt.getByte("renderSide2");
+		renderSide1 = nbt.getBoolean("renderSide1");
+		renderSide2 = nbt.getBoolean("renderSide2");
 	}
 
 	@Override

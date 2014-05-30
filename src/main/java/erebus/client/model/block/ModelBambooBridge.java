@@ -8,6 +8,7 @@ import erebus.tileentity.TileEntityBambooBridge;
 
 @SideOnly(Side.CLIENT)
 public class ModelBambooBridge extends ModelBase {
+
 	ModelRenderer BambooStep1;
 	ModelRenderer BambooStep3;
 	ModelRenderer BambooStep2;
@@ -95,7 +96,7 @@ public class ModelBambooBridge extends ModelBase {
 	}
 
 	public void render(TileEntityBambooBridge tile) {
-		if (tile.getRenderSide1() == 1) {
+		if (tile.getRenderSide1()) {
 			SupportR1.render(0.0625F);
 			SupportR2.render(0.0625F);
 			StringR1.render(0.0625F);
@@ -103,7 +104,7 @@ public class ModelBambooBridge extends ModelBase {
 			String4.render(0.0625F);
 		}
 
-		if (tile.getRenderSide2() == 1) {
+		if (tile.getRenderSide2()) {
 			SupportL1.render(0.0625F);
 			SupportL2.render(0.0625F);
 			StringL1.render(0.0625F);

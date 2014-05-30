@@ -17,6 +17,13 @@ import erebus.tileentity.TileEntityBambooBridge;
 public class BambooBridgeItemRenderer implements IItemRenderer {
 
 	private final ModelBambooBridge ModelBambooBridge = new ModelBambooBridge();
+	private final TileEntityBambooBridge te = new TileEntityBambooBridge();
+	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/bambooLadder.png");
+
+	public BambooBridgeItemRenderer() {
+		te.setRenderSide1(true);
+		te.setRenderSide2(true);
+	}
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -49,10 +56,7 @@ public class BambooBridgeItemRenderer implements IItemRenderer {
 	}
 
 	private void renderBlock(float x, float y, float z, double size) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/bambooLadder.png"));
-		TileEntityBambooBridge te = new TileEntityBambooBridge();
-		te.setRenderSide1((byte) 1);
-		te.setRenderSide2((byte) 1);
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y + 0.1875F, z);

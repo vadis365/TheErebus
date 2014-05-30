@@ -67,57 +67,54 @@ public class BlockBambooBridge extends BlockContainer {
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		TileEntityBambooBridge te = Utils.getTileEntity(world, x, y, z, TileEntityBambooBridge.class);
-		int meta = world.getBlockMetadata(x, y, z);
+
 		front = canConnectBridgeTo(world, x, y, z - 1);
 		back = canConnectBridgeTo(world, x, y, z + 1);
 		left = canConnectBridgeTo(world, x - 1, y, z);
 		right = canConnectBridgeTo(world, x + 1, y, z);
-		if (meta == 2) {
-			if (!right)
-				te.setRenderSide1((byte) 1);
-			if (!left)
-				te.setRenderSide2((byte) 1);
-			if (right)
-				te.setRenderSide1((byte) 0);
-			if (left)
-				te.setRenderSide2((byte) 0);
-		}
 
-		if (meta == 3) {
-			if (!right)
-				te.setRenderSide2((byte) 1);
-			if (!left)
-				te.setRenderSide1((byte) 1);
-			if (right)
-				te.setRenderSide2((byte) 0);
-			if (left)
-				te.setRenderSide1((byte) 0);
+		switch (world.getBlockMetadata(x, y, z)) {
+			case 2:
+				if (!right)
+					te.setRenderSide1(true);
+				if (!left)
+					te.setRenderSide2(true);
+				if (right)
+					te.setRenderSide1(false);
+				if (left)
+					te.setRenderSide2(false);
+				break;
+			case 3:
+				if (!right)
+					te.setRenderSide2(true);
+				if (!left)
+					te.setRenderSide1(true);
+				if (right)
+					te.setRenderSide2(false);
+				if (left)
+					te.setRenderSide1(false);
+				break;
+			case 4:
+				if (!back)
+					te.setRenderSide1(true);
+				if (!front)
+					te.setRenderSide2(true);
+				if (back)
+					te.setRenderSide1(false);
+				if (front)
+					te.setRenderSide2(false);
+				break;
+			case 5:
+				if (!back)
+					te.setRenderSide2(true);
+				if (!front)
+					te.setRenderSide1(true);
+				if (back)
+					te.setRenderSide2(false);
+				if (front)
+					te.setRenderSide1(false);
+				break;
 		}
-
-		if (meta == 4) {
-			if (!back)
-				te.setRenderSide1((byte) 1);
-			if (!front)
-				te.setRenderSide2((byte) 1);
-			if (back)
-				te.setRenderSide1((byte) 0);
-			if (front)
-				te.setRenderSide2((byte) 0);
-		}
-
-		if (meta == 5) {
-			if (!back)
-				te.setRenderSide2((byte) 1);
-			if (!front)
-				te.setRenderSide1((byte) 1);
-			if (back)
-				te.setRenderSide2((byte) 0);
-			if (front)
-				te.setRenderSide1((byte) 0);
-		}
-		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
-		world.func_147479_m(x, y, z);
-		world.markBlockForUpdate(x, y, z);
 	}
 
 	@Override
@@ -164,10 +161,10 @@ public class BlockBambooBridge extends BlockContainer {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);
 	}
 
-	public boolean canConnectBridgeTo(IBlockAccess IblockAccess, int x, int y, int z) {
-		Block block = IblockAccess.getBlock(x, y, z);
+	public boolean canConnectBridgeTo(IBlockAccess world, int x, int y, int z) {
+		Block block = world.getBlock(x, y, z);
 		if (block != this)
-			return block != null && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
+			return !block.isAir(world, x, y, z) && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
 		else
 			return true;
 	}
