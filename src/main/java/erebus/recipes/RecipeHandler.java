@@ -261,7 +261,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(Items.diamond, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 4), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(Items.emerald, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 5), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusMaterials, 1, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 6), 1.0F);
-		GameRegistry.addSmelting(new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()), new ItemStack(ModBlocks.mud), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.2F);
 		if (ConfigHandler.lead)
 			GameRegistry.addSmelting(new ItemStack(ModItems.metalIngot, 1, 1), new ItemStack(ModBlocks.erebusOreExtra, 1, 2), 1.0F);

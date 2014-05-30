@@ -13,7 +13,10 @@ public class ItemBlockPlanks extends ItemBlockGeneric {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		String wood = EnumWood.values()[stack.getItemDamage()].getTranslatedName();
+		int meta = stack.getItemDamage();
+		if (meta >= EnumWood.values().length)
+			return "Error";
+		String wood = EnumWood.values()[meta].getTranslatedName();
 		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), wood);
 	}
 }

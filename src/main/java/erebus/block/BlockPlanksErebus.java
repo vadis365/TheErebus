@@ -39,7 +39,7 @@ public class BlockPlanksErebus extends Block {
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-		for (int i = 0; i < icons.length; i++)
+		for (int i = 0; i < EnumWood.values().length; i++)
 			list.add(new ItemStack(item, 1, i));
 	}
 
