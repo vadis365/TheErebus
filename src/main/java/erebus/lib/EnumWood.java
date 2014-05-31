@@ -12,6 +12,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
 import erebus.block.BlockLogErebus;
 import erebus.block.BlockSaplingErebus;
+import erebus.block.BlockSlabPlanks;
 import erebus.block.BlockStairPlanks;
 import erebus.item.block.ItemBlockLocalised;
 
@@ -60,6 +61,7 @@ public enum EnumWood {
 	}
 
 	private static final HashMap<EnumWood, Block> logs = new HashMap<EnumWood, Block>();
+	private static final HashMap<EnumWood, Block> slabs = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> stairs = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> saplings = new HashMap<EnumWood, Block>();
 
@@ -80,6 +82,11 @@ public enum EnumWood {
 			GameRegistry.registerBlock(stair, ItemBlockLocalised.class, "plankStair" + wood.name());
 			Blocks.fire.setFireInfo(stair, 5, 5);
 			stairs.put(wood, stair);
+
+			Block slab = new BlockSlabPlanks(wood);
+			GameRegistry.registerBlock(slab, ItemBlockLocalised.class, "slabPlanks" + wood.name());
+			Blocks.fire.setFireInfo(slab, 5, 5);
+			slabs.put(wood, slab);
 		}
 	}
 
@@ -97,6 +104,10 @@ public enum EnumWood {
 			Block stair = stairs.get(wood);
 			OreDictionary.registerOre("stairWood", stair);
 			GameRegistry.addRecipe(new ItemStack(stair, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
+
+			Block slab = slabs.get(wood);
+			OreDictionary.registerOre("slabWood", slab);
+			GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
 		}
 	}
 }

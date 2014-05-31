@@ -56,7 +56,6 @@ import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
 import erebus.block.BlockSimple;
 import erebus.block.BlockSlabPetrifiedWood;
-import erebus.block.BlockSlabPlanksErebus;
 import erebus.block.BlockSlabStoneErebus;
 import erebus.block.BlockSmallPlants;
 import erebus.block.BlockSpiderSpawner;
@@ -84,8 +83,6 @@ import erebus.item.block.ItemBlockFlowerPlanted;
 import erebus.item.block.ItemBlockGeneric;
 import erebus.item.block.ItemBlockPlanks;
 import erebus.item.block.ItemBlockSlabPetrifiedWood;
-import erebus.item.block.ItemBlockSlabPlanks0Erebus;
-import erebus.item.block.ItemBlockSlabPlanks1Erebus;
 import erebus.item.block.ItemBlockSlabStoneErebus;
 import erebus.item.block.ItemBlockWitherWeb;
 import erebus.lib.EnumWood;
@@ -119,7 +116,7 @@ public class ModBlocks {
 	public static Block jadeBlock, altar, glowGemBlock, mucusBomb;
 
 	// STAIRS, SLABS, WALLS
-	public static Block[] umbercobbleStairs, stoneSlabs, plankSlabs, petrifiedWoodSlab, gneissStairs;
+	public static Block[] umbercobbleStairs, stoneSlabs, petrifiedWoodSlab, gneissStairs;
 	public static Block wallErebus, petrifiedWoodStairs, amberBrickStairs, waspNestStairs;
 
 	// DUNGEONS
@@ -215,9 +212,6 @@ public class ModBlocks {
 		stoneSlabs = new Block[2];
 		for (int i = 0; i < 2; i++)
 			stoneSlabs[i] = new BlockSlabStoneErebus(i == 1).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("slabStoneErebus");
-		plankSlabs = new Block[4];
-		for (int i = 0; i < 4; i++)
-			plankSlabs[i] = new BlockSlabPlanksErebus((int) Math.floor(i / 2f), i % 2 == 1).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setBlockName("slabPlanksErebus");
 		wallErebus = new BlockWallErebus().setBlockName("wallErebus");
 		petrifiedWoodSlab = new Block[2];
 		for (int i = 0; i < petrifiedWoodSlab.length; i++)
@@ -245,8 +239,8 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
-		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, stoneSlabs[0], plankSlabs[0]);
-		ModTabs.blocks.setTab(plankSlabs[2], petrifiedWoodSlab[0], wallErebus);
+		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, stoneSlabs[0]);
+		ModTabs.blocks.setTab(petrifiedWoodSlab[0], wallErebus);
 	}
 
 	private static void registerBlocks() {
@@ -326,8 +320,6 @@ public class ModBlocks {
 			GameRegistry.registerBlock(umbercobbleStairs[i], "umbercobbleStairs" + i);
 		for (int i = 0; i < stoneSlabs.length; i++)
 			GameRegistry.registerBlock(stoneSlabs[i], ItemBlockSlabStoneErebus.class, "slabStone" + i);
-		for (int i = 0; i < plankSlabs.length; i++)
-			GameRegistry.registerBlock(plankSlabs[i], i <= 1 ? ItemBlockSlabPlanks0Erebus.class : ItemBlockSlabPlanks1Erebus.class, "slabPlanks" + i);
 		GameRegistry.registerBlock(petrifiedWoodStairs, "petrifiedWoodStairs");
 		for (int i = 0; i < petrifiedWoodSlab.length; i++)
 			GameRegistry.registerBlock(petrifiedWoodSlab[i], ItemBlockSlabPetrifiedWood.class, "petrifiedWoodSlab" + i);
@@ -357,8 +349,6 @@ public class ModBlocks {
 		umberPaver.setHarvestLevel("pickaxe", 0);
 		for (int i = 0; i < stoneSlabs.length; i++)
 			stoneSlabs[i].setHarvestLevel("pickaxe", 0);
-		for (int i = 0; i < plankSlabs.length; i++)
-			plankSlabs[i].setHarvestLevel("axe", 0);
 		wallErebus.setHarvestLevel("pickaxe", 0);
 		umberOreBlock.setHarvestLevel("pickaxe", 0, 0);
 		umberOreBlock.setHarvestLevel("pickaxe", 1, 1);

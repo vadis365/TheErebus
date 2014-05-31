@@ -1,6 +1,5 @@
 package erebus.recipes;
 
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -69,17 +68,6 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 5), new Object[] { "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 6), new Object[] { "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 1) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 7), new Object[] { "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 2) });
-
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[0], 6, 0), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 0) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[0], 6, 1), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 1) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[0], 6, 2), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 2) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[0], 6, 3), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 3) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[0], 6, 4), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 4) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[0], 6, 5), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 5) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[0], 6, 6), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 6) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[0], 6, 7), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 7) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[2], 6, 0), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 8) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.plankSlabs[2], 6, 1), new Object[] { "###", '#', new ItemStack(ModBlocks.planksErebus, 1, 9) });
 
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wallErebus, 6, 0), new Object[] { "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wallErebus, 6, 1), new Object[] { "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 1) });
@@ -310,9 +298,6 @@ public class RecipeHandler {
 		OreDictionary.registerOre("dyeMagenta", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.MAGENTA_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.WHITE_PETAL.ordinal()));
-
-		for (Block slab : ModBlocks.plankSlabs)
-			OreDictionary.registerOre("slabWood", new ItemStack(slab, 1, OreDictionary.WILDCARD_VALUE));
 
 		if (ConfigHandler.lead) {
 			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));
