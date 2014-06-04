@@ -60,12 +60,12 @@ public class PacketPipeline{
 			
 			ClassPath path = ClassPath.from(PacketPipeline.class.getClassLoader());
 			
-			for(ClassInfo clsInfo:path.getTopLevelClasses("chylex.hee.packets.client")){
+			for(ClassInfo clsInfo:path.getTopLevelClasses("erebus.network.client")){
 				Class cls = clsInfo.load();
 				if (!cls.getName().endsWith("__"))registerPacket(++id,cls);
 			}
 			
-			for(ClassInfo clsInfo:path.getTopLevelClasses("chylex.hee.packets.server")){
+			for(ClassInfo clsInfo:path.getTopLevelClasses("erebus.network.server")){
 				Class cls = clsInfo.load();
 				if (!cls.getName().endsWith("__"))registerPacket(++id,cls);
 			}
