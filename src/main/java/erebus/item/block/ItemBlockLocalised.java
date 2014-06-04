@@ -12,6 +12,10 @@ public class ItemBlockLocalised extends ItemCloth {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return field_150939_a.getLocalizedName();
+		return getBlock().getLocalizedName();
+	}
+
+	public Block getBlock() {
+		return field_150939_a;
 	}
 }

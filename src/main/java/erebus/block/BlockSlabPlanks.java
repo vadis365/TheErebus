@@ -61,10 +61,9 @@ public class BlockSlabPlanks extends Block {
 
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-		if (side == 1) {
-			if (world.getBlock(x, y - 1, z) == this)
-				return 2;
-		} else if (side == 0 || hitY > 0.5D)
+		if (side == 1)
+			return 0;
+		if (side == 0 || hitY > 0.5D)
 			return 1;
 		return 0;
 	}
@@ -106,7 +105,6 @@ public class BlockSlabPlanks extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-
 	}
 
 	@Override
