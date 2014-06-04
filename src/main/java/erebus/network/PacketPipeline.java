@@ -1,29 +1,23 @@
 package erebus.network;
-
+import gnu.trove.map.hash.TByteObjectHashMap;
+import gnu.trove.map.hash.TObjectByteHashMap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageCodec;
-
-import java.util.Collections;
-import java.util.Comparator;
+import io.netty.channel.ChannelFutureListener;
+import java.lang.reflect.Field;
 import java.util.EnumMap;
-import java.util.LinkedList;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
-
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
-
-import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLEventChannel;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.FMLOutboundHandler.OutboundTarget;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -31,11 +25,11 @@ import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.lib.Reference;
 
-@ChannelHandler.Sharable
-public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
+// @formatter:off
+public class PacketPipeline{
 	private static PacketPipeline instance;
+	private static final String channelName = "erebus";
 
 	public static void initializePipeline() {
 		if (instance != null)
@@ -44,78 +38,73 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 		instance.load();
 	}
 
-	private EnumMap<Side, FMLEmbeddedChannel> channels;
-	private final LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
+	private FMLEventChannel eventDrivenChannel;
+	private EnumMap<Side,FMLEmbeddedChannel> channels;
 
-	private PacketPipeline() {
-	}
+    private TByteObjectHashMap<Class<? extends AbstractPacket>> idToPacket = new TByteObjectHashMap<Class<? extends AbstractPacket>>();
+    private TObjectByteHashMap<Class<? extends AbstractPacket>> packetToId = new TObjectByteHashMap<Class<? extends AbstractPacket>>();
+
+	private PacketPipeline(){}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void load() {
-		channels = NetworkRegistry.INSTANCE.newChannel(Reference.MOD_ID, instance);
-
-		try {
+	private void load(){
+		eventDrivenChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(channelName);
+		eventDrivenChannel.register(this);
+		
+		try{
+			Field channelField = FMLEventChannel.class.getDeclaredField("channels");
+			channelField.setAccessible(true);
+			channels = (EnumMap)channelField.get(eventDrivenChannel);
+			
+			int id = -1;
+			
 			ClassPath path = ClassPath.from(PacketPipeline.class.getClassLoader());
-
-			for (ClassInfo clsInfo : path.getTopLevelClasses("erebus.network.client")) {
+			
+			for(ClassInfo clsInfo:path.getTopLevelClasses("chylex.hee.packets.client")){
 				Class cls = clsInfo.load();
-				if (!cls.getName().endsWith("__"))
-					packets.add(cls);
+				if (!cls.getName().endsWith("__"))registerPacket(++id,cls);
 			}
-
-			for (ClassInfo clsInfo : path.getTopLevelClasses("erebus.network.server")) {
+			
+			for(ClassInfo clsInfo:path.getTopLevelClasses("chylex.hee.packets.server")){
 				Class cls = clsInfo.load();
-				if (!cls.getName().endsWith("__"))
-					packets.add(cls);
+				if (!cls.getName().endsWith("__"))registerPacket(++id,cls);
 			}
-		} catch (Exception e) {
+		}catch(Exception e){
 			throw new RuntimeException(e);
 		}
-
-		Collections.sort(packets, new Comparator<Class<? extends AbstractPacket>>() {
-			@Override
-			public int compare(Class<? extends AbstractPacket> cls1, Class<? extends AbstractPacket> cls2) {
-				int res = String.CASE_INSENSITIVE_ORDER.compare(cls1.getCanonicalName(), cls2.getCanonicalName());
-				if (res == 0)
-					res = cls1.getCanonicalName().compareTo(cls2.getCanonicalName());
-				return res;
-			}
-		});
+	}
+	
+	private void registerPacket(int id, Class<? extends AbstractPacket> cls){
+		idToPacket.put((byte)id,cls);
+		packetToId.put(cls,(byte)id);
 	}
 
-	@Override
-	protected void encode(ChannelHandlerContext ctx, AbstractPacket packet, List<Object> out) throws Exception {
+	private FMLProxyPacket writePacket(AbstractPacket packet){
 		ByteBuf buffer = Unpooled.buffer();
-		byte index = (byte) packets.indexOf(packet.getClass());
-		if (index == -1)
-			throw new UnsupportedOperationException("Tried to send a non-registered packet!");
-
-		buffer.writeByte(index);
-		packet.write(ctx, buffer);
-		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(), ctx.channel().attr(NetworkRegistry.FML_CHANNEL).get());
-		out.add(proxyPacket);
+		buffer.writeByte(packetToId.get(packet.getClass()));
+		packet.write(buffer);
+		return new FMLProxyPacket(buffer,channelName);
 	}
+	
+	private void readPacket(FMLProxyPacket fmlPacket, Side side){
+		ByteBuf buffer = fmlPacket.payload();
+		
+		try{
+			AbstractPacket packet = idToPacket.get(buffer.readByte()).newInstance();
+			packet.read(buffer.slice());
+			
+			switch(side){
+				case CLIENT:
+					packet.handle(Side.CLIENT,getClientPlayer());
+					break;
 
-	@Override
-	protected void decode(ChannelHandlerContext ctx, FMLProxyPacket packet, List<Object> out) throws Exception {
-		ByteBuf payload = packet.payload();
-		Class<? extends AbstractPacket> cls = packets.get(payload.readByte());
-		if (cls == null)
-			throw new UnsupportedOperationException("Tried to handle a non-registered packet!");
-
-		AbstractPacket pkt = cls.newInstance();
-		pkt.read(ctx, payload.slice());
-		switch (FMLCommonHandler.instance().getEffectiveSide()) {
-			case CLIENT:
-				pkt.handle(Side.CLIENT, getClientPlayer());
-				break;
-
-			case SERVER:
-				INetHandler netHandler = ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();
-				pkt.handle(Side.SERVER, ((NetHandlerPlayServer) netHandler).playerEntity);
-				break;
+				case SERVER:
+					packet.handle(Side.SERVER,((NetHandlerPlayServer)fmlPacket.handler()).playerEntity);
+					break;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		out.add(pkt);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -123,50 +112,63 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 		return Minecraft.getMinecraft().thePlayer;
 	}
 
-	public static void sendToAll(AbstractPacket packet) {
+	// EVENTS AND DISPATCHING
+	
+	@SubscribeEvent
+	public void onClientPacketReceived(ClientCustomPacketEvent e){
+		readPacket(e.packet,Side.CLIENT);
+	}
+	
+	@SubscribeEvent
+	public void onServerPacketReceived(ServerCustomPacketEvent e){
+		readPacket(e.packet,Side.SERVER);
+	}
+	
+	public static void sendToAll(AbstractPacket packet){
 		FMLEmbeddedChannel channel = instance.channels.get(Side.SERVER);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(OutboundTarget.ALL);
-		channel.writeAndFlush(packet);
+		channel.writeAndFlush(instance.writePacket(packet)).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
 	}
-
-	public static void sendToPlayer(EntityPlayer player, AbstractPacket packet) {
+	
+	public static void sendToPlayer(EntityPlayer player, AbstractPacket packet){
 		FMLEmbeddedChannel channel = instance.channels.get(Side.SERVER);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(OutboundTarget.PLAYER);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
-		channel.writeAndFlush(packet);
+		channel.writeAndFlush(instance.writePacket(packet)).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
 	}
-
-	public static void sendToAllAround(int dimension, double x, double y, double z, double range, AbstractPacket packet) {
+	
+	public static void sendToAllAround(int dimension, double x, double y, double z, double range, AbstractPacket packet){
 		FMLEmbeddedChannel channel = instance.channels.get(Side.SERVER);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(OutboundTarget.ALLAROUNDPOINT);
-		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(new TargetPoint(dimension, x, y, z, range));
-		channel.writeAndFlush(packet);
+		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(new TargetPoint(dimension,x,y,z,range));
+		channel.writeAndFlush(instance.writePacket(packet)).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
 	}
-
-	public static void sendToAllAround(Entity entity, double range, AbstractPacket packet) {
+	
+	public static void sendToAllAround(Entity entity, double range, AbstractPacket packet){
 		FMLEmbeddedChannel channel = instance.channels.get(Side.SERVER);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(OutboundTarget.ALLAROUNDPOINT);
-		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(new TargetPoint(entity.dimension, entity.posX, entity.posY, entity.posZ, range));
-		channel.writeAndFlush(packet);
+		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(new TargetPoint(entity.dimension,entity.posX,entity.posY,entity.posZ,range));
+		channel.writeAndFlush(instance.writePacket(packet)).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
 	}
-
-	public static void sendToAllAround(TileEntity tile, double range, AbstractPacket packet) {
+	
+	public static void sendToAllAround(TileEntity tile, double range, AbstractPacket packet){
 		FMLEmbeddedChannel channel = instance.channels.get(Side.SERVER);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(OutboundTarget.ALLAROUNDPOINT);
-		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(new TargetPoint(tile.getWorldObj().provider.dimensionId, tile.xCoord + 0.5D, tile.yCoord + 0.5D, tile.zCoord + 0.5D, range));
-		channel.writeAndFlush(packet);
+		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(new TargetPoint(tile.getWorldObj().provider.dimensionId,tile.xCoord+0.5D,tile.yCoord+0.5D,tile.zCoord+0.5D,range));
+		channel.writeAndFlush(instance.writePacket(packet)).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
 	}
-
-	public static void sendToDimension(int dimension, AbstractPacket packet) {
+	
+	public static void sendToDimension(int dimension, AbstractPacket packet){
 		FMLEmbeddedChannel channel = instance.channels.get(Side.SERVER);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(OutboundTarget.DIMENSION);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(dimension);
-		channel.writeAndFlush(packet);
+		channel.writeAndFlush(instance.writePacket(packet)).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
 	}
-
-	public static void sendToServer(AbstractPacket message) {
+	
+	public static void sendToServer(AbstractPacket packet){
 		FMLEmbeddedChannel channel = instance.channels.get(Side.CLIENT);
 		channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(OutboundTarget.TOSERVER);
-		channel.writeAndFlush(message);
-	}
+		channel.writeAndFlush(instance.writePacket(packet)).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
+    }
 }
+// @formatter:on

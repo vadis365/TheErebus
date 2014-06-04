@@ -1,6 +1,5 @@
 package erebus.network.client;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.particle.EffectRenderer;
@@ -30,12 +29,12 @@ public class C00EntityParticle extends AbstractClientPacket{
 	}
 	
 	@Override
-	public void write(ChannelHandlerContext ctx, ByteBuf buffer){
+	public void write(ByteBuf buffer){
 		buffer.writeInt(entityId).writeByte(particleType);
 	}
 
 	@Override
-	public void read(ChannelHandlerContext ctx, ByteBuf buffer){
+	public void read(ByteBuf buffer){
 		entityId = buffer.readInt();
 		particleType = buffer.readByte();
 	}

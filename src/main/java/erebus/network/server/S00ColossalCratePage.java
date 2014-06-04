@@ -1,6 +1,5 @@
 package erebus.network.server;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayerMP;
 import erebus.inventory.ContainerColossalCrate;
 import erebus.network.AbstractServerPacket;
@@ -16,12 +15,12 @@ public class S00ColossalCratePage extends AbstractServerPacket{
 	}
 	
 	@Override
-	public void write(ChannelHandlerContext ctx, ByteBuf buffer){
+	public void write(ByteBuf buffer){
 		buffer.writeByte(page);
 	}
 
 	@Override
-	public void read(ChannelHandlerContext ctx, ByteBuf buffer){
+	public void read(ByteBuf buffer){
 		page = buffer.readByte();
 	}
 
