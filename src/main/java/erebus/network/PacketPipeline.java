@@ -1,18 +1,24 @@
 package erebus.network;
+
+import erebus.lib.Reference;
 import gnu.trove.map.hash.TByteObjectHashMap;
 import gnu.trove.map.hash.TObjectByteHashMap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
+
 import java.lang.reflect.Field;
 import java.util.EnumMap;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
+
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLEventChannel;
@@ -29,7 +35,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 // @formatter:off
 public class PacketPipeline{
 	private static PacketPipeline instance;
-	private static final String channelName = "erebus";
 
 	public static void initializePipeline() {
 		if (instance != null)
@@ -41,14 +46,14 @@ public class PacketPipeline{
 	private FMLEventChannel eventDrivenChannel;
 	private EnumMap<Side,FMLEmbeddedChannel> channels;
 
-    private TByteObjectHashMap<Class<? extends AbstractPacket>> idToPacket = new TByteObjectHashMap<Class<? extends AbstractPacket>>();
-    private TObjectByteHashMap<Class<? extends AbstractPacket>> packetToId = new TObjectByteHashMap<Class<? extends AbstractPacket>>();
+    private final TByteObjectHashMap<Class<? extends AbstractPacket>> idToPacket = new TByteObjectHashMap<Class<? extends AbstractPacket>>();
+    private final TObjectByteHashMap<Class<? extends AbstractPacket>> packetToId = new TObjectByteHashMap<Class<? extends AbstractPacket>>();
 
 	private PacketPipeline(){}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void load(){
-		eventDrivenChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(channelName);
+		eventDrivenChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(Reference.CHANNEL);
 		eventDrivenChannel.register(this);
 		
 		try{
@@ -83,7 +88,7 @@ public class PacketPipeline{
 		ByteBuf buffer = Unpooled.buffer();
 		buffer.writeByte(packetToId.get(packet.getClass()));
 		packet.write(buffer);
-		return new FMLProxyPacket(buffer,channelName);
+		return new FMLProxyPacket(buffer,Reference.CHANNEL);
 	}
 	
 	private void readPacket(FMLProxyPacket fmlPacket, Side side){
