@@ -30,8 +30,8 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		if (block == ModBlocks.planksErebus && blockMeta == 9)
 			return false;
 
-		if (block == ModBlocks.plankSlabs[2] && blockMeta == 1)
-			return false;
+		//if (block == ModBlocks.plankSlabs[2] && blockMeta == 1)
+		//	return false;
 
 		if (block == EnumWood.Acacia.getStair())
 			return false;
