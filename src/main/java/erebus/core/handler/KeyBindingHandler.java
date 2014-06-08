@@ -79,6 +79,10 @@ public class KeyBindingHandler {
 
 	// TODO dave, you're on your own now... detect unpressing key in event above and run these depending on the unpressed key; DON'T just put 'else' in there,
 	// otherwise it will run all the time!
+	
+	// Messed about with this a bit and got frustrated - made it half work.
+	// Can't figure out a 'clean' way to do this...
+	// Now, I will give up and let some one else fix it! D.
 
 	@Override
 	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
