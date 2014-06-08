@@ -18,9 +18,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.network.PacketPipeline;
-import erebus.network.packet.PacketBeetleRamAttack;
-import erebus.network.packet.PacketGlider;
-import erebus.network.packet.PacketGliderPowered;
+import erebus.network.server.PacketBeetleRamAttack;
+import erebus.network.server.PacketGlider;
+import erebus.network.server.PacketGliderPowered;
 
 @SideOnly(Side.CLIENT)
 public class KeyBindingHandler {
@@ -48,7 +48,7 @@ public class KeyBindingHandler {
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
 				chestPlate.getTagCompound().setBoolean("isGliding", true);
-				//PacketPipeline.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketGlider(true)));
+				PacketPipeline.sendToServer(new PacketGlider(true));
 			}
 		}
 
@@ -63,7 +63,7 @@ public class KeyBindingHandler {
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
 				chestPlate.getTagCompound().setBoolean("isPowered", true);
-				//PacketPipeline.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketGliderPowered(true)));
+				PacketPipeline.sendToServer(new PacketGliderPowered(true));
 			}
 		}
 
@@ -72,9 +72,8 @@ public class KeyBindingHandler {
 			if (player == null)
 				return;
 
-			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle) {
-				//PacketPipeline.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketBeetleRamAttack(true)));
-			}
+			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
+				PacketPipeline.sendToServer(new PacketBeetleRamAttack(true));
 		}
 	}
 
@@ -94,7 +93,7 @@ public class KeyBindingHandler {
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
 				chestPlate.getTagCompound().setBoolean("isGliding", false);
-				PacketPipeline.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketGlider(false)));
+				PacketPipeline.sendToServer(new PacketGlider(false));
 			}
 
 			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
@@ -102,11 +101,11 @@ public class KeyBindingHandler {
 					chestPlate.stackTagCompound = new NBTTagCompound();
 
 				chestPlate.getTagCompound().setBoolean("isPowered", false);
-				PacketPipeline.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketGliderPowered(false)));
+				PacketPipeline.sendToServer(new PacketGliderPowered(false));
 			}
 
 			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
-				PacketPipeline.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketBeetleRamAttack(false)));
+				PacketPipeline.sendToServer(new PacketBeetleRamAttack(false));
 		}
 	}
 }

@@ -15,8 +15,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.network.PacketPipeline;
-import erebus.network.client.C00EntityParticle;
-import erebus.network.client.C00EntityParticle.ParticleType;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityGooBall extends EntityThrowable {
 
@@ -59,7 +59,7 @@ public class EntityGooBall extends EntityThrowable {
 					setDead();
 				}
 				if (worldObj.isRemote)
-					PacketPipeline.sendToAllAround(mop.entityHit, 64D, new C00EntityParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
+					PacketPipeline.sendToAllAround(mop.entityHit, 64D, new PacketParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
 			}
 		worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
 	}

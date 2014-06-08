@@ -1,13 +1,16 @@
 package erebus.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import erebus.ModBlocks;
+import erebus.network.AbstractPacket;
 import erebus.network.PacketPipeline;
-import erebus.network.packet.PacketJarOHoney;
+import erebus.network.client.PacketJarOHoney;
 
 public class TileEntityJarOHoney extends TileEntityGlowingJar {
 
@@ -35,22 +38,35 @@ public class TileEntityJarOHoney extends TileEntityGlowingJar {
 
 	private void sendUpdatesToClients() {
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		PacketPipeline.sendToAll(getDescriptionPacket());
+		PacketPipeline.sendToAll(getPacket());
 	}
 
 	public void setOwner(String name) {
 		owner = name;
 		if (!worldObj.isRemote)
-			PacketPipeline.sendToAll(getDescriptionPacket());
+			PacketPipeline.sendToAll(getPacket());
 	}
 
 	public String getOwnerName() {
 		return owner;
 	}
 
+	public AbstractPacket getPacket() {
+		return new PacketJarOHoney(xCoord, yCoord, zCoord, tank.getFluid(), owner);
+	}
+
 	@Override
 	public Packet getDescriptionPacket() {
-		return PacketTypeHandler.populatePacket(new PacketJarOHoney(xCoord, yCoord, zCoord, tank.getFluid(), owner));
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+		NBTTagCompound nbt = packet.func_148857_g();
+		if (packet.func_148853_f() == 0)
+			readFromNBT(nbt);
 	}
 
 	@Override

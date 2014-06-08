@@ -45,8 +45,8 @@ public class EntityBotFly extends EntityMob {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D); // atkDmg
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D); // followRange
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D);
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class EntityBotFly extends EntityMob {
 	protected void flyAbout() {
 
 		if (getIsFlyHanging()) {
-			if (!worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
+			if (!worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
 				setIsFlyHanging(false);
 			else {
 				if (rand.nextInt(200) == 0)
@@ -174,7 +174,7 @@ public class EntityBotFly extends EntityMob {
 			moveForward = 0.5F;
 			rotationYaw += var8;
 
-			if (rand.nextInt(100) == 0 && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
+			if (rand.nextInt(100) == 0 && worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
 				setIsFlyHanging(false);
 		}
 	}
@@ -274,11 +274,9 @@ public class EntityBotFly extends EntityMob {
 					entityBotFlyLarva.setPosition(entity.posX, entity.posY + 1, entity.posZ);
 					entityBotFlyLarva.setParasiteCount((byte) 1);
 					worldObj.spawnEntityInWorld(entityBotFlyLarva);
-				} else if (rand.nextInt(20) == 0 && entity.riddenByEntity != null && entity.riddenByEntity instanceof EntityBotFlyLarva) {
-					if (((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount() < 3) {
+				} else if (rand.nextInt(20) == 0 && entity.riddenByEntity != null && entity.riddenByEntity instanceof EntityBotFlyLarva)
+					if (((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount() < 3)
 						((EntityBotFlyLarva) entity.riddenByEntity).setParasiteCount((byte) (((EntityBotFlyLarva) entity.riddenByEntity).getParasiteCount() + 1));
-					}
-				}
 			return true;
 		}
 		return false;
