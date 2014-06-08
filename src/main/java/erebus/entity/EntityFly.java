@@ -14,7 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemErebusMaterial.DATA;
+import erebus.item.ErebusMaterial.DATA;
 
 public class EntityFly extends EntityAmbientCreature {
 

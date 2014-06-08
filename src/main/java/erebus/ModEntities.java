@@ -56,7 +56,7 @@ import erebus.entity.EntityWoodlouse;
 import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.effect.EntityErebusLightningBolt;
-import erebus.item.ItemSpawnEggs;
+import erebus.item.SpawnEggs;
 
 public class ModEntities {
 
@@ -126,6 +126,6 @@ public class ModEntities {
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor) {
 		registerEntity(id, entityClass, name);
-		ItemSpawnEggs.registerSpawnEgg(entityClass, name, id, eggBackgroundColor, eggForegroundColor);
+		SpawnEggs.registerSpawnEgg(entityClass, name, id, eggBackgroundColor, eggForegroundColor);
 	}
 }

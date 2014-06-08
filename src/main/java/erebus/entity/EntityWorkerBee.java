@@ -30,7 +30,7 @@ import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
 import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAIPolinate;
-import erebus.item.ItemErebusMaterial.DATA;
+import erebus.item.ErebusMaterial.DATA;
 
 public class EntityWorkerBee extends EntityTameable {
 	public ChunkCoordinates currentFlightTarget;

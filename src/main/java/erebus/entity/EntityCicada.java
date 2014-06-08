@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemErebusMaterial.DATA;
+import erebus.item.ErebusMaterial.DATA;
 import erebus.lib.EnumWood;
 
 public class EntityCicada extends EntityCreature {

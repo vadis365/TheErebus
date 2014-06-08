@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.EntityAntlionMiniBoss;
-import erebus.item.ItemErebusMaterial.DATA;
+import erebus.item.ErebusMaterial.DATA;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;

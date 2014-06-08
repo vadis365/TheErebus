@@ -17,7 +17,7 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.ItemErebusMaterial.DATA;
+import erebus.item.ErebusMaterial.DATA;
 
 public class EntityWoodlouse extends EntityCreature {
 

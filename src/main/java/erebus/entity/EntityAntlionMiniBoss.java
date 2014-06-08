@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemErebusMaterial.DATA;
+import erebus.item.ErebusMaterial.DATA;
 
 public class EntityAntlionMiniBoss extends EntityMob {
 

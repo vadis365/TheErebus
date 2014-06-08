@@ -14,10 +14,10 @@ import erebus.ModItems;
 import erebus.block.BlockErebusFlower.FLOWER_TYPE;
 import erebus.block.BlockErebusOre;
 import erebus.core.handler.ConfigHandler;
-import erebus.item.ItemErebusFood;
-import erebus.item.ItemErebusMaterial;
-import erebus.item.ItemErebusMaterial.DATA;
-import erebus.item.ItemErebusSpecial;
+import erebus.item.ErebusFood;
+import erebus.item.ErebusMaterial;
+import erebus.item.ErebusMaterial.DATA;
+import erebus.item.ErebusSpecial;
 import erebus.lib.EnumWood;
 
 public class RecipeHandler {
@@ -148,11 +148,11 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooPole, 4), new Object[] { " S ", " B ", " B ", 'S', Items.slime_ball, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.extenderThingy, 1), new Object[] { "BSB", "PDP", "BRB", 'S', Items.string, 'R', Items.redstone, 'D', Blocks.dispenser, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), 'P', new ItemStack(ModBlocks.planksErebus, 1, EnumWood.Bamboo.ordinal()) });
 
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataBambooSoup), new Object[] { new ItemStack(Items.bowl), new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bambooShoot.ordinal()) });
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataMelonade), new Object[] { new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.melon) });
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataMelonadeSparkly), new Object[] { new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.speckled_melon) });
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaeOnStick), new Object[] { new ItemStack(Items.stick), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ItemErebusFood.dataLarvaCooked) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusFood, 2, ItemErebusFood.dataHoneySandwich), new Object[] { " B ", "RRR", " B ", 'B', new ItemStack(Items.bread), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()) });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataBambooSoup), new Object[] { new ItemStack(Items.bowl), new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bambooShoot.ordinal()) });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataMelonade), new Object[] { new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.melon) });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataMelonadeSparkly), new Object[] { new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.speckled_melon) });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataLarvaeOnStick), new Object[] { new ItemStack(Items.stick), new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataLarvaCooked) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusFood, 2, ErebusFood.dataHoneySandwich), new Object[] { " B ", "RRR", " B ", 'B', new ItemStack(Items.bread), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.honeyTreat, 1), new Object[] { "SRS", "RBR", "SRS", 'S', new ItemStack(Items.sugar), 'B', new ItemStack(Items.bread), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()) });
 
 		// Miscellaneous
@@ -182,7 +182,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), 'B', Items.bucket);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', Items.iron_ingot, '$', new ItemStack(ModBlocks.blockAmber, 1, 1), '0', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.jadeBlock), "xxx", "xxx", "xxx", 'x', "gemJade"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.erebusMaterials, 9, ItemErebusMaterial.DATA.jade.ordinal()), "blockJade"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.erebusMaterials, 9, ErebusMaterial.DATA.jade.ordinal()), "blockJade"));
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.mucusCharge.ordinal()), new Object[] { "SSS", "SRS", "SSS", 'S', Items.slime_ball, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.repellent.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mucusBomb, 1), new Object[] { "MMM", "MTM", "MMM", 'M', new ItemStack(ModItems.erebusMaterials, 1, DATA.mucusCharge.ordinal()), 'T', Blocks.tnt });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.honeyCombBlock, 1), new Object[] { "NPN", "PCP", "NPN", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal()), 'C', Blocks.chest, 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()) });
@@ -214,26 +214,26 @@ public class RecipeHandler {
 			}
 
 		// Special Items - for future expansion
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL", 'S', Items.string, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataBeetleTamingAmulet), new Object[] { " N ", "NJN", " F ", 'N', Items.gold_nugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataRhinoRidingKit), new Object[] { " SX", "CCC", "LLL", 'S', Items.string, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataBeetleTamingAmulet), new Object[] { " N ", "NJN", " F ", 'N', Items.gold_nugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.beeTamingAmulet, 1), new Object[] { " n ", "nJn", " N ", 'n', Items.gold_nugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()) });
 
 		//Umbergolem parts recipe 1
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemCore), new Object[] { "AAA", "ARA", "AAA", 'A', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.redGem.ordinal()) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemHead), new Object[] { "SSS", "SHS", "SSS", 'S', Blocks.stone, 'H', new ItemStack(ModItems.reinCompoundGoggles, 1) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemLClaw), new Object[] { "  P", "  S", " SS", 'S', Blocks.stone, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemRClaw), new Object[] { "SSP", "S  ", "   ", 'S', Blocks.stone, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemLegs), new Object[] { "SSS", "S S", "R R", 'S', Blocks.stone, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemCore), new Object[] { "AAA", "ARA", "AAA", 'A', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.redGem.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemHead), new Object[] { "SSS", "SHS", "SSS", 'S', Blocks.stone, 'H', new ItemStack(ModItems.reinCompoundGoggles, 1) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLClaw), new Object[] { "  P", "  S", " SS", 'S', Blocks.stone, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemRClaw), new Object[] { "SSP", "S  ", "   ", 'S', Blocks.stone, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLegs), new Object[] { "SSS", "S S", "R R", 'S', Blocks.stone, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()) });
 
 		//Umbergolem parts recipe 2
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemHead), new Object[] { "SSS", "SHS", "SSS", 'S', ModBlocks.umberstone, 'H', new ItemStack(ModItems.reinCompoundGoggles, 1) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemLClaw), new Object[] { "  P", "  S", " SS", 'S', ModBlocks.umberstone, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemRClaw), new Object[] { "SSP", "S  ", "   ", 'S', ModBlocks.umberstone, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemLegs), new Object[] { "SSS", "S S", "R R", 'S', ModBlocks.umberstone, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemHead), new Object[] { "SSS", "SHS", "SSS", 'S', ModBlocks.umberstone, 'H', new ItemStack(ModItems.reinCompoundGoggles, 1) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLClaw), new Object[] { "  P", "  S", " SS", 'S', ModBlocks.umberstone, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemRClaw), new Object[] { "SSP", "S  ", "   ", 'S', ModBlocks.umberstone, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLegs), new Object[] { "SSS", "S S", "R R", 'S', ModBlocks.umberstone, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()) });
 
 		// Umbergolem Statue
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.umberGolemStatue, 1), new Object[] { " H ", "LCR", " X ", 'H', new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemHead), 'L', new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemLClaw), 'C', new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemCore), 'R', new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemRClaw), 'X',
-		new ItemStack(ModItems.erebusSpecialItem, 1, ItemErebusSpecial.dataGolemLegs) });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.umberGolemStatue, 1), new Object[] { " H ", "LCR", " X ", 'H', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemHead), 'L', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLClaw), 'C', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemCore), 'R', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemRClaw), 'X',
+		new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLegs) });
 	}
 
 	private static void registerSmelting() {
@@ -275,7 +275,7 @@ public class RecipeHandler {
 		OreDictionary.registerOre("orePetrifiedWood", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataPetrifiedWood));
 		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataEncrustedDiamond));
 		OreDictionary.registerOre("mobEgg", new ItemStack(ModItems.spawnEggs, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("gemJade", new ItemStack(ModItems.erebusMaterials, 1, ItemErebusMaterial.DATA.jade.ordinal()));
+		OreDictionary.registerOre("gemJade", new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.jade.ordinal()));
 		OreDictionary.registerOre("blockJade", new ItemStack(ModBlocks.jadeBlock));
 		OreDictionary.registerOre("blockSpawner", ModBlocks.spiderSpawner);
 		OreDictionary.registerOre("blockSpawner", ModBlocks.jumpingSpiderSpawner);

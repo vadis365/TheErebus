@@ -18,7 +18,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.handler.ConfigHandler;
 import erebus.entity.ai.EntityAIExplodeAttackOnCollide;
-import erebus.item.ItemErebusMaterial.DATA;
+import erebus.item.ErebusMaterial.DATA;
 
 public class EntityBombardierBeetle extends EntityMob {
 	private final float explosionRadius = 1;

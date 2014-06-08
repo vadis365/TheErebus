@@ -5,8 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ItemErebusMaterial.DATA;
-import erebus.item.ItemWhetstone;
+import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Whetstone;
 
 public class RecipeWhetstoneUpgrades implements IRecipe {
 	@Override
@@ -21,7 +21,7 @@ public class RecipeWhetstoneUpgrades implements IRecipe {
 				return false;
 
 			if (a == 4) {
-				if (!(is.getItem() == ModItems.whetstone && is.getItemDamage() < ItemWhetstone.maxTier))
+				if (!(is.getItem() == ModItems.whetstone && is.getItemDamage() < Whetstone.maxTier))
 					return false;
 			} else if (!(is.getItem() == ModItems.erebusMaterials && is.getItemDamage() == DATA.whetstonePowder.ordinal()))
 				return false;
