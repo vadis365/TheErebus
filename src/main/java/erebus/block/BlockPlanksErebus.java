@@ -40,7 +40,8 @@ public class BlockPlanksErebus extends Block {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
 		for (int i = 0; i < EnumWood.values().length; i++)
-			list.add(new ItemStack(item, 1, i));
+			if (EnumWood.values()[i].hasPlanks())
+				list.add(new ItemStack(item, 1, i));
 	}
 
 	@Override
@@ -49,6 +50,7 @@ public class BlockPlanksErebus extends Block {
 		icons = new IIcon[EnumWood.values().length];
 
 		for (int i = 0; i < icons.length; i++)
-			icons[i] = reg.registerIcon("erebus:planks_" + EnumWood.values()[i].name().toLowerCase());
+			if (EnumWood.values()[i].hasPlanks())
+				icons[i] = reg.registerIcon("erebus:planks_" + EnumWood.values()[i].name().toLowerCase());
 	}
 }

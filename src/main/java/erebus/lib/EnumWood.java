@@ -15,6 +15,7 @@ import erebus.block.BlockSaplingErebus;
 import erebus.block.BlockSlabPlanks;
 import erebus.block.BlockStairPlanks;
 import erebus.item.block.ItemBlockLocalised;
+import erebus.item.block.ItemBlockSlabSimple;
 
 public enum EnumWood {
 
@@ -28,20 +29,30 @@ public enum EnumWood {
 	Scorched,
 	Asper,
 	Cypress,
-	Sap,
+	Sap(true, false),
 	Weedwood,
-	White(false),
-	Bamboo(false);
+	White(false, true),
+	Bamboo(false, true);
 	//@formatter:on
 
 	private final boolean hasLog;
+	private final boolean hasPlanks;
 
-	EnumWood(boolean hasLog) {
+	EnumWood(boolean hasLog, boolean hasPlanks) {
 		this.hasLog = hasLog;
+		this.hasPlanks = hasPlanks;
 	}
 
 	EnumWood() {
-		this(true);
+		this(true, true);
+	}
+
+	public boolean hasPlanks() {
+		return hasPlanks;
+	}
+
+	public boolean hasLog() {
+		return hasLog;
 	}
 
 	public Block getStair() {
@@ -50,6 +61,10 @@ public enum EnumWood {
 
 	public Block getLog() {
 		return logs.get(this);
+	}
+
+	public Block getSlab() {
+		return slabs.get(this);
 	}
 
 	public Block getleaves() {
@@ -77,16 +92,17 @@ public enum EnumWood {
 				GameRegistry.registerBlock(sapling, ItemBlockLocalised.class, "sapling" + wood.name());
 				saplings.put(wood, sapling);
 			}
+			if (wood.hasPlanks) {
+				Block stair = new BlockStairPlanks(ModBlocks.planksErebus, wood);
+				GameRegistry.registerBlock(stair, ItemBlockLocalised.class, "plankStair" + wood.name());
+				Blocks.fire.setFireInfo(stair, 5, 5);
+				stairs.put(wood, stair);
 
-			Block stair = new BlockStairPlanks(ModBlocks.planksErebus, wood);
-			GameRegistry.registerBlock(stair, ItemBlockLocalised.class, "plankStair" + wood.name());
-			Blocks.fire.setFireInfo(stair, 5, 5);
-			stairs.put(wood, stair);
-
-			Block slab = new BlockSlabPlanks(wood);
-			GameRegistry.registerBlock(slab, ItemBlockLocalised.class, "slabPlanks" + wood.name());
-			Blocks.fire.setFireInfo(slab, 5, 5);
-			slabs.put(wood, slab);
+				Block slab = new BlockSlabPlanks(wood);
+				GameRegistry.registerBlock(slab, ItemBlockSlabSimple.class, "slabPlanks" + wood.name());
+				Blocks.fire.setFireInfo(slab, 5, 5);
+				slabs.put(wood, slab);
+			}
 		}
 	}
 
@@ -100,14 +116,15 @@ public enum EnumWood {
 
 				OreDictionary.registerOre("treeSapling", saplings.get(wood));
 			}
+			if (wood.hasPlanks) {
+				Block stair = stairs.get(wood);
+				OreDictionary.registerOre("stairWood", stair);
+				GameRegistry.addRecipe(new ItemStack(stair, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
 
-			Block stair = stairs.get(wood);
-			OreDictionary.registerOre("stairWood", stair);
-			GameRegistry.addRecipe(new ItemStack(stair, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
-
-			Block slab = slabs.get(wood);
-			OreDictionary.registerOre("slabWood", slab);
-			GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
+				Block slab = slabs.get(wood);
+				OreDictionary.registerOre("slabWood", slab);
+				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
+			}
 		}
 	}
 }
