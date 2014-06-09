@@ -5,13 +5,16 @@ import java.util.List;
 import net.minecraft.block.BlockWall;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.item.block.ItemBlockGeneric;
 
-public class BlockWallErebus extends BlockWall {
+public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
 
 	public BlockWallErebus() {
 		super(ModBlocks.umberstone);
@@ -53,5 +56,10 @@ public class BlockWallErebus extends BlockWall {
 	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list) {
 		for (int a = 0; a < 9; a++)
 			list.add(new ItemStack(id, 1, a));
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockGeneric.class;
 	}
 }

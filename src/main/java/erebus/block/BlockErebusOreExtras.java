@@ -7,12 +7,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.item.block.ItemBlockGeneric;
 
-public class BlockErebusOreExtras extends Block {
+public class BlockErebusOreExtras extends Block implements ISubBlocksBlock {
 
 	private final String[] types = { "oreAluminiumU", "oreCopperU", "oreLeadU", "oreSilverU", "oreTinU" };
 	public static final byte dataAluminium = 0, dataCopper = 1, dataLead = 2, dataSilver = 3, dataTin = 4;
@@ -52,5 +55,10 @@ public class BlockErebusOreExtras extends Block {
 		icons = new IIcon[types.length];
 		for (int i = 0; i < icons.length; i++)
 			icons[i] = reg.registerIcon("erebus:" + types[i]);
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockGeneric.class;
 	}
 }

@@ -9,14 +9,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
+import erebus.item.block.ItemBlockErebusStigma;
 
-public class BlockErebusStigma extends Block {
+public class BlockErebusStigma extends Block implements ISubBlocksBlock {
 
 	public enum STIGMA_BLOCK_TYPE {
 		BLACK_STIGMA, RED_STIGMA, BROWN_STIGMA, BLUE_STIGMA, PURPLE_STIGMA, CYAN_STIGMA, LIGHT_GRAY_STIGMA, GRAY_STIGMA, PINK_STIGMA, YELLOW_STIGMA, LIGHT_BLUE_STIGMA, MAGENTA_STIGMA, ORANGE_STIGMA, WHITE_STIGMA
@@ -69,5 +72,10 @@ public class BlockErebusStigma extends Block {
 		blockIcon = new IIcon[14];
 		for (int i = 0; i < blockIcon.length; i++)
 			blockIcon[i] = reg.registerIcon("erebus:erebusFlower0");
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockErebusStigma.class;
 	}
 }

@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -18,11 +19,13 @@ import net.minecraftforge.common.ForgeHooks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.ErebusMaterial.DATA;
+import erebus.item.block.ItemBlockDoubleHeightPlant;
 
-public class BlockDoubleHeightPlant extends Block {
+public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock {
 
 	public static final String[] plantName = new String[] { "Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "Shroom1", "Shroom2" };
 
@@ -134,33 +137,33 @@ public class BlockDoubleHeightPlant extends Block {
 			world.setBlockToAir(x, y + 1, z);
 		else
 			world.setBlockToAir(x, y - 1, z);
-		
+
 		if (world.rand.nextInt(4) == 0) {
-			
+
 			if (meta > 7)
 				meta -= 8;
-			
+
 			switch (meta) {
-			case 0:
-				item = new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal());
-				break;
-			case 1:
-				item = new ItemStack(ModItems.erebusMaterials, 1, DATA.weepingBluePetal.ordinal());
-				break;
-			case 2:
-				item = new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal());
-				break;
-			case 3:
-			case 4:
-			case 7:
-				item = ForgeHooks.getGrassSeed(world);
-				break;
-			case 5:
-				item = new ItemStack(ModBlocks.doubleHeightPlant, 1, meta);
-				break;
-			case 6:
-				item = new ItemStack(ModBlocks.doubleHeightPlant, 1, meta);
-				break;
+				case 0:
+					item = new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal());
+					break;
+				case 1:
+					item = new ItemStack(ModItems.erebusMaterials, 1, DATA.weepingBluePetal.ordinal());
+					break;
+				case 2:
+					item = new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal());
+					break;
+				case 3:
+				case 4:
+				case 7:
+					item = ForgeHooks.getGrassSeed(world);
+					break;
+				case 5:
+					item = new ItemStack(ModBlocks.doubleHeightPlant, 1, meta);
+					break;
+				case 6:
+					item = new ItemStack(ModBlocks.doubleHeightPlant, 1, meta);
+					break;
 			}
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
@@ -189,5 +192,10 @@ public class BlockDoubleHeightPlant extends Block {
 		if (world.getBlockMetadata(x, y, z) > 7)
 			return damageDropped(world.getBlockMetadata(x, y, z) - 8);
 		return damageDropped(world.getBlockMetadata(x, y, z));
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockDoubleHeightPlant.class;
 	}
 }

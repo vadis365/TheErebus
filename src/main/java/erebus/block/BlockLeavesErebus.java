@@ -9,14 +9,17 @@ import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.item.block.ItemBlockGeneric;
 
-public class BlockLeavesErebus extends BlockLeaves {
+public class BlockLeavesErebus extends BlockLeaves implements ISubBlocksBlock {
 
 	public static final String[] leafTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Asper", "Mossbark", "Pink", "Cypress" };
 	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataAsper = 3, dataMossbark = 4, dataPink = 5, dataCypress = 6;
@@ -46,80 +49,73 @@ public class BlockLeavesErebus extends BlockLeaves {
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
-        if (!world.isRemote) {
-            int meta = world.getBlockMetadata(x, y, z);
+		if (!world.isRemote) {
+			int meta = world.getBlockMetadata(x, y, z);
 
-            if ((meta & 8) != 0 && (meta & 4) == 0) {
-                byte b0 = 4;
-                int i1 = b0 + 1;
-                byte b1 = 32;
-                int j1 = b1 * b1;
-                int k1 = b1 / 2;
+			if ((meta & 8) != 0 && (meta & 4) == 0) {
+				byte b0 = 4;
+				int i1 = b0 + 1;
+				byte b1 = 32;
+				int j1 = b1 * b1;
+				int k1 = b1 / 2;
 
-                if (this.adjacentTreeBlocks == null)
-                    this.adjacentTreeBlocks = new int[b1 * b1 * b1];
+				if (adjacentTreeBlocks == null)
+					adjacentTreeBlocks = new int[b1 * b1 * b1];
 
-                int l1;
+				int l1;
 
-                if (world.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1)) {
-                    int i2;
-                    int j2;
+				if (world.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1)) {
+					int i2;
+					int j2;
 
-                    for (l1 = -b0; l1 <= b0; ++l1) {
-                        for (i2 = -b0; i2 <= b0; ++i2) {
-                            for (j2 = -b0; j2 <= b0; ++j2) {
-                                Block block = world.getBlock(x + l1, y + i2, z + j2);
+					for (l1 = -b0; l1 <= b0; ++l1)
+						for (i2 = -b0; i2 <= b0; ++i2)
+							for (j2 = -b0; j2 <= b0; ++j2) {
+								Block block = world.getBlock(x + l1, y + i2, z + j2);
 
-                                if (!block.canSustainLeaves(world, x + l1, y + i2, z + j2))
-                                    if (block.isLeaves(world, x + l1, y + i2, z + j2))
-                                        this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -2;
-                                    else
-                                        this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -1;
-                                else
-                                    this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = 0;
-                            }
-                        }
-                    }
+								if (!block.canSustainLeaves(world, x + l1, y + i2, z + j2))
+									if (block.isLeaves(world, x + l1, y + i2, z + j2))
+										adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -2;
+									else
+										adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -1;
+								else
+									adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = 0;
+							}
 
-                    for (l1 = 1; l1 <= 4; ++l1) {
-                        for (i2 = -b0; i2 <= b0; ++i2) {
-                            for (j2 = -b0; j2 <= b0; ++j2) {
-                                for (int k2 = -b0; k2 <= b0; ++k2) {
-                                	
-                                    if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1] == l1 - 1) {
-                                        if (this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
-                                            this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
+					for (l1 = 1; l1 <= 4; ++l1)
+						for (i2 = -b0; i2 <= b0; ++i2)
+							for (j2 = -b0; j2 <= b0; ++j2)
+								for (int k2 = -b0; k2 <= b0; ++k2)
+									if (adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1] == l1 - 1) {
+										if (adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
+											adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
 
-                                        if (this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
-                                            this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
+										if (adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
+											adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
 
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] == -2)
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] = l1;
+										if (adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] == -2)
+											adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] = l1;
 
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] == -2)
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] = l1;
+										if (adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] == -2)
+											adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] = l1;
 
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + (k2 + k1 - 1)] == -2)
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + (k2 + k1 - 1)] = l1;
+										if (adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 - 1] == -2)
+											adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 - 1] = l1;
 
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] == -2)
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] = l1;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                l1 = this.adjacentTreeBlocks[k1 * j1 + k1 * b1 + k1];
+										if (adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] == -2)
+											adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] = l1;
+									}
+				}
 
-                if (l1 >= 0)
-                    world.setBlockMetadataWithNotify(x, y, z, meta & -9, 4);
-                else
-                    this.removeLeaves(world, x, y, z);
-            }
-        }
-    }
+				l1 = adjacentTreeBlocks[k1 * j1 + k1 * b1 + k1];
+
+				if (l1 >= 0)
+					world.setBlockMetadataWithNotify(x, y, z, meta & -9, 4);
+				else
+					removeLeaves(world, x, y, z);
+			}
+		}
+	}
 
 	private void removeLeaves(World world, int x, int y, int z) {
 		dropBlockAsItem(world, x, y, z, getDamageValue(world, x, y, z), 0);
@@ -141,32 +137,33 @@ public class BlockLeavesErebus extends BlockLeaves {
 	public int quantityDropped(Random rand) {
 		return 1;
 	}
-/* broken
-	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune) {
-		return Item.getItemFromBlock(ModBlocks.erebusSapling);
-	}
 
-	@Override
-	public int damageDropped(int meta) {
-		switch (meta) {
-			case dataAcacia:
-				return BlockSaplingErebus.dataAcacia;
-			case dataEucalyptus:
-				return BlockSaplingErebus.dataEucalyptus;
-			case dataMahogany:
-				return BlockSaplingErebus.dataMahogany;
-			case dataMossbark:
-				return BlockSaplingErebus.dataMossbark;
-			case dataAsper:
-				return BlockSaplingErebus.dataAsper;
-			case dataCypress:
-				return BlockSaplingErebus.dataCypress;
-			default:
-				return -1;
+	/* broken
+		@Override
+		public Item getItemDropped(int meta, Random rand, int fortune) {
+			return Item.getItemFromBlock(ModBlocks.erebusSapling);
 		}
-	}
-*/
+
+		@Override
+		public int damageDropped(int meta) {
+			switch (meta) {
+				case dataAcacia:
+					return BlockSaplingErebus.dataAcacia;
+				case dataEucalyptus:
+					return BlockSaplingErebus.dataEucalyptus;
+				case dataMahogany:
+					return BlockSaplingErebus.dataMahogany;
+				case dataMossbark:
+					return BlockSaplingErebus.dataMossbark;
+				case dataAsper:
+					return BlockSaplingErebus.dataAsper;
+				case dataCypress:
+					return BlockSaplingErebus.dataCypress;
+				default:
+					return -1;
+			}
+		}
+	*/
 	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z) & ~8;
@@ -221,5 +218,10 @@ public class BlockLeavesErebus extends BlockLeaves {
 	@Override
 	public String[] func_150125_e() {
 		return leafTypes;
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockGeneric.class;
 	}
 }

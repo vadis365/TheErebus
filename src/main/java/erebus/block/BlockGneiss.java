@@ -9,13 +9,16 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.item.block.ItemBlockGeneric;
 
-public class BlockGneiss extends Block {
+public class BlockGneiss extends Block implements ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissSlab", "gneissSmooth", "gneissTiles" };
 	@SideOnly(Side.CLIENT)
@@ -74,5 +77,10 @@ public class BlockGneiss extends Block {
 	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockGeneric.class;
 	}
 }

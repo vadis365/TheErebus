@@ -9,15 +9,18 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
+import erebus.item.block.ItemBlockGeneric;
 
-public class BlockErebusOre extends Block {
+public class BlockErebusOre extends Block implements ISubBlocksBlock {
 
 	protected String[] iconPaths = new String[] { "oreCoalU", "oreIronU", "oreGoldU", "oreLapisU", "oreDiamondU", "oreEmeraldU", "oreJadeU", "petrifiedWoodOre", "oreVolcanicDiamond" };
 	public static final byte dataCoal = 0, dataIron = 1, dataGold = 2, dataLapis = 3, dataDiamond = 4, dataEmerald = 5, dataJade = 6, dataPetrifiedWood = 7, dataEncrustedDiamond = 8;
@@ -139,5 +142,10 @@ public class BlockErebusOre extends Block {
 
 			dropXpOnBlockBreak(world, x, y, z, j1);
 		}
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockGeneric.class;
 	}
 }

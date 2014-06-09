@@ -8,14 +8,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.item.block.ItemBlockSlabStoneErebus;
 
-public class BlockSlabStoneErebus extends BlockSlab {
+public class BlockSlabStoneErebus extends BlockSlab implements ISubBlocksBlock {
 
 	public static final String[] slabTypes = new String[] { "umberstone", "umbercobble", "umbercobbleMossy", "umbercobbleWebbed", "umbrick", "umberpaver", "umberpaverMossy", "umberpaverWebbed" };
 	public static final byte dataUmberstone = 0, dataUmbercobble = 1, dataUmbercobbleMossy = 2, dataUmbercobbleWebbed = 3, dataUmbrick = 4, dataUmberpaver = 5, dataUmberpaverMossy = 6, dataUmberpaverWebbed = 7;
@@ -81,5 +84,10 @@ public class BlockSlabStoneErebus extends BlockSlab {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockSlabStoneErebus.class;
 	}
 }

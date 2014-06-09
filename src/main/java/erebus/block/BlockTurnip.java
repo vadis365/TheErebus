@@ -49,7 +49,7 @@ public class BlockTurnip extends BlockCrops {
 	}
 
 	@Override
-	 protected Item func_149866_i() { //getSeedItem()
+	protected Item func_149866_i() { //getSeedItem()
 		return ModItems.turnip;
 	}
 

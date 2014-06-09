@@ -6,14 +6,17 @@ import java.util.Random;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IShearable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.item.block.ItemBlockColoredSingle;
 
-public class BlockFern extends BlockUndergroundFlower implements IShearable {
+public class BlockFern extends BlockUndergroundFlower implements IShearable, ISubBlocksBlock {
 
 	public BlockFern() {
 		float var3 = 0.4F;
@@ -81,5 +84,10 @@ public class BlockFern extends BlockUndergroundFlower implements IShearable {
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
 		return true;
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockColoredSingle.class;
 	}
 }

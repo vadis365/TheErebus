@@ -13,15 +13,18 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.core.helper.Utils;
+import erebus.item.block.ItemBlockErebusFlower;
 
-public class BlockErebusFlower extends Block {
+public class BlockErebusFlower extends Block implements ISubBlocksBlock {
 
 	public enum FLOWER_TYPE {
 		//@formatter:off
@@ -119,5 +122,10 @@ public class BlockErebusFlower extends Block {
 		icons = new IIcon[3];
 		for (int i = 0; i < icons.length; i++)
 			icons[i] = reg.registerIcon("erebus:erebusFlower" + i);
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockErebusFlower.class;
 	}
 }

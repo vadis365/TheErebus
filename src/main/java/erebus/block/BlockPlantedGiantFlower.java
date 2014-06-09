@@ -9,6 +9,7 @@ import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -20,11 +21,13 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.item.block.ItemBlockFlowerPlanted;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
 
-public class BlockPlantedGiantFlower extends BlockSapling {
+public class BlockPlantedGiantFlower extends BlockSapling implements ISubBlocksBlock {
 
 	public enum FLOWER_TYPE {
 		BLACK, RED, BROWN, BLUE, PURPLE, CYAN, LIGHT_GRAY, GRAY, PINK, YELLOW, LIGHT_BLUE, MAGENTA, ORANGE, WHITE, RAINBOW
@@ -80,12 +83,12 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 		return BlockRenderIDs.PLANTED_FLOWER.id();
 	}
 
-    @Override
+	@Override
 	@SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
-        return ModItems.flowerSeeds;
-    }
-    
+	public Item getItem(World world, int x, int y, int z) {
+		return ModItems.flowerSeeds;
+	}
+
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
@@ -121,5 +124,10 @@ public class BlockPlantedGiantFlower extends BlockSapling {
 				func_149878_d(event.world, event.x, event.y, event.z, event.world.rand);
 			event.setResult(Result.ALLOW);
 		}
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockFlowerPlanted.class;
 	}
 }

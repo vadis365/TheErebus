@@ -1,10 +1,13 @@
 package erebus;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -73,18 +76,6 @@ import erebus.block.BlockWaspNest;
 import erebus.block.BlockWaspSpawner;
 import erebus.block.BlockWitherWeb;
 import erebus.block.JarOHoney;
-import erebus.item.block.ItemBlockAmber;
-import erebus.item.block.ItemBlockColoredSingle;
-import erebus.item.block.ItemBlockDoubleHeightPlant;
-import erebus.item.block.ItemBlockErebusFlower;
-import erebus.item.block.ItemBlockErebusPlantSmall;
-import erebus.item.block.ItemBlockErebusStigma;
-import erebus.item.block.ItemBlockFlowerPlanted;
-import erebus.item.block.ItemBlockGeneric;
-import erebus.item.block.ItemBlockPlanks;
-import erebus.item.block.ItemBlockSlabPetrifiedWood;
-import erebus.item.block.ItemBlockSlabStoneErebus;
-import erebus.item.block.ItemBlockWitherWeb;
 import erebus.lib.EnumWood;
 
 public class ModBlocks {
@@ -160,7 +151,7 @@ public class ModBlocks {
 		doubleHeightPlant = new BlockDoubleHeightPlant().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("doubleHeightPlant");
 		thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
 		fern = (BlockFern) new BlockFern().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFern");
-		blockTurnip = new BlockTurnip().setBlockName("turnips");
+		blockTurnip = new BlockTurnip().setBlockName("turnipsCrop");
 		fiddlehead = new BlockFiddlehead().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFiddlehead");
 
 		blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("blockSilk").setBlockTextureName("erebus:blockSilk");
@@ -211,11 +202,11 @@ public class ModBlocks {
 		petrifiedWoodStairs = new BlockStairsBase(petrifiedWoodPlanks, 0).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodStairs");
 		stoneSlabs = new Block[2];
 		for (int i = 0; i < 2; i++)
-			stoneSlabs[i] = new BlockSlabStoneErebus(i == 1).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("slabStoneErebus");
+			stoneSlabs[i] = new BlockSlabStoneErebus(i == 1).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("slabStoneErebus" + i);
 		wallErebus = new BlockWallErebus().setBlockName("wallErebus");
 		petrifiedWoodSlab = new Block[2];
 		for (int i = 0; i < petrifiedWoodSlab.length; i++)
-			petrifiedWoodSlab[i] = new BlockSlabPetrifiedWood(i == 1).setBlockName("petrifiedWoodSlab");
+			petrifiedWoodSlab[i] = new BlockSlabPetrifiedWood(i == 1).setBlockName("petrifiedWoodSlab" + i);
 		amberBrickStairs = new BlockStairsBase(blockAmber, 2).setStepSound(Block.soundTypeStone).setBlockName("amberBrickStairs");
 		waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("waspNestStairs");
 		gneissStairs = new Block[BlockGneiss.iconPaths.length];
@@ -244,98 +235,28 @@ public class ModBlocks {
 	}
 
 	private static void registerBlocks() {
-		GameRegistry.registerBlock(portalErebus, "portal");
+		try {
+			for (Field f : ModBlocks.class.getDeclaredFields()) {
+				Object obj = f.get(null);
+				if (obj instanceof Block)
+					registerBlock((Block) obj);
+				else if (obj instanceof Block[])
+					for (Block block : (Block[]) obj)
+						registerBlock(block);
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-		GameRegistry.registerBlock(umberstone, ItemBlockGeneric.class, "umberstone");
-		GameRegistry.registerBlock(umberOreBlock, ItemBlockGeneric.class, "oreBlockU");
-		GameRegistry.registerBlock(oreFossil, "oreFossil");
-		GameRegistry.registerBlock(redGem, ItemBlockGeneric.class, "redGem");
-		GameRegistry.registerBlock(blockAmber, ItemBlockAmber.class, "blockAmber");
-		GameRegistry.registerBlock(quickSand, "quickSand");
-		GameRegistry.registerBlock(ghostSand, "ghostSand");
-		GameRegistry.registerBlock(erebusOreExtra, ItemBlockGeneric.class, "erebusOreExtras");
-		GameRegistry.registerBlock(umberstoneButton, "umberstoneButton");
+	private static void registerBlock(Block block) {
+		String name = block.getUnlocalizedName();
+		String[] strings = name.split("\\.");
 
-		GameRegistry.registerBlock(planksErebus, ItemBlockPlanks.class, "planksErebus");
-		GameRegistry.registerBlock(leavesErebus, ItemBlockGeneric.class, "leavesErebus");
-		GameRegistry.registerBlock(hollowLogAcacia, "hollowLogAcacia");
-		GameRegistry.registerBlock(erebusFlower, ItemBlockErebusFlower.class, "erebusFlower");
-		GameRegistry.registerBlock(erebusStigma, ItemBlockErebusStigma.class, "erebusStigma");
-
-		GameRegistry.registerBlock(thorns, "thorns");
-		GameRegistry.registerBlock(fern, ItemBlockColoredSingle.class, "fern");
-		GameRegistry.registerBlock(blockTurnip, "blockTurnip");
-		GameRegistry.registerBlock(fiddlehead, "fiddlehead");
-		GameRegistry.registerBlock(flowerPlanted, ItemBlockFlowerPlanted.class, "flowerPlanted");
-		GameRegistry.registerBlock(doubleHeightPlant, ItemBlockDoubleHeightPlant.class, "doubleHeightPlant");
-
-		GameRegistry.registerBlock(blockSilk, "blockSilk");
-		GameRegistry.registerBlock(mirBrick, "mirBrick");
-		GameRegistry.registerBlock(petrifiedWoodPlanks, "petrifiedWoodPlanks");
-		GameRegistry.registerBlock(petrifiedCraftingTable, "petrifiedCraftingTable");
-		GameRegistry.registerBlock(bambooCrate, "bambooCrate");
-		GameRegistry.registerBlock(umberFurnace, "umberFurnaceOff");
-		GameRegistry.registerBlock(umberFurnace_on, "umberFurnaceOn");
-		GameRegistry.registerBlock(umberPaver, ItemBlockGeneric.class, "umberpaver");
-		GameRegistry.registerBlock(bambooShoot, "bambooShoot");
-		GameRegistry.registerBlock(bambooCrop, "bambooCrop");
-		GameRegistry.registerBlock(bambooTorch, "bambooTorch");
-		GameRegistry.registerBlock(erebusAltar, "erebusAltar");
-		GameRegistry.registerBlock(erebusAltarLightning, "erebusAltarLightning");
-		GameRegistry.registerBlock(erebusAltarHealing, "erebusAltarHealing");
-		GameRegistry.registerBlock(erebusAltarXP, "erebusAltarXP");
-		GameRegistry.registerBlock(erebusAltarRepair, "erebusAltarRepair");
-		GameRegistry.registerBlock(glowingJar, "glowingJar");
-		GameRegistry.registerBlock(reinExo, "reinExo");
-		GameRegistry.registerBlock(bambooLadder, "bambooLadder");
-		GameRegistry.registerBlock(umberGolemStatue, "umberGolemStatue");
-		GameRegistry.registerBlock(waspNestBlock, "waspNestBlock");
-		GameRegistry.registerBlock(petrifiedWoodChest, "petrifiedWoodChest");
-		GameRegistry.registerBlock(blockBones, "blockBones");
-		GameRegistry.registerBlock(blockWitherWeb, ItemBlockWitherWeb.class, "witherWeb");
-		GameRegistry.registerBlock(bambooBridge, "bambooBridge");
-		GameRegistry.registerBlock(extenderThingy, "extenderThingy");
-		GameRegistry.registerBlock(bambooPole, "bambooPole");
-		GameRegistry.registerBlock(umberstonePillar, "umberstonePillar");
-		GameRegistry.registerBlock(velocityBlock, "velocityBlock");
-		GameRegistry.registerBlock(honeyCombBlock, "honeyCombBlock");
-		GameRegistry.registerBlock(doorAmber, "doorAmber");
-		GameRegistry.registerBlock(gneiss, ItemBlockGeneric.class, "gneiss");
-		GameRegistry.registerBlock(mud, "mud");
-		GameRegistry.registerBlock(mudBricks, "mudBricks");
-		GameRegistry.registerBlock(erebusMushroomCap0, "mushroomBulbCap");
-		GameRegistry.registerBlock(erebusMushroomCap1, "mushroom1Cap");
-		GameRegistry.registerBlock(erebusMushroomCap2, "mushroom2Cap");
-		GameRegistry.registerBlock(erebusMushroomCap3, "mushroom3Cap");
-		GameRegistry.registerBlock(erebusMushroomCap4, "mushroom4Cap");
-		GameRegistry.registerBlock(erebusPlantSmall, ItemBlockErebusPlantSmall.class, "erebusPlantSmall");
-		GameRegistry.registerBlock(honeyTreat, "honeyTreat");
-		GameRegistry.registerBlock(jarOHoney, "jarOHoney");
-		GameRegistry.registerBlock(jadeBlock, "jadeBlock");
-		GameRegistry.registerBlock(altar, "altar");
-		GameRegistry.registerBlock(glowGemBlock, "glowgemBlock");
-		GameRegistry.registerBlock(mucusBomb, "mucusBomb");
-
-		for (int i = 0; i < umbercobbleStairs.length; i++)
-			GameRegistry.registerBlock(umbercobbleStairs[i], "umbercobbleStairs" + i);
-		for (int i = 0; i < stoneSlabs.length; i++)
-			GameRegistry.registerBlock(stoneSlabs[i], ItemBlockSlabStoneErebus.class, "slabStone" + i);
-		GameRegistry.registerBlock(petrifiedWoodStairs, "petrifiedWoodStairs");
-		for (int i = 0; i < petrifiedWoodSlab.length; i++)
-			GameRegistry.registerBlock(petrifiedWoodSlab[i], ItemBlockSlabPetrifiedWood.class, "petrifiedWoodSlab" + i);
-		GameRegistry.registerBlock(amberBrickStairs, "amberBrickStairs");
-		GameRegistry.registerBlock(waspNestStairs, "waspNestStairs");
-		for (int i = 0; i < gneissStairs.length; i++)
-			GameRegistry.registerBlock(gneissStairs[i], "gneissStairs" + i);
-
-		GameRegistry.registerBlock(wallErebus, ItemBlockGeneric.class, "wallErebus");
-		GameRegistry.registerBlock(insectRepellent, "blockInsectRepellent");
-
-		GameRegistry.registerBlock(spiderSpawner, "spiderSpawner");
-		GameRegistry.registerBlock(jumpingSpiderSpawner, "jumpingSpiderSpawner");
-		GameRegistry.registerBlock(waspSpawner, "waspSpawner");
-
-		GameRegistry.registerBlock(erebusHoneyBlock, "erebusHoney");
+		if (block instanceof ISubBlocksBlock)
+			GameRegistry.registerBlock(block, ((ISubBlocksBlock) block).getItemBlockClass(), strings[strings.length - 1]);
+		else
+			GameRegistry.registerBlock(block, strings[strings.length - 1]);
 	}
 
 	private static void registerProperties() {
@@ -380,5 +301,10 @@ public class ModBlocks {
 	private static void registerFluids() {
 		erebusHoney = new Fluid("honey").setBlock(erebusHoneyBlock).setDensity(6000).setViscosity(6000).setUnlocalizedName("erebus.honey");
 		FluidRegistry.registerFluid(erebusHoney);
+	}
+
+	public static interface ISubBlocksBlock {
+
+		Class<? extends ItemBlock> getItemBlockClass();
 	}
 }

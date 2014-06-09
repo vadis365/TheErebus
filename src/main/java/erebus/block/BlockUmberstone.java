@@ -7,12 +7,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.item.block.ItemBlockGeneric;
 
-public class BlockUmberstone extends Block {
+public class BlockUmberstone extends Block implements ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "umberstone", "cobbleUmber", "cobbleUmberMossy", "cobbleUmberWebbed", "umberstoneBricks", "smoothUmbertile", "smoothUmbertiles" };
 	@SideOnly(Side.CLIENT)
@@ -49,5 +52,10 @@ public class BlockUmberstone extends Block {
 	@Override
 	public int damageDropped(int meta) {
 		return meta == 0 ? 1 : meta;
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockGeneric.class;
 	}
 }

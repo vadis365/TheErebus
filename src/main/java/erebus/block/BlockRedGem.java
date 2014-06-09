@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -16,10 +17,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.item.ErebusMaterial.DATA;
+import erebus.item.block.ItemBlockGeneric;
 
-public class BlockRedGem extends Block {
+public class BlockRedGem extends Block implements ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "redgem", "redlampOn", "redlampOff" };
 	@SideOnly(Side.CLIENT)
@@ -127,5 +130,10 @@ public class BlockRedGem extends Block {
 		if (meta == 1 || meta == 2)
 			return true;
 		return false;
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockGeneric.class;
 	}
 }

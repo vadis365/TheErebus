@@ -7,14 +7,17 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.item.block.ItemBlockSlabPetrifiedWood;
 
-public class BlockSlabPetrifiedWood extends BlockSlab {
+public class BlockSlabPetrifiedWood extends BlockSlab implements ISubBlocksBlock {
 
 	public BlockSlabPetrifiedWood(boolean isDouble) {
 		super(isDouble, Material.rock);
@@ -54,5 +57,10 @@ public class BlockSlabPetrifiedWood extends BlockSlab {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockSlabPetrifiedWood.class;
 	}
 }
