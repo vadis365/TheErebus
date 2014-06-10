@@ -64,7 +64,6 @@ public class RecipeHandler {
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.umbercobbleStairs[i], 4), new Object[] { "#  ", "## ", "###", '#', new ItemStack(ModBlocks.umberstone, 1, i) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.amberBrickStairs, 4), new Object[] { "#  ", "## ", "###", '#', new ItemStack(ModBlocks.blockAmber, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodStairs, 4), new Object[] { "#  ", "## ", "###", '#', new ItemStack(ModBlocks.petrifiedWoodPlanks, 1, 0) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodSlab), new Object[] { "xxx", 'x', ModBlocks.petrifiedWoodPlanks });
 
 		for (Block slab : ModBlocks.stoneSlabs)
 			addSlabRecipe((BlockSlabStone) slab);
