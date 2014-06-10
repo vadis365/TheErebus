@@ -58,8 +58,7 @@ import erebus.block.BlockPortalErebus;
 import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
 import erebus.block.BlockSimple;
-import erebus.block.BlockSlabPetrifiedWood;
-import erebus.block.BlockSlabStoneErebus;
+import erebus.block.BlockSlabStone;
 import erebus.block.BlockSmallPlants;
 import erebus.block.BlockSpiderSpawner;
 import erebus.block.BlockStairsBase;
@@ -107,7 +106,7 @@ public class ModBlocks {
 	public static Block jadeBlock, altar, glowGemBlock, mucusBomb;
 
 	// STAIRS, SLABS, WALLS
-	public static Block[] umbercobbleStairs, stoneSlabs, petrifiedWoodSlab, gneissStairs;
+	public static Block[] umbercobbleStairs, stoneSlabs, gneissStairs;
 	public static Block wallErebus, petrifiedWoodStairs, amberBrickStairs, waspNestStairs;
 
 	// DUNGEONS
@@ -200,13 +199,14 @@ public class ModBlocks {
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("umbercobbleStairs" + i);
 		petrifiedWoodStairs = new BlockStairsBase(petrifiedWoodPlanks, 0).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodStairs");
-		stoneSlabs = new Block[2];
-		for (int i = 0; i < 2; i++)
-			stoneSlabs[i] = new BlockSlabStoneErebus(i == 1).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("slabStoneErebus" + i);
+		stoneSlabs = new Block[8];
+		for (int i = 0; i <= 4; i++)
+			stoneSlabs[i] = new BlockSlabStone(ModBlocks.umberstone, i);
+		for (int i = 0; i <= 2; i++)
+			stoneSlabs[5 + i] = new BlockSlabStone(ModBlocks.umberPaver, i);
+		stoneSlabs[7] = new BlockSlabStone(ModBlocks.petrifiedWoodPlanks);
+
 		wallErebus = new BlockWallErebus().setBlockName("wallErebus");
-		petrifiedWoodSlab = new Block[2];
-		for (int i = 0; i < petrifiedWoodSlab.length; i++)
-			petrifiedWoodSlab[i] = new BlockSlabPetrifiedWood(i == 1).setBlockName("petrifiedWoodSlab" + i);
 		amberBrickStairs = new BlockStairsBase(blockAmber, 2).setStepSound(Block.soundTypeStone).setBlockName("amberBrickStairs");
 		waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("waspNestStairs");
 		gneissStairs = new Block[BlockGneiss.iconPaths.length];
@@ -230,8 +230,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
-		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, stoneSlabs[0]);
-		ModTabs.blocks.setTab(petrifiedWoodSlab[0], wallErebus);
+		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wallErebus);
 	}
 
 	private static void registerBlocks() {
@@ -268,8 +267,6 @@ public class ModBlocks {
 		waspSpawner.setHarvestLevel("pickaxe", 0, 0);
 		umberstone.setHarvestLevel("pickaxe", 0);
 		umberPaver.setHarvestLevel("pickaxe", 0);
-		for (int i = 0; i < stoneSlabs.length; i++)
-			stoneSlabs[i].setHarvestLevel("pickaxe", 0);
 		wallErebus.setHarvestLevel("pickaxe", 0);
 		umberOreBlock.setHarvestLevel("pickaxe", 0, 0);
 		umberOreBlock.setHarvestLevel("pickaxe", 1, 1);

@@ -1,5 +1,6 @@
 package erebus.recipes;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -13,6 +14,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.block.BlockErebusFlower.FLOWER_TYPE;
 import erebus.block.BlockErebusOre;
+import erebus.block.BlockSlabStone;
 import erebus.core.handler.ConfigHandler;
 import erebus.item.ErebusFood;
 import erebus.item.ErebusMaterial;
@@ -31,6 +33,10 @@ public class RecipeHandler {
 		registerOreDictionary();
 		registerRecipes();
 		registerSmelting();
+	}
+
+	private static void addSlabRecipe(BlockSlabStone block) {
+		GameRegistry.addRecipe(new ItemStack(block, 6), new Object[] { "xxx", 'x', new ItemStack(block.base, 1, block.meta) });
 	}
 
 	private static void registerRecipes() {
@@ -58,16 +64,10 @@ public class RecipeHandler {
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.umbercobbleStairs[i], 4), new Object[] { "#  ", "## ", "###", '#', new ItemStack(ModBlocks.umberstone, 1, i) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.amberBrickStairs, 4), new Object[] { "#  ", "## ", "###", '#', new ItemStack(ModBlocks.blockAmber, 1, 2) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodStairs, 4), new Object[] { "#  ", "## ", "###", '#', new ItemStack(ModBlocks.petrifiedWoodPlanks, 1, 0) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodSlab[0]), new Object[] { "xxx", 'x', ModBlocks.petrifiedWoodPlanks });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodSlab), new Object[] { "xxx", 'x', ModBlocks.petrifiedWoodPlanks });
 
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 0), new Object[] { "###", '#', new ItemStack(ModBlocks.umberstone, 1, 0) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 1), new Object[] { "###", '#', new ItemStack(ModBlocks.umberstone, 1, 1) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 2), new Object[] { "###", '#', new ItemStack(ModBlocks.umberstone, 1, 2) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 3), new Object[] { "###", '#', new ItemStack(ModBlocks.umberstone, 1, 3) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 4), new Object[] { "###", '#', new ItemStack(ModBlocks.umberstone, 1, 4) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 5), new Object[] { "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 0) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 6), new Object[] { "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 1) });
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.stoneSlabs[0], 6, 7), new Object[] { "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 2) });
+		for (Block slab : ModBlocks.stoneSlabs)
+			addSlabRecipe((BlockSlabStone) slab);
 
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wallErebus, 6, 0), new Object[] { "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wallErebus, 6, 1), new Object[] { "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 1) });
