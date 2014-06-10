@@ -21,6 +21,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.lib.Reference;
 
 public class SpawnEggs extends ItemMonsterPlacer {
 	private static final Map<Short, EggData> eggTypes = new LinkedHashMap<Short, EggData>();
@@ -43,7 +44,7 @@ public class SpawnEggs extends ItemMonsterPlacer {
 
 		EggData egg = getEggData(is);
 		if (egg != null)
-			s += " " + StatCollector.translateToLocal("entity.Erebus." + egg.entityName + ".name");
+			s += " " + StatCollector.translateToLocal("entity." + Reference.MOD_ID + "." + egg.entityName + ".name");
 
 		return s;
 	}
