@@ -24,7 +24,6 @@ public enum EnumWood {
 	Eucalyptus,
 	Mahogany,
 	Mossbark,
-	Pink,
 	Scorched,
 	Asper,
 	Cypress,
