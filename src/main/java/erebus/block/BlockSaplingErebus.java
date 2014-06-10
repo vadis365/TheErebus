@@ -111,8 +111,6 @@ public class BlockSaplingErebus extends BlockSapling {
 			case Asper:
 				worldGen = new WorldGenAsperTree();
 				break;
-			case Baobab:
-				break;
 			case Cypress:
 				break;
 			case Mahogany:

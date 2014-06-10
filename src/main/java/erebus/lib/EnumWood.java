@@ -23,7 +23,6 @@ public enum EnumWood {
 	Acacia,
 	Eucalyptus,
 	Mahogany,
-	Baobab,
 	Mossbark,
 	Pink,
 	Scorched,
