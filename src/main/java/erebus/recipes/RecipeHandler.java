@@ -155,6 +155,10 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.honeyTreat, 1), new Object[] { "SRS", "RBR", "SRS", 'S', new ItemStack(Items.sugar), 'B', new ItemStack(Items.bread), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()) });
 
 		// Miscellaneous
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mirBrick), "xy", "yx", 'x', Items.clay_ball, 'y', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.mudBrick.ordinal()));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mirBrick), "xy", "yx", 'y', Items.clay_ball, 'x', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.mudBrick.ordinal()));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mirBrick, 4), "xy", "yx", 'x', Blocks.clay, 'y', ModBlocks.mudBricks);
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mirBrick, 4), "xy", "yx", 'y', Blocks.clay, 'x', ModBlocks.mudBricks);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockSilk, 1), new Object[] { "sss", "sss", "sss", 's', Items.string });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockAmber, 4, 2), new Object[] { "ss", "ss", 's', new ItemStack(ModBlocks.blockAmber, 1, 0) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.portalActivator, 1), new Object[] { "  O", " / ", "/  ", 'O', new ItemStack(Items.spider_eye), '/', new ItemStack(Items.stick) });
