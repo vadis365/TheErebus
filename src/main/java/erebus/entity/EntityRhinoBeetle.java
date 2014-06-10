@@ -27,8 +27,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.core.handler.KeyBindingHandler;
 import erebus.item.ErebusMaterial.DATA;
 import erebus.item.ErebusSpecial;
+import erebus.network.PacketPipeline;
+import erebus.network.server.PacketBeetleRamAttack;
 
 public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
@@ -76,15 +79,15 @@ public class EntityRhinoBeetle extends EntityTameable {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
-	/*
-	 * Disabled until sounds are found
-	 * 
-	 * @Override protected String getLivingSound() { return
-	 * "erebus:rhinobeetlesound"; }
-	 * 
-	 * @Override protected String getHurtSound() { return
-	 * "erebus:rhinobeetlehurt"; }
-	 */
+	@Override
+	protected String getLivingSound() {
+		return "erebus:rhinobeetlesound";
+	}
+
+	@Override
+	protected String getHurtSound() {
+		return "erebus:rhinobeetlehurt";
+	}
 
 	@Override
 	protected String getDeathSound() {
@@ -192,10 +195,10 @@ public class EntityRhinoBeetle extends EntityTameable {
 		} else
 			return super.interact(player);
 	}
-	
-    public boolean shagging() {
-        return shagCount > 0;
-    }
+
+	public boolean shagging() {
+		return shagCount > 0;
+	}
 
 	public void setRamAttack(boolean state) {
 		ramming = state;
@@ -247,8 +250,12 @@ public class EntityRhinoBeetle extends EntityTameable {
 			if (getTameState() == 0 || riddenByEntity == null)
 				if (worldObj.getWorldTime() % 10 == 0)
 					setRammingCharge((byte) 0);
-		if(shagCount > 0)
+		if (shagCount > 0)
 			shagCount--;
+
+		if (worldObj.isRemote)
+			if (ramming && !KeyBindingHandler.beetleRam.getIsKeyPressed())
+				PacketPipeline.sendToServer(new PacketBeetleRamAttack(false));
 	}
 
 	@Override

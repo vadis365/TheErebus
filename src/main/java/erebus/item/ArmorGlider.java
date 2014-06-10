@@ -22,12 +22,16 @@ import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.client.model.armor.ModelArmorGlider;
 import erebus.client.model.armor.ModelArmorPowered;
+import erebus.core.handler.KeyBindingHandler;
 import erebus.item.ErebusMaterial.DATA;
+import erebus.network.PacketPipeline;
+import erebus.network.server.PacketGlider;
+import erebus.network.server.PacketGliderPowered;
 
 public class ArmorGlider extends ItemArmor {
 
-	public ArmorGlider(int armorType) {
-		super(ModMaterials.armorREINEXOSPECIAL, 2, armorType);
+	public ArmorGlider() {
+		super(ModMaterials.armorREINEXOSPECIAL, 2, 1);
 	}
 
 	@Override
@@ -77,16 +81,35 @@ public class ArmorGlider extends ItemArmor {
 	}
 
 	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack is) {
-		//if (world.isRemote)
-		//	return;
+	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
+		if (world.isRemote) {
+			if (!stack.hasTagCompound())
+				stack.stackTagCompound = new NBTTagCompound();
+
+			if (stack.getTagCompound().getBoolean("isGliding") && !KeyBindingHandler.glide.getIsKeyPressed()) {
+				stack.getTagCompound().setBoolean("isGliding", false);
+				PacketPipeline.sendToServer(new PacketGlider(false));
+			}
+
+			if (this == ModItems.armorGliderPowered)
+				if (stack.getTagCompound().getBoolean("isPowered") && !KeyBindingHandler.poweredGlide.getIsKeyPressed()) {
+					stack.getTagCompound().setBoolean("isPowered", false);
+					PacketPipeline.sendToServer(new PacketGliderPowered(false));
+				}
+		}
+	}
+
+	@Override
+	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+		onUpdate(stack, world, player, 0, false);
+
 		player.fallDistance = 0.0F;
 
-		if (!is.hasTagCompound()) {
-			is.stackTagCompound = new NBTTagCompound();
+		if (!stack.hasTagCompound()) {
+			stack.stackTagCompound = new NBTTagCompound();
 			return;
 		}
-		NBTTagCompound nbt = is.getTagCompound();
+		NBTTagCompound nbt = stack.getTagCompound();
 
 		if (nbt.getBoolean("isGliding"))
 			if (!player.onGround) {

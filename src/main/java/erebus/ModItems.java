@@ -15,7 +15,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.core.handler.ConfigHandler;
-import erebus.item.EncrustedDiamond;
 import erebus.item.ArmorGlider;
 import erebus.item.Bambucket;
 import erebus.item.BeeTamingAmulet;
@@ -25,6 +24,7 @@ import erebus.item.BucketOfHoney;
 import erebus.item.CavemanClub;
 import erebus.item.CompoundGoggles;
 import erebus.item.CrownOfLuminosity;
+import erebus.item.EncrustedDiamond;
 import erebus.item.ErebusFood;
 import erebus.item.ErebusMaterial;
 import erebus.item.ErebusMaterial.DATA;
@@ -34,6 +34,8 @@ import erebus.item.FlowerSeeds;
 import erebus.item.HomingBeecon;
 import erebus.item.HornOfSummoning;
 import erebus.item.JadeArmour;
+import erebus.item.JadeAxe;
+import erebus.item.JadePickaxe;
 import erebus.item.JumpBoots;
 import erebus.item.MaxSpeedBow;
 import erebus.item.MetalIngots;
@@ -52,8 +54,6 @@ import erebus.item.WaspSword;
 import erebus.item.WebSlinger;
 import erebus.item.Whetstone;
 import erebus.item.WoodlouseBall;
-import erebus.item.JadeAxe;
-import erebus.item.JadePickaxe;
 import erebus.item.block.ItemBlockDoorAmber;
 
 public class ModItems {
@@ -142,8 +142,8 @@ public class ModItems {
 		compoundGoggles = new CompoundGoggles(ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("compoundGoggles").setTextureName("erebus:compoundGoggles");
 		sprintLeggings = new SprintLeggings(ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("sprintLeggings").setTextureName("erebus:sprintLeggings");
 		jumpBoots = new JumpBoots(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("jumpBoots").setTextureName("erebus:jumpBoots");
-		armorGlider = new ArmorGlider(1).setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
-		armorGliderPowered = new ArmorGlider(1).setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
+		armorGlider = new ArmorGlider().setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
+		armorGliderPowered = new ArmorGlider().setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 		lightCrown = new CrownOfLuminosity(0).setUnlocalizedName("lightCrown").setTextureName("erebus:lightCrown");
 
 		spawnEggs = new SpawnEggs().setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");

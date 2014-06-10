@@ -1,7 +1,5 @@
 package erebus.core.handler;
 
-import java.util.EnumSet;
-
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -37,7 +35,7 @@ public class KeyBindingHandler {
 
 	@SubscribeEvent
 	public void onKey(KeyInputEvent e) {
-		if (glide.getIsKeyPressed()) { // TODO not sure if getIsKeyPressed or isPressed, test!
+		if (glide.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
 				return;
@@ -52,7 +50,7 @@ public class KeyBindingHandler {
 			}
 		}
 
-		if (poweredGlide.getIsKeyPressed()) {
+		if (poweredGlide.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
 				return;
@@ -67,49 +65,13 @@ public class KeyBindingHandler {
 			}
 		}
 
-		if (beetleRam.getIsKeyPressed()) {
+		if (beetleRam.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
 				return;
 
 			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
 				PacketPipeline.sendToServer(new PacketBeetleRamAttack(true));
-		}
-	}
-
-	// TODO dave, you're on your own now... detect unpressing key in event above and run these depending on the unpressed key; DON'T just put 'else' in there,
-	// otherwise it will run all the time!
-	
-	// Messed about with this a bit and got frustrated - made it half work.
-	// Can't figure out a 'clean' way to do this...
-	// Now, I will give up and let some one else fix it! D.
-
-	@Override
-	public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
-		if (tickEnd) {
-			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
-			if (player == null)
-				return;
-
-			ItemStack chestPlate = player.inventory.armorInventory[2];
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
-				if (!chestPlate.hasTagCompound())
-					chestPlate.stackTagCompound = new NBTTagCompound();
-
-				chestPlate.getTagCompound().setBoolean("isGliding", false);
-				PacketPipeline.sendToServer(new PacketGlider(false));
-			}
-
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
-				if (!chestPlate.hasTagCompound())
-					chestPlate.stackTagCompound = new NBTTagCompound();
-
-				chestPlate.getTagCompound().setBoolean("isPowered", false);
-				PacketPipeline.sendToServer(new PacketGliderPowered(false));
-			}
-
-			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
-				PacketPipeline.sendToServer(new PacketBeetleRamAttack(false));
 		}
 	}
 }
