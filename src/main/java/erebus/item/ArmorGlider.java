@@ -162,16 +162,17 @@ public class ArmorGlider extends ItemArmor {
 			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround || chestPlate.getTagCompound().getBoolean("isPowered") && !player.onGround) {
 				// Method is fixed but rotations need working out!
 				int yaw = (int) player.rotationYaw;
-				if (yaw < 0)
-					yaw += 360;
 
 				yaw += 22;
 				yaw %= 360;
-
+				
+				if (yaw < 0)
+					yaw += 360;
+				
 				int facing = yaw / 45; //  360degrees divided by 45 == 8 zones
-
 				float x = 0;
 				float y = 0;
+				
 				switch (facing) {
 					case 0:
 						x = 1;
