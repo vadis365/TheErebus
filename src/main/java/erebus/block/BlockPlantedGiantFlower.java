@@ -66,7 +66,7 @@ public class BlockPlantedGiantFlower extends BlockSapling implements ISubBlocksB
 		int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = new WorldGenGiantFlowers();
 		if (meta >= 0 && meta <= 13)
-			((WorldGenGiantFlowers) worldGen).setFlowerColor(meta + 2);
+			((WorldGenGiantFlowers) worldGen).setFlowerColor(meta);
 		world.setBlockToAir(x, y, z);
 		if (!worldGen.generate(world, rand, x, y, z))
 			world.setBlock(x, y, z, ModBlocks.flowerPlanted, meta, 3);

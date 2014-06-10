@@ -16,8 +16,8 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 		PetalShape petalShape = PetalShape.values()[rand.nextInt(PetalShape.values().length)];
 		int stemHeight = rand.nextInt(6)+2;
 		
-		if (primaryPetalColor == -1)primaryPetalColor = rand.nextInt(13)+2;
-		if (secondaryPetalColor == -1)secondaryPetalColor = petalShape.canHaveSecondaryColor && rand.nextInt(8) == 0 ? rand.nextInt(13)+2 : primaryPetalColor;
+		if (primaryPetalColor == -1)primaryPetalColor = rand.nextInt(13);
+		if (secondaryPetalColor == -1)secondaryPetalColor = petalShape.canHaveSecondaryColor && rand.nextInt(8) == 0 ? rand.nextInt(13) : primaryPetalColor;
 		
 		// CHECK AIR
 		
@@ -48,23 +48,23 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 		switch(stemShape){
 			case SMALL_X:
 				for(int a = 0; a < 2; a++){
-					for(int b = 0; b < 2; b++)world.setBlock(x-1+a*2,y,z-1+b*2,ModBlocks.erebusFlower,1,2);
+					for(int b = 0; b < 2; b++)world.setBlock(x-1+a*2,y,z-1+b*2,ModBlocks.erebusFlower,15,2);
 				}
 				break;
 				
 			case SMALL_PLUS:
-				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,1,2);
+				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,15,2);
 				break;
 				
 			case LARGE_PLUS:
 				for(int a = 0; a < 4; a++){
-					world.setBlock(x+Direction.offsetX[a]*2,y,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower,1,2);
-					world.setBlock(x+Direction.offsetX[a],y+1,z+Direction.offsetZ[a],ModBlocks.erebusFlower,1,2);
+					world.setBlock(x+Direction.offsetX[a]*2,y,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower,15,2);
+					world.setBlock(x+Direction.offsetX[a],y+1,z+Direction.offsetZ[a],ModBlocks.erebusFlower,15,2);
 				}
 				break;
 		}
 		
-		for(int yy = y; yy <= y+stemHeight; yy++)world.setBlock(x,yy,z,ModBlocks.erebusFlower,1,2);
+		for(int yy = y; yy <= y+stemHeight; yy++)world.setBlock(x,yy,z,ModBlocks.erebusFlower,15,2);
 		
 		// GENERATE PETALS
 		
@@ -75,12 +75,12 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				
 				// LAYER 0 & 1
 				
-				world.setBlock(x,y,z,ModBlocks.erebusFlower,1,2);
+				world.setBlock(x,y,z,ModBlocks.erebusFlower,15,2);
 				
 				for(int a = 0; a < 4; a++){
-					world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,1,2);
-					world.setBlock(x+Direction.offsetX[a]*2,y+1,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower,1,2);
-					if (rand.nextInt(3) == 0)world.setBlock(x+Direction.offsetX[a]*3,y+2,z+Direction.offsetZ[a]*3,ModBlocks.erebusFlower,1,2);
+					world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,15,2);
+					world.setBlock(x+Direction.offsetX[a]*2,y+1,z+Direction.offsetZ[a]*2,ModBlocks.erebusFlower,15,2);
+					if (rand.nextInt(3) == 0)world.setBlock(x+Direction.offsetX[a]*3,y+2,z+Direction.offsetZ[a]*3,ModBlocks.erebusFlower,15,2);
 				}
 				
 				for(int xx = x-1; xx <= x+1; xx++){
@@ -102,9 +102,9 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				// LAYER 3
 				
 				if(rand.nextInt(10) == 0)
-					world.setBlock(x,y+3,z,ModBlocks.erebusFlower,0,2);
+					world.setBlock(x,y+3,z,ModBlocks.erebusFlower,14,2);
 				else
-					world.setBlock(x,y+3,z,ModBlocks.erebusStigma,primaryPetalColor-2,2);
+					world.setBlock(x,y+3,z,ModBlocks.erebusStigma,primaryPetalColor,2);
 					
 				for(int a = 0; a < 3; a++){
 					for(int b = 0; b < 2; b++){
@@ -140,12 +140,12 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				break;
 				
 			case DISPERSE_HEMISPHERE:
-				world.setBlock(x,y,z,ModBlocks.erebusFlower,1,2);
+				world.setBlock(x,y,z,ModBlocks.erebusFlower,15,2);
 				
 				if(rand.nextInt(10) == 0)
-					world.setBlock(x,y+1,z,ModBlocks.erebusFlower,0,2);	
+					world.setBlock(x,y+1,z,ModBlocks.erebusFlower,14,2);	
 				else
-					world.setBlock(x,y+1,z,ModBlocks.erebusStigma,primaryPetalColor-2,2);
+					world.setBlock(x,y+1,z,ModBlocks.erebusStigma,primaryPetalColor,2);
 				
 				for(int a = 0; a < 4; a++){
 					for(int b = 1; b <= 3; b++)world.setBlock(x+Direction.offsetX[a]*b,y+b-1,z+Direction.offsetZ[a]*b,ModBlocks.erebusFlower,secondaryPetalColor,2);
@@ -161,15 +161,15 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 				break;
 				
 			case UMBRELLA:
-				world.setBlock(x,y,z,ModBlocks.erebusFlower,1,2);
-				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,1,2);
+				world.setBlock(x,y,z,ModBlocks.erebusFlower,15,2);
+				for(int a = 0; a < 4; a++)world.setBlock(x+Direction.offsetX[a],y,z+Direction.offsetZ[a],ModBlocks.erebusFlower,15,2);
 
 				world.setBlock(x,y+1,z,ModBlocks.erebusFlower,primaryPetalColor,2);
 				
 				if(rand.nextInt(10) == 0)
-					world.setBlock(x,y+2,z,ModBlocks.erebusFlower,0,2);	
+					world.setBlock(x,y+2,z,ModBlocks.erebusFlower,14,2);	
 				else
-					world.setBlock(x,y+2,z,ModBlocks.erebusStigma,primaryPetalColor-2,2);		
+					world.setBlock(x,y+2,z,ModBlocks.erebusStigma,primaryPetalColor,2);		
 				
 				for(int a = 0; a < 3; a++){
 					world.setBlock(x-3+a,y+1,z,ModBlocks.erebusFlower,primaryPetalColor,2);
