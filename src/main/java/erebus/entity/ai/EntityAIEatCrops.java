@@ -51,24 +51,18 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 	@Override
 	protected void prepareToEat() {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
-		grasshopper.setCanJump(false);
-		grasshopper.setMoveTasks(false);
 		grasshopper.setIsEating(true);
 	}
 
 	@Override
 	protected void eatingInterupted() {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
-		grasshopper.setCanJump(true);
-		grasshopper.setMoveTasks(true);
 		grasshopper.setIsEating(false);
 	}
 
 	@Override
 	protected void afterEaten() {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
-		grasshopper.setCanJump(true);
-		grasshopper.setMoveTasks(true);
 		grasshopper.setIsEating(false);
 		reproCap++;
 		if (reproCap == 6)

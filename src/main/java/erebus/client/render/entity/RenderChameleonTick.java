@@ -23,7 +23,7 @@ public class RenderChameleonTick extends RenderLiving {
 
 	public void renderChameleonTick(EntityChameleonTick entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		boolean alpha = entity.blockID.getRenderBlockPass() == 1;
-
+		float animationSize = entity.animation;
 		GL11.glPushMatrix();
 		if (alpha) {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -33,7 +33,10 @@ public class RenderChameleonTick extends RenderLiving {
 		GL11.glTranslatef(0.0F, 0.5F, 0.0F);
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
+		GL11.glPushMatrix();
+		GL11.glScaled(1F, 1F-0.02F * animationSize, 1F);
 		blockRenderer.renderBlockAsItem(entity.blockID, entity.blockMeta, 1.0F);
+		GL11.glPopMatrix();
 		if (alpha)
 			GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
