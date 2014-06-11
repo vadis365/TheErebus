@@ -54,7 +54,7 @@ import erebus.block.BlockPetrifiedChest;
 import erebus.block.BlockPetrifiedCraftingTable;
 import erebus.block.BlockPlanksErebus;
 import erebus.block.BlockPlantedGiantFlower;
-import erebus.block.BlockPortalErebus;
+import erebus.block.BlockErebusPortal;
 import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
 import erebus.block.BlockSimple;
@@ -83,7 +83,7 @@ public class ModBlocks {
 	public static Fluid erebusHoney;
 
 	// PORTAL
-	public static BlockPortalErebus portalErebus;
+	public static BlockErebusPortal portalErebus;
 
 	// TERRAIN AND ORES
 	public static Block umberstone, umberOreBlock, oreFossil, redGem, blockAmber, quickSand, ghostSand, erebusOreExtra, umberstoneButton;
@@ -121,7 +121,7 @@ public class ModBlocks {
 	}
 
 	private static void initBlocks() {
-		portalErebus = (BlockPortalErebus) new BlockPortalErebus().setHardness(-1F).setLightLevel(1.0F).setStepSound(Block.soundTypeGlass).setBlockName("portalErebus");
+		portalErebus = (BlockErebusPortal) new BlockErebusPortal().setHardness(-1F).setLightLevel(1.0F).setStepSound(Block.soundTypeGlass).setBlockName("portalErebus");
 
 		umberstone = new BlockUmberstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("umberstone");
 		umberOreBlock = new BlockErebusOre().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockName("oreBlockU");

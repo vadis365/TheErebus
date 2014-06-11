@@ -24,12 +24,12 @@ import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.world.TeleporterErebus;
 
-public class BlockPortalErebus extends BlockBreakable {
+public class BlockErebusPortal extends BlockBreakable {
 
 	public static final int[][] types = new int[][] { new int[0], { 3, 1 }, { 2, 0 } };
 
-	public BlockPortalErebus() {
-		super("erebus:portalErebus", Material.portal, false);
+	public BlockErebusPortal() {
+		super("erebus:erebusPortal", Material.portal, false);
 		setTickRandomly(true);
 	}
 
