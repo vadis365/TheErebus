@@ -36,12 +36,6 @@ public class ThaumcraftIntegration implements IModIntegration {
 		registerBlock(ModBlocks.ghostSand, -1, Aspect.TRAP, 4, Aspect.VOID, 3);
 		registerBlock(ModBlocks.hollowLogAcacia, -1, Aspect.SLIME, 1, Aspect.TREE, 3);
 
-		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataCoal, Aspect.EARTH, 1, Aspect.ENERGY, 4, Aspect.FIRE, 2, Aspect.ENTROPY, 3);
-		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataIron, Aspect.EARTH, 1, Aspect.MECHANISM, 2, Aspect.CRAFT, 2, Aspect.METAL, 4, Aspect.ENTROPY, 3);
-		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataGold, Aspect.EARTH, 1, Aspect.GREED, 4, Aspect.METAL, 4, Aspect.ENTROPY, 3);
-		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataDiamond, Aspect.EARTH, 1, Aspect.CRYSTAL, 8, Aspect.ORDER, 4, Aspect.ENTROPY, 3);
-		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataEmerald, Aspect.EARTH, 1, Aspect.GREED, 16, Aspect.CRYSTAL, 8, Aspect.ENTROPY, 3);
-		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataLapis, Aspect.EARTH, 1, Aspect.GREED, 8, Aspect.CRYSTAL, 2, Aspect.ENTROPY, 3);
 		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataJade, Aspect.GREED, 4, Aspect.CRYSTAL, 3, Aspect.EARTH, 2);
 		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataPetrifiedWood, Aspect.EARTH, 1, Aspect.TREE, 2, Aspect.ENTROPY, 2);
 		registerBlock(ModBlocks.oreFossil, -1, Aspect.DEATH, 1, Aspect.BEAST, 1, Aspect.EARTH, 1);
