@@ -1,6 +1,8 @@
 package erebus.integration;
 
 import net.minecraft.block.Block;
+import codechicken.microblock.BlockMicroMaterial;
+import codechicken.microblock.MicroMaterialRegistry;
 import cpw.mods.fml.common.Loader;
 import erebus.ModBlocks;
 import erebus.block.BlockGneiss;
@@ -25,11 +27,11 @@ public class FMBIntegration {
 	}
 
 	private static void addMicroblock(Block block) {
-		//MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(block, 0), block.getUnlocalizedName());
+		MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(block, 0), block.getUnlocalizedName());
 	}
 
 	private static void addMicroblock(Block block, int metaFrom, int metaTo) {
-		//		for (int i = metaFrom; i < metaTo; i++)
-		//			MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(block, i), block.getUnlocalizedName() + "." + i);
+		for (int i = metaFrom; i < metaTo; i++)
+			MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(block, i), block.getUnlocalizedName() + "." + i);
 	}
 }
