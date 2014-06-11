@@ -19,7 +19,6 @@ import cpw.mods.fml.relauncher.Side;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
-import erebus.client.sound.EntitySoundEvent;
 import erebus.core.handler.BonemealHandler;
 import erebus.core.handler.BucketHandler;
 import erebus.core.handler.ConfigHandler;
@@ -48,7 +47,6 @@ public class Erebus {
 		ConfigHandler.loadConfig(event);
 
 		if (event.getSide() == Side.CLIENT) {
-			MinecraftForge.EVENT_BUS.register(new EntitySoundEvent());
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			MinecraftForge.EVENT_BUS.register(new HomingBeeconTextureHandler());
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());

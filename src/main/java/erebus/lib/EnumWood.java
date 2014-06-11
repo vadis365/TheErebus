@@ -24,25 +24,31 @@ public enum EnumWood {
 	Eucalyptus,
 	Mahogany,
 	Mossbark,
-	Scorched,
+	Scorched(true, true, false),
 	Asper,
 	Cypress,
-	Sap(true, false),
+	Sap(true, false, true),
 	Weedwood,
-	White(false, true),
-	Bamboo(false, true);
+	White(false, true, false),
+	Bamboo(false, true, false);
 	//@formatter:on
 
 	private final boolean hasLog;
 	private final boolean hasPlanks;
+	private final boolean hasSapling;
 
-	EnumWood(boolean hasLog, boolean hasPlanks) {
+	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling) {
 		this.hasLog = hasLog;
 		this.hasPlanks = hasPlanks;
+		this.hasSapling = hasSapling;
 	}
 
 	EnumWood() {
-		this(true, true);
+		this(true, true, true);
+	}
+
+	public boolean hasSapling() {
+		return hasSapling;
 	}
 
 	public boolean hasPlanks() {
@@ -85,7 +91,8 @@ public enum EnumWood {
 				GameRegistry.registerBlock(log, ItemBlockLocalised.class, "log" + wood.name());
 				Blocks.fire.setFireInfo(log, 5, 5);
 				logs.put(wood, log);
-
+			}
+			if (wood.hasSapling) {
 				Block sapling = new BlockSaplingErebus(wood);
 				GameRegistry.registerBlock(sapling, ItemBlockLocalised.class, "sapling" + wood.name());
 				saplings.put(wood, sapling);
@@ -111,9 +118,9 @@ public enum EnumWood {
 				OreDictionary.registerOre("logWood", log);
 				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, wood.ordinal()), new ItemStack(log));
 				GameRegistry.addSmelting(new ItemStack(Items.coal, 1, 1), new ItemStack(log), 1.0F);
-
-				OreDictionary.registerOre("treeSapling", saplings.get(wood));
 			}
+			if (wood.hasSapling)
+				OreDictionary.registerOre("treeSapling", saplings.get(wood));
 			if (wood.hasPlanks) {
 				Block stair = stairs.get(wood);
 				OreDictionary.registerOre("stairWood", stair);
