@@ -12,20 +12,17 @@ import net.minecraft.world.World;
 public class BlockGhostSand extends Block {
 
 	public BlockGhostSand() {
-		super(Material.sand);
-	}
-
-	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-	}
-
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block side) {
+		super(Material.portal);
 	}
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		return null;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
 	}
 
 	@Override
