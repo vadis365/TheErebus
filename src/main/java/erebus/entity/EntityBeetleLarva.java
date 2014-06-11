@@ -207,12 +207,20 @@ public class EntityBeetleLarva extends EntityAnimal {
 			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 0), 0.0F);
 	}
 
+	private boolean isStick(ItemStack stack) {
+		int stick = OreDictionary.getOreID("stickWood");
+		for (int id : OreDictionary.getOreIDs(stack))
+			if (id == stick)
+				return true;
+		return false;
+	}
+
 	@Override
 	public boolean interact(EntityPlayer player) {
-		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && OreDictionary.getOreID(is) == OreDictionary.getOreID("stickWood")) {
+		ItemStack stack = player.inventory.getCurrentItem();
+		if (!worldObj.isRemote && isStick(stack)) {
 			setLarvaSize(getLarvaSize() + 0.1F);
-			--is.stackSize;
+			stack.stackSize--;
 			return true;
 		}
 		return super.interact(player);

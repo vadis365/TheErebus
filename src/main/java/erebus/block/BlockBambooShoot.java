@@ -7,8 +7,10 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -136,6 +138,18 @@ public class BlockBambooShoot extends BlockFlower implements IPlantable {
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z) {
 		return ModItems.erebusMaterials;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		return blockIcon;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg) {
+		blockIcon = reg.registerIcon(getTextureName());
 	}
 
 	@SubscribeEvent
