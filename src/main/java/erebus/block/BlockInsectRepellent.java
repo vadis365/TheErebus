@@ -11,6 +11,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -21,10 +22,15 @@ import erebus.ModBlocks;
 public class BlockInsectRepellent extends Block {
 
 	public BlockInsectRepellent() {
-		super(Material.air);
+		super(Material.ground);
 		setTickRandomly(true);
 		setBlockTextureName("erebus:blockInsectRepellent");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
+	}
+
+	@Override
+	public boolean isAir(IBlockAccess world, int x, int y, int z) {
+		return true;
 	}
 
 	@Override
