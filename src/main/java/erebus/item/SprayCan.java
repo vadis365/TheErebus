@@ -17,7 +17,7 @@ public class SprayCan extends Item {
 	}
 
 	protected String getSprayCanSound() {
-		return "erebus:SprayCanSound";
+		return "erebus:spraycansound";
 	}
 
 	@Override

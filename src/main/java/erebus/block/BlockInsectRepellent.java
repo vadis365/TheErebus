@@ -109,7 +109,7 @@ public class BlockInsectRepellent extends Block {
 			if (entity.worldObj.getBlock(x, y, z) == ModBlocks.insectRepellent && ((EntityLiving) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD)) {
 				int Knockback = 1;
 				entity.addVelocity(MathHelper.sin(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F, 0.1D, MathHelper.cos(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F);
-				entity.worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
+				entity.worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
 			}
 	}
 
