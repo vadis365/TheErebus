@@ -122,6 +122,6 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 	protected abstract void afterPollination();
 
 	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
-		return AxisAlignedBB.getAABBPool().getAABB(flowerX, flowerY, flowerZ, flowerX + 1.0D, flowerY + 1.0D, flowerZ + 1.0D);
+		return AxisAlignedBB.getBoundingBox(flowerX, flowerY, flowerZ, flowerX + 1.0D, flowerY + 1.0D, flowerZ + 1.0D);
 	}
 }

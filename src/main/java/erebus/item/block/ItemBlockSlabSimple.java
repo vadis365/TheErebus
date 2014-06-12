@@ -20,14 +20,14 @@ public class ItemBlockSlabSimple extends ItemBlockLocalised {
 				return false;
 
 			if (side == 1) {
-				if (meta == 0 && world.checkNoEntityCollision(AxisAlignedBB.getAABBPool().getAABB(x, y, z, x + 1, y + 1, z + 1))) {
+				if (meta == 0 && world.checkNoEntityCollision(AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1))) {
 					playPlaceSound(world, x, y, z);
 					world.setBlockMetadataWithNotify(x, y, z, 2, 3);
 					stack.stackSize--;
 					return true;
 				}
 			} else if (side == 0)
-				if (meta == 1 && world.checkNoEntityCollision(AxisAlignedBB.getAABBPool().getAABB(x, y, z, x + 1, y + 1, z + 1))) {
+				if (meta == 1 && world.checkNoEntityCollision(AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1))) {
 					playPlaceSound(world, x, y, z);
 					world.setBlockMetadataWithNotify(x, y, z, 2, 3);
 					stack.stackSize--;

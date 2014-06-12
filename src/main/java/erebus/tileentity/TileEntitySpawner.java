@@ -63,7 +63,7 @@ public class TileEntitySpawner extends TileEntity {
 					Entity entity = EntityList.createEntityByName(mobName, worldObj);
 					if (entity == null)
 						return;
-					int j = worldObj.getEntitiesWithinAABB(entity.getClass(), AxisAlignedBB.getAABBPool().getAABB(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(spawnRange * 2, 4.0D, spawnRange * 2)).size();
+					int j = worldObj.getEntitiesWithinAABB(entity.getClass(), AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(spawnRange * 2, 4.0D, spawnRange * 2)).size();
 
 					if (j >= maxNearbyEntities) {
 						resetDelay();

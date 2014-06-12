@@ -295,7 +295,7 @@ public class BlockPetrifiedChest extends BlockContainer {
 
 	@SuppressWarnings("unchecked")
 	public static boolean isOcelotBlockingChest(World world, int x, int y, int z) {
-		Iterator<EntityOcelot> iterator = world.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getAABBPool().getAABB(x, y + 1, z, x + 1, y + 2, z + 1)).iterator();
+		Iterator<EntityOcelot> iterator = world.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1)).iterator();
 
 		do
 			if (!iterator.hasNext())

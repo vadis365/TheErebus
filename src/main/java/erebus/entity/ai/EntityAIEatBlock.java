@@ -160,6 +160,6 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	protected abstract void afterEaten();
 
 	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
-		return AxisAlignedBB.getAABBPool().getAABB(cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
+		return AxisAlignedBB.getBoundingBox(cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
 	}
 }

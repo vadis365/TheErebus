@@ -54,7 +54,7 @@ public class EntityErebusLightningBolt extends EntityWeatherEffect {
 				worldObj.lastLightningBolt = 2;
 			else {
 				double d0 = 3.0D;
-				List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getAABBPool().getAABB(posX - d0, posY - d0, posZ - d0, posX + d0, posY + 6.0D + d0, posZ + d0));
+				List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(posX - d0, posY - d0, posZ - d0, posX + d0, posY + 6.0D + d0, posZ + d0));
 
 				for (int l = 0; l < list.size(); ++l) {
 					Entity entity = list.get(l);
