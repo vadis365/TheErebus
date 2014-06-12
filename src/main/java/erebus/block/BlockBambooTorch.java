@@ -62,7 +62,7 @@ public class BlockBambooTorch extends Block {
 		Block block = world.getBlock(x, y - 1, z);
 
 		if (world.getBlockMetadata(x, y, z) == 0) {
-			if (block == null || world.isAirBlock(x, y + 1, z))
+			if (block == null || !world.isAirBlock(x, y + 1, z))
 				return false;
 			if (block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
 				return true;
