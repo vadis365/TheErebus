@@ -10,6 +10,7 @@ config/
 logs/
 eclipse/
 gradlew.bat
+build.gradle
 mods/
 saves/
 crash-reports/crash-2014-05-25_16.42.08-client.txt
