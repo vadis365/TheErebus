@@ -123,6 +123,7 @@ import erebus.client.render.tileentity.TileEntityPetrifiedWoodChestRenderer;
 import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
 import erebus.client.render.tileentity.TileEntitySpawnerRender;
 import erebus.client.render.tileentity.TileEntityUmberGolemStatueRenderer;
+import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -215,6 +216,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderInformation() {
+		FMLCommonHandler.instance().bus().register(new GogglesClientTickHandler());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeetle.class, new RenderBeetle());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFly.class, new RenderFly());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantula.class, new RenderTarantula());
