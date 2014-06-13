@@ -56,16 +56,6 @@ public class EntityGlowWorm extends EntityCreature {
 	}
 
 	@Override
-	protected boolean canDespawn() {
-		return false;
-	}
-
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-	}
-
-	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D); // Movespeed
