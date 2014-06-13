@@ -109,27 +109,27 @@ public class EntityBeetle extends EntityAnimal {
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
 
-		if (is != null && is == new ItemStack(Items.bucket, 1) && !player.capabilities.isCreativeMode) {
+		if (is != null && is.getItem() == Items.bucket && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bucketOfBeetleJuice));
 			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bucketOfBeetleJuice)))
 				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bucketOfBeetleJuice, 1, 0), false);
 			return true;
 		}
-		if (is != null && is == new ItemStack(ModItems.bamBucket) && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
+		if (is != null && is.getItem() == ModItems.bamBucket && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bamBucket, 1, 2));
 			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bamBucket, 1, 2)))
 				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bamBucket, 1, 2), false);
 			return true;
 		}
-		if (is != null && is == new ItemStack(ModItems.turnip) && !shagging()) {
+		if (is != null && is.getItem() == ModItems.turnip && !shagging()) { 
 			is.stackSize--;
 			setTame((byte) 1);
 			shagCount = 600;
 			return true;
-		} else
-			return super.interact(player);
+		}
+		return super.interact(player);
 	}
 	
     public boolean shagging() {
@@ -145,7 +145,7 @@ public class EntityBeetle extends EntityAnimal {
 
 	@Override
 	public boolean isBreedingItem(ItemStack is) {
-		return is != null && is == new ItemStack(ModItems.turnip);
+		return is != null && is.getItem() == ModItems.turnip;
 	}
 
 	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {
