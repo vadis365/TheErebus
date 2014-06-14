@@ -39,59 +39,59 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 		float widthReduced = 0, height = 0;
 
 		switch (meta) {
-			case 0:
+			case dataBulbCappedShroom:
 				widthReduced = 0.3125F;
 				height = 0.6875F;
 				break;
-			case 1:
+			case dataMushroom1:
 				widthReduced = 0.0625F;
 				height = 0.75F;
 				break;
-			case 2:
+			case dataMushroom2:
 				widthReduced = 0.0625F;
 				height = 0.75F;
 				break;
-			case 3:
+			case dataMushroom3:
 				widthReduced = 0.125F;
 				height = 0.625F;
 				break;
-			case 4:
+			case dataDutchCapShroom:
 				widthReduced = 0.0625F;
 				height = 0.875F;
 				break;
-			case 5:
+			case dataCattail:
 				widthReduced = 0;
 				height = 0.9375F;
 				break;
-			case 6:
+			case dataDesertShrub:
 				widthReduced = 0;
 				height = 1F;
 				break;
-			case 7:
+			case dataHanger:
 				widthReduced = 0.1875F;
 				height = 1F;
 				break;
-			case 8:
+			case dataHangerSeed:
 				widthReduced = 0.125F;
 				height = 1F;
 				break;
-			case 9:
+			case dataMireCoral:
 				widthReduced = 0;
 				height = 0.9375F;
 				break;
-			case 10:
+			case dataNettle:
 				widthReduced = 0.125F;
 				height = 1F;
 				break;
-			case 11:
+			case dataNettleFlowered:
 				widthReduced = 0.125F;
 				height = 1F;
 				break;
-			case 12:
+			case dataSwampPlant:
 				widthReduced = 0.0625F;
 				height = 0.4375F;
 				break;
-			case 13:
+			case dataFireBloom:
 				widthReduced = 0.1875F;
 				height = 1F;
 				break;
@@ -122,11 +122,11 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 				xx = x + rand.nextInt(3) - 1;
 				yy = y + rand.nextInt(2) - rand.nextInt(2);
 				zz = z + rand.nextInt(3) - 1;
-			if (world.isAirBlock(xx, yy, zz) && this.canBlockStay(world, xx, yy, zz)){
-				if(meta == 10 && rand.nextInt(3) == 0)
-					world.setBlock(x, y, z, this, 11, 2);
-				if(meta == 11)
-					world.setBlock(xx, yy, zz, this, 10, 2);
+			if (world.isAirBlock(xx, yy, zz) && this.canBlockStay(world, xx, yy, zz)) {
+				if(meta == dataNettle && rand.nextInt(3) == 0)
+					world.setBlock(x, y, z, this, dataNettleFlowered, 2);
+				if(meta == dataNettleFlowered)
+					world.setBlock(xx, yy, zz, this, dataNettle, 2);
 				else
 					world.setBlock(xx, yy, zz, this, meta, 2);
 			}
