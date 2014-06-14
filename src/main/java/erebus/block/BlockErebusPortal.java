@@ -61,12 +61,12 @@ public class BlockErebusPortal extends BlockBreakable {
 					if (entity instanceof EntityPlayerMP)
 						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) entity, 0, TeleporterErebus.TELEPORTER_TO_OVERWORLD);
 					else
-						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, 0, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(0));
+						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, 0, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(0), TeleporterErebus.TELEPORTER_TO_OVERWORLD);
 				else if (entity.dimension == 0)
 					if (entity instanceof EntityPlayerMP)
 						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) entity, ConfigHandler.erebusDimensionID, TeleporterErebus.TELEPORTER_TO_EREBUS);
 					else
-						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, ConfigHandler.erebusDimensionID, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(ConfigHandler.erebusDimensionID));
+						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, ConfigHandler.erebusDimensionID, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(ConfigHandler.erebusDimensionID), TeleporterErebus.TELEPORTER_TO_EREBUS);
 				entity.timeUntilPortal = 300;
 			}
 	}
