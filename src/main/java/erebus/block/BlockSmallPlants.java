@@ -100,6 +100,40 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	}
 
 	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand) {
+		int meta = world.getBlockMetadata(x, y, z);
+		if (rand.nextInt(10) == 0) {
+			byte radius = 4;
+			int distance = 5;
+			int xx;
+			int yy;
+			int zz;
+			for (xx = x - radius; xx <= x + radius; ++xx) {
+				for (zz = z - radius; zz <= z + radius; ++zz) {
+					for (yy = y - 1; yy <= y + 1; ++yy) {
+						if (world.getBlock(xx, zz, yy) == this) {
+							--distance;
+							if (distance <= 0)
+								return;
+						}
+					}
+				}
+			}
+				xx = x + rand.nextInt(3) - 1;
+				yy = y + rand.nextInt(2) - rand.nextInt(2);
+				zz = z + rand.nextInt(3) - 1;
+			if (world.isAirBlock(xx, yy, zz) && this.canBlockStay(world, xx, yy, zz)){
+				if(meta == 10 && rand.nextInt(3) == 0)
+					world.setBlock(x, y, z, this, 11, 2);
+				if(meta == 11)
+					world.setBlock(xx, yy, zz, this, 10, 2);
+				else
+					world.setBlock(xx, yy, zz, this, meta, 2);
+			}
+		}
+	}
+
+	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[iconPaths.length];
 		int i = 0;
