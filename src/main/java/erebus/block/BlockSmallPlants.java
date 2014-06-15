@@ -22,9 +22,16 @@ import erebus.item.block.ItemBlockErebusPlantSmall;
 
 public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 
-	public static final String[] iconPaths = new String[] { "bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "dutchCapShroom", "cattail", "desertShrub", "hanger", "hangerSeed", "mireCoral", "nettle", "nettleFlowered", "swampPlant", "fireBloom" };
+	public static final String[] iconPaths = new String[] { "bulbCappedShroom",
+			"mushroomSmall1", "mushroomSmall2", "mushroomSmall3",
+			"dutchCapShroom", "cattail", "desertShrub", "hanger", "hangerSeed",
+			"mireCoral", "nettle", "nettleFlowered", "swampPlant", "fireBloom" };
 
-	public static final int dataBulbCappedShroom = 0, dataMushroom1 = 1, dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4, dataCattail = 5, dataDesertShrub = 6, dataHanger = 7, dataHangerSeed = 8, dataMireCoral = 9, dataNettle = 10, dataNettleFlowered = 11, dataSwampPlant = 12, dataFireBloom = 13;
+	public static final int dataBulbCappedShroom = 0, dataMushroom1 = 1,
+			dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4,
+			dataCattail = 5, dataDesertShrub = 6, dataHanger = 7,
+			dataHangerSeed = 8, dataMireCoral = 9, dataNettle = 10,
+			dataNettleFlowered = 11, dataSwampPlant = 12, dataFireBloom = 13;
 
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
@@ -39,62 +46,62 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 		float widthReduced = 0, height = 0;
 
 		switch (meta) {
-			case dataBulbCappedShroom:
-				widthReduced = 0.3125F;
-				height = 0.6875F;
-				break;
-			case dataMushroom1:
-				widthReduced = 0.0625F;
-				height = 0.75F;
-				break;
-			case dataMushroom2:
-				widthReduced = 0.0625F;
-				height = 0.75F;
-				break;
-			case dataMushroom3:
-				widthReduced = 0.125F;
-				height = 0.625F;
-				break;
-			case dataDutchCapShroom:
-				widthReduced = 0.0625F;
-				height = 0.875F;
-				break;
-			case dataCattail:
-				widthReduced = 0;
-				height = 0.9375F;
-				break;
-			case dataDesertShrub:
-				widthReduced = 0;
-				height = 1F;
-				break;
-			case dataHanger:
-				widthReduced = 0.1875F;
-				height = 1F;
-				break;
-			case dataHangerSeed:
-				widthReduced = 0.125F;
-				height = 1F;
-				break;
-			case dataMireCoral:
-				widthReduced = 0;
-				height = 0.9375F;
-				break;
-			case dataNettle:
-				widthReduced = 0.125F;
-				height = 1F;
-				break;
-			case dataNettleFlowered:
-				widthReduced = 0.125F;
-				height = 1F;
-				break;
-			case dataSwampPlant:
-				widthReduced = 0.0625F;
-				height = 0.4375F;
-				break;
-			case dataFireBloom:
-				widthReduced = 0.1875F;
-				height = 1F;
-				break;
+		case dataBulbCappedShroom:
+			widthReduced = 0.3125F;
+			height = 0.6875F;
+			break;
+		case dataMushroom1:
+			widthReduced = 0.0625F;
+			height = 0.75F;
+			break;
+		case dataMushroom2:
+			widthReduced = 0.0625F;
+			height = 0.75F;
+			break;
+		case dataMushroom3:
+			widthReduced = 0.125F;
+			height = 0.625F;
+			break;
+		case dataDutchCapShroom:
+			widthReduced = 0.0625F;
+			height = 0.875F;
+			break;
+		case dataCattail:
+			widthReduced = 0;
+			height = 0.9375F;
+			break;
+		case dataDesertShrub:
+			widthReduced = 0;
+			height = 1F;
+			break;
+		case dataHanger:
+			widthReduced = 0.1875F;
+			height = 1F;
+			break;
+		case dataHangerSeed:
+			widthReduced = 0.125F;
+			height = 1F;
+			break;
+		case dataMireCoral:
+			widthReduced = 0;
+			height = 0.9375F;
+			break;
+		case dataNettle:
+			widthReduced = 0.125F;
+			height = 1F;
+			break;
+		case dataNettleFlowered:
+			widthReduced = 0.125F;
+			height = 1F;
+			break;
+		case dataSwampPlant:
+			widthReduced = 0.0625F;
+			height = 0.4375F;
+			break;
+		case dataFireBloom:
+			widthReduced = 0.1875F;
+			height = 1F;
+			break;
 		}
 		setBlockBounds(0F + widthReduced, 0.0F, 0F + widthReduced, 1F - widthReduced, height, 1F - widthReduced);
 	}
@@ -119,13 +126,14 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 					}
 				}
 			}
-				xx = x + rand.nextInt(3) - 1;
-				yy = y + rand.nextInt(2) - rand.nextInt(2);
-				zz = z + rand.nextInt(3) - 1;
-			if (world.isAirBlock(xx, yy, zz) && this.canBlockStay(world, xx, yy, zz)) {
-				if(meta == dataNettle && rand.nextInt(3) == 0)
+			xx = x + rand.nextInt(3) - 1;
+			yy = y + rand.nextInt(2) - rand.nextInt(2);
+			zz = z + rand.nextInt(3) - 1;
+			if (world.isAirBlock(xx, yy, zz)
+					&& this.canBlockStay(world, xx, yy, zz)) {
+				if (meta == dataNettle && rand.nextInt(3) == 0)
 					world.setBlock(x, y, z, this, dataNettleFlowered, 2);
-				if(meta == dataNettleFlowered)
+				if (meta == dataNettleFlowered)
 					world.setBlock(xx, yy, zz, this, dataNettle, 2);
 				else
 					world.setBlock(xx, yy, zz, this, meta, 2);
@@ -187,10 +195,29 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 		Block soil = world.getBlock(x, y - 1, z);
 		if (y >= 0 && y < 256 && meta < 5)
 			return (soil == Blocks.mycelium || world.getFullBlockLightValue(x, y, z) < 13) && soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
-		else if (y >= 0 && y < 256 && meta >= 5)
+		if (y >= 0 && y < 256 && meta >= 5 && meta != dataHanger || y >= 0 && y < 256 && meta >= 5 && meta != dataHangerSeed)
 			return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
-
+		if(meta == dataHanger || meta == dataHangerSeed)
+			return isValidBlock(world.getBlock(x, y + 1, z));
 		return false;
+	}
+	
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+		int meta = world.getBlockMetadata(x, y, z);
+		if(meta == dataHanger || meta == dataHangerSeed)
+			if (world.isAirBlock(x, y + 1, z))
+				world.setBlockToAir(x, y, z);
+		canBlockStay(world, x, y, z);
+	}
+	
+	private boolean isValidBlock(Block block) {
+		return block.getMaterial().blocksMovement() || block == this;
+	}
+	
+	@Override
+	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
+		return isValidBlock(world.getBlock(x, y + 1, z));
 	}
 
 	@Override
