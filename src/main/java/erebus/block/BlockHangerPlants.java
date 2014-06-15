@@ -61,9 +61,9 @@ public class BlockHangerPlants extends BlockBush implements ISubBlocksBlock {
 				if (meta == dataHangerSeed)
 					world.setBlock(x, yy, z, this, dataHanger, 2);
 			}
-			if (meta == dataHanger && rand.nextInt(10) == 0)
-				world.setBlock(x, y, z, this, dataHangerSeed, 2);
 		}
+		if (meta == dataHanger && rand.nextInt(10) == 0)
+			world.setBlock(x, y, z, this, dataHangerSeed, 2);
 	}
 
 	@Override
