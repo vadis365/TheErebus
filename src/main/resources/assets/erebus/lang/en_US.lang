@@ -152,15 +152,15 @@ tile.erebusPlantSmall_3.name=Small Shroom3
 tile.erebusPlantSmall_4.name=Dutch Cap Mushroom
 tile.erebusPlantSmall_5.name=Cattail
 tile.erebusPlantSmall_6.name=Desert Shrub 
-tile.erebusPlantSmall_7.name=Hanger
-tile.erebusPlantSmall_8.name=Seeded Hanger
-tile.erebusPlantSmall_9.name=Mire Coral
-tile.erebusPlantSmall_10.name=Nettle
-tile.erebusPlantSmall_11.name=Nettle Flowered 
-tile.erebusPlantSmall_12.name=Swamp Plant
-tile.erebusPlantSmall_13.name=Fire Bloom
+tile.erebusPlantSmall_7.name=Mire Coral
+tile.erebusPlantSmall_8.name=Nettle
+tile.erebusPlantSmall_9.name=Nettle Flowered 
+tile.erebusPlantSmall_10.name=Swamp Plant
+tile.erebusPlantSmall_11.name=Fire Bloom
 tile.erebus.glowGemBlock.name=Glowing Gem
 tile.erebus.mucusBomb.name=Mucus Bomb
+tile.erebusHanger_0.name=Hanger
+tile.erebusHanger_1.name=Seeded Hanger
 
 # Items
 item.encrustedDiamond.name=Encrusted Diamond

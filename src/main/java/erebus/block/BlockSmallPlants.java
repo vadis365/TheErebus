@@ -24,14 +24,13 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "bulbCappedShroom",
 			"mushroomSmall1", "mushroomSmall2", "mushroomSmall3",
-			"dutchCapShroom", "cattail", "desertShrub", "hanger", "hangerSeed",
+			"dutchCapShroom", "cattail", "desertShrub",
 			"mireCoral", "nettle", "nettleFlowered", "swampPlant", "fireBloom" };
 
 	public static final int dataBulbCappedShroom = 0, dataMushroom1 = 1,
 			dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4,
-			dataCattail = 5, dataDesertShrub = 6, dataHanger = 7,
-			dataHangerSeed = 8, dataMireCoral = 9, dataNettle = 10,
-			dataNettleFlowered = 11, dataSwampPlant = 12, dataFireBloom = 13;
+			dataCattail = 5, dataDesertShrub = 6, dataMireCoral = 7, dataNettle = 8,
+			dataNettleFlowered = 9, dataSwampPlant = 10, dataFireBloom = 11;
 
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
@@ -74,14 +73,6 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 			widthReduced = 0;
 			height = 1F;
 			break;
-		case dataHanger:
-			widthReduced = 0.1875F;
-			height = 1F;
-			break;
-		case dataHangerSeed:
-			widthReduced = 0.125F;
-			height = 1F;
-			break;
 		case dataMireCoral:
 			widthReduced = 0;
 			height = 0.9375F;
@@ -109,7 +100,7 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
-		if (rand.nextInt(10) == 0) {
+		if (rand.nextInt(1) == 0) {
 			byte radius = 4;
 			int distance = 5;
 			int xx;
@@ -188,43 +179,28 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
 	}
-
+	
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		int meta = world.getBlockMetadata(x, y, z);
 		Block soil = world.getBlock(x, y - 1, z);
 		if (y >= 0 && y < 256 && meta < 5)
 			return (soil == Blocks.mycelium || world.getFullBlockLightValue(x, y, z) < 13) && soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
-		if (y >= 0 && y < 256 && meta >= 5 && meta != dataHanger || y >= 0 && y < 256 && meta >= 5 && meta != dataHangerSeed)
+		if (y >= 0 && y < 256 && meta >= 5)
 			return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
-		if(meta == dataHanger || meta == dataHangerSeed)
-			return isValidBlock(world.getBlock(x, y + 1, z));
 		return false;
 	}
 	
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if(meta == dataHanger || meta == dataHangerSeed)
-			if (world.isAirBlock(x, y + 1, z))
-				world.setBlockToAir(x, y, z);
 		canBlockStay(world, x, y, z);
-	}
-	
-	private boolean isValidBlock(Block block) {
-		return block.getMaterial().blocksMovement() || block == this;
-	}
-	
-	@Override
-	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
-		return isValidBlock(world.getBlock(x, y + 1, z));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 13) {
+		if (meta == dataFireBloom) {
 			double xx = x + 0.5F;
 			double yy = y + 1F;
 			double zz = z + 0.5F;
