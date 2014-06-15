@@ -52,7 +52,7 @@ public class BlockHangerPlants extends BlockBush implements ISubBlocksBlock {
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
-		if (rand.nextInt(10) == 0) {
+		if (rand.nextInt(4) == 0) {
 			int yy = y - 1;
 
 			if (world.isAirBlock(x, yy, z) && this.canBlockStay(world, x, yy, z)) {
@@ -62,7 +62,7 @@ public class BlockHangerPlants extends BlockBush implements ISubBlocksBlock {
 					world.setBlock(x, yy, z, this, dataHanger, 2);
 			}
 		}
-		if (meta == dataHanger && rand.nextInt(10) == 0)
+		if (meta == dataHanger && rand.nextInt(4) == 0)
 			world.setBlock(x, y, z, this, dataHangerSeed, 2);
 	}
 
