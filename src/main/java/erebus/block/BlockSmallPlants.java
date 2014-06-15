@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -18,6 +19,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.item.ErebusMaterial.DATA;
 import erebus.item.block.ItemBlockErebusPlantSmall;
 
 public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
@@ -162,7 +166,7 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 
 	@Override
 	public int quantityDropped(int meta, int fortune, Random random) {
-		return 1;
+		return 0;
 	}
 
 	@Override
@@ -173,6 +177,35 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
+	}
+	
+	@Override
+	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+
+		ItemStack item = null;
+		int meta = world.getBlockMetadata(x, y, z);
+
+			switch (meta) {
+				case dataNettle:
+					item = new ItemStack(ModItems.erebusMaterials, 1, DATA.nettleleaves.ordinal());
+					break;
+				case dataNettleFlowered:
+					item = new ItemStack(ModItems.erebusMaterials, 1, DATA.nettleflowers.ordinal());
+					break;
+				case dataBulbCappedShroom:
+				case dataMushroom1:
+				case dataMushroom2:
+				case dataMushroom3:
+				case dataDutchCapShroom:
+				case dataCattail:
+				case dataDesertShrub:
+				case dataMireCoral:
+				case dataSwampPlant:
+				case dataFireBloom:
+					item = new ItemStack(Item.getItemFromBlock(this), 1, meta);
+					break;	
+			}
+			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 	}
 
 	@Override
@@ -193,6 +226,11 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+		if (world.isAirBlock(x, y - 1, z)) {
+			int meta = world.getBlockMetadata(x, y, z);
+			world.setBlockToAir(x, y, z);
+			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), new ItemStack(Item.getItemFromBlock(this), 1, meta));
+			}
 		canBlockStay(world, x, y, z);
 	}
 

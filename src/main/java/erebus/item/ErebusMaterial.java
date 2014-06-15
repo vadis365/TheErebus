@@ -54,7 +54,9 @@ public class ErebusMaterial extends Item {
 		papyrus,
 		enhancedGliderWing,
 		repellent,
-		mucusCharge
+		mucusCharge,
+		nettleleaves,
+		nettleflowers
 	}
 	// @formatter:on
 
