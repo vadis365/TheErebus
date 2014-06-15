@@ -1,6 +1,7 @@
 package erebus.world.biomes.decorators;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.util.Direction;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
@@ -109,6 +110,18 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataWeepingBlueBottom,2);
 				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataWeepingBlueTop,2);
 			}
+		}
+		
+		for(attempt = 0; attempt < 10; attempt++){
+			xx = x+offsetXZ();
+			yy = 30+rand.nextInt(90);
+			zz = z+offsetXZ();
+
+				if (!world.getBlock(xx,yy,zz).isNormalCube())continue;
+
+				for(int hangerY = rand.nextInt(20); hangerY>0; hangerY--)
+					if (world.isAirBlock(xx,yy-hangerY,zz))
+						world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger);
 		}
 	}
 

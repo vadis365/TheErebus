@@ -210,6 +210,18 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 						world.setBlock(xx+Direction.offsetX[offset],yy-vineY,zz+Direction.offsetZ[offset],Blocks.vine,offset == 3 ? 1 : offset == 2 ? 4 : offset == 1 ? 0 : 2,3);
 			}
 		}
+		
+		for(attempt = 0; attempt < 10; attempt++){
+			xx = x+offsetXZ();
+			yy = 30+rand.nextInt(90);
+			zz = z+offsetXZ();
+
+				if (!world.getBlock(xx,yy,zz).isNormalCube())continue;
+
+				for(int hangerY = rand.nextInt(20); hangerY>0; hangerY--)
+					if (world.isAirBlock(xx,yy-hangerY,zz))
+						world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger);
+		}
 
 		if (rand.nextInt(3) == 0)
 			for(attempt = 0; attempt < 6; ++attempt){
