@@ -104,7 +104,7 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
-		if (rand.nextInt(1) == 0) {
+		if (rand.nextInt(15) == 0) {
 			byte radius = 4;
 			int distance = 5;
 			int xx;
