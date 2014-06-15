@@ -1,7 +1,6 @@
 package erebus.world.biomes.decorators;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
