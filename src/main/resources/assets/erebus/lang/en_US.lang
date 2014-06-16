@@ -159,8 +159,14 @@ tile.erebusPlantSmall_10.name=Swamp Plant
 tile.erebusPlantSmall_11.name=Fire Bloom
 tile.erebus.glowGemBlock.name=Glowing Gem
 tile.erebus.mucusBomb.name=Mucus Bomb
-tile.erebusHanger_0.name=Hanger
-tile.erebusHanger_1.name=Seeded Hanger
+tile.erebusHanger_0.name=Hanger Shoot 1
+tile.erebusHanger_1.name=Hanger Shoot 2
+tile.erebusHanger_2.name=Hanger Shoot 3
+tile.erebusHanger_3.name=Hanger Shoot 4
+tile.erebusHanger_4.name=Hanger
+tile.erebusHanger_5.name=Hanger Fruited
+tile.erebusHanger_6.name=Hanger Seeded
+
 
 # Items
 item.encrustedDiamond.name=Encrusted Diamond
@@ -224,6 +230,9 @@ item.erebusMaterials.27.name=Papyrus
 item.erebusMaterials.28.name=Enhanced Glider Wing
 item.erebusMaterials.29.name=Repellent
 item.erebusMaterials.30.name=Mucus Charge
+item.erebusMaterials.31.name=Nettle Leaves
+item.erebusMaterials.32.name=Nettle Flowers
+item.erebusMaterials.33.name=Middle Fruit Seeds
 item.erebusSpecialItem.0.name=Beetle Riding Kit
 item.erebusSpecialItem.1.name=Beetle Taming Amulet
 item.erebusSpecialItem.2.name=Umbergolem Core
@@ -242,6 +251,7 @@ item.erebusFood.7.name=Melonade
 item.erebusFood.8.name=Sparkly Melonade
 item.erebusFood.9.name=Larvae-on-a-Stick
 item.erebusFood.10.name=Honey Sandwich
+item.erebusFood.11.name=Middle Fruit
 item.bamBucket.0.name=Bambucket
 item.bamBucket.1.name=Water Bambucket
 item.bamBucket.2.name=Bambucket Of Beetle Juice

@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.block.BlockBambooShoot;
+import erebus.block.BlockHangerPlants;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketSound;
 
@@ -56,7 +57,8 @@ public class ErebusMaterial extends Item {
 		repellent,
 		mucusCharge,
 		nettleleaves,
-		nettleflowers
+		nettleflowers,
+		middleFruitSeeds,
 	}
 	// @formatter:on
 
@@ -75,6 +77,18 @@ public class ErebusMaterial extends Item {
 
 			if (soil != null && soil.canSustainPlant(world, x, y, z, ForgeDirection.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(x, y + 1, z)) {
 				world.setBlock(x, y + 1, z, ModBlocks.bambooShoot);
+
+				if (!player.capabilities.isCreativeMode)
+					--is.stackSize;
+				return true;
+			}
+		}
+		
+		if (side == 0 && is.getItemDamage() == DATA.middleFruitSeeds.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y - 1, z, side, is)) {
+			Block block = world.getBlock(x, y, z);
+
+			if (block != null && block.getMaterial().blocksMovement()) {
+				world.setBlock(x, y - 1, z, ModBlocks.erebusHanger, BlockHangerPlants.dataHanger0, 2);
 
 				if (!player.capabilities.isCreativeMode)
 					--is.stackSize;
