@@ -1,15 +1,12 @@
 package erebus.block;
 
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
@@ -22,7 +19,7 @@ import erebus.ModBlocks;
 import erebus.core.handler.ConfigHandler;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
-import erebus.world.TeleporterErebus;
+import erebus.world.teleporter.TeleporterHandler;
 
 public class BlockErebusPortal extends BlockBreakable {
 
@@ -56,8 +53,8 @@ public class BlockErebusPortal extends BlockBreakable {
 		if (world.isRemote)
 			return;
 		if (entity.ridingEntity == null && entity.riddenByEntity == null)
-			if (entity.timeUntilPortal <= 0) {
-				if (entity.dimension == ConfigHandler.erebusDimensionID)
+			if (entity.timeUntilPortal <= 0) { // TODO readd animation and make sure the player has to get out of the portal, otherwise he gets tp'd again after the cooldown runs out
+				/*if (entity.dimension == ConfigHandler.erebusDimensionID)
 					if (entity instanceof EntityPlayerMP)
 						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) entity, 0, TeleporterErebus.TELEPORTER_TO_OVERWORLD);
 					else
@@ -66,8 +63,10 @@ public class BlockErebusPortal extends BlockBreakable {
 					if (entity instanceof EntityPlayerMP)
 						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) entity, ConfigHandler.erebusDimensionID, TeleporterErebus.TELEPORTER_TO_EREBUS);
 					else
-						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, ConfigHandler.erebusDimensionID, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(ConfigHandler.erebusDimensionID), TeleporterErebus.TELEPORTER_TO_EREBUS);
-				entity.timeUntilPortal = 300;
+						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, ConfigHandler.erebusDimensionID, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(ConfigHandler.erebusDimensionID), TeleporterErebus.TELEPORTER_TO_EREBUS);*/
+				//entity.travelToDimension(entity.dimension == ConfigHandler.erebusDimensionID ? 0 : ConfigHandler.erebusDimensionID);
+				if (entity.dimension == 0)TeleporterHandler.transferToErebus(entity);
+				else TeleporterHandler.transferToOverworld(entity);
 			}
 	}
 

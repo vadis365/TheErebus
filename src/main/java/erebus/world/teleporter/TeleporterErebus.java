@@ -1,10 +1,8 @@
-package erebus.world;
-
+package erebus.world.teleporter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
@@ -13,26 +11,20 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.DimensionManager;
 import erebus.ModBlocks;
-import erebus.core.handler.ConfigHandler;
 
-public class TeleporterErebus extends Teleporter {
-
-	public static final TeleporterErebus TELEPORTER_TO_OVERWORLD = new TeleporterErebus(DimensionManager.getWorld(0));
-	public static final TeleporterErebus TELEPORTER_TO_EREBUS = new TeleporterErebus(DimensionManager.getWorld(ConfigHandler.erebusDimensionID));
-
+final class TeleporterErebus extends Teleporter {
 	private final WorldServer worldServerInstance;
-	private final Random random;
+	private final Random rand;
 	private final LongHashMap destinationCoordinateCache = new LongHashMap();
 	private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
 
-	private TeleporterErebus(WorldServer worldServer) {
+	TeleporterErebus(WorldServer worldServer) {
 		super(worldServer);
 		worldServerInstance = worldServer;
-		random = new Random(worldServer.getSeed() + 1);
+		rand = new Random(worldServer.getSeed() + 1);
 	}
-
+	
 	@Override
 	public void placeInPortal(Entity entity, double x, double y, double z, float par8) {
 		if (!placeInExistingPortal(entity, x, y, z, par8)) {
@@ -193,7 +185,7 @@ public class TeleporterErebus extends Teleporter {
 		int i1 = int_y;
 		int j1 = int_z;
 		int k1 = 0;
-		int l1 = random.nextInt(4);
+		int l1 = rand.nextInt(4);
 		int i2;
 		double d1;
 		double d2;

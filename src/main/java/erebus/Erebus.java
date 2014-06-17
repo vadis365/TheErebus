@@ -2,10 +2,8 @@ package erebus;
 
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
-
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -32,6 +30,7 @@ import erebus.network.PacketPipeline;
 import erebus.recipes.AltarRecipe;
 import erebus.recipes.RecipeHandler;
 import erebus.world.WorldProviderErebus;
+import erebus.world.teleporter.TeleporterHandler;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
 public class Erebus {
@@ -73,6 +72,7 @@ public class Erebus {
 		ModBiomes.init();
 		RecipeHandler.init();
 		AltarRecipe.init();
+		TeleporterHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
