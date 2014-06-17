@@ -15,7 +15,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -33,7 +32,7 @@ public class BlockWallPlants extends Block implements IShearable, ISubBlocksBloc
 
 	public static final String[] iconPaths = new String[] { "moss", "lichen" };//, "lichen"
 
-public static final int dataMoss = 0, dataLichen = 6;// 
+public static final int dataMoss = 0, dataLichen = 8;// 
 	
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
@@ -59,7 +58,11 @@ public static final int dataMoss = 0, dataLichen = 6;//
 	public IIcon getIcon(int side, int meta) {
 		if (meta < 0)
 			return null;
-		if (meta <= 5)
+		if (meta == 0)
+			return icons[0];
+		if (meta == 1)
+			return icons[1];
+		if (meta > 1 && meta<= 7)
 			return icons[0];
 		else return icons[1];
 	}
@@ -104,16 +107,16 @@ public static final int dataMoss = 0, dataLichen = 6;//
 			break;
 		case 1:
 			widthMin = 0F;
-			heightMin = 0F;
+			heightMin = 0.875F;
 			depthMin = 0F;
 			widthMax = 0F;
-			heightMax = 0.875F;
+			heightMax = 0F;
 			depthMax = 0F;
 			break;
 		case 2:
 			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0.875F;
+			heightMin = 0.875F;
+			depthMin = 0F;
 			widthMax = 0F;
 			heightMax = 0F;
 			depthMax = 0F;
@@ -123,10 +126,26 @@ public static final int dataMoss = 0, dataLichen = 6;//
 			heightMin = 0F;
 			depthMin = 0F;
 			widthMax = 0F;
+			heightMax = 0.875F;
+			depthMax = 0F;
+			break;
+		case 4:
+			widthMin = 0F;
+			heightMin = 0F;
+			depthMin = 0.875F;
+			widthMax = 0F;
+			heightMax = 0F;
+			depthMax = 0F;
+			break;
+		case 5:
+			widthMin = 0F;
+			heightMin = 0F;
+			depthMin = 0F;
+			widthMax = 0F;
 			heightMax = 0F;
 			depthMax = 0.8125F;
 			break;
-		case 4:
+		case 6:
 			widthMin = 0.8125F;
 			heightMin = 0;
 			depthMin = 0F;
@@ -134,7 +153,55 @@ public static final int dataMoss = 0, dataLichen = 6;//
 			heightMax = 0;
 			depthMax = 0F;
 			break;
-		case 5:
+		case 7:
+			widthMin = 0F;
+			heightMin = 0F;
+			depthMin = 0F;
+			widthMax = 0.8125F;
+			heightMax = 0F;
+			depthMax = 0F;
+			break;
+		case 8:
+			widthMin = 0F;
+			heightMin = 0.875F;
+			depthMin = 0F;
+			widthMax = 0F;
+			heightMax = 0F;
+			depthMax = 0F;
+			break;
+		case 9:
+			widthMin = 0F;
+			heightMin = 0F;
+			depthMin = 0F;
+			widthMax = 0F;
+			heightMax = 0.875F;
+			depthMax = 0F;
+			break;
+		case 10:
+			widthMin = 0F;
+			heightMin = 0F;
+			depthMin = 0.875F;
+			widthMax = 0F;
+			heightMax = 0F;
+			depthMax = 0F;
+			break;
+		case 11:
+			widthMin = 0F;
+			heightMin = 0F;
+			depthMin = 0F;
+			widthMax = 0F;
+			heightMax = 0F;
+			depthMax = 0.8125F;
+			break;
+		case 12:
+			widthMin = 0.8125F;
+			heightMin = 0;
+			depthMin = 0F;
+			widthMax = 0F;
+			heightMax = 0;
+			depthMax = 0F;
+			break;
+		case 13:
 			widthMin = 0F;
 			heightMin = 0F;
 			depthMin = 0F;
@@ -164,25 +231,45 @@ public static final int dataMoss = 0, dataLichen = 6;//
 	
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
+		if (meta == 0) {
+			if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
+				meta = 2;
 
-		if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
-			meta = 0;
+			if (side == 1 && world.isSideSolid(x, y - 1, z, UP))
+				meta = 3;
 
-		if (side == 1 && world.isSideSolid(x, y - 1, z, UP))
-			meta = 1;
+			if (side == 2 && world.isSideSolid(x, y, z + 1, NORTH))
+				meta = 4;
 
-		if (side == 2 && world.isSideSolid(x, y, z + 1, NORTH))
-			meta = 2;
+			if (side == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
+				meta = 5;
 
-		if (side == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
-			meta = 3;
+			if (side == 4 && world.isSideSolid(x + 1, y, z, WEST))
+				meta = 6;
 
-		if (side == 4 && world.isSideSolid(x + 1, y, z, WEST))
-			meta = 4;
+			if (side == 5 && world.isSideSolid(x - 1, y, z, EAST))
+				meta = 7;
+		}
 
-		if (side == 5 && world.isSideSolid(x - 1, y, z, EAST))
-			meta = 5;
+		if (meta == 1) {
+			if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
+				meta = 8;
 
+			if (side == 1 && world.isSideSolid(x, y - 1, z, UP))
+				meta = 9;
+
+			if (side == 2 && world.isSideSolid(x, y, z + 1, NORTH))
+				meta = 10;
+
+			if (side == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
+				meta = 11;
+
+			if (side == 4 && world.isSideSolid(x + 1, y, z, WEST))
+				meta = 12;
+
+			if (side == 5 && world.isSideSolid(x - 1, y, z, EAST))
+				meta = 13;
+		}
 		return meta;
 	}
   
@@ -191,23 +278,24 @@ public static final int dataMoss = 0, dataLichen = 6;//
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
 		
-		if (meta == 0 && world.isSideSolid(x, y + 1, z, DOWN))
-			flag = true;
-
-		if (meta == 1 && world.isSideSolid(x, y - 1, z, UP))
-			flag = true;
-
-		if (meta == 2 && world.isSideSolid(x, y, z + 1, NORTH))
-			flag = true;
-
-		if (meta == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
-			flag = true;
-
-		if (meta == 4 && world.isSideSolid(x + 1, y, z, WEST))
-			flag = true;
-
-		if (meta == 5 && world.isSideSolid(x - 1, y, z, EAST))
-			flag = true;
+		if (meta == 2 || meta == 8)
+			if(world.isSideSolid(x, y + 1, z, DOWN))
+				flag = true;
+		if (meta == 3 || meta == 9)
+			if (world.isSideSolid(x, y - 1, z, UP))
+				flag = true;
+		if (meta == 4 || meta == 10)
+			if (world.isSideSolid(x, y, z + 1, NORTH))
+				flag = true;
+		if (meta == 5 || meta == 11)
+			if (world.isSideSolid(x, y, z - 1, SOUTH))
+				flag = true;
+		if (meta == 6 || meta == 12)
+			if (world.isSideSolid(x + 1, y, z, WEST))
+				flag = true;
+		if (meta == 7 || meta == 13)
+			if (world.isSideSolid(x - 1, y, z, EAST))
+				flag = true;
 
 		if (!flag) {
 			breakBlock(world, x, y, z, neighbour, meta);
@@ -238,20 +326,19 @@ public static final int dataMoss = 0, dataLichen = 6;//
     }
 
     @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta){
-    	super.harvestBlock(world, player, x, y, z, meta);
-    }
-
-    @Override
     public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
         return true;
     }
 
     @Override
-    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
-    {
+    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
+    	int meta = world.getBlockMetadata(x, y, z);
+		if (meta == 2||meta == 3||meta == 4||meta == 5||meta == 6||meta == 7)
+    		meta = 0;
+		if (meta == 8||meta == 9||meta == 10||meta == 11||meta == 12||meta == 13)
+    		meta = 1;
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        ret.add(new ItemStack(this, 1));
+        ret.add(new ItemStack(this, 1, meta));
         return ret;
     }
 
