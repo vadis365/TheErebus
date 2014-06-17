@@ -159,13 +159,7 @@ tile.erebusPlantSmall_10.name=Swamp Plant
 tile.erebusPlantSmall_11.name=Fire Bloom
 tile.erebus.glowGemBlock.name=Glowing Gem
 tile.erebus.mucusBomb.name=Mucus Bomb
-tile.erebusHanger_0.name=Hanger Shoot 1
-tile.erebusHanger_1.name=Hanger Shoot 2
-tile.erebusHanger_2.name=Hanger Shoot 3
-tile.erebusHanger_3.name=Hanger Shoot 4
-tile.erebusHanger_4.name=Hanger
-tile.erebusHanger_5.name=Hanger Fruited
-tile.erebusHanger_6.name=Hanger Seeded
+tile.erebusHanger.name=Hanger
 
 
 # Items
