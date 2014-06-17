@@ -48,6 +48,7 @@ public class NEIErebusConfig implements IConfigureNEI {
 			API.hideItem(new ItemStack(ModBlocks.erebusOreExtra, 1, 4));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 4));
 		}
+		API.hideItem(new ItemStack(ModBlocks.erebusHanger));
 	}
 
 	@Override
