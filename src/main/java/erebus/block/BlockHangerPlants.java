@@ -101,11 +101,11 @@ public class BlockHangerPlants extends BlockBush {
 		}
 
 		// Fruit
-		if (rand.nextInt(6) == 0 && meta == dataHanger4)
+		if (meta == dataHanger4 && rand.nextInt(10) == 0)
 			world.setBlock(x, y, z, this, dataHangerFruit, 2);
 
 		// Seeds
-		if (rand.nextInt(10) == 0 && meta == dataHangerFruit)
+		if (meta == dataHangerFruit && rand.nextInt(10) == 0)
 			world.setBlock(x, y, z, this, dataHangerSeed, 2);
 	}
 
