@@ -42,8 +42,9 @@ public static final int dataMoss = 0, dataLichen = 8;//
 		setTickRandomly(true);
 	}
 	
+	@Override
 	public void setBlockBoundsForItemRender() {
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        setBlockBounds(0.125F, 0.0F, 0.0F, 0.25F, 1.0F, 1.0F);
     }
 	
 	@Override
@@ -87,7 +88,7 @@ public static final int dataMoss = 0, dataLichen = 8;//
 
     @Override
     public boolean renderAsNormalBlock() {
-        return true;
+        return false;
     }
 
     @Override
@@ -143,10 +144,10 @@ public static final int dataMoss = 0, dataLichen = 8;//
 			depthMin = 0F;
 			widthMax = 0F;
 			heightMax = 0F;
-			depthMax = 0.8125F;
+			depthMax = 0.875F;
 			break;
 		case 6:
-			widthMin = 0.8125F;
+			widthMin = 0.875F;
 			heightMin = 0;
 			depthMin = 0F;
 			widthMax = 0F;
@@ -157,7 +158,7 @@ public static final int dataMoss = 0, dataLichen = 8;//
 			widthMin = 0F;
 			heightMin = 0F;
 			depthMin = 0F;
-			widthMax = 0.8125F;
+			widthMax = 0.875F;
 			heightMax = 0F;
 			depthMax = 0F;
 			break;
@@ -191,10 +192,10 @@ public static final int dataMoss = 0, dataLichen = 8;//
 			depthMin = 0F;
 			widthMax = 0F;
 			heightMax = 0F;
-			depthMax = 0.8125F;
+			depthMax = 0.875F;
 			break;
 		case 12:
-			widthMin = 0.8125F;
+			widthMin = 0.875F;
 			heightMin = 0;
 			depthMin = 0F;
 			widthMax = 0F;
@@ -205,7 +206,7 @@ public static final int dataMoss = 0, dataLichen = 8;//
 			widthMin = 0F;
 			heightMin = 0F;
 			depthMin = 0F;
-			widthMax = 0.8125F;
+			widthMax = 0.875F;
 			heightMax = 0F;
 			depthMax = 0F;
 			break;
@@ -221,8 +222,8 @@ public static final int dataMoss = 0, dataLichen = 8;//
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return world.isSideSolid(x, y + 1, z, DOWN) || world.isSideSolid(x, y - 1, z, UP) || world.isSideSolid(x - 1, y, z, EAST) || world.isSideSolid(x + 1, y, z, WEST) || world.isSideSolid(x, y, z - 1, SOUTH) || world.isSideSolid(x, y, z + 1, NORTH);
-		}
+		return isValidBlock(world.getBlock(x, y + 1, z)) || isValidBlock(world.getBlock(x, y - 1, z)) || isValidBlock(world.getBlock(x - 1, y, z)) || isValidBlock(world.getBlock(x + 1, y, z)) ||isValidBlock(world.getBlock(x, y, z - 1)) || isValidBlock(world.getBlock(x, y, z +1 ));	
+	}
 
     
 	private boolean isValidBlock(Block block) {
