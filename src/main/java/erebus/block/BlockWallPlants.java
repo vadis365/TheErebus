@@ -30,16 +30,15 @@ import erebus.item.block.ItemBlockErebusPlantSmall;
 
 public class BlockWallPlants extends Block implements IShearable, ISubBlocksBlock {
 
-	public static final String[] iconPaths = new String[] { "moss", "lichen" };//, "lichen"
+	public static final String[] iconPaths = new String[] { "moss", "lichen" };
 
-public static final int dataMoss = 0, dataLichen = 8;// 
+public static final int dataMoss = 0, dataLichen = 1; 
 	
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
 
 	public BlockWallPlants() {
 		super(Material.plants);
-		setTickRandomly(true);
 	}
 	
 	@Override
@@ -59,13 +58,13 @@ public static final int dataMoss = 0, dataLichen = 8;//
 	public IIcon getIcon(int side, int meta) {
 		if (meta < 0)
 			return null;
-		if (meta == 0)
-			return icons[0];
-		if (meta == 1)
-			return icons[1];
-		if (meta > 1 && meta<= 7)
-			return icons[0];
-		else return icons[1];
+		if (meta == dataMoss)
+			return icons[dataMoss];
+		if (meta == dataLichen)
+			return icons[dataLichen];
+		if (meta > 1 && meta <= 7)
+			return icons[dataMoss];
+		else return icons[dataLichen];
 	}
 
 	@Override
@@ -219,20 +218,18 @@ public static final int dataMoss = 0, dataLichen = 8;//
 		return null;
 	}
 
-
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y + 1, z)) || isValidBlock(world.getBlock(x, y - 1, z)) || isValidBlock(world.getBlock(x - 1, y, z)) || isValidBlock(world.getBlock(x + 1, y, z)) ||isValidBlock(world.getBlock(x, y, z - 1)) || isValidBlock(world.getBlock(x, y, z +1 ));	
 	}
 
-    
 	private boolean isValidBlock(Block block) {
 		return block.renderAsNormalBlock() && block.getMaterial().blocksMovement();
 	}
 	
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-		if (meta == 0) {
+		if (meta == dataMoss) {
 			if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
 				meta = 2;
 
@@ -252,7 +249,7 @@ public static final int dataMoss = 0, dataLichen = 8;//
 				meta = 7;
 		}
 
-		if (meta == 1) {
+		if (meta == dataLichen) {
 			if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
 				meta = 8;
 
@@ -334,20 +331,14 @@ public static final int dataMoss = 0, dataLichen = 8;//
     @Override
     public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
     	int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 2||meta == 3||meta == 4||meta == 5||meta == 6||meta == 7)
-    		meta = 0;
-		if (meta == 8||meta == 9||meta == 10||meta == 11||meta == 12||meta == 13)
-    		meta = 1;
+		if (meta == 2 || meta == 3 || meta == 4 || meta == 5 || meta == 6 || meta == 7)
+    		meta = dataMoss;
+		if (meta == 8 || meta == 9 || meta == 10 || meta == 11 || meta == 12 || meta == 13)
+    		meta = dataLichen;
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
         ret.add(new ItemStack(this, 1, meta));
         return ret;
     }
-
-    @Override
-	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
-		return 16777215;
-	}
     
 	@Override
 	public Class<? extends ItemBlock> getItemBlockClass() {
