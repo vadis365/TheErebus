@@ -220,7 +220,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 
 				for(int hangerY = rand.nextInt(20); hangerY>0; hangerY--)
 					if (world.isAirBlock(xx,yy-hangerY,zz))
-						world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger);
+						world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger, 4, 2);
 		}
 
 		if (rand.nextInt(3) == 0)

@@ -1,5 +1,11 @@
 package erebus.world.biomes.decorators;
 
+import static net.minecraftforge.common.util.ForgeDirection.DOWN;
+import static net.minecraftforge.common.util.ForgeDirection.EAST;
+import static net.minecraftforge.common.util.ForgeDirection.NORTH;
+import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
+import static net.minecraftforge.common.util.ForgeDirection.UP;
+import static net.minecraftforge.common.util.ForgeDirection.WEST;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -120,7 +126,44 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 
 				for(int hangerY = rand.nextInt(20); hangerY>0; hangerY--)
 					if (world.isAirBlock(xx,yy-hangerY,zz))
-						world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger);
+						world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger, 4, 2);
+		}
+		
+		int offset = 1;
+		for(attempt = 0; attempt < 800; attempt++) {
+			xx = x+offsetXZ();
+			yy = 30+rand.nextInt(80);
+			zz = z+offsetXZ();
+
+			if (world.isAirBlock(xx,yy,zz)) {
+				int randomiseSide = rand.nextInt(6);
+				switch (randomiseSide) {
+				case 0:
+					if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
+						world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 2, 2);
+					break;
+				case 1:	
+					if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
+						world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 3, 2);
+					break;
+				case 2:
+					if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
+						world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 4, 2);
+					break;
+				case 3:
+					if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
+						world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 5, 2);
+					break;
+				case 4:
+					if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
+						world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 6, 2);
+					break;
+				case 5:
+					if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
+						world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 7, 2);
+					break;
+				}
+			}
 		}
 	}
 
