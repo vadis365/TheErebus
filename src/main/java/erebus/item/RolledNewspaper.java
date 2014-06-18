@@ -2,36 +2,40 @@ package erebus.item;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSimpleFoiled;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class RolledNewspaper extends Item {
+public class RolledNewspaper extends ItemSimpleFoiled {
 
 	public RolledNewspaper() {
-		maxStackSize = 1;
+		setMaxStackSize(1);
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
-	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
-		list.add("+10 Attack Damage");
-		if (!is.isItemEnchanted())
-			list.add("Bane of Arthropods V");
+		list.add(EnumChatFormatting.BLUE + "+10 Attack Damage");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack is, int pass) {
-		return true;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
+		ItemStack stack = new ItemStack(item, 1, 0);
+		stack.addEnchantment(Enchantment.baneOfArthropods, 5);
+		list.add(stack);
 	}
 
 	@Override
