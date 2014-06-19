@@ -25,27 +25,30 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.item.block.ItemBlockErebusPlantSmall;
 
-public class BlockWallPlants extends Block implements IShearable, ISubBlocksBlock {
+public class BlockWallPlants extends Block implements IShearable,
+		ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "moss", "lichen" };
 
-public static final int dataMoss = 0, dataLichen = 1; 
-	
+	public static final int dataMoss = 0, dataLichen = 1;
+
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
 
 	public BlockWallPlants() {
 		super(Material.plants);
+		setTickRandomly(true);
 	}
-	
+
 	@Override
 	public void setBlockBoundsForItemRender() {
-        setBlockBounds(0.125F, 0.0F, 0.0F, 0.25F, 1.0F, 1.0F);
-    }
-	
+		setBlockBounds(0.125F, 0.0F, 0.0F, 0.25F, 1.0F, 1.0F);
+	}
+
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[iconPaths.length];
@@ -64,7 +67,8 @@ public static final int dataMoss = 0, dataLichen = 1;
 			return icons[dataLichen];
 		if (meta > 1 && meta <= 7)
 			return icons[dataMoss];
-		else return icons[dataLichen];
+		else
+			return icons[dataLichen];
 	}
 
 	@Override
@@ -75,25 +79,26 @@ public static final int dataMoss = 0, dataLichen = 1;
 			list.add(new ItemStack(id, 1, i));
 	}
 
-    @Override
-    public int getRenderType() {
-        return 0;
-    }
+	@Override
+	public int getRenderType() {
+		return 0;
+	}
 
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
 
-    @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
-    	int meta = access.getBlockMetadata(x, y, z);
-    	float widthMin = 0, heightMin = 0, depthMin = 0;
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y,
+			int z) {
+		int meta = access.getBlockMetadata(x, y, z);
+		float widthMin = 0, heightMin = 0, depthMin = 0;
 		float widthMax = 0, heightMax = 0, depthMax = 0;
 
 		switch (meta) {
@@ -211,8 +216,8 @@ public static final int dataMoss = 0, dataLichen = 1;
 			break;
 		}
 		setBlockBounds(0F + widthMin, 0F + heightMin, 0F + depthMin, 1F - widthMax, 1F - heightMax, 1F - depthMax);
-		}
-    
+	}
+
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		return null;
@@ -220,13 +225,18 @@ public static final int dataMoss = 0, dataLichen = 1;
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x, y + 1, z)) || isValidBlock(world.getBlock(x, y - 1, z)) || isValidBlock(world.getBlock(x - 1, y, z)) || isValidBlock(world.getBlock(x + 1, y, z)) ||isValidBlock(world.getBlock(x, y, z - 1)) || isValidBlock(world.getBlock(x, y, z +1 ));	
+		return isValidBlock(world.getBlock(x, y + 1, z))
+				|| isValidBlock(world.getBlock(x, y - 1, z))
+				|| isValidBlock(world.getBlock(x - 1, y, z))
+				|| isValidBlock(world.getBlock(x + 1, y, z))
+				|| isValidBlock(world.getBlock(x, y, z - 1))
+				|| isValidBlock(world.getBlock(x, y, z + 1));
 	}
 
 	private boolean isValidBlock(Block block) {
 		return block.renderAsNormalBlock() && block.getMaterial().blocksMovement();
 	}
-	
+
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
 		if (meta == dataMoss) {
@@ -270,14 +280,14 @@ public static final int dataMoss = 0, dataLichen = 1;
 		}
 		return meta;
 	}
-  
+
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
-		
+
 		if (meta == 2 || meta == 8)
-			if(world.isSideSolid(x, y + 1, z, DOWN))
+			if (world.isSideSolid(x, y + 1, z, DOWN))
 				flag = true;
 		if (meta == 3 || meta == 9)
 			if (world.isSideSolid(x, y - 1, z, UP))
@@ -302,44 +312,134 @@ public static final int dataMoss = 0, dataLichen = 1;
 
 		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
-	
+
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
 	}
-	
+
 	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}
-    
+
 	@Override
 	public Item getItemDropped(int id, Random random, int fortune) {
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    public int quantityDropped(Random rand) {
-        return 0;
-    }
+	@Override
+	public int quantityDropped(Random rand) {
+		return 0;
+	}
 
-    @Override
-    public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
-        return true;
-    }
+	@Override
+	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
+		return true;
+	}
 
-    @Override
-    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
-    	int meta = world.getBlockMetadata(x, y, z);
+	@Override
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
+		int meta = world.getBlockMetadata(x, y, z);
 		if (meta == 2 || meta == 3 || meta == 4 || meta == 5 || meta == 6 || meta == 7)
-    		meta = dataMoss;
+			meta = dataMoss;
 		if (meta == 8 || meta == 9 || meta == 10 || meta == 11 || meta == 12 || meta == 13)
-    		meta = dataLichen;
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        ret.add(new ItemStack(this, 1, meta));
-        return ret;
-    }
-    
+			meta = dataLichen;
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ret.add(new ItemStack(this, 1, meta));
+		return ret;
+	}
+
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand) {
+		int meta = world.getBlockMetadata(x, y, z);
+		int attempt = 0;
+		if (rand.nextInt(2) == 0) {
+			byte radius = 4;
+			int distance = 5;
+			int xx;
+			int yy;
+			int zz;
+			for (xx = x - radius; xx <= x + radius; ++xx) {
+				for (zz = z - radius; zz <= z + radius; ++zz) {
+					for (yy = y - 1; yy <= y + radius; ++yy) {
+						if (world.getBlock(xx, zz, yy) == this) {
+							--distance;
+							if (distance <= 0)
+								return;
+						}
+					}
+				}
+			}
+
+			xx = x + rand.nextInt(3) - 1;
+			yy = y + rand.nextInt(3) - 1;
+			zz = z + rand.nextInt(3) - 1;
+			if (world.isAirBlock(xx, yy, zz)) {
+				for (attempt = 0; attempt < 6; attempt++) {
+					int offset = 1;
+					int randomiseSide = rand.nextInt(6);
+
+					if (meta > 1 && meta <= 7) {
+						switch (randomiseSide) {
+						case 0:
+							if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 2, 2);
+							break;
+						case 1:
+							if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 3, 2);
+							break;
+						case 2:
+							if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 4, 2);
+							break;
+						case 3:
+							if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 5, 2);
+							break;
+						case 4:
+							if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 6, 2);
+							break;
+						case 5:
+							if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 7, 2);
+							break;
+						}
+					} else if (meta > 7 && meta <= 13) {
+						switch (randomiseSide) {
+						case 0:
+							if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 8, 2);
+							break;
+						case 1:
+							if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 9, 2);
+							break;
+						case 2:
+							if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 10, 2);
+							break;
+						case 3:
+							if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 11, 2);
+							break;
+						case 4:
+							if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 12, 2);
+							break;
+						case 5:
+							if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
+								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 13, 2);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	@Override
 	public Class<? extends ItemBlock> getItemBlockClass() {
 		return ItemBlockErebusPlantSmall.class;
