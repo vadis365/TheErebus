@@ -438,6 +438,8 @@ public class BlockWallPlants extends Block implements IShearable,
 				}
 			}
 		}
+		if (rand.nextInt(64) == 0)
+			world.setBlockToAir(x, y, z);
 	}
 
 	@Override
