@@ -362,7 +362,7 @@ public class BlockWallPlants extends Block implements IShearable,
 			int zz;
 			for (xx = x - radius; xx <= x + radius; ++xx) {
 				for (zz = z - radius; zz <= z + radius; ++zz) {
-					for (yy = y - 1; yy <= y + radius; ++yy) {
+					for (yy = y - radius; yy <= y + radius; ++yy) {
 						if (world.getBlock(xx, zz, yy) == this) {
 							--distance;
 							if (distance <= 0)
@@ -438,7 +438,7 @@ public class BlockWallPlants extends Block implements IShearable,
 				}
 			}
 		}
-		if (rand.nextInt(64) == 0)
+		if (rand.nextInt(25) == 0)
 			world.setBlockToAir(x, y, z);
 	}
 
