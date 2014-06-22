@@ -146,9 +146,9 @@ tile.doubleHeightPlant_11.name=Droughted Shrub
 tile.doubleHeightPlant_12.name=Tangled Stalk Mushrooms
 tile.doubleHeightPlant_13.name=High Capped Mushroom
 tile.erebusPlantSmall_0.name=Bulb Capped Mushroom
-tile.erebusPlantSmall_1.name=Small Shroom1 
-tile.erebusPlantSmall_2.name=Small Shroom2
-tile.erebusPlantSmall_3.name=Small Shroom3
+tile.erebusPlantSmall_1.name=Grandma's Shoes Mushroom
+tile.erebusPlantSmall_2.name=Sarcastic Czech Mushroom
+tile.erebusPlantSmall_3.name=Kaizer's Fingers Mushroom
 tile.erebusPlantSmall_4.name=Dutch Cap Mushroom
 tile.erebusPlantSmall_5.name=Cattail
 tile.erebusPlantSmall_6.name=Desert Shrub 
@@ -160,7 +160,8 @@ tile.erebusPlantSmall_11.name=Fire Bloom
 tile.erebus.glowGemBlock.name=Glowing Gem
 tile.erebus.mucusBomb.name=Mucus Bomb
 tile.erebusHanger.name=Hanger
-
+tile.erebusWallPlants_0.name=Moss
+tile.erebusWallPlants_1.name=Lichen
 
 # Items
 item.encrustedDiamond.name=Encrusted Diamond
@@ -227,6 +228,7 @@ item.erebusMaterials.30.name=Mucus Charge
 item.erebusMaterials.31.name=Nettle Leaves
 item.erebusMaterials.32.name=Nettle Flowers
 item.erebusMaterials.33.name=Middle Fruit Seeds
+item.erebusMaterials.34.name=Moss Ball
 item.erebusSpecialItem.0.name=Beetle Riding Kit
 item.erebusSpecialItem.1.name=Beetle Taming Amulet
 item.erebusSpecialItem.2.name=Umbergolem Core

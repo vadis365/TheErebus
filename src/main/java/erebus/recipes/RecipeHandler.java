@@ -190,6 +190,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mucusBomb, 1), new Object[] { "MMM", "MTM", "MMM", 'M', new ItemStack(ModItems.erebusMaterials, 1, DATA.mucusCharge.ordinal()), 'T', Blocks.tnt });
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.honeyCombBlock, 1), new Object[] { "NPN", "PCP", "NPN", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal()), 'C', Blocks.chest, 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(Items.blaze_powder, 1), new Object[] { "FFF", "FFF", "FFF", 'F', new ItemStack(ModBlocks.erebusPlantSmall, 1, 13) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.mossBall.ordinal()), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.erebusWallPlants, 1, 0) });
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.itemPetrifiedWood.ordinal()), 'U', new ItemStack(ModBlocks.umberstone, 1, 0));
