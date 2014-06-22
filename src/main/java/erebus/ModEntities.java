@@ -38,6 +38,7 @@ import erebus.entity.EntityMosquito;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityMucusBombPrimed;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityPunchshroom;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
@@ -91,7 +92,7 @@ public class ModEntities {
 		registerEntity(26, EntityBloodSnail.class, "bloodSnail", 0x634430, 0xFF0000);
 		registerEntity(27, EntityTitanBeetle.class, "titanBeetle", 0xF09071, 0x000000);
 		registerEntity(28, EntityBotFlyLarva.class, "botFlyLarva");
-		registerEntity(29, EntitySporeling.class, "sporeling", 0xFFFFFF, 0xFF0000);
+		//registerEntity(29, EntitySporeling.class, "sporeling", 0xFFFFFF, 0xFF0000);
 		registerEntity(30, EntityWheatWeevil.class, "wheatWeevil", 0x000000, 0xFFA200);
 		registerEntity(31, EntityWoodlouse.class, "woodlouse", 0x747474, 0x222222);
 		registerEntity(32, EntityCicada.class, "cicada", 0x747474, 0xFFA200);
@@ -101,6 +102,7 @@ public class ModEntities {
 		registerEntity(36, EntityChameleonTick.class, "chameleonTick", 0x804E3D, 0x3D6F80);
 		registerEntity(37, EntitySolifugeSmall.class, "solifugeSmall");
 		registerEntity(38, EntityMidgeSwarm.class, "midgeSwarm", -14803180, -13816034);
+		registerEntity(39, EntityPunchshroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
 
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
