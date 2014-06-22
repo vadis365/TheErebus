@@ -104,28 +104,14 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
-		if (rand.nextInt(15) == 0) {
-			byte radius = 4;
-			int distance = 5;
+		if (rand.nextInt(25) == 0) {
 			int xx;
 			int yy;
 			int zz;
-			for (xx = x - radius; xx <= x + radius; ++xx) {
-				for (zz = z - radius; zz <= z + radius; ++zz) {
-					for (yy = y - 1; yy <= y + 1; ++yy) {
-						if (world.getBlock(xx, zz, yy) == this) {
-							--distance;
-							if (distance <= 0)
-								return;
-						}
-					}
-				}
-			}
 			xx = x + rand.nextInt(3) - 1;
 			yy = y + rand.nextInt(2) - rand.nextInt(2);
 			zz = z + rand.nextInt(3) - 1;
-			if (world.isAirBlock(xx, yy, zz)
-					&& this.canBlockStay(world, xx, yy, zz)) {
+			if (world.isAirBlock(xx, yy, zz) && this.canBlockStay(world, xx, yy, zz)) {
 				if (meta == dataNettle && rand.nextInt(3) == 0)
 					world.setBlock(x, y, z, this, dataNettleFlowered, 2);
 				if (meta == dataNettleFlowered)

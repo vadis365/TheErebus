@@ -2,6 +2,7 @@ package erebus;
 
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.biomes.BiomeElysianFields;
+import erebus.world.biomes.BiomeFungalForest;
 import erebus.world.biomes.BiomeSubterraneanSavannah;
 import erebus.world.biomes.BiomeUlteriorOutback;
 import erebus.world.biomes.BiomeUndergroundJungle;
@@ -49,7 +50,7 @@ public class ModBiomes {
 		subterraneanSavannah = new BiomeSubterraneanSavannah(subterraneanSavannahID);
 		elysianFields = new BiomeElysianFields(elysianFieldsID);
 		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
-		//fungalForest = new BiomeFungalForest(fungalForestID);
+		fungalForest = new BiomeFungalForest(fungalForestID);
 		//betweenlands = new BiomeBetweenlands(betweenlandsID);
 
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);

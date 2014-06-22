@@ -27,11 +27,11 @@ import erebus.item.block.ItemBlockDoubleHeightPlant;
 
 public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock {
 
-	public static final String[] plantName = new String[] { "Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "Shroom1", "Shroom2" };
+	public static final String[] plantName = new String[] { "Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "TangledStalk", "HighCapped" };
 
-	public static final int dataSundewBottom = 0, dataWeepingBlueBottom = 1, dataBullrushBottom = 2, dataDroughtedShrubBottom = 3, dataShroom1Bottom = 4, dataShroom2Bottom = 5;
+	public static final int dataSundewBottom = 0, dataWeepingBlueBottom = 1, dataBullrushBottom = 2, dataDroughtedShrubBottom = 3, dataTangledStalkBottom = 4, dataHighCappedBottom = 5;
 
-	public static final int dataSundewTop = 8, dataWeepingBlueTop = 9, dataBullrushTop = 10, dataDroughtedShrubTop = 11, dataShroom1Top = 12, dataShroom2Top = 13;
+	public static final int dataSundewTop = 8, dataWeepingBlueTop = 9, dataBullrushTop = 10, dataDroughtedShrubTop = 11, dataTangledStalkTop = 12, dataHighCappedTop = 13;
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] doublePlantBottomIcons;
@@ -87,9 +87,6 @@ public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
-		int meta = access.getBlockMetadata(x, y, z);
-		if (meta == 4 || meta == 12 || meta == 7 || meta == 15)
-			return access.getBiomeGenForCoords(x, z).getBiomeGrassColor(x, y, z);
 		return 16777215;
 	}
 

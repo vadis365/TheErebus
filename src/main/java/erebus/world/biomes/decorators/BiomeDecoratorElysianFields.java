@@ -22,7 +22,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 	protected final WorldGenerator genTreeCypress = new WorldGenCypressTree();
 	protected final WorldGenerator genGiantFlowers = new WorldGenGiantFlowers();
 	
-	protected final WorldGenerator genMossPatch = new WorldGenMossPatch();
+	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 
 	protected boolean generateFlowers = true;
 
