@@ -77,6 +77,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.flowerPlanted);
+		MinecraftForge.EVENT_BUS.register(ModBlocks.erebusPlantSmall);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.insectRepellent);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.erebusHoneyBlock);

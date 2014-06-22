@@ -69,6 +69,14 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 					if (type == 0) {
 						j2 = y + i1 - 3;
 					}
+					
+					if (type == 1) {
+						j2 = y + i1 - 1;
+					}
+					
+					if (type == 4) {
+						j2 = y + i1 - 1;
+					}
 
 					for (k1 = j2; k1 <= y + i1; ++k1) {
 						l1 = 1;
@@ -77,9 +85,14 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 							++l1;
 						}
 
-						if (type == 1) {
+						if (type == 2) {
 							l1 = 3;
 						}
+						
+						if (type == 4) {
+							l1 = 2;
+						}
+
 
 						for (i2 = x - l1; i2 <= x + l1; ++i2) {
 							for (int k2 = z - l1; k2 <= z + l1; ++k2) {
@@ -101,7 +114,7 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 									l2 += 3;
 								}
 
-								if (type == 1 || k1 < y + i1) {
+								if (type == 2 || type == 4 || k1 < y + i1) {
 									if ((i2 == x - l1 || i2 == x + l1) && (k2 == z - l1 || k2 == z + l1)) {
 										continue;
 									}

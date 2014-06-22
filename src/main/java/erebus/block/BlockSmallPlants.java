@@ -15,14 +15,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.entity.player.BonemealEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.ErebusMaterial.DATA;
 import erebus.item.block.ItemBlockErebusPlantSmall;
+import erebus.world.feature.plant.WorldGenBigMushroomErebusMany;
+import erebus.world.feature.plant.WorldGenGiantFlowers;
 
 public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 
@@ -235,5 +242,25 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	@Override
 	public Class<? extends ItemBlock> getItemBlockClass() {
 		return ItemBlockErebusPlantSmall.class;
+	}
+	
+	@SubscribeEvent
+	public void onBonemeal(BonemealEvent event) {
+		if (!event.world.isRemote && event.block == this) {
+			if (event.world.rand.nextFloat() < 0.45D)
+				growPlants(event.world, event.x, event.y, event.z, event.world.rand);
+			event.setResult(Result.ALLOW);
+		}
+	}
+	
+	public void growPlants(World world, int x, int y, int z, Random rand) {
+		int meta = world.getBlockMetadata(x, y, z);
+		WorldGenerator worldGen = new WorldGenBigMushroomErebusMany(meta);
+		if (meta >= 0 && meta <= 4)
+			worldGen.generate(world, rand, x, y, z);
+		world.setBlockToAir(x, y, z);
+		
+		if (!worldGen.generate(world, rand, x, y, z))
+			world.setBlock(x, y, z, this, meta, 3);
 	}
 }
