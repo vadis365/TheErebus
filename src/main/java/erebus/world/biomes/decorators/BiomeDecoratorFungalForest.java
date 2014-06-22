@@ -123,7 +123,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			}
 		}
 
-		for(attempt = 0; attempt < 15; attempt++) {
+		for(attempt = 0; attempt < 10; attempt++) {
 			xx = x+offsetXZ();
 			yy = 30+rand.nextInt(80);
 			zz = z+offsetXZ();
@@ -132,7 +132,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 				genMossPatch.generate(world,rand,xx,yy,zz);
 		}
 		
-		for(attempt = 0; attempt < 15; attempt++) {
+		for(attempt = 0; attempt < 10; attempt++) {
 			xx = x+offsetXZ();
 			yy = 30+rand.nextInt(80);
 			zz = z+offsetXZ();

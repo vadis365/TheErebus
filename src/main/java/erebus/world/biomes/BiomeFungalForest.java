@@ -15,7 +15,7 @@ public class BiomeFungalForest extends BiomeBaseErebus {
 		setBiomeName("Fungal Forest");
 		setColors(0x4E8833);
 		setTemperatureRainfall(0.9F, 0.95F);
-		setWeight(2000);
+		setWeight(12);
 	}
 
 }
