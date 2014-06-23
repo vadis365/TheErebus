@@ -1,6 +1,7 @@
 package erebus.world.feature.plant;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -23,42 +24,37 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		int type = this.mushroomType;
-
 		int height = rand.nextInt(8) + 4;
 		boolean flag = true;
 		Block block;
 
 		if (y >= 1 && y + height + 1 < 256) {
-			int yMax;
-			int yy;
-			int capRad;
-			int xx;
+			int xx, yy, capRad;
 
-			for (yMax = y; yMax <= y + 1 + height; ++yMax) {
+			for (yy = y; yy <= y + 1 + height; ++yy) {
 				byte rad = 3;
 
-				if (yMax <= y + 3) {
+				if (yy <= y + 3)
 					rad = 0;
-				}
 
-				for (yy = x - rad; yy <= x + rad && flag; ++yy) {
+				for (xx = x - rad; xx <= x + rad && flag; ++xx) {
 					for (capRad = z - rad; capRad <= z + rad && flag; ++capRad) {
-						if (yMax >= 0 && yMax < 256) {
-							block = world.getBlock(yy, yMax, capRad);
+						
+						if (yy >= 0 && yy < 256) {
+							block = world.getBlock(xx, yy, capRad);
 
-							if (block.getMaterial() != Material.air && !block.isLeaves(world, yy, yMax, capRad)) {
+							if (block.getMaterial() != Material.air && !block.isLeaves(world, xx, yy, capRad)) {
 								flag = false;
 							}
-						} else {
+						} else
 							flag = false;
-						}
 					}
 				}
 			}
 
-			if (!flag) {
+			if (!flag)
 				return false;
-			} else {
+			else {
 				block = world.getBlock(x, y - 1, z);
 
 				if (block != Blocks.dirt && block != Blocks.grass && block != Blocks.mycelium) {
@@ -66,101 +62,81 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 				} else {
 					int capLength = y + height;
 
-					if (type == 0) {
+					if (type == 0)
 						capLength = y + height - 3;
-					}
 					
-					if (type == 1) {
+					if (type == 1)
 						capLength = y + height - 1;
-					}
 					
-					if (type == 4) {
+					if (type == 4)
 						capLength = y + height - 1;
-					}
 
 					for (yy = capLength; yy <= y + height; ++yy) {
 						capRad = 1;
 
-						if (yy < y + height) {
+						if (yy < y + height)
 							++capRad;
-						}
-
-						if (type == 2) {
-							capRad = 3;
-						}
 						
-						if (type == 4) {
+						if (type == 2)
+							capRad = 3;
+						
+						if (type == 4)
 							capRad = 2;
-						}
-
 
 						for (xx = x - capRad; xx <= x + capRad; ++xx) {
 							for (int zz = z - capRad; zz <= z + capRad; ++zz) {
 								int meta = 5;
 
-								if (xx == x - capRad) {
+								if (xx == x - capRad)
 									--meta;
-								}
-
-								if (xx == x + capRad) {
+								
+								if (xx == x + capRad)
 									++meta;
-								}
-
-								if (zz == z - capRad) {
+								
+								if (zz == z - capRad)
 									meta -= 3;
-								}
-
-								if (zz == z + capRad) {
+								
+								if (zz == z + capRad)
 									meta += 3;
-								}
 
 								if (type == 2 || type == 4 || yy < y + height) {
-									if ((xx == x - capRad || xx == x + capRad) && (zz == z - capRad || zz == z + capRad)) {
+									
+									if ((xx == x - capRad || xx == x + capRad) && (zz == z - capRad || zz == z + capRad))
 										continue;
-									}
-
-									if (xx == x - (capRad - 1) && zz == z - capRad) {
+									
+									if (xx == x - (capRad - 1) && zz == z - capRad)
 										meta = 1;
-									}
-
-									if (xx == x - capRad && zz == z - (capRad - 1)) {
+									
+									if (xx == x - capRad && zz == z - (capRad - 1))
 										meta = 1;
-									}
-
-									if (xx == x + (capRad - 1) && zz == z - capRad) {
+									
+									if (xx == x + (capRad - 1) && zz == z - capRad)
 										meta = 3;
-									}
-
-									if (xx == x + capRad && zz == z - (capRad - 1)) {
+									
+									if (xx == x + capRad && zz == z - (capRad - 1))
 										meta = 3;
-									}
-
-									if (xx == x - (capRad - 1) && zz == z + capRad) {
+									
+									if (xx == x - (capRad - 1) && zz == z + capRad)
 										meta = 7;
-									}
-
-									if (xx == x - capRad && zz == z + (capRad - 1)) {
+									
+									if (xx == x - capRad && zz == z + (capRad - 1))
 										meta = 7;
-									}
-
-									if (xx == x + (capRad - 1) && zz == z + capRad) {
+									
+									if (xx == x + (capRad - 1) && zz == z + capRad)
 										meta = 9;
-									}
-
-									if (xx == x + capRad && zz == z + (capRad - 1)) {
+									
+									if (xx == x + capRad && zz == z + (capRad - 1))
 										meta = 9;
-									}
+
 								}
 
-								if (meta == 5 && yy < y + height) {
+								if (meta == 5 && yy < y + height)
 									meta = 0;
-								}
 
 								block = world.getBlock(xx, yy, zz);
-
-								if ((meta != 0 || y >= y + height - 1) && (block.getMaterial() == Material.air || block.canBeReplacedByLeaves(world, xx, yy, zz))) {
+								
+								if ((meta != 0 || y >= y + height - 1) && (block.getMaterial() == Material.air || block.canBeReplacedByLeaves(world, xx, yy, zz)))
 									world.setBlock(xx, yy, zz, getMushroomCap(type), meta, 3);
-								}
 							}
 						}
 					}
@@ -168,27 +144,30 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 					for (yy = 0; yy < height; ++yy) {
 						block = world.getBlock(x, y + yy, z);
 
-						if (block.getMaterial() == Material.air || block.canBeReplacedByLeaves(world, x, y + yy, z)) {
+						if (block.getMaterial() == Material.air || block.canBeReplacedByLeaves(world, x, y + yy, z))
 							world.setBlock(x, y + yy, z, getMushroomCap(type), 10, 3);
-						}
 					}
-
 					return true;
 				}
 			}
-		} else {
+		} else
 			return false;
-		}
 	}
-	
-	private Block getMushroomCap(int type){
-		switch(type){
-			case 0: return ModBlocks.erebusMushroomCap0;
-			case 1: return ModBlocks.erebusMushroomCap1;
-			case 2: return ModBlocks.erebusMushroomCap2;
-			case 3: return ModBlocks.erebusMushroomCap3;
-			case 4: return ModBlocks.erebusMushroomCap4;
-			default: return null;
+
+	private Block getMushroomCap(int type) {
+		switch (type) {
+		case 0:
+			return ModBlocks.erebusMushroomCap0;
+		case 1:
+			return ModBlocks.erebusMushroomCap1;
+		case 2:
+			return ModBlocks.erebusMushroomCap2;
+		case 3:
+			return ModBlocks.erebusMushroomCap3;
+		case 4:
+			return ModBlocks.erebusMushroomCap4;
+		default:
+			return null;
 		}
 	}
 }
