@@ -69,7 +69,7 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 						capLength = y + height - 1;
 					
 					if (type == 4)
-						capLength = y + height - 1;
+						capLength = y + height - 2;
 
 					for (yy = capLength; yy <= y + height; ++yy) {
 						capRad = 1;
@@ -79,9 +79,6 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 						
 						if (type == 2)
 							capRad = 3;
-						
-						if (type == 4)
-							capRad = 2;
 
 						for (xx = x - capRad; xx <= x + capRad; ++xx) {
 							for (int zz = z - capRad; zz <= z + capRad; ++zz) {
@@ -99,7 +96,7 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 								if (zz == z + capRad)
 									meta += 3;
 
-								if (type == 2 || type == 4 || yy < y + height) {
+								if (type == 2 || yy < y + height) {
 									
 									if ((xx == x - capRad || xx == x + capRad) && (zz == z - capRad || zz == z + capRad))
 										continue;
