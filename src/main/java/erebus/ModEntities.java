@@ -44,6 +44,7 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
+import erebus.entity.EntitySporeBall;
 import erebus.entity.EntitySporeling;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTitanBeetle;
@@ -117,6 +118,7 @@ public class ModEntities {
 		registerEntity(73, EntityExtractedBlock.class, "extractedBlock");
 		registerEntity(74, EntityGooBall.class, "gooBall");
 		registerEntity(75, EntityWoodlouseBall.class, "woodlouseBall");
+		registerEntity(76, EntitySporeBall.class, "sporeBall");
 
 		// Spawn conditions
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);

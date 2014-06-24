@@ -29,6 +29,12 @@ public class EntityPunchshroom extends EntityMob {
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
+	
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataWatcher.addObject(20, new Integer(0));
+	}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -46,6 +52,7 @@ public class EntityPunchshroom extends EntityMob {
 	 * 
 	 * @Override protected String getDeathSound() { return ""; }
 	 */
+	
 	@Override
 	public void onUpdate() {
 		squishFactor += (squishAmount - squishFactor) * 0.5F;
@@ -65,6 +72,16 @@ public class EntityPunchshroom extends EntityMob {
 			squishAmount = 1.0F;
 
 		alterSquishAmount();
+		
+		if (getAttackTarget() != null) {
+			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
+			if (getRangeAttackTimer() < 120 && distance > 3)
+				setRangeAttackTimer(getRangeAttackTimer() + 2);
+			if (getRangeAttackTimer() >= 120 && distance > 3 && onGround)
+				shootSporeBall(getAttackTarget(), distance);
+			if (getRangeAttackTimer() == 0)
+				;
+		}
 	}
 
 	protected void alterSquishAmount() {
@@ -76,8 +93,10 @@ public class EntityPunchshroom extends EntityMob {
 		despawnEntity();
 		EntityPlayer entityplayer = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 
-		if (entityplayer != null)
+		if (entityplayer != null) {
 			faceEntity(entityplayer, 10.0F, 20.0F);
+			setAttackTarget(entityplayer);	
+		}
 
 		if (onGround && shroomJumpDelay-- <= 0) {
 			shroomJumpDelay = getJumpDelay();
@@ -117,11 +136,29 @@ public class EntityPunchshroom extends EntityMob {
 			attackEntityAsMob(par1Entity);
 		}
 	}
+	
+	protected void shootSporeBall(Entity entity, float distance) {
+		if (distance < 16.0F)
+			if (entity instanceof EntityPlayer) {
+				setRangeAttackTimer(0);
+				EntitySporeBall sporeBall = new EntitySporeBall(worldObj, this);
+				sporeBall.posY = posY + height + 0.3D;
+				worldObj.spawnEntityInWorld(sporeBall);
+			}
+	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity par1Entity) {
 		super.attackEntityAsMob(par1Entity);
 		return true;
+	}
+	
+	public void setRangeAttackTimer(int size) {
+		dataWatcher.updateObject(20, Integer.valueOf(size));
+	}
+
+	public int getRangeAttackTimer() {
+		return dataWatcher.getWatchableObjectInt(20);
 	}
 
 }
