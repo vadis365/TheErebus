@@ -18,18 +18,16 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.ErebusMaterial.DATA;
 import erebus.item.block.ItemBlockErebusPlantSmall;
 import erebus.world.feature.plant.WorldGenBigMushroomErebusMany;
-import erebus.world.feature.plant.WorldGenGiantFlowers;
 
 public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 

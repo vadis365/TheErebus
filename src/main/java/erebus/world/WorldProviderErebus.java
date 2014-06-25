@@ -63,7 +63,7 @@ public class WorldProviderErebus extends WorldProvider {
 						currentFogColor[a] = targetFogColor[a];
 				}
 
-		return worldObj.getWorldVec3Pool().getVecFromPool(currentFogColor[0] / 255D, currentFogColor[1] / 255D, currentFogColor[2] / 255D);
+		return Vec3.createVectorHelper(currentFogColor[0] / 255D, currentFogColor[1] / 255D, currentFogColor[2] / 255D);
 	}
 
 	@Override
