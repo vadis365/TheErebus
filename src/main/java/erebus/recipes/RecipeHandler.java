@@ -191,6 +191,8 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.honeyCombBlock, 1), new Object[] { "NPN", "PCP", "NPN", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal()), 'C', Blocks.chest, 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(Items.blaze_powder, 1), new Object[] { "FFF", "FFF", "FFF", 'F', new ItemStack(ModBlocks.erebusPlantSmall, 1, 13) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.mossBall.ordinal()), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.erebusWallPlants, 1, 0) });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.scorchedPlanks, 4), ModBlocks.scorchedWood);
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.rottenPlanks, 2), ModBlocks.rottenWood);
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.itemPetrifiedWood.ordinal()), 'U', new ItemStack(ModBlocks.umberstone, 1, 0));
@@ -237,7 +239,7 @@ public class RecipeHandler {
 
 		// Umbergolem Statue
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.umberGolemStatue, 1), new Object[] { " H ", "LCR", " X ", 'H', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemHead), 'L', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLClaw), 'C', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemCore), 'R', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemRClaw), 'X',
-		new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLegs) });
+			new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLegs) });
 	}
 
 	private static void registerSmelting() {

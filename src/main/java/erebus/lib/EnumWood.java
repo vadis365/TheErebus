@@ -24,7 +24,6 @@ public enum EnumWood {
 	Eucalyptus,
 	Mahogany,
 	Mossbark,
-	Scorched(true, true, false),
 	Asper,
 	Cypress,
 	Sap(true, false, true),

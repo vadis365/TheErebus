@@ -91,7 +91,7 @@ public class ModBlocks {
 	public static Block umberstone, umberOreBlock, oreFossil, redGem, blockAmber, quickSand, ghostSand, erebusOreExtra, umberstoneButton;
 
 	// WOOD
-	public static Block planksErebus, hollowLogAcacia, erebusFlower, erebusStigma;
+	public static Block planksErebus, hollowLogAcacia, erebusFlower, erebusStigma, scorchedWood, rottenWood, scorchedPlanks, rottenPlanks;
 	public static BlockLeavesErebus leavesErebus;
 
 	// UNDERGROWTH
@@ -138,6 +138,12 @@ public class ModBlocks {
 
 		planksErebus = new BlockPlanksErebus().setHardness(2.0F).setStepSound(Block.soundTypeWood);
 		EnumWood.initBlocks();
+		scorchedWood = new BlockSimple(Material.wood).setHardness(2.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("scorchedWood").setBlockTextureName("erebus:log_scorched");
+		rottenWood = new BlockSimple(Material.wood).setHardness(2.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("rottenWood").setBlockTextureName("erebus:log_rotten");
+
+		scorchedPlanks = new BlockSimple(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("scorchedPlanks").setBlockTextureName("erebus:planks_scorched");
+		rottenPlanks = new BlockSimple(Material.wood).setHardness(0.5F).setResistance(1.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("rottenPlanks").setBlockTextureName("erebus:planks_rotten");
+
 		leavesErebus = (BlockLeavesErebus) new BlockLeavesErebus().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leavesErebus");
 		hollowLogAcacia = new BlockHollowLog().setHardness(0.7F).setStepSound(Block.soundTypeWood).setBlockName("hollowLogAcacia");
 		erebusFlower = new BlockErebusFlower().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFlower");

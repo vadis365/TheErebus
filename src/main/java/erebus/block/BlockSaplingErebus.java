@@ -130,8 +130,6 @@ public class BlockSaplingErebus extends BlockSapling {
 			case Mossbark:
 				worldGen = new WorldGenMossbarkTree();
 				break;
-			case Scorched:
-				break;
 			default:
 				break;
 		}
