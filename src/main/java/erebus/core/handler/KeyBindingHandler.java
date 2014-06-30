@@ -15,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.entity.EntityRhinoBeetle;
+import erebus.lib.Reference;
 import erebus.network.PacketPipeline;
 import erebus.network.server.PacketBeetleRamAttack;
 import erebus.network.server.PacketGlider;
@@ -23,9 +24,9 @@ import erebus.network.server.PacketGliderPowered;
 @SideOnly(Side.CLIENT)
 public class KeyBindingHandler {
 
-	public static KeyBinding glide = new KeyBinding("Glide", Keyboard.KEY_G, "category.movement");
-	public static KeyBinding poweredGlide = new KeyBinding("Glider Lift", Keyboard.KEY_F, "category.movement");
-	public static KeyBinding beetleRam = new KeyBinding("Beetle Ram Attack", Keyboard.KEY_R, "category.movement");
+	public static KeyBinding glide = new KeyBinding("Glide", Keyboard.KEY_G, Reference.MOD_NAME);
+	public static KeyBinding poweredGlide = new KeyBinding("Glider Lift", Keyboard.KEY_F, Reference.MOD_NAME);
+	public static KeyBinding beetleRam = new KeyBinding("Beetle Ram Attack", Keyboard.KEY_R, Reference.MOD_NAME);
 
 	public KeyBindingHandler() {
 		ClientRegistry.registerKeyBinding(glide);
