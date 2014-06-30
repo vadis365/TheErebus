@@ -42,7 +42,7 @@ public class EntitySporeBall extends EntityThrowable {
 				trailParticles(worldObj, posX, posY + 0.35D, posZ, rand);
 		
 		if (ridingEntity != null) {
-			yOffset= -1F;
+			yOffset= -1.5F;
 			if (worldObj.isRemote)
 				confusionParticles(worldObj, posX, posY, posZ, rand);
 			
@@ -82,7 +82,7 @@ public class EntitySporeBall extends EntityThrowable {
 	@SideOnly(Side.CLIENT)
 	public void trailParticles(World world, double x, double y, double z, Random rand) {
 		for (int count = 0; count < 3; ++count) {
-			Erebus.proxy.spawnCustomParticle("cloud", worldObj, x, y, z, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("spell", worldObj, x, y, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 	
@@ -97,7 +97,7 @@ public class EntitySporeBall extends EntityThrowable {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 0.5F * motionZ;
 			velX = rand.nextFloat() * 0.5F * motionX;
-			Erebus.proxy.spawnCustomParticle("cloud", worldObj, x, y, z, velX, velY, velZ);
+			Erebus.proxy.spawnCustomParticle("spell", worldObj, x, y, z, velX, velY, velZ);
 		}
 	}
 }

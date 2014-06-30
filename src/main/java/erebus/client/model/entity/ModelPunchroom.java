@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelPunchshroom extends ModelBase {
+public class ModelPunchroom extends ModelBase {
 	ModelRenderer mushBase;
 	ModelRenderer mushBase2;
 	ModelRenderer mushBase3;
@@ -13,7 +13,7 @@ public class ModelPunchshroom extends ModelBase {
 	ModelRenderer mushCap2;
 	ModelRenderer mushCap3;
 
-	public ModelPunchshroom() {
+	public ModelPunchroom() {
 		textureWidth = 128;
 		textureHeight = 64;
 

@@ -1,40 +1,25 @@
 package erebus.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityPunchshroom extends EntityMob {
+public class EntityPunchroom extends EntityMob {
 	private int shroomJumpDelay;
 	public float squishAmount;
 	public float squishFactor;
 	public float prevSquishFactor;
 
-	public EntityPunchshroom(World par1World) {
-
-		super(par1World);
+	public EntityPunchroom(World world) {
+		super(world);
 		isImmuneToFire = true;
 		setSize(1.0F, 1.0F);
 		shroomJumpDelay = rand.nextInt(20) + 10;
-		tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.0D, false));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-	}
-	
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-		dataWatcher.addObject(20, new Integer(0));
-	}
+}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -72,16 +57,6 @@ public class EntityPunchshroom extends EntityMob {
 			squishAmount = 1.0F;
 
 		alterSquishAmount();
-		
-		if (getAttackTarget() != null) {
-			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
-			if (getRangeAttackTimer() < 120 && distance > 3)
-				setRangeAttackTimer(getRangeAttackTimer() + 2);
-			if (getRangeAttackTimer() >= 120 && distance > 3 && onGround)
-				shootSporeBall(getAttackTarget(), distance);
-			if (getRangeAttackTimer() == 0)
-				;
-		}
 	}
 
 	protected void alterSquishAmount() {
@@ -119,46 +94,14 @@ public class EntityPunchshroom extends EntityMob {
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		float knockback = 1;
+		float knockback = 0.2F;
 		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY)
 			if (worldObj.difficultySetting.ordinal() > 1)
 				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-					knockback = 2;
+					knockback = 0.4F;
 				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-					knockback = 3;
-		player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
-
-	}
-
-	@Override
-	protected void attackEntity(Entity par1Entity, float par2) {
-		if (par2 > 0.0F && par2 < 2.0F) {
-			attackEntityAsMob(par1Entity);
+					knockback = 0.6F;
+		player.attackEntityFrom(DamageSource.causeMobDamage(this), 1F);
+		player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.3D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
 		}
 	}
-	
-	protected void shootSporeBall(Entity entity, float distance) {
-		if (distance < 16.0F)
-			if (entity instanceof EntityPlayer) {
-				setRangeAttackTimer(0);
-				EntitySporeBall sporeBall = new EntitySporeBall(worldObj, this);
-				sporeBall.posY = posY + height + 0.3D;
-				worldObj.spawnEntityInWorld(sporeBall);
-			}
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity par1Entity) {
-		super.attackEntityAsMob(par1Entity);
-		return true;
-	}
-	
-	public void setRangeAttackTimer(int size) {
-		dataWatcher.updateObject(20, Integer.valueOf(size));
-	}
-
-	public int getRangeAttackTimer() {
-		return dataWatcher.getWatchableObjectInt(20);
-	}
-
-}
