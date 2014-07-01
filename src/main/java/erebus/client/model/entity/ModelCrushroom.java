@@ -184,7 +184,7 @@ public class ModelCrushroom extends ModelBase {
 		rightThigh.rotateAngleY = -movcos1;
 		leftThigh.rotateAngleY = -movcos1;
 
-		if (crushroom.standing) {
+		if (crushroom.getStanding()==1) {
 			capTop.setRotationPoint(0F, -14F, 1F);
 			capBottom.setRotationPoint(0F, -14F, 1F);
 			head.setRotationPoint(0F, -14F, 1F);

@@ -63,8 +63,6 @@ public class EntitySporeBall extends EntityThrowable {
 						ticksExisted=0;
 					}
 				}
-				if (worldObj.isRemote)
-					PacketPipeline.sendToAllAround(mop.entityHit, 64D, new PacketParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
 			}
 			else
 				setDead();
@@ -72,7 +70,7 @@ public class EntitySporeBall extends EntityThrowable {
 
 	@Override
 	public boolean canBeCollidedWith() {
-		return true;
+		return false;
 	}
 
 	public boolean attackEntityFrom(DamageSource source, int amount) {

@@ -10,6 +10,7 @@ import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.client.particle.EntitySpellParticleFX;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -338,6 +339,9 @@ public class ClientProxy extends CommonProxy {
 
 		if (particleName.equals("cloud"))
 			fx = new EntityCloudFX(world, x, y, z, vecX, vecY, vecZ);
+		
+		if (particleName.equals("spell"))
+			fx = new EntitySpellParticleFX(world, x, y, z, vecX, vecY, vecZ);
 
 		if (particleName.equals("heart"))
 			fx = new EntityHeartFX(world, x, y, z, vecX, vecY, vecZ);
