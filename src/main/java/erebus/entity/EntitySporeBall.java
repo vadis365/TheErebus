@@ -76,9 +76,11 @@ public class EntitySporeBall extends EntityThrowable {
 			}
 			
 			if (mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityPlayer)) {
-				if (!worldObj.isRemote)
+				if (!worldObj.isRemote) {
 					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 5 * 20, 0));
-				setDead();
+					((EntityLivingBase) mop.entityHit).attackEntityFrom(DamageSource.causeMobDamage(getThrower()), 1.0F);
+				}
+					setDead();
 			}
 		}
 			else
