@@ -10,6 +10,7 @@
 "beetlelarvasplat": {"category": "neutral","sounds":["beetlelarvasplat"]},
 "blackwidowhurt": {"category": "hostile","sounds":["blackwidowhurt"]},
 "blackwidowsound": {"category": "hostile","sounds":["blackwidowsound"]},
+"blamsound": {"category": "hostile","sounds":["blamsound"]},
 "bombardierbeetlehurt": {"category": "hostile","sounds":["bombardierbeetlehurt"]},
 "bombardierbeetlesound": {"category": "hostile", "sounds":["bombardierbeetlesound"]},
 "centipedehurt": {"category": "hostile", "sounds":["centipedehurt"]},

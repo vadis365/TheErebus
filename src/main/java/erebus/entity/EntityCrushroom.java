@@ -172,6 +172,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	private void meleeAttackPlayer() {
 		if (!worldObj.isRemote && getAttackTarget().boundingBox.maxY >= boundingBox.minY && getAttackTarget().boundingBox.minY <= boundingBox.maxY && getSmashCount() == 20) {
 			spawnBlamParticles();
+			playSound("erebus:blamsound", 0.5F, 1.0F);
 			getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), 6.0F);
 			getAttackTarget().addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 0.5D, 0.2D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 0.5D);
 		}
