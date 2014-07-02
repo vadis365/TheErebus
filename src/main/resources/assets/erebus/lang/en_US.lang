@@ -315,6 +315,8 @@ entity.erebus.antlionMiniBoss.name=Antlion Mini Boss
 entity.erebus.chameleonTick.name=Chameleon Tick
 entity.erebus.solifugeSmall.name=Solifuge Small
 entity.erebus.midgeSwarm.name=Midge Swarm
+entity.erebus.punchroom.name=Punchroom
+entity.erebus.crushroom.name=Crushroom
 
 # Fluids
 fluid.erebus.honey=Honey

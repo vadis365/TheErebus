@@ -31,7 +31,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(2, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true));
 	}
 
 	@Override
@@ -162,6 +162,11 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	protected Item getDropItem() {
 		return Items.bone;
 	}
+	
+	@Override
+    public boolean canAttackClass(Class entity) {
+        return EntityCrushroom.class != entity && EntitySporeling.class != entity;
+    }
 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase entity, float range) {

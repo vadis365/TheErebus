@@ -3,9 +3,12 @@ package erebus.entity;
 import java.util.Random;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -61,7 +64,7 @@ public class EntitySporeBall extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
 
-		if (mop.entityHit != null)
+		if (mop.entityHit != null) {
 			if (mop.entityHit instanceof EntityPlayer) {
 
 				if (!worldObj.isRemote) {
@@ -71,6 +74,13 @@ public class EntitySporeBall extends EntityThrowable {
 					}
 				}
 			}
+			
+			if (mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityPlayer)) {
+				if (!worldObj.isRemote)
+					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 5 * 20, 0));
+				setDead();
+			}
+		}
 			else
 				setDead();
 	}
