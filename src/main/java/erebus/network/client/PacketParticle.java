@@ -7,15 +7,17 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.client.fx.EntityRepellentFX;
 import erebus.network.AbstractClientPacket;
 
 public class PacketParticle extends AbstractClientPacket {
 
 	public static enum ParticleType {
-		BEETLE_LARVA_SQUISH, SPRAY_CAN;
+		BEETLE_LARVA_SQUISH, SPRAY_CAN, CRUSHROOM_BLAM;
 
 		static final ParticleType[] values = values();
 	}
@@ -56,8 +58,12 @@ public class PacketParticle extends AbstractClientPacket {
 				for (int count = 0; count <= 200; ++count)
 					eff.addEffect(new EntityBreakingFX(player.worldObj, e.posX + (rand.nextDouble() - 0.5D) * e.width, e.posY + rand.nextDouble() * e.height - e.yOffset, e.posZ + (rand.nextDouble() - 0.5D) * e.width, Items.slime_ball));
 				break;
-
-			default:
+			case CRUSHROOM_BLAM:
+				for (int a = 0; a < 360; a += 4) {
+					double ang = a * Math.PI / 180D;
+					eff.addEffect(new EntityRepellentFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY + 0.1D, e.posZ + MathHelper.cos((float) ang) * 3,0,0,0));
+				}
+				default:
 				;
 		}
 	}

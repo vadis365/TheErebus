@@ -148,7 +148,7 @@ public class ModelCrushroom extends ModelBase {
 		EntityCrushroom crushroom = (EntityCrushroom) entity;
 		float movcos1 = MathHelper.cos(limbSwing * 0.7F) * 0.3F * limbSwingAngle;
 		float movsin1 = MathHelper.sin(limbSwing * 0.7F) * 0.3F * limbSwingAngle;
-		float hitSwing = -crushroom.getSmashCount() * 0.1F;
+		float hitSwing = MathHelper.sin(-crushroom.getSmashCount() * 0.1F);
 
 		rightArm1.setRotationPoint(-9F, -10F, 1F);
 		leftArm1.setRotationPoint(9F, -10F, 1F);
@@ -195,21 +195,21 @@ public class ModelCrushroom extends ModelBase {
 			head.rotateAngleX = rotationPitch / (180F / (float) Math.PI) + hitSwing * 0.5F;
 			chest.rotateAngleX = hitSwing * 0.5F;
 			belly.rotateAngleX = hitSwing * 0.5F;
-			rightArm1.rotateAngleX = hitSwing * 3;
-			leftArm1.rotateAngleX = hitSwing * 3;
+			rightArm1.rotateAngleX = hitSwing * 3F;
+			leftArm1.rotateAngleX = hitSwing * 3F;
 		}
 
 		if (crushroom.getStanding() == 3) {
 			capTop.setRotationPoint(0F, -14F, 1F);
 			capBottom.setRotationPoint(0F, -14F, 1F);
 			head.setRotationPoint(0F, -14F, 1F);
-			capTop.rotateAngleX = rotationPitch / (180F / (float) Math.PI) + hitSwing * 2;
-			capBottom.rotateAngleX = rotationPitch / (180F / (float) Math.PI) + hitSwing * 2;
-			head.rotateAngleX = rotationPitch / (180F / (float) Math.PI) + hitSwing * 2;
-			chest.rotateAngleX = -hitSwing * 2;
-			belly.rotateAngleX = -hitSwing * 2;
-			rightArm1.rotateAngleX = hitSwing * 3;
-			leftArm1.rotateAngleX = hitSwing * 3;
+			capTop.rotateAngleX = rotationPitch / (180F / (float) Math.PI) + hitSwing * 2F;
+			capBottom.rotateAngleX = rotationPitch / (180F / (float) Math.PI) + hitSwing * 2F;
+			head.rotateAngleX = rotationPitch / (180F / (float) Math.PI) + hitSwing * 2F;
+			chest.rotateAngleX = -hitSwing * 2F;
+			belly.rotateAngleX = -hitSwing * 2F;
+			rightArm1.rotateAngleX = hitSwing * 2.5F;
+			leftArm1.rotateAngleX = hitSwing * 2.5F;
 		}
 	}
 }

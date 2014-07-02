@@ -16,6 +16,9 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 0.75D, 40, 12.0F);
@@ -34,9 +37,10 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
 	}
 
 	@Override
@@ -58,19 +62,26 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 		if (!worldObj.isRemote && getAttackTarget() != null) {
 			faceEntity(getAttackTarget(), 10.0F, 20.0F);
 			double distance = getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
-			if (distance > 4.0D && distance <= 12) {
-				setStanding((byte) 0);
+			
+			if (distance > 5.0D && distance <= 12) {
 				tasks.addTask(3, aiArrowAttack);
+				if (getSmashCount() >= 1) {
+					setSmashCount(getSmashCount() - 1);
+					setStanding((byte) 3);
+					if (getSmashCount() == 0) {
+						setStanding((byte) 0);	
+					}
+				}
 			}
-
-			if (distance <= 4.0D) {
+			
+			if (distance <= 5.0D) {
 				tasks.removeTask(aiArrowAttack);
-				if (getSmashCount() < 10 && getStanding() != 3) {
+				if (getSmashCount() < 20 && getStanding() != 3) {
 					setSmashCount(getSmashCount() + 1);
 					setStanding((byte) 2);
 				}
 
-				if (getSmashCount() >= 10 && getStanding() == 2) {
+				if (getSmashCount() >= 20 && getStanding() == 2) {
 					setStanding((byte) 3);
 					meleeAttackPlayer();
 				}
@@ -78,7 +89,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 				if (getSmashCount() >= 1 && getStanding() == 3) {
 					setSmashCount(getSmashCount() - 1);
 					if (getSmashCount() == 0) {
-						setStanding((byte) 0);	
+						setStanding((byte) 2);	
 					}
 				}
 			}
@@ -159,7 +170,14 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	}
 		
 	private void meleeAttackPlayer() {
-		if (!worldObj.isRemote && getAttackTarget().boundingBox.maxY >= boundingBox.minY && getAttackTarget().boundingBox.minY <= boundingBox.maxY && getSmashCount() == 10)
-			getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F);	
+		if (!worldObj.isRemote && getAttackTarget().boundingBox.maxY >= boundingBox.minY && getAttackTarget().boundingBox.minY <= boundingBox.maxY && getSmashCount() == 20) {
+			spawnBlamParticles();
+			getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), 6.0F);
+			getAttackTarget().addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 0.5D, 0.2D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 0.5D);
+		}
+	}
+		
+	public void spawnBlamParticles() {
+		PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.CRUSHROOM_BLAM));
 	}
 }
