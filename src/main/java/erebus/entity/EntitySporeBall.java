@@ -5,15 +5,13 @@ import java.util.Random;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntitySporeBall extends EntityThrowable {
 
@@ -45,6 +43,15 @@ public class EntitySporeBall extends EntityThrowable {
 			yOffset= -1.5F;
 			if (worldObj.isRemote)
 				confusionParticles(worldObj, posX, posY, posZ, rand);
+			
+			if (!worldObj.isRemote) {
+				if(ridingEntity instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer)ridingEntity;
+					ItemStack is = player.inventory.getCurrentItem();
+					if (is != null)
+						player.dropOneItem(true);
+				}
+			}
 			
 			if (ticksExisted > 140)
 				setDead();
