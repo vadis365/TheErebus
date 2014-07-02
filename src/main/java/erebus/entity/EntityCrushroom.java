@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -146,6 +147,11 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	protected String getDeathSound() {
 		return "erebus:sporelingdeath";
 	}
+	
+	@Override
+	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
+		playSound("mob.irongolem.walk", 1.0F, 0.5F);
+	}
 
 	@Override
 	protected float getSoundPitch() {
@@ -171,8 +177,8 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 		
 	private void meleeAttackPlayer() {
 		if (!worldObj.isRemote && getAttackTarget().boundingBox.maxY >= boundingBox.minY && getAttackTarget().boundingBox.minY <= boundingBox.maxY && getSmashCount() == 20) {
-			spawnBlamParticles();
 			playSound("erebus:blamsound", 0.5F, 1.0F);
+			spawnBlamParticles();
 			getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), 6.0F);
 			getAttackTarget().addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 0.5D, 0.2D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 0.5D);
 		}
