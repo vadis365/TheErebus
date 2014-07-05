@@ -26,7 +26,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	public int cropZ;
 	private int spiralIndex;
 	private int eatTicks;
-	private static final List<Point> spiral = new Spiral(32, 32).spiral();
+	private static final List<Point> spiral = new Spiral(32, 8).spiral();
 
 	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed) {
 		this.entity = entity;
@@ -49,13 +49,15 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
-		return !entity.isChild();
+		return !entity.isChild() && entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, AxisAlignedBB.getBoundingBox(cropX, cropY, cropZ, cropX + 1, cropY + 1, cropZ + 1)).isEmpty();
 	}
 
 	@Override
 	public void updateTask() {
-		if (!continueExecuting())
+		if (!continueExecuting()) {
+			resetTask();
 			return;
+		}
 
 		int xCoord = (int) entity.posX;
 		int yCoord = (int) entity.posY;

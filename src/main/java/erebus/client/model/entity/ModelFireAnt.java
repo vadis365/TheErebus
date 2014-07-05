@@ -299,8 +299,8 @@ public class ModelFireAnt extends ModelBase {
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		HeadA.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
 		HeadA.rotateAngleX = rotationPitch / (180F / (float) Math.PI) - 1F;
-		float stuff = MathHelper.cos(limbSwing * 2.0F + (float) Math.PI);
-		float morestuff = MathHelper.cos(limbSwing * 2.0F);
+		float stuff = MathHelper.cos(limbSwing * 1.5F + (float) Math.PI);
+		float morestuff = MathHelper.cos(limbSwing * 1.5F);
 		LBLA.rotateAngleX = stuff * 0.7F * prevLimbSwing + 0.25F;
 		LBLB.rotateAngleX = stuff * 0.7F * prevLimbSwing + 0.25F;
 		LBLC.rotateAngleX = stuff * 0.7F * prevLimbSwing + 0.5F;

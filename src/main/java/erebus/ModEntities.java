@@ -12,6 +12,7 @@ import erebus.entity.EntityAntlion;
 import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityBlackAnt;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBloodSnail;
 import erebus.entity.EntityBombardierBeetle;
@@ -106,6 +107,7 @@ public class ModEntities {
 		registerEntity(38, EntityMidgeSwarm.class, "midgeSwarm", -14803180, -13816034);
 		registerEntity(39, EntityPunchroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
 		registerEntity(40, EntityCrushroom.class, "crushroom", 0xFFFFFF, 0xFF0000);
+		registerEntity(41, EntityBlackAnt.class, "blackAnt", 0x000000, 0xF09071);
 
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
