@@ -39,6 +39,7 @@ import erebus.item.JadePickaxe;
 import erebus.item.JumpBoots;
 import erebus.item.MaxSpeedBow;
 import erebus.item.MetalIngots;
+import erebus.item.MushroomHelm;
 import erebus.item.NectarCollector;
 import erebus.item.Paxel;
 import erebus.item.PortalActivator;
@@ -74,7 +75,7 @@ public class ModItems {
 	public static Item fossilClub, waspSword, maxSpeedBow, waspDagger, scorpionPincer, webSlinger, doorAmberItem, woodlouseBall, rolledNewspaper;
 
 	// MISC ARMOR
-	public static Item reinCompoundGoggles, compoundGoggles, sprintLeggings, jumpBoots, armorGlider, armorGliderPowered, lightCrown;
+	public static Item reinCompoundGoggles, compoundGoggles, sprintLeggings, jumpBoots, armorGlider, armorGliderPowered, lightCrown, mushroomHelm;
 
 	// CREATIVE
 	public static Item spawnEggs;
@@ -145,7 +146,8 @@ public class ModItems {
 		armorGlider = new ArmorGlider().setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
 		armorGliderPowered = new ArmorGlider().setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 		lightCrown = new CrownOfLuminosity(0).setUnlocalizedName("lightCrown").setTextureName("erebus:lightCrown");
-
+		mushroomHelm = new MushroomHelm(0).setUnlocalizedName("mushroomHelm").setTextureName("erebus:mushroomHelm");
+		
 		spawnEggs = new SpawnEggs().setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
 	}
 
@@ -157,7 +159,7 @@ public class ModItems {
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger, woodlouseBall, rolledNewspaper);
-		ModTabs.gears.setTab(lightCrown, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
+		ModTabs.gears.setTab(mushroomHelm, lightCrown, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
 		ModTabs.specials.setTab(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
 
 		// Special Case
