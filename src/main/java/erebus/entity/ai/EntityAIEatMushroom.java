@@ -1,7 +1,8 @@
 package erebus.entity.ai;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
 import erebus.entity.EntityBlackAnt;
@@ -9,9 +10,10 @@ import erebus.entity.EntityBlackAnt;
 public class EntityAIEatMushroom extends EntityAIEatBlock {
 
 	private final double moveSpeed;
-
-	public EntityAIEatMushroom(EntityAnimal entity, double moveSpeed, int eatSpeed) {
-		super(entity, null, 0, null, moveSpeed, eatSpeed);
+	private Block blockMunched;
+	private int metaData;
+	public EntityAIEatMushroom(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
+		super((EntityLiving) entity, null, 0, null, moveSpeed, eatSpeed);
 		this.moveSpeed = moveSpeed;
 	}
 
@@ -52,6 +54,8 @@ public class EntityAIEatMushroom extends EntityAIEatBlock {
 	protected void prepareToEat() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 		blackAnt.setIsEating(true);
+		blockMunched = getTargetBlock();
+		metaData = entity.worldObj.getBlockMetadata(cropX, cropY, cropZ);	
 	}
 
 	@Override
@@ -64,5 +68,6 @@ public class EntityAIEatMushroom extends EntityAIEatBlock {
 	protected void afterEaten() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 		blackAnt.setIsEating(false);
+		blackAnt.setShroomsMunched(blockMunched, metaData, (byte) 1);
 	}
 }
