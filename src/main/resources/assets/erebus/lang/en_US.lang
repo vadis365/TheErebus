@@ -126,10 +126,10 @@ tile.bambooPole.name=Bamboo Nerdpole
 tile.umberstonePillar.name=Umberstone Pillar
 tile.velocityBlock.name=Velocity Block
 tile.mushroomBulbCap.name=Bulb Capped Mushroom
-tile.mushroom1Cap.name=1 Cap Mushroom
-tile.mushroom2Cap.name=2 Cap Mushroom
-tile.mushroom3Cap.name=3 Cap Mushroom
-tile.mushroom4Cap.name=4 Cap Mushroom
+tile.mushroom1Cap.name=Grandma's Shoes Mushroom
+tile.mushroom2Cap.name=Sarcastic Czech Mushroom
+tile.mushroom3Cap.name=Kaizer's Fingers Mushroom
+tile.mushroom4Cap.name=Dutch Cap Mushroom
 tile.honeyTreat.name=Honey Treat
 tile.erebus.jarOHoney.name=Jar O'Honey
 tile.erebus.blockJade.name=Jade Block
@@ -274,6 +274,7 @@ item.flowerSeeds.name=%s Flower Bulb
 item.whetstone.name=Whetstone
 item.woodlouseBall.name=Woodlouse Ball
 item.rolledNewspaper.name=Rolled Up Newspaper
+item.mushroomHelm.name=Mushroom Helm
 
 # Entities
 entity.erebus.beetleLarva.name=Beetle Larva
@@ -317,6 +318,7 @@ entity.erebus.solifugeSmall.name=Solifuge Small
 entity.erebus.midgeSwarm.name=Midge Swarm
 entity.erebus.punchroom.name=Punchroom
 entity.erebus.crushroom.name=Crushroom
+entity.erebus.blackAnt.name=Black Ant
 
 # Fluids
 fluid.erebus.honey=Honey

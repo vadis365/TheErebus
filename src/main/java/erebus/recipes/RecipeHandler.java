@@ -15,6 +15,7 @@ import erebus.ModItems;
 import erebus.block.BlockErebusFlower.FLOWER_TYPE;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockSlabStone;
+import erebus.block.BlockSmallPlants;
 import erebus.core.handler.ConfigHandler;
 import erebus.item.ErebusFood;
 import erebus.item.ErebusMaterial;
@@ -240,7 +241,31 @@ public class RecipeHandler {
 		// Umbergolem Statue
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.umberGolemStatue, 1), new Object[] { " H ", "LCR", " X ", 'H', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemHead), 'L', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLClaw), 'C', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemCore), 'R', new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemRClaw), 'X',
 			new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemLegs) });
-	}
+		
+		// Mushroom Blocks
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.erebusMushroomCap0, 1), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.erebusPlantSmall, 1, BlockSmallPlants.dataBulbCappedShroom) });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.erebusMushroomCap1, 1), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.erebusPlantSmall, 1, BlockSmallPlants.dataMushroom1) });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.erebusMushroomCap2, 1), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.erebusPlantSmall, 1, BlockSmallPlants.dataMushroom2) });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.erebusMushroomCap3, 1), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.erebusPlantSmall, 1, BlockSmallPlants.dataMushroom3) });
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.erebusMushroomCap4, 1), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.erebusPlantSmall, 1, BlockSmallPlants.dataDutchCapShroom) });
+		GameRegistry.addRecipe(new ItemStack(Blocks.red_mushroom_block, 1), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.red_mushroom, 1) });
+		GameRegistry.addRecipe(new ItemStack(Blocks.brown_mushroom_block, 1), new Object[] { "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.brown_mushroom, 1) });
+		
+		// Mushroom Helm
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.mushroomHelm, 1), new Object[] {
+			new ItemStack(ModBlocks.erebusMushroomCap0, 1), 
+			new ItemStack(ModBlocks.erebusMushroomCap1, 1),
+			new ItemStack(ModBlocks.erebusMushroomCap2, 1),
+			new ItemStack(ModBlocks.erebusMushroomCap3, 1),
+			new ItemStack(ModBlocks.erebusMushroomCap4, 1),
+			new ItemStack(Blocks.red_mushroom_block, 1),
+			new ItemStack(Blocks.brown_mushroom_block, 1),
+			new ItemStack(ModItems.erebusMaterials, 1, DATA.camoPowder.ordinal()),
+			new ItemStack(Blocks.pumpkin, 1)
+		});
+	
+		
+		}
 
 	private static void registerSmelting() {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.blockAmber, 1, 1), new ItemStack(ModBlocks.blockAmber), 0.3F);

@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -18,11 +19,18 @@ public class MushroomHelm extends ItemArmor {
 
 	public MushroomHelm(int armorType) {
 		super(ModMaterials.armorREINEXOSPECIAL, 2, armorType);
+		setMaxDamage(40);
 	}
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == Item.getItemFromBlock(ModBlocks.erebusPlantSmall) && material.getItemDamage() <= 4;
+		return material.getItem() == Item.getItemFromBlock(ModBlocks.erebusMushroomCap0)
+				|| material.getItem() == Item.getItemFromBlock(ModBlocks.erebusMushroomCap1)
+				|| material.getItem() == Item.getItemFromBlock(ModBlocks.erebusMushroomCap2)
+				|| material.getItem() == Item.getItemFromBlock(ModBlocks.erebusMushroomCap3)
+				|| material.getItem() == Item.getItemFromBlock(ModBlocks.erebusMushroomCap4)
+				|| material.getItem() == Item.getItemFromBlock(Blocks.red_mushroom_block)
+				|| material.getItem() == Item.getItemFromBlock(Blocks.brown_mushroom_block);
 	}
 
 	@Override
@@ -52,7 +60,10 @@ public class MushroomHelm extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-
+		if(player.getFoodStats().needFood() && stack.getItemDamage() != 40) {
+			player.getFoodStats().addStats(1, 0.2F);
+			stack.damageItem(1, player);
+		}
 	}
 
 }
