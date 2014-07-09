@@ -1,11 +1,5 @@
 package erebus.block;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
-
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -198,7 +192,7 @@ public class BlockGlowshroomStalk extends Block{
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 
-		int randomiseSide = rand.nextInt(5);
+		int randomiseSide = rand.nextInt(9);
 		int offset = 1;
 
 		if (meta == 0) {
@@ -207,7 +201,6 @@ public class BlockGlowshroomStalk extends Block{
 				if (world.isAirBlock(x, y - offset, z))
 					world.setBlock(x, y - offset, z, ModBlocks.erebusGlowshroomStalk, dataStalk1, 2);
 				break;
-
 			case 1:
 				if (world.isAirBlock(x, y , z - offset))
 					world.setBlock(x, y , z - offset, ModBlocks.erebusGlowshroomStalk, dataStalk4, 2);
@@ -223,6 +216,23 @@ public class BlockGlowshroomStalk extends Block{
 			case 4:
 				if (world.isAirBlock(x + offset, y , z))
 					world.setBlock(x + offset, y , z, ModBlocks.erebusGlowshroomStalk, dataStalk13, 2);
+				break;
+			//toadstools	
+			case 5:
+				if (world.isAirBlock(x, y , z - offset))
+					world.setBlock(x, y , z - offset, ModBlocks.erebusGlowshroom, dataStalk4, 2);
+				break;
+			case 6:
+				if (world.isAirBlock(x, y , z + offset))
+					world.setBlock(x, y , z + offset, ModBlocks.erebusGlowshroom, dataStalk7, 2);
+				break;
+			case 7:
+				if (world.isAirBlock(x - offset, y , z))
+					world.setBlock(x - offset, y , z, ModBlocks.erebusGlowshroom, dataStalk10, 2);
+				break;
+			case 8:
+				if (world.isAirBlock(x + offset, y , z))
+					world.setBlock(x + offset, y , z, ModBlocks.erebusGlowshroom, dataStalk13, 2);
 				break;
 			}
 		}
@@ -299,16 +309,16 @@ public class BlockGlowshroomStalk extends Block{
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
-		return canPlaceBlockAt(world, x, y, z);
+		return true;
 	}
 	
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x, y + 1, z))
-				|| isValidBlock(world.getBlock(x - 1, y, z))
-				|| isValidBlock(world.getBlock(x + 1, y, z))
-				|| isValidBlock(world.getBlock(x, y, z - 1))
-				|| isValidBlock(world.getBlock(x, y, z + 1));
+		return isValidBlock(world.getBlock(x, y + 1, z), getDamageValue(world, x, y + 1, z))
+				|| isValidBlock(world.getBlock(x - 1, y, z), getDamageValue(world, x - 1, y, z))
+				|| isValidBlock(world.getBlock(x + 1, y, z), getDamageValue(world, x + 1, y, z))
+				|| isValidBlock(world.getBlock(x, y, z - 1), getDamageValue(world, x, y, z - 1))
+				|| isValidBlock(world.getBlock(x, y, z + 1), getDamageValue(world, x, y, z + 1));
 	}
 	
 	@Override
@@ -327,7 +337,7 @@ public class BlockGlowshroomStalk extends Block{
 
 			if (side == 5)
 				meta = 13;
-		System.out.println("Block Placed Meta is: "+ meta + " On side: "+side);
+
 			return meta;
 		}
 
@@ -338,31 +348,30 @@ public class BlockGlowshroomStalk extends Block{
 		if (meta == 0)
 			flag = true;
 		if (meta == 1 || meta == 2|| meta == 3)
-			if (world.isSideSolid(x, y + 1, z, DOWN))
+			if (isValidBlock(world.getBlock(x, y + 1, z), getDamageValue(world, x, y + 1, z)))
 				flag = true;
 		if (meta == 4 || meta == 5 || meta == 6)
-			if (world.isSideSolid(x, y, z + 1, NORTH))
+			if (isValidBlock(world.getBlock(x, y, z + 1), getDamageValue(world, x, y, z + 1)))
 				flag = true;
 		if (meta == 7 || meta == 8 || meta == 9)
-			if (world.isSideSolid(x, y, z - 1, SOUTH))
+			if (isValidBlock(world.getBlock(x, y, z - 1), getDamageValue(world, x, y, z - 1)))
 				flag = true;
 		if (meta == 10 || meta == 11 || meta == 12)
-			if (world.isSideSolid(x + 1, y, z, WEST))
+			if (isValidBlock(world.getBlock(x + 1, y, z), getDamageValue(world, x + 1, y, z)))
 				flag = true;
 		if (meta == 13 || meta == 14 || meta == 15)
-			if (world.isSideSolid(x - 1, y, z, EAST))
+			if (isValidBlock(world.getBlock(x - 1, y, z), getDamageValue(world, x - 1, y, z)))
 				flag = true;
 
 		if (!flag) {
 			breakBlock(world, x, y, z, neighbour, meta);
 			world.setBlockToAir(x, y, z);
-			System.out.println("Whoops, this is some how mashed up!");
 		}
 
 		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
-	private boolean isValidBlock(Block block) {
-		return block.getMaterial().blocksMovement() || block == this;
+	private boolean isValidBlock(Block block, int meta) {
+		return block.getMaterial().blocksMovement() || block == this && meta == 0;
 	}
 }

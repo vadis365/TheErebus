@@ -42,6 +42,7 @@ import erebus.block.BlockFiddlehead;
 import erebus.block.BlockGhostSand;
 import erebus.block.BlockGlowGem;
 import erebus.block.BlockGlowingJar;
+import erebus.block.BlockGlowshroom;
 import erebus.block.BlockGlowshroomStalk;
 import erebus.block.BlockGneiss;
 import erebus.block.BlockHangerPlants;
@@ -158,6 +159,7 @@ public class ModBlocks {
 		erebusMushroomCap3 = new BlockErebusMushroomCap(3).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom3Cap");
 		erebusMushroomCap4 = new BlockErebusMushroomCap(4).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom4Cap");
 		erebusGlowshroomStalk = new BlockGlowshroomStalk().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalk").setBlockTextureName("erebus:glowshroomStalk");
+		erebusGlowshroom = new BlockGlowshroom().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroom").setBlockTextureName("erebus:mushroomYellow");
 		
 		doubleHeightPlant = new BlockDoubleHeightPlant().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("doubleHeightPlant");
 		thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
