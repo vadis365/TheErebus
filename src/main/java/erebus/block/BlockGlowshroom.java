@@ -12,7 +12,7 @@ import erebus.ModBlocks;
 public class BlockGlowshroom extends Block{
 
 	public BlockGlowshroom() {
-		super(Material.plants);
+		super(Material.gourd);
 		setTickRandomly(true);
 		setLightLevel(0.8F);
 	}

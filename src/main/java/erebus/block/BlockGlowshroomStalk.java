@@ -1,10 +1,13 @@
 package erebus.block;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
@@ -12,7 +15,7 @@ import erebus.ModBlocks;
 public class BlockGlowshroomStalk extends Block{
 
 	public BlockGlowshroomStalk() {
-		super(Material.plants);
+		super(Material.gourd);
 		this.setTickRandomly(true);
 	}
 
@@ -187,6 +190,153 @@ public class BlockGlowshroomStalk extends Block{
 		}
 		setBlockBounds(0F + widthMin, 0F + heightMin, 0F + depthMin, 1F - widthMax, 1F - heightMax, 1F - depthMax);
 	}
+	
+	@Override
+	@SuppressWarnings("rawtypes")
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
+		int meta = world.getBlockMetadata(x, y, z);
+		float widthMin = 0, heightMin = 0, depthMin = 0;
+		float widthMax = 0, heightMax = 0, depthMax = 0;
+
+		switch (meta) {
+			case dataStalk0:
+				widthMin= 0F;
+				heightMin = 0F;
+				depthMin= 0F;
+				widthMax= 0F;
+				heightMax = 0F;
+				depthMax= 0F;
+				break;
+		//down
+			case dataStalk1:
+				widthMin= 0.1875F;
+				heightMin = 0.875F;
+				depthMin= 0.1875F;
+				widthMax= 0.1875F;
+				heightMax = 0F;
+				depthMax= 0.1875F;
+				break;
+			case dataStalk2:
+				widthMin= 0.1875F;
+				heightMin = 0.375F;
+				depthMin= 0.1875F;
+				widthMax= 0.1875F;
+				heightMax = 0F;
+				depthMax= 0.1875F;
+				break;
+			case dataStalk3:
+				widthMin= 0.1875F;
+				heightMin = 0F;
+				depthMin= 0.1875F;
+				widthMax= 0.1875F;
+				heightMax = 0F;
+				depthMax= 0.1875F;
+				break;
+		//north		
+			case dataStalk4:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0.875F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0F;
+				break;
+			case dataStalk5:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0.375F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0F;
+				break;
+			case dataStalk6:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0F;
+				break;
+				
+		//south
+			case dataStalk7:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0.875F;
+				break;
+			case dataStalk8:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0.375F;
+				break;
+			case dataStalk9:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0F;
+				break;
+		//west
+			case dataStalk10:
+				widthMin = 0.875F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+			case dataStalk11:
+				widthMin = 0.375F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+			case dataStalk12:
+				widthMin = 0F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+		//east
+			case dataStalk13:
+				widthMin = 0F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0.875F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+			case dataStalk14:
+				widthMin = 0F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0.375F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+			case dataStalk15:
+				widthMin = 0F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;		
+		}
+		setBlockBounds(0F + widthMin, 0F + heightMin, 0F + depthMin, 1F - widthMax, 1F - heightMax, 1F - depthMax);
+		super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
+	}
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
@@ -219,19 +369,19 @@ public class BlockGlowshroomStalk extends Block{
 				break;
 			//toadstools	
 			case 5:
-				if (world.isAirBlock(x, y , z - offset))
+				if (world.isAirBlock(x, y , z - offset) && rand.nextInt(3) == 0)
 					world.setBlock(x, y , z - offset, ModBlocks.erebusGlowshroom, dataStalk4, 2);
 				break;
 			case 6:
-				if (world.isAirBlock(x, y , z + offset))
+				if (world.isAirBlock(x, y , z + offset) && rand.nextInt(3) == 0)
 					world.setBlock(x, y , z + offset, ModBlocks.erebusGlowshroom, dataStalk7, 2);
 				break;
 			case 7:
-				if (world.isAirBlock(x - offset, y , z))
+				if (world.isAirBlock(x - offset, y , z) && rand.nextInt(3) == 0)
 					world.setBlock(x - offset, y , z, ModBlocks.erebusGlowshroom, dataStalk10, 2);
 				break;
 			case 8:
-				if (world.isAirBlock(x + offset, y , z))
+				if (world.isAirBlock(x + offset, y , z) && rand.nextInt(3) == 0)
 					world.setBlock(x + offset, y , z, ModBlocks.erebusGlowshroom, dataStalk13, 2);
 				break;
 			}
