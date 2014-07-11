@@ -373,6 +373,12 @@ public class BlockGlowshroomStalk extends Block{
 
 		// Stalk maturity
 		switch (meta) {
+			case dataStalk0:
+				if(rand.nextInt(5)== 0) {
+					if (world.isAirBlock(x, y + 1 , z))
+						world.setBlock(x, y + 1 , z, ModBlocks.erebusGlowshroom, 0, 2);
+						}
+				break;
 			case dataStalk1:
 				world.setBlock(x, y, z, this, dataStalk2, 2);
 				break;
@@ -386,8 +392,9 @@ public class BlockGlowshroomStalk extends Block{
 				if (world.getBlock(x, y, z + 1) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x, y, z + 1) == 0)
 				world.setBlock(x, y, z, this, dataStalk5, 2);
 				if(rand.nextInt(2)== 0) {
-					if (world.getBlock(x, y, z + 1) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x, y, z + 1) == 5 && world.isAirBlock(x, y +1 , z)) {
+					if (world.getBlock(x, y, z + 1) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x, y, z + 1) == 5 && world.isAirBlock(x, y + 1 , z)) {
 						world.setBlock(x, y, z, this, dataStalk6, 2);
+						world.setBlock(x, y + 1 , z, ModBlocks.erebusGlowshroom, 0, 2);
 						}
 					else {
 						world.setBlock(x, y, z, this, dataStalk5, 2);
@@ -417,8 +424,9 @@ public class BlockGlowshroomStalk extends Block{
 				if (world.getBlock(x, y, z - 1) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x, y, z - 1) == 0)
 				world.setBlock(x, y, z, this, dataStalk8, 2);
 				if(rand.nextInt(2)== 0) {
-					if (world.getBlock(x, y, z - 1) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x, y, z - 1) == 8 && world.isAirBlock(x, y +1 , z)) {
+					if (world.getBlock(x, y, z - 1) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x, y, z - 1) == 8 && world.isAirBlock(x, y + 1 , z)) {
 						world.setBlock(x, y, z, this, dataStalk9, 2);
+						world.setBlock(x, y + 1 , z, ModBlocks.erebusGlowshroom, 0, 2);
 						}
 					else {
 						world.setBlock(x, y, z, this, dataStalk8, 2);
@@ -449,8 +457,9 @@ public class BlockGlowshroomStalk extends Block{
 				if (world.getBlock(x + 1, y, z) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x + 1, y, z) == 0)
 				world.setBlock(x, y, z, this, dataStalk11, 2);
 				if(rand.nextInt(2)== 0) {
-					if (world.getBlock(x + 1, y, z) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x + 1, y, z) == 11 && world.isAirBlock(x, y +1 , z)) {
+					if (world.getBlock(x + 1, y, z) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x + 1, y, z) == 11 && world.isAirBlock(x, y + 1 , z)) {
 						world.setBlock(x, y, z, this, dataStalk12, 2);
+						world.setBlock(x, y + 1 , z, ModBlocks.erebusGlowshroom, 0, 2);
 						}
 					else {
 						world.setBlock(x, y, z, this, dataStalk11, 2);
@@ -481,8 +490,9 @@ public class BlockGlowshroomStalk extends Block{
 				if (world.getBlock(x - 1, y, z) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x - 1, y, z) == 0)
 				world.setBlock(x, y, z, this, dataStalk14, 2);
 				if(rand.nextInt(2)== 0) {
-					if (world.getBlock(x - 1, y, z) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x - 1, y, z) == 14 && world.isAirBlock(x, y +1 , z)) {
+					if (world.getBlock(x - 1, y, z) == ModBlocks.erebusGlowshroomStalk && getDamageValue(world, x - 1, y, z) == 14 && world.isAirBlock(x, y + 1 , z)) {
 						world.setBlock(x, y, z, this, dataStalk15, 2);
+						world.setBlock(x, y + 1 , z, ModBlocks.erebusGlowshroom, 0, 2);
 						}
 					else {
 						world.setBlock(x, y, z, this, dataStalk14, 2);
