@@ -44,6 +44,7 @@ import erebus.item.NectarCollector;
 import erebus.item.Paxel;
 import erebus.item.PortalActivator;
 import erebus.item.ReinExoskeletonArmor;
+import erebus.item.RitualDagger;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
 import erebus.item.SpawnEggs;
@@ -73,6 +74,7 @@ public class ModItems {
 
 	// MISC WEAPONS
 	public static Item fossilClub, waspSword, maxSpeedBow, waspDagger, scorpionPincer, webSlinger, doorAmberItem, woodlouseBall, rolledNewspaper;
+	public static Item ritualDagger;
 
 	// MISC ARMOR
 	public static Item reinCompoundGoggles, compoundGoggles, sprintLeggings, jumpBoots, armorGlider, armorGliderPowered, lightCrown, mushroomHelm;
@@ -138,6 +140,7 @@ public class ModItems {
 		blockExtractor = new BlockExtractor().setFull3D().setUnlocalizedName("blockExtractor").setTextureName("erebus:blockExtractor");
 		woodlouseBall = new WoodlouseBall().setUnlocalizedName("woodlouseBall");
 		rolledNewspaper = new RolledNewspaper().setUnlocalizedName("rolledNewspaper").setTextureName("erebus:rolledNewspaper");
+		ritualDagger = new RitualDagger();
 
 		reinCompoundGoggles = new CompoundGoggles(ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
 		compoundGoggles = new CompoundGoggles(ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("compoundGoggles").setTextureName("erebus:compoundGoggles");
@@ -147,7 +150,7 @@ public class ModItems {
 		armorGliderPowered = new ArmorGlider().setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 		lightCrown = new CrownOfLuminosity(0).setUnlocalizedName("lightCrown").setTextureName("erebus:lightCrown");
 		mushroomHelm = new MushroomHelm(0).setUnlocalizedName("mushroomHelm").setTextureName("erebus:mushroomHelm");
-		
+
 		spawnEggs = new SpawnEggs().setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
 	}
 
