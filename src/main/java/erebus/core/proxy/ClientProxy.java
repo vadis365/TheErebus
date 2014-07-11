@@ -41,6 +41,7 @@ import erebus.client.model.entity.ModelUmberGolem;
 import erebus.client.model.entity.ModelWheatWeevil;
 import erebus.client.model.entity.ModelWoodlouse;
 import erebus.client.render.block.BlockBambooCropRender;
+import erebus.client.render.block.BlockGlowshroomStalkRender;
 import erebus.client.render.block.BlockHollowLogRender;
 import erebus.client.render.block.BlockPlantedFlowerRender;
 import erebus.client.render.entity.RenderAnimatedBlock;
@@ -205,7 +206,7 @@ import erebus.tileentity.TileEntityUmberGolemStatue;
 public class ClientProxy extends CommonProxy {
 
 	public enum BlockRenderIDs {
-		BAMBOO_CROP, HOLLOW_LOG, PLANTED_FLOWER;
+		BAMBOO_CROP, HOLLOW_LOG, PLANTED_FLOWER, GLOWSHROOM_STALK;
 
 		private final int ID;
 
@@ -302,6 +303,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.BAMBOO_CROP.id(), new BlockBambooCropRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.HOLLOW_LOG.id(), new BlockHollowLogRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.PLANTED_FLOWER.id(), new BlockPlantedFlowerRender());
+		RenderingRegistry.registerBlockHandler(BlockRenderIDs.GLOWSHROOM_STALK.id(), new BlockGlowshroomStalkRender());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltar), new ItemErebusAltarRenderer());
