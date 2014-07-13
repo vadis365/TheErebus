@@ -66,9 +66,15 @@ public class BlockGlowshroomStalkW3 extends Block {
 			breakBlock(world, x, y, z, neighbour, meta);
 			world.setBlockToAir(x, y, z);
 		}
+<<<<<<< HEAD:src/main/java/erebus/block/glowshroom/BlockGlowshroomStalkW3.java
 
 		Block blockAbove = world.getBlock(x, y + 1, z);
 		if (blockAbove != ModBlocks.glowshroom)
+=======
+		
+		Block blockAbove = world.getBlock(x, y + 1 ,z);
+		if (blockAbove != ModBlocks.glowshroom && isValidBlock(world.getBlock(x + 1, y, z)))
+>>>>>>> FETCH_HEAD:src/main/java/erebus/block/BlockGlowshroomStalkW3.java
 			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1, 0, 2);
 
 		super.onNeighborBlockChange(world, x, y, z, neighbour);

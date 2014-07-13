@@ -32,6 +32,7 @@ public class BlockGlowshroomStalkMain extends Block {
 					world.setBlock(x, y - offset, z, ModBlocks.glowshroomStalkDown1, 0, 2);
 				break;
 			case 1:
+<<<<<<< HEAD:src/main/java/erebus/block/glowshroom/BlockGlowshroomStalkMain.java
 				if (world.isAirBlock(x, y, z - offset))
 					world.setBlock(x, y, z - offset, ModBlocks.glowshroomStalkN1, 0, 2);
 				break;
@@ -46,6 +47,22 @@ public class BlockGlowshroomStalkMain extends Block {
 			case 4:
 				if (world.isAirBlock(x + offset, y, z))
 					world.setBlock(x + offset, y, z, ModBlocks.glowshroomStalkE1, 0, 2);
+=======
+				if (world.isAirBlock(x, y , z - offset) && world.getBlock(x, y + 1 , z) != ModBlocks.umberstone)
+					world.setBlock(x, y , z - offset, ModBlocks.glowshroomStalkN1, 0, 2);
+				break;
+			case 2:
+				if (world.isAirBlock(x, y , z + offset) && world.getBlock(x, y + 1 , z) != ModBlocks.umberstone)
+					world.setBlock(x, y , z + offset, ModBlocks.glowshroomStalkS1, 0, 2);
+				break;
+			case 3:
+				if (world.isAirBlock(x - offset, y , z) && world.getBlock(x, y + 1 , z) != ModBlocks.umberstone)
+					world.setBlock(x - offset, y , z, ModBlocks.glowshroomStalkW1, 0, 2);
+				break;
+			case 4:
+				if (world.isAirBlock(x + offset, y , z) && world.getBlock(x, y + 1 , z) != ModBlocks.umberstone)
+					world.setBlock(x + offset, y , z, ModBlocks.glowshroomStalkE1, 0, 2);
+>>>>>>> FETCH_HEAD:src/main/java/erebus/block/BlockGlowshroomStalkMain.java
 				break;
 		}
 
