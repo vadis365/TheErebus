@@ -88,7 +88,7 @@ public class BlockGlowshroomStalkW3 extends Block{
 		}
 		
 		Block blockAbove = world.getBlock(x, y + 1 ,z);
-		if (blockAbove != ModBlocks.glowshroom)
+		if (blockAbove != ModBlocks.glowshroom && isValidBlock(world.getBlock(x + 1, y, z)))
 			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1, 0, 2);
 
 		super.onNeighborBlockChange(world, x, y, z, neighbour);
