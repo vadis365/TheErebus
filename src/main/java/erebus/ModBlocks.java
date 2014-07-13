@@ -43,7 +43,20 @@ import erebus.block.BlockGhostSand;
 import erebus.block.BlockGlowGem;
 import erebus.block.BlockGlowingJar;
 import erebus.block.BlockGlowshroom;
-import erebus.block.BlockGlowshroomStalk;
+import erebus.block.BlockGlowshroomStalkDown1;
+import erebus.block.BlockGlowshroomStalkDown2;
+import erebus.block.BlockGlowshroomStalkDown3;
+import erebus.block.BlockGlowshroomStalkE1;
+import erebus.block.BlockGlowshroomStalkE3;
+import erebus.block.BlockGlowshroomStalkMain;
+import erebus.block.BlockGlowshroomStalkN1;
+import erebus.block.BlockGlowshroomStalkN3;
+import erebus.block.BlockGlowshroomStalkNS2;
+import erebus.block.BlockGlowshroomStalkS1;
+import erebus.block.BlockGlowshroomStalkS3;
+import erebus.block.BlockGlowshroomStalkW1;
+import erebus.block.BlockGlowshroomStalkW3;
+import erebus.block.BlockGlowshroomStalkWE2;
 import erebus.block.BlockGneiss;
 import erebus.block.BlockHangerPlants;
 import erebus.block.BlockHollowLog;
@@ -99,8 +112,12 @@ public class ModBlocks {
 	// UNDERGROWTH
 	public static Block thorns, blockTurnip, fiddlehead, erebusPlantSmall, erebusHanger, erebusWallPlants;
 	public static BlockFern fern;
-	public static Block doubleHeightPlant, erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4, erebusGlowshroomStalk, erebusGlowshroom;
-
+	public static Block doubleHeightPlant, erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4;
+	public static Block glowshroom, glowshroomStalkMain, glowshroomStalkDown1, glowshroomStalkDown2, glowshroomStalkDown3;
+	public static Block glowshroomStalkN1, glowshroomStalkS1, glowshroomStalkNS2;
+	public static Block glowshroomStalkW1, glowshroomStalkE1, glowshroomStalkWE2;
+	public static Block glowshroomStalkN3, glowshroomStalkS3, glowshroomStalkW3, glowshroomStalkE3;
+	
 	// DECORATIONS AND UTILITIES
 	public static Block blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, umberFurnace, umberFurnace_on;
 	public static Block umberPaver, insectRepellent, bambooShoot, bambooCrop, bambooTorch, erebusAltar, erebusAltarLightning;
@@ -158,9 +175,22 @@ public class ModBlocks {
 		erebusMushroomCap2 = new BlockErebusMushroomCap(2).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom2Cap");
 		erebusMushroomCap3 = new BlockErebusMushroomCap(3).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom3Cap");
 		erebusMushroomCap4 = new BlockErebusMushroomCap(4).setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("mushroom4Cap");
-		erebusGlowshroomStalk = new BlockGlowshroomStalk().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalk").setBlockTextureName("erebus:glowshroomStalk");
-		erebusGlowshroom = new BlockGlowshroom().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroom").setBlockTextureName("erebus:mushroomYellow");
-		
+		glowshroom = new BlockGlowshroom().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroom").setBlockTextureName("erebus:mushroomYellow");
+		glowshroomStalkMain = new BlockGlowshroomStalkMain().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalk").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkDown1 = new BlockGlowshroomStalkDown1().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkDown1").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkDown2 = new BlockGlowshroomStalkDown2().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkDown2").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkDown3 = new BlockGlowshroomStalkDown3().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkDown3").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkN1 = new BlockGlowshroomStalkN1().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkN1").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkN3 = new BlockGlowshroomStalkN3().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkN3").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkS1 = new BlockGlowshroomStalkS1().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkS1").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkS3 = new BlockGlowshroomStalkS3().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkS3").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkNS2 = new BlockGlowshroomStalkNS2().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkNS2").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkW1 = new BlockGlowshroomStalkW1().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkW1").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkW3 = new BlockGlowshroomStalkW3().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkW3").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkE1 = new BlockGlowshroomStalkE1().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkE1").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkE3 = new BlockGlowshroomStalkE3().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkE3").setBlockTextureName("erebus:glowshroomStalk");
+		glowshroomStalkWE2 = new BlockGlowshroomStalkWE2().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkWE2").setBlockTextureName("erebus:glowshroomStalk");
+	
 		doubleHeightPlant = new BlockDoubleHeightPlant().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("doubleHeightPlant");
 		thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
 		fern = (BlockFern) new BlockFern().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFern");
@@ -237,7 +267,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, erebusOreExtra, redGem, blockAmber, quickSand, ghostSand);
 		ModTabs.blocks.setTab(hollowLogAcacia, planksErebus, leavesErebus);
 		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusPlantSmall, erebusWallPlants);
-		ModTabs.blocks.setTab(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4, erebusGlowshroomStalk, erebusGlowshroom);
+		ModTabs.blocks.setTab(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4, glowshroomStalkMain, glowshroom);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);

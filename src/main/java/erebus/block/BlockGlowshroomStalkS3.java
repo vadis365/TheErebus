@@ -1,44 +1,27 @@
 package erebus.block;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
-public class BlockGlowshroom extends Block{
-	@SideOnly(Side.CLIENT)
-	private IIcon bottomIcon;
-	
-	public BlockGlowshroom() {
-		super(Material.circuits);
-		setLightLevel(0.8F);
-		setBlockBounds(0.0625F, 0F, 0.0625F, 0.9375F, 1F, 0.9375F);
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side == 0 ? bottomIcon : blockIcon;
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:mushroomYellow");
-		bottomIcon = reg.registerIcon("erebus:mushroomYellowInside");
+public class BlockGlowshroomStalkS3 extends Block{
+
+	public BlockGlowshroomStalkS3() {
+		super(Material.wood);
+		setBlockBounds(0.3125F, 0.3125F, 0F, 0.6875F, 1F, 0.6875F);
 	}
 
 	@Override
 	public int getRenderType() {
-		return BlockRenderIDs.GLOWSHROOM_CAPS.id();
+		return BlockRenderIDs.GLOWSHROOM_STALK.id();
 	}
 	
 	@Override
@@ -49,6 +32,18 @@ public class BlockGlowshroom extends Block{
 	@Override
 	public boolean renderAsNormalBlock() {
 		return true;
+	}
+	
+	@Override
+	public void setBlockBoundsForItemRender() {
+		setBlockBounds(0.3125F, 0.3125F, 0F, 0.6875F, 1F, 0.6875F);
+	}
+	
+	@Override
+	@SuppressWarnings("rawtypes")
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
+		setBlockBounds(0.3125F, 0.3125F, 0F, 0.6875F, 1F, 0.6875F);
+		super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
 	}
 
 	@Override
@@ -73,27 +68,20 @@ public class BlockGlowshroom extends Block{
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x , y - 1, z));
+		return isValidBlock(world.getBlock(x, y, z - 1));
 	}
 	
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x , y - 1, z));
+		return isValidBlock(world.getBlock(x, y, z - 1));
 	}
-	
-	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-			return meta;
-		}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
-		
-		if (isValidBlock(world.getBlock(x, y -1, z)))
+		if (isValidBlock(world.getBlock(x, y, z - 1)))
 			flag = true;
-
 		if (!flag) {
 			breakBlock(world, x, y, z, neighbour, meta);
 			world.setBlockToAir(x, y, z);
@@ -103,10 +91,6 @@ public class BlockGlowshroom extends Block{
 	}
 
 	private boolean isValidBlock(Block block) {
-		return block == ModBlocks.glowshroomStalkMain
-				|| block == ModBlocks.glowshroomStalkN3
-				|| block == ModBlocks.glowshroomStalkS3
-				|| block == ModBlocks.glowshroomStalkW3
-				|| block == ModBlocks.glowshroomStalkE3;
+		return block == ModBlocks.glowshroomStalkNS2;
 	}
 }
