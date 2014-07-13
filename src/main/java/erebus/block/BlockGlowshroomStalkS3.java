@@ -86,7 +86,11 @@ public class BlockGlowshroomStalkS3 extends Block{
 			breakBlock(world, x, y, z, neighbour, meta);
 			world.setBlockToAir(x, y, z);
 		}
-
+		
+		Block blockAbove = world.getBlock(x, y + 1 ,z);
+		if (blockAbove != ModBlocks.glowshroom)
+			world.setBlock(x, y, z, ModBlocks.glowshroomStalkS1, 0, 2);
+		
 		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 

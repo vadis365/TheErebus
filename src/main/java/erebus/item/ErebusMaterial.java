@@ -59,7 +59,8 @@ public class ErebusMaterial extends Item {
 		nettleleaves,
 		nettleflowers,
 		middleFruitSeeds,
-		mossBall
+		mossBall,
+		yellowDottedFungus
 	}
 	// @formatter:on
 

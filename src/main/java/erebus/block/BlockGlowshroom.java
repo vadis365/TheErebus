@@ -11,7 +11,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.item.ErebusMaterial.DATA;
 
 public class BlockGlowshroom extends Block{
 	@SideOnly(Side.CLIENT)
@@ -52,18 +54,18 @@ public class BlockGlowshroom extends Block{
 	}
 
 	@Override
+	public int quantityDropped(Random rand) {
+		return 1;
+	}
+
+	@Override
+	public Item getItemDropped(int meta, Random rand, int fortune) {
+		return ModItems.erebusMaterials;
+	}
+
+	@Override
 	public int damageDropped(int meta) {
-		return meta;
-	}
-
-	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
-		return 0;
-	}
-
-	@Override
-	public Item getItemDropped(int id, Random random, int fortune) {
-		return null;
+		return DATA.yellowDottedFungus.ordinal();
 	}
 
 	@Override
