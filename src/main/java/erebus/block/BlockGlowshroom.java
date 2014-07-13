@@ -21,7 +21,7 @@ public class BlockGlowshroom extends Block{
 	
 	public BlockGlowshroom() {
 		super(Material.circuits);
-		setLightLevel(0.8F);
+		setLightLevel(0.9375F);
 		setBlockBounds(0.0625F, 0F, 0.0625F, 0.9375F, 1F, 0.9375F);
 	}
 	
@@ -105,10 +105,6 @@ public class BlockGlowshroom extends Block{
 	}
 
 	private boolean isValidBlock(Block block) {
-		return block == ModBlocks.glowshroomStalkMain
-				|| block == ModBlocks.glowshroomStalkN3
-				|| block == ModBlocks.glowshroomStalkS3
-				|| block == ModBlocks.glowshroomStalkW3
-				|| block == ModBlocks.glowshroomStalkE3;
+		return block.getMaterial().blocksMovement();
 	}
 }

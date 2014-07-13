@@ -195,7 +195,9 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.scorchedPlanks, 4), ModBlocks.scorchedWood);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.rottenPlanks, 2), ModBlocks.rottenWood);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
-
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new Object[] { new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), Blocks.torch });
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new Object[] { new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()) });
+		
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.itemPetrifiedWood.ordinal()), 'U', new ItemStack(ModBlocks.umberstone, 1, 0));
 
