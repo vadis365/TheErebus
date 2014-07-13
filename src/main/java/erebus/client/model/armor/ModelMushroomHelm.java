@@ -3,13 +3,12 @@ package erebus.client.model.armor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelMushroomHelm extends ModelBiped {
+
 	ModelRenderer capTop;
 	ModelRenderer capMiddle;
 	ModelRenderer capFront;
@@ -44,7 +43,7 @@ public class ModelMushroomHelm extends ModelBiped {
 		mainHead = new ModelRenderer(this, 0, 2);
 		mainHead.addBox(-4.5F, -9F, -4.5F, 9, 9, 9);
 		setRotation(mainHead, 0F, 0F, 0F);
-		
+
 		capTop.addChild(capMiddle);
 		capTop.addChild(capFront);
 		capTop.addChild(capBack);
@@ -69,9 +68,7 @@ public class ModelMushroomHelm extends ModelBiped {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 		capTop.rotateAngleY = bipedHead.rotateAngleY;
 		capTop.rotateAngleX = bipedHead.rotateAngleX;
 	}
-
 }

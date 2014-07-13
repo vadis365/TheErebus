@@ -1,18 +1,15 @@
-package erebus.block;
+package erebus.block.glowshroom;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
-public class BlockGlowshroomStalkW3 extends Block{
+public class BlockGlowshroomStalkW3 extends Block {
 
 	public BlockGlowshroomStalkW3() {
 		super(Material.wood);
@@ -23,27 +20,10 @@ public class BlockGlowshroomStalkW3 extends Block{
 	public int getRenderType() {
 		return BlockRenderIDs.GLOWSHROOM_STALK.id();
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return true;
-	}
-	
-	@Override
-	public void setBlockBoundsForItemRender() {
-		setBlockBounds(0.3125F, 0.3125F, 0.3125F, 1F, 1F, 0.6875F);
-	}
-	
-	@Override
-	@SuppressWarnings("rawtypes")
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
-		setBlockBounds(0.3125F, 0.3125F, 0.3125F, 1F, 1F, 0.6875F);
-		super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
 	}
 
 	@Override
@@ -70,7 +50,7 @@ public class BlockGlowshroomStalkW3 extends Block{
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x + 1, y, z));
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x + 1, y, z));
@@ -86,8 +66,8 @@ public class BlockGlowshroomStalkW3 extends Block{
 			breakBlock(world, x, y, z, neighbour, meta);
 			world.setBlockToAir(x, y, z);
 		}
-		
-		Block blockAbove = world.getBlock(x, y + 1 ,z);
+
+		Block blockAbove = world.getBlock(x, y + 1, z);
 		if (blockAbove != ModBlocks.glowshroom)
 			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1, 0, 2);
 
