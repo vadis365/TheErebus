@@ -258,7 +258,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 	}
 
 	public void replaceBlocksForBiome(int x, int z, Block[] blocks, BiomeGenBase[] biomes) {
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, blocks, biomes);
+		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, blocks, new byte[256], biomes, worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY)
 			return;
