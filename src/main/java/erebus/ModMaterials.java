@@ -12,6 +12,7 @@ public class ModMaterials {
 	public static ArmorMaterial armorEXOSKELETON = EnumHelper.addArmorMaterial("EXOSKELETON", 11, new int[] { 2, 4, 3, 2 }, 15);
 	public static ArmorMaterial armorREINEXOSKELETON = EnumHelper.addArmorMaterial("REINEXOSKELETON", 11, new int[] { 3, 8, 6, 3 }, 2);
 	public static ArmorMaterial armorREINEXOSPECIAL = EnumHelper.addArmorMaterial("REINEXOSPECIAL", 11, new int[] { 2, 7, 5, 2 }, 2);
+	public static ArmorMaterial armorRHINO = EnumHelper.addArmorMaterial("RHINO", 11, new int[] { 2, 7, 5, 2 }, 2);
 	public static ArmorMaterial armorJADE = EnumHelper.addArmorMaterial("JADE", 24, new int[] { 3, 7, 5, 2 }, 15);
 	public static ToolMaterial toolJADE = EnumHelper.addToolMaterial("JADE", 2, 863, 10.0F, 2.0F, 18);
 	public static ToolMaterial toolJADEPAXEL = EnumHelper.addToolMaterial("JADEPAXEL", 2, 1079, 8.0F, 4.0F, 14);

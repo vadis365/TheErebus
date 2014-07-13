@@ -108,6 +108,12 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonLegs, 1), new Object[] { "sss", "s s", "s s", 's', new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonBoots, 1), new Object[] { "   ", "s s", "s s", 's', new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()) });
 
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonHelmet, 1), new Object[] { "h h", "sss", "s s", 's', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExoRhino.ordinal()), 'h', new ItemStack(ModItems.erebusMaterials, 1, DATA.rhinoBeetleHorn.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBody, 1), new Object[] { "s s", "sss", "sss", 's', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExoRhino.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonLegs, 1), new Object[] { "sss", "s s", "s s", 's', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExoRhino.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBoots, 1), new Object[] { "   ", "s s", "s s", 's', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExoRhino.ordinal()) });
+
+		
 		// Special armor
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.compoundLens.ordinal()), new Object[] { "GGG", "GEG", "GGG", 'E', new ItemStack(ModBlocks.blockAmber, 1, 1), 'G', new ItemStack(ModItems.erebusMaterials, 1, DATA.compoundEyes.ordinal()) });
 		GameRegistry.addRecipe(new ItemStack(ModItems.compoundGoggles, 1), new Object[] { "XXX", "OXO", "   ", 'O', new ItemStack(ModItems.erebusMaterials, 1, DATA.compoundLens.ordinal()), 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()) });
