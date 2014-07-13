@@ -14,40 +14,48 @@ public class BlockGlowshroomStalkRender implements ISimpleBlockRenderingHandler 
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+		renderer.renderAllFaces = false;
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+		renderer.renderAllFaces = true;
+		block = world.getBlock(x, y, z);
+		float widthMin = 0, heightMin = 0, depthMin = 0;
+		float widthMax = 0, heightMax = 0, depthMax = 0;
+	
 		if (block == ModBlocks.glowshroomStalkN3) {
 			renderer.setRenderBounds(0.3125F, 0.3125F, 0.3125F, 0.6875F, 0.6875F, 1F);
 			renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
-			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F);
+			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F , 0.6875F);
 			renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
 		}
-
+		
 		if (block == ModBlocks.glowshroomStalkS3) {
 			renderer.setRenderBounds(0.3125F, 0.3125F, 0F, 0.6875F, 0.6875F, 0.6875F);
 			renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
-			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F);
+			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F );
 			renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
 		}
-
+		
 		if (block == ModBlocks.glowshroomStalkW3) {
 			renderer.setRenderBounds(0.3125F, 0.3125F, 0.3125F, 1F, 0.6875F, 0.6875F);
 			renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
-			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F);
+			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F );
 			renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
 		}
-
+		
 		if (block == ModBlocks.glowshroomStalkE3) {
 			renderer.setRenderBounds(0, 0.3125F, 0.3125F, 0.6875F, 0.6875F, 0.6875F);
 			renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
-			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F);
+			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F );
 			renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
 		}
-
+	
+		renderer.renderAllFaces = false;
 		return true;
 	}
 

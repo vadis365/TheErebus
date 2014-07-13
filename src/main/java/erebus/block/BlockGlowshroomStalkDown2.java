@@ -1,30 +1,54 @@
-package erebus.block.glowshroom;
+package erebus.block;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 
-public class BlockGlowshroomStalkDown3 extends Block {
+public class BlockGlowshroomStalkDown2 extends Block{
 
-	public BlockGlowshroomStalkDown3() {
+	public BlockGlowshroomStalkDown2() {
 		super(Material.wood);
 		setTickRandomly(true);
-		setBlockBounds(0.1875F, 0F, 0.1875F, 0.8125F, 1F, 0.8125F);
+		setBlockBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 1F, 0.8125F);
 	}
 
+	@Override
+	public int getRenderType() {
+		return 0;
+	}
+	
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
+	public boolean renderAsNormalBlock() {
+		return true;
+	}
+	
+	@Override
+	public void setBlockBoundsForItemRender() {
+		setBlockBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 1F, 0.8125F);
+	}
+	
+	@Override
+	@SuppressWarnings("rawtypes")
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
+		setBlockBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 1F, 0.8125F);
+		super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
+	}
+
+	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
-		if (!world.isRemote)
-			world.setBlock(x, y, z, ModBlocks.glowshroomStalkMain, 0, 2);
+		world.setBlock(x, y, z, ModBlocks.glowshroomStalkDown3, 0, 2);
 	}
 
 	@Override
@@ -51,7 +75,7 @@ public class BlockGlowshroomStalkDown3 extends Block {
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y + 1, z));
 	}
-
+	
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y + 1, z));
