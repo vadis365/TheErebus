@@ -62,18 +62,8 @@ public class BlockGlowshroomStalkMain extends Block {
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int x, int y, int z) {
-		return true;
-	}
-
-	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y - 1, z)) || isValidBlock(world.getBlock(x, y + 1, z)) || isValidBlock(world.getBlock(x - 1, y, z)) || isValidBlock(world.getBlock(x + 1, y, z)) || isValidBlock(world.getBlock(x, y, z - 1)) || isValidBlock(world.getBlock(x, y, z + 1));
-	}
-
-	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-		return 0;
 	}
 
 	@Override
@@ -81,22 +71,7 @@ public class BlockGlowshroomStalkMain extends Block {
 		if (world.isRemote)
 			return;
 
-		boolean flag = false;
-
-		if (isValidBlock(world.getBlock(x, y - 1, z)))
-			flag = true;
-		if (isValidBlock(world.getBlock(x, y + 1, z)))
-			flag = true;
-		if (isValidBlock(world.getBlock(x, y, z + 1)))
-			flag = true;
-		if (isValidBlock(world.getBlock(x, y, z - 1)))
-			flag = true;
-		if (isValidBlock(world.getBlock(x + 1, y, z)))
-			flag = true;
-		if (isValidBlock(world.getBlock(x - 1, y, z)))
-			flag = true;
-
-		if (!flag)
+		if (!canPlaceBlockAt(world, x, y, z))
 			Utils.breakBlockWithParticles(world, x, y, z);
 	}
 

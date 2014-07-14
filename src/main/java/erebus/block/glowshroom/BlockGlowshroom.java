@@ -50,6 +50,11 @@ public class BlockGlowshroom extends Block {
 	}
 
 	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
 	public int quantityDropped(Random rand) {
 		return 1;
 	}

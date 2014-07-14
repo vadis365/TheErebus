@@ -28,6 +28,11 @@ public class BlockGlowshroomStalkE3 extends Block {
 	}
 
 	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
 	public int quantityDropped(int meta, int fortune, Random random) {
 		return 0;
 	}

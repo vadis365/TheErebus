@@ -23,6 +23,11 @@ public class BlockGlowshroomStalkW3 extends Block {
 	}
 
 	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
