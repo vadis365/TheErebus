@@ -23,6 +23,8 @@ public class BlockGlowshroomStalkNS2 extends Block {
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
+		if (world.isRemote)
+			return;
 		if (world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkMain) {
 			if (rand.nextInt(2) == 0 && world.isAirBlock(x, y, z - 1))
 				world.setBlock(x, y, z - 1, ModBlocks.glowshroomStalkN1, 0, 2);

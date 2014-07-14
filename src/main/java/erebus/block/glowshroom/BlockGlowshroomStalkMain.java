@@ -17,10 +17,12 @@ public class BlockGlowshroomStalkMain extends Block {
 
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
-		int randomiseSide = rand.nextInt(5);
+		if (world.isRemote)
+			return;
+
 		int offset = 1;
 
-		switch (randomiseSide) {
+		switch (rand.nextInt(5)) {
 			case 0:
 				if (world.isAirBlock(x, y - offset, z))
 					world.setBlock(x, y - offset, z, ModBlocks.glowshroomStalkDown1, 0, 2);
