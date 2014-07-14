@@ -15,6 +15,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAIEatMushroom;
 
 public class EntityBlackAnt extends EntityMob {
@@ -119,6 +120,7 @@ public class EntityBlackAnt extends EntityMob {
 	public void setShroomsMunched(Block block, int meta, byte mushrooms) {
 		
 		if (block != null && block == ModBlocks.erebusPlantSmall && meta <= 4) {
+			Utils.dropStack(worldObj, (int)posX, (int)posY, (int)posZ, new ItemStack(block, 1, meta));
 			
 			switch (meta) {
 			case 0:
