@@ -58,6 +58,13 @@ public class BlockGlowshroomStalkW3 extends Block {
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+		if (world.isRemote)
+			return;
+
+		Block blockAbove = world.getBlock(x, y + 1, z);
+		if (blockAbove != ModBlocks.glowshroom)
+			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1, 0, 2);
+		
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
 		if (isValidBlock(world.getBlock(x + 1, y, z)))
@@ -66,10 +73,6 @@ public class BlockGlowshroomStalkW3 extends Block {
 			breakBlock(world, x, y, z, neighbour, meta);
 			world.setBlockToAir(x, y, z);
 		}
-
-		Block blockAbove = world.getBlock(x, y + 1, z);
-		if (blockAbove != ModBlocks.glowshroom)
-			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1, 0, 2);
 
 		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
