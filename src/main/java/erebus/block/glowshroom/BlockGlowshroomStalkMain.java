@@ -87,23 +87,21 @@ public class BlockGlowshroomStalkMain extends Block {
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+		if (world.isRemote)
+			return;
+
 		boolean flag = false;
 
 		if (isValidBlock(world.getBlock(x, y - 1, z)))
 			flag = true;
-
 		if (isValidBlock(world.getBlock(x, y + 1, z)))
 			flag = true;
-
 		if (isValidBlock(world.getBlock(x, y, z + 1)))
 			flag = true;
-
 		if (isValidBlock(world.getBlock(x, y, z - 1)))
 			flag = true;
-
 		if (isValidBlock(world.getBlock(x + 1, y, z)))
 			flag = true;
-
 		if (isValidBlock(world.getBlock(x - 1, y, z)))
 			flag = true;
 

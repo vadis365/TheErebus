@@ -69,6 +69,9 @@ public class BlockGlowshroomStalkS1 extends Block {
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+		if (world.isRemote)
+			return;
+
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
 		if (isValidBlock(world.getBlock(x, y, z - 1)))
