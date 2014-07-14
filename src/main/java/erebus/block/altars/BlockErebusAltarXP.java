@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.altars;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

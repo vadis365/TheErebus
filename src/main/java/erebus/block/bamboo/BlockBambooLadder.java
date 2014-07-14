@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.bamboo;
 
 import java.util.Random;
 

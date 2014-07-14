@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.plants;
 
 import java.util.Random;
 

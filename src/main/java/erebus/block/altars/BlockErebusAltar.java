@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.altars;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFence;

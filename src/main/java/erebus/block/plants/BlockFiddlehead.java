@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.plants;
 
 public class BlockFiddlehead extends BlockFern {
 

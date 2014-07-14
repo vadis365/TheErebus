@@ -1,12 +1,13 @@
 package erebus.world.feature.plant;
 
 import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.BlockSmallPlants;
+import erebus.block.plants.BlockSmallPlants;
 
 //@formatter:off
 public class WorldGenNettlePatch extends WorldGenerator {

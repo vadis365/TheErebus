@@ -16,8 +16,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.block.BlockBambooShoot;
-import erebus.block.BlockHangerPlants;
+import erebus.block.bamboo.BlockBambooShoot;
+import erebus.block.plants.BlockHangerPlants;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketSound;
 

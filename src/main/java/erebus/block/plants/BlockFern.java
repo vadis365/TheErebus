@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.plants;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,6 +14,7 @@ import net.minecraftforge.common.IShearable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.block.BlockUndergroundFlower;
 import erebus.item.block.ItemBlockColoredSingle;
 
 public class BlockFern extends BlockUndergroundFlower implements IShearable, ISubBlocksBlock {

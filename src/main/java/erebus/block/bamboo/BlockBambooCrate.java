@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.bamboo;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

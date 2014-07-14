@@ -3,7 +3,7 @@ package erebus.core.handler;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import erebus.block.BlockSaplingErebus;
+import erebus.block.plants.BlockSaplingErebus;
 
 public class BonemealHandler {
 

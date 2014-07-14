@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.plants;
 
 import net.minecraft.block.BlockVine;
 import net.minecraft.entity.Entity;

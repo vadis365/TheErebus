@@ -11,8 +11,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.BlockDoubleHeightPlant;
-import erebus.block.BlockSmallPlants;
+import erebus.block.plants.BlockDoubleHeightPlant;
+import erebus.block.plants.BlockSmallPlants;
 
 //@formatter:off
 public class WorldGenPonds extends WorldGenerator{

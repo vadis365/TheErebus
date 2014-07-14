@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.plants;
 
 import java.util.List;
 import java.util.Random;
@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModTabs;
+import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
 import erebus.world.feature.tree.WorldGenAcaciaTree;

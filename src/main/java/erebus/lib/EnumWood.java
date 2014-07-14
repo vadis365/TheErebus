@@ -11,9 +11,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
 import erebus.block.BlockLogErebus;
-import erebus.block.BlockSaplingErebus;
 import erebus.block.BlockSlabPlanks;
 import erebus.block.BlockStairPlanks;
+import erebus.block.plants.BlockSaplingErebus;
 import erebus.item.block.ItemBlockLocalised;
 import erebus.item.block.ItemBlockSlabSimple;
 
