@@ -1,54 +1,29 @@
-package erebus.block;
+package erebus.block.glowshroom;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
-public class BlockGlowshroomStalkDown2 extends Block{
+public class BlockGlowshroomStalkE3 extends Block {
 
-	public BlockGlowshroomStalkDown2() {
+	public BlockGlowshroomStalkE3() {
 		super(Material.wood);
-		setTickRandomly(true);
-		setBlockBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 1F, 0.8125F);
+		setBlockBounds(0F, 0.3125F, 0.3125F, 0.6875F, 1F, 0.6875F);
 	}
 
 	@Override
 	public int getRenderType() {
-		return 0;
+		return BlockRenderIDs.GLOWSHROOM_STALK.id();
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return true;
-	}
-	
-	@Override
-	public void setBlockBoundsForItemRender() {
-		setBlockBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 1F, 0.8125F);
-	}
-	
-	@Override
-	@SuppressWarnings("rawtypes")
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
-		setBlockBounds(0.1875F, 0.375F, 0.1875F, 0.8125F, 1F, 0.8125F);
-		super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
-	}
-
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
-		world.setBlock(x, y, z, ModBlocks.glowshroomStalkDown3, 0, 2);
 	}
 
 	@Override
@@ -73,29 +48,33 @@ public class BlockGlowshroomStalkDown2 extends Block{
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x, y + 1, z));
+		return isValidBlock(world.getBlock(x - 1, y, z));
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x, y + 1, z));
+		return isValidBlock(world.getBlock(x - 1, y, z));
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
-		if (isValidBlock(world.getBlock(x, y + 1, z)))
+		if (isValidBlock(world.getBlock(x - 1, y, z)))
 			flag = true;
 		if (!flag) {
 			breakBlock(world, x, y, z, neighbour, meta);
 			world.setBlockToAir(x, y, z);
 		}
 
+		Block blockAbove = world.getBlock(x, y + 1, z);
+		if (blockAbove != ModBlocks.glowshroom)
+			world.setBlock(x, y, z, ModBlocks.glowshroomStalkE1, 0, 2);
+
 		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
 	private boolean isValidBlock(Block block) {
-		return block == ModBlocks.glowshroomStalkMain;
+		return block == ModBlocks.glowshroomStalkWE2;
 	}
 }

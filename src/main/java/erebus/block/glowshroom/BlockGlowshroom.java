@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.glowshroom;
 
 import java.util.Random;
 
@@ -46,11 +46,6 @@ public class BlockGlowshroom extends Block {
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return true;
 	}
 
 	@Override

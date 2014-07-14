@@ -1,82 +1,48 @@
-package erebus.block;
+package erebus.block.glowshroom;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 
-public class BlockGlowshroomStalkNS2 extends Block{
+public class BlockGlowshroomStalkNS2 extends Block {
 
 	public BlockGlowshroomStalkNS2() {
 		super(Material.wood);
 		setTickRandomly(true);
 		setBlockBounds(0.1875F, 0.1875F, 0F, 0.8125F, 0.8125F, 1F);
 	}
-	
-	@Override
-	public int getRenderType() {
-		return 0;
-	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return true;
-	}
-	
-	@Override
-	public void setBlockBoundsForItemRender() {
-		setBlockBounds(0.1875F, 0.1875F, 0F, 0.8125F, 0.8125F, 1F);
-	}
-	
-	@Override
-	@SuppressWarnings("rawtypes")
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
-		setBlockBounds(0.1875F, 0.1875F, 0F, 0.8125F, 0.8125F, 1F);
-		super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
-	}
-
-	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		if (world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkMain) {
-			if(rand.nextInt(2)== 0 && world.isAirBlock(x, y , z - 1)) {
+			if (rand.nextInt(2) == 0 && world.isAirBlock(x, y, z - 1))
 				world.setBlock(x, y, z - 1, ModBlocks.glowshroomStalkN1, 0, 2);
-			}
-			else if(world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkN1) {
+			else if (world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkN1)
 				return;
-				}
-			else if(world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkN3) {
+			else if (world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkN3)
 				return;
-				}
-			else {
+			else
 				world.setBlock(x, y, z, ModBlocks.glowshroomStalkMain, 0, 2);
-			}
 		}
-		
-		else if (world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkMain) {
-			if(rand.nextInt(2)== 0 && world.isAirBlock(x, y , z + 1)) {
+
+		else if (world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkMain)
+			if (rand.nextInt(2) == 0 && world.isAirBlock(x, y, z + 1))
 				world.setBlock(x, y, z + 1, ModBlocks.glowshroomStalkS1, 0, 2);
-			}
-			else if(world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkS1) {
+			else if (world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkS1)
 				return;
-				}
-			else if(world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkS3) {
+			else if (world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkS3)
 				return;
-				}
-			else {
+			else
 				world.setBlock(x, y, z, ModBlocks.glowshroomStalkMain, 0, 2);
-			}
-		}
 	}
 
 	@Override
@@ -103,7 +69,7 @@ public class BlockGlowshroomStalkNS2 extends Block{
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y, z + 1)) || isValidBlock(world.getBlock(x, y, z - 1));
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y, z + 1)) || isValidBlock(world.getBlock(x, y, z - 1));

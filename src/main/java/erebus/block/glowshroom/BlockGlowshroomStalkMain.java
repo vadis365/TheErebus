@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.glowshroom;
 
 import java.util.Random;
 
@@ -13,27 +13,6 @@ public class BlockGlowshroomStalkMain extends Block {
 	public BlockGlowshroomStalkMain() {
 		super(Material.wood);
 		setTickRandomly(true);
-		setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
-	}
-
-	@Override
-	public int getRenderType() {
-		return 0;
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return true;
-	}
-
-	@Override
-	public void setBlockBoundsForItemRender() {
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	@Override

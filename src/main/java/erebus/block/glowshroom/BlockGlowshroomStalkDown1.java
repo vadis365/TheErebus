@@ -1,17 +1,14 @@
-package erebus.block;
+package erebus.block.glowshroom;
 
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 
-public class BlockGlowshroomStalkDown1 extends Block{
+public class BlockGlowshroomStalkDown1 extends Block {
 
 	public BlockGlowshroomStalkDown1() {
 		super(Material.wood);
@@ -20,30 +17,8 @@ public class BlockGlowshroomStalkDown1 extends Block{
 	}
 
 	@Override
-	public int getRenderType() {
-		return 0;
-	}
-	
-	@Override
 	public boolean isOpaqueCube() {
 		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return true;
-	}
-	
-	@Override
-	public void setBlockBoundsForItemRender() {
-		setBlockBounds(0.1875F, 0.875F, 0.1875F, 0.8125F, 1F, 0.8125F);
-	}
-	
-	@Override
-	@SuppressWarnings("rawtypes")
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
-		setBlockBounds(0.1875F, 0.875F, 0.1875F, 0.8125F, 1F, 0.8125F);
-		super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
 	}
 
 	@Override
@@ -75,7 +50,7 @@ public class BlockGlowshroomStalkDown1 extends Block{
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y + 1, z));
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y + 1, z));
