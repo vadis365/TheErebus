@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.core.helper.Utils;
 
 public class BlockGlowshroomStalkMain extends Block {
 
@@ -96,7 +97,7 @@ public class BlockGlowshroomStalkMain extends Block {
 			flag = true;
 
 		if (!flag)
-			world.setBlockToAir(x, y, z);
+			Utils.breakBlockWithParticles(world, x, y, z);
 	}
 
 	private boolean isValidBlock(Block block) {

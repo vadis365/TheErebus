@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 public class BlockGlowshroomStalkW3 extends Block {
@@ -55,7 +56,7 @@ public class BlockGlowshroomStalkW3 extends Block {
 			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1);
 
 		if (!isValidBlock(world.getBlock(x + 1, y, z)))
-			world.setBlockToAir(x, y, z);
+			Utils.breakBlockWithParticles(world, x, y, z);
 	}
 
 	private boolean isValidBlock(Block block) {

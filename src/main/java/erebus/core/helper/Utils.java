@@ -3,6 +3,7 @@ package erebus.core.helper;
 import java.awt.Color;
 import java.util.LinkedHashMap;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -28,6 +29,18 @@ public class Utils {
 			meta += 2;
 
 		return meta;
+	}
+
+	public static final void breakBlockWithParticles(World world, int x, int y, int z, int meta) {
+		Block block = world.getBlock(x, y, z);
+		if (block.isAir(world, x, y, z))
+			return;
+		world.setBlockToAir(x, y, z);
+		world.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(block) + (meta << 12));
+	}
+
+	public static final void breakBlockWithParticles(World world, int x, int y, int z) {
+		breakBlockWithParticles(world, x, y, z, world.getBlockMetadata(x, y, z));
 	}
 
 	public static final void dropStack(World world, int x, int y, int z, ItemStack is) {

@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.ErebusMaterial.DATA;
 
@@ -79,7 +80,7 @@ public class BlockGlowshroom extends Block {
 			return;
 
 		if (!isValidBlock(world.getBlock(x, y - 1, z)))
-			world.setBlockToAir(x, y, z);
+			Utils.breakBlockWithParticles(world, x, y, z);
 	}
 
 	private boolean isValidBlock(Block block) {
