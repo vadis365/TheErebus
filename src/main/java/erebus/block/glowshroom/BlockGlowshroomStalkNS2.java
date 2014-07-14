@@ -27,24 +27,24 @@ public class BlockGlowshroomStalkNS2 extends Block {
 			return;
 		if (world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkMain) {
 			if (rand.nextInt(2) == 0 && world.isAirBlock(x, y, z - 1))
-				world.setBlock(x, y, z - 1, ModBlocks.glowshroomStalkN1, 0, 2);
+				world.setBlock(x, y, z - 1, ModBlocks.glowshroomStalkN1);
 			else if (world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkN1)
 				return;
 			else if (world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkN3)
 				return;
 			else
-				world.setBlock(x, y, z, ModBlocks.glowshroomStalkMain, 0, 2);
+				world.setBlock(x, y, z, ModBlocks.glowshroomStalkMain);
 		}
 
 		else if (world.getBlock(x, y, z - 1) == ModBlocks.glowshroomStalkMain)
 			if (rand.nextInt(2) == 0 && world.isAirBlock(x, y, z + 1))
-				world.setBlock(x, y, z + 1, ModBlocks.glowshroomStalkS1, 0, 2);
+				world.setBlock(x, y, z + 1, ModBlocks.glowshroomStalkS1);
 			else if (world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkS1)
 				return;
 			else if (world.getBlock(x, y, z + 1) == ModBlocks.glowshroomStalkS3)
 				return;
 			else
-				world.setBlock(x, y, z, ModBlocks.glowshroomStalkMain, 0, 2);
+				world.setBlock(x, y, z, ModBlocks.glowshroomStalkMain);
 	}
 
 	@Override
@@ -82,18 +82,14 @@ public class BlockGlowshroomStalkNS2 extends Block {
 		if (world.isRemote)
 			return;
 
-		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
 		if (isValidBlock(world.getBlock(x, y, z + 1)))
 			flag = true;
 		if (isValidBlock(world.getBlock(x, y, z - 1)))
 			flag = true;
-		if (!flag) {
-			breakBlock(world, x, y, z, neighbour, meta);
-			world.setBlockToAir(x, y, z);
-		}
 
-		super.onNeighborBlockChange(world, x, y, z, neighbour);
+		if (!flag)
+			world.setBlockToAir(x, y, z);
 	}
 
 	private boolean isValidBlock(Block block) {

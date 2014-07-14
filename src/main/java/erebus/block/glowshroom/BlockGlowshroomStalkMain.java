@@ -25,29 +25,29 @@ public class BlockGlowshroomStalkMain extends Block {
 		switch (rand.nextInt(5)) {
 			case 0:
 				if (world.isAirBlock(x, y - offset, z))
-					world.setBlock(x, y - offset, z, ModBlocks.glowshroomStalkDown1, 0, 2);
+					world.setBlock(x, y - offset, z, ModBlocks.glowshroomStalkDown1);
 				break;
 			case 1:
 				if (world.isAirBlock(x, y, z - offset) && world.getBlock(x, y + 1, z) != ModBlocks.umberstone)
-					world.setBlock(x, y, z - offset, ModBlocks.glowshroomStalkN1, 0, 2);
+					world.setBlock(x, y, z - offset, ModBlocks.glowshroomStalkN1);
 				break;
 			case 2:
 				if (world.isAirBlock(x, y, z + offset) && world.getBlock(x, y + 1, z) != ModBlocks.umberstone)
-					world.setBlock(x, y, z + offset, ModBlocks.glowshroomStalkS1, 0, 2);
+					world.setBlock(x, y, z + offset, ModBlocks.glowshroomStalkS1);
 				break;
 			case 3:
 				if (world.isAirBlock(x - offset, y, z) && world.getBlock(x, y + 1, z) != ModBlocks.umberstone)
-					world.setBlock(x - offset, y, z, ModBlocks.glowshroomStalkW1, 0, 2);
+					world.setBlock(x - offset, y, z, ModBlocks.glowshroomStalkW1);
 				break;
 			case 4:
 				if (world.isAirBlock(x + offset, y, z) && world.getBlock(x, y + 1, z) != ModBlocks.umberstone)
-					world.setBlock(x + offset, y, z, ModBlocks.glowshroomStalkE1, 0, 2);
+					world.setBlock(x + offset, y, z, ModBlocks.glowshroomStalkE1);
 				break;
 		}
 
 		if (rand.nextInt(10) == 0)
 			if (world.isAirBlock(x, y + 1, z))
-				world.setBlock(x, y + 1, z, ModBlocks.glowshroom, 0, 2);
+				world.setBlock(x, y + 1, z, ModBlocks.glowshroom);
 	}
 
 	@Override
@@ -105,12 +105,8 @@ public class BlockGlowshroomStalkMain extends Block {
 		if (isValidBlock(world.getBlock(x - 1, y, z)))
 			flag = true;
 
-		if (!flag) {
-			breakBlock(world, x, y, z, neighbour, 0);
+		if (!flag)
 			world.setBlockToAir(x, y, z);
-		}
-
-		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
 	private boolean isValidBlock(Block block) {

@@ -60,21 +60,12 @@ public class BlockGlowshroomStalkE3 extends Block {
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		if (world.isRemote)
 			return;
-		
-		Block blockAbove = world.getBlock(x, y + 1, z);
-		if (blockAbove != ModBlocks.glowshroom)
-			world.setBlock(x, y, z, ModBlocks.glowshroomStalkE1, 0, 2);
-		
-		int meta = world.getBlockMetadata(x, y, z);
-		boolean flag = false;
-		if (isValidBlock(world.getBlock(x - 1, y, z)))
-			flag = true;
-		if (!flag) {
-			breakBlock(world, x, y, z, neighbour, meta);
+
+		if (world.getBlock(x, y + 1, z) != ModBlocks.glowshroom)
+			world.setBlock(x, y, z, ModBlocks.glowshroomStalkE1);
+
+		if (!isValidBlock(world.getBlock(x - 1, y, z)))
 			world.setBlockToAir(x, y, z);
-		}
-		
-		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
 	private boolean isValidBlock(Block block) {

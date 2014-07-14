@@ -85,18 +85,11 @@ public class BlockGlowshroom extends Block {
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		int meta = world.getBlockMetadata(x, y, z);
-		boolean flag = false;
+		if (world.isRemote)
+			return;
 
-		if (isValidBlock(world.getBlock(x, y - 1, z)))
-			flag = true;
-
-		if (!flag) {
-			breakBlock(world, x, y, z, neighbour, meta);
+		if (!isValidBlock(world.getBlock(x, y - 1, z)))
 			world.setBlockToAir(x, y, z);
-		}
-
-		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
 	private boolean isValidBlock(Block block) {

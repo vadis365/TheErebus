@@ -61,20 +61,11 @@ public class BlockGlowshroomStalkW3 extends Block {
 		if (world.isRemote)
 			return;
 
-		Block blockAbove = world.getBlock(x, y + 1, z);
-		if (blockAbove != ModBlocks.glowshroom)
-			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1, 0, 2);
-		
-		int meta = world.getBlockMetadata(x, y, z);
-		boolean flag = false;
-		if (isValidBlock(world.getBlock(x + 1, y, z)))
-			flag = true;
-		if (!flag) {
-			breakBlock(world, x, y, z, neighbour, meta);
-			world.setBlockToAir(x, y, z);
-		}
+		if (world.getBlock(x, y + 1, z) != ModBlocks.glowshroom)
+			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1);
 
-		super.onNeighborBlockChange(world, x, y, z, neighbour);
+		if (!isValidBlock(world.getBlock(x + 1, y, z)))
+			world.setBlockToAir(x, y, z);
 	}
 
 	private boolean isValidBlock(Block block) {
