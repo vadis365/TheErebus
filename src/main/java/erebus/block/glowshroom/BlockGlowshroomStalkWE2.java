@@ -49,11 +49,6 @@ public class BlockGlowshroomStalkWE2 extends Block {
 	}
 
 	@Override
-	public int damageDropped(int meta) {
-		return meta;
-	}
-
-	@Override
 	public int quantityDropped(int meta, int fortune, Random random) {
 		return 0;
 	}
@@ -61,11 +56,6 @@ public class BlockGlowshroomStalkWE2 extends Block {
 	@Override
 	public Item getItemDropped(int id, Random random, int fortune) {
 		return null;
-	}
-
-	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
-		return world.getBlockMetadata(x, y, z);
 	}
 
 	@Override

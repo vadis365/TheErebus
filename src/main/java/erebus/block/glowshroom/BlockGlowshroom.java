@@ -64,11 +64,6 @@ public class BlockGlowshroom extends Block {
 	}
 
 	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
-		return world.getBlockMetadata(x, y, z);
-	}
-
-	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y - 1, z));
 	}
@@ -76,11 +71,6 @@ public class BlockGlowshroom extends Block {
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y - 1, z));
-	}
-
-	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-		return meta;
 	}
 
 	@Override
