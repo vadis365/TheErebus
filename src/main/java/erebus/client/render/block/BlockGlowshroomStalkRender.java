@@ -14,8 +14,33 @@ public class BlockGlowshroomStalkRender implements ISimpleBlockRenderingHandler 
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-		BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+		if (block == ModBlocks.glowshroomStalkN3) {
+			renderer.setRenderBounds(0.3125F, 0.3125F, 0.3125F, 0.6875F, 0.6875F, 1F);
+			BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F);
+			BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+		}
+
+		if (block == ModBlocks.glowshroomStalkS3) {
+			renderer.setRenderBounds(0.3125F, 0.3125F, 0F, 0.6875F, 0.6875F, 0.6875F);
+			BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F);
+			BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+		}
+
+		if (block == ModBlocks.glowshroomStalkW3) {
+			renderer.setRenderBounds(0.3125F, 0.3125F, 0.3125F, 1F, 0.6875F, 0.6875F);
+			BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F);
+			BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+		}
+
+		if (block == ModBlocks.glowshroomStalkE3) {
+			renderer.setRenderBounds(0, 0.3125F, 0.3125F, 0.6875F, 0.6875F, 0.6875F);
+			BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+			renderer.setRenderBounds(0.3125F, 0.6875F, 0.3125F, 0.6875F, 1F, 0.6875F);
+			BlockRenderHelper.renderSimpleBlock(ModBlocks.glowshroomStalkMain, 0, renderer);
+		}
 	}
 
 	@Override
