@@ -1,18 +1,17 @@
 package erebus.entity.ai;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
-import erebus.ModBlocks;
 import erebus.entity.EntityBlackAnt;
 
-public class EntityAIEatMushroom extends EntityAIEatBlock {
+public class EntityAIHarvestCrops extends EntityAIEatBlock {
 
 	private final double moveSpeed;
 	private Block blockMunched;
 	private int metaData;
-	public EntityAIEatMushroom(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
+	public EntityAIHarvestCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
 		super((EntityLiving) entity, null, 0, null, moveSpeed, eatSpeed);
 		this.moveSpeed = moveSpeed;
 	}
@@ -22,15 +21,9 @@ public class EntityAIEatMushroom extends EntityAIEatBlock {
 		if (block == null)
 			return false;
 
-		if (block == ModBlocks.erebusPlantSmall && blockMeta <= 4 || block == Blocks.brown_mushroom || block == Blocks.red_mushroom)
+		if (block instanceof BlockCrops && blockMeta >= 7)
 			return true;
 		
-		if (block == ModBlocks.doubleHeightPlant && blockMeta == 4 || block == ModBlocks.doubleHeightPlant && blockMeta == 12)
-			return true;
-		
-		if (block == ModBlocks.doubleHeightPlant && blockMeta == 5 || block == ModBlocks.doubleHeightPlant && blockMeta == 13)
-			return true;
-
 		else if (block.hasTileEntity(blockMeta))
 			return false;
 
@@ -68,6 +61,6 @@ public class EntityAIEatMushroom extends EntityAIEatBlock {
 	protected void afterEaten() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 		blackAnt.setIsEating(false);
-		blackAnt.setShroomsMunched(blockMunched, metaData, (byte) 1);
+		blackAnt.setBlockHarvested(blockMunched, metaData);
 	}
 }

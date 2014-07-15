@@ -334,6 +334,7 @@ container.umberFurnace=Umber Furnace
 container.petrifiedWoodChest=Petrified Wood Chest
 container.petrifiedChestDouble=Large Petrified Wood Chest
 container.extenderThingy=Bamboo Extender
+container.antInventory=Ant Command Control
 
 # Colours
 colour.erebus.dyeBlack=Black

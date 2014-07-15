@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockPetrifiedChest;
+import erebus.client.gui.GuiAntInventory;
 import erebus.client.gui.GuiBambooCrate;
 import erebus.client.gui.GuiColossalCrate;
 import erebus.client.gui.GuiExtenderThingy;
@@ -19,6 +20,8 @@ import erebus.client.gui.GuiPetrifiedChest;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.client.gui.GuiUmberFurnace;
 import erebus.entity.EntityAnimatedBambooCrate;
+import erebus.entity.EntityBlackAnt;
+import erebus.inventory.ContainerAntInventory;
 import erebus.inventory.ContainerBambooCrate;
 import erebus.inventory.ContainerColossalCrate;
 import erebus.inventory.ContainerExtenderThingy;
@@ -58,6 +61,7 @@ public class CommonProxy implements IGuiHandler {
 	public static final int GUI_ID_ANIMATED_BAMBOO_CRATE = 6;
 	public static final int GUI_ID_EXTENDER_THINGY = 7;
 	public static final int GUI_ID_HONEY_COMB = 9;
+	public static final int GUI_ID_ANT_INVENTORY = 10;
 
 	private final int[][] places = new int[][] { { 1, 0, 0 }, { 1, 0, 1 }, { 0, 0, 1 }, { 1, 1, 0 }, { 1, 1, 1 }, { 0, 1, 1 }, { 0, 1, 0 }, { 0, 0, 0 } };
 
@@ -154,6 +158,13 @@ public class CommonProxy implements IGuiHandler {
 			if (tileentity instanceof TileEntityHoneyComb)
 				return new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tileentity);
 		}
+		
+		else if (ID == GUI_ID_ANT_INVENTORY) {
+			Entity entity = world.getEntityByID(x);
+			if (entity != null && entity instanceof EntityBlackAnt)
+				return new ContainerAntInventory(player.inventory, (EntityBlackAnt) entity);
+		}
+		
 		return null;
 	}
 
@@ -203,6 +214,12 @@ public class CommonProxy implements IGuiHandler {
 			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity instanceof TileEntityHoneyComb)
 				return new GuiHoneyComb(player.inventory, (TileEntityHoneyComb) tileentity);
+		}
+		
+		else if (ID == GUI_ID_ANT_INVENTORY) {
+			Entity entity = world.getEntityByID(x);
+			if (entity != null && entity instanceof EntityBlackAnt)
+				return new GuiAntInventory(player.inventory, (EntityBlackAnt) entity);
 		}
 
 		return null;
