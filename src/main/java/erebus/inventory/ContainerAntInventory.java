@@ -2,9 +2,11 @@ package erebus.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 
 public class ContainerAntInventory extends Container {
@@ -34,18 +36,23 @@ public class ContainerAntInventory extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber) {
 		ItemStack is = null;
-		Slot slot = (Slot) inventorySlots.get(par2);
+		Slot slot = (Slot) inventorySlots.get(slotNumber);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack is1 = slot.getStack();
 			is = is1.copy();
 
-			if (par2 < numRows * 9) {
+			if (slotNumber < numRows * 9) {
 				if (!mergeItemStack(is1, numRows * 9, inventorySlots.size(), true))
 					return null;
-			} else if (!mergeItemStack(is1, 0, numRows * 9, false))
+			}
+			else if (is1.getItem() == Items.shears || is1.getItem() == Items.bucket || is1.getItem() instanceof ItemHoe) {
+				if (!mergeItemStack(is1, 0, 1, false))
+					return null;
+			}
+			else if (!mergeItemStack(is1, 1, numRows * 3, false))
 				return null;
 
 			if (is1.stackSize == 0)

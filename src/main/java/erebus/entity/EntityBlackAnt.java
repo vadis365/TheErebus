@@ -10,7 +10,9 @@ import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -27,6 +29,9 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public boolean isEating;
 	
 	protected ItemStack[] inventory;
+	private final int TOOL_SLOT = 0;
+	private final int CROP_ID_SLOT = 1;
+	private final int INVENTORY_SLOT = 2;
 	
 	public EntityBlackAnt(World world) {
 		super(world);
@@ -195,7 +200,16 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return true;
+		if(slot == TOOL_SLOT)
+			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe;
+		
+		if(slot == CROP_ID_SLOT)
+			return true;
+		
+		if(slot == INVENTORY_SLOT)
+			return true;
+
+		return false;
 	}
 	
 	@Override
