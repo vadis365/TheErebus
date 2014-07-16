@@ -10,6 +10,7 @@ import thaumcraft.api.aspects.AspectList;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.block.BlockErebusOre;
+import erebus.integration.ModIntegrationHandler.IModIntegration;
 
 public class ThaumcraftIntegration implements IModIntegration {
 
@@ -17,9 +18,12 @@ public class ThaumcraftIntegration implements IModIntegration {
 	public String getModId() {
 		return "Thaumcraft";
 	}
+	
+	@Override
+	public void onInit(){}
 
 	@Override
-	public void integrate() {
+	public void onPostInit() {
 		registerBlock(ModBlocks.blockAmber, 0, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
 		registerBlock(ModBlocks.blockAmber, 1, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 5);
 		registerBlock(ModBlocks.blockAmber, 2, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);

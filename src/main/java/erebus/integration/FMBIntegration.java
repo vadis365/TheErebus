@@ -1,5 +1,4 @@
 package erebus.integration;
-
 import net.minecraft.block.Block;
 import codechicken.microblock.BlockMicroMaterial;
 import codechicken.microblock.MicroMaterialRegistry;
@@ -7,11 +6,17 @@ import cpw.mods.fml.common.Loader;
 import erebus.ModBlocks;
 import erebus.block.BlockGneiss;
 import erebus.block.BlockUmberstone;
+import erebus.integration.ModIntegrationHandler.IModIntegration;
 import erebus.lib.EnumWood;
 
-public class FMBIntegration {
-
-	public static void integrate() {
+public class FMBIntegration implements IModIntegration{
+	@Override
+	public String getModId() {
+		return "ForgeMicroblock";
+	}
+	
+	@Override
+	public void onInit() {
 		if (Loader.isModLoaded("ForgeMicroblock")) {
 			addMicroblock(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length);
 			addMicroblock(ModBlocks.redGem, 0, 2);
@@ -25,6 +30,9 @@ public class FMBIntegration {
 			addMicroblock(ModBlocks.umberstonePillar);
 		}
 	}
+	
+	@Override
+	public void onPostInit(){}
 
 	private static void addMicroblock(Block block) {
 		MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(block, 0), block.getUnlocalizedName());

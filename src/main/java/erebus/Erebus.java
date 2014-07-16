@@ -2,9 +2,6 @@ package erebus;
 
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import com.google.common.reflect.ClassPath;
-import com.google.common.reflect.ClassPath.ClassInfo;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -12,6 +9,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
@@ -22,9 +20,11 @@ import erebus.core.handler.BucketHandler;
 import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.proxy.CommonProxy;
+import erebus.debug.ErebusCommandDebug;
 import erebus.entity.util.RandomMobNames;
 import erebus.integration.FMBIntegration;
-import erebus.integration.IModIntegration;
+import erebus.integration.ModIntegrationHandler;
+import erebus.integration.ThaumcraftIntegration;
 import erebus.lib.Reference;
 import erebus.network.PacketPipeline;
 import erebus.recipes.AltarRecipe;
@@ -89,26 +89,19 @@ public class Erebus {
 		if (ConfigHandler.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
-		if (Loader.isModLoaded("ForgeMicroblock"))
-			FMBIntegration.integrate();
+		// TODO someone test it outside eclipse to make sure it doesn't crash without the mods installed
+		ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
+		ModIntegrationHandler.addMod(FMBIntegration.class);
+		ModIntegrationHandler.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		try {
-			for (ClassInfo clsInfo : ClassPath.from(getClass().getClassLoader()).getTopLevelClasses("erebus.integration")) {
-				Class<?> cls = clsInfo.load();
-
-				if (IModIntegration.class.isAssignableFrom(cls) && !cls.isInterface())
-					try {
-						IModIntegration obj = (IModIntegration) cls.newInstance();
-						if (Loader.isModLoaded(obj.getModId()))
-							obj.integrate();
-					} catch (Throwable e) {
-						e.printStackTrace();
-					}
-			}
-		} catch (Exception e) {
-		}
+		ModIntegrationHandler.postInit();
+	}
+	
+	@EventHandler
+	public void onServerStarting(FMLServerStartingEvent event){
+		event.registerServerCommand(new ErebusCommandDebug());
 	}
 }
