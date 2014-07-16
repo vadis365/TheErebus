@@ -25,9 +25,7 @@ public class ModIntegrationHandler{
 	
 	static interface IModIntegration {
 		public String getModId();
-		
 		public void onInit();
-		
 		public void onPostInit();
 	}
 }

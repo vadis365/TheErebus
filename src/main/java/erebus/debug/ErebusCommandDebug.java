@@ -34,7 +34,7 @@ public class ErebusCommandDebug extends CommandBase{
 		
 		if (params.length == 0){
 			sender.addChatMessage(text("Available commands:"));
-			
+			// TODO
 		}
 	}
 }

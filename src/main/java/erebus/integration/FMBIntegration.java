@@ -17,18 +17,16 @@ public class FMBIntegration implements IModIntegration{
 	
 	@Override
 	public void onInit() {
-		if (Loader.isModLoaded("ForgeMicroblock")) {
-			addMicroblock(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length);
-			addMicroblock(ModBlocks.redGem, 0, 2);
-			addMicroblock(ModBlocks.blockAmber, 0, 3);
-			addMicroblock(ModBlocks.gneiss, 0, BlockGneiss.iconPaths.length);
-			addMicroblock(ModBlocks.blockSilk);
-			addMicroblock(ModBlocks.mirBrick);
-			addMicroblock(ModBlocks.petrifiedWoodPlanks);
-			addMicroblock(ModBlocks.planksErebus, 0, EnumWood.values().length);
-			addMicroblock(ModBlocks.umberPaver, 0, 3);
-			addMicroblock(ModBlocks.umberstonePillar);
-		}
+		addMicroblock(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length);
+		addMicroblock(ModBlocks.redGem, 0, 2);
+		addMicroblock(ModBlocks.blockAmber, 0, 3);
+		addMicroblock(ModBlocks.gneiss, 0, BlockGneiss.iconPaths.length);
+		addMicroblock(ModBlocks.blockSilk);
+		addMicroblock(ModBlocks.mirBrick);
+		addMicroblock(ModBlocks.petrifiedWoodPlanks);
+		addMicroblock(ModBlocks.planksErebus, 0, EnumWood.values().length);
+		addMicroblock(ModBlocks.umberPaver, 0, 3);
+		addMicroblock(ModBlocks.umberstonePillar);
 	}
 	
 	@Override

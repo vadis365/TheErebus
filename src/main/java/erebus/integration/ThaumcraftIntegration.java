@@ -1,5 +1,4 @@
 package erebus.integration;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,7 +12,6 @@ import erebus.block.BlockErebusOre;
 import erebus.integration.ModIntegrationHandler.IModIntegration;
 
 public class ThaumcraftIntegration implements IModIntegration {
-
 	@Override
 	public String getModId() {
 		return "Thaumcraft";

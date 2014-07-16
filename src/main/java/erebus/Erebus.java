@@ -89,7 +89,7 @@ public class Erebus {
 		if (ConfigHandler.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
-		// TODO someone test it outside eclipse to make sure it doesn't crash without the mods installed
+		// TODO someone test it outside eclipse to make sure it doesn't crash without the mods installed 
 		ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
 		ModIntegrationHandler.addMod(FMBIntegration.class);
 		ModIntegrationHandler.init();
