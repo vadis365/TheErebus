@@ -12,6 +12,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import erebus.Erebus;
 import erebus.core.helper.Utils;
@@ -23,6 +25,9 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	private EntityAIHarvestCrops aiHarvestCrops = new EntityAIHarvestCrops(this, 0.6D, 1);
 	public boolean setAttributes; // needed for logic later
 	public boolean isEating;
+	
+	protected ItemStack[] inventory;
+	
 	public EntityBlackAnt(World world) {
 		super(world);
 		stepHeight = 1.0F;
@@ -33,6 +38,8 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		tasks.addTask(1, aiHarvestCrops);
 		tasks.addTask(2, aiPanic);
 		tasks.addTask(3, new EntityAILookIdle(this));
+		
+		inventory = new ItemStack[3];
 	}
 	
 	@Override
@@ -121,32 +128,48 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 	@Override
 	public int getSizeInventory() {
-		// TODO Auto-generated method stub
-		return 0;
+		return inventory.length;
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int p_70301_1_) {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemStack getStackInSlot(int slot) {
+		return inventory[slot];
 	}
 
 	@Override
-	public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemStack decrStackSize(int slot, int size) {
+			if (inventory[slot] != null) {
+				ItemStack itemstack;
+				if (inventory[slot].stackSize <= size) {
+					itemstack = inventory[slot];
+					inventory[slot] = null;
+					return itemstack;
+				} else {
+					itemstack = inventory[slot].splitStack(size);
+					if (inventory[slot].stackSize == 0)
+						inventory[slot] = null;
+					return itemstack;
+				}
+			} else
+				return null;
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemStack getStackInSlotOnClosing(int slot) {
+			if (inventory[slot] != null) {
+				ItemStack itemstack = inventory[slot];
+				inventory[slot] = null;
+				return itemstack;
+			} else
+				return null;
 	}
 
 	@Override
-	public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-		// TODO Auto-generated method stub
-		
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+		inventory[slot] = stack;
+
+		if (stack != null && stack.stackSize > getInventoryStackLimit())
+			stack.stackSize = getInventoryStackLimit();
 	}
 
 	@Override
@@ -156,43 +179,68 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 64;
+	}
+
+
+	@Override
+	public final boolean isUseableByPlayer(EntityPlayer player) {
+		return true;
+	}
+	
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return true;
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		NBTTagList tags = nbt.getTagList("Items", 10);
+		inventory = new ItemStack[getSizeInventory()];
+
+		for (int i = 0; i < tags.tagCount(); i++) {
+			NBTTagCompound data = tags.getCompoundTagAt(i);
+			int j = data.getByte("Slot") & 255;
+
+			if (j >= 0 && j < inventory.length)
+				inventory[j] = ItemStack.loadItemStackFromNBT(data);
+		}
 	}
 
 	@Override
-	public void markDirty() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		NBTTagList tags = new NBTTagList();
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		for (int i = 0; i < inventory.length; i++)
+			if (inventory[i] != null) {
+				NBTTagCompound data = new NBTTagCompound();
+				data.setByte("Slot", (byte) i);
+				inventory[i].writeToNBT(data);
+				tags.appendTag(data);
+			}
 
+		nbt.setTag("Items", tags);
+	}
+	
 	@Override
 	public void openInventory() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void closeInventory() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-		// TODO Auto-generated method stub
-		return false;
+	public void markDirty() {
+		// TODO Auto-generated method stub	
 	}
 }
