@@ -2,25 +2,26 @@ package erebus.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 
 public class ContainerAntInventory extends Container {
 
-	public int numRows = 1;
+	private static final int NUM_ROWS = 1;
+	private final IInventory inventory;
 
 	public ContainerAntInventory(InventoryPlayer playerInventory, IInventory entityInventory) {
-		int i = (numRows - 4) * 18;
+		inventory = entityInventory;
+
+		int i = (NUM_ROWS - 4) * 18;
 		int j;
 		int k;
 
-		for (j = 0; j < numRows; ++j)
+		for (j = 0; j < NUM_ROWS; ++j)
 			for (k = 0; k < 3; ++k)
-				addSlotToContainer(new Slot(entityInventory, k + j * 9, 26 + k * 54, 18 + j * 18));
+				addSlotToContainer(new BetterSlot(entityInventory, k + j * 9, 26 + k * 54, 18 + j * 18));
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)
@@ -44,15 +45,13 @@ public class ContainerAntInventory extends Container {
 			ItemStack is1 = slot.getStack();
 			is = is1.copy();
 
-			if (slotNumber < numRows * 9) {
-				if (!mergeItemStack(is1, numRows * 9, inventorySlots.size(), true))
+			if (slotNumber < NUM_ROWS * 9) {
+				if (!mergeItemStack(is1, NUM_ROWS * 9, inventorySlots.size(), true))
 					return null;
-			}
-			else if (is1.getItem() == Items.shears || is1.getItem() == Items.bucket || is1.getItem() instanceof ItemHoe) {
+			} else if (inventory.isItemValidForSlot(0, is1)) {
 				if (!mergeItemStack(is1, 0, 1, false))
 					return null;
-			}
-			else if (!mergeItemStack(is1, 1, numRows * 3, false))
+			} else if (!mergeItemStack(is1, 1, NUM_ROWS * 3, false))
 				return null;
 
 			if (is1.stackSize == 0)

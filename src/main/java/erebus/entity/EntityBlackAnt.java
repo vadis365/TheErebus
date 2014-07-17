@@ -23,16 +23,17 @@ import erebus.core.proxy.CommonProxy;
 import erebus.entity.ai.EntityAIHarvestCrops;
 
 public class EntityBlackAnt extends EntityMob implements IInventory {
-	private EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
-	private EntityAIHarvestCrops aiHarvestCrops = new EntityAIHarvestCrops(this, 0.6D, 1);
+
+	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
+	private final EntityAIHarvestCrops aiHarvestCrops = new EntityAIHarvestCrops(this, 0.6D, 1);
 	public boolean setAttributes; // needed for logic later
 	public boolean isEating;
-	
+
 	protected ItemStack[] inventory;
 	private final int TOOL_SLOT = 0;
 	private final int CROP_ID_SLOT = 1;
 	private final int INVENTORY_SLOT = 2;
-	
+
 	public EntityBlackAnt(World world) {
 		super(world);
 		stepHeight = 1.0F;
@@ -43,10 +44,10 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		tasks.addTask(1, aiHarvestCrops);
 		tasks.addTask(2, aiPanic);
 		tasks.addTask(3, new EntityAILookIdle(this));
-		
+
 		inventory = new ItemStack[3];
 	}
-	
+
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -57,7 +58,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public boolean isAIEnabled() {
 		return true;
 	}
-	
+
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
@@ -66,16 +67,16 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
-	
+
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-    protected boolean canDespawn() {
-        return true;
-    }
+	protected boolean canDespawn() {
+		return true;
+	}
 
 	@Override
 	protected String getLivingSound() {
@@ -101,30 +102,30 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public int getMaxSpawnedInChunk() {
 		return 5;
 	}
-    
+
 	public void openGUI(EntityPlayer player) {
 		player.openGui(Erebus.instance, CommonProxy.GUI_ID_ANT_INVENTORY, player.worldObj, getEntityId(), 0, 0);
-     }
-    
+	}
+
 	@Override
-    public boolean interact(EntityPlayer player) {
+	public boolean interact(EntityPlayer player) {
 		// TODO a fair bit of crap to happen here methinks
 		openGUI(player);
 		return super.interact(player);
 	}
-	
+
 	public void setIsEating(boolean isEating) {
 		this.isEating = isEating;
 	}
-	
+
 	public void setBlockHarvested(Block block, int meta) {
 		Random rand = new Random();
 		if (block != null) {
-			Utils.dropStack(worldObj, (int)posX, (int)posY, (int)posZ, new ItemStack(block.getItemDropped(meta, rand, 0), rand.nextInt(2) + 1));
-			Utils.dropStack(worldObj, (int)posX, (int)posY, (int)posZ,  new ItemStack(block.getItemDropped(0, rand, 0), rand.nextInt(2) + 1));
+			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(block.getItemDropped(meta, rand, 0), rand.nextInt(2) + 1));
+			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(block.getItemDropped(0, rand, 0), rand.nextInt(2) + 1));
 		}
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
@@ -143,30 +144,30 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 	@Override
 	public ItemStack decrStackSize(int slot, int size) {
-			if (inventory[slot] != null) {
-				ItemStack itemstack;
-				if (inventory[slot].stackSize <= size) {
-					itemstack = inventory[slot];
+		if (inventory[slot] != null) {
+			ItemStack itemstack;
+			if (inventory[slot].stackSize <= size) {
+				itemstack = inventory[slot];
+				inventory[slot] = null;
+				return itemstack;
+			} else {
+				itemstack = inventory[slot].splitStack(size);
+				if (inventory[slot].stackSize == 0)
 					inventory[slot] = null;
-					return itemstack;
-				} else {
-					itemstack = inventory[slot].splitStack(size);
-					if (inventory[slot].stackSize == 0)
-						inventory[slot] = null;
-					return itemstack;
-				}
-			} else
-				return null;
+				return itemstack;
+			}
+		} else
+			return null;
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
-			if (inventory[slot] != null) {
-				ItemStack itemstack = inventory[slot];
-				inventory[slot] = null;
-				return itemstack;
-			} else
-				return null;
+		if (inventory[slot] != null) {
+			ItemStack itemstack = inventory[slot];
+			inventory[slot] = null;
+			return itemstack;
+		} else
+			return null;
 	}
 
 	@Override
@@ -192,26 +193,19 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		return 64;
 	}
 
-
 	@Override
 	public final boolean isUseableByPlayer(EntityPlayer player) {
 		return true;
 	}
-	
+
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		if(slot == TOOL_SLOT)
+		if (slot == TOOL_SLOT)
 			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe;
-		
-		if(slot == CROP_ID_SLOT)
-			return true;
-		
-		if(slot == INVENTORY_SLOT)
-			return true;
 
-		return false;
+		return slot == CROP_ID_SLOT || slot == INVENTORY_SLOT;
 	}
-	
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
@@ -242,19 +236,16 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 		nbt.setTag("Items", tags);
 	}
-	
+
 	@Override
 	public void openInventory() {
-		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void closeInventory() {
-		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void markDirty() {
-		// TODO Auto-generated method stub	
 	}
 }
