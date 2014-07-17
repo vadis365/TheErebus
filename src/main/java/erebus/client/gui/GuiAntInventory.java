@@ -25,12 +25,15 @@ public class GuiAntInventory extends GuiContainer {
 	private static final ResourceLocation GUI_ANT_INVENTORY = new ResourceLocation("erebus:textures/gui/container/antGuiTest.png");
 	public static Item[] ghostIcon = new Item[] {Items.stone_hoe, Items.shears, Items.bucket};
 	private ItemStack stack;
-	int iconCount=0;
+	int iconCount = 0;
+	private IInventory antInventory;
+	
 	public GuiAntInventory(InventoryPlayer inventory, Entity entityInventory) {
 		super(new ContainerAntInventory(inventory, (IInventory) entityInventory));
 		xSize = 176;
 		ySize = 131;
 		stack = new ItemStack(ghostIcon[0]);
+		antInventory = (IInventory)entityInventory;
 	}
 
 	@Override
@@ -47,14 +50,16 @@ public class GuiAntInventory extends GuiContainer {
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glColor4f(1f, 1f, 1f, 0.2f);
-		IIcon iicon1 = stack.getIconIndex();
-		this.mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
-		this.drawTexturedModelRectFromIcon(guiLeft + 26, guiTop +18, iicon1, 16, 16);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
+		if(antInventory.getStackInSlot(0) == null) {
+			GL11.glPushMatrix();
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glColor4f(1f, 1f, 1f, 0.2f);
+			IIcon iicon1 = stack.getIconIndex();
+			this.mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
+			this.drawTexturedModelRectFromIcon(guiLeft + 26, guiTop +18, iicon1, 16, 16);
+			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glPopMatrix();
+		}
     }
 		
 	@Override
