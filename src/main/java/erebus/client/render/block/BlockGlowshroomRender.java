@@ -28,6 +28,7 @@ public class BlockGlowshroomRender implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0.375F, 0.9375F, 0.375F, 0.625F, 1F, 0.625F);
 		renderer.renderStandardBlock(ModBlocks.glowshroom, x, y, z);
 		renderer.setRenderBounds(0.25F, 0.8125F, 0.25F, 0.75F, 0.9375F, 0.75F);
@@ -38,6 +39,7 @@ public class BlockGlowshroomRender implements ISimpleBlockRenderingHandler {
 		renderer.renderStandardBlock(ModBlocks.glowshroom, x, y, z);
 		renderer.setRenderBounds(0.3125F, 0F, 0.3125F, 0.6875F, 0.5F, 0.6875F);
 		renderer.renderStandardBlock(ModBlocks.glowshroomStalkMain, x, y, z);
+		renderer.renderAllFaces = false;
 		return true;
 	}
 
