@@ -62,4 +62,10 @@ public class ContainerAntInventory extends Container {
 
 		return is;
 	}
+	
+	@Override  
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		inventory.closeInventory();
+	}
 }

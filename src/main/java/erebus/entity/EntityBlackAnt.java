@@ -114,6 +114,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		// TODO a fair bit of crap to happen here methinks
+		openInventory();
 		openGUI(player);
 		return super.interact(player);
 	}
@@ -244,6 +245,8 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	// The below code doesn't work for the moment...I'll get around to doing it soon
 	@Override
 	public void openInventory() {
+		if(worldObj.isRemote)
+			return;
 		tasks.removeTask(aiWander);
 		// TODO tasks.removeTask(aiPlantCrops);
 		tasks.removeTask(aiHarvestCrops);
@@ -254,20 +257,25 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 	@Override
 	public void closeInventory() {
+		if(worldObj.isRemote)
+			return;
+		
 		if (getStackInSlot(TOOL_SLOT) == null)
 			tasks.addTask(1, aiWander);
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
 			//TO DO tasks.addTask(1, aiPlantCrops);
+			System.out.println("Planter Set");
 		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
 			//TO DO tasks.addTask(1, aiCollectCrops);
+			System.out.println("Collector Set");
 		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemShears) {
 			tasks.addTask(1, aiHarvestCrops);
-			System.out.println("Harvest Set");
+			System.out.println("Harvester Set");
 		}
 		System.out.println("Close");
 	}
