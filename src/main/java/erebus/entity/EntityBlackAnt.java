@@ -2,8 +2,6 @@ package erebus.entity;
 
 import java.util.Random;
 
-import thaumcraft.common.entities.ai.interact.AIHarvestCrops;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -242,8 +240,8 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 		nbt.setTag("Items", tags);
 	}
-	
-// The below code doesn't work for the moment...I'll get around to doing it soon
+
+	// The below code doesn't work for the moment...I'll get around to doing it soon
 	@Override
 	public void openInventory() {
 		tasks.removeTask(aiWander);
@@ -256,19 +254,18 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 	@Override
 	public void closeInventory() {
-		if(getStackInSlot(TOOL_SLOT) == null) {
+		if (getStackInSlot(TOOL_SLOT) == null)
 			tasks.addTask(1, aiWander);
-		}
-		
-		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
+
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
 			//TO DO tasks.addTask(1, aiPlantCrops);
 		}
-		
-		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
+
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
 			//TO DO tasks.addTask(1, aiCollectCrops);
 		}
-		
-		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemShears) {
+
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemShears) {
 			tasks.addTask(1, aiHarvestCrops);
 			System.out.println("Harvest Set");
 		}
