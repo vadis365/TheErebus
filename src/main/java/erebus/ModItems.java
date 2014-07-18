@@ -15,6 +15,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.core.handler.ConfigHandler;
+import erebus.item.AntTamingAmulet;
 import erebus.item.ArmorGlider;
 import erebus.item.Bambucket;
 import erebus.item.BeeTamingAmulet;
@@ -65,7 +66,7 @@ public class ModItems {
 	// BASIC MATERIALS
 	public static Item portalActivator, erebusMaterials, erebusFood, metalIngot, bamBucket, turnip, sprayCan, wandOfAnimation;
 	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor, nectarCollector, beeTamingAmulet, bucketHoney;
-	public static Item homingBeecon, flowerSeeds, whetstone, encrustedDiamond;
+	public static Item homingBeecon, antTamingAmulet, flowerSeeds, whetstone, encrustedDiamond;
 
 	// JADE STUFF
 	public static Item jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe;
@@ -112,7 +113,8 @@ public class ModItems {
 		flowerSeeds = new FlowerSeeds().setUnlocalizedName("flowerSeeds");
 		whetstone = new Whetstone().setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
 		encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
-
+		antTamingAmulet = new AntTamingAmulet().setUnlocalizedName("antTamingAmulet").setTextureName("erebus:antTamingAmulet");
+		
 		jadeHelmet = new JadeArmour(0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new JadeArmour(1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
 		jadeLegs = new JadeArmour(2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
@@ -172,7 +174,7 @@ public class ModItems {
 		ModTabs.gears.setTab(rhinoExoskeletonHelmet, rhinoExoskeletonBody, rhinoExoskeletonLegs, rhinoExoskeletonBoots);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger, woodlouseBall, rolledNewspaper);
 		ModTabs.gears.setTab(mushroomHelm, lightCrown, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
-		ModTabs.specials.setTab(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
+		ModTabs.specials.setTab(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
 
 		// Special Case
 		ModTabs.blocks.setTab(doorAmberItem);

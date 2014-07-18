@@ -21,6 +21,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import erebus.Erebus;
+import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.entity.ai.EntityAIHarvestCrops;
@@ -48,14 +49,15 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		tasks.addTask(1, aiWander);
 		tasks.addTask(2, aiPanic);
 		tasks.addTask(3, new EntityAILookIdle(this));
-
 		inventory = new ItemStack[3];
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		// TODO probably gonna need some datawatcher shizz here
+		dataWatcher.addObject(24, new Integer(0));
+		dataWatcher.addObject(25, new Integer(0));
+		dataWatcher.addObject(26, new Integer(0));
 	}
 
 	@Override
@@ -113,9 +115,16 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 	@Override
 	public boolean interact(EntityPlayer player) {
-		// TODO a fair bit of crap to happen here methinks
-		openInventory();
-		openGUI(player);
+		ItemStack is = player.inventory.getCurrentItem();
+		if (is != null && is.getItem() == ModItems.antTamingAmulet && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
+			setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
+			player.swingItem();
+			return true;
+		}
+		else {
+			openInventory();
+			openGUI(player);
+		}
 		return super.interact(player);
 	}
 
@@ -134,7 +143,15 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		// TODO Put some code here to stop Andre moaning about overriding a method that just calls the super dooper class :P
+		if (worldObj.isRemote)
+			if (!hasCustomNameTag())
+				setCustomNameTag("X: " + getDropPointX() + " Y: " + getDropPointX() + " Z: " + getDropPointX());
+		
+		if (!worldObj.isRemote && !setAttributes) {
+			openInventory();
+			closeInventory();
+			setAttributes = true;
+		}
 	}
 
 	@Override
@@ -214,6 +231,9 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
+		
+		setDropPoint(nbt.getInteger("dropPointX"), nbt.getInteger("dropPointY"), nbt.getInteger("dropPointZ"));
+		
 		NBTTagList tags = nbt.getTagList("Items", 10);
 		inventory = new ItemStack[getSizeInventory()];
 
@@ -229,6 +249,11 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
+		
+		nbt.setInteger("dropPointX", getDropPointX());
+		nbt.setInteger("dropPointY", getDropPointY());
+		nbt.setInteger("dropPointZ", getDropPointZ());
+		
 		NBTTagList tags = new NBTTagList();
 
 		for (int i = 0; i < inventory.length; i++)
@@ -242,7 +267,6 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		nbt.setTag("Items", tags);
 	}
 
-	// The below code doesn't work for the moment...I'll get around to doing it soon
 	@Override
 	public void openInventory() {
 		if(worldObj.isRemote)
@@ -277,10 +301,29 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 			tasks.addTask(1, aiHarvestCrops);
 			System.out.println("Harvester Set");
 		}
+		updateAITasks();
 		System.out.println("Close");
 	}
 
 	@Override
 	public void markDirty() {
+	}
+	
+	public void setDropPoint(int x, int y, int z) {
+		dataWatcher.updateObject(24, Integer.valueOf(x));
+		dataWatcher.updateObject(25, Integer.valueOf(y));
+		dataWatcher.updateObject(26, Integer.valueOf(z));
+	}
+
+	public int getDropPointX() {
+		return dataWatcher.getWatchableObjectInt(24);
+	}
+
+	public int getDropPointY() {
+		return dataWatcher.getWatchableObjectInt(25);
+	}
+
+	public int getDropPointZ() {
+		return dataWatcher.getWatchableObjectInt(26);
 	}
 }
