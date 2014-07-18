@@ -79,7 +79,7 @@ public class GuiAntInventory extends GuiContainer {
 			GL11.glPopMatrix();
 		}
 		
-		if(antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemBucket) {
+		if(antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemBucket && antInventory.getStackInSlot(1) == null) {
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);

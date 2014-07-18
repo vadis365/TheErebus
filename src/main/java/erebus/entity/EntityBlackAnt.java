@@ -1,14 +1,17 @@
 package erebus.entity;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -19,6 +22,7 @@ import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.Erebus;
 import erebus.ModItems;
@@ -31,8 +35,10 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
 	private final EntityAIHarvestCrops aiHarvestCrops = new EntityAIHarvestCrops(this, 0.6D, 1);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
+
 	public boolean setAttributes; // needed for logic later
 	public boolean isEating;
+	public boolean canPickupItems;
 
 	protected ItemStack[] inventory;
 	private final int TOOL_SLOT = 0;
@@ -43,6 +49,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		super(world);
 		stepHeight = 1.0F;
 		setAttributes = false;
+		canPickupItems = false;
 		setSize(1.3F, 0.55F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -152,6 +159,58 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 			closeInventory();
 			setAttributes = true;
 		}
+	}
+
+	@Override	
+	public void onLivingUpdate(){
+	    super.onLivingUpdate();
+	    if(canPickupItems) {
+		    EntityItem entityitem = getClosestEntityItem(this, 16.0D);
+		    if (entityitem != null && getStackInSlot(CROP_ID_SLOT) != null && entityitem.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
+		    	float distance = entityitem.getDistanceToEntity(this);
+		    	ItemStack stack = entityitem.getEntityItem();
+		    	int metadata = stack.getItemDamage();
+		    	if (distance > 2.0F) {
+		    		int x = MathHelper.floor_double(entityitem.posX);
+		            int y = MathHelper.floor_double(entityitem.posY);
+		            int z = MathHelper.floor_double(entityitem.posZ);
+		            getLookHelper().setLookPosition(x + 0.5D, y, z + 0.5D, 50.0F, 8.0F);
+		            moveToItem(entityitem, distance);
+		            return;
+		    	}
+		    	if ((distance < 2.0F) && (entityitem != null)) {
+		    		System.out.println("Pick Up Item and add to inventory here.");
+		    		// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
+		    		// not sure if they should carry items back to silo one at a time or store them yet
+		    		Utils.addItemStackToInventory(this, new ItemStack(stack.getItem(), 1, metadata));
+		    		entityitem.setDead();
+		    		return;
+		    	}
+		    }
+	   }
+	}
+	
+	public EntityItem getClosestEntityItem(Entity entity, double d) {
+		double d1 = -1.0D;
+		EntityItem entityitem = null;
+		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(d, d, d));
+		for (int k = 0; k < list.size(); k++) {
+			Entity entity1 = (Entity)list.get(k);
+		      if ((entity1 instanceof EntityItem)) {
+		    	  EntityItem entityitem1 = (EntityItem)entity1;
+		    	  double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
+		    	  if (((d < 0.0D) || (d2 < d * d)) && ((d1 == -1.0D) || (d2 < d1))) {
+		    		  d1 = d2;
+		    		  entityitem = entityitem1;
+		    	  }
+		      }
+		}
+		return entityitem;
+	  }
+	  
+	public void moveToItem(Entity entity, float distance) {
+		if (getNavigator().tryMoveToXYZ(entity.posX, entity.posY, entity.posZ, 0.5D))
+			getMoveHelper().setMoveTo(entity.posX, entity.posY, entity.posZ, 0.5D);
 	}
 
 	@Override
@@ -271,10 +330,10 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public void openInventory() {
 		if(worldObj.isRemote)
 			return;
+		canPickupItems = false;
 		tasks.removeTask(aiWander);
 		// TODO tasks.removeTask(aiPlantCrops);
 		tasks.removeTask(aiHarvestCrops);
-		// TODO tasks.removeTask(aiCollectCrops);
 		System.out.println("Open");
 		System.out.println("Tasks Removed");
 	}
@@ -284,20 +343,24 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		if(worldObj.isRemote)
 			return;
 		
-		if (getStackInSlot(TOOL_SLOT) == null)
+		if (getStackInSlot(TOOL_SLOT) == null) {
 			tasks.addTask(1, aiWander);
+			canPickupItems = false;
+		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
 			//TO DO tasks.addTask(1, aiPlantCrops);
+			canPickupItems = false;
 			System.out.println("Planter Set");
 		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
-			//TO DO tasks.addTask(1, aiCollectCrops);
+			canPickupItems = true;
 			System.out.println("Collector Set");
 		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemShears) {
+			canPickupItems = false;
 			tasks.addTask(1, aiHarvestCrops);
 			System.out.println("Harvester Set");
 		}
