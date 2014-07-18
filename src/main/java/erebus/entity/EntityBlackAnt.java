@@ -2,17 +2,22 @@ package erebus.entity;
 
 import java.util.Random;
 
+import thaumcraft.common.entities.ai.interact.AIHarvestCrops;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -26,6 +31,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
 	private final EntityAIHarvestCrops aiHarvestCrops = new EntityAIHarvestCrops(this, 0.6D, 1);
+	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
 	public boolean setAttributes; // needed for logic later
 	public boolean isEating;
 
@@ -41,7 +47,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		setSize(1.3F, 0.55F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, aiHarvestCrops);
+		tasks.addTask(1, aiWander);
 		tasks.addTask(2, aiPanic);
 		tasks.addTask(3, new EntityAILookIdle(this));
 
@@ -236,13 +242,37 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 
 		nbt.setTag("Items", tags);
 	}
-
+	
+// The below code doesn't work for the moment...I'll get around to doing it soon
 	@Override
 	public void openInventory() {
+		tasks.removeTask(aiWander);
+		// TODO tasks.removeTask(aiPlantCrops);
+		tasks.removeTask(aiHarvestCrops);
+		// TODO tasks.removeTask(aiCollectCrops);
+		System.out.println("Open");
+		System.out.println("Tasks Removed");
 	}
 
 	@Override
 	public void closeInventory() {
+		if(getStackInSlot(TOOL_SLOT) == null) {
+			tasks.addTask(1, aiWander);
+		}
+		
+		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
+			//TO DO tasks.addTask(1, aiPlantCrops);
+		}
+		
+		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
+			//TO DO tasks.addTask(1, aiCollectCrops);
+		}
+		
+		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemShears) {
+			tasks.addTask(1, aiHarvestCrops);
+			System.out.println("Harvest Set");
+		}
+		System.out.println("Close");
 	}
 
 	@Override
