@@ -73,7 +73,7 @@ public class EntityAIPlantCrops extends EntityAIEatBlock {
 		if (!blackAnt.worldObj.isRemote) {
 			EntityPlayer player = Utils.getPlayer(blackAnt.worldObj);
 			player.setCurrentItemOrArmor(0, new ItemStack(Items.wooden_hoe));
-			Utils.rightClickAt(blackAnt.worldObj, cropX, cropY, cropZ, 0);
+			Utils.rightClickAt(blackAnt.worldObj, cropX, cropY, cropZ, 1);
 		}
 	}
 }

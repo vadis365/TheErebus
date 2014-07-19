@@ -90,12 +90,11 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 				if (flag) {
 					prepareToEat();
 					eatTicks++;
-					entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), cropX, cropY, cropZ, getScaledEatTicks());
+					//entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), cropX, cropY, cropZ, getScaledEatTicks());
 					if (!canEatBlock(entity.worldObj.getBlock(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
 						hasTarget = false;
 					else if (EAT_SPEED <= eatTicks) {
-						entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
-						entity.worldObj.setBlockToAir(cropX, cropY, cropZ);
+						//entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
 						if (seed != null)
 							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
 						hasTarget = false;

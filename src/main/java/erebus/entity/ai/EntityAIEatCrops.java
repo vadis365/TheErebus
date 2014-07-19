@@ -63,6 +63,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 	@Override
 	protected void afterEaten() {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
+		grasshopper.worldObj.setBlockToAir(cropX, cropY, cropZ);
 		grasshopper.setIsEating(false);
 		reproCap++;
 		if (reproCap == 6)

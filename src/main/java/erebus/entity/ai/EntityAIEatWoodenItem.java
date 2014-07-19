@@ -75,6 +75,7 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 	@Override
 	protected void afterEaten() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
+		beetleLarva.worldObj.setBlockToAir(cropX, cropY, cropZ);
 		beetleLarva.setIsEating(false);
 		beetleLarva.setMoveTasks(true);
 		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);
