@@ -130,7 +130,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		return dataWatcher.getWatchableObjectByte(16) != 0;
 	}
 
-	private static final String[] names = { "Antwan", "George", "Geoff", "Alberto", "Jose", "Linda", "Chantelle", "Dave" };
+	private static final String[] names = { "Antwan", "George", "Geoff", "Alberto", "Jose", "Linda", "Chantelle", "Dave", "Basil", "Gertrude", "Herbert", "Russel", "Adam", "Gwen", "Billy Bob Joe Bob Joe Harrison Jr.", "Sid", "Dylan", "Jade" };
 
 	@Override
 	public void setTamed(boolean tamed) {
