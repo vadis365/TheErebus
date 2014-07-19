@@ -15,15 +15,15 @@ public class ContainerAntInventory extends Container {
 	public ContainerAntInventory(InventoryPlayer playerInventory, IInventory entityInventory) {
 		inventory = entityInventory;
 
-		int i = 54;
+		int i = -54;
 
-		for (int k = 0; k < 3; ++k)
+		for (int k = 0; k < 3; k++)
 			addSlotToContainer(new BetterSlot(entityInventory, k, 26 + k * 54, 18));
 
-		for (int j = 0; j < 3; ++j)
-			for (int k = 0; k < 9; ++k)
+		for (int j = 0; j < 3; j++)
+			for (int k = 0; k < 9; k++)
 				addSlotToContainer(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 103 + j * 18 + i));
-		for (int j = 0; j < 9; ++j)
+		for (int j = 0; j < 9; j++)
 			addSlotToContainer(new Slot(playerInventory, j, 8 + j * 18, 161 + i));
 	}
 
