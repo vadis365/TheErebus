@@ -170,7 +170,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	    		int metadata = stack.getItemDamage();
 		    	if(metadata == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
 		    		float distance = entityitem.getDistanceToEntity(this);
-		    		if (distance > 1.0F) {
+		    		if (distance > 1.0F && entityitem.delayBeforeCanPickup == 0) {
 		    			double x = entityitem.posX;
 		    			double y = entityitem.posY;
 		    			double z = entityitem.posZ;
@@ -178,7 +178,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		    			moveToItem(entityitem);
 		    			return;
 		    		}
-		    		if ((distance < 1.0F) && (entityitem != null)) {
+		    		if (distance < 1.0F && entityitem != null) {
 		    			System.out.println("Pick Up Item and add to inventory here.");
 		    			// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
 		    			// not sure if they should carry items back to silo one at a time or store them yet
