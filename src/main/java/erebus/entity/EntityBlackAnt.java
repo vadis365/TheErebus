@@ -31,15 +31,16 @@ import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.entity.ai.EntityAIHarvestCrops;
+import erebus.entity.ai.EntityAIPlantCrops;
 
 public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
 	private final EntityAIHarvestCrops aiHarvestCrops = new EntityAIHarvestCrops(this, 0.6D, 1);
+	private final EntityAIPlantCrops aiPlantCrops = new EntityAIPlantCrops(this, 0.6D, 4);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
 
 	public boolean setAttributes; // needed for logic later
-	public boolean isEating;
 	public boolean canPickupItems;
 	public boolean canCollectFromSilo;
 	public boolean canAddToSilo;
@@ -55,8 +56,8 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		setAttributes = false;
 		canPickupItems = false;
 		canAddToSilo = false;
-		canPickupItems = false;
-		setSize(1.3F, 0.55F);
+		canCollectFromSilo = false;
+		setSize(1.2F, 0.55F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, aiWander);
@@ -164,10 +165,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		return super.interact(player);
 	}
 
-	public void setIsEating(boolean isEating) {
-		this.isEating = isEating;
-	}
-
 	public void setBlockHarvested(Block block, int meta) {
 		Random rand = new Random();
 		if (block != null) {
@@ -197,7 +194,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				int metadata = stack.getItemDamage();
 				if (metadata == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
 					float distance = entityitem.getDistanceToEntity(this);
-					if (distance >= 1.5F && entityitem.delayBeforeCanPickup <= 0) {
+					if (distance >= 1.5F && entityitem.delayBeforeCanPickup <= 0 && !entityitem.isDead) {
 						double x = entityitem.posX;
 						double y = entityitem.posY;
 						double z = entityitem.posZ;
@@ -205,11 +202,12 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 						moveToItem(entityitem);
 						return;
 					}
-					if (distance < 2F && entityitem != null) {
+					if (distance < 1.5F && entityitem != null) {
 						System.out.println("Pick Up Item and add to inventory here.");
 						// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
 						// not sure if they should carry items back to silo one at a time or store them yet
-						Utils.addItemStackToInventory(this, new ItemStack(stack.getItem(), stack.stackSize, metadata));
+						getMoveHelper().setMoveTo(entityitem.posX, entityitem.posY,entityitem.posZ, 0.5D);
+						addToInventory(new ItemStack(stack.getItem(), stack.stackSize, metadata));
 						entityitem.setDead();
 						return;
 					}
@@ -233,7 +231,32 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 					canPickupItems = true;
 				}
 		}
+		
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe)
+			if (getStackInSlot(INVENTORY_SLOT) == null) {
+				//canCollectFromSilo = true; // this stops the planting AI and makes the ant go to the silo
+			}
+
+		if (canCollectFromSilo) {
+			moveToSilo();
+			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
+			if (block == Blocks.chest)
+				if (getDistance(getDropPointX(), getDropPointY(), getDropPointZ()) < 1.5D) {
+					//TODO add stack from chest inventory matching filter slot to ant inventory slot
+					canCollectFromSilo = false;
+				}
+		}
 	}
+	
+	private void addToInventory(ItemStack stack) {
+		if (stack == null)
+			return;
+
+		if (inventory[INVENTORY_SLOT] == null)
+			inventory[INVENTORY_SLOT] = stack.copy();
+		else if (Utils.areStacksTheSame(stack, inventory[INVENTORY_SLOT], false) && inventory[INVENTORY_SLOT].getMaxStackSize() >= inventory[INVENTORY_SLOT].stackSize + stack.stackSize)
+			inventory[INVENTORY_SLOT].stackSize += stack.stackSize;
+		 }
 
 	private void addDropToInventory(int x, int y, int z) {
 		ItemStack stack = getStackInSlot(INVENTORY_SLOT);
@@ -408,8 +431,10 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (worldObj.isRemote)
 			return;
 		canPickupItems = false;
+		canAddToSilo = false;
+		canCollectFromSilo = false;
 		tasks.removeTask(aiWander);
-		// TODO tasks.removeTask(aiPlantCrops);
+		tasks.removeTask(aiPlantCrops);
 		tasks.removeTask(aiHarvestCrops);
 		System.out.println("Open");
 		System.out.println("Tasks Removed");
@@ -426,7 +451,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
-			//TO DO tasks.addTask(1, aiPlantCrops);
+			tasks.addTask(1, aiPlantCrops);
 			canPickupItems = false;
 			System.out.println("Planter Set");
 		}
