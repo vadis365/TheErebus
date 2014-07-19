@@ -28,6 +28,13 @@ import erebus.lib.Reference;
 
 public class Utils {
 
+	public static boolean rightClickAt(World world, int x, int y, int z, int side) {
+		if (world.isRemote)
+			return false;
+
+		return world.getBlock(x, y, z).onBlockActivated(world, x, y, z, getPlayer(world), side, 0, 0, 0);
+	}
+
 	public static EntityPlayer getPlayer(World world) {
 		if (world.isRemote || !(world instanceof WorldServer))
 			return null;
