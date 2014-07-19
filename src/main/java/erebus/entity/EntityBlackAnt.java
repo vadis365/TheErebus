@@ -197,13 +197,15 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(d, d, d));
 		for (int k = 0; k < list.size(); k++) {
 			Entity entity1 = (Entity)list.get(k);
-		      if (entity1 instanceof EntityItem && ((EntityItem)entity1).getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
-		    	  if (((EntityItem)entity1).getEntityItem().getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
-		    		  EntityItem entityitem1 = (EntityItem)entity1;
-		    		  double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-		    		  if (((d < 0.0D) || (d2 < d * d)) && ((d1 == -1.0D) || (d2 < d1))) {
-		    			  d1 = d2;
-		    			  entityitem = entityitem1;
+		      if (entity1 != null && entity1 instanceof EntityItem && getStackInSlot(CROP_ID_SLOT) != null) {
+		    	  EntityItem entityitem1 = (EntityItem)entity1;
+		    	  if(entityitem1.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
+		    		  if (entityitem1.getEntityItem().getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
+		    			  double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
+		    			  if (((d < 0.0D) || (d2 < d * d)) && ((d1 == -1.0D) || (d2 < d1))) {
+		    				  d1 = d2;
+		    				  entityitem = entityitem1;
+		    			  }
 		    		  }
 		    	  }
 		      }
