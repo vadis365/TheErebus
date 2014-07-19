@@ -204,7 +204,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		    			moveToItem(entityitem);
 		    			return;
 		    		}
-		    		if (distance < 1.5F && entityitem != null) {
+		    		if (distance < 2F && entityitem != null) {
 		    			System.out.println("Pick Up Item and add to inventory here.");
 		    			// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
 		    			// not sure if they should carry items back to silo one at a time or store them yet
