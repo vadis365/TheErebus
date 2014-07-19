@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -12,7 +13,7 @@ import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -29,7 +30,7 @@ import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.entity.ai.EntityAIHarvestCrops;
 
-public class EntityBlackAnt extends EntityMob implements IInventory {
+public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
 	private final EntityAIHarvestCrops aiHarvestCrops = new EntityAIHarvestCrops(this, 0.6D, 1);
@@ -38,6 +39,8 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public boolean setAttributes; // needed for logic later
 	public boolean isEating;
 	public boolean canPickupItems;
+	public boolean canCollectFromSilo;
+	public boolean canAddToSilo;
 
 	protected ItemStack[] inventory;
 	public static final int TOOL_SLOT = 0;
@@ -48,6 +51,8 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		super(world);
 		stepHeight = 1.0F;
 		setAttributes = false;
+		canPickupItems = false;
+		canAddToSilo = false;
 		canPickupItems = false;
 		setSize(1.3F, 0.55F);
 		getNavigator().setAvoidsWater(true);
@@ -76,18 +81,13 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
+		//getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
-	}
-
-	@Override
-	protected boolean canDespawn() {
-		return true;
 	}
 
 	@Override
@@ -114,6 +114,27 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public int getMaxSpawnedInChunk() {
 		return 5;
 	}
+	
+	@Override
+	protected boolean canDespawn() {
+		if (isTamed())
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+    public boolean isTamed() {
+        return dataWatcher.getWatchableObjectByte(16) != 0;
+    }
+
+	@Override
+    public void setTamed(boolean tamed) {
+        if (tamed)
+            this.dataWatcher.updateObject(16, Byte.valueOf((byte) 1));
+        else
+            this.dataWatcher.updateObject(16, Byte.valueOf((byte) 0));
+    }
 
 	public void openGUI(EntityPlayer player) {
 		player.openGui(Erebus.instance, CommonProxy.GUI_ID_ANT_INVENTORY, player.worldObj, getEntityId(), 0, 0);
@@ -122,15 +143,18 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (is != null && is.getItem() == ModItems.antTamingAmulet && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
-			setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
-			player.swingItem();
-			return true;
-		}
-		else {
-			openInventory();
-			openGUI(player);
-		}
+		
+			if (is != null && is.getItem() == ModItems.antTamingAmulet && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
+				setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
+				player.swingItem();
+				setTamed(true);
+				playTameEffect(true);
+				return true;
+			}
+			if(isTamed()) {
+				openInventory();
+				openGUI(player);
+			}
 		return super.interact(player);
 	}
 
@@ -150,7 +174,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public void onUpdate() {
 		super.onUpdate();
 		if (worldObj.isRemote)
-			if (!hasCustomNameTag())
+			if (isTamed())
 				setCustomNameTag("X: " + getDropPointX() + " Y: " + getDropPointX() + " Z: " + getDropPointX());
 		
 		if (!worldObj.isRemote && !setAttributes) {
@@ -296,6 +320,11 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		
+		if(nbt.getByte("tamed") == 1)
+			setTamed(true);
+		else
+			setTamed(false);
+		
 		setDropPoint(nbt.getInteger("dropPointX"), nbt.getInteger("dropPointY"), nbt.getInteger("dropPointZ"));
 		
 		NBTTagList tags = nbt.getTagList("Items", 10);
@@ -313,6 +342,11 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
+		
+		if(isTamed())
+			nbt.setByte("tamed", Byte.valueOf((byte) 1));
+		else
+			nbt.setByte("tamed", Byte.valueOf((byte) 0));
 		
 		nbt.setInteger("dropPointX", getDropPointX());
 		nbt.setInteger("dropPointY", getDropPointY());
@@ -394,4 +428,14 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public int getDropPointZ() {
 		return dataWatcher.getWatchableObjectInt(26);
 	}
+
+	@Override
+	public EntityAgeable createChild(EntityAgeable baby) {
+		return null;
+	}
+
+	@Override
+    public boolean isBreedingItem(ItemStack stack){
+        return false;
+    }
 }
