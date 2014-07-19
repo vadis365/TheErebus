@@ -166,27 +166,29 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	    if(canPickupItems) {
 		    EntityItem entityitem = getClosestEntityItem(this, 16.0D);
 		    if (entityitem != null && getStackInSlot(CROP_ID_SLOT) != null && entityitem.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
-		    	float distance = entityitem.getDistanceToEntity(this);
-		    	ItemStack stack = entityitem.getEntityItem();
-		    	int metadata = stack.getItemDamage();
-		    	if (distance > 1.0F) {
-		    		double x = entityitem.posX;
-		    		double y = entityitem.posY;
-		    		double z = entityitem.posZ;
-		            getLookHelper().setLookPosition(x, y, z, 20.0F, 8.0F);
-		            moveToItem(entityitem);
-		            return;
-		    	}
-		    	if ((distance < 1.0F) && (entityitem != null)) {
-		    		System.out.println("Pick Up Item and add to inventory here.");
-		    		// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
-		    		// not sure if they should carry items back to silo one at a time or store them yet
-		    		Utils.addItemStackToInventory(this, new ItemStack(stack.getItem(), 1, metadata));
-		    		entityitem.setDead();
-		    		return;
+	    		ItemStack stack = entityitem.getEntityItem();
+	    		int metadata = stack.getItemDamage();
+		    	if(metadata == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
+		    		float distance = entityitem.getDistanceToEntity(this);
+		    		if (distance > 1.0F) {
+		    			double x = entityitem.posX;
+		    			double y = entityitem.posY;
+		    			double z = entityitem.posZ;
+		    			getLookHelper().setLookPosition(x, y, z, 20.0F, 8.0F);
+		    			moveToItem(entityitem);
+		    			return;
+		    		}
+		    		if ((distance < 1.0F) && (entityitem != null)) {
+		    			System.out.println("Pick Up Item and add to inventory here.");
+		    			// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
+		    			// not sure if they should carry items back to silo one at a time or store them yet
+		    			Utils.addItemStackToInventory(this, new ItemStack(stack.getItem(), stack.stackSize, metadata));
+		    			entityitem.setDead();
+		    			return;
+		    		}
 		    	}
 		    }
-	   }
+	    }
 	}
 	
 	public EntityItem getClosestEntityItem(Entity entity, double d) {
@@ -195,17 +197,19 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(d, d, d));
 		for (int k = 0; k < list.size(); k++) {
 			Entity entity1 = (Entity)list.get(k);
-		      if ((entity1 instanceof EntityItem)) {
-		    	  EntityItem entityitem1 = (EntityItem)entity1;
-		    	  double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-		    	  if (((d < 0.0D) || (d2 < d * d)) && ((d1 == -1.0D) || (d2 < d1))) {
-		    		  d1 = d2;
-		    		  entityitem = entityitem1;
+		      if (entity1 instanceof EntityItem && ((EntityItem)entity1).getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
+		    	  if (((EntityItem)entity1).getEntityItem().getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
+		    		  EntityItem entityitem1 = (EntityItem)entity1;
+		    		  double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
+		    		  if (((d < 0.0D) || (d2 < d * d)) && ((d1 == -1.0D) || (d2 < d1))) {
+		    			  d1 = d2;
+		    			  entityitem = entityitem1;
+		    		  }
 		    	  }
 		      }
 		}
 		return entityitem;
-	  }
+	}
 	  
 	public void moveToItem(Entity entity) {
 		if (getNavigator().tryMoveToXYZ(entity.posX, entity.posY, entity.posZ, 0.5D))
