@@ -6,6 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import erebus.entity.EntityBlackAnt;
 
 public class ContainerAntInventory extends Container {
 
@@ -62,10 +63,29 @@ public class ContainerAntInventory extends Container {
 
 		return is;
 	}
-	
-	@Override  
+
+	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
 		inventory.closeInventory();
+	}
+
+	@Override
+	public ItemStack slotClick(int slotIndex, int button, int clickType, EntityPlayer player) {
+		if (slotIndex == EntityBlackAnt.CROP_ID_SLOT) {
+			Slot slot = (Slot) inventorySlots.get(slotIndex);
+			ItemStack slotStack = slot.getStack();
+			ItemStack heldStack = player.inventory.getItemStack();
+
+			if (slotStack == null && heldStack != null) {
+				ItemStack copy = heldStack.copy();
+				copy.stackSize = 0;
+				slot.putStack(copy);
+			} else if (slotStack != null)
+				slot.putStack(null);
+
+			return null;
+		} else
+			return super.slotClick(slotIndex, button, clickType, player);
 	}
 }

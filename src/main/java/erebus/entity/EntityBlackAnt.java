@@ -40,9 +40,9 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	public boolean canPickupItems;
 
 	protected ItemStack[] inventory;
-	private final int TOOL_SLOT = 0;
-	private final int CROP_ID_SLOT = 1;
-	private final int INVENTORY_SLOT = 2;
+	public static final int TOOL_SLOT = 0;
+	public static final int CROP_ID_SLOT = 1;
+	public final int INVENTORY_SLOT = 2;
 
 	public EntityBlackAnt(World world) {
 		super(world);
