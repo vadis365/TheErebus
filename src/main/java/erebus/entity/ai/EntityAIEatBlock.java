@@ -32,7 +32,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	public int cropZ;
 	private int spiralIndex;
 	private int eatTicks;
-	private static final List<Point> spiral = new Spiral(32, 4).spiral();
+	private static final List<Point> spiral = new Spiral(16, 16).spiral();
 
 	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed) {
 		this.entity = entity;

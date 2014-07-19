@@ -31,20 +31,20 @@ public class Spiral {
 	};
 
 	private final int width;
-	private final int height;
+	private final int length;
 	private Point point;
 	private Direction direction = Direction.E;
 	private final List<Point> list = new ArrayList<Point>();
 
-	public Spiral(int width, int height) {
+	public Spiral(int width, int length) {
 		this.width = width;
-		this.height = height;
+		this.length = length;
 	}
 
 	public List<Point> spiral() {
 		point = new Point(0, 0);
 		int steps = 1;
-		while (list.size() < width * height) {
+		while (list.size() < width * length) {
 			advance(steps);
 			advance(steps);
 			steps++;
@@ -62,7 +62,7 @@ public class Spiral {
 	}
 
 	private boolean inBounds(Point p) {
-		return between(-width / 2, width / 2, p.x) && between(-height / 2, height / 2, p.y);
+		return between(-width / 2, width / 2, p.x) && between(-length / 2, length / 2, p.y);
 	}
 
 	private boolean between(int min, int max, int value) {
