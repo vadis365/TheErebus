@@ -38,7 +38,7 @@ public class Utils {
 	public static EntityPlayer getPlayer(World world) {
 		if (world.isRemote || !(world instanceof WorldServer))
 			return null;
-		return FakePlayerFactory.get((WorldServer) world, new GameProfile(UUID.fromString(Reference.MOD_ID), "[" + Reference.CHANNEL + "]"));
+		return FakePlayerFactory.get((WorldServer) world, new GameProfile(UUID.nameUUIDFromBytes(Reference.MOD_ID.getBytes()), "[" + Reference.CHANNEL + "]"));
 	}
 
 	public static final int getFlowerMetadata(Object obj) {
