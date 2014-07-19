@@ -24,6 +24,7 @@ import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.world.World;
 import erebus.Erebus;
 import erebus.ModItems;
@@ -183,13 +184,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			closeInventory();
 			setAttributes = true;
 		}
-		
-		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
-			if(getStackInSlot(INVENTORY_SLOT) != null && getStackInSlot(INVENTORY_SLOT).stackSize > 0) {
-				canAddToSilo = true;
-    			canPickupItems = false;
-			}
-		}
 	}
 
 	@Override	
@@ -202,7 +196,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	    		int metadata = stack.getItemDamage();
 		    	if(metadata == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
 		    		float distance = entityitem.getDistanceToEntity(this);
-		    		if (distance > 1.0F && entityitem.delayBeforeCanPickup <= 0) {
+		    		if (distance >= 1.5F && entityitem.delayBeforeCanPickup <= 0) {
 		    			double x = entityitem.posX;
 		    			double y = entityitem.posY;
 		    			double z = entityitem.posZ;
@@ -210,7 +204,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		    			moveToItem(entityitem);
 		    			return;
 		    		}
-		    		if (distance < 1.0F && entityitem != null) {
+		    		if (distance < 1.5F && entityitem != null) {
 		    			System.out.println("Pick Up Item and add to inventory here.");
 		    			// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
 		    			// not sure if they should carry items back to silo one at a time or store them yet
@@ -221,6 +215,13 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		    	}
 		    }
 	    }
+	    
+		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
+			if(getStackInSlot(INVENTORY_SLOT) != null && getStackInSlot(INVENTORY_SLOT).stackSize > 15) {
+				canAddToSilo = true;
+    			canPickupItems = false;
+			}
+		}
 	    
 	    if(!canPickupItems && canAddToSilo) {
 	    	moveToSilo();
@@ -235,8 +236,10 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	private void addDropToInventory(int x, int y, int z) {
-		ItemStack stack = getStackInSlot(CROP_ID_SLOT);
-		Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), new ItemStack(stack.getItem(), stack.stackSize, stack.getItemDamage()));
+		ItemStack stack = getStackInSlot(INVENTORY_SLOT);
+		if(getStackInSlot(INVENTORY_SLOT) != null) 
+			Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), new ItemStack(stack.getItem(), stack.stackSize, stack.getItemDamage()));
+		setInventorySlotContents(2, null);
 	}
 	
 	public EntityItem getClosestEntityItem(Entity entity, double d) {
@@ -262,13 +265,19 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 	  
 	public void moveToItem(Entity entity) {
-		if (getNavigator().tryMoveToXYZ(entity.posX, entity.posY, entity.posZ, 0.5D))
-			getMoveHelper().setMoveTo(entity.posX, entity.posY, entity.posZ, 0.5D);
+	    PathEntity pathentity = this.worldObj.getPathEntityToEntity(this, entity, 16.0F, true, false, false, true);
+	    if (pathentity != null) {
+	    	setPathToEntity(pathentity);
+	    	getNavigator().setPath(pathentity, 0.5D);
+	    }
 	}
 	
 	public void moveToSilo() {
-		if (getNavigator().tryMoveToXYZ(getDropPointX(), getDropPointY() +1, getDropPointZ(), 0.5D))
-			getMoveHelper().setMoveTo(getDropPointX() +0.5D, getDropPointY() +1, getDropPointZ()+0.5D, 0.5D);
+		PathEntity pathentity = this.worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY(), getDropPointZ(),  16.0F, true, false, false, true);
+	    if (pathentity != null) {
+	    	setPathToEntity(pathentity);
+	    	getNavigator().setPath(pathentity, 0.5D);
+	    }
 	}
 
 	@Override
