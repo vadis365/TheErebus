@@ -22,7 +22,6 @@ import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.Erebus;
 import erebus.ModItems;
@@ -170,15 +169,15 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		    	float distance = entityitem.getDistanceToEntity(this);
 		    	ItemStack stack = entityitem.getEntityItem();
 		    	int metadata = stack.getItemDamage();
-		    	if (distance > 2.0F) {
-		    		int x = MathHelper.floor_double(entityitem.posX);
-		            int y = MathHelper.floor_double(entityitem.posY);
-		            int z = MathHelper.floor_double(entityitem.posZ);
-		            getLookHelper().setLookPosition(x + 0.5D, y, z + 0.5D, 50.0F, 8.0F);
-		            moveToItem(entityitem, distance);
+		    	if (distance > 1.0F) {
+		    		double x = entityitem.posX;
+		    		double y = entityitem.posY;
+		    		double z = entityitem.posZ;
+		            getLookHelper().setLookPosition(x, y, z, 20.0F, 8.0F);
+		            moveToItem(entityitem);
 		            return;
 		    	}
-		    	if ((distance < 2.0F) && (entityitem != null)) {
+		    	if ((distance < 1.0F) && (entityitem != null)) {
 		    		System.out.println("Pick Up Item and add to inventory here.");
 		    		// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
 		    		// not sure if they should carry items back to silo one at a time or store them yet
@@ -208,7 +207,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 		return entityitem;
 	  }
 	  
-	public void moveToItem(Entity entity, float distance) {
+	public void moveToItem(Entity entity) {
 		if (getNavigator().tryMoveToXYZ(entity.posX, entity.posY, entity.posZ, 0.5D))
 			getMoveHelper().setMoveTo(entity.posX, entity.posY, entity.posZ, 0.5D);
 	}
