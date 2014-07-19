@@ -116,7 +116,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	public int getMaxSpawnedInChunk() {
 		return 5;
 	}
-	
+
 	@Override
 	protected boolean canDespawn() {
 		if (isTamed())
@@ -126,17 +126,21 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	@Override
-    public boolean isTamed() {
-        return dataWatcher.getWatchableObjectByte(16) != 0;
-    }
+	public boolean isTamed() {
+		return dataWatcher.getWatchableObjectByte(16) != 0;
+	}
+
+	private static final String[] names = { "Antwan", "George", "Geoff", "Alberto", "Jose", "Linda", "Chantelle", "Dave" };
 
 	@Override
-    public void setTamed(boolean tamed) {
-        if (tamed)
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) 1));
-        else
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) 0));
-    }
+	public void setTamed(boolean tamed) {
+		if (tamed) {
+			dataWatcher.updateObject(16, Byte.valueOf((byte) 1));
+			if (!hasCustomNameTag())
+				setCustomNameTag(names[worldObj.rand.nextInt(names.length)]);
+		} else
+			dataWatcher.updateObject(16, Byte.valueOf((byte) 0));
+	}
 
 	public void openGUI(EntityPlayer player) {
 		player.openGui(Erebus.instance, CommonProxy.GUI_ID_ANT_INVENTORY, player.worldObj, getEntityId(), 0, 0);
@@ -145,18 +149,18 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		
-			if (is != null && is.getItem() == ModItems.antTamingAmulet && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
-				setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
-				player.swingItem();
-				setTamed(true);
-				playTameEffect(true);
-				return true;
-			}
-			if(isTamed()) {
-				openInventory();
-				openGUI(player);
-			}
+
+		if (is != null && is.getItem() == ModItems.antTamingAmulet && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
+			setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
+			player.swingItem();
+			setTamed(true);
+			playTameEffect(true);
+			return true;
+		}
+		if (isTamed()) {
+			openInventory();
+			openGUI(player);
+		}
 		return super.interact(player);
 	}
 
@@ -175,10 +179,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (worldObj.isRemote)
-			if (isTamed())
-				setCustomNameTag("X: " + getDropPointX() + " Y: " + getDropPointX() + " Z: " + getDropPointX());
-		
+
 		if (!worldObj.isRemote && !setAttributes) {
 			openInventory();
 			closeInventory();
@@ -186,98 +187,97 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		}
 	}
 
-	@Override	
-	public void onLivingUpdate(){
-	    super.onLivingUpdate();
-	    if(canPickupItems) {
-		    EntityItem entityitem = getClosestEntityItem(this, 16.0D);
-		    if (entityitem != null && getStackInSlot(CROP_ID_SLOT) != null && entityitem.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
-	    		ItemStack stack = entityitem.getEntityItem();
-	    		int metadata = stack.getItemDamage();
-		    	if(metadata == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
-		    		float distance = entityitem.getDistanceToEntity(this);
-		    		if (distance >= 1.5F && entityitem.delayBeforeCanPickup <= 0) {
-		    			double x = entityitem.posX;
-		    			double y = entityitem.posY;
-		    			double z = entityitem.posZ;
-		    			getLookHelper().setLookPosition(x, y, z, 20.0F, 8.0F);
-		    			moveToItem(entityitem);
-		    			return;
-		    		}
-		    		if (distance < 2F && entityitem != null) {
-		    			System.out.println("Pick Up Item and add to inventory here.");
-		    			// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
-		    			// not sure if they should carry items back to silo one at a time or store them yet
-		    			Utils.addItemStackToInventory(this, new ItemStack(stack.getItem(), stack.stackSize, metadata));
-		    			entityitem.setDead();
-		    			return;
-		    		}
-		    	}
-		    }
-	    }
-	    
-		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
-			if(getStackInSlot(INVENTORY_SLOT) != null && getStackInSlot(INVENTORY_SLOT).stackSize > 15) {
-				canAddToSilo = true;
-    			canPickupItems = false;
+	@Override
+	public void onLivingUpdate() {
+		super.onLivingUpdate();
+		if (canPickupItems) {
+			EntityItem entityitem = getClosestEntityItem(this, 16.0D);
+			if (entityitem != null && getStackInSlot(CROP_ID_SLOT) != null && entityitem.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
+				ItemStack stack = entityitem.getEntityItem();
+				int metadata = stack.getItemDamage();
+				if (metadata == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
+					float distance = entityitem.getDistanceToEntity(this);
+					if (distance >= 1.5F && entityitem.delayBeforeCanPickup <= 0) {
+						double x = entityitem.posX;
+						double y = entityitem.posY;
+						double z = entityitem.posZ;
+						getLookHelper().setLookPosition(x, y, z, 20.0F, 8.0F);
+						moveToItem(entityitem);
+						return;
+					}
+					if (distance < 2F && entityitem != null) {
+						System.out.println("Pick Up Item and add to inventory here.");
+						// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
+						// not sure if they should carry items back to silo one at a time or store them yet
+						Utils.addItemStackToInventory(this, new ItemStack(stack.getItem(), stack.stackSize, metadata));
+						entityitem.setDead();
+						return;
+					}
+				}
 			}
 		}
-	    
-	    if(!canPickupItems && canAddToSilo) {
-	    	moveToSilo();
-	    	Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
-	    	if (block == Blocks.chest)
-	    		if (getDistance(getDropPointX(), getDropPointY(), getDropPointZ()) < 1.5D) {
-	    			addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
-	    			canAddToSilo = false;
-	    			canPickupItems = true;
+
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket)
+			if (getStackInSlot(INVENTORY_SLOT) != null && getStackInSlot(INVENTORY_SLOT).stackSize > 15) {
+				canAddToSilo = true;
+				canPickupItems = false;
 			}
-	    }
+
+		if (!canPickupItems && canAddToSilo) {
+			moveToSilo();
+			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
+			if (block == Blocks.chest)
+				if (getDistance(getDropPointX(), getDropPointY(), getDropPointZ()) < 1.5D) {
+					addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
+					canAddToSilo = false;
+					canPickupItems = true;
+				}
+		}
 	}
 
 	private void addDropToInventory(int x, int y, int z) {
 		ItemStack stack = getStackInSlot(INVENTORY_SLOT);
-		if(getStackInSlot(INVENTORY_SLOT) != null) 
+		if (getStackInSlot(INVENTORY_SLOT) != null)
 			Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), new ItemStack(stack.getItem(), stack.stackSize, stack.getItemDamage()));
 		setInventorySlotContents(2, null);
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public EntityItem getClosestEntityItem(Entity entity, double d) {
 		double d1 = -1.0D;
 		EntityItem entityitem = null;
-		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(d, d, d));
+		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(d, d, d));
 		for (int k = 0; k < list.size(); k++) {
-			Entity entity1 = (Entity)list.get(k);
-		      if (entity1 != null && entity1 instanceof EntityItem && getStackInSlot(CROP_ID_SLOT) != null) {
-		    	  EntityItem entityitem1 = (EntityItem)entity1;
-		    	  if(entityitem1.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
-		    		  if (entityitem1.getEntityItem().getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
-		    			  double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-		    			  if (((d < 0.0D) || (d2 < d * d)) && ((d1 == -1.0D) || (d2 < d1))) {
-		    				  d1 = d2;
-		    				  entityitem = entityitem1;
-		    			  }
-		    		  }
-		    	  }
-		      }
+			Entity entity1 = list.get(k);
+			if (entity1 != null && entity1 instanceof EntityItem && getStackInSlot(CROP_ID_SLOT) != null) {
+				EntityItem entityitem1 = (EntityItem) entity1;
+				if (entityitem1.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem())
+					if (entityitem1.getEntityItem().getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
+						double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
+						if ((d < 0.0D || d2 < d * d) && (d1 == -1.0D || d2 < d1)) {
+							d1 = d2;
+							entityitem = entityitem1;
+						}
+					}
+			}
 		}
 		return entityitem;
 	}
-	  
+
 	public void moveToItem(Entity entity) {
-	    PathEntity pathentity = this.worldObj.getPathEntityToEntity(this, entity, 16.0F, true, false, false, true);
-	    if (pathentity != null) {
-	    	setPathToEntity(pathentity);
-	    	getNavigator().setPath(pathentity, 0.5D);
-	    }
+		PathEntity pathentity = worldObj.getPathEntityToEntity(this, entity, 16.0F, true, false, false, true);
+		if (pathentity != null) {
+			setPathToEntity(pathentity);
+			getNavigator().setPath(pathentity, 0.5D);
+		}
 	}
-	
+
 	public void moveToSilo() {
-		PathEntity pathentity = this.worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY(), getDropPointZ(),  16.0F, true, false, false, true);
-	    if (pathentity != null) {
-	    	setPathToEntity(pathentity);
-	    	getNavigator().setPath(pathentity, 0.5D);
-	    }
+		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY(), getDropPointZ(), 16.0F, true, false, false, true);
+		if (pathentity != null) {
+			setPathToEntity(pathentity);
+			getNavigator().setPath(pathentity, 0.5D);
+		}
 	}
 
 	@Override
@@ -351,20 +351,20 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (slot == TOOL_SLOT)
 			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe;
 
-		return slot == CROP_ID_SLOT || slot == INVENTORY_SLOT;
+		return false;
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		
-		if(nbt.getByte("tamed") == 1)
+
+		if (nbt.getByte("tamed") == 1)
 			setTamed(true);
 		else
 			setTamed(false);
-		
+
 		setDropPoint(nbt.getInteger("dropPointX"), nbt.getInteger("dropPointY"), nbt.getInteger("dropPointZ"));
-		
+
 		NBTTagList tags = nbt.getTagList("Items", 10);
 		inventory = new ItemStack[getSizeInventory()];
 
@@ -380,16 +380,16 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		
-		if(isTamed())
+
+		if (isTamed())
 			nbt.setByte("tamed", Byte.valueOf((byte) 1));
 		else
 			nbt.setByte("tamed", Byte.valueOf((byte) 0));
-		
+
 		nbt.setInteger("dropPointX", getDropPointX());
 		nbt.setInteger("dropPointY", getDropPointY());
 		nbt.setInteger("dropPointZ", getDropPointZ());
-		
+
 		NBTTagList tags = new NBTTagList();
 
 		for (int i = 0; i < inventory.length; i++)
@@ -405,7 +405,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@Override
 	public void openInventory() {
-		if(worldObj.isRemote)
+		if (worldObj.isRemote)
 			return;
 		canPickupItems = false;
 		tasks.removeTask(aiWander);
@@ -417,9 +417,9 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@Override
 	public void closeInventory() {
-		if(worldObj.isRemote)
+		if (worldObj.isRemote)
 			return;
-		
+
 		if (getStackInSlot(TOOL_SLOT) == null) {
 			tasks.addTask(1, aiWander);
 			canPickupItems = false;
@@ -448,7 +448,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public void markDirty() {
 	}
-	
+
 	public void setDropPoint(int x, int y, int z) {
 		dataWatcher.updateObject(24, Integer.valueOf(x));
 		dataWatcher.updateObject(25, Integer.valueOf(y));
@@ -473,7 +473,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	@Override
-    public boolean isBreedingItem(ItemStack stack){
-        return false;
-    }
+	public boolean isBreedingItem(ItemStack stack) {
+		return false;
+	}
 }
