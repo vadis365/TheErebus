@@ -11,6 +11,12 @@ import erebus.core.helper.Spiral;
 
 public abstract class EntityAIFindFlower extends EntityAIBase {
 
+	/**
+	 * The bigger you make this value the faster the AI will be. But performance
+	 * will also decrease so be sensible
+	 */
+	private static final int CHECKS_PER_TICK = 10;
+
 	private final int COLLECT_SPEED;
 	protected final EntityLiving entity;
 	private final int blockMetadata;
@@ -52,41 +58,42 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 		int yCoord = (int) entity.posY;
 		int zCoord = (int) entity.posZ;
 
-		if (!hasTarget) {
-			increment();
+		for (int i = 0; i < CHECKS_PER_TICK; i++)
+			if (!hasTarget) {
+				increment();
 
-			Point p = getNextPoint();
-			for (int y = -8; y < 8; y++)
-				if (canPolinate(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
-					flowerX = xCoord + p.x;
-					flowerY = yCoord + y;
-					flowerZ = zCoord + p.y;
-					hasTarget = true;
+				Point p = getNextPoint();
+				for (int y = -8; y < 8; y++)
+					if (canPolinate(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
+						flowerX = xCoord + p.x;
+						flowerY = yCoord + y;
+						flowerZ = zCoord + p.y;
+						hasTarget = true;
+					}
+			} else if (isEntityReady()) {
+				moveToLocation();
+				entity.getLookHelper().setLookPosition(flowerX + 0.5D, flowerY + 0.5D, flowerZ + 0.5D, 30.0F, 8.0F);
+				AxisAlignedBB blockbounds = getBlockAABB(flowerX, flowerY, flowerZ);
+				boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
+
+				if (flag) {
+					prepareToPollinate();
+					collectTicks++;
+					entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), flowerX, flowerY, flowerZ, getScaledcollectTicks());
+					if (!canPolinate(entity.worldObj.getBlock(flowerX, flowerY, flowerZ), entity.worldObj.getBlockMetadata(flowerX, flowerY, flowerZ)))
+						hasTarget = false;
+					else if (COLLECT_SPEED <= collectTicks) {
+						hasTarget = false;
+						collectTicks = 0;
+						afterPollination();
+					}
 				}
-		} else if (isEntityReady()) {
-			moveToLocation();
-			entity.getLookHelper().setLookPosition(flowerX + 0.5D, flowerY + 0.5D, flowerZ + 0.5D, 30.0F, 8.0F);
-			AxisAlignedBB blockbounds = getBlockAABB(flowerX, flowerY, flowerZ);
-			boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
-
-			if (flag) {
-				prepareToPollinate();
-				collectTicks++;
-				entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), flowerX, flowerY, flowerZ, getScaledcollectTicks());
-				if (!canPolinate(entity.worldObj.getBlock(flowerX, flowerY, flowerZ), entity.worldObj.getBlockMetadata(flowerX, flowerY, flowerZ)))
-					hasTarget = false;
-				else if (COLLECT_SPEED <= collectTicks) {
+				if (!flag && collectTicks > 1) {
+					pollinationInterupted();
 					hasTarget = false;
 					collectTicks = 0;
-					afterPollination();
 				}
 			}
-			if (!flag && collectTicks > 1) {
-				pollinationInterupted();
-				hasTarget = false;
-				collectTicks = 0;
-			}
-		}
 	}
 
 	private int getScaledcollectTicks() {

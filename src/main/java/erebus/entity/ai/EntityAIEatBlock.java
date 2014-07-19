@@ -55,7 +55,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
-		return !entity.isChild() && entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, AxisAlignedBB.getBoundingBox(cropX, cropY, cropZ, cropX + 1, cropY + 1, cropZ + 1)).isEmpty();
+		return !entity.isChild();
 	}
 
 	@Override
