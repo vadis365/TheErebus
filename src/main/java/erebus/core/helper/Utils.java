@@ -2,9 +2,11 @@ package erebus.core.helper;
 
 import java.awt.Color;
 import java.util.LinkedHashMap;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -16,9 +18,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.mojang.authlib.GameProfile;
+
+import erebus.lib.Reference;
+
 public class Utils {
+
+	public static EntityPlayer getPlayer(World world) {
+		if (world.isRemote || !(world instanceof WorldServer))
+			return null;
+		return FakePlayerFactory.get((WorldServer) world, new GameProfile(UUID.fromString(Reference.MOD_ID), "[" + Reference.CHANNEL + "]"));
+	}
 
 	public static final int getFlowerMetadata(Object obj) {
 		int meta = -1;
