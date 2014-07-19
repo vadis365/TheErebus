@@ -31,8 +31,13 @@ public class Utils {
 	public static boolean rightClickItemAt(World world, int x, int y, int z, int side, ItemStack stack) {
 		if (world.isRemote || stack == null || stack.getItem() == null)
 			return false;
-
-		return stack.getItem().onItemUse(stack, getPlayer(world), world, x, y, z, side, 0, 0, 0);
+		EntityPlayer player = getPlayer(world);
+		player.setCurrentItemOrArmor(0, stack);
+		try {
+			return stack.getItem().onItemUse(stack, player, world, x, y, z, side, 0, 0, 0);
+		} finally {
+			player.setCurrentItemOrArmor(0, null);
+		}
 	}
 
 	public static EntityPlayer getPlayer(World world) {
