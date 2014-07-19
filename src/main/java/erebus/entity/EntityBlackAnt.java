@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBucket;
@@ -182,6 +183,13 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			closeInventory();
 			setAttributes = true;
 		}
+		
+		if(getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
+			if(getStackInSlot(INVENTORY_SLOT) != null && getStackInSlot(INVENTORY_SLOT).stackSize > 0) {
+				canAddToSilo = true;
+    			canPickupItems = false;
+			}
+		}
 	}
 
 	@Override	
@@ -213,6 +221,22 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		    	}
 		    }
 	    }
+	    
+	    if(!canPickupItems && canAddToSilo) {
+	    	moveToSilo();
+	    	Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
+	    	if (block == Blocks.chest)
+	    		if (getDistance(getDropPointX(), getDropPointY(), getDropPointZ()) < 1.5D) {
+	    			addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
+	    			canAddToSilo = false;
+	    			canPickupItems = true;
+			}
+	    }
+	}
+
+	private void addDropToInventory(int x, int y, int z) {
+		ItemStack stack = getStackInSlot(CROP_ID_SLOT);
+		Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), new ItemStack(stack.getItem(), stack.stackSize, stack.getItemDamage()));
 	}
 	
 	public EntityItem getClosestEntityItem(Entity entity, double d) {
@@ -240,6 +264,11 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	public void moveToItem(Entity entity) {
 		if (getNavigator().tryMoveToXYZ(entity.posX, entity.posY, entity.posZ, 0.5D))
 			getMoveHelper().setMoveTo(entity.posX, entity.posY, entity.posZ, 0.5D);
+	}
+	
+	public void moveToSilo() {
+		if (getNavigator().tryMoveToXYZ(getDropPointX(), getDropPointY() +1, getDropPointZ(), 0.5D))
+			getMoveHelper().setMoveTo(getDropPointX() +0.5D, getDropPointY() +1, getDropPointZ()+0.5D, 0.5D);
 	}
 
 	@Override
