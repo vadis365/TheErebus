@@ -206,6 +206,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 						System.out.println("Pick Up Item and add to inventory here.");
 						// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
 						// not sure if they should carry items back to silo one at a time or store them yet
+						
 						getMoveHelper().setMoveTo(entityitem.posX, entityitem.posY,entityitem.posZ, 0.5D);
 						addToInventory(new ItemStack(stack.getItem(), stack.stackSize, metadata));
 						entityitem.setDead();
@@ -234,15 +235,17 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe)
 			if (getStackInSlot(INVENTORY_SLOT) == null) {
-				//canCollectFromSilo = true; // this stops the planting AI and makes the ant go to the silo
+				canCollectFromSilo = true; // this stops the planting AI and makes the ant go to the silo
 			}
 
 		if (canCollectFromSilo) {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
+			ItemStack stack = new ItemStack(Items.wheat_seeds, 64, 0);//test stack
 			if (block == Blocks.chest)
 				if (getDistance(getDropPointX(), getDropPointY(), getDropPointZ()) < 1.5D) {
 					//TODO add stack from chest inventory matching filter slot to ant inventory slot
+					addToInventory(stack);//test stack
 					canCollectFromSilo = false;
 				}
 		}

@@ -63,6 +63,7 @@ public class EntityAIHarvestCrops extends EntityAIEatBlock {
 	@Override
 	protected void afterEaten() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
+		blackAnt.worldObj.setBlockToAir(cropX, cropY, cropZ);
 		blackAnt.setBlockHarvested(blockMunched, metaData);
 	}
 }

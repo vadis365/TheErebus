@@ -3,12 +3,10 @@ package erebus.entity.ai;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.world.World;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackAnt;
 
@@ -34,6 +32,9 @@ public class EntityAIPlantCrops extends EntityAIEatBlock {
 		if (block == Blocks.dirt || block == Blocks.grass)
 			return true;
 		
+		if (block == Blocks.farmland && entity.worldObj.isAirBlock(cropX, cropY + 1, cropZ))
+			return true;
+		
 		else if (block.hasTileEntity(blockMeta))
 			return false;
 
@@ -48,7 +49,7 @@ public class EntityAIPlantCrops extends EntityAIEatBlock {
 	@Override
 	protected void moveToLocation() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
-		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY+1, cropZ, 16.0F, true, false, false, true);
+		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY + 1, cropZ, 16.0F, true, false, false, true);
 		if (pathentity != null) {
 			blackAnt.setPathToEntity(pathentity);
 			blackAnt.getNavigator().setPath(pathentity, 0.5D);
@@ -66,14 +67,21 @@ public class EntityAIPlantCrops extends EntityAIEatBlock {
 	}
 
 	@Override
-	protected void afterEaten() {
-		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
-		blackAnt.worldObj.playSoundEffect((double)cropX + 0.5F, (double) cropY + 0.5F, (double) cropZ + 0.5F, Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
-		
-		if (!blackAnt.worldObj.isRemote) {
-			EntityPlayer player = Utils.getPlayer(blackAnt.worldObj);
-			player.setCurrentItemOrArmor(0, new ItemStack(Items.wooden_hoe));
-			Utils.rightClickAt(blackAnt.worldObj, cropX, cropY, cropZ, 1);
-		}
+	 protected void afterEaten() {
+	  EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
+	  blackAnt.worldObj.playSoundEffect((double) cropX + 0.5F, (double) cropY + 0.5F, (double) cropZ + 0.5F, Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
+	  if (!blackAnt.worldObj.isRemote) {
+		  if(getTargetBlock() != Blocks.farmland)
+			  Utils.rightClickItemAt(blackAnt.worldObj, cropX, cropY, cropZ, 1, new ItemStack(Items.wooden_hoe));
+		  if(blackAnt.getStackInSlot(1) != null && blackAnt.getStackInSlot(2) != null)
+			  if(blackAnt.getStackInSlot(1).getItem() == blackAnt.getStackInSlot(2).getItem())
+				  if(blackAnt.getStackInSlot(1).getItemDamage() == blackAnt.getStackInSlot(2).getItemDamage()) {
+					  Utils.rightClickItemAt(blackAnt.worldObj, cropX, cropY, cropZ, 1, new ItemStack(blackAnt.getStackInSlot(2).getItem(), blackAnt.getStackInSlot(2).getItemDamage()));
+					  blackAnt.setInventorySlotContents(2, new ItemStack(blackAnt.getStackInSlot(2).getItem(), blackAnt.getStackInSlot(2).stackSize -1, blackAnt.getStackInSlot(2).getItemDamage()));
+					  if(blackAnt.getStackInSlot(2).stackSize < 1)
+						  blackAnt.setInventorySlotContents(2, null);
+						 
+			 }
+	  	}
 	}
 }
