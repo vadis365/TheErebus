@@ -170,7 +170,7 @@ public class EntityBlackAnt extends EntityMob implements IInventory {
 	    		int metadata = stack.getItemDamage();
 		    	if(metadata == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
 		    		float distance = entityitem.getDistanceToEntity(this);
-		    		if (distance > 1.0F && entityitem.delayBeforeCanPickup == 0) {
+		    		if (distance > 1.0F && entityitem.delayBeforeCanPickup <= 0) {
 		    			double x = entityitem.posX;
 		    			double y = entityitem.posY;
 		    			double z = entityitem.posZ;
