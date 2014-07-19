@@ -7,12 +7,16 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class Utils {
 
@@ -67,57 +71,100 @@ public class Utils {
 		return (T) tile;
 	}
 
-	public static final boolean addItemStackToInventory(IInventory inventory, ItemStack stack, int startIndex) {
-		if (stack == null || inventory == null)
-			return true;
-		int openSlot = -1;
-		for (int i = startIndex; i < inventory.getSizeInventory(); i++)
-			if (compareStacks(stack, inventory.getStackInSlot(i), false) && inventory.getStackInSlot(i).getMaxStackSize() > inventory.getStackInSlot(i).stackSize) {
-				final int hold = inventory.getStackInSlot(i).getMaxStackSize() - inventory.getStackInSlot(i).stackSize;
-				if (hold >= stack.stackSize) {
-					final ItemStack itemStack = inventory.getStackInSlot(i);
-					itemStack.stackSize += stack.stackSize;
-					stack = null;
+	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack) {
+		return addItemStackToInventory(iinventory, stack, 0);
+	}
+
+	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack, int side) {
+		if (iinventory == null)
+			return false;
+
+		if (stack == null || stack.stackSize <= 0)
+			return false;
+
+		IInventory invt = getInventory(iinventory);
+		return addToSlots(invt, stack, side, getSlotsFromSide(invt, side));
+	}
+
+	private static boolean addToSlots(IInventory iinventory, ItemStack stack, int side, int[] slots) {
+		for (int slot : slots) {
+			if (iinventory instanceof ISidedInventory) {
+				if (!((ISidedInventory) iinventory).canInsertItem(slot, stack, side))
+					continue;
+			} else if (!iinventory.isItemValidForSlot(slot, stack))
+				continue;
+
+			if (iinventory.getStackInSlot(slot) == null) {
+				iinventory.setInventorySlotContents(slot, stack.copy());
+				stack.stackSize = 0;
+				return true;
+			} else {
+				ItemStack invtStack = iinventory.getStackInSlot(slot);
+				if (invtStack.stackSize < Math.min(invtStack.getMaxStackSize(), iinventory.getInventoryStackLimit()) && areStacksTheSame(invtStack, stack, false)) {
+					invtStack.stackSize += stack.stackSize;
+					if (invtStack.stackSize > invtStack.getMaxStackSize()) {
+						stack.stackSize = invtStack.stackSize - invtStack.getMaxStackSize();
+						invtStack.stackSize = invtStack.getMaxStackSize();
+					} else
+						stack.stackSize = 0;
 					return true;
 				}
-				ItemStack itemStack2 = stack;
-				itemStack2.stackSize -= hold;
-				ItemStack itemStack3 = inventory.getStackInSlot(i);
-				itemStack3.stackSize += hold;
-			} else if (inventory.getStackInSlot(i) == null && openSlot == -1)
-				openSlot = i;
-
-		if (openSlot <= -1)
-			return false;
-		inventory.setInventorySlotContents(openSlot, stack);
-
-		return true;
-	}
-
-	public static final boolean addItemStackToInventory(IInventory inventory, ItemStack stack) {
-		return addItemStackToInventory(inventory, stack, 0);
-	}
-
-	public static final boolean compareStacks(ItemStack stack1, ItemStack stack2, boolean testSize) {
-		if (stack1 == null || stack2 == null)
-			return false;
-		if (stack1.getItem() == stack2.getItem())
-			if (stack1.getItemDamage() == stack2.getItemDamage())
-				if (compareNBT(stack1, stack2))
-					if (!testSize || stack1.stackSize == stack2.stackSize)
-						return true;
+			}
+		}
 		return false;
 	}
 
-	private static final boolean compareNBT(ItemStack stack1, ItemStack stack2) {
-		if (stack1.hasTagCompound() && !stack2.hasTagCompound())
+	public static boolean areStacksTheSame(ItemStack stack1, ItemStack stack2, boolean matchSize) {
+		if (stack1 == null || stack2 == null)
 			return false;
-		if (!stack1.hasTagCompound() && stack2.hasTagCompound())
-			return false;
-		if (!stack1.hasDisplayName() && !stack2.hasTagCompound())
-			return true;
-		else
-			return stack1.getTagCompound().equals(stack2.getTagCompound());
+
+		if (stack1.getItem() == stack2.getItem())
+			if (stack1.getItemDamage() == stack2.getItemDamage() || isWildcard(stack1.getItemDamage()) || isWildcard(stack2.getItemDamage()))
+				if (!matchSize || stack1.stackSize == stack2.stackSize) {
+					if (stack1.hasTagCompound() && stack2.hasTagCompound())
+						return stack1.getTagCompound().equals(stack2.getTagCompound());
+					return stack1.hasTagCompound() == stack2.hasTagCompound();
+				}
+		return false;
+	}
+
+	private static boolean isWildcard(int meta) {
+		return meta == OreDictionary.WILDCARD_VALUE;
+	}
+
+	public static int[] getSlotsFromSide(IInventory iinventory, int side) {
+		if (iinventory == null)
+			return null;
+
+		if (iinventory instanceof ISidedInventory)
+			return ((ISidedInventory) iinventory).getAccessibleSlotsFromSide(side);
+		else {
+			int[] slots = new int[iinventory.getSizeInventory()];
+			for (int i = 0; i < slots.length; i++)
+				slots[i] = i;
+			return slots;
+		}
+	}
+
+	public static IInventory getInventory(IInventory inventory) {
+		if (inventory instanceof TileEntityChest) {
+			TileEntityChest chest = (TileEntityChest) inventory;
+			TileEntityChest adjacent = null;
+			if (chest.adjacentChestXNeg != null)
+				adjacent = chest.adjacentChestXNeg;
+			if (chest.adjacentChestXNeg != null)
+				adjacent = chest.adjacentChestXNeg;
+			if (chest.adjacentChestXPos != null)
+				adjacent = chest.adjacentChestXPos;
+			if (chest.adjacentChestZNeg != null)
+				adjacent = chest.adjacentChestZNeg;
+			if (chest.adjacentChestZPos != null)
+				adjacent = chest.adjacentChestZPos;
+
+			if (adjacent != null)
+				return new InventoryLargeChest("", inventory, adjacent);
+		}
+		return inventory;
 	}
 
 	public static final LinkedHashMap<Short, Short> getEnchantments(ItemStack stack) {
