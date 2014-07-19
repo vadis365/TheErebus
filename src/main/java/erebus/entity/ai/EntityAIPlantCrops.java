@@ -3,8 +3,13 @@ package erebus.entity.ai;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.world.World;
+import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackAnt;
 
 public class EntityAIPlantCrops extends EntityAIEatBlock {
@@ -64,6 +69,11 @@ public class EntityAIPlantCrops extends EntityAIEatBlock {
 	protected void afterEaten() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 		blackAnt.worldObj.playSoundEffect((double)cropX + 0.5F, (double) cropY + 0.5F, (double) cropZ + 0.5F, Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
-		blackAnt.worldObj.setBlock(cropX, cropY, cropZ, Blocks.farmland);
+		
+		if (!blackAnt.worldObj.isRemote) {
+			EntityPlayer player = Utils.getPlayer(blackAnt.worldObj);
+			player.setCurrentItemOrArmor(0, new ItemStack(Items.wooden_hoe));
+			Utils.rightClickAt(blackAnt.worldObj, cropX, cropY, cropZ, 0);
+		}
 	}
 }
