@@ -267,7 +267,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	private void addDropToInventory(int x, int y, int z) {
 		ItemStack stack = getAntInvSlotStack();
-		if (getAntInvSlotStack() != null)
+		if (!isAntInvSlotEmpty())
 			Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), new ItemStack(stack.getItem(), stack.stackSize, stack.getItemDamage()));
 		setInventorySlotContents(2, null);
 	}
