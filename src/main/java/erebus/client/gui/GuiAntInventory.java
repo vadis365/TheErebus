@@ -9,6 +9,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -25,10 +26,10 @@ import erebus.inventory.ContainerAntInventory;
 public class GuiAntInventory extends GuiContainer {
 
 	private static final ResourceLocation GUI_ANT_INVENTORY = new ResourceLocation("erebus:textures/gui/container/antGuiTest.png");
-	public static Item[] ghostIcon = new Item[] {Items.stone_hoe, Items.shears, Items.bucket, Items.wheat_seeds, Items.wheat};
+	public static Item[] ghostIcon = new Item[] {Items.stone_hoe, Items.shears, Items.bucket, Items.stone_shovel, Items.wheat_seeds, Items.wheat};
 	private ItemStack stack, stack2;
 	int iconCountTool = 0;
-	int iconCountCrop = 3;
+	int iconCountCrop = 4;
 	private IInventory antInventory;
 	
 	public GuiAntInventory(InventoryPlayer inventory, Entity entityInventory) {
@@ -36,7 +37,7 @@ public class GuiAntInventory extends GuiContainer {
 		xSize = 176;
 		ySize = 131;
 		stack = new ItemStack(ghostIcon[0]);
-		stack2 = new ItemStack(ghostIcon[3]);
+		stack2 = new ItemStack(ghostIcon[4]);
 		antInventory = (IInventory)entityInventory;
 	}
 
@@ -70,7 +71,7 @@ public class GuiAntInventory extends GuiContainer {
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
-			stack2 = new ItemStack(ghostIcon[3]);
+			stack2 = new ItemStack(ghostIcon[4]);
 			IIcon iicon1 = stack2.getIconIndex();
 			this.mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
 			this.drawTexturedModelRectFromIcon(guiLeft + 80, guiTop + 18, iicon1, 16, 16);
@@ -89,6 +90,18 @@ public class GuiAntInventory extends GuiContainer {
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();
 		}
+		
+		if(antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemSpade && antInventory.getStackInSlot(1) == null) {
+			GL11.glPushMatrix();
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glColor4f(1f, 1f, 1f, 0.2f);
+			stack2 = new ItemStack(Items.dye, 0, 15);
+			IIcon iicon1 = stack2.getIconIndex();
+			this.mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
+			this.drawTexturedModelRectFromIcon(guiLeft + 80, guiTop + 18, iicon1, 16, 16);
+			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glPopMatrix();
+		}
     }
 		
 	@Override
@@ -99,10 +112,10 @@ public class GuiAntInventory extends GuiContainer {
         	stack2 = new ItemStack(ghostIcon[iconCountCrop]);
         	iconCountTool++;
         	iconCountCrop++;
-        	if(iconCountTool > 2)
+        	if(iconCountTool > 3)
         		iconCountTool = 0;
-        	if(iconCountCrop > 4)
-        		iconCountCrop = 3;
+        	if(iconCountCrop > 5)
+        		iconCountCrop = 4;
         }
 	}
 }
