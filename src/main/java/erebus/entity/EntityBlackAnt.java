@@ -203,10 +203,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 						return;
 					}
 					if (distance < 1.5F && entityitem != null) {
-						System.out.println("Pick Up Item and add to inventory here.");
-						// have to sort out slot sizes etc.. slot CROP_ID_SLOT should only hold a stack of 1
-						// not sure if they should carry items back to silo one at a time or store them yet
-						
 						getMoveHelper().setMoveTo(entityitem.posX, entityitem.posY,entityitem.posZ, 0.5D);
 						addToInventory(new ItemStack(stack.getItem(), stack.stackSize, metadata));
 						entityitem.setDead();
@@ -226,7 +222,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 			if (block == Blocks.chest)
-				if (getDistance(getDropPointX(), getDropPointY(), getDropPointZ()) < 1.5D) {
+				if (getDistance(getDropPointX() + 0.5D, getDropPointY(), getDropPointZ() + 0.5D) < 1.5D) {
 					addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 					canAddToSilo = false;
 					canPickupItems = true;
@@ -243,7 +239,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 			ItemStack stack = new ItemStack(Items.wheat_seeds, 64, 0);//test stack
 			if (block == Blocks.chest)
-				if (getDistance(getDropPointX(), getDropPointY(), getDropPointZ()) < 1.5D) {
+				if (getDistance(getDropPointX() + 0.5D, getDropPointY(), getDropPointZ() + 0.5D) < 1.5D) {
 					//TODO add stack from chest inventory matching filter slot to ant inventory slot
 					addToInventory(stack);//test stack
 					canCollectFromSilo = false;
@@ -299,11 +295,11 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	public void moveToSilo() {
-		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY(), getDropPointZ(), 16.0F, true, false, false, true);
+		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY() + 1, getDropPointZ(), 16.0F, true, false, false, true);
 		if (pathentity != null) {
 			setPathToEntity(pathentity);
 			getNavigator().setPath(pathentity, 0.5D);
-		}
+		}		
 	}
 
 	@Override
@@ -439,8 +435,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		tasks.removeTask(aiWander);
 		tasks.removeTask(aiPlantCrops);
 		tasks.removeTask(aiHarvestCrops);
-		System.out.println("Open");
-		System.out.println("Tasks Removed");
 	}
 
 	@Override
@@ -456,21 +450,17 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
 			tasks.addTask(1, aiPlantCrops);
 			canPickupItems = false;
-			System.out.println("Planter Set");
 		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
 			canPickupItems = true;
-			System.out.println("Collector Set");
 		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemShears) {
 			canPickupItems = false;
 			tasks.addTask(1, aiHarvestCrops);
-			System.out.println("Harvester Set");
 		}
 		updateAITasks();
-		System.out.println("Close");
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathEntity;
 import erebus.entity.EntityBlackAnt;
 
@@ -64,6 +65,7 @@ public class EntityAIHarvestCrops extends EntityAIEatBlock {
 	protected void afterEaten() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 		blackAnt.worldObj.setBlockToAir(cropX, cropY, cropZ);
+		blackAnt.worldObj.setBlock(cropX, cropY - 1, cropZ, Blocks.dirt);
 		blackAnt.setBlockHarvested(blockMunched, metaData);
 	}
 }
