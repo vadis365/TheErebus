@@ -195,10 +195,10 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 		if (canPickupItems) {
 			EntityItem entityitem = getClosestEntityItem(this, 16.0D);
-			if (entityitem != null && getStackInSlot(CROP_ID_SLOT) != null && entityitem.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
+			if (entityitem != null && !isFilterSlotEmpty() && entityitem.getEntityItem().getItem() == getFilterSlotStack().getItem()) {
 				ItemStack stack = entityitem.getEntityItem();
 				int metadata = stack.getItemDamage();
-				if (metadata == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
+				if (metadata == getFilterSlotStack().getItemDamage()) {
 					float distance = entityitem.getDistanceToEntity(this);
 					if (distance >= 1.5F && entityitem.delayBeforeCanPickup <= 0 && !entityitem.isDead) {
 						double x = entityitem.posX;
@@ -218,8 +218,8 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			}
 		}
 
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket)
-			if (getStackInSlot(INVENTORY_SLOT) != null && getStackInSlot(INVENTORY_SLOT).stackSize > 15) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemBucket)
+			if (!isAntInvSlotEmpty() && getAntInvSlotStack().stackSize > 15) {
 				canAddToSilo = true;
 				canPickupItems = false;
 			}
@@ -235,8 +235,8 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				}
 		}
 		
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe || getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade) {
-			if (getStackInSlot(INVENTORY_SLOT) == null && !isFilterSlotEmpty())
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe || !isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemSpade) {
+			if (isAntInvSlotEmpty() && !isFilterSlotEmpty())
 				canCollectFromSilo = true; // this stops the planting or bonemealing AIs and makes the ant go to the silo
 		}
 		
@@ -259,16 +259,15 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	private void addToInventory(ItemStack stack) {
 		if (stack == null)
 			return;
-
 		if (inventory[INVENTORY_SLOT] == null)
 			inventory[INVENTORY_SLOT] = stack.copy();
 		else if (Utils.areStacksTheSame(stack, inventory[INVENTORY_SLOT], false) && inventory[INVENTORY_SLOT].getMaxStackSize() >= inventory[INVENTORY_SLOT].stackSize + stack.stackSize)
 			inventory[INVENTORY_SLOT].stackSize += stack.stackSize;
-		 }
+	}
 
 	private void addDropToInventory(int x, int y, int z) {
-		ItemStack stack = getStackInSlot(INVENTORY_SLOT);
-		if (getStackInSlot(INVENTORY_SLOT) != null)
+		ItemStack stack = getAntInvSlotStack();
+		if (getAntInvSlotStack() != null)
 			Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), new ItemStack(stack.getItem(), stack.stackSize, stack.getItemDamage()));
 		setInventorySlotContents(2, null);
 	}
@@ -280,10 +279,10 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(d, d, d));
 		for (int k = 0; k < list.size(); k++) {
 			Entity entity1 = list.get(k);
-			if (entity1 != null && entity1 instanceof EntityItem && getStackInSlot(CROP_ID_SLOT) != null) {
+			if (entity1 != null && entity1 instanceof EntityItem && !isFilterSlotEmpty()) {
 				EntityItem entityitem1 = (EntityItem) entity1;
-				if (entityitem1.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem())
-					if (entityitem1.getEntityItem().getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
+				if (entityitem1.getEntityItem().getItem() == getFilterSlotStack().getItem())
+					if (entityitem1.getEntityItem().getItemDamage() == getFilterSlotStack().getItemDamage()) {
 						double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
 						if ((d < 0.0D || d2 < d * d) && (d1 == -1.0D || d2 < d1)) {
 							d1 = d2;
@@ -453,38 +452,58 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (worldObj.isRemote)
 			return;
 
-		if (getStackInSlot(TOOL_SLOT) == null) {
+		if (isTaskSlotEmpty()) {
 			tasks.addTask(1, aiWander);
 			canPickupItems = false;
 		}
 
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe && !isFilterSlotEmpty()) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe && !isFilterSlotEmpty()) {
 			tasks.addTask(1, aiPlantCrops);
 			canPickupItems = false;
 			canBonemeal = false;
 		}
 
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket && !isFilterSlotEmpty()) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemBucket && !isFilterSlotEmpty()) {
 			canPickupItems = true;
 		}
 
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemShears) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemShears) {
 			canPickupItems = false;
 			tasks.addTask(1, aiHarvestCrops);
 		}
 		
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade && !isFilterSlotEmpty()) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemSpade && !isFilterSlotEmpty()) {
 			canPickupItems = false;
 			canBonemeal = true;
 			tasks.addTask(1, aiBonemealCrops);
 		}
 		updateAITasks();
 	}
-
-	public boolean isFilterSlotEmpty() {
-		return getStackInSlot(CROP_ID_SLOT) == null;
+	
+	public boolean isTaskSlotEmpty() {
+		return getTaskSlotStack() == null;
 	}
-
+	
+	public ItemStack getTaskSlotStack() {
+		return getStackInSlot(TOOL_SLOT);
+	}
+	
+	public boolean isFilterSlotEmpty() {
+		return getFilterSlotStack() == null;
+	}
+	
+	public ItemStack getFilterSlotStack() {
+		return getStackInSlot(CROP_ID_SLOT);
+	}
+	
+	public boolean isAntInvSlotEmpty() {
+		return getAntInvSlotStack() == null;
+	}
+	
+	public ItemStack getAntInvSlotStack() {
+		return getStackInSlot(INVENTORY_SLOT);
+	}
+	
 	@Override
 	public void markDirty() {
 	}
