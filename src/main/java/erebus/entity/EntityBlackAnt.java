@@ -21,6 +21,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemShears;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -30,6 +31,7 @@ import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIAntBonemealCrops;
 import erebus.entity.ai.EntityAIAntHarvestCrops;
 import erebus.entity.ai.EntityAIAntPlantCrops;
 
@@ -38,12 +40,14 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
 	private final EntityAIAntHarvestCrops aiHarvestCrops = new EntityAIAntHarvestCrops(this, 0.6D, 1);
 	private final EntityAIAntPlantCrops aiPlantCrops = new EntityAIAntPlantCrops(this, 0.6D, 4);
+	private final EntityAIAntBonemealCrops aiBonemealCrops = new EntityAIAntBonemealCrops(this, 0.6D, 4);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
 
 	public boolean setAttributes; // needed for logic later
 	public boolean canPickupItems;
 	public boolean canCollectFromSilo;
 	public boolean canAddToSilo;
+	public boolean canBonemeal;
 
 	protected ItemStack[] inventory;
 	public static final int TOOL_SLOT = 0;
@@ -57,6 +61,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		canPickupItems = false;
 		canAddToSilo = false;
 		canCollectFromSilo = false;
+		canBonemeal = false;
 		setSize(0.9F, 0.4F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -229,7 +234,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				}
 		}
 		
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe)
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe || getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade)
 			if (getStackInSlot(INVENTORY_SLOT) == null) {
 				canCollectFromSilo = true; // this stops the planting AI and makes the ant go to the silo
 			}
@@ -238,12 +243,15 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 			ItemStack stack = new ItemStack(Items.wheat_seeds, 64, 0);//test stack
-			if (block == Blocks.chest)
+			if (block == Blocks.chest) {
 				if (getDistance(getDropPointX() + 0.5D, getDropPointY(), getDropPointZ() + 0.5D) < 1.5D) {
+					if(canBonemeal)
+						stack = new ItemStack(Items.dye, 64, 15);
 					//TODO add stack from chest inventory matching filter slot to ant inventory slot
 					addToInventory(stack);//test stack
 					canCollectFromSilo = false;
 				}
+			}
 		}
 	}
 	
@@ -371,7 +379,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		if (slot == TOOL_SLOT)
-			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe;
+			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemSpade;
 
 		return false;
 	}
@@ -435,6 +443,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		tasks.removeTask(aiWander);
 		tasks.removeTask(aiPlantCrops);
 		tasks.removeTask(aiHarvestCrops);
+		tasks.removeTask(aiBonemealCrops);
 	}
 
 	@Override
@@ -450,6 +459,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
 			tasks.addTask(1, aiPlantCrops);
 			canPickupItems = false;
+			canBonemeal = false;
 		}
 
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
@@ -459,6 +469,12 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemShears) {
 			canPickupItems = false;
 			tasks.addTask(1, aiHarvestCrops);
+		}
+		
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade) {
+			canPickupItems = false;
+			canBonemeal = true;
+			tasks.addTask(1, aiBonemealCrops);
 		}
 		updateAITasks();
 	}
