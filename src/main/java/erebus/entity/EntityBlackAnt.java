@@ -236,7 +236,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		}
 		
 		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe || getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade) {
-			if (getStackInSlot(INVENTORY_SLOT) == null)
+			if (getStackInSlot(INVENTORY_SLOT) == null && !isFilterSlotEmpty())
 				canCollectFromSilo = true; // this stops the planting or bonemealing AIs and makes the ant go to the silo
 		}
 		
@@ -458,13 +458,13 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			canPickupItems = false;
 		}
 
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe) {
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe && !isFilterSlotEmpty()) {
 			tasks.addTask(1, aiPlantCrops);
 			canPickupItems = false;
 			canBonemeal = false;
 		}
 
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket) {
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemBucket && !isFilterSlotEmpty()) {
 			canPickupItems = true;
 		}
 
@@ -473,12 +473,16 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			tasks.addTask(1, aiHarvestCrops);
 		}
 		
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade) {
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade && !isFilterSlotEmpty()) {
 			canPickupItems = false;
 			canBonemeal = true;
 			tasks.addTask(1, aiBonemealCrops);
 		}
 		updateAITasks();
+	}
+
+	public boolean isFilterSlotEmpty() {
+		return getStackInSlot(CROP_ID_SLOT) == null;
 	}
 
 	@Override
