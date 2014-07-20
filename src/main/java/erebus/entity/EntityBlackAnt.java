@@ -30,14 +30,14 @@ import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
-import erebus.entity.ai.EntityAIHarvestCrops;
-import erebus.entity.ai.EntityAIPlantCrops;
+import erebus.entity.ai.EntityAIAntHarvestCrops;
+import erebus.entity.ai.EntityAIAntPlantCrops;
 
 public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
-	private final EntityAIHarvestCrops aiHarvestCrops = new EntityAIHarvestCrops(this, 0.6D, 1);
-	private final EntityAIPlantCrops aiPlantCrops = new EntityAIPlantCrops(this, 0.6D, 4);
+	private final EntityAIAntHarvestCrops aiHarvestCrops = new EntityAIAntHarvestCrops(this, 0.6D, 1);
+	private final EntityAIAntPlantCrops aiPlantCrops = new EntityAIAntPlantCrops(this, 0.6D, 4);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
 
 	public boolean setAttributes; // needed for logic later

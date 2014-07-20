@@ -10,10 +10,10 @@ import net.minecraft.pathfinding.PathEntity;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackAnt;
 
-public class EntityAIPlantCrops extends EntityAIEatBlock {
+public class EntityAIAntPlantCrops extends EntityAIEatBlock {
 
 	private final double moveSpeed;
-	public EntityAIPlantCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
+	public EntityAIAntPlantCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
 		super((EntityLiving) entity, null, 0, null, moveSpeed, eatSpeed);
 		this.moveSpeed = moveSpeed;
 	}

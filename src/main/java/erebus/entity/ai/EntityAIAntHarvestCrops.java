@@ -8,12 +8,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathEntity;
 import erebus.entity.EntityBlackAnt;
 
-public class EntityAIHarvestCrops extends EntityAIEatBlock {
+public class EntityAIAntHarvestCrops extends EntityAIEatBlock {
 
 	private final double moveSpeed;
 	private Block blockMunched;
 	private int metaData;
-	public EntityAIHarvestCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
+	public EntityAIAntHarvestCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
 		super((EntityLiving) entity, null, 0, null, moveSpeed, eatSpeed);
 		this.moveSpeed = moveSpeed;
 	}
