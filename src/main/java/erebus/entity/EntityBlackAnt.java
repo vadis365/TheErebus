@@ -57,7 +57,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		canPickupItems = false;
 		canAddToSilo = false;
 		canCollectFromSilo = false;
-		setSize(1.2F, 0.55F);
+		setSize(0.9F, 0.4F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, aiWander);

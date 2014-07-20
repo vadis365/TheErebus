@@ -37,7 +37,7 @@ public class RenderBlackAnt extends RenderLiving {
 	}
 
 	protected void scaleBlackAnt(EntityBlackAnt entityBlackAnt, float partialTickTime) {
-		float size = 0.75F;
+		float size = 0.5F;
 		GL11.glScalef(size, size, size);
 	}
 
