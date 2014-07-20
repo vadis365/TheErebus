@@ -78,8 +78,8 @@ public class EntityAIAntBonemealCrops extends EntityAIEatBlock {
 						Utils.rightClickItemAt(blackAnt.worldObj, cropX, cropY, cropZ, 1, new ItemStack(blackAnt.getStackInSlot(2).getItem(), blackAnt.getStackInSlot(2).getItemDamage()));
 						ItemDye.applyBonemeal(blackAnt.getStackInSlot(2), blackAnt.worldObj, cropX, cropY, cropZ, player);
 						blackAnt.setInventorySlotContents(2, new ItemStack(blackAnt.getStackInSlot(2).getItem(), blackAnt.getStackInSlot(2).stackSize - 1, blackAnt.getStackInSlot(2).getItemDamage()));
-						if (blackAnt.getStackInSlot(2).stackSize < 1)
-							blackAnt.setInventorySlotContents(2, null);
+					if (blackAnt.getStackInSlot(2).stackSize < 1)
+						blackAnt.setInventorySlotContents(2, null);
 					}
 				}
 			}

@@ -440,6 +440,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		canPickupItems = false;
 		canAddToSilo = false;
 		canCollectFromSilo = false;
+		canBonemeal = false;
 		tasks.removeTask(aiWander);
 		tasks.removeTask(aiPlantCrops);
 		tasks.removeTask(aiHarvestCrops);
