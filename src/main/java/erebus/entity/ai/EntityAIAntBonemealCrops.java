@@ -25,6 +25,12 @@ public class EntityAIAntBonemealCrops extends EntityAIEatBlock {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 		return blackAnt.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing") && !blackAnt.canCollectFromSilo;
 	}
+	
+	@Override
+	public boolean continueExecuting() {
+		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
+		return !blackAnt.canCollectFromSilo;
+	}
 
 	@Override
 	protected boolean canEatBlock(Block block, int blockMeta) {
@@ -48,15 +54,13 @@ public class EntityAIAntBonemealCrops extends EntityAIEatBlock {
 	@Override
 	protected void moveToLocation() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
-		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt,
-				cropX, cropY, cropZ, 16.0F, true, false, false, true);
+		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY, cropZ, 16.0F, true, false, false, true);
 		if (pathentity != null) {
 			blackAnt.setPathToEntity(pathentity);
 			blackAnt.getNavigator().setPath(pathentity, 0.5D);
 		}
 		if (blackAnt.getDistance(cropX, cropY, cropZ) < 1.5D)
-			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY,
-					cropZ + 0.5D, 0.5D);
+			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, 0.5D);
 	}
 
 	@Override
@@ -77,7 +81,6 @@ public class EntityAIAntBonemealCrops extends EntityAIEatBlock {
 					if (blackAnt.getStackInSlot(1).getItemDamage() == blackAnt.getStackInSlot(2).getItemDamage()) {
 						Utils.rightClickItemAt(blackAnt.worldObj, cropX, cropY, cropZ, 1, new ItemStack(blackAnt.getStackInSlot(2).getItem(), blackAnt.getStackInSlot(2).getItemDamage()));
 						ItemDye.applyBonemeal(blackAnt.getStackInSlot(2), blackAnt.worldObj, cropX, cropY, cropZ, player);
-						blackAnt.setInventorySlotContents(2, new ItemStack(blackAnt.getStackInSlot(2).getItem(), blackAnt.getStackInSlot(2).stackSize - 1, blackAnt.getStackInSlot(2).getItemDamage()));
 					if (blackAnt.getStackInSlot(2).stackSize < 1)
 						blackAnt.setInventorySlotContents(2, null);
 					}

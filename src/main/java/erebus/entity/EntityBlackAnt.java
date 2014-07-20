@@ -192,6 +192,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+
 		if (canPickupItems) {
 			EntityItem entityitem = getClosestEntityItem(this, 16.0D);
 			if (entityitem != null && getStackInSlot(CROP_ID_SLOT) != null && entityitem.getEntityItem().getItem() == getStackInSlot(CROP_ID_SLOT).getItem()) {
@@ -234,11 +235,11 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				}
 		}
 		
-		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe || getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade)
-			if (getStackInSlot(INVENTORY_SLOT) == null) {
-				canCollectFromSilo = true; // this stops the planting AI and makes the ant go to the silo
-			}
-
+		if (getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemHoe || getStackInSlot(TOOL_SLOT) != null && getStackInSlot(TOOL_SLOT).getItem() instanceof ItemSpade) {
+			if (getStackInSlot(INVENTORY_SLOT) == null)
+				canCollectFromSilo = true; // this stops the planting or bonemealing AIs and makes the ant go to the silo
+		}
+		
 		if (canCollectFromSilo) {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
