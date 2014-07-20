@@ -452,28 +452,19 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (worldObj.isRemote)
 			return;
 
-		if (isTaskSlotEmpty()) {
+		if (isTaskSlotEmpty())
 			tasks.addTask(1, aiWander);
-			canPickupItems = false;
-		}
 
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe && !isFilterSlotEmpty()) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe && !isFilterSlotEmpty())
 			tasks.addTask(1, aiPlantCrops);
-			canPickupItems = false;
-			canBonemeal = false;
-		}
 
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemBucket && !isFilterSlotEmpty()) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemBucket && !isFilterSlotEmpty())
 			canPickupItems = true;
-		}
 
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemShears) {
-			canPickupItems = false;
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemShears)
 			tasks.addTask(1, aiHarvestCrops);
-		}
-		
+
 		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemSpade && !isFilterSlotEmpty()) {
-			canPickupItems = false;
 			canBonemeal = true;
 			tasks.addTask(1, aiBonemealCrops);
 		}
