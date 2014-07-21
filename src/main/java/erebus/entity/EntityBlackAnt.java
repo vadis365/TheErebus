@@ -21,7 +21,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemShears;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -235,7 +234,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				}
 		}
 		
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe || !isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemSpade) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe || !isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.bone) {
 			if (isAntInvSlotEmpty() && !isFilterSlotEmpty())
 				canCollectFromSilo = true; // this stops the planting or bonemealing AIs and makes the ant go to the silo
 		}
@@ -379,7 +378,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		if (slot == TOOL_SLOT)
-			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe || stack.getItem() instanceof ItemSpade;
+			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe || stack.getItem() == Items.bone;
 
 		return false;
 	}
@@ -464,7 +463,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemShears)
 			tasks.addTask(1, aiHarvestCrops);
 
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemSpade && !isFilterSlotEmpty()) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.bone && !isFilterSlotEmpty()) {
 			canBonemeal = true;
 			tasks.addTask(1, aiBonemealCrops);
 		}

@@ -9,7 +9,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +25,7 @@ import erebus.inventory.ContainerAntInventory;
 public class GuiAntInventory extends GuiContainer {
 
 	private static final ResourceLocation GUI_ANT_INVENTORY = new ResourceLocation("erebus:textures/gui/container/antGuiTest.png");
-	public static Item[] ghostIcon = new Item[] {Items.stone_hoe, Items.shears, Items.bucket, Items.stone_shovel, Items.wheat_seeds, Items.wheat};
+	public static Item[] ghostIcon = new Item[] {Items.stone_hoe, Items.shears, Items.bucket, Items.bone, Items.wheat_seeds, Items.wheat};
 	private ItemStack stack, stack2;
 	int iconCountTool = 0;
 	int iconCountCrop = 4;
@@ -91,7 +90,7 @@ public class GuiAntInventory extends GuiContainer {
 			GL11.glPopMatrix();
 		}
 		
-		if(antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemSpade && antInventory.getStackInSlot(1) == null) {
+		if(antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() == Items.bone && antInventory.getStackInSlot(1) == null) {
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
