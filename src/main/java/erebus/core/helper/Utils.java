@@ -1,7 +1,9 @@
 package erebus.core.helper;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
@@ -97,6 +99,89 @@ public class Utils {
 		return (T) tile;
 	}
 
+	public static void dropStackNoRandom(World world, int x, int y, int z, ItemStack stack) {
+		if (!world.isRemote && stack != null && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+			EntityItem entityItem = new EntityItem(world, x + 0.5, y, z + 0.5, stack);
+			entityItem.motionX = 0;
+			entityItem.motionY = 0;
+			entityItem.motionZ = 0;
+			entityItem.delayBeforeCanPickup = 10;
+			world.spawnEntityInWorld(entityItem);
+		}
+	}
+
+	public static int[] getSlotsFromSide(IInventory iinventory, int side) {
+		if (iinventory == null)
+			return null;
+
+		if (iinventory instanceof ISidedInventory)
+			return ((ISidedInventory) iinventory).getAccessibleSlotsFromSide(side);
+		else {
+			int[] slots = new int[iinventory.getSizeInventory()];
+			for (int i = 0; i < slots.length; i++)
+				slots[i] = i;
+			return slots;
+		}
+	}
+
+	/**
+	 * Extracts 1 item from the first found stack
+	 *
+	 * @param iinventory
+	 * @param side
+	 * @param maxStackSize
+	 * @return extracted stack
+	 */
+	public static ItemStack extractFromInventory(IInventory iinventory, int side) {
+		return extractFromInventory(iinventory, side, 1);
+	}
+
+	/**
+	 * Extracts a stack with size the same or smaller of @param maxStackSize
+	 *
+	 * @param iinventory
+	 * @param side
+	 * @param maxStackSize
+	 * @return extracted stack
+	 */
+	public static ItemStack extractFromInventory(IInventory iinventory, int side, int maxStackSize) {
+		IInventory invt = getInventory(iinventory);
+		return extractFromSlots(invt, side, maxStackSize, getSlotsFromSide(invt, side));
+	}
+
+	private static ItemStack extractFromSlots(IInventory iinventory, int side, int maxStackSize, int[] slots) {
+		for (int slot : slots) {
+			ItemStack invtStack = iinventory.getStackInSlot(slot);
+			if (invtStack != null)
+				if (iinventory instanceof ISidedInventory ? ((ISidedInventory) iinventory).canExtractItem(slot, invtStack, side) : true) {
+					ItemStack copy = invtStack.copy();
+					if (maxStackSize <= 0)
+						iinventory.setInventorySlotContents(slot, null);
+					else {
+						int amount = Math.min(maxStackSize, invtStack.stackSize);
+						invtStack.stackSize -= amount;
+						copy.stackSize = amount;
+						if (invtStack.stackSize <= 0)
+							iinventory.setInventorySlotContents(slot, null);
+					}
+					return copy;
+				}
+		}
+		return null;
+	}
+
+	public static boolean addEntitytoInventory(IInventory iinventory, EntityItem entity) {
+		if (entity == null)
+			return false;
+
+		boolean flag = addItemStackToInventory(iinventory, entity.getEntityItem());
+		if (flag)
+			entity.setDead();
+		else if (entity.getEntityItem().stackSize <= 0)
+			entity.setDead();
+		return flag;
+	}
+
 	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack) {
 		return addItemStackToInventory(iinventory, stack, 0);
 	}
@@ -140,6 +225,48 @@ public class Utils {
 		return false;
 	}
 
+	public static boolean areStacksSameOre(ItemStack stack1, ItemStack stack2) {
+		if (stack1 == null || stack2 == null)
+			return false;
+		if (areStacksTheSame(stack1, stack2, false))
+			return true;
+
+		List<String> ores1 = getOreNames(stack1);
+		List<String> ores2 = getOreNames(stack2);
+
+		if (ores1.isEmpty() || ores2.isEmpty())
+			return false;
+		for (String ore2 : ores2)
+			if (ores1.contains(ore2))
+				return isIntercheageableOreName(ore2);
+		return false;
+	}
+
+	private static final String[] orePrefixes = new String[] { "dust", "ingot", "ore", "block", "gem", "nugget", "shard", "plate", "gear", "stickWood" };
+
+	private static boolean isIntercheageableOreName(String name) {
+		for (String prefix : orePrefixes)
+			if (name.startsWith(prefix))
+				return true;
+		return false;
+	}
+
+	public static List<String> getOreNames(ItemStack stack) {
+		List<String> list = new ArrayList<String>();
+		for (int id : OreDictionary.getOreIDs(stack))
+			list.add(OreDictionary.getOreName(id));
+
+		return list;
+	}
+
+	public static boolean isItemOre(ItemStack stack, String ore) {
+		int oreID = OreDictionary.getOreID(ore);
+		for (int id : OreDictionary.getOreIDs(stack))
+			if (id == oreID)
+				return true;
+		return false;
+	}
+
 	public static boolean areStacksTheSame(ItemStack stack1, ItemStack stack2, boolean matchSize) {
 		if (stack1 == null || stack2 == null)
 			return false;
@@ -156,20 +283,6 @@ public class Utils {
 
 	private static boolean isWildcard(int meta) {
 		return meta == OreDictionary.WILDCARD_VALUE;
-	}
-
-	public static int[] getSlotsFromSide(IInventory iinventory, int side) {
-		if (iinventory == null)
-			return null;
-
-		if (iinventory instanceof ISidedInventory)
-			return ((ISidedInventory) iinventory).getAccessibleSlotsFromSide(side);
-		else {
-			int[] slots = new int[iinventory.getSizeInventory()];
-			for (int i = 0; i < slots.length; i++)
-				slots[i] = i;
-			return slots;
-		}
 	}
 
 	public static IInventory getInventory(IInventory inventory) {
@@ -191,6 +304,76 @@ public class Utils {
 				return new InventoryLargeChest("", inventory, adjacent);
 		}
 		return inventory;
+	}
+
+	public static void dropInventoryContents(TileEntity tile) {
+		if (tile == null || !(tile instanceof IInventory))
+			return;
+		IInventory iinventory = (IInventory) tile;
+		for (int i = 0; i < iinventory.getSizeInventory(); i++) {
+			ItemStack stack = iinventory.getStackInSlot(i);
+			if (stack != null && stack.getItem() != null && stack.stackSize > 0) {
+				dropStack(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord, stack.copy());
+				iinventory.setInventorySlotContents(i, null);
+			}
+		}
+		tile.markDirty();
+	}
+
+	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize) {
+		return inventoryContains(iinventory, stack, ignoreSize, getSlotsFromSide(iinventory, 0));
+	}
+
+	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize, int... slots) {
+		if (stack == null)
+			return false;
+		iinventory = getInventory(iinventory);
+
+		int totalSize = 0;
+		for (int slot : slots) {
+			ItemStack invtStack = iinventory.getStackInSlot(slot);
+			if (areStacksTheSame(invtStack, stack, false)) {
+				if (ignoreSize)
+					return true;
+				totalSize += invtStack.stackSize;
+			}
+			if (totalSize >= stack.stackSize)
+				return true;
+		}
+
+		return false;
+	}
+
+	public static boolean deleteFromInventory(IInventory iinventory, int side, ItemStack stack) {
+		return deleteFromSlots(iinventory, stack, getSlotsFromSide(iinventory, side));
+	}
+
+	public static boolean deleteFromSlots(IInventory iinventory, ItemStack stack, int... slots) {
+		iinventory = getInventory(iinventory);
+
+		if (!inventoryContains(iinventory, stack, false))
+			return false;
+		int totalDel = 0;
+		for (int slot : slots) {
+			ItemStack invtStack = iinventory.getStackInSlot(slot);
+			if (areStacksTheSame(invtStack, stack, false) || areStacksSameOre(invtStack, stack))
+				if (invtStack.stackSize >= stack.stackSize) {
+					invtStack.stackSize -= stack.stackSize;
+					if (invtStack.stackSize <= 0)
+						iinventory.setInventorySlotContents(slot, getContainer(stack));
+					return true;
+				} else {
+					totalDel += invtStack.stackSize;
+					iinventory.setInventorySlotContents(slot, getContainer(stack));
+				}
+			if (totalDel == stack.stackSize)
+				return true;
+		}
+		return false;
+	}
+
+	public static ItemStack getContainer(ItemStack stack) {
+		return stack.getItem().hasContainerItem(stack) ? stack.getItem().getContainerItem(stack) : null;
 	}
 
 	public static final LinkedHashMap<Short, Short> getEnchantments(ItemStack stack) {
