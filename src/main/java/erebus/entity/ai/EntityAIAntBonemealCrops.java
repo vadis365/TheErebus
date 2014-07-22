@@ -31,7 +31,7 @@ public class EntityAIAntBonemealCrops extends EntityAIEatBlock {
 
 	@Override
 	public boolean continueExecuting() {
-		return !blackAnt.canCollectFromSilo;
+		return !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty();
 	}
 
 	@Override

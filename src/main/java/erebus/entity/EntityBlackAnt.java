@@ -46,7 +46,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	public boolean canPickupItems;
 	public boolean canCollectFromSilo;
 	public boolean canAddToSilo;
-	public boolean canBonemeal;
 
 	protected ItemStack[] inventory;
 	public static final int TOOL_SLOT = 0;
@@ -60,7 +59,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		canPickupItems = false;
 		canAddToSilo = false;
 		canCollectFromSilo = false;
-		canBonemeal = false;
 		setSize(0.9F, 0.4F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -242,19 +240,40 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (canCollectFromSilo) {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
-			ItemStack stack = new ItemStack(Items.wheat_seeds, 64, 0);//test stack
 			if (block == Blocks.chest) {
 				if (getDistance(getDropPointX() + 0.5D, getDropPointY(), getDropPointZ() + 0.5D) < 1.5D) {
-					if(canBonemeal)
-						stack = new ItemStack(Items.dye, 64, 15);
-					//TODO add stack from chest inventory matching filter slot to ant inventory slot
-					addToInventory(stack);//test stack
+					getStackFromSilo();
 					canCollectFromSilo = false;
 				}
 			}
 		}
 	}
 	
+	private void getStackFromSilo() {
+		if (worldObj.isRemote)
+			return;
+		IInventory siloTile = (IInventory) worldObj.getTileEntity(getDropPointX(), getDropPointY(), getDropPointZ());
+		ItemStack[] siloInventory = new ItemStack[siloTile.getSizeInventory()];
+		for (int i = 0; i < siloInventory.length; i++) {
+			if (siloTile.getStackInSlot(i) != null) {
+				if(siloTile.getStackInSlot(i).getItem() == getStackInSlot(CROP_ID_SLOT).getItem() && siloTile.getStackInSlot(i).getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
+					if(isAntInvSlotEmpty()) {
+						setInventorySlotContents(INVENTORY_SLOT, new ItemStack(siloTile.getStackInSlot(i).getItem(), getStackInSlot(CROP_ID_SLOT).stackSize + 1, siloTile.getStackInSlot(i).getItemDamage()));
+						siloTile.decrStackSize(i, 1);
+					}
+					if(getStackInSlot(INVENTORY_SLOT).stackSize < getInventoryStackLimit()) {
+						if(siloTile.getStackInSlot(i) != null) {
+							int collectStackSize = siloTile.getStackInSlot(i).stackSize;
+							setInventorySlotContents(INVENTORY_SLOT, new ItemStack(siloTile.getStackInSlot(i).getItem(), collectStackSize, siloTile.getStackInSlot(i).getItemDamage()));
+							siloTile.decrStackSize(i, collectStackSize);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	private void addToInventory(ItemStack stack) {
 		if (stack == null)
 			return;
@@ -439,7 +458,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		canPickupItems = false;
 		canAddToSilo = false;
 		canCollectFromSilo = false;
-		canBonemeal = false;
 		tasks.removeTask(aiWander);
 		tasks.removeTask(aiPlantCrops);
 		tasks.removeTask(aiHarvestCrops);
@@ -464,7 +482,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			tasks.addTask(1, aiHarvestCrops);
 
 		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.bone && !isFilterSlotEmpty()) {
-			canBonemeal = true;
 			tasks.addTask(1, aiBonemealCrops);
 		}
 		updateAITasks();

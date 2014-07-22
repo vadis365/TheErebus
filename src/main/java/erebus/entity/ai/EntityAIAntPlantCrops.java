@@ -27,6 +27,11 @@ public class EntityAIAntPlantCrops extends EntityAIEatBlock {
 	public boolean shouldExecute() {
 		return blackAnt.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing") && !blackAnt.canCollectFromSilo;
 	}
+	
+	@Override
+	public boolean continueExecuting() {
+		return !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty();
+	}
 
 	@Override
 	protected boolean canEatBlock(Block block, int blockMeta) {
