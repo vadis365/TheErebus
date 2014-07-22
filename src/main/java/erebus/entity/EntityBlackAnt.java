@@ -258,16 +258,10 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			if (siloTile.getStackInSlot(i) != null) {
 				if(siloTile.getStackInSlot(i).getItem() == getStackInSlot(CROP_ID_SLOT).getItem() && siloTile.getStackInSlot(i).getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
 					if(isAntInvSlotEmpty()) {
-						setInventorySlotContents(INVENTORY_SLOT, new ItemStack(siloTile.getStackInSlot(i).getItem(), getStackInSlot(CROP_ID_SLOT).stackSize + 1, siloTile.getStackInSlot(i).getItemDamage()));
-						siloTile.decrStackSize(i, 1);
-					}
-					if(getStackInSlot(INVENTORY_SLOT).stackSize < getInventoryStackLimit()) {
-						if(siloTile.getStackInSlot(i) != null) {
-							int collectStackSize = siloTile.getStackInSlot(i).stackSize;
-							setInventorySlotContents(INVENTORY_SLOT, new ItemStack(siloTile.getStackInSlot(i).getItem(), collectStackSize, siloTile.getStackInSlot(i).getItemDamage()));
-							siloTile.decrStackSize(i, collectStackSize);
-							return;
-						}
+						int collectStackSize = siloTile.getStackInSlot(i).stackSize;
+						setInventorySlotContents(INVENTORY_SLOT, new ItemStack(siloTile.getStackInSlot(i).getItem(), collectStackSize, siloTile.getStackInSlot(i).getItemDamage()));
+						siloTile.decrStackSize(i, collectStackSize);
+						return;
 					}
 				}
 			}
