@@ -7,15 +7,15 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import erebus.client.model.entity.ModelFireAnt;
+import erebus.client.model.entity.ModelBlackAnt;
 import erebus.entity.EntityBlackAnt;
 
 public class RenderBlackAnt extends RenderLiving {
 
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackAnt.png");
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/blackAntKitBone.png"), new ResourceLocation("erebus:textures/entity/blackAntKitPlant.png") };
 
 	public RenderBlackAnt() {
-		super(new ModelFireAnt(), 1.0F);
+		super(new ModelBlackAnt(), 1.0F);
 	}
 
 	@Override
@@ -43,6 +43,10 @@ public class RenderBlackAnt extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+		EntityBlackAnt ant = (EntityBlackAnt) entity;
+		if (ant.getSkin() > 0)
+			return textures[1];
+		else
+			return textures[0];
 	}
 }

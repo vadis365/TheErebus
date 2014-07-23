@@ -460,23 +460,32 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@Override
 	public void closeInventory() {
-		if (worldObj.isRemote)
+		if (worldObj.isRemote) 
 			return;
 
-		if (isTaskSlotEmpty())
+		if (isTaskSlotEmpty()) {
 			tasks.addTask(1, aiWander);
+			dataWatcher.updateObject(16, Byte.valueOf((byte) 1));
+		}
 
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe && !isFilterSlotEmpty())
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe && !isFilterSlotEmpty()) {
 			tasks.addTask(1, aiPlantCrops);
+			dataWatcher.updateObject(16, Byte.valueOf((byte) 2));
+		}
 
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemBucket && !isFilterSlotEmpty())
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemBucket && !isFilterSlotEmpty()) {
 			canPickupItems = true;
-
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemShears)
+			dataWatcher.updateObject(16, Byte.valueOf((byte) 3));
+		}
+		
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemShears) {
 			tasks.addTask(1, aiHarvestCrops);
+			dataWatcher.updateObject(16, Byte.valueOf((byte) 4));
+		}
 
 		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.bone && !isFilterSlotEmpty()) {
 			tasks.addTask(1, aiBonemealCrops);
+			dataWatcher.updateObject(16, Byte.valueOf((byte) 5));
 		}
 		updateAITasks();
 	}
@@ -535,5 +544,11 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
 		return false;
+	}
+
+	public int getSkin() {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe)
+			return 1;
+		return 0;
 	}
 }
