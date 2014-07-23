@@ -26,7 +26,7 @@ public class EntityAIAntBonemealCrops extends EntityAIEatBlock {
 
 	@Override
 	public boolean shouldExecute() {
-		return blackAnt.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing") && !blackAnt.canCollectFromSilo;
+		return !blackAnt.canCollectFromSilo;
 	}
 
 	@Override

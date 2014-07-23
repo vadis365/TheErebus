@@ -12,7 +12,7 @@ import erebus.entity.EntityBlackAnt;
 
 public class RenderBlackAnt extends RenderLiving {
 
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/blackAntKitBone.png"), new ResourceLocation("erebus:textures/entity/blackAntKitPlant.png") };
+	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackAntKit.png");
 
 	public RenderBlackAnt() {
 		super(new ModelBlackAnt(), 1.0F);
@@ -43,10 +43,6 @@ public class RenderBlackAnt extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityBlackAnt ant = (EntityBlackAnt) entity;
-		if (ant.getSkin() > 0)
-			return textures[1];
-		else
-			return textures[0];
+			return texture;
 	}
 }

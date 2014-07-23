@@ -15,7 +15,7 @@ import erebus.entity.EntityAntlion;
 @SideOnly(Side.CLIENT)
 public class RenderAntlion extends RenderLiving {
 
-	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/antlion.png");;
+	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/antlion.png");
 
 	public RenderAntlion(ModelAntlion model, float shadowSize) {
 		super(model, shadowSize);

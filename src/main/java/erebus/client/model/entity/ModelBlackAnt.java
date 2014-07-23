@@ -4,6 +4,9 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityBlackAnt;
@@ -60,6 +63,18 @@ public class ModelBlackAnt extends ModelBase {
 	    ModelRenderer RightPack;
 	    ModelRenderer RightShears;
 	    ModelRenderer LeftShears;
+	    ModelRenderer HatTop;
+	    ModelRenderer HatBrimF;
+	    ModelRenderer HatBrimL;
+	    ModelRenderer HatBrimMain;
+	    ModelRenderer HatBrimR;
+	    ModelRenderer MachineThorax;
+	    ModelRenderer ConduitR;
+	    ModelRenderer ConduitL;
+	    ModelRenderer SprayL;
+	    ModelRenderer SpayR;
+	    ModelRenderer SprayLConduit;
+	    ModelRenderer SprayRConduit;
 
 	public ModelBlackAnt() {
 		textureWidth = 64;
@@ -76,7 +91,7 @@ public class ModelBlackAnt extends ModelBase {
 	      ThxS.addBox(-4.5F, -2.5F, 1F, 9, 5, 7);
 	      ThxS.setRotationPoint(0F, 17F, -8F);
 	      setRotation(ThxS, 0F, 0F, 0F);
-	      Thx2Ab = new ModelRenderer(this, 27, 52);
+	      Thx2Ab = new ModelRenderer(this, 39, 55);
 	      Thx2Ab.addBox(-1.5F, -1.5F, 0F, 3, 3, 1);
 	      Thx2Ab.setRotationPoint(0F, 17F, 1F);
 	      setRotation(Thx2Ab, 0F, 0F, 0F);
@@ -84,15 +99,15 @@ public class ModelBlackAnt extends ModelBase {
 	      Ab.addBox(-5.5F, -4.5F, 0F, 11, 9, 12);
 	      Ab.setRotationPoint(0F, 17F, 3F);
 	      setRotation(Ab, 0F, 0F, 0F);
-	      AbF = new ModelRenderer(this, 23, 57);
+	      AbF = new ModelRenderer(this, 0, 62);
 	      AbF.addBox(-3.5F, -3.5F, -1F, 7, 7, 1);
 	      AbF.setRotationPoint(0F, 17F, 3F);
 	      setRotation(AbF, 0F, 0F, 0F);
-	      AbSide = new ModelRenderer(this, 10, 66);
+	      AbSide = new ModelRenderer(this, 19, 63);
 	      AbSide.addBox(-6.5F, -2.5F, 2F, 13, 5, 8);
 	      AbSide.setRotationPoint(0F, 17F, 3F);
 	      setRotation(AbSide, 0F, 0F, 0F);
-	      AbTop = new ModelRenderer(this, 15, 80);
+	      AbTop = new ModelRenderer(this, 12, 80);
 	      AbTop.addBox(-4F, -5.5F, 2F, 8, 11, 8);
 	      AbTop.setRotationPoint(0F, 17F, 3F);
 	      setRotation(AbTop, 0F, 0F, 0F);
@@ -123,7 +138,7 @@ public class ModelBlackAnt extends ModelBase {
 	      LMandible2 = new ModelRenderer(this, 47, 9);
 	      LMandible2.addBox(1F, 5.5F, -3F, 1, 4, 1);
 	      setRotation(LMandible2, 0F, 0F, 0F);
-	      Eyes = new ModelRenderer(this, 0, 30);
+	      Eyes = new ModelRenderer(this, 0, 35);
 	      Eyes.addBox(-4F, 1.5F, -3F, 8, 2, 2);
 	      setRotation(Eyes, 0F, 0F, 0F);
 	      AntLS = new ModelRenderer(this, 42, 6);
@@ -236,7 +251,55 @@ public class ModelBlackAnt extends ModelBase {
 	      LeftShears.addBox(0.5F, -3F, -10.5F, 3, 2, 5);
 	      LeftShears.setRotationPoint(0F, 17F, -10F);
 	      setRotation(LeftShears, 0.8726646F, 0F, 0F);
-	    
+	      HatTop = new ModelRenderer(this, 44, 77);
+	      HatTop.addBox(-2.5F, -4F, -5F, 5, 2, 5);
+	      HatTop.setRotationPoint(0F, 17F, -9F);
+	      setRotation(HatTop, -0.4363323F, 0F, 0F);
+	      HatBrimF = new ModelRenderer(this, 0, 40);
+	      HatBrimF.addBox(-3F, -2F, -8F, 6, 1, 1);
+	      HatBrimF.setRotationPoint(0F, 17F, -9F);
+	      setRotation(HatBrimF, -0.4363323F, 0F, 0F);
+	      HatBrimL = new ModelRenderer(this, 0, 27);
+	      HatBrimL.addBox(4F, -2F, -6F, 1, 1, 6);
+	      HatBrimL.setRotationPoint(0F, 17F, -9F);
+	      setRotation(HatBrimL, -0.4363323F, 0F, 0F);
+	      HatBrimMain = new ModelRenderer(this, 0, 52);
+	      HatBrimMain.addBox(-4F, -2F, -7F, 8, 1, 8);
+	      HatBrimMain.setRotationPoint(0F, 17F, -9F);
+	      setRotation(HatBrimMain, -0.4363323F, 0F, 0F);
+	      HatBrimR = new ModelRenderer(this, 0, 27);
+	      HatBrimR.addBox(-5F, -2F, -6F, 1, 1, 6);
+	      HatBrimR.setRotationPoint(0F, 17F, -9F);
+	      setRotation(HatBrimR, -0.4363323F, 0F, 0F);
+	      MachineThorax = new ModelRenderer(this, 44, 85);
+	      MachineThorax.addBox(-2.5F, -1.5F, -14F, 5, 3, 5);
+	      MachineThorax.setRotationPoint(0F, 11F, 8F);
+	      setRotation(MachineThorax, 0F, 0F, 0F);
+	      ConduitR = new ModelRenderer(this, 18, 77);
+	      ConduitR.addBox(-1F, -0.5F, -5.5F, 9, 1, 1);
+	      ConduitR.setRotationPoint(0F, 11F, 8F);
+	      setRotation(ConduitR, 0F, 1.047198F, 0F);
+	      ConduitL = new ModelRenderer(this, 18, 77);
+	      ConduitL.addBox(-8F, -0.5F, -5.5F, 9, 1, 1);
+	      ConduitL.setRotationPoint(0F, 11F, 8F);
+	      setRotation(ConduitL, 0F, -1.064651F, 0F);
+	      SprayL = new ModelRenderer(this, 0, 19);
+	      SprayL.addBox(11F, 3.5F, -1F, 2, 2, 2);
+	      SprayL.setRotationPoint(0F, 11F, 8F);
+	      setRotation(SprayL, 0F, 0F, 0F);
+	      SpayR = new ModelRenderer(this, 0, 19);
+	      SpayR.addBox(-13F, 3.5F, -1F, 2, 2, 2);
+	      SpayR.setRotationPoint(0F, 11F, 8F);
+	      setRotation(SpayR, 0F, 0F, 0F);
+	      SprayLConduit = new ModelRenderer(this, 0, 24);
+	      SprayLConduit.addBox(8F, 3.5F, -0.5F, 3, 1, 1);
+	      SprayLConduit.setRotationPoint(0F, 11F, 8F);
+	      setRotation(SprayLConduit, 0F, 0F, 0F);
+	      SprayRConduit = new ModelRenderer(this, 0, 24);
+	      SprayRConduit.addBox(-11F, 3.5F, -0.5F, 3, 1, 1);
+	      SprayRConduit.setRotationPoint(0F, 11F, 8F);
+	      setRotation(SprayRConduit, 0F, 0F, 0F);
+
 	      RFL1.addChild(RFL2);
 	      RFL1.addChild(RFL3);
 	      RFL1.addChild(RFL4);
@@ -311,8 +374,31 @@ public class ModelBlackAnt extends ModelBase {
 			LeftShears.render(unitPixel);
 		}
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 2)|| ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 5)) {
-			//TODO Add Planter and bonemeal model bits
+		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 2)) {
+			LeftPack.render(unitPixel);
+			StrapPack.render(unitPixel);
+			RightPack.render(unitPixel);
+			GL11.glPushMatrix();
+			GL11.glTranslated(0F, -0.0625F, 0.0625F);
+			HatTop.render(unitPixel);
+			HatBrimF.render(unitPixel);
+			HatBrimL.render(unitPixel);
+			HatBrimMain.render(unitPixel);
+			HatBrimR.render(unitPixel);
+			GL11.glPopMatrix();
+			}
+		
+		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 5)) {
+			LeftPack.render(unitPixel);
+			StrapPack.render(unitPixel);
+			RightPack.render(unitPixel);
+			MachineThorax.render(unitPixel);
+			ConduitR.render(unitPixel);
+			ConduitL.render(unitPixel);
+			SprayL.render(unitPixel);
+			SpayR.render(unitPixel);
+			SprayLConduit.render(unitPixel);
+			SprayRConduit.render(unitPixel);
 			}
 	
 	}
@@ -330,18 +416,24 @@ public class ModelBlackAnt extends ModelBase {
 		RightShears.rotateAngleY = LeftShears.rotateAngleY = Head1.rotateAngleY;
 		RightShears.rotateAngleX = LeftShears.rotateAngleX = Head1.rotateAngleX + 1.64F;
 		
-		float stuff = MathHelper.cos(limbSwing * 1.5F) * 0.8F * prevLimbSwing;
+		HatTop.rotateAngleY = 
+		HatBrimF.rotateAngleY = 
+		HatBrimL.rotateAngleY = 
+		HatBrimMain.rotateAngleY = 
+		HatBrimR.rotateAngleY = Head1.rotateAngleY;
 		
+		HatTop.rotateAngleX = 
+		HatBrimF.rotateAngleX = 
+		HatBrimL.rotateAngleX = 
+		HatBrimMain.rotateAngleX = 
+		HatBrimR.rotateAngleX = Head1.rotateAngleX + 0.5F;
+		
+		float stuff = MathHelper.cos(limbSwing * 1.5F) * 0.8F * prevLimbSwing;
 		LBL1.rotateAngleX = stuff;
-
 		LML1.rotateAngleX = -stuff;
-
 		LFL1.rotateAngleX = stuff;
-
 		RBL1.rotateAngleX = stuff;
-
 		RML1.rotateAngleX = -stuff;
-
 		RFL1.rotateAngleX = stuff;
 		
 	}

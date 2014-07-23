@@ -25,7 +25,7 @@ public class EntityAIAntPlantCrops extends EntityAIEatBlock {
 
 	@Override
 	public boolean shouldExecute() {
-		return blackAnt.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing") && !blackAnt.canCollectFromSilo;
+		return !blackAnt.canCollectFromSilo;
 	}
 	
 	@Override
@@ -54,8 +54,7 @@ public class EntityAIAntPlantCrops extends EntityAIEatBlock {
 
 	@Override
 	protected void moveToLocation() {
-		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY + 1, cropZ, 16.0F, true, false, false, true);
-		
+		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY + 1, cropZ, 16.0F, true, false, false, true);	
 		if (pathentity != null) {
 			blackAnt.setPathToEntity(pathentity);
 			blackAnt.getNavigator().setPath(pathentity, 0.5D);

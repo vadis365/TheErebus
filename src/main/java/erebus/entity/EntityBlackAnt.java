@@ -546,9 +546,4 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		return false;
 	}
 
-	public int getSkin() {
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe)
-			return 1;
-		return 0;
-	}
 }
