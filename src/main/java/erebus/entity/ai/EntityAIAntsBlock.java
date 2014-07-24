@@ -11,8 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import erebus.core.helper.Spiral;
 import erebus.core.helper.Utils;
+import erebus.entity.EntityBlackAnt;
 
-public abstract class EntityAIEatBlock extends EntityAIBase {
+public abstract class EntityAIAntsBlock extends EntityAIBase {
 
 	/**
 	 * The bigger you make this value the faster the AI will be. But performance
@@ -32,9 +33,9 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	public int cropZ;
 	private int spiralIndex;
 	private int eatTicks;
-	private static final List<Point> spiral = new Spiral(16, 16).spiral();
+	private static final List<Point> spiral = new Spiral(8, 8).spiral();
 
-	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed) {
+	public EntityAIAntsBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed) {
 		this.entity = entity;
 		this.maxGrowthMetadata = maxGrowthMetadata;
 		this.block = block;
@@ -44,7 +45,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 		EAT_SPEED = eatSpeed * 20;
 	}
 
-	public EntityAIEatBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float moveSpeed, int eatSpeed) {
+	public EntityAIAntsBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float moveSpeed, int eatSpeed) {
 		this(entity, block, maxGrowthMetadata, null, moveSpeed, eatSpeed);
 	}
 
@@ -60,20 +61,21 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	@Override
 	public void updateTask() {
+		EntityBlackAnt blackAnt =  (EntityBlackAnt) entity;
 		if (!continueExecuting()) {
 			return;
 		}
 
-		int xCoord = (int) entity.posX;
-		int yCoord = (int) entity.posY;
-		int zCoord = (int) entity.posZ;
+		int xCoord = (int) blackAnt.getDropPointX();
+		int yCoord = (int) blackAnt.getDropPointY();
+		int zCoord = (int) blackAnt.getDropPointZ();
 
 		for (int i = 0; i < CHECKS_PER_TICK; i++)
 			if (!hasTarget) {
 				increment();
 
 				Point p = getNextPoint();
-				for (int y = -2; y < 2; y++)
+				for (int y = -1; y < 2; y++)
 					if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 						cropX = xCoord + p.x;
 						cropY = yCoord + y;
@@ -89,11 +91,9 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 				if (flag) {
 					prepareToEat();
 					eatTicks++;
-					entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), cropX, cropY, cropZ, getScaledEatTicks());
 					if (!canEatBlock(entity.worldObj.getBlock(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
 						hasTarget = false;
 					else if (EAT_SPEED <= eatTicks) {
-							entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
 						if (seed != null)
 							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
 						hasTarget = false;
@@ -107,6 +107,11 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 					eatTicks = 0;
 				}
 			}
+	}
+
+	private EntityBlackAnt entity(EntityBlackAnt blackAnt) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private int getScaledEatTicks() {

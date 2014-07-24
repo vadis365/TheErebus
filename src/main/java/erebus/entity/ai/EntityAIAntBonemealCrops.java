@@ -12,7 +12,7 @@ import net.minecraft.pathfinding.PathEntity;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackAnt;
 
-public class EntityAIAntBonemealCrops extends EntityAIEatBlock {
+public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 
 	EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 	public static final int CROP_ID_SLOT = 1;

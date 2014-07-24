@@ -197,7 +197,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				int metadata = stack.getItemDamage();
 				if (metadata == getFilterSlotStack().getItemDamage()) {
 					float distance = entityitem.getDistanceToEntity(this);
-					if (distance >= 1.5F && entityitem.delayBeforeCanPickup <= 0 && !entityitem.isDead) {
+					if (distance >= 2F && entityitem.delayBeforeCanPickup <= 0 && !entityitem.isDead) {
 						double x = entityitem.posX;
 						double y = entityitem.posY;
 						double z = entityitem.posZ;
@@ -205,7 +205,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 						moveToItem(entityitem);
 						return;
 					}
-					if (distance < 1.5F && entityitem != null) {
+					if (distance < 2F && entityitem != null) {
 						getMoveHelper().setMoveTo(entityitem.posX, entityitem.posY,entityitem.posZ, 0.5D);
 						addToInventory(new ItemStack(stack.getItem(), stack.stackSize, metadata));
 						entityitem.setDead();

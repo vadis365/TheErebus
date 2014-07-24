@@ -8,7 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathEntity;
 import erebus.entity.EntityBlackAnt;
 
-public class EntityAIAntHarvestCrops extends EntityAIEatBlock {
+public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
 	
 	EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 	private final double moveSpeed;
