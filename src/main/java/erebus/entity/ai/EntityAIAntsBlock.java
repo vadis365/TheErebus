@@ -109,11 +109,6 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 			}
 	}
 
-	private EntityBlackAnt entity(EntityBlackAnt blackAnt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	private int getScaledEatTicks() {
 		return (int) ((float) eatTicks / (float) EAT_SPEED * 10.0F);
 	}
