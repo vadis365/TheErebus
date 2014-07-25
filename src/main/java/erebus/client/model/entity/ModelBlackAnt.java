@@ -267,7 +267,7 @@ public class ModelBlackAnt extends ModelBase {
 	      HatBrimMain.addBox(-4F, -2F, -7F, 8, 1, 8);
 	      HatBrimMain.setRotationPoint(0F, 17F, -9F);
 	      setRotation(HatBrimMain, -0.4363323F, 0F, 0F);
-	      HatBrimR = new ModelRenderer(this, 0, 27);
+	      HatBrimR = new ModelRenderer(this, 0, 43);
 	      HatBrimR.addBox(-5F, -2F, -6F, 1, 1, 6);
 	      HatBrimR.setRotationPoint(0F, 17F, -9F);
 	      setRotation(HatBrimR, -0.4363323F, 0F, 0F);
