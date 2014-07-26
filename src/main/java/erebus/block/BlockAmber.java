@@ -81,10 +81,14 @@ public class BlockAmber extends Block implements ISubBlocksBlock {
 
 			if (side == 0 || side == 1)
 				nearby = new boolean[] { isGlass(world, x - 1, y, z), isGlass(world, x + 1, y, z), isGlass(world, x, y, z - 1), isGlass(world, x, y, z + 1), isGlass(world, x - 1, y, z - 1), isGlass(world, x - 1, y, z + 1), isGlass(world, x + 1, y, z - 1), isGlass(world, x + 1, y, z + 1) };
-			else if (side == 2 || side == 3)
+			else if (side == 2)
+				nearby = new boolean[] { isGlass(world, x + 1, y, z), isGlass(world, x - 1, y, z), isGlass(world, x, y + 1, z), isGlass(world, x, y - 1, z), isGlass(world, x + 1, y + 1, z), isGlass(world, x + 1, y - 1, z), isGlass(world, x - 1, y + 1, z), isGlass(world, x - 1, y - 1, z) };
+			else if (side == 3)
 				nearby = new boolean[] { isGlass(world, x - 1, y, z), isGlass(world, x + 1, y, z), isGlass(world, x, y + 1, z), isGlass(world, x, y - 1, z), isGlass(world, x - 1, y + 1, z), isGlass(world, x - 1, y - 1, z), isGlass(world, x + 1, y + 1, z), isGlass(world, x + 1, y - 1, z) };
-			else if (side == 4 || side == 5)
+			else if (side == 4)
 				nearby = new boolean[] { isGlass(world, x, y, z - 1), isGlass(world, x, y, z + 1), isGlass(world, x, y + 1, z), isGlass(world, x, y - 1, z), isGlass(world, x, y + 1, z - 1), isGlass(world, x, y - 1, z - 1), isGlass(world, x, y + 1, z + 1), isGlass(world, x, y - 1, z + 1) };
+			else if (side == 5)
+				nearby = new boolean[] { isGlass(world, x, y, z + 1), isGlass(world, x, y, z - 1), isGlass(world, x, y + 1, z), isGlass(world, x, y - 1, z), isGlass(world, x, y + 1, z + 1), isGlass(world, x, y - 1, z + 1), isGlass(world, x, y + 1, z - 1), isGlass(world, x, y - 1, z - 1) };
 			else
 				return glassAmber;
 
