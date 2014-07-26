@@ -468,7 +468,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (worldObj.isRemote) 
 			return;
 
-		if (isTaskSlotEmpty()) {
+		if (isTaskSlotEmpty() && isTamed()) {
 			tasks.addTask(1, aiWander);
 			dataWatcher.updateObject(16, Byte.valueOf((byte) 1));
 		}
