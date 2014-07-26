@@ -184,6 +184,11 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			closeInventory();
 			setAttributes = true;
 		}
+		
+		if (!worldObj.isRemote && isDead)
+			for (ItemStack is : inventory)
+				if (is != null)
+					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
 	}
 
 	@Override
