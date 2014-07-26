@@ -219,7 +219,7 @@ public class CommonProxy implements IGuiHandler {
 		else if (ID == GUI_ID_ANT_INVENTORY) {
 			Entity entity = world.getEntityByID(x);
 			if (entity != null && entity instanceof EntityBlackAnt)
-				return new GuiAntInventory(player.inventory, (EntityBlackAnt) entity);
+				return new GuiAntInventory(player.inventory, entity);
 		}
 
 		return null;

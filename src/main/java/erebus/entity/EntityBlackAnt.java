@@ -210,7 +210,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 						moveToItem(entityitem);
 						return;
 					}
-					if (distance < 2F && entityitem != null) {
+					if (distance < 2F) {
 						getMoveHelper().setMoveTo(entityitem.posX, entityitem.posY,entityitem.posZ, 0.5D);
 						addToInventory(new ItemStack(stack.getItem(), stack.stackSize, metadata));
 						entityitem.setDead();
