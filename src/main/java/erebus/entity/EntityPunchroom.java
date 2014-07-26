@@ -51,7 +51,7 @@ public class EntityPunchroom extends EntityMob {
 				float f1 = rand.nextFloat() * 0.5F + 0.5F;
 				float f2 = MathHelper.sin(f) * 0.5F * f1;
 				float f3 = MathHelper.cos(f) * 0.5F * f1;
-				worldObj.spawnParticle("cloud", posX + (double) f2, boundingBox.minY, posZ + (double) f3, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle("cloud", posX + f2, boundingBox.minY, posZ + f3, 0.0D, 0.0D, 0.0D);
 			}
 		} else if (!onGround && flag)
 			squishAmount = 1.0F;

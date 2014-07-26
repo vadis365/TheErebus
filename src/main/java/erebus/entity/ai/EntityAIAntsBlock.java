@@ -66,9 +66,9 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 			return;
 		}
 
-		int xCoord = (int) blackAnt.getDropPointX();
-		int yCoord = (int) blackAnt.getDropPointY();
-		int zCoord = (int) blackAnt.getDropPointZ();
+		int xCoord = blackAnt.getDropPointX();
+		int yCoord = blackAnt.getDropPointY();
+		int zCoord = blackAnt.getDropPointZ();
 
 		for (int i = 0; i < CHECKS_PER_TICK; i++)
 			if (!hasTarget) {
