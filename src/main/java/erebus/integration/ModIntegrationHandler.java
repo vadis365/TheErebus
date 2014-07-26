@@ -10,17 +10,21 @@ public class ModIntegrationHandler{
 		try {
 			IModIntegration obj = cls.newInstance();
 			if (Loader.isModLoaded(obj.getModId()))integratedMods.add(obj);
-		} catch (Throwable e) {
-			e.printStackTrace();
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
 	}
 	
 	public static void init(){
-		for(IModIntegration integration:integratedMods)integration.onInit();
+		try{
+			for(IModIntegration integration:integratedMods)integration.onInit();
+		}catch(Throwable t){}
 	}
 	
 	public static void postInit(){
-		for(IModIntegration integration:integratedMods)integration.onPostInit();
+		try{
+			for(IModIntegration integration:integratedMods)integration.onPostInit();
+		}catch(Throwable t){}
 	}
 	
 	static interface IModIntegration {

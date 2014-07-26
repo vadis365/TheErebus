@@ -52,22 +52,11 @@ public class BlockErebusPortal extends BlockBreakable {
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
 		if (world.isRemote)
 			return;
-		if (entity.ridingEntity == null && entity.riddenByEntity == null)
-			if (entity.timeUntilPortal <= 0) { // TODO readd animation and make sure the player has to get out of the portal, otherwise he gets tp'd again after the cooldown runs out
-				/*if (entity.dimension == ConfigHandler.erebusDimensionID)
-					if (entity instanceof EntityPlayerMP)
-						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) entity, 0, TeleporterErebus.TELEPORTER_TO_OVERWORLD);
-					else
-						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, 0, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(0), TeleporterErebus.TELEPORTER_TO_OVERWORLD);
-				else if (entity.dimension == 0)
-					if (entity instanceof EntityPlayerMP)
-						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) entity, ConfigHandler.erebusDimensionID, TeleporterErebus.TELEPORTER_TO_EREBUS);
-					else
-						MinecraftServer.getServer().getConfigurationManager().transferEntityToWorld(entity, ConfigHandler.erebusDimensionID, MinecraftServer.getServer().worldServerForDimension(entity.dimension), MinecraftServer.getServer().worldServerForDimension(ConfigHandler.erebusDimensionID), TeleporterErebus.TELEPORTER_TO_EREBUS);*/
-				//entity.travelToDimension(entity.dimension == ConfigHandler.erebusDimensionID ? 0 : ConfigHandler.erebusDimensionID);
-				if (entity.dimension == 0)TeleporterHandler.transferToErebus(entity);
-				else TeleporterHandler.transferToOverworld(entity);
-			}
+		
+		if (entity.ridingEntity == null && entity.riddenByEntity == null && entity.timeUntilPortal <= 0) {
+			if (entity.dimension == 0)TeleporterHandler.transferToErebus(entity);
+			else TeleporterHandler.transferToOverworld(entity);
+		}
 	}
 
 	@Override
