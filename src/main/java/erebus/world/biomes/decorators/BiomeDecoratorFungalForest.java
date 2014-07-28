@@ -9,7 +9,7 @@ import erebus.block.plants.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.plant.WorldGenBigMushroomErebusMany;
+import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenMossPatch;
 
 //@formatter:off
@@ -21,69 +21,21 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 	private final WorldGenFlowers genMushroomsRed = new WorldGenFlowers(Blocks.red_mushroom);
 	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(0);
 	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(1);
-	
+	private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 	
 	@Override
 	public void decorate(){
 		
-			for(attempt = 0; attempt < 256; attempt++){
-				xx = x+offsetXZ();
-				yy = rand.nextInt(128);
-				zz = z+offsetXZ();
+		for(attempt = 0; attempt < 256; attempt++){
+			xx = x+offsetXZ();
+			yy = rand.nextInt(128);
+			zz = z+offsetXZ();
 
-				if (world.getBlock(xx,yy-1,zz) == Blocks.grass && world.isAirBlock(xx,yy,zz))
-					world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall,rand.nextInt(5),2);
-			}
-		
-		for(int attempt=0; attempt<12; attempt++){
-			xx = x+offsetXZ();
-			yy=15+rand.nextInt(90);
-			zz = z+offsetXZ();
-			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlock(xx,yy-1,zz)==Blocks.grass){
-				new WorldGenBigMushroomErebusMany(0).generate(world,rand,xx,yy,zz);
-			}
-		}
-
-		for(int attempt=0; attempt<20; attempt++){
-			xx = x+offsetXZ();
-			yy=15+rand.nextInt(90);
-			zz = z+offsetXZ();
-			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlock(xx,yy-1,zz)==Blocks.grass){
-				new WorldGenBigMushroomErebusMany(1).generate(world,rand,xx,yy,zz);
-			}
+			if (world.getBlock(xx,yy-1,zz) == Blocks.grass && world.isAirBlock(xx,yy,zz))
+				world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall,rand.nextInt(5),2);
 		}
 		
-		for(int attempt=0; attempt<20; attempt++){
-			xx = x+offsetXZ();
-			yy=15+rand.nextInt(90);
-			zz = z+offsetXZ();
-			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlock(xx,yy-1,zz)==Blocks.grass){
-				new WorldGenBigMushroomErebusMany(2).generate(world,rand,xx,yy,zz);
-			}
-		}
-		
-		for(int attempt=0; attempt<20; attempt++){
-			xx = x+offsetXZ();
-			yy=15+rand.nextInt(90);
-			zz = z+offsetXZ();
-			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlock(xx,yy-1,zz)==Blocks.grass){
-				new WorldGenBigMushroomErebusMany(3).generate(world,rand,xx,yy,zz);
-			}
-		}
-		
-		for(int attempt=0; attempt<20; attempt++){
-			xx = x+offsetXZ();
-			yy=15+rand.nextInt(90);
-			zz = z+offsetXZ();
-			
-			if (world.isAirBlock(xx,yy,zz) && world.getBlock(xx,yy-1,zz)==Blocks.grass){
-				new WorldGenBigMushroomErebusMany(4).generate(world,rand,xx,yy,zz);
-			}
-		}
+		// TODO mushroom gen
 		
 		for(attempt = 0; attempt < 100; attempt++){
 			xx = x+offsetXZ();
