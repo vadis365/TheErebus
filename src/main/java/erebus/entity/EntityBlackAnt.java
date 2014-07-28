@@ -230,7 +230,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 			if (block == Blocks.chest)
-				if (getDistance(getDropPointX() + 0.5D, getDropPointY(), getDropPointZ() + 0.5D) < 1.5D) {
+				if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
 					addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 					canAddToSilo = false;
 					canPickupItems = true;
@@ -246,7 +246,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 			if (block == Blocks.chest) {
-				if (getDistance(getDropPointX() + 0.5D, getDropPointY(), getDropPointZ() + 0.5D) < 1.5D) {
+				if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
 					getStackFromSilo();
 					canCollectFromSilo = false;
 				}
@@ -320,7 +320,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	public void moveToSilo() {
-		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY() + 1, getDropPointZ(), 16.0F, true, false, false, true);
+		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY(), getDropPointZ(), 16.0F, true, false, false, true);
 		if (pathentity != null) {
 			setPathToEntity(pathentity);
 			getNavigator().setPath(pathentity, 0.5D);

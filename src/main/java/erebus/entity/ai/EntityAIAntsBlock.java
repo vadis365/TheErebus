@@ -75,7 +75,7 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 				increment();
 
 				Point p = getNextPoint();
-				for (int y = -1; y < 2; y++)
+				for (int y = -2; y < 1; y++)
 					if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 						cropX = xCoord + p.x;
 						cropY = yCoord + y;
