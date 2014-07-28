@@ -47,6 +47,7 @@ import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntityJarOHoney;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
+import erebus.tileentity.TileEntitySiloIntake;
 import erebus.tileentity.TileEntitySpawner;
 import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
@@ -95,6 +96,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityAltar.class, "altar");
 		registerTileEntity(TileEntityGlowGem.class, "glowGemBlock");
 		registerTileEntity(TileEntityHoneyComb.class, "honeyComb");
+		registerTileEntity(TileEntitySiloIntake.class, "siloIntake");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {

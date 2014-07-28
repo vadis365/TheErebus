@@ -1,0 +1,33 @@
+package erebus.client.render.tileentity;
+
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.client.model.block.ModelSiloIntake;
+import erebus.tileentity.TileEntitySiloIntake;
+
+@SideOnly(Side.CLIENT)
+public class TileEntitySiloIntakeRenderer extends TileEntitySpecialRenderer {
+
+	private final ModelSiloIntake ModelSiloIntake = new ModelSiloIntake();
+	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/siloIntake.png");
+
+	public void renderSiloIntake(TileEntitySiloIntake pole, float x, float y, float z) {
+		bindTexture(texture);
+		GL11.glPushMatrix();
+		GL11.glTranslated(x + 0.5D, y + 0.5F, z + 0.5D);
+		GL11.glScalef(1F, -1F, -1F);
+		ModelSiloIntake.renderModel();
+		GL11.glPopMatrix();
+	}
+
+	@Override
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation) {
+		renderSiloIntake((TileEntitySiloIntake) tile, (float) x, (float) y, (float) z);
+	}
+}

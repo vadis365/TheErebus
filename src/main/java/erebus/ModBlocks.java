@@ -39,6 +39,7 @@ import erebus.block.BlockPlanksErebus;
 import erebus.block.BlockPlantedGiantFlower;
 import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
+import erebus.block.BlockSiloIntake;
 import erebus.block.BlockSimple;
 import erebus.block.BlockSlabStone;
 import erebus.block.BlockSpiderSpawner;
@@ -124,7 +125,7 @@ public class ModBlocks {
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
 	public static Block velocityBlock, honeyCombBlock, doorAmber, erebusHoneyBlock, honeyTreat, mud, mudBricks, flowerPlanted, jarOHoney;
-	public static Block jadeBlock, altar, glowGemBlock, mucusBomb;
+	public static Block jadeBlock, altar, glowGemBlock, mucusBomb, siloIntake;
 
 	// STAIRS, SLABS, WALLS
 	public static Block[] umbercobbleStairs, stoneSlabs, gneissStairs;
@@ -239,7 +240,8 @@ public class ModBlocks {
 		altar = new BlockAltar().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.altar").setBlockTextureName("stone");
 		glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 		mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
-
+		siloIntake = new BlockSiloIntake().setHardness(1.5F).setBlockName("siloIntake").setBlockTextureName("erebus:siloIntake");
+		
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("umbercobbleStairs" + i);
@@ -272,7 +274,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
-		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb); // altar,
+		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
 		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wallErebus);
