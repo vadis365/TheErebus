@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockPetrifiedChest;
+import erebus.block.silo.TileEntitySiloTankPart;
 import erebus.client.gui.GuiAntInventory;
 import erebus.client.gui.GuiBambooCrate;
 import erebus.client.gui.GuiColossalCrate;
@@ -97,6 +98,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityGlowGem.class, "glowGemBlock");
 		registerTileEntity(TileEntityHoneyComb.class, "honeyComb");
 		registerTileEntity(TileEntitySiloIntake.class, "siloIntake");
+		registerTileEntity(TileEntitySiloTankPart.class, "siloTankPart");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {

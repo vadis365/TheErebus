@@ -93,6 +93,7 @@ import erebus.block.plants.BlockSmallPlants;
 import erebus.block.plants.BlockThorns;
 import erebus.block.plants.BlockTurnip;
 import erebus.block.silo.BlockSiloIntake;
+import erebus.block.silo.BlockSiloTankPart;
 import erebus.lib.EnumWood;
 
 public class ModBlocks {
@@ -241,7 +242,7 @@ public class ModBlocks {
 		glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 		mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 		siloIntake = new BlockSiloIntake().setHardness(1.5F).setBlockName("siloIntake").setBlockTextureName("erebus:siloIntake");
-		siloTankPart = new BlockSimple(Material.iron).setHardness(1.5F).setStepSound(Block.soundTypeMetal).setBlockName("siloTankPart").setBlockTextureName("erebus:siloTankPart");
+		siloTankPart = new BlockSiloTankPart(Material.iron).setHardness(1.5F).setStepSound(Block.soundTypeMetal).setBlockName("siloTankPart").setBlockTextureName("erebus:siloTankPart");
 		
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
