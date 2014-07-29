@@ -125,7 +125,7 @@ public class ModBlocks {
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
 	public static Block velocityBlock, honeyCombBlock, doorAmber, erebusHoneyBlock, honeyTreat, mud, mudBricks, flowerPlanted, jarOHoney;
-	public static Block jadeBlock, altar, glowGemBlock, mucusBomb, siloIntake;
+	public static Block jadeBlock, altar, glowGemBlock, mucusBomb, siloIntake, siloTankPart;
 
 	// STAIRS, SLABS, WALLS
 	public static Block[] umbercobbleStairs, stoneSlabs, gneissStairs;
@@ -241,6 +241,7 @@ public class ModBlocks {
 		glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 		mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 		siloIntake = new BlockSiloIntake().setHardness(1.5F).setBlockName("siloIntake").setBlockTextureName("erebus:siloIntake");
+		siloTankPart = new BlockSimple(Material.iron).setHardness(1.5F).setStepSound(Block.soundTypeMetal).setBlockName("siloTankPart").setBlockTextureName("erebus:siloTankPart");
 		
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -274,7 +275,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
-		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake); // altar,
+		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake, siloTankPart); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
 		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wallErebus);
