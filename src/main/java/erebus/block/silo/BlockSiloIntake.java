@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.silo;
 
 import java.util.Random;
 

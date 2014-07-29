@@ -39,7 +39,6 @@ import erebus.block.BlockPlanksErebus;
 import erebus.block.BlockPlantedGiantFlower;
 import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
-import erebus.block.BlockSiloIntake;
 import erebus.block.BlockSimple;
 import erebus.block.BlockSlabStone;
 import erebus.block.BlockSpiderSpawner;
@@ -93,6 +92,7 @@ import erebus.block.plants.BlockHangerPlants;
 import erebus.block.plants.BlockSmallPlants;
 import erebus.block.plants.BlockThorns;
 import erebus.block.plants.BlockTurnip;
+import erebus.block.silo.BlockSiloIntake;
 import erebus.lib.EnumWood;
 
 public class ModBlocks {
