@@ -15,15 +15,13 @@ public class TileEntitySiloTankPart extends TileEntity {
             if (hasMaster()) { 
                 if (isMaster()) {
                     // Put stuff you want the multiblock to do here!
-                	System.out.println("MasterBlock exists");
+                	//System.out.println("MasterBlock exists");
                 }
             } else {
                 // Constantly check if structure is formed until it is.
                 if (checkMultiBlockForm())
                     setupStructure();
             }
-            if (!checkMultiBlockForm())
-                reset();
         }
     }
     

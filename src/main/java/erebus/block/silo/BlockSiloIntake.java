@@ -39,14 +39,16 @@ public class BlockSiloIntake extends BlockContainer {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		Block block = world.getBlock(x, y +1, z);
-		if (block == null)
-			return false;
-		if (block == ModBlocks.reinExo)
-			return true;
-		if (block.isLeaves(world, x, y - 1, z) && !block.isOpaqueCube())
-			return false;
-		return block.getMaterial().blocksMovement();
+		return canBlockStay(world, x, y, z);
+	}
+
+	@Override
+	public boolean canBlockStay(World world, int x, int y, int z) {
+		return isValidBlock(world.getBlock(x, y + 1, z));
+	}
+	
+	private boolean isValidBlock(Block block) {
+		return block == ModBlocks.siloTankPart;
 	}
 
 	@Override

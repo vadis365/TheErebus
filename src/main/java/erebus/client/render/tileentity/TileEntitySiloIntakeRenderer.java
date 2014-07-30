@@ -20,7 +20,7 @@ public class TileEntitySiloIntakeRenderer extends TileEntitySpecialRenderer {
 	public void renderSiloIntake(TileEntitySiloIntake pole, float x, float y, float z) {
 		bindTexture(texture);
 		GL11.glPushMatrix();
-		GL11.glTranslated(x + 0.5D, y + 0.5F, z + 0.5D);
+		GL11.glTranslatef(x + 0.5F, y + 0.435F, z + 0.5F);
 		GL11.glScalef(1F, -1F, -1F);
 		ModelSiloIntake.renderModel();
 		GL11.glPopMatrix();
