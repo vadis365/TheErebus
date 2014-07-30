@@ -1,5 +1,6 @@
 package erebus.block.silo;
  
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
  
@@ -21,6 +22,8 @@ public class TileEntitySiloTankPart extends TileEntity {
                 if (checkMultiBlockForm())
                     setupStructure();
             }
+            if (!checkMultiBlockForm())
+                reset();
         }
     }
     
@@ -41,8 +44,31 @@ public class TileEntitySiloTankPart extends TileEntity {
                 				i++;
                 	}
                 }         // check if there are 26 blocks present ((3*3*3) - 1) and check that center block is empty
-        			return i > 25 && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord);
+        			return i == 26 && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord) && worldObj.getBlock(xCoord, yCoord-1, zCoord) instanceof BlockSiloIntake && checkSupports() && checkBase();
 		}
+    
+    public boolean checkSupports() {
+    	if( worldObj.getBlock(xCoord - 1, yCoord - 1, zCoord - 1) == Blocks.fence
+    	&& worldObj.getBlock(xCoord + 1, yCoord - 1, zCoord - 1) == Blocks.fence
+    	&& worldObj.getBlock(xCoord + 1, yCoord - 1, zCoord + 1) == Blocks.fence
+    	&& worldObj.getBlock(xCoord - 1, yCoord - 1, zCoord + 1) == Blocks.fence
+    	&& worldObj.getBlock(xCoord - 1, yCoord - 2, zCoord - 1) == Blocks.fence
+    	&& worldObj.getBlock(xCoord + 1, yCoord - 2, zCoord - 1) == Blocks.fence
+    	&& worldObj.getBlock(xCoord + 1, yCoord - 2, zCoord + 1) == Blocks.fence
+    	&& worldObj.getBlock(xCoord - 1, yCoord - 2, zCoord + 1) == Blocks.fence)
+    		return true;
+    	
+	return false; 	
+    }
+    
+    public boolean checkBase() {
+    	int i = 0;
+    	for (int x = xCoord - 1; x < xCoord + 2; x++)
+                for (int z = zCoord - 1; z < zCoord + 2; z++) 
+                	if(worldObj.getBlock(x, yCoord-3, z) == Blocks.cobblestone)
+                		i ++;
+		return i > 8;	
+    }
  
     /** Setup all the blocks in the structure*/
     public void setupStructure() {
