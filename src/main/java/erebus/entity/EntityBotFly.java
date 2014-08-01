@@ -3,19 +3,15 @@ package erebus.entity;
 import java.util.Calendar;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
@@ -259,15 +255,6 @@ public class EntityBotFly extends EntityMob {
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (super.attackEntityAsMob(entity)) {
-			if (entity instanceof EntityLivingBase) {
-				byte duration = 0;
-				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-					duration = 7;
-				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-					duration = 15;
-				if (duration > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.hunger.id, duration * 20, 0));
-			}
 			if (entity instanceof EntityPlayer)
 				if (rand.nextInt(20) == 0 && entity.riddenByEntity == null) {
 					EntityBotFlyLarva entityBotFlyLarva = new EntityBotFlyLarva(worldObj);
