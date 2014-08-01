@@ -24,7 +24,6 @@ import erebus.item.BucketOfBeetleJuice;
 import erebus.item.BucketOfHoney;
 import erebus.item.CavemanClub;
 import erebus.item.CompoundGoggles;
-import erebus.item.CrownOfLuminosity;
 import erebus.item.EncrustedDiamond;
 import erebus.item.ErebusFood;
 import erebus.item.ErebusMaterial;
@@ -40,13 +39,10 @@ import erebus.item.JadePickaxe;
 import erebus.item.JumpBoots;
 import erebus.item.MaxSpeedBow;
 import erebus.item.MetalIngots;
-import erebus.item.MushroomHelm;
 import erebus.item.NectarCollector;
 import erebus.item.Paxel;
 import erebus.item.PortalActivator;
 import erebus.item.ReinExoskeletonArmor;
-import erebus.item.RhinoArmor;
-import erebus.item.RhinoHelm;
 import erebus.item.RitualDagger;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
@@ -74,14 +70,13 @@ public class ModItems {
 	// EXOSKELETON STUFF
 	public static Item exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots;
 	public static Item reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots;
-	public static Item rhinoExoskeletonHelmet, rhinoExoskeletonBody, rhinoExoskeletonLegs, rhinoExoskeletonBoots;
-	
+
 	// MISC WEAPONS
 	public static Item fossilClub, waspSword, maxSpeedBow, waspDagger, scorpionPincer, webSlinger, doorAmberItem, woodlouseBall, rolledNewspaper;
 	public static Item ritualDagger;
 
 	// MISC ARMOR
-	public static Item reinCompoundGoggles, compoundGoggles, sprintLeggings, jumpBoots, armorGlider, armorGliderPowered, lightCrown, mushroomHelm;
+	public static Item reinCompoundGoggles, compoundGoggles, sprintLeggings, jumpBoots, armorGlider, armorGliderPowered;
 
 	// CREATIVE
 	public static Item spawnEggs;
@@ -136,11 +131,6 @@ public class ModItems {
 		reinExoskeletonLegs = new ReinExoskeletonArmor(2).setUnlocalizedName("exoLeggingsRein").setTextureName("erebus:exoLeggingsRein");
 		reinExoskeletonBoots = new ReinExoskeletonArmor(3).setUnlocalizedName("exoBootsRein").setTextureName("erebus:exoBootsRein");
 
-		rhinoExoskeletonHelmet = new RhinoHelm(0).setUnlocalizedName("rhinoHelmet").setTextureName("erebus:rhinoHelm");
-		rhinoExoskeletonBody = new RhinoArmor(1).setUnlocalizedName("rhinoChestplate").setTextureName("erebus:rhinoChestplate");
-		rhinoExoskeletonLegs = new RhinoArmor(2).setUnlocalizedName("rhinoLeggings").setTextureName("erebus:rhinoLeggings");
-		rhinoExoskeletonBoots = new RhinoArmor(3).setUnlocalizedName("rhinoBoots").setTextureName("erebus:rhinoBoots");
-	
 		fossilClub = new CavemanClub().setFull3D().setUnlocalizedName("clubBone").setTextureName("erebus:clubBone");
 		waspSword = new WaspSword().setUnlocalizedName("waspSword").setTextureName("paper");
 		maxSpeedBow = new MaxSpeedBow().setUnlocalizedName("maxSpeedBow").setTextureName("erebus:maxSpeedBow");
@@ -158,8 +148,6 @@ public class ModItems {
 		jumpBoots = new JumpBoots(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("jumpBoots").setTextureName("erebus:jumpBoots");
 		armorGlider = new ArmorGlider().setUnlocalizedName("armorGlider").setTextureName("erebus:armorGlider");
 		armorGliderPowered = new ArmorGlider().setUnlocalizedName("armorGliderPowered").setTextureName("erebus:armorGliderPowered");
-		lightCrown = new CrownOfLuminosity(0).setUnlocalizedName("lightCrown").setTextureName("erebus:lightCrown");
-		mushroomHelm = new MushroomHelm(0).setUnlocalizedName("mushroomHelm").setTextureName("erebus:mushroomHelm");
 
 		spawnEggs = new SpawnEggs().setUnlocalizedName("monsterPlacer").setTextureName("spawn_egg");
 	}
@@ -171,9 +159,8 @@ public class ModItems {
 
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
-		ModTabs.gears.setTab(rhinoExoskeletonHelmet, rhinoExoskeletonBody, rhinoExoskeletonLegs, rhinoExoskeletonBoots);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger, woodlouseBall, rolledNewspaper);
-		ModTabs.gears.setTab(mushroomHelm, lightCrown, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
+		ModTabs.gears.setTab(compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
 		ModTabs.specials.setTab(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
 
 		// Special Case

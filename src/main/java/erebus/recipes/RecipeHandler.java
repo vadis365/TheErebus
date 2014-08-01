@@ -108,11 +108,6 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonLegs, 1), "sss", "s s", "s s", 's', new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonBoots, 1), "   ", "s s", "s s", 's', new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()));
 
-		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonHelmet, 1), "h h", "sss", "s s", 's', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExoRhino.ordinal()), 'h', new ItemStack(ModItems.erebusMaterials, 1, DATA.rhinoBeetleHorn.ordinal()));
-		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBody, 1), "s s", "sss", "sss", 's', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExoRhino.ordinal()));
-		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonLegs, 1), "sss", "s s", "s s", 's', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExoRhino.ordinal()));
-		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBoots, 1), "   ", "s s", "s s", 's', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExoRhino.ordinal()));
-
 		// Special armor
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.compoundLens.ordinal()), "GGG", "GEG", "GGG", 'E', new ItemStack(ModBlocks.blockAmber, 1, 1), 'G', new ItemStack(ModItems.erebusMaterials, 1, DATA.compoundEyes.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModItems.compoundGoggles, 1), "XXX", "OXO", "   ", 'O', new ItemStack(ModItems.erebusMaterials, 1, DATA.compoundLens.ordinal()), 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()));
@@ -121,7 +116,6 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.sprintLeggings), "BBB", "BXB", "BBB", 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bioVelocity.ordinal()), 'X', new ItemStack(ModItems.reinExoskeletonLegs, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGlider), "   ", "GXG", "   ", 'G', new ItemStack(ModItems.erebusMaterials, 1, DATA.gliderWing.ordinal()), 'X', new ItemStack(ModItems.reinExoskeletonBody, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGliderPowered), "W W", "ECE", " V ", 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.enhancedGliderWing.ordinal()), 'E', new ItemStack(ModItems.erebusMaterials, 1, DATA.elasticFibre.ordinal()), 'C', new ItemStack(ModItems.armorGlider, 1), 'V', new ItemStack(ModBlocks.velocityBlock, 1));
-		GameRegistry.addRecipe(new ItemStack(ModItems.lightCrown, 1), "XXX", "XOX", "   ", 'O', new ItemStack(ModBlocks.glowGemBlock, 1), 'X', new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()));
 
 		GameRegistry.addRecipe(new ItemStack(ModItems.scorpionPincer), "I I", "XIX", "XPX", 'I', Items.iron_ingot, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()), 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()));
 
@@ -251,10 +245,6 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.erebusMushroomCap4, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.erebusPlantSmall, 1, BlockSmallPlants.dataDutchCapShroom));
 		GameRegistry.addRecipe(new ItemStack(Blocks.red_mushroom_block, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.red_mushroom, 1));
 		GameRegistry.addRecipe(new ItemStack(Blocks.brown_mushroom_block, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.brown_mushroom, 1));
-
-		// Mushroom Helm
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.mushroomHelm, 1), new ItemStack(ModBlocks.erebusMushroomCap0, 1), new ItemStack(ModBlocks.erebusMushroomCap1, 1), new ItemStack(ModBlocks.erebusMushroomCap2, 1), new ItemStack(ModBlocks.erebusMushroomCap3, 1), new ItemStack(ModBlocks.erebusMushroomCap4, 1), new ItemStack(Blocks.red_mushroom_block, 1), new ItemStack(Blocks.brown_mushroom_block, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.camoPowder.ordinal()), new ItemStack(
-		Blocks.pumpkin, 1));
 
 	}
 
