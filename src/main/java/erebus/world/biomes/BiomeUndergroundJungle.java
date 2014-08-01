@@ -8,7 +8,6 @@ import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
-import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityChameleonTick;
@@ -40,7 +39,6 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityPrayingMantis.class,10,4,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,1,4));
 		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,5,4,8));
-		spawnableMonsterList.add(new SpawnEntry(EntityBombardierBeetle.class,4,1,1));
 		spawnableMonsterList.add(new SpawnEntry(EntityVelvetWorm.class,10,1,2));
 		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
 
