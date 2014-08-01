@@ -307,8 +307,8 @@ public class EntityTitanBeetle extends EntityTameable {
 			rotationPitch = riddenByEntity.rotationPitch * 0.5F;
 			setRotation(rotationYaw, rotationPitch);
 			rotationYawHead = renderYawOffset = rotationYaw;
-			strafe = ((EntityLivingBase) riddenByEntity).moveStrafing * 0.20F;
-			forward = ((EntityLivingBase) riddenByEntity).moveForward * 0.20F;
+			strafe = ((EntityLivingBase) riddenByEntity).moveStrafing * 0.3F;
+			forward = ((EntityLivingBase) riddenByEntity).moveForward * 0.3F;
 			if (forward <= 0.0F)
 				forward *= 0.25F;
 			stepHeight = 2.0F;
