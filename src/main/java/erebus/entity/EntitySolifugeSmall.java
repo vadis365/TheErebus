@@ -17,8 +17,8 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntitySolifugeSmall extends EntityMob implements IEntityAdditionalSpawnData {
 
-	public final String[] potionName = new String[] { "Move Slowdown", "Dig Slowdown", "Harm", "Confusion", "Blindness", "Hunger", "Weakness", "Poison", "Wither" };
-	public final byte[] potionIds = new byte[] { 2, 4, 7, 9, 15, 17, 18, 19, 20 };
+	public final String[] potionName = new String[] { "Move Slowdown", "Dig Slowdown", "Confusion", "Blindness", "Hunger", "Weakness", "Poison", "Wither" };
+	public final byte[] potionIds = new byte[] { 2, 4, 9, 15, 17, 18, 19, 20 };
 
 	public EntitySolifugeSmall(World world) {
 		super(world);
