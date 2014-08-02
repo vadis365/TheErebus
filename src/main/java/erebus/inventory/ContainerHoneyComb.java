@@ -22,10 +22,10 @@ public class ContainerHoneyComb extends Container {
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)
-				addSlotToContainer(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 104 + j * 18 + i));
+				addSlotToContainer(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 102 + j * 18 + i));
 
 		for (j = 0; j < 9; ++j)
-			addSlotToContainer(new Slot(playerInventory, j, 8 + j * 18, 162 + i));
+			addSlotToContainer(new Slot(playerInventory, j, 8 + j * 18, 160 + i));
 	}
 
 	@Override
