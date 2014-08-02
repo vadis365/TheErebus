@@ -1,5 +1,7 @@
 package erebus.block.silo;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -41,7 +43,6 @@ public class BlockSiloTank extends BlockContainer {
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		
 		if (isSiloComplete(world, x, y, z)) {
 	        TileEntity tile = world.getTileEntity(x, y, z);
 	        if (tile != null && tile instanceof TileEntitySiloTank) {
@@ -51,10 +52,12 @@ public class BlockSiloTank extends BlockContainer {
 		}
 		else if (!isSiloComplete(world, x, y, z)) {
 			TileEntity tile = world.getTileEntity(x, y, z);
-			((TileEntitySiloTank) tile).setActive(false);
-			world.setBlockMetadataWithNotify(x, y, z, 0, 3);
-			int meta = world.getBlockMetadata(x, y, z);
-			breakBlock(world, x, y, z, this, 0);
+			if (tile != null && tile instanceof TileEntitySiloTank) {
+				((TileEntitySiloTank) tile).setActive(false);
+				world.setBlockMetadataWithNotify(x, y, z, 0, 3);
+				breakBlock(world, x, y, z, this, 0);
+				dropBlockAsItem(world, x, y, z, 0, 0);
+			}
 		}
 	}
     
@@ -87,6 +90,11 @@ public class BlockSiloTank extends BlockContainer {
 	}
 	
 	@Override
+	public boolean canBlockStay(World world, int x, int y, int z) {
+		return canPlaceBlockAt(world, x, y, z);
+	}
+	
+	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		TileEntitySiloTank tile = Utils.getTileEntity(world, x, y, z, TileEntitySiloTank.class);
 		if (tile != null)
@@ -95,7 +103,19 @@ public class BlockSiloTank extends BlockContainer {
 				if (is != null)
 					Utils.dropStack(world, x, y, z, is);
 			}
+		world.setBlockToAir(x, y, z);
 		super.breakBlock(world, x, y, z, block, meta);
+	}
+	
+	@Override
+	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+		breakBlock(world, x, y, z, this, 0);	
+		dropBlockAsItem(world, x, y, z, 0, 0);	
+	}
+	
+	@Override
+	public int quantityDropped(Random rand) {
+		return 1;
 	}
 	
 	@Override
