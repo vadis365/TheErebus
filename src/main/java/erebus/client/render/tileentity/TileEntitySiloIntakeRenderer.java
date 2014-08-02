@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.block.silo.TileEntitySiloIntake;
 import erebus.client.model.block.ModelSiloIntake;
-import erebus.tileentity.TileEntitySiloIntake;
 
 @SideOnly(Side.CLIENT)
 public class TileEntitySiloIntakeRenderer extends TileEntitySpecialRenderer {

@@ -4,13 +4,13 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 
 public class AntTamingAmulet extends Item {
 
@@ -40,7 +40,7 @@ public class AntTamingAmulet extends Item {
 		if (!world.isRemote && hasTag(is)) {
 			Block block = world.getBlock(x, y, z);
 			if (!world.isRemote && block != null) {
-				if (block == Blocks.chest) { // Temporary block until silo is made
+				if (block == ModBlocks.siloTank) {
 					is.getTagCompound().setInteger("homeX", x);
 					is.getTagCompound().setInteger("homeY", y);
 					is.getTagCompound().setInteger("homeZ", z);

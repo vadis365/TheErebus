@@ -93,7 +93,9 @@ import erebus.block.plants.BlockSmallPlants;
 import erebus.block.plants.BlockThorns;
 import erebus.block.plants.BlockTurnip;
 import erebus.block.silo.BlockSiloIntake;
-import erebus.block.silo.BlockSiloTankPart;
+import erebus.block.silo.BlockSiloRoof;
+import erebus.block.silo.BlockSiloSupports;
+import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
 
 public class ModBlocks {
@@ -126,7 +128,7 @@ public class ModBlocks {
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
 	public static Block velocityBlock, honeyCombBlock, doorAmber, erebusHoneyBlock, honeyTreat, mud, mudBricks, flowerPlanted, jarOHoney;
-	public static Block jadeBlock, altar, glowGemBlock, mucusBomb, siloIntake, siloTankPart;
+	public static Block jadeBlock, altar, glowGemBlock, mucusBomb;
 
 	// STAIRS, SLABS, WALLS
 	public static Block[] umbercobbleStairs, stoneSlabs, gneissStairs;
@@ -134,6 +136,8 @@ public class ModBlocks {
 
 	// DUNGEONS
 	public static Block spiderSpawner, jumpingSpiderSpawner, waspSpawner, waspNestBlock, gneiss;
+
+	public static Block siloSupports, siloIntake, siloTank, siloRoof;
 
 	public static void init() {
 		registerFluids();
@@ -242,7 +246,9 @@ public class ModBlocks {
 		glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 		mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 		siloIntake = new BlockSiloIntake().setHardness(1.5F).setBlockName("siloIntake").setBlockTextureName("erebus:siloIntake");
-		siloTankPart = new BlockSiloTankPart(Material.iron).setHardness(1.5F).setStepSound(Block.soundTypeMetal).setBlockName("siloTankPart").setBlockTextureName("erebus:siloTankPart");
+		siloTank = new BlockSiloTank(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloTank");
+		siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("siloSupports").setBlockTextureName("erebus:siloSupports");
+		siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloRoof").setBlockTextureName("erebus:siloRoof");
 		
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -276,7 +282,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
-		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake, siloTankPart); // altar,
+		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake, siloTank, siloSupports, siloRoof); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
 		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wallErebus);

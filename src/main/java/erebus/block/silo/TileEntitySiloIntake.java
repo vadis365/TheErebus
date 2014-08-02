@@ -1,4 +1,4 @@
-package erebus.tileentity;
+package erebus.block.silo;
 
 import net.minecraft.tileentity.TileEntity;
 

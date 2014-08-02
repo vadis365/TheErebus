@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.tileentity.TileEntitySiloIntake;
 
 public class BlockSiloIntake extends BlockContainer {
 
@@ -48,7 +47,7 @@ public class BlockSiloIntake extends BlockContainer {
 	}
 	
 	private boolean isValidBlock(Block block) {
-		return block == ModBlocks.siloTankPart;
+		return true;
 	}
 
 	@Override

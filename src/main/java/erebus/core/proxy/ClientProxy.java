@@ -20,7 +20,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.block.silo.TileEntitySiloTankPart;
+import erebus.block.silo.TileEntitySiloIntake;
 import erebus.client.fx.EntityRepellentFX;
 import erebus.client.fx.EntitySonicFX;
 import erebus.client.model.entity.ModelAnimatedBlock;
@@ -45,6 +45,8 @@ import erebus.client.render.block.BlockGlowshroomRender;
 import erebus.client.render.block.BlockGlowshroomStalkRender;
 import erebus.client.render.block.BlockHollowLogRender;
 import erebus.client.render.block.BlockPlantedFlowerRender;
+import erebus.client.render.block.BlockSiloRoofRender;
+import erebus.client.render.block.BlockSiloSupportsRender;
 import erebus.client.render.entity.RenderAnimatedBlock;
 import erebus.client.render.entity.RenderAnimatedChest;
 import erebus.client.render.entity.RenderAntlion;
@@ -127,7 +129,6 @@ import erebus.client.render.tileentity.TileEntityGlowingJarRenderer;
 import erebus.client.render.tileentity.TileEntityLadderRenderer;
 import erebus.client.render.tileentity.TileEntityPetrifiedWoodChestRenderer;
 import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
-import erebus.client.render.tileentity.TileEntityRenderSiloTank;
 import erebus.client.render.tileentity.TileEntitySiloIntakeRenderer;
 import erebus.client.render.tileentity.TileEntitySpawnerRender;
 import erebus.client.render.tileentity.TileEntityUmberGolemStatueRenderer;
@@ -201,14 +202,13 @@ import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
-import erebus.tileentity.TileEntitySiloIntake;
 import erebus.tileentity.TileEntitySpawner;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
 public class ClientProxy extends CommonProxy {
 
 	public enum BlockRenderIDs {
-		BAMBOO_CROP, HOLLOW_LOG, PLANTED_FLOWER, GLOWSHROOM_STALK, GLOWSHROOM_CAPS;
+		BAMBOO_CROP, HOLLOW_LOG, PLANTED_FLOWER, GLOWSHROOM_STALK, GLOWSHROOM_CAPS, SILO_ROOF, SILO_SUPPORTS;
 
 		private final int ID;
 
@@ -301,13 +301,14 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlowGem.class, new TileEntityGlowGemRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySiloIntake.class, new TileEntitySiloIntakeRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySiloTankPart.class, new TileEntityRenderSiloTank());
-		
+
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.BAMBOO_CROP.id(), new BlockBambooCropRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.HOLLOW_LOG.id(), new BlockHollowLogRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.PLANTED_FLOWER.id(), new BlockPlantedFlowerRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.GLOWSHROOM_STALK.id(), new BlockGlowshroomStalkRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.GLOWSHROOM_CAPS.id(), new BlockGlowshroomRender());
+		RenderingRegistry.registerBlockHandler(BlockRenderIDs.SILO_ROOF.id(), new BlockSiloRoofRender());
+		RenderingRegistry.registerBlockHandler(BlockRenderIDs.SILO_SUPPORTS.id(), new BlockSiloSupportsRender());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltar), new ItemErebusAltarRenderer());

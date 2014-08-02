@@ -15,7 +15,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBucket;
@@ -25,8 +24,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import erebus.Erebus;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
@@ -229,7 +230,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (!canPickupItems && canAddToSilo) {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
-			if (block == Blocks.chest)
+			if (block == ModBlocks.siloTank)
 				if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
 					addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 					canAddToSilo = false;
@@ -245,7 +246,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (canCollectFromSilo) {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
-			if (block == Blocks.chest) {
+			if (block == ModBlocks.siloTank) {
 				if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
 					getStackFromSilo();
 					canCollectFromSilo = false;
@@ -320,7 +321,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	public void moveToSilo() {
-		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY(), getDropPointZ(), 16.0F, true, false, false, true);
+		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY() - 1, getDropPointZ(), 16.0F, true, false, false, true);
 		if (pathentity != null) {
 			setPathToEntity(pathentity);
 			getNavigator().setPath(pathentity, 0.5D);
@@ -521,6 +522,13 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	
 	@Override
 	public void markDirty() {
+	}
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float damage) {
+		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown))
+			return false;
+		return super.attackEntityFrom(source, damage);
 	}
 
 	public void setDropPoint(int x, int y, int z) {
