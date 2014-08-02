@@ -9,7 +9,7 @@ import erebus.block.silo.TileEntitySiloTank;
 
 public class ContainerSilo extends Container {
 
-	public int numRows = 3;
+	public int numRows = 8;
 
 	public ContainerSilo(InventoryPlayer playerInventory, TileEntitySiloTank tile) {
 		int i = (numRows - 4) * 18;
@@ -17,15 +17,15 @@ public class ContainerSilo extends Container {
 		int k;
 
 		for (j = 0; j < numRows; ++j)
-			for (k = 0; k < 9; ++k)
-				addSlotToContainer(new Slot(tile, k + j * 9, 8 + k * 18, 18 + j * 18));
+			for (k = 0; k < 13; ++k)
+				addSlotToContainer(new Slot(tile, k + j * 13, 12 + k * 18, 17 + j * 18));
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)
-				addSlotToContainer(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 104 + j * 18 + i));
+				addSlotToContainer(new Slot(playerInventory, k + j * 9 + 9, 48 + k * 18, 102 + j * 18 + i));
 
 		for (j = 0; j < 9; ++j)
-			addSlotToContainer(new Slot(playerInventory, j, 8 + j * 18, 162 + i));
+			addSlotToContainer(new Slot(playerInventory, j, 48 + j * 18, 160 + i));
 	}
 
 	@Override
@@ -42,10 +42,10 @@ public class ContainerSilo extends Container {
 			ItemStack is1 = slot.getStack();
 			is = is1.copy();
 
-			if (par2 < numRows * 9) {
-				if (!mergeItemStack(is1, numRows * 9, inventorySlots.size(), true))
+			if (par2 < numRows * 13) {
+				if (!mergeItemStack(is1, numRows * 13, inventorySlots.size(), true))
 					return null;
-			} else if (!mergeItemStack(is1, 0, numRows * 9, false))
+			} else if (!mergeItemStack(is1, 0, numRows * 13, false))
 				return null;
 
 			if (is1.stackSize == 0)

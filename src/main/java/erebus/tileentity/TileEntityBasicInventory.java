@@ -105,7 +105,7 @@ public abstract class TileEntityBasicInventory extends TileEntity implements ISi
 
 	@Override
 	public String getInventoryName() {
-		return name;
+		return name + " " + "Silo Location X:" + xCoord + " Y:" + yCoord + " Z:" + zCoord;
 	}
 
 	@Override
