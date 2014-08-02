@@ -26,6 +26,18 @@ public class BlockSiloTank extends BlockContainer {
         super(material);
         setBlockBounds(0.125F, 0F, 0.125F, 0.875F, 1F, 0.875F);
     }
+    
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		if (isSiloComplete(world, x, y, z)) {
+	        TileEntity tile = world.getTileEntity(x, y, z);
+	        if (tile != null && tile instanceof TileEntitySiloTank) {
+	        	((TileEntitySiloTank) tile).setActive(true);
+	        	world.setBlockMetadataWithNotify(x, y, z, 1, 3);
+	        	return;
+	        }
+		}
+	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
