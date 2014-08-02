@@ -161,7 +161,10 @@ tile.erebus.glowGemBlock.name=Glowing Gem
 tile.erebus.mucusBomb.name=Mucus Bomb
 tile.erebusHanger.name=Hanger
 tile.erebusWallPlants_0.name=Moss
-tile.erebusWallPlants_1.name=Lichen
+tile.erebusWallPlants_1.name=Mould
+tile.siloTank.name=Silo Tank
+tile.siloRoof.name=Silo Roof
+tile.siloSupports.name=Silo Supports
 
 # Items
 item.encrustedDiamond.name=Encrusted Diamond
@@ -187,7 +190,6 @@ item.axeJade.name=Jade Axe
 item.shovelJade.name=Jade Shovel
 item.paxelJade.name=Jade Paxel
 item.hoeJade.name=Jade Hoe
-item.lightCrown.name=Crown Of Luminosity
 item.compoundGoggles.name=Compound Goggles
 item.reinCompoundGoggles.name=Reinforced Compound Goggles
 item.jumpBoots.name=Jump Boots
@@ -273,7 +275,6 @@ item.flowerSeeds.name=%s Flower Bulb
 item.whetstone.name=Whetstone
 item.woodlouseBall.name=Woodlouse Ball
 item.rolledNewspaper.name=Rolled Up Newspaper
-item.mushroomHelm.name=Mushroom Helm
 
 # Entities
 entity.erebus.beetleLarva.name=Beetle Larva
@@ -293,7 +294,6 @@ entity.erebus.solifuge.name=Solifuge
 entity.erebus.moth.name=Moth
 entity.erebus.antlion.name=Antlion
 entity.erebus.glowWorm.name=Glowworm
-entity.erebus.bombardierBeetle.name=Bombardier Beetle
 entity.erebus.scytodes.name=Scytodes
 entity.erebus.moneySpider.name=Money Spider
 entity.erebus.prayingMantis.name=Praying Mantis

@@ -13,7 +13,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -25,7 +24,7 @@ import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModItems;
 
-public class EntityUmberGolem extends EntityCreature implements IMob {
+public class EntityUmberGolem extends EntityCreature {
 
 	public EntityUmberGolem(World world) {
 		super(world);
@@ -66,6 +65,11 @@ public class EntityUmberGolem extends EntityCreature implements IMob {
 	@Override
 	public boolean canDespawn() {
 		return false;
+	}
+	
+	@Override
+	public boolean allowLeashing() {
+		return !canDespawn() && super.allowLeashing();
 	}
 
 	/*

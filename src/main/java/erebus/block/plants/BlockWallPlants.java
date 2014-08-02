@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.plants;
 
 import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 import static net.minecraftforge.common.util.ForgeDirection.EAST;
@@ -32,9 +32,9 @@ import erebus.item.block.ItemBlockErebusPlantSmall;
 public class BlockWallPlants extends Block implements IShearable,
 		ISubBlocksBlock {
 
-	public static final String[] iconPaths = new String[] { "moss", "lichen" };
+	public static final String[] iconPaths = new String[] { "moss", "mould" };
 
-	public static final int dataMoss = 0, dataLichen = 1;
+	public static final int dataMoss = 0, dataMould = 1;
 
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
@@ -63,12 +63,12 @@ public class BlockWallPlants extends Block implements IShearable,
 			return null;
 		if (meta == dataMoss)
 			return icons[dataMoss];
-		if (meta == dataLichen)
-			return icons[dataLichen];
+		if (meta == dataMould)
+			return icons[dataMould];
 		if (meta > 1 && meta <= 7)
 			return icons[dataMoss];
 		else
-			return icons[dataLichen];
+			return icons[dataMould];
 	}
 
 	@Override
@@ -259,7 +259,7 @@ public class BlockWallPlants extends Block implements IShearable,
 				meta = 7;
 		}
 
-		if (meta == dataLichen) {
+		if (meta == dataMould) {
 			if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
 				meta = 8;
 
@@ -344,7 +344,7 @@ public class BlockWallPlants extends Block implements IShearable,
 		if (meta == 2 || meta == 3 || meta == 4 || meta == 5 || meta == 6 || meta == 7)
 			meta = dataMoss;
 		if (meta == 8 || meta == 9 || meta == 10 || meta == 11 || meta == 12 || meta == 13)
-			meta = dataLichen;
+			meta = dataMould;
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(new ItemStack(this, 1, meta));
 		return ret;
