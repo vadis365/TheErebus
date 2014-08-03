@@ -14,6 +14,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
 import erebus.block.BlockBones;
 import erebus.block.BlockButtonUmberstone;
+import erebus.block.BlockComposter;
 import erebus.block.BlockDoorAmber;
 import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusMushroomCap;
@@ -137,7 +138,7 @@ public class ModBlocks {
 	// DUNGEONS
 	public static Block spiderSpawner, jumpingSpiderSpawner, waspSpawner, waspNestBlock, gneiss;
 
-	public static Block siloSupports, siloIntake, siloTank, siloRoof;
+	public static Block siloSupports, siloIntake, siloTank, siloRoof, composter, composterActive;
 
 	public static void init() {
 		registerFluids();
@@ -249,6 +250,8 @@ public class ModBlocks {
 		siloTank = new BlockSiloTank(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloTank");
 		siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("siloSupports").setBlockTextureName("erebus:siloSupports");
 		siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloRoof").setBlockTextureName("erebus:siloRoof");
+		composter = new BlockComposter(false).setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("composter");
+		composterActive = new BlockComposter(true).setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("composterActive");
 		
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -282,7 +285,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
-		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake, siloTank, siloSupports, siloRoof); // altar,
+		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake, siloTank, siloSupports, siloRoof, composter, composterActive); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
 		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wallErebus);

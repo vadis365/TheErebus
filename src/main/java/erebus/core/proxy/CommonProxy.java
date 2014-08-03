@@ -16,6 +16,7 @@ import erebus.block.silo.TileEntitySiloTank;
 import erebus.client.gui.GuiAntInventory;
 import erebus.client.gui.GuiBambooCrate;
 import erebus.client.gui.GuiColossalCrate;
+import erebus.client.gui.GuiComposter;
 import erebus.client.gui.GuiExtenderThingy;
 import erebus.client.gui.GuiHoneyComb;
 import erebus.client.gui.GuiPetrifiedChest;
@@ -27,6 +28,7 @@ import erebus.entity.EntityBlackAnt;
 import erebus.inventory.ContainerAntInventory;
 import erebus.inventory.ContainerBambooCrate;
 import erebus.inventory.ContainerColossalCrate;
+import erebus.inventory.ContainerComposter;
 import erebus.inventory.ContainerExtenderThingy;
 import erebus.inventory.ContainerHoneyComb;
 import erebus.inventory.ContainerPetrifiedCraftingTable;
@@ -38,6 +40,7 @@ import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
 import erebus.tileentity.TileEntityBones;
+import erebus.tileentity.TileEntityComposter;
 import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarEmpty;
 import erebus.tileentity.TileEntityErebusAltarHealing;
@@ -67,6 +70,7 @@ public class CommonProxy implements IGuiHandler {
 	public static final int GUI_ID_HONEY_COMB = 9;
 	public static final int GUI_ID_ANT_INVENTORY = 10;
 	public static final int GUI_ID_SILO_INVENTORY = 11;
+	public static final int GUI_ID_COMPOSTER = 12;
 
 	private final int[][] places = new int[][] { { 1, 0, 0 }, { 1, 0, 1 }, { 0, 0, 1 }, { 1, 1, 0 }, { 1, 1, 1 }, { 0, 1, 1 }, { 0, 1, 0 }, { 0, 0, 0 } };
 
@@ -102,6 +106,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityHoneyComb.class, "honeyComb");
 		registerTileEntity(TileEntitySiloIntake.class, "siloIntake");
 		registerTileEntity(TileEntitySiloTank.class, "siloTank");
+		registerTileEntity(TileEntityComposter.class, "composter");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
@@ -178,6 +183,12 @@ public class CommonProxy implements IGuiHandler {
 				return new ContainerSilo(player.inventory, (TileEntitySiloTank) tileentity);
 		}
 		
+		else if (ID == GUI_ID_COMPOSTER) {
+			TileEntity tileentity = world.getTileEntity(x, y, z);
+			if (tileentity instanceof TileEntityComposter)
+				return new ContainerComposter(player.inventory, (TileEntityComposter) tileentity);
+		}
+		
 		return null;
 	}
 
@@ -239,6 +250,12 @@ public class CommonProxy implements IGuiHandler {
 			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity instanceof TileEntitySiloTank)
 				return new GuiSilo(player.inventory, (TileEntitySiloTank) tileentity);
+		}
+		
+		else if (ID == GUI_ID_COMPOSTER) {
+			TileEntity tileentity = world.getTileEntity(x, y, z);
+			if (tileentity instanceof TileEntityComposter)
+				return new GuiComposter(player.inventory, (TileEntityComposter) tileentity);
 		}
 
 		return null;
