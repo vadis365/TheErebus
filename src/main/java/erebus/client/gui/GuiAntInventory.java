@@ -43,7 +43,7 @@ public class GuiAntInventory extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		int color = Utils.getColour(0, 0, 0);
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.antInventory"), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal("container.extenderThingy")) / 2 -10, 6, color);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.antInventory"), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal("container.antInventory")) / 2, 6, color);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), xSize - 170, ySize - 93, color);
 	}
 
