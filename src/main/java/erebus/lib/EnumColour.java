@@ -8,7 +8,6 @@ import net.minecraft.util.StatCollector;
 
 public enum EnumColour {
 
-	// @formatter:off
 	BLACK("Black"),
 	RED("Red"),
 	GREEN("Green"),
@@ -25,7 +24,6 @@ public enum EnumColour {
 	MAGENTA("Magenta"),
 	ORANGE("Orange"),
 	WHITE("White");
-	// @formatter:on
 
 	final String dye;
 

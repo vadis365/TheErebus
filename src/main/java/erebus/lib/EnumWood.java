@@ -19,7 +19,6 @@ import erebus.item.block.ItemBlockSlabSimple;
 
 public enum EnumWood {
 
-	//@formatter:off
 	Baobab,
 	Eucalyptus,
 	Mahogany,
@@ -30,7 +29,6 @@ public enum EnumWood {
 	Weedwood,
 	White(false, true, false),
 	Bamboo(false, true, false);
-	//@formatter:on
 
 	private final boolean hasLog;
 	private final boolean hasPlanks;

@@ -23,7 +23,6 @@ import erebus.network.client.PacketSound;
 
 public class ErebusMaterial extends Item {
 
-	// @formatter:off
 	public enum DATA {
 		plateExo,
 		jade,
@@ -63,9 +62,7 @@ public class ErebusMaterial extends Item {
 		yellowDottedFungus,
 		plateExoRhino,
 		rhinoBeetleHorn
-		
 	}
-	// @formatter:on
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
@@ -88,7 +85,7 @@ public class ErebusMaterial extends Item {
 				return true;
 			}
 		}
-		
+
 		if (side == 0 && is.getItemDamage() == DATA.middleFruitSeeds.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y - 1, z, side, is)) {
 			Block block = world.getBlock(x, y, z);
 
