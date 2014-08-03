@@ -1,7 +1,9 @@
 package erebus.block.silo;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import erebus.block.BlockSimple;
@@ -32,6 +34,30 @@ public class BlockSiloSupports extends BlockSimple {
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		return null;
+	}
+	
+	@Override
+	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+		world.setBlockToAir(x, y, z);	
+		dropBlockAsItem(world, x, y, z, 0, 0);	
+	}
+	
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+		if (!canBlockStay(world, x, y, z)) {
+			world.setBlockToAir(x, y, z);	
+			dropBlockAsItem(world, x, y, z, 0, 0);
+		}
+	}
+	
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+		return !world.isAirBlock(x, y - 1, z) && world.getBlock(x, y - 1, z).getMaterial().blocksMovement();
+	}
+	
+	@Override
+	public boolean canBlockStay(World world, int x, int y, int z) {
+		return canPlaceBlockAt(world, x, y, z);
 	}
 	
 	@Override
