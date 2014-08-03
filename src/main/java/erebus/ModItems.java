@@ -1,25 +1,69 @@
 package erebus;
 
+import java.lang.reflect.Field;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSeedFood;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.core.handler.ConfigHandler;
-import erebus.item.*;
+import erebus.item.AntTamingAmulet;
+import erebus.item.ArmorGlider;
+import erebus.item.Bambucket;
+import erebus.item.BeeTamingAmulet;
+import erebus.item.BlockExtractor;
+import erebus.item.BucketOfBeetleJuice;
+import erebus.item.BucketOfHoney;
+import erebus.item.CavemanClub;
+import erebus.item.Compost;
+import erebus.item.CompoundGoggles;
+import erebus.item.EncrustedDiamond;
+import erebus.item.ErebusFood;
+import erebus.item.ErebusMaterial;
 import erebus.item.ErebusMaterial.DATA;
+import erebus.item.ErebusSpecial;
+import erebus.item.ExoskeletonArmor;
+import erebus.item.FlowerSeeds;
+import erebus.item.HomingBeecon;
+import erebus.item.HornOfSummoning;
+import erebus.item.JadeArmour;
+import erebus.item.JadeAxe;
+import erebus.item.JadePickaxe;
+import erebus.item.JumpBoots;
+import erebus.item.MaxSpeedBow;
+import erebus.item.MetalIngots;
+import erebus.item.NectarCollector;
+import erebus.item.Paxel;
+import erebus.item.PortalActivator;
+import erebus.item.ReinExoskeletonArmor;
+import erebus.item.RitualDagger;
+import erebus.item.RolledNewspaper;
+import erebus.item.ScorpionPincer;
+import erebus.item.SpawnEggs;
+import erebus.item.SprayCan;
+import erebus.item.SprintLeggings;
+import erebus.item.WandOfAnimation;
+import erebus.item.WaspDagger;
+import erebus.item.WaspSword;
+import erebus.item.WebSlinger;
+import erebus.item.Whetstone;
+import erebus.item.WoodlouseBall;
 import erebus.item.block.ItemBlockDoorAmber;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.*;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-
-import java.lang.reflect.Field;
 
 public class ModItems {
 
 	// BASIC MATERIALS
 	public static Item portalActivator, erebusMaterials, erebusFood, metalIngot, bamBucket, turnip, sprayCan, wandOfAnimation;
 	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor, nectarCollector, beeTamingAmulet, bucketHoney;
-	public static Item homingBeecon, antTamingAmulet, flowerSeeds, whetstone, encrustedDiamond;
+	public static Item homingBeecon, antTamingAmulet, flowerSeeds, whetstone, encrustedDiamond, compost;
 
 	// JADE STUFF
 	public static Item jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe;
@@ -66,7 +110,8 @@ public class ModItems {
 		whetstone = new Whetstone().setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
 		encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
 		antTamingAmulet = new AntTamingAmulet().setUnlocalizedName("antTamingAmulet").setTextureName("erebus:antTamingAmulet");
-		
+		compost = new Compost();
+
 		jadeHelmet = new JadeArmour(0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new JadeArmour(1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
 		jadeLegs = new JadeArmour(2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
