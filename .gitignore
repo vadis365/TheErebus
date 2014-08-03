@@ -6,7 +6,7 @@ minecraft/
 gradle/
 .settings/
 .gradle/
-
+libs/
 .classpath
 .project
 .DS_Store
