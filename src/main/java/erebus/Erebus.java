@@ -89,7 +89,6 @@ public class Erebus {
 		if (ConfigHandler.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
-		// TODO someone test it outside eclipse to make sure it doesn't crash without the mods installed
 		ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
 		ModIntegrationHandler.addMod(FMBIntegration.class);
 		ModIntegrationHandler.init();
@@ -99,9 +98,9 @@ public class Erebus {
 	public void postInit(FMLPostInitializationEvent event) {
 		ModIntegrationHandler.postInit();
 	}
-	
+
 	@EventHandler
-	public void onServerStarting(FMLServerStartingEvent event){
+	public void onServerStarting(FMLServerStartingEvent event) {
 		event.registerServerCommand(new ErebusCommandDebug());
 	}
 }
