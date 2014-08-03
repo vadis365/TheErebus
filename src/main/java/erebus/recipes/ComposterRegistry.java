@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import erebus.ModItems;
 import erebus.core.helper.Utils;
 
 public class ComposterRegistry {
@@ -29,11 +30,11 @@ public class ComposterRegistry {
 		registry.add(stack);
 	}
 
-	public static boolean isCompostable(ItemStack stack) {
+	public static ItemStack isCompostable(ItemStack stack) {
 		for (ItemStack reg : registry)
 			if (Utils.areStacksTheSame(stack, reg, false))
-				return true;
+				return new ItemStack(ModItems.compost);
 
-		return false;
+		return null;
 	}
 }
