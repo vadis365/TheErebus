@@ -36,7 +36,7 @@ public class AntTamingAmulet extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	public boolean onItemUseFirst(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote && hasTag(is)) {
 			Block block = world.getBlock(x, y, z);
 			if (!world.isRemote && block != null) {

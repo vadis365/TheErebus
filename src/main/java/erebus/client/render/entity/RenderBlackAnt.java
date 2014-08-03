@@ -15,7 +15,7 @@ public class RenderBlackAnt extends RenderLiving {
 	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackAntKit.png");
 
 	public RenderBlackAnt() {
-		super(new ModelBlackAnt(), 1.0F);
+		super(new ModelBlackAnt(), 0.5F);
 	}
 
 	@Override
@@ -43,6 +43,6 @@ public class RenderBlackAnt extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-			return texture;
+		return texture;
 	}
 }

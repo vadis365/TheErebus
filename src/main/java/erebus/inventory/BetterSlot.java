@@ -6,12 +6,19 @@ import net.minecraft.item.ItemStack;
 
 public class BetterSlot extends Slot {
 
-	public BetterSlot(IInventory inventory, int slot, int posX, int posY) {
+	private final boolean isInvalid;
+
+	public BetterSlot(IInventory inventory, int slot, int posX, int posY, boolean isInvalid) {
 		super(inventory, slot, posX, posY);
+		this.isInvalid = isInvalid;
+	}
+
+	public BetterSlot(IInventory inventory, int slot, int posX, int posY) {
+		this(inventory, slot, posX, posY, false);
 	}
 
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return inventory.isItemValidForSlot(getSlotIndex(), stack);
+		return isInvalid ? false : inventory.isItemValidForSlot(getSlotIndex(), stack);
 	}
 }

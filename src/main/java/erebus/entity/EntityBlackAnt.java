@@ -1,5 +1,8 @@
 package erebus.entity;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -43,7 +46,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	private final EntityAIAntBonemealCrops aiBonemealCrops = new EntityAIAntBonemealCrops(this, 0.6D, 4);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
 
-	public boolean setAttributes; // needed for logic later
+	public boolean setAttributes;
 	public boolean canPickupItems;
 	public boolean canCollectFromSilo;
 	public boolean canAddToSilo;
@@ -123,10 +126,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@Override
 	protected boolean canDespawn() {
-		if (isTamed())
-			return false;
-		else
-			return true;
+		return !isTamed();
 	}
 
 	@Override
@@ -185,38 +185,55 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			closeInventory();
 			setAttributes = true;
 		}
-		
-		if (!worldObj.isRemote && isDead)
-			for (ItemStack is : inventory)
-				if (is != null)
-					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
+	}
+
+	@Override
+	protected void dropEquipment(boolean rencentHit, int fortune) {
+		for (ItemStack stack : inventory)
+			if (stack != null)
+				entityDropItem(stack, 0.0F);
+	}
+
+	private void addToInventory(ItemStack stack) {
+		if (stack == null)
+			return;
+		if (inventory[INVENTORY_SLOT] == null) {
+			inventory[INVENTORY_SLOT] = stack.copy();
+			stack.stackSize = 0;
+		} else if (Utils.areStacksTheSame(stack, inventory[INVENTORY_SLOT], false)) {
+			int old = inventory[INVENTORY_SLOT].stackSize;
+			inventory[INVENTORY_SLOT].stackSize += stack.stackSize;
+			if (inventory[INVENTORY_SLOT].stackSize > inventory[INVENTORY_SLOT].getMaxStackSize())
+				inventory[INVENTORY_SLOT].stackSize = inventory[INVENTORY_SLOT].getMaxStackSize();
+
+			int added = inventory[INVENTORY_SLOT].stackSize - old;
+			stack.stackSize -= added;
+		}
 	}
 
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 
-		if (canPickupItems) {
-			EntityItem entityitem = getClosestEntityItem(this, 16.0D);
-			if (entityitem != null && !isFilterSlotEmpty() && entityitem.getEntityItem().getItem() == getFilterSlotStack().getItem()) {
-				ItemStack stack = entityitem.getEntityItem();
-				int metadata = stack.getItemDamage();
-				if (metadata == getFilterSlotStack().getItemDamage()) {
-					float distance = entityitem.getDistanceToEntity(this);
-					if (distance >= 2F && entityitem.delayBeforeCanPickup <= 0 && !entityitem.isDead) {
-						double x = entityitem.posX;
-						double y = entityitem.posY;
-						double z = entityitem.posZ;
-						getLookHelper().setLookPosition(x, y, z, 20.0F, 8.0F);
-						moveToItem(entityitem);
-						return;
-					}
-					if (distance < 2F) {
-						getMoveHelper().setMoveTo(entityitem.posX, entityitem.posY,entityitem.posZ, 0.5D);
-						addToInventory(new ItemStack(stack.getItem(), stack.stackSize, metadata));
+		// Don't pick up items unless the filter is defined and the inventory is not full
+		if (canPickupItems && !isFilterSlotEmpty() && getFilterSlotStack().stackSize < getAntInvSlotStack().getMaxStackSize()) {
+			EntityItem entityitem = getClosestEntityItem(this, 16.0D, getFilterSlotStack());
+			if (entityitem != null) {
+				float distance = entityitem.getDistanceToEntity(this);
+				if (distance >= 2F && entityitem.delayBeforeCanPickup <= 0 && !entityitem.isDead) {
+					double x = entityitem.posX;
+					double y = entityitem.posY;
+					double z = entityitem.posZ;
+					getLookHelper().setLookPosition(x, y, z, 20.0F, 8.0F);
+					moveToItem(entityitem);
+					return;
+				}
+				if (distance < 2F) {
+					getMoveHelper().setMoveTo(entityitem.posX, entityitem.posY, entityitem.posZ, 0.5D);
+					addToInventory(entityitem.getEntityItem());
+					if (entityitem.getEntityItem().stackSize <= 0)
 						entityitem.setDead();
-						return;
-					}
+					return;
 				}
 			}
 		}
@@ -237,50 +254,36 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 					canPickupItems = true;
 				}
 		}
-		
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe || !isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.bone) {
+
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe || !isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.bone)
 			if (isAntInvSlotEmpty() && !isFilterSlotEmpty())
 				canCollectFromSilo = true; // this stops the planting or bonemealing AIs and makes the ant go to the silo
-		}
-		
+
 		if (canCollectFromSilo) {
 			moveToSilo();
 			Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
-			if (block == ModBlocks.siloTank) {
+			if (block == ModBlocks.siloTank)
 				if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
 					getStackFromSilo();
 					canCollectFromSilo = false;
 				}
-			}
 		}
 	}
-	
+
 	private void getStackFromSilo() {
 		if (worldObj.isRemote)
 			return;
 		IInventory siloTile = (IInventory) worldObj.getTileEntity(getDropPointX(), getDropPointY(), getDropPointZ());
 		ItemStack[] siloInventory = new ItemStack[siloTile.getSizeInventory()];
-		for (int i = 0; i < siloInventory.length; i++) {
-			if (siloTile.getStackInSlot(i) != null) {
-				if(siloTile.getStackInSlot(i).getItem() == getStackInSlot(CROP_ID_SLOT).getItem() && siloTile.getStackInSlot(i).getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage()) {
-					if(isAntInvSlotEmpty()) {
+		for (int i = 0; i < siloInventory.length; i++)
+			if (siloTile.getStackInSlot(i) != null)
+				if (siloTile.getStackInSlot(i).getItem() == getStackInSlot(CROP_ID_SLOT).getItem() && siloTile.getStackInSlot(i).getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage())
+					if (isAntInvSlotEmpty()) {
 						int collectStackSize = siloTile.getStackInSlot(i).stackSize;
 						setInventorySlotContents(INVENTORY_SLOT, new ItemStack(siloTile.getStackInSlot(i).getItem(), collectStackSize, siloTile.getStackInSlot(i).getItemDamage()));
 						siloTile.decrStackSize(i, collectStackSize);
 						return;
 					}
-				}
-			}
-		}
-	}
-
-	private void addToInventory(ItemStack stack) {
-		if (stack == null)
-			return;
-		if (inventory[INVENTORY_SLOT] == null)
-			inventory[INVENTORY_SLOT] = stack.copy();
-		else if (Utils.areStacksTheSame(stack, inventory[INVENTORY_SLOT], false) && inventory[INVENTORY_SLOT].getMaxStackSize() >= inventory[INVENTORY_SLOT].stackSize + stack.stackSize)
-			inventory[INVENTORY_SLOT].stackSize += stack.stackSize;
 	}
 
 	private void addDropToInventory(int x, int y, int z) {
@@ -291,25 +294,30 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	@SuppressWarnings("unchecked")
-	public EntityItem getClosestEntityItem(Entity entity, double d) {
-		double d1 = -1.0D;
-		EntityItem entityitem = null;
-		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(d, d, d));
-		for (int k = 0; k < list.size(); k++) {
-			Entity entity1 = list.get(k);
-			if (entity1 != null && entity1 instanceof EntityItem && !isFilterSlotEmpty()) {
-				EntityItem entityitem1 = (EntityItem) entity1;
-				if (entityitem1.getEntityItem().getItem() == getFilterSlotStack().getItem())
-					if (entityitem1.getEntityItem().getItemDamage() == getFilterSlotStack().getItemDamage()) {
-						double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-						if ((d < 0.0D || d2 < d * d) && (d1 == -1.0D || d2 < d1)) {
-							d1 = d2;
-							entityitem = entityitem1;
-						}
-					}
-			}
+	public EntityItem getClosestEntityItem(final Entity entity, double d, ItemStack filter) {
+		List<EntityItem> list = worldObj.getEntitiesWithinAABB(EntityItem.class, boundingBox.expand(d, d, d));
+		if (list.isEmpty())
+			return null;
+
+		for (Iterator<EntityItem> iterator = list.iterator(); iterator.hasNext();) {
+			EntityItem item = iterator.next();
+			if (!Utils.areStacksTheSame(filter, item.getEntityItem(), false) || item.delayBeforeCanPickup > 0)
+				iterator.remove();
 		}
-		return entityitem;
+
+		if (list.isEmpty())
+			return null;
+
+		Collections.sort(list, new Comparator<EntityItem>() {
+
+			@Override
+			public int compare(EntityItem e1, EntityItem e2) {
+				return Double.compare(e1.getDistanceSq(entity.posX, entity.posY, entity.posZ), e2.getDistanceSq(entity.posX, entity.posY, entity.posZ));
+			}
+
+		});
+
+		return list.get(0);
 	}
 
 	public void moveToItem(Entity entity) {
@@ -325,7 +333,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (pathentity != null) {
 			setPathToEntity(pathentity);
 			getNavigator().setPath(pathentity, 0.5D);
-		}		
+		}
 	}
 
 	@Override
@@ -399,7 +407,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (slot == TOOL_SLOT)
 			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe || stack.getItem() == Items.bone;
 
-		return false;
+		return true;
 	}
 
 	@Override
@@ -466,7 +474,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@Override
 	public void closeInventory() {
-		if (worldObj.isRemote) 
+		if (worldObj.isRemote)
 			return;
 
 		if (isTaskSlotEmpty() && isTamed()) {
@@ -483,7 +491,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			canPickupItems = true;
 			dataWatcher.updateObject(16, Byte.valueOf((byte) 3));
 		}
-		
+
 		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemShears) {
 			tasks.addTask(1, aiHarvestCrops);
 			dataWatcher.updateObject(16, Byte.valueOf((byte) 4));
@@ -495,35 +503,35 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		}
 		updateAITasks();
 	}
-	
+
 	public boolean isTaskSlotEmpty() {
 		return getTaskSlotStack() == null;
 	}
-	
+
 	public ItemStack getTaskSlotStack() {
 		return getStackInSlot(TOOL_SLOT);
 	}
-	
+
 	public boolean isFilterSlotEmpty() {
 		return getFilterSlotStack() == null;
 	}
-	
+
 	public ItemStack getFilterSlotStack() {
 		return getStackInSlot(CROP_ID_SLOT);
 	}
-	
+
 	public boolean isAntInvSlotEmpty() {
 		return getAntInvSlotStack() == null;
 	}
-	
+
 	public ItemStack getAntInvSlotStack() {
 		return getStackInSlot(INVENTORY_SLOT);
 	}
-	
+
 	@Override
 	public void markDirty() {
 	}
-	
+
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
 		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown))
@@ -559,4 +567,8 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		return false;
 	}
 
+	@Override
+	protected boolean canTriggerWalking() {
+		return false;
+	}
 }

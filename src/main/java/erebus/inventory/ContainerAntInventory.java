@@ -18,7 +18,7 @@ public class ContainerAntInventory extends Container {
 		int i = -54;
 
 		for (int k = 0; k < 3; k++)
-			addSlotToContainer(new BetterSlot(entityInventory, k, 26 + k * 54, 18));
+			addSlotToContainer(new BetterSlot(entityInventory, k, 26 + k * 54, 18, k == 2));
 
 		for (int j = 0; j < 3; j++)
 			for (int k = 0; k < 9; k++)
