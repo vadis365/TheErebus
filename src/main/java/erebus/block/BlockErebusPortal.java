@@ -28,8 +28,6 @@ public class BlockErebusPortal extends BlockBreakable
             if (w.getBlock(x - 1, y, z + 1) != Blocks.stonebrick || w.getBlockMetadata(x - 1, y, z + 1) != 0) return false;
             if (w.getBlock(x + 1, y, z - 1) != Blocks.stonebrick || w.getBlockMetadata(x + 1, y, z - 1) != 0) return false;
             if (w.getBlock(x + 1, y, z + 1) != Blocks.stonebrick || w.getBlockMetadata(x + 1, y, z + 1) != 0) return false;
-
-            if (w.getBlock(x + 2, y, z - 1) != Blocks.brick_stairs || w.getBlockMetadata(x + 2, y, z - 1) != 1) return false;
         }
         { //Layer 2
             if (w.getBlock(x - 1, y + 1, z + 1) != Blocks.stonebrick || w.getBlockMetadata(x - 1, y + 1, z + 1) != 0) return false;
