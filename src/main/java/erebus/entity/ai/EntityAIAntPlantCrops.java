@@ -16,18 +16,16 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 	EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
-	private final double moveSpeed;
 
 	public EntityAIAntPlantCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
 		super((EntityLiving) entity, null, 0, null, moveSpeed, eatSpeed);
-		this.moveSpeed = moveSpeed;
 	}
 
 	@Override
 	public boolean shouldExecute() {
 		return !blackAnt.canCollectFromSilo;
 	}
-	
+
 	@Override
 	public boolean continueExecuting() {
 		return !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty();
@@ -54,12 +52,12 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 
 	@Override
 	protected void moveToLocation() {
-		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY + 1, cropZ, 16.0F, true, false, false, true);	
+		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY + 1, cropZ, 16.0F, true, false, false, true);
 		if (pathentity != null) {
 			blackAnt.setPathToEntity(pathentity);
 			blackAnt.getNavigator().setPath(pathentity, 0.5D);
 		}
-		
+
 		if (blackAnt.getDistance(cropX, cropY, cropZ) < 1.5D)
 			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY + 1, cropZ + 0.5D, 0.5D);
 	}
@@ -75,12 +73,12 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 	@Override
 	protected void afterEaten() {
 		if (!blackAnt.worldObj.isRemote) {
-			
+
 			if (getTargetBlock() != Blocks.farmland) {
 				Utils.rightClickItemAt(blackAnt.worldObj, cropX, cropY, cropZ, 1, new ItemStack(Items.wooden_hoe));
 				blackAnt.worldObj.playSoundEffect((double) cropX + 0.5F, (double) cropY + 0.5F, (double) cropZ + 0.5F, Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
 			}
-			
+
 			if (!isFilterSlotEmpty() && !isAntInvSlotEmpty()) {
 				Item filterItem = getFilterSlotStack().getItem();
 				Item invItem = getAntInvSlotStack().getItem();

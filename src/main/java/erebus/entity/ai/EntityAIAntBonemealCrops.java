@@ -17,11 +17,9 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 	EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
-	private final double moveSpeed;
 
 	public EntityAIAntBonemealCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
 		super((EntityLiving) entity, null, 0, null, moveSpeed, eatSpeed);
-		this.moveSpeed = moveSpeed;
 	}
 
 	@Override
@@ -56,12 +54,12 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 	@Override
 	protected void moveToLocation() {
 		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY, cropZ, 16.0F, true, false, false, true);
-		
+
 		if (pathentity != null) {
 			blackAnt.setPathToEntity(pathentity);
 			blackAnt.getNavigator().setPath(pathentity, 0.5D);
 		}
-		
+
 		if (blackAnt.getDistance(cropX, cropY, cropZ) < 1.5D)
 			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, 0.5D);
 	}
@@ -78,8 +76,7 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 	protected void afterEaten() {
 		EntityPlayer player = Utils.getPlayer(blackAnt.worldObj);
 
-		if (!blackAnt.worldObj.isRemote) {
-
+		if (!blackAnt.worldObj.isRemote)
 			if (!isFilterSlotEmpty() && !isAntInvSlotEmpty()) {
 				Item filterItem = getFilterSlotStack().getItem();
 				Item invItem = getAntInvSlotStack().getItem();
@@ -93,7 +90,6 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 						blackAnt.setInventorySlotContents(INVENTORY_SLOT, null);
 				}
 			}
-		}
 	}
 
 	public boolean isFilterSlotEmpty() {

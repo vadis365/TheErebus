@@ -61,10 +61,9 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 
 	@Override
 	public void updateTask() {
-		EntityBlackAnt blackAnt =  (EntityBlackAnt) entity;
-		if (!continueExecuting()) {
+		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
+		if (!continueExecuting())
 			return;
-		}
 
 		int xCoord = blackAnt.getDropPointX();
 		int yCoord = blackAnt.getDropPointY();
@@ -107,10 +106,6 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 					eatTicks = 0;
 				}
 			}
-	}
-
-	private int getScaledEatTicks() {
-		return (int) ((float) eatTicks / (float) EAT_SPEED * 10.0F);
 	}
 
 	private void increment() {

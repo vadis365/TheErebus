@@ -7,7 +7,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
 
 public class BlockSiloIntake extends BlockContainer {
 
@@ -45,7 +44,7 @@ public class BlockSiloIntake extends BlockContainer {
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y + 1, z));
 	}
-	
+
 	private boolean isValidBlock(Block block) {
 		return true;
 	}
@@ -54,5 +53,4 @@ public class BlockSiloIntake extends BlockContainer {
 	public int quantityDropped(Random rand) {
 		return 1;
 	}
-
 }

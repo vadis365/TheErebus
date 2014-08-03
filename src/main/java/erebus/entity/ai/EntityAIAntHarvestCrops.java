@@ -9,15 +9,13 @@ import net.minecraft.pathfinding.PathEntity;
 import erebus.entity.EntityBlackAnt;
 
 public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
-	
+
 	EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
-	private final double moveSpeed;
 	private Block blockMunched;
 	private int metaData;
-	
+
 	public EntityAIAntHarvestCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
 		super((EntityLiving) entity, null, 0, null, moveSpeed, eatSpeed);
-		this.moveSpeed = moveSpeed;
 	}
 
 	@Override
@@ -27,7 +25,7 @@ public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
 
 		if (block instanceof BlockCrops && blockMeta >= 7)
 			return true;
-		
+
 		else if (block.hasTileEntity(blockMeta))
 			return false;
 
@@ -42,20 +40,20 @@ public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
 	@Override
 	protected void moveToLocation() {
 		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY, cropZ, 16.0F, true, false, false, true);
-		
+
 		if (pathentity != null) {
 			blackAnt.setPathToEntity(pathentity);
 			blackAnt.getNavigator().setPath(pathentity, 0.5D);
 		}
-		
+
 		if (blackAnt.getDistance(cropX, cropY, cropZ) < 1.5D)
-			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, 0.5D);	
+			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, 0.5D);
 	}
 
 	@Override
 	protected void prepareToEat() {
 		blockMunched = getTargetBlock();
-		metaData = blackAnt.worldObj.getBlockMetadata(cropX, cropY, cropZ);	
+		metaData = blackAnt.worldObj.getBlockMetadata(cropX, cropY, cropZ);
 	}
 
 	@Override

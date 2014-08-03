@@ -9,23 +9,22 @@ import erebus.block.plants.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenMossPatch;
 
 //@formatter:off
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
-	
+
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 	protected final WorldGenerator genLichenPatch = new WorldGenMossPatch(1);
 	private final WorldGenFlowers genMushroomsBrown = new WorldGenFlowers(Blocks.brown_mushroom);
 	private final WorldGenFlowers genMushroomsRed = new WorldGenFlowers(Blocks.red_mushroom);
 	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(0);
 	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(1);
-	private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
-	
+	//private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+
 	@Override
 	public void decorate(){
-		
+
 		for(attempt = 0; attempt < 256; attempt++){
 			xx = x+offsetXZ();
 			yy = rand.nextInt(128);
@@ -34,9 +33,9 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			if (world.getBlock(xx,yy-1,zz) == Blocks.grass && world.isAirBlock(xx,yy,zz))
 				world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall,rand.nextInt(5),2);
 		}
-		
+
 		// TODO mushroom gen
-		
+
 		for(attempt = 0; attempt < 100; attempt++){
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
@@ -83,7 +82,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			if (world.isAirBlock(xx,yy,zz))
 				genMossPatch.generate(world,rand,xx,yy,zz);
 		}
-		
+
 		for(attempt = 0; attempt < 10; attempt++) {
 			xx = x+offsetXZ();
 			yy = 30+rand.nextInt(80);
@@ -92,7 +91,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			if (world.isAirBlock(xx,yy,zz))
 				genLichenPatch.generate(world,rand,xx,yy,zz);
 		}
-		
+
 		genMushroomsBrown.generate(world,rand,x+offsetXZ(),rand.nextInt(128),z+offsetXZ());
 		genMushroomsRed.generate(world,rand,x+offsetXZ(),rand.nextInt(128),z+offsetXZ());
 
