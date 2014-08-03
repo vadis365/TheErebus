@@ -23,6 +23,7 @@ import erebus.item.BlockExtractor;
 import erebus.item.BucketOfBeetleJuice;
 import erebus.item.BucketOfHoney;
 import erebus.item.CavemanClub;
+import erebus.item.Compost;
 import erebus.item.CompoundGoggles;
 import erebus.item.EncrustedDiamond;
 import erebus.item.ErebusFood;
@@ -62,7 +63,7 @@ public class ModItems {
 	// BASIC MATERIALS
 	public static Item portalActivator, erebusMaterials, erebusFood, metalIngot, bamBucket, turnip, sprayCan, wandOfAnimation;
 	public static Item bucketOfBeetleJuice, hornOfSummoning, erebusSpecialItem, blockExtractor, nectarCollector, beeTamingAmulet, bucketHoney;
-	public static Item homingBeecon, antTamingAmulet, flowerSeeds, whetstone, encrustedDiamond;
+	public static Item homingBeecon, antTamingAmulet, flowerSeeds, whetstone, encrustedDiamond, compost;
 
 	// JADE STUFF
 	public static Item jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe;
@@ -109,7 +110,8 @@ public class ModItems {
 		whetstone = new Whetstone().setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
 		encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
 		antTamingAmulet = new AntTamingAmulet().setUnlocalizedName("antTamingAmulet").setTextureName("erebus:antTamingAmulet");
-		
+		compost = new Compost();
+
 		jadeHelmet = new JadeArmour(0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
 		jadeBody = new JadeArmour(1).setUnlocalizedName("chestplateJade").setTextureName("erebus:chestplateJade");
 		jadeLegs = new JadeArmour(2).setUnlocalizedName("leggingsJade").setTextureName("erebus:leggingsJade");
