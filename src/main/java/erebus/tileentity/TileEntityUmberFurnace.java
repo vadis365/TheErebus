@@ -89,7 +89,13 @@ public class TileEntityUmberFurnace extends TileEntityBasicInventory implements 
 				furnaceCookTime = 0;
 			if (flag != furnaceBurnTime > 0) {
 				flag1 = true;
-				BlockUmberFurnace.updateFurnaceBlockState(furnaceBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
+				boolean tileActive = furnaceBurnTime > 0;
+				int meta = getBlockMetadata();
+				boolean blockActive = BlockUmberFurnace.isActive(meta);
+				if (blockActive && !tileActive)
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta & 7, 3);
+				if (!blockActive && tileActive)
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta | 8, 3);
 			}
 		}
 		if (flag1)

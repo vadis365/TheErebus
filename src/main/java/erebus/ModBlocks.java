@@ -122,9 +122,9 @@ public class ModBlocks {
 	public static Block glowshroomStalkN1, glowshroomStalkS1, glowshroomStalkNS2;
 	public static Block glowshroomStalkW1, glowshroomStalkE1, glowshroomStalkWE2;
 	public static Block glowshroomStalkN3, glowshroomStalkS3, glowshroomStalkW3, glowshroomStalkE3;
-	
+
 	// DECORATIONS AND UTILITIES
-	public static Block blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, umberFurnace, umberFurnace_on;
+	public static Block blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, umberFurnace;
 	public static Block umberPaver, insectRepellent, bambooShoot, bambooCrop, bambooTorch, erebusAltar, erebusAltarLightning;
 	public static Block erebusAltarHealing, erebusAltarXP, erebusAltarRepair, glowingJar, reinExo, bambooLadder, bambooBridge;
 	public static Block umberGolemStatue, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy, bambooPole, umberstonePillar;
@@ -197,7 +197,7 @@ public class ModBlocks {
 		glowshroomStalkE1 = new BlockGlowshroomStalkE1().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkE1").setBlockTextureName("erebus:glowshroomStalk");
 		glowshroomStalkE3 = new BlockGlowshroomStalkE3().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkE3").setBlockTextureName("erebus:glowshroomStalk");
 		glowshroomStalkWE2 = new BlockGlowshroomStalkWE2().setHardness(0.2F).setStepSound(Block.soundTypeWood).setBlockName("glowshroomStalkWE2").setBlockTextureName("erebus:glowshroomStalk");
-	
+
 		doubleHeightPlant = new BlockDoubleHeightPlant().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("doubleHeightPlant");
 		thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
 		fern = (BlockFern) new BlockFern().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusFern");
@@ -210,8 +210,7 @@ public class ModBlocks {
 		petrifiedWoodPlanks = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodPlanks").setBlockTextureName("erebus:planks_petrifiedWood");
 		petrifiedCraftingTable = new BlockPetrifiedCraftingTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("petrifiedCraftingTable");
 		bambooCrate = new BlockBambooCrate().setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("bambooCrate");
-		umberFurnace = new BlockUmberFurnace(false).setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("umberFurnaceOFF");
-		umberFurnace_on = new BlockUmberFurnace(true).setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("umberFurnaceON");
+		umberFurnace = new BlockUmberFurnace();
 		umberPaver = new BlockUmberPaver().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("umberPaver");
 		insectRepellent = new BlockInsectRepellent().setBlockName("insectRepellent");
 		bambooShoot = new BlockBambooShoot().setCreativeTab(null).setBlockName("bambooShoot").setBlockTextureName("erebus:bambooShoot");
@@ -252,7 +251,7 @@ public class ModBlocks {
 		siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloRoof").setBlockTextureName("erebus:siloRoof");
 		composter = new BlockComposter(false).setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("composter");
 		composterActive = new BlockComposter(true).setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("composterActive");
-		
+
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("umbercobbleStairs" + i);
@@ -282,7 +281,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, erebusPlantSmall, erebusWallPlants);
 		ModTabs.blocks.setTab(erebusMushroomCap0, erebusMushroomCap1, erebusMushroomCap2, erebusMushroomCap3, erebusMushroomCap4, glowshroomStalkMain, glowshroom);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
-		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberFurnace, umberPaver, erebusAltar);
+		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, erebusAltar);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
 		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake, siloTank, siloSupports, siloRoof, composter, composterActive); // altar,

@@ -20,21 +20,22 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityUmberFurnace;
 
 public class BlockUmberFurnace extends BlockContainer {
 
-	private final boolean isActive;
-	private static boolean keepFurnaceInventory;
-
 	@SideOnly(Side.CLIENT)
-	private IIcon furnaceIconTop, furnaceIconFront;
+	private IIcon top, frontOff, frontOn;
 
-	public BlockUmberFurnace(boolean isActive) {
+	public BlockUmberFurnace() {
 		super(Material.rock);
-		this.isActive = isActive;
+		setHardness(3.5F);
+		setBlockName("umberFurnace");
+		setCreativeTab(ModTabs.blocks);
+		setStepSound(Block.soundTypeStone);
 	}
 
 	@Override
@@ -56,31 +57,32 @@ public class BlockUmberFurnace extends BlockContainer {
 			Block block2 = world.getBlock(x - 1, y, z);
 			Block block3 = world.getBlock(x + 1, y, z);
 
-			byte b0 = 3;
+			byte meta = 3;
 
 			if (block1.func_149730_j() && !block.func_149730_j())
-				b0 = 2;
+				meta = 2;
 			if (block2.func_149730_j() && !block3.func_149730_j())
-				b0 = 5;
+				meta = 5;
 			if (block3.func_149730_j() && !block2.func_149730_j())
-				b0 = 4;
+				meta = 4;
 
-			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return side == 1 ? furnaceIconTop : side == 0 ? furnaceIconTop : side != meta ? blockIcon : furnaceIconFront;
+		return side == 1 ? top : side == 0 ? top : side != (meta & 7) ? blockIcon : isActive(meta) ? frontOn : frontOff;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
 		blockIcon = reg.registerIcon("erebus:umberfurnaceSides");
-		furnaceIconFront = reg.registerIcon(isActive ? "erebus:umberfurnaceFrontLit" : "erebus:umberfurnaceFront");
-		furnaceIconTop = reg.registerIcon("erebus:umberfurnaceEnd");
+		frontOn = reg.registerIcon("erebus:umberfurnaceFrontLit");
+		frontOff = reg.registerIcon("erebus:umberfurnaceFront");
+		top = reg.registerIcon("erebus:umberfurnaceEnd");
 	}
 
 	@Override
@@ -109,49 +111,32 @@ public class BlockUmberFurnace extends BlockContainer {
 
 	}
 
-	public static void updateFurnaceBlockState(boolean isActive, World world, int x, int y, int z) {
-		int l = world.getBlockMetadata(x, y, z);
-		TileEntity tileentity = world.getTileEntity(x, y, z);
-		keepFurnaceInventory = true;
-
-		if (isActive)
-			world.setBlock(x, y, z, ModBlocks.umberFurnace_on);
-		else
-			world.setBlock(x, y, z, ModBlocks.umberFurnace);
-
-		keepFurnaceInventory = false;
-		world.setBlockMetadataWithNotify(x, y, z, l, 2);
-
-		if (tileentity != null) {
-			tileentity.validate();
-			world.setTileEntity(x, y, z, tileentity);
-		}
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if (isActive) {
-			int l = world.getBlockMetadata(x, y, z);
-			float f = x + 0.5F;
-			float f1 = y + 0.0F + rand.nextFloat() * 6.0F / 16.0F;
-			float f2 = z + 0.5F;
-			float f3 = 0.52F;
-			float f4 = rand.nextFloat() * 0.6F - 0.3F;
+		int meta = world.getBlockMetadata(x, y, z);
+		if (!isActive(meta))
+			return;
 
-			if (l == 4) {
-				world.spawnParticle("smoke", f - f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle("flame", f - f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
-			} else if (l == 5) {
-				world.spawnParticle("smoke", f + f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle("flame", f + f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
-			} else if (l == 2) {
-				world.spawnParticle("smoke", f + f4, f1, f2 - f3, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle("flame", f + f4, f1, f2 - f3, 0.0D, 0.0D, 0.0D);
-			} else if (l == 3) {
-				world.spawnParticle("smoke", f + f4, f1, f2 + f3, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle("flame", f + f4, f1, f2 + f3, 0.0D, 0.0D, 0.0D);
-			}
+		meta &= 7;
+		float f = x + 0.5F;
+		float f1 = y + 0.0F + rand.nextFloat() * 6.0F / 16.0F;
+		float f2 = z + 0.5F;
+		float f3 = 0.52F;
+		float f4 = rand.nextFloat() * 0.6F - 0.3F;
+
+		if (meta == 4) {
+			world.spawnParticle("smoke", f - f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", f - f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
+		} else if (meta == 5) {
+			world.spawnParticle("smoke", f + f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", f + f3, f1, f2 + f4, 0.0D, 0.0D, 0.0D);
+		} else if (meta == 2) {
+			world.spawnParticle("smoke", f + f4, f1, f2 - f3, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", f + f4, f1, f2 - f3, 0.0D, 0.0D, 0.0D);
+		} else if (meta == 3) {
+			world.spawnParticle("smoke", f + f4, f1, f2 + f3, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", f + f4, f1, f2 + f3, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -162,29 +147,20 @@ public class BlockUmberFurnace extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack is) {
-		int l = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-		if (l == 0)
+		int meta = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		if (meta == 0)
 			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-		if (l == 1)
+		if (meta == 1)
 			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-		if (l == 2)
+		if (meta == 2)
 			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-		if (l == 3)
+		if (meta == 3)
 			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
 	}
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		if (!keepFurnaceInventory) {
-			TileEntityUmberFurnace tile = Utils.getTileEntity(world, x, y, z, TileEntityUmberFurnace.class);
-
-			if (tile != null)
-				for (int i = 0; i < tile.getSizeInventory(); i++) {
-					ItemStack stack = tile.getStackInSlot(i);
-					if (stack != null)
-						Utils.dropStack(world, x, y, z, stack);
-				}
-		}
+		Utils.dropInventoryContents(Utils.getTileEntity(world, x, y, z, TileEntityUmberFurnace.class));
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 
@@ -197,11 +173,14 @@ public class BlockUmberFurnace extends BlockContainer {
 	public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
 		return Container.calcRedstoneFromInventory(Utils.getTileEntity(world, x, y, z, IInventory.class));
 	}
-/* broken
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int idPicked(World world, int x, int y, int z) {
-		return ModBlocks.umberFurnace.blockID;
+	public Item getItem(World world, int x, int y, int z) {
+		return Item.getItemFromBlock(ModBlocks.umberFurnace);
 	}
-	*/
+
+	public static boolean isActive(int meta) {
+		return (meta & 7) != meta;
+	}
 }
