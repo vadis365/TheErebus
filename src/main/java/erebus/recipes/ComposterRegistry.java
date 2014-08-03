@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 
@@ -16,6 +17,7 @@ public class ComposterRegistry {
 	public static void init() {
 		// TODO register(ModItems.butts);
 		// TODO if you register a itemstack with metadata = OreDictionary.WILDCARD_VALUE it will ignore the metadata when checking the registry
+	register(ModBlocks.erebusPlantSmall);
 	}
 
 	private static void register(Item item) {

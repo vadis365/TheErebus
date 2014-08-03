@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.block.BlockComposter;
+import erebus.recipes.ComposterRegistry;
 
 public class TileEntityComposter extends TileEntity implements ISidedInventory
 {
@@ -307,7 +308,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory
         }
         else
         {
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.composterItemStacks[0]);
+            ItemStack itemstack = ComposterRegistry.isCompostable(this.composterItemStacks[0]);
             if (itemstack == null) return false;
             if (this.composterItemStacks[2] == null) return true;
             if (!this.composterItemStacks[2].isItemEqual(itemstack)) return false;
@@ -323,7 +324,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory
     {
         if (this.canSmelt())
         {
-            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.composterItemStacks[0]);
+            ItemStack itemstack = ComposterRegistry.isCompostable(this.composterItemStacks[0]);
 
             if (this.composterItemStacks[2] == null)
             {
