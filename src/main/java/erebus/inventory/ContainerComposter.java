@@ -86,7 +86,6 @@ public class ContainerComposter extends Container {
 		return tileComposter.isUseableByPlayer(player);
 	}
 
-
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 		ItemStack itemstack = null;
