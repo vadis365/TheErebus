@@ -147,11 +147,11 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooPole, 4), " S ", " B ", " B ", 'S', Items.slime_ball, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.extenderThingy, 1), "BSB", "PDP", "BRB", 'S', Items.string, 'R', Items.redstone, 'D', Blocks.dispenser, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), 'P', new ItemStack(ModBlocks.planksErebus, 1, EnumWood.Bamboo.ordinal()));
 
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataBambooSoup), new ItemStack(Items.bowl), new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bambooShoot.ordinal()));
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataMelonade), new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.melon));
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataMelonadeSparkly), new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.speckled_melon));
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataLarvaeOnStick), new ItemStack(Items.stick), new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataLarvaCooked), new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataLarvaCooked));
-		GameRegistry.addRecipe(new ItemStack(ModItems.erebusFood, 2, ErebusFood.dataHoneySandwich), " B ", "RRR", " B ", 'B', new ItemStack(Items.bread), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.bambooSoup.ordinal()), new ItemStack(Items.bowl), new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bambooShoot.ordinal()));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.melonade.ordinal()), new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.melon));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.melonadeSparkly.ordinal()), new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.speckled_melon));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.larvaeOnStick.ordinal()), new ItemStack(Items.stick), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.larvaCooked.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.larvaCooked.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.larvaCooked.ordinal()));
+		GameRegistry.addRecipe(new ItemStack(ModItems.erebusFood, 2, ErebusFood.FoodType.honeySandwich.ordinal()), " B ", "RRR", " B ", 'B', new ItemStack(Items.bread), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.honeyTreat, 1), "SRS", "RBR", "SRS", 'S', new ItemStack(Items.sugar), 'B', new ItemStack(Items.bread), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()));
 
 		// Miscellaneous
@@ -250,27 +250,27 @@ public class RecipeHandler {
 
 	private static void registerSmelting() {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.blockAmber, 1, 1), new ItemStack(ModBlocks.blockAmber), 0.3F);
-		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, 1), new ItemStack(ModItems.erebusFood, 1, 0), 0.2F);
-		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, 3), new ItemStack(ModItems.erebusFood, 1, 2), 0.2F);
-		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, 5), new ItemStack(ModItems.erebusFood, 1, 4), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.larvaRaw.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.larvaCooked.ordinal()), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.grasshopperLegRaw.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.grasshopperLegCooked.ordinal()), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.tarantulaLegRaw.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.tarantulaLegCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberstone, 1, 1), new ItemStack(ModBlocks.umberstone), 0.2F);
-		GameRegistry.addSmelting(new ItemStack(Items.coal, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 0), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(Items.iron_ingot, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 1), 0.7F);
-		GameRegistry.addSmelting(new ItemStack(Items.gold_ingot, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 2), 1.0F);
-		GameRegistry.addSmelting(new ItemStack(Items.dye, 1, 4), new ItemStack(ModBlocks.umberOreBlock, 1, 3), 0.2F);
-		GameRegistry.addSmelting(new ItemStack(Items.diamond, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 4), 1.0F);
-		GameRegistry.addSmelting(new ItemStack(Items.emerald, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 5), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 0), new ItemStack(Items.coal, 1), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 1), new ItemStack(Items.iron_ingot), 0.7F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 2), new ItemStack(Items.gold_ingot), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 3), new ItemStack(Items.dye, 1, 4), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 4), new ItemStack(Items.diamond), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 5), new ItemStack(Items.emerald), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusMaterials, 1, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 6), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.2F);
 		if (ConfigHandler.lead)
-			GameRegistry.addSmelting(new ItemStack(ModItems.metalIngot, 1, 1), new ItemStack(ModBlocks.erebusOreExtra, 1, 2), 1.0F);
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.erebusOreExtra, 1, 2), new ItemStack(ModItems.metalIngot, 1, 1), 1.0F);
 		if (ConfigHandler.silver)
-			GameRegistry.addSmelting(new ItemStack(ModItems.metalIngot, 1, 2), new ItemStack(ModBlocks.erebusOreExtra, 1, 3), 1.0F);
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.erebusOreExtra, 1, 3), new ItemStack(ModItems.metalIngot, 1, 2), 1.0F);
 		if (ConfigHandler.copper)
-			GameRegistry.addSmelting(new ItemStack(ModItems.metalIngot, 1, 0), new ItemStack(ModBlocks.erebusOreExtra, 1, 1), 1.0F);
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.erebusOreExtra, 1, 1), new ItemStack(ModItems.metalIngot, 1, 0), 1.0F);
 		if (ConfigHandler.tin)
-			GameRegistry.addSmelting(new ItemStack(ModItems.metalIngot, 1, 3), new ItemStack(ModBlocks.erebusOreExtra, 1, 4), 1.0F);
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.erebusOreExtra, 1, 4), new ItemStack(ModItems.metalIngot, 1, 3), 1.0F);
 	}
 
 	private static void registerOreDictionary() {

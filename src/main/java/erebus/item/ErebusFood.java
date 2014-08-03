@@ -19,9 +19,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ErebusFood extends ItemFood {
 
-	public static final String[] iconPaths = new String[] { "larvaRaw", "beetleLarvaCooked", "grasshopperLegRaw", "grasshopperLegCooked", "legTarantula", "legTarantulaCooked", "bambooSoup", "melonade", "melonadeSparkly", "larvaeOnStick", "honeySandwich", "middleFruit" };
-
-	public static final short dataLarvaRaw = 0, dataLarvaCooked = 1, dataGrasshopperLegRaw = 2, dataGrasshopperLegCooked = 3, dataLegTarantula = 4, dataLegTarantulaCooked = 5, dataBambooSoup = 6, dataMelonade = 7, dataMelonadeSparkly = 8, dataLarvaeOnStick = 9, dataHoneySandwich = 10, dataMiddleFruit = 11;
+	public static enum FoodType {
+		larvaRaw,
+		larvaCooked,
+		grasshopperLegRaw,
+		grasshopperLegCooked,
+		tarantulaLegRaw,
+		tarantulaLegCooked,
+		bambooSoup,
+		melonade,
+		melonadeSparkly,
+		larvaeOnStick,
+		honeySandwich,
+		middleFruit;
+	}
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
@@ -33,30 +44,30 @@ public class ErebusFood extends ItemFood {
 	}
 
 	public int getHealAmount(ItemStack is, World world, EntityPlayer player) {
-		switch (is.getItemDamage()) {
-			case dataLarvaRaw:
+		switch (FoodType.values()[is.getItemDamage()]) {
+			case larvaRaw:
 				return 1;
-			case dataLarvaCooked:
+			case larvaCooked:
 				return 3;
-			case dataGrasshopperLegRaw:
+			case grasshopperLegRaw:
 				return 2;
-			case dataGrasshopperLegCooked:
+			case grasshopperLegCooked:
 				return 8;
-			case dataLegTarantula:
+			case tarantulaLegRaw:
 				return 2;
-			case dataLegTarantulaCooked:
+			case tarantulaLegCooked:
 				return 6;
-			case dataBambooSoup:
+			case bambooSoup:
 				return 4;
-			case dataMelonade:
+			case melonade:
 				return 3;
-			case dataMelonadeSparkly:
+			case melonadeSparkly:
 				return 6;
-			case dataLarvaeOnStick:
+			case larvaeOnStick:
 				return 9;
-			case dataHoneySandwich:
+			case honeySandwich:
 				return 6;
-			case dataMiddleFruit:
+			case middleFruit:
 				return 2;
 			default:
 				return 0;
@@ -64,30 +75,30 @@ public class ErebusFood extends ItemFood {
 	}
 
 	public float getSaturationModifier(ItemStack is, World world, EntityPlayer player) {
-		switch (is.getItemDamage()) {
-			case dataLarvaRaw:
+		switch (FoodType.values()[is.getItemDamage()]) {
+			case larvaRaw:
 				return 0.45F;
-			case dataLarvaCooked:
+			case larvaCooked:
 				return 0.65F;
-			case dataGrasshopperLegRaw:
+			case grasshopperLegRaw:
 				return 0.8F;
-			case dataGrasshopperLegCooked:
+			case grasshopperLegCooked:
 				return 0.9F;
-			case dataLegTarantula:
+			case tarantulaLegRaw:
 				return 0.6F;
-			case dataLegTarantulaCooked:
+			case tarantulaLegCooked:
 				return 1.0F;
-			case dataBambooSoup:
+			case bambooSoup:
 				return 1.0F;
-			case dataMelonade:
+			case melonade:
 				return 0.75F;
-			case dataMelonadeSparkly:
+			case melonadeSparkly:
 				return 0.85F;
-			case dataLarvaeOnStick:
+			case larvaeOnStick:
 				return 0.85F;
-			case dataHoneySandwich:
+			case honeySandwich:
 				return 0.85F;
-			case dataMiddleFruit:
+			case middleFruit:
 				return 0.5F;
 			default:
 				return 0.0F;
@@ -95,12 +106,12 @@ public class ErebusFood extends ItemFood {
 	}
 
 	public PotionEffect getPotionEffect(ItemStack is, World world, EntityPlayer player) {
-		switch (is.getItemDamage()) {
-			case dataLarvaRaw:
+		switch (FoodType.values()[is.getItemDamage()]) {
+			case larvaRaw:
 				return new PotionEffect(Potion.confusion.id, 300, 2);
-			case dataMelonadeSparkly:
+			case melonadeSparkly:
 				return new PotionEffect(Potion.regeneration.id, 200, 0);
-			case dataLarvaeOnStick:
+			case larvaeOnStick:
 				return new PotionEffect(Potion.confusion.id, 100, 1);
 			default:
 				return null;
@@ -109,9 +120,9 @@ public class ErebusFood extends ItemFood {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack is) {
-		switch (is.getItemDamage()) {
-			case dataMelonade:
-			case dataMelonadeSparkly:
+		switch (FoodType.values()[is.getItemDamage()]) {
+			case melonade:
+			case melonadeSparkly:
 				return EnumAction.drink;
 			default:
 				return EnumAction.eat;
@@ -120,21 +131,23 @@ public class ErebusFood extends ItemFood {
 
 	@Override
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
-		--is.stackSize;
+		is.stackSize--;
 		player.getFoodStats().addStats(getHealAmount(is, world, player), getSaturationModifier(is, world, player));
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		onFoodEaten(is, world, player);
 
-		int damage = is.getItemDamage();
 		Item item = null;
 
-		if (damage == dataBambooSoup)
-			item = Items.bowl;
-		else if (damage == dataMelonade || damage == dataMelonadeSparkly)
-			item = Items.glass_bottle;
-		else
-			return is;
-
+		switch (FoodType.values()[is.getItemDamage()]) {
+			case bambooSoup:
+				item = Items.bowl;
+				break;
+			case melonade:
+			case melonadeSparkly:
+				item = Items.glass_bottle;
+			default:
+				return is;
+		}
 		if (is.stackSize != 0)
 			player.inventory.addItemStackToInventory(new ItemStack(item));
 
@@ -150,10 +163,10 @@ public class ErebusFood extends ItemFood {
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		icons = new IIcon[iconPaths.length];
+		icons = new IIcon[FoodType.values().length];
 		int i = 0;
-		for (String path : iconPaths)
-			icons[i++] = iconRegister.registerIcon("erebus:" + path);
+		for (FoodType type : FoodType.values())
+			icons[i++] = iconRegister.registerIcon("erebus:" + type);
 	}
 
 	@Override
@@ -163,11 +176,11 @@ public class ErebusFood extends ItemFood {
 		return icons[meta];
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item id, CreativeTabs tab, List list) {
-		for (int i = 0; i < iconPaths.length; i++)
+		for (int i = 0; i < FoodType.values().length; i++)
 			list.add(new ItemStack(id, 1, i));
 	}
 
@@ -175,5 +188,30 @@ public class ErebusFood extends ItemFood {
 	public String getUnlocalizedName(ItemStack is) {
 		int i = is.getItemDamage();
 		return super.getUnlocalizedName() + "." + i;
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack stack) {
+		switch (FoodType.values()[stack.getItemDamage()]) {
+			case bambooSoup:
+				return new ItemStack(Items.bowl);
+			case melonade:
+			case melonadeSparkly:
+				return new ItemStack(Items.glass_bottle);
+			default:
+				return null;
+		}
+	}
+
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		switch (FoodType.values()[stack.getItemDamage()]) {
+			case bambooSoup:
+			case melonade:
+			case melonadeSparkly:
+				return true;
+			default:
+				return false;
+		}
 	}
 }

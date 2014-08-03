@@ -151,7 +151,7 @@ public class BlockHangerPlants extends BlockBush {
 		int meta = world.getBlockMetadata(x, y, z);
 		ItemStack item = null;
 		if (meta == dataHangerFruit) {
-			item = new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataMiddleFruit);
+			item = new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.middleFruit.ordinal());
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			world.setBlock(x, y, z, this, dataHanger4, 2);
 			return true;
@@ -171,7 +171,7 @@ public class BlockHangerPlants extends BlockBush {
 		int meta = world.getBlockMetadata(x, y, z);
 		ItemStack item = null;
 		if (meta == dataHangerFruit) {
-			item = new ItemStack(ModItems.erebusFood, 2, ErebusFood.dataMiddleFruit);
+			item = new ItemStack(ModItems.erebusFood, 2, ErebusFood.FoodType.middleFruit.ordinal());
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
 
@@ -197,7 +197,7 @@ public class BlockHangerPlants extends BlockBush {
 		ItemStack item = null;
 		if (world.isAirBlock(x, y + 1, z)) {
 			if (meta == dataHangerFruit) {
-				item = new ItemStack(ModItems.erebusFood, 1, ErebusFood.dataMiddleFruit);
+				item = new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.middleFruit.ordinal());
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			}
 			if (meta == dataHangerSeed) {
