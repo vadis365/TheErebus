@@ -45,6 +45,8 @@ dependencies
 {
 	compile 'codechicken:CodeChickenLib:1.7.10-1.1.1.98:dev'
 	compile 'codechicken:ForgeMultipart:1.7.10-1.1.0.300:dev'
+    compile 'codechicken:CodeChickenCore:1.7.10-1.0.2.9:dev'
+    compile 'codechicken:NotEnoughItems:1.7.10-1.0.2.15:dev'
 }
 
 processResources
