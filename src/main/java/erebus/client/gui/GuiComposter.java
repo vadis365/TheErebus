@@ -15,7 +15,7 @@ import erebus.tileentity.TileEntityComposter;
 @SideOnly(Side.CLIENT)
 public class GuiComposter extends GuiContainer
 {
-    private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("textures/gui/container/furnace.png");
+    private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("erebus:textures/gui/container/composter.png");
     private TileEntityComposter tileComposter;
 
     public GuiComposter(InventoryPlayer player, TileEntityComposter composter)
