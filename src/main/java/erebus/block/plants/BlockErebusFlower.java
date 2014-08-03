@@ -27,7 +27,6 @@ import erebus.item.block.ItemBlockErebusFlower;
 public class BlockErebusFlower extends Block implements ISubBlocksBlock {
 
 	public enum FLOWER_TYPE {
-		//@formatter:off
 		BLACK_PETAL,
 		RED_PETAL,
 		BROWN_PETAL,
@@ -44,7 +43,6 @@ public class BlockErebusFlower extends Block implements ISubBlocksBlock {
 		WHITE_PETAL,
 		EXPLODING_STIGMA,
 		STEM
-		//@formatter:on
 	}
 
 	@SideOnly(Side.CLIENT)
