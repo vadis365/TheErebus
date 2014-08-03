@@ -22,8 +22,8 @@ import erebus.ModTabs;
 import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
-import erebus.world.feature.tree.WorldGenAcaciaTree;
 import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import erebus.world.feature.tree.WorldGenErebusTrees;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
@@ -106,8 +106,8 @@ public class BlockSaplingErebus extends BlockSapling {
 			case Eucalyptus:
 				worldGen = new WorldGenEucalyptusTree();
 				break;
-			case Acacia:
-				worldGen = new WorldGenAcaciaTree();
+			case Baobab:
+				worldGen = new WorldGenBaobabTree();
 				break;
 			case Asper:
 				worldGen = new WorldGenAsperTree();

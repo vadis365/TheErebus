@@ -20,7 +20,7 @@ import erebus.item.block.ItemBlockSlabSimple;
 public enum EnumWood {
 
 	//@formatter:off
-	Acacia,
+	Baobab,
 	Eucalyptus,
 	Mahogany,
 	Mossbark,

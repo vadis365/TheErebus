@@ -6,10 +6,10 @@ import net.minecraft.world.World;
 import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 
-public class WorldGenAcaciaTree extends WorldGenTreeBase {
+public class WorldGenBaobabTree extends WorldGenTreeBase {
 
-	public WorldGenAcaciaTree() {
-		super(EnumWood.Acacia);
+	public WorldGenBaobabTree() {
+		super(EnumWood.Baobab);
 	}
 
 	@Override

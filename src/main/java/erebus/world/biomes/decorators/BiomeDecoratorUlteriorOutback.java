@@ -10,14 +10,14 @@ import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
-import erebus.world.feature.tree.WorldGenAcaciaTree;
+import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 
 //@formatter:off
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 
-	private final WorldGenerator genTreeAcacia = new WorldGenAcaciaTree();
+	private final WorldGenerator genTreeAcacia = new WorldGenBaobabTree();
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 
 	@Override
