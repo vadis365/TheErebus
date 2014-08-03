@@ -384,7 +384,7 @@ public class ModelCentipede extends ModelBase {
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
+ 
 	@Override
 	public void setLivingAnimations(EntityLivingBase entityLiving, float limbSwing, float prevLimbSwing, float partialTickTime) {
 		float ba = MathHelper.cos(limbSwing * 1.0F) * 1.5F * prevLimbSwing;
