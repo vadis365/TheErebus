@@ -1,61 +1,18 @@
 package erebus;
 
-import java.lang.reflect.Field;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemSeedFood;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.core.handler.ConfigHandler;
-import erebus.item.AntTamingAmulet;
-import erebus.item.ArmorGlider;
-import erebus.item.Bambucket;
-import erebus.item.BeeTamingAmulet;
-import erebus.item.BlockExtractor;
-import erebus.item.BucketOfBeetleJuice;
-import erebus.item.BucketOfHoney;
-import erebus.item.CavemanClub;
-import erebus.item.CompoundGoggles;
-import erebus.item.EncrustedDiamond;
-import erebus.item.ErebusFood;
-import erebus.item.ErebusMaterial;
+import erebus.item.*;
 import erebus.item.ErebusMaterial.DATA;
-import erebus.item.ErebusSpecial;
-import erebus.item.ExoskeletonArmor;
-import erebus.item.FlowerSeeds;
-import erebus.item.HomingBeecon;
-import erebus.item.HornOfSummoning;
-import erebus.item.JadeArmour;
-import erebus.item.JadeAxe;
-import erebus.item.JadePickaxe;
-import erebus.item.JumpBoots;
-import erebus.item.MaxSpeedBow;
-import erebus.item.MetalIngots;
-import erebus.item.NectarCollector;
-import erebus.item.Paxel;
-import erebus.item.PortalActivator;
-import erebus.item.ReinExoskeletonArmor;
-import erebus.item.RitualDagger;
-import erebus.item.RolledNewspaper;
-import erebus.item.ScorpionPincer;
-import erebus.item.SpawnEggs;
-import erebus.item.SprayCan;
-import erebus.item.SprintLeggings;
-import erebus.item.WandOfAnimation;
-import erebus.item.WaspDagger;
-import erebus.item.WaspSword;
-import erebus.item.WebSlinger;
-import erebus.item.Whetstone;
-import erebus.item.WoodlouseBall;
 import erebus.item.block.ItemBlockDoorAmber;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.*;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+
+import java.lang.reflect.Field;
 
 public class ModItems {
 
@@ -182,8 +139,8 @@ public class ModItems {
 		}
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(bamBucket, 1, 1), new ItemStack(bamBucket));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bamBucket, 1, 3), new ItemStack(bamBucket));
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("honey", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucketHoney), new ItemStack(Items.bucket));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid("honey"), new ItemStack(bamBucket, 1, 3), new ItemStack(bamBucket));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid("honey"), new ItemStack(bucketHoney), new ItemStack(Items.bucket));
 	}
 
 	private static void registerItem(Item item) {
