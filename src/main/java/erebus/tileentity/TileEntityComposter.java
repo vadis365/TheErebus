@@ -361,7 +361,7 @@ public class TileEntityComposter extends TileEntity implements ISidedInventory
             {
                 Block block = Block.getBlockFromItem(item);
 
-                if (block == ModBlocks.erebusWallPlants)
+                if (block == ModBlocks.erebusWallPlants && is.getItemDamage() == 1)
                 {
                     return 800;
                 }
