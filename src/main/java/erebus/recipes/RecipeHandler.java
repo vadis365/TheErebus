@@ -196,31 +196,34 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), Blocks.torch);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()));
+        GameRegistry.addRecipe(new ItemStack(ModItems.gaeaEye, 1), "");
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.itemPetrifiedWood.ordinal()), 'U', "stoneUmber"));
 
 		// Sharp Swords
-		for (int i = 0; i < swordType.length; i++)
-			for (int j = 0; j < 6; j++) {
-				ItemStack swordSharp = new ItemStack(swordType[i]);
-				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if (stoneLevel.getItemDamage() > 0) {
-					swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
-					GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(swordType[i]));
-				}
-			}
+        for (Item aSwordType : swordType) {
+            for (int j = 0; j < 6; j++) {
+                ItemStack swordSharp = new ItemStack(aSwordType);
+                ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
+                if (stoneLevel.getItemDamage() > 0) {
+                    swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
+                    GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(aSwordType));
+                }
+            }
+        }
 
 		// Sharp Axes
-		for (int i = 0; i < axeType.length; i++)
-			for (int j = 0; j < 6; j++) {
-				ItemStack axeSharp = new ItemStack(axeType[i]);
-				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if (stoneLevel.getItemDamage() > 0) {
-					axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
-					GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(axeType[i]));
-				}
-			}
+        for (Item anAxeType : axeType) {
+            for (int j = 0; j < 6; j++) {
+                ItemStack axeSharp = new ItemStack(anAxeType);
+                ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
+                if (stoneLevel.getItemDamage() > 0) {
+                    axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
+                    GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(anAxeType));
+                }
+            }
+        }
 
 		// Special Items - for future expansion
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataRhinoRidingKit), " SX", "CCC", "LLL", 'S', Items.string, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4));
