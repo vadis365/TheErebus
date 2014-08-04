@@ -20,7 +20,6 @@ public class TileEntityPortal extends TileEntity
         {
             if (!p.isPatternValid(worldObj, xCoord, yCoord, zCoord))
             {
-                //todo stuff
                 worldObj.setBlockToAir(xCoord, yCoord, zCoord);
                 worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
             }
