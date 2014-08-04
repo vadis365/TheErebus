@@ -1,6 +1,7 @@
 package erebus.world.biomes.decorators;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.plants.BlockDoubleHeightPlant;
@@ -10,14 +11,13 @@ import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
-import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 
 //@formatter:off
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 
-	private final WorldGenerator genTreeAcacia = new WorldGenBaobabTree();
+	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 
 	@Override

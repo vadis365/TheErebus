@@ -1,6 +1,7 @@
 package erebus.world.biomes.decorators;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -12,7 +13,6 @@ import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.plant.WorldGenBamboo;
-import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenAsperTree;
 
 //@formatter:off
@@ -26,7 +26,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 
 	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass,1);
 
-	private final WorldGenerator genTreeBaobab = new WorldGenBaobabTree();
+	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
 
 	@Override
@@ -70,7 +70,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			zz = z+offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
-				genTreeBaobab.generate(world,rand,xx,yy,zz);
+				genTreeAcacia.generate(world,rand,xx,yy,zz);
 		}
 
 		if (rand.nextBoolean() && rand.nextBoolean()){
