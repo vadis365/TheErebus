@@ -44,6 +44,6 @@ public class PortalActivator extends Item
 	public void onBlockAdded(World world, int x, int y, int z)
     {
         if (!world.isRemote) System.out.println(world.getBlockMetadata(x, y - 1, z));
-        if (!world.isRemote) System.out.println(ModBlocks.portalErebus.isPatternValid(world, x, y, z));
+        ModBlocks.portalErebus.makePortal(world, x, y, z);
 	}
 }

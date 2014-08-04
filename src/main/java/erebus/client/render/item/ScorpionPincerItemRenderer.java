@@ -100,5 +100,4 @@ public class ScorpionPincerItemRenderer implements IItemRenderer {
 		model.render(0.0625F);
 		GL11.glPopMatrix();
 	}
-
 }
