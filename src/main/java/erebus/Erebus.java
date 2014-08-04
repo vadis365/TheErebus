@@ -28,6 +28,7 @@ import erebus.integration.ThaumcraftIntegration;
 import erebus.lib.Reference;
 import erebus.network.PacketPipeline;
 import erebus.recipes.AltarRecipe;
+import erebus.recipes.ComposterRegistry;
 import erebus.recipes.RecipeHandler;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
@@ -92,6 +93,8 @@ public class Erebus {
 		ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
 		ModIntegrationHandler.addMod(FMBIntegration.class);
 		ModIntegrationHandler.init();
+
+		ComposterRegistry.init();
 	}
 
 	@EventHandler

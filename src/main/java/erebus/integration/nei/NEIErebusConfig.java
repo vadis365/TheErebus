@@ -21,7 +21,6 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(ModBlocks.portalErebus));
 		API.hideItem(new ItemStack(ModBlocks.blockTurnip));
 		API.hideItem(new ItemStack(ModBlocks.insectRepellent));
-		API.hideItem(new ItemStack(ModBlocks.umberFurnace_on));
 		API.hideItem(new ItemStack(ModBlocks.flowerPlanted, 1, OreDictionary.WILDCARD_VALUE));
 		API.hideItem(new ItemStack(ModBlocks.doorAmber));
 		API.hideItem(new ItemStack(ModBlocks.erebusHoneyBlock));
