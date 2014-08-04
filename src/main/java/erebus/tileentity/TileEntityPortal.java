@@ -20,6 +20,8 @@ public class TileEntityPortal extends TileEntity
         {
             if (!p.isPatternValid(worldObj, xCoord, yCoord, zCoord))
             {
+                for (int l = 0; l < 80; ++l)
+                    worldObj.spawnParticle("hugeexplosion", xCoord + Math.random(), yCoord + Math.random(), zCoord + Math.random(), 0.0D, 0.0D, 0.0D);
                 worldObj.setBlockToAir(xCoord, yCoord, zCoord);
                 worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
             }

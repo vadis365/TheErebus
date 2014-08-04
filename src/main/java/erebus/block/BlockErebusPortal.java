@@ -1,7 +1,10 @@
 package erebus.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.tileentity.TileEntityPortal;
+import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,10 +14,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.tileentity.TileEntityPortal;
-import erebus.world.teleporter.TeleporterHandler;
+
+import java.util.Random;
 
 public class BlockErebusPortal extends BlockContainer {
 
@@ -58,7 +59,7 @@ public class BlockErebusPortal extends BlockContainer {
 				return false;
 		}
 		{ //Layer 3
-			if (w.getBlock(x, y + 2, z) != Blocks.glass)
+			if (w.getBlock(x, y + 2, z) != ModBlocks.gaeanKeystone)
 				return false;
 			if (w.getBlock(x - 1, y + 2, z) != Blocks.stone_slab || w.getBlockMetadata(x - 1, y + 2, z) != 5)
 				return false;
