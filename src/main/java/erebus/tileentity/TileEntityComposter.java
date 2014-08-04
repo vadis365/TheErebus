@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.block.BlockComposter;
 import erebus.recipes.ComposterRegistry;
 
 public class TileEntityComposter extends TileEntityBasicInventory {
@@ -94,7 +93,13 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 
 			if (flag != composterBurnTime > 0) {
 				flag1 = true;
-				BlockComposter.updateFurnaceBlockState(composterBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
+				boolean tileActive = composterBurnTime > 0;
+				int meta = getBlockMetadata();
+				boolean blockActive = meta == 1;
+				if (blockActive && !tileActive)
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
+				if (!blockActive && tileActive)
+					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
 			}
 		}
 

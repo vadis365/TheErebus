@@ -9,14 +9,12 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
-import erebus.ModBlocks;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.core.proxy.CommonProxy;
@@ -24,19 +22,11 @@ import erebus.tileentity.TileEntityComposter;
 
 public class BlockComposter extends BlockContainer {
 
-	private final boolean isActive;
-	private static boolean keepComposterInventory;
 	@SideOnly(Side.CLIENT)
 	private IIcon composterTop, composterBottom;
 
-	public BlockComposter(boolean isActive) {
+	public BlockComposter() {
 		super(Material.rock);
-		this.isActive = isActive;
-	}
-
-	@Override
-	public Item getItemDropped(int id, Random rand, int fortune) {
-		return Item.getItemFromBlock(ModBlocks.composter);
 	}
 
 	@Override
@@ -67,25 +57,6 @@ public class BlockComposter extends BlockContainer {
 		}
 	}
 
-	public static void updateFurnaceBlockState(boolean isActive, World world, int x, int y, int z) {
-		int l = world.getBlockMetadata(x, y, z);
-		TileEntity tileentity = world.getTileEntity(x, y, z);
-		keepComposterInventory = true;
-
-		if (isActive)
-			world.setBlock(x, y, z, ModBlocks.composterActive);
-		else
-			world.setBlock(x, y, z, ModBlocks.composter);
-
-		keepComposterInventory = false;
-		world.setBlockMetadataWithNotify(x, y, z, l, 2);
-
-		if (tileentity != null) {
-			tileentity.validate();
-			world.setTileEntity(x, y, z, tileentity);
-		}
-	}
-
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityComposter();
@@ -93,18 +64,15 @@ public class BlockComposter extends BlockContainer {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		if (!keepComposterInventory) {
-			Utils.dropInventoryContents(Utils.getTileEntity(world, x, y, z, TileEntityComposter.class));
-			world.func_147453_f(x, y, z, block);
-		}
-
+		Utils.dropInventoryContents(Utils.getTileEntity(world, x, y, z, TileEntityComposter.class));
+		world.func_147453_f(x, y, z, block);
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if (isActive) {
+		if (world.getBlockMetadata(x, y, z) == 1) {
 			float f = x + 0.5F;
 			float f1 = y + 1.1F + rand.nextFloat() * 6.0F / 16.0F;
 			float f2 = z + 0.5F;
@@ -123,12 +91,6 @@ public class BlockComposter extends BlockContainer {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z) {
-		return Item.getItemFromBlock(ModBlocks.composter);
-	}
-	
-	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
@@ -137,7 +99,7 @@ public class BlockComposter extends BlockContainer {
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
-	
+
 	@Override
 	public int getRenderType() {
 		return BlockRenderIDs.COMPOSTER.id();
