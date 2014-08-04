@@ -49,7 +49,7 @@ public class ContainerBambooCrate extends Container {
 				return null;
 
 			if (is1.stackSize == 0)
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 		}

@@ -1,13 +1,13 @@
 package erebus.inventory;
 
-import java.util.List;
-
+import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import erebus.tileentity.TileEntityBambooCrate;
+
+import java.util.List;
 
 public class ContainerColossalCrate extends Container {
 
@@ -87,7 +87,7 @@ public class ContainerColossalCrate extends Container {
 				return null;
 
 			if (is1.stackSize == 0)
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 		}

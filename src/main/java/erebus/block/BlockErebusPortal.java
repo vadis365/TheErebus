@@ -71,8 +71,6 @@ public class BlockErebusPortal extends BlockContainer
         return thing & 3;
     }
 
-
-
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z, int m)
     {

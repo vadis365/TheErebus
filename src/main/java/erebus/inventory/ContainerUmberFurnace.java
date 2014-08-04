@@ -40,8 +40,7 @@ public class ContainerUmberFurnace extends Container {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		for (int i = 0; i < crafters.size(); i++)
-			furnace.sendGUIData(this, (ICrafting) crafters.get(i));
+        for (Object crafter : crafters) furnace.sendGUIData(this, (ICrafting) crafter);
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class ContainerUmberFurnace extends Container {
 					return null;
 
 			if (slotItemStack.stackSize == 0)
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 

@@ -19,6 +19,6 @@ public class BetterSlot extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return isInvalid ? false : inventory.isItemValidForSlot(getSlotIndex(), stack);
+		return !isInvalid && inventory.isItemValidForSlot(getSlotIndex(), stack);
 	}
 }

@@ -52,7 +52,7 @@ public class ContainerExtenderThingy extends Container {
 					return null;
 
 			if (slotItemStack.stackSize == 0)
-				slot.putStack((ItemStack) null);
+				slot.putStack(null);
 			else
 				slot.onSlotChanged();
 
