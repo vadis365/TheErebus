@@ -20,7 +20,7 @@ public class BlockErebusPortal extends BlockContainer {
 
 	public BlockErebusPortal() {
 		super(Material.portal);
-		setHardness(-1F);
+		setBlockUnbreakable();
 		setTickRandomly(true);
 		setBlockTextureName("erebus:erebusPortal");
 	}
