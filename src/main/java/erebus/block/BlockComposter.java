@@ -72,7 +72,7 @@ public class BlockComposter extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if (BlockUmberFurnace.isActive(world.getBlockMetadata(x, y, z))) {
+		if (world.getBlockMetadata(x, y, z) == 1) {
 			float f = x + 0.5F;
 			float f1 = y + 1.1F + rand.nextFloat() * 6.0F / 16.0F;
 			float f2 = z + 0.5F;
