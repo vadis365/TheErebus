@@ -21,9 +21,9 @@ import erebus.item.block.ItemBlockGeneric;
 
 public class BlockLeavesErebus extends BlockLeaves implements ISubBlocksBlock {
 
-	public static final String[] leafTypes = new String[] { "Baobab", "Eucalyptus", "Mahogany", "Asper", "Mossbark", "Cypress" };
-	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataAsper = 3, dataMossbark = 4, dataCypress = 5;
-	public static final byte dataAcaciaDecay = 8, dataEucalyptusDecay = 9, dataMahoganyDecay = 10, dataAsperDecay = 11, dataMossbarkDecay = 12, dataCypressDecay = 13;
+	public static final String[] leafTypes = new String[] { "Acacia", "Eucalyptus", "Mahogany", "Asper", "Mossbark", "Pink", "Cypress" };
+	public static final byte dataAcacia = 0, dataEucalyptus = 1, dataMahogany = 2, dataAsper = 3, dataMossbark = 4, dataPink = 5, dataCypress = 6;
+	public static final byte dataAcaciaDecay = 8, dataEucalyptusDecay = 9, dataMahoganyDecay = 10, dataAsperDecay = 11, dataMossbarkDecay = 12, dataPinkDecay = 13, dataCypressDecay = 14;
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] iconArray;
@@ -163,7 +163,7 @@ public class BlockLeavesErebus extends BlockLeaves implements ISubBlocksBlock {
 					return -1;
 			}
 		}
-	 */
+	*/
 	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z) & ~8;
