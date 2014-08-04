@@ -26,11 +26,13 @@ public class BlockErebusPortal extends BlockContainer {
 		setBlockTextureName("erebus:erebusPortal");
 	}
 
-	public void makePortal(World w, int x, int y, int z) {
+	public boolean makePortal(World w, int x, int y, int z) {
 		if (isPatternValid(w, x, y, z)) {
 			w.setBlock(x, y, z, this);
 			w.setBlock(x, y + 1, z, this);
+			return true;
 		}
+		return false;
 	}
 
 	public boolean isPatternValid(World w, int x, int y, int z) {

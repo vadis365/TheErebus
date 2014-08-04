@@ -30,20 +30,14 @@ public class PortalActivator extends Item
         {
 			Block block = world.getBlock(x, y, z);
 
-			if (block.isAir(world, x, y, z))
+			if (block.isAir(world, x, y, z) && ModBlocks.portalErebus.makePortal(world, x, y, z))
             {
 				world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
-				onBlockAdded(world, x, y, z);
+				is.damageItem(1, player);
+				return true;
 			}
-
-			is.damageItem(1, player);
-			return true;
 		}
-	}
-
-	public void onBlockAdded(World world, int x, int y, int z)
-    {
-        if (!world.isRemote) System.out.println(world.getBlockMetadata(x, y - 1, z));
-        ModBlocks.portalErebus.makePortal(world, x, y, z);
+		
+		return false;
 	}
 }
