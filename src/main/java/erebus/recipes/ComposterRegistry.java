@@ -7,9 +7,12 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 
@@ -19,17 +22,23 @@ public class ComposterRegistry {
 	private static List<ItemStack> registry = new ArrayList<ItemStack>();
 
 	public static void init() {
-		// TODO register(ModItems.butts);
-		// TODO if you register a itemstack with metadata = OreDictionary.WILDCARD_VALUE it will ignore the metadata when checking the registry
-
+		register(Items.stick);
+		register(Items.wooden_axe);
+		register(Items.wooden_door);
+		register(Items.wooden_hoe);
+		register(Items.wooden_pickaxe);
+		register(Items.wooden_shovel);
+		register(Items.wooden_sword);
+		register(Items.wheat);
+		register(Items.poisonous_potato);
 	}
 
 	private static void register(Item item) {
-		register(new ItemStack(item));
+		register(new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	private static void register(Block block) {
-		register(new ItemStack(block));
+		register(new ItemStack(block, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	private static void register(ItemStack stack) {
@@ -40,7 +49,7 @@ public class ComposterRegistry {
 		if (stack == null)
 			return null;
 
-		if (stack.getItem() instanceof ItemFood)
+		if (stack.getItem() instanceof ItemFood || stack.getItem() instanceof ItemSeeds)
 			return new ItemStack(ModItems.compost);
 		else {
 			Block block = Block.getBlockFromItem(stack.getItem());
