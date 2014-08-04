@@ -36,7 +36,7 @@ public class PortalActivatorRenderer implements IItemRenderer {
 				renderWand(-0.5F, 0.2F, -0.5F, 1.5);
 				break;
 			case EQUIPPED:
-				renderEquipped(0.3F, 1.6F, 1.1F, 2);
+				renderEquipped(0.3F, 1.4F, 0.9F, 1.5);
 				break;
 			case EQUIPPED_FIRST_PERSON:
 				renderWandFirstPerson(0.5F, 0.9F, 0.5F, 2);
