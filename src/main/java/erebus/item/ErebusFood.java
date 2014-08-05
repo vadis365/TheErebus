@@ -41,7 +41,6 @@ public class ErebusFood extends ItemFood {
 
 	static {
 		try {
-
 			Field f = ReflectionHelper.findField(PotionHelper.class, "potionRequirements", "field_77927_l");
 			f.setAccessible(true);
 			HashMap<Integer, String> potionRequirements = (HashMap<Integer, String>) f.get(null);
