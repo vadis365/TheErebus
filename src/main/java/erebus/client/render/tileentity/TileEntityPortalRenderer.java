@@ -13,8 +13,9 @@ public class TileEntityPortalRenderer extends TileEntitySpecialRenderer
 {
     private static final ResourceLocation beamTexture = new ResourceLocation("textures/entity/beacon_beam.png");
 
-    public void renderTileEntityAt(TileEntity t, double x, double y, double z, float otherThing)
+    public void renderTileEntityAt(TileEntity t, double x, double y1, double z, float otherThing)
     {
+        double y = y1 + 2;
         TileEntityPortal tile = (TileEntityPortal) t;
         if (tile.renderBeam())
         {

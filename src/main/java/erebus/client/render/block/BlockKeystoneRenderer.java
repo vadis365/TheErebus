@@ -16,7 +16,6 @@ public class BlockKeystoneRenderer implements ISimpleBlockRenderingHandler
 
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
     {
-        System.out.println("I'm rendering this stuff");
         renderKeystone(renderer, (BlockGaeanKeystone) block, x, y, z);
         return true;
     }
@@ -34,11 +33,6 @@ public class BlockKeystoneRenderer implements ISimpleBlockRenderingHandler
     public boolean renderKeystone(RenderBlocks renderer, BlockGaeanKeystone block, int x, int y, int z)
     {
         int l = renderer.blockAccess.getBlockMetadata(x, y, z);
-        int i1 = l & 3;
-
-        if (i1 == 0) renderer.uvRotateTop = 3;
-        else if (i1 == 3) renderer.uvRotateTop = 1;
-        else if (i1 == 1) renderer.uvRotateTop = 2;
 
         if (!BlockGaeanKeystone.isGemActive(l))
         {

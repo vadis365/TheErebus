@@ -2,6 +2,8 @@ package erebus.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.core.helper.IHighlightedBlock;
 import erebus.core.proxy.ClientProxy;
 import net.minecraft.block.Block;
@@ -51,7 +53,7 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock
 
     public Item getItemDropped(int i, Random r, int h)
     {
-        return null;
+        return ModItems.gaeanGem;
     }
 
     @SideOnly(Side.CLIENT)
@@ -124,7 +126,17 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock
 
     public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int h, float k, float i, float f)
     {
-        w.setBlockMetadataWithNotify(x, y, z, 1, 2);
-        return true;
+        if (p.getCurrentEquippedItem() != null && p.getCurrentEquippedItem().getItem() == ModItems.portalActivator)
+        {
+            w.setBlockMetadataWithNotify(x, y, z, 1, 2);
+            if (!ModBlocks.portalErebus.makePortal(w, x, y - 2, z))
+            {
+                w.setBlockMetadataWithNotify(x, y, z, 0, 2);
+                return false;
+            }
+            if (!p.capabilities.isCreativeMode) p.inventory.mainInventory[p.inventory.currentItem] = null;
+            return true;
+        }
+        else return false;
     }
 }

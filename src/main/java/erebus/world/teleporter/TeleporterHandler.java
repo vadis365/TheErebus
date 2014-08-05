@@ -1,5 +1,11 @@
 package erebus.world.teleporter;
-import java.util.UUID;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
+import erebus.core.handler.ConfigHandler;
+import gnu.trove.map.TObjectByteMap;
+import gnu.trove.map.hash.TObjectByteHashMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityMinecartContainer;
@@ -10,13 +16,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.WorldEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
-import erebus.core.handler.ConfigHandler;
-import gnu.trove.map.TObjectByteMap;
-import gnu.trove.map.hash.TObjectByteHashMap;
+
+import java.util.UUID;
 
 public final class TeleporterHandler{
 	private static TeleporterHandler INSTANCE = new TeleporterHandler();
@@ -98,6 +99,7 @@ public final class TeleporterHandler{
 				player.lastFoodLevel = -1;*/
 			}
 			else if (!(entity instanceof EntityMinecartContainer)){ // TODO we cannot handle this, would result in container breaking in both worlds and duplicate items; find some sneaky solution around this issue
+                                                                    // fixme copy paste
 				world.theProfiler.startSection("changeDimension");
 				
 				MinecraftServer mcServer = MinecraftServer.getServer();
