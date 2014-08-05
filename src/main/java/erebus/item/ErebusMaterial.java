@@ -61,7 +61,8 @@ public class ErebusMaterial extends Item {
 		mossBall,
 		yellowDottedFungus,
 		plateExoRhino,
-		rhinoBeetleHorn
+		rhinoBeetleHorn,
+		antPheromones
 	}
 
 	@SideOnly(Side.CLIENT)

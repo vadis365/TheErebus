@@ -15,6 +15,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.item.ErebusMaterial.DATA;
 
 public class EntityZombieAnt extends EntityMob {
 
@@ -89,24 +91,23 @@ public class EntityZombieAnt extends EntityMob {
 	}
 	
 	@Override
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 0), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 1), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 2), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 3), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 4), 0.0F);
+		entityDropItem(new ItemStack(Blocks.red_mushroom, 1, 0), 0.0F);
+		entityDropItem(new ItemStack(Blocks.brown_mushroom, 1, 0), 0.0F);
+		if (rand.nextInt(5) == 0)
+			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.antPheromones.ordinal()), 0.0F);
+	}
+	
+	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if(worldObj.isRemote)
 			worldObj.spawnParticle("reddust", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
-	}
-	
-	@Override
-	public void onDeathUpdate() {
-		super.onDeathUpdate();
-		if (!worldObj.isRemote && isDead) {
-			entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 0), 0.0F);
-			entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 1), 0.0F);
-			entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 2), 0.0F);
-			entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 3), 0.0F);
-			entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 4), 0.0F);
-			entityDropItem(new ItemStack(Blocks.red_mushroom, 1, 0), 0.0F);
-			entityDropItem(new ItemStack(Blocks.brown_mushroom, 1, 0), 0.0F);
-		}
 	}
 }
 

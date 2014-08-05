@@ -231,6 +231,10 @@ item.erebusMaterials.31.name=Nettle Leaves
 item.erebusMaterials.32.name=Nettle Flowers
 item.erebusMaterials.33.name=Middle Fruit Seeds
 item.erebusMaterials.34.name=Moss Ball
+item.erebusMaterials.35.name=Yellow Dotted Fungus
+item.erebusMaterials.36.name=Rhino Beetle Plate
+item.erebusMaterials.37.name=Rhino Beetle Horn
+item.erebusMaterials.38.name=Ant Pheromones
 item.erebusSpecialItem.0.name=Beetle Riding Kit
 item.erebusSpecialItem.1.name=Beetle Amulet
 item.erebusSpecialItem.2.name=Umbergolem Torso
@@ -319,6 +323,7 @@ entity.erebus.midgeSwarm.name=Midge Swarm
 entity.erebus.punchroom.name=Punchroom
 entity.erebus.crushroom.name=Crushroom
 entity.erebus.blackAnt.name=Black Ant
+entity.erebus.zombieAnt.name=Zombie Ant
 
 # Fluids
 fluid.erebus.honey=Honey
