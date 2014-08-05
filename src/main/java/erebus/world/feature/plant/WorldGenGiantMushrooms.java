@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
@@ -11,6 +12,9 @@ import erebus.ModBlocks;
 
 //@formatter:off
 public class WorldGenGiantMushrooms extends WorldGenerator{
+	private static final int stalkMeta = 11;
+	private static final Block tempBlock = Blocks.bedrock;
+	
 	public enum MushroomType{
 		BULB_CAPPED(ModBlocks.erebusMushroomCap0),
 		GRANDMAS_SHOES(ModBlocks.erebusMushroomCap1),
@@ -37,50 +41,44 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 		bulbs.clear();
 		Block mushroom = mushroomType.block;
 		
-		// TODO gen - this is just for '/erebus gen' testing
-		
-		bulbs.add(new ChunkCoordinates(x,y+7,z));
-		bulbs.add(new ChunkCoordinates(x+1,y+6,z));
-		bulbs.add(new ChunkCoordinates(x-1,y+6,z));
-		bulbs.add(new ChunkCoordinates(x,y+6,z+1));
-		bulbs.add(new ChunkCoordinates(x,y+6,z-1));
-		bulbs.add(new ChunkCoordinates(x-1,y+5,z-1));
-		bulbs.add(new ChunkCoordinates(x-2,y+5,z));
-		bulbs.add(new ChunkCoordinates(x,y+5,z-2));
-		bulbs.add(new ChunkCoordinates(x-1,y+5,z+1));
-		bulbs.add(new ChunkCoordinates(x,y+5,z+2));
-		bulbs.add(new ChunkCoordinates(x+2,y+5,z));
-		bulbs.add(new ChunkCoordinates(x+1,y+5,z-1));
-		bulbs.add(new ChunkCoordinates(x+1,y+5,z+1));
-
-		bulbs.add(new ChunkCoordinates(x,y,z));
-		
-		for(int a = -1; a <= 1; a++){
-			for(int b = -1; b <= 1; b++)bulbs.add(new ChunkCoordinates(x+a,y,z+b));
+		switch(mushroomType){
+			case BULB_CAPPED:
+				int stalkHeight = 3+rand.nextInt(3+rand.nextInt(2));
+				int sideHeight = 1+rand.nextInt(stalkHeight > 3 ? 3 : 2);
+				
+				for(int py = 0; py <= stalkHeight; py++){
+					world.setBlock(x,y++,z,mushroom,stalkMeta,2);
+				}
+				
+				for(int px = -1; px <= 1; px++){
+					for(int pz = -1; pz <= 1; pz++)bulbs.add(new ChunkCoordinates(x+px,y,z+pz));
+				}
+				
+				
+				for(int py = 1; py <= sideHeight; py++){
+					for(int off = -1; off <= 1; off++){
+						bulbs.add(new ChunkCoordinates(x+2,y-py,z+off));
+						bulbs.add(new ChunkCoordinates(x-2,y-py,z+off));
+						bulbs.add(new ChunkCoordinates(x+off,y-py,z+2));
+						bulbs.add(new ChunkCoordinates(x+off,y-py,z-2));
+					}
+				}
+				
+				break;
 		}
 		
-		for(int c = 1; c <= 2; c++){
-			for(int a = -1; a <= 1; a++){
-				bulbs.add(new ChunkCoordinates(x+2,y-c,z+a));
-				bulbs.add(new ChunkCoordinates(x-2,y-c,z+a));
-				bulbs.add(new ChunkCoordinates(x+a,y-c,z+2));
-				bulbs.add(new ChunkCoordinates(x+a,y-c,z-2));
-			}
-		}
-		
-		// TODO gen - this is just for '/erebus gen' testing
-		
-		for(ChunkCoordinates bulb:bulbs)world.setBlock(bulb.posX,bulb.posY,bulb.posZ,mushroom);
-		for(ChunkCoordinates bulb:bulbs)world.setBlockMetadataWithNotify(bulb.posX,bulb.posY,bulb.posZ,getMetadata(world,x,z,bulb,mushroom),2);
+		for(ChunkCoordinates bulb:bulbs)world.setBlock(bulb.posX,bulb.posY,bulb.posZ,tempBlock);
+		for(ChunkCoordinates bulb:bulbs)world.setBlockMetadataWithNotify(bulb.posX,bulb.posY,bulb.posZ,getMetadata(world,x,z,bulb),2);
+		for(ChunkCoordinates bulb:bulbs)world.setBlock(bulb.posX,bulb.posY,bulb.posZ,mushroom,world.getBlockMetadata(bulb.posX,bulb.posY,bulb.posZ),2);
 		
 		return true;
 	}
 	
-	public static int getMetadata(World world, int centerX, int centerZ, ChunkCoordinates bulb, Block mushroom){
-		boolean posX = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ) == mushroom,
-				negX = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ) == mushroom,
-				posZ = world.getBlock(bulb.posX,bulb.posY,bulb.posZ+1) == mushroom,
-				negZ = world.getBlock(bulb.posX,bulb.posY,bulb.posZ-1) == mushroom;
+	public static int getMetadata(World world, int centerX, int centerZ, ChunkCoordinates bulb){
+		boolean posX = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ) == tempBlock,
+				negX = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ) == tempBlock,
+				posZ = world.getBlock(bulb.posX,bulb.posY,bulb.posZ+1) == tempBlock,
+				negZ = world.getBlock(bulb.posX,bulb.posY,bulb.posZ-1) == tempBlock;
 		
 		if (posX && negX && posZ && negZ)return 5; // if surrounded, use top only
 		
@@ -102,10 +100,10 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 		int sides = (posX ? 1 : 0)+(negX ? 1 : 0)+(posZ ? 1 : 0)+(negZ ? 1 : 0);
 		if (sides > 1)return 0; // go away, you're no longer needed here
 		
-		boolean posXposZ = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ+1) == mushroom,
-				negXposZ = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ+1) == mushroom,
-				posXnegZ = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ-1) == mushroom,
-				negXnegZ = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ-1) == mushroom;
+		boolean posXposZ = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ+1) == tempBlock,
+				negXposZ = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ+1) == tempBlock,
+				posXnegZ = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ-1) == tempBlock,
+				negXnegZ = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ-1) == tempBlock;
 		
 		int corners = (posXposZ ? 1 : 0)+(negXposZ ? 1 : 0)+(posXnegZ ? 1 : 0)+(negXnegZ ? 1 : 0);
 		
