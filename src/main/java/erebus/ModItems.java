@@ -38,7 +38,7 @@ public class ModItems {
 	public static final Item encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
 	public static final Item antTamingAmulet = new AntTamingAmulet().setUnlocalizedName("antTamingAmulet").setTextureName("erebus:antTamingAmulet");
 	public static final Item compost = new Compost();
-    public static final Item gaeanGem = new Item().setUnlocalizedName("gaeanGem").setTextureName("erebus:gaeanGem");
+    public static final Item gaeanGem = new GaeanEye().setUnlocalizedName("gaeanGem").setTextureName("erebus:gaeanGem");
 
 	// JADE STUFF
 	public static final Item jadeHelmet = new JadeArmour(0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");

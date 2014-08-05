@@ -1,5 +1,6 @@
 package erebus;
 
+import erebus.core.handler.*;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
@@ -15,10 +16,6 @@ import cpw.mods.fml.relauncher.Side;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
-import erebus.core.handler.BonemealHandler;
-import erebus.core.handler.BucketHandler;
-import erebus.core.handler.ConfigHandler;
-import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.debug.ErebusCommandDebug;
 import erebus.entity.util.RandomMobNames;
@@ -76,6 +73,7 @@ public class Erebus {
 		TeleporterHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
+        MinecraftForge.EVENT_BUS.register(new BlockHighlightHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.flowerPlanted);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.erebusPlantSmall);

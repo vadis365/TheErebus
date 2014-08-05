@@ -1,5 +1,6 @@
 package erebus.core.proxy;
 
+import erebus.client.render.block.*;
 import erebus.client.render.item.*;
 import erebus.client.render.tileentity.*;
 import erebus.tileentity.*;
@@ -43,14 +44,6 @@ import erebus.client.model.entity.ModelSporeling;
 import erebus.client.model.entity.ModelUmberGolem;
 import erebus.client.model.entity.ModelWheatWeevil;
 import erebus.client.model.entity.ModelWoodlouse;
-import erebus.client.render.block.BlockBambooCropRender;
-import erebus.client.render.block.BlockComposterRender;
-import erebus.client.render.block.BlockGlowshroomRender;
-import erebus.client.render.block.BlockGlowshroomStalkRender;
-import erebus.client.render.block.BlockHollowLogRender;
-import erebus.client.render.block.BlockPlantedFlowerRender;
-import erebus.client.render.block.BlockSiloRoofRender;
-import erebus.client.render.block.BlockSiloSupportsRender;
 import erebus.client.render.entity.RenderAnimatedBlock;
 import erebus.client.render.entity.RenderAnimatedChest;
 import erebus.client.render.entity.RenderAntlion;
@@ -160,7 +153,7 @@ import erebus.entity.effect.EntityErebusLightningBolt;
 public class ClientProxy extends CommonProxy {
 
 	public enum BlockRenderIDs {
-		BAMBOO_CROP, HOLLOW_LOG, PLANTED_FLOWER, GLOWSHROOM_STALK, GLOWSHROOM_CAPS, SILO_ROOF, SILO_SUPPORTS, COMPOSTER;
+		BAMBOO_CROP, HOLLOW_LOG, PLANTED_FLOWER, GLOWSHROOM_STALK, GLOWSHROOM_CAPS, SILO_ROOF, SILO_SUPPORTS, COMPOSTER, KEYSTONE;
 
 		private final int ID;
 
@@ -263,6 +256,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.SILO_ROOF.id(), new BlockSiloRoofRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.SILO_SUPPORTS.id(), new BlockSiloSupportsRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.COMPOSTER.id(), new BlockComposterRender());
+        RenderingRegistry.registerBlockHandler(BlockRenderIDs.KEYSTONE.id(), new BlockKeystoneRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltar), new ItemErebusAltarRenderer());

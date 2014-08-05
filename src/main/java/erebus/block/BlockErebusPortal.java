@@ -61,7 +61,7 @@ public class BlockErebusPortal extends BlockContainer {
 				return false;
 		}
 		{ //Layer 3
-			if (w.getBlock(x, y + 2, z) != ModBlocks.gaeanKeystone)
+			if (w.getBlock(x, y + 2, z) != ModBlocks.gaeanKeystone || !BlockGaeanKeystone.isGemActive(w.getBlockMetadata(x, y + 2, z)))
 				return false;
 			if (w.getBlock(x - 1, y + 2, z) != Blocks.stone_slab || w.getBlockMetadata(x - 1, y + 2, z) != 5)
 				return false;
