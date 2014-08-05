@@ -58,6 +58,7 @@ import erebus.entity.EntityWheatWeevil;
 import erebus.entity.EntityWoodlouse;
 import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
+import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.item.SpawnEggs;
 
@@ -107,6 +108,7 @@ public class ModEntities {
 		registerEntity(39, EntityPunchroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
 		registerEntity(40, EntityCrushroom.class, "crushroom", 0xFFFFFF, 0xFF0000);
 		registerEntity(41, EntityBlackAnt.class, "blackAnt", 0x000000, 0xF09071);
+		registerEntity(42, EntityZombieAnt.class, "zombieAnt", 0x00FE40, 0xF09071);
 
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
