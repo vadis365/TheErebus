@@ -1,15 +1,5 @@
 package erebus.item;
 
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -18,8 +8,20 @@ import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityAnimatedChest;
 import erebus.tileentity.TileEntityBambooCrate;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 public class WandOfAnimation extends Item {
+    public int frame;
 
 	public WandOfAnimation() {
 		setFull3D();
@@ -68,4 +70,10 @@ public class WandOfAnimation extends Item {
 		// Bamboo Crate removed for now
 		// || block.blockID == ModBlocks.bambooCrate.blockID
 	}
+
+    public void onUpdate(ItemStack i, World w, Entity e, int m, boolean u)
+    {
+        if (frame >= Integer.MAX_VALUE) frame = 0;
+        frame++;
+    }
 }

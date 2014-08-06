@@ -66,9 +66,11 @@ public class ModelWandOfAnimation extends ModelBase {
 		Pommel3 = new ModelRenderer(this, 0, 55);
 		Pommel3.addBox(-1.5F, 23.5F, -1.5F, 3, 3, 3);
 		setRotation(Pommel3, 0F, 0.7853982F, 0F);
-		Shaft.addChild(Jewel1);
-		Shaft.addChild(Jewel2);
-		Shaft.addChild(Jewel3);
+		//Shaft.addChild(Jewel1);
+		//Shaft.addChild(Jewel2);
+		//Shaft.addChild(Jewel3);
+        Jewel1.addChild(Jewel2);
+        Jewel1.addChild(Jewel3);
 		Shaft.addChild(Dec4);
 		Shaft.addChild(Dec3);
 		Shaft.addChild(Dec2);
@@ -82,8 +84,9 @@ public class ModelWandOfAnimation extends ModelBase {
 		TopR3.addChild(TopR5);
 	}
 
-	public void render(float unitPixel) {
-		Shaft.render(unitPixel);
+	public void render(float unitPixel, int tick) {
+        Shaft.render(unitPixel);
+        GL11.glRotatef(tick, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
 		GL11.glPushMatrix();
 		GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
@@ -92,6 +95,9 @@ public class ModelWandOfAnimation extends ModelBase {
 		TopR3.render(unitPixel);
 		GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
+        GL11.glTranslatef(0f, -0.25f, 0f);
+        GL11.glRotatef(-tick * 2, 0.0F, 1.0F, 0.0F);
+        Jewel1.render(unitPixel);
 		GL11.glPopMatrix();
 	}
 
