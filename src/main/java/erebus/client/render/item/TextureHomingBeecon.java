@@ -78,6 +78,11 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
 				targetX = is.getTagCompound().getInteger("homeX");
 				targetZ = is.getTagCompound().getInteger("homeZ");
 			}
+			
+			if (is != null && is.getItem() == ModItems.homingBeeconAdvanced && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
+				targetX = is.getTagCompound().getInteger("homeX");
+				targetZ = is.getTagCompound().getInteger("homeZ");
+			}
 		}
 	}
 }
