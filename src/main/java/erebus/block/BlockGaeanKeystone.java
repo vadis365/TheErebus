@@ -22,16 +22,15 @@ import erebus.core.helper.IHighlightedBlock;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
-	
+
 	@SideOnly(Side.CLIENT)
 	public IIcon icons[];
-	public AxisAlignedBB[][] boxes = {{ AxisAlignedBB.getBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 0.8125f, 1.0f) }, { AxisAlignedBB.getBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 0.8125f, 1.0f), AxisAlignedBB.getBoundingBox(0.3125f - 0.0625f, 0.8125f, 0.3125f - 0.0625f, 0.6875f + 0.0625f, 1.0f, 0.6875f + 0.0625f) } };
+	public AxisAlignedBB[][] boxes = { { AxisAlignedBB.getBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 0.8125f, 1.0f) }, { AxisAlignedBB.getBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 0.8125f, 1.0f), AxisAlignedBB.getBoundingBox(0.3125f - 0.0625f, 0.8125f, 0.3125f - 0.0625f, 0.6875f + 0.0625f, 1.0f, 0.6875f + 0.0625f) } };
 
 	public BlockGaeanKeystone() {
 		super(Material.rock);
-		setBlockName("gaeanKeystone");
-		//setBlockTextureName("erebus:gaeanKeystone");
 		setHardness(3.0f);
+		setBlockName("gaeanKeystone");
 		setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.8125f, 1.0f);
 	}
 
@@ -45,6 +44,7 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 		return ModItems.gaeanGem;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister r) {
 		icons = new IIcon[4];
@@ -54,9 +54,10 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 		icons[3] = r.registerIcon("erebus:gaeanEye");
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return side == 1 ? icons[0] : (side == 0 ? icons[2] : icons[1]);
+		return side == 1 ? icons[0] : side == 0 ? icons[2] : icons[1];
 	}
 
 	public static boolean isGemActive(int metadata) {
@@ -68,6 +69,7 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 	}
 
 	@Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
 		AxisAlignedBB[] aabbs = boxes[isGemActive(world.getBlockMetadata(x, y, z)) ? 1 : 0];
 		for (AxisAlignedBB aabb : aabbs) {
@@ -83,13 +85,11 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 		MovingObjectPosition closest = null;
 		for (AxisAlignedBB aabb : aabbs) {
 			MovingObjectPosition mop = aabb.getOffsetBoundingBox(x, y, z).calculateIntercept(origin, direction);
-			if (mop != null) {
-				if (closest != null
-						&& mop.hitVec.distanceTo(origin) < closest.hitVec.distanceTo(origin))
+			if (mop != null)
+				if (closest != null && mop.hitVec.distanceTo(origin) < closest.hitVec.distanceTo(origin))
 					closest = mop;
 				else
 					closest = mop;
-			}
 		}
 		if (closest != null) {
 			closest.blockX = x;

@@ -15,7 +15,6 @@ import erebus.ModItems;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockSlabStone;
 import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
-import erebus.block.plants.BlockSmallPlants;
 import erebus.core.handler.ConfigHandler;
 import erebus.item.ErebusFood;
 import erebus.item.ErebusMaterial;
@@ -196,35 +195,33 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), Blocks.torch);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()));
-        GameRegistry.addRecipe(new ItemStack(ModItems.gaeanGem, 1), "VSE", "VSS", "GVV", 'V', Blocks.vine, 'S', Items.stick, 'E', ModItems.gaeanGem, 'G', Items.gold_ingot);
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.gaeanKeystone, 1), "V V", "SOS", "SSS", 'V', Blocks.vine, 'S', Blocks.stonebrick, 'O', Blocks.obsidian);
+		GameRegistry.addRecipe(new ItemStack(ModItems.gaeanGem, 1), "VSE", "VSS", "GVV", 'V', Blocks.vine, 'S', Items.stick, 'E', ModItems.gaeanGem, 'G', Items.gold_ingot);
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.gaeanKeystone, 1), "V V", "SOS", "SSS", 'V', Blocks.vine, 'S', Blocks.stonebrick, 'O', Blocks.obsidian);
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.itemPetrifiedWood.ordinal()), 'U', "stoneUmber"));
 
 		// Sharp Swords
-        for (Item aSwordType : swordType) {
-            for (int j = 0; j < 6; j++) {
-                ItemStack swordSharp = new ItemStack(aSwordType);
-                ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-                if (stoneLevel.getItemDamage() > 0) {
-                    swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
-                    GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(aSwordType));
-                }
-            }
-        }
+		for (Item aSwordType : swordType)
+			for (int j = 0; j < 6; j++) {
+				ItemStack swordSharp = new ItemStack(aSwordType);
+				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
+				if (stoneLevel.getItemDamage() > 0) {
+					swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
+					GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(aSwordType));
+				}
+			}
 
 		// Sharp Axes
-        for (Item anAxeType : axeType) {
-            for (int j = 0; j < 6; j++) {
-                ItemStack axeSharp = new ItemStack(anAxeType);
-                ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-                if (stoneLevel.getItemDamage() > 0) {
-                    axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
-                    GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(anAxeType));
-                }
-            }
-        }
+		for (Item anAxeType : axeType)
+			for (int j = 0; j < 6; j++) {
+				ItemStack axeSharp = new ItemStack(anAxeType);
+				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
+				if (stoneLevel.getItemDamage() > 0) {
+					axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
+					GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(anAxeType));
+				}
+			}
 
 		// Special Items - for future expansion
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataRhinoRidingKit), " SX", "CCC", "LLL", 'S', Items.string, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4));
