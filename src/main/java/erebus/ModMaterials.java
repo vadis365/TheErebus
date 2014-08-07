@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class ModMaterials {
 
-	public static ArmorMaterial armorEXOSKELETON = EnumHelper.addArmorMaterial("EXOSKELETON", 11, new int[] { 2, 4, 3, 2 }, 15);
+	public static ArmorMaterial armorEXOSKELETON = EnumHelper.addArmorMaterial("EXOSKELETON", 11, new int[] { 2, 3, 2, 2 }, 15);
 	public static ArmorMaterial armorREINEXOSKELETON = EnumHelper.addArmorMaterial("REINEXOSKELETON", 11, new int[] { 3, 8, 6, 3 }, 2);
 	public static ArmorMaterial armorREINEXOSPECIAL = EnumHelper.addArmorMaterial("REINEXOSPECIAL", 11, new int[] { 2, 7, 5, 2 }, 2);
 	public static ArmorMaterial armorRHINO = EnumHelper.addArmorMaterial("RHINO", 11, new int[] { 2, 7, 5, 2 }, 2);
