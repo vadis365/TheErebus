@@ -115,7 +115,7 @@ public class EntitySolifuge extends EntityMob {
 			for (int a = 0; a < 4; a++) {
 				EntitySolifugeSmall entitySolifugeSmall = new EntitySolifugeSmall(worldObj);
 				entitySolifugeSmall.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
-				entitySolifugeSmall.setPotionEffect(Byte.valueOf((byte) rand.nextInt(9)));
+				entitySolifugeSmall.setPotionEffect(Byte.valueOf((byte) rand.nextInt(8)));
 				worldObj.spawnEntityInWorld(entitySolifugeSmall);
 			}
 	}
