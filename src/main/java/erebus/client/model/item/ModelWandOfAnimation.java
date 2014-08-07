@@ -11,8 +11,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModelWandOfAnimation extends ModelBase {
 
-	ModelRenderer Jewel1, Jewel2, Jewel3, TopR1, TopR2, TopR3, TopR4, TopR5, Dec4, Dec3, Dec2, Dec1, Shaft, Pommel1, Pommel2, Pommel3;
-    boolean up;
+	private final ModelRenderer Jewel1, Jewel2, Jewel3, TopR1, TopR2, TopR3, TopR4, TopR5, Dec4, Dec3, Dec2, Dec1, Shaft, Pommel1, Pommel2, Pommel3;
+	private boolean up;
 
 	public ModelWandOfAnimation() {
 		textureWidth = 32;
@@ -67,8 +67,8 @@ public class ModelWandOfAnimation extends ModelBase {
 		Pommel3 = new ModelRenderer(this, 0, 55);
 		Pommel3.addBox(-1.5F, 23.5F, -1.5F, 3, 3, 3);
 		setRotation(Pommel3, 0F, 0.7853982F, 0F);
-        Jewel1.addChild(Jewel2);
-        Jewel1.addChild(Jewel3);
+		Jewel1.addChild(Jewel2);
+		Jewel1.addChild(Jewel3);
 		Shaft.addChild(Dec4);
 		Shaft.addChild(Dec3);
 		Shaft.addChild(Dec2);
@@ -82,10 +82,13 @@ public class ModelWandOfAnimation extends ModelBase {
 		TopR3.addChild(TopR5);
 	}
 
-	public void render(float unitPixel, int tick) {
-        if (tick == 0) up = !up;
-        Shaft.render(unitPixel);
-        GL11.glRotatef(tick, 0.0F, 1.0F, 0.0F);
+	public void render(float unitPixel) {
+		float tick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+
+		if (tick == 0)
+			up = !up;
+		Shaft.render(unitPixel);
+		GL11.glRotatef(tick, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
 		GL11.glPushMatrix();
 		GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
@@ -94,9 +97,9 @@ public class ModelWandOfAnimation extends ModelBase {
 		TopR3.render(unitPixel);
 		GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
-        GL11.glTranslatef(0f, -0.25f, 0f);
-        GL11.glRotatef(-tick * 2, 0.0F, 1.0F, 0.0F);
-        Jewel1.render(unitPixel);
+		GL11.glTranslatef(0f, -0.25f, 0f);
+		GL11.glRotatef(-tick * 2, 0.0F, 1.0F, 0.0F);
+		Jewel1.render(unitPixel);
 		GL11.glPopMatrix();
 	}
 

@@ -1,6 +1,5 @@
 package erebus.client.render.item;
 
-import erebus.item.WandOfAnimation;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -12,6 +11,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.item.ModelWandOfAnimation;
+import erebus.item.WandOfAnimation;
 
 @SideOnly(Side.CLIENT)
 public class WandOfAnimationItemRenderer implements IItemRenderer {
@@ -60,7 +60,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 		GL11.glRotatef(225.0F, 0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(0.0F, 0.0F, 0.0F, 1.0F);
 		GL11.glScaled(-size, -size, size);
-		model.render(0.0625F, item.frame);
+		model.render(0.0625F);
 		GL11.glPopMatrix();
 	}
 
@@ -72,7 +72,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 			GL11.glRotatef(0F, 0, 1F, 0);
 			GL11.glRotatef(45F, 0, 0, 1F);
 			GL11.glScaled(0.6F, 0.6F, 0.6F);
-			model.render(0.0625F, item.frame);
+			model.render(0.0625F);
 			GL11.glPopMatrix();
 		} else {
 			GL11.glPushMatrix();
@@ -81,7 +81,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 			GL11.glRotatef(-135F, 0, 1F, 0);
 			GL11.glRotatef(70F, 0, 0, 1F);
 			GL11.glScaled(size, size, size);
-			model.render(0.0625F, item.frame);
+			model.render(0.0625F);
 			GL11.glPopMatrix();
 		}
 	}
@@ -92,7 +92,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 		GL11.glRotatef(180F, 1F, 0, 0);
 		GL11.glRotatef(-45F, 0, 1F, 0);
 		GL11.glScaled(size, size, size);
-		model.render(0.0625F, item.frame);
+		model.render(0.0625F);
 		GL11.glPopMatrix();
 	}
 
@@ -103,7 +103,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 		GL11.glRotatef(135F, 0, 1F, 0);
 		GL11.glRotatef(-20F, 0, 0, 1F);
 		GL11.glScaled(size, size, size);
-		model.render(0.0625F, item.frame);
+		model.render(0.0625F);
 		GL11.glPopMatrix();
 	}
 }
