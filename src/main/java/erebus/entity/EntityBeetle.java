@@ -111,16 +111,16 @@ public class EntityBeetle extends EntityAnimal {
 
 		if (is != null && is.getItem() == Items.bucket && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bucketOfBeetleJuice));
-			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bucketOfBeetleJuice)))
-				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bucketOfBeetleJuice, 1, 0), false);
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bucketBeetleJuice));
+			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bucketBeetleJuice)))
+				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bucketBeetleJuice, 1, 0), false);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.bamBucket && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
+		if (is != null && is.getItem() == ModItems.bambucket && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bamBucket, 1, 2));
-			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bamBucket, 1, 2)))
-				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bamBucket, 1, 2), false);
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bambucket, 1, 2));
+			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucket, 1, 2)))
+				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bambucket, 1, 2), false);
 			return true;
 		}
 		if (is != null && is.getItem() == ModItems.turnip && !shagging()) { 

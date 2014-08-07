@@ -11,6 +11,7 @@ public class BucketOfBeetleJuice extends ItemBucketMilk {
 
 	public BucketOfBeetleJuice() {
 		setMaxStackSize(1);
+		setContainerItem(Items.bucket);
 	}
 
 	@Override

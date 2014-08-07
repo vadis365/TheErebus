@@ -256,10 +256,11 @@ item.erebusFood.10.name=Honey Sandwich
 item.erebusFood.11.name=Middle Fruit
 item.erebusFood.12.name=Raw Titan Chop
 item.erebusFood.13.name=Cooked Titan Chop
-item.bamBucket.0.name=Bambucket
-item.bamBucket.1.name=Water Bambucket
-item.bamBucket.2.name=Bambucket Of Beetle Juice
-item.bamBucket.3.name=Bambucket Of Honey
+item.bambucket.name=Bambucket
+item.bambucketWater.name=Water Bambucket
+item.bambucketHoney.name=Honey Bambucket
+item.bambucketAntiVenom.name=Anti-Venom Bambucket
+item.bambucketBeetleJuice.name=Beetle Juice Bambucket
 item.waspSword.name=Wasp Sword
 item.metalIngot0.name=Copper Ingot
 item.metalIngot1.name=Lead Ingot
@@ -330,7 +331,9 @@ entity.erebus.zombieAnt.name=Zombie Ant
 entity.erebus.nope.name=Nothing Here
 
 # Fluids
-fluid.erebus.honey=Honey
+fluid.honey=Honey
+fluid.beetleJuice=Beetle Juice
+fluid.antiVenom=Anti-Venom
 
 # Others
 itemGroup.erebus.block=Erebus Blocks

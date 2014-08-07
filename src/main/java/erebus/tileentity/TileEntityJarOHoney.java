@@ -7,7 +7,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import erebus.ModBlocks;
+import erebus.ModFluids;
 import erebus.network.AbstractPacket;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketJarOHoney;
@@ -15,7 +15,7 @@ import erebus.network.client.PacketJarOHoney;
 public class TileEntityJarOHoney extends TileEntityGlowingJar {
 
 	public static final int HONEY_MAX_AMOUNT = 4000;
-	public final FluidTank tank = new FluidTank(ModBlocks.erebusHoney, 0, HONEY_MAX_AMOUNT);
+	public final FluidTank tank = new FluidTank(ModFluids.honey, 0, HONEY_MAX_AMOUNT);
 	private String owner = "Boo Boo";
 
 	public int addHoney(int amount) {
@@ -32,7 +32,7 @@ public class TileEntityJarOHoney extends TileEntityGlowingJar {
 
 	public FluidStack getHoney() {
 		if (tank.getFluid() == null)
-			tank.setFluid(new FluidStack(ModBlocks.erebusHoney, 0));
+			tank.setFluid(new FluidStack(ModFluids.honey, 0));
 		return tank.getFluid();
 	}
 

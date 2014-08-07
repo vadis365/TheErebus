@@ -8,8 +8,6 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
 import erebus.block.BlockBones;
@@ -102,9 +100,6 @@ import erebus.lib.EnumWood;
 
 public class ModBlocks {
 
-	// FLUIDS
-	public static Fluid erebusHoney;
-
 	// PORTAL
 	public static BlockErebusPortal portalErebus;
 
@@ -141,11 +136,10 @@ public class ModBlocks {
 
 	public static Block siloSupports, siloTank, siloRoof, composter, composterActive;
 
-    // OTHER THINGS
-    public static Block gaeanKeystone, offeringAltar;
+	// OTHER THINGS
+	public static Block gaeanKeystone, offeringAltar;
 
 	public static void init() {
-		registerFluids();
 		initBlocks();
 		initCreativeTabs();
 		registerBlocks();
@@ -240,7 +234,7 @@ public class ModBlocks {
 		velocityBlock = new BlockVelocity().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("velocityBlock").setBlockTextureName("erebus:blockSpeed0");
 		honeyCombBlock = new BlockHoneyComb().setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundTypeCloth).setBlockName("honeyCombBlock").setBlockTextureName("erebus:honeyCombTop");
 		doorAmber = new BlockDoorAmber(Material.glass).setBlockName("doorAmber").setBlockTextureName("erebus:doorAmber");
-		erebusHoneyBlock = new BlockErebusHoney(erebusHoney).setBlockName("erebusHoney");
+		erebusHoneyBlock = new BlockErebusHoney(ModFluids.honey).setBlockName("erebusHoney");
 		mud = new BlockMud().setBlockName("erebusMud").setBlockTextureName("erebus:mud");
 		mudBricks = new BlockSimple(Material.rock).setBlockName("erebus.mudBricks").setBlockTextureName("erebus:mudBricks").setHardness(0.8F).setResistance(1.0F);
 		honeyTreat = new BlockHoneyTreat().setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("honeyTreat").setBlockTextureName("erebus:honeyTreat");
@@ -254,8 +248,8 @@ public class ModBlocks {
 		siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloRoof").setBlockTextureName("erebus:siloRoof");
 		composter = new BlockComposter().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("composter");
 
-        gaeanKeystone = new BlockGaeanKeystone();
-        offeringAltar = new BlockOfferingAltar();
+		gaeanKeystone = new BlockGaeanKeystone();
+		offeringAltar = new BlockOfferingAltar();
 
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -355,11 +349,6 @@ public class ModBlocks {
 		Blocks.fire.setFireInfo(fern, 60, 100);
 		Blocks.fire.setFireInfo(fiddlehead, 60, 100);
 		Blocks.fire.setFireInfo(thorns, 15, 100);
-	}
-
-	private static void registerFluids() {
-		erebusHoney = new Fluid("honey").setBlock(erebusHoneyBlock).setDensity(6000).setViscosity(6000).setUnlocalizedName("erebus.honey");
-		FluidRegistry.registerFluid(erebusHoney);
 	}
 
 	public static interface ISubBlocksBlock {

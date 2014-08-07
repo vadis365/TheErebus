@@ -122,8 +122,8 @@ public class ThaumcraftIntegration implements IModIntegration {
 		registerItem(ModItems.erebusFood, 8, Aspect.HUNGER, 1, Aspect.LIFE, 3, Aspect.GREED, 2);
 
 		registerItem(ModItems.turnip, -1, Aspect.HUNGER, 2, Aspect.LIFE, 2, Aspect.PLANT, 1, Aspect.CROP, 1);
-		registerItem(ModItems.bamBucket, 0, Aspect.VOID, 1, Aspect.PLANT, 2);
-		registerItem(ModItems.bamBucket, 1, Aspect.VOID, 1, Aspect.PLANT, 2, Aspect.WATER, 2);
+		registerItem(ModItems.bambucket, 0, Aspect.VOID, 1, Aspect.PLANT, 2);
+		registerItem(ModItems.bambucket, 1, Aspect.VOID, 1, Aspect.PLANT, 2, Aspect.WATER, 2);
 		registerItem(ModItems.sprayCan, -1, Aspect.POISON, 1, Aspect.AURA, 2);
 		registerItem(ModItems.waspDagger, -1, Aspect.WEAPON, 2, Aspect.AIR, 1, Aspect.POISON, 2);
 		registerItem(ModItems.wandOfAnimation, -1, Aspect.MAGIC, 10, Aspect.ELDRITCH, 8, Aspect.CRYSTAL, 2, Aspect.ENERGY, 4);
