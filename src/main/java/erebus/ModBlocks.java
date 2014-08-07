@@ -1,16 +1,7 @@
 package erebus;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.block.*;
-import erebus.block.altars.*;
-import erebus.block.bamboo.*;
-import erebus.block.glowshroom.*;
-import erebus.block.plants.*;
-import erebus.block.silo.BlockSiloIntake;
-import erebus.block.silo.BlockSiloRoof;
-import erebus.block.silo.BlockSiloSupports;
-import erebus.block.silo.BlockSiloTank;
-import erebus.lib.EnumWood;
+import java.lang.reflect.Field;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
 import net.minecraft.block.material.MapColor;
@@ -19,8 +10,95 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-
-import java.lang.reflect.Field;
+import cpw.mods.fml.common.registry.GameRegistry;
+import erebus.block.BlockAmber;
+import erebus.block.BlockBones;
+import erebus.block.BlockButtonUmberstone;
+import erebus.block.BlockComposter;
+import erebus.block.BlockDoorAmber;
+import erebus.block.BlockErebusHoney;
+import erebus.block.BlockErebusMushroomCap;
+import erebus.block.BlockErebusOre;
+import erebus.block.BlockErebusOreExtras;
+import erebus.block.BlockErebusPortal;
+import erebus.block.BlockErebusStigma;
+import erebus.block.BlockGaeanKeystone;
+import erebus.block.BlockGhostSand;
+import erebus.block.BlockGlowGem;
+import erebus.block.BlockGlowingJar;
+import erebus.block.BlockGneiss;
+import erebus.block.BlockHollowLog;
+import erebus.block.BlockHoneyComb;
+import erebus.block.BlockHoneyTreat;
+import erebus.block.BlockInsectRepellent;
+import erebus.block.BlockLeavesErebus;
+import erebus.block.BlockMucusBomb;
+import erebus.block.BlockMud;
+import erebus.block.BlockOfferingAltar;
+import erebus.block.BlockOreFossil;
+import erebus.block.BlockPetrifiedChest;
+import erebus.block.BlockPetrifiedCraftingTable;
+import erebus.block.BlockPlanksErebus;
+import erebus.block.BlockPlantedGiantFlower;
+import erebus.block.BlockQuickSand;
+import erebus.block.BlockRedGem;
+import erebus.block.BlockSimple;
+import erebus.block.BlockSlabStone;
+import erebus.block.BlockSpiderSpawner;
+import erebus.block.BlockStairsBase;
+import erebus.block.BlockUmberFurnace;
+import erebus.block.BlockUmberGolemStatue;
+import erebus.block.BlockUmberPaver;
+import erebus.block.BlockUmberstone;
+import erebus.block.BlockUmberstonePillar;
+import erebus.block.BlockVelocity;
+import erebus.block.BlockWallErebus;
+import erebus.block.BlockWaspNest;
+import erebus.block.BlockWaspSpawner;
+import erebus.block.BlockWitherWeb;
+import erebus.block.JarOHoney;
+import erebus.block.altars.BlockAltar;
+import erebus.block.altars.BlockErebusAltar;
+import erebus.block.altars.BlockErebusAltarHealing;
+import erebus.block.altars.BlockErebusAltarLightning;
+import erebus.block.altars.BlockErebusAltarRepair;
+import erebus.block.altars.BlockErebusAltarXP;
+import erebus.block.bamboo.BlockBambooBridge;
+import erebus.block.bamboo.BlockBambooCrate;
+import erebus.block.bamboo.BlockBambooCrop;
+import erebus.block.bamboo.BlockBambooLadder;
+import erebus.block.bamboo.BlockBambooPole;
+import erebus.block.bamboo.BlockBambooShoot;
+import erebus.block.bamboo.BlockBambooTorch;
+import erebus.block.bamboo.BlockExtenderThingy;
+import erebus.block.glowshroom.BlockGlowshroom;
+import erebus.block.glowshroom.BlockGlowshroomStalkDown1;
+import erebus.block.glowshroom.BlockGlowshroomStalkDown2;
+import erebus.block.glowshroom.BlockGlowshroomStalkDown3;
+import erebus.block.glowshroom.BlockGlowshroomStalkE1;
+import erebus.block.glowshroom.BlockGlowshroomStalkE3;
+import erebus.block.glowshroom.BlockGlowshroomStalkMain;
+import erebus.block.glowshroom.BlockGlowshroomStalkN1;
+import erebus.block.glowshroom.BlockGlowshroomStalkN3;
+import erebus.block.glowshroom.BlockGlowshroomStalkNS2;
+import erebus.block.glowshroom.BlockGlowshroomStalkS1;
+import erebus.block.glowshroom.BlockGlowshroomStalkS3;
+import erebus.block.glowshroom.BlockGlowshroomStalkW1;
+import erebus.block.glowshroom.BlockGlowshroomStalkW3;
+import erebus.block.glowshroom.BlockGlowshroomStalkWE2;
+import erebus.block.plants.BlockDoubleHeightPlant;
+import erebus.block.plants.BlockErebusFlower;
+import erebus.block.plants.BlockFern;
+import erebus.block.plants.BlockFiddlehead;
+import erebus.block.plants.BlockHangerPlants;
+import erebus.block.plants.BlockSmallPlants;
+import erebus.block.plants.BlockThorns;
+import erebus.block.plants.BlockTurnip;
+import erebus.block.plants.BlockWallPlants;
+import erebus.block.silo.BlockSiloRoof;
+import erebus.block.silo.BlockSiloSupports;
+import erebus.block.silo.BlockSiloTank;
+import erebus.lib.EnumWood;
 
 public class ModBlocks {
 
@@ -61,7 +139,7 @@ public class ModBlocks {
 	// DUNGEONS
 	public static Block spiderSpawner, jumpingSpiderSpawner, waspSpawner, waspNestBlock, gneiss;
 
-	public static Block siloSupports, siloIntake, siloTank, siloRoof, composter, composterActive;
+	public static Block siloSupports, siloTank, siloRoof, composter, composterActive;
 
     // OTHER THINGS
     public static Block gaeanKeystone, offeringAltar;
@@ -171,7 +249,6 @@ public class ModBlocks {
 		altar = new BlockAltar().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.altar").setBlockTextureName("stone");
 		glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 		mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
-		siloIntake = new BlockSiloIntake().setHardness(1.5F).setBlockName("siloIntake").setBlockTextureName("erebus:siloIntake");
 		siloTank = new BlockSiloTank(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloTank");
 		siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("siloSupports").setBlockTextureName("erebus:siloSupports");
 		siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloRoof").setBlockTextureName("erebus:siloRoof");
@@ -212,7 +289,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, erebusAltar);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);// erebusHoneyBlock,
-		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake, siloTank, siloSupports, siloRoof, composter, composterActive); // altar,
+		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloTank, siloSupports, siloRoof, composter, composterActive); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
 		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wallErebus, gaeanKeystone, offeringAltar);

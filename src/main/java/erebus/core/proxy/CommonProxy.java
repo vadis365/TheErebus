@@ -1,23 +1,63 @@
 package erebus.core.proxy;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.block.BlockPetrifiedChest;
-import erebus.block.silo.TileEntitySiloIntake;
-import erebus.block.silo.TileEntitySiloTank;
-import erebus.client.gui.*;
-import erebus.entity.EntityAnimatedBambooCrate;
-import erebus.entity.EntityBlackAnt;
-import erebus.inventory.*;
-import erebus.tileentity.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
+import erebus.block.BlockPetrifiedChest;
+import erebus.block.silo.TileEntitySiloTank;
+import erebus.client.gui.GuiAntInventory;
+import erebus.client.gui.GuiBambooCrate;
+import erebus.client.gui.GuiColossalCrate;
+import erebus.client.gui.GuiComposter;
+import erebus.client.gui.GuiExtenderThingy;
+import erebus.client.gui.GuiHoneyComb;
+import erebus.client.gui.GuiPetrifiedChest;
+import erebus.client.gui.GuiPetrifiedWorkbench;
+import erebus.client.gui.GuiSilo;
+import erebus.client.gui.GuiUmberFurnace;
+import erebus.entity.EntityAnimatedBambooCrate;
+import erebus.entity.EntityBlackAnt;
+import erebus.inventory.ContainerAntInventory;
+import erebus.inventory.ContainerBambooCrate;
+import erebus.inventory.ContainerColossalCrate;
+import erebus.inventory.ContainerComposter;
+import erebus.inventory.ContainerExtenderThingy;
+import erebus.inventory.ContainerHoneyComb;
+import erebus.inventory.ContainerPetrifiedCraftingTable;
+import erebus.inventory.ContainerPetrifiedWoodChest;
+import erebus.inventory.ContainerSilo;
+import erebus.inventory.ContainerUmberFurnace;
+import erebus.tileentity.TileEntityAltar;
+import erebus.tileentity.TileEntityBambooBridge;
+import erebus.tileentity.TileEntityBambooCrate;
+import erebus.tileentity.TileEntityBambooPole;
+import erebus.tileentity.TileEntityBones;
+import erebus.tileentity.TileEntityComposter;
+import erebus.tileentity.TileEntityErebusAltar;
+import erebus.tileentity.TileEntityErebusAltarEmpty;
+import erebus.tileentity.TileEntityErebusAltarHealing;
+import erebus.tileentity.TileEntityErebusAltarLightning;
+import erebus.tileentity.TileEntityErebusAltarRepair;
+import erebus.tileentity.TileEntityErebusAltarXP;
+import erebus.tileentity.TileEntityExtenderThingy;
+import erebus.tileentity.TileEntityGlowGem;
+import erebus.tileentity.TileEntityGlowingJar;
+import erebus.tileentity.TileEntityHoneyComb;
+import erebus.tileentity.TileEntityJarOHoney;
+import erebus.tileentity.TileEntityLadder;
+import erebus.tileentity.TileEntityOfferingAltar;
+import erebus.tileentity.TileEntityPetrifiedWoodChest;
+import erebus.tileentity.TileEntityPortal;
+import erebus.tileentity.TileEntitySpawner;
+import erebus.tileentity.TileEntityUmberFurnace;
+import erebus.tileentity.TileEntityUmberGolemStatue;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -65,7 +105,6 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityAltar.class, "altar");
 		registerTileEntity(TileEntityGlowGem.class, "glowGemBlock");
 		registerTileEntity(TileEntityHoneyComb.class, "honeyComb");
-		registerTileEntity(TileEntitySiloIntake.class, "siloIntake");
 		registerTileEntity(TileEntitySiloTank.class, "siloTank");
 		registerTileEntity(TileEntityComposter.class, "composter");
         registerTileEntity(TileEntityPortal.class, "portal");

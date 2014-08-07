@@ -1,7 +1,5 @@
 package erebus.core.proxy;
 
-import erebus.client.render.tileentity.*;
-import erebus.tileentity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCloudFX;
@@ -22,7 +20,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.block.silo.TileEntitySiloIntake;
 import erebus.client.fx.EntityRepellentFX;
 import erebus.client.fx.EntitySonicFX;
 import erebus.client.model.entity.ModelAnimatedBlock;
@@ -120,6 +117,25 @@ import erebus.client.render.item.WaspDaggerItemRenderer;
 import erebus.client.render.item.WaspSwordItemRenderer;
 import erebus.client.render.item.WebSlingerItemRenderer;
 import erebus.client.render.item.WoodlouseBallItemRenderer;
+import erebus.client.render.tileentity.TileEntityAltarRenderer;
+import erebus.client.render.tileentity.TileEntityBambooBridgeRenderer;
+import erebus.client.render.tileentity.TileEntityBambooPoleRenderer;
+import erebus.client.render.tileentity.TileEntityBoneBlockRenderer;
+import erebus.client.render.tileentity.TileEntityErebusAltarHealingRenderer;
+import erebus.client.render.tileentity.TileEntityErebusAltarLightningRenderer;
+import erebus.client.render.tileentity.TileEntityErebusAltarRenderer;
+import erebus.client.render.tileentity.TileEntityErebusAltarRepairRenderer;
+import erebus.client.render.tileentity.TileEntityErebusAltarXPRenderer;
+import erebus.client.render.tileentity.TileEntityExtenderThingyRenderer;
+import erebus.client.render.tileentity.TileEntityGlowGemRenderer;
+import erebus.client.render.tileentity.TileEntityGlowingJarRenderer;
+import erebus.client.render.tileentity.TileEntityLadderRenderer;
+import erebus.client.render.tileentity.TileEntityOfferingAltarRenderer;
+import erebus.client.render.tileentity.TileEntityPetrifiedWoodChestRenderer;
+import erebus.client.render.tileentity.TileEntityPortalRenderer;
+import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
+import erebus.client.render.tileentity.TileEntitySpawnerRender;
+import erebus.client.render.tileentity.TileEntityUmberGolemStatueRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
@@ -176,6 +192,25 @@ import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
+import erebus.tileentity.TileEntityAltar;
+import erebus.tileentity.TileEntityBambooBridge;
+import erebus.tileentity.TileEntityBambooCrate;
+import erebus.tileentity.TileEntityBambooPole;
+import erebus.tileentity.TileEntityBones;
+import erebus.tileentity.TileEntityErebusAltar;
+import erebus.tileentity.TileEntityErebusAltarHealing;
+import erebus.tileentity.TileEntityErebusAltarLightning;
+import erebus.tileentity.TileEntityErebusAltarRepair;
+import erebus.tileentity.TileEntityErebusAltarXP;
+import erebus.tileentity.TileEntityExtenderThingy;
+import erebus.tileentity.TileEntityGlowGem;
+import erebus.tileentity.TileEntityGlowingJar;
+import erebus.tileentity.TileEntityLadder;
+import erebus.tileentity.TileEntityOfferingAltar;
+import erebus.tileentity.TileEntityPetrifiedWoodChest;
+import erebus.tileentity.TileEntityPortal;
+import erebus.tileentity.TileEntitySpawner;
+import erebus.tileentity.TileEntityUmberGolemStatue;
 
 public class ClientProxy extends CommonProxy {
 
@@ -273,8 +308,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtenderThingy.class, new TileEntityExtenderThingyRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlowGem.class, new TileEntityGlowGemRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySiloIntake.class, new TileEntitySiloIntakeRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPortal.class, new TileEntityPortalRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPortal.class, new TileEntityPortalRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingAltar.class, new TileEntityOfferingAltarRenderer());
 
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.BAMBOO_CROP.id(), new BlockBambooCropRender());
