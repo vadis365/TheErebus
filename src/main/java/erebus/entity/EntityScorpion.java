@@ -62,11 +62,6 @@ public class EntityScorpion extends EntityMob {
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
-		return super.getCanSpawnHere();
-	}
-
-	@Override
 	public int getMaxSpawnedInChunk() {
 		return 2;
 	}

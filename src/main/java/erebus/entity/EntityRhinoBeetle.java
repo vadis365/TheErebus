@@ -117,7 +117,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	public boolean getCanSpawnHere() {
 		float light = getBrightness(1.0F);
-		if (light >= 0F)
+		if (light <= 0.5F)
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
 		return super.getCanSpawnHere();
 	}
