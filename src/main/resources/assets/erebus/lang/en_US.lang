@@ -327,6 +327,7 @@ entity.erebus.punchroom.name=Punchroom
 entity.erebus.crushroom.name=Crushroom
 entity.erebus.blackAnt.name=Black Ant
 entity.erebus.zombieAnt.name=Zombie Ant
+entity.erebus.nope.name=Nothing Here
 
 # Fluids
 fluid.erebus.honey=Honey
