@@ -13,6 +13,7 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import cpw.mods.fml.common.eventhandler.Event;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.ModTabs;
 
 public class Bambucket extends Item {
 
@@ -27,6 +28,7 @@ public class Bambucket extends Item {
 	public Bambucket(Block fluid) {
 		this.fluid = fluid;
 		setMaxStackSize(16);
+		setCreativeTab(ModTabs.items);
 	}
 
 	@Override

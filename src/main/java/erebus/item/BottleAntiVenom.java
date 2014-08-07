@@ -15,11 +15,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 
 public class BottleAntiVenom extends ItemBucketMilk {
 
 	public BottleAntiVenom() {
 		setMaxStackSize(1);
+		setCreativeTab(ModTabs.items);
 		setContainerItem(Items.glass_bottle);
 	}
 

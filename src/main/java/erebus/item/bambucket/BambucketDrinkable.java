@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.ModTabs;
 
 public abstract class BambucketDrinkable extends Item {
 
@@ -14,6 +15,7 @@ public abstract class BambucketDrinkable extends Item {
 		setMaxStackSize(16);
 		setHasSubtypes(true);
 		setTextureName(texture);
+		setCreativeTab(ModTabs.items);
 	}
 
 	@Override

@@ -11,11 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import erebus.ModTabs;
 
 public class BucketAntiVenom extends ItemBucketMilk {
 
 	public BucketAntiVenom() {
 		setMaxStackSize(1);
+		setCreativeTab(ModTabs.items);
 		setContainerItem(Items.bucket);
 	}
 

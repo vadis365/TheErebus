@@ -42,6 +42,7 @@ import erebus.item.MaxSpeedBow;
 import erebus.item.MetalIngots;
 import erebus.item.NectarCollector;
 import erebus.item.Paxel;
+import erebus.item.Planticide;
 import erebus.item.PortalActivator;
 import erebus.item.ReinExoskeletonArmor;
 import erebus.item.RitualDagger;
@@ -84,6 +85,7 @@ public class ModItems {
 	public static final Item encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
 	public static final Item antTamingAmulet = new AntTamingAmulet().setUnlocalizedName("antTamingAmulet").setTextureName("erebus:antTamingAmulet");
 	public static final Item compost = new Compost();
+	public static final Item planticide = new Planticide();
 
 	// JADE STUFF
 	public static final Item jadeHelmet = new JadeArmour(0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
@@ -159,7 +161,7 @@ public class ModItems {
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger, woodlouseBall, rolledNewspaper);
 		ModTabs.gears.setTab(compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
-		ModTabs.specials.setTab(portalActivator, bambucket, bucketBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
+		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
 
 		// Special Case
 		ModTabs.blocks.setTab(doorAmberItem);

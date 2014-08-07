@@ -5,12 +5,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import erebus.ModTabs;
 import erebus.entity.EntityBotFlyLarva;
 
 public class BucketOfBeetleJuice extends ItemBucketMilk {
 
 	public BucketOfBeetleJuice() {
 		setMaxStackSize(1);
+		setCreativeTab(ModTabs.items);
 		setContainerItem(Items.bucket);
 	}
 
