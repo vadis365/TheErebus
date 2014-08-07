@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
@@ -52,6 +53,11 @@ public class BlockUmberstone extends Block implements ISubBlocksBlock {
 	@Override
 	public int damageDropped(int meta) {
 		return meta == 0 ? 1 : meta;
+	}
+
+	@Override
+	public int getDamageValue(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z);
 	}
 
 	@Override
