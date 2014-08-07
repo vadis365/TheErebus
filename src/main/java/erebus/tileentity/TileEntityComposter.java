@@ -148,7 +148,7 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 			if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air) {
 				Block block = Block.getBlockFromItem(item);
 
-				if (block == ModBlocks.erebusWallPlants && is.getItemDamage() == 1)
+				if (block == ModBlocks.wallPlants && is.getItemDamage() == 1)
 					return 800;
 			}
 		}

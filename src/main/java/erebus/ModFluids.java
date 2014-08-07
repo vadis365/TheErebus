@@ -51,7 +51,7 @@ public class ModFluids {
 	@SideOnly(Side.CLIENT)
 	public void postStitch(TextureStitchEvent.Pre event) {
 		if (event.map.getTextureType() == 0) {
-			honey.setIcons(ModBlocks.erebusHoneyBlock.getBlockTextureFromSide(0), ModBlocks.erebusHoneyBlock.getBlockTextureFromSide(1));
+			honey.setIcons(ModBlocks.honeyBlock.getBlockTextureFromSide(0), ModBlocks.honeyBlock.getBlockTextureFromSide(1));
 			antiVenom.setIcons(event.map.registerIcon("erebus:antiVenom"), event.map.registerIcon("erebus:antiVenomFlow"));
 			beetleJuice.setIcons(event.map.registerIcon("erebus:beetleJuice"), event.map.registerIcon("erebus:beetleJuiceFlow"));
 		}

@@ -123,7 +123,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 
 			for(int hangerY = rand.nextInt(20); hangerY>0; hangerY--)
 				if (world.isAirBlock(xx,yy-hangerY,zz))
-					world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger, 4, 2);
+					world.setBlock(xx,yy-hangerY,zz,ModBlocks.hanger, 4, 2);
 		}
 
 		for(attempt = 0; attempt < 15; attempt++) {

@@ -65,8 +65,8 @@ final class TeleporterErebus extends Teleporter {
 					double d6 = l1 + 0.5D - entity.posZ;
 
 					for (int i2 = worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2)
-						if (worldServerInstance.getBlock(k1, i2, l1) == ModBlocks.portalErebus) {
-							while (worldServerInstance.getBlock(k1, i2 - 1, l1) == ModBlocks.portalErebus)
+						if (worldServerInstance.getBlock(k1, i2, l1) == ModBlocks.portal) {
+							while (worldServerInstance.getBlock(k1, i2 - 1, l1) == ModBlocks.portal)
 								--i2;
 
 							d4 = i2 + 0.5D - entity.posY;
@@ -93,16 +93,16 @@ final class TeleporterErebus extends Teleporter {
 			d4 = k + 0.5D;
 			int j2 = -1;
 
-			if (worldServerInstance.getBlock(i - 1, j, k) == ModBlocks.portalErebus)
+			if (worldServerInstance.getBlock(i - 1, j, k) == ModBlocks.portal)
 				j2 = 2;
 
-			if (worldServerInstance.getBlock(i + 1, j, k) == ModBlocks.portalErebus)
+			if (worldServerInstance.getBlock(i + 1, j, k) == ModBlocks.portal)
 				j2 = 0;
 
-			if (worldServerInstance.getBlock(i, j, k - 1) == ModBlocks.portalErebus)
+			if (worldServerInstance.getBlock(i, j, k - 1) == ModBlocks.portal)
 				j2 = 3;
 
-			if (worldServerInstance.getBlock(i, j, k + 1) == ModBlocks.portalErebus)
+			if (worldServerInstance.getBlock(i, j, k + 1) == ModBlocks.portal)
 				j2 = 1;
 
 			int k2 = entity.getTeleportDirection();
@@ -333,7 +333,7 @@ final class TeleporterErebus extends Teleporter {
 					j3 = j5 + l2;
 					i4 = j2 + (i3 - 1) * l5;
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
-					worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.stonebrick : ModBlocks.portalErebus, flag ? 1 : 0, 2);
+					worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.stonebrick : ModBlocks.portal, flag ? 1 : 0, 2);
 				}
 
 			for (i3 = 0; i3 < 4; ++i3)

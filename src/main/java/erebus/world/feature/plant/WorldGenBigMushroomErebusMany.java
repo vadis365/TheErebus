@@ -149,15 +149,15 @@ public class WorldGenBigMushroomErebusMany extends WorldGenerator {
 	private Block getMushroomCap(int type) {
 		switch (type) {
 			case 0:
-				return ModBlocks.erebusMushroomCap0;
+				return ModBlocks.mushroomCap0;
 			case 1:
-				return ModBlocks.erebusMushroomCap1;
+				return ModBlocks.mushroomCap1;
 			case 2:
-				return ModBlocks.erebusMushroomCap2;
+				return ModBlocks.mushroomCap2;
 			case 3:
-				return ModBlocks.erebusMushroomCap3;
+				return ModBlocks.mushroomCap3;
 			case 4:
-				return ModBlocks.erebusMushroomCap4;
+				return ModBlocks.mushroomCap4;
 			default:
 				return null;
 		}

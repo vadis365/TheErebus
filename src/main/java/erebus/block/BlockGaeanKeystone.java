@@ -124,7 +124,7 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int h, float k, float i, float f) {
 		if (p.getCurrentEquippedItem() != null && p.getCurrentEquippedItem().getItem() == ModItems.portalActivator) {
 			w.setBlockMetadataWithNotify(x, y, z, 1, 2);
-			if (!ModBlocks.portalErebus.makePortal(w, x, y - 2, z)) {
+			if (!ModBlocks.portal.makePortal(w, x, y - 2, z)) {
 				w.setBlockMetadataWithNotify(x, y, z, 0, 2);
 				return false;
 			}

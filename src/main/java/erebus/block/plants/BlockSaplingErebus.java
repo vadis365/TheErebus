@@ -118,7 +118,7 @@ public class BlockSaplingErebus extends BlockSapling {
 				for (var8 = 0; var8 >= -1; --var8) {
 					for (var9 = 0; var9 >= -1; --var9)
 						if (isSameSapling(world, x + var8, y, z + var9, 0) && isSameSapling(world, x + var8 + 1, y, z + var9, 0) && isSameSapling(world, x + var8, y, z + var9 + 1, 0) && isSameSapling(world, x + var8 + 1, y, z + var9 + 1, 0)) {
-							worldGen = new WorldGenErebusHugeTree(true, BlockLeavesErebus.dataMahoganyDecay, true, EnumWood.Mahogany.getLog(), ModBlocks.leavesErebus);
+							worldGen = new WorldGenErebusHugeTree(true, BlockLeavesErebus.dataMahoganyDecay, true, EnumWood.Mahogany.getLog(), ModBlocks.leaves);
 							((WorldGenErebusHugeTree) worldGen).prepare(20 + rand.nextInt(5));
 							var10 = true;
 							break;
@@ -138,7 +138,7 @@ public class BlockSaplingErebus extends BlockSapling {
 		if (worldGen == null) {
 			var9 = 0;
 			var8 = 0;
-			worldGen = new WorldGenErebusTrees(true, 5, BlockLeavesErebus.dataMahoganyDecay, false, EnumWood.Mahogany.getLog(), ModBlocks.leavesErebus, ModBlocks.thorns);
+			worldGen = new WorldGenErebusTrees(true, 5, BlockLeavesErebus.dataMahoganyDecay, false, EnumWood.Mahogany.getLog(), ModBlocks.leaves, ModBlocks.thorns);
 		}
 
 		if (var10) {

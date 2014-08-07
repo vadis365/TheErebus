@@ -7,7 +7,7 @@ import erebus.block.BlockErebusPortal;
 
 public class TileEntityPortal extends TileEntity {
 	public boolean renderBeam() {
-		return worldObj.getBlock(xCoord, yCoord + 1, zCoord) == ModBlocks.portalErebus;
+		return worldObj.getBlock(xCoord, yCoord + 1, zCoord) == ModBlocks.portal;
 	}
 
 	@Override

@@ -136,13 +136,13 @@ public class ModItems {
 	// BUCKETS
 	public static final Item bambucket = new Bambucket();
 	public static final Item bambucketWater = new Bambucket(Blocks.flowing_water).setUnlocalizedName("bambucketWater").setTextureName("erebus:bambucketWater");
-	public static final Item bambucketHoney = new Bambucket(ModBlocks.erebusHoneyBlock).setUnlocalizedName("bambucketHoney").setTextureName("erebus:bambucketHoney");
+	public static final Item bambucketHoney = new Bambucket(ModBlocks.honeyBlock).setUnlocalizedName("bambucketHoney").setTextureName("erebus:bambucketHoney");
 	public static final Item bambucketBeetleJuice = new BambucketBeetleJuice();
 	public static final Item bambucketAntiVenom = new BambucketAntiVenom();
 
 	public static final Item bucketAntiVenom = new BucketAntiVenom().setUnlocalizedName("bucketAntiVenom").setTextureName("erebus:bucketAntiVenom");
 	public static final Item bucketBeetleJuice = new BucketOfBeetleJuice().setUnlocalizedName("bucketBeetleJuice").setTextureName("erebus:bucketBeetleJuice");
-	public static final Item bucketHoney = new ItemBucket(ModBlocks.erebusHoneyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
+	public static final Item bucketHoney = new ItemBucket(ModBlocks.honeyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
 
 	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("bottleAntiVenom");
 

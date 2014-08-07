@@ -159,10 +159,10 @@ public class WorldGenPonds extends WorldGenerator {
 			zz = z + rand.nextInt(16);
 			block = world.getBlock(xx, yy - 1, zz);
 
-			if (block == Blocks.sand && ModBlocks.erebusPlantSmall.canPlaceBlockAt(world, xx, yy, zz))
+			if (block == Blocks.sand && ModBlocks.plantSmall.canPlaceBlockAt(world, xx, yy, zz))
 				if (world.isAirBlock(xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-					world.setBlock(xx, yy, zz, ModBlocks.erebusPlantSmall, BlockDoubleHeightPlant.dataBullrushBottom, 2);
-					world.setBlock(xx, yy + 1, zz, ModBlocks.erebusPlantSmall, BlockDoubleHeightPlant.dataBullrushTop, 2);
+					world.setBlock(xx, yy, zz, ModBlocks.plantSmall, BlockDoubleHeightPlant.dataBullrushBottom, 2);
+					world.setBlock(xx, yy + 1, zz, ModBlocks.plantSmall, BlockDoubleHeightPlant.dataBullrushTop, 2);
 				} else
 					break;
 		}

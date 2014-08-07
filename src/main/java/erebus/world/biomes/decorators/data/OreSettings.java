@@ -126,11 +126,11 @@ public final class OreSettings {
 		JADE(BlockErebusOre.dataJade),
 		PETRIFIED_WOOD(BlockErebusOre.dataPetrifiedWood),
 		FOSSIL(ModBlocks.oreFossil, 3),
-		ALUMINIUM(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataAluminium),
-		COPPER(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataCopper),
-		LEAD(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataLead),
-		SILVER(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataSilver),
-		TIN(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataTin);
+		ALUMINIUM(ModBlocks.oreExtra, BlockErebusOreExtras.dataAluminium),
+		COPPER(ModBlocks.oreExtra, BlockErebusOreExtras.dataCopper),
+		LEAD(ModBlocks.oreExtra, BlockErebusOreExtras.dataLead),
+		SILVER(ModBlocks.oreExtra, BlockErebusOreExtras.dataSilver),
+		TIN(ModBlocks.oreExtra, BlockErebusOreExtras.dataTin);
 
 		final Block oreBlock;
 		final byte oreMeta;

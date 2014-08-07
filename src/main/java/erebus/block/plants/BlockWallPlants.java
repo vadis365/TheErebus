@@ -374,54 +374,54 @@ public class BlockWallPlants extends Block implements IShearable, ISubBlocksBloc
 						switch (randomiseSide) {
 							case 0:
 								if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 2, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 2, 2);
 								break;
 							case 1:
 								if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 3, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 3, 2);
 								break;
 							case 2:
 								if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 4, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 4, 2);
 								break;
 							case 3:
 								if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 5, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 5, 2);
 								break;
 							case 4:
 								if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 6, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 6, 2);
 								break;
 							case 5:
 								if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 7, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 7, 2);
 								break;
 						}
 					else if (meta > 7 && meta <= 13)
 						switch (randomiseSide) {
 							case 0:
 								if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 8, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 8, 2);
 								break;
 							case 1:
 								if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 9, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 9, 2);
 								break;
 							case 2:
 								if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 10, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 10, 2);
 								break;
 							case 3:
 								if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 11, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 11, 2);
 								break;
 							case 4:
 								if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 12, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 12, 2);
 								break;
 							case 5:
 								if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
-									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 13, 2);
+									world.setBlock(xx, yy, zz, ModBlocks.wallPlants, 13, 2);
 								break;
 						}
 				}

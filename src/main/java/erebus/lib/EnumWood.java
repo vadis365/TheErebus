@@ -69,7 +69,7 @@ public enum EnumWood {
 	}
 
 	public Block getleaves() {
-		return ModBlocks.leavesErebus;
+		return ModBlocks.leaves;
 	}
 
 	public String getTranslatedName() {
@@ -95,7 +95,7 @@ public enum EnumWood {
 				saplings.put(wood, sapling);
 			}
 			if (wood.hasPlanks) {
-				Block stair = new BlockStairPlanks(ModBlocks.planksErebus, wood);
+				Block stair = new BlockStairPlanks(ModBlocks.planks, wood);
 				GameRegistry.registerBlock(stair, ItemBlockLocalised.class, "plankStair" + wood.name());
 				Blocks.fire.setFireInfo(stair, 5, 5);
 				stairs.put(wood, stair);
@@ -113,7 +113,7 @@ public enum EnumWood {
 			if (wood.hasLog) {
 				Block log = logs.get(wood);
 				OreDictionary.registerOre("logWood", log);
-				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planksErebus, 4, wood.ordinal()), new ItemStack(log));
+				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planks, 4, wood.ordinal()), new ItemStack(log));
 				GameRegistry.addSmelting(new ItemStack(Items.coal, 1, 1), new ItemStack(log), 1.0F);
 			}
 			if (wood.hasSapling)
@@ -121,11 +121,11 @@ public enum EnumWood {
 			if (wood.hasPlanks) {
 				Block stair = stairs.get(wood);
 				OreDictionary.registerOre("stairWood", stair);
-				GameRegistry.addRecipe(new ItemStack(stair, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
+				GameRegistry.addRecipe(new ItemStack(stair, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });
 
 				Block slab = slabs.get(wood);
 				OreDictionary.registerOre("slabWood", slab);
-				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planksErebus, 1, wood.ordinal()) });
+				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });
 			}
 		}
 	}

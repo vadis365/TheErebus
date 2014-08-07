@@ -36,7 +36,7 @@ public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer 
 				GL11.glTranslated(x + 0.5D, y + 0.5625F, z + 0.5D);
 				GL11.glScaled(1.0D, 0.875D, 1.0D);
 				bindTexture(TextureMap.locationBlocksTexture);
-				blockRenderer.renderBlockAsItem(ModBlocks.planksErebus, 9, 1.0F);
+				blockRenderer.renderBlockAsItem(ModBlocks.planks, 9, 1.0F);
 				GL11.glPopMatrix();
 				break;
 			case 1:
@@ -50,7 +50,7 @@ public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer 
 				GL11.glTranslated(x + 0.5D, y + 0.4375F, z + 0.5D);
 				GL11.glScaled(1.0D, 0.875D, 1.0D);
 				bindTexture(TextureMap.locationBlocksTexture);
-				blockRenderer.renderBlockAsItem(ModBlocks.planksErebus, 9, 1.0F);
+				blockRenderer.renderBlockAsItem(ModBlocks.planks, 9, 1.0F);
 				GL11.glPopMatrix();
 				break;
 			case 2:

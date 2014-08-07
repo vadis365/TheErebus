@@ -24,7 +24,7 @@ public class WorldGenNettlePatch extends WorldGenerator {
 			zz = (int)(z+0.5F+MathHelper.sin(ang)*len);
 
 			if (world.isAirBlock(xx,yy,zz) && world.getBlock(xx,yy-1,zz) == Blocks.grass){
-				world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall,rand.nextBoolean() ? BlockSmallPlants.dataNettle : BlockSmallPlants.dataNettleFlowered,2);
+				world.setBlock(xx,yy,zz,ModBlocks.plantSmall,rand.nextBoolean() ? BlockSmallPlants.dataNettle : BlockSmallPlants.dataNettleFlowered,2);
 				++placed;
 			}
 		}

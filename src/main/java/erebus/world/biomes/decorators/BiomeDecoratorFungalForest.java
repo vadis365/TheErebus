@@ -31,7 +31,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			zz = z+offsetXZ();
 
 			if (world.getBlock(xx,yy-1,zz) == Blocks.grass && world.isAirBlock(xx,yy,zz))
-				world.setBlock(xx,yy,zz,ModBlocks.erebusPlantSmall,rand.nextInt(5),2);
+				world.setBlock(xx,yy,zz,ModBlocks.plantSmall,rand.nextInt(5),2);
 		}
 
 		// TODO mushroom gen

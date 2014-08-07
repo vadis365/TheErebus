@@ -99,7 +99,7 @@ public class BlockSlabPlanks extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return ModBlocks.planksErebus.getIcon(side, wood.ordinal());
+		return ModBlocks.planks.getIcon(side, wood.ordinal());
 	}
 
 	@Override

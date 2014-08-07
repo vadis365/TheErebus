@@ -20,11 +20,11 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 	private static final Block tempBlock = Blocks.bedrock;
 
 	public enum MushroomType{
-		BULB_CAPPED(ModBlocks.erebusMushroomCap0),
-		GRANDMAS_SHOES(ModBlocks.erebusMushroomCap1),
-		SARCASTIC_CZECH(ModBlocks.erebusMushroomCap2),
-		KAIZERS_FINGERS(ModBlocks.erebusMushroomCap3),
-		DUTCH_CAP(ModBlocks.erebusMushroomCap4);
+		BULB_CAPPED(ModBlocks.mushroomCap0),
+		GRANDMAS_SHOES(ModBlocks.mushroomCap1),
+		SARCASTIC_CZECH(ModBlocks.mushroomCap2),
+		KAIZERS_FINGERS(ModBlocks.mushroomCap3),
+		DUTCH_CAP(ModBlocks.mushroomCap4);
 
 		public final Block block;
 

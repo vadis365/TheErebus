@@ -24,7 +24,7 @@ public class FMBIntegration implements IModIntegration {
 		addMicroblock(ModBlocks.blockSilk);
 		addMicroblock(ModBlocks.mirBrick);
 		addMicroblock(ModBlocks.petrifiedWoodPlanks);
-		addMicroblock(ModBlocks.planksErebus, 0, EnumWood.values().length);
+		addMicroblock(ModBlocks.planks, 0, EnumWood.values().length);
 		addMicroblock(ModBlocks.umberPaver, 0, 3);
 		addMicroblock(ModBlocks.umberstonePillar);
 	}

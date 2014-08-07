@@ -39,37 +39,37 @@ public class WorldGenMossPatch extends WorldGenerator {
 		switch (randomiseSide) {
 			case 0:
 				if (world.isSideSolid(x, y + offset, z, DOWN) && world.getBlock(x, y + offset, z) == ModBlocks.umberstone) {
-					world.setBlock(x, y, z, ModBlocks.erebusWallPlants, metaMapped + 2, 2);
+					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 2, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 1:
 				if (world.isSideSolid(x, y - offset, z, UP) && world.getBlock(x, y - offset, z) == ModBlocks.umberstone) {
-					world.setBlock(x, y, z, ModBlocks.erebusWallPlants, metaMapped + 3, 2);
+					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 3, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 2:
 				if (world.isSideSolid(x, y, z + offset, NORTH) && world.getBlock(x, y, z + offset) == ModBlocks.umberstone) {
-					world.setBlock(x, y, z, ModBlocks.erebusWallPlants, metaMapped + 4, 2);
+					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 4, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 3:
 				if (world.isSideSolid(x, y, z - offset, SOUTH) && world.getBlock(x, y, z - offset) == ModBlocks.umberstone) {
-					world.setBlock(x, y, z, ModBlocks.erebusWallPlants, metaMapped + 5, 2);
+					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 5, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 4:
 				if (world.isSideSolid(x + offset, y, z, WEST) && world.getBlock(x + offset, y, z) == ModBlocks.umberstone) {
-					world.setBlock(x, y, z, ModBlocks.erebusWallPlants, metaMapped + 6, 2);
+					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 6, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 5:
 				if (world.isSideSolid(x - offset, y, z, EAST) && world.getBlock(x - offset, y, z) == ModBlocks.umberstone) {
-					world.setBlock(x, y, z, ModBlocks.erebusWallPlants, metaMapped + 7, 2);
+					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 7, 2);
 					blockPlaced = true;
 				}
 				break;

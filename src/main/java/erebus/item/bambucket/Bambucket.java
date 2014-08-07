@@ -75,7 +75,7 @@ public class Bambucket extends Item {
 						return addBucketToPlayer(stack, player, ModItems.bambucketWater);
 					}
 
-					if (block == ModBlocks.erebusHoneyBlock && meta == 0) {
+					if (block == ModBlocks.honeyBlock && meta == 0) {
 						world.setBlockToAir(x, y, z);
 						return addBucketToPlayer(stack, player, ModItems.bambucketHoney);
 					}

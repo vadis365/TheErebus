@@ -92,11 +92,11 @@ public class EntityZombieAnt extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 0), 0.0F);
-		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 1), 0.0F);
-		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 2), 0.0F);
-		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 3), 0.0F);
-		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 4), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.plantSmall, 1, 0), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.plantSmall, 1, 1), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.plantSmall, 1, 2), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.plantSmall, 1, 3), 0.0F);
+		entityDropItem(new ItemStack(ModBlocks.plantSmall, 1, 4), 0.0F);
 		entityDropItem(new ItemStack(Blocks.red_mushroom, 1, 0), 0.0F);
 		entityDropItem(new ItemStack(Blocks.brown_mushroom, 1, 0), 0.0F);
 		if (rand.nextInt(5) == 0)

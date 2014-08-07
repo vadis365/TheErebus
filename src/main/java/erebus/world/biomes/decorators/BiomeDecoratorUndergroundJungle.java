@@ -45,8 +45,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead,1);
 	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass,1);
 
-	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leavesErebus,ModBlocks.thorns);
-	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leavesErebus);
+	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leaves,ModBlocks.thorns);
+	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leaves);
 	private final WorldGenerator genTreeJungle = new WorldGenTrees(true,6,3,3,true);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
@@ -220,7 +220,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 
 			for(int hangerY = rand.nextInt(20); hangerY>0; hangerY--)
 				if (world.isAirBlock(xx,yy-hangerY,zz))
-					world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger, 4, 2);
+					world.setBlock(xx,yy-hangerY,zz,ModBlocks.hanger, 4, 2);
 		}
 
 		if (rand.nextInt(3) == 0)

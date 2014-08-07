@@ -27,7 +27,7 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		if (block == null)
 			return false;
 
-		if (block == ModBlocks.planksErebus && blockMeta == 9)
+		if (block == ModBlocks.planks && blockMeta == 9)
 			return false;
 
 		if (block == EnumWood.values()[9].getSlab())

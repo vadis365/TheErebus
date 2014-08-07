@@ -92,7 +92,7 @@ public class ErebusMaterial extends Item {
 			Block block = world.getBlock(x, y, z);
 
 			if (block != null && block.getMaterial().blocksMovement()) {
-				world.setBlock(x, y - 1, z, ModBlocks.erebusHanger, BlockHangerPlants.dataHanger0, 2);
+				world.setBlock(x, y - 1, z, ModBlocks.hanger, BlockHangerPlants.dataHanger0, 2);
 
 				if (!player.capabilities.isCreativeMode)
 					--is.stackSize;
