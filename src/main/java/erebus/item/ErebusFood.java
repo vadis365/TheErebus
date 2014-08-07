@@ -145,6 +145,8 @@ public class ErebusFood extends ItemFood {
 				return new PotionEffect(Potion.regeneration.id, 200, 0);
 			case larvaeOnStick:
 				return new PotionEffect(Potion.confusion.id, 100, 1);
+			case titanChopCooked:
+				return new PotionEffect(Potion.damageBoost.id, 600, 1);
 			default:
 				return null;
 		}
