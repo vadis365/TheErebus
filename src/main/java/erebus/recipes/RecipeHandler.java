@@ -57,7 +57,7 @@ public class RecipeHandler {
 		// Petrified Wood stuffs
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodPlanks), "xx", "xx", 'x', new ItemStack(ModItems.erebusMaterials, 1, DATA.itemPetrifiedWood.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedCraftingTable), "xx", "xx", 'x', ModBlocks.petrifiedWoodPlanks);
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodChest), "xxx", "xyx", "xxx", 'x', ModBlocks.petrifiedWoodPlanks, 'y', Items.gold_ingot);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.petrifiedWoodChest), "xxx", "xyx", "xxx", 'x', ModBlocks.petrifiedWoodPlanks, 'y', "ingotGold"));
 
 		// Stairs, slabs, walls
 		for (int i = 0; i < ModBlocks.umbercobbleStairs.length; i++)
@@ -116,7 +116,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGlider), "   ", "GXG", "   ", 'G', new ItemStack(ModItems.erebusMaterials, 1, DATA.gliderWing.ordinal()), 'X', new ItemStack(ModItems.reinExoskeletonBody, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGliderPowered), "W W", "ECE", " V ", 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.enhancedGliderWing.ordinal()), 'E', new ItemStack(ModItems.erebusMaterials, 1, DATA.elasticFibre.ordinal()), 'C', new ItemStack(ModItems.armorGlider, 1), 'V', new ItemStack(ModBlocks.velocityBlock, 1));
 
-		GameRegistry.addRecipe(new ItemStack(ModItems.scorpionPincer), "I I", "XIX", "XPX", 'I', Items.iron_ingot, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()), 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.scorpionPincer), "I I", "XIX", "XPX", 'I', "ingotIron", 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.reinforcedPlateExo.ordinal()), 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal())));
 
 		GameRegistry.addRecipe(new ItemStack(ModItems.rolledNewspaper), "PWP", "PIP", "PWP", 'I', new ItemStack(Items.dye, 1, 0), 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal()), 'W', new ItemStack(ModItems.erebusMaterials, 1, DATA.whetstonePowder.ordinal()));
 
@@ -166,22 +166,22 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', new ItemStack(Items.feather, 1, 0), 'S', new ItemStack(Items.stick, 1, 0), 'T', new ItemStack(ModItems.erebusMaterials, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', new ItemStack(ModItems.erebusMaterials, 1, 6), 'S', new ItemStack(Items.stick, 1, 0), 'T', new ItemStack(ModItems.erebusMaterials, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', new ItemStack(ModItems.erebusMaterials, 1, 6), 'S', new ItemStack(Items.stick, 1, 0), 'T', new ItemStack(Items.flint, 1, 0));
-		GameRegistry.addRecipe(new ItemStack(ModItems.sprayCan, 9), " B ", "XRX", "XXX", 'X', Items.iron_ingot, 'B', Blocks.wooden_button, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.repellent.ordinal()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.sprayCan, 9), " B ", "XRX", "XXX", 'X', "ingotIron", 'B', Blocks.wooden_button, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.repellent.ordinal())));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.wandOfAnimation, 1), "  N", " S ", "D  ", 'D', "gemDiamond", 'S', Items.stick, 'N', Items.nether_star));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.erebusAltar, 1), "XXX", "XOX", "XXX", 'O', Blocks.obsidian, 'X', new ItemStack(ModItems.erebusMaterials, 1, 15));
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.glowingJar, 1), "XXX", "GBG", "GGG", 'X', Items.iron_ingot, 'G', new ItemStack(ModBlocks.blockAmber, 1, 1), 'B', new ItemStack(ModItems.erebusMaterials, 1, 13));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.glowingJar, 1), "XXX", "GBG", "GGG", 'X', "ingotIron", 'G', new ItemStack(ModBlocks.blockAmber, 1, 1), 'B', new ItemStack(ModItems.erebusMaterials, 1, 13)));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.reinExo, 1), new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()), new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()), new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()), new ItemStack(ModItems.erebusMaterials, 16, DATA.reinforcedPlateExo.ordinal()));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.book, 1, 0), new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), new ItemStack(Items.paper, 1, 0), new ItemStack(Items.paper, 1, 0), new ItemStack(Items.paper, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.paper, 4), new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.papyrus.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.velocityBlock), "xxx", "xxx", "xxx", 'x', new ItemStack(ModItems.erebusMaterials, 1, DATA.bioVelocity.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mudBricks), "xx", "xx", 'x', new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()));
-		GameRegistry.addRecipe(new ItemStack(ModItems.homingBeecon), "GNG", "NCN", "GNG", 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 'G', Items.gold_ingot, 'C', Items.compass);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.homingBeecon), "GNG", "NCN", "GNG", 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 'G', "ingotGold", 'C', Items.compass));
 		GameRegistry.addRecipe(new ItemStack(ModItems.nectarCollector), "  B", " S ", "S  ", 'B', Items.bowl, 'S', Items.stick);
 		ItemStack diamondPick = new ItemStack(Items.diamond_pickaxe);
 		diamondPick.addEnchantment(Enchantment.silkTouch, 1);
 		GameRegistry.addRecipe(EnchantSensitiveRecipe.makeRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal()), 'D', diamondPick, 'C', Blocks.chest));
 		GameRegistry.addRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), 'B', Items.bucket);
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', Items.iron_ingot, '$', new ItemStack(ModBlocks.blockAmber, 1, 1), '0', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', "ingotIron", '$', new ItemStack(ModBlocks.blockAmber, 1, 1), '0', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal())));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.jadeBlock), "xxx", "xxx", "xxx", 'x', "gemJade"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.erebusMaterials, 9, ErebusMaterial.DATA.jade.ordinal()), "blockJade"));
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusMaterials, 1, DATA.mucusCharge.ordinal()), "SSS", "SRS", "SSS", 'S', Items.slime_ball, 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.repellent.ordinal()));
@@ -192,10 +192,11 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.scorchedPlanks, 4), ModBlocks.scorchedWood);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.rottenPlanks, 2), ModBlocks.rottenWood);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
-		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), Blocks.torch);
-		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()));
-		GameRegistry.addRecipe(new ItemStack(ModItems.portalActivator, 1), "VSE", "VSS", "GVV", 'V', Blocks.vine, 'S', Items.stick, 'E', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.gaeanGem.ordinal()), 'G', Items.gold_ingot);
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.gaeanKeystone, 1), "V V", "SOS", "SSS", 'V', Blocks.vine, 'S', Blocks.stonebrick, 'O', Blocks.obsidian);
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), Blocks.torch);
+		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.portalActivator), "VSE", "VSS", "GVV", 'V', Blocks.vine, 'S', Items.stick, 'E', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.gaeanGem.ordinal()), 'G', "ingotGold"));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.gaeanKeystone), "V V", "SOS", "SSS", 'V', Blocks.vine, 'S', Blocks.stonebrick, 'O', Blocks.obsidian);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.antTamingAmulet), "pgp", "gog", "pgp", 'p', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.antPheromones.ordinal()), 'g', "ingotGold", 'o', Blocks.obsidian));
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.itemPetrifiedWood.ordinal()), 'U', "stoneUmber"));
