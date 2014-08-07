@@ -31,15 +31,9 @@ import erebus.world.feature.plant.WorldGenBigMushroomErebusMany;
 
 public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 
-	public static final String[] iconPaths = new String[] { "bulbCappedShroom",
-			"mushroomSmall1", "mushroomSmall2", "mushroomSmall3",
-			"dutchCapShroom", "cattail", "desertShrub",
-			"mireCoral", "nettle", "nettleFlowered", "swampPlant", "fireBloom" };
+	public static final String[] iconPaths = new String[] { "bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "dutchCapShroom", "desertShrub", "mireCoral", "nettle", "nettleFlowered", "swampPlant", "fireBloom" };
 
-	public static final int dataBulbCappedShroom = 0, dataMushroom1 = 1,
-			dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4,
-			dataCattail = 5, dataDesertShrub = 6, dataMireCoral = 7, dataNettle = 8,
-			dataNettleFlowered = 9, dataSwampPlant = 10, dataFireBloom = 11;
+	public static final int dataBulbCappedShroom = 0, dataMushroom1 = 1, dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4, dataDesertShrub = 5, dataMireCoral = 6, dataNettle = 7, dataNettleFlowered = 8, dataSwampPlant = 9, dataFireBloom = 10;
 
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
@@ -54,54 +48,50 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 		float widthReduced = 0, height = 0;
 
 		switch (meta) {
-		case dataBulbCappedShroom:
-			widthReduced = 0.3125F;
-			height = 0.6875F;
-			break;
-		case dataMushroom1:
-			widthReduced = 0.0625F;
-			height = 0.75F;
-			break;
-		case dataMushroom2:
-			widthReduced = 0.0625F;
-			height = 0.75F;
-			break;
-		case dataMushroom3:
-			widthReduced = 0.125F;
-			height = 0.625F;
-			break;
-		case dataDutchCapShroom:
-			widthReduced = 0.0625F;
-			height = 0.875F;
-			break;
-		case dataCattail:
-			widthReduced = 0;
-			height = 0.9375F;
-			break;
-		case dataDesertShrub:
-			widthReduced = 0;
-			height = 1F;
-			break;
-		case dataMireCoral:
-			widthReduced = 0;
-			height = 0.9375F;
-			break;
-		case dataNettle:
-			widthReduced = 0.125F;
-			height = 1F;
-			break;
-		case dataNettleFlowered:
-			widthReduced = 0.125F;
-			height = 1F;
-			break;
-		case dataSwampPlant:
-			widthReduced = 0.0625F;
-			height = 0.4375F;
-			break;
-		case dataFireBloom:
-			widthReduced = 0.1875F;
-			height = 1F;
-			break;
+			case dataBulbCappedShroom:
+				widthReduced = 0.3125F;
+				height = 0.6875F;
+				break;
+			case dataMushroom1:
+				widthReduced = 0.0625F;
+				height = 0.75F;
+				break;
+			case dataMushroom2:
+				widthReduced = 0.0625F;
+				height = 0.75F;
+				break;
+			case dataMushroom3:
+				widthReduced = 0.125F;
+				height = 0.625F;
+				break;
+			case dataDutchCapShroom:
+				widthReduced = 0.0625F;
+				height = 0.875F;
+				break;
+			case dataDesertShrub:
+				widthReduced = 0;
+				height = 1F;
+				break;
+			case dataMireCoral:
+				widthReduced = 0;
+				height = 0.9375F;
+				break;
+			case dataNettle:
+				widthReduced = 0.125F;
+				height = 1F;
+				break;
+			case dataNettleFlowered:
+				widthReduced = 0.125F;
+				height = 1F;
+				break;
+			case dataSwampPlant:
+				widthReduced = 0.0625F;
+				height = 0.4375F;
+				break;
+			case dataFireBloom:
+				widthReduced = 0.1875F;
+				height = 1F;
+				break;
 		}
 		setBlockBounds(0F + widthReduced, 0.0F, 0F + widthReduced, 1F - widthReduced, height, 1F - widthReduced);
 	}
@@ -116,7 +106,7 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 			xx = x + rand.nextInt(3) - 1;
 			yy = y + rand.nextInt(2) - rand.nextInt(2);
 			zz = z + rand.nextInt(3) - 1;
-			if (world.isAirBlock(xx, yy, zz) && this.canBlockStay(world, xx, yy, zz)) {
+			if (world.isAirBlock(xx, yy, zz) && canBlockStay(world, xx, yy, zz)) {
 				if (meta == dataNettle && rand.nextInt(3) == 0)
 					world.setBlock(x, y, z, this, dataNettleFlowered, 2);
 				if (meta == dataNettleFlowered)
@@ -169,41 +159,40 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}
-	
+
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
 
 		ItemStack item = null;
 		int meta = world.getBlockMetadata(x, y, z);
 
-			switch (meta) {
-				case dataNettle:
-					item = new ItemStack(ModItems.erebusMaterials, 1, DATA.nettleleaves.ordinal());
-					break;
-				case dataNettleFlowered:
-					item = new ItemStack(ModItems.erebusMaterials, 1, DATA.nettleflowers.ordinal());
-					break;
-				case dataBulbCappedShroom:
-				case dataMushroom1:
-				case dataMushroom2:
-				case dataMushroom3:
-				case dataDutchCapShroom:
-				case dataCattail:
-				case dataDesertShrub:
-				case dataMireCoral:
-				case dataSwampPlant:
-				case dataFireBloom:
-					item = new ItemStack(Item.getItemFromBlock(this), 1, meta);
-					break;	
-			}
-			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
+		switch (meta) {
+			case dataNettle:
+				item = new ItemStack(ModItems.erebusMaterials, 1, DATA.nettleleaves.ordinal());
+				break;
+			case dataNettleFlowered:
+				item = new ItemStack(ModItems.erebusMaterials, 1, DATA.nettleflowers.ordinal());
+				break;
+			case dataBulbCappedShroom:
+			case dataMushroom1:
+			case dataMushroom2:
+			case dataMushroom3:
+			case dataDutchCapShroom:
+			case dataDesertShrub:
+			case dataMireCoral:
+			case dataSwampPlant:
+			case dataFireBloom:
+				item = new ItemStack(Item.getItemFromBlock(this), 1, meta);
+				break;
+		}
+		Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
 	}
-	
+
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		int meta = world.getBlockMetadata(x, y, z);
@@ -214,14 +203,14 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 			return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 		return false;
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		if (world.isAirBlock(x, y - 1, z)) {
 			int meta = world.getBlockMetadata(x, y, z);
 			world.setBlockToAir(x, y, z);
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), new ItemStack(Item.getItemFromBlock(this), 1, meta));
-			}
+		}
 		canBlockStay(world, x, y, z);
 	}
 
@@ -241,7 +230,7 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	public Class<? extends ItemBlock> getItemBlockClass() {
 		return ItemBlockErebusPlantSmall.class;
 	}
-	
+
 	@SubscribeEvent
 	public void onBonemeal(BonemealEvent event) {
 		if (!event.world.isRemote && event.block == this) {
@@ -250,14 +239,14 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 			event.setResult(Result.ALLOW);
 		}
 	}
-	
+
 	public void growPlants(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = new WorldGenBigMushroomErebusMany(meta);
 		if (meta >= 0 && meta <= 4)
 			worldGen.generate(world, rand, x, y, z);
 		world.setBlockToAir(x, y, z);
-		
+
 		if (!worldGen.generate(world, rand, x, y, z))
 			world.setBlock(x, y, z, this, meta, 3);
 	}
