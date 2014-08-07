@@ -17,8 +17,8 @@ public class BucketAntiVenom extends ItemBucketMilk {
 
 	public BucketAntiVenom() {
 		setMaxStackSize(1);
-		setCreativeTab(ModTabs.items);
 		setContainerItem(Items.bucket);
+		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override

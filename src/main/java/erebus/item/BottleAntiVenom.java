@@ -21,7 +21,7 @@ public class BottleAntiVenom extends ItemBucketMilk {
 
 	public BottleAntiVenom() {
 		setMaxStackSize(1);
-		setCreativeTab(ModTabs.items);
+		setCreativeTab(ModTabs.specials);
 		setContainerItem(Items.glass_bottle);
 	}
 

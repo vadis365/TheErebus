@@ -15,7 +15,7 @@ public abstract class BambucketDrinkable extends Item {
 		setMaxStackSize(16);
 		setHasSubtypes(true);
 		setTextureName(texture);
-		setCreativeTab(ModTabs.items);
+		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override

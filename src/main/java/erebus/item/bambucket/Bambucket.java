@@ -28,7 +28,7 @@ public class Bambucket extends Item {
 	public Bambucket(Block fluid) {
 		this.fluid = fluid;
 		setMaxStackSize(16);
-		setCreativeTab(ModTabs.items);
+		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override

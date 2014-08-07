@@ -142,7 +142,7 @@ public class ModItems {
 
 	public static final Item bucketAntiVenom = new BucketAntiVenom().setUnlocalizedName("bucketAntiVenom").setTextureName("erebus:bucketAntiVenom");
 	public static final Item bucketBeetleJuice = new BucketOfBeetleJuice().setUnlocalizedName("bucketBeetleJuice").setTextureName("erebus:bucketBeetleJuice");
-	public static final Item bucketHoney = new ItemBucket(ModBlocks.erebusHoneyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
+	public static final Item bucketHoney = new ItemBucket(ModBlocks.erebusHoneyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
 
 	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("bottleAntiVenom");
 

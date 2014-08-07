@@ -64,15 +64,20 @@ public class Utils {
 	}
 
 	public static final void breakBlockWithParticles(World world, int x, int y, int z, int meta) {
-		Block block = world.getBlock(x, y, z);
-		if (block.isAir(world, x, y, z))
-			return;
+		playBreakParticles(world, x, y, z, meta);
 		world.setBlockToAir(x, y, z);
-		world.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(block) + (meta << 12));
 	}
 
 	public static final void breakBlockWithParticles(World world, int x, int y, int z) {
 		breakBlockWithParticles(world, x, y, z, world.getBlockMetadata(x, y, z));
+	}
+
+	public static void playBreakParticles(World world, int x, int y, int z, int meta) {
+		world.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(world.getBlock(x, y, z)) + (meta << 12));
+	}
+
+	public static void playBreakParticles(World world, int x, int y, int z) {
+		world.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(world.getBlock(x, y, z)) + (world.getBlockMetadata(x, y, z) << 12));
 	}
 
 	public static final void dropStack(World world, int x, int y, int z, ItemStack is) {

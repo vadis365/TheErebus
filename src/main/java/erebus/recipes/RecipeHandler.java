@@ -136,7 +136,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.glowGemBlock, 3, 0), "BBB", "BGB", "BBB", 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()), 'G', new ItemStack(ModItems.erebusMaterials, 1, DATA.redGem.ordinal()));
 
 		// Bamboo
-		GameRegistry.addRecipe(new ItemStack(ModItems.bambucket, 1, 0), "S", "B", 'S', Items.string, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()));
+		GameRegistry.addRecipe(new ItemStack(ModItems.bambucket, 1, 0), " S ", "B B", " B ", 'S', Items.string, 'B', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModItems.bambucket, 1, 3), "RRR", "RBR", "RRR", 'B', new ItemStack(ModItems.bambucket, 1, 0), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.planksErebus, 1, EnumWood.Bamboo.ordinal()), "##", "##", '#', new ItemStack(ModItems.erebusMaterials, 1, DATA.bamboo.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bambooCrate), "bpb", "p p", "bpb", 'p', new ItemStack(ModBlocks.planksErebus, 1, EnumWood.Bamboo.ordinal()), 'b', new ItemStack(ModItems.erebusMaterials, 1, 3));

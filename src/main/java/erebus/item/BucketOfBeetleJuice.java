@@ -12,8 +12,8 @@ public class BucketOfBeetleJuice extends ItemBucketMilk {
 
 	public BucketOfBeetleJuice() {
 		setMaxStackSize(1);
-		setCreativeTab(ModTabs.items);
 		setContainerItem(Items.bucket);
+		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override
