@@ -1,18 +1,63 @@
 package erebus;
 
+import java.lang.reflect.Field;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSeedFood;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.core.handler.ConfigHandler;
-import erebus.item.*;
+import erebus.item.AntTamingAmulet;
+import erebus.item.ArmorGlider;
+import erebus.item.Bambucket;
+import erebus.item.BeeTamingAmulet;
+import erebus.item.BlockExtractor;
+import erebus.item.BucketOfBeetleJuice;
+import erebus.item.BucketOfHoney;
+import erebus.item.CavemanClub;
+import erebus.item.Compost;
+import erebus.item.CompoundGoggles;
+import erebus.item.EncrustedDiamond;
+import erebus.item.ErebusFood;
+import erebus.item.ErebusMaterial;
 import erebus.item.ErebusMaterial.DATA;
+import erebus.item.ErebusSpecial;
+import erebus.item.ExoskeletonArmor;
+import erebus.item.FlowerSeeds;
+import erebus.item.HomingBeecon;
+import erebus.item.HomingBeeconAdvanced;
+import erebus.item.HornOfSummoning;
+import erebus.item.JadeArmour;
+import erebus.item.JadeAxe;
+import erebus.item.JadePickaxe;
+import erebus.item.JumpBoots;
+import erebus.item.MaxSpeedBow;
+import erebus.item.MetalIngots;
+import erebus.item.NectarCollector;
+import erebus.item.Paxel;
+import erebus.item.PortalActivator;
+import erebus.item.ReinExoskeletonArmor;
+import erebus.item.RitualDagger;
+import erebus.item.RolledNewspaper;
+import erebus.item.ScorpionPincer;
+import erebus.item.SpawnEggs;
+import erebus.item.SprayCan;
+import erebus.item.SprintLeggings;
+import erebus.item.WandOfAnimation;
+import erebus.item.WaspDagger;
+import erebus.item.WaspSword;
+import erebus.item.WebSlinger;
+import erebus.item.Whetstone;
+import erebus.item.WoodlouseBall;
 import erebus.item.block.ItemBlockDoorAmber;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.*;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-
-import java.lang.reflect.Field;
 
 public class ModItems {
 
@@ -34,13 +79,12 @@ public class ModItems {
 	public static final Item bucketHoney = new BucketOfHoney(ModBlocks.erebusHoneyBlock).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
 	public static final Item homingBeecon = new HomingBeecon().setUnlocalizedName("homingBeecon").setTextureName("paper");
 	public static final Item homingBeeconAdvanced = new HomingBeeconAdvanced().setUnlocalizedName("homingBeeconAdvanced").setTextureName("paper");
-	
+
 	public static final Item flowerSeeds = new FlowerSeeds().setUnlocalizedName("flowerSeeds");
 	public static final Item whetstone = new Whetstone().setUnlocalizedName("whetstone").setTextureName("erebus:whetstone");
 	public static final Item encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("encrustedDiamond").setTextureName("erebus:encrustedDiamond");
 	public static final Item antTamingAmulet = new AntTamingAmulet().setUnlocalizedName("antTamingAmulet").setTextureName("erebus:antTamingAmulet");
 	public static final Item compost = new Compost();
-    public static final Item gaeanGem = new GaeanEye().setUnlocalizedName("gaeanGem").setTextureName("erebus:gaeanGem");
 
 	// JADE STUFF
 	public static final Item jadeHelmet = new JadeArmour(0).setUnlocalizedName("helmetJade").setTextureName("erebus:helmetJade");
@@ -103,7 +147,7 @@ public class ModItems {
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger, woodlouseBall, rolledNewspaper);
 		ModTabs.gears.setTab(compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
-		ModTabs.specials.setTab(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, gaeanGem, spawnEggs);
+		ModTabs.specials.setTab(portalActivator, bamBucket, bucketOfBeetleJuice, bucketHoney, erebusSpecialItem, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
 
 		// Special Case
 		ModTabs.blocks.setTab(doorAmberItem);

@@ -160,7 +160,6 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mirBrick, 4), "xy", "yx", 'y', Blocks.clay, 'x', ModBlocks.mudBricks);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockSilk, 1), "sss", "sss", "sss", 's', Items.string);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockAmber, 4, 2), "ss", "ss", 's', new ItemStack(ModBlocks.blockAmber, 1, 0));
-		GameRegistry.addRecipe(new ItemStack(ModItems.portalActivator, 1), "  O", " / ", "/  ", 'O', new ItemStack(Items.spider_eye), '/', new ItemStack(Items.stick));
 		GameRegistry.addRecipe(new ItemStack(Items.string, 9), "#", '#', new ItemStack(ModBlocks.blockSilk));
 		GameRegistry.addRecipe(new ItemStack(Items.dye, 1, 15), "#", '#', new ItemStack(ModItems.erebusMaterials, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(Items.dye, 6, 15), "#", '#', new ItemStack(ModItems.fossilClub, 1, 0));
@@ -195,7 +194,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), Blocks.torch);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom, 1), new ItemStack(ModItems.erebusMaterials, 1, DATA.yellowDottedFungus.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()));
-		GameRegistry.addRecipe(new ItemStack(ModItems.gaeanGem, 1), "VSE", "VSS", "GVV", 'V', Blocks.vine, 'S', Items.stick, 'E', ModItems.gaeanGem, 'G', Items.gold_ingot);
+		GameRegistry.addRecipe(new ItemStack(ModItems.portalActivator, 1), "VSE", "VSS", "GVV", 'V', Blocks.vine, 'S', Items.stick, 'E', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.gaeanGem.ordinal()), 'G', Items.gold_ingot);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.gaeanKeystone, 1), "V V", "SOS", "SSS", 'V', Blocks.vine, 'S', Blocks.stonebrick, 'O', Blocks.obsidian);
 
 		// Whetstone Sharpening Enchanting Stuff
