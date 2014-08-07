@@ -37,6 +37,7 @@ public class ComposterRegistry {
 		register(new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
+	@SuppressWarnings("unused")
 	private static void register(Block block) {
 		register(new ItemStack(block, 1, OreDictionary.WILDCARD_VALUE));
 	}

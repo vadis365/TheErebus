@@ -12,7 +12,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ModelWandOfAnimation extends ModelBase {
 
 	private final ModelRenderer Jewel1, Jewel2, Jewel3, TopR1, TopR2, TopR3, TopR4, TopR5, Dec4, Dec3, Dec2, Dec1, Shaft, Pommel1, Pommel2, Pommel3;
-	private boolean up;
 
 	public ModelWandOfAnimation() {
 		textureWidth = 32;
@@ -85,8 +84,6 @@ public class ModelWandOfAnimation extends ModelBase {
 	public void render(float unitPixel) {
 		float tick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-		if (tick == 0)
-			up = !up;
 		Shaft.render(unitPixel);
 		GL11.glRotatef(tick, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
