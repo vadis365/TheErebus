@@ -8,6 +8,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -42,6 +43,8 @@ public class ModFluids {
 		FluidContainerRegistry.registerFluidContainer(honey, new ItemStack(ModItems.bucketHoney), new ItemStack(Items.bucket));
 		FluidContainerRegistry.registerFluidContainer(beetleJuice, new ItemStack(ModItems.bucketBeetleJuice), new ItemStack(Items.bucket));
 		FluidContainerRegistry.registerFluidContainer(antiVenom, new ItemStack(ModItems.bucketAntiVenom), new ItemStack(Items.bucket));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(antiVenom, FluidContainerRegistry.BUCKET_VOLUME / 2), new ItemStack(ModItems.bottleAntiVenom), new ItemStack(Items.glass_bottle));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(antiVenom, FluidContainerRegistry.BUCKET_VOLUME / 2), new ItemStack(ModItems.bottleAntiVenom), new ItemStack(Items.glass_bottle));
 	}
 
 	@SubscribeEvent

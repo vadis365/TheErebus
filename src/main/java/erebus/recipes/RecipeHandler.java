@@ -201,8 +201,10 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.antTamingAmulet), "pgp", "gog", "pgp", 'p', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.antPheromones.ordinal()), 'g', "ingotGold", 'o', Blocks.obsidian));
 
 		// Whetstone Sharpening Enchanting Stuff
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.poisonGland.ordinal()));
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bambucketAntiVenom), ModItems.bambucketBeetleJuice, new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.poisonGland.ordinal()));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.poisonGland.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.nettleleaves.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.nettleleaves.ordinal()));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bambucketAntiVenom), ModItems.bambucketBeetleJuice, new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.poisonGland.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.nettleleaves.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.nettleleaves.ordinal()));
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), ModItems.bucketAntiVenom, Items.glass_bottle, Items.glass_bottle);
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), ModItems.bambucketAntiVenom, Items.glass_bottle, Items.glass_bottle);
 
 		// Sharp Swords
 		for (Item aSwordType : swordType)
