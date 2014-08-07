@@ -21,7 +21,7 @@ public class BlockThorns extends BlockVine implements IShearable {
 		entity.attackEntityFrom(DamageSource.cactus, 1);
 	}
 
-    @Override
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
 		return 16777215;

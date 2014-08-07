@@ -1,6 +1,7 @@
 package erebus.world.loot;
 
 import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -14,15 +15,15 @@ import net.minecraftforge.common.util.Constants.NBT;
 public class LootUtil {
 
 	public static final WeightedLootList lootFuel = new WeightedLootList(new LootItemStack[]{
-		new LootItemStack(Items.coal).setAmount(1, 16).setWeight(32),
-		new LootItemStack(Items.coal).setDamage(1).setAmount(1, 16).setWeight(30),
-		new LootItemStack(Blocks.coal_block).setAmount(1, 6).setWeight(10),
-		new LootItemStack(Items.blaze_rod).setAmount(1, 8).setWeight(18),
-		new LootItemStack(Items.lava_bucket).setWeight(15),
-		new LootItemStack(Blocks.sapling).setAmount(1, 20).setDamage(0, 3).setWeight(10),
-		new LootItemStack(Items.stick).setAmount(1, 32).setWeight(8)
+	new LootItemStack(Items.coal).setAmount(1, 16).setWeight(32),
+	new LootItemStack(Items.coal).setDamage(1).setAmount(1, 16).setWeight(30),
+	new LootItemStack(Blocks.coal_block).setAmount(1, 6).setWeight(10),
+	new LootItemStack(Items.blaze_rod).setAmount(1, 8).setWeight(18),
+	new LootItemStack(Items.lava_bucket).setWeight(15),
+	new LootItemStack(Blocks.sapling).setAmount(1, 20).setDamage(0, 3).setWeight(10),
+	new LootItemStack(Items.stick).setAmount(1, 32).setWeight(8)
 	});
-	
+
 	public static void addLore(ItemStack is, String lore) {
 		NBTTagCompound tag = is.stackTagCompound;
 		if (tag == null)

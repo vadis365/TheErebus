@@ -7,7 +7,10 @@ import java.util.List;
 public class Spiral {
 
 	private enum Direction {
-		E(1, 0), N(0, 1), W(-1, 0), S(0, -1);
+		E(1, 0),
+		N(0, 1),
+		W(-1, 0),
+		S(0, -1);
 
 		private final int dx;
 		private final int dy;

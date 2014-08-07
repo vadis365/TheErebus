@@ -44,19 +44,18 @@ public class ContainerComposter extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 
-        for (Object crafter : crafters)
-        {
-            ICrafting icrafting = (ICrafting) crafter;
+		for (Object crafter : crafters) {
+			ICrafting icrafting = (ICrafting) crafter;
 
-            if (lastCookTime != tileComposter.composterCookTime)
-                icrafting.sendProgressBarUpdate(this, 0, tileComposter.composterCookTime);
+			if (lastCookTime != tileComposter.composterCookTime)
+				icrafting.sendProgressBarUpdate(this, 0, tileComposter.composterCookTime);
 
-            if (lastBurnTime != tileComposter.composterBurnTime)
-                icrafting.sendProgressBarUpdate(this, 1, tileComposter.composterBurnTime);
+			if (lastBurnTime != tileComposter.composterBurnTime)
+				icrafting.sendProgressBarUpdate(this, 1, tileComposter.composterBurnTime);
 
-            if (lastItemBurnTime != tileComposter.currentItemBurnTime)
-                icrafting.sendProgressBarUpdate(this, 2, tileComposter.currentItemBurnTime);
-        }
+			if (lastItemBurnTime != tileComposter.currentItemBurnTime)
+				icrafting.sendProgressBarUpdate(this, 2, tileComposter.currentItemBurnTime);
+		}
 
 		lastCookTime = tileComposter.composterCookTime;
 		lastBurnTime = tileComposter.composterBurnTime;

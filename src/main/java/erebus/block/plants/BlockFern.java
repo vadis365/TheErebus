@@ -47,8 +47,8 @@ public class BlockFern extends BlockUndergroundFlower implements IShearable, ISu
 			for (int j = -1; j <= 1; ++j) {
 				int colour = world.getBiomeGenForCoords(x + j, z + i).getBiomeGrassColor(x + j, y, z + i);
 				red += (colour & 16711680) >> 16;
-				green += (colour & 65280) >> 8;
-				blue += colour & 255;
+			green += (colour & 65280) >> 8;
+			blue += colour & 255;
 			}
 
 		return (red / 9 & 255) << 16 | (green / 9 & 255) << 8 | blue / 9 & 255;

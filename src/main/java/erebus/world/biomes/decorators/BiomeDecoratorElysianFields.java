@@ -21,7 +21,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 
 	protected final WorldGenerator genTreeCypress = new WorldGenCypressTree();
 	protected final WorldGenerator genGiantFlowers = new WorldGenGiantFlowers();
-	
+
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 
 	protected boolean generateFlowers = true;
@@ -113,17 +113,17 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 				world.setBlock(xx,yy+1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataWeepingBlueTop,2);
 			}
 		}
-		
+
 		for(attempt = 0; attempt < 10; attempt++){
 			xx = x+offsetXZ();
 			yy = 30+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-				if (!world.getBlock(xx,yy,zz).isNormalCube())continue;
+			if (!world.getBlock(xx,yy,zz).isNormalCube())continue;
 
-				for(int hangerY = rand.nextInt(20); hangerY>0; hangerY--)
-					if (world.isAirBlock(xx,yy-hangerY,zz))
-						world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger, 4, 2);
+			for(int hangerY = rand.nextInt(20); hangerY>0; hangerY--)
+				if (world.isAirBlock(xx,yy-hangerY,zz))
+					world.setBlock(xx,yy-hangerY,zz,ModBlocks.erebusHanger, 4, 2);
 		}
 
 		for(attempt = 0; attempt < 15; attempt++) {

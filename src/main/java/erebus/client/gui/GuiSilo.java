@@ -35,7 +35,7 @@ public class GuiSilo extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.getTextureManager().bindTexture(GUI_SILO); //temp texture 
+		mc.getTextureManager().bindTexture(GUI_SILO); //temp texture
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);

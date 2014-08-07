@@ -60,9 +60,8 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	@Override
 	public void updateTask() {
-		if (!continueExecuting()) {
+		if (!continueExecuting())
 			return;
-		}
 
 		int xCoord = (int) entity.posX;
 		int yCoord = (int) entity.posY;
@@ -93,7 +92,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 					if (!canEatBlock(entity.worldObj.getBlock(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
 						hasTarget = false;
 					else if (EAT_SPEED <= eatTicks) {
-							entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
+						entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
 						if (seed != null)
 							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
 						hasTarget = false;

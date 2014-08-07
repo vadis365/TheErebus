@@ -30,7 +30,21 @@ import erebus.world.feature.plant.WorldGenGiantFlowers;
 public class BlockPlantedGiantFlower extends BlockSapling implements ISubBlocksBlock {
 
 	public enum FLOWER_TYPE {
-		BLACK, RED, BROWN, BLUE, PURPLE, CYAN, LIGHT_GRAY, GRAY, PINK, YELLOW, LIGHT_BLUE, MAGENTA, ORANGE, WHITE, RAINBOW
+		BLACK,
+		RED,
+		BROWN,
+		BLUE,
+		PURPLE,
+		CYAN,
+		LIGHT_GRAY,
+		GRAY,
+		PINK,
+		YELLOW,
+		LIGHT_BLUE,
+		MAGENTA,
+		ORANGE,
+		WHITE,
+		RAINBOW
 	}
 
 	@SideOnly(Side.CLIENT)

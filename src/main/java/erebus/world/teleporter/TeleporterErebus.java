@@ -1,8 +1,10 @@
 package erebus.world.teleporter;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
@@ -24,7 +26,7 @@ final class TeleporterErebus extends Teleporter {
 		worldServerInstance = worldServer;
 		rand = new Random(worldServer.getSeed() + 1);
 	}
-	
+
 	@Override
 	public void placeInPortal(Entity entity, double x, double y, double z, float par8) {
 		if (!placeInExistingPortal(entity, x, y, z, par8)) {
@@ -209,43 +211,43 @@ final class TeleporterErebus extends Teleporter {
 				d2 = j2 + 0.5D - entity.posZ;
 				label274:
 
-				for (k2 = worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2)
-					if (worldServerInstance.isAirBlock(i2, k2, j2)) {
-						while (k2 > 0 && worldServerInstance.isAirBlock(i2, k2 - 1, j2))
-							--k2;
+					for (k2 = worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2)
+						if (worldServerInstance.isAirBlock(i2, k2, j2)) {
+							while (k2 > 0 && worldServerInstance.isAirBlock(i2, k2 - 1, j2))
+								--k2;
 
-						for (i3 = l1; i3 < l1 + 4; ++i3) {
-							l2 = i3 % 2;
-							k3 = 1 - l2;
+							for (i3 = l1; i3 < l1 + 4; ++i3) {
+								l2 = i3 % 2;
+								k3 = 1 - l2;
 
-							if (i3 % 4 >= 2) {
-								l2 = -l2;
-								k3 = -k3;
-							}
+								if (i3 % 4 >= 2) {
+									l2 = -l2;
+									k3 = -k3;
+								}
 
-							for (j3 = 0; j3 < 3; ++j3)
-								for (i4 = 0; i4 < 4; ++i4)
-									for (l3 = -1; l3 < 4; ++l3) {
-										k4 = i2 + (i4 - 1) * l2 + j3 * k3;
-										j4 = k2 + l3;
-										int l4 = j2 + (i4 - 1) * k3 - j3 * l2;
+								for (j3 = 0; j3 < 3; ++j3)
+									for (i4 = 0; i4 < 4; ++i4)
+										for (l3 = -1; l3 < 4; ++l3) {
+											k4 = i2 + (i4 - 1) * l2 + j3 * k3;
+											j4 = k2 + l3;
+											int l4 = j2 + (i4 - 1) * k3 - j3 * l2;
 
-										if (l3 < 0 && !worldServerInstance.getBlock(k4, j4, l4).getMaterial().isSolid() || l3 >= 0 && !worldServerInstance.isAirBlock(k4, j4, l4))
-											continue label274;
-									}
+											if (l3 < 0 && !worldServerInstance.getBlock(k4, j4, l4).getMaterial().isSolid() || l3 >= 0 && !worldServerInstance.isAirBlock(k4, j4, l4))
+												continue label274;
+										}
 
-							d4 = k2 + 0.5D - entity.posY;
-							d3 = d1 * d1 + d4 * d4 + d2 * d2;
+								d4 = k2 + 0.5D - entity.posY;
+								d3 = d1 * d1 + d4 * d4 + d2 * d2;
 
-							if (d0 < 0.0D || d3 < d0) {
-								d0 = d3;
-								l = i2;
-								i1 = k2;
-								j1 = j2;
-								k1 = i3 % 4;
+								if (d0 < 0.0D || d3 < d0) {
+									d0 = d3;
+									l = i2;
+									i1 = k2;
+									j1 = j2;
+									k1 = i3 % 4;
+								}
 							}
 						}
-					}
 			}
 		}
 
@@ -257,37 +259,37 @@ final class TeleporterErebus extends Teleporter {
 					d2 = j2 + 0.5D - entity.posZ;
 					label222:
 
-					for (k2 = worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2)
-						if (worldServerInstance.isAirBlock(i2, k2, j2)) {
-							while (k2 > 0 && worldServerInstance.isAirBlock(i2, k2 - 1, j2))
-								--k2;
+						for (k2 = worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2)
+							if (worldServerInstance.isAirBlock(i2, k2, j2)) {
+								while (k2 > 0 && worldServerInstance.isAirBlock(i2, k2 - 1, j2))
+									--k2;
 
-							for (i3 = l1; i3 < l1 + 2; ++i3) {
-								l2 = i3 % 2;
-								k3 = 1 - l2;
+								for (i3 = l1; i3 < l1 + 2; ++i3) {
+									l2 = i3 % 2;
+									k3 = 1 - l2;
 
-								for (j3 = 0; j3 < 4; ++j3)
-									for (i4 = -1; i4 < 4; ++i4) {
-										l3 = i2 + (j3 - 1) * l2;
-										k4 = k2 + i4;
-										j4 = j2 + (j3 - 1) * k3;
+									for (j3 = 0; j3 < 4; ++j3)
+										for (i4 = -1; i4 < 4; ++i4) {
+											l3 = i2 + (j3 - 1) * l2;
+											k4 = k2 + i4;
+											j4 = j2 + (j3 - 1) * k3;
 
-										if (i4 < 0 && !worldServerInstance.getBlock(l3, k4, j4).getMaterial().isSolid() || i4 >= 0 && !worldServerInstance.isAirBlock(l3, k4, j4))
-											continue label222;
+											if (i4 < 0 && !worldServerInstance.getBlock(l3, k4, j4).getMaterial().isSolid() || i4 >= 0 && !worldServerInstance.isAirBlock(l3, k4, j4))
+												continue label222;
+										}
+
+									d4 = k2 + 0.5D - entity.posY;
+									d3 = d1 * d1 + d4 * d4 + d2 * d2;
+
+									if (d0 < 0.0D || d3 < d0) {
+										d0 = d3;
+										l = i2;
+										i1 = k2;
+										j1 = j2;
+										k1 = i3 % 2;
 									}
-
-								d4 = k2 + 0.5D - entity.posY;
-								d3 = d1 * d1 + d4 * d4 + d2 * d2;
-
-								if (d0 < 0.0D || d3 < d0) {
-									d0 = d3;
-									l = i2;
-									i1 = k2;
-									j1 = j2;
-									k1 = i3 % 2;
 								}
 							}
-						}
 				}
 			}
 

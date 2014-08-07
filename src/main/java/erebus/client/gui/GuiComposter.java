@@ -20,7 +20,7 @@ public class GuiComposter extends GuiContainer {
 
 	public GuiComposter(InventoryPlayer player, TileEntityComposter composter) {
 		super(new ContainerComposter(player, composter));
-		this.tileComposter = composter;
+		tileComposter = composter;
 	}
 
 	@Override
@@ -33,15 +33,15 @@ public class GuiComposter extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(composterGuiTextures);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+		mc.getTextureManager().bindTexture(composterGuiTextures);
+		int k = (width - xSize) / 2;
+		int l = (height - ySize) / 2;
+		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
 
-		if (this.tileComposter.isBurning()) {
-			int i1 = this.tileComposter.getBurnTimeRemainingScaled(13);
-			this.drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
-			i1 = this.tileComposter.getCookProgressScaled(24);
+		if (tileComposter.isBurning()) {
+			int i1 = tileComposter.getBurnTimeRemainingScaled(13);
+			drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
+			i1 = tileComposter.getCookProgressScaled(24);
 			drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
 		}
 	}

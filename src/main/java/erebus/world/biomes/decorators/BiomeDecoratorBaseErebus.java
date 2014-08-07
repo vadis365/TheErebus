@@ -1,6 +1,13 @@
 package erebus.world.biomes.decorators;
-import static erebus.core.handler.ConfigHandler.*;
+
+import static erebus.core.handler.ConfigHandler.aluminium;
+import static erebus.core.handler.ConfigHandler.copper;
+import static erebus.core.handler.ConfigHandler.lead;
+import static erebus.core.handler.ConfigHandler.silver;
+import static erebus.core.handler.ConfigHandler.tin;
+
 import java.util.Random;
+
 import net.minecraft.world.World;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -31,8 +38,8 @@ public abstract class BiomeDecoratorBaseErebus{
 	}
 
 	public final void decorate(World world, Random rand, int x, int z){
-		if (this.isDecorating)throw new RuntimeException("Already decorating Erebus!");
-		this.isDecorating = true;
+		if (isDecorating)throw new RuntimeException("Already decorating Erebus!");
+		isDecorating = true;
 		this.world = world;
 		this.rand = rand;
 		this.x = x;
@@ -50,7 +57,7 @@ public abstract class BiomeDecoratorBaseErebus{
 
 		decorate();
 
-		this.isDecorating = false;
+		isDecorating = false;
 	}
 
 	protected void populate(){}

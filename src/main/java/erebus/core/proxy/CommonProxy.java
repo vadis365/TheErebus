@@ -107,8 +107,8 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityHoneyComb.class, "honeyComb");
 		registerTileEntity(TileEntitySiloTank.class, "siloTank");
 		registerTileEntity(TileEntityComposter.class, "composter");
-        registerTileEntity(TileEntityPortal.class, "portal");
-        registerTileEntity(TileEntityOfferingAltar.class, "offeringAltar");
+		registerTileEntity(TileEntityPortal.class, "portal");
+		registerTileEntity(TileEntityOfferingAltar.class, "offeringAltar");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
@@ -172,25 +172,25 @@ public class CommonProxy implements IGuiHandler {
 			if (tileentity instanceof TileEntityHoneyComb)
 				return new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tileentity);
 		}
-		
+
 		else if (ID == GUI_ID_ANT_INVENTORY) {
 			Entity entity = world.getEntityByID(x);
 			if (entity != null && entity instanceof EntityBlackAnt)
 				return new ContainerAntInventory(player.inventory, (EntityBlackAnt) entity);
 		}
-		
+
 		else if (ID == GUI_ID_SILO_INVENTORY) {
 			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity instanceof TileEntitySiloTank)
 				return new ContainerSilo(player.inventory, (TileEntitySiloTank) tileentity);
 		}
-		
+
 		else if (ID == GUI_ID_COMPOSTER) {
 			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity instanceof TileEntityComposter)
 				return new ContainerComposter(player.inventory, (TileEntityComposter) tileentity);
 		}
-		
+
 		return null;
 	}
 
@@ -241,19 +241,19 @@ public class CommonProxy implements IGuiHandler {
 			if (tileentity instanceof TileEntityHoneyComb)
 				return new GuiHoneyComb(player.inventory, (TileEntityHoneyComb) tileentity);
 		}
-		
+
 		else if (ID == GUI_ID_ANT_INVENTORY) {
 			Entity entity = world.getEntityByID(x);
 			if (entity != null && entity instanceof EntityBlackAnt)
 				return new GuiAntInventory(player.inventory, entity);
 		}
-		
+
 		else if (ID == GUI_ID_SILO_INVENTORY) {
 			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity instanceof TileEntitySiloTank)
 				return new GuiSilo(player.inventory, (TileEntitySiloTank) tileentity);
 		}
-		
+
 		else if (ID == GUI_ID_COMPOSTER) {
 			TileEntity tileentity = world.getTileEntity(x, y, z);
 			if (tileentity instanceof TileEntityComposter)

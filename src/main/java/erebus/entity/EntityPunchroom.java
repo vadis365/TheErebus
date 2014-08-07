@@ -19,7 +19,7 @@ public class EntityPunchroom extends EntityMob {
 		isImmuneToFire = true;
 		setSize(1.0F, 1.0F);
 		shroomJumpDelay = rand.nextInt(20) + 10;
-}
+	}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -32,12 +32,12 @@ public class EntityPunchroom extends EntityMob {
 
 	/*
 	 * @Override protected String getLivingSound() { return ""; }
-	 * 
+	 *
 	 * @Override protected String getHurtSound() { return ""; }
-	 * 
+	 *
 	 * @Override protected String getDeathSound() { return ""; }
 	 */
-	
+
 	@Override
 	public void onUpdate() {
 		squishFactor += (squishAmount - squishFactor) * 0.5F;
@@ -70,7 +70,7 @@ public class EntityPunchroom extends EntityMob {
 
 		if (entityplayer != null) {
 			faceEntity(entityplayer, 10.0F, 20.0F);
-			setAttackTarget(entityplayer);	
+			setAttackTarget(entityplayer);
 		}
 
 		if (onGround && shroomJumpDelay-- <= 0) {
@@ -103,5 +103,5 @@ public class EntityPunchroom extends EntityMob {
 					knockback = 0.6F;
 		player.attackEntityFrom(DamageSource.causeMobDamage(this), 1F);
 		player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.3D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
-		}
 	}
+}

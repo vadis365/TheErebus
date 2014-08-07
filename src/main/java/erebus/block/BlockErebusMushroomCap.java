@@ -27,8 +27,7 @@ public class BlockErebusMushroomCap extends Block {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return meta == 10 && side > 1 ? stalkIcon[mushroomType] : meta >= 1 && meta <= 9 && side == 1 ? iconArray[mushroomType] : meta >= 1 && meta <= 3 && side == 2 ? iconArray[mushroomType] : meta >= 7 && meta <= 9 && side == 3 ? iconArray[mushroomType] : (meta == 1 || meta == 4 || meta == 7) && side == 4 ? iconArray[mushroomType] : (meta == 3 || meta == 6 || meta == 9) && side == 5 ? iconArray[mushroomType] : meta == 14 ? iconArray[mushroomType] : meta == 15 ? stalkIcon[mushroomType]
-		: insideIcon[mushroomType];
+		return meta == 10 && side > 1 ? stalkIcon[mushroomType] : meta >= 1 && meta <= 9 && side == 1 ? iconArray[mushroomType] : meta >= 1 && meta <= 3 && side == 2 ? iconArray[mushroomType] : meta >= 7 && meta <= 9 && side == 3 ? iconArray[mushroomType] : (meta == 1 || meta == 4 || meta == 7) && side == 4 ? iconArray[mushroomType] : (meta == 3 || meta == 6 || meta == 9) && side == 5 ? iconArray[mushroomType] : meta == 14 ? iconArray[mushroomType] : meta == 15 ? stalkIcon[mushroomType] : insideIcon[mushroomType];
 	}
 
 	@Override

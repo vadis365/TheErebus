@@ -45,10 +45,9 @@ public class EntityGrasshopper extends EntityCreature {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = this.getBrightness(1.0F);
-		if (light >= 0F) {
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(this.boundingBox);
-		}
+		float light = getBrightness(1.0F);
+		if (light >= 0F)
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
 		return super.getCanSpawnHere();
 	}
 

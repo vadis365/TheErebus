@@ -1,4 +1,5 @@
 package erebus.world.biomes.decorators;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
@@ -22,9 +23,8 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus{
 			yy = 15+rand.nextInt(90);
 			zz = z+offsetXZ();
 
-			if (checkSurface(SurfaceType.SAND,xx,yy,zz)){
+			if (checkSurface(SurfaceType.SAND,xx,yy,zz))
 				genLavaLakes.generate(world,world.rand,xx,yy,zz);
-			}
 		}
 	}
 
@@ -54,20 +54,16 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus{
 			}
 		}
 
-		if (rand.nextInt(34) == 0){
-			for(int attempt = 0; attempt < 15; attempt++){
+		if (rand.nextInt(34) == 0)
+			for(int attempt = 0; attempt < 15; attempt++)
 				if (genAntlionLair.generate(world,rand,x+5+rand.nextInt(6)+8,15+rand.nextInt(35),z+5+rand.nextInt(6)+8))break;
-			}
-		}
 	}
 
 	@Override
 	public void generateFeature(FeatureType featureType){
-		if (featureType == FeatureType.REDGEM){
-			for(attempt = 0; attempt < 10; attempt++){
+		if (featureType == FeatureType.REDGEM)
+			for(attempt = 0; attempt < 10; attempt++)
 				genRedGem.generate(world,rand,x+offsetXZ(),rand.nextInt(64),z+offsetXZ());
-			}
-		}
 		else super.generateFeature(featureType);
 	}
 

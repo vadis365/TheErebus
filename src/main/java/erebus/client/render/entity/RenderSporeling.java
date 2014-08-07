@@ -17,14 +17,14 @@ public class RenderSporeling extends RenderLiving {
 
 	public RenderSporeling(ModelSporeling ModelSporeling, float shadow) {
 		super(ModelSporeling, shadow);
-		this.setRenderPassModel(new ModelSporeling());
+		setRenderPassModel(new ModelSporeling());
 	}
 
 	protected int setSporelingEyeBrightness(EntitySporeling entityLiving, int par2, float par3) {
-		if (par2 != 0) {
+		if (par2 != 0)
 			return -1;
-		} else {
-			this.bindTexture(eyeTexture);
+		else {
+			bindTexture(eyeTexture);
 			float var4 = 1.0F;
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -40,7 +40,7 @@ public class RenderSporeling extends RenderLiving {
 	}
 
 	protected int shouldRenderPass(EntityLiving entityLiving, int par2, float par3) {
-		return this.setSporelingEyeBrightness((EntitySporeling) entityLiving, par2, par3);
+		return setSporelingEyeBrightness((EntitySporeling) entityLiving, par2, par3);
 	}
 
 	@Override

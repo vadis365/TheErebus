@@ -289,7 +289,7 @@ public class ModelTitanBeetle extends ModelBase {
 		EntityTitanBeetle beetle = (EntityTitanBeetle) entity;
 		float correction = 0.3490659F;
 		float legMovement = MathHelper.cos(limbSwing * 1.0F) * 0.5F * prevLimbSwing;
-		this.HeadMain.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
+		HeadMain.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
 		LBL1.rotateAngleX = -legMovement + correction;
 		LML1.rotateAngleX = legMovement;
 		LFL1.rotateAngleX = -legMovement - correction;

@@ -117,7 +117,7 @@ public class EntityFly extends EntityAmbientCreature {
 		super.updateAITasks();
 
 		if (getIsFlyHanging()) {
-			if (!worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
+			if (!worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
 				setIsFlyHanging(false);
 			else {
 				if (rand.nextInt(200) == 0)
@@ -144,7 +144,7 @@ public class EntityFly extends EntityAmbientCreature {
 			moveForward = 0.5F;
 			rotationYaw += var8;
 
-			if (rand.nextInt(100) == 0 && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
+			if (rand.nextInt(100) == 0 && worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
 				setIsFlyHanging(false);
 		}
 	}

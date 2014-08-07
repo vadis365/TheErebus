@@ -145,12 +145,11 @@ public class EntityDragonfly extends EntityMob {
 		motionY *= 0.6000000238418579D;
 		if (getEntityToAttack() == null)
 			flyAbout();
-		if (riddenByEntity != null) {
+		if (riddenByEntity != null)
 			if (!worldObj.isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0)) {
 				setDropped(true);
 				riddenByEntity.mountEntity(null);
 			}
-		}
 		if (dropped) {
 			droptime++;
 			if (droptime >= 20) {

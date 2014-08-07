@@ -60,8 +60,8 @@ public class EntityBloodSnail extends EntityMob {
 
 	@Override
 	protected Entity findPlayerToAttack() {
-		EntityPlayer var1 = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
-		return var1 != null && this.canEntityBeSeen(var1) ? var1 : null;
+		EntityPlayer var1 = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
+		return var1 != null && canEntityBeSeen(var1) ? var1 : null;
 	}
 
 	@Override
@@ -69,10 +69,10 @@ public class EntityBloodSnail extends EntityMob {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLiving) {
 				byte duration = 0;
-				if (this.worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
 					duration = 7;
 
-				else if (this.worldObj.difficultySetting == EnumDifficulty.HARD)
+				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 					duration = 15;
 
 				if (duration > 0) {
@@ -81,8 +81,7 @@ public class EntityBloodSnail extends EntityMob {
 				}
 			}
 			return true;
-		} else {
+		} else
 			return false;
-		}
 	}
 }

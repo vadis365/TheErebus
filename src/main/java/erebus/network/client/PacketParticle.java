@@ -17,7 +17,9 @@ import erebus.network.AbstractClientPacket;
 public class PacketParticle extends AbstractClientPacket {
 
 	public static enum ParticleType {
-		BEETLE_LARVA_SQUISH, SPRAY_CAN, CRUSHROOM_BLAM;
+		BEETLE_LARVA_SQUISH,
+		SPRAY_CAN,
+		CRUSHROOM_BLAM;
 
 		static final ParticleType[] values = values();
 	}
@@ -61,9 +63,9 @@ public class PacketParticle extends AbstractClientPacket {
 			case CRUSHROOM_BLAM:
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
-					eff.addEffect(new EntityRepellentFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY + 0.1D, e.posZ + MathHelper.cos((float) ang) * 3,0,0,0));
+					eff.addEffect(new EntityRepellentFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY + 0.1D, e.posZ + MathHelper.cos((float) ang) * 3, 0, 0, 0));
 				}
-				default:
+			default:
 				;
 		}
 	}

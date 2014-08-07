@@ -10,7 +10,7 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 
 	public GenLayerSubBiomes(long seed, GenLayer parentGenLayer) {
 		super(seed);
-		this.parent = parentGenLayer;
+		parent = parentGenLayer;
 	}
 
 	@Override
@@ -18,12 +18,11 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 		int[] currentBiomeInts = parent.getInts(x - 2, z - 2, sizeX + 4, sizeZ + 4);
 		int[] biomeInts = IntCache.getIntCache(sizeX * sizeZ);
 
-		for (int zz = 0; zz < sizeZ; ++zz) {
+		for (int zz = 0; zz < sizeZ; ++zz)
 			for (int xx = 0; xx < sizeX; ++xx) {
 				initChunkSeed(xx + x, zz + z);
 				biomeInts[xx + zz * sizeX] = currentBiomeInts[xx + 2 + (zz + 2) * (sizeX + 4)];
 			}
-		}
 
 		initChunkSeed(x, z);
 
@@ -36,7 +35,7 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 			BiomeBaseErebus biome = (BiomeBaseErebus) BiomeGenBase.getBiomeGenArray()[biomeID];
 			BiomeBaseErebus subBiome = biome.getRandomSubBiome(nextInt(101));
 
-			if (subBiome != null && biome != subBiome) {
+			if (subBiome != null && biome != subBiome)
 				for (int a = 0, bx1, bx2, bz1, bz2, nx, nz; a < 5; a++) {
 					nx = xx + offsetX[a];
 					nz = zz + offsetZ[a];
@@ -51,7 +50,6 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 					} else if (a == 0)
 						break;
 				}
-			}
 		}
 
 		return biomeInts;

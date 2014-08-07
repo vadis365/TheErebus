@@ -24,7 +24,7 @@ public class BasicShapeGen {
 				for (int y1 = y; y1 > y - radius; y1--) {
 					double dSq = Math.pow(x1 - x, 2.0D) + Math.pow(z1 - z, 2.0D) + Math.pow(y1 - y, 2.0D);
 					if (Math.round(Math.sqrt(dSq)) < radius)
-						if ((dSq >= Math.pow(radius - 2, 2.0D)) || (y1 == y))
+						if (dSq >= Math.pow(radius - 2, 2.0D) || y1 == y)
 							world.setBlock(x1, y1, z1, block, metaData, 3);
 						else if (isHollow)
 							world.setBlockToAir(x1, y1, z1);
@@ -37,7 +37,7 @@ public class BasicShapeGen {
 				for (int y1 = y; y1 < y + radius; y1++) {
 					double dSq = Math.pow(x1 - x, 2.0D) + Math.pow(z1 - z, 2.0D) + Math.pow(y1 - y, 2.0D);
 					if (Math.round(Math.sqrt(dSq)) < radius)
-						if ((dSq >= Math.pow(radius - 2, 2.0D)) || (y1 == y))
+						if (dSq >= Math.pow(radius - 2, 2.0D) || y1 == y)
 							world.setBlock(x1, y1, z1, block, metaData, 3);
 						else if (isHollow)
 							world.setBlockToAir(x1, y1, z1);
@@ -50,13 +50,12 @@ public class BasicShapeGen {
 			int y = yStart + i;
 			int maxX = x + baseLengthX - 1;
 			int maxZ = z + baseLengthZ - 1;
-			for (int ix = 0; x + ix + i <= maxX; ix++) {
+			for (int ix = 0; x + ix + i <= maxX; ix++)
 				for (int iz = 0; z + iz + i <= maxZ; iz++)
-					if ((ix == 0) || (ix + i + 1 == baseLengthX) || (iz == 0) || (iz + i + 1 == baseLengthZ))
+					if (ix == 0 || ix + i + 1 == baseLengthX || iz == 0 || iz + i + 1 == baseLengthZ)
 						world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 3);
 					else if (isHollow)
 						world.setBlockToAir(ix + x + i, y, iz + z + i);
-			}
 			baseLengthX--;
 			baseLengthZ--;
 		}

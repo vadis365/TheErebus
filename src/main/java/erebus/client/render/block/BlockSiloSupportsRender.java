@@ -40,7 +40,7 @@ public class BlockSiloSupportsRender implements ISimpleBlockRenderingHandler {
 		renderer.renderStandardBlock(ModBlocks.siloSupports, x, y, z);
 		renderer.setRenderBounds(0, 0.8125F, 0F, 1F, 1F, 1F);
 		renderer.renderStandardBlock(Blocks.planks, x, y, z);
-		
+
 		renderer.setRenderBounds(0F, 0F, 0F, 0.1875F, 0.0625F, 0.1875F);
 		renderer.renderStandardBlock(Blocks.planks, x, y, z);
 		renderer.setRenderBounds(0.8125F, 0F, 0.8125F, 1F, 0.0625F, 1F);

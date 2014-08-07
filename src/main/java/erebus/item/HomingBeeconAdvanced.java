@@ -56,13 +56,14 @@ public class HomingBeeconAdvanced extends Item {
 		}
 		return false;
 	}
-	
+
+	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
 		if (!world.isRemote && player.isSneaking() && is.stackTagCompound.hasKey("homeX")) {
 			int x = is.getTagCompound().getInteger("homeX");
 			int y = is.getTagCompound().getInteger("homeY");
 			int z = is.getTagCompound().getInteger("homeZ");
-			if(player.worldObj.isAirBlock(x, y + 1, z) && player.worldObj.isAirBlock(x, y + 2, z)) {
+			if (player.worldObj.isAirBlock(x, y + 1, z) && player.worldObj.isAirBlock(x, y + 2, z)) {
 				player.swingItem();
 				player.setPositionAndUpdate(x + 0.5D, y + 1D, z + 0.5D);
 				player.worldObj.playSoundEffect(x, y, z, "mob.endermen.portal", 1.0F, 1.0F);
@@ -78,7 +79,7 @@ public class HomingBeeconAdvanced extends Item {
 		}
 		return true;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack is, int pass) {

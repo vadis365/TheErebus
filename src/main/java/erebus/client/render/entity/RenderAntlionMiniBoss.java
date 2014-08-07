@@ -26,7 +26,7 @@ public class RenderAntlionMiniBoss extends RenderLiving {
 		shadowSize = f1;
 		GL11.glScalef(f1, f1, f1);
 	}
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;

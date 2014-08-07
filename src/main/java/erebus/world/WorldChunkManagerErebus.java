@@ -104,7 +104,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	public ChunkPosition findBiomePosition(int x, int z, int checkRadius, List viableBiomes, Random rand) {
 		IntCache.resetIntCache();
 		int minX = x - checkRadius >> 2;
-		int minZ = z - checkRadius >> 2;
+			int minZ = z - checkRadius >> 2;
 		int maxX = x + checkRadius >> 2;
 		int maxZ = z + checkRadius >> 2;
 		int sizeX = maxX - minX + 1;
@@ -131,8 +131,8 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	public boolean areBiomesViable(int x, int z, int checkRadius, List viableBiomes) {
 		IntCache.resetIntCache();
 		int minX = x - checkRadius >> 2;
-		int minZ = z - checkRadius >> 2;
-		int maxX = x + checkRadius >> 2;
+			int minZ = z - checkRadius >> 2;
+			int maxX = x + checkRadius >> 2;
 		int maxZ = z + checkRadius >> 2;
 		int sizeX = maxX - minX + 1;
 		int sizeZ = maxZ - minZ + 1;

@@ -17,7 +17,7 @@ public class TileEntitySiloTank extends TileEntityBasicInventory {
 	public boolean canUpdate() {
 		return false;
 	}
-	
+
 	@Override
 	public String getInventoryName() {
 		return "Silo Location X:" + xCoord + " Y:" + yCoord + " Z:" + zCoord;
@@ -32,7 +32,7 @@ public class TileEntitySiloTank extends TileEntityBasicInventory {
 	public void setActive(boolean state) {
 		active = state;
 	}
-	
+
 	public boolean getActive() {
 		return active;
 	}

@@ -1,31 +1,29 @@
 package erebus.block;
 
-import erebus.tileentity.TileEntityOfferingAltar;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import erebus.tileentity.TileEntityOfferingAltar;
 
-public class BlockOfferingAltar extends BlockContainer
-{
-    public BlockOfferingAltar()
-    {
-        super(Material.rock);
-        setBlockName("offeringAltar");
-    }
+public class BlockOfferingAltar extends BlockContainer {
+	public BlockOfferingAltar() {
+		super(Material.rock);
+		setBlockName("offeringAltar");
+	}
 
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
-    public int getRenderType()
-    {
-        return -1;
-    }
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
 
-    public TileEntity createNewTileEntity(World w, int m)
-    {
-        return new TileEntityOfferingAltar();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World w, int m) {
+		return new TileEntityOfferingAltar();
+	}
 }

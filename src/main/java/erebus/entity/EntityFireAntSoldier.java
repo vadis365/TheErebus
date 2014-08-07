@@ -17,9 +17,9 @@ public class EntityFireAntSoldier extends EntityMob {
 
 	public EntityFireAntSoldier(World world) {
 		super(world);
-		this.stepHeight = 0.1F;
-		this.isImmuneToFire = true;
-		this.setSize(0.9F, 0.5F);
+		stepHeight = 0.1F;
+		isImmuneToFire = true;
+		setSize(0.9F, 0.5F);
 	}
 
 	@Override
@@ -64,12 +64,12 @@ public class EntityFireAntSoldier extends EntityMob {
 	}
 
 	public boolean isClimbing() {
-		return (!this.onGround) && (isOnLadder());
+		return !onGround && isOnLadder();
 	}
 
 	@Override
 	public boolean isOnLadder() {
-		return (this.isCollidedHorizontally);
+		return isCollidedHorizontally;
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class EntityFireAntSoldier extends EntityMob {
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
 		if (attackTime <= 0 && distance < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY) {
-			this.setFire(1);
+			setFire(1);
 			entity.setFire(10);
 			attackTime = 20;
 			attackEntityAsMob(entity);

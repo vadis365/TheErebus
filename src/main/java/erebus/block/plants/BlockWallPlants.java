@@ -29,8 +29,7 @@ import erebus.ModBlocks;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.item.block.ItemBlockErebusPlantSmall;
 
-public class BlockWallPlants extends Block implements IShearable,
-		ISubBlocksBlock {
+public class BlockWallPlants extends Block implements IShearable, ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "moss", "mould" };
 
@@ -95,125 +94,124 @@ public class BlockWallPlants extends Block implements IShearable,
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y,
-			int z) {
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
 		int meta = access.getBlockMetadata(x, y, z);
 		float widthMin = 0, heightMin = 0, depthMin = 0;
 		float widthMax = 0, heightMax = 0, depthMax = 0;
 
 		switch (meta) {
-		case 0:
-			widthMin = 0F;
-			heightMin = 0.875F;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0F;
-			depthMax = 0F;
-			break;
-		case 1:
-			widthMin = 0F;
-			heightMin = 0.875F;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0F;
-			depthMax = 0F;
-			break;
-		case 2:
-			widthMin = 0F;
-			heightMin = 0.875F;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0F;
-			depthMax = 0F;
-			break;
-		case 3:
-			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0.875F;
-			depthMax = 0F;
-			break;
-		case 4:
-			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0.875F;
-			widthMax = 0F;
-			heightMax = 0F;
-			depthMax = 0F;
-			break;
-		case 5:
-			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0F;
-			depthMax = 0.875F;
-			break;
-		case 6:
-			widthMin = 0.875F;
-			heightMin = 0;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0;
-			depthMax = 0F;
-			break;
-		case 7:
-			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0F;
-			widthMax = 0.875F;
-			heightMax = 0F;
-			depthMax = 0F;
-			break;
-		case 8:
-			widthMin = 0F;
-			heightMin = 0.875F;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0F;
-			depthMax = 0F;
-			break;
-		case 9:
-			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0.875F;
-			depthMax = 0F;
-			break;
-		case 10:
-			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0.875F;
-			widthMax = 0F;
-			heightMax = 0F;
-			depthMax = 0F;
-			break;
-		case 11:
-			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0F;
-			depthMax = 0.875F;
-			break;
-		case 12:
-			widthMin = 0.875F;
-			heightMin = 0;
-			depthMin = 0F;
-			widthMax = 0F;
-			heightMax = 0;
-			depthMax = 0F;
-			break;
-		case 13:
-			widthMin = 0F;
-			heightMin = 0F;
-			depthMin = 0F;
-			widthMax = 0.875F;
-			heightMax = 0F;
-			depthMax = 0F;
-			break;
+			case 0:
+				widthMin = 0F;
+				heightMin = 0.875F;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+			case 1:
+				widthMin = 0F;
+				heightMin = 0.875F;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+			case 2:
+				widthMin = 0F;
+				heightMin = 0.875F;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+			case 3:
+				widthMin = 0F;
+				heightMin = 0F;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0.875F;
+				depthMax = 0F;
+				break;
+			case 4:
+				widthMin = 0F;
+				heightMin = 0F;
+				depthMin = 0.875F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+			case 5:
+				widthMin = 0F;
+				heightMin = 0F;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0.875F;
+				break;
+			case 6:
+				widthMin = 0.875F;
+				heightMin = 0;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0;
+				depthMax = 0F;
+				break;
+			case 7:
+				widthMin = 0F;
+				heightMin = 0F;
+				depthMin = 0F;
+				widthMax = 0.875F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+			case 8:
+				widthMin = 0F;
+				heightMin = 0.875F;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+			case 9:
+				widthMin = 0F;
+				heightMin = 0F;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0.875F;
+				depthMax = 0F;
+				break;
+			case 10:
+				widthMin = 0F;
+				heightMin = 0F;
+				depthMin = 0.875F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+			case 11:
+				widthMin = 0F;
+				heightMin = 0F;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0.875F;
+				break;
+			case 12:
+				widthMin = 0.875F;
+				heightMin = 0;
+				depthMin = 0F;
+				widthMax = 0F;
+				heightMax = 0;
+				depthMax = 0F;
+				break;
+			case 13:
+				widthMin = 0F;
+				heightMin = 0F;
+				depthMin = 0F;
+				widthMax = 0.875F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
 		}
 		setBlockBounds(0F + widthMin, 0F + heightMin, 0F + depthMin, 1F - widthMax, 1F - heightMax, 1F - depthMax);
 	}
@@ -225,12 +223,7 @@ public class BlockWallPlants extends Block implements IShearable,
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x, y + 1, z))
-				|| isValidBlock(world.getBlock(x, y - 1, z))
-				|| isValidBlock(world.getBlock(x - 1, y, z))
-				|| isValidBlock(world.getBlock(x + 1, y, z))
-				|| isValidBlock(world.getBlock(x, y, z - 1))
-				|| isValidBlock(world.getBlock(x, y, z + 1));
+		return isValidBlock(world.getBlock(x, y + 1, z)) || isValidBlock(world.getBlock(x, y - 1, z)) || isValidBlock(world.getBlock(x - 1, y, z)) || isValidBlock(world.getBlock(x + 1, y, z)) || isValidBlock(world.getBlock(x, y, z - 1)) || isValidBlock(world.getBlock(x, y, z + 1));
 	}
 
 	private boolean isValidBlock(Block block) {
@@ -360,83 +353,78 @@ public class BlockWallPlants extends Block implements IShearable,
 			int xx;
 			int yy;
 			int zz;
-			for (xx = x - radius; xx <= x + radius; ++xx) {
-				for (zz = z - radius; zz <= z + radius; ++zz) {
-					for (yy = y - radius; yy <= y + radius; ++yy) {
+			for (xx = x - radius; xx <= x + radius; ++xx)
+				for (zz = z - radius; zz <= z + radius; ++zz)
+					for (yy = y - radius; yy <= y + radius; ++yy)
 						if (world.getBlock(xx, zz, yy) == this) {
 							--distance;
 							if (distance <= 0)
 								return;
 						}
-					}
-				}
-			}
 
 			xx = x + rand.nextInt(3) - 1;
 			yy = y + rand.nextInt(3) - 1;
 			zz = z + rand.nextInt(3) - 1;
-			if (world.isAirBlock(xx, yy, zz)) {
+			if (world.isAirBlock(xx, yy, zz))
 				for (attempt = 0; attempt < 6; attempt++) {
 					int offset = 1;
 					int randomiseSide = rand.nextInt(6);
 
-					if (meta > 1 && meta <= 7) {
+					if (meta > 1 && meta <= 7)
 						switch (randomiseSide) {
-						case 0:
-							if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 2, 2);
-							break;
-						case 1:
-							if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 3, 2);
-							break;
-						case 2:
-							if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 4, 2);
-							break;
-						case 3:
-							if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 5, 2);
-							break;
-						case 4:
-							if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 6, 2);
-							break;
-						case 5:
-							if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 7, 2);
-							break;
+							case 0:
+								if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 2, 2);
+								break;
+							case 1:
+								if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 3, 2);
+								break;
+							case 2:
+								if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 4, 2);
+								break;
+							case 3:
+								if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 5, 2);
+								break;
+							case 4:
+								if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 6, 2);
+								break;
+							case 5:
+								if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 7, 2);
+								break;
 						}
-					} else if (meta > 7 && meta <= 13) {
+					else if (meta > 7 && meta <= 13)
 						switch (randomiseSide) {
-						case 0:
-							if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 8, 2);
-							break;
-						case 1:
-							if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 9, 2);
-							break;
-						case 2:
-							if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 10, 2);
-							break;
-						case 3:
-							if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 11, 2);
-							break;
-						case 4:
-							if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 12, 2);
-							break;
-						case 5:
-							if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
-								world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 13, 2);
-							break;
+							case 0:
+								if (world.isSideSolid(xx, yy + offset, zz, DOWN) && world.getBlock(xx, yy + offset, zz) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 8, 2);
+								break;
+							case 1:
+								if (world.isSideSolid(xx, yy - offset, zz, UP) && world.getBlock(xx, yy - offset, zz) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 9, 2);
+								break;
+							case 2:
+								if (world.isSideSolid(xx, yy, zz + offset, NORTH) && world.getBlock(xx, yy, zz + offset) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 10, 2);
+								break;
+							case 3:
+								if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && world.getBlock(xx, yy, zz - offset) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 11, 2);
+								break;
+							case 4:
+								if (world.isSideSolid(xx + offset, yy, zz, WEST) && world.getBlock(xx + offset, yy, zz) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 12, 2);
+								break;
+							case 5:
+								if (world.isSideSolid(xx - offset, yy, zz, EAST) && world.getBlock(xx - offset, yy, zz) == ModBlocks.umberstone)
+									world.setBlock(xx, yy, zz, ModBlocks.erebusWallPlants, 13, 2);
+								break;
 						}
-					}
 				}
-			}
 		}
 		if (rand.nextInt(25) == 0)
 			world.setBlockToAir(x, y, z);

@@ -14,7 +14,7 @@ public class LootItemStack implements IWeightProvider {
 	private short weight = 1;
 
 	public LootItemStack(Block block) {
-		this.item = Item.getItemFromBlock(block);
+		item = Item.getItemFromBlock(block);
 	}
 
 	public LootItemStack(Item item) {

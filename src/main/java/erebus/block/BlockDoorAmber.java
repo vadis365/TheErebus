@@ -83,12 +83,12 @@ public class BlockDoorAmber extends BlockDoor {
 		flippedIcons[0] = new IconFlipped(blockIcon, true, false);
 		flippedIcons[1] = new IconFlipped(topDoorIcon, true, false);
 	}
-	
-    @Override
+
+	@Override
 	@SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
-        return ModItems.doorAmberItem;
-    }
+	public Item getItem(World world, int x, int y, int z) {
+		return ModItems.doorAmberItem;
+	}
 
 	@Override
 	public Item getItemDropped(int id, Random random, int something) {

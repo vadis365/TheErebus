@@ -22,6 +22,7 @@ import erebus.item.ErebusMaterial.DATA;
 
 public class EntityBeetle extends EntityAnimal {
 	int shagCount;
+
 	public EntityBeetle(World world) {
 		super(world);
 		setSize(1.6F, 0.9F);
@@ -56,10 +57,9 @@ public class EntityBeetle extends EntityAnimal {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = this.getBrightness(1.0F);
-		if (light >= 0F) {
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(this.boundingBox);
-		}
+		float light = getBrightness(1.0F);
+		if (light >= 0F)
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
 		return super.getCanSpawnHere();
 	}
 
@@ -97,11 +97,11 @@ public class EntityBeetle extends EntityAnimal {
 	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if(shagCount > 0)
+		if (shagCount > 0)
 			shagCount--;
 	}
 
@@ -123,7 +123,7 @@ public class EntityBeetle extends EntityAnimal {
 				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bambucket, 1, 2), false);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.turnip && !shagging()) { 
+		if (is != null && is.getItem() == ModItems.turnip && !shagging()) {
 			is.stackSize--;
 			setTame((byte) 1);
 			shagCount = 600;
@@ -131,10 +131,10 @@ public class EntityBeetle extends EntityAnimal {
 		}
 		return super.interact(player);
 	}
-	
-    public boolean shagging() {
-        return shagCount > 0;
-    }
+
+	public boolean shagging() {
+		return shagCount > 0;
+	}
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {

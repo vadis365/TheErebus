@@ -204,23 +204,23 @@ public class EntityLavaWebSpider extends EntityMob {
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		Object entityLivingData1 = super.onSpawnWithEgg(entityLivingData);
 
-		if(worldObj.rand.nextInt(100) == 0) {
+		if (worldObj.rand.nextInt(100) == 0) {
 			EntityMoneySpider entityspidermoney = new EntityMoneySpider(worldObj);
 			entityspidermoney.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
 			entityspidermoney.onSpawnWithEgg((IEntityLivingData) null);
 			worldObj.spawnEntityInWorld(entityspidermoney);
 			entityspidermoney.mountEntity(this);
 		}
-		if(entityLivingData1 == null) {
+		if (entityLivingData1 == null) {
 			entityLivingData1 = new EntitySpider.GroupData();
-			if(this.worldObj.difficultySetting == EnumDifficulty.HARD && this.worldObj.rand.nextFloat() < 0.1F * this.worldObj.func_147462_b(this.posX, this.posY, this.posZ))
-				 ((EntitySpider.GroupData)entityLivingData1).func_111104_a(this.worldObj.rand);
+			if (worldObj.difficultySetting == EnumDifficulty.HARD && worldObj.rand.nextFloat() < 0.1F * worldObj.func_147462_b(posX, posY, posZ))
+				((EntitySpider.GroupData) entityLivingData1).func_111104_a(worldObj.rand);
 
-		if(entityLivingData1 instanceof EntitySpider.GroupData) {
-			int i = ((EntitySpider.GroupData) entityLivingData1).field_111105_a;
-			if (i > 0 && Potion.potionTypes[i] != null)
-				addPotionEffect(new PotionEffect(i, Integer.MAX_VALUE));
-		}
+			if (entityLivingData1 instanceof EntitySpider.GroupData) {
+				int i = ((EntitySpider.GroupData) entityLivingData1).field_111105_a;
+				if (i > 0 && Potion.potionTypes[i] != null)
+					addPotionEffect(new PotionEffect(i, Integer.MAX_VALUE));
+			}
 		}
 		return (IEntityLivingData) entityLivingData1;
 	}

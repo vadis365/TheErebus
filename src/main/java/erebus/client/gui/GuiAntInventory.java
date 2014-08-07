@@ -25,19 +25,19 @@ import erebus.inventory.ContainerAntInventory;
 public class GuiAntInventory extends GuiContainer {
 
 	private static final ResourceLocation GUI_ANT_INVENTORY = new ResourceLocation("erebus:textures/gui/container/antGuiTest.png");
-	public static Item[] ghostIcon = new Item[] {Items.stone_hoe, Items.shears, Items.bucket, Items.bone, Items.wheat_seeds, Items.wheat};
+	public static Item[] ghostIcon = new Item[] { Items.stone_hoe, Items.shears, Items.bucket, Items.bone, Items.wheat_seeds, Items.wheat };
 	private ItemStack stack, stack2;
 	int iconCountTool = 0;
 	int iconCountCrop = 4;
 	private IInventory antInventory;
-	
+
 	public GuiAntInventory(InventoryPlayer inventory, Entity entityInventory) {
 		super(new ContainerAntInventory(inventory, (IInventory) entityInventory));
 		xSize = 176;
 		ySize = 131;
 		stack = new ItemStack(ghostIcon[0]);
 		stack2 = new ItemStack(ghostIcon[4]);
-		antInventory = (IInventory)entityInventory;
+		antInventory = (IInventory) entityInventory;
 	}
 
 	@Override
@@ -54,67 +54,67 @@ public class GuiAntInventory extends GuiContainer {
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
-		
-		if(antInventory.getStackInSlot(0) == null) {
+
+		if (antInventory.getStackInSlot(0) == null) {
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
 			IIcon iicon1 = stack.getIconIndex();
-			this.mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
-			this.drawTexturedModelRectFromIcon(guiLeft + 26, guiTop + 18, iicon1, 16, 16);
+			mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
+			drawTexturedModelRectFromIcon(guiLeft + 26, guiTop + 18, iicon1, 16, 16);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();
 		}
-		
-		if(antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemHoe) {
+
+		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemHoe) {
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
 			stack2 = new ItemStack(ghostIcon[4]);
 			IIcon iicon1 = stack2.getIconIndex();
-			this.mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
-			this.drawTexturedModelRectFromIcon(guiLeft + 80, guiTop + 18, iicon1, 16, 16);
-			this.drawTexturedModelRectFromIcon(guiLeft + 134, guiTop + 18, iicon1, 16, 16);
+			mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
+			drawTexturedModelRectFromIcon(guiLeft + 80, guiTop + 18, iicon1, 16, 16);
+			drawTexturedModelRectFromIcon(guiLeft + 134, guiTop + 18, iicon1, 16, 16);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();
 		}
-		
-		if(antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemBucket && antInventory.getStackInSlot(1) == null) {
+
+		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemBucket && antInventory.getStackInSlot(1) == null) {
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
 			IIcon iicon1 = stack2.getIconIndex();
-			this.mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
-			this.drawTexturedModelRectFromIcon(guiLeft + 80, guiTop + 18, iicon1, 16, 16);
+			mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
+			drawTexturedModelRectFromIcon(guiLeft + 80, guiTop + 18, iicon1, 16, 16);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();
 		}
-		
-		if(antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() == Items.bone && antInventory.getStackInSlot(1) == null) {
+
+		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() == Items.bone && antInventory.getStackInSlot(1) == null) {
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
 			stack2 = new ItemStack(Items.dye, 0, 15);
 			IIcon iicon1 = stack2.getIconIndex();
-			this.mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
-			this.drawTexturedModelRectFromIcon(guiLeft + 80, guiTop + 18, iicon1, 16, 16);
+			mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
+			drawTexturedModelRectFromIcon(guiLeft + 80, guiTop + 18, iicon1, 16, 16);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();
 		}
-    }
-		
+	}
+
 	@Override
-    public void updateScreen() {
-        super.updateScreen();
-        if(mc.theWorld.getWorldTime() % 40 == 0) {
-        	stack = new ItemStack(ghostIcon[iconCountTool]);
-        	stack2 = new ItemStack(ghostIcon[iconCountCrop]);
-        	iconCountTool++;
-        	iconCountCrop++;
-        	if(iconCountTool > 3)
-        		iconCountTool = 0;
-        	if(iconCountCrop > 5)
-        		iconCountCrop = 4;
-        }
+	public void updateScreen() {
+		super.updateScreen();
+		if (mc.theWorld.getWorldTime() % 40 == 0) {
+			stack = new ItemStack(ghostIcon[iconCountTool]);
+			stack2 = new ItemStack(ghostIcon[iconCountCrop]);
+			iconCountTool++;
+			iconCountCrop++;
+			if (iconCountTool > 3)
+				iconCountTool = 0;
+			if (iconCountCrop > 5)
+				iconCountCrop = 4;
+		}
 	}
 }

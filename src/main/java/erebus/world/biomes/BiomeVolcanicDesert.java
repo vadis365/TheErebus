@@ -22,7 +22,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 	@SuppressWarnings("unchecked")
 	public BiomeVolcanicDesert(int biomeID){
 		super(biomeID,new BiomeDecoratorVolcanicDesert());
-		
+
 		setBiomeName("Volcanic Desert");
 		setColors(0xA6BB4E,0x91A922);
 		setFog(255,231,10);
@@ -44,7 +44,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 		topBlock = Blocks.sand;
 		fillerBlock = Blocks.sandstone;
 	}
-	
+
 	@Override
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand){
 		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 17 ? Blocks.flowing_lava : Blocks.air : block;

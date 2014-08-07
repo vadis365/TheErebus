@@ -23,7 +23,21 @@ import erebus.lib.Reference;
 public class FlowerSeeds extends Item {
 
 	public enum SEED_TYPE {
-		BLACK, RED, BROWN, BLUE, PURPLE, CYAN, LIGHT_GRAY, GRAY, PINK, YELLOW, LIGHT_BLUE, MAGENTA, ORANGE, WHITE, RAINBOW;
+		BLACK,
+		RED,
+		BROWN,
+		BLUE,
+		PURPLE,
+		CYAN,
+		LIGHT_GRAY,
+		GRAY,
+		PINK,
+		YELLOW,
+		LIGHT_BLUE,
+		MAGENTA,
+		ORANGE,
+		WHITE,
+		RAINBOW;
 	}
 
 	@SideOnly(Side.CLIENT)

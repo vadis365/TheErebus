@@ -42,10 +42,9 @@ public class ModelBotFlyLarva extends ModelBase {
 		EntityBotFlyLarva larva = (EntityBotFlyLarva) entity;
 		int i;
 
-		if (larva.getParasiteCount() > 0) {
+		if (larva.getParasiteCount() > 0)
 			for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
 				botFlyLarvaBodyParts[i].render(par7);
-		}
 
 		if (larva.getParasiteCount() > 1) {
 			GL11.glPushMatrix();

@@ -10,9 +10,8 @@ public class WorldGenWaspDungeon extends WorldGeneratorExt{
 		y-=12+rand.nextInt(14);
 		int testY = y;
 
-		for(; testY > 60; testY--){
+		for(; testY > 60; testY--)
 			if (world.isAirBlock(x,testY,z))break;
-		}
 		if (y-4-testY > 4 || world.getBlock(x,y-2,z)!=ModBlocks.umberstone||!world.isAirBlock(x,y-16,z)) return false;
 
 		// Layer 0 (starting from top)

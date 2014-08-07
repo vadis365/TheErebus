@@ -88,7 +88,7 @@ public class EntityChameleonTick extends EntityMob {
 		protected void func_145780_a(int x, int y, int z, Block block) {
 			worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 		}
-	*/
+	 */
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.camoPowder.ordinal()), 0.0F);

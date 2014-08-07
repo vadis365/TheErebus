@@ -1,4 +1,3 @@
-
 package erebus.entity;
 
 import net.minecraft.block.Block;
@@ -36,7 +35,7 @@ public class EntityZombieAnt extends EntityMob {
 	public boolean isAIEnabled() {
 		return true;
 	}
-	
+
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
@@ -45,7 +44,7 @@ public class EntityZombieAnt extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.5D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
-	
+
 	@Override
 	public int getTotalArmorValue() {
 		return 5;
@@ -70,7 +69,8 @@ public class EntityZombieAnt extends EntityMob {
 	protected String getDeathSound() {
 		return "erebus:squish";
 	}
-	
+
+	@Override
 	protected float getSoundPitch() {
 		return 0.5F;
 	}
@@ -89,7 +89,7 @@ public class EntityZombieAnt extends EntityMob {
 	public int getMaxSpawnedInChunk() {
 		return 5;
 	}
-	
+
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		entityDropItem(new ItemStack(ModBlocks.erebusPlantSmall, 1, 0), 0.0F);
@@ -102,12 +102,11 @@ public class EntityZombieAnt extends EntityMob {
 		if (rand.nextInt(5) == 0)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.antPheromones.ordinal()), 0.0F);
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if(worldObj.isRemote)
+		if (worldObj.isRemote)
 			worldObj.spawnParticle("reddust", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
 	}
 }
-

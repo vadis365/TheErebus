@@ -108,9 +108,9 @@ public class EntityMoth extends EntityAmbientCreature {
 		super.updateAITasks();
 
 		if (getIsMothHanging()) {
-			if (!worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube()) {
+			if (!worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
 				setIsMothHanging(false);
-				} else {
+			else {
 				if (rand.nextInt(200) == 0)
 					rotationYawHead = rand.nextInt(360);
 
@@ -137,7 +137,7 @@ public class EntityMoth extends EntityAmbientCreature {
 			moveForward = 0.5F;
 			rotationYaw += var8;
 
-			if (rand.nextInt(100) == 0 && this.worldObj.getBlock(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ)).isNormalCube())
+			if (rand.nextInt(100) == 0 && worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
 				setIsMothHanging(false);
 		}
 	}

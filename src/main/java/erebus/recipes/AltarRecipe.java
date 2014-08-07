@@ -22,7 +22,7 @@ public class AltarRecipe {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param output
 	 *            what will be produced by the recipe
 	 * @param focusItem

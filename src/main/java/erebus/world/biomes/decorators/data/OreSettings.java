@@ -1,7 +1,13 @@
 package erebus.world.biomes.decorators.data;
 
-import static erebus.core.handler.ConfigHandler.*;
+import static erebus.core.handler.ConfigHandler.aluminium;
+import static erebus.core.handler.ConfigHandler.copper;
+import static erebus.core.handler.ConfigHandler.lead;
+import static erebus.core.handler.ConfigHandler.silver;
+import static erebus.core.handler.ConfigHandler.tin;
+
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
@@ -27,10 +33,10 @@ public final class OreSettings {
 	}
 
 	public OreSettings reset() {
-		this.chance = 1F;
-		this.minY = 5;
-		this.maxY = 112;
-		this.checkArea = 3;
+		chance = 1F;
+		minY = 5;
+		maxY = 112;
+		checkArea = 3;
 		return this;
 	}
 
@@ -40,7 +46,7 @@ public final class OreSettings {
 	}
 
 	public OreSettings setIterations(int iterations) {
-		this.minIterations = this.maxIterations = (byte) iterations;
+		minIterations = maxIterations = (byte) iterations;
 		return this;
 	}
 
@@ -51,7 +57,7 @@ public final class OreSettings {
 	}
 
 	public OreSettings setOreAmount(int amount) {
-		this.minAmount = this.maxAmount = (byte) amount;
+		minAmount = maxAmount = (byte) amount;
 		return this;
 	}
 
@@ -78,7 +84,7 @@ public final class OreSettings {
 
 		int iterations = minIterations + rand.nextInt(maxIterations - minIterations + 1);
 
-		for (int iteration = 0, attempt, xx, yy, zz, testX, testY, testZ, oreAmount, a; iteration < iterations; iteration++) {
+		for (int iteration = 0, attempt, xx, yy, zz, testX, testY, testZ, oreAmount, a; iteration < iterations; iteration++)
 			for (attempt = 0; attempt < 12; attempt++) {
 				xx = x + rand.nextInt(16);
 				zz = z + rand.nextInt(16);
@@ -108,12 +114,23 @@ public final class OreSettings {
 					}
 				}
 			}
-		}
 	}
 
 	public static enum OreType {
-		COAL(BlockErebusOre.dataCoal), IRON(BlockErebusOre.dataIron), GOLD(BlockErebusOre.dataGold), LAPIS(BlockErebusOre.dataLapis), EMERALD(BlockErebusOre.dataEmerald), DIAMOND(BlockErebusOre.dataDiamond), JADE(BlockErebusOre.dataJade), PETRIFIED_WOOD(BlockErebusOre.dataPetrifiedWood), FOSSIL(ModBlocks.oreFossil, 3), ALUMINIUM(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataAluminium), COPPER(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataCopper), LEAD(ModBlocks.erebusOreExtra,
-		BlockErebusOreExtras.dataLead), SILVER(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataSilver), TIN(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataTin);
+		COAL(BlockErebusOre.dataCoal),
+		IRON(BlockErebusOre.dataIron),
+		GOLD(BlockErebusOre.dataGold),
+		LAPIS(BlockErebusOre.dataLapis),
+		EMERALD(BlockErebusOre.dataEmerald),
+		DIAMOND(BlockErebusOre.dataDiamond),
+		JADE(BlockErebusOre.dataJade),
+		PETRIFIED_WOOD(BlockErebusOre.dataPetrifiedWood),
+		FOSSIL(ModBlocks.oreFossil, 3),
+		ALUMINIUM(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataAluminium),
+		COPPER(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataCopper),
+		LEAD(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataLead),
+		SILVER(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataSilver),
+		TIN(ModBlocks.erebusOreExtra, BlockErebusOreExtras.dataTin);
 
 		final Block oreBlock;
 		final byte oreMeta;
@@ -124,7 +141,7 @@ public final class OreSettings {
 		}
 
 		OreType(int oreMeta) {
-			this.oreBlock = ModBlocks.umberOreBlock;
+			oreBlock = ModBlocks.umberOreBlock;
 			this.oreMeta = (byte) oreMeta;
 		}
 

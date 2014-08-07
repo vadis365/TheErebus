@@ -23,12 +23,11 @@ public class GenLayerBiomes extends GenLayerErebus {
 		parent.getInts(x, z, sizeX, sizeZ);
 		int[] ints = IntCache.getIntCache(sizeX * sizeZ);
 
-		for (int zz = 0; zz < sizeZ; ++zz) {
+		for (int zz = 0; zz < sizeZ; ++zz)
 			for (int xx = 0; xx < sizeX; ++xx) {
 				initChunkSeed(xx + x, zz + z);
 				ints[xx + zz * sizeX] = biomesToGenerate.getRandomItem(nextInt(totalWeight)).biomeID;
 			}
-		}
 
 		return ints;
 	}

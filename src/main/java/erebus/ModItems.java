@@ -18,6 +18,7 @@ import erebus.item.AntTamingAmulet;
 import erebus.item.ArmorGlider;
 import erebus.item.BeeTamingAmulet;
 import erebus.item.BlockExtractor;
+import erebus.item.BottleAntiVenom;
 import erebus.item.BucketAntiVenom;
 import erebus.item.BucketOfBeetleJuice;
 import erebus.item.CavemanClub;
@@ -140,6 +141,8 @@ public class ModItems {
 	public static final Item bucketAntiVenom = new BucketAntiVenom().setUnlocalizedName("bucketAntiVenom").setTextureName("erebus:bucketAntiVenom");
 	public static final Item bucketBeetleJuice = new BucketOfBeetleJuice().setUnlocalizedName("bucketBeetleJuice").setTextureName("erebus:bucketBeetleJuice");
 	public static final Item bucketHoney = new ItemBucket(ModBlocks.erebusHoneyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setUnlocalizedName("bucketHoney").setTextureName("erebus:bucketHoney");
+
+	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("bottleAntiVenom");
 
 	public static void init() {
 		initCreativeTabs();

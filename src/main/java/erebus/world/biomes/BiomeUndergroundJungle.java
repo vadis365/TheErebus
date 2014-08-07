@@ -26,7 +26,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 	@SuppressWarnings("unchecked")
 	public BiomeUndergroundJungle(int biomeID){
 		super(biomeID,new BiomeDecoratorUndergroundJungle());
-		
+
 		setBiomeName("Undergound Jungle");
 		setColors(0x53CA37,0x29BC05);
 		setFog(8,128,8);
@@ -56,12 +56,12 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus{
 	public float getSpawningChance(){
 		return 0.2F;
 	}
-	
+
 	@Override
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand){
 		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 24 ? Blocks.flowing_water : Blocks.air : block;
 	}
-	
+
 	@Override
 	public BiomeBaseErebus getRandomSubBiome(int randomValue){
 		return ModBiomes.jungleSubLake;

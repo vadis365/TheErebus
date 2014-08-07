@@ -70,7 +70,7 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	/*
 	 * @Override protected String getLivingSound() { return
 	 * "erebus:AntlionSound"; }
-	 * 
+	 *
 	 * @Override protected String getHurtSound() { return "erebus:Antlionhurt";
 	 * }
 	 */

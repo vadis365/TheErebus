@@ -9,8 +9,7 @@ import erebus.tileentity.TileEntityErebusAltarLightning;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityErebusAltarLightningRenderer extends TileEntityErebusAltarRenderer {
-	private static final ResourceLocation[] tex = new ResourceLocation[] { new ResourceLocation("erebus:textures/special/tiles/altarLightning1.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning2.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning3.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning4.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning5.png"),
-	new ResourceLocation("erebus:textures/special/tiles/altarLightning6.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning7.png") };
+	private static final ResourceLocation[] tex = new ResourceLocation[] { new ResourceLocation("erebus:textures/special/tiles/altarLightning1.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning2.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning3.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning4.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning5.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning6.png"), new ResourceLocation("erebus:textures/special/tiles/altarLightning7.png") };
 
 	private final ModelAltarLightning model = new ModelAltarLightning();
 

@@ -30,21 +30,21 @@ public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
 				return ModBlocks.umberstone.getIcon(side, 1); // Umbercobble
 			case 2:
 				return ModBlocks.umberstone.getIcon(side, 2); // Mossy
-																// Umbercobble
+				// Umbercobble
 			case 3:
 				return ModBlocks.umberstone.getIcon(side, 3); // Webbed
-																// Umbercobble
+				// Umbercobble
 			case 4:
 				return ModBlocks.umberstone.getIcon(side, 4); // Umberstone
-																// Bricks
+				// Bricks
 			case 5:
 				return ModBlocks.umberPaver.getIcon(side, 0); // Umberpaver
 			case 6:
 				return ModBlocks.umberPaver.getIcon(side, 1); // Mossy
-																// Umberpaver
+				// Umberpaver
 			case 7:
 				return ModBlocks.umberPaver.getIcon(side, 2); // Webbed
-																// Umberpaver
+				// Umberpaver
 			case 8:
 				return ModBlocks.blockAmber.getIcon(side, 2); // Amber Bricks
 		}

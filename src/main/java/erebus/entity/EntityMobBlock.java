@@ -67,11 +67,11 @@ public abstract class EntityMobBlock extends EntityCreature implements IMob {
 				motionZ *= 0.6D;
 			}
 
-            if (entity instanceof EntityLivingBase)
-                EnchantmentHelper.func_151384_a((EntityLivingBase)entity, this);
+			if (entity instanceof EntityLivingBase)
+				EnchantmentHelper.func_151384_a((EntityLivingBase) entity, this);
 
-            EnchantmentHelper.func_151385_b(this, entity);
-        }
+			EnchantmentHelper.func_151385_b(this, entity);
+		}
 
 		return flag;
 	}

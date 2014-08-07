@@ -40,7 +40,8 @@ public class ContainerUmberFurnace extends Container {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-        for (Object crafter : crafters) furnace.sendGUIData(this, (ICrafting) crafter);
+		for (Object crafter : crafters)
+			furnace.sendGUIData(this, (ICrafting) crafter);
 	}
 
 	@Override

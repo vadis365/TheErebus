@@ -66,7 +66,7 @@ public class EntityUmberGolem extends EntityCreature {
 	public boolean canDespawn() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean allowLeashing() {
 		return !canDespawn() && super.allowLeashing();
@@ -74,7 +74,7 @@ public class EntityUmberGolem extends EntityCreature {
 
 	/*
 	 * protected String getLivingSound() { return "erebus:umbergolemsound"; }
-	 * 
+	 *
 	 * protected String getHurtSound() { return "erebus:umbergolemhurt"; }
 	 */
 

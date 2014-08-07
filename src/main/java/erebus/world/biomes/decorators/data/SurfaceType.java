@@ -4,7 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
 public enum SurfaceType {
-	GRASS, DIRT, SAND, MIXED;
+	GRASS,
+	DIRT,
+	SAND,
+	MIXED;
 
 	public boolean matchBlock(Block block) {
 		switch (this) {

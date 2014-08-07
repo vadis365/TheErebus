@@ -17,6 +17,7 @@ import erebus.entity.EntityChameleonTick;
 @SideOnly(Side.CLIENT)
 public class RenderChameleonTick extends RenderLiving {
 	private final RenderBlocks blockRenderer = new RenderBlocks();
+
 	public RenderChameleonTick(ModelChameleonTick model, float shadowsize) {
 		super(model, shadowsize);
 	}
@@ -28,20 +29,20 @@ public class RenderChameleonTick extends RenderLiving {
 		if (alpha) {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glEnable(GL11.GL_BLEND);
-			}
+		}
 		GL11.glTranslatef((float) x, (float) y, (float) z);
 		GL11.glTranslatef(0.0F, 0.5F, 0.0F);
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glPushMatrix();
-		GL11.glScaled(1F, 1F-0.02F * animationSize, 1F);
+		GL11.glScaled(1F, 1F - 0.02F * animationSize, 1F);
 		blockRenderer.renderBlockAsItem(entity.blockID, entity.blockMeta, 1.0F);
 		GL11.glPopMatrix();
 		if (alpha)
 			GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 		super.doRender(entity, x, y, z, rotationYaw, partialTickTime);
-		}
+	}
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {

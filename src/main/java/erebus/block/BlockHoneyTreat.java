@@ -56,10 +56,10 @@ public class BlockHoneyTreat extends BlockCake {
 				world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 		}
 	}
-/* broken
-	@Override
-	public int idPicked(World world, int x, int y, int z) {
-		return ModBlocks.honeyTreat.blockID;
-	}
-	*/
+	/* broken
+		@Override
+		public int idPicked(World world, int x, int y, int z) {
+			return ModBlocks.honeyTreat.blockID;
+		}
+	 */
 }

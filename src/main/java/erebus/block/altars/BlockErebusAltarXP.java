@@ -14,7 +14,7 @@ import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarXP;
 
 public class BlockErebusAltarXP extends BlockErebusAltar {
-	
+
 	private Item item;
 	private int meta;
 
@@ -77,7 +77,7 @@ public class BlockErebusAltarXP extends BlockErebusAltar {
 			}
 		return false;
 	}
-	
+
 	private void setItemOffering(Item thing, int metadata) {
 		item = thing;
 		meta = metadata;

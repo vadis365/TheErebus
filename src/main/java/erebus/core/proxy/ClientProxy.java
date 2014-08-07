@@ -215,7 +215,15 @@ import erebus.tileentity.TileEntityUmberGolemStatue;
 public class ClientProxy extends CommonProxy {
 
 	public enum BlockRenderIDs {
-		BAMBOO_CROP, HOLLOW_LOG, PLANTED_FLOWER, GLOWSHROOM_STALK, GLOWSHROOM_CAPS, SILO_ROOF, SILO_SUPPORTS, COMPOSTER, KEYSTONE;
+		BAMBOO_CROP,
+		HOLLOW_LOG,
+		PLANTED_FLOWER,
+		GLOWSHROOM_STALK,
+		GLOWSHROOM_CAPS,
+		SILO_ROOF,
+		SILO_SUPPORTS,
+		COMPOSTER,
+		KEYSTONE;
 
 		private final int ID;
 
@@ -290,7 +298,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityCrushroom.class, new RenderCrushroom());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackAnt.class, new RenderBlackAnt());
 		RenderingRegistry.registerEntityRenderingHandler(EntityZombieAnt.class, new RenderZombieAnt());
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarHealing.class, new TileEntityErebusAltarHealingRenderer());
@@ -309,7 +317,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlowGem.class, new TileEntityGlowGemRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPortal.class, new TileEntityPortalRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingAltar.class, new TileEntityOfferingAltarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingAltar.class, new TileEntityOfferingAltarRenderer());
 
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.BAMBOO_CROP.id(), new BlockBambooCropRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.HOLLOW_LOG.id(), new BlockHollowLogRender());
@@ -319,7 +327,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.SILO_ROOF.id(), new BlockSiloRoofRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.SILO_SUPPORTS.id(), new BlockSiloSupportsRender());
 		RenderingRegistry.registerBlockHandler(BlockRenderIDs.COMPOSTER.id(), new BlockComposterRender());
-        RenderingRegistry.registerBlockHandler(BlockRenderIDs.KEYSTONE.id(), new BlockKeystoneRenderer());
+		RenderingRegistry.registerBlockHandler(BlockRenderIDs.KEYSTONE.id(), new BlockKeystoneRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltar), new ItemErebusAltarRenderer());
@@ -343,7 +351,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooPole), new BambooPoleItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.jarOHoney), new ItemGlowingJarRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.woodlouseBall, new WoodlouseBallItemRenderer());
-        MinecraftForgeClient.registerItemRenderer(ModItems.portalActivator, new PortalActivatorRenderer());
+		MinecraftForgeClient.registerItemRenderer(ModItems.portalActivator, new PortalActivatorRenderer());
 	}
 
 	@Override
@@ -361,7 +369,7 @@ public class ClientProxy extends CommonProxy {
 
 		if (particleName.equals("cloud"))
 			fx = new EntityCloudFX(world, x, y, z, vecX, vecY, vecZ);
-		
+
 		if (particleName.equals("spell"))
 			fx = new EntitySpellParticleFX(world, x, y, z, vecX, vecY, vecZ);
 

@@ -105,9 +105,8 @@ public class EntityBotFlyLarva extends EntityMob {
 				((EntityLivingBase) ridingEntity).addPotionEffect(new PotionEffect(Potion.digSlowdown.id, duration * 20, 0));
 				((EntityLivingBase) ridingEntity).addPotionEffect(new PotionEffect(Potion.hunger.id, duration * 20, 0));
 			}
-		if (getParasiteCount() == 0) {
+		if (getParasiteCount() == 0)
 			setDead();
-		}
 		super.onUpdate();
 	}
 
@@ -149,7 +148,7 @@ public class EntityBotFlyLarva extends EntityMob {
 	}
 
 	public EntityLivingBase playerName() {
-		return this.worldObj.getPlayerEntityByName(getPersistanceOnPlayer());
+		return worldObj.getPlayerEntityByName(getPersistanceOnPlayer());
 	}
 
 	@Override
@@ -158,7 +157,7 @@ public class EntityBotFlyLarva extends EntityMob {
 		setParasiteCount(nbt.getByte("parasites"));
 		setPersistanceOnPlayer(nbt.getString("playerName"));
 		if ((EntityPlayer) playerName() != null) {
-			EntityPlayer player = ((EntityPlayer) playerName());
+			EntityPlayer player = (EntityPlayer) playerName();
 			if (!worldObj.isRemote)
 				if (player.riddenByEntity == null) {
 					mountEntity(player);

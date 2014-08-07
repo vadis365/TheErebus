@@ -184,12 +184,12 @@ public class EntityCicada extends EntityCreature {
 	public void spawnSonicParticles() {
 		for (int a = 0; a < 360; a += 6) {
 			double ang = a * Math.PI / 180D;
-			Erebus.proxy.spawnCustomParticle("repellent", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 0.5D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
+			Erebus.proxy.spawnCustomParticle("repellent", worldObj, posX + -MathHelper.sin((float) ang) * 1.0, posY + 0.5D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
 		}
 
 		for (int a = 0; a < 360; a += 4) {
 			double ang = a * Math.PI / 180D;
-			Erebus.proxy.spawnCustomParticle("sonic", worldObj, this.posX + -MathHelper.sin((float) ang) * 1.0, this.posY + 0.5D, this.posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
+			Erebus.proxy.spawnCustomParticle("sonic", worldObj, posX + -MathHelper.sin((float) ang) * 1.0, posY + 0.5D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
 		}
 	}
 

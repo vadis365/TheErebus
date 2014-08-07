@@ -5,7 +5,9 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -17,7 +19,7 @@ public class RenderMucusBombPrimed extends Render {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/blocks/mucusBombSides.png");
 
 	public RenderMucusBombPrimed() {
-		this.shadowSize = 0.5F;
+		shadowSize = 0.5F;
 	}
 
 	public void renderPrimedMucusBomb(EntityMucusBombPrimed entityMucusBombPrimed, double x, double y, double z, float rotationYaw, float partialTickTime) {
@@ -28,13 +30,11 @@ public class RenderMucusBombPrimed extends Render {
 		if (entityMucusBombPrimed.fuse - partialTickTime + 1.0F < 10.0F) {
 			f2 = 1.0F - (entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 10.0F;
 
-			if (f2 < 0.0F) {
+			if (f2 < 0.0F)
 				f2 = 0.0F;
-			}
 
-			if (f2 > 1.0F) {
+			if (f2 > 1.0F)
 				f2 = 1.0F;
-			}
 
 			f2 *= f2;
 			f2 *= f2;
@@ -44,7 +44,7 @@ public class RenderMucusBombPrimed extends Render {
 
 		f2 = (1.0F - (entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 100.0F) * 0.8F;
 		bindTexture(TextureMap.locationBlocksTexture);
-		this.blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, entityMucusBombPrimed.getBrightness(partialTickTime));
+		blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, entityMucusBombPrimed.getBrightness(partialTickTime));
 
 		if (entityMucusBombPrimed.fuse / 5 % 2 == 0) {
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -53,7 +53,7 @@ public class RenderMucusBombPrimed extends Render {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_DST_ALPHA);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, f2);
 			bindTexture(TextureMap.locationBlocksTexture);
-			this.blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, 1.0F);
+			blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, 1.0F);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glEnable(GL11.GL_LIGHTING);
@@ -70,6 +70,6 @@ public class RenderMucusBombPrimed extends Render {
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		this.renderPrimedMucusBomb((EntityMucusBombPrimed) entity, x, y, z, rotationYaw, partialTickTime);
+		renderPrimedMucusBomb((EntityMucusBombPrimed) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 }

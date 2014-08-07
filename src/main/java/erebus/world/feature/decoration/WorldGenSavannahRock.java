@@ -1,6 +1,7 @@
 package erebus.world.feature.decoration;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -11,11 +12,9 @@ public class WorldGenSavannahRock extends WorldGenerator{
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
-		for(int xx = x-3; xx <= x+3; xx++){
-			for(int zz = z-3; zz <= z+3; zz++){
+		for(int xx = x-3; xx <= x+3; xx++)
+			for(int zz = z-3; zz <= z+3; zz++)
 				if (world.getBlock(xx,y-1,zz)!=Blocks.grass)return false;
-			}
-		}
 
 		float radX,radY,radZ;
 
@@ -57,15 +56,11 @@ public class WorldGenSavannahRock extends WorldGenerator{
 	}
 
 	private void generateEllipsoidAt(World world, Random rand, int x, int y, int z, float radX, float radY, float radZ){
-		for(float xf = x-radX; xf <= x+radX; xf++){
-			for(float zf = z-radZ; zf <= z+radZ; zf++){
-				for(float yf = y-radY; yf <= y+radY; yf++){
-					if (Math.pow(xf-x,2)/(radX*radX)+Math.pow(yf-y,2)/(radY*radY)+Math.pow(zf-z,2)/(radZ*radZ) <= 1.1){
-						world.setBlock((int)Math.floor(xf),(int)Math.floor(yf),(int)Math.floor(zf),(rand.nextInt(6) == 0?Blocks.monster_egg:Blocks.stone));
-					}
-				}
-			}
-		}
+		for(float xf = x-radX; xf <= x+radX; xf++)
+			for(float zf = z-radZ; zf <= z+radZ; zf++)
+				for(float yf = y-radY; yf <= y+radY; yf++)
+					if (Math.pow(xf-x,2)/(radX*radX)+Math.pow(yf-y,2)/(radY*radY)+Math.pow(zf-z,2)/(radZ*radZ) <= 1.1)
+						world.setBlock((int)Math.floor(xf),(int)Math.floor(yf),(int)Math.floor(zf),rand.nextInt(6) == 0?Blocks.monster_egg:Blocks.stone);
 	}
 }
 //@formatter:on

@@ -19,22 +19,22 @@ import erebus.world.loot.WeightedLootList;
 public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[]{
-		new LootItemStack(Items.string).setAmount(5,10).setWeight(13),
-		new LootItemStack(Blocks.web).setAmount(3,8).setWeight(13),
-		new LootItemStack(Items.stick).setAmount(1,8).setWeight(12),
-		new LootItemStack(Items.gold_nugget).setAmount(3,11).setWeight(12),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(3,8).setDamage(DATA.shardBone.ordinal()).setWeight(12),
-		new LootItemStack(Items.bone).setAmount(1,3).setWeight(11),
-		new LootItemStack(Items.iron_ingot).setAmount(1,3).setWeight(10),
-		new LootItemStack(Items.gold_ingot).setAmount(1,2).setWeight(10),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(1,5).setDamage(DATA.flyWing.ordinal()).setWeight(10),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(1).setDamage(DATA.jade.ordinal()).setWeight(9),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(3,6).setDamage(DATA.plateExo.ordinal()).setWeight(8),
-		new LootItemStack(ModItems.erebusMaterials).setAmount(2,6).setDamage(DATA.compoundEyes.ordinal()).setWeight(7),
-		new LootItemStack(ModItems.erebusMaterials).setDamage(DATA.compoundLens.ordinal()).setWeight(2),
-		new LootItemStack(ModItems.maxSpeedBow).setWeight(1),
-		new LootItemStack(ModBlocks.umberGolemStatue).setWeight(1),
-		new LootItemStack(ModItems.webSlinger).setWeight(1)
+	new LootItemStack(Items.string).setAmount(5,10).setWeight(13),
+	new LootItemStack(Blocks.web).setAmount(3,8).setWeight(13),
+	new LootItemStack(Items.stick).setAmount(1,8).setWeight(12),
+	new LootItemStack(Items.gold_nugget).setAmount(3,11).setWeight(12),
+	new LootItemStack(ModItems.erebusMaterials).setAmount(3,8).setDamage(DATA.shardBone.ordinal()).setWeight(12),
+	new LootItemStack(Items.bone).setAmount(1,3).setWeight(11),
+	new LootItemStack(Items.iron_ingot).setAmount(1,3).setWeight(10),
+	new LootItemStack(Items.gold_ingot).setAmount(1,2).setWeight(10),
+	new LootItemStack(ModItems.erebusMaterials).setAmount(1,5).setDamage(DATA.flyWing.ordinal()).setWeight(10),
+	new LootItemStack(ModItems.erebusMaterials).setAmount(1).setDamage(DATA.jade.ordinal()).setWeight(9),
+	new LootItemStack(ModItems.erebusMaterials).setAmount(3,6).setDamage(DATA.plateExo.ordinal()).setWeight(8),
+	new LootItemStack(ModItems.erebusMaterials).setAmount(2,6).setDamage(DATA.compoundEyes.ordinal()).setWeight(7),
+	new LootItemStack(ModItems.erebusMaterials).setDamage(DATA.compoundLens.ordinal()).setWeight(2),
+	new LootItemStack(ModItems.maxSpeedBow).setWeight(1),
+	new LootItemStack(ModBlocks.umberGolemStatue).setWeight(1),
+	new LootItemStack(ModItems.webSlinger).setWeight(1)
 	});
 
 	@Override
@@ -44,10 +44,10 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 		int halfSizeZ = rand.nextInt(4)+4;
 		int j1 = 0;
 		int i2;
-		
+
 		if(y+height+1 >= 127)
 			return false;
-		
+
 		for(int xx = x-halfSizeX-1; xx <= x+halfSizeX+1; ++xx)
 			for(int yy = y-1; yy <= y+height+1; ++yy)
 				for(int zz = z-halfSizeZ-1; zz <= z+halfSizeZ+1; ++zz){
@@ -102,7 +102,7 @@ public class WorldGenSpiderDungeons extends WorldGenerator { // TODO
 			//System.out.println("Spider Dungeon Here: " + x + " "+ y + " "+ z);
 			return true;
 		}
-		
+
 		return false;
 	}
 }

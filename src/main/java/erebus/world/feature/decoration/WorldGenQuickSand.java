@@ -1,6 +1,7 @@
 package erebus.world.feature.decoration;
 
 import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;

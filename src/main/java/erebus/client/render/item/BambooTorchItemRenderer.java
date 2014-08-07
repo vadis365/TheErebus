@@ -66,7 +66,7 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 			GL11.glScaled(0.75F, 0.75F, 0.75F);
 			blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 0, 1.0F);
 			GL11.glTranslatef(x, y, z);
-			blockRenderer.renderBlockAsItem((ModBlocks.bambooTorch), 1, 1.0F);
+			blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 1, 1.0F);
 			GL11.glPopMatrix();
 		} else {
 			GL11.glPushMatrix();
@@ -74,7 +74,7 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 			GL11.glScaled(size, size, size);
 			blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 0, 1.0F);
 			GL11.glTranslatef(x, y, z);
-			blockRenderer.renderBlockAsItem((ModBlocks.bambooTorch), 1, 1.0F);
+			blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 1, 1.0F);
 			GL11.glPopMatrix();
 		}
 	}
@@ -86,7 +86,7 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 		GL11.glScaled(size, size, size);
 		blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 0, 1.0F);
 		GL11.glTranslatef(x - 0.5F, y + 0.1F, z - 0.5F);
-		blockRenderer.renderBlockAsItem((ModBlocks.bambooTorch), 1, 1.0F);
+		blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 1, 1.0F);
 		GL11.glPopMatrix();
 	}
 
@@ -96,7 +96,7 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 		GL11.glScaled(size, size, size);
 		blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 0, 1.0F);
 		GL11.glTranslatef(x, y + 1.4F, z);
-		blockRenderer.renderBlockAsItem((ModBlocks.bambooTorch), 1, 1.0F);
+		blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 1, 1.0F);
 		GL11.glPopMatrix();
 	}
 

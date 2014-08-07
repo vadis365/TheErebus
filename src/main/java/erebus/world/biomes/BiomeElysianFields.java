@@ -23,7 +23,7 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 	public BiomeElysianFields(int biomeID){
 		this(biomeID,new BiomeDecoratorElysianFields());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public BiomeElysianFields(int biomeID, BiomeDecoratorBaseErebus decorator){
 		super(biomeID,decorator);
@@ -44,18 +44,18 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityCicada.class,100,1,1));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityWheatWeevil.class,6,1,2));
-		
+
 		spawnableMonsterList.add(new SpawnEntry(EntityDragonfly.class,5,1,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityVelvetWorm.class,10,1,2));
 		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
 	}
-	
+
 	@Override
 	public BiomeBaseErebus getRandomSubBiome(int randomValue){
 		return randomValue < 40 ? ModBiomes.fieldsSubForest : null;
 	}
-	
+
 	public static class BiomeElysianForest extends BiomeElysianFields{
 		public BiomeElysianForest(int biomeID){
 			super(biomeID,new BiomeDecoratorElysianFields.BiomeDecoratorElysianForest());
