@@ -88,7 +88,7 @@ public class ErebusFood extends ItemFood {
 			case melonadeSparkly:
 				return 5;
 			case larvaeOnStick:
-				return 4;
+				return 9;
 			case honeySandwich:
 				return 6;
 			case middleFruit:
