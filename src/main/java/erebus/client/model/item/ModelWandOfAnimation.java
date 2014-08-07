@@ -20,10 +20,10 @@ public class ModelWandOfAnimation extends ModelBase {
 		Jewel1.addBox(-2F, -7.7F, -2F, 4, 4, 4);
 		setRotation(Jewel1, 0F, 0.7853982F, 0F);
 		Jewel2 = new ModelRenderer(this, 0, 7);
-		Jewel2.addBox(-2F, -6F, 2F, 4, 4, 4);
+		Jewel2.addBox(-2F, -6F, 2F, 4, 4, 4, -0.01F);
 		setRotation(Jewel2, 0.7853982F, 0F, 0F);
 		Jewel3 = new ModelRenderer(this, 0, 7);
-		Jewel3.addBox(-6F, -6F, -2F, 4, 4, 4);
+		Jewel3.addBox(-6F, -6F, -2F, 4, 4, 4, -0.01F);
 		setRotation(Jewel3, 0F, 0F, 0.7853982F);
 		TopR1 = new ModelRenderer(this, 5, 0);
 		TopR1.addBox(-2F, -4F, -0.5F, 1, 4, 1);
