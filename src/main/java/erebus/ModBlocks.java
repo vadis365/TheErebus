@@ -284,7 +284,6 @@ public class ModBlocks {
 
 	private static void registerProperties() {
 		oreFossil.setHarvestLevel("pickaxe", 1);
-		oreFossil.setHarvestLevel("pickaxe", 1);
 		mirBrick.setHarvestLevel("pickaxe", 1);
 		spiderSpawner.setHarvestLevel("pickaxe", 0, 0);
 		jumpingSpiderSpawner.setHarvestLevel("pickaxe", 0, 0);
