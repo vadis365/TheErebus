@@ -1,9 +1,8 @@
 package erebus.item;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
-
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +16,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class ErebusFood extends ItemFood {
@@ -38,7 +38,7 @@ public class ErebusFood extends ItemFood {
 		honeySandwich,
 		middleFruit,
 		titanChop,
-		titanChopCooked;
+		titanChopCooked
 	}
 
 	static {
