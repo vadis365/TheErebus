@@ -64,7 +64,7 @@ public class ModBlocks {
 	public static Block siloSupports, siloIntake, siloTank, siloRoof, composter, composterActive;
 
     // OTHER THINGS
-    public static Block gaeanKeystone;
+    public static Block gaeanKeystone, offeringAltar;
 
 	public static void init() {
 		registerFluids();
@@ -178,6 +178,7 @@ public class ModBlocks {
 		composter = new BlockComposter().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("composter");
 
         gaeanKeystone = new BlockGaeanKeystone();
+        offeringAltar = new BlockOfferingAltar();
 
 		umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 		for (int i = 0; i < umbercobbleStairs.length; i++)
@@ -214,7 +215,7 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloIntake, siloTank, siloSupports, siloRoof, composter, composterActive); // altar,
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
-		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wallErebus, gaeanKeystone);
+		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wallErebus, gaeanKeystone, offeringAltar);
 	}
 
 	private static void registerBlocks() {

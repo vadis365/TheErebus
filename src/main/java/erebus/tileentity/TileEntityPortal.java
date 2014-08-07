@@ -14,10 +14,13 @@ public class TileEntityPortal extends TileEntity
 
     public void updateEntity()
     {
-        BlockErebusPortal p = (BlockErebusPortal) worldObj.getBlock(xCoord, yCoord, zCoord);
+        BlockErebusPortal p;
+        Block b = worldObj.getBlock(xCoord, yCoord, zCoord);
         Block topBlock = worldObj.getBlock(xCoord, yCoord + 1, zCoord);
         if (topBlock instanceof BlockErebusPortal)
         {
+            if (b instanceof BlockErebusPortal) p = (BlockErebusPortal) b;
+            else return;
             if (!p.isPatternValid(worldObj, xCoord, yCoord, zCoord))
             {
                 for (int l = 0; l < 80; ++l)

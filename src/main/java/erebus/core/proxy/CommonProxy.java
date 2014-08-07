@@ -69,6 +69,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntitySiloTank.class, "siloTank");
 		registerTileEntity(TileEntityComposter.class, "composter");
         registerTileEntity(TileEntityPortal.class, "portal");
+        registerTileEntity(TileEntityOfferingAltar.class, "offeringAltar");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
