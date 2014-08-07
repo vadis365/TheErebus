@@ -34,6 +34,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
+import erebus.item.ErebusFood;
 import erebus.item.ErebusMaterial.DATA;
 import erebus.item.ErebusSpecial;
 import erebus.tileentity.TileEntityTitanChest;
@@ -105,7 +106,7 @@ public class EntityTitanBeetle extends EntityTameable {
 			double offSetZ = Math.cos(a) * 1.2D;
 			enderChestParticles(worldObj, posX - offSetX, posY + 1.2, posZ - offSetZ, rand);
 		}
-		if(shagCount > 0)
+		if (shagCount > 0)
 			shagCount--;
 	}
 
@@ -194,6 +195,8 @@ public class EntityTitanBeetle extends EntityTameable {
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
+
+		entityDropItem(new ItemStack(ModItems.erebusFood, 1 + rand.nextInt(1), isBurning() ? ErebusFood.FoodType.titanChopCooked.ordinal() : ErebusFood.FoodType.titanChop.ordinal()), 0.0F);
 		dropChests();
 	}
 
@@ -295,10 +298,10 @@ public class EntityTitanBeetle extends EntityTameable {
 		}
 		return super.interact(player);
 	}
-	
-    public boolean shagging() {
-        return shagCount > 0;
-    }
+
+	public boolean shagging() {
+		return shagCount > 0;
+	}
 
 	@Override
 	public void moveEntityWithHeading(float strafe, float forward) {
