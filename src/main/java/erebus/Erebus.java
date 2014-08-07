@@ -84,6 +84,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModBlocks.erebusPlantSmall);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.insectRepellent);
+		MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.armorGlider);
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.erebusHoneyBlock, ModItems.bucketHoney);
