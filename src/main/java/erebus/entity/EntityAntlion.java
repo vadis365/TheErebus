@@ -37,6 +37,7 @@ public class EntityAntlion extends EntityMob {
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityFireAnt.class, 0, true));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityFireAntSoldier.class, 0, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBlackAnt.class, 0, true));
 	}
 
 	@Override
@@ -67,7 +68,7 @@ public class EntityAntlion extends EntityMob {
 	/*
 	 * @Override protected String getLivingSound() {
 	 * return "erebus:AntlionSound"; }
-	 * 
+	 *
 	 * @Override protected String getHurtSound() {
 	 * return "erebus:Antlionhurt";
 	 * }
