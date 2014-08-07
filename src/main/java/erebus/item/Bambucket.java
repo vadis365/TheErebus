@@ -24,13 +24,11 @@ import erebus.entity.EntityBotFlyLarva;
 
 public class Bambucket extends Item {
 
-	public IIcon bambucket;
-	public IIcon waterBambucket;
-	public IIcon bambucketOfBeetleJuice;
-	public IIcon bambucketHoney;
+	@SideOnly(Side.CLIENT)
+	private IIcon bambucket, waterBambucket, bambucketOfBeetleJuice, bambucketHoney;
 
 	public Bambucket() {
-		maxStackSize = 16;
+		setMaxStackSize(16);
 		setHasSubtypes(true);
 		setMaxDamage(0);
 	}
@@ -38,11 +36,6 @@ public class Bambucket extends Item {
 	@Override
 	public boolean hasContainerItem(ItemStack stack) {
 		return true;
-	}
-
-	@Override
-	public Item getContainerItem() {
-		return this;
 	}
 
 	@Override
