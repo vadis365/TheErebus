@@ -20,6 +20,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.IHighlightedBlock;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.item.ErebusMaterial;
 
 public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 
@@ -41,7 +42,12 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 
 	@Override
 	public Item getItemDropped(int i, Random r, int h) {
-		return ModItems.gaeanGem;
+		return ModItems.erebusMaterials;
+	}
+
+	@Override
+	public int damageDropped(int meta) {
+		return ErebusMaterial.DATA.gaeanGem.ordinal();
 	}
 
 	@Override
