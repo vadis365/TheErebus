@@ -6,8 +6,11 @@ import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityErebusAltarXP;
 
+@SideOnly(Side.CLIENT)
 public class ModelAltarXP extends ModelBase {
 	ModelRenderer GlassTop;
 	ModelRenderer GlassBot;
