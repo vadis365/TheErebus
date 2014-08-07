@@ -36,7 +36,9 @@ public class ErebusFood extends ItemFood {
 		melonadeSparkly,
 		larvaeOnStick,
 		honeySandwich,
-		middleFruit;
+		middleFruit,
+		titanChop,
+		titanChopCooked;
 	}
 
 	static {
@@ -72,25 +74,29 @@ public class ErebusFood extends ItemFood {
 			case larvaCooked:
 				return 3;
 			case grasshopperLegRaw:
-				return 2;
+				return 1;
 			case grasshopperLegCooked:
-				return 8;
+				return 4;
 			case tarantulaLegRaw:
-				return 2;
+				return 1;
 			case tarantulaLegCooked:
-				return 6;
+				return 5;
 			case bambooSoup:
 				return 4;
 			case melonade:
 				return 3;
 			case melonadeSparkly:
-				return 6;
+				return 5;
 			case larvaeOnStick:
-				return 9;
+				return 4;
 			case honeySandwich:
 				return 6;
 			case middleFruit:
 				return 2;
+			case titanChop:
+				return 4;
+			case titanChopCooked:
+				return 8;
 			default:
 				return 0;
 		}
@@ -99,29 +105,33 @@ public class ErebusFood extends ItemFood {
 	public float getSaturationModifier(ItemStack is, World world, EntityPlayer player) {
 		switch (FoodType.values()[is.getItemDamage()]) {
 			case larvaRaw:
-				return 0.45F;
+				return 0.1F;
 			case larvaCooked:
-				return 0.65F;
+				return 0.4F;
 			case grasshopperLegRaw:
-				return 0.8F;
+				return 0.1F;
 			case grasshopperLegCooked:
-				return 0.9F;
+				return 0.4F;
 			case tarantulaLegRaw:
-				return 0.6F;
+				return 0.1F;
 			case tarantulaLegCooked:
-				return 1.0F;
+				return 0.4F;
 			case bambooSoup:
-				return 1.0F;
+				return 0.3F;
 			case melonade:
-				return 0.75F;
+				return 0.2F;
 			case melonadeSparkly:
-				return 0.85F;
+				return 0.4F;
 			case larvaeOnStick:
-				return 0.85F;
-			case honeySandwich:
-				return 0.85F;
-			case middleFruit:
 				return 0.5F;
+			case honeySandwich:
+				return 0.6F;
+			case middleFruit:
+				return 0.3F;
+			case titanChop:
+				return 0.3F;
+			case titanChopCooked:
+				return 0.8F;
 			default:
 				return 0.0F;
 		}
