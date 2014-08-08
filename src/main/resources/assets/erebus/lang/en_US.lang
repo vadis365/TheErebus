@@ -285,7 +285,7 @@ item.whetstone.name=Whetstone
 item.woodlouseBall.name=Woodlouse Ball
 item.rolledNewspaper.name=Rolled Up Newspaper
 item.antTamingAmulet.name=Ant Taming Amulet
-item.planticide.name=Planticide
+item.planticide.name=Herbicide
 
 # Entities
 entity.erebus.beetleLarva.name=Beetle Larva
