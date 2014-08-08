@@ -16,7 +16,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
-import erebus.core.handler.ConfigHandler;
+import erebus.core.handler.configs.ConfigHandler;
 import gnu.trove.map.TObjectByteMap;
 import gnu.trove.map.hash.TObjectByteHashMap;
 
@@ -33,10 +33,10 @@ public final class TeleporterHandler {
 	}
 
 	public static void transferToErebus(Entity entity) {
-		INSTANCE.transferEntity(entity, ConfigHandler.erebusDimensionID);
+		INSTANCE.transferEntity(entity, ConfigHandler.INSTANCE.erebusDimensionID);
 	}
 
-	private TObjectByteMap<UUID> waitingPlayers = new TObjectByteHashMap<UUID>();
+	private final TObjectByteMap<UUID> waitingPlayers = new TObjectByteHashMap<UUID>();
 	private boolean checkWaitingPlayers = false;
 
 	private TeleporterErebus teleportToOverworld;
@@ -54,7 +54,7 @@ public final class TeleporterHandler {
 
 		if (world.provider.dimensionId == 0)
 			world.customTeleporters.add(teleportToOverworld = new TeleporterErebus(world));
-		else if (world.provider.dimensionId == ConfigHandler.erebusDimensionID)
+		else if (world.provider.dimensionId == ConfigHandler.INSTANCE.erebusDimensionID)
 			world.customTeleporters.add(teleportToErebus = new TeleporterErebus(world));
 
 		System.out.println("added to " + e.world);
@@ -76,7 +76,7 @@ public final class TeleporterHandler {
 	}
 
 	private void transferEntity(Entity entity, int dimensionId) {
-		if (dimensionId != 0 && dimensionId != ConfigHandler.erebusDimensionID)
+		if (dimensionId != 0 && dimensionId != ConfigHandler.INSTANCE.erebusDimensionID)
 			throw new IllegalArgumentException("Supplied invalid dimension ID into Erebus teleporter: " + dimensionId);
 
 		World world = entity.worldObj;

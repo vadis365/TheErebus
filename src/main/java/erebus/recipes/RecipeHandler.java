@@ -15,7 +15,7 @@ import erebus.ModItems;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockSlabStone;
 import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
-import erebus.core.handler.ConfigHandler;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.ErebusFood;
 import erebus.item.ErebusMaterial;
 import erebus.item.ErebusMaterial.DATA;
@@ -260,13 +260,13 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusMaterials, 1, 1), new ItemStack(ModBlocks.umberOreBlock, 1, 6), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.2F);
-		if (ConfigHandler.lead)
+		if (ConfigHandler.INSTANCE.lead)
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 2), new ItemStack(ModItems.metalIngot, 1, 1), 1.0F);
-		if (ConfigHandler.silver)
+		if (ConfigHandler.INSTANCE.silver)
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 3), new ItemStack(ModItems.metalIngot, 1, 2), 1.0F);
-		if (ConfigHandler.copper)
+		if (ConfigHandler.INSTANCE.copper)
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 1), new ItemStack(ModItems.metalIngot, 1, 0), 1.0F);
-		if (ConfigHandler.tin)
+		if (ConfigHandler.INSTANCE.tin)
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 4), new ItemStack(ModItems.metalIngot, 1, 3), 1.0F);
 	}
 
@@ -310,23 +310,23 @@ public class RecipeHandler {
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.WHITE_PETAL.ordinal()));
 
-		if (ConfigHandler.lead) {
+		if (ConfigHandler.INSTANCE.lead) {
 			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));
 			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.oreExtra, 1, 2));
 		}
-		if (ConfigHandler.silver) {
+		if (ConfigHandler.INSTANCE.silver) {
 			OreDictionary.registerOre("ingotSilver", new ItemStack(ModItems.metalIngot, 1, 2));
 			OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.oreExtra, 1, 3));
 		}
-		if (ConfigHandler.copper) {
+		if (ConfigHandler.INSTANCE.copper) {
 			OreDictionary.registerOre("ingotCopper", new ItemStack(ModItems.metalIngot, 1, 0));
 			OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.oreExtra, 1, 1));
 		}
-		if (ConfigHandler.tin) {
+		if (ConfigHandler.INSTANCE.tin) {
 			OreDictionary.registerOre("ingotTin", new ItemStack(ModItems.metalIngot, 1, 3));
 			OreDictionary.registerOre("oreTin", new ItemStack(ModBlocks.oreExtra, 1, 4));
 		}
-		if (ConfigHandler.aluminium)
+		if (ConfigHandler.INSTANCE.aluminium)
 			OreDictionary.registerOre("oreAluminum", new ItemStack(ModBlocks.oreExtra, 1, 0));
 	}
 }

@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.ConfigHandler;
+import erebus.core.handler.configs.ConfigHandler;
 
 public class MetalIngots extends Item {
 
@@ -37,13 +37,13 @@ public class MetalIngots extends Item {
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item id, CreativeTabs tabs, List list) {
-		if (ConfigHandler.copper)
+		if (ConfigHandler.INSTANCE.copper)
 			list.add(new ItemStack(id, 1, 0));
-		if (ConfigHandler.lead)
+		if (ConfigHandler.INSTANCE.lead)
 			list.add(new ItemStack(id, 1, 1));
-		if (ConfigHandler.silver)
+		if (ConfigHandler.INSTANCE.silver)
 			list.add(new ItemStack(id, 1, 2));
-		if (ConfigHandler.tin)
+		if (ConfigHandler.INSTANCE.tin)
 			list.add(new ItemStack(id, 1, 3));
 	}
 

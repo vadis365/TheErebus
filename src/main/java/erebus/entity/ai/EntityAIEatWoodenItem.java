@@ -9,7 +9,7 @@ import erebus.ModBlocks;
 import erebus.block.BlockHollowLog;
 import erebus.block.bamboo.BlockBambooCrop;
 import erebus.block.bamboo.BlockBambooTorch;
-import erebus.core.handler.ConfigHandler;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityBeetleLarva;
 import erebus.lib.EnumWood;
 
@@ -36,11 +36,11 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		if (block == EnumWood.values()[9].getStair())
 			return false;
 
-		if (ConfigHandler.beetleLarvaEating == 2)
+		if (ConfigHandler.INSTANCE.beetleLarvaEating == 2)
 			return true;
 		else if (block.getMaterial() != Material.wood || block instanceof BlockLog || block instanceof BlockBambooCrop || block instanceof BlockHollowLog || block == Blocks.brown_mushroom_block || block == Blocks.red_mushroom_block || block instanceof BlockBambooTorch)
 			return false;
-		else if (ConfigHandler.beetleLarvaEating == 0 && block.hasTileEntity(blockMeta))
+		else if (ConfigHandler.INSTANCE.beetleLarvaEating == 0 && block.hasTileEntity(blockMeta))
 			return false;
 
 		return true;

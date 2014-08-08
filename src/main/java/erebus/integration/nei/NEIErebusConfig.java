@@ -8,7 +8,7 @@ import codechicken.nei.recipe.DefaultOverlayHandler;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.client.gui.GuiPetrifiedWorkbench;
-import erebus.core.handler.ConfigHandler;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
 
 public class NEIErebusConfig implements IConfigureNEI {
@@ -27,23 +27,23 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(ModBlocks.altar));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap3));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap4));
-		if (!ConfigHandler.aluminium) {
+		if (!ConfigHandler.INSTANCE.aluminium) {
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 0));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 0));
 		}
-		if (!ConfigHandler.copper) {
+		if (!ConfigHandler.INSTANCE.copper) {
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 1));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 1));
 		}
-		if (!ConfigHandler.lead) {
+		if (!ConfigHandler.INSTANCE.lead) {
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 2));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 2));
 		}
-		if (!ConfigHandler.silver) {
+		if (!ConfigHandler.INSTANCE.silver) {
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 3));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 3));
 		}
-		if (!ConfigHandler.tin) {
+		if (!ConfigHandler.INSTANCE.tin) {
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 4));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 4));
 		}

@@ -1,14 +1,9 @@
 package erebus.world.biomes.decorators;
 
-import static erebus.core.handler.ConfigHandler.aluminium;
-import static erebus.core.handler.ConfigHandler.copper;
-import static erebus.core.handler.ConfigHandler.lead;
-import static erebus.core.handler.ConfigHandler.silver;
-import static erebus.core.handler.ConfigHandler.tin;
-
 import java.util.Random;
 
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -47,7 +42,7 @@ public abstract class BiomeDecoratorBaseErebus{
 
 		for(FeatureType featureType:FeatureType.values())generateFeature(featureType);
 
-		boolean extraOres = lead || silver || copper || tin || aluminium;
+		boolean extraOres = ConfigHandler.INSTANCE.lead || ConfigHandler.INSTANCE.silver || ConfigHandler.INSTANCE.copper || ConfigHandler.INSTANCE.tin || ConfigHandler.INSTANCE.aluminium;
 
 		for(OreType oreType:OreType.values()){
 			oreType.setupDefault(oreGen,extraOres);

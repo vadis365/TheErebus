@@ -10,7 +10,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.ConfigHandler;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 
 public class WorldProviderErebus extends WorldProvider {
@@ -80,7 +80,7 @@ public class WorldProviderErebus extends WorldProvider {
 	public void registerWorldChunkManager() {
 		worldChunkMgr = new WorldChunkManagerErebus(worldObj);
 		hasNoSky = true;
-		dimensionId = ConfigHandler.erebusDimensionID;
+		dimensionId = ConfigHandler.INSTANCE.erebusDimensionID;
 	}
 
 	@Override

@@ -1,11 +1,5 @@
 package erebus.world.biomes.decorators.data;
 
-import static erebus.core.handler.ConfigHandler.aluminium;
-import static erebus.core.handler.ConfigHandler.copper;
-import static erebus.core.handler.ConfigHandler.lead;
-import static erebus.core.handler.ConfigHandler.silver;
-import static erebus.core.handler.ConfigHandler.tin;
-
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -13,6 +7,7 @@ import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.block.BlockErebusOre;
 import erebus.block.BlockErebusOreExtras;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.feature.decoration.WorldGenErebusMinable;
 
 public final class OreSettings {
@@ -178,19 +173,19 @@ public final class OreSettings {
 					settings.setChance(0.125F).setIterations(0, 2).setOreAmount(8, 11).setY(36, 112);
 					break;
 				case ALUMINIUM:
-					settings.setChance(aluminium ? 1F : 0F).setIterations(2, 3).setOreAmount(3, 4).setCheckArea(2);
+					settings.setChance(ConfigHandler.INSTANCE.aluminium ? 1F : 0F).setIterations(2, 3).setOreAmount(3, 4).setCheckArea(2);
 					break;
 				case COPPER:
-					settings.setChance(copper ? 1F : 0F).setIterations(7, 9).setOreAmount(5, 7);
+					settings.setChance(ConfigHandler.INSTANCE.copper ? 1F : 0F).setIterations(7, 9).setOreAmount(5, 7);
 					break;
 				case LEAD:
-					settings.setChance(lead ? 1F : 0F).setIterations(4).setOreAmount(3).setCheckArea(2);
+					settings.setChance(ConfigHandler.INSTANCE.lead ? 1F : 0F).setIterations(4).setOreAmount(3).setCheckArea(2);
 					break;
 				case SILVER:
-					settings.setChance(silver ? 1F : 0F).setIterations(5).setOreAmount(6, 8);
+					settings.setChance(ConfigHandler.INSTANCE.silver ? 1F : 0F).setIterations(5).setOreAmount(6, 8);
 					break;
 				case TIN:
-					settings.setChance(tin ? 1F : 0F).setIterations(2, 4).setOreAmount(3, 4).setCheckArea(2);
+					settings.setChance(ConfigHandler.INSTANCE.tin ? 1F : 0F).setIterations(2, 4).setOreAmount(3, 4).setCheckArea(2);
 					break;
 			}
 		}

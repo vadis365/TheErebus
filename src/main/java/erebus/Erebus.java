@@ -18,8 +18,8 @@ import erebus.client.sound.AmbientMusicManager;
 import erebus.core.handler.BlockHighlightHandler;
 import erebus.core.handler.BonemealHandler;
 import erebus.core.handler.BucketHandler;
-import erebus.core.handler.ConfigHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.debug.ErebusCommandDebug;
 import erebus.entity.util.RandomMobNames;
@@ -34,7 +34,7 @@ import erebus.recipes.RecipeHandler;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class Erebus {
 
 	@SidedProxy(clientSide = Reference.SP_CLIENT, serverSide = Reference.SP_SERVER)
@@ -45,7 +45,7 @@ public class Erebus {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		ConfigHandler.loadConfig(event);
+		ConfigHandler.INSTANCE.loadConfig(event);
 
 		if (event.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
@@ -61,8 +61,8 @@ public class Erebus {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
-		DimensionManager.registerProviderType(ConfigHandler.erebusDimensionID, WorldProviderErebus.class, true);
-		DimensionManager.registerDimension(ConfigHandler.erebusDimensionID, ConfigHandler.erebusDimensionID);
+		DimensionManager.registerProviderType(ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
+		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, ConfigHandler.INSTANCE.erebusDimensionID);
 	}
 
 	@EventHandler
@@ -89,8 +89,9 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.honeyBlock, ModItems.bucketHoney);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 
-		if (ConfigHandler.randomNames)
+		if (ConfigHandler.INSTANCE.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 
 		ModIntegrationHandler.addMod(ThaumcraftIntegration.class);

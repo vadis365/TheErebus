@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.core.handler.ConfigHandler;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.AntTamingAmulet;
 import erebus.item.ArmorGlider;
 import erebus.item.BeeTamingAmulet;
@@ -154,7 +154,7 @@ public class ModItems {
 
 	private static void initCreativeTabs() {
 		ModTabs.items.setTab(erebusMaterials, whetstone, erebusFood, turnip, encrustedDiamond);
-		if (ConfigHandler.lead || ConfigHandler.silver || ConfigHandler.copper || ConfigHandler.tin || ConfigHandler.aluminium)
+		if (ConfigHandler.INSTANCE.lead || ConfigHandler.INSTANCE.silver || ConfigHandler.INSTANCE.copper || ConfigHandler.INSTANCE.tin || ConfigHandler.INSTANCE.aluminium)
 			ModTabs.items.setTab(metalIngot);
 
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
