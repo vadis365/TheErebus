@@ -18,7 +18,7 @@ public class ModMaterials {
 	public static ToolMaterial toolJADEPAXEL = EnumHelper.addToolMaterial("JADEPAXEL", 2, 1079, 8.0F, 4.0F, 14);
 	public static ToolMaterial toolCAVEMANCLUB = EnumHelper.addToolMaterial("CAVEMANCLUB", 0, 131, 4.0F, 2.0F, 12);
 	public static ToolMaterial weaponWaspDagger = EnumHelper.addToolMaterial("WASPDAGGER", 0, 1, 1.0F, 0.0F, 12);
-	public static ToolMaterial weaponWaspSword = EnumHelper.addToolMaterial("WASPSWORD", 0, 863, 1.0F, 6.0F, 18);
+	public static ToolMaterial weaponWaspSword = EnumHelper.addToolMaterial("WASPSWORD", 0, 863, 1.0F, 6.0F, 0);
 	public static ToolMaterial weaponScorpionPincer = EnumHelper.addToolMaterial("SCORPIONPINCER", 0, 863, 1.0F, 4.0F, 2);
 	public static ToolMaterial ritualDagger = EnumHelper.addToolMaterial("RITUAL_DAGGER", 0, 128, 1.0F, -3.0F, 30);
 	public static Material honey = new MaterialLiquid(MapColor.mapColorArray[14]);
