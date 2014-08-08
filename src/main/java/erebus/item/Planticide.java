@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import erebus.ModTabs;
@@ -20,13 +19,9 @@ public class Planticide extends Item {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!player.capabilities.isCreativeMode)
 			stack.stackSize--;
-
-		int x = MathHelper.floor_double(player.posX);
-		int y = MathHelper.floor_double(player.posY);
-		int z = MathHelper.floor_double(player.posZ);
 
 		if (!world.isRemote)
 			for (int i = -3; i <= 3; i++)
@@ -44,6 +39,6 @@ public class Planticide extends Item {
 		else
 			player.swingItem();
 
-		return stack;
+		return true;
 	}
 }
