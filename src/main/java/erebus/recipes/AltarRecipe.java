@@ -28,7 +28,7 @@ public class AltarRecipe {
 	 * @param focusItem
 	 *            item that will go in the centre
 	 * @param inputs
-	 *            must not be null and must contain less than 8 stack
+	 *            must not be null and must contain less than 8 items
 	 */
 	public static void addRecipe(ItemStack output, ItemStack focusItem, ItemStack... inputs) {
 		if (output == null || focusItem == null || inputs == null || inputs.length >= 8)

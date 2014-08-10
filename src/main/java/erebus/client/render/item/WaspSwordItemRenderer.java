@@ -15,7 +15,7 @@ import erebus.client.model.item.ModelWaspSword;
 @SideOnly(Side.CLIENT)
 public class WaspSwordItemRenderer implements IItemRenderer {
 	private final ModelWaspSword model;
-	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/stack/waspSword.png");
+	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/waspSword.png");
 
 	public WaspSwordItemRenderer() {
 		model = new ModelWaspSword();

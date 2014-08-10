@@ -1,23 +1,102 @@
 package erebus;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.block.*;
-import erebus.block.altars.*;
-import erebus.block.bamboo.*;
-import erebus.block.glowshroom.*;
-import erebus.block.plants.*;
-import erebus.block.silo.BlockSiloRoof;
-import erebus.block.silo.BlockSiloSupports;
-import erebus.block.silo.BlockSiloTank;
-import erebus.lib.EnumWood;
+import java.lang.reflect.Field;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
-
-import java.lang.reflect.Field;
+import cpw.mods.fml.common.registry.GameRegistry;
+import erebus.block.BlockAmber;
+import erebus.block.BlockBones;
+import erebus.block.BlockButtonUmberstone;
+import erebus.block.BlockComposter;
+import erebus.block.BlockDoorAmber;
+import erebus.block.BlockErebusHoney;
+import erebus.block.BlockErebusMushroomCap;
+import erebus.block.BlockErebusOre;
+import erebus.block.BlockErebusOreExtras;
+import erebus.block.BlockErebusPortal;
+import erebus.block.BlockErebusStigma;
+import erebus.block.BlockGaeanKeystone;
+import erebus.block.BlockGhostSand;
+import erebus.block.BlockGlowGem;
+import erebus.block.BlockGlowingJar;
+import erebus.block.BlockGneiss;
+import erebus.block.BlockHollowLog;
+import erebus.block.BlockHoneyComb;
+import erebus.block.BlockHoneyTreat;
+import erebus.block.BlockInsectRepellent;
+import erebus.block.BlockLeavesErebus;
+import erebus.block.BlockMucusBomb;
+import erebus.block.BlockMud;
+import erebus.block.BlockOfferingAltar;
+import erebus.block.BlockOreFossil;
+import erebus.block.BlockPetrifiedChest;
+import erebus.block.BlockPetrifiedCraftingTable;
+import erebus.block.BlockPlanksErebus;
+import erebus.block.BlockPlantedGiantFlower;
+import erebus.block.BlockQuickSand;
+import erebus.block.BlockRedGem;
+import erebus.block.BlockSimple;
+import erebus.block.BlockSlabStone;
+import erebus.block.BlockSpiderSpawner;
+import erebus.block.BlockStairsBase;
+import erebus.block.BlockUmberFurnace;
+import erebus.block.BlockUmberGolemStatue;
+import erebus.block.BlockUmberPaver;
+import erebus.block.BlockUmberstone;
+import erebus.block.BlockUmberstonePillar;
+import erebus.block.BlockVelocity;
+import erebus.block.BlockWallErebus;
+import erebus.block.BlockWaspNest;
+import erebus.block.BlockWaspSpawner;
+import erebus.block.BlockWitherWeb;
+import erebus.block.JarOHoney;
+import erebus.block.altars.BlockAltar;
+import erebus.block.altars.BlockErebusAltar;
+import erebus.block.altars.BlockErebusAltarHealing;
+import erebus.block.altars.BlockErebusAltarLightning;
+import erebus.block.altars.BlockErebusAltarRepair;
+import erebus.block.altars.BlockErebusAltarXP;
+import erebus.block.bamboo.BlockBambooBridge;
+import erebus.block.bamboo.BlockBambooCrate;
+import erebus.block.bamboo.BlockBambooCrop;
+import erebus.block.bamboo.BlockBambooLadder;
+import erebus.block.bamboo.BlockBambooPole;
+import erebus.block.bamboo.BlockBambooShoot;
+import erebus.block.bamboo.BlockBambooTorch;
+import erebus.block.bamboo.BlockExtenderThingy;
+import erebus.block.glowshroom.BlockGlowshroom;
+import erebus.block.glowshroom.BlockGlowshroomStalkDown1;
+import erebus.block.glowshroom.BlockGlowshroomStalkDown2;
+import erebus.block.glowshroom.BlockGlowshroomStalkDown3;
+import erebus.block.glowshroom.BlockGlowshroomStalkE1;
+import erebus.block.glowshroom.BlockGlowshroomStalkE3;
+import erebus.block.glowshroom.BlockGlowshroomStalkMain;
+import erebus.block.glowshroom.BlockGlowshroomStalkN1;
+import erebus.block.glowshroom.BlockGlowshroomStalkN3;
+import erebus.block.glowshroom.BlockGlowshroomStalkNS2;
+import erebus.block.glowshroom.BlockGlowshroomStalkS1;
+import erebus.block.glowshroom.BlockGlowshroomStalkS3;
+import erebus.block.glowshroom.BlockGlowshroomStalkW1;
+import erebus.block.glowshroom.BlockGlowshroomStalkW3;
+import erebus.block.glowshroom.BlockGlowshroomStalkWE2;
+import erebus.block.plants.BlockDoubleHeightPlant;
+import erebus.block.plants.BlockErebusFlower;
+import erebus.block.plants.BlockFern;
+import erebus.block.plants.BlockFiddlehead;
+import erebus.block.plants.BlockHangerPlants;
+import erebus.block.plants.BlockSmallPlants;
+import erebus.block.plants.BlockThorns;
+import erebus.block.plants.BlockTurnip;
+import erebus.block.plants.BlockWallPlants;
+import erebus.block.silo.BlockSiloRoof;
+import erebus.block.silo.BlockSiloSupports;
+import erebus.block.silo.BlockSiloTank;
+import erebus.lib.EnumWood;
 
 public class ModBlocks {
 
@@ -114,6 +193,7 @@ public class ModBlocks {
 	public static final Block mudBricks = new BlockSimple(Material.rock).setBlockName("erebus.mudBricks").setBlockTextureName("erebus:mudBricks").setHardness(0.8F).setResistance(1.0F);
 	public static final Block jarOHoney = new JarOHoney().setHardness(0.5F).setBlockName("erebus.jarOHoney").setBlockTextureName("erebus:glassAmber");
 	public static final Block jadeBlock = new BlockCompressed(MapColor.greenColor).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.blockJade").setBlockTextureName("erebus:blockJade");
+	public static final Block altar = new BlockAltar().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.altar").setBlockTextureName("stone");
 	public static final Block glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 	public static final Block mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 
@@ -137,7 +217,7 @@ public class ModBlocks {
 	public static final Block amberBrickStairs = new BlockStairsBase(blockAmber, 2).setStepSound(Block.soundTypeStone).setBlockName("amberBrickStairs");
 	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("waspNestStairs");
 
-	// OTHER THINGS (AKA ILEXICONN'S STUFF. DELETE IF HE EVER QUITS)
+	// OTHER THINGS (AKA LEXICONN'S STUFF. DELETE IF HE EVER QUITS)
 	public static final Block gaeanKeystone = new BlockGaeanKeystone();
 	public static final Block offeringAltar = new BlockOfferingAltar();
 

@@ -16,7 +16,7 @@ import erebus.client.model.item.ModelPortalStaff;
 public class PortalActivatorRenderer implements IItemRenderer {
 
 	private static final ModelPortalStaff model = new ModelPortalStaff();
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/special/stack/portalStaff.png");
+	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/portalStaff.png");
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

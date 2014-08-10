@@ -1,8 +1,5 @@
 package erebus.block.altars;
 
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.tileentity.TileEntityErebusAltarEmpty;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
@@ -16,17 +13,14 @@ import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.List;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.tileentity.TileEntityErebusAltarEmpty;
 
 public class BlockErebusAltar extends BlockContainer {
-    private String message;
-    private AxisAlignedBB[] boxes = {
-        AxisAlignedBB.getBoundingBox(0f, 0f, 0f, 1f, 1f, 1f)
-    };
+
+	private String message;
 
 	public BlockErebusAltar() {
 		super(Material.rock);
@@ -69,6 +63,12 @@ public class BlockErebusAltar extends BlockContainer {
 	}
 
 	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
+		float f = 0.0625F;
+		return AxisAlignedBB.getBoundingBox(i + f, j, k + f, i + 1 - f, j + 1 - f, k + 1 - f);
+	}
+
+	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
 		double offsetY = 0.9D;
 		if (entity instanceof EntityItem)
@@ -83,7 +83,7 @@ public class BlockErebusAltar extends BlockContainer {
 						world.spawnParticle("flame", entity.posX, entity.posY + 0.5D, entity.posZ, 0.0D, 0.0D, 0.0D);
 						world.spawnParticle("cloud", entity.posX, entity.posY + 0.5D, entity.posZ, 0.0D, 0.0D, 0.0D);
 						if (world.isRemote)
-							Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
+							Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(message.toString()));
 					}
 			}
 	}
@@ -129,30 +129,4 @@ public class BlockErebusAltar extends BlockContainer {
 				break;
 		}
 	}
-
-    @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
-        for (AxisAlignedBB aabb : boxes) {
-            AxisAlignedBB aabbTmp = aabb.getOffsetBoundingBox(x, y, z);
-            if (box.intersectsWith(aabbTmp)) list.add(aabbTmp);
-        }
-    }
-
-    @Override
-    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 origin, Vec3 direction) {
-        MovingObjectPosition closest = null;
-        for (AxisAlignedBB aabb : boxes) {
-            MovingObjectPosition mop = aabb.getOffsetBoundingBox(x, y, z).calculateIntercept(origin, direction);
-            if (mop != null) {
-                if (closest != null && mop.hitVec.distanceTo(origin) < closest.hitVec.distanceTo(origin)) closest = mop;
-                else closest = mop;
-            }
-        }
-        if (closest != null) {
-            closest.blockX = x;
-            closest.blockY = y;
-            closest.blockZ = z;
-        }
-        return closest;
-    }
 }

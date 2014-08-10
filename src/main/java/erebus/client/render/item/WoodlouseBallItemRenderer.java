@@ -18,7 +18,7 @@ import erebus.entity.EntityWoodlouseBall;
 @SideOnly(Side.CLIENT)
 public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 	private final ModelWoodlouseBall ModelWoodlouseBall;
-	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/stack/woodlouseBall.png");
+	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/woodlouseBall.png");
 
 	public WoodlouseBallItemRenderer() {
 		ModelWoodlouseBall = new ModelWoodlouseBall();

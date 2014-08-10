@@ -1,16 +1,21 @@
 package erebus.block.altars;
 
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityErebusAltarRepair;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityErebusAltarRepair;
 
-public class BlockErebusAltarRepair extends BlockErebusAltar {
+public class BlockErebusAltarRepair extends BlockErebusAltarLightning {
+
+	public BlockErebusAltarRepair() {
+		super();
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
@@ -22,6 +27,12 @@ public class BlockErebusAltarRepair extends BlockErebusAltar {
 		TileEntityErebusAltarRepair te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarRepair.class);
 		te.setActive(false);
 		te.setcanBeUsed(true);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+		float f = 0.0625F;
+		return AxisAlignedBB.getBoundingBox(x + f, y, z + f, x + 1 - f, y + 1 - f, z + 1 - f);
 	}
 
 	@Override

@@ -1,8 +1,5 @@
 package erebus.block.altars;
 
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityErebusAltarXP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -10,12 +7,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityErebusAltarXP;
 
 public class BlockErebusAltarXP extends BlockErebusAltar {
 
 	private Item item;
 	private int meta;
+
+	public BlockErebusAltarXP() {
+		super();
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
@@ -26,6 +31,12 @@ public class BlockErebusAltarXP extends BlockErebusAltar {
 	public void onBlockAdded(World world, int x, int y, int z) {
 		TileEntityErebusAltarXP te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarXP.class);
 		te.setActive(false);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
+		float f = 0.0625F;
+		return AxisAlignedBB.getBoundingBox(i + f, j, k + f, i + 1 - f, j + 1 - f, k + 1 - f);
 	}
 
 	@Override

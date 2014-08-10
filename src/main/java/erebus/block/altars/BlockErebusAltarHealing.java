@@ -1,21 +1,45 @@
 package erebus.block.altars;
 
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityErebusAltarHealing;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityErebusAltarHealing;
 
-public class BlockErebusAltarHealing extends BlockErebusAltar {
+public class BlockErebusAltarHealing extends BlockContainer {
 
 	public BlockErebusAltarHealing() {
+		super(Material.rock);
 		setBlockTextureName("erebus:blockErebusAltarBreak");
+	}
+
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityErebusAltarHealing();
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z));
 	}
 
 	@Override

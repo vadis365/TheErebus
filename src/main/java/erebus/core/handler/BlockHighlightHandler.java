@@ -33,9 +33,8 @@ public class BlockHighlightHandler {
 				GL11.glLineWidth(3.0f);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDepthMask(false);
-				for (AxisAlignedBB aabb : bounds) {
-                    RenderGlobal.drawOutlinedBoundingBox(aabb.copy().offset(x, y, z).offset(-pos.xCoord, -pos.yCoord, -pos.zCoord), -1);
-                }
+				for (AxisAlignedBB aabb : bounds)
+					RenderGlobal.drawOutlinedBoundingBox(aabb.copy().offset(x, y, z).offset(-pos.xCoord, -pos.yCoord, -pos.zCoord), -1);
 				GL11.glDepthMask(true);
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glDisable(GL11.GL_BLEND);

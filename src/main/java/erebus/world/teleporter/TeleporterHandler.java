@@ -101,7 +101,7 @@ public final class TeleporterHandler {
 				/*player.lastExperience = -1;
 				player.lastHealth = -1.0F;
 				player.lastFoodLevel = -1;*/
-			} else if (!(entity instanceof EntityMinecartContainer)) { // TODO we cannot handle this, would result in container breaking in both worlds and duplicate stack; find some sneaky solution around this issue
+			} else if (!(entity instanceof EntityMinecartContainer)) { // TODO we cannot handle this, would result in container breaking in both worlds and duplicate items; find some sneaky solution around this issue
 				// fixme copy paste
 				world.theProfiler.startSection("changeDimension");
 
