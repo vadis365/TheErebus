@@ -2,19 +2,16 @@ package erebus.world.feature.plant;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.core.helper.MathUtil;
+import erebus.world.feature.WorldGenErebus;
 
 //@formatter:off
-public class WorldGenGiantMushrooms extends WorldGenerator{
+public class WorldGenGiantMushrooms extends WorldGenErebus{
 	private static final int stalkMeta = 10;
 	private static final int bulbFullMeta = 14;
 	private static final Block tempBlock = Blocks.bedrock;
@@ -41,7 +38,7 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z){
+	public boolean generate(int x, int y, int z){
 		bulbs.clear();
 		Block mushroom = mushroomType.block;
 
@@ -51,15 +48,13 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 		//
 
 		switch(mushroomType){
-			case BULB_CAPPED: genBulbCapped(world,rand,x,y,z,mushroom); break;
-			case KAIZERS_FINGERS: genKaizersFingers(world,rand,x,y,z,mushroom); break;
-			case DUTCH_CAP : genDutchCap(world,rand,x,y,z,mushroom); break;
+			case BULB_CAPPED: genBulbCapped(x,y,z,mushroom); break;
+			case KAIZERS_FINGERS: genKaizersFingers(x,y,z,mushroom); break;
+			case DUTCH_CAP : genDutchCap(x,y,z,mushroom); break;
 			default: break;
 		}
 
-		for(ChunkCoordinates bulb:bulbs)world.setBlock(bulb.posX,bulb.posY,bulb.posZ,tempBlock);
-		for(ChunkCoordinates bulb:bulbs)world.setBlockMetadataWithNotify(bulb.posX,bulb.posY,bulb.posZ,getMetadata(world,x,z,bulb),2);
-		for(ChunkCoordinates bulb:bulbs)world.setBlock(bulb.posX,bulb.posY,bulb.posZ,mushroom,world.getBlockMetadata(bulb.posX,bulb.posY,bulb.posZ),2);
+		generateBulbs(x,z,mushroom);
 
 		return true;
 	}
@@ -68,39 +63,41 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 	 * MUSHROOM TYPE - BULB CAPPED
 	 */
 
-	private void genBulbCapped(World world, Random rand, int x, int y, int z, Block mushroom){
+	private void genBulbCapped(int x, int y, int z, Block mushroom){
 		int stalkHeight = 3+rand.nextInt(3+rand.nextInt(2));
 		int sideHeight = 1+rand.nextInt(stalkHeight > 3 ? 3 : 2);
+		
+		setBlockPillar(x,z,y,y+stalkHeight,mushroom,stalkMeta);
+		
+		for(int px = -1; px <= 1; px++){
+			for(int pz = -1; pz <= 1; pz++){
+				bulbs.add(new ChunkCoordinates(x+px,y,z+pz));
+			}
+		}
 
-		for(int py = 0; py <= stalkHeight; py++)
-			world.setBlock(x,y++,z,mushroom,stalkMeta,2);
-
-		for(int px = -1; px <= 1; px++)
-			for(int pz = -1; pz <= 1; pz++)bulbs.add(new ChunkCoordinates(x+px,y,z+pz));
-
-
-		for(int py = 1; py <= sideHeight; py++)
+		for(int py = 1; py <= sideHeight; py++){
 			for(int off = -1; off <= 1; off++){
 				bulbs.add(new ChunkCoordinates(x+2,y-py,z+off));
 				bulbs.add(new ChunkCoordinates(x-2,y-py,z+off));
 				bulbs.add(new ChunkCoordinates(x+off,y-py,z+2));
 				bulbs.add(new ChunkCoordinates(x+off,y-py,z-2));
 			}
+		}
 	}
 
 	/*
 	 * MUSHROOM TYPE - KAIZERS FINGERS
 	 */
 
-	private void genKaizersFingers(World world, Random rand, int x, int y, int z, Block mushroom){
+	private void genKaizersFingers(int x, int y, int z, Block mushroom){
 		int mainShroomHeight = 4+rand.nextInt(4);
 
 		for(int py = 0, sidesPlaced = 0; py <= mainShroomHeight; py++){
-			world.setBlock(x,y+py,z,mushroom,stalkMeta,2);
+			setBlock(x,y+py,z,mushroom,stalkMeta);
 
 			if (py >= 2 && py < mainShroomHeight-1 && rand.nextInt(4+sidesPlaced*2) == 0){
 				int dir = rand.nextInt(4);
-				world.setBlock(x+Direction.offsetX[dir],y+py,z+Direction.offsetZ[dir],mushroom,bulbFullMeta,2);
+				setBlock(x+Direction.offsetX[dir],y+py,z+Direction.offsetZ[dir],mushroom,bulbFullMeta);
 				++sidesPlaced;
 			}
 		}
@@ -114,11 +111,11 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 		for(int smallShroomAttempt = 0, xx, zz; smallShroomAttempt < 4+rand.nextInt(7); smallShroomAttempt++){
 			xx = x+rand.nextInt(4)-rand.nextInt(4);
 			zz = z+rand.nextInt(4)-rand.nextInt(4);
-			if (!world.isAirBlock(xx,y,zz) || !world.isAirBlock(xx-1,y,zz) || !world.isAirBlock(xx+1,y,zz) || !world.isAirBlock(xx,y,zz-1) || !world.isAirBlock(xx,y,zz+1))continue;
+			if (!isAir(xx,y,zz) || !isAir(xx-1,y,zz) || !isAir(xx+1,y,zz) || !isAir(xx,y,zz-1) || !isAir(xx,y,zz+1))continue;
 
 			int smallShroomHeight = rand.nextBoolean() ? 1 : 1+rand.nextInt(2);
-			for(int py = 0; py < smallShroomHeight; py++)world.setBlock(xx,y+py,zz,mushroom,stalkMeta,2);
-			world.setBlock(xx,y+smallShroomHeight,zz,mushroom,bulbFullMeta,2);
+			setBlockPillar(xx,zz,y,y+smallShroomHeight-1,mushroom,stalkMeta);
+			setBlock(xx,y+smallShroomHeight,zz,mushroom,bulbFullMeta);
 			connectList.add(new ChunkCoordinates(xx,y-1,zz));
 		}
 
@@ -137,8 +134,8 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 			zz = coords1.posZ+Direction.offsetZ[dir];
 
 			if (MathUtil.distance(xx-coords2.posX,zz-coords2.posZ) < dist){
-				world.setBlock(xx,y-1,zz,mushroom,stalkMeta,2);
-				if (rand.nextInt(16) == 0)world.setBlock(xx,y,zz,mushroom,stalkMeta,2);
+				setBlock(xx,y-1,zz,mushroom,stalkMeta);
+				if (rand.nextInt(16) == 0)setBlock(xx,y,zz,mushroom,stalkMeta);
 				coords1.posX = xx;
 				coords1.posZ = zz;
 			}
@@ -146,74 +143,94 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 	}
 
 	/*
-	 * MUSHROOM TYPE - KAIZERS FINGERS
+	 * MUSHROOM TYPE - DUTCH CAP
 	 */
 
-	private void genDutchCap(World world, Random rand, int x, int y, int z, Block mushroom){
+	private void genDutchCap(int x, int y, int z, Block mushroom){
 		int height = 9+rand.nextInt(8);
 		
 		for(int a = 0; a < 2; a++){
 			for(int b = 0; b < 2; b++){
-				for(int py = 0; py < 2; py++){
-					world.setBlock(x-1+3*a,y+py,z+b,mushroom,stalkMeta,2);
-					world.setBlock(x+b,y+py,z-1+3*a,mushroom,stalkMeta,2);
-				}
+				setBlockPillar(x-1+3*a,z+b,y,y+1,mushroom,stalkMeta);
+				setBlockPillar(x+b,z-1+3*a,y,y+1,mushroom,stalkMeta);
 				
-				world.setBlock(x-1+3*a,y,z-1+3*b,mushroom,stalkMeta,2);
-				world.setBlock(x-2+5*a,y,z+b,mushroom,stalkMeta,2);
-				world.setBlock(x+b,y,z-2+5*a,mushroom,stalkMeta,2);
+				setBlock(x-1+3*a,y,z-1+3*b,mushroom,stalkMeta);
+				setBlock(x-2+5*a,y,z+b,mushroom,stalkMeta);
+				setBlock(x+b,y,z-2+5*a,mushroom,stalkMeta);
 			}
 		}
 		
-		for(int py = 0; py <= height; py++){
-			world.setBlock(x,y+py,z,mushroom,stalkMeta,2);
-			world.setBlock(x+1,y+py,z,mushroom,stalkMeta,2);
-			world.setBlock(x,y+py,z+1,mushroom,stalkMeta,2);
-			world.setBlock(x+1,y+py,z+1,mushroom,stalkMeta,2);
+		setBlockCube(x,y,z,x+1,y+height,z+1,mushroom,stalkMeta);
+		
+		for(int py = 4; py <= height; py++){
+			boolean isTop = py >= height-1;
 			
-			if (py > 3 && rand.nextInt(3) == 0){
-				int branchAddX = 0, branchAddZ = 0;
-				
-				for(int branchAttempt = 0; branchAttempt < 12 && branchAddX == 0 && branchAddZ == 0; branchAttempt++){
-					branchAddX = rand.nextInt(3) != 0 ? 0 : rand.nextInt(3)-1;
-					branchAddZ = rand.nextInt(3) != 0 ? 0 : rand.nextInt(3)-1;
-				}
-				
-				if (branchAddX == 0 && branchAddZ == 0)continue;
-				
-				boolean canGenerateBranch = true;
-				
-				for(int testY = -2; testY <= 0; testY++){
-					if (!world.isAirBlock(x+branchAddX*2,y+py+testY,z+branchAddZ*2) || !world.isAirBlock(x+branchAddX*2+1,y+py+testY,z+branchAddZ*2) ||
-						!world.isAirBlock(x+branchAddX*2,y+py+testY,z+branchAddZ*2+1) || !world.isAirBlock(x+branchAddX*2+1,y+py+testY,z+branchAddZ*2+1)){
-						canGenerateBranch = false;
-						break;
+			if (rand.nextInt(3) == 0 || isTop){
+				for(int attempt = 0; attempt < (isTop ? 2 : 1); attempt++){
+					int branchAddX = 0, branchAddZ = 0;
+					
+					for(int branchAttempt = 0; branchAttempt < 12 && branchAddX == 0 && branchAddZ == 0; branchAttempt++){
+						branchAddX = rand.nextInt(3) != 0 ? 0 : rand.nextInt(3)-1;
+						branchAddZ = rand.nextInt(3) != 0 ? 0 : rand.nextInt(3)-1;
 					}
-				}
-				
-				if (!canGenerateBranch)continue;
-				
-				int branchSize = 1+rand.nextInt(2+rand.nextInt(3));
-				
-				for(int branch = 1; branch <= branchSize; branch++){
-					world.setBlock(x+branchAddX*branch,y+py-1+branch,z+branchAddZ*branch,mushroom,stalkMeta,2);
-					world.setBlock(x+branchAddX*branch+1,y+py-1+branch,z+branchAddZ*branch,mushroom,stalkMeta,2);
-					world.setBlock(x+branchAddX*branch,y+py-1+branch,z+branchAddZ*branch+1,mushroom,stalkMeta,2);
-					world.setBlock(x+branchAddX*branch+1,y+py-1+branch,z+branchAddZ*branch+1,mushroom,stalkMeta,2);
+					
+					if (branchAddX == 0 && branchAddZ == 0)continue;
+					if (!checkAirCube(x+branchAddX*2,y+py-2,z+branchAddZ*2,x+branchAddX*2+1,y+py,z+branchAddZ*2+1))continue;
+					
+					int branchSize = isTop ? 3+rand.nextInt(2) : 2+rand.nextInt(2+rand.nextInt(2));
+					
+					for(int branch = 1; branch <= branchSize; branch++){
+						setBlockRect(x+branchAddX*branch,z+branchAddZ*branch,x+branchAddX*branch+1,z+branchAddZ*branch+1,y+py-1+branch,mushroom,stalkMeta);
+						if (isTop)setBlockRect(x+branchAddX*branch,z+branchAddZ*branch,x+branchAddX*branch+1,z+branchAddZ*branch+1,y+py+branch,mushroom,stalkMeta);
+					}
+					
+					int branchTopX = x+branchAddX*branchSize, branchTopY = y+py+branchSize, branchTopZ = z+branchAddZ*branchSize;
+					
+					if (isTop){
+						setBlockRect(branchTopX,branchTopZ,branchTopX+1,branchTopZ+1,branchTopY+1,mushroom,stalkMeta);
+						branchTopY += 2;
+						
+						for(int a = 0; a < 2; a++){
+							for(int b = 0; b < 2; b++){
+								if (isAir(branchTopX+a,branchTopY,branchTopZ+b))setBlock(branchTopX+a,branchTopY,branchTopZ+b,mushroom,bulbFullMeta);
+								if (isAir(branchTopX-1+3*a,branchTopY-1,branchTopZ+b))setBlock(branchTopX-1+3*a,branchTopY-1,branchTopZ+b,mushroom,bulbFullMeta);
+								if (isAir(branchTopX+b,branchTopY-1,branchTopZ-1+3*a))setBlock(branchTopX+b,branchTopY-1,branchTopZ-1+3*a,mushroom,bulbFullMeta);
+								if (isAir(branchTopX-1+3*a,branchTopY-2,branchTopZ-1+3*b))setBlock(branchTopX-1+3*a,branchTopY-2,branchTopZ-1+3*b,mushroom,bulbFullMeta);
+								if (isAir(branchTopX-2+5*a,branchTopY-2,branchTopZ+b))setBlock(branchTopX-2+5*a,branchTopY-2,branchTopZ+b,mushroom,bulbFullMeta);
+								if (isAir(branchTopX+b,branchTopY-2,branchTopZ-2+5*a))setBlock(branchTopX+b,branchTopY-2,branchTopZ-2+5*a,mushroom,bulbFullMeta);
+							}
+						}
+					}
+					else{
+						for(int a = 0; a < 2; a++){
+							for(int b = 0; b < 2; b++){
+								if (isAir(branchTopX+a,branchTopY,branchTopZ+b))setBlock(branchTopX+a,branchTopY,branchTopZ+b,mushroom,bulbFullMeta);
+								if (isAir(branchTopX-1+3*a,branchTopY-1,branchTopZ+b))setBlock(branchTopX-1+3*a,branchTopY-1,branchTopZ+b,mushroom,bulbFullMeta);
+								if (isAir(branchTopX+b,branchTopY-1,branchTopZ-1+3*a))setBlock(branchTopX+b,branchTopY-1,branchTopZ-1+3*a,mushroom,bulbFullMeta);
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 	
 	/*
-	 * METADATA UTILITY
+	 * BULB METADATA
 	 */
+	
+	private void generateBulbs(int centerX, int centerZ, Block mushroom){
+		for(ChunkCoordinates bulb:bulbs)setBlock(bulb.posX,bulb.posY,bulb.posZ,tempBlock);
+		for(ChunkCoordinates bulb:bulbs)setMetadata(bulb.posX,bulb.posY,bulb.posZ,getBulbMetadata(centerX,centerZ,bulb));
+		for(ChunkCoordinates bulb:bulbs)setBlock(bulb.posX,bulb.posY,bulb.posZ,mushroom,getMetadata(bulb.posX,bulb.posY,bulb.posZ));
+		bulbs.clear();
+	}
 
-	public static int getMetadata(World world, int centerX, int centerZ, ChunkCoordinates bulb){
-		boolean posX = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ) == tempBlock,
-		negX = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ) == tempBlock,
-		posZ = world.getBlock(bulb.posX,bulb.posY,bulb.posZ+1) == tempBlock,
-		negZ = world.getBlock(bulb.posX,bulb.posY,bulb.posZ-1) == tempBlock;
+	private int getBulbMetadata(int centerX, int centerZ, ChunkCoordinates bulb){
+		boolean posX = getBlock(bulb.posX+1,bulb.posY,bulb.posZ) == tempBlock,
+				negX = getBlock(bulb.posX-1,bulb.posY,bulb.posZ) == tempBlock,
+				posZ = getBlock(bulb.posX,bulb.posY,bulb.posZ+1) == tempBlock,
+				negZ = getBlock(bulb.posX,bulb.posY,bulb.posZ-1) == tempBlock;
 
 		if (posX && negX && posZ && negZ)return 5; // if surrounded, use top only
 
@@ -233,10 +250,10 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 		int sides = (posX ? 1 : 0)+(negX ? 1 : 0)+(posZ ? 1 : 0)+(negZ ? 1 : 0);
 		if (sides > 1)return 0; // go away, you're no longer needed here
 
-		boolean posXposZ = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ+1) == tempBlock,
-		negXposZ = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ+1) == tempBlock,
-		posXnegZ = world.getBlock(bulb.posX+1,bulb.posY,bulb.posZ-1) == tempBlock,
-		negXnegZ = world.getBlock(bulb.posX-1,bulb.posY,bulb.posZ-1) == tempBlock;
+		boolean posXposZ = getBlock(bulb.posX+1,bulb.posY,bulb.posZ+1) == tempBlock,
+				negXposZ = getBlock(bulb.posX-1,bulb.posY,bulb.posZ+1) == tempBlock,
+				posXnegZ = getBlock(bulb.posX+1,bulb.posY,bulb.posZ-1) == tempBlock,
+				negXnegZ = getBlock(bulb.posX-1,bulb.posY,bulb.posZ-1) == tempBlock;
 
 		int corners = (posXposZ ? 1 : 0)+(negXposZ ? 1 : 0)+(posXnegZ ? 1 : 0)+(negXnegZ ? 1 : 0);
 
@@ -245,7 +262,7 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 
 		if (sides == 0 && corners == 2){
 			for(int dir = 0, meta; dir < 4; dir++){
-				meta = world.getBlockMetadata(bulb.posX+Direction.offsetX[dir],bulb.posY-1,bulb.posZ+Direction.offsetZ[dir]);
+				meta = getMetadata(bulb.posX+Direction.offsetX[dir],bulb.posY-1,bulb.posZ+Direction.offsetZ[dir]);
 				if (meta != 0)return meta; // use meta of cap above and to the side - either 2 side cap or full cap
 			}
 

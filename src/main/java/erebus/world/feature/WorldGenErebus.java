@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public abstract class WorldGenErebus extends WorldGenerator{
-	protected World world;
+	private World world;
 	protected Random rand;
 	
 	@Override
@@ -50,6 +50,14 @@ public abstract class WorldGenErebus extends WorldGenerator{
 		}
 	}
 	
+	protected final void setBlockPillar(int x, int z, int y1, int y2, Block block){
+		setBlockPillar(x,z,y1,y2,block,0);
+	}
+	
+	protected final void setBlockPillar(int x, int z, int y1, int y2, Block block, int metadata){
+		for(int yy = y1; yy <= y2; yy++)world.setBlock(x,yy,z,block,metadata,2);
+	}
+	
 	protected final void setBlockCube(int x1, int y1, int z1, int x2, int y2, int z2, Block block){
 		setBlockCube(x1,y1,z1,x2,y2,z2,block,0);
 	}
@@ -62,6 +70,14 @@ public abstract class WorldGenErebus extends WorldGenerator{
 				}
 			}
 		}
+	}
+	
+	protected final boolean setMetadata(int x, int y, int z, int metadata){
+		return world.setBlockMetadataWithNotify(x,y,z,metadata,2);
+	}
+	
+	protected final boolean setMetadata(int x, int y, int z, int metadata, boolean update){
+		return world.setBlockMetadataWithNotify(x,y,z,metadata,update ? 3 : 2);
 	}
 	
 	/*
