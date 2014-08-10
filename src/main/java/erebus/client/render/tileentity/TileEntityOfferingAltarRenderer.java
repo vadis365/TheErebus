@@ -39,6 +39,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer {
 	}
 
     public void renderItem(TileEntityOfferingAltar tile) {
+        if (!tile.getWorldObj().isRemote) tile.getWorldObj().markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
         for (int i = 0; i < tile.items.length; i++) {
             EntityItem item = tile.getEntityItem(i);
             if (item != null) {
