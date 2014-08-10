@@ -39,7 +39,11 @@ public class BlockBambooTorch extends Block {
 	public IIcon getIcon(int side, int meta) {
 		if (meta < 0 || meta >= icons.length)
 			return null;
-		return icons[meta];
+		if (meta == 0)
+			return side > 1 ? icons [0] : icons[3];
+		if (meta == 1)
+			return side > 1 ? icons [1] : icons[2];
+		return null; 
 	}
 
 	@Override
