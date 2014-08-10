@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
@@ -27,7 +28,8 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 	private final ModelGlowingJar glowingJar = new ModelGlowingJar();
 	private final RenderItem renderItem;
 	private final RenderBlocks blockRenderer = new RenderBlocks();
-    private static final ResourceLocation GLOWING_JAR = new ResourceLocation("erebus:textures/special/tiles/glowingJar.png");
+	private static final ResourceLocation GLOWING_JAR = new ResourceLocation("erebus:textures/special/tiles/glowingJar.png");
+	public static TileEntityGlowingJarRenderer instance;
 
 	public TileEntityGlowingJarRenderer() {
 		renderItem = new RenderItem() {
@@ -40,33 +42,50 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 	}
 
 	@Override
+	public void func_147497_a(TileEntityRendererDispatcher renderer) {
+		super.func_147497_a(renderer);
+		instance = this;
+	}
+
+	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
-		if (tile instanceof TileEntityJarOHoney) {
-			int amount = ((TileEntityJarOHoney) tile).tank.getFluidAmount();
-			int capacity = ((TileEntityJarOHoney) tile).tank.getCapacity();
-			float size = 0.70F / capacity * amount;
-			if (amount >= 100) {
-				GL11.glPushMatrix();
-				GL11.glEnable(3042);
-				GL11.glBlendFunc(770, 771);
-				GL11.glTranslated((float) x + 0.5F, (float) (y + 0.030F + size * 0.5F), (float) z + 0.5F);
-				GL11.glScalef(0.55F, -size, -0.55F);
-				bindTexture(TextureMap.locationBlocksTexture);
-				blockRenderer.renderBlockAsItem(ModBlocks.blockAmber, 0, 1.0F);
-				GL11.glDisable(3042);
-				GL11.glPopMatrix();
-			}
-			renderNameTag(((TileEntityJarOHoney) tile).getOwnerName(), x, y, z);
-		} else if (tile instanceof TileEntityGlowingJar) {
-			EntityItem ghostItem = ((TileEntityGlowingJar)tile).getGhostItem();
+		if (tile instanceof TileEntityJarOHoney)
+			renderJarOHoney((TileEntityJarOHoney) tile, x, y, z);
+		else if (tile instanceof TileEntityGlowingJar)
+			renderGlowJar(x, y, z, ((TileEntityGlowingJar) tile).getGhostItem());
+
+		renderJar(x, y, z);
+	}
+
+	public void renderJarOHoney(TileEntityJarOHoney tile, double x, double y, double z) {
+		int amount = tile.tank.getFluidAmount();
+		int capacity = tile.tank.getCapacity();
+		float size = 0.70F / capacity * amount;
+		if (amount >= 100) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
-			GL11.glScalef(1.2F, 1.2F, 1.2F);
-			renderItem.doRender(ghostItem, 0, 0, 0, 0, 0);
-			GL11.glRotatef(90, 0, 1, 0);
-			renderItem.doRender(ghostItem, 0, 0, 0, 0, 0);
+			GL11.glEnable(3042);
+			GL11.glBlendFunc(770, 771);
+			GL11.glTranslated((float) x + 0.5F, (float) (y + 0.030F + size * 0.5F), (float) z + 0.5F);
+			GL11.glScalef(0.55F, -size, -0.55F);
+			bindTexture(TextureMap.locationBlocksTexture);
+			blockRenderer.renderBlockAsItem(ModBlocks.blockAmber, 0, 1.0F);
+			GL11.glDisable(3042);
 			GL11.glPopMatrix();
 		}
+		renderNameTag(tile.getOwnerName(), x, y, z);
+	}
+
+	public void renderGlowJar(double x, double y, double z, EntityItem ghostItem) {
+		GL11.glPushMatrix();
+		GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
+		GL11.glScalef(1.2F, 1.2F, 1.2F);
+		renderItem.doRender(ghostItem, 0, 0, 0, 0, 0);
+		GL11.glRotatef(90, 0, 1, 0);
+		renderItem.doRender(ghostItem, 0, 0, 0, 0, 0);
+		GL11.glPopMatrix();
+	}
+
+	public void renderJar(double x, double y, double z) {
 		bindTexture(GLOWING_JAR);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
