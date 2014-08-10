@@ -4,6 +4,7 @@ build/
 eclipse/
 minecraft/
 gradle/
+src/api/
 .settings/
 .gradle/
 libs/

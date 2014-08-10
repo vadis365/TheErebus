@@ -62,6 +62,6 @@ public class TileEntityOfferingAltar extends TileEntity implements IExtendedEnti
 
     @Override
     public void init(Entity entity, World world) {
-
+        stack = new ItemStack[3];
     }
 }
