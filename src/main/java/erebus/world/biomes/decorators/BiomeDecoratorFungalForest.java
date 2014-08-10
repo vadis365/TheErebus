@@ -42,7 +42,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 
 			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
-					if (rand.nextInt(8)== 0 && world.isAirBlock(xx,yy+1,zz)){
+					if (rand.nextInt(8) == 0 && world.isAirBlock(xx,yy+1,zz)){
 						world.setBlock(xx,yy,zz,Blocks.double_plant,3,2);
 						world.setBlock(xx,yy+1,zz,Blocks.double_plant,10,2);
 					}

@@ -46,15 +46,15 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 		Block mushroom = mushroomType.block;
 
 		// TODO tmp
-		mushroomType = MushroomType.KAIZERS_FINGERS;
+		mushroomType = MushroomType.DUTCH_CAP;
 		mushroom = mushroomType.block;
 		//
 
 		switch(mushroomType){
 			case BULB_CAPPED: genBulbCapped(world,rand,x,y,z,mushroom); break;
 			case KAIZERS_FINGERS: genKaizersFingers(world,rand,x,y,z,mushroom); break;
-			default:
-				break;
+			case DUTCH_CAP : genDutchCap(world,rand,x,y,z,mushroom); break;
+			default: break;
 		}
 
 		for(ChunkCoordinates bulb:bulbs)world.setBlock(bulb.posX,bulb.posY,bulb.posZ,tempBlock);
@@ -145,6 +145,66 @@ public class WorldGenGiantMushrooms extends WorldGenerator{
 		}
 	}
 
+	/*
+	 * MUSHROOM TYPE - KAIZERS FINGERS
+	 */
+
+	private void genDutchCap(World world, Random rand, int x, int y, int z, Block mushroom){
+		int height = 9+rand.nextInt(8);
+		
+		for(int a = 0; a < 2; a++){
+			for(int b = 0; b < 2; b++){
+				for(int py = 0; py < 2; py++){
+					world.setBlock(x-1+3*a,y+py,z+b,mushroom,stalkMeta,2);
+					world.setBlock(x+b,y+py,z-1+3*a,mushroom,stalkMeta,2);
+				}
+				
+				world.setBlock(x-1+3*a,y,z-1+3*b,mushroom,stalkMeta,2);
+				world.setBlock(x-2+5*a,y,z+b,mushroom,stalkMeta,2);
+				world.setBlock(x+b,y,z-2+5*a,mushroom,stalkMeta,2);
+			}
+		}
+		
+		for(int py = 0; py <= height; py++){
+			world.setBlock(x,y+py,z,mushroom,stalkMeta,2);
+			world.setBlock(x+1,y+py,z,mushroom,stalkMeta,2);
+			world.setBlock(x,y+py,z+1,mushroom,stalkMeta,2);
+			world.setBlock(x+1,y+py,z+1,mushroom,stalkMeta,2);
+			
+			if (py > 3 && rand.nextInt(3) == 0){
+				int branchAddX = 0, branchAddZ = 0;
+				
+				for(int branchAttempt = 0; branchAttempt < 12 && branchAddX == 0 && branchAddZ == 0; branchAttempt++){
+					branchAddX = rand.nextInt(3) != 0 ? 0 : rand.nextInt(3)-1;
+					branchAddZ = rand.nextInt(3) != 0 ? 0 : rand.nextInt(3)-1;
+				}
+				
+				if (branchAddX == 0 && branchAddZ == 0)continue;
+				
+				boolean canGenerateBranch = true;
+				
+				for(int testY = -2; testY <= 0; testY++){
+					if (!world.isAirBlock(x+branchAddX*2,y+py+testY,z+branchAddZ*2) || !world.isAirBlock(x+branchAddX*2+1,y+py+testY,z+branchAddZ*2) ||
+						!world.isAirBlock(x+branchAddX*2,y+py+testY,z+branchAddZ*2+1) || !world.isAirBlock(x+branchAddX*2+1,y+py+testY,z+branchAddZ*2+1)){
+						canGenerateBranch = false;
+						break;
+					}
+				}
+				
+				if (!canGenerateBranch)continue;
+				
+				int branchSize = 1+rand.nextInt(2+rand.nextInt(3));
+				
+				for(int branch = 1; branch <= branchSize; branch++){
+					world.setBlock(x+branchAddX*branch,y+py-1+branch,z+branchAddZ*branch,mushroom,stalkMeta,2);
+					world.setBlock(x+branchAddX*branch+1,y+py-1+branch,z+branchAddZ*branch,mushroom,stalkMeta,2);
+					world.setBlock(x+branchAddX*branch,y+py-1+branch,z+branchAddZ*branch+1,mushroom,stalkMeta,2);
+					world.setBlock(x+branchAddX*branch+1,y+py-1+branch,z+branchAddZ*branch+1,mushroom,stalkMeta,2);
+				}
+			}
+		}
+	}
+	
 	/*
 	 * METADATA UTILITY
 	 */
