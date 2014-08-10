@@ -28,6 +28,10 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 	private final RenderItem renderItem;
 	private final ItemStack glowThingy = new ItemStack(ModItems.erebusMaterials, 1, 13);
 	private final RenderBlocks blockRenderer = new RenderBlocks();
+    private final ResourceLocation textures = new ResourceLocation("erebus:textures/blocks/blockAmber.png");
+    private final ResourceLocation textures2 = new ResourceLocation("erebus:textures/special/tiles/glowingJar.png");
+    private final FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;;
+    private EntityItem ghostEntityItem;
 
 	public TileEntityGlowingJarRenderer() {
 		renderItem = new RenderItem() {
@@ -41,6 +45,7 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
+        if (ghostEntityItem == null) ghostEntityItem = new EntityItem(tile.getWorldObj());
 		if (tile instanceof TileEntityJarOHoney) {
 			int amount = ((TileEntityJarOHoney) tile).tank.getFluidAmount();
 			int capacity = ((TileEntityJarOHoney) tile).tank.getCapacity();
@@ -51,14 +56,13 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 				GL11.glBlendFunc(770, 771);
 				GL11.glTranslated((float) x + 0.5F, (float) (y + 0.030F + size * 0.5F), (float) z + 0.5F);
 				GL11.glScalef(0.55F, -size, -0.55F);
-				bindTexture(new ResourceLocation("erebus:textures/blocks/blockAmber.png"));
+				bindTexture(textures);
 				blockRenderer.renderBlockAsItem(ModBlocks.blockAmber, 0, 1.0F);
 				GL11.glDisable(3042);
 				GL11.glPopMatrix();
 			}
 			renderNameTag(((TileEntityJarOHoney) tile).getOwnerName(), x, y, z);
 		} else {
-			EntityItem ghostEntityItem = new EntityItem(tile.getWorldObj());
 			ghostEntityItem.hoverStart = 0.0F;
 			ghostEntityItem.setEntityItemStack(glowThingy);
 			GL11.glPushMatrix();
@@ -69,7 +73,7 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 			renderItem.doRender(ghostEntityItem, 0, 0, 0, 0, 0);
 			GL11.glPopMatrix();
 		}
-		bindTexture(new ResourceLocation("erebus:textures/special/tiles/glowingJar.png"));
+		bindTexture(textures2);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
 		GL11.glScalef(0.7F, -1F, -0.7F);
@@ -80,7 +84,6 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 	}
 
 	private void renderNameTag(String name, double x, double y, double z) {
-		FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
 		float scale = 0.02666667F;
 		float height = 0.8F;
 
