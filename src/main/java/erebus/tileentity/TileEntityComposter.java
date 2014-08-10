@@ -130,7 +130,7 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 			if (inventory[2] == null)
 				inventory[2] = itemstack.copy();
 			else if (inventory[2].getItem() == itemstack.getItem())
-				inventory[2].stackSize += itemstack.stackSize; // Forge BugFix: Results may have multiple items
+				inventory[2].stackSize += itemstack.stackSize; // Forge BugFix: Results may have multiple stack
 
 			--inventory[0].stackSize;
 

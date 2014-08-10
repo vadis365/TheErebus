@@ -60,7 +60,7 @@ public class TileEntityUmberFurnace extends TileEntityBasicInventory implements 
 
 		cookTime = COOK_TIME_BASE - (int) (COOK_TIME_BASE * 0.8F * ((float) tank.getFluidAmount() / (float) tank.getCapacity()));
 
-		// Smelting items
+		// Smelting stack
 		// Stolen from vanilla furnace.
 		boolean flag = furnaceBurnTime > 0;
 		boolean flag1 = false;

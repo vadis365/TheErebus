@@ -215,7 +215,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 
-		// Don't pick up items unless the filter is defined and the inventory is not full
+		// Don't pick up stack unless the filter is defined and the inventory is not full
 		if (canPickupItems && !isFilterSlotEmpty() && (getAntInvSlotStack() == null || getAntInvSlotStack().stackSize < getAntInvSlotStack().getMaxStackSize())) {
 			EntityItem entityitem = getClosestEntityItem(this, 16.0D, getFilterSlotStack());
 			if (entityitem != null) {

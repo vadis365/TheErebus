@@ -34,7 +34,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/items/wandOfAnimation.png"));
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/stack/wandOfAnimation.png"));
 		switch (type) {
 			case ENTITY:
 				renderWand(0.0F, 1.0F, 0.0F, 0.75D, (WandOfAnimation) item.getItem());
