@@ -38,19 +38,23 @@ public class TileEntityOfferingAltar extends TileEntity {
     @SideOnly(Side.CLIENT)
     public EntityItem getEntityItem(int i) {
         if (stack[i] == null) {
+            if (!worldObj.isRemote) worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
             items[i] = null;
             return null;
         }
         else {
             if (items[i] == null) {
+                if (!worldObj.isRemote) worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
                 items[i] = new EntityItem(worldObj, 0d, 0d, 0d, stack[i]);
                 return items[i];
             }
             if (items[i].getEntityItem() != stack[i]) {
+                if (!worldObj.isRemote) worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
                 items[i] = new EntityItem(worldObj, 0d, 0d, 0d, stack[i]);
                 return items[i];
             }
             if (items[i] != null && items[i].getEntityItem() == stack[i]) {
+                if (!worldObj.isRemote) worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
                 return items[i];
             }
         }
