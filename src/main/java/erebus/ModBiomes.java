@@ -45,15 +45,33 @@ public class ModBiomes {
 	public static int fieldsSubForestID;
 
 	public static void init() {
+		for(int id:new int[]{
+			undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, betweenlandsID,
+			jungleSubLakeID, jungleSubAsperGroveID, desertSubCharredForestID, savannahSubRockyWastelandID, savannahSubAsperGroveID, savannahSubSteppeID, fieldsSubForestID
+		}){
+			if (id >= 128)throw new RuntimeException("Erebus biome IDs cannot be higher than 127!");
+		}
+		
+		// CREATE BIOMES
+		
 		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
 		volcanicDesert = new BiomeVolcanicDesert(volcanicDesertID);
 		subterraneanSavannah = new BiomeSubterraneanSavannah(subterraneanSavannahID);
 		elysianFields = new BiomeElysianFields(elysianFieldsID);
 		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
 		fungalForest = new BiomeFungalForest(fungalForestID);
-		//betweenlands = new BiomeBetweenlands(betweenlandsID);
 
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);
-		//jungleSubLake = new BiomeLake(jungleSubLakeID);
+		
+		// MUTATIONS
+		
+		undergroundJungle.createMutation();
+		volcanicDesert.createMutation();
+		subterraneanSavannah.createMutation();
+		elysianFields.createMutation();
+		ulteriorOutback.createMutation();
+		fungalForest.createMutation();
+		
+		fieldsSubForest.createMutation();
 	}
 }
