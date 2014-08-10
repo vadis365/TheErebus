@@ -1,5 +1,8 @@
 package erebus.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,10 +13,9 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
-
 public class TileEntityOfferingAltar extends TileEntity {
     public ItemStack[] stack;
+    public EntityItem[] items = new EntityItem[3];
 
     public TileEntityOfferingAltar() {
         stack = new ItemStack[3];
@@ -31,6 +33,28 @@ public class TileEntityOfferingAltar extends TileEntity {
             }
         }
         return false;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public EntityItem getEntityItem(int i) {
+        if (stack[i] == null) {
+            items[i] = null;
+            return null;
+        }
+        else {
+            if (items[i] == null) {
+                items[i] = new EntityItem(worldObj, 0d, 0d, 0d, stack[i]);
+                return items[i];
+            }
+            if (items[i].getEntityItem() != stack[i]) {
+                items[i] = new EntityItem(worldObj, 0d, 0d, 0d, stack[i]);
+                return items[i];
+            }
+            if (items[i] != null && items[i].getEntityItem() == stack[i]) {
+                return items[i];
+            }
+        }
+        return null;
     }
 
     public boolean addItem(Item item) {
@@ -96,7 +120,7 @@ public class TileEntityOfferingAltar extends TileEntity {
 
     @Override
     public void updateEntity() {
-        if (!worldObj.isRemote) System.out.println(Arrays.asList(stack));
+
     }
 
     @Override
