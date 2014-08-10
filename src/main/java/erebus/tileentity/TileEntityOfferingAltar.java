@@ -1,16 +1,28 @@
 package erebus.tileentity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class TileEntityOfferingAltar extends TileEntity implements IExtendedEntityProperties {
+import java.util.Arrays;
+
+public class TileEntityOfferingAltar extends TileEntity {
     public ItemStack[] stack;
+
+    public TileEntityOfferingAltar() {
+        stack = new ItemStack[3];
+    }
+
+    public static TileEntityOfferingAltar instance(World world, int x, int y, int z) {
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        return tileEntity instanceof TileEntityOfferingAltar ? (TileEntityOfferingAltar) tileEntity : null;
+    }
 
     public boolean canAddItem() {
         for (ItemStack item : stack) {
@@ -33,8 +45,20 @@ public class TileEntityOfferingAltar extends TileEntity implements IExtendedEnti
         return false;
     }
 
+    public ItemStack getLatestItem() {
+        int latest = 0;
+        ItemStack item;
+        for (int i = 0; i < stack.length; i++) {
+            if (stack[i] != null) latest = i;
+        }
+        item = stack[latest];
+        stack[latest] = null;
+        return item;
+    }
+
     @Override
-    public void saveNBTData(NBTTagCompound tag) {
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
         NBTTagList list = new NBTTagList();
         for (int i = 0; i < stack.length; ++i) {
             if (stack[i] != null) {
@@ -48,7 +72,8 @@ public class TileEntityOfferingAltar extends TileEntity implements IExtendedEnti
     }
 
     @Override
-    public void loadNBTData(NBTTagCompound tag) {
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
         NBTTagList list = tag.getTagList("items", 10);
         for (int i = 0; i < list.tagCount(); ++i) {
             NBTTagCompound compound = list.getCompoundTagAt(i);
@@ -61,7 +86,19 @@ public class TileEntityOfferingAltar extends TileEntity implements IExtendedEnti
     }
 
     @Override
-    public void init(Entity entity, World world) {
-        stack = new ItemStack[3];
+    public void updateEntity() {
+        if (!worldObj.isRemote) System.out.println(Arrays.asList(stack));
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound tag = new NBTTagCompound();
+        writeToNBT(tag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        readFromNBT(packet.func_148857_g());
     }
 }
