@@ -32,8 +32,8 @@ public class ConfigHandler {
 		ModBiomes.subterraneanSavannahID = config.get("Biomes", "Biome ID of Subterranean Savannah", 102).getInt(102);
 		ModBiomes.elysianFieldsID = config.get("Biomes", "Biome ID of Elysian Fields", 103).getInt(103);
 		ModBiomes.ulteriorOutbackID = config.get("Biomes", "Biome ID of Ulterior Outback", 104).getInt(104);
-		/*ModBiomes.fungalForestID = config.get("Biomes", "Biome ID of Fungal Forest", 156).getInt(156);
-		ModBiomes.betweenlandsID = config.get("Biomes", "Biome ID of Betweenlands", 157).getInt(157);*/
+		ModBiomes.fungalForestID = config.get("Biomes", "Biome ID of Fungal Forest", 105).getInt(105);
+		/*ModBiomes.betweenlandsID = config.get("Biomes", "Biome ID of Betweenlands", 157).getInt(157);*/
 
 		ModBiomes.fieldsSubForestID = config.get("Biomes", "Biome ID of Fields - Forest", 127).getInt(127);
 		/*ModBiomes.jungleSubLakeID = config.get("Biomes", "Biome ID of Underground Jungle - Lake", 161).getInt(161);
