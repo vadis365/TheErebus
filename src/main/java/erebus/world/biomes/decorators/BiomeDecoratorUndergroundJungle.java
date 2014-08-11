@@ -81,9 +81,11 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 			for(attempt = 0; attempt < 4; attempt++)
 				if (genAmberGround.generate(world,rand,x+offsetXZ(),10+rand.nextInt(40),z+offsetXZ()))break;
 
-		if (rand.nextInt(37) == 0)
-			for(attempt = 0; attempt < 5; attempt++)
+		if (((x>>4) % 5 == 0 && (z>>4) % 5 == 0 && rand.nextInt(6) == 0) || rand.nextInt(60) == 0){
+			for(attempt = 0; attempt < 5; attempt++){
 				if (genWaspDungeon.generate(world,rand,x+offsetXZ(),127,z+offsetXZ()))break;
+			}
+		}
 
 		for(attempt = 0; attempt < 10; attempt++){
 			xx = x+offsetXZ();
@@ -121,7 +123,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 				else if (r <= 28) treeGen = genTreeJungleTall;
 				else treeGen = genTreeEucalyptus;
 
-				if (treeGen!=null) treeGen.generate(world,rand,xx,yy,zz);
+				if (treeGen != null) treeGen.generate(world,rand,xx,yy,zz);
 			}
 		}
 
