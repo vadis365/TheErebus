@@ -65,7 +65,7 @@ import erebus.item.block.ItemBlockDoorAmber;
 public class ModItems {
 
 	// BASIC MATERIALS
-	public static final Item portalActivator = new PortalActivator().setUnlocalizedName("portalActivator").setTextureName("erebus:portalActivator");
+	public static final Item portalActivator = new PortalActivator().setUnlocalizedName("portalActivator");
 	public static final Item erebusMaterials = new ErebusMaterial().setUnlocalizedName("erebusMaterials");
 	public static final Item erebusSpecialItem = new ErebusSpecial().setUnlocalizedName("erebusSpecialItem");
 	public static final Item erebusFood = new ErebusFood().setUnlocalizedName("erebusFood");
