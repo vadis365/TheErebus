@@ -19,7 +19,7 @@ public class ConfigGUI extends GuiConfig {
 	private static List<IConfigElement> getElements() {
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
 		for (String category : ConfigHandler.INSTANCE.usedCategories)
-			list.add(new ConfigElement(ConfigHandler.INSTANCE.config.getCategory(category)));
+			list.add(new ConfigElement(ConfigHandler.INSTANCE.config.getCategory(category.toLowerCase())));
 		return list;
 	}
 }
