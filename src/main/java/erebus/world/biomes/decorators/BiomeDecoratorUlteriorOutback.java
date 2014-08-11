@@ -29,7 +29,8 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 
 			for(yy = 20; yy < 100; yy += rand.nextInt(2)+1)
 				if (world.getBlock(xx,yy,zz) == Blocks.sand && world.isAirBlock(xx,yy+1,zz)){
-					world.setBlock(xx,yy,zz,Blocks.grass); // TODO 1.7 - add ungrowing dirt and red sand
+					if (rand.nextInt(3) == 0)world.setBlock(xx,yy,zz,Blocks.grass);
+					else world.setBlock(xx,yy,zz,Blocks.dirt,1,2);
 					break;
 				}
 		}

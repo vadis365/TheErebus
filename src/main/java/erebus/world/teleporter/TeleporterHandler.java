@@ -93,7 +93,7 @@ public final class TeleporterHandler {
 					return;
 				}
 
-				waitingPlayers.put(player.getGameProfile().getId(), (byte) 20); // if there are any issues, we can either increase the number or rewrite the "is player in portal?" checking part
+				waitingPlayers.put(player.getGameProfile().getId(), (byte) 40); // if there are any issues, we can either increase the number or rewrite the "is player in portal?" checking part
 				checkWaitingPlayers = true;
 
 				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);

@@ -2,7 +2,6 @@ package erebus.world;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -134,15 +133,16 @@ public class ChunkProviderErebus implements IChunkProvider {
 	public Chunk provideChunk(int x, int z) {
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		Block[] blocks = new Block[32768];
+		byte[] metadata = new byte[32768];
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
 
 		generateTerrain(x, z, blocks);
-		replaceBlocksForBiome(x, z, blocks, biomesForGeneration);
+		replaceBlocksForBiome(x, z, blocks, metadata, biomesForGeneration);
 
 		caveGenerator.func_151539_a(this, worldObj, x, z, blocks);
 		ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
 
-		Chunk chunk = new Chunk(worldObj, blocks, x, z);
+		Chunk chunk = new Chunk(worldObj, blocks, metadata, x, z);
 		byte[] biomeArrayReference = chunk.getBiomeArray();
 
 		for (int a = 0; a < biomeArrayReference.length; ++a)
@@ -257,8 +257,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 		return noise;
 	}
 
-	public void replaceBlocksForBiome(int x, int z, Block[] blocks, BiomeGenBase[] biomes) {
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, blocks, new byte[256], biomes, worldObj);
+	public void replaceBlocksForBiome(int x, int z, Block[] blocks, byte[] metadata, BiomeGenBase[] biomes) {
+		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, blocks, metadata, biomes, worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY)
 			return;
@@ -268,8 +268,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
 			for (int zInChunk = 0; zInChunk < 16; ++zInChunk) {
-				BiomeGenBase biome = biomes[zInChunk + xInChunk * 16];
-				float temperature = biome.getFloatTemperature(0, 0, 0); // TODO make sure this doesn't break
+				BiomeBaseErebus biome = (BiomeBaseErebus)biomes[zInChunk + xInChunk * 16];
+				float temperature = biome.getFloatTemperature(0, 0, 0);
 				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
 				Block topBlock = biome.topBlock;
@@ -303,19 +303,19 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 								var13 = var12;
 
-								if (yInChunk >= var5 - 1)
+								if (yInChunk >= var5 - 1){
 									blocks[index] = topBlock;
-								else
+									if (topBlock == biome.topBlock)metadata[index] = biome.topBlockMeta;
+								}
+								else{
 									blocks[index] = fillerBlock;
+									if (fillerBlock == biome.fillerBlock)metadata[index] = biome.fillerBlockMeta;
+								}
 							}
 						} else if (var13 > 0) {
 							--var13;
 							blocks[index] = fillerBlock;
-
-							if (var13 == 0 && fillerBlock == Blocks.sand) {
-								var13 = rand.nextInt(4);
-								fillerBlock = Blocks.sandstone;
-							}
+							if (fillerBlock == biome.fillerBlock)metadata[index] = biome.fillerBlockMeta;
 						}
 					}
 				}

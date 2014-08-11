@@ -21,6 +21,9 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	private short biomeWeight;
 	private int grassColor,foliageColor;
 	private short[] fogColorRGB = new short[]{ 255,255,255 };
+	
+	public byte topBlockMeta;
+	public byte fillerBlockMeta;
 
 	public BiomeBaseErebus(int biomeID, BiomeDecoratorBaseErebus decorator){
 		super(biomeID);
@@ -32,6 +35,9 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 		spawnableCaveCreatureList.clear();
+		
+		topBlockMeta = 0;
+		fillerBlockMeta = 0;
 	}
 
 	protected final BiomeBaseErebus setColors(int grassAndFoliage){

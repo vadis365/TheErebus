@@ -2,7 +2,6 @@ package erebus.block.plants;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,7 +26,6 @@ import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.ErebusMaterial.DATA;
 import erebus.item.block.ItemBlockErebusPlantSmall;
-import erebus.world.feature.plant.WorldGenBigMushroomErebusMany;
 
 public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 
@@ -241,13 +239,14 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	}
 
 	public void growPlants(World world, int x, int y, int z, Random rand) {
-		int meta = world.getBlockMetadata(x, y, z);
+		// TODO
+		/*int meta = world.getBlockMetadata(x, y, z);
 		WorldGenerator worldGen = new WorldGenBigMushroomErebusMany(meta);
 		if (meta >= 0 && meta <= 4)
 			worldGen.generate(world, rand, x, y, z);
 		world.setBlockToAir(x, y, z);
 
 		if (!worldGen.generate(world, rand, x, y, z))
-			world.setBlock(x, y, z, this, meta, 3);
+			world.setBlock(x, y, z, this, meta, 3);*/
 	}
 }

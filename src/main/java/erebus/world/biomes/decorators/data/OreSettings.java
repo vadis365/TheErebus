@@ -118,6 +118,7 @@ public final class OreSettings {
 		LAPIS(BlockErebusOre.dataLapis),
 		EMERALD(BlockErebusOre.dataEmerald),
 		DIAMOND(BlockErebusOre.dataDiamond),
+		DIAMOND_ENCRUSTED(BlockErebusOre.dataEncrustedDiamond),
 		JADE(BlockErebusOre.dataJade),
 		PETRIFIED_WOOD(BlockErebusOre.dataPetrifiedWood),
 		FOSSIL(ModBlocks.oreFossil, 3),
