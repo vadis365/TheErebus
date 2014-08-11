@@ -44,7 +44,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 				genRottenAcacia.generate(world,rand,xx,yy,zz);
 		}
 
-		if (rand.nextBoolean())
+		if (rand.nextBoolean()){
 			for(attempt = 0; attempt < 20; attempt++){
 				xx = x+offsetXZ();
 				yy = 20+rand.nextInt(80);
@@ -55,6 +55,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 					if (rand.nextBoolean())break;
 				}
 			}
+		}
 
 		for(attempt = 0; attempt < 420; attempt++){
 			xx = x+offsetXZ();
@@ -71,7 +72,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			xx = x+offsetXZ();
 			zz = z+offsetXZ();
 
-			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
+			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
 				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
 					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy+1,zz)){
 						world.setBlock(xx,yy,zz,Blocks.double_plant,2,2);
@@ -82,6 +83,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 
 					break;
 				}
+			}
 		}
 
 		if (rand.nextBoolean())
