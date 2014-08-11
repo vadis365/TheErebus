@@ -86,7 +86,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			}
 		}
 
-		if (rand.nextBoolean())
+		if (rand.nextBoolean()){
 			for(attempt = 0; attempt < 180; attempt++){
 				xx = x+offsetXZ();
 				yy = 20+rand.nextInt(80);
@@ -95,6 +95,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 				if (checkSurface(SurfaceType.GRASS,xx,yy,zz))
 					if (genTreeEucalyptus.generate(world,rand,xx,yy,zz) && rand.nextBoolean()) break;
 			}
+		}
 	}
 
 	@Override
@@ -111,9 +112,9 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 
 	@Override
 	public void generateFeature(FeatureType featureType){
-		if (featureType == FeatureType.REDGEM)
-			for(attempt = 0; attempt < 8; attempt++)
-				genRedGem.generate(world,rand,x+offsetXZ(),64+rand.nextInt(60),z+offsetXZ());
+		if (featureType == FeatureType.REDGEM){
+			for(attempt = 0; attempt < 8; attempt++)genRedGem.generate(world,rand,x+offsetXZ(),64+rand.nextInt(60),z+offsetXZ());
+		}
 		else super.generateFeature(featureType);
 	}
 }
