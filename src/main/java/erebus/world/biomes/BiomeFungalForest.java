@@ -15,7 +15,7 @@ public class BiomeFungalForest extends BiomeBaseErebus {
 		setBiomeName("Fungal Forest");
 		setColors(0x4E8833);
 		setTemperatureRainfall(0.9F, 0.95F);
-		setWeight(12);
+		setWeight(120);
 
 		//spawnableCaveCreatureList.add(new SpawnEntry(EntitySporeling.class,1,1,1));
 	}

@@ -38,37 +38,38 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 	}
 
 	@Override
-	public boolean generate(int x, int y, int z){
+	protected boolean generate(int x, int y, int z){
 		bulbs.clear();
 		Block mushroom = mushroomType.block;
-
-		// TODO tmp
-		mushroomType = MushroomType.GRANDMAS_SHOES;
-		mushroom = mushroomType.block;
-		//
+		boolean res = false;
 
 		switch(mushroomType){
-			case BULB_CAPPED: genBulbCapped(x,y,z,mushroom); break;
-			case KAIZERS_FINGERS: genKaizersFingers(x,y,z,mushroom); break;
-			case DUTCH_CAP : genDutchCap(x,y,z,mushroom); break;
-			case GRANDMAS_SHOES: genGrandmasShoes(x,y,z,mushroom); break;
+			case BULB_CAPPED: res = genBulbCapped(x,y,z,mushroom); break;
+			case KAIZERS_FINGERS: res = genKaizersFingers(x,y,z,mushroom); break;
+			case DUTCH_CAP : res = genDutchCap(x,y,z,mushroom); break;
+			case GRANDMAS_SHOES: res = genGrandmasShoes(x,y,z,mushroom); break;
 			default: break;
 		}
 
-		generateBulbs(x,z,mushroom);
-
-		return true;
+		if (res){
+			generateBulbs(x,z,mushroom);
+			return true;
+		}
+		else return false;
 	}
 
 	/*
 	 * MUSHROOM TYPE - BULB CAPPED
 	 */
 
-	private void genBulbCapped(int x, int y, int z, Block mushroom){
+	private boolean genBulbCapped(int x, int y, int z, Block mushroom){
 		int stalkHeight = 3+rand.nextInt(3+rand.nextInt(2));
 		int sideHeight = 1+rand.nextInt(stalkHeight > 3 ? 3 : 2);
 		
+		if (!checkAirCube(x,y,z,x,y+stalkHeight-sideHeight,z) || !checkAirCube(x-2,y+stalkHeight-sideHeight+1,z-2,x+2,y+stalkHeight+1,z+2))return false;
+		
 		setBlockPillar(x,z,y,y+stalkHeight,mushroom,stalkMeta);
+		y += stalkHeight+1;
 		
 		for(int px = -1; px <= 1; px++){
 			for(int pz = -1; pz <= 1; pz++){
@@ -84,14 +85,18 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 				bulbs.add(new ChunkCoordinates(x+off,y-py,z-2));
 			}
 		}
+		
+		return true;
 	}
 
 	/*
 	 * MUSHROOM TYPE - KAIZERS FINGERS
 	 */
 
-	private void genKaizersFingers(int x, int y, int z, Block mushroom){
+	private boolean genKaizersFingers(int x, int y, int z, Block mushroom){
 		int mainShroomHeight = 4+rand.nextInt(4);
+		
+		if (!checkAirCube(x-1,y+3,z-1,x+1,y+mainShroomHeight+1,z+1) || !checkAirCube(x-4,y,z-4,x+4,y+2,z+4) || !checkSolidCube(x-4,y-1,z-4,x+4,y-1,z+4))return false;
 
 		for(int py = 0, sidesPlaced = 0; py <= mainShroomHeight; py++){
 			setBlock(x,y+py,z,mushroom,stalkMeta);
@@ -141,14 +146,18 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 				coords1.posZ = zz;
 			}
 		}
+		
+		return true;
 	}
 
 	/*
 	 * MUSHROOM TYPE - DUTCH CAP
 	 */
 
-	private void genDutchCap(int x, int y, int z, Block mushroom){
+	private boolean genDutchCap(int x, int y, int z, Block mushroom){
 		int height = 9+rand.nextInt(8);
+		
+		if (!checkAirCube(x-2,y,z-2,x+3,y+4,z+3) || !checkAirCube(x-3,y+5,z-3,x+5,y+height+1,z+5) || !checkAirCube(x-4,y+height+2,z-4,x+7,y+height+4,z+7) || !checkSolidCube(x-2,y-1,z-2,x+3,y-1,z+3))return false;
 		
 		for(int a = 0; a < 2; a++){
 			for(int b = 0; b < 2; b++){
@@ -214,14 +223,19 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 				}
 			}
 		}
+		
+		return true;
 	}
 
 	/*
 	 * MUSHROOM TYPE - GRANDMA'S SHOES
 	 */
 
-	private void genGrandmasShoes(int x, int y, int z, Block mushroom){
-		int height = 5+rand.nextInt(8), splits = rand.nextInt(height > 8 ? 3 : 2), splitSize = splits == 0 ? height : (int)Math.ceil(height/(1F+splits));
+	private boolean genGrandmasShoes(int x, int y, int z, Block mushroom){
+		int height = 5+rand.nextInt(8), splits = rand.nextInt(height > 8 ? 3 : 2), splitSize = splits == 0 ? height : (int)Math.ceil(height/(1F+splits)), splitDir = (splits != 0 ? rand.nextInt(4) : -1);
+		
+		int splitOffX = splitDir == -1 ? 0 : Direction.offsetX[splitDir], splitOffZ = splitDir == -1 ? 0 : Direction.offsetZ[splitDir];
+		if (!checkAirCube(x-1,y,z-1,x+2,y+height-2,z+2) || !checkAirCube(x-3+splitOffX,z-3+splitOffZ,y+height-1,x+3+splitOffX,y+height+1,z+3+splitOffZ) || !checkSolidCube(x-1,y-1,z-1,x+3,y-1,z+3))return false;
 		
 		for(int a = 0; a < 2; a++){
 			for(int b = 0; b < 2; b++){
@@ -230,12 +244,12 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 			}
 		}
 		
-		for(int py = 0, split = splitSize, splitDir = (splits != 0 ? rand.nextInt(4) : -1); py <= height; py++){
+		for(int py = 0, split = splitSize; py <= height; py++){
 			setBlockRect(x,z,x+1,z+1,y+py,mushroom,stalkMeta);
 			
-			if (--split < 0 && splitDir != -1 && py < height){
-				x += Direction.offsetX[splitDir];
-				z += Direction.offsetZ[splitDir];
+			if (--split < 0 && py < height){
+				x += splitOffX;
+				z += splitOffZ;
 				split = splitSize-1;
 			}
 		}
@@ -256,6 +270,8 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 				bulbs.add(new ChunkCoordinates(x-1+b,y+height-1,z-3+7*a));
 			}
 		}
+		
+		return true;
 	}
 	
 	/*

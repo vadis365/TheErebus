@@ -115,4 +115,18 @@ public abstract class WorldGenErebus extends WorldGenerator{
 		
 		return true;
 	}
+	
+
+	
+	protected final boolean checkSolidCube(int x1, int y1, int z1, int x2, int y2, int z2){
+		for(int yy = y1; yy <= y2; yy++){
+			for(int xx = x1; xx <= x2; xx++){
+				for(int zz = z1; zz <= z2; zz++){
+					if (!world.getBlock(xx,yy,zz).isOpaqueCube())return false;
+				}
+			}
+		}
+		
+		return true;
+	}
 }
