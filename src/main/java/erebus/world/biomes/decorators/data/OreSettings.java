@@ -164,6 +164,9 @@ public final class OreSettings {
 				case DIAMOND:
 					settings.setChance(0.66F).setIterations(2, 4).setOreAmount(1).setCheckArea(1);
 					break;
+				case DIAMOND_ENCRUSTED:
+					settings.setChance(0F);
+					break;
 				case JADE:
 					settings.setChance(0.5F).setIterations(1, 4).setOreAmount(4).setCheckArea(2);
 					break;
