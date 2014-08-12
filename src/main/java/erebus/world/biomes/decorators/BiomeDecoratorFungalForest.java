@@ -35,11 +35,11 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz))world.setBlock(xx,yy,zz,ModBlocks.plantSmall,rand.nextInt(5),2);
 		}
 
-		for(attempt = 0; attempt < 150; attempt++){
+		for(attempt = 0; attempt < 30; attempt++){
 			int r = rand.nextInt(100);
-			if (r < 15)genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
-			else if (r < 45)genGiantMushrooms.setMushroomType(MushroomType.KAIZERS_FINGERS);
-			else if (r < 70)genGiantMushrooms.setMushroomType(MushroomType.GRANDMAS_SHOES);
+			if (r < 12)genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
+			else if (r < 78)genGiantMushrooms.setMushroomType(MushroomType.KAIZERS_FINGERS);
+			else if (r < 92)genGiantMushrooms.setMushroomType(MushroomType.GRANDMAS_SHOES);
 			else genGiantMushrooms.setMushroomType(MushroomType.BULB_CAPPED);
 			
 			xx = x+offsetXZ();
@@ -50,7 +50,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 				if (checkSurface(SurfaceType.GRASS,xx,--yy,zz))break;
 			}
 			
-			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && genGiantMushrooms.generate(world,rand,xx,yy,zz) && rand.nextInt(8) == 0)break;
+			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && genGiantMushrooms.generate(world,rand,xx,yy,zz) && rand.nextInt(5) == 0)break;
 		}
 
 		for(attempt = 0; attempt < 100; attempt++){
