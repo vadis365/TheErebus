@@ -43,7 +43,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 		Block mushroom = mushroomType.block;
 
 		// TODO tmp
-		mushroomType = MushroomType.DUTCH_CAP;
+		mushroomType = MushroomType.GRANDMAS_SHOES;
 		mushroom = mushroomType.block;
 		//
 
@@ -51,6 +51,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 			case BULB_CAPPED: genBulbCapped(x,y,z,mushroom); break;
 			case KAIZERS_FINGERS: genKaizersFingers(x,y,z,mushroom); break;
 			case DUTCH_CAP : genDutchCap(x,y,z,mushroom); break;
+			case GRANDMAS_SHOES: genGrandmasShoes(x,y,z,mushroom); break;
 			default: break;
 		}
 
@@ -214,6 +215,48 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 			}
 		}
 	}
+
+	/*
+	 * MUSHROOM TYPE - GRANDMA'S SHOES
+	 */
+
+	private void genGrandmasShoes(int x, int y, int z, Block mushroom){
+		int height = 5+rand.nextInt(8), splits = rand.nextInt(height > 8 ? 3 : 2), splitSize = splits == 0 ? height : (int)Math.ceil(height/(1F+splits));
+		
+		for(int a = 0; a < 2; a++){
+			for(int b = 0; b < 2; b++){
+				setBlockRect(x-1+3*b,z,x-1+3*b,z+1,y,mushroom,stalkMeta);
+				setBlockRect(x,z-1+3*b,x+1,z-1+3*b,y,mushroom,stalkMeta);
+			}
+		}
+		
+		for(int py = 0, split = splitSize, splitDir = (splits != 0 ? rand.nextInt(4) : -1); py <= height; py++){
+			setBlockRect(x,z,x+1,z+1,y+py,mushroom,stalkMeta);
+			
+			if (--split < 0 && splitDir != -1 && py < height){
+				x += Direction.offsetX[splitDir];
+				z += Direction.offsetZ[splitDir];
+				split = splitSize-1;
+			}
+		}
+		
+		for(int a = 0; a < 2; a++){
+			for(int b = 0; b < 2; b++){
+				bulbs.add(new ChunkCoordinates(x+a,y+height+1,z+b));
+				bulbs.add(new ChunkCoordinates(x-1+3*a,y+height+1,z+b));
+				bulbs.add(new ChunkCoordinates(x+b,y+height+1,z-1+3*a));
+				setBlock(x-1+3*a,y+height,z-1+3*b,mushroom,5); // top only
+				bulbs.add(new ChunkCoordinates(x-2+5*a,y+height-1,z-2+5*b));
+			}
+			
+			for(int b = 0; b < 4; b++){
+				bulbs.add(new ChunkCoordinates(x-2+5*a,y+height,z-1+b));
+				bulbs.add(new ChunkCoordinates(x-1+b,y+height,z-2+5*a));
+				bulbs.add(new ChunkCoordinates(x-3+7*a,y+height-1,z-1+b));
+				bulbs.add(new ChunkCoordinates(x-1+b,y+height-1,z-3+7*a));
+			}
+		}
+	}
 	
 	/*
 	 * BULB METADATA
@@ -265,15 +308,17 @@ public class WorldGenGiantMushrooms extends WorldGenErebus{
 				meta = getMetadata(bulb.posX+Direction.offsetX[dir],bulb.posY-1,bulb.posZ+Direction.offsetZ[dir]);
 				if (meta != 0)return meta; // use meta of cap above and to the side - either 2 side cap or full cap
 			}
-
-			return 14; // if not found, fallback to full cap
 		}
-		else if (sides == 1 && corners == 1)
+		
+		if ((sides == 1 && corners == 1) || (sides == 0 && corners == 2))
 			if (bulb.posX > centerX){
 				if (bulb.posZ > centerZ)return 9; // use top, south and east
 				else return 3; // use top, north and east
-			} else if (bulb.posZ > centerZ)return 7; // use top, south and west
-			else return 1; // use top, north and west
+			}
+			else{
+				if (bulb.posZ > centerZ)return 7; // use top, south and west
+				else return 1; // use top, north and west
+			}
 
 		return 0;
 	}
