@@ -65,11 +65,6 @@ public class BottleAntiVenom extends ItemBucketMilk {
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public int getColorFromDamage(int meta) {
-		return 0x5D995D;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int pass) {

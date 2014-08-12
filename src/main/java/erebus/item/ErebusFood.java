@@ -53,8 +53,10 @@ public class ErebusFood extends ItemFood {
 			HashMap<Integer, String> potionAmplifiers = (HashMap<Integer, String>) f2.get(null);
 			potionAmplifiers.put(Potion.jump.getId(), "5");
 
+			Field f3 = ReflectionHelper.findField(Potion.class, "liquidColor", "field_76414_N");
+			f3.setAccessible(true);
+			f3.set(Potion.jump, 0x22FF4C);
 		} catch (Exception e) {
-
 		}
 	}
 
