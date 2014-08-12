@@ -2,6 +2,7 @@ package erebus.block.plants;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -26,13 +26,15 @@ import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.ErebusMaterial.DATA;
 import erebus.item.block.ItemBlockErebusPlantSmall;
+import erebus.world.feature.plant.WorldGenGiantMushrooms;
+import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 
 public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "dutchCapShroom", "desertShrub", "mireCoral", "nettle", "nettleFlowered", "swampPlant", "fireBloom" };
-
 	public static final int dataBulbCappedShroom = 0, dataMushroom1 = 1, dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4, dataDesertShrub = 5, dataMireCoral = 6, dataNettle = 7, dataNettleFlowered = 8, dataSwampPlant = 9, dataFireBloom = 10;
-
+	private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+	
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
 
@@ -239,14 +241,37 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	}
 
 	public void growPlants(World world, int x, int y, int z, Random rand) {
-		// TODO
-		/*int meta = world.getBlockMetadata(x, y, z);
-		WorldGenerator worldGen = new WorldGenBigMushroomErebusMany(meta);
-		if (meta >= 0 && meta <= 4)
-			worldGen.generate(world, rand, x, y, z);
-		world.setBlockToAir(x, y, z);
-
-		if (!worldGen.generate(world, rand, x, y, z))
-			world.setBlock(x, y, z, this, meta, 3);*/
+		int meta = world.getBlockMetadata(x, y, z);
+		if (meta >= 0 && meta <= 4) {
+			switch (meta) {
+			case 0:
+				world.setBlockToAir(x, y, z);
+				genGiantMushrooms.setMushroomType(MushroomType.BULB_CAPPED);
+				genGiantMushrooms.generate(world, rand, x, y, z);
+				break;
+			case 1:
+				world.setBlockToAir(x, y, z);
+				genGiantMushrooms.setMushroomType(MushroomType.GRANDMAS_SHOES);
+				genGiantMushrooms.generate(world, rand, x, y, z);
+				break;
+			case 2:
+				world.setBlockToAir(x, y, z);
+				genGiantMushrooms.setMushroomType(MushroomType.SARCASTIC_CZECH);
+				genGiantMushrooms.generate(world, rand, x, y, z);
+				break;
+			case 3:
+				world.setBlockToAir(x, y, z);
+				genGiantMushrooms.setMushroomType(MushroomType.KAIZERS_FINGERS);
+				genGiantMushrooms.generate(world, rand, x, y, z);
+				break;
+			case 4:
+				world.setBlockToAir(x, y, z);
+				genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
+				genGiantMushrooms.generate(world, rand, x, y, z);
+				break;
+			}
+		}
+		if (!genGiantMushrooms.generate(world, rand, x, y, z))
+			world.setBlock(x, y, z, this, meta, 3);
 	}
 }
