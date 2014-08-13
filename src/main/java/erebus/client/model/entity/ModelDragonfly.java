@@ -8,7 +8,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityDragonfly;
 
 @SideOnly(Side.CLIENT)
-public class ModelDragonfly extends ModelBase {
+public class ModelDragonfly extends ModelBase
+{
 
 	ModelRenderer REye;
 	ModelRenderer LEye;
@@ -46,7 +47,8 @@ public class ModelDragonfly extends ModelBase {
 	ModelRenderer LBLeg1;
 	ModelRenderer LBLeg2;
 
-	public ModelDragonfly() {
+	public ModelDragonfly()
+	{
 		textureWidth = 128;
 		textureHeight = 128;
 
@@ -193,7 +195,8 @@ public class ModelDragonfly extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		REye.render(unitPixel);
@@ -233,14 +236,16 @@ public class ModelDragonfly extends ModelBase {
 		LBLeg2.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityDragonfly var8 = (EntityDragonfly) entity;
 		RFWing.rotateAngleZ = var8.wingFloat;

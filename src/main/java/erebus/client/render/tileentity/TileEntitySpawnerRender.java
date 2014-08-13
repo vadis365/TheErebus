@@ -12,17 +12,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntitySpawner;
 
 @SideOnly(Side.CLIENT)
-public class TileEntitySpawnerRender extends TileEntitySpecialRenderer {
+public class TileEntitySpawnerRender extends TileEntitySpecialRenderer
+{
 
 	private double rotation0;
 	private double rotation1;
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation) {
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation)
+	{
 		renderTileEntityMobSpawner((TileEntitySpawner) tile, x, y, z, rotation);
 	}
 
-	public void renderTileEntityMobSpawner(TileEntitySpawner tile, double x, double y, double z, float rotation) {
+	public void renderTileEntityMobSpawner(TileEntitySpawner tile, double x, double y, double z, float rotation)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y, (float) z + 0.5F);
 
@@ -30,7 +33,8 @@ public class TileEntitySpawnerRender extends TileEntitySpecialRenderer {
 		rotation1 = rotation0;
 		rotation0 = (rotation0 + 1000.0F / (tile.getSpawnDelay() + 200.0F)) % 360.0D;
 
-		if (entity != null) {
+		if (entity != null)
+		{
 			entity.setWorld(tile.getWorldObj());
 			float f1 = 0.4375F;
 			GL11.glTranslatef(0.0F, 0.4F, 0.0F);

@@ -19,9 +19,11 @@ import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityWoodlouse extends EntityCreature {
+public class EntityWoodlouse extends EntityCreature
+{
 
-	public EntityWoodlouse(World world) {
+	public EntityWoodlouse(World world)
+	{
 		super(world);
 		stepHeight = 0.0F;
 		setSize(1.0F, 0.3F);
@@ -35,80 +37,103 @@ public class EntityWoodlouse extends EntityCreature {
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
+	public boolean getCanSpawnHere()
+	{
 		float light = getBrightness(1.0F);
 		if (light >= 0F)
+		{
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		}
 		return super.getCanSpawnHere();
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:beetlehurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player) {
+	public boolean interact(EntityPlayer player)
+	{
 		if (worldObj.isRemote)
+		{
 			return true;
+		}
 
 		ItemStack is = player.inventory.getCurrentItem();
-		if (is == null) {
+		if (is == null)
+		{
 			setDead();
 			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(ModItems.woodlouseBall, 1));
 			return true;
 		} else
+		{
 			return false;
+		}
 	}
 
 	@Override
-	public void setDead() {
+	public void setDead()
+	{
 		super.setDead();
 		if (worldObj.isRemote)
-			for (int i = 0; i < 7; ++i) {
+		{
+			for (int i = 0; i < 7; ++i)
+			{
 				double velX = rand.nextGaussian() * 0.02D;
 				double velY = rand.nextGaussian() * 0.02D;
 				double velZ = rand.nextGaussian() * 0.02D;
 				worldObj.spawnParticle("smoke", posX + rand.nextFloat() * width * 2.0F - width, posY + 0.5D + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, velX, velY, velZ);
 			}
+		}
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float damage) {
+	public boolean attackEntityFrom(DamageSource source, float damage)
+	{
 		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown) || source instanceof EntityDamageSourceIndirect)
+		{
 			return false;
+		}
 		return super.attackEntityFrom(source, damage);
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.whetstonePowder.ordinal()), 0F);
 	}
 }

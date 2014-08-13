@@ -12,7 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityWorkerBee;
 
 @SideOnly(Side.CLIENT)
-public class ModelWorkerBee extends ModelBase {
+public class ModelWorkerBee extends ModelBase
+{
 
 	ModelRenderer Thx;
 	ModelRenderer ThxS;
@@ -68,7 +69,8 @@ public class ModelWorkerBee extends ModelBase {
 	ModelRenderer LWingMid;
 	ModelRenderer LWingFront;
 
-	public ModelWorkerBee() {
+	public ModelWorkerBee()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 		Thx = new ModelRenderer(this, 14, 14);
@@ -291,7 +293,8 @@ public class ModelWorkerBee extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GL11.glPushMatrix();
@@ -321,20 +324,23 @@ public class ModelWorkerBee extends ModelBase {
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float heady = rotationYaw / (180F / (float) Math.PI);
 		Head1.rotateAngleY = heady;
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 
-		if (bee.onGround) {
+		if (bee.onGround)
+		{
 			float legMovement = MathHelper.cos(limbSwing * 2.0F) * 0.7F * limbSwingAngle;
 			LBL1.rotateAngleX = -legMovement;
 			LML1.rotateAngleX = legMovement;
@@ -356,7 +362,8 @@ public class ModelWorkerBee extends ModelBase {
 			Sting.rotateAngleX = -0.2F;
 		}
 
-		if (bee.isFlying()) {
+		if (bee.isFlying())
+		{
 			LBL1.rotateAngleX = +0.25F;
 			LML1.rotateAngleX = 0F;
 			LFL1.rotateAngleX = -0.25F;

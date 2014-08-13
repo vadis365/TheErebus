@@ -10,7 +10,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityErebusAltarLightning;
 
 @SideOnly(Side.CLIENT)
-public class ModelAltarLightning extends ModelBase {
+public class ModelAltarLightning extends ModelBase
+{
 
 	ModelRenderer Mid;
 	ModelRenderer Top;
@@ -26,7 +27,8 @@ public class ModelAltarLightning extends ModelBase {
 	ModelRenderer ElectrodeR2;
 	ModelRenderer Sparks;
 
-	public ModelAltarLightning() {
+	public ModelAltarLightning()
+	{
 		textureWidth = 256;
 		textureHeight = 64;
 
@@ -84,7 +86,8 @@ public class ModelAltarLightning extends ModelBase {
 		setRotation(Sparks, 0F, 0.7853982F, 0F);
 	}
 
-	public void render(TileEntityErebusAltarLightning tile) {
+	public void render(TileEntityErebusAltarLightning tile)
+	{
 		float x = tile.animationTicks;
 		GL11.glPushMatrix();
 		GL11.glScalef(0.04F * x, 0.04F * x, 0.04F * x);
@@ -110,13 +113,15 @@ public class ModelAltarLightning extends ModelBase {
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void setRotationAngles() {
+	public void setRotationAngles()
+	{
 	}
 
 }

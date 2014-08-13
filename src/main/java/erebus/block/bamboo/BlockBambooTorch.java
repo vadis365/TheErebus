@@ -12,12 +12,14 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBambooTorch extends Block {
+public class BlockBambooTorch extends Block
+{
 
 	public static final String[] iconPaths = new String[] { "bambooTorchLower", "bambooTorch", "bambooTorchTop", "bambooTorchBottom" };
 	public static IIcon[] icons;
 
-	public BlockBambooTorch() {
+	public BlockBambooTorch()
+	{
 		super(Material.wood);
 		setTickRandomly(true);
 		setLightLevel(0.9F);
@@ -26,95 +28,130 @@ public class BlockBambooTorch extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(IIconRegister iconRegister)
+	{
 		icons = new IIcon[iconPaths.length];
 
 		int i = 0;
 		for (String path : iconPaths)
+		{
 			icons[i++] = iconRegister.registerIcon("erebus:" + path);
+		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta)
+	{
 		if (meta < 0 || meta >= icons.length)
+		{
 			return null;
+		}
 		if (meta == 0)
-			return side > 1 ? icons [0] : icons[3];
+		{
+			return side > 1 ? icons[0] : icons[3];
+		}
 		if (meta == 1)
-			return side > 1 ? icons [1] : icons[2];
-		return null; 
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+		{
+			return side > 1 ? icons[1] : icons[2];
+		}
 		return null;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		return null;
+	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean renderAsNormalBlock()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
 		Block block = world.getBlock(x, y - 1, z);
 
-		if (world.getBlockMetadata(x, y, z) == 0) {
+		if (world.getBlockMetadata(x, y, z) == 0)
+		{
 			if (block == null || !world.isAirBlock(x, y + 1, z))
+			{
 				return false;
+			}
 			if (block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
+			{
 				return true;
+			}
 			if (!block.isLeaves(world, x, y - 1, z) && !block.isOpaqueCube())
+			{
 				return false;
+			}
 			world.setBlock(x, y + 1, z, this, 1, 3);
 		}
 		return block.getMaterial().blocksMovement();
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour)
+	{
 		dropTorchIfCantStay(world, x, y, z);
 	}
 
-	protected boolean dropTorchIfCantStay(World world, int x, int y, int z) {
+	protected boolean dropTorchIfCantStay(World world, int x, int y, int z)
+	{
 		int meta = world.getBlockMetadata(x, y + 1, z);
-		if (world.isAirBlock(x, y - 1, z)) {
+		if (world.isAirBlock(x, y - 1, z))
+		{
 			world.setBlockToAir(x, y, z);
 			if (meta == 0)
+			{
 				dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+			}
 			return false;
 		}
 		return true;
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player)
+	{
 		if (world.getBlock(x, y - 1, z) == this)
+		{
 			world.setBlockToAir(x, y - 1, z);
+		}
 		if (world.getBlock(x, y + 1, z) == this)
+		{
 			world.setBlockToAir(x, y + 1, z);
-		if (world.getBlock(x, y, z) == this) {
+		}
+		if (world.getBlock(x, y, z) == this)
+		{
 			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 			world.setBlockToAir(x, y + 1, z);
 		}
 	}
 
 	@Override
-	public int quantityDropped(Random rand) {
+	public int quantityDropped(Random rand)
+	{
 		return 1;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand)
+	{
 		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 0) {
+		if (meta == 0)
+		{
 			double d0 = x + 0.4375F;
 			double d1 = y + 2.0625F;
 			double d2 = z + 0.4375F;

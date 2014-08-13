@@ -7,13 +7,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelWoodlouseBall extends ModelBase {
+public class ModelWoodlouseBall extends ModelBase
+{
 
 	ModelRenderer UpDown;
 	ModelRenderer ForeAft;
 	ModelRenderer Main;
 
-	public ModelWoodlouseBall() {
+	public ModelWoodlouseBall()
+	{
 		textureWidth = 64;
 		textureHeight = 64;
 
@@ -32,19 +34,22 @@ public class ModelWoodlouseBall extends ModelBase {
 
 	}
 
-	public void render(float unitPixel) {
+	public void render(float unitPixel)
+	{
 		UpDown.render(unitPixel);
 		ForeAft.render(unitPixel);
 		Main.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 	}
 }

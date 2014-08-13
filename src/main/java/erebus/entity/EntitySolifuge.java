@@ -16,9 +16,11 @@ import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntitySolifuge extends EntityMob {
+public class EntitySolifuge extends EntityMob
+{
 
-	public EntitySolifuge(World world) {
+	public EntitySolifuge(World world)
+	{
 		super(world);
 		setSize(2.0F, 1.0F);
 		experienceValue = 10;
@@ -32,17 +34,20 @@ public class EntitySolifuge extends EntityMob {
 	}
 
 	@Override
-	protected void entityInit() {
+	protected void entityInit()
+	{
 		super.entityInit();
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.5D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
@@ -51,72 +56,88 @@ public class EntitySolifuge extends EntityMob {
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 2;
 	}
 
 	@Override
-	protected void fall(float par1) {
+	protected void fall(float par1)
+	{
 	}
 
 	@Override
-	public void setInWeb() {
+	public void setInWeb()
+	{
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "mob.spider.say";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "mob.spider.say";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "mob.spider.death";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(3) + 1 + looting, DATA.bioVelocity.ordinal()), 0.0F);
 	}
 
 	@Override
-	protected void dropRareDrop(int looting) {
+	protected void dropRareDrop(int looting)
+	{
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
 	}
 
 	@Override
-	public boolean isOnLadder() {
+	public boolean isOnLadder()
+	{
 		return isCollidedHorizontally;
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 	}
 
 	@Override
-	public void setDead() {
+	public void setDead()
+	{
 		super.setDead();
 		if (!worldObj.isRemote)
-			for (int a = 0; a < 4; a++) {
+		{
+			for (int a = 0; a < 4; a++)
+			{
 				EntitySolifugeSmall entitySolifugeSmall = new EntitySolifugeSmall(worldObj);
 				entitySolifugeSmall.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
 				entitySolifugeSmall.setPotionEffect(Byte.valueOf((byte) rand.nextInt(8)));
 				worldObj.spawnEntityInWorld(entitySolifugeSmall);
 			}
+		}
 	}
 }

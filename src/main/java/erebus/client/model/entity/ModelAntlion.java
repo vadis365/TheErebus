@@ -8,7 +8,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelAntlion extends ModelBase {
+public class ModelAntlion extends ModelBase
+{
 	ModelRenderer MandR1;
 	ModelRenderer MandR2;
 	ModelRenderer MandR3;
@@ -57,7 +58,8 @@ public class ModelAntlion extends ModelBase {
 	ModelRenderer LB2;
 	ModelRenderer LB3;
 
-	public ModelAntlion() {
+	public ModelAntlion()
+	{
 		textureWidth = 128;
 		textureHeight = 128;
 		MandR1 = new ModelRenderer(this, 110, 54);
@@ -251,7 +253,8 @@ public class ModelAntlion extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Head.render(unitPixel);
@@ -285,14 +288,16 @@ public class ModelAntlion extends ModelBase {
 		LB1.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float cos1 = MathHelper.cos(limbSwing * 1.0F + (float) Math.PI) * 0.5F * prevLimbSwing;
 		float cos2 = MathHelper.cos(limbSwing * 1.0F) * 0.5F * prevLimbSwing;

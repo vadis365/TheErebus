@@ -18,64 +18,84 @@ import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
 
-public class EntityGooBall extends EntityThrowable {
+public class EntityGooBall extends EntityThrowable
+{
 
-	public EntityGooBall(World world) {
+	public EntityGooBall(World world)
+	{
 		super(world);
 		setSize(0.7F, 0.7F);
 	}
 
-	public EntityGooBall(World world, EntityLiving entity) {
+	public EntityGooBall(World world, EntityLiving entity)
+	{
 		super(world, entity);
 	}
 
-	public EntityGooBall(World world, double x, double y, double z) {
+	public EntityGooBall(World world, double x, double y, double z)
+	{
 		super(world, x, y, z);
 	}
 
-	public EntityGooBall(World world, EntityPlayer player) {
+	public EntityGooBall(World world, EntityPlayer player)
+	{
 		super(world, player);
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 		if (worldObj.isRemote)
+		{
 			trailParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
+		}
 	}
 
-	protected String getJumpedOnSound() {
+	protected String getJumpedOnSound()
+	{
 		return "erebus:beetlelarvasplat";
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(MovingObjectPosition mop)
+	{
 
 		if (mop.entityHit != null)
-			if (mop.entityHit instanceof EntityPlayer) {
+		{
+			if (mop.entityHit instanceof EntityPlayer)
+			{
 
-				if (!worldObj.isRemote) {
+				if (!worldObj.isRemote)
+				{
 					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 5 * 20, 3));
 					setDead();
 				}
 				if (worldObj.isRemote)
+				{
 					PacketPipeline.sendToAllAround(mop.entityHit, 64D, new PacketParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
+				}
 			}
+		}
 		worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
 	}
 
 	@Override
-	public boolean canBeCollidedWith() {
+	public boolean canBeCollidedWith()
+	{
 		return false;
 	}
 
-	public boolean attackEntityFrom(DamageSource source, int amount) {
+	public boolean attackEntityFrom(DamageSource source, int amount)
+	{
 		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void trailParticles(World world, double x, double y, double z, Random rand) {
-		for (int count = 0; count < 20; ++count) {
+	public void trailParticles(World world, double x, double y, double z, Random rand)
+	{
+		for (int count = 0; count < 20; ++count)
+		{
 			double velX = 0.0D;
 			double velY = 0.0D;
 			double velZ = 0.0D;

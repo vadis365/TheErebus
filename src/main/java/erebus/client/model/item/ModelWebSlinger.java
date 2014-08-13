@@ -4,7 +4,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelWebSlinger extends ModelBase {
+public class ModelWebSlinger extends ModelBase
+{
 	ModelRenderer ShapeA;
 	ModelRenderer ShapeB;
 	ModelRenderer ShapeC;
@@ -37,7 +38,8 @@ public class ModelWebSlinger extends ModelBase {
 	ModelRenderer Greeble2;
 	ModelRenderer Greeble3;
 
-	public ModelWebSlinger() {
+	public ModelWebSlinger()
+	{
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -168,7 +170,8 @@ public class ModelWebSlinger extends ModelBase {
 
 	}
 
-	public void render() {
+	public void render()
+	{
 		ShapeA.render(0.0625F);
 		ShapeB.render(0.0625F);
 		ShapeC.render(0.0625F);
@@ -203,14 +206,16 @@ public class ModelWebSlinger extends ModelBase {
 
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par6Entity) {
+	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par6Entity)
+	{
 
 	}
 }

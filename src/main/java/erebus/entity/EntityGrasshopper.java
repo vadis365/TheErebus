@@ -14,12 +14,14 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.entity.ai.EntityAIEatCrops;
 
-public class EntityGrasshopper extends EntityCreature {
+public class EntityGrasshopper extends EntityCreature
+{
 
 	private ChunkCoordinates currentJumpTarget;
 	public boolean isEating;
 
-	public EntityGrasshopper(World world) {
+	public EntityGrasshopper(World world)
+	{
 		super(world);
 		stepHeight = 1.0F;
 		jumpMovementFactor = 0.1F;
@@ -32,69 +34,86 @@ public class EntityGrasshopper extends EntityCreature {
 	}
 
 	@Override
-	protected boolean isAIEnabled() {
+	protected boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
+	public boolean getCanSpawnHere()
+	{
 		float light = getBrightness(1.0F);
 		if (light >= 0F)
+		{
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		}
 		return super.getCanSpawnHere();
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 3;
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "erebus:grasshoppersound";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:grasshopperhurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{ // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		if (isBurning())
+		{
 			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 3), 0.0F);
-		else
+		} else
+		{
 			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 2), 0.0F);
+		}
 	}
 
-	public boolean randJump() {
+	public boolean randJump()
+	{
 		return rand.nextInt(50) == 0;
 	}
 
 	@Override
-	protected void jump() {
+	protected void jump()
+	{
 		currentJumpTarget = new ChunkCoordinates((int) posX + rand.nextInt(3) - rand.nextInt(3), (int) posY, (int) posZ + rand.nextInt(3) - rand.nextInt(3));
 		motionX += (Math.signum(currentJumpTarget.posX + 0.5D - posX) * 0.5D - motionX) * 0.60000000149011612D;
 		motionZ += (Math.signum(currentJumpTarget.posZ + 0.5D - posZ) * 0.5D - motionZ) * 0.60000000149011612D;
@@ -105,18 +124,23 @@ public class EntityGrasshopper extends EntityCreature {
 		setPositionAndUpdate(posX, posY, posZ);
 	}
 
-	public void setIsEating(boolean isEating) {
+	public void setIsEating(boolean isEating)
+	{
 		this.isEating = isEating;
 	}
 
 	@Override
-	protected void fall(float par1) {
+	protected void fall(float par1)
+	{
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 		if (!worldObj.isRemote && onGround && randJump() && !isEating)
+		{
 			jump();
+		}
 	}
 }

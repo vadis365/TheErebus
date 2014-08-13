@@ -8,7 +8,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelWheatWeevil extends ModelBase {
+public class ModelWheatWeevil extends ModelBase
+{
 	ModelRenderer HeadTop;
 	ModelRenderer HeadMain;
 	ModelRenderer HeadFront;
@@ -48,7 +49,8 @@ public class ModelWheatWeevil extends ModelBase {
 	ModelRenderer LBL3;
 	ModelRenderer LBL4;
 
-	public ModelWheatWeevil() {
+	public ModelWheatWeevil()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 		HeadTop = new ModelRenderer(this, 17, 25);
@@ -209,7 +211,8 @@ public class ModelWheatWeevil extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		HeadMain.render(unitPixel);
@@ -226,14 +229,16 @@ public class ModelWheatWeevil extends ModelBase {
 		LBL1.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float correction = 0.3490659F;
 		float legMovement = MathHelper.cos(limbSwing * 2.5F) * 0.9F * prevLimbSwing;

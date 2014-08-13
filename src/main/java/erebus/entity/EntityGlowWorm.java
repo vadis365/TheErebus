@@ -19,12 +19,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityGlowWorm extends EntityCreature {
+public class EntityGlowWorm extends EntityCreature
+{
 	public int lastX;
 	public int lastY;
 	public int lastZ;
 
-	public EntityGlowWorm(World world) {
+	public EntityGlowWorm(World world)
+	{
 		super(world);
 		stepHeight = 0.0F;
 		isImmuneToFire = true;
@@ -38,97 +40,127 @@ public class EntityGlowWorm extends EntityCreature {
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
+	public boolean getCanSpawnHere()
+	{
 		float light = getBrightness(1.0F);
 		if (light >= 0F)
+		{
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		}
 		return super.getCanSpawnHere();
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 2;
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D); // Movespeed
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D); // MaxHealth
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "erebus:glowwormsound";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:glowwormhurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal()), 0.0F);
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		if (worldObj.isRemote && isGlowing())
+		{
 			lightUp(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+		}
 		if (worldObj.isRemote && !isGlowing())
+		{
 			switchOff();
+		}
 		super.onUpdate();
 	}
 
 	@SideOnly(Side.CLIENT)
-	private void lightUp(World world, int x, int y, int z) {
+	private void lightUp(World world, int x, int y, int z)
+	{
 		world.setLightValue(EnumSkyBlock.Block, x, y, z, 9);
 		for (int i = -1; i < 2; i++)
+		{
 			for (int j = -1; j < 2; j++)
+			{
 				for (int k = -1; k < 2; k++)
-					if (x + i != lastX || y + j != lastY || z + k != lastZ || isDead) {
+				{
+					if (x + i != lastX || y + j != lastY || z + k != lastZ || isDead)
+					{
 						world.updateLightByType(EnumSkyBlock.Block, lastX + i, lastY + j, lastZ + k);
 						lastX = x;
 						lastY = y;
 						lastZ = z;
 					}
+				}
+			}
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
-	private void switchOff() {
+	private void switchOff()
+	{
 		worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
 		worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
 	}
 
-	public boolean isGlowing() {
+	public boolean isGlowing()
+	{
 		return worldObj.getSunBrightness(1.0F) < 0.5F;
 	}
 
 	@Override
-	public void setDead() {
+	public void setDead()
+	{
 		super.setDead();
 		if (worldObj.isRemote)
+		{
 			switchOff();
+		}
 	}
 }

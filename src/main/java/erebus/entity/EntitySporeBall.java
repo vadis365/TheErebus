@@ -16,94 +16,131 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 
-public class EntitySporeBall extends EntityThrowable {
+public class EntitySporeBall extends EntityThrowable
+{
 
-	public EntitySporeBall(World world) {
+	public EntitySporeBall(World world)
+	{
 		super(world);
 		setSize(0.7F, 0.7F);
 	}
 
-	public EntitySporeBall(World world, EntityLiving entity) {
+	public EntitySporeBall(World world, EntityLiving entity)
+	{
 		super(world, entity);
 	}
 
-	public EntitySporeBall(World world, double x, double y, double z) {
+	public EntitySporeBall(World world, double x, double y, double z)
+	{
 		super(world, x, y, z);
 	}
 
-	public EntitySporeBall(World world, EntityPlayer player) {
+	public EntitySporeBall(World world, EntityPlayer player)
+	{
 		super(world, player);
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 		if (ridingEntity == null)
+		{
 			if (worldObj.isRemote)
+			{
 				trailParticles(worldObj, posX, posY + 0.35D, posZ, rand);
+			}
+		}
 
-		if (ridingEntity != null) {
+		if (ridingEntity != null)
+		{
 			yOffset = -1.5F;
 			if (worldObj.isRemote)
+			{
 				confusionParticles(worldObj, posX, posY, posZ, rand);
+			}
 
 			if (!worldObj.isRemote)
-				if (ridingEntity instanceof EntityPlayer) {
+			{
+				if (ridingEntity instanceof EntityPlayer)
+				{
 					EntityPlayer player = (EntityPlayer) ridingEntity;
 					ItemStack is = player.inventory.getCurrentItem();
 					if (is != null)
+					{
 						player.dropOneItem(true);
+					}
 				}
+			}
 
 			if (ticksExisted > 140)
+			{
 				setDead();
+			}
 		}
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(MovingObjectPosition mop)
+	{
 
-		if (mop.entityHit != null) {
+		if (mop.entityHit != null)
+		{
 
-			if (mop.entityHit instanceof EntityPlayer) {
+			if (mop.entityHit instanceof EntityPlayer)
+			{
 
 				EntityPlayer player = (EntityPlayer) mop.entityHit;
 				if (!worldObj.isRemote)
-					if (player.riddenByEntity == null) {
+				{
+					if (player.riddenByEntity == null)
+					{
 						mountEntity(player);
 						ticksExisted = 0;
 					}
+				}
 			}
 
-			if (mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityPlayer)) {
-				if (!worldObj.isRemote) {
+			if (mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityPlayer))
+			{
+				if (!worldObj.isRemote)
+				{
 					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 5 * 20, 0));
 					((EntityLivingBase) mop.entityHit).attackEntityFrom(DamageSource.causeMobDamage(getThrower()), 1.0F);
 				}
 				setDead();
 			}
 		} else
+		{
 			setDead();
+		}
 	}
 
 	@Override
-	public boolean canBeCollidedWith() {
+	public boolean canBeCollidedWith()
+	{
 		return false;
 	}
 
-	public boolean attackEntityFrom(DamageSource source, int amount) {
+	public boolean attackEntityFrom(DamageSource source, int amount)
+	{
 		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void trailParticles(World world, double x, double y, double z, Random rand) {
+	public void trailParticles(World world, double x, double y, double z, Random rand)
+	{
 		for (int count = 0; count < 3; ++count)
+		{
 			Erebus.proxy.spawnCustomParticle("spell", worldObj, x, y, z, 0.0D, 0.0D, 0.0D);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void confusionParticles(World world, double x, double y, double z, Random rand) {
-		for (int count = 0; count < 2; ++count) {
+	public void confusionParticles(World world, double x, double y, double z, Random rand)
+	{
+		for (int count = 0; count < 2; ++count)
+		{
 			double velX = 0.0D;
 			double velY = 0.0D;
 			double velZ = 0.0D;

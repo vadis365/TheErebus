@@ -62,7 +62,8 @@ import erebus.item.bambucket.BambucketAntiVenom;
 import erebus.item.bambucket.BambucketBeetleJuice;
 import erebus.item.block.ItemBlockDoorAmber;
 
-public class ModItems {
+public class ModItems
+{
 
 	// BASIC MATERIALS
 	public static final Item portalActivator = new PortalActivator().setUnlocalizedName("portalActivator");
@@ -146,16 +147,20 @@ public class ModItems {
 
 	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("bottleAntiVenom");
 
-	public static void init() {
+	public static void init()
+	{
 		initCreativeTabs();
 		registerItems();
 		registerProperties();
 	}
 
-	private static void initCreativeTabs() {
+	private static void initCreativeTabs()
+	{
 		ModTabs.items.setTab(erebusMaterials, whetstone, erebusFood, turnip, encrustedDiamond);
 		if (ConfigHandler.INSTANCE.lead || ConfigHandler.INSTANCE.silver || ConfigHandler.INSTANCE.copper || ConfigHandler.INSTANCE.tin || ConfigHandler.INSTANCE.aluminium)
+		{
 			ModTabs.items.setTab(metalIngot);
+		}
 
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
@@ -167,32 +172,45 @@ public class ModItems {
 		ModTabs.blocks.setTab(doorAmberItem);
 	}
 
-	private static void registerItems() {
-		try {
-			for (Field f : ModItems.class.getDeclaredFields()) {
+	private static void registerItems()
+	{
+		try
+		{
+			for (Field f : ModItems.class.getDeclaredFields())
+			{
 				Object obj = f.get(null);
 				if (obj instanceof Item)
+				{
 					registerItem((Item) obj);
-				else if (obj instanceof Item[])
+				} else if (obj instanceof Item[])
+				{
 					for (Item item : (Item[]) obj)
+					{
 						registerItem(item);
+					}
+				}
 			}
-		} catch (IllegalAccessException e) {
+		} catch (IllegalAccessException e)
+		{
 			throw new RuntimeException(e);
 		}
 	}
 
-	private static void registerItem(Item item) {
+	private static void registerItem(Item item)
+	{
 		String name = item.getUnlocalizedName();
 		String[] strings = name.split("\\.");
 		GameRegistry.registerItem(item, strings[strings.length - 1]);
 	}
 
-	private static void registerProperties() {
-		GameRegistry.registerFuelHandler(new IFuelHandler() {
+	private static void registerProperties()
+	{
+		GameRegistry.registerFuelHandler(new IFuelHandler()
+		{
 
 			@Override
-			public int getBurnTime(ItemStack fuel) {
+			public int getBurnTime(ItemStack fuel)
+			{
 				return fuel.getItem() == erebusMaterials && fuel.getItemDamage() == DATA.bamboo.ordinal() ? 300 : 0;
 			}
 		});

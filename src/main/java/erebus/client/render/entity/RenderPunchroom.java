@@ -13,15 +13,18 @@ import erebus.client.model.entity.ModelPunchroom;
 import erebus.entity.EntityPunchroom;
 
 @SideOnly(Side.CLIENT)
-public class RenderPunchroom extends RenderLiving {
+public class RenderPunchroom extends RenderLiving
+{
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/punchroom.png");
 
-	public RenderPunchroom() {
+	public RenderPunchroom()
+	{
 		super(new ModelPunchroom(), 1.0F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime)
+	{
 		EntityPunchroom punchroom = (EntityPunchroom) entityliving;
 		int i = 1;
 		float f1 = (punchroom.prevSquishFactor + (punchroom.squishFactor - punchroom.prevSquishFactor) * partialTickTime) / (i * 0.5F + 1.0F);
@@ -31,7 +34,8 @@ public class RenderPunchroom extends RenderLiving {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

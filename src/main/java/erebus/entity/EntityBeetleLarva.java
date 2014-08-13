@@ -25,14 +25,16 @@ import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
 
-public class EntityBeetleLarva extends EntityAnimal {
+public class EntityBeetleLarva extends EntityAnimal
+{
 
 	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
 	public boolean isEating;
 	public boolean isSquashed;
 
-	public EntityBeetleLarva(World world) {
+	public EntityBeetleLarva(World world)
+	{
 		super(world);
 		setSize(0.9F, 0.5F);
 		getNavigator().setAvoidsWater(true);
@@ -45,70 +47,91 @@ public class EntityBeetleLarva extends EntityAnimal {
 	}
 
 	@Override
-	protected void entityInit() {
+	protected void entityInit()
+	{
 		super.entityInit();
 		dataWatcher.addObject(28, new Float(1.0F));
 		dataWatcher.addObject(29, new Byte((byte) 0));
 	}
 
-	public void setLarvaSize(float byteSize) {
+	public void setLarvaSize(float byteSize)
+	{
 		dataWatcher.updateObject(28, new Float(byteSize));
 		setSize(0.9F * byteSize, 0.5F * byteSize);
 	}
 
-	public void setTame(byte isBred) {
+	public void setTame(byte isBred)
+	{
 		dataWatcher.updateObject(29, Byte.valueOf(isBred));
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public boolean isChild() {
+	public boolean isChild()
+	{
 		return false;
 	}
 
 	@Override
-	protected boolean canDespawn() {
+	protected boolean canDespawn()
+	{
 		if (getTame() != 0)
+		{
 			return false;
-		else
+		} else
+		{
 			return true;
+		}
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0F);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
+	public boolean getCanSpawnHere()
+	{
 		float light = getBrightness(1.0F);
 		if (light >= 0F)
+		{
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		}
 		return super.getCanSpawnHere();
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer player) {
+	public void onCollideWithPlayer(EntityPlayer player)
+	{
 		super.onCollideWithPlayer(player);
 		byte duration = 0;
-		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && player.boundingBox.maxX >= boundingBox.minX && player.boundingBox.minX <= boundingBox.maxX && player.boundingBox.maxZ >= boundingBox.minZ && player.boundingBox.minZ <= boundingBox.maxZ && player.lastTickPosY > player.posY) {
+		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && player.boundingBox.maxX >= boundingBox.minX && player.boundingBox.minX <= boundingBox.maxX && player.boundingBox.maxZ >= boundingBox.minZ && player.boundingBox.minZ <= boundingBox.maxZ && player.lastTickPosY > player.posY)
+		{
 			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+			{
 				duration = 7;
-			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+			} else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+			{
 				duration = 15;
+			}
 			if (duration > 0)
+			{
 				player.addPotionEffect(new PotionEffect(Potion.confusion.id, duration * 20, 0));
+			}
 			setisSquashed(true);
 			setDead();
 			onDeathUpdate();
@@ -116,67 +139,83 @@ public class EntityBeetleLarva extends EntityAnimal {
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		String actionSound = "erebus:beetlelarvasound";
 		if (isEating)
+		{
 			actionSound = "erebus:beetlelarvamunch";
+		}
 		return actionSound;
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:beetlelarvahurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
-	protected String getJumpedOnSound() {
+	protected String getJumpedOnSound()
+	{
 		return "erebus:beetlelarvasplat";
 	}
 
-	protected static String getHasMunched() {
+	protected static String getHasMunched()
+	{
 		return "erebus:beetlelarvamunch";
 	}
 
 	@Override
-	protected float getSoundVolume() {
+	protected float getSoundVolume()
+	{
 		return 0.5F;
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 		float i;
-		if (worldObj.isRemote) {
+		if (worldObj.isRemote)
+		{
 			i = getLarvaSize();
 			setSize(0.9F * i, 0.5F * i);
 		}
-		if (getLarvaSize() > 1.8F) {
+		if (getLarvaSize() > 1.8F)
+		{
 			setDead();
 			spawnBeetle();
 		}
 	}
 
-	private void spawnBeetle() {
-		if (getTame() == 0) {
+	private void spawnBeetle()
+	{
+		if (getTame() == 0)
+		{
 			EntityBeetle entityBeetle = new EntityBeetle(worldObj);
 			entityBeetle.setPosition(posX, posY, posZ);
 			worldObj.spawnEntityInWorld(entityBeetle);
 		}
-		if (getTame() == 1) {
+		if (getTame() == 1)
+		{
 			EntityBeetle entityBeetle = new EntityBeetle(worldObj);
 			entityBeetle.setPosition(posX, posY, posZ);
 			entityBeetle.setTame((byte) 1);
 			worldObj.spawnEntityInWorld(entityBeetle);
-		} else if (getTame() == 2) {
+		} else if (getTame() == 2)
+		{
 			EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(worldObj);
 			entityRhinoBeetle.setPosition(posX, posY, posZ);
 			entityRhinoBeetle.setTameState((byte) 1);
 			worldObj.spawnEntityInWorld(entityRhinoBeetle);
-		} else if (getTame() == 3) {
+		} else if (getTame() == 3)
+		{
 			EntityTitanBeetle entityTitanBeetle = new EntityTitanBeetle(worldObj);
 			entityTitanBeetle.setPosition(posX, posY, posZ);
 			entityTitanBeetle.setTameState((byte) 1);
@@ -185,40 +224,56 @@ public class EntityBeetleLarva extends EntityAnimal {
 	}
 
 	@Override
-	public void onDeathUpdate() {
+	public void onDeathUpdate()
+	{
 		super.onDeathUpdate();
-		if (isSquashed) {
+		if (isSquashed)
+		{
 			PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
 			worldObj.playSoundEffect(posX, posY, posZ, getJumpedOnSound(), 1.0F, 0.5F);
 			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
-			if (!worldObj.isRemote) {
+			if (!worldObj.isRemote)
+			{
 				if (rand.nextInt(200) == 0)
+				{
 					entityDropItem(new ItemStack(Items.diamond), 0.0F);
+				}
 				entityDropItem(new ItemStack(Items.slime_ball), 0.0F);
 			}
 		}
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		if (isBurning())
+		{
 			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 1), 0.0F);
-		else
+		} else
+		{
 			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 0), 0.0F);
+		}
 	}
 
-	private boolean isStick(ItemStack stack) {
+	private boolean isStick(ItemStack stack)
+	{
 		int stick = OreDictionary.getOreID("stickWood");
 		for (int id : OreDictionary.getOreIDs(stack))
+		{
 			if (id == stick)
+			{
 				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player) {
+	public boolean interact(EntityPlayer player)
+	{
 		ItemStack stack = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && isStick(stack)) {
+		if (!worldObj.isRemote && isStick(stack))
+		{
 			setLarvaSize(getLarvaSize() + 0.1F);
 			stack.stackSize--;
 			return true;
@@ -226,51 +281,64 @@ public class EntityBeetleLarva extends EntityAnimal {
 		return super.interact(player);
 	}
 
-	public void setIsEating(boolean par1) {
+	public void setIsEating(boolean par1)
+	{
 		isEating = par1;
 	}
 
-	public void setisSquashed(boolean par1) {
+	public void setisSquashed(boolean par1)
+	{
 		isSquashed = par1;
 	}
 
-	public void setMoveTasks(boolean par1) {
+	public void setMoveTasks(boolean par1)
+	{
 		if (par1 == false)
+		{
 			tasks.removeTask(aiWander);
+		}
 
 		if (par1 == true)
+		{
 			tasks.addTask(2, aiWander);
+		}
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox() {
+	public AxisAlignedBB getBoundingBox()
+	{
 		return boundingBox;
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
+	public void writeEntityToNBT(NBTTagCompound nbt)
+	{
 		super.writeEntityToNBT(nbt);
 		nbt.setFloat("size", getLarvaSize());
 		nbt.setByte("tame", getTame());
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
+	public void readEntityFromNBT(NBTTagCompound nbt)
+	{
 		super.readEntityFromNBT(nbt);
 		setLarvaSize(nbt.getFloat("size"));
 		setTame(nbt.getByte("tame"));
 	}
 
-	public float getLarvaSize() {
+	public float getLarvaSize()
+	{
 		return dataWatcher.getWatchableObjectFloat(28);
 	}
 
-	public byte getTame() {
+	public byte getTame()
+	{
 		return dataWatcher.getWatchableObjectByte(29);
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable entityageable) {
+	public EntityAgeable createChild(EntityAgeable entityageable)
+	{
 		return null;
 	}
 }

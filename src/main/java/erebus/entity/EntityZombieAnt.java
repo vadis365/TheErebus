@@ -17,9 +17,11 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityZombieAnt extends EntityMob {
+public class EntityZombieAnt extends EntityMob
+{
 
-	public EntityZombieAnt(World world) {
+	public EntityZombieAnt(World world)
+	{
 		super(world);
 		stepHeight = 1.0F;
 		setSize(2F, 1.2F);
@@ -32,12 +34,14 @@ public class EntityZombieAnt extends EntityMob {
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
@@ -46,52 +50,62 @@ public class EntityZombieAnt extends EntityMob {
 	}
 
 	@Override
-	public int getTotalArmorValue() {
+	public int getTotalArmorValue()
+	{
 		return 5;
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "erebus:fireantsound";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:fireanthurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected float getSoundPitch() {
+	protected float getSoundPitch()
+	{
 		return 0.5F;
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	public boolean isOnLadder() {
+	public boolean isOnLadder()
+	{
 		return isCollidedHorizontally;
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 5;
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		entityDropItem(new ItemStack(ModBlocks.plantSmall, 1, 0), 0.0F);
 		entityDropItem(new ItemStack(ModBlocks.plantSmall, 1, 1), 0.0F);
 		entityDropItem(new ItemStack(ModBlocks.plantSmall, 1, 2), 0.0F);
@@ -100,13 +114,18 @@ public class EntityZombieAnt extends EntityMob {
 		entityDropItem(new ItemStack(Blocks.red_mushroom, 1, 0), 0.0F);
 		entityDropItem(new ItemStack(Blocks.brown_mushroom, 1, 0), 0.0F);
 		if (rand.nextInt(5) == 0)
+		{
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.antPheromones.ordinal()), 0.0F);
+		}
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 		if (worldObj.isRemote)
+		{
 			worldObj.spawnParticle("reddust", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
+		}
 	}
 }

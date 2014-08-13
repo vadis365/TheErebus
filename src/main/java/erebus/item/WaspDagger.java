@@ -8,26 +8,34 @@ import net.minecraft.world.World;
 import erebus.ModMaterials;
 import erebus.entity.EntityWaspDagger;
 
-public class WaspDagger extends ItemSword {
+public class WaspDagger extends ItemSword
+{
 
-	public WaspDagger() {
+	public WaspDagger()
+	{
 		super(ModMaterials.weaponWaspDagger);
 		maxStackSize = 16;
 		setTextureName("paper");
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
+	{
 		if (!player.capabilities.isCreativeMode)
+		{
 			is.stackSize--;
+		}
 		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 		if (!world.isRemote)
+		{
 			world.spawnEntityInWorld(new EntityWaspDagger(world, player));
+		}
 		return is;
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player) {
+	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player)
+	{
 		is.damageItem(2, player);
 		return true;
 	}

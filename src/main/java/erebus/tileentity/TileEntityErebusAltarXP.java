@@ -5,7 +5,8 @@ import net.minecraft.world.World;
 import erebus.Erebus;
 import erebus.ModBlocks;
 
-public class TileEntityErebusAltarXP extends TileEntityErebusAltar {
+public class TileEntityErebusAltarXP extends TileEntityErebusAltar
+{
 
 	public int animationTicks;
 	public boolean active;
@@ -13,30 +14,49 @@ public class TileEntityErebusAltarXP extends TileEntityErebusAltar {
 	private int uses;
 
 	@Override
-	public void updateEntity() {
-		if (active) {
+	public void updateEntity()
+	{
+		if (active)
+		{
 			if (animationTicks == 0)
+			{
 				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+			}
 			if (animationTicks <= 24)
+			{
 				animationTicks++;
+			}
 		}
-		if (!active) {
+		if (!active)
+		{
 			if (animationTicks == 25)
+			{
 				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+			}
 			if (animationTicks >= 1)
+			{
 				animationTicks--;
+			}
 			if (animationTicks == 1)
+			{
 				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar);
+			}
 		}
 		if (animationTicks == 6)
+		{
 			cloudBurst(worldObj, xCoord, yCoord, zCoord);
+		}
 		if (spawnTicks == 0)
+		{
 			setActive(false);
+		}
 		spawnTicks--;
 	}
 
-	public void cloudBurst(World world, int x, int y, int z) {
-		if (world.isRemote) {
+	public void cloudBurst(World world, int x, int y, int z)
+	{
+		if (world.isRemote)
+		{
 			double d0 = x + 0.53125F;
 			double d1 = y + 1.25F;
 			double d2 = z + 0.53125F;
@@ -50,28 +70,34 @@ public class TileEntityErebusAltarXP extends TileEntityErebusAltar {
 		}
 	}
 
-	public void setActive(boolean par1) {
+	public void setActive(boolean par1)
+	{
 		active = par1;
 	}
 
-	public void setSpawnTicks(int i) {
+	public void setSpawnTicks(int i)
+	{
 		spawnTicks = i;
 	}
 
-	public void setUses(int isSize) {
+	public void setUses(int isSize)
+	{
 		uses = isSize;
 	}
 
-	public int getUses() {
+	public int getUses()
+	{
 		return uses;
 	}
 
-	public int getExcess() {
+	public int getExcess()
+	{
 		return uses - 165;
 	}
 
 	@Override
-	protected void writeTileToNBT(NBTTagCompound nbt) {
+	protected void writeTileToNBT(NBTTagCompound nbt)
+	{
 		nbt.setInteger("animationTicks", animationTicks);
 		nbt.setInteger("spawnTicks", spawnTicks);
 		nbt.setInteger("uses", uses);
@@ -79,7 +105,8 @@ public class TileEntityErebusAltarXP extends TileEntityErebusAltar {
 	}
 
 	@Override
-	protected void readTileFromNBT(NBTTagCompound nbt) {
+	protected void readTileFromNBT(NBTTagCompound nbt)
+	{
 		animationTicks = nbt.getInteger("animationTicks");
 		spawnTicks = nbt.getInteger("spawnTicks");
 		uses = nbt.getInteger("uses");

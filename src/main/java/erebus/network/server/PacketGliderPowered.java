@@ -8,35 +8,44 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.network.AbstractServerPacket;
 
-public class PacketGliderPowered extends AbstractServerPacket {
+public class PacketGliderPowered extends AbstractServerPacket
+{
 
 	private boolean isPowered;
 
-	public PacketGliderPowered() {
+	public PacketGliderPowered()
+	{
 	}
 
-	public PacketGliderPowered(boolean isPowered) {
+	public PacketGliderPowered(boolean isPowered)
+	{
 		this.isPowered = isPowered;
 	}
 
 	@Override
-	protected void handle(World world, EntityPlayerMP player) {
+	protected void handle(World world, EntityPlayerMP player)
+	{
 		ItemStack chestplate = player.inventory.armorInventory[2];
 
-		if (chestplate != null && chestplate.getItem() == ModItems.armorGliderPowered) {
+		if (chestplate != null && chestplate.getItem() == ModItems.armorGliderPowered)
+		{
 			if (!chestplate.hasTagCompound())
+			{
 				chestplate.stackTagCompound = new NBTTagCompound();
+			}
 			chestplate.getTagCompound().setBoolean("isPowered", isPowered);
 		}
 	}
 
 	@Override
-	public void write(ByteBuf buffer) {
+	public void write(ByteBuf buffer)
+	{
 		buffer.writeBoolean(isPowered);
 	}
 
 	@Override
-	public void read(ByteBuf buffer) {
+	public void read(ByteBuf buffer)
+	{
 		isPowered = buffer.readBoolean();
 	}
 }

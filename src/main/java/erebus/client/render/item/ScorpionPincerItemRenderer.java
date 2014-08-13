@@ -13,27 +13,33 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.item.ModelScorpionPincer;
 
 @SideOnly(Side.CLIENT)
-public class ScorpionPincerItemRenderer implements IItemRenderer {
+public class ScorpionPincerItemRenderer implements IItemRenderer
+{
 	private final ModelScorpionPincer model;
 	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/scorpionPincer.png");
 
-	public ScorpionPincerItemRenderer() {
+	public ScorpionPincerItemRenderer()
+	{
 		model = new ModelScorpionPincer();
 	}
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(ItemStack item, ItemRenderType type)
+	{
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	{
 		return helper != ItemRendererHelper.BLOCK_3D;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch (type) {
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+	{
+		switch (type)
+		{
 			case ENTITY:
 				renderPincer(0.0F, 1.0F, 0.0F, 2.5D);
 				break;
@@ -51,7 +57,8 @@ public class ScorpionPincerItemRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderEquipped(float x, float y, float z, double size) {
+	private void renderEquipped(float x, float y, float z, double size)
+	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
@@ -62,16 +69,19 @@ public class ScorpionPincerItemRenderer implements IItemRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void renderPincer(float x, float y, float z, double size) {
+	private void renderPincer(float x, float y, float z, double size)
+	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
-		if (RenderItem.renderInFrame) {
+		if (RenderItem.renderInFrame)
+		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x - 0.4F, y - 1.0F, z + 0.1F);
 			GL11.glRotatef(-60F, 0, 0, 1F);
 			GL11.glScaled(1.8F, 1.8F, 1.8F);
 			model.render(0.0625F);
 			GL11.glPopMatrix();
-		} else {
+		} else
+		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y, z);
 			GL11.glScaled(size, size, size);
@@ -80,7 +90,8 @@ public class ScorpionPincerItemRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderPincerFirstPerson(float x, float y, float z, double size) {
+	private void renderPincerFirstPerson(float x, float y, float z, double size)
+	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
@@ -92,7 +103,8 @@ public class ScorpionPincerItemRenderer implements IItemRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void renderPincerInventory(float x, float y, float z, double size) {
+	private void renderPincerInventory(float x, float y, float z, double size)
+	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);

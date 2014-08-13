@@ -9,7 +9,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityGrasshopper;
 
 @SideOnly(Side.CLIENT)
-public class ModelGrasshopper extends ModelBase {
+public class ModelGrasshopper extends ModelBase
+{
 
 	ModelRenderer LAnt;
 	ModelRenderer RAnt;
@@ -54,7 +55,8 @@ public class ModelGrasshopper extends ModelBase {
 	ModelRenderer RBL5;
 	ModelRenderer RBL6;
 
-	public ModelGrasshopper() {
+	public ModelGrasshopper()
+	{
 		textureWidth = 64;
 		textureHeight = 64;
 		LAnt = new ModelRenderer(this, 0, 0);
@@ -228,7 +230,8 @@ public class ModelGrasshopper extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		LAnt.render(unitPixel);
@@ -275,14 +278,16 @@ public class ModelGrasshopper extends ModelBase {
 		RBL6.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		float heady = rotationYaw / (180F / (float) Math.PI);
 		float headx = rotationPitch / (180F / (float) Math.PI);
 		float legx1 = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing;
@@ -324,7 +329,8 @@ public class ModelGrasshopper extends ModelBase {
 		RFL3.rotateAngleX = legx1;
 		RFL4.rotateAngleX = legx1;
 		EntityGrasshopper var8 = (EntityGrasshopper) entity;
-		if (!var8.onGround) {
+		if (!var8.onGround)
+		{
 			LBL4.setRotationPoint(2F, 22.0F, 14F);
 			LBL5.setRotationPoint(2F, 22.0F, 14F);
 			LBL6.setRotationPoint(2F, 21.0F, 14F);
@@ -360,7 +366,8 @@ public class ModelGrasshopper extends ModelBase {
 			RML3.rotateAngleX = 0.6F;
 			RML4.rotateAngleX = 0.6F;
 		}
-		if (var8.onGround) {
+		if (var8.onGround)
+		{
 			LBL4.setRotationPoint(2F, 18F, 3F);
 			LBL5.setRotationPoint(2F, 18F, 3F);
 			LBL6.setRotationPoint(2F, 18F, 3F);

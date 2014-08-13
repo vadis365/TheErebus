@@ -12,14 +12,17 @@ import erebus.client.model.block.ModelBoneBlock;
 import erebus.tileentity.TileEntityBones;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityBoneBlockRenderer extends TileEntitySpecialRenderer {
+public class TileEntityBoneBlockRenderer extends TileEntitySpecialRenderer
+{
 
 	private final ModelBoneBlock ModelBoneBlock = new ModelBoneBlock();
 
-	public void renderAModelAt(TileEntityBones tile, double x, double y, double z, float f) {
+	public void renderAModelAt(TileEntityBones tile, double x, double y, double z, float f)
+	{
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/boneBlock.png"));
 		int meta = tile.getBlockMetadata();
-		switch (meta) {
+		switch (meta)
+		{
 			case 2:
 				GL11.glPushMatrix();
 				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
@@ -56,7 +59,8 @@ public class TileEntityBoneBlockRenderer extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime)
+	{
 		renderAModelAt((TileEntityBones) tile, x, y, z, partialTickTime);
 	}
 }

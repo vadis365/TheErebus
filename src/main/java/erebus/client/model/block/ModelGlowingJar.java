@@ -9,11 +9,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelGlowingJar extends ModelBase {
+public class ModelGlowingJar extends ModelBase
+{
 
 	private final ModelRenderer jar, lid, neck;
 
-	public ModelGlowingJar() {
+	public ModelGlowingJar()
+	{
 		textureWidth = 128;
 		textureHeight = 64;
 		jar = new ModelRenderer(this, 0, 27);
@@ -28,7 +30,8 @@ public class ModelGlowingJar extends ModelBase {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void render() {
+	public void render()
+	{
 		lid.render(0.0625F);
 		GL11.glPushMatrix();
 		GL11.glEnable(3042);

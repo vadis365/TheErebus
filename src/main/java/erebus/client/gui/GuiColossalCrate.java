@@ -20,12 +20,14 @@ import erebus.network.server.S00ColossalCratePage;
 import erebus.tileentity.TileEntityBambooCrate;
 
 @SideOnly(Side.CLIENT)
-public class GuiColossalCrate extends GuiContainer {
+public class GuiColossalCrate extends GuiContainer
+{
 
 	public static final boolean hasInventoryTweaks = Loader.isModLoaded("inventorytweaks");
 	private static final ResourceLocation GUI_BAMBOO_CRATE = new ResourceLocation("erebus:textures/gui/container/bambooCollosalCrate.png");
 
-	public GuiColossalCrate(InventoryPlayer playerInventory, List<TileEntityBambooCrate> list) {
+	public GuiColossalCrate(InventoryPlayer playerInventory, List<TileEntityBambooCrate> list)
+	{
 		super(new ContainerColossalCrate(playerInventory, list));
 		allowUserInput = false;
 		ySize = 220;
@@ -34,7 +36,8 @@ public class GuiColossalCrate extends GuiContainer {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public void initGui() {
+	public void initGui()
+	{
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
 		buttonList.clear();
@@ -43,20 +46,25 @@ public class GuiColossalCrate extends GuiContainer {
 	}
 
 	@Override
-	public void onGuiClosed() {
+	public void onGuiClosed()
+	{
 		super.onGuiClosed();
 		Keyboard.enableRepeatEvents(false);
 	}
 
-	public int getPageNumber() {
+	public int getPageNumber()
+	{
 		return ((ContainerColossalCrate) inventorySlots).page;
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) {
-		if (button.enabled) {
+	protected void actionPerformed(GuiButton button)
+	{
+		if (button.enabled)
+		{
 			int newPage = 1;
-			switch (button.id) {
+			switch (button.id)
+			{
 				case 0:
 					newPage = getPageNumber() - 1;
 					PacketPipeline.sendToServer(new S00ColossalCratePage(newPage));
@@ -72,7 +80,8 @@ public class GuiColossalCrate extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
+	{
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.colossalCrate"), 28, 6, 4210752);
 		String str = getPageNumber() + "/3";
 		fontRendererObj.drawString(str, xSize / 2 - fontRendererObj.getStringWidth(str) / 2, 6, 4210752);
@@ -80,7 +89,8 @@ public class GuiColossalCrate extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
+	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(GUI_BAMBOO_CRATE);
 		int k = (width - xSize) / 2;

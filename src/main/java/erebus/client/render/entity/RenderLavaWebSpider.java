@@ -9,22 +9,26 @@ import org.lwjgl.opengl.GL11;
 
 import erebus.client.model.entity.ModelLavaWebSpider;
 
-public class RenderLavaWebSpider extends RenderLiving {
+public class RenderLavaWebSpider extends RenderLiving
+{
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/lavaWebSpider.png");
 
-	public RenderLavaWebSpider(ModelLavaWebSpider modelBase, float shadowSize) {
+	public RenderLavaWebSpider(ModelLavaWebSpider modelBase, float shadowSize)
+	{
 		super(modelBase, shadowSize);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime)
+	{
 		float size = 1.8F;
 		shadowSize = 0.3F;
 		GL11.glScalef(size, size, size);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

@@ -3,13 +3,16 @@ package erebus.world.biomes;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
-public class BiomeFungalForest extends BiomeBaseErebus {
+public class BiomeFungalForest extends BiomeBaseErebus
+{
 
-	public BiomeFungalForest(int biomeID) {
+	public BiomeFungalForest(int biomeID)
+	{
 		this(biomeID, new BiomeDecoratorFungalForest());
 	}
 
-	public BiomeFungalForest(int biomeID, BiomeDecoratorBaseErebus decorator) {
+	public BiomeFungalForest(int biomeID, BiomeDecoratorBaseErebus decorator)
+	{
 		super(biomeID, decorator);
 
 		setBiomeName("Fungal Forest");
@@ -17,6 +20,7 @@ public class BiomeFungalForest extends BiomeBaseErebus {
 		setTemperatureRainfall(0.9F, 0.95F);
 		setWeight(12);
 
-		//spawnableCaveCreatureList.add(new SpawnEntry(EntitySporeling.class,1,1,1));
+		// spawnableCaveCreatureList.add(new
+		// SpawnEntry(EntitySporeling.class,1,1,1));
 	}
 }

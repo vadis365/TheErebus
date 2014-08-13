@@ -23,7 +23,8 @@ import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityJarOHoney;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
+public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer
+{
 
 	private final ModelGlowingJar glowingJar = new ModelGlowingJar();
 	private final RenderItem renderItem;
@@ -31,10 +32,13 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 	private static final ResourceLocation GLOWING_JAR = new ResourceLocation("erebus:textures/special/tiles/glowingJar.png");
 	public static TileEntityGlowingJarRenderer instance;
 
-	public TileEntityGlowingJarRenderer() {
-		renderItem = new RenderItem() {
+	public TileEntityGlowingJarRenderer()
+	{
+		renderItem = new RenderItem()
+		{
 			@Override
-			public boolean shouldBob() {
+			public boolean shouldBob()
+			{
 				return false;
 			}
 		};
@@ -42,26 +46,33 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void func_147497_a(TileEntityRendererDispatcher renderer) {
+	public void func_147497_a(TileEntityRendererDispatcher renderer)
+	{
 		super.func_147497_a(renderer);
 		instance = this;
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime)
+	{
 		if (tile instanceof TileEntityJarOHoney)
+		{
 			renderJarOHoney((TileEntityJarOHoney) tile, x, y, z);
-		else if (tile instanceof TileEntityGlowingJar)
+		} else if (tile instanceof TileEntityGlowingJar)
+		{
 			renderGlowJar(x, y, z, ((TileEntityGlowingJar) tile).getGhostItem());
+		}
 
 		renderJar(x, y, z);
 	}
 
-	public void renderJarOHoney(TileEntityJarOHoney tile, double x, double y, double z) {
+	public void renderJarOHoney(TileEntityJarOHoney tile, double x, double y, double z)
+	{
 		int amount = tile.tank.getFluidAmount();
 		int capacity = tile.tank.getCapacity();
 		float size = 0.70F / capacity * amount;
-		if (amount >= 100) {
+		if (amount >= 100)
+		{
 			GL11.glPushMatrix();
 			GL11.glEnable(3042);
 			GL11.glBlendFunc(770, 771);
@@ -75,7 +86,8 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 		renderNameTag(tile.getOwnerName(), x, y, z);
 	}
 
-	public void renderGlowJar(double x, double y, double z, EntityItem ghostItem) {
+	public void renderGlowJar(double x, double y, double z, EntityItem ghostItem)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
 		GL11.glScalef(1.2F, 1.2F, 1.2F);
@@ -85,7 +97,8 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	public void renderJar(double x, double y, double z) {
+	public void renderJar(double x, double y, double z)
+	{
 		bindTexture(GLOWING_JAR);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
@@ -96,7 +109,8 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void renderNameTag(String name, double x, double y, double z) {
+	private void renderNameTag(String name, double x, double y, double z)
+	{
 		float scale = 0.02666667F;
 		float height = 0.8F;
 

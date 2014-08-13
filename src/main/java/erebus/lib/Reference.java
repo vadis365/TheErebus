@@ -1,6 +1,7 @@
 package erebus.lib;
 
-public class Reference {
+public class Reference
+{
 
 	public static final String MOD_ID = "erebus";
 	public static final String MOD_NAME = "Erebus";

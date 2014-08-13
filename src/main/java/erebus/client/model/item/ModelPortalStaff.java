@@ -3,10 +3,12 @@ package erebus.client.model.item;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelPortalStaff extends ModelBase {
+public class ModelPortalStaff extends ModelBase
+{
 	public ModelRenderer[] boxes = new ModelRenderer[8];
 
-	public ModelPortalStaff() {
+	public ModelPortalStaff()
+	{
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -36,8 +38,11 @@ public class ModelPortalStaff extends ModelBase {
 		boxes[7].setRotationPoint(0f, 0f, 0f);
 	}
 
-	public void render() {
+	public void render()
+	{
 		for (ModelRenderer box : boxes)
+		{
 			box.render(0.0625f);
+		}
 	}
 }

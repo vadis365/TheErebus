@@ -19,9 +19,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityExtractedBlock;
 
-public class BlockExtractor extends Item {
+public class BlockExtractor extends Item
+{
 
-	public BlockExtractor() {
+	public BlockExtractor()
+	{
 		maxStackSize = 1;
 		setMaxDamage(128);
 	}
@@ -29,56 +31,72 @@ public class BlockExtractor extends Item {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag)
+	{
 		list.add("Point at blocks and hold");
 		list.add("down the right mouse button");
 		list.add("to extract them.");
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
 		return EnumAction.bow;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
+	public int getMaxItemUseDuration(ItemStack stack)
+	{
 		float x = hasTag(stack) ? stack.getTagCompound().getFloat("blockHardness") * 30 : 0;
 		if (x >= 150)
+		{
 			x = 150;
+		}
 		return (int) x;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	{
 		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown") <= 0)
+		{
 			getBlockInfo(world, player, stack);
-		if (hasTag(stack)) {
+		}
+		if (hasTag(stack))
+		{
 			Block block = Block.getBlockById(stack.getTagCompound().getInteger("blockID"));
 			if (block != null)
+			{
 				player.setItemInUse(stack, getMaxItemUseDuration(stack));
+			}
 		}
 		return stack;
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
+	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count)
+	{
 		resetStats(stack);
 	}
 
-	public void getBlockInfo(World world, EntityPlayer player, ItemStack stack) {
-		if (!world.isRemote && hasTag(stack)) {
+	public void getBlockInfo(World world, EntityPlayer player, ItemStack stack)
+	{
+		if (!world.isRemote && hasTag(stack))
+		{
 			Vec3 vec3 = player.getLookVec().normalize();
 			double targetX = player.posX;
 			double targetY = player.posY + player.getEyeHeight() - 0.10000000149011612D;
 			double targetZ = player.posZ;
 
 			int range = 0;
-			while (world.isAirBlock(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)) && range <= 15) { // range of 16
+			while (world.isAirBlock(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)) && range <= 15)
+			{ // range of 16
 				range++;
 				targetX += vec3.xCoord;
 				targetY += vec3.yCoord;
 				targetZ += vec3.zCoord;
-				if (!world.isAirBlock(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ))) {
+				if (!world.isAirBlock(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)))
+				{
 					stack.getTagCompound().setInteger("targetX", MathHelper.floor_double(targetX));
 					stack.getTagCompound().setInteger("targetY", MathHelper.floor_double(targetY));
 					stack.getTagCompound().setInteger("targetZ", MathHelper.floor_double(targetZ));
@@ -86,26 +104,34 @@ public class BlockExtractor extends Item {
 					stack.getTagCompound().setInteger("blockMeta", world.getBlockMetadata(MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
 					Block block = Block.getBlockById(stack.getTagCompound().getInteger("blockID"));
 					if (block != null)
+					{
 						stack.getTagCompound().setFloat("blockHardness", block.getBlockHardness(world, MathHelper.floor_double(targetX), MathHelper.floor_double(targetY), MathHelper.floor_double(targetZ)));
+					}
 				}
 			}
 		}
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
-		if (!world.isRemote && hasTag(stack)) {
+	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
+	{
+		if (!world.isRemote && hasTag(stack))
+		{
 			Block block = Block.getBlockById(stack.getTagCompound().getInteger("blockID"));
 			if (block != null && canExtract(block))
+			{
 				extractBlock(stack, world, player);
+			}
 		}
 		resetStats(stack);
 		stack.damageItem(1, player);
 		return stack;
 	}
 
-	protected void extractBlock(ItemStack stack, World world, EntityPlayer player) {
-		if (!world.isRemote) {
+	protected void extractBlock(ItemStack stack, World world, EntityPlayer player)
+	{
+		if (!world.isRemote)
+		{
 			EntityExtractedBlock entityExtractedBlock;
 			entityExtractedBlock = new EntityExtractedBlock(world);
 			int targetX = stack.getTagCompound().getInteger("targetX");
@@ -120,17 +146,21 @@ public class BlockExtractor extends Item {
 		}
 	}
 
-	private boolean canExtract(Block block) {
+	private boolean canExtract(Block block)
+	{
 		return !(block instanceof BlockContainer) && !(block instanceof BlockFluidBase) && !(block instanceof BlockPane) && block != Block.getBlockFromName("bedrock") && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
 	}
 
-	public void resetStats(ItemStack stack) {
+	public void resetStats(ItemStack stack)
+	{
 		stack.getTagCompound().setInteger("blockID", 0);
 		stack.getTagCompound().setInteger("coolDown", 20);
 	}
 
-	private boolean hasTag(ItemStack stack) {
-		if (!stack.hasTagCompound()) {
+	private boolean hasTag(ItemStack stack)
+	{
+		if (!stack.hasTagCompound())
+		{
 			stack.setTagCompound(new NBTTagCompound());
 			return false;
 		}
@@ -138,8 +168,11 @@ public class BlockExtractor extends Item {
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int aNumber, boolean aBoolean) {
+	public void onUpdate(ItemStack stack, World world, Entity entity, int aNumber, boolean aBoolean)
+	{
 		if (hasTag(stack) && stack.getTagCompound().getInteger("coolDown") >= 0)
+		{
 			stack.getTagCompound().setInteger("coolDown", stack.getTagCompound().getInteger("coolDown") - 1);
+		}
 	}
 }

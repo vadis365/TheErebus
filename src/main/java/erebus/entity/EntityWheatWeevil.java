@@ -18,9 +18,11 @@ import net.minecraftforge.common.ForgeHooks;
 import erebus.ModItems;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityWheatWeevil extends EntityCreature {
+public class EntityWheatWeevil extends EntityCreature
+{
 
-	public EntityWheatWeevil(World world) {
+	public EntityWheatWeevil(World world)
+	{
 		super(world);
 		stepHeight = 0.0F;
 		setSize(1.0F, 0.5F);
@@ -34,58 +36,71 @@ public class EntityWheatWeevil extends EntityCreature {
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
+	public boolean getCanSpawnHere()
+	{
 		float light = getBrightness(1.0F);
 		if (light >= 0F)
+		{
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		}
 		return super.getCanSpawnHere();
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 2;
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D); // Movespeed
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D); // MaxHealth
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "erebus:beetlesound";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:beetlehurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		switch (rand.nextInt(5)) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
+		switch (rand.nextInt(5))
+		{
 			case 0:
 				entityDropItem(new ItemStack(ModItems.flowerSeeds, 1 + rand.nextInt(3) + looting, rand.nextInt(14)), 0F);
 				break;
@@ -107,9 +122,11 @@ public class EntityWheatWeevil extends EntityCreature {
 				break;
 		}
 
-		if (rand.nextInt(10) == 0) {
+		if (rand.nextInt(10) == 0)
+		{
 			int dropRareishType = rand.nextInt(7);
-			switch (dropRareishType) {
+			switch (dropRareishType)
+			{
 				case 0:
 					entityDropItem(new ItemStack(ModItems.turnip, 1 + looting), 0F);
 					break;

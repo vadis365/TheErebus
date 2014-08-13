@@ -6,7 +6,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBoneBlock extends ModelBase {
+public class ModelBoneBlock extends ModelBase
+{
 	ModelRenderer Skull_Main;
 	ModelRenderer SkullTop;
 	ModelRenderer SkullLeft;
@@ -23,7 +24,8 @@ public class ModelBoneBlock extends ModelBase {
 	ModelRenderer BoneR4;
 	ModelRenderer BoneR1;
 
-	public ModelBoneBlock() {
+	public ModelBoneBlock()
+	{
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -89,7 +91,8 @@ public class ModelBoneBlock extends ModelBase {
 		setRotation(BoneR1, 0F, -0.2094395F, 0F);
 	}
 
-	public void render() {
+	public void render()
+	{
 		Skull_Main.render(0.0625F);
 		SkullTop.render(0.0625F);
 		SkullLeft.render(0.0625F);
@@ -107,7 +110,8 @@ public class ModelBoneBlock extends ModelBase {
 		BoneR1.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

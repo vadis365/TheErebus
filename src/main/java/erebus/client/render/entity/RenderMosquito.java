@@ -12,23 +12,29 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelMosquito;
 
 @SideOnly(Side.CLIENT)
-public class RenderMosquito extends RenderLiving {
+public class RenderMosquito extends RenderLiving
+{
 	private final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/mosquito.png");
 
-	public RenderMosquito() {
+	public RenderMosquito()
+	{
 		super(new ModelMosquito(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float f)
+	{
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
 		GL11.glTranslatef(0.0F, -1.4F, -0.5F);
 		if (entityliving.ridingEntity != null)
+		{
 			GL11.glTranslatef(0.0F, 0.0F, 0.5F);
+		}
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

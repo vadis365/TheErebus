@@ -13,14 +13,16 @@ import erebus.core.helper.Utils;
 import erebus.inventory.ContainerPetrifiedWoodChest;
 
 @SideOnly(Side.CLIENT)
-public class GuiPetrifiedChest extends GuiContainer {
+public class GuiPetrifiedChest extends GuiContainer
+{
 
 	private static final ResourceLocation field_110421_t = new ResourceLocation("erebus:textures/gui/container/petrifiedContainerBig.png");
 	private final IInventory upperChestInventory, lowerChestInventory;
 
 	private final int inventoryRows;
 
-	public GuiPetrifiedChest(IInventory upperInventory, IInventory lowerInventory) {
+	public GuiPetrifiedChest(IInventory upperInventory, IInventory lowerInventory)
+	{
 		super(new ContainerPetrifiedWoodChest(upperInventory, lowerInventory));
 		upperChestInventory = upperInventory;
 		lowerChestInventory = lowerInventory;
@@ -30,13 +32,15 @@ public class GuiPetrifiedChest extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
+	{
 		fontRendererObj.drawString(lowerChestInventory.hasCustomInventoryName() ? lowerChestInventory.getInventoryName() : StatCollector.translateToLocal(lowerChestInventory.getInventoryName()), 8, 6, Utils.getColour(255, 255, 255));
 		fontRendererObj.drawString(upperChestInventory.hasCustomInventoryName() ? upperChestInventory.getInventoryName() : StatCollector.translateToLocal(upperChestInventory.getInventoryName()), 8, ySize - 96 + 2, Utils.getColour(255, 255, 255));
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
+	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(field_110421_t);
 		int k = (width - xSize) / 2;

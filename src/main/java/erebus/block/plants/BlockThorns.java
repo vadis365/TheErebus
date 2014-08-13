@@ -9,21 +9,25 @@ import net.minecraftforge.common.IShearable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockThorns extends BlockVine implements IShearable {
+public class BlockThorns extends BlockVine implements IShearable
+{
 
-	public BlockThorns() {
+	public BlockThorns()
+	{
 		super();
 		setTickRandomly(true);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+	{
 		entity.attackEntityFrom(DamageSource.cactus, 1);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
+	public int colorMultiplier(IBlockAccess access, int x, int y, int z)
+	{
 		return 16777215;
 	}
 

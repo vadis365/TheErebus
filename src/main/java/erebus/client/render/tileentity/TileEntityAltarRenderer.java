@@ -13,18 +13,23 @@ import erebus.client.model.block.ModelStone4;
 import erebus.tileentity.TileEntityAltar;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityAltarRenderer extends TileEntitySpecialRenderer {
+public class TileEntityAltarRenderer extends TileEntitySpecialRenderer
+{
 
 	private final ModelAltar model = new ModelAltar();
 	private final ModelStone4 stone4 = new ModelStone4();
 	public static float rotation;
 	public static final float rotaspeed = 0.01F;
 
-	public void renderAModelAt(TileEntityAltar tile, double x, double y, double z, float partialTick) {
+	public void renderAModelAt(TileEntityAltar tile, double x, double y, double z, float partialTick)
+	{
 		if (tile.blockMetadata == 1)
+		{
 			bindTexture(new ResourceLocation("erebus:textures/special/tiles/altarActive.png"));
-		else
+		} else
+		{
 			bindTexture(new ResourceLocation("erebus:textures/special/tiles/altar.png"));
+		}
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5F, y + 1.5F, z + 0.5F);
@@ -41,7 +46,8 @@ public class TileEntityAltarRenderer extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick) {
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick)
+	{
 		renderAModelAt((TileEntityAltar) tile, x, y, z, partialTick);
 		rotation = rotation > 360 ? 0 : rotation + rotaspeed;
 	}

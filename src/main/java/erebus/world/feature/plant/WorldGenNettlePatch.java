@@ -10,21 +10,25 @@ import erebus.ModBlocks;
 import erebus.block.plants.BlockSmallPlants;
 
 //@formatter:off
-public class WorldGenNettlePatch extends WorldGenerator {
+public class WorldGenNettlePatch extends WorldGenerator
+{
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z){
-		float ang,len;
+	public boolean generate(World world, Random rand, int x, int y, int z)
+	{
+		float ang, len;
 
-		for(int attempt = 0, placed = 0, xx, yy, zz; attempt < 48 && placed < 15; ++attempt){
-			ang = (float)(rand.nextDouble()*Math.PI*2D);
-			len = rand.nextFloat()*(0.3F+rand.nextFloat()*0.7F)*7F;
+		for (int attempt = 0, placed = 0, xx, yy, zz; attempt < 48 && placed < 15; ++attempt)
+		{
+			ang = (float) (rand.nextDouble() * Math.PI * 2D);
+			len = rand.nextFloat() * (0.3F + rand.nextFloat() * 0.7F) * 7F;
 
-			xx = (int)(x+0.5F+MathHelper.cos(ang)*len);
-			yy = y+rand.nextInt(3)-rand.nextInt(3);
-			zz = (int)(z+0.5F+MathHelper.sin(ang)*len);
+			xx = (int) (x + 0.5F + MathHelper.cos(ang) * len);
+			yy = y + rand.nextInt(3) - rand.nextInt(3);
+			zz = (int) (z + 0.5F + MathHelper.sin(ang) * len);
 
-			if (world.isAirBlock(xx,yy,zz) && world.getBlock(xx,yy-1,zz) == Blocks.grass){
-				world.setBlock(xx,yy,zz,ModBlocks.plantSmall,rand.nextBoolean() ? BlockSmallPlants.dataNettle : BlockSmallPlants.dataNettleFlowered,2);
+			if (world.isAirBlock(xx, yy, zz) && world.getBlock(xx, yy - 1, zz) == Blocks.grass)
+			{
+				world.setBlock(xx, yy, zz, ModBlocks.plantSmall, rand.nextBoolean() ? BlockSmallPlants.dataNettle : BlockSmallPlants.dataNettleFlowered, 2);
 				++placed;
 			}
 		}
@@ -32,4 +36,4 @@ public class WorldGenNettlePatch extends WorldGenerator {
 		return true;
 	}
 }
-//@formatter:on
+// @formatter:on

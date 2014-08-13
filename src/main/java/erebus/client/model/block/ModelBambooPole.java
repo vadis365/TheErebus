@@ -9,7 +9,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBambooPole extends ModelBase {
+public class ModelBambooPole extends ModelBase
+{
 
 	ModelRenderer A;
 	ModelRenderer B;
@@ -40,7 +41,8 @@ public class ModelBambooPole extends ModelBase {
 	ModelRenderer XX;
 	ModelRenderer YY;
 
-	public ModelBambooPole() {
+	public ModelBambooPole()
+	{
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -159,13 +161,15 @@ public class ModelBambooPole extends ModelBase {
 
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void renderModel() {
+	public void renderModel()
+	{
 		GL11.glPushMatrix();
 		GL11.glScalef(0.335F, 0.335F, 0.335F);
 		A.render(0.0625F);

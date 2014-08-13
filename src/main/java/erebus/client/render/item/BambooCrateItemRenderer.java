@@ -13,29 +13,35 @@ import erebus.client.model.block.ModelBambooCrate;
 import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
 
 @SideOnly(Side.CLIENT)
-public class BambooCrateItemRenderer implements IItemRenderer {
+public class BambooCrateItemRenderer implements IItemRenderer
+{
 
 	private final ModelBambooCrate modelBambooCrate;
 	private final ResourceLocation resourceBambooCrate;
 
-	public BambooCrateItemRenderer() {
+	public BambooCrateItemRenderer()
+	{
 		modelBambooCrate = new ModelBambooCrate();
 		resourceBambooCrate = TileEntityRenderBambooCrate.bambooCrateResource;
 	}
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(ItemStack item, ItemRenderType type)
+	{
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	{
 		return true;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch (type) {
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+	{
+		switch (type)
+		{
 			case ENTITY:
 				renderBambooCrate(0.0F, 1.0F, 0.0F, 1.0D);
 				break;
@@ -53,7 +59,8 @@ public class BambooCrateItemRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderBambooCrate(float x, float y, float z, double size) {
+	private void renderBambooCrate(float x, float y, float z, double size)
+	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(resourceBambooCrate);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);

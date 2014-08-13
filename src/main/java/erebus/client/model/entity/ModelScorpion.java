@@ -9,7 +9,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityScorpion;
 
 @SideOnly(Side.CLIENT)
-public class ModelScorpion extends ModelBase {
+public class ModelScorpion extends ModelBase
+{
 
 	ModelRenderer RMand;
 	ModelRenderer LMand;
@@ -71,7 +72,8 @@ public class ModelScorpion extends ModelBase {
 	ModelRenderer Sting1;
 	ModelRenderer Sting2;
 
-	public ModelScorpion() {
+	public ModelScorpion()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 		RMand = new ModelRenderer(this, 33, 0);
@@ -316,7 +318,8 @@ public class ModelScorpion extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		RMand.render(unitPixel);
@@ -349,14 +352,16 @@ public class ModelScorpion extends ModelBase {
 		Tail1.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityScorpion var8 = (EntityScorpion) entity;
 		float cosz1 = MathHelper.cos(limbSwing * 1.0F + (float) Math.PI) * 0.3F * prevLimbSwing;
@@ -407,7 +412,8 @@ public class ModelScorpion extends ModelBase {
 		Tail6.rotateAngleZ = -cosxnz1;
 		Sting1.rotateAngleZ = -cosxnz1;
 		Sting2.rotateAngleZ = -cosxnz1;
-		if (var8.captured()) {
+		if (var8.captured())
+		{
 			Tail1.rotateAngleX = EntityScorpion.stingticks;
 			Tail2.rotateAngleX = EntityScorpion.stingticks + 0.8726646F;
 			Tail3.rotateAngleX = EntityScorpion.stingticks + 1.22173F;
@@ -431,7 +437,8 @@ public class ModelScorpion extends ModelBase {
 			ClawL5Bot.rotateAngleX = -0.14719755F;
 			ClawL5Top.rotateAngleX = -0.14719755F;
 		}
-		if (!var8.captured()) {
+		if (!var8.captured())
+		{
 			Tail1.rotateAngleX = 0F;
 			Tail2.rotateAngleX = 0.8726646F;
 			Tail3.rotateAngleX = 1.22173F;

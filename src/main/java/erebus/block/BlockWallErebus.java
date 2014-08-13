@@ -14,16 +14,20 @@ import erebus.ModBlocks;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.item.block.ItemBlockGeneric;
 
-public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
+public class BlockWallErebus extends BlockWall implements ISubBlocksBlock
+{
 
-	public BlockWallErebus() {
+	public BlockWallErebus()
+	{
 		super(ModBlocks.umberstone);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		switch (meta) {
+	public IIcon getIcon(int side, int meta)
+	{
+		switch (meta)
+		{
 			default:
 				return ModBlocks.umberstone.getIcon(side, 0); // Umberstone
 			case 1:
@@ -53,13 +57,17 @@ public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list)
+	{
 		for (int a = 0; a < 9; a++)
+		{
 			list.add(new ItemStack(id, 1, a));
+		}
 	}
 
 	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
+	public Class<? extends ItemBlock> getItemBlockClass()
+	{
 		return ItemBlockGeneric.class;
 	}
 }

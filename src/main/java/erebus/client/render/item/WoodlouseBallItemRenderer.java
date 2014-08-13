@@ -16,28 +16,34 @@ import erebus.client.model.item.ModelWoodlouseBall;
 import erebus.entity.EntityWoodlouseBall;
 
 @SideOnly(Side.CLIENT)
-public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
+public class WoodlouseBallItemRenderer extends Render implements IItemRenderer
+{
 	private final ModelWoodlouseBall ModelWoodlouseBall;
 	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/woodlouseBall.png");
 
-	public WoodlouseBallItemRenderer() {
+	public WoodlouseBallItemRenderer()
+	{
 		ModelWoodlouseBall = new ModelWoodlouseBall();
 	}
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(ItemStack item, ItemRenderType type)
+	{
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	{
 		return helper != ItemRendererHelper.ENTITY_BOBBING && helper != ItemRendererHelper.ENTITY_ROTATION;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
-		switch (type) {
+		switch (type)
+		{
 			case ENTITY:
 				renderBall(0.0F, 0.0F, 0.0F, 1.2D);
 				break;
@@ -55,7 +61,8 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 		}
 	}
 
-	private void renderEquipped(float x, float y, float z, double size) {
+	private void renderEquipped(float x, float y, float z, double size)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y - 0.2F, z + 0.2F);
 		GL11.glRotatef(45F, 0, 1F, 0);
@@ -64,14 +71,17 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void renderBall(float x, float y, float z, double size) {
-		if (RenderItem.renderInFrame) {
+	private void renderBall(float x, float y, float z, double size)
+	{
+		if (RenderItem.renderInFrame)
+		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y - 0.7F, z);
 			GL11.glScaled(0.8F, 0.8F, 0.8F);
 			ModelWoodlouseBall.render(0.0625F);
 			GL11.glPopMatrix();
-		} else {
+		} else
+		{
 			GL11.glPushMatrix();
 			GL11.glScaled(size, size, size);
 			GL11.glRotatef(180F, 0, 0, 1F);
@@ -81,7 +91,8 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 		}
 	}
 
-	private void renderBallFirstPerson(float x, float y, float z, double size) {
+	private void renderBallFirstPerson(float x, float y, float z, double size)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(90F, 1F, 0, 0);
@@ -91,7 +102,8 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void renderBallInventory(float x, float y, float z, double size) {
+	private void renderBallInventory(float x, float y, float z, double size)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glScaled(size, size, size);
@@ -100,11 +112,13 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime)
+	{
 		renderWoodlouseBall((EntityWoodlouseBall) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
-	public void renderWoodlouseBall(EntityWoodlouseBall entityWoodlouseBall, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void renderWoodlouseBall(EntityWoodlouseBall entityWoodlouseBall, double x, double y, double z, float rotationYaw, float partialTickTime)
+	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y - 0.3F, (float) z);
@@ -115,7 +129,8 @@ public class WoodlouseBallItemRenderer extends Render implements IItemRenderer {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

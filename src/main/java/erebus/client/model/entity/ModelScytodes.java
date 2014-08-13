@@ -11,7 +11,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelScytodes extends ModelBase {
+public class ModelScytodes extends ModelBase
+{
 	ModelRenderer Lmand1;
 	ModelRenderer Lmand2;
 	ModelRenderer Rmand1;
@@ -79,7 +80,8 @@ public class ModelScytodes extends ModelBase {
 	ModelRenderer RBL5;
 	ModelRenderer RBL6;
 
-	public ModelScytodes() {
+	public ModelScytodes()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -360,7 +362,8 @@ public class ModelScytodes extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float ingCorpse, float edARaft, float away, float yClouds, float inACarnival, float ationTank) {
+	public void render(Entity entity, float ingCorpse, float edARaft, float away, float yClouds, float inACarnival, float ationTank)
+	{
 		super.render(entity, ingCorpse, edARaft, away, yClouds, inACarnival, ationTank);
 		setRotationAngles(ingCorpse, edARaft, away, yClouds, inACarnival, ationTank, entity);
 		Lmand1.render(ationTank);
@@ -431,14 +434,16 @@ public class ModelScytodes extends ModelBase {
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float cosZ = MathHelper.cos(limbSwing * 1.0F) * 0.3F * prevLimbSwing;
 		float cosY = MathHelper.cos(limbSwing * 1.0F) * 0.4F * prevLimbSwing;

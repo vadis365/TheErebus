@@ -20,7 +20,8 @@ import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.item.block.ItemBlockGeneric;
 
-public class BlockErebusOre extends Block implements ISubBlocksBlock {
+public class BlockErebusOre extends Block implements ISubBlocksBlock
+{
 
 	protected String[] iconPaths = new String[] { "oreCoalU", "oreIronU", "oreGoldU", "oreLapisU", "oreDiamondU", "oreEmeraldU", "oreJadeU", "petrifiedWoodOre", "oreVolcanicDiamond" };
 	public static final byte dataCoal = 0, dataIron = 1, dataGold = 2, dataLapis = 3, dataDiamond = 4, dataEmerald = 5, dataJade = 6, dataPetrifiedWood = 7, dataEncrustedDiamond = 8;
@@ -28,36 +29,48 @@ public class BlockErebusOre extends Block implements ISubBlocksBlock {
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] icons;
 
-	public BlockErebusOre() {
+	public BlockErebusOre()
+	{
 		super(Material.rock);
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(IIconRegister iconRegister)
+	{
 		icons = new IIcon[iconPaths.length];
 
 		for (int a = 0; a < iconPaths.length; a++)
+		{
 			icons[a] = iconRegister.registerIcon("erebus:" + iconPaths[a]);
+		}
 	}
 
 	@Override
-	public IIcon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta)
+	{
 		if (meta < 0 || meta >= icons.length)
+		{
 			return null;
+		}
 		return icons[meta];
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list)
+	{
 		for (int a = 0; a < iconPaths.length; a++)
+		{
 			list.add(new ItemStack(id, 1, a));
+		}
 	}
 
 	@Override
-	public int damageDropped(int meta) {
-		switch (meta) {
+	public int damageDropped(int meta)
+	{
+		switch (meta)
+		{
 			case dataCoal:
 			case dataDiamond:
 			case dataEmerald:
@@ -74,14 +87,18 @@ public class BlockErebusOre extends Block implements ISubBlocksBlock {
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
+	public int quantityDropped(int meta, int fortune, Random random)
+	{
 		int _default = meta == dataLapis ? 4 + random.nextInt(5) : 1;
 
-		if (Item.getItemFromBlock(this) != getItemDropped(meta, random, fortune)) {
+		if (Item.getItemFromBlock(this) != getItemDropped(meta, random, fortune))
+		{
 			int j = random.nextInt(fortune + 2) - 1;
 
 			if (j < 0)
+			{
 				j = 0;
+			}
 
 			return _default * (j + 1);
 		}
@@ -90,8 +107,10 @@ public class BlockErebusOre extends Block implements ISubBlocksBlock {
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random random, int fortune) {
-		switch (meta) {
+	public Item getItemDropped(int meta, Random random, int fortune)
+	{
+		switch (meta)
+		{
 			case 0:
 				return Items.coal;
 			case 3:
@@ -111,23 +130,28 @@ public class BlockErebusOre extends Block implements ISubBlocksBlock {
 	}
 
 	@Override
-	protected ItemStack createStackedBlock(int meta) {
+	protected ItemStack createStackedBlock(int meta)
+	{
 		return new ItemStack(this, 1, meta);
 	}
 
 	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
+	public int getDamageValue(World world, int x, int y, int z)
+	{
 		return world.getBlockMetadata(x, y, z);
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float chance, int fortune) {
+	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float chance, int fortune)
+	{
 		super.dropBlockAsItemWithChance(world, x, y, z, meta, chance, fortune);
 
-		if (getItemDropped(meta, world.rand, fortune) != Item.getItemFromBlock(this)) {
+		if (getItemDropped(meta, world.rand, fortune) != Item.getItemFromBlock(this))
+		{
 			int j1 = 0;
 
-			switch (meta) {
+			switch (meta)
+			{
 				case 0:
 					j1 = MathHelper.getRandomIntegerInRange(world.rand, 0, 2);
 					break;
@@ -145,7 +169,8 @@ public class BlockErebusOre extends Block implements ISubBlocksBlock {
 	}
 
 	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
+	public Class<? extends ItemBlock> getItemBlockClass()
+	{
 		return ItemBlockGeneric.class;
 	}
 }

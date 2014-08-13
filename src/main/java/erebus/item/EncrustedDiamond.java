@@ -6,15 +6,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.entity.EntityFireResistent;
 
-public class EncrustedDiamond extends Item {
+public class EncrustedDiamond extends Item
+{
 
 	@Override
-	public boolean hasCustomEntity(ItemStack stack) {
+	public boolean hasCustomEntity(ItemStack stack)
+	{
 		return true;
 	}
 
 	@Override
-	public Entity createEntity(World world, Entity location, ItemStack stack) {
+	public Entity createEntity(World world, Entity location, ItemStack stack)
+	{
 		EntityFireResistent entity = new EntityFireResistent(world, location.posX, location.posY, location.posZ, stack);
 		entity.motionX = location.motionX;
 		entity.motionY = location.motionY;

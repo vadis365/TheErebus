@@ -14,13 +14,15 @@ import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntitySolifuge;
 
-public final class RandomMobNames {
+public final class RandomMobNames
+{
 
 	public static final RandomMobNames instance = new RandomMobNames();
 
 	private static final Map<Class<? extends EntityLiving>, NameData> names = new HashMap<Class<? extends EntityLiving>, NameData>();
 
-	static {
+	static
+	{
 		names.put(EntityBotFly.class, new NameData(380, new String[] { "Butt Fly" }));
 		names.put(EntityGrasshopper.class, new NameData(360, new String[] { "Grasshumper", "Jimminey" }));
 		names.put(EntityBeetleLarva.class, new NameData(320, new String[] { "Trampoline", "Dylan4ever" }));
@@ -31,20 +33,25 @@ public final class RandomMobNames {
 	};
 
 	@SubscribeEvent
-	public void onLivingSpawn(LivingSpawnEvent e) {
+	public void onLivingSpawn(LivingSpawnEvent e)
+	{
 		EntityLiving entity = (EntityLiving) e.entityLiving;
 
 		NameData data = names.get(entity.getClass());
 
 		if (data != null && entity.getRNG().nextInt(data.diceSides) == 0 && !entity.hasCustomNameTag())
+		{
 			entity.setCustomNameTag(data.nameList[entity.getRNG().nextInt(data.nameList.length)]);
+		}
 	}
 
-	static final class NameData {
+	static final class NameData
+	{
 		final short diceSides;
 		final String[] nameList;
 
-		NameData(int diceSides, String[] nameList) {
+		NameData(int diceSides, String[] nameList)
+		{
 			this.diceSides = (short) diceSides;
 			this.nameList = nameList;
 		}

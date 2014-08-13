@@ -14,22 +14,26 @@ import erebus.ModBlocks;
 import erebus.client.model.entity.ModelFireAnt;
 import erebus.entity.EntityZombieAnt;
 
-public class RenderZombieAnt extends RenderLiving {
+public class RenderZombieAnt extends RenderLiving
+{
 
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackAntFungal.png");
 
 	private final RenderBlocks blockRenderer = new RenderBlocks();
 
-	public RenderZombieAnt() {
+	public RenderZombieAnt()
+	{
 		super(new ModelFireAnt(), 1.0F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime)
+	{
 		GL11.glScalef(1.5F, 1.5F, 1.5F);
 	}
 
-	public void renderZombieAnt(EntityZombieAnt entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void renderZombieAnt(EntityZombieAnt entity, double x, double y, double z, float rotationYaw, float partialTickTime)
+	{
 		double a = Math.toRadians(entity.renderYawOffset);
 		double offSetX = -Math.sin(a) * entity.width * 0.3D;
 		double offSetZ = Math.cos(a) * entity.width * 0.3D;
@@ -101,12 +105,14 @@ public class RenderZombieAnt extends RenderLiving {
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime)
+	{
 		renderZombieAnt((EntityZombieAnt) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

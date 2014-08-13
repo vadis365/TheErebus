@@ -9,7 +9,8 @@ import erebus.world.biomes.BiomeUndergroundJungle;
 import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.loot.WeightedList;
 
-public class ModBiomes {
+public class ModBiomes
+{
 	public static WeightedList<BiomeBaseErebus> biomeList = new WeightedList<BiomeBaseErebus>();
 
 	public static BiomeBaseErebus undergroundJungle;
@@ -44,16 +45,18 @@ public class ModBiomes {
 	public static int savannahSubSteppeID;
 	public static int fieldsSubForestID;
 
-	public static void init() {
-		for(int id:new int[]{
-			undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, betweenlandsID,
-			jungleSubLakeID, jungleSubAsperGroveID, desertSubCharredForestID, savannahSubRockyWastelandID, savannahSubAsperGroveID, savannahSubSteppeID, fieldsSubForestID
-		}){
-			if (id >= 128)throw new RuntimeException("Erebus biome IDs cannot be higher than 127!");
+	public static void init()
+	{
+		for (int id : new int[] { undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, betweenlandsID, jungleSubLakeID, jungleSubAsperGroveID, desertSubCharredForestID, savannahSubRockyWastelandID, savannahSubAsperGroveID, savannahSubSteppeID, fieldsSubForestID })
+		{
+			if (id >= 128)
+			{
+				throw new RuntimeException("Erebus biome IDs cannot be higher than 127!");
+			}
 		}
-		
+
 		// CREATE BIOMES
-		
+
 		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
 		volcanicDesert = new BiomeVolcanicDesert(volcanicDesertID);
 		subterraneanSavannah = new BiomeSubterraneanSavannah(subterraneanSavannahID);
@@ -62,16 +65,16 @@ public class ModBiomes {
 		fungalForest = new BiomeFungalForest(fungalForestID);
 
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);
-		
+
 		// MUTATIONS
-		
+
 		undergroundJungle.createMutation();
 		volcanicDesert.createMutation();
 		subterraneanSavannah.createMutation();
 		elysianFields.createMutation();
 		ulteriorOutback.createMutation();
 		fungalForest.createMutation();
-		
+
 		fieldsSubForest.createMutation();
 	}
 }

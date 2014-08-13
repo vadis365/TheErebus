@@ -8,15 +8,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelGrasshopper;
 
 @SideOnly(Side.CLIENT)
-public class RenderGrasshopper extends RenderLiving {
+public class RenderGrasshopper extends RenderLiving
+{
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/grasshopper.png");
 
-	public RenderGrasshopper() {
+	public RenderGrasshopper()
+	{
 		super(new ModelGrasshopper(), 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

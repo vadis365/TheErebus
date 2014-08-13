@@ -13,22 +13,26 @@ import erebus.client.model.entity.ModelBeetleLarva;
 import erebus.entity.EntityBeetleLarva;
 
 @SideOnly(Side.CLIENT)
-public class RenderBeetleLarva extends RenderLiving {
+public class RenderBeetleLarva extends RenderLiving
+{
 
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/beetleLarva.png");
 
-	public RenderBeetleLarva() {
+	public RenderBeetleLarva()
+	{
 		super(new ModelBeetleLarva(), 0.3F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float f)
+	{
 		float larvaSize = ((EntityBeetleLarva) entityliving).getLarvaSize();
 		GL11.glScalef(larvaSize, larvaSize, larvaSize);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

@@ -12,36 +12,45 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ItemPetrifiedWoodChestRenderer implements IItemRenderer {
+public class ItemPetrifiedWoodChestRenderer implements IItemRenderer
+{
 
 	private final ModelChest modelChest = new ModelChest();
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(ItemStack item, ItemRenderType type)
+	{
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	{
 		return true;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch (type) {
-			case ENTITY: {
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+	{
+		switch (type)
+		{
+			case ENTITY:
+			{
 				renderChest(0.5F, 0.5F, 0.5F);
 				break;
 			}
-			case EQUIPPED: {
+			case EQUIPPED:
+			{
 				renderChest(1.0F, 1.0F, 1.0F);
 				break;
 			}
-			case EQUIPPED_FIRST_PERSON: {
+			case EQUIPPED_FIRST_PERSON:
+			{
 				renderChest(1.0F, 1.0F, 1.0F);
 				break;
 			}
-			case INVENTORY: {
+			case INVENTORY:
+			{
 				renderChest(0.0F, 0.075F, 0.0F);
 				break;
 			}
@@ -50,7 +59,8 @@ public class ItemPetrifiedWoodChestRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderChest(float x, float y, float z) {
+	private void renderChest(float x, float y, float z)
+	{
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("erebus:textures/special/tiles/petrifiedChest.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);

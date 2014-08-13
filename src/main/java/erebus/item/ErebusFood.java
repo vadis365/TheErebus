@@ -22,9 +22,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unchecked")
-public class ErebusFood extends ItemFood {
+public class ErebusFood extends ItemFood
+{
 
-	public static enum FoodType {
+	public static enum FoodType
+	{
 		larvaRaw,
 		larvaCooked,
 		grasshopperLegRaw,
@@ -41,8 +43,10 @@ public class ErebusFood extends ItemFood {
 		titanChopCooked
 	}
 
-	static {
-		try {
+	static
+	{
+		try
+		{
 			Field f = ReflectionHelper.findField(PotionHelper.class, "potionRequirements", "field_77927_l");
 			f.setAccessible(true);
 			HashMap<Integer, String> potionRequirements = (HashMap<Integer, String>) f.get(null);
@@ -56,21 +60,25 @@ public class ErebusFood extends ItemFood {
 			Field f3 = ReflectionHelper.findField(Potion.class, "liquidColor", "field_76414_N");
 			f3.setAccessible(true);
 			f3.set(Potion.jump, 0x22FF4C);
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
 
-	public ErebusFood() {
+	public ErebusFood()
+	{
 		super(3, 0.5F, false);
 		setHasSubtypes(true);
 		setMaxDamage(0);
 	}
 
-	public int getHealAmount(ItemStack is, World world, EntityPlayer player) {
-		switch (FoodType.values()[is.getItemDamage()]) {
+	public int getHealAmount(ItemStack is, World world, EntityPlayer player)
+	{
+		switch (FoodType.values()[is.getItemDamage()])
+		{
 			case larvaRaw:
 				return 1;
 			case larvaCooked:
@@ -104,8 +112,10 @@ public class ErebusFood extends ItemFood {
 		}
 	}
 
-	public float getSaturationModifier(ItemStack is, World world, EntityPlayer player) {
-		switch (FoodType.values()[is.getItemDamage()]) {
+	public float getSaturationModifier(ItemStack is, World world, EntityPlayer player)
+	{
+		switch (FoodType.values()[is.getItemDamage()])
+		{
 			case larvaRaw:
 				return 0.1F;
 			case larvaCooked:
@@ -139,8 +149,10 @@ public class ErebusFood extends ItemFood {
 		}
 	}
 
-	public PotionEffect getPotionEffect(ItemStack is, World world, EntityPlayer player) {
-		switch (FoodType.values()[is.getItemDamage()]) {
+	public PotionEffect getPotionEffect(ItemStack is, World world, EntityPlayer player)
+	{
+		switch (FoodType.values()[is.getItemDamage()])
+		{
 			case larvaRaw:
 				return new PotionEffect(Potion.confusion.id, 300, 2);
 			case melonadeSparkly:
@@ -155,8 +167,10 @@ public class ErebusFood extends ItemFood {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack is) {
-		switch (FoodType.values()[is.getItemDamage()]) {
+	public EnumAction getItemUseAction(ItemStack is)
+	{
+		switch (FoodType.values()[is.getItemDamage()])
+		{
 			case melonade:
 			case melonadeSparkly:
 				return EnumAction.drink;
@@ -166,7 +180,8 @@ public class ErebusFood extends ItemFood {
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
+	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
+	{
 		is.stackSize--;
 		player.getFoodStats().addStats(getHealAmount(is, world, player), getSaturationModifier(is, world, player));
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
@@ -174,7 +189,8 @@ public class ErebusFood extends ItemFood {
 
 		Item item = null;
 
-		switch (FoodType.values()[is.getItemDamage()]) {
+		switch (FoodType.values()[is.getItemDamage()])
+		{
 			case bambooSoup:
 				item = Items.bowl;
 				break;
@@ -185,50 +201,67 @@ public class ErebusFood extends ItemFood {
 				return is;
 		}
 		if (is.stackSize != 0)
+		{
 			player.inventory.addItemStackToInventory(new ItemStack(item));
+		}
 
 		return is.stackSize == 0 ? new ItemStack(item) : is;
 	}
 
 	@Override
-	protected void onFoodEaten(ItemStack is, World world, EntityPlayer player) {
+	protected void onFoodEaten(ItemStack is, World world, EntityPlayer player)
+	{
 		PotionEffect effect = this.getPotionEffect(is, world, player);
 		if (!world.isRemote && effect != null)
+		{
 			player.addPotionEffect(effect);
+		}
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(IIconRegister iconRegister)
+	{
 		icons = new IIcon[FoodType.values().length];
 		int i = 0;
 		for (FoodType type : FoodType.values())
+		{
 			icons[i++] = iconRegister.registerIcon("erebus:" + type);
+		}
 	}
 
 	@Override
-	public IIcon getIconFromDamage(int meta) {
+	public IIcon getIconFromDamage(int meta)
+	{
 		if (meta < 0 || meta >= icons.length)
+		{
 			return null;
+		}
 		return icons[meta];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "rawtypes" })
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, List list)
+	{
 		for (int i = 0; i < FoodType.values().length; i++)
+		{
 			list.add(new ItemStack(id, 1, i));
+		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack is) {
+	public String getUnlocalizedName(ItemStack is)
+	{
 		int i = is.getItemDamage();
 		return super.getUnlocalizedName() + "." + i;
 	}
 
 	@Override
-	public ItemStack getContainerItem(ItemStack stack) {
-		switch (FoodType.values()[stack.getItemDamage()]) {
+	public ItemStack getContainerItem(ItemStack stack)
+	{
+		switch (FoodType.values()[stack.getItemDamage()])
+		{
 			case bambooSoup:
 				return new ItemStack(Items.bowl);
 			case melonade:
@@ -240,8 +273,10 @@ public class ErebusFood extends ItemFood {
 	}
 
 	@Override
-	public boolean hasContainerItem(ItemStack stack) {
-		switch (FoodType.values()[stack.getItemDamage()]) {
+	public boolean hasContainerItem(ItemStack stack)
+	{
+		switch (FoodType.values()[stack.getItemDamage()])
+		{
 			case bambooSoup:
 			case melonade:
 			case melonadeSparkly:
@@ -252,12 +287,14 @@ public class ErebusFood extends ItemFood {
 	}
 
 	@Override
-	public String getPotionEffect(ItemStack stack) {
+	public String getPotionEffect(ItemStack stack)
+	{
 		return "+0+1-2+3&4-4+13";
 	}
 
 	@Override
-	public boolean isPotionIngredient(ItemStack stack) {
+	public boolean isPotionIngredient(ItemStack stack)
+	{
 		return stack != null && stack.getItemDamage() == FoodType.grasshopperLegRaw.ordinal();
 	}
 }

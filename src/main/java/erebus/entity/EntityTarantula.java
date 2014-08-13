@@ -18,22 +18,26 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityTarantula extends EntityMob {
+public class EntityTarantula extends EntityMob
+{
 	public int skin = rand.nextInt(99);
 
-	public EntityTarantula(World world) {
+	public EntityTarantula(World world)
+	{
 		super(world);
 		setSize(1.3F, 0.6F);
 	}
 
 	@Override
-	protected void entityInit() {
+	protected void entityInit()
+	{
 		super.entityInit();
 		dataWatcher.addObject(16, new Byte((byte) 0));
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
@@ -41,84 +45,106 @@ public class EntityTarantula extends EntityMob {
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 2;
 	}
 
 	@Override
-	public int getTotalArmorValue() {
+	public int getTotalArmorValue()
+	{
 		return 4;
 	}
 
 	@Override
-	public boolean isOnLadder() {
+	public boolean isOnLadder()
+	{
 		return isBesideClimbableBlock();
 	}
 
 	@Override
-	public void setInWeb() {
+	public void setInWeb()
+	{
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	public boolean isPotionApplicable(PotionEffect potionEffect) {
+	public boolean isPotionApplicable(PotionEffect potionEffect)
+	{
 		return potionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(potionEffect);
 	}
 
-	public boolean isBesideClimbableBlock() {
+	public boolean isBesideClimbableBlock()
+	{
 		return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
 	}
 
-	public void setBesideClimbableBlock(boolean besideBlock) {
+	public void setBesideClimbableBlock(boolean besideBlock)
+	{
 		byte b0 = dataWatcher.getWatchableObjectByte(16);
 
 		if (besideBlock)
+		{
 			b0 = (byte) (b0 | 1);
-		else
+		} else
+		{
 			b0 &= -2;
+		}
 
 		dataWatcher.updateObject(16, Byte.valueOf(b0));
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "mob.spider.say";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "mob.spider.say";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "mob.spider.death";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 		if (!worldObj.isRemote)
+		{
 			setBesideClimbableBlock(isCollidedHorizontally);
+		}
 	}
 
 	@Override
-	protected void attackEntity(Entity entity, float distance) {
-		if (distance < 2.0F) {
+	protected void attackEntity(Entity entity, float distance)
+	{
+		if (distance < 2.0F)
+		{
 			super.attackEntity(entity, distance);
 			attackEntityAsMob(entity);
 		}
 		if (distance > 2.0F && distance < 6.0F && rand.nextInt(10) == 0)
-			if (onGround) {
+		{
+			if (onGround)
+			{
 				double d0 = entity.posX - posX;
 				double d1 = entity.posZ - posZ;
 				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
@@ -126,35 +152,50 @@ public class EntityTarantula extends EntityMob {
 				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
 				motionY = 0.4000000059604645D;
 			}
+		}
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		if (super.attackEntityAsMob(entity)) {
+	public boolean attackEntityAsMob(Entity entity)
+	{
+		if (super.attackEntityAsMob(entity))
+		{
 
-			if (entity instanceof EntityLiving) {
+			if (entity instanceof EntityLiving)
+			{
 				byte duration = 0;
 
 				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal() && rand.nextInt(19) == 0)
+				{
 					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+					{
 						duration = 5;
-					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					} else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					{
 						duration = 10;
+					}
+				}
 
 				if (duration > 0)
+				{
 					((EntityLiving) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
+				}
 			}
 			return true;
 		} else
+		{
 			return false;
+		}
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		int chanceFiftyFifty = rand.nextInt(1) + 1;
 		int chance20x60x20 = rand.nextInt(4);
 		int legDrop = 0;
-		switch (chance20x60x20) {
+		switch (chance20x60x20)
+		{
 			case 0:
 				legDrop = 1;
 				break;
@@ -168,33 +209,44 @@ public class EntityTarantula extends EntityMob {
 				break;
 		}
 		if (isBurning())
+		{
 			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 5), 0.0F);
-		else
+		} else
+		{
 			entityDropItem(new ItemStack(ModItems.erebusFood, legDrop + looting, 4), 0.0F);
+		}
 		dropItem(Items.spider_eye, chanceFiftyFifty + looting);
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData)
+	{
 		Object entityLivingData1 = super.onSpawnWithEgg(entityLivingData);
 
-		if (worldObj.rand.nextInt(100) == 0) {
+		if (worldObj.rand.nextInt(100) == 0)
+		{
 			EntityMoneySpider entityspidermoney = new EntityMoneySpider(worldObj);
 			entityspidermoney.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
 			entityspidermoney.onSpawnWithEgg((IEntityLivingData) null);
 			worldObj.spawnEntityInWorld(entityspidermoney);
 			entityspidermoney.mountEntity(this);
 		}
-		if (entityLivingData1 == null) {
+		if (entityLivingData1 == null)
+		{
 			entityLivingData1 = new EntitySpider.GroupData();
 			if (worldObj.difficultySetting == EnumDifficulty.HARD && worldObj.rand.nextFloat() < 0.1F * worldObj.func_147462_b(posX, posY, posZ))
+			{
 				((EntitySpider.GroupData) entityLivingData1).func_111104_a(worldObj.rand);
+			}
 
-			if (entityLivingData1 instanceof EntitySpider.GroupData) {
+			if (entityLivingData1 instanceof EntitySpider.GroupData)
+			{
 				int i = ((EntitySpider.GroupData) entityLivingData1).field_111105_a;
 				if (i > 0 && Potion.potionTypes[i] != null)
+				{
 					addPotionEffect(new PotionEffect(i, Integer.MAX_VALUE));
+				}
 			}
 		}
 		return (IEntityLivingData) entityLivingData1;

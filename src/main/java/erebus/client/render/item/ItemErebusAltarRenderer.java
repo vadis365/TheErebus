@@ -13,23 +13,28 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelErebusAltar;
 
 @SideOnly(Side.CLIENT)
-public class ItemErebusAltarRenderer implements IItemRenderer {
+public class ItemErebusAltarRenderer implements IItemRenderer
+{
 
 	private final ModelErebusAltar ModelAltarBlock = new ModelErebusAltar();
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(ItemStack item, ItemRenderType type)
+	{
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	{
 		return helper != ItemRendererHelper.BLOCK_3D;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch (type) {
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+	{
+		switch (type)
+		{
 			case ENTITY:
 				renderBlock(0.0F, 1.0F, 0.0F, 0.5D);
 				break;
@@ -47,16 +52,19 @@ public class ItemErebusAltarRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderBlock(float x, float y, float z, double size) {
+	private void renderBlock(float x, float y, float z, double size)
+	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/altarBase.png"));
-		if (RenderItem.renderInFrame) {
+		if (RenderItem.renderInFrame)
+		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y - 0.625F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glScaled(0.5F, 0.5F, 0.5F);
 			ModelAltarBlock.render();
 			GL11.glPopMatrix();
-		} else {
+		} else
+		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y, z);
 			GL11.glRotatef(180F, 1F, 0, 0);

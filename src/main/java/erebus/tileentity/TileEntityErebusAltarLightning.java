@@ -14,7 +14,8 @@ import erebus.entity.EntityMobBlock;
 import erebus.entity.EntityUmberGolem;
 import erebus.entity.effect.EntityErebusLightningBolt;
 
-public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
+public class TileEntityErebusAltarLightning extends TileEntityErebusAltar
+{
 
 	public int animationTicks;
 	public boolean active;
@@ -22,37 +23,61 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
 	private int spawnTicks;
 
 	@Override
-	public void updateEntity() {
+	public void updateEntity()
+	{
 		findEnemyToAttack();
 		spawnTicks--;
-		if (active) {
+		if (active)
+		{
 			if (animationTicks == 0)
+			{
 				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+			}
 			if (animationTicks <= 24)
+			{
 				animationTicks++;
+			}
 			if (animationTicks == 25)
-				if (fuzz < 20) {
+			{
+				if (fuzz < 20)
+				{
 					fuzz++;
 					if (fuzz >= 20)
+					{
 						fuzz = 0;
+					}
 				}
+			}
 		}
-		if (!active) {
+		if (!active)
+		{
 			if (animationTicks == 25)
+			{
 				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+			}
 			if (animationTicks >= 1)
+			{
 				animationTicks--;
+			}
 			if (animationTicks == 1)
+			{
 				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar);
+			}
 		}
 		if (animationTicks >= 1 && animationTicks <= 24)
+		{
 			flameOn(worldObj, xCoord, yCoord, zCoord);
+		}
 		if (spawnTicks == 0)
+		{
 			setActive(false);
+		}
 	}
 
-	public void flameOn(World world, int x, int y, int z) {
-		if (world.isRemote) {
+	public void flameOn(World world, int x, int y, int z)
+	{
+		if (world.isRemote)
+		{
 			double d0 = x + 0.53125F;
 			double d1 = y + 1.25F;
 			double d2 = z + 0.53125F;
@@ -73,23 +98,31 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
 		}
 	}
 
-	public void setActive(boolean par1) {
+	public void setActive(boolean par1)
+	{
 		active = par1;
 	}
 
-	public void setSpawnTicks(int i) {
+	public void setSpawnTicks(int i)
+	{
 		spawnTicks = i;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Entity findEnemyToAttack() {
+	protected Entity findEnemyToAttack()
+	{
 		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D).expand(6D, 2D, 6D));
 		if (active)
-			for (int i = 0; i < list.size(); i++) {
+		{
+			for (int i = 0; i < list.size(); i++)
+			{
 				Entity entity = list.get(i);
 				if (entity != null)
+				{
 					if (entity instanceof EntityLivingBase)
-						if (((EntityLivingBase) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD) && !(entity instanceof EntityMobBlock) && !(entity instanceof EntityUmberGolem)) {
+					{
+						if (((EntityLivingBase) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD) && !(entity instanceof EntityMobBlock) && !(entity instanceof EntityUmberGolem))
+						{
 							double a = entity.posX;
 							double b = entity.boundingBox.minY;
 							double c = entity.posZ;
@@ -97,19 +130,24 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
 							entitybolt.setLocationAndAngles(a, b, c, 0F, 0F);
 							worldObj.addWeatherEffect(entitybolt);
 						}
+					}
+				}
 			}
+		}
 		return null;
 	}
 
 	@Override
-	protected void writeTileToNBT(NBTTagCompound nbt) {
+	protected void writeTileToNBT(NBTTagCompound nbt)
+	{
 		nbt.setInteger("animationTicks", animationTicks);
 		nbt.setInteger("spawnTicks", spawnTicks);
 		nbt.setBoolean("active", active);
 	}
 
 	@Override
-	protected void readTileFromNBT(NBTTagCompound nbt) {
+	protected void readTileFromNBT(NBTTagCompound nbt)
+	{
 		animationTicks = nbt.getInteger("animationTicks");
 		spawnTicks = nbt.getInteger("spawnTicks");
 		active = nbt.getBoolean("active");

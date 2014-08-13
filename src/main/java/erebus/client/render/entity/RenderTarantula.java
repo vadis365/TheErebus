@@ -9,21 +9,27 @@ import erebus.client.model.entity.ModelTarantula;
 import erebus.entity.EntityTarantula;
 
 @SideOnly(Side.CLIENT)
-public class RenderTarantula extends RenderLiving {
+public class RenderTarantula extends RenderLiving
+{
 
 	private final ResourceLocation resource1 = new ResourceLocation("erebus:textures/entity/tarantula.png");
 	private final ResourceLocation resource2 = new ResourceLocation("erebus:textures/entity/tarantulaTurqoise.png");
 
-	public RenderTarantula() {
+	public RenderTarantula()
+	{
 		super(new ModelTarantula(), 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		EntityTarantula tarantula = (EntityTarantula) entity;
 		if (tarantula.skin <= 4)
+		{
 			return resource2;
-		else
+		} else
+		{
 			return resource1;
+		}
 	}
 }

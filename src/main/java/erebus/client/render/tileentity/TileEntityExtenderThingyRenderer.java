@@ -15,15 +15,18 @@ import erebus.client.model.block.ModelExtenderThingy;
 import erebus.tileentity.TileEntityExtenderThingy;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer {
+public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer
+{
 
 	private final ModelExtenderThingy ModelExtenderThingy = new ModelExtenderThingy();
 	private final RenderBlocks blockRenderer = new RenderBlocks();
 
-	public void renderAModelAt(TileEntityExtenderThingy tile, double x, double y, double z, float f) {
+	public void renderAModelAt(TileEntityExtenderThingy tile, double x, double y, double z, float f)
+	{
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/extenderThingy.png"));
 		int meta = tile.getBlockMetadata();
-		switch (meta) {
+		switch (meta)
+		{
 			case 0:
 				GL11.glPushMatrix();
 				GL11.glTranslated(x + 0.5D, y - 0.5F, z + 0.5D);
@@ -89,7 +92,8 @@ public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer 
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float meta) {
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float meta)
+	{
 		renderAModelAt((TileEntityExtenderThingy) tile, x, y, z, meta);
 	}
 }

@@ -10,30 +10,39 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 
 @SideOnly(Side.CLIENT)
-public class TextureHomingBeecon extends TextureAtlasSprite {
+public class TextureHomingBeecon extends TextureAtlasSprite
+{
 
 	public double currentAngle;
 	public double angleDelta;
 	public int targetX, targetZ;
 
-	public TextureHomingBeecon() {
+	public TextureHomingBeecon()
+	{
 		super("erebus:homingBeecon");
 	}
 
 	@Override
-	public void updateAnimation() {
+	public void updateAnimation()
+	{
 		Minecraft minecraft = Minecraft.getMinecraft();
 		if (minecraft.theWorld != null && minecraft.thePlayer != null)
+		{
 			updateCompass(minecraft.theWorld, minecraft.thePlayer.posX, minecraft.thePlayer.posZ, minecraft.thePlayer.rotationYaw, false, false);
-		else
+		} else
+		{
 			updateCompass((World) null, 0.0D, 0.0D, 0.0D, true, false);
+		}
 	}
 
-	public void updateCompass(World world, double x, double z, double rotation, boolean flag1, boolean flag2) {
+	public void updateCompass(World world, double x, double z, double rotation, boolean flag1, boolean flag2)
+	{
 		getBeeconHome();
-		if (!framesTextureData.isEmpty()) {
+		if (!framesTextureData.isEmpty())
+		{
 			double angle = 0.0D;
-			if (world != null && !flag1) {
+			if (world != null && !flag1)
+			{
 				double locationX = targetX - x;
 				double locationZ = targetZ - z;
 				rotation %= 360.0D;
@@ -41,19 +50,30 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
 			}
 
 			if (flag2)
+			{
 				currentAngle = angle;
-			else {
+			} else
+			{
 				double angle2;
-				for (angle2 = angle - currentAngle; angle2 < -Math.PI; angle2 += Math.PI * 2D);
+				for (angle2 = angle - currentAngle; angle2 < -Math.PI; angle2 += Math.PI * 2D)
+				{
+					;
+				}
 
 				while (angle2 >= Math.PI)
+				{
 					angle2 -= Math.PI * 2D;
+				}
 
 				if (angle2 < -1.0D)
+				{
 					angle2 = -1.0D;
+				}
 
 				if (angle2 > 1.0D)
+				{
 					angle2 = 1.0D;
+				}
 
 				angleDelta += angle2 * 0.1D;
 				angleDelta *= 0.8D;
@@ -61,25 +81,33 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
 			}
 
 			int i;
-			for (i = (int) ((currentAngle / (Math.PI * 2D) + 1.0D) * framesTextureData.size()) % framesTextureData.size(); i < 0; i = (i + framesTextureData.size()) % framesTextureData.size());
+			for (i = (int) ((currentAngle / (Math.PI * 2D) + 1.0D) * framesTextureData.size()) % framesTextureData.size(); i < 0; i = (i + framesTextureData.size()) % framesTextureData.size())
+			{
+				;
+			}
 
-			if (i != frameCounter) {
+			if (i != frameCounter)
+			{
 				frameCounter = i;
 				TextureUtil.uploadTextureMipmap((int[][]) framesTextureData.get(frameCounter), width, height, originX, originY, false, false);
 			}
 		}
 	}
 
-	public void getBeeconHome() {
+	public void getBeeconHome()
+	{
 		Minecraft minecraft = Minecraft.getMinecraft();
-		if (minecraft.theWorld != null && minecraft.thePlayer != null) {
+		if (minecraft.theWorld != null && minecraft.thePlayer != null)
+		{
 			ItemStack is = minecraft.thePlayer.inventory.getCurrentItem();
-			if (is != null && is.getItem() == ModItems.homingBeecon && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
+			if (is != null && is.getItem() == ModItems.homingBeecon && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX"))
+			{
 				targetX = is.getTagCompound().getInteger("homeX");
 				targetZ = is.getTagCompound().getInteger("homeZ");
 			}
 
-			if (is != null && is.getItem() == ModItems.homingBeeconAdvanced && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
+			if (is != null && is.getItem() == ModItems.homingBeeconAdvanced && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX"))
+			{
 				targetX = is.getTagCompound().getInteger("homeX");
 				targetZ = is.getTagCompound().getInteger("homeZ");
 			}

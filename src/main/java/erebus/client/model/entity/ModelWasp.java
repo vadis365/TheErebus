@@ -12,7 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityWasp;
 
 @SideOnly(Side.CLIENT)
-public class ModelWasp extends ModelBase {
+public class ModelWasp extends ModelBase
+{
 
 	ModelRenderer Thx;
 	ModelRenderer ThxS;
@@ -69,7 +70,8 @@ public class ModelWasp extends ModelBase {
 	ModelRenderer LWingMid;
 	ModelRenderer LWingFront;
 
-	public ModelWasp() {
+	public ModelWasp()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -292,7 +294,8 @@ public class ModelWasp extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GL11.glPushMatrix();
@@ -358,14 +361,16 @@ public class ModelWasp extends ModelBase {
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float heady = rotationYaw / (180F / (float) Math.PI);
 		float headx = rotationPitch / (180F / (float) Math.PI) - 1.0F;
@@ -394,7 +399,8 @@ public class ModelWasp extends ModelBase {
 		LMandibleA.rotateAngleX = headx;
 		LMandibleB.rotateAngleX = headx;
 		EntityWasp wasp = (EntityWasp) entity;
-		if (wasp.onGround) {
+		if (wasp.onGround)
+		{
 			float legx1 = MathHelper.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * prevLimbSwing;
 			float legx2 = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing;
 			LBLA.rotateAngleX = legx1 + 0.25F;
@@ -440,7 +446,8 @@ public class ModelWasp extends ModelBase {
 			AbBack.rotateAngleX = -0.2F;
 			Sting.rotateAngleX = -0.2F;
 		}
-		if (wasp.isFlying()) {
+		if (wasp.isFlying())
+		{
 			LBLA.rotateAngleX = +0.25F;
 			LBLB.rotateAngleX = +0.25F;
 			LBLC.rotateAngleX = +0.5F;

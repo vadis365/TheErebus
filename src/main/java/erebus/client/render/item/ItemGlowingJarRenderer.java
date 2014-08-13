@@ -10,21 +10,26 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.render.tileentity.TileEntityGlowingJarRenderer;
 
 @SideOnly(Side.CLIENT)
-public class ItemGlowingJarRenderer implements IItemRenderer {
+public class ItemGlowingJarRenderer implements IItemRenderer
+{
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(ItemStack item, ItemRenderType type)
+	{
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	{
 		return helper != ItemRendererHelper.BLOCK_3D;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch (type) {
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+	{
+		switch (type)
+		{
 			case ENTITY:
 				GL11.glScaled(0.5D, 0.5D, 0.5D);
 				renderBlock(-0.5F, 0.0F, -0.5F);
@@ -44,7 +49,8 @@ public class ItemGlowingJarRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderBlock(float x, float y, float z) {
+	private void renderBlock(float x, float y, float z)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		TileEntityGlowingJarRenderer.instance.renderJar(0, 0, 0);

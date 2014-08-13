@@ -10,7 +10,8 @@ import erebus.block.BlockErebusOreExtras;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.feature.decoration.WorldGenErebusMinable;
 
-public final class OreSettings {
+public final class OreSettings
+{
 	private static final byte[] checkX = new byte[] { -1, -1, 1, 1, 0, 0 }, checkY = new byte[] { 0, 0, 0, 0, -1, 1 }, checkZ = new byte[] { -1, 1, -1, 1, 0, 0 };
 
 	private static final WorldGenErebusMinable genMinable = new WorldGenErebusMinable();
@@ -22,12 +23,14 @@ public final class OreSettings {
 	private byte minY, maxY;
 	private byte checkArea;
 
-	public OreSettings setType(OreType oreType) {
+	public OreSettings setType(OreType oreType)
+	{
 		this.oreType = oreType;
 		return this;
 	}
 
-	public OreSettings reset() {
+	public OreSettings reset()
+	{
 		chance = 1F;
 		minY = 5;
 		maxY = 112;
@@ -35,71 +38,93 @@ public final class OreSettings {
 		return this;
 	}
 
-	public OreSettings setChance(float chance) {
+	public OreSettings setChance(float chance)
+	{
 		this.chance = chance;
 		return this;
 	}
 
-	public OreSettings setIterations(int iterations) {
+	public OreSettings setIterations(int iterations)
+	{
 		minIterations = maxIterations = (byte) iterations;
 		return this;
 	}
 
-	public OreSettings setIterations(int minIterations, int maxIterations) {
+	public OreSettings setIterations(int minIterations, int maxIterations)
+	{
 		this.minIterations = (byte) minIterations;
 		this.maxIterations = (byte) maxIterations;
 		return this;
 	}
 
-	public OreSettings setOreAmount(int amount) {
+	public OreSettings setOreAmount(int amount)
+	{
 		minAmount = maxAmount = (byte) amount;
 		return this;
 	}
 
-	public OreSettings setOreAmount(int minAmount, int maxAmount) {
+	public OreSettings setOreAmount(int minAmount, int maxAmount)
+	{
 		this.minAmount = (byte) minAmount;
 		this.maxAmount = (byte) maxAmount;
 		return this;
 	}
 
-	public OreSettings setY(int minY, int maxY) {
+	public OreSettings setY(int minY, int maxY)
+	{
 		this.minY = (byte) minY;
 		this.maxY = (byte) maxY;
 		return this;
 	}
 
-	public OreSettings setCheckArea(int checkArea) {
+	public OreSettings setCheckArea(int checkArea)
+	{
 		this.checkArea = (byte) checkArea;
 		return this;
 	}
 
-	public void generate(World world, Random rand, int x, int z) {
+	public void generate(World world, Random rand, int x, int z)
+	{
 		if (rand.nextFloat() >= chance)
+		{
 			return;
+		}
 
 		int iterations = minIterations + rand.nextInt(maxIterations - minIterations + 1);
 
 		for (int iteration = 0, attempt, xx, yy, zz, testX, testY, testZ, oreAmount, a; iteration < iterations; iteration++)
-			for (attempt = 0; attempt < 12; attempt++) {
+		{
+			for (attempt = 0; attempt < 12; attempt++)
+			{
 				xx = x + rand.nextInt(16);
 				zz = z + rand.nextInt(16);
 				yy = minY + rand.nextInt(Math.max(1, 1 + maxY - minY));
 
-				for (a = 0; a < 6; a++) {
+				for (a = 0; a < 6; a++)
+				{
 					testX = xx + checkX[a] * checkArea;
 					testY = yy + checkY[a] * checkArea;
 					testZ = zz + checkZ[a] * checkArea;
 
 					if (testX >> 4 != x >> 4)
+					{
 						testX = x;
+					}
 					if (testZ >> 4 != z >> 4)
+					{
 						testZ = z;
+					}
 
-					if (world.isAirBlock(testX, testY, testZ)) {
-						if ((oreAmount = minAmount + rand.nextInt(maxAmount - minAmount + 1)) == 1) {
+					if (world.isAirBlock(testX, testY, testZ))
+					{
+						if ((oreAmount = minAmount + rand.nextInt(maxAmount - minAmount + 1)) == 1)
+						{
 							if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone)
+							{
 								world.setBlock(xx, yy, zz, oreType.oreBlock, oreType.oreMeta, 2);
-						} else {
+							}
+						} else
+						{
 							genMinable.prepare(oreType.oreBlock, oreType.oreMeta, oreAmount);
 							genMinable.generate(world, rand, xx, yy, zz);
 						}
@@ -109,9 +134,11 @@ public final class OreSettings {
 					}
 				}
 			}
+		}
 	}
 
-	public static enum OreType {
+	public static enum OreType
+	{
 		COAL(BlockErebusOre.dataCoal),
 		IRON(BlockErebusOre.dataIron),
 		GOLD(BlockErebusOre.dataGold),
@@ -131,21 +158,25 @@ public final class OreSettings {
 		final Block oreBlock;
 		final byte oreMeta;
 
-		OreType(Block oreBlock, int oreMeta) {
+		OreType(Block oreBlock, int oreMeta)
+		{
 			this.oreBlock = oreBlock;
 			this.oreMeta = (byte) oreMeta;
 		}
 
-		OreType(int oreMeta) {
+		OreType(int oreMeta)
+		{
 			oreBlock = ModBlocks.umberOreBlock;
 			this.oreMeta = (byte) oreMeta;
 		}
 
-		public void setupDefault(OreSettings settings, boolean extraOres) {
+		public void setupDefault(OreSettings settings, boolean extraOres)
+		{
 			settings.reset();
 			settings.setType(this);
 
-			switch (this) {
+			switch (this)
+			{
 				case COAL:
 					settings.setIterations(extraOres ? 6 : 8).setOreAmount(9, 12);
 					break;

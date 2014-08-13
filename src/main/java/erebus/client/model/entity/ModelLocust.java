@@ -12,7 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityLocust;
 
 @SideOnly(Side.CLIENT)
-public class ModelLocust extends ModelBase {
+public class ModelLocust extends ModelBase
+{
 
 	ModelRenderer LAnt;
 	ModelRenderer RAnt;
@@ -61,7 +62,8 @@ public class ModelLocust extends ModelBase {
 	ModelRenderer LBWing;
 	ModelRenderer RBWing;
 
-	public ModelLocust() {
+	public ModelLocust()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 		LAnt = new ModelRenderer(this, 0, 0);
@@ -251,7 +253,8 @@ public class ModelLocust extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		LAnt.render(unitPixel);
@@ -306,14 +309,16 @@ public class ModelLocust extends ModelBase {
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		float heady = rotationYaw / (180F / (float) Math.PI);
 		float headx = rotationPitch / (180F / (float) Math.PI);
 		float legx1 = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing;
@@ -355,7 +360,8 @@ public class ModelLocust extends ModelBase {
 		RFL3.rotateAngleX = legx1;
 		RFL4.rotateAngleX = legx1;
 		EntityLocust var8 = (EntityLocust) entity;
-		if (!var8.onGround) {
+		if (!var8.onGround)
+		{
 			LBL4.setRotationPoint(2F, 22.0F, 14F);
 			LBL5.setRotationPoint(2F, 22.0F, 14F);
 			LBL6.setRotationPoint(2F, 21.0F, 14F);
@@ -399,7 +405,8 @@ public class ModelLocust extends ModelBase {
 			LFWing.rotateAngleX = legx1;
 			LBWing.rotateAngleX = legx1;
 		}
-		if (var8.onGround) {
+		if (var8.onGround)
+		{
 			RFWing.rotateAngleY = 0F;
 			RBWing.rotateAngleY = 0F;
 			LFWing.rotateAngleY = 0F;

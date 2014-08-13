@@ -10,10 +10,12 @@ import erebus.ModBlocks;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
-public class BlockSiloRoofRender implements ISimpleBlockRenderingHandler {
+public class BlockSiloRoofRender implements ISimpleBlockRenderingHandler
+{
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
+	{
 		renderer.setRenderBounds(0.375F, 0.5625F, 0.375F, 0.625F, 0.75F, 0.625F);
 		BlockRenderHelper.renderSimpleBlock(ModBlocks.siloRoof, 0, renderer);
 		renderer.setRenderBounds(0.25F, 0.375F, 0.25F, 0.75F, 0.5625F, 0.75F);
@@ -25,7 +27,8 @@ public class BlockSiloRoofRender implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
+	{
 		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0.375F, 0.5625F, 0.375F, 0.625F, 0.75F, 0.625F);
 		renderer.renderStandardBlock(ModBlocks.siloRoof, x, y, z);
@@ -40,12 +43,14 @@ public class BlockSiloRoofRender implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
+	public boolean shouldRender3DInInventory(int modelId)
+	{
 		return true;
 	}
 
 	@Override
-	public int getRenderId() {
+	public int getRenderId()
+	{
 		return BlockRenderIDs.SILO_ROOF.id();
 	}
 }

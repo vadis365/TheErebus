@@ -22,12 +22,14 @@ import erebus.item.ErebusMaterial.DATA;
 import erebus.item.ErebusSpecial;
 import erebus.lib.EnumWood;
 
-public class RecipeHandler {
+public class RecipeHandler
+{
 
 	public static Item[] swordType = new Item[] { Items.wooden_sword, Items.stone_sword, Items.iron_sword, Items.golden_sword, Items.diamond_sword, ModItems.jadeSword, ModItems.scorpionPincer, ModItems.waspSword };
 	public static Item[] axeType = new Item[] { Items.wooden_axe, Items.stone_axe, Items.iron_axe, Items.golden_axe, Items.diamond_axe, ModItems.jadeAxe };
 
-	public static void init() {
+	public static void init()
+	{
 		EnumWood.initRecipes();
 
 		registerOreDictionary();
@@ -35,11 +37,13 @@ public class RecipeHandler {
 		registerSmelting();
 	}
 
-	private static void addSlabRecipe(BlockSlabStone block) {
+	private static void addSlabRecipe(BlockSlabStone block)
+	{
 		GameRegistry.addRecipe(new ItemStack(block, 6), "xxx", 'x', new ItemStack(block.base, 1, block.meta));
 	}
 
-	private static void registerRecipes() {
+	private static void registerRecipes()
+	{
 		// Wood
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModBlocks.planks, 1, EnumWood.White.ordinal()), "plankWood", "dyeWhite"));
 
@@ -61,12 +65,16 @@ public class RecipeHandler {
 
 		// Stairs, slabs, walls
 		for (int i = 0; i < ModBlocks.umbercobbleStairs.length; i++)
+		{
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.umbercobbleStairs[i], 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.umberstone, 1, i));
+		}
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.amberBrickStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.petrifiedWoodPlanks, 1, 0));
 
 		for (Block slab : ModBlocks.stoneSlabs)
+		{
 			addSlabRecipe((BlockSlabStone) slab);
+		}
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wall, 6, 0), "###", "###", '#', "stoneUmber"));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 1), "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 1));
@@ -207,32 +215,40 @@ public class RecipeHandler {
 
 		// Sharp Swords
 		for (Item aSwordType : swordType)
-			for (int j = 0; j < 6; j++) {
+		{
+			for (int j = 0; j < 6; j++)
+			{
 				ItemStack swordSharp = new ItemStack(aSwordType);
 				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if (stoneLevel.getItemDamage() > 0) {
+				if (stoneLevel.getItemDamage() > 0)
+				{
 					swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
 					GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(aSwordType));
 				}
 			}
+		}
 
 		// Sharp Axes
 		for (Item anAxeType : axeType)
-			for (int j = 0; j < 6; j++) {
+		{
+			for (int j = 0; j < 6; j++)
+			{
 				ItemStack axeSharp = new ItemStack(anAxeType);
 				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if (stoneLevel.getItemDamage() > 0) {
+				if (stoneLevel.getItemDamage() > 0)
+				{
 					axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
 					GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(anAxeType));
 				}
 			}
+		}
 
 		// Special Items - for future expansion
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataRhinoRidingKit), " SX", "CCC", "LLL", 'S', Items.string, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4));
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataBeetleTamingAmulet), " N ", "NJN", " F ", 'N', Items.gold_nugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'F', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()));
 		GameRegistry.addRecipe(new ItemStack(ModItems.beeTamingAmulet, 1), " n ", "nJn", " N ", 'n', Items.gold_nugget, 'J', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()), 'N', new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()));
 
-		//Umbergolem parts
+		// Umbergolem parts
 		GameRegistry.addRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemCore), "AAA", "ARA", "AAA", 'A', new ItemStack(ModItems.erebusMaterials, 1, DATA.altarFragment.ordinal()), 'R', new ItemStack(ModItems.erebusMaterials, 1, DATA.redGem.ordinal()));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemHead), "SSS", "SHS", "SSS", 'S', "stone", 'H', new ItemStack(ModItems.reinCompoundGoggles, 1)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataGolemClaw), "  P", "  S", " SS", 'S', "stone", 'P', new ItemStack(ModItems.erebusMaterials, 1, DATA.scorpionPincer.ordinal())));
@@ -244,7 +260,8 @@ public class RecipeHandler {
 
 	}
 
-	private static void registerSmelting() {
+	private static void registerSmelting()
+	{
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.blockAmber, 1, 1), new ItemStack(ModBlocks.blockAmber), 0.3F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.larvaRaw.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.larvaCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.grasshopperLegRaw.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.grasshopperLegCooked.ordinal()), 0.2F);
@@ -261,16 +278,25 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), new ItemStack(ModItems.erebusMaterials, 1, DATA.mudBrick.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusMaterials, 1, DATA.honeyDrip.ordinal()), new ItemStack(ModItems.erebusMaterials, 1, DATA.nectar.ordinal()), 0.2F);
 		if (ConfigHandler.INSTANCE.lead)
+		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 2), new ItemStack(ModItems.metalIngot, 1, 1), 1.0F);
+		}
 		if (ConfigHandler.INSTANCE.silver)
+		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 3), new ItemStack(ModItems.metalIngot, 1, 2), 1.0F);
+		}
 		if (ConfigHandler.INSTANCE.copper)
+		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 1), new ItemStack(ModItems.metalIngot, 1, 0), 1.0F);
+		}
 		if (ConfigHandler.INSTANCE.tin)
+		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 4), new ItemStack(ModItems.metalIngot, 1, 3), 1.0F);
+		}
 	}
 
-	private static void registerOreDictionary() {
+	private static void registerOreDictionary()
+	{
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
 		OreDictionary.registerOre("stone", new ItemStack(ModBlocks.umberstone));
 		OreDictionary.registerOre("stoneUmber", new ItemStack(ModBlocks.umberstone));
@@ -310,23 +336,29 @@ public class RecipeHandler {
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.WHITE_PETAL.ordinal()));
 
-		if (ConfigHandler.INSTANCE.lead) {
+		if (ConfigHandler.INSTANCE.lead)
+		{
 			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));
 			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.oreExtra, 1, 2));
 		}
-		if (ConfigHandler.INSTANCE.silver) {
+		if (ConfigHandler.INSTANCE.silver)
+		{
 			OreDictionary.registerOre("ingotSilver", new ItemStack(ModItems.metalIngot, 1, 2));
 			OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.oreExtra, 1, 3));
 		}
-		if (ConfigHandler.INSTANCE.copper) {
+		if (ConfigHandler.INSTANCE.copper)
+		{
 			OreDictionary.registerOre("ingotCopper", new ItemStack(ModItems.metalIngot, 1, 0));
 			OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.oreExtra, 1, 1));
 		}
-		if (ConfigHandler.INSTANCE.tin) {
+		if (ConfigHandler.INSTANCE.tin)
+		{
 			OreDictionary.registerOre("ingotTin", new ItemStack(ModItems.metalIngot, 1, 3));
 			OreDictionary.registerOre("oreTin", new ItemStack(ModBlocks.oreExtra, 1, 4));
 		}
 		if (ConfigHandler.INSTANCE.aluminium)
+		{
 			OreDictionary.registerOre("oreAluminum", new ItemStack(ModBlocks.oreExtra, 1, 0));
+		}
 	}
 }

@@ -10,55 +10,67 @@ import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarLightning;
 
-public class BlockErebusAltarLightning extends BlockContainer {
+public class BlockErebusAltarLightning extends BlockContainer
+{
 
-	public BlockErebusAltarLightning() {
+	public BlockErebusAltarLightning()
+	{
 		super(Material.rock);
 		setBlockTextureName("erebus:blockErebusAltarBreak");
 	}
 
 	@Override
-	public int getRenderType() {
+	public int getRenderType()
+	{
 		return -1;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean renderAsNormalBlock()
+	{
 		return false;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
+	public TileEntity createNewTileEntity(World world, int meta)
+	{
 		return new TileEntityErebusAltarLightning();
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
 		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z));
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
+	public void onBlockAdded(World world, int x, int y, int z)
+	{
 		TileEntityErebusAltarLightning te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarLightning.class);
 		te.setActive(false);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
+	{
 		TileEntityErebusAltarLightning te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarLightning.class);
-		if (player.getCurrentEquippedItem() != null) {
-			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation && !te.active) {
+		if (player.getCurrentEquippedItem() != null)
+		{
+			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation && !te.active)
+			{
 				player.getCurrentEquippedItem().damageItem(1, player);
 				te.setActive(true);
 				te.setSpawnTicks(12000);
 				return true;
 			}
-			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation && te.active) {
+			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation && te.active)
+			{
 				player.getCurrentEquippedItem().damageItem(1, player);
 				te.setActive(false);
 				return true;

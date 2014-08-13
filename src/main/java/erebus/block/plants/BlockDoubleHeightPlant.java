@@ -25,7 +25,8 @@ import erebus.core.helper.Utils;
 import erebus.item.ErebusMaterial.DATA;
 import erebus.item.block.ItemBlockDoubleHeightPlant;
 
-public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock {
+public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock
+{
 
 	public static final String[] plantName = new String[] { "Sundew", "WeepingBlue", "Bullrush", "DroughtedShrub", "TangledStalk", "HighCapped" };
 
@@ -38,18 +39,21 @@ public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] doublePlantTopIcons;
 
-	public BlockDoubleHeightPlant() {
+	public BlockDoubleHeightPlant()
+	{
 		super(Material.plants);
 		setBlockBounds(0F, 0F, 0F, 1F, 1.F, 1F);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg)
+	{
 		doublePlantBottomIcons = new IIcon[plantName.length];
 		doublePlantTopIcons = new IIcon[plantName.length];
 
-		for (int i = 0; i < doublePlantBottomIcons.length; ++i) {
+		for (int i = 0; i < doublePlantBottomIcons.length; ++i)
+		{
 			doublePlantBottomIcons[i] = reg.registerIcon("erebus:doublePlant" + plantName[i] + "Bottom");
 			doublePlantTopIcons[i] = reg.registerIcon("erebus:doublePlant" + plantName[i] + "Top");
 		}
@@ -57,67 +61,89 @@ public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta)
+	{
 		if (meta <= 7)
+		{
 			return doublePlantBottomIcons[meta];
-		else
+		} else
+		{
 			return doublePlantTopIcons[meta - 8];
+		}
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
 		return null;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean renderAsNormalBlock()
+	{
 		return false;
 	}
 
 	@Override
-	public int getRenderType() {
+	public int getRenderType()
+	{
 		return 1;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
+	public int colorMultiplier(IBlockAccess access, int x, int y, int z)
+	{
 		return 16777215;
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
 		Block block = world.getBlock(x, y - 1, z);
 		if (block == null || !world.isAirBlock(x, y + 1, z))
+		{
 			return false;
+		}
 		if (block == this && world.getBlockMetadata(x, y - 1, z) < 8)
+		{
 			return true;
+		}
 		if (!block.isLeaves(world, x, y - 1, z) && !block.isOpaqueCube())
+		{
 			return false;
-		else
+		} else
+		{
 			return block.getMaterial().blocksMovement();
+		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour)
+	{
 		world(world, x, y, z);
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		if (world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) <= 7) {
+	public void onBlockAdded(World world, int x, int y, int z)
+	{
+		if (world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) <= 7)
+		{
 			int meta = world.getBlockMetadata(x, y, z);
 			world.setBlock(x, y + 1, z, this, meta + 8, 3);
 		}
 	}
 
-	protected boolean world(World world, int x, int y, int z) {
-		if (world.isAirBlock(x, y - 1, z)) {
+	protected boolean world(World world, int x, int y, int z)
+	{
+		if (world.isAirBlock(x, y - 1, z))
+		{
 			world.setBlockToAir(x, y, z);
 			return false;
 		}
@@ -125,22 +151,30 @@ public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock {
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player)
+	{
 
 		ItemStack item = null;
 		int meta = world.getBlockMetadata(x, y, z);
 
 		if (meta <= 7)
+		{
 			world.setBlockToAir(x, y + 1, z);
-		else
+		} else
+		{
 			world.setBlockToAir(x, y - 1, z);
+		}
 
-		if (world.rand.nextInt(4) == 0) {
+		if (world.rand.nextInt(4) == 0)
+		{
 
 			if (meta > 7)
+			{
 				meta -= 8;
+			}
 
-			switch (meta) {
+			switch (meta)
+			{
 				case 0:
 					item = new ItemStack(ModItems.erebusMaterials, 1, DATA.bioLuminescence.ordinal());
 					break;
@@ -167,32 +201,41 @@ public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock {
 	}
 
 	@Override
-	public int damageDropped(int meta) {
+	public int damageDropped(int meta)
+	{
 		return meta;
 	}
 
 	@Override
-	public int quantityDropped(Random rand) {
+	public int quantityDropped(Random rand)
+	{
 		return 0;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs tab, List list)
+	{
 		for (int i = 0; i < doublePlantBottomIcons.length; i++)
+		{
 			list.add(new ItemStack(id, 1, i));
+		}
 	}
 
 	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
+	public int getDamageValue(World world, int x, int y, int z)
+	{
 		if (world.getBlockMetadata(x, y, z) > 7)
+		{
 			return damageDropped(world.getBlockMetadata(x, y, z) - 8);
+		}
 		return damageDropped(world.getBlockMetadata(x, y, z));
 	}
 
 	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
+	public Class<? extends ItemBlock> getItemBlockClass()
+	{
 		return ItemBlockDoubleHeightPlant.class;
 	}
 }

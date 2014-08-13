@@ -22,13 +22,15 @@ import erebus.core.helper.IHighlightedBlock;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.ErebusMaterial;
 
-public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
+public class BlockGaeanKeystone extends Block implements IHighlightedBlock
+{
 
 	@SideOnly(Side.CLIENT)
 	public IIcon icons[];
 	public AxisAlignedBB[][] boxes = { { AxisAlignedBB.getBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 0.8125f, 1.0f) }, { AxisAlignedBB.getBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 0.8125f, 1.0f), AxisAlignedBB.getBoundingBox(0.3125f - 0.0625f, 0.8125f, 0.3125f - 0.0625f, 0.6875f + 0.0625f, 1.0f, 0.6875f + 0.0625f) } };
 
-	public BlockGaeanKeystone() {
+	public BlockGaeanKeystone()
+	{
 		super(Material.rock);
 		setHardness(3.0f);
 		setBlockName("gaeanKeystone");
@@ -36,23 +38,27 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube()
+	{
 		return false;
 	}
 
 	@Override
-	public Item getItemDropped(int i, Random r, int h) {
+	public Item getItemDropped(int i, Random r, int h)
+	{
 		return ModItems.erebusMaterials;
 	}
 
 	@Override
-	public int damageDropped(int meta) {
+	public int damageDropped(int meta)
+	{
 		return ErebusMaterial.DATA.gaeanGem.ordinal();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister r) {
+	public void registerBlockIcons(IIconRegister r)
+	{
 		icons = new IIcon[4];
 		icons[0] = r.registerIcon("erebus:keystone_top");
 		icons[1] = r.registerIcon("erebus:keystone_sides");
@@ -62,42 +68,57 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta)
+	{
 		return side == 1 ? icons[0] : side == 0 ? icons[2] : icons[1];
 	}
 
-	public static boolean isGemActive(int metadata) {
+	public static boolean isGemActive(int metadata)
+	{
 		return metadata > 0;
 	}
 
-	public IIcon getEyeIcon() {
+	public IIcon getEyeIcon()
+	{
 		return icons[3];
 	}
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity)
+	{
 		AxisAlignedBB[] aabbs = boxes[isGemActive(world.getBlockMetadata(x, y, z)) ? 1 : 0];
-		for (AxisAlignedBB aabb : aabbs) {
+		for (AxisAlignedBB aabb : aabbs)
+		{
 			AxisAlignedBB aabbTmp = aabb.getOffsetBoundingBox(x, y, z);
 			if (box.intersectsWith(aabbTmp))
+			{
 				list.add(aabbTmp);
+			}
 		}
 	}
 
 	@Override
-	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 origin, Vec3 direction) {
+	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 origin, Vec3 direction)
+	{
 		AxisAlignedBB[] aabbs = boxes[isGemActive(world.getBlockMetadata(x, y, z)) ? 1 : 0];
 		MovingObjectPosition closest = null;
-		for (AxisAlignedBB aabb : aabbs) {
+		for (AxisAlignedBB aabb : aabbs)
+		{
 			MovingObjectPosition mop = aabb.getOffsetBoundingBox(x, y, z).calculateIntercept(origin, direction);
 			if (mop != null)
+			{
 				if (closest != null && mop.hitVec.distanceTo(origin) < closest.hitVec.distanceTo(origin))
+				{
 					closest = mop;
-				else
+				} else
+				{
 					closest = mop;
+				}
+			}
 		}
-		if (closest != null) {
+		if (closest != null)
+		{
 			closest.blockX = x;
 			closest.blockY = y;
 			closest.blockZ = z;
@@ -106,32 +127,42 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock {
 	}
 
 	@Override
-	public AxisAlignedBB[] getBoxes(World world, int x, int y, int z, EntityPlayer player) {
+	public AxisAlignedBB[] getBoxes(World world, int x, int y, int z, EntityPlayer player)
+	{
 		return boxes[isGemActive(world.getBlockMetadata(x, y, z)) ? 1 : 0];
 	}
 
 	@Override
-	public int getRenderType() {
+	public int getRenderType()
+	{
 		return BlockRenderIDs.KEYSTONE.id();
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean renderAsNormalBlock()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int h, float k, float i, float f) {
-		if (p.getCurrentEquippedItem() != null && p.getCurrentEquippedItem().getItem() == ModItems.portalActivator) {
+	public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer p, int h, float k, float i, float f)
+	{
+		if (p.getCurrentEquippedItem() != null && p.getCurrentEquippedItem().getItem() == ModItems.portalActivator)
+		{
 			w.setBlockMetadataWithNotify(x, y, z, 1, 2);
-			if (!ModBlocks.portal.makePortal(w, x, y - 2, z)) {
+			if (!ModBlocks.portal.makePortal(w, x, y - 2, z))
+			{
 				w.setBlockMetadataWithNotify(x, y, z, 0, 2);
 				return false;
 			}
 			if (!p.capabilities.isCreativeMode)
+			{
 				p.inventory.mainInventory[p.inventory.currentItem] = null;
+			}
 			return true;
 		} else
+		{
 			return false;
+		}
 	}
 }

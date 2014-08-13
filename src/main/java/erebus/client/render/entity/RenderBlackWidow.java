@@ -13,21 +13,25 @@ import erebus.client.model.entity.ModelBlackWidow;
 import erebus.entity.EntityBlackWidow;
 
 @SideOnly(Side.CLIENT)
-public class RenderBlackWidow extends RenderLiving {
+public class RenderBlackWidow extends RenderLiving
+{
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackWidow.png");
 
-	public RenderBlackWidow() {
+	public RenderBlackWidow()
+	{
 		super(new ModelBlackWidow(), 0.3F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float f)
+	{
 		shadowSize = ((EntityBlackWidow) entityliving).getWidowSize() * 0.3F;
 		GL11.glScalef(shadowSize, shadowSize, shadowSize);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

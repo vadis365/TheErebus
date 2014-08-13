@@ -62,9 +62,11 @@ import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.item.SpawnEggs;
 
-public class ModEntities {
+public class ModEntities
+{
 
-	public static void init() {
+	public static void init()
+	{
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "beetleLarva", -1251634, -13032944);
 		registerEntity(1, EntityWasp.class, "wasp", -256, -16382458);
@@ -83,7 +85,8 @@ public class ModEntities {
 		registerEntity(14, EntityAntlion.class, "antlion", 0x000000, 0xFFFFFF);
 		registerEntity(15, EntityBlackWidow.class, "blackWidow", 0x000000, 0xFF0000);
 		registerEntity(16, EntityGlowWorm.class, "glowWorm", 0xFFFF00, 0xFFFFFF);
-		//registerEntity(17, Free Space here.class, "bombardierBeetle", 0xFFEEFF, 0x9E0E0E);
+		// registerEntity(17, Free Space here.class, "bombardierBeetle",
+		// 0xFFEEFF, 0x9E0E0E);
 		registerEntity(18, EntityScytodes.class, "scytodes", 0x0B4D49, 0xFFFFFF);
 		registerEntity(19, EntityMoneySpider.class, "moneySpider", 0xF5C400, 0x0B4D49);
 		registerEntity(20, EntityPrayingMantis.class, "prayingMantis", 0x06B900, 0x06B900);
@@ -129,11 +132,13 @@ public class ModEntities {
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);
 	}
 
-	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name) {
+	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name)
+	{
 		EntityRegistry.registerModEntity(entityClass, name, id, Erebus.instance, 256, 1, true);
 	}
 
-	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor) {
+	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor)
+	{
 		registerEntity(id, entityClass, name);
 		SpawnEggs.registerSpawnEgg(entityClass, name, id, eggBackgroundColor, eggForegroundColor);
 	}

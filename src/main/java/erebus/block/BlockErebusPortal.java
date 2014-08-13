@@ -17,17 +17,21 @@ import erebus.ModBlocks;
 import erebus.tileentity.TileEntityPortal;
 import erebus.world.teleporter.TeleporterHandler;
 
-public class BlockErebusPortal extends BlockContainer {
+public class BlockErebusPortal extends BlockContainer
+{
 
-	public BlockErebusPortal() {
+	public BlockErebusPortal()
+	{
 		super(Material.portal);
 		setBlockUnbreakable();
 		setTickRandomly(true);
 		setBlockTextureName("erebus:erebusPortal");
 	}
 
-	public boolean makePortal(World w, int x, int y, int z) {
-		if (isPatternValid(w, x, y, z)) {
+	public boolean makePortal(World w, int x, int y, int z)
+	{
+		if (isPatternValid(w, x, y, z))
+		{
 			w.setBlock(x, y, z, this);
 			w.setBlock(x, y + 1, z, this);
 			return true;
@@ -35,74 +39,120 @@ public class BlockErebusPortal extends BlockContainer {
 		return false;
 	}
 
-	public boolean isPatternValid(World w, int x, int y, int z) {
-		{ //Layer 0
+	public boolean isPatternValid(World w, int x, int y, int z)
+	{
+		{ // Layer 0
 			if (w.getBlock(x, y - 1, z) != Blocks.stonebrick || w.getBlockMetadata(x, y - 1, z) != 3)
+			{
 				return false;
+			}
 		}
-		{ //Layer 1
+		{ // Layer 1
 			if (w.getBlock(x - 1, y, z - 1) != Blocks.stonebrick || w.getBlockMetadata(x - 1, y, z - 1) != 0)
+			{
 				return false;
+			}
 			if (w.getBlock(x - 1, y, z + 1) != Blocks.stonebrick || w.getBlockMetadata(x - 1, y, z + 1) != 0)
+			{
 				return false;
+			}
 			if (w.getBlock(x + 1, y, z - 1) != Blocks.stonebrick || w.getBlockMetadata(x + 1, y, z - 1) != 0)
+			{
 				return false;
+			}
 			if (w.getBlock(x + 1, y, z + 1) != Blocks.stonebrick || w.getBlockMetadata(x + 1, y, z + 1) != 0)
+			{
 				return false;
+			}
 		}
-		{ //Layer 2
+		{ // Layer 2
 			if (w.getBlock(x - 1, y + 1, z + 1) != Blocks.stonebrick || w.getBlockMetadata(x - 1, y + 1, z + 1) != 0)
+			{
 				return false;
+			}
 			if (w.getBlock(x - 1, y + 1, z - 1) != Blocks.stonebrick || w.getBlockMetadata(x - 1, y + 1, z - 1) != 0)
+			{
 				return false;
+			}
 			if (w.getBlock(x + 1, y + 1, z + 1) != Blocks.stonebrick || w.getBlockMetadata(x + 1, y + 1, z + 1) != 0)
+			{
 				return false;
+			}
 			if (w.getBlock(x + 1, y + 1, z - 1) != Blocks.stonebrick || w.getBlockMetadata(x + 1, y + 1, z - 1) != 0)
+			{
 				return false;
+			}
 		}
-		{ //Layer 3
+		{ // Layer 3
 			if (w.getBlock(x, y + 2, z) != ModBlocks.gaeanKeystone || !BlockGaeanKeystone.isGemActive(w.getBlockMetadata(x, y + 2, z)))
+			{
 				return false;
+			}
 			if (w.getBlock(x - 1, y + 2, z) != Blocks.stone_slab || w.getBlockMetadata(x - 1, y + 2, z) != 5)
+			{
 				return false;
+			}
 			if (w.getBlock(x - 1, y + 2, z - 1) != Blocks.stone_slab || w.getBlockMetadata(x - 1, y + 2, z - 1) != 5)
+			{
 				return false;
+			}
 			if (w.getBlock(x - 1, y + 2, z + 1) != Blocks.stone_slab || w.getBlockMetadata(x - 1, y + 2, z + 1) != 5)
+			{
 				return false;
+			}
 			if (w.getBlock(x, y + 2, z - 1) != Blocks.stone_slab || w.getBlockMetadata(x, y + 2, z - 1) != 5)
+			{
 				return false;
+			}
 			if (w.getBlock(x, y + 2, z + 1) != Blocks.stone_slab || w.getBlockMetadata(x, y + 2, z + 1) != 5)
+			{
 				return false;
+			}
 			if (w.getBlock(x + 1, y + 2, z) != Blocks.stone_slab || w.getBlockMetadata(x - 1, y + 2, z) != 5)
+			{
 				return false;
+			}
 			if (w.getBlock(x + 1, y + 2, z - 1) != Blocks.stone_slab || w.getBlockMetadata(x + 1, y + 2, z - 1) != 5)
+			{
 				return false;
+			}
 			if (w.getBlock(x + 1, y + 2, z + 1) != Blocks.stone_slab || w.getBlockMetadata(x + 1, y + 2, z + 1) != 5)
+			{
 				return false;
+			}
 		}
 		return true;
 	}
 
-	public static int isThisAThing(int thing) {
+	public static int isThisAThing(int thing)
+	{
 		return thing & 3;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z, int m) {
+	public boolean shouldSideBeRendered(IBlockAccess w, int x, int y, int z, int m)
+	{
 		int thing = 0;
 
-		if (w.getBlock(x, y, z) == this) {
+		if (w.getBlock(x, y, z) == this)
+		{
 			thing = isThisAThing(w.getBlockMetadata(x, y, z));
 
 			if (thing == 0)
+			{
 				return false;
+			}
 
 			if (thing == 2 && m != 5 && m != 4)
+			{
 				return false;
+			}
 
 			if (thing == 1 && m != 3 && m != 2)
+			{
 				return false;
+			}
 		}
 
 		boolean flag = w.getBlock(x - 1, y, z) == this && w.getBlock(x - 2, y, z) != this;
@@ -115,50 +165,67 @@ public class BlockErebusPortal extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World w, int x, int y, int z, Block b) {
+	public void onNeighborBlockChange(World w, int x, int y, int z, Block b)
+	{
 		if (b == this)
+		{
 			w.setBlockToAir(x, y, z);
+		}
 		if (!isPatternValid(w, x, y, z))
+		{
 			w.setBlockToAir(x, y, x);
+		}
 	}
 
 	@Override
-	public int quantityDropped(Random rand) {
+	public int quantityDropped(Random rand)
+	{
 		return 0;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getRenderBlockPass() {
+	public int getRenderBlockPass()
+	{
 		return 1;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
 		return null;
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
+	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
+	{
 		if (entity.ridingEntity == null && entity.riddenByEntity == null && entity.timeUntilPortal <= 0)
+		{
 			if (entity.dimension == 0)
+			{
 				TeleporterHandler.transferToErebus(entity);
-			else
+			} else
+			{
 				TeleporterHandler.transferToOverworld(entity);
+			}
+		}
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean renderAsNormalBlock()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube()
+	{
 		return false;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World w, int m) {
+	public TileEntity createNewTileEntity(World w, int m)
+	{
 		return new TileEntityPortal();
 	}
 }

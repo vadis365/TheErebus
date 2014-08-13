@@ -12,23 +12,28 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 
 @SideOnly(Side.CLIENT)
-public class BambooTorchItemRenderer implements IItemRenderer {
+public class BambooTorchItemRenderer implements IItemRenderer
+{
 
 	private final RenderBlocks blockRenderer = new RenderBlocks();
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+	public boolean handleRenderType(ItemStack item, ItemRenderType type)
+	{
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+	{
 		return true;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch (type) {
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+	{
+		switch (type)
+		{
 			case ENTITY:
 				renderTorch(0.0F, 1.0F, 0.0F, 1.0D);
 				break;
@@ -46,7 +51,8 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderEquipped(float x, float y, float z, double size) {
+	private void renderEquipped(float x, float y, float z, double size)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(-45.0F, 1.0F, 0.0F, 0.0F);
@@ -59,8 +65,10 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void renderTorch(float x, float y, float z, double size) {
-		if (RenderItem.renderInFrame) {
+	private void renderTorch(float x, float y, float z, double size)
+	{
+		if (RenderItem.renderInFrame)
+		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y - 1.37F, z);
 			GL11.glScaled(0.75F, 0.75F, 0.75F);
@@ -68,7 +76,8 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 			GL11.glTranslatef(x, y, z);
 			blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 1, 1.0F);
 			GL11.glPopMatrix();
-		} else {
+		} else
+		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y, z);
 			GL11.glScaled(size, size, size);
@@ -79,7 +88,8 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderTorchFirstPerson(float x, float y, float z, double size) {
+	private void renderTorchFirstPerson(float x, float y, float z, double size)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(-45F, 0, 1F, 0);
@@ -90,7 +100,8 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void renderTorchInventory(float x, float y, float z, double size) {
+	private void renderTorchInventory(float x, float y, float z, double size)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glScaled(size, size, size);

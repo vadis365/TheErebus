@@ -19,11 +19,13 @@ import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityCentipede extends EntityMob {
+public class EntityCentipede extends EntityMob
+{
 
 	public int skin = rand.nextInt(3);
 
-	public EntityCentipede(World world) {
+	public EntityCentipede(World world)
+	{
 		super(world);
 		setSize(1.0F, 0.8F);
 		getNavigator().setAvoidsWater(true);
@@ -36,7 +38,8 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
@@ -45,17 +48,21 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 2;
 	}
 
-	public double getAttackStrength() {
-		switch (worldObj.difficultySetting) {
+	public double getAttackStrength()
+	{
+		switch (worldObj.difficultySetting)
+		{
 			default:
 				return 2.0D;
 			case EASY:
@@ -68,62 +75,78 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	@Override
-	public int getTotalArmorValue() {
+	public int getTotalArmorValue()
+	{
 		return 8;
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "erebus:centipedesound";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:centipedehurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{ // playStepSound
 		playSound("erebus:centipedewalk", 0.5F, 1.0F);
 	}
 
 	@Override
-	protected float getSoundVolume() {
+	protected float getSoundVolume()
+	{
 		return 0.4F;
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + looting, DATA.bioVelocity.ordinal()), 0.0F);
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override
-	protected void dropRareDrop(int looting) {
+	protected void dropRareDrop(int looting)
+	{
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer player) {
+	public void onCollideWithPlayer(EntityPlayer player)
+	{
 		super.onCollideWithPlayer(player);
-		if (player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY) {
+		if (player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY)
+		{
 			byte duration = 0;
 			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+			{
 				duration = 7;
-			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+			} else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+			{
 				duration = 15;
+			}
 			if (duration > 0)
+			{
 				player.addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
+			}
 		}
 	}
 }

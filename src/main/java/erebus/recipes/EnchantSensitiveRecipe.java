@@ -11,113 +11,159 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import erebus.core.helper.Utils;
 
-public class EnchantSensitiveRecipe extends ShapedRecipes {
+public class EnchantSensitiveRecipe extends ShapedRecipes
+{
 
-	public EnchantSensitiveRecipe(int width, int height, ItemStack[] items, ItemStack result) {
+	public EnchantSensitiveRecipe(int width, int height, ItemStack[] items, ItemStack result)
+	{
 		super(width, height, items, result);
 	}
 
 	@Override
-	public boolean matches(InventoryCrafting grid, World world) {
+	public boolean matches(InventoryCrafting grid, World world)
+	{
 		for (int i = 0; i <= 3 - recipeWidth; i++)
-			for (int j = 0; j <= 3 - recipeHeight; j++) {
+		{
+			for (int j = 0; j <= 3 - recipeHeight; j++)
+			{
 				if (checkMatch(grid, i, j, true))
+				{
 					return true;
+				}
 
 				if (checkMatch(grid, i, j, false))
+				{
 					return true;
+				}
 			}
+		}
 		return false;
 	}
 
-	private boolean checkMatch(InventoryCrafting grid, int x, int y, boolean inverted) {
+	private boolean checkMatch(InventoryCrafting grid, int x, int y, boolean inverted)
+	{
 		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 3; j++) {
+		{
+			for (int j = 0; j < 3; j++)
+			{
 				int i1 = i - x;
 				int j1 = j - y;
 				ItemStack stack = null;
 
 				if (i1 >= 0 && j1 >= 0 && i1 < recipeWidth && j1 < recipeHeight)
+				{
 					if (inverted)
+					{
 						stack = recipeItems[recipeWidth - i1 - 1 + j1 * recipeWidth];
-					else
+					} else
+					{
 						stack = recipeItems[i1 + j1 * recipeWidth];
+					}
+				}
 
 				ItemStack stack2 = grid.getStackInRowAndColumn(i, j);
 
-				if (stack2 != null || stack != null) {
+				if (stack2 != null || stack != null)
+				{
 					if (stack2 == null && stack != null || stack2 != null && stack == null)
+					{
 						return false;
+					}
 
 					if (stack.getItem() != stack2.getItem())
+					{
 						return false;
+					}
 
 					if (stack.getItemDamage() != OreDictionary.WILDCARD_VALUE && stack.getItemDamage() != stack2.getItemDamage())
+					{
 						return false;
+					}
 
 					if (!checkEnchants(stack, stack2))
+					{
 						return false;
+					}
 				}
 			}
+		}
 
 		return true;
 	}
 
-	private boolean checkEnchants(ItemStack stack1, ItemStack stack2) {
+	private boolean checkEnchants(ItemStack stack1, ItemStack stack2)
+	{
 		if (stack1.hasTagCompound() && stack2.hasTagCompound())
+		{
 			return Utils.getEnchantments(stack1).equals(Utils.getEnchantments(stack2));
+		}
 		return stack1.hasTagCompound() == stack2.hasTagCompound();
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static EnchantSensitiveRecipe makeRecipe(ItemStack result, Object... recipe) {
+	public static EnchantSensitiveRecipe makeRecipe(ItemStack result, Object... recipe)
+	{
 		String s = "";
 		int i = 0;
 		int width = 0;
 		int height = 0;
 
-		if (recipe[i] instanceof String[]) {
+		if (recipe[i] instanceof String[])
+		{
 			String[] astring = (String[]) recipe[i++];
 
-			for (int l = 0; l < astring.length; l++) {
+			for (int l = 0; l < astring.length; l++)
+			{
 				String s1 = astring[l];
 				height++;
 				width = s1.length();
 				s = s + s1;
 			}
 		} else
-			while (recipe[i] instanceof String) {
+		{
+			while (recipe[i] instanceof String)
+			{
 				String s2 = (String) recipe[i++];
 				height++;
 				width = s2.length();
 				s = s + s2;
 			}
+		}
 
 		HashMap hashmap;
 
-		for (hashmap = new HashMap(); i < recipe.length; i += 2) {
+		for (hashmap = new HashMap(); i < recipe.length; i += 2)
+		{
 			Character character = (Character) recipe[i];
 			ItemStack itemstack1 = null;
 
 			if (recipe[i + 1] instanceof Item)
+			{
 				itemstack1 = new ItemStack((Item) recipe[i + 1]);
-			else if (recipe[i + 1] instanceof Block)
+			} else if (recipe[i + 1] instanceof Block)
+			{
 				itemstack1 = new ItemStack((Block) recipe[i + 1], 1, 32767);
-			else if (recipe[i + 1] instanceof ItemStack)
+			} else if (recipe[i + 1] instanceof ItemStack)
+			{
 				itemstack1 = (ItemStack) recipe[i + 1];
+			}
 
 			hashmap.put(character, itemstack1);
 		}
 
 		ItemStack[] aitemstack = new ItemStack[width * height];
 
-		for (int i1 = 0; i1 < width * height; i1++) {
+		for (int i1 = 0; i1 < width * height; i1++)
+		{
 			char c0 = s.charAt(i1);
 
 			if (hashmap.containsKey(Character.valueOf(c0)))
+			{
 				aitemstack[i1] = ((ItemStack) hashmap.get(Character.valueOf(c0))).copy();
-			else
+			} else
+			{
 				aitemstack[i1] = null;
+			}
 		}
 
 		return new EnchantSensitiveRecipe(width, height, aitemstack, result);

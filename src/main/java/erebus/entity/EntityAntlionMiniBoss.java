@@ -22,9 +22,11 @@ import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityAntlionMiniBoss extends EntityMob {
+public class EntityAntlionMiniBoss extends EntityMob
+{
 
-	public EntityAntlionMiniBoss(World world) {
+	public EntityAntlionMiniBoss(World world)
+	{
 		super(world);
 		setSize(2.75F, 1.2F);
 		isImmuneToFire = true;
@@ -38,7 +40,8 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
@@ -48,22 +51,26 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public int getTotalArmorValue() {
+	public int getTotalArmorValue()
+	{
 		return 15;
 	}
 
 	@Override
-	protected boolean canDespawn() {
+	protected boolean canDespawn()
+	{
 		return false;
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
@@ -76,56 +83,73 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	 */
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{ // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected Item getDropItem() {
+	protected Item getDropItem()
+	{
 		return Item.getItemFromBlock(Blocks.sand);
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
+		{
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
+		}
 	}
 
 	@Override
-	protected void dropRareDrop(int par1) {
+	protected void dropRareDrop(int par1)
+	{
 		dropItem(Item.getItemFromBlock(ModBlocks.ghostSand), 4);
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 		if (findPlayerToAttack() != null)
+		{
 			entityToAttack = findPlayerToAttack();
-		else
+		} else
+		{
 			entityToAttack = null;
+		}
 		EnumDifficulty difficulty = worldObj.difficultySetting;
 		if (difficulty == EnumDifficulty.PEACEFUL)
+		{
 			worldObj.difficultySetting = EnumDifficulty.EASY;
+		}
 		worldObj.difficultySetting = difficulty;
 	}
 
 	@Override
-	protected Entity findPlayerToAttack() {
+	protected Entity findPlayerToAttack()
+	{
 		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 		return player;
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float damage) {
+	public boolean attackEntityFrom(DamageSource source, float damage)
+	{
 		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown))
+		{
 			return false;
+		}
 		return super.attackEntityFrom(source, damage);
 	}
 }

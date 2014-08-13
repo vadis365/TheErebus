@@ -6,7 +6,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelColossalCrate extends ModelBase {
+public class ModelColossalCrate extends ModelBase
+{
 	ModelRenderer BambooBase1;
 	ModelRenderer BambooBase2;
 	ModelRenderer BambooBase3;
@@ -21,7 +22,8 @@ public class ModelColossalCrate extends ModelBase {
 	ModelRenderer BambooTop4;
 	ModelRenderer BambooCenter;
 
-	public ModelColossalCrate() {
+	public ModelColossalCrate()
+	{
 		textureWidth = 128;
 		textureHeight = 128;
 
@@ -79,13 +81,15 @@ public class ModelColossalCrate extends ModelBase {
 		setRotation(BambooCenter, 0F, 0F, 0F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void renderModel() {
+	public void renderModel()
+	{
 		BambooBase1.render(0.0625F);
 		BambooBase2.render(0.0625F);
 		BambooBase3.render(0.0625F);

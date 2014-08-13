@@ -9,7 +9,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityPrayingMantis;
 
 @SideOnly(Side.CLIENT)
-public class ModelPrayingMantis extends ModelBase {
+public class ModelPrayingMantis extends ModelBase
+{
 	ModelRenderer Head1;
 	ModelRenderer Head2;
 	ModelRenderer Head3;
@@ -56,7 +57,8 @@ public class ModelPrayingMantis extends ModelBase {
 	ModelRenderer LBLeg5;
 	ModelRenderer LBLeg6;
 
-	public ModelPrayingMantis() {
+	public ModelPrayingMantis()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 		Head1 = new ModelRenderer(this, 20, 11);
@@ -242,7 +244,8 @@ public class ModelPrayingMantis extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Head1.render(unitPixel);
@@ -292,14 +295,16 @@ public class ModelPrayingMantis extends ModelBase {
 		LBLeg6.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		EntityPrayingMantis entityPrayingMantis = (EntityPrayingMantis) entity;
 		float cos1 = MathHelper.cos(limbSwing + (float) Math.PI) * 0.3F * prevLimbSwing;
 		float cos2 = MathHelper.cos(limbSwing) * 0.3F * prevLimbSwing;
@@ -330,7 +335,8 @@ public class ModelPrayingMantis extends ModelBase {
 		RFLeg5.rotateAngleX = cos1;
 		RFLeg6.rotateAngleX = cos1;
 
-		if (entityPrayingMantis.getDataWatcher().getWatchableObjectByte(22) == 1) {
+		if (entityPrayingMantis.getDataWatcher().getWatchableObjectByte(22) == 1)
+		{
 			LArm1.rotateAngleX = cosxnz1 + 0.3490659F;
 			LArm2.rotateAngleX = cosxnz1 - 2.268928F;
 			LArm3.rotateAngleX = cosxnz1 + 0.3490659F;
@@ -341,7 +347,8 @@ public class ModelPrayingMantis extends ModelBase {
 			RArm4.rotateAngleX = -cosxnz1 + 0.3490659F;
 		}
 
-		if (entityPrayingMantis.getDataWatcher().getWatchableObjectByte(22) == 0) {
+		if (entityPrayingMantis.getDataWatcher().getWatchableObjectByte(22) == 0)
+		{
 			LArm1.rotateAngleX = -1.222F;
 			LArm2.rotateAngleX = 2.443F;
 			LArm3.rotateAngleX = -1.222F;

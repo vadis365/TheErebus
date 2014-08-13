@@ -29,25 +29,29 @@ import erebus.item.block.ItemBlockErebusPlantSmall;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 
-public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
+public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock
+{
 
 	public static final String[] iconPaths = new String[] { "bulbCappedShroom", "mushroomSmall1", "mushroomSmall2", "mushroomSmall3", "dutchCapShroom", "desertShrub", "mireCoral", "nettle", "nettleFlowered", "swampPlant", "fireBloom" };
 	public static final int dataBulbCappedShroom = 0, dataMushroom1 = 1, dataMushroom2 = 2, dataMushroom3 = 3, dataDutchCapShroom = 4, dataDesertShrub = 5, dataMireCoral = 6, dataNettle = 7, dataNettleFlowered = 8, dataSwampPlant = 9, dataFireBloom = 10;
 	private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
-	
+
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
 
-	public BlockSmallPlants() {
+	public BlockSmallPlants()
+	{
 		setTickRandomly(true);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
+	{
 		int meta = access.getBlockMetadata(x, y, z);
 		float widthReduced = 0, height = 0;
 
-		switch (meta) {
+		switch (meta)
+		{
 			case dataBulbCappedShroom:
 				widthReduced = 0.3125F;
 				height = 0.6875F;
@@ -97,76 +101,99 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
+	public void updateTick(World world, int x, int y, int z, Random rand)
+	{
 		int meta = world.getBlockMetadata(x, y, z);
-		if (rand.nextInt(25) == 0) {
+		if (rand.nextInt(25) == 0)
+		{
 			int xx;
 			int yy;
 			int zz;
 			xx = x + rand.nextInt(3) - 1;
 			yy = y + rand.nextInt(2) - rand.nextInt(2);
 			zz = z + rand.nextInt(3) - 1;
-			if (world.isAirBlock(xx, yy, zz) && canBlockStay(world, xx, yy, zz)) {
+			if (world.isAirBlock(xx, yy, zz) && canBlockStay(world, xx, yy, zz))
+			{
 				if (meta == dataNettle && rand.nextInt(3) == 0)
+				{
 					world.setBlock(x, y, z, this, dataNettleFlowered, 2);
+				}
 				if (meta == dataNettleFlowered)
+				{
 					world.setBlock(xx, yy, zz, this, dataNettle, 2);
-				else
+				} else
+				{
 					world.setBlock(xx, yy, zz, this, meta, 2);
+				}
 			}
 		}
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister reg) {
+	public void registerBlockIcons(IIconRegister reg)
+	{
 		icons = new IIcon[iconPaths.length];
 		int i = 0;
 		for (String path : iconPaths)
+		{
 			icons[i++] = reg.registerIcon("erebus:" + path);
+		}
 	}
 
 	@Override
-	public IIcon getIcon(int side, int meta) {
+	public IIcon getIcon(int side, int meta)
+	{
 		if (meta < 0 || meta >= icons.length)
+		{
 			return null;
+		}
 		return icons[meta];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
+	public void getSubBlocks(Item id, CreativeTabs tab, List list)
+	{
 		for (int i = 0; i < icons.length; i++)
+		{
 			list.add(new ItemStack(id, 1, i));
+		}
 	}
 
 	@Override
-	public int damageDropped(int meta) {
+	public int damageDropped(int meta)
+	{
 		return meta;
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
+	public int quantityDropped(int meta, int fortune, Random random)
+	{
 		return 0;
 	}
 
 	@Override
-	public Item getItemDropped(int id, Random random, int fortune) {
+	public Item getItemDropped(int id, Random random, int fortune)
+	{
 		return Item.getItemFromBlock(this);
 	}
 
 	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
+	public int getDamageValue(World world, int x, int y, int z)
+	{
 		return world.getBlockMetadata(x, y, z);
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
+	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player)
+	{
 
 		ItemStack item = null;
 		int meta = world.getBlockMetadata(x, y, z);
 
-		switch (meta) {
+		switch (meta)
+		{
 			case dataNettle:
 				item = new ItemStack(ModItems.erebusMaterials, 1, DATA.nettleleaves.ordinal());
 				break;
@@ -189,24 +216,32 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int x, int y, int z) {
+	public boolean canBlockStay(World world, int x, int y, int z)
+	{
 		int meta = world.getBlockMetadata(x, y, z);
 		Block soil = world.getBlock(x, y - 1, z);
 		if (y >= 0 && y < 256 && meta < 5)
+		{
 			return (soil == Blocks.mycelium || world.getFullBlockLightValue(x, y, z) < 13) && soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
+		}
 		if (y >= 0 && y < 256 && meta >= 5)
+		{
 			return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
+		}
 		return false;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		if (world.isAirBlock(x, y - 1, z)) {
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour)
+	{
+		if (world.isAirBlock(x, y - 1, z))
+		{
 			int meta = world.getBlockMetadata(x, y, z);
 			world.setBlockToAir(x, y, z);
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), new ItemStack(Item.getItemFromBlock(this), 1, meta));
@@ -216,9 +251,11 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand)
+	{
 		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == dataFireBloom) {
+		if (meta == dataFireBloom)
+		{
 			double xx = x + 0.5F;
 			double yy = y + 1F;
 			double zz = z + 0.5F;
@@ -227,51 +264,61 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock {
 	}
 
 	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
+	public Class<? extends ItemBlock> getItemBlockClass()
+	{
 		return ItemBlockErebusPlantSmall.class;
 	}
 
 	@SubscribeEvent
-	public void onBonemeal(BonemealEvent event) {
-		if (!event.world.isRemote && event.block == this) {
+	public void onBonemeal(BonemealEvent event)
+	{
+		if (!event.world.isRemote && event.block == this)
+		{
 			if (event.world.rand.nextFloat() < 0.45D)
+			{
 				growPlants(event.world, event.x, event.y, event.z, event.world.rand);
+			}
 			event.setResult(Result.ALLOW);
 		}
 	}
 
-	public void growPlants(World world, int x, int y, int z, Random rand) {
+	public void growPlants(World world, int x, int y, int z, Random rand)
+	{
 		int meta = world.getBlockMetadata(x, y, z);
-		if (meta >= 0 && meta <= 4) {
-			switch (meta) {
-			case 0:
-				world.setBlockToAir(x, y, z);
-				genGiantMushrooms.setMushroomType(MushroomType.BULB_CAPPED);
-				genGiantMushrooms.generate(world, rand, x, y, z);
-				break;
-			case 1:
-				world.setBlockToAir(x, y, z);
-				genGiantMushrooms.setMushroomType(MushroomType.GRANDMAS_SHOES);
-				genGiantMushrooms.generate(world, rand, x, y, z);
-				break;
-			case 2:
-				world.setBlockToAir(x, y, z);
-				genGiantMushrooms.setMushroomType(MushroomType.SARCASTIC_CZECH);
-				genGiantMushrooms.generate(world, rand, x, y, z);
-				break;
-			case 3:
-				world.setBlockToAir(x, y, z);
-				genGiantMushrooms.setMushroomType(MushroomType.KAIZERS_FINGERS);
-				genGiantMushrooms.generate(world, rand, x, y, z);
-				break;
-			case 4:
-				world.setBlockToAir(x, y, z);
-				genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
-				genGiantMushrooms.generate(world, rand, x, y, z);
-				break;
+		if (meta >= 0 && meta <= 4)
+		{
+			switch (meta)
+			{
+				case 0:
+					world.setBlockToAir(x, y, z);
+					genGiantMushrooms.setMushroomType(MushroomType.BULB_CAPPED);
+					genGiantMushrooms.generate(world, rand, x, y, z);
+					break;
+				case 1:
+					world.setBlockToAir(x, y, z);
+					genGiantMushrooms.setMushroomType(MushroomType.GRANDMAS_SHOES);
+					genGiantMushrooms.generate(world, rand, x, y, z);
+					break;
+				case 2:
+					world.setBlockToAir(x, y, z);
+					genGiantMushrooms.setMushroomType(MushroomType.SARCASTIC_CZECH);
+					genGiantMushrooms.generate(world, rand, x, y, z);
+					break;
+				case 3:
+					world.setBlockToAir(x, y, z);
+					genGiantMushrooms.setMushroomType(MushroomType.KAIZERS_FINGERS);
+					genGiantMushrooms.generate(world, rand, x, y, z);
+					break;
+				case 4:
+					world.setBlockToAir(x, y, z);
+					genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
+					genGiantMushrooms.generate(world, rand, x, y, z);
+					break;
 			}
 		}
 		if (!genGiantMushrooms.generate(world, rand, x, y, z))
+		{
 			world.setBlock(x, y, z, this, meta, 3);
+		}
 	}
 }

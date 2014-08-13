@@ -11,10 +11,12 @@ import erebus.block.BlockGaeanKeystone;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
-public class BlockKeystoneRenderer implements ISimpleBlockRenderingHandler {
+public class BlockKeystoneRenderer implements ISimpleBlockRenderingHandler
+{
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
+	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer)
+	{
 		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.8125D, 1.0D);
 		BlockRenderHelper.renderSimpleBlock(ModBlocks.gaeanKeystone, 0, renderer);
@@ -22,30 +24,36 @@ public class BlockKeystoneRenderer implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
+	{
 		renderKeystone(renderer, (BlockGaeanKeystone) block, x, y, z);
 		return true;
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
+	public boolean shouldRender3DInInventory(int modelId)
+	{
 		return true;
 	}
 
 	@Override
-	public int getRenderId() {
+	public int getRenderId()
+	{
 		return BlockRenderIDs.KEYSTONE.id();
 	}
 
-	public boolean renderKeystone(RenderBlocks renderer, BlockGaeanKeystone block, int x, int y, int z) {
+	public boolean renderKeystone(RenderBlocks renderer, BlockGaeanKeystone block, int x, int y, int z)
+	{
 		int l = renderer.blockAccess.getBlockMetadata(x, y, z);
 
-		if (!BlockGaeanKeystone.isGemActive(l)) {
+		if (!BlockGaeanKeystone.isGemActive(l))
+		{
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.8125D, 1.0D);
 			renderer.renderStandardBlock(block, x, y, z);
 			renderer.uvRotateTop = 0;
 			return true;
-		} else {
+		} else
+		{
 			renderer.renderAllFaces = true;
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.8125D, 1.0D);
 			renderer.renderStandardBlock(block, x, y, z);

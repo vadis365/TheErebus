@@ -7,7 +7,8 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class ModMaterials {
+public class ModMaterials
+{
 
 	public static ArmorMaterial armorEXOSKELETON = EnumHelper.addArmorMaterial("EXOSKELETON", 11, new int[] { 2, 3, 2, 2 }, 15);
 	public static ArmorMaterial armorREINEXOSKELETON = EnumHelper.addArmorMaterial("REINEXOSKELETON", 11, new int[] { 3, 8, 6, 3 }, 2);

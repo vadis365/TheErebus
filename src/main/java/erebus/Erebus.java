@@ -35,7 +35,8 @@ import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
-public class Erebus {
+public class Erebus
+{
 
 	@SidedProxy(clientSide = Reference.SP_CLIENT, serverSide = Reference.SP_SERVER)
 	public static CommonProxy proxy;
@@ -44,10 +45,12 @@ public class Erebus {
 	public static Erebus instance;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public void preInit(FMLPreInitializationEvent event)
+	{
 		ConfigHandler.INSTANCE.loadConfig(event);
 
-		if (event.getSide() == Side.CLIENT) {
+		if (event.getSide() == Side.CLIENT)
+		{
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			MinecraftForge.EVENT_BUS.register(new HomingBeeconTextureHandler());
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
@@ -66,7 +69,8 @@ public class Erebus {
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	public void init(FMLInitializationEvent event)
+	{
 		proxy.registerKeyHandlers();
 		proxy.registerTileEntities();
 		proxy.registerRenderInformation();
@@ -92,7 +96,9 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 
 		if (ConfigHandler.INSTANCE.randomNames)
+		{
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
+		}
 
 		ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
 		ModIntegrationHandler.addMod(FMBIntegration.class);
@@ -102,12 +108,14 @@ public class Erebus {
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event)
+	{
 		ModIntegrationHandler.postInit();
 	}
 
 	@EventHandler
-	public void onServerStarting(FMLServerStartingEvent event) {
+	public void onServerStarting(FMLServerStartingEvent event)
+	{
 		event.registerServerCommand(new ErebusCommandDebug());
 	}
 }

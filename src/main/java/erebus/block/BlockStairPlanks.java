@@ -7,11 +7,13 @@ import erebus.ModTabs;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
 
-public class BlockStairPlanks extends BlockStairs {
+public class BlockStairPlanks extends BlockStairs
+{
 
 	private final EnumWood wood;
 
-	public BlockStairPlanks(Block block, EnumWood wood) {
+	public BlockStairPlanks(Block block, EnumWood wood)
+	{
 		super(block, wood.ordinal());
 		setHardness(2.0F);
 		this.wood = wood;
@@ -22,7 +24,8 @@ public class BlockStairPlanks extends BlockStairs {
 	}
 
 	@Override
-	public String getLocalizedName() {
+	public String getLocalizedName()
+	{
 		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".stairPlanks.name"), wood.getTranslatedName());
 	}
 }

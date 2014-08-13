@@ -11,17 +11,21 @@ import net.minecraft.world.World;
 import erebus.ModMaterials;
 import erebus.entity.EntityScorpion;
 
-public class ScorpionPincer extends ItemSword {
+public class ScorpionPincer extends ItemSword
+{
 
-	public ScorpionPincer() {
+	public ScorpionPincer()
+	{
 		super(ModMaterials.weaponScorpionPincer);
 		maxStackSize = 1;
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player) {
+	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player)
+	{
 		is.damageItem(1, player);
-		if (!(entity instanceof EntityScorpion)) {
+		if (!(entity instanceof EntityScorpion))
+		{
 			double knockback = 0.5D;
 			double direction = Math.toRadians(player.renderYawOffset);
 			entity.addVelocity(-Math.sin(direction) * knockback, 0.25D, Math.cos(direction) * knockback);
@@ -30,12 +34,17 @@ public class ScorpionPincer extends ItemSword {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
+	{
 		if (!player.capabilities.isCreativeMode && player.inventory.hasItem(Items.fire_charge))
+		{
 			is.damageItem(10, player);
-		if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.fire_charge)) {
+		}
+		if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.fire_charge))
+		{
 			world.playSoundAtEntity(player, "mob.ghast.fireball", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-			if (!world.isRemote) {
+			if (!world.isRemote)
+			{
 				Vec3 look = player.getLookVec();
 				double direction = Math.toRadians(player.renderYawOffset);
 				double directionY = Math.toRadians(player.cameraPitch);

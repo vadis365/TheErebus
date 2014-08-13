@@ -13,12 +13,14 @@ import erebus.inventory.ContainerHoneyComb;
 import erebus.tileentity.TileEntityHoneyComb;
 
 @SideOnly(Side.CLIENT)
-public class GuiHoneyComb extends GuiContainer {
+public class GuiHoneyComb extends GuiContainer
+{
 
 	private static final ResourceLocation GUI_HONEY_COMB = new ResourceLocation("erebus:textures/gui/container/honeyCombGui.png");
 	private final TileEntityHoneyComb honeyCombInventory;
 
-	public GuiHoneyComb(InventoryPlayer playerInventory, TileEntityHoneyComb tile) {
+	public GuiHoneyComb(InventoryPlayer playerInventory, TileEntityHoneyComb tile)
+	{
 		super(new ContainerHoneyComb(playerInventory, tile));
 		honeyCombInventory = tile;
 		allowUserInput = false;
@@ -26,13 +28,15 @@ public class GuiHoneyComb extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y) {
+	protected void drawGuiContainerForegroundLayer(int x, int y)
+	{
 		fontRendererObj.drawString(StatCollector.translateToLocal(honeyCombInventory.getInventoryName()), 8, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int x, int y) {
+	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int x, int y)
+	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(GUI_HONEY_COMB);
 		int k = (width - xSize) / 2;

@@ -5,7 +5,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelGlowWorm extends ModelBase {
+public class ModelGlowWorm extends ModelBase
+{
 	ModelRenderer Head1;
 	ModelRenderer Head2;
 	ModelRenderer LMandible;
@@ -59,7 +60,8 @@ public class ModelGlowWorm extends ModelBase {
 	ModelRenderer RBL3;
 	ModelRenderer RBL4;
 
-	public ModelGlowWorm() {
+	public ModelGlowWorm()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -274,7 +276,8 @@ public class ModelGlowWorm extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Head1.render(unitPixel);
@@ -332,14 +335,16 @@ public class ModelGlowWorm extends ModelBase {
 
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		Head1.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
 		Head2.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
 		LMandible.rotateAngleY = rotationYaw / (180F / (float) Math.PI);

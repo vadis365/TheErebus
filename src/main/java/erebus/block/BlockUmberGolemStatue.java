@@ -16,47 +16,58 @@ import erebus.ModItems;
 import erebus.entity.EntityUmberGolem;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
-public class BlockUmberGolemStatue extends BlockContainer {
+public class BlockUmberGolemStatue extends BlockContainer
+{
 
 	@SideOnly(Side.CLIENT)
 	private IIcon a, b;
 
-	public BlockUmberGolemStatue() {
+	public BlockUmberGolemStatue()
+	{
 		super(Material.rock);
 		setBlockTextureName("erebus:blockErebusAltarBreak");
 	}
 
 	@Override
-	public int getRenderType() {
+	public int getRenderType()
+	{
 		return -1;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube()
+	{
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
+	public boolean renderAsNormalBlock()
+	{
 		return false;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
+	public TileEntity createNewTileEntity(World world, int meta)
+	{
 		return new TileEntityUmberGolemStatue();
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
 		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z));
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
+	{
 		if (player.getCurrentEquippedItem() != null)
-			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation) {
+		{
+			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation)
+			{
 				player.getCurrentEquippedItem().damageItem(1, player);
-				if (!world.isRemote) {
+				if (!world.isRemote)
+				{
 					EntityUmberGolem entityUmberGolem;
 					entityUmberGolem = new EntityUmberGolem(world);
 					world.setBlockToAir(x, y, z);
@@ -66,21 +77,31 @@ public class BlockUmberGolemStatue extends BlockContainer {
 				}
 				return true;
 			}
+		}
 		return false;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack is) {
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack is)
+	{
 		byte b0 = 0;
 		int l1 = MathHelper.floor_double(entityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 		if (l1 == 0)
+		{
 			b0 = 2;
+		}
 		if (l1 == 1)
+		{
 			b0 = 5;
+		}
 		if (l1 == 2)
+		{
 			b0 = 3;
+		}
 		if (l1 == 3)
+		{
 			b0 = 4;
+		}
 		world.setBlockMetadataWithNotify(x, y, z, b0, 3);
 	}
 }

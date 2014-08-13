@@ -22,7 +22,8 @@ import erebus.core.helper.Utils;
 import erebus.inventory.ContainerAntInventory;
 
 @SideOnly(Side.CLIENT)
-public class GuiAntInventory extends GuiContainer {
+public class GuiAntInventory extends GuiContainer
+{
 
 	private static final ResourceLocation GUI_ANT_INVENTORY = new ResourceLocation("erebus:textures/gui/container/antGuiTest.png");
 	public static Item[] ghostIcon = new Item[] { Items.stone_hoe, Items.shears, Items.bucket, Items.bone, Items.wheat_seeds, Items.wheat };
@@ -31,7 +32,8 @@ public class GuiAntInventory extends GuiContainer {
 	int iconCountCrop = 4;
 	private IInventory antInventory;
 
-	public GuiAntInventory(InventoryPlayer inventory, Entity entityInventory) {
+	public GuiAntInventory(InventoryPlayer inventory, Entity entityInventory)
+	{
 		super(new ContainerAntInventory(inventory, (IInventory) entityInventory));
 		xSize = 176;
 		ySize = 131;
@@ -41,21 +43,24 @@ public class GuiAntInventory extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
+	{
 		int color = Utils.getColour(0, 0, 0);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.antInventory"), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal("container.antInventory")) / 2, 6, color);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), xSize - 170, ySize - 93, color);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY) {
+	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY)
+	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(GUI_ANT_INVENTORY);
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
 
-		if (antInventory.getStackInSlot(0) == null) {
+		if (antInventory.getStackInSlot(0) == null)
+		{
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
@@ -66,7 +71,8 @@ public class GuiAntInventory extends GuiContainer {
 			GL11.glPopMatrix();
 		}
 
-		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemHoe) {
+		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemHoe)
+		{
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
@@ -79,7 +85,8 @@ public class GuiAntInventory extends GuiContainer {
 			GL11.glPopMatrix();
 		}
 
-		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemBucket && antInventory.getStackInSlot(1) == null) {
+		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() instanceof ItemBucket && antInventory.getStackInSlot(1) == null)
+		{
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
@@ -90,7 +97,8 @@ public class GuiAntInventory extends GuiContainer {
 			GL11.glPopMatrix();
 		}
 
-		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() == Items.bone && antInventory.getStackInSlot(1) == null) {
+		if (antInventory.getStackInSlot(0) != null && antInventory.getStackInSlot(0).getItem() == Items.bone && antInventory.getStackInSlot(1) == null)
+		{
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1f, 1f, 1f, 0.2f);
@@ -104,17 +112,23 @@ public class GuiAntInventory extends GuiContainer {
 	}
 
 	@Override
-	public void updateScreen() {
+	public void updateScreen()
+	{
 		super.updateScreen();
-		if (mc.theWorld.getWorldTime() % 40 == 0) {
+		if (mc.theWorld.getWorldTime() % 40 == 0)
+		{
 			stack = new ItemStack(ghostIcon[iconCountTool]);
 			stack2 = new ItemStack(ghostIcon[iconCountCrop]);
 			iconCountTool++;
 			iconCountCrop++;
 			if (iconCountTool > 3)
+			{
 				iconCountTool = 0;
+			}
 			if (iconCountCrop > 5)
+			{
 				iconCountCrop = 4;
+			}
 		}
 	}
 }

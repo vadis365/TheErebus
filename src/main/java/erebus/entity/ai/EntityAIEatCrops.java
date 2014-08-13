@@ -10,69 +10,94 @@ import erebus.ModBlocks;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityLocust;
 
-public class EntityAIEatCrops extends EntityAIEatBlock {
+public class EntityAIEatCrops extends EntityAIEatBlock
+{
 
 	private final double moveSpeed;
 	private int reproCap = 0;
 
-	public EntityAIEatCrops(EntityLiving entity, double moveSpeed, int eatSpeed) {
+	public EntityAIEatCrops(EntityLiving entity, double moveSpeed, int eatSpeed)
+	{
 		super(entity, Blocks.wheat, 7, new ItemStack(Items.wheat_seeds), moveSpeed, eatSpeed);
 		this.moveSpeed = moveSpeed;
 	}
 
 	@Override
-	protected boolean canEatBlock(Block block, int blockMeta) {
+	protected boolean canEatBlock(Block block, int blockMeta)
+	{
 		if (block == null)
+		{
 			return false;
-
-		else if (block == Blocks.tallgrass || block == ModBlocks.blockTurnip || block == Blocks.wheat) // removed for time being block == Blocks.double_plant
+		} else if (block == Blocks.tallgrass || block == ModBlocks.blockTurnip || block == Blocks.wheat)
+		{
+			// for
+			// time
+			// being
+			// block
+			// ==
+			// Blocks.double_plant
 			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public boolean continueExecuting() {
+	public boolean continueExecuting()
+	{
 		return entity instanceof EntityAnimal ? !((EntityAnimal) entity).isInLove() && !entity.isChild() : super.continueExecuting();
 	}
 
 	@Override
-	protected boolean isEntityReady() {
+	protected boolean isEntityReady()
+	{
 		return true;
 	}
 
 	@Override
-	protected void moveToLocation() {
+	protected void moveToLocation()
+	{
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
 		if (!grasshopper.isEating)
+		{
 			if (!entity.getNavigator().tryMoveToXYZ(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed))
+			{
 				entity.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed);
+			}
+		}
 	}
 
 	@Override
-	protected void prepareToEat() {
+	protected void prepareToEat()
+	{
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
 		grasshopper.setIsEating(true);
 	}
 
 	@Override
-	protected void eatingInterupted() {
+	protected void eatingInterupted()
+	{
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
 		grasshopper.setIsEating(false);
 	}
 
 	@Override
-	protected void afterEaten() {
+	protected void afterEaten()
+	{
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
 		grasshopper.worldObj.setBlockToAir(cropX, cropY, cropZ);
 		grasshopper.setIsEating(false);
 		reproCap++;
 		if (reproCap == 6)
-			if (grasshopper.worldObj.countEntities(EntityGrasshopper.class) < 80) {
+		{
+			if (grasshopper.worldObj.countEntities(EntityGrasshopper.class) < 80)
+			{
 				EntityGrasshopper entityGrasshopper = new EntityGrasshopper(grasshopper.worldObj);
 				entityGrasshopper.setPosition(cropX, cropY + 1, cropZ);
 				grasshopper.worldObj.spawnEntityInWorld(entityGrasshopper);
 			}
-		if (reproCap == 12) {
+		}
+		if (reproCap == 12)
+		{
 			grasshopper.setDead();
 			EntityLocust entityLocust = new EntityLocust(grasshopper.worldObj);
 			entityLocust.setPosition(cropX, cropY + 1, cropZ);

@@ -12,23 +12,27 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelSolifuge;
 
 @SideOnly(Side.CLIENT)
-public class RenderSolifugeSmall extends RenderLiving {
+public class RenderSolifugeSmall extends RenderLiving
+{
 
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/solifuge.png");
 
-	public RenderSolifugeSmall() {
+	public RenderSolifugeSmall()
+	{
 		super(new ModelSolifuge(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float f)
+	{
 		float f1 = 0.5F;
 		shadowSize = f1;
 		GL11.glScalef(f1, f1, f1);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

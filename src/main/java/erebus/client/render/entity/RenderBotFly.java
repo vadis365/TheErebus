@@ -13,21 +13,27 @@ import erebus.client.model.entity.ModelBotFly;
 import erebus.entity.EntityBotFly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBotFly extends RenderLiving {
+public class RenderBotFly extends RenderLiving
+{
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/botFly.png");
 
-	public RenderBotFly() {
+	public RenderBotFly()
+	{
 		super(new ModelBotFly(), 0.3F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float f)
+	{
 		if (((EntityBotFly) entityliving).getIsFlyHanging())
+		{
 			GL11.glRotatef(180.0F, -1.0F, 0.0F, 0.0F);
+		}
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

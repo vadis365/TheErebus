@@ -6,12 +6,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelAltar extends ModelBase {
+public class ModelAltar extends ModelBase
+{
 
 	private final ModelRenderer altar1, altar2, altar3, altar4, altar5, altar6, altar7, altar8, altar9, altar10, altar11, altar12;
 	private final ModelRenderer altar13, altar14, altar15;
 
-	public ModelAltar() {
+	public ModelAltar()
+	{
 		textureWidth = 256;
 		textureHeight = 128;
 
@@ -77,13 +79,15 @@ public class ModelAltar extends ModelBase {
 		setRotation(altar15, 0F, 0F, 0F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void renderAll() {
+	public void renderAll()
+	{
 		altar1.render(0.0625F);
 		altar2.render(0.0625F);
 		altar3.render(0.0625F);

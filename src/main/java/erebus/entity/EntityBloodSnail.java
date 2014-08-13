@@ -11,16 +11,19 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityBloodSnail extends EntityMob {
+public class EntityBloodSnail extends EntityMob
+{
 
-	public EntityBloodSnail(World world) {
+	public EntityBloodSnail(World world)
+	{
 		super(world);
 		setSize(1.0F, 0.8F);
 		stepHeight = 0.0F;
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D); // Movespeed
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D); // MaxHealth
@@ -29,59 +32,74 @@ public class EntityBloodSnail extends EntityMob {
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
+	public boolean getCanSpawnHere()
+	{
 		return !worldObj.isAnyLiquid(boundingBox);
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 3;
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "erebus:snailliving";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:snailhurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:snaildeath";
 	}
 
 	@Override
-	protected Item getDropItem() {
+	protected Item getDropItem()
+	{
 		return null;// TheBetweenlands.RedShell.itemID;
 	}
 
 	@Override
-	protected Entity findPlayerToAttack() {
+	protected Entity findPlayerToAttack()
+	{
 		EntityPlayer var1 = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 		return var1 != null && canEntityBeSeen(var1) ? var1 : null;
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		if (super.attackEntityAsMob(entity)) {
-			if (entity instanceof EntityLiving) {
+	public boolean attackEntityAsMob(Entity entity)
+	{
+		if (super.attackEntityAsMob(entity))
+		{
+			if (entity instanceof EntityLiving)
+			{
 				byte duration = 0;
 				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				{
 					duration = 7;
-
-				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+				} else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+				{
 					duration = 15;
+				}
 
-				if (duration > 0) {
+				if (duration > 0)
+				{
 					((EntityLiving) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
 					((EntityLiving) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, duration * 20, 0));
 				}
 			}
 			return true;
 		} else
+		{
 			return false;
+		}
 	}
 }

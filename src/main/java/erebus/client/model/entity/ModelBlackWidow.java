@@ -8,7 +8,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBlackWidow extends ModelBase {
+public class ModelBlackWidow extends ModelBase
+{
 
 	ModelRenderer Rant1;
 	ModelRenderer Rant2;
@@ -74,7 +75,8 @@ public class ModelBlackWidow extends ModelBase {
 	ModelRenderer LegBL5;
 	ModelRenderer LegBL6;
 
-	public ModelBlackWidow() {
+	public ModelBlackWidow()
+	{
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -341,7 +343,8 @@ public class ModelBlackWidow extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Rant1.render(unitPixel);
@@ -369,14 +372,16 @@ public class ModelBlackWidow extends ModelBase {
 		LegBL1.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 
 		Head.rotateAngleY = rotationYaw / (180F / (float) Math.PI);

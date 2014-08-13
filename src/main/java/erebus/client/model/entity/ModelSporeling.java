@@ -8,7 +8,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelSporeling extends ModelBase {
+public class ModelSporeling extends ModelBase
+{
 	ModelRenderer torso;
 	ModelRenderer legleft1;
 	ModelRenderer legright1;
@@ -22,7 +23,8 @@ public class ModelSporeling extends ModelBase {
 	ModelRenderer eyeleft;
 	ModelRenderer eyeright;
 
-	public ModelSporeling() {
+	public ModelSporeling()
+	{
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -77,7 +79,8 @@ public class ModelSporeling extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		torso.render(unitPixel);
@@ -94,14 +97,16 @@ public class ModelSporeling extends ModelBase {
 		eyeright.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		armleft.rotateAngleX = MathHelper.cos(limbSwing * 1.5F + (float) Math.PI) * 2.0F * prevLimbSwing * 0.5F;
 		armright.rotateAngleX = MathHelper.cos(limbSwing * 1.5F) * 2.0F * prevLimbSwing * 0.5F;

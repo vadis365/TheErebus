@@ -2,9 +2,11 @@ package erebus.tileentity;
 
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityBones extends TileEntity {
+public class TileEntityBones extends TileEntity
+{
 	@Override
-	public boolean canUpdate() {
+	public boolean canUpdate()
+	{
 		return false;
 	}
 

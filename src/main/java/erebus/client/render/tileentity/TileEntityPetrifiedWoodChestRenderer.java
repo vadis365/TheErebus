@@ -17,7 +17,8 @@ import erebus.block.BlockPetrifiedChest;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRenderer {
+public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRenderer
+{
 
 	private static final ResourceLocation RES_NORMAL_DOUBLE = new ResourceLocation("erebus:textures/special/tiles/petrifiedLargechest.png");
 	private static final ResourceLocation RES_NORMAL_SINGLE = new ResourceLocation("erebus:textures/special/tiles/petrifiedChest.png");
@@ -25,19 +26,25 @@ public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRende
 	private final ModelChest chestModel = new ModelChest();
 	private final ModelChest largeChestModel = new ModelLargeChest();
 
-	public void renderTileEntityPetrifiedWoodChestAt(TileEntityPetrifiedWoodChest chest, double x, double y, double z, float yaw) {
+	public void renderTileEntityPetrifiedWoodChestAt(TileEntityPetrifiedWoodChest chest, double x, double y, double z, float yaw)
+	{
 		int i;
 
 		if (!chest.hasWorldObj())
+		{
 			i = 0;
-		else {
+		} else
+		{
 			Block block = chest.getBlockType();
 			i = chest.getBlockMetadata();
 
-			if (block instanceof BlockPetrifiedChest && i == 0) {
-				try {
+			if (block instanceof BlockPetrifiedChest && i == 0)
+			{
+				try
+				{
 					((BlockPetrifiedChest) block).unifyAdjacentChests(chest.getWorldObj(), chest.xCoord, chest.yCoord, chest.zCoord);
-				} catch (ClassCastException e) {
+				} catch (ClassCastException e)
+				{
 					FMLLog.severe("Attempted to render a chest at %d,  %d, %d that was not a chest", chest.xCoord, chest.yCoord, chest.zCoord);
 				}
 				i = chest.getBlockMetadata();
@@ -46,13 +53,16 @@ public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRende
 			chest.checkForAdjacentChests();
 		}
 
-		if (chest.adjacentChestZNeg == null && chest.adjacentChestXNeg == null) {
+		if (chest.adjacentChestZNeg == null && chest.adjacentChestXNeg == null)
+		{
 			ModelChest modelchest;
 
-			if (chest.adjacentChestXPos == null && chest.adjacentChestZPosition == null) {
+			if (chest.adjacentChestXPos == null && chest.adjacentChestZPosition == null)
+			{
 				modelchest = chestModel;
 				bindTexture(RES_NORMAL_SINGLE);
-			} else {
+			} else
+			{
 				modelchest = largeChestModel;
 				bindTexture(RES_NORMAL_DOUBLE);
 			}
@@ -66,40 +76,58 @@ public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRende
 			short short1 = 0;
 
 			if (i == 2)
+			{
 				short1 = 180;
+			}
 
 			if (i == 3)
+			{
 				short1 = 0;
+			}
 
 			if (i == 4)
+			{
 				short1 = 90;
+			}
 
 			if (i == 5)
+			{
 				short1 = -90;
+			}
 
 			if (i == 2 && chest.adjacentChestXPos != null)
+			{
 				GL11.glTranslatef(1.0F, 0.0F, 0.0F);
+			}
 
 			if (i == 5 && chest.adjacentChestZPosition != null)
+			{
 				GL11.glTranslatef(0.0F, 0.0F, -1.0F);
+			}
 
 			GL11.glRotatef(short1, 0.0F, 1.0F, 0.0F);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			float f1 = chest.prevLidAngle + (chest.lidAngle - chest.prevLidAngle) * yaw;
 			float f2;
 
-			if (chest.adjacentChestZNeg != null) {
+			if (chest.adjacentChestZNeg != null)
+			{
 				f2 = chest.adjacentChestZNeg.prevLidAngle + (chest.adjacentChestZNeg.lidAngle - chest.adjacentChestZNeg.prevLidAngle) * yaw;
 
 				if (f2 > f1)
+				{
 					f1 = f2;
+				}
 			}
 
-			if (chest.adjacentChestXNeg != null) {
+			if (chest.adjacentChestXNeg != null)
+			{
 				f2 = chest.adjacentChestXNeg.prevLidAngle + (chest.adjacentChestXNeg.lidAngle - chest.adjacentChestXNeg.prevLidAngle) * yaw;
 
 				if (f2 > f1)
+				{
 					f1 = f2;
+				}
 			}
 
 			f1 = 1.0F - f1;
@@ -113,7 +141,8 @@ public class TileEntityPetrifiedWoodChestRenderer extends TileEntitySpecialRende
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime)
+	{
 		renderTileEntityPetrifiedWoodChestAt((TileEntityPetrifiedWoodChest) tile, x, y, z, partialTickTime);
 	}
 }

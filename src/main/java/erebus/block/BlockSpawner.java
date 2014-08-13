@@ -5,11 +5,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import erebus.tileentity.TileEntitySpawner;
 
-public class BlockSpawner extends BlockMobSpawner {
+public class BlockSpawner extends BlockMobSpawner
+{
 
 	private final String mobName;
 
-	public BlockSpawner(String mobName) {
+	public BlockSpawner(String mobName)
+	{
 		disableStats();
 		setHardness(5.0F);
 		this.mobName = mobName;
@@ -17,7 +19,8 @@ public class BlockSpawner extends BlockMobSpawner {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
+	public TileEntity createNewTileEntity(World world, int meta)
+	{
 		return new TileEntitySpawner(mobName);
 	}
 }

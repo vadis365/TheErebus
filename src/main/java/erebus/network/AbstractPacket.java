@@ -8,7 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 
-public abstract class AbstractPacket {
+public abstract class AbstractPacket
+{
 
 	protected static Random rand = new Random();
 

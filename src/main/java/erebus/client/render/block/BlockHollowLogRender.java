@@ -10,10 +10,12 @@ import erebus.ModBlocks;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
-public class BlockHollowLogRender implements ISimpleBlockRenderingHandler {
+public class BlockHollowLogRender implements ISimpleBlockRenderingHandler
+{
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
+	{
 		float pixel = 0.0625F;
 		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0D, 0D, 0D, 1D, 1D, pixel);
@@ -32,7 +34,8 @@ public class BlockHollowLogRender implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
+	{
 		int meta = world.getBlockMetadata(x, y, z);
 
 		float pixel = 0.005F; // 0.0625F; <-- causes Z-fighting
@@ -46,7 +49,9 @@ public class BlockHollowLogRender implements ISimpleBlockRenderingHandler {
 		renderer.setRenderBounds(0D, 0D, 1D - (meta == 1 ? pixel : 0D), 1D, 1D, 1D);
 		renderer.renderStandardBlock(ModBlocks.hollowLogAcacia, x, y, z);
 		if (meta == 0)
+		{
 			renderer.uvRotateEast = renderer.uvRotateWest = renderer.uvRotateTop = renderer.uvRotateBottom = 1;
+		}
 		renderer.setRenderBounds(0D, 0D, 0D, 1D, pixel, 1D);
 		renderer.renderStandardBlock(ModBlocks.hollowLogAcacia, x, y, z);
 		renderer.setRenderBounds(0D, 1D - pixel, 0D, 1D, 1D, 1D);
@@ -58,12 +63,14 @@ public class BlockHollowLogRender implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
+	public boolean shouldRender3DInInventory(int modelId)
+	{
 		return true;
 	}
 
 	@Override
-	public int getRenderId() {
+	public int getRenderId()
+	{
 		return BlockRenderIDs.HOLLOW_LOG.id();
 	}
 }

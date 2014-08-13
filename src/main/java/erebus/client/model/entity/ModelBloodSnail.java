@@ -5,7 +5,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelBloodSnail extends ModelBase {
+public class ModelBloodSnail extends ModelBase
+{
 	ModelRenderer shellMain;
 	ModelRenderer shellBack;
 	ModelRenderer shellMid;
@@ -15,7 +16,8 @@ public class ModelBloodSnail extends ModelBase {
 	ModelRenderer foot;
 	ModelRenderer feelerL;
 
-	public ModelBloodSnail() {
+	public ModelBloodSnail()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -61,7 +63,8 @@ public class ModelBloodSnail extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		shellMain.render(unitPixel);
@@ -74,14 +77,16 @@ public class ModelBloodSnail extends ModelBase {
 		feelerL.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		feelerL.rotateAngleX = MathHelper.cos(limbSwing * 1F + (float) Math.PI) * 0.5F * prevLimbSwing;
 		feelerR.rotateAngleX = MathHelper.cos(limbSwing * 1F) * 0.5F * prevLimbSwing;

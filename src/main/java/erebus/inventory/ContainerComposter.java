@@ -11,29 +11,38 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.recipes.ComposterRegistry;
 import erebus.tileentity.TileEntityComposter;
 
-public class ContainerComposter extends Container {
+public class ContainerComposter extends Container
+{
 
 	private final TileEntityComposter tileComposter;
 	private int lastCookTime;
 	private int lastBurnTime;
 	private int lastItemBurnTime;
 
-	public ContainerComposter(InventoryPlayer player, TileEntityComposter composter) {
+	public ContainerComposter(InventoryPlayer player, TileEntityComposter composter)
+	{
 		tileComposter = composter;
 		addSlotToContainer(new BetterSlot(composter, 0, 56, 17));
 		addSlotToContainer(new BetterSlot(composter, 1, 56, 53));
 		addSlotToContainer(new BetterSlot(composter, 2, 116, 35, true));
 
 		for (int i = 0; i < 3; i++)
+		{
 			for (int j = 0; j < 9; j++)
+			{
 				addSlotToContainer(new Slot(player, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+			}
+		}
 
 		for (int i = 0; i < 9; i++)
+		{
 			addSlotToContainer(new Slot(player, i, 8 + i * 18, 142));
+		}
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting crafting) {
+	public void addCraftingToCrafters(ICrafting crafting)
+	{
 		super.addCraftingToCrafters(crafting);
 		crafting.sendProgressBarUpdate(this, 0, tileComposter.composterCookTime);
 		crafting.sendProgressBarUpdate(this, 1, tileComposter.composterBurnTime);
@@ -41,20 +50,28 @@ public class ContainerComposter extends Container {
 	}
 
 	@Override
-	public void detectAndSendChanges() {
+	public void detectAndSendChanges()
+	{
 		super.detectAndSendChanges();
 
-		for (Object crafter : crafters) {
+		for (Object crafter : crafters)
+		{
 			ICrafting icrafting = (ICrafting) crafter;
 
 			if (lastCookTime != tileComposter.composterCookTime)
+			{
 				icrafting.sendProgressBarUpdate(this, 0, tileComposter.composterCookTime);
+			}
 
 			if (lastBurnTime != tileComposter.composterBurnTime)
+			{
 				icrafting.sendProgressBarUpdate(this, 1, tileComposter.composterBurnTime);
+			}
 
 			if (lastItemBurnTime != tileComposter.currentItemBurnTime)
+			{
 				icrafting.sendProgressBarUpdate(this, 2, tileComposter.currentItemBurnTime);
+			}
 		}
 
 		lastCookTime = tileComposter.composterCookTime;
@@ -64,8 +81,10 @@ public class ContainerComposter extends Container {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int value) {
-		switch (id) {
+	public void updateProgressBar(int id, int value)
+	{
+		switch (id)
+		{
 			case 0:
 				tileComposter.composterCookTime = value;
 				break;
@@ -79,46 +98,71 @@ public class ContainerComposter extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player) {
+	public boolean canInteractWith(EntityPlayer player)
+	{
 		return tileComposter.isUseableByPlayer(player);
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex)
+	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot) inventorySlots.get(slotIndex);
 
-		if (slot != null && slot.getHasStack()) {
+		if (slot != null && slot.getHasStack())
+		{
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (slotIndex == 2) {
+			if (slotIndex == 2)
+			{
 				if (!mergeItemStack(itemstack1, 3, 39, true))
+				{
 					return null;
+				}
 
 				slot.onSlotChange(itemstack1, itemstack);
-			} else if (slotIndex != 1 && slotIndex != 0) {
-				if (ComposterRegistry.isCompostable(itemstack1) != null) {
+			} else if (slotIndex != 1 && slotIndex != 0)
+			{
+				if (ComposterRegistry.isCompostable(itemstack1) != null)
+				{
 					if (!mergeItemStack(itemstack1, 0, 1, false))
+					{
 						return null;
-				} else if (TileEntityComposter.isItemFuel(itemstack1)) {
+					}
+				} else if (TileEntityComposter.isItemFuel(itemstack1))
+				{
 					if (!mergeItemStack(itemstack1, 1, 2, false))
+					{
 						return null;
-				} else if (slotIndex >= 3 && slotIndex < 30) {
+					}
+				} else if (slotIndex >= 3 && slotIndex < 30)
+				{
 					if (!mergeItemStack(itemstack1, 30, 39, false))
+					{
 						return null;
+					}
 				} else if (slotIndex >= 30 && slotIndex < 39 && !mergeItemStack(itemstack1, 3, 30, false))
+				{
 					return null;
+				}
 			} else if (!mergeItemStack(itemstack1, 3, 39, false))
+			{
 				return null;
+			}
 
 			if (itemstack1.stackSize == 0)
+			{
 				slot.putStack(null);
-			else
+			} else
+			{
 				slot.onSlotChanged();
+			}
 
 			if (itemstack1.stackSize == itemstack.stackSize)
+			{
 				return null;
+			}
 
 			slot.onPickupFromSlot(player, itemstack1);
 		}

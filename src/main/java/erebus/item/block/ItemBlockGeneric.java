@@ -4,24 +4,29 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockGeneric extends ItemBlock {
+public class ItemBlockGeneric extends ItemBlock
+{
 
-	public ItemBlockGeneric(Block block) {
+	public ItemBlockGeneric(Block block)
+	{
 		super(block);
 		setHasSubtypes(true);
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack is) {
+	public String getUnlocalizedName(ItemStack is)
+	{
 		return this.getUnlocalizedName() + "_" + is.getItemDamage();
 	}
 
 	@Override
-	public int getMetadata(int meta) {
+	public int getMetadata(int meta)
+	{
 		return meta;
 	}
 
-	public Block getBlock() {
+	public Block getBlock()
+	{
 		return field_150939_a;
 	}
 }

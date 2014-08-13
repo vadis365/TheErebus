@@ -5,7 +5,8 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.world.World;
 import erebus.network.AbstractClientPacket;
 
-public class PacketSound extends AbstractClientPacket {
+public class PacketSound extends AbstractClientPacket
+{
 
 	public static final byte SOUND_VELOCITY_USE = 0;
 	public static final byte SOUND_CAMO_USE = 1;
@@ -14,10 +15,12 @@ public class PacketSound extends AbstractClientPacket {
 	private double x, y, z;
 	private float loudness, pitch;
 
-	public PacketSound() {
+	public PacketSound()
+	{
 	}
 
-	public PacketSound(byte type, double x, double y, double z, float loudness, float pitch) {
+	public PacketSound(byte type, double x, double y, double z, float loudness, float pitch)
+	{
 		this();
 		this.type = type;
 		this.x = x;
@@ -28,10 +31,12 @@ public class PacketSound extends AbstractClientPacket {
 	}
 
 	@Override
-	protected void handle(World world, EntityClientPlayerMP player) {
+	protected void handle(World world, EntityClientPlayerMP player)
+	{
 		String s = null;
 
-		switch (type) {
+		switch (type)
+		{
 			case SOUND_VELOCITY_USE:
 				s = "erebus:CentipedeSound";
 				break;
@@ -41,11 +46,14 @@ public class PacketSound extends AbstractClientPacket {
 		}
 
 		if (s != null)
+		{
 			player.worldObj.playSound(x, y, z, s, loudness, pitch, true);
+		}
 	}
 
 	@Override
-	public void write(ByteBuf buffer) {
+	public void write(ByteBuf buffer)
+	{
 		buffer.writeByte(type);
 		buffer.writeDouble(x);
 		buffer.writeDouble(y);
@@ -55,7 +63,8 @@ public class PacketSound extends AbstractClientPacket {
 	}
 
 	@Override
-	public void read(ByteBuf buffer) {
+	public void read(ByteBuf buffer)
+	{
 		type = buffer.readByte();
 		x = buffer.readDouble();
 		y = buffer.readDouble();

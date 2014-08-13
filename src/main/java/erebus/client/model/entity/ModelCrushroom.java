@@ -6,7 +6,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import erebus.entity.EntityCrushroom;
 
-public class ModelCrushroom extends ModelBase {
+public class ModelCrushroom extends ModelBase
+{
 	ModelRenderer capTop;
 	ModelRenderer capBottom;
 	ModelRenderer head;
@@ -28,7 +29,8 @@ public class ModelCrushroom extends ModelBase {
 	ModelRenderer leftFoot1;
 	ModelRenderer leftFoot2;
 
-	public ModelCrushroom() {
+	public ModelCrushroom()
+	{
 		textureWidth = 128;
 		textureHeight = 128;
 
@@ -125,7 +127,8 @@ public class ModelCrushroom extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 
@@ -136,14 +139,16 @@ public class ModelCrushroom extends ModelBase {
 		leftThigh.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityCrushroom crushroom = (EntityCrushroom) entity;
 		float movcos1 = MathHelper.cos(limbSwing * 0.7F) * 0.3F * limbSwingAngle;
@@ -160,7 +165,8 @@ public class ModelCrushroom extends ModelBase {
 		rightThigh.rotateAngleY = -movcos1;
 		leftThigh.rotateAngleY = -movcos1;
 
-		if (crushroom.getStanding() == 1) {
+		if (crushroom.getStanding() == 1)
+		{
 			capTop.setRotationPoint(0F, -14F, 1F);
 			capBottom.setRotationPoint(0F, -14F, 1F);
 			head.setRotationPoint(0F, -14F, 1F);
@@ -173,7 +179,8 @@ public class ModelCrushroom extends ModelBase {
 			leftArm1.rotateAngleX = -movsin1;
 		}
 
-		if (crushroom.getStanding() == 0) {
+		if (crushroom.getStanding() == 0)
+		{
 			capTop.setRotationPoint(0F, -12F, 3F);
 			capBottom.setRotationPoint(0F, -12F, 3F);
 			head.setRotationPoint(0F, -12F, 3F);
@@ -186,7 +193,8 @@ public class ModelCrushroom extends ModelBase {
 			leftArm1.rotateAngleX = -movsin1 - 1.047198F;
 		}
 
-		if (crushroom.getStanding() == 2) {
+		if (crushroom.getStanding() == 2)
+		{
 			capTop.setRotationPoint(0F, -14F, 1F);
 			capBottom.setRotationPoint(0F, -14F, 1F);
 			head.setRotationPoint(0F, -14F, 1F);
@@ -199,7 +207,8 @@ public class ModelCrushroom extends ModelBase {
 			leftArm1.rotateAngleX = hitSwing * 3F;
 		}
 
-		if (crushroom.getStanding() == 3) {
+		if (crushroom.getStanding() == 3)
+		{
 			capTop.setRotationPoint(0F, -14F, 1F);
 			capBottom.setRotationPoint(0F, -14F, 1F);
 			head.setRotationPoint(0F, -14F, 1F);

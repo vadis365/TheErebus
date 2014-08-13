@@ -6,7 +6,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBambooCrate extends ModelBase {
+public class ModelBambooCrate extends ModelBase
+{
 
 	ModelRenderer BottomBamb1;
 	ModelRenderer BottomBamb2;
@@ -22,7 +23,8 @@ public class ModelBambooCrate extends ModelBase {
 	ModelRenderer TopBamb4;
 	ModelRenderer Core;
 
-	public ModelBambooCrate() {
+	public ModelBambooCrate()
+	{
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -80,13 +82,15 @@ public class ModelBambooCrate extends ModelBase {
 		setRotation(Core, 0F, 0F, 0F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void renderModel() {
+	public void renderModel()
+	{
 		BottomBamb1.render(0.0625F);
 		BottomBamb2.render(0.0625F);
 		BottomBamb3.render(0.0625F);

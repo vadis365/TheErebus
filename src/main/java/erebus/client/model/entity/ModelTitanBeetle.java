@@ -12,7 +12,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityTitanBeetle;
 
 @SideOnly(Side.CLIENT)
-public class ModelTitanBeetle extends ModelBase {
+public class ModelTitanBeetle extends ModelBase
+{
 	ModelRenderer Thx;
 	ModelRenderer ThxS;
 	ModelRenderer Ab;
@@ -59,7 +60,8 @@ public class ModelTitanBeetle extends ModelBase {
 	ModelRenderer Body;
 	ModelRenderer Lock;
 
-	public ModelTitanBeetle() {
+	public ModelTitanBeetle()
+	{
 		textureWidth = 128;
 		textureHeight = 128;
 
@@ -249,7 +251,8 @@ public class ModelTitanBeetle extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityTitanBeetle beetle = (EntityTitanBeetle) entity;
@@ -266,7 +269,8 @@ public class ModelTitanBeetle extends ModelBase {
 		RFL1.render(unitPixel);
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
-		if (beetle.getTameState() >= 3) {
+		if (beetle.getTameState() >= 3)
+		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0F, 0.27F, 0.15F);
 			GL11.glScalef(0.67F, 0.67F, 0.67F);
@@ -277,14 +281,16 @@ public class ModelTitanBeetle extends ModelBase {
 		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityTitanBeetle beetle = (EntityTitanBeetle) entity;
 		float correction = 0.3490659F;

@@ -7,7 +7,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModBiomes;
 import erebus.lib.Reference;
 
-public class ConfigHandler {
+public class ConfigHandler
+{
 
 	public static final ConfigHandler INSTANCE = new ConfigHandler();
 
@@ -18,13 +19,15 @@ public class ConfigHandler {
 
 	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores" };
 
-	public void loadConfig(FMLPreInitializationEvent event) {
+	public void loadConfig(FMLPreInitializationEvent event)
+	{
 		config = new Configuration(event.getSuggestedConfigurationFile());
 
 		syncConfigs();
 	}
 
-	private void syncConfigs() {
+	private void syncConfigs()
+	{
 
 		// Biomes & misc
 		ModBiomes.undergroundJungleID = config.get("Biomes", "Biome ID of Underground Jungle", 100).getInt(100);
@@ -33,15 +36,26 @@ public class ConfigHandler {
 		ModBiomes.elysianFieldsID = config.get("Biomes", "Biome ID of Elysian Fields", 103).getInt(103);
 		ModBiomes.ulteriorOutbackID = config.get("Biomes", "Biome ID of Ulterior Outback", 104).getInt(104);
 		ModBiomes.fungalForestID = config.get("Biomes", "Biome ID of Fungal Forest", 105).getInt(105);
-		/*ModBiomes.betweenlandsID = config.get("Biomes", "Biome ID of Betweenlands", 157).getInt(157);*/
+		/*
+		 * ModBiomes.betweenlandsID = config.get("Biomes",
+		 * "Biome ID of Betweenlands", 157).getInt(157);
+		 */
 
 		ModBiomes.fieldsSubForestID = config.get("Biomes", "Biome ID of Fields - Forest", 127).getInt(127);
-		/*ModBiomes.jungleSubLakeID = config.get("Biomes", "Biome ID of Underground Jungle - Lake", 161).getInt(161);
-		ModBiomes.jungleSubAsperGroveID = config.get("Biomes", "Biome ID of Underground Jungle - Asper Grove", 162).getInt(162);
-		ModBiomes.desertSubCharredForestID = config.get("Biomes", "Biome ID of Volcanic Desert - Charred Forest", 163).getInt(163);
-		ModBiomes.savannahSubRockyWastelandID = config.get("Biomes", "Biome ID of Savannah - Rocky Wasteland", 164).getInt(164);
-		ModBiomes.savannahSubAsperGroveID = config.get("Biomes", "Biome ID of Savannah - Asper Grove", 165).getInt(165);
-		ModBiomes.savannahSubSteppeID = config.get("Biomes", "Biome ID of Savannah - Steppe", 166).getInt(166);*/
+		/*
+		 * ModBiomes.jungleSubLakeID = config.get("Biomes",
+		 * "Biome ID of Underground Jungle - Lake", 161).getInt(161);
+		 * ModBiomes.jungleSubAsperGroveID = config.get("Biomes",
+		 * "Biome ID of Underground Jungle - Asper Grove", 162).getInt(162);
+		 * ModBiomes.desertSubCharredForestID = config.get("Biomes",
+		 * "Biome ID of Volcanic Desert - Charred Forest", 163).getInt(163);
+		 * ModBiomes.savannahSubRockyWastelandID = config.get("Biomes",
+		 * "Biome ID of Savannah - Rocky Wasteland", 164).getInt(164);
+		 * ModBiomes.savannahSubAsperGroveID = config.get("Biomes",
+		 * "Biome ID of Savannah - Asper Grove", 165).getInt(165);
+		 * ModBiomes.savannahSubSteppeID = config.get("Biomes",
+		 * "Biome ID of Savannah - Steppe", 166).getInt(166);
+		 */
 
 		erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
 		spawnPortalMobs = config.get(Configuration.CATEGORY_GENERAL, "Should spawn beetles and larvae in the portal", true).getBoolean(true);
@@ -57,12 +71,17 @@ public class ConfigHandler {
 		aluminium = config.get("Ores", "Generate aluminium", false).getBoolean(false);
 
 		if (config.hasChanged())
+		{
 			config.save();
+		}
 	}
 
 	@SubscribeEvent
-	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
+	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs)
+	{
 		if (Reference.MOD_ID.equals(eventArgs.modID))
+		{
 			syncConfigs();
+		}
 	}
 }

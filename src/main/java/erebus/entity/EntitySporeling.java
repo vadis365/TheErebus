@@ -23,9 +23,11 @@ import net.minecraft.world.World;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 
-public class EntitySporeling extends EntityAnimal {
+public class EntitySporeling extends EntityAnimal
+{
 
-	public EntitySporeling(World world) {
+	public EntitySporeling(World world)
+	{
 		super(world);
 		setSize(0.5F, 0.3F);
 		stepHeight = 0.0F;
@@ -45,7 +47,8 @@ public class EntitySporeling extends EntityAnimal {
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
@@ -53,65 +56,81 @@ public class EntitySporeling extends EntityAnimal {
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public void onLivingUpdate() {
+	public void onLivingUpdate()
+	{
 		worldObj.spawnParticle("reddust", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
 
-		if (rand.nextInt(200) == 0) {
+		if (rand.nextInt(200) == 0)
+		{
 			int x = MathHelper.floor_double(posX);
 			int y = MathHelper.floor_double(posY);
 			int z = MathHelper.floor_double(posZ);
 
-			if (worldObj.isAirBlock(x, y, z) && worldObj.getBiomeGenForCoords(x, z).biomeID == ModBiomes.fungalForestID && Blocks.brown_mushroom.canPlaceBlockAt(worldObj, x, y, z)) {
+			if (worldObj.isAirBlock(x, y, z) && worldObj.getBiomeGenForCoords(x, z).biomeID == ModBiomes.fungalForestID && Blocks.brown_mushroom.canPlaceBlockAt(worldObj, x, y, z))
+			{
 				int mush = rand.nextInt(3);
 				if (mush != 0)
+				{
 					worldObj.setBlock(x, y, z, Blocks.brown_mushroom);
-				else
+				} else
+				{
 					worldObj.setBlock(x, y, z, ModBlocks.plantSmall, rand.nextInt(5), 3);
+				}
 			}
 		}
 		super.onLivingUpdate();
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
+	public boolean getCanSpawnHere()
+	{
 		float light = getBrightness(1.0F);
 		if (light >= 0F)
+		{
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		}
 		return super.getCanSpawnHere();
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 3;
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "erebus:sporelingliving";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:sporelinghurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:sporelingdeath";
 	}
 
 	@Override
-	protected Item getDropItem() {
+	protected Item getDropItem()
+	{
 		return Items.bone;
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable child) {
+	public EntityAgeable createChild(EntityAgeable child)
+	{
 		return null;
 	}
 }

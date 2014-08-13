@@ -22,9 +22,11 @@ import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityAntlion extends EntityMob {
+public class EntityAntlion extends EntityMob
+{
 
-	public EntityAntlion(World world) {
+	public EntityAntlion(World world)
+	{
 		super(world);
 		setSize(2.0F, 0.9F);
 		isImmuneToFire = true;
@@ -41,7 +43,8 @@ public class EntityAntlion extends EntityMob {
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(35.0D);
@@ -51,85 +54,106 @@ public class EntityAntlion extends EntityMob {
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public int getTotalArmorValue() {
+	public int getTotalArmorValue()
+	{
 		return 8;
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	/*
-	 * @Override protected String getLivingSound() {
-	 * return "erebus:AntlionSound"; }
+	 * @Override protected String getLivingSound() { return
+	 * "erebus:AntlionSound"; }
 	 *
-	 * @Override protected String getHurtSound() {
-	 * return "erebus:Antlionhurt";
+	 * @Override protected String getHurtSound() { return "erebus:Antlionhurt";
 	 * }
 	 */
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{ // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected Item getDropItem() {
+	protected Item getDropItem()
+	{
 		return Item.getItemFromBlock(Blocks.sand);
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
+		{
 			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
+		}
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
+	public boolean getCanSpawnHere()
+	{
 		return isOnSand() && super.getCanSpawnHere();
 	}
 
-	public boolean isOnSand() {
+	public boolean isOnSand()
+	{
 		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == Blocks.sand;
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
 		super.onUpdate();
 		if (findPlayerToAttack() != null)
+		{
 			entityToAttack = findPlayerToAttack();
-		else
+		} else
+		{
 			entityToAttack = null;
+		}
 
 		if (!worldObj.isRemote && getEntityToAttack() == null && isOnSand())
+		{
 			yOffset = -1;
-		else
+		} else
+		{
 			yOffset = 0;
+		}
 	}
 
 	@Override
-	protected Entity findPlayerToAttack() {
+	protected Entity findPlayerToAttack()
+	{
 		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 		return player;
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float damage) {
+	public boolean attackEntityFrom(DamageSource source, float damage)
+	{
 		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown))
+		{
 			return false;
+		}
 		return super.attackEntityFrom(source, damage);
 	}
 }

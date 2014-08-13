@@ -10,81 +10,112 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 
-public class EntityWebSling extends EntityThrowable {
+public class EntityWebSling extends EntityThrowable
+{
 
 	private byte type;
 
-	public EntityWebSling(World world) {
+	public EntityWebSling(World world)
+	{
 		super(world);
 		setSize(1F, 1F);
 	}
 
-	public EntityWebSling(World world, EntityLiving entity) {
+	public EntityWebSling(World world, EntityLiving entity)
+	{
 		super(world, entity);
 	}
 
-	public EntityWebSling(World world, double x, double y, double z) {
+	public EntityWebSling(World world, double x, double y, double z)
+	{
 		super(world, x, y, z);
 	}
 
-	public EntityWebSling(World world, EntityPlayer player) {
+	public EntityWebSling(World world, EntityPlayer player)
+	{
 		super(world, player);
 	}
 
 	@Override
-	protected void entityInit() {
+	protected void entityInit()
+	{
 		super.entityInit();
 		dataWatcher.addObject(24, new Byte((byte) 0));
 	}
 
-	protected String getWebSlingSplatSound() {
+	protected String getWebSlingSplatSound()
+	{
 		return "erebus:webslingsplat";
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
-		if (!worldObj.isRemote) {
+	protected void onImpact(MovingObjectPosition mop)
+	{
+		if (!worldObj.isRemote)
+		{
 			int x = MathHelper.floor_double(posX);
 			int y = MathHelper.floor_double(posY);
 			int z = MathHelper.floor_double(posZ);
 
-			if (mop.entityHit != null) {
+			if (mop.entityHit != null)
+			{
 				if (type == 0)
+				{
 					worldObj.setBlock(x, y, z, Blocks.web);
+				}
 				if (type == 1)
+				{
 					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb);
+				}
 				if (type == 2)
+				{
 					mop.entityHit.setFire(10);
-			} else if (mop.entityHit == null && Blocks.web.canPlaceBlockAt(worldObj, x, y, z) || mop.entityHit == null && Blocks.fire.canPlaceBlockAt(worldObj, x, y, z)) {
+				}
+			} else if (mop.entityHit == null && Blocks.web.canPlaceBlockAt(worldObj, x, y, z) || mop.entityHit == null && Blocks.fire.canPlaceBlockAt(worldObj, x, y, z))
+			{
 				if (type == 0)
+				{
 					worldObj.setBlock(x, y, z, Blocks.web);
+				}
 				if (type == 1)
+				{
 					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb);
+				}
 				if (type == 2)
+				{
 					worldObj.setBlock(x, y, z, Blocks.fire);
+				}
 			}
 			if (!worldObj.isRemote)
+			{
 				setDead();
+			}
 		}
 		if (type != 2)
+		{
 			worldObj.playSoundAtEntity(this, getWebSlingSplatSound(), 1.0F, 1.0F);
+		}
 	}
 
 	@Override
-	public boolean canBeCollidedWith() {
+	public boolean canBeCollidedWith()
+	{
 		return false;
 	}
 
-	public boolean attackEntityFrom(DamageSource source, int par2) {
+	public boolean attackEntityFrom(DamageSource source, int par2)
+	{
 		return false;
 	}
 
-	public void setType(byte webType) {
+	public void setType(byte webType)
+	{
 		type = webType;
 		dataWatcher.updateObject(24, webType);
 	}
 
-	public byte getType() {
+	public byte getType()
+	{
 		return type;
 	}
 }

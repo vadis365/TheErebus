@@ -4,7 +4,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelWaspSword extends ModelBase {
+public class ModelWaspSword extends ModelBase
+{
 	ModelRenderer Point;
 	ModelRenderer Blade;
 	ModelRenderer SpikeTop1;
@@ -26,7 +27,8 @@ public class ModelWaspSword extends ModelBase {
 	ModelRenderer Hilt;
 	ModelRenderer Pommel;
 
-	public ModelWaspSword() {
+	public ModelWaspSword()
+	{
 		textureWidth = 32;
 		textureHeight = 64;
 
@@ -112,7 +114,8 @@ public class ModelWaspSword extends ModelBase {
 		setRotation(Pommel, 0F, 0F, 0.7853982F);
 	}
 
-	public void render() {
+	public void render()
+	{
 		Point.render(0.0625F);
 		Blade.render(0.0625F);
 		SpikeTop1.render(0.0625F);
@@ -135,14 +138,16 @@ public class ModelWaspSword extends ModelBase {
 		Pommel.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par6Entity) {
+	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par6Entity)
+	{
 
 	}
 }

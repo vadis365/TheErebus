@@ -2,13 +2,16 @@ package erebus.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityErebusAltarEmpty extends TileEntityErebusAltar {
+public class TileEntityErebusAltarEmpty extends TileEntityErebusAltar
+{
 
 	@Override
-	protected void writeTileToNBT(NBTTagCompound nbt) {
+	protected void writeTileToNBT(NBTTagCompound nbt)
+	{
 	}
 
 	@Override
-	protected void readTileFromNBT(NBTTagCompound nbt) {
+	protected void readTileFromNBT(NBTTagCompound nbt)
+	{
 	}
 }

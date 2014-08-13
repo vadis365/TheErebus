@@ -13,19 +13,23 @@ import erebus.client.model.entity.ModelPrayingMantis;
 import erebus.entity.EntityPrayingMantis;
 
 @SideOnly(Side.CLIENT)
-public class RenderPrayingMantis extends RenderLiving {
+public class RenderPrayingMantis extends RenderLiving
+{
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/prayingMantis.png");
 
-	public RenderPrayingMantis(ModelPrayingMantis model, float shadowSize) {
+	public RenderPrayingMantis(ModelPrayingMantis model, float shadowSize)
+	{
 		super(model, shadowSize);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
+	protected void preRenderCallback(EntityLivingBase entityliving, float f)
+	{
 		scalePrayingMantis((EntityPrayingMantis) entityliving, f);
 	}
 
-	protected void scalePrayingMantis(EntityPrayingMantis entityPrayingMantis, float f) {
+	protected void scalePrayingMantis(EntityPrayingMantis entityPrayingMantis, float f)
+	{
 		float f1 = 1.0F;
 		shadowSize = 0.5F;
 		GL11.glScalef(f1, f1, f1);
@@ -35,7 +39,8 @@ public class RenderPrayingMantis extends RenderLiving {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 }

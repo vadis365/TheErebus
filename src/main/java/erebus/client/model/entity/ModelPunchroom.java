@@ -4,7 +4,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelPunchroom extends ModelBase {
+public class ModelPunchroom extends ModelBase
+{
 	ModelRenderer mushBase;
 	ModelRenderer mushBase2;
 	ModelRenderer mushBase3;
@@ -13,7 +14,8 @@ public class ModelPunchroom extends ModelBase {
 	ModelRenderer mushCap2;
 	ModelRenderer mushCap3;
 
-	public ModelPunchroom() {
+	public ModelPunchroom()
+	{
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -48,7 +50,8 @@ public class ModelPunchroom extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 
@@ -61,7 +64,8 @@ public class ModelPunchroom extends ModelBase {
 		mushCap3.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

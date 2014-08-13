@@ -17,7 +17,8 @@ import erebus.block.plants.BlockSaplingErebus;
 import erebus.item.block.ItemBlockLocalised;
 import erebus.item.block.ItemBlockSlabSimple;
 
-public enum EnumWood {
+public enum EnumWood
+{
 
 	Baobab,
 	Eucalyptus,
@@ -34,45 +35,55 @@ public enum EnumWood {
 	private final boolean hasPlanks;
 	private final boolean hasSapling;
 
-	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling) {
+	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling)
+	{
 		this.hasLog = hasLog;
 		this.hasPlanks = hasPlanks;
 		this.hasSapling = hasSapling;
 	}
 
-	EnumWood() {
+	EnumWood()
+	{
 		this(true, true, true);
 	}
 
-	public boolean hasSapling() {
+	public boolean hasSapling()
+	{
 		return hasSapling;
 	}
 
-	public boolean hasPlanks() {
+	public boolean hasPlanks()
+	{
 		return hasPlanks;
 	}
 
-	public boolean hasLog() {
+	public boolean hasLog()
+	{
 		return hasLog;
 	}
 
-	public Block getStair() {
+	public Block getStair()
+	{
 		return stairs.get(this);
 	}
 
-	public Block getLog() {
+	public Block getLog()
+	{
 		return logs.get(this);
 	}
 
-	public Block getSlab() {
+	public Block getSlab()
+	{
 		return slabs.get(this);
 	}
 
-	public Block getleaves() {
+	public Block getleaves()
+	{
 		return ModBlocks.leaves;
 	}
 
-	public String getTranslatedName() {
+	public String getTranslatedName()
+	{
 		return StatCollector.translateToLocal("wood." + Reference.MOD_ID + "." + name().toLowerCase());
 	}
 
@@ -81,20 +92,25 @@ public enum EnumWood {
 	private static final HashMap<EnumWood, Block> stairs = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> saplings = new HashMap<EnumWood, Block>();
 
-	public static void initBlocks() {
-		for (EnumWood wood : values()) {
-			if (wood.hasLog) {
+	public static void initBlocks()
+	{
+		for (EnumWood wood : values())
+		{
+			if (wood.hasLog)
+			{
 				Block log = new BlockLogErebus(wood);
 				GameRegistry.registerBlock(log, ItemBlockLocalised.class, "log" + wood.name());
 				Blocks.fire.setFireInfo(log, 5, 5);
 				logs.put(wood, log);
 			}
-			if (wood.hasSapling) {
+			if (wood.hasSapling)
+			{
 				Block sapling = new BlockSaplingErebus(wood);
 				GameRegistry.registerBlock(sapling, ItemBlockLocalised.class, "sapling" + wood.name());
 				saplings.put(wood, sapling);
 			}
-			if (wood.hasPlanks) {
+			if (wood.hasPlanks)
+			{
 				Block stair = new BlockStairPlanks(ModBlocks.planks, wood);
 				GameRegistry.registerBlock(stair, ItemBlockLocalised.class, "plankStair" + wood.name());
 				Blocks.fire.setFireInfo(stair, 5, 5);
@@ -108,17 +124,23 @@ public enum EnumWood {
 		}
 	}
 
-	public static void initRecipes() {
-		for (EnumWood wood : values()) {
-			if (wood.hasLog) {
+	public static void initRecipes()
+	{
+		for (EnumWood wood : values())
+		{
+			if (wood.hasLog)
+			{
 				Block log = logs.get(wood);
 				OreDictionary.registerOre("logWood", log);
 				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planks, 4, wood.ordinal()), new ItemStack(log));
 				GameRegistry.addSmelting(new ItemStack(Items.coal, 1, 1), new ItemStack(log), 1.0F);
 			}
 			if (wood.hasSapling)
+			{
 				OreDictionary.registerOre("treeSapling", saplings.get(wood));
-			if (wood.hasPlanks) {
+			}
+			if (wood.hasPlanks)
+			{
 				Block stair = stairs.get(wood);
 				OreDictionary.registerOre("stairWood", stair);
 				GameRegistry.addRecipe(new ItemStack(stair, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });

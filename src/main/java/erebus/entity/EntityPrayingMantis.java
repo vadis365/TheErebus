@@ -16,11 +16,13 @@ import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ErebusMaterial.DATA;
 
-public class EntityPrayingMantis extends EntityMob {
+public class EntityPrayingMantis extends EntityMob
+{
 
 	private int attackAnimation;
 
-	public EntityPrayingMantis(World world) {
+	public EntityPrayingMantis(World world)
+	{
 		super(world);
 		isImmuneToFire = true;
 		setSize(2.0F, 2.5F);
@@ -34,29 +36,34 @@ public class EntityPrayingMantis extends EntityMob {
 	}
 
 	@Override
-	protected void entityInit() {
+	protected void entityInit()
+	{
 		super.entityInit();
 		dataWatcher.addObject(20, 0.0F);
 		dataWatcher.addObject(22, new Byte((byte) 0));
 	}
 
 	@Override
-	public boolean isAIEnabled() {
+	public boolean isAIEnabled()
+	{
 		return true;
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnedInChunk()
+	{
 		return 2;
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute() {
+	public EnumCreatureAttribute getCreatureAttribute()
+	{
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void applyEntityAttributes()
+	{
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
@@ -65,57 +72,77 @@ public class EntityPrayingMantis extends EntityMob {
 	}
 
 	@Override
-	protected String getLivingSound() {
+	protected String getLivingSound()
+	{
 		return "erebus:mantissound";
 	}
 
 	@Override
-	protected String getHurtSound() {
+	protected String getHurtSound()
+	{
 		return "erebus:mantishurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
+	protected String getDeathSound()
+	{
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
+	protected void func_145780_a(int x, int y, int z, Block block)
+	{
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	public boolean isOnLadder() {
+	public boolean isOnLadder()
+	{
 		return isCollidedHorizontally;
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
 		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.camoPowder.ordinal()), 0.0F);
 	}
 
 	@Override
-	public void onUpdate() {
-		if (!worldObj.isRemote && getAttackTarget() != null) {
+	public void onUpdate()
+	{
+		if (!worldObj.isRemote && getAttackTarget() != null)
+		{
 			double d1 = getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
 			if (d1 >= 4.0D)
+			{
 				dataWatcher.updateObject(20, (24.0F - (float) d1) * 0.0208333F);
+			}
 			if (d1 < 4.0D)
+			{
 				dataWatcher.updateObject(20, (24.0F - (float) d1) * 0.041666F);
+			}
 		}
 		if (!worldObj.isRemote && getAttackTarget() == null || dataWatcher.getWatchableObjectFloat(20) > 0.8F)
+		{
 			dataWatcher.updateObject(20, 1.0F);
-		if (!worldObj.isRemote) {
+		}
+		if (!worldObj.isRemote)
+		{
 			if (attackAnimation < 5 && dataWatcher.getWatchableObjectByte(22) == 0)
+			{
 				setAttackAnimation(attackAnimation + 1, (byte) 0);
+			}
 			if (attackAnimation == 5)
+			{
 				setAttackAnimation(0, (byte) 1);
+			}
 
 		}
 		super.onUpdate();
 	}
 
-	public void setAttackAnimation(int count, byte action) {
+	public void setAttackAnimation(int count, byte action)
+	{
 		attackAnimation = count;
 		dataWatcher.updateObject(22, action);
 	}

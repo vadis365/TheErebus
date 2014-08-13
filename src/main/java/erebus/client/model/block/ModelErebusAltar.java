@@ -7,13 +7,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelErebusAltar extends ModelBase {
+public class ModelErebusAltar extends ModelBase
+{
 
 	private final ModelRenderer Mid;
 	private final ModelRenderer Top;
 	private final ModelRenderer Bot;
 
-	public ModelErebusAltar() {
+	public ModelErebusAltar()
+	{
 		textureWidth = 256;
 		textureHeight = 64;
 
@@ -30,20 +32,23 @@ public class ModelErebusAltar extends ModelBase {
 		Bot.setRotationPoint(0F, 20F, 0F);
 	}
 
-	public void render() {
+	public void render()
+	{
 		Mid.render(0.0625F);
 		Top.render(0.0625F);
 		Bot.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 
 	}
 }

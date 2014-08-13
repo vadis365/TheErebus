@@ -12,12 +12,14 @@ import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class AltarRecipe {
+public class AltarRecipe
+{
 
 	private static final ArrayList<AltarRecipe> recipeRegistry = new ArrayList<AltarRecipe>();
 
-	public static void init() {
-		//example recipe, delete when real ones are added
+	public static void init()
+	{
+		// example recipe, delete when real ones are added
 		addRecipe(new ItemStack(Items.arrow), new ItemStack(Blocks.anvil), new ItemStack(Items.apple));
 	}
 
@@ -30,17 +32,24 @@ public class AltarRecipe {
 	 * @param inputs
 	 *            must not be null and must contain less than 8 items
 	 */
-	public static void addRecipe(ItemStack output, ItemStack focusItem, ItemStack... inputs) {
+	public static void addRecipe(ItemStack output, ItemStack focusItem, ItemStack... inputs)
+	{
 		if (output == null || focusItem == null || inputs == null || inputs.length >= 8)
+		{
 			return;
+		}
 		AltarRecipe recipe = new AltarRecipe(output, focusItem, inputs);
 		if (!recipeRegistry.contains(recipe))
+		{
 			recipeRegistry.add(recipe);
+		}
 	}
 
-	public static ItemStack getOutput(ItemStack focusItem, ItemStack... inputs) {
+	public static ItemStack getOutput(ItemStack focusItem, ItemStack... inputs)
+	{
 		AltarRecipe recipe = new AltarRecipe(null, focusItem, inputs);
-		if (recipeRegistry.contains(recipe)) {
+		if (recipeRegistry.contains(recipe))
+		{
 			ItemStack output = recipeRegistry.get(recipeRegistry.indexOf(recipe)).output;
 			return output != null ? output.copy() : null;
 		}
@@ -51,12 +60,15 @@ public class AltarRecipe {
 	private final UnsizedStack focusItem;
 	private final UnsizedStack[] inputs;
 
-	public AltarRecipe(ItemStack output, ItemStack focusItem, ItemStack... inputs) {
+	public AltarRecipe(ItemStack output, ItemStack focusItem, ItemStack... inputs)
+	{
 		this.output = output == null ? null : output.copy();
 		this.focusItem = new UnsizedStack(focusItem);
 		UnsizedStack[] temp = new UnsizedStack[inputs.length];
 		for (int i = 0; i < inputs.length; i++)
+		{
 			temp[i] = new UnsizedStack(inputs[i]);
+		}
 
 		List<UnsizedStack> list = Arrays.asList(temp);
 		Collections.sort(list);
@@ -64,14 +76,18 @@ public class AltarRecipe {
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return new HashCodeBuilder().append(focusItem).append(inputs).hashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+	{
 		if (!(obj instanceof AltarRecipe))
+		{
 			return false;
+		}
 
 		AltarRecipe recipe = (AltarRecipe) obj;
 		return new EqualsBuilder().append(focusItem, recipe.focusItem).append(inputs, recipe.inputs).build();

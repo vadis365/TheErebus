@@ -6,7 +6,8 @@ import erebus.creativetab.CreativeTabErebusGear;
 import erebus.creativetab.CreativeTabErebusItem;
 import erebus.creativetab.CreativeTabErebusSpecialItem;
 
-public class ModTabs {
+public class ModTabs
+{
 
 	public static CreativeTabErebus blocks = new CreativeTabErebusBlock();
 	public static CreativeTabErebus items = new CreativeTabErebusItem();

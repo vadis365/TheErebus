@@ -14,27 +14,35 @@ import erebus.ModBlocks;
 import erebus.entity.EntityMucusBombPrimed;
 
 @SideOnly(Side.CLIENT)
-public class RenderMucusBombPrimed extends Render {
+public class RenderMucusBombPrimed extends Render
+{
 	private RenderBlocks blockRenderer = new RenderBlocks();
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/blocks/mucusBombSides.png");
 
-	public RenderMucusBombPrimed() {
+	public RenderMucusBombPrimed()
+	{
 		shadowSize = 0.5F;
 	}
 
-	public void renderPrimedMucusBomb(EntityMucusBombPrimed entityMucusBombPrimed, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void renderPrimedMucusBomb(EntityMucusBombPrimed entityMucusBombPrimed, double x, double y, double z, float rotationYaw, float partialTickTime)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		float f2;
 
-		if (entityMucusBombPrimed.fuse - partialTickTime + 1.0F < 10.0F) {
+		if (entityMucusBombPrimed.fuse - partialTickTime + 1.0F < 10.0F)
+		{
 			f2 = 1.0F - (entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 10.0F;
 
 			if (f2 < 0.0F)
+			{
 				f2 = 0.0F;
+			}
 
 			if (f2 > 1.0F)
+			{
 				f2 = 1.0F;
+			}
 
 			f2 *= f2;
 			f2 *= f2;
@@ -46,7 +54,8 @@ public class RenderMucusBombPrimed extends Render {
 		bindTexture(TextureMap.locationBlocksTexture);
 		blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, entityMucusBombPrimed.getBrightness(partialTickTime));
 
-		if (entityMucusBombPrimed.fuse / 5 % 2 == 0) {
+		if (entityMucusBombPrimed.fuse / 5 % 2 == 0)
+		{
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glEnable(GL11.GL_BLEND);
@@ -64,12 +73,14 @@ public class RenderMucusBombPrimed extends Render {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
 		return texture;
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
+	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime)
+	{
 		renderPrimedMucusBomb((EntityMucusBombPrimed) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 }

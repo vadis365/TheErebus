@@ -23,36 +23,46 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.lib.Reference;
 
-public class SpawnEggs extends ItemMonsterPlacer {
+public class SpawnEggs extends ItemMonsterPlacer
+{
 	private static final Map<Short, EggData> eggTypes = new LinkedHashMap<Short, EggData>();
 
-	public static final void registerSpawnEgg(Class<? extends EntityLiving> entity, String entityName, int id, int eggBackgroundColor, int eggForegroundColor) {
+	public static final void registerSpawnEgg(Class<? extends EntityLiving> entity, String entityName, int id, int eggBackgroundColor, int eggForegroundColor)
+	{
 		eggTypes.put((short) id, new EggData(id, entityName, entity, eggBackgroundColor, eggForegroundColor));
 	}
 
-	private static final EggData getEggData(ItemStack is) {
+	private static final EggData getEggData(ItemStack is)
+	{
 		return eggTypes.get((short) is.getItemDamage());
 	}
 
-	public SpawnEggs() {
+	public SpawnEggs()
+	{
 		setHasSubtypes(true);
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack is) {
+	public String getItemStackDisplayName(ItemStack is)
+	{
 		String s = StatCollector.translateToLocal(getUnlocalizedName() + ".name").trim();
 
 		EggData egg = getEggData(is);
 		if (egg != null)
+		{
 			s += " " + StatCollector.translateToLocal("entity." + Reference.MOD_ID + "." + egg.entityName + ".name");
+		}
 
 		return s;
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
 		if (world.isRemote)
+		{
 			return true;
+		}
 
 		Block block = world.getBlock(x, y, z);
 		x += Facing.offsetsXForSide[side];
@@ -60,36 +70,49 @@ public class SpawnEggs extends ItemMonsterPlacer {
 		z += Facing.offsetsZForSide[side];
 
 		EggData egg = getEggData(is);
-		if (egg != null) {
+		if (egg != null)
+		{
 			egg.spawnMob(world, x + 0.5D, y + (side == 1 && block != null && block.getRenderType() == 11 ? 0.5D : 0D), z + 0.5D, is);
 
 			if (!player.capabilities.isCreativeMode)
+			{
 				--is.stackSize;
+			}
 		}
 
 		return true;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
+	{
 		if (world.isRemote)
+		{
 			return is;
+		}
 
 		MovingObjectPosition mop = getMovingObjectPositionFromPlayer(world, player, true);
 
-		if (mop != null && mop.typeOfHit == MovingObjectType.BLOCK) {
+		if (mop != null && mop.typeOfHit == MovingObjectType.BLOCK)
+		{
 			int x = mop.blockX, y = mop.blockY, z = mop.blockZ;
 
 			if (!world.canMineBlock(player, x, y, z) || !player.canPlayerEdit(x, y, z, mop.sideHit, is))
+			{
 				return is;
+			}
 
-			if (world.getBlock(x, y, z).getMaterial() == Material.water) {
+			if (world.getBlock(x, y, z).getMaterial() == Material.water)
+			{
 				EggData egg = getEggData(is);
-				if (egg != null) {
+				if (egg != null)
+				{
 					egg.spawnMob(world, x, y, z, is);
 
 					if (!player.capabilities.isCreativeMode)
+					{
 						--is.stackSize;
+					}
 				}
 			}
 		}
@@ -99,7 +122,8 @@ public class SpawnEggs extends ItemMonsterPlacer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack is, int pass) {
+	public int getColorFromItemStack(ItemStack is, int pass)
+	{
 		EggData egg = getEggData(is);
 		return egg != null ? pass == 0 ? egg.primaryColor : egg.secondaryColor : 16777215;
 	}
@@ -107,12 +131,16 @@ public class SpawnEggs extends ItemMonsterPlacer {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, List list)
+	{
 		for (Short s : eggTypes.keySet())
+		{
 			list.add(new ItemStack(id, 1, s));
+		}
 	}
 
-	static class EggData {
+	static class EggData
+	{
 
 		private final short id;
 		String entityName;
@@ -120,11 +148,13 @@ public class SpawnEggs extends ItemMonsterPlacer {
 		int primaryColor;
 		int secondaryColor;
 
-		EggData(int id, String entityName, Class<? extends EntityLiving> entityClass, int[] rgbPrimaryColor, int[] rgbSecondaryColor) {
+		EggData(int id, String entityName, Class<? extends EntityLiving> entityClass, int[] rgbPrimaryColor, int[] rgbSecondaryColor)
+		{
 			this(id, entityName, entityClass, rgbPrimaryColor[0] << 16 | rgbPrimaryColor[1] << 8 | rgbPrimaryColor[2], rgbSecondaryColor[0] << 16 | rgbSecondaryColor[1] << 8 | rgbSecondaryColor[2]);
 		}
 
-		EggData(int id, String entityName, Class<? extends EntityLiving> entityClass, int primaryColor, int secondaryColor) {
+		EggData(int id, String entityName, Class<? extends EntityLiving> entityClass, int primaryColor, int secondaryColor)
+		{
 			this.id = (short) id;
 			this.entityName = entityName;
 			this.entityClass = entityClass;
@@ -132,18 +162,23 @@ public class SpawnEggs extends ItemMonsterPlacer {
 			this.secondaryColor = secondaryColor;
 		}
 
-		public EntityLiving spawnMob(World world, double x, double y, double z, ItemStack is) {
+		public EntityLiving spawnMob(World world, double x, double y, double z, ItemStack is)
+		{
 			EntityLiving e = null;
 
-			try {
+			try
+			{
 				e = entityClass.getConstructor(World.class).newInstance(world);
-			} catch (Exception ex) {
+			} catch (Exception ex)
+			{
 				ex.printStackTrace();
 				return null;
 			}
 
 			if (e == null)
+			{
 				return null;
+			}
 
 			e.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360F), 0F);
 			e.rotationYawHead = e.rotationYaw;
@@ -153,13 +188,16 @@ public class SpawnEggs extends ItemMonsterPlacer {
 			e.playLivingSound();
 
 			if (is.hasDisplayName())
+			{
 				e.setCustomNameTag(is.getDisplayName());
+			}
 
 			return e;
 		}
 
 		@Override
-		public int hashCode() {
+		public int hashCode()
+		{
 			return id;
 		}
 	}

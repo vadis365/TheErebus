@@ -11,7 +11,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityCicada;
 
 @SideOnly(Side.CLIENT)
-public class ModelCicada extends ModelBase {
+public class ModelCicada extends ModelBase
+{
 
 	ModelRenderer LEye;
 	ModelRenderer REye;
@@ -58,7 +59,8 @@ public class ModelCicada extends ModelBase {
 	ModelRenderer LWingMain;
 	ModelRenderer LWingBack;
 
-	public ModelCicada() {
+	public ModelCicada()
+	{
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -242,7 +244,8 @@ public class ModelCicada extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
+	{
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityCicada cicada = (EntityCicada) entity;
@@ -286,7 +289,8 @@ public class ModelCicada extends ModelBase {
 		RWingFront.render(unitPixel);
 		LWingFront.render(unitPixel);
 
-		if (cicada.isFlying()) {
+		if (cicada.isFlying())
+		{
 
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.05F, 0.4F, 0.1F);
@@ -304,18 +308,21 @@ public class ModelCicada extends ModelBase {
 		}
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
+	private void setRotation(ModelRenderer model, float x, float y, float z)
+	{
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
+	{
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityCicada cicada = (EntityCicada) entity;
 
-		if (cicada.onGround) {
+		if (cicada.onGround)
+		{
 			RWingFront.rotateAngleX = 0F;
 			LWingFront.rotateAngleX = 0F;
 			RWingFront.rotateAngleY = 0F;
@@ -324,7 +331,8 @@ public class ModelCicada extends ModelBase {
 			LWingFront.rotateAngleZ = -0.3F;
 		}
 
-		if (cicada.isFlying()) {
+		if (cicada.isFlying())
+		{
 			RWingFront.rotateAngleZ = 1.8F - cicada.wingFloat;;
 			LWingFront.rotateAngleZ = -1.8F + cicada.wingFloat;;
 			RWingFront.rotateAngleX = -1.8F;

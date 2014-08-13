@@ -98,7 +98,8 @@ import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
 
-public class ModBlocks {
+public class ModBlocks
+{
 
 	// PORTAL
 	public static final BlockErebusPortal portal = (BlockErebusPortal) new BlockErebusPortal().setHardness(-1F).setLightLevel(1.0F).setStepSound(Block.soundTypeGlass).setBlockName("portalErebus");
@@ -221,7 +222,8 @@ public class ModBlocks {
 	public static final Block gaeanKeystone = new BlockGaeanKeystone();
 	public static final Block offeringAltar = new BlockOfferingAltar();
 
-	public static void init() {
+	public static void init()
+	{
 		initBlocks();
 		EnumWood.initBlocks();
 		initCreativeTabs();
@@ -230,19 +232,29 @@ public class ModBlocks {
 		registerProperties();
 	}
 
-	private static void initBlocks() {
+	private static void initBlocks()
+	{
 		for (int i = 0; i < umbercobbleStairs.length; i++)
+		{
 			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("umbercobbleStairs" + i);
+		}
 		for (int i = 0; i <= 4; i++)
+		{
 			stoneSlabs[i] = new BlockSlabStone(ModBlocks.umberstone, i);
+		}
 		for (int i = 0; i <= 2; i++)
+		{
 			stoneSlabs[5 + i] = new BlockSlabStone(ModBlocks.umberPaver, i);
+		}
 		stoneSlabs[7] = new BlockSlabStone(ModBlocks.petrifiedWoodPlanks);
 		for (int i = 0; i < gneissStairs.length; i++)
+		{
 			gneissStairs[i] = new BlockStairsBase(gneiss, i).setStepSound(Block.soundTypeStone).setBlockName("gneissStairs" + i);
+		}
 	}
 
-	private static void initCreativeTabs() {
+	private static void initCreativeTabs()
+	{
 		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, oreExtra, redGem, blockAmber, quickSand, ghostSand);
 		ModTabs.blocks.setTab(hollowLogAcacia, planks, leaves);
 		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, plantSmall, wallPlants);
@@ -257,32 +269,46 @@ public class ModBlocks {
 		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wall, gaeanKeystone);
 	}
 
-	private static void registerBlocks() {
-		try {
-			for (Field f : ModBlocks.class.getDeclaredFields()) {
+	private static void registerBlocks()
+	{
+		try
+		{
+			for (Field f : ModBlocks.class.getDeclaredFields())
+			{
 				Object obj = f.get(null);
 				if (obj instanceof Block)
+				{
 					registerBlock((Block) obj);
-				else if (obj instanceof Block[])
+				} else if (obj instanceof Block[])
+				{
 					for (Block block : (Block[]) obj)
+					{
 						registerBlock(block);
+					}
+				}
 			}
-		} catch (IllegalAccessException e) {
+		} catch (IllegalAccessException e)
+		{
 			throw new RuntimeException(e);
 		}
 	}
 
-	private static void registerBlock(Block block) {
+	private static void registerBlock(Block block)
+	{
 		String name = block.getUnlocalizedName();
 		String[] strings = name.split("\\.");
 
 		if (block instanceof ISubBlocksBlock)
+		{
 			GameRegistry.registerBlock(block, ((ISubBlocksBlock) block).getItemBlockClass(), strings[strings.length - 1]);
-		else
+		} else
+		{
 			GameRegistry.registerBlock(block, strings[strings.length - 1]);
+		}
 	}
 
-	private static void registerProperties() {
+	private static void registerProperties()
+	{
 		oreFossil.setHarvestLevel("pickaxe", 1);
 		mirBrick.setHarvestLevel("pickaxe", 1);
 		spiderSpawner.setHarvestLevel("pickaxe", 0, 0);
@@ -318,7 +344,8 @@ public class ModBlocks {
 		Blocks.fire.setFireInfo(thorns, 15, 100);
 	}
 
-	public static interface ISubBlocksBlock {
+	public static interface ISubBlocksBlock
+	{
 
 		Class<? extends ItemBlock> getItemBlockClass();
 	}

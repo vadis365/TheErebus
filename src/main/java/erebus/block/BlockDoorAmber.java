@@ -14,14 +14,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 
-public class BlockDoorAmber extends BlockDoor {
+public class BlockDoorAmber extends BlockDoor
+{
 
 	@SideOnly(Side.CLIENT)
 	public IIcon topDoorIcon, crapFixIcon;
 	@SideOnly(Side.CLIENT)
 	public IIcon[] flippedIcons;
 
-	public BlockDoorAmber(Material material) {
+	public BlockDoorAmber(Material material)
+	{
 		super(material);
 		float f = 0.5F;
 		float f1 = 1.0F;
@@ -30,51 +32,75 @@ public class BlockDoorAmber extends BlockDoor {
 	}
 
 	@Override
-	public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int direction) {
+	public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int direction)
+	{
 		if (direction == 1)
+		{
 			return blockIcon;
+		}
 		if (direction == 0)
+		{
 			return crapFixIcon;
-		int meta = func_150012_g(iBlockAccess, x, y, z);//getFullMetadata
+		}
+		int meta = func_150012_g(iBlockAccess, x, y, z);// getFullMetadata
 		boolean flag = (meta & 4) != 0;
 		int halfMeta = meta & 3;
 		boolean flipped = false;
 
-		if (flag) {
+		if (flag)
+		{
 			if (halfMeta == 0 && direction == 2)
+			{
 				flipped = !flipped;
-			else if (halfMeta == 1 && direction == 5)
+			} else if (halfMeta == 1 && direction == 5)
+			{
 				flipped = !flipped;
-			else if (halfMeta == 2 && direction == 3)
+			} else if (halfMeta == 2 && direction == 3)
+			{
 				flipped = !flipped;
-			else if (halfMeta == 3 && direction == 4)
+			} else if (halfMeta == 3 && direction == 4)
+			{
 				flipped = !flipped;
-		} else {
+			}
+		} else
+		{
 			if (halfMeta == 0 && direction == 5)
+			{
 				flipped = !flipped;
-			else if (halfMeta == 1 && direction == 3)
+			} else if (halfMeta == 1 && direction == 3)
+			{
 				flipped = !flipped;
-			else if (halfMeta == 2 && direction == 4)
+			} else if (halfMeta == 2 && direction == 4)
+			{
 				flipped = !flipped;
-			else if (halfMeta == 3 && direction == 2)
+			} else if (halfMeta == 3 && direction == 2)
+			{
 				flipped = !flipped;
+			}
 			if ((meta & 16) != 0)
+			{
 				flipped = !flipped;
+			}
 		}
 
 		if (flipped)
+		{
 			return flippedIcons[(meta & 8) != 0 ? 1 : 0];
-		else
+		} else
+		{
 			return (meta & 8) != 0 ? topDoorIcon : blockIcon;
+		}
 	}
 
 	@Override
-	public IIcon getIcon(int par1, int par2) {
+	public IIcon getIcon(int par1, int par2)
+	{
 		return blockIcon;
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister icon) {
+	public void registerBlockIcons(IIconRegister icon)
+	{
 		blockIcon = icon.registerIcon("erebus:doorAmberLower");
 		topDoorIcon = icon.registerIcon("erebus:doorAmberUpper");
 		crapFixIcon = icon.registerIcon("erebus:doorAmberBlank");
@@ -86,18 +112,21 @@ public class BlockDoorAmber extends BlockDoor {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z) {
+	public Item getItem(World world, int x, int y, int z)
+	{
 		return ModItems.doorAmberItem;
 	}
 
 	@Override
-	public Item getItemDropped(int id, Random random, int something) {
+	public Item getItemDropped(int id, Random random, int something)
+	{
 		return (id & 8) != 0 ? null : ModItems.doorAmberItem;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public int getRenderBlockPass() {
+	public int getRenderBlockPass()
+	{
 		return 1;
 	}
 }
