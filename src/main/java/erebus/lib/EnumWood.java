@@ -27,7 +27,6 @@ public enum EnumWood
 	Asper,
 	Cypress,
 	Sap(true, false, true),
-	Weedwood,
 	White(false, true, false),
 	Bamboo(false, true, false);
 
