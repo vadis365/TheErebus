@@ -17,6 +17,7 @@ import erebus.world.feature.tree.WorldGenCypressTree;
 
 //@formatter:off
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
+	protected final WorldGenPonds genPonds = new WorldGenPonds();
 	protected final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
 
 	protected final WorldGenerator genTreeCypress = new WorldGenCypressTree();
@@ -25,6 +26,23 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 
 	protected boolean generateFlowers = true;
+	
+	@Override
+	protected void populate(){
+		if (rand.nextInt(4) == 0){
+			for(attempt = 0; attempt < 25; attempt++){
+				xx = x + 16;
+				yy = 20+rand.nextInt(90);
+				zz = z + 16;
+
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+					genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D);
+					genPonds.generate(world,rand,xx,yy,zz);
+					if (rand.nextBoolean())break;
+				}
+			}
+		}
+	}
 
 	@Override
 	public void decorate(){
@@ -198,8 +216,6 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 	 */
 
 	public static class BiomeDecoratorElysianForest extends BiomeDecoratorElysianFields{
-		private final WorldGenPonds genPonds = new WorldGenPonds();
-
 		private final WorldGenerator genOakTree = new WorldGenTrees(false,5,0,0,false);
 		private final WorldGenerator genBirchTree = new WorldGenTrees(false,5,2,2,false);
 
@@ -209,7 +225,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 
 		@Override
 		protected void populate(){
-			if (rand.nextInt(4) == 0){
+			/*if (rand.nextInt(4) == 0){
 				for(attempt = 0; attempt < 45; attempt++){
 					xx = x + 16;
 					yy = rand.nextInt(120);
@@ -223,7 +239,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 						}
 					}
 				}
-			}
+			}*/
 
 			super.populate();
 		}

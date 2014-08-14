@@ -11,6 +11,7 @@ import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.block.plants.BlockDoubleHeightPlant;
+import erebus.world.biomes.BiomeUndergroundJungle;
 
 public class WorldGenPonds extends WorldGenerator{
 
@@ -111,13 +112,16 @@ public class WorldGenPonds extends WorldGenerator{
 			}
 		}
 
+		BiomeGenBase biome = world.getBiomeGenForCoords(x + 8,z + 8);
+		boolean isJungle = biome instanceof BiomeUndergroundJungle;
+		
 		for(int xx = 0; xx < 16; ++xx){
 			for(int zz = 0; zz < 16; ++zz){
 				for(int yy = 0; yy < 8; ++yy){
 					boolean flag = !placeWater[(xx * 16 + zz) * 8 + yy] && (xx < 15 && placeWater[((xx + 1) * 16 + zz) * 8 + yy] || xx > 0 && placeWater[((xx - 1) * 16 + zz) * 8 + yy] || zz < 15 && placeWater[(xx * 16 + zz + 1) * 8 + yy] || zz > 0 && placeWater[(xx * 16 + zz - 1) * 8 + yy] || yy < 7 && placeWater[(xx * 16 + zz) * 8 + yy + 1] || yy > 0 && placeWater[(xx * 16 + zz) * 8 + yy - 1]);
 
 					if (flag && (yy < 4 || rand.nextBoolean()) && world.getBlock(x + xx,y + yy,z + zz).getMaterial().isSolid()){
-						world.setBlock(x + xx,y + yy,z + zz,Blocks.sand,0,2);
+						world.setBlock(x + xx,y + yy,z + zz,isJungle ? ModBlocks.mud : Blocks.sand,0,2);
 					}
 				}
 			}
