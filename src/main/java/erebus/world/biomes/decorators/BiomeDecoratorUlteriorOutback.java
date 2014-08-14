@@ -14,104 +14,85 @@ import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 
 //@formatter:off
-public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus
-{
+public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 
 	@Override
-	public void decorate()
-	{
+	public void decorate(){
 
-		for (attempt = 0; attempt < 112; attempt++)
-		{
+		for(attempt = 0; attempt < 112; attempt++){
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
-			for (yy = 20; yy < 100; yy += rand.nextInt(2) + 1)
-			{
-				if (world.getBlock(xx, yy, zz) == Blocks.sand && world.isAirBlock(xx, yy + 1, zz))
-				{
-					if (rand.nextInt(3) == 0)
-					{
-						world.setBlock(xx, yy, zz, Blocks.grass);
-					} else
-					{
-						world.setBlock(xx, yy, zz, Blocks.dirt, 1, 2);
+			for(yy = 20; yy < 100; yy += rand.nextInt(2) + 1){
+				if (world.getBlock(xx,yy,zz) == Blocks.sand && world.isAirBlock(xx,yy + 1,zz)){
+					if (rand.nextInt(3) == 0){
+						world.setBlock(xx,yy,zz,Blocks.grass);
+					}
+					else{
+						world.setBlock(xx,yy,zz,Blocks.dirt,1,2);
 					}
 					break;
 				}
 			}
 		}
 
-		for (attempt = 0; attempt < rand.nextInt(3); attempt++)
-		{
+		for(attempt = 0; attempt < rand.nextInt(3); attempt++){
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(25) * (1 + rand.nextInt(3)); // more likely
 			// in lower
 			// levels
 			zz = z + offsetXZ();
 
-			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
-			{
-				genRottenAcacia.generate(world, rand, xx, yy, zz);
+			if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
+				genRottenAcacia.generate(world,rand,xx,yy,zz);
 			}
 		}
 
-		if (rand.nextBoolean())
-		{
-			for (attempt = 0; attempt < 20; attempt++)
-			{
+		if (rand.nextBoolean()){
+			for(attempt = 0; attempt < 20; attempt++){
 				xx = x + offsetXZ();
 				yy = 20 + rand.nextInt(80);
 				zz = z + offsetXZ();
 
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				{
-					genTreeAcacia.generate(world, rand, xx, yy, zz);
-					if (rand.nextBoolean())
-					{
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+					genTreeAcacia.generate(world,rand,xx,yy,zz);
+					if (rand.nextBoolean()){
 						break;
 					}
 				}
 			}
 		}
 
-		for (attempt = 0; attempt < 420; attempt++)
-		{
+		for(attempt = 0; attempt < 420; attempt++){
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
 
-			if (checkSurface(SurfaceType.SAND, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz))
-			{
-				world.setBlock(xx, yy, zz, ModBlocks.doubleHeightPlant, BlockDoubleHeightPlant.dataDroughtedShrubBottom, 2);
-				world.setBlock(xx, yy + 1, zz, ModBlocks.doubleHeightPlant, BlockDoubleHeightPlant.dataDroughtedShrubTop, 2);
+			if (checkSurface(SurfaceType.SAND,xx,yy,zz) && world.isAirBlock(xx,yy + 1,zz)){
+				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataDroughtedShrubBottom,2);
+				world.setBlock(xx,yy + 1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataDroughtedShrubTop,2);
 			}
 		}
 
-		for (attempt = 0; attempt < 194; attempt++)
-		{
+		for(attempt = 0; attempt < 194; attempt++){
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
-			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
-			{
-				if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
-				{
-					if (rand.nextInt(10) == 0 && world.isAirBlock(xx, yy + 1, zz))
-					{
-						world.setBlock(xx, yy, zz, Blocks.double_plant, 2, 2);
-						world.setBlock(xx, yy + 1, zz, Blocks.double_plant, 10, 2);
+			for(yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1){
+				if (checkSurface(SurfaceType.MIXED,xx,yy,zz)){
+					if (rand.nextInt(10) == 0 && world.isAirBlock(xx,yy + 1,zz)){
+						world.setBlock(xx,yy,zz,Blocks.double_plant,2,2);
+						world.setBlock(xx,yy + 1,zz,Blocks.double_plant,10,2);
 					}
-					else if (rand.nextInt(80) == 0)
-					{
-						world.setBlock(xx, yy, zz, ModBlocks.plantSmall, BlockSmallPlants.dataFireBloom, 2);
-					} else
-					{
-						world.setBlock(xx, yy, zz, Blocks.tallgrass, 1, 2);
+					else if (rand.nextInt(80) == 0){
+						world.setBlock(xx,yy,zz,ModBlocks.plantSmall,BlockSmallPlants.dataFireBloom,2);
+					}
+					else{
+						world.setBlock(xx,yy,zz,Blocks.tallgrass,1,2);
 					}
 
 					break;
@@ -119,18 +100,14 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus
 			}
 		}
 
-		if (rand.nextBoolean())
-		{
-			for (attempt = 0; attempt < 180; attempt++)
-			{
+		if (rand.nextBoolean()){
+			for(attempt = 0; attempt < 180; attempt++){
 				xx = x + offsetXZ();
 				yy = 20 + rand.nextInt(80);
 				zz = z + offsetXZ();
 
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				{
-					if (genTreeEucalyptus.generate(world, rand, xx, yy, zz) && rand.nextBoolean())
-					{
+				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
+					if (genTreeEucalyptus.generate(world,rand,xx,yy,zz) && rand.nextBoolean()){
 						break;
 					}
 				}
@@ -140,22 +117,20 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus
 
 	@Override
 	@SuppressWarnings("incomplete-switch")
-	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres)
-	{
-		switch (oreType)
-		{
+	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
+		switch(oreType){
 			case COAL:
-				oreGen.setChance(0.85F).setIterations(extraOres ? 2 : 3).setOreAmount(7, 10).setY(5, 56);
+				oreGen.setChance(0.85F).setIterations(extraOres ? 2 : 3).setOreAmount(7,10).setY(5,56);
 				break; // less common, lowered amount too, also ~2 times smaller
-				// area
+			// area
 			case EMERALD:
-				oreGen.setIterations(1, 3);
+				oreGen.setIterations(1,3);
 				break; // one more vein
 			case DIAMOND:
-				oreGen.setIterations(3, 4);
+				oreGen.setIterations(3,4);
 				break; // one more vein
 			case PETRIFIED_WOOD:
-				oreGen.setIterations(extraOres ? 1 : 2, extraOres ? 2 : 3).setY(20, 64).setCheckArea(3);
+				oreGen.setIterations(extraOres ? 1 : 2,extraOres ? 2 : 3).setY(20,64).setCheckArea(3);
 				break; // more common, but ~1.5 times smaller area
 			case FOSSIL:
 				oreGen.setChance(0.06F);
@@ -164,16 +139,13 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus
 	}
 
 	@Override
-	public void generateFeature(FeatureType featureType)
-	{
-		if (featureType == FeatureType.REDGEM)
-		{
-			for (attempt = 0; attempt < 8; attempt++)
-			{
-				genRedGem.generate(world, rand, x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ());
+	public void generateFeature(FeatureType featureType){
+		if (featureType == FeatureType.REDGEM){
+			for(attempt = 0; attempt < 8; attempt++){
+				genRedGem.generate(world,rand,x + offsetXZ(),64 + rand.nextInt(60),z + offsetXZ());
 			}
-		} else
-		{
+		}
+		else{
 			super.generateFeature(featureType);
 		}
 	}
