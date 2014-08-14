@@ -20,15 +20,14 @@ public class FMPIntegration implements IModIntegration
 	@Override
 	public void onInit()
 	{
-		registerMaterial(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length - 1);
+		registerMaterial(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length);
 		registerMaterial(ModBlocks.redGem);
-		registerMaterial(ModBlocks.blockAmber, 0, 2);
-		registerMaterial(ModBlocks.gneiss, 0, BlockGneiss.iconPaths.length - 1);
+		registerMaterial(ModBlocks.blockAmber, 0, 3);
+		registerMaterial(ModBlocks.gneiss, 0, BlockGneiss.iconPaths.length);
 		registerMaterial(ModBlocks.blockSilk);
 		registerMaterial(ModBlocks.mirBrick);
 		registerMaterial(ModBlocks.petrifiedWoodPlanks);
-		registerMaterial(ModBlocks.planks, 0, EnumWood.values().length - 1);
-		registerMaterial(ModBlocks.umberPaver, 0, 2);
+		registerMaterial(ModBlocks.umberPaver, 0, 3);
 		registerMaterial(ModBlocks.umberstonePillar);
 
 		for (EnumWood wood : EnumWood.values())
@@ -40,6 +39,10 @@ public class FMPIntegration implements IModIntegration
 			if (wood.hasLeaves())
 			{
 				registerMaterial(wood.getLeaves());
+			}
+			if (wood.hasPlanks())
+			{
+				registerMaterial(ModBlocks.planks, wood.ordinal(), wood.ordinal() + 1);
 			}
 		}
 	}
@@ -56,7 +59,7 @@ public class FMPIntegration implements IModIntegration
 
 	private void registerMaterial(Block block, int minMeta, int maxMeta)
 	{
-		for (int i = minMeta; i <= maxMeta; i++)
+		for (int i = minMeta; i < maxMeta; i++)
 		{
 			FMLInterModComms.sendMessage(getModId(), "microMaterial", new ItemStack(block, 1, i));
 		}
