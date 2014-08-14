@@ -18,7 +18,7 @@ public class ItemBlockSlabSimple extends ItemBlockLocalised
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
 		int meta = world.getBlockMetadata(x, y, z);
-		if (world.getBlock(x, y, z) == getBlock() && meta != 2)
+		if (world.getBlock(x, y, z) == field_150939_a && meta != 2)
 		{
 			if (!player.canPlayerEdit(x, y, z, side, stack))
 			{
@@ -81,7 +81,7 @@ public class ItemBlockSlabSimple extends ItemBlockLocalised
 			}
 
 			Block block = world.getBlock(X, Y, Z);
-			if (block != getBlock())
+			if (block != field_150939_a)
 			{
 				return super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
 			}
@@ -89,9 +89,9 @@ public class ItemBlockSlabSimple extends ItemBlockLocalised
 			meta = world.getBlockMetadata(X, Y, Z);
 			boolean flag = meta != 0;
 
-			if ((side == 1 && !flag || side == 0 && flag) && block == getBlock())
+			if ((side == 1 && !flag || side == 0 && flag) && block == field_150939_a)
 			{
-				if (world.checkNoEntityCollision(getBlock().getCollisionBoundingBoxFromPool(world, X, Y, Z)) && world.setBlock(X, Y, Z, getBlock(), meta, 3))
+				if (world.checkNoEntityCollision(field_150939_a.getCollisionBoundingBoxFromPool(world, X, Y, Z)) && world.setBlock(X, Y, Z, field_150939_a, meta, 3))
 				{
 					playPlaceSound(world, X, Y, Z);
 					stack.stackSize--;
@@ -104,6 +104,6 @@ public class ItemBlockSlabSimple extends ItemBlockLocalised
 
 	private void playPlaceSound(World world, int x, int y, int z)
 	{
-		world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, getBlock().stepSound.getBreakSound(), (getBlock().stepSound.getVolume() + 1.0F) / 2.0F, getBlock().stepSound.getPitch() * 0.8F);
+		world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, field_150939_a.stepSound.getBreakSound(), (field_150939_a.stepSound.getVolume() + 1.0F) / 2.0F, field_150939_a.stepSound.getPitch() * 0.8F);
 	}
 }

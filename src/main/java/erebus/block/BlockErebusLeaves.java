@@ -74,7 +74,7 @@ public class BlockErebusLeaves extends BlockLeaves
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		return true;
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && world.getBlock(x, y, z) == this ? false : true;
 	}
 
 	@Override

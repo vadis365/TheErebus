@@ -17,6 +17,7 @@ import erebus.block.BlockStairPlanks;
 import erebus.block.plants.BlockSaplingErebus;
 import erebus.item.block.ItemBlockLocalised;
 import erebus.item.block.ItemBlockSlabSimple;
+import erebus.item.block.ItemErebusLeaves;
 
 public enum EnumWood
 {
@@ -137,7 +138,7 @@ public enum EnumWood
 			if (wood.hasLeaves)
 			{
 				Block leaf = new BlockErebusLeaves(wood);
-				GameRegistry.registerBlock(leaf, ItemBlockLocalised.class, "leaves" + wood.name());
+				GameRegistry.registerBlock(leaf, ItemErebusLeaves.class, "leaves" + wood.name());
 				Blocks.fire.setFireInfo(leaf, 30, 60);
 				leaves.put(wood, leaf);
 			}
