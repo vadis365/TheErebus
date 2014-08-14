@@ -100,8 +100,15 @@ public class Erebus
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 		}
 
-		ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
-		ModIntegrationHandler.addMod(FMBIntegration.class);
+		if (!ConfigHandler.INSTANCE.disableThaumcraft)
+		{
+			ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
+		}
+		if (!ConfigHandler.INSTANCE.disableFMP)
+		{
+			ModIntegrationHandler.addMod(FMBIntegration.class);
+		}
+
 		ModIntegrationHandler.init();
 
 		ComposterRegistry.init();
