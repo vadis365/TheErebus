@@ -3,12 +3,14 @@ package erebus.block;
 import net.minecraft.block.BlockCake;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 
 public class BlockHoneyTreat extends BlockCake
 {
@@ -67,10 +69,12 @@ public class BlockHoneyTreat extends BlockCake
 			}
 		}
 	}
-	/*
-	 * broken
-	 *
-	 * @Override public int idPicked(World world, int x, int y, int z) { return
-	 * ModBlocks.honeyTreat.blockID; }
-	 */
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Item getItem(World world, int x, int y, int z)
+	{
+		return Item.getItemFromBlock(ModBlocks.honeyTreat);
+	}
+
 }

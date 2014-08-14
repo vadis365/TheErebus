@@ -301,7 +301,6 @@ public class RecipeHandler
 		OreDictionary.registerOre("stone", new ItemStack(ModBlocks.umberstone));
 		OreDictionary.registerOre("stoneUmber", new ItemStack(ModBlocks.umberstone));
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.planks, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("treeLeaves", new ItemStack(ModBlocks.leaves, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("oreCoal", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataCoal));
 		OreDictionary.registerOre("oreIron", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataIron));
 		OreDictionary.registerOre("oreGold", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataGold));

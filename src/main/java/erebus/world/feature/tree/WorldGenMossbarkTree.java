@@ -1,9 +1,9 @@
 package erebus.world.feature.tree;
 
 import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 
 public class WorldGenMossbarkTree extends WorldGenTreeBase{
@@ -97,7 +97,7 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase{
 
 	public void generateMiddleBranch(World world, Random rand, int x, int y, int z, int height){
 		for(int yy = 0; yy < 2; ++yy){
-			world.setBlock(x,y - 1 - yy,z,leaves,BlockLeavesErebus.dataMossbarkDecay,3);
+			world.setBlock(x,y - 1 - yy,z,leaves,0,3);
 		}
 		for(int yy = 0; yy < height; ++yy){
 			world.setBlock(x,y + yy,z,log,0,3);
@@ -106,8 +106,8 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase{
 
 	public void generateOutsideBranch(World world, Random rand, int x, int y, int z, int height){
 		for(int yy = 0; yy < 2; ++yy){
-			world.setBlock(x,y - 1 - yy,z,leaves,BlockLeavesErebus.dataMossbarkDecay,3);
-			world.setBlock(x,y + height + yy,z,leaves,BlockLeavesErebus.dataMossbarkDecay,3);
+			world.setBlock(x,y - 1 - yy,z,leaves,0,3);
+			world.setBlock(x,y + height + yy,z,leaves,0,3);
 		}
 
 		for(int yy = 0; yy < height; ++yy){
@@ -116,7 +116,7 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase{
 			}
 
 			for(int a = 0; a < 4; a++){
-				world.setBlock(x + offsetX[a],y + yy,z + offsetZ[a],leaves,BlockLeavesErebus.dataMossbarkDecay,3);
+				world.setBlock(x + offsetX[a],y + yy,z + offsetZ[a],leaves,0,3);
 			}
 		}
 	}

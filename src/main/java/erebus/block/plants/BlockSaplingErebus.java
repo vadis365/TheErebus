@@ -19,7 +19,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModTabs;
-import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
 import erebus.world.feature.tree.WorldGenAsperTree;
@@ -39,8 +38,8 @@ public class BlockSaplingErebus extends BlockSapling
 	public BlockSaplingErebus(EnumWood wood)
 	{
 		this.wood = wood;
-		setStepSound(Block.soundTypeGrass);
 		setCreativeTab(ModTabs.blocks);
+		setStepSound(Block.soundTypeGrass);
 		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.8F, 0.9F);
 		setBlockName(Reference.MOD_ID + ".sapling." + wood.name());
 		setBlockTextureName(Reference.MOD_ID + ":sapling_" + wood.name().toLowerCase());
@@ -138,7 +137,7 @@ public class BlockSaplingErebus extends BlockSapling
 					{
 						if (isSameSapling(world, x + var8, y, z + var9, 0) && isSameSapling(world, x + var8 + 1, y, z + var9, 0) && isSameSapling(world, x + var8, y, z + var9 + 1, 0) && isSameSapling(world, x + var8 + 1, y, z + var9 + 1, 0))
 						{
-							worldGen = new WorldGenErebusHugeTree(true, BlockLeavesErebus.dataMahoganyDecay, true, EnumWood.Mahogany.getLog(), ModBlocks.leaves);
+							worldGen = new WorldGenErebusHugeTree(true, true, EnumWood.Mahogany.getLog(), EnumWood.Mahogany.getLeaves());
 							((WorldGenErebusHugeTree) worldGen).prepare(20 + rand.nextInt(5));
 							var10 = true;
 							break;
@@ -162,7 +161,7 @@ public class BlockSaplingErebus extends BlockSapling
 		{
 			var9 = 0;
 			var8 = 0;
-			worldGen = new WorldGenErebusTrees(true, 5, BlockLeavesErebus.dataMahoganyDecay, false, EnumWood.Mahogany.getLog(), ModBlocks.leaves, ModBlocks.thorns);
+			worldGen = new WorldGenErebusTrees(true, 5, false, EnumWood.Mahogany.getLog(), EnumWood.Mahogany.getLeaves(), ModBlocks.thorns);
 		}
 
 		if (var10)

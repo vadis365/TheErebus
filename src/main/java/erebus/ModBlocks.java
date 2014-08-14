@@ -29,7 +29,6 @@ import erebus.block.BlockHollowLog;
 import erebus.block.BlockHoneyComb;
 import erebus.block.BlockHoneyTreat;
 import erebus.block.BlockInsectRepellent;
-import erebus.block.BlockLeavesErebus;
 import erebus.block.BlockMucusBomb;
 import erebus.block.BlockMud;
 import erebus.block.BlockOfferingAltar;
@@ -124,7 +123,6 @@ public class ModBlocks
 	public static final Block rottenWood = new BlockSimple(Material.wood).setHardness(2.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("rottenWood").setBlockTextureName("erebus:log_rotten");
 	public static final Block scorchedPlanks = new BlockSimple(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("scorchedPlanks").setBlockTextureName("erebus:planks_scorched");
 	public static final Block rottenPlanks = new BlockSimple(Material.wood).setHardness(0.5F).setResistance(1.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("rottenPlanks").setBlockTextureName("erebus:planks_rotten");
-	public static final Block leaves = new BlockLeavesErebus().setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass).setBlockName("leavesErebus");
 
 	// UNDERGROWTH
 	public static final Block thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
@@ -256,7 +254,7 @@ public class ModBlocks
 	private static void initCreativeTabs()
 	{
 		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, oreExtra, redGem, blockAmber, quickSand, ghostSand);
-		ModTabs.blocks.setTab(hollowLogAcacia, planks, leaves);
+		ModTabs.blocks.setTab(hollowLogAcacia, planks);
 		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, plantSmall, wallPlants);
 		ModTabs.blocks.setTab(mushroomCap0, mushroomCap1, mushroomCap2, mushroomCap3, mushroomCap4, glowshroomStalkMain, glowshroom);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
@@ -337,7 +335,6 @@ public class ModBlocks
 		oreExtra.setHarvestLevel("pickaxe", 1, 4);
 
 		Blocks.fire.setFireInfo(planks, 5, 20);
-		Blocks.fire.setFireInfo(leaves, 30, 60);
 		Blocks.fire.setFireInfo(blockWitherWeb, 20, 50);
 		Blocks.fire.setFireInfo(fern, 60, 100);
 		Blocks.fire.setFireInfo(fiddlehead, 60, 100);

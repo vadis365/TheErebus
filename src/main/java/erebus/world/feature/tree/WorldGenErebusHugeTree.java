@@ -17,9 +17,9 @@ public class WorldGenErebusHugeTree extends WorldGenerator{ // TODO
 	private final Block woodBlock;
 	private final Block leafBlock;
 
-	public WorldGenErebusHugeTree(boolean par1, int par4, boolean par5, Block woodBlock, Block leafBlock){
+	public WorldGenErebusHugeTree(boolean par1, boolean par5, Block woodBlock, Block leafBlock){
 		super(par1);
-		leavesMetadata = par4;
+		leavesMetadata = 0;
 		thorns = par5;
 		this.woodBlock = woodBlock;
 		this.leafBlock = leafBlock;

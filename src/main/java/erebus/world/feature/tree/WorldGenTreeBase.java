@@ -11,6 +11,6 @@ public abstract class WorldGenTreeBase extends WorldGenerator{
 
 	public WorldGenTreeBase(EnumWood wood){
 		log = wood.getLog();
-		leaves = wood.getleaves();
+		leaves = wood.getLeaves();
 	}
 }

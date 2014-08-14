@@ -1,8 +1,8 @@
 package erebus.world.feature.tree;
 
 import java.util.Random;
+
 import net.minecraft.world.World;
-import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 
 public class WorldGenBaobabTree extends WorldGenTreeBase{
@@ -32,7 +32,7 @@ public class WorldGenBaobabTree extends WorldGenTreeBase{
 			for(int xx = -(leafSize - h); xx <= leafSize - h; xx++){
 				for(int zz = -(leafSize - h); zz <= leafSize - h; zz++){
 					if (world.isAirBlock(x + xx,y + h,z + zz)){
-						world.setBlock(x + xx,y + h,z + zz,leaves,BlockLeavesErebus.dataAcaciaDecay,2);
+						world.setBlock(x + xx,y + h,z + zz,leaves,0,2);
 					}
 				}
 			}

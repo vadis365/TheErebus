@@ -8,7 +8,6 @@ import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -45,8 +44,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead,1);
 	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass,1);
 
-	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leaves,ModBlocks.thorns);
-	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leaves);
+	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves(),ModBlocks.thorns);
+	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves());
 	private final WorldGenerator genTreeJungle = new WorldGenTrees(true,6,3,3,true);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();

@@ -1,6 +1,7 @@
 package erebus.world.feature.tree;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -9,7 +10,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
 import erebus.ModBlocks;
-import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 
 public class WorldGenErebusTrees extends WorldGenerator{ // TODO
@@ -22,13 +22,13 @@ public class WorldGenErebusTrees extends WorldGenerator{ // TODO
 	private final Block vineBlock;
 
 	public WorldGenErebusTrees(boolean par1){
-		this(par1,6,BlockLeavesErebus.dataMahoganyDecay,false,EnumWood.Mahogany.getLog(),ModBlocks.leaves,ModBlocks.thorns);
+		this(par1,6,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves(),ModBlocks.thorns);
 	}
 
-	public WorldGenErebusTrees(boolean par1, int par2, int par4, boolean par5, Block woodBlock, Block leafBlock, Block vineBlock){
+	public WorldGenErebusTrees(boolean par1, int par2, boolean par5, Block woodBlock, Block leafBlock, Block vineBlock){
 		super(par1);
 		minTreeHeight = par2;
-		metaLeaves = par4;
+		metaLeaves = 0;
 		vinesGrow = par5;
 		this.woodBlock = woodBlock;
 		this.leafBlock = leafBlock;

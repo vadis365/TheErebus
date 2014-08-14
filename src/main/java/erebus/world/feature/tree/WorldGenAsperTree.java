@@ -1,9 +1,9 @@
 package erebus.world.feature.tree;
 
 import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import erebus.block.BlockLeavesErebus;
 import erebus.lib.EnumWood;
 
 public class WorldGenAsperTree extends WorldGenTreeBase{
@@ -56,7 +56,7 @@ public class WorldGenAsperTree extends WorldGenTreeBase{
 
 				world.setBlock(x + offsetX[dir],y + yy,z + offsetZ[dir],log,dir < 2 ? 4 : 8,3);
 				if (yy > 0 && rand.nextBoolean()){
-					world.setBlock(x + offsetX[dir] * 2,y + yy,z + offsetZ[dir] * 2,leaves,BlockLeavesErebus.dataAsperDecay,3);
+					world.setBlock(x + offsetX[dir] * 2,y + yy,z + offsetZ[dir] * 2,leaves,0,3);
 				}
 				++extraWood;
 			}
@@ -72,16 +72,16 @@ public class WorldGenAsperTree extends WorldGenTreeBase{
 
 					double dist = Math.sqrt(xx * xx + Math.pow(centerY - yy,2) + zz * zz);
 					if ((dist <= 1.5D || rand.nextDouble() > dist - 1.5D) && world.isAirBlock(x + xx,y + yy,z + zz)){
-						world.setBlock(x + xx,y + yy,z + zz,leaves,BlockLeavesErebus.dataAsperDecay,3);
+						world.setBlock(x + xx,y + yy,z + zz,leaves,0,3);
 					}
 				}
 			}
 		}
 
 		for(int a = 0; a < 4; a++){
-			world.setBlock(x + offsetX[a],y + height,z + offsetZ[a],leaves,BlockLeavesErebus.dataAsperDecay,3);
+			world.setBlock(x + offsetX[a],y + height,z + offsetZ[a],leaves,0,3);
 		}
-		world.setBlock(x,y + height,z,leaves,BlockLeavesErebus.dataAsperDecay,3);
+		world.setBlock(x,y + height,z,leaves,0,3);
 
 		return true;
 	}

@@ -10,6 +10,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
+import erebus.block.BlockErebusLeaves;
 import erebus.block.BlockLogErebus;
 import erebus.block.BlockSlabPlanks;
 import erebus.block.BlockStairPlanks;
@@ -26,24 +27,26 @@ public enum EnumWood
 	Mossbark,
 	Asper,
 	Cypress,
-	Sap(true, false, true),
-	White(false, true, false),
-	Bamboo(false, true, false);
+	Sap(true, false, true, false),
+	White(false, true, false, false),
+	Bamboo(false, true, false, false);
 
 	private final boolean hasLog;
 	private final boolean hasPlanks;
 	private final boolean hasSapling;
+	private final boolean hasLeaves;
 
-	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling)
+	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling, boolean hasLeaves)
 	{
 		this.hasLog = hasLog;
 		this.hasPlanks = hasPlanks;
 		this.hasSapling = hasSapling;
+		this.hasLeaves = hasLeaves;
 	}
 
 	EnumWood()
 	{
-		this(true, true, true);
+		this(true, true, true, true);
 	}
 
 	public boolean hasSapling()
@@ -61,6 +64,11 @@ public enum EnumWood
 		return hasLog;
 	}
 
+	public boolean hasLeaves()
+	{
+		return hasLeaves;
+	}
+
 	public Block getStair()
 	{
 		return stairs.get(this);
@@ -76,9 +84,14 @@ public enum EnumWood
 		return slabs.get(this);
 	}
 
-	public Block getleaves()
+	public Block getLeaves()
 	{
-		return ModBlocks.leaves;
+		return leaves.get(this);
+	}
+
+	public Block getSapling()
+	{
+		return saplings.get(this);
 	}
 
 	public String getTranslatedName()
@@ -90,6 +103,7 @@ public enum EnumWood
 	private static final HashMap<EnumWood, Block> slabs = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> stairs = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> saplings = new HashMap<EnumWood, Block>();
+	private static final HashMap<EnumWood, Block> leaves = new HashMap<EnumWood, Block>();
 
 	public static void initBlocks()
 	{
@@ -120,6 +134,13 @@ public enum EnumWood
 				Blocks.fire.setFireInfo(slab, 5, 5);
 				slabs.put(wood, slab);
 			}
+			if (wood.hasLeaves)
+			{
+				Block leaf = new BlockErebusLeaves(wood);
+				GameRegistry.registerBlock(leaf, ItemBlockLocalised.class, "leaves" + wood.name());
+				Blocks.fire.setFireInfo(leaf, 30, 60);
+				leaves.put(wood, leaf);
+			}
 		}
 	}
 
@@ -147,6 +168,11 @@ public enum EnumWood
 				Block slab = slabs.get(wood);
 				OreDictionary.registerOre("slabWood", slab);
 				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });
+			}
+			if (wood.hasLeaves)
+			{
+				Block leaf = wood.getLeaves();
+				OreDictionary.registerOre("treeLeaves", leaf);
 			}
 		}
 	}
