@@ -20,26 +20,26 @@ public class FMPIntegration implements IModIntegration
 	@Override
 	public void onInit()
 	{
-		registerMaterial(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length);
-		registerMaterial(ModBlocks.redGem, 0, 2);
-		registerMaterial(ModBlocks.blockAmber, 0, 3);
-		registerMaterial(ModBlocks.gneiss, 0, BlockGneiss.iconPaths.length);
-		registerMaterial(ModBlocks.blockSilk, 0, 1);
-		registerMaterial(ModBlocks.mirBrick, 0, 1);
-		registerMaterial(ModBlocks.petrifiedWoodPlanks, 0, 1);
-		registerMaterial(ModBlocks.planks, 0, EnumWood.values().length);
-		registerMaterial(ModBlocks.umberPaver, 0, 3);
-		registerMaterial(ModBlocks.umberstonePillar, 0, 1);
+		registerMaterial(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length - 1);
+		registerMaterial(ModBlocks.redGem);
+		registerMaterial(ModBlocks.blockAmber, 0, 2);
+		registerMaterial(ModBlocks.gneiss, 0, BlockGneiss.iconPaths.length - 1);
+		registerMaterial(ModBlocks.blockSilk);
+		registerMaterial(ModBlocks.mirBrick);
+		registerMaterial(ModBlocks.petrifiedWoodPlanks);
+		registerMaterial(ModBlocks.planks, 0, EnumWood.values().length - 1);
+		registerMaterial(ModBlocks.umberPaver, 0, 2);
+		registerMaterial(ModBlocks.umberstonePillar);
 
 		for (EnumWood wood : EnumWood.values())
 		{
 			if (wood.hasLog())
 			{
-				registerMaterial(wood.getLog(), 0, 1);
+				registerMaterial(wood.getLog());
 			}
 			if (wood.hasLeaves())
 			{
-				registerMaterial(wood.getLeaves(), 0, 1);
+				registerMaterial(wood.getLeaves());
 			}
 		}
 	}
@@ -47,6 +47,11 @@ public class FMPIntegration implements IModIntegration
 	@Override
 	public void onPostInit()
 	{
+	}
+
+	private void registerMaterial(Block block)
+	{
+		registerMaterial(block, 0, 1);
 	}
 
 	private void registerMaterial(Block block, int minMeta, int maxMeta)
