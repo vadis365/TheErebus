@@ -23,6 +23,7 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.debug.ErebusCommandDebug;
 import erebus.entity.util.RandomMobNames;
+import erebus.integration.FMPIntegration;
 import erebus.integration.ModIntegrationHandler;
 import erebus.integration.ThaumcraftIntegration;
 import erebus.lib.Reference;
@@ -102,6 +103,11 @@ public class Erebus
 		if (!ConfigHandler.INSTANCE.disableThaumcraft)
 		{
 			ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
+		}
+
+		if (!ConfigHandler.INSTANCE.disableFMP)
+		{
+			ModIntegrationHandler.addMod(FMPIntegration.class);
 		}
 
 		ModIntegrationHandler.init();

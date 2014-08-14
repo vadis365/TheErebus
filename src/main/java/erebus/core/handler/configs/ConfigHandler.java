@@ -17,7 +17,7 @@ public class ConfigHandler
 	public byte beetleLarvaEating = 0;
 	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium;
 
-	public boolean disableThaumcraft = false;
+	public boolean disableThaumcraft = false, disableFMP = false;
 
 	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores" };
 
@@ -73,6 +73,7 @@ public class ConfigHandler
 		aluminium = config.get("Ores", "Generate aluminium", false).getBoolean(false);
 
 		disableThaumcraft = config.get(Configuration.CATEGORY_GENERAL, "Disable Thaumcraft integration", false).getBoolean(false);
+		disableFMP = config.get(Configuration.CATEGORY_GENERAL, "Disable Forge Multipart integration", false).getBoolean(false);
 
 		if (config.hasChanged())
 		{
