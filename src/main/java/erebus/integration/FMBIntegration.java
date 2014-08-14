@@ -1,6 +1,8 @@
 package erebus.integration;
 
 import net.minecraft.block.Block;
+import codechicken.microblock.BlockMicroMaterial;
+import codechicken.microblock.MicroMaterialRegistry;
 import erebus.ModBlocks;
 import erebus.block.BlockGneiss;
 import erebus.block.BlockUmberstone;
