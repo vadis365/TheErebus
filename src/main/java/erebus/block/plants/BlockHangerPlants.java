@@ -110,7 +110,7 @@ public class BlockHangerPlants extends BlockBush
 		}
 
 		// Fruit
-		if (meta == dataHanger4 && rand.nextInt(10) == 0)
+		if (meta == dataHanger4 && rand.nextInt(50) == 0)
 		{
 			world.setBlock(x, y, z, this, dataHangerFruit, 2);
 		}
@@ -173,19 +173,25 @@ public class BlockHangerPlants extends BlockBush
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
 	{
 		int meta = world.getBlockMetadata(x, y, z);
-		ItemStack item = null;
+
 		if (meta == dataHangerFruit)
 		{
-			item = new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.middleFruit.ordinal());
-			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
+			ItemStack item = new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.middleFruit.ordinal());
+			if (!player.inventory.addItemStackToInventory(item))
+			{
+				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
+			}
 			world.setBlock(x, y, z, this, dataHanger4, 2);
 			return true;
 		}
 
 		if (meta == dataHangerSeed)
 		{
-			item = new ItemStack(ModItems.erebusMaterials, 1, DATA.middleFruitSeeds.ordinal());
-			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
+			ItemStack item = new ItemStack(ModItems.erebusMaterials, 1, DATA.middleFruitSeeds.ordinal());
+			if (!player.inventory.addItemStackToInventory(item))
+			{
+				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
+			}
 			world.setBlock(x, y, z, this, dataHanger4, 2);
 			return true;
 		}
