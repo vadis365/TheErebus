@@ -76,7 +76,7 @@ public class RecipeHandler
 			addSlabRecipe((BlockSlabStone) slab);
 		}
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wall, 6, 0), "###", "###", '#', "stoneUmber"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wall, 6), "###", "###", '#', "stoneUmber"));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 1), "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 1));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 2), "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 3), "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 3));
@@ -85,7 +85,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 6), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 1));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 7), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 8), "###", "###", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
-		GameRegistry.addRecipe(new ItemStack(ModItems.doorAmberItem, 1, 0), "##", "##", "##", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
+		GameRegistry.addRecipe(new ItemStack(ModItems.doorAmberItem, 3), "##", "##", "##", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
 
 		// Jade tools
 		GameRegistry.addRecipe(new ItemStack(ModItems.jadePickaxe, 1), "XXX", " # ", " # ", '#', Items.stick, 'X', new ItemStack(ModItems.erebusMaterials, 1, DATA.jade.ordinal()));

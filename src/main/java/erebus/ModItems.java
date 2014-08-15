@@ -77,7 +77,7 @@ public class ModItems
 	public static final Item hornOfSummoning = new HornOfSummoning().setUnlocalizedName("hornOfSummoning").setTextureName("erebus:hornOfSummoning");
 	public static final Item nectarCollector = new NectarCollector().setUnlocalizedName("nectarCollector").setTextureName("erebus:nectarCollector");
 	public static final Item beeTamingAmulet = new BeeTamingAmulet().setUnlocalizedName("beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
-	public static final Item doorAmberItem = new ItemBlockDoorAmber(ModBlocks.doorAmber).setUnlocalizedName("doorAmberItem").setTextureName("erebus:doorAmber");
+	public static final Item doorAmberItem = new ItemBlockDoorAmber();
 	public static final Item homingBeecon = new HomingBeecon().setUnlocalizedName("homingBeecon").setTextureName("paper");
 	public static final Item homingBeeconAdvanced = new HomingBeeconAdvanced().setUnlocalizedName("homingBeeconAdvanced").setTextureName("paper");
 
