@@ -2,6 +2,7 @@ package erebus.block.plants;
 
 import java.util.List;
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -268,33 +269,77 @@ public class BlockSmallPlants extends BlockMushroom implements ISubBlocksBlock
 	}
 
 	@SubscribeEvent
-	public void onBonemeal(BonemealEvent event)
-	{
-		if (!event.world.isRemote && event.block == this)
-		{
-			if (event.world.rand.nextFloat() < 0.45D)
-			{
-				growPlants(event.world, event.x, event.y, event.z, event.world.rand);
+	public void onBonemeal(BonemealEvent event) {
+		if (!event.world.isRemote && event.block == this) {
+			if (event.world.rand.nextFloat() < 0.45D) {
+				int xx = event.x;
+				int yy = event.y;
+				int zz = event.z;
+				if (isMushroom(event.world, xx, yy, zz)) {
+					if (isMushroom(event.world, xx + 1, yy, zz) && isMushroom(event.world, xx + 1, yy, zz + 1) && isMushroom(event.world, xx, yy, zz + 1)) {
+						growPlants(event.world, event.x + 1, event.y, event.z, event.world.rand);
+					}
+
+					if (isMushroom(event.world, xx - 1, yy, zz) && isMushroom(event.world, xx - 1, yy, zz + 1) && isMushroom(event.world, xx, yy, zz + 1)) {
+						growPlants(event.world, event.x, event.y, event.z, event.world.rand);
+					}
+
+					if (isMushroom(event.world, xx + 1, yy, zz) && isMushroom(event.world, xx + 1, yy, zz - 1) && isMushroom(event.world, xx, yy, zz - 1)) {
+						growPlants(event.world, event.x + 1, event.y, event.z - 1, event.world.rand);
+					}
+
+					if (isMushroom(event.world, xx - 1, yy, zz) && isMushroom(event.world, xx - 1, yy, zz - 1) && isMushroom(event.world, xx, yy, zz - 1)) {
+						growPlants(event.world, event.x, event.y, event.z - 1, event.world.rand);
+					}
+				}
 			}
 			event.setResult(Result.ALLOW);
 		}
 	}
 
-	public void growPlants(World world, int x, int y, int z, Random rand)
-	{
+	public void growPlants(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
-		
-		if (meta >= 0 && meta <= 4)
-		{
-			world.setBlockToAir(x, y, z);
-		
+
+		if (isMushroom(world, x, y, z)) {
+			if (isMushroom(world, x + 1, y, z) && isMushroom(world, x + 1, y, z + 1) && isMushroom(world, x, y, z + 1)) {
+				world.setBlockToAir(x, y, z);
+				world.setBlockToAir(x + 1, y, z);
+				world.setBlockToAir(x + 1, y, z + 1);
+				world.setBlockToAir(x, y, z + 1);
+			}
+
+			if (isMushroom(world, x - 1, y, z) && isMushroom(world, x - 1, y, z + 1) && isMushroom(world, x, y, z + 1)) {
+				world.setBlockToAir(x, y, z);
+				world.setBlockToAir(x - 1, y, z);
+				world.setBlockToAir(x - 1, y, z + 1);
+				world.setBlockToAir(x, y, z + 1);
+			}
+
+			if (isMushroom(world, x + 1, y, z) && isMushroom(world, x + 1, y, z - 1) && isMushroom(world, x, y, z - 1)) {
+				world.setBlockToAir(x, y, z);
+				world.setBlockToAir(x + 1, y, z);
+				world.setBlockToAir(x + 1, y, z - 1);
+				world.setBlockToAir(x, y, z - 1);
+			}
+
+			if (isMushroom(world, x - 1, y, z) && isMushroom(world, x - 1, y, z - 1) && isMushroom(world, x, y, z - 1)) {
+				world.setBlockToAir(x, y, z);
+				world.setBlockToAir(x - 1, y, z);
+				world.setBlockToAir(x - 1, y, z - 1);
+				world.setBlockToAir(x, y, z - 1);
+			}
+			
 			WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 			genGiantMushrooms.setMushroomType(MushroomType.values()[meta]);
-			
-			if (!genGiantMushrooms.generate(world, rand, x, y, z))
-			{
+
+			if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
 				world.setBlock(x, y, z, this, meta, 3);
 			}
 		}
+	}
+	
+	private boolean isMushroom(World world, int x, int y, int z)
+	{
+		return world.getBlock(x, y, z) == this && world.getBlockMetadata(x, y, z) >= 0 && world.getBlockMetadata(x, y, z) <= 4;
 	}
 }
