@@ -4,6 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
+import net.minecraft.world.gen.feature.WorldGenMegaJungle;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -47,6 +48,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves(),ModBlocks.thorns);
 	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves());
 	private final WorldGenerator genTreeJungle = new WorldGenTrees(true,6,3,3,true);
+	private final WorldGenerator genTreeJungleLarge = new WorldGenMegaJungle(false,10,20,3,3);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
 	private final WorldGenerator genTreeJungleTall = new WorldGenTallJungleTree();
@@ -118,8 +120,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 				if (r <= 6){
 					xx = x + 9 + rand.nextInt(14);
 					zz = z + 9 + rand.nextInt(14);
-					// TODO treeGen = new
-					// WorldGenHugeTrees(true,4+rand.nextInt(40),3,3);
+					treeGen = genTreeJungleLarge;
 				}
 				else if (r <= 11){
 					treeGen = genTreeMahogany;

@@ -29,7 +29,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 	
 	@Override
 	protected void populate(){
-		if (rand.nextInt(4) == 0){
+		if (rand.nextInt(3) == 0){
 			for(attempt = 0; attempt < 25; attempt++){
 				xx = x + 16;
 				yy = 20+rand.nextInt(90);
