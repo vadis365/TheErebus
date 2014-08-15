@@ -32,17 +32,27 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock
 			return false;
 		}
 
-		if (block == ModBlocks.planks && blockMeta == 8)
+		if (block == ModBlocks.scorchedWood)
 		{
 			return false;
 		}
 
-		if (block == EnumWood.values()[8].getSlab())
+		if (block == ModBlocks.rottenPlanks)
 		{
 			return false;
 		}
 
-		if (block == EnumWood.values()[8].getStair())
+		if (block == EnumWood.Bamboo.getSlab())
+		{
+			return false;
+		}
+
+		if (block == EnumWood.Bamboo.getStair())
+		{
+			return false;
+		}
+
+		if (block == ModBlocks.planks && blockMeta == EnumWood.Bamboo.ordinal())
 		{
 			return false;
 		}
