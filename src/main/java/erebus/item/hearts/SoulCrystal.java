@@ -1,4 +1,4 @@
-package erebus.item;
+package erebus.item.hearts;
 
 import net.minecraft.item.Item;
 import erebus.ModTabs;

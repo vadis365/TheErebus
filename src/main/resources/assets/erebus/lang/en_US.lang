@@ -289,6 +289,9 @@ item.planticide.name=Herbicide
 item.erebus.soulCrystal.name=Soul Crystal
 item.erebus.crimsonHeart.name=Crimson Heart
 item.erebus.jadeHeart.name=Jade Heart
+item.erebus.manaHeart.name=Mana Heart
+item.erebus.elvenHeart.name=Elven Heart
+item.erebus.terraHeart.name=Terra Heart
 item.erebus.ritualDagger.name=Ritual Dagger
 
 # Entities

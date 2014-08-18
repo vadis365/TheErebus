@@ -11,13 +11,13 @@ import erebus.ModTabs;
 import erebus.api.animationmagic.EnergyType;
 import erebus.api.animationmagic.IEnergyStorage;
 
-public class CrimsonHeart extends Item implements IEnergyStorage
+public class ManaHeart extends Item implements IEnergyStorage
 {
-	public CrimsonHeart()
+	public ManaHeart()
 	{
 		setCreativeTab(ModTabs.gears);
-		setTextureName("erebus:heartCrimson");
-		setUnlocalizedName("erebus.crimsonHeart");
+		setTextureName("erebus:heartMana");
+		setUnlocalizedName("erebus.manaHeart");
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class CrimsonHeart extends Item implements IEnergyStorage
 	@Override
 	public int getMaxStorage(ItemStack stack, EnergyType type)
 	{
-		return 0;
+		return 10000;
 	}
 
 	@Override

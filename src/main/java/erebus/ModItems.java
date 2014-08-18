@@ -45,10 +45,8 @@ import erebus.item.Paxel;
 import erebus.item.Planticide;
 import erebus.item.PortalActivator;
 import erebus.item.ReinExoskeletonArmor;
-import erebus.item.RitualDagger;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
-import erebus.item.SoulCrystal;
 import erebus.item.SpawnEggs;
 import erebus.item.SprayCan;
 import erebus.item.SprintLeggings;
@@ -63,7 +61,12 @@ import erebus.item.bambucket.BambucketAntiVenom;
 import erebus.item.bambucket.BambucketBeetleJuice;
 import erebus.item.block.ItemBlockDoorAmber;
 import erebus.item.hearts.CrimsonHeart;
+import erebus.item.hearts.ElvenHeart;
 import erebus.item.hearts.JadeHeart;
+import erebus.item.hearts.ManaHeart;
+import erebus.item.hearts.RitualDagger;
+import erebus.item.hearts.SoulCrystal;
+import erebus.item.hearts.TerraHeart;
 
 public class ModItems
 {
@@ -130,6 +133,9 @@ public class ModItems
 	public static final Item jadeHeart = new JadeHeart();
 	public static final Item soulCrystal = new SoulCrystal();
 	public static final Item crimsonHeart = new CrimsonHeart();
+	public static final Item manaHeart = new ManaHeart();
+	public static final Item elvenHeart = new ElvenHeart();
+	public static final Item terraHeart = new TerraHeart();
 
 	// MISC ARMOR
 	public static final Item reinCompoundGoggles = new CompoundGoggles(ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");

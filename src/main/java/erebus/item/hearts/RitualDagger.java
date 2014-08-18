@@ -1,4 +1,4 @@
-package erebus.item;
+package erebus.item.hearts;
 
 import java.util.List;
 
