@@ -286,6 +286,10 @@ item.woodlouseBall.name=Woodlouse Ball
 item.rolledNewspaper.name=Rolled Up Newspaper
 item.antTamingAmulet.name=Ant Taming Amulet
 item.planticide.name=Herbicide
+item.erebus.soulCrystal.name=Soul Crystal
+item.erebus.crimsonHeart.name=Crimson Heart
+item.erebus.jadeHeart.name=Jade Heart
+item.erebus.ritualDagger.name=Ritual Dagger
 
 # Entities
 entity.erebus.beetleLarva.name=Beetle Larva

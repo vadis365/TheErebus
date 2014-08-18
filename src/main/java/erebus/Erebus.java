@@ -18,6 +18,7 @@ import erebus.client.sound.AmbientMusicManager;
 import erebus.core.handler.BlockHighlightHandler;
 import erebus.core.handler.BonemealHandler;
 import erebus.core.handler.BucketHandler;
+import erebus.core.handler.EntityDeathEventHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
@@ -81,6 +82,7 @@ public class Erebus
 		AltarRecipe.init();
 		TeleporterHandler.init();
 
+		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
 		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockHighlightHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
