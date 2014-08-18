@@ -42,6 +42,9 @@ public class BlockDoubleHeightPlant extends Block implements ISubBlocksBlock
 	public BlockDoubleHeightPlant()
 	{
 		super(Material.plants);
+		setHardness(0.0F);
+		setStepSound(Block.soundTypeGrass);
+		setBlockName("doubleHeightPlant");
 		setBlockBounds(0F, 0F, 0F, 1F, 1.F, 1F);
 	}
 

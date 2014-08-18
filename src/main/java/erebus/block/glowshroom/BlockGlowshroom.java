@@ -25,6 +25,10 @@ public class BlockGlowshroom extends Block
 	{
 		super(Material.circuits);
 		setLightLevel(0.9375F);
+		setHardness(0.2F);
+		setStepSound(Block.soundTypeWood);
+		setBlockName("glowshroom");
+		setBlockTextureName("erebus:mushroomYellow");
 		setBlockBounds(0.0625F, 0F, 0.0625F, 0.9375F, 1F, 0.9375F);
 	}
 

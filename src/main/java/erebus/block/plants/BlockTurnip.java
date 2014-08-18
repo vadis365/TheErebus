@@ -20,6 +20,11 @@ public class BlockTurnip extends BlockCrops
 	@SideOnly(Side.CLIENT)
 	private IIcon[] iconArray;
 
+	public BlockTurnip()
+	{
+		setBlockName("turnipsCrop");
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
@@ -63,7 +68,7 @@ public class BlockTurnip extends BlockCrops
 
 	@Override
 	protected Item func_149866_i()
-	{ // getSeedItem()
+	{
 		return ModItems.turnip;
 	}
 
@@ -76,7 +81,7 @@ public class BlockTurnip extends BlockCrops
 
 	@Override
 	protected Item func_149865_P()
-	{ // getCropItem()
+	{
 		return ModItems.turnip;
 	}
 

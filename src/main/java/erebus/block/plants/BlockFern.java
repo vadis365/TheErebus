@@ -3,6 +3,7 @@ package erebus.block.plants;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -22,8 +23,11 @@ public class BlockFern extends BlockUndergroundFlower implements IShearable, ISu
 
 	public BlockFern()
 	{
+		setHardness(0.0F);
+		setStepSound(Block.soundTypeGrass);
 		float var3 = 0.4F;
 		setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.8F, 0.5F + var3);
+		setBlockName("erebus.fern");
 	}
 
 	@Override
@@ -54,8 +58,8 @@ public class BlockFern extends BlockUndergroundFlower implements IShearable, ISu
 			{
 				int colour = world.getBiomeGenForCoords(x + j, z + i).getBiomeGrassColor(x + j, y, z + i);
 				red += (colour & 16711680) >> 16;
-			green += (colour & 65280) >> 8;
-			blue += colour & 255;
+				green += (colour & 65280) >> 8;
+				blue += colour & 255;
 			}
 		}
 
@@ -95,7 +99,7 @@ public class BlockFern extends BlockUndergroundFlower implements IShearable, ISu
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		blockIcon = iconRegister.registerIcon("erebus:erebusfern");
+		blockIcon = iconRegister.registerIcon("erebus:fern");
 	}
 
 	@Override
