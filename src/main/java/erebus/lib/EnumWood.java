@@ -28,7 +28,7 @@ public enum EnumWood
 	Mossbark,
 	Asper,
 	Cypress,
-	Sap(true, false, true, false),
+	Sap(true, false, true, true),
 	White(false, true, false, false),
 	Bamboo(false, true, false, false);
 
