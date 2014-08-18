@@ -40,7 +40,7 @@ public class Planticide extends Item
 						if (block.isLeaves(world, x + i, y + j, z + k))
 						{
 							Utils.breakBlockWithParticles(world, x + i, y + j, z + k);
-						} else if (block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium)
+						} else if (block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium || block == Blocks.farmland)
 						{
 							Utils.playBreakParticles(world, x + i, y + j, z + k);
 							world.setBlock(x + i, y + j, z + k, Blocks.dirt, 1, 3);

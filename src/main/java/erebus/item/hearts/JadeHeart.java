@@ -18,7 +18,7 @@ public class JadeHeart extends Item implements IEnergyStorage
 	@Override
 	public int getMaxStorage(ItemStack stack, EnergyType type)
 	{
-		return 0;
+		return 10000;
 	}
 
 	@Override
