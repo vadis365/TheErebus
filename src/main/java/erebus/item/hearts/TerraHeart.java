@@ -15,6 +15,7 @@ public class TerraHeart extends Item implements IEnergyStorage
 {
 	public TerraHeart()
 	{
+		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
 		setTextureName("erebus:heartTerra");
 		setUnlocalizedName("erebus.terraHeart");

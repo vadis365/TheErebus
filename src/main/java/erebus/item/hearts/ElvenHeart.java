@@ -15,6 +15,7 @@ public class ElvenHeart extends Item implements IEnergyStorage
 {
 	public ElvenHeart()
 	{
+		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
 		setTextureName("erebus:heartElven");
 		setUnlocalizedName("erebus.elvenHeart");

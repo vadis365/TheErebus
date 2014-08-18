@@ -7,6 +7,7 @@ public class SoulCrystal extends Item
 {
 	public SoulCrystal()
 	{
+		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
 		setTextureName("erebus:soulCrystal");
 		setUnlocalizedName("erebus.soulCrystal");

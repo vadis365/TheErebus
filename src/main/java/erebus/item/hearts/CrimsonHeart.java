@@ -15,6 +15,7 @@ public class CrimsonHeart extends Item implements IEnergyStorage
 {
 	public CrimsonHeart()
 	{
+		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
 		setTextureName("erebus:heartCrimson");
 		setUnlocalizedName("erebus.crimsonHeart");

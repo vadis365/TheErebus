@@ -15,6 +15,7 @@ public class ManaHeart extends Item implements IEnergyStorage
 {
 	public ManaHeart()
 	{
+		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
 		setTextureName("erebus:heartMana");
 		setUnlocalizedName("erebus.manaHeart");

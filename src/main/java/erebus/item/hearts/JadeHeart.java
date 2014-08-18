@@ -10,6 +10,7 @@ public class JadeHeart extends Item implements IEnergyStorage
 {
 	public JadeHeart()
 	{
+		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
 		setTextureName("erebus:heartJade");
 		setUnlocalizedName("erebus.jadeHeart");
