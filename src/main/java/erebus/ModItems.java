@@ -60,7 +60,6 @@ import erebus.item.bambucket.Bambucket;
 import erebus.item.bambucket.BambucketAntiVenom;
 import erebus.item.bambucket.BambucketBeetleJuice;
 import erebus.item.block.ItemBlockDoorAmber;
-import erebus.item.hearts.CrimsonHeart;
 import erebus.item.hearts.ElvenHeart;
 import erebus.item.hearts.JadeHeart;
 import erebus.item.hearts.ManaHeart;
@@ -132,7 +131,6 @@ public class ModItems
 	public static final Item ritualDagger = new RitualDagger();
 	public static final Item jadeHeart = new JadeHeart();
 	public static final Item soulCrystal = new SoulCrystal();
-	public static final Item crimsonHeart = new CrimsonHeart();
 	public static final Item manaHeart = new ManaHeart();
 	public static final Item elvenHeart = new ElvenHeart();
 	public static final Item terraHeart = new TerraHeart();

@@ -65,7 +65,8 @@ public class ErebusMaterial extends Item
 		plateExoRhino,
 		rhinoBeetleHorn,
 		antPheromones,
-		gaeanGem;
+		gaeanGem,
+		crimsonHeart;
 	}
 
 	@SideOnly(Side.CLIENT)
