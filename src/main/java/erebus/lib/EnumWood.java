@@ -154,7 +154,7 @@ public enum EnumWood
 				Block log = logs.get(wood);
 				OreDictionary.registerOre("logWood", log);
 				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planks, 4, wood.ordinal()), new ItemStack(log));
-				GameRegistry.addSmelting(new ItemStack(Items.coal, 1, 1), new ItemStack(log), 1.0F);
+				GameRegistry.addSmelting(new ItemStack(log), new ItemStack(Items.coal, 1, 1), 0.15F);
 			}
 			if (wood.hasSapling)
 			{
