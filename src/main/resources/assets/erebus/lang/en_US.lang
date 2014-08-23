@@ -1,9 +1,12 @@
 # Blocks
 tile.portalErebus.name=Erebus Portal
+tile.gaeanKeystone.name=Gaean Keystone
+tile.offeringAltar.name=Offering Altar
 
 tile.blockAmber0.name=Amber
 tile.blockAmber1.name=Amber Glass
 tile.blockAmber2.name=Amber Bricks
+tile.doorAmber.name=Amber Door
 
 tile.erebus.log.name=%s Wood
 tile.erebus.planks.name=%s Planks
@@ -12,6 +15,13 @@ tile.erebus.leaves.name=%s Leaves
 tile.erebus.sapling.name=%s Sapling
 tile.erebus.slabPlanks.name=%s Slab
 tile.erebus.slabStone.name=%s Slab
+
+tile.scorchedWood.name=Scorched Wood
+tile.scorchedPlanks.name=Scorched Planks
+tile.rottenWood.name=Rotten Wood
+tile.rottenPlanks.name=Rotten Planks
+
+tile.hollowLogAcacia.name=Hollow Log
 
 tile.flowerPlanted.name=%s Flower
 tile.erebusStigma.name=%s Flower Stigma
@@ -61,13 +71,22 @@ tile.oreBlockU_5.name=Emerald Ore
 tile.oreBlockU_6.name=Jade Ore
 tile.oreBlockU_7.name=Petrified Wood Ore
 tile.oreBlockU_8.name=Volcanic Diamond Ore
-tile.erebusOreExtra_0.name=Aluminium Ore
-tile.erebusOreExtra_1.name=Copper Ore
-tile.erebusOreExtra_2.name=Lead Ore
-tile.erebusOreExtra_3.name=Silver Ore
-tile.erebusOreExtra_4.name=Tin Ore
+tile.erebusOreExtras_0.name=Aluminium Ore
+tile.erebusOreExtras_1.name=Copper Ore
+tile.erebusOreExtras_2.name=Lead Ore
+tile.erebusOreExtras_3.name=Silver Ore
+tile.erebusOreExtras_4.name=Tin Ore
 tile.oreFossilU.name=Fossil Ore
+
+tile.redGem_0.name=Redgem
+tile.redGem_1.name=Redlamp
+
 tile.petrifiedWoodPlanks.name=Petrified Wood Planks
+tile.petrifiedCraftingTable.name=Petrified Crafting Table
+tile.petrifiedWoodChest.name=Petrified Wood Chest
+
+tile.erebus.blockJade.name=Jade Block
+
 tile.umberstone_0.name=Umberstone
 tile.umberstone_1.name=Umbercobble
 tile.umberstone_2.name=Mossy Umbercobble
@@ -79,21 +98,41 @@ tile.umberPaver_0.name=Umberpaver
 tile.umberPaver_1.name=Mossy Umberpaver
 tile.umberPaver_2.name=Webbed Umberpaver
 tile.umberstoneButton.name=Umberstone Button
+tile.umberstonePillar.name=Umberstone Pillar
+tile.umberFurnace.name=Umberfurnace
+
+tile.quickSand.name=Quicksand
+tile.ghostSand.name=Ghost Sand
+
+tile.erebusMud.name=Mud
+tile.erebus.mudBricks.name=Mud Bricks
+tile.mirbrick.name=Mirbrick
+
+tile.bambooBridge.name=Bamboo Bridge
 tile.bambooCrop.name=Bamboo Block
 tile.bambooCrate.name=Bamboo Crate
+<<<<<<< HEAD
+tile.bambooLadder.name=Bamboo Ladder
+tile.bambooPole.name=Bamboo Nerdpole
+=======
 tile.redGem_0.name=Redgem
 tile.redGem_1.name=Redlamp
 tile.petrifiedCraftingTable.name=Petrified Crafting Table
 tile.umberFurnaceOFF.name=Umberfurnace
 tile.erebus.fiddlehead.name=Fiddlehead
 tile.insectRepellent.name=Insect Repellent Block
+>>>>>>> origin/master
 tile.bambooTorch.name=Bamboo Torch
-tile.cobbleWebbed.name=Webbed Cobblestone
-tile.blockSilk.name=Silk
-tile.mirbrick.name=Mirbrick
+tile.extenderThingy.name=Bamboo Extender
+
 tile.spiderSpawner.name=Spider Spawner
 tile.jumpingSpiderSpawner.name=Jumping Spider Spawner
 tile.waspSpawner.name=Wasp Spawner
+<<<<<<< HEAD
+
+tile.waspNestBlock.name=Wasp Nest Block
+
+=======
 tile.blockSpiderSilk.name=Silk
 tile.thorns.name=Thorns
 tile.erebus.fern.name=Fern
@@ -103,36 +142,23 @@ tile.ghostSand.name=Ghost Sand
 tile.hollowLogAcacia.name=Hollow Acacia Log
 tile.honeyCombBlock.name=Honey Comb
 tile.doorAmber.name=Amber Door
+>>>>>>> origin/master
 tile.gneiss_0.name=Gneiss
 tile.gneiss_1.name=Hieroglyphic Gneiss
 tile.gneiss_2.name=Layered Gneiss
 tile.gneiss_3.name=Gneiss Slabs
 tile.gneiss_4.name=Smooth Gneiss
 tile.gneiss_5.name=Gneiss Tiles
-tile.erebusHoney.name=Honey
-tile.erebusMud.name=Mud
-tile.erebus.mudBricks.name=Mud Bricks
-tile.glowingJar.name=Glowing Jar
-tile.reinExo.name=Reinforced Exoskeleton Block
-tile.bambooLadder.name=Bamboo Ladder
-tile.bambooBridge.name=Bamboo Bridge
-tile.umberGolemStatue.name=Umbergolem Statue
-tile.waspNestBlock.name=Wasp Nest Block
-tile.petrifiedWoodChest.name=Petrified Wood Chest
-tile.blockBones.name=Block o' Bones
-tile.witherWeb.name=Wither Web
-tile.extenderThingy.name=Bamboo Extender
-tile.bambooPole.name=Bamboo Nerdpole
-tile.umberstonePillar.name=Umberstone Pillar
-tile.velocityBlock.name=Velocity Block
+
 tile.mushroomBulbCap.name=Bulb Capped Mushroom
 tile.mushroom1Cap.name=Grandma's Shoes Mushroom
 tile.mushroom2Cap.name=Sarcastic Czech Mushroom
 tile.mushroom3Cap.name=Kaizer's Fingers Mushroom
 tile.mushroom4Cap.name=Dutch Cap Mushroom
-tile.honeyTreat.name=Honey Treat
-tile.erebus.jarOHoney.name=Jar O'Honey
-tile.erebus.blockJade.name=Jade Block
+
+tile.glowshroom.name=Glowshroom
+tile.glowshroomStalk.name=Glowshroom Stalk
+
 tile.doubleHeightPlant_0.name=Sundew
 tile.doubleHeightPlant_1.name=Weeping Blue
 tile.doubleHeightPlant_2.name=Bullrush
@@ -145,6 +171,7 @@ tile.doubleHeightPlant_10.name=Bullrush
 tile.doubleHeightPlant_11.name=Droughted Shrub
 tile.doubleHeightPlant_12.name=Tangled Stalk Mushrooms
 tile.doubleHeightPlant_13.name=High Capped Mushroom
+
 tile.erebusPlantSmall_0.name=Bulb Capped Mushroom
 tile.erebusPlantSmall_1.name=Grandma's Shoes Mushroom
 tile.erebusPlantSmall_2.name=Sarcastic Czech Mushroom
@@ -156,14 +183,36 @@ tile.erebusPlantSmall_7.name=Nettle
 tile.erebusPlantSmall_8.name=Blooming Nettle
 tile.erebusPlantSmall_9.name=Swamp Plant
 tile.erebusPlantSmall_10.name=Firebloom
-tile.erebus.glowGemBlock.name=Glowing Gem
-tile.erebus.mucusBomb.name=Mucus Bomb
-tile.erebusHanger.name=Hanger
+
 tile.erebusWallPlants_0.name=Moss
 tile.erebusWallPlants_1.name=Mould
+
+tile.erebusHanger.name=Hanger
+tile.thorns.name=Thorns
+tile.erebusFern.name=Fern
+tile.erebusFiddlehead.name=Fiddlehead
+
 tile.siloTank.name=Silo Tank
 tile.siloRoof.name=Silo Roof
 tile.siloSupports.name=Silo Supports
+tile.composter.name=Composter
+
+tile.erebusHoney.name=Honey
+tile.erebus.jarOHoney.name=Jar O'Honey
+tile.honeyCombBlock.name=Honey Comb
+tile.honeyTreat.name=Honey Treat
+
+tile.erebus.glowGemBlock.name=Glowing Gem
+tile.glowingJar.name=Glowing Jar
+tile.umberGolemStatue.name=Umbergolem Statue
+tile.blockBones.name=Block o' Bones
+tile.insectRepellent.name=Insect Repellent Block
+tile.witherWeb.name=Wither Web
+
+tile.erebus.mucusBomb.name=Mucus Bomb
+tile.velocityBlock.name=Velocity Block
+tile.reinExo.name=Reinforced Exoskeleton Block
+tile.blockSilk.name=Silk
 
 # Items
 item.encrustedDiamond.name=Encrusted Diamond
@@ -230,7 +279,7 @@ item.erebusMaterials.31.name=Nettle Leaves
 item.erebusMaterials.32.name=Nettle Flowers
 item.erebusMaterials.33.name=Middle Fruit Seeds
 item.erebusMaterials.34.name=Moss Ball
-item.erebusMaterials.35.name=Yellow Dotted Fungus
+item.erebusMaterials.35.name=Glowshroom
 item.erebusMaterials.36.name=Rhino Beetle Plate
 item.erebusMaterials.37.name=Rhino Beetle Horn
 item.erebusMaterials.38.name=Ant Pheromones
@@ -273,7 +322,7 @@ item.sprayCan.name=Insect Repellent
 item.waspDagger.name=Wasp Dagger
 item.wandOfAnimation.name=Wand Of Animation
 item.scorpionPincer.name=Augmented Scorpion Pincer
-item.hornOfSummoning.name=Horn of The Swarm
+item.hornOfSummoning.name=Horn of the Swarm
 item.webSlinger.name=Web Slinger
 item.blockExtractor.name=Block Extractor
 item.nectarCollector.name=Nectar Collector
@@ -281,17 +330,22 @@ item.beeTamingAmulet.name=Bee Pendant
 item.doorAmberItem.name=Amber Door
 item.bucketHoney.name=Bucket Of Honey
 item.homingBeecon.name=Homing Beecon
+item.homingBeeconAdvanced.name=Advanced Homing Beecon
 item.flowerSeeds.name=%s Flower Bulb
 item.whetstone.name=Whetstone
 item.woodlouseBall.name=Woodlouse Ball
 item.rolledNewspaper.name=Rolled Up Newspaper
-item.antTamingAmulet.name=Ant Taming Amulet
+item.antTamingAmulet.name=Ant Medallion
 item.planticide.name=Herbicide
+<<<<<<< HEAD
+item.compost.name=Compost
+=======
 item.erebus.soulCrystal.name=Soul Crystal
 item.erebus.jadeHeart.name=Jade Heart
 item.erebus.manaHeart.name=Mana Heart
 item.erebus.elvenHeart.name=Elven Heart
 item.erebus.terraHeart.name=Terra Heart
+>>>>>>> origin/master
 item.erebus.ritualDagger.name=Ritual Dagger
 
 # Entities
