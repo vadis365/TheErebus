@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.block.ItemBlockPlanks;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
@@ -64,9 +65,16 @@ public class BlockPlanksErebus extends Block implements ISubBlocksBlock
 
 		for (int i = 0; i < icons.length; i++)
 		{
-			if (EnumWood.values()[i].hasPlanks())
+			EnumWood wood = EnumWood.values()[i];
+			if (wood.hasPlanks())
 			{
-				icons[i] = reg.registerIcon("erebus:planks_" + EnumWood.values()[i].name().toLowerCase());
+				String name = "erebus:planks_" + EnumWood.values()[i].name().toLowerCase();
+				if (ConfigHandler.INSTANCE.alternativePlanks && wood != EnumWood.Bamboo)
+				{
+					name += "_alt";
+				}
+
+				icons[i] = reg.registerIcon(name);
 			}
 		}
 	}

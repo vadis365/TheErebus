@@ -2,6 +2,7 @@ package erebus;
 
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -95,7 +96,7 @@ public class Erebus
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.honeyBlock, ModItems.bucketHoney);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
+		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
 
 		if (ConfigHandler.INSTANCE.randomNames)
 		{
