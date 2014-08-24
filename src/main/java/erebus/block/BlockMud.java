@@ -12,6 +12,7 @@ public class BlockMud extends Block
 	public BlockMud()
 	{
 		super(Material.clay);
+		setHardness(2.0F);
 	}
 
 	@Override
