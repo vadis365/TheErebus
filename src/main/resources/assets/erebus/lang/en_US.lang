@@ -337,15 +337,15 @@ item.woodlouseBall.name=Woodlouse Ball
 item.rolledNewspaper.name=Rolled Up Newspaper
 item.antTamingAmulet.name=Ant Medallion
 item.planticide.name=Herbicide
-<<<<<<< HEAD
 item.compost.name=Compost
-=======
 item.erebus.soulCrystal.name=Soul Crystal
 item.erebus.jadeHeart.name=Jade Heart
 item.erebus.manaHeart.name=Mana Heart
 item.erebus.elvenHeart.name=Elven Heart
 item.erebus.terraHeart.name=Terra Heart
->>>>>>> origin/master
+item.erebus.stoneHeart.name=Stone Heart
+item.erebus.twinHeart.name=Twin Heart
+item.erebus.burningHeart.name=Burning Heart
 item.erebus.ritualDagger.name=Ritual Dagger
 
 # Entities

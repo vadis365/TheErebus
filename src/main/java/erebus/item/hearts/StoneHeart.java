@@ -3,16 +3,16 @@ package erebus.item.hearts;
 import net.minecraft.item.ItemStack;
 import erebus.api.animationmagic.EnergyType;
 
-public class JadeHeart extends BaseHeart
+public class StoneHeart extends BaseHeart
 {
-	public JadeHeart()
+	public StoneHeart()
 	{
-		super("jade");
+		super("stone");
 	}
 
 	@Override
 	public int getMaxStorage(ItemStack stack, EnergyType type)
 	{
-		return 10000;
+		return 2500;
 	}
 }

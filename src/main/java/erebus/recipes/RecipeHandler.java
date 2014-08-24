@@ -259,7 +259,7 @@ public class RecipeHandler
 		// Animation Magic
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ModItems.soulCrystal, 'z', "stickWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.jadeHeart), " xz", "xyx", "xx ", 'x', "ingotGold", 'y', "blockJade", 'z', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.crimsonHeart.ordinal())));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stoneHeart), " x ", "yzx", "xxy", 'x', "stone", 'y', Blocks.obsidian, 'z', new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.crimsonHeart.ordinal())));
 	}
 
 	private static void registerSmelting()

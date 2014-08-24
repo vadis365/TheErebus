@@ -60,12 +60,15 @@ import erebus.item.bambucket.Bambucket;
 import erebus.item.bambucket.BambucketAntiVenom;
 import erebus.item.bambucket.BambucketBeetleJuice;
 import erebus.item.block.ItemBlockDoorAmber;
+import erebus.item.hearts.BurningHeart;
 import erebus.item.hearts.ElvenHeart;
 import erebus.item.hearts.JadeHeart;
 import erebus.item.hearts.ManaHeart;
 import erebus.item.hearts.RitualDagger;
 import erebus.item.hearts.SoulCrystal;
+import erebus.item.hearts.StoneHeart;
 import erebus.item.hearts.TerraHeart;
+import erebus.item.hearts.TwinHeart;
 
 public class ModItems
 {
@@ -134,6 +137,9 @@ public class ModItems
 	public static final Item manaHeart = new ManaHeart();
 	public static final Item elvenHeart = new ElvenHeart();
 	public static final Item terraHeart = new TerraHeart();
+	public static final Item stoneHeart = new StoneHeart();
+	public static final Item burningHeart = new BurningHeart();
+	public static final Item twinHeart = new TwinHeart();
 
 	// MISC ARMOR
 	public static final Item reinCompoundGoggles = new CompoundGoggles(ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");

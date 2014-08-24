@@ -5,12 +5,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.item.ErebusMaterial;
 
 public class AltarRecipe
 {
@@ -19,8 +22,7 @@ public class AltarRecipe
 
 	public static void init()
 	{
-		// example recipe, delete when real ones are added
-		addRecipe(new ItemStack(Items.arrow), new ItemStack(Blocks.anvil), new ItemStack(Items.apple));
+		addRecipe(new ItemStack(ModItems.jadeHeart), new ItemStack(ModBlocks.jadeBlock), new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.crimsonHeart.ordinal()), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot));
 	}
 
 	/**
