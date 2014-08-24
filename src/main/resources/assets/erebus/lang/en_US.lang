@@ -16,18 +16,21 @@ tile.erebus.sapling.name=%s Sapling
 tile.erebus.slabPlanks.name=%s Slab
 tile.erebus.slabStone.name=%s Slab
 
-tile.scorchedWood.name=Scorched Wood
-tile.scorchedPlanks.name=Scorched Planks
-tile.rottenWood.name=Rotten Wood
-tile.rottenPlanks.name=Rotten Planks
+tile.erebus.log_scorched.name=Scorched Wood
+tile.erebus.planks_scorched.name=Scorched Planks
+tile.erebus.log_rotten.name=Rotten Wood
+tile.erebus.planks_rotten.name=Rotten Planks
+tile.erebus.log_hollow_acacia.name=Hollow Acacia Log
+tile.erebus.planks_varnished.name=Varnished Planks
+tile.erebus.saplessLog.name=Sapless log
 
 tile.hollowLogAcacia.name=Hollow Log
 
 tile.flowerPlanted.name=%s Flower
-tile.erebusStigma.name=%s Flower Stigma
-tile.erebusFlower.name=%s Petal
-tile.erebusFlower_14.name=Exploding Stigma
-tile.erebusFlower_15.name=Stem
+tile.erebus.stigma.name=%s Flower Stigma
+tile.erebus.flower.name=%s Petal
+tile.erebus.flower_14.name=Exploding Stigma
+tile.erebus.flower_15.name=Stem
 
 tile.umbercobbleStairs0.name=Umberstone Stairs
 tile.umbercobbleStairs1.name=Umbercobble Stairs
@@ -111,38 +114,31 @@ tile.mirbrick.name=Mirbrick
 tile.bambooBridge.name=Bamboo Bridge
 tile.bambooCrop.name=Bamboo Block
 tile.bambooCrate.name=Bamboo Crate
-<<<<<<< HEAD
 tile.bambooLadder.name=Bamboo Ladder
 tile.bambooPole.name=Bamboo Nerdpole
-=======
 tile.redGem_0.name=Redgem
 tile.redGem_1.name=Redlamp
 tile.petrifiedCraftingTable.name=Petrified Crafting Table
 tile.umberFurnaceOFF.name=Umberfurnace
 tile.erebus.fiddlehead.name=Fiddlehead
 tile.insectRepellent.name=Insect Repellent Block
->>>>>>> origin/master
 tile.bambooTorch.name=Bamboo Torch
 tile.extenderThingy.name=Bamboo Extender
 
 tile.spiderSpawner.name=Spider Spawner
 tile.jumpingSpiderSpawner.name=Jumping Spider Spawner
 tile.waspSpawner.name=Wasp Spawner
-<<<<<<< HEAD
 
 tile.waspNestBlock.name=Wasp Nest Block
 
-=======
 tile.blockSpiderSilk.name=Silk
 tile.thorns.name=Thorns
 tile.erebus.fern.name=Fern
 tile.tallgrass.name=Tall Grass
 tile.quickSand.name=Quicksand
 tile.ghostSand.name=Ghost Sand
-tile.hollowLogAcacia.name=Hollow Acacia Log
 tile.honeyCombBlock.name=Honey Comb
 tile.doorAmber.name=Amber Door
->>>>>>> origin/master
 tile.gneiss_0.name=Gneiss
 tile.gneiss_1.name=Hieroglyphic Gneiss
 tile.gneiss_2.name=Layered Gneiss
@@ -159,18 +155,12 @@ tile.mushroom4Cap.name=Dutch Cap Mushroom
 tile.glowshroom.name=Glowshroom
 tile.glowshroomStalk.name=Glowshroom Stalk
 
-tile.doubleHeightPlant_0.name=Sundew
-tile.doubleHeightPlant_1.name=Weeping Blue
-tile.doubleHeightPlant_2.name=Bullrush
-tile.doubleHeightPlant_3.name=Droughted Shrub
-tile.doubleHeightPlant_4.name=Tangled Stalk Mushrooms
-tile.doubleHeightPlant_5.name=High Capped Mushroom
-tile.doubleHeightPlant_8.name=Sundew
-tile.doubleHeightPlant_9.name=Weeping Blue
-tile.doubleHeightPlant_10.name=Bullrush
-tile.doubleHeightPlant_11.name=Droughted Shrub
-tile.doubleHeightPlant_12.name=Tangled Stalk Mushrooms
-tile.doubleHeightPlant_13.name=High Capped Mushroom
+tile.erebus.sundew.name=Sundew
+tile.erebus.weepingBlue.name=Weeping Blue
+tile.erebus.bullrush.name=Bullrush
+tile.erebus.droughtedShrub.name=Droughted Shrub
+tile.erebus.tangled Stalk.name=Tangled Stalk Mushrooms
+tile.erebus.highCapped.name=High Capped Mushroom
 
 tile.erebusPlantSmall_0.name=Bulb Capped Mushroom
 tile.erebusPlantSmall_1.name=Grandma's Shoes Mushroom
@@ -285,6 +275,7 @@ item.erebusMaterials.37.name=Rhino Beetle Horn
 item.erebusMaterials.38.name=Ant Pheromones
 item.erebusMaterials.39.name=Gaean Gem
 item.erebusMaterials.40.name=Crimson Heart
+item.erebusMaterials.41.name=Sap Ball
 item.erebusSpecialItem.0.name=Beetle Riding Kit
 item.erebusSpecialItem.1.name=Beetle Amulet
 item.erebusSpecialItem.2.name=Umbergolem Torso
@@ -432,16 +423,12 @@ colour.erebus.dyeWhite=White
 colour.erebus.rainbow=Rainbow
 
 # Woods
-wood.erebus.acacia=Acacia
+wood.erebus.baobab=Baobab
 wood.erebus.eucalyptus=Eucalyptus
 wood.erebus.mahogany=Mahogany
-wood.erebus.baobab=Baobab
 wood.erebus.mossbark=Mossbark
-wood.erebus.pink=Pink
-wood.erebus.scorched=Scorched
 wood.erebus.asper=Asper
 wood.erebus.cypress=Cypress
 wood.erebus.sap=Sap
-wood.erebus.weedwood=Weedwood
 wood.erebus.white=White
 wood.erebus.bamboo=Bamboo

@@ -16,6 +16,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.block.bamboo.BlockBambooShoot;
 import erebus.block.plants.BlockHangerPlants;
 import erebus.network.PacketPipeline;
@@ -66,7 +67,18 @@ public class ErebusMaterial extends Item
 		rhinoBeetleHorn,
 		antPheromones,
 		gaeanGem,
-		crimsonHeart;
+		crimsonHeart,
+		sapBall;
+	}
+
+	public static ItemStack createStack(DATA data)
+	{
+		return createStack(data, 1);
+	}
+
+	public static ItemStack createStack(DATA data, int size)
+	{
+		return new ItemStack(ModItems.erebusMaterials, size, data.ordinal());
 	}
 
 	@SideOnly(Side.CLIENT)
