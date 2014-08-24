@@ -4,7 +4,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.plants.BlockDoubleHeightPlant;
 import erebus.block.plants.BlockSmallPlants;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -73,8 +72,8 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.SAND,xx,yy,zz) && world.isAirBlock(xx,yy + 1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataDroughtedShrubBottom,2);
-				world.setBlock(xx,yy + 1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataDroughtedShrubTop,2);
+				world.setBlock(xx,yy,zz,ModBlocks.droughtedShrub,0,2);
+				world.setBlock(xx,yy + 1,zz,ModBlocks.droughtedShrub,8,2);
 			}
 		}
 
@@ -122,7 +121,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 			case COAL:
 				oreGen.setChance(0.85F).setIterations(extraOres ? 2 : 3).setOreAmount(7,10).setY(5,56);
 				break; // less common, lowered amount too, also ~2 times smaller
-			// area
+				// area
 			case EMERALD:
 				oreGen.setIterations(1,3);
 				break; // one more vein

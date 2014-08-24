@@ -3,7 +3,6 @@ package erebus.block.silo;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import erebus.block.BlockSimple;
@@ -40,13 +39,6 @@ public class BlockSiloSupports extends BlockSimple
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
-	}
-
-	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player)
-	{
-		world.setBlockToAir(x, y, z);
-		dropBlockAsItem(world, x, y, z, 0, 0);
 	}
 
 	@Override

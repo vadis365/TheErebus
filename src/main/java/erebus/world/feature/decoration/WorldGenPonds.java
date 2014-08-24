@@ -1,6 +1,7 @@
 package erebus.world.feature.decoration;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -10,7 +11,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.plants.BlockDoubleHeightPlant;
 import erebus.world.biomes.BiomeUndergroundJungle;
 
 public class WorldGenPonds extends WorldGenerator{
@@ -183,32 +183,15 @@ public class WorldGenPonds extends WorldGenerator{
 			zz = z + rand.nextInt(16);
 			block = world.getBlock(xx,yy - 1,zz);
 
-			if (block == Blocks.sand && ModBlocks.doubleHeightPlant.canPlaceBlockAt(world,xx,yy,zz)){
+			if (block == Blocks.sand && ModBlocks.bullrush.canPlaceBlockAt(world,xx,yy,zz)){
 				for(int height = 0; height < 1; height++){
 					if (world.isAirBlock(xx,yy + height,zz)){
-						world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataBullrushBottom,2);
-						world.setBlock(xx,yy + 1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataBullrushTop,2);
+						world.setBlock(xx,yy,zz,ModBlocks.bullrush,0,2);
+						world.setBlock(xx,yy + 1,zz,ModBlocks.bullrush,8,2);
 					}
 					else{
 						break;
 					}
-				}
-			}
-		}
-
-		for(int catTailAttempt = 0, xx, yy, zz; catTailAttempt < 100; catTailAttempt++){
-			xx = x + rand.nextInt(16);
-			yy = y + 3 + rand.nextInt(5);
-			zz = z + rand.nextInt(16);
-			block = world.getBlock(xx,yy - 1,zz);
-
-			if (block == Blocks.sand && ModBlocks.plantSmall.canPlaceBlockAt(world,xx,yy,zz)){
-				if (world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy + 1,zz)){
-					world.setBlock(xx,yy,zz,ModBlocks.plantSmall,BlockDoubleHeightPlant.dataBullrushBottom,2);
-					world.setBlock(xx,yy + 1,zz,ModBlocks.plantSmall,BlockDoubleHeightPlant.dataBullrushTop,2);
-				}
-				else{
-					break;
 				}
 			}
 		}

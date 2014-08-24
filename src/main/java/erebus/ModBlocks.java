@@ -124,6 +124,14 @@ public class ModBlocks
 	public static final Block scorchedPlanks = new BlockSimple(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("scorchedPlanks").setBlockTextureName("erebus:planks_scorched");
 	public static final Block rottenPlanks = new BlockSimple(Material.wood).setHardness(0.5F).setResistance(1.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("rottenPlanks").setBlockTextureName("erebus:planks_rotten");
 
+	// DOUBLE PLANTS
+	public static final Block sundew = new BlockDoubleHeightPlant("Sundew");
+	public static final Block weepingBlue = new BlockDoubleHeightPlant("WeepingBlue");
+	public static final Block bullrush = new BlockDoubleHeightPlant("Bullrush");
+	public static final Block droughtedShrub = new BlockDoubleHeightPlant("DroughtedShrub");
+	public static final Block tangledStalk = new BlockDoubleHeightPlant("TangledStalk");
+	public static final Block highCapped = new BlockDoubleHeightPlant("HighCapped");
+
 	// UNDERGROWTH
 	public static final Block thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
 	public static final Block blockTurnip = new BlockTurnip();
@@ -132,7 +140,6 @@ public class ModBlocks
 	public static final Block hanger = new BlockHangerPlants().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusHanger");
 	public static final Block wallPlants = new BlockWallPlants().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebusWallPlants");
 	public static final Block fern = new BlockFern();
-	public static final Block doubleHeightPlant = new BlockDoubleHeightPlant();
 	public static final Block mushroomCap0 = new BlockErebusMushroomCap(0);
 	public static final Block mushroomCap1 = new BlockErebusMushroomCap(1);
 	public static final Block mushroomCap2 = new BlockErebusMushroomCap(2);
@@ -255,7 +262,7 @@ public class ModBlocks
 	{
 		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, oreExtra, redGem, blockAmber, quickSand, ghostSand);
 		ModTabs.blocks.setTab(hollowLogAcacia, planks);
-		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, doubleHeightPlant, plantSmall, wallPlants);
+		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, plantSmall, wallPlants);
 		ModTabs.blocks.setTab(mushroomCap0, mushroomCap1, mushroomCap2, mushroomCap3, mushroomCap4, glowshroomStalkMain, glowshroom);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, erebusAltar);

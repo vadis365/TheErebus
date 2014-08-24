@@ -4,7 +4,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.plants.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -26,7 +25,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 
 	protected boolean generateFlowers = true;
-	
+
 	@Override
 	protected void populate(){
 		if (rand.nextInt(3) == 0){
@@ -38,7 +37,10 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 				if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
 					genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D);
 					genPonds.generate(world,rand,xx,yy,zz);
-					if (rand.nextBoolean())break;
+					if (rand.nextBoolean())
+					{
+						break;
+					}
 				}
 			}
 		}
@@ -127,8 +129,8 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			zz = z + offsetXZ();
 
 			if (world.getBlock(xx,yy - 1,zz) == Blocks.grass && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy + 1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataSundewBottom,2);
-				world.setBlock(xx,yy + 1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataSundewTop,2);
+				world.setBlock(xx,yy,zz,ModBlocks.sundew,0,2);
+				world.setBlock(xx,yy + 1,zz,ModBlocks.sundew,8,2);
 			}
 		}
 
@@ -138,8 +140,8 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			zz = z + offsetXZ();
 
 			if (world.getBlock(xx,yy - 1,zz) == Blocks.grass && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy + 1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataWeepingBlueBottom,2);
-				world.setBlock(xx,yy + 1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataWeepingBlueTop,2);
+				world.setBlock(xx,yy,zz,ModBlocks.weepingBlue,0,2);
+				world.setBlock(xx,yy + 1,zz,ModBlocks.weepingBlue,8,2);
 			}
 		}
 
@@ -180,7 +182,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 			case IRON:
 				oreGen.setChance(0.75F).setIterations(extraOres ? 2 : 3,extraOres ? 4 : 5).setY(5,42);
 				break; // ~3 times smaller area, thus lower chance and
-			// iterations
+				// iterations
 			case GOLD:
 				oreGen.setIterations(extraOres ? 2 : 3);
 				break; // 2 veins less

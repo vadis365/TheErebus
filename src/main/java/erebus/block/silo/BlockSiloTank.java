@@ -135,13 +135,6 @@ public class BlockSiloTank extends BlockContainer
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player)
-	{
-		breakBlock(world, x, y, z, this, 0);
-		dropBlockAsItem(world, x, y, z, 0, 0);
-	}
-
-	@Override
 	public int quantityDropped(Random rand)
 	{
 		return 1;

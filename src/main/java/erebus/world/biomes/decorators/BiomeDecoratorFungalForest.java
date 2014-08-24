@@ -5,7 +5,6 @@ import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.plants.BlockDoubleHeightPlant;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -92,8 +91,8 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && world.isAirBlock(xx,yy + 1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataTangledStalkBottom,2);
-				world.setBlock(xx,yy + 1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataTangledStalkTop,2);
+				world.setBlock(xx,yy,zz,ModBlocks.tangledStalk,0,2);
+				world.setBlock(xx,yy + 1,zz,ModBlocks.tangledStalk,8,2);
 			}
 		}
 
@@ -103,8 +102,8 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz) && world.isAirBlock(xx,yy + 1,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataHighCappedBottom,2);
-				world.setBlock(xx,yy + 1,zz,ModBlocks.doubleHeightPlant,BlockDoubleHeightPlant.dataHighCappedTop,2);
+				world.setBlock(xx,yy,zz,ModBlocks.highCapped,0,2);
+				world.setBlock(xx,yy + 1,zz,ModBlocks.highCapped,8,2);
 			}
 		}
 
@@ -162,7 +161,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			case IRON:
 				oreGen.setChance(0.75F).setIterations(extraOres ? 2 : 3,extraOres ? 4 : 5).setY(5,42);
 				break; // ~3 times smaller area, thus lower chance and
-			// iterations
+				// iterations
 			case GOLD:
 				oreGen.setIterations(extraOres ? 2 : 3);
 				break; // 2 veins less
