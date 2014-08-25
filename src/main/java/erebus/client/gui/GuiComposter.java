@@ -46,8 +46,8 @@ public class GuiComposter extends GuiContainer
 		{
 			int i1 = tileComposter.getBurnTimeRemainingScaled(13);
 			drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
-			i1 = tileComposter.getCookProgressScaled(24);
-			drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
+			i1 = tileComposter.getCookProgressScaled(32);
+			drawTexturedModalRect(k + 76, l + 28, 176, 14, i1 + 1, 32);
 		}
 	}
 }
