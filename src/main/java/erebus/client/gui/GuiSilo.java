@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.block.silo.TileEntitySiloTank;
+import erebus.core.helper.Utils;
 import erebus.inventory.ContainerSilo;
 
 @SideOnly(Side.CLIENT)
@@ -31,8 +32,9 @@ public class GuiSilo extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y)
 	{
-		fontRendererObj.drawString(StatCollector.translateToLocal(siloTank.getInventoryName()), 8, 6, 4210752);
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+		int colour = Utils.getColour(192, 192, 192);
+		fontRendererObj.drawString(StatCollector.translateToLocal(siloTank.getInventoryName()), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal(siloTank.getInventoryName())) / 2, 6, colour);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, colour);
 	}
 
 	@Override

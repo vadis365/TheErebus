@@ -28,9 +28,9 @@ public class GuiComposter extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		int color = Utils.getColour(0, 0, 0);
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.composter"), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal("container.composter")) / 2, 6, color);
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), xSize - 170, ySize - 93, color);
+		int colour = Utils.getColour(20, 0, 0);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.composter"), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal("container.composter")) / 2, 6, colour);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), xSize - 170, ySize - 93, colour);
 	}
 
 	@Override
