@@ -47,4 +47,16 @@ public class BlockSiloRoof extends BlockSimple
 	{
 		return BlockRenderIDs.SILO_ROOF.id();
 	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
 }
