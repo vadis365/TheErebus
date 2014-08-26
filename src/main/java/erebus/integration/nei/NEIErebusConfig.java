@@ -29,31 +29,43 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.hideItem(new ItemStack(ModBlocks.altar));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap3));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap4));
+
+		byte b = 0;
 		if (!ConfigHandler.INSTANCE.aluminium)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 0));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 0));
+			b++;
 		}
 		if (!ConfigHandler.INSTANCE.copper)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 1));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 1));
+			b++;
 		}
 		if (!ConfigHandler.INSTANCE.lead)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 2));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 2));
+			b++;
 		}
 		if (!ConfigHandler.INSTANCE.silver)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 3));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 3));
+			b++;
 		}
 		if (!ConfigHandler.INSTANCE.tin)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 4));
 			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 4));
+			b++;
 		}
+		if (b >= 5)
+		{
+			API.hideItem(new ItemStack(ModItems.metalIngot, 1, OreDictionary.WILDCARD_VALUE));
+		}
+
 		API.hideItem(new ItemStack(ModBlocks.hanger));
 	}
 

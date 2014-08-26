@@ -198,6 +198,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.antTamingAmulet), "pgp", "gog", "pgp", 'p', ErebusMaterial.createStack(ErebusMaterial.DATA.antPheromones), 'g', "ingotGold", 'o', Blocks.obsidian));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.planticide, 2), ErebusMaterial.createStack(ErebusMaterial.DATA.poisonGland), Items.slime_ball, new ItemStack(Items.dye, 1, 15));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModBlocks.varnishedPlanks), "plankWood", ErebusMaterial.createStack(ErebusMaterial.DATA.sapBall), ErebusMaterial.createStack(ErebusMaterial.DATA.repellent), ErebusMaterial.createStack(ErebusMaterial.DATA.camoPowder)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModBlocks.varnishedPlanks), "plankWood", "slimeball", ErebusMaterial.createStack(ErebusMaterial.DATA.repellent), ErebusMaterial.createStack(ErebusMaterial.DATA.camoPowder)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.composter), "xyx", "xzx", "xyx", 'x', ModBlocks.varnishedPlanks, 'y', "dyeGreen", 'z', "gemEmerald"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.composter), "xyx", "xzx", "xyx", 'x', ModBlocks.varnishedPlanks, 'y', "dyeLime", 'z', "gemEmerald"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.siloSupports), "xxx", "y y", "y y", 'x', "slabWood", 'y', Blocks.fence));
