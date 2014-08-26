@@ -1,12 +1,12 @@
 package erebus.block.plants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -17,7 +17,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.core.helper.Utils;
 import erebus.item.ErebusMaterial;
 
 public class BlockDoubleHeightPlant extends BlockDoublePlant
@@ -35,31 +34,33 @@ public class BlockDoubleHeightPlant extends BlockDoublePlant
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player)
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune)
 	{
-		if (world.rand.nextInt(4) == 0)
+		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
+		if (world.rand.nextInt(8) != 0)
 		{
-			if ("Sundew".equals(name))
+			return drops;
+		}
+
+		if ("Sundew".equals(name))
+		{
+			drops.add(new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.bioLuminescence.ordinal()));
+		} else if ("WeepingBlue".equals(name))
+		{
+			drops.add(new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.weepingBluePetal.ordinal()));
+		} else if ("Bullrush".equals(name))
+		{
+			drops.add(new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.papyrus.ordinal()));
+		} else
+		{
+			ItemStack seed = ForgeHooks.getGrassSeed(world);
+			if (seed != null)
 			{
-				Utils.dropStack(world, x, y, z, new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.bioLuminescence.ordinal()));
-				return;
-			} else if ("WeepingBlue".equals(name))
-			{
-				Utils.dropStack(world, x, y, z, new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.weepingBluePetal.ordinal()));
-				return;
-			} else if ("Bullrush".equals(name))
-			{
-				Utils.dropStack(world, x, y, z, new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.papyrus.ordinal()));
-				return;
+				drops.add(seed);
 			}
 		}
 
-		ItemStack stack = ForgeHooks.getGrassSeed(world);
-		if (stack != null)
-		{
-			Utils.dropStack(world, x, y, z, stack);
-		}
-
+		return drops;
 	}
 
 	@Override
