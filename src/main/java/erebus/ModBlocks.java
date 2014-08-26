@@ -84,15 +84,14 @@ import erebus.block.glowshroom.BlockGlowshroomStalkS3;
 import erebus.block.glowshroom.BlockGlowshroomStalkW1;
 import erebus.block.glowshroom.BlockGlowshroomStalkW3;
 import erebus.block.glowshroom.BlockGlowshroomStalkWE2;
-import erebus.block.plants.BlockDoubleHeightPlant;
 import erebus.block.plants.BlockErebusFlower;
-import erebus.block.plants.BlockFern;
-import erebus.block.plants.BlockFiddlehead;
 import erebus.block.plants.BlockHangerPlants;
-import erebus.block.plants.BlockSmallPlants;
 import erebus.block.plants.BlockThorns;
 import erebus.block.plants.BlockTurnip;
 import erebus.block.plants.BlockWallPlants;
+import erebus.block.plants.DoubleHeightPlant;
+import erebus.block.plants.SmallMushroom;
+import erebus.block.plants.SmallPlant;
 import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
@@ -128,21 +127,33 @@ public class ModBlocks
 	public static final Block saplessLog = new SaplessLog();
 
 	// DOUBLE PLANTS
-	public static final Block sundew = new BlockDoubleHeightPlant("Sundew");
-	public static final Block weepingBlue = new BlockDoubleHeightPlant("WeepingBlue");
-	public static final Block bullrush = new BlockDoubleHeightPlant("Bullrush");
-	public static final Block droughtedShrub = new BlockDoubleHeightPlant("DroughtedShrub");
-	public static final Block tangledStalk = new BlockDoubleHeightPlant("TangledStalk");
-	public static final Block highCapped = new BlockDoubleHeightPlant("HighCapped");
+	public static final Block sundew = new DoubleHeightPlant("Sundew");
+	public static final Block weepingBlue = new DoubleHeightPlant("WeepingBlue");
+	public static final Block bullrush = new DoubleHeightPlant("Bullrush");
+	public static final Block droughtedShrub = new DoubleHeightPlant("DroughtedShrub");
+	public static final Block tangledStalk = new DoubleHeightPlant("TangledStalk");
+	public static final Block highCapped = new DoubleHeightPlant("HighCapped");
+
+	// SMALL PLANTS
+	public static final Block fiddlehead = new SmallPlant("fiddlehead", true);
+	public static final Block fern = new SmallPlant("fern", true);
+	public static final Block fireBloom = new SmallPlant("fireBloom", false);
+	public static final Block swampPlant = new SmallPlant("swampPlant", false);
+	public static final Block nettleFlowered = new SmallPlant("nettleFlowered", false);
+	public static final Block nettle = new SmallPlant("nettle", false);
+	public static final Block mireCoral = new SmallPlant("mireCoral", false);
+	public static final Block desertShrub = new SmallPlant("desertShrub", false);
+	public static final Block bulbCappedShroom = new SmallMushroom("bulbCappedShroom");
+	public static final Block kaizerfinger = new SmallMushroom("kaizerfinger");
+	public static final Block bundleshroom = new SmallMushroom("bundleshroom");
+	public static final Block greenMushroom = new SmallMushroom("greenMushroom");
+	public static final Block dutchCap = new SmallMushroom("dutchCap");
 
 	// UNDERGROWTH
 	public static final Block thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
 	public static final Block blockTurnip = new BlockTurnip();
-	public static final Block fiddlehead = new BlockFiddlehead();
-	public static final Block plantSmall = new BlockSmallPlants().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusPlantSmall");
 	public static final Block hanger = new BlockHangerPlants().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusHanger");
 	public static final Block wallPlants = new BlockWallPlants().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebusWallPlants");
-	public static final Block fern = new BlockFern();
 	public static final Block mushroomCap0 = new BlockErebusMushroomCap(0);
 	public static final Block mushroomCap1 = new BlockErebusMushroomCap(1);
 	public static final Block mushroomCap2 = new BlockErebusMushroomCap(2);
@@ -265,7 +276,7 @@ public class ModBlocks
 	{
 		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, oreExtra, redGem, blockAmber, quickSand, ghostSand);
 		ModTabs.blocks.setTab(hollowLogAcacia, planks);
-		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, plantSmall, wallPlants);
+		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, wallPlants);
 		ModTabs.blocks.setTab(mushroomCap0, mushroomCap1, mushroomCap2, mushroomCap3, mushroomCap4, glowshroomStalkMain, glowshroom);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, erebusAltar);

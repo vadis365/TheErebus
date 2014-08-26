@@ -44,7 +44,7 @@ public class RenderZombieAnt extends RenderLiving
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glScaled(entity.width * 0.2F, entity.width * 0.2F, entity.width * 0.2F);
-		blockRenderer.renderBlockAsItem(ModBlocks.plantSmall, 0, 10.0F);
+		blockRenderer.renderBlockAsItem(ModBlocks.dutchCap, 0, 10.0F);
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
@@ -53,7 +53,7 @@ public class RenderZombieAnt extends RenderLiving
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glScaled(entity.width * 0.2F, entity.width * 0.2F, entity.width * 0.2F);
-		blockRenderer.renderBlockAsItem(ModBlocks.plantSmall, 1, 10.0F);
+		blockRenderer.renderBlockAsItem(ModBlocks.greenMushroom, 0, 10.0F);
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
@@ -62,7 +62,7 @@ public class RenderZombieAnt extends RenderLiving
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glScaled(entity.width * 0.2F, entity.width * 0.2F, entity.width * 0.2F);
-		blockRenderer.renderBlockAsItem(ModBlocks.plantSmall, 2, 10.0F);
+		blockRenderer.renderBlockAsItem(ModBlocks.kaizerfinger, 0, 10.0F);
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
@@ -71,7 +71,7 @@ public class RenderZombieAnt extends RenderLiving
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glScaled(entity.width * 0.2F, entity.width * 0.2F, entity.width * 0.2F);
-		blockRenderer.renderBlockAsItem(ModBlocks.plantSmall, 3, 10.0F);
+		blockRenderer.renderBlockAsItem(ModBlocks.bundleshroom, 0, 10.0F);
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
@@ -80,7 +80,7 @@ public class RenderZombieAnt extends RenderLiving
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glScaled(entity.width * 0.2F, entity.width * 0.2F, entity.width * 0.2F);
-		blockRenderer.renderBlockAsItem(ModBlocks.plantSmall, 4, 10.0F);
+		blockRenderer.renderBlockAsItem(ModBlocks.bulbCappedShroom, 0, 10.0F);
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();

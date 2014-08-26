@@ -1,12 +1,12 @@
 package erebus.world.feature.plant;
 
 import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.plants.BlockSmallPlants;
 
 //@formatter:off
 public class WorldGenNettlePatch extends WorldGenerator{
@@ -23,7 +23,7 @@ public class WorldGenNettlePatch extends WorldGenerator{
 			zz = (int)(z + 0.5F + MathHelper.sin(ang) * len);
 
 			if (world.isAirBlock(xx,yy,zz) && world.getBlock(xx,yy - 1,zz) == Blocks.grass){
-				world.setBlock(xx,yy,zz,ModBlocks.plantSmall,rand.nextBoolean() ? BlockSmallPlants.dataNettle : BlockSmallPlants.dataNettleFlowered,2);
+				world.setBlock(xx,yy,zz,rand.nextBoolean() ? ModBlocks.nettle : ModBlocks.nettleFlowered,0,2);
 				++placed;
 			}
 		}

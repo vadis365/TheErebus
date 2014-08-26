@@ -19,13 +19,13 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.item.ErebusMaterial;
 
-public class BlockDoubleHeightPlant extends BlockDoublePlant
+public class DoubleHeightPlant extends BlockDoublePlant
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon top, bottom;
 	private final String name;
 
-	public BlockDoubleHeightPlant(String name)
+	public DoubleHeightPlant(String name)
 	{
 		this.name = name;
 		setCreativeTab(ModTabs.blocks);

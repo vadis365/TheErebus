@@ -187,7 +187,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(ErebusMaterial.createStack(ErebusMaterial.DATA.mucusCharge), "SSS", "SRS", "SSS", 'S', Items.slime_ball, 'R', ErebusMaterial.createStack(ErebusMaterial.DATA.repellent));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mucusBomb, 1), "MMM", "MTM", "MMM", 'M', ErebusMaterial.createStack(ErebusMaterial.DATA.mucusCharge), 'T', Blocks.tnt);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.honeyCombBlock, 1), "NPN", "PCP", "NPN", 'P', ErebusMaterial.createStack(ErebusMaterial.DATA.papyrus), 'C', Blocks.chest, 'N', ErebusMaterial.createStack(ErebusMaterial.DATA.nectar));
-		GameRegistry.addRecipe(new ItemStack(Items.blaze_powder, 1), "FFF", "FFF", "FFF", 'F', new ItemStack(ModBlocks.plantSmall, 1, 13));
+		GameRegistry.addRecipe(new ItemStack(Items.blaze_powder, 1), "FFF", "FFF", "FFF", 'F', new ItemStack(ModBlocks.fireBloom));
 		GameRegistry.addRecipe(ErebusMaterial.createStack(ErebusMaterial.DATA.mossBall), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.wallPlants, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.scorchedPlanks, 4), ModBlocks.scorchedWood);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.rottenPlanks, 2), ModBlocks.rottenWood);

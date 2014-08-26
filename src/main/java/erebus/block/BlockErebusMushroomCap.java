@@ -13,7 +13,6 @@ import erebus.ModBlocks;
 
 public class BlockErebusMushroomCap extends Block
 {
-
 	public static final String[] shroomTypes = new String[] { "BulbCap", "1", "2", "3", "4" };// need names
 
 	private final int mushroomType;
@@ -50,7 +49,7 @@ public class BlockErebusMushroomCap extends Block
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune)
 	{
-		return Item.getItemFromBlock(ModBlocks.plantSmall);
+		return Item.getItemFromBlock(ModBlocks.dutchCap);
 	}
 
 	@Override

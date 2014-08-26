@@ -1,5 +1,6 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
@@ -23,6 +24,8 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(1);
 	private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 
+	public static final Block[] mushrooms = { ModBlocks.dutchCap, ModBlocks.kaizerfinger, ModBlocks.bundleshroom, ModBlocks.greenMushroom, ModBlocks.bulbCappedShroom };
+
 	@Override
 	public void decorate(){
 
@@ -32,7 +35,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus{
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
-				world.setBlock(xx,yy,zz,ModBlocks.plantSmall,rand.nextInt(5),2);
+				world.setBlock(xx,yy,zz,mushrooms[rand.nextInt(mushrooms.length)],0,2);
 			}
 		}
 

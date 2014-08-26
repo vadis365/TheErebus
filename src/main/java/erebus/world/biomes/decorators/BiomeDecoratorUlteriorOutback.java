@@ -4,7 +4,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.block.plants.BlockSmallPlants;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -88,7 +87,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus{
 						world.setBlock(xx,yy + 1,zz,Blocks.double_plant,10,2);
 					}
 					else if (rand.nextInt(80) == 0){
-						world.setBlock(xx,yy,zz,ModBlocks.plantSmall,BlockSmallPlants.dataFireBloom,2);
+						world.setBlock(xx,yy,zz,ModBlocks.fireBloom,0,2);
 					}
 					else{
 						world.setBlock(xx,yy,zz,Blocks.tallgrass,1,2);

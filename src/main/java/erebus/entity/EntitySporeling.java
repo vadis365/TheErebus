@@ -21,7 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModBiomes;
-import erebus.ModBlocks;
+import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
 public class EntitySporeling extends EntityAnimal
 {
@@ -80,7 +80,7 @@ public class EntitySporeling extends EntityAnimal
 					worldObj.setBlock(x, y, z, Blocks.brown_mushroom);
 				} else
 				{
-					worldObj.setBlock(x, y, z, ModBlocks.plantSmall, rand.nextInt(5), 3);
+					worldObj.setBlock(x, y, z, BiomeDecoratorFungalForest.mushrooms[rand.nextInt(BiomeDecoratorFungalForest.mushrooms.length)], 0, 3);
 				}
 			}
 		}
