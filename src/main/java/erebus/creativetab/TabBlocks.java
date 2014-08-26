@@ -3,26 +3,26 @@ package erebus.creativetab;
 import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
+import erebus.ModBlocks;
 
-public class CreativeTabErebusSpecialItem extends CreativeTabErebus
+public class TabBlocks extends CreativeTabErebus
 {
 
-	public CreativeTabErebusSpecialItem()
+	public TabBlocks()
 	{
-		super("erebus.special");
+		super("erebus.block");
 	}
 
 	@Override
 	public Item getTabIconItem()
 	{
-		return ModItems.erebusSpecialItem;
+		return Item.getItemFromBlock(ModBlocks.umberstone);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int func_151243_f()
 	{
-		return 1;
+		return 0;
 	}
 }

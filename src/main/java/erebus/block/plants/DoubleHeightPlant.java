@@ -28,7 +28,7 @@ public class DoubleHeightPlant extends BlockDoublePlant
 	public DoubleHeightPlant(String name)
 	{
 		this.name = name;
-		setCreativeTab(ModTabs.blocks);
+		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
 		setBlockName("erebus." + name.substring(0, 1).toLowerCase() + name.substring(1));
 	}

@@ -118,7 +118,7 @@ public class ModBlocks
 	public static final Block planks = new BlockPlanksErebus().setHardness(2.0F).setStepSound(Block.soundTypeWood);
 	public static final Block hollowLogAcacia = new BlockHollowLog().setHardness(0.7F).setStepSound(Block.soundTypeWood).setBlockName("erebus.log_hollow_acacia");
 	public static final Block erebusFlower = new BlockErebusFlower().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.flower");
-	public static final Block erebusStigma = new BlockErebusStigma().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.stigma");
+	public static final Block stiga = new BlockErebusStigma().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.stigma");
 	public static final Block scorchedWood = new BlockSimple(Material.wood).setHardness(2.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("erebus.log_scorched").setBlockTextureName("erebus:log_scorched");
 	public static final Block rottenWood = new BlockSimple(Material.wood).setHardness(2.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("erebus.log_rotten").setBlockTextureName("erebus:log_rotten");
 	public static final Block scorchedPlanks = new BlockSimple(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("erebus.planks_scorched").setBlockTextureName("erebus:planks_scorched");
@@ -152,8 +152,8 @@ public class ModBlocks
 	// UNDERGROWTH
 	public static final Block thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
 	public static final Block blockTurnip = new BlockTurnip();
-	public static final Block hanger = new BlockHangerPlants().setHardness(0.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebusHanger");
-	public static final Block wallPlants = new BlockWallPlants().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebusWallPlants");
+	public static final Block hanger = new BlockHangerPlants();
+	public static final Block wallPlants = new BlockWallPlants();
 	public static final Block mushroomCap0 = new BlockErebusMushroomCap(0);
 	public static final Block mushroomCap1 = new BlockErebusMushroomCap(1);
 	public static final Block mushroomCap2 = new BlockErebusMushroomCap(2);
@@ -276,9 +276,7 @@ public class ModBlocks
 	{
 		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, oreExtra, redGem, blockAmber, quickSand, ghostSand);
 		ModTabs.blocks.setTab(hollowLogAcacia, planks);
-		ModTabs.blocks.setTab(fern, fiddlehead, thorns, erebusFlower, erebusStigma, wallPlants);
-		ModTabs.blocks.setTab(mushroomCap0, mushroomCap1, mushroomCap2, mushroomCap3, mushroomCap4, glowshroomStalkMain, glowshroom);
-		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrop, bambooCrate, bambooLadder);
+		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, bambooLadder);
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, erebusAltar);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);

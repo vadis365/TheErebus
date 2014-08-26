@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 
 public class BlockThorns extends BlockVine implements IShearable
 {
@@ -16,6 +17,7 @@ public class BlockThorns extends BlockVine implements IShearable
 	{
 		super();
 		setTickRandomly(true);
+		setCreativeTab(ModTabs.plants);
 	}
 
 	@Override

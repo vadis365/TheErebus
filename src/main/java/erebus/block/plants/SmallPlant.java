@@ -31,7 +31,7 @@ public class SmallPlant extends BlockTallGrass
 		setHardness(0.0F);
 		this.colour = colour;
 		setStepSound(soundTypeGrass);
-		setCreativeTab(ModTabs.blocks);
+		setCreativeTab(ModTabs.plants);
 		setBlockName("erebus." + name);
 	}
 

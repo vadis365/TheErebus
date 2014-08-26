@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.ErebusMaterial.DATA;
@@ -24,10 +25,11 @@ public class BlockGlowshroom extends Block
 	public BlockGlowshroom()
 	{
 		super(Material.circuits);
-		setLightLevel(0.9375F);
 		setHardness(0.2F);
+		setLightLevel(0.9375F);
+		setCreativeTab(ModTabs.plants);
+		setBlockName("erebus.glowshroom");
 		setStepSound(Block.soundTypeWood);
-		setBlockName("glowshroom");
 		setBlockTextureName("erebus:mushroomYellow");
 		setBlockBounds(0.0625F, 0F, 0.0625F, 0.9375F, 1F, 0.9375F);
 	}

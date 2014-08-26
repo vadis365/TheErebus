@@ -134,7 +134,7 @@ public class EntityWorkerBee extends EntityTameable
 		Block block = worldObj.getBlock((int) posX, (int) posY - 1, (int) posZ);
 		if (isCollidedHorizontally)
 		{
-			if (block != ModBlocks.erebusStigma || !block.hasTileEntity(worldObj.getBlockMetadata((int) posX, (int) posY - 1, (int) posZ)))
+			if (block != ModBlocks.stiga || !block.hasTileEntity(worldObj.getBlockMetadata((int) posX, (int) posY - 1, (int) posZ)))
 			{
 				return true;
 			}
@@ -295,7 +295,7 @@ public class EntityWorkerBee extends EntityTameable
 	{
 		if (currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 1, MathHelper.floor_double(posZ)) == ModBlocks.erebusFlower && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ) || currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 1, MathHelper.floor_double(posZ)) == ModBlocks.erebusFlower && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 2, currentFlightTarget.posZ))
 		{
-			if (worldObj.getBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.erebusStigma || Utils.getTileEntity(worldObj, currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ, IInventory.class) != null)
+			if (worldObj.getBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.stiga || Utils.getTileEntity(worldObj, currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ, IInventory.class) != null)
 			{
 				if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ, currentFlightTarget.posX + 1, currentFlightTarget.posY + 2, currentFlightTarget.posZ + 1)).isEmpty())
 				{

@@ -38,7 +38,7 @@ public class BlockSaplingErebus extends BlockSapling
 	public BlockSaplingErebus(EnumWood wood)
 	{
 		this.wood = wood;
-		setCreativeTab(ModTabs.blocks);
+		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
 		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.8F, 0.9F);
 		setBlockName(Reference.MOD_ID + ".sapling." + wood.name());

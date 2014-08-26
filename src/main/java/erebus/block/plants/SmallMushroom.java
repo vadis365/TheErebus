@@ -32,7 +32,7 @@ public class SmallMushroom extends BlockMushroom
 		setHardness(0.0F);
 		setStepSound(soundTypeGrass);
 		setBlockName("erebus." + name);
-		setCreativeTab(ModTabs.blocks);
+		setCreativeTab(ModTabs.plants);
 	}
 
 	@Override

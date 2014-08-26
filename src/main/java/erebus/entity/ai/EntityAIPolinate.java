@@ -20,7 +20,7 @@ public class EntityAIPolinate extends EntityAIFindFlower
 		if (blockID == null)
 		{
 			return false;
-		} else if (blockID == ModBlocks.erebusStigma)
+		} else if (blockID == ModBlocks.stiga)
 		{
 			return true;
 		}

@@ -31,7 +31,7 @@ public class BlockErebusLeaves extends BlockLeaves
 		this.wood = wood;
 		setHardness(0.2F);
 		setLightOpacity(1);
-		setCreativeTab(ModTabs.blocks);
+		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
 		setBlockName(Reference.MOD_ID + ".leaves." + wood.name());
 		setBlockTextureName(Reference.MOD_ID + ":leaves_" + wood.name().toLowerCase());

@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.item.block.ItemBlockErebusFlower;
 
@@ -53,6 +54,7 @@ public class BlockErebusFlower extends Block implements ISubBlocksBlock
 	public BlockErebusFlower()
 	{
 		super(Material.plants);
+		setCreativeTab(ModTabs.plants);
 	}
 
 	@Override

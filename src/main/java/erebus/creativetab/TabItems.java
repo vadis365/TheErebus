@@ -5,18 +5,18 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 
-public class CreativeTabErebusGear extends CreativeTabErebus
+public class TabItems extends CreativeTabErebus
 {
 
-	public CreativeTabErebusGear()
+	public TabItems()
 	{
-		super("erebus.gear");
+		super("erebus.item");
 	}
 
 	@Override
 	public Item getTabIconItem()
 	{
-		return ModItems.jadePaxel;
+		return ModItems.erebusFood;
 	}
 
 	@Override

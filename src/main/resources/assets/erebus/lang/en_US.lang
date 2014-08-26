@@ -24,7 +24,26 @@ tile.erebus.log_hollow_acacia.name=Hollow Acacia Log
 tile.erebus.planks_varnished.name=Varnished Planks
 tile.erebus.saplessLog.name=Sapless log
 
-tile.hollowLogAcacia.name=Hollow Log
+tile.erebus.sundew.name=Sundew
+tile.erebus.weepingBlue.name=Weeping Blue
+tile.erebus.bullrush.name=Bullrush
+tile.erebus.droughtedShrub.name=Droughted Shrub
+tile.erebus.tangled Stalk.name=Tangled Stalk Mushrooms
+tile.erebus.highCapped.name=High Capped Mushroom
+
+tile.erebus.bulbCappedShroom.name=Bulb Capped Mushroom
+tile.erebus.greenMushroom.name=Grandma's Shoes Mushroom
+tile.erebus.bundleshroom.name=Sarcastic Czech Mushroom
+tile.erebus.kaizerfinger.name=Kaizer's Fingers Mushroom
+tile.erebus.dutchCap.name=Dutch Cap Mushroom
+tile.erebus.desertShrub.name=Desert Shrub 
+tile.erebus.mireCoral.name=Mire Coral
+tile.erebus.nettle.name=Nettle
+tile.erebus.nettleFlowered.name=Blooming Nettle
+tile.erebus.swampPlant.name=Swamp Plant
+tile.erebus.fireBloom.name=Firebloom
+tile.erebus.fern.name=Fern
+tile.erebus.fiddlehead.name=Fiddlehead
 
 tile.flowerPlanted.name=%s Flower
 tile.erebus.stigma.name=%s Flower Stigma
@@ -120,7 +139,6 @@ tile.redGem_0.name=Redgem
 tile.redGem_1.name=Redlamp
 tile.petrifiedCraftingTable.name=Petrified Crafting Table
 tile.umberFurnaceOFF.name=Umberfurnace
-tile.erebus.fiddlehead.name=Fiddlehead
 tile.insectRepellent.name=Insect Repellent Block
 tile.bambooTorch.name=Bamboo Torch
 tile.extenderThingy.name=Bamboo Extender
@@ -133,7 +151,6 @@ tile.waspNestBlock.name=Wasp Nest Block
 
 tile.blockSpiderSilk.name=Silk
 tile.thorns.name=Thorns
-tile.erebus.fern.name=Fern
 tile.tallgrass.name=Tall Grass
 tile.quickSand.name=Quicksand
 tile.ghostSand.name=Ghost Sand
@@ -152,32 +169,13 @@ tile.mushroom2Cap.name=Sarcastic Czech Mushroom
 tile.mushroom3Cap.name=Kaizer's Fingers Mushroom
 tile.mushroom4Cap.name=Dutch Cap Mushroom
 
-tile.glowshroom.name=Glowshroom
-tile.glowshroomStalk.name=Glowshroom Stalk
+tile.erebus.glowshroom.name=Glowshroom
+tile.erebus.glowshroomStalk.name=Glowshroom Stalk
 
-tile.erebus.sundew.name=Sundew
-tile.erebus.weepingBlue.name=Weeping Blue
-tile.erebus.bullrush.name=Bullrush
-tile.erebus.droughtedShrub.name=Droughted Shrub
-tile.erebus.tangled Stalk.name=Tangled Stalk Mushrooms
-tile.erebus.highCapped.name=High Capped Mushroom
+tile.erebus.wallPlants_0.name=Moss
+tile.erebus.wallPlants_1.name=Mould
 
-tile.erebusPlantSmall_0.name=Bulb Capped Mushroom
-tile.erebusPlantSmall_1.name=Grandma's Shoes Mushroom
-tile.erebusPlantSmall_2.name=Sarcastic Czech Mushroom
-tile.erebusPlantSmall_3.name=Kaizer's Fingers Mushroom
-tile.erebusPlantSmall_4.name=Dutch Cap Mushroom
-tile.erebusPlantSmall_5.name=Desert Shrub 
-tile.erebusPlantSmall_6.name=Mire Coral
-tile.erebusPlantSmall_7.name=Nettle
-tile.erebusPlantSmall_8.name=Blooming Nettle
-tile.erebusPlantSmall_9.name=Swamp Plant
-tile.erebusPlantSmall_10.name=Firebloom
-
-tile.erebusWallPlants_0.name=Moss
-tile.erebusWallPlants_1.name=Mould
-
-tile.erebusHanger.name=Hanger
+tile.erebus.hanger.name=Hanger
 tile.thorns.name=Thorns
 tile.erebusFern.name=Fern
 tile.erebusFiddlehead.name=Fiddlehead
@@ -394,6 +392,9 @@ itemGroup.erebus.block=Erebus Blocks
 itemGroup.erebus.item=Erebus Items
 itemGroup.erebus.gear=Erebus Gear
 itemGroup.erebus.special=Erebus Specials
+itemGroup.erebus.plants=Erebus Plants
+
+# Containers
 container.bambooCrate=Bamboo Crate
 container.colossalCrate=Bamboo Crate
 container.umberFurnace=Umber Furnace

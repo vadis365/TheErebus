@@ -129,7 +129,7 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 					world.setBlock(x,y + 3,z,ModBlocks.erebusFlower,14,2);
 				}
 				else{
-					world.setBlock(x,y + 3,z,ModBlocks.erebusStigma,primaryPetalColor,2);
+					world.setBlock(x,y + 3,z,ModBlocks.stiga,primaryPetalColor,2);
 				}
 
 				for(int a = 0; a < 3; a++){
@@ -174,7 +174,7 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 					world.setBlock(x,y + 1,z,ModBlocks.erebusFlower,14,2);
 				}
 				else{
-					world.setBlock(x,y + 1,z,ModBlocks.erebusStigma,primaryPetalColor,2);
+					world.setBlock(x,y + 1,z,ModBlocks.stiga,primaryPetalColor,2);
 				}
 
 				for(int a = 0; a < 4; a++){
@@ -204,7 +204,7 @@ public class WorldGenGiantFlowers extends WorldGenerator{
 					world.setBlock(x,y + 2,z,ModBlocks.erebusFlower,14,2);
 				}
 				else{
-					world.setBlock(x,y + 2,z,ModBlocks.erebusStigma,primaryPetalColor,2);
+					world.setBlock(x,y + 2,z,ModBlocks.stiga,primaryPetalColor,2);
 				}
 
 				for(int a = 0; a < 3; a++){

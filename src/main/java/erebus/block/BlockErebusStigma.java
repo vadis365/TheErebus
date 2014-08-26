@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
+import erebus.ModTabs;
 import erebus.item.block.ItemBlockErebusStigma;
 
 public class BlockErebusStigma extends Block implements ISubBlocksBlock
@@ -47,6 +48,7 @@ public class BlockErebusStigma extends Block implements ISubBlocksBlock
 	{
 		super(Material.plants);
 		setLightLevel(1.0F);
+		setCreativeTab(ModTabs.plants);
 	}
 
 	@Override

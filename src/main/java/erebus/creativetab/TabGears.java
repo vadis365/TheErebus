@@ -3,20 +3,20 @@ package erebus.creativetab;
 import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
+import erebus.ModItems;
 
-public class CreativeTabErebusBlock extends CreativeTabErebus
+public class TabGears extends CreativeTabErebus
 {
 
-	public CreativeTabErebusBlock()
+	public TabGears()
 	{
-		super("erebus.block");
+		super("erebus.gear");
 	}
 
 	@Override
 	public Item getTabIconItem()
 	{
-		return Item.getItemFromBlock(ModBlocks.umberstone);
+		return ModItems.jadePaxel;
 	}
 
 	@Override

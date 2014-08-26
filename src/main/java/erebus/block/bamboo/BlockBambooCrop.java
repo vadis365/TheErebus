@@ -15,6 +15,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
+import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.ErebusMaterial.DATA;
 
@@ -28,6 +29,7 @@ public class BlockBambooCrop extends Block
 	{
 		super(Material.wood);
 		setTickRandomly(true);
+		setCreativeTab(ModTabs.plants);
 		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);
 	}
 

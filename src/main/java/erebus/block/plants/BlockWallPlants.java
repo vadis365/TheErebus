@@ -27,6 +27,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.item.block.ItemBlockErebusPlantSmall;
 
 public class BlockWallPlants extends Block implements IShearable, ISubBlocksBlock
@@ -42,7 +43,11 @@ public class BlockWallPlants extends Block implements IShearable, ISubBlocksBloc
 	public BlockWallPlants()
 	{
 		super(Material.plants);
+		setHardness(0.2F);
 		setTickRandomly(true);
+		setCreativeTab(ModTabs.plants);
+		setStepSound(Block.soundTypeGrass);
+		setBlockName("erebus.wallPlants");
 	}
 
 	@Override
