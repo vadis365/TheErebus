@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.item.ErebusMaterial;
+import erebus.item.Materials;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
 
@@ -48,7 +48,7 @@ public class BlockLogErebus extends BlockLog
 			drops.add(new ItemStack(ModBlocks.saplessLog));
 			for (int i = 0; i < 1 + world.rand.nextInt(2 + fortune); i++)
 			{
-				drops.add(new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.sapBall.ordinal()));
+				drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.sapBall.ordinal()));
 			}
 			return drops;
 		}

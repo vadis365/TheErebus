@@ -16,7 +16,7 @@ public class Planticide extends Item
 	public Planticide()
 	{
 		setCreativeTab(ModTabs.items);
-		setUnlocalizedName("planticide");
+		setUnlocalizedName("erebus.planticide");
 		setTextureName("erebus:planticide");
 	}
 

@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class CompoundGoggles extends ItemArmor
 {
@@ -33,6 +33,6 @@ public class CompoundGoggles extends ItemArmor
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material)
 	{
-		return material.getItem() == ModItems.erebusMaterials && material.getItemDamage() == DATA.compoundLens.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.compoundLens.ordinal();
 	}
 }

@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityAntlionMiniBoss extends EntityMob
 {
@@ -107,7 +107,7 @@ public class EntityAntlionMiniBoss extends EntityMob
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
 		{
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
+			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.plateExo.ordinal()), 0.0F);
 		}
 	}
 

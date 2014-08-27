@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class BlockBambooCrop extends Block
 {
@@ -36,7 +36,7 @@ public class BlockBambooCrop extends Block
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune)
 	{
-		return meta >= 8 && rand.nextInt(17) <= 3 ? null : ModItems.erebusMaterials;
+		return meta >= 8 && rand.nextInt(17) <= 3 ? null : ModItems.materials;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class BlockBambooCrop extends Block
 		if (metadata == 0 && world.rand.nextInt(metadata >= 8 ? 35 : 20) == 0)
 		{
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(new ItemStack(ModItems.erebusMaterials, 1, DATA.bambooShoot.ordinal()));
+			ret.add(new ItemStack(ModItems.materials, 1, DATA.bambooShoot.ordinal()));
 			return ret;
 		}
 		return super.getDrops(world, x, y, z, metadata, fortune);

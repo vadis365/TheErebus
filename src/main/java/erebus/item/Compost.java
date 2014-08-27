@@ -13,7 +13,7 @@ public class Compost extends Item
 	public Compost()
 	{
 		setCreativeTab(ModTabs.items);
-		setUnlocalizedName("compost");
+		setUnlocalizedName("erebus.compost");
 		setTextureName("erebus:compost");
 	}
 

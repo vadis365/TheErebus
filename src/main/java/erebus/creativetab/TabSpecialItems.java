@@ -16,7 +16,7 @@ public class TabSpecialItems extends CreativeTabErebus
 	@Override
 	public Item getTabIconItem()
 	{
-		return ModItems.erebusSpecialItem;
+		return ModItems.specialItem;
 	}
 
 	@Override

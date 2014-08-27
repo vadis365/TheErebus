@@ -6,7 +6,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 import erebus.item.SprintLeggings;
 
 public class RecipeSprintLeggingsUpgrades implements IRecipe
@@ -30,7 +30,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe
 			}
 			++cnt;
 
-			if (is.getItem() == ModItems.erebusMaterials && is.getItemDamage() == DATA.supernaturalvelocity.ordinal())
+			if (is.getItem() == ModItems.materials && is.getItemDamage() == DATA.supernaturalvelocity.ordinal())
 			{
 				hasVelocity = true;
 			} else if (is.getItem() == ModItems.sprintLeggings)
@@ -63,7 +63,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe
 				{
 					return false;
 				}
-			} else if (!(is.getItem() == ModItems.erebusMaterials && is.getItemDamage() == DATA.bioVelocity.ordinal()))
+			} else if (!(is.getItem() == ModItems.materials && is.getItemDamage() == DATA.bioVelocity.ordinal()))
 			{
 				return false;
 			}

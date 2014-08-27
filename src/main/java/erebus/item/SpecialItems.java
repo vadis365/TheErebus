@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ErebusSpecial extends Item
+public class SpecialItems extends Item
 {
 
 	public static final String[] iconPaths = new String[] { "rhinoRidingKit", "beetleTamingAmulet", "umberGolemCore", "umberGolemHead", "umberGolemClaw", "umberGolemLegs" };
@@ -22,7 +22,7 @@ public class ErebusSpecial extends Item
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
 
-	public ErebusSpecial()
+	public SpecialItems()
 	{
 		setHasSubtypes(true);
 		setMaxDamage(0);

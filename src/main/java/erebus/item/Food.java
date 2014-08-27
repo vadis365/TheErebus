@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unchecked")
-public class ErebusFood extends ItemFood
+public class Food extends ItemFood
 {
 
 	public static enum FoodType
@@ -68,7 +68,7 @@ public class ErebusFood extends ItemFood
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
 
-	public ErebusFood()
+	public Food()
 	{
 		super(3, 0.5F, false);
 		setHasSubtypes(true);

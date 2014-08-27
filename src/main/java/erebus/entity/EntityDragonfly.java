@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityDragonfly extends EntityMob
 {
@@ -359,10 +359,10 @@ public class EntityDragonfly extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.dragonflyWing.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.dragonflyWing.ordinal()), 0.0F);
 		if (rand.nextInt(5) == 0)
 		{
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1 + looting, DATA.compoundEyes.ordinal()), 0.0F);
+			entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(1) + 1 + looting, DATA.compoundEyes.ordinal()), 0.0F);
 		}
 		if (getSkin() == 0)
 		{

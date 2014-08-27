@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModTabs;
-import erebus.item.ErebusMaterial;
+import erebus.item.Materials;
 
 public class SmallPlant extends BlockTallGrass
 {
@@ -67,12 +67,12 @@ public class SmallPlant extends BlockTallGrass
 		if ("nettle".equals(name))
 		{
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(ErebusMaterial.createStack(ErebusMaterial.DATA.nettleleaves));
+			ret.add(Materials.createStack(Materials.DATA.nettleleaves));
 			return ret;
 		} else if ("nettleFlowered".equals(name))
 		{
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(ErebusMaterial.createStack(ErebusMaterial.DATA.nettleflowers));
+			ret.add(Materials.createStack(Materials.DATA.nettleflowers));
 			return ret;
 		} else if ("desertShrub".equals(name) || "mireCoral".equals(name) || "fireBloom".equals(name) || "swampPlant".equals(name))
 		{

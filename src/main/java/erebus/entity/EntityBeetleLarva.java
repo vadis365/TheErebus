@@ -248,10 +248,10 @@ public class EntityBeetleLarva extends EntityAnimal
 	{
 		if (isBurning())
 		{
-			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 1), 0.0F);
+			entityDropItem(new ItemStack(ModItems.food, 1, 1), 0.0F);
 		} else
 		{
-			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 0), 0.0F);
+			entityDropItem(new ItemStack(ModItems.food, 1, 0), 0.0F);
 		}
 	}
 

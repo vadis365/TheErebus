@@ -88,7 +88,7 @@ public class BlockErebusAltar extends BlockContainer
 			{
 				ItemStack is = ((EntityItem) entity).getEntityItem();
 
-				if (is.getItem() == ModItems.erebusMaterials && isValidOffering(is.getItemDamage()))
+				if (is.getItem() == ModItems.materials && isValidOffering(is.getItemDamage()))
 				{
 					if (((EntityItem) entity).age > 20)
 					{

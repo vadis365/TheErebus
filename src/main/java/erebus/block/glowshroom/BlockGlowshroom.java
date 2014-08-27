@@ -14,7 +14,7 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class BlockGlowshroom extends Block
 {
@@ -76,7 +76,7 @@ public class BlockGlowshroom extends Block
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune)
 	{
-		return ModItems.erebusMaterials;
+		return ModItems.materials;
 	}
 
 	@Override

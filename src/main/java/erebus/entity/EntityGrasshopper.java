@@ -99,10 +99,10 @@ public class EntityGrasshopper extends EntityCreature
 	{
 		if (isBurning())
 		{
-			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 3), 0.0F);
+			entityDropItem(new ItemStack(ModItems.food, 1, 3), 0.0F);
 		} else
 		{
-			entityDropItem(new ItemStack(ModItems.erebusFood, 1, 2), 0.0F);
+			entityDropItem(new ItemStack(ModItems.food, 1, 2), 0.0F);
 		}
 	}
 

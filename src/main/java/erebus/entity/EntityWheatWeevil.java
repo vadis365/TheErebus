@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityWheatWeevil extends EntityCreature
 {
@@ -143,7 +143,7 @@ public class EntityWheatWeevil extends EntityCreature
 					break;
 
 				case 4:
-					entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.bambooShoot.ordinal()), 0F);
+					entityDropItem(new ItemStack(ModItems.materials, 1 + looting, DATA.bambooShoot.ordinal()), 0F);
 					break;
 
 				case 5:

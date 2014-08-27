@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 import erebus.lib.EnumWood;
 
 public class EntityCicada extends EntityCreature
@@ -100,7 +100,7 @@ public class EntityCicada extends EntityCreature
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.repellent.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.repellent.ordinal()), 0.0F);
 	}
 
 	@Override

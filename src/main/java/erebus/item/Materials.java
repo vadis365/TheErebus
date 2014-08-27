@@ -22,7 +22,7 @@ import erebus.block.plants.BlockHangerPlants;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketSound;
 
-public class ErebusMaterial extends Item
+public class Materials extends Item
 {
 
 	public enum DATA
@@ -85,13 +85,13 @@ public class ErebusMaterial extends Item
 
 	public static ItemStack createStack(DATA data, int size)
 	{
-		return new ItemStack(ModItems.erebusMaterials, size, data.ordinal());
+		return new ItemStack(ModItems.materials, size, data.ordinal());
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
 
-	public ErebusMaterial()
+	public Materials()
 	{
 		setHasSubtypes(true);
 		setMaxDamage(0);

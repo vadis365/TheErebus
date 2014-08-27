@@ -13,7 +13,7 @@ public class BambucketBeetleJuice extends BambucketDrinkable
 	public BambucketBeetleJuice()
 	{
 		super("erebus:bambucketOfBeetleJuice");
-		setUnlocalizedName("bambucketBeetleJuice");
+		setUnlocalizedName("erebus.bambucketBeetleJuice");
 		setTextureName("erebus:bambucketBeetleJuice");
 	}
 

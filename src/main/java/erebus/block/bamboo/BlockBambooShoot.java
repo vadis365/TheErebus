@@ -23,7 +23,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class BlockBambooShoot extends BlockFlower implements IPlantable
 {
@@ -154,7 +154,7 @@ public class BlockBambooShoot extends BlockFlower implements IPlantable
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune)
 	{
-		return ModItems.erebusMaterials;
+		return ModItems.materials;
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class BlockBambooShoot extends BlockFlower implements IPlantable
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return ModItems.erebusMaterials;
+		return ModItems.materials;
 	}
 
 	@Override

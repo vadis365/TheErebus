@@ -13,7 +13,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityJumpingSpider extends EntitySpider
 {
@@ -96,7 +96,7 @@ public class EntityJumpingSpider extends EntitySpider
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override

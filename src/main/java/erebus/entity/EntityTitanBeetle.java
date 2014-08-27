@@ -36,9 +36,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.ErebusFood;
-import erebus.item.ErebusMaterial.DATA;
-import erebus.item.ErebusSpecial;
+import erebus.item.Food;
+import erebus.item.Materials.DATA;
+import erebus.item.SpecialItems;
 import erebus.tileentity.TileEntityTitanChest;
 
 public class EntityTitanBeetle extends EntityTameable
@@ -257,15 +257,15 @@ public class EntityTitanBeetle extends EntityTameable
 	{
 		if (getTameState() >= 2)
 		{
-			entityDropItem(new ItemStack(ModItems.erebusSpecialItem, 1, ErebusSpecial.dataRhinoRidingKit), 0.0F);
+			entityDropItem(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataRhinoRidingKit), 0.0F);
 		}
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
 		{
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.plateExo.ordinal()), 0.0F);
+			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.plateExo.ordinal()), 0.0F);
 		}
 
-		entityDropItem(new ItemStack(ModItems.erebusFood, 1 + rand.nextInt(1), isBurning() ? ErebusFood.FoodType.titanChopCooked.ordinal() : ErebusFood.FoodType.titanChop.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? Food.FoodType.titanChopCooked.ordinal() : Food.FoodType.titanChop.ordinal()), 0.0F);
 		dropChests();
 	}
 
@@ -316,7 +316,7 @@ public class EntityTitanBeetle extends EntityTameable
 			openGUI(player);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.erebusSpecialItem && is.getItemDamage() == 1 && getTameState() == 0)
+		if (is != null && is.getItem() == ModItems.specialItem && is.getItemDamage() == 1 && getTameState() == 0)
 		{
 			healingBuff = 20F;
 			is.stackSize--;
@@ -329,7 +329,7 @@ public class EntityTitanBeetle extends EntityTameable
 			heal(healingBuff);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.erebusSpecialItem && is.getItemDamage() == 0 && getTameState() == 1)
+		if (is != null && is.getItem() == ModItems.specialItem && is.getItemDamage() == 0 && getTameState() == 1)
 		{
 			is.stackSize--;
 			player.swingItem();
@@ -350,7 +350,7 @@ public class EntityTitanBeetle extends EntityTameable
 			}
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.erebusMaterials && is.getItemDamage() == 11 && getTameState() != 0)
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == 11 && getTameState() != 0)
 		{
 			healingBuff = 5.0F;
 			if (getHealth() < getMaxHealth())

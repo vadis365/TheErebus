@@ -100,7 +100,7 @@ public class BlockBones extends BlockContainer
 				id = Items.bone;
 			} else
 			{
-				id = ModItems.erebusMaterials;
+				id = ModItems.materials;
 				damage = 2;
 			}
 			if (id != null)

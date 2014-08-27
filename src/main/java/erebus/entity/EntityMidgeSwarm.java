@@ -17,7 +17,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityMidgeSwarm extends EntityMob
 {
@@ -229,10 +229,10 @@ public class EntityMidgeSwarm extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + 1, DATA.flyWing.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(2) + 1, DATA.flyWing.ordinal()), 0.0F);
 		if (rand.nextInt(5) == 0)
 		{
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(1) + 1, DATA.compoundEyes.ordinal()), 0.0F);
+			entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(1) + 1, DATA.compoundEyes.ordinal()), 0.0F);
 		}
 	}
 

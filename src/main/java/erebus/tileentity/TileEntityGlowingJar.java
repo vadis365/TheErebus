@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial;
+import erebus.item.Materials;
 
 public class TileEntityGlowingJar extends TileEntity
 {
@@ -21,7 +21,7 @@ public class TileEntityGlowingJar extends TileEntity
 		{
 			ghostItem = new EntityItem(worldObj);
 			ghostItem.hoverStart = 0.0F;
-			ghostItem.setEntityItemStack(new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.bioLuminescence.ordinal()));
+			ghostItem.setEntityItemStack(new ItemStack(ModItems.materials, 1, Materials.DATA.bioLuminescence.ordinal()));
 		}
 		return ghostItem;
 	}

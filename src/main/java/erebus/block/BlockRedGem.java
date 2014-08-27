@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 import erebus.item.block.ItemBlockGeneric;
 
 public class BlockRedGem extends Block implements ISubBlocksBlock
@@ -84,7 +84,7 @@ public class BlockRedGem extends Block implements ISubBlocksBlock
 	@Override
 	public Item getItemDropped(int meta, Random random, int fortune)
 	{
-		return meta == 0 ? ModItems.erebusMaterials : Item.getItemFromBlock(this);
+		return meta == 0 ? ModItems.materials : Item.getItemFromBlock(this);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import codechicken.nei.recipe.DefaultOverlayHandler;
 import erebus.ModBlocks;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ErebusMaterial;
+import erebus.item.Materials;
 import erebus.lib.Reference;
 
 public class NEIErebusConfig implements IConfigureNEI
@@ -36,27 +36,27 @@ public class NEIErebusConfig implements IConfigureNEI
 		if (!ConfigHandler.INSTANCE.aluminium)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreAluminium));
-			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotAluminium));
+			API.hideItem(Materials.createStack(Materials.DATA.ingotAluminium));
 		}
 		if (!ConfigHandler.INSTANCE.copper)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreCopper));
-			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotCopper));
+			API.hideItem(Materials.createStack(Materials.DATA.ingotCopper));
 		}
 		if (!ConfigHandler.INSTANCE.lead)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreLead));
-			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotLead));
+			API.hideItem(Materials.createStack(Materials.DATA.ingotLead));
 		}
 		if (!ConfigHandler.INSTANCE.silver)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreSilver));
-			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotSilver));
+			API.hideItem(Materials.createStack(Materials.DATA.ingotSilver));
 		}
 		if (!ConfigHandler.INSTANCE.tin)
 		{
 			API.hideItem(new ItemStack(ModBlocks.oreTin));
-			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotTin));
+			API.hideItem(Materials.createStack(Materials.DATA.ingotTin));
 		}
 
 		API.hideItem(new ItemStack(ModBlocks.hanger));

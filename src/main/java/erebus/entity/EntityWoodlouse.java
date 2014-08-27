@@ -17,7 +17,7 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityWoodlouse extends EntityCreature
 {
@@ -134,6 +134,6 @@ public class EntityWoodlouse extends EntityCreature
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1 + looting, DATA.whetstonePowder.ordinal()), 0F);
+		entityDropItem(new ItemStack(ModItems.materials, 1 + looting, DATA.whetstonePowder.ordinal()), 0F);
 	}
 }

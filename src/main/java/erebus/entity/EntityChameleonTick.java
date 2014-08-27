@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityChameleonTick extends EntityMob
 {
@@ -89,7 +89,7 @@ public class EntityChameleonTick extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.camoPowder.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.camoPowder.ordinal()), 0.0F);
 	}
 
 	@Override

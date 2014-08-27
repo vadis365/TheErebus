@@ -14,7 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityFly extends EntityAmbientCreature
 {
@@ -280,11 +280,11 @@ public class EntityFly extends EntityAmbientCreature
 	{
 		if (rand.nextInt(10) == 0)
 		{
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.flyWing.ordinal()), 0.0F);
+			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.flyWing.ordinal()), 0.0F);
 		}
 		if (rand.nextInt(20) == 0)
 		{
-			entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.compoundEyes.ordinal()), 0.0F);
+			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.compoundEyes.ordinal()), 0.0F);
 		}
 	}
 }

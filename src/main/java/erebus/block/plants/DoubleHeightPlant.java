@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.item.ErebusMaterial;
+import erebus.item.Materials;
 
 public class DoubleHeightPlant extends BlockDoublePlant
 {
@@ -44,13 +44,13 @@ public class DoubleHeightPlant extends BlockDoublePlant
 
 		if ("Sundew".equals(name))
 		{
-			drops.add(new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.bioLuminescence.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.bioLuminescence.ordinal()));
 		} else if ("WeepingBlue".equals(name))
 		{
-			drops.add(new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.weepingBluePetal.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.weepingBluePetal.ordinal()));
 		} else if ("Bullrush".equals(name))
 		{
-			drops.add(new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.papyrus.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.papyrus.ordinal()));
 		} else
 		{
 			ItemStack seed = ForgeHooks.getGrassSeed(world);

@@ -54,7 +54,7 @@ public class XPAltar extends BlockErebusAltar
 			ItemStack is = ((EntityItem) entity).getEntityItem();
 			int metadata = is.getItemDamage();
 			setItemOffering(is.getItem(), metadata);
-			if (is.getItem() == ModItems.erebusMaterials)
+			if (is.getItem() == ModItems.materials)
 			{
 				te.setUses(te.getUses() + is.stackSize);
 				entity.setDead();

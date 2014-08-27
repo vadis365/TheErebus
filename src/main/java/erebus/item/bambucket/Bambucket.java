@@ -23,7 +23,7 @@ public class Bambucket extends Item
 	public Bambucket()
 	{
 		this(Blocks.air);
-		setUnlocalizedName("bambucket");
+		setUnlocalizedName("erebus.bambucket");
 		setTextureName("erebus:bambucket");
 	}
 

@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModMaterials;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class ReinExoskeletonArmor extends ItemArmor
 {
@@ -33,6 +33,6 @@ public class ReinExoskeletonArmor extends ItemArmor
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material)
 	{
-		return material.getItem() == ModItems.erebusMaterials && material.getItemDamage() == DATA.reinforcedPlateExo.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.reinforcedPlateExo.ordinal();
 	}
 }

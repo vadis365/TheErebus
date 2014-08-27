@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityPrayingMantis extends EntityMob
 {
@@ -104,7 +104,7 @@ public class EntityPrayingMantis extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.camoPowder.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.camoPowder.ordinal()), 0.0F);
 	}
 
 	@Override

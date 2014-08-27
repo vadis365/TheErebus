@@ -17,7 +17,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityCentipede extends EntityMob
 {
@@ -119,14 +119,14 @@ public class EntityCentipede extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2) + looting, DATA.bioVelocity.ordinal()), 0.0F);
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(2) + looting, DATA.bioVelocity.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
 	}
 
 	@Override
 	protected void dropRareDrop(int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
 	}
 
 	@Override

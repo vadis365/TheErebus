@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ErebusMaterial.DATA;
+import erebus.item.Materials.DATA;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData
 {
@@ -144,7 +144,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.erebusMaterials, 1, DATA.waspSting.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.waspSting.ordinal()), 0.0F);
 	}
 
 	public boolean isFlying()

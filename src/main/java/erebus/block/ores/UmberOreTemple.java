@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import erebus.ModItems;
-import erebus.item.ErebusMaterial;
+import erebus.item.Materials;
 
 public class UmberOreTemple extends UmberOre
 {
@@ -17,12 +17,12 @@ public class UmberOreTemple extends UmberOre
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune)
 	{
-		return ModItems.erebusMaterials;
+		return ModItems.materials;
 	}
 
 	@Override
 	public int damageDropped(int meta)
 	{
-		return ErebusMaterial.DATA.templeRock.ordinal();
+		return Materials.DATA.templeRock.ordinal();
 	}
 }
