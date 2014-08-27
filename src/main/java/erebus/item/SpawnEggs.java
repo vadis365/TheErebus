@@ -46,14 +46,15 @@ public class SpawnEggs extends ItemMonsterPlacer
 	public String getItemStackDisplayName(ItemStack is)
 	{
 		String s = StatCollector.translateToLocal(getUnlocalizedName() + ".name").trim();
+		String mob = "";
 
 		EggData egg = getEggData(is);
 		if (egg != null)
 		{
-			s += " " + StatCollector.translateToLocal("entity." + Reference.MOD_ID + "." + egg.entityName + ".name");
+			mob = StatCollector.translateToLocal("entity." + Reference.MOD_ID + "." + egg.entityName + ".name");
 		}
 
-		return s;
+		return String.format(s, mob);
 	}
 
 	@Override

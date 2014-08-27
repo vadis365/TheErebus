@@ -327,6 +327,7 @@ item.erebus.rolledNewspaper.name=Rolled Up Newspaper
 item.erebus.antTamingAmulet.name=Ant Medallion
 item.erebus.planticide.name=Herbicide
 item.erebus.compost.name=Compost
+item.erebus.monsterPlacer.name=Spawn % s
 
 item.erebus.soulCrystal.name=Soul Crystal
 item.erebus.jadeHeart.name=Jade Heart
@@ -381,7 +382,6 @@ entity.erebus.punchroom.name=Punchroom
 entity.erebus.crushroom.name=Crushroom
 entity.erebus.blackAnt.name=Black Ant
 entity.erebus.zombieAnt.name=Zombie Ant
-entity.erebus.nope.name=Nothing Here
 
 # Fluids
 fluid.honey=Honey
