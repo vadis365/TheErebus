@@ -25,6 +25,9 @@ public class BlockErebusPortal extends BlockContainer
 		super(Material.portal);
 		setBlockUnbreakable();
 		setTickRandomly(true);
+		setLightLevel(1.0F);
+		setStepSound(Block.soundTypeGlass);
+		setBlockName("erebus.portal");
 		setBlockTextureName("erebus:erebusPortal");
 	}
 

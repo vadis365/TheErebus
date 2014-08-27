@@ -35,7 +35,7 @@ public class BlockUmberFurnace extends BlockContainer
 	{
 		super(Material.rock);
 		setHardness(3.5F);
-		setBlockName("umberFurnace");
+		setBlockName("erebus.umberFurnace");
 		setCreativeTab(ModTabs.blocks);
 		setStepSound(Block.soundTypeStone);
 	}

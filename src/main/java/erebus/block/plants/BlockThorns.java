@@ -1,5 +1,6 @@
 package erebus.block.plants;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
@@ -16,8 +17,11 @@ public class BlockThorns extends BlockVine implements IShearable
 	public BlockThorns()
 	{
 		super();
-		setTickRandomly(true);
+		setHardness(0.2F);
+		setBlockName("erebus.thorns");
 		setCreativeTab(ModTabs.plants);
+		setStepSound(Block.soundTypeGrass);
+		setBlockTextureName("erebus:thorns");
 	}
 
 	@Override
@@ -30,7 +34,6 @@ public class BlockThorns extends BlockVine implements IShearable
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess access, int x, int y, int z)
 	{
-		return 16777215;
+		return 0xFFFFFF;
 	}
-
 }

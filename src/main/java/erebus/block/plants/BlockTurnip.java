@@ -22,7 +22,7 @@ public class BlockTurnip extends BlockCrops
 
 	public BlockTurnip()
 	{
-		setBlockName("turnipsCrop");
+		setBlockName("erebus.turnipsCrop");
 	}
 
 	@Override

@@ -106,15 +106,15 @@ public class ModBlocks
 {
 
 	// PORTAL
-	public static final BlockErebusPortal portal = (BlockErebusPortal) new BlockErebusPortal().setHardness(-1F).setLightLevel(1.0F).setStepSound(Block.soundTypeGlass).setBlockName("portalErebus");
+	public static final BlockErebusPortal portal = new BlockErebusPortal();
 
 	// TERRAIN
-	public static final Block umberstone = new BlockUmberstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("umberstone");
-	public static final Block redGem = new BlockRedGem().setHardness(0.3F).setLightLevel(1F).setStepSound(Block.soundTypeGlass).setBlockName("redGem");
-	public static final Block blockAmber = new BlockAmber().setHardness(1.5F).setResistance(10.0F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("blockAmber");
-	public static final Block quickSand = new BlockQuickSand().setHardness(28F).setStepSound(Block.soundTypeSand).setBlockName("quickSand").setBlockTextureName("erebus:quickSand");
-	public static final Block ghostSand = new BlockGhostSand().setHardness(0.42F).setStepSound(Block.soundTypeSand).setBlockName("ghostSand").setBlockTextureName("erebus:ghostSand");
-	public static final Block umberstoneButton = new BlockButtonUmberstone().setHardness(0.5F).setStepSound(Block.soundTypeStone).setBlockName("umberstoneButton");
+	public static final Block umberstone = new BlockUmberstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberstone");
+	public static final Block redGem = new BlockRedGem().setHardness(0.3F).setLightLevel(1F).setStepSound(Block.soundTypeGlass).setBlockName("erebus.redGem");
+	public static final Block blockAmber = new BlockAmber().setHardness(1.5F).setResistance(10.0F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("erebus.amber");
+	public static final Block quickSand = new BlockQuickSand().setHardness(28F).setStepSound(Block.soundTypeSand).setBlockName("erebus.quickSand").setBlockTextureName("erebus:quickSand");
+	public static final Block ghostSand = new BlockGhostSand().setHardness(0.42F).setStepSound(Block.soundTypeSand).setBlockName("erebus.ghostSand").setBlockTextureName("erebus:ghostSand");
+	public static final Block umberstoneButton = new BlockButtonUmberstone().setHardness(0.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberstoneButton");
 
 	// ORES
 	public static final Block oreCoal = new UmberOre(Blocks.coal_ore, "Coal", 0);
@@ -171,7 +171,7 @@ public class ModBlocks
 	public static final Block dutchCap = new SmallMushroom("dutchCap");
 
 	// UNDERGROWTH
-	public static final Block thorns = new BlockThorns().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("thorns").setBlockTextureName("erebus:thorns");
+	public static final Block thorns = new BlockThorns();
 	public static final Block blockTurnip = new BlockTurnip();
 	public static final Block hanger = new BlockHangerPlants();
 	public static final Block wallPlants = new BlockWallPlants();
@@ -198,39 +198,34 @@ public class ModBlocks
 	public static final Block flowerPlanted = new BlockPlantedGiantFlower();
 
 	// DECORATIONS AND UTILITIES
-	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("blockSilk").setBlockTextureName("erebus:blockSilk");
-	public static final Block mirBrick = new BlockSimple(Material.rock).setHardness(1.5F).setStepSound(Block.soundTypeStone).setBlockName("mirbrick").setBlockTextureName("erebus:mirbrick");
-	public static final Block petrifiedWoodPlanks = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodPlanks").setBlockTextureName("erebus:planks_petrifiedWood");
-	public static final Block petrifiedCraftingTable = new BlockPetrifiedCraftingTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("petrifiedCraftingTable");
-	public static final Block bambooCrate = new BlockBambooCrate().setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("bambooCrate");
+	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.blockSilk").setBlockTextureName("erebus:blockSilk");
+	public static final Block mirBrick = new BlockSimple(Material.rock).setHardness(1.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.mirbrick").setBlockTextureName("erebus:mirbrick");
+	public static final Block petrifiedWoodPlanks = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("erebus.petrifiedWoodPlanks").setBlockTextureName("erebus:planks_petrifiedWood");
+	public static final Block petrifiedCraftingTable = new BlockPetrifiedCraftingTable().setHardness(2.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.petrifiedCraftingTable");
+	public static final Block bambooCrate = new BlockBambooCrate().setHardness(2.0F).setStepSound(Block.soundTypeWood).setBlockName("erebus.bambooCrate");
 	public static final Block umberFurnace = new BlockUmberFurnace();
-	public static final Block umberPaver = new BlockUmberPaver().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("umberPaver");
-	public static final Block insectRepellent = new BlockInsectRepellent().setBlockName("insectRepellent");
-	public static final Block bambooShoot = new BlockBambooShoot().setCreativeTab(null).setBlockName("bambooShoot").setBlockTextureName("erebus:bambooShoot");
-	public static final Block bambooCrop = new BlockBambooCrop().setHardness(1.0F).setStepSound(Block.soundTypeWood).setBlockName("bambooCrop").setBlockTextureName("erebus:bambooCropBase");
-	public static final Block bambooTorch = new BlockBambooTorch().setHardness(0.0F).setBlockName("bambooTorch");
-	public static final Block erebusAltar = new BlockErebusAltar().setHardness(20.0F).setBlockName("erebusAltar");
-	public static final Block erebusAltarLightning = new LightningAltar().setHardness(20.0F).setBlockName("erebusAltarLightning");
-	public static final Block erebusAltarHealing = new HealingAltar().setHardness(20.0F).setBlockName("erebusAltarHealing");
-	public static final Block erebusAltarXP = new XPAltar().setHardness(20.0F).setBlockName("erebusAltarXP");
-	public static final Block erebusAltarRepair = new RepairAltar().setHardness(20.0F).setBlockName("erebusAltarRepair");
-	public static final Block glowingJar = new BlockGlowingJar().setBlockName("glowingJar").setBlockTextureName("erebus:glassAmber");
-	public static final Block reinExo = new BlockSimple(Material.rock).setHardness(1.5F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("reinExo").setBlockTextureName("erebus:blockReinExo");
-	public static final Block bambooLadder = new BlockBambooLadder().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("bambooLadder").setBlockTextureName("erebus:bambooLadder");
-	public static final Block bambooBridge = new BlockBambooBridge().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("bambooBridge").setBlockTextureName("erebus:planks_bamboo");
-	public static final Block umberGolemStatue = new BlockUmberGolemStatue().setBlockName("umberGolemStatue");
-	public static final Block petrifiedWoodChest = new BlockPetrifiedChest().setHardness(2.0F).setBlockName("petrifiedWoodChest").setBlockTextureName("erebus:planks_petrifiedWood");
-	public static final Block blockBones = new BlockBones().setBlockName("blockBones");
-	public static final Block blockWitherWeb = new BlockWitherWeb().setHardness(4.0F).setBlockName("witherWeb").setBlockTextureName("web");
-	public static final Block extenderThingy = new BlockExtenderThingy().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("extenderThingy").setBlockTextureName("erebus:planks_bamboo");
-	public static final Block bambooPole = new BlockBambooPole().setHardness(0.4F).setBlockName("bambooPole").setBlockTextureName("erebus:blockBambooPole");
-	public static final Block umberstonePillar = new BlockUmberstonePillar().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("umberstonePillar").setBlockTextureName("erebus:umberstonePillarSides");
-	public static final Block velocityBlock = new BlockVelocity().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("velocityBlock").setBlockTextureName("erebus:blockSpeed0");
-	public static final Block honeyCombBlock = new BlockHoneyComb().setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundTypeCloth).setBlockName("honeyCombBlock").setBlockTextureName("erebus:honeyCombTop");
-	public static final Block doorAmber = new BlockDoorAmber(Material.glass).setBlockName("doorAmber").setBlockTextureName("erebus:doorAmber");
-	public static final Block honeyBlock = new BlockErebusHoney(ModFluids.honey).setBlockName("honeyBlock");
-	public static final Block honeyTreat = new BlockHoneyTreat().setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("honeyTreat").setBlockTextureName("erebus:honeyTreat");
-	public static final Block mud = new BlockMud().setBlockName("erebusMud").setBlockTextureName("erebus:mud");
+	public static final Block umberPaver = new BlockUmberPaver().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberPaver");
+	public static final Block insectRepellent = new BlockInsectRepellent().setBlockName("erebus.insectRepellent");
+	public static final Block bambooShoot = new BlockBambooShoot().setCreativeTab(null).setBlockName("erebus.bambooShoot").setBlockTextureName("erebus:bambooShoot");
+	public static final Block bambooCrop = new BlockBambooCrop().setHardness(1.0F).setStepSound(Block.soundTypeWood).setBlockName("erebus.bambooCrop").setBlockTextureName("erebus:bambooCropBase");
+	public static final Block bambooTorch = new BlockBambooTorch().setHardness(0.0F).setBlockName("erebus.bambooTorch");
+	public static final Block glowingJar = new BlockGlowingJar().setBlockName("erebus.glowingJar").setBlockTextureName("erebus:glassAmber");
+	public static final Block reinExo = new BlockSimple(Material.rock).setHardness(1.5F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.reinExo").setBlockTextureName("erebus:blockReinExo");
+	public static final Block bambooLadder = new BlockBambooLadder().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("erebus.bambooLadder").setBlockTextureName("erebus:bambooLadder");
+	public static final Block bambooBridge = new BlockBambooBridge().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("erebus.bambooBridge").setBlockTextureName("erebus:planks_bamboo");
+	public static final Block umberGolemStatue = new BlockUmberGolemStatue().setBlockName("erebus.umberGolemStatue");
+	public static final Block petrifiedWoodChest = new BlockPetrifiedChest().setHardness(2.0F).setBlockName("erebus.petrifiedWoodChest").setBlockTextureName("erebus:planks_petrifiedWood");
+	public static final Block blockBones = new BlockBones().setBlockName("erebus.blockBones");
+	public static final Block blockWitherWeb = new BlockWitherWeb().setHardness(4.0F).setBlockName("erebus.witherWeb").setBlockTextureName("web");
+	public static final Block extenderThingy = new BlockExtenderThingy().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("erebus.extenderThingy").setBlockTextureName("erebus:planks_bamboo");
+	public static final Block bambooPole = new BlockBambooPole().setHardness(0.4F).setBlockName("erebus.bambooPole").setBlockTextureName("erebus:blockBambooPole");
+	public static final Block umberstonePillar = new BlockUmberstonePillar().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberstonePillar").setBlockTextureName("erebus:umberstonePillarSides");
+	public static final Block velocityBlock = new BlockVelocity().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.velocityBlock").setBlockTextureName("erebus:blockSpeed0");
+	public static final Block honeyCombBlock = new BlockHoneyComb().setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.honeyCombBlock").setBlockTextureName("erebus:honeyCombTop");
+	public static final Block doorAmber = new BlockDoorAmber();
+	public static final Block honeyBlock = new BlockErebusHoney(ModFluids.honey).setBlockName("erebus.honeyBlock");
+	public static final Block honeyTreat = new BlockHoneyTreat().setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.honeyTreat").setBlockTextureName("erebus:honeyTreat");
+	public static final Block mud = new BlockMud().setBlockName("erebus.mud").setBlockTextureName("erebus:mud");
 	public static final Block mudBricks = new BlockSimple(Material.rock).setBlockName("erebus.mudBricks").setBlockTextureName("erebus:mudBricks").setHardness(0.8F).setResistance(1.0F);
 	public static final Block jarOHoney = new JarOHoney().setHardness(0.5F).setBlockName("erebus.jarOHoney").setBlockTextureName("erebus:glassAmber");
 	public static final Block jadeBlock = new BlockCompressed(MapColor.greenColor).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.blockJade").setBlockTextureName("erebus:blockJade");
@@ -238,25 +233,32 @@ public class ModBlocks
 	public static final Block glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 	public static final Block mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 
+	// ALTARS
+	public static final Block altarBase = new BlockErebusAltar().setHardness(20.0F).setBlockName("erebus.altarBase");
+	public static final Block altarLightning = new LightningAltar().setHardness(20.0F).setBlockName("erebus.altarLightning");
+	public static final Block altarHealing = new HealingAltar().setHardness(20.0F).setBlockName("erebus.altarHealing");
+	public static final Block altarXP = new XPAltar().setHardness(20.0F).setBlockName("erebus.altarXP");
+	public static final Block altarRepair = new RepairAltar().setHardness(20.0F).setBlockName("erebus.altarRepair");
+
 	// DUNGEONS
-	public static final Block spiderSpawner = new BlockSpiderSpawner("Scytodes - Erebus").setBlockName("spiderSpawner").setBlockTextureName("erebus:spiderSpawner");
-	public static final Block jumpingSpiderSpawner = new BlockSpiderSpawner("JumpingSpider - Erebus").setBlockName("jumpingSpiderSpawner").setBlockTextureName("erebus:spiderSpawner");
-	public static final Block waspSpawner = new BlockWaspSpawner("Wasp - Erebus").setBlockName("waspSpawner").setBlockTextureName("erebus:waspNestSpawner");
-	public static final Block waspNestBlock = new BlockWaspNest().setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("waspNestBlock").setBlockTextureName("erebus:waspNestBlock");
-	public static final Block gneiss = new BlockGneiss().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("gneiss");
-	public static final Block siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("siloSupports").setBlockTextureName("erebus:siloSupports");
-	public static final Block siloTank = new BlockSiloTank(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloTank");
-	public static final Block siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("siloRoof").setBlockTextureName("erebus:siloRoof");
-	public static final Block composter = new BlockComposter().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("composter");
+	public static final Block spiderSpawner = new BlockSpiderSpawner("Scytodes - Erebus").setBlockName("erebus.spiderSpawner").setBlockTextureName("erebus:spiderSpawner");
+	public static final Block jumpingSpiderSpawner = new BlockSpiderSpawner("JumpingSpider - Erebus").setBlockName("erebus.jumpingSpiderSpawner").setBlockTextureName("erebus:spiderSpawner");
+	public static final Block waspSpawner = new BlockWaspSpawner("Wasp - Erebus").setBlockName("erebus.waspSpawner").setBlockTextureName("erebus:waspNestSpawner");
+	public static final Block waspNestBlock = new BlockWaspNest().setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.waspNestBlock").setBlockTextureName("erebus:waspNestBlock");
+	public static final Block gneiss = new BlockGneiss().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneiss");
+	public static final Block siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("erebus.siloSupports").setBlockTextureName("erebus:siloSupports");
+	public static final Block siloTank = new BlockSiloTank(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.siloTank");
+	public static final Block siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.siloRoof").setBlockTextureName("erebus:siloRoof");
+	public static final Block composter = new BlockComposter().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.composter");
 
 	// STAIRS, SLABS, WALLS
 	public static final Block[] umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 	public static final Block[] stoneSlabs = new Block[8];
 	public static final Block[] gneissStairs = new Block[BlockGneiss.iconPaths.length];
-	public static final Block wall = new BlockWallErebus().setBlockName("wallErebus");
-	public static final Block petrifiedWoodStairs = new BlockStairsBase(petrifiedWoodPlanks, 0).setStepSound(Block.soundTypeWood).setBlockName("petrifiedWoodStairs");
-	public static final Block amberBrickStairs = new BlockStairsBase(blockAmber, 2).setStepSound(Block.soundTypeStone).setBlockName("amberBrickStairs");
-	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("waspNestStairs");
+	public static final Block wall = new BlockWallErebus().setBlockName("erebus.wallErebus");
+	public static final Block petrifiedWoodStairs = new BlockStairsBase(petrifiedWoodPlanks, 0).setStepSound(Block.soundTypeWood).setBlockName("erebus.petrifiedWoodStairs");
+	public static final Block amberBrickStairs = new BlockStairsBase(blockAmber, 2).setStepSound(Block.soundTypeStone).setBlockName("erebus.amberBrickStairs");
+	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.waspNestStairs");
 
 	// OTHER THINGS (AKA LEXICONN'S STUFF. DELETE IF HE EVER QUITS)
 	public static final Block gaeanKeystone = new BlockGaeanKeystone();
@@ -276,7 +278,7 @@ public class ModBlocks
 	{
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 		{
-			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("umbercobbleStairs" + i);
+			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("erebus.umbercobbleStairs" + i);
 		}
 		for (int i = 0; i <= 4; i++)
 		{
@@ -289,7 +291,7 @@ public class ModBlocks
 		stoneSlabs[7] = new BlockSlabStone(ModBlocks.petrifiedWoodPlanks);
 		for (int i = 0; i < gneissStairs.length; i++)
 		{
-			gneissStairs[i] = new BlockStairsBase(gneiss, i).setStepSound(Block.soundTypeStone).setBlockName("gneissStairs" + i);
+			gneissStairs[i] = new BlockStairsBase(gneiss, i).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneissStairs" + i);
 		}
 	}
 
@@ -298,7 +300,7 @@ public class ModBlocks
 		ModTabs.blocks.setTab(umberstone, redGem, blockAmber, quickSand, ghostSand);
 		ModTabs.blocks.setTab(hollowLogAcacia, planks);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, bambooLadder);
-		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, erebusAltar);
+		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, altarBase);
 		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
 		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);
 		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloTank, siloSupports, siloRoof, composter);

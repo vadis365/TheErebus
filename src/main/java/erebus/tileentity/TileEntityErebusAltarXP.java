@@ -39,7 +39,7 @@ public class TileEntityErebusAltarXP extends TileEntityErebusAltar
 			}
 			if (animationTicks == 1)
 			{
-				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.erebusAltar);
+				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.altarBase);
 			}
 		}
 		if (animationTicks == 6)

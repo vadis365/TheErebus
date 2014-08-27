@@ -25,7 +25,7 @@ public class BlockErebusMushroomCap extends Block
 		setHardness(0.2F);
 		mushroomType = type;
 		setStepSound(Block.soundTypeWood);
-		setBlockName("mushroomCap" + type);
+		setBlockName("erebus.mushroomCap" + type);
 	}
 
 	@SideOnly(Side.CLIENT)

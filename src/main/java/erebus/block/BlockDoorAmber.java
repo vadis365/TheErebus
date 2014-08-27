@@ -22,13 +22,15 @@ public class BlockDoorAmber extends BlockDoor
 	@SideOnly(Side.CLIENT)
 	public IIcon[] flippedIcons;
 
-	public BlockDoorAmber(Material material)
+	public BlockDoorAmber()
 	{
-		super(material);
+		super(Material.glass);
 		float f = 0.5F;
 		float f1 = 1.0F;
 		setLightOpacity(0);
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
+		setBlockName("erebus.doorAmber");
+		setBlockTextureName("erebus:doorAmber");
 	}
 
 	@Override

@@ -57,7 +57,7 @@ public class BlockPlantedGiantFlower extends BlockSapling implements ISubBlocksB
 		setCreativeTab(null);
 		setHardness(0.0F);
 		setStepSound(Block.soundTypeGrass);
-		setBlockName("flowerPlanted");
+		setBlockName("erebus.flowerPlanted");
 		float var3 = 0.4F;
 		setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1F, 0.5F + var3);
 	}

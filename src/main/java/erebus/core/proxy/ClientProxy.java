@@ -337,11 +337,11 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(new BlockKeystoneRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltar), new ItemErebusAltarRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltarLightning), new ItemErebusAltarRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltarHealing), new ItemErebusAltarRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltarXP), new ItemErebusAltarRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltarRepair), new ItemErebusAltarRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarBase), new ItemErebusAltarRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarLightning), new ItemErebusAltarRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarHealing), new ItemErebusAltarRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarXP), new ItemErebusAltarRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarRepair), new ItemErebusAltarRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.waspSword, new WaspSwordItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.umberFurnace), new ItemUmberFurnaceRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.waspDagger, new WaspDaggerItemRenderer());

@@ -18,7 +18,7 @@ public class BlockGlowshroomStalkS1 extends Block
 		setTickRandomly(true);
 		setHardness(0.2F);
 		setStepSound(Block.soundTypeWood);
-		setBlockName("glowshroomStalkS1");
+		setBlockName("erebus.glowshroomStalkS1");
 		setBlockTextureName("erebus:glowshroomStalk");
 		setBlockBounds(0.3125F, 0.3125F, 0F, 0.6875F, 0.6875F, 0.6875F);
 	}

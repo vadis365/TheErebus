@@ -69,8 +69,8 @@ public class ThaumcraftIntegration implements IModIntegration
 		registerBlock(ModBlocks.fiddlehead, -1, Aspect.PLANT, 2);
 		registerBlock(ModBlocks.insectRepellent, -1, Aspect.POISON, 1, Aspect.AURA, 2);
 		registerBlock(ModBlocks.bambooTorch, -1, Aspect.LIGHT, 2, Aspect.PLANT, 1);
-		registerBlock(ModBlocks.erebusAltar, -1, Aspect.MAGIC, 2, Aspect.ELDRITCH, 3, Aspect.ENTROPY, 2);
-		registerBlock(ModBlocks.erebusAltarLightning, -1, Aspect.MAGIC, 2, Aspect.ELDRITCH, 3, Aspect.ENTROPY, 2, Aspect.ENERGY, 2);
+		registerBlock(ModBlocks.altarBase, -1, Aspect.MAGIC, 2, Aspect.ELDRITCH, 3, Aspect.ENTROPY, 2);
+		registerBlock(ModBlocks.altarLightning, -1, Aspect.MAGIC, 2, Aspect.ELDRITCH, 3, Aspect.ENTROPY, 2, Aspect.ENERGY, 2);
 
 		registerItem(ModItems.portalActivator, -1, Aspect.MAGIC, 2, Aspect.ELDRITCH, 3);
 

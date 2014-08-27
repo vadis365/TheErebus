@@ -126,7 +126,7 @@ public class BlockErebusAltar extends BlockContainer
 			case 8:
 				if (!world.isRemote)
 				{
-					world.setBlock(x, y, z, ModBlocks.erebusAltarXP, world.getBlockMetadata(x, y, z), 3);
+					world.setBlock(x, y, z, ModBlocks.altarXP, world.getBlockMetadata(x, y, z), 3);
 				}
 				if (world.isRemote)
 				{
@@ -137,7 +137,7 @@ public class BlockErebusAltar extends BlockContainer
 			case 9:
 				if (!world.isRemote)
 				{
-					world.setBlock(x, y, z, ModBlocks.erebusAltarRepair, world.getBlockMetadata(x, y, z), 3);
+					world.setBlock(x, y, z, ModBlocks.altarRepair, world.getBlockMetadata(x, y, z), 3);
 				}
 				if (world.isRemote)
 				{
@@ -148,7 +148,7 @@ public class BlockErebusAltar extends BlockContainer
 			case 12:
 				if (!world.isRemote)
 				{
-					world.setBlock(x, y, z, ModBlocks.erebusAltarLightning, world.getBlockMetadata(x, y, z), 3);
+					world.setBlock(x, y, z, ModBlocks.altarLightning, world.getBlockMetadata(x, y, z), 3);
 				}
 				if (world.isRemote)
 				{
@@ -159,7 +159,7 @@ public class BlockErebusAltar extends BlockContainer
 			case 13:
 				if (!world.isRemote)
 				{
-					world.setBlock(x, y, z, ModBlocks.erebusAltarHealing, world.getBlockMetadata(x, y, z), 3);
+					world.setBlock(x, y, z, ModBlocks.altarHealing, world.getBlockMetadata(x, y, z), 3);
 				}
 				if (world.isRemote)
 				{

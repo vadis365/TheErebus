@@ -33,7 +33,7 @@ public class BlockGaeanKeystone extends Block implements IHighlightedBlock
 	{
 		super(Material.rock);
 		setHardness(3.0f);
-		setBlockName("gaeanKeystone");
+		setBlockName("erebus.gaeanKeystone");
 		setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.8125f, 1.0f);
 	}
 
