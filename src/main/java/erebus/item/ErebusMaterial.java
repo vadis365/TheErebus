@@ -34,7 +34,7 @@ public class ErebusMaterial extends Item
 		compoundEyes,
 		compoundLens,
 		flyWing,
-		itemPetrifiedWood,
+		petrifiedWood,
 		bioVelocity,
 		elasticFibre,
 		waspSting,
@@ -68,7 +68,14 @@ public class ErebusMaterial extends Item
 		antPheromones,
 		gaeanGem,
 		crimsonHeart,
-		sapBall;
+		sapBall,
+		templeRock,
+		ingotAluminium,
+		ingotCopper,
+		ingotLead,
+		ingotSilver,
+		ingotTin,
+		gneissRock;
 	}
 
 	public static ItemStack createStack(DATA data)

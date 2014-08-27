@@ -5,8 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.block.BlockErebusOre;
-import erebus.block.BlockErebusOreExtras;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.feature.decoration.WorldGenErebusMinable;
 
@@ -139,21 +137,21 @@ public final class OreSettings
 
 	public static enum OreType
 	{
-		COAL(BlockErebusOre.dataCoal),
-		IRON(BlockErebusOre.dataIron),
-		GOLD(BlockErebusOre.dataGold),
-		LAPIS(BlockErebusOre.dataLapis),
-		EMERALD(BlockErebusOre.dataEmerald),
-		DIAMOND(BlockErebusOre.dataDiamond),
-		DIAMOND_ENCRUSTED(BlockErebusOre.dataEncrustedDiamond),
-		JADE(BlockErebusOre.dataJade),
-		PETRIFIED_WOOD(BlockErebusOre.dataPetrifiedWood),
-		FOSSIL(ModBlocks.oreFossil, 3),
-		ALUMINIUM(ModBlocks.oreExtra, BlockErebusOreExtras.dataAluminium),
-		COPPER(ModBlocks.oreExtra, BlockErebusOreExtras.dataCopper),
-		LEAD(ModBlocks.oreExtra, BlockErebusOreExtras.dataLead),
-		SILVER(ModBlocks.oreExtra, BlockErebusOreExtras.dataSilver),
-		TIN(ModBlocks.oreExtra, BlockErebusOreExtras.dataTin);
+		COAL(ModBlocks.oreCoal),
+		IRON(ModBlocks.oreIron),
+		GOLD(ModBlocks.oreGold),
+		LAPIS(ModBlocks.oreLapis),
+		EMERALD(ModBlocks.oreEmerald),
+		DIAMOND(ModBlocks.oreDiamond),
+		DIAMOND_ENCRUSTED(ModBlocks.oreEncrustedDiamond),
+		JADE(ModBlocks.oreJade),
+		PETRIFIED_WOOD(ModBlocks.orePetrifiedWood),
+		FOSSIL(ModBlocks.oreFossil),
+		ALUMINIUM(ModBlocks.oreAluminium),
+		COPPER(ModBlocks.oreCopper),
+		LEAD(ModBlocks.oreLead),
+		SILVER(ModBlocks.oreSilver),
+		TIN(ModBlocks.oreTin);
 
 		final Block oreBlock;
 		final byte oreMeta;
@@ -164,10 +162,9 @@ public final class OreSettings
 			this.oreMeta = (byte) oreMeta;
 		}
 
-		OreType(int oreMeta)
+		OreType(Block oreBlock)
 		{
-			oreBlock = ModBlocks.umberOreBlock;
-			this.oreMeta = (byte) oreMeta;
+			this(oreBlock, 0);
 		}
 
 		public void setupDefault(OreSettings settings, boolean extraOres)

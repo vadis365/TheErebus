@@ -9,7 +9,6 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.block.BlockErebusOre;
 import erebus.integration.ModIntegrationHandler.IModIntegration;
 
 public class ThaumcraftIntegration implements IModIntegration
@@ -44,8 +43,8 @@ public class ThaumcraftIntegration implements IModIntegration
 		registerBlock(ModBlocks.ghostSand, -1, Aspect.TRAP, 4, Aspect.VOID, 3);
 		registerBlock(ModBlocks.hollowLogAcacia, -1, Aspect.SLIME, 1, Aspect.TREE, 3);
 
-		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataJade, Aspect.GREED, 4, Aspect.CRYSTAL, 3, Aspect.EARTH, 2);
-		registerBlock(ModBlocks.umberOreBlock, BlockErebusOre.dataPetrifiedWood, Aspect.EARTH, 1, Aspect.TREE, 2, Aspect.ENTROPY, 2);
+		registerBlock(ModBlocks.oreJade, 0, Aspect.GREED, 4, Aspect.CRYSTAL, 3, Aspect.EARTH, 2);
+		registerBlock(ModBlocks.orePetrifiedWood, 0, Aspect.EARTH, 1, Aspect.TREE, 2, Aspect.ENTROPY, 2);
 		registerBlock(ModBlocks.oreFossil, -1, Aspect.DEATH, 1, Aspect.BEAST, 1, Aspect.EARTH, 1);
 		registerBlock(ModBlocks.umberstone, 0, Aspect.EARTH, 2, Aspect.ENTROPY, 2);
 		registerBlock(ModBlocks.umberstone, 1, Aspect.EARTH, 1, Aspect.ENTROPY, 2);

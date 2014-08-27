@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.AntTamingAmulet;
 import erebus.item.ArmorGlider;
 import erebus.item.BeeTamingAmulet;
@@ -39,7 +38,6 @@ import erebus.item.JadeAxe;
 import erebus.item.JadePickaxe;
 import erebus.item.JumpBoots;
 import erebus.item.MaxSpeedBow;
-import erebus.item.MetalIngots;
 import erebus.item.NectarCollector;
 import erebus.item.Paxel;
 import erebus.item.Planticide;
@@ -78,7 +76,6 @@ public class ModItems
 	public static final Item erebusMaterials = new ErebusMaterial().setUnlocalizedName("erebusMaterials");
 	public static final Item erebusSpecialItem = new ErebusSpecial().setUnlocalizedName("erebusSpecialItem");
 	public static final Item erebusFood = new ErebusFood().setUnlocalizedName("erebusFood");
-	public static final Item metalIngot = new MetalIngots();
 	public static final Item turnip = new ItemSeedFood(4, 0.6F, ModBlocks.blockTurnip, Blocks.farmland).setUnlocalizedName("turnips").setTextureName("erebus:turnips");
 	public static final Item sprayCan = new SprayCan().setUnlocalizedName("sprayCan").setTextureName("erebus:sprayCan");
 	public static final Item wandOfAnimation = new WandOfAnimation().setUnlocalizedName("wandOfAnimation");
@@ -175,11 +172,6 @@ public class ModItems
 	private static void initCreativeTabs()
 	{
 		ModTabs.items.setTab(erebusMaterials, whetstone, erebusFood, turnip, encrustedDiamond);
-		if (ConfigHandler.INSTANCE.lead || ConfigHandler.INSTANCE.silver || ConfigHandler.INSTANCE.copper || ConfigHandler.INSTANCE.tin || ConfigHandler.INSTANCE.aluminium)
-		{
-			ModTabs.items.setTab(metalIngot);
-		}
-
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger, woodlouseBall, rolledNewspaper);

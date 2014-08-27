@@ -16,8 +16,6 @@ import erebus.block.BlockComposter;
 import erebus.block.BlockDoorAmber;
 import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusMushroomCap;
-import erebus.block.BlockErebusOre;
-import erebus.block.BlockErebusOreExtras;
 import erebus.block.BlockErebusPortal;
 import erebus.block.BlockErebusStigma;
 import erebus.block.BlockGaeanKeystone;
@@ -31,7 +29,6 @@ import erebus.block.BlockHoneyTreat;
 import erebus.block.BlockInsectRepellent;
 import erebus.block.BlockMucusBomb;
 import erebus.block.BlockMud;
-import erebus.block.BlockOreFossil;
 import erebus.block.BlockPetrifiedChest;
 import erebus.block.BlockPetrifiedCraftingTable;
 import erebus.block.BlockPlanksErebus;
@@ -58,9 +55,9 @@ import erebus.block.altars.BlockAltar;
 import erebus.block.altars.BlockErebusAltar;
 import erebus.block.altars.HealingAltar;
 import erebus.block.altars.LightningAltar;
+import erebus.block.altars.OfferingAltar;
 import erebus.block.altars.RepairAltar;
 import erebus.block.altars.XPAltar;
-import erebus.block.altars.OfferingAltar;
 import erebus.block.bamboo.BlockBambooBridge;
 import erebus.block.bamboo.BlockBambooCrate;
 import erebus.block.bamboo.BlockBambooCrop;
@@ -84,6 +81,14 @@ import erebus.block.glowshroom.BlockGlowshroomStalkS3;
 import erebus.block.glowshroom.BlockGlowshroomStalkW1;
 import erebus.block.glowshroom.BlockGlowshroomStalkW3;
 import erebus.block.glowshroom.BlockGlowshroomStalkWE2;
+import erebus.block.ores.UmberOre;
+import erebus.block.ores.UmberOreEncrustedDiamond;
+import erebus.block.ores.UmberOreExtra;
+import erebus.block.ores.UmberOreFossil;
+import erebus.block.ores.UmberOreGneiss;
+import erebus.block.ores.UmberOreJade;
+import erebus.block.ores.UmberOrePetrifiedWood;
+import erebus.block.ores.UmberOreTemple;
 import erebus.block.plants.BlockErebusFlower;
 import erebus.block.plants.BlockHangerPlants;
 import erebus.block.plants.BlockThorns;
@@ -103,16 +108,32 @@ public class ModBlocks
 	// PORTAL
 	public static final BlockErebusPortal portal = (BlockErebusPortal) new BlockErebusPortal().setHardness(-1F).setLightLevel(1.0F).setStepSound(Block.soundTypeGlass).setBlockName("portalErebus");
 
-	// TERRAIN AND ORES
+	// TERRAIN
 	public static final Block umberstone = new BlockUmberstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("umberstone");
-	public static final Block umberOreBlock = new BlockErebusOre().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockName("oreBlockU");
-	public static final Block oreFossil = new BlockOreFossil().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("oreFossilU").setBlockTextureName("erebus:oreFossilU");
 	public static final Block redGem = new BlockRedGem().setHardness(0.3F).setLightLevel(1F).setStepSound(Block.soundTypeGlass).setBlockName("redGem");
 	public static final Block blockAmber = new BlockAmber().setHardness(1.5F).setResistance(10.0F).setLightOpacity(3).setStepSound(Block.soundTypeGlass).setBlockName("blockAmber");
 	public static final Block quickSand = new BlockQuickSand().setHardness(28F).setStepSound(Block.soundTypeSand).setBlockName("quickSand").setBlockTextureName("erebus:quickSand");
 	public static final Block ghostSand = new BlockGhostSand().setHardness(0.42F).setStepSound(Block.soundTypeSand).setBlockName("ghostSand").setBlockTextureName("erebus:ghostSand");
-	public static final Block oreExtra = new BlockErebusOreExtras().setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone).setBlockName("erebusOreExtras");
 	public static final Block umberstoneButton = new BlockButtonUmberstone().setHardness(0.5F).setStepSound(Block.soundTypeStone).setBlockName("umberstoneButton");
+
+	// ORES
+	public static final Block oreCoal = new UmberOre(Blocks.coal_ore, "Coal", 0);
+	public static final Block oreIron = new UmberOre(Blocks.iron_ore, "Iron", 1);
+	public static final Block oreGold = new UmberOre(Blocks.gold_ore, "Gold", 2);
+	public static final Block oreLapis = new UmberOre(Blocks.lapis_ore, "Lapis", 1);
+	public static final Block oreDiamond = new UmberOre(Blocks.diamond_ore, "Diamond", 2);
+	public static final Block oreEmerald = new UmberOre(Blocks.emerald_ore, "Emerald", 2);
+	public static final Block oreJade = new UmberOreJade();
+	public static final Block oreEncrustedDiamond = new UmberOreEncrustedDiamond();
+	public static final Block orePetrifiedWood = new UmberOrePetrifiedWood();
+	public static final Block oreFossil = new UmberOreFossil();
+	public static final Block oreTemple = new UmberOreTemple();
+	public static final Block oreGneiss = new UmberOreGneiss();
+	public static final Block oreAluminium = new UmberOreExtra("Aluminium", 1);
+	public static final Block oreCopper = new UmberOreExtra("Copper", 1);
+	public static final Block oreLead = new UmberOreExtra("Lead", 2);
+	public static final Block oreSilver = new UmberOreExtra("Silver", 2);
+	public static final Block oreTin = new UmberOreExtra("Tin", 1);
 
 	// WOOD
 	public static final Block planks = new BlockPlanksErebus().setHardness(2.0F).setStepSound(Block.soundTypeWood);
@@ -274,7 +295,7 @@ public class ModBlocks
 
 	private static void initCreativeTabs()
 	{
-		ModTabs.blocks.setTab(umberstone, umberOreBlock, oreFossil, oreExtra, redGem, blockAmber, quickSand, ghostSand);
+		ModTabs.blocks.setTab(umberstone, redGem, blockAmber, quickSand, ghostSand);
 		ModTabs.blocks.setTab(hollowLogAcacia, planks);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, bambooLadder);
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, erebusAltar);
@@ -334,24 +355,11 @@ public class ModBlocks
 		umberstone.setHarvestLevel("pickaxe", 0);
 		umberPaver.setHarvestLevel("pickaxe", 0);
 		wall.setHarvestLevel("pickaxe", 0);
-		umberOreBlock.setHarvestLevel("pickaxe", 0, 0);
-		umberOreBlock.setHarvestLevel("pickaxe", 1, 1);
-		umberOreBlock.setHarvestLevel("pickaxe", 2, 2);
-		umberOreBlock.setHarvestLevel("pickaxe", 1, 3);
-		umberOreBlock.setHarvestLevel("pickaxe", 2, 4);
-		umberOreBlock.setHarvestLevel("pickaxe", 2, 5);
-		umberOreBlock.setHarvestLevel("pickaxe", 2, 6);
-		umberOreBlock.setHarvestLevel("pickaxe", 2, 8);
 		quickSand.setHarvestLevel("shovel", 2);
 		ghostSand.setHarvestLevel("shovel", 0);
 		reinExo.setHarvestLevel("pickaxe", 2);
 		petrifiedWoodChest.setHarvestLevel("pickaxe", 0);
 		jadeBlock.setHarvestLevel("pickaxe", 2);
-		oreExtra.setHarvestLevel("pickaxe", 1, 0);
-		oreExtra.setHarvestLevel("pickaxe", 1, 1);
-		oreExtra.setHarvestLevel("pickaxe", 2, 2);
-		oreExtra.setHarvestLevel("pickaxe", 2, 3);
-		oreExtra.setHarvestLevel("pickaxe", 1, 4);
 
 		Blocks.fire.setFireInfo(planks, 5, 20);
 		Blocks.fire.setFireInfo(blockWitherWeb, 20, 50);

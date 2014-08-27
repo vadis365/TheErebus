@@ -12,7 +12,6 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.block.BlockErebusOre;
 import erebus.block.BlockSlabStone;
 import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
 import erebus.core.handler.configs.ConfigHandler;
@@ -58,7 +57,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.umberstonePillar, 2), "#", "#", '#', "stoneUmber"));
 
 		// Petrified Wood stuffs
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodPlanks), "xx", "xx", 'x', ErebusMaterial.createStack(ErebusMaterial.DATA.itemPetrifiedWood));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodPlanks), "xx", "xx", 'x', ErebusMaterial.createStack(ErebusMaterial.DATA.petrifiedWood));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedCraftingTable), "xx", "xx", 'x', ModBlocks.petrifiedWoodPlanks);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.petrifiedWoodChest), "xxx", "xyx", "xxx", 'x', ModBlocks.petrifiedWoodPlanks, 'y', "ingotGold"));
 
@@ -271,48 +270,61 @@ public class RecipeHandler
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.tarantulaLegRaw.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.tarantulaLegCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.titanChop.ordinal()), new ItemStack(ModItems.erebusFood, 1, ErebusFood.FoodType.titanChopCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberstone, 1, 1), new ItemStack(ModBlocks.umberstone), 0.2F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 0), new ItemStack(Items.coal, 1), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 1), new ItemStack(Items.iron_ingot), 0.7F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 2), new ItemStack(Items.gold_ingot), 1.0F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 3), new ItemStack(Items.dye, 1, 4), 0.2F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 4), new ItemStack(Items.diamond), 1.0F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 5), new ItemStack(Items.emerald), 1.0F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberOreBlock, 1, 6), ErebusMaterial.createStack(ErebusMaterial.DATA.jade), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreCoal), new ItemStack(Items.coal, 1), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreIron), new ItemStack(Items.iron_ingot), 0.7F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreGold), new ItemStack(Items.gold_ingot), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreLapis), new ItemStack(Items.dye, 1, 4), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreDiamond), new ItemStack(Items.diamond), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreEmerald), new ItemStack(Items.emerald), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreJade), ErebusMaterial.createStack(ErebusMaterial.DATA.jade), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreFossil), ErebusMaterial.createStack(ErebusMaterial.DATA.shardBone), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreTemple), ErebusMaterial.createStack(ErebusMaterial.DATA.templeRock), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreGneiss), ErebusMaterial.createStack(ErebusMaterial.DATA.gneissRock), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.orePetrifiedWood), ErebusMaterial.createStack(ErebusMaterial.DATA.petrifiedWood), 0.1F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreEncrustedDiamond), new ItemStack(ModItems.encrustedDiamond), 1.0F);
+
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), ErebusMaterial.createStack(ErebusMaterial.DATA.mudBrick), 0.2F);
 		GameRegistry.addSmelting(ErebusMaterial.createStack(ErebusMaterial.DATA.honeyDrip), ErebusMaterial.createStack(ErebusMaterial.DATA.nectar), 0.2F);
 		if (ConfigHandler.INSTANCE.lead)
 		{
-			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 2), new ItemStack(ModItems.metalIngot, 1, 1), 1.0F);
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreLead), ErebusMaterial.createStack(ErebusMaterial.DATA.ingotLead), 1.0F);
 		}
 		if (ConfigHandler.INSTANCE.silver)
 		{
-			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 3), new ItemStack(ModItems.metalIngot, 1, 2), 1.0F);
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreSilver), ErebusMaterial.createStack(ErebusMaterial.DATA.ingotSilver), 1.0F);
 		}
 		if (ConfigHandler.INSTANCE.copper)
 		{
-			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 1), new ItemStack(ModItems.metalIngot, 1, 0), 1.0F);
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreCopper), ErebusMaterial.createStack(ErebusMaterial.DATA.ingotCopper), 1.0F);
 		}
 		if (ConfigHandler.INSTANCE.tin)
 		{
-			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreExtra, 1, 4), new ItemStack(ModItems.metalIngot, 1, 3), 1.0F);
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreTin), ErebusMaterial.createStack(ErebusMaterial.DATA.ingotTin), 1.0F);
+		}
+		if (ConfigHandler.INSTANCE.aluminium)
+		{
+			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreAluminium), ErebusMaterial.createStack(ErebusMaterial.DATA.ingotAluminium), 1.0F);
 		}
 	}
 
 	private static void registerOreDictionary()
 	{
+		OreDictionary.registerOre("oreCoal", new ItemStack(ModBlocks.oreCoal));
+		OreDictionary.registerOre("oreIron", new ItemStack(ModBlocks.oreIron));
+		OreDictionary.registerOre("oreGold", new ItemStack(ModBlocks.oreGold));
+		OreDictionary.registerOre("oreLapis", new ItemStack(ModBlocks.oreLapis));
+		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.oreDiamond));
+		OreDictionary.registerOre("oreEmerald", new ItemStack(ModBlocks.oreEmerald));
+		OreDictionary.registerOre("oreJade", new ItemStack(ModBlocks.oreJade));
+		OreDictionary.registerOre("orePetrifiedWood", new ItemStack(ModBlocks.orePetrifiedWood));
+		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.oreEncrustedDiamond));
+		OreDictionary.registerOre("oreFossil", new ItemStack(ModBlocks.oreFossil));
+		OreDictionary.registerOre("oreTemple", new ItemStack(ModBlocks.oreTemple));
+
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
 		OreDictionary.registerOre("stone", new ItemStack(ModBlocks.umberstone));
 		OreDictionary.registerOre("stoneUmber", new ItemStack(ModBlocks.umberstone));
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.planks, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("oreCoal", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataCoal));
-		OreDictionary.registerOre("oreIron", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataIron));
-		OreDictionary.registerOre("oreGold", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataGold));
-		OreDictionary.registerOre("oreLapis", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataLapis));
-		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataDiamond));
-		OreDictionary.registerOre("oreEmerald", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataEmerald));
-		OreDictionary.registerOre("oreJade", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataJade));
-		OreDictionary.registerOre("orePetrifiedWood", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataPetrifiedWood));
-		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.umberOreBlock, 1, BlockErebusOre.dataEncrustedDiamond));
 		OreDictionary.registerOre("mobEgg", new ItemStack(ModItems.spawnEggs, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("gemJade", ErebusMaterial.createStack(ErebusMaterial.DATA.jade));
 		OreDictionary.registerOre("blockJade", new ItemStack(ModBlocks.jadeBlock));
@@ -345,27 +357,28 @@ public class RecipeHandler
 
 		if (ConfigHandler.INSTANCE.lead)
 		{
-			OreDictionary.registerOre("ingotLead", new ItemStack(ModItems.metalIngot, 1, 1));
-			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.oreExtra, 1, 2));
+			OreDictionary.registerOre("ingotLead", ErebusMaterial.createStack(ErebusMaterial.DATA.ingotLead));
+			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.oreLead));
 		}
 		if (ConfigHandler.INSTANCE.silver)
 		{
-			OreDictionary.registerOre("ingotSilver", new ItemStack(ModItems.metalIngot, 1, 2));
-			OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.oreExtra, 1, 3));
+			OreDictionary.registerOre("ingotSilver", ErebusMaterial.createStack(ErebusMaterial.DATA.ingotSilver));
+			OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.oreSilver));
 		}
 		if (ConfigHandler.INSTANCE.copper)
 		{
-			OreDictionary.registerOre("ingotCopper", new ItemStack(ModItems.metalIngot, 1, 0));
-			OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.oreExtra, 1, 1));
+			OreDictionary.registerOre("ingotCopper", ErebusMaterial.createStack(ErebusMaterial.DATA.ingotCopper));
+			OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.oreCopper));
 		}
 		if (ConfigHandler.INSTANCE.tin)
 		{
-			OreDictionary.registerOre("ingotTin", new ItemStack(ModItems.metalIngot, 1, 3));
-			OreDictionary.registerOre("oreTin", new ItemStack(ModBlocks.oreExtra, 1, 4));
+			OreDictionary.registerOre("ingotTin", ErebusMaterial.createStack(ErebusMaterial.DATA.ingotTin));
+			OreDictionary.registerOre("oreTin", new ItemStack(ModBlocks.oreTin));
 		}
 		if (ConfigHandler.INSTANCE.aluminium)
 		{
-			OreDictionary.registerOre("oreAluminum", new ItemStack(ModBlocks.oreExtra, 1, 0));
+			OreDictionary.registerOre("ingotAluminium", ErebusMaterial.createStack(ErebusMaterial.DATA.ingotAluminium));
+			OreDictionary.registerOre("oreAluminum", new ItemStack(ModBlocks.oreAluminium));
 		}
 	}
 }

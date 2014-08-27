@@ -6,9 +6,9 @@ import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import codechicken.nei.recipe.DefaultOverlayHandler;
 import erebus.ModBlocks;
-import erebus.ModItems;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.ErebusMaterial;
 import erebus.lib.Reference;
 
 public class NEIErebusConfig implements IConfigureNEI
@@ -33,40 +33,30 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap3));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap4));
 
-		byte b = 0;
 		if (!ConfigHandler.INSTANCE.aluminium)
 		{
-			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 0));
-			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 0));
-			b++;
+			API.hideItem(new ItemStack(ModBlocks.oreAluminium));
+			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotAluminium));
 		}
 		if (!ConfigHandler.INSTANCE.copper)
 		{
-			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 1));
-			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 1));
-			b++;
+			API.hideItem(new ItemStack(ModBlocks.oreCopper));
+			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotCopper));
 		}
 		if (!ConfigHandler.INSTANCE.lead)
 		{
-			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 2));
-			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 2));
-			b++;
+			API.hideItem(new ItemStack(ModBlocks.oreLead));
+			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotLead));
 		}
 		if (!ConfigHandler.INSTANCE.silver)
 		{
-			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 3));
-			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 3));
-			b++;
+			API.hideItem(new ItemStack(ModBlocks.oreSilver));
+			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotSilver));
 		}
 		if (!ConfigHandler.INSTANCE.tin)
 		{
-			API.hideItem(new ItemStack(ModBlocks.oreExtra, 1, 4));
-			API.hideItem(new ItemStack(ModItems.metalIngot, 1, 4));
-			b++;
-		}
-		if (b >= 5)
-		{
-			API.hideItem(new ItemStack(ModItems.metalIngot, 1, OreDictionary.WILDCARD_VALUE));
+			API.hideItem(new ItemStack(ModBlocks.oreTin));
+			API.hideItem(ErebusMaterial.createStack(ErebusMaterial.DATA.ingotTin));
 		}
 
 		API.hideItem(new ItemStack(ModBlocks.hanger));
