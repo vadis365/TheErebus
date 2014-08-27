@@ -5,23 +5,22 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSimpleFoiled;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
+import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModMaterials;
 
-public class RolledNewspaper extends ItemSimpleFoiled
+public class RolledNewspaper extends ItemSword
 {
-
 	public RolledNewspaper()
 	{
-		setFull3D();
-		setMaxStackSize(1);
+		super(ModMaterials.rolledNewspaper);
+		setTextureName("erebus:rolledNewspaper");
+		setUnlocalizedName("erebus.rolledNewspaper");
 	}
 
 	@Override
@@ -32,14 +31,6 @@ public class RolledNewspaper extends ItemSimpleFoiled
 		ItemStack stack = new ItemStack(item);
 		stack.addEnchantment(Enchantment.baneOfArthropods, 5);
 		list.add(stack);
-	}
-
-	@Override
-	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player)
-	{
-		is.damageItem(1, player);
-		entity.attackEntityFrom(DamageSource.causeMobDamage(player), 10);
-		return true;
 	}
 
 	@Override

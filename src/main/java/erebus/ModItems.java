@@ -24,10 +24,9 @@ import erebus.item.CavemanClub;
 import erebus.item.Compost;
 import erebus.item.CompoundGoggles;
 import erebus.item.EncrustedDiamond;
-import erebus.item.Food;
-import erebus.item.SpecialItems;
 import erebus.item.ExoskeletonArmor;
 import erebus.item.FlowerSeeds;
+import erebus.item.Food;
 import erebus.item.HomingBeecon;
 import erebus.item.HomingBeeconAdvanced;
 import erebus.item.HornOfSummoning;
@@ -46,6 +45,7 @@ import erebus.item.ReinExoskeletonArmor;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
 import erebus.item.SpawnEggs;
+import erebus.item.SpecialItems;
 import erebus.item.SprayCan;
 import erebus.item.SprintLeggings;
 import erebus.item.WandOfAnimation;
@@ -125,7 +125,7 @@ public class ModItems
 	public static final Item webSlinger = new WebSlinger().setUnlocalizedName("erebus.webSlinger").setTextureName("paper");
 	public static final Item blockExtractor = new BlockExtractor().setFull3D().setUnlocalizedName("erebus.blockExtractor").setTextureName("erebus:blockExtractor");
 	public static final Item woodlouseBall = new WoodlouseBall().setUnlocalizedName("erebus.woodlouseBall");
-	public static final Item rolledNewspaper = new RolledNewspaper().setUnlocalizedName("erebus.rolledNewspaper").setTextureName("erebus:rolledNewspaper");
+	public static final Item rolledNewspaper = new RolledNewspaper();
 
 	// ANIMATION MAGIC
 	public static final Item ritualDagger = new RitualDagger();
