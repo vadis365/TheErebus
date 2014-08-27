@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSimpleFoiled;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,15 +20,8 @@ public class RolledNewspaper extends ItemSimpleFoiled
 
 	public RolledNewspaper()
 	{
+		setFull3D();
 		setMaxStackSize(1);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag)
-	{
-		list.add(EnumChatFormatting.BLUE + "+10 Attack Damage");
 	}
 
 	@Override
@@ -37,7 +29,7 @@ public class RolledNewspaper extends ItemSimpleFoiled
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		ItemStack stack = new ItemStack(item, 1, 0);
+		ItemStack stack = new ItemStack(item);
 		stack.addEnchantment(Enchantment.baneOfArthropods, 5);
 		list.add(stack);
 	}
