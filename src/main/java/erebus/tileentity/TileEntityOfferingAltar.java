@@ -179,4 +179,22 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory
 		super.writeToNBT(nbt);
 		nbt.setInteger("time", time);
 	}
+
+	@Override
+	public int getInventoryStackLimit()
+	{
+		return 1;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack stack)
+	{
+		return slot != 3;
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack stack, int side)
+	{
+		return slot == 3;
+	}
 }

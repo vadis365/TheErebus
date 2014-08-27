@@ -100,7 +100,7 @@ public class OfferingAltarNEIHandler extends TemplateRecipeHandler
 			int y = 16;
 			int x = 16;
 
-			ItemStack[] input = recipe.getInputs();
+			Object[] input = recipe.getInputs();
 			inputs = new PositionedStack[input.length];
 			if (input[0] != null)
 			{

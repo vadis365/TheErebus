@@ -17,7 +17,7 @@ public class ErebusRecipesHandler
 
 	private static void offeringAltar()
 	{
-		OfferingAltarRecipe.addRecipe(ErebusMaterial.createStack(ErebusMaterial.DATA.gaeanGem), new ItemStack(Items.diamond), new ItemStack(Items.emerald), new ItemStack(Blocks.obsidian));
+		OfferingAltarRecipe.addRecipe(ErebusMaterial.createStack(ErebusMaterial.DATA.gaeanGem), "gemDiamond", "gemEmerald", new ItemStack(Blocks.obsidian));
 	}
 
 	private static void altar()

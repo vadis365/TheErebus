@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import erebus.core.helper.Utils;
 
 public class OfferingAltarRecipe
@@ -16,7 +17,7 @@ public class OfferingAltarRecipe
 		return Collections.unmodifiableList(list);
 	}
 
-	public static void addRecipe(ItemStack output, ItemStack... inputs)
+	public static void addRecipe(ItemStack output, Object... inputs)
 	{
 		list.add(new OfferingAltarRecipe(output, inputs));
 	}
@@ -34,35 +35,58 @@ public class OfferingAltarRecipe
 	}
 
 	private final ItemStack output;
-	private final ItemStack[] inputs;
+	private final Object[] inputs;
 
-	private OfferingAltarRecipe(ItemStack output, ItemStack... inputs)
+	private OfferingAltarRecipe(ItemStack output, Object... inputs)
 	{
 		this.output = output;
 		this.inputs = inputs;
 
 		for (int i = 0; i < inputs.length; i++)
 		{
-			if (inputs[i] == null || inputs[i].stackSize != 1)
+			if (inputs[i] == null)
 			{
-				throw new IllegalArgumentException("Input must not be null and be of size 1");
+				throw new IllegalArgumentException("Input must not be null.");
+			}
+			boolean isStack = inputs[i] instanceof ItemStack;
+			boolean isString = inputs[i] instanceof String;
+			if (isString)
+			{
+				inputs[i] = OreDictionary.getOres((String) inputs[i]);
+			} else if (!isStack)
+			{
+				throw new IllegalArgumentException("Input must not be an ItemStack or a String.");
 			}
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean matches(ItemStack input1, ItemStack input2, ItemStack input3)
 	{
 		ItemStack[] stacks = { input1, input2, input3 };
-		label: for (ItemStack input : inputs)
+		label: for (Object input : inputs)
 		{
 			for (int i = 0; i < stacks.length; i++)
 			{
 				if (stacks[i] != null)
 				{
-					if (Utils.areStacksTheSame(input, stacks[i], false) && stacks[i].stackSize >= input.stackSize)
+					if (input instanceof ItemStack)
 					{
-						stacks[i] = null;
-						continue label;
+						if (Utils.areStacksTheSame((ItemStack) input, stacks[i], false))
+						{
+							stacks[i] = null;
+							continue label;
+						}
+					} else
+					{
+						for (ItemStack s : (ArrayList<ItemStack>) input)
+						{
+							if (Utils.areStacksTheSame(s, stacks[i], false))
+							{
+								stacks[i] = null;
+								continue label;
+							}
+						}
 					}
 				}
 			}
@@ -73,23 +97,36 @@ public class OfferingAltarRecipe
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean isPartOfInput(ItemStack stack)
 	{
 		if (stack == null)
 		{
 			return false;
 		}
-		for (ItemStack input : inputs)
+		for (Object input : inputs)
 		{
-			if (Utils.areStacksTheSame(input, stack, false) && stack.stackSize >= input.stackSize)
+			if (input instanceof ItemStack)
 			{
-				return true;
+				if (Utils.areStacksTheSame((ItemStack) input, stack, false))
+				{
+					return true;
+				}
+			} else
+			{
+				for (ItemStack s : (ArrayList<ItemStack>) input)
+				{
+					if (Utils.areStacksTheSame(s, stack, false))
+					{
+						return true;
+					}
+				}
 			}
 		}
 		return false;
 	}
 
-	public ItemStack[] getInputs()
+	public Object[] getInputs()
 	{
 		return inputs;
 	}
