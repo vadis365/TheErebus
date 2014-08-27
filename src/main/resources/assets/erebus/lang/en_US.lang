@@ -156,6 +156,9 @@ tile.erebus.gneiss_2.name=Layered Gneiss
 tile.erebus.gneiss_3.name=Gneiss Slabs
 tile.erebus.gneiss_4.name=Smooth Gneiss
 tile.erebus.gneiss_5.name=Gneiss Tiles
+tile.erebus.templeBrick.name=Temple Brick
+tile.erebus.templePillar.name=Temple Pillar
+tile.erebus.templeTile.name=Temple Tile
 
 tile.erebus.mushroomCap0.name=Bulb Capped Mushroom
 tile.erebus.mushroomCap1.name=Grandma's Shoes Mushroom
