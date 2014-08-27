@@ -5,25 +5,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.item.ErebusMaterial;
-
 public class AltarRecipe
 {
 
 	private static final ArrayList<AltarRecipe> recipeRegistry = new ArrayList<AltarRecipe>();
-
-	public static void init()
-	{
-		addRecipe(new ItemStack(ModItems.jadeHeart), new ItemStack(ModBlocks.jadeBlock), new ItemStack(ModItems.erebusMaterials, 1, ErebusMaterial.DATA.crimsonHeart.ordinal()), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot));
-	}
 
 	/**
 	 *

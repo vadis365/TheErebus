@@ -11,10 +11,10 @@ import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarRepair;
 
-public class BlockErebusAltarRepair extends BlockErebusAltarLightning
+public class RepairAltar extends LightningAltar
 {
 
-	public BlockErebusAltarRepair()
+	public RepairAltar()
 	{
 		super();
 	}

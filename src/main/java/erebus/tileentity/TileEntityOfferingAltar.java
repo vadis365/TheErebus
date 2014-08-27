@@ -1,156 +1,128 @@
 package erebus.tileentity;
 
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.minecraft.util.AxisAlignedBB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketOfferingAltar;
+import erebus.recipes.OfferingAltarRecipe;
 
-public class TileEntityOfferingAltar extends TileEntity
+public class TileEntityOfferingAltar extends TileEntityBasicInventory
 {
-	public ItemStack[] stack;
-	public EntityItem[] items = new EntityItem[3];
+	@SideOnly(Side.CLIENT)
+	private EntityItem ghostItem;
+	public int time = 0;
+	private ItemStack output = null;
+
+	private static final int MAX_TIME = 430;
 
 	public TileEntityOfferingAltar()
 	{
-		stack = new ItemStack[3];
-	}
-
-	public static TileEntityOfferingAltar instance(World world, int x, int y, int z)
-	{
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
-		return tileEntity instanceof TileEntityOfferingAltar ? (TileEntityOfferingAltar) tileEntity : null;
-	}
-
-	public boolean canAddItem()
-	{
-		for (ItemStack item : stack)
-		{
-			if (item == null)
-			{
-				return true;
-			}
-		}
-		return false;
+		super(4, "offeringAltar");
 	}
 
 	@SideOnly(Side.CLIENT)
-	public EntityItem getEntityItem(int i)
+	public EntityItem getItemForRendering(int slot)
 	{
-		if (stack[i] == null)
+		if (ghostItem == null)
 		{
-			items[i] = null;
+			ghostItem = new EntityItem(worldObj);
+			ghostItem.hoverStart = 0.0F;
+		}
+
+		if (inventory[slot] == null)
+		{
 			return null;
 		} else
 		{
-			if (items[i] == null)
-			{
-				items[i] = new EntityItem(worldObj, 0d, 0d, 0d, stack[i]);
-				return items[i];
-			}
-			if (items[i].getEntityItem() != stack[i])
-			{
-				items[i] = new EntityItem(worldObj, 0d, 0d, 0d, stack[i]);
-				return items[i];
-			}
-			if (items[i] != null && items[i].getEntityItem() == stack[i])
-			{
-				return items[i];
-			}
+			ghostItem.setEntityItemStack(inventory[slot]);
+			return ghostItem;
 		}
-		return null;
 	}
 
-	public boolean addItem(Item item)
+	public void popStack()
 	{
-		if (canAddItem())
+		if (!worldObj.isRemote)
 		{
-			for (int i = 0; i < stack.length; i++)
+			for (int i = getSizeInventory() - 1; i >= 0; i--)
 			{
-				if (stack[i] == null)
+				if (inventory[i] != null)
 				{
-					stack[i] = new ItemStack(item);
-					return true;
+					Utils.dropStack(worldObj, xCoord, yCoord + 1, zCoord, inventory[i].copy());
+					inventory[i] = null;
+					markDirty();
+					return;
 				}
 			}
 		}
-		return false;
 	}
 
-	public ItemStack getLatestItem()
+	public void addStack(ItemStack stack)
 	{
-		int latest = 0;
-		ItemStack item;
-		for (int i = 0; i < stack.length; i++)
+		if (stack == null || stack.stackSize <= 0)
 		{
-			if (stack[i] != null)
+			return;
+		}
+		if (inventory[3] == null)
+		{
+			for (int i = 0; i < 3; i++)
 			{
-				latest = i;
+				if (inventory[i] == null)
+				{
+					addStack(i, stack);
+					return;
+				}
 			}
 		}
-		item = stack[latest];
-		stack[latest] = null;
-		return item;
 	}
 
-	public boolean hasItems()
+	private void addStack(int slot, ItemStack stack)
 	{
-		for (ItemStack item : stack)
+		if (!worldObj.isRemote)
 		{
-			if (item != null)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound tag)
-	{
-		super.writeToNBT(tag);
-		NBTTagList list = new NBTTagList();
-		for (int i = 0; i < stack.length; ++i)
-		{
-			if (stack[i] != null)
-			{
-				NBTTagCompound compound = new NBTTagCompound();
-				compound.setByte("slot", (byte) i);
-				stack[i].writeToNBT(compound);
-				list.appendTag(compound);
-			}
-		}
-		tag.setTag("items", list);
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
-		super.readFromNBT(tag);
-		NBTTagList list = tag.getTagList("items", 10);
-		for (int i = 0; i < list.tagCount(); ++i)
-		{
-			NBTTagCompound compound = list.getCompoundTagAt(i);
-			int j = compound.getByte("slot") & 255;
-
-			if (j >= 0 && j < stack.length)
-			{
-				stack[j] = ItemStack.loadItemStackFromNBT(compound);
-			}
+			inventory[slot] = ItemStack.copyItemStack(stack);
+			inventory[slot].stackSize = 1;
+			stack.stackSize--;
+			markDirty();
 		}
 	}
 
 	@Override
 	public void updateEntity()
 	{
-
+		if (output == null)
+		{
+			time = 0;
+		} else
+		{
+			time++;
+			if (!worldObj.isRemote)
+			{
+				if (time >= MAX_TIME)
+				{
+					inventory[3] = output;
+					for (int i = 0; i < 3; i++)
+					{
+						if (inventory[i] != null)
+						{
+							if (--inventory[i].stackSize <= 0)
+							{
+								inventory[i] = null;
+							}
+						}
+					}
+					time = 0;
+					markDirty();
+				}
+			}
+		}
 	}
 
 	@Override
@@ -158,12 +130,53 @@ public class TileEntityOfferingAltar extends TileEntity
 	{
 		NBTTagCompound tag = new NBTTagCompound();
 		writeToNBT(tag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
-		readFromNBT(packet.func_148857_g());
+		if (packet.func_148853_f() == 0)
+		{
+			readFromNBT(packet.func_148857_g());
+		}
+	}
+
+	@Override
+	public void markDirty()
+	{
+		super.markDirty();
+
+		output = OfferingAltarRecipe.getOutput(inventory[0], inventory[1], inventory[2]);
+
+		if (worldObj != null && !worldObj.isRemote)
+		{
+			NBTTagCompound nbt = new NBTTagCompound();
+			writeToNBT(nbt);
+			PacketPipeline.sendToAll(new PacketOfferingAltar(xCoord, yCoord, zCoord, nbt));
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 2, yCoord + 3, zCoord + 2);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		time = nbt.getInteger("time");
+
+		markDirty();
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		nbt.setInteger("time", time);
 	}
 }

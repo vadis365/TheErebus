@@ -69,7 +69,7 @@ public class PacketParticle extends AbstractClientPacket
 			case BEETLE_LARVA_SQUISH:
 				for (int count = 0; count <= 200; ++count)
 				{
-					eff.addEffect(new EntityBreakingFX(player.worldObj, e.posX + (rand.nextDouble() - 0.5D) * e.width, e.posY + rand.nextDouble() * e.height - e.yOffset, e.posZ + (rand.nextDouble() - 0.5D) * e.width, Items.slime_ball));
+					eff.addEffect(new EntityBreakingFX(player.worldObj, e.posX + (player.worldObj.rand.nextDouble() - 0.5D) * e.width, e.posY + player.worldObj.rand.nextDouble() * e.height - e.yOffset, e.posZ + (player.worldObj.rand.nextDouble() - 0.5D) * e.width, Items.slime_ball));
 				}
 				break;
 			case CRUSHROOM_BLAM:

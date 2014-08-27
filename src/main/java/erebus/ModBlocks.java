@@ -31,7 +31,6 @@ import erebus.block.BlockHoneyTreat;
 import erebus.block.BlockInsectRepellent;
 import erebus.block.BlockMucusBomb;
 import erebus.block.BlockMud;
-import erebus.block.BlockOfferingAltar;
 import erebus.block.BlockOreFossil;
 import erebus.block.BlockPetrifiedChest;
 import erebus.block.BlockPetrifiedCraftingTable;
@@ -57,10 +56,11 @@ import erebus.block.JarOHoney;
 import erebus.block.SaplessLog;
 import erebus.block.altars.BlockAltar;
 import erebus.block.altars.BlockErebusAltar;
-import erebus.block.altars.BlockErebusAltarHealing;
-import erebus.block.altars.BlockErebusAltarLightning;
-import erebus.block.altars.BlockErebusAltarRepair;
-import erebus.block.altars.BlockErebusAltarXP;
+import erebus.block.altars.HealingAltar;
+import erebus.block.altars.LightningAltar;
+import erebus.block.altars.RepairAltar;
+import erebus.block.altars.XPAltar;
+import erebus.block.altars.OfferingAltar;
 import erebus.block.bamboo.BlockBambooBridge;
 import erebus.block.bamboo.BlockBambooCrate;
 import erebus.block.bamboo.BlockBambooCrop;
@@ -189,10 +189,10 @@ public class ModBlocks
 	public static final Block bambooCrop = new BlockBambooCrop().setHardness(1.0F).setStepSound(Block.soundTypeWood).setBlockName("bambooCrop").setBlockTextureName("erebus:bambooCropBase");
 	public static final Block bambooTorch = new BlockBambooTorch().setHardness(0.0F).setBlockName("bambooTorch");
 	public static final Block erebusAltar = new BlockErebusAltar().setHardness(20.0F).setBlockName("erebusAltar");
-	public static final Block erebusAltarLightning = new BlockErebusAltarLightning().setHardness(20.0F).setBlockName("erebusAltarLightning");
-	public static final Block erebusAltarHealing = new BlockErebusAltarHealing().setHardness(20.0F).setBlockName("erebusAltarHealing");
-	public static final Block erebusAltarXP = new BlockErebusAltarXP().setHardness(20.0F).setBlockName("erebusAltarXP");
-	public static final Block erebusAltarRepair = new BlockErebusAltarRepair().setHardness(20.0F).setBlockName("erebusAltarRepair");
+	public static final Block erebusAltarLightning = new LightningAltar().setHardness(20.0F).setBlockName("erebusAltarLightning");
+	public static final Block erebusAltarHealing = new HealingAltar().setHardness(20.0F).setBlockName("erebusAltarHealing");
+	public static final Block erebusAltarXP = new XPAltar().setHardness(20.0F).setBlockName("erebusAltarXP");
+	public static final Block erebusAltarRepair = new RepairAltar().setHardness(20.0F).setBlockName("erebusAltarRepair");
 	public static final Block glowingJar = new BlockGlowingJar().setBlockName("glowingJar").setBlockTextureName("erebus:glassAmber");
 	public static final Block reinExo = new BlockSimple(Material.rock).setHardness(1.5F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("reinExo").setBlockTextureName("erebus:blockReinExo");
 	public static final Block bambooLadder = new BlockBambooLadder().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("bambooLadder").setBlockTextureName("erebus:bambooLadder");
@@ -239,7 +239,7 @@ public class ModBlocks
 
 	// OTHER THINGS (AKA LEXICONN'S STUFF. DELETE IF HE EVER QUITS)
 	public static final Block gaeanKeystone = new BlockGaeanKeystone();
-	public static final Block offeringAltar = new BlockOfferingAltar();
+	public static final Block offeringAltar = new OfferingAltar();
 
 	public static void init()
 	{

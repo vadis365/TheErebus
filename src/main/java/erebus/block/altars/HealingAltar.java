@@ -8,12 +8,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityErebusAltarLightning;
+import erebus.tileentity.TileEntityErebusAltarHealing;
 
-public class BlockErebusAltarLightning extends BlockContainer
+public class HealingAltar extends BlockContainer
 {
 
-	public BlockErebusAltarLightning()
+	public HealingAltar()
 	{
 		super(Material.rock);
 		setBlockTextureName("erebus:blockErebusAltarBreak");
@@ -40,7 +40,7 @@ public class BlockErebusAltarLightning extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityErebusAltarLightning();
+		return new TileEntityErebusAltarHealing();
 	}
 
 	@Override
@@ -52,14 +52,14 @@ public class BlockErebusAltarLightning extends BlockContainer
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		TileEntityErebusAltarLightning te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarLightning.class);
+		TileEntityErebusAltarHealing te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarHealing.class);
 		te.setActive(false);
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
 	{
-		TileEntityErebusAltarLightning te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarLightning.class);
+		TileEntityErebusAltarHealing te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarHealing.class);
 		if (player.getCurrentEquippedItem() != null)
 		{
 			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation && !te.active)
@@ -69,6 +69,9 @@ public class BlockErebusAltarLightning extends BlockContainer
 				te.setSpawnTicks(12000);
 				return true;
 			}
+		}
+		if (player.getCurrentEquippedItem() != null)
+		{
 			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation && te.active)
 			{
 				player.getCurrentEquippedItem().damageItem(1, player);
@@ -76,7 +79,6 @@ public class BlockErebusAltarLightning extends BlockContainer
 				return true;
 			}
 		}
-
 		return false;
 	}
 }

@@ -30,8 +30,8 @@ import erebus.integration.ModIntegrationHandler;
 import erebus.integration.ThaumcraftIntegration;
 import erebus.lib.Reference;
 import erebus.network.PacketPipeline;
-import erebus.recipes.AltarRecipe;
 import erebus.recipes.ComposterRegistry;
+import erebus.recipes.ErebusRecipesHandler;
 import erebus.recipes.RecipeHandler;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
@@ -80,7 +80,7 @@ public class Erebus
 		PacketPipeline.initializePipeline();
 		ModBiomes.init();
 		RecipeHandler.init();
-		AltarRecipe.init();
+		ErebusRecipesHandler.init();
 		TeleporterHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());

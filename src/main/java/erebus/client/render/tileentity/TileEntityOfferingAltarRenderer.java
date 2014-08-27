@@ -1,6 +1,5 @@
 package erebus.client.render.tileentity;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -18,15 +17,20 @@ import erebus.tileentity.TileEntityOfferingAltar;
 @SideOnly(Side.CLIENT)
 public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 {
-	public ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/offeringAltar.png");
-	public ModelOfferingAltar model = new ModelOfferingAltar();
-	public EntityItem[] items = new EntityItem[3];
-	public Minecraft mc = Minecraft.getMinecraft();
-	public RenderItem renderItem;
+	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/offeringAltar.png");
+	private final ModelOfferingAltar model = new ModelOfferingAltar();
+	private final RenderItem renderItem;
 
 	public TileEntityOfferingAltarRenderer()
 	{
-		renderItem = new RenderItem();
+		renderItem = new RenderItem()
+		{
+			@Override
+			public boolean shouldBob()
+			{
+				return true;
+			}
+		};
 		renderItem.setRenderManager(RenderManager.instance);
 	}
 
@@ -35,27 +39,45 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 	{
 		TileEntityOfferingAltar tile = (TileEntityOfferingAltar) t;
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.55F, (float) z + 0.5F);
-		GL11.glRotatef(180f, 1f, 0f, 0f);
+		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GL11.glScaled(-1, -1, 1);
 		bindTexture(texture);
 		model.render();
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
+		GL11.glTranslatef((float) x + 0.75F, (float) y + 0.75F, (float) z + 0.5F);
 		renderItem(tile);
 		GL11.glPopMatrix();
 	}
 
 	public void renderItem(TileEntityOfferingAltar tile)
 	{
-		if (!tile.getWorldObj().isRemote)
+		float angle = tile.time;//(720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+		if (tile.getStackInSlot(3) == null)
 		{
-			tile.getWorldObj().markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
-		}
-		for (int i = 0; i < tile.items.length; i++)
-		{
-			EntityItem item = tile.getEntityItem(i);
-			if (item != null)
+			GL11.glRotated(90, 0, 0, 1);
+			for (int i = 0; i < 3; i++)
 			{
-				renderItem.doRender(item, 0d, 0d, 0d, 0f, 0f);
+				GL11.glTranslated(0.5, 0, 0);
+				GL11.glRotated(angle, 1, 1, 1);
+				EntityItem item = tile.getItemForRendering(i);
+				if (item != null)
+				{
+					GL11.glPushMatrix();
+					GL11.glRotated(angle, 1, 0, 0);
+					renderItem.doRender(item, 0, 0, 0, 0, 0);
+					GL11.glPopMatrix();
+				}
 			}
+		} else
+		{
+			GL11.glPushMatrix();
+			GL11.glTranslatef(-0.25F, 1.5F, 0);
+			GL11.glRotatef((float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL), 0, 1, 0);
+			GL11.glScaled(1.5, 1.5, 1.5);
+			renderItem.doRender(tile.getItemForRendering(3), 0, 0, 0, 0, 0);
+			GL11.glPopMatrix();
 		}
 	}
 }

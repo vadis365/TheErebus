@@ -1,7 +1,7 @@
 # Blocks
 tile.portalErebus.name=Erebus Portal
 tile.gaeanKeystone.name=Gaean Keystone
-tile.offeringAltar.name=Offering Altar
+tile.erebus.offeringAltar.name=Offering Altar
 
 tile.blockAmber0.name=Amber
 tile.blockAmber1.name=Amber Glass

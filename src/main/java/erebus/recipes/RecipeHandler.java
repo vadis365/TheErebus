@@ -204,6 +204,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.siloSupports), "xxx", "y y", "y y", 'x', "slabWood", 'y', Blocks.fence));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.siloTank), "xzx", "ywy", "xzx", 'x', "ingotIron", 'y', "blockIron", 'z', ModBlocks.varnishedPlanks, 'w', ModBlocks.petrifiedWoodChest));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.siloRoof), " x ", "xyx", 'x', ModBlocks.varnishedPlanks, 'y', ModBlocks.petrifiedWoodPlanks);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.offeringAltar), "xwx", "yzy", "xyx", 'x', "stone", 'y', Blocks.stonebrick, 'z', Blocks.obsidian, 'w', "ingotGold"));
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, ErebusMaterial.createStack(ErebusMaterial.DATA.poisonGland), ErebusMaterial.createStack(ErebusMaterial.DATA.nettleleaves), ErebusMaterial.createStack(ErebusMaterial.DATA.nettleleaves));

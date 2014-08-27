@@ -20,6 +20,9 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.registerGuiOverlay(GuiPetrifiedWorkbench.class, "crafting");
 		API.registerGuiOverlayHandler(GuiPetrifiedWorkbench.class, new DefaultOverlayHandler(), "crafting");
 
+		API.registerRecipeHandler(new OfferingAltarNEIHandler());
+		API.registerUsageHandler(new OfferingAltarNEIHandler());
+
 		API.hideItem(new ItemStack(ModBlocks.portal));
 		API.hideItem(new ItemStack(ModBlocks.blockTurnip));
 		API.hideItem(new ItemStack(ModBlocks.insectRepellent));

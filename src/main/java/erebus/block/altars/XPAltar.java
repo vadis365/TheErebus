@@ -13,13 +13,13 @@ import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarXP;
 
-public class BlockErebusAltarXP extends BlockErebusAltar
+public class XPAltar extends BlockErebusAltar
 {
 
 	private Item item;
 	private int meta;
 
-	public BlockErebusAltarXP()
+	public XPAltar()
 	{
 		super();
 	}

@@ -8,12 +8,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityErebusAltarHealing;
+import erebus.tileentity.TileEntityErebusAltarLightning;
 
-public class BlockErebusAltarHealing extends BlockContainer
+public class LightningAltar extends BlockContainer
 {
 
-	public BlockErebusAltarHealing()
+	public LightningAltar()
 	{
 		super(Material.rock);
 		setBlockTextureName("erebus:blockErebusAltarBreak");
@@ -40,7 +40,7 @@ public class BlockErebusAltarHealing extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityErebusAltarHealing();
+		return new TileEntityErebusAltarLightning();
 	}
 
 	@Override
@@ -52,14 +52,14 @@ public class BlockErebusAltarHealing extends BlockContainer
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		TileEntityErebusAltarHealing te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarHealing.class);
+		TileEntityErebusAltarLightning te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarLightning.class);
 		te.setActive(false);
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
 	{
-		TileEntityErebusAltarHealing te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarHealing.class);
+		TileEntityErebusAltarLightning te = Utils.getTileEntity(world, x, y, z, TileEntityErebusAltarLightning.class);
 		if (player.getCurrentEquippedItem() != null)
 		{
 			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation && !te.active)
@@ -69,9 +69,6 @@ public class BlockErebusAltarHealing extends BlockContainer
 				te.setSpawnTicks(12000);
 				return true;
 			}
-		}
-		if (player.getCurrentEquippedItem() != null)
-		{
 			if (player.getCurrentEquippedItem().getItem() == ModItems.wandOfAnimation && te.active)
 			{
 				player.getCurrentEquippedItem().damageItem(1, player);
@@ -79,6 +76,7 @@ public class BlockErebusAltarHealing extends BlockContainer
 				return true;
 			}
 		}
+
 		return false;
 	}
 }
