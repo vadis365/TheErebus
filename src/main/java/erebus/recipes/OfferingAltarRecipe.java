@@ -41,6 +41,10 @@ public class OfferingAltarRecipe
 	{
 		this.output = output;
 		this.inputs = inputs;
+		if (inputs.length > 3)
+		{
+			throw new IllegalArgumentException("Must not have more than 3 inputs.");
+		}
 
 		for (int i = 0; i < inputs.length; i++)
 		{

@@ -107,6 +107,7 @@ import erebus.client.render.item.ExtenderThingyItemRenderer;
 import erebus.client.render.item.ItemBoneBlockRenderer;
 import erebus.client.render.item.ItemErebusAltarRenderer;
 import erebus.client.render.item.ItemGlowingJarRenderer;
+import erebus.client.render.item.ItemOfferingAltarRenderer;
 import erebus.client.render.item.ItemPetrifiedWoodChestRenderer;
 import erebus.client.render.item.ItemUmberFurnaceRenderer;
 import erebus.client.render.item.ItemUmberGolemStatueRenderer;
@@ -325,15 +326,15 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPortal.class, new TileEntityPortalRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingAltar.class, new TileEntityOfferingAltarRenderer());
 
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.BAMBOO_CROP.id(), new BlockBambooCropRender());
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.HOLLOW_LOG.id(), new BlockHollowLogRender());
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.PLANTED_FLOWER.id(), new BlockPlantedFlowerRender());
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.GLOWSHROOM_STALK.id(), new BlockGlowshroomStalkRender());
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.GLOWSHROOM_CAPS.id(), new BlockGlowshroomRender());
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.SILO_ROOF.id(), new BlockSiloRoofRender());
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.SILO_SUPPORTS.id(), new BlockSiloSupportsRender());
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.COMPOSTER.id(), new BlockComposterRender());
-		RenderingRegistry.registerBlockHandler(BlockRenderIDs.KEYSTONE.id(), new BlockKeystoneRenderer());
+		RenderingRegistry.registerBlockHandler(new BlockBambooCropRender());
+		RenderingRegistry.registerBlockHandler(new BlockHollowLogRender());
+		RenderingRegistry.registerBlockHandler(new BlockPlantedFlowerRender());
+		RenderingRegistry.registerBlockHandler(new BlockGlowshroomStalkRender());
+		RenderingRegistry.registerBlockHandler(new BlockGlowshroomRender());
+		RenderingRegistry.registerBlockHandler(new BlockSiloRoofRender());
+		RenderingRegistry.registerBlockHandler(new BlockSiloSupportsRender());
+		RenderingRegistry.registerBlockHandler(new BlockComposterRender());
+		RenderingRegistry.registerBlockHandler(new BlockKeystoneRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.erebusAltar), new ItemErebusAltarRenderer());
@@ -358,6 +359,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.jarOHoney), new ItemGlowingJarRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.woodlouseBall, new WoodlouseBallItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.portalActivator, new PortalActivatorRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.offeringAltar), new ItemOfferingAltarRenderer());
 	}
 
 	@Override

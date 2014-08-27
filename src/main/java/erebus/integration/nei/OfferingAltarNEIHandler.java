@@ -1,7 +1,9 @@
 package erebus.integration.nei;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
@@ -87,39 +89,41 @@ public class OfferingAltarNEIHandler extends TemplateRecipeHandler
 		}
 	}
 
-	class CachedAltarRecipe extends CachedRecipe
+	private class CachedAltarRecipe extends CachedRecipe
 	{
 
-		private final PositionedStack[] inputs;
+		private final List<PositionedStack> inputs;
 		private final PositionedStack result;
 
-		CachedAltarRecipe(OfferingAltarRecipe recipe)
+		private CachedAltarRecipe(OfferingAltarRecipe recipe)
 		{
 			result = new PositionedStack(recipe.getOutput(), 127, 24);
 
 			int y = 16;
 			int x = 16;
 
-			Object[] input = recipe.getInputs();
-			inputs = new PositionedStack[input.length];
-			if (input[0] != null)
+			List<?> input = Arrays.asList(recipe.getInputs());
+			Collections.shuffle(input);
+
+			inputs = new ArrayList<PositionedStack>();
+			if (input.get(0) != null)
 			{
-				inputs[0] = new PositionedStack(input[0], x + 28, y);
+				inputs.add(new PositionedStack(input.get(0), x + 28, y));
 			}
-			if (input[1] != null)
+			if (input.size() >= 2 && input.get(1) != null)
 			{
-				inputs[1] = new PositionedStack(input[1], x + 28 - 18, y + 18);
+				inputs.add(new PositionedStack(input.get(1), x + 28 - 18, y + 18));
 			}
-			if (input[2] != null)
+			if (input.size() >= 3 && input.get(2) != null)
 			{
-				inputs[2] = new PositionedStack(input[2], x + 28 + 18, y + 18);
+				inputs.add(new PositionedStack(input.get(2), x + 28 + 18, y + 18));
 			}
 		}
 
 		@Override
 		public List<PositionedStack> getIngredients()
 		{
-			return getCycledIngredients(cycleticks / 20, Arrays.asList(inputs));
+			return getCycledIngredients(cycleticks / 20, inputs);
 		}
 
 		@Override
