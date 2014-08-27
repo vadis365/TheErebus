@@ -320,6 +320,7 @@ public class RecipeHandler
 		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.oreEncrustedDiamond));
 		OreDictionary.registerOre("oreFossil", new ItemStack(ModBlocks.oreFossil));
 		OreDictionary.registerOre("oreTemple", new ItemStack(ModBlocks.oreTemple));
+		OreDictionary.registerOre("oreGneiss", new ItemStack(ModBlocks.oreGneiss));
 
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
 		OreDictionary.registerOre("stone", new ItemStack(ModBlocks.umberstone));
