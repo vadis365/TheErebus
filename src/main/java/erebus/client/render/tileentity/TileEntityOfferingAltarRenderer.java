@@ -73,7 +73,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 		} else
 		{
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-0.25F, 1.5F, 0);
+			GL11.glTranslatef(-0.25F, 0.25F, 0);
 			GL11.glRotatef((float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL), 0, 1, 0);
 			GL11.glScaled(1.5, 1.5, 1.5);
 			renderItem.doRender(tile.getItemForRendering(3), 0, 0, 0, 0, 0);
