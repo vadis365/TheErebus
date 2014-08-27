@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -33,6 +34,7 @@ public class SmallMushroom extends BlockMushroom
 		setStepSound(soundTypeGrass);
 		setBlockName("erebus." + name);
 		setCreativeTab(ModTabs.plants);
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override

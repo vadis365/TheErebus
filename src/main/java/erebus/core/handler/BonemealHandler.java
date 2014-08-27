@@ -7,7 +7,6 @@ import erebus.block.plants.BlockSaplingErebus;
 
 public class BonemealHandler
 {
-
 	@SubscribeEvent
 	public void onBonemeal(BonemealEvent event)
 	{
