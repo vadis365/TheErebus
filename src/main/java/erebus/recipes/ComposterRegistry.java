@@ -13,6 +13,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 
@@ -21,6 +22,7 @@ public class ComposterRegistry
 
 	private static List<Material> compostableMaterials = Arrays.asList(Material.cactus, Material.cake, Material.coral, Material.gourd, Material.grass, Material.leaves, Material.plants, Material.sponge, Material.vine, Material.web, Material.wood);
 	private static List<ItemStack> registry = new ArrayList<ItemStack>();
+	private static List<ItemStack> blacklist = new ArrayList<ItemStack>();
 
 	public static void init()
 	{
@@ -33,6 +35,8 @@ public class ComposterRegistry
 		register(Items.wooden_sword);
 		register(Items.wheat);
 		register(Items.poisonous_potato);
+
+		blacklist.add(new ItemStack(ModBlocks.wallPlants, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	private static void register(Item item)
@@ -50,6 +54,13 @@ public class ComposterRegistry
 		if (stack == null)
 		{
 			return null;
+		}
+		for (ItemStack s : blacklist)
+		{
+			if (Utils.areStacksTheSame(s, stack, false))
+			{
+				return null;
+			}
 		}
 
 		if (stack.getItem() instanceof ItemFood || stack.getItem() instanceof ItemSeeds)
