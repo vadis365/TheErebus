@@ -16,9 +16,7 @@ import erebus.block.BlockComposter;
 import erebus.block.BlockDoorAmber;
 import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusMushroomCap;
-import erebus.block.BlockErebusPortal;
 import erebus.block.BlockErebusStigma;
-import erebus.block.BlockGaeanKeystone;
 import erebus.block.BlockGhostSand;
 import erebus.block.BlockGlowGem;
 import erebus.block.BlockGlowingJar;
@@ -49,6 +47,8 @@ import erebus.block.BlockWallErebus;
 import erebus.block.BlockWaspNest;
 import erebus.block.BlockWaspSpawner;
 import erebus.block.BlockWitherWeb;
+import erebus.block.ErebusPortal;
+import erebus.block.GaeanKeystone;
 import erebus.block.JarOHoney;
 import erebus.block.SaplessLog;
 import erebus.block.altars.BlockAltar;
@@ -106,7 +106,7 @@ public class ModBlocks
 {
 
 	// PORTAL
-	public static final BlockErebusPortal portal = new BlockErebusPortal();
+	public static final Block portal = new ErebusPortal();
 
 	// TERRAIN
 	public static final Block umberstone = new BlockUmberstone().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberstone");
@@ -265,7 +265,7 @@ public class ModBlocks
 	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.waspNestStairs");
 
 	// OTHER THINGS (AKA LEXICONN'S STUFF. DELETE IF HE EVER QUITS)
-	public static final Block gaeanKeystone = new BlockGaeanKeystone();
+	public static final Block gaeanKeystone = new GaeanKeystone();
 	public static final Block offeringAltar = new OfferingAltar();
 
 	public static void init()

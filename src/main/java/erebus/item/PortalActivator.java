@@ -10,9 +10,9 @@ public class PortalActivator extends Item
 
 	public PortalActivator()
 	{
-		setMaxStackSize(1);
-		setMaxDamage(64);
 		setFull3D();
+		setMaxDamage(64);
+		setMaxStackSize(1);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.block.BlockGaeanKeystone;
+import erebus.block.GaeanKeystone;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
@@ -26,7 +26,7 @@ public class BlockKeystoneRenderer implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		renderKeystone(renderer, (BlockGaeanKeystone) block, x, y, z);
+		renderKeystone(renderer, (GaeanKeystone) block, x, y, z);
 		return true;
 	}
 
@@ -42,11 +42,11 @@ public class BlockKeystoneRenderer implements ISimpleBlockRenderingHandler
 		return BlockRenderIDs.KEYSTONE.id();
 	}
 
-	public boolean renderKeystone(RenderBlocks renderer, BlockGaeanKeystone block, int x, int y, int z)
+	public boolean renderKeystone(RenderBlocks renderer, GaeanKeystone block, int x, int y, int z)
 	{
 		int l = renderer.blockAccess.getBlockMetadata(x, y, z);
 
-		if (!BlockGaeanKeystone.isGemActive(l))
+		if (!GaeanKeystone.isGemActive(l))
 		{
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.8125D, 1.0D);
 			renderer.renderStandardBlock(block, x, y, z);
