@@ -128,6 +128,16 @@ public class RecipeHandler
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.waspDagger), Materials.createStack(Materials.DATA.waspSting), new ItemStack(Items.stick));
 		GameRegistry.addRecipe(new RecipeSprintLeggingsUpgrades());
 		GameRegistry.addRecipe(new RecipeWhetstoneUpgrades());
+		
+		// Mushroom Helm & Mushroom Blocks
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.mushroomHelm, 1), new ItemStack(ModBlocks.mushroomCap0, 1), new ItemStack(ModBlocks.mushroomCap1, 1), new ItemStack(ModBlocks.mushroomCap2, 1), new ItemStack(ModBlocks.mushroomCap3, 1), new ItemStack(ModBlocks.mushroomCap4, 1), new ItemStack(Blocks.red_mushroom_block, 1), new ItemStack(Blocks.brown_mushroom_block, 1), Materials.createStack(Materials.DATA.camoPowder), new ItemStack(Blocks.pumpkin, 1)); 
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap0, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bulbCappedShroom, 1));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap1, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.kaizerfinger, 1));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap2, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bundleshroom, 1));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap3, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.greenMushroom));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap4, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.dutchCap, 1));
+		GameRegistry.addRecipe(new ItemStack(Blocks.red_mushroom_block, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.red_mushroom, 1));
+		GameRegistry.addRecipe(new ItemStack(Blocks.brown_mushroom_block, 1), "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.brown_mushroom, 1));
 
 		// Red Gem
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.redstone, 2, 0), Materials.createStack(Materials.DATA.redGem));

@@ -37,6 +37,7 @@ import erebus.item.JumpBoots;
 import erebus.item.Materials;
 import erebus.item.Materials.DATA;
 import erebus.item.MaxSpeedBow;
+import erebus.item.MushroomHelm;
 import erebus.item.NectarCollector;
 import erebus.item.Paxel;
 import erebus.item.Planticide;
@@ -145,7 +146,7 @@ public class ModItems
 	public static final Item jumpBoots = new JumpBoots(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("erebus.jumpBoots").setTextureName("erebus:jumpBoots");
 	public static final Item armorGlider = new ArmorGlider().setUnlocalizedName("erebus.armorGlider").setTextureName("erebus:armorGlider");
 	public static final Item armorGliderPowered = new ArmorGlider().setUnlocalizedName("erebus.armorGliderPowered").setTextureName("erebus:armorGliderPowered");
-
+	public static final Item mushroomHelm = new MushroomHelm(0).setUnlocalizedName("mushroomHelm").setTextureName("erebus:mushroomHelm");
 	// CREATIVE
 	public static final Item spawnEggs = new SpawnEggs().setUnlocalizedName("erebus.monsterPlacer").setTextureName("spawn_egg");
 
