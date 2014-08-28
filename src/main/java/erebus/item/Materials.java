@@ -75,7 +75,8 @@ public class Materials extends Item
 		ingotLead,
 		ingotSilver,
 		ingotTin,
-		gneissRock;
+		gneissRock,
+		hideShroom;
 	}
 
 	public static ItemStack createStack(DATA data)
