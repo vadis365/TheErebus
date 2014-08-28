@@ -35,6 +35,7 @@ public class TileEntityPortal extends TileEntity
 				}
 				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 				worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord + 2, zCoord, 0, 2);
 			}
 		}
 	}
