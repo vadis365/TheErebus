@@ -149,12 +149,13 @@ public class ModBlocks
 	public static final Block saplessLog = new SaplessLog();
 
 	// DOUBLE PLANTS
-	public static final Block sundew = new DoubleHeightPlant("Sundew");
-	public static final Block weepingBlue = new DoubleHeightPlant("WeepingBlue");
+	public static final Block sundew = new DoubleHeightPlant("Sundew", 0.8F);
+	public static final Block weepingBlue = new DoubleHeightPlant("WeepingBlue", 0.5F);
 	public static final Block bullrush = new DoubleHeightPlant("Bullrush");
 	public static final Block droughtedShrub = new DoubleHeightPlant("DroughtedShrub");
 	public static final Block tangledStalk = new DoubleHeightPlant("TangledStalk");
-	public static final Block highCapped = new DoubleHeightPlant("HighCapped");
+	public static final Block highCapped = new DoubleHeightPlant("HighCapped", 0.6F);
+	public static final Block waterFlower = new DoubleHeightPlant("WaterFlower", 0.5F);
 
 	// SMALL PLANTS
 	public static final Block fiddlehead = new SmallPlant("fiddlehead", true);

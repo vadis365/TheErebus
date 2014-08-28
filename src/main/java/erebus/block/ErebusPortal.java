@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,51 +40,51 @@ public class ErebusPortal extends Block
 	public static boolean isPatternValid(World world, int x, int y, int z)
 	{
 		// Layer 0
-		if (world.getBlock(x, y - 1, z) != Blocks.stonebrick || world.getBlockMetadata(x, y - 1, z) != 3)
+		if (!check(world, x, y - 1, z, Blocks.stonebrick, 3))
 		{
 			return false;
 		}
 
 		// Layer 1
-		if (world.getBlock(x - 1, y, z - 1) != Blocks.stonebrick || world.getBlockMetadata(x - 1, y, z - 1) != 0)
+		if (!check(world, x - 1, y, z - 1, Blocks.stonebrick, 0))
 		{
 			return false;
 		}
-		if (world.getBlock(x - 1, y, z + 1) != Blocks.stonebrick || world.getBlockMetadata(x - 1, y, z + 1) != 0)
+		if (!check(world, x - 1, y, z + 1, Blocks.stonebrick, 0))
 		{
 			return false;
 		}
-		if (world.getBlock(x + 1, y, z - 1) != Blocks.stonebrick || world.getBlockMetadata(x + 1, y, z - 1) != 0)
+		if (!check(world, x + 1, y, z - 1, Blocks.stonebrick, 0))
 		{
 			return false;
 		}
-		if (world.getBlock(x + 1, y, z + 1) != Blocks.stonebrick || world.getBlockMetadata(x + 1, y, z + 1) != 0)
+		if (!check(world, x + 1, y, z + 1, Blocks.stonebrick, 0))
 		{
 			return false;
 		}
-		if (world.getBlock(x, y, z) != Blocks.air && world.getBlock(x, y, z) != ModBlocks.portal)
+		if (!world.isAirBlock(x, y, z) && world.getBlock(x, y, z) != ModBlocks.portal)
 		{
 			return false;
 		}
 
 		// Layer 2
-		if (world.getBlock(x - 1, y + 1, z + 1) != Blocks.stonebrick || world.getBlockMetadata(x - 1, y + 1, z + 1) != 0)
+		if (!check(world, x - 1, y + 1, z - 1, Blocks.stonebrick, 0))
 		{
 			return false;
 		}
-		if (world.getBlock(x - 1, y + 1, z - 1) != Blocks.stonebrick || world.getBlockMetadata(x - 1, y + 1, z - 1) != 0)
+		if (!check(world, x - 1, y + 1, z + 1, Blocks.stonebrick, 0))
 		{
 			return false;
 		}
-		if (world.getBlock(x + 1, y + 1, z + 1) != Blocks.stonebrick || world.getBlockMetadata(x + 1, y + 1, z + 1) != 0)
+		if (!check(world, x + 1, y + 1, z - 1, Blocks.stonebrick, 0))
 		{
 			return false;
 		}
-		if (world.getBlock(x + 1, y + 1, z - 1) != Blocks.stonebrick || world.getBlockMetadata(x + 1, y + 1, z - 1) != 0)
+		if (!check(world, x + 1, y + 1, z + 1, Blocks.stonebrick, 0))
 		{
 			return false;
 		}
-		if (world.getBlock(x, y + 1, z) != Blocks.air && world.getBlock(x, y + 1, z) != ModBlocks.portal)
+		if (!world.isAirBlock(x, y + 1, z) && world.getBlock(x, y + 1, z) != ModBlocks.portal)
 		{
 			return false;
 		}
@@ -93,40 +94,28 @@ public class ErebusPortal extends Block
 		{
 			return false;
 		}
-		if (world.getBlock(x - 1, y + 2, z) != Blocks.stone_slab || world.getBlockMetadata(x - 1, y + 2, z) != 5)
+
+		for (int i = -1; i <= -1; i++)
 		{
-			return false;
-		}
-		if (world.getBlock(x - 1, y + 2, z - 1) != Blocks.stone_slab || world.getBlockMetadata(x - 1, y + 2, z - 1) != 5)
-		{
-			return false;
-		}
-		if (world.getBlock(x - 1, y + 2, z + 1) != Blocks.stone_slab || world.getBlockMetadata(x - 1, y + 2, z + 1) != 5)
-		{
-			return false;
-		}
-		if (world.getBlock(x, y + 2, z - 1) != Blocks.stone_slab || world.getBlockMetadata(x, y + 2, z - 1) != 5)
-		{
-			return false;
-		}
-		if (world.getBlock(x, y + 2, z + 1) != Blocks.stone_slab || world.getBlockMetadata(x, y + 2, z + 1) != 5)
-		{
-			return false;
-		}
-		if (world.getBlock(x + 1, y + 2, z) != Blocks.stone_slab || world.getBlockMetadata(x - 1, y + 2, z) != 5)
-		{
-			return false;
-		}
-		if (world.getBlock(x + 1, y + 2, z - 1) != Blocks.stone_slab || world.getBlockMetadata(x + 1, y + 2, z - 1) != 5)
-		{
-			return false;
-		}
-		if (world.getBlock(x + 1, y + 2, z + 1) != Blocks.stone_slab || world.getBlockMetadata(x + 1, y + 2, z + 1) != 5)
-		{
-			return false;
+			for (int j = -1; j <= -1; j++)
+			{
+				if (i == 0 && j == 0)
+				{
+					continue;
+				}
+				if (!check(world, x + i, y + 2, z + j, Blocks.stone_slab, 5))
+				{
+					return false;
+				}
+			}
 		}
 
 		return true;
+	}
+
+	private static boolean check(World world, int x, int y, int z, Block target, int meta)
+	{
+		return world.getBlock(x, y, z) == target && world.getBlockMetadata(x, y, z) == meta;
 	}
 
 	@Override
@@ -173,5 +162,12 @@ public class ErebusPortal extends Block
 	public boolean isOpaqueCube()
 	{
 		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	{
+		return side > 1;
 	}
 }

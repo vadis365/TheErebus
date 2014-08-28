@@ -2,6 +2,7 @@ package erebus.block;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,6 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.Materials;
@@ -115,5 +117,19 @@ public class GaeanKeystone extends BlockContainer
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityGaeanKeystone();
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	{
+		super.breakBlock(world, x, y, z, block, meta);
+		if (world.getBlock(x, y - 1, z) == ModBlocks.portal)
+		{
+			world.setBlockToAir(x, y - 1, z);
+		}
+		if (world.getBlock(x, y - 2, z) == ModBlocks.portal)
+		{
+			world.setBlockToAir(x, y - 2, z);
+		}
 	}
 }

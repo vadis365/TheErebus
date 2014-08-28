@@ -208,6 +208,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.templeTile, 4), "xx", "xx", 'x', new ItemStack(ModBlocks.templeBrick));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.templePillar, 2), "x", "x", 'x', new ItemStack(ModBlocks.templeTile));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.gneiss), "xx", "xx", 'x', Materials.createStack(Materials.DATA.gneissRock));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 2, 9), ModBlocks.waterFlower);
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));

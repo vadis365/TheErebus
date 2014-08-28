@@ -170,6 +170,17 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus{
 				genMossPatch.generate(world,rand,xx,yy,zz);
 			}
 		}
+
+		for(attempt = 0; attempt < 15; attempt++){
+			xx = x + offsetXZ();
+			yy = 20 + rand.nextInt(80);
+			zz = z + offsetXZ();
+
+			if (world.getBlock(xx,yy - 1,zz) == Blocks.grass && world.isAirBlock(xx,yy,zz) && world.isAirBlock(xx,yy + 1,zz)){
+				world.setBlock(xx,yy,zz,ModBlocks.waterFlower,0,2);
+				world.setBlock(xx,yy + 1,zz,ModBlocks.waterFlower,8,2);
+			}
+		}
 	}
 
 	@Override

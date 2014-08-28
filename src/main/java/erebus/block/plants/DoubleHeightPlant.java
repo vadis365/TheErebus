@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.Materials;
 
 public class DoubleHeightPlant extends BlockDoublePlant
@@ -27,10 +28,22 @@ public class DoubleHeightPlant extends BlockDoublePlant
 
 	public DoubleHeightPlant(String name)
 	{
+		this(name, 1);
+	}
+
+	public DoubleHeightPlant(String name, float width)
+	{
 		this.name = name;
 		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
+		float w = (1F - width) / 2F;
+		setBlockBounds(w, 0, w, width + w, 1, width + w);
 		setBlockName("erebus." + name.substring(0, 1).toLowerCase() + name.substring(1));
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
+	{
 	}
 
 	@Override
@@ -51,6 +64,9 @@ public class DoubleHeightPlant extends BlockDoublePlant
 		} else if ("Bullrush".equals(name))
 		{
 			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.papyrus.ordinal()));
+		} else if ("WaterFlower".equals(name))
+		{
+			drops.add(new ItemStack(this));
 		} else
 		{
 			ItemStack seed = ForgeHooks.getGrassSeed(world);
@@ -66,14 +82,21 @@ public class DoubleHeightPlant extends BlockDoublePlant
 	@Override
 	public int getRenderType()
 	{
-		return 1;
+		return BlockRenderIDs.DOUBLE_PLANTS.id();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return func_149887_c(meta) ? top : bottom;
+		return top;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
+	{
+		return func_149887_c(world.getBlockMetadata(x, y, z)) ? top : bottom;
 	}
 
 	@Override

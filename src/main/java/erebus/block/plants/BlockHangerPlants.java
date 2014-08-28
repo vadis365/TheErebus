@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
-import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.item.Food;
 import erebus.item.Materials.DATA;
@@ -33,7 +32,6 @@ public class BlockHangerPlants extends BlockBush
 	{
 		setHardness(0.0F);
 		setBlockName("erebus.hanger");
-		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
 	}
 

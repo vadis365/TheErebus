@@ -3,7 +3,6 @@ package erebus.world.teleporter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -18,7 +17,6 @@ import erebus.ModBlocks;
 final class TeleporterErebus extends Teleporter
 {
 	private final WorldServer worldServerInstance;
-	private final Random rand;
 	private final LongHashMap destinationCoordinateCache = new LongHashMap();
 	private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
 
@@ -26,7 +24,6 @@ final class TeleporterErebus extends Teleporter
 	{
 		super(worldServer);
 		worldServerInstance = worldServer;
-		rand = new Random(worldServer.getSeed() + 1);
 	}
 
 	@Override
@@ -236,6 +233,10 @@ final class TeleporterErebus extends Teleporter
 
 		// Layer 0
 		worldServerInstance.setBlock(x, y - 1, z, Blocks.stonebrick, 3, 3);
+		worldServerInstance.setBlock(x - 1, y - 1, z, ModBlocks.redGem);
+		worldServerInstance.setBlock(x, y - 1, z - 1, ModBlocks.redGem);
+		worldServerInstance.setBlock(x + 1, y - 1, z, ModBlocks.redGem);
+		worldServerInstance.setBlock(x, y - 1, z + 1, ModBlocks.redGem);
 
 		// Layer 1
 		worldServerInstance.setBlock(x - 1, y, z + 1, Blocks.stonebrick);
@@ -262,6 +263,13 @@ final class TeleporterErebus extends Teleporter
 					worldServerInstance.setBlock(x + i, y + 2, z + j, Blocks.stone_slab, 5, 3);
 				}
 			}
+		}
+
+		int height = y + 3;
+		while (worldServerInstance.getBlock(x, height, z).getBlockHardness(worldServerInstance, x, height, z) >= 0)
+		{
+			worldServerInstance.setBlockToAir(x, height, z);
+			height++;
 		}
 
 		return true;
