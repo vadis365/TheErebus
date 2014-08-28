@@ -89,7 +89,7 @@ public class BlockErebusPortal extends BlockContainer
 			{
 				return false;
 			}
-            if (w.getBlock(x, y, z) != Blocks.air)
+            if (w.getBlock(x, y + 1, z) != Blocks.air)
             {
                 if (w.getBlock(x, y + 1, z) != ModBlocks.portal) return false;
             }
