@@ -151,7 +151,9 @@ public final class OreSettings
 		COPPER(ModBlocks.oreCopper),
 		LEAD(ModBlocks.oreLead),
 		SILVER(ModBlocks.oreSilver),
-		TIN(ModBlocks.oreTin);
+		TIN(ModBlocks.oreTin),
+		TEMPLE(ModBlocks.oreTemple),
+		GNEISS(ModBlocks.oreGneiss);
 
 		final Block oreBlock;
 		final byte oreMeta;
