@@ -34,7 +34,7 @@ public class BlockHighlightHandler
 				GL11.glEnable(GL11.GL_BLEND);
 				OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 				GL11.glColor4f(0.0f, 0.0f, 0.0f, 0.4f);
-				GL11.glLineWidth(3.0f);
+				GL11.glLineWidth(2.0f);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glDepthMask(false);
 				for (AxisAlignedBB aabb : bounds)
