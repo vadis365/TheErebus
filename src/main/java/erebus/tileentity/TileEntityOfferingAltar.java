@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.helper.Utils;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketOfferingAltar;
+import erebus.network.client.PacketOfferingAltarTimer;
 import erebus.recipes.OfferingAltarRecipe;
 
 public class TileEntityOfferingAltar extends TileEntityBasicInventory
@@ -21,7 +22,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory
 	public int time = 0;
 	private ItemStack output = null;
 
-	private static final int MAX_TIME = 430;
+	private static final int MAX_TIME = 450;
 
 	public TileEntityOfferingAltar()
 	{
@@ -97,30 +98,42 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory
 	@Override
 	public void updateEntity()
 	{
+		if (worldObj.isRemote)
+		{
+			return;
+		}
+
 		if (output == null)
 		{
 			time = 0;
 		} else
 		{
 			time++;
-			if (!worldObj.isRemote)
+			PacketPipeline.sendToAll(new PacketOfferingAltarTimer(xCoord, yCoord, zCoord, time));
+
+			if (time == 90 || time == 270 || time == 450)
 			{
+				worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 4);
 				if (time >= MAX_TIME)
 				{
-					inventory[3] = output;
-					for (int i = 0; i < 3; i++)
+					worldObj.playAuxSFX(2004, xCoord, yCoord + 1, zCoord, 0);
+				}
+			}
+			if (time >= MAX_TIME)
+			{
+				inventory[3] = output;
+				for (int i = 0; i < 3; i++)
+				{
+					if (inventory[i] != null)
 					{
-						if (inventory[i] != null)
+						if (--inventory[i].stackSize <= 0)
 						{
-							if (--inventory[i].stackSize <= 0)
-							{
-								inventory[i] = null;
-							}
+							inventory[i] = null;
 						}
 					}
-					time = 0;
-					markDirty();
 				}
+				time = 0;
+				markDirty();
 			}
 		}
 	}
