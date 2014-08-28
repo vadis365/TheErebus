@@ -22,6 +22,6 @@ public class ModMaterials
 	public static ToolMaterial weaponWaspSword = EnumHelper.addToolMaterial("WASPSWORD", 0, 863, 1.0F, 6.0F, 0);
 	public static ToolMaterial weaponScorpionPincer = EnumHelper.addToolMaterial("SCORPIONPINCER", 0, 863, 1.0F, 4.0F, 2);
 	public static ToolMaterial ritualDagger = EnumHelper.addToolMaterial("RITUAL_DAGGER", 0, 128, 1.0F, -3.0F, 30);
-	public static ToolMaterial rolledNewspaper = EnumHelper.addToolMaterial("ROLLED_NEWSPAPER", 0, 256, 1.0F, 0.0F, 0);
+	public static ToolMaterial rolledNewspaper = EnumHelper.addToolMaterial("ROLLED_NEWSPAPER", 0, 64, 1.0F, 0.0F, 0);
 	public static Material honey = new MaterialLiquid(MapColor.mapColorArray[14]);
 }
