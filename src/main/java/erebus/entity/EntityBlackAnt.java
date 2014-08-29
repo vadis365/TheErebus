@@ -219,8 +219,10 @@ public class EntityBlackAnt extends EntityTameable implements IInventory
 
 		if (!worldObj.isRemote && !setAttributes)
 		{
+			if(isTamed()) {
 			openInventory();
 			closeInventory();
+			}
 			setAttributes = true;
 		}
 	}
@@ -268,6 +270,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory
 
 		// Don't pick up items unless the filter is defined and the inventory is
 		// not full
+		if(isTamed()) {
 		if (canPickupItems && !isFilterSlotEmpty() && (getAntInvSlotStack() == null || getAntInvSlotStack().stackSize < getAntInvSlotStack().getMaxStackSize()))
 		{
 			EntityItem entityitem = getClosestEntityItem(this, 16.0D, getFilterSlotStack());
@@ -342,6 +345,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory
 					canCollectFromSilo = false;
 				}
 			}
+		}
 		}
 	}
 
