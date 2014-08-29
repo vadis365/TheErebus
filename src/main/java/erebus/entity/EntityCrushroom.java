@@ -201,7 +201,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob
 	@SuppressWarnings("rawtypes")
 	public boolean canAttackClass(Class entity)
 	{
-		return EntityCrushroom.class != entity && EntitySporeling.class != entity && EntityZombieAnt.class != entity;
+		return EntityCrushroom.class != entity && EntitySporeling.class != entity && EntityZombieAnt.class != entity && EntityPunchroom.class != entity;
 	}
 
 	@Override
