@@ -3,12 +3,13 @@ package erebus.entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.item.Materials.DATA;
 
 public class EntityPunchroom extends EntityMob
 {
@@ -44,11 +45,11 @@ public class EntityPunchroom extends EntityMob
 	 */
 	
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
+	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
 		if (rand.nextInt(5) == 0)
 		{
-			entityDropItem(new ItemStack(Items.glowstone_dust, 1, 0), 0.0F);
+			entityDropItem(new ItemStack(ModItems.materials, 1 + looting , DATA.elasticFibre.ordinal()), 0.0F);
 		}
 	}
 	
