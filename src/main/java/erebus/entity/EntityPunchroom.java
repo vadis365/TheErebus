@@ -145,4 +145,10 @@ public class EntityPunchroom extends EntityMob
 			player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.3D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
 		}
 	}
+	
+	@Override
+	public int getMaxSpawnedInChunk()
+	{
+		return 2;
+	}
 }
