@@ -140,6 +140,17 @@ public class EntityBlackAnt extends EntityTameable implements IInventory
 	{
 		return !isTamed();
 	}
+	
+	@Override
+	public boolean getCanSpawnHere()
+	{
+		float light = getBrightness(1.0F);
+		if (light >= 0F)
+		{
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+		}
+		return super.getCanSpawnHere();
+	}
 
 	@Override
 	public boolean isTamed()
