@@ -63,7 +63,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 				if (item != null)
 				{
 					GL11.glPushMatrix();
-					GL11.glRotated(120 * (i + 1) + angle, 0, 1, 0);
+					GL11.glRotated(120 * (i + 1) + tile.getWorldObj().getWorldTime(), 0, 1, 0);
 					GL11.glTranslated(Math.cos(Math.toRadians(angle)), 0, 0);
 					renderItem.doRender(item, 0, 0, 0, 0, 0);
 					GL11.glPopMatrix();
@@ -73,7 +73,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 		{
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-0.25F, 0.25F, 0);
-			GL11.glRotatef((float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL), 0, 1, 0);
+			GL11.glRotatef(tile.getWorldObj().getWorldTime(), 0, 1, 0);
 			GL11.glScaled(1.5, 1.5, 1.5);
 			renderItem.doRender(tile.getItemForRendering(3), 0, 0, 0, 0, 0);
 			GL11.glPopMatrix();

@@ -47,7 +47,7 @@ public class RitualDagger extends ItemSword implements IEnergyCollector
 		{
 			if (canStore(stack, type))
 			{
-				tooltip.add(type.toString() + " - " + getCurrentStorage(stack, type));
+				tooltip.add(type.toString() + " - " + getCurrentStorage(stack, type) + "/" + getMaxStorage(stack, type));
 			}
 		}
 	}

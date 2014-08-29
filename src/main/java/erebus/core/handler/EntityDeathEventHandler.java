@@ -5,7 +5,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityAmbientCreature;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -57,13 +62,27 @@ public class EntityDeathEventHandler
 		return null;
 	}
 
-	// Just for testing for now
 	private Map<EnergyType, Integer> getEnergy(Entity entity)
 	{
 		Map<EnergyType, Integer> map = new HashMap<EnergyType, Integer>();
-		if (entity instanceof EntityPig)
+		if (entity instanceof EntityLiving)
 		{
-			map.put(EnergyType.GAEAN, 50);
+			EntityLiving living = (EntityLiving) entity;
+			int health = (int) (2 * living.getMaxHealth());
+
+			if (living instanceof EntityVillager)
+			{
+				map.put(EnergyType.SENTIENT, health);
+			} else if (living instanceof EntityAnimal || living instanceof EntityAmbientCreature)
+			{
+				map.put(EnergyType.GAEAN, health);
+			} else if (living instanceof IMob)
+			{
+				map.put(EnergyType.INFERNAL, health);
+			} else if (living instanceof IBossDisplayData)
+			{
+				map.put(EnergyType.DIVINE, health);
+			}
 		}
 
 		return map;
