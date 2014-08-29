@@ -105,7 +105,13 @@ public class BlockSaplingErebus extends BlockSapling
 		growTree(world, x, y, z, rand);
 	}
 
-	public void growTree(World world, int x, int y, int z, Random rand)
+	@Override
+	public void func_149853_b(World world, Random rand, int x, int y, int z)
+	{
+		growTree(world, x, y, z, rand);
+	}
+
+	private void growTree(World world, int x, int y, int z, Random rand)
 	{
 		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z))
 		{

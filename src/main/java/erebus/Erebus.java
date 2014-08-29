@@ -16,7 +16,6 @@ import cpw.mods.fml.relauncher.Side;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
-import erebus.core.handler.BonemealHandler;
 import erebus.core.handler.BucketHandler;
 import erebus.core.handler.EntityDeathEventHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
@@ -83,9 +82,6 @@ public class Erebus
 		TeleporterHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
-		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
-		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
-		MinecraftForge.EVENT_BUS.register(ModBlocks.flowerPlanted);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.insectRepellent);
 		MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);

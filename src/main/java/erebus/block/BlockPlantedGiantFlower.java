@@ -15,9 +15,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.entity.player.BonemealEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -157,17 +154,10 @@ public class BlockPlantedGiantFlower extends BlockSapling implements ISubBlocksB
 		rainbowPetals = reg.registerIcon("erebus:flowerPlanted2");
 	}
 
-	@SubscribeEvent
-	public void onBonemeal(BonemealEvent event)
+	@Override
+	public void func_149853_b(World world, Random rand, int x, int y, int z)
 	{
-		if (!event.world.isRemote && event.block == this)
-		{
-			if (event.world.rand.nextFloat() < 0.45D)
-			{
-				func_149878_d(event.world, event.x, event.y, event.z, event.world.rand);
-			}
-			event.setResult(Result.ALLOW);
-		}
+		func_149878_d(world, x, y, z, rand);
 	}
 
 	@Override
