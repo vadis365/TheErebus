@@ -34,14 +34,14 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityBlackWidow.class,5,1,1));
 		spawnableMonsterList.add(new SpawnEntry(EntitySolifuge.class,5,1,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityCentipede.class,10,4,8));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
+		spawnableMonsterList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,8,4,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityMidgeSwarm.class,10,1,2));
+		spawnableMonsterList.add(new SpawnEntry(EntityMidgeSwarm.class,10,1,2));
 
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityRhinoBeetle.class,5,1,1));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
+		spawnableCreatureList.add(new SpawnEntry(EntityRhinoBeetle.class,5,1,1));
+		spawnableCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
+		spawnableCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
 
 		topBlock = Blocks.sand;
 		topBlockMeta = 1;

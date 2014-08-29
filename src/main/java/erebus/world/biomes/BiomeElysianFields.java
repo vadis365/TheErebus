@@ -34,20 +34,20 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		setTemperatureRainfall(0.85F,0.5F);
 		setWeight(20);
 
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityGrasshopper.class,4,1,3));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityGlowWorm.class,4,1,3));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityTitanBeetle.class,4,1,1));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityWorkerBee.class,14,1,2));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityMoth.class,10,2,3));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetle.class,6,1,2));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityCicada.class,100,1,1));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityWheatWeevil.class,6,1,2));
+		spawnableCreatureList.add(new SpawnEntry(EntityGrasshopper.class,4,1,3));
+		spawnableCreatureList.add(new SpawnEntry(EntityGlowWorm.class,4,1,3));
+		spawnableCreatureList.add(new SpawnEntry(EntityTitanBeetle.class,4,1,1));
+		spawnableCreatureList.add(new SpawnEntry(EntityWorkerBee.class,14,1,2));
+		spawnableCreatureList.add(new SpawnEntry(EntityMoth.class,10,2,3));
+		spawnableCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
+		spawnableCreatureList.add(new SpawnEntry(EntityBeetle.class,6,1,2));
+		spawnableCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
+		spawnableCreatureList.add(new SpawnEntry(EntityCicada.class,100,1,1));
+		spawnableCreatureList.add(new SpawnEntry(EntityWheatWeevil.class,6,1,2));
 
 		spawnableMonsterList.add(new SpawnEntry(EntityDragonfly.class,5,1,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityVelvetWorm.class,10,1,2));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
+		spawnableMonsterList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
 		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
 	}
 
