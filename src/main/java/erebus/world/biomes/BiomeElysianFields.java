@@ -38,8 +38,8 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		spawnableCreatureList.add(new SpawnEntry(EntityGlowWorm.class,4,1,3));
 		spawnableCreatureList.add(new SpawnEntry(EntityTitanBeetle.class,4,1,1));
 		spawnableCreatureList.add(new SpawnEntry(EntityWorkerBee.class,14,1,2));
-		spawnableCreatureList.add(new SpawnEntry(EntityMoth.class,10,2,3));
-		spawnableCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityMoth.class,10,2,3));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
 		spawnableCreatureList.add(new SpawnEntry(EntityBeetle.class,6,1,2));
 		spawnableCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,4,2,3));
 		spawnableCreatureList.add(new SpawnEntry(EntityCicada.class,100,1,1));

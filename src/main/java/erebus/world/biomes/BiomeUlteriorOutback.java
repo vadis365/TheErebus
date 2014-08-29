@@ -41,7 +41,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 
 		spawnableCreatureList.add(new SpawnEntry(EntityRhinoBeetle.class,5,1,1));
 		spawnableCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
-		spawnableCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
 
 		topBlock = Blocks.sand;
 		topBlockMeta = 1;

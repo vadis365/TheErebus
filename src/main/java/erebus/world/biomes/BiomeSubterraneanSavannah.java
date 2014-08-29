@@ -36,7 +36,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
 		spawnableMonsterList.add(new SpawnEntry(EntityMosquito.class,60,1,3));
 
-		spawnableCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
 		spawnableCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
 		spawnableCreatureList.add(new SpawnEntry(EntityBeetle.class,8,1,2));
 

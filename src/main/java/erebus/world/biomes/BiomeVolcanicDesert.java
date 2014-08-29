@@ -37,7 +37,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 		spawnableMonsterList.add(new SpawnEntry(EntityLavaWebSpider.class,300,1,1));
 		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
 
-		spawnableCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,8,8));
 		spawnableMonsterList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
 
 		topBlock = Blocks.sand;
