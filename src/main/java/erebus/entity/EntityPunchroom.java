@@ -3,6 +3,8 @@ package erebus.entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
@@ -40,7 +42,16 @@ public class EntityPunchroom extends EntityMob
 	 *
 	 * @Override protected String getDeathSound() { return ""; }
 	 */
-
+	
+	@Override
+	protected void dropFewItems(boolean par1, int par2)
+	{
+		if (rand.nextInt(5) == 0)
+		{
+			entityDropItem(new ItemStack(Items.glowstone_dust, 1, 0), 0.0F);
+		}
+	}
+	
 	@Override
 	public void onUpdate()
 	{
