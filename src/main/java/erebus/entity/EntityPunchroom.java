@@ -126,20 +126,23 @@ public class EntityPunchroom extends EntityMob
 	{
 		super.onCollideWithPlayer(player);
 		float knockback = 0.2F;
-		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY)
-		{
-			if (worldObj.difficultySetting.ordinal() > 1)
+		if (!player.capabilities.isCreativeMode && !worldObj.isRemote) {
+			
+			if (player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY)
 			{
-				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				if (worldObj.difficultySetting.ordinal() > 1)
 				{
-					knockback = 0.4F;
-				} else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-				{
-					knockback = 0.6F;
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+					{
+						knockback = 0.4F;
+					} else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					{
+						knockback = 0.6F;
+					}
 				}
 			}
+			player.attackEntityFrom(DamageSource.causeMobDamage(this), 1F);
+			player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.3D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
 		}
-		player.attackEntityFrom(DamageSource.causeMobDamage(this), 1F);
-		player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.3D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
 	}
 }

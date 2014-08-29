@@ -23,7 +23,7 @@ public class BiomeFungalForest extends BiomeBaseErebus{
 		setWeight(12);
 
 		spawnableCaveCreatureList.add(new SpawnEntry(EntitySporeling.class,1,1,1));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityBlackAnt.class,10,3,5));
+		spawnableCaveCreatureList.add(new SpawnEntry(EntityBlackAnt.class,1,3,5));
 		spawnableMonsterList.add(new SpawnEntry(EntityZombieAnt.class,5,1,4));
 		spawnableMonsterList.add(new SpawnEntry(EntityCrushroom.class,5,1,2));
 		spawnableMonsterList.add(new SpawnEntry(EntityPunchroom.class,10,1,2));
