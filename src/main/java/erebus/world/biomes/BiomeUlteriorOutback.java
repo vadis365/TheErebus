@@ -28,20 +28,20 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus{
 		setTemperatureRainfall(1.1F,0.2F);
 		setWeight(15);
 
-		spawnableMonsterList.add(new SpawnEntry(EntityScytodes.class,30,1,4));
-		spawnableMonsterList.add(new SpawnEntry(EntityScorpion.class,10,2,2));
-		spawnableMonsterList.add(new SpawnEntry(EntitySolifuge.class,8,1,2));
-		spawnableMonsterList.add(new SpawnEntry(EntityBlackWidow.class,5,1,1));
-		spawnableMonsterList.add(new SpawnEntry(EntitySolifuge.class,5,1,3));
-		spawnableMonsterList.add(new SpawnEntry(EntityCentipede.class,10,4,8));
-		spawnableMonsterList.add(new SpawnEntry(EntityBotFly.class,10,2,3));
-		spawnableMonsterList.add(new SpawnEntry(EntityTarantula.class,8,4,8));
-		spawnableMonsterList.add(new SpawnEntry(EntityChameleonTick.class,10,1,2));
-		spawnableMonsterList.add(new SpawnEntry(EntityMidgeSwarm.class,10,1,2));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityScytodes.class,30,1,4));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityScorpion.class,10,2,2));
+		spawnableMonsterList.add(new SpawnEntryOld(EntitySolifuge.class,8,1,2));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityBlackWidow.class,5,1,1));
+		spawnableMonsterList.add(new SpawnEntryOld(EntitySolifuge.class,5,1,3));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityCentipede.class,10,4,8));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityBotFly.class,10,2,3));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityTarantula.class,8,4,8));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityChameleonTick.class,10,1,2));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityMidgeSwarm.class,10,1,2));
 
-		spawnableCreatureList.add(new SpawnEntry(EntityRhinoBeetle.class,5,1,1));
-		spawnableCreatureList.add(new SpawnEntry(EntityBeetleLarva.class,8,2,4));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityFly.class,10,2,2));
+		spawnableCreatureList.add(new SpawnEntryOld(EntityRhinoBeetle.class,5,1,1));
+		spawnableCreatureList.add(new SpawnEntryOld(EntityBeetleLarva.class,8,2,4));
+		spawnableCaveCreatureList.add(new SpawnEntryOld(EntityFly.class,10,2,2));
 
 		topBlock = Blocks.sand;
 		topBlockMeta = 1;

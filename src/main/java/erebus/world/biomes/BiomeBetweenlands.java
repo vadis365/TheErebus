@@ -21,11 +21,11 @@ public class BiomeBetweenlands extends BiomeBaseErebus{
 		setTemperatureRainfall(0.75F,0.85F);
 		setWeight(15);
 
-		spawnableMonsterList.add(new SpawnEntry(EntityCentipede.class,10,4,8));
-		spawnableMonsterList.add(new SpawnEntry(EntityJumpingSpider.class,10,2,6));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityCentipede.class,10,4,8));
+		spawnableMonsterList.add(new SpawnEntryOld(EntityJumpingSpider.class,10,2,6));
 
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityMosquito.class,20,1,2));
-		spawnableCaveCreatureList.add(new SpawnEntry(EntityDragonfly.class,20,1,2));
+		spawnableCaveCreatureList.add(new SpawnEntryOld(EntityMosquito.class,20,1,2));
+		spawnableCaveCreatureList.add(new SpawnEntryOld(EntityDragonfly.class,20,1,2));
 	}
 
 	/*

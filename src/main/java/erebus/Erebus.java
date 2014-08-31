@@ -91,7 +91,7 @@ public class Erebus
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.honeyBlock, ModItems.bucketHoney);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
-		FMLCommonHandler.instance().bus().register(new SpawnerErebus());
+		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 
 		if (ConfigHandler.INSTANCE.randomNames)
 		{
