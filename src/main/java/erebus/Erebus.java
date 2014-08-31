@@ -31,6 +31,7 @@ import erebus.network.PacketPipeline;
 import erebus.recipes.ComposterRegistry;
 import erebus.recipes.ErebusRecipesHandler;
 import erebus.recipes.RecipeHandler;
+import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
 
@@ -90,6 +91,7 @@ public class Erebus
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.honeyBlock, ModItems.bucketHoney);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
+		FMLCommonHandler.instance().bus().register(new SpawnerErebus());
 
 		if (ConfigHandler.INSTANCE.randomNames)
 		{
