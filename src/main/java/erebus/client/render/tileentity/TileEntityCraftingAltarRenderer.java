@@ -1,5 +1,6 @@
 package erebus.client.render.tileentity;
 
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -18,26 +19,57 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 	private final ModelAltar model = new ModelAltar();
 	private final ModelStone4 stone4 = new ModelStone4();
 
+	private final ResourceLocation ACTIVE = new ResourceLocation("erebus:textures/special/tiles/craftingAltarActive.png");
+	private final ResourceLocation NORMAL = new ResourceLocation("erebus:textures/special/tiles/craftingAltar.png");
+	private final ResourceLocation GLOW = new ResourceLocation("erebus:textures/special/tiles/craftingAltarGlow.png");
+
 	public void renderAModelAt(TileEntityCraftingAltar tile, double x, double y, double z, float partialTick)
 	{
 		if (tile.blockMetadata == 1)
 		{
-			bindTexture(new ResourceLocation("erebus:textures/special/tiles/craftingAltarActive.png"));
+			bindTexture(ACTIVE);
 		} else
 		{
-			bindTexture(new ResourceLocation("erebus:textures/special/tiles/craftingAltar.png"));
+			bindTexture(NORMAL);
 		}
 
+		renderMainModel(x, y, z);
+		renderStones(x, y, z, tile.rotation);
+
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
+		GL11.glDepthMask(true);
+		char c0 = 61680;
+		int j = c0 % 65536;
+		int k = c0 / 65536;
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
+
+		bindTexture(GLOW);
+		renderMainModel(x, y, z);
+		renderStones(x, y, z, tile.rotation);
+
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glPopMatrix();
+	}
+
+	private void renderMainModel(double x, double y, double z)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5F, y + 1.5F, z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 		model.renderAll();
 		GL11.glPopMatrix();
+	}
 
+	private void renderStones(double x, double y, double z, float rotation)
+	{
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5F, y + 1.5F, z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-		GL11.glRotatef(tile.rotation, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
 		stone4.renderAll();
 		GL11.glPopMatrix();
 	}
