@@ -54,6 +54,7 @@ import erebus.item.WaspDagger;
 import erebus.item.WaspSword;
 import erebus.item.WebSlinger;
 import erebus.item.Whetstone;
+import erebus.item.WitherWebSlinger;
 import erebus.item.WoodlouseBall;
 import erebus.item.bambucket.Bambucket;
 import erebus.item.bambucket.BambucketAntiVenom;
@@ -123,7 +124,8 @@ public class ModItems
 	public static final Item maxSpeedBow = new MaxSpeedBow().setUnlocalizedName("erebus.maxSpeedBow").setTextureName("erebus:maxSpeedBow");
 	public static final Item waspDagger = new WaspDagger().setUnlocalizedName("erebus.waspDagger");
 	public static final Item scorpionPincer = new ScorpionPincer().setUnlocalizedName("erebus.scorpionPincer").setTextureName("paper");
-	public static final Item webSlinger = new WebSlinger().setUnlocalizedName("erebus.webSlinger").setTextureName("paper");
+	public static final Item webSlinger = new WebSlinger().setUnlocalizedName("erebus.webSlinger");
+	public static final Item witherWebSlinger = new WitherWebSlinger().setUnlocalizedName("erebus.witherWebSlinger");
 	public static final Item blockExtractor = new BlockExtractor().setFull3D().setUnlocalizedName("erebus.blockExtractor").setTextureName("erebus:blockExtractor");
 	public static final Item woodlouseBall = new WoodlouseBall().setUnlocalizedName("erebus.woodlouseBall");
 	public static final Item rolledNewspaper = new RolledNewspaper();
@@ -175,7 +177,7 @@ public class ModItems
 		ModTabs.items.setTab(materials, whetstone, food, turnip, encrustedDiamond);
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
-		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, webSlinger, woodlouseBall, rolledNewspaper);
+		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper);
 		ModTabs.gears.setTab(mushroomHelm, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
 		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, specialItem, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
 

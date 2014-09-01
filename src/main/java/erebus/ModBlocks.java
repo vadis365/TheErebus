@@ -42,7 +42,7 @@ import erebus.block.BlockUmberGolemStatue;
 import erebus.block.BlockUmberPaver;
 import erebus.block.BlockUmberstone;
 import erebus.block.BlockUmberstonePillar;
-import erebus.block.BlockVelocity;
+import erebus.block.VelocityBlock;
 import erebus.block.BlockWallErebus;
 import erebus.block.BlockWaspNest;
 import erebus.block.BlockWaspSpawner;
@@ -50,6 +50,7 @@ import erebus.block.BlockWitherWeb;
 import erebus.block.ErebusPortal;
 import erebus.block.GaeanKeystone;
 import erebus.block.JarOHoney;
+import erebus.block.LightningSpeedBlock;
 import erebus.block.SaplessLog;
 import erebus.block.altars.AltarBase;
 import erebus.block.altars.CraftingAltar;
@@ -217,12 +218,11 @@ public class ModBlocks
 	public static final Block bambooBridge = new BlockBambooBridge().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("erebus.bambooBridge").setBlockTextureName("erebus:planks_bamboo");
 	public static final Block umberGolemStatue = new BlockUmberGolemStatue().setBlockName("erebus.umberGolemStatue");
 	public static final Block petrifiedWoodChest = new BlockPetrifiedChest().setHardness(2.0F).setBlockName("erebus.petrifiedWoodChest").setBlockTextureName("erebus:planks_petrifiedWood");
-	public static final Block blockBones = new BlockBones().setBlockName("erebus.blockBones");
-	public static final Block blockWitherWeb = new BlockWitherWeb().setHardness(4.0F).setBlockName("erebus.witherWeb").setBlockTextureName("web");
+	public static final Block bones = new BlockBones().setBlockName("erebus.blockBones");
+	public static final Block witherWeb = new BlockWitherWeb().setHardness(4.0F).setBlockName("erebus.witherWeb").setBlockTextureName("web");
 	public static final Block extenderThingy = new BlockExtenderThingy().setHardness(0.4F).setStepSound(Block.soundTypeLadder).setBlockName("erebus.extenderThingy").setBlockTextureName("erebus:planks_bamboo");
 	public static final Block bambooPole = new BlockBambooPole().setHardness(0.4F).setBlockName("erebus.bambooPole").setBlockTextureName("erebus:blockBambooPole");
 	public static final Block umberstonePillar = new BlockUmberstonePillar().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberstonePillar").setBlockTextureName("erebus:umberstonePillarSides");
-	public static final Block velocityBlock = new BlockVelocity().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.velocityBlock").setBlockTextureName("erebus:blockSpeed0");
 	public static final Block honeyCombBlock = new BlockHoneyComb().setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.honeyCombBlock").setBlockTextureName("erebus:honeyCombTop");
 	public static final Block doorAmber = new BlockDoorAmber();
 	public static final Block honeyBlock = new BlockErebusHoney(ModFluids.honey).setBlockName("erebus.honeyBlock");
@@ -233,6 +233,10 @@ public class ModBlocks
 	public static final Block jadeBlock = new BlockCompressed(MapColor.greenColor).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.blockJade").setBlockTextureName("erebus:blockJade");
 	public static final Block glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 	public static final Block mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
+
+	// VELOCITY BLOCKS
+	public static final Block velocityBlock = new VelocityBlock();
+	public static final Block lightningSpeedBlock = new LightningSpeedBlock();
 
 	// ALTARS
 	public static final Block altarBase = new AltarBase().setBlockName("erebus.altarBase");
@@ -306,8 +310,8 @@ public class ModBlocks
 		ModTabs.blocks.setTab(hollowLogAcacia, planks);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, bambooLadder);
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, altarBase);
-		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, blockBones, blockWitherWeb, extenderThingy);
-		ModTabs.blocks.setTab(umberstonePillar, velocityBlock, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);
+		ModTabs.blocks.setTab(reinExo, waspNestBlock, petrifiedWoodChest, bones, witherWeb, extenderThingy);
+		ModTabs.blocks.setTab(umberstonePillar, honeyCombBlock, honeyTreat, gneiss, mud, mudBricks, jarOHoney);
 		ModTabs.blocks.setTab(jadeBlock, glowGemBlock, mucusBomb, siloTank, siloSupports, siloRoof, composter);
 		ModTabs.blocks.setTab(umbercobbleStairs);
 		ModTabs.blocks.setTab(gneissStairs);
@@ -369,7 +373,7 @@ public class ModBlocks
 		jadeBlock.setHarvestLevel("pickaxe", 2);
 
 		Blocks.fire.setFireInfo(planks, 5, 20);
-		Blocks.fire.setFireInfo(blockWitherWeb, 20, 50);
+		Blocks.fire.setFireInfo(witherWeb, 20, 50);
 		Blocks.fire.setFireInfo(fern, 60, 100);
 		Blocks.fire.setFireInfo(fiddlehead, 60, 100);
 		Blocks.fire.setFireInfo(thorns, 15, 100);

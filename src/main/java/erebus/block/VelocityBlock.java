@@ -14,16 +14,29 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
-public class BlockVelocity extends Block
+public class VelocityBlock extends Block
 {
-
 	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+	protected IIcon top, rest;
 
-	public BlockVelocity()
+	public VelocityBlock()
 	{
 		super(Material.rock);
+		setHardness(1.5F);
+		setResistance(10.0F);
+		setStepSound(soundTypeStone);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.velocityBlock");
+		setBlockTextureName("erebus:velocityBlock");
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return BlockRenderIDs.VELOCITY_BLOCK.id();
 	}
 
 	@Override
@@ -48,7 +61,7 @@ public class BlockVelocity extends Block
 			((EntityItem) entity).age = 0;
 		}
 
-		double speed = 0.5D;
+		double speed = speed();
 		int meta = world.getBlockMetadata(x, y, z);
 		int[] factorX = { 0, 1, 0, -1 };
 		int[] factorZ = { -1, 0, 1, 0 };
@@ -70,6 +83,11 @@ public class BlockVelocity extends Block
 		}
 	}
 
+	protected double speed()
+	{
+		return 0.5D;
+	}
+
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack is)
 	{
@@ -81,18 +99,14 @@ public class BlockVelocity extends Block
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return icons[meta];
+		return side == 1 ? top : rest;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		icons = new IIcon[4];
-
-		for (int i = 0; i < icons.length; i++)
-		{
-			icons[i] = reg.registerIcon("erebus:blockSpeed" + i);
-		}
+		top = reg.registerIcon(getTextureName() + "_top");
+		rest = reg.registerIcon(getTextureName() + "_rest");
 	}
 }

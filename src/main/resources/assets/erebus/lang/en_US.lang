@@ -193,6 +193,7 @@ tile.erebus.witherWeb.name=Wither Web
 
 tile.erebus.mucusBomb.name=Mucus Bomb
 tile.erebus.velocityBlock.name=Velocity Block
+tile.erebus.lightningSpeedBlock.name=Lightning Speed Block
 tile.erebus.reinExo.name=Reinforced Exoskeleton Block
 tile.erebus.blockSilk.name=Silk
 
@@ -318,6 +319,7 @@ item.erebus.wandOfAnimation.name=Wand Of Animation
 item.erebus.scorpionPincer.name=Augmented Scorpion Pincer
 item.erebus.hornOfSummoning.name=Horn of the Swarm
 item.erebus.webSlinger.name=Web Slinger
+item.erebus.witherWebSlinger.name=Wither Web Slinger
 item.erebus.blockExtractor.name=Block Extractor
 item.erebus.nectarCollector.name=Nectar Collector
 item.erebus.beeTamingAmulet.name=Bee Pendant
