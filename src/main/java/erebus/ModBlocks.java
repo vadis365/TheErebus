@@ -235,12 +235,13 @@ public class ModBlocks
 	public static final Block mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 
 	// ALTARS
-	public static final Block altarBase = new AltarBase().setHardness(20.0F).setBlockName("erebus.altarBase");
-	public static final Block altarLightning = new LightningAltar().setHardness(20.0F).setBlockName("erebus.altarLightning");
-	public static final Block altarHealing = new HealingAltar().setHardness(20.0F).setBlockName("erebus.altarHealing");
-	public static final Block altarXP = new XPAltar().setHardness(20.0F).setBlockName("erebus.altarXP");
-	public static final Block altarRepair = new RepairAltar().setHardness(20.0F).setBlockName("erebus.altarRepair");
+	public static final Block altarBase = new AltarBase().setBlockName("erebus.altarBase");
+	public static final Block altarLightning = new LightningAltar().setBlockName("erebus.altarLightning");
+	public static final Block altarHealing = new HealingAltar().setBlockName("erebus.altarHealing");
+	public static final Block altarXP = new XPAltar().setBlockName("erebus.altarXP");
+	public static final Block altarRepair = new RepairAltar().setBlockName("erebus.altarRepair");
 	public static final Block craftingAltar = new CraftingAltar();
+	public static final Block offeringAltar = new OfferingAltar();
 
 	// DUNGEONS
 	public static final Block spiderSpawner = new BlockSpiderSpawner("Scytodes - Erebus").setBlockName("erebus.spiderSpawner").setBlockTextureName("erebus:spiderSpawner");
@@ -267,7 +268,6 @@ public class ModBlocks
 
 	// OTHER THINGS (AKA LEXICONN'S STUFF. DELETE IF HE EVER QUITS)
 	public static final Block gaeanKeystone = new GaeanKeystone();
-	public static final Block offeringAltar = new OfferingAltar();
 
 	public static void init()
 	{

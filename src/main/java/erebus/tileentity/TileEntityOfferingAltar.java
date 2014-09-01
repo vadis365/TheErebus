@@ -18,15 +18,20 @@ import erebus.recipes.OfferingAltarRecipe;
 public class TileEntityOfferingAltar extends TileEntityBasicInventory
 {
 	@SideOnly(Side.CLIENT)
-	private EntityItem ghostItem;
+	protected EntityItem ghostItem;
 	public int time = 0;
-	private ItemStack output = null;
+	protected ItemStack output = null;
 
 	private static final int MAX_TIME = 450;
 
 	public TileEntityOfferingAltar()
 	{
-		super(4, "offeringAltar");
+		this(4, "offeringAltar");
+	}
+
+	protected TileEntityOfferingAltar(int size, String name)
+	{
+		super(size, name);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -71,9 +76,9 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory
 		{
 			return;
 		}
-		if (inventory[3] == null)
+		if (inventory[getSizeInventory() - 1] == null)
 		{
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < getSizeInventory() - 1; i++)
 			{
 				if (inventory[i] == null)
 				{
@@ -121,7 +126,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory
 			}
 			if (time >= MAX_TIME)
 			{
-				inventory[3] = output;
+				inventory[3] = ItemStack.copyItemStack(output);
 				for (int i = 0; i < 3; i++)
 				{
 					if (inventory[i] != null)

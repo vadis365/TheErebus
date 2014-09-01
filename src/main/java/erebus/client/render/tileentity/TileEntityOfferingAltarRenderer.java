@@ -47,11 +47,11 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.75F, (float) y + 0.75F, (float) z + 0.5F);
-		renderItem(tile);
+		renderItems(tile);
 		GL11.glPopMatrix();
 	}
 
-	public void renderItem(TileEntityOfferingAltar tile)
+	private void renderItems(TileEntityOfferingAltar tile)
 	{
 		float angle = tile.time;
 		if (tile.getStackInSlot(3) == null)

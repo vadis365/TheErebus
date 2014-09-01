@@ -1,7 +1,10 @@
 package erebus.client.render.tileentity;
 
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,6 +26,21 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 	private final ResourceLocation NORMAL = new ResourceLocation("erebus:textures/special/tiles/craftingAltar.png");
 	private final ResourceLocation GLOW = new ResourceLocation("erebus:textures/special/tiles/craftingAltarGlow.png");
 
+	private final RenderItem renderItem;
+
+	public TileEntityCraftingAltarRenderer()
+	{
+		renderItem = new RenderItem()
+		{
+			@Override
+			public boolean shouldBob()
+			{
+				return true;
+			}
+		};
+		renderItem.setRenderManager(RenderManager.instance);
+	}
+
 	public void renderAModelAt(TileEntityCraftingAltar tile, double x, double y, double z, float partialTick)
 	{
 		if (tile.blockMetadata == 1)
@@ -37,6 +55,11 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		renderStones(x, y, z, tile.rotation);
 
 		GL11.glPushMatrix();
+		GL11.glTranslatef((float) x + 0.75F, (float) y + 0.75F, (float) z + 0.5F);
+		renderItems(tile);
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
@@ -45,13 +68,64 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		int j = c0 % 65536;
 		int k = c0 / 65536;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
-
 		bindTexture(GLOW);
 		renderMainModel(x, y, z);
 		renderStones(x, y, z, tile.rotation);
-
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glPopMatrix();
+	}
+
+	private void renderItems(TileEntityCraftingAltar tile)
+	{
+		float angle = tile.time;
+		if (tile.getStackInSlot(9) == null)
+		{
+			int count = 0;
+			for (int i = 1; i < 9; i++)
+			{
+				EntityItem item = tile.getItemForRendering(i);
+				if (item != null)
+				{
+					count++;
+				}
+			}
+
+			if (tile.getItemForRendering(0) != null)
+			{
+				GL11.glTranslatef(0, -0.25F, 0);
+				renderCentreItem(tile.getItemForRendering(0), 0);
+			}
+
+			GL11.glTranslated(-0.25, 0.5, 0);
+			for (int i = 1; i < 9; i++)
+			{
+				EntityItem item = tile.getItemForRendering(i);
+				if (item != null)
+				{
+					GL11.glPushMatrix();
+					GL11.glRotated(360F / count * (i + 1) + tile.getWorldObj().getWorldTime(), 0, 1, 0);
+					GL11.glTranslated(Math.cos(Math.toRadians(angle)), 0, 0);
+					renderItem.doRender(item, 0, 0, 0, 0, 0);
+					GL11.glPopMatrix();
+				}
+			}
+		} else
+		{
+			GL11.glRotated(90, 1, 0, 0);
+			GL11.glScaled(1.5, 1.5, 1.5);
+			GL11.glTranslatef(0.05F, -0.56F, -0.15F);
+			renderCentreItem(tile.getItemForRendering(9), 0);
+		}
+	}
+
+	private void renderCentreItem(EntityItem item, long time)
+	{
+		GL11.glPushMatrix();
+		GL11.glTranslatef(-0.25F, 0.25F, 0);
+		GL11.glRotatef(time, 0, 1, 0);
+		GL11.glScaled(1.5, 1.5, 1.5);
+		renderItem.doRender(item, 0, 0, 0, 0, 0);
 		GL11.glPopMatrix();
 	}
 
