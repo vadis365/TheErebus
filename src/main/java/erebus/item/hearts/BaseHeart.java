@@ -39,7 +39,12 @@ public abstract class BaseHeart extends Item implements IEnergyStorage
 	@Override
 	public int getCurrentStorage(ItemStack stack, EnergyType type)
 	{
-		NBTTagCompound nbt = getNBT(stack);
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt == null)
+		{
+			return 0;
+		}
+
 		if (nbt.hasKey(type.toString()))
 		{
 			return nbt.getInteger(type.toString());
@@ -61,6 +66,11 @@ public abstract class BaseHeart extends Item implements IEnergyStorage
 	@Override
 	public int extractEnergy(ItemStack stack, EnergyType type, int amount)
 	{
+		if (!stack.hasTagCompound())
+		{
+			return 0;
+		}
+
 		NBTTagCompound nbt = getNBT(stack);
 		int current = Math.max(0, nbt.getInteger(type.toString()));
 		int newValue = Math.max(0, current - amount);
