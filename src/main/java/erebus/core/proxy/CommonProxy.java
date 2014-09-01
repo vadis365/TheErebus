@@ -34,7 +34,7 @@ import erebus.inventory.ContainerPetrifiedCraftingTable;
 import erebus.inventory.ContainerPetrifiedWoodChest;
 import erebus.inventory.ContainerSilo;
 import erebus.inventory.ContainerUmberFurnace;
-import erebus.tileentity.TileEntityAltar;
+import erebus.tileentity.TileEntityCraftingAltar;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
@@ -106,7 +106,7 @@ public class CommonProxy implements IGuiHandler
 		registerTileEntity(TileEntityExtenderThingy.class, "extenderThingy");
 		registerTileEntity(TileEntityBambooPole.class, "bambooPole");
 		registerTileEntity(TileEntityJarOHoney.class, "jarOHoney");
-		registerTileEntity(TileEntityAltar.class, "altar");
+		registerTileEntity(TileEntityCraftingAltar.class, "altar");
 		registerTileEntity(TileEntityGlowGem.class, "glowGemBlock");
 		registerTileEntity(TileEntityHoneyComb.class, "honeyComb");
 		registerTileEntity(TileEntitySiloTank.class, "siloTank");

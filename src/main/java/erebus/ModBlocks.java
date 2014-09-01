@@ -51,8 +51,8 @@ import erebus.block.ErebusPortal;
 import erebus.block.GaeanKeystone;
 import erebus.block.JarOHoney;
 import erebus.block.SaplessLog;
-import erebus.block.altars.BlockAltar;
 import erebus.block.altars.BlockErebusAltar;
+import erebus.block.altars.CraftingAltar;
 import erebus.block.altars.HealingAltar;
 import erebus.block.altars.LightningAltar;
 import erebus.block.altars.OfferingAltar;
@@ -231,7 +231,6 @@ public class ModBlocks
 	public static final Block mudBricks = new BlockSimple(Material.rock).setBlockName("erebus.mudBricks").setBlockTextureName("erebus:mudBricks").setHardness(0.8F).setResistance(1.0F);
 	public static final Block jarOHoney = new JarOHoney().setHardness(0.5F).setBlockName("erebus.jarOHoney").setBlockTextureName("erebus:glassAmber");
 	public static final Block jadeBlock = new BlockCompressed(MapColor.greenColor).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.blockJade").setBlockTextureName("erebus:blockJade");
-	public static final Block altar = new BlockAltar().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.altar").setBlockTextureName("stone");
 	public static final Block glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 	public static final Block mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 
@@ -241,6 +240,7 @@ public class ModBlocks
 	public static final Block altarHealing = new HealingAltar().setHardness(20.0F).setBlockName("erebus.altarHealing");
 	public static final Block altarXP = new XPAltar().setHardness(20.0F).setBlockName("erebus.altarXP");
 	public static final Block altarRepair = new RepairAltar().setHardness(20.0F).setBlockName("erebus.altarRepair");
+	public static final Block craftingAltar = new CraftingAltar();
 
 	// DUNGEONS
 	public static final Block spiderSpawner = new BlockSpiderSpawner("Scytodes - Erebus").setBlockName("erebus.spiderSpawner").setBlockTextureName("erebus:spiderSpawner");

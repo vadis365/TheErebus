@@ -4,20 +4,26 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import erebus.tileentity.TileEntityAltar;
+import erebus.ModTabs;
+import erebus.tileentity.TileEntityCraftingAltar;
 
-public class BlockAltar extends BlockContainer
+public class CraftingAltar extends BlockContainer
 {
-
-	public BlockAltar()
+	public CraftingAltar()
 	{
 		super(Material.rock);
+		setHardness(5.0F);
+		setResistance(10.0F);
+		setStepSound(soundTypeStone);
+		setBlockTextureName("stone");
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.craftingAltar");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityAltar();
+		return new TileEntityCraftingAltar();
 	}
 
 	@Override
