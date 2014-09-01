@@ -51,7 +51,7 @@ import erebus.block.ErebusPortal;
 import erebus.block.GaeanKeystone;
 import erebus.block.JarOHoney;
 import erebus.block.SaplessLog;
-import erebus.block.altars.BlockErebusAltar;
+import erebus.block.altars.AltarBase;
 import erebus.block.altars.CraftingAltar;
 import erebus.block.altars.HealingAltar;
 import erebus.block.altars.LightningAltar;
@@ -235,7 +235,7 @@ public class ModBlocks
 	public static final Block mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 
 	// ALTARS
-	public static final Block altarBase = new BlockErebusAltar().setHardness(20.0F).setBlockName("erebus.altarBase");
+	public static final Block altarBase = new AltarBase().setHardness(20.0F).setBlockName("erebus.altarBase");
 	public static final Block altarLightning = new LightningAltar().setHardness(20.0F).setBlockName("erebus.altarLightning");
 	public static final Block altarHealing = new HealingAltar().setHardness(20.0F).setBlockName("erebus.altarHealing");
 	public static final Block altarXP = new XPAltar().setHardness(20.0F).setBlockName("erebus.altarXP");

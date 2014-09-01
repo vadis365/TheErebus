@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -13,6 +14,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.block.altars.CraftingAltar;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -21,13 +23,11 @@ import erebus.tileentity.TileEntityBambooCrate;
 
 public class WandOfAnimation extends Item
 {
-
 	public WandOfAnimation()
 	{
 		setFull3D();
-		setTextureName("paper");
-		setMaxDamage(64);
 		setNoRepair();
+		setMaxDamage(64);
 		setMaxStackSize(1);
 	}
 
@@ -40,11 +40,21 @@ public class WandOfAnimation extends Item
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg)
 	{
-		if (!player.canPlayerEdit(x, y, z, side, is))
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	{
+		if (!player.canPlayerEdit(x, y, z, side, stack))
 		{
 			return false;
+		} else if (CraftingAltar.isValid(world, x, y, z))
+		{
+			CraftingAltar.formAltar(world, x, y, z);
+			return true;
 		} else
 		{
 			Block block = world.getBlock(x, y, z);
@@ -67,7 +77,7 @@ public class WandOfAnimation extends Item
 				entityAnimatedBlock.setBlock(block, blockMeta);
 				world.spawnEntityInWorld(entityAnimatedBlock);
 				world.playSoundEffect(x, y, z, "erebus:altaroffering", 0.2F, 1.0F);
-				is.damageItem(1, player);
+				stack.damageItem(1, player);
 				return true;
 			}
 		}
