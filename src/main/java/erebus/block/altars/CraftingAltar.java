@@ -3,12 +3,16 @@ package erebus.block.altars;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
@@ -23,7 +27,6 @@ public class CraftingAltar extends BlockContainer
 		setHardness(5.0F);
 		setResistance(10.0F);
 		setStepSound(soundTypeStone);
-		setBlockTextureName("stone");
 		setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.craftingAltar");
 	}
@@ -125,5 +128,18 @@ public class CraftingAltar extends BlockContainer
 	public int getComparatorInputOverride(World world, int x, int y, int z, int side)
 	{
 		return Container.calcRedstoneFromInventory(Utils.getTileEntity(world, x, y, z, IInventory.class));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return ModBlocks.templeTile.getIcon(side, meta);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg)
+	{
 	}
 }

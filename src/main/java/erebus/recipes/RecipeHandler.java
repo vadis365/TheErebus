@@ -128,10 +128,10 @@ public class RecipeHandler
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.waspDagger), Materials.createStack(Materials.DATA.waspSting), new ItemStack(Items.stick));
 		GameRegistry.addRecipe(new RecipeSprintLeggingsUpgrades());
 		GameRegistry.addRecipe(new RecipeWhetstoneUpgrades());
-		
+
 		// Mushroom Helm & Mushroom Blocks
-		GameRegistry.addRecipe(new ItemStack(ModItems.mushroomHelm, 1), "mmm", "mpm", "  ", 'm', Materials.createStack(Materials.DATA.hideShroom), 'p', new ItemStack(Blocks.pumpkin));
-		
+		GameRegistry.addRecipe(new ItemStack(ModItems.mushroomHelm, 1), "mmm", "mpm", "   ", 'm', Materials.createStack(Materials.DATA.hideShroom), 'p', new ItemStack(Blocks.pumpkin));
+
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap0), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bulbCappedShroom, 1));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap1), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.kaizerfinger, 1));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap2), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bundleshroom, 1));
