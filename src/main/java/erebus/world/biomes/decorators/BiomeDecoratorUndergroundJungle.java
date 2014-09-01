@@ -45,8 +45,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead,1);
 	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass,1);
 
-	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves(),ModBlocks.thorns);
-	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves());
+	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,false,EnumWood.Mahogany,ModBlocks.thorns);
+	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,false,EnumWood.Mahogany);
 	private final WorldGenerator genTreeJungle = new WorldGenTrees(true,6,3,3,true);
 	private final WorldGenerator genTreeJungleLarge = new WorldGenMegaJungle(false,10,20,3,3);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
