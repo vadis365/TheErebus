@@ -113,10 +113,41 @@ public class CraftingAltarRecipe
 		return false;
 	}
 
-	public boolean matches(ItemStack focusItem, ItemStack... inputs)
+	@SuppressWarnings("unchecked")
+	public boolean matches(ItemStack focusItem, ItemStack... stacks)
 	{
 		if (!areStacksTheSame(this.focusItem, focusItem))
 		{
+			return false;
+		}
+
+		label: for (Object input : inputs)
+		{
+			for (int i = 0; i < stacks.length; i++)
+			{
+				if (stacks[i] != null)
+				{
+					if (input instanceof ItemStack)
+					{
+						if (Utils.areStacksTheSame((ItemStack) input, stacks[i], false))
+						{
+							stacks[i] = null;
+							continue label;
+						}
+					} else
+					{
+						for (ItemStack s : (ArrayList<ItemStack>) input)
+						{
+							if (Utils.areStacksTheSame(s, stacks[i], false))
+							{
+								stacks[i] = null;
+								continue label;
+							}
+						}
+					}
+				}
+			}
+
 			return false;
 		}
 
