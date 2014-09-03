@@ -41,7 +41,7 @@ public class ScorpionPincerItemRenderer implements IItemRenderer
 		switch (type)
 		{
 			case ENTITY:
-				renderPincer(0.0F, 1.0F, 0.0F, 2.5D);
+				renderPincer(0.0F, 0.0F, 0.0F, 1.0D);
 				break;
 			case EQUIPPED:
 				renderEquipped(0.6F, -0.5F, 0.5F, 2.5D);

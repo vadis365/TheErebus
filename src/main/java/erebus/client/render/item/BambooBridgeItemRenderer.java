@@ -45,7 +45,7 @@ public class BambooBridgeItemRenderer implements IItemRenderer
 		switch (type)
 		{
 			case ENTITY:
-				renderBlock(0.0F, 1.0F, 0.0F, 1.0D);
+				renderBlock(0.0F, 0.5F, 0.0F, 0.5D);
 				break;
 			case EQUIPPED:
 				renderBlock(0.5F, 2.0F, 1.0F, 1.0D);

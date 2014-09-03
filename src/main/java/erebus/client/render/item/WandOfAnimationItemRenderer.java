@@ -43,7 +43,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer
 		switch (type)
 		{
 			case ENTITY:
-				renderWand(0.0F, 1.0F, 0.0F, 0.75D, (WandOfAnimation) item.getItem());
+				renderWand(0.0F, 0.0F, 0.0F, 0.5D, (WandOfAnimation) item.getItem());
 				break;
 			case EQUIPPED:
 				renderEquipped(0.3F, 0.5F, 0.4F, 0.75D, (WandOfAnimation) item.getItem());

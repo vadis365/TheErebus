@@ -35,7 +35,7 @@ public class BambooTorchItemRenderer implements IItemRenderer
 		switch (type)
 		{
 			case ENTITY:
-				renderTorch(0.0F, 1.0F, 0.0F, 1.0D);
+				renderTorch(0.0F, 0.5F, 0.0F, 1.0D);
 				break;
 			case EQUIPPED:
 				renderEquipped(0.7F, 0.7F, 0.7F, 1.0D);

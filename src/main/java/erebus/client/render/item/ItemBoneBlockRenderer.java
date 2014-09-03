@@ -36,7 +36,7 @@ public class ItemBoneBlockRenderer implements IItemRenderer
 		switch (type)
 		{
 			case ENTITY:
-				renderBlock(0.0F, 1.75F, 0.0F, 1.0D);
+				renderBlock(0.0F, 0.5F, 0.0F, 0.5D);
 				break;
 			case EQUIPPED:
 				renderEquipped(0.4F, 2.0F, 1.25F, 1.0D);

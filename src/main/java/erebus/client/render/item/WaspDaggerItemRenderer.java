@@ -44,7 +44,7 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 		switch (type)
 		{
 			case ENTITY:
-				renderDagger(0.0F, 1.0F, 0.0F, 0.75D);
+				renderDagger(0.0F, 0.0F, 0.0F, 0.25D);
 				break;
 			case EQUIPPED:
 				renderEquipped(0.3F, 0.5F, 0.4F, 0.75D);
@@ -53,7 +53,7 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 				renderDaggerFirstPerson(0.5F, 0.9F, 0.5F, 0.75D);
 				break;
 			case INVENTORY:
-				renderDaggerInventory(-0.35F, -0.4F, 0.0F, 0.5D);
+				renderDaggerInventory(0.0F, 0.0F, 0.0F, 0.75D);
 				break;
 			default:
 				break;

@@ -41,7 +41,7 @@ public class WaspSwordItemRenderer implements IItemRenderer
 		switch (type)
 		{
 			case ENTITY:
-				renderSword(0.0F, 1.0F, 0.0F, 0.75D);
+				renderSword(0.0F, 0.5F, 0.0F, 0.5D);
 				break;
 			case EQUIPPED:
 				renderEquipped(0.3F, 0.5F, 0.4F, 0.75D);
