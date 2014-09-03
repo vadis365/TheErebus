@@ -10,13 +10,15 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
 import erebus.client.model.item.ModelWebSlinger;
 
 @SideOnly(Side.CLIENT)
 public class WebSlingerItemRenderer implements IItemRenderer
 {
 	private final ModelWebSlinger model = new ModelWebSlinger();
-	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/webSlinger.png");
+	private final ResourceLocation WEB_SLINGER = new ResourceLocation("erebus:textures/special/items/webSlinger.png");
+	private final ResourceLocation WITHER_WEB_SLINGER = new ResourceLocation("erebus:textures/special/items/webWitherSlinger.png");
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type)
@@ -33,26 +35,27 @@ public class WebSlingerItemRenderer implements IItemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
+		ResourceLocation texture = item.getItem() == ModItems.webSlinger ? WEB_SLINGER : WITHER_WEB_SLINGER;
 		switch (type)
 		{
 			case ENTITY:
-				renderWebSlinger(0.0F, 1.5F, 0.0F, 1.5D);
+				renderWebSlinger(0.0F, 0.5F, 0.0F, 0.5D, texture);
 				break;
 			case EQUIPPED:
-				renderEquipped(-0.8F, -1.6F, -1.25F, 1.5D);
+				renderEquipped(-0.8F, -1.6F, -1.25F, 1.5D, texture);
 				break;
 			case EQUIPPED_FIRST_PERSON:
-				renderWebSlingerFirstPerson(1.0F, 1.0F, 0.0F, 2.5D);
+				renderWebSlingerFirstPerson(1.0F, 1.0F, 0.0F, 2.5D, texture);
 				break;
 			case INVENTORY:
-				renderWebSlingerInventory(-0.3F, 0.3F, 0F, 0.9D);
+				renderWebSlingerInventory(-0.3F, 0.3F, 0F, 0.9D, texture);
 				break;
 			default:
 				break;
 		}
 	}
 
-	private void renderEquipped(float x, float y, float z, double size)
+	private void renderEquipped(float x, float y, float z, double size, ResourceLocation texture)
 	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
@@ -65,7 +68,7 @@ public class WebSlingerItemRenderer implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderWebSlinger(float x, float y, float z, double size)
+	private void renderWebSlinger(float x, float y, float z, double size, ResourceLocation texture)
 	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame)
@@ -87,7 +90,7 @@ public class WebSlingerItemRenderer implements IItemRenderer
 		}
 	}
 
-	private void renderWebSlingerFirstPerson(float x, float y, float z, double size)
+	private void renderWebSlingerFirstPerson(float x, float y, float z, double size, ResourceLocation texture)
 	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
@@ -100,7 +103,7 @@ public class WebSlingerItemRenderer implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderWebSlingerInventory(float x, float y, float z, double size)
+	private void renderWebSlingerInventory(float x, float y, float z, double size, ResourceLocation texture)
 	{
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
