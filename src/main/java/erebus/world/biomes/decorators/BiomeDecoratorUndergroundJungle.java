@@ -45,8 +45,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead,1);
 	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass,1);
 
-	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves(),ModBlocks.thorns);
-	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,false,EnumWood.Mahogany.getLog(),EnumWood.Mahogany.getLeaves());
+	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true,5,false,EnumWood.Mahogany,ModBlocks.thorns);
+	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true,false,EnumWood.Mahogany);
 	private final WorldGenerator genTreeJungle = new WorldGenTrees(true,6,3,3,true);
 	private final WorldGenerator genTreeJungleLarge = new WorldGenMegaJungle(false,10,20,3,3);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
@@ -297,23 +297,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus{
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres){
 		switch(oreType){
 			case COAL:
-				oreGen.setIterations(extraOres ? 3 : 4).setY(27,48).generate(world,rand,x,z); // generate
-				// first
-				// half
-				// above
-				// caves
-				oreGen.setIterations(extraOres ? 4 : 6).setOreAmount(12,14).setY(6,24); // setup
-				// more
-				// &
-				// bigger
-				// clusters
-				// below
-				// caves,
-				// let
-				// the
-				// base
-				// code
-				// generate
+				oreGen.setIterations(extraOres ? 3 : 4).setY(27,48).generate(world,rand,x,z); // generate first half above caves
+				oreGen.setIterations(extraOres ? 4 : 6).setOreAmount(12,14).setY(6,24); // setup more & bigger clusters below caves, let the base code generate
 				break;
 			case DIAMOND:
 				oreGen.setChance(0.1F).setY(6,16);

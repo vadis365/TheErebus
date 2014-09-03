@@ -41,13 +41,16 @@ import erebus.client.model.entity.ModelWheatWeevil;
 import erebus.client.model.entity.ModelWoodlouse;
 import erebus.client.render.block.BlockBambooCropRender;
 import erebus.client.render.block.BlockComposterRender;
+import erebus.client.render.block.BlockDoublePlantRender;
 import erebus.client.render.block.BlockGlowshroomRender;
 import erebus.client.render.block.BlockGlowshroomStalkRender;
 import erebus.client.render.block.BlockHollowLogRender;
+import erebus.client.render.block.BlockInsectRepellentRender;
 import erebus.client.render.block.BlockKeystoneRenderer;
 import erebus.client.render.block.BlockPlantedFlowerRender;
 import erebus.client.render.block.BlockSiloRoofRender;
 import erebus.client.render.block.BlockSiloSupportsRender;
+import erebus.client.render.block.BlockVelocityBlockRender;
 import erebus.client.render.entity.RenderAnimatedBlock;
 import erebus.client.render.entity.RenderAnimatedChest;
 import erebus.client.render.entity.RenderAntlion;
@@ -118,22 +121,22 @@ import erebus.client.render.item.WaspDaggerItemRenderer;
 import erebus.client.render.item.WaspSwordItemRenderer;
 import erebus.client.render.item.WebSlingerItemRenderer;
 import erebus.client.render.item.WoodlouseBallItemRenderer;
-import erebus.client.render.tileentity.TileEntityAltarRenderer;
 import erebus.client.render.tileentity.TileEntityBambooBridgeRenderer;
 import erebus.client.render.tileentity.TileEntityBambooPoleRenderer;
 import erebus.client.render.tileentity.TileEntityBoneBlockRenderer;
+import erebus.client.render.tileentity.TileEntityCraftingAltarRenderer;
 import erebus.client.render.tileentity.TileEntityErebusAltarHealingRenderer;
 import erebus.client.render.tileentity.TileEntityErebusAltarLightningRenderer;
 import erebus.client.render.tileentity.TileEntityErebusAltarRenderer;
 import erebus.client.render.tileentity.TileEntityErebusAltarRepairRenderer;
 import erebus.client.render.tileentity.TileEntityErebusAltarXPRenderer;
 import erebus.client.render.tileentity.TileEntityExtenderThingyRenderer;
+import erebus.client.render.tileentity.TileEntityGaeanKeystoneRenderer;
 import erebus.client.render.tileentity.TileEntityGlowGemRenderer;
 import erebus.client.render.tileentity.TileEntityGlowingJarRenderer;
 import erebus.client.render.tileentity.TileEntityLadderRenderer;
 import erebus.client.render.tileentity.TileEntityOfferingAltarRenderer;
 import erebus.client.render.tileentity.TileEntityPetrifiedWoodChestRenderer;
-import erebus.client.render.tileentity.TileEntityPortalRenderer;
 import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
 import erebus.client.render.tileentity.TileEntitySpawnerRender;
 import erebus.client.render.tileentity.TileEntityUmberGolemStatueRenderer;
@@ -193,23 +196,23 @@ import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
-import erebus.tileentity.TileEntityAltar;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
 import erebus.tileentity.TileEntityBones;
+import erebus.tileentity.TileEntityCraftingAltar;
 import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarHealing;
 import erebus.tileentity.TileEntityErebusAltarLightning;
 import erebus.tileentity.TileEntityErebusAltarRepair;
 import erebus.tileentity.TileEntityErebusAltarXP;
 import erebus.tileentity.TileEntityExtenderThingy;
+import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
-import erebus.tileentity.TileEntityPortal;
 import erebus.tileentity.TileEntitySpawner;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
@@ -226,7 +229,10 @@ public class ClientProxy extends CommonProxy
 		SILO_ROOF,
 		SILO_SUPPORTS,
 		COMPOSTER,
-		KEYSTONE;
+		KEYSTONE,
+		DOUBLE_PLANTS,
+		VELOCITY_BLOCK,
+		INSECT_REPELLENT;
 
 		private final int ID;
 
@@ -321,9 +327,9 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBones.class, new TileEntityBoneBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooPole.class, new TileEntityBambooPoleRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtenderThingy.class, new TileEntityExtenderThingyRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAltar.class, new TileEntityAltarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCraftingAltar.class, new TileEntityCraftingAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlowGem.class, new TileEntityGlowGemRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPortal.class, new TileEntityPortalRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGaeanKeystone.class, new TileEntityGaeanKeystoneRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingAltar.class, new TileEntityOfferingAltarRenderer());
 
 		RenderingRegistry.registerBlockHandler(new BlockBambooCropRender());
@@ -335,6 +341,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(new BlockSiloSupportsRender());
 		RenderingRegistry.registerBlockHandler(new BlockComposterRender());
 		RenderingRegistry.registerBlockHandler(new BlockKeystoneRenderer());
+		RenderingRegistry.registerBlockHandler(new BlockDoublePlantRender());
+		RenderingRegistry.registerBlockHandler(new BlockVelocityBlockRender());
+		RenderingRegistry.registerBlockHandler(new BlockInsectRepellentRender());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarBase), new ItemErebusAltarRenderer());
@@ -351,8 +360,9 @@ public class ClientProxy extends CommonProxy
 		MinecraftForgeClient.registerItemRenderer(ModItems.scorpionPincer, new ScorpionPincerItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.umberGolemStatue), new ItemUmberGolemStatueRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.petrifiedWoodChest), new ItemPetrifiedWoodChestRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockBones), new ItemBoneBlockRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bones), new ItemBoneBlockRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.webSlinger, new WebSlingerItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(ModItems.witherWebSlinger, new WebSlingerItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooBridge), new BambooBridgeItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.extenderThingy), new ExtenderThingyItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooPole), new BambooPoleItemRenderer());

@@ -57,7 +57,7 @@ public class OfferingAltarNEIHandler extends TemplateRecipeHandler
 		{
 			for (OfferingAltarRecipe recipe : OfferingAltarRecipe.getRecipeList())
 			{
-				arecipes.add(new CachedAltarRecipe(recipe));
+				arecipes.add(new CachedOfferingAltarRecipe(recipe));
 			}
 		} else
 		{
@@ -72,7 +72,7 @@ public class OfferingAltarNEIHandler extends TemplateRecipeHandler
 		{
 			if (Utils.areStacksTheSame(result, recipe.getOutput(), false))
 			{
-				arecipes.add(new CachedAltarRecipe(recipe));
+				arecipes.add(new CachedOfferingAltarRecipe(recipe));
 			}
 		}
 	}
@@ -84,18 +84,18 @@ public class OfferingAltarNEIHandler extends TemplateRecipeHandler
 		{
 			if (recipe.isPartOfInput(ingredient))
 			{
-				arecipes.add(new CachedAltarRecipe(recipe));
+				arecipes.add(new CachedOfferingAltarRecipe(recipe));
 			}
 		}
 	}
 
-	private class CachedAltarRecipe extends CachedRecipe
+	private class CachedOfferingAltarRecipe extends CachedRecipe
 	{
 
 		private final List<PositionedStack> inputs;
 		private final PositionedStack result;
 
-		private CachedAltarRecipe(OfferingAltarRecipe recipe)
+		private CachedOfferingAltarRecipe(OfferingAltarRecipe recipe)
 		{
 			result = new PositionedStack(recipe.getOutput(), 127, 24);
 
@@ -106,7 +106,7 @@ public class OfferingAltarNEIHandler extends TemplateRecipeHandler
 			Collections.shuffle(input);
 
 			inputs = new ArrayList<PositionedStack>();
-			if (input.get(0) != null)
+			if (input.size() >= 1 && input.get(0) != null)
 			{
 				inputs.add(new PositionedStack(input.get(0), x + 28, y));
 			}

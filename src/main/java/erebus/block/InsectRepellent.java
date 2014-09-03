@@ -4,30 +4,41 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
-public class BlockInsectRepellent extends Block
+public class InsectRepellent extends Block
 {
-
-	public BlockInsectRepellent()
+	public InsectRepellent()
 	{
-		super(Material.ground);
+		super(Material.circuits);
 		setTickRandomly(true);
-		setBlockTextureName("erebus:blockInsectRepellent");
+		setBlockName("erebus.insectRepellent");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg)
+	{
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return BlockRenderIDs.INSECT_REPELLENT.id();
 	}
 
 	@Override
@@ -82,7 +93,7 @@ public class BlockInsectRepellent extends Block
 	@Override
 	public int quantityDropped(Random rand)
 	{
-		return 1;
+		return 0;
 	}
 
 	@Override
@@ -144,21 +155,6 @@ public class BlockInsectRepellent extends Block
 				int Knockback = 1;
 				entity.addVelocity(MathHelper.sin(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F, 0.1D, MathHelper.cos(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F);
 				entity.worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public void onArthropodSpawn(LivingSpawnEvent.CheckSpawn e)
-	{
-		if (e.entity instanceof EntityLivingBase)
-		{
-			if (e.entity.worldObj.getBlock((int) e.x, (int) e.y, (int) e.z) == ModBlocks.insectRepellent)
-			{
-				if (((EntityLivingBase) e.entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD))
-				{
-					e.setResult(Result.DENY);
-				}
 			}
 		}
 	}

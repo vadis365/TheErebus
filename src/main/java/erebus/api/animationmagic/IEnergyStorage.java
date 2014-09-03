@@ -34,7 +34,7 @@ public interface IEnergyStorage
 	public int addEnergy(ItemStack stack, EnergyType type, int amount);
 
 	/**
-	 * Removed a certain amount of energy of the specified type of this item's
+	 * Removes a certain amount of energy of the specified type of this item's
 	 * internal storage
 	 *
 	 * @param stack

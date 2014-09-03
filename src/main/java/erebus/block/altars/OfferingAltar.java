@@ -23,8 +23,8 @@ public class OfferingAltar extends BlockContainer
 	public OfferingAltar()
 	{
 		super(Material.rock);
-		setBlockName("erebus.offeringAltar");
 		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.offeringAltar");
 	}
 
 	@Override

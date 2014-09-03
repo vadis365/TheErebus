@@ -11,10 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.BonemealEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -34,7 +30,6 @@ public class SmallMushroom extends BlockMushroom
 		setStepSound(soundTypeGrass);
 		setBlockName("erebus." + name);
 		setCreativeTab(ModTabs.plants);
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
@@ -66,40 +61,33 @@ public class SmallMushroom extends BlockMushroom
 		return "erebus:" + name;
 	}
 
-	@SubscribeEvent
-	public void onBonemeal(BonemealEvent event)
+	@Override
+	public void func_149853_b(World world, Random rand, int x, int y, int z)
 	{
-		if (!event.world.isRemote && event.block == this)
+		int xx = x;
+		int yy = y;
+		int zz = z;
+		if (isMushroom(world, xx, yy, zz))
 		{
-			if (event.world.rand.nextFloat() < 0.45D)
+			if (isMushroom(world, xx + 1, yy, zz) && isMushroom(world, xx + 1, yy, zz + 1) && isMushroom(world, xx, yy, zz + 1))
 			{
-				int xx = event.x;
-				int yy = event.y;
-				int zz = event.z;
-				if (isMushroom(event.world, xx, yy, zz))
-				{
-					if (isMushroom(event.world, xx + 1, yy, zz) && isMushroom(event.world, xx + 1, yy, zz + 1) && isMushroom(event.world, xx, yy, zz + 1))
-					{
-						growPlants(event.world, event.x + 1, event.y, event.z, event.world.rand);
-					}
-
-					if (isMushroom(event.world, xx - 1, yy, zz) && isMushroom(event.world, xx - 1, yy, zz + 1) && isMushroom(event.world, xx, yy, zz + 1))
-					{
-						growPlants(event.world, event.x, event.y, event.z, event.world.rand);
-					}
-
-					if (isMushroom(event.world, xx + 1, yy, zz) && isMushroom(event.world, xx + 1, yy, zz - 1) && isMushroom(event.world, xx, yy, zz - 1))
-					{
-						growPlants(event.world, event.x + 1, event.y, event.z - 1, event.world.rand);
-					}
-
-					if (isMushroom(event.world, xx - 1, yy, zz) && isMushroom(event.world, xx - 1, yy, zz - 1) && isMushroom(event.world, xx, yy, zz - 1))
-					{
-						growPlants(event.world, event.x, event.y, event.z - 1, event.world.rand);
-					}
-				}
+				growPlants(world, x + 1, y, z, world.rand);
 			}
-			event.setResult(Result.ALLOW);
+
+			if (isMushroom(world, xx - 1, yy, zz) && isMushroom(world, xx - 1, yy, zz + 1) && isMushroom(world, xx, yy, zz + 1))
+			{
+				growPlants(world, x, y, z, world.rand);
+			}
+
+			if (isMushroom(world, xx + 1, yy, zz) && isMushroom(world, xx + 1, yy, zz - 1) && isMushroom(world, xx, yy, zz - 1))
+			{
+				growPlants(world, x + 1, y, z - 1, world.rand);
+			}
+
+			if (isMushroom(world, xx - 1, yy, zz) && isMushroom(world, xx - 1, yy, zz - 1) && isMushroom(world, xx, yy, zz - 1))
+			{
+				growPlants(world, x, y, z - 1, world.rand);
+			}
 		}
 	}
 

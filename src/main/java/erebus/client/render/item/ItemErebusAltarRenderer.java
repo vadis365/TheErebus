@@ -36,16 +36,16 @@ public class ItemErebusAltarRenderer implements IItemRenderer
 		switch (type)
 		{
 			case ENTITY:
-				renderBlock(0.0F, 1.0F, 0.0F, 0.5D);
+				renderBlock(0.0F, 0.25F, 0.0F, 0.25D);
 				break;
 			case EQUIPPED:
-				renderBlock(0.5F, 1.0F, 0.5F, 0.5D);
+				renderBlock(0.5F, 1.0F, 1.0F, 0.5D);
 				break;
 			case EQUIPPED_FIRST_PERSON:
-				renderBlock(0.5F, 1.0F, 0.5F, 0.5D);
+				renderBlock(0.5F, 0.75F, 0.5F, 0.5D);
 				break;
 			case INVENTORY:
-				renderBlock(0.0F, 0.25F, 0.0F, 0.48D);
+				renderBlock(0.0F, 0.25F, 0.0F, 0.5D);
 				break;
 			default:
 				break;

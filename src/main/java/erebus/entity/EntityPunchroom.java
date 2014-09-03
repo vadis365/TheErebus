@@ -3,10 +3,13 @@ package erebus.entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.item.Materials.DATA;
 
 public class EntityPunchroom extends EntityMob
 {
@@ -40,7 +43,16 @@ public class EntityPunchroom extends EntityMob
 	 *
 	 * @Override protected String getDeathSound() { return ""; }
 	 */
-
+	
+	@Override
+	protected void dropFewItems(boolean recentlyHit, int looting)
+	{
+		if (rand.nextInt(5) == 0)
+		{
+			entityDropItem(new ItemStack(ModItems.materials, 1 + looting , DATA.elasticFibre.ordinal()), 0.0F);
+		}
+	}
+	
 	@Override
 	public void onUpdate()
 	{
@@ -114,20 +126,29 @@ public class EntityPunchroom extends EntityMob
 	{
 		super.onCollideWithPlayer(player);
 		float knockback = 0.2F;
-		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY)
-		{
-			if (worldObj.difficultySetting.ordinal() > 1)
+		if (!player.capabilities.isCreativeMode && !worldObj.isRemote) {
+			
+			if (player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY)
 			{
-				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				if (worldObj.difficultySetting.ordinal() > 1)
 				{
-					knockback = 0.4F;
-				} else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-				{
-					knockback = 0.6F;
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+					{
+						knockback = 0.4F;
+					} else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					{
+						knockback = 0.6F;
+					}
 				}
 			}
+			player.attackEntityFrom(DamageSource.causeMobDamage(this), 1F);
+			player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.3D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
 		}
-		player.attackEntityFrom(DamageSource.causeMobDamage(this), 1F);
-		player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.3D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
+	}
+	
+	@Override
+	public int getMaxSpawnedInChunk()
+	{
+		return 2;
 	}
 }

@@ -19,6 +19,8 @@ public class WorldProviderErebus extends WorldProvider{
 	private double[] currentFogColor;
 	@SideOnly(Side.CLIENT)
 	private short[] targetFogColor;
+	
+	private boolean allowHostiles, allowAnimals;
 
 	@Override
 	public boolean canRespawnHere(){
@@ -105,6 +107,21 @@ public class WorldProviderErebus extends WorldProvider{
 	@SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z){
 		return false;
+	}
+	
+	@Override
+	public void setAllowedSpawnTypes(boolean allowHostiles, boolean allowAnimals){
+		this.allowHostiles = allowHostiles;
+		this.allowAnimals = allowAnimals;
+		super.setAllowedSpawnTypes(allowHostiles,allowAnimals);
+	}
+	
+	public boolean getCanSpawnHostiles(){
+		return allowHostiles;
+	}
+	
+	public boolean getCanSpawnAnimals(){
+		return allowAnimals;
 	}
 
 	@Override

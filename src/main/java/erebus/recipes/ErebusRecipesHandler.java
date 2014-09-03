@@ -1,7 +1,6 @@
 package erebus.recipes;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import erebus.ModBlocks;
 import erebus.ModItems;
@@ -11,7 +10,7 @@ public class ErebusRecipesHandler
 {
 	public static void init()
 	{
-		altar();
+		craftingAltar();
 		offeringAltar();
 	}
 
@@ -20,8 +19,20 @@ public class ErebusRecipesHandler
 		OfferingAltarRecipe.addRecipe(Materials.createStack(Materials.DATA.gaeanGem), "gemDiamond", "gemEmerald", new ItemStack(Blocks.obsidian));
 	}
 
-	private static void altar()
+	private static void craftingAltar()
 	{
-		AltarRecipe.addRecipe(new ItemStack(ModItems.jadeHeart), new ItemStack(ModBlocks.jadeBlock), Materials.createStack(Materials.DATA.crimsonHeart), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot), new ItemStack(Items.gold_ingot));
+		CraftingAltarRecipe.addRecipe(new ItemStack(ModItems.jadeHeart), "blockJade", Materials.createStack(Materials.DATA.crimsonHeart), "ingotGold", "ingotGold", "ingotGold", "ingotGold", "ingotGold");
+		CraftingAltarRecipe.addRecipe(new ItemStack(ModBlocks.lightningSpeedBlock), new ItemStack(ModBlocks.velocityBlock), getArray(Materials.createStack(Materials.DATA.supernaturalvelocity), 8));
+		CraftingAltarRecipe.addRecipe(new ItemStack(ModItems.witherWebSlinger), new ItemStack(ModItems.webSlinger), new ItemStack(Blocks.soul_sand), Materials.createStack(Materials.DATA.poisonGland), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb));
+	}
+
+	private static Object[] getArray(Object base, int size)
+	{
+		Object[] array = new Object[size];
+		for (int i = 0; i < array.length; i++)
+		{
+			array[i] = base;
+		}
+		return array;
 	}
 }

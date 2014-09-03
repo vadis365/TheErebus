@@ -1,5 +1,6 @@
 package erebus.item;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -7,15 +8,18 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import erebus.entity.EntityWebSling;
 
 public class WebSlinger extends Item
 {
-
 	public WebSlinger()
 	{
-		maxStackSize = 1;
 		setMaxDamage(128);
+		setMaxStackSize(1);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override
@@ -27,10 +31,10 @@ public class WebSlinger extends Item
 			world.playSoundAtEntity(player, "erebus:webslingthrow", 1.0F, 1.0F);
 			if (!world.isRemote)
 			{
-				EntityWebSling var11 = new EntityWebSling(world, player);
-				var11.posY = player.posY + player.height / 2.0F;
-				var11.setType((byte) 0);
-				world.spawnEntityInWorld(var11);
+				EntityWebSling web = new EntityWebSling(world, player);
+				web.posY = player.posY + player.height / 2.0F;
+				web.setType(getShootType());
+				world.spawnEntityInWorld(web);
 			}
 		}
 		if (!player.capabilities.isCreativeMode)
@@ -39,6 +43,11 @@ public class WebSlinger extends Item
 			stack.damageItem(1, player);
 		}
 		return stack;
+	}
+
+	protected byte getShootType()
+	{
+		return (byte) 0;
 	}
 
 	@Override
@@ -58,5 +67,11 @@ public class WebSlinger extends Item
 	public int getMaxItemUseDuration(ItemStack is)
 	{
 		return 10;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg)
+	{
 	}
 }

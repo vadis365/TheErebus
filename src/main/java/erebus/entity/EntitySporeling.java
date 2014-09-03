@@ -101,7 +101,7 @@ public class EntitySporeling extends EntityAnimal
 	@Override
 	public int getMaxSpawnedInChunk()
 	{
-		return 3;
+		return 1;
 	}
 
 	@Override
@@ -133,4 +133,10 @@ public class EntitySporeling extends EntityAnimal
 	{
 		return null;
 	}
+	
+	@Override
+    protected boolean canDespawn()
+    {
+        return true;
+    }
 }

@@ -12,9 +12,6 @@ import erebus.ModBlocks;
 
 public class EntityWebSling extends EntityThrowable
 {
-
-	private byte type;
-
 	public EntityWebSling(World world)
 	{
 		super(world);
@@ -51,6 +48,8 @@ public class EntityWebSling extends EntityThrowable
 	@Override
 	protected void onImpact(MovingObjectPosition mop)
 	{
+		byte type = getType();
+
 		if (!worldObj.isRemote)
 		{
 			int x = MathHelper.floor_double(posX);
@@ -65,7 +64,7 @@ public class EntityWebSling extends EntityThrowable
 				}
 				if (type == 1)
 				{
-					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb);
+					worldObj.setBlock(x, y, z, ModBlocks.witherWeb);
 				}
 				if (type == 2)
 				{
@@ -79,7 +78,7 @@ public class EntityWebSling extends EntityThrowable
 				}
 				if (type == 1)
 				{
-					worldObj.setBlock(x, y, z, ModBlocks.blockWitherWeb);
+					worldObj.setBlock(x, y, z, ModBlocks.witherWeb);
 				}
 				if (type == 2)
 				{
@@ -110,12 +109,11 @@ public class EntityWebSling extends EntityThrowable
 
 	public void setType(byte webType)
 	{
-		type = webType;
 		dataWatcher.updateObject(24, webType);
 	}
 
 	public byte getType()
 	{
-		return type;
+		return dataWatcher.getWatchableObjectByte(24);
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
@@ -15,17 +16,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.event.entity.player.BonemealEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.item.Materials.DATA;
 
-public class BlockBambooShoot extends BlockFlower implements IPlantable
+public class BlockBambooShoot extends BlockFlower implements IGrowable
 {
 
 	public static byte calculateBambooHappiness(World world, int x, int y, int z, Block block)
@@ -184,17 +181,25 @@ public class BlockBambooShoot extends BlockFlower implements IPlantable
 		blockIcon = reg.registerIcon(getTextureName());
 	}
 
-	@SubscribeEvent
-	public void onBonemeal(BonemealEvent e)
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isRemote)
 	{
-		if (!e.world.isRemote && e.block == this)
+		return true;
+	}
+
+	@Override
+	public boolean func_149852_a(World world, Random rand, int x, int y, int z)
+	{
+		return true;
+	}
+
+	@Override
+	public void func_149853_b(World world, Random rand, int x, int y, int z)
+	{
+		int meta = world.getBlockMetadata(x, y, z);
+		if (meta < 7)
 		{
-			int meta = e.world.getBlockMetadata(e.x, e.y, e.z);
-			if (meta < 7)
-			{
-				e.world.setBlockMetadataWithNotify(e.x, e.y, e.z, meta + 9, 4);
-				e.setResult(Result.ALLOW);
-			}
+			world.setBlockMetadataWithNotify(x, y, z, meta + 9, 4);
 		}
 	}
 }

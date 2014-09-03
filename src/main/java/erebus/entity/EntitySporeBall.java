@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
+import erebus.ModItems;
 
 public class EntitySporeBall extends EntityThrowable
 {
@@ -89,10 +90,13 @@ public class EntitySporeBall extends EntityThrowable
 
 			if (mop.entityHit instanceof EntityPlayer)
 			{
-
 				EntityPlayer player = (EntityPlayer) mop.entityHit;
-				if (!worldObj.isRemote)
-				{
+				ItemStack helm = player.inventory.armorInventory[3];
+				
+				if(helm != null && helm.getItem() == ModItems.mushroomHelm)
+					setDead();
+				
+				else if (!worldObj.isRemote) {
 					if (player.riddenByEntity == null)
 					{
 						mountEntity(player);

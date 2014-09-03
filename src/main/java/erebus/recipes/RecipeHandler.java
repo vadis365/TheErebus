@@ -129,6 +129,17 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new RecipeSprintLeggingsUpgrades());
 		GameRegistry.addRecipe(new RecipeWhetstoneUpgrades());
 
+		// Mushroom Helm & Mushroom Blocks
+		GameRegistry.addRecipe(new ItemStack(ModItems.mushroomHelm, 1), "mmm", "mpm", "   ", 'm', Materials.createStack(Materials.DATA.hideShroom), 'p', new ItemStack(Blocks.pumpkin));
+
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap0), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bulbCappedShroom, 1));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap1), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.kaizerfinger, 1));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap2), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bundleshroom, 1));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap3), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.greenMushroom));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.mushroomCap4), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.dutchCap, 1));
+		GameRegistry.addRecipe(new ItemStack(Blocks.red_mushroom_block), "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.red_mushroom, 1));
+		GameRegistry.addRecipe(new ItemStack(Blocks.brown_mushroom_block), "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.brown_mushroom, 1));
+
 		// Red Gem
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.redstone, 2, 0), Materials.createStack(Materials.DATA.redGem));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.redGem, 1, 0), "##", "##", '#', Materials.createStack(Materials.DATA.redGem));
@@ -208,6 +219,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.templeTile, 4), "xx", "xx", 'x', new ItemStack(ModBlocks.templeBrick));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.templePillar, 2), "x", "x", 'x', new ItemStack(ModBlocks.templeTile));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.gneiss), "xx", "xx", 'x', Materials.createStack(Materials.DATA.gneissRock));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 2, 9), ModBlocks.waterFlower);
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));
@@ -263,7 +275,7 @@ public class RecipeHandler
 		// Animation Magic
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ModItems.soulCrystal, 'z', "stickWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stoneHeart), " x ", "yzx", "xxy", 'x', "stone", 'y', Blocks.obsidian, 'z', Materials.createStack(Materials.DATA.crimsonHeart)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stoneHeart), " x ", "yzx", "xxy", 'x', ModBlocks.templeTile, 'y', Blocks.obsidian, 'z', Materials.createStack(Materials.DATA.crimsonHeart)));
 	}
 
 	private static void registerSmelting()

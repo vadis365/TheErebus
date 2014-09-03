@@ -362,12 +362,14 @@ public class ChunkProviderErebus implements IChunkProvider{
 		int blockCoordZ = z * 16;
 
 		BiomeGenBase biomeBase = worldObj.getBiomeGenForCoords(blockCoordX + 16,blockCoordZ + 16);
+		
 		if (biomeBase instanceof BiomeBaseErebus){
 			BiomeBaseErebus biome = (BiomeBaseErebus)biomeBase;
 			rand.setSeed(worldObj.getSeed());
 			rand.setSeed(x * (rand.nextLong() / 2L * 2L + 1L) + z * (rand.nextLong() / 2L * 2L + 1L) ^ worldObj.getSeed());
 			biome.populate(worldObj,rand,blockCoordX,blockCoordZ);
 			biome.decorate(worldObj,rand,blockCoordX,blockCoordZ);
+			SpawnerErebus.onChunkPopulate(worldObj,rand,biome,blockCoordX+8,blockCoordZ+8);
 		}
 
 		for(int attempt = 0; attempt < 14; ++attempt){

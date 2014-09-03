@@ -11,8 +11,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.core.helper.TimeMeasurement;
+import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.loot.IWeightProvider;
+import erebus.world.loot.WeightedList;
 
 // @formatter:off
 public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightProvider{
@@ -23,6 +25,9 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 
 	public byte topBlockMeta;
 	public byte fillerBlockMeta;
+	
+	protected final WeightedList<SpawnEntry> spawningGradual = new WeightedList<SpawnEntry>();
+	protected final WeightedList<SpawnEntry> spawningPopulate = new WeightedList<SpawnEntry>();
 
 	public BiomeBaseErebus(int biomeID, BiomeDecoratorBaseErebus decorator){
 		super(biomeID);
@@ -66,6 +71,14 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 			ModBiomes.biomeList.add(this); // add to list once weight is known
 		}
 		return this;
+	}
+	
+	public SpawnEntry getRandomSpawnGradual(Random rand){
+		return spawningGradual.getRandomItem(rand);
+	}
+	
+	public SpawnEntry getRandomSpawnPopulate(Random rand){
+		return spawningPopulate.getRandomItem(rand);
 	}
 
 	@Override
@@ -119,9 +132,10 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	public BiomeBaseErebus getRandomSubBiome(int randomValue){
 		return null;
 	}
-
-	protected static class SpawnEntry extends SpawnListEntry{
-		protected SpawnEntry(Class<? extends EntityLiving> mobClass, int weight, int minGroupCount, int maxGroupCount){
+	
+	// TODO remove asap
+	protected static class SpawnEntryOld extends SpawnListEntry{
+		protected SpawnEntryOld(Class<? extends EntityLiving> mobClass, int weight, int minGroupCount, int maxGroupCount){
 			super(mobClass,weight,minGroupCount,maxGroupCount);
 		}
 	}

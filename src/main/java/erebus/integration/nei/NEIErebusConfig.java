@@ -23,13 +23,15 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.registerRecipeHandler(new OfferingAltarNEIHandler());
 		API.registerUsageHandler(new OfferingAltarNEIHandler());
 
+		API.registerRecipeHandler(new CraftingAltarNEIHandler());
+		API.registerUsageHandler(new CraftingAltarNEIHandler());
+
 		API.hideItem(new ItemStack(ModBlocks.portal));
 		API.hideItem(new ItemStack(ModBlocks.blockTurnip));
 		API.hideItem(new ItemStack(ModBlocks.insectRepellent));
 		API.hideItem(new ItemStack(ModBlocks.flowerPlanted, 1, OreDictionary.WILDCARD_VALUE));
 		API.hideItem(new ItemStack(ModBlocks.doorAmber));
 		API.hideItem(new ItemStack(ModBlocks.honeyBlock));
-		API.hideItem(new ItemStack(ModBlocks.altar));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap3));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap4));
 

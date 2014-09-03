@@ -1,81 +1,26 @@
 package erebus.block.altars;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.tileentity.TileEntityErebusAltarEmpty;
 
-public class BlockErebusAltar extends BlockContainer
+public class AltarBase extends AltarAbstract
 {
-
 	private String message;
-
-	public BlockErebusAltar()
-	{
-		super(Material.rock);
-		setBlockTextureName("erebus:blockErebusAltarBreak");
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return -1;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityErebusAltarEmpty();
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{
-		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z));
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
-	{
-		message = "Place Erebus item offerings on this altar. Then activate with The Wand of Animation.";
-		if (world.isRemote)
-		{
-			Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(message.toString()));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
-	{
-		float f = 0.0625F;
-		return AxisAlignedBB.getBoundingBox(i + f, j, k + f, i + 1 - f, j + 1 - f, k + 1 - f);
 	}
 
 	@Override

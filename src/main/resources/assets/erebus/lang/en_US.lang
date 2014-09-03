@@ -1,7 +1,6 @@
 # Blocks
 tile.erebus.portal.name=Erebus Portal
 tile.erebus.gaeanKeystone.name=Gaean Keystone
-tile.erebus.offeringAltar.name=Offering Altar
 
 tile.erebus.amber0.name=Amber
 tile.erebus.amber1.name=Amber Glass
@@ -83,6 +82,8 @@ tile.erebus.altarLightning.name=Altar of Lightning
 tile.erebus.altarHealing.name=Altar of Healing
 tile.erebus.altarXP.name=Altar of Experience
 tile.erebus.altarRepair.name=Altar of Repair
+tile.erebus.offeringAltar.name=Offering Altar
+tile.erebus.craftingAltar.name=Crafting Altar
 
 tile.erebus.oreCoal.name=Coal Ore
 tile.erebus.oreIron.name=Iron Ore
@@ -192,6 +193,7 @@ tile.erebus.witherWeb.name=Wither Web
 
 tile.erebus.mucusBomb.name=Mucus Bomb
 tile.erebus.velocityBlock.name=Velocity Block
+tile.erebus.lightningSpeedBlock.name=Lightning Speed Block
 tile.erebus.reinExo.name=Reinforced Exoskeleton Block
 tile.erebus.blockSilk.name=Silk
 
@@ -277,6 +279,7 @@ item.erebus.materials.45.name=Lead Ingot
 item.erebus.materials.46.name=Silver Ingot
 item.erebus.materials.47.name=Tin Ingot
 item.erebus.materials.48.name=Gneiss Rock
+item.erebus.materials.49.name=Mushroom Hide
 
 item.erebus.specialItem.0.name=Beetle Riding Kit
 item.erebus.specialItem.1.name=Beetle Amulet
@@ -316,6 +319,7 @@ item.erebus.wandOfAnimation.name=Wand Of Animation
 item.erebus.scorpionPincer.name=Augmented Scorpion Pincer
 item.erebus.hornOfSummoning.name=Horn of the Swarm
 item.erebus.webSlinger.name=Web Slinger
+item.erebus.witherWebSlinger.name=Wither Web Slinger
 item.erebus.blockExtractor.name=Block Extractor
 item.erebus.nectarCollector.name=Nectar Collector
 item.erebus.beeTamingAmulet.name=Bee Pendant
@@ -330,7 +334,7 @@ item.erebus.rolledNewspaper.name=Rolled Up Newspaper
 item.erebus.antTamingAmulet.name=Ant Medallion
 item.erebus.planticide.name=Herbicide
 item.erebus.compost.name=Compost
-item.erebus.monsterPlacer.name=Spawn % s
+item.erebus.monsterPlacer.name=Spawn %s
 
 item.erebus.soulCrystal.name=Soul Crystal
 item.erebus.jadeHeart.name=Jade Heart

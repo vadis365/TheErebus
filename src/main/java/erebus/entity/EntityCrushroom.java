@@ -12,11 +12,10 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.item.Materials;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
@@ -177,7 +176,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob
 
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block)
-	{ // playStepSound
+	{
 		playSound("mob.irongolem.walk", 1.0F, 0.5F);
 	}
 
@@ -188,16 +187,21 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob
 	}
 
 	@Override
-	protected Item getDropItem()
+	protected void dropFewItems(boolean recentHit, int fortune)
 	{
-		return Items.bone;
+		int amount = rand.nextInt(3);
+		if (fortune > 0)
+		{
+			amount += rand.nextInt(fortune + 1);
+		}
+		entityDropItem(Materials.createStack(Materials.DATA.hideShroom, amount), 0.0F);
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
 	public boolean canAttackClass(Class entity)
 	{
-		return EntityCrushroom.class != entity && EntitySporeling.class != entity;
+		return EntityCrushroom.class != entity && EntitySporeling.class != entity && EntityZombieAnt.class != entity && EntityPunchroom.class != entity;
 	}
 
 	@Override

@@ -17,16 +17,16 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
+import erebus.world.feature.tree.WorldGenCypressTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
-import erebus.world.feature.tree.WorldGenErebusTrees;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
+import erebus.world.feature.tree.WorldGenSapTree;
 
 public class BlockSaplingErebus extends BlockSapling
 {
@@ -105,7 +105,13 @@ public class BlockSaplingErebus extends BlockSapling
 		growTree(world, x, y, z, rand);
 	}
 
-	public void growTree(World world, int x, int y, int z, Random rand)
+	@Override
+	public void func_149853_b(World world, Random rand, int x, int y, int z)
+	{
+		growTree(world, x, y, z, rand);
+	}
+
+	private void growTree(World world, int x, int y, int z, Random rand)
 	{
 		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z))
 		{
@@ -113,9 +119,6 @@ public class BlockSaplingErebus extends BlockSapling
 		}
 
 		WorldGenerator worldGen = null;
-		int var8 = 0;
-		int var9 = 0;
-		boolean var10 = false;
 
 		switch (wood)
 		{
@@ -129,26 +132,14 @@ public class BlockSaplingErebus extends BlockSapling
 				worldGen = new WorldGenAsperTree();
 				break;
 			case Cypress:
+				worldGen = new WorldGenCypressTree();
 				break;
 			case Mahogany:
-				for (var8 = 0; var8 >= -1; --var8)
-				{
-					for (var9 = 0; var9 >= -1; --var9)
-					{
-						if (isSameSapling(world, x + var8, y, z + var9, 0) && isSameSapling(world, x + var8 + 1, y, z + var9, 0) && isSameSapling(world, x + var8, y, z + var9 + 1, 0) && isSameSapling(world, x + var8 + 1, y, z + var9 + 1, 0))
-						{
-							worldGen = new WorldGenErebusHugeTree(true, true, EnumWood.Mahogany.getLog(), EnumWood.Mahogany.getLeaves());
-							((WorldGenErebusHugeTree) worldGen).prepare(20 + rand.nextInt(5));
-							var10 = true;
-							break;
-						}
-					}
-
-					if (worldGen != null)
-					{
-						break;
-					}
-				}
+				worldGen = new WorldGenErebusHugeTree(true, true, wood);
+				((WorldGenErebusHugeTree) worldGen).prepare(20 + rand.nextInt(5));
+				break;
+			case Sap:
+				worldGen = new WorldGenSapTree();
 				break;
 			case Mossbark:
 				worldGen = new WorldGenMossbarkTree();
@@ -159,39 +150,18 @@ public class BlockSaplingErebus extends BlockSapling
 
 		if (worldGen == null)
 		{
-			var9 = 0;
-			var8 = 0;
-			worldGen = new WorldGenErebusTrees(true, 5, false, EnumWood.Mahogany.getLog(), EnumWood.Mahogany.getLeaves(), ModBlocks.thorns);
+			return;
 		}
 
-		if (var10)
+		world.setBlockToAir(x, y, z);
+		if (!worldGen.generate(world, rand, x, y, z))
 		{
-			world.setBlockToAir(x + var8, y, z + var9);
-			world.setBlockToAir(x + var8 + 1, y, z + var9);
-			world.setBlockToAir(x + var8, y, z + var9 + 1);
-			world.setBlockToAir(x + var8 + 1, y, z + var9 + 1);
-		} else
-		{
-			world.setBlockToAir(x, y, z);
-		}
-
-		if (!worldGen.generate(world, rand, x + var8, y, z + var9))
-		{
-			if (var10)
-			{
-				world.setBlock(x + var8, y, z + var9, this, 0, 3);
-				world.setBlock(x + var8 + 1, y, z + var9, this, 0, 3);
-				world.setBlock(x + var8, y, z + var9 + 1, this, 0, 3);
-				world.setBlock(x + var8 + 1, y, z + var9 + 1, this, 0, 3);
-			} else
-			{
-				world.setBlock(x, y, z, this, 0, 3);
-			}
+			world.setBlock(x, y, z, this);
 		}
 	}
 
 	public boolean isSameSapling(World world, int x, int y, int z, int meta)
 	{
-		return super.func_149880_a(world, x, y, z, meta);
+		return world.getBlock(x, y, z) == this;
 	}
 }

@@ -16,8 +16,6 @@ import cpw.mods.fml.relauncher.Side;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
-import erebus.core.handler.BlockHighlightHandler;
-import erebus.core.handler.BonemealHandler;
 import erebus.core.handler.BucketHandler;
 import erebus.core.handler.EntityDeathEventHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
@@ -33,6 +31,7 @@ import erebus.network.PacketPipeline;
 import erebus.recipes.ComposterRegistry;
 import erebus.recipes.ErebusRecipesHandler;
 import erebus.recipes.RecipeHandler;
+import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
 
@@ -84,18 +83,14 @@ public class Erebus
 		TeleporterHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
-		MinecraftForge.EVENT_BUS.register(new BonemealHandler());
-		MinecraftForge.EVENT_BUS.register(new BlockHighlightHandler());
-		MinecraftForge.EVENT_BUS.register(ModBlocks.bambooShoot);
-		MinecraftForge.EVENT_BUS.register(ModBlocks.flowerPlanted);
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
-		MinecraftForge.EVENT_BUS.register(ModBlocks.insectRepellent);
 		MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.armorGlider);
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.honeyBlock, ModItems.bucketHoney);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
+		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 
 		if (ConfigHandler.INSTANCE.randomNames)
 		{

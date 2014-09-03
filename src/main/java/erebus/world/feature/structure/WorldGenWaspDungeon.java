@@ -110,14 +110,14 @@ public class WorldGenWaspDungeon extends WorldGeneratorExt{
 				linez(null,z - 3,z + 3,x - 5 + 10 * a,y);
 				linex(ModBlocks.waspNestBlock,x - 1,x + 1,z - 7 + 14 * a,y);
 				linex(ModBlocks.waspNestBlock,x - 3,x - 2,z - 6 + 12 * a,y);
-				linex(ModBlocks.redGem,x - 1,x + 1,z - 6 + 12 * a,y);
+				linex(ModBlocks.waspNestBlock,x - 1,x + 1,z - 6 + 12 * a,y);
 				linex(ModBlocks.waspNestBlock,x + 2,x + 3,z - 6 + 12 * a,y);
 				linex(ModBlocks.waspNestBlock,x - 5,x - 4,z - 5 + 10 * a,y);
 				linex(ModBlocks.waspNestBlock,x + 4,x + 5,z - 5 + 10 * a,y);
 				block(ModBlocks.waspNestBlock,x - 5,z - 4 + 8 * a,y);
 				block(ModBlocks.waspNestBlock,x + 5,z - 4 + 8 * a,y);
 				linez(ModBlocks.waspNestBlock,z - 3,z - 2,x - 6 + 12 * a,y);
-				linez(ModBlocks.redGem,z - 1,z + 1,x - 6 + 12 * a,y);
+				linez(ModBlocks.waspNestBlock,z - 1,z + 1,x - 6 + 12 * a,y);
 				linez(ModBlocks.waspNestBlock,z + 2,z + 3,x - 6 + 12 * a,y);
 				linez(ModBlocks.waspNestBlock,z - 1,z + 1,x - 7 + 14 * a,y);
 			}
