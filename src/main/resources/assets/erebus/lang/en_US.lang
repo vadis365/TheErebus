@@ -281,13 +281,12 @@ item.erebus.materials.46.name=Silver Ingot
 item.erebus.materials.47.name=Tin Ingot
 item.erebus.materials.48.name=Gneiss Rock
 item.erebus.materials.49.name=Mushroom Hide
-
-item.erebus.specialItem.0.name=Beetle Riding Kit
-item.erebus.specialItem.1.name=Beetle Amulet
-item.erebus.specialItem.2.name=Umbergolem Torso
-item.erebus.specialItem.3.name=Umbergolem Head
-item.erebus.specialItem.4.name=Umbergolem Claw
-item.erebus.specialItem.5.name=Umbergolem Legs
+item.erebus.materials.50.name=Beetle Riding Kit
+item.erebus.materials.51.name=Beetle Amulet
+item.erebus.materials.52.name=Umbergolem Torso
+item.erebus.materials.53.name=Umbergolem Head
+item.erebus.materials.54.name=Umbergolem Claw
+item.erebus.materials.55.name=Umbergolem Legs
  
 item.erebus.food.0.name=Beetle Larva
 item.erebus.food.1.name=Cooked Beetle Larva

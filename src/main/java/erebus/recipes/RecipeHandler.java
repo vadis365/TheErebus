@@ -17,7 +17,6 @@ import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.Food;
 import erebus.item.Materials;
-import erebus.item.SpecialItems;
 import erebus.lib.EnumWood;
 
 public class RecipeHandler
@@ -258,19 +257,16 @@ public class RecipeHandler
 		}
 
 		// Special Items
-		GameRegistry.addRecipe(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataRhinoRidingKit), " SX", "CCC", "LLL", 'S', Items.string, 'X', Materials.createStack(Materials.DATA.plateExo), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4));
-		GameRegistry.addRecipe(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataBeetleTamingAmulet), " N ", "NJN", " F ", 'N', Items.gold_nugget, 'J', Materials.createStack(Materials.DATA.jade), 'F', Materials.createStack(Materials.DATA.altarFragment));
+		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.rhinoRidingKit), " SX", "CCC", "LLL", 'S', Items.string, 'X', Materials.createStack(Materials.DATA.plateExo), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4));
+		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.beetleTamingAmulet), " N ", "NJN", " F ", 'N', Items.gold_nugget, 'J', Materials.createStack(Materials.DATA.jade), 'F', Materials.createStack(Materials.DATA.altarFragment));
 		GameRegistry.addRecipe(new ItemStack(ModItems.beeTamingAmulet, 1), " n ", "nJn", " N ", 'n', Items.gold_nugget, 'J', Materials.createStack(Materials.DATA.jade), 'N', Materials.createStack(Materials.DATA.nectar));
 
 		// Umbergolem parts
-		GameRegistry.addRecipe(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemCore), "AAA", "ARA", "AAA", 'A', Materials.createStack(Materials.DATA.altarFragment), 'R', Materials.createStack(Materials.DATA.redGem));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemHead), "SSS", "SHS", "SSS", 'S', "stone", 'H', new ItemStack(ModItems.reinCompoundGoggles, 1)));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemClaw), "  P", "  S", " SS", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemClaw), "SSP", "S  ", "   ", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemLegs), "SSS", "S S", "R R", 'S', "stone", 'R', Materials.createStack(Materials.DATA.reinforcedPlateExo)));
-
-		// Umbergolem Statue
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.umberGolemStatue, 1), " H ", "LCR", " X ", 'H', new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemHead), 'L', new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemClaw), 'C', new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemCore), 'R', new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemClaw), 'X', new ItemStack(ModItems.specialItem, 1, SpecialItems.dataGolemLegs));
+		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.umberGolemCore), "AAA", "ARA", "AAA", 'A', Materials.createStack(Materials.DATA.altarFragment), 'R', Materials.createStack(Materials.DATA.redGem));
+		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemHead), "SSS", "SHS", "SSS", 'S', "stone", 'H', new ItemStack(ModItems.reinCompoundGoggles, 1)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemClaw), "  P", "  S", " SS", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemClaw), "SSP", "S  ", "   ", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemLegs), "SSS", "S S", "R R", 'S', "stone", 'R', Materials.createStack(Materials.DATA.reinforcedPlateExo)));
 
 		// Animation Magic
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ModItems.soulCrystal, 'z', "stickWood"));

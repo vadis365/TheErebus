@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
@@ -15,9 +14,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityMidgeSwarm extends EntityMob
 {
@@ -229,10 +227,10 @@ public class EntityMidgeSwarm extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(2) + 1, DATA.flyWing.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.flyWing, rand.nextInt(2) + 1), 0.0F);
 		if (rand.nextInt(5) == 0)
 		{
-			entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(1) + 1, DATA.compoundEyes.ordinal()), 0.0F);
+			entityDropItem(Materials.createStack(Materials.DATA.compoundEyes, rand.nextInt(1) + 1), 0.0F);
 		}
 	}
 

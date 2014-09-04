@@ -46,7 +46,6 @@ import erebus.item.ReinExoskeletonArmor;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
 import erebus.item.SpawnEggs;
-import erebus.item.SpecialItems;
 import erebus.item.SprayCan;
 import erebus.item.SprintLeggings;
 import erebus.item.WandOfAnimation;
@@ -76,7 +75,6 @@ public class ModItems
 	// BASIC MATERIALS
 	public static final Item portalActivator = new PortalActivator().setUnlocalizedName("erebus.portalActivator");
 	public static final Item materials = new Materials().setUnlocalizedName("erebus.materials");
-	public static final Item specialItem = new SpecialItems().setUnlocalizedName("erebus.specialItem");
 	public static final Item food = new Food().setUnlocalizedName("erebus.food");
 	public static final Item turnip = new ItemSeedFood(4, 0.6F, ModBlocks.blockTurnip, Blocks.farmland).setUnlocalizedName("erebus.turnips").setTextureName("erebus:turnips");
 	public static final Item sprayCan = new SprayCan().setUnlocalizedName("erebus.sprayCan").setTextureName("erebus:sprayCan");
@@ -179,7 +177,7 @@ public class ModItems
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper);
 		ModTabs.gears.setTab(mushroomHelm, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
-		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, specialItem, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
+		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds, spawnEggs);
 
 		// Special Case
 		ModTabs.blocks.setTab(doorAmberItem);

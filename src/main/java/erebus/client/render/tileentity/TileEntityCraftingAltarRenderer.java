@@ -3,8 +3,10 @@ package erebus.client.render.tileentity;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
@@ -27,6 +29,7 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 	private final ResourceLocation GLOW = new ResourceLocation("erebus:textures/special/tiles/craftingAltarGlow.png");
 
 	private final RenderItem renderItem;
+	public static TileEntityCraftingAltarRenderer instance;
 
 	public TileEntityCraftingAltarRenderer()
 	{
@@ -41,7 +44,51 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		renderItem.setRenderManager(RenderManager.instance);
 	}
 
-	public void renderAModelAt(TileEntityCraftingAltar tile, double x, double y, double z, float partialTick)
+	@Override
+	public void func_147497_a(TileEntityRendererDispatcher renderer)
+	{
+		super.func_147497_a(renderer);
+		instance = this;
+	}
+
+	public void renderTile(double x, double y, double z)
+	{
+		bindTexture(NORMAL);
+
+		GL11.glPushMatrix();
+		renderMainModel(x, y, z);
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
+		renderStones(x, y, z, 0);
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
+		GL11.glDepthMask(true);
+		char c0 = 61680;
+		int j = c0 % 65536;
+		int k = c0 / 65536;
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
+
+		bindTexture(GLOW);
+
+		GL11.glPushMatrix();
+		renderMainModel(x, y, z);
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
+		renderStones(x, y, z, 0);
+		GL11.glPopMatrix();
+
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		GL11.glPopMatrix();
+	}
+
+	private void renderTile(TileEntityCraftingAltar tile, double x, double y, double z)
 	{
 		if (tile.blockMetadata == 1)
 		{
@@ -51,8 +98,13 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 			bindTexture(NORMAL);
 		}
 
+		GL11.glPushMatrix();
 		renderMainModel(x, y, z);
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
 		renderStones(x, y, z, tile.rotation);
+		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.75F, (float) y + 0.75F, (float) z + 0.5F);
@@ -69,8 +121,12 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		int k = c0 / 65536;
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 		bindTexture(GLOW);
+		GL11.glPushMatrix();
 		renderMainModel(x, y, z);
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
 		renderStones(x, y, z, tile.rotation);
+		GL11.glPopMatrix();
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glPopMatrix();
@@ -112,9 +168,16 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 			}
 		} else
 		{
-			GL11.glRotated(90, 1, 0, 0);
-			GL11.glScaled(1.5, 1.5, 1.5);
-			GL11.glTranslatef(0.05F, -0.56F, -0.15F);
+			if (tile.getStackInSlot(9).getItem() instanceof ItemBlock)
+			{
+				GL11.glTranslatef(0.13F, -0.6F, 0.0F);
+				GL11.glScaled(1.5, 1.5, 1.5);
+			} else
+			{
+				GL11.glRotated(90, 1, 0, 0);
+				GL11.glScaled(1.5, 1.5, 1.5);
+				GL11.glTranslatef(0.05F, -0.56F, -0.15F);
+			}
 			renderCentreItem(tile.getItemForRendering(9), 0);
 		}
 	}
@@ -151,6 +214,6 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick)
 	{
-		renderAModelAt((TileEntityCraftingAltar) tile, x, y, z, partialTick);
+		renderTile((TileEntityCraftingAltar) tile, x, y, z);
 	}
 }

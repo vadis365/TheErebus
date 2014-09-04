@@ -30,7 +30,7 @@ import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
 import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAIPolinate;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityWorkerBee extends EntityTameable
 {
@@ -169,7 +169,7 @@ public class EntityWorkerBee extends EntityTameable
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.materials, getNectarPoints(), DATA.nectar.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.nectar, getNectarPoints()), 0.0F);
 	}
 
 	public boolean isFlying()
@@ -241,7 +241,7 @@ public class EntityWorkerBee extends EntityTameable
 
 	private void addHoneyToInventory(int x, int y, int z)
 	{
-		if (Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), new ItemStack(ModItems.materials, 1, DATA.nectar.ordinal())))
+		if (Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), Materials.createStack(Materials.DATA.nectar)))
 		{
 			setNectarPoints(getNectarPoints() - 1);
 		}
@@ -333,7 +333,7 @@ public class EntityWorkerBee extends EntityTameable
 		{
 			if (getNectarPoints() > 0)
 			{
-				entityDropItem(new ItemStack(ModItems.materials, 1, DATA.nectar.ordinal()), 0.0F);
+				entityDropItem(Materials.createStack(Materials.DATA.nectar), 0.0F);
 				is.damageItem(1, player);
 				setNectarPoints(getNectarPoints() - 1);
 				setTarget(null);

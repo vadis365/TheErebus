@@ -6,13 +6,11 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityScorpion extends EntityMob
 {
@@ -115,9 +113,9 @@ public class EntityScorpion extends EntityMob
 		int var5 = rand.nextInt(30);
 		if (var5 == 0)
 		{
-			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.scorpionPincer.ordinal()), 0.0F);
+			entityDropItem(Materials.createStack(Materials.DATA.scorpionPincer), 0.0F);
 		}
-		entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.poisonGland, 1 + rand.nextInt(2)), 0.0F);
 	}
 
 	@Override

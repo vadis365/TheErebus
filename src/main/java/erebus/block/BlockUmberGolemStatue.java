@@ -1,10 +1,11 @@
 package erebus.block;
 
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -18,14 +19,22 @@ import erebus.tileentity.TileEntityUmberGolemStatue;
 
 public class BlockUmberGolemStatue extends BlockContainer
 {
-
-	@SideOnly(Side.CLIENT)
-	private IIcon a, b;
-
 	public BlockUmberGolemStatue()
 	{
 		super(Material.rock);
-		setBlockTextureName("erebus:blockErebusAltarBreak");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg)
+	{
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return Blocks.stone.getIcon(side, 0);
 	}
 
 	@Override
@@ -50,12 +59,6 @@ public class BlockUmberGolemStatue extends BlockContainer
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileEntityUmberGolemStatue();
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{
-		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z));
 	}
 
 	@Override

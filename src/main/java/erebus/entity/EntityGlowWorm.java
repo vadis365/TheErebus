@@ -10,14 +10,12 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityGlowWorm extends EntityCreature
 {
@@ -103,7 +101,7 @@ public class EntityGlowWorm extends EntityCreature
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.bioLuminescence.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.bioLuminescence), 0.0F);
 	}
 
 	@Override

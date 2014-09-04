@@ -16,13 +16,13 @@ public class TabSpecialItems extends CreativeTabErebus
 	@Override
 	public Item getTabIconItem()
 	{
-		return ModItems.specialItem;
+		return ModItems.portalActivator;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int func_151243_f()
 	{
-		return 1;
+		return 0;
 	}
 }

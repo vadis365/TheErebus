@@ -14,13 +14,11 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityAntlion extends EntityMob
 {
@@ -74,7 +72,7 @@ public class EntityAntlion extends EntityMob
 	/*
 	 * @Override protected String getLivingSound() { return
 	 * "erebus:AntlionSound"; }
-	 *
+	 * 
 	 * @Override protected String getHurtSound() { return "erebus:Antlionhurt";
 	 * }
 	 */
@@ -104,7 +102,7 @@ public class EntityAntlion extends EntityMob
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
 		{
-			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.plateExo.ordinal()), 0.0F);
+			entityDropItem(Materials.createStack(Materials.DATA.plateExo), 0.0F);
 		}
 	}
 

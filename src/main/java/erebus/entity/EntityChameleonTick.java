@@ -11,11 +11,9 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityChameleonTick extends EntityMob
 {
@@ -76,20 +74,10 @@ public class EntityChameleonTick extends EntityMob
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
-	/*
-	 * @Override protected String getLivingSound() { return ""; }
-	 *
-	 * @Override protected String getHurtSound() { return ""; }
-	 *
-	 * @Override protected String getDeathSound() { return ""; }
-	 *
-	 * @Override protected void func_145780_a(int x, int y, int z, Block block)
-	 * { worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F); }
-	 */
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.camoPowder.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.camoPowder), 0.0F);
 	}
 
 	@Override

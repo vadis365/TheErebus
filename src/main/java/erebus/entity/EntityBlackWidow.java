@@ -11,15 +11,13 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityBlackWidow extends EntityMob
 {
@@ -210,7 +208,7 @@ public class EntityBlackWidow extends EntityMob
 		{
 			dropItem(Items.spider_eye, 1);
 		}
-		entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(2), DATA.poisonGland.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.poisonGland, 1 + rand.nextInt(2)), 0.0F);
 	}
 
 	@Override

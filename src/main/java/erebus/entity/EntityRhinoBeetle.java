@@ -30,8 +30,8 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.handler.KeyBindingHandler;
+import erebus.item.Materials;
 import erebus.item.Materials.DATA;
-import erebus.item.SpecialItems;
 import erebus.network.PacketPipeline;
 import erebus.network.server.PacketBeetleRamAttack;
 
@@ -187,7 +187,7 @@ public class EntityRhinoBeetle extends EntityTameable
 	{
 		if (getTameState() == 2)
 		{
-			entityDropItem(new ItemStack(ModItems.specialItem, 1, SpecialItems.dataRhinoRidingKit), 0.0F);
+			entityDropItem(Materials.createStack(Materials.DATA.rhinoRidingKit), 0.0F);
 		}
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
@@ -201,7 +201,7 @@ public class EntityRhinoBeetle extends EntityTameable
 	{
 		ItemStack is = player.inventory.getCurrentItem();
 		float healingBuff = 0.0F;
-		if (is != null && is.getItem() == ModItems.specialItem && is.getItemDamage() == 1 && getTameState() == 0)
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.beetleTamingAmulet.ordinal() && getTameState() == 0)
 		{
 			healingBuff = 20F;
 			is.stackSize--;
@@ -214,7 +214,7 @@ public class EntityRhinoBeetle extends EntityTameable
 			heal(healingBuff);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.specialItem && is.getItemDamage() == 0 && getTameState() == 1)
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.rhinoRidingKit.ordinal() && getTameState() == 1)
 		{
 			is.stackSize--;
 			player.swingItem();
@@ -235,7 +235,7 @@ public class EntityRhinoBeetle extends EntityTameable
 			}
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == 11 && getTameState() != 0)
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.bambooShoot.ordinal() && getTameState() != 0)
 		{
 			healingBuff = 5.0F;
 			if (getHealth() < getMaxHealth())

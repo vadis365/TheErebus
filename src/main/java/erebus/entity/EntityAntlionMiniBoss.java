@@ -13,14 +13,12 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityAntlionMiniBoss extends EntityMob
 {
@@ -77,7 +75,7 @@ public class EntityAntlionMiniBoss extends EntityMob
 	/*
 	 * @Override protected String getLivingSound() { return
 	 * "erebus:AntlionSound"; }
-	 *
+	 * 
 	 * @Override protected String getHurtSound() { return "erebus:Antlionhurt";
 	 * }
 	 */
@@ -107,7 +105,7 @@ public class EntityAntlionMiniBoss extends EntityMob
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
 		{
-			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.plateExo.ordinal()), 0.0F);
+			entityDropItem(Materials.createStack(Materials.DATA.plateExo), 0.0F);
 		}
 	}
 

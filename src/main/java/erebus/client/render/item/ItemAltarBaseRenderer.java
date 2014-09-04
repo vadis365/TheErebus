@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelErebusAltar;
 
 @SideOnly(Side.CLIENT)
-public class ItemErebusAltarRenderer implements IItemRenderer
+public class ItemAltarBaseRenderer implements IItemRenderer
 {
 
 	private final ModelErebusAltar ModelAltarBlock = new ModelErebusAltar();

@@ -76,7 +76,13 @@ public class Materials extends Item
 		ingotSilver,
 		ingotTin,
 		gneissRock,
-		hideShroom;
+		hideShroom,
+		rhinoRidingKit,
+		beetleTamingAmulet,
+		umberGolemCore,
+		umberGolemHead,
+		umberGolemClaw,
+		umberGolemLegs;
 	}
 
 	public static ItemStack createStack(DATA data)

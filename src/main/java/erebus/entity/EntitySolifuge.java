@@ -10,11 +10,9 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.ModItems;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntitySolifuge extends EntityMob
 {
@@ -104,13 +102,13 @@ public class EntitySolifuge extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.materials, rand.nextInt(3) + 1 + looting, DATA.bioVelocity.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.bioVelocity, rand.nextInt(3) + 1 + looting), 0.0F);
 	}
 
 	@Override
 	protected void dropRareDrop(int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.supernaturalvelocity.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.supernaturalvelocity), 0.0F);
 	}
 
 	@Override

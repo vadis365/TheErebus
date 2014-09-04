@@ -5,13 +5,11 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityLocust extends EntityMob
 {
@@ -72,7 +70,7 @@ public class EntityLocust extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.elasticFibre.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.elasticFibre), 0.0F);
 	}
 
 	public boolean randJump()

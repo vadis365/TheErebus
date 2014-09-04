@@ -9,7 +9,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -19,9 +18,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
-import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 import erebus.lib.EnumWood;
 
 public class EntityCicada extends EntityCreature
@@ -100,7 +98,7 @@ public class EntityCicada extends EntityCreature
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(new ItemStack(ModItems.materials, 1, DATA.repellent.ordinal()), 0.0F);
+		entityDropItem(Materials.createStack(Materials.DATA.repellent), 0.0F);
 	}
 
 	@Override

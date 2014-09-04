@@ -6,15 +6,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAmbientCreature;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.Materials.DATA;
+import erebus.item.Materials;
 
 public class EntityFly extends EntityAmbientCreature
 {
@@ -280,11 +278,11 @@ public class EntityFly extends EntityAmbientCreature
 	{
 		if (rand.nextInt(10) == 0)
 		{
-			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.flyWing.ordinal()), 0.0F);
+			entityDropItem(Materials.createStack(Materials.DATA.flyWing), 0.0F);
 		}
 		if (rand.nextInt(20) == 0)
 		{
-			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.compoundEyes.ordinal()), 0.0F);
+			entityDropItem(Materials.createStack(Materials.DATA.compoundEyes), 0.0F);
 		}
 	}
 }
