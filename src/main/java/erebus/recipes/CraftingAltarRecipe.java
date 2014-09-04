@@ -110,7 +110,7 @@ public class CraftingAltarRecipe
 			}
 		}
 
-		return false;
+		return areStacksTheSame(focusItem, ingredient);
 	}
 
 	@SuppressWarnings("unchecked")
