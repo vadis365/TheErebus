@@ -40,6 +40,7 @@ public class SpawnEggs extends ItemMonsterPlacer
 	public SpawnEggs()
 	{
 		setHasSubtypes(true);
+		setCreativeTab(CreativeTabs.tabMisc);
 	}
 
 	@Override
