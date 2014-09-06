@@ -113,7 +113,6 @@ public class CraftingAltarRecipe
 		return areStacksTheSame(focusItem, ingredient);
 	}
 
-	@SuppressWarnings("unchecked")
 	public boolean matches(ItemStack focusItem, ItemStack... stacks)
 	{
 		if (!areStacksTheSame(this.focusItem, focusItem))
@@ -127,23 +126,10 @@ public class CraftingAltarRecipe
 			{
 				if (stacks[i] != null)
 				{
-					if (input instanceof ItemStack)
+					if (areStacksTheSame(input, stacks[i]))
 					{
-						if (Utils.areStacksTheSame((ItemStack) input, stacks[i], false))
-						{
-							stacks[i] = null;
-							continue label;
-						}
-					} else
-					{
-						for (ItemStack s : (ArrayList<ItemStack>) input)
-						{
-							if (Utils.areStacksTheSame(s, stacks[i], false))
-							{
-								stacks[i] = null;
-								continue label;
-							}
-						}
+						stacks[i] = null;
+						continue label;
 					}
 				}
 			}
