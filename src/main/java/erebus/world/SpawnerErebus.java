@@ -99,7 +99,7 @@ public final class SpawnerErebus{
 		}
 		
 		Random rand = world.rand;
-		int x, y, z, spawned, spawnGroup, attempts, posAttempts, testedChunks = 3+rand.nextInt(1+2*world.difficultySetting.getDifficultyId());
+		int x, y, z, spawned, spawnGroup, attempts, posAttempts, maxPosAttempts, testedChunks = 3+rand.nextInt(1+2*world.difficultySetting.getDifficultyId());
 		float fx, fy, fz, yaw = 0F;
 		boolean continueSpawning, coordsFinal;
 		
@@ -111,7 +111,7 @@ public final class SpawnerErebus{
 			while(attempts < 4 && spawned < 2){
 				x = coords.chunkXPos*16+rand.nextInt(16);
 				z = coords.chunkZPos*16+rand.nextInt(16);
-				y = 20+rand.nextInt(80);
+				y = 10+rand.nextInt(100);
 				
 				BiomeGenBase biome = world.getBiomeGenForCoords(x,z);
 				if (!(biome instanceof BiomeBaseErebus))break;
@@ -129,9 +129,10 @@ public final class SpawnerErebus{
 				spawnGroup = entry.minGroupSize+rand.nextInt(entry.maxGroupSize-entry.minGroupSize+1);
 				continueSpawning = true;
 				coordsFinal = false;
+				maxPosAttempts = 20+spawnGroup*2;
 				
 				while(continueSpawning){
-					for(posAttempts = 0; posAttempts < 20+spawnGroup; posAttempts++){
+					for(posAttempts = 0; posAttempts < maxPosAttempts; posAttempts++){
 						fx = x+rand.nextInt(12)-6+0.5F;
 						fy = y+rand.nextInt(2)-1;
 						fz = z+rand.nextInt(12)-6+0.5F;
@@ -170,7 +171,7 @@ public final class SpawnerErebus{
 							y = 20+rand.nextInt(80);
 						}
 						
-						if (posAttempts == 9)continueSpawning = false;
+						if (posAttempts == maxPosAttempts-1)continueSpawning = false;
 					}
 
 					++spawned;
