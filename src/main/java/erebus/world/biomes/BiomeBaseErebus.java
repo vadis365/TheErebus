@@ -2,7 +2,6 @@ package erebus.world.biomes;
 
 import java.util.Random;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -131,13 +130,6 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	 */
 	public BiomeBaseErebus getRandomSubBiome(int randomValue){
 		return null;
-	}
-	
-	// TODO remove asap
-	protected static class SpawnEntryOld extends SpawnListEntry{
-		protected SpawnEntryOld(Class<? extends EntityLiving> mobClass, int weight, int minGroupCount, int maxGroupCount){
-			super(mobClass,weight,minGroupCount,maxGroupCount);
-		}
 	}
 }
 // @formatter:on

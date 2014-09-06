@@ -15,6 +15,7 @@ import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWheatWeevil;
 import erebus.entity.EntityWorkerBee;
+import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
 
@@ -34,21 +35,20 @@ public class BiomeElysianFields extends BiomeBaseErebus{
 		setTemperatureRainfall(0.85F,0.5F);
 		setWeight(20);
 
-		spawnableCreatureList.add(new SpawnEntryOld(EntityGrasshopper.class,4,1,3));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityGlowWorm.class,4,1,3));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityTitanBeetle.class,4,1,1));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityWorkerBee.class,14,1,2));
-		spawnableCaveCreatureList.add(new SpawnEntryOld(EntityMoth.class,10,2,3));
-		spawnableCaveCreatureList.add(new SpawnEntryOld(EntityFly.class,10,2,2));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityBeetle.class,6,1,2));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityBeetleLarva.class,4,2,3));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityCicada.class,100,1,1));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityWheatWeevil.class,6,1,2));
-
-		spawnableMonsterList.add(new SpawnEntryOld(EntityDragonfly.class,5,1,3));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityVelvetWorm.class,10,1,2));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityBotFly.class,10,2,3));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityChameleonTick.class,10,1,2));
+		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class,4).setGroupSize(1,3));
+		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class,4).setGroupSize(1,3));
+		spawningGradual.add(new SpawnEntry(EntityTitanBeetle.class,4).setGroupSize(1,1));
+		spawningGradual.add(new SpawnEntry(EntityWorkerBee.class,14).setGroupSize(1,2));
+		spawningGradual.add(new SpawnEntry(EntityMoth.class,10).setGroupSize(2,3));
+		spawningGradual.add(new SpawnEntry(EntityFly.class,10).setGroupSize(2,2));
+		spawningGradual.add(new SpawnEntry(EntityBeetle.class,6).setGroupSize(1,2));
+		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class,4).setGroupSize(2,3));
+		spawningGradual.add(new SpawnEntry(EntityCicada.class,100).setGroupSize(1,1));
+		spawningGradual.add(new SpawnEntry(EntityWheatWeevil.class,6).setGroupSize(1,2));
+		spawningGradual.add(new SpawnEntry(EntityDragonfly.class,5).setGroupSize(1,3));
+		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class,10).setGroupSize(1,2));
+		spawningGradual.add(new SpawnEntry(EntityBotFly.class,10).setGroupSize(2,3));
+		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class,10).setGroupSize(1,2));
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
+import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
 
 // @formatter:off
@@ -26,19 +27,17 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus{
 		setTemperatureRainfall(0.95F,0.05F);
 		setWeight(18);
 
-		spawnableCreatureList.add(new SpawnEntryOld(EntityGrasshopper.class,14,4,8));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityGlowWorm.class,14,4,8));
-
-		spawnableMonsterList.add(new SpawnEntryOld(EntityScytodes.class,35,1,4));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityWasp.class,30,4,8));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityTarantula.class,18,4,8));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityScorpion.class,10,4,8));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityChameleonTick.class,10,1,2));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityMosquito.class,60,1,3));
-
-		spawnableCaveCreatureList.add(new SpawnEntryOld(EntityFly.class,10,8,8));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityBeetleLarva.class,8,2,4));
-		spawnableCreatureList.add(new SpawnEntryOld(EntityBeetle.class,8,1,2));
+		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class,14).setGroupSize(4,8));
+		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class,14).setGroupSize(4,8));
+		spawningGradual.add(new SpawnEntry(EntityScytodes.class,35).setGroupSize(1,4));
+		spawningGradual.add(new SpawnEntry(EntityWasp.class,30).setGroupSize(4,8));
+		spawningGradual.add(new SpawnEntry(EntityTarantula.class,18).setGroupSize(4,8));
+		spawningGradual.add(new SpawnEntry(EntityScorpion.class,10).setGroupSize(4,8));
+		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class,10).setGroupSize(1,2));
+		spawningGradual.add(new SpawnEntry(EntityMosquito.class,60).setGroupSize(1,3));
+		spawningGradual.add(new SpawnEntry(EntityFly.class,10).setGroupSize(8,8));
+		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class,8).setGroupSize(2,4));
+		spawningGradual.add(new SpawnEntry(EntityBeetle.class,8).setGroupSize(1,2));
 
 		topBlock = Blocks.grass;
 		fillerBlock = Blocks.dirt;

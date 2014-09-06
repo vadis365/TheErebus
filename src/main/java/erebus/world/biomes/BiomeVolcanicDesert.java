@@ -14,6 +14,7 @@ import erebus.entity.EntityFly;
 import erebus.entity.EntityLavaWebSpider;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntitySolifuge;
+import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
 
 // @formatter:off
@@ -28,17 +29,16 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus{
 		setTemperatureRainfall(1.9F,0.2F);
 		setWeight(16);
 
-		spawnableMonsterList.add(new SpawnEntryOld(EntityScorpion.class,30,1,8));
-		spawnableMonsterList.add(new SpawnEntryOld(EntitySolifuge.class,30,1,8));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityFireAnt.class,30,1,8));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityFireAntSoldier.class,30,1,3));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityAntlion.class,30,1,8));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityBlackWidow.class,5,1,1));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityLavaWebSpider.class,300,1,1));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityChameleonTick.class,10,1,2));
-
-		spawnableCaveCreatureList.add(new SpawnEntryOld(EntityFly.class,10,8,8));
-		spawnableMonsterList.add(new SpawnEntryOld(EntityBotFly.class,10,2,3));
+		spawningGradual.add(new SpawnEntry(EntityScorpion.class,30).setGroupSize(1,8));
+		spawningGradual.add(new SpawnEntry(EntitySolifuge.class,30).setGroupSize(1,8));
+		spawningGradual.add(new SpawnEntry(EntityFireAnt.class,30).setGroupSize(1,8));
+		spawningGradual.add(new SpawnEntry(EntityFireAntSoldier.class,30).setGroupSize(1,3));
+		spawningGradual.add(new SpawnEntry(EntityAntlion.class,30).setGroupSize(1,8));
+		spawningGradual.add(new SpawnEntry(EntityBlackWidow.class,5).setGroupSize(1,1));
+		spawningGradual.add(new SpawnEntry(EntityLavaWebSpider.class,300).setGroupSize(1,1));
+		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class,10).setGroupSize(1,2));
+		spawningGradual.add(new SpawnEntry(EntityFly.class,10).setGroupSize(8,8));
+		spawningGradual.add(new SpawnEntry(EntityBotFly.class,10).setGroupSize(2,3));
 
 		topBlock = Blocks.sand;
 		fillerBlock = Blocks.sandstone;
