@@ -29,7 +29,11 @@ archivesBaseName = "TheErebus"
 minecraft
 {
     version = "1.7.10-10.13.0.1194"
-    runDir = "minecraft"
+    if(file('../run').exists()){
+		assetDir = "../run/assets"
+	} else {
+		assetDir = "assets"
+	}
 }
 
 repositories
