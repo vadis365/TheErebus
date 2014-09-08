@@ -4,12 +4,6 @@ build/
 eclipse/
 minecraft/
 gradle/
-config/
-logs/
-asm/
-mods/
-resourcepacks/
-saves/
 .settings/
 .gradle/
 libs/
@@ -22,6 +16,4 @@ libs/
 *.iml
 *.ipr
 *.iws
-*.txt
-*.properties
 gradlew
