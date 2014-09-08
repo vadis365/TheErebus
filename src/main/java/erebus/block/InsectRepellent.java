@@ -17,7 +17,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 public class InsectRepellent extends Block
 {
@@ -38,7 +37,7 @@ public class InsectRepellent extends Block
 	@Override
 	public int getRenderType()
 	{
-		return BlockRenderIDs.INSECT_REPELLENT.id();
+		return -1;
 	}
 
 	@Override
