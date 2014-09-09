@@ -94,7 +94,12 @@ public class EntityJumpingSpider extends EntitySpider
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(Materials.createStack(Materials.DATA.poisonGland, rand.nextInt(2)), 0.0F);
+		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
+		{
+			entityDropItem(Materials.createStack(Materials.DATA.poisonGland, 1), 0F);
+		}
 	}
 
 	@Override

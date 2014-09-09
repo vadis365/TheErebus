@@ -307,10 +307,15 @@ public class EntityBotFly extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(Materials.createStack(Materials.DATA.flyWing, 1 + rand.nextInt(2)), 0.0F);
-		if (rand.nextInt(5) == 0)
+		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
 		{
-			entityDropItem(Materials.createStack(Materials.DATA.compoundEyes, 1 + rand.nextInt(2)), 0.0F);
+			entityDropItem(Materials.createStack(Materials.DATA.flyWing, 1), 0.0F);
+			if (rand.nextInt(5) == 0)
+			{
+				entityDropItem(Materials.createStack(Materials.DATA.compoundEyes, 1), 0.0F);
+			}
 		}
 	}
 

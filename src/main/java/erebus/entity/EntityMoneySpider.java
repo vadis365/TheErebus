@@ -32,11 +32,8 @@ public class EntityMoneySpider extends EntitySpider
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
-		super.dropFewItems(par1, par2);
-
-		if (par1 && (rand.nextInt(10) == 0 || rand.nextInt(1 + par2) > 0))
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		if (recentlyHit && (rand.nextInt(10) == 0 || rand.nextInt(1 + looting) > 0))
 		{
 			dropItem(Items.gold_ingot, 1);
 		}

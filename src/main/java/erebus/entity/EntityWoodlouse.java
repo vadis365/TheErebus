@@ -134,6 +134,11 @@ public class EntityWoodlouse extends EntityCreature
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(Materials.createStack(Materials.DATA.whetstonePowder, 1 + looting), 0F);
+		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
+		{
+			entityDropItem(Materials.createStack(Materials.DATA.whetstonePowder, 1 + looting), 0F);
+		}
 	}
 }

@@ -110,12 +110,17 @@ public class EntityScorpion extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		int var5 = rand.nextInt(30);
-		if (var5 == 0)
+		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
 		{
-			entityDropItem(Materials.createStack(Materials.DATA.scorpionPincer), 0.0F);
+			int pincerChance = rand.nextInt(30);
+			if (pincerChance == 0)
+			{
+				entityDropItem(Materials.createStack(Materials.DATA.scorpionPincer), 0.0F);
+			}
+			entityDropItem(Materials.createStack(Materials.DATA.poisonGland, 1 + rand.nextInt(2)), 0.0F);
 		}
-		entityDropItem(Materials.createStack(Materials.DATA.poisonGland, 1 + rand.nextInt(2)), 0.0F);
 	}
 
 	@Override

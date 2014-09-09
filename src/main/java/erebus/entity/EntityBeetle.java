@@ -166,10 +166,11 @@ public class EntityBeetle extends EntityAnimal
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
+	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + par2);
-		for (int a = 0; a < var3; ++a)
+		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
 		{
 			entityDropItem(Materials.createStack(Materials.DATA.plateExo), 0.0F);
 		}

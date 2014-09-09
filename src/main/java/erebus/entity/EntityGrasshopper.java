@@ -97,12 +97,17 @@ public class EntityGrasshopper extends EntityCreature
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		if (isBurning())
+		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
 		{
-			entityDropItem(new ItemStack(ModItems.food, 1, 3), 0.0F);
-		} else
-		{
-			entityDropItem(new ItemStack(ModItems.food, 1, 2), 0.0F);
+			if (isBurning())
+			{
+				entityDropItem(new ItemStack(ModItems.food, 1, 3), 0.0F);
+			} else
+			{
+				entityDropItem(new ItemStack(ModItems.food, 1, 2), 0.0F);
+			}
 		}
 	}
 

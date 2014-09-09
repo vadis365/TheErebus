@@ -102,7 +102,12 @@ public class EntitySolifuge extends EntityMob
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting)
 	{
-		entityDropItem(Materials.createStack(Materials.DATA.bioVelocity, rand.nextInt(3) + 1 + looting), 0.0F);
+		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
+		{
+			entityDropItem(Materials.createStack(Materials.DATA.bioVelocity, 1), 0.0F);
+		}
 	}
 
 	@Override
