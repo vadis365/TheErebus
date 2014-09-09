@@ -138,7 +138,7 @@ public class EntityWoodlouse extends EntityCreature
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
 		{
-			entityDropItem(Materials.createStack(Materials.DATA.whetstonePowder, 1 + looting), 0F);
+			entityDropItem(Materials.createStack(Materials.DATA.whetstonePowder, 1), 0F);
 		}
 	}
 }
