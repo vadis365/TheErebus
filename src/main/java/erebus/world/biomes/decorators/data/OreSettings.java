@@ -169,6 +169,7 @@ public final class OreSettings
 			this(oreBlock, 0);
 		}
 
+		@SuppressWarnings("incomplete-switch")
 		public void setupDefault(OreSettings settings, boolean extraOres)
 		{
 			settings.reset();

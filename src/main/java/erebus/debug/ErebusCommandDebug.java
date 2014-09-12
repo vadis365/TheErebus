@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
@@ -41,81 +42,104 @@ public class ErebusCommandDebug extends CommandBase
 		return "commands.erebus.debug.usage";
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void processCommand(ICommandSender sender, String[] params){
-		if (!(sender instanceof EntityPlayer)){
+	public void processCommand(ICommandSender sender, String[] params)
+	{
+		if (!(sender instanceof EntityPlayer))
+		{
 			sender.addChatMessage(text("Cannot use Erebus debug commands in console or command block."));
 			return;
 		}
-		
-		EntityPlayer player = (EntityPlayer)sender;
 
-		if (params.length==0){
+		EntityPlayer player = (EntityPlayer) sender;
+
+		if (params.length == 0)
+		{
 			sender.addChatMessage(text("Available commands:"));
 			sender.addChatMessage(text("/erebus gen <type> <feature>"));
 			sender.addChatMessage(text("/erebus debug"));
-		}
-		else if (params[0].equals("gen")&&params.length>=3){
-			try{
-				Class<?> cls = Class.forName("erebus.world.feature."+params[1]+".WorldGen"+params[2]);
-				WorldGenerator gen = (WorldGenerator)cls.newInstance();
+		} else if (params[0].equals("gen") && params.length >= 3)
+		{
+			try
+			{
+				Class<?> cls = Class.forName("erebus.world.feature." + params[1] + ".WorldGen" + params[2]);
+				WorldGenerator gen = (WorldGenerator) cls.newInstance();
 				ChunkCoordinates coords = sender.getPlayerCoordinates();
 
-				if (gen.generate(sender.getEntityWorld(),sender.getEntityWorld().rand,coords.posX,coords.posY,coords.posZ)){
+				if (gen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, coords.posX, coords.posY, coords.posZ))
+				{
 					sender.addChatMessage(text("Generated."));
-				}
-				else{
+				} else
+				{
 					sender.addChatMessage(text("Failed."));
 				}
-			}catch(Throwable t){
+			} catch (Throwable t)
+			{
 				t.printStackTrace();
 				sender.addChatMessage(text("Something went wrong."));
 			}
-		}
-		else if (params[0].equals("debug")){
+		} else if (params[0].equals("debug"))
+		{
 			/*
-			 * Use this with hot code replace whenever there's something to debug and you want to print stuff out on command.
-			 * Whoever comes here and needs this - if you think the current code will be useful another time, add a new command for it. If not, just delete it, no hard feelings.
+			 * Use this with hot code replace whenever there's something to
+			 * debug and you want to print stuff out on command. Whoever comes
+			 * here and needs this - if you think the current code will be
+			 * useful another time, add a new command for it. If not, just
+			 * delete it, no hard feelings.
 			 */
 			String response = "";
-			
+
 			// debug start
-			
-			int creature = player.worldObj.countEntities(EnumCreatureType.creature,true);
-			int monster = player.worldObj.countEntities(EnumCreatureType.monster,true);
-			int ambient = player.worldObj.countEntities(EnumCreatureType.ambient,true);
-			
-			response = "Mob count: creature "+creature+", monster "+monster+", ambient "+ambient;
-			
+
+			int creature = player.worldObj.countEntities(EnumCreatureType.creature, true);
+			int monster = player.worldObj.countEntities(EnumCreatureType.monster, true);
+			int ambient = player.worldObj.countEntities(EnumCreatureType.ambient, true);
+
+			response = "Mob count: creature " + creature + ", monster " + monster + ", ambient " + ambient;
+
 			List<Entity> list = player.worldObj.loadedEntityList;
-			Map<EnumCreatureType,Set<String>> mobs = new HashMap<EnumCreatureType,Set<String>>();
-			
-			for(Entity entity:list){
-				for(EnumCreatureType type:EnumCreatureType.values()){
-					if (entity.isCreatureType(type,true)){
+			Map<EnumCreatureType, Set<String>> mobs = new HashMap<EnumCreatureType, Set<String>>();
+
+			for (Entity entity : list)
+			{
+				for (EnumCreatureType type : EnumCreatureType.values())
+				{
+					if (entity.isCreatureType(type, true))
+					{
 						Set<String> set = mobs.get(type);
-						if (set == null)mobs.put(type,set = new HashSet<String>());
-						
+						if (set == null)
+						{
+							mobs.put(type, set = new HashSet<String>());
+						}
+
 						set.add(entity.getClass().getSimpleName());
 					}
 				}
 			}
-			
-			for(Entry<EnumCreatureType,Set<String>> entry:mobs.entrySet()){
+
+			for (Entry<EnumCreatureType, Set<String>> entry : mobs.entrySet())
+			{
 				StringBuilder build = new StringBuilder();
 				build.append("\n").append(entry.getKey().name()).append(" - ");
-				
-				for(String s:entry.getValue())build.append(s).append(", ");
-				build.delete(build.length()-2,build.length());
-				
+
+				for (String s : entry.getValue())
+				{
+					build.append(s).append(", ");
+				}
+				build.delete(build.length() - 2, build.length());
+
 				response += build.toString();
 			}
-			
+
 			// debug end
-			
-			for(String s:response.split("\n"))sender.addChatMessage(text(s));
-		}
-		else{
+
+			for (String s : response.split("\n"))
+			{
+				sender.addChatMessage(text(s));
+			}
+		} else
+		{
 			sender.addChatMessage(text("Wrong command u noob."));
 		}
 	}
