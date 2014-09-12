@@ -21,8 +21,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus
 	@Override
 	public void decorate()
 	{
-
-		for (attempt = 0; attempt < 112; attempt++)
+		for (attempt = 0; attempt < 240; attempt++)
 		{
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
@@ -46,9 +45,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus
 		for (attempt = 0; attempt < rand.nextInt(3); attempt++)
 		{
 			xx = x + offsetXZ();
-			yy = 20 + rand.nextInt(25) * (1 + rand.nextInt(3)); // more likely
-			// in lower
-			// levels
+			yy = 20 + rand.nextInt(25) * (1 + rand.nextInt(3)); // more likely in lower levels
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
@@ -96,7 +93,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus
 
 			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
 			{
-				if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
+				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 				{
 					if (rand.nextInt(10) == 0 && world.isAirBlock(xx, yy + 1, zz))
 					{
@@ -142,8 +139,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus
 		{
 			case COAL:
 				oreGen.setChance(0.85F).setIterations(extraOres ? 2 : 3).setOreAmount(7, 10).setY(5, 56);
-				break; // less common, lowered amount too, also ~2 times smaller
-			// area
+				break; // less common, lowered amount too, also ~2 times smaller area
 			case EMERALD:
 				oreGen.setIterations(1, 3);
 				break; // one more vein
