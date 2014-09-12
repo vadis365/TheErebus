@@ -16,35 +16,33 @@ import erebus.entity.EntityTarantula;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 
-// @formatter:off
-public class BiomeUlteriorOutback extends BiomeBaseErebus{
-
-	@SuppressWarnings("unchecked")
-	public BiomeUlteriorOutback(int biomeID){
-		super(biomeID,new BiomeDecoratorUlteriorOutback());
+public class BiomeUlteriorOutback extends BiomeBaseErebus
+{
+	public BiomeUlteriorOutback(int biomeID)
+	{
+		super(biomeID, new BiomeDecoratorUlteriorOutback());
 
 		setBiomeName("Ulterior Outback");
 		setColors(0xC1B668);
-		setFog(234,194,114);
-		setTemperatureRainfall(1.1F,0.2F);
+		setFog(234, 194, 114);
+		setTemperatureRainfall(1.1F, 0.2F);
 		setWeight(15);
 
-		spawningGradual.add(new SpawnEntry(EntityScytodes.class,30).setGroupSize(1,4));
-		spawningGradual.add(new SpawnEntry(EntityScorpion.class,10).setGroupSize(2,2));
-		spawningGradual.add(new SpawnEntry(EntitySolifuge.class,8).setGroupSize(1,2));
-		spawningGradual.add(new SpawnEntry(EntityBlackWidow.class,5).setGroupSize(1,1));
-		spawningGradual.add(new SpawnEntry(EntitySolifuge.class,5).setGroupSize(1,3));
-		spawningGradual.add(new SpawnEntry(EntityCentipede.class,10).setGroupSize(4,8));
-		spawningGradual.add(new SpawnEntry(EntityBotFly.class,10).setGroupSize(2,3));
-		spawningGradual.add(new SpawnEntry(EntityTarantula.class,8).setGroupSize(4,8));
-		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class,10).setGroupSize(1,2));
-		spawningGradual.add(new SpawnEntry(EntityMidgeSwarm.class,10).setGroupSize(1,2));
-		spawningGradual.add(new SpawnEntry(EntityRhinoBeetle.class,5).setGroupSize(1,1));
-		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class,8).setGroupSize(2,4));
-		spawningGradual.add(new SpawnEntry(EntityFly.class,10).setGroupSize(2,2));
+		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 30).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(2, 2));
+		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 8).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityBlackWidow.class, 5).setGroupSize(1, 1));
+		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 5).setGroupSize(1, 3));
+		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
+		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
+		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 8).setGroupSize(4, 8));
+		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityMidgeSwarm.class, 10).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityRhinoBeetle.class, 5).setGroupSize(1, 1));
+		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 8).setGroupSize(2, 4));
+		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
 
 		topBlock = Blocks.sand;
 		topBlockMeta = 1;
 	}
 }
-// @formatter:on
