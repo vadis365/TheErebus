@@ -33,11 +33,11 @@ public class BiomeBetweenlands extends BiomeBaseErebus
 	/*
 	 * @Override public void generateBiomeFeatures(World world, Random rand, int
 	 * x, int z){}
-	 * 
+	 *
 	 * @Override public void generateFeature(World world, Random rand, int x,
 	 * int z, FeatureType featureType){ if (featureType !=
 	 * FeatureType.REDGEM)generateFeature(world,rand,x,z,featureType); }
-	 * 
+	 *
 	 * @Override public void generateOre(World world, Random rand, int x, int z,
 	 * OreType oreType, boolean extraOres){ if (oreType == OreType.FOSSIL){ if
 	 * (rand
