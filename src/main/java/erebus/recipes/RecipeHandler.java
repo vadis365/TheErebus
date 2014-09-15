@@ -72,6 +72,10 @@ public class RecipeHandler
 		{
 			addSlabRecipe((BlockSlabStone) slab);
 		}
+		for (int i = 0; i < ModBlocks.gneissStairs.length; i++)
+		{
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.gneissStairs[i], 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.gneiss, 1, i));
+		}
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wall, 6), "###", "###", '#', "stoneUmber"));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 1), "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 1));
