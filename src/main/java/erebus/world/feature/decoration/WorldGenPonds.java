@@ -221,14 +221,14 @@ public class WorldGenPonds extends WorldGenerator
 			}
 		}
 
-		for (int bullRushAttempt = 0, xx, yy, zz; bullRushAttempt < 150; bullRushAttempt++)
+		for (int bullRushAttempt = 0, xx, yy, zz; bullRushAttempt < 100; bullRushAttempt++)
 		{
 			xx = x + rand.nextInt(16);
 			yy = y + 3 + rand.nextInt(5);
 			zz = z + rand.nextInt(16);
 			block = world.getBlock(xx, yy - 1, zz);
 
-			if (block == Blocks.sand && ModBlocks.bullrush.canPlaceBlockAt(world, xx, yy, zz))
+			if (block == Blocks.sand || block == ModBlocks.mud )
 			{
 				for (int height = 0; height < 1; height++)
 				{
