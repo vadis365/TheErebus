@@ -27,8 +27,8 @@ public class BiomeFungalForest extends BiomeBaseErebus
 		setWeight(12);
 
 		spawningGradual.add(new SpawnEntry(EntitySporeling.class, 10).setGroupSize(1, 1));
-		spawningGradual.add(new SpawnEntry(EntityBlackAnt.class, 10).setGroupSize(3, 5));
-		spawningGradual.add(new SpawnEntry(EntityZombieAnt.class, 5).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntityBlackAnt.class, 15).setGroupSize(3, 5));
+		spawningGradual.add(new SpawnEntry(EntityZombieAnt.class, 8).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityCrushroom.class, 5).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityPunchroom.class, 10).setGroupSize(1, 2));
 	}

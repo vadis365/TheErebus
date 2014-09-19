@@ -27,17 +27,17 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus
 		setTemperatureRainfall(0.95F, 0.05F);
 		setWeight(18);
 
-		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 14).setGroupSize(4, 8));
-		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 14).setGroupSize(4, 8));
-		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 35).setGroupSize(1, 4));
-		spawningGradual.add(new SpawnEntry(EntityWasp.class, 30).setGroupSize(4, 8));
-		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 18).setGroupSize(4, 8));
-		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(4, 8));
+		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 10).setGroupSize(4, 8));
+		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 8).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
+		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 10).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 60).setGroupSize(1, 3));
-		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
-		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 8).setGroupSize(2, 4));
-		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 8).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityFly.class, 15).setGroupSize(8, 8));
+		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
+		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
 
 		topBlock = Blocks.grass;
 		fillerBlock = Blocks.dirt;
