@@ -1,4 +1,4 @@
-package erebus.world.feature.structure;
+package erebus.world.feature.plant;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
