@@ -28,7 +28,7 @@ archivesBaseName = "TheErebus"
 
 minecraft
 {
-    version = "1.7.10-10.13.0.1194"
+    version = "1.7.10-10.13.1.1217"
     runDir = "minecraft"
 }
 
