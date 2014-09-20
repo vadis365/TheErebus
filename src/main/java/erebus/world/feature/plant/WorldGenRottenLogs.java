@@ -1,13 +1,13 @@
 package erebus.world.feature.plant;
 
-import java.util.Random;
-
+import erebus.ModBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
 
-public class WorldGenRottonLogs extends WorldGenerator {
+import java.util.Random;
+
+public class WorldGenRottenLogs extends WorldGenerator {
 	
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		int baseRadius = rand.nextInt(3) + 3;
