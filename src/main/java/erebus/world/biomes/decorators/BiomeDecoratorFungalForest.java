@@ -152,7 +152,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 		genMushroomsBrown.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
 		genMushroomsRed.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
 
-		for (attempt = 0; attempt < 12; attempt++)
+		for (attempt = 0; attempt < 400; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
@@ -164,7 +164,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			}
 		}
 
-		for (attempt = 0; attempt < 20; attempt++)
+		for (attempt = 0; attempt < 200; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
@@ -175,7 +175,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 				genBigMushroomBrown.generate(world, rand, xx, yy, zz);
 			}
 		}
-		
+
 		// TODO OK this may need moving to it's own class to make it generate looking nice
 		for (attempt = 0; attempt < 10; attempt++)
 		{
@@ -183,11 +183,11 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			yy = 30 + rand.nextInt(90);
 			zz = z + offsetXZ();
 
-				if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone && world.isAirBlock(xx, yy -1, zz))
-				{
-					world.setBlock(xx, yy -1, zz, ModBlocks.glowshroomStalkMain, 4, 2);	
-				}
+			if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone && world.isAirBlock(xx, yy - 1, zz))
+			{
+				world.setBlock(xx, yy - 1, zz, ModBlocks.glowshroomStalkMain, 4, 2);
 			}
+		}
 	}
 
 	@Override

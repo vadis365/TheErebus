@@ -15,7 +15,7 @@ public enum SurfaceType
 		switch (this)
 		{
 			case GRASS:
-				return block == Blocks.grass;
+				return block == Blocks.grass || block == Blocks.mycelium;
 			case DIRT:
 				return block == Blocks.dirt;
 			case SAND:
