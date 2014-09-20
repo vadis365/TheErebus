@@ -1,27 +1,35 @@
 package erebus.world.feature.plant;
 
-import erebus.ModBlocks;
+import java.util.Random;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import java.util.Random;
+import erebus.ModBlocks;
 
 public class WorldGenRottenLogs extends WorldGenerator {
 	
+	private int height = -1;
+	private int baseRadius = -1;
+	public WorldGenRottenLogs(int height, int baseRadius)
+	{
+		this.height = height;
+		this.baseRadius = baseRadius;
+	}
+	
 	public boolean generate(World world, Random rand, int x, int y, int z) {
-		int baseRadius = rand.nextInt(3) + 3;
 		int radius = baseRadius -1;
+		int yy=y;
 
 		// Trunk
-		for (int y1 = y + rand.nextInt(5) + 5; y1 >= y; y1--) {
+		for (; height + y >= yy; yy++) {
 			for (int i = radius * - 1; i <= radius; ++i) {
 				for (int j = radius * -1; j <= radius; ++j) {
 					double dSq = (i * i) + (j * j);
 					if (Math.round(Math.sqrt(dSq)) == radius) {
-						world.setBlock(x + i, y1, z + j, ModBlocks.rottenWood);
+						world.setBlock(x + i, yy, z + j, ModBlocks.rottenWood);
 					} else {
-						world.setBlock(x + i, y1, z + j, Blocks.air);
+						world.setBlock(x + i, yy, z + j, Blocks.air);
 					}
 				}
 			}

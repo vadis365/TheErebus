@@ -28,7 +28,8 @@ public class CavemanClub extends ItemSword
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote && player.isSneaking()) {
-			new WorldGenRottenLogs().generate(world, new Random(), x, y+1, z);
+			Random rand = new Random();
+			new WorldGenRottenLogs(rand.nextInt(5)+5, rand.nextInt(3)+3).generate(world, rand, x, y+1, z);
 			return true;
 		}
 		return false;
