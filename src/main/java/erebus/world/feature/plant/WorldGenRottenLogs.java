@@ -19,10 +19,9 @@ public class WorldGenRottenLogs extends WorldGenerator {
 	
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		int radius = baseRadius -1;
-		int yy=y;
 
 		// Trunk
-		for (; height + y >= yy; yy++) {
+		for (int yy=y; height + y >= yy; yy++) {
 			for (int i = radius * - 1; i <= radius; ++i) {
 				for (int j = radius * -1; j <= radius; ++j) {
 					double dSq = (i * i) + (j * j);
@@ -45,6 +44,15 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					world.setBlock(x + i, y, z + j, ModBlocks.rottenWood);
 					world.setBlock(x + i + rand.nextInt(2) - 1, y, z + j + rand.nextInt(2) - 1, ModBlocks.rottenWood);
 					world.setBlock(x + i, y + rand.nextInt(2), z + j, ModBlocks.rottenWood);
+				}
+				// Branches
+				if (Math.round(Math.sqrt(dSq)) == baseRadius) {
+					for (int yy=y; height + y >= yy; yy++) {
+						if(yy < y + height -1 && yy > y + 3 && rand.nextInt(15) == 0) {
+							world.setBlock(x + i, yy, z + j, Blocks.stone);
+						}
+						
+					}
 				}
 			}
 		}
