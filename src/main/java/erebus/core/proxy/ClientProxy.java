@@ -138,7 +138,6 @@ import erebus.client.render.tileentity.TileEntityLadderRenderer;
 import erebus.client.render.tileentity.TileEntityOfferingAltarRenderer;
 import erebus.client.render.tileentity.TileEntityPetrifiedWoodChestRenderer;
 import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
-import erebus.client.render.tileentity.TileEntitySpawnerRender;
 import erebus.client.render.tileentity.TileEntityUmberGolemStatueRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
@@ -213,7 +212,6 @@ import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
-import erebus.tileentity.TileEntitySpawner;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
 public class ClientProxy extends CommonProxy
@@ -317,7 +315,6 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarXP.class, new TileEntityErebusAltarXPRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarRepair.class, new TileEntityErebusAltarRepairRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooCrate.class, new TileEntityRenderBambooCrate());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpawner.class, new TileEntitySpawnerRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlowingJar.class, new TileEntityGlowingJarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLadder.class, new TileEntityLadderRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooBridge.class, new TileEntityBambooBridgeRenderer());
