@@ -37,21 +37,21 @@ public class WorldGenRottenLogs extends WorldGenerator {
 		}
 		
 		// Randomised root Base
-		for (int i = baseRadius * - 1; i <= baseRadius; ++i) {
-			for (int j = baseRadius * - 1; j <= baseRadius; ++j) {
+		for (int i = baseRadius * -1; i <= baseRadius; ++i) {
+			for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 				double dSq = (i * i) + (j * j);
 				if (Math.round(Math.sqrt(dSq)) <= baseRadius) {
 					world.setBlock(x + i, y, z + j, ModBlocks.rottenWood);
 					world.setBlock(x + i + rand.nextInt(2) - 1, y, z + j + rand.nextInt(2) - 1, ModBlocks.rottenWood);
 					world.setBlock(x + i, y + rand.nextInt(2), z + j, ModBlocks.rottenWood);
 				}
-				// Branches
+				// Branches sort of
 				if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-					for (int yy=y; height + y >= yy; yy++) {
-						if(yy < y + height -1 && yy > y + 3 && rand.nextInt(15) == 0) {
-							world.setBlock(x + i, yy, z + j, Blocks.stone);
+					for (int yy = y; height + y >= yy; yy++) {
+						if (yy < y + height - 1 && yy > y + 5 && rand.nextInt(12) == 0) {
+							world.setBlock((int) x + i, yy, (int) z + j, ModBlocks.rottenWood);
+							world.setBlock(x + i + rand.nextInt(2) - 1, yy, z + j + rand.nextInt(2) - 1, ModBlocks.rottenWood);
 						}
-						
 					}
 				}
 			}
