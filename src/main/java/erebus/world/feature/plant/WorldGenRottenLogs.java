@@ -112,6 +112,8 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					double dSq = (i * i) + (j * j);
 					if (Math.round(Math.sqrt(dSq)) == radius) {
 						world.setBlock(x + i, yy, z + j, ModBlocks.rottenWood);
+						if(yy >= y +5 && rand.nextInt(20) == 0)
+							world.setBlock(x + i, yy, z + j, Blocks.air);
 						if(yy == y + height && rand.nextInt(2) == 0)
 							world.setBlock(x + i, yy, z + j, Blocks.air);
 					} else {
