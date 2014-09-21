@@ -1,6 +1,7 @@
 package erebus.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -21,20 +22,15 @@ public class Planticide extends Item
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
 	{
-		if (!player.capabilities.isCreativeMode)
-		{
-			stack.stackSize--;
-		}
-
 		if (!world.isRemote)
 		{
-			for (int i = -3; i <= 3; i++)
+			for (int i = -2; i <= 2; i++)
 			{
-				for (int j = -3; j <= 3; j++)
+				for (int j = -2; j <= 2; j++)
 				{
-					for (int k = -3; k <= 3; k++)
+					for (int k = -2; k <= 2; k++)
 					{
 						Block block = world.getBlock(x + i, y + j, z + k);
 						if (block.isLeaves(world, x + i, y + j, z + k))
@@ -44,7 +40,7 @@ public class Planticide extends Item
 						{
 							Utils.playBreakParticles(world, x + i, y + j, z + k);
 							world.setBlock(x + i, y + j, z + k, Blocks.dirt, 1, 3);
-						} else if (block instanceof IPlantable)
+						} else if (block instanceof IPlantable || block instanceof IGrowable)
 						{
 							Utils.breakBlockWithParticles(world, x + i, y + j, z + k);
 						}
@@ -54,6 +50,11 @@ public class Planticide extends Item
 		} else
 		{
 			player.swingItem();
+		}
+
+		if (!player.capabilities.isCreativeMode)
+		{
+			stack.stackSize--;
 		}
 
 		return true;
