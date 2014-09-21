@@ -103,6 +103,15 @@ public class WorldGenRottenLogs extends WorldGenerator {
 	});
 	
 	public boolean generate(World world, Random rand, int x, int y, int z) {
+		
+		for (int x1 = x - baseRadius; x1 <= x + baseRadius; x1++)
+			for (int z1 = z - baseRadius; z1 <= z + baseRadius; z1++)
+				for (int y1 = y + 1; y1 < y + height; y1++) {
+					if (!world.isAirBlock(x1, y1, z1))
+						return false;
+				}
+				
+		
 		int radius = baseRadius -1;
 
 		// Trunk
@@ -149,7 +158,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 			}
 		}
 		
-		if (baseRadius >= maxRadius && height >= maxHeight) {
+		if (baseRadius >= maxRadius) {
 			// Lower Spawner
 			world.setBlock(x + 1, y + 2, z, Blocks.web, 0, 2);
 			world.setBlock(x - 1, y + 2, z, Blocks.web, 0, 2);
@@ -158,33 +167,36 @@ public class WorldGenRottenLogs extends WorldGenerator {
 			world.setBlock(x, y + 3, z, Blocks.web, 0, 2);
 			world.setBlock(x, y + 1, z, Blocks.web, 0, 2);
 			world.setBlock(x, y + 2, z, ModBlocks.jumpingSpiderSpawner);
-
-			// Upper spawner
-			world.setBlock(x + 1, y + 12, z, Blocks.web, 0, 2);
-			world.setBlock(x - 1, y + 12, z, Blocks.web, 0, 2);
-			world.setBlock(x, y + 12, z - 1, Blocks.web, 0, 2);
-			world.setBlock(x, y + 12, z + 1, Blocks.web, 0, 2);
-			world.setBlock(x, y + 11, z, Blocks.web, 0, 2);
-			world.setBlock(x, y + 13, z, Blocks.web, 0, 2);
-			world.setBlock(x, y + 12, z, ModBlocks.tarantulaSpawner);
-			
-			
-			//Loot Chests
-			int moveyChest = rand.nextInt(5) - 2;
+			// Loot Chest
 			world.setBlock(x, y, z, Blocks.chest, 0, 2);
-			world.setBlock(x - 4, y + 11, z + moveyChest, Blocks.chest, 0, 2);
-			world.setBlock(x + 4, y + 11, z + moveyChest, Blocks.chest, 0, 2);
-			world.setBlock(x - 4, y + 12, z + moveyChest, ModBlocks.rottenWood, 0, 2);
-			world.setBlock(x + 4, y + 12, z + moveyChest, ModBlocks.rottenWood, 0, 2);
 			TileEntityChest chest1 = (TileEntityChest) world.getTileEntity(x, y, z);
-			TileEntityChest chest2 = (TileEntityChest) world.getTileEntity(x - 4, y + 11, z + moveyChest);
-			TileEntityChest chest3 = (TileEntityChest) world.getTileEntity(x + 4, y + 11, z + moveyChest);
-			if (chest1 != null && chest2 != null && chest3 != null) {
+			if (chest1 != null) {
 				LootUtil.generateLoot(chest1, rand, chestLoot, 3, 10);
-				LootUtil.generateLoot(chest2, rand, chestLoot, 3, 10);
-				LootUtil.generateLoot(chest3, rand, chestLoot, 3, 10);
+			}
+			if (height >= maxHeight) {
+				// Upper spawner
+				world.setBlock(x + 1, y + 12, z, Blocks.web, 0, 2);
+				world.setBlock(x - 1, y + 12, z, Blocks.web, 0, 2);
+				world.setBlock(x, y + 12, z - 1, Blocks.web, 0, 2);
+				world.setBlock(x, y + 12, z + 1, Blocks.web, 0, 2);
+				world.setBlock(x, y + 11, z, Blocks.web, 0, 2);
+				world.setBlock(x, y + 13, z, Blocks.web, 0, 2);
+				world.setBlock(x, y + 12, z, ModBlocks.tarantulaSpawner);
+				// Loot Chests
+				int moveyChest = rand.nextInt(5) - 2;
+				world.setBlock(x - 4, y + 11, z + moveyChest, Blocks.chest, 0, 2);
+				world.setBlock(x + 4, y + 11, z + moveyChest, Blocks.chest, 0, 2);
+				world.setBlock(x - 4, y + 12, z + moveyChest, ModBlocks.rottenWood, 0, 2);
+				world.setBlock(x + 4, y + 12, z + moveyChest, ModBlocks.rottenWood, 0, 2);
+				TileEntityChest chest2 = (TileEntityChest) world.getTileEntity(x - 4, y + 11, z + moveyChest);
+				TileEntityChest chest3 = (TileEntityChest) world.getTileEntity(x + 4, y + 11, z + moveyChest);
+				if (chest2 != null && chest3 != null) {
+					LootUtil.generateLoot(chest1, rand, chestLoot, 3, 10);
+					LootUtil.generateLoot(chest2, rand, chestLoot, 3, 10);
+					LootUtil.generateLoot(chest3, rand, chestLoot, 3, 10);
+				}
 			}
 		}
-		return false;
+		return true;
 	}
 }

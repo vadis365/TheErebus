@@ -47,42 +47,42 @@ public class WorldGenMossPatch extends WorldGenerator
 		switch (randomiseSide)
 		{
 			case 0:
-				if (world.isSideSolid(x, y + offset, z, DOWN) && world.getBlock(x, y + offset, z) == ModBlocks.umberstone)
+				if (world.isSideSolid(x, y + offset, z, DOWN) && isValidBlock(world, x, y + offset, z))
 				{
 					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 2, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 1:
-				if (world.isSideSolid(x, y - offset, z, UP) && world.getBlock(x, y - offset, z) == ModBlocks.umberstone)
+				if (world.isSideSolid(x, y - offset, z, UP) && isValidBlock(world, x, y - offset, z))
 				{
 					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 3, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 2:
-				if (world.isSideSolid(x, y, z + offset, NORTH) && world.getBlock(x, y, z + offset) == ModBlocks.umberstone)
+				if (world.isSideSolid(x, y, z + offset, NORTH) && isValidBlock(world, x, y, z + offset))
 				{
 					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 4, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 3:
-				if (world.isSideSolid(x, y, z - offset, SOUTH) && world.getBlock(x, y, z - offset) == ModBlocks.umberstone)
+				if (world.isSideSolid(x, y, z - offset, SOUTH) && isValidBlock(world, x, y, z - offset))
 				{
 					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 5, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 4:
-				if (world.isSideSolid(x + offset, y, z, WEST) && world.getBlock(x + offset, y, z) == ModBlocks.umberstone)
+				if (world.isSideSolid(x + offset, y, z, WEST) && isValidBlock(world, x + offset, y, z))
 				{
 					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 6, 2);
 					blockPlaced = true;
 				}
 				break;
 			case 5:
-				if (world.isSideSolid(x - offset, y, z, EAST) && world.getBlock(x - offset, y, z) == ModBlocks.umberstone)
+				if (world.isSideSolid(x - offset, y, z, EAST) && isValidBlock(world, x - offset, y, z))
 				{
 					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 7, 2);
 					blockPlaced = true;
@@ -113,6 +113,10 @@ public class WorldGenMossPatch extends WorldGenerator
 				}
 			}
 		}
+	}
+	
+	private boolean isValidBlock(World world, int x, int y, int z) {
+		return world.getBlock(x, y, z) == ModBlocks.rottenWood || world.getBlock(x, y, z) == ModBlocks.umberstone;
 	}
 
 }
