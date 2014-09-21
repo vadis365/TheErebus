@@ -29,7 +29,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 	@Override
 	public void decorate()
 	{
-		
+
 		for (attempt = 0; attempt < 10; attempt++)
 		{
 			int height = rand.nextInt(11) + 5;
@@ -37,10 +37,11 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			xx = x + offsetXZ();
 			yy = rand.nextInt(128);
 			zz = z + offsetXZ();
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {	
+			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
+			{
 				new WorldGenRottenLogs(height, baseRadius).generate(world, rand, xx, yy, zz);
-				}
 			}
+		}
 
 		for (attempt = 0; attempt < 256; attempt++)
 		{
@@ -165,7 +166,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 		genMushroomsBrown.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
 		genMushroomsRed.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
 
-		for (attempt = 0; attempt < 400; attempt++)
+		for (attempt = 0; attempt < 20; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
@@ -177,7 +178,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			}
 		}
 
-		for (attempt = 0; attempt < 200; attempt++)
+		for (attempt = 0; attempt < 12; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);

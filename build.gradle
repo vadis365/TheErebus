@@ -34,11 +34,11 @@ minecraft
 
 repositories
 {
-	maven
-	{
-		name = "ChickenBones"
-		url = "http://chickenbones.net/maven/"
-	}
+    maven
+    {
+        name = "ChickenBones"
+        url = "http://chickenbones.net/maven/"
+    }
 }
 
 dependencies
