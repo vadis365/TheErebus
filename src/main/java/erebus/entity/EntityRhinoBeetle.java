@@ -26,7 +26,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.handler.KeyBindingHandler;
@@ -132,30 +131,12 @@ public class EntityRhinoBeetle extends EntityTameable
 	@Override
 	public boolean getCanSpawnHere()
 	{
-		return worldObj.difficultySetting != EnumDifficulty.PEACEFUL && isValidLightLevel() && super.getCanSpawnHere();
-	}
-
-	protected boolean isValidLightLevel()
-	{
-		int i = MathHelper.floor_double(posX);
-		int j = MathHelper.floor_double(boundingBox.minY);
-		int k = MathHelper.floor_double(posZ);
-
-		if (worldObj.getSavedLightValue(EnumSkyBlock.Sky, i, j, k) > rand.nextInt(32))
+		float light = getBrightness(1.0F);
+		if (light >= 0F)
 		{
-			return false;
-		} else
-		{
-			int l = worldObj.getBlockLightValue(i, j, k);
-			if (worldObj.isThundering())
-			{
-				int i1 = worldObj.skylightSubtracted;
-				worldObj.skylightSubtracted = 10;
-				l = worldObj.getBlockLightValue(i, j, k);
-				worldObj.skylightSubtracted = i1;
-			}
-			return l <= rand.nextInt(8);
+			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox) && worldObj.difficultySetting != EnumDifficulty.PEACEFUL;
 		}
+		return super.getCanSpawnHere();
 	}
 
 	@Override

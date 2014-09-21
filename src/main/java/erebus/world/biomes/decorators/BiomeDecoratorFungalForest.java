@@ -55,7 +55,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			}
 		}
 
-		for (attempt = 0; attempt < 30; attempt++)
+		for (attempt = 0; attempt < 200; attempt++)
 		{
 			int r = rand.nextInt(100);
 			if (r < 12)
@@ -166,7 +166,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 		genMushroomsBrown.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
 		genMushroomsRed.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
 
-		for (attempt = 0; attempt < 20; attempt++)
+		for (attempt = 0; attempt < 100; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
@@ -178,7 +178,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			}
 		}
 
-		for (attempt = 0; attempt < 12; attempt++)
+		for (attempt = 0; attempt < 100; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
