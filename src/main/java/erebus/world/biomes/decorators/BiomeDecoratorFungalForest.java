@@ -12,7 +12,7 @@ import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 import erebus.world.feature.plant.WorldGenMossPatch;
-import erebus.world.feature.plant.WorldGenRottenLogs;
+import erebus.world.feature.plant.WorldGenRottenTreeStump;
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 {
@@ -39,7 +39,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			zz = z + offsetXZ();
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 			{
-				new WorldGenRottenLogs(height, baseRadius).generate(world, rand, xx, yy, zz);
+				new WorldGenRottenTreeStump(height, baseRadius).generate(world, rand, xx, yy, zz);
 			}
 		}
 

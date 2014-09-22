@@ -22,13 +22,13 @@ import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
 
-public class WorldGenRottenLogs extends WorldGenerator {
+public class WorldGenRottenTreeStump extends WorldGenerator {
 	
 	private int height = -1;
 	private int baseRadius = -1;
 	private int	maxRadius =	6;
 	private int	maxHeight =	15;
-	public WorldGenRottenLogs(int height, int baseRadius)
+	public WorldGenRottenTreeStump(int height, int baseRadius)
 	{
 		this.height = height;
 		this.baseRadius = baseRadius;
