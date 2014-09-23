@@ -203,7 +203,6 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ItemStack(Items.blaze_powder, 1), "FFF", "FFF", "FFF", 'F', new ItemStack(ModBlocks.fireBloom));
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.mossBall), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.wallPlants, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.scorchedPlanks, 4), ModBlocks.scorchedWood);
-		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.rottenPlanks, 2), ModBlocks.rottenWood);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom), Materials.createStack(Materials.DATA.yellowDottedFungus), Blocks.torch);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.glowshroom), Materials.createStack(Materials.DATA.yellowDottedFungus), Materials.createStack(Materials.DATA.bioLuminescence));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.portalActivator), "VSE", "VSS", "GVV", 'V', Blocks.vine, 'S', Items.stick, 'E', Materials.createStack(Materials.DATA.gaeanGem), 'G', "ingotGold"));
@@ -352,11 +351,9 @@ public class RecipeHandler
 		OreDictionary.registerOre("gemDiamond", ModItems.encrustedDiamond);
 		OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.blockAmber, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.saplessLog));
-		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.rottenWood));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.scorchedWood));
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.varnishedPlanks));
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.scorchedPlanks));
-		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.rottenPlanks));
 
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.BLACK_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeRed", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.RED_PETAL.ordinal()));

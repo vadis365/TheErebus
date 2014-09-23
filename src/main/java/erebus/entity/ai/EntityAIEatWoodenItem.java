@@ -37,7 +37,7 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock
 			return false;
 		}
 
-		if (block == ModBlocks.rottenPlanks)
+		if (block == ModBlocks.planks  && blockMeta == EnumWood.Rotten.ordinal())
 		{
 			return false;
 		}

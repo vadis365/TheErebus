@@ -29,6 +29,7 @@ import erebus.ModBlocks;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModTabs;
 import erebus.item.block.ItemBlockErebusPlantSmall;
+import erebus.lib.EnumWood;
 
 public class BlockWallPlants extends Block implements IShearable, ISubBlocksBlock
 {
@@ -259,7 +260,7 @@ public class BlockWallPlants extends Block implements IShearable, ISubBlocksBloc
 
 	private boolean isValidBlock(Block block)
 	{
-		return block == ModBlocks.rottenWood || block == ModBlocks.umberstone;
+		return block == EnumWood.Rotten.getLog() || block == ModBlocks.umberstone;
 	}
 
 	@Override

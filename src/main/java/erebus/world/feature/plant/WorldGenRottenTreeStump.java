@@ -3,6 +3,7 @@ package erebus.world.feature.plant;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
@@ -17,6 +18,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.item.Materials.DATA;
+import erebus.lib.EnumWood;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
@@ -28,10 +30,12 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 	private int baseRadius = -1;
 	private int	maxRadius =	6;
 	private int	maxHeight =	15;
+	protected Block log;
 	public WorldGenRottenTreeStump(int height, int baseRadius)
 	{
 		this.height = height;
 		this.baseRadius = baseRadius;
+		log = EnumWood.Rotten.getLog();
 	}
 	
 	public static final WeightedLootList chestLoot = new WeightedLootList(
@@ -120,7 +124,7 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 				for (int j = radius * -1; j <= radius; ++j) {
 					double dSq = (i * i) + (j * j);
 					if (Math.round(Math.sqrt(dSq)) == radius) {
-						world.setBlock(x + i, yy, z + j, ModBlocks.rottenWood);
+						world.setBlock(x + i, yy, z + j, log);
 						if(yy >= y +5 && rand.nextInt(20) == 0)
 							world.setBlock(x + i, yy, z + j, Blocks.air);
 						if(yy == y + height && rand.nextInt(2) == 0)
@@ -131,7 +135,7 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 					//floor at 10 high
 					if (Math.round(Math.sqrt(dSq)) <= radius -1 && baseRadius >= maxRadius && height >= maxHeight) {
 						if( yy == y + 10)
-							world.setBlock(x + i, yy, z + j, ModBlocks.rottenWood);
+							world.setBlock(x + i, yy, z + j, log);
 					}
 				}
 			}
@@ -142,16 +146,16 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 			for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 				double dSq = (i * i) + (j * j);
 				if (Math.round(Math.sqrt(dSq)) <= baseRadius) {
-					world.setBlock(x + i, y, z + j, ModBlocks.rottenWood);
-					world.setBlock(x + i + rand.nextInt(2) - 1, y, z + j + rand.nextInt(2) - 1, ModBlocks.rottenWood);
-					world.setBlock(x + i, y + rand.nextInt(2), z + j, ModBlocks.rottenWood);
+					world.setBlock(x + i, y, z + j, log);
+					world.setBlock(x + i + rand.nextInt(2) - 1, y, z + j + rand.nextInt(2) - 1, log);
+					world.setBlock(x + i, y + rand.nextInt(2), z + j, log);
 				}
 				// Branches sort of
 				if (Math.round(Math.sqrt(dSq)) == baseRadius) {
 					for (int yy = y; height + y >= yy; yy++) {
 						if (yy < y + height - 1 && yy > y + 5 && rand.nextInt(12) == 0) {
-							world.setBlock((int) x + i, yy, (int) z + j, ModBlocks.rottenWood);
-							world.setBlock(x + i + rand.nextInt(2) - 1, yy, z + j + rand.nextInt(2) - 1, ModBlocks.rottenWood);
+							world.setBlock((int) x + i, yy, (int) z + j, log);
+							world.setBlock(x + i + rand.nextInt(2) - 1, yy, z + j + rand.nextInt(2) - 1, log);
 						}
 					}
 				}
@@ -186,8 +190,8 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 				int moveyChest = rand.nextInt(5) - 2;
 				world.setBlock(x - 4, y + 11, z + moveyChest, Blocks.chest, 0, 2);
 				world.setBlock(x + 4, y + 11, z + moveyChest, Blocks.chest, 0, 2);
-				world.setBlock(x - 4, y + 12, z + moveyChest, ModBlocks.rottenWood, 0, 2);
-				world.setBlock(x + 4, y + 12, z + moveyChest, ModBlocks.rottenWood, 0, 2);
+				world.setBlock(x - 4, y + 12, z + moveyChest, log, 0, 2);
+				world.setBlock(x + 4, y + 12, z + moveyChest, log, 0, 2);
 				TileEntityChest chest2 = (TileEntityChest) world.getTileEntity(x - 4, y + 11, z + moveyChest);
 				TileEntityChest chest3 = (TileEntityChest) world.getTileEntity(x + 4, y + 11, z + moveyChest);
 				if (chest2 != null && chest3 != null) {

@@ -12,6 +12,7 @@ import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.lib.EnumWood;
 
 public class WorldGenMossPatch extends WorldGenerator
 {
@@ -116,7 +117,7 @@ public class WorldGenMossPatch extends WorldGenerator
 	}
 	
 	private boolean isValidBlock(World world, int x, int y, int z) {
-		return world.getBlock(x, y, z) == ModBlocks.rottenWood || world.getBlock(x, y, z) == ModBlocks.umberstone;
+		return world.getBlock(x, y, z) == EnumWood.Rotten.getLog() || world.getBlock(x, y, z) == ModBlocks.umberstone;
 	}
 
 }

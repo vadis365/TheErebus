@@ -143,9 +143,7 @@ public class ModBlocks
 	public static final Block erebusFlower = new BlockErebusFlower().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.flower");
 	public static final Block stiga = new BlockErebusStigma().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.stigma");
 	public static final Block scorchedWood = new BlockSimple(Material.wood).setHardness(2.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("erebus.log_scorched").setBlockTextureName("erebus:log_scorched");
-	public static final Block rottenWood = new BlockSimple(Material.wood).setHardness(2.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("erebus.log_rotten").setBlockTextureName("erebus:log_rotten");
 	public static final Block scorchedPlanks = new BlockSimple(Material.wood).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("erebus.planks_scorched").setBlockTextureName("erebus:planks_scorched");
-	public static final Block rottenPlanks = new BlockSimple(Material.wood).setHardness(0.5F).setResistance(1.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("erebus.planks_rotten").setBlockTextureName("erebus:planks_rotten");
 	public static final Block varnishedPlanks = new BlockSimple(Material.wood).setHardness(2.0F).setStepSound(Block.soundTypeWood).setCreativeTab(ModTabs.blocks).setBlockName("erebus.planks_varnished").setBlockTextureName("erebus:planks_varnished");
 	public static final Block saplessLog = new SaplessLog();
 

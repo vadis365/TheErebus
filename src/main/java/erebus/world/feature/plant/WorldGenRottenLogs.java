@@ -1,26 +1,12 @@
 package erebus.world.feature.plant;
 
-import java.util.List;
 import java.util.Random;
 
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.item.Materials.DATA;
-import erebus.world.loot.IPostProcess;
-import erebus.world.loot.LootItemStack;
-import erebus.world.loot.LootUtil;
-import erebus.world.loot.WeightedLootList;
+import erebus.lib.EnumWood;
 
 public class WorldGenRottenLogs extends WorldGenerator {
 	
@@ -29,11 +15,13 @@ public class WorldGenRottenLogs extends WorldGenerator {
 	private int	maxRadius =	6;
 	private int	maxHeight =	15;
 	private int direction;
+	protected Block log;
 	public WorldGenRottenLogs(int length, int baseRadius, byte direction)
 	{
 		this.length = length;
 		this.baseRadius = baseRadius;
 		this.direction = direction;
+		log = EnumWood.Rotten.getLog();
 	}
 	
 	public boolean generate(World world, Random rand, int x, int y, int z) {
@@ -55,7 +43,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 				for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 					double dSq = (i * i) + (j * j);
 					if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-						world.setBlock(x + i, y + j + baseRadius, zz, ModBlocks.rottenWood);
+						world.setBlock(x + i, y + j + baseRadius, zz, log, 11, 3);
 						if(rand.nextInt(12) == 0)
 							world.setBlock(x + i, y + j + baseRadius,  zz, Blocks.air);
 						if(zz == z - length && rand.nextInt(2) == 0||zz == z + length && rand.nextInt(2) == 0)
@@ -75,7 +63,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 				for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 					double dSq = (i * i) + (j * j);
 					if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-						world.setBlock(xx , y + j +baseRadius, z + i, ModBlocks.rottenWood);
+						world.setBlock(xx , y + j +baseRadius, z + i, log, 4, 3);
 						if(rand.nextInt(12) == 0)
 							world.setBlock(xx, y + j + baseRadius, z + i, Blocks.air);
 						if(xx == x - length && rand.nextInt(2) == 0||xx == x + length && rand.nextInt(2) == 0)
