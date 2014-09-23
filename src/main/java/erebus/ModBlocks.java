@@ -13,7 +13,7 @@ import erebus.block.BlockAmber;
 import erebus.block.BlockBones;
 import erebus.block.BlockButtonUmberstone;
 import erebus.block.BlockComposter;
-import erebus.block.BlockDoorAmber;
+import erebus.block.BlockDoorErebus;
 import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusMushroomCap;
 import erebus.block.BlockErebusStigma;
@@ -222,7 +222,6 @@ public class ModBlocks
 	public static final Block bambooPole = new BlockBambooPole().setHardness(0.4F).setBlockName("erebus.bambooPole").setBlockTextureName("erebus:blockBambooPole");
 	public static final Block umberstonePillar = new BlockUmberstonePillar().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberstonePillar").setBlockTextureName("erebus:umberstonePillarSides");
 	public static final Block honeyCombBlock = new BlockHoneyComb().setHardness(0.5F).setResistance(10.0F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.honeyCombBlock").setBlockTextureName("erebus:honeyCombTop");
-	public static final Block doorAmber = new BlockDoorAmber();
 	public static final Block honeyBlock = new BlockErebusHoney(ModFluids.honey).setBlockName("erebus.honeyBlock");
 	public static final Block honeyTreat = new BlockHoneyTreat().setHardness(0.5F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.honeyTreat").setBlockTextureName("erebus:honeyTreat");
 	public static final Block mud = new BlockMud().setBlockName("erebus.mud").setBlockTextureName("erebus:mud");
@@ -232,6 +231,19 @@ public class ModBlocks
 	public static final Block glowGemBlock = new BlockGlowGem().setBlockName("erebus.glowGemBlock").setBlockTextureName("erebus:glowGem");
 	public static final Block mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 
+	// DOORS
+	public static final Block doorAmber = new BlockDoorErebus("amber");
+	public static final Block doorBaobab = new BlockDoorErebus("baobab");
+	public static final Block doorEucalyptus = new BlockDoorErebus("eucalyptus");
+	public static final Block doorMahogany = new BlockDoorErebus("mahogany");
+	public static final Block doorMossBark = new BlockDoorErebus("mossBark");
+	public static final Block doorAsper = new BlockDoorErebus("asper");
+	public static final Block doorCypress = new BlockDoorErebus("cypress");
+	public static final Block doorSap = new BlockDoorErebus("sap");
+	public static final Block doorPetrified = new BlockDoorErebus("petrified");
+	public static final Block doorScorched = new BlockDoorErebus("scorched");
+	public static final Block doorRotten = new BlockDoorErebus("rotten");
+	
 	// VELOCITY BLOCKS
 	public static final Block velocityBlock = new VelocityBlock();
 	public static final Block lightningSpeedBlock = new LightningSpeedBlock();

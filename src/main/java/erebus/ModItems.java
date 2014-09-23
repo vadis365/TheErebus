@@ -30,6 +30,7 @@ import erebus.item.Food;
 import erebus.item.HomingBeecon;
 import erebus.item.HomingBeeconAdvanced;
 import erebus.item.HornOfSummoning;
+import erebus.item.ItemDoorErebus;
 import erebus.item.JadeArmour;
 import erebus.item.JadeAxe;
 import erebus.item.JadePickaxe;
@@ -58,7 +59,6 @@ import erebus.item.WoodlouseBall;
 import erebus.item.bambucket.Bambucket;
 import erebus.item.bambucket.BambucketAntiVenom;
 import erebus.item.bambucket.BambucketBeetleJuice;
-import erebus.item.block.ItemBlockDoorAmber;
 import erebus.item.hearts.BurningHeart;
 import erebus.item.hearts.ElvenHeart;
 import erebus.item.hearts.JadeHeart;
@@ -82,7 +82,7 @@ public class ModItems
 	public static final Item hornOfSummoning = new HornOfSummoning().setUnlocalizedName("erebus.hornOfSummoning").setTextureName("erebus:hornOfSummoning");
 	public static final Item nectarCollector = new NectarCollector().setUnlocalizedName("erebus.nectarCollector").setTextureName("erebus:nectarCollector");
 	public static final Item beeTamingAmulet = new BeeTamingAmulet().setUnlocalizedName("erebus.beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
-	public static final Item doorAmberItem = new ItemBlockDoorAmber();
+	public static final Item doorAmberItem = new ItemDoorErebus("amber");
 	public static final Item homingBeecon = new HomingBeecon().setUnlocalizedName("erebus.homingBeecon").setTextureName("paper");
 	public static final Item homingBeeconAdvanced = new HomingBeeconAdvanced().setUnlocalizedName("erebus.homingBeeconAdvanced").setTextureName("paper");
 
