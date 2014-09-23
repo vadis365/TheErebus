@@ -406,8 +406,6 @@ itemGroup.erebus.plants=Erebus Plants
 # Achievements
 achievement.welcome=A secret below the world
 achievement.welcome.desc=enter the Erebus
-achievement.mob=What is that?
-achievement.mob.desc=get close to any erebus mob
 achievement.beetle=They used to be called Maggots
 achievement.beetle.desc=kill a beetle larva
 achievement.beetleSpecial=Squishy, slimy, and totally fun
