@@ -64,9 +64,8 @@ import erebus.item.SpawnEggs;
 
 public class ModEntities
 {
-
 	public static void init()
-	{
+	{	
 		// Entity registrations
 		registerEntity(0, EntityBeetleLarva.class, "beetleLarva", -1251634, -13032944);
 		registerEntity(1, EntityWasp.class, "wasp", -256, -16382458);

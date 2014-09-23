@@ -19,6 +19,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import erebus.ModAchievements;
 import erebus.ModItems;
 import erebus.entity.ai.EntityAIEatWoodenItem;
 import erebus.network.PacketPipeline;
@@ -30,12 +31,15 @@ public class EntityBeetleLarva extends EntityAnimal
 
 	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
+	private EntityPlayer player;
 	public boolean isEating;
 	public boolean isSquashed;
+	public boolean hasDroppedDiamond;
 
 	public EntityBeetleLarva(World world)
 	{
 		super(world);
+		player = this.worldObj.getClosestPlayerToEntity(this, 20);
 		setSize(0.9F, 0.5F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -135,6 +139,7 @@ public class EntityBeetleLarva extends EntityAnimal
 			setisSquashed(true);
 			setDead();
 			onDeathUpdate();
+			player.triggerAchievement(ModAchievements.beetleSpecial);
 		}
 	}
 
@@ -234,9 +239,10 @@ public class EntityBeetleLarva extends EntityAnimal
 			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
 			if (!worldObj.isRemote)
 			{
-				if (rand.nextInt(200) == 0)
+				if (rand.nextInt(2) == 0)
 				{
 					entityDropItem(new ItemStack(Items.diamond), 0.0F);
+					setHasDroppedDiamond(true);
 				}
 				entityDropItem(new ItemStack(Items.slime_ball), 0.0F);
 			}
@@ -294,6 +300,11 @@ public class EntityBeetleLarva extends EntityAnimal
 	public void setisSquashed(boolean par1)
 	{
 		isSquashed = par1;
+	}
+	
+	public void setHasDroppedDiamond(boolean par1)
+	{
+		hasDroppedDiamond = par1;
 	}
 
 	public void setMoveTasks(boolean par1)

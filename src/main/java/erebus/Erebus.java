@@ -1,5 +1,6 @@
 package erebus;
 
+import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -19,6 +20,7 @@ import erebus.client.sound.AmbientMusicManager;
 import erebus.core.handler.BucketHandler;
 import erebus.core.handler.EntityDeathEventHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
+import erebus.core.handler.PlayerChangedDimensionEventHandler;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.debug.ErebusCommandDebug;
@@ -62,6 +64,8 @@ public class Erebus
 		ModBlocks.init();
 		ModItems.init();
 		ModEntities.init();
+		
+		AchievementPage.registerAchievementPage(new ModAchievements());
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
@@ -83,6 +87,7 @@ public class Erebus
 		TeleporterHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
+		MinecraftForge.EVENT_BUS.register(new PlayerChangedDimensionEventHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
 		MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.armorGlider);

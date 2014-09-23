@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModAchievements;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.item.block.ItemBlockGeneric;
 
@@ -26,6 +28,12 @@ public class BlockUmberstone extends Block implements ISubBlocksBlock
 	public BlockUmberstone()
 	{
 		super(Material.rock);
+	}
+	
+	@Override
+	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta){
+		EntityPlayer player = world.getClosestPlayer(x, y, z, 40);
+		player.triggerAchievement(ModAchievements.umberstone);
 	}
 
 	@Override
