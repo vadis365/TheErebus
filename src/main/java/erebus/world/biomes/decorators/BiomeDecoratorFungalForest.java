@@ -12,6 +12,7 @@ import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 import erebus.world.feature.plant.WorldGenMossPatch;
+import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenRottenTreeStump;
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
@@ -30,6 +31,20 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 	public void decorate()
 	{
 
+		for (attempt = 0; attempt < 10; attempt++)
+		{
+			int length = rand.nextInt(8) + 4;
+			int baseRadius = rand.nextInt(3) + 2;
+			byte direction = (byte)rand.nextInt(2);
+			xx = x + offsetXZ();
+			yy = rand.nextInt(128);
+			zz = z + offsetXZ();
+			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
+			{
+				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
+			}
+		}
+		
 		for (attempt = 0; attempt < 10; attempt++)
 		{
 			int height = rand.nextInt(11) + 5;

@@ -28,7 +28,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 		if (direction == 1) {
 			for (int xx = x - baseRadius; baseRadius + x >= xx; xx++)
 				for (int zz = z - length; length + z >= zz; zz++)
-					for (int yy = y; yy <= y + baseRadius * 2; yy++) {
+					for (int yy = y + 1; yy <= y + baseRadius * 2; yy++) {
 						if (!world.isAirBlock(xx, yy, zz))
 							return false;
 					}
@@ -38,7 +38,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = (i * i) + (j * j);
 						if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-							world.setBlock(x + i, y + j + baseRadius, zz, log, 11, 3);
+							world.setBlock(x + i, y + j + baseRadius, zz, log, 11, 2);
 							if (rand.nextInt(12) == 0)
 								world.setBlock(x + i, y + j + baseRadius, zz, Blocks.air);
 							if (zz == z - length && rand.nextInt(2) == 0 || zz == z + length && rand.nextInt(2) == 0)
@@ -55,7 +55,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 			// Trunk E/W
 			for (int xx = x - length; length + x >= xx; xx++)
 				for (int zz = z - baseRadius; baseRadius + z >= zz; zz++)
-					for (int yy = y; yy <= y + baseRadius * 2; yy++) {
+					for (int yy = y + 1; yy <= y + baseRadius * 2; yy++) {
 						if (!world.isAirBlock(xx, yy, zz))
 							return false;
 					}
@@ -65,7 +65,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = (i * i) + (j * j);
 						if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-							world.setBlock(xx, y + j + baseRadius, z + i, log, 4, 3);
+							world.setBlock(xx, y + j + baseRadius, z + i, log, 7, 2);
 							if (rand.nextInt(12) == 0)
 								world.setBlock(xx, y + j + baseRadius, z + i, Blocks.air);
 							if (xx == x - length && rand.nextInt(2) == 0 || xx == x + length && rand.nextInt(2) == 0)

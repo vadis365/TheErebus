@@ -121,11 +121,11 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 		// Trunk
 		for (int yy=y; height + y >= yy; yy++) {
 			for (int i = radius * - 1; i <= radius; ++i) {
-				for (int j = radius * -1; j <= radius; ++j) {
+				for (int j = radius * - 1; j <= radius; ++j) {
 					double dSq = (i * i) + (j * j);
 					if (Math.round(Math.sqrt(dSq)) == radius) {
 						world.setBlock(x + i, yy, z + j, log);
-						if(yy >= y +5 && rand.nextInt(20) == 0)
+						if(yy >= y + 5 && rand.nextInt(20) == 0)
 							world.setBlock(x + i, yy, z + j, Blocks.air);
 						if(yy == y + height && rand.nextInt(2) == 0)
 							world.setBlock(x + i, yy, z + j, Blocks.air);
@@ -146,16 +146,16 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 			for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 				double dSq = (i * i) + (j * j);
 				if (Math.round(Math.sqrt(dSq)) <= baseRadius) {
-					world.setBlock(x + i, y, z + j, log);
-					world.setBlock(x + i + rand.nextInt(2) - 1, y, z + j + rand.nextInt(2) - 1, log);
-					world.setBlock(x + i, y + rand.nextInt(2), z + j, log);
+					world.setBlock(x + i, y, z + j, log, 15, 2);
+					world.setBlock(x + i + rand.nextInt(2) - 1, y, z + j + rand.nextInt(2) - 1, log, 15, 2);
+					world.setBlock(x + i, y + rand.nextInt(2), z + j, log, 15, 2);
 				}
 				// Branches sort of
 				if (Math.round(Math.sqrt(dSq)) == baseRadius) {
 					for (int yy = y; height + y >= yy; yy++) {
 						if (yy < y + height - 1 && yy > y + 5 && rand.nextInt(12) == 0) {
-							world.setBlock((int) x + i, yy, (int) z + j, log);
-							world.setBlock(x + i + rand.nextInt(2) - 1, yy, z + j + rand.nextInt(2) - 1, log);
+							world.setBlock((int) x + i, yy, (int) z + j, log, 15, 2);
+							world.setBlock(x + i + rand.nextInt(2) - 1, yy, z + j + rand.nextInt(2) - 1, log, 15, 2);
 						}
 					}
 				}
