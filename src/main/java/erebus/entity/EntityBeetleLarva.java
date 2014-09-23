@@ -192,10 +192,12 @@ public class EntityBeetleLarva extends EntityAnimal
 			i = getLarvaSize();
 			setSize(0.9F * i, 0.5F * i);
 		}
-		if (getLarvaSize() > 1.8F)
-		{
-			setDead();
-			spawnBeetle();
+		if (!worldObj.isRemote) {
+			if (getLarvaSize() > 1.8F)
+			{
+				setDead();
+				spawnBeetle();
+			}
 		}
 	}
 

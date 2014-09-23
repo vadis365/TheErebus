@@ -119,12 +119,28 @@ final class TeleporterErebus extends Teleporter
 			}
 		}
 
+		// Layer -1
+		for (int i = -1; i <= 1; i++)
+		{
+			for (int j = -1; j <= 1; j++)
+			{
+				if (worldServerInstance.getBlock(x + i, y - 1, z + j).getBlockHardness(worldServerInstance, x + i, y - 2, z + j) >= 0)
+				{
+					worldServerInstance.setBlock(x + i, y - 2, z + j, Blocks.stonebrick, 3, 3);
+				}
+			}
+		}
+
 		// Layer 0
 		worldServerInstance.setBlock(x, y - 1, z, Blocks.stonebrick, 3, 3);
 		worldServerInstance.setBlock(x - 1, y - 1, z, ModBlocks.redGem);
 		worldServerInstance.setBlock(x, y - 1, z - 1, ModBlocks.redGem);
 		worldServerInstance.setBlock(x + 1, y - 1, z, ModBlocks.redGem);
 		worldServerInstance.setBlock(x, y - 1, z + 1, ModBlocks.redGem);
+		worldServerInstance.setBlock(x - 1, y - 1, z + 1, Blocks.stonebrick);
+		worldServerInstance.setBlock(x + 1, y - 1, z - 1, Blocks.stonebrick);
+		worldServerInstance.setBlock(x - 1, y - 1, z - 1, Blocks.stonebrick);
+		worldServerInstance.setBlock(x + 1, y - 1, z + 1, Blocks.stonebrick);
 
 		// Layer 1
 		worldServerInstance.setBlock(x - 1, y, z + 1, Blocks.stonebrick);

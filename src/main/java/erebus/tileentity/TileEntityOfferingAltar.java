@@ -61,7 +61,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory
 			{
 				if (inventory[i] != null)
 				{
-					Utils.dropStack(worldObj, xCoord, yCoord + 1, zCoord, inventory[i].copy());
+					Utils.dropStackNoRandom(worldObj, xCoord, yCoord + 1, zCoord, inventory[i].copy());
 					inventory[i] = null;
 					markDirty();
 					return;

@@ -14,6 +14,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
@@ -71,6 +72,8 @@ public class EntityBlackAnt extends EntityTameable implements IInventory
 		tasks.addTask(1, aiWander);
 		tasks.addTask(2, aiPanic);
 		tasks.addTask(3, new EntityAILookIdle(this));
+		tasks.addTask(4, new EntityAITempt(this, 0.6D, ModItems.antTamingAmulet, false));
+		tasks.addTask(5, new EntityAITempt(this, 0.6D, Items.sugar, false));
 		inventory = new ItemStack[3];
 	}
 

@@ -34,12 +34,12 @@ import erebus.inventory.ContainerPetrifiedCraftingTable;
 import erebus.inventory.ContainerPetrifiedWoodChest;
 import erebus.inventory.ContainerSilo;
 import erebus.inventory.ContainerUmberFurnace;
-import erebus.tileentity.TileEntityCraftingAltar;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
 import erebus.tileentity.TileEntityBones;
 import erebus.tileentity.TileEntityComposter;
+import erebus.tileentity.TileEntityCraftingAltar;
 import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarEmpty;
 import erebus.tileentity.TileEntityErebusAltarHealing;
@@ -55,7 +55,6 @@ import erebus.tileentity.TileEntityJarOHoney;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
-import erebus.tileentity.TileEntitySpawner;
 import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
@@ -88,7 +87,6 @@ public class CommonProxy implements IGuiHandler
 
 	public void registerTileEntities()
 	{
-		GameRegistry.registerTileEntityWithAlternatives(TileEntitySpawner.class, "tile.erebus.customSpawner", "tile.erebus.spiderSpawner", "tile.erebus.waspSpawner");
 		registerTileEntity(TileEntityBambooCrate.class, "bambooCrate");
 		registerTileEntity(TileEntityUmberFurnace.class, "umberFurnace");
 		registerTileEntity(TileEntityErebusAltar.class, "bugZapper");

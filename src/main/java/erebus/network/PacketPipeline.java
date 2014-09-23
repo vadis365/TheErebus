@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
@@ -118,7 +119,7 @@ public class PacketPipeline
 			switch (side)
 			{
 				case CLIENT:
-					packet.handle(Side.CLIENT, Minecraft.getMinecraft().theWorld, getClientPlayer());
+					packet.handle(Side.CLIENT, getClientWorld(), getClientPlayer());
 					break;
 
 				case SERVER:
@@ -129,6 +130,12 @@ public class PacketPipeline
 		{
 			e.printStackTrace();
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	private World getClientWorld()
+	{
+		return Minecraft.getMinecraft().theWorld;
 	}
 
 	@SideOnly(Side.CLIENT)

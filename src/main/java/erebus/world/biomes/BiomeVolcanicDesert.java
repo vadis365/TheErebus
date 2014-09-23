@@ -30,11 +30,11 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus
 		setTemperatureRainfall(1.9F, 0.2F);
 		setWeight(16);
 
-		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 30).setGroupSize(1, 8));
-		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 30).setGroupSize(1, 8));
+		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 20).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 25).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityFireAnt.class, 30).setGroupSize(1, 8));
 		spawningGradual.add(new SpawnEntry(EntityFireAntSoldier.class, 30).setGroupSize(1, 3));
-		spawningGradual.add(new SpawnEntry(EntityAntlion.class, 30).setGroupSize(1, 8));
+		spawningGradual.add(new SpawnEntry(EntityAntlion.class, 30).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityBlackWidow.class, 5).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityLavaWebSpider.class, 300).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));

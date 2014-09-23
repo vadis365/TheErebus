@@ -10,7 +10,7 @@ public class BlockSpiderSpawner extends BlockSpawner
 
 	public BlockSpiderSpawner(String mobName)
 	{
-		super(mobName);
+		super("erebus." + mobName);
 	}
 
 	@Override
@@ -22,6 +22,6 @@ public class BlockSpiderSpawner extends BlockSpawner
 	@Override
 	public int quantityDropped(Random rand)
 	{
-		return rand.nextInt(3);
+		return 1 + rand.nextInt(3);
 	}
 }

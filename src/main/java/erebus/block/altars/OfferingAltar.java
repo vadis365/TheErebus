@@ -23,6 +23,8 @@ public class OfferingAltar extends BlockContainer
 	public OfferingAltar()
 	{
 		super(Material.rock);
+		setHardness(2.0F);
+		setHarvestLevel("pickaxe", 0);
 		setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.offeringAltar");
 	}

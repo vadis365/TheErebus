@@ -22,23 +22,23 @@ buildscript
 
 apply plugin: 'forge'
 
-version = "0.2.4"
+version = "0.2pre10"
 group= "erebus"
 archivesBaseName = "TheErebus"
 
 minecraft
 {
-    version = "1.7.10-10.13.0.1194"
+    version = "1.7.10-10.13.1.1217"
     runDir = "minecraft"
 }
 
 repositories
 {
-	maven
-	{
-		name = "ChickenBones"
-		url = "http://chickenbones.net/maven/"
-	}
+    maven
+    {
+        name = "ChickenBones"
+        url = "http://chickenbones.net/maven/"
+    }
 }
 
 dependencies

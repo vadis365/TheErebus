@@ -57,10 +57,10 @@ public class WorldGenGiantMushrooms extends WorldGenErebus
 				res = genKaizersFingers(x, y, z, mushroom);
 				break;
 			case DUTCH_CAP:
-				res = genDutchCap(x, y, z, mushroom);
+				res = genDutchCap(x -1, y, z, mushroom);
 				break;
 			case GRANDMAS_SHOES:
-				res = genGrandmasShoes(x, y, z, mushroom);
+				res = genGrandmasShoes(x -1, y, z, mushroom);
 				break;
 			default:
 				break;

@@ -248,9 +248,11 @@ public class ModBlocks
 	public static final Block offeringAltar = new OfferingAltar();
 
 	// DUNGEONS
-	public static final Block spiderSpawner = new BlockSpiderSpawner("Scytodes - Erebus").setBlockName("erebus.spiderSpawner").setBlockTextureName("erebus:spiderSpawner");
-	public static final Block jumpingSpiderSpawner = new BlockSpiderSpawner("JumpingSpider - Erebus").setBlockName("erebus.jumpingSpiderSpawner").setBlockTextureName("erebus:spiderSpawner");
-	public static final Block waspSpawner = new BlockWaspSpawner("Wasp - Erebus").setBlockName("erebus.waspSpawner").setBlockTextureName("erebus:waspNestSpawner");
+	public static final Block spiderSpawner = new BlockSpiderSpawner("scytodes").setBlockName("erebus.spiderSpawner").setBlockTextureName("erebus:spiderSpawner");
+	public static final Block jumpingSpiderSpawner = new BlockSpiderSpawner("jumpingSpider").setBlockName("erebus.jumpingSpiderSpawner").setBlockTextureName("erebus:spiderSpawner");
+	public static final Block tarantulaSpawner = new BlockSpiderSpawner("tarantula").setBlockName("erebus.tarantulaSpawner").setBlockTextureName("erebus:spiderSpawner");
+	public static final Block waspSpawner = new BlockWaspSpawner("wasp").setBlockName("erebus.waspSpawner").setBlockTextureName("erebus:waspNestSpawner");
+
 	public static final Block waspNestBlock = new BlockWaspNest().setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.waspNestBlock").setBlockTextureName("erebus:waspNestBlock");
 	public static final Block gneiss = new BlockGneiss().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneiss");
 	public static final Block siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("erebus.siloSupports").setBlockTextureName("erebus:siloSupports");

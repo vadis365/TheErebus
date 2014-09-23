@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.item.Item;
 import erebus.ModItems;
 
-public class BlockWaspSpawner extends BlockSpawner
+public class BlockWaspSpawner extends BlockSpiderSpawner
 {
 
 	public BlockWaspSpawner(String mobName)

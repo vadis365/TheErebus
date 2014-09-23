@@ -12,6 +12,7 @@ import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 import erebus.world.feature.plant.WorldGenMossPatch;
+import erebus.world.feature.plant.WorldGenRottenTreeStump;
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 {
@@ -29,6 +30,19 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 	public void decorate()
 	{
 
+		for (attempt = 0; attempt < 10; attempt++)
+		{
+			int height = rand.nextInt(11) + 5;
+			int baseRadius = rand.nextInt(4) + 3;
+			xx = x + offsetXZ();
+			yy = rand.nextInt(128);
+			zz = z + offsetXZ();
+			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
+			{
+				new WorldGenRottenTreeStump(height, baseRadius).generate(world, rand, xx, yy, zz);
+			}
+		}
+
 		for (attempt = 0; attempt < 256; attempt++)
 		{
 			xx = x + offsetXZ();
@@ -41,7 +55,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			}
 		}
 
-		for (attempt = 0; attempt < 30; attempt++)
+		for (attempt = 0; attempt < 200; attempt++)
 		{
 			int r = rand.nextInt(100);
 			if (r < 12)
@@ -152,7 +166,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 		genMushroomsBrown.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
 		genMushroomsRed.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
 
-		for (attempt = 0; attempt < 12; attempt++)
+		for (attempt = 0; attempt < 100; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
@@ -164,7 +178,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			}
 		}
 
-		for (attempt = 0; attempt < 20; attempt++)
+		for (attempt = 0; attempt < 100; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
@@ -173,6 +187,19 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 			{
 				genBigMushroomBrown.generate(world, rand, xx, yy, zz);
+			}
+		}
+
+		// TODO OK this may need moving to it's own class to make it generate looking nice
+		for (attempt = 0; attempt < 10; attempt++)
+		{
+			xx = x + offsetXZ();
+			yy = 30 + rand.nextInt(90);
+			zz = z + offsetXZ();
+
+			if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone && world.isAirBlock(xx, yy - 1, zz))
+			{
+				world.setBlock(xx, yy - 1, zz, ModBlocks.glowshroomStalkMain, 4, 2);
 			}
 		}
 	}
