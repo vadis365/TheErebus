@@ -241,7 +241,7 @@ public class EntityBeetleLarva extends EntityAnimal
 			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
 			if (!worldObj.isRemote)
 			{
-				if (rand.nextInt(2) == 0)
+				if (rand.nextInt(200) == 0)
 				{
 					entityDropItem(new ItemStack(Items.diamond), 0.0F);
 					setHasDroppedDiamond(true);
