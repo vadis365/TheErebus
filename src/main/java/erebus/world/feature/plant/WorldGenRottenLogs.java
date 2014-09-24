@@ -27,13 +27,13 @@ public class WorldGenRottenLogs extends WorldGenerator {
 		// Trunk N/S
 		if (direction == 1) {
 			for (int xx = x - baseRadius; baseRadius + x >= xx; xx++)
-				for (int zz = z - length; length + z >= zz; zz++)
+				for (int zz = z - length; length + z - 1 >= zz; zz++)
 					for (int yy = y + 1; yy <= y + baseRadius * 2; yy++) {
 						if (!world.isAirBlock(xx, yy, zz))
 							return false;
 					}
 
-			for (int zz = z - length; length + z >= zz; zz++) {
+			for (int zz = z - length; length + z - 1 >= zz; zz++) {
 				for (int i = baseRadius * -1; i <= baseRadius; ++i) {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = (i * i) + (j * j);
@@ -49,18 +49,19 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					}
 				}
 			}
+			System.out.println("LOG: " + x +" "+y+" "+z);
 
 		} else {
 
 			// Trunk E/W
-			for (int xx = x - length; length + x >= xx; xx++)
+			for (int xx = x - length; length + x - 1 >= xx; xx++)
 				for (int zz = z - baseRadius; baseRadius + z >= zz; zz++)
 					for (int yy = y + 1; yy <= y + baseRadius * 2; yy++) {
 						if (!world.isAirBlock(xx, yy, zz))
 							return false;
 					}
 
-			for (int xx = x - length; length + x >= xx; xx++) {
+			for (int xx = x - length; length + x - 1 >= xx; xx++) {
 				for (int i = baseRadius * -1; i <= baseRadius; ++i) {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = (i * i) + (j * j);
@@ -76,6 +77,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					}
 				}
 			}
+			System.out.println("LOG: " + x +" "+y+" "+z);
 		}
 		return true;
 	}

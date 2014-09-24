@@ -43,7 +43,6 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 			{
 				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
-				System.out.println("LOG: " + xx +" "+yy+" "+zz);
 			}
 		}
 		
