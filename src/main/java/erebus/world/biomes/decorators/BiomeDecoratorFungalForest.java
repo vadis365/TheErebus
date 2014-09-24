@@ -33,15 +33,17 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 
 		for (attempt = 0; attempt < 10; attempt++)
 		{
-			int length = rand.nextInt(8) + 4;
+			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
 			byte direction = (byte)rand.nextInt(2);
-			xx = x + offsetXZ();
+			xx = ((world.getChunkFromBlockCoords(x, z).xPosition)*16) + 8;
 			yy = rand.nextInt(128);
-			zz = z + offsetXZ();
+			zz = ((world.getChunkFromBlockCoords(x, z).zPosition)*16) + 8;
+			
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 			{
 				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
+				System.out.println("LOG: " + xx +" "+yy+" "+zz);
 			}
 		}
 		
