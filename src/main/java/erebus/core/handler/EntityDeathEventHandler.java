@@ -12,7 +12,6 @@ import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -33,15 +32,19 @@ public class EntityDeathEventHandler
 		{
 			return;
 		}
-		
-		if(event.entity instanceof EntityBeetleLarva){
+
+		if (event.entity instanceof EntityBeetleLarva)
+		{
 			EntityBeetleLarva beetle = (EntityBeetleLarva) event.entity;
-			if(event.source.getSourceOfDamage() instanceof EntityPlayer){
+			if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+			{
 				event.entity.worldObj.getClosestPlayer(event.entity.posX, event.entity.posY, event.entity.posZ, 30).triggerAchievement(ModAchievements.beetle);
 			}
-			
-			if(beetle.isSquashed && beetle.hasDroppedDiamond){
-				if(event.source.getSourceOfDamage() instanceof EntityPlayer){
+
+			if (beetle.isSquashed && beetle.hasDroppedDiamond)
+			{
+				if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+				{
 					event.entity.worldObj.getClosestPlayer(event.entity.posX, event.entity.posY, event.entity.posZ, 30).triggerAchievement(ModAchievements.diamond);
 				}
 			}
