@@ -23,7 +23,7 @@ public class CavemanClub extends ItemSword
 	{
 		return Items.bone == itemStack2.getItem() ? true : super.getIsRepairable(itemStack1, itemStack2);
 	}
-	
+	/*
 	//Just in case
 	// Remove onItemUse method completely after testing hollow logs is over!!!!
 	@Override
@@ -35,5 +35,5 @@ public class CavemanClub extends ItemSword
 		}
 		return false;
 	}
-	
+	*/
 }
