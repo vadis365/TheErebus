@@ -21,7 +21,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 		this.direction = direction;
 		log = EnumWood.Rotten.getLog();
 	}
-
+	//Air check causes random crash hayelp!
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 
 		// Trunk N/S
