@@ -77,6 +77,16 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.hideItem(new ItemStack(ModBlocks.glowshroomStalkS3));
 		API.hideItem(new ItemStack(ModBlocks.glowshroomStalkW3));
 		API.hideItem(new ItemStack(ModBlocks.glowshroomStalkE3));
+
+		API.hideItem(new ItemStack(ModBlocks.doorAmber));
+		API.hideItem(new ItemStack(ModBlocks.doorBaobab));
+		API.hideItem(new ItemStack(ModBlocks.doorEucalyptus));
+		API.hideItem(new ItemStack(ModBlocks.doorMahogany));
+		API.hideItem(new ItemStack(ModBlocks.doorMossbark));
+		API.hideItem(new ItemStack(ModBlocks.doorAsper));
+		API.hideItem(new ItemStack(ModBlocks.doorCypress));
+		API.hideItem(new ItemStack(ModBlocks.doorPetrified));
+		API.hideItem(new ItemStack(ModBlocks.doorScorched));
 	}
 
 	@Override

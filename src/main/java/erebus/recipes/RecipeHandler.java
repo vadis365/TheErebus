@@ -86,7 +86,17 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 6), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 1));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 7), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 8), "###", "###", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
-		GameRegistry.addRecipe(new ItemStack(ModItems.doorAmberItem, 3), "##", "##", "##", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
+
+		// Doors
+		GameRegistry.addRecipe(new ItemStack(ModItems.doorAmber, 3), "##", "##", "##", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorBaobab, 3), "##", "##", "##", '#', "plank" + EnumWood.Baobab));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorEucalyptus, 3), "##", "##", "##", '#', "plank" + EnumWood.Eucalyptus));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorMahogany, 3), "##", "##", "##", '#', "plank" + EnumWood.Mahogany));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorMossbark, 3), "##", "##", "##", '#', "plank" + EnumWood.Mossbark));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorAsper, 3), "##", "##", "##", '#', "plank" + EnumWood.Asper));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorCypress, 3), "##", "##", "##", '#', "plank" + EnumWood.Cypress));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorPetrified, 3), "##", "##", "##", '#', "plankPetrified"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorScorched, 3), "##", "##", "##", '#', "plankScorched"));
 
 		// Jade tools
 		GameRegistry.addRecipe(new ItemStack(ModItems.jadePickaxe, 1), "XXX", " # ", " # ", '#', Items.stick, 'X', Materials.createStack(Materials.DATA.jade));
@@ -341,7 +351,6 @@ public class RecipeHandler
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
 		OreDictionary.registerOre("stone", new ItemStack(ModBlocks.umberstone));
 		OreDictionary.registerOre("stoneUmber", new ItemStack(ModBlocks.umberstone));
-		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.planks, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("mobEgg", new ItemStack(ModItems.spawnEggs, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("gemJade", Materials.createStack(Materials.DATA.jade));
 		OreDictionary.registerOre("blockJade", new ItemStack(ModBlocks.jadeBlock));
@@ -352,8 +361,17 @@ public class RecipeHandler
 		OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.blockAmber, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.saplessLog));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.scorchedWood));
+
+		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.planks, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.varnishedPlanks));
+		OreDictionary.registerOre("plankVarnished", new ItemStack(ModBlocks.varnishedPlanks));
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.scorchedPlanks));
+		OreDictionary.registerOre("plankScorched", new ItemStack(ModBlocks.scorchedPlanks));
+		OreDictionary.registerOre("plankPetrified", new ItemStack(ModBlocks.petrifiedWoodPlanks));
+		for (EnumWood wood : EnumWood.values())
+		{
+			OreDictionary.registerOre("plank" + wood, new ItemStack(ModBlocks.planks, 1, wood.ordinal()));
+		}
 
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.BLACK_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeRed", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.RED_PETAL.ordinal()));

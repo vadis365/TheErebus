@@ -41,6 +41,7 @@ import erebus.client.model.entity.ModelWheatWeevil;
 import erebus.client.model.entity.ModelWoodlouse;
 import erebus.client.render.block.BlockBambooCropRender;
 import erebus.client.render.block.BlockComposterRender;
+import erebus.client.render.block.BlockDoorRenderer;
 import erebus.client.render.block.BlockDoublePlantRender;
 import erebus.client.render.block.BlockGlowshroomRender;
 import erebus.client.render.block.BlockGlowshroomStalkRender;
@@ -229,7 +230,8 @@ public class ClientProxy extends CommonProxy
 		COMPOSTER,
 		KEYSTONE,
 		DOUBLE_PLANTS,
-		VELOCITY_BLOCK;
+		VELOCITY_BLOCK,
+		DOOR;
 
 		private final int ID;
 
@@ -339,6 +341,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(new BlockKeystoneRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockDoublePlantRender());
 		RenderingRegistry.registerBlockHandler(new BlockVelocityBlockRender());
+		RenderingRegistry.registerBlockHandler(new BlockDoorRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarBase), new ItemAltarBaseRenderer());

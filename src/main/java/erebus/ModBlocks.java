@@ -232,18 +232,16 @@ public class ModBlocks
 	public static final Block mucusBomb = new BlockMucusBomb().setBlockName("erebus.mucusBomb");
 
 	// DOORS
-	public static final Block doorAmber = new BlockDoorErebus("amber");
+	public static final Block doorAmber = new BlockDoorErebus("amber", Material.glass).setRenderPass(1);
 	public static final Block doorBaobab = new BlockDoorErebus("baobab");
 	public static final Block doorEucalyptus = new BlockDoorErebus("eucalyptus");
 	public static final Block doorMahogany = new BlockDoorErebus("mahogany");
-	public static final Block doorMossBark = new BlockDoorErebus("mossBark");
+	public static final Block doorMossbark = new BlockDoorErebus("mossbark");
 	public static final Block doorAsper = new BlockDoorErebus("asper");
 	public static final Block doorCypress = new BlockDoorErebus("cypress");
-	public static final Block doorSap = new BlockDoorErebus("sap");
 	public static final Block doorPetrified = new BlockDoorErebus("petrified");
 	public static final Block doorScorched = new BlockDoorErebus("scorched");
-	public static final Block doorRotten = new BlockDoorErebus("rotten");
-	
+
 	// VELOCITY BLOCKS
 	public static final Block velocityBlock = new VelocityBlock();
 	public static final Block lightningSpeedBlock = new LightningSpeedBlock();

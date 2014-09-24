@@ -82,7 +82,6 @@ public class ModItems
 	public static final Item hornOfSummoning = new HornOfSummoning().setUnlocalizedName("erebus.hornOfSummoning").setTextureName("erebus:hornOfSummoning");
 	public static final Item nectarCollector = new NectarCollector().setUnlocalizedName("erebus.nectarCollector").setTextureName("erebus:nectarCollector");
 	public static final Item beeTamingAmulet = new BeeTamingAmulet().setUnlocalizedName("erebus.beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
-	public static final Item doorAmberItem = new ItemDoorErebus("amber");
 	public static final Item homingBeecon = new HomingBeecon().setUnlocalizedName("erebus.homingBeecon").setTextureName("paper");
 	public static final Item homingBeeconAdvanced = new HomingBeeconAdvanced().setUnlocalizedName("erebus.homingBeeconAdvanced").setTextureName("paper");
 
@@ -92,6 +91,17 @@ public class ModItems
 	public static final Item antTamingAmulet = new AntTamingAmulet().setUnlocalizedName("erebus.antTamingAmulet").setTextureName("erebus:antTamingAmulet");
 	public static final Item compost = new Compost();
 	public static final Item planticide = new Planticide();
+
+	// DOORS
+	public static final Item doorAmber = new ItemDoorErebus(ModBlocks.doorAmber);
+	public static final Item doorBaobab = new ItemDoorErebus(ModBlocks.doorBaobab);
+	public static final Item doorEucalyptus = new ItemDoorErebus(ModBlocks.doorEucalyptus);
+	public static final Item doorMahogany = new ItemDoorErebus(ModBlocks.doorMahogany);
+	public static final Item doorMossbark = new ItemDoorErebus(ModBlocks.doorMossbark);
+	public static final Item doorAsper = new ItemDoorErebus(ModBlocks.doorAsper);
+	public static final Item doorCypress = new ItemDoorErebus(ModBlocks.doorCypress);
+	public static final Item doorPetrified = new ItemDoorErebus(ModBlocks.doorPetrified);
+	public static final Item doorScorched = new ItemDoorErebus(ModBlocks.doorScorched);
 
 	// JADE STUFF
 	public static final Item jadeHelmet = new JadeArmour(0).setUnlocalizedName("erebus.helmetJade").setTextureName("erebus:helmetJade");
@@ -178,9 +188,6 @@ public class ModItems
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper);
 		ModTabs.gears.setTab(mushroomHelm, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
 		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds);
-
-		// Special Case
-		ModTabs.blocks.setTab(doorAmberItem);
 	}
 
 	private static void registerItems()
