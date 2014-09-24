@@ -41,7 +41,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 							world.setBlock(x + i, y + j + baseRadius, zz, log, 11, 2);
 							if (rand.nextInt(12) == 0)
 								world.setBlock(x + i, y + j + baseRadius, zz, Blocks.air);
-							if (zz == z - length && rand.nextInt(2) == 0 || zz == z + length && rand.nextInt(2) == 0)
+							if (zz == z - length && rand.nextInt(2) == 0 || zz == z + length -1 && rand.nextInt(2) == 0)
 								world.setBlock(x + i, y + j + baseRadius, zz, Blocks.air);
 						} else {
 							world.setBlock(x + i, y + j + baseRadius, zz, Blocks.air);
@@ -69,7 +69,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 							world.setBlock(xx, y + j + baseRadius, z + i, log, 7, 2);
 							if (rand.nextInt(12) == 0)
 								world.setBlock(xx, y + j + baseRadius, z + i, Blocks.air);
-							if (xx == x - length && rand.nextInt(2) == 0 || xx == x + length && rand.nextInt(2) == 0)
+							if (xx == x - length && rand.nextInt(2) == 0 || xx == x + length - 1 && rand.nextInt(2) == 0)
 								world.setBlock(xx, y + j + baseRadius, z + i, Blocks.air);
 						} else {
 							world.setBlock(xx, y + j + baseRadius, z + i, Blocks.air);
