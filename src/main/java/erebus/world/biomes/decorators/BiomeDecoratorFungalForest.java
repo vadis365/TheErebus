@@ -30,7 +30,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 	@Override
 	public void decorate()
 	{
-
+		/*
 		for (attempt = 0; attempt < 10; attempt++)
 		{
 			int length = rand.nextInt(5) + 4;
@@ -45,7 +45,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
 			}
 		}
-		
+		*/
 		for (attempt = 0; attempt < 10; attempt++)
 		{
 			int height = rand.nextInt(11) + 5;
