@@ -21,7 +21,6 @@ import erebus.item.block.ItemErebusLeaves;
 
 public enum EnumWood
 {
-
 	Baobab,
 	Eucalyptus,
 	Mahogany,
@@ -32,6 +31,7 @@ public enum EnumWood
 	White(false, true, false, false),
 	Bamboo(false, true, false, false),
 	Rotten(true, true, false, false);
+
 	private final boolean hasLog;
 	private final boolean hasPlanks;
 	private final boolean hasSapling;

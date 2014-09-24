@@ -30,7 +30,6 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.hideItem(new ItemStack(ModBlocks.blockTurnip));
 		API.hideItem(new ItemStack(ModBlocks.insectRepellent));
 		API.hideItem(new ItemStack(ModBlocks.flowerPlanted, 1, OreDictionary.WILDCARD_VALUE));
-		API.hideItem(new ItemStack(ModBlocks.doorAmber));
 		API.hideItem(new ItemStack(ModBlocks.honeyBlock));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap3));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap4));
@@ -85,6 +84,7 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.hideItem(new ItemStack(ModBlocks.doorMossbark));
 		API.hideItem(new ItemStack(ModBlocks.doorAsper));
 		API.hideItem(new ItemStack(ModBlocks.doorCypress));
+		API.hideItem(new ItemStack(ModBlocks.doorRotten));
 		API.hideItem(new ItemStack(ModBlocks.doorPetrified));
 		API.hideItem(new ItemStack(ModBlocks.doorScorched));
 	}

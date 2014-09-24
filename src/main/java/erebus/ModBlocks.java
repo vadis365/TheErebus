@@ -239,6 +239,7 @@ public class ModBlocks
 	public static final Block doorMossbark = new BlockDoorErebus("mossbark");
 	public static final Block doorAsper = new BlockDoorErebus("asper");
 	public static final Block doorCypress = new BlockDoorErebus("cypress");
+	public static final Block doorRotten = new BlockDoorErebus("rotten");
 	public static final Block doorPetrified = new BlockDoorErebus("petrified");
 	public static final Block doorScorched = new BlockDoorErebus("scorched");
 

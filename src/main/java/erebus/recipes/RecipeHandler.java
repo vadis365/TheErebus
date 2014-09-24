@@ -95,6 +95,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorMossbark, 3), "##", "##", "##", '#', "plank" + EnumWood.Mossbark));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorAsper, 3), "##", "##", "##", '#', "plank" + EnumWood.Asper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorCypress, 3), "##", "##", "##", '#', "plank" + EnumWood.Cypress));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorRotten, 3), "##", "##", "##", '#', "plank" + EnumWood.Rotten));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorPetrified, 3), "##", "##", "##", '#', "plankPetrified"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorScorched, 3), "##", "##", "##", '#', "plankScorched"));
 

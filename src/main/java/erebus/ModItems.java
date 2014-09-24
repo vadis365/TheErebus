@@ -100,6 +100,7 @@ public class ModItems
 	public static final Item doorMossbark = new ItemDoorErebus(ModBlocks.doorMossbark);
 	public static final Item doorAsper = new ItemDoorErebus(ModBlocks.doorAsper);
 	public static final Item doorCypress = new ItemDoorErebus(ModBlocks.doorCypress);
+	public static final Item doorRotten = new ItemDoorErebus(ModBlocks.doorRotten);
 	public static final Item doorPetrified = new ItemDoorErebus(ModBlocks.doorPetrified);
 	public static final Item doorScorched = new ItemDoorErebus(ModBlocks.doorScorched);
 

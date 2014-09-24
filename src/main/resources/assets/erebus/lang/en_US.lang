@@ -5,7 +5,17 @@ tile.erebus.gaeanKeystone.name=Gaean Keystone
 tile.erebus.amber0.name=Amber
 tile.erebus.amber1.name=Amber Glass
 tile.erebus.amber2.name=Amber Bricks
-tile.erebus.doorAmber.name=Amber Door
+
+tile.erebus.door_amber.name=Amber Door
+tile.erebus.door_baobab.name=Baobab Door
+tile.erebus.door_eucalyptus.name=Eucalyptus Door
+tile.erebus.door_mahogany.name=Mahogany Door
+tile.erebus.door_asper.name=Asper Door
+tile.erebus.door_cypress.name=Cypress Door
+tile.erebus.door_petrified.name=Petrified Wood Door
+tile.erebus.door_scorched.name=Scorched Door
+tile.erebus.door_mossbark.name=Mossbark Door
+tile.erebus.door_rotten.name=Rotten Wood Door
 
 tile.erebus.log.name=%s Wood
 tile.erebus.planks.name=%s Planks
@@ -231,6 +241,17 @@ item.erebus.sprintLeggings.name=Sprint Leggings
 item.erebus.armorGlider.name=Glider Chestplate
 item.erebus.armorGliderPowered.name=Glider Chestplate Powered
 
+item.erebus.door_amber.name=Amber Door
+item.erebus.door_baobab.name=Baobab Door
+item.erebus.door_eucalyptus.name=Eucalyptus Door
+item.erebus.door_mahogany.name=Mahogany Door
+item.erebus.door_asper.name=Asper Door
+item.erebus.door_cypress.name=Cypress Door
+item.erebus.door_petrified.name=Petrified Wood Door
+item.erebus.door_scorched.name=Scorched Door
+item.erebus.door_mossbark.name=Mossbark Door
+item.erebus.door_rotten.name=Rotten Wood Door
+
 item.erebus.materials.0.name=Exoskeleton Plate
 item.erebus.materials.1.name=Jade
 item.erebus.materials.2.name=Bone Shard
@@ -454,3 +475,4 @@ wood.erebus.cypress=Cypress
 wood.erebus.sap=Sap
 wood.erebus.white=White
 wood.erebus.bamboo=Bamboo
+wood.erebus.rotten=Rotten
