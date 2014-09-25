@@ -106,7 +106,7 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus
 				oreGen.setIterations(extraOres ? 1 : 2, extraOres ? 2 : 3);
 				break; // less common
 			case DIAMOND:
-				oreGen.setType(OreType.DIAMOND_ENCRUSTED).setChance(0.6F).setIterations(100).setOreAmount(4).setY(5, 16);
+				oreGen.setType(OreType.DIAMOND_ENCRUSTED).setChance(0.4F).setIterations(1, 2).setOreAmount(2).setY(5, 16);
 				break; // clusters of 4, ~7 times smaller area thus lowered chance and iterations
 			case JADE:
 				oreGen.setIterations(0, 2);
