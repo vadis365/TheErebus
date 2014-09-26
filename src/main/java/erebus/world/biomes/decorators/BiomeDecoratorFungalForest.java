@@ -30,22 +30,22 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 	@Override
 	public void decorate()
 	{
-		/*
+		
 		for (attempt = 0; attempt < 10; attempt++)
 		{
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
 			byte direction = (byte)rand.nextInt(2);
-			xx = ((world.getChunkFromBlockCoords(x, z).xPosition)*16) + 8;
-			yy = rand.nextInt(128);
-			zz = ((world.getChunkFromBlockCoords(x, z).zPosition)*16) + 8;
+			xx = x + offsetXZ();
+			yy = rand.nextInt(118);
+			zz = z + offsetXZ();
 			
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 			{
 				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
 			}
 		}
-		*/
+		
 		for (attempt = 0; attempt < 10; attempt++)
 		{
 			int height = rand.nextInt(11) + 5;
