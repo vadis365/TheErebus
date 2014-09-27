@@ -48,6 +48,8 @@ import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntitySporeBall;
 import erebus.entity.EntitySporeling;
 import erebus.entity.EntityTarantula;
+import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityTarantulaEgg;
 import erebus.entity.EntityTarantulaMiniboss;
 import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityUmberGolem;
@@ -113,6 +115,7 @@ public class ModEntities
 		registerEntity(41, EntityBlackAnt.class, "blackAnt", 0x000000, 0xF09071);
 		registerEntity(42, EntityZombieAnt.class, "zombieAnt", 0x00FE40, 0xF09071);
 		registerEntity(43, EntityTarantulaMiniboss.class, "tarantulaminiboss", 0x000000, 0xE82066);
+		registerEntity(44, EntityTarantulaBaby.class, "tarantulababy", 0x000000, 0xE82066);
 
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
@@ -128,6 +131,7 @@ public class ModEntities
 		registerEntity(74, EntityGooBall.class, "gooBall");
 		registerEntity(75, EntityWoodlouseBall.class, "woodlouseBall");
 		registerEntity(76, EntitySporeBall.class, "sporeBall");
+		registerEntity(77, EntityTarantulaEgg.class, "tarantulaegg");
 
 		// Spawn conditions
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);
