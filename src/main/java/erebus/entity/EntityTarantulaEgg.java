@@ -48,7 +48,15 @@ public class EntityTarantulaEgg extends EntityThrowable
 
 		if (mop.entityHit != null)
 		{
-			//spawn Baby tarantula cluster
+			if (!worldObj.isRemote)
+			{
+				for (int a = 0; a < 4; a++)
+				{
+					EntityTarantulaBaby tarantulaBaby = new EntityTarantulaBaby(worldObj);
+					tarantulaBaby.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
+					worldObj.spawnEntityInWorld(tarantulaBaby);
+				}
+			}
 		}
 		worldObj.playSoundAtEntity(this, getSplatSound(), 1.0F, 1.0F);
 	}
