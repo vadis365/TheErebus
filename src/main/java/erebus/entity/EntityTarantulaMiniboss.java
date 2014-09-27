@@ -6,9 +6,15 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -17,6 +23,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.entity.ai.EntityAITarantulaMinibossAttack;
 import erebus.item.Materials;
 
 public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayData
@@ -27,6 +34,13 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	{
 		super(world);
 		setSize(4.0F, 1.2F);
+		experienceValue = 100;
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAITarantulaMinibossAttack(this, EntityPlayer.class, 0.3D, false));
+		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(3, new EntityAIWander(this, 0.3D));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
 	@Override
@@ -43,6 +57,12 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
+	}
+	
+	@Override
+	public boolean isAIEnabled()
+	{
+		return true;
 	}
 
 	@Override
@@ -131,28 +151,6 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 		if (!worldObj.isRemote)
 		{
 			setBesideClimbableBlock(isCollidedHorizontally);
-		}
-	}
-
-	@Override
-	protected void attackEntity(Entity entity, float distance)
-	{
-		if (distance < 2.0F)
-		{
-			super.attackEntity(entity, distance);
-			attackEntityAsMob(entity);
-		}
-		if (distance > 2.0F && distance < 6.0F && rand.nextInt(10) == 0)
-		{
-			if (onGround)
-			{
-				double d0 = entity.posX - posX;
-				double d1 = entity.posZ - posZ;
-				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-				motionX = d0 / f2 * 0.5D * 0.800000011920929D + motionX * 0.20000000298023224D;
-				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
-				motionY = 0.4000000059604645D;
-			}
 		}
 	}
 
