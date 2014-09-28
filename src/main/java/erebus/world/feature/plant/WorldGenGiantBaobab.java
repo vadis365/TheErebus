@@ -7,6 +7,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.entity.EntityAntlionMiniBoss;
+import erebus.entity.EntityTarantulaMiniboss;
 import erebus.lib.EnumWood;
 
 public class WorldGenGiantBaobab extends WorldGenerator {
@@ -156,6 +158,12 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		placeSpawner(world, rand, x + 5, y + 13, z);
 		placeSpawner(world, rand, x, y + 13, z -5);
 		placeSpawner(world, rand, x, y + 13, z + 5);
+		
+		
+		EntityTarantulaMiniboss boss = new EntityTarantulaMiniboss(world);
+		boss.setLocationAndAngles(x, y + 22, z, rand.nextFloat() * 360F, 0F);
+		boss.forceSpawn = true;
+		world.spawnEntityInWorld(boss);
 		
 		return true;
 	}

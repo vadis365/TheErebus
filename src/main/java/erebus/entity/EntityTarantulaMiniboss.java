@@ -9,7 +9,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
@@ -19,7 +18,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
@@ -67,7 +65,13 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	@Override
 	public int getMaxSpawnedInChunk()
 	{
-		return 2;
+		return 1;
+	}
+	
+	@Override
+	protected boolean canDespawn()
+	{
+		return false;
 	}
 
 	@Override
@@ -151,6 +155,13 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 		{
 			setBesideClimbableBlock(isCollidedHorizontally);
 		}
+		
+		EnumDifficulty difficulty = worldObj.difficultySetting;
+		if (difficulty == EnumDifficulty.PEACEFUL)
+		{
+			worldObj.difficultySetting = EnumDifficulty.EASY;
+		}
+		worldObj.difficultySetting = difficulty;
 	}
 
 	@Override
