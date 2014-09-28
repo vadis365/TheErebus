@@ -1,15 +1,29 @@
 package erebus.world.feature.plant;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.entity.EntityAntlionMiniBoss;
+import erebus.ModItems;
 import erebus.entity.EntityTarantulaMiniboss;
+import erebus.item.Materials.DATA;
 import erebus.lib.EnumWood;
+import erebus.world.loot.IPostProcess;
+import erebus.world.loot.LootItemStack;
+import erebus.world.loot.LootUtil;
+import erebus.world.loot.WeightedLootList;
 
 public class WorldGenGiantBaobab extends WorldGenerator {
 	
@@ -23,6 +37,74 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		log = EnumWood.Baobab.getLog();
 		leaves= EnumWood.Baobab.getLeaves();
 	}
+	
+	public static final WeightedLootList chestLoot = new WeightedLootList(
+			new LootItemStack[] {
+					new LootItemStack(Items.book).setAmount(1, 4).setWeight(18),
+					new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16),
+					new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13),
+					new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10),
+					new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9),
+					new LootItemStack(Items.enchanted_book).setWeight(8),
+					new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1),
+					new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
+					new LootItemStack(Items.golden_pickaxe).setWeight(3),
+					new LootItemStack(Items.iron_pickaxe).setWeight(2),
+					new LootItemStack(ModItems.jadePickaxe).setWeight(1),
+					new LootItemStack(Items.stone_pickaxe).setWeight(1),
+					new LootItemStack(Items.golden_shovel).setWeight(3),
+					new LootItemStack(Items.iron_shovel).setWeight(2),
+					new LootItemStack(ModItems.jadeShovel).setWeight(1),
+					new LootItemStack(Items.stone_shovel).setWeight(1),
+					new LootItemStack(Items.golden_axe).setWeight(3),
+					new LootItemStack(Items.iron_axe).setWeight(2),
+					new LootItemStack(ModItems.jadeAxe).setWeight(1),
+					new LootItemStack(Items.stone_axe).setWeight(1),
+					new LootItemStack(Items.golden_sword).setWeight(3),
+					new LootItemStack(Items.iron_sword).setWeight(2),
+					new LootItemStack(ModItems.jadeSword).setWeight(1),
+					new LootItemStack(Items.stone_sword).setWeight(1),
+					new LootItemStack(Items.iron_chestplate).setWeight(2),
+					new LootItemStack(ModItems.jadeBody).setWeight(1),
+					new LootItemStack(Items.golden_chestplate).setWeight(1),
+					new LootItemStack(Items.iron_helmet).setWeight(2),
+					new LootItemStack(ModItems.jadeHelmet).setWeight(1),
+					new LootItemStack(Items.golden_helmet).setWeight(1),
+					new LootItemStack(Items.iron_leggings).setWeight(2),
+					new LootItemStack(ModItems.jadeLegs).setWeight(1),
+					new LootItemStack(Items.golden_leggings).setWeight(1),
+					new LootItemStack(Items.iron_boots).setWeight(2),
+					new LootItemStack(ModItems.jadeBoots).setWeight(1),
+					new LootItemStack(Items.golden_boots).setWeight(1)
+					}).setPostProcessor(new IPostProcess() {
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public ItemStack postProcessItem(ItemStack is, Random rand) {
+		if (rand.nextBoolean() && (is.getItem() == Items.enchanted_book || is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
+			boolean enchBook = is.getItem() == Items.enchanted_book;
+			if (enchBook) {
+				is.func_150996_a(Items.book);
+			}
+			List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
+			if (enchBook) {
+				is.func_150996_a(Items.enchanted_book);
+			}
+
+			if (enchList != null && enchList.size() > 0) {
+				for (int a = 0; a < enchList.size(); ++a) {
+					EnchantmentData data = (EnchantmentData) enchList.get(a);
+					if (is.getItem() == Items.enchanted_book) {
+						Items.enchanted_book.addEnchantment(is, data);
+					} else {
+						is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
+					}
+				}
+			}
+		}
+			return is;
+		}
+	});
 	
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		
@@ -50,18 +132,12 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 						if (Math.round(Math.sqrt(dSq)) == radius || Math.round(Math.sqrt(dSq)) <= radius -1 &&  yy <= y + 2 ){
 							world.setBlock(x + i, yy, z + j, log);
 						}
-						else {
-							world.setBlock(x + i, yy, z + j, Blocks.air);
-						}
 						world.setBlock(x, yy, z, log);
 					} 
 					
 					if(yy <= y + layer2 && yy > y + layer1) {
 						if (Math.round(Math.sqrt(dSq)) == radius -1) {
 							world.setBlock(x + i, yy, z + j, log);
-						}
-						else {
-							world.setBlock(x + i, yy, z + j, Blocks.air);
 						}
 						world.setBlock(x, yy, z, log);
 					}
@@ -70,34 +146,34 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 						if (Math.round(Math.sqrt(dSq)) == radius -2) {
 							world.setBlock(x + i, yy, z + j, log);
 						}
-						else {
-							world.setBlock(x + i, yy, z + j, Blocks.air);
-						}
 						world.setBlock(x, yy, z, log);
 					}
 					
 					if(yy <= y + layer4 && yy > y + layer3) {
 						world.setBlock(x, y + 10, z, log);
 						world.setBlock(x, y + 11, z, log);
+						
 						if (Math.round(Math.sqrt(dSq)) <= radius -12 && Math.round(Math.sqrt(dSq)) > radius -13) {
 							world.setBlock(x + i, y + 12, z + j, Blocks.web);
 						}
 						if (Math.round(Math.sqrt(dSq)) == radius -3 || Math.round(Math.sqrt(dSq)) <= radius -3 && Math.round(Math.sqrt(dSq)) > radius -12 &&  yy >= y + 9 && yy <= y + 12) {
 							world.setBlock(x + i, yy, z + j, log);
 						}
-						else {
-							world.setBlock(x + i, yy, z + j, Blocks.air);
-						}
-						
 					}
 					
 					if(yy <= y + layer5 && yy > y + layer4) {
-						if (Math.round(Math.sqrt(dSq)) == radius -2|| Math.round(Math.sqrt(dSq)) <= radius -3 && yy >= y + 20 && yy <= y + 21) {
+						if (Math.round(Math.sqrt(dSq)) == radius -2) {
 							world.setBlock(x + i, yy, z + j, log);
 						}
-						else {
-							world.setBlock(x + i, yy, z + j, Blocks.air);
+						
+						if(  Math.round(Math.sqrt(dSq)) <= radius -3 && yy == y + 20) {
+							world.setBlock(x + i, yy, z + j, log);
 						}
+						
+						if( Math.round(Math.sqrt(dSq)) <= radius -3 && yy == y + 21) {
+							world.setBlock(x + i, yy, z + j, ModBlocks.blockSilk);
+						}
+
 					}
 
 					// 2nd floor gap in web shape
@@ -147,7 +223,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			world.setBlock(x, yy, z + 9, Blocks.vine, 1, 3);
 		}
 		
-		//spawners and webs
+		//spawners, chests with loot and webs
 		//ground floor
 		placeSpawner(world, rand, x -7, y + 3, z);
 		placeSpawner(world, rand, x + 7, y + 3, z);
@@ -159,9 +235,9 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		placeSpawner(world, rand, x, y + 13, z -5);
 		placeSpawner(world, rand, x, y + 13, z + 5);
 		
-		
+		//boss mob
 		EntityTarantulaMiniboss boss = new EntityTarantulaMiniboss(world);
-		boss.setLocationAndAngles(x, y + 22, z, rand.nextFloat() * 360F, 0F);
+		boss.setLocationAndAngles(x + 0.5D, y + 22, z + 0.5D, rand.nextFloat() * 360F, 0F);
 		boss.forceSpawn = true;
 		world.spawnEntityInWorld(boss);
 		
@@ -193,8 +269,13 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		world.setBlock(x - 1, y, z, Blocks.web, 0, 2);
 		world.setBlock(x, y, z - 1, Blocks.web, 0, 2);
 		world.setBlock(x, y, z + 1, Blocks.web, 0, 2);
-		world.setBlock(x, y - 1, z, Blocks.web, 0, 2);
 		world.setBlock(x, y + 1, z, Blocks.web, 0, 2);
 		world.setBlock(x, y, z, ModBlocks.tarantulaSpawner);
+		world.setBlock(x, y - 1, z, Blocks.chest, 0, 2);
+		TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y - 1, z);
+		if (chest != null)
+		{
+			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
+		}
 	}
 }
