@@ -6,26 +6,28 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBlocks;
 import erebus.lib.EnumWood;
 
 public class WorldGenGiantBaobab extends WorldGenerator {
 	
 	private int height = -1;
 	private int baseRadius = -1;
-	protected Block log;
-	public WorldGenGiantBaobab(int height, int baseRadius)
+	protected Block log, leaves;
+	public WorldGenGiantBaobab()
 	{
-		this.height = height;
-		this.baseRadius = baseRadius;
+		this.height = 28;
+		this.baseRadius = 14;
 		log = EnumWood.Baobab.getLog();
+		leaves= EnumWood.Baobab.getLeaves();
 	}
 	
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		
-		for (int x1 = x - baseRadius; x1 <= x + baseRadius; x1++)
-			for (int z1 = z - baseRadius; z1 <= z + baseRadius; z1++)
-				for (int y1 = y + 1; y1 < y + height; y1++) {
-					if (!world.isAirBlock(x1, y1, z1))
+		for (int xx = x - baseRadius; xx <= x + baseRadius; xx++)
+			for (int zz = z - baseRadius; zz <= z + baseRadius; zz++)
+				for (int yy = y + 1; yy < y + height; yy++) {
+					if (!world.isAirBlock(xx, yy, zz))
 						return false;
 				}
 				
@@ -37,7 +39,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		int layer4 = 19;
 		int layer5 = 27;
 
-		// Trunk
+		//trunk
 		for (int yy = y; height + y >= yy; yy++) {
 			for (int i = radius * - 1; i <= radius; ++i) {
 				for (int j = radius * - 1; j <= radius; ++j) {
@@ -105,6 +107,16 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			}
 		}
 		
+		//leaves
+		createLeaves(world, rand, x + 10, y + 29, z);
+		createLeaves(world, rand, x - 10, y + 29, z);
+		createLeaves(world, rand, x, y + 29, z + 10);
+		createLeaves(world, rand, x, y + 29, z - 10);
+		createLeaves(world, rand, x + 7, y + 27, z + 7);
+		createLeaves(world, rand, x + 7, y + 27, z -7);
+		createLeaves(world, rand, x - 7, y + 27, z + 7);
+		createLeaves(world, rand, x -7, y + 27, z - 7);
+		
 		//other internal bits like vines and holes needed
 		
 		//ground floor vines
@@ -125,7 +137,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		world.setBlock(x, y + 21, z + 9, Blocks.air);
 		world.setBlock(x, y + 21, z - 9, Blocks.air);
 		
-		//1stfloor vines
+		//1st floor vines
 		for (int yy = y + 13; 21 + y >= yy; yy++) {
 			world.setBlock(x - 9, yy, z, Blocks.vine, 2, 3);
 			world.setBlock(x + 9, yy, z, Blocks.vine, 8, 3);
@@ -133,6 +145,48 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			world.setBlock(x, yy, z + 9, Blocks.vine, 1, 3);
 		}
 		
+		//spawners and webs
+		//ground floor
+		placeSpawner(world, rand, x -7, y + 3, z);
+		placeSpawner(world, rand, x + 7, y + 3, z);
+		placeSpawner(world, rand, x, y + 3, z -7);
+		placeSpawner(world, rand, x, y + 3, z + 7);
+		//1st floor
+		placeSpawner(world, rand, x -5, y + 13, z);
+		placeSpawner(world, rand, x + 5, y + 13, z);
+		placeSpawner(world, rand, x, y + 13, z -5);
+		placeSpawner(world, rand, x, y + 13, z + 5);
+		
 		return true;
+	}
+	
+	public void createLeaves(World world, Random rand, int x, int y, int z) {
+		int radius = 5;
+		int height = 3;
+		for (int xx = x - radius; xx <= x + radius; xx++) {
+			for (int zz = z - radius; zz <= z + radius; zz++) {
+				for (int yy = y - height; yy < y + height; yy++) {
+					double dSq = Math.pow(xx - x, 2.0D) + Math.pow(zz - z, 2.0D) + Math.pow(yy - y, 2.0D);
+					if (Math.round(Math.sqrt(dSq)) < radius) {
+						if (dSq >= Math.pow(radius - 2, 2.0D)) {
+							if(rand.nextInt(10)==0)
+								world.setBlock(xx, yy, zz, log);
+							else
+								world.setBlock(xx, yy, zz, leaves);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void placeSpawner(World world, Random rand, int x, int y, int z) {
+		world.setBlock(x + 1, y, z, Blocks.web, 0, 2);
+		world.setBlock(x - 1, y, z, Blocks.web, 0, 2);
+		world.setBlock(x, y, z - 1, Blocks.web, 0, 2);
+		world.setBlock(x, y, z + 1, Blocks.web, 0, 2);
+		world.setBlock(x, y - 1, z, Blocks.web, 0, 2);
+		world.setBlock(x, y + 1, z, Blocks.web, 0, 2);
+		world.setBlock(x, y, z, ModBlocks.tarantulaSpawner);
 	}
 }
