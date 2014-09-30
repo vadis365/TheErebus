@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class EntityTarantulaEgg extends EntityThrowable
 {
-
+	public static float rotationticks;
 	public EntityTarantulaEgg(World world)
 	{
 		super(world);
@@ -35,6 +35,14 @@ public class EntityTarantulaEgg extends EntityThrowable
 	public void onUpdate()
 	{
 		super.onUpdate();
+		if (rotationticks < 360F)
+		{
+			rotationticks = rotationticks + 20F;
+			if (rotationticks >= 360F)
+			{
+				rotationticks = 0;
+			}
+		}
 	}
 
 	protected String getSplatSound()
