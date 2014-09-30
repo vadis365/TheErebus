@@ -291,7 +291,7 @@ public class RecipeHandler
 
 	private static void registerSmelting()
 	{
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.blockAmber, 1, 1), new ItemStack(ModBlocks.blockAmber), 0.3F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.blockAmber), new ItemStack(ModBlocks.blockAmber, 1, 1), 0.3F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, Food.FoodType.larvaRaw.ordinal()), new ItemStack(ModItems.food, 1, Food.FoodType.larvaCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, Food.FoodType.grasshopperLegRaw.ordinal()), new ItemStack(ModItems.food, 1, Food.FoodType.grasshopperLegCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, Food.FoodType.tarantulaLegRaw.ordinal()), new ItemStack(ModItems.food, 1, Food.FoodType.tarantulaLegCooked.ordinal()), 0.2F);
@@ -359,7 +359,7 @@ public class RecipeHandler
 		OreDictionary.registerOre("blockSpawner", ModBlocks.jumpingSpiderSpawner);
 		OreDictionary.registerOre("blockSpawner", ModBlocks.waspSpawner);
 		OreDictionary.registerOre("gemDiamond", ModItems.encrustedDiamond);
-		OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.blockAmber, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.blockAmber, 1, 1));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.saplessLog));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.scorchedWood));
 
