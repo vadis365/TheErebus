@@ -1,14 +1,11 @@
 package erebus.block;
 
-import java.util.ArrayList;
-
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -16,7 +13,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityBones;
 
 public class BlockBones extends BlockContainer
@@ -91,27 +88,9 @@ public class BlockBones extends BlockContainer
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		int count = 1 + world.rand.nextInt(3);
-		for (int i = 0; i < count; i++)
-		{
-			Item id = null;
-			int damage = 0;
-			if (world.rand.nextInt(3) == 0)
-			{
-				id = Items.bone;
-			} else
-			{
-				id = ModItems.materials;
-				damage = 2;
-			}
-			if (id != null)
-			{
-				ret.add(new ItemStack(id, 1, damage));
-			}
-		}
-		return ret;
+		Utils.dropInventoryContents(Utils.getTileEntity(world, x, y, z, TileEntityBones.class));
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 }
