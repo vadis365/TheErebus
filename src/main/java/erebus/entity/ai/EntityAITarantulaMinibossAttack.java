@@ -62,7 +62,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 
 	@Override
 	public void startExecuting() {
-		if(attacker.getHealth() <= 100 )
+		if(attacker.getHealth() <= 150 )
 			attacker.getNavigator().setPath(entityPathEntity, speedTowardsTarget);
 		else
 			attacker.getNavigator().setPath(entityPathEntity, 0);
@@ -78,7 +78,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 	public void updateTask() {
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 		attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
-		if ((longMemory && attacker.getHealth() <= 100 || attacker.getEntitySenses().canSee(entitylivingbase)) && --findAttemptCount <= 0 && attacker.getHealth() <= 100) {
+		if ((longMemory && attacker.getHealth() <= 150 || attacker.getEntitySenses().canSee(entitylivingbase)) && --findAttemptCount <= 0 && attacker.getHealth() <= 150) {
 			findAttemptCount = failedPathFindingPenalty + 4 + attacker.getRNG().nextInt(7);
 			attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, speedTowardsTarget);
 			if (attacker.getNavigator().getPath() != null) {
@@ -101,26 +101,26 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 				entitylivingbase.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F, 0.1D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F);
 				}
 		} 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > d0 + 64D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < d0 + 1024.0D){
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > d0 + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() > 150 ){
 			if (attackTick <= 0) {
 				++shouldDo;
 				if (shouldDo == 1)
-					attackTick = 60;
+					attackTick = 300;	
 				else if (shouldDo <= 2)
 					attackTick = 20;
 				else {
 					attackTick = 40;
 					shouldDo = 0;
 				}
-				if (shouldDo >= 1) {
+				if (shouldDo == 1) {
 					Vec3 look = attacker.getLookVec();
-					double direction = Math.toRadians(attacker.rotationYaw);
-					EntityTarantulaEgg var11 = new EntityTarantulaEgg (worldObj, attacker);
-					var11.setPosition(attacker.posX + -Math.sin(direction) * 3.5, attacker.posY+ attacker.height, attacker.posZ + Math.cos(direction) * 3.5);
-					var11.motionX = look.xCoord * 2.0;
-					var11.motionY = look.yCoord * 2.2;
-					var11.motionZ = look.zCoord * 2.0;
-					worldObj.spawnEntityInWorld(var11);
+					double direction = Math.toRadians(attacker.renderYawOffset);
+					EntityTarantulaEgg babyEgg = new EntityTarantulaEgg (worldObj, attacker);
+					babyEgg.setPosition(attacker.posX + -Math.sin(direction) * 3.5D, attacker.posY + attacker.height, attacker.posZ + Math.cos(direction) * 3.5D);
+					babyEgg.motionX = look.xCoord * 1.0;
+					babyEgg.motionY = look.yCoord * 2.2;
+					babyEgg.motionZ = look.zCoord * 1.0;
+					worldObj.spawnEntityInWorld(babyEgg);
 				}
 			}
 		}
