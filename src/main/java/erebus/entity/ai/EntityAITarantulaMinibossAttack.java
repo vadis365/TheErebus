@@ -105,7 +105,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 			if (attackTick <= 0) {
 				++shouldDo;
 				if (shouldDo == 1)
-					attackTick = 300;	
+					attackTick = 200;	
 				else if (shouldDo <= 2)
 					attackTick = 20;
 				else {
