@@ -36,6 +36,7 @@ import erebus.block.BlockSimple;
 import erebus.block.BlockSlabStone;
 import erebus.block.BlockSpiderSpawner;
 import erebus.block.BlockStairsBase;
+import erebus.block.BlockTarantulaEgg;
 import erebus.block.BlockUmberFurnace;
 import erebus.block.BlockUmberGolemStatue;
 import erebus.block.BlockUmberPaver;
@@ -281,8 +282,9 @@ public class ModBlocks
 	public static final Block amberBrickStairs = new BlockStairsBase(blockAmber, 2).setStepSound(Block.soundTypeStone).setBlockName("erebus.amberBrickStairs");
 	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.waspNestStairs");
 
-	// OTHER THINGS (AKA LEXICONN'S STUFF. DELETE IF HE EVER QUITS)
+	// OTHER THINGS
 	public static final Block gaeanKeystone = new GaeanKeystone();
+	public static final Block tarantulaEgg = new BlockTarantulaEgg();
 
 	public static void init()
 	{
