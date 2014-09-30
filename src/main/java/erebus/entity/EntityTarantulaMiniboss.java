@@ -23,6 +23,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.entity.ai.EntityAITarantulaMinibossAttack;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayData
 {
@@ -264,4 +267,9 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 			isAirBorne = true;
 		}
     }
+	
+	public void spawnBlamParticles()
+	{
+		PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.TARANTULA_BLAM));
+	}
 }

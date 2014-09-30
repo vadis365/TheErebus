@@ -1,15 +1,24 @@
 package erebus.entity.ai;
 
+import java.util.List;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathPoint;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import erebus.entity.EntityTarantula;
+import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
+import erebus.entity.EntityTarantulaMiniboss;
 
 public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 	World worldObj;
@@ -101,7 +110,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 				entitylivingbase.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F, 0.1D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F);
 				}
 		} 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > d0 + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() > 150 ){
+	if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > d0 + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() > 150){
 			if (attackTick <= 0) {
 				++shouldDo;
 				if (shouldDo == 1)
@@ -122,7 +131,35 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 					babyEgg.motionZ = look.zCoord * 1.0;
 					worldObj.spawnEntityInWorld(babyEgg);
 				}
+				
+				if(worldObj.rand.nextInt(3) == 1) {
+					attackTick = 30;
+					attacker.motionY = 0.61999998688697815D;
+					jumpAttack = true;
+				}
+			}
+				if(jumpAttack && attacker.motionY==-0.0784000015258789D) {
+					areaOfEffect();
+					((EntityTarantulaMiniboss) attacker).spawnBlamParticles();
+					jumpAttack = false;
+				}	
 			}
 		}
-	}
+
+	
+	protected Entity areaOfEffect() {
+		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(attacker.boundingBox.minX, attacker.boundingBox.minY, attacker.boundingBox.minZ, attacker.boundingBox.maxX, attacker.boundingBox.maxY, attacker.boundingBox.maxZ).expand(8D, 1D, 8D));
+			for (int i = 0; i < list.size(); i++) {
+				Entity entity = (Entity) list.get(i);
+				if (entity != null)
+					if (entity instanceof EntityLivingBase && !(entity instanceof EntityTarantulaMiniboss) && !(entity instanceof EntityTarantula) && !(entity instanceof EntityTarantulaBaby)) {
+						float Knockback = 2;
+						entity.attackEntityFrom(DamageSource.causeMobDamage(attacker), 8.0F);
+						entity.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
+						attacker.playSound("erebus:blamsound", 5.0F, 1.0F);
+						((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 8 * 20, 0));	
+					}
+			}	
+		return null;
+		}
 	}

@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityBreakingFX;
+import net.minecraft.client.particle.EntityCloudFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.util.MathHelper;
@@ -21,7 +22,8 @@ public class PacketParticle extends AbstractClientPacket
 	{
 		BEETLE_LARVA_SQUISH,
 		SPRAY_CAN,
-		CRUSHROOM_BLAM;
+		CRUSHROOM_BLAM,
+		TARANTULA_BLAM;
 
 		static final ParticleType[] values = values();
 	}
@@ -77,6 +79,12 @@ public class PacketParticle extends AbstractClientPacket
 				{
 					double ang = a * Math.PI / 180D;
 					eff.addEffect(new EntityRepellentFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY + 0.1D, e.posZ + MathHelper.cos((float) ang) * 3, 0, 0, 0));
+				}
+			case TARANTULA_BLAM:
+				for (int a = 0; a < 360; a += 4)
+				{
+					double ang = a * Math.PI / 180D;
+					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY, e.posZ + MathHelper.cos((float) ang) * 3, -MathHelper.sin((float) ang) * 0.5, 0.1D , MathHelper.cos((float) ang) * 0.5));		
 				}
 			default:
 				;
