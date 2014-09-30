@@ -1,14 +1,21 @@
 package erebus.tileentity;
 
-import net.minecraft.tileentity.TileEntity;
-
-public class TileEntityBones extends TileEntity
+public class TileEntityBones extends TileEntityBasicInventory
 {
+	public TileEntityBones()
+	{
+		super(36, "container.bones");
+	}
+
 	@Override
 	public boolean canUpdate()
 	{
 		return false;
 	}
 
-	// Because efficiency is for wimps
+	@Override
+	public int[] getAccessibleSlotsFromSide(int side)
+	{
+		return new int[0];
+	}
 }
