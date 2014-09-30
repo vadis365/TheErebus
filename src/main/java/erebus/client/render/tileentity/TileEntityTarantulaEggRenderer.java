@@ -22,7 +22,8 @@ public class TileEntityTarantulaEggRenderer extends TileEntitySpecialRenderer
 	{
 		bindTexture(texture);
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x + 0.5F, y + 0.5F, z + 0.5F);
+		GL11.glTranslatef(x + 0.5F, y + 1.5F, z + 0.5F);
+		GL11.glScaled(-1, -1, 1);
 		model.renderAll();
 		GL11.glPopMatrix();
 	}
