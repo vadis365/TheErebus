@@ -32,7 +32,6 @@ public class EntityBeetleLarva extends EntityAnimal
 	private final EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
 	public boolean isEating;
 	public boolean isSquashed;
-	public boolean hasDroppedDiamond;
 
 	public EntityBeetleLarva(World world)
 	{
@@ -242,7 +241,6 @@ public class EntityBeetleLarva extends EntityAnimal
 				if (rand.nextInt(200) == 0)
 				{
 					entityDropItem(new ItemStack(Items.diamond), 0.0F);
-					setHasDroppedDiamond(true);
 				}
 				entityDropItem(new ItemStack(Items.slime_ball), 0.0F);
 			}
@@ -300,11 +298,6 @@ public class EntityBeetleLarva extends EntityAnimal
 	public void setisSquashed(boolean par1)
 	{
 		isSquashed = par1;
-	}
-
-	public void setHasDroppedDiamond(boolean par1)
-	{
-		hasDroppedDiamond = par1;
 	}
 
 	public void setMoveTasks(boolean par1)

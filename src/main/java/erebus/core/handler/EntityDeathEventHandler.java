@@ -1,5 +1,6 @@
 package erebus.core.handler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -7,47 +8,52 @@ import java.util.Map.Entry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModAchievements;
 import erebus.api.animationmagic.EnergyType;
 import erebus.api.animationmagic.IEnergyCollector;
+import erebus.core.helper.Utils;
 import erebus.entity.EntityBeetleLarva;
 
 public class EntityDeathEventHandler
 {
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void dropEvent(LivingDeathEvent event)
+	@SubscribeEvent
+	public void dropEvent(LivingDropsEvent event)
 	{
-		if (event.entityLiving.worldObj.isRemote)
-		{
-			return;
-		}
-
 		if (event.entity instanceof EntityBeetleLarva)
 		{
 			EntityBeetleLarva beetle = (EntityBeetleLarva) event.entity;
 			if (event.source.getSourceOfDamage() instanceof EntityPlayer)
 			{
 				event.entity.worldObj.getClosestPlayer(event.entity.posX, event.entity.posY, event.entity.posZ, 30).triggerAchievement(ModAchievements.beetle);
-			}
 
-			if (beetle.isSquashed && beetle.hasDroppedDiamond)
-			{
-				if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+				if (beetle.isSquashed && dropedItem(event.drops, new ItemStack(Items.diamond)))
 				{
 					event.entity.worldObj.getClosestPlayer(event.entity.posX, event.entity.posY, event.entity.posZ, 30).triggerAchievement(ModAchievements.diamond);
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void deathEvent(LivingDeathEvent event)
+	{
+		if (event.entityLiving.worldObj.isRemote)
+		{
+			return;
 		}
 
 		ItemStack weapon = getWeapon(event.source);
@@ -66,6 +72,18 @@ public class EntityDeathEventHandler
 				}
 			}
 		}
+	}
+
+	private boolean dropedItem(ArrayList<EntityItem> drops, ItemStack target)
+	{
+		for (EntityItem entity : drops)
+		{
+			if (entity != null && Utils.areStacksTheSame(entity.getEntityItem(), target, false))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private ItemStack getWeapon(DamageSource source)
