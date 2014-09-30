@@ -18,15 +18,19 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import codechicken.lib.math.MathHelper;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModAchievements;
+import erebus.ModBlocks;
 import erebus.api.animationmagic.EnergyType;
 import erebus.api.animationmagic.IEnergyCollector;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBeetleLarva;
+import erebus.tileentity.TileEntityBones;
 
 public class EntityDeathEventHandler
 {
@@ -68,6 +72,52 @@ public class EntityDeathEventHandler
 					if (entry.getValue() > 0 && collector.canStore(weapon, entry.getKey()))
 					{
 						collector.addEnergy(weapon, entry.getKey(), entry.getValue());
+					}
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void playerDeath(LivingDeathEvent event)
+	{
+		World world = event.entityLiving.worldObj;
+		if (world.isRemote)
+		{
+			return;
+		}
+
+		if (event.entityLiving instanceof EntityPlayer && !world.getGameRules().getGameRuleBooleanValue("keepInventory"))
+		{
+			EntityPlayer player = (EntityPlayer) event.entityLiving;
+
+			int x = MathHelper.floor_double(player.posX);
+			int y = MathHelper.floor_double(player.posY);
+			int z = MathHelper.floor_double(player.posZ);
+			if (!world.isAirBlock(x, y, z))
+			{
+				y++;
+			}
+			world.setBlock(x, y, z, ModBlocks.bones);
+			TileEntityBones tile = Utils.getTileEntity(world, x, y, z, TileEntityBones.class);
+			if (tile != null)
+			{
+				for (int i = 0; i < player.inventory.mainInventory.length; i++)
+				{
+					ItemStack cont = player.inventory.mainInventory[i];
+					if (cont != null)
+					{
+						tile.setInventorySlotContents(i, cont.copy());
+						player.inventory.mainInventory[i] = null;
+					}
+				}
+				for (int i = 0; i < player.inventory.armorInventory.length; i++)
+				{
+					ItemStack cont = player.inventory.armorInventory[i];
+					if (cont != null)
+					{
+						tile.setInventorySlotContents(i, cont.copy());
+						player.inventory.armorInventory[i] = null;
 					}
 				}
 			}
