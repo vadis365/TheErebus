@@ -73,12 +73,6 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	{
 		return false;
 	}
-	
-	@Override
-    public boolean canBePushed()
-    {
-        return false;
-    }
 
 	@Override
 	public int getTotalArmorValue()
@@ -252,4 +246,22 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 			}
 		}
 	}
+	
+	@Override
+    public void addVelocity(double x, double y, double z)
+    {
+		if(getHealth() > 150) {
+			motionX = 0;
+			motionY += y;
+			motionZ = 0;
+			isAirBorne = false;
+		}
+		else
+		{
+			motionX += x;
+			motionY += y;
+			motionZ += z;
+			isAirBorne = true;
+		}
+    }
 }
