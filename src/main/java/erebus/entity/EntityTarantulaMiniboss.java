@@ -56,7 +56,7 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
