@@ -156,7 +156,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 						float Knockback = 2;
 						entity.attackEntityFrom(DamageSource.causeMobDamage(attacker), 8.0F);
 						entity.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
-						attacker.playSound("erebus:blamsound", 5.0F, 1.0F);
+						attacker.playSound("erebus:blamsound", 1.5F, 1.0F);
 						((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 8 * 20, 0));	
 					}
 			}	

@@ -6,6 +6,7 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCloudFX;
+import net.minecraft.client.particle.EntityHugeExplodeFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.util.MathHelper;
@@ -23,7 +24,8 @@ public class PacketParticle extends AbstractClientPacket
 		BEETLE_LARVA_SQUISH,
 		SPRAY_CAN,
 		CRUSHROOM_BLAM,
-		TARANTULA_BLAM;
+		TARANTULA_BLAM,
+		TARANTULA_DEATH;
 
 		static final ParticleType[] values = values();
 	}
@@ -86,6 +88,13 @@ public class PacketParticle extends AbstractClientPacket
 					double ang = a * Math.PI / 180D;
 					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY, e.posZ + MathHelper.cos((float) ang) * 3, -MathHelper.sin((float) ang) * 0.5, 0.1D , MathHelper.cos((float) ang) * 0.5));		
 				}
+				
+			case TARANTULA_DEATH:
+					float f = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
+					float f1 = (e.worldObj.rand.nextFloat() - 0.5F) * 4.0F;
+					float f2 = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
+					eff.addEffect(new EntityHugeExplodeFX(player.worldObj, e.posX + (double) f, e.posY + 2.0D + (double) f1, e.posZ + (double) f2, 0.0D, 0.0D, 0.0D));
+
 			default:
 				;
 		}

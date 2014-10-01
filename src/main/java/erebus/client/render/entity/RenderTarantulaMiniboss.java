@@ -38,6 +38,10 @@ public class RenderTarantulaMiniboss extends RenderLiving
 		GL11.glScalef(size, size, size);
 		if(tarantula.getHealth() > 150)
 			GL11.glRotatef(180, 0F, 1F, 0F);
+		if(tarantula.getHealth() <= 0) {
+			GL11.glTranslatef(0F, - 0.7F, 0F);
+			GL11.glRotatef(180, 0F, 0F, 1F);
+		}
 	}
 	
 	protected int shouldRenderPass(EntityLivingBase entityliving, int pass, float partialTickTime)

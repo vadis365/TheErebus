@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,7 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
 import erebus.entity.ai.EntityAITarantulaMinibossAttack;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
@@ -29,6 +31,8 @@ import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayData
 {
+	public int deathTicks;
+	
 	public EntityTarantulaMiniboss(World world)
 	{
 		super(world);
@@ -52,7 +56,7 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
@@ -145,6 +149,51 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 			forceCollideWithPlayer(getAttackTarget(), distance);
 		}
 
+	}
+
+	@Override
+	protected void onDeathUpdate() {
+		++deathTicks;
+		
+		if (deathTicks %25 == 1) {
+			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.1F);
+			worldObj.playSoundEffect(posX, posY, posZ, getHurtSound(), 1.0F, 0.1F);
+			worldObj.playSoundEffect(posX, posY, posZ, "mob.ghast.scream", 1.0F, 0.1F);
+		}
+
+		if (deathTicks >= 180 && deathTicks <= 200) {
+			PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.TARANTULA_DEATH));
+		}
+
+		int i;
+		int j;
+
+		if (!worldObj.isRemote) {
+			if (deathTicks > 150 && deathTicks % 5 == 0) {
+				i = 1000;
+
+				while (i > 0) {
+					j = EntityXPOrb.getXPSplit(i);
+					i -= j;
+					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+				}
+			}
+		}
+
+		moveEntity(0.0D, 0.310000000149011612D, 0.0D);
+		renderYawOffset = prevRenderYawOffset += 0.05F;
+		limbSwingAmount = 0.5F;
+		if (deathTicks == 200 && !worldObj.isRemote) {
+			i = 2000;
+
+			while (i > 0) {
+				j = EntityXPOrb.getXPSplit(i);
+				i -= j;
+				worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+			}
+			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), ModBlocks.tarantulaEgg);
+			setDead();
+		}
 	}
 	
 	@Override
@@ -240,6 +289,7 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 			if (onGround)
 			{
 				getLookHelper().setLookPositionWithEntity(entity, 30.0F, 30.0F);
+				faceEntity(entity,  30.0F, 30.0F);
 				double distanceX = entity.posX - posX;
 				double distanceZ = entity.posZ - posZ;
 				float squareRoot = MathHelper.sqrt_double(distanceX * distanceX + distanceZ * distanceZ);
