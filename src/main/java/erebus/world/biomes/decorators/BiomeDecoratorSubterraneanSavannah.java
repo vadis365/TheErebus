@@ -13,6 +13,7 @@ import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.plant.WorldGenBamboo;
+import erebus.world.feature.plant.WorldGenGiantBaobab;
 import erebus.world.feature.tree.WorldGenAsperTree;
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
@@ -23,7 +24,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
-
+	private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
+	
 	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass, 1);
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
@@ -66,6 +68,18 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	@Override
 	public void decorate()
 	{
+		for (attempt = 0; attempt < 1000; attempt++)
+		{
+			xx = x + 16;
+			yy = 16 + rand.nextInt(64);
+			zz = z + 16;
+			
+			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && checkSurface(SurfaceType.GRASS, xx - 10, yy, zz - 10) && checkSurface(SurfaceType.GRASS, xx + 10, yy, zz + 10) && checkSurface(SurfaceType.GRASS, xx  + 10, yy, zz - 10) && checkSurface(SurfaceType.GRASS, xx  - 10, yy, zz + 10))
+			{
+				genGiantBaobab.generate(world, rand, xx, yy, zz);
+			}
+		}
+		
 		if (rand.nextInt(12) == 0)
 		{
 			for (attempt = 0; attempt < 5; attempt++)
