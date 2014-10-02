@@ -34,6 +34,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	@Override
 	public void populate()
 	{
+	
 		if (rand.nextBoolean() && rand.nextBoolean())
 		{
 			for (attempt = 0; attempt < 8; attempt++)
@@ -67,16 +68,17 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 
 	@Override
 	public void decorate()
-	{
-		for (attempt = 0; attempt < 1000; attempt++)
+	{  
+		xx = x + 16;
+		yy = 16;
+		zz = z + 16;
+		
+		for (int yUp = yy; 64 + yy >= yUp; yUp++)
 		{
-			xx = x + 16;
-			yy = 16 + rand.nextInt(64);
-			zz = z + 16;
-			
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && checkSurface(SurfaceType.GRASS, xx - 10, yy, zz - 10) && checkSurface(SurfaceType.GRASS, xx + 10, yy, zz + 10) && checkSurface(SurfaceType.GRASS, xx  + 10, yy, zz - 10) && checkSurface(SurfaceType.GRASS, xx  - 10, yy, zz + 10))
+			if (checkSurface(SurfaceType.GRASS, xx - 8, yUp, zz - 8) && checkSurface(SurfaceType.GRASS, xx + 8, yUp, zz + 8) && checkSurface(SurfaceType.GRASS, xx  + 8, yUp, zz - 8) && checkSurface(SurfaceType.GRASS, xx  - 8, yUp, zz + 8))
 			{
-				genGiantBaobab.generate(world, rand, xx, yy, zz);
+				genGiantBaobab.generate(world, rand, xx, yUp, zz);
+				break;
 			}
 		}
 		

@@ -82,19 +82,20 @@ public class PacketParticle extends AbstractClientPacket
 					double ang = a * Math.PI / 180D;
 					eff.addEffect(new EntityRepellentFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY + 0.1D, e.posZ + MathHelper.cos((float) ang) * 3, 0, 0, 0));
 				}
+				break;
 			case TARANTULA_BLAM:
 				for (int a = 0; a < 360; a += 4)
 				{
 					double ang = a * Math.PI / 180D;
 					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY, e.posZ + MathHelper.cos((float) ang) * 3, -MathHelper.sin((float) ang) * 0.5, 0.1D , MathHelper.cos((float) ang) * 0.5));		
 				}
-				
+				break;
 			case TARANTULA_DEATH:
-					float f = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
-					float f1 = (e.worldObj.rand.nextFloat() - 0.5F) * 4.0F;
-					float f2 = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
-					eff.addEffect(new EntityHugeExplodeFX(player.worldObj, e.posX + (double) f, e.posY + 2.0D + (double) f1, e.posZ + (double) f2, 0.0D, 0.0D, 0.0D));
-
+				float f = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
+				float f1 = (e.worldObj.rand.nextFloat() - 0.5F) * 4.0F;
+				float f2 = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
+				eff.addEffect(new EntityHugeExplodeFX(player.worldObj, e.posX + (double) f, e.posY + 2.0D + (double) f1, e.posZ + (double) f2, 0.0D, 0.0D, 0.0D));
+				break;
 			default:
 				;
 		}
