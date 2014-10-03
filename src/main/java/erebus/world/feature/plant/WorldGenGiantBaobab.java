@@ -177,7 +177,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 					}
 
 					// 2nd floor gap in web shape
-					if (Math.round(Math.sqrt(dSq)) < radius -3 && Math.round(Math.sqrt(dSq)) %2==0  && yy == y + 21) {
+					if (Math.round(Math.sqrt(dSq)) < radius -3 && Math.round(Math.sqrt(dSq)) %2 == 0  && yy == y + 21) {
 						if(x + i != x && z + j != z)
 							world.setBlock(x + i, yy, z + j, Blocks.web);
 					}
@@ -194,6 +194,17 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		createLeaves(world, rand, x + 7, y + 27, z -7);
 		createLeaves(world, rand, x - 7, y + 27, z + 7);
 		createLeaves(world, rand, x -7, y + 27, z - 7);
+		
+		//roots
+		createRoots(world, rand, x, y, z);
+		createRoots(world, rand, x + 9, y, z);
+		createRoots(world, rand, x - 9, y, z);
+		createRoots(world, rand, x, y, z + 9);
+		createRoots(world, rand, x, y, z - 9);
+		createRoots(world, rand, x + 8, y, z + 8);
+		createRoots(world, rand, x + 8, y, z -8);
+		createRoots(world, rand, x - 8, y, z + 8);
+		createRoots(world, rand, x -8, y, z - 8);
 		
 		//other internal bits like vines and holes needed
 		
@@ -230,10 +241,14 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		placeSpawner(world, rand, x, y + 3, z -7);
 		placeSpawner(world, rand, x, y + 3, z + 7);
 		//1st floor
-		placeSpawner(world, rand, x -5, y + 13, z);
-		placeSpawner(world, rand, x + 5, y + 13, z);
-		placeSpawner(world, rand, x, y + 13, z -5);
-		placeSpawner(world, rand, x, y + 13, z + 5);
+		if(rand.nextBoolean()) {
+			placeSpawner(world, rand, x -5, y + 13, z);
+			placeSpawner(world, rand, x + 5, y + 13, z);
+		}
+		else {
+			placeSpawner(world, rand, x, y + 13, z -5);
+			placeSpawner(world, rand, x, y + 13, z + 5);
+		}
 		
 		//boss mob
 		EntityTarantulaMiniboss boss = new EntityTarantulaMiniboss(world);
@@ -259,6 +274,23 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 								world.setBlock(xx, yy, zz, leaves);
 						}
 					}
+				}
+			}
+		}
+	}
+	
+	public void createRoots(World world, Random rand, int x, int y, int z) {
+		float radius = 4;
+		int height = rand.nextInt(6) + 10;
+		for (int yy = y - 1; yy > y - height; --yy) {
+			for (int i = (int) (radius * - 1); i <= radius; ++i) {
+				for (int j = (int) (radius * - 1); j <= radius; ++j) {
+					double dSq = (i * i) + (j * j);
+					if (Math.round(Math.sqrt(dSq)) <= radius)
+						if(rand.nextInt(5) != 0)
+							world.setBlock(x + i, yy, z + j, log, 15, 2);
+					if (yy %4 == 0)
+						radius -= 0.02;
 				}
 			}
 		}
