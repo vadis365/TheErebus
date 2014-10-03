@@ -208,6 +208,8 @@ tile.erebus.lightningSpeedBlock.name=Lightning Speed Block
 tile.erebus.reinExo.name=Reinforced Exoskeleton Block
 tile.erebus.blockSilk.name=Silk
 
+tile.erebus.kitchenCounter.name=Kitchen Counter
+
 # Items
 item.erebus.encrustedDiamond.name=Encrusted Diamond
 item.erebus.helmetExo.name=Exoskeleton Helmet
@@ -438,6 +440,8 @@ achievement.diamond=I've never seen a diamond in the larva
 achievement.diamond.desc=The beetle larva drops a diamond when you kill it
 achievement.umberstone=Umber-what?
 achievement.umberstone.desc=Mine Umberstone
+achievement.tshirt=Oh come on!
+achievement.tshirt.desc=I killed a boss and all I got was this lousy t-shirt
 
 # Containers
 container.bambooCrate=Bamboo Crate

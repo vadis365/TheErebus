@@ -10,8 +10,9 @@ public class ModAchievements extends AchievementPage{
 	public static Achievement beetleSpecial = new Achievement("beetleSpecial", "beetleSpecial", 1, -3, ModItems.food, welcome).registerStat().setSpecial();
 	public static Achievement diamond = new Achievement("diamond", "diamond", 2, -4, Items.diamond, beetleSpecial).registerStat();
 	public static Achievement umberstone = new Achievement("umberstone", "umberstone", -1, -2, ModBlocks.umberstone, welcome).registerStat();
+	public static Achievement tshirt = new Achievement("tshirt", "tshirt", 3, 3, ModItems.spiderTShirt, welcome).registerStat();
 	
 	public ModAchievements(){
-		super("The Erebus", new Achievement[] {welcome, beetle, beetleSpecial, diamond, umberstone});
+		super("The Erebus", new Achievement[] {welcome, beetle, beetleSpecial, diamond, umberstone, tshirt});
 	}
 }

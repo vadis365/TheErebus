@@ -26,6 +26,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModAchievements;
 import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.api.animationmagic.EnergyType;
 import erebus.api.animationmagic.IEnergyCollector;
 import erebus.core.helper.Utils;
