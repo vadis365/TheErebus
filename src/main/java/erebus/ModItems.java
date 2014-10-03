@@ -47,6 +47,7 @@ import erebus.item.ReinExoskeletonArmor;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
 import erebus.item.SpawnEggs;
+import erebus.item.SpiderTShirt;
 import erebus.item.SprayCan;
 import erebus.item.SprintLeggings;
 import erebus.item.WandOfAnimation;
@@ -158,6 +159,8 @@ public class ModItems
 	public static final Item armorGlider = new ArmorGlider().setUnlocalizedName("erebus.armorGlider").setTextureName("erebus:armorGlider");
 	public static final Item armorGliderPowered = new ArmorGlider().setUnlocalizedName("erebus.armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 	public static final Item mushroomHelm = new MushroomHelm(0).setUnlocalizedName("mushroomHelm").setTextureName("erebus:mushroomHelm");
+	public static final Item spiderTShirt = new SpiderTShirt(1).setUnlocalizedName("erebus.spiderTShirt").setTextureName("erebus:spiderTShirtItem");
+	
 	// CREATIVE
 	public static final Item spawnEggs = new SpawnEggs().setUnlocalizedName("erebus.monsterPlacer").setTextureName("spawn_egg");
 
@@ -173,6 +176,7 @@ public class ModItems
 	public static final Item bucketHoney = new ItemBucket(ModBlocks.honeyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.bucketHoney").setTextureName("erebus:bucketHoney");
 
 	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("erebus.bottleAntiVenom");
+	
 
 	public static void init()
 	{
