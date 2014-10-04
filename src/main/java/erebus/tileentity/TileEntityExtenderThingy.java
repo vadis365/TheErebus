@@ -1,6 +1,7 @@
 package erebus.tileentity;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -58,13 +59,14 @@ public class TileEntityExtenderThingy extends TileEntityBasicInventory
 			if (decreaseInventory(blockID))
 			{
 				if (addToInventory(x, y, z))
-				{
-					worldObj.setBlock(x, y, z, blockID, getMetaFromDirection(dir), 3);
+				{	
 					if (extending)
 					{
+						worldObj.setBlock(x, y, z, blockID, getMetaFromDirection(dir), 3);
 						worldObj.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, extension.stepSound.getBreakSound(), (extension.stepSound.getVolume() + 1.0F) / 2.0F, extension.stepSound.getPitch() * 0.8F);
 					} else
 					{
+						worldObj.setBlock(x, y, z, Blocks.air, getMetaFromDirection(dir), 3);
 						worldObj.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(extension) + (worldObj.getBlockMetadata(x, y, z) << 12));
 					}
 				}
