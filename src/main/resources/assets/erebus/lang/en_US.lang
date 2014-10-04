@@ -159,6 +159,7 @@ tile.erebus.waspSpawner.name=Wasp Spawner
 
 tile.erebus.waspNestBlock.name=Wasp Nest Block
 tile.erebus.blockSpiderSilk.name=Silk
+tile.erebus.tarantulaEgg.name=Tarantula Egg
 
 tile.erebus.thorns.name=Thorns
 tile.erebus.gneiss_0.name=Gneiss
@@ -414,7 +415,7 @@ entity.erebus.punchroom.name=Punchroom
 entity.erebus.crushroom.name=Crushroom
 entity.erebus.blackAnt.name=Black Ant
 entity.erebus.zombieAnt.name=Zombie Ant
-entity.erebus.tarantulaminiboss.name=Fluffy-Wuffy-Kins
+entity.erebus.tarantulaminiboss.name=Tarantula Brood Mother
 entity.erebus.tarantulababy.name=Tarantula Baby
 
 # Fluids
