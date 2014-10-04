@@ -311,7 +311,7 @@ public class RecipeHandler
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreEncrustedDiamond), new ItemStack(ModItems.encrustedDiamond), 1.0F);
 
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), Materials.createStack(Materials.DATA.mudBrick), 0.2F);
-		GameRegistry.addSmelting(Materials.createStack(Materials.DATA.honeyDrip), Materials.createStack(Materials.DATA.nectar), 0.2F);
+		GameRegistry.addSmelting(Materials.createStack(Materials.DATA.nectar), Materials.createStack(Materials.DATA.honeyDrip), 0.2F);
 		if (ConfigHandler.INSTANCE.lead)
 		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreLead), Materials.createStack(Materials.DATA.ingotLead), 1.0F);
