@@ -5,49 +5,59 @@ import java.util.Random;
 import net.minecraft.world.World;
 import erebus.lib.EnumWood;
 
-public class WorldGenBaobabTree extends WorldGenTreeBase
-{
+public class WorldGenBaobabTree extends WorldGenTreeBase {
 
-	public WorldGenBaobabTree()
-	{
+	public WorldGenBaobabTree() {
 		super(EnumWood.Baobab);
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z)
-	{
-		int extraHeight = rand.nextInt(3);
-
-		for (int i = 0; i < 6 + extraHeight; i++)
-		{
-			if (!world.isAirBlock(x, y + i, z))
-			{
-				return false;
-			}
-		}
-
-		for (int i = 0; i < 6 + extraHeight; i++)
-		{
-			world.setBlock(x, y + i, z, log, 0, 2);
-		}
-
-		int leafSizeFactor = world.rand.nextInt(1 + extraHeight), leafSize = 4 + leafSizeFactor;
-		y += 3 + extraHeight;
-
-		for (int h = leafSizeFactor + 3; h > 0; h--)
-		{
-			for (int xx = -(leafSize - h); xx <= leafSize - h; xx++)
-			{
-				for (int zz = -(leafSize - h); zz <= leafSize - h; zz++)
-				{
-					if (world.isAirBlock(x + xx, y + h, z + zz))
-					{
-						world.setBlock(x + xx, y + h, z + zz, leaves, 0, 2);
-					}
+	public boolean generate(World world, Random rand, int x, int y, int z) {
+		int radius = rand.nextInt(2) + 3;
+		int height = rand.nextInt(radius) + 12;
+		int leafRadius = radius;
+		int maxHeight = height + 2;
+		int maxRadius = radius + 2;
+		
+		for (int xx = x - maxRadius; xx <= x + maxRadius; xx++)
+			for (int zz = z - maxRadius; zz <= z + maxRadius; zz++)
+				for (int yy = y + 1; yy < y + maxHeight; yy++) {
+					if (!world.isAirBlock(xx, yy, zz))
+						return false;
 				}
+
+		for (int yy = y; yy < y + height; ++yy) {
+			if (yy % 5 == 0 && radius != 1)
+				--radius;
+
+			for (int i = radius * -1; i <= radius; ++i)
+				for (int j = radius * -1; j <= radius; ++j) {
+					double dSq = (i * i) + (j * j);
+					if (Math.round(Math.sqrt(dSq)) <= radius)
+						world.setBlock(x + i, yy, z + j, log);
+				}
+
+			if (yy == y + height - 1) {
+				createLeaves(world, rand, x + rand.nextInt(5) - 2, yy + 2, z + rand.nextInt(5) - 2, leafRadius - 1);
+				createLeaves(world, rand, x + rand.nextInt(5) - 2, yy + 1, z + rand.nextInt(5) - 2, leafRadius);
+				createLeaves(world, rand, x + rand.nextInt(5) - 2, yy, z + rand.nextInt(5) - 2, leafRadius);
 			}
 		}
 
 		return true;
+	}
+
+	public void createLeaves(World world, Random rand, int x, int y, int z, int radius) {
+		int height = 1;
+		for (int xx = x - radius; xx <= x + radius; xx++)
+			for (int zz = z - radius; zz <= z + radius; zz++)
+				for (int yy = y - height; yy < y + height; yy++) {
+					double dSq = Math.pow(xx - x, 2.0D) + Math.pow(zz - z, 2.0D) + Math.pow(yy - y, 2.0D);
+					if (Math.round(Math.sqrt(dSq)) <= radius)
+						if (rand.nextInt(4) == 0 && Math.round(Math.sqrt(dSq)) < radius)
+							world.setBlock(xx, yy, zz, log);
+						else
+							world.setBlock(xx, yy, zz, leaves);
+				}
 	}
 }

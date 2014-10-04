@@ -15,6 +15,7 @@ import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.plant.WorldGenGiantBaobab;
 import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenBaobabTree;
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 {
@@ -30,6 +31,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
+	private final WorldGenerator genTreeBaobab = new WorldGenBaobabTree();
 
 	@Override
 	public void populate()
@@ -139,6 +141,18 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 			{
 				genTreeAsper.generate(world, rand, xx, yy, zz);
+			}
+		}
+		
+		for (attempt = 0; attempt < 10; attempt++)
+		{
+			xx = x + offsetXZ();
+			yy = rand.nextInt(120);
+			zz = z + offsetXZ();
+
+			if (checkSurface(SurfaceType.GRASS, xx - 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx + 2, yy, zz + 2) && checkSurface(SurfaceType.GRASS, xx  + 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx  - 2, yy, zz + 2))
+			{
+				genTreeBaobab.generate(world, rand, xx, yy, zz);
 			}
 		}
 
