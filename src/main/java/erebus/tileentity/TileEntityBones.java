@@ -4,7 +4,7 @@ public class TileEntityBones extends TileEntityBasicInventory
 {
 	public TileEntityBones()
 	{
-		super(36, "container.bones");
+		super(40, "container.bones");
 	}
 
 	@Override

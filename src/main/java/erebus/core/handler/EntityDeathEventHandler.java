@@ -99,7 +99,7 @@ public class EntityDeathEventHandler
 			{
 				y++;
 			}
-			world.setBlock(x, y, z, ModBlocks.bones);
+			world.setBlock(x, y, z, ModBlocks.bones, 2, 3);
 			TileEntityBones tile = Utils.getTileEntity(world, x, y, z, TileEntityBones.class);
 			if (tile != null)
 			{
