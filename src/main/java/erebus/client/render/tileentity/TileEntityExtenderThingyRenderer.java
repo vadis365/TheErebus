@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.client.model.block.ModelExtenderThingy;
+import erebus.lib.EnumWood;
 import erebus.tileentity.TileEntityExtenderThingy;
 
 @SideOnly(Side.CLIENT)
@@ -39,7 +40,7 @@ public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer
 				GL11.glTranslated(x + 0.5D, y + 0.5625F, z + 0.5D);
 				GL11.glScaled(1.0D, 0.875D, 1.0D);
 				bindTexture(TextureMap.locationBlocksTexture);
-				blockRenderer.renderBlockAsItem(ModBlocks.planks, 9, 1.0F);
+				blockRenderer.renderBlockAsItem(ModBlocks.planks, EnumWood.Bamboo.ordinal(), 1.0F);
 				GL11.glPopMatrix();
 				break;
 			case 1:
@@ -53,7 +54,7 @@ public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer
 				GL11.glTranslated(x + 0.5D, y + 0.4375F, z + 0.5D);
 				GL11.glScaled(1.0D, 0.875D, 1.0D);
 				bindTexture(TextureMap.locationBlocksTexture);
-				blockRenderer.renderBlockAsItem(ModBlocks.planks, 9, 1.0F);
+				blockRenderer.renderBlockAsItem(ModBlocks.planks, EnumWood.Bamboo.ordinal(), 1.0F);
 				GL11.glPopMatrix();
 				break;
 			case 2:
