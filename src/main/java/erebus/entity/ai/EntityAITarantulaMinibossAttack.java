@@ -15,6 +15,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
@@ -109,7 +110,32 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 				entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(attacker), 4.0F);
 				entitylivingbase.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F, 0.1D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F);
 				}
-		} 
+		}
+		
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > d0 + 1D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() < 150){
+			if (attackTick <= 0) {
+				++shouldDo;
+				if (shouldDo == 1)
+					attackTick = 40;	
+				else if (shouldDo <= 2)
+					attackTick = 20;
+				else {
+					attackTick = 20;
+					shouldDo = 0;
+				}
+				if (shouldDo == 1) {	
+					Vec3 look = attacker.getLookVec();
+					double direction = Math.toRadians(attacker.renderYawOffset);
+					EntityPoisonJet jet = new EntityPoisonJet (worldObj, attacker);
+					jet.setPosition(attacker.posX + -Math.sin(direction) * 3.5D, attacker.posY + attacker.height*0.5, attacker.posZ + Math.cos(direction) * 3.5D);
+					jet.motionX = look.xCoord * 1.0;
+					jet.motionY = look.yCoord * 2.2;
+					jet.motionZ = look.zCoord * 1.0;
+					worldObj.spawnEntityInWorld(jet);
+				}
+			}
+		}
+		
 	if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > d0 + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() > 150){
 			if (attackTick <= 0) {
 				++shouldDo;
@@ -145,7 +171,6 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 				}	
 			}
 		}
-
 	
 	protected Entity areaOfEffect() {
 		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(attacker.boundingBox.minX, attacker.boundingBox.minY, attacker.boundingBox.minZ, attacker.boundingBox.maxX, attacker.boundingBox.maxY, attacker.boundingBox.maxZ).expand(8D, 1D, 8D));
@@ -157,7 +182,8 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 						entity.attackEntityFrom(DamageSource.causeMobDamage(attacker), 8.0F);
 						entity.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
 						attacker.playSound("erebus:blamsound", 1.5F, 1.0F);
-						((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 8 * 20, 0));	
+						((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 8 * 20, 0));
+						((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 5 * 20, 0));
 					}
 			}	
 		return null;

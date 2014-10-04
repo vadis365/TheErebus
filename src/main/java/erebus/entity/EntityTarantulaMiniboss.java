@@ -16,6 +16,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -24,6 +25,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAITarantulaMinibossAttack;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
@@ -56,7 +59,7 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
@@ -144,7 +147,7 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 			dataWatcher.updateObject(17, Byte.valueOf((byte) 0));
 		}
 		
-		if (getHealth() <= 150 && getAttackTarget() != null) {
+		if (getHealth() <= 150 && getHealth() > 0 && getAttackTarget() != null) {
 			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
 			forceCollideWithPlayer(getAttackTarget(), distance);
 		}
@@ -192,6 +195,7 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 				worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
 			}
 			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), ModBlocks.tarantulaEgg);
+			Utils.dropStackNoRandom(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ), new ItemStack(ModItems.spiderTShirt));
 			setDead();
 		}
 	}
@@ -239,12 +243,6 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting)
-	{
-		
-	}
-
-	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData)
 	{
 		Object entityLivingData1 = super.onSpawnWithEgg(entityLivingData);
@@ -284,7 +282,7 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
     
 	public void forceCollideWithPlayer(EntityLivingBase entity, float distance)
 	{
-		if (distance > 2.0F && distance < 6.0F)
+		if (distance > 1.0F && distance < 8.0F)
 		{
 			if (onGround)
 			{

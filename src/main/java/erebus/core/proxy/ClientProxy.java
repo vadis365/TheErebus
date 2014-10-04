@@ -84,6 +84,7 @@ import erebus.client.render.entity.RenderMoneySpider;
 import erebus.client.render.entity.RenderMosquito;
 import erebus.client.render.entity.RenderMoth;
 import erebus.client.render.entity.RenderMucusBombPrimed;
+import erebus.client.render.entity.RenderPoisonJet;
 import erebus.client.render.entity.RenderPrayingMantis;
 import erebus.client.render.entity.RenderPunchroom;
 import erebus.client.render.entity.RenderRhinoBeetle;
@@ -179,6 +180,7 @@ import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMosquito;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityMucusBombPrimed;
+import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityPunchroom;
 import erebus.entity.EntityRhinoBeetle;
@@ -322,7 +324,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaMiniboss.class, new RenderTarantulaMiniboss());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaBaby.class, new RenderTarantulaBaby());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaEgg.class, new RenderEntityTarantulaEgg());
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityPoisonJet.class, new RenderPoisonJet());
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarHealing.class, new TileEntityErebusAltarHealingRenderer());
@@ -423,6 +426,12 @@ public class ClientProxy extends CommonProxy
 		if (particleName.equals("smoke"))
 		{
 			fx = new EntitySmokeFX(world, x, y, z, vecX, vecY, vecZ);
+		}
+		
+		if (particleName.equals("poison"))
+		{
+			fx = new EntitySpellParticleFX(world, x, y, z, vecX, vecY, vecZ);
+			((EntityFX)fx).setRBGColorF(0.306F, 0.576F, 0.192F);
 		}
 
 		if (particleName.equals("flame"))
