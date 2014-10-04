@@ -13,9 +13,9 @@ import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.plant.WorldGenBamboo;
-import erebus.world.feature.plant.WorldGenGiantBaobab;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
+import erebus.world.feature.tree.WorldGenGiantBaobab;
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 {

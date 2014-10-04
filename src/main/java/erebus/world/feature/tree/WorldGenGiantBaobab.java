@@ -1,4 +1,4 @@
-package erebus.world.feature.plant;
+package erebus.world.feature.tree;
 
 import java.util.List;
 import java.util.Random;
