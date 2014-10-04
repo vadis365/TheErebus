@@ -144,7 +144,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			}
 		}
 		
-		for (attempt = 0; attempt < 10; attempt++)
+		for (attempt = 0; attempt < 20; attempt++)
 		{
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
