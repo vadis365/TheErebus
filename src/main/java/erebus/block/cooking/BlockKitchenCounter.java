@@ -24,7 +24,7 @@ public class BlockKitchenCounter extends BlockContainer{
 		setHardness(2.0F);
 		setResistance(5.0F);
 		setBlockName("kitchenCounter");
-		setCreativeTab(ModTabs.blocks);
+		//setCreativeTab(ModTabs.blocks);
 	}
 	
 	@Override

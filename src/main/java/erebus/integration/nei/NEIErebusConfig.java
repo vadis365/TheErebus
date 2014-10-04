@@ -33,6 +33,7 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.hideItem(new ItemStack(ModBlocks.honeyBlock));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap3));
 		API.hideItem(new ItemStack(ModBlocks.mushroomCap4));
+		API.hideItem(new ItemStack(ModBlocks.kitchenCounter));
 
 		if (!ConfigHandler.INSTANCE.aluminium)
 		{
