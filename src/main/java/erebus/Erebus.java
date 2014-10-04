@@ -87,7 +87,6 @@ public class Erebus
 		ErebusRecipesHandler.init();
 		TeleporterHandler.init();
 
-		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
 		MinecraftForge.EVENT_BUS.register(new PlayerChangedDimensionEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityPickupEventHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
@@ -98,6 +97,11 @@ public class Erebus
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
+		
+		if (ConfigHandler.INSTANCE.graveMarker)
+		{
+			MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
+		}
 
 		if (ConfigHandler.INSTANCE.randomNames)
 		{
