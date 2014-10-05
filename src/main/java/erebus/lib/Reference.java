@@ -5,7 +5,7 @@ public class Reference
 
 	public static final String MOD_ID = "erebus";
 	public static final String MOD_NAME = "Erebus";
-	public static final String MOD_VERSION = "0.2pre10";
+	public static final String MOD_VERSION = "0.2pre11";
 	public static final String DEPENDENCIES = "required-after:Forge@[10.13.0.1180,);";
 	public static final String SP_CLIENT = "erebus.core.proxy.ClientProxy";
 	public static final String SP_SERVER = "erebus.core.proxy.CommonProxy";
