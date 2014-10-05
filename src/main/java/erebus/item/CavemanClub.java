@@ -1,14 +1,9 @@
 package erebus.item;
 
-import java.util.Random;
-
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.world.World;
 import erebus.ModMaterials;
-import erebus.world.feature.tree.WorldGenBaobabTree;
 
 public class CavemanClub extends ItemSword
 {
