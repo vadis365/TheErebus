@@ -2,6 +2,7 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
@@ -16,6 +17,7 @@ import erebus.entity.EntityPunchroom;
 public class RenderPunchroom extends RenderLiving
 {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/punchroom.png");
+	private static final ResourceLocation texture1 = new ResourceLocation("erebus:textures/entity/punchroomRubby.png");
 
 	public RenderPunchroom()
 	{
@@ -36,6 +38,9 @@ public class RenderPunchroom extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity)
 	{
+		if (((EntityLiving) entity).hasCustomNameTag())
+			if (((EntityLiving) entity).getCustomNameTag() == "Bryuf")
+				return texture1;
 		return texture;
 	}
 }
