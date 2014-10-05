@@ -1,5 +1,12 @@
 package erebus;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -65,7 +72,7 @@ public class Erebus
 		ModBlocks.init();
 		ModItems.init();
 		ModEntities.init();
-		
+
 		AchievementPage.registerAchievementPage(new ModAchievements());
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
@@ -75,8 +82,28 @@ public class Erebus
 	}
 
 	@EventHandler
+	@SuppressWarnings("unchecked")
 	public void init(FMLInitializationEvent event)
 	{
+		// Remove all the door recipes.
+		// This is needed otherwise our doors will not be craftable due to the recipe ordering
+		List<IRecipe> doorRecipes = new ArrayList<IRecipe>();
+		for (IRecipe recipe : (List<IRecipe>) CraftingManager.getInstance().getRecipeList())
+		{
+			if (recipe != null)
+			{
+				ItemStack stack = recipe.getRecipeOutput();
+				if (stack != null && stack.getItem() == Items.wooden_door)
+				{
+					doorRecipes.add(recipe);
+				}
+			}
+		}
+		for (IRecipe recipe : doorRecipes)
+		{
+			CraftingManager.getInstance().getRecipeList().remove(recipe);
+		}
+
 		proxy.registerKeyHandlers();
 		proxy.registerTileEntities();
 		proxy.registerRenderInformation();
@@ -97,7 +124,7 @@ public class Erebus
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
-		
+
 		if (ConfigHandler.INSTANCE.graveMarker)
 		{
 			MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
@@ -119,8 +146,10 @@ public class Erebus
 		}
 
 		ModIntegrationHandler.init();
-
 		ComposterRegistry.init();
+
+		// Add the other door recipes back
+		CraftingManager.getInstance().getRecipeList().addAll(doorRecipes);
 	}
 
 	@EventHandler

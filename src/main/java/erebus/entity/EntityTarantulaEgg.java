@@ -9,7 +9,8 @@ import net.minecraft.world.World;
 
 public class EntityTarantulaEgg extends EntityThrowable
 {
-	public static float rotationticks;
+	public float rotationticks;
+
 	public EntityTarantulaEgg(World world)
 	{
 		super(world);
@@ -56,15 +57,15 @@ public class EntityTarantulaEgg extends EntityThrowable
 
 		//if (mop.entityHit != null && mop.entityHit instanceof EntityPlayer)
 		//{
-			if (!worldObj.isRemote)
+		if (!worldObj.isRemote)
+		{
+			for (int a = 0; a < 4; a++)
 			{
-				for (int a = 0; a < 4; a++)
-				{
-					EntityTarantulaBaby tarantulaBaby = new EntityTarantulaBaby(worldObj);
-					tarantulaBaby.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
-					worldObj.spawnEntityInWorld(tarantulaBaby);
-				}
+				EntityTarantulaBaby tarantulaBaby = new EntityTarantulaBaby(worldObj);
+				tarantulaBaby.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
+				worldObj.spawnEntityInWorld(tarantulaBaby);
 			}
+		}
 		//}
 		setDead();
 		worldObj.playSoundAtEntity(this, getSplatSound(), 1.0F, 1.0F);

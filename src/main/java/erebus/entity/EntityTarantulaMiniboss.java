@@ -136,13 +136,6 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	{
 		super.onUpdate();
 		
-		EnumDifficulty difficulty = worldObj.difficultySetting;
-		if (difficulty == EnumDifficulty.PEACEFUL)
-		{
-			worldObj.difficultySetting = EnumDifficulty.EASY;
-		}
-		worldObj.difficultySetting = difficulty;
-		
 		if(getHealth() <= 150 && getFancyRenderOverlay()){
 			dataWatcher.updateObject(17, Byte.valueOf((byte) 0));
 		}
