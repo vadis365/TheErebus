@@ -26,6 +26,7 @@ import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
 import erebus.core.handler.BucketHandler;
 import erebus.core.handler.EntityDeathEventHandler;
+import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityPickupEventHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.handler.PlayerChangedDimensionEventHandler;
@@ -113,7 +114,8 @@ public class Erebus
 		RecipeHandler.init();
 		ErebusRecipesHandler.init();
 		TeleporterHandler.init();
-
+		
+		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
 		MinecraftForge.EVENT_BUS.register(new PlayerChangedDimensionEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityPickupEventHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
@@ -127,7 +129,7 @@ public class Erebus
 
 		if (ConfigHandler.INSTANCE.graveMarker)
 		{
-			MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
+			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
 		}
 
 		if (ConfigHandler.INSTANCE.randomNames)
