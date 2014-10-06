@@ -1,8 +1,8 @@
 [{
     "modid": "erebus",
 	"name": "Erebus",
-	"description": "Discover a world ruled by insects, the Erebus is a place to explore, mine and build\n\n-Programmers: chylex, ganymedes01, vadis365, iLexiconn!\n\n-Modelers: vadis365, tripleheadedsheep\n\n-Sound designers: voog2",
-	"version": "0.2pre11",
+	"description": "Discover a world ruled by insects, the Erebus is a place to explore, mine and build\n\n-Programmers: chylex, ganymedes01, vadis365, TheCricket26, iLexiconn\n\n-Modelers: vadis365, tripleheadedsheep\n\n-Sound designers: voog2",
+	"version": "0.2pre11a",
 	"mcversion": "1.7.10",
 	"authors": [ "Mod designed by Dylan4Ever" ],
 	"url": "http://www.minecraftforum.net/topic/1652014-/"
