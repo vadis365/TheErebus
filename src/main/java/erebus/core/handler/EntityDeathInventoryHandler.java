@@ -1,13 +1,10 @@
 package erebus.core.handler;
 
-import java.util.ArrayList;
-
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import codechicken.lib.math.MathHelper;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModBlocks;
@@ -34,7 +31,7 @@ public class EntityDeathInventoryHandler
 			int z = MathHelper.floor_double(player.posZ);
 			int playerFacing = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			byte directionMeta = 0;
-			
+
 			if (!world.isAirBlock(x, y, z))
 			{
 				y++;
@@ -80,17 +77,5 @@ public class EntityDeathInventoryHandler
 				tile.setOwner("R.I.P. " + player.getCommandSenderName());
 			}
 		}
-	}
-
-	private boolean dropedItem(ArrayList<EntityItem> drops, ItemStack target)
-	{
-		for (EntityItem entity : drops)
-		{
-			if (entity != null && Utils.areStacksTheSame(entity.getEntityItem(), target, false))
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 }
