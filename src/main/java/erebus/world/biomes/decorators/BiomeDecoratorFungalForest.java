@@ -36,9 +36,9 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
 			byte direction = (byte)rand.nextInt(2);
-			xx = x + offsetXZ();
+			xx = x + 16;
 			yy = rand.nextInt(118);
-			zz = z + offsetXZ();
+			zz = z + 16;
 			
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 			{
