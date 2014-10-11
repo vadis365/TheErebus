@@ -34,8 +34,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager
 	{
 		biomesToSpawnIn = new ArrayList(allowedBiomes);
 		biomeCache = new BiomeCache(this);
-		GenLayer[] layers = GenLayerErebus.initializeAllBiomeGenerators(world.getSeed(), world.getWorldInfo().getTerrainType());
-		biomeGenLayer = getModdedBiomeGenerators(world.getWorldInfo().getTerrainType(), world.getSeed(), layers)[1];
+		biomeGenLayer = GenLayerErebus.initializeAllBiomeGenerators(world.getSeed(), world.getWorldInfo().getTerrainType())[1];
 	}
 
 	@Override
