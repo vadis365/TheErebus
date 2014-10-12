@@ -1,127 +1,130 @@
 package erebus.tileentity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
+import erebus.ModFluids;
 
-public class TileEntityKitchenCounter extends TileEntity implements ISidedInventory{
+
+public class TileEntityKitchenCounter extends TileEntityBasicInventory implements IFluidHandler{
 	
-	private ItemStack[] inventory;
+	protected final FluidTank fluidTank;
+	public TileEntityKitchenCounter instance = this;
 	
 	public TileEntityKitchenCounter(){
-		inventory = new ItemStack[9];
-	}
-
-	@Override
-	public int getSizeInventory() {
-		return inventory.length;
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int slot) {
-		return inventory[slot];
-	}
-
-	@Override
-	public ItemStack decrStackSize(int slot, int ammount) {
-		ItemStack stack = getStackInSlot(slot);
-		
-		if(stack != null){
-			if(stack.stackSize <= ammount){
-				setInventorySlotContents(slot, null);
-			} else {
-				stack = stack.splitStack(ammount);
-				
-				if(stack.stackSize == 0){
-					setInventorySlotContents(slot, null);
-				}
-			}
-		}
-		
-		return stack;
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		ItemStack stack = getStackInSlot(slot);
-		
-		if(stack != null){
-			setInventorySlotContents(slot, null);
-		}
-		
-		return stack;
-	}
-
-	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		inventory[slot] = stack;
-		
-		if(stack != null && stack.stackSize > getInventoryStackLimit()){
-			stack.stackSize = getInventoryStackLimit();
-		}
-	}
-
-	@Override
-	public String getInventoryName() {
-		return "container.kitchencounter";
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
-
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
-	}
-
-	@Override
-	public void openInventory() {
-		
-	}
-
-	@Override
-	public void closeInventory() {
-		
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return false;
-	}
-
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
-		return null;
-	}
-
-	@Override
-	public boolean canInsertItem(int slot, ItemStack item, int side) {
-		return false;
-	}
-
-	@Override
-	public boolean canExtractItem(int slot, ItemStack item, int side) {
-		return false;
-	}
-	
-	@Override
-	public void writeToNBT(NBTTagCompound nbt){
-		super.writeToNBT(nbt);
-		
+		super(7, "kitchenCounter");
+		this.fluidTank = new FluidTank(16000);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
+		this.fluidTank.readFromNBT(nbt.getCompoundTag("fluidTank"));
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
+		NBTTagCompound fluidTag = new NBTTagCompound();
+		this.fluidTank.writeToNBT(fluidTag);
+		nbt.setTag("fluidTank", fluidTag);
+	}
+	
+	public FluidTank getFluidTank(){
+		return this.fluidTank;
+	}
+	
+	public FluidStack getFluidStackFromTank(){
+		return getFluidTank().getFluid();
+	}
+	
+	public Fluid getFluidFromTank(){
+		return getFluidStackFromTank().getFluid();
+	}
+	
+	public int getTankAmount(){
+		return getFluidTank().getFluidAmount();
+	}
+	
+	public int gaugeLiquidScaled(int par1){
+		if(getFluidTank().getFluidAmount() <= 0){
+			return 0;
+		}
+		
+		return getFluidTank().getFluidAmount() * par1 / getFluidTank().getCapacity();
+	}
+	
+	public boolean needsFluid(){
+		return getFluidTank().getFluidAmount() <= getFluidTank().getCapacity();
+	}
+	
+	@Override
+	public boolean canUpdate(){
+		return true;
 	}
 
+	@Override
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+		if(canFill(from, resource.getFluid())){
+			return getFluidTank().fill(resource, doFill);
+		}
+		return 0;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+		if((resource == null) || (!resource.isFluidEqual(getFluidTank().getFluid()))){
+			return null;
+		}
+		
+		if(!canDrain(from, resource.getFluid())){
+			return null;
+		}
+		
+		return getFluidTank().drain(resource.amount, doDrain);
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		return getFluidTank().drain(maxDrain, doDrain);
+	}
+
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid) {
+		if(fluid == ModFluids.honey || fluid ==  ModFluids.beetleJuice || fluid == ModFluids.antiVenom || fluid.getBlock() == Blocks.water){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+		return true;
+	}
+
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+		return new FluidTankInfo[] {getFluidTank().getInfo()};
+	}
+	
+	@Override
+	public Packet getDescriptionPacket(){
+		NBTTagCompound tag = new NBTTagCompound();
+		writeToNBT(tag);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, tag);
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager network, S35PacketUpdateTileEntity packet){
+		readFromNBT(packet.func_148857_g());
+	}
 }

@@ -27,7 +27,7 @@ public class EntityDeathInventoryHandler
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 
 			int x = MathHelper.floor_double(player.posX);
-			int y = MathHelper.floor_double(player.posY);
+			int y = MathHelper.floor_double(player.posY - 1);
 			int z = MathHelper.floor_double(player.posZ);
 			int playerFacing = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			byte directionMeta = 0;
