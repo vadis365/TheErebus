@@ -146,9 +146,9 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 		
 		for (attempt = 0; attempt < 20; attempt++)
 		{
-			xx = x + offsetXZ();
+			xx = x + rand.nextInt(13) + 9;
 			yy = rand.nextInt(120);
-			zz = z + offsetXZ();
+			zz = z + rand.nextInt(13) + 9;
 
 			if (checkSurface(SurfaceType.GRASS, xx - 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx + 2, yy, zz + 2) && checkSurface(SurfaceType.GRASS, xx  + 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx  - 2, yy, zz + 2))
 			{
