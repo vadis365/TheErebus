@@ -4,8 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import erebus.ModBlocks;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityLocust;
@@ -18,7 +16,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock
 
 	public EntityAIEatCrops(EntityLiving entity, double moveSpeed, int eatSpeed)
 	{
-		super(entity, Blocks.wheat, 7, new ItemStack(Items.wheat_seeds), moveSpeed, eatSpeed);
+		super(entity, Blocks.wheat, 7, moveSpeed, eatSpeed);
 		this.moveSpeed = moveSpeed;
 	}
 

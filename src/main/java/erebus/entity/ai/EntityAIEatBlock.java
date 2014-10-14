@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import erebus.core.helper.Spiral;
@@ -25,7 +25,6 @@ public abstract class EntityAIEatBlock extends EntityAIBase
 	protected final EntityLiving entity;
 	private final int maxGrowthMetadata;
 	private final Block block;
-	private final ItemStack seed;
 
 	private boolean hasTarget;
 	public int cropX;
@@ -35,20 +34,14 @@ public abstract class EntityAIEatBlock extends EntityAIBase
 	private int eatTicks;
 	private static final List<Point> spiral = new Spiral(16, 16).spiral();
 
-	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed)
+	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, double moveSpeed, int eatSpeed)
 	{
 		this.entity = entity;
 		this.maxGrowthMetadata = maxGrowthMetadata;
 		this.block = block;
-		this.seed = seed;
 		hasTarget = false;
 		spiralIndex = 0;
 		EAT_SPEED = eatSpeed * 20;
-	}
-
-	public EntityAIEatBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float moveSpeed, int eatSpeed)
-	{
-		this(entity, block, maxGrowthMetadata, null, moveSpeed, eatSpeed);
 	}
 
 	@Override
@@ -110,9 +103,9 @@ public abstract class EntityAIEatBlock extends EntityAIBase
 					} else if (EAT_SPEED <= eatTicks)
 					{
 						entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
-						if (seed != null)
+						if (getTargetBlock() != Blocks.tallgrass)
 						{
-							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
+							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, new ItemStack(getTargetBlock().getItemDropped(entity.worldObj.getBlockMetadata(cropX, cropY, cropZ), entity.worldObj.rand, 0), 1));
 						}
 						hasTarget = false;
 						eatTicks = 0;

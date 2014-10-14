@@ -20,7 +20,7 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock
 
 	public EntityAIEatWoodenItem(EntityAnimal entity, double moveSpeed, int eatSpeed)
 	{
-		super(entity, null, 0, null, moveSpeed, eatSpeed);
+		super(entity, null, 0, moveSpeed, eatSpeed);
 		this.moveSpeed = moveSpeed;
 	}
 
