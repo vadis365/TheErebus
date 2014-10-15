@@ -9,7 +9,7 @@ import erebus.core.handler.configs.ConfigHandler;
 public class PlayerChangedDimensionEventHandler {
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void entityJoin(PlayerChangedDimensionEvent event){
-		if(event.player.dimension == ConfigHandler.INSTANCE.erebusDimensionID){
+		if(event.fromDim == 0 && event.toDim == ConfigHandler.INSTANCE.erebusDimensionID){
 			event.player.triggerAchievement(ModAchievements.welcome);
 		}
 	}

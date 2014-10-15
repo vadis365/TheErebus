@@ -31,7 +31,7 @@ final class TeleporterErebus extends Teleporter
 		if (!placeInExistingPortal(entity, x, y, z, par8))
 		{
 			makePortal(entity);
-			placeInExistingPortal(entity, x, y, z, par8);
+			placeInExistingPortal(entity, x + 1, y - 2, z + 1, par8);
 		}
 	}
 
