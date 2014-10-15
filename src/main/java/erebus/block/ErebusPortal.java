@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
 
 public class ErebusPortal extends Block
@@ -151,7 +152,7 @@ public class ErebusPortal extends Block
 			}
 			if (entity != null)
 			{
-				entity.timeUntilPortal = 300; //or set this to an arbitrary amount
+				entity.timeUntilPortal = ConfigHandler.INSTANCE.portalCooldown * 20; //or set this to an arbitrary amount
 			}
 		}
 	}
