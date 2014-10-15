@@ -26,17 +26,17 @@ final class TeleporterErebus extends Teleporter
 	}
 
 	@Override
-	public void placeInPortal(Entity entity, double x, double y, double z, float par8)
+	public void placeInPortal(Entity entity, double x, double y, double z, float rotationYaw)
 	{
-		if (!placeInExistingPortal(entity, x, y, z, par8))
+		if (!placeInExistingPortal(entity, x, y, z, rotationYaw))
 		{
 			makePortal(entity);
-			placeInExistingPortal(entity, x + 1, y - 2, z + 1, par8);
+			placeInExistingPortal(entity, x, y, z, rotationYaw);
 		}
 	}
 
 	@Override
-	public boolean placeInExistingPortal(Entity entity, double x, double y, double z, float par8)
+	public boolean placeInExistingPortal(Entity entity, double x, double y, double z, float rotationYaw)
 	{
 		int checkRadius = 32;
 		double distToPortal = -1.0;
