@@ -149,6 +149,10 @@ public class ErebusPortal extends Block
 			{
 				TeleporterHandler.transferToOverworld(entity);
 			}
+			if (entity != null)
+			{
+				entity.timeUntilPortal = entity.getPortalCooldown(); //or set this to an arbitrary amount
+			}
 		}
 	}
 
