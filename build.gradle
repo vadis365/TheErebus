@@ -22,7 +22,7 @@ buildscript
 
 apply plugin: 'forge'
 
-version = "0.2pre11b"
+version = "0.2pre11c"
 group= "erebus"
 archivesBaseName = "TheErebus"
 
