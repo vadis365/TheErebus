@@ -152,7 +152,7 @@ public class ErebusPortal extends Block
 			}
 			if (entity != null)
 			{
-				entity.timeUntilPortal = ConfigHandler.INSTANCE.portalCooldown * 20; //or set this to an arbitrary amount
+				entity.timeUntilPortal = ConfigHandler.INSTANCE.portalCooldown * 20;
 			}
 		}
 	}
