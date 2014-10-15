@@ -151,7 +151,7 @@ public class ErebusPortal extends Block
 			}
 			if (entity != null)
 			{
-				entity.timeUntilPortal = entity.getPortalCooldown(); //or set this to an arbitrary amount
+				entity.timeUntilPortal = 300; //or set this to an arbitrary amount
 			}
 		}
 	}
