@@ -94,7 +94,44 @@ final class TeleporterErebus extends Teleporter
 			}
 
 			entity.motionX = entity.motionY = entity.motionZ = 0.0;
-			entity.setLocationAndAngles(posX + 0.5, posY + 0.5, posZ + 0.5, entity.rotationYaw, entity.rotationPitch);
+			int yaw = (int) entity.rotationYaw;
+			yaw += 22;
+			yaw %= 360;
+			
+			if (yaw < 0)
+			{
+				yaw += 360;
+			}
+			
+			int facing = yaw / 90;
+			float entityRotation = 0;
+			double offsetX = 0;
+			double offsetZ = 0;
+			
+			switch (facing)
+			{
+				case 0:
+					entityRotation = 180;
+					offsetX =  0.5D;
+					offsetZ =  -0.5D;
+					break;
+				case 1:
+					entityRotation = 270;
+					offsetX =  1.5D;
+					offsetZ =  0.5D;
+					break;
+				case 2:
+					entityRotation = 0;
+					offsetX =  0.5D;
+					offsetZ =  1.5D;
+					break;
+				case 3:
+					entityRotation = 90;
+					offsetX =  -0.5D;
+					offsetZ =  0.5D;
+					break;
+			}
+			entity.setLocationAndAngles(posX + offsetX, posY, posZ + offsetZ, entityRotation, entity.rotationPitch);
 			return true;
 		}
 
