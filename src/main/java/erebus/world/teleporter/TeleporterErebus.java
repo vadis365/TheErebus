@@ -94,21 +94,13 @@ final class TeleporterErebus extends Teleporter
 			}
 
 			entity.motionX = entity.motionY = entity.motionZ = 0.0;
-			int yaw = (int) entity.rotationYaw;
-			yaw += 22;
-			yaw %= 360;
-			
-			if (yaw < 0)
-			{
-				yaw += 360;
-			}
-			
-			int facing = yaw / 90;
+
+			int entityFacing = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			float entityRotation = 0;
 			double offsetX = 0;
 			double offsetZ = 0;
-			
-			switch (facing)
+
+			switch (entityFacing)
 			{
 				case 0:
 					entityRotation = 180;
@@ -131,6 +123,7 @@ final class TeleporterErebus extends Teleporter
 					offsetZ =  0.5D;
 					break;
 			}
+
 			entity.setLocationAndAngles(posX + offsetX, posY, posZ + offsetZ, entityRotation, entity.rotationPitch);
 			return true;
 		}
