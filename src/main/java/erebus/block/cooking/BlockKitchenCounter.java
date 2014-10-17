@@ -7,12 +7,18 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityKitchenCounter;
 
@@ -29,13 +35,28 @@ public class BlockKitchenCounter extends BlockContainer{
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float x1, float y1, float z1){
 		TileEntity tile = world.getTileEntity(x, y, z);
-		
-		if(tile == null || player.isSneaking()){
+		if(tile instanceof TileEntityKitchenCounter){
+			TileEntityKitchenCounter kitchen = (TileEntityKitchenCounter) tile;
+			
+			if(player.getItemInUse() == new ItemStack(Items.milk_bucket)){
+				kitchen.addMilk(1000);
+			} else if(player.getItemInUse() == new ItemStack(ModItems.bambucketHoney) || player.getItemInUse() == new ItemStack(ModItems.bucketHoney)){
+				kitchen.addHoney(1000);
+			} else if(player.getItemInUse() == new ItemStack(ModItems.bambucketBeetleJuice) || player.getItemInUse() == new ItemStack(ModItems.bucketBeetleJuice)){
+				kitchen.addBeetleJuice(1000);
+			} else if(player.getItemInUse() == new ItemStack(ModItems.bambucketAntiVenom) || player.getItemInUse() == new ItemStack(ModItems.bucketBeetleJuice)){
+				kitchen.addAntiVenom(1000);
+			}
+			
+			if(tile == null || player.isSneaking()){
+				return false;
+			}
+			
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_KITCHEN_COUNTER, world, x, y, z);
+			return true;
+		} else {
 			return false;
 		}
-		
-		player.openGui(Erebus.instance, CommonProxy.GUI_ID_KITCHEN_COUNTER, world, x, y, z);
-		return true;
 	}
 	
 	@Override
@@ -96,6 +117,13 @@ public class BlockKitchenCounter extends BlockContainer{
 	@Override
 	public TileEntity createNewTileEntity(World world, int id) {
 		return new TileEntityKitchenCounter();
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return ModBlocks.umberstone.getIcon(side, 0);
 	}
 
 }

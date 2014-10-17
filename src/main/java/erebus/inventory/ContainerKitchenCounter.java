@@ -14,11 +14,13 @@ public class ContainerKitchenCounter extends Container{
 	public ContainerKitchenCounter(InventoryPlayer inventory, TileEntityKitchenCounter tileentity) {
 		counter = tileentity;
 		
-		for(int q = 0; q < 1; q++){
-			for(int w = 0; w < 4; w++){
-				addSlotToContainer(new Slot(tileentity, w + q * 3, 62 + w * 18, 17 + q * 18));
-			}
-		}
+		addSlotToContainer(new Slot(tileentity, 0, 47, 9));
+		addSlotToContainer(new Slot(tileentity, 1, 113, 9));
+		
+		addSlotToContainer(new Slot(tileentity, 2, 68, 30));
+		addSlotToContainer(new Slot(tileentity, 3, 92, 30));
+		
+		addSlotToContainer(new Slot(tileentity, 4, 80, 64));
 		
 		bindPlayerInventory(inventory);
 	}

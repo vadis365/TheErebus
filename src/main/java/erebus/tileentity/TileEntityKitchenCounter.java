@@ -24,7 +24,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	public TileEntityKitchenCounter instance = this;
 	
 	public TileEntityKitchenCounter(){
-		super(4, "container.kitchenCounter");
+		super(5, "container.kitchenCounter");
 		this.honeyTank = new FluidTank(16000);
 		this.milkTank = new FluidTank(16000);
 		this.beetleTank = new FluidTank(16000);

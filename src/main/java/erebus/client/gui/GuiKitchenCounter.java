@@ -35,8 +35,7 @@ public class GuiKitchenCounter extends GuiContainer{
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2){
-		fontRendererObj.drawString("Kitchen Counter", 8, 6, 4210752);
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+		
 	}
 	
 	public void drawFluid(FluidStack fluid, int x, int y, int width, int height, int maxCapacity){
