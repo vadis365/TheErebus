@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import erebus.Erebus;
+import erebus.ModTabs;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityKitchenCounter;
 
@@ -23,7 +24,7 @@ public class BlockKitchenCounter extends BlockContainer{
 		setHardness(2.0F);
 		setResistance(5.0F);
 		setBlockName("kitchenCounter");
-		//setCreativeTab(ModTabs.blocks);
+		setCreativeTab(ModTabs.blocks);
 	}
 	
 	@Override

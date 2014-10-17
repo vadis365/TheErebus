@@ -1,11 +1,12 @@
 package erebus.client.render.item;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
 import erebus.client.model.block.ModelKitchenCounter;
 import erebus.lib.Reference;
 
@@ -26,6 +27,7 @@ public class ItemKitchenCounterRenderer implements IItemRenderer{
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
 		switch(type){
 			case ENTITY:
 				renderBlock(0.0F, 1.0F, 0.0F);
@@ -48,7 +50,6 @@ public class ItemKitchenCounterRenderer implements IItemRenderer{
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glScaled(-1, -1, 1);
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
 		model.renderAll();
 		GL11.glPopMatrix();
 	}
