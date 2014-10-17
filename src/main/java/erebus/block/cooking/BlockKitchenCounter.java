@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.ModTabs;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityKitchenCounter;
 
@@ -29,7 +30,7 @@ public class BlockKitchenCounter extends BlockContainer{
 		setHardness(2.0F);
 		setResistance(5.0F);
 		setBlockName("kitchenCounter");
-		//setCreativeTab(ModTabs.blocks);
+		setCreativeTab(ModTabs.blocks);
 	}
 	
 	@Override

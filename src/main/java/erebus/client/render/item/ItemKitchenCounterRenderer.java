@@ -20,8 +20,7 @@ public class ItemKitchenCounterRenderer implements IItemRenderer {
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return true;
 	}
 
@@ -50,7 +49,6 @@ public class ItemKitchenCounterRenderer implements IItemRenderer {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glScaled(-1, -1, 1);
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
 		model.renderAll();
 		GL11.glPopMatrix();
 	}
