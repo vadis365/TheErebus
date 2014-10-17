@@ -77,6 +77,21 @@ public class BlockKitchenCounter extends BlockContainer{
 			}
 		}
 	}
+	
+	@Override
+	public int getRenderType(){
+		return -1;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(){
+		return false;
+	}
+	
+	@Override
+	public boolean renderAsNormalBlock(){
+		return false;
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int id) {

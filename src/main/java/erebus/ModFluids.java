@@ -21,6 +21,7 @@ public class ModFluids
 	public static Fluid honey = new Fluid("honey").setDensity(6000).setViscosity(6000).setUnlocalizedName("honey");
 	public static Fluid antiVenom = new Fluid("antiVenom").setViscosity(2000).setUnlocalizedName("antiVenom");
 	public static Fluid beetleJuice = new Fluid("beetleJuice").setUnlocalizedName("beetleJuice");
+	public static Fluid milk = new Fluid("milk").setUnlocalizedName("milk");
 
 	private ModFluids()
 	{

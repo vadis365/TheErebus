@@ -15,7 +15,7 @@ public class ContainerKitchenCounter extends Container{
 		counter = tileentity;
 		
 		for(int q = 0; q < 1; q++){
-			for(int w = 0; w < 7; w++){
+			for(int w = 0; w < 4; w++){
 				addSlotToContainer(new Slot(tileentity, w + q * 3, 62 + w * 18, 17 + q * 18));
 			}
 		}
