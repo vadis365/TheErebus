@@ -2,17 +2,23 @@ package erebus.block.cooking;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import erebus.Erebus;
+import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityKitchenCounter;
@@ -97,6 +103,13 @@ public class BlockKitchenCounter extends BlockContainer{
 	@Override
 	public TileEntity createNewTileEntity(World world, int id) {
 		return new TileEntityKitchenCounter();
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return ModBlocks.umberstone.getIcon(side, 0);
 	}
 
 }
