@@ -8,15 +8,15 @@ import erebus.core.helper.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class StoveRecipe {
-	private static final List<StoveRecipe> recipes = new ArrayList<StoveRecipe>();
+public class KitchenCounterRecipe {
+	private static final List<KitchenCounterRecipe> recipes = new ArrayList<KitchenCounterRecipe>();
 	
 	public static void addRecipe(ItemStack output, Object... input){
-		recipes.add(new StoveRecipe(output, input));
+		recipes.add(new KitchenCounterRecipe(output, input));
 	}
 	
 	public static ItemStack getOutput(ItemStack... input){
-		for(StoveRecipe recipe : recipes){
+		for(KitchenCounterRecipe recipe : recipes){
 			if(recipe.matches(input)){
 				return recipe.getOutput();
 			}
@@ -25,19 +25,19 @@ public class StoveRecipe {
 		return null;
 	}
 	
-	public static List<StoveRecipe> getRecipeList(){
+	public static List<KitchenCounterRecipe> getRecipeList(){
 		return Collections.unmodifiableList(recipes);
 	}
 	
 	private final ItemStack output;
 	private final Object[] input;
 	
-	private StoveRecipe(ItemStack output, Object... input){
+	private KitchenCounterRecipe(ItemStack output, Object... input){
 		this.output =ItemStack.copyItemStack(output);
 		this.input = new Object[input.length];
 		
 		if(input.length > 3){
-			throw new IllegalArgumentException("Input must be 1 to 3.");
+			throw new IllegalArgumentException("Input must be 1 to 4.");
 		}
 		
 		for(int c = 0; c < input.length; c++){
