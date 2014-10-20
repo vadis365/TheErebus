@@ -30,65 +30,13 @@ public class GuiKitchenCounter extends GuiContainer{
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		//drawFluid(kitchen.getFluidTank().getFluid(), x + 104, y + 122, 16, 58, 0x404040);
+		
+		int honeySize = kitchen.getScaledHoneyAmount(65);
+		drawTexturedModalRect(x + 10, y + 75 - honeySize, 176, 96 - honeySize, 18, honeySize);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2){
 		
-	}
-	
-	public void drawFluid(FluidStack fluid, int x, int y, int width, int height, int maxCapacity){
-		if(fluid == null || fluid.getFluid() == null){
-			return;
-		}
-		
-		IIcon icon = fluid.getFluid().getFlowingIcon();
-		mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-		setGLColorFromInt(fluid.getFluid().getColor(fluid));
-		int fullX = width / 16;
-		int fullY = height / 16;
-		int lastX = width - fullX * 16;
-		int lastY = height - fullY * 16;
-		int level = fluid.amount * height / maxCapacity;
-		int fullLvl = (height - level) / 16;
-		int lastLvl = (height - level) - fullLvl * 16;
-		
-		for(int c= 0; c < fullX; c++){
-			for(int d = 0; d < fullY; d++){
-				if(d >= fullLvl){
-					drawCutIcon(icon, x + c * 16, y + d * 16, 16, 16, d == fullLvl ? lastLvl : 0);
-				}
-			}
-		}
-		
-		for(int c = 0; c < fullX; c++){
-			drawCutIcon(icon, x + c * 16, y + fullY * 16, 16, lastY, fullLvl == fullY ? lastLvl : 0);
-		}
-		
-		for(int c = 0; c < fullY; c++){
-			if(c >= fullLvl){
-				drawCutIcon(icon, x + fullX * 16, y + c * 16, lastX, 16, c == fullLvl ? lastLvl : 0);
-			}
-		}
-		
-		drawCutIcon(icon, x + fullX * 16, y + fullY * 16, lastX, lastY, fullLvl == fullY ? lastLvl : 0);	
-	}
-	
-	private void drawCutIcon(IIcon icon, int x, int y, int width, int height, int cut){
-		Tessellator tess = Tessellator.instance;
-		tess.startDrawingQuads();
-		tess.addVertexWithUV(x, y + height, zLevel, icon.getMinU(), icon.getInterpolatedV(height));
-		tess.addVertexWithUV(x + width, y + height, zLevel, icon.getInterpolatedU(width), icon.getInterpolatedV(cut));
-		tess.addVertexWithUV(x + width, y + cut, zLevel, icon.getInterpolatedU(width), icon.getInterpolatedV(cut));
-		tess.addVertexWithUV(x, y + cut, zLevel, icon.getMinU(), icon.getInterpolatedV(cut));
-		tess.draw();
-	}
-	
-	private static void setGLColorFromInt(int color){
-		float red = (color >> 16 & 255) / 255.0F;
-		float green = (color >> 8 & 255) / 255.0F;
-		float blue = (color & 255) / 255.0F;
-		GL11.glColor4f(red, green, blue, 1.0F);
 	}
 }

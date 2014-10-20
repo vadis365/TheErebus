@@ -112,6 +112,42 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		return antiVenomTank.getFluid();
 	}
 	
+	public int getHoneyAmount(){
+		return honeyTank.getFluidAmount();
+	}
+	
+	public int getMilkAmount(){
+		return milkTank.getFluidAmount();
+	}
+	
+	public int getBeetleJuiceAmount(){
+		return beetleTank.getFluidAmount();
+	}
+	
+	public int getAntiVenomAmount(){
+		return antiVenomTank.getFluidAmount();
+	}
+	
+	public int getTanksFullValue(){
+		return honeyTank.getCapacity();
+	}
+	
+	public int getScaledHoneyAmount(int scale){
+		return honeyTank.getFluid() != null ? (int) ((float) honeyTank.getFluid().amount / (float) honeyTank.getCapacity() * scale) : 0;
+	}
+	
+	public int getScaledMilkAmount(int scale){
+		return milkTank.getFluid() != null ? (int) ((float) milkTank.getFluid().amount / (float) milkTank.getCapacity() * scale) : 0;
+	}
+	
+	public int getScaledBeetleJuiceAmount(int scale){
+		return beetleTank.getFluid() != null ? (int) ((float) beetleTank.getFluid().amount / (float) beetleTank.getCapacity() * scale) : 0;
+	}
+	
+	public int getScaledAntiVenomAmount(int scale){
+		return antiVenomTank.getFluid() != null ? (int) ((float) antiVenomTank.getFluid().amount / (float) antiVenomTank.getCapacity() * scale) : 0;
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
