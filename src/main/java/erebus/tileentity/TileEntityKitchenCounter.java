@@ -1,5 +1,6 @@
 package erebus.tileentity;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -12,6 +13,10 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import erebus.ModFluids;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketKitchenCounter;
+import erebus.network.client.PacketKitchenCounterTimer;
+import erebus.recipes.KitchenCounterRecipe;
 
 
 public class TileEntityKitchenCounter extends TileEntityBasicInventory implements IFluidHandler{
@@ -20,6 +25,11 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	protected final FluidTank milkTank;
 	protected final FluidTank beetleTank;
 	protected final FluidTank antiVenomTank;
+	
+	protected ItemStack output = null;
+	public int time = 0;
+	
+	private static final int MAX_TIME = 450;
 	
 	public TileEntityKitchenCounter instance = this;
 	
@@ -192,7 +202,9 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	
 	@Override
 	public void onDataPacket(NetworkManager network, S35PacketUpdateTileEntity packet){
-		readFromNBT(packet.func_148857_g());
+		if(packet.func_148853_f() == 0){
+			readFromNBT(packet.func_148857_g());
+		}
 	}
 	
 	private void sendUpdatesToClients(){
@@ -214,6 +226,66 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		} else {
 			return 0;
 		}
+	}
+	
+	@Override
+	public void markDirty(){
+		super.markDirty();
+		
+		output = KitchenCounterRecipe.getOutput(inventory[0], inventory[1], inventory[2], inventory[4]);
+		
+		if(worldObj != null && !worldObj.isRemote){
+			NBTTagCompound nbt = new NBTTagCompound();
+			writeToNBT(nbt);
+			PacketPipeline.sendToAll(new PacketKitchenCounter(xCoord, yCoord, zCoord, nbt));
+		}
+	}
+	
+	@Override
+	public void updateEntity(){
+		if(worldObj.isRemote){
+			return;
+		}
+		
+		if(output == null){
+			time = 0;
+		} else {
+			time++;
+			PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
+			
+			if(time == 90 || time == 270 || time == 450){
+				worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 4);
+				
+				if(time >= MAX_TIME){
+					worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 0);
+				}
+			}
+			
+			if(time >= MAX_TIME){
+				inventory[4] = ItemStack.copyItemStack(output);
+				
+				for(int c = 0; c < 4; c++){
+					if(inventory[c] != null){
+						if(--inventory[c].stackSize <= 0){
+							inventory[c] = null;
+						}
+					}
+				}
+				
+				time = 0;
+				markDirty();
+			}
+		}
+	}
+	
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack stack){
+		return slot != 3;
+	}
+	
+	@Override
+	public boolean canExtractItem(int slot, ItemStack stack, int side){
+		return slot == 3;
 	}
 
 	@Override

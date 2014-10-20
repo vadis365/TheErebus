@@ -1,6 +1,7 @@
 package erebus.recipes;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import erebus.ModBlocks;
 import erebus.ModItems;
@@ -12,6 +13,7 @@ public class ErebusRecipesHandler
 	{
 		craftingAltar();
 		offeringAltar();
+		kitchenCounter();
 	}
 
 	private static void offeringAltar()
@@ -25,6 +27,11 @@ public class ErebusRecipesHandler
 		CraftingAltarRecipe.addRecipe(new ItemStack(ModBlocks.lightningSpeedBlock), new ItemStack(ModBlocks.velocityBlock), getArray(Materials.createStack(Materials.DATA.supernaturalvelocity), 8));
 		CraftingAltarRecipe.addRecipe(new ItemStack(ModItems.witherWebSlinger), new ItemStack(ModItems.webSlinger), new ItemStack(Blocks.soul_sand), Materials.createStack(Materials.DATA.poisonGland), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb));
 		CraftingAltarRecipe.addRecipe(new ItemStack(ModBlocks.umberGolemStatue), Materials.createStack(Materials.DATA.crimsonHeart), Materials.createStack(Materials.DATA.umberGolemCore), Materials.createStack(Materials.DATA.umberGolemClaw), Materials.createStack(Materials.DATA.umberGolemClaw), Materials.createStack(Materials.DATA.umberGolemHead), Materials.createStack(Materials.DATA.umberGolemLegs));
+	}
+	
+	private static void kitchenCounter()
+	{
+		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.whetstone), new ItemStack(Blocks.pumpkin), new ItemStack(Items.melon));
 	}
 
 	private static Object[] getArray(Object base, int size)
