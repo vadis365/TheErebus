@@ -1,13 +1,8 @@
 package erebus.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
@@ -16,6 +11,7 @@ import erebus.tileentity.TileEntityKitchenCounter;
 
 public class GuiKitchenCounter extends GuiContainer{
 	private TileEntityKitchenCounter kitchen;
+	
 	private static final ResourceLocation gui = new ResourceLocation("erebus:textures/gui/container/kitchenCounter.png");
 	
 	public GuiKitchenCounter(InventoryPlayer inv, TileEntityKitchenCounter tile) {
@@ -31,8 +27,9 @@ public class GuiKitchenCounter extends GuiContainer{
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 		
-		int honeySize = kitchen.getScaledHoneyAmount(65);
-		drawTexturedModalRect(x + 10, y + 75 - honeySize, 176, 96 - honeySize, 18, honeySize);
+		int size = kitchen.getScaledHoneyAmount(65);
+		drawTexturedModalRect(x + 10, y + 75 - size, 176, 96 - size, 18, 100);
+
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ public class ContainerKitchenCounter extends Container{
 		addSlotToContainer(new Slot(tileentity, 2, 68, 30));
 		addSlotToContainer(new Slot(tileentity, 3, 92, 30));
 		
-		addSlotToContainer(new Slot(tileentity, 4, 80, 64));
+		addSlotToContainer(new Slot(tileentity, 4, 80, 63));
 		
 		bindPlayerInventory(inventory);
 	}

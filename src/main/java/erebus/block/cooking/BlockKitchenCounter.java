@@ -9,6 +9,7 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -25,10 +26,11 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.proxy.CommonProxy;
-import erebus.lib.Reference;
 import erebus.tileentity.TileEntityKitchenCounter;
 
 public class BlockKitchenCounter extends BlockContainer implements IWailaBlock{
+	
+	public static IIcon honeyIcon, milkIcon, beetleJuiceIcon, antiVenomIcon;
 
 	public BlockKitchenCounter() {
 		super(Material.wood);
@@ -36,6 +38,14 @@ public class BlockKitchenCounter extends BlockContainer implements IWailaBlock{
 		setResistance(5.0F);
 		setBlockName("kitchenCounter");
 		setCreativeTab(ModTabs.blocks);
+	}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister icon){
+		honeyIcon = icon.registerIcon("erebus:honeyFlow");
+		milkIcon = icon.registerIcon("erebus:milkFlow");
+		beetleJuiceIcon = icon.registerIcon("erebus:beetleJuiceFlow");
+		antiVenomIcon = icon.registerIcon("erebus:antiVenomFlow");
 	}
 	
 	@Override
@@ -159,6 +169,7 @@ public class BlockKitchenCounter extends BlockContainer implements IWailaBlock{
 	}
 
 	public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+		currenttip.add("Kitchen Counter");
 		return currenttip;
 	}
 
