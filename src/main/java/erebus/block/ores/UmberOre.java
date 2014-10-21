@@ -28,7 +28,15 @@ public class UmberOre extends Block
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune)
 	{
-		return base.getItemDropped(meta, rand, fortune);
+		Item item = base.getItemDropped(meta, rand, fortune);
+
+		if (item == Item.getItemFromBlock(base))
+		{
+			return Item.getItemFromBlock(this);
+		} else
+		{
+			return item;
+		}
 	}
 
 	@Override
