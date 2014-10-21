@@ -1,6 +1,7 @@
 package erebus;
 
 import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.biomes.BiomeBetweenlands;
 import erebus.world.biomes.BiomeElysianFields;
 import erebus.world.biomes.BiomeFungalForest;
 import erebus.world.biomes.BiomeSubterraneanSavannah;
@@ -63,7 +64,7 @@ public class ModBiomes
 		elysianFields = new BiomeElysianFields(elysianFieldsID);
 		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
 		fungalForest = new BiomeFungalForest(fungalForestID);
-
+		betweenlands = new BiomeBetweenlands(betweenlandsID);
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);
 
 		// MUTATIONS
@@ -74,7 +75,8 @@ public class ModBiomes
 		elysianFields.createMutation();
 		ulteriorOutback.createMutation();
 		fungalForest.createMutation();
-
+		betweenlands.createMutation();
+		
 		fieldsSubForest.createMutation();
 	}
 }

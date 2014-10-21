@@ -10,14 +10,14 @@ import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
 import erebus.world.SpawnerErebus.SpawnEntry;
-import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus.BiomeDecoratorEmpty;
+import erebus.world.biomes.decorators.BiomeDecoratorBetweenlands;
 
 public class BiomeBetweenlands extends BiomeBaseErebus
 {
 
 	public BiomeBetweenlands(int biomeID)
 	{
-		super(biomeID, new BiomeDecoratorEmpty());
+		super(biomeID, new BiomeDecoratorBetweenlands());
 
 		setBiomeName("Betweenlands");
 		setColors(0x314D31);

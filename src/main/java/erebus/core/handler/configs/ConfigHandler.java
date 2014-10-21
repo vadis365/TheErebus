@@ -39,6 +39,7 @@ public class ConfigHandler
 		ModBiomes.ulteriorOutbackID = config.get("Biomes", "Ulterior Outback", 104).getInt(104);
 		ModBiomes.fungalForestID = config.get("Biomes", "Fungal Forest", 105).getInt(105);
 		ModBiomes.fieldsSubForestID = config.get("Biomes", "Fields - Forest", 127).getInt(127);
+		ModBiomes.betweenlandsID = config.get("Biomes", "Betweenlandst", 106).getInt(106);
 		/*
 		 * ModBiomes.jungleSubLakeID = config.get("Biomes",
 		 * "Biome ID of Underground Jungle - Lake", 161).getInt(161);
