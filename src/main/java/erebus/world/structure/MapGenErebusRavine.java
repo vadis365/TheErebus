@@ -229,7 +229,11 @@ public class MapGenErebusRavine extends MapGenBase
 		} else if (y < 10 && biome.biomeID == ModBiomes.volcanicDesertID)
 		{
 			blocks[index] = Blocks.flowing_lava;
-		} else
+		} 
+		else if (y < 18 && biome.biomeID == ModBiomes.submergedSwampID)
+		{
+			blocks[index] = Blocks.flowing_water;
+		}else
 		{
 			blocks[index] = Blocks.air;
 
