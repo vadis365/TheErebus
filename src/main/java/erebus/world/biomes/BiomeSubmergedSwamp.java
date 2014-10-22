@@ -22,7 +22,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus
 		setBiomeName("Submerged Swamp");
 		setColors(0x314D31);
 		setTemperatureRainfall(0.75F, 0.85F);
-		setWeight(150000);
+		setWeight(15);
 		waterColorMultiplier = 6051893;
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(2, 6));
