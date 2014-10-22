@@ -1,7 +1,7 @@
 package erebus;
 
 import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.biomes.BiomeBetweenlands;
+import erebus.world.biomes.BiomeSubmergedSwamp;
 import erebus.world.biomes.BiomeElysianFields;
 import erebus.world.biomes.BiomeFungalForest;
 import erebus.world.biomes.BiomeSubterraneanSavannah;
@@ -20,7 +20,7 @@ public class ModBiomes
 	public static BiomeBaseErebus elysianFields;
 	public static BiomeBaseErebus ulteriorOutback;
 	public static BiomeBaseErebus fungalForest;
-	public static BiomeBaseErebus betweenlands;
+	public static BiomeBaseErebus submergedSwamp;
 
 	public static int undergroundJungleID;
 	public static int volcanicDesertID;
@@ -28,7 +28,7 @@ public class ModBiomes
 	public static int elysianFieldsID;
 	public static int ulteriorOutbackID;
 	public static int fungalForestID;
-	public static int betweenlandsID;
+	public static int submergedSwampID;
 
 	public static BiomeBaseErebus jungleSubLake;
 	public static BiomeBaseErebus jungleSubAsperGrove;
@@ -48,7 +48,7 @@ public class ModBiomes
 
 	public static void init()
 	{
-		for (int id : new int[] { undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, betweenlandsID, jungleSubLakeID, jungleSubAsperGroveID, desertSubCharredForestID, savannahSubRockyWastelandID, savannahSubAsperGroveID, savannahSubSteppeID, fieldsSubForestID })
+		for (int id : new int[] { undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, submergedSwampID, jungleSubLakeID, jungleSubAsperGroveID, desertSubCharredForestID, savannahSubRockyWastelandID, savannahSubAsperGroveID, savannahSubSteppeID, fieldsSubForestID })
 		{
 			if (id >= 128)
 			{
@@ -64,7 +64,7 @@ public class ModBiomes
 		elysianFields = new BiomeElysianFields(elysianFieldsID);
 		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
 		fungalForest = new BiomeFungalForest(fungalForestID);
-		betweenlands = new BiomeBetweenlands(betweenlandsID);
+		submergedSwamp = new BiomeSubmergedSwamp(submergedSwampID);
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);
 
 		// MUTATIONS
@@ -75,7 +75,7 @@ public class ModBiomes
 		elysianFields.createMutation();
 		ulteriorOutback.createMutation();
 		fungalForest.createMutation();
-		betweenlands.createMutation();
+		submergedSwamp.createMutation();
 		
 		fieldsSubForest.createMutation();
 	}

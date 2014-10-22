@@ -10,19 +10,19 @@ import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
 import erebus.world.SpawnerErebus.SpawnEntry;
-import erebus.world.biomes.decorators.BiomeDecoratorBetweenlands;
+import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
 
-public class BiomeBetweenlands extends BiomeBaseErebus
+public class BiomeSubmergedSwamp extends BiomeBaseErebus
 {
 
-	public BiomeBetweenlands(int biomeID)
+	public BiomeSubmergedSwamp(int biomeID)
 	{
-		super(biomeID, new BiomeDecoratorBetweenlands());
+		super(biomeID, new BiomeDecoratorSubmergedSwamp());
 
-		setBiomeName("Betweenlands");
+		setBiomeName("Submerged Swamp");
 		setColors(0x314D31);
 		setTemperatureRainfall(0.75F, 0.85F);
-		setWeight(15);
+		setWeight(150000);
 		waterColorMultiplier = 6051893;
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(2, 6));

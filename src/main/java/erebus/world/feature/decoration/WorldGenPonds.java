@@ -11,7 +11,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
-import erebus.world.biomes.BiomeBetweenlands;
+import erebus.world.biomes.BiomeSubmergedSwamp;
 import erebus.world.biomes.BiomeUndergroundJungle;
 
 public class WorldGenPonds extends WorldGenerator
@@ -142,7 +142,7 @@ public class WorldGenPonds extends WorldGenerator
 
 		BiomeGenBase biome = world.getBiomeGenForCoords(x + 8, z + 8);
 		boolean isJungle = biome instanceof BiomeUndergroundJungle;
-		boolean isSwamp = biome instanceof BiomeBetweenlands;
+		boolean isSwamp = biome instanceof BiomeSubmergedSwamp;
 		
 		for (int xx = 0; xx < 16; ++xx)
 		{
@@ -201,14 +201,14 @@ public class WorldGenPonds extends WorldGenerator
 		}
 
 		Block block;
-		for (int sugarCaneAttempt = 0, xx, yy, zz; sugarCaneAttempt < 60; sugarCaneAttempt++)
+		for (int sugarCaneAttempt = 0, xx, yy, zz; sugarCaneAttempt < 30; sugarCaneAttempt++)
 		{
 			xx = x + rand.nextInt(16);
 			yy = y + 3 + rand.nextInt(5);
 			zz = z + rand.nextInt(16);
 			block = world.getBlock(xx, yy - 1, zz);
 
-			if ((block == Blocks.grass || block == Blocks.sand) && Blocks.reeds.canPlaceBlockAt(world, xx, yy, zz))
+			if ((block == Blocks.grass || block == Blocks.sand|| block == ModBlocks.mud) && Blocks.reeds.canPlaceBlockAt(world, xx, yy, zz))
 			{
 				for (int height = 0; height < 1 + rand.nextInt(7); height++)
 				{
@@ -223,7 +223,7 @@ public class WorldGenPonds extends WorldGenerator
 			}
 		}
 
-		for (int bullRushAttempt = 0, xx, yy, zz; bullRushAttempt < 100; bullRushAttempt++)
+		for (int bullRushAttempt = 0, xx, yy, zz; bullRushAttempt < 50; bullRushAttempt++)
 		{
 			xx = x + rand.nextInt(16);
 			yy = y + 3 + rand.nextInt(5);

@@ -104,7 +104,7 @@ public class WorldGenSwampWater extends WorldGenerator {
 							aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 							if (flag && (i2 < 4 || rand.nextInt(2) != 0) && world.getBlock(x + i1, y + i2, z + j2).getMaterial().isSolid())
-								world.setBlock(x + i1, y + i2, z + j2, ModBlocks.mud, 0, 2);
+								world.setBlock(x + i1, y + i2, z + j2, ModBlocks.quickSand, 0, 2);
 						}
 						
 						byte b0 = 4;

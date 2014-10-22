@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IShearable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
@@ -20,7 +21,7 @@ import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.Materials;
 
-public class DoubleHeightPlant extends BlockDoublePlant
+public class DoubleHeightPlant extends BlockDoublePlant implements IShearable
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon top, bottom;
@@ -121,4 +122,18 @@ public class DoubleHeightPlant extends BlockDoublePlant
 	{
 		list.add(new ItemStack(item));
 	}
+	
+    @Override
+    public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
+    {
+        return true;
+    }
+
+    @Override
+    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
+    {
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z)&7));
+        return ret;
+    }
 }

@@ -1,17 +1,24 @@
 package erebus.block;
 
+import static net.minecraftforge.common.util.ForgeDirection.UP;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockMud extends Block
 {
 
 	public BlockMud()
 	{
-		super(Material.clay);
+		super(Material.ground);
 		setHardness(2.0F);
 	}
 
@@ -27,4 +34,11 @@ public class BlockMud extends Block
 		entity.motionX *= 0.2D;
 		entity.motionZ *= 0.2D;
 	}
+
+	@Override
+	 public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
+	 {
+		return true;
+	 }
+
 }
