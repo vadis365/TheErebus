@@ -46,6 +46,7 @@ import erebus.item.PortalActivator;
 import erebus.item.ReinExoskeletonArmor;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
+import erebus.item.Smoothie;
 import erebus.item.SpawnEggs;
 import erebus.item.SpiderTShirt;
 import erebus.item.SprayCan;
@@ -77,6 +78,7 @@ public class ModItems
 	public static final Item portalActivator = new PortalActivator().setUnlocalizedName("erebus.portalActivator");
 	public static final Item materials = new Materials().setUnlocalizedName("erebus.materials");
 	public static final Item food = new Food().setUnlocalizedName("erebus.food");
+	public static final Item smoothie = new Smoothie().setUnlocalizedName("erebus.smoothie");
 	public static final Item turnip = new ItemSeedFood(4, 0.6F, ModBlocks.blockTurnip, Blocks.farmland).setUnlocalizedName("erebus.turnips").setTextureName("erebus:turnips");
 	public static final Item sprayCan = new SprayCan().setUnlocalizedName("erebus.sprayCan").setTextureName("erebus:sprayCan");
 	public static final Item wandOfAnimation = new WandOfAnimation().setUnlocalizedName("erebus.wandOfAnimation");
@@ -187,7 +189,7 @@ public class ModItems
 
 	private static void initCreativeTabs()
 	{
-		ModTabs.items.setTab(materials, whetstone, food, turnip, encrustedDiamond);
+		ModTabs.items.setTab(materials, whetstone, food, smoothie, turnip, encrustedDiamond);
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots, spiderTShirt);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper);
