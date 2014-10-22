@@ -1,19 +1,66 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.init.Blocks;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenPonds;
+import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
+import erebus.world.feature.decoration.WorldGenSwampWater;
 
 public class BiomeDecoratorBetweenlands extends BiomeDecoratorBaseErebus
 {
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+	private final WorldGenSwampWater genMire = new WorldGenSwampWater(Blocks.water);
+	private final WorldGenPonds genPonds = new WorldGenPonds();
+	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
+	
+	@Override
+	protected void populate() {
+		
+		for (attempt = 0; attempt < 1000; attempt++)
+		{
+			xx = x + 16;
+			yy = rand.nextInt(120);
+			zz = z + 16;
 
+			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
+			{
+				genMire.generate(world, rand, xx, yy, zz);
+			}
+		}
+		
+		for (attempt = 0; attempt < 300; attempt++)
+		{
+			xx = x + 16;
+			yy = rand.nextInt(120);
+			zz = z + 16;
 
+			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
+			{
+				genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D);
+				genPonds.generate(world, rand, xx, yy, zz);
+			}
+		}
+	}
+	
 	@Override
 	public void decorate()
 	{
+		for (attempt = 0; attempt < 30; attempt++)
+		{
+			xx = x + offsetXZ();
+			yy = rand.nextInt(120);
+			zz = z + offsetXZ();
+
+			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
+			{
+				genQuickSand.generate(world, rand, xx, yy, zz);
+			}
+		}
+			
 		for (attempt = 0; attempt < rand.nextInt(3); attempt++)
 		{
 			xx = x + offsetXZ();
@@ -24,8 +71,7 @@ public class BiomeDecoratorBetweenlands extends BiomeDecoratorBaseErebus
 			{
 				genRottenAcacia.generate(world, rand, xx, yy, zz);
 			}
-		}
-
+		}		
 	}
 
 	@Override

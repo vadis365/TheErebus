@@ -23,7 +23,7 @@ public class BiomeBetweenlands extends BiomeBaseErebus
 		setColors(0x314D31);
 		setTemperatureRainfall(0.75F, 0.85F);
 		setWeight(15);
-
+		waterColorMultiplier = 6051893;
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(2, 6));
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 20).setGroupSize(1, 2));

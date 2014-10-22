@@ -11,6 +11,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.world.biomes.BiomeBetweenlands;
 import erebus.world.biomes.BiomeUndergroundJungle;
 
 public class WorldGenPonds extends WorldGenerator
@@ -141,7 +142,8 @@ public class WorldGenPonds extends WorldGenerator
 
 		BiomeGenBase biome = world.getBiomeGenForCoords(x + 8, z + 8);
 		boolean isJungle = biome instanceof BiomeUndergroundJungle;
-
+		boolean isSwamp = biome instanceof BiomeBetweenlands;
+		
 		for (int xx = 0; xx < 16; ++xx)
 		{
 			for (int zz = 0; zz < 16; ++zz)
@@ -152,7 +154,7 @@ public class WorldGenPonds extends WorldGenerator
 
 					if (flag && (yy < 4 || rand.nextBoolean()) && world.getBlock(x + xx, y + yy, z + zz).getMaterial().isSolid())
 					{
-						world.setBlock(x + xx, y + yy, z + zz, isJungle ? ModBlocks.mud : Blocks.sand, 0, 2);
+						world.setBlock(x + xx, y + yy, z + zz, isJungle || isSwamp ? ModBlocks.mud : Blocks.sand, 0, 2);
 					}
 				}
 			}
