@@ -132,7 +132,7 @@ public class BlockBerryBush extends Block {
 				world.setBlock(x, y, z, this, 2, 2);
 				break;
 			}
-		if (meta == 2 && rand.nextInt(50) == 0) {
+		if (meta == 2 && rand.nextInt(25) == 0) {
 			world.setBlock(x, y, z, this, 3, 2);
 		}
 	}
