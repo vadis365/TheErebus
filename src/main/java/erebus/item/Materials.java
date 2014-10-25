@@ -82,7 +82,8 @@ public class Materials extends Item
 		umberGolemCore,
 		umberGolemHead,
 		umberGolemClaw,
-		umberGolemLegs;
+		umberGolemLegs,
+		jadeBerries;
 	}
 
 	public static ItemStack createStack(DATA data)

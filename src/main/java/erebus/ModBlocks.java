@@ -92,6 +92,7 @@ import erebus.block.ores.UmberOreGneiss;
 import erebus.block.ores.UmberOreJade;
 import erebus.block.ores.UmberOrePetrifiedWood;
 import erebus.block.ores.UmberOreTemple;
+import erebus.block.plants.BlockBerryBush;
 import erebus.block.plants.BlockErebusFlower;
 import erebus.block.plants.BlockHangerPlants;
 import erebus.block.plants.BlockThorns;
@@ -199,6 +200,9 @@ public class ModBlocks
 	public static final Block glowshroomStalkW3 = new BlockGlowshroomStalkW3();
 	public static final Block glowshroomStalkE3 = new BlockGlowshroomStalkE3();
 	public static final Block flowerPlanted = new BlockPlantedGiantFlower();
+	public static final Block jadeBerryBush = new BlockBerryBush("jade");
+	public static final Block heartBerryBush = new BlockBerryBush("heart");
+	public static final Block swampBerryBush = new BlockBerryBush("swamp");
 
 	// DECORATIONS AND UTILITIES
 	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.blockSilk").setBlockTextureName("erebus:blockSilk");

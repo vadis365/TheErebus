@@ -60,6 +60,10 @@ tile.erebus.flower.name=%s Petal
 tile.erebus.flower_14.name=Exploding Stigma
 tile.erebus.flower_15.name=Stem
 
+tile.erebus.jadeBerryBush.name=Jadeberry Bush
+tile.erebus.heartBerryBush.name=Heartberry Bush
+tile.erebus.swampBerryBush.name=Swampberry Bush
+
 tile.erebus.umbercobbleStairs0.name=Umberstone Stairs
 tile.erebus.umbercobbleStairs1.name=Umbercobble Stairs
 tile.erebus.umbercobbleStairs2.name=Mossy Umbercobble Stairs
@@ -313,6 +317,7 @@ item.erebus.materials.52.name=Umbergolem Torso
 item.erebus.materials.53.name=Umbergolem Head
 item.erebus.materials.54.name=Umbergolem Claw
 item.erebus.materials.55.name=Umbergolem Legs
+item.erebus.materials.56.name=Jadeberries
  
 item.erebus.food.0.name=Beetle Larva
 item.erebus.food.1.name=Cooked Beetle Larva
@@ -328,6 +333,8 @@ item.erebus.food.10.name=Honey Sandwich
 item.erebus.food.11.name=Middle Fruit
 item.erebus.food.12.name=Raw Titan Chop
 item.erebus.food.13.name=Cooked Titan Chop
+item.erebus.food.14.name=Heartberries
+item.erebus.food.15.name=Swampberries
 
 item.erebus.bambucket.name=Bambucket
 item.erebus.bambucketWater.name=Water Bambucket

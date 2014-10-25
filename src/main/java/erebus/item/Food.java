@@ -24,7 +24,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SuppressWarnings("unchecked")
 public class Food extends ItemFood
 {
-
 	public static enum FoodType
 	{
 		larvaRaw,
@@ -40,7 +39,9 @@ public class Food extends ItemFood
 		honeySandwich,
 		middleFruit,
 		titanChop,
-		titanChopCooked
+		titanChopCooked,
+		heartBerries,
+		swampBerries;
 	}
 
 	static
@@ -107,6 +108,8 @@ public class Food extends ItemFood
 				return 4;
 			case titanChopCooked:
 				return 8;
+			case swampBerries:
+				return 1;
 			default:
 				return 0;
 		}
@@ -144,6 +147,8 @@ public class Food extends ItemFood
 				return 0.3F;
 			case titanChopCooked:
 				return 0.8F;
+			case swampBerries:
+				return 0.1F;
 			default:
 				return 0.0F;
 		}
@@ -215,6 +220,10 @@ public class Food extends ItemFood
 		if (!world.isRemote && effect != null)
 		{
 			player.addPotionEffect(effect);
+		}
+		if(FoodType.values()[is.getItemDamage()] == FoodType.heartBerries)
+		{
+			player.heal(1);
 		}
 	}
 
@@ -299,4 +308,5 @@ public class Food extends ItemFood
 	{
 		return stack != null && stack.getItemDamage() == FoodType.grasshopperLegRaw.ordinal();
 	}
+	
 }

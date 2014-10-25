@@ -234,7 +234,8 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.gneiss), "xx", "xx", 'x', Materials.createStack(Materials.DATA.gneissRock));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 2, 9), ModBlocks.waterFlower);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.craftingAltar), "xxx", "xxx", "xxx", 'x', ModBlocks.altarBase);
-
+		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.jade), "xxx", "xxx", "xxx", 'x', Materials.createStack(Materials.DATA.jadeBerries));
+		
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bambucketAntiVenom), ModItems.bambucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));
