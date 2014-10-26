@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
@@ -13,13 +12,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 import erebus.ModTabs;
 import erebus.entity.EntityGasVent;
 
 public class BlockSwampVent extends Block {
-
-    @SideOnly(Side.CLIENT)
-    private IIcon topIcon;
 
     public BlockSwampVent()
     {
@@ -39,7 +36,7 @@ public class BlockSwampVent extends Block {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
     {
-        return side == 1 ? topIcon : Blocks.grass.getBlockTextureFromSide(side);
+        return Blocks.grass.getBlockTextureFromSide(side);
     }
 	   
 	@Override
@@ -57,25 +54,11 @@ public class BlockSwampVent extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if (world.isAirBlock(x, y + 1, z)) {
-			double d0 = x + 0.4375F;
-			double d1 = y + 1.0625F;
-			double d2 = z + 0.4375F;
-			double d3 = x + 0.5625F;
-			double d4 = z + 0.5625F;
-			double d5 = x + 0.5F;
-			double d6 = y + 1.25F;
-			double d7 = z + 0.5F;
-			world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("bubble", d0, d1, d2, 0.0D, 0.1D, 0.0D);
-			world.spawnParticle("smoke", d0, d1, d4, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("bubble", d0, d1, d4, 0.0D, 0.1D, 0.0D);
-			world.spawnParticle("smoke", d3, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("bubble", d3, d1, d2, 0.0D, 0.1D, 0.0D);
-			world.spawnParticle("smoke", d3, d1, d4, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("bubble", d3, d1, d4, 0.0D, 0.1D, 0.0D);
-			world.spawnParticle("smoke", d5, d6, d7, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("bubble", d5, d6, d7, 0.0D, 0.1D, 0.0D);
+		if (world.isAirBlock(x, y + 1, z)) {		
+			double xx = x + 0.5F;
+			double yy = y + 1.0F;
+			double zz = z + 0.5F;
+			Erebus.proxy.spawnCustomParticle("bubblegas", world, xx, yy, zz, 0.1D, 0.0D, 0.1D);
 		}
 	}
 
@@ -89,17 +72,7 @@ public class BlockSwampVent extends Block {
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
     {
-    	if (side == 1)
-    		return topIcon;
-        else
-        	return Blocks.grass.getBlockTextureFromSide(side);
-    }
-	
-	@Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister icon)
-    {
-        topIcon = icon.registerIcon(getTextureName() + "Top");
+		return Blocks.grass.getBlockTextureFromSide(side);
     }
 	
 	@Override

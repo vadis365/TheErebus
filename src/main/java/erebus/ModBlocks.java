@@ -121,7 +121,7 @@ public class ModBlocks
 	public static final Block ghostSand = new BlockGhostSand().setHardness(0.42F).setStepSound(Block.soundTypeSand).setBlockName("erebus.ghostSand").setBlockTextureName("erebus:ghostSand");
 	public static final Block umberstoneButton = new BlockButtonUmberstone().setHardness(0.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberstoneButton");
 	public static final Block volcanicRock = new BlockSimple(Material.rock).setHardness(5.0F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.volcanicRock").setBlockTextureName("erebus:volcanicRock");
-	public static final Block swampVent = new BlockSwampVent().setBlockName("erebus.swampVent").setBlockTextureName("erebus:swampVent");
+	public static final Block swampVent = new BlockSwampVent().setBlockName("erebus.swampVent");
 
 	// ORES
 	public static final Block oreCoal = new UmberOre(Blocks.coal_ore, "Coal", 0);
@@ -329,7 +329,7 @@ public class ModBlocks
 
 	private static void initCreativeTabs()
 	{
-		ModTabs.blocks.setTab(umberstone, redGem, blockAmber, quickSand, ghostSand);
+		ModTabs.blocks.setTab(umberstone, redGem, blockAmber, quickSand, ghostSand, swampVent);
 		ModTabs.blocks.setTab(hollowLogAcacia, planks);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, bambooLadder);
 		ModTabs.blocks.setTab(bambooBridge, bambooPole, bambooTorch, glowingJar, umberstoneButton, umberPaver, altarBase);

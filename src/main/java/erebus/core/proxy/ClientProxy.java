@@ -20,6 +20,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.client.fx.EntityBubbleGasFX;
 import erebus.client.fx.EntityRepellentFX;
 import erebus.client.fx.EntitySonicFX;
 import erebus.client.model.entity.ModelAnimatedBlock;
@@ -409,6 +410,11 @@ public class ClientProxy extends CommonProxy
 		if (particleName.equals("sonic"))
 		{
 			fx = new EntitySonicFX(world, x, y, z, vecX, vecY, vecZ);
+		}
+		
+		if (particleName.equals("bubblegas"))
+		{
+			fx = new EntityBubbleGasFX(world, x, y, z, vecX, vecY, vecZ);
 		}
 		
 		if (particleName.equals("swampflame"))
