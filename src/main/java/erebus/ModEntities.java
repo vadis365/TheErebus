@@ -27,9 +27,9 @@ import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFireResistent;
 import erebus.entity.EntityFly;
+import erebus.entity.EntityGasVent;
 import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGooBall;
-import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLavaWebSpider;
@@ -39,6 +39,7 @@ import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMosquito;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityMucusBombPrimed;
+import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityPunchroom;
 import erebus.entity.EntityRhinoBeetle;
@@ -134,6 +135,7 @@ public class ModEntities
 		registerEntity(76, EntitySporeBall.class, "sporeBall");
 		registerEntity(77, EntityTarantulaEgg.class, "tarantulaegg");
 		registerEntity(78, EntityPoisonJet.class, "poisonjet");
+		registerEntity(79, EntityGasVent.class, "gasVent");
 
 		// Spawn conditions
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);

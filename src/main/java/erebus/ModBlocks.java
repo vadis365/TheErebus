@@ -36,6 +36,7 @@ import erebus.block.BlockSimple;
 import erebus.block.BlockSlabStone;
 import erebus.block.BlockSpiderSpawner;
 import erebus.block.BlockStairsBase;
+import erebus.block.BlockSwampVent;
 import erebus.block.BlockTarantulaEgg;
 import erebus.block.BlockUmberFurnace;
 import erebus.block.BlockUmberGolemStatue;
@@ -120,6 +121,7 @@ public class ModBlocks
 	public static final Block ghostSand = new BlockGhostSand().setHardness(0.42F).setStepSound(Block.soundTypeSand).setBlockName("erebus.ghostSand").setBlockTextureName("erebus:ghostSand");
 	public static final Block umberstoneButton = new BlockButtonUmberstone().setHardness(0.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.umberstoneButton");
 	public static final Block volcanicRock = new BlockSimple(Material.rock).setHardness(5.0F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.volcanicRock").setBlockTextureName("erebus:volcanicRock");
+	public static final Block swampVent = new BlockSwampVent().setBlockName("erebus.swampVent").setBlockTextureName("erebus:swampVent");
 
 	// ORES
 	public static final Block oreCoal = new UmberOre(Blocks.coal_ore, "Coal", 0);
