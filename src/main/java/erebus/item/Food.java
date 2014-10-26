@@ -40,7 +40,6 @@ public class Food extends ItemFood
 		middleFruit,
 		titanChop,
 		titanChopCooked,
-		heartBerries,
 		swampBerries;
 	}
 
@@ -220,10 +219,6 @@ public class Food extends ItemFood
 		if (!world.isRemote && effect != null)
 		{
 			player.addPotionEffect(effect);
-		}
-		if(FoodType.values()[is.getItemDamage()] == FoodType.heartBerries)
-		{
-			player.heal(1);
 		}
 	}
 

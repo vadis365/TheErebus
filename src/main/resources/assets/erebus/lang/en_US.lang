@@ -334,8 +334,9 @@ item.erebus.food.10.name=Honey Sandwich
 item.erebus.food.11.name=Middle Fruit
 item.erebus.food.12.name=Raw Titan Chop
 item.erebus.food.13.name=Cooked Titan Chop
-item.erebus.food.14.name=Heartberries
-item.erebus.food.15.name=Swampberries
+item.erebus.food.14.name=Swampberries
+
+item.erebus.heartBerries.name=Heartberries
 
 item.erebus.bambucket.name=Bambucket
 item.erebus.bambucketWater.name=Water Bambucket
