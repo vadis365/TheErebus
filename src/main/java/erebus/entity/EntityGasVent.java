@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 
 public class EntityGasVent extends EntityLiving {
 
@@ -33,7 +34,7 @@ public class EntityGasVent extends EntityLiving {
 	@Override
 	protected void collideWithEntity(Entity entity) {
 		if (!worldObj.isRemote) {
-			if(entity instanceof EntityLivingBase && entity != this)
+			if(entity instanceof EntityLivingBase && !(entity instanceof EntityGasVent))
 				entity.setFire(5);
 		}
 		setDead();
@@ -51,16 +52,16 @@ public class EntityGasVent extends EntityLiving {
 			double d5 = posX + 0.5F;
 			double d6 = yy + 0.25F;
 			double d7 = posZ + 0.5F;
-			world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0, d1, d2, 0.0D, 0.05D, 0.0D);
-			world.spawnParticle("smoke", d0, d1, d4, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d0, d1, d4, 0.0D, 0.05D, 0.0D);
-			world.spawnParticle("smoke", d3, d1, d2, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d3, d1, d2, 0.0D, 0.05D, 0.0D);
-			world.spawnParticle("smoke", d3, d1, d4, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d3, d1, d4, 0.0D, 0.05D, 0.0D);
-			world.spawnParticle("smoke", d5, d6, d7, 0.0D, 0.0D, 0.0D);
-			world.spawnParticle("flame", d5, d6, d7, 0.0D, 0.05D, 0.0D);
+			//Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("swampflame", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
+			//Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1, d4, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("swampflame", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
+			//Erebus.proxy.spawnCustomParticle("smoke", world, d3, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("swampflame", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
+			//Erebus.proxy.spawnCustomParticle("smoke", world, d3, d1, d4, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("swampflame", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
+			//Erebus.proxy.spawnCustomParticle("smoke", world, d5, d6, d7, 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("swampflame", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
 		}
 	}
 }

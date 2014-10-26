@@ -410,6 +410,12 @@ public class ClientProxy extends CommonProxy
 		{
 			fx = new EntitySonicFX(world, x, y, z, vecX, vecY, vecZ);
 		}
+		
+		if (particleName.equals("swampflame"))
+		{
+			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
+			((EntityFX)fx).setRBGColorF(0F, 0.2F, 1F);
+		}
 
 		if (particleName.equals("portal"))
 		{
