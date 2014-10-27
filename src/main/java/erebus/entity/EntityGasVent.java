@@ -52,15 +52,10 @@ public class EntityGasVent extends EntityLiving {
 			double d5 = posX + 0.5F;
 			double d6 = yy + 0.25F;
 			double d7 = posZ + 0.5F;
-			//Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 			Erebus.proxy.spawnCustomParticle("swampflame", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
-			//Erebus.proxy.spawnCustomParticle("smoke", world, d0, d1, d4, 0.0D, 0.0D, 0.0D);
 			Erebus.proxy.spawnCustomParticle("swampflame", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
-			//Erebus.proxy.spawnCustomParticle("smoke", world, d3, d1, d2, 0.0D, 0.0D, 0.0D);
 			Erebus.proxy.spawnCustomParticle("swampflame", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
-			//Erebus.proxy.spawnCustomParticle("smoke", world, d3, d1, d4, 0.0D, 0.0D, 0.0D);
 			Erebus.proxy.spawnCustomParticle("swampflame", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
-			//Erebus.proxy.spawnCustomParticle("smoke", world, d5, d6, d7, 0.0D, 0.0D, 0.0D);
 			Erebus.proxy.spawnCustomParticle("swampflame", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
 		}
 	}
