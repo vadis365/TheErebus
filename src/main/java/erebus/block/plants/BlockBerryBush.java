@@ -123,7 +123,7 @@ public class BlockBerryBush extends Block {
 
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
-		if (rand.nextInt(15) == 0)
+		if (rand.nextInt(20) == 0)
 			switch (meta) {
 			case 0:
 				world.setBlock(x, y, z, this, 1, 2);
@@ -132,7 +132,7 @@ public class BlockBerryBush extends Block {
 				world.setBlock(x, y, z, this, 2, 2);
 				break;
 			}
-		if (meta == 2 && rand.nextInt(25) == 0) {
+		if (meta == 2 && rand.nextInt(40) == 0) {
 			world.setBlock(x, y, z, this, 3, 2);
 		}
 	}

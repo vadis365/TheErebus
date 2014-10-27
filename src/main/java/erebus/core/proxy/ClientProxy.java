@@ -420,7 +420,7 @@ public class ClientProxy extends CommonProxy
 		if (particleName.equals("swampflame"))
 		{
 			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
-			((EntityFX)fx).setRBGColorF(0F, 0.2F, 1F);
+			((EntityFX)fx).setParticleTextureIndex(96);
 		}
 
 		if (particleName.equals("portal"))
