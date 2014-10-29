@@ -25,6 +25,7 @@ import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenCypressTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import erebus.world.feature.tree.WorldGenMarshwoodTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
 import erebus.world.feature.tree.WorldGenSapTree;
 
@@ -143,6 +144,9 @@ public class BlockSaplingErebus extends BlockSapling
 				break;
 			case Mossbark:
 				worldGen = new WorldGenMossbarkTree();
+				break;
+			case Marshwood:
+				worldGen = new WorldGenMarshwoodTree();
 				break;
 			default:
 				break;

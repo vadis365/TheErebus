@@ -30,6 +30,12 @@ public class EntityGasVent extends EntityLiving {
 			trailParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
 		}
 	}
+	
+	@Override
+	public boolean isEntityInvulnerable()
+	{
+		return true;
+	}
 
 	@Override
 	protected void collideWithEntity(Entity entity) {
