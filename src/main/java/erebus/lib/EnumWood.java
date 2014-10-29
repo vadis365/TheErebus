@@ -30,7 +30,8 @@ public enum EnumWood
 	Sap(true, false, true, true),
 	White(false, true, false, false),
 	Bamboo(false, true, false, false),
-	Rotten(true, true, false, false);
+	Rotten(true, true, false, false),
+	Marshwood;
 
 	private final boolean hasLog;
 	private final boolean hasPlanks;
