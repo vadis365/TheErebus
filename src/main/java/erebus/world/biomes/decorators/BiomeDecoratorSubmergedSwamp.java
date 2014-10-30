@@ -10,6 +10,7 @@ import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenGasVents;
+import erebus.world.feature.decoration.WorldGenMire;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
@@ -21,7 +22,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 {
 	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
-	private final WorldGenSwampWater genMire = new WorldGenSwampWater(Blocks.water);
+	private final WorldGenMire genMire = new WorldGenMire(Blocks.water);
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern, 1);
@@ -29,11 +30,22 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 	private final WorldGenTallGrass genSwampPlant = new WorldGenTallGrass(ModBlocks.swampPlant, 1);
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 	protected final WorldGenGasVents genGasVent = new WorldGenGasVents();
-	
+	private final WorldGenSwampWater genSwampWater = new WorldGenSwampWater();
 	@Override
 	protected void populate() {
 		
-		for (attempt = 0; attempt < 10; attempt++)
+		for (attempt = 0; attempt < 300; attempt++)
+		{
+			xx = x + 16;
+			yy = rand.nextInt(20) + 10;
+			zz = z + 16;
+			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
+			{
+				genSwampWater.generate(world, rand, xx, yy - 1, zz);
+			}
+		}
+		
+		for (attempt = 0; attempt < 20; attempt++)
 		{
 			xx = x + 16;
 			yy = rand.nextInt(120);
@@ -45,7 +57,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 			}
 		}
 		
-		for (attempt = 0; attempt < 1000; attempt++)
+		for (attempt = 0; attempt < 800; attempt++)
 		{
 			xx = x + 16;
 			yy = rand.nextInt(120);
@@ -53,7 +65,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 
 			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
 			{
-				genPonds.prepare((rand.nextDouble() + 1.5D) * 1.5D);
+				genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D);
 				genPonds.generate(world, rand, xx, yy, zz);
 			}
 		}

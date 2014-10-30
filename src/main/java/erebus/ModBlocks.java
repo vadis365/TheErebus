@@ -96,6 +96,7 @@ import erebus.block.ores.UmberOreTemple;
 import erebus.block.plants.BlockBerryBush;
 import erebus.block.plants.BlockErebusFlower;
 import erebus.block.plants.BlockHangerPlants;
+import erebus.block.plants.BlockMireCoral;
 import erebus.block.plants.BlockThorns;
 import erebus.block.plants.BlockTurnip;
 import erebus.block.plants.BlockWallPlants;
@@ -168,7 +169,6 @@ public class ModBlocks
 	public static final Block swampPlant = new SmallPlant("swampPlant", false);
 	public static final Block nettleFlowered = new SmallPlant("nettleFlowered", false);
 	public static final Block nettle = new SmallPlant("nettle", false);
-	public static final Block mireCoral = new SmallPlant("mireCoral", false);
 	public static final Block desertShrub = new SmallPlant("desertShrub", false);
 	public static final Block bulbCappedShroom = new SmallMushroom("bulbCappedShroom");
 	public static final Block kaizerfinger = new SmallMushroom("kaizerfinger");
@@ -205,6 +205,7 @@ public class ModBlocks
 	public static final Block jadeBerryBush = new BlockBerryBush("jade");
 	public static final Block heartBerryBush = new BlockBerryBush("heart");
 	public static final Block swampBerryBush = new BlockBerryBush("swamp");
+	public static final Block mireCoral = new BlockMireCoral().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.mireCoral").setBlockTextureName("erebus:mireCoral").setLightLevel(0.8F);
 
 	// DECORATIONS AND UTILITIES
 	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.blockSilk").setBlockTextureName("erebus:blockSilk");
