@@ -51,6 +51,7 @@ import erebus.client.render.block.BlockKeystoneRenderer;
 import erebus.client.render.block.BlockPlantedFlowerRender;
 import erebus.client.render.block.BlockSiloRoofRender;
 import erebus.client.render.block.BlockSiloSupportsRender;
+import erebus.client.render.block.BlockSwampVentRenderer;
 import erebus.client.render.block.BlockVelocityBlockRender;
 import erebus.client.render.entity.RenderAnimatedBlock;
 import erebus.client.render.entity.RenderAnimatedChest;
@@ -366,6 +367,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerBlockHandler(new BlockDoublePlantRender());
 		RenderingRegistry.registerBlockHandler(new BlockVelocityBlockRender());
 		RenderingRegistry.registerBlockHandler(new BlockDoorRenderer());
+		RenderingRegistry.registerBlockHandler(new BlockSwampVentRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarBase), new ItemAltarBaseRenderer());

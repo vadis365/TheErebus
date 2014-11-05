@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModTabs;
+import erebus.client.render.block.BlockSwampVentRenderer;
 import erebus.entity.EntityGasVent;
 
 public class BlockSwampVent extends Block {
@@ -119,4 +120,8 @@ public class BlockSwampVent extends Block {
         return Blocks.grass.getIconSideOverlay();
     }
 
+	@Override
+	public int getRenderType() {
+		return BlockSwampVentRenderer.renderID;
+	}
 }
