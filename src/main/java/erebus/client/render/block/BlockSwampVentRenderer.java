@@ -1,100 +1,64 @@
 package erebus.client.render.block;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
-public class BlockSwampVentRenderer implements ISimpleBlockRenderingHandler {
-
-	public static final int renderID = RenderingRegistry.getNextAvailableRenderId();
-	
+public class BlockSwampVentRenderer implements ISimpleBlockRenderingHandler
+{
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		int l = block.getRenderColor(metadata);
-        float f = (float)(l >> 16 & 255) / 255.0F;
-        float f1 = (float)(l >> 8 & 255) / 255.0F;
-        float f2 = (float)(l & 255) / 255.0F;
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
+	{
+		int colour = block.getRenderColor(metadata);
+		float r = (colour >> 16 & 255) / 255.0F;
+		float g = (colour >> 8 & 255) / 255.0F;
+		float b = (colour & 255) / 255.0F;
 
-        if (EntityRenderer.anaglyphEnable)
-        {
-            float f3 = (f * 30.0F + f1 * 59.0F + f2 * 11.0F) / 100.0F;
-            float f4 = (f * 30.0F + f1 * 70.0F) / 100.0F;
-            float f5 = (f * 30.0F + f2 * 70.0F) / 100.0F;
-            f = f3;
-            f1 = f4;
-            f2 = f5;
-        }
-        
-        renderer.enableAO = false;
-        Tessellator tessellator = Tessellator.instance;
+		Tessellator tessellator = Tessellator.instance;
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, -1.0F, 0.0F);
-        tessellator.setColorOpaque_F(1, 1, 1);
-        renderer.renderFaceYNeg(block, 0, 0, 0, block.getIcon(0, metadata));
-        
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, 1.0F, 0.0F);
-        tessellator.setColorOpaque_F(f, f1, f2);
-        renderer.renderFaceYPos(block, 0, 0, 0, block.getIcon(1, metadata));
-        
-        IIcon iicon;
+		GL11.glColor3f(r, g, b);
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 1.0F, 0.0F);
+		renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 1, metadata));
+		tessellator.draw();
 
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, 0.0F, -1.0F);
-        tessellator.setColorOpaque_F(1, 1, 1);
-        iicon = block.getIcon(2, metadata);
-        renderer.renderFaceZNeg(block, 0, 0, 0, iicon);
-
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, 0.0F, 1.0F);
-        tessellator.setColorOpaque_F(1, 1, 1);
-        iicon = block.getIcon(3, metadata);
-        renderer.renderFaceZPos(block, 0, 0, 0, iicon);
-
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(-1.0F, 0.0F, 0.0F);
-        tessellator.setColorOpaque_F(1, 1, 1);
-        iicon = block.getIcon(4, metadata);
-        renderer.renderFaceXNeg(block, 0, 0, 0, iicon);
-
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(1.0F, 0.0F, 0.0F);
-        tessellator.setColorOpaque_F(1, 1, 1);
-        iicon = block.getIcon(5, metadata);
-        renderer.renderFaceXPos(block, 0, 0, 0, iicon);
-        
-        tessellator.draw();
-        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+		GL11.glColor4f(1, 1, 1, 1);
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, -1.0F, 0.0F);
+		renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 0, metadata));
+		tessellator.setNormal(0.0F, 0.0F, -1.0F);
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 2, metadata));
+		tessellator.setNormal(0.0F, 0.0F, 1.0F);
+		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 3, metadata));
+		tessellator.setNormal(-1.0F, 0.0F, 0.0F);
+		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 4, metadata));
+		tessellator.setNormal(1.0F, 0.0F, 0.0F);
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 5, metadata));
+		tessellator.draw();
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int modelID, RenderBlocks renderer) {
-		renderer.renderStandardBlock(block, x, y, z);
+	public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int modelID, RenderBlocks renderer)
+	{
+		return renderer.renderStandardBlock(block, x, y, z);
+	}
+
+	@Override
+	public boolean shouldRender3DInInventory(int modelId)
+	{
 		return true;
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
-		return true;
-	}
-
-	@Override
-	public int getRenderId() {
-		return renderID;
+	public int getRenderId()
+	{
+		return BlockRenderIDs.SWAMP_VENT.id();
 	}
 }

@@ -3,6 +3,7 @@ package erebus.block;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -14,7 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModTabs;
-import erebus.client.render.block.BlockSwampVentRenderer;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.entity.EntityGasVent;
 
 public class BlockSwampVent extends Block {
@@ -114,14 +115,15 @@ public class BlockSwampVent extends Block {
         return (l / 9 & 255) << 16 | (i1 / 9 & 255) << 8 | j1 / 9 & 255;
     }
 
-    @SideOnly(Side.CLIENT)
-    public static IIcon getIconSideOverlay()
-    {
-        return Blocks.grass.getIconSideOverlay();
-    }
+	@SideOnly(Side.CLIENT)
+	public static IIcon getIconSideOverlay()
+	{
+		return BlockGrass.getIconSideOverlay();
+	}
 
 	@Override
-	public int getRenderType() {
-		return BlockSwampVentRenderer.renderID;
+	public int getRenderType()
+	{
+		return BlockRenderIDs.SWAMP_VENT.id();
 	}
 }

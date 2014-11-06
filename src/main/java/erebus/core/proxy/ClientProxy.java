@@ -249,7 +249,8 @@ public class ClientProxy extends CommonProxy
 		KEYSTONE,
 		DOUBLE_PLANTS,
 		VELOCITY_BLOCK,
-		DOOR;
+		DOOR,
+		SWAMP_VENT;
 
 		private final int ID;
 
@@ -333,7 +334,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaEgg.class, new RenderEntityTarantulaEgg());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPoisonJet.class, new RenderPoisonJet());
 		RenderingRegistry.registerEntityRenderingHandler(EntityGasVent.class, new RenderGasVent());
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarHealing.class, new TileEntityErebusAltarHealingRenderer());
@@ -413,17 +414,17 @@ public class ClientProxy extends CommonProxy
 		{
 			fx = new EntitySonicFX(world, x, y, z, vecX, vecY, vecZ);
 		}
-		
+
 		if (particleName.equals("bubblegas"))
 		{
 			fx = new EntityBubbleGasFX(world, x, y, z, vecX, vecY, vecZ);
-			((EntityFX)fx).setRBGColorF(0.306F, 0.576F, 0.192F);
+			fx.setRBGColorF(0.306F, 0.576F, 0.192F);
 		}
-		
+
 		if (particleName.equals("swampflame"))
 		{
 			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
-			((EntityFX)fx).setParticleTextureIndex(96);
+			fx.setParticleTextureIndex(96);
 		}
 
 		if (particleName.equals("portal"))
@@ -450,11 +451,11 @@ public class ClientProxy extends CommonProxy
 		{
 			fx = new EntitySmokeFX(world, x, y, z, vecX, vecY, vecZ);
 		}
-		
+
 		if (particleName.equals("poison"))
 		{
 			fx = new EntitySpellParticleFX(world, x, y, z, vecX, vecY, vecZ);
-			((EntityFX)fx).setRBGColorF(0.306F, 0.576F, 0.192F);
+			fx.setRBGColorF(0.306F, 0.576F, 0.192F);
 		}
 
 		if (particleName.equals("flame"))
