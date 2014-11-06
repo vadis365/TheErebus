@@ -56,9 +56,7 @@ public class BlockAlgae extends BlockBush
         return 2129968;
     }
 
-    /**
-     * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
-     */
+    @Override
     public boolean canBlockStay(World world, int x, int y, int z)
     {
         return y >= 0 && y < 128 ? world.getBlock(x, y - 1, z).getMaterial() == Material.water && world.getBlockMetadata(x, y - 1, z) == 0 : false;
