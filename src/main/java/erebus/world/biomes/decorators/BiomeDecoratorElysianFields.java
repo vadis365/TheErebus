@@ -153,19 +153,6 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus
 
 			if (world.getBlock(xx, yy - 1, zz) == Blocks.grass && world.isAirBlock(xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz))
 			{
-				world.setBlock(xx, yy, zz, ModBlocks.sundew, 0, 2);
-				world.setBlock(xx, yy + 1, zz, ModBlocks.sundew, 8, 2);
-			}
-		}
-
-		for (attempt = 0; attempt < 5; attempt++)
-		{
-			xx = x + offsetXZ();
-			yy = 20 + rand.nextInt(80);
-			zz = z + offsetXZ();
-
-			if (world.getBlock(xx, yy - 1, zz) == Blocks.grass && world.isAirBlock(xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz))
-			{
 				world.setBlock(xx, yy, zz, ModBlocks.weepingBlue, 0, 2);
 				world.setBlock(xx, yy + 1, zz, ModBlocks.weepingBlue, 8, 2);
 			}

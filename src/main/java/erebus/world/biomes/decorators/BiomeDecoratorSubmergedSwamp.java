@@ -16,6 +16,7 @@ import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSwampWater;
 import erebus.world.feature.plant.WorldGenMossPatch;
+import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
@@ -31,6 +32,8 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 	protected final WorldGenGasVents genGasVent = new WorldGenGasVents();
 	private final WorldGenSwampWater genSwampWater = new WorldGenSwampWater();
+	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
+	
 	@Override
 	protected void populate() {
 		
@@ -117,7 +120,39 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 				}
 			}
 		}
+		
+		if (rand.nextInt(10) == 0)
+		{
+			for (attempt = 0; attempt < rand.nextInt(4); attempt++)
+			{
+				xx = x + offsetXZ();
+				yy = 25 + rand.nextInt(75);
+				zz = z + offsetXZ();
+
+				for (; yy > 20; yy--)
+				{
+					if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
+					{
+						genSwampBush.generate(world, rand, xx, yy, zz);
+						break;
+					}
+				}
+			}
+		}
 			
+		for (attempt = 0; attempt < 8; attempt++)
+		{
+			xx = x + offsetXZ();
+			yy = 20 + rand.nextInt(80);
+			zz = z + offsetXZ();
+
+			if (world.getBlock(xx, yy - 1, zz) == Blocks.grass && world.isAirBlock(xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz))
+			{
+				world.setBlock(xx, yy, zz, ModBlocks.sundew, 0, 2);
+				world.setBlock(xx, yy + 1, zz, ModBlocks.sundew, 8, 2);
+			}
+		}
+		
 		for (attempt = 0; attempt < rand.nextInt(3); attempt++)
 		{
 			xx = x + offsetXZ();
