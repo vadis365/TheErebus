@@ -20,7 +20,7 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 
 		for (int xx = x - maxRadius; xx <= x + maxRadius; xx++)
 			for (int zz = z - maxRadius; zz <= z + maxRadius; zz++)
-				for (int yy = y + 1; yy < y + height; yy++) {
+				for (int yy = y + 2; yy < y + height; yy++) {
 					if (!world.isAirBlock(xx, yy, zz))
 						return false;
 				}

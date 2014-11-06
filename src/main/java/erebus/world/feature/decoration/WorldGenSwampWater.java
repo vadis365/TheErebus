@@ -4,8 +4,11 @@ import java.util.Random;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenLiquids;
+import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.world.feature.plant.WorldGenAlgae;
 
 public class WorldGenSwampWater extends WorldGenerator {
 
@@ -54,7 +57,21 @@ public class WorldGenSwampWater extends WorldGenerator {
 				}
 			}
 		}
+		
+		WorldGenAlgae genAlgae = new WorldGenAlgae();
+		for (int attempt = 0; attempt < 5; attempt++)
+		{
+			genAlgae.generate(world, rand, x + rand.nextInt(8) - rand.nextInt(8) + 8, y + 2 + rand.nextInt(6), z + rand.nextInt(8) - rand.nextInt(8) + 8);
+		}
+		
+		WorldGenWaterlily genLily = new WorldGenWaterlily();
+		for (int attempt = 0; attempt < 20; attempt++)
+		{
+			genLily.generate(world, rand, x + rand.nextInt(8) - rand.nextInt(8) + 8, y + 2 + rand.nextInt(6), z + rand.nextInt(8) - rand.nextInt(8) + 8);
+		}
 
 			return true;
 	}
+	
+	
 }
