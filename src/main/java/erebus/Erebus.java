@@ -3,7 +3,6 @@ package erebus;
 import java.util.ArrayList;
 import java.util.List;
 
-import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -22,7 +21,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
-import erebus.block.cooking.BlockKitchenCounter;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
@@ -49,8 +47,7 @@ import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
-public class Erebus
-{
+public class Erebus {
 
 	@SidedProxy(clientSide = Reference.SP_CLIENT, serverSide = Reference.SP_SERVER)
 	public static CommonProxy proxy;
@@ -59,12 +56,10 @@ public class Erebus
 	public static Erebus instance;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.INSTANCE.loadConfig(event);
 
-		if (event.getSide() == Side.CLIENT)
-		{
+		if (event.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			MinecraftForge.EVENT_BUS.register(new HomingBeeconTextureHandler());
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
@@ -86,26 +81,18 @@ public class Erebus
 
 	@EventHandler
 	@SuppressWarnings("unchecked")
-	public void init(FMLInitializationEvent event)
-	{
+	public void init(FMLInitializationEvent event) {
 		// Remove all the door recipes.
 		// This is needed otherwise our doors will not be craftable due to the recipe ordering
 		List<IRecipe> doorRecipes = new ArrayList<IRecipe>();
 		for (IRecipe recipe : (List<IRecipe>) CraftingManager.getInstance().getRecipeList())
-		{
-			if (recipe != null)
-			{
+			if (recipe != null) {
 				ItemStack stack = recipe.getRecipeOutput();
 				if (stack != null && stack.getItem() == Items.wooden_door)
-				{
 					doorRecipes.add(recipe);
-				}
 			}
-		}
 		for (IRecipe recipe : doorRecipes)
-		{
 			CraftingManager.getInstance().getRecipeList().remove(recipe);
-		}
 
 		proxy.registerKeyHandlers();
 		proxy.registerTileEntities();
@@ -116,7 +103,7 @@ public class Erebus
 		RecipeHandler.init();
 		ErebusRecipesHandler.init();
 		TeleporterHandler.init();
-		
+
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
 		MinecraftForge.EVENT_BUS.register(new PlayerChangedDimensionEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityPickupEventHandler());
@@ -130,24 +117,16 @@ public class Erebus
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 
 		if (ConfigHandler.INSTANCE.graveMarker)
-		{
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
-		}
 
 		if (ConfigHandler.INSTANCE.randomNames)
-		{
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
-		}
 
 		if (!ConfigHandler.INSTANCE.disableThaumcraft)
-		{
 			ModIntegrationHandler.addMod(ThaumcraftIntegration.class);
-		}
 
 		if (!ConfigHandler.INSTANCE.disableFMP)
-		{
 			ModIntegrationHandler.addMod(FMPIntegration.class);
-		}
 
 		ModIntegrationHandler.init();
 		ComposterRegistry.init();
@@ -157,14 +136,12 @@ public class Erebus
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
+	public void postInit(FMLPostInitializationEvent event) {
 		ModIntegrationHandler.postInit();
 	}
 
 	@EventHandler
-	public void onServerStarting(FMLServerStartingEvent event)
-	{
+	public void onServerStarting(FMLServerStartingEvent event) {
 		event.registerServerCommand(new ErebusCommandDebug());
 	}
 }

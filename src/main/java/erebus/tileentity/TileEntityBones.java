@@ -8,79 +8,60 @@ import erebus.network.AbstractPacket;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketBones;
 
-public class TileEntityBones extends TileEntityBasicInventory
-{
+public class TileEntityBones extends TileEntityBasicInventory {
+
 	private String owner = ""; //could be expanded to contain random names
-	public TileEntityBones()
-	{
+
+	public TileEntityBones() {
 		super(40, "container.bones");
 	}
 
 	@Override
-	public boolean canUpdate()
-	{
+	public boolean canUpdate() {
 		return false;
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side)
-	{
+	public int[] getAccessibleSlotsFromSide(int side) {
 		return new int[0];
 	}
-	
-	private void sendUpdatesToClients()
-	{
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		PacketPipeline.sendToAll(getPacket());
-	}
 
-	public void setOwner(String name)
-	{
+	public void setOwner(String name) {
 		owner = name;
 		if (!worldObj.isRemote)
-		{
 			PacketPipeline.sendToAll(getPacket());
-		}
 	}
 
-	public String getOwnerName()
-	{
+	public String getOwnerName() {
 		return owner;
 	}
 
-	public AbstractPacket getPacket()
-	{
+	public AbstractPacket getPacket() {
 		return new PacketBones(xCoord, yCoord, zCoord, owner);
 	}
 
 	@Override
-	public Packet getDescriptionPacket()
-	{
+	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
-	{
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
 		NBTTagCompound nbt = packet.func_148857_g();
 		if (packet.func_148853_f() == 0)
-		{
 			readFromNBT(nbt);
-		}
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data)
-	{
+	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
 		owner = data.getString("owner");
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound data)
-	{
+	public void writeToNBT(NBTTagCompound data) {
 		super.writeToNBT(data);
 		data.setString("owner", owner);
 	}

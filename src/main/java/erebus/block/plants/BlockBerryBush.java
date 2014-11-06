@@ -28,11 +28,7 @@ public class BlockBerryBush extends Block {
 
 	private String type;
 	@SideOnly(Side.CLIENT)
-	private IIcon fastIcon;
-	@SideOnly(Side.CLIENT)
-	private IIcon fastFruitIcon;
-	@SideOnly(Side.CLIENT)
-	private IIcon fruitIcon;
+	private IIcon fastIcon, fastFruitIcon, fruitIcon;
 
 	public BlockBerryBush(String bushType) {
 		super(Material.plants);
@@ -96,22 +92,22 @@ public class BlockBerryBush extends Block {
 		float widthReduced = 0, heightReduced = 0;
 
 		switch (meta) {
-		case 0:
-			widthReduced = 0.25F;
-			heightReduced = 0.5F;
-			break;
-		case 1:
-			widthReduced = 0.125F;
-			heightReduced = 0.25F;
-			break;
-		case 2:
-			widthReduced = 0F;
-			heightReduced = 0F;
-			break;
-		case 3:
-			widthReduced = 0F;
-			heightReduced = 0F;
-			break;
+			case 0:
+				widthReduced = 0.25F;
+				heightReduced = 0.5F;
+				break;
+			case 1:
+				widthReduced = 0.125F;
+				heightReduced = 0.25F;
+				break;
+			case 2:
+				widthReduced = 0F;
+				heightReduced = 0F;
+				break;
+			case 3:
+				widthReduced = 0F;
+				heightReduced = 0F;
+				break;
 		}
 		setBlockBounds(widthReduced, 0F, widthReduced, 1F - widthReduced, 1F - heightReduced, 1F - widthReduced);
 	}
@@ -121,20 +117,20 @@ public class BlockBerryBush extends Block {
 		setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
 	}
 
+	@Override
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (rand.nextInt(20) == 0)
 			switch (meta) {
-			case 0:
-				world.setBlock(x, y, z, this, 1, 2);
-				break;
-			case 1:
-				world.setBlock(x, y, z, this, 2, 2);
-				break;
+				case 0:
+					world.setBlock(x, y, z, this, 1, 2);
+					break;
+				case 1:
+					world.setBlock(x, y, z, this, 2, 2);
+					break;
 			}
-		if (meta == 2 && rand.nextInt(40) == 0) {
+		if (meta == 2 && rand.nextInt(40) == 0)
 			world.setBlock(x, y, z, this, 3, 2);
-		}
 	}
 
 	@Override
@@ -170,7 +166,6 @@ public class BlockBerryBush extends Block {
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
-		ItemStack item = null;
 		if (world.isAirBlock(x, y - 1, z)) {
 			if (meta == 3)
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), getBerry());
@@ -204,5 +199,4 @@ public class BlockBerryBush extends Block {
 			item = new ItemStack(ModItems.food, 1, FoodType.swampBerries.ordinal());
 		return item;
 	}
-
 }
