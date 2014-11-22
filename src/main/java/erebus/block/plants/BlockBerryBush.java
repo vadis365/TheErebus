@@ -67,12 +67,6 @@ public class BlockBerryBush extends Block {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && world.getBlock(x, y, z) == this ? false : true;
-	}
-
-	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
