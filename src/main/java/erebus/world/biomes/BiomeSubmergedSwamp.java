@@ -1,7 +1,8 @@
 package erebus.world.biomes;
 
-import java.util.Random;
+import erebus.world.ChunkProviderErebus;
 
+import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
@@ -22,6 +23,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus
 		setBiomeName("Submerged Swamp");
 		setColors(0x314D31);
 		setTemperatureRainfall(0.75F, 0.85F);
+		//TODO Fix the swamp biome weight
 		setWeight(20000);
 		waterColorMultiplier = 6051893;
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
@@ -49,6 +51,6 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus
 	@Override
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand)
 	{
-		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 20 ? Blocks.flowing_water : Blocks.air : block;
+		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < ChunkProviderErebus.swampWaterHeight - 1 ? Blocks.flowing_water : Blocks.air : block;
 	}
 }

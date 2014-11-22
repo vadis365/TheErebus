@@ -1,5 +1,9 @@
 package erebus.world.biomes.decorators;
 
+import erebus.world.ChunkProviderErebus;
+
+import net.minecraft.world.gen.feature.WorldGenReed;
+import erebus.world.feature.plant.WorldGenAlgae;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
@@ -23,7 +27,6 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 {
 	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
-	private final WorldGenMire genMire = new WorldGenMire(Blocks.water);
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern, 1);
@@ -31,35 +34,12 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 	private final WorldGenTallGrass genSwampPlant = new WorldGenTallGrass(ModBlocks.swampPlant, 1);
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 	protected final WorldGenGasVents genGasVent = new WorldGenGasVents();
-	private final WorldGenSwampWater genSwampWater = new WorldGenSwampWater();
 	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
-	
+    private final WorldGenAlgae genAlgae = new WorldGenAlgae();
+    private final WorldGenReed genReed = new WorldGenReed();
+    
 	@Override
 	protected void populate() {
-		
-		for (attempt = 0; attempt < 300; attempt++)
-		{
-			xx = x + 16;
-			yy = rand.nextInt(20) + 10;
-			zz = z + 16;
-			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
-			{
-				genSwampWater.generate(world, rand, xx, yy - 1, zz);
-			}
-		}
-		
-		for (attempt = 0; attempt < 20; attempt++)
-		{
-			xx = x + 16;
-			yy = rand.nextInt(120);
-			zz = z + 16;
-
-			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
-			{
-				genMire.generate(world, rand, xx, yy, zz);
-			}
-		}
-		
 		for (attempt = 0; attempt < 800; attempt++)
 		{
 			xx = x + 16;
@@ -77,8 +57,25 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus
 	@Override
 	public void decorate()
 	{
+	    for (int attempt = 0; attempt < 5; attempt++)
+        {
+	        xx = x + offsetXZ();
+            yy = 20 + rand.nextInt(80);
+            zz = z + offsetXZ();
 
-		for (attempt = 0; attempt < 600; attempt++)
+            genAlgae.generate(world, rand, xx, yy, zz);
+        }
+        
+	    for (attempt = 0; attempt < 2; attempt++)
+        {
+            xx = x + offsetXZ();
+            yy = ChunkProviderErebus.swampWaterHeight;
+            zz = z + offsetXZ();
+
+            genReed.generate(world, rand, xx, yy, zz);
+        }
+	    
+	    for (attempt = 0; attempt < 600; attempt++)
 		{
 			xx = x + rand.nextInt(5) + 12;
 			yy = 15 + rand.nextInt(90);

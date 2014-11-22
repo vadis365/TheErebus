@@ -1,8 +1,10 @@
 package erebus.world;
 
+import erebus.ModBiomes;
+
+import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -45,6 +47,9 @@ public class ChunkProviderErebus implements IChunkProvider
 	private double[] noiseData3;
 	private double[] noiseData4;
 	private double[] noiseData5;
+	
+    private NoiseGeneratorPerlin perlinSwamp1 ;
+    private NoiseGeneratorPerlin perlinSwamp2;
 
 	private BiomeGenBase[] biomesForGeneration;
 
@@ -63,6 +68,8 @@ public class ChunkProviderErebus implements IChunkProvider
 		noiseGen4 = new NoiseGeneratorOctaves(rand, 4);
 		noiseGen5 = new NoiseGeneratorOctaves(rand, 10);
 		noiseGen6 = new NoiseGeneratorOctaves(rand, 16);
+        perlinSwamp1 = new NoiseGeneratorPerlin(this.rand, 4);
+        perlinSwamp2 = new NoiseGeneratorPerlin(this.rand, 4);
 		stoneNoise = new double[256];
 
 		caveGenerator = new MapGenErebusCaves();
@@ -151,7 +158,7 @@ public class ChunkProviderErebus implements IChunkProvider
 		Block[] blocks = new Block[32768];
 		byte[] metadata = new byte[32768];
 		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
-
+		
 		generateTerrain(x, z, blocks);
 		replaceBlocksForBiome(x, z, blocks, metadata, biomesForGeneration);
 
@@ -305,6 +312,8 @@ public class ChunkProviderErebus implements IChunkProvider
 
 		return noise;
 	}
+	
+	public static int swampWaterHeight = 24;
 
 	public void replaceBlocksForBiome(int x, int z, Block[] blocks, byte[] metadata, BiomeGenBase[] biomes)
 	{
@@ -317,17 +326,50 @@ public class ChunkProviderErebus implements IChunkProvider
 
 		byte var5 = 0;
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, x * 16, z * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
-
+		double d0 = 0.03125D;
+        double[] swampNoise1 = new double[256];
+        double[] swampNoise2 = new double[256];
+        swampNoise1 = this.perlinSwamp1.func_151599_a(swampNoise1, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+        swampNoise2 = this.perlinSwamp2.func_151599_a(swampNoise2, (double) (x * 16), (double) (z * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+        
 		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
 		{
 			for (int zInChunk = 0; zInChunk < 16; ++zInChunk)
 			{
-				BiomeBaseErebus biome = (BiomeBaseErebus) biomes[zInChunk + xInChunk * 16];
+			    int horIndex = zInChunk + xInChunk * 16;
+				BiomeBaseErebus biome = (BiomeBaseErebus) biomes[horIndex];
 				float temperature = biome.getFloatTemperature(0, 0, 0);
 				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
 				Block topBlock = biome.topBlock;
 				Block fillerBlock = biome.fillerBlock;
+                int preHeightIndex = (zInChunk * 16 + xInChunk) * 128;
+                
+                if(biome == ModBiomes.submergedSwamp) {                    
+                    if(swampNoise1[horIndex] > 1) {
+                        int h = getLowestAirBlock(blocks, preHeightIndex, 25, 35);
+                        if(h > swampWaterHeight) {
+                            for(h += 0; h >= 24 - swampNoise1[horIndex] + 0.08D; h--) {
+                                blocks[preHeightIndex + h] = h == swampWaterHeight ? rand.nextInt(32) == 0 ? Blocks.waterlily : Blocks.air : Blocks.air;
+                            }
+                            blocks[preHeightIndex + h] = swampNoise1[horIndex] < 1.08D ? ModBlocks.umberstone : swampNoise1[horIndex] < 1.5D ? Blocks.sand : swampNoise1[horIndex] < 2 ? ModBlocks.quickSand : swampNoise2[horIndex] > 2 ? ModBlocks.mud : Blocks.dirt;
+                        }
+                    }
+                    else if(swampNoise1[horIndex] > 0.85D) {
+                        int h = getLowestAirBlock(blocks, preHeightIndex, 25, 35);
+                        int average = (23 + h) / 2;
+                        if(h > swampWaterHeight) {
+                            for(h += 0; h >= average; h--) {
+                                blocks[preHeightIndex + h] = Blocks.air;
+                            }
+                            h++;
+                            if(rand.nextInt(8) == 0 && blocks[preHeightIndex + h] == Blocks.air && blocks[preHeightIndex + h + 1] == Blocks.air) {
+                                blocks[preHeightIndex + h] = blocks[preHeightIndex + h + 1] = ModBlocks.bullrush;
+                                metadata[preHeightIndex + h + 1] = 8;
+                            }
+                        }                        
+                    }
+                }
 
 				for (int yInChunk = 127; yInChunk >= 0; --yInChunk)
 				{
@@ -340,6 +382,8 @@ public class ChunkProviderErebus implements IChunkProvider
 					{
 						Block block = blocks[index];
 
+						if(biome == ModBiomes.submergedSwamp && yInChunk < swampWaterHeight && block == Blocks.air) blocks[index] = rand.nextInt(256) == 0 && blocks[index - 1].isOpaqueCube() && yInChunk < swampWaterHeight - 1 ? ModBlocks.mireCoral : Blocks.water;
+						
 						if (block.getMaterial() == Material.air)
 						{
 							var13 = -1;
@@ -401,7 +445,14 @@ public class ChunkProviderErebus implements IChunkProvider
 		}
 	}
 
-	@Override
+	private int getLowestAirBlock(Block[] blocks, int preHeightIndex, int minH, int maxH) {
+        for(int h = Math.min(minH, maxH); h <= Math.max(minH, maxH); h++) {
+            if(blocks[preHeightIndex + h] == Blocks.air) return h;
+        }
+	    return -1;
+    }
+
+    @Override
 	public void populate(IChunkProvider chunkProvider, int x, int z)
 	{
 		BlockFalling.fallInstantly = true;

@@ -1,7 +1,8 @@
 package erebus.world.structure;
 
-import java.util.Random;
+import erebus.world.ChunkProviderErebus;
 
+import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
@@ -230,7 +231,7 @@ public class MapGenErebusRavine extends MapGenBase
 		{
 			blocks[index] = Blocks.flowing_lava;
 		} 
-		else if (y < 18 && biome.biomeID == ModBiomes.submergedSwampID)
+		else if (y < ChunkProviderErebus.swampWaterHeight - 1 && biome.biomeID == ModBiomes.submergedSwampID)
 		{
 			blocks[index] = Blocks.flowing_water;
 		}else
