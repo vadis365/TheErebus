@@ -24,13 +24,7 @@ public class MushroomHelm extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap0)
-				|| material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap1)
-				|| material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap2)
-				|| material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap3)
-				|| material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap4)
-				|| material.getItem() == Item.getItemFromBlock(Blocks.red_mushroom_block)
-				|| material.getItem() == Item.getItemFromBlock(Blocks.brown_mushroom_block);
+		return material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap0) || material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap1) || material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap2) || material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap3) || material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap4) || material.getItem() == Item.getItemFromBlock(Blocks.red_mushroom_block) || material.getItem() == Item.getItemFromBlock(Blocks.brown_mushroom_block);
 	}
 
 	@Override
@@ -50,7 +44,7 @@ public class MushroomHelm extends ItemArmor {
 		model.bipedLeftArm.showModel = false;
 		model.bipedRightLeg.showModel = false;
 		model.bipedLeftLeg.showModel = false;
-		
+
 		return model;
 	}
 
@@ -60,11 +54,10 @@ public class MushroomHelm extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-		if(player.getFoodStats().needFood() && stack.getItemDamage() != 40) {
+		if (player.getFoodStats().needFood() && stack.getItemDamage() != 40) {
 			player.getFoodStats().addStats(1, 0.2F);
 			stack.damageItem(1, player);
 		}
 	}
 
 }
-

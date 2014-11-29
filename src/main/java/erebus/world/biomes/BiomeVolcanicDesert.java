@@ -18,10 +18,8 @@ import erebus.entity.EntitySolifuge;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
 
-public class BiomeVolcanicDesert extends BiomeBaseErebus
-{
-	public BiomeVolcanicDesert(int biomeID)
-	{
+public class BiomeVolcanicDesert extends BiomeBaseErebus {
+	public BiomeVolcanicDesert(int biomeID) {
 		super(biomeID, new BiomeDecoratorVolcanicDesert());
 
 		setBiomeName("Volcanic Desert");
@@ -46,8 +44,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus
 	}
 
 	@Override
-	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand)
-	{
+	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
 		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 17 ? Blocks.flowing_lava : Blocks.air : block;
 	}
 }

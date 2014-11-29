@@ -12,8 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityBlackAnt;
 
 @SideOnly(Side.CLIENT)
-public class ModelBlackAnt extends ModelBase
-{
+public class ModelBlackAnt extends ModelBase {
 	ModelRenderer Thx;
 	ModelRenderer ThxTop;
 	ModelRenderer ThxS;
@@ -77,8 +76,7 @@ public class ModelBlackAnt extends ModelBase
 	ModelRenderer SprayLConduit;
 	ModelRenderer SprayRConduit;
 
-	public ModelBlackAnt()
-	{
+	public ModelBlackAnt() {
 		textureWidth = 64;
 		textureHeight = 128;
 		Thx = new ModelRenderer(this, 14, 13);
@@ -340,8 +338,7 @@ public class ModelBlackAnt extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityBlackAnt ant = (EntityBlackAnt) entity;
@@ -364,22 +361,19 @@ public class ModelBlackAnt extends ModelBase
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 3))
-		{
+		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 3)) {
 			LeftPack.render(unitPixel);
 			StrapPack.render(unitPixel);
 			RightPack.render(unitPixel);
 
 		}
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 4))
-		{
+		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 4)) {
 			RightShears.render(unitPixel);
 			LeftShears.render(unitPixel);
 		}
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 2))
-		{
+		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 2)) {
 			LeftPack.render(unitPixel);
 			StrapPack.render(unitPixel);
 			RightPack.render(unitPixel);
@@ -393,8 +387,7 @@ public class ModelBlackAnt extends ModelBase
 			GL11.glPopMatrix();
 		}
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 5))
-		{
+		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 5)) {
 			LeftPack.render(unitPixel);
 			StrapPack.render(unitPixel);
 			RightPack.render(unitPixel);
@@ -409,16 +402,14 @@ public class ModelBlackAnt extends ModelBase
 
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		Head1.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
 		Head1.rotateAngleX = rotationPitch / (180F / (float) Math.PI) - 1F;
 		RightShears.rotateAngleY = LeftShears.rotateAngleY = Head1.rotateAngleY;

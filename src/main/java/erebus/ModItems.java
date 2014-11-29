@@ -72,8 +72,7 @@ import erebus.item.hearts.StoneHeart;
 import erebus.item.hearts.TerraHeart;
 import erebus.item.hearts.TwinHeart;
 
-public class ModItems
-{
+public class ModItems {
 
 	// BASIC MATERIALS
 	public static final Item portalActivator = new PortalActivator().setUnlocalizedName("erebus.portalActivator");
@@ -164,7 +163,7 @@ public class ModItems
 	public static final Item armorGliderPowered = new ArmorGlider().setUnlocalizedName("erebus.armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 	public static final Item mushroomHelm = new MushroomHelm(0).setUnlocalizedName("erebus.mushroomHelm").setTextureName("erebus:mushroomHelm");
 	public static final Item spiderTShirt = new SpiderTShirt(1).setUnlocalizedName("erebus.spiderTShirt").setTextureName("erebus:spiderTShirtItem");
-	
+
 	// CREATIVE
 	public static final Item spawnEggs = new SpawnEggs().setUnlocalizedName("erebus.monsterPlacer").setTextureName("spawn_egg");
 
@@ -180,17 +179,14 @@ public class ModItems
 	public static final Item bucketHoney = new ItemBucket(ModBlocks.honeyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.bucketHoney").setTextureName("erebus:bucketHoney");
 
 	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("erebus.bottleAntiVenom");
-	
 
-	public static void init()
-	{
+	public static void init() {
 		initCreativeTabs();
 		registerItems();
 		registerProperties();
 	}
 
-	private static void initCreativeTabs()
-	{
+	private static void initCreativeTabs() {
 		ModTabs.items.setTab(materials, whetstone, food, smoothie, turnip, encrustedDiamond);
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots, spiderTShirt);
@@ -199,45 +195,32 @@ public class ModItems
 		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds);
 	}
 
-	private static void registerItems()
-	{
-		try
-		{
-			for (Field f : ModItems.class.getDeclaredFields())
-			{
+	private static void registerItems() {
+		try {
+			for (Field f : ModItems.class.getDeclaredFields()) {
 				Object obj = f.get(null);
 				if (obj instanceof Item)
-				{
 					registerItem((Item) obj);
-				} else if (obj instanceof Item[])
-				{
+				else if (obj instanceof Item[])
 					for (Item item : (Item[]) obj)
-					{
 						registerItem(item);
-					}
-				}
 			}
-		} catch (IllegalAccessException e)
-		{
+		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private static void registerItem(Item item)
-	{
+	private static void registerItem(Item item) {
 		String name = item.getUnlocalizedName();
 		String[] strings = name.split("\\.");
 		GameRegistry.registerItem(item, strings[strings.length - 1]);
 	}
 
-	private static void registerProperties()
-	{
-		GameRegistry.registerFuelHandler(new IFuelHandler()
-		{
+	private static void registerProperties() {
+		GameRegistry.registerFuelHandler(new IFuelHandler() {
 
 			@Override
-			public int getBurnTime(ItemStack fuel)
-			{
+			public int getBurnTime(ItemStack fuel) {
 				return fuel.getItem() == materials && fuel.getItemDamage() == DATA.bamboo.ordinal() ? 300 : 0;
 			}
 		});

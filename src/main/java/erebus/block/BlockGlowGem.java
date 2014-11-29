@@ -20,22 +20,18 @@ import net.minecraft.world.World;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityGlowGem;
 
-public class BlockGlowGem extends BlockContainer
-{
+public class BlockGlowGem extends BlockContainer {
 
-	public BlockGlowGem()
-	{
+	public BlockGlowGem() {
 		super(Material.glass);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
-	{
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
 		int meta = access.getBlockMetadata(x, y, z);
 		float widthMin = 0, heightMin = 0, depthMin = 0;
 		float widthMax = 0, heightMax = 0, depthMax = 0;
-		switch (meta)
-		{
+		switch (meta) {
 			case 0:
 				break;
 			case 1:
@@ -141,122 +137,84 @@ public class BlockGlowGem extends BlockContainer
 	}
 
 	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z)
-	{
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 		TileEntityGlowGem tile = Utils.getTileEntity(world, x, y, z, TileEntityGlowGem.class);
 		if (tile == null)
-		{
 			return 0;
-		}
 
 		return tile.lightOn ? 15 : 0;
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return -1;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{
+	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return world.isSideSolid(x, y + 1, z, DOWN) || world.isSideSolid(x, y - 1, z, UP) || world.isSideSolid(x - 1, y, z, EAST) || world.isSideSolid(x + 1, y, z, WEST) || world.isSideSolid(x, y, z - 1, SOUTH) || world.isSideSolid(x, y, z + 1, NORTH);
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta)
-	{
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
 
 		if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
-		{
 			meta = 0;
-		}
 
 		if (side == 1 && world.isSideSolid(x, y - 1, z, UP))
-		{
 			meta = 1;
-		}
 
 		if (side == 2 && world.isSideSolid(x, y, z + 1, NORTH))
-		{
 			meta = 2;
-		}
 
 		if (side == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
-		{
 			meta = 3;
-		}
 
 		if (side == 4 && world.isSideSolid(x + 1, y, z, WEST))
-		{
 			meta = 4;
-		}
 
 		if (side == 5 && world.isSideSolid(x - 1, y, z, EAST))
-		{
 			meta = 5;
-		}
 
 		return meta;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour)
-	{
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
 		boolean flag = false;
 
 		if (meta == 0 || meta == 6 || meta == 7 || meta == 8 || meta == 9)
-		{
 			if (world.isSideSolid(x, y + 1, z, DOWN))
-			{
 				flag = true;
-			}
-		}
 
 		if (meta == 1 || meta == 10 || meta == 11 || meta == 12 || meta == 13)
-		{
 			if (world.isSideSolid(x, y - 1, z, UP))
-			{
 				flag = true;
-			}
-		}
 
 		if (meta == 2 && world.isSideSolid(x, y, z + 1, NORTH))
-		{
 			flag = true;
-		}
 
 		if (meta == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
-		{
 			flag = true;
-		}
 
 		if (meta == 4 && world.isSideSolid(x + 1, y, z, WEST))
-		{
 			flag = true;
-		}
 
 		if (meta == 5 && world.isSideSolid(x - 1, y, z, EAST))
-		{
 			flag = true;
-		}
 
-		if (!flag)
-		{
+		if (!flag) {
 			dropBlockAsItem(world, x, y, z, meta, 0);
 			world.setBlockToAir(x, y, z);
 		}
@@ -265,29 +223,23 @@ public class BlockGlowGem extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
-	{
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 
 		TileEntityGlowGem tile = Utils.getTileEntity(world, x, y, z, TileEntityGlowGem.class);
 		if (tile == null)
-		{
 			return false;
-		}
 
 		tile.toggleLight();
 		return true;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
-	{
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
 		int direction = MathHelper.floor_double(player.rotationYaw * 4F / 360F + 0.5D) & 3;
 		int meta = world.getBlockMetadata(x, y, z);
 		int newMeta = meta;
 		if (meta == 0)
-		{
-			switch (direction)
-			{
+			switch (direction) {
 				case 0:
 					newMeta = 6;
 					break;
@@ -301,12 +253,9 @@ public class BlockGlowGem extends BlockContainer
 					newMeta = 9;
 					break;
 			}
-		}
 
 		if (meta == 1)
-		{
-			switch (direction)
-			{
+			switch (direction) {
 				case 0:
 					newMeta = 10;
 					break;
@@ -320,19 +269,16 @@ public class BlockGlowGem extends BlockContainer
 					newMeta = 13;
 					break;
 			}
-		}
 		world.setBlockMetadataWithNotify(x, y, z, newMeta, 3);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		return null;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityGlowGem();
 	}
 }

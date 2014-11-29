@@ -5,18 +5,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class AmbientMusicManager
-{
+public class AmbientMusicManager {
 
 	private static AmbientMusicManager instance;
 
-	public static AmbientMusicManager getInstance()
-	{
+	public static AmbientMusicManager getInstance() {
 		return instance;
 	}
 
-	public static void register()
-	{
+	public static void register() {
 		instance = new AmbientMusicManager();
 
 		MinecraftForge.EVENT_BUS.register(instance);

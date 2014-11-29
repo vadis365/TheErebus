@@ -8,9 +8,8 @@ import erebus.ModItems;
 
 public class EntityPickupEventHandler {
 	@SubscribeEvent
-	public void itemPickup(EntityItemPickupEvent event){
-		if(event.item.getEntityItem() == new ItemStack(ModItems.spiderTShirt)){
+	public void itemPickup(EntityItemPickupEvent event) {
+		if (event.item.getEntityItem() == new ItemStack(ModItems.spiderTShirt))
 			event.entityPlayer.triggerAchievement(ModAchievements.tshirt);
-		}
 	}
 }

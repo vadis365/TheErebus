@@ -9,19 +9,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
-public class BlockVelocityBlockRender implements ISimpleBlockRenderingHandler
-{
+public class BlockVelocityBlockRender implements ISimpleBlockRenderingHandler {
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		BlockRenderHelper.renderSimpleBlock(block, 0, renderer);
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-	{
-		switch (world.getBlockMetadata(x, y, z))
-		{
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+		switch (world.getBlockMetadata(x, y, z)) {
 			case 0:
 				renderer.uvRotateTop = 0;
 				break;
@@ -42,14 +38,12 @@ public class BlockVelocityBlockRender implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId)
-	{
+	public boolean shouldRender3DInInventory(int modelId) {
 		return true;
 	}
 
 	@Override
-	public int getRenderId()
-	{
+	public int getRenderId() {
 		return BlockRenderIDs.VELOCITY_BLOCK.id();
 	}
 }

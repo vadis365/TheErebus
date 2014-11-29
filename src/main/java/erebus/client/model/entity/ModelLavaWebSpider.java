@@ -11,8 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelLavaWebSpider extends ModelBase
-{
+public class ModelLavaWebSpider extends ModelBase {
 	ModelRenderer ThxTop;
 	ModelRenderer Thx;
 	ModelRenderer ThxS;
@@ -55,8 +54,7 @@ public class ModelLavaWebSpider extends ModelBase
 	ModelRenderer Lmand;
 	ModelRenderer Rmand;
 
-	public ModelLavaWebSpider()
-	{
+	public ModelLavaWebSpider() {
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -238,8 +236,7 @@ public class ModelLavaWebSpider extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GL11.glPushMatrix();
@@ -265,16 +262,14 @@ public class ModelLavaWebSpider extends ModelBase
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 
 		float cosZ = MathHelper.cos(limbSwing * 1.0F) * 0.5F * limbSwingAngle;

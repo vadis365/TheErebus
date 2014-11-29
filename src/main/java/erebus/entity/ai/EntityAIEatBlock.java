@@ -12,8 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import erebus.core.helper.Spiral;
 import erebus.core.helper.Utils;
 
-public abstract class EntityAIEatBlock extends EntityAIBase
-{
+public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	/**
 	 * The bigger you make this value the faster the AI will be. But performance
@@ -34,8 +33,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase
 	private int eatTicks;
 	private static final List<Point> spiral = new Spiral(16, 16).spiral();
 
-	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, double moveSpeed, int eatSpeed)
-	{
+	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, double moveSpeed, int eatSpeed) {
 		this.entity = entity;
 		this.maxGrowthMetadata = maxGrowthMetadata;
 		this.block = block;
@@ -45,104 +43,80 @@ public abstract class EntityAIEatBlock extends EntityAIBase
 	}
 
 	@Override
-	public boolean shouldExecute()
-	{
+	public boolean shouldExecute() {
 		return entity.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 	}
 
 	@Override
-	public boolean continueExecuting()
-	{
+	public boolean continueExecuting() {
 		return !entity.isChild();
 	}
 
 	@Override
-	public void updateTask()
-	{
+	public void updateTask() {
 		if (!continueExecuting())
-		{
 			return;
-		}
 
 		int xCoord = (int) entity.posX;
 		int yCoord = (int) entity.posY;
 		int zCoord = (int) entity.posZ;
 
 		for (int i = 0; i < CHECKS_PER_TICK; i++)
-		{
-			if (!hasTarget)
-			{
+			if (!hasTarget) {
 				increment();
 
 				Point p = getNextPoint();
 				for (int y = -2; y < 2; y++)
-				{
-					if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y)))
-					{
+					if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 						cropX = xCoord + p.x;
 						cropY = yCoord + y;
 						cropZ = zCoord + p.y;
 						hasTarget = true;
 					}
-				}
-			} else if (isEntityReady())
-			{
+			} else if (isEntityReady()) {
 				moveToLocation();
 				entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 				AxisAlignedBB blockbounds = getBlockAABB(cropX, cropY, cropZ);
 				boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
 
-				if (flag)
-				{
+				if (flag) {
 					prepareToEat();
 					eatTicks++;
 					entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), cropX, cropY, cropZ, getScaledEatTicks());
 					if (!canEatBlock(entity.worldObj.getBlock(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
-					{
 						hasTarget = false;
-					} else if (EAT_SPEED <= eatTicks)
-					{
+					else if (EAT_SPEED <= eatTicks) {
 						entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
 						if (getTargetBlock() != Blocks.tallgrass)
-						{
 							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, new ItemStack(getTargetBlock().getItemDropped(entity.worldObj.getBlockMetadata(cropX, cropY, cropZ), entity.worldObj.rand, 0), 1));
-						}
 						hasTarget = false;
 						eatTicks = 0;
 						afterEaten();
 					}
 				}
-				if (!flag && eatTicks > 0)
-				{
+				if (!flag && eatTicks > 0) {
 					eatingInterupted();
 					hasTarget = false;
 					eatTicks = 0;
 				}
 			}
-		}
 	}
 
-	private int getScaledEatTicks()
-	{
+	private int getScaledEatTicks() {
 		return (int) ((float) eatTicks / (float) EAT_SPEED * 10.0F);
 	}
 
-	private void increment()
-	{
+	private void increment() {
 		spiralIndex++;
 		if (spiralIndex >= spiral.size())
-		{
 			spiralIndex = 0;
-		}
 	}
 
-	private Point getNextPoint()
-	{
+	private Point getNextPoint() {
 		return spiral.get(spiralIndex);
 	}
 
-	public Block getTargetBlock()
-	{
+	public Block getTargetBlock() {
 		return entity.worldObj.getBlock(cropX, cropY, cropZ);
 	}
 
@@ -154,8 +128,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase
 	 * @param meta
 	 * @return true is should eat block, false is it shouldn't
 	 */
-	protected boolean canEatBlock(Block block, int meta)
-	{
+	protected boolean canEatBlock(Block block, int meta) {
 		return block == this.block && meta == maxGrowthMetadata;
 	}
 
@@ -186,8 +159,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase
 	 */
 	protected abstract void afterEaten();
 
-	protected AxisAlignedBB getBlockAABB(int x, int y, int z)
-	{
+	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
 		return AxisAlignedBB.getBoundingBox(cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
 	}
 }

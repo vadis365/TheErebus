@@ -16,33 +16,27 @@ import erebus.client.model.item.ModelWaspDagger;
 import erebus.entity.EntityWaspDagger;
 
 @SideOnly(Side.CLIENT)
-public class WaspDaggerItemRenderer extends Render implements IItemRenderer
-{
+public class WaspDaggerItemRenderer extends Render implements IItemRenderer {
 	private final ModelWaspDagger ModelWaspDagger;
 	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/items/waspSword.png");
 
-	public WaspDaggerItemRenderer()
-	{
+	public WaspDaggerItemRenderer() {
 		ModelWaspDagger = new ModelWaspDagger();
 	}
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type)
-	{
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-	{
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return helper != ItemRendererHelper.BLOCK_3D;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-	{
-		switch (type)
-		{
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		switch (type) {
 			case ENTITY:
 				renderDagger(0.0F, 0.0F, 0.0F, 0.25D);
 				break;
@@ -60,8 +54,7 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 		}
 	}
 
-	private void renderEquipped(float x, float y, float z, double size)
-	{
+	private void renderEquipped(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y + 0.6F, z + 0.5F);
@@ -72,11 +65,9 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderDagger(float x, float y, float z, double size)
-	{
+	private void renderDagger(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
-		if (RenderItem.renderInFrame)
-		{
+		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x - 0.2F, y - 1.0F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
@@ -84,8 +75,7 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 			GL11.glScaled(0.3F, 0.3F, 0.3F);
 			ModelWaspDagger.render(0.0625F);
 			GL11.glPopMatrix();
-		} else
-		{
+		} else {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
@@ -97,8 +87,7 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 		}
 	}
 
-	private void renderDaggerFirstPerson(float x, float y, float z, double size)
-	{
+	private void renderDaggerFirstPerson(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
@@ -109,8 +98,7 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderDaggerInventory(float x, float y, float z, double size)
-	{
+	private void renderDaggerInventory(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
@@ -123,13 +111,11 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime)
-	{
+	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderWaspDagger((EntityWaspDagger) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
-	public void renderWaspDagger(EntityWaspDagger entityWaspDagger, double x, double y, double z, float rotationYaw, float partialTickTime)
-	{
+	public void renderWaspDagger(EntityWaspDagger entityWaspDagger, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x, (float) y, (float) z);
@@ -141,8 +127,7 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

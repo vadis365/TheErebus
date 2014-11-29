@@ -1,8 +1,7 @@
 package erebus.world.biomes;
 
-import erebus.world.ChunkProviderErebus;
-
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
@@ -10,14 +9,13 @@ import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
+import erebus.world.ChunkProviderErebus;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
 
-public class BiomeSubmergedSwamp extends BiomeBaseErebus
-{
+public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 
-	public BiomeSubmergedSwamp(int biomeID)
-	{
+	public BiomeSubmergedSwamp(int biomeID) {
 		super(biomeID, new BiomeDecoratorSubmergedSwamp());
 
 		setBiomeName("Submerged Swamp");
@@ -49,8 +47,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus
 	 */
 
 	@Override
-	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand)
-	{
+	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
 		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < ChunkProviderErebus.swampWaterHeight - 1 ? Blocks.flowing_water : Blocks.air : block;
 	}
 }

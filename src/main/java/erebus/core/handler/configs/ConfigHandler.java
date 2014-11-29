@@ -7,8 +7,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModBiomes;
 import erebus.lib.Reference;
 
-public class ConfigHandler
-{
+public class ConfigHandler {
 
 	public static final ConfigHandler INSTANCE = new ConfigHandler();
 
@@ -22,16 +21,14 @@ public class ConfigHandler
 
 	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores", "Integration" };
 
-	public void loadConfig(FMLPreInitializationEvent event)
-	{
+	public void loadConfig(FMLPreInitializationEvent event) {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 
 		config.load();
 		syncConfigs();
 	}
 
-	private void syncConfigs()
-	{
+	private void syncConfigs() {
 		ModBiomes.undergroundJungleID = config.get("Biomes", "Underground Jungle", 100).getInt(100);
 		ModBiomes.volcanicDesertID = config.get("Biomes", "Volcanic Desert", 101).getInt(101);
 		ModBiomes.subterraneanSavannahID = config.get("Biomes", "Subterranean Savannah", 102).getInt(102);
@@ -64,7 +61,7 @@ public class ConfigHandler
 		playCustomSongs = config.get(Configuration.CATEGORY_GENERAL, "Play erebus songs", true).getBoolean(true);
 		alternativePlanks = config.get(Configuration.CATEGORY_GENERAL, "Alternative Planks Textures", false).getBoolean(false);
 		graveMarker = config.get(Configuration.CATEGORY_GENERAL, "Block O' Bones Inventory Save", true).getBoolean(true);
-		
+
 		lead = config.get("Ores", "Generate lead", false).getBoolean(false);
 		silver = config.get("Ores", "Generate silver", false).getBoolean(false);
 		copper = config.get("Ores", "Generate copper", false).getBoolean(false);
@@ -75,17 +72,12 @@ public class ConfigHandler
 		disableFMP = config.get("Integration", "Disable Forge Multipart integration", false).getBoolean(false);
 
 		if (config.hasChanged())
-		{
 			config.save();
-		}
 	}
 
 	@SubscribeEvent
-	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
-	{
+	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 		if (Reference.MOD_ID.equals(event.modID))
-		{
 			syncConfigs();
-		}
 	}
 }

@@ -22,77 +22,57 @@ import erebus.network.server.PacketGlider;
 import erebus.network.server.PacketGliderPowered;
 
 @SideOnly(Side.CLIENT)
-public class KeyBindingHandler
-{
+public class KeyBindingHandler {
 
 	public static KeyBinding glide = new KeyBinding("Glide", Keyboard.KEY_G, Reference.MOD_NAME);
 	public static KeyBinding poweredGlide = new KeyBinding("Glider Lift", Keyboard.KEY_F, Reference.MOD_NAME);
 	public static KeyBinding beetleRam = new KeyBinding("Beetle Ram Attack", Keyboard.KEY_R, Reference.MOD_NAME);
 
-	public KeyBindingHandler()
-	{
+	public KeyBindingHandler() {
 		ClientRegistry.registerKeyBinding(glide);
 		ClientRegistry.registerKeyBinding(poweredGlide);
 		ClientRegistry.registerKeyBinding(beetleRam);
 	}
 
 	@SubscribeEvent
-	public void onKey(KeyInputEvent e)
-	{
-		if (glide.isPressed())
-		{
+	public void onKey(KeyInputEvent e) {
+		if (glide.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
-			{
 				return;
-			}
 
 			ItemStack chestPlate = player.inventory.armorInventory[2];
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered)
-			{
+			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 				if (!chestPlate.hasTagCompound())
-				{
 					chestPlate.stackTagCompound = new NBTTagCompound();
-				}
 
 				chestPlate.getTagCompound().setBoolean("isGliding", true);
 				PacketPipeline.sendToServer(new PacketGlider(true));
 			}
 		}
 
-		if (poweredGlide.isPressed())
-		{
+		if (poweredGlide.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
-			{
 				return;
-			}
 
 			ItemStack chestPlate = player.inventory.armorInventory[2];
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered)
-			{
+			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 				if (!chestPlate.hasTagCompound())
-				{
 					chestPlate.stackTagCompound = new NBTTagCompound();
-				}
 
 				chestPlate.getTagCompound().setBoolean("isPowered", true);
 				PacketPipeline.sendToServer(new PacketGliderPowered(true));
 			}
 		}
 
-		if (beetleRam.isPressed())
-		{
+		if (beetleRam.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 			if (player == null)
-			{
 				return;
-			}
 
 			if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
-			{
 				PacketPipeline.sendToServer(new PacketBeetleRamAttack(true));
-			}
 		}
 	}
 }

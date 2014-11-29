@@ -12,28 +12,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelTarantulaEgg;
 
 @SideOnly(Side.CLIENT)
-public class ItemTarantulaEggRenderer implements IItemRenderer
-{
+public class ItemTarantulaEggRenderer implements IItemRenderer {
 	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/tarantulaEgg.png");
 	private final ModelTarantulaEgg model = new ModelTarantulaEgg();
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type)
-	{
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-	{
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return true;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-	{
-		switch (type)
-		{
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		switch (type) {
 			case ENTITY:
 				renderBlock(0.0F, 1.0F, 0.0F);
 				break;
@@ -51,8 +46,7 @@ public class ItemTarantulaEggRenderer implements IItemRenderer
 		}
 	}
 
-	private void renderBlock(float x, float y, float z)
-	{
+	private void renderBlock(float x, float y, float z) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glScaled(-1, -1, 1);

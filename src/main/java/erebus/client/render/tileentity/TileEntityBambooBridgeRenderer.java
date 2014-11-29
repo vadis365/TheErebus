@@ -12,15 +12,13 @@ import erebus.client.model.block.ModelBambooBridge;
 import erebus.tileentity.TileEntityBambooBridge;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityBambooBridgeRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityBambooBridgeRenderer extends TileEntitySpecialRenderer {
 
 	private final ModelBambooBridge ModelBambooBridge = new ModelBambooBridge();
 	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/bambooLadder.png");
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation)
-	{
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation) {
 		TileEntityBambooBridge bridge = (TileEntityBambooBridge) tile;
 		bindTexture(texture);
 
@@ -28,8 +26,7 @@ public class TileEntityBambooBridgeRenderer extends TileEntitySpecialRenderer
 		GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
 		GL11.glScalef(1F, -1F, -1F);
 
-		switch (bridge.getBlockMetadata())
-		{
+		switch (bridge.getBlockMetadata()) {
 			case 2:
 				GL11.glRotatef(180F, 0.0F, 1F, 0F);
 				break;

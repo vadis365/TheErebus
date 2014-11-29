@@ -7,23 +7,19 @@ import net.minecraft.item.Item;
 import erebus.ModItems;
 import erebus.item.Materials;
 
-public class UmberOreJade extends UmberOre
-{
+public class UmberOreJade extends UmberOre {
 
-	public UmberOreJade()
-	{
+	public UmberOreJade() {
 		super(Blocks.diamond_ore, "Jade", 2);
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune)
-	{
+	public Item getItemDropped(int meta, Random rand, int fortune) {
 		return ModItems.materials;
 	}
 
 	@Override
-	public int damageDropped(int meta)
-	{
+	public int damageDropped(int meta) {
 		return Materials.DATA.jade.ordinal();
 	}
 }

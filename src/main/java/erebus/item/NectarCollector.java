@@ -9,11 +9,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NectarCollector extends Item
-{
+public class NectarCollector extends Item {
 
-	public NectarCollector()
-	{
+	public NectarCollector() {
 		setMaxDamage(64);
 		setMaxStackSize(1);
 	}
@@ -21,14 +19,12 @@ public class NectarCollector extends Item
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag)
-	{
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
 		list.add("Right click Bees to collect nectar");
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-	{
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		player.swingItem();
 		return true;
 	}

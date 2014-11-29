@@ -6,37 +6,29 @@ import net.minecraft.util.ChunkCoordinates;
 import erebus.ModBlocks;
 import erebus.entity.EntityWorkerBee;
 
-public class EntityAIPolinate extends EntityAIFindFlower
-{
+public class EntityAIPolinate extends EntityAIFindFlower {
 
-	public EntityAIPolinate(EntityLiving entity, int pollinateSpeed)
-	{
+	public EntityAIPolinate(EntityLiving entity, int pollinateSpeed) {
 		super(entity, null, 0, pollinateSpeed);
 	}
 
 	@Override
-	protected boolean canPolinate(Block blockID, int blockMeta)
-	{
+	protected boolean canPolinate(Block blockID, int blockMeta) {
 		if (blockID == null)
-		{
 			return false;
-		} else if (blockID == ModBlocks.stiga)
-		{
+		else if (blockID == ModBlocks.stiga)
 			return true;
-		}
 
 		return false;
 	}
 
 	@Override
-	protected boolean isEntityReady()
-	{
+	protected boolean isEntityReady() {
 		return true;
 	}
 
 	@Override
-	protected void moveToLocation()
-	{
+	protected void moveToLocation() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		bee.setBeePollinating(true);
 		bee.setBeeFlying(false);
@@ -45,14 +37,12 @@ public class EntityAIPolinate extends EntityAIFindFlower
 	}
 
 	@Override
-	protected void prepareToPollinate()
-	{
+	protected void prepareToPollinate() {
 
 	}
 
 	@Override
-	protected void pollinationInterupted()
-	{
+	protected void pollinationInterupted() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		bee.setBeePollinating(false);
 		bee.setBeeFlying(true);
@@ -60,20 +50,15 @@ public class EntityAIPolinate extends EntityAIFindFlower
 	}
 
 	@Override
-	protected void afterPollination()
-	{
+	protected void afterPollination() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		if (bee.getNectarPoints() < 127)
-		{
 			bee.setNectarPoints(bee.getNectarPoints() + 1);
-		}
-		if (bee.getTameState() == 0)
-		{
+		if (bee.getTameState() == 0) {
 			bee.setBeePollinating(false);
 			bee.setBeeFlying(true);
 			bee.flyAbout();
-		} else if (bee.getTameState() == 1)
-		{
+		} else if (bee.getTameState() == 1) {
 			bee.setBeePollinating(false);
 			bee.setBeeCollecting(true);
 		}

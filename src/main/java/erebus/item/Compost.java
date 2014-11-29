@@ -7,25 +7,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModTabs;
 
-public class Compost extends Item
-{
+public class Compost extends Item {
 
-	public Compost()
-	{
+	public Compost() {
 		setCreativeTab(ModTabs.items);
 		setUnlocalizedName("erebus.compost");
 		setTextureName("erebus:compost");
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-	{
-		if (ItemDye.applyBonemeal(stack, world, x, y, z, player))
-		{
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (ItemDye.applyBonemeal(stack, world, x, y, z, player)) {
 			if (!world.isRemote)
-			{
 				world.playAuxSFX(2005, x, y, z, 0);
-			}
 			return true;
 		}
 		return false;

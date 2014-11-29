@@ -10,24 +10,20 @@ import org.lwjgl.opengl.GL11;
 import erebus.client.model.entity.ModelBlackAnt;
 import erebus.entity.EntityBlackAnt;
 
-public class RenderBlackAnt extends RenderLiving
-{
+public class RenderBlackAnt extends RenderLiving {
 
 	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackAntKit.png");
 
-	public RenderBlackAnt()
-	{
+	public RenderBlackAnt() {
 		super(new ModelBlackAnt(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime)
-	{
+	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
 		scaleBlackAnt((EntityBlackAnt) entityliving, partialTickTime);
 	}
 
-	public void renderBlackAnt(EntityBlackAnt entity, double x, double y, double z, float rotationYaw, float partialTickTime)
-	{
+	public void renderBlackAnt(EntityBlackAnt entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		// double a = Math.toRadians(entity.renderYawOffset);
 		// double offSetX = -Math.sin(a) * 1D;
 		// double offSetZ = Math.cos(a) * 1D;
@@ -36,20 +32,17 @@ public class RenderBlackAnt extends RenderLiving
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime)
-	{
+	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
 		renderBlackAnt((EntityBlackAnt) entity, x, y, z, rotationYaw, partialTickTime);
 	}
 
-	protected void scaleBlackAnt(EntityBlackAnt entityBlackAnt, float partialTickTime)
-	{
+	protected void scaleBlackAnt(EntityBlackAnt entityBlackAnt, float partialTickTime) {
 		float size = 0.5F;
 		GL11.glScalef(size, size, size);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

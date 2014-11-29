@@ -11,8 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityErebusAltarXP;
 
 @SideOnly(Side.CLIENT)
-public class ModelAltarXP extends ModelBase
-{
+public class ModelAltarXP extends ModelBase {
 	ModelRenderer GlassTop;
 	ModelRenderer GlassBot;
 	ModelRenderer GlassMid;
@@ -26,8 +25,7 @@ public class ModelAltarXP extends ModelBase
 	ModelRenderer Mid;
 	ModelRenderer Bot;
 
-	public ModelAltarXP()
-	{
+	public ModelAltarXP() {
 		textureWidth = 256;
 		textureHeight = 64;
 
@@ -81,8 +79,7 @@ public class ModelAltarXP extends ModelBase
 		setRotation(Bot, 0F, 0F, 0F);
 	}
 
-	public void render(TileEntityErebusAltarXP tile)
-	{
+	public void render(TileEntityErebusAltarXP tile) {
 		float x = tile.animationTicks;
 		GL11.glPushMatrix();
 		GL11.glScalef(0.04F * x, 0.04F * x, 0.04F * x);
@@ -107,16 +104,14 @@ public class ModelAltarXP extends ModelBase
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 	}
 
 }

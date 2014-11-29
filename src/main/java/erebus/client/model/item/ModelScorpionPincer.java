@@ -4,14 +4,12 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelScorpionPincer extends ModelBase
-{
+public class ModelScorpionPincer extends ModelBase {
 	ModelRenderer ClawR4;
 	ModelRenderer ClawR5Top;
 	ModelRenderer ClawR5Bot;
 
-	public ModelScorpionPincer()
-	{
+	public ModelScorpionPincer() {
 		textureWidth = 16;
 		textureHeight = 16;
 
@@ -29,23 +27,20 @@ public class ModelScorpionPincer extends ModelBase
 		setRotation(ClawR5Bot, 0F, 0F, -0.3490659F);
 	}
 
-	public void render(float unitPixel)
-	{
+	public void render(float unitPixel) {
 		ClawR4.render(unitPixel);
 		ClawR5Top.render(unitPixel);
 		ClawR5Bot.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par6Entity)
-	{
+	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par6Entity) {
 	}
 
 }

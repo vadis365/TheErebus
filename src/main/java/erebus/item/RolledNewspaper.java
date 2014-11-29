@@ -14,10 +14,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModMaterials;
 
-public class RolledNewspaper extends ItemSword
-{
-	public RolledNewspaper()
-	{
+public class RolledNewspaper extends ItemSword {
+	public RolledNewspaper() {
 		super(ModMaterials.rolledNewspaper);
 		setTextureName("erebus:rolledNewspaper");
 		setUnlocalizedName("erebus.rolledNewspaper");
@@ -26,25 +24,20 @@ public class RolledNewspaper extends ItemSword
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubItems(Item item, CreativeTabs tab, List list)
-	{
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		ItemStack stack = new ItemStack(item);
 		stack.addEnchantment(Enchantment.baneOfArthropods, 5);
 		list.add(stack);
 	}
 
 	@Override
-	public void onCreated(ItemStack is, World world, EntityPlayer player)
-	{
+	public void onCreated(ItemStack is, World world, EntityPlayer player) {
 		is.addEnchantment(Enchantment.baneOfArthropods, 5);
 	}
 
 	@Override
-	public void onUpdate(ItemStack is, World world, Entity entity, int id, boolean map)
-	{
+	public void onUpdate(ItemStack is, World world, Entity entity, int id, boolean map) {
 		if (!is.isItemEnchanted())
-		{
 			is.addEnchantment(Enchantment.baneOfArthropods, 5);
-		}
 	}
 }

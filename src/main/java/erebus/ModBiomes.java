@@ -1,17 +1,16 @@
 package erebus;
 
 import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.biomes.BiomeSubmergedSwamp;
 import erebus.world.biomes.BiomeElysianFields;
 import erebus.world.biomes.BiomeFungalForest;
+import erebus.world.biomes.BiomeSubmergedSwamp;
 import erebus.world.biomes.BiomeSubterraneanSavannah;
 import erebus.world.biomes.BiomeUlteriorOutback;
 import erebus.world.biomes.BiomeUndergroundJungle;
 import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.loot.WeightedList;
 
-public class ModBiomes
-{
+public class ModBiomes {
 	public static WeightedList<BiomeBaseErebus> biomeList = new WeightedList<BiomeBaseErebus>();
 
 	public static BiomeBaseErebus undergroundJungle;
@@ -46,15 +45,10 @@ public class ModBiomes
 	public static int savannahSubSteppeID;
 	public static int fieldsSubForestID;
 
-	public static void init()
-	{
+	public static void init() {
 		for (int id : new int[] { undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, submergedSwampID, jungleSubLakeID, jungleSubAsperGroveID, desertSubCharredForestID, savannahSubRockyWastelandID, savannahSubAsperGroveID, savannahSubSteppeID, fieldsSubForestID })
-		{
 			if (id >= 128)
-			{
 				throw new RuntimeException("Erebus biome IDs cannot be higher than 127!");
-			}
-		}
 
 		// CREATE BIOMES
 
@@ -76,7 +70,7 @@ public class ModBiomes
 		ulteriorOutback.createMutation();
 		fungalForest.createMutation();
 		submergedSwamp.createMutation();
-		
+
 		fieldsSubForest.createMutation();
 	}
 }

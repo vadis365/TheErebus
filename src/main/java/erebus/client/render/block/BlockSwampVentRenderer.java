@@ -10,11 +10,9 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
-public class BlockSwampVentRenderer implements ISimpleBlockRenderingHandler
-{
+public class BlockSwampVentRenderer implements ISimpleBlockRenderingHandler {
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		int colour = block.getRenderColor(metadata);
 		float r = (colour >> 16 & 255) / 255.0F;
 		float g = (colour >> 8 & 255) / 255.0F;
@@ -45,20 +43,17 @@ public class BlockSwampVentRenderer implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int modelID, RenderBlocks renderer)
-	{
+	public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int modelID, RenderBlocks renderer) {
 		return renderer.renderStandardBlock(block, x, y, z);
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId)
-	{
+	public boolean shouldRender3DInInventory(int modelId) {
 		return true;
 	}
 
 	@Override
-	public int getRenderId()
-	{
+	public int getRenderId() {
 		return BlockRenderIDs.SWAMP_VENT.id();
 	}
 }

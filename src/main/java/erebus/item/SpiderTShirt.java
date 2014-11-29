@@ -9,30 +9,25 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModMaterials;
 
-public class SpiderTShirt extends ItemArmor
-{
+public class SpiderTShirt extends ItemArmor {
 
-	public SpiderTShirt(int armorType)
-	{
+	public SpiderTShirt(int armorType) {
 		super(ModMaterials.armorREINEXOSKELETON, 2, armorType);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type)
-	{
+	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
 		return "erebus:textures/models/armor/spiderTShirt.png";
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack armour, ItemStack material)
-	{
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
 		return false;
 	}
-	
+
 	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
-	{
+	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		//un-implemented feature to go here....
 	}
 }

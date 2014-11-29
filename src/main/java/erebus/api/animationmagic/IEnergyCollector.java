@@ -1,6 +1,5 @@
 package erebus.api.animationmagic;
 
-public interface IEnergyCollector extends IEnergyStorage
-{
+public interface IEnergyCollector extends IEnergyStorage {
 
 }

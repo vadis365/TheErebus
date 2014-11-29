@@ -2,8 +2,7 @@ package erebus.api.animationmagic;
 
 import net.minecraft.item.ItemStack;
 
-public interface IEnergyStorage
-{
+public interface IEnergyStorage {
 	/**
 	 * Max amount of energy of the specified type this item can store
 	 *

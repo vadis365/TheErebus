@@ -17,8 +17,7 @@ import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenGiantBaobab;
 
-public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
-{
+public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
 	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
@@ -26,7 +25,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
 	private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
-	
+
 	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass, 1);
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
@@ -34,160 +33,113 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	private final WorldGenerator genTreeBaobab = new WorldGenBaobabTree();
 
 	@Override
-	public void populate()
-	{
-	
-		if (rand.nextBoolean() && rand.nextBoolean())
-		{
-			for (attempt = 0; attempt < 8; attempt++)
-			{
+	public void populate() {
+
+		if (rand.nextBoolean() && rand.nextBoolean()) {
+			for (attempt = 0; attempt < 8; attempt++) {
 				xx = x + 16;
 				yy = rand.nextInt(120);
 				zz = z + 16;
 
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				{
+				if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
 					genPonds.prepare((rand.nextDouble() + 0.75D) * 1.2D);
 					genPonds.generate(world, rand, xx, yy, zz);
 				}
 			}
 
 			if (rand.nextInt(3) != 0)
-			{
-				for (yy = 100; yy > 20; yy--)
-				{
+				for (yy = 100; yy > 20; yy--) {
 					xx = x + offsetXZ();
 					zz = z + offsetXZ();
 
 					if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-					{
 						genBamboo.generate(world, rand, xx, yy, zz);
-					}
 				}
-			}
 		}
 	}
 
 	@Override
-	public void decorate()
-	{  
+	public void decorate() {
 		xx = x + 16;
 		yy = 16;
 		zz = z + 16;
-		
+
 		for (int yUp = yy; 64 + yy >= yUp; yUp++)
-		{
-			if (checkSurface(SurfaceType.GRASS, xx, yUp, zz) && checkSurface(SurfaceType.GRASS, xx - 6, yUp, zz - 6) && checkSurface(SurfaceType.GRASS, xx + 6, yUp, zz + 6) || checkSurface(SurfaceType.GRASS, xx, yUp, zz) && checkSurface(SurfaceType.GRASS, xx  + 6, yUp, zz - 6) && checkSurface(SurfaceType.GRASS, xx  - 6, yUp, zz + 6))
-			{
+			if (checkSurface(SurfaceType.GRASS, xx, yUp, zz) && checkSurface(SurfaceType.GRASS, xx - 6, yUp, zz - 6) && checkSurface(SurfaceType.GRASS, xx + 6, yUp, zz + 6) || checkSurface(SurfaceType.GRASS, xx, yUp, zz) && checkSurface(SurfaceType.GRASS, xx + 6, yUp, zz - 6) && checkSurface(SurfaceType.GRASS, xx - 6, yUp, zz + 6)) {
 				genGiantBaobab.generate(world, rand, xx, yUp, zz);
 				break;
 			}
-		}
-		
+
 		if (rand.nextInt(12) == 0)
-		{
 			for (attempt = 0; attempt < 5; attempt++)
-			{
 				if (genAmberUmberstone.generate(world, rand, x + offsetXZ(), rand.nextInt(120), z + offsetXZ()))
-				{
 					break;
-				}
-			}
-		}
 
 		if (rand.nextInt(24) == 0)
-		{
 			for (attempt = 0; attempt < 4; attempt++)
-			{
 				if (genAmberGround.generate(world, rand, x + offsetXZ(), 10 + rand.nextInt(40), z + offsetXZ()))
-				{
 					break;
-				}
-			}
-		}
 
-		for (attempt = 0; attempt < 65; attempt++)
-		{
+		for (attempt = 0; attempt < 65; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-			{
 				genTreeAcacia.generate(world, rand, xx, yy, zz);
-			}
 		}
 
-		if (rand.nextBoolean() && rand.nextBoolean())
-		{
+		if (rand.nextBoolean() && rand.nextBoolean()) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
 			for (yy = 100; yy > 20; yy--)
-			{
 				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				{
 					genRocks.generate(world, rand, xx, yy, zz);
-				}
-			}
 		}
 
-		for (attempt = 0; attempt < 10; attempt++)
-		{
+		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-			{
 				genTreeAsper.generate(world, rand, xx, yy, zz);
-			}
 		}
-		
-		for (attempt = 0; attempt < 20; attempt++)
-		{
+
+		for (attempt = 0; attempt < 20; attempt++) {
 			xx = x + rand.nextInt(13) + 9;
 			yy = rand.nextInt(120);
 			zz = z + rand.nextInt(13) + 9;
 
-			if (checkSurface(SurfaceType.GRASS, xx - 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx + 2, yy, zz + 2) && checkSurface(SurfaceType.GRASS, xx  + 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx  - 2, yy, zz + 2))
-			{
+			if (checkSurface(SurfaceType.GRASS, xx - 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx + 2, yy, zz + 2) && checkSurface(SurfaceType.GRASS, xx + 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx - 2, yy, zz + 2))
 				genTreeBaobab.generate(world, rand, xx, yy, zz);
-			}
 		}
 
-		for (attempt = 0; attempt < 28; attempt++)
-		{
+		for (attempt = 0; attempt < 28; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-			{
 				genRottenAcacia.generate(world, rand, xx, yy, zz);
-			}
 		}
 
-		for (attempt = 0; attempt < 180; attempt++)
-		{
+		for (attempt = 0; attempt < 180; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
 
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-			{
 				genGrass.generate(world, rand, xx, yy, zz);
-			}
 		}
 
-		for (attempt = 0; attempt < 40; attempt++)
-		{
+		for (attempt = 0; attempt < 40; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz))
-			{
+			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
 				world.setBlock(xx, yy, zz, Blocks.double_plant, 2, 2);
 				world.setBlock(xx, yy + 1, zz, Blocks.double_plant, 10, 2);
 			}
@@ -196,10 +148,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 
 	@Override
 	@SuppressWarnings("incomplete-switch")
-	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres)
-	{
-		switch (oreType)
-		{
+	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {
+		switch (oreType) {
 			case GOLD:
 				oreGen.setChance(0.75F).setIterations(extraOres ? 1 : 2).setY(50, 126).generate(world, rand, x, z); // split into 3 parts, higher areas have less gold
 				oreGen.setChance(0.9F).setIterations(extraOres ? 1 : 2, extraOres ? 2 : 3).setY(25, 50).generate(world, rand, x, z); // balanced so there are more veins per chunk

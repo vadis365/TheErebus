@@ -9,8 +9,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.AxisAlignedBB;
 import erebus.core.helper.Spiral;
 
-public abstract class EntityAIFindFlower extends EntityAIBase
-{
+public abstract class EntityAIFindFlower extends EntityAIBase {
 
 	/**
 	 * The bigger you make this value the faster the AI will be. But performance
@@ -31,8 +30,7 @@ public abstract class EntityAIFindFlower extends EntityAIBase
 	private int collectTicks;
 	private static final List<Point> spiral = new Spiral(32, 32).spiral();
 
-	public EntityAIFindFlower(EntityLiving entity, Block block, int blockMetadata, int pollinateSpeed)
-	{
+	public EntityAIFindFlower(EntityLiving entity, Block block, int blockMetadata, int pollinateSpeed) {
 		this.entity = entity;
 		this.blockMetadata = blockMetadata;
 		this.block = block;
@@ -42,104 +40,81 @@ public abstract class EntityAIFindFlower extends EntityAIBase
 	}
 
 	@Override
-	public boolean shouldExecute()
-	{
+	public boolean shouldExecute() {
 		return entity.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 	}
 
 	@Override
-	public boolean continueExecuting()
-	{
+	public boolean continueExecuting() {
 		return entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, AxisAlignedBB.getBoundingBox(flowerX, flowerY + 1, flowerZ, flowerX + 1, flowerY + 2, flowerZ + 1)).isEmpty();
 	}
 
 	@Override
-	public void updateTask()
-	{
+	public void updateTask() {
 		if (!continueExecuting())
-		{
 			return;
-		}
 
 		int xCoord = (int) entity.posX;
 		int yCoord = (int) entity.posY;
 		int zCoord = (int) entity.posZ;
 
 		for (int i = 0; i < CHECKS_PER_TICK; i++)
-		{
-			if (!hasTarget)
-			{
+			if (!hasTarget) {
 				increment();
 
 				Point p = getNextPoint();
 				for (int y = -8; y < 8; y++)
-				{
-					if (canPolinate(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y)))
-					{
+					if (canPolinate(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 						flowerX = xCoord + p.x;
 						flowerY = yCoord + y;
 						flowerZ = zCoord + p.y;
 						hasTarget = true;
 					}
-				}
-			} else if (isEntityReady())
-			{
+			} else if (isEntityReady()) {
 				moveToLocation();
 				entity.getLookHelper().setLookPosition(flowerX + 0.5D, flowerY + 0.5D, flowerZ + 0.5D, 30.0F, 8.0F);
 				AxisAlignedBB blockbounds = getBlockAABB(flowerX, flowerY, flowerZ);
 				boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
 
-				if (flag)
-				{
+				if (flag) {
 					prepareToPollinate();
 					collectTicks++;
 					entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), flowerX, flowerY, flowerZ, getScaledcollectTicks());
 					if (!canPolinate(entity.worldObj.getBlock(flowerX, flowerY, flowerZ), entity.worldObj.getBlockMetadata(flowerX, flowerY, flowerZ)))
-					{
 						hasTarget = false;
-					} else if (COLLECT_SPEED <= collectTicks)
-					{
+					else if (COLLECT_SPEED <= collectTicks) {
 						hasTarget = false;
 						collectTicks = 0;
 						afterPollination();
 					}
 				}
-				if (!flag && collectTicks > 1)
-				{
+				if (!flag && collectTicks > 1) {
 					pollinationInterupted();
 					hasTarget = false;
 					collectTicks = 0;
 				}
 			}
-		}
 	}
 
-	private int getScaledcollectTicks()
-	{
+	private int getScaledcollectTicks() {
 		return (int) ((float) collectTicks / (float) COLLECT_SPEED * 10.0F);
 	}
 
-	private void increment()
-	{
+	private void increment() {
 		spiralIndex++;
 		if (spiralIndex >= spiral.size())
-		{
 			spiralIndex = 0;
-		}
 	}
 
-	private Point getNextPoint()
-	{
+	private Point getNextPoint() {
 		return spiral.get(spiralIndex);
 	}
 
-	public Block getTargetBlockID()
-	{
+	public Block getTargetBlockID() {
 		return entity.worldObj.getBlock(flowerX, flowerY, flowerZ);
 	}
 
-	protected boolean canPolinate(Block blockID, int meta)
-	{
+	protected boolean canPolinate(Block blockID, int meta) {
 		return blockID == block && meta == blockMetadata;
 	}
 
@@ -153,8 +128,7 @@ public abstract class EntityAIFindFlower extends EntityAIBase
 
 	protected abstract void afterPollination();
 
-	protected AxisAlignedBB getBlockAABB(int x, int y, int z)
-	{
+	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
 		return AxisAlignedBB.getBoundingBox(flowerX, flowerY, flowerZ, flowerX + 1.0D, flowerY + 1.0D, flowerZ + 1.0D);
 	}
 }

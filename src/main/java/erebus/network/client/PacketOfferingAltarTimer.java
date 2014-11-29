@@ -7,17 +7,14 @@ import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
 import erebus.tileentity.TileEntityOfferingAltar;
 
-public class PacketOfferingAltarTimer extends AbstractClientPacket
-{
+public class PacketOfferingAltarTimer extends AbstractClientPacket {
 
 	private int x, y, z, time;
 
-	public PacketOfferingAltarTimer()
-	{
+	public PacketOfferingAltarTimer() {
 	}
 
-	public PacketOfferingAltarTimer(int x, int y, int z, int time)
-	{
+	public PacketOfferingAltarTimer(int x, int y, int z, int time) {
 		this();
 		this.x = x;
 		this.y = y;
@@ -26,18 +23,14 @@ public class PacketOfferingAltarTimer extends AbstractClientPacket
 	}
 
 	@Override
-	protected void handle(World world, EntityClientPlayerMP player)
-	{
+	protected void handle(World world, EntityClientPlayerMP player) {
 		TileEntityOfferingAltar tile = Utils.getTileEntity(world, x, y, z, TileEntityOfferingAltar.class);
 		if (tile != null)
-		{
 			tile.time = time;
-		}
 	}
 
 	@Override
-	public void write(ByteBuf buffer)
-	{
+	public void write(ByteBuf buffer) {
 		buffer.writeInt(x);
 		buffer.writeInt(y);
 		buffer.writeInt(z);
@@ -45,8 +38,7 @@ public class PacketOfferingAltarTimer extends AbstractClientPacket
 	}
 
 	@Override
-	public void read(ByteBuf buffer)
-	{
+	public void read(ByteBuf buffer) {
 		x = buffer.readInt();
 		y = buffer.readInt();
 		z = buffer.readInt();

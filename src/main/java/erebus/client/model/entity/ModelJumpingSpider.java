@@ -11,8 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelJumpingSpider extends ModelBase
-{
+public class ModelJumpingSpider extends ModelBase {
 	ModelRenderer LFL1;
 	ModelRenderer LFL2;
 	ModelRenderer LFL3;
@@ -82,8 +81,7 @@ public class ModelJumpingSpider extends ModelBase
 	ModelRenderer RMEye;
 	ModelRenderer RBEye;
 
-	public ModelJumpingSpider()
-	{
+	public ModelJumpingSpider() {
 		textureWidth = 64;
 		textureHeight = 128;
 		float correction = 0.6108652F;
@@ -370,8 +368,7 @@ public class ModelJumpingSpider extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float ingCorpse, float edARaft, float away, float yClouds, float inACarnival, float ationTank)
-	{
+	public void render(Entity entity, float ingCorpse, float edARaft, float away, float yClouds, float inACarnival, float ationTank) {
 		super.render(entity, ingCorpse, edARaft, away, yClouds, inACarnival, ationTank);
 		setRotationAngles(ingCorpse, edARaft, away, yClouds, inACarnival, ationTank, entity);
 		Ab.render(ationTank);
@@ -444,16 +441,14 @@ public class ModelJumpingSpider extends ModelBase
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float cosZ = MathHelper.cos(limbSwing * 1.75F) * 0.3F * prevLimbSwing;
 		float cosY = MathHelper.cos(limbSwing * 1.75F) * 0.4F * prevLimbSwing;

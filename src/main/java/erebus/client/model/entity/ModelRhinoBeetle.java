@@ -9,8 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import erebus.entity.EntityRhinoBeetle;
 
-public class ModelRhinoBeetle extends ModelBase
-{
+public class ModelRhinoBeetle extends ModelBase {
 	ModelRenderer Ab;
 	ModelRenderer AbSide;
 	ModelRenderer AbTop;
@@ -53,8 +52,7 @@ public class ModelRhinoBeetle extends ModelBase
 	ModelRenderer NoseC;
 	ModelRenderer Neck;
 
-	public ModelRhinoBeetle()
-	{
+	public ModelRhinoBeetle() {
 		textureWidth = 64;
 		textureHeight = 128;
 		Ab = new ModelRenderer(this, 9, 95);
@@ -230,8 +228,7 @@ public class ModelRhinoBeetle extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GL11.glPushMatrix();
@@ -268,16 +265,14 @@ public class ModelRhinoBeetle extends ModelBase
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityRhinoBeetle beetle = (EntityRhinoBeetle) entity;
 		float cos1 = MathHelper.cos(limbSwing * 1.0F + (float) Math.PI) * 0.5F * prevLimbSwing;

@@ -11,11 +11,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import erebus.ModItems;
 
-public class BambucketAntiVenom extends BambucketDrinkable
-{
+public class BambucketAntiVenom extends BambucketDrinkable {
 
-	public BambucketAntiVenom()
-	{
+	public BambucketAntiVenom() {
 		super("erebus:bambucketAntivenom");
 		setUnlocalizedName("erebus.bambucketAntiVenom");
 		setTextureName("erebus:bambucketAntivenom");
@@ -23,24 +21,17 @@ public class BambucketAntiVenom extends BambucketDrinkable
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public ItemStack applyEffects(ItemStack stack, World world, EntityPlayer player)
-	{
+	public ItemStack applyEffects(ItemStack stack, World world, EntityPlayer player) {
 		List<Potion> toRemove = new ArrayList<Potion>();
-		for (PotionEffect effect : (Collection<PotionEffect>) player.getActivePotionEffects())
-		{
+		for (PotionEffect effect : (Collection<PotionEffect>) player.getActivePotionEffects()) {
 			Potion potion = Potion.potionTypes[effect.getPotionID()];
 			if (potion.isBadEffect())
-			{
 				toRemove.add(potion);
-			}
 		}
 		for (Potion potion : toRemove)
-		{
 			player.removePotionEffect(potion.getId());
-		}
 
-		if (!player.capabilities.isCreativeMode)
-		{
+		if (!player.capabilities.isCreativeMode) {
 			stack.stackSize--;
 			player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucket));
 		}

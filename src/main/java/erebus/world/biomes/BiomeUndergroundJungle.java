@@ -22,10 +22,8 @@ import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
 
-public class BiomeUndergroundJungle extends BiomeBaseErebus
-{
-	public BiomeUndergroundJungle(int biomeID)
-	{
+public class BiomeUndergroundJungle extends BiomeBaseErebus {
+	public BiomeUndergroundJungle(int biomeID) {
 		super(biomeID, new BiomeDecoratorUndergroundJungle());
 
 		setBiomeName("Undergound Jungle");
@@ -53,20 +51,17 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus
 	}
 
 	@Override
-	public float getSpawningChance()
-	{
+	public float getSpawningChance() {
 		return 0.2F;
 	}
 
 	@Override
-	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand)
-	{
+	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
 		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 24 ? Blocks.flowing_water : Blocks.air : block;
 	}
 
 	@Override
-	public BiomeBaseErebus getRandomSubBiome(int randomValue)
-	{
+	public BiomeBaseErebus getRandomSubBiome(int randomValue) {
 		return ModBiomes.jungleSubLake;
 	}
 }

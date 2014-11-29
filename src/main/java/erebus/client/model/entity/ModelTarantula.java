@@ -8,8 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelTarantula extends ModelBase
-{
+public class ModelTarantula extends ModelBase {
 	ModelRenderer Body;
 	ModelRenderer RearEnd;
 	ModelRenderer Leg1;
@@ -36,8 +35,7 @@ public class ModelTarantula extends ModelBase
 	ModelRenderer Left_Spinneret;
 	ModelRenderer Right_Spinneret;
 
-	public ModelTarantula()
-	{
+	public ModelTarantula() {
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -131,8 +129,7 @@ public class ModelTarantula extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		Body.render(f5);
@@ -175,8 +172,7 @@ public class ModelTarantula extends ModelBase
 	private final float legSpeed = 1.1F;
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, null);
 
 		Head.rotateAngleY = rotationYaw / (180F / (float) Math.PI);

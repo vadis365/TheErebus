@@ -28,20 +28,20 @@ public class ItemKitchenCounterRenderer implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
 		switch (type) {
-		case ENTITY:
-			renderBlock(0.0F, 1.0F, 0.0F);
-			break;
-		case EQUIPPED:
-			renderBlock(0.5F, 1.5F, 0.5F);
-			break;
-		case EQUIPPED_FIRST_PERSON:
-			renderBlock(0.5F, 1.0F, 0.5F);
-			break;
-		case INVENTORY:
-			renderInventory(0.0F, 0.625F, 0.0F);
-			break;
-		default:
-			break;
+			case ENTITY:
+				renderBlock(0.0F, 1.0F, 0.0F);
+				break;
+			case EQUIPPED:
+				renderBlock(0.5F, 1.5F, 0.5F);
+				break;
+			case EQUIPPED_FIRST_PERSON:
+				renderBlock(0.5F, 1.0F, 0.5F);
+				break;
+			case INVENTORY:
+				renderInventory(0.0F, 0.625F, 0.0F);
+				break;
+			default:
+				break;
 		}
 	}
 

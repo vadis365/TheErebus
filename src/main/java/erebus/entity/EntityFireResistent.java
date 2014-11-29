@@ -4,54 +4,43 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EntityFireResistent extends EntityItem
-{
+public class EntityFireResistent extends EntityItem {
 
-	public EntityFireResistent(World world, double x, double y, double z)
-	{
+	public EntityFireResistent(World world, double x, double y, double z) {
 		super(world, x, y, z);
 		isImmuneToFire = true;
 	}
 
-	public EntityFireResistent(World world, double x, double y, double z, ItemStack stack)
-	{
+	public EntityFireResistent(World world, double x, double y, double z, ItemStack stack) {
 		super(world, x, y, z, stack);
 		isImmuneToFire = true;
 	}
 
-	public EntityFireResistent(World world)
-	{
+	public EntityFireResistent(World world) {
 		super(world);
 		isImmuneToFire = true;
 	}
 
 	@Override
-	public void dealFireDamage(int damage)
-	{
+	public void dealFireDamage(int damage) {
 	}
 
 	@Override
-	public void setFire(int par1)
-	{
+	public void setFire(int par1) {
 	}
 
 	@Override
-	public void setOnFireFromLava()
-	{
+	public void setOnFireFromLava() {
 	}
 
 	@Override
-	public boolean handleLavaMovement()
-	{
+	public boolean handleLavaMovement() {
 		return false;
 	}
 
 	@Override
-	public void playSound(String sound, float volume, float pitch)
-	{
+	public void playSound(String sound, float volume, float pitch) {
 		if (sound != "random.fizz")
-		{
 			super.playSound(sound, volume, pitch);
-		}
 	}
 }

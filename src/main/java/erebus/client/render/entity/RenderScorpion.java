@@ -8,18 +8,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelScorpion;
 
 @SideOnly(Side.CLIENT)
-public class RenderScorpion extends RenderLiving
-{
+public class RenderScorpion extends RenderLiving {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/scorpion.png");
 
-	public RenderScorpion()
-	{
+	public RenderScorpion() {
 		super(new ModelScorpion(), 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

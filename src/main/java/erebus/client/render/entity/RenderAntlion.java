@@ -13,32 +13,27 @@ import erebus.client.model.entity.ModelAntlion;
 import erebus.entity.EntityAntlion;
 
 @SideOnly(Side.CLIENT)
-public class RenderAntlion extends RenderLiving
-{
+public class RenderAntlion extends RenderLiving {
 
 	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/antlion.png");
 
-	public RenderAntlion(ModelAntlion model, float shadowSize)
-	{
+	public RenderAntlion(ModelAntlion model, float shadowSize) {
 		super(model, shadowSize);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f)
-	{
+	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		scaleAntlion((EntityAntlion) entityliving, f);
 	}
 
-	protected void scaleAntlion(EntityAntlion entityAntlion, float f)
-	{
+	protected void scaleAntlion(EntityAntlion entityAntlion, float f) {
 		float f1 = 0.75F;
 		shadowSize = f1;
 		GL11.glScalef(f1, f1, f1);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

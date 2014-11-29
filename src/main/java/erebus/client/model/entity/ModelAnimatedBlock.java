@@ -8,8 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelAnimatedBlock extends ModelBase
-{
+public class ModelAnimatedBlock extends ModelBase {
 
 	ModelRenderer LBL1;
 	ModelRenderer LBL2;
@@ -36,8 +35,7 @@ public class ModelAnimatedBlock extends ModelBase
 	ModelRenderer RFL3;
 	ModelRenderer RFL4;
 
-	public ModelAnimatedBlock()
-	{
+	public ModelAnimatedBlock() {
 		textureWidth = 16;
 		textureHeight = 16;
 
@@ -140,8 +138,7 @@ public class ModelAnimatedBlock extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		LBL1.render(unitPixel);
@@ -170,16 +167,14 @@ public class ModelAnimatedBlock extends ModelBase
 		RFL4.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		LBL1.rotateAngleX = MathHelper.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * prevLimbSwing + 0.25F;
 		LBL2.rotateAngleX = MathHelper.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * prevLimbSwing + 0.25F;
 		LBL3.rotateAngleX = MathHelper.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * prevLimbSwing + 0.3F;

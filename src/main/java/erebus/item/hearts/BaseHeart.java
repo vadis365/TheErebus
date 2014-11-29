@@ -12,10 +12,8 @@ import erebus.ModTabs;
 import erebus.api.animationmagic.EnergyType;
 import erebus.api.animationmagic.IEnergyStorage;
 
-public abstract class BaseHeart extends Item implements IEnergyStorage
-{
-	public BaseHeart(String name)
-	{
+public abstract class BaseHeart extends Item implements IEnergyStorage {
+	public BaseHeart(String name) {
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
 		setTextureName("erebus:heart" + name.substring(0, 1).toUpperCase() + name.substring(1));
@@ -25,36 +23,25 @@ public abstract class BaseHeart extends Item implements IEnergyStorage
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex)
-	{
+	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex) {
 		for (EnergyType type : EnergyType.values())
-		{
 			if (canStore(stack, type))
-			{
 				tooltip.add(type.toString() + " - " + getCurrentStorage(stack, type) + "/" + getMaxStorage(stack, type));
-			}
-		}
 	}
 
 	@Override
-	public int getCurrentStorage(ItemStack stack, EnergyType type)
-	{
+	public int getCurrentStorage(ItemStack stack, EnergyType type) {
 		NBTTagCompound nbt = stack.getTagCompound();
 		if (nbt == null)
-		{
 			return 0;
-		}
 
 		if (nbt.hasKey(type.toString()))
-		{
 			return nbt.getInteger(type.toString());
-		}
 		return 0;
 	}
 
 	@Override
-	public int addEnergy(ItemStack stack, EnergyType type, int amount)
-	{
+	public int addEnergy(ItemStack stack, EnergyType type, int amount) {
 		NBTTagCompound nbt = getNBT(stack);
 		int current = Math.max(0, nbt.getInteger(type.toString()));
 		int newValue = Math.min(getMaxStorage(stack, type), current + amount);
@@ -64,12 +51,9 @@ public abstract class BaseHeart extends Item implements IEnergyStorage
 	}
 
 	@Override
-	public int extractEnergy(ItemStack stack, EnergyType type, int amount)
-	{
+	public int extractEnergy(ItemStack stack, EnergyType type, int amount) {
 		if (!stack.hasTagCompound())
-		{
 			return 0;
-		}
 
 		NBTTagCompound nbt = getNBT(stack);
 		int current = Math.max(0, nbt.getInteger(type.toString()));
@@ -80,17 +64,13 @@ public abstract class BaseHeart extends Item implements IEnergyStorage
 	}
 
 	@Override
-	public boolean canStore(ItemStack stack, EnergyType type)
-	{
+	public boolean canStore(ItemStack stack, EnergyType type) {
 		return true;
 	}
 
-	private NBTTagCompound getNBT(ItemStack stack)
-	{
+	private NBTTagCompound getNBT(ItemStack stack) {
 		if (!stack.hasTagCompound())
-		{
 			stack.setTagCompound(new NBTTagCompound());
-		}
 		return stack.getTagCompound();
 	}
 }

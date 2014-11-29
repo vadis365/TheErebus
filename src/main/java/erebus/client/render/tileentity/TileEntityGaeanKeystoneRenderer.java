@@ -11,17 +11,13 @@ import org.lwjgl.opengl.GL11;
 
 import erebus.block.GaeanKeystone;
 
-public class TileEntityGaeanKeystoneRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityGaeanKeystoneRenderer extends TileEntitySpecialRenderer {
 	private static final ResourceLocation beamTexture = new ResourceLocation("textures/entity/beacon_beam.png");
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick)
-	{
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick) {
 		if (!GaeanKeystone.isGemActive(tile.getBlockMetadata()))
-		{
 			return;
-		}
 
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 		Tessellator tessellator = Tessellator.instance;

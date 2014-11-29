@@ -7,8 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityGlowGem;
 
 @SideOnly(Side.CLIENT)
-public class ModelGlowGem extends ModelBase
-{
+public class ModelGlowGem extends ModelBase {
 	ModelRenderer TopRight;
 	ModelRenderer RightEdge;
 	ModelRenderer BottomRight;
@@ -22,8 +21,7 @@ public class ModelGlowGem extends ModelBase
 	ModelRenderer Layer3Vert;
 	ModelRenderer Layer3Horiz;
 
-	public ModelGlowGem()
-	{
+	public ModelGlowGem() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -66,8 +64,7 @@ public class ModelGlowGem extends ModelBase
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void render(TileEntityGlowGem tile)
-	{
+	public void render(TileEntityGlowGem tile) {
 		TopRight.render(0.0625F);
 		RightEdge.render(0.0625F);
 		BottomRight.render(0.0625F);

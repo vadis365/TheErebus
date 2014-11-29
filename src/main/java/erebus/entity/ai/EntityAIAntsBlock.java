@@ -13,8 +13,7 @@ import erebus.core.helper.Spiral;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackAnt;
 
-public abstract class EntityAIAntsBlock extends EntityAIBase
-{
+public abstract class EntityAIAntsBlock extends EntityAIBase {
 
 	/**
 	 * The bigger you make this value the faster the AI will be. But performance
@@ -36,8 +35,7 @@ public abstract class EntityAIAntsBlock extends EntityAIBase
 	private int eatTicks;
 	private static final List<Point> spiral = new Spiral(8, 8).spiral();
 
-	public EntityAIAntsBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed)
-	{
+	public EntityAIAntsBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed) {
 		this.entity = entity;
 		this.maxGrowthMetadata = maxGrowthMetadata;
 		this.block = block;
@@ -47,104 +45,80 @@ public abstract class EntityAIAntsBlock extends EntityAIBase
 		EAT_SPEED = eatSpeed * 20;
 	}
 
-	public EntityAIAntsBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float moveSpeed, int eatSpeed)
-	{
+	public EntityAIAntsBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float moveSpeed, int eatSpeed) {
 		this(entity, block, maxGrowthMetadata, null, moveSpeed, eatSpeed);
 	}
 
 	@Override
-	public boolean shouldExecute()
-	{
+	public boolean shouldExecute() {
 		return entity.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
 	}
 
 	@Override
-	public boolean continueExecuting()
-	{
+	public boolean continueExecuting() {
 		return !entity.isChild();
 	}
 
 	@Override
-	public void updateTask()
-	{
+	public void updateTask() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
 		if (!continueExecuting())
-		{
 			return;
-		}
 
 		int xCoord = blackAnt.getDropPointX();
 		int yCoord = blackAnt.getDropPointY();
 		int zCoord = blackAnt.getDropPointZ();
 
 		for (int i = 0; i < CHECKS_PER_TICK; i++)
-		{
-			if (!hasTarget)
-			{
+			if (!hasTarget) {
 				increment();
 
 				Point p = getNextPoint();
 				for (int y = -2; y < 1; y++)
-				{
-					if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y)))
-					{
+					if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
 						cropX = xCoord + p.x;
 						cropY = yCoord + y;
 						cropZ = zCoord + p.y;
 						hasTarget = true;
 					}
-				}
-			} else if (isEntityReady())
-			{
+			} else if (isEntityReady()) {
 				moveToLocation();
 				entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 				AxisAlignedBB blockbounds = getBlockAABB(cropX, cropY, cropZ);
 				boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
 
-				if (flag)
-				{
+				if (flag) {
 					prepareToEat();
 					eatTicks++;
 					if (!canEatBlock(entity.worldObj.getBlock(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
-					{
 						hasTarget = false;
-					} else if (EAT_SPEED <= eatTicks)
-					{
+					else if (EAT_SPEED <= eatTicks) {
 						if (seed != null)
-						{
 							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
-						}
 						hasTarget = false;
 						eatTicks = 0;
 						afterEaten();
 					}
 				}
-				if (!flag && eatTicks > 0)
-				{
+				if (!flag && eatTicks > 0) {
 					eatingInterupted();
 					hasTarget = false;
 					eatTicks = 0;
 				}
 			}
-		}
 	}
 
-	private void increment()
-	{
+	private void increment() {
 		spiralIndex++;
 		if (spiralIndex >= spiral.size())
-		{
 			spiralIndex = 0;
-		}
 	}
 
-	private Point getNextPoint()
-	{
+	private Point getNextPoint() {
 		return spiral.get(spiralIndex);
 	}
 
-	public Block getTargetBlock()
-	{
+	public Block getTargetBlock() {
 		return entity.worldObj.getBlock(cropX, cropY, cropZ);
 	}
 
@@ -156,8 +130,7 @@ public abstract class EntityAIAntsBlock extends EntityAIBase
 	 * @param meta
 	 * @return true is should eat block, false is it shouldn't
 	 */
-	protected boolean canEatBlock(Block block, int meta)
-	{
+	protected boolean canEatBlock(Block block, int meta) {
 		return block == this.block && meta == maxGrowthMetadata;
 	}
 
@@ -188,8 +161,7 @@ public abstract class EntityAIAntsBlock extends EntityAIBase
 	 */
 	protected abstract void afterEaten();
 
-	protected AxisAlignedBB getBlockAABB(int x, int y, int z)
-	{
+	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
 		return AxisAlignedBB.getBoundingBox(cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
 	}
 }

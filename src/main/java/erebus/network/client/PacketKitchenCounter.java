@@ -9,14 +9,15 @@ import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
 import erebus.tileentity.TileEntityKitchenCounter;
 
-public class PacketKitchenCounter extends AbstractClientPacket{
-	
+public class PacketKitchenCounter extends AbstractClientPacket {
+
 	private int x, y, z;
 	private NBTTagCompound nbt;
-	
-	public PacketKitchenCounter(){}
-	
-	public PacketKitchenCounter(int x, int y, int z, NBTTagCompound nbt){
+
+	public PacketKitchenCounter() {
+	}
+
+	public PacketKitchenCounter(int x, int y, int z, NBTTagCompound nbt) {
 		this();
 		this.x = x;
 		this.y = y;
@@ -27,10 +28,9 @@ public class PacketKitchenCounter extends AbstractClientPacket{
 	@Override
 	protected void handle(World world, EntityClientPlayerMP player) {
 		TileEntityKitchenCounter tile = Utils.getTileEntity(world, x, y, z, TileEntityKitchenCounter.class);
-		
-		if(tile != null){
+
+		if (tile != null)
 			tile.readFromNBT(nbt);
-		}
 	}
 
 	@Override

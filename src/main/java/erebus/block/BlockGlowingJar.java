@@ -7,11 +7,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import erebus.tileentity.TileEntityGlowingJar;
 
-public class BlockGlowingJar extends BlockContainer
-{
+public class BlockGlowingJar extends BlockContainer {
 
-	public BlockGlowingJar()
-	{
+	public BlockGlowingJar() {
 		super(Material.glass);
 		setLightLevel(1.0F);
 		setStepSound(soundTypeGlass);
@@ -19,32 +17,27 @@ public class BlockGlowingJar extends BlockContainer
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return -1;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityGlowingJar();
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{
+	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) || BlockFence.func_149825_a(world.getBlock(x, y - 1, z)) || world.getBlock(x, y - 1, z) instanceof BlockGlowingJar;
 	}
 }

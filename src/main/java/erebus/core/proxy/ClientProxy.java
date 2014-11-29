@@ -233,11 +233,9 @@ import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import erebus.tileentity.TileEntityTarantulaEgg;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
-public class ClientProxy extends CommonProxy
-{
+public class ClientProxy extends CommonProxy {
 
-	public enum BlockRenderIDs
-	{
+	public enum BlockRenderIDs {
 		BAMBOO_CROP,
 		HOLLOW_LOG,
 		PLANTED_FLOWER,
@@ -254,26 +252,22 @@ public class ClientProxy extends CommonProxy
 
 		private final int ID;
 
-		BlockRenderIDs()
-		{
+		BlockRenderIDs() {
 			ID = RenderingRegistry.getNextAvailableRenderId();
 		}
 
-		public int id()
-		{
+		public int id() {
 			return ID;
 		}
 	}
 
 	@Override
-	public void registerKeyHandlers()
-	{
+	public void registerKeyHandlers() {
 		FMLCommonHandler.instance().bus().register(new KeyBindingHandler());
 	}
 
 	@Override
-	public void registerRenderInformation()
-	{
+	public void registerRenderInformation() {
 		FMLCommonHandler.instance().bus().register(new GogglesClientTickHandler());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeetle.class, new RenderBeetle());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFly.class, new RenderFly());
@@ -401,86 +395,58 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ)
-	{
+	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {
 		EntityFX fx = null;
 
 		if (particleName.equals("repellent"))
-		{
 			fx = new EntityRepellentFX(world, x, y, z, 0.0F, 0.0F, 0.0F);
-		}
 
 		if (particleName.equals("sonic"))
-		{
 			fx = new EntitySonicFX(world, x, y, z, vecX, vecY, vecZ);
-		}
 
-		if (particleName.equals("bubblegas"))
-		{
+		if (particleName.equals("bubblegas")) {
 			fx = new EntityBubbleGasFX(world, x, y, z, vecX, vecY, vecZ);
 			fx.setRBGColorF(0.306F, 0.576F, 0.192F);
 		}
 
-		if (particleName.equals("swampflame"))
-		{
+		if (particleName.equals("swampflame")) {
 			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
 			fx.setParticleTextureIndex(96);
 		}
 
 		if (particleName.equals("portal"))
-		{
 			fx = new EntityPortalFX(world, x, y, z, vecX, vecY, vecZ);
-		}
 
 		if (particleName.equals("cloud"))
-		{
 			fx = new EntityCloudFX(world, x, y, z, vecX, vecY, vecZ);
-		}
 
 		if (particleName.equals("spell"))
-		{
 			fx = new EntitySpellParticleFX(world, x, y, z, vecX, vecY, vecZ);
-		}
 
 		if (particleName.equals("heart"))
-		{
 			fx = new EntityHeartFX(world, x, y, z, vecX, vecY, vecZ);
-		}
 
 		if (particleName.equals("smoke"))
-		{
 			fx = new EntitySmokeFX(world, x, y, z, vecX, vecY, vecZ);
-		}
 
-		if (particleName.equals("poison"))
-		{
+		if (particleName.equals("poison")) {
 			fx = new EntitySpellParticleFX(world, x, y, z, vecX, vecY, vecZ);
 			fx.setRBGColorF(0.306F, 0.576F, 0.192F);
 		}
 
 		if (particleName.equals("flame"))
-		{
 			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
-		}
 
 		if (particleName.equals("enchantmenttable"))
-		{
 			fx = new EntityEnchantmentTableParticleFX(world, x, y, z, vecX, vecY, vecZ);
-		}
 
 		if (particleName.equals("lava"))
-		{
 			fx = new EntityLavaFX(world, x, y, z);
-		}
 
 		if (particleName.equals("slime"))
-		{
 			fx = new EntityBreakingFX(world, x, y, z, vecX, vecY, vecZ, Items.slime_ball, 0);
-		}
 
 		if (fx != null)
-		{
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
-		}
 	}
 }

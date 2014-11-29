@@ -11,24 +11,19 @@ import org.lwjgl.opengl.GL11;
 import erebus.client.model.entity.ModelSporeling;
 import erebus.entity.EntitySporeling;
 
-public class RenderSporeling extends RenderLiving
-{
+public class RenderSporeling extends RenderLiving {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/sporeling.png");
 	private static final ResourceLocation eyeTexture = new ResourceLocation("erebus:textures/entity/sporelingGlow.png");
 
-	public RenderSporeling(ModelSporeling ModelSporeling, float shadow)
-	{
+	public RenderSporeling(ModelSporeling ModelSporeling, float shadow) {
 		super(ModelSporeling, shadow);
 		setRenderPassModel(new ModelSporeling());
 	}
 
-	protected int setSporelingEyeBrightness(EntitySporeling entityLiving, int par2, float par3)
-	{
+	protected int setSporelingEyeBrightness(EntitySporeling entityLiving, int par2, float par3) {
 		if (par2 != 0)
-		{
 			return -1;
-		} else
-		{
+		else {
 			bindTexture(eyeTexture);
 			float var4 = 1.0F;
 			GL11.glEnable(GL11.GL_BLEND);
@@ -44,14 +39,12 @@ public class RenderSporeling extends RenderLiving
 		}
 	}
 
-	protected int shouldRenderPass(EntityLiving entityLiving, int par2, float par3)
-	{
+	protected int shouldRenderPass(EntityLiving entityLiving, int par2, float par3) {
 		return setSporelingEyeBrightness((EntitySporeling) entityLiving, par2, par3);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

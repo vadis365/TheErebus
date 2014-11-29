@@ -13,8 +13,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ModFluids
-{
+public class ModFluids {
 
 	public static final ModFluids INSTANCE = new ModFluids();
 
@@ -23,24 +22,17 @@ public class ModFluids
 	public static Fluid beetleJuice = new Fluid("beetleJuice").setUnlocalizedName("beetleJuice");
 	public static Fluid milk = new Fluid("milk").setUnlocalizedName("milk");
 
-	private ModFluids()
-	{
+	private ModFluids() {
 	}
 
-	public static void init()
-	{
-		try
-		{
-			for (Field f : ModFluids.class.getDeclaredFields())
-			{
+	public static void init() {
+		try {
+			for (Field f : ModFluids.class.getDeclaredFields()) {
 				Object obj = f.get(null);
 				if (obj instanceof Fluid)
-				{
 					FluidRegistry.registerFluid((Fluid) obj);
-				}
 			}
-		} catch (IllegalAccessException e)
-		{
+		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -58,10 +50,8 @@ public class ModFluids
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void postStitch(TextureStitchEvent.Pre event)
-	{
-		if (event.map.getTextureType() == 0)
-		{
+	public void postStitch(TextureStitchEvent.Pre event) {
+		if (event.map.getTextureType() == 0) {
 			honey.setIcons(ModBlocks.honeyBlock.getBlockTextureFromSide(0), ModBlocks.honeyBlock.getBlockTextureFromSide(1));
 			antiVenom.setIcons(event.map.registerIcon("erebus:antiVenom"), event.map.registerIcon("erebus:antiVenomFlow"));
 			beetleJuice.setIcons(event.map.registerIcon("erebus:beetleJuice"), event.map.registerIcon("erebus:beetleJuiceFlow"));

@@ -11,22 +11,18 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.integration.ModIntegrationHandler.IModIntegration;
 
-public class ThaumcraftIntegration implements IModIntegration
-{
+public class ThaumcraftIntegration implements IModIntegration {
 	@Override
-	public String getModId()
-	{
+	public String getModId() {
 		return "Thaumcraft";
 	}
 
 	@Override
-	public void onInit()
-	{
+	public void onInit() {
 	}
 
 	@Override
-	public void onPostInit()
-	{
+	public void onPostInit() {
 		registerBlock(ModBlocks.blockAmber, 0, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
 		registerBlock(ModBlocks.blockAmber, 1, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 5);
 		registerBlock(ModBlocks.blockAmber, 2, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
@@ -151,50 +147,36 @@ public class ThaumcraftIntegration implements IModIntegration
 		registerEntity("erebus.Antlion", Aspect.TRAP, 3, Aspect.EARTH, 2);
 	}
 
-	private void registerBlock(Block block, int metadata, Object... aspects)
-	{
+	private void registerBlock(Block block, int metadata, Object... aspects) {
 		if (metadata < 0)
-		{
 			metadata = OreDictionary.WILDCARD_VALUE;
-		}
 		ThaumcraftApi.registerObjectTag(new ItemStack(block, metadata), generateAspectList(aspects));
 	}
 
-	private void registerItem(Item item, int metadata, Object... aspects)
-	{
+	private void registerItem(Item item, int metadata, Object... aspects) {
 		if (metadata < 0)
-		{
 			metadata = OreDictionary.WILDCARD_VALUE;
-		}
 		ThaumcraftApi.registerObjectTag(new ItemStack(item, metadata), generateAspectList(aspects));
 	}
 
-	private void registerEntity(String entityName, Object... aspects)
-	{
+	private void registerEntity(String entityName, Object... aspects) {
 		ThaumcraftApi.registerEntityTag(entityName, generateAspectList(aspects));
 	}
 
-	private AspectList generateAspectList(Object... aspectData)
-	{
+	private AspectList generateAspectList(Object... aspectData) {
 		int index = 0;
 		AspectList list = new AspectList();
 		Aspect currentAspect = null;
 
-		try
-		{
-			for (Object o : aspectData)
-			{
+		try {
+			for (Object o : aspectData) {
 				if ((index & 1) == 0)
-				{
 					currentAspect = (Aspect) o;
-				} else
-				{
+				else
 					list.add(currentAspect, (Integer) o);
-				}
 				++index;
 			}
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 		}
 
 		return list;

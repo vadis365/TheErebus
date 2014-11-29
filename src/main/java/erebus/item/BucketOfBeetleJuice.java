@@ -8,36 +8,25 @@ import net.minecraft.world.World;
 import erebus.ModTabs;
 import erebus.entity.EntityBotFlyLarva;
 
-public class BucketOfBeetleJuice extends ItemBucketMilk
-{
+public class BucketOfBeetleJuice extends ItemBucketMilk {
 
-	public BucketOfBeetleJuice()
-	{
+	public BucketOfBeetleJuice() {
 		setMaxStackSize(1);
 		setContainerItem(Items.bucket);
 		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player)
-	{
+	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
 		if (!player.capabilities.isCreativeMode)
-		{
 			is.stackSize--;
-		}
 
 		if (!world.isRemote)
-		{
 			player.curePotionEffects(new ItemStack(Items.milk_bucket));
-		}
 
 		if (player.riddenByEntity != null && player.riddenByEntity instanceof EntityBotFlyLarva)
-		{
 			if (((EntityBotFlyLarva) player.riddenByEntity).getParasiteCount() > 0)
-			{
 				((EntityBotFlyLarva) player.riddenByEntity).setABitDead();
-			}
-		}
 
 		return is.stackSize <= 0 ? new ItemStack(Items.bucket) : is;
 	}

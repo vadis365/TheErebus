@@ -5,24 +5,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 
-public class TabBlocks extends CreativeTabErebus
-{
+public class TabBlocks extends CreativeTabErebus {
 
-	public TabBlocks()
-	{
+	public TabBlocks() {
 		super("erebus.block");
 	}
 
 	@Override
-	public Item getTabIconItem()
-	{
+	public Item getTabIconItem() {
 		return Item.getItemFromBlock(ModBlocks.umberstone);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int func_151243_f()
-	{
+	public int func_151243_f() {
 		return 0;
 	}
 }

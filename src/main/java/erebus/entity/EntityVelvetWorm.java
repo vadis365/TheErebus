@@ -16,13 +16,11 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 
-public class EntityVelvetWorm extends EntityMob
-{
+public class EntityVelvetWorm extends EntityMob {
 
 	public int skin = rand.nextInt(2);
 
-	public EntityVelvetWorm(World world)
-	{
+	public EntityVelvetWorm(World world) {
 		super(world);
 		setSize(2F, 0.7F);
 		getNavigator().setAvoidsWater(false);
@@ -39,21 +37,18 @@ public class EntityVelvetWorm extends EntityMob
 	}
 
 	@Override
-	protected void entityInit()
-	{
+	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(20, new Integer(0));
 	}
 
 	@Override
-	public boolean isAIEnabled()
-	{
+	public boolean isAIEnabled() {
 		return true;
 	}
 
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
@@ -61,54 +56,40 @@ public class EntityVelvetWorm extends EntityMob
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk()
-	{
+	public int getMaxSpawnedInChunk() {
 		return 2;
 	}
 
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		super.onUpdate();
-		if (getAttackTarget() != null)
-		{
+		if (getAttackTarget() != null) {
 			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
 			if (getInflateSize() < 100 && distance > 3)
-			{
 				setInflateSize(getInflateSize() + 2);
-			}
 			if (getInflateSize() >= 100 && distance > 3)
-			{
 				shootGooBall(getAttackTarget(), distance);
-			}
 			if (getInflateSize() == 0)
-			{
 				;
-			}
 			forceCollideWithPlayer(getAttackTarget(), distance);
 		}
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
+	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	public void setInWeb()
-	{
+	public void setInWeb() {
 	}
 
-	protected String getWebSlingThrowSound()
-	{
+	protected String getWebSlingThrowSound() {
 		return "erebus:webslingthrow";
 	}
 
-	public double getAttackStrength()
-	{
-		switch (worldObj.difficultySetting)
-		{
+	public double getAttackStrength() {
+		switch (worldObj.difficultySetting) {
 			default:
 				return 4.0D;
 			case EASY:
@@ -121,34 +102,26 @@ public class EntityVelvetWorm extends EntityMob
 	}
 
 	@Override
-	protected void dropFewItems(boolean hit, int looting)
-	{
+	protected void dropFewItems(boolean hit, int looting) {
 		int chanceFiftyFifty = rand.nextInt(2) + 1;
 
 		dropItem(Items.slime_ball, chanceFiftyFifty + looting);
 	}
 
-	protected void shootGooBall(Entity entity, float distance)
-	{
+	protected void shootGooBall(Entity entity, float distance) {
 		if (distance < 16.0F)
-		{
-			if (entity instanceof EntityPlayer)
-			{
+			if (entity instanceof EntityPlayer) {
 				worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
 				setInflateSize(0);
 				EntityGooBall gooBall = new EntityGooBall(worldObj, this);
 				gooBall.posY = posY + height / 2.0F + 0.3D;
 				worldObj.spawnEntityInWorld(gooBall);
 			}
-		}
 	}
 
-	public void forceCollideWithPlayer(EntityLivingBase entity, float distance)
-	{
+	public void forceCollideWithPlayer(EntityLivingBase entity, float distance) {
 		if (distance > 2.0F && distance < 4.0F)
-		{
-			if (onGround)
-			{
+			if (onGround) {
 				double distanceX = entity.posX - posX;
 				double distanceZ = entity.posZ - posZ;
 				float squareRoot = MathHelper.sqrt_double(distanceX * distanceX + distanceZ * distanceZ);
@@ -156,16 +129,13 @@ public class EntityVelvetWorm extends EntityMob
 				motionZ = distanceZ / squareRoot * 0.5D * 0.300000011920929D + motionZ * 0.10000000298023224D;
 				motionY = 0D;
 			}
-		}
 	}
 
-	public void setInflateSize(int size)
-	{
+	public void setInflateSize(int size) {
 		dataWatcher.updateObject(20, Integer.valueOf(size));
 	}
 
-	public int getInflateSize()
-	{
+	public int getInflateSize() {
 		return dataWatcher.getWatchableObjectInt(20);
 	}
 }

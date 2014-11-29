@@ -16,17 +16,14 @@ import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
-public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler
-{
+public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler {
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-	{
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		Tessellator tess = Tessellator.instance;
 		tess.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
 		int colour = block.colorMultiplier(renderer.blockAccess, x, y, z);
@@ -34,8 +31,7 @@ public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler
 		float g = (colour >> 8 & 255) / 255.0F;
 		float b = (colour & 255) / 255.0F;
 
-		if (EntityRenderer.anaglyphEnable)
-		{
+		if (EntityRenderer.anaglyphEnable) {
 			float r2 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
 			float g2 = (r * 30.0F + g * 70.0F) / 100.0F;
 			float b2 = (r * 30.0F + b * 70.0F) / 100.0F;
@@ -49,22 +45,19 @@ public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler
 		return true;
 	}
 
-	private void setPetalColour(int meta)
-	{
+	private void setPetalColour(int meta) {
 		Tessellator tess = Tessellator.instance;
 		float[] colour = EntitySheep.fleeceColorTable[BlockColored.func_150032_b(Utils.getFlowerMetadata(meta))];
 		tess.setColorOpaque_F(colour[0], colour[1], colour[2]);
 	}
 
-	private void drawFlower(int meta, int x, int y, int z)
-	{
+	private void drawFlower(int meta, int x, int y, int z) {
 		drawCrossedSquares(ModBlocks.flowerPlanted.getIcon(0, meta), x, y, z);
 		setPetalColour(meta);
 		drawCrossedSquares(ModBlocks.flowerPlanted.getIcon(1, meta), x, y, z);
 	}
 
-	private void drawCrossedSquares(IIcon icon, int x, int y, int z)
-	{
+	private void drawCrossedSquares(IIcon icon, int x, int y, int z) {
 		Tessellator tess = Tessellator.instance;
 
 		double minU = icon.getMinU();
@@ -94,14 +87,12 @@ public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId)
-	{
+	public boolean shouldRender3DInInventory(int modelId) {
 		return false;
 	}
 
 	@Override
-	public int getRenderId()
-	{
+	public int getRenderId() {
 		return BlockRenderIDs.PLANTED_FLOWER.id();
 	}
 }

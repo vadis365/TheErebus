@@ -10,12 +10,10 @@ import net.minecraft.world.World;
 import erebus.ModTabs;
 import erebus.block.BlockDoorErebus;
 
-public class ItemDoorErebus extends Item
-{
+public class ItemDoorErebus extends Item {
 	private final Block door;
 
-	public ItemDoorErebus(Block door)
-	{
+	public ItemDoorErebus(Block door) {
 		this.door = door;
 		setMaxStackSize(64);
 		setCreativeTab(ModTabs.blocks);
@@ -28,29 +26,21 @@ public class ItemDoorErebus extends Item
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-	{
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (side != 1)
-		{
 			return false;
-		} else
-		{
+		else {
 			y++;
-			if (player.canPlayerEdit(x, y, z, side, stack) && player.canPlayerEdit(x, y + 1, z, side, stack))
-			{
+			if (player.canPlayerEdit(x, y, z, side, stack) && player.canPlayerEdit(x, y + 1, z, side, stack)) {
 				if (!door.canPlaceBlockAt(world, x, y, z))
-				{
 					return false;
-				} else
-				{
+				else {
 					ItemDoor.placeDoorBlock(world, x, y, z, MathHelper.floor_double((player.rotationYaw + 180.0F) * 4.0F / 360.0F - 0.5D) & 3, door);
 					stack.stackSize--;
 					return true;
 				}
 			} else
-			{
 				return false;
-			}
 		}
 	}
 }

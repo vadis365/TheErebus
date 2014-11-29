@@ -12,26 +12,22 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelWorkerBee;
 
 @SideOnly(Side.CLIENT)
-public class RenderWorkerBee extends RenderLiving
-{
+public class RenderWorkerBee extends RenderLiving {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/workerBee.png");
 
-	public RenderWorkerBee()
-	{
+	public RenderWorkerBee() {
 		super(new ModelWorkerBee(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f)
-	{
+	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		float f1 = 1F;
 		shadowSize = f1;
 		GL11.glScalef(f1, f1, f1);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

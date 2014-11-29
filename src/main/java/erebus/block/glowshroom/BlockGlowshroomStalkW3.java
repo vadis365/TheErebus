@@ -10,11 +10,9 @@ import erebus.ModBlocks;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
-public class BlockGlowshroomStalkW3 extends Block
-{
+public class BlockGlowshroomStalkW3 extends Block {
 
-	public BlockGlowshroomStalkW3()
-	{
+	public BlockGlowshroomStalkW3() {
 		super(Material.wood);
 		setHardness(0.2F);
 		setStepSound(Block.soundTypeWood);
@@ -24,68 +22,53 @@ public class BlockGlowshroomStalkW3 extends Block
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return BlockRenderIDs.GLOWSHROOM_STALK.id();
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random)
-	{
+	public int quantityDropped(int meta, int fortune, Random random) {
 		return 0;
 	}
 
 	@Override
-	public Item getItemDropped(int id, Random random, int fortune)
-	{
+	public Item getItemDropped(int id, Random random, int fortune) {
 		return null;
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
-	{
+	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x + 1, y, z));
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{
+	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x + 1, y, z));
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour)
-	{
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		if (world.isRemote)
-		{
 			return;
-		}
 
 		if (world.getBlock(x, y + 1, z) != ModBlocks.glowshroom)
-		{
 			world.setBlock(x, y, z, ModBlocks.glowshroomStalkW1);
-		}
 
 		if (!isValidBlock(world.getBlock(x + 1, y, z)))
-		{
 			Utils.breakBlockWithParticles(world, x, y, z);
-		}
 	}
 
-	private boolean isValidBlock(Block block)
-	{
+	private boolean isValidBlock(Block block) {
 		return block == ModBlocks.glowshroomStalkWE2;
 	}
 }

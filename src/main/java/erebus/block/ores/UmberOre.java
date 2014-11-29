@@ -8,12 +8,10 @@ import net.minecraft.item.Item;
 import net.minecraft.world.IBlockAccess;
 import erebus.ModTabs;
 
-public class UmberOre extends Block
-{
+public class UmberOre extends Block {
 	private final Block base;
 
-	public UmberOre(Block base, String name, int harvestLevel)
-	{
+	public UmberOre(Block base, String name, int harvestLevel) {
 		super(Material.rock);
 		this.base = base;
 		setCreativeTab(ModTabs.blocks);
@@ -26,40 +24,32 @@ public class UmberOre extends Block
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune)
-	{
+	public Item getItemDropped(int meta, Random rand, int fortune) {
 		Item item = base.getItemDropped(meta, rand, fortune);
 
 		if (item == Item.getItemFromBlock(base))
-		{
 			return Item.getItemFromBlock(this);
-		} else
-		{
+		else
 			return item;
-		}
 	}
 
 	@Override
-	public int quantityDropped(Random rand)
-	{
+	public int quantityDropped(Random rand) {
 		return base.quantityDropped(rand);
 	}
 
 	@Override
-	public int quantityDroppedWithBonus(int meta, Random rand)
-	{
+	public int quantityDroppedWithBonus(int meta, Random rand) {
 		return base.quantityDroppedWithBonus(meta, rand);
 	}
 
 	@Override
-	public int getExpDrop(IBlockAccess world, int meta, int fortune)
-	{
+	public int getExpDrop(IBlockAccess world, int meta, int fortune) {
 		return base.getExpDrop(world, meta, fortune);
 	}
 
 	@Override
-	public int damageDropped(int meta)
-	{
+	public int damageDropped(int meta) {
 		return base.damageDropped(meta);
 	}
 }

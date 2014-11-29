@@ -12,26 +12,22 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelWoodlouse;
 
 @SideOnly(Side.CLIENT)
-public class RenderWoodlouse extends RenderLiving
-{
+public class RenderWoodlouse extends RenderLiving {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/woodlouse.png");
 
-	public RenderWoodlouse(ModelWoodlouse model, float shadowSize)
-	{
+	public RenderWoodlouse(ModelWoodlouse model, float shadowSize) {
 		super(model, shadowSize);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f)
-	{
+	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		float f1 = 0.3F;
 		shadowSize = 0.0F;
 		GL11.glScalef(f1, f1, f1);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

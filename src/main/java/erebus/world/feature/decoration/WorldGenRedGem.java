@@ -13,9 +13,8 @@ public class WorldGenRedGem extends WorldGenerator{
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
-		if (!world.isAirBlock(x,y,z) || world.getBlock(x,y + 1,z) != ModBlocks.umberstone){
+		if (!world.isAirBlock(x,y,z) || world.getBlock(x,y + 1,z) != ModBlocks.umberstone)
 			return false;
-		}
 
 		world.setBlock(x,y,z,ModBlocks.redGem);
 
@@ -27,15 +26,12 @@ public class WorldGenRedGem extends WorldGenerator{
 			if (world.isAirBlock(xx,yy,zz)){
 				int adjacent = 0;
 
-				for(int side = 0; side < 6; ++side){
-					if (world.getBlock(xx + offsetX[side],yy + offsetY[side],zz + offsetZ[side]) == ModBlocks.redGem){
+				for(int side = 0; side < 6; ++side)
+					if (world.getBlock(xx + offsetX[side],yy + offsetY[side],zz + offsetZ[side]) == ModBlocks.redGem)
 						++adjacent;
-					}
-				}
 
-				if (adjacent == 1){
+				if (adjacent == 1)
 					world.setBlock(xx,yy,zz,ModBlocks.redGem);
-				}
 			}
 
 			if (++distUpd > 22 + dist * 30){

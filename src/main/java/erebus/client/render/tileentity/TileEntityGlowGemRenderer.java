@@ -12,21 +12,16 @@ import erebus.client.model.block.ModelGlowGem;
 import erebus.tileentity.TileEntityGlowGem;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer {
 
 	private final ModelGlowGem ModelGlowGem = new ModelGlowGem();
 
-	public void renderAModelAt(TileEntityGlowGem tile, double x, double y, double z, float f)
-	{
+	public void renderAModelAt(TileEntityGlowGem tile, double x, double y, double z, float f) {
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/glowGem.png"));
 		if (!tile.lightOn)
-		{
 			GL11.glColor3f(1F, 0F, 0F);
-		}
 		int meta = tile.getBlockMetadata();
-		switch (meta)
-		{
+		switch (meta) {
 			case 0:
 				GL11.glPushMatrix();
 				GL11.glTranslated(x + 0.5D, y - 0.5F, z + 0.5D);
@@ -152,8 +147,7 @@ public class TileEntityGlowGemRenderer extends TileEntitySpecialRenderer
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float meta)
-	{
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float meta) {
 		renderAModelAt((TileEntityGlowGem) tile, x, y, z, meta);
 	}
 }

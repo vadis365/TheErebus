@@ -11,49 +11,40 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.Materials;
 
-public class UmberOreFossil extends UmberOre
-{
-	public UmberOreFossil()
-	{
+public class UmberOreFossil extends UmberOre {
+	public UmberOreFossil() {
 		super(Blocks.diamond_ore, "Fossil", 2);
 		setHardness(1.5F);
 		setResistance(10.0F);
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune)
-	{
+	public Item getItemDropped(int meta, Random rand, int fortune) {
 		return Items.bone;
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
-	{
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
 		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
 
-		if (world.rand.nextInt(50 - Math.min(6, fortune * 2)) == 0)
-		{
+		if (world.rand.nextInt(50 - Math.min(6, fortune * 2)) == 0) {
 			drops.add(new ItemStack(ModItems.fossilClub));
 			return drops;
 		}
 
-		if (world.rand.nextInt(10 - Math.min(6, fortune * 2)) == 0)
-		{
+		if (world.rand.nextInt(10 - Math.min(6, fortune * 2)) == 0) {
 			drops.add(Materials.createStack(Materials.DATA.altarFragment));
 			return drops;
 		}
 
-		for (int i = 0; i < 1 + world.rand.nextInt(3); i++)
-		{
+		for (int i = 0; i < 1 + world.rand.nextInt(3); i++) {
 			Item item;
 			int meta;
 
-			if (world.rand.nextInt(3) == 0)
-			{
+			if (world.rand.nextInt(3) == 0) {
 				item = Items.bone;
 				meta = 0;
-			} else
-			{
+			} else {
 				item = ModItems.materials;
 				meta = Materials.DATA.shardBone.ordinal();
 			}

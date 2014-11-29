@@ -5,8 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelFireAntSoldier extends ModelBase
-{
+public class ModelFireAntSoldier extends ModelBase {
 
 	ModelRenderer Thx;
 	ModelRenderer ThxTop;
@@ -54,8 +53,7 @@ public class ModelFireAntSoldier extends ModelBase
 	ModelRenderer RBLC;
 	ModelRenderer RBLD;
 
-	public ModelFireAntSoldier()
-	{
+	public ModelFireAntSoldier() {
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -242,8 +240,7 @@ public class ModelFireAntSoldier extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Thx.render(unitPixel);
@@ -293,16 +290,14 @@ public class ModelFireAntSoldier extends ModelBase
 		RBLD.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		float headY = rotationYaw / (180F / (float) Math.PI);
 		float headX = rotationPitch / (180F / (float) Math.PI) - 1.0F;
 		float legX = MathHelper.cos(limbSwing * 2.0F) * 0.7F * limbSwingAngle;

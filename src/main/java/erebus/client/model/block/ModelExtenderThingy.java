@@ -7,8 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityExtenderThingy;
 
 @SideOnly(Side.CLIENT)
-public class ModelExtenderThingy extends ModelBase
-{
+public class ModelExtenderThingy extends ModelBase {
 	ModelRenderer BambooStep1;
 	ModelRenderer BambooStep2;
 	ModelRenderer SupportR1;
@@ -22,8 +21,7 @@ public class ModelExtenderThingy extends ModelBase
 	ModelRenderer Polebit;
 	ModelRenderer Main;
 
-	public ModelExtenderThingy()
-	{
+	public ModelExtenderThingy() {
 		textureWidth = 64;
 		textureHeight = 64;
 
@@ -77,8 +75,7 @@ public class ModelExtenderThingy extends ModelBase
 		setRotation(Main, 0F, 0F, 0F);
 	}
 
-	public void render(TileEntityExtenderThingy tile)
-	{
+	public void render(TileEntityExtenderThingy tile) {
 		BambooStep1.render(0.0625F);
 		BambooStep2.render(0.0625F);
 		SupportR1.render(0.0625F);
@@ -93,13 +90,11 @@ public class ModelExtenderThingy extends ModelBase
 		Main.render(0.0625F);
 	}
 
-	public void render2(TileEntityExtenderThingy tile)
-	{
+	public void render2(TileEntityExtenderThingy tile) {
 		Polebit.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

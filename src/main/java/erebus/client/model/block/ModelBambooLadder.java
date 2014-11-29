@@ -6,16 +6,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBambooLadder extends ModelBase
-{
+public class ModelBambooLadder extends ModelBase {
 	ModelRenderer BambooStep1;
 	ModelRenderer BambooStep2;
 	ModelRenderer BambooStep3;
 	ModelRenderer String1;
 	ModelRenderer String2;
 
-	public ModelBambooLadder()
-	{
+	public ModelBambooLadder() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -41,8 +39,7 @@ public class ModelBambooLadder extends ModelBase
 		setRotation(String2, 0F, 0F, 0F);
 	}
 
-	public void render()
-	{
+	public void render() {
 		BambooStep1.render(0.0625F);
 		BambooStep2.render(0.0625F);
 		BambooStep3.render(0.0625F);
@@ -50,8 +47,7 @@ public class ModelBambooLadder extends ModelBase
 		String2.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

@@ -12,22 +12,15 @@ import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityScorpion;
 
 @SideOnly(Side.CLIENT)
-public class MobGrabbingHealthBarRemoval extends Gui
-{
+public class MobGrabbingHealthBarRemoval extends Gui {
 
 	@SubscribeEvent
-	public void onRenderHUD(Pre event)
-	{
-		if (event.type.equals(RenderGameOverlayEvent.ElementType.HEALTHMOUNT))
-		{
+	public void onRenderHUD(Pre event) {
+		if (event.type.equals(RenderGameOverlayEvent.ElementType.HEALTHMOUNT)) {
 			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 			if (player != null && player.ridingEntity != null)
-			{
 				if (player.ridingEntity instanceof EntityScorpion || player.ridingEntity instanceof EntityDragonfly)
-				{
 					event.setCanceled(true);
-				}
-			}
 		}
 	}
 }

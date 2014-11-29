@@ -8,41 +8,31 @@ import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarHealing;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityErebusAltarHealingRenderer extends TileEntityErebusAltarRenderer
-{
+public class TileEntityErebusAltarHealingRenderer extends TileEntityErebusAltarRenderer {
 	private static final ResourceLocation[] tex = new ResourceLocation[] { new ResourceLocation("erebus:textures/special/tiles/altarHealing1.png"), new ResourceLocation("erebus:textures/special/tiles/altarHealing2.png"), new ResourceLocation("erebus:textures/special/tiles/altarHealing3.png"), new ResourceLocation("erebus:textures/special/tiles/altarHealing4.png"), new ResourceLocation("erebus:textures/special/tiles/altarHealing5.png") };
 
 	private final ModelAltarHealing model = new ModelAltarHealing();
 
 	@Override
-	protected void renderModel(TileEntityErebusAltar altar)
-	{
+	protected void renderModel(TileEntityErebusAltar altar) {
 		model.render((TileEntityErebusAltarHealing) altar);
 	}
 
 	@Override
-	protected ResourceLocation getAltarTexture(TileEntityErebusAltar altar)
-	{
+	protected ResourceLocation getAltarTexture(TileEntityErebusAltar altar) {
 		TileEntityErebusAltarHealing tile = (TileEntityErebusAltarHealing) altar;
 
 		if (tile.animationTicks <= 5)
-		{
 			return tex[0];
-		} else if (tile.animationTicks > 5 && tile.animationTicks <= 10)
-		{
+		else if (tile.animationTicks > 5 && tile.animationTicks <= 10)
 			return tex[1];
-		} else if (tile.animationTicks > 10 && tile.animationTicks <= 15)
-		{
+		else if (tile.animationTicks > 10 && tile.animationTicks <= 15)
 			return tex[2];
-		} else if (tile.animationTicks > 15 && tile.animationTicks <= 20)
-		{
+		else if (tile.animationTicks > 15 && tile.animationTicks <= 20)
 			return tex[3];
-		} else if (tile.animationTicks > 20 && tile.animationTicks <= 25)
-		{
+		else if (tile.animationTicks > 20 && tile.animationTicks <= 25)
 			return tex[4];
-		} else
-		{
+		else
 			return null;
-		}
 	}
 }

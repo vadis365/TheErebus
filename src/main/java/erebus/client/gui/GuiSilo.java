@@ -14,14 +14,12 @@ import erebus.core.helper.Utils;
 import erebus.inventory.ContainerSilo;
 
 @SideOnly(Side.CLIENT)
-public class GuiSilo extends GuiContainer
-{
+public class GuiSilo extends GuiContainer {
 
 	private static final ResourceLocation GUI_SILO = new ResourceLocation("erebus:textures/gui/container/siloGui.png");
 	private final TileEntitySiloTank siloTank;
 
-	public GuiSilo(InventoryPlayer playerInventory, TileEntitySiloTank tile)
-	{
+	public GuiSilo(InventoryPlayer playerInventory, TileEntitySiloTank tile) {
 		super(new ContainerSilo(playerInventory, tile));
 		siloTank = tile;
 		allowUserInput = false;
@@ -30,16 +28,14 @@ public class GuiSilo extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y)
-	{
+	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		int colour = Utils.getColour(192, 192, 192);
 		fontRendererObj.drawString(StatCollector.translateToLocal(siloTank.getInventoryName()), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal(siloTank.getInventoryName())) / 2, 6, colour);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, colour);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int x, int y)
-	{
+	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(GUI_SILO); // temp texture
 		int k = (width - xSize) / 2;

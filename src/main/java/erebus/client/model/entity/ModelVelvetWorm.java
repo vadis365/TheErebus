@@ -8,8 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelVelvetWorm extends ModelBase
-{
+public class ModelVelvetWorm extends ModelBase {
 
 	ModelRenderer Head1;
 	ModelRenderer Head2;
@@ -34,8 +33,7 @@ public class ModelVelvetWorm extends ModelBase
 	ModelRenderer RAnt;
 	ModelRenderer LAnt;
 
-	public ModelVelvetWorm()
-	{
+	public ModelVelvetWorm() {
 		textureWidth = 64;
 		textureHeight = 32;
 		Head1 = new ModelRenderer(this, 21, 19);
@@ -129,8 +127,7 @@ public class ModelVelvetWorm extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Head1.render(unitPixel);
@@ -157,16 +154,14 @@ public class ModelVelvetWorm extends ModelBase
 		LAnt.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 
 		float ba = MathHelper.cos(limbSwing * 1.0F) * 1.0F * prevLimbSwing;
 		float bb = MathHelper.cos(limbSwing + 1.0F * 1.0F) * 2.0F * prevLimbSwing;

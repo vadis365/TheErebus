@@ -9,14 +9,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelWandOfAnimation extends ModelBase
-{
+public class ModelWandOfAnimation extends ModelBase {
 
 	private final ModelRenderer Jewel1, Jewel2, Jewel3, TopR1, TopR2, TopR3, TopR4, TopR5, Dec4, Dec3, Dec2, Dec1, Shaft, Pommel1, Pommel2, Pommel3;
 	boolean up;
 
-	public ModelWandOfAnimation()
-	{
+	public ModelWandOfAnimation() {
 		textureWidth = 32;
 		textureHeight = 64;
 		Jewel1 = new ModelRenderer(this, 0, 7);
@@ -84,18 +82,13 @@ public class ModelWandOfAnimation extends ModelBase
 		TopR3.addChild(TopR5);
 	}
 
-	public void render(float unitPixel)
-	{
+	public void render(float unitPixel) {
 		float tick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 		// System.out.println(up);
 		if (tick <= 360)
-		{
 			up = true;
-		}
 		if (tick >= 361)
-		{
 			up = false;
-		}
 
 		Shaft.render(unitPixel);
 		GL11.glRotatef(tick, 0.0F, 1.0F, 0.0F);
@@ -115,8 +108,7 @@ public class ModelWandOfAnimation extends ModelBase
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

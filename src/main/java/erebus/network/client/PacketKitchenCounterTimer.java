@@ -7,15 +7,15 @@ import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
 import erebus.tileentity.TileEntityKitchenCounter;
 
-public class PacketKitchenCounterTimer extends AbstractClientPacket{
-	
+public class PacketKitchenCounterTimer extends AbstractClientPacket {
+
 	private int x, y, z, time;
-	
-	public PacketKitchenCounterTimer(){
-		
+
+	public PacketKitchenCounterTimer() {
+
 	}
-	
-	public PacketKitchenCounterTimer(int x, int y, int z, int time){
+
+	public PacketKitchenCounterTimer(int x, int y, int z, int time) {
 		this();
 		this.x = x;
 		this.y = y;
@@ -26,10 +26,9 @@ public class PacketKitchenCounterTimer extends AbstractClientPacket{
 	@Override
 	protected void handle(World world, EntityClientPlayerMP player) {
 		TileEntityKitchenCounter tile = Utils.getTileEntity(world, x, y, z, TileEntityKitchenCounter.class);
-		
-		if(tile != null){
+
+		if (tile != null)
 			tile.time = time;
-		}
 	}
 
 	@Override

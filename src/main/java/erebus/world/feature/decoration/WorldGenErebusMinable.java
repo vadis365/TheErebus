@@ -8,23 +8,20 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 
-public class WorldGenErebusMinable extends WorldGenerator
-{
+public class WorldGenErebusMinable extends WorldGenerator {
 	private Block minableBlock;
 	private int minableBlockMeta = 0;
 	private int numberOfBlocks;
 	private Block blockToReplace;
 
-	public void prepare(Block block, int meta, int numberOfBlocks)
-	{
+	public void prepare(Block block, int meta, int numberOfBlocks) {
 		minableBlock = block;
 		minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
 		blockToReplace = ModBlocks.umberstone;
 	}
 
-	public void prepare(Block block, int meta, int numberOfBlocks, Block blockToReplace)
-	{
+	public void prepare(Block block, int meta, int numberOfBlocks, Block blockToReplace) {
 		minableBlock = block;
 		minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
@@ -32,8 +29,7 @@ public class WorldGenErebusMinable extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z)
-	{
+	public boolean generate(World world, Random rand, int x, int y, int z) {
 		float f = rand.nextFloat() * (float) Math.PI;
 		double d0 = x + 8 + MathHelper.sin(f) * numberOfBlocks * 0.125F;
 		double d1 = x + 8 - MathHelper.sin(f) * numberOfBlocks * 0.125F;
@@ -45,8 +41,7 @@ public class WorldGenErebusMinable extends WorldGenerator
 		int realNumberOfBlocks = numberOfBlocks;
 		numberOfBlocks = (int) Math.ceil(numberOfBlocks * (1.15F + rand.nextFloat() * 0.25F));
 
-		for (int attempt = 0, placed = 0; attempt <= numberOfBlocks && placed <= realNumberOfBlocks; ++attempt)
-		{
+		for (int attempt = 0, placed = 0; attempt <= numberOfBlocks && placed <= realNumberOfBlocks; ++attempt) {
 			double centerX = d0 + (d1 - d0) * placed / numberOfBlocks;
 			double centerY = d4 + (d5 - d4) * placed / numberOfBlocks;
 			double centerZ = d2 + (d3 - d2) * placed / numberOfBlocks;
@@ -60,37 +55,27 @@ public class WorldGenErebusMinable extends WorldGenerator
 			int maxY = MathHelper.floor_double(centerY + maxDistY * 0.5D);
 			int maxZ = MathHelper.floor_double(centerZ + maxDistXZ * 0.5D);
 
-			for (int xx = minX; xx <= maxX; ++xx)
-			{
+			for (int xx = minX; xx <= maxX; ++xx) {
 				double d12 = (xx + 0.5D - centerX) / (maxDistXZ * 0.5D);
 
 				if (d12 * d12 < 1.0D)
-				{
-					for (int yy = minY; yy <= maxY; ++yy)
-					{
+					for (int yy = minY; yy <= maxY; ++yy) {
 						double d13 = (yy + 0.5D - centerY) / (maxDistY * 0.5D);
 
 						if (d12 * d12 + d13 * d13 < 1.0D)
-						{
-							for (int zz = minZ; zz <= maxZ; ++zz)
-							{
+							for (int zz = minZ; zz <= maxZ; ++zz) {
 								double d14 = (zz + 0.5D - centerZ) / (maxDistXZ * 0.5D);
 
 								if (d12 * d12 + d13 * d13 + d14 * d14 >= 1D)
-								{
 									continue;
-								}
 
 								Block block = world.getBlock(xx, yy, zz);
-								if (block != null && block.isReplaceableOreGen(world, xx, yy, zz, blockToReplace))
-								{
+								if (block != null && block.isReplaceableOreGen(world, xx, yy, zz, blockToReplace)) {
 									world.setBlock(xx, yy, zz, minableBlock, minableBlockMeta, 2);
 									++placed;
 								}
 							}
-						}
 					}
-				}
 			}
 		}
 

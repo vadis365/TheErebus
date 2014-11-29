@@ -10,29 +10,21 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
-public class BlockDoorRenderer implements ISimpleBlockRenderingHandler
-{
+public class BlockDoorRenderer implements ISimpleBlockRenderingHandler {
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-	{
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		Tessellator tessellator = Tessellator.instance;
 		int meta = world.getBlockMetadata(x, y, z);
 
-		if ((meta & 8) != 0)
-		{
+		if ((meta & 8) != 0) {
 			if (world.getBlock(x, y - 1, z) != block)
-			{
 				return false;
-			}
 		} else if (world.getBlock(x, y + 1, z) != block)
-		{
 			return false;
-		}
 
 		int brightness = block.getMixedBrightnessForBlock(world, x, y, z);
 
@@ -40,8 +32,7 @@ public class BlockDoorRenderer implements ISimpleBlockRenderingHandler
 		tessellator.setColorOpaque_F(0.5F, 0.5F, 0.5F);
 		renderer.renderFaceYNeg(block, x, y, z, renderer.getBlockIcon(block, world, x, y, z, 0));
 
-		if ((meta & 8) != 0)
-		{
+		if ((meta & 8) != 0) {
 			tessellator.setBrightness(renderer.renderMaxY < 1.0D ? brightness : block.getMixedBrightnessForBlock(world, x, y + 1, z));
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 			renderer.uvRotateTop = 2;
@@ -73,14 +64,12 @@ public class BlockDoorRenderer implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId)
-	{
+	public boolean shouldRender3DInInventory(int modelId) {
 		return false;
 	}
 
 	@Override
-	public int getRenderId()
-	{
+	public int getRenderId() {
 		return BlockRenderIDs.DOOR.id();
 	}
 }

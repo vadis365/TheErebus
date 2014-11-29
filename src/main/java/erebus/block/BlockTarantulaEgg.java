@@ -12,11 +12,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModTabs;
 import erebus.tileentity.TileEntityTarantulaEgg;
 
-public class BlockTarantulaEgg extends BlockContainer
-{
+public class BlockTarantulaEgg extends BlockContainer {
 
-	public BlockTarantulaEgg()
-	{
+	public BlockTarantulaEgg() {
 		super(Material.rock);
 		setHardness(2.0F);
 		setHarvestLevel("pickaxe", 0);
@@ -26,38 +24,32 @@ public class BlockTarantulaEgg extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
+	public void registerBlockIcons(IIconRegister reg) {
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
+	public IIcon getIcon(int side, int meta) {
 		return Blocks.quartz_block.getIcon(side, 0);
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return -1;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityTarantulaEgg();
 	}
 

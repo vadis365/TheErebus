@@ -19,14 +19,12 @@ import erebus.item.Food;
 import erebus.item.Materials;
 import erebus.lib.EnumWood;
 
-public class RecipeHandler
-{
+public class RecipeHandler {
 
 	public static Item[] swordType = new Item[] { Items.wooden_sword, Items.stone_sword, Items.iron_sword, Items.golden_sword, Items.diamond_sword, ModItems.jadeSword, ModItems.scorpionPincer, ModItems.waspSword };
 	public static Item[] axeType = new Item[] { Items.wooden_axe, Items.stone_axe, Items.iron_axe, Items.golden_axe, Items.diamond_axe, ModItems.jadeAxe };
 
-	public static void init()
-	{
+	public static void init() {
 		EnumWood.initRecipes();
 
 		registerOreDictionary();
@@ -34,13 +32,11 @@ public class RecipeHandler
 		registerSmelting();
 	}
 
-	private static void addSlabRecipe(BlockSlabStone block)
-	{
+	private static void addSlabRecipe(BlockSlabStone block) {
 		GameRegistry.addRecipe(new ItemStack(block, 6), "xxx", 'x', new ItemStack(block.base, 1, block.meta));
 	}
 
-	private static void registerRecipes()
-	{
+	private static void registerRecipes() {
 		// Wood
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModBlocks.planks, 1, EnumWood.White.ordinal()), "plankWood", "dyeWhite"));
 
@@ -62,20 +58,14 @@ public class RecipeHandler
 
 		// Stairs, slabs, walls
 		for (int i = 0; i < ModBlocks.umbercobbleStairs.length; i++)
-		{
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.umbercobbleStairs[i], 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.umberstone, 1, i));
-		}
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.amberBrickStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.petrifiedWoodPlanks, 1, 0));
 
 		for (Block slab : ModBlocks.stoneSlabs)
-		{
 			addSlabRecipe((BlockSlabStone) slab);
-		}
 		for (int i = 0; i < ModBlocks.gneissStairs.length; i++)
-		{
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.gneissStairs[i], 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.gneiss, 1, i));
-		}
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wall, 6), "###", "###", '#', "stoneUmber"));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 1), "###", "###", '#', new ItemStack(ModBlocks.umberstone, 1, 1));
@@ -235,7 +225,7 @@ public class RecipeHandler
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 2, 9), ModBlocks.waterFlower);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.craftingAltar), "xxx", "xxx", "xxx", 'x', ModBlocks.altarBase);
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.jade), "xxx", "xxx", "xxx", 'x', Materials.createStack(Materials.DATA.jadeBerries));
-		
+
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bambucketAntiVenom), ModItems.bambucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));
@@ -244,33 +234,25 @@ public class RecipeHandler
 
 		// Sharp Swords
 		for (Item aSwordType : swordType)
-		{
-			for (int j = 0; j < 6; j++)
-			{
+			for (int j = 0; j < 6; j++) {
 				ItemStack swordSharp = new ItemStack(aSwordType);
 				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if (stoneLevel.getItemDamage() > 0)
-				{
+				if (stoneLevel.getItemDamage() > 0) {
 					swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
 					GameRegistry.addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(aSwordType));
 				}
 			}
-		}
 
 		// Sharp Axes
 		for (Item anAxeType : axeType)
-		{
-			for (int j = 0; j < 6; j++)
-			{
+			for (int j = 0; j < 6; j++) {
 				ItemStack axeSharp = new ItemStack(anAxeType);
 				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if (stoneLevel.getItemDamage() > 0)
-				{
+				if (stoneLevel.getItemDamage() > 0) {
 					axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
 					GameRegistry.addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(anAxeType));
 				}
 			}
-		}
 
 		// Special Items
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.rhinoRidingKit), " SX", "CCC", "LLL", 'S', Items.string, 'X', Materials.createStack(Materials.DATA.plateExo), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4));
@@ -290,8 +272,7 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.stoneHeart), " x ", "yzx", "xxy", 'x', ModBlocks.templeTile, 'y', Blocks.obsidian, 'z', Materials.createStack(Materials.DATA.crimsonHeart)));
 	}
 
-	private static void registerSmelting()
-	{
+	private static void registerSmelting() {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.blockAmber), new ItemStack(ModBlocks.blockAmber, 1, 1), 0.3F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, Food.FoodType.larvaRaw.ordinal()), new ItemStack(ModItems.food, 1, Food.FoodType.larvaCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, Food.FoodType.grasshopperLegRaw.ordinal()), new ItemStack(ModItems.food, 1, Food.FoodType.grasshopperLegCooked.ordinal()), 0.2F);
@@ -314,29 +295,18 @@ public class RecipeHandler
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), Materials.createStack(Materials.DATA.mudBrick), 0.2F);
 		GameRegistry.addSmelting(Materials.createStack(Materials.DATA.nectar), Materials.createStack(Materials.DATA.honeyDrip), 0.2F);
 		if (ConfigHandler.INSTANCE.lead)
-		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreLead), Materials.createStack(Materials.DATA.ingotLead), 1.0F);
-		}
 		if (ConfigHandler.INSTANCE.silver)
-		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreSilver), Materials.createStack(Materials.DATA.ingotSilver), 1.0F);
-		}
 		if (ConfigHandler.INSTANCE.copper)
-		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreCopper), Materials.createStack(Materials.DATA.ingotCopper), 1.0F);
-		}
 		if (ConfigHandler.INSTANCE.tin)
-		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreTin), Materials.createStack(Materials.DATA.ingotTin), 1.0F);
-		}
 		if (ConfigHandler.INSTANCE.aluminium)
-		{
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreAluminium), Materials.createStack(Materials.DATA.ingotAluminium), 1.0F);
-		}
 	}
 
-	private static void registerOreDictionary()
-	{
+	private static void registerOreDictionary() {
 		OreDictionary.registerOre("oreCoal", new ItemStack(ModBlocks.oreCoal));
 		OreDictionary.registerOre("oreIron", new ItemStack(ModBlocks.oreIron));
 		OreDictionary.registerOre("oreGold", new ItemStack(ModBlocks.oreGold));
@@ -371,9 +341,7 @@ public class RecipeHandler
 		OreDictionary.registerOre("plankScorched", new ItemStack(ModBlocks.scorchedPlanks));
 		OreDictionary.registerOre("plankPetrified", new ItemStack(ModBlocks.petrifiedWoodPlanks));
 		for (EnumWood wood : EnumWood.values())
-		{
 			OreDictionary.registerOre("plank" + wood, new ItemStack(ModBlocks.planks, 1, wood.ordinal()));
-		}
 
 		OreDictionary.registerOre("dyeBlack", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.BLACK_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeRed", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.RED_PETAL.ordinal()));
@@ -390,28 +358,23 @@ public class RecipeHandler
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.WHITE_PETAL.ordinal()));
 
-		if (ConfigHandler.INSTANCE.lead)
-		{
+		if (ConfigHandler.INSTANCE.lead) {
 			OreDictionary.registerOre("ingotLead", Materials.createStack(Materials.DATA.ingotLead));
 			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.oreLead));
 		}
-		if (ConfigHandler.INSTANCE.silver)
-		{
+		if (ConfigHandler.INSTANCE.silver) {
 			OreDictionary.registerOre("ingotSilver", Materials.createStack(Materials.DATA.ingotSilver));
 			OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.oreSilver));
 		}
-		if (ConfigHandler.INSTANCE.copper)
-		{
+		if (ConfigHandler.INSTANCE.copper) {
 			OreDictionary.registerOre("ingotCopper", Materials.createStack(Materials.DATA.ingotCopper));
 			OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.oreCopper));
 		}
-		if (ConfigHandler.INSTANCE.tin)
-		{
+		if (ConfigHandler.INSTANCE.tin) {
 			OreDictionary.registerOre("ingotTin", Materials.createStack(Materials.DATA.ingotTin));
 			OreDictionary.registerOre("oreTin", new ItemStack(ModBlocks.oreTin));
 		}
-		if (ConfigHandler.INSTANCE.aluminium)
-		{
+		if (ConfigHandler.INSTANCE.aluminium) {
 			OreDictionary.registerOre("ingotAluminium", Materials.createStack(Materials.DATA.ingotAluminium));
 			OreDictionary.registerOre("oreAluminum", new ItemStack(ModBlocks.oreAluminium));
 		}

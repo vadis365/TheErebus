@@ -1,10 +1,8 @@
 package erebus.item;
 
-public class WitherWebSlinger extends WebSlinger
-{
+public class WitherWebSlinger extends WebSlinger {
 	@Override
-	protected byte getShootType()
-	{
+	protected byte getShootType() {
 		return (byte) 1;
 	}
 }

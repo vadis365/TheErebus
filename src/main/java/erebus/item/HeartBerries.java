@@ -14,10 +14,9 @@ public class HeartBerries extends ItemFood {
 		setAlwaysEdible();
 		setCreativeTab(ModTabs.items);
 	}
-	
+
 	@Override
-	protected void onFoodEaten(ItemStack is, World world, EntityPlayer player)
-	{
+	protected void onFoodEaten(ItemStack is, World world, EntityPlayer player) {
 		player.heal(1);
 	}
 }

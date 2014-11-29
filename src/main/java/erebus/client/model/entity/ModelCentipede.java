@@ -9,8 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelCentipede extends ModelBase
-{
+public class ModelCentipede extends ModelBase {
 
 	// fields
 	ModelRenderer Head1;
@@ -73,8 +72,7 @@ public class ModelCentipede extends ModelBase
 	ModelRenderer LAnt;
 	ModelRenderer Neck;
 
-	public ModelCentipede()
-	{
+	public ModelCentipede() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -317,8 +315,7 @@ public class ModelCentipede extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Head1.render(unitPixel);
@@ -382,16 +379,14 @@ public class ModelCentipede extends ModelBase
 		Neck.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLivingBase entityLiving, float limbSwing, float prevLimbSwing, float partialTickTime)
-	{
+	public void setLivingAnimations(EntityLivingBase entityLiving, float limbSwing, float prevLimbSwing, float partialTickTime) {
 		float ba = MathHelper.cos(limbSwing * 1.0F) * 1.5F * prevLimbSwing;
 		float bb = MathHelper.cos(limbSwing + 1.0F * 1.0F) * 2.25F * prevLimbSwing;
 		float bc = MathHelper.cos(limbSwing + 2.0F * 1.0F) * 3.F * prevLimbSwing;
@@ -535,8 +530,7 @@ public class ModelCentipede extends ModelBase
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		Head1.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
 		Head3.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
 		RAnt.rotateAngleY = rotationYaw / (180F / (float) Math.PI) + 0.175F;

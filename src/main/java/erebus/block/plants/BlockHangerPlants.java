@@ -18,8 +18,7 @@ import erebus.core.helper.Utils;
 import erebus.item.Food;
 import erebus.item.Materials.DATA;
 
-public class BlockHangerPlants extends BlockBush
-{
+public class BlockHangerPlants extends BlockBush {
 
 	public static final String[] iconPaths = new String[] { "hanger0", "hanger1", "hanger2", "hanger3", "hanger4", "hangerFruit", "hangerSeed" };
 
@@ -28,27 +27,23 @@ public class BlockHangerPlants extends BlockBush
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons;
 
-	public BlockHangerPlants()
-	{
+	public BlockHangerPlants() {
 		setHardness(0.0F);
 		setBlockName("erebus.hanger");
 		setStepSound(Block.soundTypeGrass);
 	}
 
 	@Override
-	public int tickRate(World world)
-	{
+	public int tickRate(World world) {
 		return 5;
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z)
-	{
+	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
 		int meta = access.getBlockMetadata(x, y, z);
 		float widthReduced = 0, heightReduced = 0;
 
-		switch (meta)
-		{
+		switch (meta) {
 			case dataHanger0:
 				widthReduced = 0.375F;
 				heightReduced = 0.875F;
@@ -82,26 +77,21 @@ public class BlockHangerPlants extends BlockBush
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand)
-	{
+	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		int yy = y - 1;
 		// New shoot
 		if (world.isAirBlock(x, yy, z) && canBlockStay(world, x, yy, z))
-		{
-			switch (meta)
-			{
+			switch (meta) {
 				case dataHanger4:
 				case dataHangerFruit:
 				case dataHangerSeed:
 					world.setBlock(x, yy, z, this, dataHanger0, 2);
 					break;
 			}
-		}
 
 		// Shoot maturity
-		switch (meta)
-		{
+		switch (meta) {
 			case dataHanger0:
 				world.setBlock(x, y, z, this, dataHanger1, 2);
 				break;
@@ -118,88 +108,67 @@ public class BlockHangerPlants extends BlockBush
 
 		// Fruit
 		if (meta == dataHanger4 && rand.nextInt(50) == 0)
-		{
 			world.setBlock(x, y, z, this, dataHangerFruit, 2);
-		}
 
 		// Seeds
 		if (meta == dataHangerFruit && rand.nextInt(10) == 0)
-		{
 			world.setBlock(x, y, z, this, dataHangerSeed, 2);
-		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
+	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[iconPaths.length];
 		int i = 0;
 		for (String path : iconPaths)
-		{
 			icons[i++] = reg.registerIcon("erebus:" + path);
-		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
+	public IIcon getIcon(int side, int meta) {
 		if (meta < 0 || meta >= icons.length)
-		{
 			return null;
-		}
 		return icons[meta];
 	}
 
 	@Override
-	public int damageDropped(int meta)
-	{
+	public int damageDropped(int meta) {
 		return meta;
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random)
-	{
+	public int quantityDropped(int meta, int fortune, Random random) {
 		return 0;
 	}
 
 	@Override
-	public Item getItemDropped(int id, Random random, int fortune)
-	{
+	public Item getItemDropped(int id, Random random, int fortune) {
 		return null;
 	}
 
 	@Override
-	public int getDamageValue(World world, int x, int y, int z)
-	{
+	public int getDamageValue(World world, int x, int y, int z) {
 		return world.getBlockMetadata(x, y, z);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
-	{
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		int meta = world.getBlockMetadata(x, y, z);
 
-		if (meta == dataHangerFruit)
-		{
+		if (meta == dataHangerFruit) {
 			ItemStack item = new ItemStack(ModItems.food, 1, Food.FoodType.middleFruit.ordinal());
 			if (!player.inventory.addItemStackToInventory(item))
-			{
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
-			}
 			world.setBlock(x, y, z, this, dataHanger4, 2);
 			return true;
 		}
 
-		if (meta == dataHangerSeed)
-		{
+		if (meta == dataHangerSeed) {
 			ItemStack item = new ItemStack(ModItems.materials, 1, DATA.middleFruitSeeds.ordinal());
 			world.playSoundAtEntity(player, "random.pop", 0.5F, 2.0F);
 			if (!player.inventory.addItemStackToInventory(item))
-			{
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
-			}
 			world.setBlock(x, y, z, this, dataHanger4, 2);
 			return true;
 		}
@@ -207,49 +176,40 @@ public class BlockHangerPlants extends BlockBush
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player)
-	{
+	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
 		int meta = world.getBlockMetadata(x, y, z);
 		ItemStack item = null;
-		if (meta == dataHangerFruit)
-		{
+		if (meta == dataHangerFruit) {
 			item = new ItemStack(ModItems.food, 2, Food.FoodType.middleFruit.ordinal());
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
 
-		if (meta == dataHangerSeed)
-		{
+		if (meta == dataHangerSeed) {
 			item = new ItemStack(ModItems.materials, 2, DATA.middleFruitSeeds.ordinal());
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{
+	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y + 1, z)) && canBlockStay(world, x, y, z);
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
-	{
+	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x, y + 1, z));
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour)
-	{
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
 		ItemStack item = null;
-		if (world.isAirBlock(x, y + 1, z))
-		{
-			if (meta == dataHangerFruit)
-			{
+		if (world.isAirBlock(x, y + 1, z)) {
+			if (meta == dataHangerFruit) {
 				item = new ItemStack(ModItems.food, 1, Food.FoodType.middleFruit.ordinal());
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			}
-			if (meta == dataHangerSeed)
-			{
+			if (meta == dataHangerSeed) {
 				item = new ItemStack(ModItems.materials, 1, DATA.middleFruitSeeds.ordinal());
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			}
@@ -258,8 +218,7 @@ public class BlockHangerPlants extends BlockBush
 		canBlockStay(world, x, y, z);
 	}
 
-	private boolean isValidBlock(Block block)
-	{
+	private boolean isValidBlock(Block block) {
 		return block.getMaterial().blocksMovement() || block == this;
 	}
 }

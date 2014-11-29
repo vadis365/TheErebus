@@ -9,35 +9,29 @@ import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class BlockGhostSand extends Block
-{
+public class BlockGhostSand extends Block {
 
-	public BlockGhostSand()
-	{
+	public BlockGhostSand() {
 		super(Material.portal);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		return null;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune)
-	{
+	public Item getItemDropped(int meta, Random rand, int fortune) {
 		return Item.getItemFromBlock(Blocks.sand);
 	}
 
 	@Override
-	protected boolean canSilkHarvest()
-	{
+	protected boolean canSilkHarvest() {
 		return true;
 	}
 }

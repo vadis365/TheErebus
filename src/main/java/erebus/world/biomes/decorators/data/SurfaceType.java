@@ -3,17 +3,14 @@ package erebus.world.biomes.decorators.data;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-public enum SurfaceType
-{
+public enum SurfaceType {
 	GRASS,
 	DIRT,
 	SAND,
 	MIXED;
 
-	public boolean matchBlock(Block block)
-	{
-		switch (this)
-		{
+	public boolean matchBlock(Block block) {
+		switch (this) {
 			case GRASS:
 				return block == Blocks.grass || block == Blocks.mycelium;
 			case DIRT:

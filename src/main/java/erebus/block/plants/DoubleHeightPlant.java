@@ -21,19 +21,16 @@ import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.Materials;
 
-public class DoubleHeightPlant extends BlockDoublePlant implements IShearable
-{
+public class DoubleHeightPlant extends BlockDoublePlant implements IShearable {
 	@SideOnly(Side.CLIENT)
 	private IIcon top, bottom;
 	private final String name;
 
-	public DoubleHeightPlant(String name)
-	{
+	public DoubleHeightPlant(String name) {
 		this(name, 1);
 	}
 
-	public DoubleHeightPlant(String name, float width)
-	{
+	public DoubleHeightPlant(String name, float width) {
 		this.name = name;
 		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
@@ -43,97 +40,78 @@ public class DoubleHeightPlant extends BlockDoublePlant implements IShearable
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-	{
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune)
-	{
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
 		if (world.rand.nextInt(8) != 0)
-		{
 			return drops;
-		}
 
 		if ("Sundew".equals(name))
-		{
 			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.bioLuminescence.ordinal()));
-		} else if ("WeepingBlue".equals(name))
-		{
+		else if ("WeepingBlue".equals(name))
 			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.weepingBluePetal.ordinal()));
-		} else if ("Bullrush".equals(name))
-		{
+		else if ("Bullrush".equals(name))
 			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.papyrus.ordinal()));
-		} else if ("WaterFlower".equals(name))
-		{
+		else if ("WaterFlower".equals(name))
 			drops.add(new ItemStack(this));
-		} else
-		{
+		else {
 			ItemStack seed = ForgeHooks.getGrassSeed(world);
 			if (seed != null)
-			{
 				drops.add(seed);
-			}
 		}
 
 		return drops;
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return BlockRenderIDs.DOUBLE_PLANTS.id();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
+	public IIcon getIcon(int side, int meta) {
 		return top;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
-	{
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 		return func_149887_c(world.getBlockMetadata(x, y, z)) ? top : bottom;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
+	public void registerBlockIcons(IIconRegister reg) {
 		top = reg.registerIcon("erebus:doublePlant" + name + "Top");
 		bottom = reg.registerIcon("erebus:doublePlant" + name + "Bottom");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess access, int x, int y, int z)
-	{
+	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
 		return 0xFFFFFF;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item item, CreativeTabs tab, List list)
-	{
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
 		list.add(new ItemStack(item));
 	}
-	
-    @Override
-    public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
-    {
-        return true;
-    }
 
-    @Override
-    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
-    {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z)&7));
-        return ret;
-    }
+	@Override
+	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
+		return true;
+	}
+
+	@Override
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ret.add(new ItemStack(this, 1, world.getBlockMetadata(x, y, z) & 7));
+		return ret;
+	}
 }

@@ -5,8 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelUmberGolem extends ModelBase
-{
+public class ModelUmberGolem extends ModelBase {
 	ModelRenderer HeadTop;
 	ModelRenderer HeadMain;
 	ModelRenderer HeadFront;
@@ -57,8 +56,7 @@ public class ModelUmberGolem extends ModelBase
 	ModelRenderer ToeLBack1;
 	ModelRenderer ToeLBack2;
 
-	public ModelUmberGolem()
-	{
+	public ModelUmberGolem() {
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -261,8 +259,7 @@ public class ModelUmberGolem extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		HeadTop.render(unitPixel);
@@ -288,16 +285,14 @@ public class ModelUmberGolem extends ModelBase
 		FootL.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float movcos1 = MathHelper.cos(limbSwing * 0.7F) * 0.3F * prevLimbSwing;
 		float movsin1 = MathHelper.sin(limbSwing * 0.7F) * 1.2F * prevLimbSwing;

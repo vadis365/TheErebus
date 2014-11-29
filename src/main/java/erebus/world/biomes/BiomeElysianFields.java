@@ -19,15 +19,12 @@ import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
 
-public class BiomeElysianFields extends BiomeBaseErebus
-{
-	public BiomeElysianFields(int biomeID)
-	{
+public class BiomeElysianFields extends BiomeBaseErebus {
+	public BiomeElysianFields(int biomeID) {
 		this(biomeID, new BiomeDecoratorElysianFields());
 	}
 
-	public BiomeElysianFields(int biomeID, BiomeDecoratorBaseErebus decorator)
-	{
+	public BiomeElysianFields(int biomeID, BiomeDecoratorBaseErebus decorator) {
 		super(biomeID, decorator);
 
 		setBiomeName("Elysian Fields");
@@ -53,15 +50,12 @@ public class BiomeElysianFields extends BiomeBaseErebus
 	}
 
 	@Override
-	public BiomeBaseErebus getRandomSubBiome(int randomValue)
-	{
+	public BiomeBaseErebus getRandomSubBiome(int randomValue) {
 		return randomValue < 40 ? ModBiomes.fieldsSubForest : null;
 	}
 
-	public static class BiomeElysianForest extends BiomeElysianFields
-	{
-		public BiomeElysianForest(int biomeID)
-		{
+	public static class BiomeElysianForest extends BiomeElysianFields {
+		public BiomeElysianForest(int biomeID) {
 			super(biomeID, new BiomeDecoratorElysianFields.BiomeDecoratorElysianForest());
 
 			setBiomeName("Elysian Forest");

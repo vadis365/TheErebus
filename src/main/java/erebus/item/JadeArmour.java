@@ -9,30 +9,23 @@ import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.item.Materials.DATA;
 
-public class JadeArmour extends ItemArmor
-{
+public class JadeArmour extends ItemArmor {
 
-	public JadeArmour(int armorType)
-	{
+	public JadeArmour(int armorType) {
 		super(ModMaterials.armorJADE, 2, armorType);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type)
-	{
+	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
 		if (is.getItem() == ModItems.jadeHelmet || is.getItem() == ModItems.jadeBody || is.getItem() == ModItems.jadeBoots)
-		{
 			return "erebus:textures/models/armor/jade1.png";
-		} else
-		{
+		else
 			return "erebus:textures/models/armor/jade2.png";
-		}
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack armour, ItemStack material)
-	{
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
 		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.jade.ordinal();
 	}
 }

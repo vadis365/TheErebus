@@ -7,8 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityBambooBridge;
 
 @SideOnly(Side.CLIENT)
-public class ModelBambooBridge extends ModelBase
-{
+public class ModelBambooBridge extends ModelBase {
 
 	ModelRenderer BambooStep1;
 	ModelRenderer BambooStep3;
@@ -27,8 +26,7 @@ public class ModelBambooBridge extends ModelBase
 	ModelRenderer StringL1;
 	ModelRenderer StringL2;
 
-	public ModelBambooBridge()
-	{
+	public ModelBambooBridge() {
 		textureWidth = 64;
 		textureHeight = 32;
 		BambooStep1 = new ModelRenderer(this, 1, 1);
@@ -97,10 +95,8 @@ public class ModelBambooBridge extends ModelBase
 		setRotation(StringL2, 0F, 0F, 0.122173F);
 	}
 
-	public void render(TileEntityBambooBridge tile)
-	{
-		if (tile.getRenderSide1())
-		{
+	public void render(TileEntityBambooBridge tile) {
+		if (tile.getRenderSide1()) {
 			SupportR1.render(0.0625F);
 			SupportR2.render(0.0625F);
 			StringR1.render(0.0625F);
@@ -108,8 +104,7 @@ public class ModelBambooBridge extends ModelBase
 			String4.render(0.0625F);
 		}
 
-		if (tile.getRenderSide2())
-		{
+		if (tile.getRenderSide2()) {
 			SupportL1.render(0.0625F);
 			SupportL2.render(0.0625F);
 			StringL1.render(0.0625F);
@@ -125,8 +120,7 @@ public class ModelBambooBridge extends ModelBase
 		String2.render(0.0625F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;

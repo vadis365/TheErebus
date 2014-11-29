@@ -8,18 +8,15 @@ import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
 import erebus.tileentity.TileEntityBones;
 
-public class PacketBones extends AbstractClientPacket
-{
+public class PacketBones extends AbstractClientPacket {
 
 	private int x, y, z;;
 	private String name;
 
-	public PacketBones()
-	{
+	public PacketBones() {
 	}
 
-	public PacketBones(int x, int y, int z, String name)
-	{
+	public PacketBones(int x, int y, int z, String name) {
 		this();
 		this.x = x;
 		this.y = y;
@@ -28,18 +25,14 @@ public class PacketBones extends AbstractClientPacket
 	}
 
 	@Override
-	protected void handle(World world, EntityClientPlayerMP player)
-	{
+	protected void handle(World world, EntityClientPlayerMP player) {
 		TileEntityBones tile = Utils.getTileEntity(world, x, y, z, TileEntityBones.class);
 		if (tile != null)
-		{
 			tile.setOwner(name);
-		}
 	}
 
 	@Override
-	public void write(ByteBuf buffer)
-	{
+	public void write(ByteBuf buffer) {
 		buffer.writeInt(x);
 		buffer.writeInt(y);
 		buffer.writeInt(z);
@@ -47,8 +40,7 @@ public class PacketBones extends AbstractClientPacket
 	}
 
 	@Override
-	public void read(ByteBuf buffer)
-	{
+	public void read(ByteBuf buffer) {
 		x = buffer.readInt();
 		y = buffer.readInt();
 		z = buffer.readInt();

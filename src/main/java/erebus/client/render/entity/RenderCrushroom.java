@@ -12,24 +12,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelCrushroom;
 
 @SideOnly(Side.CLIENT)
-public class RenderCrushroom extends RenderLiving
-{
+public class RenderCrushroom extends RenderLiving {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/crushroom.png");
 
-	public RenderCrushroom()
-	{
+	public RenderCrushroom() {
 		super(new ModelCrushroom(), 1.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime)
-	{
+	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
 		GL11.glScalef(2F, 2F, 2F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

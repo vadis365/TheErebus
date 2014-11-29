@@ -9,10 +9,8 @@ import erebus.entity.EntityZombieAnt;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
-public class BiomeFungalForest extends BiomeBaseErebus
-{
-	public BiomeFungalForest(int biomeID)
-	{
+public class BiomeFungalForest extends BiomeBaseErebus {
+	public BiomeFungalForest(int biomeID) {
 		super(biomeID, new BiomeDecoratorFungalForest());
 
 		setBiomeName("Fungal Forest");

@@ -9,24 +9,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.helper.Utils;
 import erebus.lib.EnumColour;
 
-public class ItemBlockFlowerPlanted extends ItemBlockGeneric
-{
+public class ItemBlockFlowerPlanted extends ItemBlockGeneric {
 
-	public ItemBlockFlowerPlanted(Block block)
-	{
+	public ItemBlockFlowerPlanted(Block block) {
 		super(block);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public IIcon getIconFromDamage(int damage)
-	{
+	public IIcon getIconFromDamage(int damage) {
 		return getBlock().getIcon(2, damage);
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack)
-	{
+	public String getItemStackDisplayName(ItemStack stack) {
 		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getTranslatedName();
 		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), colour);
 	}

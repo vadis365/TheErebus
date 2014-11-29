@@ -15,10 +15,8 @@ import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
 
-public class BiomeSubterraneanSavannah extends BiomeBaseErebus
-{
-	public BiomeSubterraneanSavannah(int biomeID)
-	{
+public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
+	public BiomeSubterraneanSavannah(int biomeID) {
 		super(biomeID, new BiomeDecoratorSubterraneanSavannah());
 
 		setBiomeName("Subterranean Savannah");

@@ -11,12 +11,10 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.Materials;
 import erebus.lib.Reference;
 
-public class NEIErebusConfig implements IConfigureNEI
-{
+public class NEIErebusConfig implements IConfigureNEI {
 
 	@Override
-	public void loadConfig()
-	{
+	public void loadConfig() {
 		API.registerGuiOverlay(GuiPetrifiedWorkbench.class, "crafting");
 		API.registerGuiOverlayHandler(GuiPetrifiedWorkbench.class, new DefaultOverlayHandler(), "crafting");
 
@@ -32,28 +30,23 @@ public class NEIErebusConfig implements IConfigureNEI
 		API.hideItem(new ItemStack(ModBlocks.flowerPlanted, 1, OreDictionary.WILDCARD_VALUE));
 		API.hideItem(new ItemStack(ModBlocks.honeyBlock));
 
-		if (!ConfigHandler.INSTANCE.aluminium)
-		{
+		if (!ConfigHandler.INSTANCE.aluminium) {
 			API.hideItem(new ItemStack(ModBlocks.oreAluminium));
 			API.hideItem(Materials.createStack(Materials.DATA.ingotAluminium));
 		}
-		if (!ConfigHandler.INSTANCE.copper)
-		{
+		if (!ConfigHandler.INSTANCE.copper) {
 			API.hideItem(new ItemStack(ModBlocks.oreCopper));
 			API.hideItem(Materials.createStack(Materials.DATA.ingotCopper));
 		}
-		if (!ConfigHandler.INSTANCE.lead)
-		{
+		if (!ConfigHandler.INSTANCE.lead) {
 			API.hideItem(new ItemStack(ModBlocks.oreLead));
 			API.hideItem(Materials.createStack(Materials.DATA.ingotLead));
 		}
-		if (!ConfigHandler.INSTANCE.silver)
-		{
+		if (!ConfigHandler.INSTANCE.silver) {
 			API.hideItem(new ItemStack(ModBlocks.oreSilver));
 			API.hideItem(Materials.createStack(Materials.DATA.ingotSilver));
 		}
-		if (!ConfigHandler.INSTANCE.tin)
-		{
+		if (!ConfigHandler.INSTANCE.tin) {
 			API.hideItem(new ItemStack(ModBlocks.oreTin));
 			API.hideItem(Materials.createStack(Materials.DATA.ingotTin));
 		}
@@ -88,14 +81,12 @@ public class NEIErebusConfig implements IConfigureNEI
 	}
 
 	@Override
-	public String getName()
-	{
+	public String getName() {
 		return Reference.MOD_NAME;
 	}
 
 	@Override
-	public String getVersion()
-	{
+	public String getVersion() {
 		return Reference.MOD_VERSION;
 	}
 }

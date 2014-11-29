@@ -12,11 +12,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 
-public class AntTamingAmulet extends Item
-{
+public class AntTamingAmulet extends Item {
 
-	public AntTamingAmulet()
-	{
+	public AntTamingAmulet() {
 		setMaxDamage(16);
 		setMaxStackSize(1);
 	}
@@ -24,34 +22,25 @@ public class AntTamingAmulet extends Item
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag)
-	{
+	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
 		if (hasTag(is))
-		{
-			if (is.stackTagCompound != null && is.stackTagCompound.hasKey("homeX"))
-			{
+			if (is.stackTagCompound != null && is.stackTagCompound.hasKey("homeX")) {
 				list.add("Silo Block X: " + is.getTagCompound().getInteger("homeX"));
 				list.add("Silo Block Y: " + is.getTagCompound().getInteger("homeY"));
 				list.add("Silo Block Z: " + is.getTagCompound().getInteger("homeZ"));
-			} else
-			{
+			} else {
 				list.add("Click on a Silo Block to");
 				list.add("set as target for Ants.");
 				list.add("Then click on Ant link it.");
 			}
-		}
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-	{
-		if (!world.isRemote && hasTag(is))
-		{
+	public boolean onItemUseFirst(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote && hasTag(is)) {
 			Block block = world.getBlock(x, y, z);
-			if (!world.isRemote && block != null)
-			{
-				if (block == ModBlocks.siloTank)
-				{
+			if (!world.isRemote && block != null) {
+				if (block == ModBlocks.siloTank) {
 					is.getTagCompound().setInteger("homeX", x);
 					is.getTagCompound().setInteger("homeY", y);
 					is.getTagCompound().setInteger("homeZ", z);
@@ -64,10 +53,8 @@ public class AntTamingAmulet extends Item
 		return false;
 	}
 
-	private boolean hasTag(ItemStack stack)
-	{
-		if (!stack.hasTagCompound())
-		{
+	private boolean hasTag(ItemStack stack) {
+		if (!stack.hasTagCompound()) {
 			stack.setTagCompound(new NBTTagCompound());
 			return false;
 		}

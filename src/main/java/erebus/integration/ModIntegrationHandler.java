@@ -5,55 +5,38 @@ import java.util.List;
 
 import cpw.mods.fml.common.Loader;
 
-public class ModIntegrationHandler
-{
+public class ModIntegrationHandler {
 	private static List<IModIntegration> integratedMods = new ArrayList<IModIntegration>();
 
-	public static void addMod(Class<? extends IModIntegration> cls)
-	{
-		try
-		{
+	public static void addMod(Class<? extends IModIntegration> cls) {
+		try {
 			IModIntegration obj = cls.newInstance();
 			if (Loader.isModLoaded(obj.getModId()))
-			{
 				integratedMods.add(obj);
-			}
-		} catch (Throwable t)
-		{
+		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 	}
 
-	public static void init()
-	{
-		try
-		{
+	public static void init() {
+		try {
 			for (IModIntegration integration : integratedMods)
-			{
 				integration.onInit();
-			}
-		} catch (Throwable t)
-		{
+		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 	}
 
-	public static void postInit()
-	{
-		try
-		{
+	public static void postInit() {
+		try {
 			for (IModIntegration integration : integratedMods)
-			{
 				integration.onPostInit();
-			}
-		} catch (Throwable t)
-		{
+		} catch (Throwable t) {
 			t.fillInStackTrace();
 		}
 	}
 
-	static interface IModIntegration
-	{
+	static interface IModIntegration {
 		String getModId();
 
 		void onInit();

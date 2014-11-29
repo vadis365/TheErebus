@@ -6,8 +6,7 @@ import net.minecraft.block.BlockColored;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.StatCollector;
 
-public enum EnumColour
-{
+public enum EnumColour {
 
 	BLACK("Black"),
 	RED("Red"),
@@ -28,39 +27,32 @@ public enum EnumColour
 
 	final String dye;
 
-	EnumColour(String name)
-	{
+	EnumColour(String name) {
 		dye = "dye" + name;
 	}
 
-	public String getOreName()
-	{
+	public String getOreName() {
 		return dye;
 	}
 
-	public Color getColour()
-	{
+	public Color getColour() {
 		int i = BlockColored.func_150031_c(ordinal());
 		return new Color(EntitySheep.fleeceColorTable[i][0], EntitySheep.fleeceColorTable[i][1], EntitySheep.fleeceColorTable[i][2]);
 	}
 
-	public int getRGB()
-	{
+	public int getRGB() {
 		return getColour().getRGB();
 	}
 
-	public int getDarker()
-	{
+	public int getDarker() {
 		return getColour().darker().getRGB();
 	}
 
-	public int getBrighter()
-	{
+	public int getBrighter() {
 		return getColour().brighter().getRGB();
 	}
 
-	public String getTranslatedName()
-	{
+	public String getTranslatedName() {
 		return StatCollector.translateToLocal("colour." + Reference.MOD_ID + "." + dye);
 	}
 }

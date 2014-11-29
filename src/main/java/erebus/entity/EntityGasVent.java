@@ -20,29 +20,24 @@ public class EntityGasVent extends EntityLiving {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!worldObj.isRemote) {
-			if (ticksExisted > 20) {
+		if (!worldObj.isRemote)
+			if (ticksExisted > 20)
 				setDead();
-			}
-		}
 
-		if (worldObj.isRemote) {
+		if (worldObj.isRemote)
 			trailParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
-		}
 	}
-	
+
 	@Override
-	public boolean isEntityInvulnerable()
-	{
+	public boolean isEntityInvulnerable() {
 		return true;
 	}
 
 	@Override
 	protected void collideWithEntity(Entity entity) {
-		if (!worldObj.isRemote) {
-			if(entity instanceof EntityLivingBase && !(entity instanceof EntityGasVent))
+		if (!worldObj.isRemote)
+			if (entity instanceof EntityLivingBase && !(entity instanceof EntityGasVent))
 				entity.setFire(5);
-		}
 		setDead();
 		super.collideWithEntity(entity);
 	}

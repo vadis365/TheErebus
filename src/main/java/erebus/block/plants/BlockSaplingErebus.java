@@ -29,15 +29,13 @@ import erebus.world.feature.tree.WorldGenMarshwoodTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
 import erebus.world.feature.tree.WorldGenSapTree;
 
-public class BlockSaplingErebus extends BlockSapling
-{
+public class BlockSaplingErebus extends BlockSapling {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon icon;
 	private final EnumWood wood;
 
-	public BlockSaplingErebus(EnumWood wood)
-	{
+	public BlockSaplingErebus(EnumWood wood) {
 		this.wood = wood;
 		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
@@ -47,82 +45,66 @@ public class BlockSaplingErebus extends BlockSapling
 	}
 
 	@Override
-	public String getLocalizedName()
-	{
+	public String getLocalizedName() {
 		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".sapling.name"), wood.getTranslatedName());
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
+	public IIcon getIcon(int side, int meta) {
 		return blockIcon;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item item, CreativeTabs tab, List list)
-	{
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
 		list.add(new ItemStack(item));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
+	public void registerBlockIcons(IIconRegister reg) {
 		blockIcon = reg.registerIcon(getTextureName());
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
-	{
+	public boolean canBlockStay(World world, int x, int y, int z) {
 		Block soil = world.getBlock(x, y - 1, z);
 		return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand)
-	{
-		if (!world.isRemote)
-		{
+	public void updateTick(World world, int x, int y, int z, Random rand) {
+		if (!world.isRemote) {
 			super.updateTick(world, x, y, z, rand);
 
 			if (rand.nextInt(13 - (world.getBlockLightValue(x, y + 1, z) >> 1)) == 0)
-			{
 				growTree(world, x, y, z, rand);
-			}
 		}
 	}
 
 	@Override
-	public void func_149879_c(World world, int x, int y, int z, Random rand)
-	{
+	public void func_149879_c(World world, int x, int y, int z, Random rand) {
 	}
 
 	@Override
-	public void func_149878_d(World world, int x, int y, int z, Random rand)
-	{
+	public void func_149878_d(World world, int x, int y, int z, Random rand) {
 		growTree(world, x, y, z, rand);
 	}
 
 	@Override
-	public void func_149853_b(World world, Random rand, int x, int y, int z)
-	{
+	public void func_149853_b(World world, Random rand, int x, int y, int z) {
 		growTree(world, x, y, z, rand);
 	}
 
-	private void growTree(World world, int x, int y, int z, Random rand)
-	{
+	private void growTree(World world, int x, int y, int z, Random rand) {
 		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z))
-		{
 			return;
-		}
 
 		WorldGenerator worldGen = null;
 
-		switch (wood)
-		{
+		switch (wood) {
 			case Eucalyptus:
 				worldGen = new WorldGenEucalyptusTree();
 				break;
@@ -153,19 +135,14 @@ public class BlockSaplingErebus extends BlockSapling
 		}
 
 		if (worldGen == null)
-		{
 			return;
-		}
 
 		world.setBlockToAir(x, y, z);
 		if (!worldGen.generate(world, rand, x, y, z))
-		{
 			world.setBlock(x, y, z, this);
-		}
 	}
 
-	public boolean isSameSapling(World world, int x, int y, int z, int meta)
-	{
+	public boolean isSameSapling(World world, int x, int y, int z, int meta) {
 		return world.getBlock(x, y, z) == this;
 	}
 }

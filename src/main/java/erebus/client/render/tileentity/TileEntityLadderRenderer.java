@@ -12,17 +12,14 @@ import erebus.client.model.block.ModelBambooLadder;
 import erebus.tileentity.TileEntityLadder;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityLadderRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityLadderRenderer extends TileEntitySpecialRenderer {
 
 	private final ModelBambooLadder ModelBambooLadder = new ModelBambooLadder();
 
-	public void renderAModelAt(TileEntityLadder tile, double x, double y, double z, float f)
-	{
+	public void renderAModelAt(TileEntityLadder tile, double x, double y, double z, float f) {
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/bambooLadder.png"));
 		int meta = tile.getBlockMetadata();
-		switch (meta)
-		{
+		switch (meta) {
 			case 2:
 				GL11.glPushMatrix();
 				GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
@@ -60,8 +57,7 @@ public class TileEntityLadderRenderer extends TileEntitySpecialRenderer
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime)
-	{
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
 		renderAModelAt((TileEntityLadder) tile, x, y, z, partialTickTime);
 	}
 }

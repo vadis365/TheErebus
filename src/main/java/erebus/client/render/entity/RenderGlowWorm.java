@@ -13,27 +13,23 @@ import erebus.client.model.entity.ModelGlowWorm;
 import erebus.entity.EntityGlowWorm;
 
 @SideOnly(Side.CLIENT)
-public class RenderGlowWorm extends RenderLiving
-{
+public class RenderGlowWorm extends RenderLiving {
 	private static final ResourceLocation texGlowing = new ResourceLocation("erebus:textures/entity/glowWormGlow.png"), texNormal = new ResourceLocation("erebus:textures/entity/glowWorm.png");
 
-	public RenderGlowWorm(ModelGlowWorm model, float shadowSize)
-	{
+	public RenderGlowWorm(ModelGlowWorm model, float shadowSize) {
 		super(model, shadowSize);
 		setRenderPassModel(new ModelGlowWorm());
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f)
-	{
+	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		float f1 = 0.75F;
 		shadowSize = 0.0F;
 		GL11.glScalef(f1, f1, f1);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return ((EntityGlowWorm) entity).isGlowing() ? texGlowing : texNormal;
 	}
 }

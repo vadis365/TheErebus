@@ -20,12 +20,10 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.Materials;
 
-public class EntityBeetle extends EntityAnimal
-{
+public class EntityBeetle extends EntityAnimal {
 	int shagCount;
 
-	public EntityBeetle(World world)
-	{
+	public EntityBeetle(World world) {
 		super(world);
 		setSize(1.6F, 0.9F);
 		getNavigator().setAvoidsWater(true);
@@ -39,119 +37,93 @@ public class EntityBeetle extends EntityAnimal
 	}
 
 	@Override
-	protected void entityInit()
-	{
+	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(30, new Integer(rand.nextInt(51)));
 		dataWatcher.addObject(31, new Byte((byte) 0));
 	}
 
 	@Override
-	public boolean isAIEnabled()
-	{
+	public boolean isAIEnabled() {
 		return true;
 	}
 
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 	}
 
 	@Override
-	public boolean getCanSpawnHere()
-	{
+	public boolean getCanSpawnHere() {
 		float light = getBrightness(1.0F);
 		if (light >= 0F)
-		{
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
-		}
 		return super.getCanSpawnHere();
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk()
-	{
+	public int getMaxSpawnedInChunk() {
 		return 3;
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
+	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	public int getTotalArmorValue()
-	{
+	public int getTotalArmorValue() {
 		return 4;
 	}
 
 	@Override
-	protected String getLivingSound()
-	{
+	protected String getLivingSound() {
 		return "erebus:beetlesound";
 	}
 
 	@Override
-	protected String getHurtSound()
-	{
+	protected String getHurtSound() {
 		return "erebus:beetlehurt";
 	}
 
 	@Override
-	protected String getDeathSound()
-	{
+	protected String getDeathSound() {
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block)
-	{ // playStepSound
+	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("mob.spider.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		super.onUpdate();
 		if (shagCount > 0)
-		{
 			shagCount--;
-		}
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player)
-	{
+	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
 
-		if (is != null && is.getItem() == Items.bucket && !player.capabilities.isCreativeMode)
-		{
+		if (is != null && is.getItem() == Items.bucket && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
-			{
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bucketBeetleJuice));
-			} else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bucketBeetleJuice)))
-			{
+			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bucketBeetleJuice)))
 				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bucketBeetleJuice, 1, 0), false);
-			}
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.bambucket && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode)
-		{
+		if (is != null && is.getItem() == ModItems.bambucket && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
-			{
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bambucket, 1, 2));
-			} else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucket, 1, 2)))
-			{
+			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucket, 1, 2)))
 				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bambucket, 1, 2), false);
-			}
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.turnip && !shagging())
-		{
+		if (is != null && is.getItem() == ModItems.turnip && !shagging()) {
 			is.stackSize--;
 			setTame((byte) 1);
 			shagCount = 600;
@@ -160,86 +132,69 @@ public class EntityBeetle extends EntityAnimal
 		return super.interact(player);
 	}
 
-	public boolean shagging()
-	{
+	public boolean shagging() {
 		return shagCount > 0;
 	}
 
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting)
-	{
+	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-		{
 			entityDropItem(Materials.createStack(Materials.DATA.plateExo), 0.0F);
-		}
 	}
 
 	@Override
-	public boolean isBreedingItem(ItemStack is)
-	{
+	public boolean isBreedingItem(ItemStack is) {
 		return is != null && is.getItem() == ModItems.turnip;
 	}
 
-	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable)
-	{
+	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {
 		EntityBeetleLarva entityBeetleLarva = new EntityBeetleLarva(worldObj);
 		entityBeetleLarva.setTame((byte) 1);
 		return entityBeetleLarva;
 	}
 
 	@Override
-	protected boolean canDespawn()
-	{
+	protected boolean canDespawn() {
 		if (getHasMated() == 1)
-		{
 			return false;
-		} else
-		{
+		else
 			return true;
-		}
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable entityageable)
-	{
+	public EntityAgeable createChild(EntityAgeable entityageable) {
 		return spawnBabyAnimal(entityageable);
 	}
 
-	public void setSkin(int skinType)
-	{
+	public void setSkin(int skinType) {
 		dataWatcher.updateObject(30, new Integer(skinType));
 	}
 
-	public void setTame(byte hasMated)
-	{
+	public void setTame(byte hasMated) {
 		dataWatcher.updateObject(31, Byte.valueOf(hasMated));
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt)
-	{
+	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger("beetleSkin", getSkin());
 		nbt.setByte("hasMated", getHasMated());
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt)
-	{
+	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		setSkin(nbt.getInteger("beetleSkin"));
 		setTame(nbt.getByte("hasMated"));
 	}
 
-	public int getSkin()
-	{
+	public int getSkin() {
 		return dataWatcher.getWatchableObjectInt(30);
 	}
 
-	public byte getHasMated()
-	{
+	public byte getHasMated() {
 		return dataWatcher.getWatchableObjectByte(31);
 	}
 

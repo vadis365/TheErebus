@@ -21,48 +21,41 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.entity.EntityWoodlouse;
 
-public class BlockHollowLog extends Block
-{
+public class BlockHollowLog extends Block {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon iconTop, iconSide, iconMoss;
 
-	public BlockHollowLog()
-	{
+	public BlockHollowLog() {
 		super(Material.wood);
 	}
 
 	@Override
-	public IIcon getIcon(int side, int meta)
-	{
+	public IIcon getIcon(int side, int meta) {
 		return side == 0 || side == 1 ? iconTop : (side == 2 || side == 3) && meta == 1 || (side == 4 || side == 5) && meta == 0 ? iconSide : iconMoss;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
+	public void registerBlockIcons(IIconRegister reg) {
 		iconTop = reg.registerIcon("erebus:hollowLogTop");
 		iconSide = reg.registerIcon("erebus:hollowLogSide");
 		iconMoss = reg.registerIcon("erebus:hollowLogMoss");
 	}
 
 	@Override
-	public void setBlockBoundsForItemRender()
-	{
+	public void setBlockBoundsForItemRender() {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return BlockRenderIDs.HOLLOW_LOG.id();
 	}
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public void addCollisionBoxesToList(World world, int x, int y, int s, AxisAlignedBB box, List list, Entity entity)
-	{
+	public void addCollisionBoxesToList(World world, int x, int y, int s, AxisAlignedBB box, List list, Entity entity) {
 		float pixel = 0.0625F; // 1 pixel
 		// bottom
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, pixel, 1.0F);
@@ -84,55 +77,45 @@ public class BlockHollowLog extends Block
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack is)
-	{
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack is) {
 		int l = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		world.setBlockMetadataWithNotify(x, y, z, l == 0 || l == 2 ? 0 : 1, 2);
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta)
-	{
+	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
 		if (!world.isRemote)
-		{
-			if (world.rand.nextInt(5) == 0)
-			{
+			if (world.rand.nextInt(5) == 0) {
 				EntityWoodlouse entity = new EntityWoodlouse(world);
 				entity.setLocationAndAngles(x + 0.5D, y, z + 0.5D, 0.0F, 0.0F);
 				world.spawnEntityInWorld(entity);
 			}
-		}
 		super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune)
-	{
+	public Item getItemDropped(int meta, Random rand, int fortune) {
 		return Items.stick;
 	}
 
 	@Override
-	public int quantityDropped(Random rand)
-	{
+	public int quantityDropped(Random rand) {
 		return 1 + rand.nextInt(4);
 	}
 
 	@Override
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
-	{
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
 		return true;
 	}
 }

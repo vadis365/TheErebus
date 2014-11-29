@@ -13,40 +13,29 @@ import erebus.client.model.entity.ModelTitanBeetle;
 import erebus.entity.EntityTitanBeetle;
 
 @SideOnly(Side.CLIENT)
-public class RenderTitanBeetle extends RenderLiving
-{
+public class RenderTitanBeetle extends RenderLiving {
 	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/titanBeetle.png"), new ResourceLocation("erebus:textures/entity/titanBeetleKit.png"), new ResourceLocation("erebus:textures/entity/titanBeetleChested.png"), new ResourceLocation("erebus:textures/entity/titanBeetleEnderChested.png") };
 
-	public RenderTitanBeetle()
-	{
+	public RenderTitanBeetle() {
 		super(new ModelTitanBeetle(), 1.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f)
-	{
+	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		float f1 = 1.5F;
 		GL11.glScalef(f1, f1, f1);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityTitanBeetle beetle = (EntityTitanBeetle) entity;
 		if (beetle.getTameState() < 2)
-		{
 			return textures[0];
-		}
 		if (beetle.getTameState() == 2)
-		{
 			return textures[1];
-		}
 		if (beetle.getTameState() == 3)
-		{
 			return textures[2];
-		} else
-		{
+		else
 			return textures[3];
-		}
 	}
 }

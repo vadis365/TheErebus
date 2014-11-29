@@ -13,28 +13,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelBoneBlock;
 
 @SideOnly(Side.CLIENT)
-public class ItemBoneBlockRenderer implements IItemRenderer
-{
+public class ItemBoneBlockRenderer implements IItemRenderer {
 
 	private final ModelBoneBlock ModelBoneBlock = new ModelBoneBlock();
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type)
-	{
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-	{
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return helper != ItemRendererHelper.BLOCK_3D;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-	{
-		switch (type)
-		{
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		switch (type) {
 			case ENTITY:
 				renderBlock(0.0F, 0.5F, 0.0F, 0.5D);
 				break;
@@ -52,19 +47,16 @@ public class ItemBoneBlockRenderer implements IItemRenderer
 		}
 	}
 
-	private void renderBlock(float x, float y, float z, double size)
-	{
+	private void renderBlock(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/boneBlock.png"));
-		if (RenderItem.renderInFrame)
-		{
+		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y - 1.5F, z + 1.5F);
 			GL11.glRotatef(-90F, 1F, 0, 0);
 			GL11.glScaled(1F, 1F, 1F);
 			ModelBoneBlock.render();
 			GL11.glPopMatrix();
-		} else
-		{
+		} else {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
@@ -75,8 +67,7 @@ public class ItemBoneBlockRenderer implements IItemRenderer
 		}
 	}
 
-	private void renderEquipped(float x, float y, float z, double size)
-	{
+	private void renderEquipped(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/boneBlock.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
@@ -87,8 +78,7 @@ public class ItemBoneBlockRenderer implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderFirstPerson(float x, float y, float z, double size)
-	{
+	private void renderFirstPerson(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/boneBlock.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
@@ -99,8 +89,7 @@ public class ItemBoneBlockRenderer implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderInventory(float x, float y, float z, double size)
-	{
+	private void renderInventory(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/boneBlock.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y + 0.2F, z);

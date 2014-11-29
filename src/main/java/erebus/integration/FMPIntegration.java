@@ -9,17 +9,14 @@ import erebus.block.BlockUmberstone;
 import erebus.integration.ModIntegrationHandler.IModIntegration;
 import erebus.lib.EnumWood;
 
-public class FMPIntegration implements IModIntegration
-{
+public class FMPIntegration implements IModIntegration {
 	@Override
-	public String getModId()
-	{
+	public String getModId() {
 		return "ForgeMicroblock";
 	}
 
 	@Override
-	public void onInit()
-	{
+	public void onInit() {
 		registerMaterial(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length);
 		registerMaterial(ModBlocks.redGem);
 		registerMaterial(ModBlocks.blockAmber, 0, 3);
@@ -30,38 +27,26 @@ public class FMPIntegration implements IModIntegration
 		registerMaterial(ModBlocks.umberPaver, 0, 3);
 		registerMaterial(ModBlocks.umberstonePillar);
 
-		for (EnumWood wood : EnumWood.values())
-		{
+		for (EnumWood wood : EnumWood.values()) {
 			if (wood.hasLog())
-			{
 				registerMaterial(wood.getLog());
-			}
 			if (wood.hasLeaves())
-			{
 				registerMaterial(wood.getLeaves());
-			}
 			if (wood.hasPlanks())
-			{
 				registerMaterial(ModBlocks.planks, wood.ordinal(), wood.ordinal() + 1);
-			}
 		}
 	}
 
 	@Override
-	public void onPostInit()
-	{
+	public void onPostInit() {
 	}
 
-	private void registerMaterial(Block block)
-	{
+	private void registerMaterial(Block block) {
 		registerMaterial(block, 0, 1);
 	}
 
-	private void registerMaterial(Block block, int minMeta, int maxMeta)
-	{
+	private void registerMaterial(Block block, int minMeta, int maxMeta) {
 		for (int i = minMeta; i < maxMeta; i++)
-		{
 			FMLInterModComms.sendMessage(getModId(), "microMaterial", new ItemStack(block, 1, i));
-		}
 	}
 }

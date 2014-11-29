@@ -8,8 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityFly;
 
 @SideOnly(Side.CLIENT)
-public class ModelFly extends ModelBase
-{
+public class ModelFly extends ModelBase {
 
 	ModelRenderer Shape1;
 	ModelRenderer Shape2;
@@ -25,8 +24,7 @@ public class ModelFly extends ModelBase
 	ModelRenderer Shape12;
 	ModelRenderer Shape13;
 
-	public ModelFly()
-	{
+	public ModelFly() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -85,8 +83,7 @@ public class ModelFly extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Shape1.render(unitPixel);
@@ -104,16 +101,14 @@ public class ModelFly extends ModelBase
 		Shape13.render(unitPixel);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityFly var8 = (EntityFly) entity;
 		Shape12.rotateAngleX = var8.wingFloat;
@@ -122,8 +117,7 @@ public class ModelFly extends ModelBase
 		Shape13.rotateAngleZ = -var8.wingFloat;
 	}
 
-	public int getFlySize()
-	{
+	public int getFlySize() {
 		return 72;
 	}
 }

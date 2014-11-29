@@ -6,12 +6,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelOfferingAltar extends ModelBase
-{
+public class ModelOfferingAltar extends ModelBase {
 	public ModelRenderer[] boxes = new ModelRenderer[8];
 
-	public ModelOfferingAltar()
-	{
+	public ModelOfferingAltar() {
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -41,11 +39,8 @@ public class ModelOfferingAltar extends ModelBase
 		boxes[7].setRotationPoint(0F, 9F, 0F);
 	}
 
-	public void render()
-	{
+	public void render() {
 		for (ModelRenderer box : boxes)
-		{
 			box.render(0.0625f);
-		}
 	}
 }

@@ -11,8 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityErebusAltarHealing;
 
 @SideOnly(Side.CLIENT)
-public class ModelAltarHealing extends ModelBase
-{
+public class ModelAltarHealing extends ModelBase {
 	// fields
 	ModelRenderer ROutPetal1;
 	ModelRenderer ROutPetal2;
@@ -53,8 +52,7 @@ public class ModelAltarHealing extends ModelBase
 	ModelRenderer Mid;
 	ModelRenderer Bot;
 
-	public ModelAltarHealing()
-	{
+	public ModelAltarHealing() {
 		textureWidth = 256;
 		textureHeight = 64;
 
@@ -212,8 +210,7 @@ public class ModelAltarHealing extends ModelBase
 		setRotation(Bot, 0F, 0F, 0F);
 	}
 
-	public void render(TileEntityErebusAltarHealing tile)
-	{
+	public void render(TileEntityErebusAltarHealing tile) {
 
 		float x = tile.animationTicks;
 		GL11.glPushMatrix();
@@ -267,16 +264,14 @@ public class ModelAltarHealing extends ModelBase
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 	}
 
 }

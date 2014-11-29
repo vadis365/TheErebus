@@ -12,29 +12,24 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelUmberGolemStatue;
 
 @SideOnly(Side.CLIENT)
-public class ItemUmberGolemStatueRenderer implements IItemRenderer
-{
+public class ItemUmberGolemStatueRenderer implements IItemRenderer {
 
 	private final ModelUmberGolemStatue ModelUmberGolemStatue = new ModelUmberGolemStatue();
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type)
-	{
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-	{
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return helper != ItemRendererHelper.BLOCK_3D;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-	{
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
-		switch (type)
-		{
+		switch (type) {
 			case ENTITY:
 				renderBlock(0.0F, 0.5F, 0.0F, 1.0D);
 				break;
@@ -52,8 +47,7 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer
 		}
 	}
 
-	private void renderBlock(float x, float y, float z, double size)
-	{
+	private void renderBlock(float x, float y, float z, double size) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -62,8 +56,7 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderEquipped(float x, float y, float z, double size)
-	{
+	private void renderEquipped(float x, float y, float z, double size) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -73,8 +66,7 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderFirstPerson(float x, float y, float z, double size)
-	{
+	private void renderFirstPerson(float x, float y, float z, double size) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -84,8 +76,7 @@ public class ItemUmberGolemStatueRenderer implements IItemRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderInventory(float x, float y, float z, double size)
-	{
+	private void renderInventory(float x, float y, float z, double size) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);

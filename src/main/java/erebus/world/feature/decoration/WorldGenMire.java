@@ -62,9 +62,7 @@ public class WorldGenMire extends WorldGenerator {
 			for (i1 = 0; i1 < 16; ++i1)
 				for (j2 = 0; j2 < 16; ++j2)
 					for (i2 = 0; i2 < 8; ++i2) {
-						flag = !aboolean[(i1 * 16 + j2) * 8 + i2] &&
-						(i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 &&
-						aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
+						flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 						if (flag) {
 							Material material = world.getBlock(x + i1, y + i2, z + j2).getMaterial();
@@ -99,17 +97,15 @@ public class WorldGenMire extends WorldGenerator {
 				for (i1 = 0; i1 < 16; ++i1)
 					for (j2 = 0; j2 < 16; ++j2) {
 						for (i2 = 0; i2 < 8; ++i2) {
-							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] &&
-							(i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 &&
-							aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
+							flag = !aboolean[(i1 * 16 + j2) * 8 + i2] && (i1 < 15 && aboolean[((i1 + 1) * 16 + j2) * 8 + i2] || i1 > 0 && aboolean[((i1 - 1) * 16 + j2) * 8 + i2] || j2 < 15 && aboolean[(i1 * 16 + j2 + 1) * 8 + i2] || j2 > 0 && aboolean[(i1 * 16 + j2 - 1) * 8 + i2] || i2 < 7 && aboolean[(i1 * 16 + j2) * 8 + i2 + 1] || i2 > 0 && aboolean[(i1 * 16 + j2) * 8 + i2 - 1]);
 
 							if (flag && (i2 < 4 || rand.nextInt(2) != 0) && world.getBlock(x + i1, y + i2, z + j2).getMaterial().isSolid()) {
 								world.setBlock(x + i1, y + i2, z + j2, ModBlocks.quickSand, 0, 2);
-								if (rand.nextInt(10) ==0)
-									world.setBlock(x + i1, y  + 2, z + j2, ModBlocks.mireCoral, 0, 2);
+								if (rand.nextInt(10) == 0)
+									world.setBlock(x + i1, y + 2, z + j2, ModBlocks.mireCoral, 0, 2);
 							}
 						}
-						
+
 						byte b0 = 4;
 
 						if (world.isBlockFreezable(x + i1, y + b0, z + j2))

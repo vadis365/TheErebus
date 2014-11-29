@@ -11,7 +11,7 @@ import erebus.client.model.block.ModelTarantulaEgg;
 import erebus.entity.EntityTarantulaEgg;
 
 public class RenderEntityTarantulaEgg extends Render {
-	
+
 	private final ModelTarantulaEgg model = new ModelTarantulaEgg();
 	public static ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/tarantulaEgg.png");
 
@@ -19,7 +19,7 @@ public class RenderEntityTarantulaEgg extends Render {
 	public void doRender(Entity entity, double x, double y, double z, float yaw, float tick) {
 		renderEgg((EntityTarantulaEgg) entity, x, y, z, yaw, tick);
 	}
-	
+
 	public void renderEgg(EntityTarantulaEgg entityEgg, double x, double y, double z, float yaw, float tick) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();

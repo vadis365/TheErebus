@@ -72,5 +72,3 @@ public class ModelMushroomHelm extends ModelBiped {
 		capTop.rotateAngleX = bipedHead.rotateAngleX;
 	}
 }
-
-

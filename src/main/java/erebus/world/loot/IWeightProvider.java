@@ -1,6 +1,5 @@
 package erebus.world.loot;
 
-public interface IWeightProvider
-{
+public interface IWeightProvider {
 	short getWeight();
 }

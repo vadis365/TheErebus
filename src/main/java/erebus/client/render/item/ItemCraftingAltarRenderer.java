@@ -10,25 +10,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.render.tileentity.TileEntityCraftingAltarRenderer;
 
 @SideOnly(Side.CLIENT)
-public class ItemCraftingAltarRenderer implements IItemRenderer
-{
+public class ItemCraftingAltarRenderer implements IItemRenderer {
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type)
-	{
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack stack, ItemRendererHelper helper)
-	{
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack stack, ItemRendererHelper helper) {
 		return true;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack stack, Object... data)
-	{
-		switch (type)
-		{
+	public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
+		switch (type) {
 			case ENTITY:
 				GL11.glScaled(0.75, 0.75, 0.75);
 				render(stack, -0.25F, -0.25F, -0.25F);
@@ -47,8 +42,7 @@ public class ItemCraftingAltarRenderer implements IItemRenderer
 		}
 	}
 
-	private void render(ItemStack stack, float x, float y, float z)
-	{
+	private void render(ItemStack stack, float x, float y, float z) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glScaled(0.5, 0.5, 0.5);

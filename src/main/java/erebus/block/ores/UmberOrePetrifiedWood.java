@@ -7,23 +7,19 @@ import net.minecraft.item.Item;
 import erebus.ModItems;
 import erebus.item.Materials;
 
-public class UmberOrePetrifiedWood extends UmberOre
-{
+public class UmberOrePetrifiedWood extends UmberOre {
 
-	public UmberOrePetrifiedWood()
-	{
+	public UmberOrePetrifiedWood() {
 		super(Blocks.diamond_ore, "PetrifiedWood", 2);
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune)
-	{
+	public Item getItemDropped(int meta, Random rand, int fortune) {
 		return ModItems.materials;
 	}
 
 	@Override
-	public int damageDropped(int meta)
-	{
+	public int damageDropped(int meta) {
 		return Materials.DATA.petrifiedWood.ordinal();
 	}
 }

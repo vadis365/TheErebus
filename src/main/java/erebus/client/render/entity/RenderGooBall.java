@@ -16,19 +16,16 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityGooBall;
 
 @SideOnly(Side.CLIENT)
-public class RenderGooBall extends Render
-{
+public class RenderGooBall extends Render {
 	private final RenderItem renderItem = new RenderItem();
 	private final ItemStack gooBall = new ItemStack(Items.slime_ball);
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float yaw, float tick)
-	{
+	public void doRender(Entity entity, double x, double y, double z, float yaw, float tick) {
 		renderGooBall((EntityGooBall) entity, x, y, z, yaw, tick);
 	}
 
-	public void renderGooBall(EntityGooBall entityGooBall, double x, double y, double z, float yaw, float tick)
-	{
+	public void renderGooBall(EntityGooBall entityGooBall, double x, double y, double z, float yaw, float tick) {
 		renderItem.setRenderManager(RenderManager.instance);
 		EntityItem slimeballItem = new EntityItem(entityGooBall.worldObj);
 		slimeballItem.hoverStart = 0.0F;
@@ -43,8 +40,7 @@ public class RenderGooBall extends Render
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return null;
 	}
 }

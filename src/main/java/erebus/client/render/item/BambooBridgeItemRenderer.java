@@ -14,36 +14,30 @@ import erebus.client.model.block.ModelBambooBridge;
 import erebus.tileentity.TileEntityBambooBridge;
 
 @SideOnly(Side.CLIENT)
-public class BambooBridgeItemRenderer implements IItemRenderer
-{
+public class BambooBridgeItemRenderer implements IItemRenderer {
 
 	private final ModelBambooBridge ModelBambooBridge = new ModelBambooBridge();
 	private final TileEntityBambooBridge te = new TileEntityBambooBridge();
 	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/bambooLadder.png");
 
-	public BambooBridgeItemRenderer()
-	{
+	public BambooBridgeItemRenderer() {
 		te.setRenderSide1(true);
 		te.setRenderSide2(true);
 	}
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type)
-	{
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-	{
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return helper != ItemRendererHelper.BLOCK_3D;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-	{
-		switch (type)
-		{
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		switch (type) {
 			case ENTITY:
 				renderBlock(0.0F, 0.5F, 0.0F, 0.5D);
 				break;
@@ -61,19 +55,16 @@ public class BambooBridgeItemRenderer implements IItemRenderer
 		}
 	}
 
-	private void renderBlock(float x, float y, float z, double size)
-	{
+	private void renderBlock(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
-		if (RenderItem.renderInFrame)
-		{
+		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y + 0.1875F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(90F, 0, 1F, 0);
 			ModelBambooBridge.render(te);
 			GL11.glPopMatrix();
-		} else
-		{
+		} else {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y, z);
 			GL11.glRotatef(180F, 1F, 0, 0);

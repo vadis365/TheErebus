@@ -10,8 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ModelArmorPowered extends ModelBiped
-{
+public class ModelArmorPowered extends ModelBiped {
 	ModelRenderer Body;
 	ModelRenderer RArm;
 	ModelRenderer LArm;
@@ -28,8 +27,7 @@ public class ModelArmorPowered extends ModelBiped
 	public boolean isGliding;
 	public boolean isPowered;
 
-	public ModelArmorPowered()
-	{
+	public ModelArmorPowered() {
 		textureWidth = 64;
 		textureHeight = 64;
 
@@ -84,8 +82,7 @@ public class ModelArmorPowered extends ModelBiped
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GL11.glPushMatrix();
@@ -118,22 +115,19 @@ public class ModelArmorPowered extends ModelBiped
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 		RArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * prevLimbSwing * 0.5F;
 		LArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * prevLimbSwing * 0.5F;
-		if (!isGliding && !isPowered)
-		{
+		if (!isGliding && !isPowered) {
 			RWingUpgradeTop.rotateAngleZ = 0F;
 			RWingUpgradeMid.rotateAngleZ = 0F;
 			RWingUpgradeBottom.rotateAngleZ = 0F;
@@ -141,8 +135,7 @@ public class ModelArmorPowered extends ModelBiped
 			LWingUpgradeMid.rotateAngleZ = 0F;
 			LWingUpgradeBottom.rotateAngleZ = 0F;
 
-			if (player.prevPosX != player.posX || player.prevPosZ != player.posZ)
-			{
+			if (player.prevPosX != player.posX || player.prevPosZ != player.posZ) {
 				RWingUpgradeTop.rotateAngleX = 0.7F;
 				RWingUpgradeMid.rotateAngleX = 0.7F;
 				RWingUpgradeBottom.rotateAngleX = 0.7F;
@@ -150,8 +143,7 @@ public class ModelArmorPowered extends ModelBiped
 				LWingUpgradeMid.rotateAngleX = 0.7F;
 				LWingUpgradeBottom.rotateAngleX = 0.7F;
 
-			} else
-			{
+			} else {
 				RWingUpgradeTop.rotateAngleX = 0F;
 				RWingUpgradeMid.rotateAngleX = 0F;
 				RWingUpgradeBottom.rotateAngleX = 0F;
@@ -160,16 +152,14 @@ public class ModelArmorPowered extends ModelBiped
 				LWingUpgradeBottom.rotateAngleX = 0F;
 			}
 		}
-		if (isGliding || isPowered && !player.onGround)
-		{
+		if (isGliding || isPowered && !player.onGround) {
 			RWingUpgradeTop.rotateAngleZ = 1.570796F;
 			RWingUpgradeMid.rotateAngleZ = 1.570796F;
 			RWingUpgradeBottom.rotateAngleZ = 1.570796F;
 			LWingUpgradeTop.rotateAngleZ = -1.570796F;
 			LWingUpgradeMid.rotateAngleZ = -1.570796F;
 			LWingUpgradeBottom.rotateAngleZ = -1.570796F;
-			if (isPowered)
-			{
+			if (isPowered) {
 				RWingUpgradeTop.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 				RWingUpgradeMid.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 				RWingUpgradeBottom.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
@@ -178,15 +168,13 @@ public class ModelArmorPowered extends ModelBiped
 				LWingUpgradeBottom.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 			}
 		}
-		if (player.isSneaking())
-		{
+		if (player.isSneaking()) {
 			Body.rotateAngleX = 0.4F;
 			RArm.rotateAngleX += 0.4F;
 			LArm.rotateAngleX += 0.4F;
 			RWingbase.rotateAngleX = 0.5F;
 			LWingbase.rotateAngleX = 0.5F;
-			if (!isGliding || !isPowered)
-			{
+			if (!isGliding || !isPowered) {
 				RWingUpgradeTop.rotateAngleX = 0.5F;
 				RWingUpgradeMid.rotateAngleX = 0.5F;
 				RWingUpgradeBottom.rotateAngleX = 0.5F;
@@ -202,8 +190,7 @@ public class ModelArmorPowered extends ModelBiped
 			LWingUpgradeTop.rotationPointZ = 4.5F;
 			LWingUpgradeMid.rotationPointZ = 4.5F;
 			LWingUpgradeBottom.rotationPointZ = 4.5F;
-		} else
-		{
+		} else {
 			Body.rotateAngleX = 0.0F;
 			RWingbase.rotateAngleX = 0.0F;
 			LWingbase.rotateAngleX = 0.0F;

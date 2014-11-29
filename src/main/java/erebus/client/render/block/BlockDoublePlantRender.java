@@ -12,16 +12,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
-public class BlockDoublePlantRender implements ISimpleBlockRenderingHandler
-{
+public class BlockDoublePlantRender implements ISimpleBlockRenderingHandler {
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-	{
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 		int colour = block.colorMultiplier(world, x, y, z);
@@ -29,8 +26,7 @@ public class BlockDoublePlantRender implements ISimpleBlockRenderingHandler
 		float g = (colour >> 8 & 255) / 255.0F;
 		float b = (colour & 255) / 255.0F;
 
-		if (EntityRenderer.anaglyphEnable)
-		{
+		if (EntityRenderer.anaglyphEnable) {
 			float R = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
 			float G = (r * 30.0F + g * 70.0F) / 100.0F;
 			float B = (r * 30.0F + b * 70.0F) / 100.0F;
@@ -47,14 +43,12 @@ public class BlockDoublePlantRender implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId)
-	{
+	public boolean shouldRender3DInInventory(int modelId) {
 		return false;
 	}
 
 	@Override
-	public int getRenderId()
-	{
+	public int getRenderId() {
 		return BlockRenderIDs.DOUBLE_PLANTS.id();
 	}
 }

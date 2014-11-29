@@ -24,11 +24,9 @@ import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModItems;
 
-public class EntityUmberGolem extends EntityCreature
-{
+public class EntityUmberGolem extends EntityCreature {
 
-	public EntityUmberGolem(World world)
-	{
+	public EntityUmberGolem(World world) {
 		super(world);
 		isImmuneToFire = true;
 		setSize(1.0F, 1.0F);
@@ -42,20 +40,17 @@ public class EntityUmberGolem extends EntityCreature
 	}
 
 	@Override
-	protected void entityInit()
-	{
+	protected void entityInit() {
 		super.entityInit();
 	}
 
 	@Override
-	public boolean isAIEnabled()
-	{
+	public boolean isAIEnabled() {
 		return true;
 	}
 
 	@Override
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(75.0D);
@@ -63,20 +58,17 @@ public class EntityUmberGolem extends EntityCreature
 	}
 
 	@Override
-	public EnumCreatureAttribute getCreatureAttribute()
-	{
+	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
 	@Override
-	public boolean canDespawn()
-	{
+	public boolean canDespawn() {
 		return false;
 	}
 
 	@Override
-	public boolean allowLeashing()
-	{
+	public boolean allowLeashing() {
 		return !canDespawn() && super.allowLeashing();
 	}
 
@@ -87,52 +79,42 @@ public class EntityUmberGolem extends EntityCreature
 	 */
 
 	@Override
-	protected String getDeathSound()
-	{
+	protected String getDeathSound() {
 		return "erebus:squish";
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block)
-	{
+	protected void func_145780_a(int x, int y, int z, Block block) {
 		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
-	{
+	protected void dropFewItems(boolean par1, int par2) {
 		entityDropItem(new ItemStack(Blocks.stone, 5, 0), 0.0F);
 	}
 
-	public boolean isClimbing()
-	{
+	public boolean isClimbing() {
 		return !onGround && isOnLadder();
 	}
 
 	@Override
-	public boolean isOnLadder()
-	{
+	public boolean isOnLadder() {
 		return isCollidedHorizontally;
 	}
 
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		super.onUpdate();
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity entity)
-	{
+	public boolean attackEntityAsMob(Entity entity) {
 		return Attack(entity);
 	}
 
-	protected boolean Attack(Entity entity)
-	{
-		if (!worldObj.isRemote)
-		{
-			if (onGround)
-			{
+	protected boolean Attack(Entity entity) {
+		if (!worldObj.isRemote) {
+			if (onGround) {
 				double d0 = entity.posX - posX;
 				double d1 = entity.posZ - posZ;
 				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
@@ -151,39 +133,27 @@ public class EntityUmberGolem extends EntityCreature
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player)
-	{
+	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is.getItem() == ModItems.wandOfAnimation)
-		{
+		if (!worldObj.isRemote && is != null && is.getItem() == ModItems.wandOfAnimation) {
 			setDead();
 			byte b0 = 0;
 			int l1 = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			if (l1 == 0)
-			{
 				b0 = 2;
-			}
 
 			if (l1 == 1)
-			{
 				b0 = 5;
-			}
 
 			if (l1 == 2)
-			{
 				b0 = 3;
-			}
 
 			if (l1 == 3)
-			{
 				b0 = 4;
-			}
 			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY + 0.1D), MathHelper.floor_double(posZ), ModBlocks.umberGolemStatue, b0, 3);
 			worldObj.playSoundEffect(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), "erebus:altaroffering", 0.2F, 1.0F);
 			return true;
 		} else
-		{
 			return false;
-		}
 	}
 }

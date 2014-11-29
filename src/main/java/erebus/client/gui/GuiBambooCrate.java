@@ -13,14 +13,12 @@ import erebus.inventory.ContainerBambooCrate;
 import erebus.tileentity.TileEntityBambooCrate;
 
 @SideOnly(Side.CLIENT)
-public class GuiBambooCrate extends GuiContainer
-{
+public class GuiBambooCrate extends GuiContainer {
 
 	private static final ResourceLocation GUI_BAMBOO_CRATE = new ResourceLocation("erebus:textures/gui/container/bambooCrate.png");
 	private final TileEntityBambooCrate bambooCrateInventory;
 
-	public GuiBambooCrate(InventoryPlayer playerInventory, TileEntityBambooCrate tile)
-	{
+	public GuiBambooCrate(InventoryPlayer playerInventory, TileEntityBambooCrate tile) {
 		super(new ContainerBambooCrate(playerInventory, tile));
 		bambooCrateInventory = tile;
 		allowUserInput = false;
@@ -28,15 +26,13 @@ public class GuiBambooCrate extends GuiContainer
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y)
-	{
+	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		fontRendererObj.drawString(StatCollector.translateToLocal(bambooCrateInventory.getInventoryName()), 8, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int x, int y)
-	{
+	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(GUI_BAMBOO_CRATE);
 		int k = (width - xSize) / 2;

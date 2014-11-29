@@ -6,39 +6,32 @@ import net.minecraft.world.World;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.network.AbstractServerPacket;
 
-public class PacketBeetleRamAttack extends AbstractServerPacket
-{
+public class PacketBeetleRamAttack extends AbstractServerPacket {
 
 	private boolean ramming;
 
-	public PacketBeetleRamAttack()
-	{
+	public PacketBeetleRamAttack() {
 	}
 
-	public PacketBeetleRamAttack(boolean ramming)
-	{
+	public PacketBeetleRamAttack(boolean ramming) {
 		this.ramming = ramming;
 	}
 
 	@Override
-	protected void handle(World world, EntityPlayerMP player)
-	{
-		if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle)
-		{
+	protected void handle(World world, EntityPlayerMP player) {
+		if (player.isRiding() && player.ridingEntity instanceof EntityRhinoBeetle) {
 			((EntityRhinoBeetle) player.ridingEntity).setRamAttack(ramming);
 			return;
 		}
 	}
 
 	@Override
-	public void write(ByteBuf buffer)
-	{
+	public void write(ByteBuf buffer) {
 		buffer.writeBoolean(ramming);
 	}
 
 	@Override
-	public void read(ByteBuf buffer)
-	{
+	public void read(ByteBuf buffer) {
 		ramming = buffer.readBoolean();
 	}
 }

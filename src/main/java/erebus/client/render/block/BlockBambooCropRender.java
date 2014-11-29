@@ -10,12 +10,10 @@ import erebus.ModBlocks;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
-public class BlockBambooCropRender implements ISimpleBlockRenderingHandler
-{
+public class BlockBambooCropRender implements ISimpleBlockRenderingHandler {
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0.25D, 0.0D, 0.25D, 0.75D, 0.95D, 0.75D);
 		BlockRenderHelper.renderSimpleBlock(ModBlocks.bambooCrop, 0, renderer);
@@ -29,8 +27,7 @@ public class BlockBambooCropRender implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-	{
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		renderer.renderAllFaces = true;
 		renderer.setRenderBounds(0.25D, 0.0D, 0.25D, 0.75D, 0.95D, 0.75D);
 		renderer.renderStandardBlock(ModBlocks.bambooCrop, x, y, z);
@@ -45,14 +42,12 @@ public class BlockBambooCropRender implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId)
-	{
+	public boolean shouldRender3DInInventory(int modelId) {
 		return true;
 	}
 
 	@Override
-	public int getRenderId()
-	{
+	public int getRenderId() {
 		return BlockRenderIDs.BAMBOO_CROP.id();
 	}
 }

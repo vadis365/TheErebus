@@ -19,8 +19,7 @@ import erebus.client.model.block.ModelStone4;
 import erebus.tileentity.TileEntityCraftingAltar;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer {
 	private final ModelAltar model = new ModelAltar();
 	private final ModelStone4 stone4 = new ModelStone4();
 
@@ -31,13 +30,10 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 	private final RenderItem renderItem;
 	public static TileEntityCraftingAltarRenderer instance;
 
-	public TileEntityCraftingAltarRenderer()
-	{
-		renderItem = new RenderItem()
-		{
+	public TileEntityCraftingAltarRenderer() {
+		renderItem = new RenderItem() {
 			@Override
-			public boolean shouldBob()
-			{
+			public boolean shouldBob() {
 				return true;
 			}
 		};
@@ -45,14 +41,12 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 	}
 
 	@Override
-	public void func_147497_a(TileEntityRendererDispatcher renderer)
-	{
+	public void func_147497_a(TileEntityRendererDispatcher renderer) {
 		super.func_147497_a(renderer);
 		instance = this;
 	}
 
-	public void renderTile(double x, double y, double z)
-	{
+	public void renderTile(double x, double y, double z) {
 		bindTexture(NORMAL);
 
 		GL11.glPushMatrix();
@@ -88,15 +82,11 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderTile(TileEntityCraftingAltar tile, double x, double y, double z)
-	{
+	private void renderTile(TileEntityCraftingAltar tile, double x, double y, double z) {
 		if (tile.blockMetadata == 1)
-		{
 			bindTexture(ACTIVE);
-		} else
-		{
+		else
 			bindTexture(NORMAL);
-		}
 
 		GL11.glPushMatrix();
 		renderMainModel(x, y, z);
@@ -132,33 +122,25 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderItems(TileEntityCraftingAltar tile)
-	{
+	private void renderItems(TileEntityCraftingAltar tile) {
 		float angle = tile.time;
-		if (tile.getStackInSlot(9) == null)
-		{
+		if (tile.getStackInSlot(9) == null) {
 			int count = 0;
-			for (int i = 1; i < 9; i++)
-			{
+			for (int i = 1; i < 9; i++) {
 				EntityItem item = tile.getItemForRendering(i);
 				if (item != null)
-				{
 					count++;
-				}
 			}
 
-			if (tile.getItemForRendering(0) != null)
-			{
+			if (tile.getItemForRendering(0) != null) {
 				GL11.glTranslatef(0, -0.25F, 0);
 				renderCentreItem(tile.getItemForRendering(0), 0);
 			}
 
 			GL11.glTranslated(-0.25, 0.5, 0);
-			for (int i = 1; i < 9; i++)
-			{
+			for (int i = 1; i < 9; i++) {
 				EntityItem item = tile.getItemForRendering(i);
-				if (item != null)
-				{
+				if (item != null) {
 					GL11.glPushMatrix();
 					GL11.glRotated(360F / count * (i + 1) + tile.getWorldObj().getWorldTime(), 0, 1, 0);
 					GL11.glTranslated(Math.cos(Math.toRadians(angle)), 0, 0);
@@ -166,14 +148,11 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 					GL11.glPopMatrix();
 				}
 			}
-		} else
-		{
-			if (tile.getStackInSlot(9).getItem() instanceof ItemBlock)
-			{
+		} else {
+			if (tile.getStackInSlot(9).getItem() instanceof ItemBlock) {
 				GL11.glTranslatef(0.13F, -0.6F, 0.0F);
 				GL11.glScaled(1.5, 1.5, 1.5);
-			} else
-			{
+			} else {
 				GL11.glRotated(90, 1, 0, 0);
 				GL11.glScaled(1.5, 1.5, 1.5);
 				GL11.glTranslatef(0.05F, -0.56F, -0.15F);
@@ -182,8 +161,7 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		}
 	}
 
-	private void renderCentreItem(EntityItem item, long time)
-	{
+	private void renderCentreItem(EntityItem item, long time) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.25F, 0.25F, 0);
 		GL11.glRotatef(time, 0, 1, 0);
@@ -192,8 +170,7 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderMainModel(double x, double y, double z)
-	{
+	private void renderMainModel(double x, double y, double z) {
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5F, y + 1.5F, z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
@@ -201,8 +178,7 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderStones(double x, double y, double z, float rotation)
-	{
+	private void renderStones(double x, double y, double z, float rotation) {
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5F, y + 1.5F, z + 0.5F);
 		GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
@@ -212,8 +188,7 @@ public class TileEntityCraftingAltarRenderer extends TileEntitySpecialRenderer
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick)
-	{
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick) {
 		renderTile((TileEntityCraftingAltar) tile, x, y, z);
 	}
 }

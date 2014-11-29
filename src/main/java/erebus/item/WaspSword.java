@@ -8,23 +8,18 @@ import net.minecraft.potion.PotionEffect;
 import erebus.ModMaterials;
 import erebus.entity.EntityWasp;
 
-public class WaspSword extends ItemSword
-{
+public class WaspSword extends ItemSword {
 
-	public WaspSword()
-	{
+	public WaspSword() {
 		super(ModMaterials.weaponWaspSword);
 		maxStackSize = 1;
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player)
-	{
+	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player) {
 		is.damageItem(1, player);
 		if (!(entity instanceof EntityWasp))
-		{
 			entity.addPotionEffect(new PotionEffect(Potion.poison.id, 100, 0));
-		}
 		return true;
 	}
 

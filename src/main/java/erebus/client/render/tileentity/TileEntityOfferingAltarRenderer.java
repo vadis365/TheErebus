@@ -15,19 +15,15 @@ import erebus.client.model.block.ModelOfferingAltar;
 import erebus.tileentity.TileEntityOfferingAltar;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer {
 	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/offeringAltar.png");
 	private final ModelOfferingAltar model = new ModelOfferingAltar();
 	private final RenderItem renderItem;
 
-	public TileEntityOfferingAltarRenderer()
-	{
-		renderItem = new RenderItem()
-		{
+	public TileEntityOfferingAltarRenderer() {
+		renderItem = new RenderItem() {
 			@Override
-			public boolean shouldBob()
-			{
+			public boolean shouldBob() {
 				return true;
 			}
 		};
@@ -35,8 +31,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity t, double x, double y, double z, float m)
-	{
+	public void renderTileEntityAt(TileEntity t, double x, double y, double z, float m) {
 		TileEntityOfferingAltar tile = (TileEntityOfferingAltar) t;
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
@@ -51,17 +46,13 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 		GL11.glPopMatrix();
 	}
 
-	private void renderItems(TileEntityOfferingAltar tile)
-	{
+	private void renderItems(TileEntityOfferingAltar tile) {
 		float angle = tile.time;
-		if (tile.getStackInSlot(3) == null)
-		{
+		if (tile.getStackInSlot(3) == null) {
 			GL11.glTranslated(-0.25, 0.5, 0);
-			for (int i = 0; i < 3; i++)
-			{
+			for (int i = 0; i < 3; i++) {
 				EntityItem item = tile.getItemForRendering(i);
-				if (item != null)
-				{
+				if (item != null) {
 					GL11.glPushMatrix();
 					GL11.glRotated(120 * (i + 1) + tile.getWorldObj().getWorldTime(), 0, 1, 0);
 					GL11.glTranslated(Math.cos(Math.toRadians(angle)), 0, 0);
@@ -69,8 +60,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer
 					GL11.glPopMatrix();
 				}
 			}
-		} else
-		{
+		} else {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-0.25F, 0.25F, 0);
 			GL11.glRotatef(tile.getWorldObj().getWorldTime(), 0, 1, 0);

@@ -60,26 +60,21 @@ public class SmallMushroom extends BlockMushroom {
 		int xx = x;
 		int yy = y;
 		int zz = z;
-		if (isMushroom(world, xx, yy, zz)) {
+		if (isMushroom(world, xx, yy, zz))
 			if (getShroomData(world.getBlock(x, y, z)) != 0 && getShroomData(world.getBlock(x, y, z)) != 3) {
-				if (isMushroom(world, xx + 1, yy, zz) && isMushroom(world, xx + 1, yy, zz + 1) && isMushroom(world, xx, yy, zz + 1)) {
+				if (isMushroom(world, xx + 1, yy, zz) && isMushroom(world, xx + 1, yy, zz + 1) && isMushroom(world, xx, yy, zz + 1))
 					growPlants(world, x + 1, y, z, world.rand);
-				}
 
-				if (isMushroom(world, xx - 1, yy, zz) && isMushroom(world, xx - 1, yy, zz + 1) && isMushroom(world, xx, yy, zz + 1)) {
+				if (isMushroom(world, xx - 1, yy, zz) && isMushroom(world, xx - 1, yy, zz + 1) && isMushroom(world, xx, yy, zz + 1))
 					growPlants(world, x, y, z, world.rand);
-				}
 
-				if (isMushroom(world, xx + 1, yy, zz) && isMushroom(world, xx + 1, yy, zz - 1) && isMushroom(world, xx, yy, zz - 1)) {
+				if (isMushroom(world, xx + 1, yy, zz) && isMushroom(world, xx + 1, yy, zz - 1) && isMushroom(world, xx, yy, zz - 1))
 					growPlants(world, x + 1, y, z - 1, world.rand);
-				}
 
-				if (isMushroom(world, xx - 1, yy, zz) && isMushroom(world, xx - 1, yy, zz - 1) && isMushroom(world, xx, yy, zz - 1)) {
+				if (isMushroom(world, xx - 1, yy, zz) && isMushroom(world, xx - 1, yy, zz - 1) && isMushroom(world, xx, yy, zz - 1))
 					growPlants(world, x, y, z - 1, world.rand);
-				}
 			} else
 				growPlants(world, x, y, z, world.rand);
-		}
 	}
 
 	public void growPlants(World world, int x, int y, int z, Random rand) {
@@ -118,9 +113,8 @@ public class SmallMushroom extends BlockMushroom {
 			WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 			genGiantMushrooms.setMushroomType(MushroomType.values()[getShroomData(this)]);
 
-			if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
+			if (!genGiantMushrooms.generate(world, rand, x, y, z))
 				world.setBlock(x, y, z, this);
-			}
 		}
 	}
 
@@ -129,18 +123,17 @@ public class SmallMushroom extends BlockMushroom {
 	}
 
 	private int getShroomData(Block block) {
-		if (block == ModBlocks.bulbCappedShroom) {
+		if (block == ModBlocks.bulbCappedShroom)
 			return 0;
-		}else if (block == ModBlocks.greenMushroom) {
+		else if (block == ModBlocks.greenMushroom)
 			return 1;
-		} else if (block == ModBlocks.bundleshroom) {
+		else if (block == ModBlocks.bundleshroom)
 			return 2;
-		} else if (block == ModBlocks.kaizerfinger) {
+		else if (block == ModBlocks.kaizerfinger)
 			return 3;
-		} else if (block == ModBlocks.dutchCap) {
+		else if (block == ModBlocks.dutchCap)
 			return 4;
-		} else {
+		else
 			return -1;
-		}
 	}
 }

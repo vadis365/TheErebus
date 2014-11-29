@@ -5,8 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 
-public abstract class AbstractPacket
-{
+public abstract class AbstractPacket {
 	public abstract void write(ByteBuf buffer);
 
 	public abstract void read(ByteBuf buffer);

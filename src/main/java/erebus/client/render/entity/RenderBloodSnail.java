@@ -12,24 +12,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelBloodSnail;
 
 @SideOnly(Side.CLIENT)
-public class RenderBloodSnail extends RenderLiving
-{
+public class RenderBloodSnail extends RenderLiving {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/bloodSnail.png");
 
-	public RenderBloodSnail()
-	{
+	public RenderBloodSnail() {
 		super(new ModelBloodSnail(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityLiving, float partialTickTime)
-	{
+	protected void preRenderCallback(EntityLivingBase entityLiving, float partialTickTime) {
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 }

@@ -16,10 +16,8 @@ import erebus.entity.EntityTarantula;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 
-public class BiomeUlteriorOutback extends BiomeBaseErebus
-{
-	public BiomeUlteriorOutback(int biomeID)
-	{
+public class BiomeUlteriorOutback extends BiomeBaseErebus {
+	public BiomeUlteriorOutback(int biomeID) {
 		super(biomeID, new BiomeDecoratorUlteriorOutback());
 
 		setBiomeName("Ulterior Outback");

@@ -8,17 +8,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.item.Materials;
 
-public class TileEntityGlowingJar extends TileEntity
-{
+public class TileEntityGlowingJar extends TileEntity {
 
 	@SideOnly(Side.CLIENT)
 	private EntityItem ghostItem;
 
 	@SideOnly(Side.CLIENT)
-	public EntityItem getGhostItem()
-	{
-		if (ghostItem == null)
-		{
+	public EntityItem getGhostItem() {
+		if (ghostItem == null) {
 			ghostItem = new EntityItem(worldObj);
 			ghostItem.hoverStart = 0.0F;
 			ghostItem.setEntityItemStack(new ItemStack(ModItems.materials, 1, Materials.DATA.bioLuminescence.ordinal()));
@@ -27,8 +24,7 @@ public class TileEntityGlowingJar extends TileEntity
 	}
 
 	@Override
-	public boolean canUpdate()
-	{
+	public boolean canUpdate() {
 		return false;
 	}
 }

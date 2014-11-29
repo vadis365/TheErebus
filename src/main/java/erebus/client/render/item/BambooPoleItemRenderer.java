@@ -13,28 +13,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelBambooPole;
 
 @SideOnly(Side.CLIENT)
-public class BambooPoleItemRenderer implements IItemRenderer
-{
+public class BambooPoleItemRenderer implements IItemRenderer {
 
 	private final ModelBambooPole ModelBambooPole = new ModelBambooPole();
 
 	@Override
-	public boolean handleRenderType(ItemStack item, ItemRenderType type)
-	{
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-	{
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
 		return helper != ItemRendererHelper.BLOCK_3D;
 	}
 
 	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-	{
-		switch (type)
-		{
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		switch (type) {
 			case ENTITY:
 				renderBlock(0.0F, 0.5F, 0.0F, 1.0D);
 				break;
@@ -52,20 +47,17 @@ public class BambooPoleItemRenderer implements IItemRenderer
 		}
 	}
 
-	private void renderBlock(float x, float y, float z, double size)
-	{
+	private void renderBlock(float x, float y, float z, double size) {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/bambooCrate.png"));
 
-		if (RenderItem.renderInFrame)
-		{
+		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y - 0.88F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(-90F, 0, 1F, 0);
 			ModelBambooPole.renderModel();
 			GL11.glPopMatrix();
-		} else
-		{
+		} else {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(x, y, z);
 			GL11.glRotatef(180F, 1F, 0, 0);

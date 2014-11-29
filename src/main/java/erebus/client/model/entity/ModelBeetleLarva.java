@@ -9,8 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityBeetleLarva;
 
 @SideOnly(Side.CLIENT)
-public class ModelBeetleLarva extends ModelBase
-{
+public class ModelBeetleLarva extends ModelBase {
 	ModelRenderer torso1;
 	ModelRenderer torso2;
 	ModelRenderer torso3;
@@ -39,8 +38,7 @@ public class ModelBeetleLarva extends ModelBase
 	ModelRenderer titanR1;
 	ModelRenderer titanR2;
 
-	public ModelBeetleLarva()
-	{
+	public ModelBeetleLarva() {
 		textureWidth = 128;
 		textureHeight = 64;
 
@@ -155,8 +153,7 @@ public class ModelBeetleLarva extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityBeetleLarva larva = (EntityBeetleLarva) entity;
@@ -180,14 +177,12 @@ public class ModelBeetleLarva extends ModelBase
 		mouthjaw.render(unitPixel);
 		sensorleft.render(unitPixel);
 		sensorright.render(unitPixel);
-		if (larva.getTame() == 2)
-		{
+		if (larva.getTame() == 2) {
 			horn1.render(unitPixel);
 			horn2.render(unitPixel);
 			horn3.render(unitPixel);
 		}
-		if (larva.getTame() == 3)
-		{
+		if (larva.getTame() == 3) {
 			titanL1.render(unitPixel);
 			titanL2.render(unitPixel);
 			titanR1.render(unitPixel);
@@ -196,16 +191,14 @@ public class ModelBeetleLarva extends ModelBase
 
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		float ba = MathHelper.cos(limbSwing * 1.0F) * 1.5F * prevLimbSwing;
 		float bb = MathHelper.cos(limbSwing + 1.0F * 1.0F) * 2.25F * prevLimbSwing;
 		float bc = MathHelper.cos(limbSwing + 2.0F * 1.0F) * 3.F * prevLimbSwing;

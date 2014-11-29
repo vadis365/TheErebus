@@ -6,13 +6,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelStone4 extends ModelBase
-{
+public class ModelStone4 extends ModelBase {
 
 	private final ModelRenderer stone4, stone1, stone2, stone3;
 
-	public ModelStone4()
-	{
+	public ModelStone4() {
 		textureWidth = 256;
 		textureHeight = 128;
 
@@ -34,15 +32,13 @@ public class ModelStone4 extends ModelBase
 		setRotation(stone3, 0F, -0.4089647F, 0.3892394F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void renderAll()
-	{
+	public void renderAll() {
 		stone4.render(0.0625F);
 		stone1.render(0.0625F);
 		stone2.render(0.0625F);

@@ -5,24 +5,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 
-public class TabGears extends CreativeTabErebus
-{
+public class TabGears extends CreativeTabErebus {
 
-	public TabGears()
-	{
+	public TabGears() {
 		super("erebus.gear");
 	}
 
 	@Override
-	public Item getTabIconItem()
-	{
+	public Item getTabIconItem() {
 		return ModItems.jadePaxel;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int func_151243_f()
-	{
+	public int func_151243_f() {
 		return 0;
 	}
 }

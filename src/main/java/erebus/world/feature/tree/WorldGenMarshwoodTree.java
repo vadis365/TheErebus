@@ -20,10 +20,9 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 
 		for (int xx = x - maxRadius; xx <= x + maxRadius; xx++)
 			for (int zz = z - maxRadius; zz <= z + maxRadius; zz++)
-				for (int yy = y + 2; yy < y + height; yy++) {
+				for (int yy = y + 2; yy < y + height; yy++)
 					if (!world.isAirBlock(xx, yy, zz))
 						return false;
-				}
 
 		for (int yy = y; yy < y + height; ++yy) {
 			if (yy % 5 == 0 && radius != 1)
@@ -31,7 +30,7 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 
 			for (int i = radius * -1; i <= radius; ++i)
 				for (int j = radius * -1; j <= radius; ++j) {
-					double dSq = (i * i) + (j * j);
+					double dSq = i * i + j * j;
 					if (Math.round(Math.sqrt(dSq)) <= radius && yy <= y + height - 2)
 						world.setBlock(x + i, yy, z + j, log, 0, 2);
 					if (Math.round(Math.sqrt(dSq)) <= radius && yy == y || Math.round(Math.sqrt(dSq)) <= radius && yy == y + height - 1)
@@ -76,7 +75,7 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 				meta = 0;
 			}
 
-			if (dir == 1) {
+			if (dir == 1)
 				if (!root) {
 					world.setBlock(x + i, y, z, log, meta == 0 ? 0 : 4, 2);
 					if (i < branchLength)
@@ -86,10 +85,9 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 				} else {
 					world.setBlock(x + i, y, z, log, 15, 2);
 					world.setBlock(x + i, y - 1, z, log, 15, 2);
-					}
-			}
+				}
 
-			if (dir == 2) {
+			if (dir == 2)
 				if (!root) {
 					world.setBlock(x - i, y, z, log, meta == 0 ? 0 : 4, 2);
 					if (i < branchLength)
@@ -100,9 +98,8 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 					world.setBlock(x - i, y, z, log, 15, 2);
 					world.setBlock(x - i, y - 1, z, log, 15, 2);
 				}
-			}
 
-			if (dir == 3) {
+			if (dir == 3)
 				if (!root) {
 					world.setBlock(x, y, z + i, log, meta == 0 ? 0 : 8, 2);
 					if (i < branchLength)
@@ -113,9 +110,8 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 					world.setBlock(x, y, z + i, log, 15, 2);
 					world.setBlock(x, y - 1, z + i, log, 15, 2);
 				}
-			}
 
-			if (dir == 4) {
+			if (dir == 4)
 				if (!root) {
 					world.setBlock(x, y, z - i, log, meta == 0 ? 0 : 8, 2);
 					if (i < branchLength)
@@ -126,9 +122,8 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 					world.setBlock(x, y, z - i, log, 15, 2);
 					world.setBlock(x, y - 1, z - i, log, 15, 2);
 				}
-			}
 
-			if (dir == 5) {
+			if (dir == 5)
 				if (!root) {
 					world.setBlock(x + i - 1, y, z + i - 1, log, meta == 0 ? 0 : 4, 2);
 					if (i < branchLength)
@@ -139,9 +134,8 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 					world.setBlock(x + i - 1, y, z + i - 1, log, 15, 2);
 					world.setBlock(x + i - 1, y - 1, z + i - 1, log, 15, 2);
 				}
-			}
 
-			if (dir == 6) {
+			if (dir == 6)
 				if (!root) {
 					world.setBlock(x - i + 1, y, z - i + 1, log, meta == 0 ? 0 : 4, 2);
 					if (i < branchLength)
@@ -152,9 +146,8 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 					world.setBlock(x - i + 1, y, z - i + 1, log, 15, 2);
 					world.setBlock(x - i + 1, y - 1, z - i + 1, log, 15, 2);
 				}
-			}
 
-			if (dir == 7) {
+			if (dir == 7)
 				if (!root) {
 					world.setBlock(x - i + 1, y, z + i - 1, log, meta == 0 ? 0 : 8, 2);
 					if (i < branchLength)
@@ -165,9 +158,8 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 					world.setBlock(x - i + 1, y, z + i - 1, log, 15, 2);
 					world.setBlock(x - i + 1, y - 1, z + i - 1, log, 15, 2);
 				}
-			}
 
-			if (dir == 8) {
+			if (dir == 8)
 				if (!root) {
 					world.setBlock(x + i - 1, y, z - i + 1, log, meta == 0 ? 0 : 8, 2);
 					if (i < branchLength)
@@ -178,7 +170,6 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 					world.setBlock(x + i - 1, y, z - i + 1, log, 15, 2);
 					world.setBlock(x + i - 1, y - 1, z - i + 1, log, 15, 2);
 				}
-			}
 		}
 	}
 
@@ -203,12 +194,11 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 	public void addHangers(World world, Random rand, int x, int y, int z) {
 		if (rand.nextInt(4) != 0) {
 			int length = rand.nextInt(13) + 4;
-			for (int yy = y; yy > y - length; --yy) {
-				if (world.getBlock(x, yy, z) == Blocks.air) {
+			for (int yy = y; yy > y - length; --yy)
+				if (world.getBlock(x, yy, z) == Blocks.air)
 					world.setBlock(x, yy, z, ModBlocks.hanger, 4, 2);
-				} else
+				else
 					break;
-			}
 		}
 	}
 }

@@ -5,11 +5,9 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class PortalActivator extends Item
-{
+public class PortalActivator extends Item {
 
-	public PortalActivator()
-	{
+	public PortalActivator() {
 		setFull3D();
 		setMaxDamage(64);
 		setMaxStackSize(1);
@@ -17,7 +15,6 @@ public class PortalActivator extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
+	public void registerIcons(IIconRegister reg) {
 	}
 }

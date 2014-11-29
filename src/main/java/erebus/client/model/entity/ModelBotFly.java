@@ -11,8 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityBotFly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBotFly extends ModelBase
-{
+public class ModelBotFly extends ModelBase {
 	ModelRenderer Head;
 	ModelRenderer HeadFront;
 	ModelRenderer HeadTop;
@@ -49,8 +48,7 @@ public class ModelBotFly extends ModelBase
 	ModelRenderer LegLB2;
 	ModelRenderer LegLB3;
 
-	public ModelBotFly()
-	{
+	public ModelBotFly() {
 		textureWidth = 64;
 		textureHeight = 32;
 
@@ -197,8 +195,7 @@ public class ModelBotFly extends ModelBase
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel)
-	{
+	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Head.render(unitPixel);
@@ -242,16 +239,14 @@ public class ModelBotFly extends ModelBase
 		GL11.glPopMatrix();
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity)
-	{
+	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityBotFly var8 = (EntityBotFly) entity;
 		RWing1.rotateAngleX = var8.wingFloat;
@@ -260,8 +255,7 @@ public class ModelBotFly extends ModelBase
 		LWing2.rotateAngleX = var8.wingFloat;
 	}
 
-	public int getFlySize()
-	{
+	public int getFlySize() {
 		return 100;
 	}
 

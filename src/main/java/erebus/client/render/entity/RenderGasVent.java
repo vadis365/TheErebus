@@ -7,17 +7,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderGasVent extends Render
-{
+public class RenderGasVent extends Render {
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float yaw, float tick)
-	{
+	public void doRender(Entity entity, double x, double y, double z, float yaw, float tick) {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return null;
 	}
 }

@@ -12,17 +12,14 @@ import erebus.client.model.block.ModelUmberGolemStatue;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityUmberGolemStatueRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityUmberGolemStatueRenderer extends TileEntitySpecialRenderer {
 
 	private final ModelUmberGolemStatue ModelUmberGolemStatue = new ModelUmberGolemStatue();
 
-	public void renderAModelAt(TileEntityUmberGolemStatue tile, double x, double y, double z, float f)
-	{
+	public void renderAModelAt(TileEntityUmberGolemStatue tile, double x, double y, double z, float f) {
 		bindTexture(new ResourceLocation("erebus:textures/special/tiles/umberGolemStatue.png"));
 		int meta = tile.getBlockMetadata();
-		switch (meta)
-		{
+		switch (meta) {
 			case 2:
 				GL11.glPushMatrix();
 				GL11.glTranslatef((float) x + 0.5F, (float) y + 1.1F, (float) z + 0.75F);
@@ -59,8 +56,7 @@ public class TileEntityUmberGolemStatueRenderer extends TileEntitySpecialRendere
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime)
-	{
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
 		renderAModelAt((TileEntityUmberGolemStatue) tile, x, y, z, partialTickTime);
 	}
 }

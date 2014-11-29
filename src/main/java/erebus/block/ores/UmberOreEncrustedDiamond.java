@@ -6,24 +6,20 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import erebus.ModItems;
 
-public class UmberOreEncrustedDiamond extends UmberOre
-{
+public class UmberOreEncrustedDiamond extends UmberOre {
 
-	public UmberOreEncrustedDiamond()
-	{
+	public UmberOreEncrustedDiamond() {
 		super(Blocks.diamond_ore, "EncrustedDiamond", 3);
 		setHardness(10F);
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune)
-	{
+	public Item getItemDropped(int meta, Random rand, int fortune) {
 		return ModItems.encrustedDiamond;
 	}
 
 	@Override
-	public int damageDropped(int meta)
-	{
+	public int damageDropped(int meta) {
 		return 0;
 	}
 }

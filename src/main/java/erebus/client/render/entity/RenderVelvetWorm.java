@@ -13,33 +13,26 @@ import erebus.client.model.entity.ModelVelvetWorm;
 import erebus.entity.EntityVelvetWorm;
 
 @SideOnly(Side.CLIENT)
-public class RenderVelvetWorm extends RenderLiving
-{
+public class RenderVelvetWorm extends RenderLiving {
 	private final ResourceLocation resource1 = new ResourceLocation("erebus:textures/entity/velvetworm.png");
 	private final ResourceLocation resource2 = new ResourceLocation("erebus:textures/entity/velvetworm2.png");
 
-	public RenderVelvetWorm()
-	{
+	public RenderVelvetWorm() {
 		super(new ModelVelvetWorm(), 0.6F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityLiving, float par2)
-	{
+	protected void preRenderCallback(EntityLivingBase entityLiving, float par2) {
 		EntityVelvetWorm worm = (EntityVelvetWorm) entityLiving;
 		int size = worm.getInflateSize();
 		GL11.glScalef((float) (size * 0.009 + 1F), (float) (size * 0.009 + 1F), (float) (-size * 0.0025 + 1F));
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		if (((EntityVelvetWorm) entity).skin == 0)
-		{
 			return resource2;
-		} else
-		{
+		else
 			return resource1;
-		}
 	}
 }

@@ -6,33 +6,24 @@ import net.minecraft.item.ItemStack;
 import erebus.ModItems;
 import erebus.item.Materials.DATA;
 
-public class CompoundGoggles extends ItemArmor
-{
+public class CompoundGoggles extends ItemArmor {
 
-	public CompoundGoggles(ArmorMaterial enumarmormaterial, int j, int k)
-	{
+	public CompoundGoggles(ArmorMaterial enumarmormaterial, int j, int k) {
 		super(enumarmormaterial, j, k);
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type)
-	{
+	public String getArmorTexture(ItemStack is, Entity entity, int slot, String type) {
 		if (is.getItem() == ModItems.compoundGoggles)
-		{
 			return "erebus:textures/models/armor/goggles1.png";
-		}
 		if (is.getItem() == ModItems.reinCompoundGoggles)
-		{
 			return "erebus:textures/models/armor/reinGoggles.png";
-		} else
-		{
+		else
 			return null;
-		}
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack armour, ItemStack material)
-	{
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
 		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.compoundLens.ordinal();
 	}
 }

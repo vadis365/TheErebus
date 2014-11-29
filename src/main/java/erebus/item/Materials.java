@@ -22,11 +22,9 @@ import erebus.block.plants.BlockHangerPlants;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketSound;
 
-public class Materials extends Item
-{
+public class Materials extends Item {
 
-	public enum DATA
-	{
+	public enum DATA {
 		plateExo,
 		jade,
 		shardBone,
@@ -86,56 +84,44 @@ public class Materials extends Item
 		jadeBerries;
 	}
 
-	public static ItemStack createStack(DATA data)
-	{
+	public static ItemStack createStack(DATA data) {
 		return createStack(data, 1);
 	}
 
-	public static ItemStack createStack(DATA data, int size)
-	{
+	public static ItemStack createStack(DATA data, int size) {
 		return new ItemStack(ModItems.materials, size, data.ordinal());
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
 
-	public Materials()
-	{
+	public Materials() {
 		setHasSubtypes(true);
 		setMaxDamage(0);
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
-	{
-		if (side == 1 && is.getItemDamage() == DATA.bambooShoot.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is))
-		{
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (side == 1 && is.getItemDamage() == DATA.bambooShoot.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
 			Block soil = world.getBlock(x, y, z);
 
-			if (soil != null && soil.canSustainPlant(world, x, y, z, ForgeDirection.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(x, y + 1, z))
-			{
+			if (soil != null && soil.canSustainPlant(world, x, y, z, ForgeDirection.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(x, y + 1, z)) {
 				world.setBlock(x, y + 1, z, ModBlocks.bambooShoot);
 
 				if (!player.capabilities.isCreativeMode)
-				{
 					--is.stackSize;
-				}
 				return true;
 			}
 		}
 
-		if (side == 0 && is.getItemDamage() == DATA.middleFruitSeeds.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y - 1, z, side, is))
-		{
+		if (side == 0 && is.getItemDamage() == DATA.middleFruitSeeds.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y - 1, z, side, is)) {
 			Block block = world.getBlock(x, y, z);
 
-			if (block != null && block.getMaterial().blocksMovement())
-			{
+			if (block != null && block.getMaterial().blocksMovement()) {
 				world.setBlock(x, y - 1, z, ModBlocks.hanger, BlockHangerPlants.dataHanger0, 2);
 
 				if (!player.capabilities.isCreativeMode)
-				{
 					--is.stackSize;
-				}
 				return true;
 			}
 		}
@@ -144,47 +130,33 @@ public class Materials extends Item
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player)
-	{
-		if (!world.isRemote)
-		{
+	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+		if (!world.isRemote) {
 			int damage = is.getItemDamage();
 
-			if (damage == DATA.bioVelocity.ordinal() || damage == DATA.supernaturalvelocity.ordinal())
-			{
+			if (damage == DATA.bioVelocity.ordinal() || damage == DATA.supernaturalvelocity.ordinal()) {
 				PotionEffect currentSpeed = player.getActivePotionEffect(Potion.moveSpeed);
 
-				if (currentSpeed == null || damage == DATA.bioVelocity.ordinal() && currentSpeed.getAmplifier() < 1 || damage == DATA.supernaturalvelocity.ordinal() && currentSpeed.getAmplifier() < 3)
-				{
+				if (currentSpeed == null || damage == DATA.bioVelocity.ordinal() && currentSpeed.getAmplifier() < 1 || damage == DATA.supernaturalvelocity.ordinal() && currentSpeed.getAmplifier() < 3) {
 					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, damage == DATA.bioVelocity.ordinal() ? 280 : 210, damage == DATA.bioVelocity.ordinal() ? 1 : 3, true));
 					PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 				} else
-				{
 					return is;
-				}
 			}
 
-			if (damage == DATA.camoPowder.ordinal())
-			{
+			if (damage == DATA.camoPowder.ordinal()) {
 				PotionEffect currentVisibility = player.getActivePotionEffect(Potion.invisibility);
 
-				if (currentVisibility == null || damage == DATA.camoPowder.ordinal() && currentVisibility.getAmplifier() < 3)
-				{
+				if (currentVisibility == null || damage == DATA.camoPowder.ordinal() && currentVisibility.getAmplifier() < 3) {
 					player.addPotionEffect(new PotionEffect(Potion.invisibility.id, damage == DATA.camoPowder.ordinal() ? 280 : 210, damage == DATA.camoPowder.ordinal() ? 1 : 3, true));
 					PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 				} else
-				{
 					return is;
-				}
 			} else
-			{
 				return is;
-			}
 
 			if (!player.capabilities.isCreativeMode)
-			{
 				--is.stackSize;
-			}
 		}
 
 		return is;
@@ -192,48 +164,37 @@ public class Materials extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister)
-	{
+	public void registerIcons(IIconRegister iconRegister) {
 		icons = new IIcon[DATA.values().length];
 		int i = 0;
 		for (DATA d : DATA.values())
-		{
 			icons[i++] = iconRegister.registerIcon("erebus:" + d.name());
-		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta)
-	{
+	public IIcon getIconFromDamage(int meta) {
 		if (meta < 0 || meta >= icons.length)
-		{
 			return null;
-		}
 		return icons[meta];
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item id, CreativeTabs tab, List list)
-	{
+	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		for (int i = 0; i < DATA.values().length; i++)
-		{
 			list.add(new ItemStack(id, 1, i));
-		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack is)
-	{
+	public String getUnlocalizedName(ItemStack is) {
 		return super.getUnlocalizedName() + "." + is.getItemDamage();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack is, int pass)
-	{
+	public boolean hasEffect(ItemStack is, int pass) {
 		return is.getItemDamage() == DATA.whetstonePowder.ordinal();
 	}
 }

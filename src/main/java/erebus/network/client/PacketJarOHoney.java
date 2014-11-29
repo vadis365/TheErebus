@@ -10,19 +10,16 @@ import erebus.network.AbstractClientPacket;
 import erebus.network.ByteBufHelper;
 import erebus.tileentity.TileEntityJarOHoney;
 
-public class PacketJarOHoney extends AbstractClientPacket
-{
+public class PacketJarOHoney extends AbstractClientPacket {
 
 	private int x, y, z;
 	private FluidStack fluid;
 	private String name;
 
-	public PacketJarOHoney()
-	{
+	public PacketJarOHoney() {
 	}
 
-	public PacketJarOHoney(int x, int y, int z, FluidStack fluid, String name)
-	{
+	public PacketJarOHoney(int x, int y, int z, FluidStack fluid, String name) {
 		this();
 		this.x = x;
 		this.y = y;
@@ -32,19 +29,16 @@ public class PacketJarOHoney extends AbstractClientPacket
 	}
 
 	@Override
-	protected void handle(World world, EntityClientPlayerMP player)
-	{
+	protected void handle(World world, EntityClientPlayerMP player) {
 		TileEntityJarOHoney tile = Utils.getTileEntity(world, x, y, z, TileEntityJarOHoney.class);
-		if (tile != null)
-		{
+		if (tile != null) {
 			tile.tank.setFluid(fluid);
 			tile.setOwner(name);
 		}
 	}
 
 	@Override
-	public void write(ByteBuf buffer)
-	{
+	public void write(ByteBuf buffer) {
 		buffer.writeInt(x);
 		buffer.writeInt(y);
 		buffer.writeInt(z);
@@ -53,8 +47,7 @@ public class PacketJarOHoney extends AbstractClientPacket
 	}
 
 	@Override
-	public void read(ByteBuf buffer)
-	{
+	public void read(ByteBuf buffer) {
 		x = buffer.readInt();
 		y = buffer.readInt();
 		z = buffer.readInt();

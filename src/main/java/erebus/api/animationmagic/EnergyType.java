@@ -1,7 +1,6 @@
 package erebus.api.animationmagic;
 
-public enum EnergyType
-{
+public enum EnergyType {
 	SENTIENT,
 	GAEAN,
 	INFERNAL,

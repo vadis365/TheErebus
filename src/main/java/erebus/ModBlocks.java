@@ -109,8 +109,7 @@ import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
 
-public class ModBlocks
-{
+public class ModBlocks {
 
 	// PORTAL
 	public static final Block portal = new ErebusPortal();
@@ -208,7 +207,7 @@ public class ModBlocks
 	public static final Block swampBerryBush = new BlockBerryBush("swamp");
 	public static final Block mireCoral = new BlockMireCoral().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.mireCoral").setBlockTextureName("erebus:mireCoral").setLightLevel(0.8F);
 	public static final Block algae = new BlockAlgae().setBlockName("erebus.algae").setBlockTextureName("erebus:algae");
-	
+
 	// DECORATIONS AND UTILITIES
 	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.blockSilk").setBlockTextureName("erebus:blockSilk");
 	public static final Block mirBrick = new BlockSimple(Material.rock).setHardness(1.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.mirbrick").setBlockTextureName("erebus:mirbrick");
@@ -294,13 +293,12 @@ public class ModBlocks
 
 	// COOKING
 	public static final Block kitchenCounter = new BlockKitchenCounter();
-	
+
 	// OTHER THINGS
 	public static final Block gaeanKeystone = new GaeanKeystone();
 	public static final Block tarantulaEgg = new BlockTarantulaEgg();
 
-	public static void init()
-	{
+	public static void init() {
 		initBlocks();
 		EnumWood.initBlocks();
 		initCreativeTabs();
@@ -309,29 +307,19 @@ public class ModBlocks
 		registerProperties();
 	}
 
-	private static void initBlocks()
-	{
+	private static void initBlocks() {
 		for (int i = 0; i < umbercobbleStairs.length; i++)
-		{
 			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("erebus.umbercobbleStairs" + i);
-		}
 		for (int i = 0; i <= 4; i++)
-		{
 			stoneSlabs[i] = new BlockSlabStone(ModBlocks.umberstone, i);
-		}
 		for (int i = 0; i <= 2; i++)
-		{
 			stoneSlabs[5 + i] = new BlockSlabStone(ModBlocks.umberPaver, i);
-		}
 		stoneSlabs[7] = new BlockSlabStone(ModBlocks.petrifiedWoodPlanks);
 		for (int i = 0; i < gneissStairs.length; i++)
-		{
 			gneissStairs[i] = new BlockStairsBase(gneiss, i).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneissStairs" + i);
-		}
 	}
 
-	private static void initCreativeTabs()
-	{
+	private static void initCreativeTabs() {
 		ModTabs.blocks.setTab(umberstone, redGem, blockAmber, quickSand, ghostSand, swampVent);
 		ModTabs.blocks.setTab(hollowLogAcacia, planks);
 		ModTabs.blocks.setTab(blockSilk, mirBrick, petrifiedWoodPlanks, petrifiedCraftingTable, bambooCrate, bambooLadder);
@@ -344,46 +332,32 @@ public class ModBlocks
 		ModTabs.blocks.setTab(petrifiedWoodStairs, amberBrickStairs, waspNestStairs, wall, gaeanKeystone);
 	}
 
-	private static void registerBlocks()
-	{
-		try
-		{
-			for (Field f : ModBlocks.class.getDeclaredFields())
-			{
+	private static void registerBlocks() {
+		try {
+			for (Field f : ModBlocks.class.getDeclaredFields()) {
 				Object obj = f.get(null);
 				if (obj instanceof Block)
-				{
 					registerBlock((Block) obj);
-				} else if (obj instanceof Block[])
-				{
+				else if (obj instanceof Block[])
 					for (Block block : (Block[]) obj)
-					{
 						registerBlock(block);
-					}
-				}
 			}
-		} catch (IllegalAccessException e)
-		{
+		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private static void registerBlock(Block block)
-	{
+	private static void registerBlock(Block block) {
 		String name = block.getUnlocalizedName();
 		String[] strings = name.split("\\.");
 
 		if (block instanceof ISubBlocksBlock)
-		{
 			GameRegistry.registerBlock(block, ((ISubBlocksBlock) block).getItemBlockClass(), strings[strings.length - 1]);
-		} else
-		{
+		else
 			GameRegistry.registerBlock(block, strings[strings.length - 1]);
-		}
 	}
 
-	private static void registerProperties()
-	{
+	private static void registerProperties() {
 		oreFossil.setHarvestLevel("pickaxe", 1);
 		mirBrick.setHarvestLevel("pickaxe", 1);
 		spiderSpawner.setHarvestLevel("pickaxe", 0, 0);
@@ -405,8 +379,7 @@ public class ModBlocks
 		Blocks.fire.setFireInfo(thorns, 15, 100);
 	}
 
-	public static interface ISubBlocksBlock
-	{
+	public static interface ISubBlocksBlock {
 
 		Class<? extends ItemBlock> getItemBlockClass();
 	}

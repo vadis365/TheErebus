@@ -6,19 +6,14 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class AbstractClientPacket extends AbstractPacket
-{
+public abstract class AbstractClientPacket extends AbstractPacket {
 
 	@Override
-	public void handle(Side side, World world, EntityPlayer player)
-	{
+	public void handle(Side side, World world, EntityPlayer player) {
 		if (side == Side.CLIENT)
-		{
 			handle(world, (EntityClientPlayerMP) player);
-		} else
-		{
+		else
 			throw new UnsupportedOperationException("Tried to handle client packet on server side!");
-		}
 	}
 
 	@SideOnly(Side.CLIENT)

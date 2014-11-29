@@ -11,11 +11,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModTabs;
 
-public class BlockThorns extends BlockVine implements IShearable
-{
+public class BlockThorns extends BlockVine implements IShearable {
 
-	public BlockThorns()
-	{
+	public BlockThorns() {
 		super();
 		setHardness(0.2F);
 		setBlockName("erebus.thorns");
@@ -25,15 +23,13 @@ public class BlockThorns extends BlockVine implements IShearable
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-	{
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
 		entity.attackEntityFrom(DamageSource.cactus, 1);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess access, int x, int y, int z)
-	{
+	public int colorMultiplier(IBlockAccess access, int x, int y, int z) {
 		return 0xFFFFFF;
 	}
 }

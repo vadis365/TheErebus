@@ -14,11 +14,9 @@ import erebus.ModTabs;
 import erebus.api.animationmagic.EnergyType;
 import erebus.api.animationmagic.IEnergyCollector;
 
-public class RitualDagger extends ItemSword implements IEnergyCollector
-{
+public class RitualDagger extends ItemSword implements IEnergyCollector {
 
-	public RitualDagger()
-	{
+	public RitualDagger() {
 		super(ModMaterials.ritualDagger);
 		setCreativeTab(ModTabs.gears);
 		setTextureName("erebus:ritualDagger");
@@ -26,52 +24,37 @@ public class RitualDagger extends ItemSword implements IEnergyCollector
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack item, ItemStack material)
-	{
+	public boolean getIsRepairable(ItemStack item, ItemStack material) {
 		for (int id : OreDictionary.getOreIDs(material))
-		{
 			if ("ingotGold".equals(OreDictionary.getOreName(id)))
-			{
 				return true;
-			}
-		}
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex)
-	{
+	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex) {
 		for (EnergyType type : EnergyType.values())
-		{
 			if (canStore(stack, type))
-			{
 				tooltip.add(type.toString() + " - " + getCurrentStorage(stack, type) + "/" + getMaxStorage(stack, type));
-			}
-		}
 	}
 
 	@Override
-	public int getMaxStorage(ItemStack stack, EnergyType type)
-	{
+	public int getMaxStorage(ItemStack stack, EnergyType type) {
 		return 500;
 	}
 
 	@Override
-	public int getCurrentStorage(ItemStack stack, EnergyType type)
-	{
+	public int getCurrentStorage(ItemStack stack, EnergyType type) {
 		NBTTagCompound nbt = getNBT(stack);
 		if (nbt.hasKey(type.toString()))
-		{
 			return nbt.getInteger(type.toString());
-		}
 		return 0;
 	}
 
 	@Override
-	public int addEnergy(ItemStack stack, EnergyType type, int amount)
-	{
+	public int addEnergy(ItemStack stack, EnergyType type, int amount) {
 		NBTTagCompound nbt = getNBT(stack);
 		int current = Math.max(0, nbt.getInteger(type.toString()));
 		int newValue = Math.min(getMaxStorage(stack, type), current + amount);
@@ -81,8 +64,7 @@ public class RitualDagger extends ItemSword implements IEnergyCollector
 	}
 
 	@Override
-	public int extractEnergy(ItemStack stack, EnergyType type, int amount)
-	{
+	public int extractEnergy(ItemStack stack, EnergyType type, int amount) {
 		NBTTagCompound nbt = getNBT(stack);
 		int current = Math.max(0, nbt.getInteger(type.toString()));
 		int newValue = Math.max(0, current - amount);
@@ -92,17 +74,13 @@ public class RitualDagger extends ItemSword implements IEnergyCollector
 	}
 
 	@Override
-	public boolean canStore(ItemStack stack, EnergyType type)
-	{
+	public boolean canStore(ItemStack stack, EnergyType type) {
 		return true;
 	}
 
-	private NBTTagCompound getNBT(ItemStack stack)
-	{
+	private NBTTagCompound getNBT(ItemStack stack) {
 		if (!stack.hasTagCompound())
-		{
 			stack.setTagCompound(new NBTTagCompound());
-		}
 		return stack.getTagCompound();
 	}
 }

@@ -20,23 +20,19 @@ import erebus.core.handler.configs.ConfigHandler;
 import gnu.trove.map.TObjectByteMap;
 import gnu.trove.map.hash.TObjectByteHashMap;
 
-public final class TeleporterHandler
-{
+public final class TeleporterHandler {
 	private static TeleporterHandler INSTANCE = new TeleporterHandler();
 
-	public static void init()
-	{
+	public static void init() {
 		MinecraftForge.EVENT_BUS.register(INSTANCE);
 		FMLCommonHandler.instance().bus().register(INSTANCE);
 	}
 
-	public static void transferToOverworld(Entity entity)
-	{
+	public static void transferToOverworld(Entity entity) {
 		INSTANCE.transferEntity(entity, 0);
 	}
 
-	public static void transferToErebus(Entity entity)
-	{
+	public static void transferToErebus(Entity entity) {
 		INSTANCE.transferEntity(entity, ConfigHandler.INSTANCE.erebusDimensionID);
 	}
 
@@ -46,76 +42,53 @@ public final class TeleporterHandler
 	private TeleporterErebus teleportToOverworld;
 	private TeleporterErebus teleportToErebus;
 
-	private TeleporterHandler()
-	{
+	private TeleporterHandler() {
 	}
 
 	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load e)
-	{
+	public void onWorldLoad(WorldEvent.Load e) {
 		if (!(e.world instanceof WorldServer))
-		{
 			return;
-		}
 
 		WorldServer world = (WorldServer) e.world;
 
 		if (world.provider.dimensionId == 0)
-		{
 			world.customTeleporters.add(teleportToOverworld = new TeleporterErebus(world));
-		} else if (world.provider.dimensionId == ConfigHandler.INSTANCE.erebusDimensionID)
-		{
+		else if (world.provider.dimensionId == ConfigHandler.INSTANCE.erebusDimensionID)
 			world.customTeleporters.add(teleportToErebus = new TeleporterErebus(world));
-		}
 
 		System.out.println("added to " + e.world);
 	}
 
 	@SubscribeEvent
-	public void onServerTick(ServerTickEvent e)
-	{
+	public void onServerTick(ServerTickEvent e) {
 		if (e.phase != Phase.END || !checkWaitingPlayers)
-		{
 			return;
-		}
 
 		UUID[] ids = waitingPlayers.keys(new UUID[waitingPlayers.size()]);
 
 		for (UUID uuid : ids)
-		{
-			if (waitingPlayers.adjustOrPutValue(uuid, (byte) -1, (byte) 0) <= 0)
-			{
+			if (waitingPlayers.adjustOrPutValue(uuid, (byte) -1, (byte) 0) <= 0) {
 				waitingPlayers.remove(uuid);
 				if (waitingPlayers.isEmpty())
-				{
 					checkWaitingPlayers = false;
-				}
 			}
-		}
 	}
 
-	private void transferEntity(Entity entity, int dimensionId)
-	{
+	private void transferEntity(Entity entity, int dimensionId) {
 		if (dimensionId != 0 && dimensionId != ConfigHandler.INSTANCE.erebusDimensionID)
-		{
 			throw new IllegalArgumentException("Supplied invalid dimension ID into Erebus teleporter: " + dimensionId);
-		}
 
 		World world = entity.worldObj;
 
 		if (!world.isRemote && !entity.isDead)
-		{
-			if (entity instanceof EntityPlayerMP)
-			{
+			if (entity instanceof EntityPlayerMP) {
 				if (entity instanceof FakePlayer)
-				{
 					return;
-				}
 
 				EntityPlayerMP player = (EntityPlayerMP) entity;
 
-				if (waitingPlayers.containsKey(player.getGameProfile().getId()))
-				{
+				if (waitingPlayers.containsKey(player.getGameProfile().getId())) {
 					waitingPlayers.put(player.getGameProfile().getId(), (byte) 20);
 					return;
 				}
@@ -129,8 +102,7 @@ public final class TeleporterHandler
 				 * player.lastExperience = -1; player.lastHealth = -1.0F;
 				 * player.lastFoodLevel = -1;
 				 */
-			} else if (!(entity instanceof EntityMinecartContainer))
-			{ // TODO we cannot handle this, would result in container breaking in both worlds and duplicate items;
+			} else if (!(entity instanceof EntityMinecartContainer)) { // TODO we cannot handle this, would result in container breaking in both worlds and duplicate items;
 				// find some sneaky solution  around  this  issue  fixme  copy  paste
 				world.theProfiler.startSection("changeDimension");
 
@@ -146,8 +118,7 @@ public final class TeleporterHandler
 				world.theProfiler.endStartSection("reloading");
 				Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), worldTarget);
 
-				if (newEntity != null)
-				{
+				if (newEntity != null) {
 					newEntity.copyDataFrom(entity, true);
 					worldTarget.spawnEntityInWorld(newEntity);
 				}
@@ -160,6 +131,5 @@ public final class TeleporterHandler
 
 				newEntity.timeUntilPortal = entity.getPortalCooldown();
 			}
-		}
 	}
 }
