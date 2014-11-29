@@ -163,7 +163,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 			case IRON:
 				oreGen.setChance(0.75F).setIterations(extraOres ? 2 : 3, extraOres ? 4 : 5).setY(5, 42);
 				break; // ~3 times smaller area, thus lower chance and
-				// iterations
+			// iterations
 			case GOLD:
 				oreGen.setIterations(extraOres ? 2 : 3);
 				break; // 2 veins less

@@ -41,9 +41,9 @@ public class BlockBambooTorch extends Block {
 			return null;
 		if (meta == 0)
 			return side > 1 ? icons[0] : icons[3];
-			if (meta == 1)
-				return side > 1 ? icons[1] : icons[2];
-				return null;
+		if (meta == 1)
+			return side > 1 ? icons[1] : icons[2];
+		return null;
 	}
 
 	@Override

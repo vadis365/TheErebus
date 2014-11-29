@@ -66,7 +66,7 @@ public class KitchenCounterRecipe {
 			return false;
 		}
 
-	return true;
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")
