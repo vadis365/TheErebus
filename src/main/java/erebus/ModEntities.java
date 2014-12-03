@@ -136,7 +136,7 @@ public class ModEntities {
 		registerEntity(79, EntityGasVent.class, "gasVent");
 
 		// Spawn conditions
-		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 5, 10, EnumCreatureType.monster, BiomeGenBase.hell);
+		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.monster, BiomeGenBase.hell);
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name) {
