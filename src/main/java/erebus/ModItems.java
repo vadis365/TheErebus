@@ -107,6 +107,7 @@ public class ModItems {
 	public static final Item doorRotten = new ItemDoorErebus(ModBlocks.doorRotten);
 	public static final Item doorPetrified = new ItemDoorErebus(ModBlocks.doorPetrified);
 	public static final Item doorScorched = new ItemDoorErebus(ModBlocks.doorScorched);
+	public static final Item doorMarshwood = new ItemDoorErebus(ModBlocks.doorMarshwood);
 
 	// JADE STUFF
 	public static final Item jadeHelmet = new JadeArmour(0).setUnlocalizedName("erebus.helmetJade").setTextureName("erebus:helmetJade");
