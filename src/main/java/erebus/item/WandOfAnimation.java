@@ -72,8 +72,6 @@ public class WandOfAnimation extends Item {
 	}
 
 	private boolean canAnimate(Block block, World world, int x, int y, int z) {
-		return block == Blocks.chest || !(block instanceof BlockContainer) && block.getBlockHardness(world, x, y, z) >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F;
-		// Bamboo Crate removed for now
-		// || block.blockID == ModBlocks.bambooCrate.blockID
+		return block == Blocks.chest || !(block instanceof BlockContainer) && block.getBlockHardness(world, x, y, z) >= 0 && block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() >= 0.7F && block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() >= 0.7F && block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() >= 0.7F || block == ModBlocks.bambooCrate;
 	}
 }

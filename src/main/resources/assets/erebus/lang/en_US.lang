@@ -453,6 +453,7 @@ container.petrifiedChestDouble=Large Petrified Wood Chest
 container.extenderThingy=Bamboo Extender
 container.antInventory=Ant Command Control
 container.composter=Organic Composter
+container.bamber=Bamber
 
 # Colours
 colour.erebus.dyeBlack=Black

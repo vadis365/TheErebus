@@ -12,6 +12,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockPetrifiedChest;
 import erebus.block.silo.TileEntitySiloTank;
+import erebus.client.gui.GuiAnimatedBambooCrate;
 import erebus.client.gui.GuiAntInventory;
 import erebus.client.gui.GuiBambooCrate;
 import erebus.client.gui.GuiColossalCrate;
@@ -25,6 +26,7 @@ import erebus.client.gui.GuiSilo;
 import erebus.client.gui.GuiUmberFurnace;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityBlackAnt;
+import erebus.inventory.ContainerAnimatedBambooCrate;
 import erebus.inventory.ContainerAntInventory;
 import erebus.inventory.ContainerBambooCrate;
 import erebus.inventory.ContainerColossalCrate;
@@ -165,7 +167,7 @@ public class CommonProxy implements IGuiHandler {
 		else if (ID == GUI_ID_ANIMATED_BAMBOO_CRATE) {
 			Entity entity = world.getEntityByID(x);
 			if (entity != null && entity instanceof EntityAnimatedBambooCrate)
-				return new ContainerBambooCrate(player.inventory, ((EntityAnimatedBambooCrate) entity).getTile());
+				return new ContainerAnimatedBambooCrate(player.inventory, (EntityAnimatedBambooCrate) entity);
 		}
 
 		else if (ID == GUI_ID_EXTENDER_THINGY)
@@ -239,7 +241,7 @@ public class CommonProxy implements IGuiHandler {
 		else if (ID == GUI_ID_ANIMATED_BAMBOO_CRATE) {
 			Entity entity = world.getEntityByID(x);
 			if (entity != null && entity instanceof EntityAnimatedBambooCrate)
-				return new GuiBambooCrate(player.inventory, ((EntityAnimatedBambooCrate) entity).getTile());
+				return new GuiAnimatedBambooCrate(player.inventory, entity);
 		}
 
 		else if (ID == GUI_ID_EXTENDER_THINGY)
