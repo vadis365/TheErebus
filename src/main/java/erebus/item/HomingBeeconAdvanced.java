@@ -31,22 +31,25 @@ public class HomingBeeconAdvanced extends Item {
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
 		if (hasTag(is))
 			if (is.stackTagCompound != null && is.stackTagCompound.hasKey("homeX")) {
+				list.add("Dimension: " + is.getTagCompound().getString("dimName"));
 				list.add("Target X: " + is.getTagCompound().getInteger("homeX"));
 				list.add("Target Y: " + is.getTagCompound().getInteger("homeY"));
 				list.add("Target Z: " + is.getTagCompound().getInteger("homeZ"));
 			} else {
-				list.add("Right click on a Block");
+				list.add("Sneak + Right click on a Block");
 				list.add("to set as target.");
-				list.add("Sneak + Right click");
+				list.add("Right click");
 				list.add("to teleport.");
 			}
 	}
 
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote && hasTag(is)) {
+		if (!world.isRemote && hasTag(is) && player.isSneaking()) {
 			Block block = world.getBlock(x, y, z);
-			if (!world.isRemote && block != null && !player.isSneaking()) {
+			if (!world.isRemote && block != null) {
+				is.getTagCompound().setInteger("chipDim", player.dimension);
+				is.getTagCompound().setString("dimName", player.worldObj.provider.getDimensionName());
 				is.getTagCompound().setInteger("homeX", x);
 				is.getTagCompound().setInteger("homeY", y);
 				is.getTagCompound().setInteger("homeZ", z);
@@ -59,11 +62,12 @@ public class HomingBeeconAdvanced extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
-		if (!world.isRemote && player.isSneaking() && is.stackTagCompound.hasKey("homeX")) {
+		if (!world.isRemote && !player.isSneaking() && is.stackTagCompound.hasKey("homeX")) {
 			int x = is.getTagCompound().getInteger("homeX");
 			int y = is.getTagCompound().getInteger("homeY");
 			int z = is.getTagCompound().getInteger("homeZ");
-			if (player.worldObj.isAirBlock(x, y + 1, z) && player.worldObj.isAirBlock(x, y + 2, z)) {
+			int dimension = is.getTagCompound().getInteger("chipDim");
+			if (player.worldObj.isAirBlock(x, y + 1, z) && player.worldObj.isAirBlock(x, y + 2, z) && player.dimension == dimension) {
 				player.swingItem();
 				player.setPositionAndUpdate(x + 0.5D, y + 1D, z + 0.5D);
 				player.worldObj.playSoundEffect(x, y, z, "mob.endermen.portal", 1.0F, 1.0F);

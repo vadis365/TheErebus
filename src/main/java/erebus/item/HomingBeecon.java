@@ -31,19 +31,21 @@ public class HomingBeecon extends Item {
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
 		if (hasTag(is))
 			if (is.stackTagCompound != null && is.stackTagCompound.hasKey("homeX")) {
+				list.add("Dimension: " + is.getTagCompound().getString("dimName"));
 				list.add("Target X: " + is.getTagCompound().getInteger("homeX"));
 				list.add("Target Z: " + is.getTagCompound().getInteger("homeZ"));
 			} else {
-				list.add("Click on a Block");
+				list.add("Sneak + Click on a Block");
 				list.add("to set as target.");
 			}
 	}
 
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote && hasTag(is)) {
+		if (!world.isRemote && hasTag(is) && player.isSneaking()) {
 			Block block = world.getBlock(x, y, z);
 			if (!world.isRemote && block != null) {
+				is.getTagCompound().setString("dimName", player.worldObj.provider.getDimensionName());
 				is.getTagCompound().setInteger("homeX", x);
 				is.getTagCompound().setInteger("homeZ", z);
 				player.swingItem();
