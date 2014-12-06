@@ -18,6 +18,7 @@ import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.plant.WorldGenAlgae;
 import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenSwampBush;
+import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
@@ -33,6 +34,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
 	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
 	private final WorldGenReed genReed = new WorldGenReed();
+	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
 
 	@Override
 	protected void populate() {
@@ -50,6 +52,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 
 	@Override
 	public void decorate() {
+		//Water
 		for (int attempt = 0; attempt < 5; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
@@ -66,6 +69,24 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			genReed.generate(world, rand, xx, yy, zz);
 		}
 
+		for (attempt = 0; attempt < 30; attempt++)
+		{
+			xx = x + offsetXZ();
+			yy = ChunkProviderErebus.swampWaterHeight - 4;
+			zz = z + offsetXZ();
+			genVines.generate(world, rand, xx, yy, zz);
+		}
+		
+		for (attempt = 0; attempt < 10; attempt++) {
+			xx = x + offsetXZ();
+			yy = ChunkProviderErebus.swampWaterHeight + rand.nextInt(36 - ChunkProviderErebus.swampWaterHeight);
+			zz = z + offsetXZ();
+
+			if (world.isAirBlock(xx, yy, zz))
+				genMossPatch.generate(world, rand, xx, yy, zz);
+		}
+
+		//Ground
 		for (attempt = 0; attempt < 600; attempt++) {
 			xx = x + rand.nextInt(5) + 12;
 			yy = 15 + rand.nextInt(90);
