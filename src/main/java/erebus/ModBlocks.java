@@ -1,6 +1,8 @@
 package erebus;
 
 import java.lang.reflect.Field;
+import java.util.LinkedList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
@@ -110,6 +112,9 @@ import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
 
 public class ModBlocks {
+
+	// LIST WITH ALL BLOCKS IN THIS CLASS
+	public static final List<Block> BLOCKS = new LinkedList<Block>();
 
 	// PORTAL
 	public static final Block portal = new ErebusPortal();
@@ -252,6 +257,7 @@ public class ModBlocks {
 	public static final Block doorRotten = new BlockDoorErebus("rotten");
 	public static final Block doorPetrified = new BlockDoorErebus("petrified");
 	public static final Block doorScorched = new BlockDoorErebus("scorched");
+	public static final Block doorMarshwood = new BlockDoorErebus("marshwood");
 
 	// VELOCITY BLOCKS
 	public static final Block velocityBlock = new VelocityBlock();
@@ -348,6 +354,7 @@ public class ModBlocks {
 	}
 
 	private static void registerBlock(Block block) {
+		BLOCKS.add(block);
 		String name = block.getUnlocalizedName();
 		String[] strings = name.split("\\.");
 

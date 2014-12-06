@@ -62,11 +62,11 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 
 		for (attempt = 0; attempt < 200; attempt++) {
 			int r = rand.nextInt(100);
-			if (r < 12)
+			if (r < 16)
 				genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
-			else if (r < 78)
+			else if (r < 80)
 				genGiantMushrooms.setMushroomType(MushroomType.KAIZERS_FINGERS);
-			else if (r < 92)
+			else if (r < 96)
 				genGiantMushrooms.setMushroomType(MushroomType.GRANDMAS_SHOES);
 			else
 				genGiantMushrooms.setMushroomType(MushroomType.BULB_CAPPED);

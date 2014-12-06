@@ -1,11 +1,13 @@
 package erebus.integration.nei;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import codechicken.nei.recipe.DefaultOverlayHandler;
 import erebus.ModBlocks;
+import erebus.block.BlockDoorErebus;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.Materials;
@@ -68,16 +70,9 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(ModBlocks.glowshroomStalkW3));
 		API.hideItem(new ItemStack(ModBlocks.glowshroomStalkE3));
 
-		API.hideItem(new ItemStack(ModBlocks.doorAmber));
-		API.hideItem(new ItemStack(ModBlocks.doorBaobab));
-		API.hideItem(new ItemStack(ModBlocks.doorEucalyptus));
-		API.hideItem(new ItemStack(ModBlocks.doorMahogany));
-		API.hideItem(new ItemStack(ModBlocks.doorMossbark));
-		API.hideItem(new ItemStack(ModBlocks.doorAsper));
-		API.hideItem(new ItemStack(ModBlocks.doorCypress));
-		API.hideItem(new ItemStack(ModBlocks.doorRotten));
-		API.hideItem(new ItemStack(ModBlocks.doorPetrified));
-		API.hideItem(new ItemStack(ModBlocks.doorScorched));
+		for (Block block : ModBlocks.BLOCKS)
+			if (block instanceof BlockDoorErebus)
+				API.hideItem(new ItemStack(block));
 	}
 
 	@Override

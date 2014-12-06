@@ -6,15 +6,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import erebus.ModTabs;
 import erebus.block.BlockDoorErebus;
 
 public class ItemDoorErebus extends Item {
-	private final Block door;
+
+	private final BlockDoorErebus door;
 
 	public ItemDoorErebus(Block door) {
-		this.door = door;
+		this.door = (BlockDoorErebus) door;
 		setMaxStackSize(64);
 		setCreativeTab(ModTabs.blocks);
 
@@ -22,7 +24,12 @@ public class ItemDoorErebus extends Item {
 		setTextureName("erebus:door_" + name);
 		setUnlocalizedName("erebus.door_" + name);
 
-		((BlockDoorErebus) door).setItem(this);
+		this.door.setItem(this);
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		return StatCollector.translateToLocal("tile.erebus.door" + door.name + ".name");
 	}
 
 	@Override

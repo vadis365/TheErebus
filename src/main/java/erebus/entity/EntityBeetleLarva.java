@@ -203,13 +203,10 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount)
-			if (isBurning())
-				entityDropItem(new ItemStack(ModItems.food, 1, 1), 0.0F);
-			else
-				entityDropItem(new ItemStack(ModItems.food, 1, 0), 0.0F);
+		if (isBurning())
+			entityDropItem(new ItemStack(ModItems.food, 1, 1), 0.0F);
+		else
+			entityDropItem(new ItemStack(ModItems.food, 1, 0), 0.0F);
 	}
 
 	private boolean isStick(ItemStack stack) {
@@ -231,19 +228,18 @@ public class EntityBeetleLarva extends EntityAnimal {
 		return super.interact(player);
 	}
 
-	public void setIsEating(boolean par1) {
-		isEating = par1;
+	public void setIsEating(boolean eating) {
+		isEating = eating;
 	}
 
-	public void setisSquashed(boolean par1) {
-		isSquashed = par1;
+	public void setisSquashed(boolean squashed) {
+		isSquashed = squashed;
 	}
 
-	public void setMoveTasks(boolean par1) {
-		if (par1 == false)
+	public void setMoveTasks(boolean task) {
+		if (!task)
 			tasks.removeTask(aiWander);
-
-		if (par1 == true)
+		else
 			tasks.addTask(2, aiWander);
 	}
 

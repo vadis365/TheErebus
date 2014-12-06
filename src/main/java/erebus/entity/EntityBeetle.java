@@ -129,6 +129,12 @@ public class EntityBeetle extends EntityAnimal {
 			shagCount = 600;
 			return true;
 		}
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.beetleTamingAmulet.ordinal()) {
+			is.stackSize--;
+			setTame((byte) 1);
+			return true;
+		}
+		
 		return super.interact(player);
 	}
 
