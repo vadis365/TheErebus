@@ -17,6 +17,7 @@ import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.plant.WorldGenAlgae;
 import erebus.world.feature.plant.WorldGenMossPatch;
+import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
@@ -215,6 +216,18 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 				genQuickSand.generate(world, rand, xx, yy, zz);
+		}
+		
+		for (attempt = 0; attempt < 40; attempt++) {
+			int length = rand.nextInt(5) + 4;
+			int baseRadius = rand.nextInt(3) + 2;
+			byte direction = (byte) rand.nextInt(2);
+			xx = x + 16;
+			yy = rand.nextInt(118);
+			zz = z + 16;
+
+			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
+				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
 		}
 	}
 
