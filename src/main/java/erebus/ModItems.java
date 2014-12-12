@@ -55,6 +55,7 @@ import erebus.item.SprintLeggings;
 import erebus.item.WandOfAnimation;
 import erebus.item.WaspDagger;
 import erebus.item.WaspSword;
+import erebus.item.WaterStriders;
 import erebus.item.WebSlinger;
 import erebus.item.Whetstone;
 import erebus.item.WitherWebSlinger;
@@ -164,7 +165,8 @@ public class ModItems {
 	public static final Item armorGliderPowered = new ArmorGlider().setUnlocalizedName("erebus.armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 	public static final Item mushroomHelm = new MushroomHelm(0).setUnlocalizedName("erebus.mushroomHelm").setTextureName("erebus:mushroomHelm");
 	public static final Item spiderTShirt = new SpiderTShirt(1).setUnlocalizedName("erebus.spiderTShirt").setTextureName("erebus:spiderTShirtItem");
-
+	public static final Item waterStriders = new WaterStriders(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("erebus.waterStriders").setTextureName("erebus:waterStriders");
+	
 	// CREATIVE
 	public static final Item spawnEggs = new SpawnEggs().setUnlocalizedName("erebus.monsterPlacer").setTextureName("spawn_egg");
 
