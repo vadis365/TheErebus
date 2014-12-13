@@ -91,8 +91,10 @@ public class EntityWheatWeevil extends EntityCreature {
 				break;
 			case 1:
 				ItemStack seed = ForgeHooks.getGrassSeed(worldObj);
-				seed.stackSize = 1 + rand.nextInt(3) + looting;
-				entityDropItem(seed, 0F);
+				if (seed != null) {
+					seed.stackSize = 1 + rand.nextInt(3) + looting;
+					entityDropItem(seed, 0F);
+				}
 				break;
 			case 2:
 				entityDropItem(new ItemStack(Items.pumpkin_seeds, 1 + rand.nextInt(3) + looting), 0F);
