@@ -81,6 +81,7 @@ import erebus.client.render.entity.RenderGooBall;
 import erebus.client.render.entity.RenderGrasshopper;
 import erebus.client.render.entity.RenderJumpingSpider;
 import erebus.client.render.entity.RenderLavaWebSpider;
+import erebus.client.render.entity.RenderLeech;
 import erebus.client.render.entity.RenderLocust;
 import erebus.client.render.entity.RenderMidgeSwarm;
 import erebus.client.render.entity.RenderMoneySpider;
@@ -181,6 +182,7 @@ import erebus.entity.EntityGooBall;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLavaWebSpider;
+import erebus.entity.EntityLeech;
 import erebus.entity.EntityLocust;
 import erebus.entity.EntityMidgeSwarm;
 import erebus.entity.EntityMoneySpider;
@@ -331,6 +333,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityPoisonJet.class, new RenderPoisonJet());
 		RenderingRegistry.registerEntityRenderingHandler(EntityGasVent.class, new RenderGasVent());
 		RenderingRegistry.registerEntityRenderingHandler(EntityPondSkater.class, new RenderPondSkater());
+		RenderingRegistry.registerEntityRenderingHandler(EntityLeech.class, new RenderLeech());
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());

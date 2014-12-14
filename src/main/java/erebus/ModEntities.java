@@ -33,6 +33,7 @@ import erebus.entity.EntityGooBall;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLavaWebSpider;
+import erebus.entity.EntityLeech;
 import erebus.entity.EntityLocust;
 import erebus.entity.EntityMidgeSwarm;
 import erebus.entity.EntityMoneySpider;
@@ -118,6 +119,9 @@ public class ModEntities {
 		registerEntity(43, EntityTarantulaMiniboss.class, "tarantulaminiboss", 0x000000, 0xE82066);
 		registerEntity(44, EntityTarantulaBaby.class, "tarantulababy", 0x000000, 0xE82066);
 		registerEntity(45, EntityPondSkater.class, "pondskater", -13816034, -14803180);
+		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
+	//	registerEntity(47, EntityChameleonTick.class, "chameleonTick", 0x804E3D, 0x3D6F80);
+	//	registerEntity(48, EntityChameleonTick.class, "chameleonTick", 0x804E3D, 0x3D6F80);
 
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
