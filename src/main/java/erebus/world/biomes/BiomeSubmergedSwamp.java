@@ -9,6 +9,7 @@ import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityMosquito;
+import erebus.entity.EntityPondSkater;
 import erebus.world.ChunkProviderErebus;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
@@ -28,6 +29,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(2, 6));
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 20).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 20).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityPondSkater.class, 100).setGroupSize(3, 5));
 	}
 
 	/*

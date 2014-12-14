@@ -40,6 +40,7 @@ import erebus.entity.EntityMosquito;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityMucusBombPrimed;
 import erebus.entity.EntityPoisonJet;
+import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityPunchroom;
 import erebus.entity.EntityRhinoBeetle;
@@ -116,6 +117,7 @@ public class ModEntities {
 		registerEntity(42, EntityZombieAnt.class, "zombieAnt", 0x00FE40, 0xF09071);
 		registerEntity(43, EntityTarantulaMiniboss.class, "tarantulaminiboss", 0x000000, 0xE82066);
 		registerEntity(44, EntityTarantulaBaby.class, "tarantulababy", 0x000000, 0xE82066);
+		registerEntity(45, EntityPondSkater.class, "pondskater", -13816034, -14803180);
 
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
