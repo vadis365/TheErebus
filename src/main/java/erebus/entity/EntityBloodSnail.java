@@ -30,11 +30,6 @@ public class EntityBloodSnail extends EntityMob {
 	}
 
 	@Override
-	public boolean getCanSpawnHere() {
-		return !worldObj.isAnyLiquid(boundingBox);
-	}
-
-	@Override
 	public int getMaxSpawnedInChunk() {
 		return 3;
 	}

@@ -47,7 +47,8 @@ public class EntityLeech extends EntityMob
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
 	}
 	
@@ -56,11 +57,6 @@ public class EntityLeech extends EntityMob
 		return true;
 	}
 
-	@Override
-	public boolean getCanSpawnHere() {
-		return !worldObj.isAnyLiquid(boundingBox);
-	}
-    
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
