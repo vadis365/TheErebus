@@ -56,6 +56,21 @@ public class EntityLeech extends EntityMob
 	public boolean isAIEnabled() {
 		return true;
 	}
+	
+	@Override
+	protected String getLivingSound() {
+		return "erebus:snailliving";
+	}
+
+	@Override
+	protected String getHurtSound() {
+		return "erebus:snailhurt";
+	}
+
+	@Override
+	protected String getDeathSound() {
+		return "erebus:snaildeath";
+	}
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
