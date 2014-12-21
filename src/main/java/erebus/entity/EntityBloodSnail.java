@@ -10,6 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.ModItems;
 
 public class EntityBloodSnail extends EntityMob {
 
@@ -55,7 +56,7 @@ public class EntityBloodSnail extends EntityMob {
 
 	@Override
 	protected Item getDropItem() {
-		return null;// TheBetweenlands.RedShell.itemID;
+		return ModItems.lifeBlood;
 	}
 
 	@Override

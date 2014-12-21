@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.item.Materials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -75,6 +76,14 @@ public class EntitySnapper extends EntityMob {
 
 	@Override
 	public int getMaxSpawnedInChunk() {
-		return 3;
+		return 6;
+	}
+	
+	@Override
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
+			entityDropItem(Materials.createStack(Materials.DATA.snapperRoot), 0.0F);
 	}
 }

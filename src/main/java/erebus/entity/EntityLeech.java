@@ -47,7 +47,7 @@ public class EntityLeech extends EntityMob
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D); // MaxHealth
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
 	}
 	
@@ -64,7 +64,7 @@ public class EntityLeech extends EntityMob
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		if (!worldObj.isRemote)
+		if (!worldObj.isRemote && worldObj.difficultySetting.ordinal() > 1)
 			if (player.riddenByEntity == null && getBloodConsumed() <= 0)
 				mountEntity(player);
 	}
@@ -134,7 +134,7 @@ public class EntityLeech extends EntityMob
 	@Override
 	protected void dropFewItems(boolean hit, int amount) {
 		int count = 1 + getBloodConsumed();
-		dropItem(ModItems.heartBerries, count);
+		dropItem(ModItems.lifeBlood, count);
 	}
 	
 	@Override

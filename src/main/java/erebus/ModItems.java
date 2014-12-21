@@ -80,7 +80,8 @@ public class ModItems {
 	public static final Item materials = new Materials().setUnlocalizedName("erebus.materials");
 	public static final Item food = new Food().setUnlocalizedName("erebus.food");
 	public static final Item smoothie = new Smoothie().setUnlocalizedName("erebus.smoothie");
-	public static final Item heartBerries = new HeartBerries(0, 0F, false).setUnlocalizedName("erebus.heartBerries").setTextureName("erebus:heartBerries");;
+	public static final Item heartBerries = new HeartBerries(0, 0F, false).setUnlocalizedName("erebus.heartBerries").setTextureName("erebus:heartBerries");
+	public static final Item lifeBlood = new HeartBerries(0, 0F, false).setUnlocalizedName("erebus.lifeBlood").setTextureName("erebus:lifeBlood");
 	public static final Item turnip = new ItemSeedFood(4, 0.6F, ModBlocks.blockTurnip, Blocks.farmland).setUnlocalizedName("erebus.turnips").setTextureName("erebus:turnips");
 	public static final Item sprayCan = new SprayCan().setUnlocalizedName("erebus.sprayCan").setTextureName("erebus:sprayCan");
 	public static final Item wandOfAnimation = new WandOfAnimation().setUnlocalizedName("erebus.wandOfAnimation");

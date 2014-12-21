@@ -46,7 +46,7 @@ public class EntityPondSkater extends EntityMob {
 
 	@Override
 	public int getMaxSpawnedInChunk() {
-		return 3;
+		return 6;
 	}
 /* To stop console spam
 	@Override

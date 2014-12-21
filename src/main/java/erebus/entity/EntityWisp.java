@@ -1,17 +1,21 @@
 package erebus.entity;
 
-import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.item.Materials;
 
-public class EntityWisp extends EntityAnimal {
+public class EntityWisp extends EntityMob {
 	private ChunkCoordinates currentFlightTarget;
 	private float heightOffset = 0.5F;
 	public int lastX;
@@ -20,9 +24,9 @@ public class EntityWisp extends EntityAnimal {
 	private float particleSpawnTick;
 	public float particleSize;
 
-	public EntityWisp(World par1World) {
-		super(par1World);
-		setSize(0.4F, 0.4F);
+	public EntityWisp(World world) {
+		super(world);
+		setSize(0.5F, 0.5F);
 		experienceValue = 2;
 		renderDistanceWeight = 64;
 	}
@@ -32,6 +36,7 @@ public class EntityWisp extends EntityAnimal {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.5D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D);
 	}
 
@@ -44,11 +49,11 @@ public class EntityWisp extends EntityAnimal {
 	 */
 
 	@Override
-	protected void fall(float par1) {
+	protected void fall(float distance) {
 	}
 
 	@Override
-	protected void updateFallState(double par1, boolean par3) {
+	protected void updateFallState(double distanceFallen, boolean onGround) {
 	}
 
 	@Override
@@ -153,9 +158,33 @@ public class EntityWisp extends EntityAnimal {
 	public boolean getCanSpawnHere() {
 		return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty();
 	}
+	
+	@Override
+	public boolean attackEntityAsMob(Entity entity) {
+		if (super.attackEntityAsMob(entity)) {
+
+			if (entity instanceof EntityLivingBase) {
+				byte duration = 0;
+
+				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal() && rand.nextInt(19) == 0)
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+						duration = 5;
+					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+						duration = 10;
+
+				if (duration > 0)
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, duration * 20, 0));
+			}
+			return true;
+		} else
+			return false;
+	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable entityageable) {
-		return null;
+	protected void attackEntity(Entity entity, float distance) {
+		if (distance < 2.0F) {
+			super.attackEntity(entity, distance);
+			attackEntityAsMob(entity);
+		}
 	}
 }
