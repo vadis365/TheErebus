@@ -82,7 +82,9 @@ public class Materials extends Item {
 		umberGolemClaw,
 		umberGolemLegs,
 		jadeBerries,
-		snapperRoot;
+		snapperRoot,
+		hydrofuge,
+		waterRepellent;
 	}
 
 	public static ItemStack createStack(DATA data) {

@@ -118,9 +118,9 @@ public class EntityBeetle extends EntityAnimal {
 		}
 		if (is != null && is.getItem() == ModItems.bambucket && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
 			if (is.stackSize-- == 1)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bambucket, 1, 2));
-			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucket, 1, 2)))
-				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bambucket, 1, 2), false);
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bambucketBeetleJuice));
+			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucketBeetleJuice)))
+				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bambucket), false);
 			return true;
 		}
 		if (is != null && is.getItem() == ModItems.turnip && !shagging()) {

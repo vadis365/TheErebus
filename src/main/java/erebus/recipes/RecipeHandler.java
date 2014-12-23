@@ -125,6 +125,8 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.sprintLeggings), "BBB", "BXB", "BBB", 'B', Materials.createStack(Materials.DATA.bioVelocity), 'X', new ItemStack(ModItems.reinExoskeletonLegs, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGlider), "   ", "GXG", "   ", 'G', Materials.createStack(Materials.DATA.gliderWing), 'X', new ItemStack(ModItems.reinExoskeletonBody, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGliderPowered), "W W", "ECE", " V ", 'W', Materials.createStack(Materials.DATA.enhancedGliderWing), 'E', Materials.createStack(Materials.DATA.elasticFibre), 'C', new ItemStack(ModItems.armorGlider, 1), 'V', new ItemStack(ModBlocks.velocityBlock, 1));
+		GameRegistry.addRecipe(new ItemStack(ModItems.waterStriders), "WWW", "WXW", "WWW", 'W', Materials.createStack(Materials.DATA.waterRepellent), 'X', new ItemStack(ModItems.reinExoskeletonBoots, 1));
+		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.scorpionPincer), "I I", "XIX", "XPX", 'I', "ingotIron", 'X', Materials.createStack(Materials.DATA.reinforcedPlateExo), 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rolledNewspaper), "PWP", "PIP", "PWP", 'I', new ItemStack(Items.dye, 1, 0), 'P', Materials.createStack(Materials.DATA.papyrus), 'W', Materials.createStack(Materials.DATA.whetstonePowder));
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.gliderWing), "SSS", "FFF", "FFF", 'S', Items.stick, 'F', Materials.createStack(Materials.DATA.flyWing));
@@ -225,6 +227,7 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 2, 9), ModBlocks.waterFlower);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.craftingAltar), "xxx", "xxx", "xxx", 'x', ModBlocks.altarBase);
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.jade), "xxx", "xxx", "xxx", 'x', Materials.createStack(Materials.DATA.jadeBerries));
+		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.waterRepellent), "xxx", "xrx", "xxx", 'x', Materials.createStack(Materials.DATA.hydrofuge), 'r', Materials.createStack(Materials.DATA.repellent));
 
 		// Whetstone Sharpening Enchanting Stuff
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));

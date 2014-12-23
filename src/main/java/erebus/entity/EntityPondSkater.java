@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.item.Materials;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -66,8 +67,11 @@ public class EntityPondSkater extends EntityMob {
 */
 
 	@Override
-	protected Item getDropItem() {
-		return null;
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
+			entityDropItem(Materials.createStack(Materials.DATA.hydrofuge), 0.0F);
 	}
 	
 	@Override

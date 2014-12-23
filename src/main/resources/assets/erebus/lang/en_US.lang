@@ -251,6 +251,7 @@ item.erebus.armorGlider.name=Glider Chestplate
 item.erebus.armorGliderPowered.name=Glider Chestplate Powered
 item.erebus.spiderTShirt.name=Tarantula Boss Trophy
 item.erebus.mushroomHelm.name=Mush Helm
+item.erebus.waterStriders.name=Water Striders
 
 item.erebus.materials.0.name=Exoskeleton Plate
 item.erebus.materials.1.name=Jade
@@ -309,6 +310,9 @@ item.erebus.materials.53.name=Umbergolem Head
 item.erebus.materials.54.name=Umbergolem Claw
 item.erebus.materials.55.name=Umbergolem Legs
 item.erebus.materials.56.name=Jadeberries
+item.erebus.materials.57.name=Snapper Root
+item.erebus.materials.58.name=Hydrofuge
+item.erebus.materials.59.name=Water Repellent
  
 item.erebus.food.0.name=Beetle Larva
 item.erebus.food.1.name=Cooked Beetle Larva
@@ -327,6 +331,7 @@ item.erebus.food.13.name=Cooked Titan Chop
 item.erebus.food.14.name=Swampberries
 
 item.erebus.heartBerries.name=Heartberries
+item.erebus.lifeBlood.name=Life Blood
 
 item.erebus.bambucket.name=Bambucket
 item.erebus.bambucketWater.name=Water Bambucket
@@ -417,6 +422,10 @@ entity.erebus.blackAnt.name=Black Ant
 entity.erebus.zombieAnt.name=Zombie Ant
 entity.erebus.tarantulaminiboss.name=Tarantula Brood Mother
 entity.erebus.tarantulababy.name=Tarantula Baby
+entity.erebus.leech.name=Leech
+entity.erebus.pondskater.name=Pond Skater
+entity.erebus.wisp.name=Swamp Wisp
+entity.erebus.snapper.name=Snapper
 
 # Fluids
 fluid.honey=Honey
