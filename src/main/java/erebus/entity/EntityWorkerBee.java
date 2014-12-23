@@ -16,6 +16,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -115,9 +116,14 @@ public class EntityWorkerBee extends EntityTameable {
 	@Override
 	public boolean isOnLadder() {
 		Block block = worldObj.getBlock((int) posX, (int) posY - 1, (int) posZ);
+		Block block2 = worldObj.getBlock((int) posX, (int) posY, (int) posZ);
 		if (isCollidedHorizontally)
-			if (block != ModBlocks.stiga || !block.hasTileEntity(worldObj.getBlockMetadata((int) posX, (int) posY - 1, (int) posZ)))
-				return true;
+			if (block != ModBlocks.stiga || !block.hasTileEntity(worldObj.getBlockMetadata((int) posX, (int) posY - 1, (int) posZ))) {
+				if (block2 == ModBlocks.erebusFlower || block2 == Blocks.air) {
+					posY += 1;
+					return true;
+				}
+			}
 		return false;
 	}
 

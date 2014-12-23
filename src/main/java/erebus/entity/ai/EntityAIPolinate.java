@@ -30,6 +30,8 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	@Override
 	protected void moveToLocation() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
+		if(flowerY > bee.boundingBox.minY - 1)
+			bee.posY++;
 		bee.setBeePollinating(true);
 		bee.setBeeFlying(false);
 		bee.currentFlightTarget = new ChunkCoordinates(flowerX, flowerY, flowerZ);
