@@ -3,6 +3,7 @@ package erebus.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import erebus.tileentity.TileEntityKitchenCounter;
@@ -63,8 +64,26 @@ public class ContainerKitchenCounter extends Container {
 	}
 
 	@Override
+	public void addCraftingToCrafters(ICrafting crafter) {
+		super.addCraftingToCrafters(crafter);
+		counter.sendGUIData(this, crafter);
+	}
+
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+		for (Object crafter : crafters)
+			counter.sendGUIData(this, (ICrafting) crafter);
+	}
+
+	@Override
+	public void updateProgressBar(int id, int value) {
+		counter.getGUIData(id, value);
+	}
+
+	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return counter.isUseableByPlayer(player);
+		return true;
 	}
 
 }

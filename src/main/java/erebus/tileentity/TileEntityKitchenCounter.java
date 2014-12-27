@@ -1,5 +1,6 @@
 package erebus.tileentity;
 
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -7,12 +8,14 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import erebus.ModFluids;
+import erebus.inventory.ContainerKitchenCounter;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketKitchenCounter;
 import erebus.network.client.PacketKitchenCounterTimer;
@@ -20,10 +23,10 @@ import erebus.recipes.KitchenCounterRecipe;
 
 public class TileEntityKitchenCounter extends TileEntityBasicInventory implements IFluidHandler {
 
-	protected final FluidTank honeyTank;
-	protected final FluidTank milkTank;
-	protected final FluidTank beetleTank;
-	protected final FluidTank antiVenomTank;
+	protected final FluidTank honeyTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);
+	protected final FluidTank milkTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
+	protected final FluidTank beetleTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
+	protected final FluidTank antiVenomTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
 
 	protected ItemStack output = null;
 	public int time = 0;
@@ -34,87 +37,10 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 
 	public TileEntityKitchenCounter() {
 		super(5, "container.kitchenCounter");
-		honeyTank = new FluidTank(16000);
-		milkTank = new FluidTank(16000);
-		beetleTank = new FluidTank(16000);
-		antiVenomTank = new FluidTank(16000);
-	}
-
-	public int addHoney(int amount) {
-		int result = honeyTank.fill(FluidRegistry.getFluidStack("honey", amount), true);
-		sendUpdatesToClients();
-		return result;
-	}
-
-	public int addMilk(int amount) {
-		int result = milkTank.fill(FluidRegistry.getFluidStack("milk", amount), true);
-		sendUpdatesToClients();
-		return result;
-	}
-
-	//Don't say his name 3 times!
-	public int addBeetleJuice(int amount) {
-		int result = beetleTank.fill(FluidRegistry.getFluidStack("beetlejuice", amount), true);
-		sendUpdatesToClients();
-		return result;
-	}
-
-	public int addAntiVenom(int amount) {
-		int result = antiVenomTank.fill(FluidRegistry.getFluidStack("antivenom", amount), true);
-		sendUpdatesToClients();
-		return result;
-	}
-
-	public int drainHoney(int amount) {
-		FluidStack fluid = honeyTank.drain(amount, true);
-		sendUpdatesToClients();
-		return fluid == null ? 0 : fluid.amount;
-	}
-
-	public int drainMilk(int amount) {
-		FluidStack fluid = milkTank.drain(amount, true);
-		sendUpdatesToClients();
-		return fluid == null ? 0 : fluid.amount;
-	}
-
-	public int drainBeetleJuice(int amount) {
-		FluidStack fluid = beetleTank.drain(amount, true);
-		sendUpdatesToClients();
-		return fluid == null ? 0 : fluid.amount;
-	}
-
-	public int drainAntiVenom(int amount) {
-		FluidStack fluid = antiVenomTank.drain(amount, true);
-		sendUpdatesToClients();
-		return fluid == null ? 0 : fluid.amount;
-	}
-
-	public FluidStack getHoney() {
-		if (honeyTank.getFluid() == null)
-			honeyTank.setFluid(new FluidStack(ModFluids.honey, 0));
-
-		return honeyTank.getFluid();
-	}
-
-	public FluidStack getMilk() {
-		if (milkTank.getFluid() == null)
-			milkTank.setFluid(new FluidStack(ModFluids.milk, 0));
-
-		return milkTank.getFluid();
-	}
-
-	public FluidStack getBeetleJuice() {
-		if (beetleTank.getFluid() == null)
-			beetleTank.setFluid(new FluidStack(ModFluids.beetleJuice, 0));
-
-		return beetleTank.getFluid();
-	}
-
-	public FluidStack getAntiVenom() {
-		if (antiVenomTank.getFluid() == null)
-			antiVenomTank.setFluid(new FluidStack(ModFluids.antiVenom, 0));
-
-		return antiVenomTank.getFluid();
+		honeyTank.setFluid(new FluidStack(ModFluids.honey, 0));
+		milkTank.setFluid(new FluidStack(ModFluids.milk, 0));
+		beetleTank.setFluid(new FluidStack(ModFluids.beetleJuice, 0));
+		antiVenomTank.setFluid(new FluidStack(ModFluids.antiVenom, 0));
 	}
 
 	public int getHoneyAmount() {
@@ -203,6 +129,78 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 
 	private void sendUpdatesToClients() {
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	public void getGUIData(int id, int value) {
+		switch (id) {
+			case 1:
+				if (honeyTank.getFluid() == null)
+					honeyTank.setFluid(new FluidStack(ModFluids.honey, value));
+				else
+					honeyTank.getFluid().amount = value;
+				break;
+			case 2:
+				if (beetleTank.getFluid() == null)
+					beetleTank.setFluid(new FluidStack(ModFluids.beetleJuice, value));
+				else
+					beetleTank.getFluid().amount = value;
+				break;
+			case 3:
+				if (antiVenomTank.getFluid() == null)
+					antiVenomTank.setFluid(new FluidStack(ModFluids.antiVenom, value));
+				else
+					antiVenomTank.getFluid().amount = value;
+				break;
+			case 4:
+				if (milkTank.getFluid() == null)
+					milkTank.setFluid(new FluidStack(ModFluids.milk, value));
+				else
+					milkTank.getFluid().amount = value;
+				break;
+		}
+	}
+	
+	public void sendGUIData(ContainerKitchenCounter counter, ICrafting craft) {
+		craft.sendProgressBarUpdate(counter, 1, honeyTank.getFluid() != null ? honeyTank.getFluid().amount : 0);
+		craft.sendProgressBarUpdate(counter, 2, beetleTank.getFluid() != null ? beetleTank.getFluid().amount : 0);
+		craft.sendProgressBarUpdate(counter, 3, antiVenomTank.getFluid() != null ? antiVenomTank.getFluid().amount : 0);
+		craft.sendProgressBarUpdate(counter, 4, milkTank.getFluid() != null ? milkTank.getFluid().amount : 0);
+	}
+	
+	public ItemStack fillTankWithBucket(ItemStack bucket) {
+		if (honeyTank.getFluidAmount() <= honeyTank.getCapacity() - FluidContainerRegistry.BUCKET_VOLUME)
+			if (FluidContainerRegistry.isFilledContainer(bucket) && FluidContainerRegistry.getFluidForFilledItem(bucket).getFluid() == ModFluids.honey)
+				if (bucket.stackSize == 1) {
+					honeyTank.fill(new FluidStack(ModFluids.honey, FluidContainerRegistry.BUCKET_VOLUME), true);
+					for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData())
+						if (data.filledContainer.getItem() == bucket.getItem() && data.filledContainer.getItemDamage() == bucket.getItemDamage())
+							return data.emptyContainer.copy();
+				}
+		if (beetleTank.getFluidAmount() <= beetleTank.getCapacity() - FluidContainerRegistry.BUCKET_VOLUME)
+			if (FluidContainerRegistry.isFilledContainer(bucket) && FluidContainerRegistry.getFluidForFilledItem(bucket).getFluid() == ModFluids.beetleJuice)
+				if (bucket.stackSize == 1) {
+					beetleTank.fill(new FluidStack(ModFluids.beetleJuice, FluidContainerRegistry.BUCKET_VOLUME), true);
+					for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData())
+						if (data.filledContainer.getItem() == bucket.getItem() && data.filledContainer.getItemDamage() == bucket.getItemDamage())
+							return data.emptyContainer.copy();
+				}
+		if (antiVenomTank.getFluidAmount() <= antiVenomTank.getCapacity() - FluidContainerRegistry.BUCKET_VOLUME)
+			if (FluidContainerRegistry.isFilledContainer(bucket) && FluidContainerRegistry.getFluidForFilledItem(bucket).getFluid() == ModFluids.antiVenom)
+				if (bucket.stackSize == 1) {
+					antiVenomTank.fill(new FluidStack(ModFluids.antiVenom, FluidContainerRegistry.BUCKET_VOLUME), true);
+					for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData())
+						if (data.filledContainer.getItem() == bucket.getItem() && data.filledContainer.getItemDamage() == bucket.getItemDamage())
+							return data.emptyContainer.copy();
+				}
+		if (milkTank.getFluidAmount() <= milkTank.getCapacity() - FluidContainerRegistry.BUCKET_VOLUME)
+			if (FluidContainerRegistry.isFilledContainer(bucket) && FluidContainerRegistry.getFluidForFilledItem(bucket).getFluid() == ModFluids.milk)
+				if (bucket.stackSize == 1) {
+					milkTank.fill(new FluidStack(ModFluids.milk, FluidContainerRegistry.BUCKET_VOLUME), true);
+					for (FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData())
+						if (data.filledContainer.getItem() == bucket.getItem() && data.filledContainer.getItemDamage() == bucket.getItemDamage())
+							return data.emptyContainer.copy();
+				}
+		return bucket;
 	}
 
 	@Override

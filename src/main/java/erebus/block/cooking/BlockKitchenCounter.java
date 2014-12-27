@@ -12,7 +12,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,8 +22,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
-import erebus.ModItems;
 import erebus.ModTabs;
+import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityKitchenCounter;
 
@@ -50,49 +49,27 @@ public class BlockKitchenCounter extends BlockContainer implements IWailaBlock {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float x1, float y1, float z1) {
-		TileEntity tile = world.getTileEntity(x, y, z);
 		if (world.isRemote)
 			return true;
-		else if (tile instanceof TileEntityKitchenCounter) {
-			TileEntityKitchenCounter kitchen = (TileEntityKitchenCounter) tile;
 
-			ItemStack stack = player.inventory.getCurrentItem();
+		TileEntityKitchenCounter tile = Utils.getTileEntity(world, x, y, z, TileEntityKitchenCounter.class);
 
-			if (stack == null || tile == null || player.isSneaking()) {
-				player.openGui(Erebus.instance, CommonProxy.GUI_ID_KITCHEN_COUNTER, world, x, y, z);
-				return true;
-			} else if (stack.getItem() == Items.milk_bucket) {
-				kitchen.addMilk(1000);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
-				return true;
-			} else if (stack.getItem() == ModItems.bambucketHoney) {
-				kitchen.addHoney(1500);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bambucket));
-				return true;
-			} else if (stack.getItem() == ModItems.bucketHoney) {
-				kitchen.addHoney(1000);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
-				return true;
-			} else if (stack.getItem() == ModItems.bambucketBeetleJuice) {
-				kitchen.addBeetleJuice(1500);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bambucket));
-				return true;
-			} else if (stack.getItem() == ModItems.bucketBeetleJuice) {
-				kitchen.addBeetleJuice(1000);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
-				return true;
-			} else if (stack.getItem() == ModItems.bambucketAntiVenom) {
-				kitchen.addAntiVenom(1500);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bambucket));
-				return true;
-			} else if (stack.getItem() == ModItems.bucketAntiVenom) {
-				kitchen.addAntiVenom(1000);
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
-				return true;
-			} else
-				return false;
-		} else
+		if (player.isSneaking())
 			return false;
+
+		if (player.getCurrentEquippedItem() != null) {
+			ItemStack oldItem = player.getCurrentEquippedItem();
+			ItemStack newItem = tile.fillTankWithBucket(player.inventory.getStackInSlot(player.inventory.currentItem));
+
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
+			if (!ItemStack.areItemStacksEqual(oldItem, newItem))
+				return true;
+		}
+
+		if (tile != null)
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_KITCHEN_COUNTER, world, x, y, z);
+
+		return true;
 	}
 
 	@Override

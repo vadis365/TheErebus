@@ -44,6 +44,7 @@ public class ModFluids {
 		FluidContainerRegistry.registerFluidContainer(honey, new ItemStack(ModItems.bucketHoney), new ItemStack(Items.bucket));
 		FluidContainerRegistry.registerFluidContainer(beetleJuice, new ItemStack(ModItems.bucketBeetleJuice), new ItemStack(Items.bucket));
 		FluidContainerRegistry.registerFluidContainer(antiVenom, new ItemStack(ModItems.bucketAntiVenom), new ItemStack(Items.bucket));
+		FluidContainerRegistry.registerFluidContainer(milk, new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(antiVenom, FluidContainerRegistry.BUCKET_VOLUME / 2), new ItemStack(ModItems.bottleAntiVenom), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(antiVenom, FluidContainerRegistry.BUCKET_VOLUME / 2), new ItemStack(ModItems.bottleAntiVenom), new ItemStack(Items.glass_bottle));
 	}
