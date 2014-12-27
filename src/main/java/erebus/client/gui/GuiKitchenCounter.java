@@ -27,8 +27,14 @@ public class GuiKitchenCounter extends GuiContainer {
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
-		int size = kitchen.getScaledHoneyAmount(65);
-		drawTexturedModalRect(x + 10, y + 75 - size, 176, 96 - size, 18, 100);
+		int honey = kitchen.getScaledHoneyAmount(65);
+		drawTexturedModalRect(x + 8, y + 80 - honey, 8, 248 - honey, 9, honey);
+		int beetleJuice = kitchen.getScaledBeetleJuiceAmount(65);
+		drawTexturedModalRect(x + 25, y + 80 - beetleJuice, 25, 248 - beetleJuice, 9, beetleJuice);
+		int antiVenom = kitchen.getScaledAntiVenomAmount(65);
+		drawTexturedModalRect(x + 142, y + 80 - antiVenom, 142, 248 - antiVenom, 9, antiVenom);
+		int milk = kitchen.getScaledMilkAmount(65);
+		drawTexturedModalRect(x + 159, y + 80 - milk, 159, 248 - milk, 9, milk);
 
 	}
 
