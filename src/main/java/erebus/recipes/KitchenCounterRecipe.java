@@ -34,7 +34,7 @@ public class KitchenCounterRecipe {
 		this.output = ItemStack.copyItemStack(output);
 		this.input = new Object[input.length];
 
-		if (input.length > 3)
+		if (input.length > 4)
 			throw new IllegalArgumentException("Input must be 1 to 4.");
 
 		for (int c = 0; c < input.length; c++)

@@ -19,6 +19,7 @@ import erebus.inventory.ContainerKitchenCounter;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketKitchenCounter;
 import erebus.network.client.PacketKitchenCounterTimer;
+import erebus.recipes.CraftingAltarRecipe;
 import erebus.recipes.KitchenCounterRecipe;
 
 public class TileEntityKitchenCounter extends TileEntityBasicInventory implements IFluidHandler {
@@ -28,7 +29,6 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	protected final FluidTank beetleTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
 	protected final FluidTank antiVenomTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
 
-	protected ItemStack output = null;
 	public int time = 0;
 
 	private static final int MAX_TIME = 450;
@@ -222,9 +222,6 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	@Override
 	public void markDirty() {
 		super.markDirty();
-
-		output = KitchenCounterRecipe.getOutput(inventory[0], inventory[1], inventory[2], inventory[4]);
-
 		if (worldObj != null && !worldObj.isRemote) {
 			NBTTagCompound nbt = new NBTTagCompound();
 			writeToNBT(nbt);
@@ -237,8 +234,6 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		if (worldObj.isRemote)
 			return;
 
-		if (output == null)
-			time = 0;
 		else {
 			time++;
 			PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
@@ -251,16 +246,20 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 			}
 
 			if (time >= MAX_TIME) {
-				inventory[4] = ItemStack.copyItemStack(output);
-
-				for (int c = 0; c < 4; c++)
-					if (inventory[c] != null)
-						if (--inventory[c].stackSize <= 0)
-							inventory[c] = null;
-
-				time = 0;
-				markDirty();
-			}
+					ItemStack[] inputs = new ItemStack[4];
+					for (int i = 0; i < 4; i++)
+						inputs[i] = inventory[i];
+					ItemStack output = KitchenCounterRecipe.getOutput(inputs);
+					if (output != null) {
+						for (int i = 0; i < 5; i++)
+							if (inventory[i] != null)
+								if (--inventory[i].stackSize <= 0)
+									inventory[i] = null;
+						inventory[4] = ItemStack.copyItemStack(output);
+						markDirty();
+					}
+					time = 0;
+				}
 		}
 	}
 

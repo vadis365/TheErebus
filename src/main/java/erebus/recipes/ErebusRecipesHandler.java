@@ -26,7 +26,7 @@ public class ErebusRecipesHandler {
 	}
 
 	private static void kitchenCounter() {
-		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.whetstone), new ItemStack(Blocks.pumpkin), new ItemStack(Items.melon));
+		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.whetstone), new ItemStack(Blocks.pumpkin), new ItemStack(Blocks.melon_block), new ItemStack(Blocks.pumpkin), new ItemStack(Blocks.melon_block));
 	}
 
 	private static Object[] getArray(Object base, int size) {
