@@ -19,7 +19,6 @@ import erebus.inventory.ContainerKitchenCounter;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketKitchenCounter;
 import erebus.network.client.PacketKitchenCounterTimer;
-import erebus.recipes.CraftingAltarRecipe;
 import erebus.recipes.KitchenCounterRecipe;
 
 public class TileEntityKitchenCounter extends TileEntityBasicInventory implements IFluidHandler {
@@ -30,7 +29,6 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	protected final FluidTank antiVenomTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
 
 	public int time = 0;
-
 	private static final int MAX_TIME = 450;
 
 	public TileEntityKitchenCounter instance = this;
