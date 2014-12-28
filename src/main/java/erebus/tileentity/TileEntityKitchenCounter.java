@@ -1,5 +1,6 @@
 package erebus.tileentity;
 
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,7 +30,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	protected final FluidTank antiVenomTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
 
 	public int time = 0;
-	private static final int MAX_TIME = 450;
+	private static final int MAX_TIME = 432;
 
 	public TileEntityKitchenCounter instance = this;
 
@@ -39,6 +40,19 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		milkTank.setFluid(new FluidStack(ModFluids.milk, 0));
 		beetleTank.setFluid(new FluidStack(ModFluids.beetleJuice, 0));
 		antiVenomTank.setFluid(new FluidStack(ModFluids.antiVenom, 0));
+	}
+	
+	@Override
+	public int getInventoryStackLimit() {
+		return 1;
+	}
+	
+	public int getBlendProgress() {
+		return time/12;
+	}
+	
+	public boolean isBlending() {
+		return time > 0;
 	}
 
 	public int getHoneyAmount() {
@@ -224,6 +238,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 			NBTTagCompound nbt = new NBTTagCompound();
 			writeToNBT(nbt);
 			PacketPipeline.sendToAll(new PacketKitchenCounter(xCoord, yCoord, zCoord, nbt));
+			PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
 		}
 	}
 
@@ -232,32 +247,32 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		if (worldObj.isRemote)
 			return;
 
-		else {
-			time++;
-			PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
+		ItemStack[] inputs = new ItemStack[4];
+		for (int i = 0; i < 4; i++)
+			inputs[i] = inventory[i];
+		ItemStack output = KitchenCounterRecipe.getOutput(inputs);
+		if (output != null)
+			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == Items.glass_bottle) {
+				time++;
+				PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
 
-			if (time == 90 || time == 270 || time == 450) {
-				worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 4);
+				if (time == 90 || time == 270 || time == 432)
+					worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 4);
 
-				if (time >= MAX_TIME)
+				if (time >= MAX_TIME) {
 					worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 0);
-			}
-
-			if (time >= MAX_TIME) {
-					ItemStack[] inputs = new ItemStack[4];
-					for (int i = 0; i < 4; i++)
-						inputs[i] = inventory[i];
-					ItemStack output = KitchenCounterRecipe.getOutput(inputs);
-					if (output != null) {
-						for (int i = 0; i < 5; i++)
-							if (inventory[i] != null)
-								if (--inventory[i].stackSize <= 0)
-									inventory[i] = null;
-						inventory[4] = ItemStack.copyItemStack(output);
-						markDirty();
-					}
+					for (int i = 0; i < 5; i++)
+						if (inventory[i] != null)
+							if (--inventory[i].stackSize <= 0)
+								inventory[i] = null;
+					inventory[4] = ItemStack.copyItemStack(output);
 					time = 0;
+					markDirty();
 				}
+			}
+		if (output == null || getStackInSlot(4) == null ) {
+			time = 0;
+			markDirty();
 		}
 	}
 
@@ -296,4 +311,5 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		return null;
 	}
+
 }
