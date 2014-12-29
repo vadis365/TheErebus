@@ -34,10 +34,10 @@ public class BlockKitchenCounter extends BlockContainer implements IWailaBlock {
 	public static IIcon honeyIcon, milkIcon, beetleJuiceIcon, antiVenomIcon;
 
 	public BlockKitchenCounter() {
-		super(Material.wood);
+		super(Material.rock);
 		setHardness(2.0F);
 		setResistance(5.0F);
-		setBlockName("kitchenCounter");
+		setBlockName("erebus.kitchenCounter");
 		setCreativeTab(ModTabs.blocks);
 	}
 
@@ -156,8 +156,8 @@ public class BlockKitchenCounter extends BlockContainer implements IWailaBlock {
 
 			currenttip.add("Honey : " + tile.getHoneyAmount() + "/" + tile.getTanksFullValue());
 			currenttip.add("Milk : " + tile.getMilkAmount() + "/" + tile.getTanksFullValue());
-			currenttip.add("BeetleJuice : " + tile.getBeetleJuiceAmount() + "/" + tile.getTanksFullValue());
-			currenttip.add("AntiVenom : " + tile.getAntiVenomAmount() + "/" + tile.getTanksFullValue());
+			currenttip.add("Beetle Juice : " + tile.getBeetleJuiceAmount() + "/" + tile.getTanksFullValue());
+			currenttip.add("Anti-Venom : " + tile.getAntiVenomAmount() + "/" + tile.getTanksFullValue());
 		}
 
 		return currenttip;
