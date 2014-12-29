@@ -44,6 +44,7 @@ import erebus.item.NectarCollector;
 import erebus.item.Paxel;
 import erebus.item.Planticide;
 import erebus.item.PortalActivator;
+import erebus.item.RecipeBookSmoothies;
 import erebus.item.ReinExoskeletonArmor;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
@@ -183,6 +184,7 @@ public class ModItems {
 	public static final Item bucketHoney = new ItemBucket(ModBlocks.honeyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.bucketHoney").setTextureName("erebus:bucketHoney");
 
 	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("erebus.bottleAntiVenom");
+	public static final Item smoothieBook = new RecipeBookSmoothies().setMaxStackSize(1).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.smoothieBook").setTextureName("book_normal");
 
 	public static void init() {
 		initCreativeTabs();
