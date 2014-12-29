@@ -263,6 +263,8 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 
 				if (time >= MAX_TIME) {
 					worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 0);
+					worldObj.playSoundEffect(xCoord, yCoord + 1, zCoord, "random.orb", 1.0F, 1.0F);
+					
 					for (int i = 0; i < 5; i++)
 						if (inventory[i] != null)
 							if (--inventory[i].stackSize <= 0)
