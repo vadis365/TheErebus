@@ -27,7 +27,8 @@ public class Smoothie extends ItemFood {
 		givinMeTheBlues,
 		hotHotBaby,
 		dontMettleWithTheNettle,
-		liquidGold
+		liquidGold,
+		bryufsBrew;
 	}
 
 	public Smoothie() {
@@ -56,6 +57,8 @@ public class Smoothie extends ItemFood {
 				return 2;
 			case liquidGold:
 				return 0;
+			case bryufsBrew:
+				return 2;
 			default:
 				return 0;
 		}
@@ -81,6 +84,8 @@ public class Smoothie extends ItemFood {
 				return 0.1F;
 			case liquidGold:
 				return 0.0F;
+			case bryufsBrew:
+				return 0.0F;
 			default:
 				return 0.0F;
 		}
@@ -88,21 +93,33 @@ public class Smoothie extends ItemFood {
 
 	public PotionEffect getPotionEffect(ItemStack stack, World world, EntityPlayer player) {
 		switch (SmoothieType.values()[stack.getItemDamage()]) {
+			case greenTeaGrasshopper:
+				return new PotionEffect(Potion.jump.id, 1000, 2);
 			case moneyHoney:
 				return new PotionEffect(Potion.regeneration.id, 200, 2);
 			case nothingInTheMiddle:
 				return new PotionEffect(Potion.invisibility.id, 500, 1);
 			case greenGiant:
 				player.curePotionEffects(stack);
+			case seedyGoodness:
+				return new PotionEffect(Potion.digSpeed.id, 500, 1);
 			case givinMeTheBlues:
 				player.extinguish();
 				return new PotionEffect(Potion.moveSlowdown.id, 500, 2);
 			case hotHotBaby:
 				player.setFire(5);
 				return new PotionEffect(Potion.damageBoost.id, 1000, 1);
+			case dontMettleWithTheNettle:
+				return new PotionEffect(Potion.resistance.id, 1000, 1);
 			case liquidGold:
 				player.heal(0.5F);
 				return new PotionEffect(Potion.field_76443_y.id, 1000, 1);
+			case bryufsBrew:
+				player.heal(1.5F);
+				player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 1000, 2));
+				player.addPotionEffect(new PotionEffect(Potion.jump.id, 1000, 2));
+				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 1000, 2));
+				return new PotionEffect(Potion.nightVision.id, 1000, 1);
 			default:
 				return null;
 		}

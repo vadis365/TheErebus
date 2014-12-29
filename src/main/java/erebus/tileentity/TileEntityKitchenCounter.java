@@ -309,6 +309,14 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		case liquidGold:
 			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
+		case bryufsBrew:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		default:
+			break;
 		}	
 	}
 
@@ -350,6 +358,15 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		case liquidGold:
 			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 				return true;
+			break;
+		case bryufsBrew:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				if(getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					if(getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+						if(getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+							return true;
+			break;
+		default:
 			break;
 		}
 		return false;
