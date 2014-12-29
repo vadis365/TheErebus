@@ -360,11 +360,8 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 				return true;
 			break;
 		case bryufsBrew:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				if(getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-					if(getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-						if(getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-							return true;
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
 			break;
 		default:
 			break;

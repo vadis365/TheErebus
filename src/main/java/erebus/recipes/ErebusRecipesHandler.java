@@ -36,8 +36,8 @@ public class ErebusRecipesHandler {
 		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.givinMeTheBlues.ordinal()), Materials.createStack(Materials.DATA.weepingBluePetal), Materials.createStack(Materials.DATA.weepingBluePetal), new ItemStack(Items.dye, 1, 4), new ItemStack(Items.dye, 1, 4));
 		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.hotHotBaby.ordinal()), Materials.createStack(Materials.DATA.waspSting), Materials.createStack(Materials.DATA.honeyDrip), new ItemStack(ModBlocks.fireBloom), new ItemStack(ModBlocks.fireBloom));
 		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.dontMettleWithTheNettle.ordinal()), Materials.createStack(Materials.DATA.nettleflowers), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.jadeBerries), Materials.createStack(Materials.DATA.plateExo));
-		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.liquidGold.ordinal()), new ItemStack(ModItems.heartBerries), new ItemStack(ModItems.heartBerries), new ItemStack(ModBlocks.bambooShoot), new ItemStack(Items.speckled_melon));
-		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.bryufsBrew.ordinal()), Materials.createStack(Materials.DATA.compoundLens), new ItemStack(ModBlocks.bulbCappedShroom), new ItemStack(ModItems.turnip), new ItemStack(ModItems.heartBerries));	
+		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.liquidGold.ordinal()), new ItemStack(ModItems.lifeBlood), new ItemStack(ModItems.lifeBlood), Materials.createStack(Materials.DATA.bambooShoot), new ItemStack(Items.speckled_melon));
+		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.bryufsBrew.ordinal()), Materials.createStack(Materials.DATA.compoundEyes), new ItemStack(ModBlocks.bulbCappedShroom), new ItemStack(ModItems.turnip), new ItemStack(ModItems.heartBerries));	
 	}
 
 	private static Object[] getArray(Object base, int size) {
