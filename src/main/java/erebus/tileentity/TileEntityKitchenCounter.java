@@ -1,6 +1,5 @@
 package erebus.tileentity;
 
-import net.minecraft.init.Items;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +15,9 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import erebus.ModFluids;
+import erebus.ModItems;
 import erebus.inventory.ContainerKitchenCounter;
+import erebus.item.Materials;
 import erebus.item.Smoothie.SmoothieType;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketKitchenCounter;
@@ -253,7 +254,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 			inputs[i] = inventory[i];
 		ItemStack output = KitchenCounterRecipe.getOutput(inputs);
 		if (output != null && canExtractFluid(output))
-			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == Items.glass_bottle) {
+			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == ModItems.materials && getStackInSlot(4).getItemDamage() == Materials.DATA.smoothieGlass.ordinal()) {
 				time++;
 				PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
 

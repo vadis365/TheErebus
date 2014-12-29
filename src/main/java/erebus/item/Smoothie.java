@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -122,9 +121,9 @@ public class Smoothie extends ItemFood {
 		onFoodEaten(stack, world, player);
 
 		if (stack.stackSize != 0)
-			player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
+			player.inventory.addItemStackToInventory(Materials.createStack(Materials.DATA.smoothieGlass));
 
-		return stack.stackSize == 0 ? new ItemStack(Items.glass_bottle) : stack;
+		return stack.stackSize == 0 ? Materials.createStack(Materials.DATA.smoothieGlass) : stack;
 	}
 
 	@Override
