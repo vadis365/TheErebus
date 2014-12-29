@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.item.Materials;
+import erebus.item.Smoothie.SmoothieType;
 
 public class ErebusRecipesHandler {
 	public static void init() {
@@ -26,7 +27,7 @@ public class ErebusRecipesHandler {
 	}
 
 	private static void kitchenCounter() {
-		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.whetstone), new ItemStack(Blocks.pumpkin), new ItemStack(Blocks.melon_block), new ItemStack(Blocks.pumpkin), new ItemStack(Blocks.melon_block));
+		KitchenCounterRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.greenTeaGrasshopper.ordinal()), new ItemStack(Blocks.pumpkin), new ItemStack(Blocks.melon_block), new ItemStack(Blocks.pumpkin), new ItemStack(Blocks.melon_block));
 	}
 
 	private static Object[] getArray(Object base, int size) {

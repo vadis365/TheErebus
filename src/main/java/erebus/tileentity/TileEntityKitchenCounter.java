@@ -17,6 +17,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import erebus.ModFluids;
 import erebus.inventory.ContainerKitchenCounter;
+import erebus.item.Smoothie.SmoothieType;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketKitchenCounter;
 import erebus.network.client.PacketKitchenCounterTimer;
@@ -251,7 +252,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		for (int i = 0; i < 4; i++)
 			inputs[i] = inventory[i];
 		ItemStack output = KitchenCounterRecipe.getOutput(inputs);
-		if (output != null)
+		if (output != null && canExtractFluid(output))
 			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == Items.glass_bottle) {
 				time++;
 				PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
@@ -265,6 +266,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 						if (inventory[i] != null)
 							if (--inventory[i].stackSize <= 0)
 								inventory[i] = null;
+					extractFluid(output);
 					inventory[4] = ItemStack.copyItemStack(output);
 					time = 0;
 					markDirty();
@@ -276,6 +278,82 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		}
 	}
 
+	private void extractFluid(ItemStack output) {
+		switch(SmoothieType.values()[output.getItemDamage()]) {
+		//Tanks below can be any of the 4.
+		case greenTeaGrasshopper:
+			beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		case moneyHoney:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		case nothingInTheMiddle:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		case greenGiant:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		case seedyGoodness:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		case givinMeTheBlues:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		case hotHotBaby:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		case dontMettleWithTheNettle:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		case liquidGold:
+			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			break;
+		}	
+	}
+
+	private boolean canExtractFluid(ItemStack output) {
+		switch(SmoothieType.values()[output.getItemDamage()]) {
+		//These tanks have to match the extract tanks.
+		case greenTeaGrasshopper:
+			if(getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		case moneyHoney:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		case nothingInTheMiddle:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		case greenGiant:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		case seedyGoodness:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		case givinMeTheBlues:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		case hotHotBaby:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		case dontMettleWithTheNettle:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		case liquidGold:
+			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+				return true;
+			break;
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		return slot != 3;
@@ -298,7 +376,6 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		//if(from.)
 		return true;
 	}
 
