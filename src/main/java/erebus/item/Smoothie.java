@@ -34,6 +34,7 @@ public class Smoothie extends ItemFood {
 	public Smoothie() {
 		super(3, 0.5F, false);
 		setHasSubtypes(true);
+		setAlwaysEdible();
 		setMaxDamage(0);
 	}
 
