@@ -48,32 +48,88 @@ public class RecipeBookSmoothies extends ItemEditableBook {
 		 
 		 // Recipes
 		 			case 2: return 
-		 					"Green Tea Grasshopper";		 
+		 					EnumChatFormatting.BLUE+"Green Tea Grasshopper\n\n"+
+		 					EnumChatFormatting.BLACK+"Grasshopper Leg x2\n"+
+		 					"Elastic Fibre\n"+
+		 					"Fly Wing\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Beetle Juice\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Jumping";
 		 			case 3: return 
-		 					"Money Honey";		 
+		 					EnumChatFormatting.BLUE+"Money Honey\n\n"+
+		 					EnumChatFormatting.BLACK+"Honey drip x2\n"+
+		 					"Nectar\n"+
+		 					"Gold Nugget\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Honey\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Regeneration";		 
 		 			case 4: return 
-		 					"Nothing In The Middle";
+		 					EnumChatFormatting.BLUE+"Nothing In The Middle\n\n"+
+		 					EnumChatFormatting.BLACK+"Cammo powder x2\n"+
+		 					"Middle Fruit\n"+
+		 					"Swamp Berries\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Beetle Juice\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Invisibility";
 		 			case 5: return 
-		 					"Green Giant";
+		 					EnumChatFormatting.BLUE+"Green Giant\n\n"+
+		 					EnumChatFormatting.BLACK+"Repellent\n"+
+		 					"Poison Gland x2\n"+
+		 					"Wasp Sting\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Anti-Venom\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Negates Potions";
 		 			case 6: return 
-		 					"Seedy Goodness";
+		 					EnumChatFormatting.BLUE+"Seedy Goodness\n\n"+
+		 					EnumChatFormatting.BLACK+"Pumpkin Seeds\n"+
+		 					"Melon Seeds\n"+
+		 					"MiddleFruit Seeds\n"+
+		 					"Bio-Velocity\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Beetle Juice\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Dig Speed";
 		 			case 7: return 
-		 					"Givin' Me The Blues";
+		 					EnumChatFormatting.BLUE+"Givin' Me The Blues\n\n"+
+		 					EnumChatFormatting.BLACK+"Weeping Blue Petal x2\n"+
+		 					"Lapis Lazuli x2\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Milk\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Extinguish";
 		 			case 8: return 
-		 					"Hot Hot Baby";
+		 					EnumChatFormatting.BLUE+"Hot Hot Baby\n\n"+
+		 					EnumChatFormatting.BLACK+"Fire Bloom x2\n"+
+		 					"Wasp Sting\n"+
+		 					"Honey Drip\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Anti-Venom\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Strength";
 		 			case 9: return 
-		 					"Don't Meddle With The Nettle";
+		 					EnumChatFormatting.BLUE+"Don't Meddle With The Nettle\n\n"+
+		 					EnumChatFormatting.BLACK+"Nettle Leaf\n"+
+		 					"Nettle Flower\n"+
+		 					"Jade Berries\n"+
+		 					"Exo Skeleton\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Honey\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Resistance";
 		 			case 10: return 
-		 					"Liquid Gold";
+		 					EnumChatFormatting.BLUE+"Liquid Gold\n\n"+
+		 					EnumChatFormatting.BLACK+"Heart Berries x2\n"+
+		 					"Bamboo Shoot\n"+
+		 					"Glistening Melon\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Milk\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Saturation";
 		 			case 11: return 
-		 					"Bryuf's Brew"; 	 
-		 			default: return EnumChatFormatting.RED+"Whoops, page not included in the mod!"; 
+		 					EnumChatFormatting.BLUE+"Bryuf's Brew\n\n"+
+		 					EnumChatFormatting.BLACK+"Bulb Cap Mushroom\n"+
+		 					"Turnip\n"+
+		 					"Compound Lens\n"+
+		 					"Heart Berries\n\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Honey\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Beetle Juice\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Anti-Venom\n"+
+		 					EnumChatFormatting.LIGHT_PURPLE+"Milk\n\n"+
+		 					EnumChatFormatting.RED+"Effects:\n"+"Mighty Buffs"; 	 
+		 			default:
+		 				return EnumChatFormatting.RED+"Whoops, page not included in the mod!"; 
 		 		} 
 		 	} 
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack) {
-		return false;
+		return true;
 	}
 }

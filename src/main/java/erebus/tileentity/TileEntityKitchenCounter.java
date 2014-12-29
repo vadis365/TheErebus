@@ -289,25 +289,25 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
 		case nothingInTheMiddle:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
 		case greenGiant:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
 		case seedyGoodness:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
 		case givinMeTheBlues:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
 		case hotHotBaby:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
 		case dontMettleWithTheNettle:
 			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
 		case liquidGold:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+			milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 			break;
 		case bryufsBrew:
 			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
@@ -332,23 +332,23 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 				return true;
 			break;
 		case nothingInTheMiddle:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+			if(getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 				return true;
 			break;
 		case greenGiant:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+			if(getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 				return true;
 			break;
 		case seedyGoodness:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+			if(getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 				return true;
 			break;
 		case givinMeTheBlues:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+			if(getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 				return true;
 			break;
 		case hotHotBaby:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+			if(getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 				return true;
 			break;
 		case dontMettleWithTheNettle:
@@ -356,7 +356,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 				return true;
 			break;
 		case liquidGold:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+			if(getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 				return true;
 			break;
 		case bryufsBrew:
