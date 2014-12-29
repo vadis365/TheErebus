@@ -108,7 +108,7 @@ public class RecipeBookSmoothies extends ItemEditableBook {
 		 					EnumChatFormatting.BLUE+"Liquid Gold\n\n"+
 		 					EnumChatFormatting.BLACK+"Life Blood x2\n"+
 		 					"Bamboo Shoot\n"+
-		 					"Glistening Melon\n\n"+
+		 					"Glistering Melon\n\n"+
 		 					EnumChatFormatting.LIGHT_PURPLE+"Milk\n\n"+
 		 					EnumChatFormatting.RED+"Effects:\n"+"Saturation";
 		 			case 11: return 
