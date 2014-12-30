@@ -122,7 +122,7 @@ import erebus.client.render.item.ItemAltarBaseRenderer;
 import erebus.client.render.item.ItemBoneBlockRenderer;
 import erebus.client.render.item.ItemCraftingAltarRenderer;
 import erebus.client.render.item.ItemGlowingJarRenderer;
-import erebus.client.render.item.ItemKitchenCounterRenderer;
+import erebus.client.render.item.ItemSmoothieMakerRenderer;
 import erebus.client.render.item.ItemOfferingAltarRenderer;
 import erebus.client.render.item.ItemPetrifiedWoodChestRenderer;
 import erebus.client.render.item.ItemTarantulaEggRenderer;
@@ -148,7 +148,7 @@ import erebus.client.render.tileentity.TileEntityExtenderThingyRenderer;
 import erebus.client.render.tileentity.TileEntityGaeanKeystoneRenderer;
 import erebus.client.render.tileentity.TileEntityGlowGemRenderer;
 import erebus.client.render.tileentity.TileEntityGlowingJarRenderer;
-import erebus.client.render.tileentity.TileEntityKitchenCounterRenderer;
+import erebus.client.render.tileentity.TileEntitySmoothieMakerRenderer;
 import erebus.client.render.tileentity.TileEntityLadderRenderer;
 import erebus.client.render.tileentity.TileEntityOfferingAltarRenderer;
 import erebus.client.render.tileentity.TileEntityPetrifiedWoodChestRenderer;
@@ -234,7 +234,7 @@ import erebus.tileentity.TileEntityExtenderThingy;
 import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
-import erebus.tileentity.TileEntityKitchenCounter;
+import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
@@ -360,7 +360,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGaeanKeystone.class, new TileEntityGaeanKeystoneRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingAltar.class, new TileEntityOfferingAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTarantulaEgg.class, new TileEntityTarantulaEggRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKitchenCounter.class, new TileEntityKitchenCounterRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySmoothieMaker.class, new TileEntitySmoothieMakerRenderer());
 
 		RenderingRegistry.registerBlockHandler(new BlockBambooCropRender());
 		RenderingRegistry.registerBlockHandler(new BlockHollowLogRender());
@@ -403,7 +403,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.offeringAltar), new ItemOfferingAltarRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.craftingAltar), new ItemCraftingAltarRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.tarantulaEgg), new ItemTarantulaEggRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.kitchenCounter), new ItemKitchenCounterRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.smoothieMaker), new ItemSmoothieMakerRenderer());
 	}
 
 	@Override

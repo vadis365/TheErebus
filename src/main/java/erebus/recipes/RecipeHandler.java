@@ -232,6 +232,7 @@ public class RecipeHandler {
 		// Smoothies
 		//Have to figure this out...
 		GameRegistry.addShapelessRecipe(Materials.createStack(Materials.DATA.smoothieGlass), Items.glass_bottle, Items.glass_bottle, Items.glass_bottle);
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.smoothieMaker), "xrx", "xxx", "sss", 'x', Materials.createStack(Materials.DATA.smoothieGlass), 'r', new ItemStack(ModBlocks.redGem), 's', new ItemStack(ModBlocks.umberstone));
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bambucketAntiVenom), ModItems.bambucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));

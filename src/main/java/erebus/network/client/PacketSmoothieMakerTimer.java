@@ -5,17 +5,17 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.world.World;
 import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
-import erebus.tileentity.TileEntityKitchenCounter;
+import erebus.tileentity.TileEntitySmoothieMaker;
 
-public class PacketKitchenCounterTimer extends AbstractClientPacket {
+public class PacketSmoothieMakerTimer extends AbstractClientPacket {
 
 	private int x, y, z, time;
 
-	public PacketKitchenCounterTimer() {
+	public PacketSmoothieMakerTimer() {
 
 	}
 
-	public PacketKitchenCounterTimer(int x, int y, int z, int time) {
+	public PacketSmoothieMakerTimer(int x, int y, int z, int time) {
 		this();
 		this.x = x;
 		this.y = y;
@@ -25,7 +25,7 @@ public class PacketKitchenCounterTimer extends AbstractClientPacket {
 
 	@Override
 	protected void handle(World world, EntityClientPlayerMP player) {
-		TileEntityKitchenCounter tile = Utils.getTileEntity(world, x, y, z, TileEntityKitchenCounter.class);
+		TileEntitySmoothieMaker tile = Utils.getTileEntity(world, x, y, z, TileEntitySmoothieMaker.class);
 
 		if (tile != null)
 			tile.time = time;

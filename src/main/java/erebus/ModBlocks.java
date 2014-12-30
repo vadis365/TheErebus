@@ -71,7 +71,7 @@ import erebus.block.bamboo.BlockBambooPole;
 import erebus.block.bamboo.BlockBambooShoot;
 import erebus.block.bamboo.BlockBambooTorch;
 import erebus.block.bamboo.BlockExtenderThingy;
-import erebus.block.cooking.BlockKitchenCounter;
+import erebus.block.cooking.BlockSmoothieMaker;
 import erebus.block.glowshroom.BlockGlowshroom;
 import erebus.block.glowshroom.BlockGlowshroomStalkDown1;
 import erebus.block.glowshroom.BlockGlowshroomStalkDown2;
@@ -298,7 +298,7 @@ public class ModBlocks {
 	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.waspNestStairs");
 
 	// COOKING
-	public static final Block kitchenCounter = new BlockKitchenCounter();
+	public static final Block smoothieMaker = new BlockSmoothieMaker();
 
 	// OTHER THINGS
 	public static final Block gaeanKeystone = new GaeanKeystone();

@@ -6,15 +6,15 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import erebus.inventory.ContainerKitchenCounter;
-import erebus.tileentity.TileEntityKitchenCounter;
+import erebus.inventory.ContainerSmoothieMaker;
+import erebus.tileentity.TileEntitySmoothieMaker;
 
-public class GuiKitchenCounter extends GuiContainer {
-	private TileEntityKitchenCounter kitchen;
-	private static final ResourceLocation gui = new ResourceLocation("erebus:textures/gui/container/kitchenCounter.png");
+public class GuiSmoothieMaker extends GuiContainer {
+	private TileEntitySmoothieMaker kitchen;
+	private static final ResourceLocation gui = new ResourceLocation("erebus:textures/gui/container/smoothieMaker.png");
 
-	public GuiKitchenCounter(InventoryPlayer inv, TileEntityKitchenCounter tile) {
-		super(new ContainerKitchenCounter(inv, tile));
+	public GuiSmoothieMaker(InventoryPlayer inv, TileEntitySmoothieMaker tile) {
+		super(new ContainerSmoothieMaker(inv, tile));
 		kitchen = tile;
 	}
 

@@ -8,13 +8,13 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import erebus.ModItems;
 import erebus.item.Materials;
-import erebus.tileentity.TileEntityKitchenCounter;
+import erebus.tileentity.TileEntitySmoothieMaker;
 
-public class ContainerKitchenCounter extends Container {
+public class ContainerSmoothieMaker extends Container {
 
-	protected TileEntityKitchenCounter counter;
+	protected TileEntitySmoothieMaker counter;
 
-	public ContainerKitchenCounter(InventoryPlayer inventory, TileEntityKitchenCounter tileentity) {
+	public ContainerSmoothieMaker(InventoryPlayer inventory, TileEntitySmoothieMaker tileentity) {
 		counter = tileentity;
 
 		addSlotToContainer(new Slot(tileentity, 0, 47, 9));

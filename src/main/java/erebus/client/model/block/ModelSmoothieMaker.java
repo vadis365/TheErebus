@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelKitchenCounter extends ModelBase {
+public class ModelSmoothieMaker extends ModelBase {
 	ModelRenderer Base;
 	ModelRenderer Top;
 	ModelRenderer BottomBlender;
@@ -26,7 +26,7 @@ public class ModelKitchenCounter extends ModelBase {
 	ModelRenderer AntiVenomLid;
 	ModelRenderer BeetleJuiceLid;
 
-	public ModelKitchenCounter() {
+	public ModelSmoothieMaker() {
 		textureWidth = 256;
 		textureHeight = 128;
 

@@ -19,7 +19,7 @@ import erebus.client.gui.GuiColossalCrate;
 import erebus.client.gui.GuiComposter;
 import erebus.client.gui.GuiExtenderThingy;
 import erebus.client.gui.GuiHoneyComb;
-import erebus.client.gui.GuiKitchenCounter;
+import erebus.client.gui.GuiSmoothieMaker;
 import erebus.client.gui.GuiPetrifiedChest;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.client.gui.GuiSilo;
@@ -33,7 +33,7 @@ import erebus.inventory.ContainerColossalCrate;
 import erebus.inventory.ContainerComposter;
 import erebus.inventory.ContainerExtenderThingy;
 import erebus.inventory.ContainerHoneyComb;
-import erebus.inventory.ContainerKitchenCounter;
+import erebus.inventory.ContainerSmoothieMaker;
 import erebus.inventory.ContainerPetrifiedCraftingTable;
 import erebus.inventory.ContainerPetrifiedWoodChest;
 import erebus.inventory.ContainerSilo;
@@ -56,7 +56,7 @@ import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntityJarOHoney;
-import erebus.tileentity.TileEntityKitchenCounter;
+import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
@@ -77,7 +77,7 @@ public class CommonProxy implements IGuiHandler {
 	public static final int GUI_ID_ANT_INVENTORY = 10;
 	public static final int GUI_ID_SILO_INVENTORY = 11;
 	public static final int GUI_ID_COMPOSTER = 12;
-	public static final int GUI_ID_KITCHEN_COUNTER = 13;
+	public static final int GUI_ID_SMOOTHIE_MAKER = 13;
 
 	private final int[][] places = new int[][] { { 1, 0, 0 }, { 1, 0, 1 }, { 0, 0, 1 }, { 1, 1, 0 }, { 1, 1, 1 }, { 0, 1, 1 }, { 0, 1, 0 }, { 0, 0, 0 } };
 
@@ -115,7 +115,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityGaeanKeystone.class, "gaeanKeystone");
 		registerTileEntity(TileEntityOfferingAltar.class, "offeringAltar");
 		registerTileEntity(TileEntityTarantulaEgg.class, "tarantulaEgg");
-		registerTileEntity(TileEntityKitchenCounter.class, "kitchenCounter");
+		registerTileEntity(TileEntitySmoothieMaker.class, "smoothieMaker");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
@@ -196,10 +196,10 @@ public class CommonProxy implements IGuiHandler {
 				return new ContainerComposter(player.inventory, (TileEntityComposter) tileentity);
 		}
 
-		else if (ID == GUI_ID_KITCHEN_COUNTER) {
+		else if (ID == GUI_ID_SMOOTHIE_MAKER) {
 			TileEntity tileentity = world.getTileEntity(x, y, z);
-			if (tileentity instanceof TileEntityKitchenCounter)
-				return new ContainerKitchenCounter(player.inventory, (TileEntityKitchenCounter) tileentity);
+			if (tileentity instanceof TileEntitySmoothieMaker)
+				return new ContainerSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tileentity);
 		}
 
 		return null;
@@ -270,10 +270,10 @@ public class CommonProxy implements IGuiHandler {
 				return new GuiComposter(player.inventory, (TileEntityComposter) tileentity);
 		}
 
-		else if (ID == GUI_ID_KITCHEN_COUNTER) {
+		else if (ID == GUI_ID_SMOOTHIE_MAKER) {
 			TileEntity tileentity = world.getTileEntity(x, y, z);
-			if (tileentity instanceof TileEntityKitchenCounter)
-				return new GuiKitchenCounter(player.inventory, (TileEntityKitchenCounter) tileentity);
+			if (tileentity instanceof TileEntitySmoothieMaker)
+				return new GuiSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tileentity);
 		}
 
 		return null;

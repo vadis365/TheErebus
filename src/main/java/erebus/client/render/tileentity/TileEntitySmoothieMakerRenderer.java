@@ -6,15 +6,15 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import erebus.client.model.block.ModelKitchenCounter;
+import erebus.client.model.block.ModelSmoothieMaker;
 
-public class TileEntityKitchenCounterRenderer extends TileEntitySpecialRenderer {
+public class TileEntitySmoothieMakerRenderer extends TileEntitySpecialRenderer {
 
-	private final ModelKitchenCounter model;
-	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/kitchenCounter.png");
+	private final ModelSmoothieMaker model;
+	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/smoothieMaker.png");
 
-	public TileEntityKitchenCounterRenderer() {
-		model = new ModelKitchenCounter();
+	public TileEntitySmoothieMakerRenderer() {
+		model = new ModelSmoothieMaker();
 	}
 
 	@Override

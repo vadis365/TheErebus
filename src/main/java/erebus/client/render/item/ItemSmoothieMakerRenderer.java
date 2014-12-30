@@ -7,12 +7,12 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import erebus.client.model.block.ModelKitchenCounter;
+import erebus.client.model.block.ModelSmoothieMaker;
 
-public class ItemKitchenCounterRenderer implements IItemRenderer {
+public class ItemSmoothieMakerRenderer implements IItemRenderer {
 
-	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/kitchenCounter.png");
-	private final ModelKitchenCounter model = new ModelKitchenCounter();
+	private final ResourceLocation texture = new ResourceLocation("erebus:textures/special/tiles/smoothieMaker.png");
+	private final ModelSmoothieMaker model = new ModelSmoothieMaker();
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

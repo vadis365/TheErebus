@@ -16,15 +16,15 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import erebus.ModFluids;
 import erebus.ModItems;
-import erebus.inventory.ContainerKitchenCounter;
+import erebus.inventory.ContainerSmoothieMaker;
 import erebus.item.Materials;
 import erebus.item.Smoothie.SmoothieType;
 import erebus.network.PacketPipeline;
-import erebus.network.client.PacketKitchenCounter;
-import erebus.network.client.PacketKitchenCounterTimer;
-import erebus.recipes.KitchenCounterRecipe;
+import erebus.network.client.PacketSmoothieMaker;
+import erebus.network.client.PacketSmoothieMakerTimer;
+import erebus.recipes.SmoothieMakerRecipe;
 
-public class TileEntityKitchenCounter extends TileEntityBasicInventory implements IFluidHandler {
+public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements IFluidHandler {
 
 	protected final FluidTank honeyTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);
 	protected final FluidTank milkTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
@@ -34,7 +34,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	public int time = 0;
 	private static final int MAX_TIME = 432;
 
-	public TileEntityKitchenCounter() {
+	public TileEntitySmoothieMaker() {
 		super(5, "container.kitchenCounter");
 		honeyTank.setFluid(new FluidStack(ModFluids.honey, 0));
 		milkTank.setFluid(new FluidStack(ModFluids.milk, 0));
@@ -172,7 +172,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		}
 	}
 	
-	public void sendGUIData(ContainerKitchenCounter counter, ICrafting craft) {
+	public void sendGUIData(ContainerSmoothieMaker counter, ICrafting craft) {
 		craft.sendProgressBarUpdate(counter, 1, honeyTank.getFluid() != null ? honeyTank.getFluid().amount : 0);
 		craft.sendProgressBarUpdate(counter, 2, beetleTank.getFluid() != null ? beetleTank.getFluid().amount : 0);
 		craft.sendProgressBarUpdate(counter, 3, antiVenomTank.getFluid() != null ? antiVenomTank.getFluid().amount : 0);
@@ -237,8 +237,8 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		if (worldObj != null && !worldObj.isRemote) {
 			NBTTagCompound nbt = new NBTTagCompound();
 			writeToNBT(nbt);
-			PacketPipeline.sendToAll(new PacketKitchenCounter(xCoord, yCoord, zCoord, nbt));
-			PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
+			PacketPipeline.sendToAll(new PacketSmoothieMaker(xCoord, yCoord, zCoord, nbt));
+			PacketPipeline.sendToAll(new PacketSmoothieMakerTimer(xCoord, yCoord, zCoord, time));
 		}
 	}
 
@@ -250,11 +250,11 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 		ItemStack[] inputs = new ItemStack[4];
 		for (int i = 0; i < 4; i++)
 			inputs[i] = inventory[i];
-		ItemStack output = KitchenCounterRecipe.getOutput(inputs);
+		ItemStack output = SmoothieMakerRecipe.getOutput(inputs);
 		if (output != null && canExtractFluid(output))
 			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == ModItems.materials && getStackInSlot(4).getItemDamage() == Materials.DATA.smoothieGlass.ordinal() && getStackInSlot(4).stackSize == 1) {
 				time++;
-				PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
+				PacketPipeline.sendToAll(new PacketSmoothieMakerTimer(xCoord, yCoord, zCoord, time));
 
 				if (time == 90 || time == 270 || time == 432)
 					worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 4);

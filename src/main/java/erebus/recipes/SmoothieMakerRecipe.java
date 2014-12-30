@@ -8,29 +8,29 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import erebus.core.helper.Utils;
 
-public class KitchenCounterRecipe {
-	private static final List<KitchenCounterRecipe> recipes = new ArrayList<KitchenCounterRecipe>();
+public class SmoothieMakerRecipe {
+	private static final List<SmoothieMakerRecipe> recipes = new ArrayList<SmoothieMakerRecipe>();
 
 	public static void addRecipe(ItemStack output, Object... input) {
-		recipes.add(new KitchenCounterRecipe(output, input));
+		recipes.add(new SmoothieMakerRecipe(output, input));
 	}
 
 	public static ItemStack getOutput(ItemStack... input) {
-		for (KitchenCounterRecipe recipe : recipes)
+		for (SmoothieMakerRecipe recipe : recipes)
 			if (recipe.matches(input))
 				return recipe.getOutput();
 
 		return null;
 	}
 
-	public static List<KitchenCounterRecipe> getRecipeList() {
+	public static List<SmoothieMakerRecipe> getRecipeList() {
 		return Collections.unmodifiableList(recipes);
 	}
 
 	private final ItemStack output;
 	private final Object[] input;
 
-	private KitchenCounterRecipe(ItemStack output, Object... input) {
+	private SmoothieMakerRecipe(ItemStack output, Object... input) {
 		this.output = ItemStack.copyItemStack(output);
 		this.input = new Object[input.length];
 

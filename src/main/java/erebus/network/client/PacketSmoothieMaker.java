@@ -7,17 +7,17 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
-import erebus.tileentity.TileEntityKitchenCounter;
+import erebus.tileentity.TileEntitySmoothieMaker;
 
-public class PacketKitchenCounter extends AbstractClientPacket {
+public class PacketSmoothieMaker extends AbstractClientPacket {
 
 	private int x, y, z;
 	private NBTTagCompound nbt;
 
-	public PacketKitchenCounter() {
+	public PacketSmoothieMaker() {
 	}
 
-	public PacketKitchenCounter(int x, int y, int z, NBTTagCompound nbt) {
+	public PacketSmoothieMaker(int x, int y, int z, NBTTagCompound nbt) {
 		this();
 		this.x = x;
 		this.y = y;
@@ -27,7 +27,7 @@ public class PacketKitchenCounter extends AbstractClientPacket {
 
 	@Override
 	protected void handle(World world, EntityClientPlayerMP player) {
-		TileEntityKitchenCounter tile = Utils.getTileEntity(world, x, y, z, TileEntityKitchenCounter.class);
+		TileEntitySmoothieMaker tile = Utils.getTileEntity(world, x, y, z, TileEntitySmoothieMaker.class);
 
 		if (tile != null)
 			tile.readFromNBT(nbt);

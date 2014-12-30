@@ -23,15 +23,15 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityKitchenCounter;
+import erebus.tileentity.TileEntitySmoothieMaker;
 
-public class BlockKitchenCounter extends BlockContainer {
+public class BlockSmoothieMaker extends BlockContainer {
 
-	public BlockKitchenCounter() {
+	public BlockSmoothieMaker() {
 		super(Material.rock);
 		setHardness(2.0F);
 		setResistance(5.0F);
-		setBlockName("erebus.kitchenCounter");
+		setBlockName("erebus.smoothieMaker");
 		setCreativeTab(ModTabs.blocks);
 	}
 	
@@ -51,7 +51,7 @@ public class BlockKitchenCounter extends BlockContainer {
 		if (world.isRemote)
 			return true;
 
-		TileEntityKitchenCounter tile = Utils.getTileEntity(world, x, y, z, TileEntityKitchenCounter.class);
+		TileEntitySmoothieMaker tile = Utils.getTileEntity(world, x, y, z, TileEntitySmoothieMaker.class);
 
 		if (player.isSneaking())
 			return false;
@@ -69,7 +69,7 @@ public class BlockKitchenCounter extends BlockContainer {
 			player.setCurrentItemOrArmor(0, new ItemStack (ModItems.smoothieBook));
 
 		if (tile != null)
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_KITCHEN_COUNTER, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GUI_ID_SMOOTHIE_MAKER, world, x, y, z);
 
 		return true;
 	}
@@ -129,7 +129,7 @@ public class BlockKitchenCounter extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int id) {
-		return new TileEntityKitchenCounter();
+		return new TileEntitySmoothieMaker();
 	}
 
 }
