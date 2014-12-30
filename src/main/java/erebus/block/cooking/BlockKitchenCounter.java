@@ -1,11 +1,7 @@
 package erebus.block.cooking;
 
-import java.util.List;
 import java.util.Random;
 
-import mcp.mobius.waila.api.IWailaBlock;
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -29,9 +25,7 @@ import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityKitchenCounter;
 
-public class BlockKitchenCounter extends BlockContainer implements IWailaBlock {
-
-	public static IIcon honeyIcon, milkIcon, beetleJuiceIcon, antiVenomIcon;
+public class BlockKitchenCounter extends BlockContainer {
 
 	public BlockKitchenCounter() {
 		super(Material.rock);
@@ -40,13 +34,16 @@ public class BlockKitchenCounter extends BlockContainer implements IWailaBlock {
 		setBlockName("erebus.kitchenCounter");
 		setCreativeTab(ModTabs.blocks);
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg) {
+	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister icon) {
-		honeyIcon = icon.registerIcon("erebus:honeyFlow");
-		milkIcon = icon.registerIcon("erebus:milkFlow");
-		beetleJuiceIcon = icon.registerIcon("erebus:beetleJuiceFlow");
-		antiVenomIcon = icon.registerIcon("erebus:antiVenomFlow");
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		return ModBlocks.umberstone.getIcon(side, 0);
 	}
 
 	@Override
@@ -133,44 +130,6 @@ public class BlockKitchenCounter extends BlockContainer implements IWailaBlock {
 	@Override
 	public TileEntity createNewTileEntity(World world, int id) {
 		return new TileEntityKitchenCounter();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return ModBlocks.umberstone.getIcon(side, 0);
-	}
-
-	@Override
-	public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		currenttip.add("Kitchen Counter");
-		return currenttip;
-	}
-
-	@Override
-	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		boolean isCounter = accessor.getTileEntity() instanceof TileEntityKitchenCounter;
-
-		if (isCounter) {
-			TileEntityKitchenCounter tile = (TileEntityKitchenCounter) accessor.getTileEntity();
-
-			currenttip.add("Honey : " + tile.getHoneyAmount() + "/" + tile.getTanksFullValue());
-			currenttip.add("Milk : " + tile.getMilkAmount() + "/" + tile.getTanksFullValue());
-			currenttip.add("Beetle Juice : " + tile.getBeetleJuiceAmount() + "/" + tile.getTanksFullValue());
-			currenttip.add("Anti-Venom : " + tile.getAntiVenomAmount() + "/" + tile.getTanksFullValue());
-		}
-
-		return currenttip;
-	}
-
-	@Override
-	public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		return currenttip;
-	}
-
-	@Override
-	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		return null;
 	}
 
 }

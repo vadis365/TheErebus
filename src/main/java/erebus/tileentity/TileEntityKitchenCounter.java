@@ -34,8 +34,6 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	public int time = 0;
 	private static final int MAX_TIME = 432;
 
-	public TileEntityKitchenCounter instance = this;
-
 	public TileEntityKitchenCounter() {
 		super(5, "container.kitchenCounter");
 		honeyTank.setFluid(new FluidStack(ModFluids.honey, 0));
@@ -369,16 +367,6 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 			break;
 		}
 		return false;
-	}
-	
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return slot != 3;
-	}
-
-	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return slot == 3;
 	}
 
 	@Override
