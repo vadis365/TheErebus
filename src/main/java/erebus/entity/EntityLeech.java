@@ -32,10 +32,7 @@ public class EntityLeech extends EntityMob
 		firstTickCheck = false;
 		drainage = 0;
 		setBloodConsumed(0);
-		tasks.addTask(0, new EntityAISwimming(this));
-        tasks.addTask(1, new EntityAIWander(this, 0.6D));
-        targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-    }
+	    }
     
 	@Override
 	protected void entityInit() {
@@ -54,7 +51,7 @@ public class EntityLeech extends EntityMob
 	
 	@Override
 	public boolean isAIEnabled() {
-		return true;
+		return false;
 	}
 	
 	@Override
@@ -75,7 +72,7 @@ public class EntityLeech extends EntityMob
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		if (!worldObj.isRemote && worldObj.difficultySetting.ordinal() > 1)
+		if (!worldObj.isRemote && worldObj.difficultySetting.ordinal() > 0)
 			if (player.riddenByEntity == null && getBloodConsumed() <= 0)
 				mountEntity(player);
 	}
@@ -128,7 +125,7 @@ public class EntityLeech extends EntityMob
 	
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
-		if (source.equals(DamageSource.inWall))
+		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown))
 			return false;
 		return super.attackEntityFrom(source, damage);
 	}

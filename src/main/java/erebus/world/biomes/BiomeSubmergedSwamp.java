@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
+import erebus.entity.EntityBeetle;
+import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBloodSnail;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
@@ -34,10 +36,12 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 20).setGroupSize(3, 4));
 		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 20).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityPondSkater.class, 100).setGroupSize(3, 5));
-		spawningGradual.add(new SpawnEntry(EntityLeech.class, 15).setGroupSize(3, 5));
-		spawningGradual.add(new SpawnEntry(EntitySnapper.class, 15).setGroupSize(2, 3));
+		spawningGradual.add(new SpawnEntry(EntityLeech.class, 20).setGroupSize(3, 5));
+		spawningGradual.add(new SpawnEntry(EntitySnapper.class, 20).setGroupSize(2, 3));
 		spawningGradual.add(new SpawnEntry(EntityWisp.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBloodSnail.class, 10).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
+		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
 	}
 
 	/*
