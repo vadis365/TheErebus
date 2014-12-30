@@ -46,7 +46,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 	
 	@Override
 	public int getInventoryStackLimit() {
-		return 1;
+		return 64;
 	}
 	
 	public int getBlendProgress() {
@@ -254,7 +254,7 @@ public class TileEntityKitchenCounter extends TileEntityBasicInventory implement
 			inputs[i] = inventory[i];
 		ItemStack output = KitchenCounterRecipe.getOutput(inputs);
 		if (output != null && canExtractFluid(output))
-			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == ModItems.materials && getStackInSlot(4).getItemDamage() == Materials.DATA.smoothieGlass.ordinal()) {
+			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == ModItems.materials && getStackInSlot(4).getItemDamage() == Materials.DATA.smoothieGlass.ordinal() && getStackInSlot(4).stackSize == 1) {
 				time++;
 				PacketPipeline.sendToAll(new PacketKitchenCounterTimer(xCoord, yCoord, zCoord, time));
 

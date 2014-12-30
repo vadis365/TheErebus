@@ -6,6 +6,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import erebus.ModItems;
+import erebus.item.Materials;
 import erebus.tileentity.TileEntityKitchenCounter;
 
 public class ContainerKitchenCounter extends Container {
@@ -23,42 +25,37 @@ public class ContainerKitchenCounter extends Container {
 
 		addSlotToContainer(new Slot(tileentity, 4, 80, 63));
 
-		bindPlayerInventory(inventory);
-	}
-
-	protected void bindPlayerInventory(InventoryPlayer invPlayer) {
-		for (int row = 0; row < 3; row++)
-			for (int column = 0; column < 9; column++)
-				addSlotToContainer(new Slot(invPlayer, column + row * 9 + 9, 8 + column * 18, 84 + row * 18));
-
-		for (int slotNumber = 0; slotNumber < 9; slotNumber++)
-			addSlotToContainer(new Slot(invPlayer, slotNumber, 8 + slotNumber * 18, 142));
+		for (int i = 0; i < 3; ++i)
+			for (int j = 0; j < 9; ++j)
+				addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+		for (int i = 0; i < 9; ++i)
+			addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 142));
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 		ItemStack stack = null;
-		Slot slotObj = (Slot) inventorySlots.get(slot);
-
-		if (slotObj != null && slotObj.getHasStack()) {
-			ItemStack stackInSlot = slotObj.getStack();
-			stack = stackInSlot.copy();
-
-			if (slot < 9) {
-				if (!mergeItemStack(stackInSlot, 0, 35, true))
-					return null;
-			} else if (!mergeItemStack(stackInSlot, 0, 9, false))
+		Slot slot = (Slot) inventorySlots.get(slotIndex);
+		if (slot != null && slot.getHasStack()) {
+			ItemStack stack1 = slot.getStack();
+			stack = stack1.copy();
+			if (slotIndex > 4) {
+				if (stack1.getItem() == ModItems.materials && stack1.getItemDamage() != Materials.DATA.smoothieGlass.ordinal() || stack1.getItem() != ModItems.materials) {
+					if (!mergeItemStack(stack1, 0, 4, false))
+						return null;
+				} else if (stack1.getItem() == ModItems.materials && stack1.getItemDamage() == Materials.DATA.smoothieGlass.ordinal())
+					if (!mergeItemStack(stack1, 4, 5, false))
+						return null;
+			} else if (!mergeItemStack(stack1, 5, inventorySlots.size(), false))
 				return null;
-
-			if (stackInSlot.stackSize == 0)
-				slotObj.putStack(null);
+			if (stack1.stackSize == 0)
+				slot.putStack(null);
 			else
-				slotObj.onSlotChanged();
-
-			if (stackInSlot.stackSize == stack.stackSize)
+				slot.onSlotChanged();
+			if (stack1.stackSize != stack.stackSize)
+				slot.onPickupFromSlot(player, stack1);
+			else
 				return null;
-
-			slotObj.onPickupFromSlot(player, stackInSlot);
 		}
 		return stack;
 	}
