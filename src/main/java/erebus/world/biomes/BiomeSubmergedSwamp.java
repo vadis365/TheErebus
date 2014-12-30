@@ -28,8 +28,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		setBiomeName("Submerged Swamp");
 		setColors(0x314D31);
 		setTemperatureRainfall(0.75F, 0.85F);
-		//TODO Fix the swamp biome weight
-		setWeight(20000);
+		setWeight(20);
 		waterColorMultiplier = 6051893;
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(2, 4));
@@ -43,22 +42,6 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
 	}
-
-	/*
-	 * @Override public void generateBiomeFeatures(World world, Random rand, int
-	 * x, int z){}
-	 *
-	 * @Override public void generateFeature(World world, Random rand, int x,
-	 * int z, FeatureType featureType){ if (featureType !=
-	 * FeatureType.REDGEM)generateFeature(world,rand,x,z,featureType); }
-	 *
-	 * @Override public void generateOre(World world, Random rand, int x, int z,
-	 * OreType oreType, boolean extraOres){ if (oreType == OreType.FOSSIL){ if
-	 * (rand
-	 * .nextInt(7)==0)generateOreCluster(1+rand.nextInt(2)*rand.nextInt(2),
-	 * ModBlocks .oreFossil,3,9,12,world,rand,x,z,36,112,3); } else
-	 * super.generateOre(world,rand,x,z,oreType,extraOres); }
-	 */
 
 	@Override
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
