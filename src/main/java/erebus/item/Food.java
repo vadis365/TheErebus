@@ -102,6 +102,8 @@ public class Food extends ItemFood {
 				return 8;
 			case swampBerries:
 				return 1;
+			case cabbage:
+				return 1;
 			default:
 				return 0;
 		}
@@ -138,6 +140,8 @@ public class Food extends ItemFood {
 			case titanChopCooked:
 				return 0.8F;
 			case swampBerries:
+				return 0.1F;
+			case cabbage:
 				return 0.1F;
 			default:
 				return 0.0F;
@@ -186,6 +190,8 @@ public class Food extends ItemFood {
 			case melonade:
 			case melonadeSparkly:
 				item = Items.glass_bottle;
+			case cabbage:
+				world.playSoundAtEntity(player, "erebus:cabbagefart", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 			default:
 				return is;
 		}

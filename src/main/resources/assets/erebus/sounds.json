@@ -47,5 +47,6 @@
 "wasphurt": {"category": "hostile", "sounds": ["wasphurt"]},
 "waspsound": {"category": "hostile","sounds": ["waspsound"]},
 "webslingsplat": {"category": "hostile", "sounds": ["webslingsplat"]},
-"webslingthrow": {"category": "hostile","sounds": ["webslingthrow"]}
+"webslingthrow": {"category": "hostile","sounds": ["webslingthrow"]},
+"cabbagefart": {"category": "player","sounds": ["cabbagefart"]}
 }
