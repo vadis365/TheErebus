@@ -41,7 +41,7 @@ public class BlockCabbage extends BlockCrops {
         ArrayList<ItemStack> ret = super.getDrops(world, x, y, z, metadata, fortune);
 
         if (metadata >= 7) {
-            for (int i = 0; i < 3 + fortune; ++i) {
+            for (int i = 0; i < 1 + fortune; ++i) {
                 if (world.rand.nextInt(15) <= metadata) {
                     ret.add(new ItemStack(this.func_149866_i(), 1, 0));
                 }

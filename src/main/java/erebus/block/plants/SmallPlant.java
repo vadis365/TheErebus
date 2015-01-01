@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.item.Materials;
 
@@ -61,6 +62,10 @@ public class SmallPlant extends BlockTallGrass {
 		} else if ("nettleFlowered".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 			ret.add(Materials.createStack(Materials.DATA.nettleflowers));
+			return ret;
+		} else if ("swampPlant".equals(name) && world.rand.nextInt(8) == 0) {
+			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+			ret.add(new ItemStack(ModItems.cabbageSeeds, 1, 0));
 			return ret;
 		} else if ("desertShrub".equals(name) || "mireCoral".equals(name) || "fireBloom".equals(name) || "swampPlant".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
