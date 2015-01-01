@@ -97,6 +97,7 @@ import erebus.block.ores.UmberOrePetrifiedWood;
 import erebus.block.ores.UmberOreTemple;
 import erebus.block.plants.BlockAlgae;
 import erebus.block.plants.BlockBerryBush;
+import erebus.block.plants.BlockCabbage;
 import erebus.block.plants.BlockErebusFlower;
 import erebus.block.plants.BlockHangerPlants;
 import erebus.block.plants.BlockMireCoral;
@@ -212,7 +213,8 @@ public class ModBlocks {
 	public static final Block swampBerryBush = new BlockBerryBush("swamp");
 	public static final Block mireCoral = new BlockMireCoral().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.mireCoral").setBlockTextureName("erebus:mireCoral").setLightLevel(0.8F);
 	public static final Block algae = new BlockAlgae().setBlockName("erebus.algae").setBlockTextureName("erebus:algae");
-
+	public static final Block blockCabbage = new BlockCabbage();
+	
 	// DECORATIONS AND UTILITIES
 	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.blockSilk").setBlockTextureName("erebus:blockSilk");
 	public static final Block mirBrick = new BlockSimple(Material.rock).setHardness(1.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.mirbrick").setBlockTextureName("erebus:mirbrick");

@@ -38,7 +38,8 @@ public class Food extends ItemFood {
 		middleFruit,
 		titanChop,
 		titanChopCooked,
-		swampBerries;
+		swampBerries,
+		cabbage;
 	}
 
 	static {

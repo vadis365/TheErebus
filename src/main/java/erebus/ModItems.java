@@ -91,7 +91,8 @@ public class ModItems {
 	public static final Item beeTamingAmulet = new BeeTamingAmulet().setUnlocalizedName("erebus.beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
 	public static final Item homingBeecon = new HomingBeecon().setUnlocalizedName("erebus.homingBeecon").setTextureName("paper");
 	public static final Item homingBeeconAdvanced = new HomingBeeconAdvanced().setUnlocalizedName("erebus.homingBeeconAdvanced").setTextureName("paper");
-
+	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.6F, ModBlocks.blockCabbage, Blocks.farmland).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
+	
 	public static final Item flowerSeeds = new FlowerSeeds().setUnlocalizedName("erebus.flowerSeeds");
 	public static final Item whetstone = new Whetstone().setUnlocalizedName("erebus.whetstone").setTextureName("erebus:whetstone");
 	public static final Item encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("erebus.encrustedDiamond").setTextureName("erebus:encrustedDiamond");
@@ -193,7 +194,7 @@ public class ModItems {
 	}
 
 	private static void initCreativeTabs() {
-		ModTabs.items.setTab(materials, whetstone, food, smoothie, turnip, encrustedDiamond);
+		ModTabs.items.setTab(materials, whetstone, food, smoothie, turnip, cabbageSeeds, encrustedDiamond);
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots, spiderTShirt);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper);

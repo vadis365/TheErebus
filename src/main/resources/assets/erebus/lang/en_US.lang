@@ -191,6 +191,7 @@ tile.erebus.wallPlants_0.name=Moss
 tile.erebus.wallPlants_1.name=Mould
 tile.erebus.hanger.name=Hanger
 tile.erebus.turnipsCrop.name=Turnips
+tile.erebus.cabbageCrop.name=Cabbage
 
 tile.erebus.siloTank.name=Silo Tank
 tile.erebus.siloRoof.name=Silo Roof
@@ -231,6 +232,7 @@ item.erebus.portalActivator.name=Staff of Gaea
 item.erebus.clubBone.name=Caveman's Club
 item.erebus.maxSpeedBow.name=MaxSpeed Bow
 item.erebus.turnips.name=Turnips
+item.erebus.cabbageSeeds.name=Cabbage Seeds
 
 item.erebus.helmetJade.name=Jade Helmet
 item.erebus.chestplateJade.name=Jade Chestplate
@@ -330,6 +332,7 @@ item.erebus.food.11.name=Middle Fruit
 item.erebus.food.12.name=Raw Titan Chop
 item.erebus.food.13.name=Cooked Titan Chop
 item.erebus.food.14.name=Swampberries
+item.erebus.food.15.name=Cabbage
 
 item.erebus.smoothie.0.name=Green Tea Grasshopper
 item.erebus.smoothie.1.name=Money Honey
