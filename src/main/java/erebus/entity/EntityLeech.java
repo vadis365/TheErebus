@@ -72,7 +72,7 @@ public class EntityLeech extends EntityMob
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		if (!worldObj.isRemote && worldObj.difficultySetting.ordinal() > 0)
+		if (!worldObj.isRemote && !player.capabilities.isCreativeMode)
 			if (player.riddenByEntity == null && getBloodConsumed() <= 0)
 				mountEntity(player);
 	}
