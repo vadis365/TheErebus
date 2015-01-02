@@ -46,6 +46,8 @@ import erebus.item.Planticide;
 import erebus.item.PortalActivator;
 import erebus.item.RecipeBookSmoothies;
 import erebus.item.ReinExoskeletonArmor;
+import erebus.item.RhinoArmor;
+import erebus.item.RhinoHelm;
 import erebus.item.RolledNewspaper;
 import erebus.item.ScorpionPincer;
 import erebus.item.Smoothie;
@@ -169,6 +171,10 @@ public class ModItems {
 	public static final Item mushroomHelm = new MushroomHelm(0).setUnlocalizedName("erebus.mushroomHelm").setTextureName("erebus:mushroomHelm");
 	public static final Item spiderTShirt = new SpiderTShirt(1).setUnlocalizedName("erebus.spiderTShirt").setTextureName("erebus:spiderTShirtItem");
 	public static final Item waterStriders = new WaterStriders(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("erebus.waterStriders").setTextureName("erebus:waterStriders");
+	public static final Item rhinoExoskeletonHelmet = new RhinoHelm(0).setUnlocalizedName("rhinoHelmet").setTextureName("erebus:rhinoHelm");
+	public static final Item rhinoExoskeletonBody = new RhinoArmor(1).setUnlocalizedName("rhinoChestplate").setTextureName("erebus:rhinoChestplate");
+	public static final Item rhinoExoskeletonLegs = new RhinoArmor(2).setUnlocalizedName("rhinoLeggings").setTextureName("erebus:rhinoLeggings");
+	public static final Item rhinoExoskeletonBoots = new RhinoArmor(3).setUnlocalizedName("rhinoBoots").setTextureName("erebus:rhinoBoots");
 	
 	// CREATIVE
 	public static final Item spawnEggs = new SpawnEggs().setUnlocalizedName("erebus.monsterPlacer").setTextureName("spawn_egg");
@@ -186,7 +192,7 @@ public class ModItems {
 
 	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("erebus.bottleAntiVenom");
 	public static final Item smoothieBook = new RecipeBookSmoothies().setMaxStackSize(1).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.smoothieBook").setTextureName("book_normal");
-
+	
 	public static void init() {
 		initCreativeTabs();
 		registerItems();
@@ -199,6 +205,7 @@ public class ModItems {
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots, spiderTShirt);
 		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper);
 		ModTabs.gears.setTab(mushroomHelm, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
+		ModTabs.gears.setTab(rhinoExoskeletonHelmet, rhinoExoskeletonBody, rhinoExoskeletonLegs, rhinoExoskeletonBoots);
 		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds);
 	}
 

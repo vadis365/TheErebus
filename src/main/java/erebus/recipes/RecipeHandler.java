@@ -126,7 +126,11 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGlider), "   ", "GXG", "   ", 'G', Materials.createStack(Materials.DATA.gliderWing), 'X', new ItemStack(ModItems.reinExoskeletonBody, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGliderPowered), "W W", "ECE", " V ", 'W', Materials.createStack(Materials.DATA.enhancedGliderWing), 'E', Materials.createStack(Materials.DATA.elasticFibre), 'C', new ItemStack(ModItems.armorGlider, 1), 'V', new ItemStack(ModBlocks.velocityBlock, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.waterStriders), "WWW", "WXW", "WWW", 'W', Materials.createStack(Materials.DATA.waterRepellent), 'X', new ItemStack(ModItems.reinExoskeletonBoots, 1));
-		
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonHelmet),  "h h", "sss", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino), 'h', Materials.createStack(Materials.DATA.rhinoBeetleHorn));
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBody), "s s", "sss", "sss", 's', Materials.createStack(Materials.DATA.plateExoRhino));
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonLegs), "sss", "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino));
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBoots), "   ", "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino));
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.scorpionPincer), "I I", "XIX", "XPX", 'I', "ingotIron", 'X', Materials.createStack(Materials.DATA.reinforcedPlateExo), 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rolledNewspaper), "PWP", "PIP", "PWP", 'I', new ItemStack(Items.dye, 1, 0), 'P', Materials.createStack(Materials.DATA.papyrus), 'W', Materials.createStack(Materials.DATA.whetstonePowder));
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.gliderWing), "SSS", "FFF", "FFF", 'S', Items.stick, 'F', Materials.createStack(Materials.DATA.flyWing));
