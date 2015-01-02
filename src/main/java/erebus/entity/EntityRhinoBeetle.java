@@ -17,8 +17,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -101,16 +99,6 @@ public class EntityRhinoBeetle extends EntityTameable {
 	}
 
 	@Override
-	protected Item getDropItem() {
-		return Items.iron_ingot;
-	}
-
-	@Override
-	protected void dropRareDrop(int par1) {
-		dropItem(Items.ghast_tear, 1);
-	}
-
-	@Override
 	public boolean isOnLadder() {
 		return riddenByEntity != null && isCollidedHorizontally;
 	}
@@ -145,9 +133,11 @@ public class EntityRhinoBeetle extends EntityTameable {
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() == 2)
 			entityDropItem(Materials.createStack(Materials.DATA.rhinoRidingKit), 0.0F);
-		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
-		for (int a = 0; a < var3; ++a)
-			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.plateExo.ordinal()), 0.0F);
+		int dropRate = 1 + rand.nextInt(2 + looting);
+		for (int a = 0; a < dropRate; ++a)
+			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.plateExoRhino.ordinal()), 0.0F);
+		if (rand.nextInt(20) == 0)
+			entityDropItem(Materials.createStack(Materials.DATA.rhinoBeetleHorn), 0.0F);
 	}
 
 	@Override
