@@ -13,6 +13,7 @@ public class BlockGhostSand extends Block {
 
 	public BlockGhostSand() {
 		super(Material.portal);
+		setLightOpacity(255);
 	}
 
 	@Override
