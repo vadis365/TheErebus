@@ -66,27 +66,22 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			for (int xx = x - baseLengthX / 2; xx < x + baseLengthX / 2; xx++)
 				for (int zz = z - baseLengthZ / 2; zz < z + baseLengthZ / 2; zz++) {
 					if (yy > y) {
-						if (xx == x - baseLengthX / 2 && zz % 5 == 3)
-							world.setBlock(xx, yy, zz, block, metaData, 3);
-						else if (xx == x + baseLengthX / 2 - 1 && zz % 5 == 3)
-							world.setBlock(xx, yy, zz, block, metaData, 3);
-						else if (zz == z - baseLengthZ / 2 && xx % 5 == 0)
-							world.setBlock(xx, yy, zz, block, metaData, 3);
-						else if (zz == z + baseLengthZ / 2 - 1 && xx % 5 == 0)
-							world.setBlock(xx, yy, zz, block, metaData, 3);
-						else
-							world.setBlockToAir(xx, yy, zz);
+						world.setBlockToAir(xx, yy, zz);
+						if (xx == x - baseLengthX / 2 || xx == x + baseLengthX / 2 - 1)
+							if (zz > z - baseLengthZ / 2 && zz < z + baseLengthZ / 2)
+								for(int i = 3; i < 29; i += 5)
+									world.setBlock(xx, yy, z - baseLengthZ / 2 + i, block, metaData, 3);
+						
+						if (zz == z - baseLengthZ / 2 || zz == z + baseLengthZ / 2 - 1)
+							if (xx > x - baseLengthX / 2 && xx < x + baseLengthX / 2)
+								for(int i = 3; i < 29; i += 5)
+									world.setBlock(x - baseLengthZ / 2 + i, yy, zz, block, metaData, 3);
 					}
 					world.setBlock(xx, y + 4, zz, ModBlocks.templeBrick, 0, 3);
 
-					if (yy > y && yy < heightY + y)
-						if (xx > x - baseLengthX / 2
-								&& xx < x + baseLengthX / 2 - 1)
-							if (zz > z - baseLengthZ / 2
-									&& zz < z + baseLengthZ / 2 - 1) {
-								world.setBlockToAir(xx, yy, zz);
-								world.setBlockToAir(xx, y + 4, zz);
-							}
+					if (xx > x - baseLengthX / 2 && xx < x + baseLengthX / 2 - 1)
+						if (zz > z - baseLengthZ / 2 && zz < z + baseLengthZ / 2 - 1)
+							world.setBlockToAir(xx, y + 4, zz);
 				}
 		}
 	}
