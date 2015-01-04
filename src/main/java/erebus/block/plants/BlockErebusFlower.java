@@ -77,7 +77,7 @@ public class BlockErebusFlower extends Block implements ISubBlocksBlock {
 		if (meta == FLOWER_TYPE.EXPLODING_STIGMA.ordinal())
 			ret.add(new ItemStack(Items.gunpowder));
 		else
-			ret.add(new ItemStack(this, 1 + new Random().nextInt(3), meta));
+			ret.add(new ItemStack(this, 1, meta));
 
 		return ret;
 	}
