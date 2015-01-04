@@ -17,7 +17,6 @@ import erebus.block.BlockButtonUmberstone;
 import erebus.block.BlockComposter;
 import erebus.block.BlockDoorErebus;
 import erebus.block.BlockErebusHoney;
-import erebus.block.BlockErebusMushroomCap;
 import erebus.block.BlockErebusStigma;
 import erebus.block.BlockGhostSand;
 import erebus.block.BlockGlowGem;
@@ -49,6 +48,7 @@ import erebus.block.BlockWallErebus;
 import erebus.block.BlockWaspNest;
 import erebus.block.BlockWaspSpawner;
 import erebus.block.BlockWitherWeb;
+import erebus.block.ErebusHugeMushroom;
 import erebus.block.ErebusPortal;
 import erebus.block.GaeanKeystone;
 import erebus.block.InsectRepellent;
@@ -176,7 +176,7 @@ public class ModBlocks {
 	public static final Block nettleFlowered = new SmallPlant("nettleFlowered", false);
 	public static final Block nettle = new SmallPlant("nettle", false);
 	public static final Block desertShrub = new SmallPlant("desertShrub", false);
-	public static final Block bulbCappedShroom = new SmallMushroom("bulbCappedShroom");
+	public static final Block bulbCapped = new SmallMushroom("bulbCappedShroom");
 	public static final Block kaizerfinger = new SmallMushroom("kaizerfinger");
 	public static final Block bundleshroom = new SmallMushroom("bundleshroom");
 	public static final Block greenMushroom = new SmallMushroom("greenMushroom");
@@ -187,11 +187,11 @@ public class ModBlocks {
 	public static final Block blockTurnip = new BlockTurnip();
 	public static final Block hanger = new BlockHangerPlants();
 	public static final Block wallPlants = new BlockWallPlants();
-	public static final Block mushroomCap0 = new BlockErebusMushroomCap(0);
-	public static final Block mushroomCap1 = new BlockErebusMushroomCap(1);
-	public static final Block mushroomCap2 = new BlockErebusMushroomCap(2);
-	public static final Block mushroomCap3 = new BlockErebusMushroomCap(3);
-	public static final Block mushroomCap4 = new BlockErebusMushroomCap(4);
+	public static final Block bigBulbCappedMushroom = new ErebusHugeMushroom(0, "bulbcapped", bulbCapped);
+	public static final Block bigGreenMushroom = new ErebusHugeMushroom(1, "green", greenMushroom);
+	public static final Block bigBundleMushroom = new ErebusHugeMushroom(2, "bundleshroom", bundleshroom);
+	public static final Block bigKaiserfingerMushroom = new ErebusHugeMushroom(3, "kaizerfinger", kaizerfinger);
+	public static final Block bigDutchCapMushroom = new ErebusHugeMushroom(4, "dutchcap", dutchCap);
 	public static final Block glowshroom = new BlockGlowshroom();
 	public static final Block glowshroomStalkMain = new BlockGlowshroomStalkMain();
 	public static final Block glowshroomStalkDown1 = new BlockGlowshroomStalkDown1();
@@ -214,7 +214,7 @@ public class ModBlocks {
 	public static final Block mireCoral = new BlockMireCoral().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.mireCoral").setBlockTextureName("erebus:mireCoral").setLightLevel(0.8F);
 	public static final Block algae = new BlockAlgae().setBlockName("erebus.algae").setBlockTextureName("erebus:algae");
 	public static final Block blockCabbage = new BlockCabbage();
-	
+
 	// DECORATIONS AND UTILITIES
 	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.blockSilk").setBlockTextureName("erebus:blockSilk");
 	public static final Block mirBrick = new BlockSimple(Material.rock).setHardness(1.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.mirbrick").setBlockTextureName("erebus:mirbrick");

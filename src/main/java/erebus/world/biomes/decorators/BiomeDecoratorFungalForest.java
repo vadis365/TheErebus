@@ -24,7 +24,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(1);
 	private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 
-	public static final Block[] mushrooms = { ModBlocks.dutchCap, ModBlocks.kaizerfinger, ModBlocks.bundleshroom, ModBlocks.greenMushroom, ModBlocks.bulbCappedShroom };
+	public static final Block[] mushrooms = { ModBlocks.dutchCap, ModBlocks.kaizerfinger, ModBlocks.bundleshroom, ModBlocks.greenMushroom, ModBlocks.bulbCapped };
 
 	@Override
 	public void decorate() {

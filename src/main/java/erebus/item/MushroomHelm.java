@@ -24,7 +24,7 @@ public class MushroomHelm extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap0) || material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap1) || material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap2) || material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap3) || material.getItem() == Item.getItemFromBlock(ModBlocks.mushroomCap4) || material.getItem() == Item.getItemFromBlock(Blocks.red_mushroom_block) || material.getItem() == Item.getItemFromBlock(Blocks.brown_mushroom_block);
+		return material.getItem() == Item.getItemFromBlock(ModBlocks.bigBulbCappedMushroom) || material.getItem() == Item.getItemFromBlock(ModBlocks.bigGreenMushroom) || material.getItem() == Item.getItemFromBlock(ModBlocks.bigBundleMushroom) || material.getItem() == Item.getItemFromBlock(ModBlocks.bigKaiserfingerMushroom) || material.getItem() == Item.getItemFromBlock(ModBlocks.bigDutchCapMushroom) || material.getItem() == Item.getItemFromBlock(Blocks.red_mushroom_block) || material.getItem() == Item.getItemFromBlock(Blocks.brown_mushroom_block);
 	}
 
 	@Override

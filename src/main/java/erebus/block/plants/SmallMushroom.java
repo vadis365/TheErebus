@@ -123,7 +123,7 @@ public class SmallMushroom extends BlockMushroom {
 	}
 
 	private int getShroomData(Block block) {
-		if (block == ModBlocks.bulbCappedShroom)
+		if (block == ModBlocks.bulbCapped)
 			return 0;
 		else if (block == ModBlocks.greenMushroom)
 			return 1;

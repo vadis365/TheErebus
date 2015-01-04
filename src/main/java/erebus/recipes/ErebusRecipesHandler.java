@@ -37,7 +37,7 @@ public class ErebusRecipesHandler {
 		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.hotHotBaby.ordinal()), Materials.createStack(Materials.DATA.waspSting), Materials.createStack(Materials.DATA.snapperRoot), new ItemStack(ModBlocks.fireBloom), new ItemStack(ModBlocks.fireBloom));
 		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.dontMettleWithTheNettle.ordinal()), Materials.createStack(Materials.DATA.nettleflowers), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.jadeBerries), Materials.createStack(Materials.DATA.plateExo));
 		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.liquidGold.ordinal()), new ItemStack(ModItems.lifeBlood), new ItemStack(ModItems.lifeBlood), Materials.createStack(Materials.DATA.bambooShoot), new ItemStack(Items.speckled_melon));
-		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.bryufsBrew.ordinal()), Materials.createStack(Materials.DATA.compoundEyes), new ItemStack(ModBlocks.bulbCappedShroom), new ItemStack(ModItems.turnip), new ItemStack(ModItems.heartBerries));	
+		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.smoothie, 1, SmoothieType.bryufsBrew.ordinal()), Materials.createStack(Materials.DATA.compoundEyes), new ItemStack(ModBlocks.bulbCapped), new ItemStack(ModItems.turnip), new ItemStack(ModItems.heartBerries));	
 	}
 
 	private static Object[] getArray(Object base, int size) {

@@ -76,7 +76,7 @@ public class RenderZombieAnt extends RenderLiving {
 		GL11.glRotatef(-entity.renderYawOffset, 0.0F, 1.0F, 0.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glScaled(entity.width * 0.2F, entity.width * 0.2F, entity.width * 0.2F);
-		blockRenderer.renderBlockAsItem(ModBlocks.bulbCappedShroom, 0, 10.0F);
+		blockRenderer.renderBlockAsItem(ModBlocks.bulbCapped, 0, 10.0F);
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
