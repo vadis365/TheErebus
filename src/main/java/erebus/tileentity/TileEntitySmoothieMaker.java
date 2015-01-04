@@ -27,9 +27,9 @@ import erebus.recipes.SmoothieMakerRecipe;
 public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements IFluidHandler {
 
 	protected final FluidTank honeyTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);
-	protected final FluidTank milkTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
-	protected final FluidTank beetleTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
-	protected final FluidTank antiVenomTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);;
+	protected final FluidTank milkTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);
+	protected final FluidTank beetleTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);
+	protected final FluidTank antiVenomTank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);
 
 	public int time = 0;
 	private static final int MAX_TIME = 432;
@@ -277,7 +277,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	private void extractFluid(ItemStack output) {
 		switch (SmoothieType.values()[output.getItemDamage()]) {
-		//Tanks below can be any of the 4.
+			//Tanks below can be any of the 4.
 			case greenTeaGrasshopper:
 				beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 				break;
@@ -318,7 +318,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	private boolean canExtractFluid(ItemStack output) {
 		switch (SmoothieType.values()[output.getItemDamage()]) {
-		//These tanks have to match the extract tanks.
+			//These tanks have to match the extract tanks.
 			case greenTeaGrasshopper:
 				if (getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 					return true;
