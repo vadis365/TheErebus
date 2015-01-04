@@ -44,7 +44,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			            switch (yy % 4) {
 			             case 0:
 			                   buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-			                   buildRoof(world, x, yy, z, mazeWidth, mazeHeight);
+			                   buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
 			                   break;
 			                case 1:
 			                	buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
@@ -54,17 +54,47 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			                    break;
 			            }
 			       }
-			   
-			        BasicShapeGen.createPyramid(world, Blocks.sandstone, 0, true, x+sizeX/2+8, z+sizeZ/2+8, 32, 32, y - 6);
+					buildCourtyard(world, ModBlocks.templePillar, 0, x+sizeX, y - 4, z+sizeZ, 32, 4, 32);
+			        BasicShapeGen.createPyramid(world, ModBlocks.templeBrick, 0, true, x+sizeX/2+9, z+sizeZ/2+9, 30, 30, y - 6);
 			        return true;
 			//}
 		//}
 	}
+    
+	private void buildCourtyard(World world, Block block, int metaData, int x, int y, int z, int baseLengthX, int heightY, int baseLengthZ) {
+		for (int yy = y; yy < heightY + y; yy++) {
+			for (int xx = x - baseLengthX / 2; xx < x + baseLengthX / 2; xx++)
+				for (int zz = z - baseLengthZ / 2; zz < z + baseLengthZ / 2; zz++) {
+					if (yy > y) {
+						if (xx == x - baseLengthX / 2 && zz % 5 == 3)
+							world.setBlock(xx, yy, zz, block, metaData, 3);
+						else if (xx == x + baseLengthX / 2 - 1 && zz % 5 == 3)
+							world.setBlock(xx, yy, zz, block, metaData, 3);
+						else if (zz == z - baseLengthZ / 2 && xx % 5 == 0)
+							world.setBlock(xx, yy, zz, block, metaData, 3);
+						else if (zz == z + baseLengthZ / 2 - 1 && xx % 5 == 0)
+							world.setBlock(xx, yy, zz, block, metaData, 3);
+						else
+							world.setBlockToAir(xx, yy, zz);
+					}
+					world.setBlock(xx, y + 4, zz, ModBlocks.templeBrick, 0, 3);
 
-    private void buildRoof(World world, int x, int y, int z, int w, int h) {
+					if (yy > y && yy < heightY + y)
+						if (xx > x - baseLengthX / 2
+								&& xx < x + baseLengthX / 2 - 1)
+							if (zz > z - baseLengthZ / 2
+									&& zz < z + baseLengthZ / 2 - 1) {
+								world.setBlockToAir(xx, yy, zz);
+								world.setBlockToAir(xx, y + 4, zz);
+							}
+				}
+		}
+	}
+
+    private void buildRoof(World world, int x, int y, int z, int w, int h, Random rand) {
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
-                world.setBlock(x + j, y, z + i, ModBlocks.ghostSand);
+                world.setBlock(x + j, y, z + i, ModBlocks.ghostSand);	
             }
         }
     }
@@ -72,13 +102,13 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand) {
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
-            	for(int k = 0; k <= 3; k++)
+            	for(int k = 0; k <= 13; k++)
                 world.setBlock(x + j, y + k, z + i, Blocks.air);
             }
         }
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
-            	if (rand.nextInt(10) == 0)
+            	if (rand.nextInt(100) == 0)
             		world.setBlock(x + j, y, z + i, Blocks.lava);
             	else
             		world.setBlock(x + j, y, z + i, solid, 5, 2);
