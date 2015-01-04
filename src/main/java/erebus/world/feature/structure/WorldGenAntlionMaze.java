@@ -94,7 +94,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     private void buildRoof(World world, int x, int y, int z, int w, int h, Random rand) {
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
-                world.setBlock(x + j, y, z + i, ModBlocks.ghostSand);	
+                world.setBlock(x + j, y, z + i, ModBlocks.ghostSand); //turn to Blocks.air to see amazing maze
             }
         }
     }
