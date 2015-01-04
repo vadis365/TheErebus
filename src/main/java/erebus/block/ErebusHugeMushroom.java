@@ -7,7 +7,9 @@ import net.minecraft.block.BlockHugeMushroom;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -33,6 +35,21 @@ public class ErebusHugeMushroom extends BlockHugeMushroom {
 		setStepSound(Block.soundTypeWood);
 		setBlockTextureName("erebus:mushcap_" + name);
 		setBlockName("erebus." + name + "_mushroom_block");
+	}
+
+	@Override
+	protected ItemStack createStackedBlock(int meta) {
+		return new ItemStack(this, 1, 14);
+	}
+
+	@Override
+	protected boolean canSilkHarvest() {
+		return true;
+	}
+
+	@Override
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
+		return 14;
 	}
 
 	@Override
