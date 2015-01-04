@@ -191,7 +191,7 @@ public class Food extends ItemFood {
 			case melonadeSparkly:
 				item = Items.glass_bottle;
 			case cabbage:
-				world.playSoundAtEntity(player, "erebus:cabbagefart", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+				world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 			default:
 				return is;
 		}
