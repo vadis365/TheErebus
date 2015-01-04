@@ -47,6 +47,8 @@ public class ModFluids {
 		FluidContainerRegistry.registerFluidContainer(milk, new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(antiVenom, FluidContainerRegistry.BUCKET_VOLUME / 2), new ItemStack(ModItems.bottleAntiVenom), new ItemStack(Items.glass_bottle));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(antiVenom, FluidContainerRegistry.BUCKET_VOLUME / 2), new ItemStack(ModItems.bottleAntiVenom), new ItemStack(Items.glass_bottle));
+		// Who registered this twice? ^^
+		//And Why? Should it be beetleJuice?
 	}
 
 	@SubscribeEvent
