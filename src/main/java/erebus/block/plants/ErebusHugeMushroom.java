@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.plants;
 
 import java.util.List;
 import java.util.Random;
@@ -59,6 +59,12 @@ public class ErebusHugeMushroom extends BlockHugeMushroom {
 
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune) {
+		return Item.getItemFromBlock(drop);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Item getItem(World world, int x, int y, int z) {
 		return Item.getItemFromBlock(drop);
 	}
 
