@@ -50,17 +50,30 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			                	buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
 			                    buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
 			                    buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
+			                    // TODO Create loot chests and mimic chests
+			                    // TODO Create traps, new spawners and shizz
 			                    addTorch(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
 			                    break;
 			            }
 			       }
 					buildCourtyard(world, ModBlocks.templePillar, 0, x+sizeX, y - 4, z+sizeZ, 32, 4, 32);
-			        BasicShapeGen.createPyramid(world, ModBlocks.templeBrick, 0, true, x+sizeX/2+9, z+sizeZ/2+9, 30, 30, y - 6);
+					// TODO Make a proper pyramid with a couple of levels and Boss arena at base
+					// TODO Make Pyramid indestructible apart from 4 cap stones (maybe need something to open them)
+					BasicShapeGen.createPyramid(world, ModBlocks.templeBrick, 0, true, x+sizeX/2+9, z+sizeZ/2+9, 30, 30, y - 6);
+					buildEntrances(world, ModBlocks.templeBrick, 0, true, x, z, 5, 5, y, rand);
 			        return true;
 			//}
 		//}
 	}
     
+    private void buildEntrances(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart, Random rand) {
+     //	TODO these are just markers - they should probably be shafts from the surface that go down to the dungeon
+    	BasicShapeGen.createPyramid(world, block, 0, true, x, z, baseLengthX, baseLengthZ, yStart);
+    	BasicShapeGen.createPyramid(world, block, 0, true, x + 97 - baseLengthX, z, baseLengthX, baseLengthZ, yStart);
+    	BasicShapeGen.createPyramid(world, block, 0, true, x + 97 - baseLengthX, z + 97 - baseLengthZ, baseLengthX, baseLengthZ, yStart);
+    	BasicShapeGen.createPyramid(world, block, 0, true, x, z + 97 - baseLengthZ, baseLengthX, baseLengthZ, yStart);
+	}
+
 	private void buildCourtyard(World world, Block block, int metaData, int x, int y, int z, int baseLengthX, int heightY, int baseLengthZ) {
 		for (int yy = y; yy < heightY + y; yy++) {
 			for (int xx = x - baseLengthX / 2; xx < x + baseLengthX / 2; xx++)
@@ -89,12 +102,13 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     private void buildRoof(World world, int x, int y, int z, int w, int h, Random rand) {
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
-                world.setBlock(x + j, y, z + i, ModBlocks.ghostSand); //turn to Blocks.air to see amazing maze
+                world.setBlock(x + j, y, z + i, solid, 3, 2); //turn to Blocks.air to see amazing maze
             }
         }
     }
     
     private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand) {
+    	// TODO k will be 4 not 13 to clear space - will need to make air above pyramid in another method
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
             	for(int k = 0; k <= 13; k++)
@@ -113,7 +127,6 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     
     private void addTorch(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
         for (int i = 0; i < h; i++) {
-            // draw the north edge
             for (int j = 0; j < w; j++) {
                 if ((maze[j][i] & 1) == 0) {
                     if(rand.nextInt(25) == 0) {
