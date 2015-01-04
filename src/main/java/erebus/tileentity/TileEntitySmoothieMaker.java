@@ -41,16 +41,16 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 		beetleTank.setFluid(new FluidStack(ModFluids.beetleJuice, 0));
 		antiVenomTank.setFluid(new FluidStack(ModFluids.antiVenom, 0));
 	}
-	
+
 	@Override
 	public int getInventoryStackLimit() {
 		return 64;
 	}
-	
+
 	public int getBlendProgress() {
-		return time/12;
+		return time / 12;
 	}
-	
+
 	public boolean isBlending() {
 		return time > 0;
 	}
@@ -139,10 +139,6 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 			readFromNBT(packet.func_148857_g());
 	}
 
-	private void sendUpdatesToClients() {
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-	
 	public void getGUIData(int id, int value) {
 		switch (id) {
 			case 1:
@@ -171,14 +167,14 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 				break;
 		}
 	}
-	
+
 	public void sendGUIData(ContainerSmoothieMaker counter, ICrafting craft) {
 		craft.sendProgressBarUpdate(counter, 1, honeyTank.getFluid() != null ? honeyTank.getFluid().amount : 0);
 		craft.sendProgressBarUpdate(counter, 2, beetleTank.getFluid() != null ? beetleTank.getFluid().amount : 0);
 		craft.sendProgressBarUpdate(counter, 3, antiVenomTank.getFluid() != null ? antiVenomTank.getFluid().amount : 0);
 		craft.sendProgressBarUpdate(counter, 4, milkTank.getFluid() != null ? milkTank.getFluid().amount : 0);
 	}
-	
+
 	public ItemStack fillTankWithBucket(ItemStack bucket) {
 		if (honeyTank.getFluidAmount() <= honeyTank.getCapacity() - FluidContainerRegistry.BUCKET_VOLUME)
 			if (FluidContainerRegistry.isFilledContainer(bucket) && FluidContainerRegistry.getFluidForFilledItem(bucket).getFluid() == ModFluids.honey)
@@ -262,7 +258,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 				if (time >= MAX_TIME) {
 					worldObj.playAuxSFX(2005, xCoord, yCoord + 1, zCoord, 0);
 					worldObj.playSoundEffect(xCoord, yCoord + 1, zCoord, "random.orb", 1.0F, 1.0F);
-					
+
 					for (int i = 0; i < 5; i++)
 						if (inventory[i] != null)
 							if (--inventory[i].stackSize <= 0)
@@ -273,98 +269,98 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 					markDirty();
 				}
 			}
-		if (output == null || getStackInSlot(4) == null ) {
+		if (output == null || getStackInSlot(4) == null) {
 			time = 0;
 			markDirty();
 		}
 	}
 
 	private void extractFluid(ItemStack output) {
-		switch(SmoothieType.values()[output.getItemDamage()]) {
+		switch (SmoothieType.values()[output.getItemDamage()]) {
 		//Tanks below can be any of the 4.
-		case greenTeaGrasshopper:
-			beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case moneyHoney:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case nothingInTheMiddle:
-			beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case greenGiant:
-			antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case seedyGoodness:
-			beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case givinMeTheBlues:
-			milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case hotHotBaby:
-			antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case dontMettleWithTheNettle:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case liquidGold:
-			milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		case bryufsBrew:
-			honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
-			break;
-		default:
-			break;
-		}	
+			case greenTeaGrasshopper:
+				beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case moneyHoney:
+				honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case nothingInTheMiddle:
+				beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case greenGiant:
+				antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case seedyGoodness:
+				beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case givinMeTheBlues:
+				milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case hotHotBaby:
+				antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case dontMettleWithTheNettle:
+				honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case liquidGold:
+				milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			case bryufsBrew:
+				honeyTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				milkTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				antiVenomTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
+				break;
+			default:
+				break;
+		}
 	}
 
 	private boolean canExtractFluid(ItemStack output) {
-		switch(SmoothieType.values()[output.getItemDamage()]) {
+		switch (SmoothieType.values()[output.getItemDamage()]) {
 		//These tanks have to match the extract tanks.
-		case greenTeaGrasshopper:
-			if(getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case moneyHoney:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case nothingInTheMiddle:
-			if(getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case greenGiant:
-			if(getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case seedyGoodness:
-			if(getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case givinMeTheBlues:
-			if(getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case hotHotBaby:
-			if(getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case dontMettleWithTheNettle:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case liquidGold:
-			if(getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		case bryufsBrew:
-			if(getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
-				return true;
-			break;
-		default:
-			break;
+			case greenTeaGrasshopper:
+				if (getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case moneyHoney:
+				if (getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case nothingInTheMiddle:
+				if (getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case greenGiant:
+				if (getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case seedyGoodness:
+				if (getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case givinMeTheBlues:
+				if (getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case hotHotBaby:
+				if (getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case dontMettleWithTheNettle:
+				if (getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case liquidGold:
+				if (getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			case bryufsBrew:
+				if (getHoneyAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getMilkAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getAntiVenomAmount() >= FluidContainerRegistry.BUCKET_VOLUME && getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
+					return true;
+				break;
+			default:
+				break;
 		}
 		return false;
 	}

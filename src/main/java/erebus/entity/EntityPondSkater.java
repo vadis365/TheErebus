@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.item.Materials;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -8,12 +7,12 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.item.Materials;
 
 public class EntityPondSkater extends EntityMob {
 
@@ -26,12 +25,12 @@ public class EntityPondSkater extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.2D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D); // MaxHealth
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D); // atkDmg
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.2D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
-	
+
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.ARTHROPOD;
@@ -49,22 +48,23 @@ public class EntityPondSkater extends EntityMob {
 	public int getMaxSpawnedInChunk() {
 		return 6;
 	}
-/* To stop console spam
-	@Override
-	protected String getLivingSound() {
-		return "";
-	}
 
-	@Override
-	protected String getHurtSound() {
-		return "";
-	}
+	/* To stop console spam
+		@Override
+		protected String getLivingSound() {
+			return "";
+		}
 
-	@Override
-	protected String getDeathSound() {
-		return "";
-	}
-*/
+		@Override
+		protected String getHurtSound() {
+			return "";
+		}
+
+		@Override
+		protected String getDeathSound() {
+			return "";
+		}
+	 */
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
@@ -73,16 +73,16 @@ public class EntityPondSkater extends EntityMob {
 		for (amount = 0; amount < chance; ++amount)
 			entityDropItem(Materials.createStack(Materials.DATA.hydrofuge), 0.0F);
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		int x = MathHelper.floor_double(posX);
 		int y = MathHelper.floor_double(boundingBox.minY);
 		int z = MathHelper.floor_double(posZ);
-		
-		if(worldObj.getBlock(x, y, z).getMaterial() == Material.water) {
-			if(motionY < 0.0D)
+
+		if (worldObj.getBlock(x, y, z).getMaterial() == Material.water) {
+			if (motionY < 0.0D)
 				motionY = 0.0D;
 			fallDistance = 0.0F;
 		}
@@ -93,7 +93,7 @@ public class EntityPondSkater extends EntityMob {
 		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 		return player != null && isPlayerInWater(player) && canEntityBeSeen(player) ? player : null;
 	}
-	
+
 	public boolean isPlayerInWater(EntityPlayer player) {
 		int x = MathHelper.floor_double(player.posX);
 		int y = MathHelper.floor_double(player.boundingBox.minY);

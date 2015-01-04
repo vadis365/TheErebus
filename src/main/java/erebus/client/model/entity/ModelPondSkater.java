@@ -3,9 +3,9 @@ package erebus.client.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 
 public class ModelPondSkater extends ModelBase {
+
 	ModelRenderer proboscis1;
 	ModelRenderer proboscis2;
 	ModelRenderer proboscis3;
@@ -40,8 +40,8 @@ public class ModelPondSkater extends ModelBase {
 	ModelRenderer rightLegBack4;
 	ModelRenderer bum1;
 	ModelRenderer bum2;
-  
-  public ModelPondSkater() {
+
+	public ModelPondSkater() {
 		textureWidth = 64;
 		textureHeight = 128;
 
@@ -181,8 +181,8 @@ public class ModelPondSkater extends ModelBase {
 		bum2.addBox(-1.5F, -1.5F, -1F, 3, 3, 4);
 		bum2.setRotationPoint(0F, 18F, 23F);
 		setRotation(bum2, -0.1745329F, 0F, 0F);
-  }
-  
+	}
+
 	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
@@ -222,7 +222,7 @@ public class ModelPondSkater extends ModelBase {
 		bum1.render(unitPixel);
 		bum2.render(unitPixel);
 	}
-  
+
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;

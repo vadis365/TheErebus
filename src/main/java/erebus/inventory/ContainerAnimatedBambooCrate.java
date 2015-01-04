@@ -8,13 +8,10 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerAnimatedBambooCrate extends Container {
+
 	public int numRows = 3;
-	private final IInventory inventory;
 
 	public ContainerAnimatedBambooCrate(InventoryPlayer playerInventory, IInventory entityInventory) {
-		
-		inventory = entityInventory;
-		
 		int i = (numRows - 4) * 18;
 		int j;
 		int k;
