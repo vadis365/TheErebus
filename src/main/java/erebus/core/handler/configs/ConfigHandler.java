@@ -15,7 +15,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium, alternativePlanks, graveMarker;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium, alternativePlanks, graveMarker, bioluminescence;
 
 	public boolean disableThaumcraft = false, disableFMP = false;
 
@@ -61,6 +61,7 @@ public class ConfigHandler {
 		playCustomSongs = config.get(Configuration.CATEGORY_GENERAL, "Play erebus songs", true).getBoolean(true);
 		alternativePlanks = config.get(Configuration.CATEGORY_GENERAL, "Alternative Planks Textures", false).getBoolean(false);
 		graveMarker = config.get(Configuration.CATEGORY_GENERAL, "Block O' Bones Inventory Save", true).getBoolean(true);
+		bioluminescence = config.get(Configuration.CATEGORY_GENERAL, "Glowing bugs emit light", true).getBoolean(true);
 
 		lead = config.get("Ores", "Generate lead", false).getBoolean(false);
 		silver = config.get("Ores", "Generate silver", false).getBoolean(false);
