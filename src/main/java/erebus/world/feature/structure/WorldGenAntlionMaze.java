@@ -58,16 +58,32 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			       }
 					buildCourtyard(world, ModBlocks.templePillar, 0, x+sizeX, y - 4, z+sizeZ, 32, 4, 32);
 					// TODO Make a proper pyramid with a couple of levels and Boss arena at base
-					// TODO Make Pyramid indestructible apart from 4 cap stones (maybe need something to open them)
-					BasicShapeGen.createPyramid(world, ModBlocks.templeBrick, 0, true, x+sizeX/2+9, z+sizeZ/2+9, 30, 30, y - 6);
+					// TODO Make Pyramid indestructible apart from 4 cap stones (need all 4 idols to open the entrance capstones)
+					BasicShapeGen.createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x+sizeX/2+9, z+sizeZ/2+9, 30, 30, y - 6);
+					placeSpecialChests(world, x, y, z);
 					buildEntrances(world, ModBlocks.templeBrick, 0, true, x, z, 5, 5, y, rand);
 			        return true;
 			//}
 		//}
 	}
     
-    private void buildEntrances(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart, Random rand) {
-     //	TODO these are just markers - they should probably be shafts from the surface that go down to the dungeon
+    private void placeSpecialChests(World world, int x, int y, int z) {
+    	// TODO These chests will contain the 4 new idol items, one in each.
+    	// when attempted to be opened they will transform in to a mob which you have beat to get the idol.
+    	world.setBlock(x + 1, y - 3, z + 1, ModBlocks.petrifiedWoodChest);
+    	world.setBlock(x + 95, y - 3, z + 1, ModBlocks.petrifiedWoodChest);
+    	world.setBlock(x + 95, y - 3, z + 95, ModBlocks.petrifiedWoodChest);
+    	world.setBlock(x + 1, y - 3, z + 95, ModBlocks.petrifiedWoodChest);
+    	
+    	world.setBlockMetadataWithNotify(x + 1, y - 3, z + 1, 5, 3);
+    	world.setBlockMetadataWithNotify(x + 95, y - 3, z + 1, 3, 3);
+    	world.setBlockMetadataWithNotify(x + 95, y - 3, z + 95, 4, 3);
+    	world.setBlockMetadataWithNotify(x + 1, y - 3, z + 95, 2, 3);
+	}
+
+	private void buildEntrances(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart, Random rand) {
+		// TODO these are just markers - they should probably be shafts from the surface that go down to the dungeon
+		// Perhaps inside it a basic chest containing a book with instructions written in an ancient style - just so the mission is clear?
     	BasicShapeGen.createPyramid(world, block, 0, true, x, z, baseLengthX, baseLengthZ, yStart);
     	BasicShapeGen.createPyramid(world, block, 0, true, x + 97 - baseLengthX, z, baseLengthX, baseLengthZ, yStart);
     	BasicShapeGen.createPyramid(world, block, 0, true, x + 97 - baseLengthX, z + 97 - baseLengthZ, baseLengthX, baseLengthZ, yStart);
