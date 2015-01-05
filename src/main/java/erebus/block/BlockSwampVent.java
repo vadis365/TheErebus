@@ -45,6 +45,7 @@ public class BlockSwampVent extends Block {
 			if (world.isAirBlock(x, y + 1, z)) {
 				EntityGasVent vent = new EntityGasVent(world);
 				vent.setPosition(x + 0.5D, y + 1D, z + 0.5D);
+				vent.setFlameType((byte) 0);
 				world.spawnEntityInWorld(vent);
 				world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "mob.ghast.fireball", 1.0F, 0.1F);
 			}

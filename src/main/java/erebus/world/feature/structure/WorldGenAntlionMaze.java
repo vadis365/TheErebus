@@ -117,8 +117,11 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
         }
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
-            	if (rand.nextInt(100) == 0)
-            		world.setBlock(x + j, y, z + i, Blocks.lava);
+            	if (rand.nextInt(20) == 0)
+            		if(rand.nextBoolean() && rand.nextBoolean())
+            			world.setBlock(x + j, y, z + i, Blocks.lava);
+            		else
+            			world.setBlock(x + j, y, z + i, ModBlocks.gneissVent);
             	else
             		world.setBlock(x + j, y, z + i, solid, 5, 2);
             }
