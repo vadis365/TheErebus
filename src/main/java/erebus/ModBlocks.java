@@ -291,7 +291,7 @@ public class ModBlocks {
 	public static final Block templePillar = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templePillar").setBlockTextureName("erebus:templePillar");
 	public static final Block templeTile = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templeTile").setBlockTextureName("erebus:templeTile");
 	public static final Block gneissVent = new BlockGneissVent().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneissVent");
-
+	public static final Block templeBrickUnbreaking = new BlockSimple(Material.rock).setBlockUnbreakable().setStepSound(Block.soundTypeStone).setBlockName("erebus.templeBrickUnbreaking").setBlockTextureName("erebus:templeBrick");
 	// STAIRS, SLABS, WALLS
 	public static final Block[] umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
 	public static final Block[] stoneSlabs = new Block[8];
