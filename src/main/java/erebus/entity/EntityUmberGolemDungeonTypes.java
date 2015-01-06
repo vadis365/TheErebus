@@ -11,6 +11,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -21,8 +22,8 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.DungeonIdols.IDOL;
 
-public class EntityUmberGolemDungeonTypes extends EntityMob {
-
+public class EntityUmberGolemDungeonTypes extends EntityMob{
+    
 	public EntityUmberGolemDungeonTypes(World world) {
 		super(world);
 		isImmuneToFire = true;
@@ -37,7 +38,8 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(29, new Byte((byte) rand.nextInt(4))); //just for testing random spawns
+		dataWatcher.addObject(20, new Integer(0));
+		dataWatcher.addObject(29, new Byte((byte) rand.nextInt(4))); //just for testing random spawns	
 	}
 
 	@Override
@@ -48,7 +50,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(setGolemHealth());
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength());
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
@@ -112,7 +114,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) {
-		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
+		playSound("mob.zombie.step", 0.15F, 1.0F);
 	}
 
 	@Override
@@ -140,6 +142,13 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+		if (getAttackTarget() != null) {
+			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
+			if (getRangeAttackTimer() < 100 && distance > 3)
+				setRangeAttackTimer(getRangeAttackTimer() + 2);
+			if (getRangeAttackTimer() == 100 && distance > 3)
+				shootMissile(getAttackTarget(), distance);
+		}
 	}
 
 	@Override
@@ -159,13 +168,43 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 				motionY = 0.4000000059604645D;
 			}
 			int Knockback = 1;
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F + 3);
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttackStrength());
 			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
 			worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));
 			return true;
 		}
 		return true;
+	}
+	
+	public EntityThrowable getMissileType() {
+		switch(getType()) {
+			case 0:
+				return new EntityGooBall(worldObj, this);
+			case 1:
+			case 2:
+				return new EntityWebSling(worldObj, this);
+			case 3:
+				return new EntityPoisonJet(worldObj, this);
+			default:
+				return new EntityGooBall(worldObj, this);
+		}
+	}
+	
+    public void shootMissile(EntityLivingBase EntityLivingBase, float distance) {
+    	setRangeAttackTimer(0);
+    	EntityThrowable missile = getMissileType();
+    	if(getType() == 1)
+    		((EntityWebSling) missile).setType((byte) 0);
+    	if(getType() == 2)
+    		((EntityWebSling) missile).setType((byte) 2);
+    	missile.rotationPitch -= -20.0F;
+    	double targetX = EntityLivingBase.posX + EntityLivingBase.motionX - this.posX;
+    	double targetY = EntityLivingBase.posY + (double)EntityLivingBase.getEyeHeight() - 1.100000023841858D - this.posY;
+    	double targetZ = EntityLivingBase.posZ + EntityLivingBase.motionZ - this.posZ;
+    	float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
+    	missile.setThrowableHeading(targetX, targetY + (double)(target * 0.1F), targetZ, 0.75F, 8.0F);
+    	this.worldObj.spawnEntityInWorld(missile);
 	}
 	
 	@Override
@@ -186,5 +225,13 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 
 	public byte getType() {
 		return dataWatcher.getWatchableObjectByte(29);
+	}
+	
+	public void setRangeAttackTimer(int size) {
+		dataWatcher.updateObject(20, Integer.valueOf(size));
+	}
+
+	public int getRangeAttackTimer() {
+		return dataWatcher.getWatchableObjectInt(20);
 	}
 }
