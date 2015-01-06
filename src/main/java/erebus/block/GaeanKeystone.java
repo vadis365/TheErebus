@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.Materials;
 import erebus.tileentity.TileEntityGaeanKeystone;
@@ -28,6 +29,7 @@ public class GaeanKeystone extends BlockContainer {
 	public GaeanKeystone() {
 		super(Material.rock);
 		setHardness(3.0f);
+		setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.gaeanKeystone");
 	}
 

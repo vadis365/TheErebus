@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.block.ItemBlockPlanks;
 import erebus.lib.EnumWood;
@@ -25,6 +26,10 @@ public class BlockPlanksErebus extends Block implements ISubBlocksBlock {
 
 	public BlockPlanksErebus() {
 		super(Material.wood);
+		setHardness(2.0F);
+		setHarvestLevel("axe", 0);
+		setStepSound(soundTypeWood);
+		setCreativeTab(ModTabs.blocks);
 		setBlockName(Reference.MOD_ID + ".planks");
 	}
 

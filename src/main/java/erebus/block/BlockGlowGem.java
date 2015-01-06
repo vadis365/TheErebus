@@ -17,6 +17,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityGlowGem;
 
@@ -24,6 +25,9 @@ public class BlockGlowGem extends BlockContainer {
 
 	public BlockGlowGem() {
 		super(Material.glass);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.glowGemBlock");
+		setBlockTextureName("erebus:glowGem");
 	}
 
 	@Override

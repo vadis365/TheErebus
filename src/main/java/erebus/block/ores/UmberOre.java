@@ -9,6 +9,7 @@ import net.minecraft.world.IBlockAccess;
 import erebus.ModTabs;
 
 public class UmberOre extends Block {
+
 	private final Block base;
 
 	public UmberOre(Block base, String name, int harvestLevel) {

@@ -68,7 +68,7 @@ public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
 			GL11.glTranslated((float) x + 0.5F, (float) (y + 0.030F + size * 0.5F), (float) z + 0.5F);
 			GL11.glScalef(0.55F, -size, -0.55F);
 			bindTexture(TextureMap.locationBlocksTexture);
-			blockRenderer.renderBlockAsItem(ModBlocks.blockAmber, 0, 1.0F);
+			blockRenderer.renderBlockAsItem(ModBlocks.amber, 0, 1.0F);
 			GL11.glDisable(3042);
 			GL11.glPopMatrix();
 		}

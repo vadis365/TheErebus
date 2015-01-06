@@ -16,6 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityBones;
 
@@ -23,6 +24,7 @@ public class BlockBones extends BlockContainer {
 
 	public BlockBones() {
 		super(Material.rock);
+		setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.blockBones");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.6875F, 1.0F);
 	}

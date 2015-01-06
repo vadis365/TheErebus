@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackWidow;
 import erebus.item.block.ItemBlockWitherWeb;
@@ -18,7 +19,10 @@ import erebus.item.block.ItemBlockWitherWeb;
 public class BlockWitherWeb extends BlockWeb implements ISubBlocksBlock {
 
 	public BlockWitherWeb() {
-		setCreativeTab(null);
+		setHardness(4.0F);
+		setBlockTextureName("web");
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.witherWeb");
 	}
 
 	@Override

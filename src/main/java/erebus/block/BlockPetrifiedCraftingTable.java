@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
+import erebus.ModTabs;
 import erebus.core.proxy.CommonProxy;
 
 public class BlockPetrifiedCraftingTable extends Block {
@@ -18,6 +19,10 @@ public class BlockPetrifiedCraftingTable extends Block {
 
 	public BlockPetrifiedCraftingTable() {
 		super(Material.rock);
+		setHardness(2.5F);
+		setStepSound(soundTypeStone);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.petrifiedCraftingTable");
 	}
 
 	@Override

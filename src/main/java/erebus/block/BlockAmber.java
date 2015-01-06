@@ -15,6 +15,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.item.block.ItemBlockAmber;
 
 public class BlockAmber extends Block implements ISubBlocksBlock {
@@ -25,18 +26,24 @@ public class BlockAmber extends Block implements ISubBlocksBlock {
 	private IIcon[] connectedGlass;
 
 	private final String[] connectedGlassStr = new String[] { "center", "bottomleft", "bottomright", "topleft", "topright", "sidingleft", "sidingright", "sidingbottom", "sidingtop", // 8
-	"sidestopbottom", "sidesleftright", "fullsideleft", "fullsideright", "fullsidebottom", "fullsidetop", // 14
-	"topleft_c", "topright_c", "bottomleft_c", "bottomright_c", "centerall", // 19
-	"center_bl_br", "center_tl_tr", "center_tl_bl", "center_tr_br", "center_tl_br", "center_tr_bl", // 25
-	"center_tl_bl_br", "center_tl_tr_bl", "center_tl_tr_br", "center_tr_bl_br", // 29
-	"center_tl", "center_tr", "center_bl", "center_br", // 33
-	"sidingbottom_l", "sidingbottom_r", "sidingbottom_lr", "sidingtop_l", "sidingtop_r", "sidingtop_lr", // 39
-	"sidingleft_t", "sidingleft_b", "sidingleft_tb", "sidingright_t", "sidingright_b", "sidingright_tb" // 45
+	                                                          "sidestopbottom", "sidesleftright", "fullsideleft", "fullsideright", "fullsidebottom", "fullsidetop", // 14
+	                                                          "topleft_c", "topright_c", "bottomleft_c", "bottomright_c", "centerall", // 19
+	                                                          "center_bl_br", "center_tl_tr", "center_tl_bl", "center_tr_br", "center_tl_br", "center_tr_bl", // 25
+	                                                          "center_tl_bl_br", "center_tl_tr_bl", "center_tl_tr_br", "center_tr_bl_br", // 29
+	                                                          "center_tl", "center_tr", "center_bl", "center_br", // 33
+	                                                          "sidingbottom_l", "sidingbottom_r", "sidingbottom_lr", "sidingtop_l", "sidingtop_r", "sidingtop_lr", // 39
+	                                                          "sidingleft_t", "sidingleft_b", "sidingleft_tb", "sidingright_t", "sidingright_b", "sidingright_tb" // 45
 	};
 
 	public BlockAmber() {
 		super(Material.rock);
+		setHardness(1.5F);
+		setLightOpacity(3);
+		setResistance(10.0F);
+		setStepSound(soundTypeGlass);
+		setBlockName("erebus.amber");
 		setHarvestLevel("pickaxe", 0);
+		setCreativeTab(ModTabs.blocks);
 	}
 
 	@Override

@@ -16,16 +16,22 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.item.block.ItemBlockGeneric;
 
 public class BlockGneiss extends Block implements ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissSlab", "gneissSmooth", "gneissTiles" };
 	@SideOnly(Side.CLIENT)
-	public IIcon[] icons;
+	private IIcon[] icons;
 
 	public BlockGneiss() {
 		super(Material.rock);
+		setHardness(1.5F);
+		setResistance(10.0F);
+		setStepSound(soundTypeStone);
+		setBlockName("erebus.gneiss");
+		setCreativeTab(ModTabs.blocks);
 	}
 
 	@Override

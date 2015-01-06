@@ -13,12 +13,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import erebus.tileentity.TileEntityLadder;
 
 public class BlockBambooLadder extends BlockContainer {
 
 	public BlockBambooLadder() {
 		super(Material.circuits);
+		setHardness(0.4F);
+		setHarvestLevel("axe", 0);
+		setStepSound(soundTypeLadder);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.bambooLadder");
+		setBlockTextureName("erebus:bambooLadder");
 	}
 
 	@Override

@@ -13,19 +13,19 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityBambooBridge;
 
 public class BlockBambooBridge extends BlockContainer {
 
-	public boolean front;
-	public boolean back;
-	public boolean left;
-	public boolean right;
-
 	public BlockBambooBridge() {
 		super(Material.wood);
-		setBlockTextureName("erebus:bambooBridge");
+		setCreativeTab(ModTabs.blocks);
+		setHardness(0.4F);
+		setStepSound(Block.soundTypeLadder);
+		setBlockName("erebus.bambooBridge");
+		setBlockTextureName("erebus:planks_bamboo");
 	}
 
 	@Override
@@ -68,10 +68,10 @@ public class BlockBambooBridge extends BlockContainer {
 	public void onBlockAdded(World world, int x, int y, int z) {
 		TileEntityBambooBridge te = Utils.getTileEntity(world, x, y, z, TileEntityBambooBridge.class);
 
-		front = canConnectBridgeTo(world, x, y, z - 1);
-		back = canConnectBridgeTo(world, x, y, z + 1);
-		left = canConnectBridgeTo(world, x - 1, y, z);
-		right = canConnectBridgeTo(world, x + 1, y, z);
+		boolean front = canConnectBridgeTo(world, x, y, z - 1);
+		boolean back = canConnectBridgeTo(world, x, y, z + 1);
+		boolean left = canConnectBridgeTo(world, x - 1, y, z);
+		boolean right = canConnectBridgeTo(world, x + 1, y, z);
 
 		switch (world.getBlockMetadata(x, y, z)) {
 			case 2:
@@ -125,12 +125,12 @@ public class BlockBambooBridge extends BlockContainer {
 	@Override
 	@SuppressWarnings("rawtypes")
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
-		float pixel = 0.0625F; // 1 pixel
+		float pixel = 0.0625F;
 		int meta = world.getBlockMetadata(x, y, z);
-		front = canConnectBridgeTo(world, x, y, z - 1);
-		back = canConnectBridgeTo(world, x, y, z + 1);
-		left = canConnectBridgeTo(world, x - 1, y, z);
-		right = canConnectBridgeTo(world, x + 1, y, z);
+		boolean front = canConnectBridgeTo(world, x, y, z - 1);
+		boolean back = canConnectBridgeTo(world, x, y, z + 1);
+		boolean left = canConnectBridgeTo(world, x - 1, y, z);
+		boolean right = canConnectBridgeTo(world, x + 1, y, z);
 
 		if (meta == 2 || meta == 3) {
 			setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, pixel * 2, 1.0F);

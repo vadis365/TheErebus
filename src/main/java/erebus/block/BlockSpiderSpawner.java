@@ -9,6 +9,7 @@ public class BlockSpiderSpawner extends BlockSpawner {
 
 	public BlockSpiderSpawner(String mobName) {
 		super("erebus." + mobName);
+		setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override

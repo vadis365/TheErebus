@@ -17,6 +17,9 @@ public class JarOHoney extends BlockGlowingJar {
 	public JarOHoney() {
 		super();
 		setLightLevel(0);
+		setHardness(0.5F);
+		setBlockName("erebus.jarOHoney");
+		setBlockTextureName("erebus:glassAmber");
 	}
 
 	@Override

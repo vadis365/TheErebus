@@ -19,7 +19,7 @@ public class FMPIntegration implements IModIntegration {
 	public void onInit() {
 		registerMaterial(ModBlocks.umberstone, 0, BlockUmberstone.iconPaths.length);
 		registerMaterial(ModBlocks.redGem);
-		registerMaterial(ModBlocks.blockAmber, 0, 3);
+		registerMaterial(ModBlocks.amber, 0, 3);
 		registerMaterial(ModBlocks.gneiss, 0, BlockGneiss.iconPaths.length);
 		registerMaterial(ModBlocks.blockSilk);
 		registerMaterial(ModBlocks.mirBrick);

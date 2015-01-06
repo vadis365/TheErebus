@@ -14,6 +14,7 @@ import erebus.ModItems;
 import erebus.tileentity.TileEntityErebusAltarEmpty;
 
 public class AltarBase extends AltarAbstract {
+
 	private String message;
 
 	@Override

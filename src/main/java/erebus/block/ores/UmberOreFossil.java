@@ -12,6 +12,7 @@ import erebus.ModItems;
 import erebus.item.Materials;
 
 public class UmberOreFossil extends UmberOre {
+
 	public UmberOreFossil() {
 		super(Blocks.diamond_ore, "Fossil", 2);
 		setHardness(1.5F);

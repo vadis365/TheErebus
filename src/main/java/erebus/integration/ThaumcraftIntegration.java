@@ -23,9 +23,9 @@ public class ThaumcraftIntegration implements IModIntegration {
 
 	@Override
 	public void onPostInit() {
-		registerBlock(ModBlocks.blockAmber, 0, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
-		registerBlock(ModBlocks.blockAmber, 1, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 5);
-		registerBlock(ModBlocks.blockAmber, 2, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
+		registerBlock(ModBlocks.amber, 0, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
+		registerBlock(ModBlocks.amber, 1, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 5);
+		registerBlock(ModBlocks.amber, 2, Aspect.ENTROPY, 2, Aspect.CRYSTAL, 2, Aspect.SLIME, 1);
 
 		// planks, leaves
 		registerBlock(ModBlocks.blockSilk, -1, Aspect.CLOTH, 4);

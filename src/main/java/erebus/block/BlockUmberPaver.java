@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.item.block.ItemBlockGeneric;
 
 public class BlockUmberPaver extends Block implements ISubBlocksBlock {
@@ -23,6 +24,11 @@ public class BlockUmberPaver extends Block implements ISubBlocksBlock {
 
 	public BlockUmberPaver() {
 		super(Material.rock);
+		setHardness(3.5F);
+		setStepSound(soundTypeStone);
+		setHarvestLevel("pickaxe", 0);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.umberPaver");
 	}
 
 	@Override

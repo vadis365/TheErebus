@@ -19,6 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
+import erebus.ModTabs;
 import erebus.item.Materials.DATA;
 import erebus.item.block.ItemBlockGeneric;
 
@@ -26,10 +27,15 @@ public class BlockRedGem extends Block implements ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "redgem", "redlampOn", "redlampOff" };
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] icons;
+	private IIcon[] icons;
 
 	public BlockRedGem() {
 		super(Material.glass);
+		setHardness(0.3F);
+		setLightLevel(1F);
+		setStepSound(soundTypeGlass);
+		setBlockName("erebus.redGem");
+		setCreativeTab(ModTabs.blocks);
 	}
 
 	@Override

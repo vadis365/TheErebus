@@ -13,6 +13,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import erebus.entity.EntityMucusBombPrimed;
 
 public class BlockMucusBomb extends Block {
@@ -22,6 +23,8 @@ public class BlockMucusBomb extends Block {
 
 	public BlockMucusBomb() {
 		super(Material.tnt);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.mucusBomb");
 	}
 
 	@Override

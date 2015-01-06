@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import erebus.Erebus;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityBambooCrate;
@@ -18,6 +19,11 @@ public class BlockBambooCrate extends BlockContainer {
 
 	public BlockBambooCrate() {
 		super(Material.wood);
+		setHardness(2.0F);
+		setHarvestLevel("axe", 0);
+		setStepSound(soundTypeWood);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.bambooCrate");
 		setBlockTextureName("erebus:bambooCrate");
 	}
 

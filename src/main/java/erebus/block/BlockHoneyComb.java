@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityHoneyComb;
@@ -27,7 +28,13 @@ public class BlockHoneyComb extends BlockContainer {
 
 	public BlockHoneyComb() {
 		super(Material.rock);
+		setHardness(0.5F);
 		setLightLevel(0.5F);
+		setResistance(10.0F);
+		setStepSound(soundTypeCloth);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.honeyCombBlock");
+		setBlockTextureName("erebus:honeyCombTop");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
 	}
 
