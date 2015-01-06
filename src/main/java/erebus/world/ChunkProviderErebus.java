@@ -46,8 +46,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 	private double[] noiseData4;
 	private double[] noiseData5;
 
-	private NoiseGeneratorPerlin perlinSwamp1;
-	private NoiseGeneratorPerlin perlinSwamp2;
+	private NoiseGeneratorPerlin perlinAdditional1;
+	private NoiseGeneratorPerlin perlinAdditional2;
 
 	private BiomeGenBase[] biomesForGeneration;
 
@@ -65,8 +65,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 		noiseGen4 = new NoiseGeneratorOctaves(rand, 4);
 		noiseGen5 = new NoiseGeneratorOctaves(rand, 10);
 		noiseGen6 = new NoiseGeneratorOctaves(rand, 16);
-		perlinSwamp1 = new NoiseGeneratorPerlin(rand, 4);
-		perlinSwamp2 = new NoiseGeneratorPerlin(rand, 4);
+		perlinAdditional1 = new NoiseGeneratorPerlin(rand, 4);
+		perlinAdditional2 = new NoiseGeneratorPerlin(rand, 4);
 		stoneNoise = new double[256];
 
 		caveGenerator = new MapGenErebusCaves();
@@ -275,10 +275,10 @@ public class ChunkProviderErebus implements IChunkProvider {
 		byte var5 = 0;
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, x * 16, z * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
 		double d0 = 0.03125D;
-		double[] swampNoise1 = new double[256];
-		double[] swampNoise2 = new double[256];
-		swampNoise1 = perlinSwamp1.func_151599_a(swampNoise1, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
-		swampNoise2 = perlinSwamp2.func_151599_a(swampNoise2, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		double[] additionalNoise1 = new double[256];
+		double[] additionalNoise2 = new double[256];
+		additionalNoise1 = perlinAdditional1.func_151599_a(additionalNoise1, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		additionalNoise2 = perlinAdditional2.func_151599_a(additionalNoise2, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
 		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
 			for (int zInChunk = 0; zInChunk < 16; ++zInChunk) {
@@ -291,19 +291,18 @@ public class ChunkProviderErebus implements IChunkProvider {
 				Block fillerBlock = biome.fillerBlock;
 				int preHeightIndex = (zInChunk * 16 + xInChunk) * 128;
 
-				if (biome == ModBiomes.submergedSwamp)
-					if (swampNoise1[horIndex] > 0) {
+				if (biome == ModBiomes.submergedSwamp) {
+					if (additionalNoise1[horIndex] > 0) {
 						int h = getLowestAirBlock(blocks, preHeightIndex, 25, 35);
 						if (h > swampWaterHeight) {
-							for (h += 0; h > 23.08D - swampNoise1[horIndex]; h--)
+							for (h += 0; h > 23.08D - additionalNoise1[horIndex]; h--)
 								blocks[preHeightIndex + h] = h == swampWaterHeight ? rand.nextInt(32) == 0 ? Blocks.waterlily : Blocks.air : Blocks.air;
-							blocks[preHeightIndex + h] = swampNoise1[horIndex] < 0.08D ? rand.nextInt(12) == 0 ? ModBlocks.swampVent : ModBlocks.umberstone : swampNoise1[horIndex] < 0.5D ? Blocks.sand : swampNoise1[horIndex] < 1 ? ModBlocks.quickSand : swampNoise2[horIndex] > 1 ? ModBlocks.mud : Blocks.dirt;
+							blocks[preHeightIndex + h] = additionalNoise1[horIndex] < 0.08D ? rand.nextInt(12) == 0 ? ModBlocks.swampVent : ModBlocks.umberstone : additionalNoise1[horIndex] < 0.5D ? Blocks.sand : additionalNoise1[horIndex] < 1 ? ModBlocks.quickSand : additionalNoise2[horIndex] > 1 ? ModBlocks.mud : Blocks.dirt;
 						}
-					} else if (swampNoise1[horIndex] > -0.15D) {
+					} else if (additionalNoise1[horIndex] > -0.15D) {
 						int h = getLowestAirBlock(blocks, preHeightIndex, 25, 35);
-						int average = (22 + h) / 2;
 						if (h > swampWaterHeight) {
-							for (h += 0; h >= average; h--)
+							for (h += 0; h >= (22 + h) / 2; h--)
 								blocks[preHeightIndex + h] = Blocks.air;
 							h++;
 							if (h >= swampWaterHeight && rand.nextInt(8) == 0 && blocks[preHeightIndex + h] == Blocks.air && blocks[preHeightIndex + h + 1] == Blocks.air) {
@@ -312,6 +311,16 @@ public class ChunkProviderErebus implements IChunkProvider {
 							}
 						}
 					}
+				}
+				if((biome == ModBiomes.volcanicDesert || biome == ModBiomes.desertSubCharredForest) && Math.abs(additionalNoise1[horIndex]) < 1) {
+					int h = getLowestAirBlock(blocks, preHeightIndex, 25, 32) - 1;
+					if (h > 0) {
+						blocks[preHeightIndex + h] = Blocks.air;
+						for (int h2 = h - 1; h2 > h - 1 - (3 * (1 - Math.abs(additionalNoise1[horIndex]))); h2--) {
+							blocks[preHeightIndex + h2] = Blocks.flowing_lava;
+						}
+					}
+				}
 
 				for (int yInChunk = 127; yInChunk >= 0; --yInChunk) {
 					int index = (zInChunk * 16 + xInChunk) * 128 + yInChunk;
