@@ -7,9 +7,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
-import net.minecraftforge.fluids.Fluid;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModFluids;
 import erebus.ModMaterials;
 
 public class BlockErebusHoney extends BlockFluidClassic {
@@ -17,8 +17,9 @@ public class BlockErebusHoney extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	protected IIcon stillIcon, flowingIcon;
 
-	public BlockErebusHoney(Fluid fluid) {
-		super(fluid, ModMaterials.honey);
+	public BlockErebusHoney() {
+		super(ModFluids.honey, ModMaterials.honey);
+		setBlockName("erebus.honeyBlock");
 	}
 
 	@Override

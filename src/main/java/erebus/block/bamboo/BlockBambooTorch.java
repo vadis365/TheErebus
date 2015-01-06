@@ -11,6 +11,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 
 public class BlockBambooTorch extends Block {
 
@@ -19,8 +20,10 @@ public class BlockBambooTorch extends Block {
 
 	public BlockBambooTorch() {
 		super(Material.wood);
-		setTickRandomly(true);
+		setHardness(0.0F);
 		setLightLevel(0.9F);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.bambooTorch");
 		setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
 	}
 

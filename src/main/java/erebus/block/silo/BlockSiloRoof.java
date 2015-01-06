@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.ModTabs;
 import erebus.block.BlockSimple;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
@@ -11,6 +12,7 @@ public class BlockSiloRoof extends BlockSimple {
 
 	public BlockSiloRoof(Material material) {
 		super(material);
+		setCreativeTab(ModTabs.blocks);
 		setBlockBounds(0F, 0F, 0F, 1F, 0.75F, 1F);
 	}
 

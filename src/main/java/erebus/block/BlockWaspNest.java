@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 
 public class BlockWaspNest extends Block {
 
@@ -17,6 +18,12 @@ public class BlockWaspNest extends Block {
 
 	public BlockWaspNest() {
 		super(Material.rock);
+		setHardness(50.0F);
+		setResistance(2000.0F);
+		setStepSound(soundTypeStone);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.waspNestBlock");
+		setBlockTextureName("erebus:waspNestBlock");
 	}
 
 	@Override

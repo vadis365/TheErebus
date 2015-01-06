@@ -21,6 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import erebus.Erebus;
 import erebus.ModBlocks;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
@@ -29,6 +30,11 @@ public class BlockPetrifiedChest extends BlockContainer {
 
 	public BlockPetrifiedChest() {
 		super(Material.rock);
+		setHardness(2.0F);
+		setHarvestLevel("pickaxe", 0);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.petrifiedWoodChest");
+		setBlockTextureName("erebus:planks_petrifiedWood");
 		setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 	}
 

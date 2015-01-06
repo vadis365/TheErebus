@@ -8,12 +8,19 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import erebus.ModTabs;
 
 public class BlockGhostSand extends Block {
 
 	public BlockGhostSand() {
 		super(Material.portal);
+		setHardness(0.42F);
 		setLightOpacity(255);
+		setStepSound(soundTypeSand);
+		setHarvestLevel("shovel", 0);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.ghostSand");
+		setBlockTextureName("erebus:ghostSand");
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import erebus.tileentity.TileEntityBambooPole;
 
 public class BlockBambooPole extends BlockContainer {
@@ -22,6 +23,11 @@ public class BlockBambooPole extends BlockContainer {
 
 	public BlockBambooPole() {
 		super(Material.wood);
+		setHardness(0.4F);
+		setHarvestLevel("axe", 0);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.bambooPole");
+		setBlockTextureName("erebus:blockBambooPole");
 		setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
 	}
 

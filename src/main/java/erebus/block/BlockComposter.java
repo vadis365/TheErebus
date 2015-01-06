@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.core.proxy.CommonProxy;
@@ -27,6 +28,7 @@ public class BlockComposter extends BlockContainer {
 
 	public BlockComposter() {
 		super(Material.rock);
+		setCreativeTab(ModTabs.blocks);
 	}
 
 	@Override

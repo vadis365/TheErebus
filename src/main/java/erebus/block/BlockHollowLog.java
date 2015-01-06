@@ -18,6 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.entity.EntityWoodlouse;
 
@@ -28,6 +29,10 @@ public class BlockHollowLog extends Block {
 
 	public BlockHollowLog() {
 		super(Material.wood);
+		setHardness(0.7F);
+		setStepSound(soundTypeWood);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.log_hollow_acacia");
 	}
 
 	@Override

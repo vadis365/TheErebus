@@ -59,7 +59,7 @@ public class RecipeHandler {
 		// Stairs, slabs, walls
 		for (int i = 0; i < ModBlocks.umbercobbleStairs.length; i++)
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.umbercobbleStairs[i], 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.umberstone, 1, i));
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.amberBrickStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.amberBrickStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.amber, 1, 2));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.petrifiedWoodStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.petrifiedWoodPlanks, 1, 0));
 
 		for (Block slab : ModBlocks.stoneSlabs)
@@ -75,10 +75,10 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 5), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 0));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 6), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 1));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 7), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 2));
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 8), "###", "###", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.wall, 6, 8), "###", "###", '#', new ItemStack(ModBlocks.amber, 1, 2));
 
 		// Doors
-		GameRegistry.addRecipe(new ItemStack(ModItems.doorAmber, 3), "##", "##", "##", '#', new ItemStack(ModBlocks.blockAmber, 1, 2));
+		GameRegistry.addRecipe(new ItemStack(ModItems.doorAmber, 3), "##", "##", "##", '#', new ItemStack(ModBlocks.amber, 1, 2));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorBaobab, 3), "##", "##", "##", '#', "plank" + EnumWood.Baobab));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorEucalyptus, 3), "##", "##", "##", '#', "plank" + EnumWood.Eucalyptus));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.doorMahogany, 3), "##", "##", "##", '#', "plank" + EnumWood.Mahogany));
@@ -118,7 +118,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonBoots, 1), "   ", "s s", "s s", 's', Materials.createStack(Materials.DATA.reinforcedPlateExo));
 
 		// Special armor
-		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.compoundLens), "GGG", "GEG", "GGG", 'E', new ItemStack(ModBlocks.blockAmber, 1, 1), 'G', Materials.createStack(Materials.DATA.compoundEyes));
+		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.compoundLens), "GGG", "GEG", "GGG", 'E', new ItemStack(ModBlocks.amber, 1, 1), 'G', Materials.createStack(Materials.DATA.compoundEyes));
 		GameRegistry.addRecipe(new ItemStack(ModItems.compoundGoggles, 1), "XXX", "OXO", "   ", 'O', Materials.createStack(Materials.DATA.compoundLens), 'X', Materials.createStack(Materials.DATA.plateExo));
 		GameRegistry.addRecipe(new ItemStack(ModItems.reinCompoundGoggles, 1), "XXX", "XOX", "   ", 'O', new ItemStack(ModItems.compoundGoggles, 1), 'X', Materials.createStack(Materials.DATA.reinforcedPlateExo));
 		GameRegistry.addRecipe(new ItemStack(ModItems.jumpBoots), "F F", "BXB", "B B", 'F', Materials.createStack(Materials.DATA.flyWing), 'B', Materials.createStack(Materials.DATA.elasticFibre), 'X', new ItemStack(ModItems.reinExoskeletonBoots, 1));
@@ -180,7 +180,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mirBrick, 4), "xy", "yx", 'x', Blocks.clay, 'y', ModBlocks.mudBricks);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mirBrick, 4), "xy", "yx", 'y', Blocks.clay, 'x', ModBlocks.mudBricks);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockSilk, 1), "sss", "sss", "sss", 's', Items.string);
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockAmber, 4, 2), "ss", "ss", 's', new ItemStack(ModBlocks.blockAmber, 1, 0));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.amber, 4, 2), "ss", "ss", 's', new ItemStack(ModBlocks.amber, 1, 0));
 		GameRegistry.addRecipe(new ItemStack(Items.string, 9), "#", '#', new ItemStack(ModBlocks.blockSilk));
 		GameRegistry.addRecipe(new ItemStack(Items.dye, 1, 15), "#", '#', Materials.createStack(Materials.DATA.shardBone));
 		GameRegistry.addRecipe(new ItemStack(Items.dye, 6, 15), "#", '#', new ItemStack(ModItems.fossilClub, 1, 0));
@@ -189,7 +189,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', Materials.createStack(Materials.DATA.flyWing), 'S', new ItemStack(Items.stick, 1, 0), 'T', new ItemStack(Items.flint, 1, 0));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.sprayCan, 9), " B ", "XRX", "XXX", 'X', "ingotIron", 'B', Blocks.wooden_button, 'R', Materials.createStack(Materials.DATA.repellent)));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.altarBase, 1), "XXX", "XOX", "XXX", 'O', Blocks.obsidian, 'X', Materials.createStack(Materials.DATA.altarFragment));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.glowingJar, 1), "XXX", "GBG", "GGG", 'X', "ingotIron", 'G', new ItemStack(ModBlocks.blockAmber, 1, 1), 'B', Materials.createStack(Materials.DATA.bioLuminescence)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.glowingJar, 1), "XXX", "GBG", "GGG", 'X', "ingotIron", 'G', new ItemStack(ModBlocks.amber, 1, 1), 'B', Materials.createStack(Materials.DATA.bioLuminescence)));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.reinExo, 1), Materials.createStack(Materials.DATA.reinforcedPlateExo), Materials.createStack(Materials.DATA.reinforcedPlateExo), Materials.createStack(Materials.DATA.reinforcedPlateExo), Materials.createStack(Materials.DATA.reinforcedPlateExo));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.book, 1, 0), Materials.createStack(Materials.DATA.plateExo), new ItemStack(Items.paper, 1, 0), new ItemStack(Items.paper, 1, 0), new ItemStack(Items.paper, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.paper, 4), Materials.createStack(Materials.DATA.papyrus), Materials.createStack(Materials.DATA.papyrus));
@@ -201,7 +201,7 @@ public class RecipeHandler {
 		diamondPick.addEnchantment(Enchantment.silkTouch, 1);
 		GameRegistry.addRecipe(EnchantSensitiveRecipe.makeRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', Materials.createStack(Materials.DATA.scorpionPincer), 'D', diamondPick, 'C', Blocks.chest));
 		GameRegistry.addRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', Materials.createStack(Materials.DATA.honeyDrip), 'B', Items.bucket);
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', "ingotIron", '$', new ItemStack(ModBlocks.blockAmber, 1, 1), '0', Materials.createStack(Materials.DATA.nectar)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', "ingotIron", '$', new ItemStack(ModBlocks.amber, 1, 1), '0', Materials.createStack(Materials.DATA.nectar)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.jadeBlock), "xxx", "xxx", "xxx", 'x', "gemJade"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(Materials.createStack(Materials.DATA.jade, 9), "blockJade"));
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.mucusCharge), "SSS", "SRS", "SSS", 'S', Items.slime_ball, 'R', Materials.createStack(Materials.DATA.repellent));
@@ -284,7 +284,7 @@ public class RecipeHandler {
 	}
 
 	private static void registerSmelting() {
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.blockAmber), new ItemStack(ModBlocks.blockAmber, 1, 1), 0.3F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.amber), new ItemStack(ModBlocks.amber, 1, 1), 0.3F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, Food.FoodType.larvaRaw.ordinal()), new ItemStack(ModItems.food, 1, Food.FoodType.larvaCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, Food.FoodType.grasshopperLegRaw.ordinal()), new ItemStack(ModItems.food, 1, Food.FoodType.grasshopperLegCooked.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, Food.FoodType.tarantulaLegRaw.ordinal()), new ItemStack(ModItems.food, 1, Food.FoodType.tarantulaLegCooked.ordinal()), 0.2F);
@@ -341,7 +341,7 @@ public class RecipeHandler {
 		OreDictionary.registerOre("blockSpawner", ModBlocks.jumpingSpiderSpawner);
 		OreDictionary.registerOre("blockSpawner", ModBlocks.waspSpawner);
 		OreDictionary.registerOre("gemDiamond", ModItems.encrustedDiamond);
-		OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.blockAmber, 1, 1));
+		OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.amber, 1, 1));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.saplessLog));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.scorchedWood));
 

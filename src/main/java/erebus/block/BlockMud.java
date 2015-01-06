@@ -8,12 +8,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+import erebus.ModTabs;
 
 public class BlockMud extends Block {
 
 	public BlockMud() {
 		super(Material.ground);
 		setHardness(2.0F);
+		setBlockName("erebus.mud");
+		setCreativeTab(ModTabs.blocks);
+		setBlockTextureName("erebus:mud");
 	}
 
 	@Override

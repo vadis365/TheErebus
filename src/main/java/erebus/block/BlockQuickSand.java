@@ -7,11 +7,18 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import erebus.ModTabs;
 
 public class BlockQuickSand extends Block {
 
 	public BlockQuickSand() {
 		super(Material.sand);
+		setHardness(28F);
+		setStepSound(soundTypeSand);
+		setHarvestLevel("shovel", 2);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.quickSand");
+		setBlockTextureName("erebus:quickSand");
 	}
 
 	@Override

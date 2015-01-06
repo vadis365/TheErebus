@@ -9,11 +9,13 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModTabs;
 
 public abstract class AltarAbstract extends BlockContainer {
 	public AltarAbstract() {
 		super(Material.rock);
 		setHardness(20.0F);
+		setCreativeTab(ModTabs.blocks);
 	}
 
 	@Override

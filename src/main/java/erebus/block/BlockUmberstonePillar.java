@@ -6,11 +6,18 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 
 public class BlockUmberstonePillar extends BlockRotatedPillar {
 
 	public BlockUmberstonePillar() {
 		super(Material.rock);
+		setHardness(1.5F);
+		setResistance(10.0F);
+		setStepSound(soundTypeStone);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.umberstonePillar");
+		setBlockTextureName("erebus:umberstonePillarSides");
 	}
 
 	@Override

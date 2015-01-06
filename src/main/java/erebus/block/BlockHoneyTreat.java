@@ -1,39 +1,26 @@
 package erebus.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockCake;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModTabs;
 
 public class BlockHoneyTreat extends BlockCake {
-	@SideOnly(Side.CLIENT)
-	private IIcon honeyTreatTop, honeyTreatBottom, honeyTreatInner;
 
 	public BlockHoneyTreat() {
-		super();
+		setHardness(0.5F);
 		setTickRandomly(true);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return side == 1 ? honeyTreatTop : side == 0 ? honeyTreatBottom : meta > 0 && side == 4 ? honeyTreatInner : blockIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister icon) {
-		blockIcon = icon.registerIcon(getTextureName() + "_side");
-		honeyTreatInner = icon.registerIcon(getTextureName() + "_inner");
-		honeyTreatTop = icon.registerIcon(getTextureName() + "_top");
-		honeyTreatBottom = icon.registerIcon(getTextureName() + "_bottom");
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.honeyTreat");
+		setStepSound(Block.soundTypeCloth);
+		setBlockTextureName("erebus:honeyTreat");
 	}
 
 	@Override
@@ -64,5 +51,4 @@ public class BlockHoneyTreat extends BlockCake {
 	public Item getItem(World world, int x, int y, int z) {
 		return Item.getItemFromBlock(ModBlocks.honeyTreat);
 	}
-
 }

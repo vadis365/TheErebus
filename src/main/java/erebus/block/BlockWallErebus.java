@@ -12,12 +12,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.item.block.ItemBlockGeneric;
 
 public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
 
 	public BlockWallErebus() {
 		super(ModBlocks.umberstone);
+		setHarvestLevel("pickaxe", 0);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.wallErebus");
 	}
 
 	@Override
@@ -29,24 +33,19 @@ public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
 			case 1:
 				return ModBlocks.umberstone.getIcon(side, 1); // Umbercobble
 			case 2:
-				return ModBlocks.umberstone.getIcon(side, 2); // Mossy
-				// Umbercobble
+				return ModBlocks.umberstone.getIcon(side, 2); // Mossy Umbercobble
 			case 3:
-				return ModBlocks.umberstone.getIcon(side, 3); // Webbed
-				// Umbercobble
+				return ModBlocks.umberstone.getIcon(side, 3); // Webbed Umbercobble
 			case 4:
-				return ModBlocks.umberstone.getIcon(side, 4); // Umberstone
-				// Bricks
+				return ModBlocks.umberstone.getIcon(side, 4); // Umberstone Bricks
 			case 5:
 				return ModBlocks.umberPaver.getIcon(side, 0); // Umberpaver
 			case 6:
-				return ModBlocks.umberPaver.getIcon(side, 1); // Mossy
-				// Umberpaver
+				return ModBlocks.umberPaver.getIcon(side, 1); // Mossy Umberpaver
 			case 7:
-				return ModBlocks.umberPaver.getIcon(side, 2); // Webbed
-				// Umberpaver
+				return ModBlocks.umberPaver.getIcon(side, 2); // Webbed Umberpaver
 			case 8:
-				return ModBlocks.blockAmber.getIcon(side, 2); // Amber Bricks
+				return ModBlocks.amber.getIcon(side, 2); // Amber Bricks
 		}
 	}
 

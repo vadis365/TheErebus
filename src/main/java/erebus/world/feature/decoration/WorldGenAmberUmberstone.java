@@ -19,7 +19,7 @@ public class WorldGenAmberUmberstone extends WorldGenerator {
 			for (int yy = -ceilRad; yy <= ceilRad; yy++)
 				for (int zz = -ceilRad; zz <= ceilRad; zz++)
 					if (Math.sqrt(xx * xx + yy * yy + zz * zz) <= rad + rand.nextFloat() * 0.4F && world.getBlock(x + xx, y + yy, z + zz) == ModBlocks.umberstone)
-						world.setBlock(x + xx, y + yy, z + zz, ModBlocks.blockAmber);
+						world.setBlock(x + xx, y + yy, z + zz, ModBlocks.amber);
 
 		return true;
 	}

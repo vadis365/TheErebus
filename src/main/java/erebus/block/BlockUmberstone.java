@@ -16,16 +16,23 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModAchievements;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.item.block.ItemBlockGeneric;
 
 public class BlockUmberstone extends Block implements ISubBlocksBlock {
 
 	public static final String[] iconPaths = new String[] { "umberstone", "cobbleUmber", "cobbleUmberMossy", "cobbleUmberWebbed", "umberstoneBricks", "smoothUmbertile", "smoothUmbertiles" };
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] icons;
+	private IIcon[] icons;
 
 	public BlockUmberstone() {
 		super(Material.rock);
+		setHardness(1.5F);
+		setResistance(10.0F);
+		setStepSound(soundTypeStone);
+		setHarvestLevel("pickaxe", 0);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.umberstone");
 	}
 
 	@Override

@@ -9,23 +9,23 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.tileentity.TileEntityExtenderThingy;
 
 public class BlockExtenderThingy extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon iconTop, iconBottom;
-
 	public BlockExtenderThingy() {
 		super(Material.wood);
-		setBlockTextureName("erebus:extenderThingy");
+		setHardness(0.4F);
+		setHarvestLevel("axe", 0);
+		setStepSound(soundTypeLadder);
+		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.extenderThingy");
+		setBlockTextureName("erebus:planks_bamboo");
 	}
 
 	@Override

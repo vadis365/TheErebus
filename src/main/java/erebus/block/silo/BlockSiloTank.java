@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
+import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 
@@ -26,6 +27,7 @@ public class BlockSiloTank extends BlockContainer {
 
 	public BlockSiloTank(Material material) {
 		super(material);
+		setCreativeTab(ModTabs.blocks);
 		setBlockBounds(0.125F, 0F, 0.125F, 0.875F, 1F, 0.875F);
 	}
 
