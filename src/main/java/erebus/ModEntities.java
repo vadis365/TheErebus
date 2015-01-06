@@ -58,6 +58,7 @@ import erebus.entity.EntityTarantulaEgg;
 import erebus.entity.EntityTarantulaMiniboss;
 import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityUmberGolem;
+import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWaspDagger;
@@ -124,7 +125,8 @@ public class ModEntities {
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
 		registerEntity(47, EntitySnapper.class, "snapper", 0x804E3D, 0x3D6F80);
 		registerEntity(48, EntityWisp.class, "wisp", 0x804E3D, 0x3D6F80);
-
+		registerEntity(49, EntityUmberGolemDungeonTypes.class, "umberGolemIdol",  0xFFA200, 0xFFEE00);
+		
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
 		registerEntity(52, EntityAnimatedBambooCrate.class, "animatedBambooCrate");
