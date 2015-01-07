@@ -23,8 +23,8 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.DungeonIdols.IDOL;
 
-public class EntityUmberGolemDungeonTypes extends EntityMob{
-    
+public class EntityUmberGolemDungeonTypes extends EntityMob {
+
 	public EntityUmberGolemDungeonTypes(World world) {
 		super(world);
 		isImmuneToFire = true;
@@ -40,7 +40,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(20, new Integer(0));
-		dataWatcher.addObject(29, new Byte((byte) rand.nextInt(4))); //just for testing random spawns	
+		dataWatcher.addObject(29, new Byte((byte) rand.nextInt(IDOL.values().length))); //just for testing random spawns
 	}
 
 	@Override
@@ -58,32 +58,32 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 	}
 
 	private double getAttackStrength() {
-		switch(getType()) {
-		case 0:
-			return 2.0D;
-		case 1:
-			return 3.0D;
-		case 2:
-			return 4.0D;
-		case 3:
-			return 5.0D;	
-		default:
-			return 2.0D;
+		switch (getType()) {
+			case 0:
+				return 2.0D;
+			case 1:
+				return 3.0D;
+			case 2:
+				return 4.0D;
+			case 3:
+				return 5.0D;
+			default:
+				return 2.0D;
 		}
 	}
 
 	private double setGolemHealth() {
-		switch(getType()) {
-		case 0:
-			return 100.0D;
-		case 1:
-			return 150.0D;
-		case 2:
-			return 200.0D;
-		case 3:
-			return 250.0D;	
-		default:
-			return 100.0D;
+		switch (getType()) {
+			case 0:
+				return 100.0D;
+			case 1:
+				return 150.0D;
+			case 2:
+				return 200.0D;
+			case 3:
+				return 250.0D;
+			default:
+				return 100.0D;
 		}
 	}
 
@@ -120,24 +120,9 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 
 	@Override
 	protected void dropFewItems(boolean hitByPlayer, int looting) {
-		switch(getType()) {
-		case 0:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolBronze.ordinal()), 0.0F);
-			break;
-		case 1:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolSilver.ordinal()), 0.0F);
-			break;
-		case 2:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolGold.ordinal()), 0.0F);
-			break;
-		case 3:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolJade.ordinal()), 0.0F);
-			break;
-		default:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolBronze.ordinal()), 0.0F);
-			break;
-		}
+		IDOL type = IDOL.values()[Math.max(0, Math.min(IDOL.values().length, getType()))];
 
+		entityDropItem(new ItemStack(ModItems.idols, 1, type.ordinal()), 0.0F);
 	}
 
 	@Override
@@ -149,24 +134,24 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 				setRangeAttackTimer(getRangeAttackTimer() + 2);
 			if (getRangeAttackTimer() == 100 && distance > 3)
 				shootMissile(getAttackTarget(), distance);
-				getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
-				if(isCollidedHorizontally && canBreakBlock()) {
-					double direction = Math.toRadians(renderYawOffset);
-					worldObj.destroyBlockInWorldPartially(getEntityId(), (int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D), getRangeAttackTimer()/10);
-					worldObj.destroyBlockInWorldPartially(getEntityId(), (int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D), getRangeAttackTimer()/10);
-					if(getRangeAttackTimer() == 0) {// this should have it's own counter 
-						worldObj.setBlockToAir((int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D));
-						worldObj.setBlockToAir((int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D));
-						
-					}
+			getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
+			if (isCollidedHorizontally && canBreakBlock()) {
+				double direction = Math.toRadians(renderYawOffset);
+				worldObj.destroyBlockInWorldPartially(getEntityId(), (int) (posX + -Math.sin(direction) * 1.5D), (int) posY, (int) (posZ + Math.cos(direction) * 1.5D), getRangeAttackTimer() / 10);
+				worldObj.destroyBlockInWorldPartially(getEntityId(), (int) (posX + -Math.sin(direction) * 1.5D), (int) posY + 1, (int) (posZ + Math.cos(direction) * 1.5D), getRangeAttackTimer() / 10);
+				if (getRangeAttackTimer() == 0) {// this should have it's own counter
+					worldObj.setBlockToAir((int) (posX + -Math.sin(direction) * 1.5D), (int) posY, (int) (posZ + Math.cos(direction) * 1.5D));
+					worldObj.setBlockToAir((int) (posX + -Math.sin(direction) * 1.5D), (int) posY + 1, (int) (posZ + Math.cos(direction) * 1.5D));
+
 				}
+			}
 		}
 	}
 
 	private boolean canBreakBlock() {
 		double direction = Math.toRadians(renderYawOffset);
-		//testing with dirt blocks atm 
-		return worldObj.getBlock((int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D)) == Blocks.dirt || worldObj.getBlock((int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D)) == Blocks.dirt ;
+		//testing with dirt blocks atm
+		return worldObj.getBlock((int) (posX + -Math.sin(direction) * 1.5D), (int) posY, (int) (posZ + Math.cos(direction) * 1.5D)) == Blocks.dirt || worldObj.getBlock((int) (posX + -Math.sin(direction) * 1.5D), (int) posY + 1, (int) (posZ + Math.cos(direction) * 1.5D)) == Blocks.dirt;
 	}
 
 	@Override
@@ -194,9 +179,9 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 		}
 		return true;
 	}
-	
+
 	public EntityThrowable getMissileType() {
-		switch(getType()) {
+		switch (getType()) {
 			case 0:
 				return new EntityGooBall(worldObj, this);
 			case 1:
@@ -208,23 +193,23 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 				return new EntityGooBall(worldObj, this);
 		}
 	}
-	
-    public void shootMissile(EntityLivingBase EntityLivingBase, float distance) {
-    	setRangeAttackTimer(0);
-    	EntityThrowable missile = getMissileType();
-    	if(getType() == 1)
-    		((EntityWebSling) missile).setType((byte) 0);
-    	if(getType() == 2)
-    		((EntityWebSling) missile).setType((byte) 2);
-    	missile.rotationPitch -= -20.0F;
-    	double targetX = EntityLivingBase.posX + EntityLivingBase.motionX - this.posX;
-    	double targetY = EntityLivingBase.posY + (double)EntityLivingBase.getEyeHeight() - 1.100000023841858D - this.posY;
-    	double targetZ = EntityLivingBase.posZ + EntityLivingBase.motionZ - this.posZ;
-    	float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
-    	missile.setThrowableHeading(targetX, targetY + (double)(target * 0.1F), targetZ, 0.75F, 8.0F);
-    	this.worldObj.spawnEntityInWorld(missile);
+
+	public void shootMissile(EntityLivingBase EntityLivingBase, float distance) {
+		setRangeAttackTimer(0);
+		EntityThrowable missile = getMissileType();
+		if (getType() == 1)
+			((EntityWebSling) missile).setType((byte) 0);
+		if (getType() == 2)
+			((EntityWebSling) missile).setType((byte) 2);
+		missile.rotationPitch -= -20.0F;
+		double targetX = EntityLivingBase.posX + EntityLivingBase.motionX - posX;
+		double targetY = EntityLivingBase.posY + EntityLivingBase.getEyeHeight() - 1.100000023841858D - posY;
+		double targetZ = EntityLivingBase.posZ + EntityLivingBase.motionZ - posZ;
+		float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
+		missile.setThrowableHeading(targetX, targetY + target * 0.1F, targetZ, 0.75F, 8.0F);
+		worldObj.spawnEntityInWorld(missile);
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
@@ -236,7 +221,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 		super.readEntityFromNBT(nbt);
 		setType(nbt.getByte("type"));
 	}
-	
+
 	public void setType(byte isType) {
 		dataWatcher.updateObject(29, Byte.valueOf(isType));
 	}
@@ -244,7 +229,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 	public byte getType() {
 		return dataWatcher.getWatchableObjectByte(29);
 	}
-	
+
 	public void setRangeAttackTimer(int size) {
 		dataWatcher.updateObject(20, Integer.valueOf(size));
 	}
