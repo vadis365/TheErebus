@@ -20,11 +20,21 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.item.DungeonIdols.IDOL;
 
-public class EntityUmberGolemDungeonTypes extends EntityMob{
-    
+public class EntityUmberGolemDungeonTypes extends EntityMob {
+	Block block;
+	int blockMeta;
+	boolean hasBlock = false;
+	  float hardness;
+	  int blockX;
+	  int blockY;
+	  int blockZ;
+	  int breakTime = 0;
+	  
 	public EntityUmberGolemDungeonTypes(World world) {
 		super(world);
 		isImmuneToFire = true;
@@ -145,28 +155,63 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 		super.onUpdate();
 		if (getAttackTarget() != null) {
 			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
-			if (getRangeAttackTimer() < 100 && distance > 3)
-				setRangeAttackTimer(getRangeAttackTimer() + 2);
-			if (getRangeAttackTimer() == 100 && distance > 3)
-				shootMissile(getAttackTarget(), distance);
-				getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
-				if(isCollidedHorizontally && canBreakBlock()) {
-					double direction = Math.toRadians(renderYawOffset);
-					worldObj.destroyBlockInWorldPartially(getEntityId(), (int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D), getRangeAttackTimer()/10);
-					worldObj.destroyBlockInWorldPartially(getEntityId(), (int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D), getRangeAttackTimer()/10);
-					if(getRangeAttackTimer() == 0) {// this should have it's own counter 
-						worldObj.setBlockToAir((int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D));
-						worldObj.setBlockToAir((int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D));
-						
-					}
-				}
+			if (!hasBlock) {
+				if (getRangeAttackTimer() < 100 && distance > 3)
+					setRangeAttackTimer(getRangeAttackTimer() + 2);
+				if (getRangeAttackTimer() == 100 && distance > 3)
+					shootMissile(getAttackTarget(), distance);
+			}
+
+			getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
+			if (isCollidedHorizontally) {
+				double direction = Math.toRadians(renderYawOffset);
+				removeBlock((int) (posX + -Math.sin(direction) * 1.5D), (int) posY, (int) (posZ + Math.cos(direction) * 1.5D));
+				removeBlock((int) (posX + -Math.sin(direction) * 1.5D), (int) posY + 1, (int) (posZ + Math.cos(direction) * 1.5D));
+			}
+		}
+	}
+	
+	protected void removeBlock(int x, int y, int z) {
+		if ((!hasBlock) && (worldObj.getBlock(x, y, z) != Blocks.air)) {
+			hasBlock = true;
+			blockX = x;
+			blockY = y;
+			blockZ = z;
+			breakTime = 0;
+			block = worldObj.getBlock(blockX, blockY, blockZ);
+			blockMeta = worldObj.getBlockMetadata(blockX, blockY, blockZ);
+			hardness = block.getBlockHardness(worldObj, blockX, blockY, blockZ);
+		}
+
+		if (hardness <= 0.0F || block == null || !canBreakBlock(block, blockMeta))
+			hasBlock = false;
+
+		if (hasBlock) {
+			breakTime += 1;
+			block = worldObj.getBlock(blockX, blockY, blockZ);
+			blockMeta = worldObj.getBlockMetadata(blockX, blockY, blockZ);
+			int i = (int) (breakTime / (hardness * 160.0F) * 10.0F);
+			worldObj.destroyBlockInWorldPartially(getEntityId(), blockX, blockY, blockZ, i);
+
+			if (worldObj.rand.nextInt(30) == 0)
+				worldObj.playAuxSFXAtEntity(null, 2001, blockX, blockY, blockZ, block.getIdFromBlock(worldObj.getBlock(blockX, blockY, blockZ)));
+
+			if (breakTime >= hardness * 160.0F) {
+				Utils.dropStack(worldObj, blockX, blockY, blockZ, new ItemStack(block, 1, blockMeta));
+				worldObj.setBlockToAir(blockX, blockY, blockZ);
+				breakTime = 0;
+				hasBlock = false;
+				worldObj.playAuxSFXAtEntity(null, 2001, blockX, blockY, blockZ, block.getIdFromBlock(worldObj.getBlock(blockX, blockY, blockZ)));
+			}
 		}
 	}
 
-	private boolean canBreakBlock() {
-		double direction = Math.toRadians(renderYawOffset);
-		//testing with dirt blocks atm 
-		return worldObj.getBlock((int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D)) == Blocks.dirt || worldObj.getBlock((int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D)) == Blocks.dirt ;
+	protected boolean canBreakBlock(Block block, int blockMeta) {
+		if (block == ModBlocks.gneiss)
+			return false;
+		if (block.hasTileEntity(blockMeta))
+			return false;
+		return true;
 	}
 
 	@Override
@@ -185,9 +230,9 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
 				motionY = 0.4000000059604645D;
 			}
-			int Knockback = 1;
+			int knockback = 1;
 			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttackStrength());
-			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
+			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback * 0.5F, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback * 0.5F);
 			worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));
 			return true;
@@ -217,12 +262,12 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
     	if(getType() == 2)
     		((EntityWebSling) missile).setType((byte) 2);
     	missile.rotationPitch -= -20.0F;
-    	double targetX = EntityLivingBase.posX + EntityLivingBase.motionX - this.posX;
-    	double targetY = EntityLivingBase.posY + (double)EntityLivingBase.getEyeHeight() - 1.100000023841858D - this.posY;
-    	double targetZ = EntityLivingBase.posZ + EntityLivingBase.motionZ - this.posZ;
+    	double targetX = EntityLivingBase.posX + EntityLivingBase.motionX - posX;
+    	double targetY = EntityLivingBase.posY + (double)EntityLivingBase.getEyeHeight() - 1.100000023841858D - posY;
+    	double targetZ = EntityLivingBase.posZ + EntityLivingBase.motionZ - posZ;
     	float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
     	missile.setThrowableHeading(targetX, targetY + (double)(target * 0.1F), targetZ, 0.75F, 8.0F);
-    	this.worldObj.spawnEntityInWorld(missile);
+    	worldObj.spawnEntityInWorld(missile);
 	}
 	
 	@Override
