@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -148,7 +149,24 @@ public class EntityUmberGolemDungeonTypes extends EntityMob{
 				setRangeAttackTimer(getRangeAttackTimer() + 2);
 			if (getRangeAttackTimer() == 100 && distance > 3)
 				shootMissile(getAttackTarget(), distance);
+				getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
+				if(isCollidedHorizontally && canBreakBlock()) {
+					double direction = Math.toRadians(renderYawOffset);
+					worldObj.destroyBlockInWorldPartially(getEntityId(), (int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D), getRangeAttackTimer()/10);
+					worldObj.destroyBlockInWorldPartially(getEntityId(), (int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D), getRangeAttackTimer()/10);
+					if(getRangeAttackTimer() == 0) {// this should have it's own counter 
+						worldObj.setBlockToAir((int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D));
+						worldObj.setBlockToAir((int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D));
+						
+					}
+				}
 		}
+	}
+
+	private boolean canBreakBlock() {
+		double direction = Math.toRadians(renderYawOffset);
+		//testing with dirt blocks atm 
+		return worldObj.getBlock((int)(posX + -Math.sin(direction) * 1.5D), (int)posY, (int)(posZ + Math.cos(direction) * 1.5D)) == Blocks.dirt || worldObj.getBlock((int)(posX + -Math.sin(direction) * 1.5D), (int)posY + 1, (int)(posZ + Math.cos(direction) * 1.5D)) == Blocks.dirt ;
 	}
 
 	@Override
