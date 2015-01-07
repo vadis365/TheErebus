@@ -130,24 +130,9 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean hitByPlayer, int looting) {
-		switch(getType()) {
-		case 0:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolBronze.ordinal()), 0.0F);
-			break;
-		case 1:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolSilver.ordinal()), 0.0F);
-			break;
-		case 2:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolGold.ordinal()), 0.0F);
-			break;
-		case 3:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolJade.ordinal()), 0.0F);
-			break;
-		default:
-			entityDropItem(new ItemStack(ModItems.idols, 1, IDOL.idolBronze.ordinal()), 0.0F);
-			break;
-		}
-
+		IDOL type = IDOL.values()[Math.max(0, Math.min(IDOL.values().length, getType()))]; 
+		
+		entityDropItem(new ItemStack(ModItems.idols, 1, type.ordinal()), 0.0F); 
 	}
 
 	@Override

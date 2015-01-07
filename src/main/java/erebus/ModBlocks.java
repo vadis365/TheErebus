@@ -14,6 +14,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
 import erebus.block.BlockBones;
 import erebus.block.BlockButtonUmberstone;
+import erebus.block.BlockCapstone;
 import erebus.block.BlockComposter;
 import erebus.block.BlockDoorErebus;
 import erebus.block.BlockErebusHoney;
@@ -280,7 +281,7 @@ public class ModBlocks {
 	public static final Block jumpingSpiderSpawner = new BlockSpiderSpawner("jumpingSpider").setBlockName("erebus.jumpingSpiderSpawner").setBlockTextureName("erebus:spiderSpawner");
 	public static final Block tarantulaSpawner = new BlockSpiderSpawner("tarantula").setBlockName("erebus.tarantulaSpawner").setBlockTextureName("erebus:spiderSpawner");
 	public static final Block waspSpawner = new BlockWaspSpawner("wasp").setBlockName("erebus.waspSpawner").setBlockTextureName("erebus:waspNestSpawner");
-
+	public static final Block capstone = new BlockCapstone();
 	public static final Block waspNestBlock = new BlockWaspNest();
 	public static final Block gneiss = new BlockGneiss();
 	public static final Block siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("erebus.siloSupports").setBlockTextureName("erebus:siloSupports");

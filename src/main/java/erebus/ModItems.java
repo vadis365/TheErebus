@@ -95,8 +95,8 @@ public class ModItems {
 	public static final Item homingBeecon = new HomingBeecon().setUnlocalizedName("erebus.homingBeecon").setTextureName("paper");
 	public static final Item homingBeeconAdvanced = new HomingBeeconAdvanced().setUnlocalizedName("erebus.homingBeeconAdvanced").setTextureName("paper");
 	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.6F, ModBlocks.blockCabbage, Blocks.farmland).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
-	public static final Item idols = new DungeonIdols().setUnlocalizedName("erebus.idols");
-	
+	public static final Item idols = new DungeonIdols();
+
 	public static final Item flowerSeeds = new FlowerSeeds().setUnlocalizedName("erebus.flowerSeeds");
 	public static final Item whetstone = new Whetstone().setUnlocalizedName("erebus.whetstone").setTextureName("erebus:whetstone");
 	public static final Item encrustedDiamond = new EncrustedDiamond().setUnlocalizedName("erebus.encrustedDiamond").setTextureName("erebus:encrustedDiamond");
@@ -177,7 +177,7 @@ public class ModItems {
 	public static final Item rhinoExoskeletonBody = new RhinoArmor(1).setUnlocalizedName("rhinoChestplate").setTextureName("erebus:rhinoChestplate");
 	public static final Item rhinoExoskeletonLegs = new RhinoArmor(2).setUnlocalizedName("rhinoLeggings").setTextureName("erebus:rhinoLeggings");
 	public static final Item rhinoExoskeletonBoots = new RhinoArmor(3).setUnlocalizedName("rhinoBoots").setTextureName("erebus:rhinoBoots");
-	
+
 	// CREATIVE
 	public static final Item spawnEggs = new SpawnEggs().setUnlocalizedName("erebus.monsterPlacer").setTextureName("spawn_egg");
 
@@ -194,7 +194,7 @@ public class ModItems {
 
 	public static final Item bottleAntiVenom = new BottleAntiVenom().setUnlocalizedName("erebus.bottleAntiVenom");
 	public static final Item smoothieBook = new RecipeBookSmoothies().setMaxStackSize(1).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.smoothieBook").setTextureName("book_normal");
-	
+
 	public static void init() {
 		initCreativeTabs();
 		registerItems();
