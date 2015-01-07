@@ -29,16 +29,16 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	Block block;
 	int blockMeta;
 	boolean hasBlock = false;
-	  float hardness;
-	  int blockX;
-	  int blockY;
-	  int blockZ;
-	  int breakTime = 0;
+	float hardness;
+	int blockX;
+	int blockY;
+	int blockZ;
+	int breakTime = 0;
 	  
 	public EntityUmberGolemDungeonTypes(World world) {
 		super(world);
 		isImmuneToFire = true;
-		setSize(1F, 2.0F);
+		setSize(1.0F, 1.9F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.5D, false));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
@@ -146,8 +146,10 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 				if (getRangeAttackTimer() == 100 && distance > 3)
 					shootMissile(getAttackTarget(), distance);
 			}
-
-			getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
+			
+			if (oneShotMoveCheat())
+				getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
+			
 			if (isCollidedHorizontally) {
 				double direction = Math.toRadians(renderYawOffset);
 				removeBlock((int) (posX + -Math.sin(direction) * 1.5D), (int) posY, (int) (posZ + Math.cos(direction) * 1.5D));
@@ -155,7 +157,11 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 			}
 		}
 	}
-	
+
+	private boolean oneShotMoveCheat() {
+		return !getNavigator().tryMoveToEntityLiving(getAttackTarget(), 0.5D);
+	}
+
 	protected void removeBlock(int x, int y, int z) {
 		if ((!hasBlock) && (worldObj.getBlock(x, y, z) != Blocks.air)) {
 			hasBlock = true;
@@ -168,7 +174,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 			hardness = block.getBlockHardness(worldObj, blockX, blockY, blockZ);
 		}
 
-		if (hardness <= 0.0F || block == null || !canBreakBlock(block, blockMeta))
+		if (hardness <= 0.0F || block == null || !canBreakBlock(block, blockMeta) || !isInSamePos())
 			hasBlock = false;
 
 		if (hasBlock) {
@@ -198,6 +204,10 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 			return false;
 		return true;
 	}
+	
+	private boolean isInSamePos() {
+		return (int) posX == (int) lastTickPosX && (int) posY == (int) lastTickPosY && (int) posZ == (int) lastTickPosZ;
+	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
@@ -206,7 +216,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	}
 
 	protected boolean Attack(Entity entity) {
-		if (!worldObj.isRemote) {
+		if (!worldObj.isRemote && canEntityBeSeen(entity)) {
 			if (onGround) {
 				double d0 = entity.posX - posX;
 				double d1 = entity.posZ - posZ;
@@ -239,20 +249,22 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 		}
 	}
 	
-    public void shootMissile(EntityLivingBase EntityLivingBase, float distance) {
+    public void shootMissile(EntityLivingBase entity, float distance) {
     	setRangeAttackTimer(0);
-    	EntityThrowable missile = getMissileType();
-    	if(getType() == 1)
-    		((EntityWebSling) missile).setType((byte) 0);
-    	if(getType() == 2)
-    		((EntityWebSling) missile).setType((byte) 2);
-    	missile.rotationPitch -= -20.0F;
-    	double targetX = EntityLivingBase.posX + EntityLivingBase.motionX - posX;
-    	double targetY = EntityLivingBase.posY + (double)EntityLivingBase.getEyeHeight() - 1.100000023841858D - posY;
-    	double targetZ = EntityLivingBase.posZ + EntityLivingBase.motionZ - posZ;
-    	float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
-    	missile.setThrowableHeading(targetX, targetY + (double)(target * 0.1F), targetZ, 0.75F, 8.0F);
-    	worldObj.spawnEntityInWorld(missile);
+    	if(canEntityBeSeen(entity)) {
+    		EntityThrowable missile = getMissileType();
+    		if(getType() == 1)
+    			((EntityWebSling) missile).setType((byte) 0);
+    		if(getType() == 2)
+    			((EntityWebSling) missile).setType((byte) 2);
+    		missile.rotationPitch -= -20.0F;
+    		double targetX = entity.posX + entity.motionX - posX;
+    		double targetY = entity.posY + (double)entity.getEyeHeight() - 1.100000023841858D - posY;
+    		double targetZ = entity.posZ + entity.motionZ - posZ;
+    		float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
+    		missile.setThrowableHeading(targetX, targetY + (double)(target * 0.1F), targetZ, 0.75F, 8.0F);
+    		worldObj.spawnEntityInWorld(missile);
+    	}
 	}
 	
 	@Override
