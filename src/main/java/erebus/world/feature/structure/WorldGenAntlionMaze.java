@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.world.feature.util.BasicShapeGen;
 
 
@@ -56,29 +57,64 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			                    break;
 			            }
 			       }
-					buildCourtyard(world, ModBlocks.templePillar, 0, x+sizeX, y - 4, z+sizeZ, 32, 4, 32);
+					buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 32, 4, 32);
 					// TODO Make a proper pyramid with a couple of levels and Boss arena at base
-					// TODO Make Pyramid indestructible apart from 4 cap stones (need all 4 idols to open the entrance capstones)
-					BasicShapeGen.createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x+sizeX/2+9, z+sizeZ/2+9, 30, 30, y - 6);
-					placeSpecialChests(world, x, y, z);
-					buildEntrances(world, ModBlocks.templeBrick, 0, true, x, z, 5, 5, y, rand);
+					createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x + sizeX/2 + 9, z + sizeZ/2 + 9, 30, 30, y - 6);
+					addCapstones(world, x + sizeX -1, y + 8, z + sizeZ -1, ModBlocks.capstone, 0);
+					spawnIdolGuardians(world, x, y, z);
+					buildEntrances(world, Blocks.air, 0, true, x, z, 5, 5, y, rand);
 			        return true;
 			//}
 		//}
 	}
     
-    private void placeSpecialChests(World world, int x, int y, int z) {
-    	// TODO These chests will contain the 4 new idol items, one in each.
-    	// when attempted to be opened they will transform in to a mob which you have beat to get the idol.
-    	world.setBlock(x + 1, y - 3, z + 1, ModBlocks.petrifiedWoodChest);
-    	world.setBlock(x + 95, y - 3, z + 1, ModBlocks.petrifiedWoodChest);
-    	world.setBlock(x + 95, y - 3, z + 95, ModBlocks.petrifiedWoodChest);
-    	world.setBlock(x + 1, y - 3, z + 95, ModBlocks.petrifiedWoodChest);
-    	
-    	world.setBlockMetadataWithNotify(x + 1, y - 3, z + 1, 5, 3);
-    	world.setBlockMetadataWithNotify(x + 95, y - 3, z + 1, 3, 3);
-    	world.setBlockMetadataWithNotify(x + 95, y - 3, z + 95, 4, 3);
-    	world.setBlockMetadataWithNotify(x + 1, y - 3, z + 95, 2, 3);
+    private void addCapstones(World world, int x, int y, int z, Block capstone, int metaData) {
+    	world.setBlock(x, y, z, capstone, metaData, 3);
+    	world.setBlock(x + 1, y, z, capstone, metaData, 3);
+    	world.setBlock(x + 1, y, z + 1, capstone, metaData, 3);
+    	world.setBlock(x, y, z + 1, capstone, metaData, 3);
+	}
+
+	private void createPyramid(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart) {
+		int yStop = Math.min((baseLengthZ - 1) / 2, (baseLengthX - 1) / 2) + yStart;
+		for (int i = 0; i + yStart <= yStop -1; i++) {
+			int y = yStart + i;
+			int maxX = x + baseLengthX - 1;
+			int maxZ = z + baseLengthZ - 1;
+			for (int ix = 0; x + ix + i <= maxX; ix++)
+				for (int iz = 0; z + iz + i <= maxZ; iz++)
+					if (ix == 0 || ix + i + 1 == baseLengthX || iz == 0 || iz + i + 1 == baseLengthZ)
+						world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 3);
+					else if (isHollow)
+						world.setBlockToAir(ix + x + i, y, iz + z + i);
+			baseLengthX--;
+			baseLengthZ--;
+		}
+	}
+    
+    private void spawnIdolGuardians(World world, int x, int y, int z) {
+		if (!world.isRemote) {
+			for(byte spawn = 0; spawn < 4; spawn ++) {
+				EntityUmberGolemDungeonTypes entityUmberGolem;
+				entityUmberGolem = new EntityUmberGolemDungeonTypes(world);
+				entityUmberGolem.setType(spawn);
+				switch(spawn){
+					case 0:
+						entityUmberGolem.setPosition(x + 2.5D, y -3.0D, z + 2.5D);
+						break;	
+					case 1:
+						entityUmberGolem.setPosition(x + 94.5D, y -3.0D, z + 2.5D);
+						break;
+					case 2:
+						entityUmberGolem.setPosition(x + 94.5D, y -3.0D, z + 94.5D);
+						break;
+					case 3:
+						entityUmberGolem.setPosition(x + 2.5D, y -3.0D, z + 94.5D);
+						break;
+				}
+				world.spawnEntityInWorld(entityUmberGolem);
+			}
+		}
 	}
 
 	private void buildEntrances(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart, Random rand) {
@@ -127,7 +163,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     	// TODO k will be 4 not 13 to clear space - will need to make air above pyramid in another method
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
-            	for(int k = 0; k <= 13; k++)
+            	for(int k = 0; k <= 4; k++)
                 world.setBlock(x + j, y + k, z + i, Blocks.air);
             }
         }
