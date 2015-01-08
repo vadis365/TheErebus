@@ -106,6 +106,10 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	public boolean canDespawn() {
 		return false;
 	}
+	
+	@Override
+	public void setInWeb() {
+	}
 
 	@Override
 	public boolean allowLeashing() {
