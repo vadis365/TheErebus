@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
+import erebus.block.BlockAntlionSpawner;
 import erebus.block.BlockBones;
 import erebus.block.BlockButtonUmberstone;
 import erebus.block.BlockCapstone;
@@ -281,6 +282,7 @@ public class ModBlocks {
 	public static final Block jumpingSpiderSpawner = new BlockSpiderSpawner("jumpingSpider").setBlockName("erebus.jumpingSpiderSpawner").setBlockTextureName("erebus:spiderSpawner");
 	public static final Block tarantulaSpawner = new BlockSpiderSpawner("tarantula").setBlockName("erebus.tarantulaSpawner").setBlockTextureName("erebus:spiderSpawner");
 	public static final Block waspSpawner = new BlockWaspSpawner("wasp").setBlockName("erebus.waspSpawner").setBlockTextureName("erebus:waspNestSpawner");
+	public static final Block antlionSpawner = new BlockAntlionSpawner("antlion").setBlockName("erebus.antlionSpawner").setBlockTextureName("erebus:spiderSpawner");	
 	public static final Block capstone = new BlockCapstone();
 	public static final Block waspNestBlock = new BlockWaspNest();
 	public static final Block gneiss = new BlockGneiss();

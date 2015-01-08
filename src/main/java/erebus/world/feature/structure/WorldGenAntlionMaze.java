@@ -186,8 +186,11 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
                 if ((maze[j][i] & 1) == 0) {
                     if(rand.nextInt(25) == 0) {
                     	world.setBlock(x + 1 + j * 4, y, z + 1 + i * 4, Blocks.torch, 3, 2);
-                    	if(rand.nextInt(2) == 0)
+                    	if(rand.nextInt(4) == 0)
                     		world.setBlock(x + 1 + j * 4, y - 1, z + 1 + i * 4, Blocks.chest, 3, 2);
+                    }
+                    else if (rand.nextInt(15) == 0) {
+                    	world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.antlionSpawner);
                     }
                 }
             }
@@ -195,13 +198,33 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
             for (int j = 0; j < w; j++) {
             	if ((maze[j][i] & 8) == 0) {
             		if(rand.nextInt(25) == 0) {
-            			world.setBlock(x + 1 + j * 4, y, z + 1 + i * 4, Blocks.torch, 1, 2);
-            			if(rand.nextInt(2) == 0)
-            				world.setBlock(x + 1 + j * 4, y - 1, z + 1 + i * 4, Blocks.chest, 1, 2);
-            		}
+            			world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.torch, 1, 2);
+            			if(rand.nextInt(4) == 0)
+            				world.setBlock(x + 1 + j * 4, y - 1, z + 2 + i * 4, Blocks.chest, 1, 2);
+            			}
             	}
             }
-        }
+
+            for (int j = 0; j < w; j++) {
+                if ((maze[j][i] & 4) == 0) {
+                    if(rand.nextInt(25) == 0) {
+                    	world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.torch, 2, 2);
+                    	if(rand.nextInt(4) == 0)
+                    		world.setBlock(x + 3 + j * 4, y - 1, z + 2 + i * 4, Blocks.chest, 2, 2);
+                   }
+                }
+            }
+
+            for (int j = 0; j < w; j++) {
+            	if ((maze[j][i] & 2) == 0) {
+            		if(rand.nextInt(25) == 0) {
+            			world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.torch, 4, 2);
+            			if(rand.nextInt(4) == 0)
+            				world.setBlock(x + 2 + j * 4, y - 1, z + 3 + i * 4, Blocks.chest, 4, 2);
+            			}
+            	}
+            }
+    	}
 	}
 
     private void buildLevel(World world, int x, int y, int z, int w, int h, int[][] maze, Block blockType, int blockMeta) {

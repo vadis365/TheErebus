@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.Materials;
 
@@ -96,11 +97,19 @@ public class EntityAntlion extends EntityMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		return isOnSand() && super.getCanSpawnHere();
+		return isOnSand() && super.getCanSpawnHere() || isOnGneiss() && super.getCanSpawnHere()  || isOnSpawner() && super.getCanSpawnHere();
+	}
+
+	public boolean isOnSpawner() {
+		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == ModBlocks.antlionSpawner;
 	}
 
 	public boolean isOnSand() {
 		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == Blocks.sand;
+	}
+	
+	public boolean isOnGneiss() {
+		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == ModBlocks.gneiss;
 	}
 
 	@Override
