@@ -1,19 +1,63 @@
 package erebus.world.feature.structure;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.entity.EntityUmberGolemDungeonTypes;
+import erebus.item.Materials.DATA;
 import erebus.world.feature.util.BasicShapeGen;
+import erebus.world.loot.IPostProcess;
+import erebus.world.loot.LootItemStack;
+import erebus.world.loot.LootUtil;
+import erebus.world.loot.WeightedLootList;
 
 
 public class WorldGenAntlionMaze extends WorldGenerator  {
 
     private Block solid = ModBlocks.gneiss;
+      
+	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
+	new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.stone_pickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.stone_shovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.stone_axe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.stone_sword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2),
+	new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1), new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1) }).setPostProcessor(new IPostProcess() {
+
+		@SuppressWarnings("rawtypes")
+		@Override
+		public ItemStack postProcessItem(ItemStack is, Random rand) {
+			if (rand.nextBoolean() && (is.getItem() == Items.enchanted_book || is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
+				boolean enchBook = is.getItem() == Items.enchanted_book;
+				if (enchBook)
+					is.func_150996_a(Items.book);
+				List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
+				if (enchBook)
+					is.func_150996_a(Items.enchanted_book);
+
+				if (enchList != null && enchList.size() > 0)
+					for (int a = 0; a < enchList.size(); ++a) {
+						EnchantmentData data = (EnchantmentData) enchList.get(a);
+						if (is.getItem() == Items.enchanted_book)
+							Items.enchanted_book.addEnchantment(is, data);
+						else
+							is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
+					}
+			}
+			return is;
+		}
+	});
+    
 
 /*	public MazeSystem()
 	{
@@ -53,7 +97,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			                    buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
 			                    // TODO Create loot chests and mimic chests
 			                    // TODO Create traps, new spawners and shizz
-			                    addTorch(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
+			                    addFeature(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
 			                    break;
 			            }
 			       }
@@ -98,6 +142,8 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 				EntityUmberGolemDungeonTypes entityUmberGolem;
 				entityUmberGolem = new EntityUmberGolemDungeonTypes(world);
 				entityUmberGolem.setType(spawn);
+				entityUmberGolem.setHealth(entityUmberGolem.getMaxHealth()); //hack because of stupid attributes setting 
+				System.out.println("Spawn No.: "+spawn);
 				switch(spawn){
 					case 0:
 						entityUmberGolem.setPosition(x + 2.5D, y -3.0D, z + 2.5D);
@@ -180,14 +226,14 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
         }
     }
     
-    private void addTorch(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
+    private void addFeature(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
                 if ((maze[j][i] & 1) == 0) {
                     if(rand.nextInt(25) == 0) {
                     	world.setBlock(x + 1 + j * 4, y, z + 1 + i * 4, Blocks.torch, 3, 2);
                     	if(rand.nextInt(4) == 0)
-                    		world.setBlock(x + 1 + j * 4, y - 1, z + 1 + i * 4, Blocks.chest, 3, 2);
+                    		placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
                     }
                     else if (rand.nextInt(15) == 0) {
                     	world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.antlionSpawner);
@@ -200,7 +246,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
             		if(rand.nextInt(25) == 0) {
             			world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.torch, 1, 2);
             			if(rand.nextInt(4) == 0)
-            				world.setBlock(x + 1 + j * 4, y - 1, z + 2 + i * 4, Blocks.chest, 1, 2);
+            				placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 1, rand);
             			}
             	}
             }
@@ -210,7 +256,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
                     if(rand.nextInt(25) == 0) {
                     	world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.torch, 2, 2);
                     	if(rand.nextInt(4) == 0)
-                    		world.setBlock(x + 3 + j * 4, y - 1, z + 2 + i * 4, Blocks.chest, 2, 2);
+                    		placeChest(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 2, rand);
                    }
                 }
             }
@@ -220,11 +266,18 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
             		if(rand.nextInt(25) == 0) {
             			world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.torch, 4, 2);
             			if(rand.nextInt(4) == 0)
-            				world.setBlock(x + 2 + j * 4, y - 1, z + 3 + i * 4, Blocks.chest, 4, 2);
+            				placeChest(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 4, rand);
             			}
             	}
             }
     	}
+	}
+    
+    private void placeChest(World world, int x, int y, int z, int directionMeta, Random rand) {
+		world.setBlock(x, y, z, Blocks.chest, directionMeta, 2);
+		TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y, z);
+		if (chest != null)
+			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
 	}
 
     private void buildLevel(World world, int x, int y, int z, int w, int h, int[][] maze, Block blockType, int blockMeta) {

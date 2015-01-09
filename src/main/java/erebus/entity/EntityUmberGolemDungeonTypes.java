@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,12 +21,13 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.item.DungeonIdols.IDOL;
 
-public class EntityUmberGolemDungeonTypes extends EntityMob {
+public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAdditionalSpawnData {
 	Block block;
 	int blockMeta;
 	boolean hasBlock = false;
@@ -50,7 +52,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(20, new Integer(0));
-		dataWatcher.addObject(29, new Byte((byte) rand.nextInt(4))); //just for testing random spawns	
+		dataWatcher.addObject(29, new Byte((byte) 0));
 	}
 
 	@Override
@@ -62,8 +64,6 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(setGolemHealth());
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength());
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
@@ -82,7 +82,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 		}
 	}
 
-	private double setGolemHealth() {
+	private double getGolemHealth() {
 		switch(getType()) {
 		case 0:
 			return 100.0D;
@@ -285,6 +285,8 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 	
 	public void setType(byte isType) {
 		dataWatcher.updateObject(29, Byte.valueOf(isType));
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getGolemHealth());
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength());
 	}
 
 	public byte getType() {
@@ -297,5 +299,15 @@ public class EntityUmberGolemDungeonTypes extends EntityMob {
 
 	public int getRangeAttackTimer() {
 		return dataWatcher.getWatchableObjectInt(20);
+	}
+	
+	@Override
+	public void writeSpawnData(ByteBuf data) {
+		data.writeByte(getType());
+	}
+
+	@Override
+	public void readSpawnData(ByteBuf data) {
+		setType(data.readByte());
 	}
 }
