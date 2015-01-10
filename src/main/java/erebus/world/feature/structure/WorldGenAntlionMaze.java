@@ -236,7 +236,10 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
                     		placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
                     }
                     else if (rand.nextInt(15) == 0) {
-                    	world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.antlionSpawner);
+                    	if(rand.nextBoolean())
+                    		world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.antlionSpawner);
+                    	else
+                    		world.setBlock(x + 2 + j * 4, y - 1, z + 2 + i * 4, ModBlocks.magmaCrawlerSpawner);
                     }
                 }
             }

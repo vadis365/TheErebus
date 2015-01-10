@@ -35,6 +35,7 @@ import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLavaWebSpider;
 import erebus.entity.EntityLeech;
 import erebus.entity.EntityLocust;
+import erebus.entity.EntityMagmaCrawler;
 import erebus.entity.EntityMidgeSwarm;
 import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMosquito;
@@ -125,7 +126,9 @@ public class ModEntities {
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
 		registerEntity(47, EntitySnapper.class, "snapper", 0x804E3D, 0x3D6F80);
 		registerEntity(48, EntityWisp.class, "wisp", 0x804E3D, 0x3D6F80);
+		// TODO after testing remove spawn eggs and re-register dungeon mobs
 		registerEntity(49, EntityUmberGolemDungeonTypes.class, "umberGolemIdol", 0xFFA200, 0xFFEE00);
+		registerEntity(56, EntityMagmaCrawler.class, "magmaCrawler", 0xFF0000, 0xFFEE00);
 		
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
