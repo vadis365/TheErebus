@@ -71,9 +71,9 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 		{*/
     public boolean generate(World world, Random rand, int x, int y, int z) {
 			
-			int sizeX = 48;
+			int sizeX = 60;
 			int sizeY = y + 4;
-			int sizeZ = 48;
+			int sizeZ = 60;
 
 			//if (world.getBiomeGenForCoords(x, z).biomeID == ModBiomes.volcanicDesertID)
 			//{
@@ -99,12 +99,11 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			                    break;
 			            }
 			       }
-					buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 32, 4, 32);
+					buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
 					// TODO Make a proper pyramid with a couple of levels and Boss arena at base
-					createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x + sizeX/2 + 9, z + sizeZ/2 + 9, 30, 30, y - 6);
-					addCapstones(world, x + sizeX -1, y + 8, z + sizeZ -1, ModBlocks.capstone, 0);
+					createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x + sizeX/2 + 8, z + sizeZ/2 + 8, 44, 44, y - 6);
+					addCapstones(world, x + sizeX -1, y + 15, z + sizeZ -1, ModBlocks.capstone, 0);
 					spawnIdolGuardians(world, x, y, z);
-					buildEntrances(world, Blocks.air, 0, true, x, z, 5, 5, y, rand);
 			        return true;
 			//}
 		//}
@@ -141,33 +140,23 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 				entityUmberGolem = new EntityUmberGolemDungeonTypes(world);
 				entityUmberGolem.setType(spawn);
 				entityUmberGolem.setHealth(entityUmberGolem.getMaxHealth()); //hack because of stupid attributes setting 
-				System.out.println("Spawn No.: "+spawn);
 				switch(spawn){
 					case 0:
 						entityUmberGolem.setPosition(x + 2.5D, y -3.0D, z + 2.5D);
 						break;	
 					case 1:
-						entityUmberGolem.setPosition(x + 94.5D, y -3.0D, z + 2.5D);
+						entityUmberGolem.setPosition(x + 118.5D, y -3.0D, z + 2.5D);
 						break;
 					case 2:
-						entityUmberGolem.setPosition(x + 94.5D, y -3.0D, z + 94.5D);
+						entityUmberGolem.setPosition(x + 118.5D, y -3.0D, z + 118.5D);
 						break;
 					case 3:
-						entityUmberGolem.setPosition(x + 2.5D, y -3.0D, z + 94.5D);
+						entityUmberGolem.setPosition(x + 2.5D, y -3.0D, z + 118.5D);
 						break;
 				}
 				world.spawnEntityInWorld(entityUmberGolem);
 			}
 		}
-	}
-
-	private void buildEntrances(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart, Random rand) {
-		// TODO these are just markers - they should probably be shafts from the surface that go down to the dungeon
-		// Perhaps inside it a basic chest containing a book with instructions written in an ancient style - just so the mission is clear?
-    	BasicShapeGen.createPyramid(world, block, 0, true, x, z, baseLengthX, baseLengthZ, yStart);
-    	BasicShapeGen.createPyramid(world, block, 0, true, x + 97 - baseLengthX, z, baseLengthX, baseLengthZ, yStart);
-    	BasicShapeGen.createPyramid(world, block, 0, true, x + 97 - baseLengthX, z + 97 - baseLengthZ, baseLengthX, baseLengthZ, yStart);
-    	BasicShapeGen.createPyramid(world, block, 0, true, x, z + 97 - baseLengthZ, baseLengthX, baseLengthZ, yStart);
 	}
 
 	private void buildCourtyard(World world, Block block, int metaData, int x, int y, int z, int baseLengthX, int heightY, int baseLengthZ) {
@@ -178,12 +167,12 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 						world.setBlockToAir(xx, yy, zz);
 						if (xx == x - baseLengthX / 2 || xx == x + baseLengthX / 2 - 1)
 							if (zz > z - baseLengthZ / 2 && zz < z + baseLengthZ / 2)
-								for(int i = 3; i < 29; i += 5)
+								for(int i = 3; i < 49; i += 5)
 									world.setBlock(xx, yy, z - baseLengthZ / 2 + i, block, metaData, 3);
 						
 						if (zz == z - baseLengthZ / 2 || zz == z + baseLengthZ / 2 - 1)
 							if (xx > x - baseLengthX / 2 && xx < x + baseLengthX / 2)
-								for(int i = 3; i < 29; i += 5)
+								for(int i = 3; i < 49; i += 5)
 									world.setBlock(x - baseLengthZ / 2 + i, yy, zz, block, metaData, 3);
 					}
 					world.setBlock(xx, y + 4, zz, ModBlocks.templeBrick, 0, 3);
@@ -204,16 +193,17 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     }
     
     private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand) {
-    	// TODO k will be 4 not 13 to clear space - will need to make air above pyramid in another method
+    	// TODO make air above pyramid in another method
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
             	for(int k = 0; k <= 4; k++)
-                world.setBlock(x + j, y + k, z + i, Blocks.air);
+            		if(!world.isAirBlock(x + j, y + k, z + i))
+            			world.setBlock(x + j, y + k, z + i, Blocks.air);
             }
         }
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
-            	if (rand.nextInt(20) == 0)
+            	if (rand.nextInt(15) == 0)
             		if(rand.nextBoolean() && rand.nextBoolean())
             			world.setBlock(x + j, y, z + i, Blocks.lava);
             		else
@@ -233,7 +223,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
                     	if(rand.nextInt(4) == 0)
                     		placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
                     }
-                    else if (rand.nextInt(15) == 0) {
+                    else if (rand.nextInt(10) == 0) {
                     	if(rand.nextBoolean())
                     		world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.antlionSpawner);
                     	else

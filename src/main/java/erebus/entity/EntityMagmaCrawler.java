@@ -22,7 +22,7 @@ public class EntityMagmaCrawler extends EntityMob {
 	public EntityMagmaCrawler(World world) {
 		super(world);
 		isImmuneToFire = true;
-		entityCollisionReduction=1.0F;
+		entityCollisionReduction = 1.0F;
 		jumpMovementFactor = 0F;
 		setSize(1.25F, 1.0F);
 	}
@@ -105,7 +105,7 @@ public class EntityMagmaCrawler extends EntityMob {
 						}
 					}
 			}
-			if(onGround && upAbove || isCollidedHorizontally && upAbove)
+			if(onGround && upAbove || isCollidedHorizontally && upAbove || getHealth() < getMaxHealth() && upAbove)
 				upAbove = false;
 		}
 	}
