@@ -72,7 +72,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     public boolean generate(World world, Random rand, int x, int y, int z) {
 			
 			int sizeX = 48;
-			int sizeY = y+4;
+			int sizeY = y + 4;
 			int sizeZ = 48;
 
 			//if (world.getBiomeGenForCoords(x, z).biomeID == ModBiomes.volcanicDesertID)
@@ -95,8 +95,6 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			                	buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
 			                    buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
 			                    buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
-			                    // TODO Create loot chests and mimic chests
-			                    // TODO Create traps, new spawners and shizz
 			                    addFeature(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
 			                    break;
 			            }
@@ -239,7 +237,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
                     	if(rand.nextBoolean())
                     		world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.antlionSpawner);
                     	else
-                    		world.setBlock(x + 2 + j * 4, y - 1, z + 2 + i * 4, ModBlocks.magmaCrawlerSpawner);
+                    		world.setBlock(x + 2 + j * 4, y + 2, z + 2 + i * 4, ModBlocks.magmaCrawlerSpawner);
                     }
                 }
             }
