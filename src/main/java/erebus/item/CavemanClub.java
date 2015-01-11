@@ -28,7 +28,8 @@ public class CavemanClub extends ItemSword {
 		Random rand = new Random();
 		if (!world.isRemote && player.isSneaking()) {
 			//new WorldGenAntlionMaze().generate(world, rand, x, y, z);
-			new WorldGenAntlionMaze().createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x, z, 44, 44, y - 6);
+			new WorldGenAntlionMaze().createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x, z, 44, 44, y);//ModBlocks.templeBrickUnbreaking
+			new WorldGenAntlionMaze().decoratePyramid(world, x, y, z);
 			return true;
 		}
 		return false;

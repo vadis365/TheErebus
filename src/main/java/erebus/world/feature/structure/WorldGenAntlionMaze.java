@@ -87,28 +87,52 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			        for (int yy = y; yy < sizeY; yy++) {
 			            switch (yy % 4) {
 			             case 0:
-			               //    buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-			              //     buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
-			                   break;
-			                case 1:
-			                //	buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
-			                //    buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
-			                //    buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
-			                //    addFeature(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
-			                    break;
+			            	 buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+			            	 buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
+			            	 break;
+			             case 1:
+			            	 buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
+			            	 buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
+			            	 buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
+			            	 addFeature(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
+			            	 break;
 			            }
 			       }
-				//	buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
+			        buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
 					// TODO Make a proper pyramid with a couple of levels and Boss arena at base
 					createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x + sizeX/2 + 8, z + sizeZ/2 + 8, 44, 44, y - 6);
+					//TODO Move  Pyramid decoration to only happen on cap-stone removal - to reduce generation lag
+					decoratePyramid(world, x + sizeX/2 + 8, y - 6, z + sizeZ/2 + 8);
 					addCapstones(world, x + sizeX -1, y + 15, z + sizeZ -1, ModBlocks.capstone, 0);
-				//	spawnIdolGuardians(world, x, y, z);
+					spawnIdolGuardians(world, x, y, z);
 			        return true;
 			//}
 		//}
 	}
-    
-    private void addCapstones(World world, int x, int y, int z, Block capstone, int metaData) {
+
+	public static void decoratePyramid(World world, int x, int y, int z) {
+		// create floors
+		for (int yy = y; yy < y + 30; yy++)
+			for (int xx = x; xx < x + 44; xx++)
+				for (int zz = z; zz < z + 44; zz++) {
+					if (yy == y)
+						world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 1);
+					if (yy == y + 1) {
+						if (xx > x + 1 && xx < x + 42 && zz > z + 1 && zz < z + 42)
+							world.setBlock(xx, yy, zz, Blocks.sand, 0, 2);
+						if (xx > x + 4 && xx < x + 39 && zz > z + 4 && zz < z + 39)
+							if (xx % 3 == 0 || zz % 3 == 0)
+								world.setBlock(xx, yy, zz, ModBlocks.gneissVent, 0, 2);
+							else
+								world.setBlock(xx, yy, zz, Blocks.sand, 0, 2);
+					}
+					if (yy == y + 14)
+						if (xx > x + 14 && xx < x + 29 && zz > z + 14 && zz < z + 29)
+							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);
+				}
+	}
+
+	private void addCapstones(World world, int x, int y, int z, Block capstone, int metaData) {
     	world.setBlock(x, y, z, capstone, metaData, 3);
     	world.setBlock(x + 1, y, z, capstone, metaData, 3);
     	world.setBlock(x + 1, y, z + 1, capstone, metaData, 3);
@@ -125,16 +149,9 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 				for (int iz = 0; z + iz + i <= maxZ; iz++) 
 					if (ix == 0 || ix + i + 1 == baseLengthX || iz == 0 || iz + i + 1 == baseLengthZ)
 						world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 2);
-					else if (isHollow) {
+					else if (isHollow)
 						world.setBlockToAir(ix + x + i, y, iz + z + i);
-						if(y == yStart)
-							world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 2);
-						if(y == yStart + 1)
-							if (ix >= 2 && ix + i + 2 <= baseLengthX && iz >= 2 && iz + i + 2 <= baseLengthZ)
-								world.setBlock(ix + x + i, y, iz + z + i, Blocks.sand, metaData, 2);
-						if(y == yStart + 15)
-							world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 2);
-					}	
+
 			baseLengthX--;
 			baseLengthZ--;
 		}
