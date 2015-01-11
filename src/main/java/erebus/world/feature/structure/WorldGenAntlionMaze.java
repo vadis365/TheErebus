@@ -19,7 +19,6 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.item.Materials.DATA;
-import erebus.world.feature.util.BasicShapeGen;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
@@ -88,22 +87,22 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			        for (int yy = y; yy < sizeY; yy++) {
 			            switch (yy % 4) {
 			             case 0:
-			                   buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-			                   buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
+			               //    buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+			              //     buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
 			                   break;
 			                case 1:
-			                	buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
-			                    buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
-			                    buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
-			                    addFeature(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
+			                //	buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
+			                //    buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
+			                //    buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
+			                //    addFeature(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
 			                    break;
 			            }
 			       }
-					buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
+				//	buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
 					// TODO Make a proper pyramid with a couple of levels and Boss arena at base
 					createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x + sizeX/2 + 8, z + sizeZ/2 + 8, 44, 44, y - 6);
 					addCapstones(world, x + sizeX -1, y + 15, z + sizeZ -1, ModBlocks.capstone, 0);
-					spawnIdolGuardians(world, x, y, z);
+				//	spawnIdolGuardians(world, x, y, z);
 			        return true;
 			//}
 		//}
@@ -116,18 +115,26 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     	world.setBlock(x, y, z + 1, capstone, metaData, 3);
 	}
 
-	private void createPyramid(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart) {
+	public static void createPyramid(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart) {
 		int yStop = Math.min((baseLengthZ - 1) / 2, (baseLengthX - 1) / 2) + yStart;
 		for (int i = 0; i + yStart <= yStop -1; i++) {
 			int y = yStart + i;
 			int maxX = x + baseLengthX - 1;
 			int maxZ = z + baseLengthZ - 1;
-			for (int ix = 0; x + ix + i <= maxX; ix++)
-				for (int iz = 0; z + iz + i <= maxZ; iz++)
+			for (int ix = 0; x + ix + i <= maxX; ix++) 
+				for (int iz = 0; z + iz + i <= maxZ; iz++) 
 					if (ix == 0 || ix + i + 1 == baseLengthX || iz == 0 || iz + i + 1 == baseLengthZ)
-						world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 3);
-					else if (isHollow)
+						world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 2);
+					else if (isHollow) {
 						world.setBlockToAir(ix + x + i, y, iz + z + i);
+						if(y == yStart)
+							world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 2);
+						if(y == yStart + 1)
+							if (ix >= 2 && ix + i + 2 <= baseLengthX && iz >= 2 && iz + i + 2 <= baseLengthZ)
+								world.setBlock(ix + x + i, y, iz + z + i, Blocks.sand, metaData, 2);
+						if(y == yStart + 15)
+							world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 2);
+					}	
 			baseLengthX--;
 			baseLengthZ--;
 		}
@@ -168,14 +175,14 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 						if (xx == x - baseLengthX / 2 || xx == x + baseLengthX / 2 - 1)
 							if (zz > z - baseLengthZ / 2 && zz < z + baseLengthZ / 2)
 								for(int i = 3; i < 49; i += 5)
-									world.setBlock(xx, yy, z - baseLengthZ / 2 + i, block, metaData, 3);
+									world.setBlock(xx, yy, z - baseLengthZ / 2 + i, block, metaData, 2);
 						
 						if (zz == z - baseLengthZ / 2 || zz == z + baseLengthZ / 2 - 1)
 							if (xx > x - baseLengthX / 2 && xx < x + baseLengthX / 2)
 								for(int i = 3; i < 49; i += 5)
-									world.setBlock(x - baseLengthZ / 2 + i, yy, zz, block, metaData, 3);
+									world.setBlock(x - baseLengthZ / 2 + i, yy, zz, block, metaData, 2);
 					}
-					world.setBlock(xx, y + 4, zz, ModBlocks.templeBrick, 0, 3);
+					world.setBlock(xx, y + 4, zz, ModBlocks.templeBrick, 0, 2);
 
 					if (xx > x - baseLengthX / 2 && xx < x + baseLengthX / 2 - 1)
 						if (zz > z - baseLengthZ / 2 && zz < z + baseLengthZ / 2 - 1)
