@@ -18,6 +18,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.EntityUmberGolemDungeonTypes;
+import erebus.item.Materials;
 import erebus.item.Materials.DATA;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
@@ -99,9 +100,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			            }
 			       }
 			        buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
-					// TODO Make a proper pyramid with a couple of levels and Boss arena at base
 					createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x + sizeX/2 + 8, z + sizeZ/2 + 8, 44, 44, y - 6);
-					//TODO Move  Pyramid decoration to only happen on cap-stone removal - to reduce generation lag
 					decoratePyramid(world, x + sizeX/2 + 8, y - 6, z + sizeZ/2 + 8);
 					addCapstones(world, x + sizeX -1, y + 15, z + sizeZ -1, ModBlocks.capstone, 0);
 					spawnIdolGuardians(world, x, y, z);
@@ -130,6 +129,26 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 					if (yy == y + 9) {
 						if (xx > x + 9 && xx < x + 34 && zz > z + 9 && zz < z + 34)
 							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);
+						
+						// room 1
+						world.setBlock(x + 13, yy, z + 13, ModBlocks.capstone, 0, 2); // TODO make a new block state that is not idol affected
+						world.setBlock(x + 16, yy, z + 16, ModBlocks.templeTeleporter, 1, 2); // TODO make a new method to place this and set NBT for teleport
+						world.setBlock(x + 19, yy, z + 19, ModBlocks.templeTeleporter, 10, 2);// TODO ^^
+						
+						// room 2
+						world.setBlock(x + 30, yy, z + 13, ModBlocks.capstone, 0, 2); // TODO make a new block state that is not idol affected
+						world.setBlock(x + 27, yy, z + 16, ModBlocks.templeTeleporter, 2, 2); // TODO make a new method to place this and set NBT for teleport
+						world.setBlock(x + 24, yy, z + 19, ModBlocks.templeTeleporter, 10, 2);// TODO ^^
+						
+						// room 3
+						world.setBlock(x + 30, yy, z + 30, ModBlocks.capstone, 0, 2); // TODO make a new block state that is not idol affected
+						world.setBlock(x + 27, yy, z + 27, ModBlocks.templeTeleporter, 3, 2); // TODO make a new method to place this and set NBT for teleport
+						world.setBlock(x + 24, yy, z + 24, ModBlocks.templeTeleporter, 10, 2);// TODO ^^
+						
+						// room 4
+						world.setBlock(x + 13, yy, z + 30, ModBlocks.capstone, 0, 2); // TODO make a new block state that is not idol affected
+						world.setBlock(x + 16, yy, z + 27, ModBlocks.templeTeleporter, 4, 2); // TODO make a new method to place this and set NBT for teleport
+						world.setBlock(x + 19, yy, z + 24, ModBlocks.templeTeleporter, 10, 2);// TODO ^^	
 					}
 
 					if (yy == y + 10) {
@@ -156,9 +175,27 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 									world.setBlockToAir(dx1, yy + d, dz1);	
 						}
 					}
-					if (yy == y + 14)
+					
+					if (yy == y + 14) {
 						if (xx > x + 14 && xx < x + 29 && zz > z + 14 && zz < z + 29)
-							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);	
+							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);
+						world.setBlock(x + 19, yy, z + 19, ModBlocks.capstone, 0, 2); // TODO make a new block state that is not idol affected
+						world.setBlock(x + 22, yy, z + 22, ModBlocks.templeTeleporter, 0, 2); // TODO make a new method to place this and set NBT for teleport
+						world.setBlock(x + 25, yy, z + 25, ModBlocks.templeTeleporter, 10, 2);// TODO ^^
+					}
+					
+					if (yy == y + 15) {
+						// contents is 8 pieces of jade for spoon feeding tutorial
+						world.setBlock(x + 19, yy, z + 22, Blocks.chest, 2, 2);
+						TileEntityChest chest = (TileEntityChest) world.getTileEntity(x + 19, yy, z + 22);
+						if (chest != null)
+							chest.setInventorySlotContents(0, Materials.createStack(DATA.jade, 8));
+						world.setBlockMetadataWithNotify(x + 19, yy, z + 22, 2, 3);
+					}
+					
+					if (yy == y + 16) {
+						// TODO Lighting?
+					}
 				}
 	}
 
@@ -355,7 +392,6 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
         for (int j = 0; j <= w * 4; j++) {
         	world.setBlock(x + j, y, z + h * 4, blockType, blockMeta, 2);
         }
-
     }
 
 }

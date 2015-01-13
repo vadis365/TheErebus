@@ -14,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.item.Materials;
 
 public class EntityMagmaCrawler extends EntityMob {
 	private int shouldDo;
@@ -63,14 +64,8 @@ public class EntityMagmaCrawler extends EntityMob {
 	}
 
 	@Override
-	protected Item getDropItem() {
-		return Items.magma_cream;
-	}
-
-	@Override
-	protected void dropRareDrop(int fortune) {
-		for (int i = 0; i < 1 + new Random().nextInt(1 + fortune); i++)
-			dropItem(Items.magma_cream, 1);
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		entityDropItem(Materials.createStack(Materials.DATA.magmaCrawlerEye, 1), 0.0F);
 	}
 	
 	public boolean isOnCeiling() {

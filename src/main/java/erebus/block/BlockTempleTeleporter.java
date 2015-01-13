@@ -12,6 +12,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 import erebus.ModTabs;
 
 public class BlockTempleTeleporter extends BlockContainer {
@@ -108,5 +109,42 @@ public class BlockTempleTeleporter extends BlockContainer {
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
 		// TODO  Make this... return new TileEntityTempleTeleporter();
 		return null;
+	}
+	
+	@Override
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+		Random random = world.rand;
+		double d0 = 0.0625D;
+		int meta = world.getBlockMetadata(x, y, z);
+		for (int l = 0; l < 6; ++l) {
+			double particleX = x + random.nextFloat();
+			double particleY = y + random.nextFloat();
+			double particleZ = z + random.nextFloat();
+
+			if (l == 0 && !world.getBlock(x, y + 1, z).isOpaqueCube())
+				particleY = y + 1 + d0;
+
+			if (l == 1 && !world.getBlock(x, y - 1, z).isOpaqueCube())
+				particleY = y + 0 - d0;
+
+			if (l == 2 && !world.getBlock(x, y, z + 1).isOpaqueCube())
+				particleZ = z + 1 + d0;
+
+			if (l == 3 && !world.getBlock(x, y, z - 1).isOpaqueCube())
+				particleZ = z + 0 - d0;
+
+			if (l == 4 && !world.getBlock(x + 1, y, z).isOpaqueCube())
+				particleX = x + 1 + d0;
+
+			if (l == 5 && !world.getBlock(x - 1, y, z).isOpaqueCube())
+				particleX = x + 0 - d0;
+
+			if (particleX < x || particleX > x + 1 || particleY < 0.0D || particleY > y + 1 || particleZ < z || particleZ > z + 1) {
+				if (meta >= 6 && meta <= 9)
+					Erebus.proxy.spawnCustomParticle("portal", world, particleX, particleY, particleZ, 0D, 0D, 0D);
+				if (meta == 10)
+					Erebus.proxy.spawnCustomParticle("repellent", world, particleX, particleY, particleZ, 0D, 0D, 0D);
+			}
+		}
 	}
 }
