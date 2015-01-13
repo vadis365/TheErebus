@@ -126,9 +126,39 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 							else
 								world.setBlock(xx, yy, zz, Blocks.sand, 0, 2);
 					}
+
+					if (yy == y + 9) {
+						if (xx > x + 9 && xx < x + 34 && zz > z + 9 && zz < z + 34)
+							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);
+					}
+
+					if (yy == y + 10) {
+						//TODO Blocks.glass == forcefield block (have to make it yet)
+						for(int d = 0; d < 4; d++) {
+							for(int wx = 0 + d; wx < 9; wx++) {
+								world.setBlock(x + 11 + wx, yy + d, z + 21, Blocks.glass, 0, 2);
+								world.setBlock(x + 11 + wx, yy + d, z + 22, Blocks.glass, 0, 2);
+								world.setBlock(x + 21, yy + d, z + 11 + wx, Blocks.glass, 0, 2);
+								world.setBlock(x + 22, yy + d, z + 11 + wx, Blocks.glass, 0, 2);
+								
+								world.setBlock(x + 21, yy + d, z + 32 - wx, Blocks.glass, 0, 2);
+								world.setBlock(x + 22, yy + d, z + 32 - wx, Blocks.glass, 0, 2);
+								world.setBlock(x + 32 - wx, yy + d, z + 21 , Blocks.glass, 0, 2);
+								world.setBlock(x + 32 - wx, yy + d, z + 22, Blocks.glass, 0, 2);
+							}
+	
+							for(int dx = x + 20; dx < x + 24; dx ++)
+								for(int dz = z + 20; dz < z + 24; dz ++)
+									world.setBlock(dx, yy + d, dz, Blocks.glass, 0, 2);
+
+							for(int dx1 = x + 21; dx1 < x + 23; dx1 ++)
+								for(int dz1 = z + 21; dz1 < z + 23; dz1 ++)
+									world.setBlockToAir(dx1, yy + d, dz1);	
+						}
+					}
 					if (yy == y + 14)
 						if (xx > x + 14 && xx < x + 29 && zz > z + 14 && zz < z + 29)
-							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);
+							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);	
 				}
 	}
 
@@ -222,7 +252,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
             for (int j = 0; j <= w * 4; j++) {
             	for(int k = 0; k <= 4; k++)
             		if(!world.isAirBlock(x + j, y + k, z + i))
-            			world.setBlock(x + j, y + k, z + i, Blocks.air);
+            			world.setBlockToAir(x + j, y + k, z + i);
             }
         }
         for (int i = 0; i <= h * 4; i++) {
