@@ -204,7 +204,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 		world.setBlock(x, y, z, ModBlocks.templeTeleporter, metaData, 2);
 		TileEntityTempleTeleporter teleporter = (TileEntityTempleTeleporter) world.getTileEntity(x, y, z);
 		if (teleporter != null)
-			teleporter.setTargetDestination(targetX, targetY, targetZ);	
+			teleporter.setTargetDestination(targetX, targetY, targetZ, metaData);	
 	}
 	
 
@@ -403,4 +403,39 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
         }
     }
 
+	public static void openBossPortal(World world, int x, int y, int z) {
+		System.out.println("X: "+x+" Y: "+y+" Z: "+z +" Destroys walls and spawns shit here");
+	
+		for(int d = 0; d < 4; d++) {
+			for(int wx = 0 + d; wx < 9; wx++) {
+				world.playAuxSFXAtEntity(null, 2001, x + 11 + wx, y + d, z + 21, Block.getIdFromBlock(world.getBlock(x + 11 + wx, y + d, z + 21)));
+				world.setBlockToAir(x + 11 + wx, y + d, z + 21);
+				world.playAuxSFXAtEntity(null, 2001, x + 11 + wx, y + d, z + 22, Block.getIdFromBlock(world.getBlock(x + 11 + wx, y + d, z + 22)));
+				world.setBlockToAir(x + 11 + wx, y + d, z + 22);
+				
+				world.playAuxSFXAtEntity(null, 2001, x + 21, y + d, z + 11 + wx, Block.getIdFromBlock(world.getBlock(x + 21, y + d, z + 11 + wx)));
+				world.setBlockToAir(x + 21, y + d, z + 11 + wx);
+				world.playAuxSFXAtEntity(null, 2001, x + 22, y + d, z + 11 + wx, Block.getIdFromBlock(world.getBlock(x + 22, y + d, z + 11 + wx)));
+				world.setBlockToAir(x + 22, y + d, z + 11 + wx);
+				
+				world.playAuxSFXAtEntity(null, 2001, x + 21, y + d, z + 32 - wx, Block.getIdFromBlock(world.getBlock(x + 21, y + d, z + 32 - wx)));
+				world.setBlockToAir(x + 21, y + d, z + 32 - wx);
+				world.playAuxSFXAtEntity(null, 2001, x + 22, y + d, z + 32 - wx, Block.getIdFromBlock(world.getBlock(x + 22, y + d, z + 32 - wx)));
+				world.setBlockToAir(x + 22, y + d, z + 32 - wx);
+				
+				world.playAuxSFXAtEntity(null, 2001, x + 32 - wx, y + d, z + 21, Block.getIdFromBlock(world.getBlock(x + 32 - wx, y + d, z + 21)));
+				world.setBlockToAir(x + 32 - wx, y + d, z + 21);
+				world.playAuxSFXAtEntity(null, 2001, x + 32 - wx, y + d, z + 22, Block.getIdFromBlock(world.getBlock(x + 32 - wx, y + d, z + 22)));
+				world.setBlockToAir(x + 32 - wx, y + d, z + 22);
+			}
+	
+			for(int dx = x + 20; dx < x + 24; dx ++)
+				for(int dz = z + 20; dz < z + 24; dz ++)
+					if(!world.isAirBlock(dx, y + d, dz)) {
+						world.playAuxSFXAtEntity(null, 2001, dx, y + d, dz, Block.getIdFromBlock(world.getBlock(dx, y + d, dz)));
+						world.setBlockToAir(dx, y + d, dz);
+					}
+		}
+		
+	}
 }

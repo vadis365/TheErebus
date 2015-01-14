@@ -7,18 +7,20 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityTempleTeleporter extends TileEntity {
-	private int targetX, targetY, targetZ;
+	private int targetX, targetY, targetZ, blockType;
 
+	
 	@Override
 	public boolean canUpdate() {
 		return false;
 	}
 
-	public void setTargetDestination(int x, int y, int z) {
+	public void setTargetDestination(int x, int y, int z, int type) {
 		targetX = x;
 		targetY = y;
 		targetZ = z;
-		System.out.println("X: "+targetX +" Y: "+targetY+" Z: "+targetZ);
+		blockType = type;
+		System.out.println("X: "+targetX +" Y: "+targetY+" Z: "+targetZ +" Type: " +blockType);
 	}
 	
 	public int getTargetX() {
@@ -31,10 +33,14 @@ public class TileEntityTempleTeleporter extends TileEntity {
 		return targetZ;	
 	}
 	
+	public int getType() {
+		return blockType;	
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		setTargetDestination(nbt.getInteger("targetX"), nbt.getInteger("targetY"), nbt.getInteger("targetZ"));
+		setTargetDestination(nbt.getInteger("targetX"), nbt.getInteger("targetY"), nbt.getInteger("targetZ"), nbt.getInteger("blockType"));
 	}
 
 	@Override
@@ -43,6 +49,7 @@ public class TileEntityTempleTeleporter extends TileEntity {
 		nbt.setInteger("targetX", getTargetX());
 		nbt.setInteger("targetY", getTargetY());
 		nbt.setInteger("targetZ", getTargetZ());
+		nbt.setInteger("blockType", getType());
 	}
 	
 	@Override

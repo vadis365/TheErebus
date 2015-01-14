@@ -18,6 +18,7 @@ import erebus.Erebus;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityTempleTeleporter;
+import erebus.world.feature.structure.WorldGenAntlionMaze;
 
 public class BlockTempleTeleporter extends BlockContainer {
 	
@@ -94,6 +95,8 @@ public class BlockTempleTeleporter extends BlockContainer {
 			int meta = world.getBlockMetadata(x, y, z);
 			if(meta <= 8)
 				world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
+			if(tile != null && meta == 8 && tile.getType() == 4)
+				WorldGenAntlionMaze.openBossPortal(world, x - 16, y + 1, z - 27);
 			return true;
 		}
 		return true;
