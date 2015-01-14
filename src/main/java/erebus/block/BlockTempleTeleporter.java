@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -14,6 +16,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityTempleTeleporter;
 
 public class BlockTempleTeleporter extends BlockContainer {
 	
@@ -81,18 +85,33 @@ public class BlockTempleTeleporter extends BlockContainer {
 		if (world.isRemote)
 			return true;
 
-		//TileEntityTempleTeleporter() tile = Utils.getTileEntity(world, x, y, z, TileEntityTempleTeleporter().class);
+		TileEntityTempleTeleporter tile = Utils.getTileEntity(world, x, y, z, TileEntityTempleTeleporter.class);
 
 		if (player.isSneaking())
 			return false;
 
 		if (player.getCurrentEquippedItem() != null) {
 			int meta = world.getBlockMetadata(x, y, z);
-			if(meta <= 10)
-				world.setBlock(x, y, z, this, meta + 1, 3);
+			if(meta <= 8)
+				world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
 			return true;
 		}
 		return true;
+	}
+	
+	@Override
+	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
+		if (entity.isSneaking())
+			return;
+		
+		int meta = world.getBlockMetadata(x, y, z);
+		TileEntityTempleTeleporter tile = Utils.getTileEntity(world, x, y, z, TileEntityTempleTeleporter.class);
+		if(!world.isRemote)
+			if (meta >= 9 && meta <= 10)
+				if (entity instanceof EntityLivingBase && tile != null) {
+					((EntityLivingBase) entity).setPositionAndUpdate(tile.getTargetX() + 0.5D, tile.getTargetY() + 1D, tile.getTargetZ() + 0.5D);
+					entity.worldObj.playSoundEffect(x, y, z, "mob.endermen.portal", 1.0F, 1.0F);
+		}
 	}
 
 	@Override
@@ -106,9 +125,8 @@ public class BlockTempleTeleporter extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-		// TODO  Make this... return new TileEntityTempleTeleporter();
-		return null;
+	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+		return new TileEntityTempleTeleporter();
 	}
 	
 	@Override
