@@ -22,7 +22,7 @@ import erebus.world.feature.structure.WorldGenAntlionMaze;
 
 public class BlockTempleTeleporter extends BlockContainer {
 	
-	private IIcon jadeTop, exoTop, magmaCreamTop, magmaEyeTop, stringTop, closedTop, openTop1, openTop2, openTop3, activeSendTop, activeReturnTop;
+	private IIcon jadeTop, exoTop, magmaCreamTop, magmaEyeTop, stringTop, closedTop, openTop1, openTop2, openTop3, activeSendTop, activeReturnTop, largeSE, largeSW, largeNE, largeNW;
 	
 	public BlockTempleTeleporter() {
 		super(Material.rock);
@@ -46,6 +46,10 @@ public class BlockTempleTeleporter extends BlockContainer {
 		openTop3 = reg.registerIcon("erebus:templeTeleportOpen3");
 		activeSendTop = reg.registerIcon("erebus:templeTeleportSend");
 		activeReturnTop = reg.registerIcon("erebus:templeTeleportReturn");
+		largeSE = reg.registerIcon("erebus:templeTeleportSE");
+		largeSW = reg.registerIcon("erebus:templeTeleportSW");
+		largeNE = reg.registerIcon("erebus:templeTeleportNE");
+		largeNW = reg.registerIcon("erebus:templeTeleportNW");
 	}
 
 	@Override
@@ -75,11 +79,44 @@ public class BlockTempleTeleporter extends BlockContainer {
 				return activeSendTop;
 			case 10:
 				return activeReturnTop;
+			case 11://
+				return largeNE;
+			case 12:
+				return largeNW;
+			case 13:
+				return largeSE;
+			case 14:
+				return largeSW;
 			default:
 				return blockIcon;
 		}
 			return blockIcon;
 	}
+	
+	/* TODO
+	 * Make the below method use the relevant itemstack, based on the original metadata of the block (8 times)
+	 * on the block to activate teleporter.
+	 * 
+	 * block meta 0 = jade.
+	 * block meta 1 = exoplate.
+	 * block meta 2 = magma cream.
+	 * block meta 3 = magma crawler eye.
+	 * block meta 4 = string.
+	 * 
+	 * Once the 1st item is clicked it should set to block to metadata 5 and increment up to metadata 10.
+	 * Bad choice of scaling so:
+	 * 1st click changes to meta 5.
+	 * 2nd click changes to meta 6.
+	 * 3rd click changes to meta 7.
+	 * 4th & 5th clicks changes to meta 8.
+	 * 6th & 7th clicks to meta 9.
+	 * 8th click to meta 10.
+	 * 
+	 * The Tile Entity contains the getType() method which records the original meta
+	 * from when the block was generated (also vital for another method)
+	 * This could be used as the datum for basing stack to block type I guess.
+	 * 
+	 */
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
@@ -94,9 +131,11 @@ public class BlockTempleTeleporter extends BlockContainer {
 		if (player.getCurrentEquippedItem() != null) {
 			int meta = world.getBlockMetadata(x, y, z);
 			if(meta <= 8)
-				world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3);
+				world.setBlockMetadataWithNotify(x, y, z, meta + 1, 3); // debug
+			
+			//the below if condition is vital
 			if(tile != null && meta == 8 && tile.getType() == 4)
-				WorldGenAntlionMaze.openBossPortal(world, x - 16, y + 1, z - 27);
+				WorldGenAntlionMaze.breakForceField(world, x - 16, y + 1, z - 27);
 			return true;
 		}
 		return true;
@@ -110,7 +149,7 @@ public class BlockTempleTeleporter extends BlockContainer {
 		int meta = world.getBlockMetadata(x, y, z);
 		TileEntityTempleTeleporter tile = Utils.getTileEntity(world, x, y, z, TileEntityTempleTeleporter.class);
 		if(!world.isRemote)
-			if (meta >= 9 && meta <= 10)
+			if (meta >= 9 && meta <= 14)
 				if (entity instanceof EntityLivingBase && tile != null) {
 					((EntityLivingBase) entity).setPositionAndUpdate(tile.getTargetX() + 0.5D, tile.getTargetY() + 1D, tile.getTargetZ() + 0.5D);
 					entity.worldObj.playSoundEffect(x, y, z, "mob.endermen.portal", 1.0F, 1.0F);
@@ -161,7 +200,7 @@ public class BlockTempleTeleporter extends BlockContainer {
 				particleX = x + 0 - d0;
 
 			if (particleX < x || particleX > x + 1 || particleY < 0.0D || particleY > y + 1 || particleZ < z || particleZ > z + 1) {
-				if (meta >= 6 && meta <= 9)
+				if (meta >= 6 && meta <= 14 && meta != 10)
 					Erebus.proxy.spawnCustomParticle("portal", world, particleX, particleY, particleZ, 0D, 0D, 0D);
 				if (meta == 10)
 					Erebus.proxy.spawnCustomParticle("repellent", world, particleX, particleY, particleZ, 0D, 0D, 0D);
