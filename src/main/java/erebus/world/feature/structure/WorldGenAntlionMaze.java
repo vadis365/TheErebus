@@ -148,8 +148,15 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 						
 						// room 4
 						world.setBlock(x + 13, yy, z + 30, ModBlocks.capstone, 0, 2);
-						setTeleporter(world, x + 16, yy, z + 27, 4, x + 13, yy, z + 13); //this one should remove forcefield in room 1 (debug teleport added - will be removed)
-						setTeleporter(world, x + 19, yy, z + 24, 10, x + 30, yy, z + 30);	
+						setTeleporter(world, x + 16, yy, z + 27, 4, x + 13, yy, z + 13); //this one removes forcefield (debug teleport added - will be removed)
+						setTeleporter(world, x + 19, yy, z + 24, 10, x + 30, yy, z + 30);
+						
+						// centre of pyramid - these teleport you to the boss arena (1 of the 4 corners)
+						setTeleporter(world, x + 22, yy, z + 21, 11, x + 5, y + 1, z + 5);
+						setTeleporter(world, x + 21, yy, z + 21, 12, x + 38, y + 1, z + 5);
+						
+						setTeleporter(world, x + 22, yy, z + 22, 13, x + 38, y + 1, z + 38);
+						setTeleporter(world, x + 21, yy, z + 22, 14, x + 5, y + 1, z + 38);
 					}
 
 					if (yy == y + 10) {
@@ -403,9 +410,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
         }
     }
 
-	public static void openBossPortal(World world, int x, int y, int z) {
-		System.out.println("X: "+x+" Y: "+y+" Z: "+z +" Destroys walls and spawns shit here");
-	
+	public static void breakForceField(World world, int x, int y, int z) {	
 		for(int d = 0; d < 4; d++) {
 			for(int wx = 0 + d; wx < 9; wx++) {
 				world.playAuxSFXAtEntity(null, 2001, x + 11 + wx, y + d, z + 21, Block.getIdFromBlock(world.getBlock(x + 11 + wx, y + d, z + 21)));
