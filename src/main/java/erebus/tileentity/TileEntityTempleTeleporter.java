@@ -20,8 +20,7 @@ public class TileEntityTempleTeleporter extends TileEntity {
 		targetY = y;
 		targetZ = z;
 		blockType = type;
-		if(!worldObj.isRemote)
-			System.out.println("X: "+targetX +" Y: "+targetY+" Z: "+targetZ +" Type: " +blockType);
+		System.out.println("X: "+targetX +" Y: "+targetY+" Z: "+targetZ +" Type: " +blockType);
 	}
 	
 	public int getTargetX() {
