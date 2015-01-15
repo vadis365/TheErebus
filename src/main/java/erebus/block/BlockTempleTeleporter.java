@@ -103,14 +103,13 @@ public class BlockTempleTeleporter extends BlockContainer {
 	 * block meta 3 = magma crawler eye.
 	 * block meta 4 = string.
 	 * 
-	 * Once the 1st item is clicked it should set to block to metadata 5 and increment up to metadata 10.
+	 * Once the 1st item is clicked it should set to block to metadata 5 and increment up to metadata 9.
 	 * Bad choice of scaling so:
-	 * 1st click changes to meta 5.
-	 * 2nd click changes to meta 6.
-	 * 3rd click changes to meta 7.
-	 * 4th & 5th clicks changes to meta 8.
-	 * 6th & 7th clicks to meta 9.
-	 * 8th click to meta 10.
+	 * 1st click to meta 5.
+	 * 2nd click to meta 6.
+	 * 3rd & 4th click to meta 7.
+	 * 5th, 6th & 7th clicks changes to meta 8.
+	 * 8th click to meta 9.
 	 * 
 	 * The Tile Entity contains the getType() method which records the original meta
 	 * from when the block was generated (also vital for another method)

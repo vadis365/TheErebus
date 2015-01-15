@@ -215,7 +215,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 	}
 	
 	public static void setTeleporter(World world, int x, int y, int z, int metaData, int targetX, int targetY, int targetZ) {
-		world.setBlock(x, y, z, ModBlocks.templeTeleporter, metaData, 3);
+		world.setBlock(x, y, z, ModBlocks.templeTeleporter, metaData, 2);
 		TileEntityTempleTeleporter teleporter = (TileEntityTempleTeleporter) world.getTileEntity(x, y, z);
 		if (teleporter != null)
 			teleporter.setTargetDestination(targetX, targetY, targetZ, metaData);	
