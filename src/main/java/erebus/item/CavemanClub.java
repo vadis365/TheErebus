@@ -30,6 +30,7 @@ public class CavemanClub extends ItemSword {
 			//new WorldGenAntlionMaze().generate(world, rand, x, y, z);
 			new WorldGenAntlionMaze().createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x, z, 44, 44, y);//ModBlocks.templeBrickUnbreaking
 			new WorldGenAntlionMaze().decoratePyramid(world, x, y, z);
+			new WorldGenAntlionMaze().addTeleporters(world, x, y, z);
 			return true;
 		}
 		return false;
