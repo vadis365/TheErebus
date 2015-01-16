@@ -87,7 +87,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			        MazeGenerator generator = new PerfectMazeGenerator(mazeWidth, mazeHeight);
                     maze = generator.generateMaze();
 			        for (int yy = y; yy < sizeY; yy++) {
-			            switch (yy % 4) {
+			            switch ((yy - y) % 4) {
 			             case 0:
 			            	 buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
 			            	 buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
