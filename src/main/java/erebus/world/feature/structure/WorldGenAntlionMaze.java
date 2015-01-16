@@ -157,7 +157,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 						if (xx > x + 1 && xx < x + 42 && zz > z + 1 && zz < z + 42)
 							world.setBlock(xx, yy, zz, Blocks.sand, 0, 2);
 						if (xx > x + 4 && xx < x + 39 && zz > z + 4 && zz < z + 39)
-							if (xx % 3 == 0 || zz % 3 == 0)
+							if ((xx - x)% 11 == 5 || (zz - z)% 11 == 5)
 								world.setBlock(xx, yy, zz, ModBlocks.gneissVent, 0, 2);
 							else
 								world.setBlock(xx, yy, zz, Blocks.sand, 0, 2);
