@@ -7,6 +7,7 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCloudFX;
 import net.minecraft.client.particle.EntityHugeExplodeFX;
+import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.util.MathHelper;
@@ -23,7 +24,9 @@ public class PacketParticle extends AbstractClientPacket {
 		SPRAY_CAN,
 		CRUSHROOM_BLAM,
 		TARANTULA_BLAM,
-		TARANTULA_DEATH;
+		TARANTULA_DEATH,
+		ANTLION_BLAM,
+		ANTLION_RUMBLE;
 
 		static final ParticleType[] values = values();
 	}
@@ -76,11 +79,24 @@ public class PacketParticle extends AbstractClientPacket {
 					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3, e.posY, e.posZ + MathHelper.cos((float) ang) * 3, -MathHelper.sin((float) ang) * 0.5, 0.1D, MathHelper.cos((float) ang) * 0.5));
 				}
 				break;
+			case ANTLION_BLAM:
+				for (int a = 0; a < 360; a += 4) {
+					double ang = a * Math.PI / 180D;
+					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4, e.posY, e.posZ + MathHelper.cos((float) ang) * 4, -MathHelper.sin((float) ang) * 1, 0.1D, MathHelper.cos((float) ang) * 1));
+				}
+				break;
 			case TARANTULA_DEATH:
 				float f = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
 				float f1 = (e.worldObj.rand.nextFloat() - 0.5F) * 4.0F;
 				float f2 = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
 				eff.addEffect(new EntityHugeExplodeFX(player.worldObj, e.posX + f, e.posY + 2.0D + f1, e.posZ + f2, 0.0D, 0.0D, 0.0D));
+				break;
+				
+			case ANTLION_RUMBLE:
+				for (int a = 0; a < 360; a += 4) {
+					double ang = a * Math.PI / 180D;
+					eff.addEffect(new EntitySmokeFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4, e.posY, e.posZ + MathHelper.cos((float) ang) * 4, -MathHelper.sin((float) ang) * 0.5, 0.1D, MathHelper.cos((float) ang) * 0.5));
+				}
 				break;
 			default:
 				;

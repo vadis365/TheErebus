@@ -9,6 +9,7 @@ import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityAnimatedChest;
 import erebus.entity.EntityAntlion;
+import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
@@ -57,6 +58,7 @@ import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
 import erebus.entity.EntityTarantulaMiniboss;
+import erebus.entity.EntityThrownSand;
 import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityUmberGolem;
 import erebus.entity.EntityUmberGolemDungeonTypes;
@@ -127,6 +129,7 @@ public class ModEntities {
 		registerEntity(47, EntitySnapper.class, "snapper", 0x804E3D, 0x3D6F80);
 		registerEntity(48, EntityWisp.class, "wisp", 0x804E3D, 0x3D6F80);
 		// TODO after testing remove spawn eggs and re-register dungeon mobs
+		registerEntity(57, EntityAntlionBoss.class, "antlionBoss", 0x000000, 0xFFFFFF);
 		registerEntity(49, EntityUmberGolemDungeonTypes.class, "umberGolemIdol", 0xFFA200, 0xFFEE00);
 		registerEntity(56, EntityMagmaCrawler.class, "magmaCrawler", 0xFF0000, 0xFFEE00);
 		
@@ -147,6 +150,7 @@ public class ModEntities {
 		registerEntity(77, EntityTarantulaEgg.class, "tarantulaegg");
 		registerEntity(78, EntityPoisonJet.class, "poisonjet");
 		registerEntity(79, EntityGasVent.class, "gasVent");
+		registerEntity(80, EntityThrownSand.class, "thrownSand");
 
 		// Spawn conditions
 		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.monster, BiomeGenBase.hell);

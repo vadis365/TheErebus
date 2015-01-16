@@ -48,5 +48,8 @@
 "waspsound": {"category": "hostile","sounds": ["waspsound"]},
 "webslingsplat": {"category": "hostile", "sounds": ["webslingsplat"]},
 "webslingthrow": {"category": "hostile","sounds": ["webslingthrow"]},
-"cabbagefart": {"category": "player","sounds": ["cabbagefart"]}
+"cabbagefart": {"category": "player","sounds": ["cabbagefart"]},
+"antlionexplode": {"category": "hostile","sounds": ["antlionexplode"]},
+"antliongrowl": {"category": "hostile", "sounds": ["antliongrowl"]},
+"antlionslam": {"category": "hostile","sounds": ["antlionslam"]}
 }
