@@ -1,6 +1,6 @@
 # The Erebus
 
-Don't read me. I'm shy
+Don't read me. I'm shy.
 
 ## Issue tracker - tags
 
