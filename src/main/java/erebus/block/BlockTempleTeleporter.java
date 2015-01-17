@@ -29,6 +29,7 @@ public class BlockTempleTeleporter extends BlockContainer {
 		setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.templeTeleporter");
 		setBlockUnbreakable();
+		setResistance(6000000.0F);
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import erebus.block.BlockComposter;
 import erebus.block.BlockDoorErebus;
 import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusStigma;
+import erebus.block.BlockForceField;
 import erebus.block.BlockGhostSand;
 import erebus.block.BlockGlowGem;
 import erebus.block.BlockGlowingJar;
@@ -252,6 +253,10 @@ public class ModBlocks {
 	public static final Block jadeBlock = new BlockCompressed(MapColor.greenColor).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.blockJade").setBlockTextureName("erebus:blockJade").setCreativeTab(ModTabs.blocks);
 	public static final Block glowGemBlock = new BlockGlowGem();
 	public static final Block mucusBomb = new BlockMucusBomb();
+	public static final Block siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("erebus.siloSupports").setBlockTextureName("erebus:siloSupports");
+	public static final Block siloTank = new BlockSiloTank(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.siloTank");
+	public static final Block siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.siloRoof").setBlockTextureName("erebus:siloRoof");
+	public static final Block composter = new BlockComposter().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.composter");
 
 	// DOORS
 	public static final Block doorAmber = new BlockDoorErebus("amber", Material.glass).setRenderPass(1);
@@ -290,16 +295,13 @@ public class ModBlocks {
 	public static final Block capstone = new BlockCapstone();
 	public static final Block waspNestBlock = new BlockWaspNest();
 	public static final Block gneiss = new BlockGneiss();
-	public static final Block siloSupports = new BlockSiloSupports(Material.wood).setHardness(2F).setStepSound(Block.soundTypeWood).setBlockName("erebus.siloSupports").setBlockTextureName("erebus:siloSupports");
-	public static final Block siloTank = new BlockSiloTank(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.siloTank");
-	public static final Block siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.siloRoof").setBlockTextureName("erebus:siloRoof");
-	public static final Block composter = new BlockComposter().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.composter");
 	public static final Block templeBrick = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templeBrick").setBlockTextureName("erebus:templeBrick");
 	public static final Block templePillar = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templePillar").setBlockTextureName("erebus:templePillar");
 	public static final Block templeTile = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templeTile").setBlockTextureName("erebus:templeTile");
 	public static final Block gneissVent = new BlockGneissVent().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneissVent");
-	public static final Block templeBrickUnbreaking = new BlockSimple(Material.rock).setBlockUnbreakable().setStepSound(Block.soundTypeStone).setBlockName("erebus.templeBrickUnbreaking").setBlockTextureName("erebus:templeBrick");
+	public static final Block templeBrickUnbreaking = new BlockSimple(Material.rock).setBlockUnbreakable().setResistance(6000000.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templeBrickUnbreaking").setBlockTextureName("erebus:templeBrick");
 	public static final Block templeTeleporter = new BlockTempleTeleporter().setStepSound(Block.soundTypeStone).setBlockTextureName("erebus:templeBrick");
+	public static final Block forceField = new BlockForceField().setBlockTextureName("erebus:forceField");
 
 	// STAIRS, SLABS, WALLS
 	public static final Block[] umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];

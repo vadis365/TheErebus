@@ -5,6 +5,7 @@ import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCloudFX;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityFireworkSparkFX;
 import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLavaFX;
@@ -469,6 +470,9 @@ public class ClientProxy extends CommonProxy {
 
 		if (particleName.equals("slime"))
 			fx = new EntityBreakingFX(world, x, y, z, vecX, vecY, vecZ, Items.slime_ball, 0);
+		
+		if (particleName.equals("sparks"))
+			fx = new EntityFireworkSparkFX(world, x, y, z, vecX, vecY, vecZ, Minecraft.getMinecraft().effectRenderer);
 
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);

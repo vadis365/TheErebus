@@ -170,23 +170,22 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 						
 
 					if (yy == y + 10 && !forcefieldSet) {
-						//TODO Blocks.glass == forcefield block (have to make it yet)
 						for(int d = 0; d < 4; d++) {
 							for(int wx = 0 + d; wx < 9; wx++) {
-								world.setBlock(x + 11 + wx, yy + d, z + 21, Blocks.glass, 0, 2);
-								world.setBlock(x + 11 + wx, yy + d, z + 22, Blocks.glass, 0, 2);
-								world.setBlock(x + 21, yy + d, z + 11 + wx, Blocks.glass, 0, 2);
-								world.setBlock(x + 22, yy + d, z + 11 + wx, Blocks.glass, 0, 2);
+								world.setBlock(x + 11 + wx, yy + d, z + 21, ModBlocks.forceField, 0, 2);
+								world.setBlock(x + 11 + wx, yy + d, z + 22, ModBlocks.forceField, 0, 2);
+								world.setBlock(x + 21, yy + d, z + 11 + wx, ModBlocks.forceField, 0, 2);
+								world.setBlock(x + 22, yy + d, z + 11 + wx, ModBlocks.forceField, 0, 2);
 								
-								world.setBlock(x + 21, yy + d, z + 32 - wx, Blocks.glass, 0, 2);
-								world.setBlock(x + 22, yy + d, z + 32 - wx, Blocks.glass, 0, 2);
-								world.setBlock(x + 32 - wx, yy + d, z + 21 , Blocks.glass, 0, 2);
-								world.setBlock(x + 32 - wx, yy + d, z + 22, Blocks.glass, 0, 2);
+								world.setBlock(x + 21, yy + d, z + 32 - wx, ModBlocks.forceField, 0, 2);
+								world.setBlock(x + 22, yy + d, z + 32 - wx, ModBlocks.forceField, 0, 2);
+								world.setBlock(x + 32 - wx, yy + d, z + 21 , ModBlocks.forceField, 0, 2);
+								world.setBlock(x + 32 - wx, yy + d, z + 22, ModBlocks.forceField, 0, 2);
 							}
 	
 							for(int dx = x + 20; dx < x + 24; dx ++)
 								for(int dz = z + 20; dz < z + 24; dz ++)
-									world.setBlock(dx, yy + d, dz, Blocks.glass, 0, 2);
+									world.setBlock(dx, yy + d, dz, ModBlocks.forceField, 0, 2);
 
 							for(int dx1 = x + 21; dx1 < x + 23; dx1 ++)
 								for(int dz1 = z + 21; dz1 < z + 23; dz1 ++)
