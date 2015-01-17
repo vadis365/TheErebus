@@ -288,7 +288,9 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			for (int xx = x - baseLengthX / 2; xx < x + baseLengthX / 2; xx++)
 				for (int zz = z - baseLengthZ / 2; zz < z + baseLengthZ / 2; zz++) {
 					if (yy > y) {
-						world.setBlockToAir(xx, yy, zz);
+						if(!world.isAirBlock(xx, yy, zz))
+							world.setBlockToAir(xx, yy, zz);
+						
 						if (xx == x - baseLengthX / 2 || xx == x + baseLengthX / 2 - 1)
 							if (zz > z - baseLengthZ / 2 && zz < z + baseLengthZ / 2)
 								for(int i = 3; i < 49; i += 5)
