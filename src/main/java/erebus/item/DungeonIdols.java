@@ -14,8 +14,8 @@ import erebus.ModItems;
 public class DungeonIdols extends Item {
 
 	public enum IDOL {
-		Bronze,
-		Silver,
+		Mud,
+		Iron,
 		Gold,
 		Jade;
 	}

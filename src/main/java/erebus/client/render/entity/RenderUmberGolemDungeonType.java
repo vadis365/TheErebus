@@ -11,7 +11,7 @@ import erebus.client.model.entity.ModelUmberGolem;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 
 public class RenderUmberGolemDungeonType extends RenderLiving {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/umberGolemBronze.png"), new ResourceLocation("erebus:textures/entity/umberGolemSilver.png"), new ResourceLocation("erebus:textures/entity/umberGolemGold.png"), new ResourceLocation("erebus:textures/entity/umberGolemJade.png") };
+	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/umberGolemMud.png"), new ResourceLocation("erebus:textures/entity/umberGolemIron.png"), new ResourceLocation("erebus:textures/entity/umberGolemGold.png"), new ResourceLocation("erebus:textures/entity/umberGolemJade.png") };
 
 	public RenderUmberGolemDungeonType() {
 		super(new ModelUmberGolem(), 1.0F);
