@@ -114,34 +114,45 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 	public static void addTeleporters(World world, int x, int y, int z) {
 		// room 1
 			world.setBlock(x + 13, y + 9, z + 13, ModBlocks.capstone, 0, 2); // TODO make a new block state that is not idol affected
-			setTeleporter(world, x + 16, y + 9, z + 16, 1, x + 30, y + 9, z + 13); // on to next room's capstone
-			setTeleporter(world, x + 19, y + 9, z + 19, 10, x + 19, y + 14, z + 19); // back to floor above's capstone
+			setLockStone(world, x + 15, y + 9, z + 15, 2); //exo
+			setTeleporter(world, x + 16, y + 9, z + 16, 0, x + 30, y + 9, z + 13); // on to next room's capstone
+			setTeleporter(world, x + 19, y + 9, z + 19, 5, x + 19, y + 14, z + 19); // back to floor above's capstone
 		
 		// room 2
 			world.setBlock(x + 30, y + 9, z + 13, ModBlocks.capstone, 0, 2);
-			setTeleporter(world, x + 27, y + 9, z + 16, 2, x + 30, y + 9, z + 30);
-			setTeleporter(world, x + 24, y + 9, z + 19, 10, x + 13, y + 9, z + 13);
+			setLockStone(world, x + 26, y + 9, z + 15, 3); //magma cream
+			setTeleporter(world, x + 27, y + 9, z + 16, 0, x + 30, y + 9, z + 30);
+			setTeleporter(world, x + 24, y + 9, z + 19, 5, x + 13, y + 9, z + 13);
 		
 		// room 3
 			world.setBlock(x + 30, y + 9, z + 30, ModBlocks.capstone, 0, 2);
-			setTeleporter(world, x + 27, y + 9, z + 27, 3, x + 13, y + 9, z + 30);
-			setTeleporter(world, x + 24, y + 9, z + 24, 10, x + 30, y + 9, z + 13);
+			setLockStone(world, x + 26, y + 9, z + 26, 4); //magma crawler eye
+			setTeleporter(world, x + 27, y + 9, z + 27, 0, x + 13, y + 9, z + 30);
+			setTeleporter(world, x + 24, y + 9, z + 24, 5, x + 30, y + 9, z + 13);
 		
 		// room 4
 			world.setBlock(x + 13, y + 9, z + 30, ModBlocks.capstone, 0, 2);
-			setTeleporter(world, x + 16, y + 9, z + 27, 4, x + 13, y + 9, z + 13); //this one removes forcefield (debug teleport added - will be removed)
-			setTeleporter(world, x + 19, y + 9, z + 24, 10, x + 30, y + 9, z + 30);
+			setLockStone(world, x + 15, y + 9, z + 26, 5); //string
+			setTeleporter(world, x + 16, y + 9, z + 27, 0, x + 13, y + 9, z + 13); //this one removes forcefield (debug teleport added - will be removed)
+			setTeleporter(world, x + 19, y + 9, z + 24, 5, x + 30, y + 9, z + 30);
 		
 		// centre of pyramid - these teleport you to the boss arena (1 of the 4 corners)
-			setTeleporter(world, x + 22, y + 9, z + 21, 11, x + 5, y + 1, z + 5);
-			setTeleporter(world, x + 21, y + 9, z + 21, 12, x + 38, y + 1, z + 5);
-			setTeleporter(world, x + 22, y + 9, z + 22, 13, x + 38, y + 1, z + 38);
-			setTeleporter(world, x + 21, y + 9, z + 22, 14, x + 5, y + 1, z + 38);
+			setTeleporter(world, x + 22, y + 9, z + 21, 6, x + 5, y + 1, z + 5);
+			setTeleporter(world, x + 21, y + 9, z + 21, 7, x + 38, y + 1, z + 5);
+			setTeleporter(world, x + 22, y + 9, z + 22, 8, x + 38, y + 1, z + 38);
+			setTeleporter(world, x + 21, y + 9, z + 22, 9, x + 5, y + 1, z + 38);
 		
 		// Top level
 			world.setBlock(x + 19, y + 14, z + 19, ModBlocks.capstone, 0, 2);
+			setLockStone(world, x + 21, y + 14, z + 21, 1); //jade
 			setTeleporter(world, x + 22, y + 14, z + 22, 0, x + 13, y + 9, z + 13);
-			setTeleporter(world, x + 25, y + 14, z + 25, 10, x + 19, y + 14, z + 19);
+			setTeleporter(world, x + 25, y + 14, z + 25, 5, x + 19, y + 14, z + 19);
+	}
+
+	private static void setLockStone(World world, int x, int y, int z, int meta) {
+		for(int dx = x; dx < x + 3; dx ++)
+			for(int dz = z; dz < z + 3; dz ++)
+				world.setBlock(dx, y, dz, ModBlocks.templeBrickUnbreaking, meta, 2);	
 	}
 
 	public static void decoratePyramid(World world, int x, int y, int z) {
@@ -152,7 +163,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			for (int xx = x; xx < x + 44; xx++)
 				for (int zz = z; zz < z + 44; zz++) {
 					if (yy == y)
-						world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 1);
+						world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);
 					if (yy == y + 1) {
 						if (xx > x + 1 && xx < x + 42 && zz > z + 1 && zz < z + 42)
 							world.setBlock(xx, yy, zz, Blocks.sand, 0, 2);
@@ -217,7 +228,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 		world.setBlock(x, y, z, ModBlocks.templeTeleporter, metaData, 2);
 		TileEntityTempleTeleporter teleporter = (TileEntityTempleTeleporter) world.getTileEntity(x, y, z);
 		if (teleporter != null)
-			teleporter.setTargetDestination(targetX, targetY, targetZ, metaData);	
+			teleporter.setTargetDestination(targetX, targetY, targetZ);	
 	}
 	
 

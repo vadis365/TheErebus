@@ -5,22 +5,61 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import erebus.world.feature.structure.WorldGenAntlionMaze;
 
 public class TileEntityTempleTeleporter extends TileEntity {
-	private int targetX, targetY, targetZ, blockType;
+	private int targetX, targetY, targetZ;
 
 	
 	@Override
-	public boolean canUpdate() {
-		return false;
+	public void updateEntity() {
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		if(!worldObj.isRemote && meta <= 4) {
+			if(worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) >= 6 && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) <= 9)
+				if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1) >= 6 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1) <= 9)
+					if(worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) >= 6 && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) <= 9)
+						if(worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord) >= 6 && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord) <= 9)
+							if(worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord + 1) >= 6 && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord + 1) <= 9)
+								if(worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord) >= 6 && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord) <= 9)
+									if(worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord + 1) >= 6 && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord + 1) <= 9)
+										if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord + 1) >= 6 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord + 1) <= 9)
+											setAnimationMeta();
+			
+			if(worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) == 10 && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) == 10)
+				if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1) == 10 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1)  == 10)
+					if(worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) == 10 && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) == 10)
+						if(worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord) == 10 && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord) == 10)
+							if(worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord + 1) == 10 && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord + 1) == 10)
+								if(worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord) == 10 && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord) == 10)
+									if(worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord + 1) == 10 && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord + 1) == 10)
+										if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord + 1)  == 10 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord + 1) == 10)
+											setDestoyForcefield();
+											
+		}
+	}
+	
+	private void setDestoyForcefield() {
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		if(meta == 0)
+			worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+		if(worldObj.getWorldTime() % 5 == 0 && meta < 4)
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 1, 3);
+		if(meta == 4)
+			WorldGenAntlionMaze.breakForceField(worldObj, xCoord - 16, yCoord + 1, zCoord - 27);
 	}
 
-	public void setTargetDestination(int x, int y, int z, int type) {
+	public void setAnimationMeta() {
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		if(meta == 0)
+			worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+		if(worldObj.getWorldTime() % 5 == 0 && meta < 4)
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 1, 3);
+	}
+	
+	public void setTargetDestination(int x, int y, int z) {
 		targetX = x;
 		targetY = y;
 		targetZ = z;
-		blockType = type;
-		System.out.println("X: "+targetX +" Y: "+targetY+" Z: "+targetZ +" Type: " +blockType);
 	}
 	
 	public int getTargetX() {
@@ -33,14 +72,10 @@ public class TileEntityTempleTeleporter extends TileEntity {
 		return targetZ;	
 	}
 	
-	public int getType() {
-		return blockType;	
-	}
-	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		setTargetDestination(nbt.getInteger("targetX"), nbt.getInteger("targetY"), nbt.getInteger("targetZ"), nbt.getInteger("blockType"));
+		setTargetDestination(nbt.getInteger("targetX"), nbt.getInteger("targetY"), nbt.getInteger("targetZ"));
 	}
 
 	@Override
@@ -49,7 +84,6 @@ public class TileEntityTempleTeleporter extends TileEntity {
 		nbt.setInteger("targetX", getTargetX());
 		nbt.setInteger("targetY", getTargetY());
 		nbt.setInteger("targetZ", getTargetZ());
-		nbt.setInteger("blockType", getType());
 	}
 	
 	@Override
