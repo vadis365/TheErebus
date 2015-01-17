@@ -13,8 +13,7 @@ public class TileEntityTempleTeleporter extends TileEntity {
 	
 	@Override
 	public void updateEntity() {
-		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		if(!worldObj.isRemote && meta <= 4) {
+		if(!worldObj.isRemote && worldObj.getBlockMetadata(xCoord, yCoord, zCoord) <= 4) {
 			if(worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) >= 6 && worldObj.getBlockMetadata(xCoord - 1, yCoord, zCoord - 1) <= 9)
 				if(worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1) >= 6 && worldObj.getBlockMetadata(xCoord, yCoord, zCoord - 1) <= 9)
 					if(worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) >= 6 && worldObj.getBlockMetadata(xCoord + 1, yCoord, zCoord - 1) <= 9)
