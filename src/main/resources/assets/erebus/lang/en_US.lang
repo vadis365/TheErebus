@@ -162,6 +162,9 @@ tile.erebus.extenderThingy.name=Bamboo Extender
 tile.erebus.spiderSpawner.name=Spider Spawner
 tile.erebus.jumpingSpiderSpawner.name=Jumping Spider Spawner
 tile.erebus.waspSpawner.name=Wasp Spawner
+tile.erebus.tarantulaSpawner.name=Tarantula Spawner
+tile.erebus.antlionSpawner.name=Antlion Spawner
+tile.erebus.magmaCrawlerSpawner.name=Magma Crawler Spawner
 
 tile.erebus.waspNestBlock.name=Wasp Nest Block
 tile.erebus.blockSpiderSilk.name=Silk
@@ -179,6 +182,8 @@ tile.erebus.templePillar.name=Temple Pillar
 tile.erebus.templeTile.name=Temple Tile
 tile.erebus.gneissVent.name=Gneiss Gas Vent
 tile.erebus.templeBrickUnbreaking.name=Temple Brick Unbreaking
+tile.erebus.templeTeleporter.name=Temple Teleport Pad
+tile.erebus.forceField.name=Force Field
 
 tile.erebus.mushroomCap0.name=Bulb Capped Mushroom
 tile.erebus.mushroomCap1.name=Grandma's Shoes Mushroom
