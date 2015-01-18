@@ -109,31 +109,30 @@ public class BlockTempleTeleporter extends BlockContainer {
 	
 	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		Random random = world.rand;
-		double d0 = 0.0625D;
+		double pixel = 0.0625D;
 		int meta = world.getBlockMetadata(x, y, z);
 		for (int l = 0; l < 6; ++l) {
-			double particleX = x + random.nextFloat();
-			double particleY = y + random.nextFloat();
-			double particleZ = z + random.nextFloat();
+			double particleX = x + rand.nextFloat();
+			double particleY = y + rand.nextFloat();
+			double particleZ = z + rand.nextFloat();
 
 			if (l == 0 && !world.getBlock(x, y + 1, z).isOpaqueCube())
-				particleY = y + 1 + d0;
+				particleY = y + 1 + pixel;
 
 			if (l == 1 && !world.getBlock(x, y - 1, z).isOpaqueCube())
-				particleY = y + 0 - d0;
+				particleY = y + 0 - pixel;
 
 			if (l == 2 && !world.getBlock(x, y, z + 1).isOpaqueCube())
-				particleZ = z + 1 + d0;
+				particleZ = z + 1 + pixel;
 
 			if (l == 3 && !world.getBlock(x, y, z - 1).isOpaqueCube())
-				particleZ = z + 0 - d0;
+				particleZ = z + 0 - pixel;
 
 			if (l == 4 && !world.getBlock(x + 1, y, z).isOpaqueCube())
-				particleX = x + 1 + d0;
+				particleX = x + 1 + pixel;
 
 			if (l == 5 && !world.getBlock(x - 1, y, z).isOpaqueCube())
-				particleX = x + 0 - d0;
+				particleX = x + 0 - pixel;
 
 			if (particleX < x || particleX > x + 1 || particleY < 0.0D || particleY > y + 1 || particleZ < z || particleZ > z + 1) {
 				if (meta >= 1 && meta <= 9 && meta != 5)
