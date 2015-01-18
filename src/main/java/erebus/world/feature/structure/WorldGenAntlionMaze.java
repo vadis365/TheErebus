@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.core.helper.TimeMeasurement;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.item.Materials;
 import erebus.item.Materials.DATA;
@@ -71,7 +72,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 		if (rand.nextInt(20) == 0) // Should probably change this
 		{*/
     public boolean generate(World world, Random rand, int x, int y, int z) {
-			
+    	TimeMeasurement.start("Antlion Maze thing");
 			int sizeX = 60;
 			int sizeY = y + 4;
 			int sizeZ = 60;
@@ -107,6 +108,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 					addTeleporters(world, x + sizeX/2 + 8, y - 6, z + sizeZ/2 + 8);
 					addCapstones(world, x + sizeX -1, y + 15, z + sizeZ -1, ModBlocks.capstone, 0);
 					spawnIdolGuardians(world, x, y, z);
+					TimeMeasurement.finish("Antlion Maze thing");
 			        return true;
 			//}
 		//}

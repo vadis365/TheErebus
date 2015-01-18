@@ -1,6 +1,7 @@
 package erebus.core.helper;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public final class TimeMeasurement {
 
@@ -17,7 +18,7 @@ public final class TimeMeasurement {
 		long time = System.nanoTime() - times.remove(id);
 		if (time >= 10000000)
 			;
-		// System.out.println("Finished '"+id+"' in "+time+" ns ("+TimeUnit.NANOSECONDS.toMillis(time)+" ms)");
+		 System.out.println("Finished '"+id+"' in "+time+" ns ("+TimeUnit.NANOSECONDS.toMillis(time)+" ms)");
 
 		Counter counter = counters.get(id);
 		if (counter == null)
