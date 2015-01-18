@@ -96,6 +96,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			            	 buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
 			            	 buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
 			            	 buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
+			            	 createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
 			            	 addFeature(world, x, yy - 3 , z, mazeWidth, mazeHeight, maze, rand);
 			            	 break;
 			            }
@@ -110,6 +111,16 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			//}
 		//}
 	}
+    
+    private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {
+        for (int i = 0; i <= h * 4; i++) {
+            for (int j = 0; j <= w * 4; j++) {
+            	for(int k = 0; k <= 2; k++)
+            		if(world.getBlock(x + j, y + k, z + i) != solid)
+            			world.setBlockToAir(x + j, y + k, z + i);
+            }
+        }
+    }
 
 	public static void addTeleporters(World world, int x, int y, int z) {
 		// room 1
@@ -320,21 +331,13 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 	}
 
     private void buildRoof(World world, int x, int y, int z, int w, int h, Random rand) {
-        for (int i = 0; i <= h * 4; i++) {
-            for (int j = 0; j <= w * 4; j++) {
-                world.setBlock(x + j, y, z + i, solid, 3, 2); //turn to Blocks.air to see amazing maze
-            }
-        }
+        for (int i = 0; i <= h * 4; i++)
+            for (int j = 0; j <= w * 4; j++)
+            	if(canPlaceFeatureAt(world, x, y, z, x + j, y, z + i))
+            		world.setBlock(x + j, y, z + i, solid, 3, 2); //turn to Blocks.air to see amazing maze
     }
     
     private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand) {
-        for (int i = 0; i <= h * 4; i++) {
-            for (int j = 0; j <= w * 4; j++) {
-            	for(int k = 1; k <= 3; k++)
-            		if(!world.isAirBlock(x + j, y + k, z + i))
-            			world.setBlockToAir(x + j, y + k, z + i);
-            }
-        }
         for (int i = 0; i <= h * 4; i++) {
             for (int j = 0; j <= w * 4; j++) {
             	if (rand.nextInt(15) == 0)
@@ -349,10 +352,11 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
     }
     
     private void addFeature(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
+
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
                 if ((maze[j][i] & 1) == 0) {
-                    if(rand.nextInt(25) == 0) {
+                    if(rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 1 + j * 4, y - 1, z + 1 + i * 4)) {
                     	world.setBlock(x + 1 + j * 4, y, z + 1 + i * 4, Blocks.torch, 3, 2);
                     	if(rand.nextInt(4) == 0)
                     		placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
@@ -368,7 +372,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 
             for (int j = 0; j < w; j++) {
             	if ((maze[j][i] & 8) == 0) {
-            		if(rand.nextInt(25) == 0) {
+            		if(rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 1 + j * 4, y - 1, z + 2 + i * 4)) {
             			world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.torch, 1, 2);
             			if(rand.nextInt(4) == 0)
             				placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 1, rand);
@@ -378,7 +382,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 
             for (int j = 0; j < w; j++) {
                 if ((maze[j][i] & 4) == 0) {
-                    if(rand.nextInt(25) == 0) {
+                    if(rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 3 + j * 4, y - 1, z + 2 + i * 4)) {
                     	world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.torch, 2, 2);
                     	if(rand.nextInt(4) == 0)
                     		placeChest(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 2, rand);
@@ -388,7 +392,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 
             for (int j = 0; j < w; j++) {
             	if ((maze[j][i] & 2) == 0) {
-            		if(rand.nextInt(25) == 0) {
+            		if(rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 2 + j * 4, y - 1, z + 3 + i * 4)) {
             			world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.torch, 4, 2);
             			if(rand.nextInt(4) == 0)
             				placeChest(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 4, rand);
@@ -405,7 +409,15 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
 	}
 
-    private void buildLevel(World world, int x, int y, int z, int w, int h, int[][] maze, Block blockType, int blockMeta) {
+    private boolean canPlaceFeatureAt(World world, int x, int y, int z, int featureX, int featureY, int featureZ) {
+    	for (int xx = x + 34; xx < x + 86; xx++)
+    		for (int zz = z + 34; zz < z + 86; zz++)
+    			if (featureX == xx && featureZ ==zz)
+    				return false;
+		return true;
+	}
+
+	private void buildLevel(World world, int x, int y, int z, int w, int h, int[][] maze, Block blockType, int blockMeta) {
         for (int i = 0; i < h; i++) {
             // draw the north edge
             for (int j = 0; j < w; j++) {
