@@ -9,7 +9,8 @@ import erebus.world.feature.structure.WorldGenAntlionMaze;
 
 public class TileEntityTempleTeleporter extends TileEntity {
 	private int targetX, targetY, targetZ;
-
+	private boolean bossSpawn = true;
+	private boolean playOpenSound = true;
 	
 	@Override
 	public void updateEntity() {
@@ -39,18 +40,24 @@ public class TileEntityTempleTeleporter extends TileEntity {
 	
 	private void setDestoyForcefield() {
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		if(meta == 0)
+		if(meta == 0 && playOpenSound) {
 			worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+			playOpenSound = false;
+		}
 		if(worldObj.getWorldTime() % 5 == 0 && meta < 4)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 1, 3);
-		if(meta == 4)
+		if(meta == 3 && bossSpawn) {
 			WorldGenAntlionMaze.breakForceField(worldObj, xCoord - 16, yCoord + 1, zCoord - 27);
+			bossSpawn = false;
+		}
 	}
 
 	public void setAnimationMeta() {
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		if(meta == 0)
+		if(meta == 0 && playOpenSound) {
 			worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+			playOpenSound = false;
+		}
 		if(worldObj.getWorldTime() % 5 == 0 && meta < 4)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 1, 3);
 	}
