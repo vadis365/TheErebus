@@ -1,10 +1,13 @@
 package erebus.tileentity;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import erebus.core.helper.Utils;
 import erebus.world.feature.structure.WorldGenAntlionMaze;
 
 public class TileEntityTempleTeleporter extends TileEntity {
@@ -48,6 +51,8 @@ public class TileEntityTempleTeleporter extends TileEntity {
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 1, 3);
 		if(meta == 3 && bossSpawn) {
 			WorldGenAntlionMaze.breakForceField(worldObj, xCoord - 16, yCoord + 1, zCoord - 27);
+			ItemStack stack = new ItemStack(Items.potionitem, 1, 8227);
+			Utils.dropStackNoRandom(worldObj, xCoord, yCoord + 2, zCoord, stack);
 			bossSpawn = false;
 		}
 	}
