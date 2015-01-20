@@ -14,7 +14,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.MapGenBase;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.TimeMeasurement;
@@ -29,7 +29,7 @@ import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
 
 
-public class WorldGenAntlionMaze extends WorldGenerator  {
+public class MapGenAntlionMaze extends MapGenBase  {
 
     private Block solid = ModBlocks.gneiss;
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
@@ -61,7 +61,7 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 	});
     
 
-/*	public MazeSystem()
+	public MapGenAntlionMaze()
 	{
 		range = 8; //Radius of chunks that it will generate before trying to generate  8 chunks = 8*16 blocks
 	}
@@ -69,16 +69,26 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 	@Override
 	protected void func_151538_a(World world, int localX, int localZ, int chunkX, int chunkZ, Block[] blocks)
 	{
-		if (rand.nextInt(20) == 0) // Should probably change this
-		{*/
+		if (rand.nextInt(4000) == 0) // Should probably change this
+		{
+			int x = chunkX;
+			int y = 18;
+			int z = chunkZ;
+
+		//	if (world.getBiomeGenForCoords(x, z).biomeID == ModBiomes.volcanicDesertID) //this bit doesn't work 
+		//	{
+				generate(world, rand, x, y, z);
+		//	}
+		}
+	}
+
     public boolean generate(World world, Random rand, int x, int y, int z) {
     	TimeMeasurement.start("Antlion Maze thing");
+    	
 			int sizeX = 60;
 			int sizeY = y + 4;
 			int sizeZ = 60;
 
-			//if (world.getBiomeGenForCoords(x, z).biomeID == ModBiomes.volcanicDesertID)
-			//{
 			        int mazeWidth = sizeX/2;
 			        int mazeHeight = sizeZ/2;
 			        if (mazeWidth < 2 || mazeHeight < 2 || sizeY < 1) {
@@ -109,9 +119,8 @@ public class WorldGenAntlionMaze extends WorldGenerator  {
 					addCapstones(world, x + sizeX -1, y + 15, z + sizeZ -1, ModBlocks.capstone, 0);
 					spawnIdolGuardians(world, x, y, z);
 					TimeMeasurement.finish("Antlion Maze thing");
+					System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 			        return true;
-			//}
-		//}
 	}
     
     private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {

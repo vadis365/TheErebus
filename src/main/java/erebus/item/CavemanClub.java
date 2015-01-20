@@ -9,7 +9,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.ModMaterials;
-import erebus.world.feature.structure.WorldGenAntlionMaze;
+import erebus.world.feature.structure.MapGenAntlionMaze;
 
 public class CavemanClub extends ItemSword {
 
@@ -28,9 +28,9 @@ public class CavemanClub extends ItemSword {
 		Random rand = new Random();
 		if (!world.isRemote && player.isSneaking()) {
 		//	new WorldGenAntlionMaze().generate(world, rand, x, y, z);
-			new WorldGenAntlionMaze().createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x, z, 44, 44, y);//ModBlocks.templeBrickUnbreaking
-			new WorldGenAntlionMaze().decoratePyramid(world, x, y, z);
-			new WorldGenAntlionMaze().addTeleporters(world, x, y, z);
+			new MapGenAntlionMaze().createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x, z, 44, 44, y);//ModBlocks.templeBrickUnbreaking
+			new MapGenAntlionMaze().decoratePyramid(world, x, y, z);
+			new MapGenAntlionMaze().addTeleporters(world, x, y, z);
 			return true;
 		}
 		return false;

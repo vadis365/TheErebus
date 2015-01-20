@@ -23,6 +23,7 @@ import cpw.mods.fml.common.eventhandler.Event.Result;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.feature.structure.MapGenAntlionMaze;
 import erebus.world.feature.structure.WorldGenSpiderDungeons;
 import erebus.world.structure.MapGenErebusCaves;
 import erebus.world.structure.MapGenErebusRavine;
@@ -53,7 +54,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 	private final MapGenBase caveGenerator;
 	private final MapGenBase ravineGenerator;
-
+	private final MapGenBase antlionMazeGenerator;
 	public ChunkProviderErebus(World world, long seed) {
 		worldObj = world;
 
@@ -71,6 +72,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 		caveGenerator = new MapGenErebusCaves();
 		ravineGenerator = new MapGenErebusRavine();
+		antlionMazeGenerator = new MapGenAntlionMaze();
 	}
 
 	public void generateTerrain(int x, int z, Block[] blocks) {
@@ -148,13 +150,14 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 		caveGenerator.func_151539_a(this, worldObj, x, z, blocks);
 		ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
-
+		antlionMazeGenerator.func_151539_a(this, worldObj, x, z, blocks);
+		
 		Chunk chunk = new Chunk(worldObj, blocks, metadata, x, z);
 		byte[] biomeArrayReference = chunk.getBiomeArray();
 
 		for (int a = 0; a < biomeArrayReference.length; ++a)
 			biomeArrayReference[a] = (byte) biomesForGeneration[a].biomeID;
-
+		
 		chunk.generateSkylightMap();
 		chunk.resetRelightChecks();
 		return chunk;

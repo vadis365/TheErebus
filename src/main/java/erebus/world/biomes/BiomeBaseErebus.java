@@ -107,11 +107,11 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	@Override
 	public void decorate(World world, Random rand, int x, int z) {
 		String id = getClass().getSimpleName();
-		TimeMeasurement.start(id);
+		//TimeMeasurement.start(id);
 
 		decorator.decorate(world, rand, x, z);
 
-		TimeMeasurement.finish(id);
+		//TimeMeasurement.finish(id);
 	}
 
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {

@@ -8,7 +8,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import erebus.core.helper.Utils;
-import erebus.world.feature.structure.WorldGenAntlionMaze;
+import erebus.world.feature.structure.MapGenAntlionMaze;
 
 public class TileEntityTempleTeleporter extends TileEntity {
 	private int targetX, targetY, targetZ;
@@ -41,7 +41,7 @@ public class TileEntityTempleTeleporter extends TileEntity {
 		}
 	}
 	
-	private void setDestoyForcefield() {
+	private void setDestoyForcefield() {	
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		if(meta == 0 && playOpenSound) {
 			worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
@@ -50,7 +50,7 @@ public class TileEntityTempleTeleporter extends TileEntity {
 		if(worldObj.getWorldTime() % 5 == 0 && meta < 4)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 1, 3);
 		if(meta == 3 && bossSpawn) {
-			WorldGenAntlionMaze.breakForceField(worldObj, xCoord - 16, yCoord + 1, zCoord - 27);
+			MapGenAntlionMaze.breakForceField(worldObj, xCoord - 16, yCoord + 1, zCoord - 27);
 			ItemStack stack = new ItemStack(Items.potionitem, 1, 8227);
 			Utils.dropStackNoRandom(worldObj, xCoord, yCoord + 2, zCoord, stack);
 			bossSpawn = false;
