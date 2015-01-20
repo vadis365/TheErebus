@@ -14,7 +14,9 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.MapGenBase;
+import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.TimeMeasurement;
@@ -69,20 +71,20 @@ public class MapGenAntlionMaze extends MapGenBase  {
 	@Override
 	protected void func_151538_a(World world, int localX, int localZ, int chunkX, int chunkZ, Block[] blocks)
 	{
-		if (rand.nextInt(4000) == 0) // Should probably change this
+		if (rand.nextInt(500) == 0) // Should probably change this
 		{
-			int x = chunkX;
+			int x = localX;
 			int y = 18;
-			int z = chunkZ;
-
-		//	if (world.getBiomeGenForCoords(x, z).biomeID == ModBiomes.volcanicDesertID) //this bit doesn't work 
-		//	{
+			int z = localZ;
+			BiomeGenBase biomeBase = worldObj.getBiomeGenForCoords(x, z);
+			if (biomeBase == ModBiomes.volcanicDesert) 
+			{
 				generate(world, rand, x, y, z);
-		//	}
+			}
 		}
 	}
 
-    public boolean generate(World world, Random rand, int x, int y, int z) {
+    public void generate(World world, Random rand, int x, int y, int z) {
     	TimeMeasurement.start("Antlion Maze thing");
     	
 			int sizeX = 60;
@@ -92,7 +94,7 @@ public class MapGenAntlionMaze extends MapGenBase  {
 			        int mazeWidth = sizeX/2;
 			        int mazeHeight = sizeZ/2;
 			        if (mazeWidth < 2 || mazeHeight < 2 || sizeY < 1) {
-			        	return false;
+			        	return;
 			        }
 			        int[][] maze = null;
 			        MazeGenerator generator = new PerfectMazeGenerator(mazeWidth, mazeHeight);
@@ -120,7 +122,6 @@ public class MapGenAntlionMaze extends MapGenBase  {
 					spawnIdolGuardians(world, x, y, z);
 					TimeMeasurement.finish("Antlion Maze thing");
 					System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
-			        return true;
 	}
     
     private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {
