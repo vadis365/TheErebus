@@ -71,20 +71,21 @@ public class MapGenAntlionMaze extends MapGenBase  {
 	@Override
 	protected void func_151538_a(World world, int localX, int localZ, int chunkX, int chunkZ, Block[] blocks)
 	{
-		if (rand.nextInt(500) == 0) // Should probably change this
+		if (rand.nextInt(2048) == 0) // Should probably change this
 		{
-			int x = localX;
+			int x = chunkX * 16 + 16;
 			int y = 18;
-			int z = localZ;
-			BiomeGenBase biomeBase = worldObj.getBiomeGenForCoords(x, z);
-			if (biomeBase == ModBiomes.volcanicDesert) 
-			{
+			int z = chunkZ * 16 + 16;
+			BiomeGenBase biomeBase = world.getBiomeGenForCoords(x, z);
+			if (biomeBase == ModBiomes.volcanicDesert){
 				generate(world, rand, x, y, z);
+			System.out.println("ChunkX: " + x + " Y: " + y + " ChunkZ: " + z);
+			System.out.println("LocalX: " + localX + " Y: " + y + " localZ: " + localZ);
 			}
 		}
 	}
 
-    public void generate(World world, Random rand, int x, int y, int z) {
+	public void generate(World world, Random rand, int x, int y, int z) {
     	TimeMeasurement.start("Antlion Maze thing");
     	
 			int sizeX = 60;
