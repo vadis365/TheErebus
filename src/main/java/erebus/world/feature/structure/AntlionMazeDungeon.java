@@ -337,6 +337,7 @@ public class AntlionMazeDungeon
    }
    
    private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand) {
+	   createPyramid(world, Blocks.air, 0, true, x + 36, z + 36, 48, 48, y + 5); // to make a bit of air around pyramid
        for (int i = 0; i <= h * 4; i++) {
            for (int j = 0; j <= w * 4; j++) {
            	if (rand.nextInt(15) == 0)
