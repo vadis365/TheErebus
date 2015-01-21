@@ -71,7 +71,7 @@ public class MapGenAntlionMaze extends MapGenBase  {
 	@Override
 	protected void func_151538_a(World world, int localX, int localZ, int chunkX, int chunkZ, Block[] blocks)
 	{
-		if (rand.nextInt(2048) == 0) // Should probably change this
+		if (rand.nextInt(4096) == 0) // Should probably change this
 		{
 			int x = chunkX * 16 + 16;
 			int y = 18;
