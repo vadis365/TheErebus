@@ -62,10 +62,9 @@ public class AntlionMazeDungeon
 		});
 		
 	public void generateSurface(World world, Random rand, int chunkX, int chunkY, int chunkZ) {
-		int y = 18;
 		BiomeGenBase biomeBase = world.getBiomeGenForCoords(chunkX, chunkZ);
 		if (biomeBase == ModBiomes.volcanicDesert) {
-			System.out.println("ChunkX: " + chunkX + " Y: " + y + " ChunkZ: " + chunkZ);
+			System.out.println("ChunkX: " + chunkX + " Y: " + chunkY + " ChunkZ: " + chunkZ);
 			System.out.println("Attempting to Spawn at: (" + chunkX + ", " + chunkY + ", " + chunkZ + ")");
 			generate(world, rand, chunkX, chunkY, chunkZ);
 
