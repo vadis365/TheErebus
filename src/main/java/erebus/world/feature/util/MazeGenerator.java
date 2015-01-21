@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package erebus.world.feature.structure;
+package erebus.world.feature.util;
 
 /**
  * Interface for maze generators. A maze is a 2d array of integers, where each bit==1 is a wall.

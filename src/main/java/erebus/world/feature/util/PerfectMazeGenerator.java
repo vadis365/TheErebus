@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package erebus.world.feature.structure;
+package erebus.world.feature.util;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
+
 
 
 /**
