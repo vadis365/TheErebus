@@ -105,7 +105,7 @@ public class AntlionMazeDungeon
 					createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x + sizeX/2 + 8, z + sizeZ/2 + 8, 44, 44, y - 6);
 					decoratePyramid(world, x + sizeX/2 + 8, y - 6, z + sizeZ/2 + 8);
 					addTeleporters(world, x + sizeX/2 + 8, y - 6, z + sizeZ/2 + 8);
-					addCapstones(world, x + sizeX -1, y + 15, z + sizeZ -1, ModBlocks.capstone, 0);
+					addCapstones(world, x + sizeX -1, y + 15, z + sizeZ -1, ModBlocks.capstone);
 					spawnIdolGuardians(world, x, y, z);
 					TimeMeasurement.finish("Antlion Maze thing");
 					System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
@@ -242,11 +242,11 @@ public class AntlionMazeDungeon
 	}
 	
 
-	private void addCapstones(World world, int x, int y, int z, Block capstone, int metaData) {
-   	world.setBlock(x, y, z, capstone, metaData, 3);
-   	world.setBlock(x + 1, y, z, capstone, metaData, 3);
-   	world.setBlock(x + 1, y, z + 1, capstone, metaData, 3);
-   	world.setBlock(x, y, z + 1, capstone, metaData, 3);
+	private void addCapstones(World world, int x, int y, int z, Block capstone) {
+   	world.setBlock(x, y, z, capstone, 1, 3);
+   	world.setBlock(x + 1, y, z, capstone, 2, 3);
+   	world.setBlock(x, y, z + 1, capstone, 3, 3);
+   	world.setBlock(x + 1, y, z + 1, capstone, 4, 3);
 	}
 
 	public static void createPyramid(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart) {
