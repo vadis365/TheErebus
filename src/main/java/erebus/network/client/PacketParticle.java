@@ -97,8 +97,6 @@ public class PacketParticle extends AbstractClientPacket {
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
 					eff.addEffect(new EntityBreakingFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4D, e.posY + 0.125D, e.posZ + MathHelper.cos((float) ang) * 4D, Items.pumpkin_seeds));
-					
-				//	eff.addEffect(new EntitySmokeFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4, e.posY, e.posZ + MathHelper.cos((float) ang) * 4, -MathHelper.sin((float) ang) * 0.5, 0.1D, MathHelper.cos((float) ang) * 0.5));
 				}
 				break;
 			default:
