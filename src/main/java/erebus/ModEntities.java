@@ -128,18 +128,16 @@ public class ModEntities {
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
 		registerEntity(47, EntitySnapper.class, "snapper", 0x804E3D, 0x3D6F80);
 		registerEntity(48, EntityWisp.class, "wisp", 0x804E3D, 0x3D6F80);
-		// TODO after testing remove spawn eggs and re-register dungeon mobs
-		registerEntity(57, EntityAntlionBoss.class, "antlionBoss", 0x000000, 0xFFFFFF);
-		registerEntity(49, EntityUmberGolemDungeonTypes.class, "umberGolemIdol", 0xFFA200, 0xFFEE00);
-		registerEntity(56, EntityMagmaCrawler.class, "magmaCrawler", 0xFF0000, 0xFFEE00);
-		
+		registerEntity(49, EntityMagmaCrawler.class, "magmaCrawler", 0xFF0000, 0xFFEE00);
 		registerEntity(50, EntityAnimatedBlock.class, "animatedBlock");
 		registerEntity(51, EntityAnimatedChest.class, "animatedChest");
 		registerEntity(52, EntityAnimatedBambooCrate.class, "animatedBambooCrate");
 		registerEntity(53, EntityUmberGolem.class, "umberGolem");
 		registerEntity(54, EntityFireResistent.class, "fireResistentItem");
 		registerEntity(55, EntityMucusBombPrimed.class, "mucusBombPrimed");
-
+		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umberGolemIdol");
+		registerEntity(57, EntityAntlionBoss.class, "antlionBoss", 0x000000, 0xFFFFFF);
+		
 		registerEntity(70, EntityWaspDagger.class, "waspDagger");
 		registerEntity(71, EntityWebSling.class, "webSling");
 		registerEntity(72, EntityErebusLightningBolt.class, "erebusLightning");

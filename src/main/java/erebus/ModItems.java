@@ -173,10 +173,10 @@ public class ModItems {
 	public static final Item mushroomHelm = new MushroomHelm(0).setUnlocalizedName("erebus.mushroomHelm").setTextureName("erebus:mushroomHelm");
 	public static final Item spiderTShirt = new SpiderTShirt(1).setUnlocalizedName("erebus.spiderTShirt").setTextureName("erebus:spiderTShirtItem");
 	public static final Item waterStriders = new WaterStriders(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("erebus.waterStriders").setTextureName("erebus:waterStriders");
-	public static final Item rhinoExoskeletonHelmet = new RhinoHelm(0).setUnlocalizedName("rhinoHelmet").setTextureName("erebus:rhinoHelm");
-	public static final Item rhinoExoskeletonBody = new RhinoArmor(1).setUnlocalizedName("rhinoChestplate").setTextureName("erebus:rhinoChestplate");
-	public static final Item rhinoExoskeletonLegs = new RhinoArmor(2).setUnlocalizedName("rhinoLeggings").setTextureName("erebus:rhinoLeggings");
-	public static final Item rhinoExoskeletonBoots = new RhinoArmor(3).setUnlocalizedName("rhinoBoots").setTextureName("erebus:rhinoBoots");
+	public static final Item rhinoExoskeletonHelmet = new RhinoHelm(0).setUnlocalizedName("erebus.rhinoHelmet").setTextureName("erebus:rhinoHelm");
+	public static final Item rhinoExoskeletonBody = new RhinoArmor(1).setUnlocalizedName("erebus.rhinoChestplate").setTextureName("erebus:rhinoChestplate");
+	public static final Item rhinoExoskeletonLegs = new RhinoArmor(2).setUnlocalizedName("erebus.rhinoLeggings").setTextureName("erebus:rhinoLeggings");
+	public static final Item rhinoExoskeletonBoots = new RhinoArmor(3).setUnlocalizedName("erebus.rhinoBoots").setTextureName("erebus:rhinoBoots");
 
 	// CREATIVE
 	public static final Item spawnEggs = new SpawnEggs().setUnlocalizedName("erebus.monsterPlacer").setTextureName("spawn_egg");

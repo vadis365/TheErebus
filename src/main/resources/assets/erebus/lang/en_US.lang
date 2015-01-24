@@ -54,6 +54,7 @@ tile.erebus.swampPlant.name=Swamp Plant
 tile.erebus.fireBloom.name=Firebloom
 tile.erebus.fern.name=Fern
 tile.erebus.fiddlehead.name=Fiddlehead
+tile.erebus.algae.name=Swamp Algae
 
 tile.erebus.flowerPlanted.name=%s Flower
 tile.erebus.stigma.name=%s Flower Stigma
@@ -184,6 +185,7 @@ tile.erebus.gneissVent.name=Gneiss Gas Vent
 tile.erebus.templeBrickUnbreaking.name=Temple Brick Unbreaking
 tile.erebus.templeTeleporter.name=Temple Teleport Pad
 tile.erebus.forceField.name=Force Field
+tile.erebus.capstone.name=Pyramid Capstone
 
 tile.erebus.mushroomCap0.name=Bulb Capped Mushroom
 tile.erebus.mushroomCap1.name=Grandma's Shoes Mushroom
@@ -261,6 +263,10 @@ item.erebus.armorGliderPowered.name=Glider Chestplate Powered
 item.erebus.spiderTShirt.name=Tarantula Boss Trophy
 item.erebus.mushroomHelm.name=Mush Helm
 item.erebus.waterStriders.name=Water Striders
+item.erebus.rhinoHelmet.name=Rhino Plate Helmet
+item.erebus.rhinoChestplate.name=Rhino Plate Chestplate
+item.erebus.rhinoLeggings.name=Rhino Plate Leggings
+item.erebus.rhinoBoots.name=Rhino Plate Boots
 
 item.erebus.materials.0.name=Exoskeleton Plate
 item.erebus.materials.1.name=Jade
@@ -323,6 +329,7 @@ item.erebus.materials.57.name=Snapper Root
 item.erebus.materials.58.name=Hydrofuge
 item.erebus.materials.59.name=Water Repellent
 item.erebus.materials.60.name=Empty Smoothie Glass
+item.erebus.materials.61.name=Magma Crawler Eye
 
 item.erebus.food.0.name=Beetle Larva
 item.erebus.food.1.name=Cooked Beetle Larva
@@ -455,6 +462,9 @@ entity.erebus.leech.name=Leech
 entity.erebus.pondskater.name=Pond Skater
 entity.erebus.wisp.name=Swamp Wisp
 entity.erebus.snapper.name=Snapper
+entity.erebus.magmaCrawler.name=Magma Crawler
+entity.erebus.umberGolemIdol.name=Umber Golem Idol Guardian
+entity.erebus.antlionBoss.name=Antlion Overlord
 
 # Fluids
 fluid.honey=Honey
