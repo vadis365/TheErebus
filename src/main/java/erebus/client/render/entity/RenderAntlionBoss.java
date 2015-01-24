@@ -25,6 +25,9 @@ public class RenderAntlionBoss extends RenderLiving {
 		BossStatus.setBossStatus(antlionBoss, false);
 		float f1 = 2.0F;
 		GL11.glScalef(f1, f1, f1);
+		if(antlionBoss.getHealth() <= 0) {
+			GL11.glTranslatef(0, (antlionBoss.deathTicks)*0.006F, 0);	
+		}
 	}
 
 	@Override

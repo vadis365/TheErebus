@@ -483,6 +483,8 @@ public class AntlionMazeDungeon
 
 		EntityAntlionBoss antlionboss = new EntityAntlionBoss(world);
 		antlionboss.setPosition(x + 21, y - 8, z + 21);
+		antlionboss.setInPyramid((byte) 1);
+		antlionboss.setSpawnPoint(x + 21, y - 8, z + 21);
 		world.spawnEntityInWorld(antlionboss);
 	}
 }

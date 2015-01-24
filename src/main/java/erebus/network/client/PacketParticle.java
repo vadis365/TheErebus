@@ -23,7 +23,7 @@ public class PacketParticle extends AbstractClientPacket {
 		SPRAY_CAN,
 		CRUSHROOM_BLAM,
 		TARANTULA_BLAM,
-		TARANTULA_DEATH,
+		BOSS_DEATH,
 		ANTLION_BLAM,
 		ANTLION_RUMBLE;
 
@@ -86,7 +86,7 @@ public class PacketParticle extends AbstractClientPacket {
 					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4.5, e.posY, e.posZ + MathHelper.cos((float) ang) * 4.5, -MathHelper.sin((float) ang) * 1, 0.1D, MathHelper.cos((float) ang) * 1));
 				}
 				break;
-			case TARANTULA_DEATH:
+			case BOSS_DEATH:
 				float f = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
 				float f1 = (e.worldObj.rand.nextFloat() - 0.5F) * 4.0F;
 				float f2 = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;

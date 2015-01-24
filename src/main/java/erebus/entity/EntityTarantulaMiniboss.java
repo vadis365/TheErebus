@@ -141,7 +141,7 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 		}
 
 		if (deathTicks >= 180 && deathTicks <= 200)
-			PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.TARANTULA_DEATH));
+			PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.BOSS_DEATH));
 
 		int i;
 		int j;

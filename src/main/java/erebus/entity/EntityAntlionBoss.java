@@ -11,27 +11,34 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAIAntlionBossAttack;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
+import erebus.world.feature.structure.AntlionMazeDungeon;
 
 public class EntityAntlionBoss extends EntityMob implements IBossDisplayData{
 	private int blamCount;
+	public int deathTicks;
 	public EntityAntlionBoss(World world) {
 		super(world);
 		this.isImmuneToFire = true;
 		this.stepHeight = 1.0F;
-		experienceValue = 3965;
+		experienceValue = 100;
 		this.setSize(6.0F, 2.0F);
 		tasks.addTask(0, new EntityAIAntlionBossAttack(this, EntityPlayer.class, 0.6D, true));
 		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
@@ -42,6 +49,10 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData{
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(21, new Byte((byte) 3));
+		dataWatcher.addObject(23, new Byte((byte) 0));
+		dataWatcher.addObject(24, new Integer(0));
+		dataWatcher.addObject(25, new Integer(0));
+		dataWatcher.addObject(26, new Integer(0));
 	}
 
 	@Override
@@ -131,6 +142,49 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData{
 		blamCount = count;
 		dataWatcher.updateObject(21, action);
 	}
+	
+	public void setInPyramid(byte state) {
+		dataWatcher.updateObject(23, Byte.valueOf(state));
+	}
+
+	public byte getInPyramid() {
+		return dataWatcher.getWatchableObjectByte(23);
+	}
+	
+	public int getSpawnPointX() {
+		return dataWatcher.getWatchableObjectInt(24);
+	}
+
+	public int getSpawnPointY() {
+		return dataWatcher.getWatchableObjectInt(25);
+	}
+
+	public int getSpawnPointZ() {
+		return dataWatcher.getWatchableObjectInt(26);
+	}
+	
+	public void setSpawnPoint(int x, int y, int z) {
+		dataWatcher.updateObject(24, Integer.valueOf(x));
+		dataWatcher.updateObject(25, Integer.valueOf(y));
+		dataWatcher.updateObject(26, Integer.valueOf(z));
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setByte("inPyramid", getInPyramid());
+		nbt.setInteger("spawnPointX", getSpawnPointX());
+		nbt.setInteger("spawnPointY", getSpawnPointY());
+		nbt.setInteger("spawnPointZ", getSpawnPointZ());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setInPyramid(nbt.getByte("inPyramid"));
+		setSpawnPoint(nbt.getInteger("spawnPointX"), nbt.getInteger("spawnPointY"), nbt.getInteger("spawnPointZ"));
+	}
+	
 
 	protected Entity areaOfEffect2() {
 		List list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(boundingBox.minX, boundingBox.minY, boundingBox.minZ, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ).expand(16D, 1D, 16D));
@@ -145,6 +199,56 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData{
 					}
 			}	
 		return null;
+	}
+	
+	@Override
+	protected void onDeathUpdate() {
+		++deathTicks;
+
+		if (deathTicks % 25 == 1) {
+			worldObj.playSoundEffect(posX, posY, posZ, "erebus:antliongrowl", 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			worldObj.playSoundEffect(posX, posY, posZ, "erebus:antliongrowl", 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.3F);
+			worldObj.playSoundEffect(posX, posY, posZ, "mob.ghast.scream", 1.0F, 0.1F);
+		}
+
+		if (deathTicks >= 180 && deathTicks <= 200)
+			PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.BOSS_DEATH));
+
+		int i;
+		int j;
+
+		if (!worldObj.isRemote)
+			if (deathTicks > 150 && deathTicks % 5 == 0) {
+				i = 1000;
+
+				while (i > 0) {
+					j = EntityXPOrb.getXPSplit(i);
+					i -= j;
+					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+				}
+			}
+		moveEntity(0.0D, 0.310000000149011612D, 0.0D);
+		spawnRumbleParticles();
+		renderYawOffset = prevRenderYawOffset += 0.03F;
+		limbSwingAmount = 0.5F;
+		if (deathTicks == 200 && !worldObj.isRemote) {
+			i = 2000;
+
+			while (i > 0) {
+				j = EntityXPOrb.getXPSplit(i);
+				i -= j;
+				worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+			}
+			if (getInPyramid() == 1) {
+				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX(), getSpawnPointY(), getSpawnPointZ(), 7, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ());
+				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ(), 6, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ());
+				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX(), getSpawnPointY(), getSpawnPointZ() + 1, 9, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ() + 1);
+				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ() + 1, 8, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ() + 1);
+			}
+			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), ModBlocks.tarantulaEgg); //TODO NOT DROP THIS. MAYBE ANOTHER EGG?
+			Utils.dropStackNoRandom(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ), new ItemStack(ModItems.soulCrystal));
+			setDead();
+		}
 	}
 	
     public void destroyBlocksInAABB(AxisAlignedBB AABB) {
