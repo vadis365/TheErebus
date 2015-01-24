@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
@@ -32,7 +33,8 @@ public class EntityThrownSand extends EntityThrowable {
 		if (movingObjectPosition.entityHit != null) {
 			if (!worldObj.isRemote)
 				if (movingObjectPosition.entityHit instanceof EntityLivingBase) { 
-					((EntityLivingBase) movingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.blindness.id, 5 * 20, 0));
+					((EntityLivingBase) movingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.blindness.id, 2 * 20, 0));
+					worldObj.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(Blocks.sand));
 				}
 			if (!movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 4));
 			} else if (movingObjectPosition.entityHit == null && Blocks.sand.canPlaceBlockAt(worldObj, x, y, z))
