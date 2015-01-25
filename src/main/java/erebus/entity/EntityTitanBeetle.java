@@ -51,7 +51,7 @@ public class EntityTitanBeetle extends EntityTameable {
 		super(world);
 		inventory = new ItemStack[27];
 		stepHeight = 2.0F;
-		setSize(3F, 1.2F);
+		setSize(2.5F, 1.2F);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));
@@ -396,7 +396,8 @@ public class EntityTitanBeetle extends EntityTameable {
 				setAttackTarget((EntityLivingBase) null);
 				return false;
 			}
-		entity.attackEntityFrom(DamageSource.causeMobDamage(this), 4);
+		if(entity != null && getDistanceToEntity(entity) <= 2.5F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 4);
 		return super.attackEntityAsMob(entity);
 	}
 
