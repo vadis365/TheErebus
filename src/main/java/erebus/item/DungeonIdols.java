@@ -4,12 +4,15 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
+import erebus.entity.EntityUmberGolemDungeonTypes;
 
 public class DungeonIdols extends Item {
 
@@ -17,7 +20,11 @@ public class DungeonIdols extends Item {
 		Mud,
 		Iron,
 		Gold,
-		Jade;
+		Jade,
+		MudUmbergolem,
+		IronUmbergolem,
+		GoldUmbergolem,
+		JadeUmbergolem;
 	}
 
 	public static ItemStack createStack(IDOL idol) {
@@ -65,5 +72,23 @@ public class DungeonIdols extends Item {
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		return super.getUnlocalizedName() + "." + stack.getItemDamage();
+	}
+	
+	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (is.getItemDamage() >= 4) {
+			if (!world.isRemote) {
+				byte spawn = (byte) (is.getItemDamage() - 4);
+				EntityUmberGolemDungeonTypes entityUmberGolem = new EntityUmberGolemDungeonTypes(world);
+				entityUmberGolem.setType(spawn);
+				entityUmberGolem.setHealth(entityUmberGolem.getMaxHealth()); //hack because of stupid attributes setting 
+				entityUmberGolem.setPosition(x + 0.5D, y + 1, z + 0.5D);
+				world.spawnEntityInWorld(entityUmberGolem);
+				}
+				if (!player.capabilities.isCreativeMode)
+					--is.stackSize;
+				return true;
+			}
+		return false;
 	}
 }
