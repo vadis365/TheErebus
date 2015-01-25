@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -23,6 +24,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
 import erebus.item.Materials;
 
@@ -128,6 +130,8 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
 			entityDropItem(Materials.createStack(Materials.DATA.waspSting), 0.0F);
+		if(getIsBoss() == 1)
+			entityDropItem(new ItemStack(ModItems.bottleAntiVenom), 0.0F);
 	}
 
 	public boolean isFlying() {
