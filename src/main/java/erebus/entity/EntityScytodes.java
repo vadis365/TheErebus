@@ -22,7 +22,7 @@ public class EntityScytodes extends EntityMob {
 
 	public EntityScytodes(World world) {
 		super(world);
-		setSize(3F, 1.5F);
+		setSize(2F, 1F);
 		isImmuneToFire = true;
 	}
 
