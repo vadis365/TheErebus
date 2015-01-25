@@ -73,7 +73,7 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData{
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4.0D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(48.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);
@@ -245,7 +245,7 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData{
 				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX(), getSpawnPointY(), getSpawnPointZ() + 1, 9, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ() + 1);
 				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ() + 1, 8, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ() + 1);
 			}
-			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), ModBlocks.tarantulaEgg); //TODO NOT DROP THIS. MAYBE ANOTHER EGG?
+			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), ModBlocks.antlionEgg);
 			Utils.dropStackNoRandom(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ), new ItemStack(ModItems.soulCrystal));
 			setDead();
 		}

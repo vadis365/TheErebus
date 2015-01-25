@@ -124,6 +124,7 @@ import erebus.client.render.item.BambooPoleItemRenderer;
 import erebus.client.render.item.BambooTorchItemRenderer;
 import erebus.client.render.item.ExtenderThingyItemRenderer;
 import erebus.client.render.item.ItemAltarBaseRenderer;
+import erebus.client.render.item.ItemAntlionEggRenderer;
 import erebus.client.render.item.ItemBoneBlockRenderer;
 import erebus.client.render.item.ItemCraftingAltarRenderer;
 import erebus.client.render.item.ItemGlowingJarRenderer;
@@ -140,6 +141,7 @@ import erebus.client.render.item.WaspDaggerItemRenderer;
 import erebus.client.render.item.WaspSwordItemRenderer;
 import erebus.client.render.item.WebSlingerItemRenderer;
 import erebus.client.render.item.WoodlouseBallItemRenderer;
+import erebus.client.render.tileentity.TileEntityAntlionEggRenderer;
 import erebus.client.render.tileentity.TileEntityBambooBridgeRenderer;
 import erebus.client.render.tileentity.TileEntityBambooPoleRenderer;
 import erebus.client.render.tileentity.TileEntityBoneBlockRenderer;
@@ -229,6 +231,7 @@ import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
+import erebus.tileentity.TileEntityAntlionEgg;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
@@ -374,6 +377,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingAltar.class, new TileEntityOfferingAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTarantulaEgg.class, new TileEntityTarantulaEggRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySmoothieMaker.class, new TileEntitySmoothieMakerRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAntlionEgg.class, new TileEntityAntlionEggRenderer());
 
 		RenderingRegistry.registerBlockHandler(new BlockBambooCropRender());
 		RenderingRegistry.registerBlockHandler(new BlockHollowLogRender());
@@ -417,6 +421,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.craftingAltar), new ItemCraftingAltarRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.tarantulaEgg), new ItemTarantulaEggRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.smoothieMaker), new ItemSmoothieMakerRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.antlionEgg), new ItemAntlionEggRenderer());
 	}
 
 	@Override

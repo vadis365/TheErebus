@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
+import erebus.block.BlockAntlionEgg;
 import erebus.block.BlockAntlionSpawner;
 import erebus.block.BlockBones;
 import erebus.block.BlockButtonUmberstone;
@@ -319,6 +320,7 @@ public class ModBlocks {
 	// OTHER THINGS
 	public static final Block gaeanKeystone = new GaeanKeystone();
 	public static final Block tarantulaEgg = new BlockTarantulaEgg();
+	public static final Block antlionEgg = new BlockAntlionEgg();
 
 	public static void init() {
 		initBlocks();

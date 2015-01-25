@@ -19,10 +19,10 @@ import erebus.client.gui.GuiColossalCrate;
 import erebus.client.gui.GuiComposter;
 import erebus.client.gui.GuiExtenderThingy;
 import erebus.client.gui.GuiHoneyComb;
-import erebus.client.gui.GuiSmoothieMaker;
 import erebus.client.gui.GuiPetrifiedChest;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.client.gui.GuiSilo;
+import erebus.client.gui.GuiSmoothieMaker;
 import erebus.client.gui.GuiUmberFurnace;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityBlackAnt;
@@ -33,11 +33,12 @@ import erebus.inventory.ContainerColossalCrate;
 import erebus.inventory.ContainerComposter;
 import erebus.inventory.ContainerExtenderThingy;
 import erebus.inventory.ContainerHoneyComb;
-import erebus.inventory.ContainerSmoothieMaker;
 import erebus.inventory.ContainerPetrifiedCraftingTable;
 import erebus.inventory.ContainerPetrifiedWoodChest;
 import erebus.inventory.ContainerSilo;
+import erebus.inventory.ContainerSmoothieMaker;
 import erebus.inventory.ContainerUmberFurnace;
+import erebus.tileentity.TileEntityAntlionEgg;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
@@ -56,10 +57,10 @@ import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntityJarOHoney;
-import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
+import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityTarantulaEgg;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.tileentity.TileEntityUmberFurnace;
@@ -118,6 +119,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityTarantulaEgg.class, "tarantulaEgg");
 		registerTileEntity(TileEntitySmoothieMaker.class, "smoothieMaker");
 		registerTileEntity(TileEntityTempleTeleporter.class, "templeTeleporter");
+		registerTileEntity(TileEntityAntlionEgg.class, "antlionEgg");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
