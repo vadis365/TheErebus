@@ -6,6 +6,7 @@ import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -161,13 +162,15 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 		}
 
 		// TODO OK this may need moving to it's own class to make it generate looking nice
-		for (attempt = 0; attempt < 10; attempt++) {
-			xx = x + offsetXZ();
-			yy = 30 + rand.nextInt(90);
-			zz = z + offsetXZ();
+		if(ConfigHandler.INSTANCE.glowshrooms) {
+			for (attempt = 0; attempt < 10; attempt++) {
+				xx = x + offsetXZ();
+				yy = 30 + rand.nextInt(90);
+				zz = z + offsetXZ();
 
-			if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone && world.isAirBlock(xx, yy - 1, zz))
-				world.setBlock(xx, yy - 1, zz, ModBlocks.glowshroomStalkMain, 4, 2);
+				if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone && world.isAirBlock(xx, yy - 1, zz))
+					world.setBlock(xx, yy - 1, zz, ModBlocks.glowshroomStalkMain, 4, 2);
+			}
 		}
 	}
 
