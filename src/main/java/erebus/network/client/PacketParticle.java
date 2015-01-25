@@ -6,6 +6,7 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCloudFX;
+import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.particle.EntityHugeExplodeFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
@@ -13,6 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 import erebus.client.fx.EntityRepellentFX;
 import erebus.network.AbstractClientPacket;
 
@@ -81,8 +83,8 @@ public class PacketParticle extends AbstractClientPacket {
 			case ANTLION_BLAM:
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
-					for (int count = 0; count <= 100; ++count)
-						eff.addEffect(new EntityBreakingFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4D, e.posY + 0.5D, e.posZ + MathHelper.cos((float) ang) * 4D, Items.pumpkin_seeds));
+					for (int count = 0; count <= 20; ++count)
+						eff.addEffect(new EntityDiggingFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3.5D, e.posY + 0.5D, e.posZ + MathHelper.cos((float) ang) * 3.5D,  -MathHelper.sin((float) ang) * 0.8, 0.0D, MathHelper.cos((float) ang) * 0.8, ModBlocks.ghostSand, 0));
 					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4.5, e.posY, e.posZ + MathHelper.cos((float) ang) * 4.5, -MathHelper.sin((float) ang) * 1, 0.1D, MathHelper.cos((float) ang) * 1));
 				}
 				break;
@@ -96,7 +98,7 @@ public class PacketParticle extends AbstractClientPacket {
 			case ANTLION_RUMBLE:
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
-					eff.addEffect(new EntityBreakingFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4D, e.posY + 0.125D, e.posZ + MathHelper.cos((float) ang) * 4D, Items.pumpkin_seeds));
+					eff.addEffect(new EntityDiggingFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3.5D, e.posY + 0.125D, e.posZ + MathHelper.cos((float) ang) * 3.5D, -MathHelper.sin((float) ang) * 0.8, 0.3D, MathHelper.cos((float) ang) * 0.8, ModBlocks.ghostSand, 0));
 				}
 				break;
 			default:
