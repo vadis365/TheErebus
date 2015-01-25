@@ -69,7 +69,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	protected void updateBossAttributes() {
 		if (worldObj != null && !worldObj.isRemote)
 			if (getIsBoss() == 1) {
-				setSize(3F, 2F);
+				setSize(2.5F, 2F);
 				experienceValue = 25;
 				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
 				getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
@@ -148,7 +148,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		if (worldObj.isRemote) {
 			i = getIsBoss();
 			if (i == 1) {
-				setSize(3F, 2F);
+				setSize(2.5F, 2F);
 				if (!hasCustomNameTag())
 					setCustomNameTag("Hornet of Despair");
 			} else
