@@ -228,7 +228,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 			setRammingCharge((byte) 32);
 		entity.attackEntityFrom(DamageSource.causeMobDamage(this), (int) damage);
 		entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
-		worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
+		worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
 		((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));
 		setRamAttack(false);
 		return true;

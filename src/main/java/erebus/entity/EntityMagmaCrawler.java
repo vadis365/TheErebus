@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -9,8 +7,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
@@ -154,7 +150,7 @@ public class EntityMagmaCrawler extends EntityMob {
 					float targetAreaOffset = MathHelper.sqrt_float(distance) * 0.5F;
 					worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1009, (int) posX, (int) posY, (int) posZ, 0);
 					EntitySmallFireball fireball = new EntitySmallFireball(worldObj, this, distanceX + rand.nextGaussian() * targetAreaOffset, distanceY, distanceZ + rand.nextGaussian() * targetAreaOffset);
-					fireball.posY = posY + height / 2.0F + 0.5D;
+					fireball.posY = posY + height / 2.0F;
 					worldObj.spawnEntityInWorld(fireball);
 				}
 			}

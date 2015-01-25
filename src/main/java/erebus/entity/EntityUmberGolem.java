@@ -125,7 +125,7 @@ public class EntityUmberGolem extends EntityCreature {
 			int Knockback = 1;
 			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F + 3);
 			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
-			worldObj.playSoundAtEntity(entity, "damage.fallbig", 1.0F, 1.0F);
+			worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));
 			return true;
 		}
