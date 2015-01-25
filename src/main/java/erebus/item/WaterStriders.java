@@ -1,7 +1,6 @@
 package erebus.item;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -36,18 +35,18 @@ public class WaterStriders extends ItemArmor {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
 		int x = MathHelper.floor_double(player.posX);
-		int y = MathHelper.floor_double(player.boundingBox.minY);
+		int y = MathHelper.floor_double(player.posY - player.getYOffset());
 		int z = MathHelper.floor_double(player.posZ);
 		
 			player.posY += -player.motionY;
 		
-		if(world.getBlock(x, y, z).getMaterial() == Material.water) {
-			if(!Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed()) {
-				if(player.motionY < 0.0D)
-					player.motionY = 0.0D;
+		if(world.getBlock(x, y -1, z).getMaterial() == Material.water) {
+			if(player.motionY < 0.0D && player.boundingBox.minY < y) {
+				player.motionY = 0.0D;
+				player.jumpMovementFactor *=0.4F;
 				player.fallDistance = 0.0F;
-			}else
-				player.motionY = 0.5D;
+				player.onGround = true;
+			}
 		}
 	}
 }
