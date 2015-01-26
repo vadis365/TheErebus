@@ -105,31 +105,31 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.jadeBoots, 1), "# #", "# #", '#', Materials.createStack(Materials.DATA.jade));
 
 		// Exoskeleton armor
-		GameRegistry.addRecipe(new ItemStack(ModItems.exoskeletonHelmet, 1), "sss", "s s", "   ", 's', Materials.createStack(Materials.DATA.plateExo));
+		GameRegistry.addRecipe(new ItemStack(ModItems.exoskeletonHelmet, 1), "sss", "s s", 's', Materials.createStack(Materials.DATA.plateExo));
 		GameRegistry.addRecipe(new ItemStack(ModItems.exoskeletonBody, 1), "s s", "sss", "sss", 's', Materials.createStack(Materials.DATA.plateExo));
 		GameRegistry.addRecipe(new ItemStack(ModItems.exoskeletonLegs, 1), "sss", "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExo));
-		GameRegistry.addRecipe(new ItemStack(ModItems.exoskeletonBoots, 1), "   ", "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExo));
+		GameRegistry.addRecipe(new ItemStack(ModItems.exoskeletonBoots, 1), "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExo));
 
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.reinforcedPlateExo), "sss", "sss", "sss", 's', Materials.createStack(Materials.DATA.plateExo));
 
-		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonHelmet, 1), "sss", "s s", "   ", 's', Materials.createStack(Materials.DATA.reinforcedPlateExo));
+		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonHelmet, 1), "sss", "s s", 's', Materials.createStack(Materials.DATA.reinforcedPlateExo));
 		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonBody, 1), "s s", "sss", "sss", 's', Materials.createStack(Materials.DATA.reinforcedPlateExo));
 		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonLegs, 1), "sss", "s s", "s s", 's', Materials.createStack(Materials.DATA.reinforcedPlateExo));
-		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonBoots, 1), "   ", "s s", "s s", 's', Materials.createStack(Materials.DATA.reinforcedPlateExo));
+		GameRegistry.addRecipe(new ItemStack(ModItems.reinExoskeletonBoots, 1), "s s", "s s", 's', Materials.createStack(Materials.DATA.reinforcedPlateExo));
 
 		// Special armor
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.compoundLens), "GGG", "GEG", "GGG", 'E', new ItemStack(ModBlocks.amber, 1, 1), 'G', Materials.createStack(Materials.DATA.compoundEyes));
-		GameRegistry.addRecipe(new ItemStack(ModItems.compoundGoggles, 1), "XXX", "OXO", "   ", 'O', Materials.createStack(Materials.DATA.compoundLens), 'X', Materials.createStack(Materials.DATA.plateExo));
-		GameRegistry.addRecipe(new ItemStack(ModItems.reinCompoundGoggles, 1), "XXX", "XOX", "   ", 'O', new ItemStack(ModItems.compoundGoggles, 1), 'X', Materials.createStack(Materials.DATA.reinforcedPlateExo));
+		GameRegistry.addRecipe(new ItemStack(ModItems.compoundGoggles, 1), "XXX", "OXO", 'O', Materials.createStack(Materials.DATA.compoundLens), 'X', Materials.createStack(Materials.DATA.plateExo));
+		GameRegistry.addRecipe(new ItemStack(ModItems.reinCompoundGoggles, 1), "XXX", "XOX", 'O', new ItemStack(ModItems.compoundGoggles, 1), 'X', Materials.createStack(Materials.DATA.reinforcedPlateExo));
 		GameRegistry.addRecipe(new ItemStack(ModItems.jumpBoots), "F F", "BXB", "B B", 'F', Materials.createStack(Materials.DATA.flyWing), 'B', Materials.createStack(Materials.DATA.elasticFibre), 'X', new ItemStack(ModItems.reinExoskeletonBoots, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.sprintLeggings), "BBB", "BXB", "BBB", 'B', Materials.createStack(Materials.DATA.bioVelocity), 'X', new ItemStack(ModItems.reinExoskeletonLegs, 1));
-		GameRegistry.addRecipe(new ItemStack(ModItems.armorGlider), "   ", "GXG", "   ", 'G', Materials.createStack(Materials.DATA.gliderWing), 'X', new ItemStack(ModItems.reinExoskeletonBody, 1));
+		GameRegistry.addRecipe(new ItemStack(ModItems.armorGlider), "GXG", 'G', Materials.createStack(Materials.DATA.gliderWing), 'X', new ItemStack(ModItems.reinExoskeletonBody, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGliderPowered), "W W", "ECE", " V ", 'W', Materials.createStack(Materials.DATA.enhancedGliderWing), 'E', Materials.createStack(Materials.DATA.elasticFibre), 'C', new ItemStack(ModItems.armorGlider, 1), 'V', new ItemStack(ModBlocks.velocityBlock, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.waterStriders), "WWW", "WXW", "WWW", 'W', Materials.createStack(Materials.DATA.waterRepellent), 'X', new ItemStack(ModItems.reinExoskeletonBoots, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonHelmet),  "h h", "sss", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino), 'h', Materials.createStack(Materials.DATA.rhinoBeetleHorn));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBody), "s s", "sss", "sss", 's', Materials.createStack(Materials.DATA.plateExoRhino));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonLegs), "sss", "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino));
-		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBoots), "   ", "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino));
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBoots), "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.scorpionPincer), "I I", "XIX", "XPX", 'I', "ingotIron", 'X', Materials.createStack(Materials.DATA.reinforcedPlateExo), 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rolledNewspaper), "PWP", "PIP", "PWP", 'I', new ItemStack(Items.dye, 1, 0), 'P', Materials.createStack(Materials.DATA.papyrus), 'W', Materials.createStack(Materials.DATA.whetstonePowder));
@@ -140,7 +140,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new RecipeWhetstoneUpgrades());
 
 		// Mushroom Helm & Mushroom Blocks
-		GameRegistry.addRecipe(new ItemStack(ModItems.mushroomHelm, 1), "mmm", "mpm", "   ", 'm', Materials.createStack(Materials.DATA.hideShroom), 'p', new ItemStack(Blocks.pumpkin));
+		GameRegistry.addRecipe(new ItemStack(ModItems.mushroomHelm, 1), "mmm", "mpm", 'm', Materials.createStack(Materials.DATA.hideShroom), 'p', new ItemStack(Blocks.pumpkin));
 
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bigBulbCappedMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bulbCapped, 1));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.bigGreenMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.kaizerfinger, 1));
@@ -274,7 +274,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.umberGolemCore), "AAA", "ARA", "AAA", 'A', Materials.createStack(Materials.DATA.altarFragment), 'R', Materials.createStack(Materials.DATA.redGem));
 		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemHead), "SSS", "SHS", "SSS", 'S', "stone", 'H', new ItemStack(ModItems.reinCompoundGoggles, 1)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemClaw), "  P", "  S", " SS", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
-		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemClaw), "SSP", "S  ", "   ", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemClaw), "SSP", "S  ", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemLegs), "SSS", "S S", "R R", 'S', "stone", 'R', Materials.createStack(Materials.DATA.reinforcedPlateExo)));
 
 		// Animation Magic
