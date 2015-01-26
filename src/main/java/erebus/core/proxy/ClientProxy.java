@@ -137,6 +137,7 @@ import erebus.client.render.item.ItemUmberGolemStatueRenderer;
 import erebus.client.render.item.PortalActivatorRenderer;
 import erebus.client.render.item.ScorpionPincerItemRenderer;
 import erebus.client.render.item.WandOfAnimationItemRenderer;
+import erebus.client.render.item.WarHammerItemRenderer;
 import erebus.client.render.item.WaspDaggerItemRenderer;
 import erebus.client.render.item.WaspSwordItemRenderer;
 import erebus.client.render.item.WebSlingerItemRenderer;
@@ -422,6 +423,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.tarantulaEgg), new ItemTarantulaEggRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.smoothieMaker), new ItemSmoothieMakerRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.antlionEgg), new ItemAntlionEggRenderer());
+		MinecraftForgeClient.registerItemRenderer(ModItems.warHammer, new WarHammerItemRenderer());
 	}
 
 	@Override

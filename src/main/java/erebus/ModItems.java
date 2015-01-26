@@ -57,6 +57,7 @@ import erebus.item.SpiderTShirt;
 import erebus.item.SprayCan;
 import erebus.item.SprintLeggings;
 import erebus.item.WandOfAnimation;
+import erebus.item.WarHammer;
 import erebus.item.WaspDagger;
 import erebus.item.WaspSword;
 import erebus.item.WaterStriders;
@@ -151,7 +152,8 @@ public class ModItems {
 	public static final Item blockExtractor = new BlockExtractor().setFull3D().setUnlocalizedName("erebus.blockExtractor").setTextureName("erebus:blockExtractor");
 	public static final Item woodlouseBall = new WoodlouseBall().setUnlocalizedName("erebus.woodlouseBall");
 	public static final Item rolledNewspaper = new RolledNewspaper();
-
+	public static final Item warHammer = new WarHammer().setUnlocalizedName("erebus.warHammer");
+	
 	// ANIMATION MAGIC
 	public static final Item ritualDagger = new RitualDagger();
 	public static final Item jadeHeart = new JadeHeart();
@@ -205,7 +207,7 @@ public class ModItems {
 		ModTabs.items.setTab(materials, idols, whetstone, food, smoothie, turnip, cabbageSeeds, encrustedDiamond);
 		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
 		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots, spiderTShirt);
-		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper);
+		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper, warHammer);
 		ModTabs.gears.setTab(mushroomHelm, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
 		ModTabs.gears.setTab(rhinoExoskeletonHelmet, rhinoExoskeletonBody, rhinoExoskeletonLegs, rhinoExoskeletonBoots);
 		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds);
