@@ -68,7 +68,8 @@ public class WarHammer extends ItemSword {
 			return false;
 		}
 		if(side == 1) {
-			PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM)); //Not sure I like this atm
+			if(stack.getTagCompound().getInteger("charge") > 0)
+				PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM)); //Not sure I like this atm
 			areaOfEffect(world, stack, player);
 			stack.getTagCompound().setInteger("charge", 0);
 			System.out.println("Blam: " + stack.getTagCompound().getInteger("charge"));
