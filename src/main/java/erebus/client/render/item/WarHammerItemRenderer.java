@@ -88,8 +88,8 @@ public class WarHammerItemRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y + 1.25F, z);
-		GL11.glRotatef(180F, 1F, 0, 0);
-		GL11.glRotatef(45F, 0, 1F, 0);
+		GL11.glRotatef(-45F, 0, 1F, 0);
+		GL11.glRotatef(180F, 0, 0, 1F);
 		GL11.glScaled(size, size, size);
 		model.render();
 		GL11.glPopMatrix();
