@@ -1,5 +1,7 @@
 package erebus.item;
 
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,6 +9,9 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModMaterials;
 import erebus.network.PacketPipeline;
@@ -64,10 +69,26 @@ public class WarHammer extends ItemSword {
 		}
 		if(side == 1) {
 			PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM)); //Not sure I like this atm
+			areaOfEffect(world, stack, player);
 			stack.getTagCompound().setInteger("charge", 0);
 			System.out.println("Blam: " + stack.getTagCompound().getInteger("charge"));
 			return true;
 		}
 		return false;
+	}
+	
+	protected Entity areaOfEffect(World world, ItemStack stack, EntityPlayer player) {
+		List list = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(player.boundingBox.minX, player.boundingBox.minY, player.boundingBox.minZ, player.boundingBox.maxX, player.boundingBox.maxY, player.boundingBox.maxZ).expand(stack.getTagCompound().getInteger("charge")* 0.25D, 1D, stack.getTagCompound().getInteger("charge")* 0.25D));
+			for (int i = 0; i < list.size(); i++) {
+				Entity entity = (Entity) list.get(i);
+				if (entity != null)
+					if (entity instanceof EntityLivingBase && entity != player){
+						float Knockback = (float) (stack.getTagCompound().getInteger("charge")* 0.025D);
+						entity.attackEntityFrom(DamageSource.causeMobDamage(player), stack.getTagCompound().getInteger("charge")* 0.25F);
+						entity.addVelocity(-MathHelper.sin(player.rotationYaw * -3.141593F + (float)world.rand.nextInt(3) + 0.141593F / 180.0F)* Knockback, 0.01D, MathHelper.cos(player.rotationYaw * -3.141593F + (float)world.rand.nextInt(3)+0.141593F / 180.0F)* Knockback);
+						world.playSoundAtEntity(entity, "erebus:antlionslam", 1.0F, 1.0F);
+					}
+			}	
+		return null;
 	}
 }
