@@ -51,5 +51,8 @@
 "cabbagefart": {"category": "player","sounds": ["cabbagefart"]},
 "antlionexplode": {"category": "hostile","sounds": ["antlionexplode"]},
 "antliongrowl": {"category": "hostile", "sounds": ["antliongrowl"]},
-"antlionslam": {"category": "hostile","sounds": ["antlionslam"]}
+"antlionslam": {"category": "hostile","sounds": ["antlionslam"]},
+"magmacrawler": {"category": "hostile","sounds": ["magmacrawler"]},
+"magmacrawlerhurt": {"category": "hostile", "sounds": ["magmacrawlerhurt"]},
+"magmacrawlerdeath": {"category": "hostile","sounds": ["magmacrawlerdeath"]}
 }

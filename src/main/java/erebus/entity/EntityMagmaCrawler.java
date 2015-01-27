@@ -19,8 +19,6 @@ public class EntityMagmaCrawler extends EntityMob {
 	public EntityMagmaCrawler(World world) {
 		super(world);
 		isImmuneToFire = true;
-		entityCollisionReduction = 1.0F;
-		jumpMovementFactor = 0F;
 		setSize(1.25F, 1.0F);
 	}
 
@@ -41,17 +39,17 @@ public class EntityMagmaCrawler extends EntityMob {
 
 	@Override
 	protected String getLivingSound() {
-		return "erebus:fireantsound";
+		return "erebus:magmacrawler";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "erebus:fireanthurt";
+		return "erebus:magmacrawlerhurt";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "erebus:squish";
+		return "erebus:magmacrawlerdeath";
 	}
 
 	@Override

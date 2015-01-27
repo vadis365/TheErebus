@@ -208,7 +208,7 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData{
 		if (deathTicks % 25 == 1) {
 			worldObj.playSoundEffect(posX, posY, posZ, "erebus:antliongrowl", 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			worldObj.playSoundEffect(posX, posY, posZ, "erebus:antliongrowl", 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.3F);
-			worldObj.playSoundEffect(posX, posY, posZ, "mob.ghast.scream", 1.0F, 0.1F);
+			worldObj.playSoundEffect(posX, posY, posZ, "erebus:antliongrowl", 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.1F);
 		}
 
 		if (deathTicks >= 180 && deathTicks <= 200)

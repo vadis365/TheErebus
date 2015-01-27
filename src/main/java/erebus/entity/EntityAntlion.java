@@ -64,14 +64,21 @@ public class EntityAntlion extends EntityMob {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
-	/*
-	 * @Override protected String getLivingSound() { return
-	 * "erebus:AntlionSound"; }
-	 *
-	 * @Override protected String getHurtSound() { return "erebus:Antlionhurt";
-	 * }
-	 */
-
+	@Override
+	protected String getLivingSound() {
+		return "erebus:antliongrowl";
+	}
+	 
+	@Override
+	protected String getHurtSound() {
+		return "erebus:antliongrowl";
+	}
+	
+	@Override
+	protected float getSoundPitch() {
+		return super.getSoundPitch() * 2F;
+	}
+	
 	@Override
 	protected String getDeathSound() {
 		return "erebus:squish";

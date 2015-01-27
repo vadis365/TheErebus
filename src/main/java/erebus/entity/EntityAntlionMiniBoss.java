@@ -65,13 +65,20 @@ public class EntityAntlionMiniBoss extends EntityMob {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
 
-	/*
-	 * @Override protected String getLivingSound() { return
-	 * "erebus:AntlionSound"; }
-	 *
-	 * @Override protected String getHurtSound() { return "erebus:Antlionhurt";
-	 * }
-	 */
+	@Override
+	protected String getLivingSound() {
+		return "erebus:antliongrowl";
+	}
+	 
+	@Override
+	protected String getHurtSound() {
+		return "erebus:antliongrowl";
+	}
+	
+	@Override
+	protected float getSoundPitch() {
+		return super.getSoundPitch() * 1.5F;
+	}
 
 	@Override
 	protected String getDeathSound() {
