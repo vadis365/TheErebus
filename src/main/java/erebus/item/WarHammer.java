@@ -58,7 +58,7 @@ public class WarHammer extends ItemSword {
 			stack.stackTagCompound = new NBTTagCompound();
 			return false;
 		}
-		if(side == 1) {
+		if(side == 1 && player.isSneaking()) {
 			if(stack.getTagCompound().getInteger("charge") > 0) {
 				PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM));
 				world.playSoundAtEntity(player, "erebus:antlionslam", 1.0F, 1.0F);
