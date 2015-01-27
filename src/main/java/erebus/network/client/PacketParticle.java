@@ -7,6 +7,7 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCloudFX;
 import net.minecraft.client.particle.EntityDiggingFX;
+import net.minecraft.client.particle.EntityFireworkSparkFX;
 import net.minecraft.client.particle.EntityHugeExplodeFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
@@ -106,8 +107,8 @@ public class PacketParticle extends AbstractClientPacket {
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
 					for (int count = 0; count <= 4; ++count)
-						eff.addEffect(new EntityRepellentFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * count *0.5, e.posY -1D, e.posZ + MathHelper.cos((float) ang) * count *0.5, 0, 0, 0));
-					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 2, e.posY-1, e.posZ + MathHelper.cos((float) ang) * 2, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5));
+						eff.addEffect(new EntityFireworkSparkFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 1 * count *0.5, e.posY - 1, e.posZ + MathHelper.cos((float) ang) * 1 * count * 0.5, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5, eff));
+					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 2, e.posY - 1, e.posZ + MathHelper.cos((float) ang) * 2, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5));
 				}
 				break;
 			default:

@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,19 +45,11 @@ public class WarHammer extends ItemSword {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		player.setItemInUse(stack, getMaxItemUseDuration(stack)); // TODO Figure out how to stop the animation from constantly firing on NBT change
-			if (stack.getTagCompound().getInteger("charge") < 25)
-				stack.getTagCompound().setInteger("charge", stack.getTagCompound().getInteger("charge") + 1);
-			if (stack.getTagCompound().getInteger("charge") >= 25)
-				stack.getTagCompound().setInteger("charge", 25);
-			if(world.isRemote)
-				System.out.println("Charge: " + stack.getTagCompound().getInteger("charge"));
+		if (stack.getTagCompound().getInteger("charge") < 25)
+			stack.getTagCompound().setInteger("charge", stack.getTagCompound().getInteger("charge") + 1);
+		if (stack.getTagCompound().getInteger("charge") >= 25)
+			stack.getTagCompound().setInteger("charge", 25);
 		return stack;
-	}
-	
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.block;
 	}
 	
 	@Override
@@ -68,11 +59,12 @@ public class WarHammer extends ItemSword {
 			return false;
 		}
 		if(side == 1) {
-			if(stack.getTagCompound().getInteger("charge") > 0)
-				PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM)); //Not sure I like this atm
+			if(stack.getTagCompound().getInteger("charge") > 0) {
+				PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM));
+				world.playSoundAtEntity(player, "erebus:antlionslam", 1.0F, 1.0F);
+			}
 			areaOfEffect(world, stack, player);
 			stack.getTagCompound().setInteger("charge", 0);
-			System.out.println("Blam: " + stack.getTagCompound().getInteger("charge"));
 			return true;
 		}
 		return false;
@@ -87,7 +79,6 @@ public class WarHammer extends ItemSword {
 						float Knockback = (float) (stack.getTagCompound().getInteger("charge")* 0.025D);
 						entity.attackEntityFrom(DamageSource.causeMobDamage(player), stack.getTagCompound().getInteger("charge")* 0.25F);
 						entity.addVelocity(-MathHelper.sin(player.rotationYaw * -3.141593F + (float)world.rand.nextInt(3) + 0.141593F / 180.0F)* Knockback, 0.01D, MathHelper.cos(player.rotationYaw * -3.141593F + (float)world.rand.nextInt(3)+0.141593F / 180.0F)* Knockback);
-						world.playSoundAtEntity(entity, "erebus:antlionslam", 1.0F, 1.0F);
 					}
 			}	
 		return null;
