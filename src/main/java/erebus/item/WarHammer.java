@@ -9,6 +9,9 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import erebus.ModMaterials;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 
 public class WarHammer extends ItemSword {
 
@@ -60,6 +63,7 @@ public class WarHammer extends ItemSword {
 			return false;
 		}
 		if(side == 1) {
+			PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM)); //Not sure I like this atm
 			stack.getTagCompound().setInteger("charge", 0);
 			System.out.println("Blam: " + stack.getTagCompound().getInteger("charge"));
 			return true;

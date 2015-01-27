@@ -27,7 +27,8 @@ public class PacketParticle extends AbstractClientPacket {
 		TARANTULA_BLAM,
 		BOSS_DEATH,
 		ANTLION_BLAM,
-		ANTLION_RUMBLE;
+		ANTLION_RUMBLE,
+		HAMMER_BLAM;
 
 		static final ParticleType[] values = values();
 	}
@@ -99,6 +100,14 @@ public class PacketParticle extends AbstractClientPacket {
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
 					eff.addEffect(new EntityDiggingFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3.5D, e.posY + 0.125D, e.posZ + MathHelper.cos((float) ang) * 3.5D, -MathHelper.sin((float) ang) * 0.8, 0.3D, MathHelper.cos((float) ang) * 0.8, ModBlocks.ghostSand, 0));
+				}
+				break;
+			case HAMMER_BLAM:
+				for (int a = 0; a < 360; a += 4) {
+					double ang = a * Math.PI / 180D;
+					for (int count = 0; count <= 4; ++count)
+						eff.addEffect(new EntityRepellentFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * count *0.5, e.posY -1D, e.posZ + MathHelper.cos((float) ang) * count *0.5, 0, 0, 0));
+					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 2, e.posY-1, e.posZ + MathHelper.cos((float) ang) * 2, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5));
 				}
 				break;
 			default:
