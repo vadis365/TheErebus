@@ -26,13 +26,13 @@ public class RenderRhinoBeetleChargeBar extends Gui {
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				mc.renderEngine.bindTexture(new ResourceLocation("erebus:textures/gui/overlay/rhinoChargeBar.png"));
 				ScaledResolution res = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-				renderChargeBar(((EntityRhinoBeetle) player.ridingEntity).getRammingCharge() * 2, res.getScaledWidth() / 2 + 84, res.getScaledHeight() - 30);
+				renderChargeBar(((EntityRhinoBeetle) player.ridingEntity).getRammingCharge() * 2, res.getScaledWidth() / 2 - 90, res.getScaledHeight() - 30);
 			}
 		}
 	}
 
 	private void renderChargeBar(int currCond, int posX, int posY) {
 		for (int i = 0; i < currCond / 5; i++)
-			drawTexturedModalRect(posX - i * 8, posY, 0, 0, 7, 1);
+			drawTexturedModalRect(posX + i * 8, posY, 0, 0, 7, 1);
 	}
 }
