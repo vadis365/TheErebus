@@ -38,7 +38,8 @@ public class BlockUmberstone extends Block implements ISubBlocksBlock {
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
 		EntityPlayer player = world.getClosestPlayer(x, y, z, 40);
-		player.triggerAchievement(ModAchievements.umberstone);
+		if (player != null)
+			player.triggerAchievement(ModAchievements.umberstone);
 	}
 
 	@Override
