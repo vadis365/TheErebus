@@ -24,6 +24,7 @@ import erebus.item.Food.FoodType;
 import erebus.item.Materials;
 import erebus.item.Materials.DATA;
 import erebus.item.Smoothie.SmoothieType;
+import erebus.tileentity.TileEntityBones;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.world.feature.util.MazeGenerator;
 import erebus.world.feature.util.PerfectMazeGenerator;
@@ -412,6 +413,8 @@ public class AntlionMazeDungeon
                    	world.setBlock(x + 1 + j * 4, y, z + 1 + i * 4, Blocks.torch, 3, 2);
                    	if(rand.nextInt(4) == 0)
                    		placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
+                   	else if(rand.nextInt(6) == 0)
+                   		placeBones(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
                    }
                    else if (rand.nextInt(10) == 0) {
                    	if(rand.nextBoolean())
@@ -428,6 +431,8 @@ public class AntlionMazeDungeon
            			world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.torch, 1, 2);
            			if(rand.nextInt(4) == 0)
            				placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 1, rand);
+           			else if(rand.nextInt(6) == 0)
+           				placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);
            			}
            	}
            }
@@ -438,6 +443,8 @@ public class AntlionMazeDungeon
                    	world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.torch, 2, 2);
                    	if(rand.nextInt(4) == 0)
                    		placeChest(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 2, rand);
+                   	else if(rand.nextInt(6) == 0)
+                   		placeBones(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 4, rand);
                   }
                }
            }
@@ -448,10 +455,12 @@ public class AntlionMazeDungeon
            			world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.torch, 4, 2);
            			if(rand.nextInt(4) == 0)
            				placeChest(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 4, rand);
-           			}
+           			else if(rand.nextInt(6) == 0)
+           				placeBones(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 2, rand);
+           		}
            	}
            }
-   	}
+       }
 	}
    
    public void placeChest(World world, int x, int y, int z, int directionMeta, Random rand) {
@@ -459,6 +468,14 @@ public class AntlionMazeDungeon
 		TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y, z);
 		if (chest != null)
 			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
+	}
+   
+   public void placeBones(World world, int x, int y, int z, int directionMeta, Random rand) {
+		world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 2);
+		TileEntityBones bones = (TileEntityBones) world.getTileEntity(x, y, z);
+		if (bones != null) {
+			LootUtil.generateLoot(bones, rand, chestLoot, 3, 10);
+		}
 	}
 
    private boolean canPlaceFeatureAt(World world, int x, int y, int z, int featureX, int featureY, int featureZ) {

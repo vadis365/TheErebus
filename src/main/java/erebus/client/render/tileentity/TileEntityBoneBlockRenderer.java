@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StringUtils;
 
 import org.lwjgl.opengl.GL11;
 
@@ -62,7 +63,8 @@ public class TileEntityBoneBlockRenderer extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
 		renderAModelAt((TileEntityBones) tile, x, y, z, partialTickTime);
-		renderNameTag(((TileEntityBones) tile).getOwnerName(), x, y, z);
+		if (!StringUtils.isNullOrEmpty(((TileEntityBones) tile).getOwnerName()))
+			renderNameTag(((TileEntityBones) tile).getOwnerName(), x, y, z);
 	}
 
 	private void renderNameTag(String name, double x, double y, double z) {
