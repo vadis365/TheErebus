@@ -51,7 +51,7 @@ public class BlockGneissVent extends Block {
 				vent.setPosition(x + 0.5D, y + 1D, z + 0.5D);
 				vent.setFlameType((byte) 1);
 				world.spawnEntityInWorld(vent);
-				world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "mob.ghast.fireball", 1.0F, 0.1F);
+				world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "mob.ghast.fireball", 0.5F, 0.1F);
 			}
 	}
 
