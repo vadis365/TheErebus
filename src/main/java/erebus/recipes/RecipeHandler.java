@@ -15,6 +15,8 @@ import erebus.ModItems;
 import erebus.block.BlockSlabStone;
 import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.DungeonIdols;
+import erebus.item.DungeonIdols.IDOL;
 import erebus.item.Food;
 import erebus.item.Materials;
 import erebus.lib.EnumWood;
@@ -276,7 +278,11 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemClaw), "  P", "  S", " SS", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemClaw), "SSP", "S  ", 'S', "stone", 'P', Materials.createStack(Materials.DATA.scorpionPincer)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(Materials.createStack(Materials.DATA.umberGolemLegs), "SSS", "S S", "R R", 'S', "stone", 'R', Materials.createStack(Materials.DATA.reinforcedPlateExo)));
-
+		GameRegistry.addRecipe(new ShapedOreRecipe(DungeonIdols.createStack(IDOL.MudUmbergolem), "XXX", "XUX", "XXX", 'X', ModBlocks.mudBricks, 'U', ModBlocks.umberGolemStatue));
+		GameRegistry.addRecipe(new ShapedOreRecipe(DungeonIdols.createStack(IDOL.IronUmbergolem), "XXX", "XUX", "XXX", 'X', Blocks.iron_block, 'U', ModBlocks.umberGolemStatue));
+		GameRegistry.addRecipe(new ShapedOreRecipe(DungeonIdols.createStack(IDOL.GoldUmbergolem), "XXX", "XUX", "XXX", 'X', Blocks.gold_block, 'U', ModBlocks.umberGolemStatue));
+		GameRegistry.addRecipe(new ShapedOreRecipe(DungeonIdols.createStack(IDOL.JadeUmbergolem), "XXX", "XUX", "XXX", 'X', ModBlocks.jadeBlock, 'U', ModBlocks.umberGolemStatue));
+		
 		// Animation Magic
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ModItems.soulCrystal, 'z', "stickWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
