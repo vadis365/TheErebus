@@ -7,7 +7,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
 import erebus.ModMaterials;
 import erebus.world.feature.structure.AntlionMazeDungeon;
 
