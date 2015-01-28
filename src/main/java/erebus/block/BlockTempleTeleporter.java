@@ -19,9 +19,13 @@ import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityTempleTeleporter;
 
 public class BlockTempleTeleporter extends BlockContainer {
-	
-	private IIcon templeTeleport1, templeTeleport2, templeTeleport3, templeTeleport4, templeTeleport5, templeTeleport6, largeSE, largeSW, largeNE, largeNW;
-	
+
+	public static final String[] iconPaths = new String[] { "templeTeleport1", "templeTeleport2", "templeTeleport3", "templeTeleport4",
+		"templeTeleport5", "templeTeleport6", "templeTeleportNE", "templeTeleportNW", "templeTeleportSE", "templeTeleportSW", "templebrick" };
+
+	@SideOnly(Side.CLIENT)
+	private IIcon[] icons;
+
 	public BlockTempleTeleporter() {
 		super(Material.rock);
 		setCreativeTab(ModTabs.blocks);
@@ -31,50 +35,17 @@ public class BlockTempleTeleporter extends BlockContainer {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:templeBrick");
-		templeTeleport1 = reg.registerIcon("erebus:templeTeleport1");
-		templeTeleport2 = reg.registerIcon("erebus:templeTeleport2");
-		templeTeleport3 = reg.registerIcon("erebus:templeTeleport3");
-		templeTeleport4 = reg.registerIcon("erebus:templeTeleport4");
-		templeTeleport5 = reg.registerIcon("erebus:templeTeleport5");
-		templeTeleport6 = reg.registerIcon("erebus:templeTeleport6");
-		largeSE = reg.registerIcon("erebus:templeTeleportSE");
-		largeSW = reg.registerIcon("erebus:templeTeleportSW");
-		largeNE = reg.registerIcon("erebus:templeTeleportNE");
-		largeNW = reg.registerIcon("erebus:templeTeleportNW");
+		icons = new IIcon[iconPaths.length];
+		int i = 0;
+		for (String path : iconPaths)
+			icons[i++] = reg.registerIcon("erebus:" + path);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		if (side == 1)
-			switch(meta) {
-			case 0:
-				return templeTeleport1;
-			case 1:
-				return templeTeleport2;
-			case 2:
-				return templeTeleport3;
-			case 3:
-				return templeTeleport4;
-			case 4:
-				return templeTeleport5;
-			case 5:
-				return templeTeleport6;
-			case 6:
-				return largeNE;
-			case 7:
-				return largeNW;
-			case 8:
-				return largeSE;
-			case 9:
-				return largeSW;
-			default:
-				return blockIcon;
-		}
-			return blockIcon;
+		return icons[Math.max(0, Math.min(icons.length - 1, side == 1 ? meta : 10))];
 	}
 
 	@Override

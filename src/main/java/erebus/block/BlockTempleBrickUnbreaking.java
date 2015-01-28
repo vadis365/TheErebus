@@ -15,10 +15,11 @@ import erebus.ModTabs;
 import erebus.item.Materials;
 
 public class BlockTempleBrickUnbreaking extends Block {
+
 	public static final String[] iconPaths = new String[] { "templeBrick", "templeBrickJade", "templeBrickExo",
 		"templeBrickCream", "templeBrickEye", "templeBrickString", "templeBrickJade1", "templeBrickExo1",
 		"templeBrickCream1", "templeBrickEye1", "templeBrickString1"};
-	
+
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
@@ -31,7 +32,7 @@ public class BlockTempleBrickUnbreaking extends Block {
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
 	}
-	
+
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		icons = new IIcon[iconPaths.length];
