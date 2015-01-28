@@ -33,9 +33,45 @@ import erebus.world.loot.WeightedLootList;
 public class AntlionMazeDungeon
 {
 	 private Block solid = ModBlocks.gneiss;
-		public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
-		new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.stone_pickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.stone_shovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.stone_axe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.stone_sword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2),
-		new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1), new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1) }).setPostProcessor(new IPostProcess() {
+	public static final WeightedLootList chestLoot = new WeightedLootList(
+			new LootItemStack[] {
+					new LootItemStack(Items.book).setAmount(1, 4).setWeight(18),
+					new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16),
+					new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13),
+					new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10),
+					new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9),
+					new LootItemStack(Items.enchanted_book).setWeight(8),
+					new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1),
+					new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
+					new LootItemStack(Items.golden_pickaxe).setWeight(3),
+					new LootItemStack(Items.iron_pickaxe).setWeight(2),
+					new LootItemStack(ModItems.jadePickaxe).setWeight(1),
+					new LootItemStack(Items.stone_pickaxe).setWeight(1),
+					new LootItemStack(Items.golden_shovel).setWeight(3),
+					new LootItemStack(Items.iron_shovel).setWeight(2),
+					new LootItemStack(ModItems.jadeShovel).setWeight(1),
+					new LootItemStack(Items.stone_shovel).setWeight(1),
+					new LootItemStack(Items.golden_axe).setWeight(3),
+					new LootItemStack(Items.iron_axe).setWeight(2),
+					new LootItemStack(ModItems.jadeAxe).setWeight(1),
+					new LootItemStack(Items.stone_axe).setWeight(1),
+					new LootItemStack(Items.golden_sword).setWeight(3),
+					new LootItemStack(Items.iron_sword).setWeight(2),
+					new LootItemStack(ModItems.jadeSword).setWeight(1),
+					new LootItemStack(Items.stone_sword).setWeight(1),
+					new LootItemStack(Items.iron_chestplate).setWeight(2),
+					new LootItemStack(ModItems.jadeBody).setWeight(1),
+					new LootItemStack(Items.golden_chestplate).setWeight(1),
+					new LootItemStack(Items.iron_helmet).setWeight(2),
+					new LootItemStack(ModItems.jadeHelmet).setWeight(1),
+					new LootItemStack(Items.golden_helmet).setWeight(1),
+					new LootItemStack(Items.iron_leggings).setWeight(2),
+					new LootItemStack(ModItems.jadeLegs).setWeight(1),
+					new LootItemStack(Items.golden_leggings).setWeight(1),
+					new LootItemStack(Items.iron_boots).setWeight(2),
+					new LootItemStack(ModItems.jadeBoots).setWeight(1),
+					new LootItemStack(Items.golden_boots).setWeight(1) 
+					}).setPostProcessor(new IPostProcess() {
 
 			@SuppressWarnings("rawtypes")
 			@Override
@@ -123,7 +159,7 @@ public class AntlionMazeDungeon
 
 	public static void addTeleporters(World world, int x, int y, int z) {
 		// room 1
-			world.setBlock(x + 13, y + 9, z + 13, ModBlocks.capstone, 0, 2); // TODO make a new block state that is not idol affected
+			world.setBlock(x + 13, y + 9, z + 13, ModBlocks.capstone, 0, 2);
 			setLockStone(world, x + 15, y + 9, z + 15, 2); //exo
 			setTeleporter(world, x + 16, y + 9, z + 16, 0, x + 30, y + 9, z + 13); // on to next room's capstone
 			setTeleporter(world, x + 19, y + 9, z + 19, 5, x + 19, y + 14, z + 19); // back to floor above's capstone
