@@ -28,7 +28,7 @@ public class BlockTempleBrickUnbreaking extends Block {
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
@@ -44,6 +44,9 @@ public class BlockTempleBrickUnbreaking extends Block {
 		icons[9] = reg.registerIcon("erebus:templeBrickEye1");
 		icons[10] = reg.registerIcon("erebus:templeBrickString1");
 	}
+	
+	//java.lang.NullPointerException: Initializing game
+	//at erebus.block.BlockTempleBrickUnbreaking.registerBlockIcons(BlockTempleBrickUnbreaking.java:35)
 
 	@Override
 	@SideOnly(Side.CLIENT)
