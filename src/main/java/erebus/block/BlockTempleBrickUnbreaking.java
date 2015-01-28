@@ -15,10 +15,10 @@ import erebus.ModTabs;
 import erebus.item.Materials;
 
 public class BlockTempleBrickUnbreaking extends Block {
-	
-	private IIcon templeBrick, templeBrickJade, templeBrickExo, templeBrickCream, templeBrickEye, templeBrickString;
-	private IIcon templeBrickJade1, templeBrickExo1, templeBrickCream1, templeBrickEye1, templeBrickString1;
-	
+
+	@SideOnly(Side.CLIENT)
+	private IIcon[] icons;
+
 	public BlockTempleBrickUnbreaking() {
 		super(Material.rock);
 		setCreativeTab(ModTabs.blocks);
@@ -32,52 +32,25 @@ public class BlockTempleBrickUnbreaking extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:templeBrick");
-		templeBrickJade = reg.registerIcon("erebus:templeBrickJade");
-		templeBrickExo = reg.registerIcon("erebus:templeBrickExo");
-		templeBrickCream = reg.registerIcon("erebus:templeBrickCream");
-		templeBrickEye = reg.registerIcon("erebus:templeBrickEye");
-		templeBrickString = reg.registerIcon("erebus:templeBrickString");
-		templeBrickJade1 = reg.registerIcon("erebus:templeBrickJade1");
-		templeBrickExo1 = reg.registerIcon("erebus:templeBrickExo1");
-		templeBrickCream1 = reg.registerIcon("erebus:templeBrickCream1");
-		templeBrickEye1 = reg.registerIcon("erebus:templeBrickEye1");
-		templeBrickString1 = reg.registerIcon("erebus:templeBrickString1");
+		icons[0] = reg.registerIcon("erebus:templeBrick");
+		icons[1] = reg.registerIcon("erebus:templeBrickJade");
+		icons[2] = reg.registerIcon("erebus:templeBrickExo");
+		icons[3] = reg.registerIcon("erebus:templeBrickCream");
+		icons[4] = reg.registerIcon("erebus:templeBrickEye");
+		icons[5] = reg.registerIcon("erebus:templeBrickString");
+		icons[6] = reg.registerIcon("erebus:templeBrickJade1");
+		icons[7] = reg.registerIcon("erebus:templeBrickExo1");
+		icons[8] = reg.registerIcon("erebus:templeBrickCream1");
+		icons[9] = reg.registerIcon("erebus:templeBrickEye1");
+		icons[10] = reg.registerIcon("erebus:templeBrickString1");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		if (side == 1)
-			switch(meta) {
-			case 0:
-				return blockIcon;
-			case 1:
-				return templeBrickJade;
-			case 2:
-				return templeBrickExo;
-			case 3:
-				return templeBrickCream;
-			case 4:
-				return templeBrickEye;
-			case 5:
-				return templeBrickString;
-			case 6:
-				return templeBrickJade1;
-			case 7:
-				return templeBrickExo1;
-			case 8:
-				return templeBrickCream1;
-			case 9:
-				return templeBrickEye1;
-			case 10:
-				return templeBrickString1;
-			default:
-				return blockIcon;
-		}
-			return blockIcon;
+		return icons[Math.max(0, Math.min(icons.length - 1, side == 1 ? meta : 0))];
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
@@ -88,48 +61,46 @@ public class BlockTempleBrickUnbreaking extends Block {
 
 		ItemStack stack = player.getCurrentEquippedItem();
 		int meta = world.getBlockMetadata(x, y, z);
-		if (stack != null) {
+		if (stack != null)
 			switch (meta) {
-			case 0:
-				return true;
-			case 1:
-				if (stack.getItem() == ModItems.materials && stack.getItemDamage() == Materials.DATA.jade.ordinal()) {
-					world.setBlockMetadataWithNotify(x, y, z, 6, 3);
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
-			case 2:
-				if (stack.getItem() == ModItems.materials &&  stack.getItemDamage() == Materials.DATA.plateExo.ordinal()) {
-					world.setBlockMetadataWithNotify(x, y, z, 7, 3);
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
-			case 3:
-				if (stack.getItem() == Items.magma_cream) {
-					world.setBlockMetadataWithNotify(x, y, z, 8, 3);
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
-			case 4:
-				if (stack.getItem() == ModItems.materials &&  stack.getItemDamage() == Materials.DATA.magmaCrawlerEye.ordinal()) {
-					world.setBlockMetadataWithNotify(x, y, z, 9, 3);
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
-			case 5:
-				if (stack.getItem() == Items.string) {
-					world.setBlockMetadataWithNotify(x, y, z, 10, 3); //meta 10 for forcefield breaking
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
+				case 0:
+					return true;
+				case 1:
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == Materials.DATA.jade.ordinal()) {
+						world.setBlockMetadataWithNotify(x, y, z, 6, 3);
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
+				case 2:
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == Materials.DATA.plateExo.ordinal()) {
+						world.setBlockMetadataWithNotify(x, y, z, 7, 3);
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
+				case 3:
+					if (stack.getItem() == Items.magma_cream) {
+						world.setBlockMetadataWithNotify(x, y, z, 8, 3);
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
+				case 4:
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == Materials.DATA.magmaCrawlerEye.ordinal()) {
+						world.setBlockMetadataWithNotify(x, y, z, 9, 3);
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
+				case 5:
+					if (stack.getItem() == Items.string) {
+						world.setBlockMetadataWithNotify(x, y, z, 10, 3); //meta 10 for forcefield breaking
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
 			}
-		}
 		return true;
 	}
-	
 }

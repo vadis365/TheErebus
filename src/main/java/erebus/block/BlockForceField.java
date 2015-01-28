@@ -32,7 +32,7 @@ public class BlockForceField extends Block {
 		setResistance(6000000.0F);
 		setLightLevel(0.8F);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
@@ -70,13 +70,12 @@ public class BlockForceField extends Block {
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		blockIcon = iconRegister.registerIcon("erebus:forceField");
 	}
-	
+
 	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		Random random = world.rand;
 		double pixel = 0.0625D;
-		int meta = world.getBlockMetadata(x, y, z);
-		if (rand.nextInt(5) == 0) {
+		if (rand.nextInt(5) == 0)
 			for (int l = 0; l < 6; ++l) {
 				double particleX = x + random.nextFloat();
 				double particleY = y + random.nextFloat();
@@ -100,22 +99,20 @@ public class BlockForceField extends Block {
 				if (l == 5 && !world.getBlock(x - 1, y, z).isOpaqueCube())
 					particleX = x - pixel;
 
-				if (particleX < x || particleX > x + 1 || particleY < 0.0D || particleY > y + 1 || particleZ < z || particleZ > z + 1) {
+				if (particleX < x || particleX > x + 1 || particleY < 0.0D || particleY > y + 1 || particleZ < z || particleZ > z + 1)
 					Erebus.proxy.spawnCustomParticle("sparks", world, particleX, particleY, particleZ, 0, 0, 0);
-				}
 			}
-		}
 	}
-	
+
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		double twoPixels = 0.125D;
 		return AxisAlignedBB.getBoundingBox(x + twoPixels, y, z + twoPixels, x + 1 - twoPixels, y + 1, z + 1 - twoPixels);
 	}
-	
+
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-		if(!(entity instanceof EntityFX)) {
+		if (!(entity instanceof EntityFX)) {
 			int Knockback = 1;
 			entity.attackEntityFrom(DamageSource.cactus, 1);
 			entity.addVelocity(MathHelper.sin(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F, 0.08D, -MathHelper.cos(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F);

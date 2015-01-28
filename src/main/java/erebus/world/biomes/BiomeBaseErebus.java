@@ -10,13 +10,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
-import erebus.core.helper.TimeMeasurement;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.loot.IWeightProvider;
 import erebus.world.loot.WeightedList;
 
 public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightProvider {
+
 	private final BiomeDecoratorBaseErebus decorator;
 	private short biomeWeight;
 	private int grassColor, foliageColor;
@@ -106,7 +106,6 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 
 	@Override
 	public void decorate(World world, Random rand, int x, int z) {
-		String id = getClass().getSimpleName();
 		//TimeMeasurement.start(id);
 
 		decorator.decorate(world, rand, x, z);

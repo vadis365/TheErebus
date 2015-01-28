@@ -36,7 +36,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	int blockY;
 	int blockZ;
 	int breakTime = 0;
-	  
+
 	public EntityUmberGolemDungeonTypes(World world) {
 		super(world);
 		isImmuneToFire = true;
@@ -68,32 +68,32 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	}
 
 	private double getAttackStrength() {
-		switch(getType()) {
-		case 0:
-			return 2.0D;
-		case 1:
-			return 3.0D;
-		case 2:
-			return 4.0D;
-		case 3:
-			return 5.0D;	
-		default:
-			return 2.0D;
+		switch (getType()) {
+			case 0:
+				return 2.0D;
+			case 1:
+				return 3.0D;
+			case 2:
+				return 4.0D;
+			case 3:
+				return 5.0D;
+			default:
+				return 2.0D;
 		}
 	}
 
 	private double getGolemHealth() {
-		switch(getType()) {
-		case 0:
-			return 100.0D;
-		case 1:
-			return 150.0D;
-		case 2:
-			return 200.0D;
-		case 3:
-			return 250.0D;	
-		default:
-			return 100.0D;
+		switch (getType()) {
+			case 0:
+				return 100.0D;
+			case 1:
+				return 150.0D;
+			case 2:
+				return 200.0D;
+			case 3:
+				return 250.0D;
+			default:
+				return 100.0D;
 		}
 	}
 
@@ -106,7 +106,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	public boolean canDespawn() {
 		return false;
 	}
-	
+
 	@Override
 	public void setInWeb() {
 	}
@@ -134,9 +134,9 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 
 	@Override
 	protected void dropFewItems(boolean hitByPlayer, int looting) {
-		IDOL type = IDOL.values()[Math.max(0, Math.min(IDOL.values().length, getType()))]; 
-		
-		entityDropItem(new ItemStack(ModItems.idols, 1, type.ordinal()), 0.0F); 
+		IDOL type = IDOL.values()[Math.max(0, Math.min(IDOL.values().length, getType()))];
+
+		entityDropItem(new ItemStack(ModItems.idols, 1, type.ordinal()), 0.0F);
 	}
 
 	@Override
@@ -150,10 +150,10 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 				if (getRangeAttackTimer() == 100 && distance > 3)
 					shootMissile(getAttackTarget(), distance);
 			}
-			
+
 			if (oneShotMoveCheat())
 				getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
-			
+
 			if (isCollidedHorizontally) {
 				double direction = Math.toRadians(renderYawOffset);
 				removeBlock((int) (posX + -Math.sin(direction) * 1.5D), (int) posY, (int) (posZ + Math.cos(direction) * 1.5D));
@@ -167,7 +167,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	}
 
 	protected void removeBlock(int x, int y, int z) {
-		if ((!hasBlock) && (worldObj.getBlock(x, y, z) != Blocks.air)) {
+		if (!hasBlock && worldObj.getBlock(x, y, z) != Blocks.air) {
 			hasBlock = true;
 			blockX = x;
 			blockY = y;
@@ -189,14 +189,14 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 			worldObj.destroyBlockInWorldPartially(getEntityId(), blockX, blockY, blockZ, i);
 
 			if (worldObj.rand.nextInt(30) == 0)
-				worldObj.playAuxSFXAtEntity(null, 2001, blockX, blockY, blockZ, block.getIdFromBlock(worldObj.getBlock(blockX, blockY, blockZ)));
+				worldObj.playAuxSFXAtEntity(null, 2001, blockX, blockY, blockZ, Block.getIdFromBlock(worldObj.getBlock(blockX, blockY, blockZ)));
 
 			if (breakTime >= hardness * 160.0F) {
 				Utils.dropStack(worldObj, blockX, blockY, blockZ, new ItemStack(block, 1, blockMeta));
 				worldObj.setBlockToAir(blockX, blockY, blockZ);
 				breakTime = 0;
 				hasBlock = false;
-				worldObj.playAuxSFXAtEntity(null, 2001, blockX, blockY, blockZ, block.getIdFromBlock(worldObj.getBlock(blockX, blockY, blockZ)));
+				worldObj.playAuxSFXAtEntity(null, 2001, blockX, blockY, blockZ, Block.getIdFromBlock(worldObj.getBlock(blockX, blockY, blockZ)));
 			}
 		}
 	}
@@ -208,7 +208,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 			return false;
 		return true;
 	}
-	
+
 	private boolean isInSamePos() {
 		return (int) posX == (int) lastTickPosX && (int) posY == (int) lastTickPosY && (int) posZ == (int) lastTickPosZ;
 	}
@@ -238,9 +238,9 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 		}
 		return true;
 	}
-	
+
 	public EntityThrowable getMissileType() {
-		switch(getType()) {
+		switch (getType()) {
 			case 0:
 				return new EntityGooBall(worldObj, this);
 			case 1:
@@ -252,25 +252,25 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 				return new EntityGooBall(worldObj, this);
 		}
 	}
-	
-    public void shootMissile(EntityLivingBase entity, float distance) {
-    	setRangeAttackTimer(0);
-    	if(canEntityBeSeen(entity)) {
-    		EntityThrowable missile = getMissileType();
-    		if(getType() == 1)
-    			((EntityWebSling) missile).setType((byte) 0);
-    		if(getType() == 2)
-    			((EntityWebSling) missile).setType((byte) 2);
-    		missile.rotationPitch -= -20.0F;
-    		double targetX = entity.posX + entity.motionX - posX;
-    		double targetY = entity.posY + (double)entity.getEyeHeight() - 1.100000023841858D - posY;
-    		double targetZ = entity.posZ + entity.motionZ - posZ;
-    		float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
-    		missile.setThrowableHeading(targetX, targetY + (double)(target * 0.1F), targetZ, 0.75F, 8.0F);
-    		worldObj.spawnEntityInWorld(missile);
-    	}
+
+	public void shootMissile(EntityLivingBase entity, float distance) {
+		setRangeAttackTimer(0);
+		if (canEntityBeSeen(entity)) {
+			EntityThrowable missile = getMissileType();
+			if (getType() == 1)
+				((EntityWebSling) missile).setType((byte) 0);
+			if (getType() == 2)
+				((EntityWebSling) missile).setType((byte) 2);
+			missile.rotationPitch -= -20.0F;
+			double targetX = entity.posX + entity.motionX - posX;
+			double targetY = entity.posY + entity.getEyeHeight() - 1.100000023841858D - posY;
+			double targetZ = entity.posZ + entity.motionZ - posZ;
+			float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
+			missile.setThrowableHeading(targetX, targetY + target * 0.1F, targetZ, 0.75F, 8.0F);
+			worldObj.spawnEntityInWorld(missile);
+		}
 	}
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
@@ -282,7 +282,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 		super.readEntityFromNBT(nbt);
 		setType(nbt.getByte("type"));
 	}
-	
+
 	public void setType(byte isType) {
 		dataWatcher.updateObject(29, Byte.valueOf(isType));
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getGolemHealth());
@@ -292,7 +292,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	public byte getType() {
 		return dataWatcher.getWatchableObjectByte(29);
 	}
-	
+
 	public void setRangeAttackTimer(int size) {
 		dataWatcher.updateObject(20, Integer.valueOf(size));
 	}
@@ -300,7 +300,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	public int getRangeAttackTimer() {
 		return dataWatcher.getWatchableObjectInt(20);
 	}
-	
+
 	@Override
 	public void writeSpawnData(ByteBuf data) {
 		data.writeByte(getType());
