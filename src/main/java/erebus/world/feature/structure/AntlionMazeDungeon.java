@@ -20,8 +20,10 @@ import erebus.ModItems;
 import erebus.core.helper.TimeMeasurement;
 import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityUmberGolemDungeonTypes;
+import erebus.item.Food.FoodType;
 import erebus.item.Materials;
 import erebus.item.Materials.DATA;
+import erebus.item.Smoothie.SmoothieType;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.world.feature.util.MazeGenerator;
 import erebus.world.feature.util.PerfectMazeGenerator;
@@ -46,19 +48,15 @@ public class AntlionMazeDungeon
 					new LootItemStack(Items.golden_pickaxe).setWeight(3),
 					new LootItemStack(Items.iron_pickaxe).setWeight(2),
 					new LootItemStack(ModItems.jadePickaxe).setWeight(1),
-					new LootItemStack(Items.stone_pickaxe).setWeight(1),
 					new LootItemStack(Items.golden_shovel).setWeight(3),
 					new LootItemStack(Items.iron_shovel).setWeight(2),
 					new LootItemStack(ModItems.jadeShovel).setWeight(1),
-					new LootItemStack(Items.stone_shovel).setWeight(1),
 					new LootItemStack(Items.golden_axe).setWeight(3),
 					new LootItemStack(Items.iron_axe).setWeight(2),
 					new LootItemStack(ModItems.jadeAxe).setWeight(1),
-					new LootItemStack(Items.stone_axe).setWeight(1),
 					new LootItemStack(Items.golden_sword).setWeight(3),
 					new LootItemStack(Items.iron_sword).setWeight(2),
 					new LootItemStack(ModItems.jadeSword).setWeight(1),
-					new LootItemStack(Items.stone_sword).setWeight(1),
 					new LootItemStack(Items.iron_chestplate).setWeight(2),
 					new LootItemStack(ModItems.jadeBody).setWeight(1),
 					new LootItemStack(Items.golden_chestplate).setWeight(1),
@@ -70,13 +68,31 @@ public class AntlionMazeDungeon
 					new LootItemStack(Items.golden_leggings).setWeight(1),
 					new LootItemStack(Items.iron_boots).setWeight(2),
 					new LootItemStack(ModItems.jadeBoots).setWeight(1),
-					new LootItemStack(Items.golden_boots).setWeight(1) 
+					new LootItemStack(Items.golden_boots).setWeight(1),
+					new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1),
+					new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1),
+					new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.scorpionPincer.ordinal()).setWeight(1),
+					new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.whetstonePowder.ordinal()).setWeight(3),
+					new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.plateExoRhino.ordinal()).setWeight(1),
+					new LootItemStack(ModItems.food).setAmount(1, 3).setDamage(FoodType.honeySandwich.ordinal()).setWeight(3),
+					new LootItemStack(ModItems.cabbageSeeds).setAmount(1, 3).setWeight(2),
+					new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1),
+					new LootItemStack(ModItems.lifeBlood).setAmount(1, 2).setWeight(4),
+					new LootItemStack(ModItems.rolledNewspaper).setAmount(1).setWeight(1),
+					new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
+					new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
+					new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1),
+					new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1),
+					new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
+					new LootItemStack(ModItems.homingBeecon).setAmount(1).setWeight(1),
+					new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal()).setWeight(3),
+					new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal()).setWeight(1)
 					}).setPostProcessor(new IPostProcess() {
 
 			@SuppressWarnings("rawtypes")
 			@Override
 			public ItemStack postProcessItem(ItemStack is, Random rand) {
-				if (rand.nextBoolean() && (is.getItem() == Items.enchanted_book || is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
+				if (is.getItem() == Items.enchanted_book || rand.nextBoolean() && (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
 					boolean enchBook = is.getItem() == Items.enchanted_book;
 					if (enchBook)
 						is.func_150996_a(Items.book);
@@ -438,7 +454,7 @@ public class AntlionMazeDungeon
    	}
 	}
    
-   private void placeChest(World world, int x, int y, int z, int directionMeta, Random rand) {
+   public void placeChest(World world, int x, int y, int z, int directionMeta, Random rand) {
 		world.setBlock(x, y, z, Blocks.chest, directionMeta, 2);
 		TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y, z);
 		if (chest != null)

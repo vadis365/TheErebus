@@ -31,7 +31,7 @@ public class WorldGenAntlionLair extends WorldGenerator {
 		@SuppressWarnings("rawtypes")
 		@Override
 		public ItemStack postProcessItem(ItemStack is, Random rand) {
-			if (rand.nextBoolean() && (is.getItem() == Items.enchanted_book || is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
+			if (is.getItem() == Items.enchanted_book || rand.nextBoolean() && (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
 				boolean enchBook = is.getItem() == Items.enchanted_book;
 				if (enchBook)
 					is.func_150996_a(Items.book);
