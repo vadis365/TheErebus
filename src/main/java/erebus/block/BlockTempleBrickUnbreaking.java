@@ -15,7 +15,10 @@ import erebus.ModTabs;
 import erebus.item.Materials;
 
 public class BlockTempleBrickUnbreaking extends Block {
-
+	public static final String[] iconPaths = new String[] { "templeBrick", "templeBrickJade", "templeBrickExo",
+		"templeBrickCream", "templeBrickEye", "templeBrickString", "templeBrickJade1", "templeBrickExo1",
+		"templeBrickCream1", "templeBrickEye1", "templeBrickString1"};
+	
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
@@ -30,23 +33,12 @@ public class BlockTempleBrickUnbreaking extends Block {
 	}
 	
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		icons[0] = reg.registerIcon("erebus:templeBrick");
-		icons[1] = reg.registerIcon("erebus:templeBrickJade");
-		icons[2] = reg.registerIcon("erebus:templeBrickExo");
-		icons[3] = reg.registerIcon("erebus:templeBrickCream");
-		icons[4] = reg.registerIcon("erebus:templeBrickEye");
-		icons[5] = reg.registerIcon("erebus:templeBrickString");
-		icons[6] = reg.registerIcon("erebus:templeBrickJade1");
-		icons[7] = reg.registerIcon("erebus:templeBrickExo1");
-		icons[8] = reg.registerIcon("erebus:templeBrickCream1");
-		icons[9] = reg.registerIcon("erebus:templeBrickEye1");
-		icons[10] = reg.registerIcon("erebus:templeBrickString1");
+		icons = new IIcon[iconPaths.length];
+		int i = 0;
+		for (String path : iconPaths)
+			icons[i++] = reg.registerIcon("erebus:" + path);
 	}
-	
-	//java.lang.NullPointerException: Initializing game
-	//at erebus.block.BlockTempleBrickUnbreaking.registerBlockIcons(BlockTempleBrickUnbreaking.java:35)
 
 	@Override
 	@SideOnly(Side.CLIENT)
