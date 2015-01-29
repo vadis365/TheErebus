@@ -234,6 +234,9 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.craftingAltar), "xxx", "xxx", "xxx", 'x', ModBlocks.altarBase);
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.jade), "xxx", "xxx", "xxx", 'x', Materials.createStack(Materials.DATA.jadeBerries));
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.waterRepellent), "xxx", "xrx", "xxx", 'x', Materials.createStack(Materials.DATA.hydrofuge), 'r', Materials.createStack(Materials.DATA.repellent));
+		GameRegistry.addShapelessRecipe(Materials.createStack(Materials.DATA.stewPot), Blocks.cauldron);
+		GameRegistry.addRecipe(new ShapelessOreRecipe(Materials.createStack(Materials.DATA.titanStew), Materials.createStack(Materials.DATA.stewPot), new ItemStack(ModItems.food, 1, Food.FoodType.titanChop.ordinal()), Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(Materials.createStack(Materials.DATA.titanStew), Materials.createStack(Materials.DATA.stewPot), Items.beef, Items.beef, Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom"));
 		
 		// Smoothies
 		//Have to figure this out...
@@ -308,7 +311,8 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreGneiss), Materials.createStack(Materials.DATA.gneissRock), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.orePetrifiedWood), Materials.createStack(Materials.DATA.petrifiedWood), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreEncrustedDiamond), new ItemStack(ModItems.encrustedDiamond), 1.0F);
-
+		GameRegistry.addSmelting(Materials.createStack(Materials.DATA.titanStew), new ItemStack(ModItems.food, 1, Food.FoodType.titanStewCooked.ordinal()), 1.0F);
+		
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), Materials.createStack(Materials.DATA.mudBrick), 0.2F);
 		GameRegistry.addSmelting(Materials.createStack(Materials.DATA.nectar), Materials.createStack(Materials.DATA.honeyDrip), 0.2F);
 		if (ConfigHandler.INSTANCE.lead)
@@ -374,6 +378,14 @@ public class RecipeHandler {
 		OreDictionary.registerOre("dyeMagenta", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.MAGENTA_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.WHITE_PETAL.ordinal()));
+		
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.bulbCapped));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.kaizerfinger));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.bundleshroom));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.greenMushroom));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.dutchCap));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(Blocks.red_mushroom));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(Blocks.brown_mushroom));
 
 		if (ConfigHandler.INSTANCE.lead) {
 			OreDictionary.registerOre("ingotLead", Materials.createStack(Materials.DATA.ingotLead));

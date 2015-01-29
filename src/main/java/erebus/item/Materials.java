@@ -86,7 +86,9 @@ public class Materials extends Item {
 		hydrofuge,
 		waterRepellent,
 		smoothieGlass,
-		magmaCrawlerEye;
+		magmaCrawlerEye,
+		stewPot,
+		titanStew;
 	}
 
 	public static ItemStack createStack(DATA data) {

@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.item.Materials.DATA;
 
 @SuppressWarnings("unchecked")
 public class Food extends ItemFood {
@@ -39,7 +40,8 @@ public class Food extends ItemFood {
 		titanChop,
 		titanChopCooked,
 		swampBerries,
-		cabbage;
+		cabbage,
+		titanStewCooked;
 	}
 
 	static {
@@ -104,6 +106,8 @@ public class Food extends ItemFood {
 				return 1;
 			case cabbage:
 				return 1;
+			case titanStewCooked:
+				return 20;
 			default:
 				return 0;
 		}
@@ -143,6 +147,8 @@ public class Food extends ItemFood {
 				return 0.1F;
 			case cabbage:
 				return 0.1F;
+			case titanStewCooked:
+				return 1.0F;
 			default:
 				return 0.0F;
 		}
@@ -190,8 +196,13 @@ public class Food extends ItemFood {
 			case melonade:
 			case melonadeSparkly:
 				item = Items.glass_bottle;
+				break;
 			case cabbage:
 				world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
+				break;
+			case titanStewCooked:
+				is = (Materials.createStack(DATA.stewPot));
+				break;
 			default:
 				return is;
 		}
@@ -243,10 +254,10 @@ public class Food extends ItemFood {
 			case bambooSoup:
 				return new ItemStack(Items.bowl);
 			case melonade:
-				//is this ^^ supposed to have something here?
-
 			case melonadeSparkly:
 				return new ItemStack(Items.glass_bottle);
+			case titanStewCooked:
+				return (Materials.createStack(DATA.stewPot));
 			default:
 				return null;
 		}
@@ -258,11 +269,21 @@ public class Food extends ItemFood {
 			case bambooSoup:
 			case melonade:
 			case melonadeSparkly:
+			case titanStewCooked:
 				return true;
 			default:
 				return false;
 		}
 	}
+
+	@Override
+    public int getItemStackLimit(ItemStack stack) {
+		//could be made item specific I suppose
+        if(!hasContainerItem(stack))
+        	return 64;
+        else
+        	return 1;
+    }
 
 	@Override
 	public String getPotionEffect(ItemStack stack) {
