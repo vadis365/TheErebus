@@ -331,6 +331,8 @@ item.erebus.materials.58.name=Hydrofuge
 item.erebus.materials.59.name=Water Repellent
 item.erebus.materials.60.name=Empty Smoothie Glass
 item.erebus.materials.61.name=Magma Crawler Eye
+item.erebus.materials.62.name=Stew Pot
+item.erebus.materials.63.name=Un-cooked Titan Stew
 
 item.erebus.food.0.name=Beetle Larva
 item.erebus.food.1.name=Cooked Beetle Larva
@@ -348,6 +350,7 @@ item.erebus.food.12.name=Raw Titan Chop
 item.erebus.food.13.name=Cooked Titan Chop
 item.erebus.food.14.name=Swampberries
 item.erebus.food.15.name=Cabbage
+item.erebus.food.16.name=Cooked Titan Stew
 
 item.erebus.smoothie.0.name=Green Tea Grasshopper
 item.erebus.smoothie.1.name=Money Honey
