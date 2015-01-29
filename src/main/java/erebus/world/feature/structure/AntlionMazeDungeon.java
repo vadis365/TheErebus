@@ -562,7 +562,19 @@ public class AntlionMazeDungeon
 						world.playAuxSFXAtEntity(null, 2001, dx, y + d, dz, Block.getIdFromBlock(world.getBlock(dx, y + d, dz)));
 						world.setBlockToAir(dx, y + d, dz);
 					}
-		}
+			}
+			world.setBlock(x + 20, y, z + 20, ModBlocks.bambooTorch, 0, 3);
+			world.setBlock(x + 20, y + 1, z + 20, ModBlocks.bambooTorch, 1, 3);
+			
+			world.setBlock(x + 20, y, z + 23, ModBlocks.bambooTorch, 0, 3);
+			world.setBlock(x + 20, y + 1, z + 23, ModBlocks.bambooTorch, 1, 3);
+			
+			world.setBlock(x + 23, y, z + 23, ModBlocks.bambooTorch, 0, 3);
+			world.setBlock(x + 23, y + 1, z + 23, ModBlocks.bambooTorch, 1, 3);
+			
+			world.setBlock(x + 23, y, z + 20, ModBlocks.bambooTorch, 0, 3);
+			world.setBlock(x + 23, y + 1, z + 20, ModBlocks.bambooTorch, 1, 3);
+		
 
 		EntityAntlionBoss antlionboss = new EntityAntlionBoss(world);
 		antlionboss.setPosition(x + 21, y - 8, z + 21);
