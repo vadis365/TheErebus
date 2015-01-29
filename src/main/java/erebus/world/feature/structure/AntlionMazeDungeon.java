@@ -177,29 +177,34 @@ public class AntlionMazeDungeon
 	public static void addTeleporters(World world, int x, int y, int z) {
 		// room 1
 			world.setBlock(x + 13, y + 9, z + 13, ModBlocks.capstone, 0, 2);
+			setFloorDecoStone(world, x + 14, y + 9, z + 14);
 			setLockStone(world, x + 15, y + 9, z + 15, 2); //exo
 			setTeleporter(world, x + 16, y + 9, z + 16, 0, x + 30, y + 9, z + 13); // on to next room's capstone
 			setTeleporter(world, x + 19, y + 9, z + 19, 5, x + 19, y + 14, z + 19); // back to floor above's capstone
 		
 		// room 2
 			world.setBlock(x + 30, y + 9, z + 13, ModBlocks.capstone, 0, 2);
+			setFloorDecoStone(world, x + 25, y + 9, z + 14);
 			setLockStone(world, x + 26, y + 9, z + 15, 3); //magma cream
 			setTeleporter(world, x + 27, y + 9, z + 16, 0, x + 30, y + 9, z + 30);
 			setTeleporter(world, x + 24, y + 9, z + 19, 5, x + 13, y + 9, z + 13);
 		
 		// room 3
 			world.setBlock(x + 30, y + 9, z + 30, ModBlocks.capstone, 0, 2);
+			setFloorDecoStone(world, x + 25, y + 9, z + 25);
 			setLockStone(world, x + 26, y + 9, z + 26, 4); //magma crawler eye
 			setTeleporter(world, x + 27, y + 9, z + 27, 0, x + 13, y + 9, z + 30);
 			setTeleporter(world, x + 24, y + 9, z + 24, 5, x + 30, y + 9, z + 13);
 		
 		// room 4
 			world.setBlock(x + 13, y + 9, z + 30, ModBlocks.capstone, 0, 2);
+			setFloorDecoStone(world, x + 14, y + 9, z + 25);
 			setLockStone(world, x + 15, y + 9, z + 26, 5); //string
 			setTeleporter(world, x + 16, y + 9, z + 27, 0, x + 13, y + 9, z + 13); //this one removes forcefield (debug teleport added - will be removed)
 			setTeleporter(world, x + 19, y + 9, z + 24, 5, x + 30, y + 9, z + 30);
 		
 		// centre of pyramid - these teleport you to the boss arena (1 of the 4 corners)
+			setFloorMidDecoStone(world, x + 20, y + 9, z + 20);
 			setTeleporter(world, x + 22, y + 9, z + 21, 6, x + 5, y + 1, z + 5);
 			setTeleporter(world, x + 21, y + 9, z + 21, 7, x + 38, y + 1, z + 5);
 			setTeleporter(world, x + 22, y + 9, z + 22, 8, x + 38, y + 1, z + 38);
@@ -207,6 +212,11 @@ public class AntlionMazeDungeon
 		
 		// Top level
 			world.setBlock(x + 19, y + 14, z + 19, ModBlocks.capstone, 0, 2);
+			world.setBlock(x + 19, y + 15, z + 25, ModBlocks.bambooTorch, 0, 3);
+			world.setBlock(x + 19, y + 16, z + 25, ModBlocks.bambooTorch, 1, 3);
+			world.setBlock(x + 25, y + 15, z + 19, ModBlocks.bambooTorch, 0, 3);
+			world.setBlock(x + 25, y + 16, z + 19, ModBlocks.bambooTorch, 1, 3);
+			setFloorDecoStone(world, x + 20, y + 14, z + 20);
 			setLockStone(world, x + 21, y + 14, z + 21, 1); //jade
 			setTeleporter(world, x + 22, y + 14, z + 22, 0, x + 13, y + 9, z + 13);
 			setTeleporter(world, x + 25, y + 14, z + 25, 5, x + 19, y + 14, z + 19);
@@ -216,6 +226,18 @@ public class AntlionMazeDungeon
 		for(int dx = x; dx < x + 3; dx ++)
 			for(int dz = z; dz < z + 3; dz ++)
 				world.setBlock(dx, y, dz, ModBlocks.templeBrickUnbreaking, meta, 2);	
+	}
+	
+	private static void setFloorDecoStone(World world, int x, int y, int z) {
+		for(int dx = x; dx < x + 5; dx ++)
+			for(int dz = z; dz < z + 5; dz ++)
+				world.setBlock(dx, y, dz, ModBlocks.capstone, 0, 2);	
+	}
+	
+	private static void setFloorMidDecoStone(World world, int x, int y, int z) {
+		for(int dx = x; dx < x + 4; dx ++)
+			for(int dz = z; dz < z + 4; dz ++)
+				world.setBlock(dx, y, dz, ModBlocks.capstone, 0, 2);	
 	}
 
 	public static void decoratePyramid(World world, int x, int y, int z) {
@@ -521,24 +543,16 @@ public class AntlionMazeDungeon
 	public static void breakForceField(World world, int x, int y, int z) {	
 		for(int d = 0; d < 4; d++) {
 			for(int wx = 0 + d; wx < 9; wx++) {
-				world.playAuxSFXAtEntity(null, 2001, x + 11 + wx, y + d, z + 21, Block.getIdFromBlock(world.getBlock(x + 11 + wx, y + d, z + 21)));
 				world.setBlockToAir(x + 11 + wx, y + d, z + 21);
-				world.playAuxSFXAtEntity(null, 2001, x + 11 + wx, y + d, z + 22, Block.getIdFromBlock(world.getBlock(x + 11 + wx, y + d, z + 22)));
 				world.setBlockToAir(x + 11 + wx, y + d, z + 22);
 				
-				world.playAuxSFXAtEntity(null, 2001, x + 21, y + d, z + 11 + wx, Block.getIdFromBlock(world.getBlock(x + 21, y + d, z + 11 + wx)));
 				world.setBlockToAir(x + 21, y + d, z + 11 + wx);
-				world.playAuxSFXAtEntity(null, 2001, x + 22, y + d, z + 11 + wx, Block.getIdFromBlock(world.getBlock(x + 22, y + d, z + 11 + wx)));
 				world.setBlockToAir(x + 22, y + d, z + 11 + wx);
 				
-				world.playAuxSFXAtEntity(null, 2001, x + 21, y + d, z + 32 - wx, Block.getIdFromBlock(world.getBlock(x + 21, y + d, z + 32 - wx)));
 				world.setBlockToAir(x + 21, y + d, z + 32 - wx);
-				world.playAuxSFXAtEntity(null, 2001, x + 22, y + d, z + 32 - wx, Block.getIdFromBlock(world.getBlock(x + 22, y + d, z + 32 - wx)));
 				world.setBlockToAir(x + 22, y + d, z + 32 - wx);
 				
-				world.playAuxSFXAtEntity(null, 2001, x + 32 - wx, y + d, z + 21, Block.getIdFromBlock(world.getBlock(x + 32 - wx, y + d, z + 21)));
 				world.setBlockToAir(x + 32 - wx, y + d, z + 21);
-				world.playAuxSFXAtEntity(null, 2001, x + 32 - wx, y + d, z + 22, Block.getIdFromBlock(world.getBlock(x + 32 - wx, y + d, z + 22)));
 				world.setBlockToAir(x + 32 - wx, y + d, z + 22);
 			}
 	

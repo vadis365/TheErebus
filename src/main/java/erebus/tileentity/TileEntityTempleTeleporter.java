@@ -51,8 +51,8 @@ public class TileEntityTempleTeleporter extends TileEntity {
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, meta + 1, 3);
 		if(meta == 3 && bossSpawn) {
 			AntlionMazeDungeon.breakForceField(worldObj, xCoord - 16, yCoord + 1, zCoord - 27);
-			ItemStack stack = new ItemStack(Items.potionitem, 1, 8227);
-			Utils.dropStackNoRandom(worldObj, xCoord, yCoord + 2, zCoord, stack);
+			Utils.dropStackNoRandom(worldObj, xCoord, yCoord + 2, zCoord, new ItemStack(Items.potionitem, 1, 8227));
+			Utils.dropStackNoRandom(worldObj, xCoord, yCoord + 2, zCoord, new ItemStack(Items.potionitem, 1, 8198));
 			bossSpawn = false;
 		}
 	}
