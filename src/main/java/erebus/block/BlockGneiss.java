@@ -21,7 +21,7 @@ import erebus.item.block.ItemBlockGeneric;
 
 public class BlockGneiss extends Block implements ISubBlocksBlock {
 
-	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissSlab", "gneissSmooth", "gneissTiles" };
+	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissBricks", "gneissSmooth", "gneissTiles" };
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
