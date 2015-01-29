@@ -21,7 +21,7 @@ import erebus.tileentity.TileEntityTempleTeleporter;
 public class BlockTempleTeleporter extends BlockContainer {
 
 	public static final String[] iconPaths = new String[] { "templeTeleport1", "templeTeleport2", "templeTeleport3", "templeTeleport4",
-		"templeTeleport5", "templeTeleport6", "templeTeleportNE", "templeTeleportNW", "templeTeleportSE", "templeTeleportSW", "templebrick" };
+		"templeTeleport5", "templeTeleport6", "templeTeleportNE", "templeTeleportNW", "templeTeleportSE", "templeTeleportSW", "templeBrick" };
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
