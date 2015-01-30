@@ -85,6 +85,15 @@ public class SmallMushroom extends BlockMushroom {
 					world.setBlockToAir(x + 1, y, z);
 					world.setBlockToAir(x + 1, y, z + 1);
 					world.setBlockToAir(x, y, z + 1);
+					WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+					genGiantMushrooms.setMushroomType(MushroomType.values()[getShroomData(this)]);
+
+					if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
+						world.setBlock(x, y, z, this);
+						world.setBlock(x + 1, y, z, this);
+						world.setBlock(x + 1, y, z + 1, this);
+						world.setBlock(x, y, z + 1, this);
+					}
 				}
 
 				if (isMushroom(world, x - 1, y, z) && isMushroom(world, x - 1, y, z + 1) && isMushroom(world, x, y, z + 1)) {
@@ -92,6 +101,15 @@ public class SmallMushroom extends BlockMushroom {
 					world.setBlockToAir(x - 1, y, z);
 					world.setBlockToAir(x - 1, y, z + 1);
 					world.setBlockToAir(x, y, z + 1);
+					WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+					genGiantMushrooms.setMushroomType(MushroomType.values()[getShroomData(this)]);
+
+					if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
+						world.setBlock(x, y, z, this);
+						world.setBlock(x - 1, y, z, this);
+						world.setBlock(x - 1, y, z + 1, this);
+						world.setBlock(x, y, z + 1, this);
+					}
 				}
 
 				if (isMushroom(world, x + 1, y, z) && isMushroom(world, x + 1, y, z - 1) && isMushroom(world, x, y, z - 1)) {
@@ -99,6 +117,15 @@ public class SmallMushroom extends BlockMushroom {
 					world.setBlockToAir(x + 1, y, z);
 					world.setBlockToAir(x + 1, y, z - 1);
 					world.setBlockToAir(x, y, z - 1);
+					WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+					genGiantMushrooms.setMushroomType(MushroomType.values()[getShroomData(this)]);
+
+					if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
+						world.setBlock(x, y, z, this);
+						world.setBlock(x + 1, y, z, this);
+						world.setBlock(x + 1, y, z - 1, this);
+						world.setBlock(x, y, z - 1, this);
+					}
 				}
 
 				if (isMushroom(world, x - 1, y, z) && isMushroom(world, x - 1, y, z - 1) && isMushroom(world, x, y, z - 1)) {
@@ -106,15 +133,23 @@ public class SmallMushroom extends BlockMushroom {
 					world.setBlockToAir(x - 1, y, z);
 					world.setBlockToAir(x - 1, y, z - 1);
 					world.setBlockToAir(x, y, z - 1);
+					WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+					genGiantMushrooms.setMushroomType(MushroomType.values()[getShroomData(this)]);
+
+					if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
+						world.setBlock(x, y, z, this);
+						world.setBlock(x - 1, y, z, this);
+						world.setBlock(x - 1, y, z - 1, this);
+						world.setBlock(x, y, z - 1, this);
+					}
 				}
-			} else
+			} else {
 				world.setBlockToAir(x, y, z);
-
-			WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
-			genGiantMushrooms.setMushroomType(MushroomType.values()[getShroomData(this)]);
-
-			if (!genGiantMushrooms.generate(world, rand, x, y, z))
-				world.setBlock(x, y, z, this);
+				WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+				genGiantMushrooms.setMushroomType(MushroomType.values()[getShroomData(this)]);
+				if (!genGiantMushrooms.generate(world, rand, x, y, z))
+					world.setBlock(x, y, z, this);
+			}
 		}
 	}
 
