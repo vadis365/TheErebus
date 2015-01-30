@@ -7,15 +7,14 @@ import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 import erebus.core.handler.configs.ConfigHandler;
 
-
 public class WorldGenAntlionMaze implements IWorldGenerator {
 
-   @Override
-   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-     if(world.provider.dimensionId == ConfigHandler.INSTANCE.erebusDimensionID)
-         generate(world, random, chunkX*16, chunkZ*16);
-   }
-   
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		if (world.provider.dimensionId == ConfigHandler.INSTANCE.erebusDimensionID)
+			generate(world, random, chunkX * 16, chunkZ * 16);
+	}
+
 	private void generate(World world, Random random, int x, int z) {
 		AntlionMazeDungeon maze = new AntlionMazeDungeon();
 		int chunkX = x;

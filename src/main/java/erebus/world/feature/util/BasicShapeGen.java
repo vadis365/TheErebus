@@ -44,7 +44,7 @@ public class BasicShapeGen {
 				}
 	}
 
-	public final static void createPyramid(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart) {
+	public final void createPyramid(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart) {
 		int yStop = Math.min((baseLengthZ - 1) / 2, (baseLengthX - 1) / 2) + yStart;
 		for (int i = 0; i + yStart <= yStop; i++) {
 			int y = yStart + i;
