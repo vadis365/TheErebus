@@ -300,7 +300,7 @@ public class ModBlocks {
 	public static final Block templeBrick = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templeBrick").setBlockTextureName("erebus:templeBrick");
 	public static final Block templePillar = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templePillar").setBlockTextureName("erebus:templePillar");
 	public static final Block templeTile = new BlockSimple(Material.rock).setHardness(2.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.templeTile").setBlockTextureName("erebus:templeTile");
-	public static final Block gneissVent = new BlockGneissVent().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneissVent");
+	public static final Block gneissVent = new BlockGneissVent();
 	public static final Block templeBrickUnbreaking = new BlockTempleBrickUnbreaking();
 	public static final Block templeTeleporter = new BlockTempleTeleporter().setStepSound(Block.soundTypeStone).setBlockTextureName("erebus:templeBrick");
 	public static final Block forceField = new BlockForceField().setBlockTextureName("erebus:forceField");

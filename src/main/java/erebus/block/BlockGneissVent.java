@@ -21,8 +21,12 @@ public class BlockGneissVent extends Block {
 	
 	public BlockGneissVent() {
 		super(Material.rock);
-		setTickRandomly(true);
+		setHardness(30F);
+		setResistance(6000000.0F);
+		setStepSound(soundTypeStone);
+		setBlockName("erebus.gneissVent");
 		setCreativeTab(ModTabs.blocks);
+		setTickRandomly(true);
 	}
 
 	@Override

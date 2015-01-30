@@ -27,8 +27,8 @@ public class BlockGneiss extends Block implements ISubBlocksBlock {
 
 	public BlockGneiss() {
 		super(Material.rock);
-		setHardness(1.5F);
-		setResistance(10.0F);
+		setHardness(30F);
+		setResistance(6000000.0F);
 		setStepSound(soundTypeStone);
 		setBlockName("erebus.gneiss");
 		setCreativeTab(ModTabs.blocks);
