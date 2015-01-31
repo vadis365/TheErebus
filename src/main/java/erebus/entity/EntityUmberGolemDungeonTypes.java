@@ -70,15 +70,15 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	private double getAttackStrength() {
 		switch (getType()) {
 			case 0:
-				return 2.0D;
-			case 1:
-				return 3.0D;
-			case 2:
 				return 4.0D;
-			case 3:
+			case 1:
 				return 5.0D;
+			case 2:
+				return 6.0D;
+			case 3:
+				return 7.0D;
 			default:
-				return 2.0D;
+				return 4.0D;
 		}
 	}
 

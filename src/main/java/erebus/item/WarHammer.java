@@ -12,6 +12,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModMaterials;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
@@ -22,6 +24,15 @@ public class WarHammer extends ItemSword {
 	public WarHammer() {
 		super(ModMaterials.weaponWarHammer);
 		maxStackSize = 1;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
+		list.add("Hold Right mouse button to charge up.");
+		list.add("Sneak + Right Click on top of Block");
+		list.add("to use A.O.E. attack.");
 	}
 
 	@Override

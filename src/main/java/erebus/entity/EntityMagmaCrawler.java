@@ -26,8 +26,8 @@ public class EntityMagmaCrawler extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.8D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 		upAbove = true;
 	}
