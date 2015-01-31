@@ -234,7 +234,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.craftingAltar), "xxx", "xxx", "xxx", 'x', ModBlocks.altarBase);
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.jade), "xxx", "xxx", "xxx", 'x', Materials.createStack(Materials.DATA.jadeBerries));
 		GameRegistry.addRecipe(Materials.createStack(Materials.DATA.waterRepellent), "xxx", "xrx", "xxx", 'x', Materials.createStack(Materials.DATA.hydrofuge), 'r', Materials.createStack(Materials.DATA.repellent));
-		GameRegistry.addShapelessRecipe(Materials.createStack(Materials.DATA.stewPot), Blocks.cauldron);
+		GameRegistry.addShapelessRecipe(Materials.createStack(Materials.DATA.stewPot), Items.cauldron);
 		GameRegistry.addRecipe(new ShapelessOreRecipe(Materials.createStack(Materials.DATA.titanStew), Materials.createStack(Materials.DATA.stewPot), new ItemStack(ModItems.food, 1, Food.FoodType.titanChop.ordinal()), Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(Materials.createStack(Materials.DATA.titanStew), Materials.createStack(Materials.DATA.stewPot), Items.beef, Items.beef, Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom"));
 		

@@ -77,9 +77,9 @@ tile.erebus.amberBrickStairs.name=Amber Brick Stairs
 tile.erebus.waspNestStairs.name=Wasp Nest Stairs
 tile.erebus.petrifiedWoodStairs.name=Petrified Wood Stairs
 tile.erebus.gneissStairs0.name=Gneiss Stairs
-tile.erebus.gneissStairs1.name=Hieroglyphic Gneiss Stairs
+tile.erebus.gneissStairs1.name=Carved Gneiss Stairs
 tile.erebus.gneissStairs2.name=Layered Gneiss Stairs
-tile.erebus.gneissStairs3.name=Slabbed Gneiss Stairs
+tile.erebus.gneissStairs3.name=Brick Gneiss Stairs
 tile.erebus.gneissStairs4.name=Smooth Gneiss Stairs
 tile.erebus.gneissStairs5.name=Tiled Gneiss Stairs
 
@@ -174,9 +174,9 @@ tile.erebus.antlionEgg.name=Antlion Egg
 
 tile.erebus.thorns.name=Thorns
 tile.erebus.gneiss_0.name=Gneiss
-tile.erebus.gneiss_1.name=Hieroglyphic Gneiss
+tile.erebus.gneiss_1.name=Carved Gneiss
 tile.erebus.gneiss_2.name=Layered Gneiss
-tile.erebus.gneiss_3.name=Gneiss Slabs
+tile.erebus.gneiss_3.name=Gneiss Brick
 tile.erebus.gneiss_4.name=Smooth Gneiss
 tile.erebus.gneiss_5.name=Gneiss Tiles
 tile.erebus.templeBrick.name=Temple Brick
