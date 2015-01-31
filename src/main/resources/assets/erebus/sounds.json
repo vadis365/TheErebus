@@ -54,5 +54,7 @@
 "antlionslam": {"category": "hostile","sounds": ["antlionslam"]},
 "magmacrawler": {"category": "hostile","sounds": ["magmacrawler"]},
 "magmacrawlerhurt": {"category": "hostile", "sounds": ["magmacrawlerhurt"]},
-"magmacrawlerdeath": {"category": "hostile","sounds": ["magmacrawlerdeath"]}
+"magmacrawlerdeath": {"category": "hostile","sounds": ["magmacrawlerdeath"]},
+"rhinobeetlesound": {"category": "hostile","sounds": ["rhinobeetlesound"]},
+"rhinobeetlehurt": {"category": "hostile", "sounds": ["rhinobeetlehurt"]}
 }
