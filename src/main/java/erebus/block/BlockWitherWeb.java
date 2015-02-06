@@ -3,6 +3,7 @@ package erebus.block;
 import net.minecraft.block.BlockWeb;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -23,6 +24,8 @@ public class BlockWitherWeb extends BlockWeb implements ISubBlocksBlock {
 		setBlockTextureName("web");
 		setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.witherWeb");
+		setHarvestLevel("shears", 1);
+		Items.shears.setHarvestLevel("shears", 1);
 	}
 
 	@Override
