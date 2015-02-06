@@ -201,7 +201,7 @@ public class EntityBlackWidow extends EntityMob {
 					attackTime = 20;
 					shouldDo = 0;
 				}
-				if (shouldDo > 1 && getWidowSize() > 1) {
+				if (shouldDo > 1 && getWidowSize() > 1 && entity instanceof EntityPlayer) {
 					worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
 					for (int count = 0; count < 1; ++count) {
 						EntityWebSling webSling = new EntityWebSling(worldObj, this);
