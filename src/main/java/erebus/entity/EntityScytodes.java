@@ -108,7 +108,7 @@ public class EntityScytodes extends EntityMob {
 					attackTime = 20;
 					shouldDo = 0;
 				}
-				if (shouldDo > 1 && entity instanceof EntityPlayer) {
+				if (shouldDo > 1) {
 					worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
 					for (int var10 = 0; var10 < 1; ++var10) {
 						EntityWebSling var11 = new EntityWebSling(worldObj, this);
