@@ -86,7 +86,7 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 				oreGen.setIterations(0, 2);
 				break; // less common
 			case FOSSIL:
-				oreGen.setChance(0.04F).setIterations(0, 1);
+				oreGen.setChance(0.25F).setIterations(0, 1);
 				break; // much more rare
 		}
 	}

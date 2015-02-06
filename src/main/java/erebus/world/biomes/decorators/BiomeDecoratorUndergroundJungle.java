@@ -272,7 +272,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				oreGen.setChance(0.65F).setY(6, 64);
 				break; // ~2 times smaller area, thus lowered chance
 			case FOSSIL:
-				oreGen.setChance(0.041F);
+				oreGen.setChance(0.25F);
 				break; // ~ 1/3 chance
 		}
 	}

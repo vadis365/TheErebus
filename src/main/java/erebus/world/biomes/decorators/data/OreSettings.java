@@ -174,7 +174,7 @@ public final class OreSettings {
 					settings.setIterations(extraOres ? 1 : 2, extraOres ? 3 : 4).setOreAmount(7, 9).setCheckArea(2);
 					break;
 				case FOSSIL:
-					settings.setChance(0.125F).setIterations(0, 2).setOreAmount(8, 11).setY(36, 112);
+					settings.setChance(0.25F).setIterations(1, 2).setOreAmount(8, 11).setY(36, 112);
 					break;
 				case ALUMINIUM:
 					settings.setChance(ConfigHandler.INSTANCE.aluminium ? 1F : 0F).setIterations(2, 3).setOreAmount(3, 4).setCheckArea(2);

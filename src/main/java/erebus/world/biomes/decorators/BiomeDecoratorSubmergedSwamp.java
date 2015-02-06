@@ -248,7 +248,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				oreGen.setIterations(extraOres ? 1 : 2, extraOres ? 2 : 3).setY(20, 64).setCheckArea(3);
 				break; // more common, but ~1.5 times smaller area
 			case FOSSIL:
-				oreGen.setChance(0.06F);
+				oreGen.setChance(0.25F);
 				break; // more rare
 		}
 	}
