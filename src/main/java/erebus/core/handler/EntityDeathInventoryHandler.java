@@ -43,7 +43,7 @@ public class EntityDeathInventoryHandler {
 				for (int i = 0; i < player.inventory.mainInventory.length; i++) {
 					ItemStack cont = player.inventory.mainInventory[i];
 					if (cont != null) {
-						tile.setInventorySlotContents(i, cont.copy());
+						tile.setInventorySlotContents(i + 4, cont.copy());
 						player.inventory.mainInventory[i] = null;
 					}
 				}
