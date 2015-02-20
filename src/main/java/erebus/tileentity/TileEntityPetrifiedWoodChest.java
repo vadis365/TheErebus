@@ -3,6 +3,9 @@ package erebus.tileentity;
 import java.util.Iterator;
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -81,6 +84,11 @@ public class TileEntityPetrifiedWoodChest extends TileEntityBasicInventory {
 			if (adjacentChestXNeg != null)
 				adjacentChestXNeg.func_90009_a(this, 3);
 		}
+	}
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox() {
+		return AxisAlignedBB.getBoundingBox(xCoord - 1, yCoord, zCoord - 1, xCoord + 2, yCoord + 1, zCoord + 2);
 	}
 
 	private boolean func_94044_a(int x, int y, int z) {
