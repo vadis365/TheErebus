@@ -157,7 +157,7 @@ public class BlockHangerPlants extends BlockBush {
 		int meta = world.getBlockMetadata(x, y, z);
 
 		if (meta == dataHangerFruit) {
-			ItemStack item = new ItemStack(ModItems.food, 1, Food.FoodType.middleFruit.ordinal());
+			ItemStack item = new ItemStack(ModItems.food, 1, Food.FoodType.darkFruit.ordinal());
 			if (!player.inventory.addItemStackToInventory(item))
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			world.setBlock(x, y, z, this, dataHanger4, 2);
@@ -165,7 +165,7 @@ public class BlockHangerPlants extends BlockBush {
 		}
 
 		if (meta == dataHangerSeed) {
-			ItemStack item = new ItemStack(ModItems.materials, 1, DATA.middleFruitSeeds.ordinal());
+			ItemStack item = new ItemStack(ModItems.materials, 1, DATA.darkFruitSeeds.ordinal());
 			world.playSoundAtEntity(player, "random.pop", 0.5F, 2.0F);
 			if (!player.inventory.addItemStackToInventory(item))
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
@@ -180,12 +180,12 @@ public class BlockHangerPlants extends BlockBush {
 		int meta = world.getBlockMetadata(x, y, z);
 		ItemStack item = null;
 		if (meta == dataHangerFruit) {
-			item = new ItemStack(ModItems.food, 2, Food.FoodType.middleFruit.ordinal());
+			item = new ItemStack(ModItems.food, 2, Food.FoodType.darkFruit.ordinal());
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
 
 		if (meta == dataHangerSeed) {
-			item = new ItemStack(ModItems.materials, 2, DATA.middleFruitSeeds.ordinal());
+			item = new ItemStack(ModItems.materials, 2, DATA.darkFruitSeeds.ordinal());
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
 	}
@@ -206,11 +206,11 @@ public class BlockHangerPlants extends BlockBush {
 		ItemStack item = null;
 		if (world.isAirBlock(x, y + 1, z)) {
 			if (meta == dataHangerFruit) {
-				item = new ItemStack(ModItems.food, 1, Food.FoodType.middleFruit.ordinal());
+				item = new ItemStack(ModItems.food, 1, Food.FoodType.darkFruit.ordinal());
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			}
 			if (meta == dataHangerSeed) {
-				item = new ItemStack(ModItems.materials, 1, DATA.middleFruitSeeds.ordinal());
+				item = new ItemStack(ModItems.materials, 1, DATA.darkFruitSeeds.ordinal());
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			}
 			world.setBlockToAir(x, y, z);

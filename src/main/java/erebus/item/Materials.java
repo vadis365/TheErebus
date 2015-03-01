@@ -58,7 +58,7 @@ public class Materials extends Item {
 		mucusCharge,
 		nettleleaves,
 		nettleflowers,
-		middleFruitSeeds,
+		darkFruitSeeds,
 		mossBall,
 		yellowDottedFungus,
 		plateExoRhino,
@@ -121,7 +121,7 @@ public class Materials extends Item {
 			}
 		}
 
-		if (side == 0 && is.getItemDamage() == DATA.middleFruitSeeds.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y - 1, z, side, is)) {
+		if (side == 0 && is.getItemDamage() == DATA.darkFruitSeeds.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y - 1, z, side, is)) {
 			Block block = world.getBlock(x, y, z);
 
 			if (block != null && block.getMaterial().blocksMovement()) {

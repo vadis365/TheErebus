@@ -219,7 +219,7 @@ public class ModBlocks {
 	public static final Block jadeBerryBush = new BlockBerryBush("jade");
 	public static final Block heartBerryBush = new BlockBerryBush("heart");
 	public static final Block swampBerryBush = new BlockBerryBush("swamp");
-	public static final Block mireCoral = new BlockMireCoral().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.mireCoral").setBlockTextureName("erebus:mireCoral").setLightLevel(0.8F);
+	public static final Block mireCoral = new BlockMireCoral().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.mireCoral").setBlockTextureName("erebus:swampGlowWeed").setLightLevel(0.8F);
 	public static final Block algae = new BlockAlgae().setBlockName("erebus.algae").setBlockTextureName("erebus:algae");
 	public static final Block blockCabbage = new BlockCabbage();
 

@@ -36,7 +36,7 @@ public class Food extends ItemFood {
 		melonadeSparkly,
 		larvaeOnStick,
 		honeySandwich,
-		middleFruit,
+		darkFruit,
 		titanChop,
 		titanChopCooked,
 		swampBerries,
@@ -96,7 +96,7 @@ public class Food extends ItemFood {
 				return 9;
 			case honeySandwich:
 				return 6;
-			case middleFruit:
+			case darkFruit:
 				return 2;
 			case titanChop:
 				return 4;
@@ -137,7 +137,7 @@ public class Food extends ItemFood {
 				return 0.5F;
 			case honeySandwich:
 				return 0.6F;
-			case middleFruit:
+			case darkFruit:
 				return 0.3F;
 			case titanChop:
 				return 0.3F;
