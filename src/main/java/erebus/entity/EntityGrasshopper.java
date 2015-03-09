@@ -26,7 +26,7 @@ public class EntityGrasshopper extends EntityCreature {
 		setSize(1.3F, 0.5F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIEatCrops(this, 0.6D, 10));
+		tasks.addTask(1, new EntityAIEatCrops(this, 0.6D, 20));
 		tasks.addTask(2, new EntityAIPanic(this, 0.8D));
 		tasks.addTask(3, new EntityAILookIdle(this));
 	}

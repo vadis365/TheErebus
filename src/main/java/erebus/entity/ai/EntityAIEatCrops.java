@@ -75,12 +75,14 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 				entityGrasshopper.setPosition(cropX, cropY + 1, cropZ);
 				grasshopper.worldObj.spawnEntityInWorld(entityGrasshopper);
 			}
-		if (reproCap == 12) {
-			grasshopper.setDead();
-			EntityLocust entityLocust = new EntityLocust(grasshopper.worldObj);
-			entityLocust.setPosition(cropX, cropY + 1, cropZ);
-			grasshopper.worldObj.spawnEntityInWorld(entityLocust);
-			grasshopper.worldObj.playSoundAtEntity(entityLocust, "erebus:locustspawn", 1.0F, 1.0F);
+		if (reproCap >= 12) {
+			if (grasshopper.worldObj.countEntities(EntityLocust.class) < 10) {
+				grasshopper.setDead();
+				EntityLocust entityLocust = new EntityLocust(grasshopper.worldObj);
+				entityLocust.setPosition(cropX, cropY + 1, cropZ);
+				grasshopper.worldObj.spawnEntityInWorld(entityLocust);
+				grasshopper.worldObj.playSoundAtEntity(entityLocust, "erebus:locustspawn", 1.0F, 1.0F);
+			}
 		}
 	}
 }
