@@ -3,7 +3,11 @@ package erebus.client.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class ModelPondSkater extends ModelBase {
 
 	ModelRenderer proboscis1;
@@ -232,6 +236,11 @@ public class ModelPondSkater extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		float cos = MathHelper.cos(limbSwing * 1.0F) * 0.5F * limbSwingAngle;
+		rightLegMid3.rotateAngleY = -cos + 0.7853982F;
+		leftLegMid3.rotateAngleY = cos - 0.7853982F;
+		rightLegMid4.rotateAngleY = -cos - 1.745329F;
+		leftLegMid4.rotateAngleY = cos + 1.745329F;
 	}
 
 }

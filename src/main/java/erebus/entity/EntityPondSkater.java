@@ -59,12 +59,12 @@ public class EntityPondSkater extends EntityMob {
 		protected String getHurtSound() {
 			return "";
 		}
-
-		@Override
-		protected String getDeathSound() {
-			return "";
-		}
 	 */
+
+	@Override
+	protected String getDeathSound() {
+		return "erebus:squish";
+	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
