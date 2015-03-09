@@ -76,7 +76,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 				grasshopper.worldObj.spawnEntityInWorld(entityGrasshopper);
 			}
 		if (reproCap >= 12) {
-			if (grasshopper.worldObj.countEntities(EntityLocust.class) < 10) {
+			if (grasshopper.worldObj.countEntities(EntityLocust.class) < 5) {
 				grasshopper.setDead();
 				EntityLocust entityLocust = new EntityLocust(grasshopper.worldObj);
 				entityLocust.setPosition(cropX, cropY + 1, cropZ);
