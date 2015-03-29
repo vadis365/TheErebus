@@ -130,7 +130,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
 			entityDropItem(Materials.createStack(Materials.DATA.waspSting), 0.0F);
-		if(getIsBoss() == 1)
+		if (getIsBoss() == 1)
 			entityDropItem(new ItemStack(ModItems.bottleAntiVenom), 0.0F);
 	}
 

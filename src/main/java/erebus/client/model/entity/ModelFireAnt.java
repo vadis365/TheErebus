@@ -261,7 +261,8 @@ public class ModelFireAnt extends ModelBase {
 		AbTop.render(unitPixel);
 		AbBack.render(unitPixel);
 		Neck.render(unitPixel);
-		HeadA.render(unitPixel);;
+		HeadA.render(unitPixel);
+		;
 		LBLA.render(unitPixel);
 		LBLB.render(unitPixel);
 		LBLC.render(unitPixel);

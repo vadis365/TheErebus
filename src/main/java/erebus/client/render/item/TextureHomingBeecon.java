@@ -44,7 +44,8 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
 				currentAngle = angle;
 			else {
 				double angle2;
-				for (angle2 = angle - currentAngle; angle2 < -Math.PI; angle2 += Math.PI * 2D);
+				for (angle2 = angle - currentAngle; angle2 < -Math.PI; angle2 += Math.PI * 2D)
+					;
 
 				while (angle2 >= Math.PI)
 					angle2 -= Math.PI * 2D;
@@ -61,7 +62,8 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
 			}
 
 			int i;
-			for (i = (int) ((currentAngle / (Math.PI * 2D) + 1.0D) * framesTextureData.size()) % framesTextureData.size(); i < 0; i = (i + framesTextureData.size()) % framesTextureData.size());
+			for (i = (int) ((currentAngle / (Math.PI * 2D) + 1.0D) * framesTextureData.size()) % framesTextureData.size(); i < 0; i = (i + framesTextureData.size()) % framesTextureData.size())
+				;
 
 			if (i != frameCounter) {
 				frameCounter = i;

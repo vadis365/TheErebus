@@ -1,4 +1,3 @@
-
 package erebus.item;
 
 import net.minecraft.entity.Entity;

@@ -34,7 +34,7 @@ public class BlockSmoothieMaker extends BlockContainer {
 		setBlockName("erebus.smoothieMaker");
 		setCreativeTab(ModTabs.blocks);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
@@ -64,9 +64,9 @@ public class BlockSmoothieMaker extends BlockContainer {
 			if (!ItemStack.areItemStacksEqual(oldItem, newItem))
 				return true;
 		}
-		
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().stackSize ==1 && player.getCurrentEquippedItem().getItem() == Items.book)
-			player.setCurrentItemOrArmor(0, new ItemStack (ModItems.smoothieBook));
+
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().stackSize == 1 && player.getCurrentEquippedItem().getItem() == Items.book)
+			player.setCurrentItemOrArmor(0, new ItemStack(ModItems.smoothieBook));
 
 		if (tile != null)
 			player.openGui(Erebus.instance, CommonProxy.GUI_ID_SMOOTHIE_MAKER, world, x, y, z);

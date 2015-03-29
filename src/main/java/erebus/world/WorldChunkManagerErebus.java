@@ -56,13 +56,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	}
 
 	/*
-	 * @Override public float[] getTemperatures(float temperatureArray[], int x,
-	 * int z, int sizeX, int sizeZ) { if (temperatureArray == null ||
-	 * temperatureArray.length < sizeX * sizeZ) temperatureArray = new
-	 * float[sizeX * sizeZ];
-	 *
-	 * Arrays.fill(temperatureArray, 0, sizeX * sizeZ, temperature); return
-	 * temperatureArray; }
+	 * @Override public float[] getTemperatures(float temperatureArray[], int x, int z, int sizeX, int sizeZ) { if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ) temperatureArray = new float[sizeX * sizeZ]; Arrays.fill(temperatureArray, 0, sizeX * sizeZ, temperature); return temperatureArray; }
 	 */
 
 	@Override

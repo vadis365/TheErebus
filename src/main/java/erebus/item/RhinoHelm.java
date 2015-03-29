@@ -42,7 +42,7 @@ public class RhinoHelm extends ItemArmor {
 		model.bipedLeftArm.showModel = false;
 		model.bipedRightLeg.showModel = false;
 		model.bipedLeftLeg.showModel = false;
-		
+
 		return model;
 	}
 

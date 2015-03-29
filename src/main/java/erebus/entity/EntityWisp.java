@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.core.handler.configs.ConfigHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,6 +14,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.Materials;
 
 public class EntityWisp extends EntityMob {
@@ -43,11 +43,7 @@ public class EntityWisp extends EntityMob {
 	}
 
 	/*
-	 * protected String getLivingSound() { return "mob.zombie"; }
-	 * 
-	 * protected String getHurtSound() { return "mob.zombiehurt"; }
-	 * 
-	 * protected String getDeathSound() { return "mob.zombiedeath"; }
+	 * protected String getLivingSound() { return "mob.zombie"; } protected String getHurtSound() { return "mob.zombiehurt"; } protected String getDeathSound() { return "mob.zombiedeath"; }
 	 */
 
 	@Override
@@ -115,14 +111,16 @@ public class EntityWisp extends EntityMob {
 		if (worldObj.isRemote && !isGlowing())
 			switchOff();
 		if (!worldObj.isRemote)
-			if(worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ)) == Blocks.water);
-			motionY += 0.1D;
+			if (worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ)) == Blocks.water)
+				;
+		motionY += 0.1D;
 		super.onUpdate();
 	}
 
 	@SideOnly(Side.CLIENT)
 	private void lightUp(World world, int x, int y, int z) {
-		if (!ConfigHandler.INSTANCE.bioluminescence) return;
+		if (!ConfigHandler.INSTANCE.bioluminescence)
+			return;
 		world.setLightValue(EnumSkyBlock.Block, x, y, z, 9);
 		for (int i = -1; i < 2; i++)
 			for (int j = -1; j < 2; j++)
@@ -137,7 +135,8 @@ public class EntityWisp extends EntityMob {
 
 	@SideOnly(Side.CLIENT)
 	private void switchOff() {
-		if (!ConfigHandler.INSTANCE.bioluminescence) return;
+		if (!ConfigHandler.INSTANCE.bioluminescence)
+			return;
 		worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
 		worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
 	}
@@ -152,7 +151,7 @@ public class EntityWisp extends EntityMob {
 		if (worldObj.isRemote)
 			switchOff();
 	}
-	
+
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
@@ -165,7 +164,7 @@ public class EntityWisp extends EntityMob {
 	public boolean getCanSpawnHere() {
 		return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty();
 	}
-	
+
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (super.attackEntityAsMob(entity)) {

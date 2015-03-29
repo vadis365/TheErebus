@@ -49,7 +49,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 				if (is != null)
 					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
 	}
-	
+
 	public TileEntityBambooCrate getTile() {
 		TileEntityBambooCrate crate = new TileEntityBambooCrate();
 		for (int i = 0; i < inventory.length; i++)
@@ -160,18 +160,17 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 	public final boolean isUseableByPlayer(EntityPlayer player) {
 		return true;
 	}
-	
 
 	@Override
 	public void openInventory() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void closeInventory() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -190,6 +189,6 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 	@Override
 	public void markDirty() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

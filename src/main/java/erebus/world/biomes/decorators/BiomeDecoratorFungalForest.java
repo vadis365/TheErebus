@@ -162,7 +162,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 		}
 
 		// TODO OK this may need moving to it's own class to make it generate looking nice
-		if(ConfigHandler.INSTANCE.glowshrooms) {
+		if (ConfigHandler.INSTANCE.glowshrooms) {
 			for (attempt = 0; attempt < 10; attempt++) {
 				xx = x + offsetXZ();
 				yy = 30 + rand.nextInt(90);

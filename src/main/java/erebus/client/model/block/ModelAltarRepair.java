@@ -78,7 +78,8 @@ public class ModelAltarRepair extends ModelBase {
 
 		float x = tile.animationTicks;
 		GL11.glPushMatrix();
-		GL11.glScalef(0.04F * x, 0.04F * x, 0.04F * x);;
+		GL11.glScalef(0.04F * x, 0.04F * x, 0.04F * x);
+		;
 		AnvilFrontFoot.render(0.0625F);
 		AnvilRearFoot.render(0.0625F);
 		AnvilBase.render(0.0625F);

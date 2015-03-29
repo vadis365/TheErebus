@@ -20,8 +20,7 @@ import erebus.tileentity.TileEntityTempleTeleporter;
 
 public class BlockTempleTeleporter extends BlockContainer {
 
-	public static final String[] iconPaths = new String[] { "templeTeleport1", "templeTeleport2", "templeTeleport3", "templeTeleport4",
-		"templeTeleport5", "templeTeleport6", "templeTeleportNE", "templeTeleportNW", "templeTeleportSE", "templeTeleportSW", "templeBrick" };
+	public static final String[] iconPaths = new String[] { "templeTeleport1", "templeTeleport2", "templeTeleport3", "templeTeleport4", "templeTeleport5", "templeTeleport6", "templeTeleportNE", "templeTeleportNW", "templeTeleportSE", "templeTeleportSW", "templeBrick" };
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -52,15 +51,15 @@ public class BlockTempleTeleporter extends BlockContainer {
 	public void onEntityWalking(World world, int x, int y, int z, Entity entity) {
 		if (entity.isSneaking())
 			return;
-		
+
 		int meta = world.getBlockMetadata(x, y, z);
 		TileEntityTempleTeleporter tile = Utils.getTileEntity(world, x, y, z, TileEntityTempleTeleporter.class);
-		if(!world.isRemote)
+		if (!world.isRemote)
 			if (meta >= 4 && meta <= 9)
 				if (entity instanceof EntityLivingBase && tile != null) {
 					((EntityLivingBase) entity).setPositionAndUpdate(tile.getTargetX() + 0.5D, tile.getTargetY() + 1D, tile.getTargetZ() + 0.5D);
 					entity.worldObj.playSoundEffect(x, y, z, "mob.endermen.portal", 1.0F, 1.0F);
-		}
+				}
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class BlockTempleTeleporter extends BlockContainer {
 	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
 		return new TileEntityTempleTeleporter();
 	}
-	
+
 	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		double pixel = 0.0625D;

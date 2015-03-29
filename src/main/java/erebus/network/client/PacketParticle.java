@@ -86,7 +86,7 @@ public class PacketParticle extends AbstractClientPacket {
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
 					for (int count = 0; count <= 20; ++count)
-						eff.addEffect(new EntityDiggingFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3.5D, e.posY + 0.5D, e.posZ + MathHelper.cos((float) ang) * 3.5D,  -MathHelper.sin((float) ang) * 0.8, 0.0D, MathHelper.cos((float) ang) * 0.8, ModBlocks.ghostSand, 0));
+						eff.addEffect(new EntityDiggingFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 3.5D, e.posY + 0.5D, e.posZ + MathHelper.cos((float) ang) * 3.5D, -MathHelper.sin((float) ang) * 0.8, 0.0D, MathHelper.cos((float) ang) * 0.8, ModBlocks.ghostSand, 0));
 					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 4.5, e.posY, e.posZ + MathHelper.cos((float) ang) * 4.5, -MathHelper.sin((float) ang) * 1, 0.1D, MathHelper.cos((float) ang) * 1));
 				}
 				break;
@@ -96,7 +96,7 @@ public class PacketParticle extends AbstractClientPacket {
 				float f2 = (e.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
 				eff.addEffect(new EntityHugeExplodeFX(player.worldObj, e.posX + f, e.posY + 2.0D + f1, e.posZ + f2, 0.0D, 0.0D, 0.0D));
 				break;
-				
+
 			case ANTLION_RUMBLE:
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
@@ -107,7 +107,7 @@ public class PacketParticle extends AbstractClientPacket {
 				for (int a = 0; a < 360; a += 4) {
 					double ang = a * Math.PI / 180D;
 					for (int count = 0; count <= 4; ++count)
-						eff.addEffect(new EntityFireworkSparkFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 1 * count *0.5, e.posY - 1, e.posZ + MathHelper.cos((float) ang) * 1 * count * 0.5, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5, eff));
+						eff.addEffect(new EntityFireworkSparkFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 1 * count * 0.5, e.posY - 1, e.posZ + MathHelper.cos((float) ang) * 1 * count * 0.5, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5, eff));
 					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 2, e.posY - 1, e.posZ + MathHelper.cos((float) ang) * 2, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5));
 				}
 				break;

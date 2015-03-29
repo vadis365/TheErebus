@@ -153,7 +153,7 @@ public class ModItems {
 	public static final Item woodlouseBall = new WoodlouseBall().setUnlocalizedName("erebus.woodlouseBall");
 	public static final Item rolledNewspaper = new RolledNewspaper();
 	public static final Item warHammer = new WarHammer().setUnlocalizedName("erebus.warHammer");
-	
+
 	// ANIMATION MAGIC
 	public static final Item ritualDagger = new RitualDagger();
 	public static final Item jadeHeart = new JadeHeart();

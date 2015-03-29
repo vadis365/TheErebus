@@ -229,9 +229,7 @@ public final class SpawnerErebus {
 		}
 
 		/**
-		 * The spawner will attempt to spawn the mob in a group (it is not
-		 * guaranteed to spawn minGroupSize mobs, but it will go for a number
-		 * between that and maxGroupSize)
+		 * The spawner will attempt to spawn the mob in a group (it is not guaranteed to spawn minGroupSize mobs, but it will go for a number between that and maxGroupSize)
 		 */
 		public SpawnEntry setGroupSize(int minGroupSize, int maxGroupSize) {
 			this.minGroupSize = (byte) minGroupSize;

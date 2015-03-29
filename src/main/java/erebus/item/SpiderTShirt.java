@@ -28,6 +28,6 @@ public class SpiderTShirt extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		//un-implemented feature to go here....
+		// un-implemented feature to go here....
 	}
 }

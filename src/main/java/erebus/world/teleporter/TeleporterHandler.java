@@ -99,11 +99,10 @@ public final class TeleporterHandler {
 				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				player.timeUntilPortal = 0;
 				/*
-				 * player.lastExperience = -1; player.lastHealth = -1.0F;
-				 * player.lastFoodLevel = -1;
+				 * player.lastExperience = -1; player.lastHealth = -1.0F; player.lastFoodLevel = -1;
 				 */
 			} else if (!(entity instanceof EntityMinecartContainer)) { // TODO we cannot handle this, would result in container breaking in both worlds and duplicate items;
-				// find some sneaky solution  around  this  issue  fixme  copy  paste
+				// find some sneaky solution around this issue fixme copy paste
 				world.theProfiler.startSection("changeDimension");
 
 				MinecraftServer mcServer = MinecraftServer.getServer();

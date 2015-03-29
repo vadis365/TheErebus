@@ -34,13 +34,13 @@ public class GuiSmoothieMaker extends GuiContainer {
 		drawTexturedModalRect(x + 142, y + 80 - antiVenom, 142, 248 - antiVenom, 9, antiVenom);
 		int milk = kitchen.getScaledMilkAmount(80);
 		drawTexturedModalRect(x + 159, y + 80 - milk, 159, 248 - milk, 9, milk);
-		
+
 		if (kitchen.isBlending()) {
 			int i1 = kitchen.getBlendProgress();
-			drawTexturedModalRect(x + 52, y + 26, 176, 0, 73, i1 +1);
+			drawTexturedModalRect(x + 52, y + 26, 176, 0, 73, i1 + 1);
 		}
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 	}

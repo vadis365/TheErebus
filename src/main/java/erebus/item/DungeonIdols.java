@@ -73,7 +73,7 @@ public class DungeonIdols extends Item {
 	public String getUnlocalizedName(ItemStack stack) {
 		return super.getUnlocalizedName() + "." + stack.getItemDamage();
 	}
-	
+
 	@Override
 	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (is.getItemDamage() >= 4) {
@@ -81,14 +81,14 @@ public class DungeonIdols extends Item {
 				byte spawn = (byte) (is.getItemDamage() - 4);
 				EntityUmberGolemDungeonTypes entityUmberGolem = new EntityUmberGolemDungeonTypes(world);
 				entityUmberGolem.setType(spawn);
-				entityUmberGolem.setHealth(entityUmberGolem.getMaxHealth()); //hack because of stupid attributes setting 
+				entityUmberGolem.setHealth(entityUmberGolem.getMaxHealth()); // hack because of stupid attributes setting
 				entityUmberGolem.setPosition(x + 0.5D, y + 1, z + 0.5D);
 				world.spawnEntityInWorld(entityUmberGolem);
-				}
-				if (!player.capabilities.isCreativeMode)
-					--is.stackSize;
-				return true;
 			}
+			if (!player.capabilities.isCreativeMode)
+				--is.stackSize;
+			return true;
+		}
 		return false;
 	}
 }

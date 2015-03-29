@@ -117,9 +117,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	}
 
 	/*
-	 * protected String getLivingSound() { return "erebus:umbergolemsound"; }
-	 *
-	 * protected String getHurtSound() { return "erebus:umbergolemhurt"; }
+	 * protected String getLivingSound() { return "erebus:umbergolemsound"; } protected String getHurtSound() { return "erebus:umbergolemhurt"; }
 	 */
 
 	@Override

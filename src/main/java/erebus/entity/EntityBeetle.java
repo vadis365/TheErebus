@@ -134,7 +134,7 @@ public class EntityBeetle extends EntityAnimal {
 			setTame((byte) 1);
 			return true;
 		}
-		
+
 		return super.interact(player);
 	}
 

@@ -83,7 +83,8 @@ public class ModelTarantula extends ModelBase {
 		LegEF2.setRotationPoint(-7F, 0F, 0F);
 		Leg3F = new ModelRenderer(this, 30, 4);
 		Leg3F.addBox(-7F, -1F, -1F, 7, 2, 2);
-		Leg3F.setRotationPoint(-7F, 21F, 1F);;
+		Leg3F.setRotationPoint(-7F, 21F, 1F);
+		;
 		LegEF3 = new ModelRenderer(this, 0, 4);
 		LegEF3.addBox(-13F, -1F, -1F, 13, 2, 2);
 		LegEF3.setRotationPoint(-7F, 0F, 0F);

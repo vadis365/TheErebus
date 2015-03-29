@@ -38,10 +38,10 @@ public class WarHammerItemRenderer implements IItemRenderer {
 				renderHammer(0.0F, 1.5F, 0.0F, 1.0D);
 				break;
 			case EQUIPPED:
-				renderEquipped(0.3F, (float) (0.5F + item.getTagCompound().getInteger("charge")*0.05), 0.4F, 1.5D + item.getTagCompound().getInteger("charge")*0.04);
+				renderEquipped(0.3F, (float) (0.5F + item.getTagCompound().getInteger("charge") * 0.05), 0.4F, 1.5D + item.getTagCompound().getInteger("charge") * 0.04);
 				break;
 			case EQUIPPED_FIRST_PERSON:
-				renderHammerFirstPerson(0.5F, (float) (0.9F + item.getTagCompound().getInteger("charge")*0.02), 0.5F, 1.75D + item.getTagCompound().getInteger("charge")*0.02);
+				renderHammerFirstPerson(0.5F, (float) (0.9F + item.getTagCompound().getInteger("charge") * 0.02), 0.5F, 1.75D + item.getTagCompound().getInteger("charge") * 0.02);
 				break;
 			case INVENTORY:
 				renderHammerInventory(0.825F, 1.2F, 0.0F, 1.3D);

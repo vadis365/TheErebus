@@ -37,13 +37,13 @@ public class WaterStriders extends ItemArmor {
 		int x = MathHelper.floor_double(player.posX);
 		int y = MathHelper.floor_double(player.posY - player.getYOffset());
 		int z = MathHelper.floor_double(player.posZ);
-		
-			player.posY += -player.motionY;
-		
-		if(world.getBlock(x, y -1, z).getMaterial() == Material.water) {
-			if(player.motionY < 0.0D && player.boundingBox.minY < y) {
+
+		player.posY += -player.motionY;
+
+		if (world.getBlock(x, y - 1, z).getMaterial() == Material.water) {
+			if (player.motionY < 0.0D && player.boundingBox.minY < y) {
 				player.motionY = 0.0D;
-				player.jumpMovementFactor *=0.4F;
+				player.jumpMovementFactor *= 0.4F;
 				player.fallDistance = 0.0F;
 				player.onGround = true;
 			}

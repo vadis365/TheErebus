@@ -58,6 +58,7 @@ public class ModelAntlionBoss extends ModelBase {
 	ModelRenderer LB2;
 	ModelRenderer LB3;
 	float addhead = 0;
+
 	public ModelAntlionBoss() {
 		textureWidth = 128;
 		textureHeight = 128;
@@ -259,7 +260,7 @@ public class ModelAntlionBoss extends ModelBase {
 		Neck1.render(par7);
 		Neck2.render(par7);
 		HR2.render(par7);
-		HL2.render(par7);	
+		HL2.render(par7);
 		ThxR2.render(par7);
 		ThxL2.render(par7);
 		ThxR3.render(par7);
@@ -300,10 +301,10 @@ public class ModelAntlionBoss extends ModelBase {
 		float cos2 = MathHelper.cos(par1 * 1.0F) * 0.5F * par2;
 		float heady = par4 / (180F / (float) Math.PI);
 		float headx = par5 / (180F / (float) Math.PI);
-		
-		if (entityAntlionBoss.getDataWatcher().getWatchableObjectByte(21)==2){
-			for(addhead=0; addhead<17;addhead++){
-			headx=headx-addhead*0.0053702F;
+
+		if (entityAntlionBoss.getDataWatcher().getWatchableObjectByte(21) == 2) {
+			for (addhead = 0; addhead < 17; addhead++) {
+				headx = headx - addhead * 0.0053702F;
 			}
 		}
 		Head.rotateAngleY = heady;

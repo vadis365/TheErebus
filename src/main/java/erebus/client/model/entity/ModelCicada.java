@@ -325,8 +325,10 @@ public class ModelCicada extends ModelBase {
 		}
 
 		if (cicada.isFlying()) {
-			RWingFront.rotateAngleZ = 1.8F - cicada.wingFloat;;
-			LWingFront.rotateAngleZ = -1.8F + cicada.wingFloat;;
+			RWingFront.rotateAngleZ = 1.8F - cicada.wingFloat;
+			;
+			LWingFront.rotateAngleZ = -1.8F + cicada.wingFloat;
+			;
 			RWingFront.rotateAngleX = -1.8F;
 			LWingFront.rotateAngleX = -1.8F;
 			RWingFront.rotateAngleY = 0F;

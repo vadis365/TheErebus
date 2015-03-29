@@ -353,7 +353,8 @@ public class ModelBlackAnt extends ModelBase {
 		AbTop.render(unitPixel);
 		AbBack.render(unitPixel);
 		Neck.render(unitPixel);
-		Head1.render(unitPixel);;
+		Head1.render(unitPixel);
+		;
 		LBL1.render(unitPixel);
 		LML1.render(unitPixel);
 		LFL1.render(unitPixel);

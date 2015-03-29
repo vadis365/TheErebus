@@ -49,16 +49,10 @@ public class EntityPondSkater extends EntityMob {
 		return 6;
 	}
 
-	/* To stop console spam
-		@Override
-		protected String getLivingSound() {
-			return "";
-		}
-
-		@Override
-		protected String getHurtSound() {
-			return "";
-		}
+	/*
+	 * To stop console spam
+	 * @Override protected String getLivingSound() { return ""; }
+	 * @Override protected String getHurtSound() { return ""; }
 	 */
 
 	@Override

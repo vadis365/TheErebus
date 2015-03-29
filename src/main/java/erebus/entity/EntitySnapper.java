@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.item.Materials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,6 +13,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.item.Materials;
 
 public class EntitySnapper extends EntityMob {
 	public EntitySnapper(World world) {
@@ -78,7 +78,7 @@ public class EntitySnapper extends EntityMob {
 	public int getMaxSpawnedInChunk() {
 		return 6;
 	}
-	
+
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);

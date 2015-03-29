@@ -46,7 +46,7 @@ public class ModelTarantulaEgg extends ModelBase {
 		top.render(0.0625F);
 		part1.render(0.0625F);
 		part2.render(0.0625F);
-		part3.render(0.0625F);;
+		part3.render(0.0625F);
 		main.render(0.0625F);
 	}
 

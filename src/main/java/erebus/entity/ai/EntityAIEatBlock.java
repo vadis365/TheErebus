@@ -15,8 +15,7 @@ import erebus.core.helper.Utils;
 public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	/**
-	 * The bigger you make this value the faster the AI will be. But performance
-	 * will also decrease so be sensible
+	 * The bigger you make this value the faster the AI will be. But performance will also decrease so be sensible
 	 */
 	private static final int CHECKS_PER_TICK = 10;
 
@@ -121,8 +120,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	}
 
 	/**
-	 * Override this if you wish to do a more advanced checking on which blocks
-	 * should be eaten
+	 * Override this if you wish to do a more advanced checking on which blocks should be eaten
 	 *
 	 * @param block
 	 * @param meta
