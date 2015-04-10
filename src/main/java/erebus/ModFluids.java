@@ -28,8 +28,13 @@ public class ModFluids {
 		try {
 			for (Field f : ModFluids.class.getDeclaredFields()) {
 				Object obj = f.get(null);
-				if (obj instanceof Fluid)
-					FluidRegistry.registerFluid((Fluid) obj);
+				if (obj instanceof Fluid) {
+					Fluid fluid = (Fluid) obj;
+					if (FluidRegistry.isFluidRegistered(fluid.getName()))
+						f.set(null, FluidRegistry.getFluid(fluid.getName()));
+					else
+						FluidRegistry.registerFluid(fluid);
+				}
 			}
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
