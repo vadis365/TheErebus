@@ -150,7 +150,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			if (i == 1) {
 				setSize(2.5F, 2F);
 				if (!hasCustomNameTag())
-					if(rand.nextInt(5) == 0)
+					if(rand.nextBoolean())
 						setCustomNameTag("Livid's Bane");
 					else
 						setCustomNameTag("Hornet of Despair");
