@@ -37,7 +37,7 @@ public class RecipeBookSmoothies extends ItemEditableBook {
 	
 	public static String getPage(int page){ 
 		switch(page){ 
-				  
+  
 		 			case 0: return 
 		 "Thank you for using the new ErebusCo. Smoothie-matic 2000.\n"+"In the following pages you will find some delicious recipes.\n\n"+ 
 		 "Each recipe will require a different base fluid. The fluid bars shown in the gui are for: Honey, Beetle Juice, Anti-Venom and Milk."; 
