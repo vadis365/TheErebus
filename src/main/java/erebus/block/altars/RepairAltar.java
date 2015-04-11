@@ -40,7 +40,8 @@ public class RepairAltar extends AltarAbstract {
 					is.getItem().setDamage(is, -repairDamage);
 				}
 				if (te.getSpawnTicks() % 2 == 0 && te.getCollisions() < 101)
-					te.sparky(world, x, y, z);
+					if(world.isRemote)
+						te.sparky(world, x, y, z);
 			}
 			if (te.getCollisions() > 101)
 				te.setSpawnTicks(0);

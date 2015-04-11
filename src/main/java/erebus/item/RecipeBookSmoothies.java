@@ -62,9 +62,9 @@ public class RecipeBookSmoothies extends ItemEditableBook {
 		 					EnumChatFormatting.LIGHT_PURPLE+"Honey\n\n"+
 		 					EnumChatFormatting.RED+"Effects:\n"+"Regeneration";		 
 		 			case 4: return 
-		 					EnumChatFormatting.BLUE+"Nothing In The Middle\n\n"+
+		 					EnumChatFormatting.BLUE+"Darkness In The Middle\n\n"+
 		 					EnumChatFormatting.BLACK+"Cammo powder x2\n"+
-		 					"Middle Fruit\n"+
+		 					"Dark Fruit\n"+
 		 					"Swamp Berries\n\n"+
 		 					EnumChatFormatting.LIGHT_PURPLE+"Beetle Juice\n\n"+
 		 					EnumChatFormatting.RED+"Effects:\n"+"Invisibility";
@@ -79,13 +79,13 @@ public class RecipeBookSmoothies extends ItemEditableBook {
 		 					EnumChatFormatting.BLUE+"Seedy Goodness\n\n"+
 		 					EnumChatFormatting.BLACK+"Pumpkin Seeds\n"+
 		 					"Melon Seeds\n"+
-		 					"MiddleFruit Seeds\n"+
+		 					"Dark Fruit Seeds\n"+
 		 					"Bio-Velocity\n\n"+
 		 					EnumChatFormatting.LIGHT_PURPLE+"Beetle Juice\n\n"+
 		 					EnumChatFormatting.RED+"Effects:\n"+"Dig Speed";
 		 			case 7: return 
 		 					EnumChatFormatting.BLUE+"Givin' Me The Blues\n\n"+
-		 					EnumChatFormatting.BLACK+"Weeping Blue Petal x2\n"+
+		 					EnumChatFormatting.BLACK+"Weeping Blue Bell Petal x2\n"+
 		 					"Lapis Lazuli x2\n\n"+
 		 					EnumChatFormatting.LIGHT_PURPLE+"Milk\n\n"+
 		 					EnumChatFormatting.RED+"Effects:\n"+"Extinguish";
@@ -93,7 +93,7 @@ public class RecipeBookSmoothies extends ItemEditableBook {
 		 					EnumChatFormatting.BLUE+"Hot Hot Baby\n\n"+
 		 					EnumChatFormatting.BLACK+"Fire Bloom x2\n"+
 		 					"Wasp Sting\n"+
-		 					"Snapper Root\n\n"+
+		 					"Bog Maw Root\n\n"+
 		 					EnumChatFormatting.LIGHT_PURPLE+"Anti-Venom\n\n"+
 		 					EnumChatFormatting.RED+"Effects:\n"+"Strength";
 		 			case 9: return 
@@ -113,7 +113,7 @@ public class RecipeBookSmoothies extends ItemEditableBook {
 		 					EnumChatFormatting.RED+"Effects:\n"+"Saturation";
 		 			case 11: return 
 		 					EnumChatFormatting.BLUE+"Bryuf's Brew\n\n"+
-		 					EnumChatFormatting.BLACK+"Bulb Cap Mushroom\n"+
+		 					EnumChatFormatting.BLACK+"Dark Cap Mushroom\n"+
 		 					"Turnip\n"+
 		 					"Compound Eyes\n"+
 		 					"Heart Berries\n\n"+

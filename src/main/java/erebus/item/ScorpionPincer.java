@@ -1,11 +1,16 @@
 package erebus.item;
 
+import java.util.List;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import erebus.ModMaterials;
@@ -16,6 +21,14 @@ public class ScorpionPincer extends ItemSword {
 	public ScorpionPincer() {
 		super(ModMaterials.weaponScorpionPincer);
 		maxStackSize = 1;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex) {
+		tooltip.add(EnumChatFormatting.WHITE + "Can Shoot Fire Charges");
+		tooltip.add(EnumChatFormatting.WHITE + "if in your Inventory.");
 	}
 
 	@Override

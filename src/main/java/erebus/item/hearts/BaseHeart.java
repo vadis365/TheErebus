@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModTabs;
@@ -24,6 +25,7 @@ public abstract class BaseHeart extends Item implements IEnergyStorage {
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex) {
+		tooltip.add(EnumChatFormatting.LIGHT_PURPLE + "Not Implemented Yet.");
 		for (EnergyType type : EnergyType.values())
 			if (canStore(stack, type))
 				tooltip.add(type.toString() + " - " + getCurrentStorage(stack, type) + "/" + getMaxStorage(stack, type));

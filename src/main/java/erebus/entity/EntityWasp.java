@@ -150,7 +150,10 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			if (i == 1) {
 				setSize(2.5F, 2F);
 				if (!hasCustomNameTag())
-					setCustomNameTag("Hornet of Despair");
+					if(rand.nextInt(5) == 0)
+						setCustomNameTag("Livid's Bane");
+					else
+						setCustomNameTag("Hornet of Despair");
 			} else
 				setSize(1.5F, 1.0F);
 		}
@@ -241,7 +244,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	@Override
 	protected void attackEntity(Entity entity, float par2) {
-		if (par2 < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
+		if (par2 < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY&& getEntitySenses().canSee(entity))
 			attackEntityAsMob(entity);
 	}
 

@@ -254,7 +254,8 @@ public class BlockPetrifiedChest extends BlockContainer {
 		if (world.isRemote)
 			return true;
 		else {
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CHEST, world, x, y, z);
+			if(getInventory(world, x, y, z) != null)
+				player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CHEST, world, x, y, z);
 			return true;
 		}
 	}
