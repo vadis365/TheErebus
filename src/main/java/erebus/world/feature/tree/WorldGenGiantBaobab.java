@@ -39,8 +39,8 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 	}
 
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
-	new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.stone_pickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.stone_shovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.stone_axe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.stone_sword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2),
-	new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1), new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1) }).setPostProcessor(new IPostProcess() {
+			new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.stone_pickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.stone_shovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.stone_axe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.stone_sword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2),
+			new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1), new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1) }).setPostProcessor(new IPostProcess() {
 
 		@SuppressWarnings("rawtypes")
 		@Override
@@ -82,7 +82,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		int layer4 = 19;
 		int layer5 = 27;
 
-		//trunk
+		// trunk
 		for (int yy = y; height + y >= yy; yy++)
 			for (int i = radius * -1; i <= radius; ++i)
 				for (int j = radius * -1; j <= radius; ++j) {
@@ -133,7 +133,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 							world.setBlock(x + i, yy, z + j, Blocks.web);
 				}
 
-		//leaves
+		// leaves
 		createLeaves(world, rand, x + 10, y + 29, z);
 		createLeaves(world, rand, x - 10, y + 29, z);
 		createLeaves(world, rand, x, y + 29, z + 10);
@@ -143,7 +143,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		createLeaves(world, rand, x - 7, y + 27, z + 7);
 		createLeaves(world, rand, x - 7, y + 27, z - 7);
 
-		//roots
+		// roots
 		createRoots(world, rand, x, y, z);
 		createRoots(world, rand, x + 9, y, z);
 		createRoots(world, rand, x - 9, y, z);
@@ -154,9 +154,9 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		createRoots(world, rand, x - 8, y, z + 8);
 		createRoots(world, rand, x - 8, y, z - 8);
 
-		//other internal bits like vines and holes needed
+		// other internal bits like vines and holes needed
 
-		//ground floor vines
+		// ground floor vines
 		for (int yy = y + 3; 11 + y >= yy; yy++) {
 			world.setBlock(x + 1, yy, z, Blocks.vine, 2, 3);
 			world.setBlock(x - 1, yy, z, Blocks.vine, 8, 3);
@@ -164,7 +164,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			world.setBlock(x, yy, z - 1, Blocks.vine, 1, 3);
 		}
 
-		//2nd floor holes for ladders
+		// 2nd floor holes for ladders
 		world.setBlock(x + 9, y + 20, z, Blocks.air);
 		world.setBlock(x - 9, y + 20, z, Blocks.air);
 		world.setBlock(x, y + 20, z + 9, Blocks.air);
@@ -174,7 +174,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		world.setBlock(x, y + 21, z + 9, Blocks.air);
 		world.setBlock(x, y + 21, z - 9, Blocks.air);
 
-		//1st floor vines
+		// 1st floor vines
 		for (int yy = y + 13; 21 + y >= yy; yy++) {
 			world.setBlock(x - 9, yy, z, Blocks.vine, 2, 3);
 			world.setBlock(x + 9, yy, z, Blocks.vine, 8, 3);
@@ -182,13 +182,13 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			world.setBlock(x, yy, z + 9, Blocks.vine, 1, 3);
 		}
 
-		//spawners, chests with loot and webs
-		//ground floor
+		// spawners, chests with loot and webs
+		// ground floor
 		placeSpawner(world, rand, x - 7, y + 3, z);
 		placeSpawner(world, rand, x + 7, y + 3, z);
 		placeSpawner(world, rand, x, y + 3, z - 7);
 		placeSpawner(world, rand, x, y + 3, z + 7);
-		//1st floor
+		// 1st floor
 		if (rand.nextBoolean()) {
 			placeSpawner(world, rand, x - 5, y + 13, z);
 			placeSpawner(world, rand, x + 5, y + 13, z);
@@ -197,7 +197,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			placeSpawner(world, rand, x, y + 13, z + 5);
 		}
 
-		//boss mob
+		// boss mob
 		EntityTarantulaMiniboss boss = new EntityTarantulaMiniboss(world);
 		boss.setLocationAndAngles(x + 0.5D, y + 22, z + 0.5D, rand.nextFloat() * 360F, 0F);
 		boss.forceSpawn = true;

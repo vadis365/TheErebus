@@ -1,4 +1,5 @@
 package erebus.world.feature.structure;
+
 import java.util.List;
 import java.util.Random;
 
@@ -17,7 +18,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.core.helper.TimeMeasurement;
 import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.item.Food.FoodType;
@@ -35,82 +35,34 @@ import erebus.world.loot.WeightedLootList;
 
 public class AntlionMazeDungeon {
 	private Block solid = ModBlocks.gneiss;
-	public static final WeightedLootList chestLoot = new WeightedLootList(
-	new LootItemStack[] {
-			new LootItemStack(Items.book).setAmount(1, 4).setWeight(18),
-					new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16),
-					new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13),
-					new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10),
-					new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9),
-					new LootItemStack(Items.enchanted_book).setWeight(8),
-					new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1),
-					new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
-					new LootItemStack(Items.golden_pickaxe).setWeight(3),
-					new LootItemStack(Items.iron_pickaxe).setWeight(2),
-					new LootItemStack(ModItems.jadePickaxe).setWeight(1),
-					new LootItemStack(Items.golden_shovel).setWeight(3),
-					new LootItemStack(Items.iron_shovel).setWeight(2),
-					new LootItemStack(ModItems.jadeShovel).setWeight(1),
-					new LootItemStack(Items.golden_axe).setWeight(3),
-					new LootItemStack(Items.iron_axe).setWeight(2),
-					new LootItemStack(ModItems.jadeAxe).setWeight(1),
-					new LootItemStack(Items.golden_sword).setWeight(3),
-					new LootItemStack(Items.iron_sword).setWeight(2),
-					new LootItemStack(ModItems.jadeSword).setWeight(1),
-					new LootItemStack(Items.iron_chestplate).setWeight(2),
-					new LootItemStack(ModItems.jadeBody).setWeight(1),
-					new LootItemStack(Items.golden_chestplate).setWeight(1),
-					new LootItemStack(Items.iron_helmet).setWeight(2),
-					new LootItemStack(ModItems.jadeHelmet).setWeight(1),
-					new LootItemStack(Items.golden_helmet).setWeight(1),
-					new LootItemStack(Items.iron_leggings).setWeight(2),
-					new LootItemStack(ModItems.jadeLegs).setWeight(1),
-					new LootItemStack(Items.golden_leggings).setWeight(1),
-					new LootItemStack(Items.iron_boots).setWeight(2),
-					new LootItemStack(ModItems.jadeBoots).setWeight(1),
-					new LootItemStack(Items.golden_boots).setWeight(1),
-					new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1),
-					new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1),
-					new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.scorpionPincer.ordinal()).setWeight(1),
-					new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.whetstonePowder.ordinal()).setWeight(3),
-					new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.plateExoRhino.ordinal()).setWeight(1),
-					new LootItemStack(ModItems.food).setAmount(1, 3).setDamage(FoodType.honeySandwich.ordinal()).setWeight(3),
-					new LootItemStack(ModItems.cabbageSeeds).setAmount(1, 3).setWeight(2),
-					new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1),
-					new LootItemStack(ModItems.lifeBlood).setAmount(1, 2).setWeight(4),
-					new LootItemStack(ModItems.rolledNewspaper).setAmount(1).setWeight(1),
-					new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
-					new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
-					new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1),
-					new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1),
-					new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
-					new LootItemStack(ModItems.homingBeecon).setAmount(1).setWeight(1),
-					new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal()).setWeight(3),
-					new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal()).setWeight(1)
-			}).setPostProcessor(new IPostProcess() {
-				@SuppressWarnings("rawtypes")
-				@Override
-				public ItemStack postProcessItem(ItemStack is, Random rand) {
-					if (is.getItem() == Items.enchanted_book || rand.nextBoolean() && (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
-						boolean enchBook = is.getItem() == Items.enchanted_book;
-						if (enchBook)
-							is.func_150996_a(Items.book);
-						List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
-						if (enchBook)
-							is.func_150996_a(Items.enchanted_book);
-						if (enchList != null && enchList.size() > 0)
-							for (int a = 0; a < enchList.size(); ++a) {
-								EnchantmentData data = (EnchantmentData) enchList.get(a);
-								if (is.getItem() == Items.enchanted_book)
-									Items.enchanted_book.addEnchantment(is, data);
-								else
-									is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
-							}
+	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
+			new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2), new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1),
+			new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.scorpionPincer.ordinal()).setWeight(1),
+			new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.whetstonePowder.ordinal()).setWeight(3), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.plateExoRhino.ordinal()).setWeight(1), new LootItemStack(ModItems.food).setAmount(1, 3).setDamage(FoodType.honeySandwich.ordinal()).setWeight(3), new LootItemStack(ModItems.cabbageSeeds).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1), new LootItemStack(ModItems.lifeBlood).setAmount(1, 2).setWeight(4), new LootItemStack(ModItems.rolledNewspaper).setAmount(1).setWeight(1), new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
+			new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1), new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1), new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5), new LootItemStack(ModItems.homingBeecon).setAmount(1).setWeight(1), new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal()).setWeight(3), new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal()).setWeight(1) }).setPostProcessor(new IPostProcess() {
+		@SuppressWarnings("rawtypes")
+		@Override
+		public ItemStack postProcessItem(ItemStack is, Random rand) {
+			if (is.getItem() == Items.enchanted_book || rand.nextBoolean() && (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
+				boolean enchBook = is.getItem() == Items.enchanted_book;
+				if (enchBook)
+					is.func_150996_a(Items.book);
+				List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
+				if (enchBook)
+					is.func_150996_a(Items.enchanted_book);
+				if (enchList != null && enchList.size() > 0)
+					for (int a = 0; a < enchList.size(); ++a) {
+						EnchantmentData data = (EnchantmentData) enchList.get(a);
+						if (is.getItem() == Items.enchanted_book)
+							Items.enchanted_book.addEnchantment(is, data);
+						else
+							is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
 					}
-					return is;
-				}
-		});
-		
+			}
+			return is;
+		}
+	});
+
 	public void generateSurface(World world, Random rand, int chunkX, int chunkY, int chunkZ) {
 		BiomeGenBase biomeBase = world.getBiomeGenForCoords(chunkX, chunkZ);
 		if (biomeBase == ModBiomes.volcanicDesert)
@@ -123,36 +75,35 @@ public class AntlionMazeDungeon {
 		int sizeZ = 60;
 		int mazeWidth = sizeX / 2;
 		int mazeHeight = sizeZ / 2;
-		
+
 		if (mazeWidth < 2 || mazeHeight < 2 || sizeY < 1)
 			return;
-		
+
 		int[][] maze = null;
 		MazeGenerator generator = new PerfectMazeGenerator(mazeWidth, mazeHeight);
 		maze = generator.generateMaze();
-		
-		for (int yy = y; yy < sizeY; yy++) {
+
+		for (int yy = y; yy < sizeY; yy++)
 			switch ((yy - y) % 4) {
-			case 0:
-				buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-				buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
-				break;
-			case 1:
-				buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
-				buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
-				buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
-				createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-				addFeature(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, rand);
-				break;
+				case 0:
+					buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+					buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
+					break;
+				case 1:
+					buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
+					buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
+					buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
+					createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+					addFeature(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, rand);
+					break;
 			}
-		}
 		buildCourtyard(world, ModBlocks.templePillar, 0, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
 		createPyramid(world, ModBlocks.templeBrickUnbreaking, 0, true, x + sizeX / 2 + 8, z + sizeZ / 2 + 8, 44, 44, y - 6);
 		decoratePyramid(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
 		addTeleporters(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
 		addCapstones(world, x + sizeX - 1, y + 15, z + sizeZ - 1, ModBlocks.capstone);
 		spawnIdolGuardians(world, x, y, z);
-		//System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
+		// System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
 
 	private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {
@@ -244,8 +195,7 @@ public class AntlionMazeDungeon {
 					}
 
 					if (yy == y + 9)
-						if (xx > x + 9 && xx < x + 34 && zz > z + 9
-								&& zz < z + 34)
+						if (xx > x + 9 && xx < x + 34 && zz > z + 9 && zz < z + 34)
 							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);
 
 					if (yy == y + 10 && !forcefieldSet) {
@@ -273,8 +223,7 @@ public class AntlionMazeDungeon {
 					}
 
 					if (yy == y + 14)
-						if (xx > x + 14 && xx < x + 29 && zz > z + 14
-								&& zz < z + 29)
+						if (xx > x + 14 && xx < x + 29 && zz > z + 14 && zz < z + 29)
 							world.setBlock(xx, yy, zz, ModBlocks.templeBrickUnbreaking, 0, 2);
 
 					if (yy == y + 15 && !topchestSet) {
@@ -326,36 +275,35 @@ public class AntlionMazeDungeon {
 	}
 
 	private void spawnIdolGuardians(World world, int x, int y, int z) {
-		if (!world.isRemote) {
+		if (!world.isRemote)
 			for (byte spawn = 0; spawn < 4; spawn++) {
 				EntityUmberGolemDungeonTypes entityUmberGolem;
 				entityUmberGolem = new EntityUmberGolemDungeonTypes(world);
 				entityUmberGolem.setType(spawn);
 				entityUmberGolem.setHealth(entityUmberGolem.getMaxHealth());
 				switch (spawn) {
-				case 0:
-					entityUmberGolem.setPosition(x + 2.5D, y - 3.0D, z + 2.5D);
-					break;
-				case 1:
-					entityUmberGolem.setPosition(x + 118.5D, y - 3.0D, z + 2.5D);
-					break;
-				case 2:
-					entityUmberGolem.setPosition(x + 118.5D, y - 3.0D, z + 118.5D);
-					break;
-				case 3:
-					entityUmberGolem.setPosition(x + 2.5D, y - 3.0D, z + 118.5D);
-					break;
+					case 0:
+						entityUmberGolem.setPosition(x + 2.5D, y - 3.0D, z + 2.5D);
+						break;
+					case 1:
+						entityUmberGolem.setPosition(x + 118.5D, y - 3.0D, z + 2.5D);
+						break;
+					case 2:
+						entityUmberGolem.setPosition(x + 118.5D, y - 3.0D, z + 118.5D);
+						break;
+					case 3:
+						entityUmberGolem.setPosition(x + 2.5D, y - 3.0D, z + 118.5D);
+						break;
 				}
 				world.spawnEntityInWorld(entityUmberGolem);
 			}
-		}
 	}
 
 	private void buildCourtyard(World world, Block block, int metaData, int x, int y, int z, int baseLengthX, int heightY, int baseLengthZ) {
-		for (int yy = y; yy <= heightY + y; yy++) {
+		for (int yy = y; yy <= heightY + y; yy++)
 			for (int xx = x - baseLengthX / 2; xx < x + baseLengthX / 2; xx++)
-				for (int zz = z - baseLengthZ / 2; zz < z + baseLengthZ / 2; zz++) {
-					if (yy > y) {
+				for (int zz = z - baseLengthZ / 2; zz < z + baseLengthZ / 2; zz++)
+					if (yy > y)
 						if (yy <= y + 4) {
 							if (!world.isAirBlock(xx, yy, zz))
 								world.setBlockToAir(xx, yy, zz);
@@ -380,9 +328,6 @@ public class AntlionMazeDungeon {
 											world.setBlock(x - baseLengthZ / 2 + i, yy, zz, ModBlocks.templeBrick, 0, 2);
 								}
 						}
-					}
-				}
-		}
 	}
 
 	private void buildRoof(World world, int x, int y, int z, int w, int h, Random rand) {
@@ -394,8 +339,8 @@ public class AntlionMazeDungeon {
 
 	private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand) {
 		createPyramid(world, Blocks.air, 0, true, x + 36, z + 36, 48, 48, y + 5);
-		for (int i = 0; i <= h * 4; i++) {
-			for (int j = 0; j <= w * 4; j++) {
+		for (int i = 0; i <= h * 4; i++)
+			for (int j = 0; j <= w * 4; j++)
 				if (rand.nextInt(15) == 0)
 					if (rand.nextBoolean() && rand.nextBoolean())
 						world.setBlock(x + j, y, z + i, Blocks.lava);
@@ -403,30 +348,25 @@ public class AntlionMazeDungeon {
 						world.setBlock(x + j, y, z + i, ModBlocks.gneissVent);
 				else
 					world.setBlock(x + j, y, z + i, solid, 5, 2);
-			}
-		}
 	}
 
 	private void addFeature(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
 		for (int i = 0; i < h; i++) {
-			for (int j = 0; j < w; j++) {
-				if ((maze[j][i] & 1) == 0) {
+			for (int j = 0; j < w; j++)
+				if ((maze[j][i] & 1) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 1 + j * 4, y - 1, z + 1 + i * 4)) {
 						world.setBlock(x + 1 + j * 4, y, z + 1 + i * 4, Blocks.torch, 3, 2);
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
-					} else if (rand.nextInt(10) == 0) {
+					} else if (rand.nextInt(10) == 0)
 						if (rand.nextBoolean())
 							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.antlionSpawner);
 						else
 							world.setBlock(x + 2 + j * 4, y + 2, z + 2 + i * 4, ModBlocks.magmaCrawlerSpawner);
-					}
-				}
-			}
-			for (int j = 0; j < w; j++) {
-				if ((maze[j][i] & 8) == 0) {
+			for (int j = 0; j < w; j++)
+				if ((maze[j][i] & 8) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 1 + j * 4, y - 1, z + 2 + i * 4)) {
 						world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.torch, 1, 2);
 						if (rand.nextInt(4) == 0)
@@ -434,10 +374,8 @@ public class AntlionMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);
 					}
-				}
-			}
-			for (int j = 0; j < w; j++) {
-				if ((maze[j][i] & 4) == 0) {
+			for (int j = 0; j < w; j++)
+				if ((maze[j][i] & 4) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 3 + j * 4, y - 1, z + 2 + i * 4)) {
 						world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.torch, 2, 2);
 						if (rand.nextInt(4) == 0)
@@ -445,10 +383,8 @@ public class AntlionMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 4, rand);
 					}
-				}
-			}
-			for (int j = 0; j < w; j++) {
-				if ((maze[j][i] & 2) == 0) {
+			for (int j = 0; j < w; j++)
+				if ((maze[j][i] & 2) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 2 + j * 4, y - 1, z + 3 + i * 4)) {
 						world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.torch, 4, 2);
 						if (rand.nextInt(4) == 0)
@@ -456,8 +392,6 @@ public class AntlionMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 2, rand);
 					}
-				}
-			}
 		}
 	}
 
@@ -468,7 +402,7 @@ public class AntlionMazeDungeon {
 			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
 	}
 
-   private void placeBones(World world, int x, int y, int z, int directionMeta, Random rand) {
+	private void placeBones(World world, int x, int y, int z, int directionMeta, Random rand) {
 		world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 2);
 		TileEntityBones bones = (TileEntityBones) world.getTileEntity(x, y, z);
 		if (bones != null)
@@ -486,33 +420,29 @@ public class AntlionMazeDungeon {
 	private void buildLevel(World world, int x, int y, int z, int w, int h, int[][] maze, Block blockType, int blockMeta) {
 		for (int i = 0; i < h; i++) {
 			// draw the north edge
-			for (int j = 0; j < w; j++) {
+			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 1) == 0) {
 					world.setBlock(x + j * 4, y, z + i * 4, blockType, blockMeta, 2);
 					world.setBlock(x + j * 4 + 1, y, z + i * 4, blockType, blockMeta, 2);
 					world.setBlock(x + j * 4 + 2, y, z + i * 4, blockType, blockMeta, 2);
 					world.setBlock(x + j * 4 + 3, y, z + i * 4, blockType, blockMeta, 2);
-				} else {
+				} else
 					world.setBlock(x + j * 4, y, z + i * 4, blockType, blockMeta, 2);
-				}
-			}
 			// draw the west edge
-			for (int j = 0; j < w; j++) {
+			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0) {
 					world.setBlock(x + j * 4, y, z + i * 4 + 1, blockType, blockMeta, 2);
 					world.setBlock(x + j * 4, y, z + i * 4 + 2, blockType, blockMeta, 2);
 					world.setBlock(x + j * 4, y, z + i * 4 + 3, blockType, blockMeta, 2);
 				}
-			}
 			world.setBlock(x + w * 4, y, z + i * 4, blockType, blockMeta, 2);
 			world.setBlock(x + w * 4, y, z + i * 4 + 1, blockType, blockMeta, 2);
 			world.setBlock(x + w * 4, y, z + i * 4 + 2, blockType, blockMeta, 2);
 			world.setBlock(x + w * 4, y, z + i * 4 + 3, blockType, blockMeta, 2);
 		}
 		// draw the bottom line
-		for (int j = 0; j <= w * 4; j++) {
+		for (int j = 0; j <= w * 4; j++)
 			world.setBlock(x + j, y, z + h * 4, blockType, blockMeta, 2);
-		}
 	}
 
 	public static void breakForceField(World world, int x, int y, int z) {

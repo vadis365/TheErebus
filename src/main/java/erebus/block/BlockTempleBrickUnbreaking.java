@@ -16,9 +16,7 @@ import erebus.item.Materials;
 
 public class BlockTempleBrickUnbreaking extends Block {
 
-	public static final String[] iconPaths = new String[] { "templeBrick", "templeBrickJade", "templeBrickExo",
-		"templeBrickCream", "templeBrickEye", "templeBrickString", "templeBrickJade1", "templeBrickExo1",
-		"templeBrickCream1", "templeBrickEye1", "templeBrickString1"};
+	public static final String[] iconPaths = new String[] { "templeBrick", "templeBrickJade", "templeBrickExo", "templeBrickCream", "templeBrickEye", "templeBrickString", "templeBrickJade1", "templeBrickExo1", "templeBrickCream1", "templeBrickEye1", "templeBrickString1" };
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -91,7 +89,7 @@ public class BlockTempleBrickUnbreaking extends Block {
 					return true;
 				case 5:
 					if (stack.getItem() == Items.string) {
-						world.setBlockMetadataWithNotify(x, y, z, 10, 3); //meta 10 for forcefield breaking
+						world.setBlockMetadataWithNotify(x, y, z, 10, 3); // meta 10 for forcefield breaking
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;
 					}

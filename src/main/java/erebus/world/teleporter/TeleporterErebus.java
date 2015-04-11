@@ -146,7 +146,7 @@ final class TeleporterErebus extends Teleporter {
 		worldServerInstance.setBlock(x - 1, y, z - 1, Blocks.stonebrick);
 		worldServerInstance.setBlock(x + 1, y, z + 1, Blocks.stonebrick);
 
-		//Layer 2
+		// Layer 2
 		worldServerInstance.setBlock(x - 1, y + 1, z + 1, Blocks.stonebrick);
 		worldServerInstance.setBlock(x + 1, y + 1, z - 1, Blocks.stonebrick);
 		worldServerInstance.setBlock(x - 1, y + 1, z - 1, Blocks.stonebrick);

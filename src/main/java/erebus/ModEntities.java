@@ -137,7 +137,7 @@ public class ModEntities {
 		registerEntity(55, EntityMucusBombPrimed.class, "mucusBombPrimed");
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umberGolemIdol");
 		registerEntity(57, EntityAntlionBoss.class, "antlionBoss", 0x000000, 0xFFFFFF);
-		
+
 		registerEntity(70, EntityWaspDagger.class, "waspDagger");
 		registerEntity(71, EntityWebSling.class, "webSling");
 		registerEntity(72, EntityErebusLightningBolt.class, "erebusLightning");

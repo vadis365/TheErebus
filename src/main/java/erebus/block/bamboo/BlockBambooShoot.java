@@ -28,7 +28,8 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 		double happiness = 0;
 		int bottomY = y;
 
-		while (world.getBlock(x, --bottomY, z) == block);
+		while (world.getBlock(x, --bottomY, z) == block)
+			;
 		bottomY++;
 
 		// CLIMATE
@@ -102,9 +103,7 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 				int meta = world.getBlockMetadata(x, y, z);
 
 				/*
-				 * if
-				 * ((meta&7)<7)world.setBlockMetadataWithNotify(x,y,z,meta+1,4);
-				 * else
+				 * if ((meta&7)<7)world.setBlockMetadataWithNotify(x,y,z,meta+1,4); else
 				 */world.setBlock(x, y, z, ModBlocks.bambooCrop, (meta >= 8 ? 8 : 0) + (int) Math.min(7D, 2D + happiness / 7D + (meta >= 8 ? 0.5D : 0D) + Math.abs((happiness / 10D + (meta >= 8 ? 0.6D : 0D)) * rand.nextGaussian())), 3);
 			}
 		}

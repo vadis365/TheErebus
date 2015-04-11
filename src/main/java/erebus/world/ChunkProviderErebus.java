@@ -53,7 +53,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 	private final MapGenBase caveGenerator;
 	private final MapGenBase ravineGenerator;
-	
+
 	public ChunkProviderErebus(World world, long seed) {
 		worldObj = world;
 
@@ -148,13 +148,13 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 		caveGenerator.func_151539_a(this, worldObj, x, z, blocks);
 		ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
-		
+
 		Chunk chunk = new Chunk(worldObj, blocks, metadata, x, z);
 		byte[] biomeArrayReference = chunk.getBiomeArray();
 
 		for (int a = 0; a < biomeArrayReference.length; ++a)
 			biomeArrayReference[a] = (byte) biomesForGeneration[a].biomeID;
-		
+
 		chunk.generateSkylightMap();
 		chunk.resetRelightChecks();
 		return chunk;
@@ -312,7 +312,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 						}
 					}
 				}
-				if((biome == ModBiomes.volcanicDesert || biome == ModBiomes.desertSubCharredForest) && Math.abs(additionalNoise1[horIndex]) < 1) {
+				if ((biome == ModBiomes.volcanicDesert || biome == ModBiomes.desertSubCharredForest) && Math.abs(additionalNoise1[horIndex]) < 1) {
 					int h = getLowestAirBlock(blocks, preHeightIndex, 25, 32) - 1;
 					if (h > 0) {
 						blocks[preHeightIndex + h] = Blocks.air;

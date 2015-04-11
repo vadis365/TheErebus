@@ -11,14 +11,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelMagmaCrawler extends ModelBase
-{
-    ModelRenderer Thx;
-    ModelRenderer ThxTop;
-    ModelRenderer ThxS;
-    ModelRenderer ThxBottom;
-    ModelRenderer Eyeball;
-    ModelRenderer LBLA;
+public class ModelMagmaCrawler extends ModelBase {
+	ModelRenderer Thx;
+	ModelRenderer ThxTop;
+	ModelRenderer ThxS;
+	ModelRenderer ThxBottom;
+	ModelRenderer Eyeball;
+	ModelRenderer LBLA;
 	ModelRenderer LBLB;
 	ModelRenderer LBLC;
 	ModelRenderer LBLD;
@@ -42,9 +41,9 @@ public class ModelMagmaCrawler extends ModelBase
 	ModelRenderer RBLB;
 	ModelRenderer RBLC;
 	ModelRenderer RBLD;
-    ModelRenderer ThxButt;
-    ModelRenderer ThxFront;
-  
+	ModelRenderer ThxButt;
+	ModelRenderer ThxFront;
+
 	public ModelMagmaCrawler() {
 		textureWidth = 64;
 		textureHeight = 128;
@@ -77,7 +76,7 @@ public class ModelMagmaCrawler extends ModelBase
 		ThxFront.addBox(-2.5F, -2.5F, 0F, 5, 5, 1);
 		ThxFront.setRotationPoint(0F, 17F, -5F);
 		setRotation(ThxFront, 0F, 0F, 0F);
-		
+
 		LBLA = new ModelRenderer(this, 0, 95);
 		LBLA.addBox(0F, -1F, -1F, 4, 2, 2);
 		LBLA.setRotationPoint(4F, 17F, 8F);
@@ -175,7 +174,7 @@ public class ModelMagmaCrawler extends ModelBase
 		RBLD.setRotationPoint(-4F, 17F, 8F);
 		setRotation(RBLD, 0.64F, 0.7F, 1.27F);
 	}
-  
+
 	@Override
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
@@ -187,7 +186,7 @@ public class ModelMagmaCrawler extends ModelBase
 		Eyeball.render(unitPixel);
 		ThxButt.render(unitPixel);
 		ThxFront.render(unitPixel);
-		
+
 		GL11.glPushMatrix();
 		GL11.glTranslated(0F, 0F, -0.2);
 		LBLA.render(unitPixel);
@@ -216,14 +215,13 @@ public class ModelMagmaCrawler extends ModelBase
 		RBLD.render(unitPixel);
 		GL11.glPopMatrix();
 	}
-  
-  private void setRotation(ModelRenderer model, float x, float y, float z)
-  {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
-  }
-  
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		float stuff = MathHelper.cos(limbSwing * 1.5F + (float) Math.PI);

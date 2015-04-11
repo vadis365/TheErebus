@@ -15,10 +15,10 @@ import erebus.ModTabs;
 import erebus.entity.EntityGasVent;
 
 public class BlockGneissVent extends Block {
-	
+
 	@SideOnly(Side.CLIENT)
 	private IIcon topIcon;
-	
+
 	public BlockGneissVent() {
 		super(Material.rock);
 		setHardness(30F);
@@ -39,7 +39,7 @@ public class BlockGneissVent extends Block {
 	public IIcon getIcon(int side, int meta) {
 		return side == 1 ? topIcon : blockIcon;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {

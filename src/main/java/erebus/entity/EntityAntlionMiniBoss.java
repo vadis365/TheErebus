@@ -69,12 +69,12 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	protected String getLivingSound() {
 		return "erebus:antliongrowl";
 	}
-	 
+
 	@Override
 	protected String getHurtSound() {
 		return "erebus:antliongrowl";
 	}
-	
+
 	@Override
 	protected float getSoundPitch() {
 		return super.getSoundPitch() * 1.5F;

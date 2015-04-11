@@ -35,31 +35,31 @@ public class BlockCabbage extends BlockCrops {
 		} else
 			return iconArray[3];
 	}
-	
-    @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = super.getDrops(world, x, y, z, metadata, fortune);
 
-        if (metadata >= 7) {
-            for (int i = 0; i < 1 + fortune; ++i) {
-                if (world.rand.nextInt(15) <= metadata) {
-                    ret.add(new ItemStack(this.func_149866_i(), 1, 0));
-                }
-            }
-            ret.add(new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()));
-        }
-        return ret;
-    }
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+		ArrayList<ItemStack> ret = super.getDrops(world, x, y, z, metadata, fortune);
+
+		if (metadata >= 7) {
+			for (int i = 0; i < 1 + fortune; ++i) {
+				if (world.rand.nextInt(15) <= metadata) {
+					ret.add(new ItemStack(this.func_149866_i(), 1, 0));
+				}
+			}
+			ret.add(new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()));
+		}
+		return ret;
+	}
 
 	@Override
 	protected Item func_149866_i() {
 		return ModItems.cabbageSeeds;
 	}
-	
+
 	@Override
 	protected Item func_149865_P() {
 		return null;
-    }
+	}
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
@@ -77,17 +77,17 @@ public class BlockCabbage extends BlockCrops {
 	}
 
 	@Override
-    public boolean isOpaqueCube() {
-        return false;
-    }
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
 	@Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
 
 	@Override
-    public int getRenderType() {
-        return 1;
-    }
+	public int getRenderType() {
+		return 1;
+	}
 }

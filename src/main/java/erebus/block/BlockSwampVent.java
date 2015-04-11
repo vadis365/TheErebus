@@ -98,8 +98,8 @@ public class BlockSwampVent extends Block {
 			for (int l1 = -1; l1 <= 1; ++l1) {
 				int i2 = world.getBiomeGenForCoords(x + l1, z + k1).getBiomeGrassColor(x + l1, y, z + k1);
 				l += (i2 & 16711680) >> 16;
-			i1 += (i2 & 65280) >> 8;
-			j1 += i2 & 255;
+				i1 += (i2 & 65280) >> 8;
+				j1 += i2 & 255;
 			}
 
 		return (l / 9 & 255) << 16 | (i1 / 9 & 255) << 8 | j1 / 9 & 255;

@@ -19,6 +19,7 @@ import erebus.item.DungeonIdols.IDOL;
 
 public class BlockCapstone extends Block {
 	private IIcon capstoneMud, capstoneMud1, capstoneIron, capstoneIron1, capstoneGold, capstoneGold1, capstoneJade, capstoneJade1;
+
 	public BlockCapstone() {
 		super(Material.rock);
 		setStepSound(Block.soundTypeStone);
@@ -28,7 +29,7 @@ public class BlockCapstone extends Block {
 		setBlockName("erebus.capstone");
 		setBlockTextureName("erebus:capstone");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
@@ -47,29 +48,29 @@ public class BlockCapstone extends Block {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		if (side == 1)
-			switch(meta) {
-			case 0:
-				return blockIcon;
-			case 1:
-				return capstoneMud;
-			case 2:
-				return capstoneIron;
-			case 3:
-				return capstoneGold;
-			case 4:
-				return capstoneJade;
-			case 5:
-				return capstoneMud1;
-			case 6:
-				return capstoneIron1;
-			case 7:
-				return capstoneGold1;
-			case 8:
-				return capstoneJade1;
-			default:
-				return blockIcon;
-		}
-			return blockIcon;
+			switch (meta) {
+				case 0:
+					return blockIcon;
+				case 1:
+					return capstoneMud;
+				case 2:
+					return capstoneIron;
+				case 3:
+					return capstoneGold;
+				case 4:
+					return capstoneJade;
+				case 5:
+					return capstoneMud1;
+				case 6:
+					return capstoneIron1;
+				case 7:
+					return capstoneGold1;
+				case 8:
+					return capstoneJade1;
+				default:
+					return blockIcon;
+			}
+		return blockIcon;
 	}
 
 	@Override
@@ -84,69 +85,69 @@ public class BlockCapstone extends Block {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (stack != null) {
 			switch (meta) {
-			case 0:
-				return true;
-			case 1:
-				if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Mud.ordinal()) {
-					world.setBlockMetadataWithNotify(x, y, z, 5, 3);
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
-			case 2:
-				if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Iron.ordinal()) {
-					world.setBlockMetadataWithNotify(x, y, z, 6, 3);
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
-			case 3:
-				if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Gold.ordinal()) {
-					world.setBlockMetadataWithNotify(x, y, z, 7, 3);
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
-			case 4:
-				if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Jade.ordinal()) {
-					world.setBlockMetadataWithNotify(x, y, z, 8, 3);
-					if (!player.capabilities.isCreativeMode)
-						stack.stackSize--;
-				}
-				return true;
+				case 0:
+					return true;
+				case 1:
+					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Mud.ordinal()) {
+						world.setBlockMetadataWithNotify(x, y, z, 5, 3);
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
+				case 2:
+					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Iron.ordinal()) {
+						world.setBlockMetadataWithNotify(x, y, z, 6, 3);
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
+				case 3:
+					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Gold.ordinal()) {
+						world.setBlockMetadataWithNotify(x, y, z, 7, 3);
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
+				case 4:
+					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Jade.ordinal()) {
+						world.setBlockMetadataWithNotify(x, y, z, 8, 3);
+						if (!player.capabilities.isCreativeMode)
+							stack.stackSize--;
+					}
+					return true;
 			}
 		}
 		return true;
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (meta == 5)
-			if(world.getBlockMetadata(x + 1, y, z) == 6)
-				if(world.getBlockMetadata(x, y, z + 1) == 7)
-					if(world.getBlockMetadata(x + 1, y, z + 1) == 8)
+			if (world.getBlockMetadata(x + 1, y, z) == 6)
+				if (world.getBlockMetadata(x, y, z + 1) == 7)
+					if (world.getBlockMetadata(x + 1, y, z + 1) == 8)
 						openPyramid(world, x, y, z, 1, 1);
 		if (meta == 6)
-			if(world.getBlockMetadata(x - 1, y, z) == 5)
-				if(world.getBlockMetadata(x, y, z + 1) == 8)
-					if(world.getBlockMetadata(x - 1, y, z + 1) == 7)
-						openPyramid(world, x, y, z, - 1, 1);
-		
+			if (world.getBlockMetadata(x - 1, y, z) == 5)
+				if (world.getBlockMetadata(x, y, z + 1) == 8)
+					if (world.getBlockMetadata(x - 1, y, z + 1) == 7)
+						openPyramid(world, x, y, z, -1, 1);
+
 		if (meta == 7)
-			if(world.getBlockMetadata(x + 1, y, z) == 8)
-				if(world.getBlockMetadata(x, y, z - 1) == 5)
-					if(world.getBlockMetadata(x + 1, y, z - 1) == 6)
-						openPyramid(world, x, y, z, 1, - 1);
-		
+			if (world.getBlockMetadata(x + 1, y, z) == 8)
+				if (world.getBlockMetadata(x, y, z - 1) == 5)
+					if (world.getBlockMetadata(x + 1, y, z - 1) == 6)
+						openPyramid(world, x, y, z, 1, -1);
+
 		if (meta == 8)
-			if(world.getBlockMetadata(x - 1, y, z) == 7)
-				if(world.getBlockMetadata(x, y, z - 1) == 6)
-					if(world.getBlockMetadata(x - 1, y, z - 1) == 5)
-						openPyramid(world, x, y, z, - 1, - 1);
+			if (world.getBlockMetadata(x - 1, y, z) == 7)
+				if (world.getBlockMetadata(x, y, z - 1) == 6)
+					if (world.getBlockMetadata(x - 1, y, z - 1) == 5)
+						openPyramid(world, x, y, z, -1, -1);
 	}
 
-	private void openPyramid(World world, int x, int y, int z, int offsetX, int offsetZ ) {
+	private void openPyramid(World world, int x, int y, int z, int offsetX, int offsetZ) {
 		EntityErebusLightningBolt entitybolt = new EntityErebusLightningBolt(world, 0D, 0D, 0D);
 		entitybolt.setLocationAndAngles(x + offsetX, y, z + offsetZ, 0F, 0F);
 		world.addWeatherEffect(entitybolt);

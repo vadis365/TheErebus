@@ -27,7 +27,8 @@ public class WorldGenPonds extends WorldGenerator {
 		x -= 8;
 		z -= 8;
 
-		for (; y > 30 && world.isAirBlock(x, y, z); --y);
+		for (; y > 30 && world.isAirBlock(x, y, z); --y)
+			;
 
 		if (y <= 29 || world.isAirBlock(x, y, z))
 			return false;

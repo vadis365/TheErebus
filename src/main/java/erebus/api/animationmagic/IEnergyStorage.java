@@ -22,8 +22,7 @@ public interface IEnergyStorage {
 	public int getCurrentStorage(ItemStack stack, EnergyType type);
 
 	/**
-	 * Adds a certain amount of energy of the specified type to this item's
-	 * internal storage
+	 * Adds a certain amount of energy of the specified type to this item's internal storage
 	 *
 	 * @param stack
 	 * @param type
@@ -33,8 +32,7 @@ public interface IEnergyStorage {
 	public int addEnergy(ItemStack stack, EnergyType type, int amount);
 
 	/**
-	 * Removes a certain amount of energy of the specified type of this item's
-	 * internal storage
+	 * Removes a certain amount of energy of the specified type of this item's internal storage
 	 *
 	 * @param stack
 	 * @param type

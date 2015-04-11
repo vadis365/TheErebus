@@ -10,7 +10,7 @@ import erebus.network.client.PacketBones;
 
 public class TileEntityBones extends TileEntityBasicInventory {
 
-	private String owner = ""; //could be expanded to contain random names
+	private String owner = ""; // could be expanded to contain random names
 
 	public TileEntityBones() {
 		super(40, "container.bones");

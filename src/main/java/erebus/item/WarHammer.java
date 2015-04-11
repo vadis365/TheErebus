@@ -40,15 +40,15 @@ public class WarHammer extends ItemSword {
 		is.damageItem(1, player);
 		return true;
 	}
-	
+
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
-			if (!stack.hasTagCompound())
-				stack.stackTagCompound = new NBTTagCompound();
-			if(!stack.getTagCompound().hasKey("charge"))
-				stack.getTagCompound().setInteger("charge", 0);
+		if (!stack.hasTagCompound())
+			stack.stackTagCompound = new NBTTagCompound();
+		if (!stack.getTagCompound().hasKey("charge"))
+			stack.getTagCompound().setInteger("charge", 0);
 	}
-	
+
 	@Override
 	public int getMaxItemUseDuration(ItemStack is) {
 		return 1000;
@@ -62,15 +62,15 @@ public class WarHammer extends ItemSword {
 			stack.getTagCompound().setInteger("charge", 25);
 		return stack;
 	}
-	
+
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!stack.hasTagCompound()) {
 			stack.stackTagCompound = new NBTTagCompound();
 			return false;
 		}
-		if(side == 1 && player.isSneaking()) {
-			if(stack.getTagCompound().getInteger("charge") > 0) {
+		if (side == 1 && player.isSneaking()) {
+			if (stack.getTagCompound().getInteger("charge") > 0) {
 				PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM));
 				world.playSoundAtEntity(player, "erebus:antlionslam", 1.0F, 1.0F);
 			}
@@ -80,18 +80,18 @@ public class WarHammer extends ItemSword {
 		}
 		return false;
 	}
-	
+
 	protected Entity areaOfEffect(World world, ItemStack stack, EntityPlayer player) {
-		List list = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(player.boundingBox.minX, player.boundingBox.minY, player.boundingBox.minZ, player.boundingBox.maxX, player.boundingBox.maxY, player.boundingBox.maxZ).expand(stack.getTagCompound().getInteger("charge")* 0.25D, 1D, stack.getTagCompound().getInteger("charge")* 0.25D));
-			for (int i = 0; i < list.size(); i++) {
-				Entity entity = (Entity) list.get(i);
-				if (entity != null)
-					if (entity instanceof EntityLivingBase && entity != player){
-						float Knockback = (float) (stack.getTagCompound().getInteger("charge")* 0.025D);
-						entity.attackEntityFrom(DamageSource.causeMobDamage(player), stack.getTagCompound().getInteger("charge")* 0.25F);
-						entity.addVelocity(-MathHelper.sin(player.rotationYaw * -3.141593F + (float)world.rand.nextInt(3) + 0.141593F / 180.0F)* Knockback, 0.01D, MathHelper.cos(player.rotationYaw * -3.141593F + (float)world.rand.nextInt(3)+0.141593F / 180.0F)* Knockback);
-					}
-			}	
+		List<?> list = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(player.boundingBox.minX, player.boundingBox.minY, player.boundingBox.minZ, player.boundingBox.maxX, player.boundingBox.maxY, player.boundingBox.maxZ).expand(stack.getTagCompound().getInteger("charge") * 0.25D, 1D, stack.getTagCompound().getInteger("charge") * 0.25D));
+		for (int i = 0; i < list.size(); i++) {
+			Entity entity = (Entity) list.get(i);
+			if (entity != null)
+				if (entity instanceof EntityLivingBase && entity != player) {
+					float Knockback = (float) (stack.getTagCompound().getInteger("charge") * 0.025D);
+					entity.attackEntityFrom(DamageSource.causeMobDamage(player), stack.getTagCompound().getInteger("charge") * 0.25F);
+					entity.addVelocity(-MathHelper.sin(player.rotationYaw * -3.141593F + world.rand.nextInt(3) + 0.141593F / 180.0F) * Knockback, 0.01D, MathHelper.cos(player.rotationYaw * -3.141593F + world.rand.nextInt(3) + 0.141593F / 180.0F) * Knockback);
+				}
+		}
 		return null;
 	}
 }

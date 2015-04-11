@@ -33,9 +33,7 @@ public class EntityPunchroom extends EntityMob {
 
 	/*
 	 * @Override protected String getLivingSound() { return ""; }
-	 *
 	 * @Override protected String getHurtSound() { return ""; }
-	 *
 	 * @Override protected String getDeathSound() { return ""; }
 	 */
 

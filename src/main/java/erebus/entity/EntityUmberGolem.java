@@ -73,9 +73,7 @@ public class EntityUmberGolem extends EntityCreature {
 	}
 
 	/*
-	 * protected String getLivingSound() { return "erebus:umbergolemsound"; }
-	 *
-	 * protected String getHurtSound() { return "erebus:umbergolemhurt"; }
+	 * protected String getLivingSound() { return "erebus:umbergolemsound"; } protected String getHurtSound() { return "erebus:umbergolemhurt"; }
 	 */
 
 	@Override

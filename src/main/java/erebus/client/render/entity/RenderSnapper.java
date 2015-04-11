@@ -30,38 +30,38 @@ public class RenderSnapper extends RenderLiving {
 			float x = 0;
 			float y = 0;
 			switch (facing) {
-			case 0:
-				x = -1;
-				y = 0;
-				break;
-			case 1:
-				x = -1;
-				y = 1;
-				break;
-			case 2:
-				x = 0;
-				y = 1;
-				break;
-			case 3:
-				x = 1;
-				y = 1;
-				break;
-			case 4:
-				x = 1;
-				y = 0;
-				break;
-			case 5:
-				x = 1;
-				y = -1;
-				break;
-			case 6:
-				x = 0;
-				y = -1;
-				break;
-			case 7:
-				x = -1;
-				y = -1;
-				break;
+				case 0:
+					x = -1;
+					y = 0;
+					break;
+				case 1:
+					x = -1;
+					y = 1;
+					break;
+				case 2:
+					x = 0;
+					y = 1;
+					break;
+				case 3:
+					x = 1;
+					y = 1;
+					break;
+				case 4:
+					x = 1;
+					y = 0;
+					break;
+				case 5:
+					x = 1;
+					y = -1;
+					break;
+				case 6:
+					x = 0;
+					y = -1;
+					break;
+				case 7:
+					x = -1;
+					y = -1;
+					break;
 			}
 			GL11.glRotatef(45F, x, 0, y);
 		}

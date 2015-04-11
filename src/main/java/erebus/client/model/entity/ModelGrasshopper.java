@@ -183,7 +183,8 @@ public class ModelGrasshopper extends ModelBase {
 		setRotation(LBL1, -0.5235988F, 0F, 0F);
 		LBL2 = new ModelRenderer(this, 0, 24);
 		LBL2.addBox(1F, -10F, -1F, 2, 6, 3);
-		LBL2.setRotationPoint(2F, 18F, 3F);;
+		LBL2.setRotationPoint(2F, 18F, 3F);
+		;
 		setRotation(LBL2, -0.5235988F, 0F, 0F);
 		LBL3 = new ModelRenderer(this, 9, 8);
 		LBL3.addBox(0.5F, -13F, -1.5F, 3, 3, 4);

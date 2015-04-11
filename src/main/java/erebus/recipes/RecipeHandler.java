@@ -128,7 +128,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGlider), "GXG", 'G', Materials.createStack(Materials.DATA.gliderWing), 'X', new ItemStack(ModItems.reinExoskeletonBody, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.armorGliderPowered), "W W", "ECE", " V ", 'W', Materials.createStack(Materials.DATA.enhancedGliderWing), 'E', Materials.createStack(Materials.DATA.elasticFibre), 'C', new ItemStack(ModItems.armorGlider, 1), 'V', new ItemStack(ModBlocks.velocityBlock, 1));
 		GameRegistry.addRecipe(new ItemStack(ModItems.waterStriders), "WWW", "WXW", "WWW", 'W', Materials.createStack(Materials.DATA.waterRepellent), 'X', new ItemStack(ModItems.reinExoskeletonBoots, 1));
-		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonHelmet),  "h h", "sss", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino), 'h', Materials.createStack(Materials.DATA.rhinoBeetleHorn));
+		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonHelmet), "h h", "sss", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino), 'h', Materials.createStack(Materials.DATA.rhinoBeetleHorn));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBody), "s s", "sss", "sss", 's', Materials.createStack(Materials.DATA.plateExoRhino));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonLegs), "sss", "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino));
 		GameRegistry.addRecipe(new ItemStack(ModItems.rhinoExoskeletonBoots), "s s", "s s", 's', Materials.createStack(Materials.DATA.plateExoRhino));
@@ -237,12 +237,12 @@ public class RecipeHandler {
 		GameRegistry.addShapelessRecipe(Materials.createStack(Materials.DATA.stewPot), Items.cauldron);
 		GameRegistry.addRecipe(new ShapelessOreRecipe(Materials.createStack(Materials.DATA.titanStew), Materials.createStack(Materials.DATA.stewPot), new ItemStack(ModItems.food, 1, Food.FoodType.titanChop.ordinal()), Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(Materials.createStack(Materials.DATA.titanStew), Materials.createStack(Materials.DATA.stewPot), Items.beef, Items.beef, Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom"));
-		
+
 		// Smoothies
-		//Have to figure this out...
+		// Have to figure this out...
 		GameRegistry.addShapelessRecipe(Materials.createStack(Materials.DATA.smoothieGlass), Items.glass_bottle, Items.glass_bottle, Items.glass_bottle);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.smoothieMaker), "xrx", "xxx", "sss", 'x', Materials.createStack(Materials.DATA.smoothieGlass), 'r', new ItemStack(ModBlocks.redGem), 's', new ItemStack(ModBlocks.umberstone));
-		
+
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bambucketAntiVenom), ModItems.bambucketBeetleJuice, Materials.createStack(Materials.DATA.poisonGland), Materials.createStack(Materials.DATA.nettleleaves), Materials.createStack(Materials.DATA.nettleleaves));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), ModItems.bucketAntiVenom, Items.glass_bottle, Items.glass_bottle);
@@ -285,7 +285,7 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ShapedOreRecipe(DungeonIdols.createStack(IDOL.IronUmbergolem), "XXX", "XUX", "XXX", 'X', Blocks.iron_block, 'U', ModBlocks.umberGolemStatue));
 		GameRegistry.addRecipe(new ShapedOreRecipe(DungeonIdols.createStack(IDOL.GoldUmbergolem), "XXX", "XUX", "XXX", 'X', Blocks.gold_block, 'U', ModBlocks.umberGolemStatue));
 		GameRegistry.addRecipe(new ShapedOreRecipe(DungeonIdols.createStack(IDOL.JadeUmbergolem), "XXX", "XUX", "XXX", 'X', ModBlocks.jadeBlock, 'U', ModBlocks.umberGolemStatue));
-		
+
 		// Animation Magic
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ModItems.soulCrystal, 'z', "stickWood"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood"));
@@ -312,7 +312,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.orePetrifiedWood), Materials.createStack(Materials.DATA.petrifiedWood), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreEncrustedDiamond), new ItemStack(ModItems.encrustedDiamond), 1.0F);
 		GameRegistry.addSmelting(Materials.createStack(Materials.DATA.titanStew), new ItemStack(ModItems.food, 1, Food.FoodType.titanStewCooked.ordinal()), 1.0F);
-		
+
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), Materials.createStack(Materials.DATA.mudBrick), 0.2F);
 		GameRegistry.addSmelting(Materials.createStack(Materials.DATA.nectar), Materials.createStack(Materials.DATA.honeyDrip), 0.2F);
 		if (ConfigHandler.INSTANCE.lead)
@@ -378,7 +378,7 @@ public class RecipeHandler {
 		OreDictionary.registerOre("dyeMagenta", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.MAGENTA_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.WHITE_PETAL.ordinal()));
-		
+
 		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.bulbCapped));
 		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.kaizerfinger));
 		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.bundleshroom));

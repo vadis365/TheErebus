@@ -28,8 +28,8 @@ public class ModelRhinoHelm extends ModelBiped {
 	ModelRenderer lTopPlate;
 	ModelRenderer rEarCup;
 	ModelRenderer lEarCup;
-    ModelRenderer facePlate1;
-    ModelRenderer facePlate2;
+	ModelRenderer facePlate1;
+	ModelRenderer facePlate2;
 
 	public ModelRhinoHelm() {
 		textureWidth = 64;
@@ -137,5 +137,3 @@ public class ModelRhinoHelm extends ModelBiped {
 		helmFront.rotateAngleX = bipedHead.rotateAngleX;
 	}
 }
-
-

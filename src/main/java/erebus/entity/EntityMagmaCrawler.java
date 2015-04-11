@@ -15,7 +15,7 @@ import erebus.item.Materials;
 public class EntityMagmaCrawler extends EntityMob {
 	private int shouldDo;
 	public boolean upAbove;
-	
+
 	public EntityMagmaCrawler(World world) {
 		super(world);
 		isImmuneToFire = true;
@@ -61,44 +61,44 @@ public class EntityMagmaCrawler extends EntityMob {
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		entityDropItem(Materials.createStack(Materials.DATA.magmaCrawlerEye, 1), 0.0F);
 	}
-	
+
 	public boolean isOnCeiling() {
-		return upAbove && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY+1.5), MathHelper.floor_double(posZ))==ModBlocks.gneiss && worldObj.isAirBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY-0.5), MathHelper.floor_double(posZ));	
+		return upAbove && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ)) == ModBlocks.gneiss && worldObj.isAirBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY - 0.5), MathHelper.floor_double(posZ));
 	}
 
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 5;
 	}
-	
+
 	@Override
 	protected void fall(float par1) {
 	}
-	
+
 	@Override
 	public boolean getCanSpawnHere() {
 		return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox) && worldObj.isAirBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 1, MathHelper.floor_double(posZ)) == ModBlocks.gneiss;
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if (!worldObj.isRemote) {
 			if (upAbove && worldObj.isAirBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 1, MathHelper.floor_double(posZ)) && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 2, MathHelper.floor_double(posZ)) == ModBlocks.gneiss) {
 				motionY += 0.1D;
-					if (getEntityToAttack() != null && upAbove) {
-						double distance = getDistance(getEntityToAttack().posX, getEntityToAttack().boundingBox.maxY, getEntityToAttack().posZ);
-						if (distance < 2.0D) {
-							motionY += 0D;
-							upAbove = false;
-						}
+				if (getEntityToAttack() != null && upAbove) {
+					double distance = getDistance(getEntityToAttack().posX, getEntityToAttack().boundingBox.maxY, getEntityToAttack().posZ);
+					if (distance < 2.0D) {
+						motionY += 0D;
+						upAbove = false;
 					}
+				}
 			}
-			if(onGround && upAbove || isCollidedHorizontally && upAbove || getHealth() < getMaxHealth() && upAbove)
+			if (onGround && upAbove || isCollidedHorizontally && upAbove || getHealth() < getMaxHealth() && upAbove)
 				upAbove = false;
 		}
 	}
-	
+
 	@Override
 	public void onLivingUpdate() {
 		if (!worldObj.isRemote && upAbove) {
@@ -131,8 +131,7 @@ public class EntityMagmaCrawler extends EntityMob {
 				motionZ = d1 / f2 * 0.5D * 0.900000011920929D + motionZ * 0.70000000298023224D;
 				motionY = 0.3000000059604645D;
 			}
-		}
-		else if (distance >= 5.0F & distance <= 16.0F) {
+		} else if (distance >= 5.0F & distance <= 16.0F) {
 			double distanceX = entity.posX - posX;
 			double distanceY = entity.boundingBox.minY + entity.height / 2.0F - (posY + height / 2.0F);
 			double distanceZ = entity.posZ - posZ;

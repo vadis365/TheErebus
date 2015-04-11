@@ -68,17 +68,17 @@ public class EntityAntlion extends EntityMob {
 	protected String getLivingSound() {
 		return "erebus:antliongrowl";
 	}
-	 
+
 	@Override
 	protected String getHurtSound() {
 		return "erebus:antliongrowl";
 	}
-	
+
 	@Override
 	protected float getSoundPitch() {
 		return super.getSoundPitch() * 2F;
 	}
-	
+
 	@Override
 	protected String getDeathSound() {
 		return "erebus:squish";
@@ -104,7 +104,7 @@ public class EntityAntlion extends EntityMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		return isOnSand() && super.getCanSpawnHere() || isOnGneiss() && super.getCanSpawnHere()  || isOnSpawner() && super.getCanSpawnHere();
+		return isOnSand() && super.getCanSpawnHere() || isOnGneiss() && super.getCanSpawnHere() || isOnSpawner() && super.getCanSpawnHere();
 	}
 
 	public boolean isOnSpawner() {
@@ -114,7 +114,7 @@ public class EntityAntlion extends EntityMob {
 	public boolean isOnSand() {
 		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == Blocks.sand;
 	}
-	
+
 	public boolean isOnGneiss() {
 		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == ModBlocks.gneiss;
 	}

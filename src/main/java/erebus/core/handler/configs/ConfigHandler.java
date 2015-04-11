@@ -38,18 +38,7 @@ public class ConfigHandler {
 		ModBiomes.fieldsSubForestID = config.get("Biomes", "Fields - Forest", 127).getInt(127);
 		ModBiomes.submergedSwampID = config.get("Biomes", "Submerged Swamp", 106).getInt(106);
 		/*
-		 * ModBiomes.jungleSubLakeID = config.get("Biomes",
-		 * "Biome ID of Underground Jungle - Lake", 161).getInt(161);
-		 * ModBiomes.jungleSubAsperGroveID = config.get("Biomes",
-		 * "Biome ID of Underground Jungle - Asper Grove", 162).getInt(162);
-		 * ModBiomes.desertSubCharredForestID = config.get("Biomes",
-		 * "Biome ID of Volcanic Desert - Charred Forest", 163).getInt(163);
-		 * ModBiomes.savannahSubRockyWastelandID = config.get("Biomes",
-		 * "Biome ID of Savannah - Rocky Wasteland", 164).getInt(164);
-		 * ModBiomes.savannahSubAsperGroveID = config.get("Biomes",
-		 * "Biome ID of Savannah - Asper Grove", 165).getInt(165);
-		 * ModBiomes.savannahSubSteppeID = config.get("Biomes",
-		 * "Biome ID of Savannah - Steppe", 166).getInt(166);
+		 * ModBiomes.jungleSubLakeID = config.get("Biomes", "Biome ID of Underground Jungle - Lake", 161).getInt(161); ModBiomes.jungleSubAsperGroveID = config.get("Biomes", "Biome ID of Underground Jungle - Asper Grove", 162).getInt(162); ModBiomes.desertSubCharredForestID = config.get("Biomes", "Biome ID of Volcanic Desert - Charred Forest", 163).getInt(163); ModBiomes.savannahSubRockyWastelandID = config.get("Biomes", "Biome ID of Savannah - Rocky Wasteland", 164).getInt(164); ModBiomes.savannahSubAsperGroveID = config.get("Biomes", "Biome ID of Savannah - Asper Grove", 165).getInt(165); ModBiomes.savannahSubSteppeID = config.get("Biomes", "Biome ID of Savannah - Steppe", 166).getInt(166);
 		 */
 
 		erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);

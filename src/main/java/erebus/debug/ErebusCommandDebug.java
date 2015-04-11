@@ -67,11 +67,7 @@ public class ErebusCommandDebug extends CommandBase {
 			}
 		else if (params[0].equals("debug")) {
 			/*
-			 * Use this with hot code replace whenever there's something to
-			 * debug and you want to print stuff out on command. Whoever comes
-			 * here and needs this - if you think the current code will be
-			 * useful another time, add a new command for it. If not, just
-			 * delete it, no hard feelings.
+			 * Use this with hot code replace whenever there's something to debug and you want to print stuff out on command. Whoever comes here and needs this - if you think the current code will be useful another time, add a new command for it. If not, just delete it, no hard feelings.
 			 */
 			String response = "";
 

@@ -206,13 +206,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 		@Override
 		protected void populate() {
 			/*
-			 * if (rand.nextInt(4) == 0){ for(attempt = 0; attempt < 45;
-			 * attempt++){ xx = x + 16; yy = rand.nextInt(120); zz = z + 16;
-			 *
-			 * if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){
-			 * genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D);
-			 * genPonds.generate(world,rand,xx,yy,zz); if (rand.nextBoolean()){
-			 * break; } } } }
+			 * if (rand.nextInt(4) == 0){ for(attempt = 0; attempt < 45; attempt++){ xx = x + 16; yy = rand.nextInt(120); zz = z + 16; if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){ genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D); genPonds.generate(world,rand,xx,yy,zz); if (rand.nextBoolean()){ break; } } } }
 			 */
 
 			super.populate();

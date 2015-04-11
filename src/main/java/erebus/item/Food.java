@@ -277,13 +277,13 @@ public class Food extends ItemFood {
 	}
 
 	@Override
-    public int getItemStackLimit(ItemStack stack) {
-		//could be made item specific I suppose
-        if(!hasContainerItem(stack))
-        	return 64;
-        else
-        	return 1;
-    }
+	public int getItemStackLimit(ItemStack stack) {
+		// could be made item specific I suppose
+		if (!hasContainerItem(stack))
+			return 64;
+		else
+			return 1;
+	}
 
 	@Override
 	public String getPotionEffect(ItemStack stack) {

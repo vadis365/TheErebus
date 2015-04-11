@@ -53,7 +53,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 
 	@Override
 	public void decorate() {
-		//Water
+		// Water
 		for (int attempt = 0; attempt < 5; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
@@ -70,14 +70,13 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			genReed.generate(world, rand, xx, yy, zz);
 		}
 
-		for (attempt = 0; attempt < 30; attempt++)
-		{
+		for (attempt = 0; attempt < 30; attempt++) {
 			xx = x + offsetXZ();
 			yy = ChunkProviderErebus.swampWaterHeight - 4;
 			zz = z + offsetXZ();
 			genVines.generate(world, rand, xx, yy, zz);
 		}
-		
+
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = ChunkProviderErebus.swampWaterHeight + rand.nextInt(36 - ChunkProviderErebus.swampWaterHeight);
@@ -87,7 +86,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				genMossPatch.generate(world, rand, xx, yy, zz);
 		}
 
-		//Ground
+		// Ground
 		for (attempt = 0; attempt < 600; attempt++) {
 			xx = x + rand.nextInt(5) + 12;
 			yy = 15 + rand.nextInt(90);
@@ -217,7 +216,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 				genQuickSand.generate(world, rand, xx, yy, zz);
 		}
-		
+
 		for (attempt = 0; attempt < 40; attempt++) {
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;

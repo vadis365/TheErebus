@@ -68,7 +68,7 @@ public class ModelWaspSword extends ModelBase {
 		setRotation(DecL4, 0F, 0F, 0F);
 		DecL3 = new ModelRenderer(this, 25, 24);
 		DecL3.addBox(15.5F, -20F, -1F, 1, 4, 2);
-		DecL3.setRotationPoint(0F, 24F, 0F);;
+		DecL3.setRotationPoint(0F, 24F, 0F);
 		setRotation(DecL3, 0F, 0F, -0.5235988F);
 		DecL1 = new ModelRenderer(this, 27, 52);
 		DecL1.addBox(3F, -18F, -0.5F, 1, 2, 1);

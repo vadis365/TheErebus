@@ -16,7 +16,7 @@ public class EntityGasVent extends EntityLiving {
 		super(world);
 		setSize(0.5F, 2.5F);
 	}
-	
+
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -47,7 +47,7 @@ public class EntityGasVent extends EntityLiving {
 		setDead();
 		super.collideWithEntity(entity);
 	}
-	
+
 	public void setFlameType(byte type) {
 		dataWatcher.updateObject(16, Byte.valueOf(type));
 	}
@@ -67,15 +67,14 @@ public class EntityGasVent extends EntityLiving {
 			double d5 = posX + 0.5F;
 			double d6 = yy + 0.25F;
 			double d7 = posZ + 0.5F;
-			
-			if(getFlameType() == 0) {
+
+			if (getFlameType() == 0) {
 				Erebus.proxy.spawnCustomParticle("swampflame", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
 				Erebus.proxy.spawnCustomParticle("swampflame", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
 				Erebus.proxy.spawnCustomParticle("swampflame", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
 				Erebus.proxy.spawnCustomParticle("swampflame", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
 				Erebus.proxy.spawnCustomParticle("swampflame", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
-			}
-			else {
+			} else {
 				Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
 				Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
 				Erebus.proxy.spawnCustomParticle("flame", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);

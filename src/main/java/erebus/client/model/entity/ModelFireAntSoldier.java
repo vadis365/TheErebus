@@ -131,7 +131,8 @@ public class ModelFireAntSoldier extends ModelBase {
 		setRotation(AntLS, -1.0F, 0F, 0.1745329F);
 		AntLE = new ModelRenderer(this, 0, 21);
 		AntLE.addBox(7.5F, 5.5F, -3F, 1, 4, 1);
-		AntLE.setRotationPoint(0F, 16F, -1F);;
+		AntLE.setRotationPoint(0F, 16F, -1F);
+		;
 		setRotation(AntLE, -1.0F, 0F, 0.1745329F);
 		AntRS = new ModelRenderer(this, 0, 27);
 		AntRS.addBox(-7.5F, 4.5F, -3F, 3, 1, 1);
