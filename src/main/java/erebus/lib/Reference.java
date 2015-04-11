@@ -4,7 +4,7 @@ public class Reference {
 
 	public static final String MOD_ID = "erebus";
 	public static final String MOD_NAME = "Erebus";
-	public static final String MOD_VERSION = "0.2a";
+	public static final String MOD_VERSION = "0.2b";
 	public static final String DEPENDENCIES = "required-after:Forge@[10.13.3.1360,);";
 	public static final String SP_CLIENT = "erebus.core.proxy.ClientProxy";
 	public static final String SP_SERVER = "erebus.core.proxy.CommonProxy";
