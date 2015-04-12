@@ -42,11 +42,6 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 		antiVenomTank.setFluid(new FluidStack(ModFluids.antiVenom, 0));
 	}
 
-	@Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
-
 	public int getBlendProgress() {
 		return time / 12;
 	}
@@ -105,25 +100,10 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 
-		NBTTagCompound honeyTag = new NBTTagCompound();
-		NBTTagCompound milkTag = new NBTTagCompound();
-		NBTTagCompound beetleTag = new NBTTagCompound();
-		NBTTagCompound antiVenomTag = new NBTTagCompound();
-
-		honeyTank.writeToNBT(honeyTag);
-		milkTank.writeToNBT(milkTag);
-		beetleTank.writeToNBT(beetleTag);
-		antiVenomTank.writeToNBT(antiVenomTag);
-
-		nbt.setTag("honeyTank", honeyTag);
-		nbt.setTag("milkTank", milkTag);
-		nbt.setTag("beetleTank", beetleTag);
-		nbt.setTag("antiVenomTank", antiVenomTag);
-	}
-
-	@Override
-	public boolean canUpdate() {
-		return true;
+		nbt.setTag("honeyTank", honeyTank.writeToNBT(new NBTTagCompound()));
+		nbt.setTag("milkTank", milkTank.writeToNBT(new NBTTagCompound()));
+		nbt.setTag("beetleTank", beetleTank.writeToNBT(new NBTTagCompound()));
+		nbt.setTag("antiVenomTank", antiVenomTank.writeToNBT(new NBTTagCompound()));
 	}
 
 	@Override
@@ -277,7 +257,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	private void extractFluid(ItemStack output) {
 		switch (SmoothieType.values()[output.getItemDamage()]) {
-		// Tanks below can be any of the 4.
+			// Tanks below can be any of the 4.
 			case greenTeaGrasshopper:
 				beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 				break;
@@ -318,7 +298,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	private boolean canExtractFluid(ItemStack output) {
 		switch (SmoothieType.values()[output.getItemDamage()]) {
-		// These tanks have to match the extract tanks.
+			// These tanks have to match the extract tanks.
 			case greenTeaGrasshopper:
 				if (getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 					return true;
@@ -389,5 +369,4 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		return null;
 	}
-
 }
