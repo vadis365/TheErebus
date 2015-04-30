@@ -201,7 +201,7 @@ public class Food extends ItemFood {
 				world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 				break;
 			case titanStewCooked:
-				is = (Materials.createStack(DATA.stewPot));
+				is = Materials.createStack(DATA.stewPot);
 				break;
 			default:
 				return is;
@@ -257,7 +257,7 @@ public class Food extends ItemFood {
 			case melonadeSparkly:
 				return new ItemStack(Items.glass_bottle);
 			case titanStewCooked:
-				return (Materials.createStack(DATA.stewPot));
+				return Materials.createStack(DATA.stewPot);
 			default:
 				return null;
 		}
@@ -287,7 +287,7 @@ public class Food extends ItemFood {
 
 	@Override
 	public String getPotionEffect(ItemStack stack) {
-		return "+0+1-2+3&4-4+13";
+		return stack != null && stack.getItemDamage() == FoodType.grasshopperLegRaw.ordinal() ? "+0+1-2+3&4-4+13" : super.getPotionEffect(stack);
 	}
 
 	@Override
