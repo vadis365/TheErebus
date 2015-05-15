@@ -183,9 +183,9 @@ public class RecipeHandler {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.mirBrick, 4), "xy", "yx", 'y', Blocks.clay, 'x', ModBlocks.mudBricks);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockSilk, 1), "sss", "sss", "sss", 's', Items.string);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.amber, 4, 2), "ss", "ss", 's', new ItemStack(ModBlocks.amber, 1, 0));
-		GameRegistry.addRecipe(new ItemStack(Items.string, 9), "#", '#', new ItemStack(ModBlocks.blockSilk));
-		GameRegistry.addRecipe(new ItemStack(Items.dye, 1, 15), "#", '#', Materials.createStack(Materials.DATA.shardBone));
-		GameRegistry.addRecipe(new ItemStack(Items.dye, 6, 15), "#", '#', new ItemStack(ModItems.fossilClub, 1, 0));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.string, 9), new ItemStack(ModBlocks.blockSilk));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 1, 15), Materials.createStack(Materials.DATA.shardBone));
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 6, 15),  new ItemStack(ModItems.fossilClub, 1, 0));
 		GameRegistry.addRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', new ItemStack(Items.feather, 1, 0), 'S', new ItemStack(Items.stick, 1, 0), 'T', Materials.createStack(Materials.DATA.shardBone));
 		GameRegistry.addRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', Materials.createStack(Materials.DATA.flyWing), 'S', new ItemStack(Items.stick, 1, 0), 'T', Materials.createStack(Materials.DATA.shardBone));
 		GameRegistry.addRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', Materials.createStack(Materials.DATA.flyWing), 'S', new ItemStack(Items.stick, 1, 0), 'T', new ItemStack(Items.flint, 1, 0));
