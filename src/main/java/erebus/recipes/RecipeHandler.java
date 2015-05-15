@@ -230,7 +230,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(ModBlocks.craftingAltar), "xxx", "xxx", "xxx", 'x', ModBlocks.altarBase);
 		addShapedRecipe(Materials.DATA.jade.createStack(), "xxx", "xxx", "xxx", 'x', Materials.DATA.jadeBerries.createStack());
 		addShapedRecipe(Materials.DATA.waterRepellent.createStack(), "xxx", "xrx", "xxx", 'x', Materials.DATA.hydrofuge.createStack(), 'r', Materials.DATA.repellent.createStack());
-		addShapelessRecipe(Materials.DATA.stewPot.createStack(), Items.cauldron);
+		addShapelessRecipe(Materials.DATA.stewPot.createStack(), Items.cauldron, "stickWood");
 		addShapelessRecipe(Materials.DATA.titanStew.createStack(), Materials.DATA.stewPot.createStack(), new ItemStack(ModItems.food, 1, Food.FoodType.titanChop.ordinal()), Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom");
 		addShapelessRecipe(Materials.DATA.titanStew.createStack(), Materials.DATA.stewPot.createStack(), Items.beef, Items.beef, Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom");
 
