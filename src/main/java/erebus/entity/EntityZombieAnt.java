@@ -99,7 +99,7 @@ public class EntityZombieAnt extends EntityMob {
 		entityDropItem(new ItemStack(Blocks.red_mushroom), 0.0F);
 		entityDropItem(new ItemStack(Blocks.brown_mushroom), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(Materials.createStack(Materials.DATA.antPheromones), 0.0F);
+			entityDropItem(Materials.DATA.antPheromones.createStack(), 0.0F);
 	}
 
 	@Override

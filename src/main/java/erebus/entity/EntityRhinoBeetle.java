@@ -28,7 +28,6 @@ import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.handler.KeyBindingHandler;
 import erebus.item.Materials;
-import erebus.item.Materials.DATA;
 import erebus.network.PacketPipeline;
 import erebus.network.server.PacketBeetleRamAttack;
 
@@ -132,12 +131,12 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() == 2)
-			entityDropItem(Materials.createStack(Materials.DATA.rhinoRidingKit), 0.0F);
+			entityDropItem(Materials.DATA.rhinoRidingKit.createStack(), 0.0F);
 		int dropRate = 1 + rand.nextInt(2 + looting);
 		for (int a = 0; a < dropRate; ++a)
-			entityDropItem(new ItemStack(ModItems.materials, 1, DATA.plateExoRhino.ordinal()), 0.0F);
+			entityDropItem(Materials.DATA.plateExoRhino.createStack(), 0.0F);
 		if (rand.nextInt(20) == 0)
-			entityDropItem(Materials.createStack(Materials.DATA.rhinoBeetleHorn), 0.0F);
+			entityDropItem(Materials.DATA.rhinoBeetleHorn.createStack(), 0.0F);
 	}
 
 	@Override

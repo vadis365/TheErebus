@@ -129,7 +129,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.createStack(Materials.DATA.waspSting), 0.0F);
+			entityDropItem(Materials.DATA.waspSting.createStack(), 0.0F);
 		if (getIsBoss() == 1)
 			entityDropItem(new ItemStack(ModItems.bottleAntiVenom), 0.0F);
 	}
@@ -150,7 +150,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			if (i == 1) {
 				setSize(2.5F, 2F);
 				if (!hasCustomNameTag())
-					if(rand.nextBoolean())
+					if (rand.nextBoolean())
 						setCustomNameTag("Livid's Bane");
 					else
 						setCustomNameTag("Hornet of Despair");
@@ -244,7 +244,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	@Override
 	protected void attackEntity(Entity entity, float par2) {
-		if (par2 < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY&& getEntitySenses().canSee(entity))
+		if (par2 < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY && getEntitySenses().canSee(entity))
 			attackEntityAsMob(entity);
 	}
 

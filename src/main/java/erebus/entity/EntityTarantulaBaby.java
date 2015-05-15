@@ -172,7 +172,7 @@ public class EntityTarantulaBaby extends EntityMob {
 		else
 			entityDropItem(new ItemStack(ModItems.food, legDrop + looting, 4), 0.0F);
 		dropItem(Items.spider_eye, chanceFiftyFifty + looting);
-		entityDropItem(Materials.createStack(Materials.DATA.poisonGland, 1 + rand.nextInt(2)), 0.0F);
+		entityDropItem(Materials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
 	}
 
 	@Override

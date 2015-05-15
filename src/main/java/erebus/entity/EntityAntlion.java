@@ -99,7 +99,7 @@ public class EntityAntlion extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.createStack(Materials.DATA.plateExo), 0.0F);
+			entityDropItem(Materials.DATA.plateExo.createStack(), 0.0F);
 	}
 
 	@Override

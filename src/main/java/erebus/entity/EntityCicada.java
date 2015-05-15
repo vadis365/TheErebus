@@ -84,7 +84,7 @@ public class EntityCicada extends EntityCreature {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.createStack(Materials.DATA.repellent), 0.0F);
+			entityDropItem(Materials.DATA.repellent.createStack(), 0.0F);
 	}
 
 	@Override

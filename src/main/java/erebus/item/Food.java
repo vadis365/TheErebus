@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.item.Materials.DATA;
 
 @SuppressWarnings("unchecked")
 public class Food extends ItemFood {
@@ -201,7 +200,7 @@ public class Food extends ItemFood {
 				world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 				break;
 			case titanStewCooked:
-				is = Materials.createStack(DATA.stewPot);
+				is = Materials.DATA.stewPot.createStack();
 				break;
 			default:
 				return is;
@@ -257,7 +256,7 @@ public class Food extends ItemFood {
 			case melonadeSparkly:
 				return new ItemStack(Items.glass_bottle);
 			case titanStewCooked:
-				return Materials.createStack(DATA.stewPot);
+				return Materials.DATA.stewPot.createStack();
 			default:
 				return null;
 		}

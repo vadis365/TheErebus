@@ -191,10 +191,10 @@ public class EntityTitanBeetle extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() >= 2)
-			entityDropItem(Materials.createStack(Materials.DATA.rhinoRidingKit), 0.0F);
+			entityDropItem(Materials.DATA.rhinoRidingKit.createStack(), 0.0F);
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
-			entityDropItem(Materials.createStack(Materials.DATA.plateExo), 0.0F);
+			entityDropItem(Materials.DATA.plateExo.createStack(), 0.0F);
 
 		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? Food.FoodType.titanChopCooked.ordinal() : Food.FoodType.titanChop.ordinal()), 0.0F);
 		dropChests();

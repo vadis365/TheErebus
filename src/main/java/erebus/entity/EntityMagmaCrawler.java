@@ -59,7 +59,7 @@ public class EntityMagmaCrawler extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(Materials.createStack(Materials.DATA.magmaCrawlerEye, 1), 0.0F);
+		entityDropItem(Materials.DATA.magmaCrawlerEye.createStack(), 0.0F);
 	}
 
 	public boolean isOnCeiling() {
@@ -101,7 +101,7 @@ public class EntityMagmaCrawler extends EntityMob {
 
 	@Override
 	public void onLivingUpdate() {
-		if (!worldObj.isRemote && upAbove) {
+		if (!worldObj.isRemote && upAbove)
 			if (getEntityToAttack() != null) {
 				double var1 = getEntityToAttack().posX + 0.5D - posX;
 				double var5 = getEntityToAttack().posZ + 0.5D - posZ;
@@ -112,7 +112,6 @@ public class EntityMagmaCrawler extends EntityMob {
 				moveForward = 0.5F;
 				rotationYaw += var8;
 			}
-		}
 		super.onLivingUpdate();
 	}
 

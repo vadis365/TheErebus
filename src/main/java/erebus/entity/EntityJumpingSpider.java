@@ -75,7 +75,7 @@ public class EntityJumpingSpider extends EntitySpider {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.createStack(Materials.DATA.poisonGland, 1), 0F);
+			entityDropItem(Materials.DATA.poisonGland.createStack(), 0F);
 	}
 
 	@Override

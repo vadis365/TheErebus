@@ -92,8 +92,8 @@ public class EntityScorpion extends EntityMob {
 		for (amount = 0; amount < chance; ++amount) {
 			int pincerChance = rand.nextInt(30);
 			if (pincerChance == 0)
-				entityDropItem(Materials.createStack(Materials.DATA.scorpionPincer), 0.0F);
-			entityDropItem(Materials.createStack(Materials.DATA.poisonGland, 1 + rand.nextInt(2)), 0.0F);
+				entityDropItem(Materials.DATA.scorpionPincer.createStack(), 0.0F);
+			entityDropItem(Materials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
 		}
 	}
 

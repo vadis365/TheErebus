@@ -89,14 +89,14 @@ public class Materials extends Item {
 		magmaCrawlerEye,
 		stewPot,
 		titanStew;
-	}
 
-	public static ItemStack createStack(DATA data) {
-		return createStack(data, 1);
-	}
+		public ItemStack createStack() {
+			return createStack(1);
+		}
 
-	public static ItemStack createStack(DATA data, int size) {
-		return new ItemStack(ModItems.materials, size, data.ordinal());
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModItems.materials, size, ordinal());
+		}
 	}
 
 	@SideOnly(Side.CLIENT)

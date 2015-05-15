@@ -34,23 +34,23 @@ public class NEIErebusConfig implements IConfigureNEI {
 
 		if (!ConfigHandler.INSTANCE.aluminium) {
 			API.hideItem(new ItemStack(ModBlocks.oreAluminium));
-			API.hideItem(Materials.createStack(Materials.DATA.ingotAluminium));
+			API.hideItem(Materials.DATA.ingotAluminium.createStack());
 		}
 		if (!ConfigHandler.INSTANCE.copper) {
 			API.hideItem(new ItemStack(ModBlocks.oreCopper));
-			API.hideItem(Materials.createStack(Materials.DATA.ingotCopper));
+			API.hideItem(Materials.DATA.ingotCopper.createStack());
 		}
 		if (!ConfigHandler.INSTANCE.lead) {
 			API.hideItem(new ItemStack(ModBlocks.oreLead));
-			API.hideItem(Materials.createStack(Materials.DATA.ingotLead));
+			API.hideItem(Materials.DATA.ingotLead.createStack());
 		}
 		if (!ConfigHandler.INSTANCE.silver) {
 			API.hideItem(new ItemStack(ModBlocks.oreSilver));
-			API.hideItem(Materials.createStack(Materials.DATA.ingotSilver));
+			API.hideItem(Materials.DATA.ingotSilver.createStack());
 		}
 		if (!ConfigHandler.INSTANCE.tin) {
 			API.hideItem(new ItemStack(ModBlocks.oreTin));
-			API.hideItem(Materials.createStack(Materials.DATA.ingotTin));
+			API.hideItem(Materials.DATA.ingotTin.createStack());
 		}
 
 		API.hideItem(new ItemStack(ModBlocks.hanger));

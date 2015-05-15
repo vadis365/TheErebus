@@ -128,7 +128,7 @@ public class EntityWheatWeevil extends EntityCreature {
 					break;
 
 				case 4:
-					entityDropItem(Materials.createStack(Materials.DATA.bambooShoot, 1 + looting), 0F);
+					entityDropItem(Materials.DATA.bambooShoot.createStack(1 + looting), 0F);
 					break;
 
 				case 5:

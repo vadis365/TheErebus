@@ -92,7 +92,7 @@ public class EntityPrayingMantis extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.createStack(Materials.DATA.camoPowder), 0.0F);
+			entityDropItem(Materials.DATA.camoPowder.createStack(), 0.0F);
 	}
 
 	@Override

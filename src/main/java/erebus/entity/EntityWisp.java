@@ -157,7 +157,7 @@ public class EntityWisp extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.createStack(Materials.DATA.bioLuminescence), 0.0F);
+			entityDropItem(Materials.DATA.bioLuminescence.createStack(), 0.0F);
 	}
 
 	@Override

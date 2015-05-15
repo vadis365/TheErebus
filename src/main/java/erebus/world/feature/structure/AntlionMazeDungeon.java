@@ -40,28 +40,28 @@ public class AntlionMazeDungeon {
 			new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.scorpionPincer.ordinal()).setWeight(1),
 			new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.whetstonePowder.ordinal()).setWeight(3), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.plateExoRhino.ordinal()).setWeight(1), new LootItemStack(ModItems.food).setAmount(1, 3).setDamage(FoodType.honeySandwich.ordinal()).setWeight(3), new LootItemStack(ModItems.cabbageSeeds).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1), new LootItemStack(ModItems.lifeBlood).setAmount(1, 2).setWeight(4), new LootItemStack(ModItems.rolledNewspaper).setAmount(1).setWeight(1), new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
 			new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1), new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1), new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5), new LootItemStack(ModItems.homingBeecon).setAmount(1).setWeight(1), new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal()).setWeight(3), new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal()).setWeight(1) }).setPostProcessor(new IPostProcess() {
-		@SuppressWarnings("rawtypes")
-		@Override
-		public ItemStack postProcessItem(ItemStack is, Random rand) {
-			if (is.getItem() == Items.enchanted_book || rand.nextBoolean() && (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
-				boolean enchBook = is.getItem() == Items.enchanted_book;
-				if (enchBook)
-					is.func_150996_a(Items.book);
-				List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
-				if (enchBook)
-					is.func_150996_a(Items.enchanted_book);
-				if (enchList != null && enchList.size() > 0)
-					for (int a = 0; a < enchList.size(); ++a) {
-						EnchantmentData data = (EnchantmentData) enchList.get(a);
-						if (is.getItem() == Items.enchanted_book)
-							Items.enchanted_book.addEnchantment(is, data);
-						else
-							is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
+				@SuppressWarnings("rawtypes")
+				@Override
+				public ItemStack postProcessItem(ItemStack is, Random rand) {
+					if (is.getItem() == Items.enchanted_book || rand.nextBoolean() && (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
+						boolean enchBook = is.getItem() == Items.enchanted_book;
+						if (enchBook)
+							is.func_150996_a(Items.book);
+						List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
+						if (enchBook)
+							is.func_150996_a(Items.enchanted_book);
+						if (enchList != null && enchList.size() > 0)
+							for (int a = 0; a < enchList.size(); ++a) {
+								EnchantmentData data = (EnchantmentData) enchList.get(a);
+								if (is.getItem() == Items.enchanted_book)
+									Items.enchanted_book.addEnchantment(is, data);
+								else
+									is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
+							}
 					}
-			}
-			return is;
-		}
-	});
+					return is;
+				}
+			});
 
 	public void generateSurface(World world, Random rand, int chunkX, int chunkY, int chunkZ) {
 		BiomeGenBase biomeBase = world.getBiomeGenForCoords(chunkX, chunkZ);
@@ -231,7 +231,7 @@ public class AntlionMazeDungeon {
 						world.setBlock(x + 19, yy, z + 22, Blocks.chest, 2, 2);
 						TileEntityChest chest = (TileEntityChest) world.getTileEntity(x + 19, yy, z + 22);
 						if (chest != null)
-							chest.setInventorySlotContents(0, Materials.createStack(DATA.jade, 8));
+							chest.setInventorySlotContents(0, Materials.DATA.jade.createStack(8));
 						world.setBlockMetadataWithNotify(x + 19, yy, z + 22, 2, 3);
 					}
 

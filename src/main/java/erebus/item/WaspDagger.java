@@ -2,16 +2,15 @@ package erebus.item;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModMaterials;
-import erebus.api.animationmagic.EnergyType;
 import erebus.entity.EntityWaspDagger;
 
 public class WaspDagger extends ItemSword {
@@ -21,7 +20,7 @@ public class WaspDagger extends ItemSword {
 		maxStackSize = 16;
 		setTextureName("paper");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
