@@ -15,6 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
 
 public class Smoothie extends ItemFood {
 
@@ -29,6 +30,10 @@ public class Smoothie extends ItemFood {
 		dontMettleWithTheNettle,
 		liquidGold,
 		bryufsBrew;
+
+		public ItemStack makeStack() {
+			return new ItemStack(ModItems.smoothie, 1, ordinal());
+		}
 	}
 
 	public Smoothie() {

@@ -26,6 +26,9 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.registerRecipeHandler(new CraftingAltarNEIHandler());
 		API.registerUsageHandler(new CraftingAltarNEIHandler());
 
+		API.registerRecipeHandler(new SmoothieMakerNEIHandler());
+		API.registerUsageHandler(new SmoothieMakerNEIHandler());
+
 		API.hideItem(new ItemStack(ModBlocks.portal));
 		API.hideItem(new ItemStack(ModBlocks.blockTurnip));
 		API.hideItem(new ItemStack(ModBlocks.insectRepellent));

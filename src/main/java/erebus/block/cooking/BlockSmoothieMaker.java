@@ -56,7 +56,8 @@ public class BlockSmoothieMaker extends BlockContainer {
 			ItemStack oldItem = player.getCurrentEquippedItem();
 			ItemStack newItem = tile.fillTankWithBucket(player.inventory.getStackInSlot(player.inventory.currentItem));
 
-			player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
+			if (!player.capabilities.isCreativeMode)
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
 			if (!ItemStack.areItemStacksEqual(oldItem, newItem))
 				return true;
 		}

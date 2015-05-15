@@ -10,6 +10,7 @@ import erebus.inventory.ContainerSmoothieMaker;
 import erebus.tileentity.TileEntitySmoothieMaker;
 
 public class GuiSmoothieMaker extends GuiContainer {
+
 	private TileEntitySmoothieMaker kitchen;
 	private static final ResourceLocation gui = new ResourceLocation("erebus:textures/gui/container/smoothieMaker.png");
 
