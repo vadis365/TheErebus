@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -14,6 +15,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.inventory.ContainerSmoothieMaker;
@@ -257,7 +260,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	private void extractFluid(ItemStack output) {
 		switch (SmoothieType.values()[output.getItemDamage()]) {
-			// Tanks below can be any of the 4.
+		// Tanks below can be any of the 4.
 			case greenTeaGrasshopper:
 				beetleTank.drain(FluidContainerRegistry.BUCKET_VOLUME, true);
 				break;
@@ -298,7 +301,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	private boolean canExtractFluid(ItemStack output) {
 		switch (SmoothieType.values()[output.getItemDamage()]) {
-			// These tanks have to match the extract tanks.
+		// These tanks have to match the extract tanks.
 			case greenTeaGrasshopper:
 				if (getBeetleJuiceAmount() >= FluidContainerRegistry.BUCKET_VOLUME)
 					return true;
@@ -368,5 +371,11 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		return null;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getRenderBoundingBox() {
+		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 2, zCoord + 1);
 	}
 }
