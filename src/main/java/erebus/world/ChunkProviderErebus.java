@@ -1,8 +1,13 @@
 package erebus.world;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import erebus.ModBiomes;
+import erebus.ModBlocks;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.feature.structure.WorldGenSpiderDungeons;
+import erebus.world.structure.MapGenErebusCaves;
+import erebus.world.structure.MapGenErebusRavine;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -19,13 +24,9 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.feature.structure.WorldGenSpiderDungeons;
-import erebus.world.structure.MapGenErebusCaves;
-import erebus.world.structure.MapGenErebusRavine;
+
+import java.util.List;
+import java.util.Random;
 
 public class ChunkProviderErebus implements IChunkProvider {
 	private final World worldObj;
@@ -297,7 +298,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 						if (h > swampWaterHeight) {
 							for (h += 0; h > 23.08D - additionalNoise1[horIndex]; h--)
 								blocks[preHeightIndex + h] = h == swampWaterHeight ? rand.nextInt(32) == 0 ? Blocks.waterlily : Blocks.air : Blocks.air;
-							blocks[preHeightIndex + h] = additionalNoise1[horIndex] < 0.08D ? rand.nextInt(12) == 0 ? ModBlocks.swampVent : ModBlocks.umberstone : additionalNoise1[horIndex] < 0.5D ? Blocks.sand : additionalNoise1[horIndex] < 1 ? ModBlocks.quickSand : additionalNoise2[horIndex] > 1 ? ModBlocks.mud : Blocks.dirt;
+							blocks[preHeightIndex + h] = additionalNoise1[horIndex] < 0.08D ? ConfigHandler.INSTANCE.generateVents ? rand.nextInt(12) == 0 ? ModBlocks.swampVent : ModBlocks.umberstone : ModBlocks.umberstone : additionalNoise1[horIndex] < 0.5D ? Blocks.sand : additionalNoise1[horIndex] < 1 ? ModBlocks.quickSand : additionalNoise2[horIndex] > 1 ? ModBlocks.mud : Blocks.dirt;
 						}
 					} else if (additionalNoise1[horIndex] > -0.15D) {
 						int h = getLowestAirBlock(blocks, preHeightIndex, 25, 35);
