@@ -1,13 +1,7 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.block.bamboo.BlockBambooShoot;
-import erebus.block.plants.BlockHangerPlants;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketSound;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,17 +13,25 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.block.bamboo.BlockBambooShoot;
+import erebus.block.plants.BlockHangerPlants;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketSound;
 
-import java.util.List;
-
-public class Materials extends Item {
+public class ItemMaterials extends Item {
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
 
-	public Materials() {
-		setHasSubtypes(true);
+	public ItemMaterials() {
 		setMaxDamage(0);
+		setHasSubtypes(true);
+		setCreativeTab(ModTabs.items);
 	}
 
 	@Override
@@ -111,7 +113,7 @@ public class Materials extends Item {
 		return icons[meta];
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item id, CreativeTabs tab, List list) {

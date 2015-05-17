@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 import erebus.item.ItemWhetstone;
 
 public class RecipeWhetstoneUpgrades implements IRecipe {

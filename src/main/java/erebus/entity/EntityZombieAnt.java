@@ -14,7 +14,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityZombieAnt extends EntityMob {
 
@@ -99,7 +99,7 @@ public class EntityZombieAnt extends EntityMob {
 		entityDropItem(new ItemStack(Blocks.red_mushroom), 0.0F);
 		entityDropItem(new ItemStack(Blocks.brown_mushroom), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(Materials.DATA.antPheromones.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.antPheromones.createStack(), 0.0F);
 	}
 
 	@Override

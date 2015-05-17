@@ -3,11 +3,13 @@ package erebus.item;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import erebus.ModTabs;
 
 public class ItemPaxel extends ItemTool {
 
 	public ItemPaxel(ToolMaterial material) {
 		super(1.0F, material, null);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 
 public class BlockGlowshroom extends Block {
 

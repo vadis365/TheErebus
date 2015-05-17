@@ -12,7 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityFly extends EntityAmbientCreature {
 
@@ -220,8 +220,8 @@ public class EntityFly extends EntityAmbientCreature {
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (rand.nextInt(10) == 0)
-			entityDropItem(Materials.DATA.flyWing.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.flyWing.createStack(), 0.0F);
 		if (rand.nextInt(20) == 0)
-			entityDropItem(Materials.DATA.compoundEyes.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.compoundEyes.createStack(), 0.0F);
 	}
 }

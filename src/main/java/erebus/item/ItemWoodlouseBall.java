@@ -1,17 +1,21 @@
 package erebus.item;
 
-import erebus.entity.EntityWoodlouseBall;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.entity.EntityWoodlouseBall;
 
 public class ItemWoodlouseBall extends Item {
 
 	public ItemWoodlouseBall() {
-		maxStackSize = 16;
-		setTextureName("paper");
+		setMaxStackSize(16);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override
@@ -28,5 +32,10 @@ public class ItemWoodlouseBall extends Item {
 	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player) {
 		is.damageItem(2, player);
 		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
 	}
 }

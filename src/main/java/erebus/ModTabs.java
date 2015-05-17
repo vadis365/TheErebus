@@ -1,6 +1,6 @@
 package erebus;
 
-import erebus.creativetab.CreativeTabErebus;
+import net.minecraft.creativetab.CreativeTabs;
 import erebus.creativetab.TabBlocks;
 import erebus.creativetab.TabGears;
 import erebus.creativetab.TabItems;
@@ -9,9 +9,9 @@ import erebus.creativetab.TabSpecialItems;
 
 public class ModTabs {
 
-	public static CreativeTabErebus blocks = new TabBlocks();
-	public static CreativeTabErebus items = new TabItems();
-	public static CreativeTabErebus gears = new TabGears();
-	public static CreativeTabErebus specials = new TabSpecialItems();
-	public static CreativeTabErebus plants = new TabPlants();
+	public static CreativeTabs blocks = new TabBlocks();
+	public static CreativeTabs items = new TabItems();
+	public static CreativeTabs gears = new TabGears();
+	public static CreativeTabs specials = new TabSpecialItems();
+	public static CreativeTabs plants = new TabPlants();
 }

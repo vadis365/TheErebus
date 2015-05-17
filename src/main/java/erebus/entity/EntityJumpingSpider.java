@@ -11,7 +11,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityJumpingSpider extends EntitySpider {
 	public int skin = rand.nextInt(3);
@@ -75,7 +75,7 @@ public class EntityJumpingSpider extends EntitySpider {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.DATA.poisonGland.createStack(), 0F);
+			entityDropItem(ItemMaterials.DATA.poisonGland.createStack(), 0F);
 	}
 
 	@Override

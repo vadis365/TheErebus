@@ -31,7 +31,7 @@ import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
 import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAIPolinate;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityWorkerBee extends EntityTameable {
 	public ChunkCoordinates currentFlightTarget;
@@ -148,7 +148,7 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(Materials.DATA.nectar.createStack(getNectarPoints()), 0.0F);
+		entityDropItem(ItemMaterials.DATA.nectar.createStack(getNectarPoints()), 0.0F);
 	}
 
 	public boolean isFlying() {
@@ -199,7 +199,7 @@ public class EntityWorkerBee extends EntityTameable {
 	}
 
 	private void addHoneyToInventory(int x, int y, int z) {
-		if (Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), Materials.DATA.nectar.createStack()))
+		if (Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), ItemMaterials.DATA.nectar.createStack()))
 			setNectarPoints(getNectarPoints() - 1);
 	}
 
@@ -261,7 +261,7 @@ public class EntityWorkerBee extends EntityTameable {
 		ItemStack is = player.inventory.getCurrentItem();
 		if (!worldObj.isRemote && is != null && is.getItem() == ModItems.nectarCollector)
 			if (getNectarPoints() > 0) {
-				entityDropItem(Materials.DATA.nectar.createStack(), 0.0F);
+				entityDropItem(ItemMaterials.DATA.nectar.createStack(), 0.0F);
 				is.damageItem(1, player);
 				setNectarPoints(getNectarPoints() - 1);
 				setTarget(null);

@@ -1,17 +1,19 @@
 package erebus.item;
 
-import erebus.entity.EntityGrasshopper;
-import erebus.entity.EntityLocust;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import erebus.ModTabs;
+import erebus.entity.EntityGrasshopper;
+import erebus.entity.EntityLocust;
 
 public class ItemHornOfSummoning extends Item {
 
 	public ItemHornOfSummoning() {
 		setMaxStackSize(1);
+		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override

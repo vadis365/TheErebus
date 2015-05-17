@@ -13,7 +13,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntitySnapper extends EntityMob {
 	public EntitySnapper(World world) {
@@ -84,6 +84,6 @@ public class EntitySnapper extends EntityMob {
 		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.DATA.snapperRoot.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.snapperRoot.createStack(), 0.0F);
 	}
 }

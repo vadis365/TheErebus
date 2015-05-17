@@ -1,15 +1,17 @@
 package erebus.item;
 
-import erebus.ModItems;
-import erebus.item.Materials.DATA;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.item.ItemMaterials.DATA;
 
 public class ItemCompoundGoggles extends ItemArmor {
 
 	public ItemCompoundGoggles(ArmorMaterial enumarmormaterial, int j, int k) {
 		super(enumarmormaterial, j, k);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override

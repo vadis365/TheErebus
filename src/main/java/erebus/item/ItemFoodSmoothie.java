@@ -1,8 +1,7 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,8 +13,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModTabs;
 
 public class ItemFoodSmoothie extends ItemFood {
 
@@ -27,6 +28,7 @@ public class ItemFoodSmoothie extends ItemFood {
 		setHasSubtypes(true);
 		setAlwaysEdible();
 		setMaxDamage(0);
+		setCreativeTab(ModTabs.items);
 	}
 
 	public int getHealAmount(ItemStack stack, World world, EntityPlayer player) {
@@ -130,9 +132,9 @@ public class ItemFoodSmoothie extends ItemFood {
 		onFoodEaten(stack, world, player);
 
 		if (stack.stackSize != 0)
-			player.inventory.addItemStackToInventory(Materials.DATA.smoothieGlass.createStack());
+			player.inventory.addItemStackToInventory(ItemMaterials.DATA.smoothieGlass.createStack());
 
-		return stack.stackSize == 0 ? Materials.DATA.smoothieGlass.createStack() : stack;
+		return stack.stackSize == 0 ? ItemMaterials.DATA.smoothieGlass.createStack() : stack;
 	}
 
 	@Override
@@ -154,7 +156,7 @@ public class ItemFoodSmoothie extends ItemFood {
 		return super.getUnlocalizedName() + "." + damage;
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list) {

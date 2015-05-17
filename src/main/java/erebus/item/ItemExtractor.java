@@ -1,8 +1,7 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.entity.EntityExtractedBlock;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPane;
@@ -16,17 +15,20 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
-
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.entity.EntityExtractedBlock;
 
 public class ItemExtractor extends Item {
 
 	public ItemExtractor() {
-		maxStackSize = 1;
+		setMaxStackSize(1);
 		setMaxDamage(128);
+		setCreativeTab(ModTabs.gears);
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {

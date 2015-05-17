@@ -1,9 +1,10 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 
 public class ItemPortalActivator extends Item {
 
@@ -11,6 +12,7 @@ public class ItemPortalActivator extends Item {
 		setFull3D();
 		setMaxDamage(64);
 		setMaxStackSize(1);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override

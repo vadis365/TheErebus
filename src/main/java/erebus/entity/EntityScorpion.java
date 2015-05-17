@@ -10,7 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityScorpion extends EntityMob {
 	private boolean sting;
@@ -92,8 +92,8 @@ public class EntityScorpion extends EntityMob {
 		for (amount = 0; amount < chance; ++amount) {
 			int pincerChance = rand.nextInt(30);
 			if (pincerChance == 0)
-				entityDropItem(Materials.DATA.scorpionPincer.createStack(), 0.0F);
-			entityDropItem(Materials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
+				entityDropItem(ItemMaterials.DATA.scorpionPincer.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
 		}
 	}
 

@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 
 public class BlockHangerPlants extends BlockBush {
 

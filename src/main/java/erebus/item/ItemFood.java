@@ -1,8 +1,9 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,10 +16,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 
 @SuppressWarnings("unchecked")
 public class ItemFood extends net.minecraft.item.ItemFood {
@@ -46,8 +47,9 @@ public class ItemFood extends net.minecraft.item.ItemFood {
 
 	public ItemFood() {
 		super(3, 0.5F, false);
-		setHasSubtypes(true);
 		setMaxDamage(0);
+		setHasSubtypes(true);
+		setCreativeTab(ModTabs.items);
 	}
 
 	public int getHealAmount(ItemStack is, World world, EntityPlayer player) {
@@ -179,7 +181,7 @@ public class ItemFood extends net.minecraft.item.ItemFood {
 				world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 				break;
 			case titanStewCooked:
-				is = Materials.DATA.stewPot.createStack();
+				is = ItemMaterials.DATA.stewPot.createStack();
 				break;
 			default:
 				return is;
@@ -214,7 +216,7 @@ public class ItemFood extends net.minecraft.item.ItemFood {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"rawtypes"})
+	@SuppressWarnings({ "rawtypes" })
 	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		for (int i = 0; i < FoodType.values().length; i++)
 			list.add(new ItemStack(id, 1, i));
@@ -235,7 +237,7 @@ public class ItemFood extends net.minecraft.item.ItemFood {
 			case melonadeSparkly:
 				return new ItemStack(Items.glass_bottle);
 			case titanStewCooked:
-				return Materials.DATA.stewPot.createStack();
+				return ItemMaterials.DATA.stewPot.createStack();
 			default:
 				return null;
 		}

@@ -1,14 +1,7 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.block.altars.CraftingAltar;
-import erebus.core.helper.Utils;
-import erebus.entity.EntityAnimatedBambooCrate;
-import erebus.entity.EntityAnimatedBlock;
-import erebus.entity.EntityAnimatedChest;
-import erebus.tileentity.TileEntityBambooCrate;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,8 +11,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
-
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.block.altars.CraftingAltar;
+import erebus.core.helper.Utils;
+import erebus.entity.EntityAnimatedBambooCrate;
+import erebus.entity.EntityAnimatedBlock;
+import erebus.entity.EntityAnimatedChest;
+import erebus.tileentity.TileEntityBambooCrate;
 
 public class ItemWandOfAnimation extends Item {
 	public ItemWandOfAnimation() {
@@ -27,11 +28,12 @@ public class ItemWandOfAnimation extends Item {
 		setNoRepair();
 		setMaxDamage(64);
 		setMaxStackSize(1);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
 		list.add("Right click blocks to animate them");
 	}

@@ -1,11 +1,5 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.client.model.armor.ModelRhinoHelm;
-import erebus.item.Materials.DATA;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,11 +7,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.client.model.armor.ModelRhinoHelm;
+import erebus.item.ItemMaterials.DATA;
 
 public class ItemHelmRhino extends ItemArmor {
 
 	public ItemHelmRhino(int armorType) {
 		super(ModMaterials.armorRHINO, 2, armorType);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override

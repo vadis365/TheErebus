@@ -21,7 +21,7 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.item.ItemFood.FoodType;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 import erebus.lib.Reference;
 
 public class BlockBerryBush extends Block {

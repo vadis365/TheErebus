@@ -27,7 +27,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.handler.KeyBindingHandler;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 import erebus.network.PacketPipeline;
 import erebus.network.server.PacketBeetleRamAttack;
 
@@ -131,19 +131,19 @@ public class EntityRhinoBeetle extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() == 2)
-			entityDropItem(Materials.DATA.rhinoRidingKit.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.rhinoRidingKit.createStack(), 0.0F);
 		int dropRate = 1 + rand.nextInt(2 + looting);
 		for (int a = 0; a < dropRate; ++a)
-			entityDropItem(Materials.DATA.plateExoRhino.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.plateExoRhino.createStack(), 0.0F);
 		if (rand.nextInt(20) == 0)
-			entityDropItem(Materials.DATA.rhinoBeetleHorn.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.rhinoBeetleHorn.createStack(), 0.0F);
 	}
 
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack is = player.inventory.getCurrentItem();
 		float healingBuff = 0.0F;
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.beetleTamingAmulet.ordinal() && getTameState() == 0) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.beetleTamingAmulet.ordinal() && getTameState() == 0) {
 			healingBuff = 20F;
 			is.stackSize--;
 			setTameState((byte) 1);
@@ -155,7 +155,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 			heal(healingBuff);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.rhinoRidingKit.ordinal() && getTameState() == 1) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.rhinoRidingKit.ordinal() && getTameState() == 1) {
 			is.stackSize--;
 			player.swingItem();
 			setTameState((byte) 2);
@@ -171,7 +171,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 				player.mountEntity(this);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.bambooShoot.ordinal() && getTameState() != 0) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.bambooShoot.ordinal() && getTameState() != 0) {
 			healingBuff = 5.0F;
 			if (getHealth() < getMaxHealth()) {
 				heal(healingBuff);

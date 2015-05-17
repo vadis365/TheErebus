@@ -1,11 +1,12 @@
 package erebus.creativetab;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 
-public class TabGears extends CreativeTabErebus {
+public class TabGears extends CreativeTabs {
 
 	public TabGears() {
 		super("erebus.gear");

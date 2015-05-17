@@ -1,8 +1,7 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.HomingBeeconTextureHandler;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -10,13 +9,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.core.handler.HomingBeeconTextureHandler;
 
 public class ItemHomingBeecon extends Item {
 
 	public ItemHomingBeecon() {
 		setMaxStackSize(1);
+		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override
@@ -25,7 +27,7 @@ public class ItemHomingBeecon extends Item {
 		return HomingBeeconTextureHandler.beecon;
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {

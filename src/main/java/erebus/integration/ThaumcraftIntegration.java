@@ -87,7 +87,7 @@ public class ThaumcraftIntegration implements IModIntegration {
 		registerItem(ModItems.jadePaxel, -1, Aspect.GREED, 7, Aspect.MINE, 5, Aspect.CRYSTAL, 3);
 		registerItem(ModItems.jadeHoe, -1, Aspect.GREED, 2, Aspect.HARVEST, 3, Aspect.CRYSTAL, 2);
 
-		registerItem(ModItems.fossilClub, -1, Aspect.DEATH, 2, Aspect.BEAST, 1);
+		registerItem(ModItems.cavemanClub, -1, Aspect.DEATH, 2, Aspect.BEAST, 1);
 		registerItem(ModItems.maxSpeedBow, -1, Aspect.WEAPON, 5, Aspect.DEATH, 2, Aspect.AIR, 3);
 		registerItem(ModItems.waspSword, -1, Aspect.WEAPON, 4, Aspect.BEAST, 2, Aspect.POISON, 3);
 

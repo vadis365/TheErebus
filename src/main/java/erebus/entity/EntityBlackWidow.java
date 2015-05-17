@@ -17,7 +17,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityBlackWidow extends EntityMob {
 
@@ -168,7 +168,7 @@ public class EntityBlackWidow extends EntityMob {
 		super.dropFewItems(attackedByPlayer, looting);
 		if (attackedByPlayer && (rand.nextInt(3) == 0 || rand.nextInt(1 + looting) > 0))
 			dropItem(Items.spider_eye, 1);
-		entityDropItem(Materials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
+		entityDropItem(ItemMaterials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
 	}
 
 	@Override

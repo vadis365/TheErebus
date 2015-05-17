@@ -7,7 +7,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 
 public class RecipeSprintLeggingsUpgrades implements IRecipe {
 	@Override

@@ -10,7 +10,7 @@ import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityMagmaCrawler extends EntityMob {
 	private int shouldDo;
@@ -59,7 +59,7 @@ public class EntityMagmaCrawler extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(Materials.DATA.magmaCrawlerEye.createStack(), 0.0F);
+		entityDropItem(ItemMaterials.DATA.magmaCrawlerEye.createStack(), 0.0F);
 	}
 
 	public boolean isOnCeiling() {

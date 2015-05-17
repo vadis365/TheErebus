@@ -21,8 +21,8 @@ import erebus.ModItems;
 import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.item.ItemFood.FoodType;
-import erebus.item.Materials;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials;
+import erebus.item.ItemMaterials.DATA;
 import erebus.item.ItemFoodSmoothie.SmoothieType;
 import erebus.tileentity.TileEntityBones;
 import erebus.tileentity.TileEntityTempleTeleporter;
@@ -231,7 +231,7 @@ public class AntlionMazeDungeon {
 						world.setBlock(x + 19, yy, z + 22, Blocks.chest, 2, 2);
 						TileEntityChest chest = (TileEntityChest) world.getTileEntity(x + 19, yy, z + 22);
 						if (chest != null)
-							chest.setInventorySlotContents(0, Materials.DATA.jade.createStack(8));
+							chest.setInventorySlotContents(0, ItemMaterials.DATA.jade.createStack(8));
 						world.setBlockMetadataWithNotify(x + 19, yy, z + 22, 2, 3);
 					}
 

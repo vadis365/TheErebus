@@ -1,9 +1,7 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,10 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.item.ItemMaterials.DATA;
 
 public class ItemLeggingsSprint extends ItemArmor {
+
 	public static final byte maxTier = 9;
 
 	private int armtick;
@@ -24,6 +26,7 @@ public class ItemLeggingsSprint extends ItemArmor {
 
 	public ItemLeggingsSprint(ArmorMaterial material, int k) {
 		super(material, 2, k);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class ItemLeggingsSprint extends ItemArmor {
 		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.bioVelocity.ordinal();
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List textLines, boolean showAdvancedInfo) {
@@ -63,7 +66,7 @@ public class ItemLeggingsSprint extends ItemArmor {
 			armtick = 0;
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item id, CreativeTabs tab, List list) {

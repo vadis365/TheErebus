@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 
 public class BlockBambooCrop extends Block {
 

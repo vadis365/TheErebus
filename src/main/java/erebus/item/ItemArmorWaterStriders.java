@@ -3,7 +3,7 @@ package erebus.item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

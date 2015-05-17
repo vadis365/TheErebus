@@ -1,19 +1,5 @@
 package erebus.item;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.client.model.armor.ModelArmorGlider;
-import erebus.client.model.armor.ModelArmorPowered;
-import erebus.core.handler.KeyBindingHandler;
-import erebus.item.Materials.DATA;
-import erebus.network.PacketPipeline;
-import erebus.network.server.PacketGlider;
-import erebus.network.server.PacketGliderPowered;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,12 +10,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.client.model.armor.ModelArmorGlider;
+import erebus.client.model.armor.ModelArmorPowered;
+import erebus.core.handler.KeyBindingHandler;
+import erebus.item.ItemMaterials.DATA;
+import erebus.network.PacketPipeline;
+import erebus.network.server.PacketGlider;
+import erebus.network.server.PacketGliderPowered;
 
 public class ItemArmorGlider extends ItemArmor {
 
 	public ItemArmorGlider() {
 		super(ModMaterials.armorREINEXOSPECIAL, 2, 1);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override

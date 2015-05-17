@@ -15,7 +15,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityMidgeSwarm extends EntityMob {
 	private ChunkCoordinates currentFlightTarget;
@@ -190,9 +190,9 @@ public class EntityMidgeSwarm extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount) {
-			entityDropItem(Materials.DATA.flyWing.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.flyWing.createStack(), 0.0F);
 			if (rand.nextInt(5) == 0)
-				entityDropItem(Materials.DATA.compoundEyes.createStack(), 0.0F);
+				entityDropItem(ItemMaterials.DATA.compoundEyes.createStack(), 0.0F);
 		}
 	}
 

@@ -1,18 +1,20 @@
 package erebus.item;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModMaterials;
-import erebus.item.Materials.DATA;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
+import erebus.ModTabs;
+import erebus.item.ItemMaterials.DATA;
 
 public class ItemArmorReinExoskeleton extends ItemArmor {
 
 	public ItemArmorReinExoskeleton(int armorType) {
 		super(ModMaterials.armorREINEXOSKELETON, 2, armorType);
+		setCreativeTab(ModTabs.gears);
 	}
 
 	@Override

@@ -1,11 +1,7 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.core.helper.Utils;
-import erebus.lib.EnumColour;
-import erebus.lib.Reference;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,8 +13,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.lib.EnumColour;
+import erebus.lib.Reference;
 
 public class ItemFlowerSeeds extends Item {
 
@@ -27,6 +28,7 @@ public class ItemFlowerSeeds extends Item {
 
 	public ItemFlowerSeeds() {
 		setHasSubtypes(true);
+		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override
@@ -65,7 +67,7 @@ public class ItemFlowerSeeds extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		for (int i = 0; i < SEED_TYPE.values().length; i++)
 			list.add(new ItemStack(id, 1, i));

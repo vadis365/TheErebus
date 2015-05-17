@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 import erebus.lib.EnumWood;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;

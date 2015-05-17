@@ -15,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
@@ -160,7 +160,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 		int amount = rand.nextInt(3);
 		if (fortune > 0)
 			amount += rand.nextInt(fortune + 1);
-		entityDropItem(Materials.DATA.hideShroom.createStack(amount), 0.0F);
+		entityDropItem(ItemMaterials.DATA.hideShroom.createStack(amount), 0.0F);
 	}
 
 	@Override

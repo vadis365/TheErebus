@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemMaterials.DATA;
 import erebus.item.block.ItemBlockGeneric;
 
 public class BlockRedGem extends Block implements ISubBlocksBlock {

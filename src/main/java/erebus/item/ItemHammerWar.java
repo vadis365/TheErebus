@@ -1,11 +1,7 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,17 +12,23 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 
 public class ItemHammerWar extends ItemSword {
 
 	public ItemHammerWar() {
 		super(ModMaterials.weaponWarHammer);
-		maxStackSize = 1;
+		setMaxStackSize(1);
+		setCreativeTab(ModTabs.gears);
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {

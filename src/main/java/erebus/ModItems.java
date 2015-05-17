@@ -2,11 +2,6 @@ package erebus;
 
 import java.lang.reflect.Field;
 
-import erebus.item.*;
-import erebus.item.bambucket.ItemBambucket;
-import erebus.item.bambucket.ItemBambucketAntiVenom;
-import erebus.item.bambucket.ItemBambucketBeetleJuice;
-import erebus.item.hearts.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -18,19 +13,81 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.item.Materials.DATA;
+import erebus.item.ItemAmuletAntTaming;
+import erebus.item.ItemAmuletBeeTaming;
+import erebus.item.ItemArmorExoskeleton;
+import erebus.item.ItemArmorGlider;
+import erebus.item.ItemArmorJade;
+import erebus.item.ItemArmorReinExoskeleton;
+import erebus.item.ItemArmorRhino;
+import erebus.item.ItemArmorWaterStriders;
+import erebus.item.ItemAxeJade;
+import erebus.item.ItemBookSmoothies;
+import erebus.item.ItemBootsJump;
+import erebus.item.ItemBottleAntiVenom;
+import erebus.item.ItemBowMaxSpeed;
+import erebus.item.ItemBucketAntiVenom;
+import erebus.item.ItemBucketOfBeetleJuice;
+import erebus.item.ItemCavemanClub;
+import erebus.item.ItemCompost;
+import erebus.item.ItemCompoundGoggles;
+import erebus.item.ItemDaggerWasp;
+import erebus.item.ItemDoorErebus;
+import erebus.item.ItemDungeonIdols;
+import erebus.item.ItemEncrustedDiamond;
+import erebus.item.ItemExtractor;
+import erebus.item.ItemFlowerSeeds;
+import erebus.item.ItemFood;
+import erebus.item.ItemFoodHeartBerries;
+import erebus.item.ItemFoodSmoothie;
+import erebus.item.ItemHammerWar;
+import erebus.item.ItemHelmMushroom;
+import erebus.item.ItemHelmRhino;
+import erebus.item.ItemHomingBeecon;
+import erebus.item.ItemHomingBeeconAdvanced;
+import erebus.item.ItemHornOfSummoning;
+import erebus.item.ItemLeggingsSprint;
+import erebus.item.ItemMaterials;
+import erebus.item.ItemMaterials.DATA;
+import erebus.item.ItemNectarCollector;
+import erebus.item.ItemPaxel;
+import erebus.item.ItemPickaxeJade;
+import erebus.item.ItemPlanticide;
+import erebus.item.ItemPortalActivator;
+import erebus.item.ItemRitualDagger;
+import erebus.item.ItemRolledNewspaper;
+import erebus.item.ItemScorpionPincer;
+import erebus.item.ItemSoulCrystal;
+import erebus.item.ItemSpawnEggs;
+import erebus.item.ItemSprayCan;
+import erebus.item.ItemSwordWasp;
+import erebus.item.ItemTShirtSpider;
+import erebus.item.ItemWandOfAnimation;
+import erebus.item.ItemWebSlinger;
+import erebus.item.ItemWhetstone;
+import erebus.item.ItemWitherWebSlinger;
+import erebus.item.ItemWoodlouseBall;
+import erebus.item.bambucket.ItemBambucket;
+import erebus.item.bambucket.ItemBambucketAntiVenom;
+import erebus.item.bambucket.ItemBambucketBeetleJuice;
+import erebus.item.hearts.ItemHeartBurning;
 import erebus.item.hearts.ItemHeartElven;
+import erebus.item.hearts.ItemHeartJade;
+import erebus.item.hearts.ItemHeartMana;
+import erebus.item.hearts.ItemHeartStone;
+import erebus.item.hearts.ItemHeartTerra;
+import erebus.item.hearts.ItemHeartTwin;
 
 public class ModItems {
 
 	// BASIC MATERIALS
 	public static final Item portalActivator = new ItemPortalActivator().setUnlocalizedName("erebus.portalActivator");
-	public static final Item materials = new Materials().setUnlocalizedName("erebus.materials");
+	public static final Item materials = new ItemMaterials().setUnlocalizedName("erebus.materials");
 	public static final Item food = new ItemFood().setUnlocalizedName("erebus.food");
 	public static final Item smoothie = new ItemFoodSmoothie().setUnlocalizedName("erebus.smoothie");
 	public static final Item heartBerries = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.heartBerries").setTextureName("erebus:heartBerries");
 	public static final Item lifeBlood = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.lifeBlood").setTextureName("erebus:lifeBlood");
-	public static final Item turnip = new ItemSeedFood(4, 0.6F, ModBlocks.blockTurnip, Blocks.farmland).setUnlocalizedName("erebus.turnips").setTextureName("erebus:turnips");
+	public static final Item turnip = new ItemSeedFood(4, 0.6F, ModBlocks.blockTurnip, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.turnips").setTextureName("erebus:turnips");
 	public static final Item sprayCan = new ItemSprayCan().setUnlocalizedName("erebus.sprayCan").setTextureName("erebus:sprayCan");
 	public static final Item wandOfAnimation = new ItemWandOfAnimation().setUnlocalizedName("erebus.wandOfAnimation");
 	public static final Item hornOfSummoning = new ItemHornOfSummoning().setUnlocalizedName("erebus.hornOfSummoning").setTextureName("erebus:hornOfSummoning");
@@ -38,7 +95,7 @@ public class ModItems {
 	public static final Item beeTamingAmulet = new ItemAmuletBeeTaming().setUnlocalizedName("erebus.beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
 	public static final Item homingBeecon = new ItemHomingBeecon().setUnlocalizedName("erebus.homingBeecon").setTextureName("paper");
 	public static final Item homingBeeconAdvanced = new ItemHomingBeeconAdvanced().setUnlocalizedName("erebus.homingBeeconAdvanced").setTextureName("paper");
-	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.6F, ModBlocks.blockCabbage, Blocks.farmland).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
+	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.6F, ModBlocks.blockCabbage, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
 	public static final Item idols = new ItemDungeonIdols();
 
 	public static final Item flowerSeeds = new ItemFlowerSeeds().setUnlocalizedName("erebus.flowerSeeds");
@@ -66,12 +123,12 @@ public class ModItems {
 	public static final Item jadeBody = new ItemArmorJade(1).setUnlocalizedName("erebus.chestplateJade").setTextureName("erebus:chestplateJade");
 	public static final Item jadeLegs = new ItemArmorJade(2).setUnlocalizedName("erebus.leggingsJade").setTextureName("erebus:leggingsJade");
 	public static final Item jadeBoots = new ItemArmorJade(3).setUnlocalizedName("erebus.bootsJade").setTextureName("erebus:bootsJade");
-	public static final Item jadeSword = new ItemSword(ModMaterials.toolJADE).setUnlocalizedName("erebus.swordJade").setTextureName("erebus:swordJade");
-	public static final Item jadePickaxe = new ItemPickaxeJade().setUnlocalizedName("erebus.pickaxeJade").setTextureName("erebus:pickaxeJade");
+	public static final Item jadeSword = new ItemSword(ModMaterials.toolJADE).setCreativeTab(ModTabs.gears).setUnlocalizedName("erebus.swordJade").setTextureName("erebus:swordJade");
+	public static final Item jadePickaxe = new ItemPickaxeJade().setCreativeTab(ModTabs.gears).setUnlocalizedName("erebus.pickaxeJade").setTextureName("erebus:pickaxeJade");
 	public static final Item jadeAxe = new ItemAxeJade().setUnlocalizedName("erebus.axeJade").setTextureName("erebus:axeJade");
-	public static final Item jadeShovel = new ItemSpade(ModMaterials.toolJADE).setUnlocalizedName("erebus.shovelJade").setTextureName("erebus:shovelJade");
+	public static final Item jadeShovel = new ItemSpade(ModMaterials.toolJADE).setCreativeTab(ModTabs.gears).setUnlocalizedName("erebus.shovelJade").setTextureName("erebus:shovelJade");
 	public static final Item jadePaxel = new ItemPaxel(ModMaterials.toolJADEPAXEL).setUnlocalizedName("erebus.paxelJade").setTextureName("erebus:paxelJade");
-	public static final Item jadeHoe = new ItemHoe(ModMaterials.toolJADE).setUnlocalizedName("erebus.hoeJade").setTextureName("erebus:hoeJade");
+	public static final Item jadeHoe = new ItemHoe(ModMaterials.toolJADE).setCreativeTab(ModTabs.gears).setUnlocalizedName("erebus.hoeJade").setTextureName("erebus:hoeJade");
 
 	// EXOSKELETON STUFF
 	public static final Item exoskeletonHelmet = new ItemArmorExoskeleton(0).setUnlocalizedName("erebus.helmetExo").setTextureName("erebus:helmetExo");
@@ -85,7 +142,7 @@ public class ModItems {
 	public static final Item reinExoskeletonBoots = new ItemArmorReinExoskeleton(3).setUnlocalizedName("erebus.exoBootsRein").setTextureName("erebus:exoBootsRein");
 
 	// MISC WEAPONS
-	public static final Item fossilClub = new ItemCavemanClub().setFull3D().setUnlocalizedName("erebus.clubBone").setTextureName("erebus:clubBone");
+	public static final Item cavemanClub = new ItemCavemanClub().setFull3D().setUnlocalizedName("erebus.clubBone").setTextureName("erebus:clubBone");
 	public static final Item waspSword = new ItemSwordWasp().setUnlocalizedName("erebus.waspSword").setTextureName("paper");
 	public static final Item maxSpeedBow = new ItemBowMaxSpeed().setUnlocalizedName("erebus.maxSpeedBow").setTextureName("erebus:maxSpeedBow");
 	public static final Item waspDagger = new ItemDaggerWasp().setUnlocalizedName("erebus.waspDagger");
@@ -141,19 +198,8 @@ public class ModItems {
 	public static final Item smoothieBook = new ItemBookSmoothies().setMaxStackSize(1).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.smoothieBook").setTextureName("book_normal");
 
 	public static void init() {
-		initCreativeTabs();
 		registerItems();
 		registerProperties();
-	}
-
-	private static void initCreativeTabs() {
-		ModTabs.items.setTab(materials, idols, whetstone, food, smoothie, turnip, cabbageSeeds, encrustedDiamond);
-		ModTabs.gears.setTab(jadeHelmet, jadeBody, jadeLegs, jadeBoots, jadeSword, jadePickaxe, jadeAxe, jadeShovel, jadePaxel, jadeHoe);
-		ModTabs.gears.setTab(exoskeletonHelmet, exoskeletonBody, exoskeletonLegs, exoskeletonBoots, reinExoskeletonHelmet, reinExoskeletonBody, reinExoskeletonLegs, reinExoskeletonBoots, spiderTShirt);
-		ModTabs.gears.setTab(fossilClub, waspSword, waspDagger, maxSpeedBow, wandOfAnimation, scorpionPincer, woodlouseBall, rolledNewspaper, warHammer);
-		ModTabs.gears.setTab(mushroomHelm, compoundGoggles, reinCompoundGoggles, armorGlider, armorGliderPowered, sprintLeggings, jumpBoots, blockExtractor, nectarCollector);
-		ModTabs.gears.setTab(rhinoExoskeletonHelmet, rhinoExoskeletonBody, rhinoExoskeletonLegs, rhinoExoskeletonBoots);
-		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds);
 	}
 
 	private static void registerItems() {

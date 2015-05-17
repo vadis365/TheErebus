@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class DoubleHeightPlant extends BlockDoublePlant implements IShearable {
 	@SideOnly(Side.CLIENT)
@@ -50,11 +50,11 @@ public class DoubleHeightPlant extends BlockDoublePlant implements IShearable {
 			return drops;
 
 		if ("Sundew".equals(name))
-			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.bioLuminescence.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.bioLuminescence.ordinal()));
 		else if ("WeepingBlue".equals(name))
-			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.weepingBluePetal.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.weepingBluePetal.ordinal()));
 		else if ("Bullrush".equals(name))
-			drops.add(new ItemStack(ModItems.materials, 1, Materials.DATA.papyrus.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.papyrus.ordinal()));
 		else if ("WaterFlower".equals(name))
 			drops.add(new ItemStack(this));
 		else {

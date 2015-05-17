@@ -12,7 +12,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.Materials;
+import erebus.item.ItemMaterials;
 
 public class EntityPrayingMantis extends EntityMob {
 
@@ -92,7 +92,7 @@ public class EntityPrayingMantis extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.DATA.camoPowder.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.camoPowder.createStack(), 0.0F);
 	}
 
 	@Override
