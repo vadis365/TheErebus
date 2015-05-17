@@ -25,7 +25,7 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.DungeonIdols.IDOL;
+import erebus.item.ItemDungeonIdols.IDOL;
 
 public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAdditionalSpawnData {
 	Block block;

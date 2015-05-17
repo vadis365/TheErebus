@@ -9,7 +9,7 @@ import erebus.ModItems;
 public class UmberOreEncrustedDiamond extends UmberOre {
 
 	public UmberOreEncrustedDiamond() {
-		super(Blocks.diamond_ore, "EncrustedDiamond", 3);
+		super(Blocks.diamond_ore, "ItemEncrustedDiamond", 3);
 		setHardness(10F);
 	}
 

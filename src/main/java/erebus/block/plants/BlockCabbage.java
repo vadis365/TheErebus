@@ -2,6 +2,7 @@ package erebus.block.plants;
 
 import java.util.ArrayList;
 
+import erebus.item.ItemFood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,7 +14,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
-import erebus.item.Food;
 
 public class BlockCabbage extends BlockCrops {
 
@@ -46,7 +46,7 @@ public class BlockCabbage extends BlockCrops {
 					ret.add(new ItemStack(this.func_149866_i(), 1, 0));
 				}
 			}
-			ret.add(new ItemStack(ModItems.food, 1, Food.FoodType.cabbage.ordinal()));
+			ret.add(new ItemStack(ModItems.food, 1, ItemFood.FoodType.cabbage.ordinal()));
 		}
 		return ret;
 	}

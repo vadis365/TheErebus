@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.entity.effect.EntityErebusLightningBolt;
-import erebus.item.DungeonIdols.IDOL;
+import erebus.item.ItemDungeonIdols.IDOL;
 
 public class BlockCapstone extends Block {
 	private IIcon capstoneMud, capstoneMud1, capstoneIron, capstoneIron1, capstoneGold, capstoneGold1, capstoneJade, capstoneJade1;

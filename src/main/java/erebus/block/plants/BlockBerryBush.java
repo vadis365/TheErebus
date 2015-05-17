@@ -20,7 +20,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
-import erebus.item.Food.FoodType;
+import erebus.item.ItemFood.FoodType;
 import erebus.item.Materials.DATA;
 import erebus.lib.Reference;
 

@@ -2,6 +2,7 @@ package erebus.entity;
 
 import java.util.Random;
 
+import erebus.item.ItemFood;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -35,7 +36,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.Food;
 import erebus.item.Materials;
 import erebus.tileentity.TileEntityTitanChest;
 
@@ -196,7 +196,7 @@ public class EntityTitanBeetle extends EntityTameable {
 		for (int a = 0; a < var3; ++a)
 			entityDropItem(Materials.DATA.plateExo.createStack(), 0.0F);
 
-		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? Food.FoodType.titanChopCooked.ordinal() : Food.FoodType.titanChop.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? ItemFood.FoodType.titanChopCooked.ordinal() : ItemFood.FoodType.titanChop.ordinal()), 0.0F);
 		dropChests();
 	}
 

@@ -1,9 +1,9 @@
 package erebus.item.block;
 
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import erebus.lib.EnumWood;
 
 public class ItemBlockPlanks extends ItemBlockGeneric {
 

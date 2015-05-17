@@ -24,80 +24,6 @@ import java.util.List;
 
 public class Materials extends Item {
 
-	public enum DATA {
-		plateExo,
-		jade,
-		shardBone,
-		bamboo,
-		compoundEyes,
-		compoundLens,
-		flyWing,
-		petrifiedWood,
-		bioVelocity,
-		elasticFibre,
-		waspSting,
-		bambooShoot,
-		redGem,
-		bioLuminescence,
-		supernaturalvelocity,
-		altarFragment,
-		reinforcedPlateExo,
-		gliderWing,
-		scorpionPincer,
-		camoPowder,
-		nectar,
-		honeyDrip,
-		poisonGland,
-		mudBrick,
-		whetstonePowder,
-		dragonflyWing,
-		weepingBluePetal,
-		papyrus,
-		enhancedGliderWing,
-		repellent,
-		mucusCharge,
-		nettleleaves,
-		nettleflowers,
-		darkFruitSeeds,
-		mossBall,
-		yellowDottedFungus,
-		plateExoRhino,
-		rhinoBeetleHorn,
-		antPheromones,
-		gaeanGem,
-		crimsonHeart,
-		sapBall,
-		ingotAluminium,
-		ingotCopper,
-		ingotLead,
-		ingotSilver,
-		ingotTin,
-		gneissRock,
-		hideShroom,
-		rhinoRidingKit,
-		beetleTamingAmulet,
-		umberGolemCore,
-		umberGolemHead,
-		umberGolemClaw,
-		umberGolemLegs,
-		jadeBerries,
-		snapperRoot,
-		hydrofuge,
-		waterRepellent,
-		smoothieGlass,
-		magmaCrawlerEye,
-		stewPot,
-		titanStew;
-
-		public ItemStack createStack() {
-			return createStack(1);
-		}
-
-		public ItemStack createStack(int size) {
-			return new ItemStack(ModItems.materials, size, ordinal());
-		}
-	}
-
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
 
@@ -185,7 +111,7 @@ public class Materials extends Item {
 		return icons[meta];
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item id, CreativeTabs tab, List list) {
@@ -202,5 +128,79 @@ public class Materials extends Item {
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack is, int pass) {
 		return is.getItemDamage() == DATA.whetstonePowder.ordinal();
+	}
+
+	public enum DATA {
+		plateExo,
+		jade,
+		shardBone,
+		bamboo,
+		compoundEyes,
+		compoundLens,
+		flyWing,
+		petrifiedWood,
+		bioVelocity,
+		elasticFibre,
+		waspSting,
+		bambooShoot,
+		redGem,
+		bioLuminescence,
+		supernaturalvelocity,
+		altarFragment,
+		reinforcedPlateExo,
+		gliderWing,
+		scorpionPincer,
+		camoPowder,
+		nectar,
+		honeyDrip,
+		poisonGland,
+		mudBrick,
+		whetstonePowder,
+		dragonflyWing,
+		weepingBluePetal,
+		papyrus,
+		enhancedGliderWing,
+		repellent,
+		mucusCharge,
+		nettleleaves,
+		nettleflowers,
+		darkFruitSeeds,
+		mossBall,
+		yellowDottedFungus,
+		plateExoRhino,
+		rhinoBeetleHorn,
+		antPheromones,
+		gaeanGem,
+		crimsonHeart,
+		sapBall,
+		ingotAluminium,
+		ingotCopper,
+		ingotLead,
+		ingotSilver,
+		ingotTin,
+		gneissRock,
+		hideShroom,
+		rhinoRidingKit,
+		beetleTamingAmulet,
+		umberGolemCore,
+		umberGolemHead,
+		umberGolemClaw,
+		umberGolemLegs,
+		jadeBerries,
+		snapperRoot,
+		hydrofuge,
+		waterRepellent,
+		smoothieGlass,
+		magmaCrawlerEye,
+		stewPot,
+		titanStew;
+
+		public ItemStack createStack() {
+			return createStack(1);
+		}
+
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModItems.materials, size, ordinal());
+		}
 	}
 }

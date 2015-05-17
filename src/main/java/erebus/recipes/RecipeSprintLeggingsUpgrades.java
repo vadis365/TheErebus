@@ -1,5 +1,6 @@
 package erebus.recipes;
 
+import erebus.item.ItemLeggingsSprint;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -7,7 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.item.Materials.DATA;
-import erebus.item.SprintLeggings;
 
 public class RecipeSprintLeggingsUpgrades implements IRecipe {
 	@Override
@@ -32,7 +32,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 		}
 
 		if (cnt == 2 && hasVelocity && leggings != null)
-			return leggings.stackTagCompound == null || leggings.stackTagCompound.getByte("upgradeTier") < SprintLeggings.maxTier;
+			return leggings.stackTagCompound == null || leggings.stackTagCompound.getByte("upgradeTier") < ItemLeggingsSprint.maxTier;
 
 		// Biovelocity around leggings
 		if (size < 9)
@@ -43,7 +43,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 				return false;
 
 			if (a == 4) {
-				if (!(is.getItem() == ModItems.sprintLeggings && (is.stackTagCompound == null || is.stackTagCompound.getByte("upgradeTier") < SprintLeggings.maxTier)))
+				if (!(is.getItem() == ModItems.sprintLeggings && (is.stackTagCompound == null || is.stackTagCompound.getByte("upgradeTier") < ItemLeggingsSprint.maxTier)))
 					return false;
 			} else if (!(is.getItem() == ModItems.materials && is.getItemDamage() == DATA.bioVelocity.ordinal()))
 				return false;

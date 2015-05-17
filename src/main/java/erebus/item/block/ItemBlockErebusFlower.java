@@ -1,10 +1,10 @@
 package erebus.item.block;
 
+import erebus.core.helper.Utils;
+import erebus.lib.EnumColour;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import erebus.core.helper.Utils;
-import erebus.lib.EnumColour;
 
 public class ItemBlockErebusFlower extends ItemBlockGeneric {
 

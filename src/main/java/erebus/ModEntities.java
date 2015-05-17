@@ -1,5 +1,6 @@
 package erebus;
 
+import erebus.item.ItemSpawnEggs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -73,7 +74,6 @@ import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
-import erebus.item.SpawnEggs;
 
 public class ModEntities {
 	public static void init() {
@@ -160,6 +160,6 @@ public class ModEntities {
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor) {
 		registerEntity(id, entityClass, name);
-		SpawnEggs.registerSpawnEgg(entityClass, name, id, eggBackgroundColor, eggForegroundColor);
+		ItemSpawnEggs.registerSpawnEgg(entityClass, name, id, eggBackgroundColor, eggForegroundColor);
 	}
 }
