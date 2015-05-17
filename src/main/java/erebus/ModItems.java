@@ -22,7 +22,6 @@ import erebus.item.ItemArmorReinExoskeleton;
 import erebus.item.ItemArmorRhino;
 import erebus.item.ItemArmorWaterStriders;
 import erebus.item.ItemAxeJade;
-import erebus.item.ItemBookSmoothies;
 import erebus.item.ItemBootsJump;
 import erebus.item.ItemBottleAntiVenom;
 import erebus.item.ItemBowMaxSpeed;
@@ -195,7 +194,6 @@ public class ModItems {
 	public static final Item bucketHoney = new ItemBucket(ModBlocks.honeyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.bucketHoney").setTextureName("erebus:bucketHoney");
 
 	public static final Item bottleAntiVenom = new ItemBottleAntiVenom().setUnlocalizedName("erebus.bottleAntiVenom");
-	public static final Item smoothieBook = new ItemBookSmoothies().setMaxStackSize(1).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.smoothieBook").setTextureName("book_normal");
 
 	public static void init() {
 		registerItems();

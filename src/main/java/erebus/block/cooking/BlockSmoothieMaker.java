@@ -5,7 +5,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -15,7 +14,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
-import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
@@ -61,9 +59,6 @@ public class BlockSmoothieMaker extends BlockContainer {
 			if (!ItemStack.areItemStacksEqual(oldItem, newItem))
 				return true;
 		}
-
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().stackSize == 1 && player.getCurrentEquippedItem().getItem() == Items.book)
-			player.setCurrentItemOrArmor(0, new ItemStack(ModItems.smoothieBook));
 
 		if (tile != null)
 			player.openGui(Erebus.instance, CommonProxy.GUI_ID_SMOOTHIE_MAKER, world, x, y, z);
