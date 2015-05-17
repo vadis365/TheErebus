@@ -85,6 +85,6 @@ public class NEIErebusConfig implements IConfigureNEI {
 
 	@Override
 	public String getVersion() {
-		return Reference.MOD_VERSION;
+		return "${version}";
 	}
 }

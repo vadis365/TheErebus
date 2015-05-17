@@ -1,15 +1,5 @@
 package erebus;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -26,12 +16,7 @@ import erebus.client.gui.RenderWarHammerChargeBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.AmbientMusicManager;
-import erebus.core.handler.BucketHandler;
-import erebus.core.handler.EntityDeathEventHandler;
-import erebus.core.handler.EntityDeathInventoryHandler;
-import erebus.core.handler.EntityPickupEventHandler;
-import erebus.core.handler.HomingBeeconTextureHandler;
-import erebus.core.handler.PlayerChangedDimensionEventHandler;
+import erebus.core.handler.*;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.debug.ErebusCommandDebug;
@@ -48,8 +33,18 @@ import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
 import erebus.world.feature.structure.WorldGenAntlionMaze;
 import erebus.world.teleporter.TeleporterHandler;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
+import java.util.ArrayList;
+import java.util.List;
+
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = "${version}", dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class Erebus {
 
 	@SidedProxy(clientSide = Reference.SP_CLIENT, serverSide = Reference.SP_SERVER)
