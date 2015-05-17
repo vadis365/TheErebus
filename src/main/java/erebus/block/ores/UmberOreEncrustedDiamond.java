@@ -1,15 +1,15 @@
 package erebus.block.ores;
 
-import java.util.Random;
-
+import erebus.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import erebus.ModItems;
+
+import java.util.Random;
 
 public class UmberOreEncrustedDiamond extends UmberOre {
 
 	public UmberOreEncrustedDiamond() {
-		super(Blocks.diamond_ore, "ItemEncrustedDiamond", 3);
+		super(Blocks.diamond_ore, "EncrustedDiamond", 3);
 		setHardness(10F);
 	}
 
