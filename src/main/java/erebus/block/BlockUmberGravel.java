@@ -9,7 +9,7 @@ public class BlockUmberGravel extends BlockFalling {
 		setHardness(0.6F);
 		setStepSound(soundTypeGravel);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.umbergravel");
+		setBlockName("erebus.umberGravel");
 		setBlockTextureName("erebus:umberGravel");
 	}
 }
