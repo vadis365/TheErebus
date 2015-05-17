@@ -49,6 +49,7 @@ import erebus.block.BlockTempleBrickUnbreaking;
 import erebus.block.BlockTempleTeleporter;
 import erebus.block.BlockUmberFurnace;
 import erebus.block.BlockUmberGolemStatue;
+import erebus.block.BlockUmberGravel;
 import erebus.block.BlockUmberPaver;
 import erebus.block.BlockUmberstone;
 import erebus.block.BlockUmberstonePillar;
@@ -137,6 +138,7 @@ public class ModBlocks {
 	public static final Block umberstoneButton = new BlockButtonUmberstone();
 	public static final Block volcanicRock = new BlockSimple(Material.rock).setHardness(5.0F).setResistance(20.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.volcanicRock").setBlockTextureName("erebus:volcanicRock");
 	public static final Block swampVent = new BlockSwampVent().setBlockName("erebus.swampVent");
+	public static final Block umbergravel = new BlockUmberGravel();
 
 	// ORES
 	public static final Block oreCoal = new UmberOre(Blocks.coal_ore, "Coal", 0);
