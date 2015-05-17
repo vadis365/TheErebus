@@ -130,9 +130,9 @@ public class ItemFoodSmoothie extends ItemFood {
 		onFoodEaten(stack, world, player);
 
 		if (stack.stackSize != 0)
-			player.inventory.addItemStackToInventory(Materials.DATA.smoothieGlass.createStack());
+			player.inventory.addItemStackToInventory(ModItems.DATA.smoothieGlass.createStack());
 
-		return stack.stackSize == 0 ? Materials.DATA.smoothieGlass.createStack() : stack;
+		return stack.stackSize == 0 ? ModItems.DATA.smoothieGlass.createStack() : stack;
 	}
 
 	@Override

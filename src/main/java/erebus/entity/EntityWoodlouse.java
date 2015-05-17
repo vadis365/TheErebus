@@ -17,7 +17,6 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.Materials;
 
 public class EntityWoodlouse extends EntityCreature {
 
@@ -112,6 +111,6 @@ public class EntityWoodlouse extends EntityCreature {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.DATA.whetstonePowder.createStack(), 0F);
+			entityDropItem(ModItems.DATA.whetstonePowder.createStack(), 0F);
 	}
 }

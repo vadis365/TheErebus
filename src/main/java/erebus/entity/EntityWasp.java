@@ -26,7 +26,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.Materials;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
 
@@ -129,7 +128,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.DATA.waspSting.createStack(), 0.0F);
+			entityDropItem(ModItems.DATA.waspSting.createStack(), 0.0F);
 		if (getIsBoss() == 1)
 			entityDropItem(new ItemStack(ModItems.bottleAntiVenom), 0.0F);
 	}

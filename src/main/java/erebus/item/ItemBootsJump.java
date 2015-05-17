@@ -4,7 +4,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
-import erebus.item.Materials.DATA;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -29,7 +28,7 @@ public class ItemBootsJump extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.elasticFibre.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == ModItems.DATA.elasticFibre.ordinal();
 	}
 
 	@Override

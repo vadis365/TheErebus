@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -12,7 +13,6 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.Materials;
 
 public class EntityPrayingMantis extends EntityMob {
 
@@ -92,7 +92,7 @@ public class EntityPrayingMantis extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.DATA.camoPowder.createStack(), 0.0F);
+			entityDropItem(ModItems.DATA.camoPowder.createStack(), 0.0F);
 	}
 
 	@Override

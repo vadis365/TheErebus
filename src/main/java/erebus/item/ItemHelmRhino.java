@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.client.model.armor.ModelRhinoHelm;
-import erebus.item.Materials.DATA;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +21,7 @@ public class ItemHelmRhino extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.plateExoRhino.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == ModItems.DATA.plateExoRhino.ordinal();
 	}
 
 	@Override

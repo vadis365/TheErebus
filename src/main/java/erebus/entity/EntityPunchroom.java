@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.ModItems;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,7 +8,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.Materials;
 
 public class EntityPunchroom extends EntityMob {
 	private int shroomJumpDelay;
@@ -40,7 +40,7 @@ public class EntityPunchroom extends EntityMob {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (rand.nextInt(5) == 0)
-			entityDropItem(Materials.DATA.elasticFibre.createStack(1 + looting), 0.0F);
+			entityDropItem(ModItems.DATA.elasticFibre.createStack(1 + looting), 0.0F);
 	}
 
 	@Override

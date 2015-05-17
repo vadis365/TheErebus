@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -10,7 +11,6 @@ import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.item.Materials;
 
 public class EntityMagmaCrawler extends EntityMob {
 	private int shouldDo;
@@ -59,7 +59,7 @@ public class EntityMagmaCrawler extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(Materials.DATA.magmaCrawlerEye.createStack(), 0.0F);
+		entityDropItem(ModItems.DATA.magmaCrawlerEye.createStack(), 0.0F);
 	}
 
 	public boolean isOnCeiling() {

@@ -4,7 +4,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModMaterials;
-import erebus.item.Materials.DATA;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -26,6 +25,6 @@ public class ItemArmorReinExoskeleton extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.reinforcedPlateExo.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == ModItems.DATA.reinforcedPlateExo.ordinal();
 	}
 }

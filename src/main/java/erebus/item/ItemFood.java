@@ -3,6 +3,7 @@ package erebus.item;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -179,7 +180,7 @@ public class ItemFood extends net.minecraft.item.ItemFood {
 				world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 				break;
 			case titanStewCooked:
-				is = Materials.DATA.stewPot.createStack();
+				is = ModItems.DATA.stewPot.createStack();
 				break;
 			default:
 				return is;
@@ -235,7 +236,7 @@ public class ItemFood extends net.minecraft.item.ItemFood {
 			case melonadeSparkly:
 				return new ItemStack(Items.glass_bottle);
 			case titanStewCooked:
-				return Materials.DATA.stewPot.createStack();
+				return ModItems.DATA.stewPot.createStack();
 			default:
 				return null;
 		}

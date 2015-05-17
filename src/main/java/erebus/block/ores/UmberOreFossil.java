@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModItems;
-import erebus.item.Materials;
 
 public class UmberOreFossil extends UmberOre {
 
@@ -34,7 +33,7 @@ public class UmberOreFossil extends UmberOre {
 		}
 
 		if (world.rand.nextInt(10 - Math.min(6, fortune * 2)) == 0) {
-			drops.add(Materials.DATA.altarFragment.createStack());
+			drops.add(ModItems.DATA.altarFragment.createStack());
 			return drops;
 		}
 
@@ -47,7 +46,7 @@ public class UmberOreFossil extends UmberOre {
 				meta = 0;
 			} else {
 				item = ModItems.materials;
-				meta = Materials.DATA.shardBone.ordinal();
+				meta = ModItems.DATA.shardBone.ordinal();
 			}
 
 			drops.add(new ItemStack(item, 1, meta));

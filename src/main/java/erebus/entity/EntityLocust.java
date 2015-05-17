@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -9,7 +10,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.Materials;
 
 public class EntityLocust extends EntityMob {
 
@@ -64,7 +64,7 @@ public class EntityLocust extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.DATA.elasticFibre.createStack(), 0.0F);
+			entityDropItem(ModItems.DATA.elasticFibre.createStack(), 0.0F);
 	}
 
 	public boolean randJump() {

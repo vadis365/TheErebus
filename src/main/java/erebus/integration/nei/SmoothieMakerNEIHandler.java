@@ -20,7 +20,6 @@ import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.client.gui.GuiSmoothieMaker;
 import erebus.core.helper.Utils;
-import erebus.item.Materials;
 import erebus.recipes.SmoothieMakerRecipe;
 
 public class SmoothieMakerNEIHandler extends TemplateRecipeHandler {
@@ -97,7 +96,7 @@ public class SmoothieMakerNEIHandler extends TemplateRecipeHandler {
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
 		for (SmoothieMakerRecipe recipe : SmoothieMakerRecipe.getRecipeList())
-			if (recipe.isPartOfInput(ingredient) || ingredient.getItem() == ModItems.materials && ingredient.getItemDamage() == Materials.DATA.smoothieGlass.ordinal())
+			if (recipe.isPartOfInput(ingredient) || ingredient.getItem() == ModItems.materials && ingredient.getItemDamage() == ModItems.DATA.smoothieGlass.ordinal())
 				arecipes.add(new CachedSmoothieMakerRecipe(recipe));
 	}
 

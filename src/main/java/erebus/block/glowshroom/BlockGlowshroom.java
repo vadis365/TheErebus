@@ -14,7 +14,6 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.Materials.DATA;
 
 public class BlockGlowshroom extends Block {
 
@@ -72,7 +71,7 @@ public class BlockGlowshroom extends Block {
 
 	@Override
 	public int damageDropped(int meta) {
-		return DATA.yellowDottedFungus.ordinal();
+		return ModItems.DATA.yellowDottedFungus.ordinal();
 	}
 
 	@Override

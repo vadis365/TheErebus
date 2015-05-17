@@ -20,7 +20,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.item.Materials.DATA;
 import erebus.item.block.ItemBlockGeneric;
 
 public class BlockRedGem extends Block implements ISubBlocksBlock {
@@ -64,7 +63,7 @@ public class BlockRedGem extends Block implements ISubBlocksBlock {
 
 	@Override
 	public int damageDropped(int meta) {
-		return meta == 1 || meta == 2 ? 1 : DATA.redGem.ordinal();
+		return meta == 1 || meta == 2 ? 1 : ModItems.DATA.redGem.ordinal();
 	}
 
 	@Override

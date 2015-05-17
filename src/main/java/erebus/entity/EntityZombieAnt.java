@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,7 +15,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.item.Materials;
 
 public class EntityZombieAnt extends EntityMob {
 
@@ -99,7 +99,7 @@ public class EntityZombieAnt extends EntityMob {
 		entityDropItem(new ItemStack(Blocks.red_mushroom), 0.0F);
 		entityDropItem(new ItemStack(Blocks.brown_mushroom), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(Materials.DATA.antPheromones.createStack(), 0.0F);
+			entityDropItem(ModItems.DATA.antPheromones.createStack(), 0.0F);
 	}
 
 	@Override

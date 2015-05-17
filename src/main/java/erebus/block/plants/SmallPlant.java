@@ -18,7 +18,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.item.Materials;
 
 public class SmallPlant extends BlockTallGrass {
 	protected final String name;
@@ -57,11 +56,11 @@ public class SmallPlant extends BlockTallGrass {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		if ("nettle".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(Materials.DATA.nettleleaves.createStack());
+			ret.add(ModItems.DATA.nettleleaves.createStack());
 			return ret;
 		} else if ("nettleFlowered".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(Materials.DATA.nettleflowers.createStack());
+			ret.add(ModItems.DATA.nettleflowers.createStack());
 			return ret;
 		} else if ("swampPlant".equals(name) && world.rand.nextInt(8) == 0) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();

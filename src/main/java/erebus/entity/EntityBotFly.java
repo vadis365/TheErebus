@@ -2,6 +2,7 @@ package erebus.entity;
 
 import java.util.Calendar;
 
+import erebus.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -13,7 +14,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.Materials;
 
 public class EntityBotFly extends EntityMob {
 	// AKA ButtFly
@@ -248,9 +248,9 @@ public class EntityBotFly extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount) {
-			entityDropItem(Materials.DATA.flyWing.createStack(), 0.0F);
+			entityDropItem(ModItems.DATA.flyWing.createStack(), 0.0F);
 			if (rand.nextInt(5) == 0)
-				entityDropItem(Materials.DATA.compoundEyes.createStack(), 0.0F);
+				entityDropItem(ModItems.DATA.compoundEyes.createStack(), 0.0F);
 		}
 	}
 

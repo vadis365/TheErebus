@@ -36,7 +36,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.Materials;
 import erebus.tileentity.TileEntityTitanChest;
 
 public class EntityTitanBeetle extends EntityTameable {
@@ -191,10 +190,10 @@ public class EntityTitanBeetle extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() >= 2)
-			entityDropItem(Materials.DATA.rhinoRidingKit.createStack(), 0.0F);
+			entityDropItem(ModItems.DATA.rhinoRidingKit.createStack(), 0.0F);
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
-			entityDropItem(Materials.DATA.plateExo.createStack(), 0.0F);
+			entityDropItem(ModItems.DATA.plateExo.createStack(), 0.0F);
 
 		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? ItemFood.FoodType.titanChopCooked.ordinal() : ItemFood.FoodType.titanChop.ordinal()), 0.0F);
 		dropChests();
@@ -233,7 +232,7 @@ public class EntityTitanBeetle extends EntityTameable {
 			openGUI(player);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.beetleTamingAmulet.ordinal() && getTameState() == 0) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ModItems.DATA.beetleTamingAmulet.ordinal() && getTameState() == 0) {
 			healingBuff = 20F;
 			is.stackSize--;
 			setTameState((byte) 1);
@@ -245,7 +244,7 @@ public class EntityTitanBeetle extends EntityTameable {
 			heal(healingBuff);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.rhinoRidingKit.ordinal() && getTameState() == 1) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ModItems.DATA.rhinoRidingKit.ordinal() && getTameState() == 1) {
 			is.stackSize--;
 			player.swingItem();
 			setTameState((byte) 2);
@@ -261,7 +260,7 @@ public class EntityTitanBeetle extends EntityTameable {
 				player.mountEntity(this);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == Materials.DATA.bambooShoot.ordinal() && getTameState() != 0) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ModItems.DATA.bambooShoot.ordinal() && getTameState() != 0) {
 			healingBuff = 5.0F;
 			if (getHealth() < getMaxHealth()) {
 				heal(healingBuff);

@@ -2,6 +2,7 @@ package erebus.entity;
 
 import java.util.List;
 
+import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -19,7 +20,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.Materials;
 import erebus.lib.EnumWood;
 
 public class EntityCicada extends EntityCreature {
@@ -84,7 +84,7 @@ public class EntityCicada extends EntityCreature {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(Materials.DATA.repellent.createStack(), 0.0F);
+			entityDropItem(ModItems.DATA.repellent.createStack(), 0.0F);
 	}
 
 	@Override
