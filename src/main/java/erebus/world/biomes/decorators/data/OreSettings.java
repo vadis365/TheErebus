@@ -1,12 +1,12 @@
 package erebus.world.biomes.decorators.data;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.feature.decoration.WorldGenErebusMinable;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public final class OreSettings {
 	private static final byte[] checkX = new byte[] { -1, -1, 1, 1, 0, 0 }, checkY = new byte[] { 0, 0, 0, 0, -1, 1 }, checkZ = new byte[] { -1, 1, -1, 1, 0, 0 };
@@ -125,7 +125,6 @@ public final class OreSettings {
 		LEAD(ModBlocks.oreLead),
 		SILVER(ModBlocks.oreSilver),
 		TIN(ModBlocks.oreTin),
-		TEMPLE(ModBlocks.oreTemple),
 		GNEISS(ModBlocks.oreGneiss);
 
 		final Block oreBlock;

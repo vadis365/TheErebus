@@ -303,7 +303,6 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreEmerald), new ItemStack(Items.emerald), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreJade), Materials.DATA.jade.createStack(), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreFossil), Materials.DATA.shardBone.createStack(), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreTemple), Materials.DATA.templeRock.createStack(), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreGneiss), Materials.DATA.gneissRock.createStack(), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.orePetrifiedWood), Materials.DATA.petrifiedWood.createStack(), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreEncrustedDiamond), new ItemStack(ModItems.encrustedDiamond), 1.0F);
@@ -336,7 +335,6 @@ public class RecipeHandler {
 		OreDictionary.registerOre("orePetrifiedWood", new ItemStack(ModBlocks.orePetrifiedWood));
 		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.oreEncrustedDiamond));
 		OreDictionary.registerOre("oreFossil", new ItemStack(ModBlocks.oreFossil));
-		OreDictionary.registerOre("oreTemple", new ItemStack(ModBlocks.oreTemple));
 		OreDictionary.registerOre("oreGneiss", new ItemStack(ModBlocks.oreGneiss));
 
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
