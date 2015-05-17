@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,6 +15,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.Materials;
 
 public class EntityCentipede extends EntityMob {
 
@@ -105,14 +105,14 @@ public class EntityCentipede extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount) {
-			entityDropItem(ModItems.DATA.bioVelocity.createStack(), 0.0F);
-			entityDropItem(ModItems.DATA.poisonGland.createStack(), 0.0F);
+			entityDropItem(Materials.DATA.bioVelocity.createStack(), 0.0F);
+			entityDropItem(Materials.DATA.poisonGland.createStack(), 0.0F);
 		}
 	}
 
 	@Override
 	protected void dropRareDrop(int looting) {
-		entityDropItem(ModItems.DATA.supernaturalvelocity.createStack(), 0.0F);
+		entityDropItem(Materials.DATA.supernaturalvelocity.createStack(), 0.0F);
 	}
 
 	@Override

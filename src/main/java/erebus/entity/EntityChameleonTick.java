@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -14,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.item.Materials;
 
 public class EntityChameleonTick extends EntityMob {
 	public Block blockID;
@@ -71,7 +71,7 @@ public class EntityChameleonTick extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ModItems.DATA.camoPowder.createStack(), 0.0F);
+			entityDropItem(Materials.DATA.camoPowder.createStack(), 0.0F);
 	}
 
 	@Override

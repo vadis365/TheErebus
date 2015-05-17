@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -19,6 +18,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.Materials;
 
 public class EntityAntlionMiniBoss extends EntityMob {
 
@@ -100,7 +100,7 @@ public class EntityAntlionMiniBoss extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ModItems.DATA.plateExo.createStack(), 0.0F);
+			entityDropItem(Materials.DATA.plateExo.createStack(), 0.0F);
 	}
 
 	@Override

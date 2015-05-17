@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.inventory.ContainerSmoothieMaker;
+import erebus.item.Materials;
 import erebus.recipes.SmoothieMakerRecipe;
 
 public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements IFluidHandler {
@@ -163,7 +164,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 			inputs[i] = inventory[i];
 		SmoothieMakerRecipe recipe = SmoothieMakerRecipe.getRecipe(milkTank, honeyTank, beetleTank, antiVenomTank, inputs);
 		if (recipe != null)
-			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == ModItems.materials && getStackInSlot(4).getItemDamage() == ModItems.DATA.smoothieGlass.ordinal() && getStackInSlot(4).stackSize == 1) {
+			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == ModItems.materials && getStackInSlot(4).getItemDamage() == Materials.DATA.smoothieGlass.ordinal() && getStackInSlot(4).stackSize == 1) {
 				time++;
 
 				if (time >= MAX_TIME) {

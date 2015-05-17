@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -17,6 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.Materials;
 
 public class EntityGlowWorm extends EntityCreature {
 	public int lastX;
@@ -91,7 +91,7 @@ public class EntityGlowWorm extends EntityCreature {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ModItems.DATA.bioLuminescence.createStack(), 0.0F);
+			entityDropItem(Materials.DATA.bioLuminescence.createStack(), 0.0F);
 	}
 
 	@Override

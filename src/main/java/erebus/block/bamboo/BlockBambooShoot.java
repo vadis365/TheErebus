@@ -20,6 +20,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.item.Materials.DATA;
 
 public class BlockBambooShoot extends BlockFlower implements IGrowable {
 
@@ -126,7 +127,7 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 
 	@Override
 	public int damageDropped(int meta) {
-		return ModItems.DATA.bambooShoot.ordinal();
+		return DATA.bambooShoot.ordinal();
 	}
 
 	@Override

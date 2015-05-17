@@ -16,6 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.item.Materials;
 
 public class EntityTarantula extends EntityMob {
 	public int skin = rand.nextInt(99);
@@ -171,7 +172,7 @@ public class EntityTarantula extends EntityMob {
 		else
 			entityDropItem(new ItemStack(ModItems.food, legDrop + looting, 4), 0.0F);
 		dropItem(Items.spider_eye, chanceFiftyFifty + looting);
-		entityDropItem(ModItems.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
+		entityDropItem(Materials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import erebus.ModMaterials;
 import erebus.client.model.armor.ModelArmorGlider;
 import erebus.client.model.armor.ModelArmorPowered;
 import erebus.core.handler.KeyBindingHandler;
+import erebus.item.Materials.DATA;
 import erebus.network.PacketPipeline;
 import erebus.network.server.PacketGlider;
 import erebus.network.server.PacketGliderPowered;
@@ -33,7 +34,7 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == ModItems.DATA.gliderWing.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.gliderWing.ordinal();
 	}
 
 	@Override

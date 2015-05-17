@@ -21,6 +21,7 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.item.ItemFood.FoodType;
+import erebus.item.Materials.DATA;
 import erebus.lib.Reference;
 
 public class BlockBerryBush extends Block {
@@ -185,7 +186,7 @@ public class BlockBerryBush extends Block {
 	public ItemStack getBerry() {
 		ItemStack item = null;
 		if (type == "jade")
-			item = new ItemStack(ModItems.materials, 1, ModItems.DATA.jadeBerries.ordinal());
+			item = new ItemStack(ModItems.materials, 1, DATA.jadeBerries.ordinal());
 		if (type == "heart")
 			item = new ItemStack(ModItems.heartBerries, 1);
 		if (type == "swamp")

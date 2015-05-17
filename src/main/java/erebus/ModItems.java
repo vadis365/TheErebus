@@ -1,40 +1,31 @@
 package erebus;
 
-import cpw.mods.fml.common.IFuelHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.block.bamboo.BlockBambooShoot;
-import erebus.block.plants.BlockHangerPlants;
+import java.lang.reflect.Field;
+
 import erebus.item.*;
-import erebus.item.ItemFood;
 import erebus.item.bambucket.ItemBambucket;
 import erebus.item.bambucket.ItemBambucketAntiVenom;
 import erebus.item.bambucket.ItemBambucketBeetleJuice;
 import erebus.item.hearts.*;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketSound;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.*;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSeedFood;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import cpw.mods.fml.common.IFuelHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
+import erebus.item.Materials.DATA;
+import erebus.item.hearts.ItemHeartElven;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
-public class ModItems extends Item {
+public class ModItems {
 
 	// BASIC MATERIALS
 	public static final Item portalActivator = new ItemPortalActivator().setUnlocalizedName("erebus.portalActivator");
-	public static final Item materials = new ModItems().setUnlocalizedName("erebus.materials");
+	public static final Item materials = new Materials().setUnlocalizedName("erebus.materials");
 	public static final Item food = new ItemFood().setUnlocalizedName("erebus.food");
 	public static final Item smoothie = new ItemFoodSmoothie().setUnlocalizedName("erebus.smoothie");
 	public static final Item heartBerries = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.heartBerries").setTextureName("erebus:heartBerries");
@@ -151,7 +142,7 @@ public class ModItems extends Item {
 
 	public static void init() {
 		initCreativeTabs();
-		registerItems2();
+		registerItems();
 		registerProperties();
 	}
 
@@ -165,7 +156,7 @@ public class ModItems extends Item {
 		ModTabs.specials.setTab(portalActivator, bucketBeetleJuice, bucketHoney, beeTamingAmulet, homingBeecon, homingBeeconAdvanced, antTamingAmulet, sprayCan, hornOfSummoning, flowerSeeds);
 	}
 
-	private static void registerItems2() {
+	private static void registerItems() {
 		try {
 			for (Field f : ModItems.class.getDeclaredFields()) {
 				Object obj = f.get(null);
@@ -188,190 +179,11 @@ public class ModItems extends Item {
 
 	private static void registerProperties() {
 		GameRegistry.registerFuelHandler(new IFuelHandler() {
+
 			@Override
 			public int getBurnTime(ItemStack fuel) {
 				return fuel.getItem() == materials && fuel.getItemDamage() == DATA.bamboo.ordinal() ? 300 : 0;
 			}
 		});
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] icons;
-
-	public ModItems() {
-		setHasSubtypes(true);
-		setMaxDamage(0);
-	}
-
-	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (side == 1 && is.getItemDamage() == ModItems.DATA.bambooShoot.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
-			Block soil = world.getBlock(x, y, z);
-
-			if (soil != null && soil.canSustainPlant(world, x, y, z, ForgeDirection.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(x, y + 1, z)) {
-				world.setBlock(x, y + 1, z, ModBlocks.bambooShoot);
-
-				if (!player.capabilities.isCreativeMode)
-					--is.stackSize;
-				return true;
-			}
-		}
-
-		if (side == 0 && is.getItemDamage() == ModItems.DATA.darkFruitSeeds.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y - 1, z, side, is)) {
-			Block block = world.getBlock(x, y, z);
-
-			if (block != null && block.getMaterial().blocksMovement()) {
-				world.setBlock(x, y - 1, z, ModBlocks.hanger, BlockHangerPlants.dataHanger0, 2);
-
-				if (!player.capabilities.isCreativeMode)
-					--is.stackSize;
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
-		if (!world.isRemote) {
-			int damage = is.getItemDamage();
-
-			if (damage == ModItems.DATA.bioVelocity.ordinal() || damage == ModItems.DATA.supernaturalvelocity.ordinal()) {
-				PotionEffect currentSpeed = player.getActivePotionEffect(Potion.moveSpeed);
-
-				if (currentSpeed == null || damage == ModItems.DATA.bioVelocity.ordinal() && currentSpeed.getAmplifier() < 1 || damage == ModItems.DATA.supernaturalvelocity.ordinal() && currentSpeed.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, damage == ModItems.DATA.bioVelocity.ordinal() ? 280 : 210, damage == ModItems.DATA.bioVelocity.ordinal() ? 1 : 3, true));
-					PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
-				} else
-					return is;
-			}
-
-			if (damage == ModItems.DATA.camoPowder.ordinal()) {
-				PotionEffect currentVisibility = player.getActivePotionEffect(Potion.invisibility);
-
-				if (currentVisibility == null || damage == ModItems.DATA.camoPowder.ordinal() && currentVisibility.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(Potion.invisibility.id, damage == ModItems.DATA.camoPowder.ordinal() ? 280 : 210, damage == ModItems.DATA.camoPowder.ordinal() ? 1 : 3, true));
-					PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
-				} else
-					return is;
-			} else
-				return is;
-
-			if (!player.capabilities.isCreativeMode)
-				--is.stackSize;
-		}
-
-		return is;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
-		ModItems.icons = new IIcon[ModItems.DATA.values().length];
-		int i = 0;
-		for (ModItems.DATA d : ModItems.DATA.values())
-			ModItems.icons[i++] = iconRegister.registerIcon("erebus:" + d.name());
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= ModItems.icons.length)
-			return null;
-		return ModItems.icons[meta];
-	}
-
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
-		for (int i = 0; i < ModItems.DATA.values().length; i++)
-			list.add(new ItemStack(id, 1, i));
-	}
-
-	@Override
-	public String getUnlocalizedName(ItemStack is) {
-		return super.getUnlocalizedName() + "." + is.getItemDamage();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack is, int pass) {
-		return is.getItemDamage() == ModItems.DATA.whetstonePowder.ordinal();
-	}
-
-	public enum DATA {
-		plateExo,
-		jade,
-		shardBone,
-		bamboo,
-		compoundEyes,
-		compoundLens,
-		flyWing,
-		petrifiedWood,
-		bioVelocity,
-		elasticFibre,
-		waspSting,
-		bambooShoot,
-		redGem,
-		bioLuminescence,
-		supernaturalvelocity,
-		altarFragment,
-		reinforcedPlateExo,
-		gliderWing,
-		scorpionPincer,
-		camoPowder,
-		nectar,
-		honeyDrip,
-		poisonGland,
-		mudBrick,
-		whetstonePowder,
-		dragonflyWing,
-		weepingBluePetal,
-		papyrus,
-		enhancedGliderWing,
-		repellent,
-		mucusCharge,
-		nettleleaves,
-		nettleflowers,
-		darkFruitSeeds,
-		mossBall,
-		yellowDottedFungus,
-		plateExoRhino,
-		rhinoBeetleHorn,
-		antPheromones,
-		gaeanGem,
-		crimsonHeart,
-		sapBall,
-		ingotAluminium,
-		ingotCopper,
-		ingotLead,
-		ingotSilver,
-		ingotTin,
-		gneissRock,
-		hideShroom,
-		rhinoRidingKit,
-		beetleTamingAmulet,
-		umberGolemCore,
-		umberGolemHead,
-		umberGolemClaw,
-		umberGolemLegs,
-		jadeBerries,
-		snapperRoot,
-		hydrofuge,
-		waterRepellent,
-		smoothieGlass,
-		magmaCrawlerEye,
-		stewPot,
-		titanStew;
-
-		public ItemStack createStack() {
-			return createStack(1);
-		}
-
-		public ItemStack createStack(int size) {
-			return new ItemStack(materials, size, ordinal());
-		}
 	}
 }

@@ -16,6 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
+import erebus.item.Materials.DATA;
 
 public class BlockHangerPlants extends BlockBush {
 
@@ -164,7 +165,7 @@ public class BlockHangerPlants extends BlockBush {
 		}
 
 		if (meta == dataHangerSeed) {
-			ItemStack item = new ItemStack(ModItems.materials, 1, ModItems.DATA.darkFruitSeeds.ordinal());
+			ItemStack item = new ItemStack(ModItems.materials, 1, DATA.darkFruitSeeds.ordinal());
 			world.playSoundAtEntity(player, "random.pop", 0.5F, 2.0F);
 			if (!player.inventory.addItemStackToInventory(item))
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
@@ -184,7 +185,7 @@ public class BlockHangerPlants extends BlockBush {
 		}
 
 		if (meta == dataHangerSeed) {
-			item = new ItemStack(ModItems.materials, 2, ModItems.DATA.darkFruitSeeds.ordinal());
+			item = new ItemStack(ModItems.materials, 2, DATA.darkFruitSeeds.ordinal());
 			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 		}
 	}
@@ -209,7 +210,7 @@ public class BlockHangerPlants extends BlockBush {
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			}
 			if (meta == dataHangerSeed) {
-				item = new ItemStack(ModItems.materials, 1, ModItems.DATA.darkFruitSeeds.ordinal());
+				item = new ItemStack(ModItems.materials, 1, DATA.darkFruitSeeds.ordinal());
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			}
 			world.setBlockToAir(x, y, z);

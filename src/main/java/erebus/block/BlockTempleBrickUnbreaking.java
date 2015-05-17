@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
+import erebus.item.Materials;
 
 public class BlockTempleBrickUnbreaking extends Block {
 
@@ -59,14 +60,14 @@ public class BlockTempleBrickUnbreaking extends Block {
 				case 0:
 					return true;
 				case 1:
-					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ModItems.DATA.jade.ordinal()) {
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == Materials.DATA.jade.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 6, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;
 					}
 					return true;
 				case 2:
-					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ModItems.DATA.plateExo.ordinal()) {
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == Materials.DATA.plateExo.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 7, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;
@@ -80,7 +81,7 @@ public class BlockTempleBrickUnbreaking extends Block {
 					}
 					return true;
 				case 4:
-					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ModItems.DATA.magmaCrawlerEye.ordinal()) {
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == Materials.DATA.magmaCrawlerEye.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 9, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;

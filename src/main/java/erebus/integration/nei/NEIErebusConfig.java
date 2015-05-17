@@ -1,6 +1,5 @@
 package erebus.integration.nei;
 
-import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -11,6 +10,7 @@ import erebus.ModBlocks;
 import erebus.block.BlockDoorErebus;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.Materials;
 import erebus.lib.Reference;
 
 public class NEIErebusConfig implements IConfigureNEI {
@@ -37,23 +37,23 @@ public class NEIErebusConfig implements IConfigureNEI {
 
 		if (!ConfigHandler.INSTANCE.aluminium) {
 			API.hideItem(new ItemStack(ModBlocks.oreAluminium));
-			API.hideItem(ModItems.DATA.ingotAluminium.createStack());
+			API.hideItem(Materials.DATA.ingotAluminium.createStack());
 		}
 		if (!ConfigHandler.INSTANCE.copper) {
 			API.hideItem(new ItemStack(ModBlocks.oreCopper));
-			API.hideItem(ModItems.DATA.ingotCopper.createStack());
+			API.hideItem(Materials.DATA.ingotCopper.createStack());
 		}
 		if (!ConfigHandler.INSTANCE.lead) {
 			API.hideItem(new ItemStack(ModBlocks.oreLead));
-			API.hideItem(ModItems.DATA.ingotLead.createStack());
+			API.hideItem(Materials.DATA.ingotLead.createStack());
 		}
 		if (!ConfigHandler.INSTANCE.silver) {
 			API.hideItem(new ItemStack(ModBlocks.oreSilver));
-			API.hideItem(ModItems.DATA.ingotSilver.createStack());
+			API.hideItem(Materials.DATA.ingotSilver.createStack());
 		}
 		if (!ConfigHandler.INSTANCE.tin) {
 			API.hideItem(new ItemStack(ModBlocks.oreTin));
-			API.hideItem(ModItems.DATA.ingotTin.createStack());
+			API.hideItem(Materials.DATA.ingotTin.createStack());
 		}
 
 		API.hideItem(new ItemStack(ModBlocks.hanger));

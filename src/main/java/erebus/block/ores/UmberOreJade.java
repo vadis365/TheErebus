@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import erebus.ModItems;
+import erebus.item.Materials;
 
 public class UmberOreJade extends UmberOre {
 
@@ -19,6 +20,6 @@ public class UmberOreJade extends UmberOre {
 
 	@Override
 	public int damageDropped(int meta) {
-		return ModItems.DATA.jade.ordinal();
+		return Materials.DATA.jade.ordinal();
 	}
 }
