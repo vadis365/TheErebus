@@ -1,23 +1,18 @@
 package erebus.recipes;
 
-import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import erebus.ModItems;
 import erebus.ModMaterials;
 
-public class RecipePaxel implements IRecipe {
-	@Override
-	public boolean matches(InventoryCrafting matrix, World world) {
-		return checkItemInSlot(matrix, 0, ModItems.jadeAxe) && checkItemInSlot(matrix, 1, ModItems.jadeShovel) && checkItemInSlot(matrix, 2, ModItems.jadePickaxe) && checkItemInSlot(matrix, 4, Items.stick) && checkItemInSlot(matrix, 7, Items.stick);
-	}
+public class RecipePaxel extends ShapedOreRecipe {
 
-	private boolean checkItemInSlot(InventoryCrafting matrix, int slot, Item itemID) {
-		ItemStack is = matrix.getStackInSlot(slot);
-		return is != null && is.getItem() == itemID;
+	private static final int wildcard = OreDictionary.WILDCARD_VALUE;
+
+	public RecipePaxel() {
+		super(ModItems.jadePaxel, "xyz", " w ", " w ", 'x', new ItemStack(ModItems.jadeAxe, 1, wildcard), 'y', new ItemStack(ModItems.jadeShovel, 1, wildcard), 'z', new ItemStack(ModItems.jadePickaxe, 1, wildcard), 'w', "stickWood");
 	}
 
 	@Override
@@ -31,15 +26,5 @@ public class RecipePaxel implements IRecipe {
 		}
 
 		return new ItemStack(ModItems.jadePaxel, 1, ModMaterials.toolJADEPAXEL.getMaxUses() - (int) Math.floor((float) currentDurability * ModMaterials.toolJADEPAXEL.getMaxUses() / totalDurability));
-	}
-
-	@Override
-	public int getRecipeSize() {
-		return 10;
-	}
-
-	@Override
-	public ItemStack getRecipeOutput() {
-		return new ItemStack(ModItems.jadePaxel);
 	}
 }

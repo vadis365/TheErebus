@@ -1,6 +1,5 @@
 package erebus.recipes;
 
-import erebus.item.ItemDungeonIdols;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -16,9 +15,11 @@ import erebus.ModItems;
 import erebus.block.BlockSlabStone;
 import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.ItemDungeonIdols;
 import erebus.item.ItemDungeonIdols.IDOL;
 import erebus.item.ItemFood;
 import erebus.item.ItemMaterials;
+import erebus.item.ItemWhetstone;
 import erebus.lib.EnumWood;
 
 public class RecipeHandler {
@@ -135,7 +136,6 @@ public class RecipeHandler {
 		addShapedRecipe(ItemMaterials.DATA.enhancedGliderWing.createStack(), "BBB", "WWW", "WWW", 'B', ItemMaterials.DATA.bamboo.createStack(), 'W', ItemMaterials.DATA.dragonflyWing.createStack());
 		addShapelessRecipe(new ItemStack(ModItems.waspDagger), ItemMaterials.DATA.waspSting.createStack(), "stickWood");
 		GameRegistry.addRecipe(new RecipeSprintLeggingsUpgrades());
-		GameRegistry.addRecipe(new RecipeWhetstoneUpgrades());
 
 		// Mushroom Helm & Mushroom Blocks
 		addShapedRecipe(new ItemStack(ModItems.mushroomHelm, 1), "mmm", "mpm", 'm', ItemMaterials.DATA.hideShroom.createStack(), 'p', new ItemStack(Blocks.pumpkin));
@@ -264,6 +264,9 @@ public class RecipeHandler {
 					addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(anAxeType));
 				}
 			}
+
+		for (int i = 1; i <= ItemWhetstone.maxTier; i++)
+			addShapedRecipe(new ItemStack(ModItems.whetstone, 1, i), "xxx", "xyx", "xxx", 'x', ItemMaterials.DATA.whetstonePowder.createStack(), 'y', new ItemStack(ModItems.whetstone, 1, i - 1));
 
 		// Special Items
 		addShapedRecipe(ItemMaterials.DATA.rhinoRidingKit.createStack(), " SX", "CCC", "LLL", 'S', Items.string, 'X', ItemMaterials.DATA.plateExo.createStack(), 'C', new ItemStack(Blocks.carpet, 1, 0), 'L', new ItemStack(Items.dye, 1, 4));
