@@ -207,7 +207,7 @@ public class EntityMosquito extends EntityMob {
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		int i = 1 + getBloodConsumed();
-		dropItem(Items.nether_wart, i);
+		dropItem(ModItems.lifeBlood, i);
 	}
 
 	@SuppressWarnings("unchecked")
