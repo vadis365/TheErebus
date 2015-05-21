@@ -100,9 +100,9 @@ public class ItemMaterials extends Item {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
 		icons = new IIcon[DATA.values().length];
-		int i = 0;
 		for (DATA d : DATA.values())
-			icons[i++] = iconRegister.registerIcon("erebus:" + d.name());
+			if (d != DATA.unused)
+				icons[d.ordinal()] = iconRegister.registerIcon("erebus:" + d.name());
 	}
 
 	@Override
@@ -113,12 +113,13 @@ public class ItemMaterials extends Item {
 		return icons[meta];
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
-		for (int i = 0; i < DATA.values().length; i++)
-			list.add(new ItemStack(id, 1, i));
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
+		for (DATA d : DATA.values())
+			if (d != DATA.unused)
+				list.add(new ItemStack(item, 1, d.ordinal()));
 	}
 
 	@Override
@@ -175,6 +176,7 @@ public class ItemMaterials extends Item {
 		gaeanGem,
 		crimsonHeart,
 		sapBall,
+		unused,
 		ingotAluminium,
 		ingotCopper,
 		ingotLead,
