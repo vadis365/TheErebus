@@ -18,8 +18,11 @@ import erebus.entity.EntityUmberGolem;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 
 public class BlockUmberGolemStatue extends BlockContainer {
+
 	public BlockUmberGolemStatue() {
 		super(Material.rock);
+		setHardness(2.0F);
+		setBlockName("erebus.umberGolemStatue");
 	}
 
 	@Override

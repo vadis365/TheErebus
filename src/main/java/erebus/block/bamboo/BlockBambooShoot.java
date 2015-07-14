@@ -90,6 +90,9 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 		setTickRandomly(true);
 		float f = 0.2F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 3.5F, 0.5F + f);
+		setCreativeTab(null);
+		setBlockName("erebus.bambooShoot");
+		setBlockTextureName("erebus:bambooShoot");
 	}
 
 	@Override
