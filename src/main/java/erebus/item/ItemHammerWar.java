@@ -2,6 +2,7 @@ package erebus.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +36,11 @@ public class ItemHammerWar extends ItemSword {
 		list.add("Hold Right mouse button to charge up.");
 		list.add("Sneak + Right Click on top of Block");
 		list.add("to use A.O.E. attack.");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
@@ -26,6 +27,7 @@ public class BlockSwampVent extends Block {
 		setTickRandomly(true);
 		setStepSound(soundTypeGrass);
 		setCreativeTab(ModTabs.blocks);
+		setBlockName("erebus.swampVent");
 	}
 
 	@Override
@@ -69,6 +71,11 @@ public class BlockSwampVent extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg) {
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 		return Blocks.grass.getBlockTextureFromSide(side);
 	}
@@ -90,19 +97,7 @@ public class BlockSwampVent extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-		int l = 0;
-		int i1 = 0;
-		int j1 = 0;
-
-		for (int k1 = -1; k1 <= 1; ++k1)
-			for (int l1 = -1; l1 <= 1; ++l1) {
-				int i2 = world.getBiomeGenForCoords(x + l1, z + k1).getBiomeGrassColor(x + l1, y, z + k1);
-				l += (i2 & 16711680) >> 16;
-				i1 += (i2 & 65280) >> 8;
-				j1 += i2 & 255;
-			}
-
-		return (l / 9 & 255) << 16 | (i1 / 9 & 255) << 8 | j1 / 9 & 255;
+		return Blocks.grass.colorMultiplier(world, x, y, z);
 	}
 
 	@SideOnly(Side.CLIENT)
