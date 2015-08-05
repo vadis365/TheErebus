@@ -124,7 +124,9 @@ public class ItemMaterials extends Item {
 
 	@Override
 	public String getUnlocalizedName(ItemStack is) {
-		return super.getUnlocalizedName() + "." + is.getItemDamage();
+		int meta = is.getItemDamage();
+		meta = Math.min(Math.max(meta, 0), DATA.values().length - 1);
+		return super.getUnlocalizedName() + "." + DATA.values()[meta].name();
 	}
 
 	@Override
@@ -176,7 +178,7 @@ public class ItemMaterials extends Item {
 		gaeanGem,
 		crimsonHeart,
 		sapBall,
-		UNUSED,
+		UNUSED, // TODO Replace me!!!
 		ingotAluminium,
 		ingotCopper,
 		ingotLead,
