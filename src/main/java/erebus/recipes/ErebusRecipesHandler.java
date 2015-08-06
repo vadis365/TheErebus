@@ -7,7 +7,7 @@ import net.minecraftforge.fluids.Fluid;
 import erebus.ModBlocks;
 import erebus.ModFluids;
 import erebus.ModItems;
-import erebus.item.ItemFood.FoodType;
+import erebus.item.ItemErebusFood.FoodType;
 import erebus.item.ItemMaterials;
 import erebus.item.ItemFoodSmoothie.SmoothieType;
 

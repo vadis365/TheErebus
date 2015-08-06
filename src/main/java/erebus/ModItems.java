@@ -36,7 +36,7 @@ import erebus.item.ItemDungeonIdols;
 import erebus.item.ItemEncrustedDiamond;
 import erebus.item.ItemExtractor;
 import erebus.item.ItemFlowerSeeds;
-import erebus.item.ItemFood;
+import erebus.item.ItemErebusFood;
 import erebus.item.ItemFoodHeartBerries;
 import erebus.item.ItemFoodSmoothie;
 import erebus.item.ItemHammerWar;
@@ -82,7 +82,7 @@ public class ModItems {
 	// BASIC MATERIALS
 	public static final Item portalActivator = new ItemPortalActivator().setUnlocalizedName("erebus.portalActivator");
 	public static final Item materials = new ItemMaterials().setUnlocalizedName("erebus.materials");
-	public static final Item food = new ItemFood().setUnlocalizedName("erebus.food");
+	public static final Item food = new ItemErebusFood().setUnlocalizedName("erebus.food");
 	public static final Item smoothie = new ItemFoodSmoothie().setUnlocalizedName("erebus.smoothie");
 	public static final Item heartBerries = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.heartBerries").setTextureName("erebus:heartBerries");
 	public static final Item lifeBlood = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.lifeBlood").setTextureName("erebus:lifeBlood");

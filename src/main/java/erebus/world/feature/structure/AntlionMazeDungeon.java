@@ -20,7 +20,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityUmberGolemDungeonTypes;
-import erebus.item.ItemFood.FoodType;
+import erebus.item.ItemErebusFood.FoodType;
 import erebus.item.ItemMaterials;
 import erebus.item.ItemMaterials.DATA;
 import erebus.item.ItemFoodSmoothie.SmoothieType;

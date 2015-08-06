@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -22,7 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModTabs;
 
 @SuppressWarnings("unchecked")
-public class ItemFood extends net.minecraft.item.ItemFood {
+public final class ItemErebusFood extends ItemFood {
+
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] icons;
 
@@ -45,7 +47,7 @@ public class ItemFood extends net.minecraft.item.ItemFood {
 		}
 	}
 
-	public ItemFood() {
+	public ItemErebusFood() {
 		super(3, 0.5F, false);
 		setMaxDamage(0);
 		setHasSubtypes(true);
