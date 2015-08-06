@@ -146,11 +146,6 @@ public class ItemFoodSmoothie extends ItemFood {
 	}
 
 	@Override
-	public String getPotionEffect(ItemStack stack) {
-		return "+0+1-2+3&4-4+13";
-	}
-
-	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		int damage = stack.getItemDamage();
 		return super.getUnlocalizedName() + "." + damage;
