@@ -1,5 +1,10 @@
 package erebus.core.handler;
 
+import java.util.Iterator;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -54,8 +59,29 @@ public class EntityDeathInventoryHandler {
 						player.inventory.armorInventory[i] = null;
 					}
 				}
+				for (int i = player.inventory.mainInventory.length + 4; i < player.inventory.mainInventory.length + 50; i++) {
+					EntityItem entityitem = getClosestEntityItem(world, player, 16.0D, i - 40);
+					if(entityitem != null) {
+						ItemStack cont = entityitem.getEntityItem();
+						if (cont != null) {
+							tile.setInventorySlotContents(i, cont.copy());
+							entityitem.setDead();
+						}
+					}
+				}
 				tile.setOwner("R.I.P. " + player.getCommandSenderName());
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public EntityItem getClosestEntityItem(final World world, Entity entity, double distance, int index) {
+		List<EntityItem> list = world.getEntitiesWithinAABB(EntityItem.class, entity.boundingBox.expand(distance, distance, distance));
+		for (Iterator<EntityItem> iterator = list.iterator(); iterator.hasNext();) {
+			EntityItem item = iterator.next();
+		}
+		if (list.isEmpty())
+			return null;
+		return index < list.size() ? list.get(index) : null;
 	}
 }

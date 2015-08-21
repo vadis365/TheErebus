@@ -13,7 +13,7 @@ public class TileEntityBones extends TileEntityBasicInventory {
 	private String owner = ""; // could be expanded to contain random names
 
 	public TileEntityBones() {
-		super(40, "container.bones");
+		super(86, "container.bones");
 	}
 
 	@Override
