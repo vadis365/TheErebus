@@ -1,6 +1,7 @@
 package erebus.core.handler;
 
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
@@ -17,6 +18,8 @@ import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityBones;
 
 public class EntityDeathInventoryHandler {
+
+	@SuppressWarnings("unchecked")
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void playerDeath(LivingDeathEvent event) {
 		World world = event.entityLiving.worldObj;
@@ -59,9 +62,20 @@ public class EntityDeathInventoryHandler {
 						player.inventory.armorInventory[i] = null;
 					}
 				}
+
+				List<EntityItem> list = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(16, 16, 16));
+				Collections.sort(list, new Comparator<Entity>() {
+					@Override
+					public int compare(Entity o1, Entity o2) {
+						return Double.compare(o1.getDistanceSqToEntity(player), o2.getDistanceSqToEntity(player));
+					}
+				});
+				int index = 0;
 				for (int i = player.inventory.mainInventory.length + 4; i < player.inventory.mainInventory.length + 50; i++) {
-					EntityItem entityitem = getClosestEntityItem(world, player, 16.0D, i - 40);
-					if(entityitem != null) {
+					if (index >= list.size())
+						break;
+					EntityItem entityitem = list.get(index++);
+					if (entityitem != null) {
 						ItemStack cont = entityitem.getEntityItem();
 						if (cont != null) {
 							tile.setInventorySlotContents(i, cont.copy());
@@ -72,16 +86,5 @@ public class EntityDeathInventoryHandler {
 				tile.setOwner("R.I.P. " + player.getCommandSenderName());
 			}
 		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public EntityItem getClosestEntityItem(final World world, Entity entity, double distance, int index) {
-		List<EntityItem> list = world.getEntitiesWithinAABB(EntityItem.class, entity.boundingBox.expand(distance, distance, distance));
-		for (Iterator<EntityItem> iterator = list.iterator(); iterator.hasNext();) {
-			EntityItem item = iterator.next();
-		}
-		if (list.isEmpty())
-			return null;
-		return index < list.size() ? list.get(index) : null;
 	}
 }
