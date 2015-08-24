@@ -130,7 +130,7 @@ public final class ItemErebusFood extends ItemFood {
 			case cabbage:
 				return 0.3F;
 			case titanStewCooked:
-				return 1.0F;
+				return 4.0F;
 			default:
 				return 0.0F;
 		}
