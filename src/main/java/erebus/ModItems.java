@@ -86,7 +86,7 @@ public class ModItems {
 	public static final Item beeTamingAmulet = new ItemAmuletBeeTaming().setUnlocalizedName("erebus.beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
 	public static final Item homingBeecon = new ItemHomingBeecon().setUnlocalizedName("erebus.homingBeecon").setTextureName("paper");
 	public static final Item homingBeeconAdvanced = new ItemHomingBeeconAdvanced().setUnlocalizedName("erebus.homingBeeconAdvanced").setTextureName("paper");
-	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.6F, ModBlocks.blockCabbage, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
+	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.1F, ModBlocks.blockCabbage, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
 	public static final Item idols = new ItemDungeonIdols();
 
 	public static final Item flowerSeeds = new ItemFlowerSeeds().setUnlocalizedName("erebus.flowerSeeds");
