@@ -27,7 +27,7 @@ public class EntityDeathInventoryHandler {
 			return;
 
 		if (event.entityLiving instanceof EntityPlayer && !world.getGameRules().getGameRuleBooleanValue("keepInventory")) {
-			EntityPlayer player = (EntityPlayer) event.entityLiving;
+			final EntityPlayer player = (EntityPlayer) event.entityLiving;
 
 			int x = MathHelper.floor_double(player.posX);
 			int y = MathHelper.floor_double(player.posY - 1);
