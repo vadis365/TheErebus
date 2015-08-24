@@ -47,10 +47,10 @@ public class ItemWandOfAnimation extends Item {
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!player.canPlayerEdit(x, y, z, side, stack))
 			return false;
-		else if (CraftingAltar.isValid(world, x, y, z)) {
-			CraftingAltar.formAltar(world, x, y, z);
-			return true;
-		} else {
+	//	else if (CraftingAltar.isValid(world, x, y, z)) {
+		//	CraftingAltar.formAltar(world, x, y, z);
+		//	return true;}
+		 else {
 			Block block = world.getBlock(x, y, z);
 			int blockMeta = world.getBlockMetadata(x, y, z);
 			if (!world.isRemote && block != null && canAnimate(block, world, x, y, z)) {

@@ -13,7 +13,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.altars.AltarBase;
-import erebus.block.altars.CraftingAltar;
 import erebus.block.altars.HealingAltar;
 import erebus.block.altars.LightningAltar;
 import erebus.block.altars.OfferingAltar;
@@ -231,7 +230,7 @@ public class ModBlocks {
 	public static final Block altarHealing = new HealingAltar().setBlockName("erebus.altarHealing");
 	public static final Block altarXP = new XPAltar().setBlockName("erebus.altarXP");
 	public static final Block altarRepair = new RepairAltar().setBlockName("erebus.altarRepair");
-	public static final Block craftingAltar = new CraftingAltar();
+//	public static final Block craftingAltar = new CraftingAltar();
 	public static final Block offeringAltar = new OfferingAltar();
 
 	// DUNGEONS

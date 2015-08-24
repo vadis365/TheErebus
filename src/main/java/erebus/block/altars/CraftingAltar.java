@@ -53,7 +53,7 @@ public class CraftingAltar extends BlockContainer {
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++)
 				Utils.breakBlockWithParticles(world, x + i, y, z + j);
-		world.setBlock(x, y, z, ModBlocks.craftingAltar);
+	//	world.setBlock(x, y, z, ModBlocks.craftingAltar);
 	}
 
 	public static boolean isValid(World world, int x, int y, int z) {

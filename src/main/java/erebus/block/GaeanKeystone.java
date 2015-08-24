@@ -19,7 +19,6 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.ItemMaterials;
 import erebus.tileentity.TileEntityGaeanKeystone;
 
 public class GaeanKeystone extends BlockContainer {
@@ -40,12 +39,12 @@ public class GaeanKeystone extends BlockContainer {
 
 	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune) {
-		return ModItems.materials;
+		return Item.getItemFromBlock(this);
 	}
 
 	@Override
 	public int damageDropped(int meta) {
-		return ItemMaterials.DATA.gaeanGem.ordinal();
+		return 0;
 	}
 
 	@Override
