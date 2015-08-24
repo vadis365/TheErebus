@@ -34,9 +34,9 @@ import erebus.item.ItemDaggerWasp;
 import erebus.item.ItemDoorErebus;
 import erebus.item.ItemDungeonIdols;
 import erebus.item.ItemEncrustedDiamond;
+import erebus.item.ItemErebusFood;
 import erebus.item.ItemExtractor;
 import erebus.item.ItemFlowerSeeds;
-import erebus.item.ItemErebusFood;
 import erebus.item.ItemFoodHeartBerries;
 import erebus.item.ItemFoodSmoothie;
 import erebus.item.ItemHammerWar;
@@ -53,7 +53,6 @@ import erebus.item.ItemPaxel;
 import erebus.item.ItemPickaxeJade;
 import erebus.item.ItemPlanticide;
 import erebus.item.ItemPortalActivator;
-import erebus.item.ItemRitualDagger;
 import erebus.item.ItemRolledNewspaper;
 import erebus.item.ItemScorpionPincer;
 import erebus.item.ItemSoulCrystal;
@@ -69,13 +68,6 @@ import erebus.item.ItemWoodlouseBall;
 import erebus.item.bambucket.ItemBambucket;
 import erebus.item.bambucket.ItemBambucketAntiVenom;
 import erebus.item.bambucket.ItemBambucketBeetleJuice;
-import erebus.item.hearts.ItemHeartBurning;
-import erebus.item.hearts.ItemHeartElven;
-import erebus.item.hearts.ItemHeartJade;
-import erebus.item.hearts.ItemHeartMana;
-import erebus.item.hearts.ItemHeartStone;
-import erebus.item.hearts.ItemHeartTerra;
-import erebus.item.hearts.ItemHeartTwin;
 
 public class ModItems {
 
@@ -154,16 +146,16 @@ public class ModItems {
 	public static final Item warHammer = new ItemHammerWar().setUnlocalizedName("erebus.warHammer");
 
 	// ANIMATION MAGIC
-	public static final Item ritualDagger = new ItemRitualDagger();
-	public static final Item jadeHeart = new ItemHeartJade();
 	public static final Item soulCrystal = new ItemSoulCrystal();
+/*	public static final Item ritualDagger = new ItemRitualDagger();
+	public static final Item jadeHeart = new ItemHeartJade();
 	public static final Item manaHeart = new ItemHeartMana();
 	public static final Item elvenHeart = new ItemHeartElven();
 	public static final Item terraHeart = new ItemHeartTerra();
 	public static final Item stoneHeart = new ItemHeartStone();
 	public static final Item burningHeart = new ItemHeartBurning();
 	public static final Item twinHeart = new ItemHeartTwin();
-
+*/
 	// MISC ARMOR
 	public static final Item reinCompoundGoggles = new ItemCompoundGoggles(ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("erebus.reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
 	public static final Item compoundGoggles = new ItemCompoundGoggles(ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("erebus.compoundGoggles").setTextureName("erebus:compoundGoggles");

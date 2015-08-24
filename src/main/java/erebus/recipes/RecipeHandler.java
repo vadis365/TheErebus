@@ -85,6 +85,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(ModItems.doorAsper, 3), "##", "##", "##", '#', "plank" + EnumWood.Asper);
 		addShapedRecipe(new ItemStack(ModItems.doorCypress, 3), "##", "##", "##", '#', "plank" + EnumWood.Cypress);
 		addShapedRecipe(new ItemStack(ModItems.doorRotten, 3), "##", "##", "##", '#', "plank" + EnumWood.Rotten);
+		addShapedRecipe(new ItemStack(ModItems.doorMarshwood, 3), "##", "##", "##", '#', "plank" + EnumWood.Marshwood);
 		addShapedRecipe(new ItemStack(ModItems.doorPetrified, 3), "##", "##", "##", '#', "plankPetrified");
 		addShapedRecipe(new ItemStack(ModItems.doorScorched, 3), "##", "##", "##", '#', "plankScorched");
 
@@ -226,7 +227,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(ModBlocks.templePillar, 2), "x", "x", 'x', new ItemStack(ModBlocks.templeTile));
 		addShapedRecipe(new ItemStack(ModBlocks.gneiss), "xx", "xx", 'x', ItemMaterials.DATA.gneissRock.createStack());
 		addShapelessRecipe(new ItemStack(Items.dye, 2, 9), ModBlocks.waterFlower);
-		addShapedRecipe(new ItemStack(ModBlocks.craftingAltar), "xxx", "xxx", "xxx", 'x', ModBlocks.altarBase);
+	//	addShapedRecipe(new ItemStack(ModBlocks.craftingAltar), "xxx", "xxx", "xxx", 'x', ModBlocks.altarBase);
 		addShapedRecipe(ItemMaterials.DATA.jade.createStack(), "xxx", "xxx", "xxx", 'x', ItemMaterials.DATA.jadeBerries.createStack());
 		addShapedRecipe(ItemMaterials.DATA.waterRepellent.createStack(), "xxx", "xrx", "xxx", 'x', ItemMaterials.DATA.hydrofuge.createStack(), 'r', ItemMaterials.DATA.repellent.createStack());
 		addShapelessRecipe(ItemMaterials.DATA.stewPot.createStack(), Items.cauldron, "stickWood");
@@ -244,6 +245,7 @@ public class RecipeHandler {
 		addShapelessRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), ModItems.bambucketAntiVenom, Items.glass_bottle, Items.glass_bottle);
 
 		// Sharp Swords
+		addShapedRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', ItemMaterials.DATA.petrifiedWood.createStack(), 'U', new ItemStack(ModBlocks.umberstone, 1, 0));
 		for (Item aSwordType : swordType)
 			for (int j = 0; j < 6; j++) {
 				ItemStack swordSharp = new ItemStack(aSwordType);
@@ -283,11 +285,18 @@ public class RecipeHandler {
 		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.IronUmbergolem), "XXX", "XUX", "XXX", 'X', "blockIron", 'U', ModBlocks.umberGolemStatue);
 		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.GoldUmbergolem), "XXX", "XUX", "XXX", 'X', "blockGold", 'U', ModBlocks.umberGolemStatue);
 		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.JadeUmbergolem), "XXX", "XUX", "XXX", 'X', "blockjade", 'U', ModBlocks.umberGolemStatue);
+		// Umbergolem Statue 
+		addShapedRecipe(new ItemStack(ModBlocks.umberGolemStatue), " H ", "LCL", " X ", 'H', ItemMaterials.DATA.umberGolemHead.createStack(), 'L', ItemMaterials.DATA.umberGolemClaw.createStack(), 'C', ItemMaterials.DATA.umberGolemCore.createStack(), 'X', ItemMaterials.DATA.umberGolemLegs.createStack()); 
 
 		// Animation Magic
 		addShapedRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ModItems.soulCrystal, 'z', "stickWood");
-		addShapedRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood");
-		addShapedRecipe(new ItemStack(ModItems.stoneHeart), " x ", "yzx", "xxy", 'x', ModBlocks.templeTile, 'y', Blocks.obsidian, 'z', ItemMaterials.DATA.crimsonHeart.createStack());
+	//	addShapedRecipe(new ItemStack(ModItems.ritualDagger), "  x", " y ", "z  ", 'x', "ingotGold", 'y', "gemJade", 'z', "stickWood");
+	//	addShapedRecipe(new ItemStack(ModItems.stoneHeart), " x ", "yzx", "xxy", 'x', ModBlocks.templeTile, 'y', Blocks.obsidian, 'z', ItemMaterials.DATA.crimsonHeart.createStack());
+	
+		// Temporary Replacement Recipes
+		addShapelessRecipe(new ItemStack(ModItems.witherWebSlinger), new ItemStack(ModItems.webSlinger), new ItemStack(Blocks.soul_sand), ItemMaterials.DATA.poisonGland.createStack(), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb));
+		addShapelessRecipe(new ItemStack(ModBlocks.lightningSpeedBlock), new ItemStack(ModBlocks.velocityBlock), ItemMaterials.DATA.supernaturalvelocity.createStack(), ItemMaterials.DATA.supernaturalvelocity.createStack(), ItemMaterials.DATA.supernaturalvelocity.createStack(), ItemMaterials.DATA.supernaturalvelocity.createStack(), ItemMaterials.DATA.supernaturalvelocity.createStack(), ItemMaterials.DATA.supernaturalvelocity.createStack(), ItemMaterials.DATA.supernaturalvelocity.createStack(), ItemMaterials.DATA.supernaturalvelocity.createStack());
+		
 	}
 
 	private static void registerSmelting() {

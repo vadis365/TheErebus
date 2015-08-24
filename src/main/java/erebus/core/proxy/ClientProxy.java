@@ -126,7 +126,6 @@ import erebus.client.render.item.ExtenderThingyItemRenderer;
 import erebus.client.render.item.ItemAltarBaseRenderer;
 import erebus.client.render.item.ItemAntlionEggRenderer;
 import erebus.client.render.item.ItemBoneBlockRenderer;
-import erebus.client.render.item.ItemCraftingAltarRenderer;
 import erebus.client.render.item.ItemGlowingJarRenderer;
 import erebus.client.render.item.ItemOfferingAltarRenderer;
 import erebus.client.render.item.ItemPetrifiedWoodChestRenderer;
@@ -419,7 +418,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModItems.woodlouseBall, new WoodlouseBallItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.portalActivator, new PortalActivatorRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.offeringAltar), new ItemOfferingAltarRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.craftingAltar), new ItemCraftingAltarRenderer());
+		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.craftingAltar), new ItemCraftingAltarRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.tarantulaEgg), new ItemTarantulaEggRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.smoothieMaker), new ItemSmoothieMakerRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.antlionEgg), new ItemAntlionEggRenderer());
