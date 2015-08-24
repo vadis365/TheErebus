@@ -230,6 +230,8 @@ tile.erebus.blockSilk.name=Silk
 
 tile.erebus.smoothieMaker.name=ErebusCo. Smoothie-matic 2000
 
+tile.erebus.armchair.name=Adventurer's Armchair
+
 # Items
 item.erebus.encrustedDiamond.name=Encrusted Diamond
 item.erebus.helmetExo.name=Exoskeleton Helmet
@@ -545,3 +547,6 @@ wood.erebus.white=White
 wood.erebus.bamboo=Bamboo
 wood.erebus.rotten=Rotten
 wood.erebus.marshwood=Marshwood
+
+# Random
+armchair.spawnSet=You can only sit here...oh whenever
