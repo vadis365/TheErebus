@@ -1,6 +1,5 @@
 package erebus;
 
-import erebus.item.ItemSpawnEggs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -17,6 +16,7 @@ import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackAnt;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBloodSnail;
+import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
@@ -74,6 +74,7 @@ import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
+import erebus.item.ItemSpawnEggs;
 
 public class ModEntities {
 	public static void init() {
@@ -95,8 +96,7 @@ public class ModEntities {
 		registerEntity(14, EntityAntlion.class, "antlion", 0x000000, 0xFFFFFF);
 		registerEntity(15, EntityBlackWidow.class, "blackWidow", 0x000000, 0xFF0000);
 		registerEntity(16, EntityGlowWorm.class, "glowWorm", 0xFFFF00, 0xFFFFFF);
-		// registerEntity(17, Free Space here.class, "bombardierBeetle",
-		// 0xFFEEFF, 0x9E0E0E);
+		registerEntity(17, EntityBombardierBeetle.class, "bombardierBeetle", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(18, EntityScytodes.class, "scytodes", 0x0B4D49, 0xFFFFFF);
 		registerEntity(19, EntityMoneySpider.class, "moneySpider", 0xF5C400, 0x0B4D49);
 		registerEntity(20, EntityPrayingMantis.class, "prayingMantis", 0x06B900, 0x06B900);

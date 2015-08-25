@@ -478,6 +478,7 @@ entity.erebus.snapper.name=Bog Maw
 entity.erebus.magmaCrawler.name=Magma Crawler
 entity.erebus.umberGolemIdol.name=Umber Golem Idol Guardian
 entity.erebus.antlionBoss.name=Antlion Overlord
+entity.erebus.bombardierBeetle.name=Bombardier Beetle
 
 # Fluids
 fluid.honey=Honey
