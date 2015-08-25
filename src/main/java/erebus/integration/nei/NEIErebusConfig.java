@@ -23,9 +23,6 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.registerRecipeHandler(new OfferingAltarNEIHandler());
 		API.registerUsageHandler(new OfferingAltarNEIHandler());
 
-		API.registerRecipeHandler(new CraftingAltarNEIHandler());
-		API.registerUsageHandler(new CraftingAltarNEIHandler());
-
 		API.registerRecipeHandler(new SmoothieMakerNEIHandler());
 		API.registerUsageHandler(new SmoothieMakerNEIHandler());
 

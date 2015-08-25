@@ -14,14 +14,4 @@ public class RecipeHelper {
 			e.printStackTrace();
 		}
 	}
-
-	public static void addCraftingAltarRecipe(ItemStack output, Object focusItem, Object... inputs) {
-		try {
-			Class<?> CraftingAltarRecipe = Class.forName("erebus.recipes.CraftingAltarRecipe");
-			Method addRecipe = CraftingAltarRecipe.getMethod("addRecipe", ItemStack.class, Object.class, Object[].class);
-			addRecipe.invoke(null, output, focusItem, inputs);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

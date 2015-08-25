@@ -108,7 +108,6 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityExtenderThingy.class, "extenderThingy");
 		registerTileEntity(TileEntityBambooPole.class, "bambooPole");
 		registerTileEntity(TileEntityJarOHoney.class, "jarOHoney");
-		//registerTileEntity(TileEntityCraftingAltar.class, "altar");
 		registerTileEntity(TileEntityGlowGem.class, "glowGemBlock");
 		registerTileEntity(TileEntityHoneyComb.class, "honeyComb");
 		registerTileEntity(TileEntitySiloTank.class, "siloTank");

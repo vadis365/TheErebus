@@ -13,7 +13,6 @@ import erebus.item.ItemMaterials;
 
 public class ErebusRecipesHandler {
 	public static void init() {
-	//	craftingAltar();
 		offeringAltar();
 		smoothieMaker();
 	}
@@ -21,14 +20,7 @@ public class ErebusRecipesHandler {
 	private static void offeringAltar() {
 		OfferingAltarRecipe.addRecipe(ItemMaterials.DATA.gaeanGem.createStack(), "gemDiamond", "gemEmerald", new ItemStack(Blocks.obsidian));
 	}
-/*
-	private static void craftingAltar() {
-		CraftingAltarRecipe.addRecipe(new ItemStack(ModItems.jadeHeart), "blockJade", ItemMaterials.DATA.crimsonHeart.createStack(), "ingotGold", "ingotGold", "ingotGold", "ingotGold", "ingotGold");
-		CraftingAltarRecipe.addRecipe(new ItemStack(ModBlocks.lightningSpeedBlock), new ItemStack(ModBlocks.velocityBlock), getArray(ItemMaterials.DATA.supernaturalvelocity.createStack(), 8));
-		CraftingAltarRecipe.addRecipe(new ItemStack(ModItems.witherWebSlinger), new ItemStack(ModItems.webSlinger), new ItemStack(Blocks.soul_sand), ItemMaterials.DATA.poisonGland.createStack(), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb));
-		CraftingAltarRecipe.addRecipe(new ItemStack(ModBlocks.umberGolemStatue), ItemMaterials.DATA.crimsonHeart.createStack(), ItemMaterials.DATA.umberGolemCore.createStack(), ItemMaterials.DATA.umberGolemClaw.createStack(), ItemMaterials.DATA.umberGolemClaw.createStack(), ItemMaterials.DATA.umberGolemHead.createStack(), ItemMaterials.DATA.umberGolemLegs.createStack());
-	}
-*/
+
 	private static void smoothieMaker() {
 		SmoothieMakerRecipe.addRecipe(SmoothieType.greenTeaGrasshopper.makeStack(), ModFluids.beetleJuice, new ItemStack(ModItems.food, 1, FoodType.grasshopperLegRaw.ordinal()), new ItemStack(ModItems.food, 1, FoodType.grasshopperLegRaw.ordinal()), ItemMaterials.DATA.elasticFibre.createStack(), ItemMaterials.DATA.flyWing.createStack());
 		SmoothieMakerRecipe.addRecipe(SmoothieType.moneyHoney.makeStack(), ModFluids.honey, ItemMaterials.DATA.honeyDrip.createStack(), ItemMaterials.DATA.honeyDrip.createStack(), ItemMaterials.DATA.nectar.createStack(), new ItemStack(Items.gold_nugget));

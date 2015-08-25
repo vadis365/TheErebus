@@ -15,7 +15,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModTabs;
-import erebus.block.altars.CraftingAltar;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -47,9 +46,6 @@ public class ItemWandOfAnimation extends Item {
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!player.canPlayerEdit(x, y, z, side, stack))
 			return false;
-	//	else if (CraftingAltar.isValid(world, x, y, z)) {
-		//	CraftingAltar.formAltar(world, x, y, z);
-		//	return true;}
 		 else {
 			Block block = world.getBlock(x, y, z);
 			int blockMeta = world.getBlockMetadata(x, y, z);
