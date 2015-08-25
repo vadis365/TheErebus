@@ -23,11 +23,11 @@ import net.minecraft.world.World;
 import erebus.ModBiomes;
 import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
-public class EntitySporeling extends EntityAnimal {
+public class EntityCrushling extends EntityAnimal {
 
-	public EntitySporeling(World world) {
+	public EntityCrushling(World world) {
 		super(world);
-		setSize(0.5F, 0.3F);
+		setSize(0.3F, 0.5F);
 		stepHeight = 0.0F;
 		getNavigator().setBreakDoors(true);
 		getNavigator().setAvoidsWater(true);

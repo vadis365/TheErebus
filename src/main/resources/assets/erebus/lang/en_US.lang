@@ -416,14 +416,6 @@ item.doorAmberItem.name=Amber Door
 item.erebus.warHammer.name=Quake Hammer
 
 item.erebus.soulCrystal.name=Soul Crystal
-item.erebus.jadeHeart.name=Jade Heart
-item.erebus.manaHeart.name=Mana Heart
-item.erebus.elvenHeart.name=Elven Heart
-item.erebus.terraHeart.name=Terra Heart
-item.erebus.stoneHeart.name=Stone Heart
-item.erebus.twinHeart.name=Twin Heart
-item.erebus.burningHeart.name=Burning Heart
-item.erebus.ritualDagger.name=Ritual Dagger
 
 # Entities
 entity.erebus.beetleLarva.name=Beetle Larva
@@ -451,10 +443,10 @@ entity.erebus.fireAnt.name=Fire Ant
 entity.erebus.rhinoBeetle.name=Rhinoceros Beetle
 entity.erebus.workerBee.name=Worker Bee
 entity.erebus.dragonfly.name=Dragonfly
-entity.erebus.bloodSnail.name=Blood Snail
+entity.erebus.bloodSnail.name=Snail
 entity.erebus.titanBeetle.name=Titan Beetle
 entity.erebus.botFlyLarva.name=Bot Fly Larva
-entity.erebus.sporeling.name=Sporeling
+entity.erebus.crushling.name=Crushling
 entity.erebus.wheatWeevil.name=Crop Weevil
 entity.erebus.woodlouse.name=Woodlouse
 entity.erebus.cicada.name=Cicada

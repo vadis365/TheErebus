@@ -4,7 +4,7 @@ import net.minecraft.init.Blocks;
 import erebus.entity.EntityBlackAnt;
 import erebus.entity.EntityCrushroom;
 import erebus.entity.EntityPunchroom;
-import erebus.entity.EntitySporeling;
+import erebus.entity.EntityCrushling;
 import erebus.entity.EntityZombieAnt;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
@@ -19,7 +19,7 @@ public class BiomeFungalForest extends BiomeBaseErebus {
 		setWeight(12);
 		topBlock = Blocks.grass;
 
-		spawningGradual.add(new SpawnEntry(EntitySporeling.class, 10).setGroupSize(1, 1));
+		spawningGradual.add(new SpawnEntry(EntityCrushling.class, 10).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityBlackAnt.class, 15).setGroupSize(3, 5));
 		spawningGradual.add(new SpawnEntry(EntityZombieAnt.class, 8).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityCrushroom.class, 5).setGroupSize(1, 2));

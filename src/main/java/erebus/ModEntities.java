@@ -54,7 +54,7 @@ import erebus.entity.EntitySnapper;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntitySporeBall;
-import erebus.entity.EntitySporeling;
+import erebus.entity.EntityCrushling;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
@@ -108,7 +108,7 @@ public class ModEntities {
 		registerEntity(26, EntityBloodSnail.class, "bloodSnail", 0x634430, 0xFF0000);
 		registerEntity(27, EntityTitanBeetle.class, "titanBeetle", 0xF09071, 0x000000);
 		registerEntity(28, EntityBotFlyLarva.class, "botFlyLarva");
-		registerEntity(29, EntitySporeling.class, "sporeling", 0xFFFFFF, 0xFF0000);
+		registerEntity(29, EntityCrushling.class, "crushling", 0xFFFFFF, 0xFF0000);
 		registerEntity(30, EntityWheatWeevil.class, "wheatWeevil", 0x000000, 0xFFA200);
 		registerEntity(31, EntityWoodlouse.class, "woodlouse", 0x747474, 0x222222);
 		registerEntity(32, EntityCicada.class, "cicada", 0x747474, 0xFFA200);
