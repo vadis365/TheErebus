@@ -308,6 +308,8 @@ public class EntityMosquito extends EntityMob {
 		for (int p1 = n; p1 < o; p1++)
 			for (int q1 = p; q1 < q; q1++)
 				for (int n2 = n1; n2 < o1; n2++) {
+					if (!worldObj.blockExists(p1, q1, n2))
+						continue;
 					Block o2 = worldObj.getBlock(p1, q1, n2);
 					if (o2.isAir(worldObj, p1, q1, n2))
 						continue;
