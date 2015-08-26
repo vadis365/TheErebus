@@ -1,60 +1,363 @@
 {
-"altarchangestate": {"category": "block","sounds":["altarchangestate"]},
-"altaroffering": {"category": "block", "sounds": ["altaroffering"]},
-"squish": {"category": "neutral","sounds": ["squish"]},
-"beetlehurt": {"category": "neutral","sounds": ["beetlehurt"]},
-"beetlesound": {"category": "neutral","sounds": ["beetlesound"]},
-"beetlelarvahurt": {"category": "neutral", "sounds":["beetlelarvahurt"]},
-"beetlelarvamunch": {"category": "neutral","sounds":["beetlelarvamunch"]},
-"beetlelarvasound": {"category": "neutral","sounds":["beetlelarvasound"]},
-"beetlelarvasplat": {"category": "neutral","sounds":["beetlelarvasplat"]},
-"blackwidowhurt": {"category": "hostile","sounds":["blackwidowhurt"]},
-"blackwidowsound": {"category": "hostile","sounds":["blackwidowsound"]},
-"blamsound": {"category": "hostile","sounds":["blamsound"]},
-"bombardierbeetlehurt": {"category": "hostile","sounds":["bombardierbeetlehurt"]},
-"bombardierbeetlesound": {"category": "hostile", "sounds":["bombardierbeetlesound"]},
-"centipedehurt": {"category": "hostile", "sounds":["centipedehurt"]},
-"centipedesound": {"category": "hostile","sounds":["centipedesound"]},
-"centipedewalk": {"category": "hostile","sounds":["centipedewalk"]},
-"fireanthurt": {"category": "hostile", "sounds":["fireanthurt"]},
-"fireantsound": {"category": "hostile","sounds":["fireantsound"]},
-"flyhurt": {"category": "neutral", "sounds":["flyhurt"]},
-"flysound": {"category": "neutral","sounds":["flysound"]},
-"glowwormhurt": {"category": "neutral", "sounds":["glowwormhurt"]},
-"glowwormsound": {"category": "neutral","sounds":["glowwormsound"]},
-"grasshopperhurt": {"category": "neutral", "sounds":["grasshopperhurt"]},
-"grasshoppersound": {"category": "neutral","sounds": ["grasshoppersound"]},
-"hornblow": {"category": "player","sounds": ["hornblow"]},
-"locusthurt": {"category": "hostile", "sounds": ["locusthurt"]},
-"locustsound": {"category": "hostile","sounds": ["locustsound"]},
-"locustspawn": {"category": "hostile","sounds": ["locustspawn"]},
-"mantishurt": {"category": "hostile", "sounds": ["mantishurt"]},
-"mantissound": {"category": "hostile","sounds": ["mantissound"]},
-"mosquitodeath": {"category": "hostile", "sounds": ["mosquitodeath"]},
-"mosquitoflying": {"category": "hostile","sounds": ["mosquitoflying"]},
-"mosquitohit": {"category": "hostile", "sounds": ["mosquitohit"]},
-"mosquitosucking": {"category": "hostile","sounds": ["mosquitosucking"]},
-"slimecharge": {"category": "hostile", "sounds": ["slimecharge"]},
-"snaildeath": {"category": "hostile","sounds": ["snaildeath"]},
-"snailhurt": {"category": "hostile", "sounds": ["snailhurt"]},
-"snailliving": {"category": "hostile","sounds": ["snailliving"]},
-"spiderscreech": {"category": "hostile","sounds": ["spiderscreech"]},
-"sporelingdeath": {"category": "neutral","sounds": ["sporelingdeath"]},
-"sporelinghurt": {"category": "neutral", "sounds": ["sporelinghurt"]},
-"sporelingliving": {"category": "neutral","sounds": ["sporelingliving"]},
-"spraycansound": {"category": "player","sounds": ["spraycansound"]},
-"tunnelingsound": {"category": "hostile","sounds": ["tunnelingsound"]},
-"wasphurt": {"category": "hostile", "sounds": ["wasphurt"]},
-"waspsound": {"category": "hostile","sounds": ["waspsound"]},
-"webslingsplat": {"category": "hostile", "sounds": ["webslingsplat"]},
-"webslingthrow": {"category": "hostile","sounds": ["webslingthrow"]},
-"cabbagefart": {"category": "player","sounds": ["cabbagefart"]},
-"antlionexplode": {"category": "hostile","sounds": ["antlionexplode"]},
-"antliongrowl": {"category": "hostile", "sounds": ["antliongrowl"]},
-"antlionslam": {"category": "hostile","sounds": ["antlionslam"]},
-"magmacrawler": {"category": "hostile","sounds": ["magmacrawler"]},
-"magmacrawlerhurt": {"category": "hostile", "sounds": ["magmacrawlerhurt"]},
-"magmacrawlerdeath": {"category": "hostile","sounds": ["magmacrawlerdeath"]},
-"rhinobeetlesound": {"category": "hostile","sounds": ["rhinobeetlesound"]},
-"rhinobeetlehurt": {"category": "hostile", "sounds": ["rhinobeetlehurt"]}
+    "altarchangestate": {
+        "category": "block",
+        "sounds": [
+            "altarchangestate"
+        ]
+    },
+    "altaroffering": {
+        "category": "block",
+        "sounds": [
+            "altaroffering"
+        ]
+    },
+    "squish": {
+        "category": "neutral",
+        "sounds": [
+            "squish"
+        ]
+    },
+    "beetlehurt": {
+        "category": "neutral",
+        "sounds": [
+            "beetlehurt"
+        ]
+    },
+    "beetlesound": {
+        "category": "neutral",
+        "sounds": [
+            "beetlesound"
+        ]
+    },
+    "beetlelarvahurt": {
+        "category": "neutral",
+        "sounds": [
+            "beetlelarvahurt"
+        ]
+    },
+    "beetlelarvamunch": {
+        "category": "neutral",
+        "sounds": [
+            "beetlelarvamunch"
+        ]
+    },
+    "beetlelarvasound": {
+        "category": "neutral",
+        "sounds": [
+            "beetlelarvasound"
+        ]
+    },
+    "beetlelarvasplat": {
+        "category": "neutral",
+        "sounds": [
+            "beetlelarvasplat"
+        ]
+    },
+    "blackwidowhurt": {
+        "category": "hostile",
+        "sounds": [
+            "blackwidowhurt"
+        ]
+    },
+    "blackwidowsound": {
+        "category": "hostile",
+        "sounds": [
+            "blackwidowsound"
+        ]
+    },
+    "blamsound": {
+        "category": "hostile",
+        "sounds": [
+            "blamsound"
+        ]
+    },
+    "bombardierbeetlehurt": {
+        "category": "hostile",
+        "sounds": [
+            "bombardierbeetlehurt"
+        ]
+    },
+    "bombardierbeetlesound": {
+        "category": "hostile",
+        "sounds": [
+            "bombardierbeetlesound"
+        ]
+    },
+    "centipedehurt": {
+        "category": "hostile",
+        "sounds": [
+            "centipedehurt"
+        ]
+    },
+    "centipedesound": {
+        "category": "hostile",
+        "sounds": [
+            "centipedesound"
+        ]
+    },
+    "centipedewalk": {
+        "category": "hostile",
+        "sounds": [
+            "centipedewalk"
+        ]
+    },
+    "fireanthurt": {
+        "category": "hostile",
+        "sounds": [
+            "fireanthurt"
+        ]
+    },
+    "fireantsound": {
+        "category": "hostile",
+        "sounds": [
+            "fireantsound"
+        ]
+    },
+    "flyhurt": {
+        "category": "neutral",
+        "sounds": [
+            "flyhurt"
+        ]
+    },
+    "flysound": {
+        "category": "neutral",
+        "sounds": [
+            "flysound"
+        ]
+    },
+    "glowwormhurt": {
+        "category": "neutral",
+        "sounds": [
+            "glowwormhurt"
+        ]
+    },
+    "glowwormsound": {
+        "category": "neutral",
+        "sounds": [
+            "glowwormsound"
+        ]
+    },
+    "grasshopperhurt": {
+        "category": "neutral",
+        "sounds": [
+            "grasshopperhurt"
+        ]
+    },
+    "grasshoppersound": {
+        "category": "neutral",
+        "sounds": [
+            "grasshoppersound"
+        ]
+    },
+    "hornblow": {
+        "category": "player",
+        "sounds": [
+            "hornblow"
+        ]
+    },
+    "locusthurt": {
+        "category": "hostile",
+        "sounds": [
+            "locusthurt"
+        ]
+    },
+    "locustsound": {
+        "category": "hostile",
+        "sounds": [
+            "locustsound"
+        ]
+    },
+    "locustspawn": {
+        "category": "hostile",
+        "sounds": [
+            "locustspawn"
+        ]
+    },
+    "mantishurt": {
+        "category": "hostile",
+        "sounds": [
+            "mantishurt"
+        ]
+    },
+    "mantissound": {
+        "category": "hostile",
+        "sounds": [
+            "mantissound"
+        ]
+    },
+    "mosquitodeath": {
+        "category": "hostile",
+        "sounds": [
+            "mosquitodeath"
+        ]
+    },
+    "mosquitoflying": {
+        "category": "hostile",
+        "sounds": [
+            "mosquitoflying"
+        ]
+    },
+    "mosquitohit": {
+        "category": "hostile",
+        "sounds": [
+            "mosquitohit"
+        ]
+    },
+    "mosquitosucking": {
+        "category": "hostile",
+        "sounds": [
+            "mosquitosucking"
+        ]
+    },
+    "slimecharge": {
+        "category": "hostile",
+        "sounds": [
+            "slimecharge"
+        ]
+    },
+    "snaildeath": {
+        "category": "hostile",
+        "sounds": [
+            "snaildeath"
+        ]
+    },
+    "snailhurt": {
+        "category": "hostile",
+        "sounds": [
+            "snailhurt"
+        ]
+    },
+    "snailliving": {
+        "category": "hostile",
+        "sounds": [
+            "snailliving"
+        ]
+    },
+    "spiderscreech": {
+        "category": "hostile",
+        "sounds": [
+            "spiderscreech"
+        ]
+    },
+    "sporelingdeath": {
+        "category": "neutral",
+        "sounds": [
+            "sporelingdeath"
+        ]
+    },
+    "sporelinghurt": {
+        "category": "neutral",
+        "sounds": [
+            "sporelinghurt"
+        ]
+    },
+    "sporelingliving": {
+        "category": "neutral",
+        "sounds": [
+            "sporelingliving"
+        ]
+    },
+    "spraycansound": {
+        "category": "player",
+        "sounds": [
+            "spraycansound"
+        ]
+    },
+    "tunnelingsound": {
+        "category": "hostile",
+        "sounds": [
+            "tunnelingsound"
+        ]
+    },
+    "wasphurt": {
+        "category": "hostile",
+        "sounds": [
+            "wasphurt"
+        ]
+    },
+    "waspsound": {
+        "category": "hostile",
+        "sounds": [
+            "waspsound"
+        ]
+    },
+    "webslingsplat": {
+        "category": "hostile",
+        "sounds": [
+            "webslingsplat"
+        ]
+    },
+    "webslingthrow": {
+        "category": "hostile",
+        "sounds": [
+            "webslingthrow"
+        ]
+    },
+    "cabbagefart": {
+        "category": "player",
+        "sounds": [
+            "cabbagefart"
+        ]
+    },
+    "antlionexplode": {
+        "category": "hostile",
+        "sounds": [
+            "antlionexplode"
+        ]
+    },
+    "antliongrowl": {
+        "category": "hostile",
+        "sounds": [
+            "antliongrowl"
+        ]
+    },
+    "antlionslam": {
+        "category": "hostile",
+        "sounds": [
+            "antlionslam"
+        ]
+    },
+    "magmacrawler": {
+        "category": "hostile",
+        "sounds": [
+            "magmacrawler"
+        ]
+    },
+    "magmacrawlerhurt": {
+        "category": "hostile",
+        "sounds": [
+            "magmacrawlerhurt"
+        ]
+    },
+    "magmacrawlerdeath": {
+        "category": "hostile",
+        "sounds": [
+            "magmacrawlerdeath"
+        ]
+    },
+    "rhinobeetlesound": {
+        "category": "hostile",
+        "sounds": [
+            "rhinobeetlesound"
+        ]
+    },
+    "rhinobeetlehurt": {
+        "category": "hostile",
+        "sounds": [
+            "rhinobeetlehurt"
+        ]
+    },
+    "music.erebusDimension": {
+        "category": "music",
+        "sounds": [
+            {
+                "name": "music/ambient_bugInTheSystem",
+                "stream": true
+            },
+            {
+                "name": "music/ambient_feint_sleepless",
+                "stream": true
+            }
+        ]
+    }
 }
