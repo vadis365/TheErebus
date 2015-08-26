@@ -1,6 +1,7 @@
 package erebus.core.handler;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -21,11 +22,16 @@ public class EntityArmchairSpawnHandler {
 			final EntityPlayer player = (EntityPlayer) event.entityLiving;
 	    	if(world.isRemote)
 	    		return;
-			int x = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posX;
-			int y = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posY - 1;
-			int z = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posZ;
-			if(!(world.getBlock (x, y, z) instanceof BlockArmchair)) {
-				player.setSpawnChunk(null, true, ConfigHandler.INSTANCE.erebusDimensionID);
+			if(player.dimension == ConfigHandler.INSTANCE.erebusDimensionID) {
+					int x = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posX;
+					int y = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posY - 1;
+					int z = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posZ;
+					if(!(world.getBlock(x, y, z) instanceof BlockArmchair)) {
+						int xx = player.getEntityData().getInteger("erebusSpawnSetX");
+						int yy = player.getEntityData().getInteger("erebusSpawnSetY");
+						int zz = player.getEntityData().getInteger("erebusSpawnSetZ");
+						player.setSpawnChunk(new ChunkCoordinates(xx, yy, zz), true, ConfigHandler.INSTANCE.erebusDimensionID);
+				}
 			}
 		}
 	}
