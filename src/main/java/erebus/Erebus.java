@@ -27,6 +27,7 @@ import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.handler.BucketHandler;
+import erebus.core.handler.EntityArmchairSpawnHandler;
 import erebus.core.handler.EntityDeathEventHandler;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityPickupEventHandler;
@@ -110,6 +111,7 @@ public class Erebus {
 		TeleporterHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityArmchairSpawnHandler());
 		MinecraftForge.EVENT_BUS.register(new PlayerChangedDimensionEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityPickupEventHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);

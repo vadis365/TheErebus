@@ -280,4 +280,12 @@ public class CommonProxy implements IGuiHandler {
 
 		return null;
 	}
+
+    public EntityPlayer getClientPlayer() {
+        return null;
+    }
+    
+	public World getClientWorld() {
+		return null;
+	}
 }

@@ -542,3 +542,4 @@ wood.erebus.marshwood=Marshwood
 
 # Random
 armchair.spawnSet=You can only sit here...oh whenever
+armchair.spawnUnset=Spawn location removed

@@ -12,6 +12,7 @@ import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.client.particle.EntitySpellParticleFX;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -480,5 +481,15 @@ public class ClientProxy extends CommonProxy {
 
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
+	}
+
+	@Override
+	public World getClientWorld() {
+		return Minecraft.getMinecraft().theWorld;
+	}
+
+	@Override
+	public EntityPlayer getClientPlayer() {
+		return Minecraft.getMinecraft().thePlayer;
 	}
 }
