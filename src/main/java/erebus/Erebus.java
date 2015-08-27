@@ -67,7 +67,8 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new RenderWarHammerChargeBar());
 			MinecraftForge.EVENT_BUS.register(new HomingBeeconTextureHandler());
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
-			FMLCommonHandler.instance().bus().register(new ErebusMusicHandler());
+			if (ConfigHandler.INSTANCE.playCustomSongs)
+				FMLCommonHandler.instance().bus().register(new ErebusMusicHandler());
 		}
 
 		ModFluids.init();
