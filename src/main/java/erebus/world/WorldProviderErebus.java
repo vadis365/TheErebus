@@ -32,7 +32,7 @@ public class WorldProviderErebus extends WorldProvider {
 
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z) {
-		return true;
+		return this.worldObj.getTopBlock(x, z) != Blocks.bedrock && this.worldObj.getTopBlock(x, z) != Blocks.air;
 	}
 
 	@Override
@@ -129,16 +129,13 @@ public class WorldProviderErebus extends WorldProvider {
 		ChunkCoordinates chunkcoordinates = new ChunkCoordinates(worldObj.getSpawnPoint());
 
 		boolean isAdventure = worldObj.getWorldInfo().getGameType() == GameType.ADVENTURE;
-		int spawnFuzz = 200;
+		int spawnFuzz = 100;
 		int spawnFuzzHalf = spawnFuzz / 2;
 
-		if (!hasNoSky && !isAdventure) { //this hack may work to stop the bollocks
-			do {
+		if (!hasNoSky && !isAdventure) {
 			chunkcoordinates.posX += worldObj.rand.nextInt(spawnFuzz) - spawnFuzzHalf;
 			chunkcoordinates.posZ += worldObj.rand.nextInt(spawnFuzz) - spawnFuzzHalf;
 			chunkcoordinates.posY = worldObj.getTopSolidOrLiquidBlock(chunkcoordinates.posX, chunkcoordinates.posZ);
-			}
-			while (worldObj.getBlock(chunkcoordinates.posX, chunkcoordinates.posZ, chunkcoordinates.posY) == Blocks.bedrock);
 		}
 
 		return chunkcoordinates;
