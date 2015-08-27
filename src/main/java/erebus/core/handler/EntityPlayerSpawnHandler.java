@@ -20,7 +20,7 @@ public class EntityPlayerSpawnHandler {
 		World world = event.entity.worldObj;
 		if (world.isRemote)
 			return;
-
+ //Help?
 		if (event.entity instanceof EntityPlayer) {
 			final EntityPlayer player = (EntityPlayer) event.entity;
 			if(player.dimension == ConfigHandler.INSTANCE.erebusDimensionID) {
