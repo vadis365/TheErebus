@@ -542,4 +542,4 @@ wood.erebus.marshwood=Marshwood
 
 # Random
 armchair.spawnSet=You can only sit here...oh whenever
-armchair.spawnUnset=Spawn location removed
+armchair.unsafeSpawnSet=An unstable spawn location has been set to this block. Please travel though an Erebus Portal or build an Adventurer's Armchair and sit in it as this will provide a stable respawn point.

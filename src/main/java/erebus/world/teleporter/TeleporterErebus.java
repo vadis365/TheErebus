@@ -113,14 +113,27 @@ final class TeleporterErebus extends Teleporter {
 			if (entity instanceof EntityPlayer) {
 				final EntityPlayer player = (EntityPlayer) entity;
 				if(player.dimension == ConfigHandler.INSTANCE.erebusDimensionID) {
-					int xx = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posX;
-					int yy = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posY - 1;
-					int zz = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posZ;
-					if(!(worldServerInstance.getBlock (xx, yy, zz) instanceof BlockArmchair)) {
+					if(!player.getEntityData().hasKey("hasSafeSpawn"))
+						player.getEntityData().setBoolean("hasSpawn", false);
+					
+					if(!player.getEntityData().getBoolean("hasSpawn")) {
 						entity.getEntityData().setInteger("erebusSpawnSetX", (int)posX);
 						entity.getEntityData().setInteger("erebusSpawnSetY", (int)posY + 1);
 						entity.getEntityData().setInteger("erebusSpawnSetZ", (int)posZ);
 						player.setSpawnChunk(new ChunkCoordinates((int)posX, (int)posY + 1, (int)posZ), true, ConfigHandler.INSTANCE.erebusDimensionID);
+						player.getEntityData().setBoolean("hasSpawn", true);
+					}
+					
+					if(player.getEntityData().getBoolean("hasSpawn")) {
+						int xx = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posX;
+						int yy = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posY - 1;
+						int zz = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posZ;
+						if(!(worldServerInstance.getBlock (xx, yy, zz) instanceof BlockArmchair)) {
+							entity.getEntityData().setInteger("erebusSpawnSetX", (int)posX);
+							entity.getEntityData().setInteger("erebusSpawnSetY", (int)posY + 1);
+							entity.getEntityData().setInteger("erebusSpawnSetZ", (int)posZ);
+							player.setSpawnChunk(new ChunkCoordinates((int)posX, (int)posY + 1, (int)posZ), true, ConfigHandler.INSTANCE.erebusDimensionID);
+						}
 					}
 				}
 			}

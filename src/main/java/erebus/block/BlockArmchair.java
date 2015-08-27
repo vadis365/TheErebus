@@ -26,6 +26,7 @@ public class BlockArmchair extends Block{
             return false;
         } else {
             player.setSpawnChunk(new ChunkCoordinates(x, y + 1, z), true, ConfigHandler.INSTANCE.erebusDimensionID);
+            player.getEntityData().setBoolean("hasSpawn", true);
             Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
         }
         return true;

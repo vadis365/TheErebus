@@ -23,14 +23,14 @@ public class EntityArmchairSpawnHandler {
 	    	if(world.isRemote)
 	    		return;
 			if(player.dimension == ConfigHandler.INSTANCE.erebusDimensionID) {
-					int x = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posX;
-					int y = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posY - 1;
-					int z = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posZ;
-					if(!(world.getBlock(x, y, z) instanceof BlockArmchair)) {
-						int xx = player.getEntityData().getInteger("erebusSpawnSetX");
-						int yy = player.getEntityData().getInteger("erebusSpawnSetY");
-						int zz = player.getEntityData().getInteger("erebusSpawnSetZ");
-						player.setSpawnChunk(new ChunkCoordinates(xx, yy, zz), true, ConfigHandler.INSTANCE.erebusDimensionID);
+				int x = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posX;
+				int y = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posY - 1;
+				int z = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posZ;
+				if(!(world.getBlock(x, y, z) instanceof BlockArmchair)) {
+					int xx = player.getEntityData().getInteger("erebusSpawnSetX");
+					int yy = player.getEntityData().getInteger("erebusSpawnSetY");
+					int zz = player.getEntityData().getInteger("erebusSpawnSetZ");
+					player.setSpawnChunk(new ChunkCoordinates(xx, yy, zz), true, ConfigHandler.INSTANCE.erebusDimensionID);
 				}
 			}
 		}
