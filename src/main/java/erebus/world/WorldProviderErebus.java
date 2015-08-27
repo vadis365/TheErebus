@@ -6,6 +6,7 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
@@ -126,13 +127,16 @@ public class WorldProviderErebus extends WorldProvider {
 		ChunkCoordinates chunkcoordinates = new ChunkCoordinates(worldObj.getSpawnPoint());
 
 		boolean isAdventure = worldObj.getWorldInfo().getGameType() == GameType.ADVENTURE;
-		int spawnFuzz = 100;
+		int spawnFuzz = 200;
 		int spawnFuzzHalf = spawnFuzz / 2;
 
-		if (!hasNoSky && !isAdventure) {
+		if (!hasNoSky && !isAdventure) { //this hack may work to stop the bollocks
+			do {
 			chunkcoordinates.posX += worldObj.rand.nextInt(spawnFuzz) - spawnFuzzHalf;
 			chunkcoordinates.posZ += worldObj.rand.nextInt(spawnFuzz) - spawnFuzzHalf;
 			chunkcoordinates.posY = worldObj.getTopSolidOrLiquidBlock(chunkcoordinates.posX, chunkcoordinates.posZ);
+			}
+			while (worldObj.getBlock(chunkcoordinates.posX, chunkcoordinates.posZ, chunkcoordinates.posY) == Blocks.bedrock);
 		}
 
 		return chunkcoordinates;
