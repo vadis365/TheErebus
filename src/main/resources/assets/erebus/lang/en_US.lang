@@ -229,7 +229,6 @@ tile.erebus.blockSilk.name=Silk
 
 tile.erebus.smoothieMaker.name=ErebusCo. Smoothie-matic 2000
 
-tile.erebus.armchair.name=Adventurer's Armchair
 
 # Items
 item.erebus.encrustedDiamond.name=Encrusted Diamond
@@ -539,7 +538,3 @@ wood.erebus.white=White
 wood.erebus.bamboo=Bamboo
 wood.erebus.rotten=Rotten
 wood.erebus.marshwood=Marshwood
-
-# Random
-armchair.spawnSet=You can only sit here...oh whenever
-armchair.unsafeSpawnSet=An unstable spawn location has been set to this block. Please travel though an Erebus Portal or build an Adventurer's Armchair and sit in it as this will provide a stable respawn point.
