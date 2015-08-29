@@ -26,7 +26,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	public EntityCrushroom(World world) {
 		super(world);
 		setSize(3.3F, 4F);
-		tasks.addTask(0, new EntityAIWander(this, 0.6D));
+		tasks.addTask(0, new EntityAIWander(this, 0.5D));
 		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(2, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
@@ -36,7 +36,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
