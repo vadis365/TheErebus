@@ -27,10 +27,10 @@ public class EntityWoodlouse extends EntityCreature {
 		setSize(1.0F, 0.3F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 10.0F, 0.9D, 0.7D));
-		tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMob.class, 10.0F, 0.9D, 0.7D));
-		tasks.addTask(3, new EntityAIWander(this, 0.7D));
-		tasks.addTask(4, new EntityAIPanic(this, 0.9F));
+		tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 10.0F, 0.9D, 0.6D));
+		tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMob.class, 10.0F, 0.9D, 0.6D));
+		tasks.addTask(3, new EntityAIWander(this, 0.6D));
+		tasks.addTask(4, new EntityAIPanic(this, 0.6F));
 		tasks.addTask(5, new EntityAILookIdle(this));
 	}
 
@@ -50,7 +50,7 @@ public class EntityWoodlouse extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
 	}
 
