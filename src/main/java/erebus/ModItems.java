@@ -22,6 +22,7 @@ import erebus.item.ItemArmorReinExoskeleton;
 import erebus.item.ItemArmorRhino;
 import erebus.item.ItemArmorWaterStriders;
 import erebus.item.ItemAxeJade;
+import erebus.item.ItemBookSmoothies;
 import erebus.item.ItemBootsJump;
 import erebus.item.ItemBottleAntiVenom;
 import erebus.item.ItemBowMaxSpeed;
@@ -88,6 +89,7 @@ public class ModItems {
 	public static final Item homingBeeconAdvanced = new ItemHomingBeeconAdvanced().setUnlocalizedName("erebus.homingBeeconAdvanced").setTextureName("paper");
 	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.1F, ModBlocks.blockCabbage, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
 	public static final Item idols = new ItemDungeonIdols();
+	public static final Item soulCrystal = new ItemSoulCrystal();
 
 	public static final Item flowerSeeds = new ItemFlowerSeeds().setUnlocalizedName("erebus.flowerSeeds");
 	public static final Item whetstone = new ItemWhetstone().setUnlocalizedName("erebus.whetstone").setTextureName("erebus:whetstone");
@@ -145,17 +147,6 @@ public class ModItems {
 	public static final Item rolledNewspaper = new ItemRolledNewspaper();
 	public static final Item warHammer = new ItemHammerWar().setUnlocalizedName("erebus.warHammer");
 
-	// ANIMATION MAGIC
-	public static final Item soulCrystal = new ItemSoulCrystal();
-/*	public static final Item ritualDagger = new ItemRitualDagger();
-	public static final Item jadeHeart = new ItemHeartJade();
-	public static final Item manaHeart = new ItemHeartMana();
-	public static final Item elvenHeart = new ItemHeartElven();
-	public static final Item terraHeart = new ItemHeartTerra();
-	public static final Item stoneHeart = new ItemHeartStone();
-	public static final Item burningHeart = new ItemHeartBurning();
-	public static final Item twinHeart = new ItemHeartTwin();
-*/
 	// MISC ARMOR
 	public static final Item reinCompoundGoggles = new ItemCompoundGoggles(ModMaterials.armorREINEXOSKELETON, 2, 0).setUnlocalizedName("erebus.reinCompoundGoggles").setTextureName("erebus:reinCompoundGoggles");
 	public static final Item compoundGoggles = new ItemCompoundGoggles(ModMaterials.armorEXOSKELETON, 2, 0).setUnlocalizedName("erebus.compoundGoggles").setTextureName("erebus:compoundGoggles");
@@ -186,6 +177,7 @@ public class ModItems {
 	public static final Item bucketHoney = new ItemBucket(ModBlocks.honeyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.bucketHoney").setTextureName("erebus:bucketHoney");
 
 	public static final Item bottleAntiVenom = new ItemBottleAntiVenom().setUnlocalizedName("erebus.bottleAntiVenom");
+	public static final Item smoothieBook = new ItemBookSmoothies().setMaxStackSize(1).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.smoothieBook").setTextureName("book_normal");
 
 	public static void init() {
 		registerItems();
