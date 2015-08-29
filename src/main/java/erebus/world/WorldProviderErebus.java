@@ -99,6 +99,11 @@ public class WorldProviderErebus extends WorldProvider {
 	}
 
 	@Override
+    public int getActualHeight() {
+        return 128;
+    }
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z) {
 		return false;

@@ -57,8 +57,8 @@ final class TeleporterErebus extends Teleporter {
 					for (int h = worldServerInstance.getActualHeight() - 1; h >= 0; h--)
 						if (worldServerInstance.getBlock(i, h, j) == ModBlocks.gaeanKeystone) {
 							double X = i + 0.5 - entity.posX;
-							double Y = j + 0.5 - entity.posZ;
-							double Z = h - 2 + 0.5 - entity.posY;
+							double Z = j + 0.5 - entity.posZ;
+							double Y = h - 2 + 0.5 - entity.posY;
 							double dist = X * X + Z * Z + Y * Y;
 
 							if (distToPortal < 0.0 || dist < distToPortal) {
@@ -113,8 +113,11 @@ final class TeleporterErebus extends Teleporter {
 
 	@Override
 	public boolean makePortal(Entity entity) {
+		//attempt at constraining the portal height in the Erebus
+		double safeHeight = Math.min(Math.max(entity.posY * 0.5D, 12), 116);
+		
 		int x = MathHelper.floor_double(entity.posX);
-		int y = MathHelper.floor_double(entity.posY) - 2;
+		int y = MathHelper.floor_double(safeHeight) - 2;
 		int z = MathHelper.floor_double(entity.posZ);
 
 		for (int i = -2; i <= 2; i++)
