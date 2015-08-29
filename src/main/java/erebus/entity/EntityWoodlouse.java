@@ -27,10 +27,10 @@ public class EntityWoodlouse extends EntityCreature {
 		setSize(1.0F, 0.3F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 10.0F, 0.9D, 0.6D));
-		tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMob.class, 10.0F, 0.9D, 0.6D));
+		tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 10.0F, 0.7D, 0.6D));
+		tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMob.class, 10.0F, 0.7D, 0.6D));
 		tasks.addTask(3, new EntityAIWander(this, 0.6D));
-		tasks.addTask(4, new EntityAIPanic(this, 0.6F));
+		tasks.addTask(4, new EntityAIPanic(this, 0.6D));
 		tasks.addTask(5, new EntityAILookIdle(this));
 	}
 
