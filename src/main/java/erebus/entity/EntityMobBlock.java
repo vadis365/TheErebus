@@ -26,8 +26,6 @@ public abstract class EntityMobBlock extends EntityCreature implements IMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!worldObj.isRemote && worldObj.difficultySetting == EnumDifficulty.PEACEFUL)
-			setDead();
 	}
 
 	@Override

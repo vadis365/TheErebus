@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -12,6 +11,7 @@ import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
 import erebus.tileentity.TileEntityBambooCrate;
 
 public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements IInventory {
@@ -24,7 +24,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 		tasks.removeTask(aiWander);
 		tasks.removeTask(aiAttackOnCollide);
 		tasks.removeTask(aiAttackNearestTarget);
-		tasks.addTask(1, new EntityAITempt(this, 1.0D, ModItems.wandOfAnimation, false));
+		tasks.addTask(1, new EntityAIBlockFollowOwner(this, 1.0D, 10.0F, 2.0F));
 	}
 
 	public EntityAnimatedBambooCrate setContents(IInventory chest) {
