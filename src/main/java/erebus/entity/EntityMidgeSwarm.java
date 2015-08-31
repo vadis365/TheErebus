@@ -1,7 +1,7 @@
 package erebus.entity;
 
-import java.util.Calendar;
-
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -14,8 +14,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
+
+import java.util.Calendar;
 
 public class EntityMidgeSwarm extends EntityMob {
 	private ChunkCoordinates currentFlightTarget;

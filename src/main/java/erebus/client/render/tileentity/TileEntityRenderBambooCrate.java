@@ -1,16 +1,14 @@
 package erebus.client.render.tileentity;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelBambooCrate;
 import erebus.client.model.block.ModelColossalCrate;
 import erebus.tileentity.TileEntityBambooCrate;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityRenderBambooCrate extends TileEntitySpecialRenderer {

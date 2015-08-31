@@ -1,11 +1,11 @@
 package erebus.world.feature.tree;
 
-import java.util.Random;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.lib.EnumWood;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 	public WorldGenMarshwoodTree() {

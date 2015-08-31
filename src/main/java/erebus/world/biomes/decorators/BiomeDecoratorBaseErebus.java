@@ -1,14 +1,14 @@
 package erebus.world.biomes.decorators;
 
-import java.util.Random;
-
-import net.minecraft.world.World;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRedGem;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public abstract class BiomeDecoratorBaseErebus {
 

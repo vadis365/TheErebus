@@ -1,21 +1,19 @@
 package erebus.entity;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIAntBonemealCrops;
+import erebus.entity.ai.EntityAIAntHarvestCrops;
+import erebus.entity.ai.EntityAIAntPlantCrops;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,14 +28,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.entity.ai.EntityAIAntBonemealCrops;
-import erebus.entity.ai.EntityAIAntHarvestCrops;
-import erebus.entity.ai.EntityAIAntPlantCrops;
+
+import java.util.*;
 
 public class EntityBlackAnt extends EntityTameable implements IInventory {
 

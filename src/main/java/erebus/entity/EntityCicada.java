@@ -1,13 +1,13 @@
 package erebus.entity;
 
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemMaterials;
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -15,12 +15,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
-import erebus.lib.EnumWood;
+
+import java.util.List;
 
 public class EntityCicada extends EntityCreature {
 	private int sonics;

@@ -3,7 +3,7 @@ package erebus.block;
 public class LightningSpeedBlock extends VelocityBlock {
 	public LightningSpeedBlock() {
 		super();
-		setBlockName("erebus.lightningSpeedBlock");
+		setUnlocalizedName("erebus.lightningSpeedBlock");
 		setBlockTextureName("erebus:lightningSpeedBlock");
 	}
 

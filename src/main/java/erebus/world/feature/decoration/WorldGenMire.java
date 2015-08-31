@@ -1,7 +1,6 @@
 package erebus.world.feature.decoration;
 
-import java.util.Random;
-
+import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -9,7 +8,8 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
+
+import java.util.Random;
 
 public class WorldGenMire extends WorldGenerator {
 

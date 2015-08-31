@@ -1,5 +1,7 @@
 package erebus.item;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemEditableBook;
@@ -8,8 +10,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBookSmoothies extends ItemEditableBook {
 

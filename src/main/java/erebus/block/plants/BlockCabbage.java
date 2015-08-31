@@ -1,7 +1,8 @@
 package erebus.block.plants;
 
-import java.util.ArrayList;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModItems;
 import erebus.item.ItemErebusFood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
@@ -11,9 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
+
+import java.util.ArrayList;
 
 public class BlockCabbage extends BlockCrops {
 
@@ -21,7 +21,7 @@ public class BlockCabbage extends BlockCrops {
 	private IIcon[] iconArray;
 
 	public BlockCabbage() {
-		setBlockName("erebus.cabbageCrop");
+		setUnlocalizedName("erebus.cabbageCrop");
 	}
 
 	@Override

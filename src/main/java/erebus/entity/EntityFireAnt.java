@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -13,6 +11,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class EntityFireAnt extends EntityMob {
 	private int shouldDo;

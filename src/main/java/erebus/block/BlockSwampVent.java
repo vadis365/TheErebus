@@ -1,7 +1,11 @@
 package erebus.block;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModTabs;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.entity.EntityGasVent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.material.Material;
@@ -12,12 +16,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModTabs;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.entity.EntityGasVent;
+
+import java.util.Random;
 
 public class BlockSwampVent extends Block {
 
@@ -27,7 +27,7 @@ public class BlockSwampVent extends Block {
 		setTickRandomly(true);
 		setStepSound(soundTypeGrass);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.swampVent");
+		setUnlocalizedName("erebus.swampVent");
 	}
 
 	@Override

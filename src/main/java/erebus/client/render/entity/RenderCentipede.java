@@ -1,12 +1,12 @@
 package erebus.client.render.entity;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.client.model.entity.ModelCentipede;
+import erebus.entity.EntityCentipede;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.model.entity.ModelCentipede;
-import erebus.entity.EntityCentipede;
 
 @SideOnly(Side.CLIENT)
 public class RenderCentipede extends RenderLiving {

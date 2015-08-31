@@ -1,7 +1,6 @@
 package erebus.entity.ai;
 
-import java.util.List;
-
+import erebus.entity.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,11 +14,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import erebus.entity.EntityPoisonJet;
-import erebus.entity.EntityTarantula;
-import erebus.entity.EntityTarantulaBaby;
-import erebus.entity.EntityTarantulaEgg;
-import erebus.entity.EntityTarantulaMiniboss;
+
+import java.util.List;
 
 public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 

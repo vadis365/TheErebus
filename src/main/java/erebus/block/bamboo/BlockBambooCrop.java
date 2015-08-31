@@ -1,8 +1,11 @@
 package erebus.block.bamboo;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.item.ItemMaterials.DATA;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,12 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.ItemMaterials.DATA;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockBambooCrop extends Block {
 

@@ -1,7 +1,5 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -9,6 +7,8 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.structure.WorldGenAntlionLair;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.gen.feature.WorldGenLakes;
 
 public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();

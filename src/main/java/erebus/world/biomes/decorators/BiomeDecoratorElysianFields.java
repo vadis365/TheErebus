@@ -1,8 +1,5 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -13,6 +10,9 @@ import erebus.world.feature.plant.WorldGenGiantFlowers;
 import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenNettlePatch;
 import erebus.world.feature.tree.WorldGenCypressTree;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.gen.feature.WorldGenTrees;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 	protected final WorldGenPonds genPonds = new WorldGenPonds();

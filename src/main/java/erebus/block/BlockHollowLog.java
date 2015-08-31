@@ -1,8 +1,10 @@
 package erebus.block;
 
-import java.util.List;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.entity.EntityWoodlouse;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,11 +18,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.entity.EntityWoodlouse;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockHollowLog extends Block {
 
@@ -32,7 +32,7 @@ public class BlockHollowLog extends Block {
 		setHardness(0.7F);
 		setStepSound(soundTypeWood);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.log_hollow_acacia");
+		setUnlocalizedName("erebus.log_hollow_acacia");
 	}
 
 	@Override

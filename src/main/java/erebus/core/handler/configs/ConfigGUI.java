@@ -1,13 +1,13 @@
 package erebus.core.handler.configs;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.minecraftforge.fml.client.config.GuiConfig;
+import net.minecraftforge.fml.client.config.IConfigElement;
+import erebus.lib.Reference;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
-import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.IConfigElement;
-import erebus.lib.Reference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfigGUI extends GuiConfig {
 

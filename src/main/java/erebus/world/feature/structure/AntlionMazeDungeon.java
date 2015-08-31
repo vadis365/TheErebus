@@ -1,8 +1,22 @@
 package erebus.world.feature.structure;
 
-import java.util.List;
-import java.util.Random;
-
+import erebus.ModBiomes;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.entity.EntityAntlionBoss;
+import erebus.entity.EntityUmberGolemDungeonTypes;
+import erebus.item.ItemErebusFood.FoodType;
+import erebus.item.ItemFoodSmoothie.SmoothieType;
+import erebus.item.ItemMaterials;
+import erebus.item.ItemMaterials.DATA;
+import erebus.tileentity.TileEntityBones;
+import erebus.tileentity.TileEntityTempleTeleporter;
+import erebus.world.feature.util.MazeGenerator;
+import erebus.world.feature.util.PerfectMazeGenerator;
+import erebus.world.loot.IPostProcess;
+import erebus.world.loot.LootItemStack;
+import erebus.world.loot.LootUtil;
+import erebus.world.loot.WeightedLootList;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -15,23 +29,9 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.entity.EntityAntlionBoss;
-import erebus.entity.EntityUmberGolemDungeonTypes;
-import erebus.item.ItemErebusFood.FoodType;
-import erebus.item.ItemMaterials;
-import erebus.item.ItemMaterials.DATA;
-import erebus.item.ItemFoodSmoothie.SmoothieType;
-import erebus.tileentity.TileEntityBones;
-import erebus.tileentity.TileEntityTempleTeleporter;
-import erebus.world.feature.util.MazeGenerator;
-import erebus.world.feature.util.PerfectMazeGenerator;
-import erebus.world.loot.IPostProcess;
-import erebus.world.loot.LootItemStack;
-import erebus.world.loot.LootUtil;
-import erebus.world.loot.WeightedLootList;
+
+import java.util.List;
+import java.util.Random;
 
 public class AntlionMazeDungeon {
 	private Block solid = ModBlocks.gneiss;

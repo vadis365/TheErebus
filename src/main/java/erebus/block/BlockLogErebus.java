@@ -1,17 +1,7 @@
 package erebus.block;
 
-import java.util.ArrayList;
-
-import net.minecraft.block.BlockLog;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.monster.EntitySilverfish;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
@@ -20,6 +10,16 @@ import erebus.entity.EntityWoodlouse;
 import erebus.item.ItemMaterials;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
+import net.minecraft.block.BlockLog;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 public class BlockLogErebus extends BlockLog {
 
@@ -31,7 +31,7 @@ public class BlockLogErebus extends BlockLog {
 	public BlockLogErebus(EnumWood wood) {
 		this.wood = wood;
 		setCreativeTab(ModTabs.blocks);
-		setBlockName(Reference.MOD_ID + ".log" + wood.name());
+		setUnlocalizedName(Reference.MOD_ID + ".log" + wood.name());
 	}
 
 	@Override

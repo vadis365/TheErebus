@@ -1,15 +1,15 @@
 package erebus.client.render.entity;
 
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.entity.EntityDragonfly;
+import erebus.entity.EntityScorpion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.Gui;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.entity.EntityDragonfly;
-import erebus.entity.EntityScorpion;
 
 @SideOnly(Side.CLIENT)
 public class MobGrabbingHealthBarRemoval extends Gui {

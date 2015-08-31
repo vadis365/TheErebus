@@ -1,23 +1,18 @@
 package erebus.tileentity;
 
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.inventory.ContainerSmoothieMaker;
 import erebus.item.ItemMaterials;
 import erebus.recipes.SmoothieMakerRecipe;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.*;
 
 public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements IFluidHandler {
 

@@ -1,9 +1,8 @@
 package erebus.recipes;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -13,9 +12,10 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ComposterRegistry {
 

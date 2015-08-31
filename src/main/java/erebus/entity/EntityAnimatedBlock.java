@@ -1,19 +1,21 @@
 package erebus.entity;
 
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
 import io.netty.buffer.ByteBuf;
-
-import java.util.UUID;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,15 +26,8 @@ import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.entity.ai.EntityAIBlockFollowOwner;
+
+import java.util.UUID;
 
 public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditionalSpawnData {
 

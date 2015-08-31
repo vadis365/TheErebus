@@ -1,9 +1,9 @@
 package erebus.integration;
 
+import net.minecraftforge.fml.common.Loader;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import cpw.mods.fml.common.Loader;
 
 public class ModIntegrationHandler {
 	private static List<IModIntegration> integratedMods = new ArrayList<IModIntegration>();

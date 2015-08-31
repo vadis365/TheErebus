@@ -1,8 +1,8 @@
 package erebus.tileentity;
 
+import erebus.entity.EntityAnimatedChest;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import erebus.entity.EntityAnimatedChest;
 
 public class TileEntityAnimatedChest extends TileEntityBasicInventory {
 

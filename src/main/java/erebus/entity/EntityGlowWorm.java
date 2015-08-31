@@ -1,22 +1,18 @@
 package erebus.entity;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
 
 public class EntityGlowWorm extends EntityCreature {
 	public int lastX;

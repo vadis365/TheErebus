@@ -1,7 +1,5 @@
 package erebus.world.loot;
 
-import java.util.Random;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -10,6 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.util.Constants.NBT;
+
+import java.util.Random;
 
 public class LootUtil {
 

@@ -1,12 +1,12 @@
 package erebus.entity;
 
+import erebus.Erebus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import erebus.Erebus;
 
 public class EntityWaspDagger extends EntityThrowable {
 	public static float rotationticks;

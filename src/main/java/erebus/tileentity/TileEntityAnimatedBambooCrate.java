@@ -1,8 +1,8 @@
 package erebus.tileentity;
 
-import net.minecraft.block.Block;
 import erebus.ModBlocks;
 import erebus.entity.EntityAnimatedBambooCrate;
+import net.minecraft.block.Block;
 
 public class TileEntityAnimatedBambooCrate extends TileEntityBasicInventory {
 

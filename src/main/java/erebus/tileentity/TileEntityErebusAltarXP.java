@@ -1,9 +1,9 @@
 package erebus.tileentity;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import erebus.Erebus;
 import erebus.ModBlocks;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class TileEntityErebusAltarXP extends TileEntityErebusAltar {
 

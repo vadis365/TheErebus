@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -9,8 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.item.ItemMaterials;
 
 public class EntityMagmaCrawler extends EntityMob {
 	private int shouldDo;

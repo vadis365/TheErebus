@@ -1,16 +1,16 @@
 package erebus.core.handler;
 
-import java.util.ArrayList;
-
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import erebus.ModAchievements;
+import erebus.core.helper.Utils;
+import erebus.entity.EntityBeetleLarva;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import erebus.ModAchievements;
-import erebus.core.helper.Utils;
-import erebus.entity.EntityBeetleLarva;
+
+import java.util.ArrayList;
 
 public class EntityDeathEventHandler {
 	@SubscribeEvent

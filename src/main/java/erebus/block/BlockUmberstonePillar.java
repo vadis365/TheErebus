@@ -1,12 +1,12 @@
 package erebus.block;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
 
 public class BlockUmberstonePillar extends BlockRotatedPillar {
 
@@ -16,7 +16,7 @@ public class BlockUmberstonePillar extends BlockRotatedPillar {
 		setResistance(10.0F);
 		setStepSound(soundTypeStone);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.umberstonePillar");
+		setUnlocalizedName("erebus.umberstonePillar");
 		setBlockTextureName("erebus:umberstonePillarSides");
 	}
 

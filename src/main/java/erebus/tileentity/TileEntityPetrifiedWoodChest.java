@@ -1,17 +1,17 @@
 package erebus.tileentity;
 
-import java.util.Iterator;
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.block.BlockPetrifiedChest;
+import erebus.inventory.ContainerPetrifiedWoodChest;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.util.AxisAlignedBB;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.block.BlockPetrifiedChest;
-import erebus.inventory.ContainerPetrifiedWoodChest;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class TileEntityPetrifiedWoodChest extends TileEntityBasicInventory {
 

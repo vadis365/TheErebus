@@ -1,15 +1,6 @@
 package erebus.recipes;
 
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.block.BlockSlabStone;
@@ -21,6 +12,15 @@ import erebus.item.ItemErebusFood;
 import erebus.item.ItemMaterials;
 import erebus.item.ItemWhetstone;
 import erebus.lib.EnumWood;
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class RecipeHandler {
 

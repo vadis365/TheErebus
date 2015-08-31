@@ -1,7 +1,9 @@
 package erebus.block;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,16 +15,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
+
+import java.util.Random;
 
 public class InsectRepellent extends Block {
 	public InsectRepellent() {
 		super(Material.circuits);
 		setTickRandomly(true);
-		setBlockName("erebus.insectRepellent");
+		setUnlocalizedName("erebus.insectRepellent");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
 	}
 

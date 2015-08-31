@@ -1,7 +1,8 @@
 package erebus.block.plants;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
@@ -9,9 +10,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
+
+import java.util.Random;
 
 public class BlockAlgae extends BlockBush {
 

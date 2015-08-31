@@ -1,11 +1,11 @@
 package erebus.entity.ai;
 
+import erebus.entity.EntityAnimatedBlock;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.entity.EntityAnimatedBlock;
 
 public class EntityAIBlockFollowOwner extends EntityAIBase {
     private EntityAnimatedBlock animatedBlock;

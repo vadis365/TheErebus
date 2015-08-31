@@ -1,8 +1,8 @@
 package erebus.item;
 
-import net.minecraft.item.ItemAxe;
 import erebus.ModMaterials;
 import erebus.ModTabs;
+import net.minecraft.item.ItemAxe;
 
 public class ItemAxeJade extends ItemAxe {
 

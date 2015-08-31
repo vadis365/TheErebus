@@ -1,12 +1,12 @@
 package erebus.world.feature.plant;
 
-import java.util.Random;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Facing;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenVinesErebus extends WorldGenerator {
 	int maxVineHeight;

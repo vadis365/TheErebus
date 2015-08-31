@@ -1,11 +1,9 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.init.Items;
@@ -15,8 +13,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
 
 public class EntityTarantulaBaby extends EntityMob {
 	public int skin = rand.nextInt(99);

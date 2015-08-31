@@ -1,9 +1,11 @@
 package erebus.block.plants;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.item.block.ItemBlockErebusFlower;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.Material;
@@ -18,12 +20,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.item.block.ItemBlockErebusFlower;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockErebusFlower extends Block implements ISubBlocksBlock {
 

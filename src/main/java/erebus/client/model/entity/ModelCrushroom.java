@@ -1,10 +1,10 @@
 package erebus.client.model.entity;
 
+import erebus.entity.EntityCrushroom;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import erebus.entity.EntityCrushroom;
 
 public class ModelCrushroom extends ModelBase {
 	ModelRenderer capTop;

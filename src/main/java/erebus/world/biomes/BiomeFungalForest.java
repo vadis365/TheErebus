@@ -1,13 +1,9 @@
 package erebus.world.biomes;
 
-import net.minecraft.init.Blocks;
-import erebus.entity.EntityBlackAnt;
-import erebus.entity.EntityCrushroom;
-import erebus.entity.EntityPunchroom;
-import erebus.entity.EntityCrushling;
-import erebus.entity.EntityZombieAnt;
+import erebus.entity.*;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
+import net.minecraft.init.Blocks;
 
 public class BiomeFungalForest extends BiomeBaseErebus {
 	public BiomeFungalForest(int biomeID) {

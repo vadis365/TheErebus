@@ -1,5 +1,12 @@
 package erebus.tileentity;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketOfferingAltar;
+import erebus.network.client.PacketOfferingAltarTimer;
+import erebus.recipes.OfferingAltarRecipe;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,13 +14,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.helper.Utils;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketOfferingAltar;
-import erebus.network.client.PacketOfferingAltarTimer;
-import erebus.recipes.OfferingAltarRecipe;
 
 public class TileEntityOfferingAltar extends TileEntityBasicInventory {
 	@SideOnly(Side.CLIENT)

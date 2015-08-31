@@ -1,23 +1,16 @@
 package erebus.entity;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.item.ItemErebusFood;
+import erebus.item.ItemMaterials;
+import erebus.tileentity.TileEntityTitanChest;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -31,13 +24,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemMaterials;
-import erebus.tileentity.TileEntityTitanChest;
+
+import java.util.Random;
 
 public class EntityTitanBeetle extends EntityTameable {
 

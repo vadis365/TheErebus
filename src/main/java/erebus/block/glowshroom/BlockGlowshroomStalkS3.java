@@ -1,14 +1,14 @@
 package erebus.block.glowshroom;
 
-import java.util.Random;
-
+import erebus.ModBlocks;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+
+import java.util.Random;
 
 public class BlockGlowshroomStalkS3 extends Block {
 
@@ -16,7 +16,7 @@ public class BlockGlowshroomStalkS3 extends Block {
 		super(Material.wood);
 		setHardness(0.2F);
 		setStepSound(Block.soundTypeWood);
-		setBlockName("erebus.glowshroomStalkS3");
+		setUnlocalizedName("erebus.glowshroomStalkS3");
 		setBlockTextureName("erebus:glowshroomStalk");
 		setBlockBounds(0.3125F, 0.3125F, 0F, 0.6875F, 1F, 0.6875F);
 	}

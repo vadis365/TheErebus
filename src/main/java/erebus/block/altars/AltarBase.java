@@ -1,5 +1,8 @@
 package erebus.block.altars;
 
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.tileentity.TileEntityErebusAltarEmpty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,9 +12,6 @@ import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.tileentity.TileEntityErebusAltarEmpty;
 
 public class AltarBase extends AltarAbstract {
 

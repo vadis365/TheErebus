@@ -1,7 +1,13 @@
 package erebus.block;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntityHoneyComb;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -12,14 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityHoneyComb;
+
+import java.util.Random;
 
 public class BlockHoneyComb extends BlockContainer {
 
@@ -33,7 +33,7 @@ public class BlockHoneyComb extends BlockContainer {
 		setResistance(10.0F);
 		setStepSound(soundTypeCloth);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.honeyCombBlock");
+		setUnlocalizedName("erebus.honeyCombBlock");
 		setBlockTextureName("erebus:honeyCombTop");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
 	}

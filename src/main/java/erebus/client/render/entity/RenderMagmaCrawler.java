@@ -1,14 +1,12 @@
 package erebus.client.render.entity;
 
+import erebus.client.model.entity.ModelMagmaCrawler;
+import erebus.entity.EntityMagmaCrawler;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import erebus.client.model.entity.ModelMagmaCrawler;
-import erebus.entity.EntityMagmaCrawler;
 
 public class RenderMagmaCrawler extends RenderLiving {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/magmaCrawler.png");

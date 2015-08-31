@@ -1,12 +1,12 @@
 package erebus.entity.ai;
 
+import erebus.entity.EntityBlackAnt;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathEntity;
-import erebus.entity.EntityBlackAnt;
 
 public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
 

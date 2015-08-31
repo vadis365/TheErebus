@@ -1,7 +1,14 @@
 package erebus.block.plants;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.item.ItemErebusFood.FoodType;
+import erebus.item.ItemMaterials.DATA;
+import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -14,15 +21,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.item.ItemErebusFood.FoodType;
-import erebus.item.ItemMaterials.DATA;
-import erebus.lib.Reference;
+
+import java.util.Random;
 
 public class BlockBerryBush extends Block {
 
@@ -33,7 +33,7 @@ public class BlockBerryBush extends Block {
 	public BlockBerryBush(String bushType) {
 		super(Material.plants);
 		type = bushType;
-		setBlockName(Reference.MOD_ID + "." + type + "BerryBush");
+		setUnlocalizedName(Reference.MOD_ID + "." + type + "BerryBush");
 		setBlockTextureName(Reference.MOD_ID + ":" + type + "BerryBush");
 		setTickRandomly(true);
 		setHardness(0.2F);

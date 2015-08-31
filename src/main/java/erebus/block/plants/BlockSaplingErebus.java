@@ -1,8 +1,11 @@
 package erebus.block.plants;
 
-import java.util.List;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.lib.EnumWood;
+import erebus.lib.Reference;
+import erebus.world.feature.tree.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,19 +18,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.lib.EnumWood;
-import erebus.lib.Reference;
-import erebus.world.feature.tree.WorldGenAsperTree;
-import erebus.world.feature.tree.WorldGenBaobabTree;
-import erebus.world.feature.tree.WorldGenCypressTree;
-import erebus.world.feature.tree.WorldGenErebusHugeTree;
-import erebus.world.feature.tree.WorldGenEucalyptusTree;
-import erebus.world.feature.tree.WorldGenMarshwoodTree;
-import erebus.world.feature.tree.WorldGenMossbarkTree;
-import erebus.world.feature.tree.WorldGenSapTree;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockSaplingErebus extends BlockSapling {
 
@@ -40,7 +33,7 @@ public class BlockSaplingErebus extends BlockSapling {
 		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
 		setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.8F, 0.9F);
-		setBlockName(Reference.MOD_ID + ".sapling." + wood.name());
+		setUnlocalizedName(Reference.MOD_ID + ".sapling." + wood.name());
 		setBlockTextureName(Reference.MOD_ID + ":sapling_" + wood.name().toLowerCase());
 	}
 

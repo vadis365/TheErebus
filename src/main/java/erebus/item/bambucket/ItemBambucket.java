@@ -1,6 +1,6 @@
 package erebus.item.bambucket;
 
-import cpw.mods.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;

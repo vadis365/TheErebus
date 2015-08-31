@@ -1,9 +1,9 @@
 package erebus.block;
 
-import java.util.Random;
-
-import net.minecraft.item.Item;
 import erebus.ModBlocks;
+import net.minecraft.item.Item;
+
+import java.util.Random;
 
 public class BlockAntlionSpawner extends BlockSpawner {
 

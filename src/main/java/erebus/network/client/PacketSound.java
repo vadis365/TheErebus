@@ -1,9 +1,9 @@
 package erebus.network.client;
 
+import erebus.network.AbstractClientPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.world.World;
-import erebus.network.AbstractClientPacket;
 
 public class PacketSound extends AbstractClientPacket {
 

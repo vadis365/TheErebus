@@ -1,19 +1,19 @@
 package erebus.block;
 
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.item.block.ItemBlockGeneric;
 import net.minecraft.block.BlockWall;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.item.block.ItemBlockGeneric;
+
+import java.util.List;
 
 public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
 
@@ -21,7 +21,7 @@ public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
 		super(ModBlocks.umberstone);
 		setHarvestLevel("pickaxe", 0);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.wallErebus");
+		setUnlocalizedName("erebus.wallErebus");
 	}
 
 	@Override

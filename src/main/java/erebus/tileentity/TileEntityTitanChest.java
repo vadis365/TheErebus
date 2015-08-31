@@ -1,8 +1,8 @@
 package erebus.tileentity;
 
+import erebus.entity.EntityTitanBeetle;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import erebus.entity.EntityTitanBeetle;
 
 public class TileEntityTitanChest extends TileEntityBasicInventory {
 

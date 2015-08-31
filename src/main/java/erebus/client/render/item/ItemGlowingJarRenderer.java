@@ -1,13 +1,11 @@
 package erebus.client.render.item;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.client.render.tileentity.TileEntityGlowingJarRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.render.tileentity.TileEntityGlowingJarRenderer;
 
 @SideOnly(Side.CLIENT)
 public class ItemGlowingJarRenderer implements IItemRenderer {

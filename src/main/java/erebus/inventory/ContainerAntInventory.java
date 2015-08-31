@@ -1,12 +1,12 @@
 package erebus.inventory;
 
+import erebus.entity.EntityBlackAnt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import erebus.entity.EntityBlackAnt;
 
 public class ContainerAntInventory extends Container {
 

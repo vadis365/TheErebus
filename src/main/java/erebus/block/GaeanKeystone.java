@@ -1,7 +1,12 @@
 package erebus.block;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.tileentity.TileEntityGaeanKeystone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -13,13 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.tileentity.TileEntityGaeanKeystone;
+
+import java.util.Random;
 
 public class GaeanKeystone extends BlockContainer {
 	@SideOnly(Side.CLIENT)
@@ -29,7 +29,7 @@ public class GaeanKeystone extends BlockContainer {
 		super(Material.rock);
 		setHardness(3.0f);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.gaeanKeystone");
+		setUnlocalizedName("erebus.gaeanKeystone");
 	}
 
 	@Override

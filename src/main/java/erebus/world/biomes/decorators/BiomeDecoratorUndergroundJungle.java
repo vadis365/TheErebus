@@ -1,13 +1,5 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.world.gen.feature.WorldGenBigMushroom;
-import net.minecraft.world.gen.feature.WorldGenFlowers;
-import net.minecraft.world.gen.feature.WorldGenMegaJungle;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.lib.EnumWood;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -21,12 +13,10 @@ import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.plant.WorldGenMelon;
 import erebus.world.feature.plant.WorldGenTurnips;
 import erebus.world.feature.structure.WorldGenWaspDungeon;
-import erebus.world.feature.tree.WorldGenAsperTree;
-import erebus.world.feature.tree.WorldGenErebusHugeTree;
-import erebus.world.feature.tree.WorldGenErebusTrees;
-import erebus.world.feature.tree.WorldGenEucalyptusTree;
-import erebus.world.feature.tree.WorldGenMossbarkTree;
-import erebus.world.feature.tree.WorldGenTallJungleTree;
+import erebus.world.feature.tree.*;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.Direction;
+import net.minecraft.world.gen.feature.*;
 
 public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();

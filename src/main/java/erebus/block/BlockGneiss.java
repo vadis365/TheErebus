@@ -1,8 +1,10 @@
 package erebus.block;
 
-import java.util.List;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.item.block.ItemBlockGeneric;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,11 +15,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.item.block.ItemBlockGeneric;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockGneiss extends Block implements ISubBlocksBlock {
 
@@ -30,7 +30,7 @@ public class BlockGneiss extends Block implements ISubBlocksBlock {
 		setHardness(30F);
 		setResistance(6000000.0F);
 		setStepSound(soundTypeStone);
-		setBlockName("erebus.gneiss");
+		setUnlocalizedName("erebus.gneiss");
 		setCreativeTab(ModTabs.blocks);
 	}
 

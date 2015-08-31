@@ -1,23 +1,18 @@
 package erebus.network.client;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.client.fx.EntityRepellentFX;
+import erebus.network.AbstractClientPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.particle.EntityBreakingFX;
-import net.minecraft.client.particle.EntityCloudFX;
-import net.minecraft.client.particle.EntityDiggingFX;
-import net.minecraft.client.particle.EntityFireworkSparkFX;
-import net.minecraft.client.particle.EntityHugeExplodeFX;
+import net.minecraft.client.particle.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.client.fx.EntityRepellentFX;
-import erebus.network.AbstractClientPacket;
 
 public class PacketParticle extends AbstractClientPacket {
 

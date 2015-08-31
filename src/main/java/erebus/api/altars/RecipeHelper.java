@@ -1,8 +1,8 @@
 package erebus.api.altars;
 
-import java.lang.reflect.Method;
-
 import net.minecraft.item.ItemStack;
+
+import java.lang.reflect.Method;
 
 public class RecipeHelper {
 	public static void addOfferingAltarRecipe(ItemStack output, Object... inputs) {

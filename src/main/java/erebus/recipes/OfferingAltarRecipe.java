@@ -1,12 +1,12 @@
 package erebus.recipes;
 
+import erebus.core.helper.Utils;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-import erebus.core.helper.Utils;
 
 public class OfferingAltarRecipe {
 	private static final List<OfferingAltarRecipe> list = new ArrayList<OfferingAltarRecipe>();

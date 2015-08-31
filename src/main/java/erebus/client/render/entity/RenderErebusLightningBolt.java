@@ -1,17 +1,15 @@
 package erebus.client.render.entity;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.entity.effect.EntityErebusLightningBolt;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.entity.effect.EntityErebusLightningBolt;
+import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class RenderErebusLightningBolt extends Render {

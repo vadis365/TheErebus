@@ -1,7 +1,10 @@
 package erebus.block;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -9,18 +12,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.teleporter.TeleporterHandler;
+
+import java.util.Random;
 
 public class ErebusPortal extends Block {
 	public ErebusPortal() {
 		super(Material.portal);
 		setLightLevel(1.0F);
 		setBlockUnbreakable();
-		setBlockName("erebus.portal");
+		setUnlocalizedName("erebus.portal");
 		setStepSound(Block.soundTypeGlass);
 		setBlockTextureName("erebus:portal");
 	}

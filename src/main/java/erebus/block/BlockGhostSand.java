@@ -1,14 +1,14 @@
 package erebus.block;
 
-import java.util.Random;
-
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import erebus.ModTabs;
+
+import java.util.Random;
 
 public class BlockGhostSand extends Block {
 
@@ -19,7 +19,7 @@ public class BlockGhostSand extends Block {
 		setStepSound(soundTypeSand);
 		setHarvestLevel("shovel", 0);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.ghostSand");
+		setUnlocalizedName("erebus.ghostSand");
 		setBlockTextureName("erebus:ghostSand");
 	}
 

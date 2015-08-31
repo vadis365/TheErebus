@@ -1,13 +1,6 @@
 package erebus;
 
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.biomes.BiomeElysianFields;
-import erebus.world.biomes.BiomeFungalForest;
-import erebus.world.biomes.BiomeSubmergedSwamp;
-import erebus.world.biomes.BiomeSubterraneanSavannah;
-import erebus.world.biomes.BiomeUlteriorOutback;
-import erebus.world.biomes.BiomeUndergroundJungle;
-import erebus.world.biomes.BiomeVolcanicDesert;
+import erebus.world.biomes.*;
 import erebus.world.loot.WeightedList;
 
 public class ModBiomes {

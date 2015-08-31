@@ -1,11 +1,11 @@
 package erebus.client.render.entity;
 
+import erebus.client.model.entity.ModelAnimatedChest;
+import erebus.entity.EntityAnimatedChest;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
-import erebus.client.model.entity.ModelAnimatedChest;
-import erebus.entity.EntityAnimatedChest;
 
 public class RenderAnimatedChest extends RenderLiving {
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/animatedChest.png");

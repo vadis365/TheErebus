@@ -1,5 +1,7 @@
 package erebus.block;
 
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityJarOHoney;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,8 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityJarOHoney;
 
 public class JarOHoney extends BlockGlowingJar {
 
@@ -18,7 +18,7 @@ public class JarOHoney extends BlockGlowingJar {
 		super();
 		setLightLevel(0);
 		setHardness(0.5F);
-		setBlockName("erebus.jarOHoney");
+		setUnlocalizedName("erebus.jarOHoney");
 		setBlockTextureName("erebus:glassAmber");
 	}
 

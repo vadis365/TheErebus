@@ -1,9 +1,6 @@
 package erebus.world.teleporter;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+import erebus.ModBlocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.LongHashMap;
@@ -11,7 +8,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
-import erebus.ModBlocks;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 final class TeleporterErebus extends Teleporter {
 	private final WorldServer worldServerInstance;

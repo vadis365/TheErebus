@@ -1,5 +1,10 @@
 package erebus.block.bamboo;
 
+import erebus.Erebus;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -9,11 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import erebus.Erebus;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityBambooCrate;
 
 public class BlockBambooCrate extends BlockContainer {
 
@@ -23,7 +23,7 @@ public class BlockBambooCrate extends BlockContainer {
 		setHarvestLevel("axe", 0);
 		setStepSound(soundTypeWood);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.bambooCrate");
+		setUnlocalizedName("erebus.bambooCrate");
 		setBlockTextureName("erebus:bambooCrate");
 	}
 

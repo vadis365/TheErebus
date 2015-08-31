@@ -1,9 +1,10 @@
 package erebus.block.bamboo;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.item.ItemMaterials.DATA;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.IGrowable;
@@ -16,11 +17,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumPlantType;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.item.ItemMaterials.DATA;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class BlockBambooShoot extends BlockFlower implements IGrowable {
 
@@ -91,7 +91,7 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 		float f = 0.2F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 3.5F, 0.5F + f);
 		setCreativeTab(null);
-		setBlockName("erebus.bambooShoot");
+		setUnlocalizedName("erebus.bambooShoot");
 		setBlockTextureName("erebus:bambooShoot");
 	}
 

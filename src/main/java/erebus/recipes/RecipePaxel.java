@@ -1,11 +1,11 @@
 package erebus.recipes;
 
+import erebus.ModItems;
+import erebus.ModMaterials;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import erebus.ModItems;
-import erebus.ModMaterials;
 
 public class RecipePaxel extends ShapedOreRecipe {
 

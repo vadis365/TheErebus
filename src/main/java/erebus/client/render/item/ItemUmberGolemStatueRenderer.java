@@ -1,15 +1,13 @@
 package erebus.client.render.item;
 
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.client.model.block.ModelUmberGolemStatue;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.model.block.ModelUmberGolemStatue;
 
 @SideOnly(Side.CLIENT)
 public class ItemUmberGolemStatueRenderer implements IItemRenderer {

@@ -1,12 +1,12 @@
 package erebus.network.server;
 
+import erebus.ModItems;
+import erebus.network.AbstractServerPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.network.AbstractServerPacket;
 
 public class PacketGlider extends AbstractServerPacket {
 

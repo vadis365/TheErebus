@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -11,7 +12,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.ItemMaterials;
 
 public class EntityJumpingSpider extends EntitySpider {
 	public int skin = rand.nextInt(3);

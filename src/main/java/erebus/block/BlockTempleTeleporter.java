@@ -1,7 +1,11 @@
 package erebus.block;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityTempleTeleporter;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,12 +15,8 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityTempleTeleporter;
+
+import java.util.Random;
 
 public class BlockTempleTeleporter extends BlockContainer {
 
@@ -28,7 +28,7 @@ public class BlockTempleTeleporter extends BlockContainer {
 	public BlockTempleTeleporter() {
 		super(Material.rock);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.templeTeleporter");
+		setUnlocalizedName("erebus.templeTeleporter");
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
 	}

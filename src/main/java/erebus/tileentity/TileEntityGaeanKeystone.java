@@ -1,11 +1,11 @@
 package erebus.tileentity;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.block.ErebusPortal;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntityGaeanKeystone extends TileEntity {
 	@Override

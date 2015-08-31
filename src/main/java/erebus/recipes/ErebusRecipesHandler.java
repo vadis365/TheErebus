@@ -1,15 +1,15 @@
 package erebus.recipes;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
 import erebus.ModBlocks;
 import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.item.ItemErebusFood.FoodType;
 import erebus.item.ItemFoodSmoothie.SmoothieType;
 import erebus.item.ItemMaterials;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 
 public class ErebusRecipesHandler {
 	public static void init() {

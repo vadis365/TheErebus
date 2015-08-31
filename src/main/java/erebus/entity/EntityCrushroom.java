@@ -1,24 +1,19 @@
 package erebus.entity;
 
+import erebus.item.ItemMaterials;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	private final EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 0.75D, 40, 12.0F);

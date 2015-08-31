@@ -1,10 +1,7 @@
 package erebus.world;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
+import erebus.ModBiomes;
+import erebus.world.genlayer.GenLayerErebus;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -15,8 +12,11 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.WorldTypeEvent;
-import erebus.ModBiomes;
-import erebus.world.genlayer.GenLayerErebus;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class WorldChunkManagerErebus extends WorldChunkManager {
 
@@ -35,10 +35,13 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		biomeGenLayer = GenLayerErebus.initializeAllBiomeGenerators(world.getSeed(), world.getWorldInfo().getTerrainType())[1];
 	}
 
+	/**
+	 * TODO: The getBiomGenAt(int, int) no longer exists
+	 *
 	@Override
 	public BiomeGenBase getBiomeGenAt(int chunkX, int chunkZ) {
 		return biomeCache.getBiomeGenAt(chunkX, chunkZ);
-	}
+	}*/
 
 	@Override
 	public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase biomesForGeneration[], int x, int z, int sizeX, int sizeZ) {
@@ -93,6 +96,9 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		}
 	}
 
+	/**
+	 * TODO: This now centers around the BlockPos
+	 */
 	@Override
 	@SuppressWarnings("rawtypes")
 	public ChunkPosition findBiomePosition(int x, int z, int checkRadius, List viableBiomes, Random rand) {

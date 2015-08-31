@@ -1,9 +1,11 @@
 package erebus.block.plants;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,12 +15,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.item.ItemMaterials;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class SmallPlant extends BlockTallGrass {
 	protected final String name;
@@ -31,7 +31,7 @@ public class SmallPlant extends BlockTallGrass {
 		this.colour = colour;
 		setStepSound(soundTypeGrass);
 		setCreativeTab(ModTabs.plants);
-		setBlockName("erebus." + name);
+		setUnlocalizedName("erebus." + name);
 	}
 
 	@Override

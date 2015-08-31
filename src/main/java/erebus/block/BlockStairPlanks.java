@@ -1,11 +1,11 @@
 package erebus.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.util.StatCollector;
 import erebus.ModTabs;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.util.StatCollector;
 
 public class BlockStairPlanks extends BlockStairs {
 
@@ -18,7 +18,7 @@ public class BlockStairPlanks extends BlockStairs {
 		setLightOpacity(0);
 		setCreativeTab(ModTabs.blocks);
 		setStepSound(Block.soundTypeWood);
-		setBlockName(Reference.MOD_ID + ".stairPlanks" + wood.name());
+		setUnlocalizedName(Reference.MOD_ID + ".stairPlanks" + wood.name());
 	}
 
 	@Override

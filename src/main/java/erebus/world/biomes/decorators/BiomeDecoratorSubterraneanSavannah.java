@@ -1,21 +1,17 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.WorldGenSavannaTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.decoration.WorldGenAmberGround;
-import erebus.world.feature.decoration.WorldGenAmberUmberstone;
-import erebus.world.feature.decoration.WorldGenPonds;
-import erebus.world.feature.decoration.WorldGenRottenAcacia;
-import erebus.world.feature.decoration.WorldGenSavannahRock;
+import erebus.world.feature.decoration.*;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenGiantBaobab;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.gen.feature.WorldGenSavannaTree;
+import net.minecraft.world.gen.feature.WorldGenTallGrass;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
 	private final WorldGenPonds genPonds = new WorldGenPonds();

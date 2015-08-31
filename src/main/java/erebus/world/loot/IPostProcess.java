@@ -1,8 +1,8 @@
 package erebus.world.loot;
 
-import java.util.Random;
-
 import net.minecraft.item.ItemStack;
+
+import java.util.Random;
 
 public interface IPostProcess {
 

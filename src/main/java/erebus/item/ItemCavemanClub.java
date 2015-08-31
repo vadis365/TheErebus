@@ -1,10 +1,10 @@
 package erebus.item;
 
+import erebus.ModMaterials;
+import erebus.ModTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import erebus.ModMaterials;
-import erebus.ModTabs;
 
 public class ItemCavemanClub extends ItemSword {
 

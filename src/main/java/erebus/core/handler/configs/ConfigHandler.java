@@ -1,11 +1,11 @@
 package erebus.core.handler.configs;
 
-import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModBiomes;
 import erebus.lib.Reference;
+import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHandler {
 

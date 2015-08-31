@@ -1,7 +1,10 @@
 package erebus.block;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityBones;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -14,18 +17,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityBones;
+
+import java.util.Random;
 
 public class BlockBones extends BlockContainer {
 
 	public BlockBones() {
 		super(Material.rock);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.blockBones");
+		setUnlocalizedName("erebus.blockBones");
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.6875F, 1.0F);
 	}
 

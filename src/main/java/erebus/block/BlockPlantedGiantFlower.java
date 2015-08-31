@@ -1,9 +1,13 @@
 package erebus.block;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModItems;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.item.block.ItemBlockFlowerPlanted;
+import erebus.world.feature.plant.WorldGenGiantFlowers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,14 +19,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModItems;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.block.ItemBlockFlowerPlanted;
-import erebus.world.feature.plant.WorldGenGiantFlowers;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockPlantedGiantFlower extends BlockSapling implements ISubBlocksBlock {
 
@@ -51,7 +51,7 @@ public class BlockPlantedGiantFlower extends BlockSapling implements ISubBlocksB
 		setCreativeTab(null);
 		setHardness(0.0F);
 		setStepSound(Block.soundTypeGrass);
-		setBlockName("erebus.flowerPlanted");
+		setUnlocalizedName("erebus.flowerPlanted");
 		float var3 = 0.4F;
 		setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 1F, 0.5F + var3);
 	}

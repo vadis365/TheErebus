@@ -1,19 +1,17 @@
 package erebus.client.gui;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
+import erebus.inventory.ContainerUmberFurnace;
+import erebus.tileentity.TileEntityUmberFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.helper.Utils;
-import erebus.inventory.ContainerUmberFurnace;
-import erebus.tileentity.TileEntityUmberFurnace;
 
 @SideOnly(Side.CLIENT)
 public class GuiUmberFurnace extends GuiContainer {

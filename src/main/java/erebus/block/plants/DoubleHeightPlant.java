@@ -1,8 +1,11 @@
 package erebus.block.plants;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,12 +17,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.item.ItemMaterials;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DoubleHeightPlant extends BlockDoublePlant implements IShearable {
 	@SideOnly(Side.CLIENT)
@@ -36,7 +36,7 @@ public class DoubleHeightPlant extends BlockDoublePlant implements IShearable {
 		setStepSound(Block.soundTypeGrass);
 		float w = (1F - width) / 2F;
 		setBlockBounds(w, 0, w, width + w, 1, width + w);
-		setBlockName("erebus." + name.substring(0, 1).toLowerCase() + name.substring(1));
+		setUnlocalizedName("erebus." + name.substring(0, 1).toLowerCase() + name.substring(1));
 	}
 
 	@Override

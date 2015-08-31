@@ -1,8 +1,11 @@
 package erebus.block;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.lib.EnumWood;
+import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,12 +16,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.lib.EnumWood;
-import erebus.lib.Reference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockSlabPlanks extends Block {
 
@@ -33,7 +33,7 @@ public class BlockSlabPlanks extends Block {
 		setCreativeTab(ModTabs.blocks);
 		setStepSound(Block.soundTypeWood);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
-		setBlockName(Reference.MOD_ID + ".slabPlanks" + wood.name());
+		setUnlocalizedName(Reference.MOD_ID + ".slabPlanks" + wood.name());
 	}
 
 	@Override

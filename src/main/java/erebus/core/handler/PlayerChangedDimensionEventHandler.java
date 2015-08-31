@@ -1,8 +1,8 @@
 package erebus.core.handler;
 
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import erebus.ModAchievements;
 import erebus.core.handler.configs.ConfigHandler;
 

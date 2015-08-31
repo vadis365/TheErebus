@@ -1,13 +1,11 @@
 package erebus.client.gui;
 
+import erebus.inventory.ContainerSmoothieMaker;
+import erebus.tileentity.TileEntitySmoothieMaker;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import erebus.inventory.ContainerSmoothieMaker;
-import erebus.tileentity.TileEntitySmoothieMaker;
 
 public class GuiSmoothieMaker extends GuiContainer {
 

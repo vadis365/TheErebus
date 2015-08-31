@@ -1,23 +1,17 @@
 package erebus.tileentity;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.block.BlockUmberFurnace;
+import erebus.inventory.ContainerUmberFurnace;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.block.BlockUmberFurnace;
-import erebus.inventory.ContainerUmberFurnace;
 
 public class TileEntityUmberFurnace extends TileEntityBasicInventory implements IFluidHandler {
 

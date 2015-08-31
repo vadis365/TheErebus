@@ -1,7 +1,8 @@
 package erebus.block.bamboo;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -9,9 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
+
+import java.util.Random;
 
 public class BlockBambooTorch extends Block {
 
@@ -23,7 +23,7 @@ public class BlockBambooTorch extends Block {
 		setHardness(0.0F);
 		setLightLevel(0.9F);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.bambooTorch");
+		setUnlocalizedName("erebus.bambooTorch");
 		setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
 	}
 

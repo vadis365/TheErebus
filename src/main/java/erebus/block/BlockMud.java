@@ -1,5 +1,6 @@
 package erebus.block;
 
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -8,14 +9,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
-import erebus.ModTabs;
 
 public class BlockMud extends Block {
 
 	public BlockMud() {
 		super(Material.ground);
 		setHardness(2.0F);
-		setBlockName("erebus.mud");
+		setUnlocalizedName("erebus.mud");
 		setCreativeTab(ModTabs.blocks);
 		setBlockTextureName("erebus:mud");
 	}

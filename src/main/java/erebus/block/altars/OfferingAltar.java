@@ -1,5 +1,10 @@
 package erebus.block.altars;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityOfferingAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -12,11 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityOfferingAltar;
 
 public class OfferingAltar extends BlockContainer {
 	public OfferingAltar() {
@@ -24,7 +24,7 @@ public class OfferingAltar extends BlockContainer {
 		setHardness(2.0F);
 		setHarvestLevel("pickaxe", 0);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.offeringAltar");
+		setUnlocalizedName("erebus.offeringAltar");
 	}
 
 	@Override

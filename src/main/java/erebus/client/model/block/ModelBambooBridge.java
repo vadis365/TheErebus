@@ -1,10 +1,10 @@
 package erebus.client.model.block;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.tileentity.TileEntityBambooBridge;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.tileentity.TileEntityBambooBridge;
 
 @SideOnly(Side.CLIENT)
 public class ModelBambooBridge extends ModelBase {

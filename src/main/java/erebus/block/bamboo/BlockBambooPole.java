@@ -1,7 +1,9 @@
 package erebus.block.bamboo;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.tileentity.TileEntityBambooPole;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,10 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.tileentity.TileEntityBambooPole;
+
+import java.util.Random;
 
 public class BlockBambooPole extends BlockContainer {
 
@@ -26,7 +26,7 @@ public class BlockBambooPole extends BlockContainer {
 		setHardness(0.4F);
 		setHarvestLevel("axe", 0);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.bambooPole");
+		setUnlocalizedName("erebus.bambooPole");
 		setBlockTextureName("erebus:blockBambooPole");
 		setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
 	}

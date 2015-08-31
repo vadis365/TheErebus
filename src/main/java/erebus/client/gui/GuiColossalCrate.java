@@ -1,23 +1,21 @@
 package erebus.client.gui;
 
-import java.util.List;
-
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.inventory.ContainerColossalCrate;
+import erebus.network.PacketPipeline;
+import erebus.network.server.S00ColossalCratePage;
+import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.inventory.ContainerColossalCrate;
-import erebus.network.PacketPipeline;
-import erebus.network.server.S00ColossalCratePage;
-import erebus.tileentity.TileEntityBambooCrate;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiColossalCrate extends GuiContainer {

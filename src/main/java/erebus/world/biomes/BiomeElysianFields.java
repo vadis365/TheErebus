@@ -1,20 +1,7 @@
 package erebus.world.biomes;
 
 import erebus.ModBiomes;
-import erebus.entity.EntityBeetle;
-import erebus.entity.EntityBeetleLarva;
-import erebus.entity.EntityBotFly;
-import erebus.entity.EntityChameleonTick;
-import erebus.entity.EntityCicada;
-import erebus.entity.EntityDragonfly;
-import erebus.entity.EntityFly;
-import erebus.entity.EntityGlowWorm;
-import erebus.entity.EntityGrasshopper;
-import erebus.entity.EntityMoth;
-import erebus.entity.EntityTitanBeetle;
-import erebus.entity.EntityVelvetWorm;
-import erebus.entity.EntityWheatWeevil;
-import erebus.entity.EntityWorkerBee;
+import erebus.entity.*;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;

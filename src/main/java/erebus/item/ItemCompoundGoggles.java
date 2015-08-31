@@ -1,11 +1,11 @@
 package erebus.item;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.item.ItemMaterials.DATA;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 
 public class ItemCompoundGoggles extends ItemArmor {
 

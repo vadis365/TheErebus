@@ -1,9 +1,11 @@
 package erebus.block;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-
-import java.util.Iterator;
-
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,12 +21,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityPetrifiedWoodChest;
+
+import java.util.Iterator;
+
+import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 
 public class BlockPetrifiedChest extends BlockContainer {
 
@@ -33,7 +33,7 @@ public class BlockPetrifiedChest extends BlockContainer {
 		setHardness(2.0F);
 		setHarvestLevel("pickaxe", 0);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.petrifiedWoodChest");
+		setUnlocalizedName("erebus.petrifiedWoodChest");
 		setBlockTextureName("erebus:planks_petrifiedWood");
 		setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 	}

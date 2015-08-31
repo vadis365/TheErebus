@@ -1,7 +1,5 @@
 package erebus.entity.effect;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityWeatherEffect;
@@ -9,6 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EntityErebusLightningBolt extends EntityWeatherEffect {
 

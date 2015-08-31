@@ -1,12 +1,5 @@
 package erebus.debug;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
@@ -16,6 +9,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class ErebusCommandDebug extends CommandBase {
 	private static final IChatComponent text(String str) {

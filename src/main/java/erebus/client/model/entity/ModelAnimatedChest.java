@@ -1,10 +1,10 @@
 package erebus.client.model.entity;
 
+import erebus.entity.EntityAnimatedChest;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import erebus.entity.EntityAnimatedChest;
 
 public class ModelAnimatedChest extends ModelBase {
 	// fields

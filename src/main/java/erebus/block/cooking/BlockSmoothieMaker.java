@@ -1,5 +1,14 @@
 package erebus.block.cooking;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntitySmoothieMaker;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,15 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntitySmoothieMaker;
 
 public class BlockSmoothieMaker extends BlockContainer {
 
@@ -27,7 +27,7 @@ public class BlockSmoothieMaker extends BlockContainer {
 		super(Material.rock);
 		setHardness(2.0F);
 		setResistance(5.0F);
-		setBlockName("erebus.smoothieMaker");
+		setUnlocalizedName("erebus.smoothieMaker");
 		setCreativeTab(ModTabs.blocks);
 	}
 

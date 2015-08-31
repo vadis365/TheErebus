@@ -1,24 +1,14 @@
 package erebus.world.biomes;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
-import erebus.entity.EntityBeetle;
-import erebus.entity.EntityBeetleLarva;
-import erebus.entity.EntityBloodSnail;
-import erebus.entity.EntityCentipede;
-import erebus.entity.EntityDragonfly;
-import erebus.entity.EntityJumpingSpider;
-import erebus.entity.EntityLeech;
-import erebus.entity.EntityMosquito;
-import erebus.entity.EntityPondSkater;
-import erebus.entity.EntitySnapper;
-import erebus.entity.EntityWisp;
+import erebus.entity.*;
 import erebus.world.ChunkProviderErebus;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+
+import java.util.Random;
 
 public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 

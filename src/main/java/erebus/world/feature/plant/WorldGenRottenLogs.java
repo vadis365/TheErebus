@@ -1,12 +1,12 @@
 package erebus.world.feature.plant;
 
-import java.util.Random;
-
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.lib.EnumWood;
+
+import java.util.Random;
 
 public class WorldGenRottenLogs extends WorldGenerator {
 

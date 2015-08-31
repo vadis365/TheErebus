@@ -28,9 +28,10 @@ archivesBaseName = "TheErebus"
 
 minecraft
 {
-    version = "1.7.10-10.13.4.1448-1.7.10"
+    version = "1.8-11.14.3.1502"
     runDir = "minecraft"
     replace '${version}', project.version
+    mappings = "snapshot_20141130"
 }
 
 repositories

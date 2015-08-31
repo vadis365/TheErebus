@@ -1,5 +1,9 @@
 package erebus.client.render.tileentity;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.client.model.block.ModelBoneBlock;
+import erebus.tileentity.TileEntityBones;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
@@ -8,13 +12,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.model.block.ModelBoneBlock;
-import erebus.tileentity.TileEntityBones;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityBoneBlockRenderer extends TileEntitySpecialRenderer {

@@ -1,13 +1,13 @@
 package erebus.client.render.item;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
 
 @SideOnly(Side.CLIENT)
 public class TextureHomingBeecon extends TextureAtlasSprite {

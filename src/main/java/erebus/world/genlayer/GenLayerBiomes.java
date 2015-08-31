@@ -1,10 +1,10 @@
 package erebus.world.genlayer;
 
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 import erebus.ModBiomes;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.loot.WeightedList;
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomes extends GenLayerErebus {
 

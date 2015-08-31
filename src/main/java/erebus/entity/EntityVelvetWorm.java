@@ -1,20 +1,16 @@
 package erebus.entity;
 
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 
 public class EntityVelvetWorm extends EntityMob {
 

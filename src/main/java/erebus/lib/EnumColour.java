@@ -1,10 +1,10 @@
 package erebus.lib;
 
-import java.awt.Color;
-
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.StatCollector;
+
+import java.awt.*;
 
 public enum EnumColour {
 

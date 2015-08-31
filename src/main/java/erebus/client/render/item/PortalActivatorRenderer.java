@@ -1,16 +1,14 @@
 package erebus.client.render.item;
 
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.client.model.item.ModelPortalStaff;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.model.item.ModelPortalStaff;
 
 @SideOnly(Side.CLIENT)
 public class PortalActivatorRenderer implements IItemRenderer {

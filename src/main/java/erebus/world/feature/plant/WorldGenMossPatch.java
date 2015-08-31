@@ -1,18 +1,13 @@
 package erebus.world.feature.plant;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
+import erebus.ModBlocks;
+import erebus.lib.EnumWood;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
-import erebus.lib.EnumWood;
+import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class WorldGenMossPatch extends WorldGenerator {
 	boolean blockPlaced = false;

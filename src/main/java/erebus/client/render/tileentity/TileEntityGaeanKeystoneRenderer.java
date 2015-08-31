@@ -1,15 +1,13 @@
 package erebus.client.render.tileentity;
 
+import erebus.block.GaeanKeystone;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import erebus.block.GaeanKeystone;
 
 public class TileEntityGaeanKeystoneRenderer extends TileEntitySpecialRenderer {
 	private static final ResourceLocation beamTexture = new ResourceLocation("textures/entity/beacon_beam.png");

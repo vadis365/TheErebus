@@ -1,14 +1,13 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -16,9 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
 
 public class EntityAntlionMiniBoss extends EntityMob {
 

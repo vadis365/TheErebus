@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -13,7 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.item.ItemMaterials;
 
 public class EntityChameleonTick extends EntityMob {
 	public Block blockID;

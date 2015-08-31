@@ -1,12 +1,10 @@
 package erebus.client.model.entity;
 
+import erebus.entity.EntityMidgeSwarm;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
 import org.lwjgl.opengl.GL11;
-
-import erebus.entity.EntityMidgeSwarm;
 
 public class ModelMidgeSwarm extends ModelBase {
 	ModelRenderer LFLeg;

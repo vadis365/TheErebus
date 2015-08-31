@@ -1,13 +1,11 @@
 package erebus.client.render.item;
 
+import net.minecraftforge.fml.client.FMLClientHandler;
+import erebus.client.model.block.ModelSmoothieMaker;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import erebus.client.model.block.ModelSmoothieMaker;
 
 public class ItemSmoothieMakerRenderer implements IItemRenderer {
 

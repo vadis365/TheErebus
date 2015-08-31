@@ -1,7 +1,7 @@
 package erebus.block;
 
-import net.minecraft.block.BlockFalling;
 import erebus.ModTabs;
+import net.minecraft.block.BlockFalling;
 
 public class BlockUmberGravel extends BlockFalling {
 
@@ -9,7 +9,7 @@ public class BlockUmberGravel extends BlockFalling {
 		setHardness(0.6F);
 		setStepSound(soundTypeGravel);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.umberGravel");
+		setUnlocalizedName("erebus.umberGravel");
 		setBlockTextureName("erebus:umberGravel");
 	}
 }

@@ -1,15 +1,13 @@
 package erebus.client.render.tileentity;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.client.model.block.ModelErebusAltar;
+import erebus.tileentity.TileEntityErebusAltar;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.model.block.ModelErebusAltar;
-import erebus.tileentity.TileEntityErebusAltar;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityErebusAltarRenderer extends TileEntitySpecialRenderer {

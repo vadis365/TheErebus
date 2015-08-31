@@ -1,6 +1,6 @@
 package erebus.world;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;

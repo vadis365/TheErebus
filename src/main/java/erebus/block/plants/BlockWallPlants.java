@@ -1,16 +1,12 @@
 package erebus.block.plants;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.item.block.ItemBlockErebusPlantSmall;
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,13 +19,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.item.block.ItemBlockErebusPlantSmall;
-import erebus.lib.EnumWood;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class BlockWallPlants extends Block implements IShearable, ISubBlocksBlock {
 
@@ -46,7 +41,7 @@ public class BlockWallPlants extends Block implements IShearable, ISubBlocksBloc
 		setTickRandomly(true);
 		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
-		setBlockName("erebus.wallPlants");
+		setUnlocalizedName("erebus.wallPlants");
 	}
 
 	@Override

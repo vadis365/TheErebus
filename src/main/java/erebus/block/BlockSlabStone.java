@@ -1,8 +1,11 @@
 package erebus.block;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.item.block.ItemBlockSlabSimple;
+import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -13,12 +16,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.item.block.ItemBlockSlabSimple;
-import erebus.lib.Reference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockSlabStone extends Block implements ISubBlocksBlock {
 
@@ -40,7 +40,7 @@ public class BlockSlabStone extends Block implements ISubBlocksBlock {
 		String[] strings = name.split("\\.");
 		name = strings[strings.length - 1];
 
-		setBlockName(Reference.MOD_ID + ".slab-" + name + meta);
+		setUnlocalizedName(Reference.MOD_ID + ".slab-" + name + meta);
 	}
 
 	public BlockSlabStone(Block base) {

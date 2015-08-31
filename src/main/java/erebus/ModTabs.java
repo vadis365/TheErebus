@@ -1,11 +1,7 @@
 package erebus;
 
+import erebus.creativetab.*;
 import net.minecraft.creativetab.CreativeTabs;
-import erebus.creativetab.TabBlocks;
-import erebus.creativetab.TabGears;
-import erebus.creativetab.TabItems;
-import erebus.creativetab.TabPlants;
-import erebus.creativetab.TabSpecialItems;
 
 public class ModTabs {
 

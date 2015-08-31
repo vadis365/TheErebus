@@ -1,7 +1,10 @@
 package erebus.block;
 
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.item.block.ItemBlockAmber;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,11 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.item.block.ItemBlockAmber;
+
+import java.util.List;
 
 public class BlockAmber extends Block implements ISubBlocksBlock {
 
@@ -41,7 +41,7 @@ public class BlockAmber extends Block implements ISubBlocksBlock {
 		setLightOpacity(3);
 		setResistance(10.0F);
 		setStepSound(soundTypeGlass);
-		setBlockName("erebus.amber");
+		setUnlocalizedName("erebus.amber");
 		setHarvestLevel("pickaxe", 0);
 		setCreativeTab(ModTabs.blocks);
 	}

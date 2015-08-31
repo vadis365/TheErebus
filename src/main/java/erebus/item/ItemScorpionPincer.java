@@ -1,7 +1,10 @@
 package erebus.item;
 
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.entity.EntityScorpion;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
@@ -11,11 +14,8 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.entity.EntityScorpion;
+
+import java.util.List;
 
 public class ItemScorpionPincer extends ItemSword {
 

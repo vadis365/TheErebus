@@ -1,14 +1,12 @@
 package erebus.client.render.entity;
 
+import erebus.client.model.entity.ModelBlackAnt;
+import erebus.entity.EntityBlackAnt;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import erebus.client.model.entity.ModelBlackAnt;
-import erebus.entity.EntityBlackAnt;
 
 public class RenderBlackAnt extends RenderLiving {
 

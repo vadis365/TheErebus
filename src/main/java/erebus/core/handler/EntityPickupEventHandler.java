@@ -1,10 +1,10 @@
 package erebus.core.handler;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModAchievements;
 import erebus.ModItems;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 public class EntityPickupEventHandler {
 	@SubscribeEvent

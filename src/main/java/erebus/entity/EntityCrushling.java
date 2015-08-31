@@ -1,18 +1,10 @@
 package erebus.entity;
 
+import erebus.ModBiomes;
+import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveIndoors;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -20,8 +12,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBiomes;
-import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
 public class EntityCrushling extends EntityAnimal {
 

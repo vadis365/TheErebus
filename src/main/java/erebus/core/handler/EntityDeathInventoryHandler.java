@@ -1,9 +1,10 @@
 package erebus.core.handler;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import erebus.ModBlocks;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityBones;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,11 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import erebus.ModBlocks;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityBones;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class EntityDeathInventoryHandler {
 

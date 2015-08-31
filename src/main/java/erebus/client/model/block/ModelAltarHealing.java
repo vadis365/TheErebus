@@ -1,14 +1,12 @@
 package erebus.client.model.block;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.tileentity.TileEntityErebusAltarHealing;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.tileentity.TileEntityErebusAltarHealing;
 
 @SideOnly(Side.CLIENT)
 public class ModelAltarHealing extends ModelBase {

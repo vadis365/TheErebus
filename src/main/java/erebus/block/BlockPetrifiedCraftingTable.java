@@ -1,16 +1,16 @@
 package erebus.block;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModTabs;
+import erebus.core.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModTabs;
-import erebus.core.proxy.CommonProxy;
 
 public class BlockPetrifiedCraftingTable extends Block {
 
@@ -22,7 +22,7 @@ public class BlockPetrifiedCraftingTable extends Block {
 		setHardness(2.5F);
 		setStepSound(soundTypeStone);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.petrifiedCraftingTable");
+		setUnlocalizedName("erebus.petrifiedCraftingTable");
 	}
 
 	@Override

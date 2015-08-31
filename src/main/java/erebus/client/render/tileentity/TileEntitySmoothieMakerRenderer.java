@@ -1,12 +1,10 @@
 package erebus.client.render.tileentity;
 
+import erebus.client.model.block.ModelSmoothieMaker;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import erebus.client.model.block.ModelSmoothieMaker;
 
 public class TileEntitySmoothieMakerRenderer extends TileEntitySpecialRenderer {
 

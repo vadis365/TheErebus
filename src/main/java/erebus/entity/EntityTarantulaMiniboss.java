@@ -1,12 +1,14 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAITarantulaMinibossAttack;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -24,13 +26,6 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAITarantulaMinibossAttack;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayData {
 	public int deathTicks;

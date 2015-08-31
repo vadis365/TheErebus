@@ -1,8 +1,10 @@
 package erebus.entity;
 
-import java.util.Calendar;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -16,11 +18,9 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
+
+import java.util.Calendar;
+import java.util.Random;
 
 public class EntityDragonfly extends EntityMob {
 

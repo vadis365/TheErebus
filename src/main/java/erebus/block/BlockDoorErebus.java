@@ -1,14 +1,14 @@
 package erebus.block;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+
+import java.util.Random;
 
 public class BlockDoorErebus extends BlockDoor {
 	public final String name;
@@ -25,7 +25,7 @@ public class BlockDoorErebus extends BlockDoor {
 		this.name = name;
 		setHardness(3.0F);
 		setStepSound(soundTypeWood);
-		setBlockName("erebus.door" + name);
+		setUnlocalizedName("erebus.door" + name);
 		setBlockTextureName("erebus:door_" + name);
 	}
 

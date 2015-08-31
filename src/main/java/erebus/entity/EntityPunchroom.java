@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.item.ItemMaterials;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,7 +8,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.ItemMaterials;
 
 public class EntityPunchroom extends EntityMob {
 	private int shroomJumpDelay;

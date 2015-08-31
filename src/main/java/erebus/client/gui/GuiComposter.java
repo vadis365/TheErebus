@@ -1,17 +1,15 @@
 package erebus.client.gui;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.core.helper.Utils;
+import erebus.inventory.ContainerComposter;
+import erebus.tileentity.TileEntityComposter;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.helper.Utils;
-import erebus.inventory.ContainerComposter;
-import erebus.tileentity.TileEntityComposter;
 
 @SideOnly(Side.CLIENT)
 public class GuiComposter extends GuiContainer {

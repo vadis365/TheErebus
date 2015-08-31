@@ -1,17 +1,17 @@
 package erebus.entity.ai;
 
-import java.awt.Point;
-import java.util.List;
-
+import erebus.core.helper.Spiral;
+import erebus.core.helper.Utils;
+import erebus.entity.EntityBlackAnt;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import erebus.core.helper.Spiral;
-import erebus.core.helper.Utils;
-import erebus.entity.EntityBlackAnt;
+
+import java.awt.*;
+import java.util.List;
 
 public abstract class EntityAIAntsBlock extends EntityAIBase {
 

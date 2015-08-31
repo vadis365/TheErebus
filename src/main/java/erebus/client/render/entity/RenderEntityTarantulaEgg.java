@@ -1,14 +1,12 @@
 package erebus.client.render.entity;
 
+import net.minecraftforge.fml.client.FMLClientHandler;
+import erebus.client.model.block.ModelTarantulaEgg;
+import erebus.entity.EntityTarantulaEgg;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import erebus.client.model.block.ModelTarantulaEgg;
-import erebus.entity.EntityTarantulaEgg;
 
 public class RenderEntityTarantulaEgg extends Render {
 

@@ -1,10 +1,10 @@
 package erebus.network.server;
 
+import erebus.entity.EntityRhinoBeetle;
+import erebus.network.AbstractServerPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-import erebus.entity.EntityRhinoBeetle;
-import erebus.network.AbstractServerPacket;
 
 public class PacketBeetleRamAttack extends AbstractServerPacket {
 

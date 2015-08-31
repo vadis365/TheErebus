@@ -1,5 +1,10 @@
 package erebus.block;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.entity.EntityUmberGolem;
+import erebus.tileentity.TileEntityUmberGolemStatue;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,18 +16,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.entity.EntityUmberGolem;
-import erebus.tileentity.TileEntityUmberGolemStatue;
 
 public class BlockUmberGolemStatue extends BlockContainer {
 
 	public BlockUmberGolemStatue() {
 		super(Material.rock);
 		setHardness(2.0F);
-		setBlockName("erebus.umberGolemStatue");
+		setUnlocalizedName("erebus.umberGolemStatue");
 	}
 
 	@Override

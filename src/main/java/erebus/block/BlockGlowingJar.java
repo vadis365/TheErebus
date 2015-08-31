@@ -1,12 +1,12 @@
 package erebus.block;
 
+import erebus.ModTabs;
+import erebus.tileentity.TileEntityGlowingJar;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import erebus.ModTabs;
-import erebus.tileentity.TileEntityGlowingJar;
 
 public class BlockGlowingJar extends BlockContainer {
 
@@ -15,7 +15,7 @@ public class BlockGlowingJar extends BlockContainer {
 		setLightLevel(1.0F);
 		setStepSound(soundTypeGlass);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.glowingJar");
+		setUnlocalizedName("erebus.glowingJar");
 		setBlockTextureName("erebus:glassAmber");
 		setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 1.0F, 0.8F);
 	}

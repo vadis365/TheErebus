@@ -1,27 +1,14 @@
 package erebus.world.biomes;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
-import erebus.entity.EntityBeetle;
-import erebus.entity.EntityBeetleLarva;
-import erebus.entity.EntityBombardierBeetle;
-import erebus.entity.EntityBotFly;
-import erebus.entity.EntityCentipede;
-import erebus.entity.EntityChameleonTick;
-import erebus.entity.EntityFly;
-import erebus.entity.EntityJumpingSpider;
-import erebus.entity.EntityMosquito;
-import erebus.entity.EntityPrayingMantis;
-import erebus.entity.EntityScytodes;
-import erebus.entity.EntityTarantula;
-import erebus.entity.EntityVelvetWorm;
-import erebus.entity.EntityWasp;
+import erebus.entity.*;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+
+import java.util.Random;
 
 public class BiomeUndergroundJungle extends BiomeBaseErebus {
 	public BiomeUndergroundJungle(int biomeID) {

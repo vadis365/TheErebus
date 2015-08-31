@@ -1,8 +1,8 @@
 package erebus.block.plants;
 
-import java.util.List;
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHugeMushroom;
 import net.minecraft.block.material.Material;
@@ -12,9 +12,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
+
+import java.util.List;
+import java.util.Random;
 
 public class ErebusHugeMushroom extends BlockHugeMushroom {
 
@@ -28,7 +28,7 @@ public class ErebusHugeMushroom extends BlockHugeMushroom {
 		this.drop = drop;
 		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeWood);
-		setBlockName("erebus.mushroomCap" + type);
+		setUnlocalizedName("erebus.mushroomCap" + type);
 		setBlockTextureName("erebus:mushcap_" + name);
 	}
 
@@ -39,7 +39,7 @@ public class ErebusHugeMushroom extends BlockHugeMushroom {
 		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeWood);
 		setBlockTextureName("erebus:mushcap_" + name);
-		setBlockName("erebus." + name + "_mushroom_block");
+		setUnlocalizedName("erebus." + name + "_mushroom_block");
 	}
 
 	@Override

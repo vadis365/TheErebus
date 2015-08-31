@@ -1,8 +1,8 @@
 package erebus.api.cooking;
 
-import java.lang.reflect.Method;
-
 import net.minecraft.item.ItemStack;
+
+import java.lang.reflect.Method;
 
 public class CookingRecipes {
 

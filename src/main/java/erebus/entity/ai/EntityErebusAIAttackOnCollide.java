@@ -1,5 +1,8 @@
 package erebus.entity.ai;
 
+import erebus.entity.EntityAntlionMiniBoss;
+import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityVelvetWorm;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -9,9 +12,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.entity.EntityAntlionMiniBoss;
-import erebus.entity.EntityPrayingMantis;
-import erebus.entity.EntityVelvetWorm;
 
 public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 

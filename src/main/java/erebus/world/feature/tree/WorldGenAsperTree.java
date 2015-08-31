@@ -1,10 +1,10 @@
 package erebus.world.feature.tree;
 
-import java.util.Random;
-
+import erebus.lib.EnumWood;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import erebus.lib.EnumWood;
+
+import java.util.Random;
 
 public class WorldGenAsperTree extends WorldGenTreeBase {
 

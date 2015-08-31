@@ -1,7 +1,12 @@
 package erebus.block.silo;
 
-import java.util.Random;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -12,13 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
+
+import java.util.Random;
 
 public class BlockSiloTank extends BlockContainer {
 

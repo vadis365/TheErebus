@@ -1,7 +1,9 @@
 package erebus.item;
 
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.entity.EntityExtractedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPane;
@@ -15,10 +17,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.entity.EntityExtractedBlock;
+
+import java.util.List;
 
 public class ItemExtractor extends Item {
 

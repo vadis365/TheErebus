@@ -1,9 +1,9 @@
 package erebus.world.genlayer;
 
+import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
-import erebus.world.biomes.BiomeBaseErebus;
 
 public class GenLayerSubBiomes extends GenLayerErebus {
 	private static final byte[] offsetX = new byte[] { 0, 1, -1, 0, 0 }, offsetZ = new byte[] { 0, 0, 0, 1, -1 };

@@ -1,19 +1,19 @@
 package erebus.client.sound;
 
-import java.lang.reflect.Field;
-import java.util.Random;
-
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import erebus.core.handler.configs.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import erebus.core.handler.configs.ConfigHandler;
+
+import java.lang.reflect.Field;
+import java.util.Random;
 // Props to SanAndeasP - he wrote this
 public class ErebusMusicHandler {
 	private MusicTicker prevMusicTicker;

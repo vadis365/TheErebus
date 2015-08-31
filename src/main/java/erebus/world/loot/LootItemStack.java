@@ -1,10 +1,10 @@
 package erebus.world.loot;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.Random;
 
 public class LootItemStack implements IWeightProvider {
 

@@ -1,18 +1,16 @@
 package erebus.entity;
 
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemMaterials;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,10 +21,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
 

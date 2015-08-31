@@ -1,7 +1,12 @@
 package erebus.item;
 
-import java.util.List;
-
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.lib.EnumColour;
+import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,13 +18,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.lib.EnumColour;
-import erebus.lib.Reference;
+
+import java.util.List;
 
 public class ItemFlowerSeeds extends Item {
 

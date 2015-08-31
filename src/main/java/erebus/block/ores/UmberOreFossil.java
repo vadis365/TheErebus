@@ -1,15 +1,15 @@
 package erebus.block.ores;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import erebus.ModItems;
+import erebus.item.ItemMaterials;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class UmberOreFossil extends UmberOre {
 

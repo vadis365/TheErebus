@@ -1,16 +1,16 @@
 package erebus.world.structure;
 
-import java.util.Random;
-
+import erebus.ModBiomes;
+import erebus.ModBlocks;
+import erebus.world.ChunkProviderErebus;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.MapGenBase;
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.world.ChunkProviderErebus;
+
+import java.util.Random;
 
 public class MapGenErebusRavine extends MapGenBase {
 
