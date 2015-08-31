@@ -84,7 +84,7 @@ public class ModEntities {
 		registerEntity(80, EntityThrownSand.class, "thrownSand");
 
 		// Spawn conditions
-		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.monster, BiomeGenBase.hell);
+		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.MONSTER, BiomeGenBase.hell);
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name) {
