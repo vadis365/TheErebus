@@ -32,7 +32,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 		}
 
 		if (cnt == 2 && hasVelocity && leggings != null)
-			return leggings.stackTagCompound == null || leggings.stackTagCompound.getByte("upgradeTier") < ItemLeggingsSprint.maxTier;
+			return leggings.getTagCompound() == null || leggings.getTagCompound().getByte("upgradeTier") < ItemLeggingsSprint.maxTier;
 
 		// Biovelocity around leggings
 		if (size < 9)
@@ -43,7 +43,7 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 				return false;
 
 			if (a == 4) {
-				if (!(is.getItem() == ModItems.sprintLeggings && (is.stackTagCompound == null || is.stackTagCompound.getByte("upgradeTier") < ItemLeggingsSprint.maxTier)))
+				if (!(is.getItem() == ModItems.sprintLeggings && (is.getTagCompound() == null || is.getTagCompound().getByte("upgradeTier") < ItemLeggingsSprint.maxTier)))
 					return false;
 			} else if (!(is.getItem() == ModItems.materials && is.getItemDamage() == DATA.bioVelocity.ordinal()))
 				return false;
@@ -66,9 +66,9 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 			return null;
 		is = is.copy();
 
-		if (is.stackTagCompound == null)
-			is.stackTagCompound = new NBTTagCompound();
-		is.stackTagCompound.setByte("upgradeTier", (byte) (is.stackTagCompound.getByte("upgradeTier") + 1));
+		if (is.getTagCompound() == null)
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setByte("upgradeTier", (byte) (is.getTagCompound().getByte("upgradeTier") + 1));
 		return is;
 	}
 
@@ -80,5 +80,11 @@ public class RecipeSprintLeggingsUpgrades implements IRecipe {
 	@Override
 	public ItemStack getRecipeOutput() {
 		return new ItemStack(ModItems.sprintLeggings);
+	}
+
+	@Override
+	public ItemStack[] getRemainingItems(InventoryCrafting crafting) {
+		//TODO: Make this method work
+		return new ItemStack[0];
 	}
 }

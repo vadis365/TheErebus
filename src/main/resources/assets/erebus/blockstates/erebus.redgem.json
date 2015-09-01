@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"variant=redgem": { "model": "erebus:redgem_erebus.redgem" },
+		"variant=redLampOn": { "model": "erebus:redLampOn_erebus.redgem" },
+		"variant=redLampOff": { "model": "erebus:redLampOff_erebus.redgem" }
+	}
+}

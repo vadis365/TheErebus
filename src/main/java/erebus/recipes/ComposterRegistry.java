@@ -26,7 +26,12 @@ public class ComposterRegistry {
 	public static void init() {
 		register(Items.stick);
 		register(Items.wooden_axe);
-		register(Items.wooden_door);
+		register(Items.oak_door);
+		register(Items.dark_oak_door);
+		register(Items.acacia_door);
+		register(Items.birch_door);
+		register(Items.jungle_door);
+		register(Items.spruce_door);
 		register(Items.wooden_hoe);
 		register(Items.wooden_pickaxe);
 		register(Items.wooden_shovel);

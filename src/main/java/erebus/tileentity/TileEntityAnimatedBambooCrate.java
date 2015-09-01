@@ -3,6 +3,8 @@ package erebus.tileentity;
 import erebus.ModBlocks;
 import erebus.entity.EntityAnimatedBambooCrate;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IChatComponent;
 
 public class TileEntityAnimatedBambooCrate extends TileEntityBasicInventory {
 

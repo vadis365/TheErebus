@@ -39,7 +39,7 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 
 		if (block instanceof BlockCrops && blockMeta < 7)
 			return true;
-		else if (block.hasTileEntity(blockMeta))
+		else if (block.hasTileEntity(block.getStateFromMeta(blockMeta)))
 			return false;
 
 		return false;

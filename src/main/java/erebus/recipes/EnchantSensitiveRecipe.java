@@ -31,7 +31,7 @@ public class EnchantSensitiveRecipe extends ShapedOreRecipe {
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean checkMatch(InventoryCrafting inv, int startX, int startY, boolean mirror) {
+	protected boolean checkMatch(InventoryCrafting inv, int startX, int startY, boolean mirror) {
 		for (int x = 0; x < 3; x++)
 			for (int y = 0; y < 3; y++) {
 				int subX = x - startX;

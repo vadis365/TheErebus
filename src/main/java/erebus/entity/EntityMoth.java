@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -108,7 +109,7 @@ public class EntityMoth extends EntityAmbientCreature {
 		super.updateAITasks();
 
 		if (getIsMothHanging()) {
-			if (!worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
+			if (!worldObj.getBlockState(new BlockPos(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ))).getBlock().isNormalCube())
 				setIsMothHanging(false);
 			else {
 				if (rand.nextInt(200) == 0)
@@ -116,7 +117,7 @@ public class EntityMoth extends EntityAmbientCreature {
 
 				if (worldObj.getClosestPlayerToEntity(this, 4.0D) != null) {
 					setIsMothHanging(false);
-					worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1015, (int) posX, (int) posY, (int) posZ, 0);
+					worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1015, new BlockPos(posX, posY, posZ), 0);
 				}
 			}
 		} else {
@@ -137,7 +138,7 @@ public class EntityMoth extends EntityAmbientCreature {
 			moveForward = 0.5F;
 			rotationYaw += var8;
 
-			if (rand.nextInt(100) == 0 && worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
+			if (rand.nextInt(100) == 0 && worldObj.getBlockState(new BlockPos(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ))).getBlock().isNormalCube())
 				setIsMothHanging(false);
 		}
 	}
@@ -149,10 +150,12 @@ public class EntityMoth extends EntityAmbientCreature {
 
 	@Override
 	protected void fall(float par1) {
+
 	}
 
 	@Override
 	protected void updateFallState(double par1, boolean par3) {
+
 	}
 
 	@Override
@@ -162,7 +165,7 @@ public class EntityMoth extends EntityAmbientCreature {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float par2) {
-		if (isEntityInvulnerable())
+		if (isEntityInvulnerable(source))
 			return false;
 		else {
 			if (!worldObj.isRemote && getIsMothHanging())
@@ -193,7 +196,7 @@ public class EntityMoth extends EntityAmbientCreature {
 		else {
 			int var2 = MathHelper.floor_double(posX);
 			int var3 = MathHelper.floor_double(posZ);
-			int var4 = worldObj.getBlockLightValue(var2, var1, var3);
+			int var4 = worldObj.getLight(new BlockPos(var2, var1, var3));
 			byte var5 = 4;
 			Calendar var6 = worldObj.getCurrentDate();
 
@@ -203,7 +206,7 @@ public class EntityMoth extends EntityAmbientCreature {
 			} else
 				var5 = 7;
 
-			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
+			return var4 <= rand.nextInt(var5) && super.getCanSpawnHere();
 		}
 	}
 

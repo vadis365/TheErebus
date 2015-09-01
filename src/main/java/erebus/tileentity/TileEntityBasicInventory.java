@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 
 public abstract class TileEntityBasicInventory extends TileEntity implements ISidedInventory {
 
@@ -104,11 +105,6 @@ public abstract class TileEntityBasicInventory extends TileEntity implements ISi
 	}
 
 	@Override
-	public String getInventoryName() {
-		return name;
-	}
-
-	@Override
 	public final boolean isUseableByPlayer(EntityPlayer player) {
 		return true;
 	}
@@ -119,12 +115,7 @@ public abstract class TileEntityBasicInventory extends TileEntity implements ISi
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
-
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
+	public int[] getSlotsForFace(EnumFacing side) {
 		int[] slots = new int[getSizeInventory()];
 		for (int i = 0; i < slots.length; i++)
 			slots[i] = i;
@@ -137,20 +128,12 @@ public abstract class TileEntityBasicInventory extends TileEntity implements ISi
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
+	public boolean canInsertItem(int slot, ItemStack stack, EnumFacing side) {
 		return isItemValidForSlot(slot, stack);
 	}
 
 	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
+	public boolean canExtractItem(int slot, ItemStack stack, EnumFacing side) {
 		return true;
-	}
-
-	@Override
-	public void openInventory() {
-	}
-
-	@Override
-	public void closeInventory() {
 	}
 }
