@@ -34,7 +34,7 @@ public abstract class BiomeDecoratorBaseErebus {
 	}
 
 	public final void decorate(World world, Random rand, int x, int z) {
-		if (isDecorating)
+	/*	if (isDecorating)
 			throw new RuntimeException("Already decorating Erebus!");
 		isDecorating = true;
 		this.world = world;
@@ -55,7 +55,7 @@ public abstract class BiomeDecoratorBaseErebus {
 
 		decorate();
 
-		isDecorating = false;
+		isDecorating = false;*/
 	}
 
 	protected void populate() {
@@ -81,7 +81,7 @@ public abstract class BiomeDecoratorBaseErebus {
 	}
 
 	protected boolean checkSurface(SurfaceType surfaceType, int x, int y, int z) {
-		return surfaceType.matchBlock(world.getBlock(x, y - 1, z)) && world.isAirBlock(x, y, z);
+		return true; //surfaceType.matchBlock(world.getBlock(x, y - 1, z)) && world.isAirBlock(x, y, z);
 	}
 
 	public static class BiomeDecoratorEmpty extends BiomeDecoratorBaseErebus {

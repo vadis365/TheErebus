@@ -1,25 +1,8 @@
 package erebus.world.biomes.decorators;
 
-import erebus.ModBlocks;
-import erebus.lib.EnumWood;
-import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
-import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.decoration.WorldGenAmberGround;
-import erebus.world.feature.decoration.WorldGenAmberUmberstone;
-import erebus.world.feature.decoration.WorldGenPonds;
-import erebus.world.feature.decoration.WorldGenQuickSand;
-import erebus.world.feature.plant.WorldGenBamboo;
-import erebus.world.feature.plant.WorldGenMelon;
-import erebus.world.feature.plant.WorldGenTurnips;
-import erebus.world.feature.structure.WorldGenWaspDungeon;
-import erebus.world.feature.tree.*;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.world.gen.feature.*;
 
 public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
-	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
+/*	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
@@ -265,5 +248,5 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				oreGen.setChance(0.25F);
 				break; // ~ 1/3 chance
 		}
-	}
+	}*/
 }

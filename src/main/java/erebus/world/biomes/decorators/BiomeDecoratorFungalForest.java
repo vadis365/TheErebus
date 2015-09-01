@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.WorldGenFlowers;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
-	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
+/*	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 	protected final WorldGenerator genLichenPatch = new WorldGenMossPatch(1);
 	private final WorldGenFlowers genMushroomsBrown = new WorldGenFlowers(Blocks.brown_mushroom);
 	private final WorldGenFlowers genMushroomsRed = new WorldGenFlowers(Blocks.red_mushroom);
@@ -200,5 +200,5 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				oreGen.setChance(0.25F).setOreAmount(5, 8);
 				break; // double chance, lower amount per vein
 		}
-	}
+	}*/
 }

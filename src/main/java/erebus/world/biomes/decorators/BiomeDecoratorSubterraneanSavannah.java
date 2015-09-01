@@ -1,20 +1,8 @@
 package erebus.world.biomes.decorators;
 
-import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
-import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.decoration.*;
-import erebus.world.feature.plant.WorldGenBamboo;
-import erebus.world.feature.tree.WorldGenAsperTree;
-import erebus.world.feature.tree.WorldGenBaobabTree;
-import erebus.world.feature.tree.WorldGenGiantBaobab;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.WorldGenSavannaTree;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
-	private final WorldGenPonds genPonds = new WorldGenPonds();
+/*	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
 	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
@@ -164,5 +152,5 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				oreGen.setChance(0.5F).setIterations(0, extraOres ? 2 : 3).setY(5, 64);
 				break; // less common and lowered area ~2 times, thus lowered chance and iterations
 		}
-	}
+	}*/
 }

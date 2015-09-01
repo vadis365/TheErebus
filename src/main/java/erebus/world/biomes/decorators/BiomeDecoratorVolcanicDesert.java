@@ -11,7 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 
 public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
-	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
+/*	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
 	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.flowing_lava);
 	private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 
@@ -89,5 +89,5 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 				oreGen.setChance(0.25F).setIterations(0, 1);
 				break; // much more rare
 		}
-	}
+	}*/
 }

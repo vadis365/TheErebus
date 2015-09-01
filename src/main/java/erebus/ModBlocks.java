@@ -14,6 +14,7 @@ import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
+import net.minecraft.block.BlockStone;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -32,8 +33,8 @@ public class ModBlocks {
 	public static final Block portal = new ErebusPortal();
 
 	// TERRAIN
-	public static final Block umberstone = new BlockUmberstone();
-	public static final Block redGem = new BlockRedGem();
+	public static final Block umberstone = new BlockStone();
+/*	public static final Block redGem = new BlockRedGem();
 	public static final Block amber = new BlockAmber();
 	public static final Block quickSand = new BlockQuickSand();
 	public static final Block ghostSand = new BlockGhostSand();
@@ -223,15 +224,15 @@ public class ModBlocks {
 	public static final Block gaeanKeystone = new GaeanKeystone();
 	public static final Block tarantulaEgg = new BlockTarantulaEgg();
 	public static final Block antlionEgg = new BlockAntlionEgg();
-
+*/
 	public static void init() {
-		initBlocks();
-		EnumWood.initBlocks();
+	//	initBlocks();
+	//	EnumWood.initBlocks();
 
 		registerBlocks();
-		registerProperties();
+	//	registerProperties();
 	}
-
+/*
 	private static void initBlocks() {
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setUnlocalizedName("erebus.umbercobbleStairs" + i);
@@ -243,7 +244,7 @@ public class ModBlocks {
 		for (int i = 0; i < gneissStairs.length; i++)
 			gneissStairs[i] = new BlockStairsBase(gneiss, i).setStepSound(Block.soundTypeStone).setUnlocalizedName("erebus.gneissStairs" + i);
 	}
-
+*/
 	private static void registerBlocks() {
 		try {
 			for (Field f : ModBlocks.class.getDeclaredFields()) {
@@ -269,7 +270,7 @@ public class ModBlocks {
 		else
 			GameRegistry.registerBlock(block, strings[strings.length - 1]);
 	}
-
+/*
 	private static void registerProperties() {
 		Blocks.fire.setFireInfo(planks, 5, 20);
 		Blocks.fire.setFireInfo(witherWeb, 20, 50);
@@ -277,7 +278,7 @@ public class ModBlocks {
 		Blocks.fire.setFireInfo(fiddlehead, 60, 100);
 		Blocks.fire.setFireInfo(thorns, 15, 100);
 	}
-
+*/
 	public static interface ISubBlocksBlock {
 
 		Class<? extends ItemBlock> getItemBlockClass();

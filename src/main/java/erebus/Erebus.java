@@ -56,7 +56,7 @@ public class Erebus {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.INSTANCE.loadConfig(event);
-
+/*
 		if (event.getSide() == Side.CLIENT) {
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			MinecraftForge.EVENT_BUS.register(new RenderWarHammerChargeBar());
@@ -65,19 +65,19 @@ public class Erebus {
 			if (ConfigHandler.INSTANCE.playCustomSongs)
 				FMLCommonHandler.instance().bus().register(new ErebusMusicHandler());
 		}
-
-		ModFluids.init();
+*/
+	//	ModFluids.init();
 		ModBlocks.init();
-		ModItems.init();
-		ModEntities.init();
+		//ModItems.init();
+		//ModEntities.init();
 
-		AchievementPage.registerAchievementPage(new ModAchievements());
+//		AchievementPage.registerAchievementPage(new ModAchievements());
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
+//		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
 		DimensionManager.registerProviderType(ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, ConfigHandler.INSTANCE.erebusDimensionID);
-		GameRegistry.registerWorldGenerator(new WorldGenAntlionMaze(), 0);
+	//	GameRegistry.registerWorldGenerator(new WorldGenAntlionMaze(), 0);
 	}
 
 	@EventHandler
@@ -85,7 +85,7 @@ public class Erebus {
 	public void init(FMLInitializationEvent event) {
 		// Remove all the door recipes.
 		// This is needed otherwise our doors will not be craftable due to the recipe ordering
-		List<IRecipe> doorRecipes = new ArrayList<IRecipe>();
+	/*	List<IRecipe> doorRecipes = new ArrayList<IRecipe>();
 		for (IRecipe recipe : (List<IRecipe>) CraftingManager.getInstance().getRecipeList())
 			if (recipe != null) {
 				ItemStack stack = recipe.getRecipeOutput();
@@ -94,18 +94,18 @@ public class Erebus {
 			}
 		for (IRecipe recipe : doorRecipes)
 			CraftingManager.getInstance().getRecipeList().remove(recipe);
+*/
+	//	proxy.registerKeyHandlers();
+	//	proxy.registerTileEntities();
+	//	proxy.registerRenderInformation();
 
-		proxy.registerKeyHandlers();
-		proxy.registerTileEntities();
-		proxy.registerRenderInformation();
-
-		PacketPipeline.initializePipeline();
+	//	PacketPipeline.initializePipeline();
 		ModBiomes.init();
-		RecipeHandler.init();
-		ErebusRecipesHandler.init();
+	//	RecipeHandler.init();
+	//	ErebusRecipesHandler.init();
 		TeleporterHandler.init();
 
-		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
+	/*	MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
 		MinecraftForge.EVENT_BUS.register(new PlayerChangedDimensionEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityPickupEventHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);
@@ -114,10 +114,10 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.honeyBlock, ModItems.bucketHoney);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
-		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
+	*/	FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
+	//	FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 
-		if (ConfigHandler.INSTANCE.graveMarker)
+		/*		if (ConfigHandler.INSTANCE.graveMarker)
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
 
 		if (ConfigHandler.INSTANCE.randomNames)
@@ -134,15 +134,16 @@ public class Erebus {
 
 		// Add the other door recipes back
 		CraftingManager.getInstance().getRecipeList().addAll(doorRecipes);
+		*/
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		ModIntegrationHandler.postInit();
+	//	ModIntegrationHandler.postInit();
 	}
 
 	@EventHandler
 	public void onServerStarting(FMLServerStartingEvent event) {
-		event.registerServerCommand(new ErebusCommandDebug());
+	//	event.registerServerCommand(new ErebusCommandDebug());
 	}
 }

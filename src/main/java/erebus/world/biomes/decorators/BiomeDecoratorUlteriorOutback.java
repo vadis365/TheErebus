@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
-	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
@@ -125,5 +125,5 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 				genRedGem.generate(world, rand, x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ());
 		else
 			super.generateFeature(featureType);
-	}
+	}*/
 }

@@ -36,6 +36,6 @@ public abstract class GenLayerErebus extends GenLayer {
 	public static byte getModdedBiomeSize(WorldType worldType, byte original) {
 		WorldTypeEvent.BiomeSize event = new WorldTypeEvent.BiomeSize(worldType, original);
 		MinecraftForge.TERRAIN_GEN_BUS.post(event);
-		return event.newSize;
+		return (byte) event.newSize;
 	}
 }

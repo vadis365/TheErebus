@@ -19,7 +19,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		setFog(8, 128, 8);
 		setTemperatureRainfall(1.35F, 0.9F);
 		setWeight(22);
-
+/*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
@@ -34,7 +34,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 20).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 15).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBombardierBeetle.class, 8).setGroupSize(1, 2));
-
+*/
 		topBlock = Blocks.grass.getDefaultState();
 		fillerBlock = Blocks.dirt.getDefaultState();
 	}

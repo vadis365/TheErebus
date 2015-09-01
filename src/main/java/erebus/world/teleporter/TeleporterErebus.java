@@ -3,6 +3,7 @@ package erebus.world.teleporter;
 import erebus.ModBlocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -24,60 +25,62 @@ final class TeleporterErebus extends Teleporter {
 	}
 
 	@Override
-	public void placeInPortal(Entity entity, double x, double y, double z, float rotationYaw) {
-		if (!placeInExistingPortal(entity, x, y, z, rotationYaw)) {
-			makePortal(entity);
-			placeInExistingPortal(entity, x, y, z, rotationYaw);
+	public void placeInPortal(Entity entityIn, float rotationYaw) {
+		if (!placeInExistingPortal(entityIn, rotationYaw)) {
+			makePortal(entityIn);
+			placeInExistingPortal(entityIn, rotationYaw);
 		}
 	}
 
 	@Override
-	public boolean placeInExistingPortal(Entity entity, double x, double y, double z, float rotationYaw) {
+	public boolean placeInExistingPortal(Entity entityIn, float rotationYaw) {
 		int checkRadius = 32;
 		double distToPortal = -1.0;
 		int posX = 0;
 		int posY = 0;
 		int posZ = 0;
-		int roundX = MathHelper.floor_double(entity.posX);
-		int roundZ = MathHelper.floor_double(entity.posZ);
+		int roundX = MathHelper.floor_double(entityIn.posX);
+		int roundZ = MathHelper.floor_double(entityIn.posZ);
 		long coordPair = ChunkCoordIntPair.chunkXZ2Int(roundX, roundZ);
 		boolean portalNotSaved = true;
-
+		BlockPos blockpos = BlockPos.ORIGIN;
 		if (destinationCoordinateCache.containsItem(coordPair)) {
 			PortalPosition pos = (PortalPosition) destinationCoordinateCache.getValueByKey(coordPair);
+			
 			distToPortal = 0.0;
-			posX = pos.posX;
-			posY = pos.posY;
-			posZ = pos.posZ;
+			posX = pos.getX();
+			posY = pos.getY();
+			posZ = pos.getZ();
 			pos.lastUpdateTime = worldServerInstance.getTotalWorldTime();
 			portalNotSaved = false;
 		} else
-			for (int i = roundX - checkRadius; i <= roundX + checkRadius; i++)
+			for (int i = roundX - checkRadius; i <= roundX + checkRadius; i++) 
+				
 				for (int j = roundZ - checkRadius; j <= roundZ + checkRadius; j++)
 					for (int h = worldServerInstance.getActualHeight() - 1; h >= 0; h--)
-						if (worldServerInstance.getBlock(i, h, j) == ModBlocks.gaeanKeystone) {
-							double X = i + 0.5 - entity.posX;
-							double Z = j + 0.5 - entity.posZ;
-							double Y = h - 2 + 0.5 - entity.posY;
+						if (worldServerInstance.getBlockState(new BlockPos(i, h, j)) == ModBlocks.umberstone) { //ModBlocks.gaeanKeystone
+							double X = i + 0.5 - entityIn.posX;
+							double Z = j + 0.5 - entityIn.posZ;
+							double Y = h - 2 + 0.5 - entityIn.posY;
 							double dist = X * X + Z * Z + Y * Y;
 
 							if (distToPortal < 0.0 || dist < distToPortal) {
 								distToPortal = dist;
+								blockpos.add(i, h, j);
 								posX = i;
 								posY = h;
 								posZ = j;
 							}
 						}
-
 		if (distToPortal >= 0.0) {
 			if (portalNotSaved) {
-				destinationCoordinateCache.add(coordPair, new PortalPosition(posX, posY, posZ, worldServerInstance.getTotalWorldTime()));
+                this.destinationCoordinateCache.add(coordPair, new Teleporter.PortalPosition((BlockPos)blockpos, this.worldServerInstance.getTotalWorldTime()));
 				destinationCoordinateKeys.add(Long.valueOf(coordPair));
 			}
 
-			entity.motionX = entity.motionY = entity.motionZ = 0.0;
+			entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0;
 
-			int entityFacing = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+			int entityFacing = MathHelper.floor_double(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			float entityRotation = 0;
 			double offsetX = 0;
 			double offsetZ = 0;
@@ -105,7 +108,7 @@ final class TeleporterErebus extends Teleporter {
 					break;
 			}
 
-			entity.setLocationAndAngles(posX + offsetX, posY, posZ + offsetZ, entityRotation, entity.rotationPitch);
+			entityIn.setLocationAndAngles(posX + offsetX, posY, posZ + offsetZ, entityRotation, entityIn.rotationPitch);
 			return true;
 		}
 		return false;
@@ -123,12 +126,12 @@ final class TeleporterErebus extends Teleporter {
 		for (int i = -2; i <= 2; i++)
 			for (int j = 0; j <= 3; j++)
 				for (int k = -2; k <= 2; k++)
-					worldServerInstance.setBlockToAir(x + i, y + j, z + k);
-
+					worldServerInstance.setBlockToAir(new BlockPos(x + i, y + j, z + k));
+/*
 		// Layer -1
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++)
-				if (worldServerInstance.getBlock(x + i, y - 1, z + j).getBlockHardness(worldServerInstance, x + i, y - 2, z + j) >= 0)
+				if (worldServerInstance.getBlockState(x + i, y - 1, z + j).getBlockHardness(worldServerInstance, x + i, y - 2, z + j) >= 0)
 					worldServerInstance.setBlock(x + i, y - 2, z + j, Blocks.stonebrick, 3, 3);
 
 		// Layer 0
@@ -163,11 +166,11 @@ final class TeleporterErebus extends Teleporter {
 					worldServerInstance.setBlock(x + i, y + 2, z + j, Blocks.stone_slab, 5, 3);
 
 		int height = y + 3;
-		while (worldServerInstance.getBlock(x, height, z).getBlockHardness(worldServerInstance, x, height, z) >= 0) {
+		while (worldServerInstance.getBlockState(x, height, z).getBlockHardness(worldServerInstance, x, height, z) >= 0) {
 			worldServerInstance.setBlockToAir(x, height, z);
 			height++;
 		}
-
+*/
 		return true;
 	}
 

@@ -25,7 +25,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		setFog(234, 194, 114);
 		setTemperatureRainfall(1.1F, 0.2F);
 		setWeight(15);
-
+/*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(2, 2));
 		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 10).setGroupSize(1, 3));
@@ -38,7 +38,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityRhinoBeetle.class, 10).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 15).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
-
+*/
 		topBlock = Blocks.sand.getDefaultState();
 		topBlockMeta = 1;
 	}

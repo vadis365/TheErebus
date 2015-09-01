@@ -1,21 +1,8 @@
 package erebus.world.biomes.decorators;
 
-import erebus.ModBlocks;
-import erebus.world.biomes.decorators.data.FeatureType;
-import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
-import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.decoration.WorldGenPonds;
-import erebus.world.feature.plant.WorldGenGiantFlowers;
-import erebus.world.feature.plant.WorldGenMossPatch;
-import erebus.world.feature.plant.WorldGenNettlePatch;
-import erebus.world.feature.tree.WorldGenCypressTree;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
-	protected final WorldGenPonds genPonds = new WorldGenPonds();
+/*	protected final WorldGenPonds genPonds = new WorldGenPonds();
 	protected final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
 
 	protected final WorldGenerator genTreeCypress = new WorldGenCypressTree();
@@ -196,7 +183,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 	 */
 
 	public static class BiomeDecoratorElysianForest extends BiomeDecoratorElysianFields {
-		private final WorldGenerator genOakTree = new WorldGenTrees(false, 5, 0, 0, false);
+	/*	private final WorldGenerator genOakTree = new WorldGenTrees(false, 5, 0, 0, false);
 		private final WorldGenerator genBirchTree = new WorldGenTrees(false, 5, 2, 2, false);
 
 		public BiomeDecoratorElysianForest() {
@@ -207,7 +194,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 		protected void populate() {
 			/*
 			 * if (rand.nextInt(4) == 0){ for(attempt = 0; attempt < 45; attempt++){ xx = x + 16; yy = rand.nextInt(120); zz = z + 16; if (checkSurface(SurfaceType.GRASS,xx,yy,zz)){ genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D); genPonds.generate(world,rand,xx,yy,zz); if (rand.nextBoolean()){ break; } } } }
-			 */
+			 
 
 			super.populate();
 		}
@@ -238,6 +225,6 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 			}
 
 			super.decorate();
-		}
+		}*/
 	}
 }

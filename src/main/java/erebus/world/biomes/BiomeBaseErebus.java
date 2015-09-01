@@ -101,13 +101,13 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	}
 
 	public void populate(World world, Random rand, int x, int z) {
-		decorator.populate(world, rand, x, z);
+		//decorator.populate(world, rand, x, z);
 	}
 
 	public void decorate(World world, Random rand, int x, int z) {
 		// TimeMeasurement.start(id);
 
-		decorator.decorate(world, rand, x, z);
+	//	decorator.decorate(world, rand, x, z);
 
 		// TimeMeasurement.finish(id);
 	}

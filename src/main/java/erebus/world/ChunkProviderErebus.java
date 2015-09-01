@@ -290,11 +290,11 @@ public class ChunkProviderErebus implements IChunkProvider {
 			//	float temperature = biome.getFloatTemperature(0, 0, 0);
 				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
-				Block topBlock = (Block) biome.topBlock;
-				Block fillerBlock = (Block) biome.fillerBlock;
+				Block topBlock = biome.topBlock.getBlock();
+				Block fillerBlock = biome.fillerBlock.getBlock();
 				int preHeightIndex = (zInChunk * 16 + xInChunk) * 128;
 
-				if (biome == ModBiomes.submergedSwamp) {
+			/*	if (biome == ModBiomes.submergedSwamp) {
 					if (additionalNoise1[horIndex] > 0) {
 						int h = getLowestAirBlock(blocks, preHeightIndex, 25, 35);
 						if (h > swampWaterHeight) {
@@ -314,7 +314,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 							}
 						}
 					}
-				}
+				} */
 				if ((biome == ModBiomes.volcanicDesert || biome == ModBiomes.desertSubCharredForest) && Math.abs(additionalNoise1[horIndex]) < 1) {
 					int h = getLowestAirBlock(blocks, preHeightIndex, 25, 32) - 1;
 					if (h > 0) {
@@ -333,8 +333,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 					else {
 						Block block = blocks[index];
 
-						if (biome == ModBiomes.submergedSwamp && yInChunk < swampWaterHeight && block == Blocks.air)
-							blocks[index] = rand.nextInt(256) == 0 && blocks[index - 1].isOpaqueCube() && yInChunk < swampWaterHeight - 1 ? ModBlocks.mireCoral : Blocks.water;
+					//	if (biome == ModBiomes.submergedSwamp && yInChunk < swampWaterHeight && block == Blocks.air)
+					//		blocks[index] = rand.nextInt(256) == 0 && blocks[index - 1].isOpaqueCube() && yInChunk < swampWaterHeight - 1 ? ModBlocks.mireCoral : Blocks.water;
 
 						if (block.getMaterial() == Material.air)
 							var13 = -1;
@@ -344,8 +344,8 @@ public class ChunkProviderErebus implements IChunkProvider {
 									topBlock = Blocks.air;
 									fillerBlock = ModBlocks.umberstone;
 								} else if (yInChunk >= var5 - 4 && yInChunk <= var5 + 1) {
-									topBlock = (Block) biome.topBlock;
-									fillerBlock = (Block) biome.fillerBlock;
+									topBlock = biome.topBlock.getBlock();
+									fillerBlock = biome.fillerBlock.getBlock();
 								}
 
 								if (yInChunk < var5 && topBlock.getMaterial() == Material.air)
@@ -358,18 +358,18 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 								if (yInChunk >= var5 - 1) {
 									blocks[index] = topBlock;
-									if (topBlock == biome.topBlock)
+									if (topBlock == biome.topBlock.getBlock())
 										metadata[index] = biome.topBlockMeta;
 								} else {
 									blocks[index] = fillerBlock;
-									if (fillerBlock == biome.fillerBlock)
+									if (fillerBlock == biome.fillerBlock.getBlock())
 										metadata[index] = biome.fillerBlockMeta;
 								}
 							}
 						} else if (var13 > 0) {
 							--var13;
 							blocks[index] = fillerBlock;
-							if (fillerBlock == biome.fillerBlock)
+							if (fillerBlock == biome.fillerBlock.getBlock())
 								metadata[index] = biome.fillerBlockMeta;
 						}
 					}
@@ -387,7 +387,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 	@Override
 	public void populate(IChunkProvider chunkProvider, int x, int z) {
 		BlockFalling.fallInstantly = true;
-		BlockPos blockCoord = new BlockPos(x * 16, 0, z * 16);
+	/*	BlockPos blockCoord = new BlockPos(x * 16, 0, z * 16);
 		BlockPos blockCoordOffSet = new BlockPos(blockCoord.getX() +16, 0,  blockCoord.getY() +16);
 		int blockCoordX = x * 16;
 		int blockCoordZ = z * 16;
@@ -404,7 +404,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 		for (int attempt = 0; attempt < 14; ++attempt)
 			new WorldGenSpiderDungeons().generate(worldObj, rand, blockCoordX + rand.nextInt(16) + 8, rand.nextInt(128), blockCoordZ + rand.nextInt(16) + 8);
-
+*/
 		BlockFalling.fallInstantly = false;
 	}
 

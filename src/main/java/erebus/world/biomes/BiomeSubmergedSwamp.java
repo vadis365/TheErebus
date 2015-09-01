@@ -19,6 +19,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		setColors(0x314D31);
 		setTemperatureRainfall(0.75F, 0.85F);
 		setWeight(20);
+		/*
 		waterColorMultiplier = 6051893;
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(2, 4));
@@ -31,6 +32,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBloodSnail.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
+		*/
 	}
 
 	@Override

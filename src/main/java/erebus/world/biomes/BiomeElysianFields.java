@@ -1,7 +1,20 @@
 package erebus.world.biomes;
 
 import erebus.ModBiomes;
-import erebus.entity.*;
+import erebus.entity.EntityBeetle;
+import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityBotFly;
+import erebus.entity.EntityChameleonTick;
+import erebus.entity.EntityCicada;
+import erebus.entity.EntityDragonfly;
+import erebus.entity.EntityFly;
+import erebus.entity.EntityGlowWorm;
+import erebus.entity.EntityGrasshopper;
+import erebus.entity.EntityMoth;
+import erebus.entity.EntityTitanBeetle;
+import erebus.entity.EntityVelvetWorm;
+import erebus.entity.EntityWheatWeevil;
+import erebus.entity.EntityWorkerBee;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
@@ -19,7 +32,7 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		setFog(213, 228, 127);
 		setTemperatureRainfall(0.85F, 0.5F);
 		setWeight(20);
-
+/*
 		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityTitanBeetle.class, 8).setGroupSize(1, 1));
@@ -34,6 +47,7 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
+		*/
 	}
 
 	@Override

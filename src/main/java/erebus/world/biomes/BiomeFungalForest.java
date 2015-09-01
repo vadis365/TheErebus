@@ -14,11 +14,12 @@ public class BiomeFungalForest extends BiomeBaseErebus {
 		setTemperatureRainfall(0.9F, 0.95F);
 		setWeight(12);
 		topBlock = Blocks.grass.getDefaultState();
-
+/*
 		spawningGradual.add(new SpawnEntry(EntityCrushling.class, 10).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityBlackAnt.class, 15).setGroupSize(3, 5));
 		spawningGradual.add(new SpawnEntry(EntityZombieAnt.class, 8).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityCrushroom.class, 5).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityPunchroom.class, 10).setGroupSize(1, 2));
+		*/
 	}
 }

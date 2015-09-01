@@ -52,7 +52,7 @@ public class WorldProviderErebus extends WorldProvider {
 	@Override
 	public Vec3 getFogColor(float celestialAngle, float partialTickTime) {
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords(player.playerLocation);
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ));
 		if (biome instanceof BiomeBaseErebus)
 			targetFogColor = ((BiomeBaseErebus) biome).getFogRGB();
 		else

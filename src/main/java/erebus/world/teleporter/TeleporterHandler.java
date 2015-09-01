@@ -1,12 +1,7 @@
 package erebus.world.teleporter;
 
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
-import erebus.core.handler.configs.ConfigHandler;
-import gnu.trove.map.TObjectByteMap;
-import gnu.trove.map.hash.TObjectByteHashMap;
+import java.util.UUID;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityMinecartContainer;
@@ -17,8 +12,13 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.WorldEvent;
-
-import java.util.UUID;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import erebus.core.handler.configs.ConfigHandler;
+import gnu.trove.map.TObjectByteMap;
+import gnu.trove.map.hash.TObjectByteHashMap;
 
 public final class TeleporterHandler {
 	private static TeleporterHandler INSTANCE = new TeleporterHandler();
@@ -52,9 +52,9 @@ public final class TeleporterHandler {
 
 		WorldServer world = (WorldServer) e.world;
 
-		if (world.provider.dimensionId == 0)
+		if (world.provider.getDimensionId() == 0)
 			world.customTeleporters.add(teleportToOverworld = new TeleporterErebus(world));
-		else if (world.provider.dimensionId == ConfigHandler.INSTANCE.erebusDimensionID)
+		else if (world.provider.getDimensionId() == ConfigHandler.INSTANCE.erebusDimensionID)
 			world.customTeleporters.add(teleportToErebus = new TeleporterErebus(world));
 
 		System.out.println("added to " + e.world);
@@ -118,7 +118,7 @@ public final class TeleporterHandler {
 				Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), worldTarget);
 
 				if (newEntity != null) {
-					newEntity.copyDataFrom(entity, true);
+					newEntity.copyDataFromOld(entity);
 					worldTarget.spawnEntityInWorld(newEntity);
 				}
 

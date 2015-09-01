@@ -14,7 +14,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 		setFog(140, 116, 9);
 		setTemperatureRainfall(0.95F, 0.05F);
 		setWeight(20);
-
+/*
 		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 8).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
@@ -26,7 +26,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 15).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
-
+*/
 		topBlock = Blocks.grass.getDefaultState();
 		fillerBlock = Blocks.dirt.getDefaultState();
 	}

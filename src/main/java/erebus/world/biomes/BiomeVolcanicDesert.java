@@ -18,7 +18,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus {
 		setFog(255, 231, 10);
 		setTemperatureRainfall(1.9F, 0.2F);
 		setWeight(16);
-
+/*
 		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 25).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityFireAnt.class, 30).setGroupSize(1, 8));
@@ -29,7 +29,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
-
+*/
 		topBlock = Blocks.sand.getDefaultState();
 		fillerBlock = Blocks.sandstone.getDefaultState();
 	}

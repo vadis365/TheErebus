@@ -1,26 +1,8 @@
 package erebus.world.biomes.decorators;
 
-import erebus.ModBlocks;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.ChunkProviderErebus;
-import erebus.world.biomes.decorators.data.FeatureType;
-import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
-import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.decoration.WorldGenGasVents;
-import erebus.world.feature.decoration.WorldGenPonds;
-import erebus.world.feature.decoration.WorldGenQuickSand;
-import erebus.world.feature.decoration.WorldGenRottenAcacia;
-import erebus.world.feature.plant.*;
-import erebus.world.feature.tree.WorldGenMarshwoodTree;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.world.gen.feature.WorldGenReed;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
-	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
+/*	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
@@ -258,5 +240,5 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				genRedGem.generate(world, rand, x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ());
 		else
 			super.generateFeature(featureType);
-	}
+	}*/
 }

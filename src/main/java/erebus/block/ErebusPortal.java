@@ -7,9 +7,13 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -22,9 +26,10 @@ public class ErebusPortal extends Block {
 		setBlockUnbreakable();
 		setUnlocalizedName("erebus.portal");
 		setStepSound(Block.soundTypeGlass);
-		setBlockTextureName("erebus:portal");
+		setCreativeTab(CreativeTabs.tabTools);
+		//setBlockTextureName("erebus:portal");
 	}
-
+/*
 	public static boolean makePortal(World world, int x, int y, int z) {
 		if (isPatternValid(world, x, y, z)) {
 			world.setBlock(x, y, z, ModBlocks.portal);
@@ -81,38 +86,27 @@ public class ErebusPortal extends Block {
 	private static boolean check(World world, int x, int y, int z, Block target, int meta) {
 		return world.getBlock(x, y, z) == target && world.getBlockMetadata(x, y, z) == meta;
 	}
-
+*/
 	@Override
 	public int quantityDropped(Random rand) {
 		return 0;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderBlockPass() {
-		return 1;
-	}
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+        return null;
+    }
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-		return null;
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
-		if (entity.ridingEntity == null && entity.riddenByEntity == null && entity.timeUntilPortal <= 0) {
-			if (entity.dimension == 0)
-				TeleporterHandler.transferToErebus(entity);
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+		if (entityIn.ridingEntity == null && entityIn.riddenByEntity == null && entityIn.timeUntilPortal <= 0) {
+			if (entityIn.dimension == 0)
+				TeleporterHandler.transferToErebus(entityIn);
 			else
-				TeleporterHandler.transferToOverworld(entity);
-			if (entity != null)
-				entity.timeUntilPortal = ConfigHandler.INSTANCE.portalCooldown * 20;
+				TeleporterHandler.transferToOverworld(entityIn);
+			if (entityIn != null)
+				entityIn.timeUntilPortal = ConfigHandler.INSTANCE.portalCooldown * 20;
 		}
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
 	}
 
 	@Override
@@ -120,9 +114,8 @@ public class ErebusPortal extends Block {
 		return false;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		return side > 1;
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+		return true;
 	}
 }
