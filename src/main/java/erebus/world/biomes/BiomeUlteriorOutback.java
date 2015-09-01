@@ -1,9 +1,20 @@
 package erebus.world.biomes;
 
-import erebus.entity.*;
+import net.minecraft.init.Blocks;
+import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityBlackWidow;
+import erebus.entity.EntityBotFly;
+import erebus.entity.EntityCentipede;
+import erebus.entity.EntityChameleonTick;
+import erebus.entity.EntityFly;
+import erebus.entity.EntityMidgeSwarm;
+import erebus.entity.EntityRhinoBeetle;
+import erebus.entity.EntityScorpion;
+import erebus.entity.EntityScytodes;
+import erebus.entity.EntitySolifuge;
+import erebus.entity.EntityTarantula;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
-import net.minecraft.init.Blocks;
 
 public class BiomeUlteriorOutback extends BiomeBaseErebus {
 	public BiomeUlteriorOutback(int biomeID) {
@@ -28,7 +39,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 15).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
 
-		topBlock = Blocks.sand;
+		topBlock = Blocks.sand.getDefaultState();
 		topBlockMeta = 1;
 	}
 }

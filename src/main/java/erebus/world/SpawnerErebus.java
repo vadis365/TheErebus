@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -94,7 +95,7 @@ public final class SpawnerErebus {
 		for (int amt : entityCount.values())
 			totalAmount += amt;
 
-		if (totalAmount >= Math.min(spawnChunks.size() >> 1, MAX_MOBS_PER_WORLD) / (world.difficultySetting == EnumDifficulty.PEACEFUL ? 2 : 1))
+		if (totalAmount >= Math.min(spawnChunks.size() >> 1, MAX_MOBS_PER_WORLD) / (world.getDifficulty() == EnumDifficulty.PEACEFUL ? 2 : 1))
 			return;
 
 		List<ChunkCoordIntPair> chunksToTest = new ArrayList<ChunkCoordIntPair>();
@@ -104,7 +105,7 @@ public final class SpawnerErebus {
 				chunksToTest.add(entry.getKey());
 
 		Random rand = world.rand;
-		int x, y, z, spawned, spawnGroup, attempts, posAttempts, maxPosAttempts, testedChunks = 3 + rand.nextInt(1 + 2 * world.difficultySetting.getDifficultyId());
+		int x, y, z, spawned, spawnGroup, attempts, posAttempts, maxPosAttempts, testedChunks = 3 + rand.nextInt(1 + 2 * world.getDifficulty().getDifficultyId());
 		float fx, fy, fz, yaw = 0F;
 		boolean continueSpawning, coordsFinal;
 
@@ -117,8 +118,8 @@ public final class SpawnerErebus {
 				x = coords.chunkXPos * 16 + rand.nextInt(16);
 				z = coords.chunkZPos * 16 + rand.nextInt(16);
 				y = 10 + rand.nextInt(100);
-
-				BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+				BlockPos blockCoord = new BlockPos(x, y, z);
+				BiomeGenBase biome = world.getBiomeGenForCoords(blockCoord);
 				if (!(biome instanceof BiomeBaseErebus))
 					break;
 

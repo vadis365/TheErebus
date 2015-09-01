@@ -30,8 +30,8 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
 
-		topBlock = Blocks.sand;
-		fillerBlock = Blocks.sandstone;
+		topBlock = Blocks.sand.getDefaultState();
+		fillerBlock = Blocks.sandstone.getDefaultState();
 	}
 
 	@Override

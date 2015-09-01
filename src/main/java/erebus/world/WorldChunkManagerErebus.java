@@ -1,8 +1,11 @@
 package erebus.world;
 
-import erebus.ModBiomes;
-import erebus.world.genlayer.GenLayerErebus;
-import net.minecraft.world.ChunkPosition;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
@@ -12,11 +15,8 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.WorldTypeEvent;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import erebus.ModBiomes;
+import erebus.world.genlayer.GenLayerErebus;
 
 public class WorldChunkManagerErebus extends WorldChunkManager {
 
@@ -101,7 +101,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
-	public ChunkPosition findBiomePosition(int x, int z, int checkRadius, List viableBiomes, Random rand) {
+	public BlockPos findBiomePosition(int x, int z, int checkRadius, List viableBiomes, Random rand) {
 		IntCache.resetIntCache();
 		int minX = x - checkRadius >> 2;
 		int minZ = z - checkRadius >> 2;
@@ -110,7 +110,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		int sizeX = maxX - minX + 1;
 		int sizeZ = maxZ - minZ + 1;
 		int[] biomeArray = biomeGenLayer.getInts(minX, minZ, sizeX, sizeZ);
-		ChunkPosition pos = null;
+		BlockPos pos = null;
 		int attempts = 0;
 
 		for (int index = 0; index < sizeX * sizeZ; ++index) {
@@ -118,7 +118,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 			int finalZ = minZ + index / sizeX << 2;
 
 			if (viableBiomes.contains(BiomeGenBase.getBiomeGenArray()[biomeArray[index]]) && (pos == null || rand.nextInt(attempts + 1) == 0)) {
-				pos = new ChunkPosition(finalX, 0, finalZ);
+				pos = new BlockPos(finalX, 0, finalZ);
 				++attempts;
 			}
 		}

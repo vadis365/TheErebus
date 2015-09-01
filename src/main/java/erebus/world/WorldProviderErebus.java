@@ -1,18 +1,20 @@
 package erebus.world;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldSettings;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldSettings.GameType;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldProviderErebus extends WorldProvider {
 
@@ -32,8 +34,14 @@ public class WorldProviderErebus extends WorldProvider {
 
 	@Override
 	public boolean canCoordinateBeSpawn(int x, int z) {
-		return this.worldObj.getTopBlock(x, z) != Blocks.bedrock && this.worldObj.getTopBlock(x, z) != Blocks.air;
+		return getGroundAvailableUp(new BlockPos(x, 0, z)) != Blocks.bedrock;
 	}
+	
+    public Block getGroundAvailableUp(BlockPos pos) {
+        BlockPos blockpos1;
+        for (blockpos1 = new BlockPos(pos.getX(), 20, pos.getZ()); !this.worldObj.isAirBlock(blockpos1.up()); blockpos1 = blockpos1.up());
+        return this.worldObj.getBlockState(blockpos1).getBlock();
+    }
 
 	@Override
 	public float calculateCelestialAngle(long worldTime, float partialTickTime) {
@@ -44,7 +52,7 @@ public class WorldProviderErebus extends WorldProvider {
 	@Override
 	public Vec3 getFogColor(float celestialAngle, float partialTickTime) {
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords((int) player.posX, (int) player.posZ);
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(player.playerLocation);
 		if (biome instanceof BiomeBaseErebus)
 			targetFogColor = ((BiomeBaseErebus) biome).getFogRGB();
 		else
@@ -68,7 +76,7 @@ public class WorldProviderErebus extends WorldProvider {
 						currentFogColor[a] = targetFogColor[a];
 				}
 
-		return Vec3.createVectorHelper(currentFogColor[0] / 255D, currentFogColor[1] / 255D, currentFogColor[2] / 255D);
+		return new Vec3(currentFogColor[0] / 255D, currentFogColor[1] / 255D, currentFogColor[2] / 255D);
 	}
 
 	@Override
@@ -130,19 +138,24 @@ public class WorldProviderErebus extends WorldProvider {
 	}
 
 	@Override
-	public ChunkCoordinates getRandomizedSpawnPoint() {
-		ChunkCoordinates chunkcoordinates = new ChunkCoordinates(worldObj.getSpawnPoint());
+    public BlockPos getRandomizedSpawnPoint() {
+        BlockPos ret = this.worldObj.getSpawnPoint();
 
-		boolean isAdventure = worldObj.getWorldInfo().getGameType() == GameType.ADVENTURE;
-		int spawnFuzz = 100;
-		int spawnFuzzHalf = spawnFuzz / 2;
+        boolean isAdventure = worldObj.getWorldInfo().getGameType() == WorldSettings.GameType.ADVENTURE;
+        int spawnFuzz = 100;
+        int border = MathHelper.floor_double(worldObj.getWorldBorder().getClosestDistance(ret.getX(), ret.getZ()));
+        if (border < spawnFuzz) spawnFuzz = border;
+        if (spawnFuzz < 1) spawnFuzz = 1;
+        int spawnFuzzHalf = spawnFuzz / 2;
 
-		if (!hasNoSky && !isAdventure) {
-			chunkcoordinates.posX += worldObj.rand.nextInt(spawnFuzz) - spawnFuzzHalf;
-			chunkcoordinates.posZ += worldObj.rand.nextInt(spawnFuzz) - spawnFuzzHalf;
-			chunkcoordinates.posY = worldObj.getTopSolidOrLiquidBlock(chunkcoordinates.posX, chunkcoordinates.posZ);
-		}
+        if (!getHasNoSky() && !isAdventure)
+            ret = worldObj.getTopSolidOrLiquidBlock(ret.add(worldObj.rand.nextInt(spawnFuzzHalf) - spawnFuzz, 0, worldObj.rand.nextInt(spawnFuzzHalf) - spawnFuzz));
 
-		return chunkcoordinates;
+        return ret;
+    }
+
+	@Override
+	public String getInternalNameSuffix() {
+        return "";
 	}
 }

@@ -27,7 +27,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
 
-		topBlock = Blocks.grass;
-		fillerBlock = Blocks.dirt;
+		topBlock = Blocks.grass.getDefaultState();
+		fillerBlock = Blocks.dirt.getDefaultState();
 	}
 }

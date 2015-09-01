@@ -35,8 +35,8 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 15).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBombardierBeetle.class, 8).setGroupSize(1, 2));
 
-		topBlock = Blocks.grass;
-		fillerBlock = Blocks.dirt;
+		topBlock = Blocks.grass.getDefaultState();
+		fillerBlock = Blocks.dirt.getDefaultState();
 	}
 
 	@Override

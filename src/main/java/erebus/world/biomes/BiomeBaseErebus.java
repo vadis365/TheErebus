@@ -1,5 +1,11 @@
 package erebus.world.biomes;
 
+import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
@@ -8,12 +14,6 @@ import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.loot.IWeightProvider;
 import erebus.world.loot.WeightedList;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-
-import java.util.Random;
 
 public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightProvider {
 
@@ -50,7 +50,7 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 
 	protected final BiomeBaseErebus setColors(int grass, int foliage) {
 		setColor(grass);
-		func_76733_a(grass);
+		//func_76733_a(grass);
 		grassColor = grass;
 		foliageColor = foliage;
 		return this;
@@ -80,15 +80,15 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public final int getBiomeGrassColor(int a, int b, int c) {
+    public int getModdedBiomeGrassColor(int original) {
 		return grassColor;
-	}
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public final int getBiomeFoliageColor(int a, int b, int c) {
-		return foliageColor;
-	}
+    public int getModdedBiomeFoliageColor(int original) {
+       return foliageColor;
+    }
 
 	@SideOnly(Side.CLIENT)
 	public final short[] getFogRGB() {
@@ -104,7 +104,6 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 		decorator.populate(world, rand, x, z);
 	}
 
-	@Override
 	public void decorate(World world, Random rand, int x, int z) {
 		// TimeMeasurement.start(id);
 
@@ -127,4 +126,5 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	public BiomeBaseErebus getRandomSubBiome(int randomValue) {
 		return null;
 	}
+
 }
