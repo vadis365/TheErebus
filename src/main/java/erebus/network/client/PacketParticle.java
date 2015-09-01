@@ -1,5 +1,6 @@
 package erebus.network.client;
 
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -7,7 +8,6 @@ import erebus.client.fx.EntityRepellentFX;
 import erebus.network.AbstractClientPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.particle.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
@@ -53,7 +53,7 @@ public class PacketParticle extends AbstractClientPacket {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	protected void handle(World world, EntityClientPlayerMP player) {
+	protected void handle(World world, EntityPlayerSP player) {
 		if (particleType < 0 || particleType >= ParticleType.values.length)
 			return;
 

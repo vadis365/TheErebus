@@ -1,11 +1,11 @@
 package erebus.network.client;
 
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
 import erebus.tileentity.TileEntityOfferingAltar;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -26,7 +26,7 @@ public class PacketOfferingAltar extends AbstractClientPacket {
 	}
 
 	@Override
-	protected void handle(World world, EntityClientPlayerMP player) {
+	protected void handle(World world, EntityPlayerSP player) {
 		TileEntityOfferingAltar tile = Utils.getTileEntity(world, x, y, z, TileEntityOfferingAltar.class);
 		if (tile != null)
 			tile.readFromNBT(nbt);

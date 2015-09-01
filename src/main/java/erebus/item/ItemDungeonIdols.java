@@ -1,24 +1,21 @@
 package erebus.item;
 
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.entity.EntityUmberGolemDungeonTypes;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class ItemDungeonIdols extends Item {
-
-	@SideOnly(Side.CLIENT)
-	private static IIcon[] icons;
 
 	public ItemDungeonIdols() {
 		setMaxDamage(0);
@@ -37,23 +34,6 @@ public class ItemDungeonIdols extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		icons = new IIcon[IDOL.values().length];
-		int i = 0;
-		for (IDOL d : IDOL.values())
-			icons[i++] = reg.registerIcon("erebus:idol" + d.name());
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= icons.length)
-			return null;
-		return icons[meta];
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		for (int i = 0; i < IDOL.values().length; i++)
@@ -66,9 +46,10 @@ public class ItemDungeonIdols extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (is.getItemDamage() >= 4) {
 			if (!world.isRemote) {
+				int x = pos.getX(), y = pos.getY(), z = pos.getZ();
 				byte spawn = (byte) (is.getItemDamage() - 4);
 				EntityUmberGolemDungeonTypes entityUmberGolem = new EntityUmberGolemDungeonTypes(world);
 				entityUmberGolem.setType(spawn);
@@ -91,6 +72,6 @@ public class ItemDungeonIdols extends Item {
 		MudUmbergolem,
 		IronUmbergolem,
 		GoldUmbergolem,
-		JadeUmbergolem;
+		JadeUmbergolem
 	}
 }

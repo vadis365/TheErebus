@@ -4,7 +4,6 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModTabs;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -15,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.lang.reflect.Field;
@@ -24,9 +22,6 @@ import java.util.List;
 
 @SuppressWarnings("unchecked")
 public final class ItemErebusFood extends ItemFood {
-
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] icons;
 
 	static {
 		try {
@@ -156,14 +151,14 @@ public final class ItemErebusFood extends ItemFood {
 		switch (FoodType.values()[is.getItemDamage()]) {
 			case melonade:
 			case melonadeSparkly:
-				return EnumAction.drink;
+				return EnumAction.DRINK;
 			default:
-				return EnumAction.eat;
+				return EnumAction.EAT;
 		}
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
+	public ItemStack onItemUseFinish(ItemStack is, World world, EntityPlayer player) {
 		is.stackSize--;
 		player.getFoodStats().addStats(getHealAmount(is, world, player), getSaturationModifier(is, world, player));
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
@@ -199,21 +194,6 @@ public final class ItemErebusFood extends ItemFood {
 		PotionEffect effect = this.getPotionEffect(is, world, player);
 		if (!world.isRemote && effect != null)
 			player.addPotionEffect(effect);
-	}
-
-	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		icons = new IIcon[FoodType.values().length];
-		int i = 0;
-		for (FoodType type : FoodType.values())
-			icons[i++] = iconRegister.registerIcon("erebus:" + type);
-	}
-
-	@Override
-	public IIcon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= icons.length)
-			return null;
-		return icons[meta];
 	}
 
 	@Override
@@ -277,7 +257,7 @@ public final class ItemErebusFood extends ItemFood {
 		return stack != null && stack.getItemDamage() == FoodType.grasshopperLegRaw.ordinal();
 	}
 
-	public static enum FoodType {
+	public enum FoodType {
 		larvaRaw,
 		larvaCooked,
 		grasshopperLegRaw,
@@ -294,7 +274,7 @@ public final class ItemErebusFood extends ItemFood {
 		titanChopCooked,
 		swampBerries,
 		cabbage,
-		titanStewCooked;
+		titanStewCooked
 	}
 
 }

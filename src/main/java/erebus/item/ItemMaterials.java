@@ -1,5 +1,8 @@
 package erebus.item;
 
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -25,9 +28,6 @@ import java.util.List;
 
 public class ItemMaterials extends Item {
 
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] icons;
-
 	public ItemMaterials() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
@@ -35,12 +35,14 @@ public class ItemMaterials extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (side == 1 && is.getItemDamage() == DATA.bambooShoot.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y + 1, z, side, is)) {
-			Block soil = world.getBlock(x, y, z);
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+		BlockPos top = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+		BlockPos bottom = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
+		if (side.getIndex() == 1 && is.getItemDamage() == DATA.bambooShoot.ordinal() && player.canPlayerEdit(pos, side, is) && player.canPlayerEdit(top, side, is)) {
+			Block soil = world.getBlockState(pos).getBlock();
 
-			if (soil != null && soil.canSustainPlant(world, x, y, z, ForgeDirection.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(x, y + 1, z)) {
-				world.setBlock(x, y + 1, z, ModBlocks.bambooShoot);
+			if (soil != null && soil.canSustainPlant(world, pos, EnumFacing.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(top)) {
+				world.setBlockState(top, ModBlocks.bambooShoot.getDefaultState());
 
 				if (!player.capabilities.isCreativeMode)
 					--is.stackSize;
@@ -48,11 +50,12 @@ public class ItemMaterials extends Item {
 			}
 		}
 
-		if (side == 0 && is.getItemDamage() == DATA.darkFruitSeeds.ordinal() && player.canPlayerEdit(x, y, z, side, is) && player.canPlayerEdit(x, y - 1, z, side, is)) {
-			Block block = world.getBlock(x, y, z);
+		if (side.getIndex() == 0 && is.getItemDamage() == DATA.darkFruitSeeds.ordinal() && player.canPlayerEdit(pos, side, is) && player.canPlayerEdit(bottom, side, is)) {
+			Block block = world.getBlockState(pos).getBlock();
 
 			if (block != null && block.getMaterial().blocksMovement()) {
-				world.setBlock(x, y - 1, z, ModBlocks.hanger, BlockHangerPlants.dataHanger0, 2);
+				FMLLog.info("Placed a hanger");
+				//world.setBlockState(bottom, ModBlocks.hanger.getDefaultState(), BlockHangerPlants.dataHanger0, 2);
 
 				if (!player.capabilities.isCreativeMode)
 					--is.stackSize;
@@ -98,23 +101,6 @@ public class ItemMaterials extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
-		icons = new IIcon[DATA.values().length];
-		for (DATA d : DATA.values())
-			if (d.isActive())
-				icons[d.ordinal()] = iconRegister.registerIcon("erebus:" + d.name());
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= icons.length)
-			return null;
-		return icons[meta];
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		for (DATA d : DATA.values())
@@ -131,7 +117,7 @@ public class ItemMaterials extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack is, int pass) {
+	public boolean hasEffect(ItemStack is) {
 		return is.getItemDamage() == DATA.whetstonePowder.ordinal();
 	}
 

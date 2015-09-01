@@ -6,7 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
+import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -22,7 +22,7 @@ public class ContainerUmberFurnace extends Container {
 		addSlotToContainer(new SlotFluidContainer(tile, 0, 31, 35));
 		addSlotToContainer(new SlotSmelt(tile, 1, 56, 17));
 		addSlotToContainer(new SlotFuel(tile, 2, 56, 53));
-		addSlotToContainer(new SlotFurnace(inventory.player, tile, 3, 116, 35));
+		addSlotToContainer(new SlotFurnaceOutput(inventory.player, tile, 3, 116, 35));
 
 		for (int i = 0; i < 3; ++i)
 			for (int j = 0; j < 9; ++j)
@@ -69,7 +69,7 @@ public class ContainerUmberFurnace extends Container {
 			} else if (FluidContainerRegistry.isContainer(slotItemStack)) {
 				if (!mergeItemStack(slotItemStack, 0, 1, false))
 					return null;
-			} else if (FurnaceRecipes.smelting().getSmeltingResult(slotItemStack) != null) {
+			} else if (FurnaceRecipes.instance().getSmeltingResult(slotItemStack) != null) {
 				if (!mergeItemStack(slotItemStack, 1, 2, false))
 					return null;
 			} else if (TileEntityFurnace.isItemFuel(slotItemStack))

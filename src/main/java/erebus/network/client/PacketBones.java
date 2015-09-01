@@ -1,11 +1,11 @@
 package erebus.network.client;
 
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
 import erebus.tileentity.TileEntityBones;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.world.World;
 
 public class PacketBones extends AbstractClientPacket {
@@ -25,7 +25,7 @@ public class PacketBones extends AbstractClientPacket {
 	}
 
 	@Override
-	protected void handle(World world, EntityClientPlayerMP player) {
+	protected void handle(World world, EntityPlayerSP player) {
 		TileEntityBones tile = Utils.getTileEntity(world, x, y, z, TileEntityBones.class);
 		if (tile != null)
 			tile.setOwner(name);

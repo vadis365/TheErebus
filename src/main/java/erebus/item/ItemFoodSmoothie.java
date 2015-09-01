@@ -4,7 +4,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -13,15 +12,11 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class ItemFoodSmoothie extends ItemFood {
-
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] icons;
 
 	public ItemFoodSmoothie() {
 		super(3, 0.5F, false);
@@ -107,7 +102,7 @@ public class ItemFoodSmoothie extends ItemFood {
 				return new PotionEffect(Potion.resistance.id, 1000, 1);
 			case liquidGold:
 				player.heal(0.5F);
-				return new PotionEffect(Potion.field_76443_y.id, 1000, 1);
+				return new PotionEffect(Potion.saturation.id, 1000, 1);
 			case bryufsBrew:
 				player.heal(1.5F);
 				player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 1000, 2));
@@ -121,11 +116,11 @@ public class ItemFoodSmoothie extends ItemFood {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.drink;
+		return EnumAction.DRINK;
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
 		stack.stackSize--;
 		player.getFoodStats().addStats(getHealAmount(stack, world, player), getSaturationModifier(stack, world, player));
 		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
@@ -159,24 +154,7 @@ public class ItemFoodSmoothie extends ItemFood {
 			list.add(new ItemStack(item, 1, c));
 	}
 
-	@Override
-	public IIcon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= icons.length)
-			return null;
-
-		return icons[meta];
-	}
-
-	@Override
-	public void registerIcons(IIconRegister icon) {
-		icons = new IIcon[SmoothieType.values().length];
-		int c = 0;
-
-		for (SmoothieType type : SmoothieType.values())
-			icons[c++] = icon.registerIcon("erebus:" + type);
-	}
-
-	public static enum SmoothieType {
+	public enum SmoothieType {
 		greenTeaGrasshopper,
 		moneyHoney,
 		nothingInTheMiddle,
