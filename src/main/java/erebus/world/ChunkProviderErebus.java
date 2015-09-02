@@ -109,7 +109,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 							double d14 = 0.25D;
 							double d15 = d10;
 							double d16 = (d11 - d10) * d14;
-
+							
 							for (int i2 = 0; i2 < 4; i2++) {
 								IBlockState iblockstate = null;
 
@@ -117,8 +117,10 @@ public class ChunkProviderErebus implements IChunkProvider {
 									iblockstate = ModBlocks.umberstone.getDefaultState();
 
 								l1 += c;
-								
-								primer.setBlockState(k1, l1, i2, iblockstate);
+								 int k2 = k1 + k * 4;
+	                                int l2 = j1 + i1 * 8;
+	                                int i3 = i2 + l * 4;
+								primer.setBlockState(k2, l2, i3, iblockstate);
 
 								
 								d15 += d16;
