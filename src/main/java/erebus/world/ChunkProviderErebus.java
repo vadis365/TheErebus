@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -23,9 +24,7 @@ import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
-import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.feature.structure.WorldGenSpiderDungeons;
 import erebus.world.structure.MapGenErebusCaves;
 import erebus.world.structure.MapGenErebusRavine;
 
@@ -75,7 +74,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 		ravineGenerator = new MapGenErebusRavine();
 	}
 
-	public void generateTerrain(int x, int z, Block[] blocks) {
+	public void generateTerrain(int x, int z, ChunkPrimer primer) {
 		byte byte0 = 4;
 		int i = byte0 + 1;
 		byte byte2 = 17;
@@ -112,12 +111,16 @@ public class ChunkProviderErebus implements IChunkProvider {
 							double d16 = (d11 - d10) * d14;
 
 							for (int i2 = 0; i2 < 4; i2++) {
-								blocks[l1] = Blocks.air;
+								IBlockState iblockstate = null;
 
 								if (d15 > 0.0D)
-									blocks[l1] = ModBlocks.umberstone;
+									iblockstate = ModBlocks.umberstone.getDefaultState();
 
 								l1 += c;
+								
+								primer.setBlockState(k1, l1, i2, iblockstate);
+
+								
 								d15 += d16;
 							}
 
@@ -132,26 +135,25 @@ public class ChunkProviderErebus implements IChunkProvider {
 					}
 				}
 	}
-
-	//@Override
-	//public Chunk loadChunk(int x, int z) {
-	//	return provideChunk(x, z);
-	//}
+	
+	private int chunkX = 0, chunkZ = 0;
 
 	@Override
 	public Chunk provideChunk(int x, int z) {
-		rand.setSeed(x * 341873128712L + z * 132897987541L);
+		chunkX = x;
+		chunkZ = z;
 		Block[] blocks = new Block[32768];
 		byte[] metadata = new byte[32768];
-		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+		ChunkPrimer chunkprimer = new ChunkPrimer();
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+		this.generateTerrain(x, z, chunkprimer);
+		replaceBlocksForBiome(x, z, blocks, metadata, biomesForGeneration, chunkprimer);
 
-		generateTerrain(x, z, blocks);
-		replaceBlocksForBiome(x, z, blocks, metadata, biomesForGeneration);
+		// caveGenerator.func_151539_a(this, worldObj, x, z, blocks);
+		// ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
 
-	//	caveGenerator.func_151539_a(this, worldObj, x, z, blocks);
-	//	ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
-
-		Chunk chunk = new Chunk(worldObj, x, z);
+		Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
 		byte[] biomeArrayReference = chunk.getBiomeArray();
 
 		for (int a = 0; a < biomeArrayReference.length; ++a)
@@ -268,9 +270,9 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 	public static int swampWaterHeight = 24;
 
-	public void replaceBlocksForBiome(int x, int z, Block[] blocks, byte[] metadata, BiomeGenBase[] biomes) {
+	public void replaceBlocksForBiome(int x, int z, Block[] blocks, byte[] metadata, BiomeGenBase[] biomes, ChunkPrimer primer) {
 	//	ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, blocks, metadata, biomes, worldObj);
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, new ChunkPrimer(), worldObj);
+		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, chunkX, chunkZ, primer, this.worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY)
 			return;
@@ -290,8 +292,10 @@ public class ChunkProviderErebus implements IChunkProvider {
 			//	float temperature = biome.getFloatTemperature(0, 0, 0);
 				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
-				Block topBlock = biome.topBlock.getBlock();
-				Block fillerBlock = biome.fillerBlock.getBlock();
+				
+				IBlockState topBlock = biome.topBlock.getBlock().getDefaultState();
+				IBlockState fillerBlock = biome.fillerBlock.getBlock().getDefaultState();
+	
 				int preHeightIndex = (zInChunk * 16 + xInChunk) * 128;
 
 			/*	if (biome == ModBiomes.submergedSwamp) {
@@ -336,40 +340,41 @@ public class ChunkProviderErebus implements IChunkProvider {
 					//	if (biome == ModBiomes.submergedSwamp && yInChunk < swampWaterHeight && block == Blocks.air)
 					//		blocks[index] = rand.nextInt(256) == 0 && blocks[index - 1].isOpaqueCube() && yInChunk < swampWaterHeight - 1 ? ModBlocks.mireCoral : Blocks.water;
 
-						if (block.getMaterial() == Material.air)
+						IBlockState iblockstate2 = primer.getBlockState(xInChunk, yInChunk, zInChunk);
+						if (iblockstate2.getBlock().getMaterial() == Material.air)
 							var13 = -1;
-						else if (block == ModBlocks.umberstone) {
+						else if (iblockstate2.getBlock() == ModBlocks.umberstone) {
 							if (var13 == -1) {
 								if (var12 <= 0) {
-									topBlock = Blocks.air;
-									fillerBlock = ModBlocks.umberstone;
+									topBlock = Blocks.air.getDefaultState();
+									fillerBlock = ModBlocks.umberstone.getDefaultState();
 								} else if (yInChunk >= var5 - 4 && yInChunk <= var5 + 1) {
-									topBlock = biome.topBlock.getBlock();
-									fillerBlock = biome.fillerBlock.getBlock();
+									topBlock = biome.topBlock.getBlock().getDefaultState();
+									fillerBlock = biome.fillerBlock.getBlock().getDefaultState();
 								}
 
-								if (yInChunk < var5 && topBlock.getMaterial() == Material.air)
+								if (yInChunk < var5 && topBlock.getBlock().getMaterial() == Material.air)
 									//if (temperature < 0.15F)
 									//	topBlock = Blocks.ice;
 									//else
-										topBlock = Blocks.water;
+										topBlock = Blocks.water.getDefaultState();
 
 								var13 = var12;
 
 								if (yInChunk >= var5 - 1) {
-									blocks[index] = topBlock;
-									if (topBlock == biome.topBlock.getBlock())
+									blocks[index] = topBlock.getBlock();
+									if (topBlock == biome.topBlock.getBlock().getDefaultState())
 										metadata[index] = biome.topBlockMeta;
 								} else {
-									blocks[index] = fillerBlock;
-									if (fillerBlock == biome.fillerBlock.getBlock())
+									blocks[index] = fillerBlock.getBlock();
+									if (fillerBlock == biome.fillerBlock.getBlock().getDefaultState())
 										metadata[index] = biome.fillerBlockMeta;
 								}
 							}
 						} else if (var13 > 0) {
 							--var13;
-							blocks[index] = fillerBlock;
-							if (fillerBlock == biome.fillerBlock.getBlock())
+							blocks[index] = fillerBlock.getBlock();
+							if (fillerBlock == biome.fillerBlock.getBlock().getDefaultState())
 								metadata[index] = biome.fillerBlockMeta;
 						}
 					}
