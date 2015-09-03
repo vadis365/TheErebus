@@ -103,7 +103,7 @@ public class AntlionMazeDungeon {
 		addTeleporters(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
 		addCapstones(world, x + sizeX - 1, y + 15, z + sizeZ - 1, ModBlocks.capstone);
 		spawnIdolGuardians(world, x, y, z);
-		// System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
+		System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
 
 	private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {
