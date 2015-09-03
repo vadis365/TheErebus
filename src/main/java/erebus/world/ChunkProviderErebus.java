@@ -114,7 +114,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 								IBlockState iblockstate = null;
 
 								if (d15 > 0.0D)
-									iblockstate = ModBlocks.umberstone.getDefaultState();
+									iblockstate = Blocks.stone.getDefaultState();
 
 								l1 += c;
 								 int k2 = k1 + k * 4;
@@ -322,7 +322,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 					}
 				} */
 				if ((biome == ModBiomes.volcanicDesert || biome == ModBiomes.desertSubCharredForest) && Math.abs(additionalNoise1[horIndex]) < 1) {
-					int h = getLowestAirBlock(blocks, preHeightIndex, 25, 32) - 1;
+					int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 32) - 1;
 					if (h > 0) {
 						primer.setBlockState(xInChunk, preHeightIndex + h, zInChunk, Blocks.air.getDefaultState());
 						for (int h2 = h - 1; h2 > h - 1 - (3 * (1 - Math.abs(additionalNoise1[horIndex]))); h2--) {
@@ -337,22 +337,25 @@ public class ChunkProviderErebus implements IChunkProvider {
 					if (yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))
 						primer.setBlockState(xInChunk, yInChunk, zInChunk, Blocks.bedrock.getDefaultState());
 					else {
-
 					//	if (biome == ModBiomes.submergedSwamp && yInChunk < swampWaterHeight && block == Blocks.air)
 					//		blocks[index] = rand.nextInt(256) == 0 && blocks[index - 1].isOpaqueCube() && yInChunk < swampWaterHeight - 1 ? ModBlocks.mireCoral : Blocks.water;
 
 						IBlockState iblockstate2 = primer.getBlockState(xInChunk, yInChunk, zInChunk);
-						if (iblockstate2.getBlock().getMaterial() == Material.air)
+						if (iblockstate2.getBlock().getMaterial() == Material.air) {
 							var13 = -1;
-						else if (iblockstate2.getBlock() == ModBlocks.umberstone) {
+						}
+						else if (iblockstate2.getBlock().getDefaultState() == Blocks.stone.getDefaultState()) {
 							if (var13 == -1) {
-								if (var12 <= 0) {
-									topBlock = Blocks.air.getDefaultState();
-									fillerBlock = ModBlocks.umberstone.getDefaultState();
-								} else if (yInChunk >= var5 - 4 && yInChunk <= var5 + 1) {
-									topBlock = biome.topBlock;
-									fillerBlock = biome.fillerBlock;
-								}
+								//if (var12 <= 0) {
+								//	topBlock = Blocks.air.getDefaultState();
+								//	primer.setBlockState(xInChunk, yInChunk, zInChunk, topBlock);
+									//fillerBlock = ModBlocks.umberstone.getDefaultState();
+								//} else 
+							//	if (yInChunk >= var5 + 4 && yInChunk <= var5 + 120) {
+									//topBlock = biome.topBlock;
+									primer.setBlockState(xInChunk, yInChunk + 1, zInChunk, biome.topBlock);
+								//	fillerBlock = biome.fillerBlock;
+								//}
 
 								if (yInChunk < var5 && topBlock.getBlock().getMaterial() == Material.air)
 									//if (temperature < 0.15F)
@@ -361,31 +364,16 @@ public class ChunkProviderErebus implements IChunkProvider {
 										topBlock = Blocks.water.getDefaultState();
 
 								var13 = var12;
-
-								if (yInChunk >= var5 - 1) {
-									blocks[index] = topBlock.getBlock();
-									if (topBlock == biome.topBlock)
-										metadata[index] = biome.topBlockMeta;
-								} else {
-									blocks[index] = fillerBlock.getBlock();
-									if (fillerBlock == biome.fillerBlock)
-										metadata[index] = biome.fillerBlockMeta;
-								}
 							}
-						} else if (var13 > 0) {
-							--var13;
-							blocks[index] = fillerBlock.getBlock();
-							if (fillerBlock == biome.fillerBlock)
-								metadata[index] = biome.fillerBlockMeta;
 						}
 					}
 				}
 			}
 	}
 
-	private int getLowestAirBlock(Block[] blocks, int preHeightIndex, int minH, int maxH) {
+	private int getLowestAirBlock(ChunkPrimer primer, int xInChunk, int zInChunk, int preHeightIndex, int minH, int maxH) {
 		for (int h = Math.min(minH, maxH); h <= Math.max(minH, maxH); h++)
-			if (blocks[preHeightIndex + h] == Blocks.air)
+			if (primer.getBlockState(xInChunk, h, zInChunk).getBlock().getMaterial() == Material.air)
 				return h;
 		return -1;
 	}

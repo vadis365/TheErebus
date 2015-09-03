@@ -1,5 +1,6 @@
 package erebus.world.biomes;
 
+import net.minecraft.block.BlockSand;
 import net.minecraft.init.Blocks;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
@@ -39,7 +40,6 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 15).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
 */
-		topBlock = Blocks.sand.getDefaultState();
-		topBlockMeta = 1;
+		topBlock = Blocks.sand.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND);
 	}
 }
