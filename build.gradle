@@ -1,71 +1,42 @@
-buildscript
-{
-    repositories
-	{
-        mavenCentral()
-        maven
-		{
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven
-		{
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies
-	{
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-    }
+plugins {
+    id "net.minecraftforge.gradle.forge" version "2.0.1"
 }
 
-apply plugin: 'forge'
-
 version = "0.3a"
-group= "erebus"
+group = "erebus"
 archivesBaseName = "TheErebus"
 
-minecraft
-{
-    version = "1.8-11.14.3.1502"
+minecraft {
+    version = "1.8-11.14.3.1450"
     runDir = "minecraft"
     replace '${version}', project.version
     mappings = "snapshot_20141130"
 }
 
-repositories
-{
-    maven
-    {
+repositories {
+    maven {
         name = "ChickenBones"
         url = "http://chickenbones.net/maven/"
     }
 }
 
-dependencies
-{
+dependencies {
 	compile 'codechicken:CodeChickenLib:1.7.10-1.1.3.136:dev'
 	compile 'codechicken:ForgeMultipart:1.7.10-1.2.0.344:dev'
    	compile 'codechicken:CodeChickenCore:1.7.10-1.0.6.44:dev'
 	compile 'codechicken:NotEnoughItems:1.7.10-1.0.4.107:dev'
 }
 
-processResources
-{
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
-    from(sourceSets.main.resources.srcDirs)
-	{
+    from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
         
-    from(sourceSets.main.resources.srcDirs)
-	{
+    from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
-
-idea { module { inheritOutputDirs = true } }
