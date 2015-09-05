@@ -7,7 +7,7 @@ group = "erebus"
 archivesBaseName = "TheErebus"
 
 minecraft {
-    version = "1.8-11.14.3.1450"
+    version = "1.8-11.14.3.1512"
     runDir = "minecraft"
     replace '${version}', project.version
     mappings = "snapshot_20141130"
