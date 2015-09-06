@@ -1,11 +1,5 @@
 package erebus.core.handler;
 
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.lib.Reference;
@@ -17,6 +11,12 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
@@ -42,7 +42,7 @@ public class KeyBindingHandler {
 			ItemStack chestPlate = player.inventory.armorInventory[2];
 			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 				if (!chestPlate.hasTagCompound())
-					chestPlate.stackTagCompound = new NBTTagCompound();
+					chestPlate.setTagCompound(new NBTTagCompound());
 
 				chestPlate.getTagCompound().setBoolean("isGliding", true);
 				PacketPipeline.sendToServer(new PacketGlider(true));
@@ -57,7 +57,7 @@ public class KeyBindingHandler {
 			ItemStack chestPlate = player.inventory.armorInventory[2];
 			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
 				if (!chestPlate.hasTagCompound())
-					chestPlate.stackTagCompound = new NBTTagCompound();
+					chestPlate.setTagCompound(new NBTTagCompound());
 
 				chestPlate.getTagCompound().setBoolean("isPowered", true);
 				PacketPipeline.sendToServer(new PacketGliderPowered(true));

@@ -538,3 +538,9 @@ wood.erebus.white=White
 wood.erebus.bamboo=Bamboo
 wood.erebus.rotten=Rotten
 wood.erebus.marshwood=Marshwood
+
+# Altar Messages
+altar.experience.message=Altar of Experience Summoned.
+altar.repair.message=Altar of Repair Summoned.
+altar.lightning.message=Altar of Lightning Summoned.
+altar.healing.message=Altar of Healing Summoned.

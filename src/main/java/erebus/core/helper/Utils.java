@@ -3,6 +3,7 @@ package erebus.core.helper;
 import com.mojang.authlib.GameProfile;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -14,7 +15,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
@@ -28,13 +32,13 @@ import java.util.UUID;
 
 public class Utils {
 
-	public static boolean rightClickItemAt(World world, int x, int y, int z, int side, ItemStack stack) {
+	public static boolean rightClickItemAt(World world, BlockPos pos, EnumFacing side, ItemStack stack) {
 		if (world.isRemote || stack == null || stack.getItem() == null)
 			return false;
 		EntityPlayer player = getPlayer(world);
 		player.setCurrentItemOrArmor(0, stack);
 		try {
-			return stack.getItem().onItemUse(stack, player, world, x, y, z, side, 0, 0, 0);
+			return stack.getItem().onItemUse(stack, player, world, pos, side, 0, 0, 0);
 		} finally {
 			player.setCurrentItemOrArmor(0, null);
 		}
@@ -61,31 +65,31 @@ public class Utils {
 		return meta;
 	}
 
-	public static final void breakBlockWithParticles(World world, int x, int y, int z, int meta) {
-		playBreakParticles(world, x, y, z, meta);
-		world.setBlockToAir(x, y, z);
+	public static final void breakBlockWithParticles(World world, BlockPos pos, IBlockState state) {
+		playBreakParticles(world, pos, state);
+		world.setBlockToAir(pos);
 	}
 
-	public static final void breakBlockWithParticles(World world, int x, int y, int z) {
-		breakBlockWithParticles(world, x, y, z, world.getBlockMetadata(x, y, z));
+	public static final void breakBlockWithParticles(World world, BlockPos pos) {
+		breakBlockWithParticles(world, pos, world.getBlockState(pos));
 	}
 
-	public static void playBreakParticles(World world, int x, int y, int z, int meta) {
-		world.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(world.getBlock(x, y, z)) + (meta << 12));
+	public static void playBreakParticles(World world, BlockPos pos, IBlockState state) {
+		world.playAuxSFXAtEntity(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + world.getBlockState(pos).getBlock().getMetaFromState(state) << 12);
 	}
 
-	public static void playBreakParticles(World world, int x, int y, int z) {
-		world.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(world.getBlock(x, y, z)) + (world.getBlockMetadata(x, y, z) << 12));
+	public static void playBreakParticles(World world, BlockPos pos) {
+		world.playAuxSFXAtEntity(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + (world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)) << 12));
 	}
 
-	public static final void dropStack(World world, int x, int y, int z, ItemStack is) {
+	public static final void dropStack(World world, BlockPos pos, ItemStack is) {
 		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
 			float f = 0.7F;
 			double d0 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d1 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d2 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-			EntityItem entityitem = new EntityItem(world, x + d0, y + d1, z + d2, is);
-			entityitem.delayBeforeCanPickup = 10;
+			EntityItem entityitem = new EntityItem(world, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, is);
+			entityitem.setPickupDelay(10);
 			world.spawnEntityInWorld(entityitem);
 		}
 	}
@@ -95,30 +99,30 @@ public class Utils {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static final <T> T getTileEntity(IBlockAccess world, int x, int y, int z, Class<T> cls) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+	public static final <T> T getTileEntity(IBlockAccess world, BlockPos pos, Class<T> cls) {
+		TileEntity tile = world.getTileEntity(pos);
 		if (!cls.isInstance(tile))
 			return null;
 		return (T) tile;
 	}
 
-	public static void dropStackNoRandom(World world, int x, int y, int z, ItemStack stack) {
+	public static void dropStackNoRandom(World world, BlockPos pos, ItemStack stack) {
 		if (!world.isRemote && stack != null && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
-			EntityItem entityItem = new EntityItem(world, x + 0.5, y, z + 0.5, stack);
+			EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
 			entityItem.motionX = 0;
 			entityItem.motionY = 0;
 			entityItem.motionZ = 0;
-			entityItem.delayBeforeCanPickup = 10;
+			entityItem.setPickupDelay(10);
 			world.spawnEntityInWorld(entityItem);
 		}
 	}
 
-	public static int[] getSlotsFromSide(IInventory iinventory, int side) {
+	public static int[] getSlotsFromSide(IInventory iinventory, EnumFacing side) {
 		if (iinventory == null)
 			return null;
 
 		if (iinventory instanceof ISidedInventory)
-			return ((ISidedInventory) iinventory).getAccessibleSlotsFromSide(side);
+			return ((ISidedInventory) iinventory).getSlotsForFace(side);
 		else {
 			int[] slots = new int[iinventory.getSizeInventory()];
 			for (int i = 0; i < slots.length; i++)
@@ -130,33 +134,34 @@ public class Utils {
 	/**
 	 * Extracts 1 item from the first found stack
 	 *
+	 * @param lock
 	 * @param iinventory
 	 * @param side
-	 * @param maxStackSize
 	 * @return extracted stack
 	 */
-	public static ItemStack extractFromInventory(IInventory iinventory, int side) {
-		return extractFromInventory(iinventory, side, 1);
+	public static ItemStack extractFromInventory(ILockableContainer lock, IInventory iinventory, EnumFacing side) {
+		return extractFromInventory(lock, iinventory, side, 1);
 	}
 
 	/**
 	 * Extracts a stack with size the same or smaller of @param maxStackSize
 	 *
+	 * @param lock
 	 * @param iinventory
 	 * @param side
 	 * @param maxStackSize
 	 * @return extracted stack
 	 */
-	public static ItemStack extractFromInventory(IInventory iinventory, int side, int maxStackSize) {
-		IInventory invt = getInventory(iinventory);
+	public static ItemStack extractFromInventory(ILockableContainer lock, IInventory iinventory, EnumFacing side, int maxStackSize) {
+		IInventory invt = getInventory(lock, iinventory);
 		return extractFromSlots(invt, side, maxStackSize, getSlotsFromSide(invt, side));
 	}
 
-	private static ItemStack extractFromSlots(IInventory iinventory, int side, int maxStackSize, int[] slots) {
+	private static ItemStack extractFromSlots(IInventory iinventory, EnumFacing side, int maxStackSize, int[] slots) {
 		for (int slot : slots) {
 			ItemStack invtStack = iinventory.getStackInSlot(slot);
 			if (invtStack != null)
-				if (iinventory instanceof ISidedInventory ? ((ISidedInventory) iinventory).canExtractItem(slot, invtStack, side) : true) {
+				if (!(iinventory instanceof ISidedInventory) || ((ISidedInventory) iinventory).canExtractItem(slot, invtStack, side)) {
 					ItemStack copy = invtStack.copy();
 					if (maxStackSize <= 0)
 						iinventory.setInventorySlotContents(slot, null);
@@ -173,11 +178,11 @@ public class Utils {
 		return null;
 	}
 
-	public static boolean addEntitytoInventory(IInventory iinventory, EntityItem entity) {
+	public static boolean addEntitytoInventory(ILockableContainer lock, IInventory iinventory, EntityItem entity) {
 		if (entity == null)
 			return false;
 
-		boolean flag = addItemStackToInventory(iinventory, entity.getEntityItem());
+		boolean flag = addItemStackToInventory(lock, iinventory, entity.getEntityItem());
 		if (flag)
 			entity.setDead();
 		else if (entity.getEntityItem().stackSize <= 0)
@@ -185,22 +190,22 @@ public class Utils {
 		return flag;
 	}
 
-	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack) {
-		return addItemStackToInventory(iinventory, stack, 0);
+	public static boolean addItemStackToInventory(ILockableContainer lock, IInventory iinventory, ItemStack stack) {
+		return addItemStackToInventory(lock, iinventory, stack, EnumFacing.DOWN);
 	}
 
-	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack, int side) {
+	public static boolean addItemStackToInventory(ILockableContainer lock, IInventory iinventory, ItemStack stack, EnumFacing side) {
 		if (iinventory == null)
 			return false;
 
 		if (stack == null || stack.stackSize <= 0)
 			return false;
 
-		IInventory invt = getInventory(iinventory);
+		IInventory invt = getInventory(lock, iinventory);
 		return addToSlots(invt, stack, side, getSlotsFromSide(invt, side));
 	}
 
-	private static boolean addToSlots(IInventory iinventory, ItemStack stack, int side, int[] slots) {
+	private static boolean addToSlots(IInventory iinventory, ItemStack stack, EnumFacing side, int[] slots) {
 		for (int slot : slots) {
 			if (iinventory instanceof ISidedInventory) {
 				if (!((ISidedInventory) iinventory).canInsertItem(slot, stack, side))
@@ -288,7 +293,7 @@ public class Utils {
 		return meta == OreDictionary.WILDCARD_VALUE;
 	}
 
-	public static IInventory getInventory(IInventory inventory) {
+	public static IInventory getInventory(ILockableContainer lock, IInventory inventory) {
 		if (inventory instanceof TileEntityChest) {
 			TileEntityChest chest = (TileEntityChest) inventory;
 			TileEntityChest adjacent = null;
@@ -304,7 +309,7 @@ public class Utils {
 				adjacent = chest.adjacentChestZPos;
 
 			if (adjacent != null)
-				return new InventoryLargeChest("", inventory, adjacent);
+				return new InventoryLargeChest("", lock, adjacent);
 		}
 		return inventory;
 	}
@@ -316,21 +321,21 @@ public class Utils {
 		for (int i = 0; i < iinventory.getSizeInventory(); i++) {
 			ItemStack stack = iinventory.getStackInSlot(i);
 			if (stack != null && stack.getItem() != null && stack.stackSize > 0) {
-				dropStack(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord, stack.copy());
+				dropStack(tile.getWorld(), tile.getPos(), stack.copy());
 				iinventory.setInventorySlotContents(i, null);
 			}
 		}
 		tile.markDirty();
 	}
 
-	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize) {
-		return inventoryContains(iinventory, stack, ignoreSize, getSlotsFromSide(iinventory, 0));
+	public static boolean inventoryContains(ILockableContainer lock, IInventory iinventory, ItemStack stack, boolean ignoreSize) {
+		return inventoryContains(lock, iinventory, stack, ignoreSize, getSlotsFromSide(iinventory, EnumFacing.DOWN));
 	}
 
-	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize, int... slots) {
+	public static boolean inventoryContains(ILockableContainer lock, IInventory iinventory, ItemStack stack, boolean ignoreSize, int... slots) {
 		if (stack == null)
 			return false;
-		iinventory = getInventory(iinventory);
+		iinventory = getInventory(lock, iinventory);
 
 		int totalSize = 0;
 		for (int slot : slots) {
@@ -347,14 +352,14 @@ public class Utils {
 		return false;
 	}
 
-	public static boolean deleteFromInventory(IInventory iinventory, int side, ItemStack stack) {
-		return deleteFromSlots(iinventory, stack, getSlotsFromSide(iinventory, side));
+	public static boolean deleteFromInventory(ILockableContainer lock, IInventory iinventory, EnumFacing side, ItemStack stack) {
+		return deleteFromSlots(lock, iinventory, stack, getSlotsFromSide(iinventory, side));
 	}
 
-	public static boolean deleteFromSlots(IInventory iinventory, ItemStack stack, int... slots) {
-		iinventory = getInventory(iinventory);
+	public static boolean deleteFromSlots(ILockableContainer lock, IInventory iinventory, ItemStack stack, int... slots) {
+		iinventory = getInventory(lock, iinventory);
 
-		if (!inventoryContains(iinventory, stack, false))
+		if (!inventoryContains(lock, iinventory, stack, false))
 			return false;
 		int totalDel = 0;
 		for (int slot : slots) {
@@ -381,7 +386,7 @@ public class Utils {
 
 	public static final LinkedHashMap<Short, Short> getEnchantments(ItemStack stack) {
 		LinkedHashMap<Short, Short> map = new LinkedHashMap<Short, Short>();
-		NBTTagList list = stack.getItem() == Items.enchanted_book ? Items.enchanted_book.func_92110_g(stack) : stack.getEnchantmentTagList();
+		NBTTagList list = stack.getItem() == Items.enchanted_book ? Items.enchanted_book.getEnchantments(stack) : stack.getEnchantmentTagList();
 
 		if (list != null)
 			for (int i = 0; i < list.tagCount(); i++) {

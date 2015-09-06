@@ -1,7 +1,5 @@
 package erebus.block.bamboo;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.item.ItemMaterials.DATA;
@@ -9,14 +7,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class BlockBambooShoot extends BlockFlower implements IGrowable {
 
-	public static byte calculateBambooHappiness(World world, int x, int y, int z, Block block) {
+	public static byte calculateBambooHappiness(World world, BlockPos pos, Block block) {
 		double happiness = 0;
 		int bottomY = y;
 
@@ -92,7 +92,11 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 3.5F, 0.5F + f);
 		setCreativeTab(null);
 		setUnlocalizedName("erebus.bambooShoot");
-		setBlockTextureName("erebus:bambooShoot");
+	}
+
+	@Override
+	public EnumFlowerColor getBlockType() {
+		return null;
 	}
 
 	@Override
@@ -140,18 +144,6 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return blockIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon(getTextureName());
-	}
-
-	@Override
 	public boolean func_149851_a(World world, int x, int y, int z, boolean isRemote) {
 		return true;
 	}
@@ -166,5 +158,20 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 		int meta = world.getBlockMetadata(x, y, z);
 		if (meta < 7)
 			world.setBlockMetadataWithNotify(x, y, z, meta + 9, 4);
+	}
+
+	@Override
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+		return false;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+
 	}
 }

@@ -1,13 +1,13 @@
 package erebus.core.handler;
 
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,12 +32,12 @@ public class BucketHandler {
 		event.setResult(Result.ALLOW);
 	}
 
-	private ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
-		Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
+	private ItemStack fillCustomBucket(World world, MovingObjectPosition mop) {
+		Block block = world.getBlockState(mop.getBlockPos()).getBlock();
 
 		Item bucket = buckets.get(block);
-		if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
-			world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
+		if ((bucket != null) && block.getMetaFromState(world.getBlockState(mop.getBlockPos())) == 0) {
+			world.setBlockToAir(mop.getBlockPos());
 			return new ItemStack(bucket);
 		} else
 			return null;

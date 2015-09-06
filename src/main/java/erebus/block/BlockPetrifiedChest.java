@@ -18,6 +18,8 @@ import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -260,13 +262,14 @@ public class BlockPetrifiedChest extends BlockContainer {
 		}
 	}
 
-	public static IInventory getInventory(World world, int x, int y, int z) {
-		Object object = world.getTileEntity(x, y, z);
+	public static IInventory getInventory(World world, BlockPos pos) {
+		Object object = world.getTileEntity(pos);
 		Block chest = ModBlocks.petrifiedWoodChest;
+		int x = pos.getX(), y = pos.getY(), z = pos.getZ();
 
 		if (object == null)
 			return null;
-		else if (world.isSideSolid(x, y + 1, z, DOWN))
+		else if (world.isSideSolid(x, y + 1, z, EnumFacing.DOWN))
 			return null;
 		else if (isOcelotBlockingChest(world, x, y, z))
 			return null;

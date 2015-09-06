@@ -1,6 +1,5 @@
 package erebus;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import erebus.block.*;
 import erebus.block.altars.*;
 import erebus.block.bamboo.*;
@@ -11,7 +10,6 @@ import erebus.block.plants.*;
 import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
-import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCompressed;
 import net.minecraft.block.BlockStone;
@@ -19,6 +17,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -34,7 +33,7 @@ public class ModBlocks {
 
 	// TERRAIN
 	public static final Block umberstone = new BlockStone();
-/*	public static final Block redGem = new BlockRedGem();
+	public static final Block redGem = new BlockRedGem();
 	public static final Block amber = new BlockAmber();
 	public static final Block quickSand = new BlockQuickSand();
 	public static final Block ghostSand = new BlockGhostSand();
@@ -224,7 +223,7 @@ public class ModBlocks {
 	public static final Block gaeanKeystone = new GaeanKeystone();
 	public static final Block tarantulaEgg = new BlockTarantulaEgg();
 	public static final Block antlionEgg = new BlockAntlionEgg();
-*/
+
 	public static void init() {
 	//	initBlocks();
 	//	EnumWood.initBlocks();

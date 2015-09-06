@@ -1,22 +1,22 @@
 package erebus.core.handler;
 
+import erebus.ModItems;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 
 @SideOnly(Side.CLIENT)
 public class GogglesClientTickHandler {
 	public static Minecraft mc = FMLClientHandler.instance().getClient();
 
-	private static PotionEffect nightVisionEffect = new PotionEffect(Potion.nightVision.id, 300, 1, true);
+	private static PotionEffect nightVisionEffect = new PotionEffect(Potion.nightVision.id, 300, 1, true, false);
 
 	@SubscribeEvent
 	public void onRenderTick(RenderTickEvent e) {

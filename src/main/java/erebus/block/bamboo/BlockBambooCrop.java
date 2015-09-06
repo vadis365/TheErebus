@@ -1,28 +1,24 @@
 package erebus.block.bamboo;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.item.ItemMaterials.DATA;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BlockBambooCrop extends Block {
-
-	@SideOnly(Side.CLIENT)
-	private IIcon iconTop;
 
 	public BlockBambooCrop() {
 		super(Material.wood);
@@ -32,36 +28,23 @@ public class BlockBambooCrop extends Block {
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune) {
-		return meta >= 8 && rand.nextInt(17) <= 3 ? null : ModItems.materials;
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return getMetaFromState(state) >= 8 && rand.nextInt(17) <= 3 ? null : ModItems.materials;
 	}
 
 	@Override
-	public int damageDropped(int meta) {
+	public int damageDropped(IBlockState state) {
 		return DATA.bamboo.ordinal();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side == 1 || side == 0 ? iconTop : blockIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		super.registerBlockIcons(reg);
-		iconTop = reg.registerIcon("erebus:bambooCropTop");
-	}
-
-	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-		if (metadata == 0 && world.rand.nextInt(metadata >= 8 ? 35 : 20) == 0) {
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		if (getMetaFromState(state) == 0 && RANDOM.nextInt(getMetaFromState(state) >= 8 ? 35 : 20) == 0) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 			ret.add(new ItemStack(ModItems.materials, 1, DATA.bambooShoot.ordinal()));
 			return ret;
 		}
-		return super.getDrops(world, x, y, z, metadata, fortune);
+		return super.getDrops(world, pos, state, fortune);
 	}
 
 	@Override
@@ -75,40 +58,30 @@ public class BlockBambooCrop extends Block {
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
-		int meta = world.getBlockMetadata(x, y, z);
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		int meta = getMetaFromState(state);
 
 		if ((meta & 7) != 0)
-			if (BlockBambooShoot.calculateBambooHappiness(world, x, y, z, this) > rand.nextInt(110 - meta * 2) && world.isAirBlock(x, y + 1, z))
-				world.setBlock(x, y + 1, z, this, meta - 1, 3);
+			if (BlockBambooShoot.calculateBambooHappiness(world, pos, this) > rand.nextInt(110 - meta * 2) && world.isAirBlock(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ())))
+				world.setBlockState(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()), getStateFromMeta(meta - 1), 3);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighbour) {
 		if (!canBlockStay(world, x, y, z)) {
-			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+			dropBlockAsItem(world, x, y, z, getMetaFromState(state), 0);
 			world.setBlockToAir(x, y, z);
 		}
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
 		Block block = world.getBlock(x, y - 1, z);
 		return world.getBlock(x, y - 1, z) == this || block != null && block.isSideSolid(world, x, y, z, ForgeDirection.UP);
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int x, int y, int z) {
-		return canPlaceBlockAt(world, x, y, z);
-	}
-
-	@Override
-	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
+	public boolean canPlaceBlockOnSide(World world, BlockPos pos, int side) {
 		Block block = world.getBlock(x, y - 1, z);
 		if (!(world.getBlock(x, y - 1, z) == this && world.getBlockMetadata(x, y - 1, z) == 0 || block != null && block.isSideSolid(world, x, y, z, ForgeDirection.UP)))
 			return false;
@@ -117,7 +90,7 @@ public class BlockBambooCrop extends Block {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack is) {
+	public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entityLivingBase, ItemStack is) {
 		Block block = world.getBlock(x, y - 1, z);
 		if (!(world.getBlock(x, y - 1, z) == this && world.getBlockMetadata(x, y - 1, z) == 0 || block != null && block.isSideSolid(world, x, y, z, ForgeDirection.UP)))
 			world.setBlockToAir(x, y, z);

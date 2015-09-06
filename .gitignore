@@ -20,6 +20,7 @@ build
 #runtime
 eclipse
 run
+minecraft
 
 #mac
 .DS_Store

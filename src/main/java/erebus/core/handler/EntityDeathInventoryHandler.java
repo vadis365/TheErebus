@@ -1,7 +1,5 @@
 package erebus.core.handler;
 
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityBones;
@@ -9,9 +7,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,8 +35,9 @@ public class EntityDeathInventoryHandler {
 			int z = MathHelper.floor_double(player.posZ);
 			int playerFacing = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			byte directionMeta = 0;
+			BlockPos pos = new BlockPos(x, y, z);
 
-			if (!world.isAirBlock(x, y, z))
+			if (!world.isAirBlock(pos))
 				y++;
 			if (playerFacing == 0)
 				directionMeta = 2;
@@ -45,8 +47,8 @@ public class EntityDeathInventoryHandler {
 				directionMeta = 3;
 			if (playerFacing == 3)
 				directionMeta = 4;
-			world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 3);
-			TileEntityBones tile = Utils.getTileEntity(world, x, y, z, TileEntityBones.class);
+			world.setBlockState(pos, ModBlocks.bones.getStateFromMeta(directionMeta), 3);
+			TileEntityBones tile = Utils.getTileEntity(world, pos, TileEntityBones.class);
 			if (tile != null) {
 				for (int i = 0; i < player.inventory.mainInventory.length; i++) {
 					ItemStack cont = player.inventory.mainInventory[i];
@@ -63,7 +65,7 @@ public class EntityDeathInventoryHandler {
 					}
 				}
 
-				List<EntityItem> list = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(16, 16, 16));
+				List<EntityItem> list = world.getEntitiesWithinAABB(EntityItem.class, player.getBoundingBox().expand(16, 16, 16));
 				Collections.sort(list, new Comparator<Entity>() {
 					@Override
 					public int compare(Entity o1, Entity o2) {
@@ -83,7 +85,7 @@ public class EntityDeathInventoryHandler {
 						}
 					}
 				}
-				tile.setOwner("R.I.P. " + player.getCommandSenderName());
+				tile.setOwner("R.I.P. " + player.getCommandSenderEntity().getName());
 			}
 		}
 	}

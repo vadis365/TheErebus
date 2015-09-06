@@ -1,10 +1,5 @@
 package erebus.item;
 
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
@@ -13,16 +8,18 @@ import erebus.block.plants.BlockHangerPlants;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketSound;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -55,7 +52,7 @@ public class ItemMaterials extends Item {
 
 			if (block != null && block.getMaterial().blocksMovement()) {
 				FMLLog.info("Placed a hanger");
-				//world.setBlockState(bottom, ModBlocks.hanger.getDefaultState(), BlockHangerPlants.dataHanger0, 2);
+				world.setBlockState(bottom, ModBlocks.hanger.getStateFromMeta(BlockHangerPlants.dataHanger0), 2);
 
 				if (!player.capabilities.isCreativeMode)
 					--is.stackSize;
@@ -75,7 +72,7 @@ public class ItemMaterials extends Item {
 				PotionEffect currentSpeed = player.getActivePotionEffect(Potion.moveSpeed);
 
 				if (currentSpeed == null || damage == DATA.bioVelocity.ordinal() && currentSpeed.getAmplifier() < 1 || damage == DATA.supernaturalvelocity.ordinal() && currentSpeed.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, damage == DATA.bioVelocity.ordinal() ? 280 : 210, damage == DATA.bioVelocity.ordinal() ? 1 : 3, true));
+					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, damage == DATA.bioVelocity.ordinal() ? 280 : 210, damage == DATA.bioVelocity.ordinal() ? 1 : 3, true, false));
 					PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 				} else
 					return is;
@@ -85,7 +82,7 @@ public class ItemMaterials extends Item {
 				PotionEffect currentVisibility = player.getActivePotionEffect(Potion.invisibility);
 
 				if (currentVisibility == null || damage == DATA.camoPowder.ordinal() && currentVisibility.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(Potion.invisibility.id, damage == DATA.camoPowder.ordinal() ? 280 : 210, damage == DATA.camoPowder.ordinal() ? 1 : 3, true));
+					player.addPotionEffect(new PotionEffect(Potion.invisibility.id, damage == DATA.camoPowder.ordinal() ? 280 : 210, damage == DATA.camoPowder.ordinal() ? 1 : 3, true, false));
 					PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 				} else
 					return is;

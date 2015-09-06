@@ -1,18 +1,14 @@
 package erebus.core.proxy;
 
-import erebus.client.render.init.BlockRenderingRegistry;
-import erebus.client.render.init.ItemRenderingRegistry;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.client.fx.EntityBubbleGasFX;
 import erebus.client.fx.EntityRepellentFX;
 import erebus.client.fx.EntitySonicFX;
 import erebus.client.model.entity.*;
-import erebus.client.render.block.*;
 import erebus.client.render.entity.*;
+import erebus.client.render.init.BlockRenderingRegistry;
+import erebus.client.render.init.ItemRenderingRegistry;
 import erebus.client.render.item.*;
 import erebus.client.render.tileentity.*;
 import erebus.core.handler.GogglesClientTickHandler;
@@ -27,6 +23,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ClientProxy extends CommonProxy {
 
@@ -45,10 +47,11 @@ public class ClientProxy extends CommonProxy {
 		DOOR,
 		SWAMP_VENT;
 
-		private final int ID;
+		//TODO: getNextAvailableRenderId() deoesnt exist
+		private final int ID = 1337;
 
 		BlockRenderIDs() {
-			ID = RenderingRegistry.getNextAvailableRenderId();
+			//ID = RenderingRegistry.getNextAvailableRenderId();
 		}
 
 		public int id() {
@@ -154,19 +157,20 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySmoothieMaker.class, new TileEntitySmoothieMakerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAntlionEgg.class, new TileEntityAntlionEggRenderer());
 
-		RenderingRegistry.registerBlockHandler(new BlockBambooCropRender());
-		RenderingRegistry.registerBlockHandler(new BlockHollowLogRender());
-		RenderingRegistry.registerBlockHandler(new BlockPlantedFlowerRender());
-		RenderingRegistry.registerBlockHandler(new BlockGlowshroomStalkRender());
-		RenderingRegistry.registerBlockHandler(new BlockGlowshroomRender());
-		RenderingRegistry.registerBlockHandler(new BlockSiloRoofRender());
-		RenderingRegistry.registerBlockHandler(new BlockSiloSupportsRender());
-		RenderingRegistry.registerBlockHandler(new BlockComposterRender());
-		RenderingRegistry.registerBlockHandler(new BlockKeystoneRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockDoublePlantRender());
-		RenderingRegistry.registerBlockHandler(new BlockVelocityBlockRender());
-		RenderingRegistry.registerBlockHandler(new BlockDoorRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockSwampVentRenderer());
+		//TODO: Get ISBRH's taken care of
+		//RenderingRegistry.registerBlockHandler(new BlockBambooCropRender());
+		//RenderingRegistry.registerBlockHandler(new BlockHollowLogRender());
+		//RenderingRegistry.registerBlockHandler(new BlockPlantedFlowerRender());
+		//RenderingRegistry.registerBlockHandler(new BlockGlowshroomStalkRender());
+		//RenderingRegistry.registerBlockHandler(new BlockGlowshroomRender());
+		//RenderingRegistry.registerBlockHandler(new BlockSiloRoofRender());
+		//RenderingRegistry.registerBlockHandler(new BlockSiloSupportsRender());
+		//RenderingRegistry.registerBlockHandler(new BlockComposterRender());
+		//RenderingRegistry.registerBlockHandler(new BlockKeystoneRenderer());
+		//RenderingRegistry.registerBlockHandler(new BlockDoublePlantRender());
+		//RenderingRegistry.registerBlockHandler(new BlockVelocityBlockRender());
+		//RenderingRegistry.registerBlockHandler(new BlockDoorRenderer());
+		//RenderingRegistry.registerBlockHandler(new BlockSwampVentRenderer());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooCrate), new BambooCrateItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.altarBase), new ItemAltarBaseRenderer());
@@ -212,6 +216,61 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {
 		EntityFX fx = null;
+		EntityFlameFX flameFX = null;
+		EntityPortalFX portalFX = null;
+		EntityCloudFX cloudFX = null;
+		EntitySpellParticleFX spellFX = null;
+		EntityHeartFX heartFX = null;
+		EntitySmokeFX smokeFX = null;
+		EntityEnchantmentTableParticleFX enchantFX = null;
+		EntityLavaFX lavaFX = null;
+		EntityBreakingFX breakFX = null;
+
+		try {
+			Constructor<EntityFlameFX> flameConstruct = EntityFlameFX.class.getDeclaredConstructor(Object.class);
+			flameConstruct.setAccessible(true);
+			flameFX = flameConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ);
+
+			Constructor<EntityPortalFX> portalConstruct = EntityPortalFX.class.getDeclaredConstructor(Object.class);
+			portalConstruct.setAccessible(true);
+			portalFX = portalConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ);
+
+			Constructor<EntityCloudFX> cloudConstruct = EntityCloudFX.class.getDeclaredConstructor(Object.class);
+			cloudConstruct.setAccessible(true);
+			cloudFX = cloudConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ);
+
+			Constructor<EntitySpellParticleFX> spellConstruct = EntitySpellParticleFX.class.getDeclaredConstructor(Object.class);
+			spellConstruct.setAccessible(true);
+			spellFX = spellConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ);
+
+			Constructor<EntityHeartFX> heartConstruct = EntityHeartFX.class.getDeclaredConstructor(Object.class);
+			heartConstruct.setAccessible(true);
+			heartFX = heartConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ);
+
+			Constructor<EntitySmokeFX> smokeConstruct = EntitySmokeFX.class.getDeclaredConstructor(Object.class);
+			smokeConstruct.setAccessible(true);
+			smokeFX = smokeConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ);
+
+			Constructor<EntityEnchantmentTableParticleFX> enchantConstruct = EntityEnchantmentTableParticleFX.class.getDeclaredConstructor(Object.class);
+			enchantConstruct.setAccessible(true);
+			enchantFX = enchantConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ);
+
+			Constructor<EntityLavaFX> lavaConstruct = EntityLavaFX.class.getDeclaredConstructor(Object.class);
+			lavaConstruct.setAccessible(true);
+			lavaFX = lavaConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ);
+
+			Constructor<EntityBreakingFX> breakConstruct = EntityBreakingFX.class.getDeclaredConstructor(Object.class);
+			breakConstruct.setAccessible(true);
+			breakFX = breakConstruct.newInstance(world, x, y, z, vecX, vecY, vecZ, Items.slime_ball, 0);
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 
 		if (particleName.equals("repellent"))
 			fx = new EntityRepellentFX(world, x, y, z, 0.0F, 0.0F, 0.0F);
@@ -225,47 +284,32 @@ public class ClientProxy extends CommonProxy {
 		}
 
 		if (particleName.equals("swampflame")) {
-			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
-			fx.setParticleTextureIndex(96);
+			assert flameFX != null;
+			flameFX.setParticleTextureIndex(96);
 		}
 
-		if (particleName.equals("portal"))
-			fx = new EntityPortalFX(world, x, y, z, vecX, vecY, vecZ);
-
-		if (particleName.equals("cloud"))
-			fx = new EntityCloudFX(world, x, y, z, vecX, vecY, vecZ);
-
-		if (particleName.equals("spell"))
-			fx = new EntitySpellParticleFX(world, x, y, z, vecX, vecY, vecZ);
-
-		if (particleName.equals("heart"))
-			fx = new EntityHeartFX(world, x, y, z, vecX, vecY, vecZ);
-
-		if (particleName.equals("smoke"))
-			fx = new EntitySmokeFX(world, x, y, z, vecX, vecY, vecZ);
-
-		if (particleName.equals("poison")) {
-			fx = new EntitySpellParticleFX(world, x, y, z, vecX, vecY, vecZ);
-			fx.setRBGColorF(0.306F, 0.576F, 0.192F);
+		if(particleName.equals("poison")) {
+			assert spellFX != null;
+			spellFX.setRBGColorF(0.306F, 0.576F, 0.192F);
 		}
-
-		if (particleName.equals("flame"))
-			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
-
-		if (particleName.equals("enchantmenttable"))
-			fx = new EntityEnchantmentTableParticleFX(world, x, y, z, vecX, vecY, vecZ);
-
-		if (particleName.equals("lava"))
-			fx = new EntityLavaFX(world, x, y, z);
-
-		if (particleName.equals("slime"))
-			fx = new EntityBreakingFX(world, x, y, z, vecX, vecY, vecZ, Items.slime_ball, 0);
 
 		if (particleName.equals("sparks"))
 			fx = new EntityFireworkSparkFX(world, x, y, z, vecX, vecY, vecZ, Minecraft.getMinecraft().effectRenderer);
 
-		if (fx != null)
+		if (fx != null && flameFX != null && portalFX != null && cloudFX != null && spellFX != null && heartFX != null
+				&& smokeFX != null && enchantFX != null && lavaFX != null && breakFX != null) {
+
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
+			Minecraft.getMinecraft().effectRenderer.addEffect(flameFX);
+			Minecraft.getMinecraft().effectRenderer.addEffect(portalFX);
+			Minecraft.getMinecraft().effectRenderer.addEffect(cloudFX);
+			Minecraft.getMinecraft().effectRenderer.addEffect(spellFX);
+			Minecraft.getMinecraft().effectRenderer.addEffect(heartFX);
+			Minecraft.getMinecraft().effectRenderer.addEffect(smokeFX);
+			Minecraft.getMinecraft().effectRenderer.addEffect(enchantFX);
+			Minecraft.getMinecraft().effectRenderer.addEffect(lavaFX);
+			Minecraft.getMinecraft().effectRenderer.addEffect(breakFX);
+		}
 	}
 
 	@Override

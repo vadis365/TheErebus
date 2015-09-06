@@ -1,20 +1,21 @@
 package erebus.client.gui;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.core.helper.Utils;
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiPetrifiedWorkbench extends GuiCrafting {
 
-	public GuiPetrifiedWorkbench(InventoryPlayer player, World world, int x, int y, int z) {
-		super(player, world, x, y, z);
+	public GuiPetrifiedWorkbench(InventoryPlayer player, World world, BlockPos pos) {
+		super(player, world, pos);
 	}
 
 	@Override

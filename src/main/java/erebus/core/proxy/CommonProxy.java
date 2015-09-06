@@ -1,7 +1,5 @@
 package erebus.core.proxy;
 
-import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import erebus.block.BlockPetrifiedChest;
 import erebus.block.silo.TileEntitySiloTank;
 import erebus.client.gui.*;
@@ -13,7 +11,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,18 +93,18 @@ public class CommonProxy implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		if (ID == GUI_ID_BAMBOO_CRATE) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntityBambooCrate)
 				return new ContainerBambooCrate(player.inventory, (TileEntityBambooCrate) tileentity);
 		}
 
 		else if (ID == GUI_ID_COLOSSAL_CRATE) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntityBambooCrate) {
 				List<TileEntityBambooCrate> list = new ArrayList<TileEntityBambooCrate>();
 				for (int[] place : places) {
 					TileEntity tile;
-					tile = world.getTileEntity(x + place[0], y + place[1], z + place[2]);
+					tile = world.getTileEntity(new BlockPos(x + place[0], y + place[1], z + place[2]));
 					if (tile != null && tile instanceof TileEntityBambooCrate) {
 						TileEntityBambooCrate tilecrate = (TileEntityBambooCrate) tile;
 						list.add(tilecrate);
@@ -115,15 +116,15 @@ public class CommonProxy implements IGuiHandler {
 		}
 
 		else if (ID == GUI_ID_PETRIFIED_CRAFT)
-			return new ContainerPetrifiedCraftingTable(player.inventory, world, x, y, z);
+			return new ContainerPetrifiedCraftingTable(player.inventory, world, new BlockPos(x, y, z));
 		else if (ID == GUI_ID_UMBER_FURNACE) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntityUmberFurnace)
 				return new ContainerUmberFurnace(player.inventory, (TileEntityUmberFurnace) tileentity);
 		}
 
 		else if (ID == GUI_ID_PETRIFIED_CHEST) {
-			IInventory inventory = BlockPetrifiedChest.getInventory(world, x, y, z);
+			IInventory inventory = BlockPetrifiedChest.getInventory(world, new BlockPos(x, y, z));
 			return new ContainerPetrifiedWoodChest(player.inventory, inventory);
 		}
 
@@ -134,9 +135,9 @@ public class CommonProxy implements IGuiHandler {
 		}
 
 		else if (ID == GUI_ID_EXTENDER_THINGY)
-			return new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) world.getTileEntity(x, y, z));
+			return new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) world.getTileEntity(new BlockPos(x, y, z)));
 		else if (ID == GUI_ID_HONEY_COMB) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntityHoneyComb)
 				return new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tileentity);
 		}
@@ -148,19 +149,19 @@ public class CommonProxy implements IGuiHandler {
 		}
 
 		else if (ID == GUI_ID_SILO_INVENTORY) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntitySiloTank)
 				return new ContainerSilo(player.inventory, (TileEntitySiloTank) tileentity);
 		}
 
 		else if (ID == GUI_ID_COMPOSTER) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntityComposter)
 				return new ContainerComposter(player.inventory, (TileEntityComposter) tileentity);
 		}
 
 		else if (ID == GUI_ID_SMOOTHIE_MAKER) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntitySmoothieMaker)
 				return new ContainerSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tileentity);
 		}
@@ -171,17 +172,17 @@ public class CommonProxy implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		if (ID == GUI_ID_BAMBOO_CRATE) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(new BlockPos(x, y, z)));
 			if (tileentity instanceof TileEntityBambooCrate)
 				return new GuiBambooCrate(player.inventory, (TileEntityBambooCrate) tileentity);
 		}
 
 		else if (ID == GUI_ID_COLOSSAL_CRATE) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(new BlockPos(x, y, z)));
 			if (tileentity instanceof TileEntityBambooCrate) {
 				List<TileEntityBambooCrate> list = new ArrayList<TileEntityBambooCrate>();
 				for (int[] place : places) {
-					TileEntityBambooCrate tilecrate = (TileEntityBambooCrate) world.getTileEntity(x + place[0], y + place[1], z + place[2]);
+					TileEntityBambooCrate tilecrate = (TileEntityBambooCrate) world.getTileEntity(new BlockPos(x + place[0], y + place[1], z + place[2]));
 					list.add(tilecrate);
 				}
 				return new GuiColossalCrate(player.inventory, list);
@@ -189,15 +190,15 @@ public class CommonProxy implements IGuiHandler {
 		}
 
 		else if (ID == GUI_ID_PETRIFIED_CRAFT)
-			return new GuiPetrifiedWorkbench(player.inventory, world, x, y, z);
+			return new GuiPetrifiedWorkbench(player.inventory, world, new BlockPos(x, y, z));
 		else if (ID == GUI_ID_UMBER_FURNACE) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntityUmberFurnace)
 				return new GuiUmberFurnace(player.inventory, (TileEntityUmberFurnace) tileentity);
 		}
 
 		else if (ID == GUI_ID_PETRIFIED_CHEST) {
-			IInventory inventory = BlockPetrifiedChest.getInventory(world, x, y, z);
+			IInventory inventory = BlockPetrifiedChest.getInventory(world, new BlockPos(x, y, z));
 			return new GuiPetrifiedChest(player.inventory, inventory);
 		}
 
@@ -208,9 +209,9 @@ public class CommonProxy implements IGuiHandler {
 		}
 
 		else if (ID == GUI_ID_EXTENDER_THINGY)
-			return new GuiExtenderThingy(player.inventory, (TileEntityExtenderThingy) world.getTileEntity(x, y, z));
+			return new GuiExtenderThingy(player.inventory, (TileEntityExtenderThingy) world.getTileEntity(new BlockPos(x, y, z)));
 		else if (ID == GUI_ID_HONEY_COMB) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntityHoneyComb)
 				return new GuiHoneyComb(player.inventory, (TileEntityHoneyComb) tileentity);
 		}
@@ -222,19 +223,19 @@ public class CommonProxy implements IGuiHandler {
 		}
 
 		else if (ID == GUI_ID_SILO_INVENTORY) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntitySiloTank)
 				return new GuiSilo(player.inventory, (TileEntitySiloTank) tileentity);
 		}
 
 		else if (ID == GUI_ID_COMPOSTER) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntityComposter)
 				return new GuiComposter(player.inventory, (TileEntityComposter) tileentity);
 		}
 
 		else if (ID == GUI_ID_SMOOTHIE_MAKER) {
-			TileEntity tileentity = world.getTileEntity(x, y, z);
+			TileEntity tileentity = world.getTileEntity(new BlockPos(x, y, z));
 			if (tileentity instanceof TileEntitySmoothieMaker)
 				return new GuiSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tileentity);
 		}

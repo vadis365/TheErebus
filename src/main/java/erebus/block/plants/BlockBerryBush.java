@@ -1,7 +1,5 @@
 package erebus.block.plants;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
@@ -11,13 +9,13 @@ import erebus.item.ItemMaterials.DATA;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -27,14 +25,11 @@ import java.util.Random;
 public class BlockBerryBush extends Block {
 
 	private String type;
-	@SideOnly(Side.CLIENT)
-	private IIcon fastIcon, fastFruitIcon, fruitIcon;
 
 	public BlockBerryBush(String bushType) {
 		super(Material.plants);
 		type = bushType;
 		setUnlocalizedName(Reference.MOD_ID + "." + type + "BerryBush");
-		setBlockTextureName(Reference.MOD_ID + ":" + type + "BerryBush");
 		setTickRandomly(true);
 		setHardness(0.2F);
 		setLightOpacity(1);
@@ -58,31 +53,13 @@ public class BlockBerryBush extends Block {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (meta > 2)
-			return Minecraft.getMinecraft().gameSettings.fancyGraphics ? fruitIcon : fastFruitIcon;
-
-		return Minecraft.getMinecraft().gameSettings.fancyGraphics ? blockIcon : fastIcon;
-	}
-
-	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon(getTextureName() + "Fancy");
-		fastIcon = reg.registerIcon(getTextureName() + "Fast");
-		fruitIcon = reg.registerIcon(getTextureName() + "FruitedFancy");
-		fastFruitIcon = reg.registerIcon(getTextureName() + "FruitedFast");
-	}
-
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
-		int meta = access.getBlockMetadata(x, y, z);
+	public void setBlockBoundsBasedOnState(IBlockAccess access, BlockPos pos) {
+		int meta = access.getBlockState(pos).getBlock().getMetaFromState(access.getBlockState(pos));
 		float widthReduced = 0, heightReduced = 0;
 
 		switch (meta) {
@@ -112,61 +89,55 @@ public class BlockBerryBush extends Block {
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
-		int meta = world.getBlockMetadata(x, y, z);
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		int meta = world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos));
 		if (rand.nextInt(25) == 0)
 			switch (meta) {
 				case 0:
-					world.setBlock(x, y, z, this, 1, 2);
+					world.setBlockState(pos, this.getStateFromMeta(1), 2);
 					break;
 				case 1:
-					world.setBlock(x, y, z, this, 2, 2);
+					world.setBlockState(pos, this.getStateFromMeta(2), 2);
 					break;
 			}
 		if (meta == 2 && rand.nextInt(50) == 0)
-			world.setBlock(x, y, z, this, 3, 2);
+			world.setBlockState(pos, this.getStateFromMeta(3), 2);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		int meta = world.getBlockMetadata(x, y, z);
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+		int meta = world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos));
 		if (meta == 3) {
 			world.playSoundAtEntity(player, "random.pop", 0.5F, 2.0F);
 			if (!player.inventory.addItemStackToInventory(getBerry()))
-				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), getBerry());
-			world.setBlock(x, y, z, this, 2, 2);
+				Utils.dropStack(world, (int) (pos.getX() + 0.5D), (int) (pos.getY() + 0.5D), (int) (pos.getZ() + 0.5D), getBerry());
+			world.setBlockState(pos, this.getStateFromMeta(2), 2);
 			return true;
 		}
 		return true;
 	}
 
 	@Override
-	public void onBlockHarvested(World world, int x, int y, int z, int id, EntityPlayer player) {
-		int meta = world.getBlockMetadata(x, y, z);
+	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+		int meta = getMetaFromState(state);
 		if (meta == 3)
-			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), getBerry());
+			Utils.dropStack(world, (int) (pos.getX() + 0.5D), (int) (pos.getY() + 0.5D), (int) (pos.getZ() + 0.5D), getBerry());
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x, y - 1, z)) && canBlockStay(world, x, y, z);
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
+		return isValidBlock(world.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())).getBlock());
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x, y - 1, z));
-	}
-
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (world.isAirBlock(x, y - 1, z)) {
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighbour) {
+		int meta = getMetaFromState(state);
+		if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()))) {
 			if (meta == 3)
-				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), getBerry());
-			Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), new ItemStack(Item.getItemFromBlock(this)));
-			world.setBlockToAir(x, y, z);
+				Utils.dropStack(world, (int) (pos.getX() + 0.5D), (int) (pos.getY() + 0.5D), (int) (pos.getZ() + 0.5D), getBerry());
+			Utils.dropStack(world, (int) (pos.getX() + 0.5D), (int) (pos.getY() + 0.5D), (int) (pos.getZ() + 0.5D), new ItemStack(Item.getItemFromBlock(this)));
+			world.setBlockToAir(pos);
 		}
-		canBlockStay(world, x, y, z);
 	}
 
 	private boolean isValidBlock(Block block) {
@@ -174,12 +145,12 @@ public class BlockBerryBush extends Block {
 	}
 
 	@Override
-	public int damageDropped(int meta) {
+	public int damageDropped(IBlockState state) {
 		return 0;
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
+	public int quantityDropped(IBlockState state, int fortune, Random random) {
 		return 1;
 	}
 

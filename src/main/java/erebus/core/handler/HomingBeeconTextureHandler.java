@@ -14,7 +14,7 @@ public class HomingBeeconTextureHandler {
 
 	@SubscribeEvent
 	public void onItemIconRegister(TextureStitchEvent.Pre evt) {
-		if (evt.map.getTextureType() == 1)
+		if (evt.map.getGlTextureId() == 1)
 			evt.map.setTextureEntry("erebus:homingBeecon", HomingBeeconTextureHandler.beecon = new TextureHomingBeecon());
 	}
 }

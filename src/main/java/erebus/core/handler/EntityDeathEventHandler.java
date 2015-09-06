@@ -1,6 +1,5 @@
 package erebus.core.handler;
 
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModAchievements;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBeetleLarva;
@@ -9,8 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class EntityDeathEventHandler {
 	@SubscribeEvent
@@ -26,7 +26,7 @@ public class EntityDeathEventHandler {
 		}
 	}
 
-	private boolean dropedItem(ArrayList<EntityItem> drops, ItemStack target) {
+	private boolean dropedItem(List<EntityItem> drops, ItemStack target) {
 		for (EntityItem entity : drops)
 			if (entity != null && Utils.areStacksTheSame(entity.getEntityItem(), target, false))
 				return true;
