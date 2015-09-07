@@ -1,7 +1,11 @@
 package erebus.core.helper;
 
-import com.mojang.authlib.GameProfile;
-import erebus.lib.Reference;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.UUID;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -24,11 +28,9 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.UUID;
+import com.mojang.authlib.GameProfile;
+
+import erebus.lib.Reference;
 
 public class Utils {
 
@@ -134,26 +136,24 @@ public class Utils {
 	/**
 	 * Extracts 1 item from the first found stack
 	 *
-	 * @param lock
 	 * @param iinventory
 	 * @param side
 	 * @return extracted stack
 	 */
-	public static ItemStack extractFromInventory(ILockableContainer lock, IInventory iinventory, EnumFacing side) {
-		return extractFromInventory(lock, iinventory, side, 1);
+	public static ItemStack extractFromInventory(IInventory iinventory, EnumFacing side) {
+		return extractFromInventory(iinventory, side, 1);
 	}
 
 	/**
 	 * Extracts a stack with size the same or smaller of @param maxStackSize
 	 *
-	 * @param lock
 	 * @param iinventory
 	 * @param side
 	 * @param maxStackSize
 	 * @return extracted stack
 	 */
-	public static ItemStack extractFromInventory(ILockableContainer lock, IInventory iinventory, EnumFacing side, int maxStackSize) {
-		IInventory invt = getInventory(lock, iinventory);
+	public static ItemStack extractFromInventory(IInventory iinventory, EnumFacing side, int maxStackSize) {
+		IInventory invt = getInventory(iinventory);
 		return extractFromSlots(invt, side, maxStackSize, getSlotsFromSide(invt, side));
 	}
 
@@ -178,11 +178,11 @@ public class Utils {
 		return null;
 	}
 
-	public static boolean addEntitytoInventory(ILockableContainer lock, IInventory iinventory, EntityItem entity) {
+	public static boolean addEntitytoInventory(IInventory iinventory, EntityItem entity) {
 		if (entity == null)
 			return false;
 
-		boolean flag = addItemStackToInventory(lock, iinventory, entity.getEntityItem());
+		boolean flag = addItemStackToInventory(iinventory, entity.getEntityItem());
 		if (flag)
 			entity.setDead();
 		else if (entity.getEntityItem().stackSize <= 0)
@@ -190,18 +190,18 @@ public class Utils {
 		return flag;
 	}
 
-	public static boolean addItemStackToInventory(ILockableContainer lock, IInventory iinventory, ItemStack stack) {
-		return addItemStackToInventory(lock, iinventory, stack, EnumFacing.DOWN);
+	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack) {
+		return addItemStackToInventory(iinventory, stack, EnumFacing.DOWN);
 	}
 
-	public static boolean addItemStackToInventory(ILockableContainer lock, IInventory iinventory, ItemStack stack, EnumFacing side) {
+	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack, EnumFacing side) {
 		if (iinventory == null)
 			return false;
 
 		if (stack == null || stack.stackSize <= 0)
 			return false;
 
-		IInventory invt = getInventory(lock, iinventory);
+		IInventory invt = getInventory(iinventory);
 		return addToSlots(invt, stack, side, getSlotsFromSide(invt, side));
 	}
 
@@ -293,7 +293,7 @@ public class Utils {
 		return meta == OreDictionary.WILDCARD_VALUE;
 	}
 
-	public static IInventory getInventory(ILockableContainer lock, IInventory inventory) {
+	public static IInventory getInventory(IInventory inventory) {
 		if (inventory instanceof TileEntityChest) {
 			TileEntityChest chest = (TileEntityChest) inventory;
 			TileEntityChest adjacent = null;
@@ -309,7 +309,7 @@ public class Utils {
 				adjacent = chest.adjacentChestZPos;
 
 			if (adjacent != null)
-				return new InventoryLargeChest("", lock, adjacent);
+				return new InventoryLargeChest("", (ILockableContainer) inventory, adjacent);
 		}
 		return inventory;
 	}
@@ -328,14 +328,14 @@ public class Utils {
 		tile.markDirty();
 	}
 
-	public static boolean inventoryContains(ILockableContainer lock, IInventory iinventory, ItemStack stack, boolean ignoreSize) {
-		return inventoryContains(lock, iinventory, stack, ignoreSize, getSlotsFromSide(iinventory, EnumFacing.DOWN));
+	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize) {
+		return inventoryContains(iinventory, stack, ignoreSize, getSlotsFromSide(iinventory, EnumFacing.DOWN));
 	}
 
-	public static boolean inventoryContains(ILockableContainer lock, IInventory iinventory, ItemStack stack, boolean ignoreSize, int... slots) {
+	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize, int... slots) {
 		if (stack == null)
 			return false;
-		iinventory = getInventory(lock, iinventory);
+		iinventory = getInventory(iinventory);
 
 		int totalSize = 0;
 		for (int slot : slots) {
@@ -352,14 +352,14 @@ public class Utils {
 		return false;
 	}
 
-	public static boolean deleteFromInventory(ILockableContainer lock, IInventory iinventory, EnumFacing side, ItemStack stack) {
-		return deleteFromSlots(lock, iinventory, stack, getSlotsFromSide(iinventory, side));
+	public static boolean deleteFromInventory(IInventory iinventory, EnumFacing side, ItemStack stack) {
+		return deleteFromSlots(iinventory, stack, getSlotsFromSide(iinventory, side));
 	}
 
-	public static boolean deleteFromSlots(ILockableContainer lock, IInventory iinventory, ItemStack stack, int... slots) {
-		iinventory = getInventory(lock, iinventory);
+	public static boolean deleteFromSlots(IInventory iinventory, ItemStack stack, int... slots) {
+		iinventory = getInventory(iinventory);
 
-		if (!inventoryContains(lock, iinventory, stack, false))
+		if (!inventoryContains(iinventory, stack, false))
 			return false;
 		int totalDel = 0;
 		for (int slot : slots) {
