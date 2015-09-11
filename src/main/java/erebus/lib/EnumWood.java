@@ -14,6 +14,8 @@ import erebus.block.BlockErebusLeaves;
 import erebus.block.BlockLogErebus;
 import erebus.block.BlockSlabPlanks;
 import erebus.block.BlockStairPlanks;
+import erebus.block.BlockWoodFence;
+import erebus.block.BlockWoodFenceGate;
 import erebus.block.plants.BlockSaplingErebus;
 import erebus.item.block.ItemBlockLocalised;
 import erebus.item.block.ItemBlockSlabSimple;
@@ -32,10 +34,7 @@ public enum EnumWood {
 	Rotten(true, true, false, false),
 	Marshwood;
 
-	private final boolean hasLog;
-	private final boolean hasPlanks;
-	private final boolean hasSapling;
-	private final boolean hasLeaves;
+	private final boolean hasLog, hasPlanks, hasSapling, hasLeaves;
 
 	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling, boolean hasLeaves) {
 		this.hasLog = hasLog;
@@ -93,6 +92,8 @@ public enum EnumWood {
 	private static final HashMap<EnumWood, Block> stairs = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> saplings = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> leaves = new HashMap<EnumWood, Block>();
+	private static final HashMap<EnumWood, Block> fences = new HashMap<EnumWood, Block>();
+	private static final HashMap<EnumWood, Block> fenceGates = new HashMap<EnumWood, Block>();
 
 	public static void initBlocks() {
 		for (EnumWood wood : values()) {
@@ -117,6 +118,14 @@ public enum EnumWood {
 				GameRegistry.registerBlock(slab, ItemBlockSlabSimple.class, "slabPlanks" + wood.name());
 				Blocks.fire.setFireInfo(slab, 5, 5);
 				slabs.put(wood, slab);
+
+				Block fence = new BlockWoodFence(wood);
+				GameRegistry.registerBlock(fence, ItemBlockLocalised.class, "fence" + wood.name());
+				fences.put(wood, fence);
+
+				Block fenceGate = new BlockWoodFenceGate(wood);
+				GameRegistry.registerBlock(fenceGate, ItemBlockLocalised.class, "fenceGate" + wood.name());
+				fenceGates.put(wood, fenceGate);
 			}
 			if (wood.hasLeaves) {
 				Block leaf = new BlockErebusLeaves(wood);
