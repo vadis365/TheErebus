@@ -83,6 +83,14 @@ public enum EnumWood {
 		return saplings.get(this);
 	}
 
+	public Block getFence() {
+		return fences.get(this);
+	}
+
+	public Block getFenceGate() {
+		return fenceGates.get(this);
+	}
+
 	public String getTranslatedName() {
 		return StatCollector.translateToLocal("wood." + Reference.MOD_ID + "." + name().toLowerCase());
 	}
