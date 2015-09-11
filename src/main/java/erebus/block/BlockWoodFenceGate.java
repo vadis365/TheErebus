@@ -20,7 +20,7 @@ public class BlockWoodFenceGate extends BlockFenceGate {
 		setResistance(5.0F);
 		setStepSound(soundTypeWood);
 		setCreativeTab(ModTabs.blocks);
-		setBlockName(Reference.MOD_ID + ".fenceGame" + wood.name());
+		setBlockName(Reference.MOD_ID + ".fenceGate" + wood.name());
 	}
 
 	@Override
