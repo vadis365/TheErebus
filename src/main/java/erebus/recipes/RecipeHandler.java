@@ -393,7 +393,7 @@ public class RecipeHandler {
 		OreDictionary.registerOre("foodMushroom", new ItemStack(Blocks.brown_mushroom));
 
 		//Honey
-		OreDictionary.registerOre("honeyDrop", ItemMaterials.DATA.honeyDrip.createStack());
+		OreDictionary.registerOre("dropHoney", ItemMaterials.DATA.honeyDrip.createStack());
 		OreDictionary.registerOre("bucketHoney", new ItemStack(ModItems.bucketHoney));
 		OreDictionary.registerOre("bucketHoney", new ItemStack(ModItems.bambucketHoney));
 
