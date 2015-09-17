@@ -392,6 +392,11 @@ public class RecipeHandler {
 		OreDictionary.registerOre("foodMushroom", new ItemStack(Blocks.red_mushroom));
 		OreDictionary.registerOre("foodMushroom", new ItemStack(Blocks.brown_mushroom));
 
+		//Honey
+		OreDictionary.registerOre("dropHoney", ItemMaterials.DATA.honeyDrip.createStack());
+		OreDictionary.registerOre("bucketHoney", new ItemStack(ModItems.bucketHoney));
+		OreDictionary.registerOre("bucketHoney", new ItemStack(ModItems.bambucketHoney));
+
 		if (ConfigHandler.INSTANCE.lead) {
 			OreDictionary.registerOre("ingotLead", ItemMaterials.DATA.ingotLead.createStack());
 			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.oreLead));
