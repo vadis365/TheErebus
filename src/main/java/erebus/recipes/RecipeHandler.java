@@ -157,7 +157,7 @@ public class RecipeHandler {
 
 		// Bamboo
 		addShapedRecipe(new ItemStack(ModItems.bambucket, 1, 0), " S ", "B B", " B ", 'S', Items.string, 'B', ItemMaterials.DATA.bamboo.createStack());
-		addShapedRecipe(new ItemStack(ModItems.bambucketHoney), "RRR", "RBR", "RRR", 'B', new ItemStack(ModItems.bambucket, 1, 0), 'R', ItemMaterials.DATA.honeyDrip.createStack());
+		addShapedRecipe(new ItemStack(ModItems.bambucketHoney), "RRR", "RBR", "RRR", 'B', new ItemStack(ModItems.bambucket, 1, 0), 'R', "dropHoney");
 		addShapedRecipe(new ItemStack(ModBlocks.planks, 1, EnumWood.Bamboo.ordinal()), "##", "##", '#', ItemMaterials.DATA.bamboo.createStack());
 		addShapedRecipe(new ItemStack(ModBlocks.bambooCrate), "bpb", "p p", "bpb", 'p', new ItemStack(ModBlocks.planks, 1, EnumWood.Bamboo.ordinal()), 'b', ItemMaterials.DATA.bamboo.createStack());
 		addShapedRecipe(new ItemStack(ModBlocks.bambooLadder, 1), "BBB", "S S", "BBB", 'B', ItemMaterials.DATA.bamboo.createStack(), 'S', Items.string);
@@ -170,8 +170,8 @@ public class RecipeHandler {
 		addShapelessRecipe(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.melonade.ordinal()), new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.melon));
 		addShapelessRecipe(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.melonadeSparkly.ordinal()), new ItemStack(Items.potionitem, 1, 0), new ItemStack(Items.speckled_melon));
 		addShapelessRecipe(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.larvaeOnStick.ordinal()), "stickWood", new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.larvaCooked.ordinal()), new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.larvaCooked.ordinal()), new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.larvaCooked.ordinal()));
-		addShapedRecipe(new ItemStack(ModItems.food, 2, ItemErebusFood.FoodType.honeySandwich.ordinal()), " B ", "RRR", " B ", 'B', new ItemStack(Items.bread), 'R', ItemMaterials.DATA.honeyDrip.createStack());
-		addShapedRecipe(new ItemStack(ModBlocks.honeyTreat, 1), "SRS", "RBR", "SRS", 'S', new ItemStack(Items.sugar), 'B', new ItemStack(Items.bread), 'R', ItemMaterials.DATA.honeyDrip.createStack());
+		addShapedRecipe(new ItemStack(ModItems.food, 2, ItemErebusFood.FoodType.honeySandwich.ordinal()), " B ", "RRR", " B ", 'B', new ItemStack(Items.bread), 'R', "dropHoney");
+		addShapedRecipe(new ItemStack(ModBlocks.honeyTreat, 1), "SRS", "RBR", "SRS", 'S', new ItemStack(Items.sugar), 'B', new ItemStack(Items.bread), 'R', "dropHoney");
 
 		// Miscellaneous
 		addShapedRecipe(new ItemStack(ModBlocks.mirBrick), "xy", "yx", 'x', Items.clay_ball, 'y', ItemMaterials.DATA.mudBrick.createStack());
@@ -199,7 +199,7 @@ public class RecipeHandler {
 		ItemStack diamondPick = new ItemStack(Items.diamond_pickaxe);
 		diamondPick.addEnchantment(Enchantment.silkTouch, 1);
 		GameRegistry.addRecipe(EnchantSensitiveRecipe.makeRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', ItemMaterials.DATA.scorpionPincer.createStack(), 'D', diamondPick, 'C', "chestWood"));
-		addShapedRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', ItemMaterials.DATA.honeyDrip.createStack(), 'B', Items.bucket);
+		addShapedRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', "dropHoney", 'B', Items.bucket);
 		addShapedRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', "ingotIron", '$', new ItemStack(ModBlocks.amber, 1, 1), '0', ItemMaterials.DATA.nectar.createStack());
 		addShapedRecipe(new ItemStack(ModBlocks.jadeBlock), "xxx", "xxx", "xxx", 'x', "gemJade");
 		addShapelessRecipe(ItemMaterials.DATA.jade.createStack(9), "blockJade");
