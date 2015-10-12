@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -55,6 +56,11 @@ public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
 	public void getSubBlocks(Item id, CreativeTabs creativeTab, List list) {
 		for (int a = 0; a < 9; a++)
 			list.add(new ItemStack(id, 1, a));
+	}
+
+	@Override
+	public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
+		return true;
 	}
 
 	@Override
