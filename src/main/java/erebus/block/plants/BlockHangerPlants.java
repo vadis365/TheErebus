@@ -158,6 +158,7 @@ public class BlockHangerPlants extends BlockBush {
 
 		if (meta == dataHangerFruit) {
 			ItemStack item = new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.darkFruit.ordinal());
+			world.playSoundAtEntity(player, "random.pop", 0.5F, 2.0F);
 			if (!player.inventory.addItemStackToInventory(item))
 				Utils.dropStack(world, (int) (x + 0.5D), (int) (y + 0.5D), (int) (z + 0.5D), item);
 			world.setBlock(x, y, z, this, dataHanger4, 2);
