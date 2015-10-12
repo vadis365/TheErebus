@@ -93,4 +93,9 @@ public class BlockLogErebus extends BlockLog {
 			}
 		super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 	}
+	
+	@Override
+	public int damageDropped(int meta) {
+		return 0;
+	}
 }
