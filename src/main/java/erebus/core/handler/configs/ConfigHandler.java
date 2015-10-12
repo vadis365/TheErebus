@@ -15,7 +15,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows;
 
 	public boolean disableThaumcraft = false, disableFMP = false;
 
@@ -54,7 +54,8 @@ public class ConfigHandler {
 		bioluminescence = config.get(Configuration.CATEGORY_GENERAL, "Glowing bugs emit light", true).getBoolean(true);
 		glowshrooms = config.get(Configuration.CATEGORY_GENERAL, "Add Glowshrooms to World generation", true).getBoolean(true);
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
-
+		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
+		
 		lead = config.get("Ores", "Generate lead", false).getBoolean(false);
 		silver = config.get("Ores", "Generate silver", false).getBoolean(false);
 		copper = config.get("Ores", "Generate copper", false).getBoolean(false);

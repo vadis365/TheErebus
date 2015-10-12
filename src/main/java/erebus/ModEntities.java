@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityAnimatedChest;
@@ -22,6 +23,7 @@ import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityCicada;
+import erebus.entity.EntityCrushling;
 import erebus.entity.EntityCrushroom;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityExtractedBlock;
@@ -54,7 +56,6 @@ import erebus.entity.EntitySnapper;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntitySporeBall;
-import erebus.entity.EntityCrushling;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
@@ -151,7 +152,8 @@ public class ModEntities {
 		registerEntity(80, EntityThrownSand.class, "thrownSand");
 
 		// Spawn conditions
-		EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.monster, BiomeGenBase.hell);
+		if (ConfigHandler.INSTANCE.netherWidows)
+			EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.monster, BiomeGenBase.hell);
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name) {
