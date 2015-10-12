@@ -263,7 +263,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				moveToSilo();
 				Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 				if (block == ModBlocks.siloTank)
-					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
+					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 2D) {
 						addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 						canAddToSilo = false;
 						canPickupItems = true;
@@ -280,7 +280,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				moveToSilo();
 				Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
 				if (block == ModBlocks.siloTank)
-					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 1.5D) {
+					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 2D) {
 						getStackFromSilo();
 						canCollectFromSilo = false;
 					}
