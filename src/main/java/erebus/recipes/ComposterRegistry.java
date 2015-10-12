@@ -16,6 +16,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
+import erebus.item.ItemMaterials;
 
 public class ComposterRegistry {
 
@@ -33,6 +34,17 @@ public class ComposterRegistry {
 		register(Items.wooden_sword);
 		register(Items.wheat);
 		register(Items.poisonous_potato);
+		register(ItemMaterials.DATA.darkFruitSeeds.createStack());
+		register(ItemMaterials.DATA.weepingBluePetal.createStack());
+		register(ItemMaterials.DATA.papyrus.createStack());
+		register(ItemMaterials.DATA.nettleleaves.createStack());
+		register(ItemMaterials.DATA.nettleflowers.createStack());
+		register(ItemMaterials.DATA.mossBall.createStack());
+		register(ItemMaterials.DATA.yellowDottedFungus.createStack());
+		register(ItemMaterials.DATA.jadeBerries.createStack());
+		register(ItemMaterials.DATA.snapperRoot.createStack());
+		register(ItemMaterials.DATA.bamboo.createStack());
+		register(ItemMaterials.DATA.bambooShoot.createStack());
 
 		blacklist.add(new ItemStack(ModBlocks.wallPlants, 1, OreDictionary.WILDCARD_VALUE));
 	}
