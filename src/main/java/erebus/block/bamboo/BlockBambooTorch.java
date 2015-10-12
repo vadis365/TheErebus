@@ -102,10 +102,8 @@ public class BlockBambooTorch extends Block {
 			world.setBlockToAir(x, y - 1, z);
 		if (world.getBlock(x, y + 1, z) == this)
 			world.setBlockToAir(x, y + 1, z);
-		if (world.getBlock(x, y, z) == this) {
+		if (world.getBlock(x, y + 1, z) == this || world.getBlock(x, y - 1, z) == this)
 			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlockToAir(x, y + 1, z);
-		}
 	}
 
 	@Override
