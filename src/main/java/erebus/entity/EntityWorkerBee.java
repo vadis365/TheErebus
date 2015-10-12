@@ -59,7 +59,7 @@ public class EntityWorkerBee extends EntityTameable {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(22, new Integer(0));
+		dataWatcher.addObject(22, new Integer(2));
 		dataWatcher.addObject(23, new Byte((byte) 0));
 		dataWatcher.addObject(24, new Integer(0));
 		dataWatcher.addObject(25, new Integer(0));
