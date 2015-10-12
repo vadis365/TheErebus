@@ -67,7 +67,7 @@ public class SmallPlant extends BlockTallGrass {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 			ret.add(new ItemStack(ModItems.cabbageSeeds, 1, 0));
 			return ret;
-		} else if ("desertShrub".equals(name) || "mireCoral".equals(name) || "fireBloom".equals(name) || "swampPlant".equals(name)) {
+		} else if ("desertShrub".equals(name) || "mireCoral".equals(name) || "fireBloom".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 			ret.add(new ItemStack(this));
 			return ret;
