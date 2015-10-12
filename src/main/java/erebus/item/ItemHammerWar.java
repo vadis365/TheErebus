@@ -15,8 +15,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
+import erebus.item.ItemMaterials.DATA;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
@@ -41,6 +43,11 @@ public class ItemHammerWar extends ItemSword {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.reinforcedPlateExo.ordinal();
 	}
 
 	@Override
