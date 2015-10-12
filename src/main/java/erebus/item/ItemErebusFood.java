@@ -166,7 +166,8 @@ public final class ItemErebusFood extends ItemFood {
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
 		is.stackSize--;
 		player.getFoodStats().addStats(getHealAmount(is, world, player), getSaturationModifier(is, world, player));
-		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		if(FoodType.values()[is.getItemDamage()] != FoodType.cabbage)
+			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		onFoodEaten(is, world, player);
 
 		Item item = null;
