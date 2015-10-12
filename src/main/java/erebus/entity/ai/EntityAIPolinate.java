@@ -55,7 +55,7 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	protected void afterPollination() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		if (bee.getNectarPoints() < 127)
-			bee.setNectarPoints(bee.getNectarPoints() + 1);
+			bee.setNectarPoints(bee.getNectarPoints() + 2);
 		if (bee.getTameState() == 0) {
 			bee.setBeePollinating(false);
 			bee.setBeeFlying(true);
