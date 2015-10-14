@@ -232,7 +232,9 @@ public class RecipeHandler {
 		addShapelessRecipe(ItemMaterials.DATA.stewPot.createStack(), Items.cauldron, "stickWood");
 		addShapelessRecipe(ItemMaterials.DATA.titanStew.createStack(), ItemMaterials.DATA.stewPot.createStack(), new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.titanChop.ordinal()), Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom");
 		addShapelessRecipe(ItemMaterials.DATA.titanStew.createStack(), ItemMaterials.DATA.stewPot.createStack(), Items.beef, Items.beef, Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom");
-
+		addShapedRecipe(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 0), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.dye, 1, 2), 'v', ItemMaterials.DATA.supernaturalvelocity.createStack(), 'p', new ItemStack(ModBlocks.wallPlants, 1, 0));
+		addShapedRecipe(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 1), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.dye, 1, 4), 'v', ItemMaterials.DATA.supernaturalvelocity.createStack(), 'p', new ItemStack(ModBlocks.wallPlants, 1, 1));
+		
 		// Smoothies
 		// Have to figure this out...
 		addShapelessRecipe(ItemMaterials.DATA.smoothieGlass.createStack(), Items.glass_bottle, Items.glass_bottle, Items.glass_bottle);
