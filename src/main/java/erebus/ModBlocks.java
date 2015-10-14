@@ -110,6 +110,7 @@ import erebus.block.plants.BlockMireCoral;
 import erebus.block.plants.BlockThorns;
 import erebus.block.plants.BlockTurnip;
 import erebus.block.plants.BlockWallPlants;
+import erebus.block.plants.BlockWallPlantsCultivated;
 import erebus.block.plants.DoubleHeightPlant;
 import erebus.block.plants.ErebusHugeMushroom;
 import erebus.block.plants.SmallMushroom;
@@ -194,6 +195,7 @@ public class ModBlocks {
 	public static final Block blockTurnip = new BlockTurnip();
 	public static final Block hanger = new BlockHangerPlants();
 	public static final Block wallPlants = new BlockWallPlants();
+	public static final Block wallPlantsCultivated = new BlockWallPlantsCultivated();
 	public static final Block bigBulbCappedMushroom = new ErebusHugeMushroom(0, "bulbcapped", bulbCapped);
 	public static final Block bigGreenMushroom = new ErebusHugeMushroom(1, "green", greenMushroom);
 	public static final Block bigBundleMushroom = new ErebusHugeMushroom(2, "bundleshroom", bundleshroom);

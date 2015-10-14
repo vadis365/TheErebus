@@ -160,6 +160,9 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 
 				if (block == ModBlocks.wallPlants && is.getItemDamage() == 1)
 					return 800;
+				
+				if (block == ModBlocks.wallPlantsCultivated && is.getItemDamage() == 1)
+					return 400;
 			}
 		}
 

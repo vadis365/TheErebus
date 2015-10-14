@@ -26,6 +26,30 @@ tile.erebus.sapling.name=%s Sapling
 tile.erebus.slabPlanks.name=%s Slab
 tile.erebus.slabStone.name=%s Slab
 
+tile.erebus.fenceBaobab.name=Baobab Fence
+tile.erebus.fenceEucalyptus.name=Eucalyptus Fence
+tile.erebus.fenceMahogany.name=Mahogany Fence
+tile.erebus.fenceMossbark.name=Mossbark Fence
+tile.erebus.fenceAsper.name=Asper Fence
+tile.erebus.fenceCypress.name=Cypress Fence
+tile.erebus.fenceSap.name=Sap Fence
+tile.erebus.fenceWhite.name=White Fence
+tile.erebus.fenceBamboo.name=Bamboo Fence
+tile.erebus.fenceRotten.name=Rotten Fence
+tile.erebus.fenceMarshwood.name=Marshwood Fence
+
+tile.erebus.fenceGateBaobab.name=Baobab Fence Gate
+tile.erebus.fenceGateEucalyptus.name=Eucalyptus Fence Gate
+tile.erebus.fenceGateMahogany.name=Mahogany Fence Gate
+tile.erebus.fenceGateMossbark.name=Mossbark Fence Gate
+tile.erebus.fenceGateAsper.name=Asper Fence Gate
+tile.erebus.fenceGateCypress.name=Cypress Fence Gate
+tile.erebus.fenceGateSap.name=Sap Fence Gate
+tile.erebus.fenceGateWhite.name=White Fence Gate
+tile.erebus.fenceGateBamboo.name=Bamboo Fence Gate
+tile.erebus.fenceGateRotten.name=Rotten Fence Gate
+tile.erebus.fenceGateMarshwood.name=Marshwood Fence Gate
+
 tile.erebus.log_scorched.name=Scorched Wood
 tile.erebus.planks_scorched.name=Scorched Planks
 tile.erebus.log_rotten.name=Rotten Wood
@@ -200,6 +224,34 @@ tile.erebus.glowshroomStalk.name=Glowshroom Stalk
 
 tile.erebus.wallPlants_0.name=Moss
 tile.erebus.wallPlants_1.name=Mould
+tile.erebus.wallPlants_2.name=Moss
+tile.erebus.wallPlants_3.name=Moss
+tile.erebus.wallPlants_4.name=Moss
+tile.erebus.wallPlants_5.name=Moss
+tile.erebus.wallPlants_6.name=Moss
+tile.erebus.wallPlants_7.name=Moss
+tile.erebus.wallPlants_8.name=Mould
+tile.erebus.wallPlants_9.name=Mould
+tile.erebus.wallPlants_10.name=Mould
+tile.erebus.wallPlants_11.name=Mould
+tile.erebus.wallPlants_12.name=Mould
+tile.erebus.wallPlants_13.name=Mould
+
+tile.erebus.wallPlantsCultivated_0.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_1.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_2.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_3.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_4.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_5.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_6.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_7.name=Cultivated Moss
+tile.erebus.wallPlantsCultivated_8.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_9.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_10.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_11.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_12.name=Cultivated Mould
+tile.erebus.wallPlantsCultivated_13.name=Cultivated Mould
+
 tile.erebus.hanger.name=Erebus Hanger
 tile.erebus.turnipsCrop.name=Turnips
 tile.erebus.cabbageCrop.name=Cabbage
