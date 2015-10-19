@@ -24,7 +24,7 @@ import erebus.lib.EnumWood;
 
 public class RecipeHandler {
 
-	public static Item[] swordType = new Item[] { Items.wooden_sword, Items.stone_sword, Items.iron_sword, Items.golden_sword, Items.diamond_sword, ModItems.jadeSword, ModItems.scorpionPincer, ModItems.waspSword, ModItems.warHammer};
+	public static Item[] swordType = new Item[] { Items.wooden_sword, Items.stone_sword, Items.iron_sword, Items.golden_sword, Items.diamond_sword, ModItems.jadeSword, ModItems.scorpionPincer, ModItems.waspSword, ModItems.warHammer };
 	public static Item[] axeType = new Item[] { Items.wooden_axe, Items.stone_axe, Items.iron_axe, Items.golden_axe, Items.diamond_axe, ModItems.jadeAxe };
 
 	public static void init() {
@@ -234,7 +234,7 @@ public class RecipeHandler {
 		addShapelessRecipe(ItemMaterials.DATA.titanStew.createStack(), ItemMaterials.DATA.stewPot.createStack(), Items.beef, Items.beef, Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.cabbage.ordinal()), "foodMushroom", "foodMushroom");
 		addShapedRecipe(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 0), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.dye, 1, 2), 'v', ItemMaterials.DATA.supernaturalvelocity.createStack(), 'p', new ItemStack(ModBlocks.wallPlants, 1, 0));
 		addShapedRecipe(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 1), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.dye, 1, 4), 'v', ItemMaterials.DATA.supernaturalvelocity.createStack(), 'p', new ItemStack(ModBlocks.wallPlants, 1, 1));
-		
+
 		// Smoothies
 		// Have to figure this out...
 		addShapelessRecipe(ItemMaterials.DATA.smoothieGlass.createStack(), Items.glass_bottle, Items.glass_bottle, Items.glass_bottle);
@@ -285,10 +285,10 @@ public class RecipeHandler {
 		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.MudUmbergolem), "XXX", "XUX", "XXX", 'X', ModBlocks.mudBricks, 'U', ModBlocks.umberGolemStatue);
 		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.IronUmbergolem), "XXX", "XUX", "XXX", 'X', "blockIron", 'U', ModBlocks.umberGolemStatue);
 		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.GoldUmbergolem), "XXX", "XUX", "XXX", 'X', "blockGold", 'U', ModBlocks.umberGolemStatue);
-		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.JadeUmbergolem), "XXX", "XUX", "XXX", 'X', "blockjade", 'U', ModBlocks.umberGolemStatue);
+		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.JadeUmbergolem), "XXX", "XUX", "XXX", 'X', "blockJade", 'U', ModBlocks.umberGolemStatue);
 
-		// Umbergolem Statue 
-		addShapedRecipe(new ItemStack(ModBlocks.umberGolemStatue), " H ", "LCL", " X ", 'H', ItemMaterials.DATA.umberGolemHead.createStack(), 'L', ItemMaterials.DATA.umberGolemClaw.createStack(), 'C', ItemMaterials.DATA.umberGolemCore.createStack(), 'X', ItemMaterials.DATA.umberGolemLegs.createStack()); 
+		// Umbergolem Statue
+		addShapedRecipe(new ItemStack(ModBlocks.umberGolemStatue), " H ", "LCL", " X ", 'H', ItemMaterials.DATA.umberGolemHead.createStack(), 'L', ItemMaterials.DATA.umberGolemClaw.createStack(), 'C', ItemMaterials.DATA.umberGolemCore.createStack(), 'X', ItemMaterials.DATA.umberGolemLegs.createStack());
 
 		// Animation Magic
 		addShapedRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ModItems.soulCrystal, 'z', "stickWood");
