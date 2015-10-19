@@ -168,6 +168,8 @@ public final class ItemErebusFood extends ItemFood {
 		player.getFoodStats().addStats(getHealAmount(is, world, player), getSaturationModifier(is, world, player));
 		if(FoodType.values()[is.getItemDamage()] != FoodType.cabbage)
 			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		else
+			world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 		onFoodEaten(is, world, player);
 
 		Item item = null;
@@ -181,7 +183,6 @@ public final class ItemErebusFood extends ItemFood {
 				item = Items.glass_bottle;
 				break;
 			case cabbage:
-				world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 				break;
 			case titanStewCooked:
 				is = ItemMaterials.DATA.stewPot.createStack();
