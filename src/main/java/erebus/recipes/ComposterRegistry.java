@@ -45,9 +45,9 @@ public class ComposterRegistry {
 		register(ItemMaterials.DATA.snapperRoot.createStack());
 		register(ItemMaterials.DATA.bamboo.createStack());
 		register(ItemMaterials.DATA.bambooShoot.createStack());
-
-		blacklist.add(new ItemStack(ModBlocks.wallPlants, 1, OreDictionary.WILDCARD_VALUE));
-		blacklist.add(new ItemStack(ModBlocks.wallPlantsCultivated, 1, OreDictionary.WILDCARD_VALUE));
+		
+		blacklist.add(new ItemStack(ModBlocks.wallPlants, 1, 1));
+		blacklist.add(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 1));
 	}
 
 	private static void register(Item item) {
