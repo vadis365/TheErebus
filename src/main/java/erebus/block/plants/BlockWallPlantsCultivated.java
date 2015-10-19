@@ -241,7 +241,7 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, ISub
 	}
 
 	private boolean isValidBlock(Block block) {
-		return block == EnumWood.Rotten.getLog() || block == ModBlocks.umberstone;
+		return block == EnumWood.Rotten.getLog();
 	}
 
 	@Override
