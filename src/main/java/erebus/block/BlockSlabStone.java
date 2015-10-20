@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks.ISubBlocksBlock;
@@ -45,6 +46,12 @@ public class BlockSlabStone extends Block implements ISubBlocksBlock {
 
 	public BlockSlabStone(Block base) {
 		this(base, 0);
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		int meta = world.getBlockMetadata(x, y, z);
+		return meta == 2 || side == ForgeDirection.UP && meta == 1 || side == ForgeDirection.DOWN && meta == 0;
 	}
 
 	@Override

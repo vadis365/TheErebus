@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -241,7 +240,7 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, ISub
 	}
 
 	private boolean isValidBlock(Block block) {
-		return block == EnumWood.Rotten.getLog() || block == ModBlocks.umberstone;
+		return block == EnumWood.Rotten.getLog();
 	}
 
 	@Override
@@ -370,26 +369,14 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, ISub
 	public void updateTick(World world, int x, int y, int z, Random rand) {
 		int meta = world.getBlockMetadata(x, y, z);
 		int attempt = 0;
-	//	byte radius = 4;
-	//	int distance = 5;
 		int xx;
 		int yy;
 		int zz;
-	/*	for (xx = x - radius; xx <= x + radius; ++xx)
-			for (zz = z - radius; zz <= z + radius; ++zz)
-				for (yy = y - radius; yy <= y + radius; ++yy)
-					if (world.getBlock(xx, zz, yy) == this) {
-						--distance;
-						if (distance <= 0)
-							return;
-					} */
-
-
-			for (attempt = 0; attempt < 52; attempt++) {
-				xx = x + rand.nextInt(3) - 1;
-				yy = y + rand.nextInt(3) - 1;
-				zz = z + rand.nextInt(3) - 1;
-				if (world.isAirBlock(xx, yy, zz)) {
+		for (attempt = 0; attempt < 52; attempt++) {
+			xx = x + rand.nextInt(3) - 1;
+			yy = y + rand.nextInt(3) - 1;
+			zz = z + rand.nextInt(3) - 1;
+			if (world.isAirBlock(xx, yy, zz)) {
 				int offset = 1;
 				int randomiseSide = rand.nextInt(6);
 
@@ -447,8 +434,8 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, ISub
 							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 13, 2);
 						break;
 					}
-				}
 			}
+		}
 		if (rand.nextInt(100) == 0)
 			world.setBlockToAir(x, y, z);
 	}

@@ -33,10 +33,10 @@ public class PacketSound extends AbstractClientPacket {
 
 		switch (type) {
 			case SOUND_VELOCITY_USE:
-				s = "erebus:CentipedeSound";
+				s = "erebus:centipedesound";
 				break;
 			case SOUND_CAMO_USE:
-				s = "erebus:MantisSound";
+				s = "erebus:mantissound";
 				break;
 		}
 
