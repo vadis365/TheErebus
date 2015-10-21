@@ -118,7 +118,7 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 
 		// chest and spawners
 		world.setBlock(x, y + 1, z, Blocks.chest, 0, 3);
-		TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y, z);
+		TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y + 1, z);
 		if (chest != null)
 			LootUtil.generateLoot(chest, rand, chestLoot, 5, 15);
 		world.setBlock(x, y + 2, z, ModBlocks.dragonflySpawner, 0, 3);
