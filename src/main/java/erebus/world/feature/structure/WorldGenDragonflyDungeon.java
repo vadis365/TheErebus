@@ -71,26 +71,45 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 					if (Math.round(Math.sqrt(dSqCylinder)) < 6)
 						if (dSqCylinder <= Math.pow(6, 2.0D))
 							world.setBlock(xx, y, zz, ModBlocks.erebusFlower, 15, 3);
+					if (Math.round(Math.sqrt(dSqCylinder)) == 5)
+						if (dSqCylinder <= Math.pow(6, 2.0D))
+							world.setBlock(xx, y + 1, zz, ModBlocks.erebusFlower, 15, 3);
 				}
 
 		// air gap in lily pad
 		int direction = rand.nextInt(4);
 
 		if (direction == 0)
-			for (int airX = 5; airX > 1; airX--)
+			for (int airX = 5; airX > 1; airX--) {
 				world.setBlock(x + airX, y, z, Blocks.air, 0, 3);
+				world.setBlock(x + airX, y + 1, z, Blocks.air, 0, 3);
+				world.setBlock(x + airX, y + 1, z - 1, ModBlocks.erebusFlower, 15, 3);
+				world.setBlock(x + airX, y + 1, z + 1, ModBlocks.erebusFlower, 15, 3);
+			}
 
 		if (direction == 1)
-			for (int airZ = 5; airZ > 1; airZ--)
+			for (int airZ = 5; airZ > 1; airZ--){
 				world.setBlock(x, y, z + airZ, Blocks.air, 0, 3);
+				world.setBlock(x, y + 1, z + airZ, Blocks.air, 0, 3);
+				world.setBlock(x + 1, y + 1, z + airZ, ModBlocks.erebusFlower, 15, 3);
+				world.setBlock(x - 1, y + 1, z + airZ, ModBlocks.erebusFlower, 15, 3);
+			}
 
 		if (direction == 2)
-			for (int airX = -5; airX < -1; airX++)
+			for (int airX = -5; airX < -1; airX++) {
 				world.setBlock(x + airX, y, z, Blocks.air, 0, 3);
+				world.setBlock(x + airX, y + 1, z, Blocks.air, 0, 3);
+				world.setBlock(x + airX, y + 1, z - 1, ModBlocks.erebusFlower, 15, 3);
+				world.setBlock(x + airX, y + 1, z + 1, ModBlocks.erebusFlower, 15, 3);
+			}
 
 		if (direction == 3)
-			for (int airZ = -5; airZ < -1; airZ++)
+			for (int airZ = -5; airZ < -1; airZ++) {
 				world.setBlock(x, y, z + airZ, Blocks.air, 0, 3);
+				world.setBlock(x, y + 1, z + airZ, Blocks.air, 0, 3);
+				world.setBlock(x + 1, y + 1, z + airZ, ModBlocks.erebusFlower, 15, 3);
+				world.setBlock(x - 1, y + 1, z + airZ, ModBlocks.erebusFlower, 15, 3);
+			}
 
 		// flower stem
 		world.setBlock(x + 1, y + 1, z, ModBlocks.erebusFlower, 15, 3);
