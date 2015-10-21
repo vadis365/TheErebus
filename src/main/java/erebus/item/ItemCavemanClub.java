@@ -9,7 +9,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 import erebus.ModMaterials;
 import erebus.ModTabs;
-import erebus.world.feature.structure.WorldGenUmbergolemHut;
+import erebus.world.feature.structure.WorldGenDragonflyDungeon;
 
 public class ItemCavemanClub extends ItemSword {
 
@@ -28,7 +28,7 @@ public class ItemCavemanClub extends ItemSword {
     public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
         Random rand = new Random();
         if( !world.isRemote && player.isSneaking() ) {
-            new WorldGenUmbergolemHut().generate(world, rand, x, y, z);
+            new WorldGenDragonflyDungeon().generate(world, rand, x, y + 1, z);
             return true;
         }
         return false;

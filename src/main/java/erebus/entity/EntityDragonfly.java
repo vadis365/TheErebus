@@ -257,26 +257,20 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	public boolean getCanSpawnHere() {
 		int var1 = MathHelper.floor_double(boundingBox.minY);
-		if (var1 >= 63)
+		if (var1 >= 100)
 			return false;
 		else {
 			int var2 = MathHelper.floor_double(posX);
 			int var3 = MathHelper.floor_double(posZ);
 			int var4 = worldObj.getBlockLightValue(var2, var1, var3);
-			byte var5 = 4;
-			Calendar var6 = worldObj.getCurrentDate();
-			if ((var6.get(2) + 1 != 10 || var6.get(5) < 20) && (var6.get(2) + 1 != 11 || var6.get(5) > 3)) {
-				if (rand.nextBoolean())
-					return false;
-			} else
-				var5 = 7;
+			byte var5 = 7;
 			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
 		}
 	}
 
 	@Override
 	public int getMaxSpawnedInChunk() {
-		return 3;
+		return 6;
 	}
 
 	@Override
