@@ -127,6 +127,7 @@ public class EntityBeetle extends EntityAnimal {
 			is.stackSize--;
 			setTame((byte) 1);
 			shagCount = 600;
+			worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
 			return true;
 		}
 		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.beetleTamingAmulet.ordinal()) {

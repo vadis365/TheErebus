@@ -254,6 +254,7 @@ public class EntityTitanBeetle extends EntityTameable {
 		if (is != null && is.getItem() == ModItems.turnip && !shagging() && getTameState() != 0) {
 			is.stackSize--;
 			shagCount = 600;
+			worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
 			return true;
 		}
 		if (is == null && getTameState() >= 2) {
