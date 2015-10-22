@@ -68,15 +68,13 @@ public class BlockBambooTorch extends Block {
 	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
 		Block block = world.getBlock(x, y - 1, z);
 
-		if (world.getBlockMetadata(x, y, z) == 0) {
-			if (block == null || !world.isAirBlock(x, y + 1, z))
-				return false;
-			if (block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
-				return true;
-			if (!block.isLeaves(world, x, y - 1, z) && !block.isOpaqueCube())
-				return false;
-			world.setBlock(x, y + 1, z, this, 1, 3);
-		}
+		if (block == null || !world.isAirBlock(x, y + 1, z))
+			return false;
+		if (block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
+			return true;
+		if (block.isLeaves(world, x, y - 1, z))
+			return false;
+		world.setBlock(x, y + 1, z, this, 1, 3);
 		return block.getMaterial().blocksMovement();
 	}
 
