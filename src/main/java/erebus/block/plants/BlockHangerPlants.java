@@ -2,7 +2,6 @@ package erebus.block.plants;
 
 import java.util.Random;
 
-import erebus.item.ItemErebusFood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,6 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
+import erebus.item.ItemErebusFood;
 import erebus.item.ItemMaterials.DATA;
 
 public class BlockHangerPlants extends BlockBush {
@@ -113,6 +113,10 @@ public class BlockHangerPlants extends BlockBush {
 		// Seeds
 		if (meta == dataHangerFruit && rand.nextInt(10) == 0)
 			world.setBlock(x, y, z, this, dataHangerSeed, 2);
+
+		// Revert Seeds
+		if (meta == dataHangerSeed && rand.nextInt(10) == 0)
+			world.setBlock(x, y, z, this, dataHanger4, 2);
 	}
 
 	@Override
