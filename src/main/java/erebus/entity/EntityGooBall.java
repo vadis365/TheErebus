@@ -10,6 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,6 +20,8 @@ import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityGooBall extends EntityThrowable {
+
+	private boolean playedSound = false;
 
 	public EntityGooBall(World world) {
 		super(world);
@@ -51,9 +54,8 @@ public class EntityGooBall extends EntityThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
 
-		if (mop.entityHit != null)
+		if (mop.entityHit != null) {
 			if (mop.entityHit instanceof EntityPlayer) {
-
 				if (!worldObj.isRemote) {
 					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 5 * 20, 3));
 					setDead();
@@ -61,7 +63,14 @@ public class EntityGooBall extends EntityThrowable {
 				if (worldObj.isRemote)
 					PacketPipeline.sendToAllAround(mop.entityHit, 64D, new PacketParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
 			}
-		worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
+			if (mop.typeOfHit != null && mop.typeOfHit == MovingObjectType.BLOCK)
+				setDead();
+		}
+
+		if(!playedSound) {
+			worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
+			playedSound  = true;
+		}
 	}
 
 	@Override
