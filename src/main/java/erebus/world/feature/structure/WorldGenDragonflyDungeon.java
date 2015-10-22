@@ -3,6 +3,7 @@ package erebus.world.feature.structure;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
@@ -25,12 +26,13 @@ import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
 
 public class WorldGenDragonflyDungeon extends WorldGenerator {
+	private Block lillyPad = ModBlocks.giantLilyPad;
 
-	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
+	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(ModItems.materials).setAmount(1, 2).setDamage(DATA.waterRepellent.ordinal()).setWeight(3), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
 			new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2), new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1),
-			new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.scorpionPincer.ordinal()).setWeight(1),
-			new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.whetstonePowder.ordinal()).setWeight(3), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.plateExoRhino.ordinal()).setWeight(1), new LootItemStack(ModItems.food).setAmount(1, 3).setDamage(FoodType.honeySandwich.ordinal()).setWeight(3), new LootItemStack(ModItems.cabbageSeeds).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1), new LootItemStack(ModItems.lifeBlood).setAmount(1, 2).setWeight(4), new LootItemStack(ModItems.rolledNewspaper).setAmount(1).setWeight(1), new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1), new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1), new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5), new LootItemStack(ModItems.homingBeecon).setAmount(1).setWeight(1), new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal()).setWeight(3), new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal()).setWeight(1) }).setPostProcessor(new IPostProcess() {
+			new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1),
+			new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.hydrofuge.ordinal()).setWeight(3), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.plateExoRhino.ordinal()).setWeight(1), new LootItemStack(ModItems.food).setAmount(1, 3).setDamage(FoodType.honeySandwich.ordinal()).setWeight(3), new LootItemStack(ModItems.cabbageSeeds).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1), new LootItemStack(ModItems.lifeBlood).setAmount(1, 2).setWeight(4), new LootItemStack(ModItems.rolledNewspaper).setAmount(1).setWeight(1), new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
+			new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1), new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1), new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5), new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.nothingInTheMiddle.ordinal()).setWeight(3), new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal()).setWeight(1) }).setPostProcessor(new IPostProcess() {
 				@SuppressWarnings("rawtypes")
 				@Override
 				public ItemStack postProcessItem(ItemStack is, Random rand) {
@@ -56,25 +58,27 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
-		//space check
-		for (int xx = x - 6; xx <= x + 6; xx++)
-			for (int zz = z - 6; zz <= z + 6; zz++)
-				for (int yy = y + 1; yy < y + 5; yy++) {
-					if (!world.isAirBlock(xx, yy, zz))
-						return false;
-				}
+		// space check
+		for (int attempt = 0; attempt < 15; attempt++) {
+			for (int xx = x - 6; xx <= x + 6; xx++)
+				for (int zz = z - 6; zz <= z + 6; zz++)
+					for (int yy = y + 1; yy < y + 5; yy++) {
+						if (!world.isAirBlock(xx, yy, zz) || world.getBlock(xx, y - 1, zz) != Blocks.water)
+							return false;
+					}
+		}
 
 		// main lily pad
 		for (int xx = x - 6; xx <= x + 6; xx++)
-			for (int zz = z - 6; zz <= z + 6; zz++){
-					double dSqCylinder = Math.pow(xx - x, 2.0D) + Math.pow(zz - z, 2.0D);
-					if (Math.round(Math.sqrt(dSqCylinder)) < 6)
-						if (dSqCylinder <= Math.pow(6, 2.0D))
-							world.setBlock(xx, y, zz, ModBlocks.erebusFlower, 15, 3);
-					if (Math.round(Math.sqrt(dSqCylinder)) == 5)
-						if (dSqCylinder <= Math.pow(6, 2.0D))
-							world.setBlock(xx, y + 1, zz, ModBlocks.erebusFlower, 15, 3);
-				}
+			for (int zz = z - 6; zz <= z + 6; zz++) {
+				double dSqCylinder = Math.pow(xx - x, 2.0D) + Math.pow(zz - z, 2.0D);
+				if (Math.round(Math.sqrt(dSqCylinder)) < 6)
+					if (dSqCylinder <= Math.pow(6, 2.0D))
+						world.setBlock(xx, y, zz, lillyPad, 0, 3);
+				if (Math.round(Math.sqrt(dSqCylinder)) == 5)
+					if (dSqCylinder <= Math.pow(6, 2.0D))
+						world.setBlock(xx, y + 1, zz, lillyPad, 0, 3);
+			}
 
 		// air gap in lily pad
 		int direction = rand.nextInt(4);
@@ -83,39 +87,39 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 			for (int airX = 5; airX > 1; airX--) {
 				world.setBlock(x + airX, y, z, Blocks.air, 0, 3);
 				world.setBlock(x + airX, y + 1, z, Blocks.air, 0, 3);
-				world.setBlock(x + airX, y + 1, z - 1, ModBlocks.erebusFlower, 15, 3);
-				world.setBlock(x + airX, y + 1, z + 1, ModBlocks.erebusFlower, 15, 3);
+				world.setBlock(x + airX, y + 1, z - 1, lillyPad, 0, 3);
+				world.setBlock(x + airX, y + 1, z + 1, lillyPad, 0, 3);
 			}
 
 		if (direction == 1)
 			for (int airZ = 5; airZ > 1; airZ--){
 				world.setBlock(x, y, z + airZ, Blocks.air, 0, 3);
 				world.setBlock(x, y + 1, z + airZ, Blocks.air, 0, 3);
-				world.setBlock(x + 1, y + 1, z + airZ, ModBlocks.erebusFlower, 15, 3);
-				world.setBlock(x - 1, y + 1, z + airZ, ModBlocks.erebusFlower, 15, 3);
+				world.setBlock(x + 1, y + 1, z + airZ, lillyPad, 0, 3);
+				world.setBlock(x - 1, y + 1, z + airZ, lillyPad, 0, 3);
 			}
 
 		if (direction == 2)
 			for (int airX = -5; airX < -1; airX++) {
 				world.setBlock(x + airX, y, z, Blocks.air, 0, 3);
 				world.setBlock(x + airX, y + 1, z, Blocks.air, 0, 3);
-				world.setBlock(x + airX, y + 1, z - 1, ModBlocks.erebusFlower, 15, 3);
-				world.setBlock(x + airX, y + 1, z + 1, ModBlocks.erebusFlower, 15, 3);
+				world.setBlock(x + airX, y + 1, z - 1, lillyPad, 0, 3);
+				world.setBlock(x + airX, y + 1, z + 1, lillyPad, 0, 3);
 			}
 
 		if (direction == 3)
 			for (int airZ = -5; airZ < -1; airZ++) {
 				world.setBlock(x, y, z + airZ, Blocks.air, 0, 3);
 				world.setBlock(x, y + 1, z + airZ, Blocks.air, 0, 3);
-				world.setBlock(x + 1, y + 1, z + airZ, ModBlocks.erebusFlower, 15, 3);
-				world.setBlock(x - 1, y + 1, z + airZ, ModBlocks.erebusFlower, 15, 3);
+				world.setBlock(x + 1, y + 1, z + airZ, lillyPad, 0, 3);
+				world.setBlock(x - 1, y + 1, z + airZ, lillyPad, 0, 3);
 			}
 
 		// flower stem
-		world.setBlock(x + 1, y + 1, z, ModBlocks.erebusFlower, 15, 3);
-		world.setBlock(x, y + 1, z + 1, ModBlocks.erebusFlower, 15, 3);
-		world.setBlock(x - 1, y + 1, z, ModBlocks.erebusFlower, 15, 3);
-		world.setBlock(x, y + 1, z - 1, ModBlocks.erebusFlower, 15, 3);
+		world.setBlock(x + 1, y + 1, z, lillyPad, 0, 3);
+		world.setBlock(x, y + 1, z + 1, lillyPad, 0, 3);
+		world.setBlock(x - 1, y + 1, z, lillyPad, 0, 3);
+		world.setBlock(x, y + 1, z - 1, lillyPad, 0, 3);
 
 		// flower
 		world.setBlock(x + 1, y + 2, z, ModBlocks.erebusFlower, 13, 3);
@@ -142,7 +146,6 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 			LootUtil.generateLoot(chest, rand, chestLoot, 5, 15);
 		world.setBlock(x, y + 2, z, ModBlocks.dragonflySpawner, 0, 3);
 		world.setBlock(x, y + 3, z, ModBlocks.dragonflySpawner, 0, 3);
-
 		return true;
 	}
 }

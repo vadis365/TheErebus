@@ -202,7 +202,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		boss.setLocationAndAngles(x + 0.5D, y + 22, z + 0.5D, rand.nextFloat() * 360F, 0F);
 		boss.forceSpawn = true;
 		world.spawnEntityInWorld(boss);
-		System.out.println("Added Dungeon at: " + x + " " + z);
+		//System.out.println("Added Dungeon at: " + x + " " + z);
 		return true;
 	}
 

@@ -224,6 +224,7 @@ public class ModBlocks {
 	public static final Block mireCoral = new BlockMireCoral().setHardness(0.2F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.mireCoral").setBlockTextureName("erebus:swampGlowWeed").setLightLevel(0.8F);
 	public static final Block algae = new BlockAlgae().setBlockName("erebus.algae").setBlockTextureName("erebus:algae");
 	public static final Block blockCabbage = new BlockCabbage();
+	public static final Block giantLilyPad = new BlockSimple(Material.wood, "axe", 1).setHardness(5.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.giantLilyPad").setBlockTextureName("erebus:giantLilyPad").setCreativeTab(ModTabs.blocks);
 
 	// DECORATIONS AND UTILITIES
 	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.blockSilk").setBlockTextureName("erebus:blockSilk").setCreativeTab(ModTabs.blocks);
