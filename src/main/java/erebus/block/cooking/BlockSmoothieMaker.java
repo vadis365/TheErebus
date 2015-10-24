@@ -64,8 +64,10 @@ public class BlockSmoothieMaker extends BlockContainer {
 				if (!player.capabilities.isCreativeMode)
 					if (oldItem.stackSize > 1) {
 						oldItem.stackSize--;
-						player.inventory.addItemStackToInventory(newItem);
-						player.inventory.markDirty();
+						if (!player.inventory.addItemStackToInventory(newItem))
+							player.dropPlayerItemWithRandomChoice(newItem, false);
+						else
+							player.inventory.markDirty();
 					} else {
 						player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
 						player.inventory.markDirty();
