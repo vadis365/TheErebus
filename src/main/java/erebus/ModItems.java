@@ -69,6 +69,7 @@ import erebus.item.ItemWoodlouseBall;
 import erebus.item.bambucket.ItemBambucket;
 import erebus.item.bambucket.ItemBambucketAntiVenom;
 import erebus.item.bambucket.ItemBambucketBeetleJuice;
+import erebus.item.bambucket.ItemBambucketMilk;
 
 public class ModItems {
 
@@ -171,6 +172,7 @@ public class ModItems {
 	public static final Item bambucketHoney = new ItemBambucket(ModBlocks.honeyBlock).setUnlocalizedName("erebus.bambucketHoney").setTextureName("erebus:bambucketHoney");
 	public static final Item bambucketBeetleJuice = new ItemBambucketBeetleJuice();
 	public static final Item bambucketAntiVenom = new ItemBambucketAntiVenom();
+	public static final Item bambucketMilk = new ItemBambucketMilk();
 
 	public static final Item bucketAntiVenom = new ItemBucketAntiVenom().setUnlocalizedName("erebus.bucketAntiVenom").setTextureName("erebus:bucketAntiVenom");
 	public static final Item bucketBeetleJuice = new ItemBucketOfBeetleJuice().setUnlocalizedName("erebus.bucketBeetleJuice").setTextureName("erebus:bucketBeetleJuice");

@@ -2,6 +2,8 @@ package erebus.item.bambucket;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -39,6 +41,18 @@ public class ItemBambucket extends Item {
 	@Override
 	public ItemStack getContainerItem(ItemStack stack) {
 		return hasContainerItem(stack) ? new ItemStack(ModItems.bambucket) : null;
+	}
+
+	@Override
+	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity) {
+		if (entity instanceof EntityCow) {
+			if (!player.capabilities.isCreativeMode)
+				stack.stackSize--;
+			if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucketMilk)))
+				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bambucketMilk), false);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
