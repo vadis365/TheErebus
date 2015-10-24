@@ -54,16 +54,25 @@ public class BlockSmoothieMaker extends BlockContainer {
 
 		if (player.getCurrentEquippedItem() != null) {
 			ItemStack oldItem = player.getCurrentEquippedItem();
-			ItemStack newItem = tile.fillTankWithBucket(player.inventory.getStackInSlot(player.inventory.currentItem));
+			ItemStack newItem;
+			if (oldItem.stackSize == 1 && oldItem.getItem() == Items.book)
+				newItem = new ItemStack(ModItems.smoothieBook);
+			else
+				newItem = tile.fillTankWithBucket(oldItem);
 
-			if (!player.capabilities.isCreativeMode)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
-			if (!ItemStack.areItemStacksEqual(oldItem, newItem))
+			if (!ItemStack.areItemStacksEqual(oldItem, newItem)) {
+				if (!player.capabilities.isCreativeMode)
+					if (oldItem.stackSize > 1) {
+						oldItem.stackSize--;
+						player.inventory.addItemStackToInventory(newItem);
+						player.inventory.markDirty();
+					} else {
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
+						player.inventory.markDirty();
+					}
 				return true;
+			}
 		}
-
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().stackSize == 1 && player.getCurrentEquippedItem().getItem() == Items.book) 
-			player.setCurrentItemOrArmor(0, new ItemStack (ModItems.smoothieBook)); 
 
 		if (tile != null)
 			player.openGui(Erebus.instance, CommonProxy.GUI_ID_SMOOTHIE_MAKER, world, x, y, z);
