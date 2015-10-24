@@ -33,11 +33,4 @@ public class ErebusRecipesHandler {
 		SmoothieMakerRecipe.addRecipe(SmoothieType.liquidGold.makeStack(), ModFluids.milk, new ItemStack(ModItems.lifeBlood), new ItemStack(ModItems.lifeBlood), ItemMaterials.DATA.bambooShoot.createStack(), new ItemStack(Items.speckled_melon));
 		SmoothieMakerRecipe.addRecipe(SmoothieType.bryufsBrew.makeStack(), new Fluid[] { ModFluids.honey, ModFluids.milk, ModFluids.antiVenom, ModFluids.beetleJuice }, ItemMaterials.DATA.compoundEyes.createStack(), new ItemStack(ModBlocks.bulbCapped), new ItemStack(ModItems.turnip), new ItemStack(ModItems.heartBerries));
 	}
-
-	private static Object[] getArray(Object base, int size) {
-		Object[] array = new Object[size];
-		for (int i = 0; i < array.length; i++)
-			array[i] = base;
-		return array;
-	}
 }
