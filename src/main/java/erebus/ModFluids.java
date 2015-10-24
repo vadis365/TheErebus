@@ -61,5 +61,4 @@ public class ModFluids {
 			beetleJuice.setIcons(event.map.registerIcon("erebus:beetleJuice"), event.map.registerIcon("erebus:beetleJuiceFlow"));
 		}
 	}
-
 }

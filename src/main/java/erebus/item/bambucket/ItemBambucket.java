@@ -1,9 +1,5 @@
 package erebus.item.bambucket;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +10,10 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import cpw.mods.fml.common.eventhandler.Event;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
 
 public class ItemBambucket extends Item {
 
@@ -29,6 +29,16 @@ public class ItemBambucket extends Item {
 		this.fluid = fluid;
 		setMaxStackSize(16);
 		setCreativeTab(ModTabs.specials);
+	}
+
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		return fluid != Blocks.air;
+	}
+
+	@Override
+	public ItemStack getContainerItem(ItemStack stack) {
+		return hasContainerItem(stack) ? new ItemStack(ModItems.bambucket) : null;
 	}
 
 	@Override
