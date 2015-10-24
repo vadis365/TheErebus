@@ -163,7 +163,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(ModBlocks.bambooLadder, 1), "BBB", "S S", "BBB", 'B', ItemMaterials.DATA.bamboo.createStack(), 'S', Items.string);
 		addShapedRecipe(new ItemStack(ModBlocks.bambooTorch, 4), "C", "B", "B", 'C', new ItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE), 'B', ItemMaterials.DATA.bamboo.createStack());
 		addShapedRecipe(new ItemStack(ModBlocks.bambooBridge, 3), "SSS", "B B", "LLL", 'S', Items.string, 'L', new ItemStack(ModBlocks.bambooLadder, 1), 'B', ItemMaterials.DATA.bamboo.createStack());
-		addShapedRecipe(new ItemStack(ModBlocks.bambooPole, 4), " S ", " B ", " B ", 'S', "slimeball", 'B', ItemMaterials.DATA.bamboo.createStack());
+		addShapedRecipe(new ItemStack(ModBlocks.bambooPole, 4), "S", "B", "B", 'S', "slimeball", 'B', ItemMaterials.DATA.bamboo.createStack());
 		addShapedRecipe(new ItemStack(ModBlocks.extenderThingy, 1), "BSB", "PDP", "BRB", 'S', Items.string, 'R', "dustRedstone", 'D', Blocks.dispenser, 'B', ItemMaterials.DATA.bamboo.createStack(), 'P', new ItemStack(ModBlocks.planks, 1, EnumWood.Bamboo.ordinal()));
 
 		addShapelessRecipe(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.bambooSoup.ordinal()), new ItemStack(Items.bowl), ItemMaterials.DATA.bamboo.createStack(), ItemMaterials.DATA.bambooShoot.createStack());
