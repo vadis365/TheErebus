@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
-import erebus.item.ItemMaterials.DATA;
+import erebus.core.helper.Utils;
 
 public class ItemArmorJade extends ItemArmor {
 
@@ -27,7 +27,7 @@ public class ItemArmorJade extends ItemArmor {
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.jade.ordinal();
+	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
+		return Utils.isItemOre(material, "gemJade");
 	}
 }

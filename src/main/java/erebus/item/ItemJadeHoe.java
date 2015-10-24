@@ -1,18 +1,18 @@
 package erebus.item;
 
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 
-public class ItemPickaxeJade extends ItemPickaxe {
+public class ItemJadeHoe extends ItemHoe {
 
-	public ItemPickaxeJade() {
+	public ItemJadeHoe() {
 		super(ModMaterials.toolJADE);
 		setCreativeTab(ModTabs.gears);
-		setTextureName("erebus:pickaxeJade");
-		setUnlocalizedName("erebus.pickaxeJade");
+		setTextureName("erebus:hoeJade");
+		setUnlocalizedName("erebus.hoeJade");
 	}
 
 	@Override
