@@ -1,5 +1,10 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.util.Direction;
+import net.minecraft.world.gen.feature.WorldGenReed;
+import net.minecraft.world.gen.feature.WorldGenTallGrass;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.ChunkProviderErebus;
@@ -11,17 +16,16 @@ import erebus.world.feature.decoration.WorldGenGasVents;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
-import erebus.world.feature.plant.*;
-import erebus.world.feature.structure.WorldGenAntlionLair;
+import erebus.world.feature.plant.WorldGenAlgae;
+import erebus.world.feature.plant.WorldGenMossPatch;
+import erebus.world.feature.plant.WorldGenRottenLogs;
+import erebus.world.feature.plant.WorldGenSwampBush;
+import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.structure.WorldGenDragonflyDungeon;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.world.gen.feature.WorldGenReed;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
+
 	private final WorldGenDragonflyDungeon genGiantLilyPad = new WorldGenDragonflyDungeon();
 	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
@@ -53,7 +57,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 
 	@Override
 	public void decorate() {
-		
+
 		if (rand.nextInt(34) == 0)
 			for (int attempt = 0; attempt < 15; attempt++)
 				if (genGiantLilyPad.generate(world, rand, x + 5 + rand.nextInt(6) + 8, ChunkProviderErebus.swampWaterHeight, z + 5 + rand.nextInt(6) + 8))
@@ -110,7 +114,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				genMossPatch.generate(world, rand, xx, yy, zz);
 		}
 
-		if (ConfigHandler.INSTANCE.generateVents) {
+		if (ConfigHandler.INSTANCE.generateVents)
 			if (rand.nextInt(6) == 0)
 				for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
 					xx = x + offsetXZ();
@@ -123,7 +127,6 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 							break;
 						}
 				}
-		}
 
 		if (rand.nextInt(10) == 0)
 			for (attempt = 0; attempt < rand.nextInt(4); attempt++) {

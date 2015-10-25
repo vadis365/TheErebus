@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import java.util.Calendar;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;

@@ -3,6 +3,7 @@ package erebus.block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -21,6 +22,11 @@ public class BlockWoodFenceGate extends BlockFenceGate {
 		setStepSound(soundTypeWood);
 		setCreativeTab(ModTabs.blocks);
 		setBlockName(Reference.MOD_ID + ".fenceGate" + wood.name());
+	}
+
+	@Override
+	public String getLocalizedName() {
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".fence_gate_" + wood.getUnlocalisedName() + ".name");
 	}
 
 	@Override

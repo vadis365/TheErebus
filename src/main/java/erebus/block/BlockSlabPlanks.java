@@ -90,7 +90,7 @@ public class BlockSlabPlanks extends Block {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".slabPlanks.name"), wood.getTranslatedName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".slab_" + wood.getUnlocalisedName() + ".name");
 	}
 
 	@Override

@@ -41,9 +41,9 @@ public class EntityBombardierBeetle extends EntityMob {
 	}
 
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 2;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 2;
+	}
 
 	@Override
 	public void onUpdate() {
@@ -51,12 +51,10 @@ public class EntityBombardierBeetle extends EntityMob {
 		collideTick++;
 		if (collideTick > 20 || getAttackTarget() == null)
 			collideTick = 0;
-		if (getAttackTarget() != null) {
-			if (!worldObj.isRemote && isCollidedHorizontally) {
+		if (getAttackTarget() != null)
+			if (!worldObj.isRemote && isCollidedHorizontally)
 				if (collideTick == 20)
 					clearpath();
-			}
-		}
 	}
 
 	@Override
@@ -112,12 +110,10 @@ public class EntityBombardierBeetle extends EntityMob {
 
 	private void clearpath() {
 		boolean rule = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
-		double direction = Math.toRadians(rotationYaw);
 		double x = posX;
 		double y = posY;
 		double z = posZ;
-		if (ConfigHandler.INSTANCE.bombardierBlockDestroy == true) {
-			worldObj.createExplosion(this, x, y + 1, z, explosionRadius, rule); 
-		}
+		if (ConfigHandler.INSTANCE.bombardierBlockDestroy == true)
+			worldObj.createExplosion(this, x, y + 1, z, explosionRadius, rule);
 	}
 }

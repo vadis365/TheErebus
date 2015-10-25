@@ -5,6 +5,7 @@ import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
@@ -37,6 +38,11 @@ public class BlockWoodFence extends BlockFence {
 	public boolean canConnectFenceTo(IBlockAccess world, int x, int y, int z) {
 		Block block = world.getBlock(x, y, z);
 		return super.canConnectFenceTo(world, x, y, z) || block instanceof BlockWoodFence || block instanceof BlockWoodFenceGate;
+	}
+
+	@Override
+	public String getLocalizedName() {
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".fence_" + wood.getUnlocalisedName() + ".name");
 	}
 
 	@Override

@@ -1,9 +1,10 @@
 package erebus.item.block;
 
-import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import erebus.lib.EnumWood;
+import erebus.lib.Reference;
 
 public class ItemBlockPlanks extends ItemBlockGeneric {
 
@@ -16,7 +17,7 @@ public class ItemBlockPlanks extends ItemBlockGeneric {
 		int meta = stack.getItemDamage();
 		if (meta >= EnumWood.values().length)
 			return "Error";
-		String wood = EnumWood.values()[meta].getTranslatedName();
-		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), wood);
+		EnumWood wood = EnumWood.values()[meta];
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".planks_" + wood.getUnlocalisedName() + ".name");
 	}
 }

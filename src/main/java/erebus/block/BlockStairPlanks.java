@@ -23,6 +23,6 @@ public class BlockStairPlanks extends BlockStairs {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".stairPlanks.name"), wood.getTranslatedName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".stairs_" + wood.getUnlocalisedName() + ".name");
 	}
 }

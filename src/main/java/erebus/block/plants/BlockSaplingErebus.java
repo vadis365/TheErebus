@@ -46,7 +46,7 @@ public class BlockSaplingErebus extends BlockSapling {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".sapling.name"), wood.getTranslatedName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".sapling_" + wood.getUnlocalisedName() + ".name");
 	}
 
 	@Override

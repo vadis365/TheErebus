@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
@@ -91,8 +90,8 @@ public enum EnumWood {
 		return fenceGates.get(this);
 	}
 
-	public String getTranslatedName() {
-		return StatCollector.translateToLocal("wood." + Reference.MOD_ID + "." + name().toLowerCase());
+	public String getUnlocalisedName() {
+		return name().toLowerCase();
 	}
 
 	private static final HashMap<EnumWood, Block> logs = new HashMap<EnumWood, Block>();

@@ -1,5 +1,6 @@
 package erebus.entity.ai;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -9,17 +10,18 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAIExplodeAttackOnCollide extends EntityAIBase {
-	World worldObj;
-	EntityCreature attacker;
-	int attackTick;
-	double speedTowardsTarget;
-	boolean longMemory;
-	PathEntity entityPathEntity;
-	Class classTarget;
+
+	private World worldObj;
+	private EntityCreature attacker;
+	private int attackTick;
+	private double speedTowardsTarget;
+	private boolean longMemory;
+	private PathEntity entityPathEntity;
+	private Class<? extends Entity> classTarget;
 	private int field_75445_i;
 	private int failedPathFindingPenalty;
 
-	public EntityAIExplodeAttackOnCollide(EntityCreature entityCreature, Class par2Class, double par3, boolean par5) {
+	public EntityAIExplodeAttackOnCollide(EntityCreature entityCreature, Class<? extends Entity> par2Class, double par3, boolean par5) {
 		this(entityCreature, par3, par5);
 		classTarget = par2Class;
 	}

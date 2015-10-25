@@ -1,4 +1,104 @@
-# Blocks
+##########
+# Blocks #
+##########
+
+# Logs
+tile.erebus.log_baobab.name=Baobab Wood
+tile.erebus.log_eucalyptus.name=Eucalyptus Wood
+tile.erebus.log_mahogany.name=Mahogany Wood
+tile.erebus.log_mossbark.name=Mossbark Wood
+tile.erebus.log_asper.name=Asper Wood
+tile.erebus.log_cypress.name=Cypress Wood
+tile.erebus.log_sap.name=Sap Wood
+tile.erebus.log_rotten.name=Rotten Wood
+tile.erebus.log_marshwood.name=Marshwood Wood
+
+# Leaves
+tile.erebus.leaves_baobab.name=Baobab Leaves
+tile.erebus.leaves_eucalyptus.name=Eucalyptus Leaves
+tile.erebus.leaves_mahogany.name=Mahogany Leaves
+tile.erebus.leaves_mossbark.name=Mossbark Leaves
+tile.erebus.leaves_asper.name=Asper Leaves
+tile.erebus.leaves_cypress.name=Cypress Leaves
+tile.erebus.leaves_sap.name=Sap Leaves
+tile.erebus.leaves_marshwood.name=Marshwood Leaves
+
+# Saplings
+tile.erebus.sapling_baobab.name=Baobab Sapling
+tile.erebus.sapling_eucalyptus.name=Eucalyptus Sapling
+tile.erebus.sapling_mahogany.name=Mahogany Sapling
+tile.erebus.sapling_mossbark.name=Mossbark Sapling
+tile.erebus.sapling_asper.name=Asper Sapling
+tile.erebus.sapling_cypress.name=Cypress Sapling
+tile.erebus.sapling_sap.name=Sap Sapling
+tile.erebus.sapling_marshwood.name=Marshwood Sapling
+
+# Planks
+tile.erebus.planks_baobab.name=Baobab Planks
+tile.erebus.planks_eucalyptus.name=Eucalyptus Planks
+tile.erebus.planks_mahogany.name=Mahogany Planks
+tile.erebus.planks_mossbark.name=Mossbark Planks
+tile.erebus.planks_asper.name=Asper Planks
+tile.erebus.planks_cypress.name=Cypress Planks
+tile.erebus.planks_sap.name=Sap Planks
+tile.erebus.planks_white.name=White Planks
+tile.erebus.planks_bamboo.name=Bamboo Planks
+tile.erebus.planks_rotten.name=Rotten Planks
+tile.erebus.planks_marshwood.name=Marshwood Planks
+
+# Stairs
+tile.erebus.stairs_baobab.name=Baobab Stairs
+tile.erebus.stairs_eucalyptus.name=Eucalyptus Stairs
+tile.erebus.stairs_mahogany.name=Mahogany Stairs
+tile.erebus.stairs_mossbark.name=Mossbark Stairs
+tile.erebus.stairs_asper.name=Asper Stairs
+tile.erebus.stairs_cypress.name=Cypress Stairs
+tile.erebus.stairs_sap.name=Sap Stairs
+tile.erebus.stairs_white.name=White Stairs
+tile.erebus.stairs_bamboo.name=Bamboo Stairs
+tile.erebus.stairs_rotten.name=Rotten Stairs
+tile.erebus.stairs_marshwood.name=Marshwood Stairs
+
+# Slabs
+tile.erebus.slab_baobab.name=Baobab Slab
+tile.erebus.slab_eucalyptus.name=Eucalyptus Slab
+tile.erebus.slab_mahogany.name=Mahogany Slab
+tile.erebus.slab_mossbark.name=Mossbark Slab
+tile.erebus.slab_asper.name=Asper Slab
+tile.erebus.slab_cypress.name=Cypress Slab
+tile.erebus.slab_sap.name=Sap Slab
+tile.erebus.slab_white.name=White Slab
+tile.erebus.slab_bamboo.name=Bamboo Slab
+tile.erebus.slab_rotten.name=Rotten Slab
+tile.erebus.slab_marshwood.name=Marshwood Slab
+
+# Fences
+tile.erebus.fence_baobab.name=Baobab Fence
+tile.erebus.fence_eucalyptus.name=Eucalyptus Fence
+tile.erebus.fence_mahogany.name=Mahogany Fence
+tile.erebus.fence_mossbark.name=Mossbark Fence
+tile.erebus.fence_asper.name=Asper Fence
+tile.erebus.fence_cypress.name=Cypress Fence
+tile.erebus.fence_sap.name=Sap Fence
+tile.erebus.fence_white.name=White Fence
+tile.erebus.fence_bamboo.name=Bamboo Fence
+tile.erebus.fence_rotten.name=Rotten Fence
+tile.erebus.fence_marshwood.name=Marshwood Fence
+
+# Fence Gates
+tile.erebus.fence_gate_baobab.name=Baobab Fence Gate
+tile.erebus.fence_gate_eucalyptus.name=Eucalyptus Fence Gate
+tile.erebus.fence_gate_mahogany.name=Mahogany Fence Gate
+tile.erebus.fence_gate_mossbark.name=Mossbark Fence Gate
+tile.erebus.fence_gate_asper.name=Asper Fence Gate
+tile.erebus.fence_gate_cypress.name=Cypress Fence Gate
+tile.erebus.fence_gate_sap.name=Sap Fence Gate
+tile.erebus.fence_gate_white.name=White Fence Gate
+tile.erebus.fence_gate_bamboo.name=Bamboo Fence Gate
+tile.erebus.fence_gate_rotten.name=Rotten Fence Gate
+tile.erebus.fence_gate_marshwood.name=Marshwood Fence Gate
+
+# Rest (someone should organise it at some point)
 tile.erebus.portal.name=Erebus Portal
 tile.erebus.gaeanKeystone.name=Gaean Keystone
 
@@ -18,42 +118,8 @@ tile.erebus.doormossbark.name=Mossbark Door
 tile.erebus.doorrotten.name=Rotten Wood Door
 tile.erebus.doormarshwood.name=Marshwood Door
 
-tile.erebus.log.name=%s Wood
-tile.erebus.planks.name=%s Planks
-tile.erebus.stairPlanks.name=%s Stairs
-tile.erebus.leaves.name=%s Leaves
-tile.erebus.sapling.name=%s Sapling
-tile.erebus.slabPlanks.name=%s Slab
-tile.erebus.slabStone.name=%s Slab
-
-tile.erebus.fenceBaobab.name=Baobab Fence
-tile.erebus.fenceEucalyptus.name=Eucalyptus Fence
-tile.erebus.fenceMahogany.name=Mahogany Fence
-tile.erebus.fenceMossbark.name=Mossbark Fence
-tile.erebus.fenceAsper.name=Asper Fence
-tile.erebus.fenceCypress.name=Cypress Fence
-tile.erebus.fenceSap.name=Sap Fence
-tile.erebus.fenceWhite.name=White Fence
-tile.erebus.fenceBamboo.name=Bamboo Fence
-tile.erebus.fenceRotten.name=Rotten Fence
-tile.erebus.fenceMarshwood.name=Marshwood Fence
-
-tile.erebus.fenceGateBaobab.name=Baobab Fence Gate
-tile.erebus.fenceGateEucalyptus.name=Eucalyptus Fence Gate
-tile.erebus.fenceGateMahogany.name=Mahogany Fence Gate
-tile.erebus.fenceGateMossbark.name=Mossbark Fence Gate
-tile.erebus.fenceGateAsper.name=Asper Fence Gate
-tile.erebus.fenceGateCypress.name=Cypress Fence Gate
-tile.erebus.fenceGateSap.name=Sap Fence Gate
-tile.erebus.fenceGateWhite.name=White Fence Gate
-tile.erebus.fenceGateBamboo.name=Bamboo Fence Gate
-tile.erebus.fenceGateRotten.name=Rotten Fence Gate
-tile.erebus.fenceGateMarshwood.name=Marshwood Fence Gate
-
 tile.erebus.log_scorched.name=Scorched Wood
 tile.erebus.planks_scorched.name=Scorched Planks
-tile.erebus.log_rotten.name=Rotten Wood
-tile.erebus.planks_rotten.name=Rotten Planks
 tile.erebus.log_hollow_acacia.name=Hollow Acacia Log
 tile.erebus.planks_varnished.name=Varnished Planks
 tile.erebus.saplessLog.name=Sapless log
@@ -282,8 +348,10 @@ tile.erebus.blockSilk.name=Silk
 
 tile.erebus.smoothieMaker.name=ErebusCo. Smoothie-matic 2000
 
+#########
+# Items #
+#########
 
-# Items
 item.erebus.encrustedDiamond.name=Encrusted Diamond
 item.erebus.helmetExo.name=Exoskeleton Helmet
 item.erebus.chestplateExo.name=Exoskeleton Chestplate
@@ -470,7 +538,10 @@ item.erebus.warHammer.name=Quake Hammer
 
 item.erebus.soulCrystal.name=Soul Crystal
 
-# Entities
+############
+# Entities #
+############
+
 entity.erebus.beetleLarva.name=Beetle Larva
 entity.erebus.wasp.name=Wasp
 entity.erebus.centipede.name=Centipede
@@ -524,19 +595,28 @@ entity.erebus.umberGolemIdol.name=Umber Golem Idol Guardian
 entity.erebus.antlionBoss.name=Antlion Overlord
 entity.erebus.bombardierBeetle.name=Bombardier Beetle
 
-# Fluids
+##########
+# Fluids #
+##########
+
 fluid.honey=Honey
 fluid.beetleJuice=Beetle Juice
 fluid.antiVenom=Anti-Venom
 
-# Others
+#################
+# Creative Tabs #
+#################
+
 itemGroup.erebus.block=Erebus Blocks
 itemGroup.erebus.item=Erebus Items
 itemGroup.erebus.gear=Erebus Gear
 itemGroup.erebus.special=Erebus Specials
 itemGroup.erebus.plants=Erebus Plants
 
-# Achievements
+################
+# Achievements #
+################
+
 achievement.welcome=A secret below the world
 achievement.welcome.desc=enter the Erebus
 achievement.beetle=They used to be called Maggots
@@ -550,7 +630,10 @@ achievement.umberstone.desc=Mine Umberstone
 achievement.tshirt=Oh come on!
 achievement.tshirt.desc=I killed a boss and all I got was this lousy t-shirt
 
-# Containers
+##############
+# Containers #
+##############
+
 container.bambooCrate=Bamboo Crate
 container.colossalCrate=Bamboo Crate
 container.umberFurnace=Umber Furnace
@@ -561,7 +644,10 @@ container.antInventory=Ant Command Control
 container.composter=Organic Composter
 container.bamber=Bamber
 
-# Colours
+###########
+# Colours #
+###########
+
 colour.erebus.dyeBlack=Black
 colour.erebus.dyeRed=Red
 colour.erebus.dyeGreen=Green
@@ -579,16 +665,3 @@ colour.erebus.dyeMagenta=Magenta
 colour.erebus.dyeOrange=Orange
 colour.erebus.dyeWhite=White
 colour.erebus.rainbow=Rainbow
-
-# Woods
-wood.erebus.baobab=Baobab
-wood.erebus.eucalyptus=Eucalyptus
-wood.erebus.mahogany=Mahogany
-wood.erebus.mossbark=Mossbark
-wood.erebus.asper=Asper
-wood.erebus.cypress=Cypress
-wood.erebus.sap=Sap
-wood.erebus.white=White
-wood.erebus.bamboo=Bamboo
-wood.erebus.rotten=Rotten
-wood.erebus.marshwood=Marshwood

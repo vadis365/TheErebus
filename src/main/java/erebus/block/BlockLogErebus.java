@@ -36,7 +36,7 @@ public class BlockLogErebus extends BlockLog {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".log.name"), wood.getTranslatedName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".log_" + wood.getUnlocalisedName() + ".name");
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class BlockLogErebus extends BlockLog {
 			}
 		super.onBlockDestroyedByPlayer(world, x, y, z, meta);
 	}
-	
+
 	@Override
 	public int damageDropped(int meta) {
 		return 0;

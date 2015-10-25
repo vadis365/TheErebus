@@ -37,7 +37,7 @@ public class BlockErebusLeaves extends BlockLeaves {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".leaves.name"), wood.getTranslatedName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".leaves_" + wood.getUnlocalisedName() + ".name");
 	}
 
 	@Override
