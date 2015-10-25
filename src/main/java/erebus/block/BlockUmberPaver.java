@@ -20,7 +20,7 @@ public class BlockUmberPaver extends Block implements ISubBlocksBlock {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] blockIcon;
-	private final String[] types = new String[] { "", "Mossy", "Webbed" };
+	public static final String[] types = new String[] { "", "Mossy", "Webbed" };
 
 	public BlockUmberPaver() {
 		super(Material.rock);

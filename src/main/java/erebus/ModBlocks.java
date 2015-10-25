@@ -337,10 +337,10 @@ public class ModBlocks {
 		for (int i = 0; i < umbercobbleStairs.length; i++)
 			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("erebus.umbercobbleStairs" + i);
 		for (int i = 0; i <= 4; i++)
-			stoneSlabs[i] = new BlockSlabStone(ModBlocks.umberstone, i);
+			stoneSlabs[i] = new BlockSlabStone(ModBlocks.umberstone, i, BlockUmberstone.iconPaths[i]);
 		for (int i = 0; i <= 2; i++)
-			stoneSlabs[5 + i] = new BlockSlabStone(ModBlocks.umberPaver, i);
-		stoneSlabs[7] = new BlockSlabStone(ModBlocks.petrifiedWoodPlanks);
+			stoneSlabs[5 + i] = new BlockSlabStone(ModBlocks.umberPaver, i, "umberpaver" + BlockUmberPaver.types[i]);
+		stoneSlabs[7] = new BlockSlabStone(ModBlocks.petrifiedWoodPlanks, "petrifiedWood");
 		for (int i = 0; i < gneissStairs.length; i++)
 			gneissStairs[i] = new BlockStairsBase(gneiss, i).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneissStairs" + i);
 	}

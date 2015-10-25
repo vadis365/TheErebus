@@ -72,6 +72,15 @@ tile.erebus.slab_bamboo.name=Bamboo Slab
 tile.erebus.slab_rotten.name=Rotten Slab
 tile.erebus.slab_marshwood.name=Marshwood Slab
 
+tile.erebus.slab_umberstone.name=Umberstone Slab
+tile.erebus.slab_cobbleUmber.name=Umbercobble Slab
+tile.erebus.slab_cobbleUmberMossy.name=Mossy Umbercobble Slab
+tile.erebus.slab_cobbleUmberWebbed.name=Webbed Umbercobble Slab
+tile.erebus.slab_umberstoneBricks.name=Umberstone Bricks Slab
+tile.erebus.slab_umberpaver.name=Umberpaver Slab
+tile.erebus.slab_umberpaverMossy.name=Mossy Umberpaver Slab
+tile.erebus.slab_petrifiedWood.name=Petrified Wood Slab
+
 # Fences
 tile.erebus.fence_baobab.name=Baobab Fence
 tile.erebus.fence_eucalyptus.name=Eucalyptus Fence

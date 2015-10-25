@@ -23,13 +23,15 @@ import erebus.lib.Reference;
 
 public class BlockSlabStone extends Block implements ISubBlocksBlock {
 
+	private final String baseName;
 	public final Block base;
 	public final int meta;
 
-	public BlockSlabStone(Block base, int meta) {
+	public BlockSlabStone(Block base, int meta, String baseName) {
 		super(base.getMaterial());
 		this.base = base;
 		this.meta = meta;
+		this.baseName = baseName;
 		setHardness(2.0F);
 		setLightOpacity(0);
 		setCreativeTab(ModTabs.blocks);
@@ -44,8 +46,8 @@ public class BlockSlabStone extends Block implements ISubBlocksBlock {
 		setBlockName(Reference.MOD_ID + ".slab-" + name + meta);
 	}
 
-	public BlockSlabStone(Block base) {
-		this(base, 0);
+	public BlockSlabStone(Block base, String baseName) {
+		this(base, 0, baseName);
 	}
 
 	@Override
@@ -101,7 +103,7 @@ public class BlockSlabStone extends Block implements ISubBlocksBlock {
 
 	@Override
 	public String getLocalizedName() {
-		return String.format(StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".slabStone.name"), new ItemStack(base, 1, meta).getDisplayName());
+		return StatCollector.translateToLocal("tile." + Reference.MOD_ID + ".slab_" + baseName + ".name");
 	}
 
 	@Override
