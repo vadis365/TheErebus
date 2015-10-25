@@ -178,6 +178,8 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	public boolean attackEntityFrom(DamageSource source, float damage) {
 		if (getHealth() > 150 && !(source instanceof EntityDamageSourceIndirect))
 			return false;
+		if (getHealth() <= 150 && source instanceof EntityDamageSourceIndirect)
+			return false;
 		return super.attackEntityFrom(source, damage);
 	}
 

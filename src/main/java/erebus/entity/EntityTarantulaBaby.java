@@ -8,15 +8,11 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
 
 public class EntityTarantulaBaby extends EntityMob {
 	public int skin = rand.nextInt(99);
@@ -35,7 +31,7 @@ public class EntityTarantulaBaby extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 	}
@@ -147,32 +143,6 @@ public class EntityTarantulaBaby extends EntityMob {
 			return true;
 		} else
 			return false;
-	}
-
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chanceFiftyFifty = rand.nextInt(1) + 1;
-		int chance20x60x20 = rand.nextInt(4);
-		int legDrop = 0;
-		switch (chance20x60x20) {
-			case 0:
-				legDrop = 1;
-				break;
-			case 1:
-			case 2:
-			case 3:
-				legDrop = 2;
-				break;
-			case 4:
-				legDrop = 3;
-				break;
-		}
-		if (isBurning())
-			entityDropItem(new ItemStack(ModItems.food, legDrop + looting, 5), 0.0F);
-		else
-			entityDropItem(new ItemStack(ModItems.food, legDrop + looting, 4), 0.0F);
-		dropItem(Items.spider_eye, chanceFiftyFifty + looting);
-		entityDropItem(ItemMaterials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
 	}
 
 	@Override
