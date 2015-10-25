@@ -10,7 +10,7 @@ public class ItemBambucketMilk extends ItemBambucketDrinkable {
 
 	public ItemBambucketMilk() {
 		super("erebus:bambucketMilk");
-		setUnlocalizedName("erebus.erebus:bambucketMilk");
+		setUnlocalizedName("erebus.bambucketMilk");
 		setTextureName("erebus:bambucketMilk");
 	}
 
