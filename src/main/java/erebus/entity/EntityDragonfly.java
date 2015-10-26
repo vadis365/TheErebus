@@ -274,9 +274,9 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(ItemMaterials.DATA.dragonflyWing.createStack(), 0.0F);
+		entityDropItem(ItemMaterials.DATA.dragonflyWing.makeStack(), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(ItemMaterials.DATA.compoundEyes.createStack(rand.nextInt(1) + 1 + looting), 0.0F);
+			entityDropItem(ItemMaterials.DATA.compoundEyes.makeStack(rand.nextInt(1) + 1 + looting), 0.0F);
 		if (getSkin() == 0)
 			entityDropItem(new ItemStack(Items.ender_pearl, rand.nextInt(1) + 1 + looting), 0.0F);
 	}

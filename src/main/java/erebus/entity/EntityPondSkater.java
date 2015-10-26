@@ -65,7 +65,7 @@ public class EntityPondSkater extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.hydrofuge.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.hydrofuge.makeStack(), 0.0F);
 	}
 
 	@Override

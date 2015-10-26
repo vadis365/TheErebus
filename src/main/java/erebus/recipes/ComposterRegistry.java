@@ -34,17 +34,17 @@ public class ComposterRegistry {
 		register(Items.wooden_sword);
 		register(Items.wheat);
 		register(Items.poisonous_potato);
-		register(ItemMaterials.DATA.darkFruitSeeds.createStack());
-		register(ItemMaterials.DATA.weepingBluePetal.createStack());
-		register(ItemMaterials.DATA.papyrus.createStack());
-		register(ItemMaterials.DATA.nettleleaves.createStack());
-		register(ItemMaterials.DATA.nettleflowers.createStack());
-		register(ItemMaterials.DATA.mossBall.createStack());
-		register(ItemMaterials.DATA.yellowDottedFungus.createStack());
-		register(ItemMaterials.DATA.jadeBerries.createStack());
-		register(ItemMaterials.DATA.snapperRoot.createStack());
-		register(ItemMaterials.DATA.bamboo.createStack());
-		register(ItemMaterials.DATA.bambooShoot.createStack());
+		register(ItemMaterials.DATA.darkFruitSeeds.makeStack());
+		register(ItemMaterials.DATA.weepingBluePetal.makeStack());
+		register(ItemMaterials.DATA.papyrus.makeStack());
+		register(ItemMaterials.DATA.nettleleaves.makeStack());
+		register(ItemMaterials.DATA.nettleflowers.makeStack());
+		register(ItemMaterials.DATA.mossBall.makeStack());
+		register(ItemMaterials.DATA.yellowDottedFungus.makeStack());
+		register(ItemMaterials.DATA.jadeBerries.makeStack());
+		register(ItemMaterials.DATA.snapperRoot.makeStack());
+		register(ItemMaterials.DATA.bamboo.makeStack());
+		register(ItemMaterials.DATA.bambooShoot.makeStack());
 		
 		blacklist.add(new ItemStack(ModBlocks.wallPlants, 1, 1));
 		blacklist.add(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 1));

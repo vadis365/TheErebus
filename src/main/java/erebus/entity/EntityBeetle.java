@@ -148,7 +148,7 @@ public class EntityBeetle extends EntityAnimal {
 		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.plateExo.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
 	}
 
 	@Override

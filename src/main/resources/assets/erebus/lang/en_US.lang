@@ -431,6 +431,25 @@ item.erebus.smoothie_dont_meddle_with_the_nettle.name=Don't Meddle With The Nett
 item.erebus.smoothie_liquid_gold.name=Liquid Gold Smoothie
 item.erebus.smoothie_bryufs_brew.name=Bryuf's Brew Smoothie
 
+# Foodstuffs
+item.erebus.food_beetle_larva_raw.name=Beetle Larva
+item.erebus.food_beetle_larva_cooked.name=Cooked Beetle Larva
+item.erebus.food_grasshopper_leg_raw.name=Grasshopper Leg
+item.erebus.food_grasshopper_leg_cooked.name=Cooked Grasshopper Leg
+item.erebus.food_tarantula_leg_raw.name=Tarantula Leg
+item.erebus.food_tarantula_leg_cooked.name=Crispy Tarantula Leg
+item.erebus.food_bamboo_soup.name=Bamboo Soup
+item.erebus.food_melonade.name=Melonade
+item.erebus.food_melonade_sparkly.name=Sparkly Melonade
+item.erebus.food_larvae_on_stick.name=Larvae-on-a-Stick
+item.erebus.food_honey_sandwich.name=Honey Sandwich
+item.erebus.food_dark_fruit.name=Dark Fruit
+item.erebus.food_titan_chop_raw.name=Raw Titan Chop
+item.erebus.food_titan_chop_cooked.name=Cooked Titan Chop
+item.erebus.food_swampberries.name=Swampberries
+item.erebus.food_cabbage.name=Cabbage
+item.erebus.food_titan_stew_cooked.name=Cooked Titan Stew
+
 # Rest
 item.erebus.encrustedDiamond.name=Encrusted Diamond
 item.erebus.helmetExo.name=Exoskeleton Helmet
@@ -536,24 +555,6 @@ item.erebus.materials.smoothieGlass.name=Empty Smoothie Glass
 item.erebus.materials.magmaCrawlerEye.name=Magma Crawler Eye
 item.erebus.materials.stewPot.name=Stew Pot
 item.erebus.materials.titanStew.name=Un-cooked Titan Stew
-
-item.erebus.food.0.name=Beetle Larva
-item.erebus.food.1.name=Cooked Beetle Larva
-item.erebus.food.2.name=Grasshopper Leg
-item.erebus.food.3.name=Cooked Grasshopper Leg
-item.erebus.food.4.name=Tarantula Paw
-item.erebus.food.5.name=Crispy Tarantula Paw
-item.erebus.food.6.name=Bamboo Soup
-item.erebus.food.7.name=Melonade
-item.erebus.food.8.name=Sparkly Melonade
-item.erebus.food.9.name=Larvae-on-a-Stick
-item.erebus.food.10.name=Honey Sandwich
-item.erebus.food.11.name=Dark Fruit
-item.erebus.food.12.name=Raw Titan Chop
-item.erebus.food.13.name=Cooked Titan Chop
-item.erebus.food.14.name=Swampberries
-item.erebus.food.15.name=Cabbage
-item.erebus.food.16.name=Cooked Titan Stew
 
 item.erebus.heartBerries.name=Heartberries
 item.erebus.lifeBlood.name=Life Blood

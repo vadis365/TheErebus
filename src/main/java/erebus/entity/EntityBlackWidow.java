@@ -168,7 +168,7 @@ public class EntityBlackWidow extends EntityMob {
 		super.dropFewItems(attackedByPlayer, looting);
 		if (attackedByPlayer && (rand.nextInt(3) == 0 || rand.nextInt(1 + looting) > 0))
 			dropItem(Items.spider_eye, 1);
-		entityDropItem(ItemMaterials.DATA.poisonGland.createStack(1 + rand.nextInt(2)), 0.0F);
+		entityDropItem(ItemMaterials.DATA.poisonGland.makeStack(1 + rand.nextInt(2)), 0.0F);
 	}
 
 	@Override

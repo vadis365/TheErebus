@@ -84,6 +84,6 @@ public class EntitySnapper extends EntityMob {
 		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.snapperRoot.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.snapperRoot.makeStack(), 0.0F);
 	}
 }

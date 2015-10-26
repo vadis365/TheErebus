@@ -48,12 +48,18 @@ public class ItemSmoothie extends ItemFood {
 
 	@Override
 	public ItemStack getContainerItem(ItemStack stack) {
-		return ItemMaterials.DATA.smoothieGlass.createStack();
+		return ItemMaterials.DATA.smoothieGlass.makeStack();
 	}
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.drink;
+	}
+
+	@Override
+	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
+		super.onEaten(stack, world, player);
+		return getContainerItem(stack);
 	}
 
 	@Override
@@ -206,7 +212,11 @@ public class ItemSmoothie extends ItemFood {
 		}
 
 		public ItemStack makeStack() {
-			return new ItemStack(ModItems.smoothie, 1, ordinal());
+			return makeStack(1);
+		}
+
+		public ItemStack makeStack(int size) {
+			return new ItemStack(ModItems.smoothie, size, ordinal());
 		}
 
 		public String getExtraEffect() {

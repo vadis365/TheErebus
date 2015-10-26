@@ -197,11 +197,11 @@ public class ItemMaterials extends Item {
 		stewPot,
 		titanStew;
 
-		public ItemStack createStack() {
-			return createStack(1);
+		public ItemStack makeStack() {
+			return makeStack(1);
 		}
 
-		public ItemStack createStack(int size) {
+		public ItemStack makeStack(int size) {
 			return new ItemStack(ModItems.materials, size, ordinal());
 		}
 

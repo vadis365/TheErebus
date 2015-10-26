@@ -46,7 +46,7 @@ public class BlockCabbage extends BlockCrops {
 					ret.add(new ItemStack(this.func_149866_i(), 1, 0));
 				}
 			}
-			ret.add(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.cabbage.ordinal()));
+			ret.add(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.CABBAGE.ordinal()));
 		}
 		return ret;
 	}

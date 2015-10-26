@@ -160,7 +160,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 		int amount = rand.nextInt(3);
 		if (fortune > 0)
 			amount += rand.nextInt(fortune + 1);
-		entityDropItem(ItemMaterials.DATA.hideShroom.createStack(amount), 0.0F);
+		entityDropItem(ItemMaterials.DATA.hideShroom.makeStack(amount), 0.0F);
 	}
 
 	@Override

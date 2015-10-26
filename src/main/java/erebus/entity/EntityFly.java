@@ -220,8 +220,8 @@ public class EntityFly extends EntityAmbientCreature {
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (rand.nextInt(10) == 0)
-			entityDropItem(ItemMaterials.DATA.flyWing.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.flyWing.makeStack(), 0.0F);
 		if (rand.nextInt(20) == 0)
-			entityDropItem(ItemMaterials.DATA.compoundEyes.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.compoundEyes.makeStack(), 0.0F);
 	}
 }

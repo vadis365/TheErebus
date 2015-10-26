@@ -14,6 +14,7 @@ public class ModMaterials {
 	public static ArmorMaterial armorREINEXOSPECIAL = EnumHelper.addArmorMaterial("REINEXOSPECIAL", 33, new int[] { 3, 8, 6, 3 }, 10);
 	public static ArmorMaterial armorRHINO = EnumHelper.addArmorMaterial("RHINO", 33, new int[] { 3, 8, 6, 3 }, 10);
 	public static ArmorMaterial armorJADE = EnumHelper.addArmorMaterial("JADE", 24, new int[] { 3, 7, 5, 2 }, 15);
+
 	public static ToolMaterial toolJADE = EnumHelper.addToolMaterial("JADE", 2, 863, 10.0F, 2.0F, 18);
 	public static ToolMaterial toolJADEPAXEL = EnumHelper.addToolMaterial("JADEPAXEL", 2, 1079, 8.0F, 4.0F, 14);
 	public static ToolMaterial toolCAVEMANCLUB = EnumHelper.addToolMaterial("CAVEMANCLUB", 0, 131, 4.0F, 2.0F, 12);
@@ -23,5 +24,6 @@ public class ModMaterials {
 	public static ToolMaterial ritualDagger = EnumHelper.addToolMaterial("RITUAL_DAGGER", 0, 128, 1.0F, -3.0F, 30);
 	public static ToolMaterial rolledNewspaper = EnumHelper.addToolMaterial("ROLLED_NEWSPAPER", 0, 64, 1.0F, 0.0F, 0);
 	public static ToolMaterial weaponWarHammer = EnumHelper.addToolMaterial("WARHAMMER", 0, 863, 1.0F, 10.0F, 10);
+
 	public static Material honey = new MaterialLiquid(MapColor.mapColorArray[14]);
 }

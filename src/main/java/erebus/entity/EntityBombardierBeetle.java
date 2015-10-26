@@ -98,7 +98,7 @@ public class EntityBombardierBeetle extends EntityMob {
 		dropItem(Items.blaze_powder, 1);
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
-			entityDropItem(ItemMaterials.DATA.plateExo.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
 	}
 
 	@Override

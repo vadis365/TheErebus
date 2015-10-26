@@ -34,7 +34,7 @@ public class UmberOreFossil extends UmberOre {
 		}
 
 		if (world.rand.nextInt(10 - Math.min(6, fortune * 2)) == 0) {
-			drops.add(ItemMaterials.DATA.altarFragment.createStack());
+			drops.add(ItemMaterials.DATA.altarFragment.makeStack());
 			return drops;
 		}
 
