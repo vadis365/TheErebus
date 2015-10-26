@@ -95,17 +95,12 @@ public class SmoothieMakerRecipe {
 			return false;
 		}
 
-		for (FluidStack fluid : fluids)
-			if (tank0.getFluidAmount() >= fluid.amount && tank0.getFluid().isFluidEqual(fluid))
-				continue;
-			else if (tank1.getFluidAmount() >= fluid.amount && tank1.getFluid().isFluidEqual(fluid))
-				continue;
-			else if (tank2.getFluidAmount() >= fluid.amount && tank2.getFluid().isFluidEqual(fluid))
-				continue;
-			else if (tank3.getFluidAmount() >= fluid.amount && tank3.getFluid().isFluidEqual(fluid))
-				continue;
-			else
-				return false;
+	label: for (FluidStack fluid : fluids) {
+		for (IFluidTank tank : new IFluidTank[] { tank0, tank1, tank2, tank3 })
+			if (tank.getFluidAmount() >= fluid.amount && tank.getFluid().isFluidEqual(fluid))
+				continue label;
+		return false;
+	}
 
 		return true;
 	}

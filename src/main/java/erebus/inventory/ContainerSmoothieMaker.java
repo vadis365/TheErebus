@@ -1,21 +1,24 @@
 package erebus.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import erebus.ModItems;
 import erebus.item.ItemMaterials;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketSmoothieMakerGUI;
 import erebus.tileentity.TileEntitySmoothieMaker;
 
 public class ContainerSmoothieMaker extends Container {
 
-	protected TileEntitySmoothieMaker counter;
+	protected TileEntitySmoothieMaker tile;
 
 	public ContainerSmoothieMaker(InventoryPlayer inventory, TileEntitySmoothieMaker tileentity) {
-		counter = tileentity;
+		tile = tileentity;
 
 		addSlotToContainer(new Slot(tileentity, 0, 47, 9));
 		addSlotToContainer(new Slot(tileentity, 1, 113, 9));
@@ -61,26 +64,25 @@ public class ContainerSmoothieMaker extends Container {
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting crafter) {
-		super.addCraftingToCrafters(crafter);
-		counter.sendGUIData(this, crafter);
-	}
-
-	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		for (Object crafter : crafters)
-			counter.sendGUIData(this, (ICrafting) crafter);
+
+		if (tile != null) {
+			NBTTagCompound nbt = new NBTTagCompound();
+			tile.writeGUIData(nbt);
+			for (Object crafter : crafters)
+				if (crafter instanceof EntityPlayerMP)
+					PacketPipeline.sendToPlayer((EntityPlayerMP) crafter, new PacketSmoothieMakerGUI(nbt));
+		}
 	}
 
-	@Override
-	public void updateProgressBar(int id, int value) {
-		counter.getGUIData(id, value);
+	public void readPacketData(NBTTagCompound nbt) {
+		if (tile != null && nbt != null)
+			tile.readGUIData(nbt);
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return true;
 	}
-
 }
