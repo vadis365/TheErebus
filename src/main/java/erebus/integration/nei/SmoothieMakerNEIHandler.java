@@ -75,7 +75,7 @@ public class SmoothieMakerNEIHandler extends TemplateRecipeHandler {
 
 	@Override
 	public void loadTransferRects() {
-		transferRects.add(new RecipeTransferRect(new Rectangle(87, 25, 25, 16), getRecipeId()));
+		transferRects.add(new RecipeTransferRect(new Rectangle(67, 45, 32, 16), getRecipeId()));
 	}
 
 	@Override
