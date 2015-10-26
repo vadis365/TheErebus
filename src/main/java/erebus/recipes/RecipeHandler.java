@@ -238,8 +238,6 @@ public class RecipeHandler {
 		addShapelessRecipe(ItemMaterials.DATA.smoothieGlass.makeStack(), Items.glass_bottle, Items.glass_bottle, Items.glass_bottle);
 		addShapedRecipe(new ItemStack(ModBlocks.smoothieMaker), "xrx", "xxx", "sss", 'x', ItemMaterials.DATA.smoothieGlass.makeStack(), 'r', new ItemStack(ModBlocks.redGem), 's', new ItemStack(ModBlocks.umberstone));
 
-		addShapelessRecipe(new ItemStack(ModItems.bucketAntiVenom), ModItems.bucketBeetleJuice, ItemMaterials.DATA.poisonGland.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack());
-		addShapelessRecipe(new ItemStack(ModItems.bambucketAntiVenom), ModItems.bambucketBeetleJuice, ItemMaterials.DATA.poisonGland.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack());
 		addShapelessRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), ModItems.bucketAntiVenom, Items.glass_bottle, Items.glass_bottle);
 		addShapelessRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), ModItems.bambucketAntiVenom, Items.glass_bottle, Items.glass_bottle);
 

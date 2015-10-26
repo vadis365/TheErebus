@@ -12,8 +12,6 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
 import erebus.recipes.SmoothieMakerRecipe;
 
 public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements IFluidHandler {
@@ -102,22 +100,21 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 		ItemStack[] inputs = new ItemStack[4];
 		for (int i = 0; i < 4; i++)
 			inputs[i] = inventory[i];
-		SmoothieMakerRecipe recipe = SmoothieMakerRecipe.getRecipe(tanks[0], tanks[1], tanks[2], tanks[3], inputs);
-		if (recipe != null)
-			if (getStackInSlot(4) != null && getStackInSlot(4).getItem() == ModItems.materials && getStackInSlot(4).getItemDamage() == ItemMaterials.DATA.smoothieGlass.ordinal() && getStackInSlot(4).stackSize == 1) {
-				progress++;
+		SmoothieMakerRecipe recipe = SmoothieMakerRecipe.getRecipe(getStackInSlot(4), tanks[0], tanks[1], tanks[2], tanks[3], inputs);
+		if (recipe != null) {
+			progress++;
 
-				if (progress >= MAX_TIME) {
-					for (int i = 0; i < 5; i++)
-						if (inventory[i] != null)
-							if (--inventory[i].stackSize <= 0)
-								inventory[i] = null;
-					extractFluids(recipe);
-					inventory[4] = ItemStack.copyItemStack(recipe.getOutput());
-					progress = 0;
-					markDirty();
-				}
+			if (progress >= MAX_TIME) {
+				for (int i = 0; i < 5; i++)
+					if (inventory[i] != null)
+						if (--inventory[i].stackSize <= 0)
+							inventory[i] = null;
+				extractFluids(recipe);
+				inventory[4] = ItemStack.copyItemStack(recipe.getOutput());
+				progress = 0;
+				markDirty();
 			}
+		}
 		if (recipe == null || getStackInSlot(4) == null) {
 			progress = 0;
 			markDirty();
