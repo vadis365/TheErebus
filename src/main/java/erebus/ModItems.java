@@ -2,6 +2,7 @@ package erebus;
 
 import java.lang.reflect.Field;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemSeedFood;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import erebus.block.BlockSlabPlanks;
 import erebus.item.ItemAmuletAntTaming;
 import erebus.item.ItemAmuletBeeTaming;
 import erebus.item.ItemArmorExoskeleton;
@@ -212,7 +214,12 @@ public class ModItems {
 
 			@Override
 			public int getBurnTime(ItemStack fuel) {
-				return fuel.getItem() == materials && fuel.getItemDamage() == DATA.bamboo.ordinal() ? 300 : 0;
+				if (fuel.getItem() == materials && fuel.getItemDamage() == DATA.bamboo.ordinal())
+					return 300;
+				else if (Block.getBlockFromItem(fuel.getItem()) instanceof BlockSlabPlanks)
+					return 150;
+				else
+					return 0;
 			}
 		});
 	}

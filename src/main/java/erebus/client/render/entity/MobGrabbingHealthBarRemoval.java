@@ -2,7 +2,6 @@ package erebus.client.render.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.Gui;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.Pre;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -12,7 +11,7 @@ import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityScorpion;
 
 @SideOnly(Side.CLIENT)
-public class MobGrabbingHealthBarRemoval extends Gui {
+public class MobGrabbingHealthBarRemoval {
 
 	@SubscribeEvent
 	public void onRenderHUD(Pre event) {
