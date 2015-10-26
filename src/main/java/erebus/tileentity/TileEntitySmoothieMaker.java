@@ -151,7 +151,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 		for (FluidTank tank : tanks)
 			if (resource.isFluidEqual(tank.getFluid())) {
 				foundTankWithSameFluid = true;
-				amountFilled = tank.fill(resource, true);
+				amountFilled = tank.fill(resource, doFill);
 				break;
 			}
 
@@ -159,7 +159,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 		if (!foundTankWithSameFluid && amountFilled < resource.amount)
 			for (FluidTank tank : tanks)
 				if (tank.getFluid() == null) {
-					amountFilled += tank.fill(resource, true);
+					amountFilled += tank.fill(resource, doFill);
 					break;
 				}
 
