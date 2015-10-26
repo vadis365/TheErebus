@@ -419,6 +419,19 @@ tile.erebus.smoothieMaker.name=ErebusCo. Smoothie-matic 2000
 # Items #
 #########
 
+# Smoothies
+item.erebus.smoothie_green_tea_grasshopper.name=Green Tea Grasshopper Smoothie
+item.erebus.smoothie_money_honey.name=Money Honey Smoothie
+item.erebus.smoothie_nothing_in_the_middle.name=Nothing In The Middle Smoothie
+item.erebus.smoothie_green_giant.name=Green Giant Smoothie
+item.erebus.smoothie_seedy_goodness.name=Seedy Goodness Smoothie
+item.erebus.smoothie_givin_me_the_blues.name=Givin' Me The Blues Smoothie
+item.erebus.smoothie_hot_hot_baby.name=Hot Hot Baby Smoothie
+item.erebus.smoothie_dont_meddle_with_the_nettle.name=Don't Meddle With The Nettle Smoothie
+item.erebus.smoothie_liquid_gold.name=Liquid Gold Smoothie
+item.erebus.smoothie_bryufs_brew.name=Bryuf's Brew Smoothie
+
+# Rest
 item.erebus.encrustedDiamond.name=Encrusted Diamond
 item.erebus.helmetExo.name=Exoskeleton Helmet
 item.erebus.chestplateExo.name=Exoskeleton Chestplate
@@ -541,19 +554,6 @@ item.erebus.food.13.name=Cooked Titan Chop
 item.erebus.food.14.name=Swampberries
 item.erebus.food.15.name=Cabbage
 item.erebus.food.16.name=Cooked Titan Stew
-
-item.erebus.smoothie.0.name=Green Tea Grasshopper
-item.erebus.smoothie.1.name=Money Honey
-item.erebus.smoothie.2.name=Nothing In The Middle
-item.erebus.smoothie.3.name=Green Giant
-item.erebus.smoothie.4.name=Seedy Goodness
-item.erebus.smoothie.5.name=Givin' Me The Blues
-item.erebus.smoothie.6.name=Hot Hot Baby
-item.erebus.smoothie.7.name=Don't Meddle With The Nettle
-item.erebus.smoothie.8.name=Liquid Gold
-item.erebus.smoothie.9.name=Bryuf's Brew
-
-item.erebus.smoothieBook.name=Smoothie-matic 2000
 
 item.erebus.heartBerries.name=Heartberries
 item.erebus.lifeBlood.name=Life Blood
@@ -725,3 +725,12 @@ container.extenderThingy=Bamboo Extender
 container.antInventory=Ant Command Control
 container.composter=Organic Composter
 container.bamber=Bamber
+
+##########
+# Others #
+##########
+
+erebus.smoothie.effect.milk=Clears Effects
+erebus.smoothie.effect.extinguish=Puts Out Fires
+erebus.smoothie.effect.set_fire=Makes Fire
+erebus.smoothie.effect.heal=Heals

@@ -21,7 +21,6 @@ import erebus.item.ItemArmorReinExoskeleton;
 import erebus.item.ItemArmorRhino;
 import erebus.item.ItemArmorWaterStriders;
 import erebus.item.ItemAxeJade;
-import erebus.item.ItemBookSmoothies;
 import erebus.item.ItemBootsJump;
 import erebus.item.ItemBottleAntiVenom;
 import erebus.item.ItemBowMaxSpeed;
@@ -38,7 +37,7 @@ import erebus.item.ItemErebusFood;
 import erebus.item.ItemExtractor;
 import erebus.item.ItemFlowerSeeds;
 import erebus.item.ItemFoodHeartBerries;
-import erebus.item.ItemFoodSmoothie;
+import erebus.item.ItemSmoothie;
 import erebus.item.ItemHammerWar;
 import erebus.item.ItemHelmMushroom;
 import erebus.item.ItemHelmRhino;
@@ -79,7 +78,7 @@ public class ModItems {
 	public static final Item portalActivator = new ItemPortalActivator().setUnlocalizedName("erebus.portalActivator");
 	public static final Item materials = new ItemMaterials().setUnlocalizedName("erebus.materials");
 	public static final Item food = new ItemErebusFood().setUnlocalizedName("erebus.food");
-	public static final Item smoothie = new ItemFoodSmoothie().setUnlocalizedName("erebus.smoothie");
+	public static final Item smoothie = new ItemSmoothie().setUnlocalizedName("erebus.smoothie");
 	public static final Item heartBerries = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.heartBerries").setTextureName("erebus:heartBerries");
 	public static final Item lifeBlood = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.lifeBlood").setTextureName("erebus:lifeBlood");
 	public static final Item turnip = new ItemSeedFood(4, 0.6F, ModBlocks.blockTurnip, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.turnips").setTextureName("erebus:turnips");
@@ -181,7 +180,6 @@ public class ModItems {
 	public static final Item bucketHoney = new ItemBucket(ModBlocks.honeyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.bucketHoney").setTextureName("erebus:bucketHoney");
 
 	public static final Item bottleAntiVenom = new ItemBottleAntiVenom().setUnlocalizedName("erebus.bottleAntiVenom");
-	public static final Item smoothieBook = new ItemBookSmoothies().setMaxStackSize(1).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.smoothieBook").setTextureName("book_normal");
 
 	public static void init() {
 		registerItems();

@@ -13,6 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import erebus.core.helper.Utils;
 
 public class SmoothieMakerRecipe {
+
 	private static final List<SmoothieMakerRecipe> recipes = new ArrayList<SmoothieMakerRecipe>();
 
 	public static void addRecipe(ItemStack output, FluidStack fluid, Object... input) {

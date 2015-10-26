@@ -166,7 +166,7 @@ public final class ItemErebusFood extends ItemFood {
 	public ItemStack onEaten(ItemStack is, World world, EntityPlayer player) {
 		is.stackSize--;
 		player.getFoodStats().addStats(getHealAmount(is, world, player), getSaturationModifier(is, world, player));
-		if(FoodType.values()[is.getItemDamage()] != FoodType.cabbage)
+		if (FoodType.values()[is.getItemDamage()] != FoodType.cabbage)
 			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 		else
 			world.playSoundAtEntity(player, "erebus:cabbagefart", 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
@@ -298,5 +298,4 @@ public final class ItemErebusFood extends ItemFood {
 		cabbage,
 		titanStewCooked;
 	}
-
 }
