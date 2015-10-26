@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,7 +20,6 @@ import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.lib.EnumColour;
-import erebus.lib.Reference;
 
 public class ItemFlowerSeeds extends Item {
 
@@ -75,10 +75,13 @@ public class ItemFlowerSeeds extends Item {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getTranslatedName();
+		String colour;
 		if (stack.getItemDamage() == SEED_TYPE.RAINBOW.ordinal())
-			colour = "colour." + Reference.MOD_ID + ".rainbow";
-		return String.format(super.getItemStackDisplayName(stack), colour);
+			colour = "rainbow";
+		else
+			colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getUnlocalisedName();
+
+		return StatCollector.translateToLocal("item.erebus.flower_bulb_" + colour + ".name");
 	}
 
 	public enum SEED_TYPE {

@@ -107,6 +107,70 @@ tile.erebus.fence_gate_bamboo.name=Bamboo Fence Gate
 tile.erebus.fence_gate_rotten.name=Rotten Fence Gate
 tile.erebus.fence_gate_marshwood.name=Marshwood Fence Gate
 
+# Flowers
+tile.erebus.flower_black.name=Black Petal Block
+tile.erebus.flower_red.name=Red Petal Block
+tile.erebus.flower_brown.name=Brown Petal Block
+tile.erebus.flower_blue.name=Blue Petal Block
+tile.erebus.flower_purple.name=Purple Petal Block
+tile.erebus.flower_cyan.name=Cyan Petal Block
+tile.erebus.flower_light_grey.name=Light Grey Petal Block
+tile.erebus.flower_grey.name=Grey Petal Block
+tile.erebus.flower_pink.name=Pink Petal Block
+tile.erebus.flower_yellow.name=Yellow Petal Block
+tile.erebus.flower_light_blue.name=Light Blue Petal Block
+tile.erebus.flower_magenta.name=Magenta Petal Block
+tile.erebus.flower_orange.name=Orange Petal Block
+tile.erebus.flower_white.name=White Petal Block
+
+tile.erebus.flower_stigma.name=Exploding Stigma
+tile.erebus.flower_stem.name=Stem
+
+tile.erebus.stigma_black.name=Black Stigma
+tile.erebus.stigma_red.name=Red Stigma
+tile.erebus.stigma_brown.name=Brown Stigma
+tile.erebus.stigma_blue.name=Blue Stigma
+tile.erebus.stigma_purple.name=Purple Stigma
+tile.erebus.stigma_cyan.name=Cyan Stigma
+tile.erebus.stigma_light_grey.name=Light Grey Stigma
+tile.erebus.stigma_grey.name=Grey Stigma
+tile.erebus.stigma_pink.name=Pink Stigma
+tile.erebus.stigma_yellow.name=Yellow Stigma
+tile.erebus.stigma_light_blue.name=Light Blue Stigma
+tile.erebus.stigma_magenta.name=Magenta Stigma
+tile.erebus.stigma_orange.name=Orange Stigma
+tile.erebus.stigma_white.name=White Stigma
+
+tile.erebus.stigma_black.name=Black Stigma
+tile.erebus.stigma_red.name=Red Stigma
+tile.erebus.stigma_brown.name=Brown Stigma
+tile.erebus.stigma_blue.name=Blue Stigma
+tile.erebus.stigma_purple.name=Purple Stigma
+tile.erebus.stigma_cyan.name=Cyan Stigma
+tile.erebus.stigma_light_grey.name=Light Grey Stigma
+tile.erebus.stigma_grey.name=Grey Stigma
+tile.erebus.stigma_pink.name=Pink Stigma
+tile.erebus.stigma_yellow.name=Yellow Stigma
+tile.erebus.stigma_light_blue.name=Light Blue Stigma
+tile.erebus.stigma_magenta.name=Magenta Stigma
+tile.erebus.stigma_orange.name=Orange Stigma
+tile.erebus.stigma_white.name=White Stigma
+
+tile.erebus.flower_planted_black.name=Black Flower
+tile.erebus.flower_planted_red.name=Red Flower
+tile.erebus.flower_planted_brown.name=Brown Flower
+tile.erebus.flower_planted_blue.name=Blue Flower
+tile.erebus.flower_planted_purple.name=Purple Flower
+tile.erebus.flower_planted_cyan.name=Cyan Flower
+tile.erebus.flower_planted_light_grey.name=Light Grey Flower
+tile.erebus.flower_planted_grey.name=Grey Flower
+tile.erebus.flower_planted_pink.name=Pink Flower
+tile.erebus.flower_planted_yellow.name=Yellow Flower
+tile.erebus.flower_planted_light_blue.name=Light Blue Flower
+tile.erebus.flower_planted_magenta.name=Magenta Flower
+tile.erebus.flower_planted_orange.name=Orange Flower
+tile.erebus.flower_planted_white.name=White Flower
+
 # Rest (someone should organise it at some point)
 tile.erebus.portal.name=Erebus Portal
 tile.erebus.gaeanKeystone.name=Gaean Keystone
@@ -155,12 +219,6 @@ tile.erebus.fireBloom.name=Firebloom
 tile.erebus.fern.name=Fern
 tile.erebus.fiddlehead.name=Fiddlehead
 tile.erebus.algae.name=Swamp Algae
-
-tile.erebus.flowerPlanted.name=%s Flower
-tile.erebus.stigma.name=%s Flower Stigma
-tile.erebus.flower.name=%s Petal
-tile.erebus.flower_14.name=Exploding Stigma
-tile.erebus.flower_15.name=Stem
 
 tile.erebus.jadeBerryBush.name=Jadeberry Bush
 tile.erebus.heartBerryBush.name=Heartberry Bush
@@ -534,7 +592,6 @@ item.erebus.doorAmberitem.erebus.name=Amber Door
 item.erebus.bucketHoney.name=Bucket Of Honey
 item.erebus.homingBeecon.name=Homing Beecon
 item.erebus.homingBeeconAdvanced.name=Advanced Homing Beecon
-item.erebus.flowerSeeds.name=%s Flower Bulb
 item.erebus.whetstone.name=Whetstone
 item.erebus.woodlouseBall.name=Woodlouse Ball
 item.erebus.rolledNewspaper.name=Rolled Up Newspaper
@@ -544,8 +601,24 @@ item.erebus.compost.name=Compost
 item.erebus.monsterPlacer.name=Spawn %s
 item.doorAmberItem.name=Amber Door
 item.erebus.warHammer.name=Quake Hammer
-
 item.erebus.soulCrystal.name=Soul Crystal
+
+# Flower Bulbs
+item.erebus.flower_bulb_black.name=Black Flower Bulb
+item.erebus.flower_bulb_red.name=Red Flower Bulb
+item.erebus.flower_bulb_brown.name=Brown Flower Bulb
+item.erebus.flower_bulb_blue.name=Blue Flower Bulb
+item.erebus.flower_bulb_purple.name=Purple Flower Bulb
+item.erebus.flower_bulb_cyan.name=Cyan Flower Bulb
+item.erebus.flower_bulb_light_grey.name=Light Grey Flower Bulb
+item.erebus.flower_bulb_grey.name=Grey Flower Bulb
+item.erebus.flower_bulb_pink.name=Pink Flower Bulb
+item.erebus.flower_bulb_yellow.name=Yellow Flower Bulb
+item.erebus.flower_bulb_light_blue.name=Light Blue Flower Bulb
+item.erebus.flower_bulb_magenta.name=Magenta Flower Bulb
+item.erebus.flower_bulb_orange.name=Orange Flower Bulb
+item.erebus.flower_bulb_white.name=White Flower Bulb
+item.erebus.flower_bulb_rainbow.name=Rainbow Flower Bulb
 
 ############
 # Entities #
@@ -652,25 +725,3 @@ container.extenderThingy=Bamboo Extender
 container.antInventory=Ant Command Control
 container.composter=Organic Composter
 container.bamber=Bamber
-
-###########
-# Colours #
-###########
-
-colour.erebus.dyeBlack=Black
-colour.erebus.dyeRed=Red
-colour.erebus.dyeGreen=Green
-colour.erebus.dyeBrown=Brown
-colour.erebus.dyeBlue=Blue
-colour.erebus.dyePurple=Purple
-colour.erebus.dyeCyan=Cyan
-colour.erebus.dyeLightGray=Light Grey
-colour.erebus.dyeGray=Grey
-colour.erebus.dyePink=Pink
-colour.erebus.dyeLime=Lime
-colour.erebus.dyeYellow=Yellow
-colour.erebus.dyeLightBlue=Light Blue
-colour.erebus.dyeMagenta=Magenta
-colour.erebus.dyeOrange=Orange
-colour.erebus.dyeWhite=White
-colour.erebus.rainbow=Rainbow

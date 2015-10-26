@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import net.minecraft.block.BlockColored;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.util.StatCollector;
 
 public enum EnumColour {
 
@@ -52,7 +51,7 @@ public enum EnumColour {
 		return getColour().brighter().getRGB();
 	}
 
-	public String getTranslatedName() {
-		return StatCollector.translateToLocal("colour." + Reference.MOD_ID + "." + dye);
+	public String getUnlocalisedName() {
+		return name().toLowerCase();
 	}
 }

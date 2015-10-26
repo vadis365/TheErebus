@@ -1,10 +1,10 @@
 package erebus.item.block;
 
-import erebus.core.helper.Utils;
-import erebus.lib.EnumColour;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import erebus.core.helper.Utils;
+import erebus.lib.EnumColour;
 
 public class ItemBlockErebusStigma extends ItemBlockGeneric {
 
@@ -14,7 +14,7 @@ public class ItemBlockErebusStigma extends ItemBlockGeneric {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getTranslatedName();
-		return String.format(StatCollector.translateToLocal(getUnlocalizedName() + ".name"), colour);
+		String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getUnlocalisedName();
+		return StatCollector.translateToLocal(getUnlocalizedName() + "_" + colour + ".name");
 	}
 }
