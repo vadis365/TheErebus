@@ -20,7 +20,7 @@ public class GuiSmoothieMaker extends GuiContainer {
 
 	private TileEntitySmoothieMaker tile;
 	private static final ResourceLocation gui = new ResourceLocation("erebus:textures/gui/container/smoothieMaker.png");
-	private static final Rectangle[] tankPositions = new Rectangle[] { new Rectangle(8, 6, 9, 73), new Rectangle(25, 6, 9, 73), new Rectangle(142, 6, 9, 73), new Rectangle(159, 6, 9, 73) };
+	public static final Rectangle[] tankPositions = new Rectangle[] { new Rectangle(8, 6, 9, 73), new Rectangle(25, 6, 9, 73), new Rectangle(142, 6, 9, 73), new Rectangle(159, 6, 9, 73) };
 
 	public GuiSmoothieMaker(InventoryPlayer inv, TileEntitySmoothieMaker tile) {
 		super(new ContainerSmoothieMaker(inv, tile));
@@ -94,7 +94,7 @@ public class GuiSmoothieMaker extends GuiContainer {
 		tess.draw();
 	}
 
-	private void glColour(int colour) {
+	public static void glColour(int colour) {
 		float r = (colour >> 16 & 255) / 255F;
 		float g = (colour >> 8 & 255) / 255F;
 		float b = (colour & 255) / 255F;

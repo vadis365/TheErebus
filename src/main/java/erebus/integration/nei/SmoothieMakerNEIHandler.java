@@ -7,7 +7,10 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -24,6 +27,57 @@ import erebus.item.ItemMaterials;
 import erebus.recipes.SmoothieMakerRecipe;
 
 public class SmoothieMakerNEIHandler extends TemplateRecipeHandler {
+
+	@Override
+	public final void drawForeground(int recipe) {
+		super.drawForeground(recipe);
+		CachedSmoothieMakerRecipe rec = (CachedSmoothieMakerRecipe) arecipes.get(recipe);
+
+		FluidStack[] fluids = rec.getFluids();
+		for (int i = 0; i < fluids.length; i++)
+			draw(GuiSmoothieMaker.tankPositions[i], fluids[i], 16000);
+	}
+
+	void draw(Rectangle rectangle, FluidStack fluid, int capacity) {
+		if (fluid == null || fluid.getFluid() == null || fluid.amount <= 0)
+			return;
+		IIcon fluidIcon = fluid.getFluid().getStillIcon();
+		if (fluidIcon == null)
+			return;
+
+		GuiDraw.changeTexture(TextureMap.locationBlocksTexture);
+		GuiSmoothieMaker.glColour(fluid.getFluid().getColor(fluid));
+		GL11.glEnable(GL11.GL_BLEND);
+
+		int amount = Math.max(Math.min(rectangle.height, fluid.amount * rectangle.height / capacity), 1);
+		int posY = rectangle.y + rectangle.height - amount;
+
+		for (int i = 0; i < rectangle.width; i += 16)
+			for (int j = 0; j < amount; j += 16) {
+				int drawWidth = Math.min(rectangle.width - i, 16);
+				int drawHeight = Math.min(amount - j, 16);
+
+				int drawX = rectangle.x + i - 5;
+				int drawY = posY + j - 3;
+
+				double minU = fluidIcon.getMinU();
+				double maxU = fluidIcon.getMaxU();
+				double minV = fluidIcon.getMinV();
+				double maxV = fluidIcon.getMaxV();
+
+				Tessellator tessellator = Tessellator.instance;
+				tessellator.startDrawingQuads();
+				tessellator.addVertexWithUV(drawX, drawY + drawHeight, 0, minU, minV + (maxV - minV) * drawHeight / 16F);
+				tessellator.addVertexWithUV(drawX + drawWidth, drawY + drawHeight, 0, minU + (maxU - minU) * drawWidth / 16F, minV + (maxV - minV) * drawHeight / 16F);
+				tessellator.addVertexWithUV(drawX + drawWidth, drawY, 0, minU + (maxU - minU) * drawWidth / 16F, minV);
+				tessellator.addVertexWithUV(drawX, drawY, 0, minU, minV);
+				tessellator.draw();
+			}
+
+		GuiDraw.changeTexture(getGuiTexture());
+		GuiSmoothieMaker.glColour(0xFFFFFF);
+		GuiDraw.drawTexturedModalRect(rectangle.x - 5, rectangle.y, 176, 41, rectangle.width, rectangle.height);
+	}
 
 	@Override
 	public void drawBackground(int index) {
