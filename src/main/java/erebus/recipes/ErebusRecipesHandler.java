@@ -38,6 +38,6 @@ public class ErebusRecipesHandler {
 		SmoothieMakerRecipe.addRecipe(FoodType.MELONADE_SPARKLY.makeStack(), ItemMaterials.DATA.smoothieGlass.makeStack(), FluidRegistry.WATER, new ItemStack(Items.speckled_melon));
 		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.bambucketAntiVenom), new ItemStack(ModItems.bambucket), ModFluids.beetleJuice, ItemMaterials.DATA.poisonGland.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack());
 		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.bucketAntiVenom), new ItemStack(Items.bucket), ModFluids.beetleJuice, ItemMaterials.DATA.poisonGland.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack());
-		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.bottleAntiVenom), new ItemStack(Items.glass_bottle, 2), ModFluids.beetleJuice, ItemMaterials.DATA.poisonGland.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack());
+		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), new ItemStack(Items.glass_bottle, 2), ModFluids.beetleJuice, ItemMaterials.DATA.poisonGland.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack(), ItemMaterials.DATA.nettleleaves.makeStack());
 	}
 }
