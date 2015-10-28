@@ -38,6 +38,7 @@ import erebus.block.BlockPetrifiedChest;
 import erebus.block.BlockPetrifiedCraftingTable;
 import erebus.block.BlockPlanksErebus;
 import erebus.block.BlockPlantedGiantFlower;
+import erebus.block.BlockPreservedBlock;
 import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
 import erebus.block.BlockSimple;
@@ -324,6 +325,7 @@ public class ModBlocks {
 	public static final Block gaeanKeystone = new GaeanKeystone();
 	public static final Block tarantulaEgg = new BlockTarantulaEgg();
 	public static final Block antlionEgg = new BlockAntlionEgg();
+	public static final Block preservedBlock = new BlockPreservedBlock();
 
 	public static void init() {
 		initBlocks();

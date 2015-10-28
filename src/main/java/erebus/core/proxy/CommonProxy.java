@@ -59,6 +59,7 @@ import erebus.tileentity.TileEntityJarOHoney;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
+import erebus.tileentity.TileEntityPreservedBlock;
 import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityTarantulaEgg;
 import erebus.tileentity.TileEntityTempleTeleporter;
@@ -118,6 +119,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntitySmoothieMaker.class, "smoothieMaker");
 		registerTileEntity(TileEntityTempleTeleporter.class, "templeTeleporter");
 		registerTileEntity(TileEntityAntlionEgg.class, "antlionEgg");
+		registerTileEntity(TileEntityPreservedBlock.class, "preservedBlock");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
@@ -281,10 +283,10 @@ public class CommonProxy implements IGuiHandler {
 		return null;
 	}
 
-    public EntityPlayer getClientPlayer() {
-        return null;
-    }
-    
+	public EntityPlayer getClientPlayer() {
+		return null;
+	}
+
 	public World getClientWorld() {
 		return null;
 	}

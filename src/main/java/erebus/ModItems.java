@@ -37,7 +37,6 @@ import erebus.item.ItemErebusFood;
 import erebus.item.ItemExtractor;
 import erebus.item.ItemFlowerSeeds;
 import erebus.item.ItemFoodHeartBerries;
-import erebus.item.ItemSmoothie;
 import erebus.item.ItemHammerWar;
 import erebus.item.ItemHelmMushroom;
 import erebus.item.ItemHelmRhino;
@@ -57,12 +56,14 @@ import erebus.item.ItemPlanticide;
 import erebus.item.ItemPortalActivator;
 import erebus.item.ItemRolledNewspaper;
 import erebus.item.ItemScorpionPincer;
+import erebus.item.ItemSmoothie;
 import erebus.item.ItemSoulCrystal;
 import erebus.item.ItemSpawnEggs;
 import erebus.item.ItemSprayCan;
 import erebus.item.ItemSwordWasp;
 import erebus.item.ItemTShirtSpider;
 import erebus.item.ItemWandOfAnimation;
+import erebus.item.ItemWandOfPreservation;
 import erebus.item.ItemWebSlinger;
 import erebus.item.ItemWhetstone;
 import erebus.item.ItemWitherWebSlinger;
@@ -75,6 +76,7 @@ import erebus.item.bambucket.ItemBambucketMilk;
 public class ModItems {
 
 	// BASIC MATERIALS
+	public static final Item wandOfPreservation = new ItemWandOfPreservation();
 	public static final Item portalActivator = new ItemPortalActivator().setUnlocalizedName("erebus.portalActivator");
 	public static final Item materials = new ItemMaterials().setUnlocalizedName("erebus.materials");
 	public static final Item food = new ItemErebusFood().setUnlocalizedName("erebus.food");

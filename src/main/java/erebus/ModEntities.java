@@ -48,6 +48,7 @@ import erebus.entity.EntityMucusBombPrimed;
 import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityPreservedBlock;
 import erebus.entity.EntityPunchroom;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
@@ -150,6 +151,7 @@ public class ModEntities {
 		registerEntity(78, EntityPoisonJet.class, "poisonjet");
 		registerEntity(79, EntityGasVent.class, "gasVent");
 		registerEntity(80, EntityThrownSand.class, "thrownSand");
+		registerEntity(81, EntityPreservedBlock.class, "preservedBlock");
 
 		// Spawn conditions
 		if (ConfigHandler.INSTANCE.netherWidows)
