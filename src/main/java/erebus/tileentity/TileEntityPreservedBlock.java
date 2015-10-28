@@ -42,6 +42,10 @@ public class TileEntityPreservedBlock extends TileEntity {
 		entityNBT = nbt.getCompoundTag("EntityNBT");
 	}
 
+	public NBTTagCompound getEntityNBT() {
+		return entityNBT;
+	}
+
 	public void setEntityNBT(NBTTagCompound entityNBT) {
 		this.entityNBT = entityNBT;
 	}
