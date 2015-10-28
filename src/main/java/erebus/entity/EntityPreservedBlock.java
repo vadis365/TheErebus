@@ -3,6 +3,7 @@ package erebus.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,7 +53,7 @@ public class EntityPreservedBlock extends EntityThrowable {
 
 	// Easier to expand on
 	private boolean canTrap(Entity entity) {
-		return entity instanceof EntityLivingBase;
+		return entity instanceof EntityLivingBase && !(entity instanceof IBossDisplayData);
 	}
 
 	private NBTTagCompound trapEntity(Entity entity) {
