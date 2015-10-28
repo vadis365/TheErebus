@@ -44,8 +44,8 @@ public class EntityPreservedBlock extends EntityThrowable {
 				tile.setEntityNBT(trapEntity(mop.entityHit));
 				mop.entityHit.setDead();
 			}
-		} else if (mop.entityHit == null && ModBlocks.preservedBlock.canPlaceBlockAt(worldObj, x, y, z))
-			worldObj.setBlock(x, y, z, ModBlocks.preservedBlock);
+		} else if (mop.entityHit == null && ModBlocks.amber.canPlaceBlockAt(worldObj, x, y, z))
+			worldObj.setBlock(x, y, z, ModBlocks.amber, 1, 2);
 
 		setDead();
 	}
