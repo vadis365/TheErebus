@@ -14,8 +14,8 @@ public class ItemWandOfPreservation extends Item {
 		setMaxDamage(256);
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.specials);
-		setUnlocalizedName("erebus.wandOfPreservation");
 		setTextureName("erebus:wand_of_preservation");
+		setUnlocalizedName("erebus.wand_of_preservation");
 	}
 
 	@Override
