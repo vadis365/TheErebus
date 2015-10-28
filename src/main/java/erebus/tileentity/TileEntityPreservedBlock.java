@@ -53,9 +53,10 @@ public class TileEntityPreservedBlock extends TileEntity {
 	public void spawnTrappedEntity() {
 		if (worldObj.isRemote)
 			return;
-
-		Entity entity = EntityList.createEntityFromNBT(entityNBT, worldObj);
-		entity.setLocationAndAngles(xCoord + 0.5, yCoord, zCoord + 0.5, 0.0F, 0.0F);
-		worldObj.spawnEntityInWorld(entity);
+		if (entityNBT != null) {
+			Entity entity = EntityList.createEntityFromNBT(entityNBT, worldObj);
+			entity.setLocationAndAngles(xCoord + 0.5, yCoord, zCoord + 0.5, 0.0F, 0.0F);
+			worldObj.spawnEntityInWorld(entity);
+		}
 	}
 }

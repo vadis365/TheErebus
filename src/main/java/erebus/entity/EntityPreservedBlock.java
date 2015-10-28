@@ -3,6 +3,7 @@ package erebus.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -36,13 +37,15 @@ public class EntityPreservedBlock extends EntityThrowable {
 		int y = MathHelper.floor_double(posY);
 		int z = MathHelper.floor_double(posZ);
 
-		if (mop.typeOfHit == MovingObjectType.ENTITY && mop.entityHit != null)
+		if (mop.typeOfHit == MovingObjectType.ENTITY && mop.entityHit != null && !(mop.entityHit instanceof EntityPlayer)) {
 			if (canTrap(mop.entityHit)) {
 				worldObj.setBlock(x, y, z, ModBlocks.preservedBlock);
 				TileEntityPreservedBlock tile = Utils.getTileEntity(worldObj, x, y, z, TileEntityPreservedBlock.class);
 				tile.setEntityNBT(trapEntity(mop.entityHit));
 				mop.entityHit.setDead();
 			}
+		} else if (mop.entityHit == null && ModBlocks.preservedBlock.canPlaceBlockAt(worldObj, x, y, z))
+			worldObj.setBlock(x, y, z, ModBlocks.preservedBlock);
 
 		setDead();
 	}
