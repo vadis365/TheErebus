@@ -97,8 +97,7 @@ public class ItemMaterials extends Item {
 	public void registerIcons(IIconRegister iconRegister) {
 		icons = new IIcon[DATA.values().length];
 		for (DATA d : DATA.values())
-			if (d.isActive())
-				icons[d.ordinal()] = iconRegister.registerIcon("erebus:" + d.name());
+			icons[d.ordinal()] = iconRegister.registerIcon("erebus:" + d.name());
 	}
 
 	@Override
@@ -114,8 +113,7 @@ public class ItemMaterials extends Item {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		for (DATA d : DATA.values())
-			if (d.isActive())
-				list.add(new ItemStack(item, 1, d.ordinal()));
+			list.add(new ItemStack(item, 1, d.ordinal()));
 	}
 
 	@Override
@@ -174,7 +172,7 @@ public class ItemMaterials extends Item {
 		gaeanGem,
 		crimsonHeart,
 		sapBall,
-		UNUSED, // TODO Replace me!!!
+		amberStar,
 		ingotAluminium,
 		ingotCopper,
 		ingotLead,
@@ -203,10 +201,6 @@ public class ItemMaterials extends Item {
 
 		public ItemStack makeStack(int size) {
 			return new ItemStack(ModItems.materials, size, ordinal());
-		}
-
-		public boolean isActive() {
-			return this != UNUSED;
 		}
 	}
 }
