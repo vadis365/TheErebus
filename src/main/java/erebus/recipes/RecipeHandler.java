@@ -7,6 +7,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -33,6 +35,10 @@ public class RecipeHandler {
 		registerOreDictionary();
 		registerRecipes();
 		registerSmelting();
+
+		RecipeSorter.register("erebus.paxelrecipe", RecipePaxel.class, Category.SHAPELESS, "after:minecraft:shapeless");
+		RecipeSorter.register("erebus.enchantmentsensitiverecipe", EnchantSensitiveRecipe.class, Category.SHAPED, "after:minecraft:shaped");
+		RecipeSorter.register("erebus.sprintleggingsupgrades", RecipeSprintLeggingsUpgrades.class, Category.SHAPELESS, "after:minecraft:shapeless");
 	}
 
 	private static void registerRecipes() {
