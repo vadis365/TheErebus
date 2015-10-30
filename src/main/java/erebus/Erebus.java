@@ -32,7 +32,6 @@ import erebus.core.handler.EntityDeathEventHandler;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityPickupEventHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
-import erebus.core.handler.PlayerChangedDimensionEventHandler;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.debug.ErebusCommandDebug;
@@ -112,7 +111,6 @@ public class Erebus {
 		TeleporterHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEventHandler());
-		MinecraftForge.EVENT_BUS.register(new PlayerChangedDimensionEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityPickupEventHandler());
 		MinecraftForge.EVENT_BUS.register(new BucketFillHandler());
 		MinecraftForge.EVENT_BUS.register(ModBlocks.quickSand);

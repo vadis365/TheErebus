@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import erebus.block.GaeanKeystone;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.tileentity.TileEntityGaeanKeystone;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.LongHashMap;
@@ -18,10 +15,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
-import erebus.ModBlocks;
 import net.minecraft.world.chunk.Chunk;
+import erebus.ModAchievements;
+import erebus.ModBlocks;
+import erebus.block.GaeanKeystone;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.tileentity.TileEntityGaeanKeystone;
 
 final class TeleporterErebus extends Teleporter {
+
 	private final WorldServer worldServerInstance;
 	private final LongHashMap destinationCoordinateCache = new LongHashMap();
 	private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
@@ -33,14 +35,12 @@ final class TeleporterErebus extends Teleporter {
 
 	@Override
 	public void placeInPortal(Entity entity, double x, double y, double z, float rotationYaw) {
-		if (!placeInExistingPortal(entity, x, y, z, rotationYaw)) {
+		if (!placeInExistingPortal(entity, x, y, z, rotationYaw))
 			if (worldServerInstance.provider.dimensionId == ConfigHandler.INSTANCE.erebusDimensionID) {
 				makePortal(entity);
 				placeInExistingPortal(entity, x, y, z, rotationYaw);
-			} else {
+			} else
 				moveToEmptyArea(entity);
-			}
-		}
 	}
 
 	private void moveToEmptyArea(Entity entity) {
@@ -56,11 +56,11 @@ final class TeleporterErebus extends Teleporter {
 				free_height = 0;
 				continue;
 			}
-			if (free_height == 0) {
+			if (free_height == 0)
 				freeStartY = y;
-			}
 			free_height++;
-			if (free_height >= height) break;
+			if (free_height >= height)
+				break;
 		}
 		entity.setPosition(x, freeStartY, z);
 	}
@@ -71,26 +71,31 @@ final class TeleporterErebus extends Teleporter {
 		int minZ = MathHelper.floor_double(box.minZ);
 		int maxZ = MathHelper.floor_double(box.maxZ + 1.0D);
 
-		if (box.minX < 0.0D) --minX;
-		if (y < 0.0D) --y;
-		if (box.minZ < 0.0D) --minZ;
+		if (box.minX < 0.0D)
+			--minX;
+		if (y < 0.0D)
+			--y;
+		if (box.minZ < 0.0D)
+			--minZ;
 
-		for (int x = minX; x < maxX; ++x) {
+		for (int x = minX; x < maxX; ++x)
 			for (int z = minZ; z < maxZ; ++z) {
 				Block block = worldServerInstance.getBlock(x, y, z);
 
 				final Material mat = block.getMaterial();
-				if (mat.isLiquid() || !mat.isReplaceable()) {
+				if (mat.isLiquid() || !mat.isReplaceable())
 					return true;
-				}
 			}
-		}
 
 		return false;
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public boolean placeInExistingPortal(Entity entity, double x, double y, double z, float rotationYaw) {
+		if (entity instanceof EntityPlayer)
+			((EntityPlayer) entity).triggerAchievement(ModAchievements.welcome);
+
 		int checkRadius = 32;
 		double distToPortal = Double.POSITIVE_INFINITY;
 		int posX = 0;
@@ -110,25 +115,24 @@ final class TeleporterErebus extends Teleporter {
 			pos.lastUpdateTime = worldServerInstance.getTotalWorldTime();
 			portalNotSaved = false;
 		} else {
-			for (int chunkX = roundX - checkRadius; chunkX <= roundX + checkRadius; chunkX += 16) {
+			for (int chunkX = roundX - checkRadius; chunkX <= roundX + checkRadius; chunkX += 16)
 				for (int chunkZ = roundZ - checkRadius; chunkZ <= roundZ + checkRadius; chunkZ += 16) {
 					Chunk chunk = worldServerInstance.getChunkFromBlockCoords(chunkX, chunkZ);
 					for (TileEntity te : (Iterable<TileEntity>) chunk.chunkTileEntityMap.values()) {
-						if (!(te instanceof TileEntityGaeanKeystone)) {
+						if (!(te instanceof TileEntityGaeanKeystone))
 							continue;
-						}
 						double dx = entity.posX - te.xCoord;
 						double dy = 0; //entity.posY - te.yCoord;
 						double dz = entity.posZ - te.zCoord;
 						double dSq = dx * dx + dy * dy + dz * dz;
-						if (dSq > distToPortal) continue;
+						if (dSq > distToPortal)
+							continue;
 						distToPortal = dSq;
 						posX = te.xCoord;
 						posY = te.yCoord;
 						posZ = te.zCoord;
 					}
 				}
-			}
 			distToPortal = Math.sqrt(distToPortal);
 		}
 
@@ -176,9 +180,12 @@ final class TeleporterErebus extends Teleporter {
 
 	@Override
 	public boolean makePortal(Entity entity) {
+		if (entity instanceof EntityPlayer)
+			((EntityPlayer) entity).triggerAchievement(ModAchievements.welcome);
+
 		//attempt at constraining the portal height in the Erebus
 		double safeHeight = Math.min(Math.max(entity.posY * 0.5D, 12), 116);
-		
+
 		int x = MathHelper.floor_double(entity.posX);
 		int y = MathHelper.floor_double(safeHeight) - 2;
 		int z = MathHelper.floor_double(entity.posZ);
