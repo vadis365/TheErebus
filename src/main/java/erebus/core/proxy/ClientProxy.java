@@ -48,7 +48,6 @@ import erebus.client.render.block.BlockDoublePlantRender;
 import erebus.client.render.block.BlockGlowshroomRender;
 import erebus.client.render.block.BlockGlowshroomStalkRender;
 import erebus.client.render.block.BlockHollowLogRender;
-import erebus.client.render.block.BlockKeystoneRenderer;
 import erebus.client.render.block.BlockPlantedFlowerRender;
 import erebus.client.render.block.BlockSiloRoofRender;
 import erebus.client.render.block.BlockSiloSupportsRender;
@@ -268,7 +267,6 @@ public class ClientProxy extends CommonProxy {
 		SILO_ROOF,
 		SILO_SUPPORTS,
 		COMPOSTER,
-		KEYSTONE,
 		DOUBLE_PLANTS,
 		VELOCITY_BLOCK,
 		DOOR,
@@ -393,7 +391,6 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockSiloRoofRender());
 		RenderingRegistry.registerBlockHandler(new BlockSiloSupportsRender());
 		RenderingRegistry.registerBlockHandler(new BlockComposterRender());
-		RenderingRegistry.registerBlockHandler(new BlockKeystoneRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockDoublePlantRender());
 		RenderingRegistry.registerBlockHandler(new BlockVelocityBlockRender());
 		RenderingRegistry.registerBlockHandler(new BlockDoorRenderer());

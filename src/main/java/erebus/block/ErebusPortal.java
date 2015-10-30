@@ -4,21 +4,19 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class ErebusPortal extends Block {
+
 	public ErebusPortal() {
 		super(Material.portal);
 		setLightLevel(1.0F);
@@ -39,16 +37,19 @@ public class ErebusPortal extends Block {
 			final int atY = y + dir.offsetY;
 			final int atZ = z + dir.offsetZ;
 			Block at = world.getBlock(atX, atY, atZ);
-			if (!isSubstrate(at, actualPortal)) continue;
+			if (!isSubstrate(at, actualPortal))
+				continue;
 			final int opX = x - dir.offsetX;
 			final int opY = y - dir.offsetY;
 			final int opZ = z - dir.offsetZ;
 			Block op = world.getBlock(opX, opY, opZ);
-			if (!op.isNormalCube() && !isSubstrate(op, actualPortal)) return false;
+			if (!op.isNormalCube() && !isSubstrate(op, actualPortal))
+				return false;
 			neighborPortals++;
-			axisFlag |= (1 << (dir.ordinal() >> 1)) /* Creates a mask formatted as: <Up|Down><North|South><East|West> */;
+			axisFlag |= 1 << (dir.ordinal() >> 1) /* Creates a mask formatted as: <Up|Down><North|South><East|West> */;
 		}
-		if (neighborPortals < 1) return false;
+		if (neighborPortals < 1)
+			return false;
 		if (axisFlag == 0x7)
 			return false; // 0b111, meaning there's a nieghbor on 3 sides, therefore not defining a plane
 		return true;
@@ -60,9 +61,8 @@ public class ErebusPortal extends Block {
 
 	@Override
 	public void onNeighborBlockChange(World w, int x, int y, int z, Block neighbor) {
-		if (!obeysPortalRule(w, x, y, z, true)) {
+		if (!obeysPortalRule(w, x, y, z, true))
 			w.setBlockToAir(x, y, z);
-		}
 	}
 
 	@Override

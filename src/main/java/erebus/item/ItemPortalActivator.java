@@ -10,7 +10,6 @@ public class ItemPortalActivator extends Item {
 
 	public ItemPortalActivator() {
 		setFull3D();
-		setMaxDamage(64);
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
 	}

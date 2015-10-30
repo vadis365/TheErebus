@@ -2,7 +2,6 @@ package erebus.block;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -12,21 +11,20 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import erebus.tileentity.TileEntityGaeanKeystone;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class GaeanKeystone extends BlockContainer {
+
 	@SideOnly(Side.CLIENT)
 	private IIcon icons[];
 
@@ -35,21 +33,12 @@ public class GaeanKeystone extends BlockContainer {
 		setHardness(3.0f);
 		setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.gaeanKeystone");
+		setBlockBounds(0, 0, 0, 1, 0.8125F, 1);
 	}
 
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
-	}
-
-	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune) {
-		return Item.getItemFromBlock(this);
-	}
-
-	@Override
-	public int damageDropped(int meta) {
-		return 0;
 	}
 
 	@Override
@@ -71,35 +60,30 @@ public class GaeanKeystone extends BlockContainer {
 	}
 
 	@Override
-	public int getRenderType() {
-		return BlockRenderIDs.KEYSTONE.id();
-	}
-
-	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote) return true;
+		if (world.isRemote)
+			return true;
 		ItemStack held = player.getCurrentEquippedItem();
 		if (world.getBlockMetadata(x, y, z) > 0) {
-			if (held != null) return true;
+			if (held != null)
+				return true;
 			breakPortal(world, x, y, z);
 			world.setBlockMetadataWithNotify(x, y, z, 0, 3);
 			player.setCurrentItemOrArmor(0, new ItemStack(ModItems.portalActivator));
 			return true;
 		}
-		if (held == null || held.getItem() != ModItems.portalActivator) {
+		if (held == null || held.getItem() != ModItems.portalActivator)
 			return false;
-		}
 		if (makePortal(world, x, y, z)) {
 			world.setBlockMetadataWithNotify(x, y, z, 1, 3);
 			player.setCurrentItemOrArmor(0, null);
-		} else {
+		} else
 			world.setBlockMetadataWithNotify(x, y, z, 0, 3);
-		}
 		return true;
 	}
 
@@ -137,13 +121,11 @@ public class GaeanKeystone extends BlockContainer {
 		}
 
 		static void iterateCube(PCoord min, PCoord max, ICoordFunc func) {
-			for (int x = min.x; x <= max.x; x++) {
-				for (int z = min.z; z <= max.z; z++) {
-						for (int y = min.y; y <= max.y; y++) {
-						if (func.visit(new PCoord(min.w, x, y, z))) return;
-					}
-				}
-			}
+			for (int x = min.x; x <= max.x; x++)
+				for (int z = min.z; z <= max.z; z++)
+					for (int y = min.y; y <= max.y; y++)
+						if (func.visit(new PCoord(min.w, x, y, z)))
+							return;
 		}
 
 		interface ICoordFunc {
@@ -156,13 +138,18 @@ public class GaeanKeystone extends BlockContainer {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (!(o instanceof PCoord)) return false;
+			if (this == o)
+				return true;
+			if (!(o instanceof PCoord))
+				return false;
 			PCoord pCoord = (PCoord) o;
 
-			if (x != pCoord.x) return false;
-			if (y != pCoord.y) return false;
-			if (z != pCoord.z) return false;
+			if (x != pCoord.x)
+				return false;
+			if (y != pCoord.y)
+				return false;
+			if (z != pCoord.z)
+				return false;
 			return !(w != null ? !w.equals(pCoord.w) : pCoord.w != null);
 
 		}
@@ -186,17 +173,15 @@ public class GaeanKeystone extends BlockContainer {
 		PCoord[] neighbors() {
 			PCoord[] ret = new PCoord[6];
 			int i = 0;
-			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
 				ret[i++] = add(dir.offsetX, dir.offsetY, dir.offsetZ);
-			}
 			return ret;
 		}
 
 		public void ensureFloored() {
 			Block b = w.getBlock(x, y, z);
-			if (b.isReplaceable(w, x, y, z)) {
+			if (b.isReplaceable(w, x, y, z))
 				setBlock(ModBlocks.umberstone);
-			}
 		}
 
 		public void setBlock(Block b) {
@@ -223,9 +208,8 @@ public class GaeanKeystone extends BlockContainer {
 		PCoord.iterateCube(min, max, new PCoord.ICoordFunc() {
 			@Override
 			public boolean visit(PCoord at) {
-				if (!at.is(ModBlocks.portal)) {
+				if (!at.is(ModBlocks.portal))
 					return false;
-				}
 				HashSet<PCoord> found = new HashSet<PCoord>();
 				ArrayList<PCoord> frontier = new ArrayList<PCoord>();
 				frontier.add(at);
@@ -233,15 +217,14 @@ public class GaeanKeystone extends BlockContainer {
 					PCoord f = frontier.remove(frontier.size() - 1);
 					found.add(f);
 					for (PCoord pc : f.neighbors()) {
-						if (found.contains(pc)) continue;
-						if (pc.is(ModBlocks.portal)) {
+						if (found.contains(pc))
+							continue;
+						if (pc.is(ModBlocks.portal))
 							frontier.add(pc);
-						}
 					}
 				}
-				for (PCoord pc : found) {
+				for (PCoord pc : found)
 					pc.setBlockNoNotify(Blocks.air);
-				}
 				return true;
 			}
 		});
@@ -257,20 +240,21 @@ public class GaeanKeystone extends BlockContainer {
 		PCoord.iterateCube(min, max, new PCoord.ICoordFunc() {
 			@Override
 			public boolean visit(PCoord at) {
-				if (!at.isLeaf()) return false;
-				if (badLeaves.contains(at)) return false;
-				if (visitLeaves(at, contig, badLeaves) && contig.size() < MAX_PORTAL_SIZE) {
+				if (!at.isLeaf())
+					return false;
+				if (badLeaves.contains(at))
+					return false;
+				if (visitLeaves(at, contig, badLeaves) && contig.size() < MAX_PORTAL_SIZE)
 					return true;
-				}
 				badLeaves.addAll(contig);
 				contig.clear();
 				return false;
 			}
 		});
-		if (contig.isEmpty()) return false;
-		for (PCoord at : contig) {
+		if (contig.isEmpty())
+			return false;
+		for (PCoord at : contig)
 			at.setBlockNoNotify(ModBlocks.portal);
-		}
 		return true;
 	}
 
@@ -280,8 +264,10 @@ public class GaeanKeystone extends BlockContainer {
 		while (!frontier.isEmpty()) {
 			PCoord at = frontier.remove(frontier.size() - 1); // Removing from end to skip array move
 			for (PCoord n : at.neighbors()) {
-				if (!n.isLeaf()) continue;
-				if (invalidLeaves.contains(n)) return false;
+				if (!n.isLeaf())
+					continue;
+				if (invalidLeaves.contains(n))
+					return false;
 				if (contig.add(n)) {
 					if (!n.validLeafPortal()) {
 						invalidLeaves.addAll(frontier);
@@ -296,19 +282,12 @@ public class GaeanKeystone extends BlockContainer {
 	}
 
 	static final byte F = 1, L = 2, END = -1;
-	static final byte[] portalFrame = new byte[] {
-			0, F, F, F, 0, END,
-			F, L, L, L, F, END,
-			F, L, L, L, F, END,
-			F, L, L, L, F, END,
-			0, F, F, F, 0, END,
-	};
+	static final byte[] portalFrame = new byte[] { 0, F, F, F, 0, END, F, L, L, L, F, END, F, L, L, L, F, END, F, L, L, L, F, END, 0, F, F, F, 0, END, };
 
 	public void buildDestinationPortal(World w, int x, int y, int z) {
 		PCoord keystone = new PCoord(w, x, y, z);
-		while (keystone.isAir() && keystone.y > 0) {
+		while (keystone.isAir() && keystone.y > 0)
 			keystone = keystone.add(0, -1, 0);
-		}
 		keystone = keystone.add(0, 1, 0);
 		final int C = 5;
 		int r = 5 / 2;
@@ -320,9 +299,8 @@ public class GaeanKeystone extends BlockContainer {
 				at.ensureFloored();
 				int yMin = at.y + 1;
 				int yMax = at.y + C;
-				for (int y = yMin; y < yMax; y++) {
+				for (int y = yMin; y < yMax; y++)
 					at.w.setBlockToAir(at.x, y, at.z);
-				}
 				return false;
 			}
 		});
@@ -336,10 +314,10 @@ public class GaeanKeystone extends BlockContainer {
 			} else if (b == F || b == L) {
 				Block block;
 				int md = 0;
-				if (b == L) {
+				if (b == L)
 					block = Blocks.air;
-				} else {
-					md = w.rand.nextBoolean() ? 5 /* smoothUmbertile */ : 6 /* smoothUmbertiles */;
+				else {
+					md = w.rand.nextBoolean() ? 5 /* smoothUmbertile */: 6 /* smoothUmbertiles */;
 					block = ModBlocks.umberstone;
 				}
 				w.setBlock(start.x + dx, start.y + dy, start.z + dz, block, md, 3);
