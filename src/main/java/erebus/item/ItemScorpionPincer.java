@@ -8,7 +8,7 @@ import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -29,8 +29,7 @@ public class ItemScorpionPincer extends ItemSword {
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex) {
-		tooltip.add(EnumChatFormatting.WHITE + "Can Shoot Fire Charges");
-		tooltip.add(EnumChatFormatting.WHITE + "if in your Inventory.");
+		tooltip.add(StatCollector.translateToLocal("tooltip.erebus.scorpionpincer"));
 	}
 
 	@Override

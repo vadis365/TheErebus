@@ -727,6 +727,42 @@ container.antInventory=Ant Command Control
 container.composter=Organic Composter
 container.bamber=Bamber
 
+############
+# Tooltips #
+############
+
+tooltip.erebus.dimension=Dimension: %s
+tooltip.erebus.targetx=Target X: %d
+tooltip.erebus.targety=Target Y: %d
+tooltip.erebus.targetz=Target Z: %d
+tooltip.erebus.homingbeeconadvanced_1=Sneak + Right click on a block to set as target.
+tooltip.erebus.homingbeeconadvanced_2=Right click to teleport.
+tooltip.erebus.homingbeecon=Sneak + Click on a block to set as target.
+tooltip.erebus.warhammer_1=Hold Right mouse button to charge up.
+tooltip.erebus.warhammer_2=Sneak + Right Click on top of block to use A.O.E. attack.
+tooltip.erebus.waspdagger_1=One use.
+tooltip.erebus.waspdagger_2=Can be thrown.
+tooltip.erebus.honeycombx=Honey Comb Block X: %d
+tooltip.erebus.honeycomby=Honey Comb Block Y: %d
+tooltip.erebus.honeycombz=Honey Comb Block Z: %d
+tooltip.erebus.beetamingamulet_1=Click on a Honey Comb Block to set as target for Bee drops.
+tooltip.erebus.beetamingamulet_2=Then click on Bee to tame.
+tooltip.erebus.siloblockx=Silo Block X: %d
+tooltip.erebus.siloblocky=Silo Block Y: %d
+tooltip.erebus.siloblockz=Silo Block Z: %d
+tooltip.erebus.anttamingamulet_1=Click on a Silo Block to set as target for Ants.
+tooltip.erebus.anttamingamulet_2=Then click on Ant link it.
+tooltip.erebus.sprintleggingstier=Tier %d
+tooltip.erebus.whetstonesharpness=Sharpness Level %d
+tooltip.erebus.whetstone_1=Crafted with an Axe or Sword.
+tooltip.erebus.whetstone_2=Adds Sharpness enchantment.
+tooltip.erebus.whetstone_3=Un-enchanted
+tooltip.erebus.whetstone_4=Surround with Whetstone Powder to increase levels.
+tooltip.erebus.nectarcollector=Right click Bees to collect nectar.
+tooltip.erebus.wandofanimation=Right click blocks to animate them.
+tooltip.erebus.extractor=Point at blocks and hold down the right mouse button to extract them.
+tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
+
 ##########
 # Others #
 ##########

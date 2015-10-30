@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,20 +22,18 @@ public class ItemAmuletAntTaming extends Item {
 		setCreativeTab(ModTabs.specials);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
-		if (hasTag(is))
-			if (is.stackTagCompound != null && is.stackTagCompound.hasKey("homeX")) {
-				list.add("Silo Block X: " + is.getTagCompound().getInteger("homeX"));
-				list.add("Silo Block Y: " + is.getTagCompound().getInteger("homeY"));
-				list.add("Silo Block Z: " + is.getTagCompound().getInteger("homeZ"));
-			} else {
-				list.add("Click on a Silo Block to");
-				list.add("set as target for Ants.");
-				list.add("Then click on Ant link it.");
-			}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
+		if (hasTag(stack) && stack.stackTagCompound.hasKey("homeX")) {
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.siloblockx", stack.getTagCompound().getInteger("homeX")));
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.siloblocky", stack.getTagCompound().getInteger("homeY")));
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.siloblockz", stack.getTagCompound().getInteger("homeZ")));
+		} else {
+			list.add(StatCollector.translateToLocal("tooltip.erebus.anttamingamulet_1"));
+			list.add(StatCollector.translateToLocal("tooltip.erebus.anttamingamulet_2"));
+		}
 	}
 
 	@Override

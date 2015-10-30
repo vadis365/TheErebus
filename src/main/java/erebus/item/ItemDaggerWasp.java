@@ -1,42 +1,47 @@
 package erebus.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModMaterials;
-import erebus.entity.EntityWaspDagger;
+import java.util.List;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModMaterials;
+import erebus.entity.EntityWaspDagger;
 
 public class ItemDaggerWasp extends ItemSword {
 
 	public ItemDaggerWasp() {
 		super(ModMaterials.weaponWaspDagger);
-		maxStackSize = 16;
-		setTextureName("paper");
+		setMaxStackSize(16);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex) {
-		tooltip.add(EnumChatFormatting.WHITE + "One use.");
-		tooltip.add(EnumChatFormatting.WHITE + "Can be thrown");
+	public void registerIcons(IIconRegister reg) {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean isComplex) {
+		list.add(StatCollector.translateToLocal("tooltip.erebus.waspdagger_1"));
+		list.add(StatCollector.translateToLocal("tooltip.erebus.waspdagger_1"));
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (!player.capabilities.isCreativeMode)
-			is.stackSize--;
+			stack.stackSize--;
 		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 		if (!world.isRemote)
 			world.spawnEntityInWorld(new EntityWaspDagger(world, player));
-		return is;
+		return stack;
 	}
 
 	@Override

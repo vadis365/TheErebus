@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -35,9 +36,8 @@ public class ItemHammerWar extends ItemSword {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
-		list.add("Hold Right mouse button to charge up.");
-		list.add("Sneak + Right Click on top of Block");
-		list.add("to use A.O.E. attack.");
+		list.add(StatCollector.translateToLocal("tooltip.erebus.warhammer_1"));
+		list.add(StatCollector.translateToLocal("tooltip.erebus.warhammer_2"));
 	}
 
 	@Override

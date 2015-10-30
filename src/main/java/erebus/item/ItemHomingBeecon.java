@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,19 +28,16 @@ public class ItemHomingBeecon extends Item {
 		return HomingBeeconTextureHandler.beecon;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
-		if (hasTag(is))
-			if (is.stackTagCompound != null && is.stackTagCompound.hasKey("homeX")) {
-				list.add("Dimension: " + is.getTagCompound().getString("dimName"));
-				list.add("Target X: " + is.getTagCompound().getInteger("homeX"));
-				list.add("Target Z: " + is.getTagCompound().getInteger("homeZ"));
-			} else {
-				list.add("Sneak + Click on a Block");
-				list.add("to set as target.");
-			}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
+		if (hasTag(stack) && stack.stackTagCompound.hasKey("homeX")) {
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.dimension", stack.getTagCompound().getString("dimName")));
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.targetx", stack.getTagCompound().getInteger("homeX")));
+			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.targetz", stack.getTagCompound().getInteger("homeZ")));
+		} else
+			list.add(StatCollector.translateToLocal("tooltip.erebus.homingbeecon"));
 	}
 
 	@Override

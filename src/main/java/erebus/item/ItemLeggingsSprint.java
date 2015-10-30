@@ -10,6 +10,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,11 +35,11 @@ public class ItemLeggingsSprint extends ItemArmor {
 		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.bioVelocity.ordinal();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack is, EntityPlayer player, List textLines, boolean showAdvancedInfo) {
-		textLines.add(EnumChatFormatting.GRAY + "Tier " + (1 + (is.stackTagCompound == null ? 0 : is.stackTagCompound.getByte("upgradeTier"))));
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean showAdvancedInfo) {
+		list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocalFormatted("tooltip.erebus.sprintleggingstier", 1 + (!stack.hasTagCompound() ? 0 : stack.stackTagCompound.getByte("upgradeTier"))));
 	}
 
 	@Override

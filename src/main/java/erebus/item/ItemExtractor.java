@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -28,13 +29,11 @@ public class ItemExtractor extends Item {
 		setCreativeTab(ModTabs.gears);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
-		list.add("Point at blocks and hold");
-		list.add("down the right mouse button");
-		list.add("to extract them.");
+		list.add(StatCollector.translateToLocal("tooltip.erebus.extractor"));
 	}
 
 	@Override

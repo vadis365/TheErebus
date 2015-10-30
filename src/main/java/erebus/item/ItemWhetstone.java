@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModTabs;
@@ -20,28 +21,26 @@ public class ItemWhetstone extends Item {
 		setCreativeTab(ModTabs.items);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack is, EntityPlayer player, List textLines, boolean showAdvancedInfo) {
-		if (is.getItemDamage() > 0) {
-			textLines.add(EnumChatFormatting.LIGHT_PURPLE + "Sharpness Level " + is.getItemDamage());
-			textLines.add(EnumChatFormatting.WHITE + "Crafted with an Axe or Sword.");
-			textLines.add(EnumChatFormatting.WHITE + "Adds Sharpness enchantment.");
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean showAdvancedInfo) {
+		if (stack.getItemDamage() > 0) {
+			list.add(EnumChatFormatting.LIGHT_PURPLE + StatCollector.translateToLocalFormatted("tooltip.erebus.whetstonesharpness", stack.getItemDamage()));
+			list.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("tooltip.erebus.whetstone_1"));
+			list.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("tooltip.erebus.whetstone_2"));
 		} else {
-			textLines.add(EnumChatFormatting.LIGHT_PURPLE + "Un-enchanted");
-			textLines.add(EnumChatFormatting.WHITE + "Surround with");
-			textLines.add(EnumChatFormatting.WHITE + "Whetstone Powder");
-			textLines.add(EnumChatFormatting.WHITE + "to increase levels");
+			list.add(EnumChatFormatting.LIGHT_PURPLE + StatCollector.translateToLocal("tooltip.erebus.whetstone_3"));
+			list.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("tooltip.erebus.whetstone_4"));
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		for (int i = 0; i < 6; i++)
-			list.add(new ItemStack(id, 1, i));
+			list.add(new ItemStack(item, 1, i));
 	}
 
 	@Override

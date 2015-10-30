@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,7 +35,7 @@ public class ItemWandOfAnimation extends Item {
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
-		list.add("Right click blocks to animate them");
+		list.add(StatCollector.translateToLocal("tooltip.erebus.wandofanimation"));
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class ItemWandOfAnimation extends Item {
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (!player.canPlayerEdit(x, y, z, side, stack))
 			return false;
-		 else {
+		else {
 			Block block = world.getBlock(x, y, z);
 			int blockMeta = world.getBlockMetadata(x, y, z);
 			if (!world.isRemote && block != null && canAnimate(block, world, x, y, z)) {
