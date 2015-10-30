@@ -17,6 +17,7 @@ public class ItemWhetstone extends Item {
 	public static final byte maxTier = 5;
 
 	public ItemWhetstone() {
+		setMaxStackSize(1);
 		setHasSubtypes(true);
 		setCreativeTab(ModTabs.items);
 	}
@@ -28,10 +29,9 @@ public class ItemWhetstone extends Item {
 		if (stack.getItemDamage() > 0) {
 			list.add(EnumChatFormatting.LIGHT_PURPLE + StatCollector.translateToLocalFormatted("tooltip.erebus.whetstonesharpness", stack.getItemDamage()));
 			list.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("tooltip.erebus.whetstone_1"));
-			list.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("tooltip.erebus.whetstone_2"));
 		} else {
-			list.add(EnumChatFormatting.LIGHT_PURPLE + StatCollector.translateToLocal("tooltip.erebus.whetstone_3"));
-			list.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("tooltip.erebus.whetstone_4"));
+			list.add(EnumChatFormatting.LIGHT_PURPLE + StatCollector.translateToLocal("tooltip.erebus.whetstone_2"));
+			list.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("tooltip.erebus.whetstone_3"));
 		}
 	}
 

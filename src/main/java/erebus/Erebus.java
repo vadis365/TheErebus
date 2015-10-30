@@ -26,6 +26,7 @@ import erebus.client.gui.RenderWarHammerChargeBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
+import erebus.core.handler.AnvilEventsHandler;
 import erebus.core.handler.BucketFillHandler;
 import erebus.core.handler.EntityDeathEventHandler;
 import erebus.core.handler.EntityDeathInventoryHandler;
@@ -118,6 +119,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.armorGlider);
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
+		MinecraftForge.EVENT_BUS.register(new AnvilEventsHandler());
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 

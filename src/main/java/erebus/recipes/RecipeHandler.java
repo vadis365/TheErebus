@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
@@ -25,9 +24,6 @@ import erebus.item.ItemWhetstone;
 import erebus.lib.EnumWood;
 
 public class RecipeHandler {
-
-	public static Item[] swordType = new Item[] { Items.wooden_sword, Items.stone_sword, Items.iron_sword, Items.golden_sword, Items.diamond_sword, ModItems.jadeSword, ModItems.scorpionPincer, ModItems.waspSword, ModItems.warHammer };
-	public static Item[] axeType = new Item[] { Items.wooden_axe, Items.stone_axe, Items.iron_axe, Items.golden_axe, Items.diamond_axe, ModItems.jadeAxe };
 
 	public static void init() {
 		EnumWood.initRecipes();
@@ -247,29 +243,8 @@ public class RecipeHandler {
 		addShapelessRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), ModItems.bucketAntiVenom, Items.glass_bottle, Items.glass_bottle);
 		addShapelessRecipe(new ItemStack(ModItems.bottleAntiVenom, 2), ModItems.bambucketAntiVenom, Items.glass_bottle, Items.glass_bottle);
 
-		// Sharp Swords
+		// Whetstone
 		addShapedRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', ItemMaterials.DATA.petrifiedWood.makeStack(), 'U', new ItemStack(ModBlocks.umberstone, 1, 0));
-		for (Item aSwordType : swordType)
-			for (int j = 0; j < 6; j++) {
-				ItemStack swordSharp = new ItemStack(aSwordType);
-				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if (stoneLevel.getItemDamage() > 0) {
-					swordSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage());
-					addShapelessRecipe(swordSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(aSwordType));
-				}
-			}
-
-		// Sharp Axes
-		for (Item anAxeType : axeType)
-			for (int j = 0; j < 6; j++) {
-				ItemStack axeSharp = new ItemStack(anAxeType);
-				ItemStack stoneLevel = new ItemStack(ModItems.whetstone, 1, j);
-				if (stoneLevel.getItemDamage() > 0) {
-					axeSharp.addEnchantment(Enchantment.sharpness, stoneLevel.getItemDamage() + 1);
-					addShapelessRecipe(axeSharp, new ItemStack(ModItems.whetstone, 1, stoneLevel.getItemDamage()), new ItemStack(anAxeType));
-				}
-			}
-
 		for (int i = 1; i <= ItemWhetstone.maxTier; i++)
 			addShapedRecipe(new ItemStack(ModItems.whetstone, 1, i), "xxx", "xyx", "xxx", 'x', ItemMaterials.DATA.whetstonePowder.makeStack(), 'y', new ItemStack(ModItems.whetstone, 1, i - 1));
 
