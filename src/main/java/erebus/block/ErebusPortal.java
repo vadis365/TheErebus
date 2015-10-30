@@ -3,6 +3,8 @@ package erebus.block;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -14,6 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ErebusPortal extends Block {
 	public ErebusPortal() {
@@ -25,61 +28,41 @@ public class ErebusPortal extends Block {
 		setBlockTextureName("erebus:portal");
 	}
 
-	public static boolean makePortal(World world, int x, int y, int z) {
-		if (isPatternValid(world, x, y, z)) {
-			world.setBlock(x, y, z, ModBlocks.portal);
-			world.setBlock(x, y + 1, z, ModBlocks.portal);
-			return true;
+	public static boolean obeysPortalRule(World world, int x, int y, int z, boolean actualPortal) {
+		// >0 substrate neighbors
+		// Each substrate neighbor has solid/substrate on the opposite side
+		//
+		int neighborPortals = 0;
+		int axisFlag = 0;
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			final int atX = x + dir.offsetX;
+			final int atY = y + dir.offsetY;
+			final int atZ = z + dir.offsetZ;
+			Block at = world.getBlock(atX, atY, atZ);
+			if (!isSubstrate(at, actualPortal)) continue;
+			final int opX = x - dir.offsetX;
+			final int opY = y - dir.offsetY;
+			final int opZ = z - dir.offsetZ;
+			Block op = world.getBlock(opX, opY, opZ);
+			if (!op.isNormalCube() && !isSubstrate(op, actualPortal)) return false;
+			neighborPortals++;
+			axisFlag |= (1 << (dir.ordinal() >> 1)) /* Creates a mask formatted as: <Up|Down><North|South><East|West> */;
 		}
-		return false;
-	}
-
-	public static boolean isPatternValid(World world, int x, int y, int z) {
-		// Layer 0
-		if (!check(world, x, y - 1, z, Blocks.stonebrick, 3))
-			return false;
-
-		// Layer 1
-		if (!check(world, x - 1, y, z - 1, Blocks.stonebrick, 0))
-			return false;
-		if (!check(world, x - 1, y, z + 1, Blocks.stonebrick, 0))
-			return false;
-		if (!check(world, x + 1, y, z - 1, Blocks.stonebrick, 0))
-			return false;
-		if (!check(world, x + 1, y, z + 1, Blocks.stonebrick, 0))
-			return false;
-		if (!world.isAirBlock(x, y, z) && world.getBlock(x, y, z) != ModBlocks.portal)
-			return false;
-
-		// Layer 2
-		if (!check(world, x - 1, y + 1, z - 1, Blocks.stonebrick, 0))
-			return false;
-		if (!check(world, x - 1, y + 1, z + 1, Blocks.stonebrick, 0))
-			return false;
-		if (!check(world, x + 1, y + 1, z - 1, Blocks.stonebrick, 0))
-			return false;
-		if (!check(world, x + 1, y + 1, z + 1, Blocks.stonebrick, 0))
-			return false;
-		if (!world.isAirBlock(x, y + 1, z) && world.getBlock(x, y + 1, z) != ModBlocks.portal)
-			return false;
-
-		// Layer 3
-		if (world.getBlock(x, y + 2, z) != ModBlocks.gaeanKeystone)
-			return false;
-
-		for (int i = -1; i <= -1; i++)
-			for (int j = -1; j <= -1; j++) {
-				if (i == 0 && j == 0)
-					continue;
-				if (!check(world, x + i, y + 2, z + j, Blocks.stone_slab, 5))
-					return false;
-			}
-
+		if (neighborPortals < 1) return false;
+		if (axisFlag == 0x7)
+			return false; // 0b111, meaning there's a nieghbor on 3 sides, therefore not defining a plane
 		return true;
 	}
 
-	private static boolean check(World world, int x, int y, int z, Block target, int meta) {
-		return world.getBlock(x, y, z) == target && world.getBlockMetadata(x, y, z) == meta;
+	private static boolean isSubstrate(Block block, boolean portalNotLeaf) {
+		return portalNotLeaf ? block instanceof ErebusPortal : block instanceof BlockLeaves;
+	}
+
+	@Override
+	public void onNeighborBlockChange(World w, int x, int y, int z, Block neighbor) {
+		if (!obeysPortalRule(w, x, y, z, true)) {
+			w.setBlockToAir(x, y, z);
+		}
 	}
 
 	@Override
@@ -123,6 +106,6 @@ public class ErebusPortal extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		return side > 1;
+		return world.getBlock(x, y, z) != this;
 	}
 }
