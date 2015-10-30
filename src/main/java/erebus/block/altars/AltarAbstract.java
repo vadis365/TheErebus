@@ -12,6 +12,7 @@ import erebus.ModBlocks;
 import erebus.ModTabs;
 
 public abstract class AltarAbstract extends BlockContainer {
+
 	public AltarAbstract() {
 		super(Material.rock);
 		setHardness(20.0F);
@@ -30,9 +31,9 @@ public abstract class AltarAbstract extends BlockContainer {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		float f = 0.0625F;
-		return AxisAlignedBB.getBoundingBox(i + f, j, k + f, i + 1 - f, j + 1 - f, k + 1 - f);
+		return AxisAlignedBB.getBoundingBox(x + f, y, z + f, x + 1 - f, y + 1 - f, z + 1 - f);
 	}
 
 	@Override

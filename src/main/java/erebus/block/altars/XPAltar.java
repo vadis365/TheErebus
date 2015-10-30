@@ -12,6 +12,7 @@ import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarXP;
 
 public class XPAltar extends AltarAbstract {
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityErebusAltarXP();

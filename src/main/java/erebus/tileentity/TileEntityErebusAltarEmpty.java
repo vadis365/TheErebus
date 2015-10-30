@@ -6,6 +6,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
 public class TileEntityErebusAltarEmpty extends TileEntityErebusAltar {
+
 	@Override
 	public boolean canUpdate() {
 		return false;

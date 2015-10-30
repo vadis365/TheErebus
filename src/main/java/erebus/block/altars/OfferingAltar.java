@@ -19,6 +19,7 @@ import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityOfferingAltar;
 
 public class OfferingAltar extends BlockContainer {
+
 	public OfferingAltar() {
 		super(Material.rock);
 		setHardness(2.0F);

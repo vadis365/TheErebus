@@ -8,6 +8,7 @@ import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarHealing;
 
 public class HealingAltar extends AltarAbstract {
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityErebusAltarHealing();

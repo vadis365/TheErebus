@@ -11,6 +11,7 @@ import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarRepair;
 
 public class RepairAltar extends AltarAbstract {
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityErebusAltarRepair();
@@ -40,7 +41,7 @@ public class RepairAltar extends AltarAbstract {
 					is.getItem().setDamage(is, -repairDamage);
 				}
 				if (te.getSpawnTicks() % 2 == 0 && te.getCollisions() < 101)
-					if(world.isRemote)
+					if (world.isRemote)
 						te.sparky(world, x, y, z);
 			}
 			if (te.getCollisions() > 101)

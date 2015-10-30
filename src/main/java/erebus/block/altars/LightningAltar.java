@@ -8,6 +8,7 @@ import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarLightning;
 
 public class LightningAltar extends AltarAbstract {
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityErebusAltarLightning();
