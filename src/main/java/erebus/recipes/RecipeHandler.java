@@ -20,7 +20,6 @@ import erebus.item.ItemDungeonIdols;
 import erebus.item.ItemDungeonIdols.IDOL;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemMaterials;
-import erebus.item.ItemWhetstone;
 import erebus.lib.EnumWood;
 
 public class RecipeHandler {
@@ -245,7 +244,7 @@ public class RecipeHandler {
 
 		// Whetstone
 		addShapedRecipe(new ItemStack(ModItems.whetstone, 1, 0), "SSS", "PPP", "UUU", 'S', Blocks.sand, 'P', ItemMaterials.DATA.petrifiedWood.makeStack(), 'U', new ItemStack(ModBlocks.umberstone, 1, 0));
-		for (int i = 1; i <= ItemWhetstone.maxTier; i++)
+		for (int i = 1; i <= Enchantment.sharpness.getMaxLevel(); i++)
 			addShapedRecipe(new ItemStack(ModItems.whetstone, 1, i), "xxx", "xyx", "xxx", 'x', ItemMaterials.DATA.whetstonePowder.makeStack(), 'y', new ItemStack(ModItems.whetstone, 1, i - 1));
 
 		// Special Items

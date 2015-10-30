@@ -14,8 +14,6 @@ import erebus.ModTabs;
 
 public class ItemWhetstone extends Item {
 
-	public static final byte maxTier = 5;
-
 	public ItemWhetstone() {
 		setMaxStackSize(1);
 		setHasSubtypes(true);
