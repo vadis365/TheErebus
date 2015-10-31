@@ -2,6 +2,7 @@ package erebus.core.handler;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
@@ -19,6 +20,29 @@ import erebus.tileentity.TileEntityBones;
 
 public class EntityDeathInventoryHandler {
 
+	private static final List<OffsetPos> offsets = new LinkedList<OffsetPos>();
+
+	static {
+		offsets.add(new OffsetPos(0, 0, 0));
+		offsets.add(new OffsetPos(0, 1, 0));
+		offsets.add(new OffsetPos(0, -1, 0));
+
+		offsets.add(new OffsetPos(1, 0, 0));
+		offsets.add(new OffsetPos(1, 0, 1));
+		offsets.add(new OffsetPos(-1, 0, 1));
+		offsets.add(new OffsetPos(-1, 0, -1));
+
+		offsets.add(new OffsetPos(1, 1, 0));
+		offsets.add(new OffsetPos(1, 1, 1));
+		offsets.add(new OffsetPos(-1, 1, 1));
+		offsets.add(new OffsetPos(-1, 1, -1));
+
+		offsets.add(new OffsetPos(1, -1, 0));
+		offsets.add(new OffsetPos(1, -1, 1));
+		offsets.add(new OffsetPos(-1, -1, 1));
+		offsets.add(new OffsetPos(-1, -1, -1));
+	}
+
 	@SuppressWarnings("unchecked")
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void playerDeath(LivingDeathEvent event) {
@@ -35,8 +59,14 @@ public class EntityDeathInventoryHandler {
 			int playerFacing = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			byte directionMeta = 0;
 
-			if (!world.isAirBlock(x, y, z))
-				y++;
+			for (OffsetPos offset : offsets)
+				if (!world.getBlock(x + offset.x, y + offset.y, z + offset.z).isReplaceable(world, x + offset.x, y + offset.y, z + offset.z)) {
+					x += offset.x;
+					y += offset.y;
+					z += offset.z;
+					break;
+				}
+
 			if (playerFacing == 0)
 				directionMeta = 2;
 			if (playerFacing == 1)
@@ -85,6 +115,16 @@ public class EntityDeathInventoryHandler {
 				}
 				tile.setOwner("R.I.P. " + player.getCommandSenderName());
 			}
+		}
+	}
+
+	static class OffsetPos {
+		final int x, y, z;
+
+		OffsetPos(int x, int y, int z) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
 		}
 	}
 }
