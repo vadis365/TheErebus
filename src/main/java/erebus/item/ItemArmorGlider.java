@@ -13,7 +13,6 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -49,37 +48,39 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ModelBiped getArmorModel(EntityLivingBase player, ItemStack is, int slot) {
-		ModelArmorGlider model = new ModelArmorGlider();
-		ModelArmorPowered modelPower = new ModelArmorPowered();
-		model.bipedHead.showModel = false;
-		model.bipedHeadwear.showModel = false;
-		model.bipedBody.showModel = false;
-		model.bipedRightArm.showModel = false;
-		model.bipedLeftArm.showModel = false;
-		model.bipedRightLeg.showModel = false;
-		model.bipedLeftLeg.showModel = false;
+	public ModelBiped getArmorModel(EntityLivingBase player, ItemStack stack, int slot) {
+		if (canFly()) {
+			ModelArmorPowered modelPower = new ModelArmorPowered();
+			modelPower.bipedHead.showModel = false;
+			modelPower.bipedHeadwear.showModel = false;
+			modelPower.bipedBody.showModel = false;
+			modelPower.bipedRightArm.showModel = false;
+			modelPower.bipedLeftArm.showModel = false;
+			modelPower.bipedRightLeg.showModel = false;
+			modelPower.bipedLeftLeg.showModel = false;
 
-		modelPower.bipedHead.showModel = false;
-		modelPower.bipedHeadwear.showModel = false;
-		modelPower.bipedBody.showModel = false;
-		modelPower.bipedRightArm.showModel = false;
-		modelPower.bipedLeftArm.showModel = false;
-		modelPower.bipedRightLeg.showModel = false;
-		modelPower.bipedLeftLeg.showModel = false;
+			if (stack.hasTagCompound()) {
+				modelPower.isGliding = stack.getTagCompound().getBoolean("isGliding");
+				modelPower.isPowered = stack.getTagCompound().getBoolean("isPowered");
+			}
 
-		if (is.hasTagCompound()) {
-			model.isGliding = is.getTagCompound().getBoolean("isGliding");
-			modelPower.isGliding = is.getTagCompound().getBoolean("isGliding");
-		}
-
-		if (is.hasTagCompound())
-			modelPower.isPowered = is.getTagCompound().getBoolean("isPowered");
-
-		if (canFly())
 			return modelPower;
+		} else {
+			ModelArmorGlider model = new ModelArmorGlider();
 
-		return model;
+			model.bipedHead.showModel = false;
+			model.bipedHeadwear.showModel = false;
+			model.bipedBody.showModel = false;
+			model.bipedRightArm.showModel = false;
+			model.bipedLeftArm.showModel = false;
+			model.bipedRightLeg.showModel = false;
+			model.bipedLeftLeg.showModel = false;
+
+			if (stack.hasTagCompound())
+				model.isGliding = stack.getTagCompound().getBoolean("isGliding");
+
+			return model;
+		}
 	}
 
 	@Override
@@ -93,7 +94,7 @@ public class ItemArmorGlider extends ItemArmor {
 				PacketPipeline.sendToServer(new PacketGlider(false));
 			}
 
-			if (this == ModItems.armorGliderPowered)
+			if (canFly())
 				if (stack.getTagCompound().getBoolean("isPowered") && !KeyBindingHandler.poweredGlide.getIsKeyPressed()) {
 					stack.getTagCompound().setBoolean("isPowered", false);
 					PacketPipeline.sendToServer(new PacketGliderPowered(false));
@@ -152,15 +153,11 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onPlayerRenderPre(RenderPlayerEvent.Pre e) {
+	public void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
 		GL11.glPushMatrix();
-		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+		EntityPlayer player = event.entityPlayer;
 		ItemStack chestPlate = player.inventory.armorInventory[2];
-		if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
-			if (!chestPlate.hasTagCompound()) {
-				chestPlate.stackTagCompound = new NBTTagCompound();
-				return;
-			}
+		if (chestPlate != null && chestPlate.getItem() instanceof ItemArmorGlider && chestPlate.hasTagCompound())
 			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround || chestPlate.getTagCompound().getBoolean("isPowered") && !player.onGround) {
 				// Method is fixed but rotations need working out!
 				int yaw = (int) player.rotationYaw;
@@ -212,7 +209,6 @@ public class ItemArmorGlider extends ItemArmor {
 				GL11.glRotatef(60.0F, x, 0.0F, y);
 				player.limbSwingAmount = 0.001F;
 			}
-		}
 	}
 
 	public boolean canFly() {
@@ -221,7 +217,7 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onPlayerRenderPost(RenderPlayerEvent.Post e) {
+	public void onPlayerRenderPost(RenderPlayerEvent.Post event) {
 		GL11.glPopMatrix();
 	}
 }
