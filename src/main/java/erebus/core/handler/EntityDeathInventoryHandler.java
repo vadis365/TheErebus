@@ -60,7 +60,7 @@ public class EntityDeathInventoryHandler {
 			byte directionMeta = 0;
 
 			for (OffsetPos offset : offsets)
-				if (!world.getBlock(x + offset.x, y + offset.y, z + offset.z).isReplaceable(world, x + offset.x, y + offset.y, z + offset.z)) {
+				if (world.getBlock(x + offset.x, y + offset.y, z + offset.z).isReplaceable(world, x + offset.x, y + offset.y, z + offset.z)) {
 					x += offset.x;
 					y += offset.y;
 					z += offset.z;
