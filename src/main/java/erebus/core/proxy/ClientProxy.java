@@ -134,9 +134,10 @@ import erebus.client.render.item.ItemSmoothieMakerRenderer;
 import erebus.client.render.item.ItemTarantulaEggRenderer;
 import erebus.client.render.item.ItemUmberFurnaceRenderer;
 import erebus.client.render.item.ItemUmberGolemStatueRenderer;
+import erebus.client.render.item.ItemWandOfAnimationRenderer;
+import erebus.client.render.item.ItemWandOfPreservationRenderer;
 import erebus.client.render.item.PortalActivatorRenderer;
 import erebus.client.render.item.ScorpionPincerItemRenderer;
-import erebus.client.render.item.WandOfAnimationItemRenderer;
 import erebus.client.render.item.WarHammerItemRenderer;
 import erebus.client.render.item.WaspDaggerItemRenderer;
 import erebus.client.render.item.WaspSwordItemRenderer;
@@ -406,7 +407,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.umberFurnace), new ItemUmberFurnaceRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.waspDagger, new WaspDaggerItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.bambooTorch), new BambooTorchItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(ModItems.wandOfAnimation, new WandOfAnimationItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(ModItems.wandOfAnimation, new ItemWandOfAnimationRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.glowingJar), new ItemGlowingJarRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.scorpionPincer, new ScorpionPincerItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.umberGolemStatue), new ItemUmberGolemStatueRenderer());
@@ -425,6 +426,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.smoothieMaker), new ItemSmoothieMakerRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.antlionEgg), new ItemAntlionEggRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.warHammer, new WarHammerItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(ModItems.wandOfPreservation, new ItemWandOfPreservationRenderer());
 	}
 
 	@Override

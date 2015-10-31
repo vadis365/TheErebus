@@ -66,7 +66,7 @@ public class ScorpionPincerItemRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x - 0.4F, y - 1.0F, z + 0.1F);
+			GL11.glTranslatef(x - 0.45F, y, z + 0.1F);
 			GL11.glRotatef(-60F, 0, 0, 1F);
 			GL11.glScaled(1.8F, 1.8F, 1.8F);
 			model.render(0.0625F);

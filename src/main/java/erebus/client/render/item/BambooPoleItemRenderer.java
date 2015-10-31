@@ -52,7 +52,7 @@ public class BambooPoleItemRenderer implements IItemRenderer {
 
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 0.88F, z);
+			GL11.glTranslatef(x, y - 0.375F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(-90F, 0, 1F, 0);
 			ModelBambooPole.renderModel();

@@ -62,7 +62,7 @@ public class BambooTorchItemRenderer implements IItemRenderer {
 	private void renderTorch(float x, float y, float z, double size) {
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 1.37F, z);
+			GL11.glTranslatef(x, y - 0.625F, z);
 			GL11.glScaled(0.75F, 0.75F, 0.75F);
 			blockRenderer.renderBlockAsItem(ModBlocks.bambooTorch, 0, 1.0F);
 			GL11.glTranslatef(x, y, z);

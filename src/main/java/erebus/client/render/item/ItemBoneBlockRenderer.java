@@ -51,7 +51,7 @@ public class ItemBoneBlockRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/boneBlock.png"));
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 1.5F, z + 1.5F);
+			GL11.glTranslatef(x, y - 0.25F, z + 1.5F);
 			GL11.glRotatef(-90F, 1F, 0, 0);
 			GL11.glScaled(1F, 1F, 1F);
 			ModelBoneBlock.render();

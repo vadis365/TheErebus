@@ -51,9 +51,9 @@ public class ItemAltarBaseRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/tiles/altarBase.png"));
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 0.625F, z);
+			GL11.glTranslatef(x, y, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
-			GL11.glScaled(0.5F, 0.5F, 0.5F);
+			GL11.glScaled(0.3F, 0.3F, 0.3F);
 			ModelAltarBlock.render();
 			GL11.glPopMatrix();
 		} else {

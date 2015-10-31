@@ -59,9 +59,10 @@ public class BambooBridgeItemRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y + 0.1875F, z);
+			GL11.glTranslatef(x, y + 0.4F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(90F, 0, 1F, 0);
+			GL11.glScaled(size + 0.2D, size + 0.2D, size + 0.2D);
 			ModelBambooBridge.render(te);
 			GL11.glPopMatrix();
 		} else {

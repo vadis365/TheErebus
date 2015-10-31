@@ -69,10 +69,10 @@ public class WaspDaggerItemRenderer extends Render implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x - 0.2F, y - 1.0F, z);
+			GL11.glTranslatef(x + 0.1F, y + 0.3F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(45F, 0, 0, 1F);
-			GL11.glScaled(0.3F, 0.3F, 0.3F);
+			GL11.glScaled(0.4F, 0.4F, 0.4F);
 			ModelWaspDagger.render(0.0625F);
 			GL11.glPopMatrix();
 		} else {

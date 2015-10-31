@@ -1,6 +1,5 @@
 package erebus.client.render.item;
 
-import erebus.item.ItemWandOfAnimation;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -11,15 +10,15 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.model.item.ModelWandOfAnimation;
+import erebus.client.model.item.ModelWandOfPreservation;
 
 @SideOnly(Side.CLIENT)
-public class WandOfAnimationItemRenderer implements IItemRenderer {
+public class ItemWandOfPreservationRenderer implements IItemRenderer {
 
-	private final ModelWandOfAnimation model;
+	private final ModelWandOfPreservation model;
 
-	public WandOfAnimationItemRenderer() {
-		model = new ModelWandOfAnimation();
+	public ItemWandOfPreservationRenderer() {
+		model = new ModelWandOfPreservation();
 	}
 
 	@Override
@@ -34,49 +33,46 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/items/wandOfAnimation.png"));
+		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("erebus:textures/special/items/wandOfPreservation.png"));
 		switch (type) {
 			case ENTITY:
-				renderWand(0.0F, 0.0F, 0.0F, 0.5D, (ItemWandOfAnimation) item.getItem());
+				renderWand(0.0F, 0.0F, 0.0F, 0.75D);
 				break;
 			case EQUIPPED:
-				renderEquipped(0.3F, 0.5F, 0.4F, 0.75D, (ItemWandOfAnimation) item.getItem());
+				renderEquipped(0.4F, 1.8F, 1F, 1.5D);
 				break;
 			case EQUIPPED_FIRST_PERSON:
-				renderWandFirstPerson(0.5F, 0.9F, 0.5F, 1.0D, (ItemWandOfAnimation) item.getItem());
+				renderWandFirstPerson(0.5F, 1.75F, 0.5F, 1.5D);
 				break;
 			case INVENTORY:
-				renderWandInventory(0.1F, 0.1F, 0.0F, 0.75D, (ItemWandOfAnimation) item.getItem());
+				renderWandInventory(0.9F, 0.9F, 0.0F, 1.2D);
 				break;
 			default:
 				break;
 		}
 	}
 
-	private void renderEquipped(float x, float y, float z, double size, ItemWandOfAnimation item) {
+	private void renderEquipped(float x, float y, float z, double size) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x, y + 0.6F, z + 0.5F);
-		GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(225.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(0.0F, 0.0F, 0.0F, 1.0F);
+		GL11.glTranslatef(x, y, z);
+		GL11.glRotatef(-20.0F, 0.0F, 0.0F, 1.0F);
 		GL11.glScaled(-size, -size, size);
 		model.render(0.0625F);
 		GL11.glPopMatrix();
 	}
 
-	private void renderWand(float x, float y, float z, double size, ItemWandOfAnimation item) {
+	private void renderWand(float x, float y, float z, double size) {
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x + 0.1F, y - 0.8F, z);
+			GL11.glTranslatef(x + 0.4F, y + 0.6F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
-			GL11.glRotatef(0F, 0, 1F, 0);
 			GL11.glRotatef(45F, 0, 0, 1F);
-			GL11.glScaled(0.6F, 0.6F, 0.6F);
+			GL11.glScaled(0.8F, 0.8F, 0.8F);
 			model.render(0.0625F);
 			GL11.glPopMatrix();
 		} else {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y, z);
+			GL11.glTranslatef(x, y + 0.5F, z);
 			GL11.glRotatef(180F, 1F, 0, 0);
 			GL11.glRotatef(-135F, 0, 1F, 0);
 			GL11.glRotatef(70F, 0, 0, 1F);
@@ -86,7 +82,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 		}
 	}
 
-	private void renderWandFirstPerson(float x, float y, float z, double size, ItemWandOfAnimation item) {
+	private void renderWandFirstPerson(float x, float y, float z, double size) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180F, 1F, 0, 0);
@@ -96,7 +92,7 @@ public class WandOfAnimationItemRenderer implements IItemRenderer {
 		GL11.glPopMatrix();
 	}
 
-	private void renderWandInventory(float x, float y, float z, double size, ItemWandOfAnimation item) {
+	private void renderWandInventory(float x, float y, float z, double size) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(135F, 1F, 0, 0);

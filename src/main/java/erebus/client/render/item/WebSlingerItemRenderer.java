@@ -66,7 +66,7 @@ public class WebSlingerItemRenderer implements IItemRenderer {
 		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(texture);
 		if (RenderItem.renderInFrame) {
 			GL11.glPushMatrix();
-			GL11.glTranslatef(x, y - 1.0F, z);
+			GL11.glTranslatef(x, y, z);
 			GL11.glRotatef(180F, 1, 0, -1F);
 			GL11.glScaled(0.70F, 0.70F, 0.70F);
 			model.render();
