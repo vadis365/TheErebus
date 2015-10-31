@@ -185,7 +185,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', new ItemStack(Items.feather, 1, 0), 'S', "stickWood", 'T', ItemMaterials.DATA.shardBone.makeStack());
 		addShapedRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', ItemMaterials.DATA.flyWing.makeStack(), 'S', "stickWood", 'T', ItemMaterials.DATA.shardBone.makeStack());
 		addShapedRecipe(new ItemStack(Items.arrow, 4), "T", "S", "F", 'F', ItemMaterials.DATA.flyWing.makeStack(), 'S', "stickWood", 'T', Items.flint);
-		addShapedRecipe(new ItemStack(ModItems.sprayCan, 9), " B ", "XRX", "XXX", 'X', "ingotIron", 'B', Blocks.wooden_button, 'R', ItemMaterials.DATA.repellent.makeStack());
+		addShapedRecipe(new ItemStack(ModItems.sprayCan, 9), " B ", "XRX", "XXX", 'X', "ingotIron", 'B', "buttonWood", 'R', ItemMaterials.DATA.repellent.makeStack());
 		addShapedRecipe(new ItemStack(ModBlocks.altarBase, 1), "XXX", "XOX", "XXX", 'O', Blocks.obsidian, 'X', ItemMaterials.DATA.altarFragment.makeStack());
 		addShapedRecipe(new ItemStack(ModBlocks.glowingJar, 1), "XXX", "GBG", "GGG", 'X', "ingotIron", 'G', new ItemStack(ModBlocks.amber, 1, 1), 'B', ItemMaterials.DATA.bioLuminescence.makeStack());
 		addShapelessRecipe(new ItemStack(ModBlocks.reinExo, 1), ItemMaterials.DATA.reinforcedPlateExo.makeStack(), ItemMaterials.DATA.reinforcedPlateExo.makeStack(), ItemMaterials.DATA.reinforcedPlateExo.makeStack(), ItemMaterials.DATA.reinforcedPlateExo.makeStack());
@@ -218,7 +218,7 @@ public class RecipeHandler {
 		addShapelessRecipe(new ItemStack(ModBlocks.varnishedPlanks), "plankWood", "slimeball", ItemMaterials.DATA.repellent.makeStack(), ItemMaterials.DATA.camoPowder.makeStack());
 		addShapedRecipe(new ItemStack(ModBlocks.composter), "xyx", "xzx", "xyx", 'x', ModBlocks.varnishedPlanks, 'y', "dyeGreen", 'z', "gemEmerald");
 		addShapedRecipe(new ItemStack(ModBlocks.composter), "xyx", "xzx", "xyx", 'x', ModBlocks.varnishedPlanks, 'y', "dyeLime", 'z', "gemEmerald");
-		addShapedRecipe(new ItemStack(ModBlocks.siloSupports), "xxx", "y y", "y y", 'x', "slabWood", 'y', Blocks.fence);
+		addShapedRecipe(new ItemStack(ModBlocks.siloSupports), "xxx", "y y", "y y", 'x', "slabWood", 'y', "fenceWood");
 		addShapedRecipe(new ItemStack(ModBlocks.siloTank), "xzx", "ywy", "xzx", 'x', "ingotIron", 'y', "blockIron", 'z', ModBlocks.varnishedPlanks, 'w', ModBlocks.petrifiedWoodChest);
 		addShapedRecipe(new ItemStack(ModBlocks.siloRoof), " x ", "xyx", 'x', ModBlocks.varnishedPlanks, 'y', ModBlocks.petrifiedWoodPlanks);
 		addShapedRecipe(new ItemStack(ModBlocks.offeringAltar), "xwx", "yzy", "xyx", 'x', "stone", 'y', Blocks.stonebrick, 'z', Blocks.obsidian, 'w', "ingotGold");
@@ -233,6 +233,7 @@ public class RecipeHandler {
 		addShapelessRecipe(ItemMaterials.DATA.titanStew.makeStack(), ItemMaterials.DATA.stewPot.makeStack(), Items.beef, Items.beef, Items.potato, Items.carrot, new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.CABBAGE.ordinal()), "foodMushroom", "foodMushroom");
 		addShapedRecipe(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 0), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.dye, 1, 2), 'v', ItemMaterials.DATA.supernaturalvelocity.makeStack(), 'p', new ItemStack(ModBlocks.wallPlants, 1, 0));
 		addShapedRecipe(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 1), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.dye, 1, 4), 'v', ItemMaterials.DATA.supernaturalvelocity.makeStack(), 'p', new ItemStack(ModBlocks.wallPlants, 1, 1));
+		addShapedRecipe(new ItemStack(Items.leather, 8), "xx", "xx", 'x', ItemMaterials.DATA.hideShroom.makeStack());
 
 		// Smoothies
 		// Have to figure this out...
@@ -311,6 +312,8 @@ public class RecipeHandler {
 
 	private static void registerOreDictionary() {
 		OreDictionary.registerOre("chestWood", new ItemStack(Blocks.chest));
+		OreDictionary.registerOre("buttonWood", new ItemStack(Blocks.wooden_button));
+		OreDictionary.registerOre("fenceWood", new ItemStack(Blocks.fence));
 
 		OreDictionary.registerOre("oreCoal", new ItemStack(ModBlocks.oreCoal));
 		OreDictionary.registerOre("oreIron", new ItemStack(ModBlocks.oreIron));
