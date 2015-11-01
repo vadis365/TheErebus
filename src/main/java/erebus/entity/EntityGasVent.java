@@ -1,10 +1,12 @@
 package erebus.entity;
 
+import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,9 +31,8 @@ public class EntityGasVent extends EntityLiving {
 		if (!worldObj.isRemote)
 			if (ticksExisted > 20)
 				setDead();
-
-		if (worldObj.isRemote)
-			trailParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
+		if (ticksExisted == 1)
+			flameParticles(posX - 0.5D, posY, posZ - 0.5D);
 	}
 
 	@Override
@@ -54,6 +55,15 @@ public class EntityGasVent extends EntityLiving {
 
 	public byte getFlameType() {
 		return dataWatcher.getWatchableObjectByte(16);
+	}
+
+	private void flameParticles(double x, double y, double z) {
+		Iterator<EntityPlayer> players = worldObj.playerEntities.iterator();
+		while (players.hasNext()) {
+			EntityPlayer playersNear = players.next();
+			if ((playersNear).getDistanceSqToEntity(this) < 256D)
+				trailParticles(worldObj, x, y, z, rand); // may need to put this in a packet...
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
