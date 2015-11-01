@@ -15,6 +15,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.client.fx.EntityRepellentFX;
 import erebus.network.AbstractClientPacket;
@@ -29,7 +30,9 @@ public class PacketParticle extends AbstractClientPacket {
 		BOSS_DEATH,
 		ANTLION_BLAM,
 		ANTLION_RUMBLE,
-		HAMMER_BLAM;
+		HAMMER_BLAM,
+		GAS_VENT_SWAMP,
+		GAS_VENT_VOLCANIC;
 
 		static final ParticleType[] values = values();
 	}
@@ -109,6 +112,40 @@ public class PacketParticle extends AbstractClientPacket {
 					for (int count = 0; count <= 4; ++count)
 						eff.addEffect(new EntityFireworkSparkFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 1 * count * 0.5, e.posY - 1, e.posZ + MathHelper.cos((float) ang) * 1 * count * 0.5, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5, eff));
 					eff.addEffect(new EntityCloudFX(player.worldObj, e.posX + -MathHelper.sin((float) ang) * 2, e.posY - 1, e.posZ + MathHelper.cos((float) ang) * 2, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5));
+				}
+				break;
+			case GAS_VENT_SWAMP:
+				for (double yy = e.posY; yy < e.posY + 2D; yy += 0.5D) {
+					double d0 = e.posX - 0.075F;
+					double d1 = yy;
+					double d2 = e.posZ - 0.075F;
+					double d3 = e.posX + 0.075F;
+					double d4 = e.posZ + 0.075F;
+					double d5 = e.posX;
+					double d6 = yy + 0.25F;
+					double d7 = e.posZ;
+					Erebus.proxy.spawnCustomParticle("swampflame", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
+					Erebus.proxy.spawnCustomParticle("swampflame", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
+					Erebus.proxy.spawnCustomParticle("swampflame", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
+					Erebus.proxy.spawnCustomParticle("swampflame", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
+					Erebus.proxy.spawnCustomParticle("swampflame", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
+				}
+				break;
+			case GAS_VENT_VOLCANIC:
+				for (double yy = e.posY; yy < e.posY + 2D; yy += 0.5D) {
+					double d0 = e.posX - 0.075F;
+					double d1 = yy;
+					double d2 = e.posZ - 0.075F;
+					double d3 = e.posX + 0.075F;
+					double d4 = e.posZ + 0.075F;
+					double d5 = e.posX;
+					double d6 = yy + 0.25F;
+					double d7 = e.posZ;
+					Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
+					Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
+					Erebus.proxy.spawnCustomParticle("flame", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
+					Erebus.proxy.spawnCustomParticle("flame", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
+					Erebus.proxy.spawnCustomParticle("flame", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
 				}
 				break;
 			default:
