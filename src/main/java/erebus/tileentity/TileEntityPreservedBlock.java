@@ -51,7 +51,7 @@ public class TileEntityPreservedBlock extends TileEntity {
 	}
 
 	public void spawnTrappedEntity() {
-		if (worldObj.isRemote)
+		if (worldObj.isRemote || entityNBT == null)
 			return;
 
 		Entity entity = EntityList.createEntityFromNBT(entityNBT, worldObj);

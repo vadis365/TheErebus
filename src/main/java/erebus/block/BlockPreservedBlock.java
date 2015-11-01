@@ -1,14 +1,19 @@
 package erebus.block;
 
-import net.minecraft.block.Block;
+import java.util.Random;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.event.world.BlockEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -24,10 +29,14 @@ public class BlockPreservedBlock extends BlockContainer {
 	}
 
 	@Override
+	public int quantityDropped(Random rand) {
+		return 0;
+	}
+
+	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
 		if (!world.isRemote && stack.hasTagCompound()) {
-			world.setBlock(x, y + 1, z, ModBlocks.preservedBlock);
-			TileEntityPreservedBlock tile = Utils.getTileEntity(world, x, y + 1, z, TileEntityPreservedBlock.class);
+			TileEntityPreservedBlock tile = Utils.getTileEntity(world, x, y, z, TileEntityPreservedBlock.class);
 			if (tile != null)
 				tile.setEntityNBT(stack.getTagCompound().getCompoundTag("EntityNBT"));
 		}
@@ -49,16 +58,6 @@ public class BlockPreservedBlock extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		// TODO move this to a better place
-		TileEntityPreservedBlock tile = Utils.getTileEntity(world, x, y, z, TileEntityPreservedBlock.class);
-		if (tile != null)
-			tile.spawnTrappedEntity();
-
-		super.breakBlock(world, x, y, z, block, meta);
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
 	}
@@ -73,5 +72,24 @@ public class BlockPreservedBlock extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public int getRenderBlockPass() {
 		return 1;
+	}
+
+	@SubscribeEvent
+	public void onBreakEvent(BlockEvent.BreakEvent event) {
+		World world = event.world;
+		int x = event.x;
+		int y = event.y;
+		int z = event.z;
+
+		TileEntityPreservedBlock tile = Utils.getTileEntity(world, x, y, z, TileEntityPreservedBlock.class);
+		if (tile != null)
+			if (EnchantmentHelper.getSilkTouchModifier(event.getPlayer())) {
+				ItemStack stack = new ItemStack(this);
+				NBTTagCompound nbt = new NBTTagCompound();
+				nbt.setTag("EntityNBT", tile.getEntityNBT());
+				stack.setTagCompound(nbt);
+				this.dropBlockAsItem(world, x, y, z, stack);
+			} else
+				tile.spawnTrappedEntity();
 	}
 }
