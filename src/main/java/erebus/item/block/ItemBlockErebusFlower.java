@@ -14,9 +14,9 @@ public class ItemBlockErebusFlower extends ItemBlockGeneric {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		if (stack.getItemDamage() == 14)
+		if (stack.getItemDamage() == 15)
 			return StatCollector.translateToLocal(getUnlocalizedName() + "_stem.name");
-		else if (stack.getItemDamage() == 15)
+		else if (stack.getItemDamage() == 14)
 			return StatCollector.translateToLocal(getUnlocalizedName() + "_stigma.name");
 		else {
 			String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getUnlocalisedName();
