@@ -762,6 +762,16 @@ tooltip.erebus.wandofanimation=Right click blocks to animate them.
 tooltip.erebus.extractor=Point at blocks and hold down the right mouse button to extract them.
 tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
 
+############
+# Commands #
+############
+command.erebus.commanddenied=Cannot use Erebus debug commands in console or command block.
+command.erebus.available=Available commands:
+command.erebus.generated=Generated.
+command.erebus.failed=Failed.
+command.erebus.somethingwentwrong=Something went wrong.
+command.erebus.mobcount="Mob count: creature %d, monster %d, ambient %d
+
 ##########
 # Others #
 ##########

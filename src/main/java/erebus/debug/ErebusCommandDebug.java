@@ -12,14 +12,15 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class ErebusCommandDebug extends CommandBase {
-	private static final IChatComponent text(String str) {
-		return new ChatComponentText(str);
+
+	private static final IChatComponent text(String str, Object... objects) {
+		return new ChatComponentTranslation(str, objects);
 	}
 
 	@Override
@@ -41,14 +42,14 @@ public class ErebusCommandDebug extends CommandBase {
 	@Override
 	public void processCommand(ICommandSender sender, String[] params) {
 		if (!(sender instanceof EntityPlayer)) {
-			sender.addChatMessage(text("Cannot use Erebus debug commands in console or command block."));
+			sender.addChatMessage(text("command.erebus.commanddenied"));
 			return;
 		}
 
 		EntityPlayer player = (EntityPlayer) sender;
 
 		if (params.length == 0) {
-			sender.addChatMessage(text("Available commands:"));
+			sender.addChatMessage(text("command.erebus.available"));
 			sender.addChatMessage(text("/erebus gen <type> <feature>"));
 			sender.addChatMessage(text("/erebus debug"));
 		} else if (params[0].equals("gen") && params.length >= 3)
@@ -58,12 +59,12 @@ public class ErebusCommandDebug extends CommandBase {
 				ChunkCoordinates coords = sender.getPlayerCoordinates();
 
 				if (gen.generate(sender.getEntityWorld(), sender.getEntityWorld().rand, coords.posX, coords.posY, coords.posZ))
-					sender.addChatMessage(text("Generated."));
+					sender.addChatMessage(text("command.erebus.generated"));
 				else
-					sender.addChatMessage(text("Failed."));
+					sender.addChatMessage(text("command.erebus.failed"));
 			} catch (Throwable t) {
 				t.printStackTrace();
-				sender.addChatMessage(text("Something went wrong."));
+				sender.addChatMessage(text("command.erebus.somethingwentwrong"));
 			}
 		else if (params[0].equals("debug")) {
 			/*
