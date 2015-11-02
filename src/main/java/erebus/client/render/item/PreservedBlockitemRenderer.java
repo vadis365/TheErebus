@@ -1,5 +1,12 @@
 package erebus.client.render.item;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.client.render.block.BlockRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -8,14 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.client.render.block.BlockRenderHelper;
 
 @SideOnly(Side.CLIENT)
 public class PreservedBlockitemRenderer implements IItemRenderer {
@@ -69,12 +68,17 @@ public class PreservedBlockitemRenderer implements IItemRenderer {
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		boolean wasBlendOn = GL11.glIsEnabled(GL11.GL_BLEND);
+		if (!wasBlendOn) {
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		}
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		renderer.setRenderBoundsFromBlock(ModBlocks.preservedBlock);
 		BlockRenderHelper.renderSimpleBlock(ModBlocks.preservedBlock, 0, renderer);
+		if (!wasBlendOn)
+			GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}
 }
