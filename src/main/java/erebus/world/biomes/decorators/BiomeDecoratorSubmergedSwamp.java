@@ -139,6 +139,10 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 						genSwampBush.generate(world, rand, xx, yy, zz);
 						break;
 					}
+					else if (checkSurface(SurfaceType.UMBERSTONE, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
+						genSwampBush.generate(world, rand, xx, yy, zz);
+						break;
+					}
 			}
 
 		for (attempt = 0; attempt < 8; attempt++) {
