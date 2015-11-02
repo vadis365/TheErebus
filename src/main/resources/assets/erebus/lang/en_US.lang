@@ -770,7 +770,7 @@ command.erebus.available=Available commands:
 command.erebus.generated=Generated.
 command.erebus.failed=Failed.
 command.erebus.somethingwentwrong=Something went wrong.
-command.erebus.mobcount="Mob count: creature %d, monster %d, ambient %d
+command.erebus.gen=/erebus gen <type> <feature>
 
 ##########
 # Others #

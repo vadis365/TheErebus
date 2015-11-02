@@ -50,7 +50,7 @@ public class ErebusCommandDebug extends CommandBase {
 
 		if (params.length == 0) {
 			sender.addChatMessage(text("command.erebus.available"));
-			sender.addChatMessage(text("/erebus gen <type> <feature>"));
+			sender.addChatMessage(text("command.erebus.gen"));
 			sender.addChatMessage(text("/erebus debug"));
 		} else if (params[0].equals("gen") && params.length >= 3)
 			try {
