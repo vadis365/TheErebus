@@ -2,7 +2,12 @@ package erebus.item;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.core.handler.HomingBeeconTextureHandler;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,16 +15,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.core.handler.HomingBeeconTextureHandler;
 
 public class ItemHomingBeecon extends Item {
 
 	public ItemHomingBeecon() {
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.specials);
+		setUnlocalizedName("erebus.homingBeecon");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
 	}
 
 	@Override
@@ -41,13 +48,13 @@ public class ItemHomingBeecon extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote && hasTag(is) && player.isSneaking()) {
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote && hasTag(stack) && player.isSneaking()) {
 			Block block = world.getBlock(x, y, z);
 			if (!world.isRemote && block != null) {
-				is.getTagCompound().setString("dimName", player.worldObj.provider.getDimensionName());
-				is.getTagCompound().setInteger("homeX", x);
-				is.getTagCompound().setInteger("homeZ", z);
+				stack.getTagCompound().setString("dimName", player.worldObj.provider.getDimensionName());
+				stack.getTagCompound().setInteger("homeX", x);
+				stack.getTagCompound().setInteger("homeZ", z);
 				player.swingItem();
 				return true;
 			}

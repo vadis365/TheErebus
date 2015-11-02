@@ -2,13 +2,6 @@ package erebus;
 
 import java.lang.reflect.Field;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemSeedFood;
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockSlabPlanks;
@@ -30,6 +23,7 @@ import erebus.item.ItemCavemanClub;
 import erebus.item.ItemCompost;
 import erebus.item.ItemCompoundGoggles;
 import erebus.item.ItemDaggerWasp;
+import erebus.item.ItemDeathBeecon;
 import erebus.item.ItemDoorErebus;
 import erebus.item.ItemDungeonIdols;
 import erebus.item.ItemEncrustedDiamond;
@@ -72,6 +66,13 @@ import erebus.item.bambucket.ItemBambucket;
 import erebus.item.bambucket.ItemBambucketAntiVenom;
 import erebus.item.bambucket.ItemBambucketBeetleJuice;
 import erebus.item.bambucket.ItemBambucketMilk;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemSeedFood;
+import net.minecraft.item.ItemStack;
 
 public class ModItems {
 
@@ -89,8 +90,9 @@ public class ModItems {
 	public static final Item hornOfSummoning = new ItemHornOfSummoning().setUnlocalizedName("erebus.hornOfSummoning").setTextureName("erebus:hornOfSummoning");
 	public static final Item nectarCollector = new ItemNectarCollector().setUnlocalizedName("erebus.nectarCollector").setTextureName("erebus:nectarCollector");
 	public static final Item beeTamingAmulet = new ItemAmuletBeeTaming().setUnlocalizedName("erebus.beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
-	public static final Item homingBeecon = new ItemHomingBeecon().setUnlocalizedName("erebus.homingBeecon").setTextureName("paper");
-	public static final Item homingBeeconAdvanced = new ItemHomingBeeconAdvanced().setUnlocalizedName("erebus.homingBeeconAdvanced").setTextureName("paper");
+	public static final Item homingBeecon = new ItemHomingBeecon();
+	public static final Item homingBeeconAdvanced = new ItemHomingBeeconAdvanced();
+	public static final Item deathBeecon = new ItemDeathBeecon();
 	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.1F, ModBlocks.blockCabbage, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
 	public static final Item idols = new ItemDungeonIdols();
 	public static final Item soulCrystal = new ItemSoulCrystal();
