@@ -1,6 +1,7 @@
 package erebus.client.render.item;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -62,6 +63,8 @@ public class PreservedBlockitemRenderer implements IItemRenderer {
 			Entity entity = EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag("EntityNBT"), Minecraft.getMinecraft().theWorld);
 			entity.setLocationAndAngles(0, 0, 0, 0, 0);
 			RenderManager.instance.renderEntityWithPosYaw(entity, 0, 0, 0, 0, 0);
+			if (!GL11.glIsEnabled(GL12.GL_RESCALE_NORMAL))
+				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glPopMatrix();
 		}
 		GL11.glPopMatrix();
