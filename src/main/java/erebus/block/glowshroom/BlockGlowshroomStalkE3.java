@@ -1,23 +1,15 @@
 package erebus.block.glowshroom;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 import erebus.ModBlocks;
-import erebus.core.helper.Utils;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockGlowshroomStalkE3 extends Block {
+public class BlockGlowshroomStalkE3 extends BlockGlowshroomPart {
 
 	public BlockGlowshroomStalkE3() {
-		super(Material.wood);
-		setHardness(0.2F);
-		setStepSound(Block.soundTypeWood);
-		setBlockName("erebus.glowshroomStalkE3");
-		setBlockTextureName("erebus:glowshroomStalk");
+		super("StalkE3", ForgeDirection.WEST);
 		setBlockBounds(0F, 0.3125F, 0.3125F, 0.6875F, 1F, 0.6875F);
 	}
 
@@ -27,48 +19,15 @@ public class BlockGlowshroomStalkE3 extends Block {
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
-		return 0;
-	}
-
-	@Override
-	public Item getItemDropped(int id, Random random, int fortune) {
-		return null;
-	}
-
-	@Override
-	public boolean canBlockStay(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x - 1, y, z));
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x - 1, y, z));
-	}
-
-	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		if (world.isRemote)
-			return;
-
-		if (world.getBlock(x, y + 1, z) != ModBlocks.glowshroom)
+		if (!world.isRemote && world.getBlock(x, y + 1, z) != ModBlocks.glowshroom)
 			world.setBlock(x, y, z, ModBlocks.glowshroomStalkE1);
 
-		if (!isValidBlock(world.getBlock(x - 1, y, z)))
-			Utils.breakBlockWithParticles(world, x, y, z);
+		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
-	private boolean isValidBlock(Block block) {
+	@Override
+	protected boolean isValidBlock(Block block) {
 		return block == ModBlocks.glowshroomStalkWE2;
 	}
 }

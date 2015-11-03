@@ -2,33 +2,17 @@ package erebus.block.glowshroom;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
+import net.minecraft.block.Block;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockGlowshroomStalkWE2 extends Block {
+public class BlockGlowshroomStalkWE2 extends BlockGlowshroomPart {
 
 	public BlockGlowshroomStalkWE2() {
-		super(Material.wood);
-		setTickRandomly(true);
-		setHardness(0.2F);
-		setStepSound(Block.soundTypeWood);
-		setBlockName("erebus.glowshroomStalkWE2");
-		setBlockTextureName("erebus:glowshroomStalk");
+		super("StalkWE2", ForgeDirection.UNKNOWN);
 		setBlockBounds(0F, 0.1875F, 0.1875F, 1F, 0.8125F, 0.8125F);
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
 	}
 
 	@Override
@@ -59,16 +43,6 @@ public class BlockGlowshroomStalkWE2 extends Block {
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
-		return 0;
-	}
-
-	@Override
-	public Item getItemDropped(int id, Random random, int fortune) {
-		return null;
-	}
-
-	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		return isValidBlock(world.getBlock(x + 1, y, z)) || isValidBlock(world.getBlock(x - 1, y, z));
 	}
@@ -83,17 +57,12 @@ public class BlockGlowshroomStalkWE2 extends Block {
 		if (world.isRemote)
 			return;
 
-		boolean flag = false;
-		if (isValidBlock(world.getBlock(x + 1, y, z)))
-			flag = true;
-		if (isValidBlock(world.getBlock(x - 1, y, z)))
-			flag = true;
-
-		if (!flag)
+		if (!isValidBlock(world.getBlock(x + 1, y, z)) && !isValidBlock(world.getBlock(x - 1, y, z)))
 			Utils.breakBlockWithParticles(world, x, y, z);
 	}
 
-	private boolean isValidBlock(Block block) {
+	@Override
+	protected boolean isValidBlock(Block block) {
 		return block == ModBlocks.glowshroomStalkMain;
 	}
 }

@@ -2,12 +2,12 @@ package erebus.block.glowshroom;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
+import erebus.core.helper.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.core.helper.Utils;
 
 public class BlockGlowshroomStalkMain extends Block {
 
