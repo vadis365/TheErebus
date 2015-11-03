@@ -23,7 +23,7 @@ import erebus.item.ItemCavemanClub;
 import erebus.item.ItemCompost;
 import erebus.item.ItemCompoundGoggles;
 import erebus.item.ItemDaggerWasp;
-import erebus.item.ItemDeathBeecon;
+import erebus.item.ItemDeathCompass;
 import erebus.item.ItemDoorErebus;
 import erebus.item.ItemDungeonIdols;
 import erebus.item.ItemEncrustedDiamond;
@@ -92,7 +92,7 @@ public class ModItems {
 	public static final Item beeTamingAmulet = new ItemAmuletBeeTaming().setUnlocalizedName("erebus.beeTamingAmulet").setTextureName("erebus:beeTamingAmulet");
 	public static final Item homingBeecon = new ItemHomingBeecon();
 	public static final Item homingBeeconAdvanced = new ItemHomingBeeconAdvanced();
-	public static final Item deathBeecon = new ItemDeathBeecon();
+	public static final Item deathCompass = new ItemDeathCompass();
 	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.1F, ModBlocks.blockCabbage, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbageSeeds");
 	public static final Item idols = new ItemDungeonIdols();
 	public static final Item soulCrystal = new ItemSoulCrystal();

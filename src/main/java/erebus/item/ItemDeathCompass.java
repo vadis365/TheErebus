@@ -4,11 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemDeathBeecon extends ItemHomingBeecon {
+public class ItemDeathCompass extends ItemHomingBeecon {
 
-	public ItemDeathBeecon() {
+	public ItemDeathCompass() {
 		setCreativeTab(null);
-		setUnlocalizedName("erebus.deathBeecon");
+		setUnlocalizedName("erebus.deathCompass");
 	}
 
 	@Override
