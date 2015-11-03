@@ -16,6 +16,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityScytodes extends EntityMob {
+
 	private int shouldDo;
 	public int skin = rand.nextInt(4);
 

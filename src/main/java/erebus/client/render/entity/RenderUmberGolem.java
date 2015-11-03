@@ -1,26 +1,24 @@
 package erebus.client.render.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import erebus.client.model.entity.ModelUmberGolem;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
-import erebus.client.model.entity.ModelUmberGolem;
-
 public class RenderUmberGolem extends RenderLiving {
+
 	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/umberGolem.png");
 
-	public RenderUmberGolem(ModelUmberGolem model, float shadowSize) {
-		super(model, shadowSize);
+	public RenderUmberGolem() {
+		super(new ModelUmberGolem(), 0.5F);
 	}
 
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		float f1 = 0.75F;
-		shadowSize = 0.5F;
-		GL11.glScalef(f1, f1, f1);
+		GL11.glScalef(0.75F, 0.75F, 0.75F);
 	}
 
 	@Override

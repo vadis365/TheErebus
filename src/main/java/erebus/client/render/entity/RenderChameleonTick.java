@@ -1,5 +1,11 @@
 package erebus.client.render.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.client.model.entity.ModelChameleonTick;
+import erebus.entity.EntityChameleonTick;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -7,19 +13,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.client.model.entity.ModelChameleonTick;
-import erebus.entity.EntityChameleonTick;
-
 @SideOnly(Side.CLIENT)
 public class RenderChameleonTick extends RenderLiving {
+
 	private final RenderBlocks blockRenderer = new RenderBlocks();
 
-	public RenderChameleonTick(ModelChameleonTick model, float shadowsize) {
-		super(model, shadowsize);
+	public RenderChameleonTick() {
+		super(new ModelChameleonTick(), 0.3F);
 	}
 
 	public void renderChameleonTick(EntityChameleonTick entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
@@ -50,20 +50,14 @@ public class RenderChameleonTick extends RenderLiving {
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float scale) {
-		shadowSize = 0.3F;
-		GL11.glScalef(1.0F, 1.0F, 1.0F);
-	}
-
-	@Override
 	protected float getDeathMaxRotation(EntityLivingBase entityLivingBase) {
 		return 0F;
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityChameleonTick ChameleonTick = (EntityChameleonTick) entity;
-		String blockPath = ChameleonTick.blockID.getIcon(0, ChameleonTick.blockMeta).getIconName();
+		EntityChameleonTick chameleonTick = (EntityChameleonTick) entity;
+		String blockPath = chameleonTick.blockID.getIcon(0, chameleonTick.blockMeta).getIconName();
 		String modName = "minecraft";
 		if (blockPath.contains(":")) {
 			modName = blockPath.split(":")[0];
