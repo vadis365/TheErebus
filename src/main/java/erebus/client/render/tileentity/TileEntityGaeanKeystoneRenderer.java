@@ -24,7 +24,7 @@ public class TileEntityGaeanKeystoneRenderer extends TileEntitySpecialRenderer {
 		mc.getTextureManager().bindTexture(texture);
 		double now = 0;
 		if (mc.theWorld != null)
-			now = mc.theWorld.getTotalWorldTime() + partialTick;
+			now = (mc.theWorld.getTotalWorldTime() % Short.MAX_VALUE) + partialTick;
 		GL11.glPushMatrix();
 		double hover = (Math.sin(now / 40) + 1) / 16;
 		float s = 1.25F;
