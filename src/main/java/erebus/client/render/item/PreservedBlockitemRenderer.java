@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.client.render.block.BlockRenderHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -63,8 +64,11 @@ public class PreservedBlockitemRenderer implements IItemRenderer {
 			Entity entity = EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag("EntityNBT"), Minecraft.getMinecraft().theWorld);
 			entity.setLocationAndAngles(0, 0, 0, 0, 0);
 			RenderManager.instance.renderEntityWithPosYaw(entity, 0, 0, 0, 0, 0);
-			if (!GL11.glIsEnabled(GL12.GL_RESCALE_NORMAL))
-				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+			OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+
 			GL11.glPopMatrix();
 		}
 		GL11.glPopMatrix();
