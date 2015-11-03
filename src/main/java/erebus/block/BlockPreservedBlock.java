@@ -2,23 +2,24 @@ package erebus.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
-import net.minecraftforge.event.world.BlockEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityPreservedBlock;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+import net.minecraftforge.event.world.BlockEvent;
 
 public class BlockPreservedBlock extends BlockContainer {
 
@@ -77,13 +78,17 @@ public class BlockPreservedBlock extends BlockContainer {
 	@SubscribeEvent
 	public void onBreakEvent(BlockEvent.BreakEvent event) {
 		World world = event.world;
+		EntityPlayer player = event.getPlayer();
 		int x = event.x;
 		int y = event.y;
 		int z = event.z;
 
+		if (player.capabilities.isCreativeMode)
+			return;
+
 		TileEntityPreservedBlock tile = Utils.getTileEntity(world, x, y, z, TileEntityPreservedBlock.class);
 		if (tile != null)
-			if (EnchantmentHelper.getSilkTouchModifier(event.getPlayer())) {
+			if (EnchantmentHelper.getSilkTouchModifier(player)) {
 				ItemStack stack = new ItemStack(this);
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setTag("EntityNBT", tile.getEntityNBT());
