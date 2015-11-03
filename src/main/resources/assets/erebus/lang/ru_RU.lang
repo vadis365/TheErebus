@@ -108,22 +108,21 @@ tile.erebus.fence_gate_rotten.name=Калитка из гнилого дерев
 tile.erebus.fence_gate_marshwood.name=Калитка из болотного дерева
 
 # Flowers
-tile.erebus.flower_black.name=Чёрный лепесток
-tile.erebus.flower_red.name=Красный лепесток
-tile.erebus.flower_brown.name=Коричневый лепесток
-tile.erebus.flower_blue.name=Синий лепесток
-tile.erebus.flower_purple.name=Фиолетовый лепесток
-tile.erebus.flower_cyan.name=Бирюзовый лепесток
-tile.erebus.flower_light_grey.name=Светло-серый лепесток
-tile.erebus.flower_grey.name=Серый лепесток
-tile.erebus.flower_pink.name=Розовый лепесток
-tile.erebus.flower_yellow.name=Жёлый лепесток
-tile.erebus.flower_light_blue.name=Светло-синий лепесток
-tile.erebus.flower_magenta.name=Сиреневый лепесток
-tile.erebus.flower_orange.name=Оранжевый лепесток
-tile.erebus.flower_white.name=Белый лепесток
-
-tile.erebus.flower_stigma.name=Взрывающаяся стигма
+tile.erebus.flower_black_petal.name=Чёрный лепесток
+tile.erebus.flower_red_petal.name=Красный лепесток
+tile.erebus.flower_brown_petal.name=Коричневый лепесток
+tile.erebus.flower_blue_petal.name=Синий лепесток
+tile.erebus.flower_purple_petal.name=Фиолетовый лепесток
+tile.erebus.flower_cyan_petal.name=Бирюзовый лепесток
+tile.erebus.flower_light_grey_petal.name=Светло-серый лепесток
+tile.erebus.flower_grey_petal.name=Серый лепесток
+tile.erebus.flower_pink_petal.name=Розовый лепесток
+tile.erebus.flower_yellow_petal.name=Жёлый лепесток
+tile.erebus.flower_light_blue_petal.name=Светло-синий лепесток
+tile.erebus.flower_magenta_petal.name=Сиреневый лепесток
+tile.erebus.flower_orange_petal.name=Оранжевый лепесток
+tile.erebus.flower_white_petal.name=Белый лепесток
+tile.erebus.flower_exploding_stigma.name=Взрывающаяся стигма
 tile.erebus.flower_stem.name=Стебель
 
 tile.erebus.stigma_black.name=Чёрная стигма

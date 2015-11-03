@@ -12,8 +12,8 @@ public class ItemBlockGeneric extends ItemBlock {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack is) {
-		return this.getUnlocalizedName() + "_" + is.getItemDamage();
+	public String getUnlocalizedName(ItemStack stack) {
+		return this.getUnlocalizedName() + "_" + stack.getItemDamage();
 	}
 
 	@Override
