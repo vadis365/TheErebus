@@ -107,6 +107,58 @@ tile.erebus.fence_gate_bamboo.name=Калитка из бамбука
 tile.erebus.fence_gate_rotten.name=Калитка из гнилого дерева
 tile.erebus.fence_gate_marshwood.name=Калитка из болотного дерева
 
+# Flowers
+tile.erebus.flower_black.name=Чёрный лепесток
+tile.erebus.flower_red.name=Красный лепесток
+tile.erebus.flower_brown.name=Коричневый лепесток
+tile.erebus.flower_blue.name=Синий лепесток
+tile.erebus.flower_purple.name=Фиолетовый лепесток
+tile.erebus.flower_cyan.name=Бирюзовый лепесток
+tile.erebus.flower_light_grey.name=Светло-серый лепесток
+tile.erebus.flower_grey.name=Серый лепесток
+tile.erebus.flower_pink.name=Розовый лепесток
+tile.erebus.flower_yellow.name=Жёлый лепесток
+tile.erebus.flower_light_blue.name=Светло-синий лепесток
+tile.erebus.flower_magenta.name=Сиреневый лепесток
+tile.erebus.flower_orange.name=Оранжевый лепесток
+tile.erebus.flower_white.name=Белый лепесток
+
+tile.erebus.flower_stigma.name=Взрывающаяся стигма
+tile.erebus.flower_stem.name=Стебель
+
+tile.erebus.stigma_black.name=Чёрная стигма
+tile.erebus.stigma_red.name=Красная стигма
+tile.erebus.stigma_brown.name=Коричневая стигма
+tile.erebus.stigma_blue.name=Синяя стигма
+tile.erebus.stigma_purple.name=Фиолетовая стигма
+tile.erebus.stigma_cyan.name=Бирюзовая стигма
+tile.erebus.stigma_light_grey.name=Светло-серая стигма
+tile.erebus.stigma_grey.name=Серая стигма
+tile.erebus.stigma_pink.name=Розовая стигма
+tile.erebus.stigma_yellow.name=Жёлтая стигма
+tile.erebus.stigma_light_blue.name=Светло-синяя стигма
+tile.erebus.stigma_magenta.name=Сиреневая стигма
+tile.erebus.stigma_orange.name=Оранжевая стигма
+tile.erebus.stigma_white.name=Белая стигма
+
+tile.erebus.flower_planted_black.name=Чёрный цветок
+tile.erebus.flower_planted_red.name=Красный цветок
+tile.erebus.flower_planted_brown.name=Коричневый цветок
+tile.erebus.flower_planted_blue.name=Синий цветок
+tile.erebus.flower_planted_purple.name=Фиолетовый цветок
+tile.erebus.flower_planted_cyan.name=Бирюзовый цветок
+tile.erebus.flower_planted_light_grey.name=Светло-серый цветок
+tile.erebus.flower_planted_grey.name=Серый цветок
+tile.erebus.flower_planted_pink.name=Розовый цветок
+tile.erebus.flower_planted_yellow.name=Жёлтый цветок
+tile.erebus.flower_planted_light_blue.name=Светло-синий цветок
+tile.erebus.flower_planted_magenta.name=Сиреневый цветок
+tile.erebus.flower_planted_orange.name=Оранжевый цветок
+tile.erebus.flower_planted_white.name=Белый цветок
+
+# Fluid Blocks
+tile.erebus.honeyBlock.name=Мёд
+
 # Rest (someone should organise it at some point)
 tile.erebus.portal.name=Портал в «Эреб»
 tile.erebus.gaeanKeystone.name=Гаеанов замковый камень
@@ -138,14 +190,14 @@ tile.erebus.weepingBlue.name=Плачущий цветок
 tile.erebus.bullrush.name=Камышевидник
 tile.erebus.droughtedShrub.name=Сухой кустарник
 tile.erebus.tangledStalk.name=Переплетающийся шляпочный гриб
-tile.erebus.highCapped.name=Высокий шляпочный гриб
+tile.erebus.highCapped.name=Гриб с высокой шляпкой
 tile.erebus.waterFlower.name=Высокоцвет
 
-tile.erebus.bulbCappedShroom.name=Округлённый шляпочный гриб
+tile.erebus.bulbCappedShroom.name=Гриб с тёмной шляпкой
 tile.erebus.greenMushroom.name=Бабушкин обувной гриб
 tile.erebus.bundleshroom.name=Саркастический чешский гриб
 tile.erebus.kaizerfinger.name=Гриб пальцев Кайзера
-tile.erebus.dutchCap.name=Голландский шляпочный гриб
+tile.erebus.dutchCap.name=Гриб с голландской шляпкой
 tile.erebus.desertShrub.name=Пустынный кустарник
 tile.erebus.mireCoral.name=Болотный коралл
 tile.erebus.nettle.name=Крапива
@@ -155,12 +207,6 @@ tile.erebus.fireBloom.name=Огнецвет
 tile.erebus.fern.name=Папоротник
 tile.erebus.fiddlehead.name=Скрипичник
 tile.erebus.algae.name=Болотные водоросли
-
-tile.erebus.flowerPlanted.name=%s цветок
-tile.erebus.stigma.name=%s стигма цветка
-tile.erebus.flower.name=%s лепесток
-tile.erebus.flower_14.name=Взрывающаяся стигма
-tile.erebus.flower_15.name=Стебель
 
 tile.erebus.jadeBerryBush.name=Куст нефритовый ягоды
 tile.erebus.heartBerryBush.name=Куст ягоды любви
@@ -266,6 +312,7 @@ tile.erebus.waspSpawner.name=Спаунер ос
 tile.erebus.tarantulaSpawner.name=Спаунер пауков-птицеедов
 tile.erebus.antlionSpawner.name=Спаунер муравьиных львов
 tile.erebus.magmaCrawlerSpawner.name=Спаунер магмовой гусеницы
+tile.erebus.dragonflySpawner.name=Спаунер стрекоз
 
 tile.erebus.waspNestBlock.name=Блок осиного гнезда
 tile.erebus.blockSpiderSilk.name=Шёлк
@@ -288,11 +335,11 @@ tile.erebus.templeTeleporter.name=Храмовая панель телепорт
 tile.erebus.forceField.name=Силовое поле
 tile.erebus.capstone.name=Капитель пирамиды
 
-tile.erebus.mushroomCap0.name=Округлённый шляпочный гриб
+tile.erebus.mushroomCap0.name=Гриб с тёмной шляпкой
 tile.erebus.mushroomCap1.name=Бабушкин обувной гриб
 tile.erebus.mushroomCap2.name=Саркастический чешский гриб
 tile.erebus.mushroomCap3.name=Гриб пальцев Кайзера
-tile.erebus.mushroomCap4.name=Голландский шляпочный гриб
+tile.erebus.mushroomCap4.name=Гриб с голландской шляпкой
 
 tile.erebus.glowshroom.name=Светящийся гриб
 tile.erebus.glowshroomStalk.name=Ножка светящегося гриба
@@ -361,6 +408,38 @@ tile.erebus.smoothieMaker.name=ErebusCo. Smoothie-matic 2000
 # Items #
 #########
 
+# Smoothies
+item.erebus.smoothie_green_tea_grasshopper.name=Смузи: Кузнечик с зелёного чая
+item.erebus.smoothie_money_honey.name=Смузи: Денежный мёд
+item.erebus.smoothie_nothing_in_the_middle.name=Смузи: Пустота посередине
+item.erebus.smoothie_green_giant.name=Смузи: Зелёный гигант
+item.erebus.smoothie_seedy_goodness.name=Смузи: Семенная доброта
+item.erebus.smoothie_givin_me_the_blues.name=Смузи: Givin' Me The Blues
+item.erebus.smoothie_hot_hot_baby.name=Смузи: Горячая-прегорячая детка
+item.erebus.smoothie_dont_meddle_with_the_nettle.name=Смузи: Не трогайте крапиву
+item.erebus.smoothie_liquid_gold.name=Смузи: Жидкое золото
+item.erebus.smoothie_bryufs_brew.name=Смузи: Bryuf's Brew
+
+# Foodstuffs
+item.erebus.food_beetle_larva_raw.name=Личинка жука
+item.erebus.food_beetle_larva_cooked.name=Приготовленная личинка жука
+item.erebus.food_grasshopper_leg_raw.name=Ножка кузнечика
+item.erebus.food_grasshopper_leg_cooked.name=Приготовленная ножка кузнечика
+item.erebus.food_tarantula_leg_raw.name=Лапка паука-птицееда
+item.erebus.food_tarantula_leg_cooked.name=Хрустящая лапка паука-птицееда
+item.erebus.food_bamboo_soup.name=Бамбуковый суп
+item.erebus.food_melonade.name=Мелонад
+item.erebus.food_melonade_sparkly.name=Сверкающий мелонад
+item.erebus.food_larvae_on_stick.name=Личинка на палочке
+item.erebus.food_honey_sandwich.name=Медовый сэндвич
+item.erebus.food_dark_fruit.name=Тёмный фрукт
+item.erebus.food_titan_chop_raw.name=Сырая отбивная из титана
+item.erebus.food_titan_chop_cooked.name=Приготовленная отбивная из титана
+item.erebus.food_swampberries.name=Болотные ягоды
+item.erebus.food_cabbage.name=Капуста
+item.erebus.food_titan_stew_cooked.name=Приготовленное рагу из титана
+
+# Rest
 item.erebus.encrustedDiamond.name=Инкрустированный алмаз
 item.erebus.helmetExo.name=Экзоскелетный шлем
 item.erebus.chestplateExo.name=Экзоскелетная кираса
@@ -466,37 +545,6 @@ item.erebus.materials.magmaCrawlerEye.name=Глаз магмовой гусен�
 item.erebus.materials.stewPot.name=Кастрюля для тушения
 item.erebus.materials.titanStew.name=Неприготовленное рагу из титана
 
-item.erebus.food.0.name=Личинка жука
-item.erebus.food.1.name=Приготовленная личинка жука
-item.erebus.food.2.name=Ножка кузнечика
-item.erebus.food.3.name=Приготовленная ножка кузнечика
-item.erebus.food.4.name=Лапка паука-птицееда
-item.erebus.food.5.name=Хрустящая лапка паука-птицееда
-item.erebus.food.6.name=Бамбуковый суп
-item.erebus.food.7.name=Мелонад
-item.erebus.food.8.name=Сверкающий мелонад
-item.erebus.food.9.name=Личинка на палочке
-item.erebus.food.10.name=Медовый сэндвич
-item.erebus.food.11.name=Тёмный фрукт
-item.erebus.food.12.name=Сырая отбивная из титана
-item.erebus.food.13.name=Приготовленная отбивная из титана
-item.erebus.food.14.name=Болотные ягоды
-item.erebus.food.15.name=Капуста
-item.erebus.food.16.name=Приготовленное рагу из титана
-
-item.erebus.smoothie.0.name=Кузнечик с зелёного чая
-item.erebus.smoothie.1.name=Денежный мёд
-item.erebus.smoothie.2.name=Нет ничего посередине
-item.erebus.smoothie.3.name=Зелёный гигант
-item.erebus.smoothie.4.name=Семенная доброта
-item.erebus.smoothie.5.name=Givin' Me The Blues
-item.erebus.smoothie.6.name=Горячая-прегорячая детка
-item.erebus.smoothie.7.name=Don't Meddle With The Nettle
-item.erebus.smoothie.8.name=Жидкое золото
-item.erebus.smoothie.9.name=Bryuf's Brew
-
-item.erebus.smoothieBook.name=Smoothie-matic 2000
-
 item.erebus.heartBerries.name=Жизненные ягоды
 item.erebus.lifeBlood.name=Жизненная кровь
 
@@ -534,7 +582,6 @@ item.erebus.doorAmberitem.erebus.name=Янтарная дверь
 item.erebus.bucketHoney.name=Ведро мёда
 item.erebus.homingBeecon.name=Homing Beecon
 item.erebus.homingBeeconAdvanced.name=Advanced Homing Beecon
-item.erebus.flowerSeeds.name=%s луковица цветка
 item.erebus.whetstone.name=Точильный камень
 item.erebus.woodlouseBall.name=Шарик мокрицы
 item.erebus.rolledNewspaper.name=Свёрнутая газета
@@ -543,9 +590,25 @@ item.erebus.planticide.name=Гербицид
 item.erebus.compost.name=Компост
 item.erebus.monsterPlacer.name=Призвать существо - %s
 item.doorAmberItem.name=Янтарная дверь
-item.erebus.warHammer.name=Quake Hammer
-
+item.erebus.warHammer.name=Молот землетрясения
 item.erebus.soulCrystal.name=Кристалл души
+
+# Flower Bulbs
+item.erebus.flower_bulb_black.name=Луковица чёрного цветка
+item.erebus.flower_bulb_red.name=Луковица красного цветка
+item.erebus.flower_bulb_brown.name=Луковица коричневого цветка
+item.erebus.flower_bulb_blue.name=Луковица синего цветка
+item.erebus.flower_bulb_purple.name=Луковица фиолетового цветка
+item.erebus.flower_bulb_cyan.name=Луковица бирюзового цветка
+item.erebus.flower_bulb_light_grey.name=Луковица светло-серого цветка
+item.erebus.flower_bulb_grey.name=Луковица серого цветка
+item.erebus.flower_bulb_pink.name=Луковица розового цветка
+item.erebus.flower_bulb_yellow.name=Луковица жёлтого цветка
+item.erebus.flower_bulb_light_blue.name=Луковица светло-синего цветка
+item.erebus.flower_bulb_magenta.name=Луковица сиреневого цветка
+item.erebus.flower_bulb_orange.name=Луковица оранжевого цветка
+item.erebus.flower_bulb_white.name=Луковица белого цветка
+item.erebus.flower_bulb_rainbow.name=Луковица разноцветного цветка
 
 ############
 # Entities #
@@ -653,24 +716,56 @@ container.antInventory=Управление муравьями
 container.composter=Органический компостер
 container.bamber=Bamber
 
-###########
-# Colours #
-###########
+############
+# Tooltips #
+############
 
-colour.erebus.dyeBlack=Чёрный
-colour.erebus.dyeRed=Красный
-colour.erebus.dyeGreen=Зелёный
-colour.erebus.dyeBrown=Коричневый
-colour.erebus.dyeBlue=Синий
-colour.erebus.dyePurple=Фиолетовый
-colour.erebus.dyeCyan=Бирюзовый
-colour.erebus.dyeLightGray=Светло-серый
-colour.erebus.dyeGray=Серый
-colour.erebus.dyePink=Розовый
-colour.erebus.dyeLime=Лаймовый
-colour.erebus.dyeYellow=Жёлтый
-colour.erebus.dyeLightBlue=Светло-синий
-colour.erebus.dyeMagenta=Сиреневый
-colour.erebus.dyeOrange=Оранжевый
-colour.erebus.dyeWhite=Белый
-colour.erebus.rainbow=Радужный
+tooltip.erebus.dimension=Измерение: %s
+tooltip.erebus.targetx=Координата X: %d
+tooltip.erebus.targety=Координата Y: %d
+tooltip.erebus.targetz=Координата Z: %d
+tooltip.erebus.homingbeeconadvanced_1=Shift + ПКМ по блоку, чтобы пометить его как цель.
+tooltip.erebus.homingbeeconadvanced_2=ПКМ, чтобы телепортироваться.
+tooltip.erebus.homingbeecon=Shift + ЛКМ по блоку, чтобы пометить его как цель.
+tooltip.erebus.warhammer_1=Удерживайте ПКМ, чтобы усилить удар.
+tooltip.erebus.warhammer_2=Shift + ПКМ по верху блока, чтобы добыть блоки по площади.
+tooltip.erebus.waspdagger_1=Одноразовый.
+tooltip.erebus.waspdagger_2=Можно кинуть.
+tooltip.erebus.honeycombx=Honey Comb Block X: %d
+tooltip.erebus.honeycomby=Honey Comb Block Y: %d
+tooltip.erebus.honeycombz=Honey Comb Block Z: %d
+tooltip.erebus.beetamingamulet_1=Click on a Honey Comb Block to set as target for Bee drops.
+tooltip.erebus.beetamingamulet_2=Then click on Bee to tame.
+tooltip.erebus.siloblockx=Silo Block X: %d
+tooltip.erebus.siloblocky=Silo Block Y: %d
+tooltip.erebus.siloblockz=Silo Block Z: %d
+tooltip.erebus.anttamingamulet_1=Click on a Silo Block to set as target for Ants.
+tooltip.erebus.anttamingamulet_2=Then click on Ant link it.
+tooltip.erebus.sprintleggingstier=Уровень: %d
+tooltip.erebus.whetstonesharpness=Уровень остроты: %d
+tooltip.erebus.whetstone_1=Применяется на инструменты на наковальне.
+tooltip.erebus.whetstone_2=Не зачарован
+tooltip.erebus.whetstone_3=Окружите точильным порошком, чтобы увеличить уровень.
+tooltip.erebus.nectarcollector=ПКМ по пчёлам, чтобы собрать нектар.
+tooltip.erebus.wandofanimation=ПКМ по блоку, чтобы оживить его.
+tooltip.erebus.extractor=Наведитесь на блоки и зажмите ПКМ, чтобы извлечь их.
+tooltip.erebus.scorpionpincer=Может стрелять огненными шарами, если они есть в вашем инвентаре.
+
+############
+# Commands #
+############
+command.erebus.commanddenied=Нельзя использовать команды Erebus в консоли или командном блоке.
+command.erebus.available=Доступные команды:
+command.erebus.generated=Сгенерировано.
+command.erebus.failed=Не удалось.
+command.erebus.somethingwentwrong=Что-то пошло не так.
+command.erebus.gen=/erebus gen <тип> <функция>
+
+##########
+# Others #
+##########
+
+erebus.smoothie.effect.milk=Убирает эффекты
+erebus.smoothie.effect.extinguish=Тушит
+erebus.smoothie.effect.set_fire=Поджигает
+erebus.smoothie.effect.heal=Лечит
