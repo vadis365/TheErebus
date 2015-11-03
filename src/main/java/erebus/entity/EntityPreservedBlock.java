@@ -1,9 +1,12 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.api.PreservableEntityRegistry;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityPreservedBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,9 +14,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityPreservedBlock;
 
 public class EntityPreservedBlock extends EntityThrowable {
 
@@ -51,9 +51,8 @@ public class EntityPreservedBlock extends EntityThrowable {
 		setDead();
 	}
 
-	// Easier to expand on
 	private boolean canTrap(Entity entity) {
-		return entity instanceof EntityLivingBase && !(entity instanceof IBossDisplayData);
+		return PreservableEntityRegistry.canBePreserved(entity);
 	}
 
 	private NBTTagCompound trapEntity(Entity entity) {
