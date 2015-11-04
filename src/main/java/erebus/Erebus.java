@@ -28,6 +28,8 @@ import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.handler.AnvilEventsHandler;
 import erebus.core.handler.BucketFillHandler;
+import erebus.core.handler.DeathCompassRespawnEvent;
+import erebus.core.handler.EntityConstructingEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityPickupEventHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
@@ -120,8 +122,11 @@ public class Erebus {
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 
-		if (ConfigHandler.INSTANCE.graveMarker)
+		if (ConfigHandler.INSTANCE.graveMarker) {
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
+			MinecraftForge.EVENT_BUS.register(new EntityConstructingEvent());
+			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
+		}
 
 		if (ConfigHandler.INSTANCE.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);

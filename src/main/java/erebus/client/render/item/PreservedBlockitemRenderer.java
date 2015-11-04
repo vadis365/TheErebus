@@ -59,7 +59,7 @@ public class PreservedBlockitemRenderer implements IItemRenderer {
 		if (stack.hasTagCompound()) {
 			GL11.glPushMatrix();
 			GL11.glScalef(1.0F, -1.0F, -1.0F);
-			GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+			GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
 			GL11.glScaled(0.5, 0.5, 0.5);
 			Entity entity = EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag("EntityNBT"), Minecraft.getMinecraft().theWorld);
 			entity.setLocationAndAngles(0, 0, 0, 0, 0);
