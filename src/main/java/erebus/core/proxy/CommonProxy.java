@@ -5,12 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockPetrifiedChest;
@@ -68,6 +62,12 @@ import erebus.tileentity.TileEntityTarantulaEgg;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -298,10 +298,10 @@ public class CommonProxy implements IGuiHandler {
 
 	/**
 	 * Adds an entity's custom data to the map for temporary storage
-	 * 
+	 *
 	 * @param compound An NBT Tag Compound that stores the IExtendedEntityProperties data only
 	 */
-	public static void storeEntityData(String name, NBTTagCompound compound) {
+	public void storeEntityData(String name, NBTTagCompound compound) {
 		System.out.println("Temp Proxy Data is Stored for player");
 		extendedEntityData.put(name, compound);
 	}
@@ -310,9 +310,8 @@ public class CommonProxy implements IGuiHandler {
 	 * Removes the compound from the map and returns the NBT tag stored for name
 	 * or null if none exists
 	 */
-	public static NBTTagCompound getEntityData(String name) {
+	public NBTTagCompound getEntityData(String name) {
 		System.out.println("Temp Proxy Data is Retrieved for player");
 		return extendedEntityData.remove(name);
 	}
-
 }
