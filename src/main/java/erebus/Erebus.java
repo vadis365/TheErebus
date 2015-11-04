@@ -125,7 +125,7 @@ public class Erebus {
 		if (ConfigHandler.INSTANCE.graveMarker) {
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
 			MinecraftForge.EVENT_BUS.register(new EntityConstructingEvent());
-			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
+			FMLCommonHandler.instance().bus().register(new DeathCompassRespawnEvent());
 		}
 
 		if (ConfigHandler.INSTANCE.randomNames)
