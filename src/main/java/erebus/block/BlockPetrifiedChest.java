@@ -4,6 +4,12 @@ import static net.minecraftforge.common.util.ForgeDirection.DOWN;
 
 import java.util.Iterator;
 
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,12 +25,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.tileentity.TileEntityPetrifiedWoodChest;
 
 public class BlockPetrifiedChest extends BlockContainer {
 
@@ -254,7 +254,7 @@ public class BlockPetrifiedChest extends BlockContainer {
 		if (world.isRemote)
 			return true;
 		else {
-			if(getInventory(world, x, y, z) != null)
+			if (getInventory(world, x, y, z) != null)
 				player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CHEST, world, x, y, z);
 			return true;
 		}

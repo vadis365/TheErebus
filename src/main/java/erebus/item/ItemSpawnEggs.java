@@ -1,5 +1,9 @@
 package erebus.item;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.lib.Reference;
@@ -18,10 +22,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ItemSpawnEggs extends ItemMonsterPlacer {
 	private static final Map<Short, EggData> eggTypes = new LinkedHashMap<Short, EggData>();
@@ -106,7 +106,7 @@ public class ItemSpawnEggs extends ItemMonsterPlacer {
 		return egg != null ? pass == 0 ? egg.primaryColor : egg.secondaryColor : 16777215;
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item id, CreativeTabs tab, List list) {

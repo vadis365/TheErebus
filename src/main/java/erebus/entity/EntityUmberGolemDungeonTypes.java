@@ -1,5 +1,10 @@
 package erebus.entity;
 
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.item.ItemDungeonIdols.IDOL;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -21,11 +26,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemDungeonIdols.IDOL;
 
 public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAdditionalSpawnData {
 	Block block;

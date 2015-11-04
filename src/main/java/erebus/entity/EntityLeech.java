@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
@@ -7,8 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
 
 public class EntityLeech extends EntityMob {
 

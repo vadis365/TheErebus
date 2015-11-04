@@ -1,12 +1,12 @@
 package erebus.entity;
 
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityGasVent extends EntityLiving {
 
@@ -32,7 +32,7 @@ public class EntityGasVent extends EntityLiving {
 					PacketPipeline.sendToAllAround(this, 16D, new PacketParticle(this, ParticleType.GAS_VENT_SWAMP));
 				if (getFlameType() == 1)
 					PacketPipeline.sendToAllAround(this, 16D, new PacketParticle(this, ParticleType.GAS_VENT_VOLCANIC));
-				}
+			}
 		}
 	}
 

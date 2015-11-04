@@ -1,5 +1,10 @@
 package erebus.client.render.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import erebus.ModBlocks;
+import erebus.client.model.entity.ModelFireAnt;
+import erebus.entity.EntityZombieAnt;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -7,12 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import erebus.ModBlocks;
-import erebus.client.model.entity.ModelFireAnt;
-import erebus.entity.EntityZombieAnt;
 
 public class RenderZombieAnt extends RenderLiving {
 

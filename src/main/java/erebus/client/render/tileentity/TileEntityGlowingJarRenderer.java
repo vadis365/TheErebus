@@ -1,5 +1,13 @@
 package erebus.client.render.tileentity;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.client.model.block.ModelGlowingJar;
+import erebus.tileentity.TileEntityGlowingJar;
+import erebus.tileentity.TileEntityJarOHoney;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -12,15 +20,6 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.client.model.block.ModelGlowingJar;
-import erebus.tileentity.TileEntityGlowingJar;
-import erebus.tileentity.TileEntityJarOHoney;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {

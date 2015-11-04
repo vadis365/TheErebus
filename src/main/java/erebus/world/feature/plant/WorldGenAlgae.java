@@ -2,9 +2,9 @@ package erebus.world.feature.plant;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
 
 public class WorldGenAlgae extends WorldGenerator {
 

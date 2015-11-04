@@ -1,11 +1,5 @@
 package erebus.client.render.tileentity;
 
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -14,6 +8,11 @@ import erebus.ModBlocks;
 import erebus.client.model.block.ModelExtenderThingy;
 import erebus.lib.EnumWood;
 import erebus.tileentity.TileEntityExtenderThingy;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer {

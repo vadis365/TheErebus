@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import erebus.ModAchievements;
+import erebus.ModBlocks;
+import erebus.block.GaeanKeystone;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.tileentity.TileEntityGaeanKeystone;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -16,11 +21,6 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
-import erebus.ModAchievements;
-import erebus.ModBlocks;
-import erebus.block.GaeanKeystone;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.tileentity.TileEntityGaeanKeystone;
 
 final class TeleporterErebus extends Teleporter {
 

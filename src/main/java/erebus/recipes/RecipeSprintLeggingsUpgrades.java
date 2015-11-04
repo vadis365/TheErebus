@@ -1,13 +1,13 @@
 package erebus.recipes;
 
+import erebus.ModItems;
+import erebus.item.ItemLeggingsSprint;
+import erebus.item.ItemMaterials.DATA;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.ItemLeggingsSprint;
-import erebus.item.ItemMaterials.DATA;
 
 public class RecipeSprintLeggingsUpgrades implements IRecipe {
 

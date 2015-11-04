@@ -1,12 +1,12 @@
 package erebus.client.model.entity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.entity.EntityGrasshopper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.entity.EntityGrasshopper;
 
 @SideOnly(Side.CLIENT)
 public class ModelGrasshopper extends ModelBase {

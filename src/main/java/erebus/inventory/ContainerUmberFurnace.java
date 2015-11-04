@@ -1,5 +1,6 @@
 package erebus.inventory;
 
+import erebus.tileentity.TileEntityUmberFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import erebus.tileentity.TileEntityUmberFurnace;
 
 public class ContainerUmberFurnace extends Container {
 

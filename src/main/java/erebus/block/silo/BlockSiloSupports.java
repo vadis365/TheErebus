@@ -1,14 +1,14 @@
 package erebus.block.silo;
 
+import erebus.ModTabs;
+import erebus.block.BlockSimple;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import erebus.entity.EntityBlackAnt;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import erebus.ModTabs;
-import erebus.block.BlockSimple;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.entity.EntityBlackAnt;
 
 public class BlockSiloSupports extends BlockSimple {
 

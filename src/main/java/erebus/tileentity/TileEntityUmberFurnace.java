@@ -1,5 +1,9 @@
 package erebus.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.block.BlockUmberFurnace;
+import erebus.inventory.ContainerUmberFurnace;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -14,10 +18,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.block.BlockUmberFurnace;
-import erebus.inventory.ContainerUmberFurnace;
 
 public class TileEntityUmberFurnace extends TileEntityBasicInventory implements IFluidHandler {
 

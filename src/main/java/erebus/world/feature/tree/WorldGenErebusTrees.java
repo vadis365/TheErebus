@@ -2,6 +2,7 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -9,7 +10,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
-import erebus.lib.EnumWood;
 
 public class WorldGenErebusTrees extends WorldGenerator { // TODO
 	private final int minTreeHeight;

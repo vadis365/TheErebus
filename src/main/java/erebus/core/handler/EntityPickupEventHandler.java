@@ -1,14 +1,14 @@
 package erebus.core.handler;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stats.AchievementList;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModAchievements;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.block.BlockLogErebus;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.AchievementList;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 public class EntityPickupEventHandler {
 

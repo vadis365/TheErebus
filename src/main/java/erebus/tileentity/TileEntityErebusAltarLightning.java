@@ -2,17 +2,17 @@ package erebus.tileentity;
 
 import java.util.List;
 
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.entity.EntityMobBlock;
+import erebus.entity.EntityUmberGolem;
+import erebus.entity.effect.EntityErebusLightningBolt;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.entity.EntityMobBlock;
-import erebus.entity.EntityUmberGolem;
-import erebus.entity.effect.EntityErebusLightningBolt;
 
 public class TileEntityErebusAltarLightning extends TileEntityErebusAltar {
 

@@ -1,8 +1,8 @@
 package erebus.world.biomes.decorators.data;
 
+import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import erebus.ModBlocks;
 
 public enum SurfaceType {
 	GRASS,

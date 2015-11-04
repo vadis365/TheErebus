@@ -1,5 +1,9 @@
 package erebus.tileentity;
 
+import erebus.ModFluids;
+import erebus.network.AbstractPacket;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketJarOHoney;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -7,10 +11,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import erebus.ModFluids;
-import erebus.network.AbstractPacket;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketJarOHoney;
 
 public class TileEntityJarOHoney extends TileEntityGlowingJar {
 

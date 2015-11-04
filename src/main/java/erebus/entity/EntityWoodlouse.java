@@ -1,5 +1,8 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -15,9 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemMaterials;
 
 public class EntityWoodlouse extends EntityCreature {
 

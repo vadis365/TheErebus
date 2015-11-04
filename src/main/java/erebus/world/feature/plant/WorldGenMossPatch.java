@@ -9,10 +9,10 @@ import static net.minecraftforge.common.util.ForgeDirection.WEST;
 
 import java.util.Random;
 
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.lib.EnumWood;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenMossPatch extends WorldGenerator {
 	boolean blockPlaced = false;

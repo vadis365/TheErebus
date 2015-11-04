@@ -1,15 +1,15 @@
 package erebus.item.bambucket;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import erebus.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class ItemBambucketAntiVenom extends ItemBambucketDrinkable {
 

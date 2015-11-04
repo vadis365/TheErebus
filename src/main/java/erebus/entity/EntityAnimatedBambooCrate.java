@@ -1,5 +1,11 @@
 package erebus.entity;
 
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
+import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -7,12 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.entity.ai.EntityAIBlockFollowOwner;
-import erebus.tileentity.TileEntityBambooCrate;
 
 public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements IInventory {
 

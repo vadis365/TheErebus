@@ -2,8 +2,8 @@ package erebus.block;
 
 import java.util.Random;
 
-import net.minecraft.item.Item;
 import erebus.ModItems;
+import net.minecraft.item.Item;
 
 public class BlockWaspSpawner extends BlockSpiderSpawner {
 

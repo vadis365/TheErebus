@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import erebus.core.helper.Utils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -9,8 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import erebus.core.helper.Utils;
 
 public class EntityExtractedBlock extends EntityFlying implements IEntityAdditionalSpawnData {
 

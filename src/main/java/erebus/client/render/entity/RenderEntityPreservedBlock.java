@@ -1,15 +1,14 @@
 package erebus.client.render.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import erebus.ModBlocks;
+import erebus.entity.EntityPreservedBlock;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import erebus.ModBlocks;
-import erebus.entity.EntityPreservedBlock;
 
 public class RenderEntityPreservedBlock extends Render {
 	private final RenderBlocks blockRenderer = new RenderBlocks();

@@ -1,10 +1,10 @@
 package erebus.client.model.entity;
 
+import erebus.entity.EntityLeech;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-import erebus.entity.EntityLeech;
 
 public class ModelLeech extends ModelBase {
 	ModelRenderer s1;

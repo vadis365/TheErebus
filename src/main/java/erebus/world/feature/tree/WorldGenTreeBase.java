@@ -1,8 +1,8 @@
 package erebus.world.feature.tree;
 
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.lib.EnumWood;
 
 public abstract class WorldGenTreeBase extends WorldGenerator {
 

@@ -1,10 +1,10 @@
 package erebus.network;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class ByteBufHelper {
 

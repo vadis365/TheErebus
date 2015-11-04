@@ -3,18 +3,6 @@ package erebus.block.plants;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModTabs;
@@ -28,6 +16,18 @@ import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
 import erebus.world.feature.tree.WorldGenSapTree;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class BlockSaplingErebus extends BlockSapling {
 

@@ -2,11 +2,11 @@ package erebus.world.feature.decoration;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
 
 public class WorldGenGasVents extends WorldGenerator {
 	@Override

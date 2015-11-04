@@ -2,11 +2,11 @@ package erebus.world.structure;
 
 import java.util.Random;
 
+import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.MapGenBase;
-import erebus.world.biomes.BiomeBaseErebus;
 
 public class MapGenErebusCaves extends MapGenBase {
 	protected void generateLargeCaveNode(long seed, int chunkX, int chunkZ, Block[] blocks, double xx, double yy, double zz) {

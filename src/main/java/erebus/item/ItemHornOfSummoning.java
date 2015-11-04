@@ -1,12 +1,12 @@
 package erebus.item;
 
+import erebus.ModTabs;
+import erebus.entity.EntityWorkerBee;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.ModTabs;
-import erebus.entity.EntityWorkerBee;
 
 public class ItemHornOfSummoning extends Item {
 

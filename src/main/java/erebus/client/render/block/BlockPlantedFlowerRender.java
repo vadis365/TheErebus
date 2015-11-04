@@ -1,5 +1,11 @@
 package erebus.client.render.block;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -8,12 +14,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
 
 @SideOnly(Side.CLIENT)
 public class BlockPlantedFlowerRender implements ISimpleBlockRenderingHandler {

@@ -1,11 +1,11 @@
 package erebus.client.render.tileentity;
 
-import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelAltarRepair;
 import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarRepair;
+import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityErebusAltarRepairRenderer extends TileEntityErebusAltarRenderer {

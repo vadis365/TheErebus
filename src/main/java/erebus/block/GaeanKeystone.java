@@ -3,6 +3,12 @@ package erebus.block;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.tileentity.TileEntityGaeanKeystone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockLeaves;
@@ -16,12 +22,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.tileentity.TileEntityGaeanKeystone;
 
 public class GaeanKeystone extends BlockContainer {
 
@@ -317,7 +317,7 @@ public class GaeanKeystone extends BlockContainer {
 				if (b == L)
 					block = Blocks.air;
 				else {
-					md = w.rand.nextBoolean() ? 5 /* smoothUmbertile */: 6 /* smoothUmbertiles */;
+					md = w.rand.nextBoolean() ? 5 /* smoothUmbertile */ : 6 /* smoothUmbertiles */;
 					block = ModBlocks.umberstone;
 				}
 				w.setBlock(start.x + dx, start.y + dy, start.z + dz, block, md, 3);

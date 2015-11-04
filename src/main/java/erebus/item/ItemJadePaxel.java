@@ -1,8 +1,8 @@
 package erebus.item;
 
-import net.minecraft.item.ItemStack;
 import erebus.ModMaterials;
 import erebus.core.helper.Utils;
+import net.minecraft.item.ItemStack;
 
 public class ItemJadePaxel extends ItemPaxel {
 

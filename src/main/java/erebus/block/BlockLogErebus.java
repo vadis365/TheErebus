@@ -2,14 +2,6 @@ package erebus.block;
 
 import java.util.ArrayList;
 
-import net.minecraft.block.BlockLog;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.monster.EntitySilverfish;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
@@ -20,6 +12,14 @@ import erebus.entity.EntityWoodlouse;
 import erebus.item.ItemMaterials;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
+import net.minecraft.block.BlockLog;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 public class BlockLogErebus extends BlockLog {
 

@@ -1,12 +1,12 @@
 package erebus.block;
 
+import erebus.ModTabs;
+import erebus.tileentity.TileEntityGlowingJar;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import erebus.ModTabs;
-import erebus.tileentity.TileEntityGlowingJar;
 
 public class BlockGlowingJar extends BlockContainer {
 

@@ -1,8 +1,8 @@
 package erebus.block;
 
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
-import erebus.ModTabs;
 
 public class BlockStairsBase extends BlockStairs {
 

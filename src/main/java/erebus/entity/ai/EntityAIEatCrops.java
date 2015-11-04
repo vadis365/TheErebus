@@ -1,12 +1,12 @@
 package erebus.entity.ai;
 
+import erebus.ModBlocks;
+import erebus.entity.EntityGrasshopper;
+import erebus.entity.EntityLocust;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.init.Blocks;
-import erebus.ModBlocks;
-import erebus.entity.EntityGrasshopper;
-import erebus.entity.EntityLocust;
 
 public class EntityAIEatCrops extends EntityAIEatBlock {
 

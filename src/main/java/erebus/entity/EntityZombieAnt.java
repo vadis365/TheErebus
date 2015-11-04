@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -13,8 +15,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.item.ItemMaterials;
 
 public class EntityZombieAnt extends EntityMob {
 

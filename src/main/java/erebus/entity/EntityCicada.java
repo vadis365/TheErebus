@@ -2,6 +2,12 @@ package erebus.entity;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemMaterials;
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -15,12 +21,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
-import erebus.lib.EnumWood;
 
 public class EntityCicada extends EntityCreature {
 	private int sonics;

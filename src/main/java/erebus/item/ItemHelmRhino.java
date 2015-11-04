@@ -1,12 +1,5 @@
 package erebus.item;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
@@ -14,6 +7,13 @@ import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.client.model.armor.ModelRhinoHelm;
 import erebus.item.ItemMaterials.DATA;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemHelmRhino extends ItemArmor {
 

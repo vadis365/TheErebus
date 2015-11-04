@@ -1,5 +1,8 @@
 package erebus.world;
 
+import java.util.List;
+import java.util.Random;
+
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
@@ -24,9 +27,6 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
-
-import java.util.List;
-import java.util.Random;
 
 public class ChunkProviderErebus implements IChunkProvider {
 	private final World worldObj;

@@ -1,7 +1,7 @@
 package erebus.block;
 
-import net.minecraft.block.BlockFalling;
 import erebus.ModTabs;
+import net.minecraft.block.BlockFalling;
 
 public class BlockUmberGravel extends BlockFalling {
 

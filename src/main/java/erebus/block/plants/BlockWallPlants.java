@@ -11,6 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.item.block.ItemBlockErebusPlantSmall;
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -24,14 +32,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.item.block.ItemBlockErebusPlantSmall;
-import erebus.lib.EnumWood;
 
 public class BlockWallPlants extends Block implements IShearable, ISubBlocksBlock {
 
@@ -286,7 +286,7 @@ public class BlockWallPlants extends Block implements IShearable, ISubBlocksBloc
 	public void onPostBlockPlaced(World world, int x, int y, int z, int meta) {
 		onNeighborBlockChange(world, x, y, z, this);
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
@@ -312,7 +312,7 @@ public class BlockWallPlants extends Block implements IShearable, ISubBlocksBloc
 				flag = true;
 
 		if (!flag || meta == dataMoss || meta == dataMould)
-			if(!world.isRemote)
+			if (!world.isRemote)
 				Utils.breakBlockWithParticles(world, x, y, z, meta);
 
 		super.onNeighborBlockChange(world, x, y, z, neighbour);

@@ -1,9 +1,5 @@
 package erebus.client.render.item;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -11,6 +7,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.block.ModelBambooCrate;
 import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 
 @SideOnly(Side.CLIENT)
 public class BambooCrateItemRenderer implements IItemRenderer {

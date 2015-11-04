@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -14,7 +15,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 
 public class EntityVelvetWorm extends EntityMob {
 

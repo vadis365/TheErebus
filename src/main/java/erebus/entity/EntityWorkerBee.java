@@ -1,5 +1,11 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIPolinate;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -26,12 +32,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAIPolinate;
-import erebus.item.ItemMaterials;
 
 public class EntityWorkerBee extends EntityTameable {
 	public ChunkCoordinates currentFlightTarget;

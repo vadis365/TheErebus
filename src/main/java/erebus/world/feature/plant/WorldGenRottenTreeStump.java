@@ -3,6 +3,14 @@ package erebus.world.feature.plant;
 import java.util.List;
 import java.util.Random;
 
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.item.ItemMaterials.DATA;
+import erebus.lib.EnumWood;
+import erebus.world.loot.IPostProcess;
+import erebus.world.loot.LootItemStack;
+import erebus.world.loot.LootUtil;
+import erebus.world.loot.WeightedLootList;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -15,14 +23,6 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.item.ItemMaterials.DATA;
-import erebus.lib.EnumWood;
-import erebus.world.loot.IPostProcess;
-import erebus.world.loot.LootItemStack;
-import erebus.world.loot.LootUtil;
-import erebus.world.loot.WeightedLootList;
 
 public class WorldGenRottenTreeStump extends WorldGenerator {
 
@@ -42,29 +42,29 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 			new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.stone_pickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.stone_shovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.stone_axe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.stone_sword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2),
 			new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1), new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1) }).setPostProcessor(new IPostProcess() {
 
-		@SuppressWarnings("rawtypes")
-		@Override
-		public ItemStack postProcessItem(ItemStack is, Random rand) {
-			if (rand.nextBoolean() && (is.getItem() == Items.enchanted_book || is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
-				boolean enchBook = is.getItem() == Items.enchanted_book;
-				if (enchBook)
-					is.func_150996_a(Items.book);
-				List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
-				if (enchBook)
-					is.func_150996_a(Items.enchanted_book);
+				@SuppressWarnings("rawtypes")
+				@Override
+				public ItemStack postProcessItem(ItemStack is, Random rand) {
+					if (rand.nextBoolean() && (is.getItem() == Items.enchanted_book || is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
+						boolean enchBook = is.getItem() == Items.enchanted_book;
+						if (enchBook)
+							is.func_150996_a(Items.book);
+						List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10));
+						if (enchBook)
+							is.func_150996_a(Items.enchanted_book);
 
-				if (enchList != null && enchList.size() > 0)
-					for (int a = 0; a < enchList.size(); ++a) {
-						EnchantmentData data = (EnchantmentData) enchList.get(a);
-						if (is.getItem() == Items.enchanted_book)
-							Items.enchanted_book.addEnchantment(is, data);
-						else
-							is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
+						if (enchList != null && enchList.size() > 0)
+							for (int a = 0; a < enchList.size(); ++a) {
+								EnchantmentData data = (EnchantmentData) enchList.get(a);
+								if (is.getItem() == Items.enchanted_book)
+									Items.enchanted_book.addEnchantment(is, data);
+								else
+									is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
+							}
 					}
-			}
-			return is;
-		}
-	});
+					return is;
+				}
+			});
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {

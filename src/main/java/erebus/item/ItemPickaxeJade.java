@@ -1,10 +1,10 @@
 package erebus.item;
 
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemStack;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
 
 public class ItemPickaxeJade extends ItemPickaxe {
 

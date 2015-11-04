@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -17,8 +19,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
 
 public class EntityBeetle extends EntityAnimal {
 	int shagCount;

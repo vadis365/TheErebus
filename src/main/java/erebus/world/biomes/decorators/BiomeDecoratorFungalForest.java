@@ -1,10 +1,5 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.WorldGenBigMushroom;
-import net.minecraft.world.gen.feature.WorldGenFlowers;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -15,6 +10,11 @@ import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenRottenTreeStump;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.gen.feature.WorldGenBigMushroom;
+import net.minecraft.world.gen.feature.WorldGenFlowers;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);

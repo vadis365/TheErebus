@@ -1,13 +1,13 @@
 package erebus.integration;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import erebus.ModBlocks;
 import erebus.block.BlockGneiss;
 import erebus.block.BlockUmberstone;
 import erebus.integration.ModIntegrationHandler.IModIntegration;
 import erebus.lib.EnumWood;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class FMPIntegration implements IModIntegration {
 	@Override

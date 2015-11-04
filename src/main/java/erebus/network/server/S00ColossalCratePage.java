@@ -1,10 +1,10 @@
 package erebus.network.server;
 
+import erebus.inventory.ContainerColossalCrate;
+import erebus.network.AbstractServerPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
-import erebus.inventory.ContainerColossalCrate;
-import erebus.network.AbstractServerPacket;
 
 public class S00ColossalCratePage extends AbstractServerPacket {
 

@@ -1,5 +1,9 @@
 package erebus.item;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModTabs;
@@ -12,10 +16,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class ItemBottleAntiVenom extends ItemBucketMilk {
 

@@ -1,11 +1,11 @@
 package erebus.block.altars;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityErebusAltarLightning;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class LightningAltar extends AltarAbstract {
 

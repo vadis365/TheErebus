@@ -1,12 +1,12 @@
 package erebus.tileentity;
 
+import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import erebus.ModBlocks;
 
 public class TileEntityExtenderThingy extends TileEntityBasicInventory {
 

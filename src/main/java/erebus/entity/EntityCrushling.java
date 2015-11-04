@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModBiomes;
+import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -20,8 +22,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBiomes;
-import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
 public class EntityCrushling extends EntityAnimal {
 

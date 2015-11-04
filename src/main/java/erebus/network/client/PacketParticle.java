@@ -1,5 +1,11 @@
 package erebus.network.client;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.client.fx.EntityRepellentFX;
+import erebus.network.AbstractClientPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -13,12 +19,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.client.fx.EntityRepellentFX;
-import erebus.network.AbstractClientPacket;
 
 public class PacketParticle extends AbstractClientPacket {
 

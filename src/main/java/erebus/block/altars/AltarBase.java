@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.item.ItemMaterials;
+import erebus.tileentity.TileEntityErebusAltarEmpty;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
-import erebus.tileentity.TileEntityErebusAltarEmpty;
 
 public class AltarBase extends AltarAbstract {
 

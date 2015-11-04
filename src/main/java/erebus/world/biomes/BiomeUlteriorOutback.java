@@ -1,6 +1,5 @@
 package erebus.world.biomes;
 
-import net.minecraft.init.Blocks;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBotFly;
@@ -15,6 +14,7 @@ import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
+import net.minecraft.init.Blocks;
 
 public class BiomeUlteriorOutback extends BiomeBaseErebus {
 	public BiomeUlteriorOutback(int biomeID) {

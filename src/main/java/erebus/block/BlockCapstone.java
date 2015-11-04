@@ -2,6 +2,12 @@ package erebus.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.entity.effect.EntityErebusLightningBolt;
+import erebus.item.ItemDungeonIdols.IDOL;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -10,12 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.entity.effect.EntityErebusLightningBolt;
-import erebus.item.ItemDungeonIdols.IDOL;
 
 public class BlockCapstone extends Block {
 	private IIcon capstoneMud, capstoneMud1, capstoneIron, capstoneIron1, capstoneGold, capstoneGold1, capstoneJade, capstoneJade1;

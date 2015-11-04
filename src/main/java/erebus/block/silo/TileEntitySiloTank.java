@@ -1,9 +1,9 @@
 package erebus.block.silo;
 
-import net.minecraft.util.AxisAlignedBB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityBasicInventory;
+import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntitySiloTank extends TileEntityBasicInventory {
 

@@ -1,13 +1,12 @@
 package erebus.client.model.block;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityErebusAltarLightning;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 
 @SideOnly(Side.CLIENT)
 public class ModelAltarLightning extends ModelBase {

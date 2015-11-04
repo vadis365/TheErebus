@@ -1,13 +1,13 @@
 package erebus.block;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import erebus.ModTabs;
 
 public class BlockQuickSand extends Block {
 

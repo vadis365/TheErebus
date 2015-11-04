@@ -1,6 +1,5 @@
 package erebus.world.biomes;
 
-import net.minecraft.init.Blocks;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityChameleonTick;
@@ -14,6 +13,7 @@ import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
+import net.minecraft.init.Blocks;
 
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 	public BiomeSubterraneanSavannah(int biomeID) {

@@ -2,6 +2,12 @@ package erebus.block.plants;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.item.ItemErebusFood;
+import erebus.item.ItemMaterials.DATA;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,12 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemErebusFood;
-import erebus.item.ItemMaterials.DATA;
 
 public class BlockHangerPlants extends BlockBush {
 

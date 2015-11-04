@@ -2,6 +2,7 @@ package erebus.entity;
 
 import java.util.List;
 
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +18,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.ItemMaterials;
 
 public class EntityBlackWidow extends EntityMob {
 

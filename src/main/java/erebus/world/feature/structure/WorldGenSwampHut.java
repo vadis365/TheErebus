@@ -2,16 +2,16 @@ package erebus.world.feature.structure;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.EnumWood;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldGenSwampHut implements IWorldGenerator {
 

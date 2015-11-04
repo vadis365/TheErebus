@@ -1,5 +1,7 @@
 package erebus.tileentity;
 
+import erebus.core.helper.Utils;
+import erebus.world.feature.structure.AntlionMazeDungeon;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,8 +9,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import erebus.core.helper.Utils;
-import erebus.world.feature.structure.AntlionMazeDungeon;
 
 public class TileEntityTempleTeleporter extends TileEntity {
 	private int targetX, targetY, targetZ;

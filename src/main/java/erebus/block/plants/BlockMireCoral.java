@@ -1,7 +1,7 @@
 package erebus.block.plants;
 
-import net.minecraft.block.material.Material;
 import erebus.block.BlockSimple;
+import net.minecraft.block.material.Material;
 
 public class BlockMireCoral extends BlockSimple {
 

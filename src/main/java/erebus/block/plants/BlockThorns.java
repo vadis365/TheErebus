@@ -1,5 +1,8 @@
 package erebus.block.plants;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
 import net.minecraft.entity.Entity;
@@ -7,9 +10,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
 
 public class BlockThorns extends BlockVine implements IShearable {
 

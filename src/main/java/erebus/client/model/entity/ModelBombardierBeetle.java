@@ -1,53 +1,53 @@
 package erebus.client.model.entity;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 @SideOnly(Side.CLIENT)
 public class ModelBombardierBeetle extends ModelBase {
-    ModelRenderer Thx;
-    ModelRenderer ThxS;
-    ModelRenderer Ab;
-    ModelRenderer AbSide;
-    ModelRenderer AbBack;
-    ModelRenderer Head1;
-    ModelRenderer Head2;
-    ModelRenderer LMandible;
-    ModelRenderer RMandible;
-    ModelRenderer Eyes;
-    ModelRenderer LBLA;
-    ModelRenderer LBLB;
-    ModelRenderer LBLC;
-    ModelRenderer LBLD;
-    ModelRenderer LMLA;
-    ModelRenderer LMLB;
-    ModelRenderer LMLC;
-    ModelRenderer LMLD;
-    ModelRenderer LFLA;
-    ModelRenderer LFLB;
-    ModelRenderer LFLC;
-    ModelRenderer LFLD;
-    ModelRenderer RFLA;
-    ModelRenderer RFLB;
-    ModelRenderer RFLC;
-    ModelRenderer RFLD;
-    ModelRenderer RMLA;
-    ModelRenderer RMLB;
-    ModelRenderer RMLC;
-    ModelRenderer RMLD;
-    ModelRenderer RBLA;
-    ModelRenderer RBLB;
-    ModelRenderer RBLC;
-    ModelRenderer RBLD;
-    ModelRenderer AntRE;
-    ModelRenderer AntLE;
-  
+	ModelRenderer Thx;
+	ModelRenderer ThxS;
+	ModelRenderer Ab;
+	ModelRenderer AbSide;
+	ModelRenderer AbBack;
+	ModelRenderer Head1;
+	ModelRenderer Head2;
+	ModelRenderer LMandible;
+	ModelRenderer RMandible;
+	ModelRenderer Eyes;
+	ModelRenderer LBLA;
+	ModelRenderer LBLB;
+	ModelRenderer LBLC;
+	ModelRenderer LBLD;
+	ModelRenderer LMLA;
+	ModelRenderer LMLB;
+	ModelRenderer LMLC;
+	ModelRenderer LMLD;
+	ModelRenderer LFLA;
+	ModelRenderer LFLB;
+	ModelRenderer LFLC;
+	ModelRenderer LFLD;
+	ModelRenderer RFLA;
+	ModelRenderer RFLB;
+	ModelRenderer RFLC;
+	ModelRenderer RFLD;
+	ModelRenderer RMLA;
+	ModelRenderer RMLB;
+	ModelRenderer RMLC;
+	ModelRenderer RMLD;
+	ModelRenderer RBLA;
+	ModelRenderer RBLB;
+	ModelRenderer RBLC;
+	ModelRenderer RBLD;
+	ModelRenderer AntRE;
+	ModelRenderer AntLE;
+
 	public ModelBombardierBeetle() {
 		textureWidth = 64;
 		textureHeight = 128;
@@ -195,7 +195,7 @@ public class ModelBombardierBeetle extends ModelBase {
 		AntLE.addBox(5F, 0.5F, -2F, 9, 1, 1);
 		AntLE.setRotationPoint(0F, 17F, -1F);
 		setRotation(AntLE, 0F, 0.8726646F, 0F);
-  }
+	}
 
 	@Override
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
@@ -251,37 +251,37 @@ public class ModelBombardierBeetle extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		Head1.rotateAngleY = rotationYaw / (180F / (float)Math.PI);
-		Head2.rotateAngleY = rotationYaw / (180F / (float)Math.PI);
-		LMandible.rotateAngleY = rotationYaw / (180F / (float)Math.PI);
-		RMandible.rotateAngleY = rotationYaw / (180F / (float)Math.PI);
-		AntRE.rotateAngleY = rotationYaw / (180F / (float)Math.PI) - 1.0F;
-		AntLE.rotateAngleY = rotationYaw / (180F / (float)Math.PI) + 1.0F;
-		Eyes.rotateAngleY = rotationYaw / (180F  / (float)Math.PI);
+		Head1.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
+		Head2.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
+		LMandible.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
+		RMandible.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
+		AntRE.rotateAngleY = rotationYaw / (180F / (float) Math.PI) - 1.0F;
+		AntLE.rotateAngleY = rotationYaw / (180F / (float) Math.PI) + 1.0F;
+		Eyes.rotateAngleY = rotationYaw / (180F / (float) Math.PI);
 
-		LBLA.rotateAngleX = MathHelper.cos(limbSwing + (float)Math.PI) * 0.7F * limbSwingAngle + 0.25F;
-		LBLB.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle + 0.25F;
-		LBLC.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle + 0.5F;
-		LBLD.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle + 0.61F;
+		LBLA.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle + 0.25F;
+		LBLB.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle + 0.25F;
+		LBLC.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle + 0.5F;
+		LBLD.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle + 0.61F;
 		LMLA.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle;
 		LMLB.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle;
 		LMLC.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle;
 		LMLD.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle;
-		LFLA.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle -0.25F;
-		LFLB.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle -0.25F;
-		LFLC.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle -0.5F;
-		LFLD.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle -0.64F;
-		RBLA.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle +0.25F;
-		RBLB.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle +0.25F;
-		RBLC.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle +0.5F;
-		RBLD.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle +0.61F;
-		RMLA.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle;
-		RMLB.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle;
-		RMLC.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle;
-		RMLD.rotateAngleX = MathHelper.cos(limbSwing  + (float)Math.PI) * 0.7F * limbSwingAngle;
-		RFLA.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle -0.25F;
-		RFLB.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle -0.25F;
-		RFLC.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle -0.5F;
-		RFLD.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle -0.64F;
+		LFLA.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle - 0.25F;
+		LFLB.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle - 0.25F;
+		LFLC.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle - 0.5F;
+		LFLD.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle - 0.64F;
+		RBLA.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle + 0.25F;
+		RBLB.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle + 0.25F;
+		RBLC.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle + 0.5F;
+		RBLD.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle + 0.61F;
+		RMLA.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle;
+		RMLB.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle;
+		RMLC.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle;
+		RMLD.rotateAngleX = MathHelper.cos(limbSwing + (float) Math.PI) * 0.7F * limbSwingAngle;
+		RFLA.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle - 0.25F;
+		RFLB.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle - 0.25F;
+		RFLC.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle - 0.5F;
+		RFLD.rotateAngleX = MathHelper.cos(limbSwing) * 0.7F * limbSwingAngle - 0.64F;
 	}
 }

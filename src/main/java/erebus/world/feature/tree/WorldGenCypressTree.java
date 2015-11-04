@@ -2,10 +2,10 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
+import erebus.lib.EnumWood;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
-import erebus.lib.EnumWood;
 
 public class WorldGenCypressTree extends WorldGenTreeBase {
 

@@ -1,5 +1,7 @@
 package erebus.entity.ai;
 
+import erebus.core.helper.Utils;
+import erebus.entity.EntityBlackAnt;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.EntityLiving;
@@ -9,8 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
-import erebus.core.helper.Utils;
-import erebus.entity.EntityBlackAnt;
 
 public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 

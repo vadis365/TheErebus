@@ -1,5 +1,10 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.core.handler.KeyBindingHandler;
+import erebus.item.ItemMaterials;
+import erebus.network.PacketPipeline;
+import erebus.network.server.PacketBeetleRamAttack;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -25,11 +30,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.core.handler.KeyBindingHandler;
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.server.PacketBeetleRamAttack;
 
 public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);

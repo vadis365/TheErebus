@@ -1,5 +1,8 @@
 package erebus.integration;
 
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.integration.ModIntegrationHandler.IModIntegration;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -7,9 +10,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.integration.ModIntegrationHandler.IModIntegration;
 
 public class ThaumcraftIntegration implements IModIntegration {
 	@Override

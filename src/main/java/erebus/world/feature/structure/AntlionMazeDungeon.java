@@ -3,18 +3,6 @@ package erebus.world.feature.structure;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
@@ -32,6 +20,18 @@ import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class AntlionMazeDungeon {
 	private Block solid = ModBlocks.gneiss;
@@ -103,7 +103,7 @@ public class AntlionMazeDungeon {
 		addTeleporters(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
 		addCapstones(world, x + sizeX - 1, y + 15, z + sizeZ - 1, ModBlocks.capstone);
 		spawnIdolGuardians(world, x, y, z);
-	//	System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
+		//	System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
 
 	private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {

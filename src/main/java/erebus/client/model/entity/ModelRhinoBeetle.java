@@ -1,13 +1,12 @@
 package erebus.client.model.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import erebus.entity.EntityRhinoBeetle;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
-
-import org.lwjgl.opengl.GL11;
-
-import erebus.entity.EntityRhinoBeetle;
 
 public class ModelRhinoBeetle extends ModelBase {
 	ModelRenderer Ab;

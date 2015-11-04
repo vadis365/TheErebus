@@ -1,5 +1,9 @@
 package erebus.entity;
 
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemMaterials;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -23,10 +27,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
 

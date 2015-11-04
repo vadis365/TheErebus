@@ -3,8 +3,6 @@ package erebus.entity.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.entity.EntityLiving;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
@@ -14,6 +12,8 @@ import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityPunchroom;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntitySolifuge;
+import net.minecraft.entity.EntityLiving;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
 public final class RandomMobNames {
 

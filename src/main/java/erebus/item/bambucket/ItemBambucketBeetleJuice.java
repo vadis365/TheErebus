@@ -1,11 +1,11 @@
 package erebus.item.bambucket;
 
+import erebus.ModItems;
+import erebus.entity.EntityBotFlyLarva;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.entity.EntityBotFlyLarva;
 
 public class ItemBambucketBeetleJuice extends ItemBambucketDrinkable {
 

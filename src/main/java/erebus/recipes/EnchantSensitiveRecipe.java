@@ -3,12 +3,12 @@ package erebus.recipes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import erebus.core.helper.Utils;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import erebus.core.helper.Utils;
 
 public class EnchantSensitiveRecipe extends ShapedOreRecipe {
 

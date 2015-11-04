@@ -1,13 +1,13 @@
 package erebus.network.client;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import erebus.inventory.ContainerSmoothieMaker;
+import erebus.network.AbstractClientPacket;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import erebus.inventory.ContainerSmoothieMaker;
-import erebus.network.AbstractClientPacket;
 
 public class PacketSmoothieMakerGUI extends AbstractClientPacket {
 

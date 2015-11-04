@@ -6,6 +6,10 @@ import static net.minecraftforge.common.util.ForgeDirection.NORTH;
 import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
 import static net.minecraftforge.common.util.ForgeDirection.UP;
 import static net.minecraftforge.common.util.ForgeDirection.WEST;
+
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityGlowGem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,9 +21,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityGlowGem;
 
 public class BlockGlowGem extends BlockContainer {
 

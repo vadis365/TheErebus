@@ -1,9 +1,9 @@
 package erebus.item;
 
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import erebus.ModTabs;
 
 public abstract class ItemPaxel extends ItemTool {
 

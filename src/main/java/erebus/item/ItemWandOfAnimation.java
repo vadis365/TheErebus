@@ -2,6 +2,15 @@ package erebus.item;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.entity.EntityAnimatedBambooCrate;
+import erebus.entity.EntityAnimatedBlock;
+import erebus.entity.EntityAnimatedChest;
+import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,15 +21,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.entity.EntityAnimatedBambooCrate;
-import erebus.entity.EntityAnimatedBlock;
-import erebus.entity.EntityAnimatedChest;
-import erebus.tileentity.TileEntityBambooCrate;
 
 public class ItemWandOfAnimation extends Item {
 	public ItemWandOfAnimation() {

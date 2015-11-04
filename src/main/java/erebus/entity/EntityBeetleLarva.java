@@ -1,5 +1,11 @@
 package erebus.entity;
 
+import erebus.ModAchievements;
+import erebus.ModItems;
+import erebus.entity.ai.EntityAIEatWoodenItem;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -23,12 +29,6 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-import erebus.ModAchievements;
-import erebus.ModItems;
-import erebus.entity.ai.EntityAIEatWoodenItem;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityBeetleLarva extends EntityAnimal {
 

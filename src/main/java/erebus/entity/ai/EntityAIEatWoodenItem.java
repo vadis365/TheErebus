@@ -1,10 +1,5 @@
 package erebus.entity.ai;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
 import erebus.block.BlockHollowLog;
 import erebus.block.bamboo.BlockBambooCrop;
@@ -12,6 +7,11 @@ import erebus.block.bamboo.BlockBambooTorch;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityBeetleLarva;
 import erebus.lib.EnumWood;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.init.Blocks;
 
 public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 

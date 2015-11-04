@@ -3,6 +3,12 @@ package erebus.block.plants;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.world.feature.plant.WorldGenGiantMushrooms;
+import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,12 +17,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.world.feature.plant.WorldGenGiantMushrooms;
-import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 
 public class SmallMushroom extends BlockMushroom {
 	private final String name;

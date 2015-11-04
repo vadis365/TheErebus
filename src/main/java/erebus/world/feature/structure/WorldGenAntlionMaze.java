@@ -2,10 +2,10 @@ package erebus.world.feature.structure;
 
 import java.util.Random;
 
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
 import erebus.core.handler.configs.ConfigHandler;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldGenAntlionMaze implements IWorldGenerator {
 

@@ -2,6 +2,12 @@ package erebus.entity;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,12 +18,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityGooBall extends EntityThrowable {
 
@@ -67,9 +67,9 @@ public class EntityGooBall extends EntityThrowable {
 				setDead();
 		}
 
-		if(!playedSound) {
+		if (!playedSound) {
 			worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
-			playedSound  = true;
+			playedSound = true;
 		}
 	}
 

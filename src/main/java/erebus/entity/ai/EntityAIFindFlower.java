@@ -3,11 +3,11 @@ package erebus.entity.ai;
 import java.awt.Point;
 import java.util.List;
 
+import erebus.core.helper.Spiral;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.AxisAlignedBB;
-import erebus.core.helper.Spiral;
 
 public abstract class EntityAIFindFlower extends EntityAIBase {
 

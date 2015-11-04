@@ -1,14 +1,13 @@
 package erebus.client.render.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import erebus.entity.EntityExtractedBlock;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import erebus.entity.EntityExtractedBlock;
 
 public class RenderExtractedBlock extends Render {
 

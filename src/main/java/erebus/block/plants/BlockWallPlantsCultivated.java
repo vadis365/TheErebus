@@ -11,6 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.item.block.ItemBlockErebusPlantSmall;
+import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -24,14 +32,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.item.block.ItemBlockErebusPlantSmall;
-import erebus.lib.EnumWood;
 
 public class BlockWallPlantsCultivated extends Block implements IShearable, ISubBlocksBlock {
 
@@ -291,7 +291,7 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, ISub
 	public void onPostBlockPlaced(World world, int x, int y, int z, int meta) {
 		onNeighborBlockChange(world, x, y, z, this);
 	}
-	
+
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		int meta = world.getBlockMetadata(x, y, z);
@@ -317,7 +317,7 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, ISub
 				flag = true;
 
 		if (!flag || meta == dataMoss || meta == dataMould)
-			if(!world.isRemote)
+			if (!world.isRemote)
 				Utils.breakBlockWithParticles(world, x, y, z, meta);
 
 		super.onNeighborBlockChange(world, x, y, z, neighbour);
@@ -382,57 +382,57 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, ISub
 
 				if (meta > 1 && meta <= 7)
 					switch (randomiseSide) {
-					case 0:
-						if (world.isSideSolid(xx, yy + offset, zz, DOWN) && isValidBlock(world.getBlock(xx, yy + offset, zz)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 2, 2);
-						break;
-					case 1:
-						if (world.isSideSolid(xx, yy - offset, zz, UP) && isValidBlock(world.getBlock(xx, yy - offset, zz)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 3, 2);
-						break;
-					case 2:
-						if (world.isSideSolid(xx, yy, zz + offset, NORTH) && isValidBlock(world.getBlock(xx, yy, zz + offset)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 4, 2);
-						break;
-					case 3:
-						if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && isValidBlock(world.getBlock(xx, yy, zz - offset)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 5, 2);
-						break;
-					case 4:
-						if (world.isSideSolid(xx + offset, yy, zz, WEST) && isValidBlock(world.getBlock(xx + offset, yy, zz)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 6, 2);
-						break;
-					case 5:
-						if (world.isSideSolid(xx - offset, yy, zz, EAST) && isValidBlock(world.getBlock(xx - offset, yy, zz)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 7, 2);
-						break;
+						case 0:
+							if (world.isSideSolid(xx, yy + offset, zz, DOWN) && isValidBlock(world.getBlock(xx, yy + offset, zz)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 2, 2);
+							break;
+						case 1:
+							if (world.isSideSolid(xx, yy - offset, zz, UP) && isValidBlock(world.getBlock(xx, yy - offset, zz)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 3, 2);
+							break;
+						case 2:
+							if (world.isSideSolid(xx, yy, zz + offset, NORTH) && isValidBlock(world.getBlock(xx, yy, zz + offset)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 4, 2);
+							break;
+						case 3:
+							if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && isValidBlock(world.getBlock(xx, yy, zz - offset)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 5, 2);
+							break;
+						case 4:
+							if (world.isSideSolid(xx + offset, yy, zz, WEST) && isValidBlock(world.getBlock(xx + offset, yy, zz)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 6, 2);
+							break;
+						case 5:
+							if (world.isSideSolid(xx - offset, yy, zz, EAST) && isValidBlock(world.getBlock(xx - offset, yy, zz)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 7, 2);
+							break;
 					}
 				else if (meta > 7 && meta <= 13)
 					switch (randomiseSide) {
-					case 0:
-						if (world.isSideSolid(xx, yy + offset, zz, DOWN) && isValidBlock(world.getBlock(xx, yy + offset, zz)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 8, 2);
-						break;
-					case 1:
-						if (world.isSideSolid(xx, yy - offset, zz, UP) && isValidBlock(world.getBlock(xx, yy - offset, zz)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 9, 2);
-						break;
-					case 2:
-						if (world.isSideSolid(xx, yy, zz + offset, NORTH) && isValidBlock(world.getBlock(xx, yy, zz + offset)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 10, 2);
-						break;
-					case 3:
-						if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && isValidBlock(world.getBlock(xx, yy, zz - offset)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 11, 2);
-						break;
-					case 4:
-						if (world.isSideSolid(xx + offset, yy, zz, WEST) && isValidBlock(world.getBlock(xx + offset, yy, zz)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 12, 2);
-						break;
-					case 5:
-						if (world.isSideSolid(xx - offset, yy, zz, EAST) && isValidBlock(world.getBlock(xx - offset, yy, zz)))
-							world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 13, 2);
-						break;
+						case 0:
+							if (world.isSideSolid(xx, yy + offset, zz, DOWN) && isValidBlock(world.getBlock(xx, yy + offset, zz)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 8, 2);
+							break;
+						case 1:
+							if (world.isSideSolid(xx, yy - offset, zz, UP) && isValidBlock(world.getBlock(xx, yy - offset, zz)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 9, 2);
+							break;
+						case 2:
+							if (world.isSideSolid(xx, yy, zz + offset, NORTH) && isValidBlock(world.getBlock(xx, yy, zz + offset)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 10, 2);
+							break;
+						case 3:
+							if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && isValidBlock(world.getBlock(xx, yy, zz - offset)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 11, 2);
+							break;
+						case 4:
+							if (world.isSideSolid(xx + offset, yy, zz, WEST) && isValidBlock(world.getBlock(xx + offset, yy, zz)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 12, 2);
+							break;
+						case 5:
+							if (world.isSideSolid(xx - offset, yy, zz, EAST) && isValidBlock(world.getBlock(xx - offset, yy, zz)))
+								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 13, 2);
+							break;
 					}
 			}
 		}

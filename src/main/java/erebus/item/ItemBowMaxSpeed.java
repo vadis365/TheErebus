@@ -1,5 +1,8 @@
 package erebus.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -14,17 +17,14 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
 
 public class ItemBowMaxSpeed extends ItemBow {
 
 	private final int weaponEnchantibility;
-	public static final String[] bowAnimationIcon = new String[] { "_standby", "_pulling_0", "_pulling_1", "_pulling_2" }; 
+	public static final String[] bowAnimationIcon = new String[] { "_standby", "_pulling_0", "_pulling_1", "_pulling_2" };
 
-	@SideOnly(Side.CLIENT)  
-	private IIcon[] iconArray;  
+	@SideOnly(Side.CLIENT)
+	private IIcon[] iconArray;
 
 	public ItemBowMaxSpeed() {
 		setMaxStackSize(1);
@@ -40,7 +40,7 @@ public class ItemBowMaxSpeed extends ItemBow {
 		iconArray = new IIcon[bowAnimationIcon.length];
 
 		for (int iconIndex = 0; iconIndex < iconArray.length; ++iconIndex) {
-			iconArray[iconIndex] = icon.registerIcon("erebus:maxspeedbow"+ bowAnimationIcon[iconIndex]);
+			iconArray[iconIndex] = icon.registerIcon("erebus:maxspeedbow" + bowAnimationIcon[iconIndex]);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class ItemBowMaxSpeed extends ItemBow {
 		}
 		return getIcon(stack, renderPass);
 	}
- 
+
 	@Override
 	public IIcon getItemIconForUseDuration(int iconIndex) {
 		return iconArray[iconIndex];
@@ -75,7 +75,7 @@ public class ItemBowMaxSpeed extends ItemBow {
 			return;
 		maxUseDuration = event.charge;
 
-		boolean canShoot  = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
+		boolean canShoot = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
 
 		if (canShoot || player.inventory.hasItem(Items.arrow)) {
 			float power = maxUseDuration / 20.0F;
@@ -131,33 +131,34 @@ public class ItemBowMaxSpeed extends ItemBow {
 	public EnumAction getItemUseAction(ItemStack is) {
 		return EnumAction.bow;
 	}
-/*
-	@Override
-	public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
-		if (!player.isSneaking()) {
-			if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.arrow)) {
-				EntityArrow arrow = new EntityArrow(world, player, 2.0F);
 
-				if (world.rand.nextInt(4) == 0)
-					arrow.setIsCritical(true);
-
-				arrow.setDamage(arrow.getDamage() * 0.75D);
-
-				is.damageItem(1, player);
-				world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + 1.0F * 0.5F);
-
-				if (!player.capabilities.isCreativeMode)
-					player.inventory.consumeInventoryItem(Items.arrow);
-
-				if (!world.isRemote)
-					world.spawnEntityInWorld(arrow);
-			}
-		} else
-			player.setItemInUse(is, getMaxItemUseDuration(is));
-
-		return is;
-	}
-*/
+	/*
+		@Override
+		public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+			if (!player.isSneaking()) {
+				if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.arrow)) {
+					EntityArrow arrow = new EntityArrow(world, player, 2.0F);
+	
+					if (world.rand.nextInt(4) == 0)
+						arrow.setIsCritical(true);
+	
+					arrow.setDamage(arrow.getDamage() * 0.75D);
+	
+					is.damageItem(1, player);
+					world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + 1.0F * 0.5F);
+	
+					if (!player.capabilities.isCreativeMode)
+						player.inventory.consumeInventoryItem(Items.arrow);
+	
+					if (!world.isRemote)
+						world.spawnEntityInWorld(arrow);
+				}
+			} else
+				player.setItemInUse(is, getMaxItemUseDuration(is));
+	
+			return is;
+		}
+	*/
 	@Override
 	public int getItemEnchantability() {
 		return weaponEnchantibility;

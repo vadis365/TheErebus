@@ -1,15 +1,15 @@
 package erebus.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.recipes.ComposterRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.recipes.ComposterRegistry;
 
 public class TileEntityComposter extends TileEntityBasicInventory {
 
@@ -160,7 +160,7 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 
 				if (block == ModBlocks.wallPlants && is.getItemDamage() == 1)
 					return 800;
-				
+
 				if (block == ModBlocks.wallPlantsCultivated && is.getItemDamage() == 1)
 					return 400;
 			}

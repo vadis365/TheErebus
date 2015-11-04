@@ -1,12 +1,12 @@
 package erebus.tileentity;
 
+import erebus.network.AbstractPacket;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketBones;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import erebus.network.AbstractPacket;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketBones;
 
 public class TileEntityBones extends TileEntityBasicInventory {
 

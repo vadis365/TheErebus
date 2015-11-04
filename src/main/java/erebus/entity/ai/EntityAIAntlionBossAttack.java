@@ -2,6 +2,8 @@ package erebus.entity.ai;
 
 import java.util.List;
 
+import erebus.entity.EntityAntlionBoss;
+import erebus.entity.EntityThrownSand;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,8 +17,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import erebus.entity.EntityAntlionBoss;
-import erebus.entity.EntityThrownSand;
 
 public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 

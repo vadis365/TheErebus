@@ -3,13 +3,13 @@ package erebus.world.feature.plant;
 import java.util.ArrayList;
 import java.util.List;
 
+import erebus.ModBlocks;
+import erebus.core.helper.MathUtil;
+import erebus.world.feature.WorldGenErebus;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
-import erebus.ModBlocks;
-import erebus.core.helper.MathUtil;
-import erebus.world.feature.WorldGenErebus;
 
 public class WorldGenGiantMushrooms extends WorldGenErebus {
 	private static final int stalkMeta = 10;

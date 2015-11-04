@@ -1,10 +1,5 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.world.gen.feature.WorldGenReed;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.ChunkProviderErebus;
@@ -23,6 +18,11 @@ import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.structure.WorldGenDragonflyDungeon;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.Direction;
+import net.minecraft.world.gen.feature.WorldGenReed;
+import net.minecraft.world.gen.feature.WorldGenTallGrass;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 
@@ -138,8 +138,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 					if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
 						genSwampBush.generate(world, rand, xx, yy, zz);
 						break;
-					}
-					else if (checkSurface(SurfaceType.UMBERSTONE, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
+					} else if (checkSurface(SurfaceType.UMBERSTONE, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
 						genSwampBush.generate(world, rand, xx, yy, zz);
 						break;
 					}

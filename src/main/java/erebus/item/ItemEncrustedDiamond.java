@@ -1,11 +1,11 @@
 package erebus.item;
 
+import erebus.ModTabs;
+import erebus.entity.EntityFireResistent;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.ModTabs;
-import erebus.entity.EntityFireResistent;
 
 public class ItemEncrustedDiamond extends Item {
 

@@ -1,11 +1,11 @@
 package erebus.block;
 
-import net.minecraft.block.BlockButtonStone;
-import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModTabs;
+import net.minecraft.block.BlockButtonStone;
+import net.minecraft.util.IIcon;
 
 public class BlockButtonUmberstone extends BlockButtonStone {
 

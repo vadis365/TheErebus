@@ -1,5 +1,9 @@
 package erebus.world;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -9,10 +13,6 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldSettings.GameType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.biomes.BiomeBaseErebus;
 
 public class WorldProviderErebus extends WorldProvider {
 
@@ -25,7 +25,7 @@ public class WorldProviderErebus extends WorldProvider {
 
 	@Override
 	public boolean canRespawnHere() {
-		if(ConfigHandler.INSTANCE.allowRespawning)
+		if (ConfigHandler.INSTANCE.allowRespawning)
 			return true;
 		return false;
 	}
@@ -48,7 +48,7 @@ public class WorldProviderErebus extends WorldProvider {
 		if (biome instanceof BiomeBaseErebus)
 			targetFogColor = ((BiomeBaseErebus) biome).getFogRGB();
 		else
-			targetFogColor = new short[]{255, 255, 255};
+			targetFogColor = new short[] { 255, 255, 255 };
 
 		if (currentFogColor == null) {
 			currentFogColor = new double[3];
@@ -99,9 +99,9 @@ public class WorldProviderErebus extends WorldProvider {
 	}
 
 	@Override
-    public int getActualHeight() {
-        return 128;
-    }
+	public int getActualHeight() {
+		return 128;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

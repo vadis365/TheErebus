@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -21,8 +23,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.ModItems;
 
 public class EntityUmberGolem extends EntityCreature {
 

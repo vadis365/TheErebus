@@ -1,9 +1,17 @@
 package erebus.entity;
 
-import io.netty.buffer.ByteBuf;
-
 import java.util.UUID;
 
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,15 +32,6 @@ import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.entity.ai.EntityAIBlockFollowOwner;
 
 public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditionalSpawnData {
 
@@ -198,10 +197,10 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 		super.writeEntityToNBT(data);
 		data.setInteger("blockID", Block.getIdFromBlock(blockID));
 		data.setInteger("blockMeta", blockMeta);
-        if (getOwnerName() == null)
-        	data.setString("OwnerUUID", "");
-        else
-        	data.setString("OwnerUUID", getOwnerName());
+		if (getOwnerName() == null)
+			data.setString("OwnerUUID", "");
+		else
+			data.setString("OwnerUUID", getOwnerName());
 	}
 
 	@Override
@@ -210,18 +209,18 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 		blockID = Block.getBlockById(data.getInteger("blockID"));
 		blockMeta = data.getInteger("blockMeta");
 		setCanBeTempted();
-		
-        String s = "";
 
-        if (data.hasKey("OwnerUUID", 8))
-            s = data.getString("OwnerUUID");
-        else {
-            String s1 = data.getString("Owner");
-            s = PreYggdrasilConverter.func_152719_a(s1);
-        }
+		String s = "";
 
-        if (s.length() > 0)
-            setOwnerName(s);
+		if (data.hasKey("OwnerUUID", 8))
+			s = data.getString("OwnerUUID");
+		else {
+			String s1 = data.getString("Owner");
+			s = PreYggdrasilConverter.func_152719_a(s1);
+		}
+
+		if (s.length() > 0)
+			setOwnerName(s);
 	}
 
 	@Override
@@ -236,30 +235,25 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 		blockMeta = buffer.readInt();
 		setCanBeTempted();
 	}
-	
-    public String getOwnerName() {
-        return dataWatcher.getWatchableObjectString(18);
-    }
 
-    public void setOwnerName(String name) {
-        dataWatcher.updateObject(18, name);
-    }
+	public String getOwnerName() {
+		return dataWatcher.getWatchableObjectString(18);
+	}
 
-    public EntityLivingBase getOwner()
-    {
-        try
-        {
-            UUID uuid = UUID.fromString(getOwnerName());
-            return uuid == null ? null : worldObj.func_152378_a(uuid);
-        }
-        catch (IllegalArgumentException illegalargumentexception)
-        {
-            return null;
-        }
-    }
+	public void setOwnerName(String name) {
+		dataWatcher.updateObject(18, name);
+	}
 
-    public boolean belongsTo(EntityLivingBase entity)
-    {
-        return entity == getOwner();
-    }
+	public EntityLivingBase getOwner() {
+		try {
+			UUID uuid = UUID.fromString(getOwnerName());
+			return uuid == null ? null : worldObj.func_152378_a(uuid);
+		} catch (IllegalArgumentException illegalargumentexception) {
+			return null;
+		}
+	}
+
+	public boolean belongsTo(EntityLivingBase entity) {
+		return entity == getOwner();
+	}
 }

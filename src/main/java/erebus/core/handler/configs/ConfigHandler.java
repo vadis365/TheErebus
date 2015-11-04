@@ -1,11 +1,11 @@
 package erebus.core.handler.configs;
 
-import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModBiomes;
 import erebus.lib.Reference;
+import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHandler {
 
@@ -55,7 +55,7 @@ public class ConfigHandler {
 		glowshrooms = config.get(Configuration.CATEGORY_GENERAL, "Add Glowshrooms to World generation", true).getBoolean(true);
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
 		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
-		
+
 		lead = config.get("Ores", "Generate lead", false).getBoolean(false);
 		silver = config.get("Ores", "Generate silver", false).getBoolean(false);
 		copper = config.get("Ores", "Generate copper", false).getBoolean(false);

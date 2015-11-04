@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.entity.ai.EntityAIEatCrops;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -11,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.entity.ai.EntityAIEatCrops;
 
 public class EntityGrasshopper extends EntityCreature {
 

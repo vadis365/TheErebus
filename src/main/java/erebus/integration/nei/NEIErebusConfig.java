@@ -1,8 +1,5 @@
 package erebus.integration.nei;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 import codechicken.nei.recipe.DefaultOverlayHandler;
@@ -12,6 +9,9 @@ import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.ItemMaterials;
 import erebus.lib.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class NEIErebusConfig implements IConfigureNEI {
 

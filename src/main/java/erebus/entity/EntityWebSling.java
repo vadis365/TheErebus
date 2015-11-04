@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -8,7 +9,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
 
 public class EntityWebSling extends EntityThrowable {
 	public EntityWebSling(World world) {

@@ -1,11 +1,11 @@
 package erebus.tileentity;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class TileEntityErebusAltarRepair extends TileEntityErebusAltar {
 

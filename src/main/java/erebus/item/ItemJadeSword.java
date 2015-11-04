@@ -1,10 +1,10 @@
 package erebus.item;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 
 public class ItemJadeSword extends ItemSword {
 

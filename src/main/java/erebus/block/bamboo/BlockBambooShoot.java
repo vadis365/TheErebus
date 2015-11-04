@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.item.ItemMaterials.DATA;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.IGrowable;
@@ -19,11 +24,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.EnumPlantType;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.item.ItemMaterials.DATA;
 
 public class BlockBambooShoot extends BlockFlower implements IGrowable {
 
@@ -80,6 +80,7 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 	}
 
 	private static Map<Block, Float> soilValues = new HashMap<Block, Float>();
+
 	static {
 		soilValues.put(Blocks.dirt, 1F);
 		soilValues.put(Blocks.grass, 1F);

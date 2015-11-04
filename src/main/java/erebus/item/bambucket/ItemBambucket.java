@@ -1,5 +1,9 @@
 package erebus.item.bambucket;
 
+import cpw.mods.fml.common.eventhandler.Event;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,10 +16,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
-import cpw.mods.fml.common.eventhandler.Event;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
 
 public class ItemBambucket extends Item {
 

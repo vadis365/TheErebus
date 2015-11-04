@@ -1,14 +1,13 @@
 package erebus.client.render.entity;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import erebus.client.model.entity.ModelUmberGolem;
 import erebus.entity.EntityUmberGolemDungeonTypes;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderUmberGolemDungeonType extends RenderLiving {
 	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/umberGolemMud.png"), new ResourceLocation("erebus:textures/entity/umberGolemIron.png"), new ResourceLocation("erebus:textures/entity/umberGolemGold.png"), new ResourceLocation("erebus:textures/entity/umberGolemJade.png") };

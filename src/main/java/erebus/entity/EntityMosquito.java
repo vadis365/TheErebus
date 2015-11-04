@@ -2,6 +2,8 @@ package erebus.entity;
 
 import java.util.List;
 
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -20,8 +22,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
 
 public class EntityMosquito extends EntityMob {
 	private final static int maxBloodLevel = 5;

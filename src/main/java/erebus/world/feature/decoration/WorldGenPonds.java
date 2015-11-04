@@ -2,6 +2,9 @@ package erebus.world.feature.decoration;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
+import erebus.world.biomes.BiomeSubmergedSwamp;
+import erebus.world.biomes.BiomeUndergroundJungle;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -10,9 +13,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
-import erebus.world.biomes.BiomeSubmergedSwamp;
-import erebus.world.biomes.BiomeUndergroundJungle;
 
 public class WorldGenPonds extends WorldGenerator {
 

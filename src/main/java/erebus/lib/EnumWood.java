@@ -2,11 +2,6 @@ package erebus.lib;
 
 import java.util.HashMap;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
 import erebus.block.BlockErebusLeaves;
@@ -19,6 +14,11 @@ import erebus.block.plants.BlockSaplingErebus;
 import erebus.item.block.ItemBlockLocalised;
 import erebus.item.block.ItemBlockSlabSimple;
 import erebus.item.block.ItemErebusLeaves;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public enum EnumWood {
 	Baobab,

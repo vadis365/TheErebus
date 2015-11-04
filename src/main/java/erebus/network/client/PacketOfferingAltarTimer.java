@@ -1,11 +1,11 @@
 package erebus.network.client;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.world.World;
 import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
 import erebus.tileentity.TileEntityOfferingAltar;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.world.World;
 
 public class PacketOfferingAltarTimer extends AbstractClientPacket {
 

@@ -2,10 +2,10 @@ package erebus.world.feature.plant;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
 
 public class WorldGenTurnips extends WorldGenerator {
 

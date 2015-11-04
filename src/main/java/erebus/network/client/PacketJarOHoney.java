@@ -1,14 +1,14 @@
 package erebus.network.client;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import erebus.core.helper.Utils;
 import erebus.network.AbstractClientPacket;
 import erebus.network.ByteBufHelper;
 import erebus.tileentity.TileEntityJarOHoney;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 public class PacketJarOHoney extends AbstractClientPacket {
 

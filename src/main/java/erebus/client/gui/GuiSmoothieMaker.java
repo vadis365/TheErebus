@@ -2,6 +2,10 @@ package erebus.client.gui;
 
 import java.awt.Rectangle;
 
+import org.lwjgl.opengl.GL11;
+
+import erebus.inventory.ContainerSmoothieMaker;
+import erebus.tileentity.TileEntitySmoothieMaker;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -10,11 +14,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-
-import org.lwjgl.opengl.GL11;
-
-import erebus.inventory.ContainerSmoothieMaker;
-import erebus.tileentity.TileEntitySmoothieMaker;
 
 public class GuiSmoothieMaker extends GuiContainer {
 

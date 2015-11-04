@@ -1,10 +1,5 @@
 package erebus.core.handler;
 
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-
 import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -20,6 +15,10 @@ import erebus.network.PacketPipeline;
 import erebus.network.server.PacketBeetleRamAttack;
 import erebus.network.server.PacketGlider;
 import erebus.network.server.PacketGliderPowered;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 @SideOnly(Side.CLIENT)
 public class KeyBindingHandler {

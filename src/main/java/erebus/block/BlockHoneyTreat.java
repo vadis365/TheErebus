@@ -1,5 +1,9 @@
 package erebus.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCake;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,10 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModTabs;
 
 public class BlockHoneyTreat extends BlockCake {
 

@@ -1,13 +1,13 @@
 package erebus.item;
 
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.entity.EntityWasp;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.entity.EntityWasp;
 
 public class ItemSwordWasp extends ItemSword {
 

@@ -2,11 +2,11 @@ package erebus.core.handler;
 
 import java.util.Map;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import erebus.ModItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraftforge.event.AnvilUpdateEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import erebus.ModItems;
 
 public class AnvilEventsHandler {
 

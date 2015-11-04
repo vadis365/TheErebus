@@ -1,15 +1,15 @@
 package erebus.block;
 
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.lib.EnumWood;
 import erebus.lib.Reference;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 
 public class BlockWoodFenceGate extends BlockFenceGate {
 

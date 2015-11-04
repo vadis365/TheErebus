@@ -2,7 +2,14 @@ package erebus.entity;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.item.ItemErebusFood;
+import erebus.item.ItemMaterials;
+import erebus.tileentity.TileEntityTitanChest;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -31,13 +38,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemMaterials;
-import erebus.tileentity.TileEntityTitanChest;
 
 public class EntityTitanBeetle extends EntityTameable {
 

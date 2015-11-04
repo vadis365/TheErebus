@@ -1,13 +1,13 @@
 package erebus.client.render.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.core.proxy.ClientProxy.BlockRenderIDs;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
 
 @SideOnly(Side.CLIENT)
 public class BlockSiloRoofRender implements ISimpleBlockRenderingHandler {

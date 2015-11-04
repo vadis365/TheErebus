@@ -1,8 +1,8 @@
 package erebus.tileentity;
 
-import net.minecraft.util.AxisAlignedBB;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.AxisAlignedBB;
 
 public class TileEntityBambooCrate extends TileEntityBasicInventory {
 

@@ -1,16 +1,15 @@
 package erebus.client.gui;
 
-import net.minecraft.client.gui.inventory.GuiCrafting;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.helper.Utils;
+import net.minecraft.client.gui.inventory.GuiCrafting;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 @SideOnly(Side.CLIENT)
 public class GuiPetrifiedWorkbench extends GuiCrafting {
