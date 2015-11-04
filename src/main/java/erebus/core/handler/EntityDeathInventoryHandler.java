@@ -5,12 +5,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.core.helper.Utils;
-import erebus.tileentity.TileEntityBones;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +13,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import erebus.ModBlocks;
+import erebus.core.helper.Utils;
+import erebus.tileentity.TileEntityBones;
 
 public class EntityDeathInventoryHandler {
 
@@ -78,15 +77,11 @@ public class EntityDeathInventoryHandler {
 			if (playerFacing == 3)
 				directionMeta = 4;
 			world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 3);
-			if (!playerProps.getRecentlyDeceased()) {
-				playerProps.setDimension(player.worldObj.provider.getDimensionName());
-				playerProps.setXLocation(x);
-				playerProps.setZLocation(z);
-				playerProps.setRecentlyDeceased(true);
-				NBTTagCompound playerData = new NBTTagCompound();
-				playerProps.saveNBTData(playerData);
-				Erebus.proxy.storeEntityData(((EntityPlayer) event.entity).getCommandSenderName(), playerData);
-			}
+			playerProps.setDimension(player.worldObj.provider.getDimensionName());
+			playerProps.setXLocation(x);
+			playerProps.setZLocation(z);
+			NBTTagCompound playerData = new NBTTagCompound();
+			playerProps.saveNBTData(playerData);
 			TileEntityBones tile = Utils.getTileEntity(world, x, y, z, TileEntityBones.class);
 			if (tile != null) {
 				for (int i = 0; i < player.inventory.mainInventory.length; i++) {

@@ -12,12 +12,10 @@ public class ErebusExtendedPlayerProperties implements IExtendedEntityProperties
 
 	private int x, z;
 	private String dimension;
-	private boolean justDied;
 
 	public ErebusExtendedPlayerProperties(EntityPlayer player) {
 		dimension = "None";
 		x = z = 0;
-		justDied = false;
 	}
 
 	public static void register(EntityPlayer player) {
@@ -34,10 +32,7 @@ public class ErebusExtendedPlayerProperties implements IExtendedEntityProperties
 		properties.setString("dimension", dimension);
 		properties.setInteger("xLocation", x);
 		properties.setInteger("zLocation", z);
-		properties.setBoolean("justDied", justDied);
 		compound.setTag(EREBUS_EXT_PROP_NAME, properties);
-		System.out.println("Dimension: " + dimension + " X: " + x + " Z: " + z + " Recently deceased: " + justDied);
-
 	}
 
 	@Override
@@ -46,20 +41,10 @@ public class ErebusExtendedPlayerProperties implements IExtendedEntityProperties
 		dimension = properties.getString("dimension");
 		x = properties.getInteger("xLocation");
 		z = properties.getInteger("zLocation");
-		justDied = properties.getBoolean("justDied");
-		System.out.println("Dimension: " + dimension + " X: " + x + " Z: " + z + " Recently deceased: " + justDied);
 	}
 
 	@Override
 	public void init(Entity entity, World world) {
-	}
-
-	public void setRecentlyDeceased(boolean state) {
-		justDied = state;
-	}
-
-	public boolean getRecentlyDeceased() {
-		return justDied;
 	}
 
 	public void setDimension(String string) {
