@@ -1,13 +1,13 @@
 package erebus.client.render.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
 
 @SideOnly(Side.CLIENT)
 public class TextureHomingBeecon extends TextureAtlasSprite {
@@ -16,8 +16,8 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
 	public double angleDelta;
 	public int targetX, targetZ;
 
-	public TextureHomingBeecon() {
-		super("erebus:homingBeecon");
+	public TextureHomingBeecon(String name) {
+		super(name);
 	}
 
 	@Override
@@ -72,18 +72,18 @@ public class TextureHomingBeecon extends TextureAtlasSprite {
 		}
 	}
 
-	public void getBeeconHome() {
+	private void getBeeconHome() {
 		Minecraft minecraft = Minecraft.getMinecraft();
 		if (minecraft.theWorld != null && minecraft.thePlayer != null) {
-			ItemStack is = minecraft.thePlayer.inventory.getCurrentItem();
-			if (is != null && is.getItem() == ModItems.homingBeecon && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
-				targetX = is.getTagCompound().getInteger("homeX");
-				targetZ = is.getTagCompound().getInteger("homeZ");
-			}
+			ItemStack stack = minecraft.thePlayer.inventory.getCurrentItem();
+			if (stack == null)
+				return;
 
-			if (is != null && is.getItem() == ModItems.homingBeeconAdvanced && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
-				targetX = is.getTagCompound().getInteger("homeX");
-				targetZ = is.getTagCompound().getInteger("homeZ");
+			boolean isCompassItem = stack.getItem() == ModItems.homingBeecon || stack.getItem() == ModItems.homingBeeconAdvanced || stack.getItem() == ModItems.deathCompass;
+
+			if (isCompassItem && stack.hasTagCompound() && stack.stackTagCompound.hasKey("homeX")) {
+				targetX = stack.getTagCompound().getInteger("homeX");
+				targetZ = stack.getTagCompound().getInteger("homeZ");
 			}
 		}
 	}

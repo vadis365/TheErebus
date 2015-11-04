@@ -108,22 +108,21 @@ tile.erebus.fence_gate_rotten.name=腐木栅栏门
 tile.erebus.fence_gate_marshwood.name=沼泽木栅栏门
 
 # Flowers
-tile.erebus.flower_black.name=黑色花瓣块
-tile.erebus.flower_red.name=红色花瓣块
-tile.erebus.flower_brown.name=棕色花瓣块
-tile.erebus.flower_blue.name=蓝色花瓣块
-tile.erebus.flower_purple.name=紫色花瓣块
-tile.erebus.flower_cyan.name=青色花瓣块
-tile.erebus.flower_light_grey.name=淡灰色花瓣块
-tile.erebus.flower_grey.name=灰色花瓣块
-tile.erebus.flower_pink.name=粉色花瓣块
-tile.erebus.flower_yellow.name=黄色花瓣块
-tile.erebus.flower_light_blue.name=淡蓝色花瓣块
-tile.erebus.flower_magenta.name=品红色花瓣块
-tile.erebus.flower_orange.name=橙色花瓣块
-tile.erebus.flower_white.name=白色花瓣块
-
-tile.erebus.flower_stigma.name=裂开的柱头
+tile.erebus.flower_black_petal.name=黑色花瓣块
+tile.erebus.flower_red_petal.name=红色花瓣块
+tile.erebus.flower_brown_petal.name=棕色花瓣块
+tile.erebus.flower_blue_petal.name=蓝色花瓣块
+tile.erebus.flower_purple_petal.name=紫色花瓣块
+tile.erebus.flower_cyan_petal.name=青色花瓣块
+tile.erebus.flower_light_grey_petal.name=淡灰色花瓣块
+tile.erebus.flower_grey_petal.name=灰色花瓣块
+tile.erebus.flower_pink_petal.name=粉色花瓣块
+tile.erebus.flower_yellow_petal.name=黄色花瓣块
+tile.erebus.flower_light_blue_petal.name=淡蓝色花瓣块
+tile.erebus.flower_magenta_petal.name=品红色花瓣块
+tile.erebus.flower_orange_petal.name=橙色花瓣块
+tile.erebus.flower_white_petal.name=白色花瓣块
+tile.erebus.flower_exploding_stigma.name=裂开的柱头
 tile.erebus.flower_stem.name=茎
 
 tile.erebus.stigma_black.name=黑色柱头

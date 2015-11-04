@@ -1,10 +1,8 @@
 package erebus;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import erebus.api.PreservableEntityRegistry;
+import erebus.api.PreservableEntityRegistry.EntityDimensions;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -77,6 +75,31 @@ import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.item.ItemSpawnEggs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySnowman;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class ModEntities {
 	public static void init() {
@@ -153,17 +176,49 @@ public class ModEntities {
 		registerEntity(80, EntityThrownSand.class, "thrownSand");
 		registerEntity(81, EntityPreservedBlock.class, "preservedBlock");
 
+		PreservableEntityRegistry.registerEntity(EntityCow.class, new EntityDimensions(0.5F, 0.125F, 0.5F, 0.5F));
+		PreservableEntityRegistry.registerEntity(EntityPig.class, new EntityDimensions(0.5F, 0.25F, 0.55F, 0.5F));
+		PreservableEntityRegistry.registerEntity(EntityHorse.class, new EntityDimensions(0.5F, 0.125F, 0.5F, 0.35F));
+		PreservableEntityRegistry.registerEntity(EntityChicken.class, new EntityDimensions(0.5F, 0.125F, 0.5F, 0.75F));
+		PreservableEntityRegistry.registerEntity(EntitySheep.class, new EntityDimensions(0.5F, 0.125F, 0.5F, 0.5F));
+		PreservableEntityRegistry.registerEntity(EntityVillager.class, new EntityDimensions(0.5F, 0.0F, 0.5F, 0.5F));
+		PreservableEntityRegistry.registerEntity(EntityBat.class, new EntityDimensions(0.5F, 0.0F, 0.35F, 0.85F));
+		PreservableEntityRegistry.registerEntity(EntitySquid.class, new EntityDimensions(0.5F, 0.5F, 0.5F, 0.4F));
+		PreservableEntityRegistry.registerEntity(EntityOcelot.class, new EntityDimensions(0.5F, 0.35F, 0.4F, 0.4F));
+		PreservableEntityRegistry.registerEntity(EntityWolf.class, new EntityDimensions(0.5F, 0.25F, 0.5F, 0.5F));
+		PreservableEntityRegistry.registerEntity(EntityZombie.class, new EntityDimensions(0.5F, 0.0625F, 0.5F, 0.45F));
+		PreservableEntityRegistry.registerEntity(EntitySkeleton.class, new EntityDimensions(0.5F, 0.0625F, 0.5F, 0.45F));
+		PreservableEntityRegistry.registerEntity(EntityCreeper.class, new EntityDimensions(0.5F, 0.0625F, 0.5F, 0.5F));
+		PreservableEntityRegistry.registerEntity(EntitySpider.class, new EntityDimensions(0.5F, 0.25F, 0.5F, 0.45F));
+		PreservableEntityRegistry.registerEntity(EntityGhast.class, new EntityDimensions(0.5F, 0.45F, 0.5F, 0.1F));
+		PreservableEntityRegistry.registerEntity(EntityEnderman.class, new EntityDimensions(0.5F, 0.1F, 0.5F, 0.3F));
+		PreservableEntityRegistry.registerEntity(EntitySilverfish.class, new EntityDimensions(0.5F, 0.35F, 0.35F, 0.75F));
+		PreservableEntityRegistry.registerEntity(EntityBlaze.class, new EntityDimensions(0.5F, 0.0F, 0.5F, 0.5F));
+		PreservableEntityRegistry.registerEntity(EntityWitch.class, new EntityDimensions(0.5F, 0.1F, 0.5F, 0.35F));
+		PreservableEntityRegistry.registerEntity(EntitySnowman.class, new EntityDimensions(0.5F, 0.0F, 0.5F, 0.5F));
+		PreservableEntityRegistry.registerEntity(EntityIronGolem.class, new EntityDimensions(0.5F, 0.0625F, 0.5F, 0.35F));
+
 		// Spawn conditions
 		if (ConfigHandler.INSTANCE.netherWidows)
 			EntityRegistry.addSpawn(EntityBlackWidow.class, 100, 2, 5, EnumCreatureType.monster, BiomeGenBase.hell);
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name) {
+		registerEntity(id, entityClass, name, null);
+	}
+
+	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name, EntityDimensions dimensions) {
 		EntityRegistry.registerModEntity(entityClass, name, id, Erebus.instance, 256, 1, true);
+		if (dimensions != null)
+			PreservableEntityRegistry.registerEntity(entityClass, dimensions);
 	}
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor) {
-		registerEntity(id, entityClass, name);
+		registerEntity(id, entityClass, name, eggBackgroundColor, eggForegroundColor, null);
+	}
+
+	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor, EntityDimensions dimensions) {
+		registerEntity(id, entityClass, name, dimensions);
 		ItemSpawnEggs.registerSpawnEgg(entityClass, name, id, eggBackgroundColor, eggForegroundColor);
 	}
 }

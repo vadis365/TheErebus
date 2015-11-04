@@ -1,10 +1,9 @@
 package erebus.item.block;
 
+import erebus.block.plants.BlockErebusFlower;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import erebus.core.helper.Utils;
-import erebus.lib.EnumColour;
 
 public class ItemBlockErebusFlower extends ItemBlockGeneric {
 
@@ -14,13 +13,9 @@ public class ItemBlockErebusFlower extends ItemBlockGeneric {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		if (stack.getItemDamage() == 15)
-			return StatCollector.translateToLocal(getUnlocalizedName() + "_stem.name");
-		else if (stack.getItemDamage() == 14)
-			return StatCollector.translateToLocal(getUnlocalizedName() + "_stigma.name");
-		else {
-			String colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getUnlocalisedName();
-			return StatCollector.translateToLocal(getUnlocalizedName() + "_" + colour + ".name");
-		}
+		int meta = Math.min(Math.max(0, stack.getItemDamage()), BlockErebusFlower.FLOWER_TYPE.values().length - 1);
+		BlockErebusFlower.FLOWER_TYPE type = BlockErebusFlower.FLOWER_TYPE.values()[meta];
+
+		return StatCollector.translateToLocal(getUnlocalizedName() + "_" + type.toString().toLowerCase() + ".name");
 	}
 }

@@ -11,6 +11,13 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityPreservedBlock extends TileEntity {
 
 	private NBTTagCompound entityNBT;
+	private Entity cachedRenderEntity;
+
+	public Entity getRenderEntity() {
+		if (cachedRenderEntity == null && entityNBT != null)
+			cachedRenderEntity = EntityList.createEntityFromNBT(entityNBT, worldObj);
+		return cachedRenderEntity;
+	}
 
 	@Override
 	public boolean canUpdate() {
