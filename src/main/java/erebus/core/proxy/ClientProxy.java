@@ -1,5 +1,22 @@
 package erebus.core.proxy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityBreakingFX;
+import net.minecraft.client.particle.EntityCloudFX;
+import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityFireworkSparkFX;
+import net.minecraft.client.particle.EntityFlameFX;
+import net.minecraft.client.particle.EntityHeartFX;
+import net.minecraft.client.particle.EntityLavaFX;
+import net.minecraft.client.particle.EntityPortalFX;
+import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.client.particle.EntitySpellParticleFX;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -107,6 +124,7 @@ import erebus.client.render.item.ItemWandOfAnimationRenderer;
 import erebus.client.render.item.ItemWandOfPreservationRenderer;
 import erebus.client.render.item.PortalActivatorRenderer;
 import erebus.client.render.item.PreservedBlockitemRenderer;
+import erebus.client.render.item.RenderMaxSpeedBow;
 import erebus.client.render.item.ScorpionPincerItemRenderer;
 import erebus.client.render.item.WarHammerItemRenderer;
 import erebus.client.render.item.WaspDaggerItemRenderer;
@@ -226,23 +244,6 @@ import erebus.tileentity.TileEntityPreservedBlock;
 import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityTarantulaEgg;
 import erebus.tileentity.TileEntityUmberGolemStatue;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityBreakingFX;
-import net.minecraft.client.particle.EntityCloudFX;
-import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityFireworkSparkFX;
-import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.client.particle.EntityHeartFX;
-import net.minecraft.client.particle.EntityLavaFX;
-import net.minecraft.client.particle.EntityPortalFX;
-import net.minecraft.client.particle.EntitySmokeFX;
-import net.minecraft.client.particle.EntitySpellParticleFX;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
 
@@ -415,6 +416,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModItems.warHammer, new WarHammerItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.wandOfPreservation, new ItemWandOfPreservationRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.preservedBlock), new PreservedBlockitemRenderer());
+		MinecraftForgeClient.registerItemRenderer(ModItems.maxSpeedBow, new RenderMaxSpeedBow());
 	}
 
 	@Override
