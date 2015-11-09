@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 
@@ -26,6 +27,7 @@ public class BlockPreservedBlock extends BlockContainer {
 	public BlockPreservedBlock() {
 		super(Material.glass);
 		setHardness(1.0F);
+		setStepSound(soundTypeGlass);
 		setBlockName("erebus.preservedBlock");
 	}
 
@@ -56,6 +58,20 @@ public class BlockPreservedBlock extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityPreservedBlock();
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
+		TileEntityPreservedBlock tile = Utils.getTileEntity(world, x, y, z, TileEntityPreservedBlock.class);
+		if (tile != null) {
+			ItemStack stack = new ItemStack(this);
+			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setTag("EntityNBT", tile.getEntityNBT());
+			stack.setTagCompound(nbt);
+			return stack;
+		}
+
+		return new ItemStack(ModBlocks.amber, 1, 1);
 	}
 
 	@Override
