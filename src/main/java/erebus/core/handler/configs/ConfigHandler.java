@@ -1,15 +1,25 @@
 package erebus.core.handler.configs;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import erebus.Erebus;
 import erebus.ModBiomes;
+import erebus.api.PreservableEntityRegistry;
 import erebus.lib.Reference;
 import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHandler {
 
 	public static final ConfigHandler INSTANCE = new ConfigHandler();
+
+	private File configFolder;
 
 	public Configuration config;
 	public int erebusDimensionID;
@@ -22,13 +32,17 @@ public class ConfigHandler {
 	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores", "Integration" };
 
 	public void loadConfig(FMLPreInitializationEvent event) {
-		config = new Configuration(event.getSuggestedConfigurationFile());
+		File configFile = event.getSuggestedConfigurationFile();
+		configFolder = configFile.getParentFile();
+		config = new Configuration(configFile);
 
 		config.load();
 		syncConfigs();
 	}
 
 	private void syncConfigs() {
+		readEntityDimensionsFile();
+
 		ModBiomes.undergroundJungleID = config.get("Biomes", "Underground Jungle", 100).getInt(100);
 		ModBiomes.volcanicDesertID = config.get("Biomes", "Volcanic Desert", 101).getInt(101);
 		ModBiomes.subterraneanSavannahID = config.get("Biomes", "Subterranean Savannah", 102).getInt(102);
@@ -67,6 +81,19 @@ public class ConfigHandler {
 
 		if (config.hasChanged())
 			config.save();
+	}
+
+	private void readEntityDimensionsFile() {
+		File file = new File(configFolder, "ErebusEntityDimensions.cfg");
+		if (!file.exists()) {
+			PreservableEntityRegistry.readFile(new BufferedReader(new InputStreamReader(Erebus.class.getResourceAsStream("/assets/DefaultEntityDimensions.cfg"))));
+			PreservableEntityRegistry.writeConfigFile(file);
+		} else
+			try {
+				PreservableEntityRegistry.readFile(new BufferedReader(new FileReader(file)));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 
 	@SubscribeEvent

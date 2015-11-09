@@ -1,5 +1,10 @@
 package erebus.api;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,6 +16,49 @@ import net.minecraft.entity.boss.IBossDisplayData;
 public class PreservableEntityRegistry {
 
 	public static Map<Class<? extends Entity>, EntityDimensions> MAP = new HashMap<Class<? extends Entity>, EntityDimensions>();
+
+	@SuppressWarnings("unchecked")
+	public static void readFile(BufferedReader br) {
+		try {
+			MAP.clear();
+			String str;
+			while ((str = br.readLine()) != null)
+				if (!str.isEmpty() && !str.startsWith("#")) {
+					String[] entry = str.trim().split("=");
+					if (entry.length != 2)
+						throw new IllegalArgumentException("Illegal entry found when reading Entity Dimensions file: " + str);
+					String[] dims = entry[1].split(",");
+					if (dims.length != 4)
+						throw new IllegalArgumentException("Illegal entry found when reading Entity Dimensions file: " + str);
+
+					Class<? extends Entity> cls = (Class<? extends Entity>) Class.forName(entry[0]);
+					EntityDimensions dimensions = new EntityDimensions(Float.parseFloat(dims[0].trim()), Float.parseFloat(dims[1].trim()), Float.parseFloat(dims[2].trim()), Float.parseFloat(dims[3].trim()));
+					MAP.put(cls, dimensions);
+				}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void writeConfigFile(File file) {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+			bw.write("# entity.class=xOffset, yOffset, zOffset, scale");
+			bw.newLine();
+			bw.newLine();
+
+			for (Entry<Class<? extends Entity>, EntityDimensions> entry : MAP.entrySet()) {
+				EntityDimensions dims = entry.getValue();
+				bw.write(entry.getKey().getCanonicalName() + "=" + dims.xOff + ", " + dims.yOff + ", " + dims.zOff + ", " + dims.scale);
+				bw.newLine();
+			}
+
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void registerEntity(Class<? extends Entity> entityCls, EntityDimensions dimensions) {
 		MAP.put(entityCls, dimensions);
