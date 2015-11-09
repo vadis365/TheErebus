@@ -24,7 +24,7 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 		renderTrappedEntity(entity, x, y, z);
 	}
 
-	private void renderTrappedEntity(Entity entity, double x, double y, double z) {
+	public static void renderTrappedEntity(Entity entity, double x, double y, double z) {
 		EntityDimensions dimensions = PreservableEntityRegistry.getEntityDimensions(entity);
 		float xOff = 0.5F;
 		float yOff = 0.0625F;

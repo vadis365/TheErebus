@@ -18,9 +18,11 @@ public class PreservableEntityRegistry {
 	public static Map<Class<? extends Entity>, EntityDimensions> MAP = new HashMap<Class<? extends Entity>, EntityDimensions>();
 
 	@SuppressWarnings("unchecked")
-	public static void readFile(BufferedReader br) {
-		try {
+	public static void readFile(BufferedReader br, boolean clearMap) {
+		if (clearMap)
 			MAP.clear();
+
+		try {
 			String str;
 			while ((str = br.readLine()) != null)
 				if (!str.isEmpty() && !str.startsWith("#")) {

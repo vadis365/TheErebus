@@ -8,10 +8,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.client.render.block.BlockRenderHelper;
+import erebus.client.render.tileentity.TileEntityPreservedBlockRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -54,24 +54,17 @@ public class PreservedBlockitemRenderer implements IItemRenderer {
 	}
 
 	private void render(ItemStack stack, float x, float y, float z, RenderBlocks renderer) {
-		GL11.glPushMatrix();
-		GL11.glTranslatef(x + 0.5F, y + 0.125F, z + 0.5F);
 		if (stack.hasTagCompound()) {
 			GL11.glPushMatrix();
-			GL11.glScalef(1.0F, -1.0F, -1.0F);
-			GL11.glRotatef(180.0F, 0.0F, 0.0F, 0.0F);
-			GL11.glScaled(0.5, 0.5, 0.5);
 			Entity entity = EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag("EntityNBT"), Minecraft.getMinecraft().theWorld);
 			entity.setLocationAndAngles(0, 0, 0, 0, 0);
-			RenderManager.instance.renderEntityWithPosYaw(entity, 0, 0, 0, 0, 0);
+			TileEntityPreservedBlockRenderer.renderTrappedEntity(entity, x, y, z);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
-
 			GL11.glPopMatrix();
 		}
-		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
