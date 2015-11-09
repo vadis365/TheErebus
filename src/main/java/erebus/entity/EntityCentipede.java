@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,8 +17,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
 
 public class EntityCentipede extends EntityMob {
 
@@ -147,7 +147,10 @@ public class EntityCentipede extends EntityMob {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setSkin(nbt.getInteger("skin"));
+		if (nbt.hasKey("skin"))
+			setSkin(nbt.getInteger("skin"));
+		else
+			setSkin(rand.nextInt(3));
 	}
 
 	public int getSkin() {

@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -15,7 +16,6 @@ import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 
 public class EntityVelvetWorm extends EntityMob {
 
@@ -152,7 +152,10 @@ public class EntityVelvetWorm extends EntityMob {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setSkin(nbt.getInteger("skin"));
+		if (nbt.hasKey("skin"))
+			setSkin(nbt.getInteger("skin"));
+		else
+			setSkin(rand.nextInt(2));
 	}
 
 	public int getSkin() {

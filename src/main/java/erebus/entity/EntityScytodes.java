@@ -210,7 +210,10 @@ public class EntityScytodes extends EntityMob {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setSkin(nbt.getInteger("skin"));
+		if (nbt.hasKey("skin"))
+			setSkin(nbt.getInteger("skin"));
+		else
+			setSkin(rand.nextInt(4));
 	}
 
 	public int getSkin() {

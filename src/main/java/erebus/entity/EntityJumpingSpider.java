@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -12,7 +13,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.item.ItemMaterials;
 
 public class EntityJumpingSpider extends EntitySpider {
 
@@ -93,7 +93,7 @@ public class EntityJumpingSpider extends EntitySpider {
 	public int getMaxSpawnedInChunk() {
 		return 2;
 	}
-	
+
 	public void setSkin(int skinType) {
 		dataWatcher.updateObject(30, new Integer(skinType));
 	}
@@ -107,7 +107,10 @@ public class EntityJumpingSpider extends EntitySpider {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setSkin(nbt.getInteger("skin"));
+		if (nbt.hasKey("skin"))
+			setSkin(nbt.getInteger("skin"));
+		else
+			setSkin(rand.nextInt(3));
 	}
 
 	public int getSkin() {

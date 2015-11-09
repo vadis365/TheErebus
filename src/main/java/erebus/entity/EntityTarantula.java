@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -16,7 +17,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.ModItems;
 
 public class EntityTarantula extends EntityMob {
 
@@ -29,7 +29,7 @@ public class EntityTarantula extends EntityMob {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(16, new Byte((byte) 0));
-		dataWatcher.addObject(30, new Integer(rand.nextInt(99)));
+		dataWatcher.addObject(30, new Integer(rand.nextInt(2)));
 	}
 
 	@Override
@@ -212,7 +212,10 @@ public class EntityTarantula extends EntityMob {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setSkin(nbt.getInteger("skin"));
+		if (nbt.hasKey("skin"))
+			setSkin(nbt.getInteger("skin"));
+		else
+			setSkin(rand.nextInt(2));
 	}
 
 	public int getSkin() {

@@ -11,8 +11,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class RenderTarantula extends RenderLiving {
 
-	private final ResourceLocation resource1 = new ResourceLocation("erebus:textures/entity/tarantula.png");
-	private final ResourceLocation resource2 = new ResourceLocation("erebus:textures/entity/tarantulaTurqoise.png");
+	private final ResourceLocation[] TEXTURES = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/tarantula.png"), new ResourceLocation("erebus:textures/entity/tarantulaTurqoise.png") };
 
 	public RenderTarantula() {
 		super(new ModelTarantula(), 0.5F);
@@ -20,10 +19,6 @@ public class RenderTarantula extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityTarantula tarantula = (EntityTarantula) entity;
-		if (tarantula.getSkin() <= 4)
-			return resource2;
-		else
-			return resource1;
+		return TEXTURES[Math.min(TEXTURES.length - 1, ((EntityTarantula) entity).getSkin())];
 	}
 }

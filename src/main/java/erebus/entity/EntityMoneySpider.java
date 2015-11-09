@@ -43,7 +43,7 @@ public class EntityMoneySpider extends EntitySpider {
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		return entityLivingData;
 	}
-	
+
 	public void setSkin(int skinType) {
 		dataWatcher.updateObject(30, new Integer(skinType));
 	}
@@ -57,7 +57,10 @@ public class EntityMoneySpider extends EntitySpider {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setSkin(nbt.getInteger("skin"));
+		if (nbt.hasKey("skin"))
+			setSkin(nbt.getInteger("skin"));
+		else
+			setSkin(rand.nextInt(3));
 	}
 
 	public int getSkin() {
