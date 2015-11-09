@@ -2,7 +2,6 @@ package erebus.entity;
 
 import java.util.Calendar;
 
-import erebus.client.render.entity.AnimationMathHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,13 +14,13 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.client.render.entity.AnimationMathHelper;
 
 public class EntityMoth extends EntityAmbientCreature {
 
 	private ChunkCoordinates currentFlightTarget;
 	public float wingFloat;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
-	public int skin = rand.nextInt(3);
 
 	public EntityMoth(World world) {
 		super(world);
@@ -33,6 +32,7 @@ public class EntityMoth extends EntityAmbientCreature {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(16, new Byte((byte) 0));
+		dataWatcher.addObject(30, new Integer(rand.nextInt(3)));
 	}
 
 	@Override
@@ -176,12 +176,22 @@ public class EntityMoth extends EntityAmbientCreature {
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		dataWatcher.updateObject(16, Byte.valueOf(nbt.getByte("MothFlags")));
+		setSkin(nbt.getInteger("skin"));
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setByte("mothFlags", dataWatcher.getWatchableObjectByte(16));
+		nbt.setInteger("skin", getSkin());
+	}
+
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
 	}
 
 	@Override

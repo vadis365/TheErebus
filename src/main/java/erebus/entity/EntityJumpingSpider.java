@@ -1,24 +1,30 @@
 package erebus.entity;
 
-import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.item.ItemMaterials;
 
 public class EntityJumpingSpider extends EntitySpider {
-	public int skin = rand.nextInt(3);
 
 	public EntityJumpingSpider(World par1World) {
 		super(par1World);
 		setSize(0.7F, 0.5F);
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataWatcher.addObject(30, new Integer(rand.nextInt(3)));
 	}
 
 	@Override
@@ -86,5 +92,25 @@ public class EntityJumpingSpider extends EntitySpider {
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 2;
+	}
+	
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("skin", getSkin());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setSkin(nbt.getInteger("skin"));
+	}
+
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
 	}
 }

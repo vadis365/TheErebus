@@ -27,6 +27,6 @@ public class RenderMoneySpider extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return TEXTURES[Math.min(TEXTURES.length - 1, ((EntityMoneySpider) entity).skin)];
+		return TEXTURES[Math.min(TEXTURES.length - 1, ((EntityMoneySpider) entity).getSkin())];
 	}
 }

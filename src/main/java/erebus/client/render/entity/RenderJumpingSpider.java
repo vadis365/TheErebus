@@ -1,13 +1,14 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import erebus.client.model.entity.ModelJumpingSpider;
-import erebus.entity.EntityJumpingSpider;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import erebus.client.model.entity.ModelJumpingSpider;
+import erebus.entity.EntityJumpingSpider;
 
 public class RenderJumpingSpider extends RenderLiving {
 
@@ -24,6 +25,6 @@ public class RenderJumpingSpider extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return TEXTURES[Math.min(TEXTURES.length - 1, ((EntityJumpingSpider) entity).skin)];
+		return TEXTURES[Math.min(TEXTURES.length - 1, ((EntityJumpingSpider) entity).getSkin())];
 	}
 }

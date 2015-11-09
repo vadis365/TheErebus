@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -11,14 +10,15 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.ModItems;
 
 public class EntityTarantula extends EntityMob {
-	public int skin = rand.nextInt(99);
 
 	public EntityTarantula(World world) {
 		super(world);
@@ -29,6 +29,7 @@ public class EntityTarantula extends EntityMob {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(16, new Byte((byte) 0));
+		dataWatcher.addObject(30, new Integer(rand.nextInt(99)));
 	}
 
 	@Override
@@ -196,5 +197,25 @@ public class EntityTarantula extends EntityMob {
 			}
 		}
 		return (IEntityLivingData) entityLivingData1;
+	}
+
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("skin", getSkin());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setSkin(nbt.getInteger("skin"));
+	}
+
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
 	}
 }

@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -13,12 +12,12 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 
 public class EntityVelvetWorm extends EntityMob {
-
-	public int skin = rand.nextInt(2);
 
 	public EntityVelvetWorm(World world) {
 		super(world);
@@ -40,6 +39,7 @@ public class EntityVelvetWorm extends EntityMob {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(20, new Integer(0));
+		dataWatcher.addObject(30, new Integer(rand.nextInt(2)));
 	}
 
 	@Override
@@ -137,5 +137,25 @@ public class EntityVelvetWorm extends EntityMob {
 
 	public int getInflateSize() {
 		return dataWatcher.getWatchableObjectInt(20);
+	}
+
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("skin", getSkin());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setSkin(nbt.getInteger("skin"));
+	}
+
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
 	}
 }

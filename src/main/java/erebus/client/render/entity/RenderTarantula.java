@@ -21,7 +21,7 @@ public class RenderTarantula extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityTarantula tarantula = (EntityTarantula) entity;
-		if (tarantula.skin <= 4)
+		if (tarantula.getSkin() <= 4)
 			return resource2;
 		else
 			return resource1;

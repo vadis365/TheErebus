@@ -1,15 +1,16 @@
 package erebus.client.render.entity;
 
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelMoth;
 import erebus.entity.EntityMoth;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class RenderMoth extends RenderLiving {
@@ -32,7 +33,7 @@ public class RenderMoth extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityMoth entityMoth = (EntityMoth) entity;
-		switch (entityMoth.skin) {
+		switch (entityMoth.getSkin()) {
 			case 0:
 				return resource1;
 			case 1:

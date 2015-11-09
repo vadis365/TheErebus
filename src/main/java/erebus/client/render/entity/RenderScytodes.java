@@ -1,10 +1,10 @@
 package erebus.client.render.entity;
 
-import erebus.client.model.entity.ModelScytodes;
-import erebus.entity.EntityScytodes;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import erebus.client.model.entity.ModelScytodes;
+import erebus.entity.EntityScytodes;
 
 public class RenderScytodes extends RenderLiving {
 
@@ -16,6 +16,6 @@ public class RenderScytodes extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return TEXTURES[Math.min(TEXTURES.length - 1, ((EntityScytodes) entity).skin)];
+		return TEXTURES[Math.min(TEXTURES.length - 1, ((EntityScytodes) entity).getSkin())];
 	}
 }

@@ -5,14 +5,20 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class EntityMoneySpider extends EntitySpider {
-	public int skin = rand.nextInt(3);
 
 	public EntityMoneySpider(World world) {
 		super(world);
 		setSize(0.6F, 0.4F);
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataWatcher.addObject(30, new Integer(rand.nextInt(3)));
 	}
 
 	@Override
@@ -36,5 +42,25 @@ public class EntityMoneySpider extends EntitySpider {
 	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData entityLivingData) {
 		return entityLivingData;
+	}
+	
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("skin", getSkin());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setSkin(nbt.getInteger("skin"));
+	}
+
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
 	}
 }

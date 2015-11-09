@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -12,14 +10,15 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.ItemMaterials;
 
 public class EntityCentipede extends EntityMob {
-
-	public int skin = rand.nextInt(3);
 
 	public EntityCentipede(World world) {
 		super(world);
@@ -31,6 +30,12 @@ public class EntityCentipede extends EntityMob {
 		tasks.addTask(3, new EntityAIWander(this, 0.3D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataWatcher.addObject(30, new Integer(rand.nextInt(3)));
 	}
 
 	@Override
@@ -127,5 +132,25 @@ public class EntityCentipede extends EntityMob {
 			if (duration > 0)
 				player.addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
 		}
+	}
+
+	public void setSkin(int skinType) {
+		dataWatcher.updateObject(30, new Integer(skinType));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("skin", getSkin());
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setSkin(nbt.getInteger("skin"));
+	}
+
+	public int getSkin() {
+		return dataWatcher.getWatchableObjectInt(30);
 	}
 }
