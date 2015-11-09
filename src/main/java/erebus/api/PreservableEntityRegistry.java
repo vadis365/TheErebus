@@ -5,7 +5,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -15,7 +17,8 @@ import net.minecraft.entity.boss.IBossDisplayData;
 
 public class PreservableEntityRegistry {
 
-	public static Map<Class<? extends Entity>, EntityDimensions> MAP = new HashMap<Class<? extends Entity>, EntityDimensions>();
+	private static Map<Class<? extends Entity>, EntityDimensions> MAP = new HashMap<Class<? extends Entity>, EntityDimensions>();
+	private static List<IPreservableEntityHandler> HANDLERS = new ArrayList<IPreservableEntityHandler>();
 
 	@SuppressWarnings("unchecked")
 	public static void readFile(BufferedReader br, boolean clearMap) {
@@ -59,13 +62,18 @@ public class PreservableEntityRegistry {
 		}
 	}
 
+	public static void registerHandler(IPreservableEntityHandler handler) {
+		HANDLERS.add(handler);
+	}
+
 	public static void registerEntity(Class<? extends Entity> entityCls, EntityDimensions dimensions) {
 		MAP.put(entityCls, dimensions);
 	}
 
 	public static EntityDimensions getEntityDimensions(Entity entity) {
-		if (entity instanceof IPreservableEntity)
-			return ((IPreservableEntity) entity).getDimensions();
+		for (IPreservableEntityHandler handler : HANDLERS)
+			if (handler.handlesEntity(entity))
+				return handler.getDimensions(entity);
 
 		EntityDimensions dimensions = EntityDimensions.DEFAULT;
 		for (Entry<Class<? extends Entity>, EntityDimensions> entry : MAP.entrySet())
@@ -76,8 +84,9 @@ public class PreservableEntityRegistry {
 	}
 
 	public static boolean canBePreserved(Entity entity) {
-		if (entity instanceof IPreservableEntity)
-			return ((IPreservableEntity) entity).canbePreserved();
+		for (IPreservableEntityHandler handler : HANDLERS)
+			if (handler.handlesEntity(entity))
+				return handler.canbePreserved(entity);
 
 		for (Entry<Class<? extends Entity>, EntityDimensions> entry : MAP.entrySet())
 			if (entry.getKey().isAssignableFrom(entity.getClass()))
