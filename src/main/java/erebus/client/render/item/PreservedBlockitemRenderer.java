@@ -58,7 +58,7 @@ public class PreservedBlockitemRenderer implements IItemRenderer {
 			GL11.glPushMatrix();
 			Entity entity = EntityList.createEntityFromNBT(stack.getTagCompound().getCompoundTag("EntityNBT"), Minecraft.getMinecraft().theWorld);
 			entity.setLocationAndAngles(0, 0, 0, 0, 0);
-			TileEntityPreservedBlockRenderer.renderTrappedEntity(entity, x, y, z);
+			TileEntityPreservedBlockRenderer.renderTrappedEntity(entity, x, y, z, 3);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
