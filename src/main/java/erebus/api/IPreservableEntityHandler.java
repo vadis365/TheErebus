@@ -1,6 +1,6 @@
 package erebus.api;
 
-import erebus.api.PreservableEntityRegistry.EntityDimensions;
+import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import net.minecraft.entity.Entity;
 
 /**

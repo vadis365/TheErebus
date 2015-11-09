@@ -3,13 +3,6 @@ package erebus;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -22,6 +15,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import erebus.api.ErebusAPI;
 import erebus.client.gui.RenderWarHammerChargeBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
@@ -42,6 +36,7 @@ import erebus.integration.ModIntegrationHandler;
 import erebus.integration.ThaumcraftIntegration;
 import erebus.lib.Reference;
 import erebus.network.PacketPipeline;
+import erebus.preserved.PreservableEntityRegistry;
 import erebus.recipes.ComposterRegistry;
 import erebus.recipes.ErebusRecipesHandler;
 import erebus.recipes.RecipeHandler;
@@ -49,6 +44,13 @@ import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
 import erebus.world.feature.structure.WorldGenAntlionMaze;
 import erebus.world.teleporter.TeleporterHandler;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = "${version}", dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class Erebus {
@@ -61,6 +63,8 @@ public class Erebus {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ErebusAPI.preservableEntityRegistry = PreservableEntityRegistry.INSTANCE;
+
 		ConfigHandler.INSTANCE.loadConfig(event);
 
 		if (event.getSide() == Side.CLIENT) {

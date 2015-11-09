@@ -1,4 +1,4 @@
-package erebus.api;
+package erebus.preserved;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,21 +11,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import erebus.api.IPreservableEntityHandler;
+import erebus.api.IPreservableEntityRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.IBossDisplayData;
 
-public class PreservableEntityRegistry {
+public class PreservableEntityRegistry implements IPreservableEntityRegistry {
 
-	private static Map<Class<? extends Entity>, EntityDimensions> MAP = new HashMap<Class<? extends Entity>, EntityDimensions>();
-	private static List<IPreservableEntityHandler> HANDLERS = new ArrayList<IPreservableEntityHandler>();
+	private Map<Class<? extends Entity>, EntityDimensions> MAP = new HashMap<Class<? extends Entity>, EntityDimensions>();
+	private List<IPreservableEntityHandler> HANDLERS = new ArrayList<IPreservableEntityHandler>();
+	public static final PreservableEntityRegistry INSTANCE = new PreservableEntityRegistry();
 
-	static {
+	private PreservableEntityRegistry() {
 		registerHandler(new PreservedSkeletonHandler());
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void readFile(BufferedReader br, boolean clearMap) {
+	public void readFile(BufferedReader br, boolean clearMap) {
 		if (clearMap)
 			MAP.clear();
 
@@ -50,7 +53,7 @@ public class PreservableEntityRegistry {
 		}
 	}
 
-	public static void writeConfigFile(File file) {
+	public void writeConfigFile(File file) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 			bw.write("# entity.class=xOffset, yOffset, zOffset, scale");
@@ -66,15 +69,18 @@ public class PreservableEntityRegistry {
 		}
 	}
 
-	public static void registerHandler(IPreservableEntityHandler handler) {
+	@Override
+	public void registerHandler(IPreservableEntityHandler handler) {
 		HANDLERS.add(handler);
 	}
 
-	public static void registerEntity(Class<? extends Entity> entityCls, EntityDimensions dimensions) {
+	@Override
+	public void registerEntity(Class<? extends Entity> entityCls, EntityDimensions dimensions) {
 		MAP.put(entityCls, dimensions);
 	}
 
-	public static EntityDimensions getEntityDimensions(Entity entity) {
+	@Override
+	public EntityDimensions getEntityDimensions(Entity entity) {
 		for (IPreservableEntityHandler handler : HANDLERS)
 			if (handler.handlesEntity(entity))
 				return handler.getDimensions(entity);
@@ -87,7 +93,8 @@ public class PreservableEntityRegistry {
 		return dimensions;
 	}
 
-	public static boolean canBePreserved(Entity entity) {
+	@Override
+	public boolean canBePreserved(Entity entity) {
 		for (IPreservableEntityHandler handler : HANDLERS)
 			if (handler.handlesEntity(entity))
 				return handler.canbePreserved(entity);

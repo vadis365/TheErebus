@@ -1,8 +1,7 @@
 package erebus;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
-import erebus.api.PreservableEntityRegistry;
-import erebus.api.PreservableEntityRegistry.EntityDimensions;
+import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -75,6 +74,7 @@ import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.item.ItemSpawnEggs;
+import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -167,7 +167,7 @@ public class ModEntities {
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name, EntityDimensions dimensions) {
 		EntityRegistry.registerModEntity(entityClass, name, id, Erebus.instance, 256, 1, true);
 		if (dimensions != null)
-			PreservableEntityRegistry.registerEntity(entityClass, dimensions);
+			ErebusAPI.preservableEntityRegistry.registerEntity(entityClass, dimensions);
 	}
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor) {

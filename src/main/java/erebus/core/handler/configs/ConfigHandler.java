@@ -11,8 +11,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.Erebus;
 import erebus.ModBiomes;
-import erebus.api.PreservableEntityRegistry;
 import erebus.lib.Reference;
+import erebus.preserved.PreservableEntityRegistry;
 import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHandler {
@@ -87,12 +87,12 @@ public class ConfigHandler {
 		File file = new File(configFolder, "ErebusEntityDimensions.cfg");
 		BufferedReader br = new BufferedReader(new InputStreamReader(Erebus.class.getResourceAsStream("/assets/DefaultEntityDimensions.cfg")));
 		if (!file.exists()) {
-			PreservableEntityRegistry.readFile(br, true);
-			PreservableEntityRegistry.writeConfigFile(file);
+			PreservableEntityRegistry.INSTANCE.readFile(br, true);
+			PreservableEntityRegistry.INSTANCE.writeConfigFile(file);
 		} else
 			try {
-				PreservableEntityRegistry.readFile(br, true);
-				PreservableEntityRegistry.readFile(new BufferedReader(new FileReader(file)), false);
+				PreservableEntityRegistry.INSTANCE.readFile(br, true);
+				PreservableEntityRegistry.INSTANCE.readFile(new BufferedReader(new FileReader(file)), false);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

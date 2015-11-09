@@ -1,6 +1,7 @@
-package erebus.api;
+package erebus.preserved;
 
-import erebus.api.PreservableEntityRegistry.EntityDimensions;
+import erebus.api.IPreservableEntityHandler;
+import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntitySkeleton;
 

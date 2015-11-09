@@ -1,7 +1,7 @@
 package erebus.entity;
 
 import erebus.ModBlocks;
-import erebus.api.PreservableEntityRegistry;
+import erebus.api.ErebusAPI;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityPreservedBlock;
 import net.minecraft.entity.Entity;
@@ -52,7 +52,7 @@ public class EntityPreservedBlock extends EntityThrowable {
 	}
 
 	private boolean canTrap(Entity entity) {
-		return PreservableEntityRegistry.canBePreserved(entity);
+		return ErebusAPI.preservableEntityRegistry.canBePreserved(entity);
 	}
 
 	private NBTTagCompound trapEntity(Entity entity) {

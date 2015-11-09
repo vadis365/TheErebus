@@ -4,8 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.api.PreservableEntityRegistry;
-import erebus.api.PreservableEntityRegistry.EntityDimensions;
+import erebus.api.ErebusAPI;
+import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import erebus.tileentity.TileEntityPreservedBlock;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -25,7 +25,7 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 	}
 
 	public static void renderTrappedEntity(Entity entity, double x, double y, double z) {
-		EntityDimensions dimensions = PreservableEntityRegistry.getEntityDimensions(entity);
+		EntityDimensions dimensions = ErebusAPI.preservableEntityRegistry.getEntityDimensions(entity);
 		float xOff = 0.5F;
 		float yOff = 0.0625F;
 		float zOff = 0.5F;
