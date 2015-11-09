@@ -40,7 +40,7 @@ public class EntityPreservedBlock extends EntityThrowable {
 
 		if (mop.typeOfHit == MovingObjectType.ENTITY && mop.entityHit != null && !(mop.entityHit instanceof EntityPlayer)) {
 			if (canTrap(mop.entityHit)) {
-				worldObj.setBlock(x, y, z, ModBlocks.preservedBlock);
+				worldObj.setBlock(x, y, z, ModBlocks.preservedBlock, 2 + rand.nextInt(4), 3);
 				TileEntityPreservedBlock tile = Utils.getTileEntity(worldObj, x, y, z, TileEntityPreservedBlock.class);
 				tile.setEntityNBT(trapEntity(mop.entityHit));
 				mop.entityHit.setDead();

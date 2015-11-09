@@ -42,12 +42,15 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 
 		switch (meta) {
 			case 3:
+			case 7:
 				GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
 				break;
 			case 5:
+			case 9:
 				GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
 				break;
 			case 4:
+			case 8:
 				GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
 				break;
 		}

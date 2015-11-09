@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenAmberUmberstone extends WorldGenerator {
+
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		if (world.getBlock(x, y, z) != ModBlocks.umberstone)

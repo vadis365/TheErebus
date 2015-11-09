@@ -75,8 +75,8 @@ public class PreservedBlockitemRenderer implements IItemRenderer {
 		}
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		renderer.setRenderBoundsFromBlock(ModBlocks.preservedBlock);
-		BlockRenderHelper.renderSimpleBlock(ModBlocks.preservedBlock, 0, renderer);
+		renderer.setRenderBoundsFromBlock(ModBlocks.amber);
+		BlockRenderHelper.renderSimpleBlock(ModBlocks.amber, stack.getItemDamage() == 0 ? 1 : 0, renderer);
 		if (!wasBlendOn)
 			GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();

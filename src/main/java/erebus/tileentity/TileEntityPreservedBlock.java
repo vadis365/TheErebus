@@ -55,6 +55,7 @@ public class TileEntityPreservedBlock extends TileEntity {
 
 	public void setEntityNBT(NBTTagCompound entityNBT) {
 		this.entityNBT = entityNBT;
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public void spawnTrappedEntity() {
