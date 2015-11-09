@@ -7,6 +7,7 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import erebus.world.feature.tree.WorldGenSapTree;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -17,6 +18,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
+	private final WorldGenerator genTreeSap = new WorldGenSapTree();
 
 	@Override
 	public void decorate() {
@@ -94,6 +96,19 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 					if (genTreeEucalyptus.generate(world, rand, xx, yy, zz) && rand.nextBoolean())
 						break;
+			}
+
+		if (rand.nextBoolean())
+			for (attempt = 0; attempt < 20; attempt++) {
+				xx = x + offsetXZ();
+				yy = 20 + rand.nextInt(80);
+				zz = z + offsetXZ();
+
+				if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
+					genTreeSap.generate(world, rand, xx, yy, zz);
+					if (rand.nextBoolean())
+						break;
+				}
 			}
 	}
 

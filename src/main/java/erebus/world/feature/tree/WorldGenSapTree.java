@@ -2,10 +2,9 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
-import erebus.lib.EnumWood;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.Direction;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import erebus.lib.EnumWood;
 
 public class WorldGenSapTree extends WorldGenTreeBase {
 
@@ -13,193 +12,109 @@ public class WorldGenSapTree extends WorldGenTreeBase {
 		super(EnumWood.Sap);
 	}
 
-	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
-		float treeRand = rand.nextFloat();
 
-		if (treeRand >= 0.5F)
-			return generateMediumTree(world, rand, x, y, z);
-		else if (treeRand >= 0.3F)
-			return generateLargeTree(world, rand, x, y, z);
-		else
-			return generateSmallTree(world, rand, x, y, z);
-	}
+		int height = rand.nextInt(4) + 12;
+		int maxRadius = 5;
+		boolean alternate = rand.nextBoolean();
 
-	private boolean checkEmptyArea(World world, int x, int y, int z, int totalHeight, int rad) {
-		if (world.getBlock(x, y, z).getMaterial() != Material.air)
-			return false;
-
-		for (int xx = x - rad; xx <= x + rad; xx++)
-			for (int zz = z - rad; zz <= z + rad; zz++)
-				for (int yy = y + 1; yy <= y + totalHeight; yy++)
-					if (world.getBlock(xx, yy, zz).getMaterial() != Material.air)
+		for (int xx = x - maxRadius; xx <= x + maxRadius; xx++)
+			for (int zz = z - maxRadius; zz <= z + maxRadius; zz++)
+				for (int yy = y + 2; yy < y + height; yy++)
+					if (!world.isAirBlock(xx, yy, zz))
 						return false;
 
-		return true;
-	}
+		for (int yy = y; yy < y + height; ++yy) {
 
-	/*
-	 * SMALL
-	 */
+			if (yy < y + height -1)
+				world.setBlock(x, yy, z, log, 0, 2);
 
-	private boolean generateSmallTree(World world, Random rand, int x, int y, int z) {
-		int trunkH = rand.nextInt(4) + 5;
-		int nakedTrunkH = rand.nextInt(2) + 1;
-		int leafH = trunkH - nakedTrunkH;
+			if (yy == y + height - 1) {
+				createLeaves(world, x, yy, z);
+				placeLeaves(world, x, yy + 1, z);
+			}
 
-		if (!checkEmptyArea(world, x, y, z, trunkH + 2, 2))
-			return false;
+			if (yy == y + height - 7 || yy == y + height - 10) {
+				if (alternate) {
+					createBranch(world, rand, x + 1, yy - rand.nextInt(2), z, 1, 1);
+					createBranch(world, rand, x - 1, yy - rand.nextInt(2), z, 2, 1);
+					alternate = false;
 
-		for (int yy = y; yy <= y + trunkH; yy++)
-			world.setBlock(x, yy, z, log, 0, 2);
-		for (int yy = y + trunkH + 1; yy <= y + trunkH + 2; yy++)
-			world.setBlock(x, yy, z, leaves, 0, 2);
-
-		for (int a = 0; a < 4; a++) {
-			for (int yy = y + nakedTrunkH; yy <= y + trunkH; yy++)
-				world.setBlock(x + Direction.offsetX[a], yy, z + Direction.offsetZ[a], leaves, 0, 2);
-
-			if (leafH - 4 > 1)
-				for (int yy = y + nakedTrunkH + 2; yy <= y + trunkH - 2; yy++) {
-					if ((yy == y + nakedTrunkH + 2 || yy == y + trunkH - 2) && leafH - 4 > 3 && rand.nextInt(11) == 0)
-						continue;
-					world.setBlock(x + Direction.offsetX[a] * 2, yy, z + Direction.offsetZ[a] * 2, leaves, 0, 2);
-				}
-		}
-
-		for (int a = 0; a < 2; a++)
-			for (int b = 0; b < 2; b++)
-				for (int yy = y + nakedTrunkH + 1; yy <= y + trunkH - 1; yy++) {
-					if ((yy == y + nakedTrunkH + 1 || yy == y + trunkH - 1) && leafH - 2 > 3 && rand.nextInt(8) == 0)
-						continue;
-					world.setBlock(x - 1 + 2 * a, yy, z - 1 + 2 * b, leaves, 0, 2);
-				}
-
-		return true;
-	}
-
-	/*
-	 * MEDIUM
-	 */
-
-	private boolean generateMediumTree(World world, Random rand, int x, int y, int z) {
-		int trunkH = rand.nextInt(5) + 8;
-		int nakedTrunkH = rand.nextInt(3) + 1;
-		int leafH = trunkH - nakedTrunkH;
-
-		if (!checkEmptyArea(world, x, y, z, trunkH + 3, 3))
-			return false;
-
-		for (int yy = y; yy <= y + trunkH; yy++)
-			world.setBlock(x, yy, z, log, 0, 2);
-		for (int yy = y + trunkH + 1; yy <= y + trunkH + 3; yy++)
-			world.setBlock(x, yy, z, leaves, 0, 2);
-
-		for (int a = 0; a < 4; a++) {
-			for (int yy = y + nakedTrunkH; yy <= y + trunkH + 1; yy++)
-				world.setBlock(x + Direction.offsetX[a], yy, z + Direction.offsetZ[a], leaves, 0, 2);
-			for (int yy = y + nakedTrunkH + 1; yy <= y + trunkH - 2; yy++)
-				world.setBlock(x + Direction.offsetX[a] * 2, yy, z + Direction.offsetZ[a] * 2, leaves, 0, 2);
-
-			if (leafH - 7 > 1)
-				for (int yy = y + nakedTrunkH + 3; yy <= y + trunkH - 4; yy++) {
-					if ((yy == y + nakedTrunkH + 3 || yy == y + trunkH - 4) && leafH - 7 > 3 && rand.nextInt(10) == 0)
-						continue;
-					world.setBlock(x + Direction.offsetX[a] * 3, yy, z + Direction.offsetZ[a] * 3, leaves, 0, 2);
-				}
-		}
-
-		for (int a = 0; a < 2; a++)
-			for (int b = 0; b < 2; b++) {
-				for (int yy = y + nakedTrunkH + 1; yy <= y + trunkH - 1; yy++) {
-					if ((yy == y + nakedTrunkH + 1 || yy == y + trunkH - 1) && rand.nextInt(14) == 0)
-						continue;
-					world.setBlock(x - 1 + 2 * a, yy, z + -1 + 2 * b, leaves, 0, 2);
-				}
-
-				for (int yy = y + nakedTrunkH + 2; yy <= y + trunkH - 3; yy++) {
-					boolean canSkip = yy == y + nakedTrunkH + 2 || yy == y + trunkH - 3;
-					if (!canSkip || rand.nextInt(10) != 0)
-						world.setBlock(x - 2 + 4 * a, yy, z + -1 + 2 * b, leaves, 0, 2);
-					if (!canSkip || rand.nextInt(10) != 0)
-						world.setBlock(x - 1 + 2 * a, yy, z + -2 + 4 * b, leaves, 0, 2);
+				} else {
+					createBranch(world, rand, x, yy - rand.nextInt(2), z + 1, 3, 1);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z - 1, 4, 1);
+					alternate = true;
 				}
 			}
 
+			if (yy == y + height - 4) {
+				if (alternate) {
+					createBranch(world, rand, x + 1, yy - rand.nextInt(2), z, 1, 1);
+					createBranch(world, rand, x - 1, yy - rand.nextInt(2), z, 2, 1);
+					alternate = false;
+
+				} else {
+					createBranch(world, rand, x, yy - rand.nextInt(2), z + 1, 3, 1);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z - 1, 4, 1);
+					alternate = true;
+				}
+			}
+		}
 		return true;
 	}
 
-	/*
-	 * LARGE
-	 */
+	private void createBranch(World world, Random rand, int x, int y, int z, int dir, int branchLength) {
+		int meta = dir;
+		for (int i = 0; i <= branchLength; ++i) {
 
-	private boolean generateLargeTree(World world, Random rand, int x, int y, int z) {
-		int trunkH = rand.nextInt(6) + 12;
-		int nakedTrunkH = rand.nextInt(3) + 2;
-		int leafH = trunkH - nakedTrunkH;
+			if (i >= 1) {
+				y++;
+				meta = 0;
+			}
 
-		if (!checkEmptyArea(world, x, y, z, trunkH + 4, 3))
-			return false;
-
-		for (int yy = y; yy <= y + trunkH; yy++) {
-			world.setBlock(x, yy, z, log, 0, 2);
-
-			if (yy <= y + trunkH - 2)
-				for (int a = 0; a < 4; a++) {
-					boolean genLog = yy >= y + trunkH - 3 && rand.nextBoolean() || yy < y + trunkH - 3;
-					world.setBlock(x + Direction.offsetX[a], yy, z + Direction.offsetZ[a], genLog ? log : leaves, genLog ? 0 : 0, 2);
+			if (dir == 1) {
+				world.setBlock(x + i, y, z, log, meta == 0 ? 0 : 4, 2);
+				if (i == branchLength) {
+					createLeaves(world, x + i, y, z);
+					placeLeaves(world, x + i + 2, y, z);
 				}
+			}
+
+			if (dir == 2) {
+				world.setBlock(x - i, y, z, log, meta == 0 ? 0 : 4, 2);
+				if (i == branchLength) {
+					createLeaves(world, x - i, y, z);
+					placeLeaves(world, x - i - 2, y, z);
+				}
+			}
+
+			if (dir == 3) {
+				world.setBlock(x, y, z + i, log, meta == 0 ? 0 : 8, 2);
+				if (i == branchLength) {
+					createLeaves(world, x, y, z + i);
+					placeLeaves(world, x, y, z + i + 2);
+				}
+			}
+
+			if (dir == 4) {
+				world.setBlock(x, y, z - i, log, meta == 0 ? 0 : 8, 2);
+				if (i == branchLength) {
+					createLeaves(world, x, y, z - i);
+					placeLeaves(world, x, y, z - i - 2);
+				}
+			}
 		}
-
-		for (int yy = y + trunkH + 1; yy <= y + trunkH + 4; yy++)
-			world.setBlock(x, yy, z, leaves, 0, 2);
-
-		for (int a = 0; a < 4; a++) {
-			for (int yy = y + trunkH - 1; yy <= y + trunkH + 2; yy++) {
-				if (yy == y + trunkH + 2 && rand.nextInt(5) == 0)
-					continue;
-				world.setBlock(x + Direction.offsetX[a], yy, z + Direction.offsetZ[a], leaves, 0, 2);
-			}
-
-			for (int yy = y + nakedTrunkH; yy <= y + trunkH; yy++) {
-				if (yy == y + trunkH && rand.nextInt(6) == 0)
-					continue;
-				world.setBlock(x + Direction.offsetX[a] * 2, yy, z + Direction.offsetZ[a] * 2, leaves, 0, 2);
-			}
-
-			for (int yy = y + nakedTrunkH + 2; yy <= y + trunkH - 3; yy++)
-				world.setBlock(x + Direction.offsetX[a] * 3, yy, z + Direction.offsetZ[a] * 3, leaves, 0, 2);
-		}
-
-		for (int a = 0; a < 2; a++)
-			for (int b = 0; b < 2; b++) {
-				for (int yy = y + nakedTrunkH; yy <= y + trunkH + 1; yy++)
-					world.setBlock(x - 1 + 2 * a, yy, z - 1 + 2 * b, leaves, 0, 2);
-
-				for (int yy = y + nakedTrunkH + 1; yy <= y + trunkH - 2; yy++) {
-					boolean canSkip = yy == y + nakedTrunkH + 1 || yy == y + trunkH - 2;
-					if (!canSkip || rand.nextInt(10) != 0)
-						world.setBlock(x - 2 + 4 * a, yy, z - 1 + 2 * b, leaves, 0, 2);
-					if (!canSkip || rand.nextInt(10) != 0)
-						world.setBlock(x - 1 + 2 * a, yy, z - 2 + 4 * b, leaves, 0, 2);
-				}
-
-				for (int yy = y + nakedTrunkH + 3; yy <= y + trunkH - 3; yy++) {
-					if (yy == y + trunkH - 3 && rand.nextInt(7) == 0)
-						continue;
-					world.setBlock(x - 2 + 4 * a, yy, z - 2 + 4 * b, leaves, 0, 2);
-				}
-
-				if (leafH - 9 > 1)
-					for (int yy = y + nakedTrunkH + 4; yy <= y + trunkH - 5; yy++) {
-						boolean canSkip = (yy == y + nakedTrunkH + 4 || yy == y + trunkH - 5) && leafH - 9 > 2;
-						if (!canSkip || rand.nextInt(12) != 0)
-							world.setBlock(x - 3 + 6 * a, yy, z - 1 + 2 * b, leaves, 0, 2);
-						if (!canSkip || rand.nextInt(12) != 0)
-							world.setBlock(x - 1 + 2 * a, yy, z - 3 + 6 * b, leaves, 0, 2);
-					}
-			}
-
-		return true;
 	}
+
+	private void createLeaves(World world, int x, int y, int z) {
+		for (int d = -1; d < 2; d++)
+			for (int d2 = -1; d2 < 2; d2++)
+				placeLeaves(world, x + d, y, z + d2);
+	}
+
+	private void placeLeaves(World world, int x, int y, int z) {
+		if (world.getBlock(x, y, z) == Blocks.air)
+			world.setBlock(x, y, z, leaves);
+	}
+
 }
