@@ -20,6 +20,10 @@ public class PreservableEntityRegistry {
 	private static Map<Class<? extends Entity>, EntityDimensions> MAP = new HashMap<Class<? extends Entity>, EntityDimensions>();
 	private static List<IPreservableEntityHandler> HANDLERS = new ArrayList<IPreservableEntityHandler>();
 
+	static {
+		registerHandler(new PreservedSkeletonHandler());
+	}
+
 	@SuppressWarnings("unchecked")
 	public static void readFile(BufferedReader br, boolean clearMap) {
 		if (clearMap)
