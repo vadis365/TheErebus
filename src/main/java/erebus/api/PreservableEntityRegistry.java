@@ -46,13 +46,10 @@ public class PreservableEntityRegistry {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 			bw.write("# entity.class=xOffset, yOffset, zOffset, scale");
 			bw.newLine();
+			bw.write("# Example:");
 			bw.newLine();
-
-			for (Entry<Class<? extends Entity>, EntityDimensions> entry : MAP.entrySet()) {
-				EntityDimensions dims = entry.getValue();
-				bw.write(entry.getKey().getCanonicalName() + "=" + dims.xOff + ", " + dims.yOff + ", " + dims.zOff + ", " + dims.scale);
-				bw.newLine();
-			}
+			bw.write("# net.minecraft.entity.passive.EntityCow=0.5, 0.125, 0.5, 0.5");
+			bw.newLine();
 
 			bw.close();
 		} catch (IOException e) {
