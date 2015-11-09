@@ -18,8 +18,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.world.BlockEvent;
 
 public class BlockPreservedBlock extends BlockContainer {
@@ -29,6 +31,15 @@ public class BlockPreservedBlock extends BlockContainer {
 		setHardness(1.0F);
 		setStepSound(soundTypeGlass);
 		setBlockName("erebus.preservedBlock");
+	}
+
+	@Override
+	public boolean rotateBlock(World world, int x, int y, int z, ForgeDirection axis) {
+		int meta = world.getBlockMetadata(x, y, z) + 1;
+		if (meta >= 5)
+			meta = 2;
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+		return true;
 	}
 
 	@Override
@@ -43,6 +54,16 @@ public class BlockPreservedBlock extends BlockContainer {
 			if (tile != null)
 				tile.setEntityNBT(stack.getTagCompound().getCompoundTag("EntityNBT"));
 		}
+
+		int rotation = MathHelper.floor_double(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		if (rotation == 0)
+			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+		else if (rotation == 1)
+			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+		else if (rotation == 2)
+			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+		else if (rotation == 3)
+			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
 	}
 
 	@Override
