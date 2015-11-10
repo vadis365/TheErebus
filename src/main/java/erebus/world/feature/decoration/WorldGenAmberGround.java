@@ -44,8 +44,8 @@ public class WorldGenAmberGround extends WorldGenerator {
 		return true;
 	}
 
-	private void setBlock(World world, int x, int y, int z, Random rand) {
-		if (rand.nextFloat() > 0.5F)
+	protected void setBlock(World world, int x, int y, int z, Random rand) {
+		if (rand.nextFloat() > 0.02F)
 			world.setBlock(x, y, z, ModBlocks.amber);
 		else {
 			world.setBlock(x, y, z, ModBlocks.preservedBlock, 6 + rand.nextInt(4), 3);

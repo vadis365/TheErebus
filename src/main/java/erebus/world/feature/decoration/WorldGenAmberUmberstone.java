@@ -4,9 +4,8 @@ import java.util.Random;
 
 import erebus.ModBlocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenAmberUmberstone extends WorldGenerator {
+public class WorldGenAmberUmberstone extends WorldGenAmberGround {
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
@@ -20,7 +19,7 @@ public class WorldGenAmberUmberstone extends WorldGenerator {
 			for (int yy = -ceilRad; yy <= ceilRad; yy++)
 				for (int zz = -ceilRad; zz <= ceilRad; zz++)
 					if (Math.sqrt(xx * xx + yy * yy + zz * zz) <= rad + rand.nextFloat() * 0.4F && world.getBlock(x + xx, y + yy, z + zz) == ModBlocks.umberstone)
-						world.setBlock(x + xx, y + yy, z + zz, ModBlocks.amber);
+						setBlock(world, x + xx, y + yy, z + zz, rand);
 
 		return true;
 	}
