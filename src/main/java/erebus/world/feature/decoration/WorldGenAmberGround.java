@@ -48,7 +48,7 @@ public class WorldGenAmberGround extends WorldGenerator {
 		if (rand.nextFloat() > 0.5F)
 			world.setBlock(x, y, z, ModBlocks.amber);
 		else {
-			world.setBlock(x, y, z, ModBlocks.preservedBlock);
+			world.setBlock(x, y, z, ModBlocks.preservedBlock, 6 + rand.nextInt(4), 3);
 			TileEntityPreservedBlock tile = Utils.getTileEntity(world, x, y, z, TileEntityPreservedBlock.class);
 			if (tile != null)
 				try {
