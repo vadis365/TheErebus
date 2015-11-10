@@ -96,7 +96,7 @@ public class BlockPreservedBlock extends BlockContainer {
 			return stack;
 		}
 
-		return new ItemStack(ModBlocks.amber, 1, 1);
+		return new ItemStack(ModBlocks.amber, 1, world.getBlockMetadata(x, y, z) > 5 ? 0 : 1);
 	}
 
 	@Override
