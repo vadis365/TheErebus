@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -16,8 +18,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
 
 public class EntityHoneyPotAnt extends EntityTameable {
 
@@ -113,18 +113,18 @@ public class EntityHoneyPotAnt extends EntityTameable {
 		ItemStack stack = player.inventory.getCurrentItem();
 		if (!worldObj.isRemote && stack.getItem() == Items.sugar && isTamed() && getHoneyBelly() < 0.8F) {
 			setHoneyBelly(getHoneyBelly() + 0.1F);
-			stack.stackSize--;
+			if (!player.capabilities.isCreativeMode)
+				stack.stackSize--;
 			return true;
 		}
 
-		if (!worldObj.isRemote && stack != null && stack.getItem() == ModItems.nectarCollector) {
-			if (getHoneyBelly() > 0 && isTamed() ) {
-				entityDropItem(ItemMaterials.DATA.nectar.makeStack((int)(getHoneyBelly() * 10)), 0.0F);
+		if (!worldObj.isRemote && stack != null && stack.getItem() == ModItems.nectarCollector)
+			if (getHoneyBelly() > 0 && isTamed()) {
+				entityDropItem(ItemMaterials.DATA.nectar.makeStack((int) (getHoneyBelly() * 10)), 0.0F);
 				stack.damageItem(1, player);
 				setHoneyBelly(0);
 				return true;
 			}
-		}
 
 		if (stack != null && stack.getItem() == ModItems.antTamingAmulet) {
 			player.swingItem();
@@ -137,11 +137,10 @@ public class EntityHoneyPotAnt extends EntityTameable {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if(isTamed()) {
-			if(getHoneyBelly() > 0 )
-				entityDropItem(ItemMaterials.DATA.nectar.makeStack((int)(getHoneyBelly() * 10)), 0.0F);
-		}
-		else
+		if (isTamed()) {
+			if (getHoneyBelly() > 0)
+				entityDropItem(ItemMaterials.DATA.nectar.makeStack((int) (getHoneyBelly() * 10)), 0.0F);
+		} else
 			entityDropItem(ItemMaterials.DATA.nectar.makeStack(1), 0.0F);
 	}
 
