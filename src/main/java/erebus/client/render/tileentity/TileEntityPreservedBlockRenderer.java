@@ -1,5 +1,11 @@
 package erebus.client.render.tileentity;
 
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -7,10 +13,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.api.ErebusAPI;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import erebus.tileentity.TileEntityPreservedBlock;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer {
@@ -38,8 +40,7 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 		}
 
 		GL11.glPushMatrix();
-		GL11.glTranslated(x + xOff, y + yOff, z + zOff);
-
+		GL11.glTranslated(x + 0.5F, y, z + 0.5F);
 		switch (meta) {
 			case 3:
 			case 7:
@@ -56,10 +57,12 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 		}
 
 		GL11.glScalef(scale, scale, scale);
-
-		entity.setLocationAndAngles(0, 0, 0, 0, 0);
-		RenderManager.instance.renderEntityWithPosYaw(entity, 0, 0, 0, 0, 0);
-
+		GL11.glTranslated(0, yOff, 0.2F); // x and z offsets will need changing in the config and re-adding here
+		Render renderer = RenderManager.instance.getEntityRenderObject(entity);
+		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+		renderer.doRender(entity, 0, 0, 0, 0, 0);
+		GL11.glPopAttrib();
+		
 		GL11.glPopMatrix();
 	}
 }
