@@ -55,8 +55,6 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 				break;
 		}
 
-		GL11.glScalef(1.0F, -1.0F, -1.0F);
-		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
 		GL11.glScalef(scale, scale, scale);
 
 		entity.setLocationAndAngles(0, 0, 0, 0, 0);

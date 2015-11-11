@@ -50,7 +50,7 @@ public class PreservableEntityRegistry implements IPreservableEntityRegistry {
 				}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new IllegalArgumentException("Error reading file", e);
 		}
 	}
 
