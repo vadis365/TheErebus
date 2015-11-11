@@ -669,6 +669,7 @@ entity.erebus.bombardierBeetle.name=Bombardier Beetle
 entity.erebus.animatedChest.name=Chester
 entity.erebus.animatedBambooCrate.name=Bamber
 entity.erebus.animatedBlock.name=Animated Block
+entity.erebus.honeyPotAnt.name=Honey Pot Ant
 
 ##########
 # Fluids #

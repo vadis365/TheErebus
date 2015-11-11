@@ -32,6 +32,7 @@ import erebus.entity.EntityGasVent;
 import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGooBall;
 import erebus.entity.EntityGrasshopper;
+import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLavaWebSpider;
 import erebus.entity.EntityLeech;
@@ -141,6 +142,7 @@ public class ModEntities {
 		registerEntity(55, EntityMucusBombPrimed.class, "mucusBombPrimed");
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umberGolemIdol");
 		registerEntity(57, EntityAntlionBoss.class, "antlionBoss", 0x000000, 0xFFFFFF);
+		registerEntity(58, EntityHoneyPotAnt.class, "honeyPotAnt", 0xFFA400, 0x000000);
 
 		registerEntity(70, EntityWaspDagger.class, "waspDagger");
 		registerEntity(71, EntityWebSling.class, "webSling");
