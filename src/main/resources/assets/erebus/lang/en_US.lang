@@ -439,6 +439,7 @@ item.erebus.food_cabbage.name=Cabbage
 item.erebus.food_titan_stew_cooked.name=Cooked Titan Stew
 
 # Rest
+item.erebus.wand_of_preservation.name=Wand of Preservation
 item.erebus.encrustedDiamond.name=Encrusted Diamond
 item.erebus.helmetExo.name=Exoskeleton Helmet
 item.erebus.chestplateExo.name=Exoskeleton Chestplate
@@ -521,7 +522,7 @@ item.erebus.materials.antPheromones.name=Ant Pheromones
 item.erebus.materials.gaeanGem.name=Gaean Gem
 item.erebus.materials.crimsonHeart.name=Crimson Heart
 item.erebus.materials.sapBall.name=Tree Resin
-item.erebus.materials.UNUSED.name=UNUSED
+item.erebus.materials.amberStar.name=Amber Star
 item.erebus.materials.ingotAluminium.name=Aluminium Ingot
 item.erebus.materials.ingotCopper.name=Copper Ingot
 item.erebus.materials.ingotLead.name=Lead Ingot
