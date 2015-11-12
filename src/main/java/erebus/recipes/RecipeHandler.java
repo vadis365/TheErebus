@@ -235,6 +235,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 1), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.dye, 1, 4), 'v', ItemMaterials.DATA.supernaturalvelocity.makeStack(), 'p', new ItemStack(ModBlocks.wallPlants, 1, 1));
 		addShapedRecipe(new ItemStack(Items.leather, 8), "xx", "xx", 'x', ItemMaterials.DATA.hideShroom.makeStack());
 		addShapedRecipe(new ItemStack(Items.dye, 1, 2), "xx", "xx", 'x', new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.STEM.ordinal()));
+		addShapedRecipe(ItemMaterials.DATA.amberStar.makeStack(), " x ", "xyx", " x ", 'x', ItemMaterials.DATA.sapBall.makeStack(), 'y', new ItemStack(ModBlocks.amber, 1, 1));
 
 		// Smoothies
 		// Have to figure this out...
