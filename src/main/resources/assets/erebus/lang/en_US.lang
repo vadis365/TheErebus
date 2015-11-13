@@ -165,6 +165,7 @@ tile.erebus.gaeanKeystone.name=Gaean Keystone
 tile.erebus.amber0.name=Amber
 tile.erebus.amber1.name=Amber Glass
 tile.erebus.amber2.name=Amber Bricks
+tile.erebus.preservedBlock.name=Preserved Block
 
 tile.erebus.dooramber.name=Amber Door
 tile.erebus.doorbaobab.name=Baobab Door

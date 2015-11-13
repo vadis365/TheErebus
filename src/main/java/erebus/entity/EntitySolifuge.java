@@ -30,11 +30,6 @@ public class EntitySolifuge extends EntityMob {
 	}
 
 	@Override
-	protected void entityInit() {
-		super.entityInit();
-	}
-
-	@Override
 	public boolean isAIEnabled() {
 		return true;
 	}
@@ -105,15 +100,11 @@ public class EntitySolifuge extends EntityMob {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-	}
-
-	@Override
 	public void setDead() {
 		super.setDead();
-		if (!worldObj.isRemote)
-			for (int a = 0; a < 4; a++) {
+
+		if (!worldObj.isRemote && getHealth() <= 0.0F)
+			for (int i = 0; i < 4; i++) {
 				EntitySolifugeSmall entitySolifugeSmall = new EntitySolifugeSmall(worldObj);
 				entitySolifugeSmall.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
 				entitySolifugeSmall.setPotionEffect(Byte.valueOf((byte) rand.nextInt(8)));
