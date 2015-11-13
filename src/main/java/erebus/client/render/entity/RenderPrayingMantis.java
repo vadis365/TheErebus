@@ -5,7 +5,6 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelPrayingMantis;
-import erebus.entity.EntityPrayingMantis;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,14 +20,10 @@ public class RenderPrayingMantis extends RenderLiving {
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		scalePrayingMantis((EntityPrayingMantis) entityliving, f);
-	}
-
-	protected void scalePrayingMantis(EntityPrayingMantis entityPrayingMantis, float f) {
+	protected void preRenderCallback(EntityLivingBase entity, float partialTickTime) {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, entityPrayingMantis.getDataWatcher().getWatchableObjectFloat(20));
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, entity.getDataWatcher().getWatchableObjectFloat(20));
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class EntityPrayingMantis extends EntityMob {
@@ -119,5 +120,17 @@ public class EntityPrayingMantis extends EntityMob {
 	public void setAttackAnimation(int count, byte action) {
 		attackAnimation = count;
 		dataWatcher.updateObject(22, action);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		dataWatcher.updateObject(20, nbt.getFloat("Alpha"));
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setFloat("Alpha", dataWatcher.getWatchableObjectFloat(20));
 	}
 }
