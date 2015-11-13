@@ -1,4 +1,4 @@
-package erebus.client.gui;
+package erebus.client.gui.elements;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

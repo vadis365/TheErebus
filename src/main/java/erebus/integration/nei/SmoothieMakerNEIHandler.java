@@ -45,7 +45,15 @@ public class SmoothieMakerNEIHandler extends TemplateRecipeHandler {
 			return;
 
 		GuiDraw.changeTexture(TextureMap.locationBlocksTexture);
-		GuiSmoothieMaker.glColour(fluid.getFluid().getColor(fluid));
+		int colour = fluid.getFluid().getColor(fluid);
+		float r = (colour >> 16 & 255) / 255F;
+		float g = (colour >> 8 & 255) / 255F;
+		float b = (colour & 255) / 255F;
+		int a = colour >> 24 & 255;
+		if (a <= 0)
+			a = 255;
+
+		GL11.glColor4f(r, g, b, a / 255F);
 		GL11.glEnable(GL11.GL_BLEND);
 
 		int amount = Math.max(Math.min(rectangle.height, fluid.amount * rectangle.height / capacity), 1);
@@ -74,7 +82,7 @@ public class SmoothieMakerNEIHandler extends TemplateRecipeHandler {
 			}
 
 		GuiDraw.changeTexture(getGuiTexture());
-		GuiSmoothieMaker.glColour(0xFFFFFF);
+		GL11.glColor3f(1, 1, 1);
 		GuiDraw.drawTexturedModalRect(rectangle.x - 5, rectangle.y, 176, 41, rectangle.width, rectangle.height);
 	}
 

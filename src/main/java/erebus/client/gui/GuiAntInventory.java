@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.helper.Utils;
 import erebus.inventory.ContainerAntInventory;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,7 +20,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
-public class GuiAntInventory extends GuiContainer {
+public class GuiAntInventory extends GuiErebus {
 
 	private static final ResourceLocation GUI_ANT_INVENTORY = new ResourceLocation("erebus:textures/gui/container/antGuiTest.png");
 	public static Item[] ghostIcon = new Item[] { Items.stone_hoe, Items.shears, Items.bucket, Items.bone, Items.wheat_seeds, Items.wheat };
@@ -50,9 +49,7 @@ public class GuiAntInventory extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(GUI_ANT_INVENTORY);
-		int k = (width - xSize) / 2;
-		int l = (height - ySize) / 2;
-		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
 		if (antInventory.getStackInSlot(0) == null) {
 			GL11.glPushMatrix();

@@ -6,13 +6,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.inventory.ContainerBambooCrate;
 import erebus.tileentity.TileEntityBambooCrate;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
-public class GuiBambooCrate extends GuiContainer {
+public class GuiBambooCrate extends GuiErebus {
 
 	private static final ResourceLocation GUI_BAMBOO_CRATE = new ResourceLocation("erebus:textures/gui/container/bambooCrate.png");
 	private final TileEntityBambooCrate bambooCrateInventory;
@@ -34,8 +33,6 @@ public class GuiBambooCrate extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int x, int y) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(GUI_BAMBOO_CRATE);
-		int k = (width - xSize) / 2;
-		int l = (height - ySize) / 2;
-		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 	}
 }

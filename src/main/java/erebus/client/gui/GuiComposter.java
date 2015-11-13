@@ -7,13 +7,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.core.helper.Utils;
 import erebus.inventory.ContainerComposter;
 import erebus.tileentity.TileEntityComposter;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
-public class GuiComposter extends GuiContainer {
+public class GuiComposter extends GuiErebus {
+
 	private static final ResourceLocation composterGuiTextures = new ResourceLocation("erebus:textures/gui/container/composter.png");
 	private TileEntityComposter tileComposter;
 
@@ -33,15 +33,13 @@ public class GuiComposter extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float partialTickTime, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(composterGuiTextures);
-		int k = (width - xSize) / 2;
-		int l = (height - ySize) / 2;
-		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
 		if (tileComposter.isBurning()) {
 			int i1 = tileComposter.getBurnTimeRemainingScaled(13);
-			drawTexturedModalRect(k + 56, l + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
+			drawTexturedModalRect(guiLeft + 56, guiTop + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
 			i1 = tileComposter.getCookProgressScaled(32);
-			drawTexturedModalRect(k + 76, l + 28, 176, 14, i1 + 1, 32);
+			drawTexturedModalRect(guiLeft + 76, guiTop + 28, 176, 14, i1 + 1, 32);
 		}
 	}
 }

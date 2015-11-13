@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.client.gui.elements.GuiInvisibleButton;
 import erebus.inventory.ContainerColossalCrate;
 import erebus.network.PacketPipeline;
 import erebus.network.server.S00ColossalCratePage;

@@ -19,7 +19,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 	private static final int MAX_TIME = 432;
 
 	private final FluidTank[] tanks = new FluidTank[4];
-	private int progress = 0;
+	private int progress = 0, prevProgress = 0;
 
 	public TileEntitySmoothieMaker() {
 		super(5, "container.kitchenCounter");
@@ -31,8 +31,12 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 		return tanks;
 	}
 
-	public int getBlendProgress() {
-		return progress / 12;
+	public float getBlendProgress() {
+		return progress / 12F;
+	}
+
+	public float getPrevBlendProgress() {
+		return prevProgress / 12F;
 	}
 
 	public boolean isBlending() {
@@ -94,8 +98,11 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	@Override
 	public void updateEntity() {
-		if (worldObj.isRemote)
+		if (worldObj.isRemote) {
+			// Interpolation stuff
+			prevProgress = progress;
 			return;
+		}
 
 		ItemStack[] inputs = new ItemStack[4];
 		for (int i = 0; i < 4; i++)
