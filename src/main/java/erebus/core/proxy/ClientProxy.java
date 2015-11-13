@@ -1,30 +1,26 @@
 package erebus.core.proxy;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityBreakingFX;
-import net.minecraft.client.particle.EntityCloudFX;
-import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityFireworkSparkFX;
-import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.client.particle.EntityHeartFX;
-import net.minecraft.client.particle.EntityLavaFX;
-import net.minecraft.client.particle.EntityPortalFX;
-import net.minecraft.client.particle.EntitySmokeFX;
-import net.minecraft.client.particle.EntitySpellParticleFX;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
+import java.util.ArrayList;
+import java.util.List;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.block.BlockPetrifiedChest;
+import erebus.block.silo.TileEntitySiloTank;
 import erebus.client.fx.EntityBubbleGasFX;
 import erebus.client.fx.EntityRepellentFX;
 import erebus.client.fx.EntitySonicFX;
+import erebus.client.gui.GuiAntInventory;
+import erebus.client.gui.GuiColossalCrate;
+import erebus.client.gui.GuiComposter;
+import erebus.client.gui.GuiErebusBasic;
+import erebus.client.gui.GuiPetrifiedChest;
+import erebus.client.gui.GuiPetrifiedWorkbench;
+import erebus.client.gui.GuiSmoothieMaker;
+import erebus.client.gui.GuiUmberFurnace;
 import erebus.client.model.entity.ModelAnimatedBlock;
 import erebus.client.model.entity.ModelAnimatedChest;
 import erebus.client.render.block.BlockBambooCropRender;
@@ -225,11 +221,17 @@ import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
+import erebus.inventory.ContainerAnimatedBambooCrate;
+import erebus.inventory.ContainerBambooCrate;
+import erebus.inventory.ContainerExtenderThingy;
+import erebus.inventory.ContainerHoneyComb;
+import erebus.inventory.ContainerSilo;
 import erebus.tileentity.TileEntityAntlionEgg;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
 import erebus.tileentity.TileEntityBones;
+import erebus.tileentity.TileEntityComposter;
 import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarHealing;
 import erebus.tileentity.TileEntityErebusAltarLightning;
@@ -239,13 +241,37 @@ import erebus.tileentity.TileEntityExtenderThingy;
 import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
+import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntityLadder;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import erebus.tileentity.TileEntityPreservedBlock;
 import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityTarantulaEgg;
+import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.particle.EntityBreakingFX;
+import net.minecraft.client.particle.EntityCloudFX;
+import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityFireworkSparkFX;
+import net.minecraft.client.particle.EntityFlameFX;
+import net.minecraft.client.particle.EntityHeartFX;
+import net.minecraft.client.particle.EntityLavaFX;
+import net.minecraft.client.particle.EntityPortalFX;
+import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.client.particle.EntitySpellParticleFX;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
 
@@ -482,12 +508,49 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public World getClientWorld() {
-		return Minecraft.getMinecraft().theWorld;
-	}
+	public GuiContainer getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		GuiID guiID = GuiID.values()[ID];
+		TileEntity tile = world.getTileEntity(x, y, z);
+		Entity entity = world.getEntityByID(x);
 
-	@Override
-	public EntityPlayer getClientPlayer() {
-		return Minecraft.getMinecraft().thePlayer;
+		switch (guiID) {
+			case ANIMATED_BAMBOO_CRATE:
+				if (entity != null && entity instanceof EntityAnimatedBambooCrate)
+					return new GuiErebusBasic(new ContainerAnimatedBambooCrate(player.inventory, (IInventory) entity), new ResourceLocation("erebus:textures/gui/container/bambooCrate.png"), (IInventory) entity, 168);
+			case ANT_INVENTORY:
+				if (entity != null && entity instanceof EntityBlackAnt)
+					return new GuiAntInventory(player.inventory, entity);
+			case BAMBOO_CRATE:
+				return new GuiErebusBasic(new ContainerBambooCrate(player.inventory, (TileEntityBambooCrate) tile), new ResourceLocation("erebus:textures/gui/container/bambooCrate.png"), (TileEntityBambooCrate) tile, 168);
+			case COLOSSAL_CRATE:
+				List<TileEntityBambooCrate> list = new ArrayList<TileEntityBambooCrate>();
+				for (int[] place : places) {
+					TileEntity te = world.getTileEntity(x + place[0], y + place[1], z + place[2]);
+					if (te != null && te instanceof TileEntityBambooCrate)
+						list.add((TileEntityBambooCrate) te);
+					else
+						return null;
+				}
+				return new GuiColossalCrate(player.inventory, list);
+			case COMPOSTER:
+				return new GuiComposter(player.inventory, (TileEntityComposter) tile);
+			case EXTENDER_THINGY:
+				return new GuiErebusBasic(new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) tile), new ResourceLocation("erebus:textures/gui/container/extenderThingy.png"), (TileEntityExtenderThingy) tile, 176, 136);
+			case HONEY_COMB:
+				return new GuiErebusBasic(new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile), new ResourceLocation("erebus:textures/gui/container/honeyCombGui.png"), (TileEntityHoneyComb) tile, 168);
+			case PETRIFIED_CHEST:
+				IInventory inventory = BlockPetrifiedChest.getInventory(world, x, y, z);
+				return new GuiPetrifiedChest(player.inventory, inventory);
+			case PETRIFIED_CRAFT:
+				return new GuiPetrifiedWorkbench(player.inventory, world, x, y, z);
+			case SILO_INVENTORY:
+				return new GuiErebusBasic(new ContainerSilo(player.inventory, (TileEntitySiloTank) tile), new ResourceLocation("erebus:textures/gui/container/siloGui.png"), (TileEntitySiloTank) tile, 256, 256);
+			case SMOOTHIE_MAKER:
+				return new GuiSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tile);
+			case UMBER_FURNACE:
+				return new GuiUmberFurnace(player.inventory, (TileEntityUmberFurnace) tile);
+			default:
+				return null;
+		}
 	}
 }

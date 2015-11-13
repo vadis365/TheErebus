@@ -30,7 +30,7 @@ public class BlockPetrifiedCraftingTable extends Block {
 		if (world.isRemote)
 			return true;
 		else {
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CRAFT, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.PETRIFIED_CRAFT.ordinal(), world, x, y, z);
 			return true;
 		}
 	}

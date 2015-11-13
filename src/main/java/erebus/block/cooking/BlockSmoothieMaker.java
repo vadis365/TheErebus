@@ -71,7 +71,7 @@ public class BlockSmoothieMaker extends BlockContainer {
 		}
 
 		if (tile != null)
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_SMOOTHIE_MAKER, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.SMOOTHIE_MAKER.ordinal(), world, x, y, z);
 
 		return true;
 	}

@@ -105,7 +105,7 @@ public class BlockUmberFurnace extends BlockContainer {
 		}
 
 		if (tile != null)
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_UMBER_FURNACE, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.UMBER_FURNACE.ordinal(), world, x, y, z);
 
 		return true;
 

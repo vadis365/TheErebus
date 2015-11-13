@@ -71,7 +71,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 				chest.setInventorySlotContents(i, inventory[i]);
 			return true;
 		} else {
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_ANIMATED_BAMBOO_CRATE, player.worldObj, getEntityId(), 0, 0);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.ANIMATED_BAMBOO_CRATE.ordinal(), player.worldObj, getEntityId(), 0, 0);
 			return true;
 		}
 	}

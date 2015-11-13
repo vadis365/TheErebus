@@ -164,7 +164,7 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 			worldObj.playSoundEffect(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), "erebus:altaroffering", 0.2F, 1.0F);
 			return true;
 		} else if (blockID == ModBlocks.petrifiedCraftingTable && is == null) {
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CRAFT, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.PETRIFIED_CRAFT.ordinal(), player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
 			return true;
 		} else
 			return false;

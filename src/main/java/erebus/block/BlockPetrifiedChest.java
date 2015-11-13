@@ -255,7 +255,7 @@ public class BlockPetrifiedChest extends BlockContainer {
 			return true;
 		else {
 			if (getInventory(world, x, y, z) != null)
-				player.openGui(Erebus.instance, CommonProxy.GUI_ID_PETRIFIED_CHEST, world, x, y, z);
+				player.openGui(Erebus.instance, CommonProxy.GuiID.PETRIFIED_CHEST.ordinal(), world, x, y, z);
 			return true;
 		}
 	}

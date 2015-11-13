@@ -68,7 +68,7 @@ public class BlockHoneyComb extends BlockContainer {
 				ItemStack current = player.inventory.getCurrentItem();
 				if (current != null && current.getItem() == Item.getItemFromBlock(this) || current != null && current.getItem() == ModItems.beeTamingAmulet)
 					return false;
-				player.openGui(Erebus.instance, CommonProxy.GUI_ID_HONEY_COMB, world, x, y, z);
+				player.openGui(Erebus.instance, CommonProxy.GuiID.HONEY_COMB.ordinal(), world, x, y, z);
 			}
 		return true;
 	}

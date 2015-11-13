@@ -53,7 +53,7 @@ public class BlockComposter extends BlockContainer {
 			TileEntityComposter composter = (TileEntityComposter) world.getTileEntity(x, y, z);
 
 			if (composter != null)
-				player.openGui(Erebus.instance, CommonProxy.GUI_ID_COMPOSTER, world, x, y, z);
+				player.openGui(Erebus.instance, CommonProxy.GuiID.COMPOSTER.ordinal(), world, x, y, z);
 
 			return true;
 		}

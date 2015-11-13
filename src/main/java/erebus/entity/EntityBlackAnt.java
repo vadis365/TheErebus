@@ -158,7 +158,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	public void openGUI(EntityPlayer player) {
-		player.openGui(Erebus.instance, CommonProxy.GUI_ID_ANT_INVENTORY, player.worldObj, getEntityId(), 0, 0);
+		player.openGui(Erebus.instance, CommonProxy.GuiID.ANT_INVENTORY.ordinal(), player.worldObj, getEntityId(), 0, 0);
 	}
 
 	@Override

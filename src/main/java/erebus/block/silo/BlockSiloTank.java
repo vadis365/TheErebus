@@ -72,7 +72,7 @@ public class BlockSiloTank extends BlockContainer {
 			if (current != null && current.getItem() == Item.getItemFromBlock(ModBlocks.siloRoof))
 				return false;
 			if (isSiloComplete(world, x, y, z)) {
-				player.openGui(Erebus.instance, CommonProxy.GUI_ID_SILO_INVENTORY, world, x, y, z);
+				player.openGui(Erebus.instance, CommonProxy.GuiID.SILO_INVENTORY.ordinal(), world, x, y, z);
 				return true;
 			}
 		}

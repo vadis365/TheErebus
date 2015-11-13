@@ -49,7 +49,7 @@ public class BlockExtenderThingy extends BlockContainer {
 			return true;
 
 		if (world.getTileEntity(x, y, z) != null)
-			player.openGui(Erebus.instance, CommonProxy.GUI_ID_EXTENDER_THINGY, world, x, y, z);
+			player.openGui(Erebus.instance, CommonProxy.GuiID.EXTENDER_THINGY.ordinal(), world, x, y, z);
 
 		return true;
 	}
