@@ -23,6 +23,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityCicada extends EntityCreature {
+
 	private int sonics;
 	public ChunkCoordinates currentFlightTarget;
 	public float wingFloat;
@@ -164,19 +165,18 @@ public class EntityCicada extends EntityCreature {
 		List<?> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX + 0.5D, posY + 0.5D, posZ + 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(sonics * 0.2D, 0.5D, sonics * 0.2D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = (Entity) list.get(i);
-			if (entity != null)
-				if (entity instanceof EntityPlayer && !(entity instanceof EntityCicada)) {
-					if (sonics == 20) {
-						if (worldObj.isRemote)
-							spawnSonicParticles();
-						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 8 * 20, 0));
-						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 8 * 20, 0));
-						entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 0D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 2.0D);
-						worldObj.playSoundAtEntity(this, "erebus:locustspawn", 1.0F, 6.0F);
-						setCicadaFlying(true);
-					}
-					return canEntityBeSeen(entity) ? entity : null;
+			if (entity instanceof EntityPlayer && !((EntityPlayer) entity).capabilities.isCreativeMode) {
+				if (sonics == 20) {
+					if (worldObj.isRemote)
+						spawnSonicParticles();
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 8 * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 8 * 20, 0));
+					entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 0D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 2.0D);
+					worldObj.playSoundAtEntity(this, "erebus:locustspawn", 1.0F, 6.0F);
+					setCicadaFlying(true);
 				}
+				return canEntityBeSeen(entity) ? entity : null;
+			}
 		}
 		return null;
 	}
