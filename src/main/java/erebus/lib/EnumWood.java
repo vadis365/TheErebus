@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public enum EnumWood {
+
 	Baobab,
 	Eucalyptus,
 	Mahogany,

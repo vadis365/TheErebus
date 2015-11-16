@@ -28,7 +28,7 @@ archivesBaseName = "TheErebus"
 
 minecraft
 {
-    version = "1.7.10-10.13.4.1448-1.7.10"
+    version = "1.7.10-10.13.4.1566-1.7.10"
     runDir = "minecraft"
     replace '${version}', project.version
 }
