@@ -76,23 +76,24 @@ public class EntityWoodlouse extends EntityCreature {
 
 	@Override
 	public boolean interact(EntityPlayer player) {
-		if (worldObj.isRemote)
+		ItemStack stack = player.inventory.getCurrentItem();
+		if (stack == null) {
+			if (!worldObj.isRemote) {
+				setDead();
+				Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(ModItems.woodlouseBall, 1));
+			}
 			return true;
+		}
 
-		ItemStack is = player.inventory.getCurrentItem();
-		if (is == null) {
-			setDead();
-			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(ModItems.woodlouseBall, 1));
-			return true;
-		} else
-			return false;
+		return false;
 	}
 
 	@Override
 	public void setDead() {
 		super.setDead();
-		if (worldObj.isRemote)
-			for (int i = 0; i < 7; ++i) {
+
+		if (worldObj.isRemote && getHealth() <= 0)
+			for (int i = 0; i < 7; i++) {
 				double velX = rand.nextGaussian() * 0.02D;
 				double velY = rand.nextGaussian() * 0.02D;
 				double velZ = rand.nextGaussian() * 0.02D;
