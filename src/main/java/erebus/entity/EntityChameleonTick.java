@@ -16,6 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityChameleonTick extends EntityMob {
+
 	public Block blockID;
 	public int blockMeta;
 	public int animation;
@@ -35,11 +36,6 @@ public class EntityChameleonTick extends EntityMob {
 	public void setBlock(Block blockID, int blockMeta) {
 		this.blockID = blockID;
 		this.blockMeta = blockMeta;
-	}
-
-	@Override
-	protected void entityInit() {
-		super.entityInit();
 	}
 
 	@Override
@@ -142,8 +138,7 @@ public class EntityChameleonTick extends EntityMob {
 
 	@Override
 	protected Entity findPlayerToAttack() {
-		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 8.0D);
-		return player;
+		return worldObj.getClosestVulnerablePlayerToEntity(this, 8.0D);
 	}
 
 	@Override
@@ -151,10 +146,4 @@ public class EntityChameleonTick extends EntityMob {
 		if (distance > 0.0F && distance < 2.0F)
 			attackEntityAsMob(entity);
 	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		return super.attackEntityAsMob(entity);
-	}
-
 }
