@@ -30,7 +30,7 @@ public class BlockPreservedBlock extends BlockContainer {
 
 	public BlockPreservedBlock() {
 		super(Material.glass);
-		setHardness(1.0F);
+		setHardness(10F);
 		setStepSound(soundTypeGlass);
 		setBlockName("erebus.preservedBlock");
 	}
