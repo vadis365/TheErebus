@@ -205,8 +205,14 @@ public class ModelMosquito extends ModelBase {
 		ArmLeft2.render(f5);
 		ArmRight1.render(f5);
 		ArmRight2.render(f5);
+
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		WingLeft.render(f5);
 		WingRight.render(f5);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glPopMatrix();
 
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
