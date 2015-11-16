@@ -51,6 +51,8 @@ public class PreservableEntityRegistry implements IPreservableEntityRegistry {
 					MAP.put(cls, dimensions);
 				}
 
+		} catch (ClassNotFoundException e) {
+			// ignore silently
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Error reading file", e);
 		}
