@@ -71,11 +71,16 @@ public class ConfigHandler {
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
 		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
 
-		for (OreType oretype : OreType.values())
-			oretype.setEnabled(config.get("Ores", "Generate " + oretype.toString().toLowerCase(), oretype.isEnabled()).getBoolean(oretype.isEnabled()));
-
 		disableThaumcraft = config.get("Integration", "Disable Thaumcraft integration", false).getBoolean(false);
 		disableFMP = config.get("Integration", "Disable Forge Multipart integration", false).getBoolean(false);
+
+		if (config.hasChanged())
+			config.save();
+	}
+
+	public void initOreConfigs() {
+		for (OreType oretype : OreType.values())
+			oretype.setEnabled(config.get("Ores", "Generate " + oretype.toString().toLowerCase(), oretype.isEnabled()).getBoolean(oretype.isEnabled()));
 
 		if (config.hasChanged())
 			config.save();
@@ -98,7 +103,9 @@ public class ConfigHandler {
 
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if (Reference.MOD_ID.equals(event.modID))
+		if (Reference.MOD_ID.equals(event.modID)) {
 			syncConfigs();
+			initOreConfigs();
+		}
 	}
 }

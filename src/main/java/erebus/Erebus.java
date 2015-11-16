@@ -82,6 +82,8 @@ public class Erebus {
 		ModItems.init();
 		ModEntities.init();
 
+		ConfigHandler.INSTANCE.initOreConfigs();
+
 		AchievementPage.registerAchievementPage(new ModAchievements());
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
