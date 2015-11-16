@@ -14,7 +14,8 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class RenderWasp extends RenderLiving {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/wasp.png");
+	private static final ResourceLocation WASP = new ResourceLocation("erebus:textures/entity/wasp.png");
+	private static final ResourceLocation HORNET = new ResourceLocation("erebus:textures/entity/hornet.png");
 
 	public RenderWasp() {
 		super(new ModelWasp(), 1F);
@@ -31,6 +32,6 @@ public class RenderWasp extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return TEXTURE;
+		return ((EntityWasp) entity).getIsBoss() == 1 ? HORNET : WASP;
 	}
 }

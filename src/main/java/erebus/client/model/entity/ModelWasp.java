@@ -346,6 +346,7 @@ public class ModelWasp extends ModelBase {
 		ThxLW.render(unitPixel);
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		RWingBack.render(unitPixel);
 		RWingMid.render(unitPixel);
 		RWingFront.render(unitPixel);
