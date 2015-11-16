@@ -27,6 +27,7 @@ public class PreservableEntityRegistry implements IPreservableEntityRegistry {
 		registerHandler(new PreservedSkeletonHandler());
 		registerHandler(new PreservedItemsHandler());
 		registerHandler(new PreservedSlimeHandler());
+		registerHandler(new PreservedWaspHandler());
 	}
 
 	@SuppressWarnings("unchecked")
