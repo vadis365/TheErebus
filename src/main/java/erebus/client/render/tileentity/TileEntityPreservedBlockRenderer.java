@@ -27,10 +27,10 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 
 	public static void renderTrappedEntity(Entity entity, double x, double y, double z, int meta) {
 		EntityDimensions dimensions = ErebusAPI.preservableEntityRegistry.getEntityDimensions(entity);
-		float xOff = 0F;
-		float yOff = 0F;
-		float zOff = 0F;
-		float scale = 0F;
+		float xOff = 0;
+		float yOff = 0;
+		float zOff = 0;
+		float scale = 1;
 		if (dimensions != null) {
 			xOff = dimensions.getX();
 			yOff = dimensions.getY();

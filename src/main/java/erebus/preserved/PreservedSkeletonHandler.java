@@ -7,7 +7,7 @@ import net.minecraft.entity.monster.EntitySkeleton;
 
 public class PreservedSkeletonHandler implements IPreservableEntityHandler {
 
-	private final EntityDimensions dimensions = new EntityDimensions(0.5F, 0.0F, 0.5F, 0.35F);
+	private final EntityDimensions dimensions = new EntityDimensions(0.0F, 0.0F, 0.0F, 0.35F);
 
 	@Override
 	public boolean handlesEntity(Entity entity) {

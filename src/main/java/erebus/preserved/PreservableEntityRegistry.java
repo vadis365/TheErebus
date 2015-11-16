@@ -26,6 +26,7 @@ public class PreservableEntityRegistry implements IPreservableEntityRegistry {
 	private PreservableEntityRegistry() {
 		registerHandler(new PreservedSkeletonHandler());
 		registerHandler(new PreservedItemsHandler());
+		registerHandler(new PreservedSlimeHandler());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -109,7 +110,7 @@ public class PreservableEntityRegistry implements IPreservableEntityRegistry {
 
 	public static class EntityDimensions {
 
-		public static final EntityDimensions DEFAULT = new EntityDimensions(0.5F, 0.0F, 0.5F, 0.5F);
+		public static final EntityDimensions DEFAULT = new EntityDimensions(0.0F, 0.25F, 0.0F, 0.5F);
 
 		final float xOff, yOff, zOff, scale;
 
