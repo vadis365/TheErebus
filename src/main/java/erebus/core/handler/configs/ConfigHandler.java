@@ -25,7 +25,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, coal, iron, gold, lapis, emerald, diamond, diamond_encrusted, jade, petrified_wood, fossil, gneiss, lead, silver, copper, tin, aluminium, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows;
 
 	public boolean disableThaumcraft = false, disableFMP = false;
 
@@ -70,6 +70,16 @@ public class ConfigHandler {
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
 		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
 
+		coal = config.get("Ores", "Generate coal", true).getBoolean(true);
+		iron = config.get("Ores", "Generate iron", true).getBoolean(true);
+		lapis = config.get("Ores", "Generate lapis lazuli", true).getBoolean(true);
+		emerald = config.get("Ores", "Generate emerald", true).getBoolean(true);
+		diamond = config.get("Ores", "Generate diamond", true).getBoolean(true);
+//		diamond_encrusted = config.get("Ores", "Generate encrusted diamond(this option does nothing right now)", false).getBoolean(false);
+		jade = config.get("Ores", "Generate jade", true).getBoolean(true);
+		petrified_wood = config.get("Ores", "Generate petrified wood", true).getBoolean(true);
+		fossil = config.get("Ores", "Generate fossil", true).getBoolean(true);
+//		gneiss = config.get("Ores", "Generate gneiss(this option does nothing right now)", false).getBoolean(false);
 		lead = config.get("Ores", "Generate lead", false).getBoolean(false);
 		silver = config.get("Ores", "Generate silver", false).getBoolean(false);
 		copper = config.get("Ores", "Generate copper", false).getBoolean(false);

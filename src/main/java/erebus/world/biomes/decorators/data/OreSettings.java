@@ -146,34 +146,34 @@ public final class OreSettings {
 
 			switch (this) {
 				case COAL:
-					settings.setIterations(extraOres ? 6 : 8).setOreAmount(9, 12);
+					settings.setChance(ConfigHandler.INSTANCE.coal ? 1F : 0F).setIterations(extraOres ? 6 : 8).setOreAmount(9, 12);
 					break;
 				case IRON:
-					settings.setIterations(extraOres ? 7 : 9, extraOres ? 8 : 10).setOreAmount(6, 10);
+					settings.setChance(ConfigHandler.INSTANCE.iron ? 1F : 0F).setIterations(extraOres ? 7 : 9, extraOres ? 8 : 10).setOreAmount(6, 10);
 					break;
 				case GOLD:
-					settings.setIterations(extraOres ? 4 : 5).setOreAmount(6);
+					settings.setChance(ConfigHandler.INSTANCE.gold ? 1F : 0F).setIterations(extraOres ? 4 : 5).setOreAmount(6);
 					break;
 				case LAPIS:
-					settings.setIterations(3).setOreAmount(5).setCheckArea(2);
+					settings.setChance(ConfigHandler.INSTANCE.lapis ? 1F : 0F).setIterations(3).setOreAmount(5).setCheckArea(2);
 					break;
 				case EMERALD:
-					settings.setChance(0.33F).setIterations(0, 2).setOreAmount(3).setCheckArea(1);
+					settings.setChance(ConfigHandler.INSTANCE.emerald ? 0.33F : 0F).setIterations(0, 2).setOreAmount(3).setCheckArea(1);
 					break;
 				case DIAMOND:
-					settings.setChance(0.66F).setIterations(2, 4).setOreAmount(1).setCheckArea(1);
+					settings.setChance(ConfigHandler.INSTANCE.diamond ? 0.66F : 0F).setIterations(2, 4).setOreAmount(1).setCheckArea(1);
 					break;
 				case DIAMOND_ENCRUSTED:
-					settings.setChance(0F);
+					settings.setChance(ConfigHandler.INSTANCE.diamond_encrusted ? 0F : 0F);
 					break;
 				case JADE:
-					settings.setChance(0.5F).setIterations(1, 4).setOreAmount(4).setCheckArea(2);
+					settings.setChance(ConfigHandler.INSTANCE.jade ? 0.5F : 0F).setIterations(1, 4).setOreAmount(4).setCheckArea(2);
 					break;
 				case PETRIFIED_WOOD:
-					settings.setIterations(extraOres ? 1 : 2, extraOres ? 3 : 4).setOreAmount(7, 9).setCheckArea(2);
+					settings.setChance(ConfigHandler.INSTANCE.petrified_wood ? 1F : 0F).setIterations(extraOres ? 1 : 2, extraOres ? 3 : 4).setOreAmount(7, 9).setCheckArea(2);
 					break;
 				case FOSSIL:
-					settings.setChance(0.25F).setIterations(1, 2).setOreAmount(8, 11).setY(36, 112);
+					settings.setChance(ConfigHandler.INSTANCE.fossil ? 0.25F : 0F).setIterations(1, 2).setOreAmount(8, 11).setY(36, 112);
 					break;
 				case ALUMINIUM:
 					settings.setChance(ConfigHandler.INSTANCE.aluminium ? 1F : 0F).setIterations(2, 3).setOreAmount(3, 4).setCheckArea(2);
