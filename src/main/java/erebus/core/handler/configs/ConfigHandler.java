@@ -13,6 +13,7 @@ import erebus.Erebus;
 import erebus.ModBiomes;
 import erebus.lib.Reference;
 import erebus.preserved.PreservableEntityRegistry;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHandler {
@@ -25,7 +26,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, lead, silver, copper, tin, aluminium, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows;
 
 	public boolean disableThaumcraft = false, disableFMP = false;
 
@@ -70,11 +71,8 @@ public class ConfigHandler {
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
 		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
 
-		lead = config.get("Ores", "Generate lead", false).getBoolean(false);
-		silver = config.get("Ores", "Generate silver", false).getBoolean(false);
-		copper = config.get("Ores", "Generate copper", false).getBoolean(false);
-		tin = config.get("Ores", "Generate tin", false).getBoolean(false);
-		aluminium = config.get("Ores", "Generate aluminium", false).getBoolean(false);
+		for (OreType oretype : OreType.values())
+			oretype.setEnabled(config.get("Ores", "Generate " + oretype.toString().toLowerCase(), oretype.isEnabled()).getBoolean(oretype.isEnabled()));
 
 		disableThaumcraft = config.get("Integration", "Disable Thaumcraft integration", false).getBoolean(false);
 		disableFMP = config.get("Integration", "Disable Forge Multipart integration", false).getBoolean(false);

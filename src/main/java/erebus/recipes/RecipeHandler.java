@@ -5,12 +5,12 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.block.BlockSlabStone;
 import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
-import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.ItemDungeonIdols;
 import erebus.item.ItemDungeonIdols.IDOL;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemMaterials;
 import erebus.lib.EnumWood;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -300,15 +300,15 @@ public class RecipeHandler {
 
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), ItemMaterials.DATA.mudBrick.makeStack(), 0.2F);
 		GameRegistry.addSmelting(ItemMaterials.DATA.nectar.makeStack(), ItemMaterials.DATA.honeyDrip.makeStack(), 0.2F);
-		if (ConfigHandler.INSTANCE.lead)
+		if (OreType.LEAD.isEnabled())
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreLead), ItemMaterials.DATA.ingotLead.makeStack(), 1.0F);
-		if (ConfigHandler.INSTANCE.silver)
+		if (OreType.SILVER.isEnabled())
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreSilver), ItemMaterials.DATA.ingotSilver.makeStack(), 1.0F);
-		if (ConfigHandler.INSTANCE.copper)
+		if (OreType.COPPER.isEnabled())
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreCopper), ItemMaterials.DATA.ingotCopper.makeStack(), 1.0F);
-		if (ConfigHandler.INSTANCE.tin)
+		if (OreType.TIN.isEnabled())
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreTin), ItemMaterials.DATA.ingotTin.makeStack(), 1.0F);
-		if (ConfigHandler.INSTANCE.aluminium)
+		if (OreType.ALUMINIUM.isEnabled())
 			GameRegistry.addSmelting(new ItemStack(ModBlocks.oreAluminium), ItemMaterials.DATA.ingotAluminium.makeStack(), 1.0F);
 	}
 
@@ -380,23 +380,23 @@ public class RecipeHandler {
 		OreDictionary.registerOre("bucketHoney", new ItemStack(ModItems.bucketHoney));
 		OreDictionary.registerOre("bucketHoney", new ItemStack(ModItems.bambucketHoney));
 
-		if (ConfigHandler.INSTANCE.lead) {
+		if (OreType.LEAD.isEnabled()) {
 			OreDictionary.registerOre("ingotLead", ItemMaterials.DATA.ingotLead.makeStack());
 			OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.oreLead));
 		}
-		if (ConfigHandler.INSTANCE.silver) {
+		if (OreType.SILVER.isEnabled()) {
 			OreDictionary.registerOre("ingotSilver", ItemMaterials.DATA.ingotSilver.makeStack());
 			OreDictionary.registerOre("oreSilver", new ItemStack(ModBlocks.oreSilver));
 		}
-		if (ConfigHandler.INSTANCE.copper) {
+		if (OreType.COPPER.isEnabled()) {
 			OreDictionary.registerOre("ingotCopper", ItemMaterials.DATA.ingotCopper.makeStack());
 			OreDictionary.registerOre("oreCopper", new ItemStack(ModBlocks.oreCopper));
 		}
-		if (ConfigHandler.INSTANCE.tin) {
+		if (OreType.TIN.isEnabled()) {
 			OreDictionary.registerOre("ingotTin", ItemMaterials.DATA.ingotTin.makeStack());
 			OreDictionary.registerOre("oreTin", new ItemStack(ModBlocks.oreTin));
 		}
-		if (ConfigHandler.INSTANCE.aluminium) {
+		if (OreType.ALUMINIUM.isEnabled()) {
 			OreDictionary.registerOre("ingotAluminium", ItemMaterials.DATA.ingotAluminium.makeStack());
 			OreDictionary.registerOre("oreAluminum", new ItemStack(ModBlocks.oreAluminium));
 		}

@@ -3,7 +3,6 @@ package erebus.world.biomes.decorators.data;
 import java.util.Random;
 
 import erebus.ModBlocks;
-import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.feature.decoration.WorldGenErebusMinable;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -110,33 +109,43 @@ public final class OreSettings {
 	}
 
 	public static enum OreType {
-		COAL(ModBlocks.oreCoal),
-		IRON(ModBlocks.oreIron),
-		GOLD(ModBlocks.oreGold),
-		LAPIS(ModBlocks.oreLapis),
-		EMERALD(ModBlocks.oreEmerald),
-		DIAMOND(ModBlocks.oreDiamond),
-		DIAMOND_ENCRUSTED(ModBlocks.oreEncrustedDiamond),
-		JADE(ModBlocks.oreJade),
-		PETRIFIED_WOOD(ModBlocks.orePetrifiedWood),
-		FOSSIL(ModBlocks.oreFossil),
-		ALUMINIUM(ModBlocks.oreAluminium),
-		COPPER(ModBlocks.oreCopper),
-		LEAD(ModBlocks.oreLead),
-		SILVER(ModBlocks.oreSilver),
-		TIN(ModBlocks.oreTin),
-		GNEISS(ModBlocks.oreGneiss);
+		COAL(ModBlocks.oreCoal, true),
+		IRON(ModBlocks.oreIron, true),
+		GOLD(ModBlocks.oreGold, true),
+		LAPIS(ModBlocks.oreLapis, true),
+		EMERALD(ModBlocks.oreEmerald, true),
+		DIAMOND(ModBlocks.oreDiamond, true),
+		DIAMOND_ENCRUSTED(ModBlocks.oreEncrustedDiamond, true),
+		JADE(ModBlocks.oreJade, true),
+		PETRIFIED_WOOD(ModBlocks.orePetrifiedWood, true),
+		FOSSIL(ModBlocks.oreFossil, true),
+		ALUMINIUM(ModBlocks.oreAluminium, false),
+		COPPER(ModBlocks.oreCopper, false),
+		LEAD(ModBlocks.oreLead, false),
+		SILVER(ModBlocks.oreSilver, false),
+		TIN(ModBlocks.oreTin, false),
+		GNEISS(ModBlocks.oreGneiss, true);
 
 		final Block oreBlock;
 		final byte oreMeta;
+		boolean isEnabled;
 
-		OreType(Block oreBlock, int oreMeta) {
+		OreType(Block oreBlock, int oreMeta, boolean isEnabled) {
 			this.oreBlock = oreBlock;
 			this.oreMeta = (byte) oreMeta;
+			this.isEnabled = isEnabled;
 		}
 
-		OreType(Block oreBlock) {
-			this(oreBlock, 0);
+		OreType(Block oreBlock, boolean isEnabled) {
+			this(oreBlock, 0, isEnabled);
+		}
+
+		public boolean isEnabled() {
+			return isEnabled;
+		}
+
+		public void setEnabled(boolean flag) {
+			isEnabled = flag;
 		}
 
 		@SuppressWarnings("incomplete-switch")
@@ -176,19 +185,19 @@ public final class OreSettings {
 					settings.setChance(0.25F).setIterations(1, 2).setOreAmount(8, 11).setY(36, 112);
 					break;
 				case ALUMINIUM:
-					settings.setChance(ConfigHandler.INSTANCE.aluminium ? 1F : 0F).setIterations(2, 3).setOreAmount(3, 4).setCheckArea(2);
+					settings.setChance(1F).setIterations(2, 3).setOreAmount(3, 4).setCheckArea(2);
 					break;
 				case COPPER:
-					settings.setChance(ConfigHandler.INSTANCE.copper ? 1F : 0F).setIterations(7, 9).setOreAmount(5, 7);
+					settings.setChance(1F).setIterations(7, 9).setOreAmount(5, 7);
 					break;
 				case LEAD:
-					settings.setChance(ConfigHandler.INSTANCE.lead ? 1F : 0F).setIterations(4).setOreAmount(3).setCheckArea(2);
+					settings.setChance(1F).setIterations(4).setOreAmount(3).setCheckArea(2);
 					break;
 				case SILVER:
-					settings.setChance(ConfigHandler.INSTANCE.silver ? 1F : 0F).setIterations(5).setOreAmount(6, 8);
+					settings.setChance(1F).setIterations(5).setOreAmount(6, 8);
 					break;
 				case TIN:
-					settings.setChance(ConfigHandler.INSTANCE.tin ? 1F : 0F).setIterations(2, 4).setOreAmount(3, 4).setCheckArea(2);
+					settings.setChance(1F).setIterations(2, 4).setOreAmount(3, 4).setCheckArea(2);
 					break;
 			}
 		}
