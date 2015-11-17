@@ -75,8 +75,14 @@ public class ModelArmorGlider extends ModelBiped {
 		GL11.glPopMatrix();
 		RWingbase.render(unitPixel);
 		LWingbase.render(unitPixel);
+
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		RWing.render(unitPixel);
 		LWing.render(unitPixel);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glPopMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

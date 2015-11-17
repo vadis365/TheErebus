@@ -49,21 +49,21 @@ public class ItemArmorGlider extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase player, ItemStack stack, int slot) {
 		if (canFly()) {
-			ModelArmorPowered modelPower = new ModelArmorPowered();
-			modelPower.bipedHead.showModel = false;
-			modelPower.bipedHeadwear.showModel = false;
-			modelPower.bipedBody.showModel = false;
-			modelPower.bipedRightArm.showModel = false;
-			modelPower.bipedLeftArm.showModel = false;
-			modelPower.bipedRightLeg.showModel = false;
-			modelPower.bipedLeftLeg.showModel = false;
+			ModelArmorPowered model = new ModelArmorPowered();
+			model.bipedHead.showModel = false;
+			model.bipedHeadwear.showModel = false;
+			model.bipedBody.showModel = false;
+			model.bipedRightArm.showModel = false;
+			model.bipedLeftArm.showModel = false;
+			model.bipedRightLeg.showModel = false;
+			model.bipedLeftLeg.showModel = false;
 
 			if (stack.hasTagCompound()) {
-				modelPower.isGliding = stack.getTagCompound().getBoolean("isGliding");
-				modelPower.isPowered = stack.getTagCompound().getBoolean("isPowered");
+				model.isGliding = stack.getTagCompound().getBoolean("isGliding");
+				model.isPowered = stack.getTagCompound().getBoolean("isPowered");
 			}
 
-			return modelPower;
+			return model;
 		} else {
 			ModelArmorGlider model = new ModelArmorGlider();
 
@@ -141,12 +141,12 @@ public class ItemArmorGlider extends ItemArmor {
 	}
 
 	@Override
-	public void onCreated(ItemStack is, World world, EntityPlayer player) {
-		if (!is.hasTagCompound())
-			is.setTagCompound(new NBTTagCompound());
-		is.stackTagCompound.setBoolean("isGliding", false);
-		is.stackTagCompound.setBoolean("isPowered", false);
-		is.stackTagCompound.setInteger("fuelTicks", 0);
+	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
+		if (!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		stack.stackTagCompound.setBoolean("isGliding", false);
+		stack.stackTagCompound.setBoolean("isPowered", false);
+		stack.stackTagCompound.setInteger("fuelTicks", 0);
 
 	}
 
@@ -154,59 +154,16 @@ public class ItemArmorGlider extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	public void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
 		GL11.glPushMatrix();
+
 		EntityPlayer player = event.entityPlayer;
 		ItemStack chestPlate = player.inventory.armorInventory[2];
 		if (chestPlate != null && chestPlate.getItem() instanceof ItemArmorGlider && chestPlate.hasTagCompound())
 			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround || chestPlate.getTagCompound().getBoolean("isPowered") && !player.onGround) {
-				// Method is fixed but rotations need working out!
-				int yaw = (int) player.rotationYaw;
-
-				yaw += 22;
-				yaw %= 360;
-
-				if (yaw < 0)
-					yaw += 360;
-
-				int facing = yaw / 45; // 360degrees divided by 45 == 8 zones
-				float x = 0;
-				float y = 0;
-
-				switch (facing) {
-					case 0:
-						x = 1;
-						y = 0;
-						break;
-					case 1:
-						x = 1;
-						y = 1;
-						break;
-					case 2:
-						x = 0;
-						y = 1;
-						break;
-					case 3:
-						x = -1;
-						y = 1;
-						break;
-					case 4:
-						x = -1;
-						y = 0;
-						break;
-					case 5:
-						x = -1;
-						y = -1;
-						break;
-					case 6:
-						x = 0;
-						y = -1;
-						break;
-					case 7:
-						x = 1;
-						y = -1;
-						break;
-				}
+				float yaw = player.rotationYaw;
+				float x = (float) Math.cos(Math.PI * yaw / 180F);
+				float y = (float) Math.sin(Math.PI * yaw / 180F);
 				GL11.glRotatef(60.0F, x, 0.0F, y);
-				player.limbSwingAmount = 0.001F;
+				player.limbSwingAmount = 0.1F;
 			}
 	}
 
