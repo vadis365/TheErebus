@@ -2,11 +2,14 @@ package erebus.world.biomes;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBombardierBeetle;
+import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityChameleonTick;
@@ -20,8 +23,6 @@ import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 
 public class BiomeUndergroundJungle extends BiomeBaseErebus {
 	public BiomeUndergroundJungle(int biomeID) {
@@ -47,6 +48,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 20).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 15).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBombardierBeetle.class, 8).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityBombardierBeetleLarva.class, 20).setGroupSize(2, 4));
 
 		topBlock = Blocks.grass;
 		fillerBlock = Blocks.dirt;
