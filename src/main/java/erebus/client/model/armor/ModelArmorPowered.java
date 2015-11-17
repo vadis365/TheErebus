@@ -7,7 +7,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 
 @SideOnly(Side.CLIENT)
@@ -127,7 +126,6 @@ public class ModelArmorPowered extends ModelBiped {
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityPlayer player = (EntityPlayer) entity;
 
 		prevLimbSwing /= 100;
 		RArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * prevLimbSwing * 0.5F;
@@ -140,7 +138,7 @@ public class ModelArmorPowered extends ModelBiped {
 			LWingUpgradeMid.rotateAngleZ = 0F;
 			LWingUpgradeBottom.rotateAngleZ = 0F;
 
-			if (player.prevPosX != player.posX || player.prevPosZ != player.posZ) {
+			if (entity.prevPosX != entity.posX || entity.prevPosZ != entity.posZ) {
 				RWingUpgradeTop.rotateAngleX = 0.7F;
 				RWingUpgradeMid.rotateAngleX = 0.7F;
 				RWingUpgradeBottom.rotateAngleX = 0.7F;
@@ -157,7 +155,7 @@ public class ModelArmorPowered extends ModelBiped {
 				LWingUpgradeBottom.rotateAngleX = 0F;
 			}
 		}
-		if (isGliding || isPowered && !player.onGround) {
+		if (isGliding || isPowered && !entity.onGround) {
 			RWingUpgradeTop.rotateAngleZ = 1.570796F;
 			RWingUpgradeMid.rotateAngleZ = 1.570796F;
 			RWingUpgradeBottom.rotateAngleZ = 1.570796F;
@@ -174,7 +172,7 @@ public class ModelArmorPowered extends ModelBiped {
 				LWingUpgradeBottom.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 			}
 		}
-		if (player.isSneaking()) {
+		if (entity.isSneaking()) {
 			Body.rotateAngleX = 0.4F;
 			RArm.rotateAngleX += 0.4F;
 			LArm.rotateAngleX += 0.4F;

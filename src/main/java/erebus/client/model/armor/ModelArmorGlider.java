@@ -2,13 +2,11 @@ package erebus.client.model.armor;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 
 @SideOnly(Side.CLIENT)
@@ -98,13 +96,12 @@ public class ModelArmorGlider extends ModelBiped {
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
 		RArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * prevLimbSwing * 0.5F;
 		LArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * prevLimbSwing * 0.5F;
 		if (!isGliding) {
 			RWing.rotateAngleZ = 0F;
 			LWing.rotateAngleZ = 0F;
-			if (player.prevPosX != player.posX || player.prevPosZ != player.posZ) {
+			if (entity.prevPosX != entity.posX || entity.prevPosZ != entity.posZ) {
 				RWing.rotateAngleX = 0.7F;
 				LWing.rotateAngleX = 0.7F;
 			} else {
@@ -112,11 +109,11 @@ public class ModelArmorGlider extends ModelBiped {
 				LWing.rotateAngleX = 0.0F;
 			}
 		}
-		if (isGliding && !player.onGround) {
+		if (isGliding && !entity.onGround) {
 			RWing.rotateAngleZ = 1.570796F;
 			LWing.rotateAngleZ = -1.570796F;
 		}
-		if (player.isSneaking()) {
+		if (entity.isSneaking()) {
 			Body.rotateAngleX = 0.4F;
 			RArm.rotateAngleX += 0.4F;
 			LArm.rotateAngleX += 0.4F;
