@@ -9,7 +9,6 @@ import net.minecraft.block.BlockColored;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.RecipesArmorDyes;
 import net.minecraft.world.World;
@@ -37,10 +36,6 @@ public class RecipeGliderDye extends RecipesArmorDyes {
 		}
 
 		return stack != null && !list.isEmpty();
-	}
-
-	private boolean isDyeableMaterial(ArmorMaterial material) {
-		return material == ArmorMaterial.IRON || material == ArmorMaterial.CHAIN;
 	}
 
 	private boolean isDye(ItemStack stack) {
@@ -95,9 +90,7 @@ public class RecipeGliderDye extends RecipesArmorDyes {
 						rgb[2] = (int) (rgb[2] + f2 * 255.0F);
 						j++;
 					}
-				} else if (craftStack.getItem() instanceof ItemArmor) {
-					if (!isDyeableMaterial(((ItemArmor) craftStack.getItem()).getArmorMaterial()))
-						return null;
+				} else if (craftStack.getItem() == ModItems.armorGliderPowered) {
 
 					result = craftStack.copy();
 					if (armour.hasColor(craftStack)) {
