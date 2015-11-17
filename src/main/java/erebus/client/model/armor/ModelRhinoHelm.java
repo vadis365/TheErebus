@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 
 @SideOnly(Side.CLIENT)
 public class ModelRhinoHelm extends ModelBiped {
+
 	ModelRenderer helmFront;
 	ModelRenderer helmTop;
 	ModelRenderer helmRight;

@@ -2,14 +2,17 @@ package erebus.client.model.armor;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 
+@SideOnly(Side.CLIENT)
 public class ModelArmorPowered extends ModelBiped {
+
 	ModelRenderer Body;
 	ModelRenderer RArm;
 	ModelRenderer LArm;
@@ -124,7 +127,9 @@ public class ModelArmorPowered extends ModelBiped {
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
+		EntityPlayer player = (EntityPlayer) entity;
+
+		prevLimbSwing /= 100;
 		RArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * prevLimbSwing * 0.5F;
 		LArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * prevLimbSwing * 0.5F;
 		if (!isGliding && !isPowered) {
