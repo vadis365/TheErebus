@@ -27,12 +27,59 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.util.Constants;
 
 public class ItemArmorGlider extends ItemArmor {
 
 	public ItemArmorGlider() {
 		super(ModMaterials.armorREINEXOSPECIAL, 2, 1);
 		setCreativeTab(ModTabs.gears);
+	}
+
+	@Override
+	public boolean hasColor(ItemStack stack) {
+		return !stack.hasTagCompound() ? false : !stack.getTagCompound().hasKey("display", Constants.NBT.TAG_COMPOUND) ? false : stack.getTagCompound().getCompoundTag("display").hasKey("color", Constants.NBT.TAG_INT);
+	}
+
+	@Override
+	public int getColor(ItemStack stack) {
+		NBTTagCompound nbt = stack.getTagCompound();
+
+		if (nbt == null)
+			return 0xFFFFFF;
+		else {
+			NBTTagCompound displayNBT = nbt.getCompoundTag("display");
+			return displayNBT == null ? 0xFFFFFF : displayNBT.hasKey("color", 3) ? displayNBT.getInteger("color") : 0xFFFFFF;
+		}
+	}
+
+	@Override
+	public void removeColor(ItemStack stack) {
+		NBTTagCompound nbt = stack.getTagCompound();
+
+		if (nbt != null) {
+			NBTTagCompound displayNBT = nbt.getCompoundTag("display");
+
+			if (displayNBT.hasKey("color"))
+				displayNBT.removeTag("color");
+		}
+	}
+
+	@Override
+	public void func_82813_b(ItemStack stack, int colour) {
+		NBTTagCompound nbt = stack.getTagCompound();
+
+		if (nbt == null) {
+			nbt = new NBTTagCompound();
+			stack.setTagCompound(nbt);
+		}
+
+		NBTTagCompound displayNBT = nbt.getCompoundTag("display");
+
+		if (!nbt.hasKey("display", 10))
+			nbt.setTag("display", displayNBT);
+
+		displayNBT.setInteger("color", colour);
 	}
 
 	@Override

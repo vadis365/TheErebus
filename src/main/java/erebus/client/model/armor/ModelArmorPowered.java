@@ -4,9 +4,12 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
 @SideOnly(Side.CLIENT)
@@ -104,15 +107,31 @@ public class ModelArmorPowered extends ModelBiped {
 		GL11.glPopMatrix();
 		RWingbase.render(unitPixel);
 		LWingbase.render(unitPixel);
+
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+		if (entity instanceof EntityLivingBase) {
+			EntityLivingBase living = (EntityLivingBase) entity;
+			ItemStack chestplate = living.getEquipmentInSlot(3);
+			if (chestplate != null && chestplate.getItem() == ModItems.armorGliderPowered && ModItems.armorGliderPowered.hasColor(chestplate)) {
+
+				int colour = ModItems.armorGliderPowered.getColor(chestplate);
+				float red = (colour >> 16 & 255) / 255.0F;
+				float green = (colour >> 8 & 255) / 255.0F;
+				float blue = (colour & 255) / 255.0F;
+				GL11.glColor3f(red, green, blue);
+			}
+		}
+
 		RWingUpgradeTop.render(unitPixel);
 		RWingUpgradeMid.render(unitPixel);
 		RWingUpgradeBottom.render(unitPixel);
 		LWingUpgradeTop.render(unitPixel);
 		LWingUpgradeMid.render(unitPixel);
 		LWingUpgradeBottom.render(unitPixel);
+		GL11.glColor3f(1, 1, 1);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}

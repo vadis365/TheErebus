@@ -70,6 +70,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemSeedFood;
 import net.minecraft.item.ItemStack;
@@ -159,7 +160,7 @@ public class ModItems {
 	public static final Item sprintLeggings = new ItemLeggingsSprint(ModMaterials.armorREINEXOSPECIAL, 2).setUnlocalizedName("erebus.sprintLeggings").setTextureName("erebus:sprintLeggings");
 	public static final Item jumpBoots = new ItemBootsJump(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("erebus.jumpBoots").setTextureName("erebus:jumpBoots");
 	public static final Item armorGlider = new ItemArmorGlider().setUnlocalizedName("erebus.armorGlider").setTextureName("erebus:armorGlider");
-	public static final Item armorGliderPowered = new ItemArmorGlider().setUnlocalizedName("erebus.armorGliderPowered").setTextureName("erebus:armorGliderPowered");
+	public static final ItemArmor armorGliderPowered = (ItemArmor) new ItemArmorGlider().setUnlocalizedName("erebus.armorGliderPowered").setTextureName("erebus:armorGliderPowered");
 	public static final Item mushroomHelm = new ItemHelmMushroom(0).setUnlocalizedName("erebus.mushroomHelm").setTextureName("erebus:mushroomHelm");
 	public static final Item spiderTShirt = new ItemTShirtSpider(1).setUnlocalizedName("erebus.spiderTShirt").setTextureName("erebus:spiderTShirtItem");
 	public static final Item waterStriders = new ItemArmorWaterStriders(ModMaterials.armorREINEXOSPECIAL, 3).setUnlocalizedName("erebus.waterStriders").setTextureName("erebus:waterStriders");

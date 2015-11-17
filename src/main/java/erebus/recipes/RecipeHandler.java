@@ -31,6 +31,7 @@ public class RecipeHandler {
 		registerRecipes();
 		registerSmelting();
 
+		RecipeSorter.register("erebus.gliderdye", RecipeGliderDye.class, Category.SHAPELESS, "after:minecraft:shapeless");
 		RecipeSorter.register("erebus.paxelrecipe", RecipePaxel.class, Category.SHAPELESS, "after:minecraft:shapeless");
 		RecipeSorter.register("erebus.enchantmentsensitiverecipe", EnchantSensitiveRecipe.class, Category.SHAPED, "after:minecraft:shaped");
 		RecipeSorter.register("erebus.sprintleggingsupgrades", RecipeSprintLeggingsUpgrades.class, Category.SHAPELESS, "after:minecraft:shapeless");
@@ -126,6 +127,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(ModItems.sprintLeggings), "BBB", "BXB", "BBB", 'B', ItemMaterials.DATA.bioVelocity.makeStack(), 'X', new ItemStack(ModItems.reinExoskeletonLegs, 1));
 		addShapedRecipe(new ItemStack(ModItems.armorGlider), "GXG", 'G', ItemMaterials.DATA.gliderWing.makeStack(), 'X', new ItemStack(ModItems.reinExoskeletonBody, 1));
 		addShapedRecipe(new ItemStack(ModItems.armorGliderPowered), "W W", "ECE", " V ", 'W', ItemMaterials.DATA.enhancedGliderWing.makeStack(), 'E', ItemMaterials.DATA.elasticFibre.makeStack(), 'C', new ItemStack(ModItems.armorGlider, 1), 'V', new ItemStack(ModBlocks.velocityBlock, 1));
+		GameRegistry.addRecipe(new RecipeGliderDye());
 		addShapedRecipe(new ItemStack(ModItems.waterStriders), "WWW", "WXW", "WWW", 'W', ItemMaterials.DATA.waterRepellent.makeStack(), 'X', new ItemStack(ModItems.reinExoskeletonBoots, 1));
 		addShapedRecipe(new ItemStack(ModItems.rhinoExoskeletonHelmet), "h h", "sss", "s s", 's', ItemMaterials.DATA.plateExoRhino.makeStack(), 'h', ItemMaterials.DATA.rhinoBeetleHorn.makeStack());
 		addShapedRecipe(new ItemStack(ModItems.rhinoExoskeletonBody), "s s", "sss", "sss", 's', ItemMaterials.DATA.plateExoRhino.makeStack());
