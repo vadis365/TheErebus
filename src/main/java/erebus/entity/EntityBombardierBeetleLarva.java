@@ -27,22 +27,24 @@ public class EntityBombardierBeetleLarva extends EntityBeetleLarva {
 		super.entityInit();
 		dataWatcher.addObject(20, new Integer(0));
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (getInflateSize() <= 0)
-			setInflateSize(0);
-		if (getInflateSize() >= 100)
-			explode();
-		if (getAttackTarget() == null)
-			setInflateSize(getInflateSize() - 2);
-		if (getAttackTarget() != null) {
-			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
-			if (getInflateSize() < 100 && distance <= 4)
-				setInflateSize(getInflateSize() + 2);
-			if (getInflateSize() < 100 && distance > 4)
+		if (!worldObj.isRemote) {
+			if (getInflateSize() <= 0)
+				setInflateSize(0);
+			if (getInflateSize() >= 100)
+				explode();
+			if (getAttackTarget() == null)
 				setInflateSize(getInflateSize() - 2);
+			if (getAttackTarget() != null) {
+				float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
+				if (getInflateSize() < 100 && distance <= 4)
+					setInflateSize(getInflateSize() + 2);
+				if (getInflateSize() < 100 && distance > 4)
+					setInflateSize(getInflateSize() - 2);
+			}
 		}
 	}
 
@@ -54,7 +56,7 @@ public class EntityBombardierBeetleLarva extends EntityBeetleLarva {
 		worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
 		setDead();
 	}
-	
+
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (entity != null && getDistanceToEntity(entity) <= 1.5F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
