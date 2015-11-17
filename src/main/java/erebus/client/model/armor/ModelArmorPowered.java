@@ -104,6 +104,7 @@ public class ModelArmorPowered extends ModelBiped {
 		LWingbase.render(unitPixel);
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		RWingUpgradeTop.render(unitPixel);
 		RWingUpgradeMid.render(unitPixel);
 		RWingUpgradeBottom.render(unitPixel);
