@@ -9,6 +9,7 @@ import erebus.world.biomes.BiomeUlteriorOutback;
 import erebus.world.biomes.BiomeUndergroundJungle;
 import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.loot.WeightedList;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class ModBiomes {
 	public static WeightedList<BiomeBaseErebus> biomeList = new WeightedList<BiomeBaseErebus>();
@@ -21,13 +22,14 @@ public class ModBiomes {
 	public static BiomeBaseErebus fungalForest;
 	public static BiomeBaseErebus submergedSwamp;
 
-	public static int undergroundJungleID;
-	public static int volcanicDesertID;
-	public static int subterraneanSavannahID;
-	public static int elysianFieldsID;
-	public static int ulteriorOutbackID;
-	public static int fungalForestID;
-	public static int submergedSwampID;
+	public static int undergroundJungleID = 100;
+	public static int volcanicDesertID = 101;
+	public static int subterraneanSavannahID = 102;
+	public static int elysianFieldsID = 103;
+	public static int ulteriorOutbackID = 104;
+	public static int fungalForestID = 105;
+	public static int submergedSwampID = 106;
+	public static int fieldsSubForestID = 107;
 
 	public static BiomeBaseErebus jungleSubLake;
 	public static BiomeBaseErebus jungleSubAsperGrove;
@@ -43,12 +45,15 @@ public class ModBiomes {
 	public static int savannahSubRockyWastelandID;
 	public static int savannahSubAsperGroveID;
 	public static int savannahSubSteppeID;
-	public static int fieldsSubForestID;
 
 	public static void init() {
-		for (int id : new int[] { undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, submergedSwampID, jungleSubLakeID, jungleSubAsperGroveID, desertSubCharredForestID, savannahSubRockyWastelandID, savannahSubAsperGroveID, savannahSubSteppeID, fieldsSubForestID })
+		for (int id : new int[] { undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, submergedSwampID, fieldsSubForestID }) {
 			if (id >= 128)
-				throw new RuntimeException("Erebus biome IDs cannot be higher than 127!");
+				throw new IllegalArgumentException("Erebus biome IDs cannot be higher than 127!");
+			BiomeGenBase biome = BiomeGenBase.getBiomeGenArray()[id];
+			if (biome != null)
+				throw new IllegalArgumentException("Erebus can not use biome ID " + id + " because it's being used by " + biome + ". Please choose a different one.");
+		}
 
 		// CREATE BIOMES
 
@@ -72,5 +77,13 @@ public class ModBiomes {
 		submergedSwamp.createMutation();
 
 		fieldsSubForest.createMutation();
+	}
+
+	public static void postInit() {
+		for (int id : new int[] { undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, submergedSwampID, fieldsSubForestID }) {
+			BiomeGenBase biome = BiomeGenBase.getBiomeGenArray()[id];
+			if (!(biome instanceof BiomeBaseErebus))
+				throw new IllegalArgumentException("Erebus biome with id " + id + " was replaced by " + biome + ". This is likely an ID conflict or a bug in another mod!");
+		}
 	}
 }

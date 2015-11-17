@@ -2,8 +2,6 @@ package erebus.world.biomes;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.entity.EntityBeetle;
@@ -23,8 +21,11 @@ import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 
 public class BiomeUndergroundJungle extends BiomeBaseErebus {
+
 	public BiomeUndergroundJungle(int biomeID) {
 		super(biomeID, new BiomeDecoratorUndergroundJungle());
 

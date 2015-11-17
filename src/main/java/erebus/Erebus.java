@@ -155,6 +155,7 @@ public class Erebus {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		ModIntegrationHandler.postInit();
+		ModBiomes.postInit();
 	}
 
 	@EventHandler

@@ -116,7 +116,6 @@ public class ModelArmorPowered extends ModelBiped {
 			EntityLivingBase living = (EntityLivingBase) entity;
 			ItemStack chestplate = living.getEquipmentInSlot(3);
 			if (chestplate != null && chestplate.getItem() == ModItems.armorGliderPowered && ModItems.armorGliderPowered.hasColor(chestplate)) {
-
 				int colour = ModItems.armorGliderPowered.getColor(chestplate);
 				float red = (colour >> 16 & 255) / 255.0F;
 				float green = (colour >> 8 & 255) / 255.0F;
