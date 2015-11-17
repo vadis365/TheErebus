@@ -17,6 +17,7 @@ import erebus.network.PacketPipeline;
 import erebus.network.server.PacketGlider;
 import erebus.network.server.PacketGliderPowered;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -88,13 +89,13 @@ public class ItemArmorGlider extends ItemArmor {
 			if (!stack.hasTagCompound())
 				stack.stackTagCompound = new NBTTagCompound();
 
-			if (stack.getTagCompound().getBoolean("isGliding") && !KeyBindingHandler.glide.getIsKeyPressed()) {
+			if (stack.getTagCompound().getBoolean("isGliding") && (!KeyBindingHandler.glide.getIsKeyPressed() || entity.onGround)) {
 				stack.getTagCompound().setBoolean("isGliding", false);
 				PacketPipeline.sendToServer(new PacketGlider(false));
 			}
 
 			if (canFly())
-				if (stack.getTagCompound().getBoolean("isPowered") && !KeyBindingHandler.poweredGlide.getIsKeyPressed()) {
+				if (stack.getTagCompound().getBoolean("isPowered") && (!KeyBindingHandler.poweredGlide.getIsKeyPressed() || entity.onGround)) {
 					stack.getTagCompound().setBoolean("isPowered", false);
 					PacketPipeline.sendToServer(new PacketGliderPowered(false));
 				}
@@ -156,6 +157,15 @@ public class ItemArmorGlider extends ItemArmor {
 		GL11.glPushMatrix();
 
 		EntityPlayer player = event.entityPlayer;
+
+		double d0 = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialRenderTick;
+		double d1 = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialRenderTick;
+		double d2 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialRenderTick;
+		d0 = d0 - RenderManager.renderPosX;
+		d1 = d1 - RenderManager.renderPosY;
+		d2 = d2 - RenderManager.renderPosZ;
+		GL11.glTranslated(d0, d1, d2);
+
 		ItemStack chestPlate = player.inventory.armorInventory[2];
 		if (chestPlate != null && chestPlate.getItem() instanceof ItemArmorGlider && chestPlate.hasTagCompound())
 			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround || chestPlate.getTagCompound().getBoolean("isPowered") && !player.onGround) {
@@ -165,6 +175,8 @@ public class ItemArmorGlider extends ItemArmor {
 				GL11.glRotatef(60.0F, x, 0.0F, y);
 				player.limbSwingAmount = 0.1F;
 			}
+
+		GL11.glTranslated(-d0, -d1, -d2);
 	}
 
 	public boolean canFly() {

@@ -37,7 +37,7 @@ public class KeyBindingHandler {
 	public void onKey(KeyInputEvent e) {
 		if (glide.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
-			if (player == null)
+			if (player == null || player.onGround)
 				return;
 
 			ItemStack chestPlate = player.inventory.armorInventory[2];
@@ -52,7 +52,7 @@ public class KeyBindingHandler {
 
 		if (poweredGlide.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().thePlayer;
-			if (player == null)
+			if (player == null || player.onGround)
 				return;
 
 			ItemStack chestPlate = player.inventory.armorInventory[2];
