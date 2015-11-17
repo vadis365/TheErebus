@@ -1,11 +1,5 @@
 package erebus.entity;
 
-import erebus.ModAchievements;
-import erebus.ModItems;
-import erebus.entity.ai.EntityAIEatWoodenItem;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -29,6 +23,12 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import erebus.ModAchievements;
+import erebus.ModItems;
+import erebus.entity.ai.EntityAIEatWoodenItem;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityBeetleLarva extends EntityAnimal {
 
@@ -77,7 +77,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	protected boolean canDespawn() {
-		if (getTame() != 0)
+		if (getTame() != 0 && getTame() != 4)
 			return false;
 		else
 			return true;
@@ -188,6 +188,10 @@ public class EntityBeetleLarva extends EntityAnimal {
 			entityTitanBeetle.setPosition(posX, posY, posZ);
 			entityTitanBeetle.setTameState((byte) 1);
 			worldObj.spawnEntityInWorld(entityTitanBeetle);
+		} else if (getTame() == 4) {
+			EntityBombardierBeetle entityBombardierBeetle = new EntityBombardierBeetle(worldObj);
+			entityBombardierBeetle.setPosition(posX, posY, posZ);
+			worldObj.spawnEntityInWorld(entityBombardierBeetle);
 		}
 	}
 
@@ -225,7 +229,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack stack = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && isStick(stack)) {
+		if (!worldObj.isRemote && isStick(stack) && getTame() != 4) {
 			setLarvaSize(getLarvaSize() + 0.1F);
 			stack.stackSize--;
 			return true;

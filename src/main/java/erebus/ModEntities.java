@@ -1,5 +1,9 @@
 package erebus;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.biome.BiomeGenBase;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
@@ -15,6 +19,7 @@ import erebus.entity.EntityBlackAnt;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBloodSnail;
 import erebus.entity.EntityBombardierBeetle;
+import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
@@ -76,10 +81,6 @@ import erebus.entity.EntityZombieAnt;
 import erebus.entity.effect.EntityErebusLightningBolt;
 import erebus.item.ItemSpawnEggs;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class ModEntities {
 	public static void init() {
@@ -143,6 +144,7 @@ public class ModEntities {
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umberGolemIdol");
 		registerEntity(57, EntityAntlionBoss.class, "antlionBoss", 0x000000, 0xFFFFFF);
 		registerEntity(58, EntityHoneyPotAnt.class, "honeyPotAnt", 0xFFA400, 0x000000);
+		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardierBeetleLarva", 0xFFEEFF, 0x9E0E0E);
 
 		registerEntity(70, EntityWaspDagger.class, "waspDagger");
 		registerEntity(71, EntityWebSling.class, "webSling");
