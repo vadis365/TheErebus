@@ -2,12 +2,6 @@ package erebus.entity;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
-import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -20,7 +14,14 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemMaterials;
+import erebus.lib.EnumWood;
 
 public class EntityCicada extends EntityCreature {
 
@@ -82,10 +83,12 @@ public class EntityCicada extends EntityCreature {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.repellent.makeStack(), 0.0F);
+		if (recentlyHit) {
+			int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+			int amount;
+			for (amount = 0; amount < chance; ++amount)
+				entityDropItem(ItemMaterials.DATA.repellent.makeStack(), 0.0F);
+		}
 	}
 
 	@Override
@@ -117,6 +120,9 @@ public class EntityCicada extends EntityCreature {
 			else
 				land();
 		}
+
+		if (worldObj.difficultySetting == EnumDifficulty.PEACEFUL)
+			setDead();
 	}
 
 	public boolean isFlying() {

@@ -1,16 +1,16 @@
 package erebus.entity;
 
-import erebus.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.ModItems;
 
 public class EntityBloodSnail extends EntityMob {
 
@@ -50,8 +50,13 @@ public class EntityBloodSnail extends EntityMob {
 	}
 
 	@Override
-	protected Item getDropItem() {
-		return ModItems.lifeBlood;
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		if (recentlyHit) {
+			int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+			int amount;
+			for (amount = 0; amount < chance; ++amount)
+				entityDropItem(new ItemStack(ModItems.lifeBlood), 0.0F);
+		}
 	}
 
 	@Override

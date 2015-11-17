@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
@@ -9,6 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
 
 public class EntityLeech extends EntityMob {
 
@@ -135,9 +135,11 @@ public class EntityLeech extends EntityMob {
 	}
 
 	@Override
-	protected void dropFewItems(boolean hit, int amount) {
-		int count = 1 + getBloodConsumed();
-		dropItem(ModItems.lifeBlood, count);
+	protected void dropFewItems(boolean recentlyHit, int amount) {
+		if (recentlyHit) {
+			int count = 1 + getBloodConsumed();
+			dropItem(ModItems.lifeBlood, count);
+		}
 	}
 
 	@Override

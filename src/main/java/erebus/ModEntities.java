@@ -169,7 +169,7 @@ public class ModEntities {
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name, EntityDimensions dimensions) {
-		EntityRegistry.registerModEntity(entityClass, name, id, Erebus.instance, 256, 1, true);
+		EntityRegistry.registerModEntity(entityClass, name, id, Erebus.instance, 256, 3, true);
 		if (dimensions != null)
 			ErebusAPI.preservableEntityRegistry.registerEntity(entityClass, dimensions);
 	}
