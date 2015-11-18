@@ -129,12 +129,13 @@ public class EntityHoneyPotAnt extends EntityTameable {
 				}
 				return true;
 			}
-		} else if (item == ModItems.antTamingAmulet) {
-			player.swingItem();
-			setTamed(true);
-			playTameEffect(true);
-			return true;
-		}
+		} else if (item == ModItems.antTamingAmulet)
+			if (!isTamed()) {
+				player.swingItem();
+				setTamed(true);
+				playTameEffect(true);
+				return true;
+			}
 
 		return super.interact(player);
 	}
