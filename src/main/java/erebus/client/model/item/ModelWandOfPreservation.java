@@ -7,6 +7,7 @@ import net.minecraft.client.model.ModelRenderer;
 
 @SideOnly(Side.CLIENT)
 public class ModelWandOfPreservation extends ModelBase {
+
 	ModelRenderer topMid;
 	ModelRenderer topMain;
 	ModelRenderer topBase;

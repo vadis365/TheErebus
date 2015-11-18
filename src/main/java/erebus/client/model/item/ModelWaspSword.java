@@ -1,10 +1,14 @@
 package erebus.client.model.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
+@SideOnly(Side.CLIENT)
 public class ModelWaspSword extends ModelBase {
+
 	ModelRenderer Point;
 	ModelRenderer Blade;
 	ModelRenderer SpikeTop1;
