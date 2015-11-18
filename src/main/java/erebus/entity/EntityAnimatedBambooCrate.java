@@ -25,6 +25,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 		tasks.removeTask(aiAttackOnCollide);
 		tasks.removeTask(aiAttackNearestTarget);
 		tasks.addTask(1, new EntityAIBlockFollowOwner(this, 1.0D, 10.0F, 2.0F));
+		isImmuneToFire = true;
 	}
 
 	public EntityAnimatedBambooCrate setContents(IInventory chest) {
@@ -190,5 +191,9 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 	public void markDirty() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	protected void fall(float distance) {
 	}
 }

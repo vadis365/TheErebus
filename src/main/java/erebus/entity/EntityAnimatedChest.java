@@ -27,6 +27,7 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 		tasks.removeTask(aiAttackOnCollide);
 		tasks.removeTask(aiAttackNearestTarget);
 		tasks.addTask(1, new EntityAIBlockFollowOwner(this, 1.0D, 10.0F, 2.0F));
+		isImmuneToFire = true;
 	}
 
 	@Override
@@ -126,5 +127,9 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 			if (b0 >= 0 && b0 < inventory.length)
 				inventory[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 		}
+	}
+
+	@Override
+	protected void fall(float distance) {
 	}
 }
