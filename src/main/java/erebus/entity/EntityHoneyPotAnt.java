@@ -48,8 +48,7 @@ public class EntityHoneyPotAnt extends EntityTameable {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = getBrightness(1.0F);
-		if (light >= 0F)
+		if (getBrightness(1.0F) >= 0F)
 			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
 		return super.getCanSpawnHere();
 	}
@@ -61,10 +60,7 @@ public class EntityHoneyPotAnt extends EntityTameable {
 
 	@Override
 	protected boolean canDespawn() {
-		if (isTamed())
-			return false;
-		else
-			return true;
+		return !isTamed();
 	}
 
 	@Override
@@ -102,11 +98,9 @@ public class EntityHoneyPotAnt extends EntityTameable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		float i;
-		if (worldObj.isRemote) {
-			i = getHoneyBelly();
-			setSize(0.9F + i, 0.4F);
-		}
+
+		if (worldObj.isRemote)
+			setSize(0.9F + getHoneyBelly(), 0.4F);
 	}
 
 	@Override
@@ -158,33 +152,24 @@ public class EntityHoneyPotAnt extends EntityTameable {
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setFloat("size", getHoneyBelly());
-		if (isTamed())
-			nbt.setByte("tamed", Byte.valueOf((byte) 1));
-		else
-			nbt.setByte("tamed", Byte.valueOf((byte) 0));
+		nbt.setByte("tamed", (byte) (isTamed() ? 1 : 0));
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		setHoneyBelly(nbt.getFloat("size"));
-		if (nbt.getByte("tamed") == 1)
-			setTamed(true);
-		else
-			setTamed(false);
+		setTamed(nbt.getByte("tamed") == (byte) 1);
 	}
 
 	public void setHoneyBelly(float scaledSize) {
-		dataWatcher.updateObject(28, new Float(scaledSize));
+		dataWatcher.updateObject(28, scaledSize);
 		setSize(0.9F + scaledSize, 0.4F);
 	}
 
 	@Override
 	public void setTamed(boolean tamed) {
-		if (tamed)
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 1));
-		else
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 0));
+		dataWatcher.updateObject(16, (byte) (tamed ? 1 : 0));
 	}
 
 	public float getHoneyBelly() {
