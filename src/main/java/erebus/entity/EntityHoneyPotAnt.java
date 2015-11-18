@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -111,27 +112,36 @@ public class EntityHoneyPotAnt extends EntityTameable {
 	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack stack = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && stack.getItem() == Items.sugar && isTamed() && getHoneyBelly() < 0.8F) {
-			setHoneyBelly(getHoneyBelly() + 0.1F);
-			if (!player.capabilities.isCreativeMode)
-				stack.stackSize--;
-			return true;
-		}
+		if (stack == null)
+			return super.interact(player);
 
-		if (!worldObj.isRemote && stack != null && stack.getItem() == ModItems.nectarCollector)
-			if (getHoneyBelly() > 0 && isTamed()) {
-				entityDropItem(ItemMaterials.DATA.nectar.makeStack((int) (getHoneyBelly() * 10)), 0.0F);
-				stack.damageItem(1, player);
-				setHoneyBelly(0);
+		Item item = stack.getItem();
+
+		if (item == Items.sugar) {
+			if (isTamed() && getHoneyBelly() < 0.8F) {
+				if (!worldObj.isRemote) {
+					setHoneyBelly(getHoneyBelly() + 0.1F);
+					if (!player.capabilities.isCreativeMode)
+						stack.stackSize--;
+				}
 				return true;
 			}
-
-		if (stack != null && stack.getItem() == ModItems.antTamingAmulet) {
+		} else if (item == ModItems.nectarCollector) {
+			if (getHoneyBelly() > 0 && isTamed()) {
+				if (!worldObj.isRemote) {
+					entityDropItem(ItemMaterials.DATA.nectar.makeStack((int) (getHoneyBelly() * 10)), 0.0F);
+					stack.damageItem(1, player);
+					setHoneyBelly(0);
+				}
+				return true;
+			}
+		} else if (item == ModItems.antTamingAmulet) {
 			player.swingItem();
 			setTamed(true);
 			playTameEffect(true);
 			return true;
 		}
+
 		return super.interact(player);
 	}
 
