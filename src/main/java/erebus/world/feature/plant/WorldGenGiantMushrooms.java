@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class WorldGenGiantMushrooms extends WorldGenErebus {
 	private static final int stalkMeta = 10;
@@ -64,6 +65,8 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 			case GRANDMAS_SHOES:
 				res = genGrandmasShoes(x - 1, y, z, mushroom);
 				break;
+			case SARCASTIC_CZECH:
+				res = genSarcasticCzech(x - 1, y, z, mushroom);
 			default:
 				break;
 		}
@@ -299,6 +302,45 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 				bulbs.add(new ChunkCoordinates(x - 1 + b, y + height - 1, z - 3 + 7 * a));
 			}
 		}
+
+		return true;
+	}
+
+	/*
+	 * MUSHROOM TYPE - SARCASTIC CZECH
+	 */
+	private boolean genSarcasticCzech(int x, int y, int z, Block mushroom) {
+		int height = 2 + rand.nextInt(3);
+		setBlockPillar(x, z, y, y + height, mushroom, stalkMeta);
+		setBlockPillar(x + 1, z, y, y + height, mushroom, stalkMeta);
+		setBlockPillar(x, z + 1, y, y + height, mushroom, stalkMeta);
+		setBlockPillar(x + 1, z + 1, y, y + height, mushroom, stalkMeta);
+		y += height;
+
+		for (ForgeDirection[] dirs : new ForgeDirection[][] { new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.SOUTH }, new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.NORTH }, new ForgeDirection[] { ForgeDirection.WEST, ForgeDirection.SOUTH }, new ForgeDirection[] { ForgeDirection.WEST, ForgeDirection.NORTH }, }) {
+			int armLength = 7 + rand.nextInt(4);
+			int xx = x + dirs[0].offsetX;
+			int yy = y;
+			int zz = z + dirs[0].offsetZ;
+			for (int i = 0; i < armLength; i++) {
+				if (i % 2 == 0)
+					yy++;
+				else {
+					ForgeDirection dir = dirs[rand.nextInt(dirs.length)];
+					xx += dir.offsetX;
+					zz += dir.offsetZ;
+				}
+				setBlock(xx, yy, zz, mushroom, stalkMeta);
+			}
+
+			setBlock(xx, yy + 1, zz, mushroom, bulbFullMeta);
+			for (int i = -1; i <= 1; i++)
+				for (int j = -1; j <= 1; j++)
+					setBlock(xx + i, yy, zz + j, mushroom, bulbFullMeta);
+		}
+
+		setBlockRect(x, z, x + 1, z + 1, y + 1, mushroom, bulbFullMeta);
+		setBlockRect(x - 1, z - 1, x + 2, z + 2, y, mushroom, bulbFullMeta);
 
 		return true;
 	}

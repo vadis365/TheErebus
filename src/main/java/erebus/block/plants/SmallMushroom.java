@@ -68,7 +68,7 @@ public class SmallMushroom extends BlockMushroom {
 				WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 				genGiantMushrooms.setMushroomType(MushroomType.getFromShroom(this));
 
-				if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
+				if (!genGiantMushrooms.generate(world, rand, x + 1, y, z)) {
 					world.setBlock(x, y, z, this);
 					world.setBlock(x + 1, y, z, this);
 					world.setBlock(x + 1, y, z + 1, this);
@@ -100,7 +100,7 @@ public class SmallMushroom extends BlockMushroom {
 				WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 				genGiantMushrooms.setMushroomType(MushroomType.getFromShroom(this));
 
-				if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
+				if (!genGiantMushrooms.generate(world, rand, x + 1, y, z - 1)) {
 					world.setBlock(x, y, z, this);
 					world.setBlock(x + 1, y, z, this);
 					world.setBlock(x + 1, y, z - 1, this);
@@ -116,7 +116,7 @@ public class SmallMushroom extends BlockMushroom {
 				WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 				genGiantMushrooms.setMushroomType(MushroomType.getFromShroom(this));
 
-				if (!genGiantMushrooms.generate(world, rand, x, y, z)) {
+				if (!genGiantMushrooms.generate(world, rand, x, y, z - 1)) {
 					world.setBlock(x, y, z, this);
 					world.setBlock(x - 1, y, z, this);
 					world.setBlock(x - 1, y, z - 1, this);

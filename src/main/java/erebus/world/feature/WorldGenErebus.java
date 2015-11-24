@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -95,8 +94,7 @@ public abstract class WorldGenErebus extends WorldGenerator {
 	}
 
 	protected final boolean isAir(int x, int y, int z) {
-		Block block = world.getBlock(x, y, z);
-		return block == Blocks.air || block.isAir(world, x, y, z);
+		return world.isAirBlock(x, y, z);
 	}
 
 	protected final boolean checkAirCube(int x1, int y1, int z1, int x2, int y2, int z2) {
