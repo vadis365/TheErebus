@@ -317,7 +317,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 		setBlockPillar(x + 1, z + 1, y, y + height, mushroom, stalkMeta);
 		y += height;
 
-		for (ForgeDirection[] dirs : new ForgeDirection[][] { new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.SOUTH }, new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.NORTH }, new ForgeDirection[] { ForgeDirection.WEST, ForgeDirection.SOUTH }, new ForgeDirection[] { ForgeDirection.WEST, ForgeDirection.NORTH }, }) {
+		for (ForgeDirection[] dirs : new ForgeDirection[][] { new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.SOUTH }, new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.NORTH }, new ForgeDirection[] { ForgeDirection.WEST, ForgeDirection.SOUTH }, new ForgeDirection[] { ForgeDirection.WEST, ForgeDirection.NORTH } }) {
 			int armLength = 7 + rand.nextInt(4);
 			int xx = x + dirs[0].offsetX;
 			int yy = y;
