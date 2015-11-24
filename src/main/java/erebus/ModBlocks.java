@@ -186,11 +186,11 @@ public class ModBlocks {
 	public static final Block nettleFlowered = new SmallPlant("nettleFlowered", false);
 	public static final Block nettle = new SmallPlant("nettle", false);
 	public static final Block desertShrub = new SmallPlant("desertShrub", false);
-	public static final Block bulbCapped = new SmallMushroom("bulbCappedShroom");
-	public static final Block kaizerfinger = new SmallMushroom("kaizerfinger");
-	public static final Block bundleshroom = new SmallMushroom("bundleshroom");
-	public static final Block greenMushroom = new SmallMushroom("greenMushroom");
-	public static final Block dutchCap = new SmallMushroom("dutchCap");
+	public static final Block darkCapped = new SmallMushroom("bulbCappedShroom", false);
+	public static final Block kaizersFinger = new SmallMushroom("kaizerfinger", false);
+	public static final Block sarcasticCzech = new SmallMushroom("bundleshroom", true);
+	public static final Block grandmasShoes = new SmallMushroom("greenMushroom", true);
+	public static final Block dutchCap = new SmallMushroom("dutchCap", true);
 
 	// UNDERGROWTH
 	public static final Block thorns = new BlockThorns();
@@ -198,10 +198,10 @@ public class ModBlocks {
 	public static final Block hanger = new BlockHangerPlants();
 	public static final Block wallPlants = new BlockWallPlants();
 	public static final Block wallPlantsCultivated = new BlockWallPlantsCultivated();
-	public static final Block bigBulbCappedMushroom = new ErebusHugeMushroom(0, "bulbcapped", bulbCapped);
-	public static final Block bigGreenMushroom = new ErebusHugeMushroom(1, "green", greenMushroom);
-	public static final Block bigBundleMushroom = new ErebusHugeMushroom(2, "bundleshroom", bundleshroom);
-	public static final Block bigKaiserfingerMushroom = new ErebusHugeMushroom(3, "kaizerfinger", kaizerfinger);
+	public static final Block bigBulbCappedMushroom = new ErebusHugeMushroom(0, "bulbcapped", darkCapped);
+	public static final Block bigGreenMushroom = new ErebusHugeMushroom(1, "green", grandmasShoes);
+	public static final Block bigBundleMushroom = new ErebusHugeMushroom(2, "bundleshroom", sarcasticCzech);
+	public static final Block bigKaiserfingerMushroom = new ErebusHugeMushroom(3, "kaizerfinger", kaizersFinger);
 	public static final Block bigDutchCapMushroom = new ErebusHugeMushroom(4, "dutchcap", dutchCap);
 	public static final Block glowshroom = new BlockGlowshroom();
 	public static final Block glowshroomStalkMain = new BlockGlowshroomStalkMain();

@@ -17,16 +17,24 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 	private static final Block tempBlock = Blocks.bedrock;
 
 	public enum MushroomType {
-		BULB_CAPPED(ModBlocks.bigBulbCappedMushroom),
-		GRANDMAS_SHOES(ModBlocks.bigGreenMushroom),
-		SARCASTIC_CZECH(ModBlocks.bigBundleMushroom),
-		KAIZERS_FINGERS(ModBlocks.bigKaiserfingerMushroom),
-		DUTCH_CAP(ModBlocks.bigDutchCapMushroom);
+		BULB_CAPPED(ModBlocks.darkCapped, ModBlocks.bigBulbCappedMushroom),
+		GRANDMAS_SHOES(ModBlocks.grandmasShoes, ModBlocks.bigGreenMushroom),
+		SARCASTIC_CZECH(ModBlocks.sarcasticCzech, ModBlocks.bigBundleMushroom),
+		KAIZERS_FINGERS(ModBlocks.kaizersFinger, ModBlocks.bigKaiserfingerMushroom),
+		DUTCH_CAP(ModBlocks.dutchCap, ModBlocks.bigDutchCapMushroom);
 
-		public final Block block;
+		public final Block mushroom, log;
 
-		MushroomType(Block block) {
-			this.block = block;
+		MushroomType(Block mushroom, Block log) {
+			this.log = log;
+			this.mushroom = mushroom;
+		}
+
+		public static MushroomType getFromShroom(Block block) {
+			for (MushroomType type : values())
+				if (type.mushroom == block)
+					return type;
+			return null;
 		}
 	}
 
@@ -40,9 +48,10 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 	@Override
 	protected boolean generate(int x, int y, int z) {
 		bulbs.clear();
-		Block mushroom = mushroomType.block;
+		Block mushroom = mushroomType.log;
 		boolean res = false;
 
+		System.out.println(mushroomType);
 		switch (mushroomType) {
 			case BULB_CAPPED:
 				res = genBulbCapped(x, y, z, mushroom);

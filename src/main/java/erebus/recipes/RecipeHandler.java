@@ -144,10 +144,10 @@ public class RecipeHandler {
 		// Mushroom Helm & Mushroom Blocks
 		addShapedRecipe(new ItemStack(ModItems.mushroomHelm, 1), "mmm", "mpm", 'm', ItemMaterials.DATA.hideShroom.makeStack(), 'p', new ItemStack(Blocks.pumpkin));
 
-		addShapedRecipe(new ItemStack(ModBlocks.bigBulbCappedMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bulbCapped));
-		addShapedRecipe(new ItemStack(ModBlocks.bigGreenMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.greenMushroom));
-		addShapedRecipe(new ItemStack(ModBlocks.bigBundleMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.bundleshroom));
-		addShapedRecipe(new ItemStack(ModBlocks.bigKaiserfingerMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.kaizerfinger));
+		addShapedRecipe(new ItemStack(ModBlocks.bigBulbCappedMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.darkCapped));
+		addShapedRecipe(new ItemStack(ModBlocks.bigGreenMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.grandmasShoes));
+		addShapedRecipe(new ItemStack(ModBlocks.bigBundleMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.sarcasticCzech));
+		addShapedRecipe(new ItemStack(ModBlocks.bigKaiserfingerMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.kaizersFinger));
 		addShapedRecipe(new ItemStack(ModBlocks.bigDutchCapMushroom), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.dutchCap));
 		addShapedRecipe(new ItemStack(Blocks.red_mushroom_block), "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.red_mushroom));
 		addShapedRecipe(new ItemStack(Blocks.brown_mushroom_block), "mmm", "mmm", "mmm", 'm', new ItemStack(Blocks.brown_mushroom));
@@ -369,10 +369,10 @@ public class RecipeHandler {
 		OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.ORANGE_PETAL.ordinal()));
 		OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.WHITE_PETAL.ordinal()));
 
-		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.bulbCapped));
-		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.kaizerfinger));
-		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.bundleshroom));
-		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.greenMushroom));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.darkCapped));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.kaizersFinger));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.sarcasticCzech));
+		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.grandmasShoes));
 		OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.dutchCap));
 		OreDictionary.registerOre("foodMushroom", new ItemStack(Blocks.red_mushroom));
 		OreDictionary.registerOre("foodMushroom", new ItemStack(Blocks.brown_mushroom));
