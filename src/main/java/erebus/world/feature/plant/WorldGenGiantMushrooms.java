@@ -51,7 +51,6 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 		Block mushroom = mushroomType.log;
 		boolean res = false;
 
-		System.out.println(mushroomType);
 		switch (mushroomType) {
 			case BULB_CAPPED:
 				res = genBulbCapped(x, y, z, mushroom);
