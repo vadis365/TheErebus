@@ -100,15 +100,11 @@ public abstract class WorldGenErebus extends WorldGenerator {
 	}
 
 	protected final boolean checkAirCube(int x1, int y1, int z1, int x2, int y2, int z2) {
-		Block block;
-
 		for (int yy = y1; yy <= y2; yy++)
 			for (int xx = x1; xx <= x2; xx++)
-				for (int zz = z1; zz <= z2; zz++) {
-					block = world.getBlock(xx, yy, zz);
-					if (block != Blocks.air && !block.isAir(world, xx, yy, zz))
+				for (int zz = z1; zz <= z2; zz++)
+					if (!isAir(xx, yy, zz))
 						return false;
-				}
 
 		return true;
 	}

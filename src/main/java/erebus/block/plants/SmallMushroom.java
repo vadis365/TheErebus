@@ -19,6 +19,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class SmallMushroom extends BlockMushroom {
+
 	private final String name;
 
 	public SmallMushroom(String name) {
@@ -78,7 +79,7 @@ public class SmallMushroom extends BlockMushroom {
 	}
 
 	public void growPlants(World world, int x, int y, int z, Random rand) {
-		if (isMushroom(world, x, y, z)) {
+		if (isMushroom(world, x, y, z))
 			if (getShroomData(world.getBlock(x, y, z)) != 0 && getShroomData(world.getBlock(x, y, z)) != 3) {
 				if (isMushroom(world, x + 1, y, z) && isMushroom(world, x + 1, y, z + 1) && isMushroom(world, x, y, z + 1)) {
 					world.setBlockToAir(x, y, z);
@@ -150,7 +151,6 @@ public class SmallMushroom extends BlockMushroom {
 				if (!genGiantMushrooms.generate(world, rand, x, y, z))
 					world.setBlock(x, y, z, this);
 			}
-		}
 	}
 
 	private boolean isMushroom(World world, int x, int y, int z) {
