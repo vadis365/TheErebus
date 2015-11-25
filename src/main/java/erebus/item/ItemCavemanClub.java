@@ -28,7 +28,7 @@ public class ItemCavemanClub extends ItemSword {
 		public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 			Random rand = new Random();
 			if (!world.isRemote && player.isSneaking()) {
-				new AntHillMazeDungeon().generate(world, rand, x, y + 1, z);
+				new AntHillMazeDungeon().makeMaze(world, rand, x, y + 1, z);
 				return true;
 			}
 			return true;

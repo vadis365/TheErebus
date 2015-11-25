@@ -30,7 +30,7 @@ import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
 
 public class AntHillMazeDungeon {
-	private Block solid = Blocks.stained_glass;
+	private Block solid = Blocks.dirt;
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
 			new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2), new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1),
 			new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.scorpionPincer.ordinal()).setWeight(1),
@@ -67,23 +67,23 @@ public class AntHillMazeDungeon {
 
 	public void generate(World world, Random rand, int x, int y, int z) {
 		int sizeX = 16;
-		int sizeY = y + 16;
+		int sizeY = y + 4;
 		int sizeZ = 16;
 		int mazeWidth = sizeX / 2;
 		int mazeHeight = sizeZ / 2;
 
 		if (mazeWidth < 2 || mazeHeight < 2 || sizeY < 1)
 			return;
-
-		int[][] maze = null;
-		MazeGenerator generator = new PerfectMazeGenerator(mazeWidth, mazeHeight);
-		maze = generator.generateMaze();
-
-		for (int yy = y; yy < sizeY; yy++) {
-			switch ((yy - y) % 4) {
+		
+			System.out.println("Y height is: " + " Y: " + y);
+			int[][] maze = null;
+			MazeGenerator generator = new PerfectMazeGenerator(mazeWidth, mazeHeight);
+			maze = generator.generateMaze();
+			for (int yy = y; yy < sizeY; yy++) {
+				switch ((yy - y) % 4) {
 				case 0:
-					buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-				//	buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
+					// buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+					// buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
 					break;
 				case 1:
 					buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 0);
@@ -92,11 +92,18 @@ public class AntHillMazeDungeon {
 					createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
 					addFeature(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, rand);
 					break;
+				}
+				world.setBlock(x + 1, yy - 4, z + 1, Blocks.air); // just an air gap to see levels
+				world.setBlock(x + 31, yy - 4, z + 31, Blocks.air);
 			}
-			world.setBlock(x + 1, yy - 4, z + 1, Blocks.air); //just an air gap to see levels
-			world.setBlock(x + 31, yy - 4, z + 31, Blocks.air);
-		}
 		System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
+	}
+	
+	public void makeMaze(World world, Random rand, int x, int y, int z) {
+		for (int floors = 0; floors < 4; floors ++) {
+			y += 4;
+			generate(world, rand, x, y, z);
+		}
 	}
 
 	private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {
@@ -143,7 +150,7 @@ public class AntHillMazeDungeon {
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 1 + j * 4, y - 1, z + 2 + i * 4)) {
-					//	world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.torch, 1, 2);
+						world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.torch, 1, 2);
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 1, rand);
 						else if (rand.nextInt(6) == 0)
@@ -152,7 +159,7 @@ public class AntHillMazeDungeon {
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 4) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 3 + j * 4, y - 1, z + 2 + i * 4)) {
-					//	world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.torch, 2, 2);
+						world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.torch, 2, 2);
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 2, rand);
 						else if (rand.nextInt(6) == 0)
@@ -161,7 +168,7 @@ public class AntHillMazeDungeon {
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 2) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 2 + j * 4, y - 1, z + 3 + i * 4)) {
-					//	world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.torch, 4, 2);
+						world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.torch, 4, 2);
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 4, rand);
 						else if (rand.nextInt(6) == 0)
