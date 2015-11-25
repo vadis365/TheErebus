@@ -334,6 +334,7 @@ tile.erebus.templeBrickUnbreaking.name=Temple Brick Unbreaking
 tile.erebus.templeTeleporter.name=Temple Teleport Pad
 tile.erebus.forceField.name=Force Field
 tile.erebus.capstone.name=Pyramid Capstone
+tile.erebus.anthillBlock.name=Anthill Block
 
 tile.erebus.mushroomCap0.name=Dark Capped Mushroom
 tile.erebus.mushroomCap1.name=Grandma's Shoes Mushroom
