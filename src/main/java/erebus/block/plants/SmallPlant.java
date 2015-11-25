@@ -7,25 +7,28 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.item.ItemMaterials;
+import erebus.item.block.ItemBlockColoured;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class SmallPlant extends BlockTallGrass {
+public class SmallPlant extends BlockTallGrass implements ISubBlocksBlock {
+
 	protected final String name;
 	protected final boolean colour;
 
 	public SmallPlant(String name, boolean colour) {
-		super();
 		this.name = name;
 		setHardness(0.0F);
 		this.colour = colour;
@@ -111,5 +114,10 @@ public class SmallPlant extends BlockTallGrass {
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		if ("fireBloom".equals(name))
 			world.spawnParticle("flame", x + 0.5F, y + 1F, z + 0.5F, 0.0D, 0.0D, 0.0D);
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemBlockColoured.class;
 	}
 }
