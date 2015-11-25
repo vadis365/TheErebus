@@ -5,7 +5,7 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.item.ItemMaterials.DATA;
@@ -23,7 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockRedGem extends Block implements ISubBlocksBlock {
+public class BlockRedGem extends Block implements IHasCustomItemBlock {
 
 	public static final String[] iconPaths = new String[] { "redgem", "redlampOn", "redlampOff" };
 	@SideOnly(Side.CLIENT)

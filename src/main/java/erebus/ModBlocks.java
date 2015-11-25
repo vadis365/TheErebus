@@ -367,8 +367,8 @@ public class ModBlocks {
 		String name = block.getUnlocalizedName();
 		String[] strings = name.split("\\.");
 
-		if (block instanceof ISubBlocksBlock)
-			GameRegistry.registerBlock(block, ((ISubBlocksBlock) block).getItemBlockClass(), strings[strings.length - 1]);
+		if (block instanceof IHasCustomItemBlock)
+			GameRegistry.registerBlock(block, ((IHasCustomItemBlock) block).getItemBlockClass(), strings[strings.length - 1]);
 		else
 			GameRegistry.registerBlock(block, strings[strings.length - 1]);
 	}
@@ -381,7 +381,7 @@ public class ModBlocks {
 		Blocks.fire.setFireInfo(thorns, 15, 100);
 	}
 
-	public static interface ISubBlocksBlock {
+	public static interface IHasCustomItemBlock {
 
 		Class<? extends ItemBlock> getItemBlockClass();
 	}

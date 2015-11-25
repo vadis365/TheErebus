@@ -7,7 +7,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.item.ItemMaterials;
@@ -23,7 +23,7 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class SmallPlant extends BlockTallGrass implements ISubBlocksBlock {
+public class SmallPlant extends BlockTallGrass implements IHasCustomItemBlock {
 
 	protected final String name;
 	protected final boolean colour;

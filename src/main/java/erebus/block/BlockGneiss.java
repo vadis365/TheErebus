@@ -5,7 +5,7 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModTabs;
 import erebus.item.block.ItemBlockGeneric;
 import net.minecraft.block.Block;
@@ -19,7 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockGneiss extends Block implements ISubBlocksBlock {
+public class BlockGneiss extends Block implements IHasCustomItemBlock {
 
 	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissBricks", "gneissSmooth", "gneissTiles" };
 	@SideOnly(Side.CLIENT)

@@ -6,7 +6,7 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.item.block.ItemBlockErebusFlower;
@@ -25,7 +25,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockErebusFlower extends Block implements ISubBlocksBlock {
+public class BlockErebusFlower extends Block implements IHasCustomItemBlock {
 
 	public enum FLOWER_TYPE {
 		BLACK_PETAL,

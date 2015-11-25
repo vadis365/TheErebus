@@ -4,7 +4,7 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModTabs;
 import erebus.item.block.ItemBlockGeneric;
 import net.minecraft.block.Block;
@@ -16,7 +16,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class BlockUmberPaver extends Block implements ISubBlocksBlock {
+public class BlockUmberPaver extends Block implements IHasCustomItemBlock {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] blockIcon;

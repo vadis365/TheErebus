@@ -5,7 +5,7 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModTabs;
 import erebus.item.block.ItemBlockGeneric;
 import net.minecraft.block.BlockWall;
@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockWallErebus extends BlockWall implements ISubBlocksBlock {
+public class BlockWallErebus extends BlockWall implements IHasCustomItemBlock {
 
 	public BlockWallErebus() {
 		super(ModBlocks.umberstone);

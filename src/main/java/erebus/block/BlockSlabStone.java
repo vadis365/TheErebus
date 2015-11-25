@@ -5,7 +5,7 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModTabs;
 import erebus.item.block.ItemBlockSlabSimple;
 import erebus.lib.Reference;
@@ -21,7 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockSlabStone extends Block implements ISubBlocksBlock {
+public class BlockSlabStone extends Block implements IHasCustomItemBlock {
 
 	private final String baseName;
 	public final Block base;

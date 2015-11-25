@@ -2,7 +2,7 @@ package erebus.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackWidow;
@@ -17,7 +17,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockWitherWeb extends BlockWeb implements ISubBlocksBlock {
+public class BlockWitherWeb extends BlockWeb implements IHasCustomItemBlock {
 
 	public BlockWitherWeb() {
 		setHardness(4.0F);

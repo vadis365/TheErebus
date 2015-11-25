@@ -14,7 +14,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.item.block.ItemBlockErebusPlantSmall;
@@ -33,7 +33,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
-public class BlockWallPlantsCultivated extends Block implements IShearable, ISubBlocksBlock {
+public class BlockWallPlantsCultivated extends Block implements IShearable, IHasCustomItemBlock {
 
 	public static final String[] iconPaths = new String[] { "mossCultivated", "mouldCultivated" };
 

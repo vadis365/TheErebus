@@ -6,7 +6,7 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.item.block.ItemBlockErebusStigma;
@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockErebusStigma extends Block implements ISubBlocksBlock {
+public class BlockErebusStigma extends Block implements IHasCustomItemBlock {
 
 	public enum STIGMA_BLOCK_TYPE {
 		BLACK_STIGMA,

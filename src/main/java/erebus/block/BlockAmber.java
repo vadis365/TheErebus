@@ -5,7 +5,7 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModBlocks.IHasCustomItemBlock;
 import erebus.ModTabs;
 import erebus.item.block.ItemBlockAmber;
 import net.minecraft.block.Block;
@@ -19,7 +19,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockAmber extends Block implements ISubBlocksBlock {
+public class BlockAmber extends Block implements IHasCustomItemBlock {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon blockAmber, glassAmber, brickAmber;
