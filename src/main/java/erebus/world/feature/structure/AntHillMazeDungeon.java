@@ -30,8 +30,16 @@ import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
 
 public class AntHillMazeDungeon {
+
+	// TODO make some sort of 'unlocking' for the stairs (possibly an offering plinth that requests random items).
+	// TODO not all floors should be mazes. some more open ones with puzzles and maybe mini-boss fights.
+	// TODO make an actual anthill (small) that is the entrance to the top maze.
+	// TODO remove swamp vents and mycelium and replace with unbreakable spike traps and something else.
+	// TODO change loot chest contents to be more up to date with new mod additions.
+
 	private Block solid = ModBlocks.anthillBlock;
 	private Block stairs = ModBlocks.anthillStairs;
+
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
 			new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2), new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1),
 			new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.scorpionPincer.ordinal()).setWeight(1),
@@ -102,7 +110,7 @@ public class AntHillMazeDungeon {
 		for (int floors = 0; floors < 6; floors ++) {
 			if(floors < 4) {
 				generate(world, rand, x, yy, z);
-				//create stairs
+				// create stairs
 			if((yy - y) == 4 || (yy - y) == 12) {
 				world.setBlock(x + 1, yy + 1, z + 1, solid);
 				world.setBlock(x + 1, yy + 2, z + 1, solid);
@@ -122,7 +130,7 @@ public class AntHillMazeDungeon {
 				world.setBlock(x + 31, yy + 1, z + 29, stairs, 2, 2);
 				}
 			}
-			//create air gaps using imaginary extra 2 floors
+			// create air gaps using imaginary extra 2 floors
 			if((yy - y) == 12 || (yy - y) == 20) {
 				world.setBlock(x + 1, yy - 4, z + 1, Blocks.air);
 				world.setBlock(x + 1, yy - 4, z + 2, Blocks.air);
@@ -178,7 +186,6 @@ public class AntHillMazeDungeon {
 					} else if (rand.nextInt(6) == 0)
 						if (rand.nextBoolean())
 							world.setBlock(x + 2 + j * 4, y - 1, z + 2 + i * 4, Blocks.wool);
-			
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0)
 					if (rand.nextInt(25) == 0) {
