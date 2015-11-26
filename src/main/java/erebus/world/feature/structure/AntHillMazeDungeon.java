@@ -31,6 +31,7 @@ import erebus.world.loot.WeightedLootList;
 
 public class AntHillMazeDungeon {
 	private Block solid = ModBlocks.anthillBlock;
+	private Block stairs = ModBlocks.anthillStairs;
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.jade.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.plateExo.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
 			new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2), new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1),
 			new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.altarFragment.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.reinforcedPlateExo.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.scorpionPincer.ordinal()).setWeight(1),
@@ -103,22 +104,22 @@ public class AntHillMazeDungeon {
 				generate(world, rand, x, yy, z);
 				//create stairs
 			if((yy - y) == 4 || (yy - y) == 12) {
-				world.setBlock(x + 1, yy + 1, z + 1, Blocks.planks);
-				world.setBlock(x + 1, yy + 2, z + 1, Blocks.planks);
-				world.setBlock(x + 1, yy + 3, z + 1, Blocks.oak_stairs, 3, 2);
+				world.setBlock(x + 1, yy + 1, z + 1, solid);
+				world.setBlock(x + 1, yy + 2, z + 1, solid);
+				world.setBlock(x + 1, yy + 3, z + 1, stairs, 3, 2);
 				if (world.getBlock(x + 1, yy + 1, z + 2) == Blocks.air)
-					world.setBlock(x + 1, yy + 1, z + 2, Blocks.planks);
-				world.setBlock(x + 1, yy + 2, z + 2, Blocks.oak_stairs, 3, 2);
-				world.setBlock(x + 1, yy + 1, z + 3, Blocks.oak_stairs, 3, 2);
+					world.setBlock(x + 1, yy + 1, z + 2, solid);
+				world.setBlock(x + 1, yy + 2, z + 2, stairs, 3, 2);
+				world.setBlock(x + 1, yy + 1, z + 3, stairs, 3, 2);
 			}
 			else {
-				world.setBlock(x + 31, yy + 1, z + 31, Blocks.planks);
-				world.setBlock(x + 31, yy + 2, z + 31, Blocks.planks);
-				world.setBlock(x + 31, yy + 3, z + 31, Blocks.oak_stairs, 2, 2);
+				world.setBlock(x + 31, yy + 1, z + 31, solid);
+				world.setBlock(x + 31, yy + 2, z + 31, solid);
+				world.setBlock(x + 31, yy + 3, z + 31, stairs, 2, 2);
 				if (world.getBlock(x + 31, yy + 1, z + 30) == Blocks.air)
-					world.setBlock(x + 31, yy + 1, z + 30, Blocks.planks);
-				world.setBlock(x + 31, yy + 2, z + 30, Blocks.oak_stairs, 2, 2);
-				world.setBlock(x + 31, yy + 1, z + 29, Blocks.oak_stairs, 2, 2);
+					world.setBlock(x + 31, yy + 1, z + 30, solid);
+				world.setBlock(x + 31, yy + 2, z + 30, stairs, 2, 2);
+				world.setBlock(x + 31, yy + 1, z + 29, stairs, 2, 2);
 				}
 			}
 			//create air gaps using imaginary extra 2 floors

@@ -319,6 +319,7 @@ public class ModBlocks {
 	public static final Block petrifiedWoodStairs = new BlockStairsBase(petrifiedWoodPlanks, 0).setStepSound(Block.soundTypeWood).setBlockName("erebus.petrifiedWoodStairs");
 	public static final Block amberBrickStairs = new BlockStairsBase(amber, 2).setStepSound(Block.soundTypeStone).setBlockName("erebus.amberBrickStairs");
 	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.waspNestStairs");
+	public static final Block anthillStairs = new BlockStairsBase(anthillBlock, 0).setBlockUnbreakable().setStepSound(Block.soundTypeGrass).setBlockName("erebus.anthillStairs");
 
 	// COOKING
 	public static final Block smoothieMaker = new BlockSmoothieMaker();
