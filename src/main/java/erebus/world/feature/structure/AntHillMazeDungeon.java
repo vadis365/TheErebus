@@ -33,7 +33,6 @@ public class AntHillMazeDungeon {
 
 	// TODO make some sort of 'unlocking' for the stairs (possibly an offering plinth that requests random items).
 	// TODO not all floors should be mazes. some more open ones with puzzles and maybe mini-boss fights.
-	// TODO make an actual anthill (small) that is the entrance to the top maze.
 	// TODO remove swamp vents and mycelium and replace with unbreakable spike traps and something else.
 	// TODO change loot chest contents to be more up to date with new mod additions.
 
@@ -130,7 +129,16 @@ public class AntHillMazeDungeon {
 				world.setBlock(x + 31, yy + 1, z + 29, stairs, 2, 2);
 				}
 			}
-			// create air gaps using imaginary extra 2 floors
+
+			if(floors == 0)
+				world.setBlock(x + 1, yy + 1, z + 1, Blocks.lapis_block); // teleporter thing to boss arena.
+
+			if(floors == 4) {
+				generateMainDome(world, x + 16, yy, z + 16);
+				gererateEntrance(world, x + 2, yy, z + 2);
+			}
+
+			// create air gaps above stairs using imaginary extra 2 floors
 			if((yy - y) == 12 || (yy - y) == 20) {
 				world.setBlock(x + 1, yy - 4, z + 1, Blocks.air);
 				world.setBlock(x + 1, yy - 4, z + 2, Blocks.air);
@@ -144,6 +152,42 @@ public class AntHillMazeDungeon {
 			System.out.println("Y height is: " + " floor: " + (yy - y));
 			yy += 4;
 		}
+	}
+
+	private void gererateEntrance(World world, int x, int y, int z) {
+		for (int xx = x - 5; xx <= x + 5; xx++)
+			for (int zz = z - 5; zz <= z + 5; zz++)
+				for (int yy = y; yy < y + 5; yy++) {
+					double dSqDome = Math.pow(xx - x, 2.0D) + Math.pow(zz - z, 2.0D) + Math.pow(yy - y, 2.0D);
+					if (Math.round(Math.sqrt(dSqDome)) < 5)
+						if (dSqDome >= Math.pow(3, 2.0D))
+							world.setBlock(xx, yy, zz, solid, 0, 2);
+						else
+							world.setBlock(xx, yy, zz, Blocks.air);
+				}
+		// entrance ways in to small dome
+		world.setBlock(x, y + 1, z - 3, Blocks.air);
+		world.setBlock(x, y + 2, z - 3, Blocks.air);
+		world.setBlock(x, y + 1, z - 4, Blocks.air);
+		world.setBlock(x, y + 2, z - 4, Blocks.air);
+
+		world.setBlock(x - 3, y + 1, z, Blocks.air);
+		world.setBlock(x - 3, y + 2, z, Blocks.air);
+		world.setBlock(x - 4, y + 1, z, Blocks.air);
+		world.setBlock(x - 4, y + 2, z, Blocks.air);
+	}
+
+	private void generateMainDome(World world, int x, int y, int z) {
+		for (int xx = x - 17; xx <= x + 17; xx++)
+			for (int zz = z - 17; zz <= z + 17; zz++)
+				for (int yy = y; yy < y + 17; yy++) {
+					double dSqDome = Math.pow(xx - x, 2.0D) + Math.pow(zz - z, 2.0D) + Math.pow(yy - y, 2.0D);
+					if (Math.round(Math.sqrt(dSqDome)) < 17)
+						if (dSqDome >= Math.pow(15, 2.0D) || yy == y)
+							world.setBlock(xx, yy, zz, solid, 0, 2);
+						else
+							world.setBlock(xx, yy, zz, Blocks.air);
+				}
 	}
 
 	private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {
