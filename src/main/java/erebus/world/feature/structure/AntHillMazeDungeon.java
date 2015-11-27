@@ -143,11 +143,17 @@ public class AntHillMazeDungeon {
 				world.setBlock(x + 1, yy - 4, z + 1, Blocks.air);
 				world.setBlock(x + 1, yy - 4, z + 2, Blocks.air);
 				world.setBlock(x + 1, yy - 4, z + 3, Blocks.air);
+				world.setBlock(x + 1, yy - 5, z + 2, Blocks.air);
+				world.setBlock(x + 1, yy - 5, z + 3, Blocks.air);
+				world.setBlock(x + 2, yy - 5, z + 3, Blocks.air);
 			}
 			else if((yy - y) == 8 || (yy - y) == 16) {
 				world.setBlock(x + 31, yy - 4, z + 31, Blocks.air);
 				world.setBlock(x + 31, yy - 4, z + 30, Blocks.air);
 				world.setBlock(x + 31, yy - 4, z + 29, Blocks.air);
+				world.setBlock(x + 31, yy - 5, z + 30, Blocks.air);
+				world.setBlock(x + 31, yy - 5, z + 29, Blocks.air);
+				world.setBlock(x + 30, yy - 5, z + 29, Blocks.air);
 			}
 			System.out.println("Y height is: " + " floor: " + (yy - y));
 			yy += 4;
@@ -219,8 +225,15 @@ public class AntHillMazeDungeon {
 
 	private void addFeature(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
 		for (int i = 0; i < h; i++) {
-			for (int j = 0; j < w; j++)
-				if ((maze[j][i] & 1) == 0)
+			for (int j = 0; j < w; j++) 
+				if ((maze[j][i] & 1) == 0) {
+					if (world.getBlock(x + j * 4, y + 1, z + 1 + i * 4) != solid)
+						world.setBlock(x + j * 4, y + 1, z + 1 + i * 4, stairs, 7, 3);
+					world.setBlock(x + 1 + j * 4, y + 1, z + 1 + i * 4, stairs, 7, 3);
+					world.setBlock(x + 2 + j * 4, y + 1, z + 1 + i * 4, stairs, 7, 3);
+					world.setBlock(x + 3 + j * 4, y + 1, z + 1 + i * 4, stairs, 7, 3);
+					if (world.getBlock(x + 4 + j * 4, y + 1, z + 1 + i * 4) != solid)
+						world.setBlock(x + 4 + j * 4, y + 1, z + 1 + i * 4, stairs, 7, 3);
 					if (rand.nextInt(25) == 0) {
 						world.setBlock(x + 1 + j * 4, y, z + 1 + i * 4, Blocks.torch, 3, 2);
 						if (rand.nextInt(4) == 0)
@@ -230,8 +243,16 @@ public class AntHillMazeDungeon {
 					} else if (rand.nextInt(6) == 0)
 						if (rand.nextBoolean())
 							world.setBlock(x + 2 + j * 4, y - 1, z + 2 + i * 4, Blocks.wool);
+				}
 			for (int j = 0; j < w; j++)
-				if ((maze[j][i] & 8) == 0)
+				if ((maze[j][i] & 8) == 0) {
+					if (world.getBlock(x + 1 + j * 4, y + 1, z + i * 4) != solid)
+						world.setBlock(x + 1 + j * 4, y + 1, z + i * 4, stairs, 5, 3);
+					world.setBlock(x + 1 + j * 4, y + 1, z + 1 + i * 4, stairs, 5, 3);
+					world.setBlock(x + 1 + j * 4, y + 1, z + 2 + i * 4, stairs, 5, 3);
+					world.setBlock(x + 1 + j * 4, y + 1, z + 3 + i * 4, stairs, 5, 3);
+					if (world.getBlock(x + 1 + j * 4, y + 1, z + 4 + i * 4) != solid)
+						world.setBlock(x + 1 + j * 4, y + 1, z + 4 + i * 4, stairs, 5, 3);
 					if (rand.nextInt(25) == 0) {
 						world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.torch, 1, 2);
 						if (rand.nextInt(4) == 0)
@@ -239,8 +260,16 @@ public class AntHillMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);
 					}
+				}
 			for (int j = 0; j < w; j++)
-				if ((maze[j][i] & 4) == 0)
+				if ((maze[j][i] & 4) == 0) {
+					if (world.getBlock(x + 3 + j * 4, y + 1, z + i * 4) != solid)
+						world.setBlock(x + 3 + j * 4, y + 1, z + i * 4, stairs, 4, 3);
+					world.setBlock(x + 3 + j * 4, y + 1, z + 1 + i * 4, stairs, 4, 3);
+					world.setBlock(x + 3 + j * 4, y + 1, z + 2 + i * 4, stairs, 4, 3);
+					world.setBlock(x + 3 + j * 4, y + 1, z + 3 + i * 4, stairs, 4, 3);
+					if (world.getBlock(x + 3 + j * 4, y + 1, z + 4 + i * 4) != solid)
+					world.setBlock(x + 3 + j * 4, y + 1, z + 4 + i * 4, stairs, 4, 3);
 					if (rand.nextInt(25) == 0) {
 						world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.torch, 2, 2);
 						if (rand.nextInt(4) == 0)
@@ -248,8 +277,16 @@ public class AntHillMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 4, rand);
 					}
+				}
 			for (int j = 0; j < w; j++)
-				if ((maze[j][i] & 2) == 0)
+				if ((maze[j][i] & 2) == 0) {
+					if (world.getBlock(x + j * 4, y + 1, z + 3 + i * 4) != solid)
+						world.setBlock(x + j * 4, y + 1, z + 3 + i * 4, stairs, 6, 3);
+					world.setBlock(x + 1 + j * 4, y + 1, z + 3 + i * 4, stairs, 6, 3);
+					world.setBlock(x + 2 + j * 4, y + 1, z + 3 + i * 4, stairs, 6, 3);
+					world.setBlock(x + 3 + j * 4, y + 1, z + 3 + i * 4, stairs, 6, 3);
+					if (world.getBlock(x + 4 + j * 4, y + 1, z + 3 + i * 4) != solid)
+						world.setBlock(x + 4 + j * 4, y + 1, z + 3 + i * 4, stairs, 6, 3);
 					if (rand.nextInt(25) == 0) {
 						world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.torch, 4, 2);
 						if (rand.nextInt(4) == 0)
@@ -257,6 +294,7 @@ public class AntHillMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 2, rand);
 					}
+				}
 		}
 	}
 
