@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.block.BlockSlabPlanks;
 import erebus.item.ItemAmuletAntTaming;
 import erebus.item.ItemAmuletBeeTaming;
 import erebus.item.ItemArmorExoskeleton;
@@ -66,7 +65,6 @@ import erebus.item.bambucket.ItemBambucket;
 import erebus.item.bambucket.ItemBambucketAntiVenom;
 import erebus.item.bambucket.ItemBambucketBeetleJuice;
 import erebus.item.bambucket.ItemBambucketMilk;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -219,10 +217,7 @@ public class ModItems {
 			public int getBurnTime(ItemStack fuel) {
 				if (fuel.getItem() == materials && fuel.getItemDamage() == DATA.bamboo.ordinal())
 					return 300;
-				else if (Block.getBlockFromItem(fuel.getItem()) instanceof BlockSlabPlanks)
-					return 150;
-				else
-					return 0;
+				return 0;
 			}
 		});
 	}
