@@ -44,6 +44,7 @@ import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
 import erebus.block.BlockSimple;
 import erebus.block.BlockSlabStone;
+import erebus.block.BlockSoldierAntTrap;
 import erebus.block.BlockSpiderSpawner;
 import erebus.block.BlockStairsBase;
 import erebus.block.BlockSwampVent;
@@ -310,6 +311,7 @@ public class ModBlocks {
 	public static final Block templeTeleporter = new BlockTempleTeleporter().setStepSound(Block.soundTypeStone).setBlockTextureName("erebus:templeBrick");
 	public static final Block forceField = new BlockForceField().setBlockTextureName("erebus:forceField");
 	public static final Block anthillBlock = new BlockAnthillBlock();
+	public static final Block soldierAntTrap = new BlockSoldierAntTrap();
 
 	// STAIRS, SLABS, WALLS
 	public static final Block[] umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
