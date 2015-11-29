@@ -7,7 +7,7 @@ import net.minecraft.entity.item.EntityItem;
 
 public class PreservedItemsHandler implements IPreservableEntityHandler {
 
-	private final EntityDimensions dimensions = new EntityDimensions(0.25F, 0.25F, 0.25F, 1.5F);
+	private final EntityDimensions dimensions = new EntityDimensions(-0.25F, 0.25F, -0.25F, 1.5F);
 
 	@Override
 	public boolean handlesEntity(Entity entity) {

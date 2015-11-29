@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 
 @SideOnly(Side.CLIENT)
@@ -60,6 +61,8 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 		GL11.glScalef(scale, scale, scale);
 		Render renderer = RenderManager.instance.getEntityRenderObject(entity);
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+		if (entity instanceof EntityItem)
+			((EntityItem) entity).hoverStart = 0;
 		renderer.doRender(entity, 0, 0, 0, 0, 0);
 		GL11.glPopAttrib();
 
