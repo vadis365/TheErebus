@@ -4,12 +4,6 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCompressed;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
 import erebus.block.BlockAnthillBlock;
@@ -44,6 +38,7 @@ import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
 import erebus.block.BlockSimple;
 import erebus.block.BlockSlabStone;
+import erebus.block.BlockSlidingBlockPuzzle;
 import erebus.block.BlockSoldierAntTrap;
 import erebus.block.BlockSpiderSpawner;
 import erebus.block.BlockStairsBase;
@@ -123,6 +118,12 @@ import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCompressed;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 
 public class ModBlocks {
 
@@ -299,6 +300,7 @@ public class ModBlocks {
 	public static final Block antlionSpawner = new BlockAntlionSpawner("antlion").setBlockName("erebus.antlionSpawner").setBlockTextureName("erebus:spiderSpawner");
 	public static final Block magmaCrawlerSpawner = new BlockMagmaCrawlerSpawner("magmaCrawler").setBlockName("erebus.magmaCrawlerSpawner").setBlockTextureName("erebus:spiderSpawner");
 	public static final Block dragonflySpawner = new BlockDragonflySpawner("dragonfly").setBlockName("erebus.dragonflySpawner").setBlockTextureName("erebus:spiderSpawner");
+	public static final Block slidingBlockPuzzle = new BlockSlidingBlockPuzzle();
 
 	public static final Block capstone = new BlockCapstone();
 	public static final Block waspNestBlock = new BlockWaspNest();
@@ -318,10 +320,10 @@ public class ModBlocks {
 	public static final Block[] stoneSlabs = new Block[8];
 	public static final Block[] gneissStairs = new Block[BlockGneiss.iconPaths.length];
 	public static final Block wall = new BlockWallErebus();
-	public static final Block petrifiedWoodStairs = new BlockStairsBase(petrifiedWoodPlanks, 0).setStepSound(Block.soundTypeWood).setBlockName("erebus.petrifiedWoodStairs");
-	public static final Block amberBrickStairs = new BlockStairsBase(amber, 2).setStepSound(Block.soundTypeStone).setBlockName("erebus.amberBrickStairs");
-	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setStepSound(Block.soundTypeStone).setBlockName("erebus.waspNestStairs");
-	public static final Block anthillStairs = new BlockStairsBase(anthillBlock, 0).setBlockUnbreakable().setStepSound(Block.soundTypeGrass).setBlockName("erebus.anthillStairs");
+	public static final Block petrifiedWoodStairs = new BlockStairsBase(petrifiedWoodPlanks, 0).setBlockName("erebus.petrifiedWoodStairs");
+	public static final Block amberBrickStairs = new BlockStairsBase(amber, 2).setBlockName("erebus.amberBrickStairs");
+	public static final Block waspNestStairs = new BlockStairsBase(waspNestBlock, 2).setHardness(50.0F).setBlockName("erebus.waspNestStairs");
+	public static final Block anthillStairs = new BlockStairsBase(anthillBlock, 0).setBlockUnbreakable().setBlockName("erebus.anthillStairs");
 
 	// COOKING
 	public static final Block smoothieMaker = new BlockSmoothieMaker();
@@ -342,14 +344,14 @@ public class ModBlocks {
 
 	private static void initBlocks() {
 		for (int i = 0; i < umbercobbleStairs.length; i++)
-			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setStepSound(Block.soundTypeStone).setBlockName("erebus.umbercobbleStairs" + i);
+			umbercobbleStairs[i] = new BlockStairsBase(umberstone, i).setBlockName("erebus.umbercobbleStairs" + i);
 		for (int i = 0; i <= 4; i++)
 			stoneSlabs[i] = new BlockSlabStone(ModBlocks.umberstone, i, BlockUmberstone.iconPaths[i]);
 		for (int i = 0; i <= 2; i++)
 			stoneSlabs[5 + i] = new BlockSlabStone(ModBlocks.umberPaver, i, "umberpaver" + BlockUmberPaver.types[i]);
 		stoneSlabs[7] = new BlockSlabStone(ModBlocks.petrifiedWoodPlanks, "petrifiedWood");
 		for (int i = 0; i < gneissStairs.length; i++)
-			gneissStairs[i] = new BlockStairsBase(gneiss, i).setStepSound(Block.soundTypeStone).setBlockName("erebus.gneissStairs" + i);
+			gneissStairs[i] = new BlockStairsBase(gneiss, i).setBlockName("erebus.gneissStairs" + i);
 	}
 
 	private static void registerBlocks() {

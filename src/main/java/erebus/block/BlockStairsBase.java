@@ -10,6 +10,7 @@ public class BlockStairsBase extends BlockStairs {
 		super(block, meta);
 		setHardness(2.0F);
 		setLightOpacity(0);
+		setStepSound(block.stepSound);
 		setCreativeTab(ModTabs.blocks);
 	}
 }
