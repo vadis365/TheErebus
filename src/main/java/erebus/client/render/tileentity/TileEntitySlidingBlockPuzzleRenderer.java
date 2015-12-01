@@ -16,7 +16,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 @SideOnly(Side.CLIENT)
 public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRenderer {
 
-	@Override // FIXME inverted texture on SOUTH and EAST facings
+	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
 		TileEntitySlidingBlockPuzzle puzzleTile = (TileEntitySlidingBlockPuzzle) tile;
 		ForgeDirection facing = puzzleTile.getFacing();
@@ -67,16 +67,16 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 				tessellator.addVertexWithUV(0, yy + 0, xx + 0, uu + 0, vv + 0);
 				break;
 			case EAST:
-				tessellator.addVertexWithUV(0, yy + 0, xx + 0, uu + 0, vv + 0);
-				tessellator.addVertexWithUV(0, yy + 0, xx + width, uu + uvSize, vv + 0);
-				tessellator.addVertexWithUV(0, yy + height, xx + width, uu + uvSize, vv + uvSize);
-				tessellator.addVertexWithUV(0, yy + height, xx + 0, uu + 0, vv + uvSize);
+				tessellator.addVertexWithUV(0, yy + 0, xx + 0, uu + uvSize, vv + 0);
+				tessellator.addVertexWithUV(0, yy + 0, xx + width, uu + 0, vv + 0);
+				tessellator.addVertexWithUV(0, yy + height, xx + width, uu + 0, vv + uvSize);
+				tessellator.addVertexWithUV(0, yy + height, xx + 0, uu + uvSize, vv + uvSize);
 				break;
 			case SOUTH:
-				tessellator.addVertexWithUV(xx + 0, yy + 0, 0, uu + 0, vv + 0);
-				tessellator.addVertexWithUV(xx + width, yy + 0, 0, uu + uvSize, vv + 0);
-				tessellator.addVertexWithUV(xx + width, yy + height, 0, uu + uvSize, vv + uvSize);
-				tessellator.addVertexWithUV(xx + 0, yy + height, 0, uu + 0, vv + uvSize);
+				tessellator.addVertexWithUV(xx + 0, yy + 0, 0, uu + uvSize, vv + 0);
+				tessellator.addVertexWithUV(xx + width, yy + 0, 0, uu + 0, vv + 0);
+				tessellator.addVertexWithUV(xx + width, yy + height, 0, uu + 0, vv + uvSize);
+				tessellator.addVertexWithUV(xx + 0, yy + height, 0, uu + uvSize, vv + uvSize);
 				break;
 			case NORTH:
 				tessellator.addVertexWithUV(xx + 0, yy + height, 0, uu + 0, vv + uvSize);

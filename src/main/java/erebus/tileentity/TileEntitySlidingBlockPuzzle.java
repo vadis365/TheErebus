@@ -40,17 +40,16 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 	}
 
 	public boolean handleClick(float hitX, float hitY, float hitZ) {
-		System.out.println(worldObj.isRemote + " - " + hitX + ", " + hitY + ", " + hitZ);
-
 		if (hitY > 0.5F)
 			switch (facing) {
-				case EAST:
-					break;
 				case NORTH:
-					break;
 				case SOUTH:
-					break;
+					if (hitX > 0.5F)
+						return handleClick(pieces[0]);
+					else
+						return handleClick(pieces[1]);
 				case WEST:
+				case EAST:
 					if (hitZ > 0.5F)
 						return handleClick(pieces[1]);
 					else
@@ -60,13 +59,14 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			}
 		else
 			switch (facing) {
-				case EAST:
-					break;
 				case NORTH:
-					break;
 				case SOUTH:
-					break;
+					if (hitX > 0.5F)
+						return handleClick(pieces[2]);
+					else
+						return handleClick(pieces[3]);
 				case WEST:
+				case EAST:
 					if (hitZ > 0.5F)
 						return handleClick(pieces[3]);
 					else
@@ -160,7 +160,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		offset = BlockOffset.fromArray(nbt.getIntArray("Offset"));
 		puzzle = SlidingPuzzle.values()[nbt.getInteger("Puzzle")];
 		for (int i = 0; i < pieces.length; i++)
-			pieces[i] = SlidingPiece.fromArray(i, nbt.getIntArray("Piece" + i));
+			pieces[i] = SlidingPiece.fromArray(nbt.getIntArray("Piece" + i));
 	}
 
 	@Override
@@ -180,15 +180,16 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 
 	private static Map<ForgeDirection, List<BlockOffset>> map = new HashMap<ForgeDirection, List<BlockOffset>>();
 
-	static {
+	private static void genMap() {
+		map.clear();
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			List<BlockOffset> offsets = new ArrayList<BlockOffset>();
 			switch (dir) {
 				case EAST:
 					for (int y = 1; y >= -1; y--) {
-						offsets.add(new BlockOffset(0, y, -1));
-						offsets.add(new BlockOffset(0, y, 0));
 						offsets.add(new BlockOffset(0, y, +1));
+						offsets.add(new BlockOffset(0, y, 0));
+						offsets.add(new BlockOffset(0, y, -1));
 					}
 					break;
 				case NORTH:
@@ -200,9 +201,9 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 					break;
 				case SOUTH:
 					for (int y = 1; y >= -1; y--) {
-						offsets.add(new BlockOffset(+1, y, 0));
-						offsets.add(new BlockOffset(0, y, 0));
 						offsets.add(new BlockOffset(-1, y, 0));
+						offsets.add(new BlockOffset(0, y, 0));
+						offsets.add(new BlockOffset(+1, y, 0));
 					}
 					break;
 				case WEST:
@@ -225,6 +226,8 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 	 * Creates a puzzle with the centre block at the passed coordinates
 	 */
 	public static void createPuzzleAt(World world, int x, int y, int z, ForgeDirection facing, SlidingPuzzle puzzle) {
+		genMap();
+
 		List<TileEntitySlidingBlockPuzzle> tiles = new ArrayList<TileEntitySlidingBlockPuzzle>();
 		List<BlockOffset> offsets = map.get(facing);
 		if (offsets == null)
@@ -241,14 +244,24 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			int xx = 2 * tX;
 			int yy = 2 * tY;
 
-			tile.pieces[0] = new SlidingPiece(0, xx, yy);
-			tile.pieces[1] = new SlidingPiece(1, xx + 1, yy);
-			tile.pieces[2] = new SlidingPiece(2, xx, yy + 1);
-			if (tX == 2 && tY == 2)
-				tile.pieces[3] = new SlidingPiece(3, -1, -1);
-			else
-				tile.pieces[3] = new SlidingPiece(3, xx + 1, yy + 1);
-
+			if (facing == ForgeDirection.SOUTH || facing == ForgeDirection.EAST) {
+				tile.pieces[1] = new SlidingPiece(0, xx, yy);
+				tile.pieces[0] = new SlidingPiece(1, xx + 1, yy);
+				tile.pieces[3] = new SlidingPiece(2, xx, yy + 1);
+				if (tX == 2 && tY == 2)
+					tile.pieces[2] = new SlidingPiece(3, -1, -1);
+				else
+					tile.pieces[2] = new SlidingPiece(3, xx + 1, yy + 1);
+			} else {
+				tile.pieces[0] = new SlidingPiece(0, xx, yy);
+				tile.pieces[1] = new SlidingPiece(1, xx + 1, yy);
+				tile.pieces[2] = new SlidingPiece(2, xx, yy + 1);
+				if (tX == 2 && tY == 2)
+					tile.pieces[3] = new SlidingPiece(3, -1, -1);
+				else
+					tile.pieces[3] = new SlidingPiece(3, xx + 1, yy + 1);
+			}
+			tile.sendUpdatesToClient();
 			index++;
 		}
 	}
@@ -263,7 +276,6 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		tile.facing = facing;
 		tile.offset = offset;
 		tile.puzzle = puzzle;
-		tile.markDirty();
 
 		return tile;
 	}
@@ -296,15 +308,15 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		}
 
 		int[] toArray() {
-			return new int[] { u, v };
+			return new int[] { index, u, v };
 		}
 
 		SlidingPiece copy() {
 			return new SlidingPiece(index, u, v);
 		}
 
-		static SlidingPiece fromArray(int index, int[] array) {
-			return new SlidingPiece(index, array[0], array[1]);
+		static SlidingPiece fromArray(int[] array) {
+			return new SlidingPiece(array[0], array[1], array[2]);
 		}
 
 		static void swapPieces(SlidingPiece piece0, SlidingPiece piece1) {
