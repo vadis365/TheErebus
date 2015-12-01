@@ -49,8 +49,8 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 			int width = 8;
 			int height = 8;
 			double uvSize = 1 / 6F;
-			double uu = piece.u / 6F;
-			double vv = piece.v / 6F;
+			double uu = piece.getU() / 6F;
+			double vv = piece.getV() / 6F;
 
 			tessellator.startDrawingQuads();
 			switch (facing) {

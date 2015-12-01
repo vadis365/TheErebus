@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockSlidingBlockPuzzle extends BlockContainer {
 
@@ -34,11 +35,7 @@ public class BlockSlidingBlockPuzzle extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		TileEntitySlidingBlockPuzzle tile = Utils.getTileEntity(world, x, y, z, TileEntitySlidingBlockPuzzle.class);
-		if (tile != null) {
-			// TODO implement the game logic
-		}
-
-		return false;
+		return tile != null && tile.getFacing() == ForgeDirection.getOrientation(side) && tile.handleClick(hitX, hitY, hitZ);
 	}
 
 	@Override

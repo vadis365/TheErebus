@@ -7,6 +7,7 @@ import java.util.Map;
 
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -38,6 +39,109 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		return pieces;
 	}
 
+	public boolean handleClick(float hitX, float hitY, float hitZ) {
+		System.out.println(worldObj.isRemote + " - " + hitX + ", " + hitY + ", " + hitZ);
+
+		if (hitY > 0.5F)
+			switch (facing) {
+				case EAST:
+					break;
+				case NORTH:
+					break;
+				case SOUTH:
+					break;
+				case WEST:
+					if (hitZ > 0.5F)
+						return handleClick(pieces[1]);
+					else
+						return handleClick(pieces[0]);
+				default:
+					break;
+			}
+		else
+			switch (facing) {
+				case EAST:
+					break;
+				case NORTH:
+					break;
+				case SOUTH:
+					break;
+				case WEST:
+					if (hitZ > 0.5F)
+						return handleClick(pieces[3]);
+					else
+						return handleClick(pieces[2]);
+				default:
+					break;
+			}
+		return false;
+	}
+
+	private boolean handleClick(SlidingPiece piece) {
+		if (piece.isEmpty())
+			return false;
+
+		SlidingPiece emptyPiece = getEmptyPieceIfPresent();
+		if (emptyPiece != null) {
+			if (swapPiecesIfPossible(piece, emptyPiece)) {
+				if (!worldObj.isRemote)
+					sendUpdatesToClient();
+				return true;
+			}
+		} else {
+			List<ForgeDirection> neighbouringDirs = new ArrayList<ForgeDirection>();
+			neighbouringDirs.add(piece.index <= 1 ? ForgeDirection.UP : ForgeDirection.DOWN);
+			neighbouringDirs.add(facing.getRotation(piece.index % 2 == 0 ? ForgeDirection.UP : ForgeDirection.DOWN));
+
+			for (ForgeDirection dir : neighbouringDirs) {
+				BlockOffset neighbourOffset = offset.add(dir);
+				if (!neighbourOffset.isValid())
+					continue;
+
+				TileEntitySlidingBlockPuzzle neighbour = Utils.getTileEntity(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, TileEntitySlidingBlockPuzzle.class);
+				if (neighbour != null) {
+					emptyPiece = neighbour.getEmptyPieceIfPresent();
+					if (neighbourOffset.equals(neighbour.offset) && emptyPiece != null)
+						if (swapPiecesIfPossible(piece, emptyPiece)) {
+							if (!worldObj.isRemote) {
+								sendUpdatesToClient();
+								neighbour.sendUpdatesToClient();
+							}
+							return true;
+						}
+				}
+			}
+		}
+		return false;
+	}
+
+	private SlidingPiece getEmptyPieceIfPresent() {
+		for (SlidingPiece p : pieces)
+			if (p.isEmpty())
+				return p;
+		return null;
+	}
+
+	private boolean swapPiecesIfPossible(SlidingPiece piece, SlidingPiece emptyPiece) {
+		int x = piece.index % 2;
+		int y = piece.index / 2;
+		int eX = emptyPiece.index % 2;
+		int eY = emptyPiece.index / 2;
+		if (x == eX && y != eY || x != eX && y == eY) {
+			if (!worldObj.isRemote)
+				SlidingPiece.swapPieces(piece, emptyPiece);
+			return true;
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	private void sendUpdatesToClient() {
+		List<EntityPlayerMP> players = worldObj.playerEntities;
+		for (EntityPlayerMP player : players)
+			player.playerNetServerHandler.sendPacket(getDescriptionPacket());
+	}
+
 	@Override
 	public Packet getDescriptionPacket() {
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, writeData(new NBTTagCompound()));
@@ -60,7 +164,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		offset = BlockOffset.fromArray(nbt.getIntArray("Offset"));
 		puzzle = SlidingPuzzle.values()[nbt.getInteger("Puzzle")];
 		for (int i = 0; i < pieces.length; i++)
-			pieces[i] = SlidingPiece.fromArray(nbt.getIntArray("Piece" + i));
+			pieces[i] = SlidingPiece.fromArray(i, nbt.getIntArray("Piece" + i));
 	}
 
 	@Override
@@ -141,13 +245,13 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			int xx = 2 * tX;
 			int yy = 2 * tY;
 
-			tile.pieces[0] = new SlidingPiece(xx, yy);
-			tile.pieces[1] = new SlidingPiece(xx + 1, yy);
-			tile.pieces[2] = new SlidingPiece(xx, yy + 1);
+			tile.pieces[0] = new SlidingPiece(0, xx, yy);
+			tile.pieces[1] = new SlidingPiece(1, xx + 1, yy);
+			tile.pieces[2] = new SlidingPiece(2, xx, yy + 1);
 			if (tX == 2 && tY == 2)
-				tile.pieces[3] = new SlidingPiece(xx + 1, yy + 1, -1, -1);
+				tile.pieces[3] = new SlidingPiece(3, xx + 1, yy + 1, -1, -1);
 			else
-				tile.pieces[3] = new SlidingPiece(xx + 1, yy + 1);
+				tile.pieces[3] = new SlidingPiece(3, xx + 1, yy + 1);
 
 			index++;
 		}
@@ -170,26 +274,27 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 
 	public static class SlidingPiece {
 
-		int x, y;
-		public final int u, v;
+		final int index, x, y;
+		int u, v;
 
-		SlidingPiece(int x, int y, int u, int v) {
+		SlidingPiece(int index, int x, int y, int u, int v) {
+			this.index = index;
 			this.x = x;
 			this.y = y;
 			this.u = u;
 			this.v = v;
 		}
 
-		SlidingPiece(int x, int y) {
-			this(x, y, x, y);
+		SlidingPiece(int index, int x, int y) {
+			this(index, x, y, x, y);
 		}
 
-		public int getX() {
-			return x;
+		public int getU() {
+			return u;
 		}
 
-		public int getY() {
-			return y;
+		public int getV() {
+			return v;
 		}
 
 		public boolean isEmpty() {
@@ -200,12 +305,39 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			return new int[] { x, y, u, v };
 		}
 
-		static SlidingPiece fromArray(int[] array) {
-			return new SlidingPiece(array[0], array[1], array[2], array[3]);
+		SlidingPiece copy() {
+			return new SlidingPiece(index, x, y, u, v);
+		}
+
+		static SlidingPiece fromArray(int index, int[] array) {
+			return new SlidingPiece(index, array[0], array[1], array[2], array[3]);
+		}
+
+		static void swapPieces(SlidingPiece piece0, SlidingPiece piece1) {
+			SlidingPiece temp = piece0.copy();
+			piece0.u = piece1.u;
+			piece0.v = piece1.v;
+			piece1.u = temp.u;
+			piece1.v = temp.v;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof SlidingPiece) {
+				SlidingPiece piece = (SlidingPiece) obj;
+				return piece.x == x && piece.y == y && piece.u == u && piece.v == v;
+			}
+			return false;
+		}
+
+		@Override
+		public String toString() {
+			return "SlidingPiece: " + x + ", " + y + " - " + u + ", " + v;
 		}
 	}
 
 	public static class BlockOffset {
+
 		public final int x, y, z;
 
 		BlockOffset(int x, int y, int z) {
@@ -218,8 +350,30 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			return new int[] { x, y, z };
 		}
 
+		BlockOffset add(ForgeDirection dir) {
+			return new BlockOffset(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+		}
+
+		boolean isValid() {
+			return x >= -1 && x <= 1 && y >= -1 && y <= 1 && z >= -1 && z <= 1;
+		}
+
 		static BlockOffset fromArray(int[] array) {
 			return new BlockOffset(array[0], array[1], array[2]);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof BlockOffset) {
+				BlockOffset off = (BlockOffset) obj;
+				return off.x == x && off.y == y && off.z == z;
+			}
+			return false;
+		}
+
+		@Override
+		public String toString() {
+			return "BlockOffset: " + x + ", " + y + ", " + z;
 		}
 	}
 
