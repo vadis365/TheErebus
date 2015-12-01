@@ -123,11 +123,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 	}
 
 	private boolean swapPiecesIfPossible(SlidingPiece piece, SlidingPiece emptyPiece) {
-		int x = piece.index % 2;
-		int y = piece.index / 2;
-		int eX = emptyPiece.index % 2;
-		int eY = emptyPiece.index / 2;
-		if (x == eX && y != eY || x != eX && y == eY) {
+		if (piece.x == emptyPiece.x && piece.y != emptyPiece.y || piece.x != emptyPiece.x && piece.y == emptyPiece.y) {
 			if (!worldObj.isRemote)
 				SlidingPiece.swapPieces(piece, emptyPiece);
 			return true;
@@ -249,7 +245,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			tile.pieces[1] = new SlidingPiece(1, xx + 1, yy);
 			tile.pieces[2] = new SlidingPiece(2, xx, yy + 1);
 			if (tX == 2 && tY == 2)
-				tile.pieces[3] = new SlidingPiece(3, xx + 1, yy + 1, -1, -1);
+				tile.pieces[3] = new SlidingPiece(3, -1, -1);
 			else
 				tile.pieces[3] = new SlidingPiece(3, xx + 1, yy + 1);
 
@@ -274,19 +270,17 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 
 	public static class SlidingPiece {
 
-		final int index, x, y;
+		final int index;
+		final int x, y;
 		int u, v;
 
-		SlidingPiece(int index, int x, int y, int u, int v) {
+		SlidingPiece(int index, int u, int v) {
 			this.index = index;
-			this.x = x;
-			this.y = y;
 			this.u = u;
 			this.v = v;
-		}
 
-		SlidingPiece(int index, int x, int y) {
-			this(index, x, y, x, y);
+			x = index % 2;
+			y = index / 2;
 		}
 
 		public int getU() {
@@ -302,15 +296,15 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		}
 
 		int[] toArray() {
-			return new int[] { x, y, u, v };
+			return new int[] { u, v };
 		}
 
 		SlidingPiece copy() {
-			return new SlidingPiece(index, x, y, u, v);
+			return new SlidingPiece(index, u, v);
 		}
 
 		static SlidingPiece fromArray(int index, int[] array) {
-			return new SlidingPiece(index, array[0], array[1], array[2], array[3]);
+			return new SlidingPiece(index, array[0], array[1]);
 		}
 
 		static void swapPieces(SlidingPiece piece0, SlidingPiece piece1) {
@@ -325,14 +319,14 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		public boolean equals(Object obj) {
 			if (obj instanceof SlidingPiece) {
 				SlidingPiece piece = (SlidingPiece) obj;
-				return piece.x == x && piece.y == y && piece.u == u && piece.v == v;
+				return piece.index == index && piece.u == u && piece.v == v;
 			}
 			return false;
 		}
 
 		@Override
 		public String toString() {
-			return "SlidingPiece: " + x + ", " + y + " - " + u + ", " + v;
+			return "SlidingPiece: " + u + ", " + v;
 		}
 	}
 
