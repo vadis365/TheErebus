@@ -29,14 +29,10 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
-
 		if (facing == ForgeDirection.WEST || facing == ForgeDirection.SOUTH)
 			GL11.glTranslated(facing.offsetX, 0, facing.offsetZ);
-
 		GL11.glScalef(-0.0625F, -0.0625F, 0.0625F);
 		GL11.glTranslated(-16, -16, 0);
-
-		Tessellator tessellator = Tessellator.instance;
 
 		for (int i = 0; i < pieces.length; i++) {
 			SlidingPiece piece = pieces[i];
@@ -51,39 +47,46 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 			double uvSize = 1 / 6F;
 			double uu = piece.getU() / 6F;
 			double vv = piece.getV() / 6F;
-
-			tessellator.startDrawingQuads();
-			switch (facing) {
-				case WEST:
-					tessellator.addVertexWithUV(0, yy + height, xx + 0, uu + 0, vv + uvSize);
-					tessellator.addVertexWithUV(0, yy + height, xx + width, uu + uvSize, vv + uvSize);
-					tessellator.addVertexWithUV(0, yy + 0, xx + width, uu + uvSize, vv + 0);
-					tessellator.addVertexWithUV(0, yy + 0, xx + 0, uu + 0, vv + 0);
-					break;
-				case EAST:
-					tessellator.addVertexWithUV(0, yy + 0, xx + 0, uu + 0, vv + 0);
-					tessellator.addVertexWithUV(0, yy + 0, xx + width, uu + uvSize, vv + 0);
-					tessellator.addVertexWithUV(0, yy + height, xx + width, uu + uvSize, vv + uvSize);
-					tessellator.addVertexWithUV(0, yy + height, xx + 0, uu + 0, vv + uvSize);
-					break;
-				case SOUTH:
-					tessellator.addVertexWithUV(xx + 0, yy + 0, 0, uu + 0, vv + 0);
-					tessellator.addVertexWithUV(xx + width, yy + 0, 0, uu + uvSize, vv + 0);
-					tessellator.addVertexWithUV(xx + width, yy + height, 0, uu + uvSize, vv + uvSize);
-					tessellator.addVertexWithUV(xx + 0, yy + height, 0, uu + 0, vv + uvSize);
-					break;
-				case NORTH:
-					tessellator.addVertexWithUV(xx + 0, yy + height, 0, uu + 0, vv + uvSize);
-					tessellator.addVertexWithUV(xx + width, yy + height, 0, uu + uvSize, vv + uvSize);
-					tessellator.addVertexWithUV(xx + width, yy + 0, 0, uu + uvSize, vv + 0);
-					tessellator.addVertexWithUV(xx + 0, yy + 0, 0, uu + 0, vv + 0);
-					break;
-				default:
-					break;
-			}
-
-			tessellator.draw();
+			drawFace(facing, xx, yy, width, height, uu, vv, uvSize);
 		}
+
+		bindTexture(new ResourceLocation("textures/blocks/planks_spruce.png"));
+		drawFace(facing.getOpposite(), 0, 0, 16, 16, 0, 0, 1);
 		GL11.glPopMatrix();
+	}
+
+	private void drawFace(ForgeDirection facing, float xx, float yy, float width, float height, double uu, double vv, double uvSize) {
+		Tessellator tessellator = Tessellator.instance;
+
+		tessellator.startDrawingQuads();
+		switch (facing) {
+			case WEST:
+				tessellator.addVertexWithUV(0, yy + height, xx + 0, uu + 0, vv + uvSize);
+				tessellator.addVertexWithUV(0, yy + height, xx + width, uu + uvSize, vv + uvSize);
+				tessellator.addVertexWithUV(0, yy + 0, xx + width, uu + uvSize, vv + 0);
+				tessellator.addVertexWithUV(0, yy + 0, xx + 0, uu + 0, vv + 0);
+				break;
+			case EAST:
+				tessellator.addVertexWithUV(0, yy + 0, xx + 0, uu + 0, vv + 0);
+				tessellator.addVertexWithUV(0, yy + 0, xx + width, uu + uvSize, vv + 0);
+				tessellator.addVertexWithUV(0, yy + height, xx + width, uu + uvSize, vv + uvSize);
+				tessellator.addVertexWithUV(0, yy + height, xx + 0, uu + 0, vv + uvSize);
+				break;
+			case SOUTH:
+				tessellator.addVertexWithUV(xx + 0, yy + 0, 0, uu + 0, vv + 0);
+				tessellator.addVertexWithUV(xx + width, yy + 0, 0, uu + uvSize, vv + 0);
+				tessellator.addVertexWithUV(xx + width, yy + height, 0, uu + uvSize, vv + uvSize);
+				tessellator.addVertexWithUV(xx + 0, yy + height, 0, uu + 0, vv + uvSize);
+				break;
+			case NORTH:
+				tessellator.addVertexWithUV(xx + 0, yy + height, 0, uu + 0, vv + uvSize);
+				tessellator.addVertexWithUV(xx + width, yy + height, 0, uu + uvSize, vv + uvSize);
+				tessellator.addVertexWithUV(xx + width, yy + 0, 0, uu + uvSize, vv + 0);
+				tessellator.addVertexWithUV(xx + 0, yy + 0, 0, uu + 0, vv + 0);
+				break;
+			default:
+				break;
+		}
+		tessellator.draw();
 	}
 }
