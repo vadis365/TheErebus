@@ -4,6 +4,12 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCompressed;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
 import erebus.block.BlockAnthillBlock;
@@ -34,6 +40,7 @@ import erebus.block.BlockPetrifiedCraftingTable;
 import erebus.block.BlockPlanksErebus;
 import erebus.block.BlockPlantedGiantFlower;
 import erebus.block.BlockPreservedBlock;
+import erebus.block.BlockPuffShroom;
 import erebus.block.BlockQuickSand;
 import erebus.block.BlockRedGem;
 import erebus.block.BlockSimple;
@@ -118,12 +125,6 @@ import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCompressed;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 
 public class ModBlocks {
 
@@ -314,6 +315,7 @@ public class ModBlocks {
 	public static final Block forceField = new BlockForceField().setBlockTextureName("erebus:forceField");
 	public static final Block anthillBlock = new BlockAnthillBlock();
 	public static final Block soldierAntTrap = new BlockSoldierAntTrap();
+	public static final Block puffShroom = new BlockPuffShroom();
 
 	// STAIRS, SLABS, WALLS
 	public static final Block[] umbercobbleStairs = new Block[BlockUmberstone.iconPaths.length];
