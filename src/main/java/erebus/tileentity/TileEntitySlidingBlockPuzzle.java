@@ -180,8 +180,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 
 	private static Map<ForgeDirection, List<BlockOffset>> map = new HashMap<ForgeDirection, List<BlockOffset>>();
 
-	private static void genMap() {
-		map.clear();
+	static {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			List<BlockOffset> offsets = new ArrayList<BlockOffset>();
 			switch (dir) {
@@ -226,8 +225,6 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 	 * Creates a puzzle with the centre block at the passed coordinates
 	 */
 	public static void createPuzzleAt(World world, int x, int y, int z, ForgeDirection facing, SlidingPuzzle puzzle) {
-		genMap();
-
 		List<TileEntitySlidingBlockPuzzle> tiles = new ArrayList<TileEntitySlidingBlockPuzzle>();
 		List<BlockOffset> offsets = map.get(facing);
 		if (offsets == null)
