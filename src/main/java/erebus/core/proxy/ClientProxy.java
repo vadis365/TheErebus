@@ -109,6 +109,7 @@ import erebus.client.render.entity.RenderSnapper;
 import erebus.client.render.entity.RenderSolifuge;
 import erebus.client.render.entity.RenderSolifugeSmall;
 import erebus.client.render.entity.RenderSporeBall;
+import erebus.client.render.entity.RenderSporeJet;
 import erebus.client.render.entity.RenderTarantula;
 import erebus.client.render.entity.RenderTarantulaBaby;
 import erebus.client.render.entity.RenderTarantulaMiniboss;
@@ -228,6 +229,7 @@ import erebus.entity.EntitySnapper;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntitySporeBall;
+import erebus.entity.EntitySporeJet;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
@@ -386,6 +388,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityPreservedBlock.class, new RenderEntityPreservedBlock());
 		RenderingRegistry.registerEntityRenderingHandler(EntityHoneyPotAnt.class, new RenderHoneyPotAnt());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBombardierBeetleLarva.class, new RenderBeetleLarva());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySporeJet.class, new RenderSporeJet());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());

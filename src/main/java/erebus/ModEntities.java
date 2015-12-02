@@ -60,6 +60,7 @@ import erebus.entity.EntitySnapper;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntitySporeBall;
+import erebus.entity.EntitySporeJet;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
@@ -158,6 +159,7 @@ public class ModEntities {
 		registerEntity(79, EntityGasVent.class, "gasVent");
 		registerEntity(80, EntityThrownSand.class, "thrownSand");
 		registerEntity(81, EntityPreservedBlock.class, "preservedBlock");
+		registerEntity(82, EntitySporeJet.class, "sporeJet");
 
 		// Spawn conditions
 		if (ConfigHandler.INSTANCE.netherWidows)
