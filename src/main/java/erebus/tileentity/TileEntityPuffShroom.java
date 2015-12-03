@@ -13,24 +13,18 @@ public class TileEntityPuffShroom extends TileEntity {
 	public boolean active;
 
 	@Override
-	public boolean canUpdate() {
-		return true;
-	}
-
-	@Override
 	public void updateEntity() {
 		prevAnimationTicks = animationTicks;
 
 		if (!worldObj.isRemote) {
 			if (active) {
 				if (animationTicks == 12)
-					if (!worldObj.isRemote)
-						if (worldObj.isAirBlock(xCoord, yCoord + 1, zCoord)) {
-							EntitySporeJet jet = new EntitySporeJet(worldObj);
-							jet.setPosition(xCoord + 0.5D, yCoord + 1.5D, zCoord + 0.5D);
-							worldObj.spawnEntityInWorld(jet);
-							worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "erebus:spraycansound", 0.5F, 1F);
-						}
+					if (worldObj.isAirBlock(xCoord, yCoord + 1, zCoord)) {
+						EntitySporeJet jet = new EntitySporeJet(worldObj);
+						jet.setPosition(xCoord + 0.5D, yCoord + 1.5D, zCoord + 0.5D);
+						worldObj.spawnEntityInWorld(jet);
+						worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "erebus:spraycansound", 0.5F, 1F);
+					}
 				if (animationTicks <= 16)
 					animationTicks++;
 				if (animationTicks == 16)
