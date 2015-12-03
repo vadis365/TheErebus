@@ -16,6 +16,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 @SideOnly(Side.CLIENT)
 public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRenderer {
 
+	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation("textures/blocks/planks_spruce.png");
+
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
 		TileEntitySlidingBlockPuzzle puzzleTile = (TileEntitySlidingBlockPuzzle) tile;
@@ -29,6 +31,7 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
+		GL11.glEnable(GL11.GL_CULL_FACE);
 		if (facing == ForgeDirection.WEST || facing == ForgeDirection.SOUTH)
 			GL11.glTranslated(facing.offsetX, 0, facing.offsetZ);
 		GL11.glScalef(-0.0625F, -0.0625F, 0.0625F);
@@ -50,8 +53,10 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 			drawFace(facing, xx, yy, width, height, uu, vv, uvSize);
 		}
 
-		bindTexture(new ResourceLocation("textures/blocks/planks_spruce.png"));
+		bindTexture(BACKGROUND_TEXTURE);
 		drawFace(facing.getOpposite(), 0, 0, 16, 16, 0, 0, 1);
+		GL11.glTranslated(facing.offsetX, 0, -facing.offsetZ);
+		drawFace(facing, 0, 0, 16, 16, 0, 0, 1);
 		GL11.glPopMatrix();
 	}
 
