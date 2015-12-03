@@ -1,27 +1,29 @@
 package erebus.tileentity;
 
+import erebus.entity.EntitySporeJet;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import erebus.entity.EntitySporeJet;
 
 public class TileEntityPuffShroom extends TileEntity {
-	
-	public int animationTicks;
+
+	public int animationTicks, prevAnimationTicks;
 	public boolean active;
 
 	@Override
-    public boolean canUpdate() {
-        return true;
-    }
+	public boolean canUpdate() {
+		return true;
+	}
 
 	@Override
 	public void updateEntity() {
+		prevAnimationTicks = animationTicks;
+
 		if (!worldObj.isRemote) {
 			if (active) {
-				if (animationTicks == 12) {
+				if (animationTicks == 12)
 					if (!worldObj.isRemote)
 						if (worldObj.isAirBlock(xCoord, yCoord + 1, zCoord)) {
 							EntitySporeJet jet = new EntitySporeJet(worldObj);
@@ -29,7 +31,6 @@ public class TileEntityPuffShroom extends TileEntity {
 							worldObj.spawnEntityInWorld(jet);
 							worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "erebus:spraycansound", 0.5F, 1F);
 						}
-			}
 				if (animationTicks <= 16)
 					animationTicks++;
 				if (animationTicks == 16)
@@ -45,11 +46,11 @@ public class TileEntityPuffShroom extends TileEntity {
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}
-	
+
 	public void setActive(boolean isActive) {
 		active = isActive;
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
