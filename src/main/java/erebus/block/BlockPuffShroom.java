@@ -2,6 +2,9 @@ package erebus.block;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
+import erebus.ModTabs;
+import erebus.tileentity.TileEntityPuffShroom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -10,9 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.ModTabs;
-import erebus.tileentity.TileEntityPuffShroom;
 
 public class BlockPuffShroom extends BlockContainer {
 
@@ -34,7 +34,7 @@ public class BlockPuffShroom extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
-		int meta = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;;
+		int meta = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, meta == 0 ? 2 : meta == 1 ? 5 : meta == 2 ? 3 : 4, 2);
 	}
 
