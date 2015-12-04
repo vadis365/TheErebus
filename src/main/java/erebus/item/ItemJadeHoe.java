@@ -11,7 +11,7 @@ public class ItemJadeHoe extends ItemHoe {
 	public ItemJadeHoe() {
 		super(ModMaterials.toolJADE);
 		setCreativeTab(ModTabs.gears);
-		setTextureName("erebus:hoeJade");
+		setTextureName("erebus:hoe_jade");
 		setUnlocalizedName("erebus.hoeJade");
 	}
 

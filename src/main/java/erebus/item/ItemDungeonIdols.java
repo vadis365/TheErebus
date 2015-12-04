@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class ItemDungeonIdols extends Item {
 
 	@SideOnly(Side.CLIENT)
-	private static IIcon[] icons;
+	private IIcon[] icons;
 
 	public ItemDungeonIdols() {
 		setMaxDamage(0);
@@ -27,21 +27,13 @@ public class ItemDungeonIdols extends Item {
 		setUnlocalizedName("erebus.idols");
 	}
 
-	public static ItemStack createStack(IDOL idol) {
-		return createStack(idol, 1);
-	}
-
-	public static ItemStack createStack(IDOL idol, int size) {
-		return new ItemStack(ModItems.idols, size, idol.ordinal());
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
 		icons = new IIcon[IDOL.values().length];
 		int i = 0;
-		for (IDOL d : IDOL.values())
-			icons[i++] = reg.registerIcon("erebus:idol" + d.name());
+		for (IDOL idol : IDOL.values())
+			icons[i++] = reg.registerIcon("erebus:idol_" + idol.name().toLowerCase());
 	}
 
 	@Override
@@ -62,14 +54,16 @@ public class ItemDungeonIdols extends Item {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName() + "." + stack.getItemDamage();
+		int meta = stack.getItemDamage();
+		IDOL idol = IDOL.values()[Math.min(Math.max(meta, 0), IDOL.values().length - 1)];
+		return super.getUnlocalizedName() + "_" + idol.name().toLowerCase();
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (is.getItemDamage() >= 4) {
+	public boolean onItemUse(ItemStack stacl, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (stacl.getItemDamage() >= 4) {
 			if (!world.isRemote) {
-				byte spawn = (byte) (is.getItemDamage() - 4);
+				byte spawn = (byte) (stacl.getItemDamage() - 4);
 				EntityUmberGolemDungeonTypes entityUmberGolem = new EntityUmberGolemDungeonTypes(world);
 				entityUmberGolem.setType(spawn);
 				entityUmberGolem.setHealth(entityUmberGolem.getMaxHealth()); // hack because of stupid attributes setting
@@ -77,20 +71,28 @@ public class ItemDungeonIdols extends Item {
 				world.spawnEntityInWorld(entityUmberGolem);
 			}
 			if (!player.capabilities.isCreativeMode)
-				--is.stackSize;
+				stacl.stackSize--;
 			return true;
 		}
 		return false;
 	}
 
 	public enum IDOL {
-		Mud,
-		Iron,
-		Gold,
-		Jade,
-		MudUmbergolem,
-		IronUmbergolem,
-		GoldUmbergolem,
-		JadeUmbergolem;
+		MUD,
+		IRON,
+		GOLD,
+		JADE,
+		MUD_UMBERGOLEM,
+		IRON_UMBERGOLEM,
+		GOLD_UMBERGOLEM,
+		JADE_UMBERGOLEM;
+
+		public ItemStack makeStack() {
+			return makeStack(1);
+		}
+
+		public ItemStack makeStack(int size) {
+			return new ItemStack(ModItems.idols, size, ordinal());
+		}
 	}
 }

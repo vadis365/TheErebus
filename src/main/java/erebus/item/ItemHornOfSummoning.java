@@ -13,6 +13,8 @@ public class ItemHornOfSummoning extends Item {
 	public ItemHornOfSummoning() {
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.specials);
+		setTextureName("erebus:horn_of_summoning");
+		setUnlocalizedName("erebus.hornOfSummoning");
 	}
 
 	@Override
@@ -40,12 +42,11 @@ public class ItemHornOfSummoning extends Item {
 	}
 
 	protected void summonBees(ItemStack is, World world, EntityPlayer player) {
-		if (!world.isRemote) {
+		if (!world.isRemote)
 			for (int a = -3; a < world.rand.nextInt(6); a++) {
 				EntityWorkerBee bee = new EntityWorkerBee(world);
 				bee.setPosition(player.posX, player.posY + 3, player.posZ);
 				world.spawnEntityInWorld(bee);
 			}
-		}
 	}
 }

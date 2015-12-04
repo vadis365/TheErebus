@@ -11,7 +11,7 @@ public class ItemAxeJade extends ItemAxe {
 	public ItemAxeJade() {
 		super(ModMaterials.toolJADE);
 		setCreativeTab(ModTabs.gears);
-		setTextureName("erebus:axeJade");
+		setTextureName("erebus:axe_jade");
 		setUnlocalizedName("erebus.axeJade");
 	}
 

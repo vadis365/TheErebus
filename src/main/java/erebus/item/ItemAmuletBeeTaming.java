@@ -20,6 +20,8 @@ public class ItemAmuletBeeTaming extends Item {
 		setMaxDamage(16);
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.specials);
+		setTextureName("erebus:bee_taming_amulet");
+		setUnlocalizedName("erebus.beeTamingAmulet");
 	}
 
 	@Override

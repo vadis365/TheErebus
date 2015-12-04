@@ -6,7 +6,6 @@ import erebus.ModItems;
 import erebus.block.BlockSlabStone;
 import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
 import erebus.item.ItemDungeonIdols;
-import erebus.item.ItemDungeonIdols.IDOL;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemMaterials;
 import erebus.lib.EnumWood;
@@ -263,16 +262,16 @@ public class RecipeHandler {
 		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_CLAW.makeStack(), "  P", "  S", " SS", 'S', "stone", 'P', ItemMaterials.DATA.SCORPION_PINCER.makeStack());
 		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_CLAW.makeStack(), "SSP", "S  ", 'S', "stone", 'P', ItemMaterials.DATA.SCORPION_PINCER.makeStack());
 		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_LEGS.makeStack(), "SSS", "S S", "R R", 'S', "stone", 'R', ItemMaterials.DATA.REINFORCED_PLATE_EXO.makeStack());
-		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.MudUmbergolem), "XXX", "XUX", "XXX", 'X', ModBlocks.mudBricks, 'U', ModBlocks.umberGolemStatue);
-		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.IronUmbergolem), "XXX", "XUX", "XXX", 'X', "blockIron", 'U', ModBlocks.umberGolemStatue);
-		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.GoldUmbergolem), "XXX", "XUX", "XXX", 'X', "blockGold", 'U', ModBlocks.umberGolemStatue);
-		addShapedRecipe(ItemDungeonIdols.createStack(IDOL.JadeUmbergolem), "XXX", "XUX", "XXX", 'X', "blockJade", 'U', ModBlocks.umberGolemStatue);
+		addShapedRecipe(ItemDungeonIdols.IDOL.MUD_UMBERGOLEM.makeStack(), "XXX", "XUX", "XXX", 'X', ModBlocks.mudBricks, 'U', ModBlocks.umberGolemStatue);
+		addShapedRecipe(ItemDungeonIdols.IDOL.IRON_UMBERGOLEM.makeStack(), "XXX", "XUX", "XXX", 'X', "blockIron", 'U', ModBlocks.umberGolemStatue);
+		addShapedRecipe(ItemDungeonIdols.IDOL.GOLD_UMBERGOLEM.makeStack(), "XXX", "XUX", "XXX", 'X', "blockGold", 'U', ModBlocks.umberGolemStatue);
+		addShapedRecipe(ItemDungeonIdols.IDOL.JADE_UMBERGOLEM.makeStack(), "XXX", "XUX", "XXX", 'X', "blockJade", 'U', ModBlocks.umberGolemStatue);
 
 		// Umbergolem Statue
 		addShapedRecipe(new ItemStack(ModBlocks.umberGolemStatue), " H ", "LCL", " X ", 'H', ItemMaterials.DATA.UMBERGOLEM_HEAD.makeStack(), 'L', ItemMaterials.DATA.UMBERGOLEM_CLAW.makeStack(), 'C', ItemMaterials.DATA.UMBERGOLEM_CORE.makeStack(), 'X', ItemMaterials.DATA.UMBERGOLEM_LEGS.makeStack());
 
 		// Animation Magic
-		addShapedRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ModItems.soulCrystal, 'z', "stickWood");
+		addShapedRecipe(new ItemStack(ModItems.wandOfAnimation), " xy", " zx", "x  ", 'x', "ingotGold", 'y', ItemMaterials.DATA.SOUL_CRYSTAL.makeStack(), 'z', "stickWood");
 
 		// Temporary Replacement Recipes
 		addShapelessRecipe(new ItemStack(ModItems.witherWebSlinger), new ItemStack(ModItems.webSlinger), new ItemStack(Blocks.soul_sand), ItemMaterials.DATA.POISON_GLAND.makeStack(), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb));

@@ -23,6 +23,7 @@ public class ItemBottleAntiVenom extends ItemBucketMilk {
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.specials);
 		setContainerItem(Items.glass_bottle);
+		setUnlocalizedName("erebus.bottleAntiVenom");
 	}
 
 	@Override

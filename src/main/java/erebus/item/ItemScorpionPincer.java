@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.entity.EntityScorpion;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
@@ -30,6 +31,11 @@ public class ItemScorpionPincer extends ItemSword {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean isComplex) {
 		tooltip.add(StatCollector.translateToLocal("tooltip.erebus.scorpionpincer"));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
 	}
 
 	@Override

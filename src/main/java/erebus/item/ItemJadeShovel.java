@@ -11,7 +11,7 @@ public class ItemJadeShovel extends ItemSpade {
 	public ItemJadeShovel() {
 		super(ModMaterials.toolJADE);
 		setCreativeTab(ModTabs.gears);
-		setTextureName("erebus:shovelJade");
+		setTextureName("erebus:shovel_jade");
 		setUnlocalizedName("erebus.shovelJade");
 	}
 

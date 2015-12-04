@@ -16,6 +16,8 @@ public class ItemSprayCan extends Item {
 	public ItemSprayCan() {
 		setMaxStackSize(9);
 		setCreativeTab(ModTabs.specials);
+		setTextureName("erebus:spray_can");
+		setUnlocalizedName("erebus.sprayCan");
 	}
 
 	protected String getSprayCanSound() {

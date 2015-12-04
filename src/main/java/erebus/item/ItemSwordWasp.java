@@ -1,8 +1,11 @@
 package erebus.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.entity.EntityWasp;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -25,4 +28,8 @@ public class ItemSwordWasp extends ItemSword {
 		return true;
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+	}
 }

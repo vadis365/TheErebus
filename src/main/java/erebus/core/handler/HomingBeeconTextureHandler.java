@@ -15,8 +15,8 @@ public class HomingBeeconTextureHandler {
 	@SubscribeEvent
 	public void onItemIconRegister(TextureStitchEvent.Pre evt) {
 		if (evt.map.getTextureType() == 1) {
-			evt.map.setTextureEntry("erebus:homingBeecon", HomingBeeconTextureHandler.beecon = new TextureHomingBeecon("erebus:homingBeecon"));
-			evt.map.setTextureEntry("erebus:deathCompass", HomingBeeconTextureHandler.deathCompasss = new TextureHomingBeecon("erebus:deathCompass"));
+			evt.map.setTextureEntry("erebus:homing_beecon", HomingBeeconTextureHandler.beecon = new TextureHomingBeecon("erebus:homing_beecon"));
+			evt.map.setTextureEntry("erebus:death_compass", HomingBeeconTextureHandler.deathCompasss = new TextureHomingBeecon("erebus:death_compass"));
 		}
 	}
 }

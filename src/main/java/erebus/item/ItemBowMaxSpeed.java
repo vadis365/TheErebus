@@ -1,5 +1,8 @@
 package erebus.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -15,9 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
 
 public class ItemBowMaxSpeed extends ItemBow {
 
@@ -37,27 +37,25 @@ public class ItemBowMaxSpeed extends ItemBow {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister icon) {
-		itemIcon = icon.registerIcon("erebus:maxspeedbow" + "_standby");
+		itemIcon = icon.registerIcon("erebus:max_speed_bow" + "_standby");
 		iconArray = new IIcon[bowAnimationIcon.length];
 
-		for (int iconIndex = 0; iconIndex < iconArray.length; ++iconIndex) {
-			iconArray[iconIndex] = icon.registerIcon("erebus:maxspeedbow" + bowAnimationIcon[iconIndex]);
-		}
+		for (int iconIndex = 0; iconIndex < iconArray.length; ++iconIndex)
+			iconArray[iconIndex] = icon.registerIcon("erebus:max_speed_bow" + bowAnimationIcon[iconIndex]);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 		int time = stack.getMaxItemUseDuration() - useRemaining;
-		if (usingItem != null) {
+		if (usingItem != null)
 			if (time >= 4)
 				return getItemIconForUseDuration(3);
 			else if (time > 2)
 				return getItemIconForUseDuration(2);
 			else if (time > 0)
 				return getItemIconForUseDuration(1);
-		}
-		return this.itemIcon;
+		return itemIcon;
 	}
 
 	@Override
@@ -75,7 +73,7 @@ public class ItemBowMaxSpeed extends ItemBow {
 				return event.result;
 
 			if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.arrow) || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0)
-				player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+				player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
 		return stack;
 	}
@@ -109,7 +107,7 @@ public class ItemBowMaxSpeed extends ItemBow {
 			float power = maxUseDuration / pullSpeedModifier;
 			power = (power * power + power * 2.0F) / 4.0F;
 
-			if ((maxUseDuration < minRelease) || power < 0.1D)
+			if (maxUseDuration < minRelease || power < 0.1D)
 				return;
 
 			if (power > 1.0F)

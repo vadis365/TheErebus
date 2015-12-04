@@ -11,7 +11,7 @@ public class ItemBambucketBeetleJuice extends ItemBambucketDrinkable {
 
 	public ItemBambucketBeetleJuice() {
 		super("erebus:bambucketOfBeetleJuice");
-		setTextureName("erebus:bambucketBeetleJuice");
+		setTextureName("erebus:bambucket_beetle_juice");
 		setUnlocalizedName("erebus.bambucketBeetleJuice");
 	}
 

@@ -18,9 +18,9 @@ import net.minecraft.world.World;
 public class ItemRolledNewspaper extends ItemSword {
 	public ItemRolledNewspaper() {
 		super(ModMaterials.rolledNewspaper);
-		setTextureName("erebus:rolledNewspaper");
-		setUnlocalizedName("erebus.rolledNewspaper");
 		setCreativeTab(ModTabs.gears);
+		setTextureName("erebus:rolled_newspaper");
+		setUnlocalizedName("erebus.rolledNewspaper");
 	}
 
 	@Override

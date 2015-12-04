@@ -30,6 +30,7 @@ public class ItemHammerWar extends ItemSword {
 		super(ModMaterials.weaponWarHammer);
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
+		setUnlocalizedName("erebus.warHammer");
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

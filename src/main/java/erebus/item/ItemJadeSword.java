@@ -11,7 +11,7 @@ public class ItemJadeSword extends ItemSword {
 	public ItemJadeSword() {
 		super(ModMaterials.toolJADE);
 		setCreativeTab(ModTabs.gears);
-		setTextureName("erebus:swordJade");
+		setTextureName("erebus:sword_jade");
 		setUnlocalizedName("erebus.swordJade");
 	}
 

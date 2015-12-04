@@ -15,8 +15,8 @@ public class ItemBambucketAntiVenom extends ItemBambucketDrinkable {
 
 	public ItemBambucketAntiVenom() {
 		super("erebus:bambucketAntivenom");
+		setTextureName("erebus:bambucket_antivenom");
 		setUnlocalizedName("erebus.bambucketAntiVenom");
-		setTextureName("erebus:bambucketAntivenom");
 	}
 
 	@Override

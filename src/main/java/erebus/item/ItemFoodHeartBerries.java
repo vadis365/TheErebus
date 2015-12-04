@@ -13,6 +13,8 @@ public class ItemFoodHeartBerries extends ItemFood {
 		setMaxDamage(0);
 		setAlwaysEdible();
 		setCreativeTab(ModTabs.items);
+		setTextureName("erebus:heart_berries");
+		setUnlocalizedName("erebus.heartBerries");
 	}
 
 	@Override

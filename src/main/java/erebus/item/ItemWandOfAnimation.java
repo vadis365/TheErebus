@@ -29,6 +29,7 @@ public class ItemWandOfAnimation extends Item {
 		setMaxDamage(64);
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
+		setUnlocalizedName("erebus.wandOfAnimation");
 	}
 
 	@Override

@@ -29,6 +29,7 @@ public class ItemFlowerSeeds extends Item {
 	public ItemFlowerSeeds() {
 		setHasSubtypes(true);
 		setCreativeTab(ModTabs.specials);
+		setUnlocalizedName("erebus.flowerSeeds");
 	}
 
 	@Override
@@ -56,8 +57,8 @@ public class ItemFlowerSeeds extends Item {
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		normal = reg.registerIcon("erebus:flowerSeed0");
-		rainbow = reg.registerIcon("erebus:flowerSeed1");
+		normal = reg.registerIcon("erebus:flower_seed");
+		rainbow = reg.registerIcon("erebus:flower_seed_rainbow");
 	}
 
 	@Override

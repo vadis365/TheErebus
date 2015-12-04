@@ -11,7 +11,7 @@ public class ItemPickaxeJade extends ItemPickaxe {
 	public ItemPickaxeJade() {
 		super(ModMaterials.toolJADE);
 		setCreativeTab(ModTabs.gears);
-		setTextureName("erebus:pickaxeJade");
+		setTextureName("erebus:pickaxe_jade");
 		setUnlocalizedName("erebus.pickaxeJade");
 	}
 

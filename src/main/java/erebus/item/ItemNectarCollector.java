@@ -17,6 +17,8 @@ public class ItemNectarCollector extends Item {
 		setMaxDamage(64);
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.gears);
+		setTextureName("erebus:nectar_collector");
+		setUnlocalizedName("erebus.nectarCollector");
 	}
 
 	@Override

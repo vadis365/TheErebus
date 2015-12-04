@@ -88,28 +88,28 @@ public class BlockCapstone extends Block {
 				case 0:
 					return true;
 				case 1:
-					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Mud.ordinal()) {
+					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.MUD.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 5, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;
 					}
 					return true;
 				case 2:
-					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Iron.ordinal()) {
+					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.IRON.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 6, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;
 					}
 					return true;
 				case 3:
-					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Gold.ordinal()) {
+					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.GOLD.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 7, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;
 					}
 					return true;
 				case 4:
-					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.Jade.ordinal()) {
+					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.JADE.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 8, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;

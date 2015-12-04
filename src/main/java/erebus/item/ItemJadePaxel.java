@@ -8,7 +8,7 @@ public class ItemJadePaxel extends ItemPaxel {
 
 	public ItemJadePaxel() {
 		super(ModMaterials.toolJADEPAXEL);
-		setTextureName("erebus:paxelJade");
+		setTextureName("erebus:paxel_jade");
 		setUnlocalizedName("erebus.paxelJade");
 	}
 

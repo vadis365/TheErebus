@@ -6,6 +6,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAIAntlionBossAttack;
+import erebus.item.ItemMaterials;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
@@ -241,7 +242,7 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ() + 1, 8, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ() + 1);
 			}
 			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), ModBlocks.antlionEgg);
-			Utils.dropStackNoRandom(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ), new ItemStack(ModItems.soulCrystal));
+			Utils.dropStackNoRandom(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ), ItemMaterials.DATA.SOUL_CRYSTAL.makeStack());
 			Utils.dropStackNoRandom(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ), new ItemStack(ModItems.warHammer));
 			setDead();
 		}
