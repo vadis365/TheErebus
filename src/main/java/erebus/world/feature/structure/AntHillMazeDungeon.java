@@ -75,7 +75,7 @@ public class AntHillMazeDungeon {
 
 	public void generate(World world, Random rand, int x, int y, int z) {
 		int sizeX = 16;
-		int sizeY = y + 4;
+		int sizeY = y + 5;
 		int sizeZ = 16;
 		int mazeWidth = sizeX / 2;
 		int mazeHeight = sizeZ / 2;
@@ -87,17 +87,18 @@ public class AntHillMazeDungeon {
 			MazeGenerator generator = new PerfectMazeGenerator(mazeWidth, mazeHeight);
 			maze = generator.generateMaze();
 			for (int yy = y; yy < sizeY; yy++) {
-				switch ((yy - y) % 4) {
+				switch ((yy - y) % 5) {
 				case 0:
-					buildFloor(world, x, yy, z, mazeWidth, mazeHeight, rand);
-					buildRoof(world, x, yy + 4, z, mazeWidth, mazeHeight, rand);
+					buildFloor(world, x, yy, z, mazeWidth, mazeHeight, rand, false);
+					buildFloor(world, x, yy + 1, z, mazeWidth, mazeHeight, rand, true);
+					buildRoof(world, x, yy + 5, z, mazeWidth, mazeHeight, rand);
 					break;
 				case 1:
-					buildLevel(world, x, yy, z, mazeWidth, mazeHeight, maze, solid, 0);
 					buildLevel(world, x, yy + 1, z, mazeWidth, mazeHeight, maze, solid, 0);
 					buildLevel(world, x, yy + 2, z, mazeWidth, mazeHeight, maze, solid, 0);
-					createAir(world, x, yy, z, mazeWidth, mazeHeight, rand);
-					addFeature(world, x, yy + 1, z, mazeWidth, mazeHeight, maze, rand);
+					buildLevel(world, x, yy + 3, z, mazeWidth, mazeHeight, maze, solid, 0);
+					createAir(world, x, yy + 1, z + 1, mazeWidth, mazeHeight, rand);
+					addFeature(world, x, yy + 2, z, mazeWidth, mazeHeight, maze, rand);
 					break;
 				}
 			}
@@ -110,53 +111,65 @@ public class AntHillMazeDungeon {
 			if(floors < 4) {
 				generate(world, rand, x, yy, z);
 				// create stairs
-			if((yy - y) == 4 || (yy - y) == 12) {
-				world.setBlock(x + 1, yy + 1, z + 1, solid);
+			if((yy - y) == 5 || (yy - y) == 15) {
 				world.setBlock(x + 1, yy + 2, z + 1, solid);
-				world.setBlock(x + 1, yy + 3, z + 1, stairs, 3, 2);
-				if (world.getBlock(x + 1, yy + 1, z + 2) == Blocks.air)
-					world.setBlock(x + 1, yy + 1, z + 2, solid);
-				world.setBlock(x + 1, yy + 2, z + 2, stairs, 3, 2);
-				world.setBlock(x + 1, yy + 1, z + 3, stairs, 3, 2);
+				world.setBlock(x + 1, yy + 3, z + 1, solid);
+				world.setBlock(x + 1, yy + 4, z + 1, solid);
+				world.setBlock(x + 1, yy + 5, z + 1, stairs, 3, 2);
+				if (world.getBlock(x + 1, yy + 2, z + 2) == Blocks.air)
+					world.setBlock(x + 1, yy + 2, z + 2, solid);
+				world.setBlock(x + 1, yy + 3, z + 2, solid);
+				world.setBlock(x + 1, yy + 4, z + 2, stairs, 3, 2);
+				world.setBlock(x + 1, yy + 3, z + 3, stairs, 1, 2);
+				world.setBlock(x + 1, yy + 2, z + 3, solid);
+				world.setBlock(x + 2, yy + 2, z + 3, stairs, 1, 2);
 			}
 			else {
-				world.setBlock(x + 31, yy + 1, z + 31, solid);
 				world.setBlock(x + 31, yy + 2, z + 31, solid);
-				world.setBlock(x + 31, yy + 3, z + 31, stairs, 2, 2);
-				if (world.getBlock(x + 31, yy + 1, z + 30) == Blocks.air)
-					world.setBlock(x + 31, yy + 1, z + 30, solid);
-				world.setBlock(x + 31, yy + 2, z + 30, stairs, 2, 2);
-				world.setBlock(x + 31, yy + 1, z + 29, stairs, 2, 2);
+				world.setBlock(x + 31, yy + 3, z + 31, solid);
+				world.setBlock(x + 31, yy + 4, z + 31, solid);
+				world.setBlock(x + 31, yy + 5, z + 31, stairs, 2, 2);
+				if (world.getBlock(x + 31, yy + 2, z + 30) == Blocks.air)
+					world.setBlock(x + 31, yy + 2, z + 30, solid);
+				world.setBlock(x + 31, yy + 3, z + + 30, solid);
+				world.setBlock(x + 31, yy + 4, z + + 30, stairs, 2, 2);
+				world.setBlock(x + 31, yy + 3, z + 29, stairs, 0, 2);
+				world.setBlock(x + 31, yy + 2, z + 29, solid);
+				world.setBlock(x + 30, yy + 2, z + 29, stairs, 0, 2);
 				}
 			}
 
 			if(floors == 0)
-				world.setBlock(x + 1, yy + 1, z + 1, Blocks.lapis_block); // teleporter thing to boss arena.
+				world.setBlock(x + 1, yy + 2, z + 1, Blocks.lapis_block); // teleporter thing to boss arena.
 
 			if(floors == 4) {
-				generateMainDome(world, x + 16, yy, z + 16);
-				gererateEntrance(world, x + 2, yy, z + 2);
+				generateMainDome(world, x + 16, yy + 1, z + 16);
+				gererateEntrance(world, x + 2, yy + 1, z + 2);
 			}
 
 			// create air gaps above stairs using imaginary extra 2 floors
-			if((yy - y) == 12 || (yy - y) == 20) {
+			if((yy - y) == 15 || (yy - y) == 25) {
 				world.setBlock(x + 1, yy - 4, z + 1, Blocks.air);
 				world.setBlock(x + 1, yy - 4, z + 2, Blocks.air);
 				world.setBlock(x + 1, yy - 4, z + 3, Blocks.air);
 				world.setBlock(x + 1, yy - 5, z + 2, Blocks.air);
 				world.setBlock(x + 1, yy - 5, z + 3, Blocks.air);
+				world.setBlock(x + 1, yy - 6, z + 3, Blocks.air);
 				world.setBlock(x + 2, yy - 5, z + 3, Blocks.air);
+				world.setBlock(x + 2, yy - 6, z + 3, Blocks.air);
 			}
-			else if((yy - y) == 8 || (yy - y) == 16) {
+			else if((yy - y) == 10 || (yy - y) == 20) {
 				world.setBlock(x + 31, yy - 4, z + 31, Blocks.air);
 				world.setBlock(x + 31, yy - 4, z + 30, Blocks.air);
 				world.setBlock(x + 31, yy - 4, z + 29, Blocks.air);
 				world.setBlock(x + 31, yy - 5, z + 30, Blocks.air);
 				world.setBlock(x + 31, yy - 5, z + 29, Blocks.air);
+				world.setBlock(x + 31, yy - 6, z + 29, Blocks.air);
 				world.setBlock(x + 30, yy - 5, z + 29, Blocks.air);
+				world.setBlock(x + 30, yy - 6, z + 29, Blocks.air);
 			}
 			System.out.println("Y height is: " + " floor: " + (yy - y));
-			yy += 4;
+			yy += 5;
 		}
 	}
 
@@ -211,16 +224,18 @@ public class AntHillMazeDungeon {
 					world.setBlock(x + j, y, z + i, solid, 1, 2);
 	}
 
-	private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand) {
+	private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand, boolean addFeature) {
 		for (int i = 0; i <= h * 4; i++)
 			for (int j = 0; j <= w * 4; j++)
-				if (rand.nextInt(15) == 0)
-					if (rand.nextBoolean() && rand.nextBoolean())
-						world.setBlock(x + j, y, z + i, Blocks.mycelium);
-					else
-						world.setBlock(x + j, y, z + i, ModBlocks.swampVent);
-				else
-					world.setBlock(x + j, y, z + i, solid, 0, 2);
+				if (world.getBlock(x + j, y, z + i) != stairs) {
+					if (rand.nextInt(15) == 0 && addFeature)
+						if (rand.nextBoolean() && rand.nextBoolean())
+							world.setBlock(x + j, y, z + i, Blocks.mycelium); // formic acid?
+						else
+							world.setBlock(x + j, y, z + i, ModBlocks.puffShroom, 3, 2);
+					else 
+						world.setBlock(x + j, y, z + i, solid, 0, 2);
+				}
 	}
 
 	private void addFeature(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
@@ -242,7 +257,7 @@ public class AntHillMazeDungeon {
 							placeBones(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
 					} else if (rand.nextInt(6) == 0)
 						if (rand.nextBoolean())
-							world.setBlock(x + 2 + j * 4, y - 1, z + 2 + i * 4, Blocks.wool);
+							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool);
 				}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0) {

@@ -20,11 +20,6 @@ public class EntitySporeJet extends EntityLiving {
 	}
 
 	@Override
-	protected void entityInit() {
-		super.entityInit();
-	}
-
-	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if (!worldObj.isRemote) {

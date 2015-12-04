@@ -34,7 +34,7 @@ public class TileEntityPuffShroom extends TileEntity {
 				if (animationTicks >= 1)
 					animationTicks--;
 				if (animationTicks == 0)
-					if (worldObj.rand.nextInt(50) == 0)
+					if (worldObj.rand.nextInt(140) == 0)
 						setActive(true);
 			}
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
