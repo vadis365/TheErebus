@@ -554,14 +554,14 @@ item.erebus.materials.force_key.name=Force Key
 item.erebus.heartBerries.name=Heartberries
 item.erebus.lifeBlood.name=Life Blood
 
-item.erebus.idols.0.name=Mud Scarab Idol
-item.erebus.idols.1.name=Iron Scarab Idol
-item.erebus.idols.2.name=Gold Scarab Idol
-item.erebus.idols.3.name=Jade Scarab Idol
-item.erebus.idols.4.name=Spawn Mud Idol Guardian
-item.erebus.idols.5.name=Spawn Iron Idol Guardian
-item.erebus.idols.6.name=Spawn Gold Idol Guardian
-item.erebus.idols.7.name=Spawn Jade Idol Guardian
+item.erebus.idols.mud.name=Mud Scarab Idol
+item.erebus.idols.iron.name=Iron Scarab Idol
+item.erebus.idols.gold.name=Gold Scarab Idol
+item.erebus.idols.jade.name=Jade Scarab Idol
+item.erebus.idols.mud_umbergolem.name=Spawn Mud Idol Guardian
+item.erebus.idols.iron_umbergolem.name=Spawn Iron Idol Guardian
+item.erebus.idols.gold_umbergolem.name=Spawn Gold Idol Guardian
+item.erebus.idols.jade_umbergolem.name=Spawn Jade Idol Guardian
 
 item.erebus.bambucket.name=Bambucket
 item.erebus.bambucketWater.name=Water Bambucket

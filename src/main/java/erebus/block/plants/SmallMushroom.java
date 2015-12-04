@@ -18,16 +18,16 @@ import net.minecraft.world.World;
 
 public class SmallMushroom extends BlockMushroom {
 
-	private final String name;
+	private final String name, itemTextureName;
 	private boolean requires2x2ToGrow;
 
-	public SmallMushroom(String name, boolean requires2x2ToGrow) {
-		super();
+	public SmallMushroom(String name, String itemTextureName, boolean requires2x2ToGrow) {
 		this.name = name;
 		setHardness(0.0F);
 		setStepSound(soundTypeGrass);
 		setBlockName("erebus." + name);
 		setCreativeTab(ModTabs.plants);
+		this.itemTextureName = itemTextureName;
 		this.requires2x2ToGrow = requires2x2ToGrow;
 	}
 
@@ -53,7 +53,7 @@ public class SmallMushroom extends BlockMushroom {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName() {
-		return "erebus:" + name;
+		return "erebus:" + itemTextureName;
 	}
 
 	@Override

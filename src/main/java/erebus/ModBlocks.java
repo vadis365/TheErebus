@@ -192,11 +192,11 @@ public class ModBlocks {
 	public static final Block nettleFlowered = new SmallPlant("nettleFlowered", false);
 	public static final Block nettle = new SmallPlant("nettle", false);
 	public static final Block desertShrub = new SmallPlant("desertShrub", false);
-	public static final Block darkCapped = new SmallMushroom("bulbCappedShroom", false);
-	public static final Block kaizersFinger = new SmallMushroom("kaizerfinger", false);
-	public static final Block sarcasticCzech = new SmallMushroom("bundleshroom", true);
-	public static final Block grandmasShoes = new SmallMushroom("greenMushroom", true);
-	public static final Block dutchCap = new SmallMushroom("dutchCap", true);
+	public static final Block darkCapped = new SmallMushroom("bulbCappedShroom", "bulb_capped_shroom", false);
+	public static final Block kaizersFinger = new SmallMushroom("kaizerfinger", "kaizers_fingers", false);
+	public static final Block sarcasticCzech = new SmallMushroom("bundleshroom", "bundle_shroom", true);
+	public static final Block grandmasShoes = new SmallMushroom("greenMushroom", "green_mushroom", true);
+	public static final Block dutchCap = new SmallMushroom("dutchCap", "dutch_cap", true);
 
 	// UNDERGROWTH
 	public static final Block thorns = new BlockThorns();
