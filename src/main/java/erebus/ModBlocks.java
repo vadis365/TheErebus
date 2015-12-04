@@ -4,12 +4,6 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCompressed;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
 import erebus.block.BlockAnthillBlock;
@@ -18,6 +12,7 @@ import erebus.block.BlockAntlionSpawner;
 import erebus.block.BlockBones;
 import erebus.block.BlockButtonUmberstone;
 import erebus.block.BlockCapstone;
+import erebus.block.BlockCompletedPuzzle;
 import erebus.block.BlockComposter;
 import erebus.block.BlockDoorErebus;
 import erebus.block.BlockDragonflySpawner;
@@ -125,6 +120,12 @@ import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCompressed;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 
 public class ModBlocks {
 
@@ -302,6 +303,7 @@ public class ModBlocks {
 	public static final Block magmaCrawlerSpawner = new BlockMagmaCrawlerSpawner("magmaCrawler").setBlockName("erebus.magmaCrawlerSpawner").setBlockTextureName("erebus:spiderSpawner");
 	public static final Block dragonflySpawner = new BlockDragonflySpawner("dragonfly").setBlockName("erebus.dragonflySpawner").setBlockTextureName("erebus:spiderSpawner");
 	public static final Block slidingBlockPuzzle = new BlockSlidingBlockPuzzle();
+	public static final Block completedPuzzle = new BlockCompletedPuzzle();
 
 	public static final Block capstone = new BlockCapstone();
 	public static final Block waspNestBlock = new BlockWaspNest();

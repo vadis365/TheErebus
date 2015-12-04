@@ -8,7 +8,6 @@ import java.util.Random;
 
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -108,7 +107,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			if (swapPiecesIfPossible(piece, emptyPiece)) {
 				if (!worldObj.isRemote) {
 					onPuzzleChange();
-					sendUpdatesToClient();
+					Utils.sendUpdatesToClient(worldObj, getDescriptionPacket());
 				}
 				return true;
 			}
@@ -130,8 +129,8 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 							if (!worldObj.isRemote) {
 								onPuzzleChange();
 								neighbour.onPuzzleChange();
-								sendUpdatesToClient();
-								neighbour.sendUpdatesToClient();
+								Utils.sendUpdatesToClient(worldObj, getDescriptionPacket());
+								Utils.sendUpdatesToClient(neighbour.worldObj, neighbour.getDescriptionPacket());
 							}
 							return true;
 						}
@@ -155,13 +154,6 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			return true;
 		}
 		return false;
-	}
-
-	@SuppressWarnings("unchecked")
-	private void sendUpdatesToClient() {
-		List<EntityPlayerMP> players = worldObj.playerEntities;
-		for (EntityPlayerMP player : players)
-			player.playerNetServerHandler.sendPacket(getDescriptionPacket());
 	}
 
 	@Override
@@ -198,13 +190,18 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 	}
 
 	private NBTTagCompound writeData(NBTTagCompound nbt) {
-		nbt.setByte("Facing", (byte) facing.ordinal());
-		nbt.setIntArray("Offset", offset.toArray());
-		nbt.setInteger("Puzzle", puzzle.ordinal());
+		if (facing != null)
+			nbt.setByte("Facing", (byte) facing.ordinal());
+		if (offset != null)
+			nbt.setIntArray("Offset", offset.toArray());
+		if (puzzle != null)
+			nbt.setInteger("Puzzle", puzzle.ordinal());
 		for (int i = 0; i < pieces.length; i++)
-			nbt.setIntArray("Piece" + i, pieces[i].toArray());
+			if (pieces[i] != null)
+				nbt.setIntArray("Piece" + i, pieces[i].toArray());
 		for (int i = 0; i < originalPieces.length; i++)
-			nbt.setIntArray("OriginalPiece" + i, originalPieces[i].toArray());
+			if (originalPieces[i] != null)
+				nbt.setIntArray("OriginalPiece" + i, originalPieces[i].toArray());
 		return nbt;
 	}
 
@@ -260,6 +257,11 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		if (offsets == null)
 			throw new IllegalArgumentException("Can't generate sliding block puzzle facing " + facing);
 
+		world.setBlock(x, y + 2, z, ModBlocks.completedPuzzle);
+		TileEntityCompletedPuzzle compPuzzle = Utils.getTileEntity(world, x, y + 2, z, TileEntityCompletedPuzzle.class);
+		if (compPuzzle != null)
+			compPuzzle.setPuzzle(puzzle);
+
 		for (BlockOffset offset : offsets)
 			tiles.add(setBlock(world, x, y, z, offset, facing, puzzle));
 
@@ -302,7 +304,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 				pieces.remove(index);
 			}
 
-			tile.sendUpdatesToClient();
+			Utils.sendUpdatesToClient(tile.worldObj, tile.getDescriptionPacket());
 		}
 	}
 

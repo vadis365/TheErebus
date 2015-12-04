@@ -3,12 +3,6 @@ package erebus.core.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockPetrifiedChest;
@@ -32,6 +26,7 @@ import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
 import erebus.tileentity.TileEntityBones;
+import erebus.tileentity.TileEntityCompletedPuzzle;
 import erebus.tileentity.TileEntityComposter;
 import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarEmpty;
@@ -57,6 +52,12 @@ import erebus.tileentity.TileEntityTarantulaEgg;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -117,6 +118,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntitySoldierAntTrap.class, "soldierAntTrap");
 		registerTileEntity(TileEntitySlidingBlockPuzzle.class, "slidingBlockPuzzle");
 		registerTileEntity(TileEntityPuffShroom.class, "puffShroom");
+		registerTileEntity(TileEntityCompletedPuzzle.class, "completedPuzzle");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {

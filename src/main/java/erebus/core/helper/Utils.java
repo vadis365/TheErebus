@@ -12,6 +12,7 @@ import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -19,6 +20,7 @@ import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.IBlockAccess;
@@ -28,6 +30,13 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class Utils {
+
+	@SuppressWarnings("unchecked")
+	public static void sendUpdatesToClient(World world, Packet descriptionPacket) {
+		List<EntityPlayerMP> players = world.playerEntities;
+		for (EntityPlayerMP player : players)
+			player.playerNetServerHandler.sendPacket(descriptionPacket);
+	}
 
 	public static boolean rightClickItemAt(World world, int x, int y, int z, int side, ItemStack stack) {
 		if (world.isRemote || stack == null || stack.getItem() == null)
