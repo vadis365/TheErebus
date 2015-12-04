@@ -47,7 +47,7 @@ public class ItemHammerWar extends ItemSword {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.reinforcedPlateExo.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.REINFORCED_PLATE_EXO.ordinal();
 	}
 
 	@Override

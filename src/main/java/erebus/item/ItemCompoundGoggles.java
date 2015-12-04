@@ -26,6 +26,6 @@ public class ItemCompoundGoggles extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.compoundLens.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.COMPOUND_LENS.ordinal();
 	}
 }

@@ -248,9 +248,9 @@ public class EntityBotFly extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount) {
-			entityDropItem(ItemMaterials.DATA.flyWing.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.FLY_WING.makeStack(), 0.0F);
 			if (rand.nextInt(5) == 0)
-				entityDropItem(ItemMaterials.DATA.compoundEyes.makeStack(), 0.0F);
+				entityDropItem(ItemMaterials.DATA.COMPOUND_EYES.makeStack(), 0.0F);
 		}
 	}
 

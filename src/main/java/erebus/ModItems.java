@@ -215,7 +215,7 @@ public class ModItems {
 
 			@Override
 			public int getBurnTime(ItemStack fuel) {
-				if (fuel.getItem() == materials && fuel.getItemDamage() == DATA.bamboo.ordinal())
+				if (fuel.getItem() == materials && fuel.getItemDamage() == DATA.BAMBOO.ordinal())
 					return 300;
 				return 0;
 			}

@@ -40,7 +40,7 @@ public class EntityPunchroom extends EntityMob {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (rand.nextInt(5) == 0)
-			entityDropItem(ItemMaterials.DATA.elasticFibre.makeStack(1 + looting), 0.0F);
+			entityDropItem(ItemMaterials.DATA.ELASTIC_FIBRE.makeStack(1 + looting), 0.0F);
 	}
 
 	@Override

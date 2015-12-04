@@ -43,10 +43,10 @@ public class ContainerSmoothieMaker extends Container {
 			ItemStack stack1 = slot.getStack();
 			stack = stack1.copy();
 			if (slotIndex > 4) {
-				if (stack1.getItem() == ModItems.materials && stack1.getItemDamage() != ItemMaterials.DATA.smoothieGlass.ordinal() || stack1.getItem() != ModItems.materials) {
+				if (stack1.getItem() == ModItems.materials && stack1.getItemDamage() != ItemMaterials.DATA.SMOOTHIE_GLASS.ordinal() || stack1.getItem() != ModItems.materials) {
 					if (!mergeItemStack(stack1, 0, 4, false))
 						return null;
-				} else if (stack1.getItem() == ModItems.materials && stack1.getItemDamage() == ItemMaterials.DATA.smoothieGlass.ordinal())
+				} else if (stack1.getItem() == ModItems.materials && stack1.getItemDamage() == ItemMaterials.DATA.SMOOTHIE_GLASS.ordinal())
 					if (!mergeItemStack(stack1, 4, 5, false))
 						return null;
 			} else if (!mergeItemStack(stack1, 5, inventorySlots.size(), false))

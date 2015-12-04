@@ -84,7 +84,7 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.gliderWing.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.GLIDER_WING.ordinal();
 	}
 
 	@Override

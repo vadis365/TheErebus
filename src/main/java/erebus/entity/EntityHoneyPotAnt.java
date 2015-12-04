@@ -123,7 +123,7 @@ public class EntityHoneyPotAnt extends EntityTameable {
 		} else if (item == ModItems.nectarCollector) {
 			if (getHoneyBelly() > 0 && isTamed()) {
 				if (!worldObj.isRemote) {
-					entityDropItem(ItemMaterials.DATA.nectar.makeStack((int) (getHoneyBelly() * 10)), 0.0F);
+					entityDropItem(ItemMaterials.DATA.NECTAR.makeStack((int) (getHoneyBelly() * 10)), 0.0F);
 					stack.damageItem(1, player);
 					setHoneyBelly(0);
 				}
@@ -144,9 +144,9 @@ public class EntityHoneyPotAnt extends EntityTameable {
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (isTamed()) {
 			if (getHoneyBelly() > 0)
-				entityDropItem(ItemMaterials.DATA.nectar.makeStack((int) (getHoneyBelly() * 10)), 0.0F);
+				entityDropItem(ItemMaterials.DATA.NECTAR.makeStack((int) (getHoneyBelly() * 10)), 0.0F);
 		} else
-			entityDropItem(ItemMaterials.DATA.nectar.makeStack(1), 0.0F);
+			entityDropItem(ItemMaterials.DATA.NECTAR.makeStack(1), 0.0F);
 	}
 
 	@Override

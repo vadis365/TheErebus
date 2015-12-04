@@ -18,7 +18,7 @@ public class TileEntityGlowingJar extends TileEntity {
 		if (ghostItem == null) {
 			ghostItem = new EntityItem(worldObj);
 			ghostItem.hoverStart = 0.0F;
-			ghostItem.setEntityItemStack(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.bioLuminescence.ordinal()));
+			ghostItem.setEntityItemStack(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.BIO_LUMINESCENCE.ordinal()));
 		}
 		return ghostItem;
 	}

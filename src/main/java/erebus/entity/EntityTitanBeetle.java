@@ -191,10 +191,10 @@ public class EntityTitanBeetle extends EntityTameable {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() >= 2)
-			entityDropItem(ItemMaterials.DATA.rhinoRidingKit.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.RHINO_RIDING_KIT.makeStack(), 0.0F);
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
-			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.PLATE_EXO.makeStack(), 0.0F);
 
 		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? ItemErebusFood.FoodType.TITAN_CHOP_COOKED.ordinal() : ItemErebusFood.FoodType.TITAN_CHOP_RAW.ordinal()), 0.0F);
 		dropChests();
@@ -233,7 +233,7 @@ public class EntityTitanBeetle extends EntityTameable {
 			openGUI(player);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.beetleTamingAmulet.ordinal() && getTameState() == 0) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.BEETLE_TAMING_AMULET.ordinal() && getTameState() == 0) {
 			healingBuff = 20F;
 			is.stackSize--;
 			setTameState((byte) 1);
@@ -245,7 +245,7 @@ public class EntityTitanBeetle extends EntityTameable {
 			heal(healingBuff);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.rhinoRidingKit.ordinal() && getTameState() == 1) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.RHINO_RIDING_KIT.ordinal() && getTameState() == 1) {
 			is.stackSize--;
 			player.swingItem();
 			setTameState((byte) 2);
@@ -262,7 +262,7 @@ public class EntityTitanBeetle extends EntityTameable {
 				player.mountEntity(this);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.bambooShoot.ordinal() && getTameState() != 0) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.BAMBOO_SHOOT.ordinal() && getTameState() != 0) {
 			healingBuff = 5.0F;
 			if (getHealth() < getMaxHealth()) {
 				heal(healingBuff);

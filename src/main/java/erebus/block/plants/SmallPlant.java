@@ -60,11 +60,11 @@ public class SmallPlant extends BlockTallGrass implements IHasCustomItemBlock {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		if ("nettle".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(ItemMaterials.DATA.nettleleaves.makeStack());
+			ret.add(ItemMaterials.DATA.NETTLE_LEAVES.makeStack());
 			return ret;
 		} else if ("nettleFlowered".equals(name)) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(ItemMaterials.DATA.nettleflowers.makeStack());
+			ret.add(ItemMaterials.DATA.NETTLE_FLOWERS.makeStack());
 			return ret;
 		} else if ("swampPlant".equals(name) && world.rand.nextInt(8) == 0) {
 			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();

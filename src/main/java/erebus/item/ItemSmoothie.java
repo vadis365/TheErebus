@@ -47,7 +47,7 @@ public class ItemSmoothie extends ItemFood {
 
 	@Override
 	public ItemStack getContainerItem(ItemStack stack) {
-		return ItemMaterials.DATA.smoothieGlass.makeStack();
+		return ItemMaterials.DATA.SMOOTHIE_GLASS.makeStack();
 	}
 
 	@Override

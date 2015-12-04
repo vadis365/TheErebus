@@ -158,7 +158,7 @@ public class SmoothieMakerNEIHandler extends TemplateRecipeHandler {
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
 		for (SmoothieMakerRecipe recipe : SmoothieMakerRecipe.getRecipeList())
-			if (recipe.isPartOfInput(ingredient) || ingredient.getItem() == ModItems.materials && ingredient.getItemDamage() == ItemMaterials.DATA.smoothieGlass.ordinal())
+			if (recipe.isPartOfInput(ingredient) || ingredient.getItem() == ModItems.materials && ingredient.getItemDamage() == ItemMaterials.DATA.SMOOTHIE_GLASS.ordinal())
 				arecipes.add(new CachedSmoothieMakerRecipe(recipe));
 	}
 

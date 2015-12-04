@@ -29,7 +29,7 @@ public class ItemArmorWaterStriders extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.elasticFibre.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.ELASTIC_FIBRE.ordinal();
 	}
 
 	@Override

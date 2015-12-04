@@ -24,7 +24,7 @@ public class ItemHelmRhino extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.plateExoRhino.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.PLATE_EXO_RHINO.ordinal();
 	}
 
 	@Override

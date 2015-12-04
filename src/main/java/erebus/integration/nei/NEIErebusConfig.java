@@ -37,23 +37,23 @@ public class NEIErebusConfig implements IConfigureNEI {
 
 		if (!OreType.ALUMINIUM.isEnabled()) {
 			API.hideItem(new ItemStack(ModBlocks.oreAluminium));
-			API.hideItem(ItemMaterials.DATA.ingotAluminium.makeStack());
+			API.hideItem(ItemMaterials.DATA.INGOT_ALUMINIUM.makeStack());
 		}
 		if (!OreType.COPPER.isEnabled()) {
 			API.hideItem(new ItemStack(ModBlocks.oreCopper));
-			API.hideItem(ItemMaterials.DATA.ingotCopper.makeStack());
+			API.hideItem(ItemMaterials.DATA.INGOT_COPPER.makeStack());
 		}
 		if (!OreType.LEAD.isEnabled()) {
 			API.hideItem(new ItemStack(ModBlocks.oreLead));
-			API.hideItem(ItemMaterials.DATA.ingotLead.makeStack());
+			API.hideItem(ItemMaterials.DATA.INGOT_LEAD.makeStack());
 		}
 		if (!OreType.SILVER.isEnabled()) {
 			API.hideItem(new ItemStack(ModBlocks.oreSilver));
-			API.hideItem(ItemMaterials.DATA.ingotSilver.makeStack());
+			API.hideItem(ItemMaterials.DATA.INGOT_SILVER.makeStack());
 		}
 		if (!OreType.TIN.isEnabled()) {
 			API.hideItem(new ItemStack(ModBlocks.oreTin));
-			API.hideItem(ItemMaterials.DATA.ingotTin.makeStack());
+			API.hideItem(ItemMaterials.DATA.INGOT_TIN.makeStack());
 		}
 
 		API.hideItem(new ItemStack(ModBlocks.hanger));

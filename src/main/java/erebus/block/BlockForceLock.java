@@ -25,7 +25,7 @@ public class BlockForceLock extends Block {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getCurrentEquippedItem();
-		if (stack != null && stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.forceKey.ordinal()) {
+		if (stack != null && stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.FORCE_KEY.ordinal()) {
 			if (!player.capabilities.isCreativeMode)
 				stack.stackSize--;
 			if (!world.isRemote)

@@ -28,6 +28,6 @@ public class ItemArmorExoskeleton extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.plateExo.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.PLATE_EXO.ordinal();
 	}
 }

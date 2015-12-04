@@ -20,6 +20,6 @@ public class UmberOreJade extends UmberOre {
 
 	@Override
 	public int damageDropped(int meta) {
-		return ItemMaterials.DATA.jade.ordinal();
+		return ItemMaterials.DATA.JADE.ordinal();
 	}
 }

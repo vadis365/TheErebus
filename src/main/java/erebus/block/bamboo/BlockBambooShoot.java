@@ -134,7 +134,7 @@ public class BlockBambooShoot extends BlockFlower implements IGrowable {
 
 	@Override
 	public int damageDropped(int meta) {
-		return DATA.bambooShoot.ordinal();
+		return DATA.BAMBOO_SHOOT.ordinal();
 	}
 
 	@Override

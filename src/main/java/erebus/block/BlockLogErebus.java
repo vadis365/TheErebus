@@ -45,7 +45,7 @@ public class BlockLogErebus extends BlockLog {
 			ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
 			drops.add(new ItemStack(ModBlocks.saplessLog));
 			for (int i = 0; i < 1 + world.rand.nextInt(2 + fortune); i++)
-				drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.sapBall.ordinal()));
+				drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.SAP_BALL.ordinal()));
 			return drops;
 		}
 		return super.getDrops(world, x, y, z, metadata, fortune);

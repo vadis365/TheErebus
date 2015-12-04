@@ -186,7 +186,7 @@ public class BlockBerryBush extends Block {
 	public ItemStack getBerry() {
 		ItemStack item = null;
 		if (type == "jade")
-			item = new ItemStack(ModItems.materials, 1, DATA.jadeBerries.ordinal());
+			item = new ItemStack(ModItems.materials, 1, DATA.JADE_BERRIES.ordinal());
 		if (type == "heart")
 			item = new ItemStack(ModItems.heartBerries, 1);
 		if (type == "swamp")

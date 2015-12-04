@@ -59,7 +59,7 @@ public class EntityMagmaCrawler extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(ItemMaterials.DATA.magmaCrawlerEye.makeStack(), 0.0F);
+		entityDropItem(ItemMaterials.DATA.MAGMA_CRAWLER_EYE.makeStack(), 0.0F);
 	}
 
 	public boolean isOnCeiling() {

@@ -60,14 +60,14 @@ public class BlockTempleBrickUnbreaking extends Block {
 				case 0:
 					return true;
 				case 1:
-					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.jade.ordinal()) {
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.JADE.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 6, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;
 					}
 					return true;
 				case 2:
-					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.plateExo.ordinal()) {
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.PLATE_EXO.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 7, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;
@@ -81,7 +81,7 @@ public class BlockTempleBrickUnbreaking extends Block {
 					}
 					return true;
 				case 4:
-					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.magmaCrawlerEye.ordinal()) {
+					if (stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.MAGMA_CRAWLER_EYE.ordinal()) {
 						world.setBlockMetadataWithNotify(x, y, z, 9, 3);
 						if (!player.capabilities.isCreativeMode)
 							stack.stackSize--;

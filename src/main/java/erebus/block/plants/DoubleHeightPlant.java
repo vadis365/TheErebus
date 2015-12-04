@@ -50,11 +50,11 @@ public class DoubleHeightPlant extends BlockDoublePlant implements IShearable {
 			return drops;
 
 		if ("Sundew".equals(name))
-			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.bioLuminescence.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.BIO_LUMINESCENCE.ordinal()));
 		else if ("WeepingBlue".equals(name))
-			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.weepingBluePetal.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.WEEPING_BLUE_PETAL.ordinal()));
 		else if ("Bullrush".equals(name))
-			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.papyrus.ordinal()));
+			drops.add(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.PAPYRUS.ordinal()));
 		else if ("WaterFlower".equals(name))
 			drops.add(new ItemStack(this));
 		else {

@@ -64,7 +64,7 @@ public class EntityLocust extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.elasticFibre.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.ELASTIC_FIBRE.makeStack(), 0.0F);
 	}
 
 	public boolean randJump() {

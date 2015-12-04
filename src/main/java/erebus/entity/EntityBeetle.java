@@ -130,7 +130,7 @@ public class EntityBeetle extends EntityAnimal {
 			worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.beetleTamingAmulet.ordinal()) {
+		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.BEETLE_TAMING_AMULET.ordinal()) {
 			is.stackSize--;
 			setTame((byte) 1);
 			return true;
@@ -148,7 +148,7 @@ public class EntityBeetle extends EntityAnimal {
 		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.PLATE_EXO.makeStack(), 0.0F);
 	}
 
 	@Override

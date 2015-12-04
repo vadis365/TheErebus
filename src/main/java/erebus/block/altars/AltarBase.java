@@ -59,10 +59,10 @@ public class AltarBase extends AltarAbstract {
 
 	private void initMap() {
 		if (ALTAR_TYPES.isEmpty()) {
-			ALTAR_TYPES.put(ItemMaterials.DATA.bioVelocity, ModBlocks.altarXP);
-			ALTAR_TYPES.put(ItemMaterials.DATA.elasticFibre, ModBlocks.altarRepair);
-			ALTAR_TYPES.put(ItemMaterials.DATA.redGem, ModBlocks.altarLightning);
-			ALTAR_TYPES.put(ItemMaterials.DATA.bioLuminescence, ModBlocks.altarHealing);
+			ALTAR_TYPES.put(ItemMaterials.DATA.BIO_VELOCITY, ModBlocks.altarXP);
+			ALTAR_TYPES.put(ItemMaterials.DATA.ELASTIC_FIBRE, ModBlocks.altarRepair);
+			ALTAR_TYPES.put(ItemMaterials.DATA.RED_GEM, ModBlocks.altarLightning);
+			ALTAR_TYPES.put(ItemMaterials.DATA.BIO_LUMINESCENCE, ModBlocks.altarHealing);
 		}
 	}
 }

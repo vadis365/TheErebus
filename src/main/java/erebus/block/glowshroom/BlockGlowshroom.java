@@ -72,7 +72,7 @@ public class BlockGlowshroom extends Block {
 
 	@Override
 	public int damageDropped(int meta) {
-		return DATA.yellowDottedFungus.ordinal();
+		return DATA.YELLOW_DOTTED_FUNGUS.ordinal();
 	}
 
 	@Override

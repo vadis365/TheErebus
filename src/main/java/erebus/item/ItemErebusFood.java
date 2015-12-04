@@ -156,9 +156,9 @@ public class ItemErebusFood extends ItemFood {
 				return new ItemStack(Items.bowl);
 			case MELONADE:
 			case MELONADE_SPARKLY:
-				return ItemMaterials.DATA.smoothieGlass.makeStack();
+				return ItemMaterials.DATA.SMOOTHIE_GLASS.makeStack();
 			case TITAN_STEW_COOKED:
-				return ItemMaterials.DATA.stewPot.makeStack();
+				return ItemMaterials.DATA.STEW_POT.makeStack();
 			default:
 				return null;
 		}

@@ -32,7 +32,7 @@ public class ItemLeggingsSprint extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.bioVelocity.ordinal();
+		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.BIO_VELOCITY.ordinal();
 	}
 
 	@Override

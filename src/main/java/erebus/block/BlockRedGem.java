@@ -64,7 +64,7 @@ public class BlockRedGem extends Block implements IHasCustomItemBlock {
 
 	@Override
 	public int damageDropped(int meta) {
-		return meta == 1 || meta == 2 ? 1 : DATA.redGem.ordinal();
+		return meta == 1 || meta == 2 ? 1 : DATA.RED_GEM.ordinal();
 	}
 
 	@Override

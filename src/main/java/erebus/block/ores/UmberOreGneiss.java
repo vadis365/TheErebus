@@ -19,6 +19,6 @@ public class UmberOreGneiss extends UmberOre {
 
 	@Override
 	public int damageDropped(int meta) {
-		return ItemMaterials.DATA.gneissRock.ordinal();
+		return ItemMaterials.DATA.GNEISS_ROCK.ordinal();
 	}
 }

@@ -148,7 +148,7 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(ItemMaterials.DATA.nectar.makeStack(getNectarPoints() + 2), 0.0F);
+		entityDropItem(ItemMaterials.DATA.NECTAR.makeStack(getNectarPoints() + 2), 0.0F);
 	}
 
 	public boolean isFlying() {
@@ -199,7 +199,7 @@ public class EntityWorkerBee extends EntityTameable {
 	}
 
 	private void addHoneyToInventory(int x, int y, int z) {
-		if (Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), ItemMaterials.DATA.nectar.makeStack(2)))
+		if (Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), ItemMaterials.DATA.NECTAR.makeStack(2)))
 			setNectarPoints(getNectarPoints() - 2);
 	}
 
@@ -261,7 +261,7 @@ public class EntityWorkerBee extends EntityTameable {
 		ItemStack is = player.inventory.getCurrentItem();
 		if (!worldObj.isRemote && is != null && is.getItem() == ModItems.nectarCollector)
 			if (getNectarPoints() > 0) {
-				entityDropItem(ItemMaterials.DATA.nectar.makeStack(2), 0.0F);
+				entityDropItem(ItemMaterials.DATA.NECTAR.makeStack(2), 0.0F);
 				is.damageItem(1, player);
 				setNectarPoints(getNectarPoints() - 2);
 				setTarget(null);

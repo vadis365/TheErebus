@@ -34,7 +34,7 @@ public class UmberOreFossil extends UmberOre {
 		}
 
 		if (world.rand.nextInt(10 - Math.min(6, fortune * 2)) == 0) {
-			drops.add(ItemMaterials.DATA.altarFragment.makeStack());
+			drops.add(ItemMaterials.DATA.ALTAR_FRAGMENT.makeStack());
 			return drops;
 		}
 
@@ -47,7 +47,7 @@ public class UmberOreFossil extends UmberOre {
 				meta = 0;
 			} else {
 				item = ModItems.materials;
-				meta = ItemMaterials.DATA.shardBone.ordinal();
+				meta = ItemMaterials.DATA.SHARD_BONE.ordinal();
 			}
 
 			drops.add(new ItemStack(item, 1, meta));

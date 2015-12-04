@@ -20,6 +20,6 @@ public class UmberOrePetrifiedWood extends UmberOre {
 
 	@Override
 	public int damageDropped(int meta) {
-		return ItemMaterials.DATA.petrifiedWood.ordinal();
+		return ItemMaterials.DATA.PETRIFIED_WOOD.ordinal();
 	}
 }

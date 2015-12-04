@@ -100,7 +100,7 @@ public class EntityAntlionMiniBoss extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.plateExo.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.PLATE_EXO.makeStack(), 0.0F);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class ItemWandOfPreservation extends Item {
 	private boolean consumeBullet(EntityPlayer player) {
 		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
 			ItemStack stack = player.inventory.mainInventory[i];
-			if (stack != null && stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.amberStar.ordinal()) {
+			if (stack != null && stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.AMBER_STAR.ordinal()) {
 				if (--stack.stackSize <= 0)
 					player.inventory.mainInventory[i] = null;
 				player.inventory.markDirty();

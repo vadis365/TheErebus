@@ -110,14 +110,14 @@ public class EntityCentipede extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount) {
-			entityDropItem(ItemMaterials.DATA.bioVelocity.makeStack(), 0.0F);
-			entityDropItem(ItemMaterials.DATA.poisonGland.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.BIO_VELOCITY.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.DATA.POISON_GLAND.makeStack(), 0.0F);
 		}
 	}
 
 	@Override
 	protected void dropRareDrop(int looting) {
-		entityDropItem(ItemMaterials.DATA.supernaturalvelocity.makeStack(), 0.0F);
+		entityDropItem(ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), 0.0F);
 	}
 
 	@Override
