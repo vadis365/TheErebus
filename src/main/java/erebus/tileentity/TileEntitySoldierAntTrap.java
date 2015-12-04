@@ -70,7 +70,7 @@ public class TileEntitySoldierAntTrap extends TileEntity {
 				Entity entity = list.get(i);
 				if (entity != null)
 					if (entity instanceof EntityPlayer)
-						((EntityLivingBase) entity).attackEntityFrom(DamageSource.generic , 2);
+						((EntityLivingBase) entity).attackEntityFrom(DamageSource.generic, 2);
 			}
 		return null;
 	}
