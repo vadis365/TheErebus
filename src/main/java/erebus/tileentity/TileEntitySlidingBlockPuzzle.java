@@ -21,7 +21,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 	private ForgeDirection facing;
 	private BlockOffset offset;
 	private SlidingPuzzle puzzle;
-	private final SlidingPiece[] pieces = new SlidingPiece[4];
+	private final SlidingPiece[] pieces = new SlidingPiece[4], originalPieces = new SlidingPiece[4];
 
 	public ForgeDirection getFacing() {
 		return facing;
@@ -37,6 +37,33 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 
 	public SlidingPiece[] getPieces() {
 		return pieces;
+	}
+
+	public void onPuzzleChange() {
+		for (int i = 0; i < pieces.length; i++)
+			if (!originalPieces[i].equals(pieces[i]))
+				return;
+
+		Utils.breakBlockWithParticles(worldObj, xCoord, yCoord, zCoord, 0);
+		List<ForgeDirection> neighbouringDirs = new ArrayList<ForgeDirection>();
+		neighbouringDirs.add(ForgeDirection.UP);
+		neighbouringDirs.add(ForgeDirection.DOWN);
+		neighbouringDirs.add(facing.getRotation(ForgeDirection.UP));
+		neighbouringDirs.add(facing.getRotation(ForgeDirection.DOWN));
+		for (ForgeDirection dir : neighbouringDirs) {
+			BlockOffset neighbourOffset = offset.add(dir);
+			if (!neighbourOffset.isValid())
+				continue;
+			TileEntitySlidingBlockPuzzle neighbour = Utils.getTileEntity(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, TileEntitySlidingBlockPuzzle.class);
+			if (neighbour != null)
+				neighbour.onPuzzleChange();
+		}
+	}
+
+	private void onFinishedCreating() {
+		for (int i = 0; i < pieces.length; i++)
+			originalPieces[i] = pieces[i].copy();
+
 	}
 
 	public boolean handleClick(float hitX, float hitY, float hitZ) {
@@ -84,8 +111,10 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		SlidingPiece emptyPiece = getEmptyPieceIfPresent();
 		if (emptyPiece != null) {
 			if (swapPiecesIfPossible(piece, emptyPiece)) {
-				if (!worldObj.isRemote)
+				if (!worldObj.isRemote) {
+					onPuzzleChange();
 					sendUpdatesToClient();
+				}
 				return true;
 			}
 		} else {
@@ -104,6 +133,8 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 					if (neighbourOffset.equals(neighbour.offset) && emptyPiece != null)
 						if (swapPiecesIfPossible(piece, emptyPiece)) {
 							if (!worldObj.isRemote) {
+								onPuzzleChange();
+								neighbour.onPuzzleChange();
 								sendUpdatesToClient();
 								neighbour.sendUpdatesToClient();
 							}
@@ -161,6 +192,8 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		puzzle = SlidingPuzzle.values()[nbt.getInteger("Puzzle")];
 		for (int i = 0; i < pieces.length; i++)
 			pieces[i] = SlidingPiece.fromArray(nbt.getIntArray("Piece" + i));
+		for (int i = 0; i < originalPieces.length; i++)
+			originalPieces[i] = SlidingPiece.fromArray(nbt.getIntArray("OriginalPiece" + i));
 	}
 
 	@Override
@@ -175,6 +208,8 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		nbt.setInteger("Puzzle", puzzle.ordinal());
 		for (int i = 0; i < pieces.length; i++)
 			nbt.setIntArray("Piece" + i, pieces[i].toArray());
+		for (int i = 0; i < originalPieces.length; i++)
+			nbt.setIntArray("OriginalPiece" + i, originalPieces[i].toArray());
 		return nbt;
 	}
 
@@ -258,6 +293,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 				else
 					tile.pieces[3] = new SlidingPiece(3, xx + 1, yy + 1);
 			}
+			tile.onFinishedCreating();
 			tile.sendUpdatesToClient();
 			index++;
 		}
@@ -335,7 +371,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 
 		@Override
 		public String toString() {
-			return "SlidingPiece: " + u + ", " + v;
+			return "SlidingPiece: " + "index:" + index + ", u: " + u + ", v:" + v;
 		}
 	}
 

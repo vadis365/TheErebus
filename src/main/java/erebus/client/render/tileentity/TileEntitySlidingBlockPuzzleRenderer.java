@@ -16,7 +16,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 @SideOnly(Side.CLIENT)
 public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRenderer {
 
-	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation("textures/blocks/planks_spruce.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation("erebus", "textures/blocks/anthillBlock.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
@@ -54,9 +54,17 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 		}
 
 		bindTexture(BACKGROUND_TEXTURE);
+
+		GL11.glPushMatrix();
+		GL11.glTranslated(16 * facing.offsetX, 0, 16 * -facing.offsetZ);
 		drawFace(facing.getOpposite(), 0, 0, 16, 16, 0, 0, 1);
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
 		GL11.glTranslated(facing.offsetX, 0, -facing.offsetZ);
 		drawFace(facing, 0, 0, 16, 16, 0, 0, 1);
+		GL11.glPopMatrix();
+
 		GL11.glPopMatrix();
 	}
 

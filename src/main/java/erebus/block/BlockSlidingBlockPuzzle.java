@@ -15,6 +15,7 @@ public class BlockSlidingBlockPuzzle extends BlockContainer {
 		super(Material.rock);
 		setBlockUnbreakable();
 		setBlockName("erebus.sldingBlockPuzzle");
+		setBlockTextureName("erebus:anthillBlock");
 	}
 
 	@Override
