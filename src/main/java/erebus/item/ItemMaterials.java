@@ -97,7 +97,7 @@ public class ItemMaterials extends Item {
 	public void registerIcons(IIconRegister reg) {
 		icons = new IIcon[DATA.values().length];
 		for (DATA data : DATA.values())
-			icons[data.ordinal()] = reg.registerIcon("erebus:" + data.name());
+			icons[data.ordinal()] = reg.registerIcon("erebus:" + data.name().toLowerCase());
 	}
 
 	@Override
