@@ -3,6 +3,18 @@ package erebus.world.feature.structure;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
@@ -16,18 +28,6 @@ import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class AntHillMazeDungeon {
 
@@ -89,16 +89,16 @@ public class AntHillMazeDungeon {
 		for (int yy = y; yy < sizeY; yy++)
 			switch ((yy - y) % 5) {
 				case 0:
-					buildFloor(world, x, yy, z, mazeWidth, mazeHeight, rand, false);
-					buildFloor(world, x, yy + 1, z, mazeWidth, mazeHeight, rand, true);
-					buildRoof(world, x, yy + 5, z, mazeWidth, mazeHeight, rand);
-					break;
-				case 1:
-					buildLevel(world, x, yy + 1, z, mazeWidth, mazeHeight, maze, solid, 0);
 					buildLevel(world, x, yy + 2, z, mazeWidth, mazeHeight, maze, solid, 0);
 					buildLevel(world, x, yy + 3, z, mazeWidth, mazeHeight, maze, solid, 0);
-					createAir(world, x, yy + 1, z + 1, mazeWidth, mazeHeight, rand);
-					addFeature(world, x, yy + 2, z, mazeWidth, mazeHeight, maze, rand);
+					buildLevel(world, x, yy + 4, z, mazeWidth, mazeHeight, maze, solid, 0);
+					createAir(world, x, yy + 3, z + 1, mazeWidth, mazeHeight, rand);
+					addFeature(world, x, yy + 3, z, mazeWidth, mazeHeight, maze, rand);
+					break;
+				case 1:
+					buildFloor(world, x, yy - 1, z, mazeWidth, mazeHeight, rand, false);
+					buildFloor(world, x, yy, z, mazeWidth, mazeHeight, rand, true);
+					buildRoof(world, x, yy + 4, z, mazeWidth, mazeHeight, rand);
 					break;
 			}
 		System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
@@ -224,14 +224,13 @@ public class AntHillMazeDungeon {
 	private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand, boolean addFeature) {
 		for (int i = 0; i <= h * 4; i++)
 			for (int j = 0; j <= w * 4; j++)
-				if (world.getBlock(x + j, y, z + i) != stairs)
-					if (rand.nextInt(15) == 0 && addFeature)
-						if (rand.nextBoolean() && rand.nextBoolean())
-							world.setBlock(x + j, y, z + i, Blocks.mycelium); // formic acid?
-						else
-							world.setBlock(x + j, y, z + i, ModBlocks.puffShroom, 3, 2);
+				if (rand.nextInt(15) == 0 && addFeature && world.getBlock(x + j, y + 1, z + i) != solid)
+					if (rand.nextBoolean() && rand.nextBoolean())
+						world.setBlock(x + j, y, z + i, Blocks.mycelium); // formic acid?
 					else
-						world.setBlock(x + j, y, z + i, solid, 0, 2);
+						world.setBlock(x + j, y, z + i, ModBlocks.puffShroom, 3, 2);
+				else if (world.getBlock(x + j, y, z + i) != Blocks.wool)
+					world.setBlock(x + j, y, z + i, solid, 0, 2);
 	}
 
 	private void addFeature(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
@@ -253,7 +252,9 @@ public class AntHillMazeDungeon {
 							placeBones(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
 					} else if (rand.nextInt(6) == 0)
 						if (rand.nextBoolean())
-							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool);
+							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool);//fungal ant spawner
+						else
+							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool, 15, 0); //fungal Soldier ant spawner
 				}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0) {
@@ -269,7 +270,7 @@ public class AntHillMazeDungeon {
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 1, rand);
 						else if (rand.nextInt(6) == 0)
-							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);
+							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);	
 					}
 				}
 			for (int j = 0; j < w; j++)
