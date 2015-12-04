@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import erebus.ModBlocks;
 import erebus.core.helper.Utils;
@@ -58,12 +59,6 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			if (neighbour != null)
 				neighbour.onPuzzleChange();
 		}
-	}
-
-	private void onFinishedCreating() {
-		for (int i = 0; i < pieces.length; i++)
-			originalPieces[i] = pieces[i].copy();
-
 	}
 
 	public boolean handleClick(float hitX, float hitY, float hitZ) {
@@ -156,7 +151,7 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 	private boolean swapPiecesIfPossible(SlidingPiece piece, SlidingPiece emptyPiece) {
 		if (piece.x == emptyPiece.x && piece.y != emptyPiece.y || piece.x != emptyPiece.x && piece.y == emptyPiece.y) {
 			if (!worldObj.isRemote)
-				SlidingPiece.swapPieces(piece, emptyPiece);
+				SlidingPiece.swapUVs(piece, emptyPiece);
 			return true;
 		}
 		return false;
@@ -268,34 +263,46 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		for (BlockOffset offset : offsets)
 			tiles.add(setBlock(world, x, y, z, offset, facing, puzzle));
 
-		int index = 0;
-		for (TileEntitySlidingBlockPuzzle tile : tiles) {
-			int tX = index % 3;
-			int tY = index / 3;
+		List<SlidingPiece> pieces = new ArrayList<SlidingPiece>();
+		for (int i = 0; i < tiles.size(); i++) {
+			TileEntitySlidingBlockPuzzle tile = tiles.get(i);
+			int tX = i % 3;
+			int tY = i / 3;
 
 			int xx = 2 * tX;
 			int yy = 2 * tY;
 
 			if (facing == ForgeDirection.SOUTH || facing == ForgeDirection.EAST) {
-				tile.pieces[1] = new SlidingPiece(0, xx, yy);
-				tile.pieces[0] = new SlidingPiece(1, xx + 1, yy);
-				tile.pieces[3] = new SlidingPiece(2, xx, yy + 1);
+				pieces.add(tile.originalPieces[1] = new SlidingPiece(0, xx, yy));
+				pieces.add(tile.originalPieces[0] = new SlidingPiece(1, xx + 1, yy));
+				pieces.add(tile.originalPieces[3] = new SlidingPiece(2, xx, yy + 1));
 				if (tX == 2 && tY == 2)
-					tile.pieces[2] = new SlidingPiece(3, -1, -1);
+					pieces.add(tile.originalPieces[2] = new SlidingPiece(3, -1, -1));
 				else
-					tile.pieces[2] = new SlidingPiece(3, xx + 1, yy + 1);
+					pieces.add(tile.originalPieces[2] = new SlidingPiece(3, xx + 1, yy + 1));
 			} else {
-				tile.pieces[0] = new SlidingPiece(0, xx, yy);
-				tile.pieces[1] = new SlidingPiece(1, xx + 1, yy);
-				tile.pieces[2] = new SlidingPiece(2, xx, yy + 1);
+				pieces.add(tile.originalPieces[0] = new SlidingPiece(0, xx, yy));
+				pieces.add(tile.originalPieces[1] = new SlidingPiece(1, xx + 1, yy));
+				pieces.add(tile.originalPieces[2] = new SlidingPiece(2, xx, yy + 1));
 				if (tX == 2 && tY == 2)
-					tile.pieces[3] = new SlidingPiece(3, -1, -1);
+					pieces.add(tile.originalPieces[3] = new SlidingPiece(3, -1, -1));
 				else
-					tile.pieces[3] = new SlidingPiece(3, xx + 1, yy + 1);
+					pieces.add(tile.originalPieces[3] = new SlidingPiece(3, xx + 1, yy + 1));
 			}
-			tile.onFinishedCreating();
+		}
+		for (TileEntitySlidingBlockPuzzle tile : tiles) {
+			Random rand = tile.worldObj.rand;
+
+			for (int i = 0; i < tile.pieces.length; i++) {
+				int index = rand.nextInt(pieces.size());
+				int pieceIndex = i;
+				if (facing == ForgeDirection.SOUTH || facing == ForgeDirection.EAST)
+					pieceIndex ^= 1;
+				tile.pieces[i] = pieces.get(index).copyUV(pieceIndex);
+				pieces.remove(index);
+			}
+
 			tile.sendUpdatesToClient();
-			index++;
 		}
 	}
 
@@ -348,11 +355,15 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 			return new SlidingPiece(index, u, v);
 		}
 
+		SlidingPiece copyUV(int index) {
+			return new SlidingPiece(index, u, v);
+		}
+
 		static SlidingPiece fromArray(int[] array) {
 			return new SlidingPiece(array[0], array[1], array[2]);
 		}
 
-		static void swapPieces(SlidingPiece piece0, SlidingPiece piece1) {
+		static void swapUVs(SlidingPiece piece0, SlidingPiece piece1) {
 			SlidingPiece temp = piece0.copy();
 			piece0.u = piece1.u;
 			piece0.v = piece1.v;
