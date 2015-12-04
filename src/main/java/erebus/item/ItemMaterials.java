@@ -193,7 +193,8 @@ public class ItemMaterials extends Item {
 		smoothieGlass,
 		magmaCrawlerEye,
 		stewPot,
-		titanStew;
+		titanStew,
+		forceKey;
 
 		public ItemStack makeStack() {
 			return makeStack(1);
