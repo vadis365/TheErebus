@@ -140,10 +140,10 @@ public class AntHillMazeDungeon {
 			if (floors == 0)
 				world.setBlock(x + 1, yy + 2, z + 1, Blocks.lapis_block); // teleporter thing to boss arena.
 
-		//	if (floors == 4) {
-		//		generateMainDome(world, x + 16, yy + 1, z + 16);
-		//		gererateEntrance(world, x + 2, yy + 1, z + 2);
-		//	}
+			if (floors == 4) {
+				generateMainDome(world, x + 16, yy + 1, z + 16);
+				gererateEntrance(world, x + 2, yy + 1, z + 2);
+			}
 
 			// create air gaps above stairs using imaginary extra 2 floors
 			if (yy - y == 15 || yy - y == 25) {

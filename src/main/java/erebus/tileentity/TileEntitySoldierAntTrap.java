@@ -31,7 +31,7 @@ public class TileEntitySoldierAntTrap extends TileEntity {
 				if (animationTicks == 0)
 					worldObj.playSoundEffect(xCoord, yCoord, zCoord, "mob.zombie.say", 0.25F, 0.5F);
 				if (animationTicks == 11)
-					worldObj.playSoundEffect(xCoord, yCoord, zCoord, "mob.sheep.shear", 2.0F, 0.5F);
+					worldObj.playSoundEffect(xCoord, yCoord, zCoord, "mob.sheep.shear", 0.5F, 0.5F);
 				if (animationTicks <= 16)
 					animationTicks++;
 				if (animationTicks == 16)
@@ -41,7 +41,7 @@ public class TileEntitySoldierAntTrap extends TileEntity {
 				if (animationTicks >= 1)
 					animationTicks--;
 				if (animationTicks == 0)
-					if (worldObj.rand.nextInt(50) == 0)
+					if (worldObj.rand.nextInt(140) == 0)
 						setActive(true);
 			}
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
