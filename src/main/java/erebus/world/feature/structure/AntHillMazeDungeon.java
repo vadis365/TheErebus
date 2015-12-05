@@ -73,13 +73,13 @@ public class AntHillMazeDungeon {
 				}
 			});
 
-	private void generateSurface(World world, Random rand, int chunkX, int chunkY, int chunkZ) {
+	private void generateSurface(World world, Random rand, int chunkX, int chunkY, int chunkZ, boolean hasKey) {
 		BiomeGenBase biomeBase = world.getBiomeGenForCoords(chunkX, chunkZ);
 		if (biomeBase == ModBiomes.fungalForest)
-			generate(world, rand, chunkX, chunkY, chunkZ);
+			generate(world, rand, chunkX, chunkY, chunkZ, hasKey);
 	}
 
-	private void generate(World world, Random rand, int x, int y, int z) {
+	private void generate(World world, Random rand, int x, int y, int z, boolean hasKey) {
 		int sizeX = 16;
 		int sizeY = y + 5;
 		int sizeZ = 16;
@@ -109,9 +109,11 @@ public class AntHillMazeDungeon {
 					break;
 			}
 
-		IInventory randomInvt = chests.get(rand.nextInt(chests.size()));
-		Utils.addItemStackToInventory(randomInvt, ItemMaterials.DATA.FORCE_KEY.makeStack());
-		System.out.println("Added key to inventory at: " + ((TileEntity) randomInvt).xCoord + ", " + ((TileEntity) randomInvt).yCoord + ", " + ((TileEntity) randomInvt).zCoord);
+		if (hasKey) {
+			IInventory randomInvt = chests.get(rand.nextInt(chests.size()));
+			Utils.addItemStackToInventory(randomInvt, ItemMaterials.DATA.FORCE_KEY.makeStack());
+			System.out.println("Added key to inventory at: " + ((TileEntity) randomInvt).xCoord + ", " + ((TileEntity) randomInvt).yCoord + ", " + ((TileEntity) randomInvt).zCoord);
+		}
 
 		System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
@@ -120,7 +122,7 @@ public class AntHillMazeDungeon {
 		int yy = y;
 		for (int floors = 0; floors < 6; floors++) {
 			if (floors < 4) {
-				generate(world, rand, x, yy, z);
+				generate(world, rand, x, yy, z, true);
 				// create stairs
 				if (yy - y == 5 || yy - y == 15) {
 					world.setBlock(x + 1, yy + 2, z + 1, solid);
