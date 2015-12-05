@@ -140,10 +140,10 @@ public class AntHillMazeDungeon {
 			if (floors == 0)
 				world.setBlock(x + 1, yy + 2, z + 1, Blocks.lapis_block); // teleporter thing to boss arena.
 
-			if (floors == 4) {
-				generateMainDome(world, x + 16, yy + 1, z + 16);
-				gererateEntrance(world, x + 2, yy + 1, z + 2);
-			}
+		//	if (floors == 4) {
+		//		generateMainDome(world, x + 16, yy + 1, z + 16);
+		//		gererateEntrance(world, x + 2, yy + 1, z + 2);
+		//	}
 
 			// create air gaps above stairs using imaginary extra 2 floors
 			if (yy - y == 15 || yy - y == 25) {
@@ -255,6 +255,10 @@ public class AntHillMazeDungeon {
 							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool);//fungal ant spawner
 						else
 							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool, 15, 0); //fungal Soldier ant spawner
+					else if(rand.nextInt(10) == 0) {
+						int randOffset = rand.nextInt(2);
+						world.setBlock(x + 1 + j * 4, y - randOffset, z + i * 4, ModBlocks.soldierAntTrap, 3, 2);
+					}	
 				}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0) {
@@ -270,8 +274,12 @@ public class AntHillMazeDungeon {
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 1, rand);
 						else if (rand.nextInt(6) == 0)
-							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);	
+							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);
 					}
+					else if(rand.nextInt(10) == 0) {
+						int randOffset = rand.nextInt(2);
+						world.setBlock(x + j * 4, y - randOffset, z + 2 + i * 4, ModBlocks.soldierAntTrap, 5, 2);
+					}	
 				}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 4) == 0) {
@@ -289,6 +297,10 @@ public class AntHillMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 4, rand);
 					}
+					if(rand.nextInt(10) == 0) {
+						int randOffset = rand.nextInt(2);
+						world.setBlock(x + 4 + j * 4, y - randOffset, z + 2 + i * 4, ModBlocks.soldierAntTrap, 4, 2);
+					}	
 				}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 2) == 0) {
@@ -306,6 +318,10 @@ public class AntHillMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 2, rand);
 					}
+					else if(rand.nextInt(10) == 0) {
+						int randOffset = rand.nextInt(2);
+						world.setBlock(x + 1 + j * 4, y - randOffset, z + 4 + i * 4, ModBlocks.soldierAntTrap, 2, 2);
+					}	
 				}
 		}
 	}
