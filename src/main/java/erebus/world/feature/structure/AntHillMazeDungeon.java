@@ -1,24 +1,15 @@
 package erebus.world.feature.structure;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.core.helper.Utils;
 import erebus.item.ItemErebusFood.FoodType;
+import erebus.item.ItemMaterials;
 import erebus.item.ItemMaterials.DATA;
 import erebus.item.ItemSmoothie.SmoothieType;
 import erebus.tileentity.TileEntityBones;
@@ -28,6 +19,20 @@ import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class AntHillMazeDungeon {
 
@@ -38,8 +43,9 @@ public class AntHillMazeDungeon {
 
 	private Block solid = ModBlocks.anthillBlock;
 	private Block stairs = ModBlocks.anthillStairs;
+	private List<IInventory> chests = new ArrayList<IInventory>();
 
-	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.JADE.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.PLATE_EXO.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
+	private static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.book).setAmount(1, 4).setWeight(18), new LootItemStack(Items.paper).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.web).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.JADE.ordinal()).setWeight(10), new LootItemStack(ModItems.materials).setAmount(4, 8).setDamage(DATA.PLATE_EXO.ordinal()).setWeight(9), new LootItemStack(Items.enchanted_book).setWeight(8), new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1), new LootItemStack(Items.golden_pickaxe).setWeight(3), new LootItemStack(Items.iron_pickaxe).setWeight(2),
 			new LootItemStack(ModItems.jadePickaxe).setWeight(1), new LootItemStack(Items.golden_shovel).setWeight(3), new LootItemStack(Items.iron_shovel).setWeight(2), new LootItemStack(ModItems.jadeShovel).setWeight(1), new LootItemStack(Items.golden_axe).setWeight(3), new LootItemStack(Items.iron_axe).setWeight(2), new LootItemStack(ModItems.jadeAxe).setWeight(1), new LootItemStack(Items.golden_sword).setWeight(3), new LootItemStack(Items.iron_sword).setWeight(2), new LootItemStack(ModItems.jadeSword).setWeight(1), new LootItemStack(Items.iron_chestplate).setWeight(2), new LootItemStack(ModItems.jadeBody).setWeight(1), new LootItemStack(Items.golden_chestplate).setWeight(1), new LootItemStack(Items.iron_helmet).setWeight(2), new LootItemStack(ModItems.jadeHelmet).setWeight(1),
 			new LootItemStack(Items.golden_helmet).setWeight(1), new LootItemStack(Items.iron_leggings).setWeight(2), new LootItemStack(ModItems.jadeLegs).setWeight(1), new LootItemStack(Items.golden_leggings).setWeight(1), new LootItemStack(Items.iron_boots).setWeight(2), new LootItemStack(ModItems.jadeBoots).setWeight(1), new LootItemStack(Items.golden_boots).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.ALTAR_FRAGMENT.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.REINFORCED_PLATE_EXO.ordinal()).setWeight(1), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.SCORPION_PINCER.ordinal()).setWeight(1),
 			new LootItemStack(ModItems.materials).setAmount(1, 3).setDamage(DATA.WHETSTONE_POWDER.ordinal()).setWeight(3), new LootItemStack(ModItems.materials).setAmount(1).setDamage(DATA.PLATE_EXO_RHINO.ordinal()).setWeight(1), new LootItemStack(ModItems.food).setAmount(1, 3).setDamage(FoodType.HONEY_SANDWICH.ordinal()).setWeight(3), new LootItemStack(ModItems.cabbageSeeds).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1), new LootItemStack(ModItems.lifeBlood).setAmount(1, 2).setWeight(4), new LootItemStack(ModItems.rolledNewspaper).setAmount(1).setWeight(1), new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2), new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
@@ -67,13 +73,13 @@ public class AntHillMazeDungeon {
 				}
 			});
 
-	public void generateSurface(World world, Random rand, int chunkX, int chunkY, int chunkZ) {
+	private void generateSurface(World world, Random rand, int chunkX, int chunkY, int chunkZ) {
 		BiomeGenBase biomeBase = world.getBiomeGenForCoords(chunkX, chunkZ);
 		if (biomeBase == ModBiomes.fungalForest)
 			generate(world, rand, chunkX, chunkY, chunkZ);
 	}
 
-	public void generate(World world, Random rand, int x, int y, int z) {
+	private void generate(World world, Random rand, int x, int y, int z) {
 		int sizeX = 16;
 		int sizeY = y + 5;
 		int sizeZ = 16;
@@ -83,6 +89,7 @@ public class AntHillMazeDungeon {
 		if (mazeWidth < 2 || mazeHeight < 2 || sizeY < 1)
 			return;
 
+		chests.clear();
 		int[][] maze = null;
 		MazeGenerator generator = new PerfectMazeGenerator(mazeWidth, mazeHeight);
 		maze = generator.generateMaze();
@@ -101,6 +108,11 @@ public class AntHillMazeDungeon {
 					buildRoof(world, x, yy + 4, z, mazeWidth, mazeHeight, rand);
 					break;
 			}
+
+		IInventory randomInvt = chests.get(rand.nextInt(chests.size()));
+		Utils.addItemStackToInventory(randomInvt, ItemMaterials.DATA.FORCE_KEY.makeStack());
+		System.out.println("Added key to inventory at: " + ((TileEntity) randomInvt).xCoord + ", " + ((TileEntity) randomInvt).yCoord + ", " + ((TileEntity) randomInvt).zCoord);
+
 		System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
 
@@ -255,10 +267,10 @@ public class AntHillMazeDungeon {
 							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool);//fungal ant spawner
 						else
 							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool, 15, 0); //fungal Soldier ant spawner
-					else if(rand.nextInt(10) == 0) {
+					else if (rand.nextInt(10) == 0) {
 						int randOffset = rand.nextInt(2);
 						world.setBlock(x + 1 + j * 4, y - randOffset, z + i * 4, ModBlocks.soldierAntTrap, 3, 2);
-					}	
+					}
 				}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0) {
@@ -275,11 +287,10 @@ public class AntHillMazeDungeon {
 							placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 1, rand);
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);
-					}
-					else if(rand.nextInt(10) == 0) {
+					} else if (rand.nextInt(10) == 0) {
 						int randOffset = rand.nextInt(2);
 						world.setBlock(x + j * 4, y - randOffset, z + 2 + i * 4, ModBlocks.soldierAntTrap, 5, 2);
-					}	
+					}
 				}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 4) == 0) {
@@ -297,10 +308,10 @@ public class AntHillMazeDungeon {
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 4, rand);
 					}
-					if(rand.nextInt(10) == 0) {
+					if (rand.nextInt(10) == 0) {
 						int randOffset = rand.nextInt(2);
 						world.setBlock(x + 4 + j * 4, y - randOffset, z + 2 + i * 4, ModBlocks.soldierAntTrap, 4, 2);
-					}	
+					}
 				}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 2) == 0) {
@@ -317,11 +328,10 @@ public class AntHillMazeDungeon {
 							placeChest(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 4, rand);
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 2, rand);
-					}
-					else if(rand.nextInt(10) == 0) {
+					} else if (rand.nextInt(10) == 0) {
 						int randOffset = rand.nextInt(2);
 						world.setBlock(x + 1 + j * 4, y - randOffset, z + 4 + i * 4, ModBlocks.soldierAntTrap, 2, 2);
-					}	
+					}
 				}
 		}
 	}
@@ -329,15 +339,19 @@ public class AntHillMazeDungeon {
 	private void placeChest(World world, int x, int y, int z, int directionMeta, Random rand) {
 		world.setBlock(x, y, z, Blocks.chest, directionMeta, 2);
 		TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y, z);
-		if (chest != null)
+		if (chest != null) {
 			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
+			chests.add(chest);
+		}
 	}
 
 	private void placeBones(World world, int x, int y, int z, int directionMeta, Random rand) {
 		world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 2);
 		TileEntityBones bones = (TileEntityBones) world.getTileEntity(x, y, z);
-		if (bones != null)
+		if (bones != null) {
 			LootUtil.generateLoot(bones, rand, chestLoot, 3, 10);
+			chests.add(bones);
+		}
 	}
 
 	private void buildLevel(World world, int x, int y, int z, int w, int h, int[][] maze, Block blockType, int blockMeta) {
