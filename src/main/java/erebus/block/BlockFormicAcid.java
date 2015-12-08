@@ -25,7 +25,6 @@ public class BlockFormicAcid extends BlockFluidClassic {
 	public BlockFormicAcid() {
 		super(ModFluids.formicAcid, ModMaterials.formicAcid);
 		setBlockName("erebus.formicAcid");
-		setCreativeTab(ModTabs.blocks);
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class BlockFormicAcid extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		if (world.isAirBlock(x, y + 1, z)) {
-			
+
 			float xx = (float) x + 0.5F;
 			double yy = y + 1.0F;
 			float zz = (float) z + 0.5F;
