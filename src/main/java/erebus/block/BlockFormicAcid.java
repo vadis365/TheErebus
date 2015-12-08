@@ -65,10 +65,22 @@ public class BlockFormicAcid extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		if (world.isAirBlock(x, y + 1, z)) {
-			double xx = x + 0.5F;
+			
+			float xx = (float) x + 0.5F;
 			double yy = y + 1.0F;
-			double zz = z + 0.5F;
-			Erebus.proxy.spawnCustomParticle("bubblegas", world, xx, yy, zz, 0.1D, 0.0D, 0.1D);
+			float zz = (float) z + 0.5F;
+			float fixedOffset = 0.25F;
+			float randomOffset = rand.nextFloat() * 0.6F - 0.3F;
+
+			Erebus.proxy.spawnCustomParticle("bubblegas", world, (double) (xx - fixedOffset), (double) y + 0.75D, (double) (zz + randomOffset), 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("bubblegas", world, (double) (xx + fixedOffset), (double) y + 0.75D, (double) (zz + randomOffset), 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("bubblegas", world, (double) (xx + randomOffset), (double) y + 0.75D, (double) (zz - fixedOffset), 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("bubblegas", world, (double) (xx + randomOffset), (double) y + 0.75D, (double) (zz + fixedOffset), 0.0D, 0.0D, 0.0D);
+
+			Erebus.proxy.spawnCustomParticle("swampflame", world, (double) (xx - fixedOffset), yy, (double) (zz + randomOffset), 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("swampflame", world, (double) (xx + fixedOffset), yy, (double) (zz + randomOffset), 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("swampflame", world, (double) (xx + randomOffset), yy, (double) (zz - fixedOffset), 0.0D, 0.0D, 0.0D);
+			Erebus.proxy.spawnCustomParticle("swampflame", world, (double) (xx + randomOffset), yy, (double) (zz + fixedOffset), 0.0D, 0.0D, 0.0D);
 		}
 	}
 }
