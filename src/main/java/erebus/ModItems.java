@@ -175,10 +175,12 @@ public class ModItems {
 	public static final Item bambucketBeetleJuice = new ItemBambucketBeetleJuice();
 	public static final Item bambucketAntiVenom = new ItemBambucketAntiVenom();
 	public static final Item bambucketMilk = new ItemBambucketMilk();
+	public static final Item bambucketFormicAcid = new ItemBambucket(ModBlocks.formicAcid).setUnlocalizedName("erebus.bambucketFormicAcid").setTextureName("erebus:bambucket_formic_acid");
 
 	public static final Item bucketAntiVenom = new ItemBucketAntiVenom().setUnlocalizedName("erebus.bucketAntiVenom").setTextureName("erebus:bucket_antivenom");
 	public static final Item bucketBeetleJuice = new ItemBucketOfBeetleJuice().setUnlocalizedName("erebus.bucketBeetleJuice").setTextureName("erebus:bucket_beetle_juice");
 	public static final Item bucketHoney = new ItemBucket(ModBlocks.honeyBlock).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.bucketHoney").setTextureName("erebus:bucket_honey");
+	public static final Item bucketFormicAcid = new ItemBucket(ModBlocks.formicAcid).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(ModTabs.specials).setUnlocalizedName("erebus.bucketFormicAcid").setTextureName("erebus:bucket_formic_acid");
 
 	public static final Item bottleAntiVenom = new ItemBottleAntiVenom();
 

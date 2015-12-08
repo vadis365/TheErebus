@@ -103,6 +103,11 @@ public class ItemBambucket extends Item {
 						world.setBlockToAir(x, y, z);
 						return addBucketToPlayer(stack, player, ModItems.bambucketHoney);
 					}
+
+					if (block == ModBlocks.formicAcid && meta == 0) {
+						world.setBlockToAir(x, y, z);
+						return addBucketToPlayer(stack, player, ModItems.bambucketFormicAcid);
+					}
 				} else {
 					if (pos.sideHit == 0)
 						y--;

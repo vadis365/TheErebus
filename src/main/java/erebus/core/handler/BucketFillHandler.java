@@ -18,6 +18,10 @@ public class BucketFillHandler {
 			event.world.setBlockToAir(event.target.blockX, event.target.blockY, event.target.blockZ);
 			event.result = new ItemStack(ModItems.bucketHoney);
 			event.setResult(Result.ALLOW);
+		} else if (block == ModBlocks.formicAcid && event.current != null && event.current.getItem() == Items.bucket) {
+			event.world.setBlockToAir(event.target.blockX, event.target.blockY, event.target.blockZ);
+			event.result = new ItemStack(ModItems.bucketFormicAcid);
+			event.setResult(Result.ALLOW);
 		}
 	}
 }

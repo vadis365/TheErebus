@@ -570,9 +570,11 @@ item.erebus.bambucketHoney.name=Honey Bambucket
 item.erebus.bambucketAntiVenom.name=Anti-Venom Bambucket
 item.erebus.bambucketBeetleJuice.name=Beetle Juice Bambucket
 item.erebus.bambucketMilk.name=Milk Bambucket
+item.erebus.bambucketFormicAcid.name=Formic Acid Bambucket
 item.erebus.bucketBeetleJuice.name=Beetle Juice Bucket
 item.erebus.bucketAntiVenom.name=Anti-Venom Bucket
 item.erebus.bottleAntiVenom.name=Anti-Venom Bottle
+item.erebus.bucketFormicAcid.name=Formic Acid Bucket
 
 item.erebus.waspSword.name=Wasp Sword
 item.erebus.sprayCan.name=Insect Repellent
