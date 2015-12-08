@@ -32,6 +32,7 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glDisable(GL11.GL_LIGHTING);
 		if (facing == ForgeDirection.WEST || facing == ForgeDirection.SOUTH)
 			GL11.glTranslated(facing.offsetX, 0, facing.offsetZ);
 		GL11.glScalef(-0.0625F, -0.0625F, 0.0625F);
@@ -65,6 +66,7 @@ public class TileEntitySlidingBlockPuzzleRenderer extends TileEntitySpecialRende
 		drawFace(facing, 0, 0, 16, 16, 0, 0, 1);
 		GL11.glPopMatrix();
 
+		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 
