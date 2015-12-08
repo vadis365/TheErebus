@@ -26,4 +26,5 @@ public class ModMaterials {
 	public static ToolMaterial weaponWarHammer = EnumHelper.addToolMaterial("WARHAMMER", 0, 863, 1.0F, 10.0F, 10);
 
 	public static Material honey = new MaterialLiquid(MapColor.mapColorArray[14]);
+	public static Material formicAcid = new MaterialLiquid(MapColor.mapColorArray[3]);
 }

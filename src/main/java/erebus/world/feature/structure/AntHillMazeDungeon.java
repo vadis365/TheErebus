@@ -36,9 +36,8 @@ import erebus.world.loot.WeightedLootList;
 
 public class AntHillMazeDungeon {
 
-	// TODO make some sort of 'unlocking' for the stairs (possibly an offering plinth that requests random items).
+	// TODO 'unlocking' for the stairs.
 	// TODO not all floors should be mazes. some more open ones with puzzles and maybe mini-boss fights.
-	// TODO remove swamp vents and mycelium and replace with unbreakable spike traps and something else.
 	// TODO change loot chest contents to be more up to date with new mod additions.
 
 	private Block solid = ModBlocks.anthillBlock;
@@ -243,7 +242,7 @@ public class AntHillMazeDungeon {
 			for (int j = 0; j <= w * 4; j++)
 				if (rand.nextInt(15) == 0 && addFeature && world.getBlock(x + j, y + 1, z + i) != solid)
 					if (rand.nextBoolean() && rand.nextBoolean())
-						world.setBlock(x + j, y, z + i, Blocks.mycelium); // formic acid?
+						world.setBlock(x + j, y, z + i, ModBlocks.formicAcid);
 					else
 						world.setBlock(x + j, y, z + i, ModBlocks.puffShroom, 3, 2);
 				else if (world.getBlock(x + j, y, z + i) != Blocks.wool)

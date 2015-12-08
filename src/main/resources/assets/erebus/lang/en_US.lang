@@ -157,6 +157,7 @@ tile.erebus.flower_planted_white.name=White Flower
 
 # Fluid Blocks
 tile.erebus.honeyBlock.name=Honey
+tile.erebus.formicAcid.name=Formic Acid
 
 # Rest (someone should organise it at some point)
 tile.erebus.portal.name=Erebus Portal

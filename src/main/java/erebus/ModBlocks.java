@@ -4,6 +4,12 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCompressed;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.block.BlockAmber;
 import erebus.block.BlockAnthillBlock;
@@ -20,6 +26,7 @@ import erebus.block.BlockErebusHoney;
 import erebus.block.BlockErebusStigma;
 import erebus.block.BlockForceField;
 import erebus.block.BlockForceLock;
+import erebus.block.BlockFormicAcid;
 import erebus.block.BlockGhostSand;
 import erebus.block.BlockGlowGem;
 import erebus.block.BlockGlowingJar;
@@ -121,12 +128,6 @@ import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.lib.EnumWood;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCompressed;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 
 public class ModBlocks {
 
@@ -269,6 +270,7 @@ public class ModBlocks {
 	public static final Block siloTank = new BlockSiloTank(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.siloTank");
 	public static final Block siloRoof = new BlockSiloRoof(Material.iron).setHardness(3F).setStepSound(Block.soundTypeMetal).setBlockName("erebus.siloRoof").setBlockTextureName("erebus:siloRoof");
 	public static final Block composter = new BlockComposter().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.composter");
+	public static final Block formicAcid = new BlockFormicAcid();
 
 	// DOORS
 	public static final Block doorAmber = new BlockDoorErebus("amber", Material.glass).setRenderPass(1);

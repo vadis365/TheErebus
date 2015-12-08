@@ -480,6 +480,11 @@ public class ClientProxy extends CommonProxy {
 			fx.setRBGColorF(0.306F, 0.576F, 0.192F);
 		}
 
+		if (particleName.equals("bubblegasAcid")) {
+			fx = new EntityBubbleGasFX(world, x, y, z, vecX, vecY, vecZ);
+			fx.setRBGColorF(0.490F, 0.7451F, 0.6863F);
+		}
+
 		if (particleName.equals("swampflame")) {
 			fx = new EntityFlameFX(world, x, y, z, vecX, vecY, vecZ);
 			fx.setParticleTextureIndex(96);

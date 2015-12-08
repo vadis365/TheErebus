@@ -2,15 +2,15 @@ package erebus;
 
 import java.lang.reflect.Field;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ModFluids {
 
@@ -20,6 +20,7 @@ public class ModFluids {
 	public static Fluid antiVenom = new Fluid("antiVenom").setViscosity(2000).setUnlocalizedName("antiVenom");
 	public static Fluid beetleJuice = new Fluid("beetleJuice").setUnlocalizedName("beetleJuice");
 	public static Fluid milk = new Fluid("milk").setUnlocalizedName("milk");
+	public static Fluid formicAcid = new Fluid("formicAcid").setUnlocalizedName("formicAcid");
 
 	private ModFluids() {
 	}
@@ -59,6 +60,7 @@ public class ModFluids {
 			honey.setIcons(ModBlocks.honeyBlock.getBlockTextureFromSide(0), ModBlocks.honeyBlock.getBlockTextureFromSide(1));
 			antiVenom.setIcons(event.map.registerIcon("erebus:antiVenom"), event.map.registerIcon("erebus:antiVenomFlow"));
 			beetleJuice.setIcons(event.map.registerIcon("erebus:beetleJuice"), event.map.registerIcon("erebus:beetleJuiceFlow"));
+			formicAcid.setIcons(event.map.registerIcon("erebus:formic_acid"), event.map.registerIcon("erebus:formic_acid_flow"));
 		}
 	}
 }
