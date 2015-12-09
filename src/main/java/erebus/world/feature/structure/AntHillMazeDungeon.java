@@ -4,20 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
@@ -33,6 +19,20 @@ import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class AntHillMazeDungeon {
 
@@ -99,7 +99,6 @@ public class AntHillMazeDungeon {
 					buildLevel(world, x, yy + 3, z, mazeWidth, mazeHeight, maze, solid, 0);
 					buildLevel(world, x, yy + 4, z, mazeWidth, mazeHeight, maze, solid, 0);
 					createAir(world, x, yy + 3, z + 1, mazeWidth, mazeHeight, rand);
-					placeChest(world, x + 14, y + 2, z + 14, 5, rand); // anti crash chest here always in a safe space near centre
 					addFeature(world, x, yy + 3, z, mazeWidth, mazeHeight, maze, rand);
 					break;
 				case 1:
@@ -109,11 +108,11 @@ public class AntHillMazeDungeon {
 					break;
 			}
 
-		if (hasKey) {
+		if (hasKey && !chests.isEmpty()) {
 			IInventory randomInvt = chests.get(rand.nextInt(chests.size()));
-			// TODO fix 
-			// doesn't add to Bone block for some reason
+			TileEntityBones.allowInsertion = true;
 			Utils.addItemStackToInventory(randomInvt, ItemMaterials.DATA.FORCE_KEY.makeStack());
+			TileEntityBones.allowInsertion = false;
 			System.out.println("Added key to inventory at: " + ((TileEntity) randomInvt).xCoord + ", " + ((TileEntity) randomInvt).yCoord + ", " + ((TileEntity) randomInvt).zCoord);
 		}
 

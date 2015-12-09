@@ -10,7 +10,9 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 
 public class TileEntityBones extends TileEntityBasicInventory {
 
-	private String owner = ""; // could be expanded to contain random names
+	public static boolean allowInsertion = false;
+
+	private String owner = "";
 
 	public TileEntityBones() {
 		super(86, "container.bones");
@@ -23,6 +25,8 @@ public class TileEntityBones extends TileEntityBasicInventory {
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
+		if (allowInsertion)
+			return super.getAccessibleSlotsFromSide(side);
 		return new int[0];
 	}
 
