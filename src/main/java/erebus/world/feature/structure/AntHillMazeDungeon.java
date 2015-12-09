@@ -245,7 +245,7 @@ public class AntHillMazeDungeon {
 						world.setBlock(x + j, y, z + i, ModBlocks.formicAcid);
 					else
 						world.setBlock(x + j, y, z + i, ModBlocks.puffShroom, 3, 2);
-				else if (world.getBlock(x + j, y, z + i) != Blocks.wool)
+				else if (world.getBlock(x + j, y, z + i) != Blocks.wool && world.getBlock(x + j, y, z + i) != ModBlocks.zombieAntSpawner)
 					world.setBlock(x + j, y, z + i, solid, 0, 2);
 	}
 
@@ -268,7 +268,7 @@ public class AntHillMazeDungeon {
 							placeBones(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
 					} else if (rand.nextInt(6) == 0)
 						if (rand.nextBoolean())
-							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool);//fungal ant spawner
+							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.zombieAntSpawner);
 						else
 							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, Blocks.wool, 15, 0); //fungal Soldier ant spawner
 					else if (rand.nextInt(10) == 0) {

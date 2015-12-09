@@ -66,6 +66,7 @@ import erebus.block.BlockWallErebus;
 import erebus.block.BlockWaspNest;
 import erebus.block.BlockWaspSpawner;
 import erebus.block.BlockWitherWeb;
+import erebus.block.BlockZombieAntSpawner;
 import erebus.block.ErebusPortal;
 import erebus.block.GaeanKeystone;
 import erebus.block.InsectRepellent;
@@ -308,6 +309,7 @@ public class ModBlocks {
 	public static final Block slidingBlockPuzzle = new BlockSlidingBlockPuzzle();
 	public static final Block completedPuzzle = new BlockCompletedPuzzle();
 	public static final Block forceLock = new BlockForceLock();
+	public static final Block zombieAntSpawner = new BlockZombieAntSpawner("zombieAnt").setBlockName("erebus.zombieAntSpawner").setBlockTextureName("erebus:ant_spawner");
 
 	public static final Block capstone = new BlockCapstone();
 	public static final Block waspNestBlock = new BlockWaspNest();
