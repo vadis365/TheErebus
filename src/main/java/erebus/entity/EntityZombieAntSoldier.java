@@ -16,12 +16,12 @@ import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.item.ItemMaterials;
 
-public class EntityZombieAnt extends EntityMob {
+public class EntityZombieAntSoldier extends EntityMob {
 
-	public EntityZombieAnt(World world) {
+	public EntityZombieAntSoldier(World world) {
 		super(world);
 		stepHeight = 1.0F;
-		setSize(1.5F, 0.75F);
+		setSize(1.75F, 0.75F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.4D, false));
@@ -39,8 +39,8 @@ public class EntityZombieAnt extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.5D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 

@@ -57,6 +57,7 @@ import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySnapper;
+import erebus.entity.EntityZombieAntSoldier;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntitySporeBall;
@@ -146,6 +147,7 @@ public class ModEntities {
 		registerEntity(57, EntityAntlionBoss.class, "antlionBoss", 0x000000, 0xFFFFFF);
 		registerEntity(58, EntityHoneyPotAnt.class, "honeyPotAnt", 0xFFA400, 0x000000);
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardierBeetleLarva", 0xFFEEFF, 0x9E0E0E);
+		registerEntity(60, EntityZombieAntSoldier.class, "zombieAntSoldier", 0x00FE40, 0xF09071);
 
 		registerEntity(70, EntityWaspDagger.class, "waspDagger");
 		registerEntity(71, EntityWebSling.class, "webSling");

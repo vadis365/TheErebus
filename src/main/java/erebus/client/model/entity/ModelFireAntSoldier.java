@@ -5,6 +5,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
+import org.lwjgl.opengl.GL11;
+
 public class ModelFireAntSoldier extends ModelBase {
 
 	ModelRenderer Thx;
@@ -110,6 +112,7 @@ public class ModelFireAntSoldier extends ModelBase {
 		RMandibleA.setRotationPoint(0F, 16F, -1F);
 		setRotation(RMandibleA, -1.0F, 0F, 0F);
 		RMandibleB = new ModelRenderer(this, 0, 36);
+		RMandibleB.mirror = true;
 		RMandibleB.addBox(-3F, 5.5F, -2F, 2, 6, 1);
 		RMandibleB.setRotationPoint(0F, 16F, -1F);
 		setRotation(RMandibleB, -1.0F, 0F, 0F);
@@ -132,7 +135,6 @@ public class ModelFireAntSoldier extends ModelBase {
 		AntLE = new ModelRenderer(this, 0, 21);
 		AntLE.addBox(7.5F, 5.5F, -3F, 1, 4, 1);
 		AntLE.setRotationPoint(0F, 16F, -1F);
-		;
 		setRotation(AntLE, -1.0F, 0F, 0.1745329F);
 		AntRS = new ModelRenderer(this, 0, 27);
 		AntRS.addBox(-7.5F, 4.5F, -3F, 3, 1, 1);
@@ -244,6 +246,8 @@ public class ModelFireAntSoldier extends ModelBase {
 	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		GL11.glPushMatrix();
+		GL11.glTranslated(0F, 0F, -0.375F);
 		Thx.render(unitPixel);
 		ThxTop.render(unitPixel);
 		ThxS.render(unitPixel);
@@ -289,6 +293,7 @@ public class ModelFireAntSoldier extends ModelBase {
 		RBLB.render(unitPixel);
 		RBLC.render(unitPixel);
 		RBLD.render(unitPixel);
+		GL11.glPopMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -310,8 +315,6 @@ public class ModelFireAntSoldier extends ModelBase {
 		AntRS.rotateAngleY = headY;
 		AntRE.rotateAngleY = headY;
 		Eyes.rotateAngleY = headY;
-		RMandibleA.rotateAngleY = headY;
-		RMandibleB.rotateAngleY = headY;
 		LMandibleA.rotateAngleY = headY;
 		LMandibleB.rotateAngleY = headY;
 		HeadA.rotateAngleX = headX;
@@ -349,5 +352,10 @@ public class ModelFireAntSoldier extends ModelBase {
 		RFLB.rotateAngleX = legX - 0.25F;
 		RFLC.rotateAngleX = legX - 0.5F;
 		RFLD.rotateAngleX = legX - 0.64F;
+		
+		RMandibleA.rotateAngleY =headY -MathHelper.cos(limbSwing * 0.5F) * 0.2F * limbSwingAngle;
+		RMandibleB.rotateAngleY =headY -MathHelper.cos(limbSwing * 0.5F) * 0.2F * limbSwingAngle;
+		LMandibleA.rotateAngleY = headY-MathHelper.cos(limbSwing * 0.5F + (float) Math.PI) * 0.2F * limbSwingAngle;
+		LMandibleB.rotateAngleY = headY-MathHelper.cos(limbSwing * 0.5F + (float) Math.PI) * 0.2F * limbSwingAngle;
 	}
 }
