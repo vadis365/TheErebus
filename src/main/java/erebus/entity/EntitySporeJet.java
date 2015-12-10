@@ -37,10 +37,9 @@ public class EntitySporeJet extends EntityLiving {
 
 	@Override
 	protected void collideWithEntity(Entity entity) {
-		if (!worldObj.isRemote) {
-			if (entity instanceof EntityLivingBase && !(entity instanceof EntitySporeJet))
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, 5 * 20, 0));
+		if (!worldObj.isRemote) {;
 			if (entity instanceof EntityPlayer) {
+				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, 5 * 20, 0));
 				EntityPlayer player = (EntityPlayer) entity;
 				ItemStack is = player.inventory.getCurrentItem();
 				if (is != null)
