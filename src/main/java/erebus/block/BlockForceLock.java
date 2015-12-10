@@ -27,7 +27,7 @@ import erebus.item.ItemMaterials;
 public class BlockForceLock extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private IIcon sides, front;
+	private IIcon front;
 
 	public BlockForceLock() {
 		super(Material.rock);
