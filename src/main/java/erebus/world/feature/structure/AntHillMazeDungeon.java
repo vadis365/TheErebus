@@ -4,6 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentData;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
@@ -19,20 +33,6 @@ import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class AntHillMazeDungeon {
 
@@ -115,7 +115,6 @@ public class AntHillMazeDungeon {
 			TileEntityBones.allowInsertion = false;
 			System.out.println("Added key to inventory at: " + ((TileEntity) randomInvt).xCoord + ", " + ((TileEntity) randomInvt).yCoord + ", " + ((TileEntity) randomInvt).zCoord);
 		}
-
 		System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
 
@@ -170,6 +169,11 @@ public class AntHillMazeDungeon {
 				world.setBlockToAir(x + 1, yy - 6, z + 3);
 				world.setBlockToAir(x + 2, yy - 5, z + 3);
 				world.setBlockToAir(x + 2, yy - 6, z + 3);
+				if(yy - y != 25) {
+					world.setBlock(x + 1, yy - 3, z + 1, ModBlocks.forceField);
+					world.setBlock(x + 1, yy - 3, z + 2, ModBlocks.forceLock, 2, 2);
+					world.setBlock(x + 1, yy - 3, z + 3, ModBlocks.forceField);
+				}
 			} else if (yy - y == 10 || yy - y == 20) {
 				world.setBlockToAir(x + 31, yy - 4, z + 31);
 				world.setBlockToAir(x + 31, yy - 4, z + 30);
@@ -179,6 +183,9 @@ public class AntHillMazeDungeon {
 				world.setBlockToAir(x + 31, yy - 6, z + 29);
 				world.setBlockToAir(x + 30, yy - 5, z + 29);
 				world.setBlockToAir(x + 30, yy - 6, z + 29);
+				world.setBlock(x + 31, yy - 3, z + 31, ModBlocks.forceField);
+				world.setBlock(x + 31, yy - 3, z + 30, ModBlocks.forceLock, 0, 2);
+				world.setBlock(x + 31, yy - 3, z + 29, ModBlocks.forceField);
 			}
 			System.out.println("Y height is: " + " floor: " + (yy - y));
 			yy += 5;
