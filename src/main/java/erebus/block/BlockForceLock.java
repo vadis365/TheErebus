@@ -79,8 +79,22 @@ public class BlockForceLock extends Block {
 		if (stack != null && stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.FORCE_KEY.ordinal()) {
 			if (!player.capabilities.isCreativeMode)
 				stack.stackSize--;
-			if (!world.isRemote)
+			if (!world.isRemote) {
+				int meta = world.getBlockMetadata(x, y, z);
+				if (meta == 0 || meta == 2) {
+					if(world.getBlock(x, y, z + 1) == ModBlocks.forceField)
+						Utils.breakBlockWithParticles(world, x, y, z + 1, 0);
+					if(world.getBlock(x, y, z - 1) == ModBlocks.forceField)
+						Utils.breakBlockWithParticles(world, x, y, z - 1, 0);
+				}
+				if (meta == 1 || meta == 3) {
+					if(world.getBlock(x + 1, y, z) == ModBlocks.forceField)
+						Utils.breakBlockWithParticles(world, x + 1, y, z, 0);
+					if(world.getBlock(x - 1, y, z) == ModBlocks.forceField)
+						Utils.breakBlockWithParticles(world, x - 1, y, z, 0);
+				}
 				Utils.breakBlockWithParticles(world, x, y, z, 0);
+			}
 			return true;
 		}
 		return false;
@@ -88,8 +102,9 @@ public class BlockForceLock extends Block {
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack is) {
-		int l = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 1.5D) & 3;
-		world.setBlockMetadataWithNotify(x, y, z, l, 2);
+		int meta = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 1.5D) & 3;
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+		System.out.println("Meta: "+ meta);
 	}
 
 	@Override
