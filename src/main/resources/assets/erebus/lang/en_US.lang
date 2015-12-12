@@ -409,6 +409,7 @@ tile.erebus.reinExo.name=Reinforced Exoskeleton Block
 tile.erebus.blockSilk.name=Silk
 
 tile.erebus.smoothieMaker.name=ErebusCo. Smoothie-matic 2000
+tile.erebus.forceLock.name=Force Lock
 
 #########
 # Items #
