@@ -693,6 +693,8 @@ entity.erebus.zombieAntSoldier.name=Zombie Ant Soldier
 fluid.honey=Honey
 fluid.beetleJuice=Beetle Juice
 fluid.antiVenom=Anti-Venom
+fluid.milk=Milk
+fluid.formicAcid=Formic Acid
 
 #################
 # Creative Tabs #
