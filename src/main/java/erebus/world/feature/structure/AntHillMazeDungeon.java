@@ -36,7 +36,6 @@ import erebus.world.loot.WeightedLootList;
 
 public class AntHillMazeDungeon {
 
-	// TODO 'unlocking' for the stairs.
 	// TODO not all floors should be mazes. some more open ones with puzzles and maybe mini-boss fights.
 	// TODO change loot chest contents to be more up to date with new mod additions.
 
@@ -102,8 +101,8 @@ public class AntHillMazeDungeon {
 					addFeature(world, x, yy + 3, z, mazeWidth, mazeHeight, maze, rand);
 					break;
 				case 1:
-					buildFloor(world, x, yy - 1, z, mazeWidth, mazeHeight, rand, false);
-					buildFloor(world, x, yy, z, mazeWidth, mazeHeight, rand, true);
+					buildFloor(world, x, yy - 1, z, mazeWidth, mazeHeight, rand, false, false);
+					buildFloor(world, x, yy, z, mazeWidth, mazeHeight, rand, true, false);
 					buildRoof(world, x, yy + 4, z, mazeWidth, mazeHeight, rand);
 					break;
 			}
@@ -121,8 +120,10 @@ public class AntHillMazeDungeon {
 	public void makeMaze(World world, Random rand, int x, int y, int z) {
 		int yy = y;
 		for (int floors = 0; floors < 6; floors++) {
-			if (floors < 4) {
+			if (floors < 4 && floors > 0)
 				generate(world, rand, x, yy, z, true);
+
+			if (floors < 4) {
 				// create stairs
 				if (yy - y == 5 || yy - y == 15) {
 					world.setBlock(x + 1, yy + 2, z + 1, solid);
@@ -151,8 +152,22 @@ public class AntHillMazeDungeon {
 				}
 			}
 
-			if (floors == 0)
-				world.setBlock(x + 1, yy + 2, z + 1, Blocks.lapis_block); // teleporter thing to boss arena.
+			if (floors == 0) {
+				for(int xx = x; xx < x + 32; xx++) {
+					for(int zz = z; zz < z + 32; zz++) {
+						for(int y2 = y; y2 < y + 5; y2++) {
+							if(y2 > y + 1) {
+								world.setBlock(xx, y2, z, solid);
+								world.setBlock(x, y2, zz, solid);
+								world.setBlock(xx, y2, z + 32, solid);
+								world.setBlock(x + 32, y2, zz, solid);
+							}
+						}
+					}
+				}
+				buildFloor(world, x, yy, z, 8, 8, rand, false, false);
+				buildFloor(world, x, yy + 1, z, 8, 8, rand, true, true);		
+			}
 
 			if (floors == 4) {
 				generateMainDome(world, x + 16, yy + 1, z + 16);
@@ -243,14 +258,19 @@ public class AntHillMazeDungeon {
 					world.setBlock(x + j, y, z + i, solid, 1, 2);
 	}
 
-	private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand, boolean addFeature) {
+	private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand, boolean addFeature, boolean addSpawners) {
 		for (int i = 0; i <= h * 4; i++)
 			for (int j = 0; j <= w * 4; j++)
-				if (rand.nextInt(15) == 0 && addFeature && world.getBlock(x + j, y + 1, z + i) != solid)
+				if (rand.nextInt(15) == 0 && addFeature && world.getBlock(x + j, y + 1, z + i) != solid) {
 					if (rand.nextBoolean() && rand.nextBoolean())
 						world.setBlock(x + j, y, z + i, ModBlocks.formicAcid);
+					else if (rand.nextInt(6) == 0 && addSpawners)
+						world.setBlock(x + j, y, z + i, ModBlocks.zombieAntSpawner, 0, 2);
+					else if (rand.nextInt(6) == 0 && addSpawners)
+							world.setBlock(x + j, y, z + i, ModBlocks.zombieAntSoldierSpawner, 0, 2);
 					else
 						world.setBlock(x + j, y, z + i, ModBlocks.puffShroom, 3, 2);
+				}
 				else if (world.getBlock(x + j, y, z + i) != ModBlocks.zombieAntSoldierSpawner && world.getBlock(x + j, y, z + i) != ModBlocks.zombieAntSpawner)
 					world.setBlock(x + j, y, z + i, solid, 0, 2);
 	}
