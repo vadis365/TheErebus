@@ -310,6 +310,7 @@ public class ModBlocks {
 	public static final Block completedPuzzle = new BlockCompletedPuzzle();
 	public static final Block forceLock = new BlockForceLock();
 	public static final Block zombieAntSpawner = new BlockZombieAntSpawner("zombieAnt").setBlockName("erebus.zombieAntSpawner").setBlockTextureName("erebus:ant_spawner");
+	public static final Block zombieAntSoldierSpawner = new BlockZombieAntSpawner("zombieAntSoldier").setBlockName("erebus.zombieAntSoldierSpawner").setBlockTextureName("erebus:ant_spawner");
 
 	public static final Block capstone = new BlockCapstone();
 	public static final Block waspNestBlock = new BlockWaspNest();

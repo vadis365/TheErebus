@@ -316,6 +316,7 @@ tile.erebus.antlionSpawner.name=Antlion Spawner
 tile.erebus.magmaCrawlerSpawner.name=Magma Crawler Spawner
 tile.erebus.dragonflySpawner.name=Dragonfly Spawner
 tile.erebus.zombieAntSpawner.name=Zombie Ant Spawner
+tile.erebus.zombieAntSoldierSpawner.name=Zombie Ant Soldier Spawner
 
 tile.erebus.waspNestBlock.name=Wasp Nest Block
 tile.erebus.blockSpiderSilk.name=Silk
