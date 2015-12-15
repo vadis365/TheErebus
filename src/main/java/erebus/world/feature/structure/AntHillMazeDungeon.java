@@ -153,14 +153,49 @@ public class AntHillMazeDungeon {
 			}
 
 			if (floors == 0) {
-				for(int xx = x; xx < x + 32; xx++) {
-					for(int zz = z; zz < z + 32; zz++) {
+				for(int xx = x; xx <= x + 32; xx++) {
+					for(int zz = z; zz <= z + 32; zz++) {
 						for(int y2 = y; y2 < y + 5; y2++) {
 							if(y2 > y + 1) {
-								world.setBlock(xx, y2, z, solid);
-								world.setBlock(x, y2, zz, solid);
-								world.setBlock(xx, y2, z + 32, solid);
-								world.setBlock(x + 32, y2, zz, solid);
+								if (world.getBlock(xx, y2, zz) != solid && world.getBlock(xx, y2, zz) != stairs)
+									world.setBlockToAir(xx, y2, zz);
+
+								if (rand.nextInt(10) == 0)
+									world.setBlock(xx, y2, z, ModBlocks.soldierAntTrap, 3, 2);
+								else
+									world.setBlock(xx, y2, z, solid);
+	
+								if (rand.nextInt(10) == 0)
+									world.setBlock(xx, y2, z + 32, ModBlocks.soldierAntTrap, 2, 2);
+								else
+									world.setBlock(xx, y2, z + 32, solid);
+
+								if (rand.nextInt(10) == 0)
+									world.setBlock(x, y2, zz, ModBlocks.soldierAntTrap, 5, 2);
+								else
+									world.setBlock(x, y2, zz, solid);
+
+								if (rand.nextInt(10) == 0)
+									world.setBlock(x + 32, y2, zz, ModBlocks.soldierAntTrap, 4, 2);
+								else
+									world.setBlock(x + 32, y2, zz, solid);
+								
+								if (zz <= z + 6 || zz > z + 9 && zz <= z + 22 || zz > z + 25) {
+									if (rand.nextInt(10) == 0)
+										world.setBlock(x + 16, y2, zz, ModBlocks.soldierAntTrap, 4, 2);
+									else if (rand.nextInt(10) == 0)
+										world.setBlock(x + 16, y2, zz, ModBlocks.soldierAntTrap, 5, 2);
+									else 
+										world.setBlock(x + 16, y2, zz, solid);
+								}
+								if (xx <= x + 6 || xx > x + 9 && xx <= x + 22 || xx > x + 25) {
+									if (rand.nextInt(10) == 0)
+										world.setBlock(xx, y2, z + 16, ModBlocks.soldierAntTrap, 2, 2);
+									else if (rand.nextInt(10) == 0)
+										world.setBlock(xx, y2, z + 16, ModBlocks.soldierAntTrap, 3, 2);
+									else 
+										world.setBlock(xx, y2, z + 16, solid); 
+								}
 							}
 						}
 					}
