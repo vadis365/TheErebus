@@ -1,10 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
-import erebus.core.handler.KeyBindingHandler;
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.server.PacketBeetleRamAttack;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -30,6 +25,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.core.handler.KeyBindingHandler;
+import erebus.item.ItemMaterials;
+import erebus.network.PacketPipeline;
+import erebus.network.server.PacketBeetleRamAttack;
 
 public class EntityRhinoBeetle extends EntityTameable {
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
@@ -226,11 +226,13 @@ public class EntityRhinoBeetle extends EntityTameable {
 	private boolean ram(Entity entity, float knockback, float damage) {
 		if (getTameState() == 0 || riddenByEntity == null)
 			setRammingCharge((byte) 32);
-		entity.attackEntityFrom(DamageSource.causeMobDamage(this), (int) damage);
-		entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
-		worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
-		((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));
-		setRamAttack(false);
+		if (!worldObj.isRemote && entity.boundingBox.maxY >= boundingBox.minY && entity.boundingBox.minY <= boundingBox.maxY && entity.boundingBox.maxX >= boundingBox.minX && entity.boundingBox.minX <= boundingBox.maxX && entity.boundingBox.maxZ >= boundingBox.minZ && entity.boundingBox.minZ <= boundingBox.maxZ) {
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (int) damage);
+			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
+			worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
+			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));
+			setRamAttack(false);
+		}
 		return true;
 	}
 
