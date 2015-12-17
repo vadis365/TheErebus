@@ -2,10 +2,6 @@ package erebus.block;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
@@ -14,6 +10,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.teleporter.TeleporterHandler;
 
 public class ErebusPortal extends Block {
 
@@ -84,7 +84,7 @@ public class ErebusPortal extends Block {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
 		if (entity.ridingEntity == null && entity.riddenByEntity == null && entity.timeUntilPortal <= 0) {
-			if (entity.dimension == 0)
+			if (entity.dimension == 0 || entity.dimension == 1)
 				TeleporterHandler.transferToErebus(entity);
 			else
 				TeleporterHandler.transferToOverworld(entity);
