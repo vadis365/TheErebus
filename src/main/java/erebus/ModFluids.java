@@ -61,6 +61,7 @@ public class ModFluids {
 			antiVenom.setIcons(event.map.registerIcon("erebus:antiVenom"), event.map.registerIcon("erebus:antiVenomFlow"));
 			beetleJuice.setIcons(event.map.registerIcon("erebus:beetleJuice"), event.map.registerIcon("erebus:beetleJuiceFlow"));
 			formicAcid.setIcons(event.map.registerIcon("erebus:formic_acid"), event.map.registerIcon("erebus:formic_acid_flow"));
+			milk.setIcons(event.map.registerIcon("erebus:milk"), event.map.registerIcon("erebus:milk_flow"));
 		}
 	}
 }
