@@ -226,7 +226,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 	private boolean ram(Entity entity, float knockback, float damage) {
 		if (getTameState() == 0 || riddenByEntity == null)
 			setRammingCharge((byte) 32);
-		if (!worldObj.isRemote && entity.boundingBox.maxY >= boundingBox.minY && entity.boundingBox.minY <= boundingBox.maxY && entity.boundingBox.maxX >= boundingBox.minX && entity.boundingBox.minX <= boundingBox.maxX && entity.boundingBox.maxZ >= boundingBox.minZ && entity.boundingBox.minZ <= boundingBox.maxZ) {
+		if (!worldObj.isRemote && entity.boundingBox.maxY >= boundingBox.minY && entity.boundingBox.minY <= boundingBox.maxY && entity.boundingBox.maxX >= boundingBox.minX - 0.25D && entity.boundingBox.minX <= boundingBox.maxX + 0.25D && entity.boundingBox.maxZ >= boundingBox.minZ - 0.25D && entity.boundingBox.minZ <= boundingBox.maxZ + 0.25D) {
 			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (int) damage);
 			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
 			worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
