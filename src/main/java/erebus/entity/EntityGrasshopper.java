@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
-import erebus.entity.ai.EntityAIEatCrops;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -13,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.entity.ai.EntityAIEatCrops;
 
 public class EntityGrasshopper extends EntityCreature {
 
@@ -22,7 +22,6 @@ public class EntityGrasshopper extends EntityCreature {
 	public EntityGrasshopper(World world) {
 		super(world);
 		stepHeight = 1.0F;
-		jumpMovementFactor = 0.1F;
 		setSize(1.3F, 0.5F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -105,7 +104,6 @@ public class EntityGrasshopper extends EntityCreature {
 		float direction = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
 		float rotation = MathHelper.wrapAngleTo180_float(direction - rotationYaw);
 		rotationYaw += rotation;
-		setPositionAndUpdate(posX, posY, posZ);
 	}
 
 	public void setIsEating(boolean isEating) {

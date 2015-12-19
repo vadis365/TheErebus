@@ -17,7 +17,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	/**
 	 * The bigger you make this value the faster the AI will be. But performance will also decrease so be sensible
 	 */
-	private static final int CHECKS_PER_TICK = 10;
+	private static final int CHECKS_PER_TICK = 1;
 
 	private final int EAT_SPEED;
 	protected final EntityLiving entity;
