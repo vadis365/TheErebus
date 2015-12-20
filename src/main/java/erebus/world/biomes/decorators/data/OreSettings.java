@@ -2,10 +2,10 @@ package erebus.world.biomes.decorators.data;
 
 import java.util.Random;
 
-import erebus.ModBlocks;
-import erebus.world.feature.decoration.WorldGenErebusMinable;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.world.feature.decoration.WorldGenErebusMinable;
 
 public final class OreSettings {
 	private static final byte[] checkX = new byte[] { -1, -1, 1, 1, 0, 0 }, checkY = new byte[] { 0, 0, 0, 0, -1, 1 }, checkZ = new byte[] { -1, 1, -1, 1, 0, 0 };
@@ -124,7 +124,8 @@ public final class OreSettings {
 		LEAD(ModBlocks.oreLead, false),
 		SILVER(ModBlocks.oreSilver, false),
 		TIN(ModBlocks.oreTin, false),
-		GNEISS(ModBlocks.oreGneiss, true);
+		GNEISS(ModBlocks.oreGneiss, true),
+		QUARTZ(ModBlocks.oreQuartz, true);
 
 		final Block oreBlock;
 		final byte oreMeta;
@@ -198,6 +199,9 @@ public final class OreSettings {
 					break;
 				case TIN:
 					settings.setChance(1F).setIterations(2, 4).setOreAmount(3, 4).setCheckArea(2);
+					break;
+				case QUARTZ:
+					settings.setIterations(extraOres ? 1 : 2, extraOres ? 3 : 4).setOreAmount(7, 9).setCheckArea(2);
 					break;
 			}
 		}

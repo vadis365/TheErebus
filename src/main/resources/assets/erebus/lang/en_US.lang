@@ -265,6 +265,7 @@ tile.erebus.oreTin.name=Tin Ore
 tile.erebus.oreFossil.name=Fossil Ore
 tile.erebus.oreTemple.name=Temple Ore
 tile.erebus.oreGneiss.name=Gneiss Ore
+tile.erebus.oreQuartz.name=Quartz Ore
 
 tile.erebus.redGem_0.name=Redgem
 tile.erebus.redGem_1.name=Redlamp

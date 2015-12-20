@@ -1,15 +1,5 @@
 package erebus.recipes;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.block.BlockSlabStone;
-import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
-import erebus.item.ItemDungeonIdols;
-import erebus.item.ItemErebusFood;
-import erebus.item.ItemMaterials;
-import erebus.lib.EnumWood;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -20,6 +10,16 @@ import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import cpw.mods.fml.common.registry.GameRegistry;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.block.BlockSlabStone;
+import erebus.block.plants.BlockErebusFlower.FLOWER_TYPE;
+import erebus.item.ItemDungeonIdols;
+import erebus.item.ItemErebusFood;
+import erebus.item.ItemMaterials;
+import erebus.lib.EnumWood;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 
 public class RecipeHandler {
 
@@ -329,6 +329,7 @@ public class RecipeHandler {
 		OreDictionary.registerOre("oreDiamond", new ItemStack(ModBlocks.oreEncrustedDiamond));
 		OreDictionary.registerOre("oreFossil", new ItemStack(ModBlocks.oreFossil));
 		OreDictionary.registerOre("oreGneiss", new ItemStack(ModBlocks.oreGneiss));
+		OreDictionary.registerOre("oreQuartz", new ItemStack(ModBlocks.oreQuartz));
 
 		OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.umberstone, 1, 1));
 		OreDictionary.registerOre("stone", new ItemStack(ModBlocks.umberstone));

@@ -111,6 +111,7 @@ import erebus.block.ores.UmberOreFossil;
 import erebus.block.ores.UmberOreGneiss;
 import erebus.block.ores.UmberOreJade;
 import erebus.block.ores.UmberOrePetrifiedWood;
+import erebus.block.ores.UmberOreQuartz;
 import erebus.block.plants.BlockAlgae;
 import erebus.block.plants.BlockBerryBush;
 import erebus.block.plants.BlockCabbage;
@@ -161,6 +162,7 @@ public class ModBlocks {
 	public static final Block orePetrifiedWood = new UmberOrePetrifiedWood();
 	public static final Block oreFossil = new UmberOreFossil();
 	public static final Block oreGneiss = new UmberOreGneiss();
+	public static final Block oreQuartz = new UmberOreQuartz();
 	public static final Block oreAluminium = new UmberOreExtra("Aluminium", 1);
 	public static final Block oreCopper = new UmberOreExtra("Copper", 1);
 	public static final Block oreLead = new UmberOreExtra("Lead", 2);
