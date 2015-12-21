@@ -126,6 +126,7 @@ import erebus.client.render.entity.RenderWoodlouse;
 import erebus.client.render.entity.RenderWorkerBee;
 import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
+import erebus.client.render.item.ArmchairItemRenderer;
 import erebus.client.render.item.BambooBridgeItemRenderer;
 import erebus.client.render.item.BambooCrateItemRenderer;
 import erebus.client.render.item.BambooPoleItemRenderer;
@@ -153,6 +154,7 @@ import erebus.client.render.item.WaspSwordItemRenderer;
 import erebus.client.render.item.WebSlingerItemRenderer;
 import erebus.client.render.item.WoodlouseBallItemRenderer;
 import erebus.client.render.tileentity.TileEntityAntlionEggRenderer;
+import erebus.client.render.tileentity.TileEntityArmchairRenderer;
 import erebus.client.render.tileentity.TileEntityBambooBridgeRenderer;
 import erebus.client.render.tileentity.TileEntityBambooPoleRenderer;
 import erebus.client.render.tileentity.TileEntityBoneBlockRenderer;
@@ -258,6 +260,7 @@ import erebus.inventory.ContainerExtenderThingy;
 import erebus.inventory.ContainerHoneyComb;
 import erebus.inventory.ContainerSilo;
 import erebus.tileentity.TileEntityAntlionEgg;
+import erebus.tileentity.TileEntityArmchair;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPole;
@@ -420,6 +423,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlidingBlockPuzzle.class, new TileEntitySlidingBlockPuzzleRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPuffShroom.class, new TileEntityPuffShroomRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCompletedPuzzle.class, new TileEntityCompletedPuzzleRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityArmchair.class, new TileEntityArmchairRenderer());
 
 		RenderingRegistry.registerBlockHandler(new BlockBambooCropRender());
 		RenderingRegistry.registerBlockHandler(new BlockHollowLogRender());
@@ -466,6 +470,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModItems.wandOfPreservation, new ItemWandOfPreservationRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.preservedBlock), new PreservedBlockitemRenderer());
 		MinecraftForgeClient.registerItemRenderer(ModItems.maxSpeedBow, new RenderMaxSpeedBow());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.armchair), new ArmchairItemRenderer());
 	}
 
 	@Override
