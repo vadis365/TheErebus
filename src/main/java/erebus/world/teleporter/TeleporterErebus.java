@@ -156,7 +156,7 @@ final class TeleporterErebus extends Teleporter {
 			double ez = posZ + 0.5;
 			entity.setLocationAndAngles(ex, ey, ez, entityRotation, entity.rotationPitch);
 			
-			if (entity instanceof EntityPlayer) {
+			if (entity instanceof EntityPlayer && ConfigHandler.INSTANCE.allowRespawning) {
 				final EntityPlayer player = (EntityPlayer) entity;
 				if (player.dimension == ConfigHandler.INSTANCE.erebusDimensionID) {
 					if (!player.getEntityData().hasKey("armchairSpawn"))

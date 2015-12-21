@@ -7,6 +7,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import erebus.Erebus;
+import erebus.core.handler.configs.ConfigHandler;
 
 public class BlockArmchair extends Block {
 
@@ -24,11 +25,13 @@ public class BlockArmchair extends Block {
         if(player.isSneaking()) {
             return false;
         } else {
-        	player.getEntityData().setInteger("armchairX", (int) x);
-        	player.getEntityData().setInteger("armchairY", (int) y);
-        	player.getEntityData().setInteger("armchairZ", (int) z);
-        	player.getEntityData().setBoolean("armchairSpawn", true);
-            Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
+        	if (ConfigHandler.INSTANCE.allowRespawning) {
+        		player.getEntityData().setInteger("armchairX", (int) x);
+        		player.getEntityData().setInteger("armchairY", (int) y);
+        		player.getEntityData().setInteger("armchairZ", (int) z);
+        		player.getEntityData().setBoolean("armchairSpawn", true);
+        		Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
+        	}
         }
         return true;
     }

@@ -34,6 +34,7 @@ import erebus.core.handler.EntityConstructingEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityPickupEventHandler;
 import erebus.core.handler.EntityPlayerSpawnHandler;
+import erebus.core.handler.ErebusPlayerLoggedInEvent;
 import erebus.core.handler.FurnaceBurnTimeHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
 import erebus.core.handler.configs.ConfigHandler;
@@ -129,8 +130,12 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(new AnvilEventsHandler());
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
-		MinecraftForge.EVENT_BUS.register(new FurnaceBurnTimeHandler());  
-		MinecraftForge.EVENT_BUS.register(new EntityPlayerSpawnHandler());  
+		MinecraftForge.EVENT_BUS.register(new FurnaceBurnTimeHandler());
+
+		if (ConfigHandler.INSTANCE.allowRespawning) {
+			FMLCommonHandler.instance().bus().register(new ErebusPlayerLoggedInEvent());
+			MinecraftForge.EVENT_BUS.register(new EntityPlayerSpawnHandler());
+			}
 
 		if (ConfigHandler.INSTANCE.graveMarker) {
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
