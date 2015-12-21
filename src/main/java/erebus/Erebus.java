@@ -30,7 +30,6 @@ import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.handler.AnvilEventsHandler;
 import erebus.core.handler.BucketFillHandler;
 import erebus.core.handler.DeathCompassRespawnEvent;
-import erebus.core.handler.EntityArmchairSpawnHandler;
 import erebus.core.handler.EntityConstructingEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityPickupEventHandler;
@@ -130,8 +129,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(new AnvilEventsHandler());
 		FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
-		MinecraftForge.EVENT_BUS.register(new FurnaceBurnTimeHandler());
-		MinecraftForge.EVENT_BUS.register(new EntityArmchairSpawnHandler());  
+		MinecraftForge.EVENT_BUS.register(new FurnaceBurnTimeHandler());  
 		MinecraftForge.EVENT_BUS.register(new EntityPlayerSpawnHandler());  
 
 		if (ConfigHandler.INSTANCE.graveMarker) {
