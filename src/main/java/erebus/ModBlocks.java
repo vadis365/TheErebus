@@ -15,6 +15,7 @@ import erebus.block.BlockAmber;
 import erebus.block.BlockAnthillBlock;
 import erebus.block.BlockAntlionEgg;
 import erebus.block.BlockAntlionSpawner;
+import erebus.block.BlockArmchair;
 import erebus.block.BlockBones;
 import erebus.block.BlockButtonUmberstone;
 import erebus.block.BlockCapstone;
@@ -346,6 +347,7 @@ public class ModBlocks {
 	public static final Block tarantulaEgg = new BlockTarantulaEgg();
 	public static final Block antlionEgg = new BlockAntlionEgg();
 	public static final Block preservedBlock = new BlockPreservedBlock();
+	public static final Block armchair = new BlockArmchair();
 
 	public static void init() {
 		initBlocks();

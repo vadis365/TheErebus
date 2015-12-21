@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -18,6 +19,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import erebus.ModAchievements;
 import erebus.ModBlocks;
+import erebus.block.BlockArmchair;
 import erebus.block.GaeanKeystone;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.tileentity.TileEntityGaeanKeystone;
@@ -155,6 +157,36 @@ final class TeleporterErebus extends Teleporter {
 			double ey = posY + 0.125 /* prevents glitchiness */;
 			double ez = posZ + 0.5;
 			entity.setLocationAndAngles(ex, ey, ez, entityRotation, entity.rotationPitch);
+			
+			if (entity instanceof EntityPlayer) {
+				final EntityPlayer player = (EntityPlayer) entity;
+				if (player.dimension == ConfigHandler.INSTANCE.erebusDimensionID) {
+					if (!player.getEntityData().hasKey("hasSpawn"))
+						player.getEntityData().setBoolean("hasSpawn", false);
+
+					if (!player.getEntityData().getBoolean("hasSpawn")) {
+						entity.getEntityData().setInteger("erebusSpawnSetX", (int) posX);
+						entity.getEntityData().setInteger("erebusSpawnSetY", (int) posY + 1);
+						entity.getEntityData().setInteger("erebusSpawnSetZ", (int) posZ);
+						player.setSpawnChunk(new ChunkCoordinates((int) posX, (int) posY + 1, (int) posZ), true, ConfigHandler.INSTANCE.erebusDimensionID);
+						player.getEntityData().setBoolean("hasSpawn", true);
+					}
+
+					if (player.getEntityData().getBoolean("hasSpawn")) {
+						int xx = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posX;
+						int yy = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posY - 1;
+						int zz = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID).posZ;
+						if (!(worldServerInstance.getBlock(xx, yy, zz) instanceof BlockArmchair)) {
+							System.out.println("Teleporter says no bed");
+							entity.getEntityData().setInteger("erebusSpawnSetX", (int) posX);
+							entity.getEntityData().setInteger("erebusSpawnSetY", (int) posY + 1);
+							entity.getEntityData().setInteger("erebusSpawnSetZ", (int) posZ);
+							player.setSpawnChunk(new ChunkCoordinates((int) posX, (int) posY + 1, (int) posZ), true, ConfigHandler.INSTANCE.erebusDimensionID);
+						}
+					}
+				}
+			}
+
 			return true;
 		}
 		return false;

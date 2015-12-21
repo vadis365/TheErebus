@@ -773,6 +773,8 @@ tooltip.erebus.nectarcollector=Right click Bees to collect nectar.
 tooltip.erebus.wandofanimation=Right click blocks to animate them.
 tooltip.erebus.extractor=Point at blocks and hold down the right mouse button to extract them.
 tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
+armchair.spawnSet=You can only sit here...oh whenever  
+armchair.unsafeSpawnSet=An unstable spawn location has been set to this block. Please travel though an Erebus Portal or build an Adventurer's Armchair and sit in it as this will provide a stable respawn point.  
 
 ############
 # Commands #
