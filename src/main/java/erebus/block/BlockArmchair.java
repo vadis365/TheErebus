@@ -2,6 +2,7 @@ package erebus.block;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -20,15 +21,19 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.EntityArmchairMount;
 import erebus.tileentity.TileEntityArmchair;
 
 public class BlockArmchair extends BlockContainer {
+	
+	private  EntityArmchairMount entityMountableBlock;
 
     public BlockArmchair() {
         super(Material.wood);
         setBlockName("erebus.armchair");
         setHardness(2.0F);
         setResistance(10.0F);
+        setBlockBounds(0, 0, 0, 1, 0.4375F, 1);
     }
     
 	@Override
@@ -99,8 +104,20 @@ public class BlockArmchair extends BlockContainer {
         		player.getEntityData().setInteger("armchairZ", (int) z);
         		player.getEntityData().setBoolean("armchairSpawn", true);
         		Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
+                entityMountableBlock = new EntityArmchairMount(world);
+                entityMountableBlock.setPosition(x + 0.5D, y  + 0.5D, z  + 0.5D);
+                world.spawnEntityInWorld(entityMountableBlock);
+                player.mountEntity(entityMountableBlock);
         	}
         }
         return true;
     }
+
+	@Override
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+    	if (!world.isRemote && entityMountableBlock != null)
+    		entityMountableBlock.setDead();
+        return;
+    }
+
 }

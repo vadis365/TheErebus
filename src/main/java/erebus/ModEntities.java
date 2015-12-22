@@ -13,6 +13,7 @@ import erebus.entity.EntityAnimatedChest;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityAntlionMiniBoss;
+import erebus.entity.EntityArmchairMount;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackAnt;
@@ -162,6 +163,7 @@ public class ModEntities {
 		registerEntity(80, EntityThrownSand.class, "thrownSand");
 		registerEntity(81, EntityPreservedBlock.class, "preservedBlock");
 		registerEntity(82, EntitySporeJet.class, "sporeJet");
+		registerEntity(83, EntityArmchairMount.class, "armchairMount");
 
 		// Spawn conditions
 		if (ConfigHandler.INSTANCE.netherWidows)
