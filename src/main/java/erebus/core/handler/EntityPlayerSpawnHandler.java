@@ -31,7 +31,6 @@ public class EntityPlayerSpawnHandler {
 					event.entityPlayer.getEntityData().setInteger("armchairY", aY);
 					event.entityPlayer.getEntityData().setInteger("armchairZ", aZ);
 					event.entityPlayer.getEntityData().setBoolean("armchairSpawn", true);
-					System.out.println("Copied ARMCHAIR data to new player");
 				}
 
 				if(event.original.getEntityData().hasKey("erebusPortalX")) {
@@ -41,7 +40,6 @@ public class EntityPlayerSpawnHandler {
 					event.entityPlayer.getEntityData().setInteger("erebusPortalX", pX);
 					event.entityPlayer.getEntityData().setInteger("erebusPortalY", pY);
 					event.entityPlayer.getEntityData().setInteger("erebusPortalZ", pZ);
-					System.out.println("Copied PORTAL data to new player");
 				}
 				
 				if(event.entityPlayer.getEntityData().hasKey("armchairSpawn")) {

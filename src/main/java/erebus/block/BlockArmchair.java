@@ -90,7 +90,6 @@ public class BlockArmchair extends BlockContainer {
 		if (l1 == 3)
 			b0 = 4;
 		world.setBlockMetadataWithNotify(x, y, z, b0, 3);
-		System.out.println("Meta: " + b0);
 	}
 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
