@@ -9,7 +9,7 @@ public class EntityArmchairMount extends Entity {
 
 	public EntityArmchairMount (World world) {
 		super(world);
-        setSize(0.0F, 0.0F);
+		setSize(0.0F, 0.0F);
 	}
 
 	@Override
@@ -32,11 +32,11 @@ public class EntityArmchairMount extends Entity {
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {
+	protected void readEntityFromNBT(NBTTagCompound nbt) {
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound p_70014_1_) {
+	protected void writeEntityToNBT(NBTTagCompound nbt) {
 	}
 
 }
