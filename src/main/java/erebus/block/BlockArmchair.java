@@ -90,6 +90,7 @@ public class BlockArmchair extends BlockContainer {
 		if (l1 == 3)
 			b0 = 4;
 		world.setBlockMetadataWithNotify(x, y, z, b0, 3);
+		System.out.println("Meta: " + b0);
 	}
 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
@@ -99,15 +100,17 @@ public class BlockArmchair extends BlockContainer {
             return false;
         } else {
 		if (player.dimension == ConfigHandler.INSTANCE.erebusDimensionID && ConfigHandler.INSTANCE.allowRespawning) {
+			byte meta = (byte) world.getBlockMetadata(x, y, z);
 			player.getEntityData().setInteger("armchairX", (int) x);
 			player.getEntityData().setInteger("armchairY", (int) y);
 			player.getEntityData().setInteger("armchairZ", (int) z);
         		player.getEntityData().setBoolean("armchairSpawn", true);
         		Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
-			entityMountableBlock = new EntityArmchairMount(world);
-			entityMountableBlock.setPosition(x + 0.5D, y  + 0.5D, z  + 0.5D);
-			world.spawnEntityInWorld(entityMountableBlock);
-			player.mountEntity(entityMountableBlock);
+        		entityMountableBlock = new EntityArmchairMount(world);
+        		entityMountableBlock.setPosition(x + 0.5D, y  + 0.5D, z  + 0.5D);
+        		entityMountableBlock.setChairAngle(meta);
+        		world.spawnEntityInWorld(entityMountableBlock);
+        		player.mountEntity(entityMountableBlock);
 		}
 	}
         return true;

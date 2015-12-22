@@ -17,7 +17,32 @@ public class EntityArmchairMount extends Entity {
 		super.updateRiderPosition();
 		if (riddenByEntity instanceof EntityLivingBase) {
 			riddenByEntity.setPosition(posX, posY + 1D, posZ);
+
+			if(getChairAngle() == 2) {
+				((EntityLivingBase) riddenByEntity).renderYawOffset = 180F;
+				((EntityLivingBase) riddenByEntity).rotationYawHead = 180F;
+			}
+
+			if(getChairAngle() == 3) {
+				((EntityLivingBase) riddenByEntity).renderYawOffset = 0F;
+				((EntityLivingBase) riddenByEntity).rotationYawHead = 0F;
+			}
+
+			if(getChairAngle() == 4) {
+				((EntityLivingBase) riddenByEntity).renderYawOffset = 90F;
+				((EntityLivingBase) riddenByEntity).rotationYawHead = 90F;
+			}
+
+			if(getChairAngle() == 5) {
+				((EntityLivingBase) riddenByEntity).renderYawOffset = -90F;
+				((EntityLivingBase) riddenByEntity).rotationYawHead = -90F;
+			}
 		}
+	}
+	
+	@Override
+	protected void entityInit() {
+		dataWatcher.addObject(30, new Byte((byte) 0));
 	}
 
 	@Override
@@ -26,9 +51,13 @@ public class EntityArmchairMount extends Entity {
 		if (!worldObj.isRemote && riddenByEntity == null)
 			setDead();
 	}
+	
+	public void setChairAngle(Byte angle) {
+		dataWatcher.updateObject(30, Byte.valueOf(angle));
+	}
 
-	@Override
-	protected void entityInit() {
+	public byte getChairAngle() {
+		return dataWatcher.getWatchableObjectByte(30);
 	}
 
 	@Override
