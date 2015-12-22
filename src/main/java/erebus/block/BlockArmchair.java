@@ -104,13 +104,13 @@ public class BlockArmchair extends BlockContainer {
 			player.getEntityData().setInteger("armchairX", (int) x);
 			player.getEntityData().setInteger("armchairY", (int) y);
 			player.getEntityData().setInteger("armchairZ", (int) z);
-        		player.getEntityData().setBoolean("armchairSpawn", true);
-        		Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
-        		entityMountableBlock = new EntityArmchairMount(world);
-        		entityMountableBlock.setPosition(x + 0.5D, y  + 0.5D, z  + 0.5D);
-        		entityMountableBlock.setChairAngle(meta);
-        		world.spawnEntityInWorld(entityMountableBlock);
-        		player.mountEntity(entityMountableBlock);
+			player.getEntityData().setBoolean("armchairSpawn", true);
+			Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
+			entityMountableBlock = new EntityArmchairMount(world);
+			entityMountableBlock.setPosition(x + 0.5D, y  + 0.5D, z  + 0.5D);
+			entityMountableBlock.setChairAngle(meta);
+			world.spawnEntityInWorld(entityMountableBlock);
+			player.mountEntity(entityMountableBlock);
 		}
 	}
         return true;
