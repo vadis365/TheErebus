@@ -98,18 +98,18 @@ public class BlockArmchair extends BlockContainer {
         if(player.isSneaking()) {
             return false;
         } else {
-        	if (ConfigHandler.INSTANCE.allowRespawning) {
-        		player.getEntityData().setInteger("armchairX", (int) x);
-        		player.getEntityData().setInteger("armchairY", (int) y);
-        		player.getEntityData().setInteger("armchairZ", (int) z);
+		if (player.dimension == ConfigHandler.INSTANCE.erebusDimensionID && ConfigHandler.INSTANCE.allowRespawning) {
+			player.getEntityData().setInteger("armchairX", (int) x);
+			player.getEntityData().setInteger("armchairY", (int) y);
+			player.getEntityData().setInteger("armchairZ", (int) z);
         		player.getEntityData().setBoolean("armchairSpawn", true);
         		Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
-                entityMountableBlock = new EntityArmchairMount(world);
-                entityMountableBlock.setPosition(x + 0.5D, y  + 0.5D, z  + 0.5D);
-                world.spawnEntityInWorld(entityMountableBlock);
-                player.mountEntity(entityMountableBlock);
-        	}
-        }
+			entityMountableBlock = new EntityArmchairMount(world);
+			entityMountableBlock.setPosition(x + 0.5D, y  + 0.5D, z  + 0.5D);
+			world.spawnEntityInWorld(entityMountableBlock);
+			player.mountEntity(entityMountableBlock);
+		}
+	}
         return true;
     }
 
