@@ -1,21 +1,25 @@
 package erebus.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.ItemMaterials;
 
 public class EntityWisp extends EntityMob {
 	private ChunkCoordinates currentFlightTarget;
@@ -30,7 +34,12 @@ public class EntityWisp extends EntityMob {
 		super(world);
 		setSize(0.5F, 0.5F);
 		experienceValue = 2;
-		renderDistanceWeight = 64;
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataWatcher.addObject(30, new Byte((byte) 0));
 	}
 
 	@Override
@@ -41,10 +50,6 @@ public class EntityWisp extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.5D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D);
 	}
-
-	/*
-	 * protected String getLivingSound() { return "mob.zombie"; } protected String getHurtSound() { return "mob.zombiehurt"; } protected String getDeathSound() { return "mob.zombiedeath"; }
-	 */
 
 	@Override
 	protected void fall(float distance) {
@@ -106,15 +111,15 @@ public class EntityWisp extends EntityMob {
 
 	@Override
 	public void onUpdate() {
+		super.onUpdate();
+		findNearEntity();
 		if (worldObj.isRemote && isGlowing())
 			lightUp(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
 		if (worldObj.isRemote && !isGlowing())
 			switchOff();
 		if (!worldObj.isRemote)
 			if (worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ)) == Blocks.water)
-				;
-		motionY += 0.1D;
-		super.onUpdate();
+				motionY += 0.1D;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -137,12 +142,36 @@ public class EntityWisp extends EntityMob {
 	private void switchOff() {
 		if (!ConfigHandler.INSTANCE.bioluminescence)
 			return;
-		worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
-		worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+		if(worldObj.getBlockLightValue(lastX, lastY, lastZ) != EnumSkyBlock.Block.defaultLightValue) {
+			worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
+			worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Entity findNearEntity() {
+		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX - 0.5D, posY - 0.5D, posZ - 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(16D, 16D, 16D));
+		for (int i = 0; i < list.size(); i++) {
+			Entity entity = list.get(i);
+			if (entity != null)
+				if (entity instanceof EntityPlayer)
+					setIsNearEntity(true);
+				else
+					setIsNearEntity(false);
+		}
+		return null;
 	}
 
 	public boolean isGlowing() {
-		return worldObj.getSunBrightness(1.0F) < 0.5F;
+		return worldObj.getSunBrightness(1.0F) < 0.5F && getIsNearEntity();
+	}
+
+	public void setIsNearEntity(boolean entityNear) {
+		dataWatcher.updateObject(30, entityNear ? (byte)1 : (byte)0);
+	}
+
+	public boolean getIsNearEntity() {
+		return dataWatcher.getWatchableObjectByte(30) == 1 ? true : false;
 	}
 
 	@Override

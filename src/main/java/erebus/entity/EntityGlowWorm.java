@@ -1,11 +1,11 @@
 package erebus.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
+import java.util.List;
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -14,9 +14,14 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.ItemMaterials;
 
 public class EntityGlowWorm extends EntityCreature {
 	public int lastX;
@@ -34,6 +39,12 @@ public class EntityGlowWorm extends EntityCreature {
 		tasks.addTask(3, new EntityAIWander(this, 0.5D));
 		tasks.addTask(4, new EntityAIPanic(this, 0.7F));
 		tasks.addTask(5, new EntityAILookIdle(this));
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataWatcher.addObject(30, new Byte((byte) 0));
 	}
 
 	@Override
@@ -96,6 +107,7 @@ public class EntityGlowWorm extends EntityCreature {
 
 	@Override
 	public void onUpdate() {
+			findNearEntity();
 		if (worldObj.isRemote && isGlowing())
 			lightUp(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
 		if (worldObj.isRemote && !isGlowing())
@@ -123,12 +135,36 @@ public class EntityGlowWorm extends EntityCreature {
 	private void switchOff() {
 		if (!ConfigHandler.INSTANCE.bioluminescence)
 			return;
-		worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
-		worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+		if(worldObj.getBlockLightValue(lastX, lastY, lastZ) != EnumSkyBlock.Block.defaultLightValue) {
+			worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
+			worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Entity findNearEntity() {
+		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX - 0.5D, posY - 0.5D, posZ - 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(8D, 8D, 8D));
+		for (int i = 0; i < list.size(); i++) {
+			Entity entity = list.get(i);
+			if (entity != null)
+				if (entity instanceof EntityPlayer)
+					setIsNearEntity(true);
+				else
+					setIsNearEntity(false);
+		}
+		return null;
 	}
 
 	public boolean isGlowing() {
-		return worldObj.getSunBrightness(1.0F) < 0.5F;
+		return worldObj.getSunBrightness(1.0F) < 0.5F && getIsNearEntity();
+	}
+
+	public void setIsNearEntity(boolean entityNear) {
+		dataWatcher.updateObject(30, entityNear ? (byte)1 : (byte)0);
+	}
+
+	public boolean getIsNearEntity() {
+		return dataWatcher.getWatchableObjectByte(30) == 1 ? true : false;
 	}
 
 	@Override
