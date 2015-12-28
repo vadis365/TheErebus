@@ -27,6 +27,7 @@ public class EntityGlowWorm extends EntityCreature {
 	public int lastX;
 	public int lastY;
 	public int lastZ;
+	private boolean triggerOnce;
 
 	public EntityGlowWorm(World world) {
 		super(world);
@@ -107,6 +108,7 @@ public class EntityGlowWorm extends EntityCreature {
 
 	@Override
 	public void onUpdate() {
+		if (!worldObj.isRemote)
 			findNearEntity();
 		if (worldObj.isRemote && isGlowing())
 			lightUp(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
@@ -129,29 +131,30 @@ public class EntityGlowWorm extends EntityCreature {
 						lastY = y;
 						lastZ = z;
 					}
+		triggerOnce = true;
 	}
 
 	@SideOnly(Side.CLIENT)
 	private void switchOff() {
 		if (!ConfigHandler.INSTANCE.bioluminescence)
 			return;
-		if(worldObj.getBlockLightValue(lastX, lastY, lastZ) != EnumSkyBlock.Block.defaultLightValue) {
+		if(triggerOnce) {
 			worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
 			worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+			triggerOnce = false;
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	protected Entity findNearEntity() {
-		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX - 0.5D, posY - 0.5D, posZ - 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(8D, 8D, 8D));
+		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(posX - 0.5D, posY - 0.5D, posZ - 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(8D, 8D, 8D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = list.get(i);
-			if (entity != null)
-				if (entity instanceof EntityPlayer)
-					setIsNearEntity(true);
-				else
-					setIsNearEntity(false);
+			if (entity != null && !getIsNearEntity())
+				setIsNearEntity(true);
 		}
+		if (list.isEmpty() && getIsNearEntity())
+			setIsNearEntity(false);
 		return null;
 	}
 
@@ -160,7 +163,7 @@ public class EntityGlowWorm extends EntityCreature {
 	}
 
 	public void setIsNearEntity(boolean entityNear) {
-		dataWatcher.updateObject(30, entityNear ? (byte)1 : (byte)0);
+		dataWatcher.updateObject(30, entityNear ? (byte) 1 : (byte) 0);
 	}
 
 	public boolean getIsNearEntity() {
