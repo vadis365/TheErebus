@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
+import erebus.ModTabs;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityArmchairMount;
 import erebus.tileentity.TileEntityArmchair;
@@ -34,6 +35,7 @@ public class BlockArmchair extends BlockContainer {
         setHardness(2.0F);
         setResistance(10.0F);
         setBlockBounds(0, 0, 0, 1, 0.4375F, 1);
+        setCreativeTab(ModTabs.blocks);
     }
     
 	@Override
