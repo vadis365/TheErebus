@@ -1,11 +1,5 @@
 package erebus.entity;
 
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.entity.ai.EntityAIBlockFollowOwner;
-import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -13,6 +7,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.core.proxy.CommonProxy;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
+import erebus.tileentity.TileEntityBambooCrate;
 
 public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements IInventory {
 
@@ -70,6 +70,8 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 			TileEntityBambooCrate chest = Utils.getTileEntity(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), TileEntityBambooCrate.class);
 			for (int i = 0; i < chest.getSizeInventory(); i++)
 				chest.setInventorySlotContents(i, inventory[i]);
+			worldObj.notifyBlocksOfNeighborChange(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), blockID);
+			worldObj.markBlockForUpdate(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
 			return true;
 		} else {
 			player.openGui(Erebus.instance, CommonProxy.GuiID.ANIMATED_BAMBOO_CRATE.ordinal(), player.worldObj, getEntityId(), 0, 0);
