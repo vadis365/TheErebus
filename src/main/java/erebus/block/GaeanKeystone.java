@@ -3,12 +3,6 @@ package erebus.block;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.tileentity.TileEntityGaeanKeystone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockLeaves;
@@ -20,8 +14,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.tileentity.TileEntityGaeanKeystone;
 
 public class GaeanKeystone extends BlockContainer {
 
@@ -304,29 +306,33 @@ public class GaeanKeystone extends BlockContainer {
 				return false;
 			}
 		});
-		PCoord start = floorMin.add(0, 1, 0);
-		int dx = 0, dy = 0, dz = 0;
-		for (byte b : portalFrame) {
-			if (b == END) {
-				dy++;
-				dx = 0;
-				continue;
-			} else if (b == F || b == L) {
-				Block block;
-				int md = 0;
-				if (b == L)
-					block = Blocks.air;
-				else {
-					md = w.rand.nextBoolean() ? 5 /* smoothUmbertile */ : 6 /* smoothUmbertiles */;
-					block = ModBlocks.umberstone;
+		if (ConfigHandler.INSTANCE.genReturnPortalFrame) {
+			PCoord start = floorMin.add(0, 1, 0);
+			int dx = 0, dy = 0, dz = 0;
+			for (byte b : portalFrame) {
+				if (b == END) {
+					dy++;
+					dx = 0;
+					continue;
+				} else if (b == F || b == L) {
+					Block block;
+					int md = 0;
+					if (b == L)
+						if (w.difficultySetting != EnumDifficulty.HARD)
+							block = Blocks.leaves;
+						else
+							block = Blocks.air;
+					else {
+						md = w.rand.nextBoolean() ? 5 /* smoothUmbertile */: 6 /* smoothUmbertiles */;
+						block = ModBlocks.umberstone;
+					}
+					w.setBlock(start.x + dx, start.y + dy, start.z + dz, block, md, 3);
 				}
-				w.setBlock(start.x + dx, start.y + dy, start.z + dz, block, md, 3);
+				dx++;
 			}
-			dx++;
+
+			keystone.setBlock(ModBlocks.gaeanKeystone);
+			keystone.w.getTileEntity(keystone.x, keystone.y, keystone.z);
 		}
-
-		keystone.setBlock(ModBlocks.gaeanKeystone);
-		keystone.w.getTileEntity(keystone.x, keystone.y, keystone.z);
 	}
-
 }
