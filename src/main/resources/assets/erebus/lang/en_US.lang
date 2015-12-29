@@ -779,6 +779,7 @@ armchair.spawnSet=You can only sit here... oh, whenever.
 armchair.obstructed=Adventurer's Armchair obstructed. Defaulting spawn to most recent Portal used.
 armchair.missing=Adventurer's Armchair not found. Defaulting spawn to most recent Portal used.
 armchair.unstable=An unstable spawn point has been set to your current location. Please travel through an Erebus portal from The Overworld to create a stable spawn point.
+armchair.unableToSit=Adventurer's Armchair obstructed.
 
 ############
 # Commands #

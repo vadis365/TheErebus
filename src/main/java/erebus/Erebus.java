@@ -28,6 +28,7 @@ import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.handler.AnvilEventsHandler;
+import erebus.core.handler.ArmchairPlayerDamageHandler;
 import erebus.core.handler.BedPlaceEventHandler;
 import erebus.core.handler.BucketFillHandler;
 import erebus.core.handler.DeathCompassRespawnEvent;
@@ -133,6 +134,7 @@ public class Erebus {
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(new FurnaceBurnTimeHandler());
 		MinecraftForge.EVENT_BUS.register(new BedPlaceEventHandler());
+		MinecraftForge.EVENT_BUS.register(new ArmchairPlayerDamageHandler());
 
 		if (ConfigHandler.INSTANCE.allowRespawning) {
 			FMLCommonHandler.instance().bus().register(new ErebusPlayerLoggedInEvent());
