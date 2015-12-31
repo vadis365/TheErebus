@@ -277,6 +277,7 @@ public class RecipeHandler {
 		// Temporary Replacement Recipes
 		addShapelessRecipe(new ItemStack(ModItems.witherWebSlinger), new ItemStack(ModItems.webSlinger), new ItemStack(Blocks.soul_sand), ItemMaterials.DATA.POISON_GLAND.makeStack(), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb), new ItemStack(ModBlocks.witherWeb));
 		addShapelessRecipe(new ItemStack(ModBlocks.lightningSpeedBlock), new ItemStack(ModBlocks.velocityBlock), ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack());
+		addShapelessRecipe(new ItemStack(Items.dye, 1, 15), new ItemStack(ModItems.deathCompass));
 
 	}
 
