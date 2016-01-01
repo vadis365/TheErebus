@@ -346,6 +346,7 @@ public class RecipeHandler {
 		OreDictionary.registerOre("blockGlass", new ItemStack(ModBlocks.amber, 1, 1));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.saplessLog));
 		OreDictionary.registerOre("logWood", new ItemStack(ModBlocks.scorchedWood));
+		OreDictionary.registerOre("bamboo", ItemMaterials.DATA.BAMBOO.makeStack());
 
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.planks, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("plankWood", new ItemStack(ModBlocks.varnishedPlanks));
