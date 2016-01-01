@@ -1,16 +1,10 @@
 package erebus.entity;
 
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -27,6 +21,11 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.ItemMaterials;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
 
@@ -36,7 +35,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	private boolean areAttributesSetup = false;
 	public boolean waspFlying;
 	public final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
-	public final EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityLivingBase.class, 0.3D, true);
+	public final EntityErebusAIAttackOnCollide aiAttackOnCollide = new EntityErebusAIAttackOnCollide(this, EntityLivingBase.class, 0.3D, true);
 
 	public EntityWasp(World world) {
 		super(world);
@@ -101,7 +100,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	@Override
-	protected void fall(float par1) {
+	protected void fall(float amount) {
 	}
 
 	@Override
@@ -167,7 +166,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			motionY *= 0.6D;
 
 		if (!worldObj.isRemote) {
-			if (getEntityToAttack() == null) {
+			if (getAttackTarget() == null) {
 				if (rand.nextInt(200) == 0)
 					if (!waspFlying)
 						setWaspFlying(true);
@@ -180,8 +179,8 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 					land();
 			}
 
-			if (getEntityToAttack() != null) {
-				currentFlightTarget = new ChunkCoordinates((int) getEntityToAttack().posX, (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()), (int) getEntityToAttack().posZ);
+			if (getAttackTarget() != null) {
+				currentFlightTarget = new ChunkCoordinates((int) getAttackTarget().posX, (int) ((int) getAttackTarget().posY + getAttackTarget().getEyeHeight()), (int) getAttackTarget().posZ);
 				setWaspFlying(false);
 				flyToTarget();
 			}
@@ -220,32 +219,17 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	@Override
-	public void setAttackTarget(EntityLivingBase entity) {
-		setTarget(entity);
-		super.setAttackTarget(entity);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		if (super.attackEntityAsMob(entity)) {
-			if (entity instanceof EntityLivingBase) {
-				byte var2 = 0;
-				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-					var2 = 7;
-				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-					var2 = 15;
-				if (var2 > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, var2 * 20, 0));
-			}
-			return true;
+	public void onCollideWithPlayer(EntityPlayer player) {
+		super.onCollideWithPlayer(player);
+		if (player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY) {
+			byte duration = 0;
+			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				duration = 7;
+			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+				duration = 15;
+			if (duration > 0)
+				player.addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
 		}
-		return false;
-	}
-
-	@Override
-	protected void attackEntity(Entity entity, float par2) {
-		if (par2 < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY && getEntitySenses().canSee(entity))
-			attackEntityAsMob(entity);
 	}
 
 	public byte getIsBoss() {
