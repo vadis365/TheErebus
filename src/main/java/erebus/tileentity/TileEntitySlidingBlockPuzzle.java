@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import erebus.ModBlocks;
-import erebus.core.helper.Utils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -15,6 +13,8 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import erebus.ModBlocks;
+import erebus.core.helper.Utils;
 
 public class TileEntitySlidingBlockPuzzle extends TileEntity {
 
@@ -256,8 +256,14 @@ public class TileEntitySlidingBlockPuzzle extends TileEntity {
 		List<BlockOffset> offsets = map.get(facing);
 		if (offsets == null)
 			throw new IllegalArgumentException("Can't generate sliding block puzzle facing " + facing);
-
-		world.setBlock(x, y + 2, z, ModBlocks.completedPuzzle);
+		if (facing == ForgeDirection.WEST)
+			world.setBlock(x , y, z - 2, ModBlocks.completedPuzzle);
+		if (facing == ForgeDirection.EAST)
+			world.setBlock(x , y, z + 2, ModBlocks.completedPuzzle);
+		if (facing == ForgeDirection.SOUTH)
+			world.setBlock(x - 2, y, z, ModBlocks.completedPuzzle);
+		if (facing == ForgeDirection.NORTH)
+			world.setBlock(x + 2, y, z, ModBlocks.completedPuzzle);
 		TileEntityCompletedPuzzle compPuzzle = Utils.getTileEntity(world, x, y + 2, z, TileEntityCompletedPuzzle.class);
 		if (compPuzzle != null)
 			compPuzzle.setPuzzle(puzzle);

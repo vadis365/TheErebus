@@ -18,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.util.ForgeDirection;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
@@ -27,6 +28,8 @@ import erebus.item.ItemMaterials;
 import erebus.item.ItemMaterials.DATA;
 import erebus.item.ItemSmoothie.SmoothieType;
 import erebus.tileentity.TileEntityBones;
+import erebus.tileentity.TileEntitySlidingBlockPuzzle;
+import erebus.tileentity.TileEntitySlidingBlockPuzzle.SlidingPuzzle;
 import erebus.world.feature.util.MazeGenerator;
 import erebus.world.feature.util.PerfectMazeGenerator;
 import erebus.world.loot.IPostProcess;
@@ -201,7 +204,12 @@ public class AntHillMazeDungeon {
 					}
 				}
 				buildFloor(world, x, yy, z, 8, 8, rand, false, false);
-				buildFloor(world, x, yy + 1, z, 8, 8, rand, true, true);		
+				buildFloor(world, x, yy + 1, z, 8, 8, rand, true, true);
+				TileEntitySlidingBlockPuzzle.createPuzzleAt(world, x + 16, y + 3, z + 8, ForgeDirection.getOrientation(ForgeDirection.WEST.ordinal()), SlidingPuzzle.TEST);
+				TileEntitySlidingBlockPuzzle.createPuzzleAt(world, x + 16, y + 3, z + 24, ForgeDirection.getOrientation(ForgeDirection.EAST.ordinal()), SlidingPuzzle.TEST);
+				TileEntitySlidingBlockPuzzle.createPuzzleAt(world, x + 8, y + 3, z + 16, ForgeDirection.getOrientation(ForgeDirection.SOUTH.ordinal()), SlidingPuzzle.TEST);
+				TileEntitySlidingBlockPuzzle.createPuzzleAt(world, x + 24, y + 3, z + 16, ForgeDirection.getOrientation(ForgeDirection.NORTH.ordinal()), SlidingPuzzle.TEST);
+				
 			}
 
 			if (floors == 4) {
