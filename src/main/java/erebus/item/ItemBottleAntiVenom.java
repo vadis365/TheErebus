@@ -40,8 +40,10 @@ public class ItemBottleAntiVenom extends ItemBucketMilk {
 
 		if (!player.capabilities.isCreativeMode) {
 			stack.stackSize--;
-			if(!player.getEntityData().hasKey("antivenomDuration") || player.getEntityData().getInteger("antivenomDuration") < 60)
-				player.getEntityData().setInteger("antivenomDuration", 60);
+			if(!player.getEntityData().hasKey("antivenomDuration") || player.getEntityData().getInteger("antivenomDuration") < 180) {
+				int currentDuration = player.getEntityData().getInteger("antivenomDuration");
+				player.getEntityData().setInteger("antivenomDuration", currentDuration <= 120 ? currentDuration + 60 : 180);
+			}
 			if (stack.stackSize <= 0)
 				return new ItemStack(Items.glass_bottle);
 			else

@@ -25,7 +25,7 @@ public class GuiAntiVenomBar extends Gui {
 
 		if (!mc.thePlayer.capabilities.isCreativeMode) {
 			int startX = event.resolution.getScaledWidth() / 2 + 82;
-			int startY = event.resolution.getScaledHeight() - 49;
+			int startY = event.resolution.getScaledHeight() - 51;
 			if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR) {
 				mc.getTextureManager().bindTexture(antiVenomTexture);
 
@@ -40,9 +40,9 @@ public class GuiAntiVenomBar extends Gui {
 						if (duration <= 3 && mc.theWorld.getTotalWorldTime() % 60 == 0)
 							offsetY += random.nextInt(3) - 1;
 						if (i * 2 + 1 < duration)
-							drawTexturedModalRect(startX - i * 8, startY + offsetY, 0, 0, 9, 9);
+							drawTexturedModalRect(startX - i * 8, startY + offsetY, 0, 0, 9, 11);
 						if (i * 2 + 1 == duration)
-							drawTexturedModalRect(startX - i * 8, startY + offsetY, 9, 0, 9, 9);
+							drawTexturedModalRect(startX - i * 8, startY + offsetY, 9, 0, 9, 11);
 
 					}
 				}
