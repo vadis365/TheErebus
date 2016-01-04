@@ -23,10 +23,12 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import erebus.api.ErebusAPI;
+import erebus.client.gui.GuiAntiVenomBar;
 import erebus.client.gui.RenderWarHammerChargeBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
+import erebus.core.handler.AntiVenomDurationHandler;
 import erebus.core.handler.AnvilEventsHandler;
 import erebus.core.handler.ArmchairPlayerDamageHandler;
 import erebus.core.handler.BedPlaceEventHandler;
@@ -79,6 +81,7 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
 			if (ConfigHandler.INSTANCE.playCustomSongs)
 				FMLCommonHandler.instance().bus().register(new ErebusMusicHandler());
+			MinecraftForge.EVENT_BUS.register(new GuiAntiVenomBar());
 		}
 
 		ModFluids.init();
@@ -135,6 +138,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(new FurnaceBurnTimeHandler());
 		MinecraftForge.EVENT_BUS.register(new BedPlaceEventHandler());
 		MinecraftForge.EVENT_BUS.register(new ArmchairPlayerDamageHandler());
+		FMLCommonHandler.instance().bus().register(new AntiVenomDurationHandler());
 
 		if (ConfigHandler.INSTANCE.allowRespawning) {
 			FMLCommonHandler.instance().bus().register(new ErebusPlayerLoggedInEvent());

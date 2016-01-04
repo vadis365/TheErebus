@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import erebus.ModTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucketMilk;
@@ -12,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import erebus.ModTabs;
 
 public class ItemBucketAntiVenom extends ItemBucketMilk {
 
@@ -35,6 +35,8 @@ public class ItemBucketAntiVenom extends ItemBucketMilk {
 
 		if (!player.capabilities.isCreativeMode) {
 			stack.stackSize--;
+			if(!player.getEntityData().hasKey("antivenomDuration") || player.getEntityData().getInteger("antivenomDuration") < 180)
+				player.getEntityData().setInteger("antivenomDuration", 180);
 			if (stack.stackSize <= 0)
 				return new ItemStack(Items.bucket);
 			else

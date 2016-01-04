@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import erebus.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import erebus.ModItems;
 
 public class ItemBambucketAntiVenom extends ItemBambucketDrinkable {
 
@@ -33,6 +33,8 @@ public class ItemBambucketAntiVenom extends ItemBambucketDrinkable {
 
 		if (!player.capabilities.isCreativeMode) {
 			stack.stackSize--;
+			if(!player.getEntityData().hasKey("antivenomDuration") || player.getEntityData().getInteger("antivenomDuration") < 180)
+				player.getEntityData().setInteger("antivenomDuration", 180);
 			player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucket));
 		}
 		return stack;

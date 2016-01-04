@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -16,6 +13,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModTabs;
 
 public class ItemBottleAntiVenom extends ItemBucketMilk {
 
@@ -40,6 +40,8 @@ public class ItemBottleAntiVenom extends ItemBucketMilk {
 
 		if (!player.capabilities.isCreativeMode) {
 			stack.stackSize--;
+			if(!player.getEntityData().hasKey("antivenomDuration") || player.getEntityData().getInteger("antivenomDuration") < 60)
+				player.getEntityData().setInteger("antivenomDuration", 60);
 			if (stack.stackSize <= 0)
 				return new ItemStack(Items.glass_bottle);
 			else
