@@ -28,6 +28,7 @@ public class TileEntitySoldierAntTrap extends TileEntity {
 		if (!worldObj.isRemote) {
 			findEnemyToAttack();
 			if (active) {
+				activateBlock();
 				if (animationTicks == 0)
 					worldObj.playSoundEffect(xCoord, yCoord, zCoord, "mob.zombie.say", 0.25F, 0.5F);
 				if (animationTicks == 11)
@@ -37,13 +38,10 @@ public class TileEntitySoldierAntTrap extends TileEntity {
 				if (animationTicks == 16)
 					setActive(false);
 			}
-			if (!active) {
+			if (!active)
 				if (animationTicks >= 1)
 					animationTicks--;
-				if (animationTicks == 0)
-					if (worldObj.rand.nextInt(140) == 0)
-						setActive(true);
-			}
+
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}
@@ -54,6 +52,19 @@ public class TileEntitySoldierAntTrap extends TileEntity {
 
 	@SuppressWarnings("unchecked")
 	protected Entity findEnemyToAttack() {
+		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D).expand(3D, 2D, 3D));
+			for (int i = 0; i < list.size(); i++) {
+				Entity entity = list.get(i);
+				if (entity != null)
+					if (entity instanceof EntityPlayer)
+						if (!active && animationTicks == 0)
+							setActive(true);
+			}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Entity activateBlock() {
 		int meta = getBlockMetadata();
 		float x = 0, z = 0;
 		if(meta == 4)

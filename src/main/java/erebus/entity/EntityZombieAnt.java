@@ -10,10 +10,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
 import erebus.item.ItemMaterials;
 
 public class EntityZombieAnt extends EntityMob {
@@ -86,13 +83,9 @@ public class EntityZombieAnt extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModBlocks.dutchCap), 0.0F);
-		entityDropItem(new ItemStack(ModBlocks.grandmasShoes), 0.0F);
-		entityDropItem(new ItemStack(ModBlocks.kaizersFinger), 0.0F);
-		entityDropItem(new ItemStack(ModBlocks.sarcasticCzech), 0.0F);
-		entityDropItem(new ItemStack(ModBlocks.darkCapped), 0.0F);
-		entityDropItem(new ItemStack(Blocks.red_mushroom), 0.0F);
-		entityDropItem(new ItemStack(Blocks.brown_mushroom), 0.0F);
+		int amount = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
+		for (int a = 0; a < amount; ++a)
+			entityDropItem(ItemMaterials.DATA.PLATE_ZOMBIE_ANT.makeStack(), 0.0F);
 		if (rand.nextInt(5) == 0)
 			entityDropItem(ItemMaterials.DATA.ANT_PHEROMONES.makeStack(), 0.0F);
 	}

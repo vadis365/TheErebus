@@ -1,11 +1,17 @@
 package erebus.tileentity;
 
-import erebus.entity.EntitySporeJet;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import erebus.entity.EntitySporeJet;
 
 public class TileEntityPuffShroom extends TileEntity {
 
@@ -17,6 +23,7 @@ public class TileEntityPuffShroom extends TileEntity {
 		prevAnimationTicks = animationTicks;
 
 		if (!worldObj.isRemote) {
+			findEnemyToAttack();
 			if (active) {
 				if (animationTicks == 12)
 					if (worldObj.isAirBlock(xCoord, yCoord + 1, zCoord)) {
@@ -30,15 +37,25 @@ public class TileEntityPuffShroom extends TileEntity {
 				if (animationTicks == 16)
 					setActive(false);
 			}
-			if (!active) {
+			if (!active)
 				if (animationTicks >= 1)
 					animationTicks--;
-				if (animationTicks == 0)
-					if (worldObj.rand.nextInt(140) == 0)
-						setActive(true);
-			}
+
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	protected Entity findEnemyToAttack() {
+		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D).expand(3D, 2D, 3D));
+			for (int i = 0; i < list.size(); i++) {
+				Entity entity = list.get(i);
+				if (entity != null)
+					if (entity instanceof EntityPlayer)
+						if (!active && animationTicks == 0)
+							setActive(true);
+			}
+		return null;
 	}
 
 	public void setActive(boolean isActive) {

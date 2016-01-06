@@ -195,7 +195,8 @@ public class ItemMaterials extends Item {
 		STEW_POT,
 		TITAN_STEW,
 		FORCE_KEY,
-		SOUL_CRYSTAL;
+		SOUL_CRYSTAL,
+		PLATE_ZOMBIE_ANT;
 
 		public ItemStack makeStack() {
 			return makeStack(1);

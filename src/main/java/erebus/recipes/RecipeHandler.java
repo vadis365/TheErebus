@@ -238,6 +238,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(Items.dye, 1, 2), "xx", "xx", 'x', new ItemStack(ModBlocks.erebusFlower, 1, FLOWER_TYPE.STEM.ordinal()));
 		addShapedRecipe(ItemMaterials.DATA.AMBER_STAR.makeStack(), " x ", "xyx", " x ", 'x', ItemMaterials.DATA.SAP_BALL.makeStack(), 'y', new ItemStack(ModBlocks.amber, 1, 1));
 		addShapedRecipe(new ItemStack(ModBlocks.armchair), "  w", "www", "p p", 'w', Blocks.wool, 'p', "plankWood");
+		addShapedRecipe(new ItemStack(Items.rotten_flesh), "xx", "xx", 'x', ItemMaterials.DATA.PLATE_ZOMBIE_ANT.makeStack());
 
 		// Smoothies
 		// Have to figure this out...

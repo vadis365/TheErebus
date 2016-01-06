@@ -556,6 +556,8 @@ item.erebus.materials.magma_crawler_eye.name=Magma Crawler Eye
 item.erebus.materials.stew_pot.name=Stew Pot
 item.erebus.materials.titan_stew.name=Un-cooked Titan Stew
 item.erebus.materials.force_key.name=Force Key
+item.erebus.materials.power_crystal.name=Power Crystal
+item.erebus.materials.plate_zombie_ant.name=Zombie Ant Plate
 
 item.erebus.heartBerries.name=Heartberries
 item.erebus.lifeBlood.name=Life Blood
