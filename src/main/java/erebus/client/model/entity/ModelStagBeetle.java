@@ -3,6 +3,7 @@ package erebus.client.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -341,5 +342,13 @@ public class ModelStagBeetle extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		float legMovement = MathHelper.cos(limbSwing * 0.75F) * 0.3F * limbSwingAngle;
+		float correction = 0.3490659F;
+		legLB1.rotateAngleY = legMovement - correction;
+		legLM1.rotateAngleY = -legMovement;
+		legLF1.rotateAngleY = legMovement + correction;
+		legRB1.rotateAngleY = -legMovement - correction;
+		legRM1.rotateAngleY = legMovement;
+		legRF1.rotateAngleY = legMovement + 3.142F - correction;
 	}
 }
