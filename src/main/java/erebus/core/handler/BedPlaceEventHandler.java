@@ -21,9 +21,11 @@ public class BedPlaceEventHandler {
 			if (itemstack != null && itemstack.getItem() == Items.bed) {
 				event.setCanceled(true);
 				itemstack.stackSize--;
-				EntityBedBug bedBug = new EntityBedBug(world);
-				bedBug.setPosition(event.x, event.y, event.z);
-				bedBug.worldObj.spawnEntityInWorld(bedBug);
+				for (int i = 0; i < 3; i++) {
+					EntityBedBug bedBug = new EntityBedBug(world);
+					bedBug.setPosition(event.x + (world.rand.nextFloat() * 0.03D - world.rand.nextFloat() * 0.03D), event.y + 0.25D, event.z + (world.rand.nextFloat() * 0.03D - world.rand.nextFloat() * 0.03D));
+					bedBug.worldObj.spawnEntityInWorld(bedBug);
+				}
 			}
 		}
 	}

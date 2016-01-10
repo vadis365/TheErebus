@@ -10,15 +10,16 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
 
 public class EntityBedBug extends EntityMob {
 
 	public EntityBedBug(World world) {
 		super(world);
-		setSize(1.0F, 0.8F);
+		setSize(0.75F, 0.6F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.3D, false));
@@ -32,7 +33,7 @@ public class EntityBedBug extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength());
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
@@ -45,19 +46,24 @@ public class EntityBedBug extends EntityMob {
 	public double getAttackStrength() {
 		switch (worldObj.difficultySetting) {
 			default:
-				return 2.0D;
+				return 1.0D;
 			case EASY:
-				return 2.0D;
+				return 1.0D;
 			case NORMAL:
 				return 2.0D;
 			case HARD:
-				return 4.0D;
+				return 3.0D;
 		}
 	}
 
 	@Override
 	public int getTotalArmorValue() {
-		return 8;
+		return 2;
+	}
+
+	@Override
+	protected float getSoundPitch() {
+		return super.getSoundPitch() * 1.25F;
 	}
 
 	@Override
@@ -87,9 +93,6 @@ public class EntityBedBug extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.PLATE_EXO.makeStack(), 0.0F);
+		entityDropItem(new ItemStack(Blocks.wool, 1, 0), 0F);
 	}
 }
