@@ -87,7 +87,10 @@ public class EntityZombieAntSoldier extends EntityMob {
 		for (int a = 0; a < amount; ++a)
 			entityDropItem(ItemMaterials.DATA.PLATE_ZOMBIE_ANT.makeStack(), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(ItemMaterials.DATA.ANT_PHEROMONES.makeStack(), 0.0F);
+			if(rand.nextBoolean())
+				entityDropItem(ItemMaterials.DATA.ANT_PHEROMONES.makeStack(), 0.0F);
+			else
+				entityDropItem(ItemMaterials.DATA.TERPSISHROOM.makeStack(), 0.0F);
 	}
 
 	@Override
