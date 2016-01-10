@@ -134,7 +134,7 @@ public class EntityStagBeetle extends EntityTameable {
 		int rareDropChance = rand.nextInt(30);
 		if (rareDropChance == 0)
 			entityDropItem(ItemMaterials.DATA.STAG_BEETLE_MANDIBLES.makeStack(), 0.0F);
-		if (rareDropChance == 1) {
+		if (rareDropChance >= 1 && rareDropChance <= 4) {
 			if(isBurning())
 				entityDropItem(new ItemStack(ModItems.stagHeartCooked), 1);
 			else
