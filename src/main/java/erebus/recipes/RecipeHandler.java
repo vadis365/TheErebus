@@ -301,6 +301,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.orePetrifiedWood), ItemMaterials.DATA.PETRIFIED_WOOD.makeStack(), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreEncrustedDiamond), new ItemStack(ModItems.encrustedDiamond), 1.0F);
 		GameRegistry.addSmelting(ItemMaterials.DATA.TITAN_STEW.makeStack(), new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.TITAN_STEW_COOKED.ordinal()), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModItems.stagHeartRaw), new ItemStack(ModItems.stagHeartCooked), 1.0F);
 
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.mud), ItemMaterials.DATA.MUD_BRICK.makeStack(), 0.2F);
 		GameRegistry.addSmelting(ItemMaterials.DATA.NECTAR.makeStack(), ItemMaterials.DATA.HONEY_DRIP.makeStack(), 0.2F);

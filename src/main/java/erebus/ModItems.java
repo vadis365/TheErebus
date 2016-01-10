@@ -2,6 +2,13 @@ package erebus;
 
 import java.lang.reflect.Field;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemSeedFood;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.item.ItemAmuletAntTaming;
@@ -30,6 +37,7 @@ import erebus.item.ItemErebusFood;
 import erebus.item.ItemExtractor;
 import erebus.item.ItemFlowerSeeds;
 import erebus.item.ItemFoodHeartBerries;
+import erebus.item.ItemFoodStagHeart;
 import erebus.item.ItemHammerWar;
 import erebus.item.ItemHelmMushroom;
 import erebus.item.ItemHelmRhino;
@@ -64,13 +72,6 @@ import erebus.item.bambucket.ItemBambucket;
 import erebus.item.bambucket.ItemBambucketAntiVenom;
 import erebus.item.bambucket.ItemBambucketBeetleJuice;
 import erebus.item.bambucket.ItemBambucketMilk;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemSeedFood;
-import net.minecraft.item.ItemStack;
 
 public class ModItems {
 
@@ -93,6 +94,8 @@ public class ModItems {
 	public static final Item deathCompass = new ItemDeathCompass();
 	public static final Item cabbageSeeds = new ItemSeedFood(4, 0.1F, ModBlocks.blockCabbage, Blocks.farmland).setCreativeTab(ModTabs.items).setUnlocalizedName("erebus.cabbageSeeds").setTextureName("erebus:cabbage_seeds");
 	public static final Item idols = new ItemDungeonIdols();
+	public static final Item stagHeartRaw = new ItemFoodStagHeart(0, 0F, false, "raw");
+	public static final Item stagHeartCooked = new ItemFoodStagHeart(20, 0.5F, false, "cooked");
 
 	public static final Item flowerSeeds = new ItemFlowerSeeds();
 	public static final Item whetstone = new ItemWhetstone().setUnlocalizedName("erebus.whetstone").setTextureName("erebus:whetstone");

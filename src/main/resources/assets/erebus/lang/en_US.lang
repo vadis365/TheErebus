@@ -465,6 +465,8 @@ item.erebus.clubBone.name=Caveman's Club
 item.erebus.maxSpeedBow.name=Maximum Speed Bow
 item.erebus.turnips.name=Turnips
 item.erebus.cabbageSeeds.name=Cabbage Seeds
+item.erebus.heart_stag_raw.name=Heart of the Stag
+item.erebus.heart_stag_cooked.name=Roasted Heart of the Stag
 
 item.erebus.helmetJade.name=Jade Helmet
 item.erebus.chestplateJade.name=Jade Chestplate
@@ -783,6 +785,8 @@ armchair.obstructed=Adventurer's Armchair obstructed. Defaulting spawn to most r
 armchair.missing=Adventurer's Armchair not found. Defaulting spawn to most recent Portal used.
 armchair.unstable=An unstable spawn point has been set to your current location. Please travel through an Erebus portal from The Overworld to create a stable spawn point.
 armchair.unableToSit=Adventurer's Armchair obstructed.
+tooltip.erebus.heals=Heals 10 Hearts when consumed. Always Edible.
+tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
 
 ############
 # Commands #
