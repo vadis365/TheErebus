@@ -16,7 +16,7 @@ public class EntityPlayerSpawnHandler {
 	@SuppressWarnings("unchecked")
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onClonePlayer(PlayerEvent.Clone event) {
-		
+
 		World world = event.entity.worldObj;
 		if (world.isRemote)
 			return;
@@ -41,20 +41,20 @@ public class EntityPlayerSpawnHandler {
 					event.entityPlayer.getEntityData().setInteger("erebusPortalY", pY);
 					event.entityPlayer.getEntityData().setInteger("erebusPortalZ", pZ);
 				}
-				
+
 				if(event.entityPlayer.getEntityData().hasKey("armchairSpawn")) {
 					int aX = event.entityPlayer.getEntityData().getInteger("armchairX");
 					int aY = event.entityPlayer.getEntityData().getInteger("armchairY");
 					int aZ = event.entityPlayer.getEntityData().getInteger("armchairZ");
 					if(world.getBlock(aX, aY, aZ) instanceof BlockArmchair) {
 						if(world.isAirBlock(aX, aY + 1, aZ) && world.isAirBlock(aX, aY + 2, aZ))
-							event.entityPlayer.setLocationAndAngles(aX + 0.5D, aY + 1.25D, aZ + 0.5D, event.entityPlayer.rotationYaw, event.entityPlayer.rotationPitch);
+							event.entityPlayer.setLocationAndAngles(aX + 0.5D, aY + 0.5D, aZ + 0.5D, event.entityPlayer.rotationYaw, event.entityPlayer.rotationPitch);
 						else {
 							Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.obstructed")));
 							spawnAtPortal(world, event.entityPlayer);
 						}
 					}
-					
+
 					if(!(world.getBlock(aX, aY, aZ) instanceof BlockArmchair)) {
 						Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.missing")));
 						spawnAtPortal(world, event.entityPlayer);
