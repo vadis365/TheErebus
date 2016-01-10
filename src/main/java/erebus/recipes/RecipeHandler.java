@@ -198,7 +198,7 @@ public class RecipeHandler {
 		addShapedRecipe(new ItemStack(ModItems.nectarCollector), "  B", " S ", "S  ", 'B', Items.bowl, 'S', "stickWood");
 		ItemStack diamondPick = new ItemStack(Items.diamond_pickaxe);
 		diamondPick.addEnchantment(Enchantment.silkTouch, 1);
-		GameRegistry.addRecipe(EnchantSensitiveRecipe.makeRecipe(new ItemStack(ModItems.blockExtractor), "  P", " D ", "C  ", 'P', ItemMaterials.DATA.SCORPION_PINCER.makeStack(), 'D', diamondPick, 'C', "chestWood"));
+		GameRegistry.addRecipe(EnchantSensitiveRecipe.makeRecipe(new ItemStack(ModItems.blockExtractor), "  M", " D ", "C  ", 'M', ItemMaterials.DATA.STAG_BEETLE_MANDIBLES.makeStack(), 'D', diamondPick, 'C', "chestWood"));
 		addShapedRecipe(new ItemStack(ModItems.bucketHoney), "RRR", "RBR", "RRR", 'R', "dropHoney", 'B', Items.bucket);
 		addShapedRecipe(new ItemStack(ModBlocks.jarOHoney), "%%%", "$0$", "$$$", '%', "ingotIron", '$', new ItemStack(ModBlocks.amber, 1, 1), '0', ItemMaterials.DATA.NECTAR.makeStack());
 		addShapedRecipe(new ItemStack(ModBlocks.jadeBlock), "xxx", "xxx", "xxx", 'x', "gemJade");
@@ -260,7 +260,7 @@ public class RecipeHandler {
 
 		// Umbergolem parts
 		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_CORE.makeStack(), "AAA", "ARA", "AAA", 'A', ItemMaterials.DATA.ALTAR_FRAGMENT.makeStack(), 'R', ItemMaterials.DATA.RED_GEM.makeStack());
-		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_HEAD.makeStack(), "SSS", "SHS", "SSS", 'S', "stone", 'H', new ItemStack(ModItems.reinCompoundGoggles, 1));
+		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_HEAD.makeStack(), "SSS", "SHS", "SMS", 'S', "stone", 'H', new ItemStack(ModItems.reinCompoundGoggles, 1), 'M', ItemMaterials.DATA.STAG_BEETLE_MANDIBLES.makeStack());
 		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_CLAW.makeStack(), "  P", "  S", " SS", 'S', "stone", 'P', ItemMaterials.DATA.SCORPION_PINCER.makeStack());
 		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_CLAW.makeStack(), "SSP", "S  ", 'S', "stone", 'P', ItemMaterials.DATA.SCORPION_PINCER.makeStack());
 		addShapedRecipe(ItemMaterials.DATA.UMBERGOLEM_LEGS.makeStack(), "SSS", "S S", "R R", 'S', "stone", 'R', ItemMaterials.DATA.REINFORCED_PLATE_EXO.makeStack());

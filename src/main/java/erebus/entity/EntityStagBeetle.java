@@ -129,10 +129,18 @@ public class EntityStagBeetle extends EntityTameable {
 		if (getTameState() >= 2)
 			entityDropItem(ItemMaterials.DATA.RHINO_RIDING_KIT.makeStack(), 0.0F);
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
-		for (int a = 0; a < var3; ++a)
+		for (int a = 0; a < var3; ++a) 
 			entityDropItem(ItemMaterials.DATA.PLATE_EXO.makeStack(), 0.0F);
+		int rareDropChance = rand.nextInt(30);
+		if (rareDropChance == 0)
+			entityDropItem(ItemMaterials.DATA.STAG_BEETLE_MANDIBLES.makeStack(), 0.0F);
+		if (rareDropChance == 1) {
+			if(isBurning())
+				entityDropItem(new ItemStack(ModItems.stagHeartCooked), 1);
+			else
+				entityDropItem(new ItemStack(ModItems.stagHeartRaw), 1);
+		}
 	}
-
 
 	@Override
 	public boolean interact(EntityPlayer player) {
