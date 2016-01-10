@@ -233,7 +233,7 @@ public class EntityStagBeetle extends EntityTameable {
 			double a = Math.toRadians(renderYawOffset);
 			double offSetX = -Math.sin(a) * 0.1D;
 			double offSetZ = Math.cos(a) * 0.1D;
-			riddenByEntity.setPosition(posX - offSetX, posY + 1.1D + riddenByEntity.getYOffset(), posZ - offSetZ);
+			riddenByEntity.setPosition(posX - offSetX, posY + 0.75D + riddenByEntity.getYOffset(), posZ - offSetZ);
 		}
 	}
 
