@@ -10,7 +10,7 @@ import erebus.entity.EntityBedBug;
 
 public class BedPlaceEventHandler {
 	@SubscribeEvent
-	public void onPlayerTorchPlacement(PlaceEvent event) {
+	public void onPlayerBedPlacement(PlaceEvent event) {
 
 		World world = event.world;
 		if (world.isRemote)
