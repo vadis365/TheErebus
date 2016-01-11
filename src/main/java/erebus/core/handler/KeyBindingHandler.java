@@ -1,9 +1,12 @@
 package erebus.core.handler;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 
 import org.lwjgl.input.Keyboard;
 
@@ -84,8 +87,12 @@ public class KeyBindingHandler {
 			if (player == null)
 				return;
 
-			if (player.isRiding() && player.ridingEntity instanceof EntityStagBeetle)
-				PacketPipeline.sendToServer(new PacketBeetleDig());
+			if (player.isRiding() && player.ridingEntity instanceof EntityStagBeetle) {
+				MovingObjectPosition mop = Minecraft.getMinecraft().renderViewEntity.rayTrace(5, 1.0F);
+				if(mop != null && mop.typeOfHit == MovingObjectType.BLOCK) {
+					PacketPipeline.sendToServer(new PacketBeetleDig(mop.blockX, mop.blockY, mop.blockZ, mop.sideHit));
+				}
+			}
 		}
 	}
 }
