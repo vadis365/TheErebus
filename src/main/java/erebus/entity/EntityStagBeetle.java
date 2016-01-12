@@ -49,6 +49,8 @@ public class EntityStagBeetle extends EntityTameable {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataWatcher.addObject(28, new Byte((byte) 1));
+		dataWatcher.addObject(29, new Byte((byte) 0));
 		dataWatcher.addObject(30, new Integer(0));
 		dataWatcher.addObject(31, new Byte((byte) 0));
 	}
@@ -63,11 +65,14 @@ public class EntityStagBeetle extends EntityTameable {
 		super.onUpdate();
 		if (shagCount > 0)
 			shagCount--;
-		if (getJawMove())
-			setJawState(getJawState() + 1);
-		if (getJawState() >= 6) {
-			setJawState(0);
-			setJawMove(false);
+		if (!worldObj.isRemote) {
+			if (dataWatcher.getWatchableObjectByte(29) == 1)
+				dataWatcher.updateObject(30, dataWatcher.getWatchableObjectInt(30) + 1);
+			if (dataWatcher.getWatchableObjectInt(30) >= 6) {
+				dataWatcher.updateObject(28, (byte) 1);
+				dataWatcher.updateObject(29, (byte) 0);
+				dataWatcher.updateObject(30, 0);
+			}
 		}
 	}
 
@@ -238,8 +243,8 @@ public class EntityStagBeetle extends EntityTameable {
 		super.updateRiderPosition();
 		if (riddenByEntity instanceof EntityLivingBase) {
 			double a = Math.toRadians(renderYawOffset);
-			double offSetX = -Math.sin(a) * 0.5D;
-			double offSetZ = Math.cos(a) * 0.5D;
+			double offSetX = -Math.sin(a) * 0.75D;
+			double offSetZ = Math.cos(a) * 0.75D;
 			riddenByEntity.setPosition(posX - offSetX, posY + 0.8D + riddenByEntity.getYOffset(), posZ - offSetZ);
 		}
 	}
@@ -292,31 +297,19 @@ public class EntityStagBeetle extends EntityTameable {
 		return dataWatcher.getWatchableObjectByte(31);
 	}
 
-	public void setJawState(int jawState) {
-		dataWatcher.updateObject(30, jawState);
-	}
-
-	public int getJawState() {
-		return dataWatcher.getWatchableObjectInt(30);
-	}
-
-	public void setJawMove(boolean state) {
-		jawMove = state;
-	}
-
-	public boolean getJawMove() {
-		return jawMove;
-	}
-
 	@Override
 	public void writeEntityToNBT(NBTTagCompound data) {
 		super.writeEntityToNBT(data);
 		data.setByte("tameState", getTameState());
+		dataWatcher.updateObject(30, data.getInteger("jawMotion"));
+		dataWatcher.updateObject(28, data.getByte("headPos"));
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound data) {
 		super.readEntityFromNBT(data);
 		setTameState(data.getByte("tameState"));
+		data.setInteger("jawMotion", dataWatcher.getWatchableObjectInt(30));
+		data.setByte("headPos", dataWatcher.getWatchableObjectByte(28));
 	}
 }

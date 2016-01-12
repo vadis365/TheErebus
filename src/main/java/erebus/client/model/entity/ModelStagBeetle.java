@@ -358,19 +358,27 @@ public class ModelStagBeetle extends ModelBase {
 		legRB1.rotateAngleY = -legMovement - correction;
 		legRM1.rotateAngleY = legMovement;
 		legRF1.rotateAngleY = legMovement + 3.142F - correction;
-		if(beetle.getJawMove()) {
-			if(beetle.getJawState() < 5) {
-				mandibleR1.rotateAngleY = + 1.2F + (0.025F * beetle.getJawState());
-				mandibleL1.rotateAngleY = - 1.2F - (0.025F * beetle.getJawState());
+		if(beetle.getDataWatcher().getWatchableObjectByte(29) == 1) {
+			if(beetle.getDataWatcher().getWatchableObjectByte(28) == 0)
+				headMid.rotateAngleX = -0.17453292519943295F + 0.5F;
+			else if(beetle.getDataWatcher().getWatchableObjectByte(28) == 2)
+				headMid.rotateAngleX = -0.17453292519943295F - 1.0F;
+			else
+				headMid.rotateAngleX = -0.17453292519943295F;
+			if(beetle.getDataWatcher().getWatchableObjectInt(30) < 5) {
+				mandibleR1.rotateAngleY = + 1.2F + (0.025F * beetle.getDataWatcher().getWatchableObjectInt(30));
+				mandibleL1.rotateAngleY = - 1.2F - (0.025F * beetle.getDataWatcher().getWatchableObjectInt(30));
 			}
 			else {
-				mandibleR1.rotateAngleY = 1.45F - (0.175F * beetle.getJawState());
-				mandibleL1.rotateAngleY = - 1.45F + (0.175F * beetle.getJawState());
+				mandibleR1.rotateAngleY = 1.45F - (0.175F * beetle.getDataWatcher().getWatchableObjectInt(30));
+				mandibleL1.rotateAngleY = - 1.45F + (0.175F * beetle.getDataWatcher().getWatchableObjectInt(30));
 			}
 		}
 		else {
 			mandibleR1.rotateAngleY = legMovement * 0.2F * limbSwingAngle + 0.8F;
 			mandibleL1.rotateAngleY = -legMovement * 0.2F * limbSwingAngle - 0.8F;
+			headMid.rotateAngleX = -0.17453292519943295F;
 		}
+
 	}
 }

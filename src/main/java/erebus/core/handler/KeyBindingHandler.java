@@ -90,7 +90,6 @@ public class KeyBindingHandler {
 			if (player.isRiding() && player.ridingEntity instanceof EntityStagBeetle) {
 				MovingObjectPosition mop = Minecraft.getMinecraft().renderViewEntity.rayTrace(5, 1.0F);
 				if(mop != null && mop.typeOfHit == MovingObjectType.BLOCK) {
-					((EntityStagBeetle) player.ridingEntity).setJawMove(true);
 					PacketPipeline.sendToServer(new PacketBeetleDig(mop.blockX, mop.blockY, mop.blockZ, mop.sideHit));
 				}
 			}

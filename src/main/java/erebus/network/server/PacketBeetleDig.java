@@ -31,14 +31,21 @@ public class PacketBeetleDig extends AbstractServerPacket {
 
 			if (!world.isAirBlock(blockX, blockY, blockZ)) {
 				AxisAlignedBB blockBox = AxisAlignedBB.getBoundingBox(blockX + 0.5D, blockY + 0.5D, blockZ + 0.5D, blockX + 0.5D, blockY + 0.5D, blockZ + 0.5D);
-
+				beetle.getDataWatcher().updateObject(29, (byte)1);
 				int i = MathHelper.floor_double(blockBox.minX);
 				int j = MathHelper.floor_double(blockBox.minY);
 				int k = MathHelper.floor_double(blockBox.minZ);
 				int l = MathHelper.floor_double(blockBox.maxX);
 				int i1 = MathHelper.floor_double(blockBox.maxY);
 				int j1 = MathHelper.floor_double(blockBox.maxZ);
-
+				
+				if(blockY + 0.5D > player.posY + 2)
+					beetle.getDataWatcher().updateObject(28, (byte)2);
+				else if(blockY + 0.5D < player.posY)
+					beetle.getDataWatcher().updateObject(28, (byte)0);
+				else
+					beetle.getDataWatcher().updateObject(28, (byte)1);
+				
 				if(blockHitSide != 0 && blockHitSide != 1) {
 						if (direction == 0 || direction == 2) {
 							i -= 1;
