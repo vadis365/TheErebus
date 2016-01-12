@@ -3,14 +3,14 @@ package erebus.world.feature.plant;
 import java.util.ArrayList;
 import java.util.List;
 
-import erebus.ModBlocks;
-import erebus.core.helper.MathUtil;
-import erebus.world.feature.WorldGenErebus;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.util.ForgeDirection;
+import erebus.ModBlocks;
+import erebus.core.helper.MathUtil;
+import erebus.world.feature.WorldGenErebus;
 
 public class WorldGenGiantMushrooms extends WorldGenErebus {
 	private static final int stalkMeta = 10;
@@ -311,6 +311,11 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 	 */
 	private boolean genSarcasticCzech(int x, int y, int z, Block mushroom) {
 		int height = 2 + rand.nextInt(3);
+		int armLength = 4 + rand.nextInt(3);
+
+		if (!checkAirCube(x, y, z, x, y + height, z) || !checkAirCube(x - armLength, y + height, z - armLength, x + armLength, y + height + 1, z + armLength))
+			return false;
+	
 		setBlockPillar(x, z, y, y + height, mushroom, stalkMeta);
 		setBlockPillar(x + 1, z, y, y + height, mushroom, stalkMeta);
 		setBlockPillar(x, z + 1, y, y + height, mushroom, stalkMeta);
@@ -318,7 +323,6 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 		y += height;
 
 		for (ForgeDirection[] dirs : new ForgeDirection[][] { new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.SOUTH }, new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.NORTH }, new ForgeDirection[] { ForgeDirection.WEST, ForgeDirection.SOUTH }, new ForgeDirection[] { ForgeDirection.WEST, ForgeDirection.NORTH } }) {
-			int armLength = 7 + rand.nextInt(4);
 			int xx = x + dirs[0].offsetX;
 			int yy = y;
 			int zz = z + dirs[0].offsetZ;
