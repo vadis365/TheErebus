@@ -265,7 +265,7 @@ public class EntityStagBeetle extends EntityTameable {
 
 	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {
 		EntityBeetleLarva entityBeetleLarva = new EntityBeetleLarva(worldObj);
-		entityBeetleLarva.setTame((byte) 0); //TODO make new larva for this beetle type
+		entityBeetleLarva.setTame((byte) 5);
 		return entityBeetleLarva;
 	}
 

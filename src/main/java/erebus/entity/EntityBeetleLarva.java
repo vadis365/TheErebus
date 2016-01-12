@@ -192,6 +192,11 @@ public class EntityBeetleLarva extends EntityAnimal {
 			EntityBombardierBeetle entityBombardierBeetle = new EntityBombardierBeetle(worldObj);
 			entityBombardierBeetle.setPosition(posX, posY, posZ);
 			worldObj.spawnEntityInWorld(entityBombardierBeetle);
+		} else if (getTame() == 5) {
+			EntityStagBeetle entityStagBeetle = new EntityStagBeetle(worldObj);
+			entityStagBeetle.setPosition(posX, posY, posZ);
+			entityStagBeetle.setTameState((byte) 1);
+			worldObj.spawnEntityInWorld(entityStagBeetle);
 		}
 	}
 

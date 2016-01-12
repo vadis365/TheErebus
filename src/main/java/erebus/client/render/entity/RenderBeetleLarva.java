@@ -16,7 +16,7 @@ import erebus.entity.EntityBombardierBeetleLarva;
 @SideOnly(Side.CLIENT)
 public class RenderBeetleLarva extends RenderLiving {
 
-	private final ResourceLocation[] TEXTURES = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/beetleLarva.png"), new ResourceLocation("erebus:textures/entity/beetleLarvaBombardier.png") };
+	private final ResourceLocation[] TEXTURES = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/beetleLarva.png"), new ResourceLocation("erebus:textures/entity/beetleLarvaBombardier.png"), new ResourceLocation("erebus:textures/entity/beetleLarvaStag.png") };
 
 	public RenderBeetleLarva() {
 		super(new ModelBeetleLarva(), 0.3F);
@@ -38,6 +38,8 @@ public class RenderBeetleLarva extends RenderLiving {
 		EntityBeetleLarva larva = (EntityBeetleLarva) entity;
 		if (larva.getTame() == 4)
 			return TEXTURES[1];
+		else if(larva.getTame() == 5)
+			return TEXTURES[2];
 		else
 			return TEXTURES[0];
 	}

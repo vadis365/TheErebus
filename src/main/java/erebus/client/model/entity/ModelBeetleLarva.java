@@ -1,12 +1,12 @@
 package erebus.client.model.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.entity.EntityBeetleLarva;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.entity.EntityBeetleLarva;
 
 @SideOnly(Side.CLIENT)
 public class ModelBeetleLarva extends ModelBase {
@@ -37,6 +37,8 @@ public class ModelBeetleLarva extends ModelBase {
 	ModelRenderer titanL2;
 	ModelRenderer titanR1;
 	ModelRenderer titanR2;
+	ModelRenderer jawStagLeft;
+	ModelRenderer jawStagRight;
 
 	public ModelBeetleLarva() {
 		textureWidth = 128;
@@ -150,6 +152,14 @@ public class ModelBeetleLarva extends ModelBase {
 		titanR2.addBox(-1.5F, -4F, -1.4F, 1, 3, 1);
 		titanR2.setRotationPoint(0F, 20F, -10F);
 		setRotation(titanR2, -0.1396263F, 0F, 0F);
+		jawStagLeft = new ModelRenderer(this, 35, 8);
+		jawStagLeft.addBox(1.8F, 0F, 0.5F, 1, 5, 1);
+		jawStagLeft.setRotationPoint(0F, 20F, -10F);
+		setRotation(jawStagLeft, -1.047198F, 0.1745329F, 0F);
+		jawStagRight = new ModelRenderer(this, 50, 8);
+		jawStagRight.addBox(-2.8F, 0F, 0.5F, 1, 5, 1);
+		jawStagRight.setRotationPoint(0F, 20F, -10F);
+		setRotation(jawStagRight, -1.047198F, -0.1745329F, 0F);
 	}
 
 	@Override
@@ -188,7 +198,12 @@ public class ModelBeetleLarva extends ModelBase {
 			titanR1.render(unitPixel);
 			titanR2.render(unitPixel);
 		}
-
+		if (larva.getTame() == 5) {
+			jawleft.showModel = false;
+			jawright.showModel = false;
+			jawStagLeft.render(unitPixel);
+			jawStagRight.render(unitPixel);
+		}
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -219,6 +234,8 @@ public class ModelBeetleLarva extends ModelBase {
 		titanL2.rotationPointX = bf;
 		titanR1.rotationPointX = bf;
 		titanR2.rotationPointX = bf;
+		jawStagLeft.rotationPointX = bf;
+		jawStagRight.rotationPointX = bf;
 
 		torso1.rotationPointY = ba + 20F;
 
