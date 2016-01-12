@@ -18,7 +18,7 @@ public class BlockPuffShroom extends BlockContainer {
 		setStepSound(Block.soundTypeStone);
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
-		setCreativeTab(ModTabs.blocks);
+		//setCreativeTab(ModTabs.blocks);
 		setBlockTextureName("erebus:anthillBlock");
 		setBlockName("erebus.puffShroom");
 	}

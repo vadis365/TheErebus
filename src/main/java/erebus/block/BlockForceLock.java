@@ -34,7 +34,7 @@ public class BlockForceLock extends Block {
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
 		setStepSound(soundTypeStone);
-		setCreativeTab(ModTabs.blocks);
+		//setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.forceLock");
 	}
 

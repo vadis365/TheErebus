@@ -11,7 +11,7 @@ public class BlockAnthillBlock extends Block {
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
 		setStepSound(soundTypeStone);
-		setCreativeTab(ModTabs.blocks);
+		//setCreativeTab(ModTabs.blocks);
 		setBlockName("erebus.anthillBlock");
 		setBlockTextureName("erebus:anthillBlock");
 	}

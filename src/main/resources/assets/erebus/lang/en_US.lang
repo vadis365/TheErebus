@@ -229,7 +229,7 @@ tile.erebus.gneissStairs2.name=Layered Gneiss Stairs
 tile.erebus.gneissStairs3.name=Brick Gneiss Stairs
 tile.erebus.gneissStairs4.name=Smooth Gneiss Stairs
 tile.erebus.gneissStairs5.name=Tiled Gneiss Stairs
-tile.erebus.anthillStairs.name=Anthill Stairs
+tile.erebus.anthillStairs.name=Anthill Stairs (Unused WIP)
 
 tile.erebus.wallErebus_0.name=Umberstone Wall
 tile.erebus.wallErebus_1.name=Umbercobble Wall
@@ -570,8 +570,8 @@ item.erebus.materials.smoothie_glass.name=Empty Smoothie Glass
 item.erebus.materials.magma_crawler_eye.name=Magma Crawler Eye
 item.erebus.materials.stew_pot.name=Stew Pot
 item.erebus.materials.titan_stew.name=Un-cooked Titan Stew
-item.erebus.materials.force_key.name=Force Key
-item.erebus.materials.power_crystal.name=Power Crystal
+item.erebus.materials.force_key.name=Force Key (Unused WIP)
+item.erebus.materials.soul_crystal.name=Soul Crystal
 item.erebus.materials.plate_zombie_ant.name=Zombie Ant Plate
 item.erebus.materials.stag_beetle_mandibles.name=Stag Beetle Mandibles
 item.erebus.materials.terpsishroom.name=Terpsishroom
@@ -579,14 +579,14 @@ item.erebus.materials.terpsishroom.name=Terpsishroom
 item.erebus.heartBerries.name=Heartberries
 item.erebus.lifeBlood.name=Life Blood
 
-item.erebus.idols.mud.name=Mud Scarab Idol
-item.erebus.idols.iron.name=Iron Scarab Idol
-item.erebus.idols.gold.name=Gold Scarab Idol
-item.erebus.idols.jade.name=Jade Scarab Idol
-item.erebus.idols.mud_umbergolem.name=Spawn Mud Idol Guardian
-item.erebus.idols.iron_umbergolem.name=Spawn Iron Idol Guardian
-item.erebus.idols.gold_umbergolem.name=Spawn Gold Idol Guardian
-item.erebus.idols.jade_umbergolem.name=Spawn Jade Idol Guardian
+item.erebus.idols_mud.name=Mud Scarab Idol
+item.erebus.idols_iron.name=Iron Scarab Idol
+item.erebus.idols_gold.name=Gold Scarab Idol
+item.erebus.idols_jade.name=Jade Scarab Idol
+item.erebus.idols_mud_umbergolem.name=Spawn Mud Idol Guardian
+item.erebus.idols_iron_umbergolem.name=Spawn Iron Idol Guardian
+item.erebus.idols_gold_umbergolem.name=Spawn Gold Idol Guardian
+item.erebus.idols_jade_umbergolem.name=Spawn Jade Idol Guardian
 
 item.erebus.bambucket.name=Bambucket
 item.erebus.bambucketWater.name=Water Bambucket
@@ -594,11 +594,11 @@ item.erebus.bambucketHoney.name=Honey Bambucket
 item.erebus.bambucketAntiVenom.name=Anti-Venom Bambucket
 item.erebus.bambucketBeetleJuice.name=Beetle Juice Bambucket
 item.erebus.bambucketMilk.name=Milk Bambucket
-item.erebus.bambucketFormicAcid.name=Formic Acid Bambucket
+item.erebus.bambucketFormicAcid.name=Formic Acid Bambucket (Unused WIP)
 item.erebus.bucketBeetleJuice.name=Beetle Juice Bucket
 item.erebus.bucketAntiVenom.name=Anti-Venom Bucket
 item.erebus.bottleAntiVenom.name=Anti-Venom Bottle
-item.erebus.bucketFormicAcid.name=Formic Acid Bucket
+item.erebus.bucketFormicAcid.name=Formic Acid Bucket (Unused WIP)
 
 item.erebus.waspSword.name=Wasp Sword
 item.erebus.sprayCan.name=Insect Repellent
@@ -707,7 +707,7 @@ entity.erebus.honeyPotAnt.name=Honey Pot Ant
 entity.erebus.bombardierBeetleLarva.name=Bombardier Beetle Larva
 entity.erebus.zombieAntSoldier.name=Zombie Ant Soldier
 entity.erebus.bedBug.name=Bed Bug
-entity.erebus.stagBeetle.name=Stag Beetle (WIP)
+entity.erebus.stagBeetle.name=Stag Beetle
 
 ##########
 # Fluids #
@@ -717,7 +717,7 @@ fluid.honey=Honey
 fluid.beetleJuice=Beetle Juice
 fluid.antiVenom=Anti-Venom
 fluid.milk=Milk
-fluid.formicAcid=Formic Acid
+fluid.formicAcid=Formic Acid (Unused WIP)
 
 #################
 # Creative Tabs #

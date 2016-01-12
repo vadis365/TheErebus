@@ -34,6 +34,12 @@ public class NEIErebusConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(ModBlocks.bambooShoot));
 		API.hideItem(new ItemStack(ModBlocks.slidingBlockPuzzle));
 		API.hideItem(new ItemStack(ModBlocks.completedPuzzle));
+		API.hideItem(new ItemStack(ModBlocks.anthillBlock));
+		API.hideItem(new ItemStack(ModBlocks.anthillStairs));
+		API.hideItem(new ItemStack(ModBlocks.soldierAntTrap));
+		API.hideItem(new ItemStack(ModBlocks.puffShroom));
+		API.hideItem(new ItemStack(ModBlocks.forceLock));
+		API.hideItem(ItemMaterials.DATA.FORCE_KEY.makeStack());
 
 		if (!OreType.ALUMINIUM.isEnabled()) {
 			API.hideItem(new ItemStack(ModBlocks.oreAluminium));

@@ -11,7 +11,7 @@ public class ItemPortalActivator extends Item {
 	public ItemPortalActivator() {
 		setFull3D();
 		setMaxStackSize(1);
-		setCreativeTab(ModTabs.gears);
+		setCreativeTab(ModTabs.specials);
 	}
 
 	@Override
