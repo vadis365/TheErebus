@@ -4,8 +4,12 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import erebus.entity.EntityStagBeetle;
 
 @SideOnly(Side.CLIENT)
 public class ModelStagBeetle extends ModelBase {
@@ -307,6 +311,8 @@ public class ModelStagBeetle extends ModelBase {
 	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		GL11.glPushMatrix();
+		GL11.glTranslated(0F, 0F, 0.375F);
         abdomenRTop.render(unitPixel);
         legLB1.render(unitPixel);
         abdomenBellyBack.render(unitPixel);
@@ -331,6 +337,7 @@ public class ModelStagBeetle extends ModelBase {
         abdomenR.render(unitPixel);
         abdomenRTopRear.render(unitPixel);
         bumR2.render(unitPixel);
+		GL11.glPopMatrix();
     }
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -342,6 +349,7 @@ public class ModelStagBeetle extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		EntityStagBeetle beetle = (EntityStagBeetle)entity;
 		float legMovement = MathHelper.cos(limbSwing * 0.75F) * 0.3F * limbSwingAngle;
 		float correction = 0.3490659F;
 		legLB1.rotateAngleY = legMovement - correction;
@@ -350,5 +358,19 @@ public class ModelStagBeetle extends ModelBase {
 		legRB1.rotateAngleY = -legMovement - correction;
 		legRM1.rotateAngleY = legMovement;
 		legRF1.rotateAngleY = legMovement + 3.142F - correction;
+		if(beetle.getJawMove()) {
+			if(beetle.getJawState() < 5) {
+				mandibleR1.rotateAngleY = + 1.2F + (0.025F * beetle.getJawState());
+				mandibleL1.rotateAngleY = - 1.2F - (0.025F * beetle.getJawState());
+			}
+			else {
+				mandibleR1.rotateAngleY = 1.45F - (0.175F * beetle.getJawState());
+				mandibleL1.rotateAngleY = - 1.45F + (0.175F * beetle.getJawState());
+			}
+		}
+		else {
+			mandibleR1.rotateAngleY = legMovement * 0.2F * limbSwingAngle + 0.8F;
+			mandibleL1.rotateAngleY = -legMovement * 0.2F * limbSwingAngle - 0.8F;
+		}
 	}
 }

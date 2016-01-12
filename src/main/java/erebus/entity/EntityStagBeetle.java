@@ -30,7 +30,7 @@ public class EntityStagBeetle extends EntityTameable {
 
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	int shagCount;
-
+	boolean jawMove;
 	public EntityStagBeetle(World world) {
 		super(world);
 		stepHeight = 2.0F;
@@ -49,6 +49,7 @@ public class EntityStagBeetle extends EntityTameable {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataWatcher.addObject(30, new Integer(0));
 		dataWatcher.addObject(31, new Byte((byte) 0));
 	}
 
@@ -62,6 +63,12 @@ public class EntityStagBeetle extends EntityTameable {
 		super.onUpdate();
 		if (shagCount > 0)
 			shagCount--;
+		if (getJawMove())
+			setJawState(getJawState() + 1);
+		if (getJawState() >= 6) {
+			setJawState(0);
+			setJawMove(false);
+		}
 	}
 
 	@Override
@@ -231,9 +238,9 @@ public class EntityStagBeetle extends EntityTameable {
 		super.updateRiderPosition();
 		if (riddenByEntity instanceof EntityLivingBase) {
 			double a = Math.toRadians(renderYawOffset);
-			double offSetX = -Math.sin(a) * 0.1D;
-			double offSetZ = Math.cos(a) * 0.1D;
-			riddenByEntity.setPosition(posX - offSetX, posY + 0.75D + riddenByEntity.getYOffset(), posZ - offSetZ);
+			double offSetX = -Math.sin(a) * 0.5D;
+			double offSetZ = Math.cos(a) * 0.5D;
+			riddenByEntity.setPosition(posX - offSetX, posY + 0.8D + riddenByEntity.getYOffset(), posZ - offSetZ);
 		}
 	}
 
@@ -283,6 +290,22 @@ public class EntityStagBeetle extends EntityTameable {
 
 	public byte getTameState() {
 		return dataWatcher.getWatchableObjectByte(31);
+	}
+
+	public void setJawState(int jawState) {
+		dataWatcher.updateObject(30, jawState);
+	}
+
+	public int getJawState() {
+		return dataWatcher.getWatchableObjectInt(30);
+	}
+
+	public void setJawMove(boolean state) {
+		jawMove = state;
+	}
+
+	public boolean getJawMove() {
+		return jawMove;
 	}
 
 	@Override
