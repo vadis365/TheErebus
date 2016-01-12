@@ -3,6 +3,7 @@ package erebus.client.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -347,11 +348,12 @@ public class ModelStagBeetle extends ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
-		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTickTime) {
 		EntityStagBeetle beetle = (EntityStagBeetle)entity;
 		float legMovement = MathHelper.cos(limbSwing * 0.75F) * 0.3F * limbSwingAngle;
 		float correction = 0.3490659F;
+		int prevAnimation = beetle.prevAnimation;
+		float interAnimationTicks = beetle.getDataWatcher().getWatchableObjectInt(30) + (beetle.getDataWatcher().getWatchableObjectInt(30) - prevAnimation) * partialTickTime;
 		legLB1.rotateAngleY = legMovement - correction;
 		legLM1.rotateAngleY = -legMovement;
 		legLF1.rotateAngleY = legMovement + correction;
@@ -360,25 +362,36 @@ public class ModelStagBeetle extends ModelBase {
 		legRF1.rotateAngleY = legMovement + 3.142F - correction;
 		if(beetle.getDataWatcher().getWatchableObjectByte(29) == 1) {
 			if(beetle.getDataWatcher().getWatchableObjectByte(28) == 0)
-				headMid.rotateAngleX = -0.17453292519943295F + 0.5F;
+				headMid.rotateAngleX = -0.175F + 0.085F * interAnimationTicks;
 			else if(beetle.getDataWatcher().getWatchableObjectByte(28) == 2)
-				headMid.rotateAngleX = -0.17453292519943295F - 1.0F;
-			else
-				headMid.rotateAngleX = -0.17453292519943295F;
-			if(beetle.getDataWatcher().getWatchableObjectInt(30) < 5) {
-				mandibleR1.rotateAngleY = + 1.2F + (0.025F * beetle.getDataWatcher().getWatchableObjectInt(30));
-				mandibleL1.rotateAngleY = - 1.2F - (0.025F * beetle.getDataWatcher().getWatchableObjectInt(30));
+				headMid.rotateAngleX = -0.175F - 0.17F * interAnimationTicks;
+			else if(beetle.getDataWatcher().getWatchableObjectByte(28) == 1)
+				if(headMid.rotateAngleX > -0.175F)
+					headMid.rotateAngleX -= 0.17F * interAnimationTicks;
+				else if(headMid.rotateAngleX < -0.175F)
+					headMid.rotateAngleX += 0.085F * interAnimationTicks;
+				else
+					headMid.rotateAngleX = -0.175F;
+			if(interAnimationTicks < 5) {
+				mandibleR1.rotateAngleY = + 1.2F + (0.025F * interAnimationTicks);
+				mandibleL1.rotateAngleY = - 1.2F - (0.025F * interAnimationTicks);
 			}
 			else {
-				mandibleR1.rotateAngleY = 1.45F - (0.175F * beetle.getDataWatcher().getWatchableObjectInt(30));
-				mandibleL1.rotateAngleY = - 1.45F + (0.175F * beetle.getDataWatcher().getWatchableObjectInt(30));
+				mandibleR1.rotateAngleY = 1.45F - (0.175F * interAnimationTicks);
+				mandibleL1.rotateAngleY = - 1.45F + (0.175F * interAnimationTicks);
 			}
 		}
 		else {
 			mandibleR1.rotateAngleY = legMovement * 0.2F * limbSwingAngle + 0.8F;
 			mandibleL1.rotateAngleY = -legMovement * 0.2F * limbSwingAngle - 0.8F;
-			headMid.rotateAngleX = -0.17453292519943295F;
+			headMid.rotateAngleX = -0.175F;
 		}
+	}
+
+	@Override
+	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+		
 
 	}
 }

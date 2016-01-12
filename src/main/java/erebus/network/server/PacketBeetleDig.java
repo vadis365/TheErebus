@@ -38,25 +38,25 @@ public class PacketBeetleDig extends AbstractServerPacket {
 				int l = MathHelper.floor_double(blockBox.maxX);
 				int i1 = MathHelper.floor_double(blockBox.maxY);
 				int j1 = MathHelper.floor_double(blockBox.maxZ);
-				
+
 				if(blockY + 0.5D > player.posY + 2)
 					beetle.getDataWatcher().updateObject(28, (byte)2);
 				else if(blockY + 0.5D < player.posY)
 					beetle.getDataWatcher().updateObject(28, (byte)0);
 				else
 					beetle.getDataWatcher().updateObject(28, (byte)1);
-				
+
 				if(blockHitSide != 0 && blockHitSide != 1) {
 						if (direction == 0 || direction == 2) {
 							i -= 1;
 							l += 1;
-							j -=1;
+							j -= 1;
 							i1 +=1;
 						}
 						if (direction == 1 || direction == 3) {
 							k -= 1;
 							j1 += 1;
-							j -=1;
+							j -= 1;
 							i1 +=1;
 						}
 				}
@@ -66,7 +66,6 @@ public class PacketBeetleDig extends AbstractServerPacket {
 					i -= 1;
 					l += 1;
 				}
-
 				for (int k1 = i; k1 <= l; ++k1)
 					for (int l1 = j; l1 <= i1; ++l1)
 						for (int i2 = k; i2 <= j1; ++i2) {
@@ -76,7 +75,7 @@ public class PacketBeetleDig extends AbstractServerPacket {
 								block.dropBlockAsItem(world, k1, l1, i2, world.getBlockMetadata(k1, l1, i2), 0);
 							}
 						}
-			}
+				}
 			return;
 		}
 	}

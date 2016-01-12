@@ -30,7 +30,7 @@ public class EntityStagBeetle extends EntityTameable {
 
 	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
 	int shagCount;
-	boolean jawMove;
+	public int prevAnimation;
 	public EntityStagBeetle(World world) {
 		super(world);
 		stepHeight = 2.0F;
@@ -63,6 +63,7 @@ public class EntityStagBeetle extends EntityTameable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+		prevAnimation = dataWatcher.getWatchableObjectInt(30);
 		if (shagCount > 0)
 			shagCount--;
 		if (!worldObj.isRemote) {
