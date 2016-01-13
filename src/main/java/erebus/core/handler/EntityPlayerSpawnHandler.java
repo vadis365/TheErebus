@@ -1,15 +1,14 @@
 package erebus.core.handler;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import erebus.Erebus;
 import erebus.block.BlockArmchair;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.network.PacketPipeline;
+import erebus.network.server.PacketArmchairClientMessages;
 
 public class EntityPlayerSpawnHandler {
 
@@ -50,13 +49,13 @@ public class EntityPlayerSpawnHandler {
 						if(world.isAirBlock(aX, aY + 1, aZ) && world.isAirBlock(aX, aY + 2, aZ))
 							event.entityPlayer.setLocationAndAngles(aX + 0.5D, aY + 0.5D, aZ + 0.5D, event.entityPlayer.rotationYaw, event.entityPlayer.rotationPitch);
 						else {
-							Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.obstructed")));
+							PacketPipeline.sendToPlayer(event.entityPlayer, new PacketArmchairClientMessages((byte)2));
 							spawnAtPortal(world, event.entityPlayer);
 						}
 					}
 
 					if(!(world.getBlock(aX, aY, aZ) instanceof BlockArmchair)) {
-						Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.missing")));
+						PacketPipeline.sendToPlayer(event.entityPlayer, new PacketArmchairClientMessages((byte)3));
 						spawnAtPortal(world, event.entityPlayer);
 						event.entityPlayer.getEntityData().setBoolean("armchairSpawn", false);
 					}	

@@ -12,17 +12,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import erebus.ModTabs;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityArmchairMount;
+import erebus.network.PacketPipeline;
+import erebus.network.server.PacketArmchairClientMessages;
 import erebus.tileentity.TileEntityArmchair;
 
 public class BlockArmchair extends BlockContainer {
@@ -102,14 +101,14 @@ public class BlockArmchair extends BlockContainer {
         } else {
 		if (player.dimension == ConfigHandler.INSTANCE.erebusDimensionID && ConfigHandler.INSTANCE.allowRespawning) {
 			if(!world.isAirBlock(x, y + 1, z) || !world.isAirBlock(x, y + 2, z))
-				Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.unableToSit")));
+				PacketPipeline.sendToPlayer(player, new PacketArmchairClientMessages((byte)0));
 			else {
 				byte meta = (byte) world.getBlockMetadata(x, y, z);
 				player.getEntityData().setInteger("armchairX", (int) x);
 				player.getEntityData().setInteger("armchairY", (int) y);
 				player.getEntityData().setInteger("armchairZ", (int) z);
 				player.getEntityData().setBoolean("armchairSpawn", true);
-				Erebus.proxy.getClientPlayer().addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("armchair.spawnSet")));
+				PacketPipeline.sendToPlayer(player, new PacketArmchairClientMessages((byte)1));
 				entityMountableBlock = new EntityArmchairMount(world);
 				entityMountableBlock.setPosition(x + 0.5D, y  + 0.5D, z  + 0.5D);
 				entityMountableBlock.setChairAngle(meta);
