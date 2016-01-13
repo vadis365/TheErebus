@@ -34,7 +34,6 @@ public class AntiVenomDurationHandler {
 								toRemove.add(potion);
 					}
 					for (Potion potion : toRemove)
-						//event.player.addPotionEffect(new PotionEffect(potion.getId(), 0, 0));
 						event.player.removePotionEffect(potion.getId());
 
 					if (world.getTotalWorldTime() % 20 == 0) {
