@@ -14,7 +14,7 @@ import erebus.network.PacketPipeline;
 import erebus.network.server.PacketAntiVenom;
 
 public class AntiVenomDurationHandler {
-
+	public final byte[] potionIds = new byte[] { 2, 4, 9, 15, 17, 18, 19, 20 };
 	@SuppressWarnings("unchecked")
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void playerAntiVenomTick(PlayerTickEvent event) {
@@ -29,10 +29,12 @@ public class AntiVenomDurationHandler {
 					List<Potion> toRemove = new ArrayList<Potion>();
 					for (PotionEffect effect : (Collection<PotionEffect>) event.player.getActivePotionEffects()) {
 						Potion potion = Potion.potionTypes[effect.getPotionID()];
-						if (potion.isBadEffect())
-							toRemove.add(potion);
+						for (int count = 0; count < potionIds.length; count++)
+							if (potion.getId() == potionIds[count])
+								toRemove.add(potion);
 					}
 					for (Potion potion : toRemove)
+						//event.player.addPotionEffect(new PotionEffect(potion.getId(), 0, 0));
 						event.player.removePotionEffect(potion.getId());
 
 					if (world.getTotalWorldTime() % 20 == 0) {

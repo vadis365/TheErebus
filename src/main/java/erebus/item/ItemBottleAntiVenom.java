@@ -1,16 +1,10 @@
 package erebus.item;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -29,15 +23,6 @@ public class ItemBottleAntiVenom extends ItemBucketMilk {
 	@Override
 	@SuppressWarnings("unchecked")
 	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
-		List<Potion> toRemove = new ArrayList<Potion>();
-		for (PotionEffect effect : (Collection<PotionEffect>) player.getActivePotionEffects()) {
-			Potion potion = Potion.potionTypes[effect.getPotionID()];
-			if (potion.isBadEffect() && effect.getAmplifier() <= 0)
-				toRemove.add(potion);
-		}
-		for (Potion potion : toRemove)
-			player.removePotionEffect(potion.getId());
-
 		if (!player.capabilities.isCreativeMode) {
 			stack.stackSize--;
 			if(!player.getEntityData().hasKey("antivenomDuration") || player.getEntityData().getInteger("antivenomDuration") < 180) {
