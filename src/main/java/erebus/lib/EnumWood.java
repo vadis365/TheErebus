@@ -2,6 +2,11 @@ package erebus.lib;
 
 import java.util.HashMap;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import erebus.ModBlocks;
 import erebus.block.BlockErebusLeaves;
@@ -14,11 +19,6 @@ import erebus.block.plants.BlockSaplingErebus;
 import erebus.item.block.ItemBlockLocalised;
 import erebus.item.block.ItemBlockSlabSimple;
 import erebus.item.block.ItemErebusLeaves;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public enum EnumWood {
 
@@ -162,6 +162,15 @@ public enum EnumWood {
 				Block slab = slabs.get(wood);
 				OreDictionary.registerOre("slabWood", slab);
 				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });
+
+				Block fence = fences.get(wood);
+				OreDictionary.registerOre("fenceWood", fence);
+				GameRegistry.addRecipe(new ItemStack(fence, 2), new Object[] { "sps", "s s", 's', Items.stick, 'p', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });
+
+				Block fenceGate = fenceGates.get(wood);
+				OreDictionary.registerOre("fenceGate", fenceGate);
+				GameRegistry.addRecipe(new ItemStack(fenceGate, 1), new Object[] { "sps", "sps", 's', Items.stick, 'p', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });
+
 			}
 			if (wood.hasLeaves) {
 				Block leaf = wood.getLeaves();
