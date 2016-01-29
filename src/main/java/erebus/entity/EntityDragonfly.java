@@ -2,11 +2,6 @@ package erebus.entity;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -20,6 +15,12 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.item.ItemMaterials;
 
 public class EntityDragonfly extends EntityMob {
 
@@ -144,7 +145,7 @@ public class EntityDragonfly extends EntityMob {
 		if (getEntityToAttack() == null)
 			flyAbout();
 		if (riddenByEntity != null)
-			if (!worldObj.isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0)) {
+			if (!worldObj.isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0 || !worldObj.isRemote && captured() && worldObj.isSideSolid(MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1D), MathHelper.floor_double(posZ), ForgeDirection.UP))) {
 				setDropped(true);
 				riddenByEntity.mountEntity(null);
 			}
