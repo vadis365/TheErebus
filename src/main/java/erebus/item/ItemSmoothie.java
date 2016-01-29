@@ -4,12 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.collect.HashMultimap;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModTabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -26,6 +20,13 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.google.common.collect.HashMultimap;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModTabs;
 
 public class ItemSmoothie extends ItemFood {
 
@@ -58,7 +59,10 @@ public class ItemSmoothie extends ItemFood {
 	@Override
 	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
 		super.onEaten(stack, world, player);
-		return getContainerItem(stack);
+		if (stack.stackSize >= 0)
+			if(!player.inventory.addItemStackToInventory(getContainerItem(stack)))
+				player.dropPlayerItemWithRandomChoice(getContainerItem(stack), false);
+		return stack;
 	}
 
 	@Override
@@ -239,14 +243,19 @@ public class ItemSmoothie extends ItemFood {
 			switch (this) {
 				case GREEN_GIANT:
 					player.curePotionEffects(new ItemStack(Items.milk_bucket));
+					break;
 				case GIVIN_ME_THE_BLUES:
 					player.extinguish();
+					break;
 				case HOT_HOT_BABY:
 					player.setFire(5);
+					break;
 				case LIQUID_GOLD:
 					player.heal(0.5F);
+					break;
 				case BRYUFS_BREW:
 					player.heal(1.5F);
+					break;
 				default:
 			}
 		}
