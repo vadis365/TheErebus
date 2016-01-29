@@ -1,6 +1,6 @@
 package erebus.core.handler;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -50,28 +50,28 @@ public class EntityPlayerSpawnHandler {
 							event.entityPlayer.setLocationAndAngles(aX + 0.5D, aY + 0.5D, aZ + 0.5D, event.entityPlayer.rotationYaw, event.entityPlayer.rotationPitch);
 						else {
 							PacketPipeline.sendToPlayer(event.entityPlayer, new PacketArmchairClientMessages((byte)2));
-							spawnAtPortal(world, event.entityPlayer);
+							spawnAtPortal(world, (EntityPlayerMP) event.entityPlayer);
 						}
 					}
 
 					if(!(world.getBlock(aX, aY, aZ) instanceof BlockArmchair)) {
 						PacketPipeline.sendToPlayer(event.entityPlayer, new PacketArmchairClientMessages((byte)3));
-						spawnAtPortal(world, event.entityPlayer);
+						spawnAtPortal(world, (EntityPlayerMP) event.entityPlayer);
 						event.entityPlayer.getEntityData().setBoolean("armchairSpawn", false);
 					}	
 				}
 
 				if(!event.entityPlayer.getEntityData().hasKey("armchairSpawn"))
-					spawnAtPortal(world, event.entityPlayer);
+					spawnAtPortal(world, (EntityPlayerMP) event.entityPlayer);
 			}
 		}
 	}
 
-	private void spawnAtPortal(World world, EntityPlayer player) {
+	private void spawnAtPortal(World world, EntityPlayerMP player) {
 		int pX = player.getEntityData().getInteger("erebusPortalX");
 		int pY = player.getEntityData().getInteger("erebusPortalY");
 		int pZ = player.getEntityData().getInteger("erebusPortalZ");
-		player.setLocationAndAngles(pX + 0.5D, pY + 1.25D, pZ + 0.5D, player.rotationYaw, player.rotationPitch);
+		player.playerNetServerHandler.setPlayerLocation(pX + 0.5D, pY + 1.25D, pZ + 0.5D, player.rotationYaw, player.rotationPitch);
 	}
 }
 

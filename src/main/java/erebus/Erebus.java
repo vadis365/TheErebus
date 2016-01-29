@@ -41,6 +41,7 @@ import erebus.core.handler.EntityPlayerSpawnHandler;
 import erebus.core.handler.ErebusPlayerLoggedInEvent;
 import erebus.core.handler.FurnaceBurnTimeHandler;
 import erebus.core.handler.HomingBeeconTextureHandler;
+import erebus.core.handler.PlayerAboveCeilingHandler;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
 import erebus.debug.ErebusCommandDebug;
@@ -139,6 +140,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(new BedPlaceEventHandler());
 		MinecraftForge.EVENT_BUS.register(new ArmchairPlayerDamageHandler());
 		FMLCommonHandler.instance().bus().register(new AntiVenomDurationHandler());
+		MinecraftForge.EVENT_BUS.register(new PlayerAboveCeilingHandler());
 
 		if (ConfigHandler.INSTANCE.allowRespawning) {
 			FMLCommonHandler.instance().bus().register(new ErebusPlayerLoggedInEvent());
