@@ -1,14 +1,14 @@
 package erebus.entity;
 
-import erebus.ModBlocks;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import erebus.ModBlocks;
 
 public class EntityWebSling extends EntityThrowable {
 	public EntityWebSling(World world) {
@@ -43,21 +43,19 @@ public class EntityWebSling extends EntityThrowable {
 		byte type = getType();
 
 		if (!worldObj.isRemote) {
-			int x = mop.blockX;
-			int y = mop.blockY;
-			int z = mop.blockZ;
-			ForgeDirection side = ForgeDirection.getOrientation(mop.sideHit);
-			x += side.offsetX;
-			y += side.offsetY;
-			z += side.offsetZ;
+			int x = MathHelper.floor_double(posX);
+			int y = MathHelper.floor_double(posY);
+			int z = MathHelper.floor_double(posZ);
 
 			if (mop.entityHit != null) {
-				if (type == 0)
-					worldObj.setBlock(x, y, z, Blocks.web);
-				else if (type == 1)
-					worldObj.setBlock(x, y, z, ModBlocks.witherWeb);
-				else if (type == 2)
-					mop.entityHit.setFire(10);
+				if (Blocks.web.canPlaceBlockAt(worldObj, x, y, z))
+					if (type == 0)
+						worldObj.setBlock(x, y, z, Blocks.web);
+					else if (type == 1)
+						worldObj.setBlock(x, y, z, ModBlocks.witherWeb);
+				if (Blocks.fire.canPlaceBlockAt(worldObj, x, y, z))
+					if (type == 2)
+						mop.entityHit.setFire(10);
 			} else {
 				if (Blocks.web.canPlaceBlockAt(worldObj, x, y, z))
 					if (type == 0)
