@@ -2,21 +2,12 @@ package erebus.entity;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemErebusFood;
-import erebus.item.ItemMaterials;
-import erebus.tileentity.TileEntityTitanChest;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -38,6 +29,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.ItemErebusFood;
+import erebus.item.ItemMaterials;
+import erebus.tileentity.TileEntityTitanChest;
 
 public class EntityTitanBeetle extends EntityTameable {
 
@@ -53,7 +53,7 @@ public class EntityTitanBeetle extends EntityTameable {
 		stepHeight = 2.0F;
 		setSize(2.5F, 1.2F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.5D, true));
+		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, 0.5D, true));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));
 		tasks.addTask(3, new EntityAITempt(this, 0.5D, ModItems.turnip, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.5D));

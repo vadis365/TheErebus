@@ -30,7 +30,7 @@ import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.handler.AntiVenomDurationHandler;
 import erebus.core.handler.AnvilEventsHandler;
-import erebus.core.handler.ArmchairPlayerDamageHandler;
+import erebus.core.handler.PlayerInWallDamageHandler;
 import erebus.core.handler.BedPlaceEventHandler;
 import erebus.core.handler.BucketFillHandler;
 import erebus.core.handler.DeathCompassRespawnEvent;
@@ -138,7 +138,7 @@ public class Erebus {
 		FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(new FurnaceBurnTimeHandler());
 		MinecraftForge.EVENT_BUS.register(new BedPlaceEventHandler());
-		MinecraftForge.EVENT_BUS.register(new ArmchairPlayerDamageHandler());
+		MinecraftForge.EVENT_BUS.register(new PlayerInWallDamageHandler());
 		FMLCommonHandler.instance().bus().register(new AntiVenomDurationHandler());
 		MinecraftForge.EVENT_BUS.register(new PlayerAboveCeilingHandler());
 
