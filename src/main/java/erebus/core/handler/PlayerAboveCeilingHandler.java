@@ -3,6 +3,7 @@ package erebus.core.handler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.block.BlockArmchair;
 import erebus.core.handler.configs.ConfigHandler;
@@ -10,13 +11,14 @@ import erebus.network.PacketPipeline;
 import erebus.network.server.PacketArmchairClientMessages;
 
 public class PlayerAboveCeilingHandler {
-	@SubscribeEvent
+	@SuppressWarnings("unchecked")
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntityOnCeiling(PlayerEvent event) {
 		World world = event.entity.worldObj;
 		if (world.isRemote)
 			return;
 		if (event.entityPlayer.dimension == ConfigHandler.INSTANCE.erebusDimensionID) {
-			if(event.entityPlayer.posY >= 128) {
+			if(event.entityPlayer.posY >= 128 || event.entityPlayer.posY <= 0) {
 				if (event.entityPlayer.getEntityData().hasKey("armchairSpawn")) {
 					int aX = event.entityPlayer.getEntityData().getInteger("armchairX");
 					int aY = event.entityPlayer.getEntityData().getInteger("armchairY");
