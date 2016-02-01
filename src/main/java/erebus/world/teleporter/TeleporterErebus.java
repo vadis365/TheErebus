@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.ChunkCoordIntPair;
@@ -165,6 +166,7 @@ final class TeleporterErebus extends Teleporter {
 					player.getEntityData().setInteger("erebusPortalX", (int) posX);
 					player.getEntityData().setInteger("erebusPortalY", (int) posY);
 					player.getEntityData().setInteger("erebusPortalZ", (int) posZ);
+					player.addChatMessage(new ChatComponentTranslation("chat.darkosto"));
 				}
 			}
 
