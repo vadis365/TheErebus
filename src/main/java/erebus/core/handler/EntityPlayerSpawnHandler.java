@@ -47,7 +47,7 @@ public class EntityPlayerSpawnHandler {
 					int aZ = event.entityPlayer.getEntityData().getInteger("armchairZ");
 					if(world.getBlock(aX, aY, aZ) instanceof BlockArmchair) {
 						if(world.isAirBlock(aX, aY + 1, aZ) && world.isAirBlock(aX, aY + 2, aZ))
-							event.entityPlayer.setLocationAndAngles(aX + 0.5D, aY + 0.5D, aZ + 0.5D, event.entityPlayer.rotationYaw, event.entityPlayer.rotationPitch);
+							event.entityPlayer.setLocationAndAngles(aX + 0.5D, aY + 1D, aZ + 0.5D, event.entityPlayer.rotationYaw, event.entityPlayer.rotationPitch);
 						else {
 							PacketPipeline.sendToPlayer(event.entityPlayer, new PacketArmchairClientMessages((byte)2));
 							spawnAtPortal(world, (EntityPlayerMP) event.entityPlayer);
