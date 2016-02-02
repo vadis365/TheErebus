@@ -802,7 +802,6 @@ armchair.unstable=An unstable spawn point has been set to your current location.
 armchair.unableToSit=Adventurer's Armchair obstructed.
 tooltip.erebus.heals=Heals 10 Hearts when consumed. Always Edible.
 tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
-chat.darkosto=If you are seeing this then the spawn is setting correct on dimensional transfer Darkosto
 
 ############
 # Commands #
