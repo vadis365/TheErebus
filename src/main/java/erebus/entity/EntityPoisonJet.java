@@ -2,9 +2,6 @@ package erebus.entity;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +11,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.Erebus;
 
 public class EntityPoisonJet extends EntityThrowable {
 
@@ -46,18 +46,15 @@ public class EntityPoisonJet extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
-
 		if (mop.entityHit != null) {
-
 			if (mop.entityHit instanceof EntityLivingBase) {
 				if (!worldObj.isRemote) {
 					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 5 * 20, 0));
 					((EntityLivingBase) mop.entityHit).attackEntityFrom(DamageSource.causeMobDamage(getThrower()), 1.0F);
 				}
-				setDead();
 			}
-		} else
-			setDead();
+		}
+		setDead();
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package erebus.entity;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -219,17 +220,24 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer player) {
-		super.onCollideWithPlayer(player);
-		if (player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY) {
-			byte duration = 0;
-			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-				duration = 7;
-			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-				duration = 15;
-			if (duration > 0)
-				player.addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
-		}
+	public boolean attackEntityAsMob(Entity entity) {
+		if (super.attackEntityAsMob(entity)) {
+			if (entity instanceof EntityLivingBase) {
+				byte duration = 0;
+
+				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal())
+					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+						duration = 7;
+					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+						duration = 15;
+
+				if (duration > 0)
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
+			}
+
+			return true;
+		} else
+			return false;
 	}
 
 	public byte getIsBoss() {

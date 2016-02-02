@@ -110,7 +110,7 @@ public class EntityTarantulaBaby extends EntityMob {
 
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
-		if (distance < 2.0F) {
+		if (distance < 1.0F) {
 			super.attackEntity(entity, distance);
 			attackEntityAsMob(entity);
 		}

@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -13,6 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.item.ItemMaterials;
 
 public class EntityJumpingSpider extends EntitySpider {
 
@@ -51,19 +51,19 @@ public class EntityJumpingSpider extends EntitySpider {
 	}
 
 	@Override
-	public boolean attackEntityAsMob(Entity par1Entity) {
-		if (super.attackEntityAsMob(par1Entity)) {
-			if (par1Entity instanceof EntityLivingBase) {
-				byte b0 = 0;
+	public boolean attackEntityAsMob(Entity entity) {
+		if (super.attackEntityAsMob(entity)) {
+			if (entity instanceof EntityLivingBase) {
+				byte duration = 0;
 
 				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal())
 					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-						b0 = 7;
+						duration = 7;
 					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-						b0 = 15;
+						duration = 15;
 
-				if (b0 > 0)
-					((EntityLivingBase) par1Entity).addPotionEffect(new PotionEffect(Potion.poison.id, b0 * 20, 0));
+				if (duration > 0)
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
 			}
 
 			return true;

@@ -17,6 +17,7 @@ public class EntityScorpion extends EntityMob {
 	private boolean poisoned;
 	public static float stingticks;
 	private int cooldown = 0;
+
 	public EntityScorpion(World world) {
 		super(world);
 		stepHeight = 0.1F;
@@ -48,9 +49,9 @@ public class EntityScorpion extends EntityMob {
 		}
 		if (!worldObj.isRemote && captured()) {
 			updateRiderPosition();
-			if(cooldown < 20)
+			if(cooldown < 10)
 				cooldown++;
-			if(cooldown >= 20)
+			if(cooldown >= 10)
 				cooldown = 0;
 		}
 		if (sting && stingticks < 0.64F) {

@@ -43,16 +43,12 @@ public class EntityTarantulaEgg extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
-
-		// if (mop.entityHit != null && mop.entityHit instanceof EntityPlayer)
-		// {
 		if (!worldObj.isRemote)
-			for (int a = 0; a < 4; a++) {
+			for (int a = 0; a < 2; a++) {
 				EntityTarantulaBaby tarantulaBaby = new EntityTarantulaBaby(worldObj);
 				tarantulaBaby.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
 				worldObj.spawnEntityInWorld(tarantulaBaby);
 			}
-		// }
 		setDead();
 		worldObj.playSoundAtEntity(this, getSplatSound(), 1.0F, 1.0F);
 	}
