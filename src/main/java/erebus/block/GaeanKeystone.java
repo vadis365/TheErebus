@@ -22,7 +22,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.core.handler.configs.ConfigHandler;
 import erebus.tileentity.TileEntityGaeanKeystone;
 
 public class GaeanKeystone extends BlockContainer {
@@ -306,7 +305,7 @@ public class GaeanKeystone extends BlockContainer {
 				return false;
 			}
 		});
-		if (ConfigHandler.INSTANCE.genReturnPortalFrame) {
+
 			PCoord start = floorMin.add(0, 1, 0);
 			int dx = 0, dy = 0, dz = 0;
 			for (byte b : portalFrame) {
@@ -333,6 +332,5 @@ public class GaeanKeystone extends BlockContainer {
 
 			keystone.setBlock(ModBlocks.gaeanKeystone);
 			keystone.w.getTileEntity(keystone.x, keystone.y, keystone.z);
-		}
 	}
 }

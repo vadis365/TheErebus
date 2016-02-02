@@ -26,7 +26,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, genReturnPortalFrame;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows;
 
 	public boolean disableThaumcraft = false, disableFMP = false;
 
@@ -67,7 +67,6 @@ public class ConfigHandler {
 		glowshrooms = config.get(Configuration.CATEGORY_GENERAL, "Add Glowshrooms to World generation", true).getBoolean(true);
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
 		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
-		genReturnPortalFrame = config.get(Configuration.CATEGORY_GENERAL, "Generate Return Portal in Erebus", true).getBoolean(true);
 		
 		disableThaumcraft = config.get("Integration", "Disable Thaumcraft integration", false).getBoolean(false);
 		disableFMP = config.get("Integration", "Disable Forge Multipart integration", false).getBoolean(false);
