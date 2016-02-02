@@ -1,18 +1,15 @@
 package erebus.core.handler;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import erebus.ModBlocks;
@@ -46,7 +43,10 @@ public class EntityDeathInventoryHandler {
 
 	@SuppressWarnings("unchecked")
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void playerDeath(LivingDeathEvent event) {
+	public void onPlayerDrops(PlayerDropsEvent event) {
+
+		final List<EntityItem> drops = event.drops;
+		if (drops.isEmpty()) return;
 		World world = event.entityLiving.worldObj;
 		if (world.isRemote)
 			return;
@@ -84,37 +84,15 @@ public class EntityDeathInventoryHandler {
 			playerProps.saveNBTData(playerData);
 			TileEntityBones tile = Utils.getTileEntity(world, x, y, z, TileEntityBones.class);
 			if (tile != null) {
-				for (int i = 0; i < player.inventory.mainInventory.length; i++) {
-					ItemStack cont = player.inventory.mainInventory[i];
-					if (cont != null) {
-						tile.setInventorySlotContents(i + 4, cont.copy());
-						player.inventory.mainInventory[i] = null;
-					}
-				}
-				for (int i = 0; i < player.inventory.armorInventory.length; i++) {
-					ItemStack cont = player.inventory.armorInventory[i];
-					if (cont != null) {
-						tile.setInventorySlotContents(i, cont.copy());
-						player.inventory.armorInventory[i] = null;
-					}
-				}
-
-				List<EntityItem> list = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(16, 16, 16));
-				Collections.sort(list, new Comparator<Entity>() {
-					@Override
-					public int compare(Entity o1, Entity o2) {
-						return Double.compare(o1.getDistanceSqToEntity(player), o2.getDistanceSqToEntity(player));
-					}
-				});
 				int index = 0;
-				for (int i = player.inventory.mainInventory.length + 4; i < player.inventory.mainInventory.length + 50; i++) {
-					if (index >= list.size())
+				for (int i = 0; i < drops.size(); i++) {
+					if (index >= 86 || index >= drops.size())
 						break;
-					EntityItem entityitem = list.get(index++);
+					EntityItem entityitem = drops.get(index++);
 					if (entityitem != null) {
-						ItemStack cont = entityitem.getEntityItem();
-						if (cont != null) {
-							tile.setInventorySlotContents(i, cont.copy());
+						ItemStack stack = entityitem.getEntityItem();
+						if (stack != null) {
+							tile.setInventorySlotContents(i, stack.copy());
 							entityitem.setDead();
 						}
 					}
