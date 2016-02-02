@@ -1,8 +1,5 @@
 package erebus.entity.ai;
 
-import erebus.entity.EntityAntlionMiniBoss;
-import erebus.entity.EntityPrayingMantis;
-import erebus.entity.EntityVelvetWorm;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -12,6 +9,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.entity.EntityAntlionMiniBoss;
+import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityVelvetWorm;
 
 public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 
@@ -40,6 +40,8 @@ public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
+		if(!attacker.isEntityAlive())
+			return false;
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 		if (entitylivingbase == null)
 			return false;
@@ -57,6 +59,8 @@ public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
+		if(!attacker.isEntityAlive())
+			return false;
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 		return entitylivingbase == null ? false : !entitylivingbase.isEntityAlive() ? false : !longMemory ? !attacker.getNavigator().noPath() : attacker.isWithinHomeDistance(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ));
 	}

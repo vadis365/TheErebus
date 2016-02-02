@@ -16,7 +16,7 @@ public class EntityScorpion extends EntityMob {
 	private boolean sting;
 	private boolean poisoned;
 	public static float stingticks;
-
+	private int cooldown = 0;
 	public EntityScorpion(World world) {
 		super(world);
 		stepHeight = 0.1F;
@@ -41,10 +41,18 @@ public class EntityScorpion extends EntityMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!worldObj.isRemote && !captured())
+		if (!worldObj.isRemote && !captured()) {
 			setisStinging(false);
-		if (!worldObj.isRemote && captured())
+			if(cooldown > 0 )
+				cooldown = 0;
+		}
+		if (!worldObj.isRemote && captured()) {
 			updateRiderPosition();
+			if(cooldown < 20)
+				cooldown++;
+			if(cooldown >= 20)
+				cooldown = 0;
+		}
 		if (sting && stingticks < 0.64F) {
 			stingticks = stingticks + 0.16F;
 			if (stingticks >= 0.64F) {
@@ -157,7 +165,7 @@ public class EntityScorpion extends EntityMob {
 	@Override
 	protected void attackEntity(Entity entity, float distance) {
 		super.attackEntity(entity, distance);
-		if (distance < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
+		if (distance < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY && cooldown == 0)
 			attackEntityAsMob(entity);
 	}
 }

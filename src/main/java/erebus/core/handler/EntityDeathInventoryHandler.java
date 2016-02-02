@@ -47,6 +47,7 @@ public class EntityDeathInventoryHandler {
 
 		final List<EntityItem> drops = event.drops;
 		if (drops.isEmpty()) return;
+
 		World world = event.entityLiving.worldObj;
 		if (world.isRemote)
 			return;
