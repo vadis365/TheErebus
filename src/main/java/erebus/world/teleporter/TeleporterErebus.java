@@ -63,7 +63,7 @@ final class TeleporterErebus extends Teleporter {
 			--minX;
 		if (minY < 0.0D)
 			--minY;
-		if (box.minZ < 0.0D)
+		if (minZ < 0.0D)
 			--minZ;
 
 		for (int x = minX; x < maxX; ++x)
