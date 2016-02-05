@@ -2,6 +2,8 @@ package erebus.world.biomes;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import erebus.ModBlocks;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityBlackWidow;
@@ -15,8 +17,6 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntitySolifuge;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 
 public class BiomeVolcanicDesert extends BiomeBaseErebus {
 	public BiomeVolcanicDesert(int biomeID) {

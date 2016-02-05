@@ -4,11 +4,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModTabs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,8 +15,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModTabs;
 
 public class ItemErebusFood extends ItemFood {
 
@@ -115,6 +116,8 @@ public class ItemErebusFood extends ItemFood {
 		PotionEffect effect = this.getPotionEffect(stack, world, player);
 		if (!world.isRemote && effect != null)
 			player.addPotionEffect(effect);
+		if (!world.isRemote && stack.getItemDamage() == FoodType.PRICKLY_PAIR_RAW.ordinal())
+			player.attackEntityFrom(DamageSource.cactus, 1);
 	}
 
 	@Override
@@ -202,7 +205,9 @@ public class ItemErebusFood extends ItemFood {
 		TITAN_CHOP_COOKED(8, 0.8F),
 		SWAMPBERRIES(1, 0.1F),
 		CABBAGE(1, 0.3F),
-		TITAN_STEW_COOKED(20, 4.0F);
+		TITAN_STEW_COOKED(20, 4.0F),
+		PRICKLY_PAIR_RAW(3, 0.3F),
+		PRICKLY_PAIR_COOKED(4, 0.5F);
 
 		private final int healAmount;
 		private final float saturationModifier;

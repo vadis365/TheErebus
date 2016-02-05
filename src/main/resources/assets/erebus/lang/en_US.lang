@@ -212,6 +212,7 @@ tile.erebus.algae.name=Swamp Algae
 tile.erebus.jadeBerryBush.name=Jadeberry Bush
 tile.erebus.heartBerryBush.name=Heartberry Bush
 tile.erebus.swampBerryBush.name=Swampberry Bush
+tile.erebus.pricklyPair.name=Prickly Pair Cactus
 
 tile.erebus.umbercobbleStairs0.name=Umberstone Stairs
 tile.erebus.umbercobbleStairs1.name=Umbercobble Stairs
@@ -461,6 +462,8 @@ item.erebus.food_titan_chop_cooked.name=Cooked Titan Chop
 item.erebus.food_swampberries.name=Swampberries
 item.erebus.food_cabbage.name=Cabbage
 item.erebus.food_titan_stew_cooked.name=Cooked Titan Stew
+item.erebus.food_prickly_pair_raw.name=Raw Prickly Pair
+item.erebus.food_prickly_pair_cooked.name=Cooked Prickly Pair
 
 # Rest
 item.erebus.wand_of_preservation.name=Wand of Preservation

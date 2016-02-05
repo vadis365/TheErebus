@@ -119,6 +119,7 @@ import erebus.block.plants.BlockCabbage;
 import erebus.block.plants.BlockErebusFlower;
 import erebus.block.plants.BlockHangerPlants;
 import erebus.block.plants.BlockMireCoral;
+import erebus.block.plants.BlockPricklyPair;
 import erebus.block.plants.BlockThorns;
 import erebus.block.plants.BlockTurnip;
 import erebus.block.plants.BlockWallPlants;
@@ -237,7 +238,8 @@ public class ModBlocks {
 	public static final Block algae = new BlockAlgae().setBlockName("erebus.algae").setBlockTextureName("erebus:algae");
 	public static final Block blockCabbage = new BlockCabbage();
 	public static final Block giantLilyPad = new BlockSimple(Material.wood, "axe", 1).setHardness(5.0F).setStepSound(Block.soundTypeGrass).setBlockName("erebus.giantLilyPad").setBlockTextureName("erebus:giantLilyPad").setCreativeTab(ModTabs.blocks);
-
+	public static final Block pricklyPair = new BlockPricklyPair();
+	
 	// DECORATIONS AND UTILITIES
 	public static final Block blockSilk = new BlockSimple(Material.cloth).setHardness(0.2F).setStepSound(Block.soundTypeCloth).setBlockName("erebus.blockSilk").setBlockTextureName("erebus:blockSilk").setCreativeTab(ModTabs.blocks);
 	public static final Block mirBrick = new BlockSimple(Material.rock, "pickaxe", 1).setHardness(1.5F).setStepSound(Block.soundTypeStone).setBlockName("erebus.mirbrick").setBlockTextureName("erebus:mirbrick").setCreativeTab(ModTabs.blocks);

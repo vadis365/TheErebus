@@ -1,20 +1,22 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
+import erebus.world.feature.plant.WorldGenPricklyPairPatch;
 import erebus.world.feature.structure.WorldGenAntlionLair;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 
 public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
 	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.flowing_lava);
 	private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
-
+	protected final WorldGenPricklyPairPatch genPricklyPair = new WorldGenPricklyPairPatch();
+	
 	@Override
 	public void populate() {
 		for (attempt = 0; attempt < 35; attempt++) {
@@ -53,6 +55,19 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 					break;
 			}
 		}
+
+		if (rand.nextInt(20) == 0)
+			for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
+				xx = x + offsetXZ();
+				yy = 25 + rand.nextInt(75);
+				zz = z + offsetXZ();
+
+				for (; yy > 20; yy--)
+					if (checkSurface(SurfaceType.SAND, xx, yy, zz)) {
+						genPricklyPair.generate(world, rand, xx, yy, zz);
+						break;
+					}
+			}
 
 		if (rand.nextInt(34) == 0)
 			for (int attempt = 0; attempt < 15; attempt++)

@@ -288,6 +288,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.GRASSHOPPER_LEG_RAW.ordinal()), new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.GRASSHOPPER_LEG_COOKED.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.TARANTULA_LEG_RAW.ordinal()), new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.TARANTULA_LEG_COOKED.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.TITAN_CHOP_RAW.ordinal()), new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.TITAN_CHOP_COOKED.ordinal()), 0.2F);
+		GameRegistry.addSmelting(new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.PRICKLY_PAIR_RAW.ordinal()), new ItemStack(ModItems.food, 1, ItemErebusFood.FoodType.PRICKLY_PAIR_COOKED.ordinal()), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.umberstone, 1, 1), new ItemStack(ModBlocks.umberstone), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreCoal), new ItemStack(Items.coal, 1), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.oreIron), new ItemStack(Items.iron_ingot), 0.7F);
