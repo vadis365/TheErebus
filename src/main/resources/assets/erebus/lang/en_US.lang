@@ -824,3 +824,7 @@ erebus.smoothie.effect.milk=Clears Effects
 erebus.smoothie.effect.extinguish=Puts Out Fires
 erebus.smoothie.effect.set_fire=Makes Fire
 erebus.smoothie.effect.heal=Heals
+key.erebus.glide=Glide
+key.erebus.poweredGlide=Glider Lift
+key.erebus.beetleRam=Beetle Ram Attack
+key.erebus.beetleMine=Stag Beetle Dig
