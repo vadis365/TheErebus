@@ -788,13 +788,15 @@ tooltip.erebus.nectarcollector=ПКМ по пчёлам, чтобы собрат
 tooltip.erebus.wandofanimation=ПКМ по блоку, чтобы оживить его.
 tooltip.erebus.extractor=Наведитесь на блоки и зажмите ПКМ, чтобы извлечь их.
 tooltip.erebus.scorpionpincer=Может стрелять огненными шарами, если они есть в вашем инвентаре.
+tooltip.erebus.heals=Лечит 10 сердец при употреблении. Всегда съедобно.
+tooltip.erebus.feeds=Утоляет голод при употреблении. Всегда съедобно.
+tooltip.erebus.poweredGlider_1=Требуются блоки красного камня в качестве топлива для полета.
+tooltip.erebus.poweredGlider_2=Для полета используйте кнопки, назначенные на §bПланирование§7 и §bПланирование вверх§7.
 armchair.spawnSet=You can only sit here... oh, whenever.
 armchair.obstructed=Adventurer's Armchair obstructed. Defaulting spawn to most recent Portal used.
 armchair.missing=Adventurer's Armchair not found. Defaulting spawn to most recent Portal used.
 armchair.unstable=An unstable spawn point has been set to your current location. Please travel through an Erebus portal from The Overworld to create a stable spawn point.
 armchair.unableToSit=Adventurer's Armchair obstructed.
-tooltip.erebus.heals=Лечит 10 сердец при употреблении. Всегда съедобно.
-tooltip.erebus.feeds=Утоляет голод при употреблении. Всегда съедобно.
 
 
 ############
