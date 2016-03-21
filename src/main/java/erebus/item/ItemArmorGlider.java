@@ -44,7 +44,7 @@ public class ItemArmorGlider extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
-		if (hasTag(stack) && stack.stackTagCompound.hasKey("isPowered")) {
+		if (canFly()) {
 			list.add(StatCollector.translateToLocal("tooltip.erebus.poweredGlider"));
 			// TODO Add tooltips with keys assigned to glide and poweredGlide as variables
 		}
