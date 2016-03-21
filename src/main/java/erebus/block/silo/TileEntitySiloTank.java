@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityBasicInventory;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.StatCollector;
 
 public class TileEntitySiloTank extends TileEntityBasicInventory {
 
@@ -20,7 +21,7 @@ public class TileEntitySiloTank extends TileEntityBasicInventory {
 
 	@Override
 	public String getInventoryName() {
-		return "Silo Location X:" + xCoord + " Y:" + yCoord + " Z:" + zCoord;
+		return StatCollector.translateToLocal("container.silo") + " X:" + xCoord + " Y:" + yCoord + " Z:" + zCoord;
 	}
 
 	@Override
