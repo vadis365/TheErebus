@@ -798,13 +798,15 @@ tooltip.erebus.nectarcollector=Right click Bees to collect nectar.
 tooltip.erebus.wandofanimation=Right click blocks to animate them.
 tooltip.erebus.extractor=Point at blocks and hold down the right mouse button to extract them.
 tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
+tooltip.erebus.heals=Heals 10 Hearts when consumed. Always Edible.
+tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
+tooltip.erebus.poweredGlider=Need redgem blocks at the cost of fuel to flight.
+
 armchair.spawnSet=You can only sit here... oh, whenever.
 armchair.obstructed=Adventurer's Armchair obstructed. Defaulting spawn to most recent Portal used.
 armchair.missing=Adventurer's Armchair not found. Defaulting spawn to most recent Portal used.
 armchair.unstable=An unstable spawn point has been set to your current location. Please travel through an Erebus portal from The Overworld to create a stable spawn point.
 armchair.unableToSit=Adventurer's Armchair obstructed.
-tooltip.erebus.heals=Heals 10 Hearts when consumed. Always Edible.
-tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
 
 ############
 # Commands #
