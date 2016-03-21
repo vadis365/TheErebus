@@ -157,6 +157,7 @@ tile.erebus.flower_planted_white.name=Белый цветок
 
 # Fluid Blocks
 tile.erebus.honeyBlock.name=Мёд
+tile.erebus.formicAcid.name=Муравьиная кислота
 
 # Rest (someone should organise it at some point)
 tile.erebus.portal.name=Портал в «Эреб»
@@ -165,6 +166,7 @@ tile.erebus.gaeanKeystone.name=Гаеанов замковый камень
 tile.erebus.amber0.name=Янтарь
 tile.erebus.amber1.name=Янтарное стекло
 tile.erebus.amber2.name=Янтарный кирпич
+tile.erebus.preservedBlock.name=Законсервированный блок
 
 tile.erebus.dooramber.name=Янтарная дверь
 tile.erebus.doorbaobab.name=Дверь из баобаба
@@ -228,6 +230,7 @@ tile.erebus.gneissStairs2.name=Ступеньки из многослойног�
 tile.erebus.gneissStairs3.name=Ступеньки из плит гнейса
 tile.erebus.gneissStairs4.name=Ступеньки из гладкого гнейса
 tile.erebus.gneissStairs5.name=Ступеньки из плиток гнейса
+tile.erebus.anthillStairs.name=Ступеньки из муравейника (НЕ ИСПОЛЬЗУЕТСЯ)
 
 tile.erebus.wallErebus_0.name=Стена из умбрового камня
 tile.erebus.wallErebus_1.name=Стена из умбрового булыжника
@@ -314,6 +317,8 @@ tile.erebus.tarantulaSpawner.name=Спаунер пауков-птицеедов
 tile.erebus.antlionSpawner.name=Спаунер муравьиных львов
 tile.erebus.magmaCrawlerSpawner.name=Спаунер магмовой гусеницы
 tile.erebus.dragonflySpawner.name=Спаунер стрекоз
+tile.erebus.zombieAntSpawner.name=Спавнер муравьев-зомби
+tile.erebus.zombieAntSoldierSpawner.name=Спавнер солдатов-зомби
 
 tile.erebus.waspNestBlock.name=Блок осиного гнезда
 tile.erebus.blockSpiderSilk.name=Шёлк
@@ -330,11 +335,14 @@ tile.erebus.gneiss_5.name=Плитки из гнейса
 tile.erebus.templeBrick.name=Кирпич храма
 tile.erebus.templePillar.name=Колонна храма
 tile.erebus.templeTile.name=Плитка храма
-tile.erebus.gneissVent.name=Gneiss Gas Vent
+tile.erebus.gneissVent.name=Отверстие гнейсового газа
 tile.erebus.templeBrickUnbreaking.name=Неразрушимый камень храма
 tile.erebus.templeTeleporter.name=Храмовая панель телепортации
 tile.erebus.forceField.name=Силовое поле
 tile.erebus.capstone.name=Капитель пирамиды
+tile.erebus.anthillBlock.name=Блок муравейника
+tile.erebus.soldierAntTrap.name=Ловушка муравейника солдата
+tile.erebus.puffShroom.name=Пуфгриб муравейника
 
 tile.erebus.mushroomCap0.name=Гриб с тёмной шляпкой
 tile.erebus.mushroomCap1.name=Бабушкин обувной гриб
@@ -416,7 +424,7 @@ tile.erebus.lightningSpeedBlock.name=Блок скорости молнии
 tile.erebus.reinExo.name=Укреплённый экзоскелетный блок
 tile.erebus.blockSilk.name=Шёлк
 
-tile.erebus.smoothieMaker.name=ErebusCo. Smoothie-matic 2000
+tile.erebus.smoothieMaker.name=Эреб Ко. Смузи-Машина 2000
 tile.erebus.forceLock.name=Силовой ключ
 tile.erebus.armchair.name=Кресло путешественника
 
@@ -430,7 +438,7 @@ item.erebus.smoothie_money_honey.name=Смузи: Денежный мёд
 item.erebus.smoothie_nothing_in_the_middle.name=Смузи: Пустота посередине
 item.erebus.smoothie_green_giant.name=Смузи: Зелёный гигант
 item.erebus.smoothie_seedy_goodness.name=Смузи: Семенная доброта
-item.erebus.smoothie_givin_me_the_blues.name=Смузи: Givin' Me The Blues
+item.erebus.smoothie_givin_me_the_blues.name=Смузи: сыграй мне "блюз"
 item.erebus.smoothie_hot_hot_baby.name=Смузи: Горячая-прегорячая детка
 item.erebus.smoothie_dont_meddle_with_the_nettle.name=Смузи: Не трогайте крапиву
 item.erebus.smoothie_liquid_gold.name=Смузи: Жидкое золото
@@ -543,7 +551,6 @@ item.erebus.materials.ant_pheromones.name=Феромоны муравья
 item.erebus.materials.gaean_gem.name=Гаеанова драгоценность
 item.erebus.materials.crimson_heart.name=Багровое сердце
 item.erebus.materials.sap_ball.name=Шарик сока
-item.erebus.materials.UNUSED.name=НЕ ИСПОЛЬЗУЕТСЯ
 item.erebus.materials.amber_star.name=Янтарная звезда
 item.erebus.materials.ingot_aluminium.name=Алюминиевый слиток
 item.erebus.materials.ingot_copper.name=Медный слиток
@@ -590,9 +597,11 @@ item.erebus.bambucketHoney.name=Бамбуковое ведро мёда
 item.erebus.bambucketAntiVenom.name=Бамбуковое ведро противоядия
 item.erebus.bambucketBeetleJuice.name=Бамбуковое ведро сока из личинок
 item.erebus.bambucketMilk.name=Бамбуковое ведро молока
+item.erebus.bambucketFormicAcid.name=Бамбуковое ведро муравьиной кислоты (НЕ ИСПОЛЬЗУЕТСЯ)
 item.erebus.bucketBeetleJuice.name=Ведро сока из личинок
 item.erebus.bucketAntiVenom.name=Ведро противоядия
 item.erebus.bottleAntiVenom.name=Пузырёк противоядия
+item.erebus.bucketFormicAcid.name=Ведро муравьиной кислоты (НЕ ИСПОЛЬЗУЕТСЯ)
 
 item.erebus.waspSword.name=Осиный меч
 item.erebus.sprayCan.name=Средство от насекомых
@@ -609,6 +618,7 @@ item.erebus.doorAmberitem.erebus.name=Янтарная дверь
 item.erebus.bucketHoney.name=Ведро мёда
 item.erebus.homingBeecon.name=Маяк возвращения
 item.erebus.homingBeeconAdvanced.name=Улучшенный маяк возвращения
+item.erebus.deathCompass.name=Компас блока костей
 item.erebus.whetstone.name=Точильный камень
 item.erebus.woodlouseBall.name=Шарик мокрицы
 item.erebus.rolledNewspaper.name=Свёрнутая газета
@@ -699,9 +709,10 @@ entity.erebus.animatedBambooCrate.name=Оживлённый бамбуковый
 entity.erebus.animatedBlock.name=Оживленный блок
 entity.erebus.honeyPotAnt.name=Медовый муравей
 entity.erebus.bombardierBeetleLarva.name=Жук-бомбардир
-entity.erebus.zombieAntSoldier.name=Зомби-муравей солдат
+entity.erebus.zombieAntSoldier.name=Зомби-солдат
 entity.erebus.bedBug.name=Постельный клоп
 entity.erebus.stagBeetle.name=Рогач
+entity.erebus.gasVent.name=Пламя болотного газа
 
 ##########
 # Fluids #
@@ -752,6 +763,7 @@ container.antInventory=Управление муравьями
 container.composter=Органический компостер
 container.chester=Оживленный сундук
 container.bamber=Оживлённый бамбуковый ящик
+container.silo=Местоположение силоса
 
 ############
 # Tooltips #
@@ -798,7 +810,6 @@ armchair.missing=Adventurer's Armchair not found. Defaulting spawn to most recen
 armchair.unstable=An unstable spawn point has been set to your current location. Please travel through an Erebus portal from The Overworld to create a stable spawn point.
 armchair.unableToSit=Adventurer's Armchair obstructed.
 
-
 ############
 # Commands #
 ############
@@ -819,5 +830,5 @@ erebus.smoothie.effect.set_fire=Поджигает
 erebus.smoothie.effect.heal=Лечит
 key.erebus.glide=Планирование
 key.erebus.poweredGlide=Планирование вверх
-key.erebus.beetleRam=Beetle Ram Attack
-key.erebus.beetleMine=Stag Beetle Dig
+key.erebus.beetleRam=Атака рогача на таран
+key.erebus.beetleMine=Подкоп рогача
