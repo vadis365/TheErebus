@@ -711,6 +711,7 @@ entity.erebus.bombardierBeetleLarva.name=Bombardier Beetle Larva
 entity.erebus.zombieAntSoldier.name=Zombie Ant Soldier
 entity.erebus.bedBug.name=Bed Bug
 entity.erebus.stagBeetle.name=Stag Beetle
+entity.erebus.gasVent.name=Swamp gas flame
 
 ##########
 # Fluids #
@@ -762,6 +763,7 @@ container.extenderThingy=Bamboo Extender
 container.antInventory=Ant Command Control
 container.composter=Organic Composter
 container.bamber=Bamber
+container.silo=Silo location
 
 ############
 # Tooltips #
