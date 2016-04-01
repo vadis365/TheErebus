@@ -31,7 +31,7 @@ public class ItemDaggerWasp extends ItemSword {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean isComplex) {
 		list.add(StatCollector.translateToLocal("tooltip.erebus.waspdagger_1"));
-		list.add(StatCollector.translateToLocal("tooltip.erebus.waspdagger_1"));
+		list.add(StatCollector.translateToLocal("tooltip.erebus.waspdagger_2"));
 	}
 
 	@Override
