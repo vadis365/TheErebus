@@ -7,15 +7,16 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityMinecartContainer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import erebus.Erebus;
 import erebus.core.handler.configs.ConfigHandler;
 import gnu.trove.map.TObjectByteMap;
 import gnu.trove.map.hash.TObjectByteHashMap;
@@ -25,7 +26,6 @@ public final class TeleporterHandler {
 
 	public static void init() {
 		MinecraftForge.EVENT_BUS.register(INSTANCE);
-		FMLCommonHandler.instance().bus().register(INSTANCE);
 	}
 
 	public static void transferToOverworld(Entity entity) {
@@ -47,17 +47,17 @@ public final class TeleporterHandler {
 
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load e) {
-		if (!(e.world instanceof WorldServer))
+		if (!(e.getWorld() instanceof WorldServer))
 			return;
 
-		WorldServer world = (WorldServer) e.world;
+		WorldServer world = (WorldServer) e.getWorld();
 
-		if (world.provider.getDimensionId() == 0)
+		if (world.provider.getDimensionType() == DimensionType.OVERWORLD)
 			world.customTeleporters.add(teleportToOverworld = new TeleporterErebus(world));
-		else if (world.provider.getDimensionId() == ConfigHandler.INSTANCE.erebusDimensionID)
+		else if (world.provider.getDimensionType() == Erebus.dimensionType)
 			world.customTeleporters.add(teleportToErebus = new TeleporterErebus(world));
 
-		System.out.println("added to " + e.world);
+		System.out.println("added to " + e.getWorld());
 	}
 
 	@SubscribeEvent
@@ -87,16 +87,15 @@ public final class TeleporterHandler {
 					return;
 
 				EntityPlayerMP player = (EntityPlayerMP) entity;
-
-				if (waitingPlayers.containsKey(player.getGameProfile().getId())) {
-					waitingPlayers.put(player.getGameProfile().getId(), (byte) 20);
+				if (waitingPlayers.containsKey(player.getUniqueID())) {
+					waitingPlayers.put(player.getUniqueID(), (byte) 20);
 					return;
 				}
 
-				waitingPlayers.put(player.getGameProfile().getId(), (byte) 40); // if there are any issues, we can either increase the number or rewrite the "is player in portal?" checking part
+				waitingPlayers.put(player.getUniqueID(), (byte) 40); // if there are any issues, we can either increase the number or rewrite the "is player in portal?" checking part
 				checkWaitingPlayers = true;
+				player.mcServer.getPlayerList().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				player.timeUntilPortal = 0;
 				/*
 				 * player.lastExperience = -1; player.lastHealth = -1.0F; player.lastFoodLevel = -1;
@@ -105,7 +104,7 @@ public final class TeleporterHandler {
 				// find some sneaky solution around this issue fixme copy paste
 				world.theProfiler.startSection("changeDimension");
 
-				MinecraftServer mcServer = MinecraftServer.getServer();
+				MinecraftServer mcServer = world.getMinecraftServer();
 				WorldServer worldCurrent = mcServer.worldServerForDimension(entity.dimension);
 				WorldServer worldTarget = mcServer.worldServerForDimension(dimensionId);
 				entity.dimension = dimensionId;
@@ -113,12 +112,12 @@ public final class TeleporterHandler {
 				world.removeEntity(entity);
 				entity.isDead = false;
 				world.theProfiler.startSection("reposition");
-				mcServer.getConfigurationManager().transferEntityToWorld(entity, dimensionId, worldCurrent, worldTarget, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
+				mcServer.getPlayerList().transferEntityToWorld(entity, dimensionId, worldCurrent, worldTarget, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				world.theProfiler.endStartSection("reloading");
 				Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), worldTarget);
 
 				if (newEntity != null) {
-					newEntity.copyDataFromOld(entity);
+					//newEntity.copyDataFromOld(entity);
 					worldTarget.spawnEntityInWorld(newEntity);
 				}
 

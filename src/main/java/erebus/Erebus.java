@@ -1,5 +1,7 @@
 package erebus;
 
+import net.minecraft.world.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -9,40 +11,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import erebus.client.gui.RenderWarHammerChargeBar;
-import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
-import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
-import erebus.client.sound.ErebusMusicHandler;
-import erebus.core.handler.*;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.proxy.CommonProxy;
-import erebus.debug.ErebusCommandDebug;
-import erebus.entity.util.RandomMobNames;
-import erebus.integration.FMPIntegration;
-import erebus.integration.ModIntegrationHandler;
-import erebus.integration.ThaumcraftIntegration;
 import erebus.lib.Reference;
-import erebus.network.PacketPipeline;
-import erebus.recipes.ComposterRegistry;
-import erebus.recipes.ErebusRecipesHandler;
-import erebus.recipes.RecipeHandler;
-import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
-import erebus.world.feature.structure.WorldGenAntlionMaze;
 import erebus.world.teleporter.TeleporterHandler;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = "${version}", dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class Erebus {
@@ -52,6 +25,8 @@ public class Erebus {
 
 	@Instance(Reference.MOD_ID)
 	public static Erebus instance;
+	
+	public static DimensionType dimensionType;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -74,9 +49,7 @@ public class Erebus {
 //		AchievementPage.registerAchievementPage(new ModAchievements());
 
 //		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
-
-		DimensionManager.registerProviderType(ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
-		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, ConfigHandler.INSTANCE.erebusDimensionID);
+		dimensionType = DimensionType.register("Erebus", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
 	//	GameRegistry.registerWorldGenerator(new WorldGenAntlionMaze(), 0);
 	}
 

@@ -5,7 +5,6 @@ import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCloudFX;
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityFireworkSparkFX;
 import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.particle.EntityLavaFX;

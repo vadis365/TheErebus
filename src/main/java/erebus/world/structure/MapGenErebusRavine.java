@@ -1,22 +1,27 @@
 package erebus.world.structure;
+import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.gen.MapGenBase;
+
+import com.google.common.base.Objects;
 
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.world.ChunkProviderErebus;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.MapGenBase;
-
-import java.util.Random;
 
 public class MapGenErebusRavine extends MapGenBase {
-
+	protected static final IBlockState BLK_AIR = Blocks.air.getDefaultState();
 	private final float[] field_75046_d = new float[1024];
-
-	protected void generateRavine(long seed, int x, int z, Block[] blocks, double par6, double par8, double seed0, float seed2, float seed3, float seed4, int seed5, int seed6, double seed7) {
+	
+	protected void generateRavine(long seed, int x, int z, ChunkPrimer chunkPrimer, double par6, double par8, double seed0, float seed2, float seed3, float seed4, int seed5, int seed6, double seed7) {
 		Random random = new Random(seed);
 		double blockCoordX = x * 16 + 8;
 		double blockCoordZ = z * 16 + 8;
@@ -49,8 +54,8 @@ public class MapGenErebusRavine extends MapGenBase {
 			double d7 = d6 * seed7;
 			d6 *= random.nextFloat() * 0.25D + 0.75D;
 			d7 *= random.nextFloat() * 0.25D + 0.75D;
-			float f6 = MathHelper.cos(seed4);
-			float f7 = MathHelper.sin(seed4);
+			float f6 = net.minecraft.util.math.MathHelper.cos(seed4);
+			float f7 = net.minecraft.util.math.MathHelper.sin(seed4);
 			par6 += MathHelper.cos(seed3) * f6;
 			par8 += f7;
 			seed0 += MathHelper.sin(seed3) * f6;
@@ -105,7 +110,7 @@ public class MapGenErebusRavine extends MapGenBase {
 								int arrayIndex = (posX * 16 + posZ) * 128 + posY;
 
 								if (posY >= 0 && posY < 128) {
-									if (isOceanBlock(blocks, arrayIndex, posX, posY, posZ, x, z))
+									if (isOceanBlock(chunkPrimer, posX, posY, posZ, x, z))
 										flag1 = true;
 
 									if (posY != minY - 1 && posX != minX && posX != maxX - 1 && posZ != minZ && posZ != maxZ - 1)
@@ -127,12 +132,14 @@ public class MapGenErebusRavine extends MapGenBase {
 										double d14 = (posY + 0.5D - par8) / d7;
 
 										if ((d12 * d12 + d13 * d13) * field_75046_d[posY] + d14 * d14 / 6.0D < 1.0D) {
-											if (isTopBlock(blocks, arrayIndex, posX, posY, posZ, x, z))
-												flag2 = true;
+												IBlockState iblockstate1 = chunkPrimer.getBlockState(posX, posY, posZ);
+												IBlockState iblockstate2 = (IBlockState)Objects.firstNonNull(chunkPrimer.getBlockState(posX, posY + 1, posZ), BLK_AIR);
 
-											digBlock(blocks, arrayIndex, posX, posY, posZ, x, z, flag2);
+												if (isTopBlock(chunkPrimer, posX, posY, posZ, x, z))
+													flag2 = true;
+
+												digBlock(chunkPrimer, posX, posY, posZ, x, z, flag2, iblockstate1, iblockstate2);
 										}
-
 										--arrayIndex;
 									}
 							}
@@ -147,7 +154,7 @@ public class MapGenErebusRavine extends MapGenBase {
 	}
 
 	@Override
-	protected void func_151538_a(World world, int x, int z, int par4, int par5, Block[] blocks) {
+	protected void recursiveGenerate(World world, int x, int z, int par4, int par5, ChunkPrimer chunkPrimerIn) {
 		if (rand.nextInt(50) == 0) {
 			double d0 = x * 16 + rand.nextInt(16);
 			double d1 = rand.nextInt(rand.nextInt(28) + 8) + 10;
@@ -156,34 +163,45 @@ public class MapGenErebusRavine extends MapGenBase {
 			float f = rand.nextFloat() * (float) Math.PI * 2.0F;
 			float f1 = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
 			float f2 = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
-			generateRavine(rand.nextLong(), par4, par5, blocks, d0, d1, d2, f2, f, f1, 0, 0, 3.0D);
+			generateRavine(this.rand.nextLong(), par4, par5, chunkPrimerIn, d0, d1, d2, f2, f, f1, 0, 0, 1.0D);
 		}
 	}
 
-	protected boolean isOceanBlock(Block[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ) {
-		return blocks[index] == Blocks.flowing_water || blocks[index] == Blocks.water;
+	protected boolean isOceanBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ) {
+		net.minecraft.block.Block block = data.getBlockState(x, y, z).getBlock();
+		return block == Blocks.flowing_water || block == Blocks.water;
 	}
 
-	private boolean isTopBlock(Block[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ) {
-		return blocks[index] == worldObj.getBiomeGenForCoords(x + chunkX * 16, z + chunkZ * 16).topBlock;
-	}
+    private boolean isExceptionBiome(BiomeGenBase biome) {
+    	// this may do something at some point
+        return false;
+    }
 
-	protected void digBlock(Block[] blocks, int index, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
-		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x + chunkX * 16, z + chunkZ * 16);
+    private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ) {
+        BiomeGenBase biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+        IBlockState state = data.getBlockState(x, y, z);
+        return (isExceptionBiome(biome) ? state.getBlock() == Blocks.grass : state.getBlock() == biome.topBlock);
+    }
+
+	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, IBlockState state, IBlockState up) {
+		BiomeGenBase biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+		IBlockState top = biome.topBlock;
+        IBlockState filler = biome.fillerBlock;
+        Block block = data.getBlockState(x, y, z).getBlock();
 
 		if (y < 3)
-			blocks[index] = Blocks.bedrock;
+			block =  Blocks.bedrock;
 		else if (y < 4)
-			blocks[index] = ModBlocks.umberstone;
-		else if (y < 10 && biome.biomeID == ModBiomes.volcanicDesertID)
-			blocks[index] = Blocks.flowing_lava;
-		else if (y < ChunkProviderErebus.swampWaterHeight - 1 && biome.biomeID == ModBiomes.submergedSwampID)
-			blocks[index] = Blocks.flowing_water;
+			block =  ModBlocks.umberstone;
+		else if (y < 10 && biome.getIdForBiome(biome) == ModBiomes.volcanicDesertID)
+			block =  Blocks.flowing_lava;
+		else if (y < ChunkProviderErebus.swampWaterHeight - 1 && biome.getIdForBiome(biome) == ModBiomes.submergedSwampID)
+			block = Blocks.flowing_water;
 		else {
-			blocks[index] = Blocks.air;
+			block =  Blocks.air;
 
-			if (foundTop && blocks[index - 1] == biome.fillerBlock)
-				blocks[index - 1] = biome.topBlock;
+			 if (foundTop && data.getBlockState(x, y - 1, z).getBlock() == filler.getBlock())
+                 data.setBlockState(x, y - 1, z, top.getBlock().getDefaultState());
 		}
 	}
 }

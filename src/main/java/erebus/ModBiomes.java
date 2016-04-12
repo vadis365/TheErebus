@@ -56,14 +56,14 @@ public class ModBiomes {
 
 		// MUTATIONS
 
-		undergroundJungle.createMutation();
-		volcanicDesert.createMutation();
-		subterraneanSavannah.createMutation();
-		elysianFields.createMutation();
-		ulteriorOutback.createMutation();
-		fungalForest.createMutation();
-		submergedSwamp.createMutation();
+		undergroundJungle.isMutation();
+		volcanicDesert.isMutation();
+		subterraneanSavannah.isMutation();
+		elysianFields.isMutation();
+		ulteriorOutback.isMutation();
+		fungalForest.isMutation();
+		submergedSwamp.isMutation();
 
-		fieldsSubForest.createMutation();
+		fieldsSubForest.isMutation();
 	}
 }

@@ -1,23 +1,21 @@
 package erebus.block;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.teleporter.TeleporterHandler;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import java.util.Random;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.teleporter.TeleporterHandler;
 
 public class ErebusPortal extends Block {
 	public ErebusPortal() {
@@ -25,7 +23,6 @@ public class ErebusPortal extends Block {
 		setLightLevel(1.0F);
 		setBlockUnbreakable();
 		setUnlocalizedName("erebus.portal");
-		setStepSound(Block.soundTypeGlass);
 		setCreativeTab(CreativeTabs.tabTools);
 		//setBlockTextureName("erebus:portal");
 	}
@@ -93,13 +90,13 @@ public class ErebusPortal extends Block {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+	 public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
         return null;
     }
 
 	@Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		if (entityIn.ridingEntity == null && entityIn.riddenByEntity == null && entityIn.timeUntilPortal <= 0) {
+		if (entityIn.getRidingEntity() == null && entityIn.getPassengers() == null && entityIn.timeUntilPortal <= 0) {
 			if (entityIn.dimension == 0)
 				TeleporterHandler.transferToErebus(entityIn);
 			else
@@ -110,7 +107,7 @@ public class ErebusPortal extends Block {
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
