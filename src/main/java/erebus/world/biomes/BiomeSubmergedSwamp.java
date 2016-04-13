@@ -1,24 +1,24 @@
 package erebus.world.biomes;
 
-import erebus.ModBlocks;
-import erebus.entity.*;
-import erebus.world.ChunkProviderErebus;
-import erebus.world.SpawnerErebus.SpawnEntry;
-import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-
-import java.util.Random;
+import erebus.world.ChunkProviderErebus;
+import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
 
 public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 
-	public BiomeSubmergedSwamp(int biomeID) {
-		super(biomeID, new BiomeDecoratorSubmergedSwamp());
-
-		setBiomeName("Submerged Swamp");
+	public BiomeSubmergedSwamp(BiomeProperties properties) {
+		super(properties, new BiomeDecoratorSubmergedSwamp());
+		
+		properties.setBaseBiome("Submerged Swamp");
+		properties.setTemperature(0.75F);
+		properties.setRainDisabled();
 		setColors(0x314D31);
-		setTemperatureRainfall(0.75F, 0.85F);
+		setFog(8, 128, 8);
 		setWeight(20);
+
 		/*
 		waterColorMultiplier = 6051893;
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
@@ -37,6 +37,6 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 
 	@Override
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
-		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < ChunkProviderErebus.swampWaterHeight - 1 ? Blocks.flowing_water : Blocks.air : block;
+		return block == Blocks.stone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < ChunkProviderErebus.swampWaterHeight - 1 ? Blocks.flowing_water : Blocks.air : block;
 	}
 }

@@ -7,17 +7,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
 
 public class ErebusPortal extends Block {
+
 	public ErebusPortal() {
 		super(Material.portal);
 		setLightLevel(1.0F);
@@ -89,14 +86,17 @@ public class ErebusPortal extends Block {
 		return 0;
 	}
 
-	@Override
-	 public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
-        return null;
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+        return NULL_AABB;
     }
+
+//	@Override
+//	 public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
+ //   }
 
 	@Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		if (entityIn.getRidingEntity() == null && entityIn.getPassengers() == null && entityIn.timeUntilPortal <= 0) {
+		 if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.timeUntilPortal <= 0) {
 			if (entityIn.dimension == 0)
 				TeleporterHandler.transferToErebus(entityIn);
 			else
@@ -111,8 +111,9 @@ public class ErebusPortal extends Block {
 		return false;
 	}
 
+/*
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
 		return true;
-	}
+	}*/
 }

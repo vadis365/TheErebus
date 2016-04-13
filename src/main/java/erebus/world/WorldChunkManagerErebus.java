@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,7 +18,7 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 import erebus.ModBiomes;
 import erebus.world.genlayer.GenLayerErebus;
 
-public class WorldChunkManagerErebus extends WorldChunkManager {
+public class WorldChunkManagerErebus extends BiomeProvider {
 
 	private static final float rainfall = 0F;
 	private static final ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah));
@@ -53,7 +53,8 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		int[] biomeArray = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 
 		for (int index = 0; index < sizeX * sizeZ; ++index)
-			biomesForGeneration[index] = BiomeGenBase.getBiomeGenArray()[biomeArray[index]];
+			biomesForGeneration[index] = BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], ModBiomes.biomeList.get(index));
+
 
 		return biomesForGeneration;
 	}
@@ -61,15 +62,6 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	/*
 	 * @Override public float[] getTemperatures(float temperatureArray[], int x, int z, int sizeX, int sizeZ) { if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ) temperatureArray = new float[sizeX * sizeZ]; Arrays.fill(temperatureArray, 0, sizeX * sizeZ, temperature); return temperatureArray; }
 	 */
-
-	@Override
-	public float[] getRainfall(float rainfallArray[], int x, int z, int sizeX, int sizeZ) {
-		if (rainfallArray == null || rainfallArray.length < sizeX * sizeZ)
-			rainfallArray = new float[sizeX * sizeZ];
-
-		Arrays.fill(rainfallArray, 0, sizeX * sizeZ, rainfall);
-		return rainfallArray;
-	}
 
 	@Override
 	public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase biomesForGeneration[], int x, int z, int sizeX, int sizeZ) {
@@ -90,8 +82,8 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		} else {
 			int[] generatedBiomes = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 			for (int index = 0; index < sizeX * sizeZ; ++index)
-				biomesForGeneration[index] = BiomeGenBase.getBiomeGenArray()[generatedBiomes[index]];
-
+				biomesForGeneration[index] = BiomeGenBase.getBiomeFromBiomeList(generatedBiomes[index], ModBiomes.biomeList.get(index));
+	
 			return biomesForGeneration;
 		}
 	}
@@ -117,7 +109,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 			int finalX = minX + index % sizeX << 2;
 			int finalZ = minZ + index / sizeX << 2;
 
-			if (viableBiomes.contains(BiomeGenBase.getBiomeGenArray()[biomeArray[index]]) && (pos == null || rand.nextInt(attempts + 1) == 0)) {
+			if (viableBiomes.contains(BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], ModBiomes.biomeList.get(index))) && (pos == null || rand.nextInt(attempts + 1) == 0)) {
 				pos = new BlockPos(finalX, 0, finalZ);
 				++attempts;
 			}
@@ -139,7 +131,7 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 		int[] biomeArray = biomeGenLayer.getInts(minX, minZ, sizeX, sizeZ);
 
 		for (int index = 0; index < sizeX * sizeZ; ++index)
-			if (!viableBiomes.contains(BiomeGenBase.getBiomeGenArray()[biomeArray[index]]))
+			if (!viableBiomes.contains(BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], ModBiomes.biomeList.get(index))))
 				return false;
 
 		return true;
@@ -160,6 +152,6 @@ public class WorldChunkManagerErebus extends WorldChunkManager {
 	public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
 		WorldTypeEvent.InitBiomeGens event = new WorldTypeEvent.InitBiomeGens(worldType, seed, original);
 		MinecraftForge.TERRAIN_GEN_BUS.post(event);
-		return event.newBiomeGens;
+		return event.getNewBiomeGens();
 	}
 }

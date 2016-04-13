@@ -2,6 +2,10 @@ package erebus.world.biomes.decorators;
 
 
 public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
+	@Override
+	protected void decorate() {
+		System.out.println("Under Ground Jungle Decorating");
+	}
 /*	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
@@ -46,6 +50,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 
 	@Override
 	protected void decorate() {
+		
 		if (rand.nextInt(3) == 0)
 			for (attempt = 0; attempt < 5; attempt++)
 				if (genAmberUmberstone.generate(world, rand, x + offsetXZ(), rand.nextInt(120), z + offsetXZ()))

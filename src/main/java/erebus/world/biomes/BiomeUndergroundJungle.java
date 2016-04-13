@@ -1,23 +1,21 @@
 package erebus.world.biomes;
 
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.entity.*;
-import erebus.world.SpawnerErebus.SpawnEntry;
-import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-
 import java.util.Random;
 
-public class BiomeUndergroundJungle extends BiomeBaseErebus {
-	public BiomeUndergroundJungle(int biomeID) {
-		super(biomeID, new BiomeDecoratorUndergroundJungle());
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import erebus.ModBiomes;
+import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
 
-		setBiomeName("Undergound Jungle");
+public class BiomeUndergroundJungle extends BiomeBaseErebus {
+	public BiomeUndergroundJungle(BiomeProperties properties) {
+		super(properties, new BiomeDecoratorUndergroundJungle());
+
+		properties.setBaseBiome("Undergound Jungle");
+		properties.setTemperature(1.35F);
+		properties.setRainDisabled();
 		setColors(0x53CA37, 0x29BC05);
 		setFog(8, 128, 8);
-		setTemperatureRainfall(1.35F, 0.9F);
 		setWeight(22);
 /*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
@@ -46,7 +44,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 
 	@Override
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
-		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 24 ? Blocks.flowing_water : Blocks.air : block;
+		return block == Blocks.stone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? y < 24 ? Blocks.flowing_water : Blocks.air : block;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package erebus.world.biomes;
 
+import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
 import erebus.ModBiomes;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
@@ -20,17 +21,18 @@ import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
 
 public class BiomeElysianFields extends BiomeBaseErebus {
-	public BiomeElysianFields(int biomeID) {
-		this(biomeID, new BiomeDecoratorElysianFields());
+	public BiomeElysianFields(BiomeProperties properties) {
+		this(properties , new BiomeDecoratorElysianFields());
 	}
 
-	public BiomeElysianFields(int biomeID, BiomeDecoratorBaseErebus decorator) {
-		super(biomeID, decorator);
+	public BiomeElysianFields(BiomeProperties properties, BiomeDecoratorBaseErebus decorator) {
+		super(properties, decorator);
 
-		setBiomeName("Elysian Fields");
+		properties.setBaseBiome("Elysian Fields");
+		properties.setTemperature(0.85F);
+		properties.setRainDisabled();
 		setColors(0xC6FF54);
 		setFog(213, 228, 127);
-		setTemperatureRainfall(0.85F, 0.5F);
 		setWeight(20);
 /*
 		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 10).setGroupSize(1, 3));
@@ -56,10 +58,10 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 	}
 
 	public static class BiomeElysianForest extends BiomeElysianFields {
-		public BiomeElysianForest(int biomeID) {
-			super(biomeID, new BiomeDecoratorElysianFields.BiomeDecoratorElysianForest());
+		public BiomeElysianForest(BiomeProperties properties) {
+			super(properties, new BiomeDecoratorElysianFields.BiomeDecoratorElysianForest());
 
-			setBiomeName("Elysian Forest");
+			properties.setBaseBiome("Elysian Forest");
 			setColors(0x74BF26);
 		}
 	}

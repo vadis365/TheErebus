@@ -1,12 +1,14 @@
 package erebus.world.feature.decoration;
 
-import erebus.ModBlocks;
+import java.util.Random;
+
 import net.minecraft.block.Block;
-import net.minecraft.util.MathHelper;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import java.util.Random;
+import erebus.ModBlocks;
 
 public class WorldGenErebusMinable extends WorldGenerator {
 	private Block minableBlock;
@@ -18,7 +20,7 @@ public class WorldGenErebusMinable extends WorldGenerator {
 		minableBlock = block;
 		minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
-		blockToReplace = ModBlocks.umberstone;
+		blockToReplace = Blocks.stone;//ModBlocks.umberstone;
 	}
 
 	public void prepare(Block block, int meta, int numberOfBlocks, Block blockToReplace) {
@@ -29,14 +31,14 @@ public class WorldGenErebusMinable extends WorldGenerator {
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, BlockPos position) {
 		float f = rand.nextFloat() * (float) Math.PI;
-		double d0 = x + 8 + MathHelper.sin(f) * numberOfBlocks * 0.125F;
-		double d1 = x + 8 - MathHelper.sin(f) * numberOfBlocks * 0.125F;
-		double d2 = z + 8 + MathHelper.cos(f) * numberOfBlocks * 0.125F;
-		double d3 = z + 8 - MathHelper.cos(f) * numberOfBlocks * 0.125F;
-		double d4 = y + rand.nextInt(3) - 2;
-		double d5 = y + rand.nextInt(3) - 2;
+		double d0 = position.getX() + 8 + MathHelper.sin(f) * numberOfBlocks * 0.125F;
+		double d1 = position.getX() + 8 - MathHelper.sin(f) * numberOfBlocks * 0.125F;
+		double d2 = position.getZ() + 8 + MathHelper.cos(f) * numberOfBlocks * 0.125F;
+		double d3 = position.getZ() + 8 - MathHelper.cos(f) * numberOfBlocks * 0.125F;
+		double d4 = position.getY() + rand.nextInt(3) - 2;
+		double d5 = position.getY() + rand.nextInt(3) - 2;
 
 		int realNumberOfBlocks = numberOfBlocks;
 		numberOfBlocks = (int) Math.ceil(numberOfBlocks * (1.15F + rand.nextFloat() * 0.25F));

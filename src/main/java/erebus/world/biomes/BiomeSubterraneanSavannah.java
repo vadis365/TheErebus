@@ -4,16 +4,19 @@ import erebus.entity.*;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
 
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
-	public BiomeSubterraneanSavannah(int biomeID) {
-		super(biomeID, new BiomeDecoratorSubterraneanSavannah());
+	public BiomeSubterraneanSavannah(BiomeProperties properties) {
+		super(properties, new BiomeDecoratorSubterraneanSavannah());
 
-		setBiomeName("Subterranean Savannah");
+		properties.setBaseBiome("Subterranean Savannah");
+		properties.setTemperature(0.95F);
+		properties.setRainDisabled();
 		setColors(0xB6B957, 0xA3A52D);
 		setFog(140, 116, 9);
-		setTemperatureRainfall(0.95F, 0.05F);
 		setWeight(20);
+
 /*
 		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 8).setGroupSize(1, 4));

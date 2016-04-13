@@ -4,12 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -50,7 +52,7 @@ public class WorldProviderErebus extends WorldProvider {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public Vec3 getFogColor(float celestialAngle, float partialTickTime) {
+	public Vec3d getFogColor(float celestialAngle, float partialTickTime) {
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		BiomeGenBase biome = worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ));
 		if (biome instanceof BiomeBaseErebus)
@@ -76,7 +78,7 @@ public class WorldProviderErebus extends WorldProvider {
 						currentFogColor[a] = targetFogColor[a];
 				}
 
-		return new Vec3(currentFogColor[0] / 255D, currentFogColor[1] / 255D, currentFogColor[2] / 255D);
+		return new Vec3d(currentFogColor[0] / 255D, currentFogColor[1] / 255D, currentFogColor[2] / 255D);
 	}
 
 	@Override
@@ -93,12 +95,12 @@ public class WorldProviderErebus extends WorldProvider {
 	public void registerWorldChunkManager() {
 		worldChunkMgr = new WorldChunkManagerErebus(worldObj);
 		hasNoSky = true;
-		dimensionId = ConfigHandler.INSTANCE.erebusDimensionID;
+		//dimensionId = ConfigHandler.INSTANCE.erebusDimensionID;
 	}
 
 	@Override
-	public IChunkProvider createChunkGenerator() {
-		return new ChunkProviderErebus(worldObj, worldObj.getSeed());
+	public IChunkGenerator createChunkGenerator() {
+		return (IChunkGenerator) new ChunkProviderErebus(worldObj, worldObj.getSeed());
 	}
 
 	@Override
@@ -133,11 +135,6 @@ public class WorldProviderErebus extends WorldProvider {
 	}
 
 	@Override
-	public String getDimensionName() {
-		return "Erebus";
-	}
-
-	@Override
     public BlockPos getRandomizedSpawnPoint() {
         BlockPos ret = this.worldObj.getSpawnPoint();
 
@@ -154,8 +151,11 @@ public class WorldProviderErebus extends WorldProvider {
         return ret;
     }
 
+
+
 	@Override
-	public String getInternalNameSuffix() {
-        return "";
+	public DimensionType getDimensionType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

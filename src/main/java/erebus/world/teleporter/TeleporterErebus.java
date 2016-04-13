@@ -1,18 +1,17 @@
 package erebus.world.teleporter;
 
-import erebus.ModBlocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.LongHashMap;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldServer;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.LongHashMap;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.world.Teleporter;
+import net.minecraft.world.WorldServer;
 
 final class TeleporterErebus extends Teleporter {
 	private final WorldServer worldServerInstance;
@@ -58,7 +57,7 @@ final class TeleporterErebus extends Teleporter {
 				
 				for (int j = roundZ - checkRadius; j <= roundZ + checkRadius; j++)
 					for (int h = worldServerInstance.getActualHeight() - 1; h >= 0; h--)
-						if (worldServerInstance.getBlockState(new BlockPos(i, h, j)) == ModBlocks.umberstone) { //ModBlocks.gaeanKeystone
+						if (worldServerInstance.getBlockState(new BlockPos(i, h, j)) == Blocks.stone) { //ModBlocks.gaeanKeystone
 							double X = i + 0.5 - entityIn.posX;
 							double Z = j + 0.5 - entityIn.posZ;
 							double Y = h - 2 + 0.5 - entityIn.posY;

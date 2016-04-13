@@ -9,7 +9,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
-import erebus.ModBlocks;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.loot.IWeightProvider;
@@ -28,11 +27,11 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	protected final WeightedList<SpawnEntry> spawningGradual = new WeightedList<SpawnEntry>();
 	protected final WeightedList<SpawnEntry> spawningPopulate = new WeightedList<SpawnEntry>();
 
-	public BiomeBaseErebus(int biomeID, BiomeDecoratorBaseErebus decorator) {
-		super(biomeID);
+	public BiomeBaseErebus(BiomeProperties properties, BiomeDecoratorBaseErebus decorator) {
+		super(properties);
 		this.decorator = decorator;
 
-		setDisableRain();
+		//setDisableRain();
 
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
@@ -44,12 +43,12 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	}
 
 	protected final BiomeBaseErebus setColors(int grassAndFoliage) {
-		setColors(grassAndFoliage, grassAndFoliage);
+		//setColors(grassAndFoliage, grassAndFoliage);
 		return this;
 	}
 
 	protected final BiomeBaseErebus setColors(int grass, int foliage) {
-		setColor(grass);
+		//setColors(grass);
 		//func_76733_a(grass);
 		grassColor = grass;
 		foliageColor = foliage;
@@ -107,13 +106,13 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	public void decorate(World world, Random rand, int x, int z) {
 		// TimeMeasurement.start(id);
 
-	//	decorator.decorate(world, rand, x, z);
+		decorator.decorate(world, rand, x, z);
 
 		// TimeMeasurement.finish(id);
 	}
 
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
-		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? Blocks.air : block;
+		return block == Blocks.stone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? Blocks.air : block;
 	}
 
 	/**

@@ -1,11 +1,12 @@
 package erebus;
 
+import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
 import erebus.world.biomes.*;
 import erebus.world.loot.WeightedList;
 
 public class ModBiomes {
 	public static WeightedList<BiomeBaseErebus> biomeList = new WeightedList<BiomeBaseErebus>();
-
+	public static BiomeProperties properties;
 	public static BiomeBaseErebus undergroundJungle;
 	public static BiomeBaseErebus volcanicDesert;
 	public static BiomeBaseErebus subterraneanSavannah;
@@ -45,14 +46,14 @@ public class ModBiomes {
 
 		// CREATE BIOMES
 
-		undergroundJungle = new BiomeUndergroundJungle(undergroundJungleID);
-		volcanicDesert = new BiomeVolcanicDesert(volcanicDesertID);
-		subterraneanSavannah = new BiomeSubterraneanSavannah(subterraneanSavannahID);
-		elysianFields = new BiomeElysianFields(elysianFieldsID);
-		ulteriorOutback = new BiomeUlteriorOutback(ulteriorOutbackID);
-		fungalForest = new BiomeFungalForest(fungalForestID);
-		submergedSwamp = new BiomeSubmergedSwamp(submergedSwampID);
-		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(fieldsSubForestID);
+		undergroundJungle = new BiomeUndergroundJungle(new BiomeProperties("Underground Jungle"));
+		volcanicDesert = new BiomeVolcanicDesert(new BiomeProperties("Volcanic Desert"));
+		subterraneanSavannah = new BiomeSubterraneanSavannah(new BiomeProperties("Subterranean Savannah"));
+		elysianFields = new BiomeElysianFields(new BiomeProperties("Elysian Fields"));
+		ulteriorOutback = new BiomeUlteriorOutback(new BiomeProperties("Ulterior Outback"));
+		fungalForest = new BiomeFungalForest(new BiomeProperties("Fungal Forest"));
+		submergedSwamp = new BiomeSubmergedSwamp(new BiomeProperties("Submerged Swamp"));
+		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(new BiomeProperties("Elysian Forest"));
 
 		// MUTATIONS
 

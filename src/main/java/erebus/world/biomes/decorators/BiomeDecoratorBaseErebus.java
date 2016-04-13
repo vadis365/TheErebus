@@ -18,9 +18,9 @@ public abstract class BiomeDecoratorBaseErebus {
 	protected int xx, yy, zz, attempt;
 	private boolean isDecorating = false;
 
-	private static final OreSettings oreGen = new OreSettings();
+//	private static final OreSettings oreGen = new OreSettings();
 
-	protected static final WorldGenRedGem genRedGem = new WorldGenRedGem();
+//	protected static final WorldGenRedGem genRedGem = new WorldGenRedGem();
 
 	protected BiomeDecoratorBaseErebus() {
 	}
@@ -34,7 +34,7 @@ public abstract class BiomeDecoratorBaseErebus {
 	}
 
 	public final void decorate(World world, Random rand, int x, int z) {
-	/*	if (isDecorating)
+		if (isDecorating)
 			throw new RuntimeException("Already decorating Erebus!");
 		isDecorating = true;
 		this.world = world;
@@ -42,7 +42,7 @@ public abstract class BiomeDecoratorBaseErebus {
 		this.x = x;
 		this.z = z;
 
-		for (FeatureType featureType : FeatureType.values())
+	/*	for (FeatureType featureType : FeatureType.values())
 			generateFeature(featureType);
 
 		boolean extraOres = ConfigHandler.INSTANCE.lead || ConfigHandler.INSTANCE.silver || ConfigHandler.INSTANCE.copper || ConfigHandler.INSTANCE.tin || ConfigHandler.INSTANCE.aluminium;
@@ -51,11 +51,11 @@ public abstract class BiomeDecoratorBaseErebus {
 			oreType.setupDefault(oreGen, extraOres);
 			modifyOreGen(oreGen, oreType, extraOres);
 			oreGen.generate(world, rand, x, z);
-		}
+		}*/
 
 		decorate();
 
-		isDecorating = false;*/
+		isDecorating = false;
 	}
 
 	protected void populate() {
@@ -68,12 +68,12 @@ public abstract class BiomeDecoratorBaseErebus {
 	}
 
 	protected void generateFeature(FeatureType featureType) {
-		switch (featureType) {
+	/*	switch (featureType) {
 			case REDGEM:
 				for (attempt = 0; attempt < 5; attempt++)
 					genRedGem.generate(world, rand, x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ());
 				break;
-		}
+		}*/
 	}
 
 	protected final int offsetXZ() {

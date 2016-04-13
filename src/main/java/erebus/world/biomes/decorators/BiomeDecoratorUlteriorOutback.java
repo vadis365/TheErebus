@@ -1,17 +1,11 @@
 package erebus.world.biomes.decorators;
 
-import erebus.ModBlocks;
-import erebus.world.biomes.decorators.data.FeatureType;
-import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
-import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.decoration.WorldGenRottenAcacia;
-import erebus.world.feature.tree.WorldGenEucalyptusTree;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.gen.feature.WorldGenSavannaTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
+	@Override
+	protected void decorate() {
+		System.out.println("Ulterior Outback Decorating");
+	}
 /*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);

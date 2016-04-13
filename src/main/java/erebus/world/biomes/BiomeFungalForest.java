@@ -1,17 +1,17 @@
 package erebus.world.biomes;
 
-import erebus.entity.*;
-import erebus.world.SpawnerErebus.SpawnEntry;
-import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 import net.minecraft.init.Blocks;
+import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
 public class BiomeFungalForest extends BiomeBaseErebus {
-	public BiomeFungalForest(int biomeID) {
-		super(biomeID, new BiomeDecoratorFungalForest());
+	public BiomeFungalForest(BiomeProperties properties) {
+		super(properties, new BiomeDecoratorFungalForest());
 
-		setBiomeName("Fungal Forest");
+		properties.setBaseBiome("Fungal Forest");
+		properties.setTemperature(0.9F);
+		properties.setRainDisabled();
+
 		setColors(0x4E8833);
-		setTemperatureRainfall(0.9F, 0.95F);
 		setWeight(12);
 		topBlock = Blocks.grass.getDefaultState();
 /*

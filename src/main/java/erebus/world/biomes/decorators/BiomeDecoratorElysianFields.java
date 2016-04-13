@@ -2,6 +2,10 @@ package erebus.world.biomes.decorators;
 
 
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
+	@Override
+	protected void decorate() {
+		System.out.println("Elysian Fields Decorating");
+	}
 /*	protected final WorldGenPonds genPonds = new WorldGenPonds();
 	protected final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
 
@@ -30,7 +34,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 	}
 
 	@Override
-	public void decorate() {
+	protected void decorate() {
 		for (attempt = 0; attempt < 105; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
@@ -183,6 +187,11 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 	 */
 
 	public static class BiomeDecoratorElysianForest extends BiomeDecoratorElysianFields {
+		@Override
+		public void decorate() {
+		System.out.println("Elysian Forest Decorating");
+			// System.out.println("decorating at "+x+","+z);
+		}
 	/*	private final WorldGenerator genOakTree = new WorldGenTrees(false, 5, 0, 0, false);
 		private final WorldGenerator genBirchTree = new WorldGenTrees(false, 5, 2, 2, false);
 
@@ -198,11 +207,10 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 
 			super.populate();
 		}
-
+	
 		@Override
 		public void decorate() {
 			// System.out.println("decorating at "+x+","+z);
-
 			for (attempt = 0; attempt < 400; attempt++) {
 				xx = x + offsetXZ();
 				zz = z + offsetXZ();
