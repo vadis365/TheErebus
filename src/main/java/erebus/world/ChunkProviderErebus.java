@@ -9,26 +9,26 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.IProgressUpdate;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.ChunkProviderEvent;
+import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import erebus.ModBiomes;
-import erebus.ModBlocks;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.structure.MapGenErebusCaves;
 import erebus.world.structure.MapGenErebusRavine;
 
-public class ChunkProviderErebus implements IChunkProvider {
+public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	private final World worldObj;
 
 	private final Random rand;
@@ -79,7 +79,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 		int i = byte0 + 1;
 		byte byte2 = 17;
 		int j = byte0 + 1;
-		biomesForGeneration = worldObj.getWorldChunkManager().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
 
 		noiseArray = initializeNoiseField(noiseArray, x * byte0, 0, z * byte0, i, byte2, j);
 
@@ -148,7 +148,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 		byte[] metadata = new byte[32768];
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+		this.biomesForGeneration = this.worldObj.getBiomeProvider().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
 		this.generateTerrain(x, z, chunkprimer);
 		replaceBlocksForBiome(x, z, blocks, metadata, biomesForGeneration, chunkprimer);
 
@@ -159,7 +159,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 		byte[] biomeArrayReference = chunk.getBiomeArray();
 
 		for (int a = 0; a < biomeArrayReference.length; ++a)
-			biomeArrayReference[a] = (byte) biomesForGeneration[a].biomeID;
+			biomeArrayReference[a] = (byte) BiomeGenBase.getIdForBiome(biomesForGeneration[a]);
 
 		chunk.generateSkylightMap();
 		chunk.resetRelightChecks();
@@ -274,7 +274,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 	public void replaceBlocksForBiome(int x, int z, Block[] blocks, byte[] metadata, BiomeGenBase[] biomes, ChunkPrimer primer) {
 	//	ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, blocks, metadata, biomes, worldObj);
-		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, chunkX, chunkZ, primer, this.worldObj);
+		ChunkGeneratorEvent.ReplaceBiomeBlocks event = new ChunkGeneratorEvent.ReplaceBiomeBlocks((IChunkGenerator) this, chunkX, chunkZ, primer, this.worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY)
 			return;
@@ -341,7 +341,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 					//		blocks[index] = rand.nextInt(256) == 0 && blocks[index - 1].isOpaqueCube() && yInChunk < swampWaterHeight - 1 ? ModBlocks.mireCoral : Blocks.water;
 
 						IBlockState iblockstate2 = primer.getBlockState(xInChunk, yInChunk, zInChunk);
-						if (iblockstate2.getBlock().getMaterial() == Material.air) {
+						if (iblockstate2.getBlock().getMaterial(iblockstate2) == Material.air) {
 							var13 = -1;
 						}
 						else if (iblockstate2.getBlock().getDefaultState() == Blocks.stone.getDefaultState()) {
@@ -357,7 +357,7 @@ public class ChunkProviderErebus implements IChunkProvider {
 								//	fillerBlock = biome.fillerBlock;
 								//}
 
-								if (yInChunk < var5 && topBlock.getBlock().getMaterial() == Material.air)
+								if (yInChunk < var5 && topBlock.getBlock().getMaterial(iblockstate2) == Material.air)
 									//if (temperature < 0.15F)
 									//	topBlock = Blocks.ice;
 									//else
@@ -373,13 +373,12 @@ public class ChunkProviderErebus implements IChunkProvider {
 
 	private int getLowestAirBlock(ChunkPrimer primer, int xInChunk, int zInChunk, int preHeightIndex, int minH, int maxH) {
 		for (int h = Math.min(minH, maxH); h <= Math.max(minH, maxH); h++)
-			if (primer.getBlockState(xInChunk, h, zInChunk).getBlock().getMaterial() == Material.air)
+			if (primer.getBlockState(xInChunk, h, zInChunk).getBlock().getMaterial(null) == Material.air)
 				return h;
 		return -1;
 	}
 
-	@Override
-	public void populate(IChunkProvider chunkProvider, int x, int z) {
+	public void populate(int x, int z) {
 		BlockFalling.fallInstantly = true;
 	/*	BlockPos blockCoord = new BlockPos(x * 16, 0, z * 16);
 		BlockPos blockCoordOffSet = new BlockPos(blockCoord.getX() +16, 0,  blockCoord.getY() +16);
@@ -416,64 +415,41 @@ public class ChunkProviderErebus implements IChunkProvider {
 	}
 
 	@Override
-	public boolean chunkExists(int x, int z) {
-		return true;
-	}
-
-	@Override
-	public boolean saveChunks(boolean mode, IProgressUpdate progressUpdate) {
-		return true;
-	}
-
-	@Override
-	public boolean canSave() {
-		return true;
-	}
-
-	@Override
-	public int getLoadedChunkCount() {
-		return 0;
+	public Chunk getLoadedChunk(int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public boolean unloadQueuedChunks() {
-		return false;
-	}
-
-	@Override
-	public void saveExtraData() {
-	}
-
-	@Override
-	public Chunk provideChunk(BlockPos blockPosIn) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_,
-			int p_177460_3_, int p_177460_4_) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List func_177458_a(EnumCreatureType p_177458_1_, BlockPos p_177458_2_) {
+	public boolean generateStructures(Chunk chunkIn, int x, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<SpawnListEntry> getPossibleCreatures(
+			EnumCreatureType creatureType, BlockPos pos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World worldIn, String p_180513_2_,
-			BlockPos p_180513_3_) {
+	public BlockPos getStrongholdGen(World worldIn, String structureName,
+			BlockPos position) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void recreateStructures(Chunk p_180514_1_, int p_180514_2_,
-			int p_180514_3_) {
+	public void recreateStructures(Chunk chunkIn, int x, int z) {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

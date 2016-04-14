@@ -2,6 +2,7 @@ package erebus;
 
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -49,7 +50,8 @@ public class Erebus {
 //		AchievementPage.registerAchievementPage(new ModAchievements());
 
 //		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
-		dimensionType = DimensionType.register("Erebus", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
+		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
+		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
 	//	GameRegistry.registerWorldGenerator(new WorldGenAntlionMaze(), 0);
 	}
 
@@ -87,7 +89,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModItems.jumpBoots);
 		BucketHandler.INSTANCE.buckets.put(ModBlocks.honeyBlock, ModItems.bucketHoney);
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-	*/	FMLCommonHandler.instance().bus().register(ConfigHandler.INSTANCE);
+	*/	MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 	//	FMLCommonHandler.instance().bus().register(SpawnerErebus.INSTANCE);
 
 		/*		if (ConfigHandler.INSTANCE.graveMarker)

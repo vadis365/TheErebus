@@ -1,6 +1,9 @@
 package erebus;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import erebus.lib.Reference;
 import erebus.world.biomes.*;
 import erebus.world.loot.WeightedList;
 
@@ -54,6 +57,14 @@ public class ModBiomes {
 		fungalForest = new BiomeFungalForest(new BiomeProperties("Fungal Forest"));
 		submergedSwamp = new BiomeSubmergedSwamp(new BiomeProperties("Submerged Swamp"));
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(new BiomeProperties("Elysian Forest"));
+		GameRegistry.register(undergroundJungle.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Underground Jungle")));
+		GameRegistry.register(volcanicDesert.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Volcanic Desert")));
+		GameRegistry.register(subterraneanSavannah.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Subterranean Savannah")));
+		GameRegistry.register(elysianFields.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Elysian Fields")));
+		GameRegistry.register(ulteriorOutback.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Ulterior Outback")));
+		GameRegistry.register(fungalForest.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Fungal Forest")));
+		GameRegistry.register(submergedSwamp.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Submerged Swamp")));
+		GameRegistry.register(fieldsSubForest.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Elysian Forest")));
 
 		// MUTATIONS
 

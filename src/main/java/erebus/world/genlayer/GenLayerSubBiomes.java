@@ -1,9 +1,9 @@
 package erebus.world.genlayer;
 
-import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
+import erebus.world.biomes.BiomeBaseErebus;
 
 public class GenLayerSubBiomes extends GenLayerErebus {
 	private static final byte[] offsetX = new byte[] { 0, 1, -1, 0, 0 }, offsetZ = new byte[] { 0, 0, 0, 1, -1 };
@@ -32,7 +32,7 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 
 			int biomeID = currentBiomeInts[xx + 2 + (zz + 2) * (sizeX + 4)];
 
-			BiomeBaseErebus biome = (BiomeBaseErebus) BiomeGenBase.getBiomeGenArray()[biomeID];
+			BiomeBaseErebus biome = (BiomeBaseErebus) BiomeGenBase.getBiomeForId(biomeID);
 			BiomeBaseErebus subBiome = biome.getRandomSubBiome(nextInt(101));
 
 			if (subBiome != null && biome != subBiome)
@@ -45,7 +45,7 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 					bz2 = currentBiomeInts[nx + 2 + (nz + 2 + 1) * (sizeX + 4)];
 
 					if (bx1 == biomeID && bx2 == biomeID && bz1 == biomeID && bz2 == biomeID && (a == 0 || nextInt(3) != 0)) {
-						biomeInts[nx + nz * sizeX] = subBiome.biomeID;
+						biomeInts[nx + nz * sizeX] = subBiome.getIdForBiome(subBiome);
 						attempt = 999;
 					} else if (a == 0)
 						break;

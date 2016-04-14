@@ -103,6 +103,7 @@ public class ErebusPortal extends Block {
 				TeleporterHandler.transferToOverworld(entityIn);
 			if (entityIn != null)
 				entityIn.timeUntilPortal = ConfigHandler.INSTANCE.portalCooldown * 20;
+			return;
 		}
 	}
 

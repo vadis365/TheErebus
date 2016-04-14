@@ -1,10 +1,10 @@
 package erebus.world.genlayer;
 
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.IntCache;
 import erebus.ModBiomes;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.loot.WeightedList;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomes extends GenLayerErebus {
 
@@ -26,7 +26,7 @@ public class GenLayerBiomes extends GenLayerErebus {
 		for (int zz = 0; zz < sizeZ; ++zz)
 			for (int xx = 0; xx < sizeX; ++xx) {
 				initChunkSeed(xx + x, zz + z);
-				ints[xx + zz * sizeX] = biomesToGenerate.getRandomItem(nextInt(totalWeight)).biomeID;
+				ints[xx + zz * sizeX] = biomesToGenerate.getRandomItem(nextInt(totalWeight)).getIdForBiome(ModBiomes.fieldsSubForest);
 			}
 
 		return ints;

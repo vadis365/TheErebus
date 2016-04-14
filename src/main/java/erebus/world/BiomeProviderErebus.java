@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -18,10 +19,10 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 import erebus.ModBiomes;
 import erebus.world.genlayer.GenLayerErebus;
 
-public class WorldChunkManagerErebus extends BiomeProvider {
+public class BiomeProviderErebus extends BiomeProvider {
 
 	private static final float rainfall = 0F;
-	private static final ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah));
+	static final ArrayList<BiomeGenBase> allowedBiomes = new ArrayList<BiomeGenBase>(Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah));
 
 	@SuppressWarnings("rawtypes")
 	private final List biomesToSpawnIn;
@@ -29,7 +30,7 @@ public class WorldChunkManagerErebus extends BiomeProvider {
 	private final GenLayer biomeGenLayer;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public WorldChunkManagerErebus(World world) {
+	public BiomeProviderErebus(World world) {
 		biomesToSpawnIn = new ArrayList(allowedBiomes);
 		biomeCache = new BiomeCache(this);
 		biomeGenLayer = GenLayerErebus.initializeAllBiomeGenerators(world.getSeed(), world.getWorldInfo().getTerrainType())[1];
@@ -53,7 +54,7 @@ public class WorldChunkManagerErebus extends BiomeProvider {
 		int[] biomeArray = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 
 		for (int index = 0; index < sizeX * sizeZ; ++index)
-			biomesForGeneration[index] = BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], ModBiomes.biomeList.get(index));
+			biomesForGeneration[index] = BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], Biomes.DEFAULT);
 
 
 		return biomesForGeneration;
@@ -82,7 +83,7 @@ public class WorldChunkManagerErebus extends BiomeProvider {
 		} else {
 			int[] generatedBiomes = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 			for (int index = 0; index < sizeX * sizeZ; ++index)
-				biomesForGeneration[index] = BiomeGenBase.getBiomeFromBiomeList(generatedBiomes[index], ModBiomes.biomeList.get(index));
+				biomesForGeneration[index] = BiomeGenBase.getBiomeFromBiomeList(generatedBiomes[index], Biomes.DEFAULT);
 	
 			return biomesForGeneration;
 		}
@@ -109,7 +110,7 @@ public class WorldChunkManagerErebus extends BiomeProvider {
 			int finalX = minX + index % sizeX << 2;
 			int finalZ = minZ + index / sizeX << 2;
 
-			if (viableBiomes.contains(BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], ModBiomes.biomeList.get(index))) && (pos == null || rand.nextInt(attempts + 1) == 0)) {
+			if (viableBiomes.contains(BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], Biomes.DEFAULT)) && (pos == null || rand.nextInt(attempts + 1) == 0)) {
 				pos = new BlockPos(finalX, 0, finalZ);
 				++attempts;
 			}
@@ -131,7 +132,7 @@ public class WorldChunkManagerErebus extends BiomeProvider {
 		int[] biomeArray = biomeGenLayer.getInts(minX, minZ, sizeX, sizeZ);
 
 		for (int index = 0; index < sizeX * sizeZ; ++index)
-			if (!viableBiomes.contains(BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], ModBiomes.biomeList.get(index))))
+			if (!viableBiomes.contains(BiomeGenBase.getBiomeFromBiomeList(biomeArray[index], Biomes.DEFAULT)))
 				return false;
 
 		return true;

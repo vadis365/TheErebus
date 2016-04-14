@@ -12,9 +12,9 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 
@@ -26,7 +26,9 @@ public class WorldProviderErebus extends WorldProvider {
 	private short[] targetFogColor;
 
 	private boolean allowHostiles, allowAnimals;
+	
 
+	
 	@Override
 	public boolean canRespawnHere() {
 		if(ConfigHandler.INSTANCE.allowRespawning)
@@ -93,14 +95,19 @@ public class WorldProviderErebus extends WorldProvider {
 
 	@Override
 	public void registerWorldChunkManager() {
-		worldChunkMgr = new WorldChunkManagerErebus(worldObj);
+		setDimension(ConfigHandler.INSTANCE.erebusDimensionID);
+		worldChunkMgr = new BiomeProviderErebus(worldObj);
 		hasNoSky = true;
-		//dimensionId = ConfigHandler.INSTANCE.erebusDimensionID;
+	}
+
+	@Override
+	public DimensionType getDimensionType() {
+		return Erebus.dimensionType;
 	}
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return (IChunkGenerator) new ChunkProviderErebus(worldObj, worldObj.getSeed());
+		return new ChunkProviderErebus(worldObj, worldObj.getSeed());
 	}
 
 	@Override
@@ -150,12 +157,4 @@ public class WorldProviderErebus extends WorldProvider {
 
         return ret;
     }
-
-
-
-	@Override
-	public DimensionType getDimensionType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
