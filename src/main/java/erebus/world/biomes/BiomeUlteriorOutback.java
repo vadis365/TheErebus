@@ -2,11 +2,12 @@ package erebus.world.biomes;
 
 import net.minecraft.block.BlockSand;
 import net.minecraft.init.Blocks;
+import erebus.ModBiomes;
 import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 
 public class BiomeUlteriorOutback extends BiomeBaseErebus {
 	public BiomeUlteriorOutback(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorUlteriorOutback());
+		super(properties, new BiomeDecoratorUlteriorOutback(), ModBiomes.ulteriorOutbackID);
 
 		properties.setBaseBiome("Ulterior Outback");
 		properties.setTemperature(1.1F);

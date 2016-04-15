@@ -26,13 +26,14 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 
 	protected final WeightedList<SpawnEntry> spawningGradual = new WeightedList<SpawnEntry>();
 	protected final WeightedList<SpawnEntry> spawningPopulate = new WeightedList<SpawnEntry>();
+	public BiomeBaseErebus biomebase;
+	public int biomeID;
 
-	public BiomeBaseErebus(BiomeProperties properties, BiomeDecoratorBaseErebus decorator) {
+	public BiomeBaseErebus(BiomeProperties properties, BiomeDecoratorBaseErebus decorator, int biomeID) {
 		super(properties);
 		this.decorator = decorator;
-
-		//setDisableRain();
-
+		biomebase = this;
+		this.biomeID = biomeID;
 		spawnableMonsterList.clear();
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
@@ -43,7 +44,7 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	}
 
 	protected final BiomeBaseErebus setColors(int grassAndFoliage) {
-		//setColors(grassAndFoliage, grassAndFoliage);
+		setColors(grassAndFoliage, grassAndFoliage);
 		return this;
 	}
 
@@ -76,6 +77,10 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	public SpawnEntry getRandomSpawnPopulate(Random rand) {
 		return spawningPopulate.getRandomItem(rand);
 	}
+
+    public int getModdedBiomeID() {
+		return biomeID;
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)

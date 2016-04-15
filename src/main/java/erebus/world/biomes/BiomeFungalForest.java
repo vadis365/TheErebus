@@ -1,16 +1,16 @@
 package erebus.world.biomes;
 
 import net.minecraft.init.Blocks;
+import erebus.ModBiomes;
 import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
 public class BiomeFungalForest extends BiomeBaseErebus {
 	public BiomeFungalForest(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorFungalForest());
+		super(properties, new BiomeDecoratorFungalForest(), ModBiomes.fungalForestID);
 
 		properties.setBaseBiome("Fungal Forest");
 		properties.setTemperature(0.9F);
 		properties.setRainDisabled();
-
 		setColors(0x4E8833);
 		setWeight(12);
 		topBlock = Blocks.grass.getDefaultState();

@@ -4,11 +4,12 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import erebus.ModBiomes;
 import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
 
 public class BiomeVolcanicDesert extends BiomeBaseErebus {
 	public BiomeVolcanicDesert(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorVolcanicDesert());
+		super(properties, new BiomeDecoratorVolcanicDesert(), ModBiomes.volcanicDesertID);
 
 		properties.setBaseBiome("Volcanic Desert");
 		properties.setTemperature(1.9F);

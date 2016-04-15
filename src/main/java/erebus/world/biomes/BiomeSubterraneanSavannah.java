@@ -1,5 +1,6 @@
 package erebus.world.biomes;
 
+import erebus.ModBiomes;
 import erebus.entity.*;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
@@ -8,7 +9,7 @@ import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
 
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 	public BiomeSubterraneanSavannah(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorSubterraneanSavannah());
+		super(properties, new BiomeDecoratorSubterraneanSavannah(), ModBiomes.subterraneanSavannahID);
 
 		properties.setBaseBiome("Subterranean Savannah");
 		properties.setTemperature(0.95F);

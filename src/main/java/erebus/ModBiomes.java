@@ -66,7 +66,7 @@ public class ModBiomes {
 		fungalForest = new BiomeFungalForest(new BiomeProperties("Fungal Forest"));
 		submergedSwamp = new BiomeSubmergedSwamp(new BiomeProperties("Submerged Swamp"));
 		fieldsSubForest = new BiomeElysianFields.BiomeElysianForest(new BiomeProperties("Elysian Forest"));
-		GameRegistry.register(undergroundJungle.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Underground Jungle")));
+	/*	GameRegistry.register(undergroundJungle.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Underground Jungle")));
 		GameRegistry.register(volcanicDesert.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Volcanic Desert")));
 		GameRegistry.register(subterraneanSavannah.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Subterranean Savannah")));
 		GameRegistry.register(elysianFields.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Elysian Fields")));
@@ -74,7 +74,15 @@ public class ModBiomes {
 		GameRegistry.register(fungalForest.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Fungal Forest")));
 		GameRegistry.register(submergedSwamp.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Submerged Swamp")));
 		GameRegistry.register(fieldsSubForest.setRegistryName(new ResourceLocation(Reference.MOD_ID, "Elysian Forest")));
-
+		*/
+		BiomeGenBase.registerBiome(undergroundJungleID, "erebus:undergroundJungle", undergroundJungle);
+		BiomeGenBase.registerBiome(volcanicDesertID, "erebus:volcanicDesert", volcanicDesert);
+		BiomeGenBase.registerBiome(subterraneanSavannahID, "erebus:subterraneanSavannah", subterraneanSavannah);
+		BiomeGenBase.registerBiome(elysianFieldsID, "erebus:elysianFields", elysianFields);
+		BiomeGenBase.registerBiome(ulteriorOutbackID, "erebus:ulteriorOutback", ulteriorOutback);
+		BiomeGenBase.registerBiome(fungalForestID, "erebus:fungalForest", fungalForest);
+		BiomeGenBase.registerBiome(fieldsSubForestID, "erebus:fieldsSubForest", fieldsSubForest);
+		BiomeGenBase.registerBiome(submergedSwampID, "erebus:submergedSwamp", submergedSwamp);
 		// MUTATIONS
 
 		undergroundJungle.isMutation();
@@ -86,27 +94,14 @@ public class ModBiomes {
 		submergedSwamp.isMutation();
 
 		fieldsSubForest.isMutation();
-	}
-
-	public static BiomeGenBase returnRandomBiome() {
-		Random rand = new Random();
-		int biome = rand.nextInt(7);
-		switch (biome) {
-		case 0:
-			return undergroundJungle;
-		case 1:
-			return volcanicDesert;
-		case 2:
-			return subterraneanSavannah;
-		case 3:
-			return elysianFields;
-		case 4:
-			return ulteriorOutback;
-		case 5:
-			return fungalForest;
-		case 6:
-			return submergedSwamp;
-		}
-		return undergroundJungle;
+		
+		System.out.println("undergroundJungleID: " + BiomeGenBase.getIdForBiome(undergroundJungle));
+		System.out.println("volcanicDesertID: " + BiomeGenBase.getIdForBiome(volcanicDesert));
+		System.out.println("subterraneanSavannahID: " + BiomeGenBase.getIdForBiome(subterraneanSavannah));
+		System.out.println("elysianFieldsID: " + BiomeGenBase.getIdForBiome(elysianFields));
+		System.out.println("ulteriorOutbackID: " + BiomeGenBase.getIdForBiome(ulteriorOutback));
+		System.out.println("fungalForestID: " + BiomeGenBase.getIdForBiome(fungalForest));
+		System.out.println("fieldsSubForestID: " + BiomeGenBase.getIdForBiome(fieldsSubForest));
+		System.out.println("submergedSwampID: " + BiomeGenBase.getIdForBiome(submergedSwamp));
 	}
 }

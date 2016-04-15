@@ -4,18 +4,20 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import erebus.ModBiomes;
 import erebus.world.ChunkProviderErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
 
 public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 
 	public BiomeSubmergedSwamp(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorSubmergedSwamp());
+		super(properties, new BiomeDecoratorSubmergedSwamp(), ModBiomes.submergedSwampID);
 		
 		properties.setBaseBiome("Submerged Swamp");
 		properties.setTemperature(0.75F);
 		properties.setRainDisabled();
 		setColors(0x314D31);
+		//setWaterColor(6051893);
 		setFog(8, 128, 8);
 		setWeight(20);
 

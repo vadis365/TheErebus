@@ -1,32 +1,16 @@
 package erebus.world.biomes;
 
-import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
 import erebus.ModBiomes;
-import erebus.entity.EntityBeetle;
-import erebus.entity.EntityBeetleLarva;
-import erebus.entity.EntityBotFly;
-import erebus.entity.EntityChameleonTick;
-import erebus.entity.EntityCicada;
-import erebus.entity.EntityDragonfly;
-import erebus.entity.EntityFly;
-import erebus.entity.EntityGlowWorm;
-import erebus.entity.EntityGrasshopper;
-import erebus.entity.EntityMoth;
-import erebus.entity.EntityTitanBeetle;
-import erebus.entity.EntityVelvetWorm;
-import erebus.entity.EntityWheatWeevil;
-import erebus.entity.EntityWorkerBee;
-import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
 
 public class BiomeElysianFields extends BiomeBaseErebus {
 	public BiomeElysianFields(BiomeProperties properties) {
-		this(properties , new BiomeDecoratorElysianFields());
+		this(properties, new BiomeDecoratorElysianFields());
 	}
 
 	public BiomeElysianFields(BiomeProperties properties, BiomeDecoratorBaseErebus decorator) {
-		super(properties, decorator);
+		super(properties, decorator, ModBiomes.elysianFieldsID);
 
 		properties.setBaseBiome("Elysian Fields");
 		properties.setTemperature(0.85F);
