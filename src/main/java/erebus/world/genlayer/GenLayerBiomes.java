@@ -26,7 +26,7 @@ public class GenLayerBiomes extends GenLayerErebus {
 		for (int zz = 0; zz < sizeZ; ++zz)
 			for (int xx = 0; xx < sizeX; ++xx) {
 				initChunkSeed(xx + x, zz + z);
-				ints[xx + zz * sizeX] = biomesToGenerate.getRandomItem(nextInt(totalWeight)).getIdForBiome(ModBiomes.fieldsSubForest);
+				ints[xx + zz * sizeX] = biomesToGenerate.getRandomItem(nextInt(totalWeight)).getIdForBiome(ModBiomes.returnRandomBiome());
 			}
 
 		return ints;

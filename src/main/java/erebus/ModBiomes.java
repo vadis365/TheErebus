@@ -1,15 +1,24 @@
 package erebus;
 
+import java.util.Random;
+
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import erebus.lib.Reference;
-import erebus.world.biomes.*;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.biomes.BiomeElysianFields;
+import erebus.world.biomes.BiomeFungalForest;
+import erebus.world.biomes.BiomeSubmergedSwamp;
+import erebus.world.biomes.BiomeSubterraneanSavannah;
+import erebus.world.biomes.BiomeUlteriorOutback;
+import erebus.world.biomes.BiomeUndergroundJungle;
+import erebus.world.biomes.BiomeVolcanicDesert;
 import erebus.world.loot.WeightedList;
 
 public class ModBiomes {
 	public static WeightedList<BiomeBaseErebus> biomeList = new WeightedList<BiomeBaseErebus>();
-	public static BiomeProperties properties;
 	public static BiomeBaseErebus undergroundJungle;
 	public static BiomeBaseErebus volcanicDesert;
 	public static BiomeBaseErebus subterraneanSavannah;
@@ -77,5 +86,27 @@ public class ModBiomes {
 		submergedSwamp.isMutation();
 
 		fieldsSubForest.isMutation();
+	}
+
+	public static BiomeGenBase returnRandomBiome() {
+		Random rand = new Random();
+		int biome = rand.nextInt(7);
+		switch (biome) {
+		case 0:
+			return undergroundJungle;
+		case 1:
+			return volcanicDesert;
+		case 2:
+			return subterraneanSavannah;
+		case 3:
+			return elysianFields;
+		case 4:
+			return ulteriorOutback;
+		case 5:
+			return fungalForest;
+		case 6:
+			return submergedSwamp;
+		}
+		return undergroundJungle;
 	}
 }
