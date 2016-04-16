@@ -20,6 +20,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.ILockableContainer;
@@ -27,19 +28,22 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.mojang.authlib.GameProfile;
+
 import erebus.lib.Reference;
 
 public class Utils {
 
-	public static boolean rightClickItemAt(World world, BlockPos pos, EnumFacing side, ItemStack stack) {
+	public static boolean rightClickItemAt(World world, BlockPos pos, EnumHand hand, EnumFacing side, ItemStack stack) {
 		if (world.isRemote || stack == null || stack.getItem() == null)
 			return false;
 		EntityPlayer player = getPlayer(world);
-		player.setCurrentItemOrArmor(0, stack);
+		player.replaceItemInInventory(0, stack);
 		try {
-			return stack.getItem().onItemUse(stack, player, world, pos, side, 0, 0, 0);
+			return stack.getItem().onItemUse(stack, player, world, pos, hand, side, 0, 0, 0) != null;
 		} finally {
-			player.setCurrentItemOrArmor(0, null);
+			player.replaceItemInInventory(0, null);
 		}
 	}
 
@@ -82,7 +86,7 @@ public class Utils {
 	}
 
 	public static final void dropStack(World world, BlockPos pos, ItemStack is) {
-		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops")) {
 			float f = 0.7F;
 			double d0 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d1 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
@@ -106,7 +110,7 @@ public class Utils {
 	}
 
 	public static void dropStackNoRandom(World world, BlockPos pos, ItemStack stack) {
-		if (!world.isRemote && stack != null && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+		if (!world.isRemote && stack != null && world.getGameRules().getBoolean("doTileDrops")) {
 			EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
 			entityItem.motionX = 0;
 			entityItem.motionY = 0;
