@@ -9,7 +9,7 @@ import net.minecraft.world.biome.BiomeGenBase.BiomeProperties;
 
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 	public BiomeSubterraneanSavannah(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorSubterraneanSavannah(), ModBiomes.subterraneanSavannahID);
+		super(properties, new BiomeDecoratorSubterraneanSavannah());
 
 		properties.setBaseBiome("Subterranean Savannah");
 		properties.setTemperature(0.95F);

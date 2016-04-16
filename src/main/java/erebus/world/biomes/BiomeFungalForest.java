@@ -6,7 +6,7 @@ import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 
 public class BiomeFungalForest extends BiomeBaseErebus {
 	public BiomeFungalForest(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorFungalForest(), ModBiomes.fungalForestID);
+		super(properties, new BiomeDecoratorFungalForest());
 
 		properties.setBaseBiome("Fungal Forest");
 		properties.setTemperature(0.9F);

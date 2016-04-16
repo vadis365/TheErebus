@@ -9,7 +9,7 @@ import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
 
 public class BiomeVolcanicDesert extends BiomeBaseErebus {
 	public BiomeVolcanicDesert(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorVolcanicDesert(), ModBiomes.volcanicDesertID);
+		super(properties, new BiomeDecoratorVolcanicDesert());
 
 		properties.setBaseBiome("Volcanic Desert");
 		properties.setTemperature(1.9F);

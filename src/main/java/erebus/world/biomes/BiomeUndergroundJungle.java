@@ -10,7 +10,7 @@ import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
 
 public class BiomeUndergroundJungle extends BiomeBaseErebus {
 	public BiomeUndergroundJungle(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorUndergroundJungle(), ModBiomes.undergroundJungleID);
+		super(properties, new BiomeDecoratorUndergroundJungle());
 
 		properties.setBaseBiome("Undergound Jungle");
 		properties.setTemperature(1.35F);

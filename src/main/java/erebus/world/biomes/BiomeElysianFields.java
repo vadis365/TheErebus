@@ -10,7 +10,7 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 	}
 
 	public BiomeElysianFields(BiomeProperties properties, BiomeDecoratorBaseErebus decorator) {
-		super(properties, decorator, ModBiomes.elysianFieldsID);
+		super(properties, decorator);
 
 		properties.setBaseBiome("Elysian Fields");
 		properties.setTemperature(0.85F);

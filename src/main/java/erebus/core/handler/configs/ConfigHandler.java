@@ -29,17 +29,6 @@ public class ConfigHandler {
 	}
 
 	private void syncConfigs() {
-		ModBiomes.undergroundJungleID = config.get("Biomes", "Underground Jungle", 100).getInt(100);
-		ModBiomes.volcanicDesertID = config.get("Biomes", "Volcanic Desert", 101).getInt(101);
-		ModBiomes.subterraneanSavannahID = config.get("Biomes", "Subterranean Savannah", 102).getInt(102);
-		ModBiomes.elysianFieldsID = config.get("Biomes", "Elysian Fields", 103).getInt(103);
-		ModBiomes.ulteriorOutbackID = config.get("Biomes", "Ulterior Outback", 104).getInt(104);
-		ModBiomes.fungalForestID = config.get("Biomes", "Fungal Forest", 105).getInt(105);
-		ModBiomes.fieldsSubForestID = config.get("Biomes", "Fields - Forest", 127).getInt(127);
-		ModBiomes.submergedSwampID = config.get("Biomes", "Submerged Swamp", 106).getInt(106);
-		/*
-		 * ModBiomes.jungleSubLakeID = config.get("Biomes", "Biome ID of Underground Jungle - Lake", 161).getInt(161); ModBiomes.jungleSubAsperGroveID = config.get("Biomes", "Biome ID of Underground Jungle - Asper Grove", 162).getInt(162); ModBiomes.desertSubCharredForestID = config.get("Biomes", "Biome ID of Volcanic Desert - Charred Forest", 163).getInt(163); ModBiomes.savannahSubRockyWastelandID = config.get("Biomes", "Biome ID of Savannah - Rocky Wasteland", 164).getInt(164); ModBiomes.savannahSubAsperGroveID = config.get("Biomes", "Biome ID of Savannah - Asper Grove", 165).getInt(165); ModBiomes.savannahSubSteppeID = config.get("Biomes", "Biome ID of Savannah - Steppe", 166).getInt(166);
-		 */
 
 		erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
 		portalCooldown = config.get(Configuration.CATEGORY_GENERAL, "Number of seconds before the portal is usable again.", 5).getInt(5);
@@ -70,7 +59,7 @@ public class ConfigHandler {
 
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if (Reference.MOD_ID.equals(event.modID))
+		if (Reference.MOD_ID.equals(event.getModID()))
 			syncConfigs();
 	}
 }

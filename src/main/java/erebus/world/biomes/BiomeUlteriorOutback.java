@@ -7,7 +7,7 @@ import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 
 public class BiomeUlteriorOutback extends BiomeBaseErebus {
 	public BiomeUlteriorOutback(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorUlteriorOutback(), ModBiomes.ulteriorOutbackID);
+		super(properties, new BiomeDecoratorUlteriorOutback());
 
 		properties.setBaseBiome("Ulterior Outback");
 		properties.setTemperature(1.1F);

@@ -11,7 +11,7 @@ import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
 public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 
 	public BiomeSubmergedSwamp(BiomeProperties properties) {
-		super(properties, new BiomeDecoratorSubmergedSwamp(), ModBiomes.submergedSwampID);
+		super(properties, new BiomeDecoratorSubmergedSwamp());
 		
 		properties.setBaseBiome("Submerged Swamp");
 		properties.setTemperature(0.75F);
