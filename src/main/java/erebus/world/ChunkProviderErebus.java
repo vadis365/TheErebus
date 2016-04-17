@@ -145,7 +145,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		this.generateTerrain(x, z, chunkprimer);
 		replaceBlocksForBiome(x, z, biomesForGeneration, chunkprimer);
 
-		// caveGenerator.func_151539_a(this, worldObj, x, z, blocks);
+		 caveGenerator.generate(worldObj, x, z, chunkprimer);
 		// ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
 
 		Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
@@ -364,9 +364,11 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	}
 
 	private int getLowestAirBlock(ChunkPrimer primer, int xInChunk, int zInChunk, int preHeightIndex, int minH, int maxH) {
-		for (int h = Math.min(minH, maxH); h <= Math.max(minH, maxH); h++)
-			if (primer.getBlockState(xInChunk, h, zInChunk).getBlock().getMaterial(null) == Material.air)
+		for (int h = Math.min(minH, maxH); h <= Math.max(minH, maxH); h++) {
+			IBlockState iblockstate = primer.getBlockState(xInChunk, h, zInChunk);
+			if (primer.getBlockState(xInChunk, h, zInChunk).getBlock().getMaterial(iblockstate) == Material.air)
 				return h;
+		}
 		return -1;
 	}
 
