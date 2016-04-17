@@ -3,7 +3,6 @@ package erebus.world;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -137,20 +136,14 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 					}
 				}
 	}
-	
-	private int chunkX = 0, chunkZ = 0;
 
 	@Override
 	public Chunk provideChunk(int x, int z) {
-		chunkX = x;
-		chunkZ = z;
-		Block[] blocks = new Block[32768];
-		byte[] metadata = new byte[32768];
 		this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		this.biomesForGeneration = this.worldObj.getBiomeProvider().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
 		this.generateTerrain(x, z, chunkprimer);
-		replaceBlocksForBiome(x, z, blocks, metadata, biomesForGeneration, chunkprimer);
+		replaceBlocksForBiome(x, z, biomesForGeneration, chunkprimer);
 
 		// caveGenerator.func_151539_a(this, worldObj, x, z, blocks);
 		// ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
@@ -272,9 +265,8 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 
 	public static int swampWaterHeight = 24;
 
-	public void replaceBlocksForBiome(int x, int z, Block[] blocks, byte[] metadata, BiomeGenBase[] biomes, ChunkPrimer primer) {
-	//	ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, x, z, blocks, metadata, biomes, worldObj);
-		ChunkGeneratorEvent.ReplaceBiomeBlocks event = new ChunkGeneratorEvent.ReplaceBiomeBlocks((IChunkGenerator) this, chunkX, chunkZ, primer, this.worldObj);
+	public void replaceBlocksForBiome(int x, int z, BiomeGenBase[] biomes, ChunkPrimer primer) {
+		ChunkGeneratorEvent.ReplaceBiomeBlocks event = new ChunkGeneratorEvent.ReplaceBiomeBlocks(this, x, z, primer, this.worldObj);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY)
 			return;
@@ -322,7 +314,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 					}
 				} */
 				if ((biome == ModBiomes.volcanicDesert || biome == ModBiomes.desertSubCharredForest) && Math.abs(additionalNoise1[horIndex]) < 1) {
-					int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 32) - 1;
+					int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 32);
 					if (h > 0) {
 						primer.setBlockState(xInChunk, preHeightIndex + h, zInChunk, Blocks.air.getDefaultState());
 						for (int h2 = h - 1; h2 > h - 1 - (3 * (1 - Math.abs(additionalNoise1[horIndex]))); h2--) {
