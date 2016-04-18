@@ -57,15 +57,15 @@ public class ModBiomes {
 
 		// MUTATIONS
 
-		undergroundJungle.isMutation();
-		volcanicDesert.isMutation();
-		subterraneanSavannah.isMutation();
-		elysianFields.isMutation();
-		ulteriorOutback.isMutation();
-		fungalForest.isMutation();
-		submergedSwamp.isMutation();
+		//undergroundJungle.isMutation();
+		//volcanicDesert.isMutation();
+		//subterraneanSavannah.isMutation();
+		//elysianFields.isMutation();
+		//ulteriorOutback.isMutation();
+		//fungalForest.isMutation();
+		//submergedSwamp.isMutation();
 
-		fieldsSubForest.isMutation();
+		//fieldsSubForest.isMutation();
 		
 		System.out.println("undergroundJungleID: " + BiomeGenBase.getIdForBiome(undergroundJungle));
 		System.out.println("volcanicDesertID: " + BiomeGenBase.getIdForBiome(volcanicDesert));

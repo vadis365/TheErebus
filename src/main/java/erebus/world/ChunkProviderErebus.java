@@ -72,70 +72,65 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		caveGenerator = new MapGenErebusCaves();
 		ravineGenerator = new MapGenErebusRavine();
 	}
+	
+	public void generateTerrain(int x, int z, ChunkPrimer chunkPrimer) {
+        int i = 4;
+        int k = i + 1;
+        int l = 17;
+        int i1 = i + 1;
+        this.noiseArray = initializeNoiseField(this.noiseArray, x * i, 0, z * i, k, l, i1);
 
-	public void generateTerrain(int x, int z, ChunkPrimer primer) {
-		byte byte0 = 4;
-		int i = byte0 + 1;
-		byte byte2 = 17;
-		int j = byte0 + 1;
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+        for (int j1 = 0; j1 < i; ++j1) {
+            for (int k1 = 0; k1 < i; ++k1) {
+                for (int l1 = 0; l1 < 16; ++l1) {
+                    double d0 = 0.125D;
+                    double d1 = this.noiseArray[((j1 + 0) * i1 + k1 + 0) * l + l1 + 0];
+                    double d2 = this.noiseArray[((j1 + 0) * i1 + k1 + 1) * l + l1 + 0];
+                    double d3 = this.noiseArray[((j1 + 1) * i1 + k1 + 0) * l + l1 + 0];
+                    double d4 = this.noiseArray[((j1 + 1) * i1 + k1 + 1) * l + l1 + 0];
+                    double d5 = (this.noiseArray[((j1 + 0) * i1 + k1 + 0) * l + l1 + 1] - d1) * d0;
+                    double d6 = (this.noiseArray[((j1 + 0) * i1 + k1 + 1) * l + l1 + 1] - d2) * d0;
+                    double d7 = (this.noiseArray[((j1 + 1) * i1 + k1 + 0) * l + l1 + 1] - d3) * d0;
+                    double d8 = (this.noiseArray[((j1 + 1) * i1 + k1 + 1) * l + l1 + 1] - d4) * d0;
 
-		noiseArray = initializeNoiseField(noiseArray, x * byte0, 0, z * byte0, i, byte2, j);
+                    for (int i2 = 0; i2 < 8; ++i2) {
+                        double d9 = 0.25D;
+                        double d10 = d1;
+                        double d11 = d2;
+                        double d12 = (d3 - d1) * d9;
+                        double d13 = (d4 - d2) * d9;
 
-		for (int k = 0; k < byte0; k++)
-			for (int l = 0; l < byte0; l++)
-				for (int i1 = 0; i1 < 16; i1++) {
-					double d = 0.125D;
-					double d1 = noiseArray[((k + 0) * j + l + 0) * byte2 + i1 + 0];
-					double d2 = noiseArray[((k + 0) * j + l + 1) * byte2 + i1 + 0];
-					double d3 = noiseArray[((k + 1) * j + l + 0) * byte2 + i1 + 0];
-					double d4 = noiseArray[((k + 1) * j + l + 1) * byte2 + i1 + 0];
-					double d5 = (noiseArray[((k + 0) * j + l + 0) * byte2 + i1 + 1] - d1) * d;
-					double d6 = (noiseArray[((k + 0) * j + l + 1) * byte2 + i1 + 1] - d2) * d;
-					double d7 = (noiseArray[((k + 1) * j + l + 0) * byte2 + i1 + 1] - d3) * d;
-					double d8 = (noiseArray[((k + 1) * j + l + 1) * byte2 + i1 + 1] - d4) * d;
+                        for (int j2 = 0; j2 < 4; ++j2) {
+                            double d14 = 0.25D;
+                            double d15 = d10;
+                            double d16 = (d11 - d10) * d14;
 
-					for (int j1 = 0; j1 < 8; j1++) {
-						double d9 = 0.25D;
-						double d10 = d1;
-						double d11 = d2;
-						double d12 = (d3 - d1) * d9;
-						double d13 = (d4 - d2) * d9;
+                            for (int k2 = 0; k2 < 4; ++k2) {
+                                IBlockState iblockstate = null;
 
-						for (int k1 = 0; k1 < 4; k1++) {
-							int l1 = k1 + k * 4 << 11 | 0 + l * 4 << 7 | i1 * 8 + j1;
-							char c = '\200';
-							double d14 = 0.25D;
-							double d15 = d10;
-							double d16 = (d11 - d10) * d14;
-							
-							for (int i2 = 0; i2 < 4; i2++) {
-								IBlockState iblockstate = null;
-
-								if (d15 > 0.0D)
+                                if (d15 > 0.0D)
 									iblockstate = Blocks.stone.getDefaultState();
 
-								l1 += c;
-								 int k2 = k1 + k * 4;
-	                                int l2 = j1 + i1 * 8;
-	                                int i3 = i2 + l * 4;
-								primer.setBlockState(k2, l2, i3, iblockstate);
+                                int l2 = j2 + j1 * 4;
+                                int i3 = i2 + l1 * 8;
+                                int j3 = k2 + k1 * 4;
+                                chunkPrimer.setBlockState(l2, i3, j3, iblockstate);
+                                d15 += d16;
+                            }
 
-								
-								d15 += d16;
-							}
+                            d10 += d12;
+                            d11 += d13;
+                        }
 
-							d10 += d12;
-							d11 += d13;
-						}
-
-						d1 += d5;
-						d2 += d6;
-						d3 += d7;
-						d4 += d8;
-					}
-				}
-	}
+                        d1 += d5;
+                        d2 += d6;
+                        d3 += d7;
+                        d4 += d8;
+                    }
+                }
+            }
+        }
+    }
 
 	@Override
 	public Chunk provideChunk(int x, int z) {
@@ -176,7 +171,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		double oneOver512 = 1D / 512D;
 		double groundNoiseMp = 1D / 2048D;
 
-		for (int k = 0; k < sizeY; k++) {
+		for (int k = 0; k < sizeY; ++k) {
 			ad[k] = Math.cos(k * Math.PI * 6D / sizeY) * 2D;
 			double d2 = k;
 
@@ -189,8 +184,8 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 			}
 		}
 
-		for (int xx = 0; xx < sizeX; xx++)
-			for (int zz = 0; zz < sizeZ; zz++) {
+		for (int xx = 0; xx < sizeX; ++xx)
+			for (int zz = 0; zz < sizeZ; ++zz) {
 				double d3 = (noiseData4[j] + 256D) * oneOver512;
 
 				if (d3 > 1.0D)
@@ -224,7 +219,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 				d5 = d5 * sizeY * 0.0625D;
 				j++;
 
-				for (int yy = 0; yy < sizeY; yy++) {
+				for (int yy = 0; yy < sizeY; ++yy) {
 					double d6 = 0.0D;
 					double d7 = ad[yy];
 					double d8 = noiseData2[index] * groundNoiseMp;
@@ -256,7 +251,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 					}
 
 					noise[index] = d6;
-					index++;
+					++index;
 				}
 			}
 
@@ -279,9 +274,9 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		additionalNoise1 = perlinAdditional1.func_151599_a(additionalNoise1, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		additionalNoise2 = perlinAdditional2.func_151599_a(additionalNoise2, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
-		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
-			for (int zInChunk = 0; zInChunk < 16; ++zInChunk) {
-				int horIndex = zInChunk + xInChunk * 16;
+		for (int zInChunk = 0; zInChunk < 16; ++zInChunk)
+			for (int xInChunk = 0; xInChunk < 16; ++xInChunk) {
+				int horIndex = xInChunk + zInChunk * 16;
 				BiomeBaseErebus biome = (BiomeBaseErebus) biomes[horIndex];
 			//	float temperature = biome.getFloatTemperature(0, 0, 0);
 				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
@@ -290,7 +285,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 				IBlockState topBlock = biome.topBlock;
 				IBlockState fillerBlock = biome.fillerBlock;
 	
-				int preHeightIndex = (zInChunk * 16 + xInChunk) * 128;
+				int preHeightIndex = (xInChunk * 16 + zInChunk) * 128;
 
 			/*	if (biome == ModBiomes.submergedSwamp) {
 					if (additionalNoise1[horIndex] > 0) {
@@ -324,7 +319,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 				}
 
 				for (int yInChunk = 127; yInChunk >= 0; --yInChunk) {
-					int index = (zInChunk * 16 + xInChunk) * 128 + yInChunk;
+					int index = (xInChunk * 16 + zInChunk) * 128 + yInChunk;
 
 					if (yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))
 						primer.setBlockState(xInChunk, yInChunk, zInChunk, Blocks.bedrock.getDefaultState());
@@ -345,7 +340,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 								//} else 
 							//	if (yInChunk >= var5 + 4 && yInChunk <= var5 + 120) {
 									//topBlock = biome.topBlock;
-									primer.setBlockState(xInChunk, yInChunk + 1, zInChunk, biome.topBlock);
+									primer.setBlockState(xInChunk, yInChunk + 1, zInChunk, topBlock);
 								//	fillerBlock = biome.fillerBlock;
 								//}
 
