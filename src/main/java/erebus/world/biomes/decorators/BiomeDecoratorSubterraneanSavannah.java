@@ -1,25 +1,32 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenSavannaTree;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenSavannahRock;
+
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
-	@Override
-	protected void decorate() {
-	//	System.out.println("Subterranean Savannah Decorating");
-	}
-/*	private final WorldGenPonds genPonds = new WorldGenPonds();
-	private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
-	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
-	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
-	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
-	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
-	private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
 
-	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass, 1);
+	//private final WorldGenPonds genPonds = new WorldGenPonds();
+	//private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
+	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
+	//private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+	//private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
+	//private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
+	//private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
-	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
-	private final WorldGenerator genTreeBaobab = new WorldGenBaobabTree();
-
+	//private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
+	//private final WorldGenerator genTreeBaobab = new WorldGenBaobabTree();
+	
+	protected final BlockPos pos = new BlockPos(0, 0, 0);
+/*
 	@Override
 	public void populate() {
 
@@ -45,10 +52,10 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				}
 		}
 	}
-
+*/
 	@Override
 	public void decorate() {
-		xx = x + 16;
+	/*	xx = x + 16;
 		yy = 16;
 		zz = z + 16;
 
@@ -67,14 +74,14 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			for (attempt = 0; attempt < 4; attempt++)
 				if (genAmberGround.generate(world, rand, x + offsetXZ(), 10 + rand.nextInt(40), z + offsetXZ()))
 					break;
-
+*/
 		for (attempt = 0; attempt < 65; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genTreeAcacia.generate(world, rand, xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos.add(xx, yy, zz)))
+				genTreeAcacia.generate(world, rand, pos.add(xx, yy, zz).up());
 		}
 
 		if (rand.nextBoolean() && rand.nextBoolean()) {
@@ -82,10 +89,12 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			zz = z + offsetXZ();
 
 			for (yy = 100; yy > 20; yy--)
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-					genRocks.generate(world, rand, xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos.add(xx, yy, zz))) {
+					if(genRocks.generate(world, rand, pos.add(xx, yy, zz)))
+						break;
+				}
 		}
-
+/*
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
@@ -112,28 +121,23 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 				genRottenAcacia.generate(world, rand, xx, yy, zz);
 		}
-
-		for (attempt = 0; attempt < 180; attempt++) {
+*/
+		IBlockState tallGrassState = Blocks.tallgrass.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
+		for (attempt = 0; attempt < 35; attempt++) {
 			xx = x + offsetXZ();
-			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genGrass.generate(world, rand, xx, yy, zz);
-		}
-
-		for (attempt = 0; attempt < 40; attempt++) {
-			xx = x + offsetXZ();
-			yy = 20 + rand.nextInt(80);
-			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-				world.setBlock(xx, yy, zz, Blocks.double_plant, 2, 2);
-				world.setBlock(xx, yy + 1, zz, Blocks.double_plant, 10, 2);
-			}
+			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
+				if (checkSurface(SurfaceType.MIXED, pos.add(xx, yy, zz))) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.add(xx, yy, zz).up(2)))
+						Blocks.double_plant.placeAt(world, pos.add(xx, yy, zz).up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
+					else
+						world.setBlockState(pos.add(xx, yy, zz).up(), tallGrassState);
+					break;
+				}
 		}
 	}
-
+/*
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {

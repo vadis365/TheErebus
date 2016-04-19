@@ -1,17 +1,13 @@
 package erebus.world.biomes.decorators;
 
-import erebus.core.handler.configs.ConfigHandler;
+import java.util.Random;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.decoration.WorldGenRedGem;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.ChunkPrimer;
-
-import java.util.Random;
 
 public abstract class BiomeDecoratorBaseErebus {
 
