@@ -4,7 +4,7 @@ package erebus.world.biomes.decorators;
 public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 	@Override
 	protected void decorate() {
-		System.out.println("Volcanic Desert Decorating");
+	//	System.out.println("Volcanic Desert Decorating");
 	}
 /*	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
 	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.flowing_lava);

@@ -1,6 +1,7 @@
 package erebus.world.biomes.decorators.data;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 
 public enum SurfaceType {
@@ -9,16 +10,16 @@ public enum SurfaceType {
 	SAND,
 	MIXED;
 
-	public boolean matchBlock(Block block) {
+	public boolean matchBlock(IBlockState block) {
 		switch (this) {
 			case GRASS:
-				return block == Blocks.grass || block == Blocks.mycelium;
+				return block == Blocks.grass.getDefaultState()  || block == Blocks.mycelium.getDefaultState() ;
 			case DIRT:
-				return block == Blocks.dirt;
+				return block == Blocks.dirt.getDefaultState();
 			case SAND:
-				return block == Blocks.sand;
+				return block == Blocks.sand.getDefaultState();
 			case MIXED:
-				return block == Blocks.grass || block == Blocks.dirt || block == Blocks.sand;
+				return block == Blocks.grass.getDefaultState() || block == Blocks.dirt.getDefaultState() || block == Blocks.sand.getDefaultState();
 			default:
 				return false;
 		}

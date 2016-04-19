@@ -4,7 +4,7 @@ package erebus.world.biomes.decorators;
 public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	@Override
 	protected void decorate() {
-		System.out.println("Under Ground Jungle Decorating");
+	//	System.out.println("Under Ground Jungle Decorating");
 	}
 /*	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();

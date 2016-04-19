@@ -19,7 +19,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 	@Override
 	protected void decorate() {
-		System.out.println("Fungal Forest Decorating");
+		//System.out.println("Fungal Forest Decorating");
 	}
 	
 /*	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);

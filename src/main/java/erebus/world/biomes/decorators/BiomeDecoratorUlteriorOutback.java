@@ -4,7 +4,7 @@ package erebus.world.biomes.decorators;
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 	@Override
 	protected void decorate() {
-		System.out.println("Ulterior Outback Decorating");
+	//	System.out.println("Ulterior Outback Decorating");
 	}
 /*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 

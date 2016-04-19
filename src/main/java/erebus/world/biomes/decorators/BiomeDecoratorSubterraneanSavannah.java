@@ -4,7 +4,7 @@ package erebus.world.biomes.decorators;
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
 	@Override
 	protected void decorate() {
-		System.out.println("Subterranean Savannah Decorating");
+	//	System.out.println("Subterranean Savannah Decorating");
 	}
 /*	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);

@@ -17,7 +17,7 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0xC6FF54);
 		setFog(213, 228, 127);
-		setWeight(20);
+		setWeight(2000);
 /*
 		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 10).setGroupSize(1, 3));

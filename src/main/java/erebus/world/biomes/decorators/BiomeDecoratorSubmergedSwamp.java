@@ -4,7 +4,7 @@ package erebus.world.biomes.decorators;
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	@Override
 	protected void decorate() {
-		System.out.println("Submerged Swamp Decorating");
+	//	System.out.println("Submerged Swamp Decorating");
 	}
 /*	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();

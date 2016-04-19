@@ -1,11 +1,15 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import erebus.world.biomes.decorators.data.SurfaceType;
+
 
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
-	@Override
-	protected void decorate() {
-		System.out.println("Elysian Fields Decorating");
-	}
+	protected final BlockPos pos = new BlockPos(0, 0, 0);
 /*	protected final WorldGenPonds genPonds = new WorldGenPonds();
 	protected final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
 
@@ -32,10 +36,11 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 				}
 			}
 	}
-
+*/
 	@Override
 	protected void decorate() {
-		for (attempt = 0; attempt < 105; attempt++) {
+		//System.out.println("Elysian Fields Decorating");
+	/*	for (attempt = 0; attempt < 105; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 			yy = 20 + rand.nextInt(80);
@@ -66,23 +71,22 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 						break;
 					}
 			}
-
+*/
+		IBlockState tallGrassState = Blocks.tallgrass.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
 		for (attempt = 0; attempt < 35; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
 			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
-				if (checkSurface(SurfaceType.MIXED, xx, yy, zz)) {
-					if (rand.nextInt(10) == 0 && world.isAirBlock(xx, yy + 1, zz)) {
-						world.setBlock(xx, yy, zz, Blocks.double_plant, 2, 2);
-						world.setBlock(xx, yy + 1, zz, Blocks.double_plant, 10, 2);
-					} else
-						world.setBlock(xx, yy, zz, Blocks.tallgrass, 1, 2);
-
+				if (checkSurface(SurfaceType.MIXED, pos.add(xx, yy, zz))) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.add(xx, yy, zz).up(2)))
+						Blocks.double_plant.placeAt(world, pos.add(xx, yy, zz).up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
+					else
+						world.setBlockState(pos.add(xx, yy, zz).up(), tallGrassState);
 					break;
 				}
 		}
-
+/*
 		for (attempt = 0; attempt < 12; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
@@ -141,9 +145,9 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 				world.setBlock(xx, yy, zz, ModBlocks.waterFlower, 0, 2);
 				world.setBlock(xx, yy + 1, zz, ModBlocks.waterFlower, 8, 2);
 			}
-		}
+		}*/
 	}
-
+/*
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {

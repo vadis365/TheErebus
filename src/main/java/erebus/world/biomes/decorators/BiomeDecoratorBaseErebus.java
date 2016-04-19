@@ -6,7 +6,10 @@ import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRedGem;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.ChunkPrimer;
 
 import java.util.Random;
 
@@ -80,8 +83,9 @@ public abstract class BiomeDecoratorBaseErebus {
 		return rand.nextInt(16) + 8;
 	}
 
-	protected boolean checkSurface(SurfaceType surfaceType, int x, int y, int z) {
-		return true; //surfaceType.matchBlock(world.getBlock(x, y - 1, z)) && world.isAirBlock(x, y, z);
+	protected boolean checkSurface(SurfaceType surfaceType, BlockPos pos) {
+		//System.out.println("Surface Checked at "+ pos);
+		return surfaceType.matchBlock(world.getBlockState(pos)) && world.isAirBlock(pos.up());
 	}
 
 	public static class BiomeDecoratorEmpty extends BiomeDecoratorBaseErebus {
