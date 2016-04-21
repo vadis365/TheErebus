@@ -268,13 +268,14 @@ public class ClientProxy extends CommonProxy {
 	 @Override
 	    public void registerDefaultBlockItemRenderer(Block block) {
 		 String name = block.getRegistryName().toString();
+		 String itemName = name.substring(name.lastIndexOf(":") + 1, name.length());
 	        System.out.println("GIBBERISH FOR TESTING: " + block + " STRING NAME: " + name);
 	      //  ModelLoader.registerItemVariants(Item.getItemFromBlock(block), new ModelResourceLocation(name, "inventory"));
 	        //FIXME: Uhm yeah, ModelLoader#registerItemVariants (the proper way afaik?) doesn't seem to work, so I've also added this here
 	      //  Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), x, new ModelResourceLocation(name, "inventory"));
 	            
 	        if (createJSONFile)
-	            createJSONForBlock(name);
+	            createJSONForBlock(itemName);
 	    }
 	 
 /*
@@ -334,7 +335,7 @@ public class ClientProxy extends CommonProxy {
 */
 	    private void createJSONForBlock(String blockName) {
 	        String path = "models/block/" + blockName + ".json";
-
+	        System.out.println("SAVING HERE: " + path);
 	        String renderType = "block/cube_all";
 	        File file = new File(path);
 	        try {
