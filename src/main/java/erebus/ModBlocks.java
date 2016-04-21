@@ -22,7 +22,7 @@ public class ModBlocks {
 	public static final Block portal = new ErebusPortal();
 
 	// TERRAIN
-	public static final Block umberstone = new BlockUmberstone();
+	 public static final Block umberstone = new BlockUmberstone();
 	
 /*	public static final Block redGem = new BlockRedGem();
 	public static final Block amber = new BlockAmber();
@@ -240,7 +240,7 @@ public class ModBlocks {
 
 		registerBlocks();
 		for(Block block : BLOCKS) {
-			System.out.println("REGISTERING EREBUS BLOCK: " + block);
+			System.out.println("REGISTERING RENDERERS FOR: " + block);
 			Erebus.proxy.registerDefaultBlockItemRenderer(block);
 		}
 	//	registerProperties();
@@ -278,8 +278,12 @@ public class ModBlocks {
 	}
 
 	private static void registerBlock(Block block) {
+		if(block !=null) {
 		BLOCKS.add(block);
-			GameRegistry.register(block);
+		GameRegistry.register(block);
+		System.out.println("REGISTERING EREBUS BLOCK: " + block);
+		}
+		
 	}
 /*
 	private static void registerProperties() {

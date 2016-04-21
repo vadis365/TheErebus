@@ -3,17 +3,15 @@ package erebus.core.proxy;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import erebus.block.terrain.IMetaBlockName;
 
 public class ClientProxy extends CommonProxy {
  /*
@@ -264,18 +262,20 @@ public class ClientProxy extends CommonProxy {
 	// A LITTLE CODE BORROWED FROM BETWEENLANDS - THANKS GUYS ;)
 	
 	//Please turn this off again after using
-    private static final boolean createJSONFile = true;
+    private static final boolean createJSONFile = false;
 	 @Override
 	    public void registerDefaultBlockItemRenderer(Block block) {
 		 String name = block.getRegistryName().toString();
 		 String itemName = name.substring(name.lastIndexOf(":") + 1, name.length());
-	        System.out.println("GIBBERISH FOR TESTING: " + block + " STRING NAME: " + name);
-	      //  ModelLoader.registerItemVariants(Item.getItemFromBlock(block), new ModelResourceLocation(name, "inventory"));
+		 System.out.println("GIBBERISH FOR TESTING: " + block + " STRING NAME: " + name);
+		 if(!name.isEmpty()) {
+		 if(block instanceof IMetaBlockName)
+			 ModelLoader.registerItemVariants(Item.getItemFromBlock(block), new ModelResourceLocation(name, "inventory"));
 	        //FIXME: Uhm yeah, ModelLoader#registerItemVariants (the proper way afaik?) doesn't seem to work, so I've also added this here
-	      //  Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), x, new ModelResourceLocation(name, "inventory"));
-	            
-	        if (createJSONFile)
-	            createJSONForBlock(itemName);
+		 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(name, "inventory"));
+		 }
+	      //  if (createJSONFile)
+	      //      createJSONForBlock(itemName);
 	    }
 	 
 /*
