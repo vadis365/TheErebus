@@ -19,7 +19,8 @@ public class ErebusPortal extends Block {
 		super(Material.portal);
 		setLightLevel(1.0F);
 		setBlockUnbreakable();
-		setUnlocalizedName("erebus.portal");
+		setRegistryName("portal");
+		setUnlocalizedName(getRegistryName().toString());
 		setCreativeTab(CreativeTabs.tabTools);
 		//setBlockTextureName("erebus:portal");
 	}

@@ -3,9 +3,11 @@ package erebus.core.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -296,5 +298,15 @@ public class CommonProxy implements IGuiHandler {
     
 	public World getClientWorld() {
 		return null;
+	}
+
+	public void registerDefaultBlockItemRenderer(Block block) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void registerDefaultItemRenderer(Item item) {
+		// TODO Auto-generated method stub
+		
 	}
 }

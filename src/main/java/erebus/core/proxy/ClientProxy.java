@@ -1,247 +1,22 @@
 package erebus.core.proxy;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityBreakingFX;
-import net.minecraft.client.particle.EntityCloudFX;
-import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.client.particle.EntityHeartFX;
-import net.minecraft.client.particle.EntityLavaFX;
-import net.minecraft.client.particle.EntityPortalFX;
-import net.minecraft.client.particle.EntitySmokeFX;
-import net.minecraft.client.particle.EntitySpellParticleFX;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.client.fx.EntityBubbleGasFX;
-import erebus.client.fx.EntityRepellentFX;
-import erebus.client.fx.EntitySonicFX;
-import erebus.client.model.entity.ModelAnimatedBlock;
-import erebus.client.model.entity.ModelAnimatedChest;
-import erebus.client.model.entity.ModelAntlion;
-import erebus.client.model.entity.ModelChameleonTick;
-import erebus.client.model.entity.ModelCicada;
-import erebus.client.model.entity.ModelFireAnt;
-import erebus.client.model.entity.ModelFireAntSoldier;
-import erebus.client.model.entity.ModelGlowWorm;
-import erebus.client.model.entity.ModelJumpingSpider;
-import erebus.client.model.entity.ModelLavaWebSpider;
-import erebus.client.model.entity.ModelPrayingMantis;
-import erebus.client.model.entity.ModelRhinoBeetle;
-import erebus.client.model.entity.ModelScytodes;
-import erebus.client.model.entity.ModelUmberGolem;
-import erebus.client.model.entity.ModelWheatWeevil;
-import erebus.client.model.entity.ModelWoodlouse;
-import erebus.client.render.entity.RenderAnimatedBlock;
-import erebus.client.render.entity.RenderAnimatedChest;
-import erebus.client.render.entity.RenderAntlion;
-import erebus.client.render.entity.RenderAntlionBoss;
-import erebus.client.render.entity.RenderAntlionMiniBoss;
-import erebus.client.render.entity.RenderBeetle;
-import erebus.client.render.entity.RenderBeetleLarva;
-import erebus.client.render.entity.RenderBlackAnt;
-import erebus.client.render.entity.RenderBlackWidow;
-import erebus.client.render.entity.RenderBloodSnail;
-import erebus.client.render.entity.RenderBombardierBeetle;
-import erebus.client.render.entity.RenderBotFly;
-import erebus.client.render.entity.RenderBotFlyLarva;
-import erebus.client.render.entity.RenderCentipede;
-import erebus.client.render.entity.RenderChameleonTick;
-import erebus.client.render.entity.RenderCicada;
-import erebus.client.render.entity.RenderCrushling;
-import erebus.client.render.entity.RenderCrushroom;
-import erebus.client.render.entity.RenderDragonfly;
-import erebus.client.render.entity.RenderEntityTarantulaEgg;
-import erebus.client.render.entity.RenderErebusLightningBolt;
-import erebus.client.render.entity.RenderExtractedBlock;
-import erebus.client.render.entity.RenderFireAnt;
-import erebus.client.render.entity.RenderFireAntSoldier;
-import erebus.client.render.entity.RenderFly;
-import erebus.client.render.entity.RenderGasVent;
-import erebus.client.render.entity.RenderGlowWorm;
-import erebus.client.render.entity.RenderGooBall;
-import erebus.client.render.entity.RenderGrasshopper;
-import erebus.client.render.entity.RenderJumpingSpider;
-import erebus.client.render.entity.RenderLavaWebSpider;
-import erebus.client.render.entity.RenderLeech;
-import erebus.client.render.entity.RenderLocust;
-import erebus.client.render.entity.RenderMagmaCrawler;
-import erebus.client.render.entity.RenderMidgeSwarm;
-import erebus.client.render.entity.RenderMoneySpider;
-import erebus.client.render.entity.RenderMosquito;
-import erebus.client.render.entity.RenderMoth;
-import erebus.client.render.entity.RenderMucusBombPrimed;
-import erebus.client.render.entity.RenderPoisonJet;
-import erebus.client.render.entity.RenderPondSkater;
-import erebus.client.render.entity.RenderPrayingMantis;
-import erebus.client.render.entity.RenderPunchroom;
-import erebus.client.render.entity.RenderRhinoBeetle;
-import erebus.client.render.entity.RenderScorpion;
-import erebus.client.render.entity.RenderScytodes;
-import erebus.client.render.entity.RenderSnapper;
-import erebus.client.render.entity.RenderSolifuge;
-import erebus.client.render.entity.RenderSolifugeSmall;
-import erebus.client.render.entity.RenderSporeBall;
-import erebus.client.render.entity.RenderTarantula;
-import erebus.client.render.entity.RenderTarantulaBaby;
-import erebus.client.render.entity.RenderTarantulaMiniboss;
-import erebus.client.render.entity.RenderThrownSand;
-import erebus.client.render.entity.RenderTitanBeetle;
-import erebus.client.render.entity.RenderUmberGolem;
-import erebus.client.render.entity.RenderUmberGolemDungeonType;
-import erebus.client.render.entity.RenderVelvetWorm;
-import erebus.client.render.entity.RenderWasp;
-import erebus.client.render.entity.RenderWebSling;
-import erebus.client.render.entity.RenderWheatWeevil;
-import erebus.client.render.entity.RenderWisp;
-import erebus.client.render.entity.RenderWoodlouse;
-import erebus.client.render.entity.RenderWorkerBee;
-import erebus.client.render.entity.RenderZombieAnt;
-import erebus.client.render.init.BlockRenderingRegistry;
-import erebus.client.render.init.ItemRenderingRegistry;
-import erebus.client.render.item.BambooBridgeItemRenderer;
-import erebus.client.render.item.BambooCrateItemRenderer;
-import erebus.client.render.item.BambooPoleItemRenderer;
-import erebus.client.render.item.BambooTorchItemRenderer;
-import erebus.client.render.item.ExtenderThingyItemRenderer;
-import erebus.client.render.item.ItemAltarBaseRenderer;
-import erebus.client.render.item.ItemAntlionEggRenderer;
-import erebus.client.render.item.ItemBoneBlockRenderer;
-import erebus.client.render.item.ItemGlowingJarRenderer;
-import erebus.client.render.item.ItemOfferingAltarRenderer;
-import erebus.client.render.item.ItemPetrifiedWoodChestRenderer;
-import erebus.client.render.item.ItemSmoothieMakerRenderer;
-import erebus.client.render.item.ItemTarantulaEggRenderer;
-import erebus.client.render.item.ItemUmberFurnaceRenderer;
-import erebus.client.render.item.ItemUmberGolemStatueRenderer;
-import erebus.client.render.item.PortalActivatorRenderer;
-import erebus.client.render.item.ScorpionPincerItemRenderer;
-import erebus.client.render.item.WandOfAnimationItemRenderer;
-import erebus.client.render.item.WarHammerItemRenderer;
-import erebus.client.render.item.WaspDaggerItemRenderer;
-import erebus.client.render.item.WaspSwordItemRenderer;
-import erebus.client.render.item.WebSlingerItemRenderer;
-import erebus.client.render.item.WoodlouseBallItemRenderer;
-import erebus.client.render.tileentity.TileEntityAntlionEggRenderer;
-import erebus.client.render.tileentity.TileEntityBambooBridgeRenderer;
-import erebus.client.render.tileentity.TileEntityBambooPoleRenderer;
-import erebus.client.render.tileentity.TileEntityBoneBlockRenderer;
-import erebus.client.render.tileentity.TileEntityErebusAltarHealingRenderer;
-import erebus.client.render.tileentity.TileEntityErebusAltarLightningRenderer;
-import erebus.client.render.tileentity.TileEntityErebusAltarRenderer;
-import erebus.client.render.tileentity.TileEntityErebusAltarRepairRenderer;
-import erebus.client.render.tileentity.TileEntityErebusAltarXPRenderer;
-import erebus.client.render.tileentity.TileEntityExtenderThingyRenderer;
-import erebus.client.render.tileentity.TileEntityGaeanKeystoneRenderer;
-import erebus.client.render.tileentity.TileEntityGlowGemRenderer;
-import erebus.client.render.tileentity.TileEntityGlowingJarRenderer;
-import erebus.client.render.tileentity.TileEntityLadderRenderer;
-import erebus.client.render.tileentity.TileEntityOfferingAltarRenderer;
-import erebus.client.render.tileentity.TileEntityPetrifiedWoodChestRenderer;
-import erebus.client.render.tileentity.TileEntityRenderBambooCrate;
-import erebus.client.render.tileentity.TileEntitySmoothieMakerRenderer;
-import erebus.client.render.tileentity.TileEntityTarantulaEggRenderer;
-import erebus.client.render.tileentity.TileEntityUmberGolemStatueRenderer;
-import erebus.core.handler.GogglesClientTickHandler;
-import erebus.core.handler.KeyBindingHandler;
-import erebus.entity.EntityAnimatedBambooCrate;
-import erebus.entity.EntityAnimatedBlock;
-import erebus.entity.EntityAnimatedChest;
-import erebus.entity.EntityAntlion;
-import erebus.entity.EntityAntlionBoss;
-import erebus.entity.EntityAntlionMiniBoss;
-import erebus.entity.EntityBeetle;
-import erebus.entity.EntityBeetleLarva;
-import erebus.entity.EntityBlackAnt;
-import erebus.entity.EntityBlackWidow;
-import erebus.entity.EntityBloodSnail;
-import erebus.entity.EntityBombardierBeetle;
-import erebus.entity.EntityBotFly;
-import erebus.entity.EntityBotFlyLarva;
-import erebus.entity.EntityCentipede;
-import erebus.entity.EntityChameleonTick;
-import erebus.entity.EntityCicada;
-import erebus.entity.EntityCrushling;
-import erebus.entity.EntityCrushroom;
-import erebus.entity.EntityDragonfly;
-import erebus.entity.EntityExtractedBlock;
-import erebus.entity.EntityFireAnt;
-import erebus.entity.EntityFireAntSoldier;
-import erebus.entity.EntityFly;
-import erebus.entity.EntityGasVent;
-import erebus.entity.EntityGlowWorm;
-import erebus.entity.EntityGooBall;
-import erebus.entity.EntityGrasshopper;
-import erebus.entity.EntityJumpingSpider;
-import erebus.entity.EntityLavaWebSpider;
-import erebus.entity.EntityLeech;
-import erebus.entity.EntityLocust;
-import erebus.entity.EntityMagmaCrawler;
-import erebus.entity.EntityMidgeSwarm;
-import erebus.entity.EntityMoneySpider;
-import erebus.entity.EntityMosquito;
-import erebus.entity.EntityMoth;
-import erebus.entity.EntityMucusBombPrimed;
-import erebus.entity.EntityPoisonJet;
-import erebus.entity.EntityPondSkater;
-import erebus.entity.EntityPrayingMantis;
-import erebus.entity.EntityPunchroom;
-import erebus.entity.EntityRhinoBeetle;
-import erebus.entity.EntityScorpion;
-import erebus.entity.EntityScytodes;
-import erebus.entity.EntitySnapper;
-import erebus.entity.EntitySolifuge;
-import erebus.entity.EntitySolifugeSmall;
-import erebus.entity.EntitySporeBall;
-import erebus.entity.EntityTarantula;
-import erebus.entity.EntityTarantulaBaby;
-import erebus.entity.EntityTarantulaEgg;
-import erebus.entity.EntityTarantulaMiniboss;
-import erebus.entity.EntityThrownSand;
-import erebus.entity.EntityTitanBeetle;
-import erebus.entity.EntityUmberGolem;
-import erebus.entity.EntityUmberGolemDungeonTypes;
-import erebus.entity.EntityVelvetWorm;
-import erebus.entity.EntityWasp;
-import erebus.entity.EntityWaspDagger;
-import erebus.entity.EntityWebSling;
-import erebus.entity.EntityWheatWeevil;
-import erebus.entity.EntityWisp;
-import erebus.entity.EntityWoodlouse;
-import erebus.entity.EntityWoodlouseBall;
-import erebus.entity.EntityWorkerBee;
-import erebus.entity.EntityZombieAnt;
-import erebus.entity.effect.EntityErebusLightningBolt;
-import erebus.tileentity.TileEntityAntlionEgg;
-import erebus.tileentity.TileEntityBambooBridge;
-import erebus.tileentity.TileEntityBambooCrate;
-import erebus.tileentity.TileEntityBambooPole;
-import erebus.tileentity.TileEntityBones;
-import erebus.tileentity.TileEntityErebusAltar;
-import erebus.tileentity.TileEntityErebusAltarHealing;
-import erebus.tileentity.TileEntityErebusAltarLightning;
-import erebus.tileentity.TileEntityErebusAltarRepair;
-import erebus.tileentity.TileEntityErebusAltarXP;
-import erebus.tileentity.TileEntityExtenderThingy;
-import erebus.tileentity.TileEntityGaeanKeystone;
-import erebus.tileentity.TileEntityGlowGem;
-import erebus.tileentity.TileEntityGlowingJar;
-import erebus.tileentity.TileEntityLadder;
-import erebus.tileentity.TileEntityOfferingAltar;
-import erebus.tileentity.TileEntityPetrifiedWoodChest;
-import erebus.tileentity.TileEntitySmoothieMaker;
-import erebus.tileentity.TileEntityTarantulaEgg;
-import erebus.tileentity.TileEntityUmberGolemStatue;
+import net.minecraftforge.client.model.ModelLoader;
 
 public class ClientProxy extends CommonProxy {
-
+ /*
 	public enum BlockRenderIDs {
 		BAMBOO_CROP,
 		HOLLOW_LOG,
@@ -483,7 +258,117 @@ public class ClientProxy extends CommonProxy {
 
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
-	}
+	} */
+	//Please turn this off again after using
+	
+	// A LITTLE CODE BORROWED FROM BETWEENLANDS - THANKS GUYS ;)
+	
+	//Please turn this off again after using
+    private static final boolean createJSONFile = true;
+	 @Override
+	    public void registerDefaultBlockItemRenderer(Block block) {
+		 String name = block.getRegistryName().toString();
+	        System.out.println("GIBBERISH FOR TESTING: " + block + " STRING NAME: " + name);
+	      //  ModelLoader.registerItemVariants(Item.getItemFromBlock(block), new ModelResourceLocation(name, "inventory"));
+	        //FIXME: Uhm yeah, ModelLoader#registerItemVariants (the proper way afaik?) doesn't seem to work, so I've also added this here
+	      //  Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), x, new ModelResourceLocation(name, "inventory"));
+	            
+	        if (createJSONFile)
+	            createJSONForBlock(name);
+	    }
+	 
+/*
+	    @Override
+	    public void registerDefaultItemRenderer(Item item) {
+	        List<ItemStack> list = new ArrayList<>();
+	        item.getSubItems(item, null, list);
+	        if (list.size() > 0) {
+	            for (ItemStack itemStack : list) {
+	                String name = item.getUnlocalizedName(itemStack);
+	                String itemName = name.substring(name.lastIndexOf(".") + 1, name.length());
+	                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, itemStack.getItemDamage(), new ModelResourceLocation(ModInfo.ASSETS_PREFIX + itemName, "inventory"));
+	                ModelLoader.setCustomModelResourceLocation(item, itemStack.getItemDamage(), new ModelResourceLocation(ModInfo.ASSETS_PREFIX + itemName, "inventory"));
+	                if (ConfigHandler.debug && createJSONFile)
+	                    createJSONForItem(item, itemStack.getItemDamage(), itemName);
+	            }
+	        } else {
+	            String name = item.getUnlocalizedName();
+	            String itemName = name.substring(name.lastIndexOf(".") + 1, name.length());
+	            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(ModInfo.ASSETS_PREFIX + itemName, "inventory"));
+	            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(ModInfo.ASSETS_PREFIX + itemName, "inventory"));
+	            if (ConfigHandler.debug && createJSONFile)
+	                createJSONForItem(item, 0, itemName);
+	        }
+	    }
+
+
+	    private void createJSONForItem(Item item, int meta, String itemName) {
+	        String location;
+	        if (item instanceof ICustomResourceLocationItem)
+	            location = ((ICustomResourceLocationItem) item).getCustomResourceLocation(meta);
+	        else
+	            location = itemName;
+	        String path = "models/item/" + itemName + ".json";
+
+	        String renderType;
+	        if (item instanceof ICustomItemRenderType)
+	            renderType = ((ICustomItemRenderType) item).getCustomRenderType(meta);
+	        else
+	            renderType = "item/generated";
+	        File file = new File(path);
+	        try {
+	            if (file.createNewFile()) {
+	                PrintWriter writer = new PrintWriter(file);
+	                writer.println("{");
+	                writer.println("  \"parent\": \"" + renderType + "\",\n" +
+	                        "   \"textures\": {\n" +
+	                        "     \"layer0\": \"thebetweenlands:items/" + location + "\"\n" +
+	                        "   }");
+	                writer.println("}");
+	                writer.close();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+*/
+	    private void createJSONForBlock(String blockName) {
+	        String path = "models/block/" + blockName + ".json";
+
+	        String renderType = "block/cube_all";
+	        File file = new File(path);
+	        try {
+	            if (file.createNewFile()) {
+	                PrintWriter writer = new PrintWriter(file);
+	                writer.println("{");
+	                writer.println("  \"parent\": \"" + renderType + "\",\n" +
+	                        "   \"textures\": {\n" +
+	                        "     \"all\": \"erebus:blocks/" + blockName + "\"\n" +
+	                        "   }");
+	                writer.println("}");
+	                writer.close();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        path = "models/item/" + blockName + ".json";
+
+	        renderType = "erebus:block/" + blockName;
+	        file = new File(path);
+	        try {
+	            if (file.createNewFile()) {
+	                PrintWriter writer = new PrintWriter(file);
+	                writer.println("{");
+	                writer.println("  \"parent\": \"" + renderType);
+	                writer.println("}");
+	                writer.close();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
 
 	@Override
 	public World getClientWorld() {

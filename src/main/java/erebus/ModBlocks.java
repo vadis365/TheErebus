@@ -5,9 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import erebus.block.ErebusPortal;
+import erebus.block.terrain.BlockUmberstone;
 
 public class ModBlocks {
 
@@ -16,10 +20,11 @@ public class ModBlocks {
 
 	// PORTAL
 	public static final Block portal = new ErebusPortal();
-/*
+
 	// TERRAIN
-	public static final Block umberstone = new BlockStone();
-	public static final Block redGem = new BlockRedGem();
+	public static final Block umberstone = new BlockUmberstone();
+	
+/*	public static final Block redGem = new BlockRedGem();
 	public static final Block amber = new BlockAmber();
 	public static final Block quickSand = new BlockQuickSand();
 	public static final Block ghostSand = new BlockGhostSand();
@@ -210,11 +215,34 @@ public class ModBlocks {
 	public static final Block tarantulaEgg = new BlockTarantulaEgg();
 	public static final Block antlionEgg = new BlockAntlionEgg();
 */
+	
+	private static void registerBlocksNoWorky() {
+		try {
+			for(Field field : ModBlocks.class.getClass().getDeclaredFields()) {
+				if(field.getType().isAssignableFrom(Block.class)) {
+					Block block = (Block) field.get(ModBlocks.class);
+					registerBlock(block);
+
+					if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+						if(block.getCreativeTabToDisplayOn() == null)
+							block.setCreativeTab(ModTabs.blocks);
+					}
+				}
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	public static void init() {
 	//	initBlocks();
 	//	EnumWood.initBlocks();
 
 		registerBlocks();
+		for(Block block : BLOCKS) {
+			System.out.println("REGISTERING EREBUS BLOCK: " + block);
+			Erebus.proxy.registerDefaultBlockItemRenderer(block);
+		}
 	//	registerProperties();
 	}
 /*
@@ -237,8 +265,12 @@ public class ModBlocks {
 				if (obj instanceof Block)
 					registerBlock((Block) obj);
 				else if (obj instanceof Block[])
-					for (Block block : (Block[]) obj)
+					for (Block block : (Block[]) obj) {
 						registerBlock(block);
+				if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+					if(block.getCreativeTabToDisplayOn() == null)
+						block.setCreativeTab(CreativeTabs.tabBlock);
+					}
 			}
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
@@ -247,13 +279,7 @@ public class ModBlocks {
 
 	private static void registerBlock(Block block) {
 		BLOCKS.add(block);
-		String name = block.getUnlocalizedName();
-		String[] strings = name.split("\\.");
-
-		if (block instanceof ISubBlocksBlock)
-			GameRegistry.registerBlock(block, ((ISubBlocksBlock) block).getItemBlockClass(), strings[strings.length - 1]);
-		else
-			GameRegistry.registerBlock(block, strings[strings.length - 1]);
+			GameRegistry.register(block);
 	}
 /*
 	private static void registerProperties() {

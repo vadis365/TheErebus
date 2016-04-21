@@ -11,7 +11,7 @@ public class ModTabs {
 			return Item.getItemFromBlock(ModBlocks.umberstone);
 		}
 	};
-
+/*
 	public static CreativeTabs items = new CreativeTabs("erebus.item") {
 		@Override
 		public Item getTabIconItem() {
@@ -38,5 +38,5 @@ public class ModTabs {
 		public Item getTabIconItem() {
 			return Item.getItemFromBlock(ModBlocks.dutchCap);
 		}
-	};
+	};*/
 }
