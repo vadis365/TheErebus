@@ -3,7 +3,6 @@ package erebus;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -75,6 +74,7 @@ public class Erebus {
 	//	proxy.registerRenderInformation();
 
 	//	PacketPipeline.initializePipeline();
+		Erebus.proxy.registerBlockRenderer();
 		ModBiomes.init();
 	//	RecipeHandler.init();
 	//	ErebusRecipesHandler.init();

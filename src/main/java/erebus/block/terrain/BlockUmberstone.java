@@ -23,9 +23,9 @@ public class BlockUmberstone extends Block implements IMetaBlockName {
 		setHardness(1.5F);
 		setResistance(10.0F);
 		setHarvestLevel("pickaxe", 0);
-		setCreativeTab(ModTabs.blocks);
 		setRegistryName("umberstone");
 		setUnlocalizedName(getRegistryName().toString());
+		setCreativeTab(ModTabs.blocks);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.UMBER_STONE));
 	}
 	@Override

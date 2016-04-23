@@ -9,6 +9,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModBiomes;
+import erebus.ModBlocks;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.loot.IWeightProvider;
@@ -107,7 +108,7 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	}
 
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
-		return block == Blocks.stone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? Blocks.air : block;
+		return block == ModBlocks.umberstone || block == topBlock || block == fillerBlock || block == Blocks.sandstone ? Blocks.air : block;
 	}
 
 	/**

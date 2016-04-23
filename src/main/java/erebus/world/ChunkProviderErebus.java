@@ -23,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import erebus.ModBiomes;
+import erebus.ModBlocks;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.structure.MapGenErebusCaves;
 import erebus.world.structure.MapGenErebusRavine;
@@ -109,7 +110,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
                                 IBlockState iblockstate = null;
 
                                 if (d15 > 0.0D)
-									iblockstate = Blocks.stone.getDefaultState();
+									iblockstate = ModBlocks.umberstone.getDefaultState();
 
                                 int l2 = j2 + j1 * 4;
                                 int i3 = i2 + l1 * 8;
@@ -331,7 +332,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 						if (iblockstate2.getBlock().getMaterial(iblockstate2) == Material.air) {
 							var13 = -1;
 						}
-						else if (iblockstate2.getBlock().getDefaultState() == Blocks.stone.getDefaultState()) {
+						else if (iblockstate2.getBlock().getDefaultState() == ModBlocks.umberstone.getDefaultState()) {
 							if (var13 == -1) {
 								//if (var12 <= 0) {
 								//	topBlock = Blocks.air.getDefaultState();

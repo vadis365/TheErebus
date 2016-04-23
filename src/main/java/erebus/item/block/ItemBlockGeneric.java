@@ -22,6 +22,6 @@ public class ItemBlockGeneric extends ItemBlock {
 	}
 
 	public Block getBlock() {
-		return field_150939_a;
+		return this.block;
 	}
 }

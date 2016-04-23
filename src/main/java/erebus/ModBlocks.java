@@ -5,13 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 import erebus.block.ErebusPortal;
 import erebus.block.terrain.BlockUmberstone;
+import erebus.block.terrain.IMetaBlockName;
+import erebus.block.terrain.ItemBlockMeta;
 
 public class ModBlocks {
 
@@ -215,34 +214,13 @@ public class ModBlocks {
 	public static final Block tarantulaEgg = new BlockTarantulaEgg();
 	public static final Block antlionEgg = new BlockAntlionEgg();
 */
-	
-	private static void registerBlocksNoWorky() {
-		try {
-			for(Field field : ModBlocks.class.getClass().getDeclaredFields()) {
-				if(field.getType().isAssignableFrom(Block.class)) {
-					Block block = (Block) field.get(ModBlocks.class);
-					registerBlock(block);
-
-					if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-						if(block.getCreativeTabToDisplayOn() == null)
-							block.setCreativeTab(ModTabs.blocks);
-					}
-				}
-			}
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public static void init() {
 	//	initBlocks();
 	//	EnumWood.initBlocks();
-
 		registerBlocks();
-		for(Block block : BLOCKS) {
-			System.out.println("REGISTERING RENDERERS FOR: " + block);
-			Erebus.proxy.registerDefaultBlockItemRenderer(block);
-		}
+		Erebus.proxy.registerResources();
+	//	Erebus.proxy.registerBlockRenderer();
 	//	registerProperties();
 	}
 /*
@@ -267,9 +245,6 @@ public class ModBlocks {
 				else if (obj instanceof Block[])
 					for (Block block : (Block[]) obj) {
 						registerBlock(block);
-				if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
-					if(block.getCreativeTabToDisplayOn() == null)
-						block.setCreativeTab(CreativeTabs.tabBlock);
 					}
 			}
 		} catch (IllegalAccessException e) {
@@ -278,12 +253,16 @@ public class ModBlocks {
 	}
 
 	private static void registerBlock(Block block) {
-		if(block !=null) {
 		BLOCKS.add(block);
 		GameRegistry.register(block);
-		System.out.println("REGISTERING EREBUS BLOCK: " + block);
+		if(block instanceof IMetaBlockName) {
+			ItemBlockMeta itemBlock = new ItemBlockMeta(block);
+			GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
 		}
-		
+		else {
+			ItemBlock itemBlock = new ItemBlock(block);
+			GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
+		}
 	}
 /*
 	private static void registerProperties() {

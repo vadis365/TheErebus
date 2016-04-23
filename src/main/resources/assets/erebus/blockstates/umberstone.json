@@ -6,6 +6,6 @@
 		"type=umbercobble_webbed": { "model": "erebus:umbercobble_webbed" },
 		"type=umberstone_bricks": { "model": "erebus:umberstone_bricks" },
 		"type=umbertile_smooth": { "model": "erebus:umbertile_smooth" },
-		"type=umbertile_smooth_small": { "model": "umbertile_smooth_small" }
+		"type=umbertile_smooth_small": { "model": "erebus:umbertile_smooth_small" }
 	}
 }

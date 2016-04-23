@@ -1,9 +1,5 @@
 package erebus.core.proxy;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -11,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import erebus.block.terrain.IMetaBlockName;
+import erebus.ModBlocks;
 
 public class ClientProxy extends CommonProxy {
  /*
@@ -257,119 +253,39 @@ public class ClientProxy extends CommonProxy {
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 	} */
-	//Please turn this off again after using
-	
-	// A LITTLE CODE BORROWED FROM BETWEENLANDS - THANKS GUYS ;)
-	
-	//Please turn this off again after using
-    private static final boolean createJSONFile = false;
-	 @Override
-	    public void registerDefaultBlockItemRenderer(Block block) {
-		 String name = block.getRegistryName().toString();
-		 String itemName = name.substring(name.lastIndexOf(":") + 1, name.length());
-		 System.out.println("GIBBERISH FOR TESTING: " + block + " STRING NAME: " + name);
-		 if(!name.isEmpty()) {
-		 if(block instanceof IMetaBlockName)
-			 ModelLoader.registerItemVariants(Item.getItemFromBlock(block), new ModelResourceLocation(name, "inventory"));
-	        //FIXME: Uhm yeah, ModelLoader#registerItemVariants (the proper way afaik?) doesn't seem to work, so I've also added this here
-		 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(name, "inventory"));
-		 }
-	      //  if (createJSONFile)
-	      //      createJSONForBlock(itemName);
-	    }
-	 
-/*
-	    @Override
-	    public void registerDefaultItemRenderer(Item item) {
-	        List<ItemStack> list = new ArrayList<>();
-	        item.getSubItems(item, null, list);
-	        if (list.size() > 0) {
-	            for (ItemStack itemStack : list) {
-	                String name = item.getUnlocalizedName(itemStack);
-	                String itemName = name.substring(name.lastIndexOf(".") + 1, name.length());
-	                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, itemStack.getItemDamage(), new ModelResourceLocation(ModInfo.ASSETS_PREFIX + itemName, "inventory"));
-	                ModelLoader.setCustomModelResourceLocation(item, itemStack.getItemDamage(), new ModelResourceLocation(ModInfo.ASSETS_PREFIX + itemName, "inventory"));
-	                if (ConfigHandler.debug && createJSONFile)
-	                    createJSONForItem(item, itemStack.getItemDamage(), itemName);
-	            }
-	        } else {
-	            String name = item.getUnlocalizedName();
-	            String itemName = name.substring(name.lastIndexOf(".") + 1, name.length());
-	            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(ModInfo.ASSETS_PREFIX + itemName, "inventory"));
-	            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(ModInfo.ASSETS_PREFIX + itemName, "inventory"));
-	            if (ConfigHandler.debug && createJSONFile)
-	                createJSONForItem(item, 0, itemName);
-	        }
-	    }
 
+	//TODO MAKE THIS MORE EFFICIENT
+	@Override
+	public void registerResources() {
+		ModelLoader.registerItemVariants(Item.getItemFromBlock(ModBlocks.umberstone), variants("umberstone", "umbercobble", "umbercobble_mossy", "umbercobble_webbed", "umberstone_bricks", "umbertile_smooth", "umbertile_smooth_small"));
+	}
 
-	    private void createJSONForItem(Item item, int meta, String itemName) {
-	        String location;
-	        if (item instanceof ICustomResourceLocationItem)
-	            location = ((ICustomResourceLocationItem) item).getCustomResourceLocation(meta);
-	        else
-	            location = itemName;
-	        String path = "models/item/" + itemName + ".json";
+	@Override
+	public void registerBlockRenderer() {
+		reg(ModBlocks.portal);
+		reg(ModBlocks.umberstone, 0, "umberstone");
+		reg(ModBlocks.umberstone, 1, "umbercobble");
+		reg(ModBlocks.umberstone, 2, "umbercobble_mossy");
+		reg(ModBlocks.umberstone, 3, "umbercobble_webbed");
+		reg(ModBlocks.umberstone, 4, "umberstone_bricks");
+		reg(ModBlocks.umberstone, 5, "umbertile_smooth");
+		reg(ModBlocks.umberstone, 6, "umbertile_smooth_small");
+	}
 
-	        String renderType;
-	        if (item instanceof ICustomItemRenderType)
-	            renderType = ((ICustomItemRenderType) item).getCustomRenderType(meta);
-	        else
-	            renderType = "item/generated";
-	        File file = new File(path);
-	        try {
-	            if (file.createNewFile()) {
-	                PrintWriter writer = new PrintWriter(file);
-	                writer.println("{");
-	                writer.println("  \"parent\": \"" + renderType + "\",\n" +
-	                        "   \"textures\": {\n" +
-	                        "     \"layer0\": \"thebetweenlands:items/" + location + "\"\n" +
-	                        "   }");
-	                writer.println("}");
-	                writer.close();
-	            }
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-*/
-	    private void createJSONForBlock(String blockName) {
-	        String path = "models/block/" + blockName + ".json";
-	        System.out.println("SAVING HERE: " + path);
-	        String renderType = "block/cube_all";
-	        File file = new File(path);
-	        try {
-	            if (file.createNewFile()) {
-	                PrintWriter writer = new PrintWriter(file);
-	                writer.println("{");
-	                writer.println("  \"parent\": \"" + renderType + "\",\n" +
-	                        "   \"textures\": {\n" +
-	                        "     \"all\": \"erebus:blocks/" + blockName + "\"\n" +
-	                        "   }");
-	                writer.println("}");
-	                writer.close();
-	            }
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+	public void reg(Block block) {
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName().toString(), "inventory"));
+	}
 
-	        path = "models/item/" + blockName + ".json";
+	public void reg(Block block, int meta, String file) {
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), meta, new ModelResourceLocation("erebus:" + file, "inventory"));
+	}
 
-	        renderType = "erebus:block/" + blockName;
-	        file = new File(path);
-	        try {
-	            if (file.createNewFile()) {
-	                PrintWriter writer = new PrintWriter(file);
-	                writer.println("{");
-	                writer.println("  \"parent\": \"" + renderType);
-	                writer.println("}");
-	                writer.close();
-	            }
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-
+	private ModelResourceLocation[] variants(String... strings) {
+		ModelResourceLocation[] res = new ModelResourceLocation[strings.length];
+		for (int i = 0; i < strings.length; i++)
+			res[i] = new ModelResourceLocation("erebus:"+ strings[i], "inventory");
+		return res;
+	}
 
 	@Override
 	public World getClientWorld() {

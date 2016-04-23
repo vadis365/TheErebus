@@ -300,12 +300,11 @@ public class CommonProxy implements IGuiHandler {
 		return null;
 	}
 
-	public void registerDefaultBlockItemRenderer(Block block) {
+	public void registerBlockRenderer() {
 		// TODO Auto-generated method stub
-		
 	}
 
-	public void registerDefaultItemRenderer(Item item) {
+	public void registerResources() {
 		// TODO Auto-generated method stub
 		
 	}
