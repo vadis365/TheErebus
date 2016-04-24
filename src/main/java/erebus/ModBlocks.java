@@ -11,6 +11,9 @@ import erebus.block.ErebusPortal;
 import erebus.block.terrain.BlockUmberstone;
 import erebus.block.terrain.IMetaBlockName;
 import erebus.block.terrain.ItemBlockMeta;
+import erebus.block.trees.BlockLogErebus;
+import erebus.block.trees.BlockSaplingErebus;
+import erebus.lib.EnumWood;
 
 public class ModBlocks {
 
@@ -21,8 +24,29 @@ public class ModBlocks {
 	public static final Block portal = new ErebusPortal();
 
 	// TERRAIN
-	 public static final Block umberstone = new BlockUmberstone();
+	public static final Block umberstone = new BlockUmberstone();
+
+	public static final Block log_asper = new BlockLogErebus(EnumWood.Asper);
+	public static final Block log_balsam = new BlockLogErebus(EnumWood.Balsam);
+	public static final Block log_baobab = new BlockLogErebus(EnumWood.Baobab);
+	public static final Block log_cypress = new BlockLogErebus(EnumWood.Cypress);
+	public static final Block log_eucalyptus = new BlockLogErebus(EnumWood.Eucalyptus);
+	public static final Block log_mahogany = new BlockLogErebus(EnumWood.Mahogany);
+	public static final Block log_marshwood = new BlockLogErebus(EnumWood.Marshwood);
+	public static final Block log_mossbark = new BlockLogErebus(EnumWood.Mossbark);
+	public static final Block log_rotten = new BlockLogErebus(EnumWood.Rotten);
 	
+	public static final Block sapling_asper = new BlockSaplingErebus(EnumWood.Asper);
+	public static final Block sapling_balsam = new BlockSaplingErebus(EnumWood.Balsam);
+	public static final Block sapling_baobab = new BlockSaplingErebus(EnumWood.Baobab);
+	public static final Block sapling_cypress = new BlockSaplingErebus(EnumWood.Cypress);
+	public static final Block sapling_eucalyptus = new BlockSaplingErebus(EnumWood.Eucalyptus);
+	public static final Block sapling_mahogany = new BlockSaplingErebus(EnumWood.Mahogany);
+	public static final Block sapling_marshwood = new BlockSaplingErebus(EnumWood.Marshwood);
+	public static final Block sapling_mossbark = new BlockSaplingErebus(EnumWood.Mossbark);
+	
+	// public static final Block log_white = new BlockLogErebus(EnumWood.White);
+
 /*	public static final Block redGem = new BlockRedGem();
 	public static final Block amber = new BlockAmber();
 	public static final Block quickSand = new BlockQuickSand();
@@ -217,7 +241,7 @@ public class ModBlocks {
 
 	public static void init() {
 	//	initBlocks();
-	//	EnumWood.initBlocks();
+		EnumWood.initBlocks();
 		registerBlocks();
 		Erebus.proxy.registerResources();
 	//	Erebus.proxy.registerBlockRenderer();

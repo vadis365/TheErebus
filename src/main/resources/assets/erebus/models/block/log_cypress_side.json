@@ -1,0 +1,7 @@
+{
+	"parent": "block/column_side",
+	"textures": {
+		"side": "erebus:blocks/log_cypress",
+        "end": "erebus:blocks/log_cypress_top"
+	}
+}

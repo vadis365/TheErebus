@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"axis=y":  { "model": "erebus:log_eucalyptus" },
+        "axis=z":   { "model": "erebus:log_eucalyptus_side" },
+        "axis=x":   { "model": "erebus:log_eucalyptus_side", "y": 90 },
+        "axis=none": { "model": "erebus:log_eucalyptus_bark" }
+	}
+}

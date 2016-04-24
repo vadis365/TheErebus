@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"axis=y":  { "model": "erebus:log_cypress" },
+        "axis=z":   { "model": "erebus:log_cypress_side" },
+        "axis=x":   { "model": "erebus:log_cypress_side", "y": 90 },
+        "axis=none": { "model": "erebus:log_cypress_bark" }
+	}
+}

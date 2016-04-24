@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"stage=0": { "model": "erebus:sapling_marshwood" },
+		"stage=1": { "model": "erebus:sapling_marshwood" }
+	}
+}

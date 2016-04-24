@@ -1,23 +1,14 @@
 package erebus.lib;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import erebus.ModBlocks;
-import erebus.block.BlockErebusLeaves;
-import erebus.block.BlockLogErebus;
-import erebus.block.BlockSlabPlanks;
-import erebus.block.BlockStairPlanks;
-import erebus.block.plants.BlockSaplingErebus;
-import erebus.item.block.ItemBlockLocalised;
-import erebus.item.block.ItemBlockSlabSimple;
-import erebus.item.block.ItemErebusLeaves;
+import java.util.HashMap;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.HashMap;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import erebus.Erebus;
+import erebus.block.trees.BlockLogErebus;
+import erebus.block.trees.BlockSaplingErebus;
 
 public enum EnumWood {
 	Baobab,
@@ -26,7 +17,7 @@ public enum EnumWood {
 	Mossbark,
 	Asper,
 	Cypress,
-	Sap(true, false, true, true),
+	Balsam(true, false, true, true),
 	White(false, true, false, false),
 	Bamboo(false, true, false, false),
 	Rotten(true, true, false, false),
@@ -84,10 +75,6 @@ public enum EnumWood {
 		return saplings.get(this);
 	}
 
-	public String getTranslatedName() {
-		return StatCollector.translateToLocal("wood." + Reference.MOD_ID + "." + name().toLowerCase());
-	}
-
 	private static final HashMap<EnumWood, Block> logs = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> slabs = new HashMap<EnumWood, Block>();
 	private static final HashMap<EnumWood, Block> stairs = new HashMap<EnumWood, Block>();
@@ -98,15 +85,14 @@ public enum EnumWood {
 		for (EnumWood wood : values()) {
 			if (wood.hasLog) {
 				Block log = new BlockLogErebus(wood);
-				GameRegistry.registerBlock(log, ItemBlockLocalised.class, "log" + wood.name());
 				Blocks.fire.setFireInfo(log, 5, 5);
 				logs.put(wood, log);
 			}
 			if (wood.hasSapling) {
 				Block sapling = new BlockSaplingErebus(wood);
-				GameRegistry.registerBlock(sapling, ItemBlockLocalised.class, "sapling" + wood.name());
 				saplings.put(wood, sapling);
-			}
+			}/*
+			//TODO After logs and saplings
 			if (wood.hasPlanks) {
 				Block stair = new BlockStairPlanks(ModBlocks.planks, wood);
 				GameRegistry.registerBlock(stair, ItemBlockLocalised.class, "plankStair" + wood.name());
@@ -124,9 +110,10 @@ public enum EnumWood {
 				Blocks.fire.setFireInfo(leaf, 30, 60);
 				leaves.put(wood, leaf);
 			}
+			*/
 		}
 	}
-
+/*
 	public static void initRecipes() {
 		for (EnumWood wood : values()) {
 			if (wood.hasLog) {
@@ -152,4 +139,5 @@ public enum EnumWood {
 			}
 		}
 	}
+	*/
 }

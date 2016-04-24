@@ -308,4 +308,8 @@ public class CommonProxy implements IGuiHandler {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void reg(Block log) {
+		// TODO Auto-generated method stub
+	}
 }

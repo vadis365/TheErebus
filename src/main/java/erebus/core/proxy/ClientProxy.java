@@ -270,9 +270,30 @@ public class ClientProxy extends CommonProxy {
 		reg(ModBlocks.umberstone, 4, "umberstone_bricks");
 		reg(ModBlocks.umberstone, 5, "umbertile_smooth");
 		reg(ModBlocks.umberstone, 6, "umbertile_smooth_small");
+
+		reg(ModBlocks.log_asper);
+		reg(ModBlocks.log_balsam);
+		reg(ModBlocks.log_baobab);
+		reg(ModBlocks.log_cypress);
+		reg(ModBlocks.log_eucalyptus);
+		reg(ModBlocks.log_mahogany);
+		reg(ModBlocks.log_marshwood);
+		reg(ModBlocks.log_mossbark);
+		reg(ModBlocks.log_rotten);
+
+		reg(ModBlocks.sapling_asper);
+		reg(ModBlocks.sapling_balsam);
+		reg(ModBlocks.sapling_baobab);
+		reg(ModBlocks.sapling_cypress);
+		reg(ModBlocks.sapling_eucalyptus);
+		reg(ModBlocks.sapling_mahogany);
+		reg(ModBlocks.sapling_marshwood);
+		reg(ModBlocks.sapling_mossbark);
 	}
 
+	@Override
 	public void reg(Block block) {
+		System.out.println("*******This should print a block type before crash*********:" + block);
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName().toString(), "inventory"));
 	}
 

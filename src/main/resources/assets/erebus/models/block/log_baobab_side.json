@@ -1,0 +1,7 @@
+{
+	"parent": "block/column_side",
+	"textures": {
+		"side": "erebus:blocks/log_baobab",
+        "end": "erebus:blocks/log_baobab_top"
+	}
+}
