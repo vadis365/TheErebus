@@ -11,6 +11,7 @@ import erebus.block.ErebusPortal;
 import erebus.block.terrain.BlockUmberstone;
 import erebus.block.terrain.IMetaBlockName;
 import erebus.block.terrain.ItemBlockMeta;
+import erebus.block.trees.BlockLeavesErebus;
 import erebus.block.trees.BlockLogErebus;
 import erebus.block.trees.BlockSaplingErebus;
 import erebus.lib.EnumWood;
@@ -26,24 +27,33 @@ public class ModBlocks {
 	// TERRAIN
 	public static final Block umberstone = new BlockUmberstone();
 
-	public static final Block log_asper = new BlockLogErebus(EnumWood.Asper);
-	public static final Block log_balsam = new BlockLogErebus(EnumWood.Balsam);
-	public static final Block log_baobab = new BlockLogErebus(EnumWood.Baobab);
-	public static final Block log_cypress = new BlockLogErebus(EnumWood.Cypress);
-	public static final Block log_eucalyptus = new BlockLogErebus(EnumWood.Eucalyptus);
-	public static final Block log_mahogany = new BlockLogErebus(EnumWood.Mahogany);
-	public static final Block log_marshwood = new BlockLogErebus(EnumWood.Marshwood);
-	public static final Block log_mossbark = new BlockLogErebus(EnumWood.Mossbark);
-	public static final Block log_rotten = new BlockLogErebus(EnumWood.Rotten);
+	public static final Block log_asper = new BlockLogErebus(EnumWood.ASPER);
+	public static final Block log_balsam = new BlockLogErebus(EnumWood.BALSAM);
+	public static final Block log_baobab = new BlockLogErebus(EnumWood.BAOBAB);
+	public static final Block log_cypress = new BlockLogErebus(EnumWood.CYPRESS);
+	public static final Block log_eucalyptus = new BlockLogErebus(EnumWood.EUCALYPTUS);
+	public static final Block log_mahogany = new BlockLogErebus(EnumWood.MAHOGANY);
+	public static final Block log_marshwood = new BlockLogErebus(EnumWood.MARSHWOOD);
+	public static final Block log_mossbark = new BlockLogErebus(EnumWood.MOSSBARK);
+	public static final Block log_rotten = new BlockLogErebus(EnumWood.ROTTEN);
 	
-	public static final Block sapling_asper = new BlockSaplingErebus(EnumWood.Asper);
-	public static final Block sapling_balsam = new BlockSaplingErebus(EnumWood.Balsam);
-	public static final Block sapling_baobab = new BlockSaplingErebus(EnumWood.Baobab);
-	public static final Block sapling_cypress = new BlockSaplingErebus(EnumWood.Cypress);
-	public static final Block sapling_eucalyptus = new BlockSaplingErebus(EnumWood.Eucalyptus);
-	public static final Block sapling_mahogany = new BlockSaplingErebus(EnumWood.Mahogany);
-	public static final Block sapling_marshwood = new BlockSaplingErebus(EnumWood.Marshwood);
-	public static final Block sapling_mossbark = new BlockSaplingErebus(EnumWood.Mossbark);
+	public static final Block sapling_asper = new BlockSaplingErebus(EnumWood.ASPER);
+	public static final Block sapling_balsam = new BlockSaplingErebus(EnumWood.BALSAM);
+	public static final Block sapling_baobab = new BlockSaplingErebus(EnumWood.BAOBAB);
+	public static final Block sapling_cypress = new BlockSaplingErebus(EnumWood.CYPRESS);
+	public static final Block sapling_eucalyptus = new BlockSaplingErebus(EnumWood.EUCALYPTUS);
+	public static final Block sapling_mahogany = new BlockSaplingErebus(EnumWood.MAHOGANY);
+	public static final Block sapling_marshwood = new BlockSaplingErebus(EnumWood.MARSHWOOD);
+	public static final Block sapling_mossbark = new BlockSaplingErebus(EnumWood.MOSSBARK);
+	
+	public static final Block leaves_asper = new BlockLeavesErebus(EnumWood.ASPER);
+	public static final Block leaves_balsam = new BlockLeavesErebus(EnumWood.BALSAM);
+	public static final Block leaves_baobab = new BlockLeavesErebus(EnumWood.BAOBAB);
+	public static final Block leaves_cypress = new BlockLeavesErebus(EnumWood.CYPRESS);
+	public static final Block leaves_eucalyptus = new BlockLeavesErebus(EnumWood.EUCALYPTUS);
+	public static final Block leaves_mahogany = new BlockLeavesErebus(EnumWood.MAHOGANY);
+	public static final Block leaves_marshwood = new BlockLeavesErebus(EnumWood.MARSHWOOD);
+	public static final Block leaves_mossbark = new BlockLeavesErebus(EnumWood.MOSSBARK);
 	
 	// public static final Block log_white = new BlockLogErebus(EnumWood.White);
 

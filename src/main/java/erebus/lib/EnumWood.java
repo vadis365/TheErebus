@@ -4,24 +4,22 @@ import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import erebus.Erebus;
+import erebus.block.trees.BlockLeavesErebus;
 import erebus.block.trees.BlockLogErebus;
 import erebus.block.trees.BlockSaplingErebus;
 
 public enum EnumWood {
-	Baobab,
-	Eucalyptus,
-	Mahogany,
-	Mossbark,
-	Asper,
-	Cypress,
-	Balsam(true, false, true, true),
-	White(false, true, false, false),
-	Bamboo(false, true, false, false),
-	Rotten(true, true, false, false),
-	Marshwood;
+	BAOBAB,
+	EUCALYPTUS,
+	MAHOGANY,
+	MOSSBARK,
+	ASPER,
+	CYPRESS,
+	BALSAM(true, false, true, true),
+	WHITE(false, true, false, false),
+	BAMBOO(false, true, false, false),
+	ROTTEN(true, true, false, false),
+	MARSHWOOD;
 
 	private final boolean hasLog;
 	private final boolean hasPlanks;
@@ -91,7 +89,13 @@ public enum EnumWood {
 			if (wood.hasSapling) {
 				Block sapling = new BlockSaplingErebus(wood);
 				saplings.put(wood, sapling);
-			}/*
+			}
+			if (wood.hasLeaves) {
+				Block leaf = new BlockLeavesErebus(wood);
+				Blocks.fire.setFireInfo(leaf, 30, 60);
+				leaves.put(wood, leaf);
+			}
+			/*
 			//TODO After logs and saplings
 			if (wood.hasPlanks) {
 				Block stair = new BlockStairPlanks(ModBlocks.planks, wood);
@@ -103,12 +107,6 @@ public enum EnumWood {
 				GameRegistry.registerBlock(slab, ItemBlockSlabSimple.class, "slabPlanks" + wood.name());
 				Blocks.fire.setFireInfo(slab, 5, 5);
 				slabs.put(wood, slab);
-			}
-			if (wood.hasLeaves) {
-				Block leaf = new BlockErebusLeaves(wood);
-				GameRegistry.registerBlock(leaf, ItemErebusLeaves.class, "leaves" + wood.name());
-				Blocks.fire.setFireInfo(leaf, 30, 60);
-				leaves.put(wood, leaf);
 			}
 			*/
 		}

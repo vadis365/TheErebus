@@ -1,6 +1,7 @@
 package erebus.core.proxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.Minecraft;
@@ -270,7 +271,15 @@ public class ClientProxy extends CommonProxy {
 		ModelLoader.setCustomStateMapper(ModBlocks.sapling_mahogany, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
 		ModelLoader.setCustomStateMapper(ModBlocks.sapling_marshwood, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
 		ModelLoader.setCustomStateMapper(ModBlocks.sapling_mossbark, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_asper, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_asper, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_balsam, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_baobab, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_cypress, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_eucalyptus, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_mahogany, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_marshwood, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.leaves_mossbark, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
 		
 	}
 
@@ -303,6 +312,15 @@ public class ClientProxy extends CommonProxy {
 		reg(ModBlocks.sapling_mahogany);
 		reg(ModBlocks.sapling_marshwood);
 		reg(ModBlocks.sapling_mossbark);
+		
+		reg(ModBlocks.leaves_asper);
+		reg(ModBlocks.leaves_balsam);
+		reg(ModBlocks.leaves_baobab);
+		reg(ModBlocks.leaves_cypress);
+		reg(ModBlocks.leaves_eucalyptus);
+		reg(ModBlocks.leaves_mahogany);
+		reg(ModBlocks.leaves_marshwood);
+		reg(ModBlocks.leaves_mossbark);
 	}
 
 	@Override
