@@ -1,8 +1,11 @@
 package erebus.core.proxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -258,6 +261,17 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerResources() {
 		ModelLoader.registerItemVariants(Item.getItemFromBlock(ModBlocks.umberstone), variants("umberstone", "umbercobble", "umbercobble_mossy", "umbercobble_webbed", "umberstone_bricks", "umbertile_smooth", "umbertile_smooth_small"));
+
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_asper, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_balsam, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_baobab, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_cypress, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_eucalyptus, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_mahogany, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_marshwood, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_mossbark, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		ModelLoader.setCustomStateMapper(ModBlocks.sapling_asper, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+		
 	}
 
 	@Override
