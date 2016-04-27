@@ -15,15 +15,14 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import erebus.ModTabs;
 import erebus.lib.EnumWood;
-import erebus.lib.Reference;
 import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenBalsamTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenCypressTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
-import erebus.world.feature.tree.WorldGenSapTree;
 
 public class BlockSaplingErebus extends BlockSapling {
 
@@ -39,45 +38,45 @@ public class BlockSaplingErebus extends BlockSapling {
 
 	@Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-      /*  if (!worldIn.isRemote) {
+        if (!worldIn.isRemote) {
             super.updateTick(worldIn, pos, state, rand);
 
             if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
                this.grow(worldIn, pos, state, rand); 
-        }*/
+        }
     }
 
 	@Override
 	public void generateTree(World world, BlockPos pos, IBlockState state, Random rand) {
-	/*	if (!TerrainGen.saplingGrowTree(world, rand, pos))
+		if (!TerrainGen.saplingGrowTree(world, rand, pos))
 			return;
 
 		WorldGenerator worldGen = null;
 
 		switch (wood) {
-			case Eucalyptus:
+			case EUCALYPTUS:
 				worldGen = new WorldGenEucalyptusTree();
 				break;
-			case Baobab:
+			case BAOBAB:
 				worldGen = new WorldGenBaobabTree();
 				break;
-			case Asper:
+			case ASPER:
 				worldGen = new WorldGenAsperTree();
 				break;
-			case Cypress:
+			case CYPRESS:
 				worldGen = new WorldGenCypressTree();
 				break;
-			case Mahogany:
+			case MAHOGANY:
 				worldGen = new WorldGenErebusHugeTree(true, true, wood);
 				((WorldGenErebusHugeTree) worldGen).prepare(20 + rand.nextInt(5));
 				break;
-			case Balsam:
-				worldGen = new WorldGenSapTree();
+			case BALSAM:
+				worldGen = new WorldGenBalsamTree();
 				break;
-			case Mossbark:
+			case MOSSBARK:
 				worldGen = new WorldGenMossbarkTree();
 				break;
-			case Marshwood:
+			case MARSHWOOD:
 				worldGen = new WorldGenMarshwoodTree();
 				break;
 			default:
@@ -89,7 +88,7 @@ public class BlockSaplingErebus extends BlockSapling {
 
 		world.setBlockToAir(pos);
 		if (!worldGen.generate(world, rand, pos))
-			world.setBlockState(pos, (IBlockState) this);*/
+			world.setBlockState(pos, (IBlockState) this);
 	}
 
 	public boolean isSameSapling(World world, BlockPos pos, int meta) {

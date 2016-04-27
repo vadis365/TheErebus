@@ -1,10 +1,12 @@
 package erebus.world.feature.tree;
 
-import erebus.lib.EnumWood;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-
 import java.util.Random;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.lib.EnumWood;
 
 public class WorldGenEucalyptusTree extends WorldGenTreeBase {
 
@@ -12,12 +14,18 @@ public class WorldGenEucalyptusTree extends WorldGenTreeBase {
 	private static final int branches = 8;
 
 	public WorldGenEucalyptusTree() {
-		super(EnumWood.Eucalyptus);
+		super(EnumWood.EUCALYPTUS);
+		this.log = ModBlocks.log_eucalyptus;
+		this.leaves = ModBlocks.leaves_eucalyptus;
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
-		if (world.getBlock(x, y - 1, z) != Blocks.grass)
+	public boolean generate(World world, Random rand, BlockPos pos) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+
+		if (world.getBlockState(pos.down()) != Blocks.grass.getDefaultState())
 			return false;
 
 		int height = 8 + rand.nextInt(4);
@@ -25,18 +33,18 @@ public class WorldGenEucalyptusTree extends WorldGenTreeBase {
 		for (int yy = 0; yy < span; yy++)
 			for (int xx = -span; xx <= span; xx++)
 				for (int zz = -span; zz <= span; zz++)
-					if (!world.isAirBlock(x + xx, y + height + yy, z + zz))
+					if (!world.isAirBlock(new BlockPos(x + xx, y + height + yy, z + zz)))
 						return false;
 
 		for (int p = -2; p < 3; p++)
 			for (int r = -1; r < 2; r++) {
-				world.setBlock(x + p, y + height + span + 1, z + r, leaves, 0, 3);
-				world.setBlock(x + r, y + height + span + 1, z + p, leaves, 0, 3);
+				world.setBlockState(new BlockPos(x + p, y + height + span + 1, z + r), leaves.getStateFromMeta(0), 2);
+				world.setBlockState(new BlockPos(x + r, y + height + span + 1, z + p), leaves.getStateFromMeta(0), 2);
 			}
 
 		for (int p = -1; p < 2; p++)
 			for (int r = -1; r < 2; r++)
-				world.setBlock(x + r, y + height + span + 2, z + p, leaves, 0, 3);
+				world.setBlockState(new BlockPos(x + r, y + height + span + 2, z + p), leaves.getStateFromMeta(0), 2);
 
 		for (int a = 0; a < branches; a++) {
 			int disX = rand.nextInt(span * 2 + 1) - span;
@@ -49,26 +57,26 @@ public class WorldGenEucalyptusTree extends WorldGenTreeBase {
 
 			for (int p = -2; p < 3; p++)
 				for (int r = -1; r < 2; r++) {
-					world.setBlock(posX + p, posY, posZ + r, leaves, 0, 3);
-					world.setBlock(posX + r, posY, posZ + p, leaves, 0, 3);
+					world.setBlockState(new BlockPos(posX + p, posY, posZ + r), leaves.getStateFromMeta(0), 2);
+					world.setBlockState(new BlockPos(posX + r, posY, posZ + p), leaves.getStateFromMeta(0), 2);
 				}
 
 			for (int p = -1; p < 2; p++)
 				for (int r = -1; r < 2; r++)
-					world.setBlock(posX + r, posY + 1, posZ + p, leaves, 0, 3);
+					world.setBlockState(new BlockPos(posX + r, posY + 1, posZ + p), leaves.getStateFromMeta(0), 2);
 			for (int b = 0; b < span; b++) {
 				int xx = disX * (b + 1) / span;
 				int yy = disY * (b + 1) / span;
 				int zz = disZ * (b + 1) / span;
 
-				world.setBlock(x + xx, y + height - 1 + yy, z + zz, log, 0, 3);
+				world.setBlockState(new BlockPos(x + xx, y + height - 1 + yy, z + zz), log.getStateFromMeta(0), 2);
 			}
 
-			world.setBlock(posX, posY, posZ, log, 0, 3);
+			world.setBlockState(new BlockPos(posX, posY, posZ), log.getStateFromMeta(0), 2);
 		}
 
 		for (int yy = 0; yy < height + span + 2; yy++)
-			world.setBlock(x, y + yy, z, log, 0, 3);
+			world.setBlockState(new BlockPos(x, y + yy, z), log.getStateFromMeta(0), 2);
 
 		return true;
 	}

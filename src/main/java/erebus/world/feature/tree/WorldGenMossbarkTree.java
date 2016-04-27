@@ -1,10 +1,12 @@
 package erebus.world.feature.tree;
 
-import erebus.lib.EnumWood;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-
 import java.util.Random;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.lib.EnumWood;
 
 public class WorldGenMossbarkTree extends WorldGenTreeBase {
 
@@ -12,11 +14,16 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase {
 	private static final int[] offsetZ = new int[] { 0, 0, -1, 1 };
 
 	public WorldGenMossbarkTree() {
-		super(EnumWood.Mossbark);
+		super(EnumWood.MOSSBARK);
+		this.log = ModBlocks.log_mossbark;
+		this.leaves = ModBlocks.leaves_mossbark;
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, BlockPos pos) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
 		int[] middleBranchHeights = new int[4];
 		int[] outsideBranchHeights = new int[4];
 
@@ -38,22 +45,22 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase {
 		int testY;
 
 		for (testY = y + 1; testY < y + 3; ++testY)
-			if (!world.isAirBlock(x, testY, z))
+			if (!world.isAirBlock(new BlockPos(x, testY, z)))
 				return false;
 
 		for (testY = y + 3; testY <= y + 1 + maxHeight; ++testY) {
 			for (int testX = x - 4; testX <= x + 4; ++testX)
 				for (int testZ = z - 1; testZ <= z + 1; ++testZ)
-					if (!world.isAirBlock(testX, testY, testZ))
+					if (!world.isAirBlock(new BlockPos(testX, testY, testZ)))
 						return false;
 
 			for (int testX = x - 1; testX <= x + 1; ++testX)
 				for (int testZ = z - 4; testZ <= z + 4; ++testZ)
-					if (!world.isAirBlock(testX, testY, testZ))
+					if (!world.isAirBlock(new BlockPos(testX, testY, testZ)))
 						return false;
 		}
 
-		if (world.getBlock(x, y - 1, z) != Blocks.dirt && world.getBlock(x, y - 1, z) != Blocks.grass)
+		if (world.getBlockState(pos.down()) != Blocks.dirt.getDefaultState() && world.getBlockState(pos.down()) != Blocks.grass.getDefaultState())
 			return false;
 
 		// generate tree
@@ -70,13 +77,13 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase {
 
 	public void generateStump(World world, Random random, int x, int y, int z, int height) {
 		for (int yy = 0; yy < height; ++yy) {
-			world.setBlock(x, y + yy, z, log, 0, 3);
+			world.setBlockState(new BlockPos(x, y + yy, z), log.getStateFromMeta(0), 3);
 
 			if (yy == height - 1) {
-				world.setBlock(x, y + yy, z + 1, log, 8, 3);
-				world.setBlock(x, y + yy, z - 1, log, 8, 3);
-				world.setBlock(x + 1, y + yy, z, log, 4, 3);
-				world.setBlock(x - 1, y + yy, z, log, 4, 3);
+				world.setBlockState(new BlockPos(x, y + yy, z + 1), log.getStateFromMeta(8), 3);
+				world.setBlockState(new BlockPos(x, y + yy, z - 1), log.getStateFromMeta(8), 3);
+				world.setBlockState(new BlockPos(x + 1, y + yy, z), log.getStateFromMeta(4), 3);
+				world.setBlockState(new BlockPos(x - 1, y + yy, z), log.getStateFromMeta(4), 3);
 				break;
 			}
 		}
@@ -84,23 +91,23 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase {
 
 	public void generateMiddleBranch(World world, Random rand, int x, int y, int z, int height) {
 		for (int yy = 0; yy < 2; ++yy)
-			world.setBlock(x, y - 1 - yy, z, leaves, 0, 3);
+			world.setBlockState(new BlockPos(x, y - 1 - yy, z), leaves.getStateFromMeta(0), 2);
 		for (int yy = 0; yy < height; ++yy)
-			world.setBlock(x, y + yy, z, log, 0, 3);
+			world.setBlockState(new BlockPos(x, y + yy, z), log.getStateFromMeta(0), 3);
 	}
 
 	public void generateOutsideBranch(World world, Random rand, int x, int y, int z, int height) {
 		for (int yy = 0; yy < 2; ++yy) {
-			world.setBlock(x, y - 1 - yy, z, leaves, 0, 3);
-			world.setBlock(x, y + height + yy, z, leaves, 0, 3);
+			world.setBlockState(new BlockPos(x, y - 1 - yy, z), leaves.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(x, y + height + yy, z), leaves.getStateFromMeta(0), 2);
 		}
 
 		for (int yy = 0; yy < height; ++yy) {
 			if (yy < height - 1)
-				world.setBlock(x, y + yy, z, log, 0, 3);
+				world.setBlockState(new BlockPos(x, y + yy, z), log.getStateFromMeta(0), 3);
 
 			for (int a = 0; a < 4; a++)
-				world.setBlock(x + offsetX[a], y + yy, z + offsetZ[a], leaves, 0, 3);
+				world.setBlockState(new BlockPos(x + offsetX[a], y + yy, z + offsetZ[a]), leaves.getStateFromMeta(0), 2);
 		}
 	}
 }

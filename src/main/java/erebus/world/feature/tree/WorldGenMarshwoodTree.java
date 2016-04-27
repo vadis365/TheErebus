@@ -1,19 +1,24 @@
 package erebus.world.feature.tree;
 
+import java.util.Random;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.lib.EnumWood;
-import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 	public WorldGenMarshwoodTree() {
-		super(EnumWood.Marshwood);
+		super(EnumWood.MARSHWOOD);
+		this.log = ModBlocks.log_marshwood;
+		this.leaves = ModBlocks.leaves_marshwood;
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, BlockPos pos) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
 		int radius = rand.nextInt(2) + 3;
 		int height = rand.nextInt(radius) + 12;
 		int maxRadius = 9;
@@ -21,7 +26,7 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 		for (int xx = x - maxRadius; xx <= x + maxRadius; xx++)
 			for (int zz = z - maxRadius; zz <= z + maxRadius; zz++)
 				for (int yy = y + 2; yy < y + height; yy++)
-					if (!world.isAirBlock(xx, yy, zz))
+					if (!world.isAirBlock(new BlockPos(xx, yy, zz)))
 						return false;
 
 		for (int yy = y; yy < y + height; ++yy) {
@@ -32,9 +37,9 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 				for (int j = radius * -1; j <= radius; ++j) {
 					double dSq = i * i + j * j;
 					if (Math.round(Math.sqrt(dSq)) <= radius && yy <= y + height - 2)
-						world.setBlock(x + i, yy, z + j, log, 0, 2);
+						world.setBlockState(new BlockPos(x + i, yy, z + j), log.getStateFromMeta(0), 2);
 					if (Math.round(Math.sqrt(dSq)) <= radius && yy == y || Math.round(Math.sqrt(dSq)) <= radius && yy == y + height - 1)
-						world.setBlock(x + i, yy, z + j, log, 15, 2);
+						world.setBlockState(new BlockPos(x + i, yy, z + j), log.getStateFromMeta(15), 2);
 				}
 
 			if (yy == y + height - 1) {
@@ -77,98 +82,98 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 
 			if (dir == 1)
 				if (!root) {
-					world.setBlock(x + i, y, z, log, meta == 0 ? 0 : 4, 2);
+					world.setBlockState(new BlockPos(x + i, y, z), log.getStateFromMeta(meta == 0 ? 0 : 4), 2);
 					if (i < branchLength)
 						addHangers(world, rand, x + i, y - 1, z);
 					if (i == branchLength)
 						createLeaves(world, rand, x + i, y - 1, z, 1);
 				} else {
-					world.setBlock(x + i, y, z, log, 15, 2);
-					world.setBlock(x + i, y - 1, z, log, 15, 2);
+					world.setBlockState(new BlockPos(x + i, y, z), log.getStateFromMeta(15), 2);
+					world.setBlockState(new BlockPos(x + i, y - 1, z), log.getStateFromMeta(15), 2);
 				}
 
 			if (dir == 2)
 				if (!root) {
-					world.setBlock(x - i, y, z, log, meta == 0 ? 0 : 4, 2);
+					world.setBlockState(new BlockPos(x - i, y, z), log.getStateFromMeta(meta == 0 ? 0 : 4), 2);
 					if (i < branchLength)
 						addHangers(world, rand, x - i, y - 1, z);
 					if (i == branchLength)
 						createLeaves(world, rand, x - i, y - 1, z, 1);
 				} else {
-					world.setBlock(x - i, y, z, log, 15, 2);
-					world.setBlock(x - i, y - 1, z, log, 15, 2);
+					world.setBlockState(new BlockPos(x - i, y, z), log.getStateFromMeta(15), 2);
+					world.setBlockState(new BlockPos(x - i, y - 1, z), log.getStateFromMeta(15), 2);
 				}
 
 			if (dir == 3)
 				if (!root) {
-					world.setBlock(x, y, z + i, log, meta == 0 ? 0 : 8, 2);
+					world.setBlockState(new BlockPos(x, y, z + i), log.getStateFromMeta(meta == 0 ? 0 : 8), 2);
 					if (i < branchLength)
 						addHangers(world, rand, x, y - 1, z + i);
 					if (i == branchLength)
 						createLeaves(world, rand, x, y - 1, z + i, 1);
 				} else {
-					world.setBlock(x, y, z + i, log, 15, 2);
-					world.setBlock(x, y - 1, z + i, log, 15, 2);
+					world.setBlockState(new BlockPos(x, y, z + i), log.getStateFromMeta(15), 2);
+					world.setBlockState(new BlockPos(x, y - 1, z + i), log.getStateFromMeta(15), 2);
 				}
 
 			if (dir == 4)
 				if (!root) {
-					world.setBlock(x, y, z - i, log, meta == 0 ? 0 : 8, 2);
+					world.setBlockState(new BlockPos(x, y, z - i), log.getStateFromMeta(meta == 0 ? 0 : 8), 2);
 					if (i < branchLength)
 						addHangers(world, rand, x, y - 1, z - i);
 					if (i == branchLength)
 						createLeaves(world, rand, x, y - 1, z - i, 1);
 				} else {
-					world.setBlock(x, y, z - i, log, 15, 2);
-					world.setBlock(x, y - 1, z - i, log, 15, 2);
+					world.setBlockState(new BlockPos(x, y, z - i), log.getStateFromMeta(15), 2);
+					world.setBlockState(new BlockPos(x, y - 1, z - i), log.getStateFromMeta(15), 2);
 				}
 
 			if (dir == 5)
 				if (!root) {
-					world.setBlock(x + i - 1, y, z + i - 1, log, meta == 0 ? 0 : 4, 2);
+					world.setBlockState(new BlockPos(x + i - 1, y, z + i - 1), log.getStateFromMeta(meta == 0 ? 0 : 4), 2);
 					if (i < branchLength)
 						addHangers(world, rand, x + i - 1, y - 1, z + i - 1);
 					if (i == branchLength)
 						createLeaves(world, rand, x + i, y - 1, z + i, 1);
 				} else {
-					world.setBlock(x + i - 1, y, z + i - 1, log, 15, 2);
-					world.setBlock(x + i - 1, y - 1, z + i - 1, log, 15, 2);
+					world.setBlockState(new BlockPos(x + i - 1, y, z + i - 1), log.getStateFromMeta(15), 2);
+					world.setBlockState(new BlockPos(x + i - 1, y - 1, z + i - 1), log.getStateFromMeta(15), 2);
 				}
 
 			if (dir == 6)
 				if (!root) {
-					world.setBlock(x - i + 1, y, z - i + 1, log, meta == 0 ? 0 : 4, 2);
+					world.setBlockState(new BlockPos(x - i + 1, y, z - i + 1), log.getStateFromMeta(meta == 0 ? 0 : 4), 2);
 					if (i < branchLength)
 						addHangers(world, rand, x - i + 1, y - 1, z - i + 1);
 					if (i == branchLength)
 						createLeaves(world, rand, x - i, y - 1, z - i, 1);
 				} else {
-					world.setBlock(x - i + 1, y, z - i + 1, log, 15, 2);
-					world.setBlock(x - i + 1, y - 1, z - i + 1, log, 15, 2);
+					world.setBlockState(new BlockPos(x - i + 1, y, z - i + 1), log.getStateFromMeta(15), 2);
+					world.setBlockState(new BlockPos(x - i + 1, y - 1, z - i + 1), log.getStateFromMeta(15), 2);
 				}
 
 			if (dir == 7)
 				if (!root) {
-					world.setBlock(x - i + 1, y, z + i - 1, log, meta == 0 ? 0 : 8, 2);
+					world.setBlockState(new BlockPos(x - i + 1, y, z + i - 1), log.getStateFromMeta(meta == 0 ? 0 : 8), 2);
 					if (i < branchLength)
 						addHangers(world, rand, x - i + 1, y - 1, z + i - 1);
 					if (i == branchLength)
 						createLeaves(world, rand, x - i, y - 1, z + i, 1);
 				} else {
-					world.setBlock(x - i + 1, y, z + i - 1, log, 15, 2);
-					world.setBlock(x - i + 1, y - 1, z + i - 1, log, 15, 2);
+					world.setBlockState(new BlockPos(x - i + 1, y, z + i - 1), log.getStateFromMeta(15), 2);
+					world.setBlockState(new BlockPos(x - i + 1, y - 1, z + i - 1), log.getStateFromMeta(15), 2);
 				}
 
 			if (dir == 8)
 				if (!root) {
-					world.setBlock(x + i - 1, y, z - i + 1, log, meta == 0 ? 0 : 8, 2);
+					world.setBlockState(new BlockPos(x + i - 1, y, z - i + 1), log.getStateFromMeta(meta == 0 ? 0 : 8), 2);
 					if (i < branchLength)
 						addHangers(world, rand, x + i - 1, y - 1, z - i + 1);
 					if (i == branchLength)
 						createLeaves(world, rand, x + i, y - 1, z - i, 1);
 				} else {
-					world.setBlock(x + i - 1, y, z - i + 1, log, 15, 2);
-					world.setBlock(x + i - 1, y - 1, z - i + 1, log, 15, 2);
+					world.setBlockState(new BlockPos(x + i - 1, y, z - i + 1), log.getStateFromMeta(15), 2);
+					world.setBlockState(new BlockPos(x + i - 1, y - 1, z - i + 1), log.getStateFromMeta(15), 2);
 				}
 		}
 	}
@@ -181,24 +186,26 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 					double dSq = Math.pow(xx - x, 2.0D) + Math.pow(zz - z, 2.0D) + Math.pow(yy - y, 2.0D);
 					if (Math.round(Math.sqrt(dSq)) <= radius)
 						if (Math.round(Math.sqrt(dSq)) == 0)
-							world.setBlock(xx, yy, zz, log, 0, 2);
+							world.setBlockState(new BlockPos(xx, yy, zz), log.getStateFromMeta(0), 2);
 						else
-							world.setBlock(xx, yy, zz, leaves);
+							world.setBlockState(new BlockPos(xx, yy, zz), leaves.getStateFromMeta(0), 2);
 					if (Math.round(Math.sqrt(dSq)) == 0) {
-						world.setBlock(xx, yy - 2, zz, leaves);
+						world.setBlockState(new BlockPos(xx, yy - 2, zz), leaves.getStateFromMeta(0), 2);
 						addHangers(world, rand, xx, yy - 3, zz);
 					}
 				}
 	}
 
 	public void addHangers(World world, Random rand, int x, int y, int z) {
+		/* TODO FIX HANGERS
 		if (rand.nextInt(4) != 0) {
 			int length = rand.nextInt(13) + 4;
 			for (int yy = y; yy > y - length; --yy)
-				if (world.getBlock(x, yy, z) == Blocks.air)
-					world.setBlock(x, yy, z, ModBlocks.hanger, 4, 2);
+				if (world.isAirBlock(new BlockPos(x, yy, z)))
+					world.setBlockState(new BlockPos(x, yy, z), ModBlocks.hanger, 4, 2);
 				else
 					break;
 		}
+		 */
 	}
 }

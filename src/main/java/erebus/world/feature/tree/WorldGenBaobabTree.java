@@ -1,27 +1,36 @@
 package erebus.world.feature.tree;
 
-import erebus.lib.EnumWood;
-import net.minecraft.world.World;
-
 import java.util.Random;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.lib.EnumWood;
 
 public class WorldGenBaobabTree extends WorldGenTreeBase {
 
 	public WorldGenBaobabTree() {
-		super(EnumWood.Baobab);
+		super(EnumWood.BAOBAB);
+		this.log = ModBlocks.log_baobab;
+		this.leaves = ModBlocks.leaves_baobab;
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, BlockPos pos) {
 		int radius = rand.nextInt(2) + 3;
 		int height = rand.nextInt(radius) + 12;
 		int maxHeight = height + 2;
 		int maxRadius = radius + 2;
+		
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+
 
 		for (int xx = x - maxRadius; xx <= x + maxRadius; xx++)
 			for (int zz = z - maxRadius; zz <= z + maxRadius; zz++)
 				for (int yy = y + 1; yy < y + maxHeight; yy++)
-					if (!world.isAirBlock(xx, yy, zz))
+					if (!world.isAirBlock(new BlockPos(xx, yy, zz)))
 						return false;
 
 		for (int yy = y; yy < y + height; ++yy) {
@@ -32,7 +41,7 @@ public class WorldGenBaobabTree extends WorldGenTreeBase {
 				for (int j = radius * -1; j <= radius; ++j) {
 					double dSq = i * i + j * j;
 					if (Math.round(Math.sqrt(dSq)) <= radius && yy <= y + height - 2)
-						world.setBlock(x + i, yy, z + j, log, 0, 2);
+						world.setBlockState(new BlockPos(x + i, yy, z + j), log.getStateFromMeta(0), 2);
 				}
 
 			if (yy == y + height - 2) {
@@ -57,25 +66,25 @@ public class WorldGenBaobabTree extends WorldGenTreeBase {
 			}
 
 			if (dir == 1) {
-				world.setBlock(x + i, y, z, log, meta == 0 ? 0 : 4, 2);
+				world.setBlockState(new BlockPos(x + i, y, z), log.getStateFromMeta(meta == 0 ? 0 : 4), 2);
 				if (i == branchLength)
 					createLeaves(world, rand, x + i, y + 1, z, branchLength);
 			}
 
 			if (dir == 2) {
-				world.setBlock(x - i, y, z, log, meta == 0 ? 0 : 4, 2);
+				world.setBlockState(new BlockPos(x - i, y, z), log.getStateFromMeta(meta == 0 ? 0 : 4), 2);
 				if (i == branchLength)
 					createLeaves(world, rand, x - i, y + 1, z, branchLength);
 			}
 
 			if (dir == 3) {
-				world.setBlock(x, y, z + i, log, meta == 0 ? 0 : 8, 2);
+				world.setBlockState(new BlockPos(x, y, z + i), log.getStateFromMeta(meta == 0 ? 0 : 8), 2);
 				if (i == branchLength)
 					createLeaves(world, rand, x, y + 1, z + i, branchLength);
 			}
 
 			if (dir == 4) {
-				world.setBlock(x, y, z - i, log, meta == 0 ? 0 : 8, 2);
+				world.setBlockState(new BlockPos(x, y, z - i), log.getStateFromMeta(meta == 0 ? 0 : 8), 2);
 				if (i == branchLength)
 					createLeaves(world, rand, x, y + 1, z - i, branchLength);
 			}
@@ -90,9 +99,10 @@ public class WorldGenBaobabTree extends WorldGenTreeBase {
 					double dSq = Math.pow(xx - x, 2.0D) + Math.pow(zz - z, 2.0D) + Math.pow(yy - y, 2.0D);
 					if (Math.round(Math.sqrt(dSq)) <= radius)
 						if (Math.round(Math.sqrt(dSq)) == 0)
-							world.setBlock(xx, yy, zz, log, 0, 2);
+							world.setBlockState(new BlockPos(xx, yy, zz), log.getStateFromMeta(0), 2);
 						else
-							world.setBlock(xx, yy, zz, leaves);
+							world.setBlockState(new BlockPos(xx, yy, zz), leaves.getStateFromMeta(0), 2);
 				}
 	}
+
 }
