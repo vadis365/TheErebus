@@ -12,6 +12,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -19,7 +20,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModTabs;
@@ -27,10 +27,6 @@ import erebus.lib.EnumWood;
 
 public class BlockLeavesErebus extends BlockLeaves {
 	private final EnumWood wood;
-	@SideOnly(Side.CLIENT)
-	protected boolean isTransparent;
-	@SideOnly(Side.CLIENT)
-	protected int iconIndex;
 
 	public BlockLeavesErebus(EnumWood wood) {
 		this.wood = wood;
@@ -41,8 +37,6 @@ public class BlockLeavesErebus extends BlockLeaves {
 		setRegistryName("leaves_" + wood.name().toLowerCase());
 		setUnlocalizedName(getRegistryName().toString());
 		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
-		if(FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT))
-			setGraphicsLevel(Minecraft.getMinecraft().isFancyGraphicsEnabled());
 	}
 
 	@Override
@@ -60,26 +54,18 @@ public class BlockLeavesErebus extends BlockLeaves {
 	@Override
 	@SideOnly(Side.CLIENT)
 	  public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && blockAccess.getBlockState(pos) == this ? false : true;
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : true;
 	}
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-		return !leavesFancy;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void setGraphicsLevel(boolean fancy) {
-		isTransparent = fancy;
-		leavesFancy = fancy;
-		iconIndex = fancy ? 0 : 1;
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
-		return isTransparent ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
+		return Blocks.leaves.getBlockLayer();
 	}
 
 	@Override
