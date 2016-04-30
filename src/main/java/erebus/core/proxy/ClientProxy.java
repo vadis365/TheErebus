@@ -281,13 +281,13 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void reg(Block block) {
-		System.out.println("*******This should print a block type before crash*********:" + block);
+		System.out.println("**This should print a block type before crash**:" + block);
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName().toString(), "inventory"));
 	}
 	
 	@Override
 	public void reg(Block block, int meta, String file) {
-		System.out.println("*******This should print a META block type before crash*********:" + block);
+		System.out.println("**This should print a META block type before crash**:" + block + " variant: "+ file);
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, new ModelResourceLocation("erebus:" + file, "inventory"));		
 	}
 
