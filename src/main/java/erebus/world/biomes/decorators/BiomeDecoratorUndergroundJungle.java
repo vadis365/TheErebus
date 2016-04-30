@@ -86,7 +86,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				genQuickSand.generate(world, rand, xx, yy, zz);
 		}
 */
-		for (attempt = 0; attempt < 20; attempt++) {
+		for (attempt = 0; attempt < 2200; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
