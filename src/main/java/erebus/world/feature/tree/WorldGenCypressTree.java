@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
 import erebus.lib.EnumWood;
 
 public class WorldGenCypressTree extends WorldGenTreeBase {
@@ -14,8 +13,6 @@ public class WorldGenCypressTree extends WorldGenTreeBase {
 
 	public WorldGenCypressTree() {
 		super(EnumWood.CYPRESS);
-		this.log = ModBlocks.log_cypress;
-		this.leaves = ModBlocks.leaves_cypress;
 	}
 
 	@Override

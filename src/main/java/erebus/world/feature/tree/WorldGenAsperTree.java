@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
 import erebus.lib.EnumWood;
 
 public class WorldGenAsperTree extends WorldGenTreeBase {
@@ -15,8 +14,6 @@ public class WorldGenAsperTree extends WorldGenTreeBase {
 
 	public WorldGenAsperTree() {
 		super(EnumWood.ASPER);
-		this.log = ModBlocks.log_asper;
-		this.leaves = ModBlocks.leaves_asper;
 	}
 
 	@Override

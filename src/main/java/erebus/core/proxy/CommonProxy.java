@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -309,7 +310,17 @@ public class CommonProxy implements IGuiHandler {
 		
 	}
 
-	public void reg(Block log) {
+	public void reg(Block block) {
 		// TODO Auto-generated method stub
+	}
+
+	public void reg(Block block, int meta, String file) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCustomStateMap(Block block, StateMap stateMap) {
+		// TODO Auto-generated method stub
+		
 	}
 }

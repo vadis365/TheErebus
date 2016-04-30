@@ -74,7 +74,6 @@ public class Erebus {
 	//	proxy.registerRenderInformation();
 
 	//	PacketPipeline.initializePipeline();
-		Erebus.proxy.registerBlockRenderer();
 		ModBiomes.init();
 	//	RecipeHandler.init();
 	//	ErebusRecipesHandler.init();

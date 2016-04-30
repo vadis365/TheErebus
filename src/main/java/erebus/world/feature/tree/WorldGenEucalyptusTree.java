@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
 import erebus.lib.EnumWood;
 
 public class WorldGenEucalyptusTree extends WorldGenTreeBase {
@@ -15,8 +14,6 @@ public class WorldGenEucalyptusTree extends WorldGenTreeBase {
 
 	public WorldGenEucalyptusTree() {
 		super(EnumWood.EUCALYPTUS);
-		this.log = ModBlocks.log_eucalyptus;
-		this.leaves = ModBlocks.leaves_eucalyptus;
 	}
 
 	@Override

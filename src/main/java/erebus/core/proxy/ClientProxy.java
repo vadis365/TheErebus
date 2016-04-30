@@ -1,9 +1,6 @@
 package erebus.core.proxy;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -262,25 +259,12 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerResources() {
 		ModelLoader.registerItemVariants(Item.getItemFromBlock(ModBlocks.umberstone), variants("umberstone", "umbercobble", "umbercobble_mossy", "umbercobble_webbed", "umberstone_bricks", "umbertile_smooth", "umbertile_smooth_small"));
+		registerBlockRenderer();
+	}
 
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_asper, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_balsam, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_baobab, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_cypress, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_eucalyptus, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_mahogany, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_marshwood, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.sapling_mossbark, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_asper, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_balsam, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_baobab, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_cypress, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_eucalyptus, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_mahogany, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_marshwood, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-		ModelLoader.setCustomStateMapper(ModBlocks.leaves_mossbark, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-		
+	@Override
+	public void setCustomStateMap(Block block, StateMap stateMap) {
+		ModelLoader.setCustomStateMapper(block, stateMap);
 	}
 
 	@Override
@@ -293,44 +277,18 @@ public class ClientProxy extends CommonProxy {
 		reg(ModBlocks.umberstone, 4, "umberstone_bricks");
 		reg(ModBlocks.umberstone, 5, "umbertile_smooth");
 		reg(ModBlocks.umberstone, 6, "umbertile_smooth_small");
-
-		reg(ModBlocks.log_asper);
-		reg(ModBlocks.log_balsam);
-		reg(ModBlocks.log_baobab);
-		reg(ModBlocks.log_cypress);
-		reg(ModBlocks.log_eucalyptus);
-		reg(ModBlocks.log_mahogany);
-		reg(ModBlocks.log_marshwood);
-		reg(ModBlocks.log_mossbark);
-		reg(ModBlocks.log_rotten);
-
-		reg(ModBlocks.sapling_asper);
-		reg(ModBlocks.sapling_balsam);
-		reg(ModBlocks.sapling_baobab);
-		reg(ModBlocks.sapling_cypress);
-		reg(ModBlocks.sapling_eucalyptus);
-		reg(ModBlocks.sapling_mahogany);
-		reg(ModBlocks.sapling_marshwood);
-		reg(ModBlocks.sapling_mossbark);
-		
-		reg(ModBlocks.leaves_asper);
-		reg(ModBlocks.leaves_balsam);
-		reg(ModBlocks.leaves_baobab);
-		reg(ModBlocks.leaves_cypress);
-		reg(ModBlocks.leaves_eucalyptus);
-		reg(ModBlocks.leaves_mahogany);
-		reg(ModBlocks.leaves_marshwood);
-		reg(ModBlocks.leaves_mossbark);
 	}
 
 	@Override
 	public void reg(Block block) {
 		System.out.println("*******This should print a block type before crash*********:" + block);
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName().toString(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName().toString(), "inventory"));
 	}
-
+	
+	@Override
 	public void reg(Block block, int meta, String file) {
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), meta, new ModelResourceLocation("erebus:" + file, "inventory"));
+		System.out.println("*******This should print a META block type before crash*********:" + block);
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, new ModelResourceLocation("erebus:" + file, "inventory"));		
 	}
 
 	private ModelResourceLocation[] variants(String... strings) {

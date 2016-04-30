@@ -23,10 +23,10 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 	public WorldGenErebusHugeTree(boolean notify, boolean genThorns, EnumWood wood) {
 		super(notify);
 		thorns = genThorns;
-		woodBlock  = ModBlocks.log_mahogany;
-		leafBlock = ModBlocks.leaves_mahogany;
-	//	woodBlock = wood.getLog();
-	//	leafBlock = wood.getLeaves();
+		//woodBlock  = ModBlocks.log_mahogany;
+		//leafBlock = ModBlocks.leaves_mahogany;
+		woodBlock = wood.getLog();
+		leafBlock = wood.getLeaves();
 	}
 
 	public void prepare(int baseHeight) {

@@ -3,7 +3,14 @@ package erebus.lib;
 import java.util.HashMap;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import erebus.Erebus;
 import erebus.block.trees.BlockLeavesErebus;
 import erebus.block.trees.BlockLogErebus;
 import erebus.block.trees.BlockSaplingErebus;
@@ -83,15 +90,29 @@ public enum EnumWood {
 		for (EnumWood wood : values()) {
 			if (wood.hasLog) {
 				Block log = new BlockLogErebus(wood);
+				GameRegistry.register(log);
+				ItemBlock itemBlock = new ItemBlock(log);
+				GameRegistry.register(itemBlock.setRegistryName(log.getRegistryName()));
+				Erebus.proxy.reg(log);
 				Blocks.fire.setFireInfo(log, 5, 5);
 				logs.put(wood, log);
 			}
 			if (wood.hasSapling) {
 				Block sapling = new BlockSaplingErebus(wood);
+				GameRegistry.register(sapling);
+				ItemBlock itemBlock = new ItemBlock(sapling);
+				GameRegistry.register(itemBlock.setRegistryName(sapling.getRegistryName()));
+				Erebus.proxy.setCustomStateMap(sapling, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
+				Erebus.proxy.reg(sapling);
 				saplings.put(wood, sapling);
 			}
 			if (wood.hasLeaves) {
 				Block leaf = new BlockLeavesErebus(wood);
+				GameRegistry.register(leaf);
+				ItemBlock itemBlock = new ItemBlock(leaf);
+				GameRegistry.register(itemBlock.setRegistryName(leaf.getRegistryName()));
+				Erebus.proxy.setCustomStateMap(leaf, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
+				Erebus.proxy.reg(leaf);
 				Blocks.fire.setFireInfo(leaf, 30, 60);
 				leaves.put(wood, leaf);
 			}
