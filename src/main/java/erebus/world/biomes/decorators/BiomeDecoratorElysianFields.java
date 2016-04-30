@@ -5,16 +5,18 @@ import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.tree.WorldGenCypressTree;
 
 
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
-	protected final BlockPos pos = new BlockPos(0, 0, 0);
-/*	protected final WorldGenPonds genPonds = new WorldGenPonds();
-	protected final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
+
+//	protected final WorldGenPonds genPonds = new WorldGenPonds();
+//	protected final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
 
 	protected final WorldGenerator genTreeCypress = new WorldGenCypressTree();
-	protected final WorldGenerator genGiantFlowers = new WorldGenGiantFlowers();
+/*	protected final WorldGenerator genGiantFlowers = new WorldGenGiantFlowers();
 
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 
@@ -40,15 +42,15 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 	@Override
 	protected void decorate() {
 		//System.out.println("Elysian Fields Decorating");
-	/*	for (attempt = 0; attempt < 105; attempt++) {
+		for (attempt = 0; attempt < 105; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 			yy = 20 + rand.nextInt(80);
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genTreeCypress.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				genTreeCypress.generate(world, rand, pos.up());
 		}
-
+/*
 		if (generateFlowers && rand.nextBoolean())
 			for (int attempt = 0, xx, yy, zz; attempt < 65; attempt++) {
 				xx = x + offsetXZ();
@@ -77,14 +79,16 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
-			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
-				if (checkSurface(SurfaceType.MIXED, pos.add(xx, yy, zz))) {
-					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.add(xx, yy, zz).up(2)))
-						Blocks.double_plant.placeAt(world, pos.add(xx, yy, zz).up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
+			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.MIXED, pos)) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2)))
+						Blocks.double_plant.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
 					else
-						world.setBlockState(pos.add(xx, yy, zz).up(), tallGrassState);
-					break;
+						if (world.isAirBlock(pos.up()))
+							world.setBlockState(pos.up(), tallGrassState);
 				}
+			}
 		}
 /*
 		for (attempt = 0; attempt < 12; attempt++) {

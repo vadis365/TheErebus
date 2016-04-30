@@ -10,13 +10,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenSavannahRock extends WorldGenerator {
 
-	protected final BlockPos posAbsolutle = new BlockPos(0, 0, 0);
-
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 		for (int xx = pos.getX() - 3; xx <= pos.getX() + 3; xx++)
 			for (int zz = pos.getZ() - 3; zz <= pos.getZ() + 3; zz++)
-				if (world.getBlockState(posAbsolutle.add(xx, pos.getY(), zz)) != Blocks.grass.getDefaultState()) {
+				if (world.getBlockState(pos.add(xx, pos.getY(), zz)) != Blocks.grass.getDefaultState()) {
 					return false;
 				}
 
@@ -50,10 +48,10 @@ public class WorldGenSavannahRock extends WorldGenerator {
 			IBlockState block;
 			for (int attempt = 0, diamonds = 0, diamondAmount = rand.nextInt(2) + 1, iradX = (int) Math.ceil(radX), iradY = (int) Math.ceil(radY), iradZ = (int) Math.ceil(radZ); attempt < 10 && diamonds < diamondAmount; attempt++) {
 				int xx = x + rand.nextInt(iradX * 2) - iradX, yy = y + rand.nextInt(iradY * 2) - iradY, zz = z + rand.nextInt(iradZ * 2) - iradZ;
-				block = world.getBlockState(posAbsolutle.add(xx, yy, zz));
+				block = world.getBlockState(pos.add(xx, yy, zz));
 
 				if (block == Blocks.stone.getDefaultState() || block == Blocks.monster_egg.getDefaultState()) {
-					world.setBlockState(posAbsolutle.add(xx, yy, zz), Blocks.diamond_ore.getDefaultState());
+					world.setBlockState(pos.add(xx, yy, zz), Blocks.diamond_ore.getDefaultState());
 					++diamonds;
 				}
 			}
@@ -66,6 +64,6 @@ public class WorldGenSavannahRock extends WorldGenerator {
 			for (float zf = z - radZ; zf <= z + radZ; zf++)
 				for (float yf = y - radY; yf <= y + radY; yf++)
 					if (Math.pow(xf - x, 2) / (radX * radX) + Math.pow(yf - y, 2) / (radY * radY) + Math.pow(zf - z, 2) / (radZ * radZ) <= 1.1)
-						world.setBlockState(posAbsolutle.add((int) Math.floor(xf), (int) Math.floor(yf), (int) Math.floor(zf)), rand.nextInt(6) == 0 ? Blocks.monster_egg.getDefaultState() : Blocks.stone.getDefaultState());
+						world.setBlockState(new BlockPos((int) Math.floor(xf), (int) Math.floor(yf), (int) Math.floor(zf)), rand.nextInt(6) == 0 ? Blocks.monster_egg.getDefaultState() : Blocks.stone.getDefaultState());
 	}
 }

@@ -81,7 +81,7 @@ public abstract class BiomeDecoratorBaseErebus {
 
 	protected boolean checkSurface(SurfaceType surfaceType, BlockPos pos) {
 		//System.out.println("Surface Checked at "+ pos);
-		return surfaceType.matchBlock(world.getBlockState(pos)) && world.isAirBlock(pos.up());
+		return surfaceType.matchBlock(world.getBlockState(pos));
 	}
 
 	public static class BiomeDecoratorEmpty extends BiomeDecoratorBaseErebus {

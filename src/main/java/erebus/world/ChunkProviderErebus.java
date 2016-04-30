@@ -371,9 +371,9 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	public void populate(int x, int z) {
 		BlockFalling.fallInstantly = true;
 		BlockPos blockCoord = new BlockPos(x * 16, 0, z * 16);
-		BlockPos blockCoordOffSet = new BlockPos(blockCoord.getX() +16, 0,  blockCoord.getY() +16);
-		int blockCoordX = x * 16;
-		int blockCoordZ = z * 16;
+		BlockPos blockCoordOffSet = new BlockPos(blockCoord.getX() +16, 0,  blockCoord.getZ() +16);
+		//int blockCoordX = x * 16;
+		//int blockCoordZ = z * 16;
 		BiomeGenBase biomeBase = worldObj.getBiomeGenForCoords(blockCoordOffSet);
 
 		if (biomeBase instanceof BiomeBaseErebus) {
@@ -381,7 +381,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 			rand.setSeed(worldObj.getSeed());
 			rand.setSeed(x * (rand.nextLong() / 2L * 2L + 1L) + z * (rand.nextLong() / 2L * 2L + 1L) ^ worldObj.getSeed());
 		//	biome.populate(worldObj, rand, blockCoordX, blockCoordZ);
-			biome.decorate(worldObj, rand, blockCoordX, blockCoordZ);
+			biome.decorate(worldObj, rand, blockCoord.getX(), blockCoord.getZ());
 		//	SpawnerErebus.onChunkPopulate(worldObj, rand, biome, blockCoordX + 8, blockCoordZ + 8);
 		}
 

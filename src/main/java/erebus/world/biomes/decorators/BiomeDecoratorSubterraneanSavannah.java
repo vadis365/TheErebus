@@ -9,6 +9,8 @@ import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
+import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenBaobabTree;
 
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
@@ -22,10 +24,9 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	//private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
-	//private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
-	//private final WorldGenerator genTreeBaobab = new WorldGenBaobabTree();
-	
-	protected final BlockPos pos = new BlockPos(0, 0, 0);
+	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
+	private final WorldGenerator genTreeBaobab = new WorldGenBaobabTree();
+
 /*
 	@Override
 	public void populate() {
@@ -79,40 +80,43 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, pos.add(xx, yy, zz)))
-				genTreeAcacia.generate(world, rand, pos.add(xx, yy, zz).up());
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos)) {
+				genTreeAcacia.generate(world, rand, pos.up());
+			}
 		}
 
 		if (rand.nextBoolean() && rand.nextBoolean()) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
-			for (yy = 100; yy > 20; yy--)
-				if (checkSurface(SurfaceType.GRASS, pos.add(xx, yy, zz))) {
-					if(genRocks.generate(world, rand, pos.add(xx, yy, zz)))
+			for (yy = 100; yy > 20; yy--) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					if(genRocks.generate(world, rand, pos))
 						break;
 				}
+			}
 		}
-/*
+
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genTreeAsper.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				genTreeAsper.generate(world, rand, pos.up());
 		}
 
 		for (attempt = 0; attempt < 20; attempt++) {
 			xx = x + rand.nextInt(13) + 9;
 			yy = rand.nextInt(120);
 			zz = z + rand.nextInt(13) + 9;
-
-			if (checkSurface(SurfaceType.GRASS, xx - 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx + 2, yy, zz + 2) && checkSurface(SurfaceType.GRASS, xx + 2, yy, zz - 2) && checkSurface(SurfaceType.GRASS, xx - 2, yy, zz + 2))
-				genTreeBaobab.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, pos.east(2)) && checkSurface(SurfaceType.GRASS, pos.west(2)) && checkSurface(SurfaceType.GRASS, pos.north(2)) && checkSurface(SurfaceType.GRASS, pos.south(2)))
+				genTreeBaobab.generate(world, rand, pos.up());
 		}
-
+/*
 		for (attempt = 0; attempt < 28; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
@@ -127,14 +131,16 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
-			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
-				if (checkSurface(SurfaceType.MIXED, pos.add(xx, yy, zz))) {
-					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.add(xx, yy, zz).up(2)))
-						Blocks.double_plant.placeAt(world, pos.add(xx, yy, zz).up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
+			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.MIXED, pos)) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2)))
+						Blocks.double_plant.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
 					else
-						world.setBlockState(pos.add(xx, yy, zz).up(), tallGrassState);
-					break;
+						if (world.isAirBlock(pos.up()))
+							world.setBlockState(pos.up(), tallGrassState);
 				}
+			}
 		}
 	}
 /*

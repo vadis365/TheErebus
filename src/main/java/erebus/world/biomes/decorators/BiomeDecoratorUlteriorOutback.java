@@ -1,12 +1,16 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenSavannaTree;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.tree.WorldGenEucalyptusTree;
+
 
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
-	@Override
-	protected void decorate() {
-	//	System.out.println("Ulterior Outback Decorating");
-	}
-/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+
+//	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
@@ -17,16 +21,18 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
-			for (yy = 20; yy < 100; yy += rand.nextInt(2) + 1)
-				if (world.getBlock(xx, yy, zz) == Blocks.sand && world.isAirBlock(xx, yy + 1, zz)) {
+			for (yy = 20; yy < 100; yy += rand.nextInt(2) + 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.getBlockState(pos) == Blocks.sand && world.isAirBlock(pos.up())) {
 					if (rand.nextInt(3) == 0)
-						world.setBlock(xx, yy, zz, Blocks.grass);
+						world.setBlockState(pos, Blocks.grass.getDefaultState(), 2);
 					else
-						world.setBlock(xx, yy, zz, Blocks.dirt, 1, 2);
+						world.setBlockState(pos, Blocks.dirt.getDefaultState(), 2);
 					break;
 				}
+			}
 		}
-
+/*
 		for (attempt = 0; attempt < rand.nextInt(3); attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(25) * (1 + rand.nextInt(3)); // more likely in lower levels
@@ -35,20 +41,20 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
 				genRottenAcacia.generate(world, rand, xx, yy, zz);
 		}
-
+*/
 		if (rand.nextBoolean())
 			for (attempt = 0; attempt < 20; attempt++) {
 				xx = x + offsetXZ();
 				yy = 20 + rand.nextInt(80);
 				zz = z + offsetXZ();
-
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
-					genTreeAcacia.generate(world, rand, xx, yy, zz);
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					genTreeAcacia.generate(world, rand, pos.up());
 					if (rand.nextBoolean())
 						break;
 				}
 			}
-
+/*
 		for (attempt = 0; attempt < 420; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
@@ -77,19 +83,19 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 					break;
 				}
 		}
-
+*/
 		if (rand.nextBoolean())
 			for (attempt = 0; attempt < 180; attempt++) {
 				xx = x + offsetXZ();
 				yy = 20 + rand.nextInt(80);
 				zz = z + offsetXZ();
-
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-					if (genTreeEucalyptus.generate(world, rand, xx, yy, zz) && rand.nextBoolean())
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos))
+					if (genTreeEucalyptus.generate(world, rand, pos.up()) && rand.nextBoolean())
 						break;
 			}
 	}
-
+/*
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {

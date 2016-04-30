@@ -1,35 +1,46 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenBigMushroom;
+import net.minecraft.world.gen.feature.WorldGenBush;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.lib.EnumWood;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenErebusHugeTree;
+import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import erebus.world.feature.tree.WorldGenMossbarkTree;
+
 
 public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
-	@Override
-	protected void decorate() {
-	//	System.out.println("Under Ground Jungle Decorating");
-	}
 /*	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
-
-	private final WorldGenFlowers genMushroomsBrown = new WorldGenFlowers(Blocks.brown_mushroom);
-	private final WorldGenFlowers genMushroomsRed = new WorldGenFlowers(Blocks.red_mushroom);
-	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(0);
-	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(1);
-
+*/
+	private final WorldGenBush genMushroomsBrown = new WorldGenBush(Blocks.brown_mushroom);
+	private final WorldGenBush genMushroomsRed = new WorldGenBush(Blocks.red_mushroom);
+	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(Blocks.brown_mushroom_block);
+	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(Blocks.red_mushroom_block);
+/*
 	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern, 1);
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead, 1);
-	private final WorldGenTallGrass genGrass = new WorldGenTallGrass(Blocks.tallgrass, 1);
-
-	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true, 5, false, EnumWood.Mahogany, ModBlocks.thorns);
-	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true, false, EnumWood.Mahogany);
-	private final WorldGenerator genTreeJungle = new WorldGenTrees(true, 6, 3, 3, true);
-	private final WorldGenerator genTreeJungleLarge = new WorldGenMegaJungle(false, 10, 20, 3, 3);
+*/	
+// TODO FIX the below trees
+//	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true, 5, false, EnumWood.MAHOGANY, ModBlocks.thorns);
+	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true, false, EnumWood.MAHOGANY);
+//	private final WorldGenerator genTreeJungle = new WorldGenTrees(true, 6, 3, 3, true);
+//	private final WorldGenerator genTreeJungleLarge = new WorldGenMegaJungle(false, 10, 20, 3, 3);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
-	private final WorldGenerator genTreeJungleTall = new WorldGenTallJungleTree();
+//	private final WorldGenerator genTreeJungleTall = new WorldGenTallJungleTree();
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
-
+/*
 	private final WorldGenerator genBamboo = new WorldGenBamboo(13, false);
 	private final WorldGenerator genTurnips = new WorldGenTurnips();
 	private final WorldGenerator genMelons = new WorldGenMelon();
@@ -47,10 +58,10 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			}
 		}
 	}
-
+*/
 	@Override
 	protected void decorate() {
-		
+/*		
 		if (rand.nextInt(3) == 0)
 			for (attempt = 0; attempt < 5; attempt++)
 				if (genAmberUmberstone.generate(world, rand, x + offsetXZ(), rand.nextInt(120), z + offsetXZ()))
@@ -74,65 +85,66 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 				genQuickSand.generate(world, rand, xx, yy, zz);
 		}
-
-		for (attempt = 0; attempt < 2200; attempt++) {
+*/
+		for (attempt = 0; attempt < 20; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos)) {
 				WorldGenerator treeGen = null;
 				int r = rand.nextInt(31);
 
-				if (r <= 6) {
-					xx = x + 9 + rand.nextInt(14);
-					zz = z + 9 + rand.nextInt(14);
-					treeGen = genTreeJungleLarge;
-				} else if (r <= 11)
-					treeGen = genTreeMahogany;
-				else if (r <= 16) {
+				//if (r <= 6) {
+				//	xx = x + 9 + rand.nextInt(14);
+				//	zz = z + 9 + rand.nextInt(14);
+				//	treeGen = genTreeJungleLarge;
+				//} else if (r <= 11)
+				//	treeGen = genTreeMahogany;
+				//else
+				if (r <= 16) {
 					xx = x + 9 + rand.nextInt(14);
 					zz = z + 9 + rand.nextInt(14);
 					((WorldGenErebusHugeTree) genTreeMahoganyLarge).prepare(20 + rand.nextInt(5));
 					treeGen = genTreeMahoganyLarge;
 				} else if (r <= 20)
 					treeGen = genTreeAsper;
-				else if (r <= 23)
-					treeGen = genTreeJungle;
+				//else if (r <= 23)
+					//treeGen = genTreeJungle;
 				else if (r <= 26)
 					treeGen = genTreeMossbark;
-				else if (r <= 28)
-					treeGen = genTreeJungleTall;
+				//else if (r <= 28)
+				//	treeGen = genTreeJungleTall;
 				else
 					treeGen = genTreeEucalyptus;
 
 				if (treeGen != null)
-					treeGen.generate(world, rand, xx, yy, zz);
+					treeGen.generate(world, rand, pos.up());
 			}
 		}
 
-		genMushroomsBrown.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
-		genMushroomsRed.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
+		genMushroomsBrown.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
+		genMushroomsRed.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
 
 		for (attempt = 0; attempt < 12; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genBigMushroomRed.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				genBigMushroomRed.generate(world, rand, pos.up());
 		}
 
 		for (attempt = 0; attempt < 20; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genBigMushroomBrown.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				genBigMushroomBrown.generate(world, rand, pos.up());
 		}
 
-		if (rand.nextInt(11) == 0) {
+	/*	if (rand.nextInt(11) == 0) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
@@ -171,16 +183,25 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				world.setBlock(xx, yy + 1, zz, Blocks.double_plant, 10, 2);
 			}
 		}
-
+*/	
+		IBlockState tallGrassState = Blocks.tallgrass.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
 		for (attempt = 0; attempt < 850; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
 
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genGrass.generate(world, rand, xx, yy, zz);
+			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.MIXED, pos)) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2)))
+						Blocks.double_plant.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
+					else
+						if (world.isAirBlock(pos.up()))
+							world.setBlockState(pos.up(), tallGrassState);
+				}
+			}
 		}
-
+/*
 		int offset;
 		for (attempt = 0; attempt < 800; attempt++) {
 			xx = x + offsetXZ();
@@ -230,8 +251,9 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 					genMelons.generate(world, rand, xx, yy, zz);
 			}
+			*/
 	}
-
+/*
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {
