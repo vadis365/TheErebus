@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import erebus.ModBlocks;
+import erebus.lib.EnumWood;
 
 public class ClientProxy extends CommonProxy {
  /*
@@ -258,7 +259,7 @@ public class ClientProxy extends CommonProxy {
 	//TODO MAKE THIS MORE EFFICIENT
 	@Override
 	public void registerResources() {
-		ModelLoader.registerItemVariants(Item.getItemFromBlock(ModBlocks.umberstone), variants("umberstone", "umbercobble", "umbercobble_mossy", "umbercobble_webbed", "umberstone_bricks", "umbertile_smooth", "umbertile_smooth_small"));
+		//ModelLoader.registerItemVariants(Item.getItemFromBlock(ModBlocks.umberstone), variants("umberstone", "umbercobble", "umbercobble_mossy", "umbercobble_webbed", "umberstone_bricks", "umbertile_smooth", "umbertile_smooth_small"));
 		registerBlockRenderer();
 	}
 
@@ -277,6 +278,14 @@ public class ClientProxy extends CommonProxy {
 		reg(ModBlocks.umberstone, 4, "umberstone_bricks");
 		reg(ModBlocks.umberstone, 5, "umbertile_smooth");
 		reg(ModBlocks.umberstone, 6, "umbertile_smooth_small");
+		
+		for (int i = 0; i < EnumWood.values().length; i++) {
+			EnumWood wood = EnumWood.values()[i];
+			if (wood.hasPlanks()) {
+				String name = "planks_" + EnumWood.values()[i].name().toLowerCase();
+				reg(ModBlocks.planks, EnumWood.values()[i].ordinal(), name);
+			}
+		}
 	}
 
 	@Override

@@ -9,24 +9,27 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import erebus.Erebus;
 import erebus.block.trees.BlockLeavesErebus;
 import erebus.block.trees.BlockLogErebus;
 import erebus.block.trees.BlockSaplingErebus;
 
-public enum EnumWood {
+public enum EnumWood implements IStringSerializable {
 	BAOBAB,
 	EUCALYPTUS,
 	MAHOGANY,
 	MOSSBARK,
 	ASPER,
 	CYPRESS,
-	BALSAM(true, false, true, true),
+	BALSAM,
 	WHITE(false, true, false, false),
 	BAMBOO(false, true, false, false),
 	ROTTEN(true, true, false, false),
-	MARSHWOOD;
+	MARSHWOOD,
+	SCORCHED(true, true, false, false),
+	VARNISHED(false, true, false, false);
 
 	private final boolean hasLog;
 	private final boolean hasPlanks;
@@ -42,6 +45,15 @@ public enum EnumWood {
 
 	EnumWood() {
 		this(true, true, true, true);
+	}
+
+	@Override
+	public String getName() {
+		return this.name().toLowerCase();
+	}
+
+	public int getID() {
+		return this.ordinal();
 	}
 
 	public boolean hasSapling() {

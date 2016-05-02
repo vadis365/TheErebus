@@ -28,6 +28,7 @@ public class BlockUmberstone extends Block implements IMetaBlockName {
 		setCreativeTab(ModTabs.blocks);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.UMBER_STONE));
 	}
+
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(TYPE, EnumType.values()[meta]);

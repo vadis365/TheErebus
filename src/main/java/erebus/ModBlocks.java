@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import erebus.block.BlockPlanksErebus;
 import erebus.block.ErebusPortal;
 import erebus.block.terrain.BlockUmberstone;
 import erebus.block.terrain.IMetaBlockName;
@@ -52,9 +53,9 @@ public class ModBlocks {
 	public static final Block oreLead = new UmberOreExtra("Lead", 2);
 	public static final Block oreSilver = new UmberOreExtra("Silver", 2);
 	public static final Block oreTin = new UmberOreExtra("Tin", 1);
-
+*/
 	// WOOD
-	public static final Block planks = new BlockPlanksErebus();
+	public static final Block planks = new BlockPlanksErebus(); /*
 	public static final Block hollowLogAcacia = new BlockHollowLog();
 	public static final Block erebusFlower = new BlockErebusFlower().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setUnlocalizedName("erebus.flower");
 	public static final Block stiga = new BlockErebusStigma().setHardness(1.0F).setStepSound(Block.soundTypeGrass).setUnlocalizedName("erebus.stigma");

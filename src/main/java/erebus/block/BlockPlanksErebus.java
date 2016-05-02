@@ -1,47 +1,35 @@
 package erebus.block;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.block.ItemBlockPlanks;
-import erebus.lib.EnumWood;
-import erebus.lib.Reference;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-
 import java.util.List;
 
-public class BlockPlanksErebus extends Block implements ISubBlocksBlock {
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModTabs;
+import erebus.block.terrain.IMetaBlockName;
+import erebus.lib.EnumWood;
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+public class BlockPlanksErebus extends Block implements IMetaBlockName {
+
+	public static final PropertyEnum TYPE = PropertyEnum.create("type", EnumWood.class);
 
 	public BlockPlanksErebus() {
 		super(Material.wood);
 		setHardness(2.0F);
 		setHarvestLevel("axe", 0);
-		setStepSound(soundTypeWood);
+		setStepSound(SoundType.WOOD);
+		setRegistryName("planks");
+		setUnlocalizedName(getRegistryName().toString());
 		setCreativeTab(ModTabs.blocks);
-		setUnlocalizedName(Reference.MOD_ID + ".planks");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return icons[meta < 0 || meta >= icons.length ? 0 : meta];
-	}
-
-	@Override
-	public int damageDropped(int meta) {
-		return meta;
 	}
 
 	@Override
@@ -54,24 +42,28 @@ public class BlockPlanksErebus extends Block implements ISubBlocksBlock {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		icons = new IIcon[EnumWood.values().length];
-
-		for (int i = 0; i < icons.length; i++) {
-			EnumWood wood = EnumWood.values()[i];
-			if (wood.hasPlanks()) {
-				String name = "erebus:planks_" + EnumWood.values()[i].name().toLowerCase();
-				if (ConfigHandler.INSTANCE.alternativePlanks && wood != EnumWood.Bamboo)
-					name += "_alt";
-
-				icons[i] = reg.registerIcon(name);
-			}
-		}
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(TYPE, EnumWood.values()[meta]);
 	}
 
 	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
-		return ItemBlockPlanks.class;
+	public int getMetaFromState(IBlockState state) {
+		EnumWood type = (EnumWood) state.getValue(TYPE);
+	    return type.getID();
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { TYPE });
+	}
+
+	@Override
+	public String getSpecialName(ItemStack stack) {
+		return EnumWood.values() [stack.getItemDamage()].getName();
 	}
 }
