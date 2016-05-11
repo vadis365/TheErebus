@@ -146,7 +146,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 
 	@Override
 	public String getInventoryName() {
-		return "container.bamber";
+		return "container.animatedBambooCrate";
 	}
 
 	@Override

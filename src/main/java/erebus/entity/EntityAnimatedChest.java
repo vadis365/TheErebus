@@ -1,9 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAIBlockFollowOwner;
-import erebus.tileentity.TileEntityAnimatedChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -12,6 +8,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
+import erebus.tileentity.TileEntityAnimatedChest;
 
 public class EntityAnimatedChest extends EntityAnimatedBlock {
 

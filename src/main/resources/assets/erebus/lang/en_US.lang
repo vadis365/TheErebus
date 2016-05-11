@@ -762,8 +762,9 @@ container.petrifiedChestDouble=Large Petrified Wood Chest
 container.extenderThingy=Bamboo Extender
 container.antInventory=Ant Command Control
 container.composter=Organic Composter
-container.bamber=Bamber
 container.silo=Silo location
+container.animatedChest=Chester
+container.animatedBambooCrate=Bamber
 
 ############
 # Tooltips #
@@ -802,7 +803,7 @@ tooltip.erebus.extractor=Point at blocks and hold down the right mouse button to
 tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
 tooltip.erebus.heals=Heals 10 Hearts when consumed. Always Edible.
 tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
-tooltip.erebus.poweredGlider=Need redgem blocks at the cost of fuel to flight.
+tooltip.erebus.poweredGlider=Needs redgem blocks at the cost of fuel to flight.
 
 armchair.spawnSet=You can only sit here... oh, whenever.
 armchair.obstructed=Adventurer's Armchair obstructed. Defaulting spawn to most recent Portal used.
