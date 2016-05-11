@@ -1,9 +1,5 @@
 package erebus.entity;
 
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -20,6 +16,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.item.ItemMaterials;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBossDisplayData {
 
@@ -39,8 +39,8 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
 	}
