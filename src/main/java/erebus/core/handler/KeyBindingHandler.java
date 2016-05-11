@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Keyboard;
 
@@ -30,10 +29,10 @@ import erebus.network.server.PacketGliderPowered;
 @SideOnly(Side.CLIENT)
 public class KeyBindingHandler {
 
-	public static KeyBinding glide = new KeyBinding(StatCollector.translateToLocal("key.erebus.glide"), Keyboard.KEY_G, Reference.MOD_NAME);
-	public static KeyBinding poweredGlide = new KeyBinding(StatCollector.translateToLocal("key.erebus.poweredGlide"), Keyboard.KEY_F, Reference.MOD_NAME);
-	public static KeyBinding beetleRam = new KeyBinding(StatCollector.translateToLocal("key.erebus.beetleRam"), Keyboard.KEY_R, Reference.MOD_NAME);
-	public static KeyBinding beetleMine = new KeyBinding(StatCollector.translateToLocal("key.erebus.beetleMine"), Keyboard.KEY_LMENU, Reference.MOD_NAME);
+	public static KeyBinding glide = new KeyBinding("key.erebus.glide", Keyboard.KEY_G, Reference.MOD_NAME);
+	public static KeyBinding poweredGlide = new KeyBinding("key.erebus.poweredGlide", Keyboard.KEY_F, Reference.MOD_NAME);
+	public static KeyBinding beetleRam = new KeyBinding("key.erebus.beetleRam", Keyboard.KEY_R, Reference.MOD_NAME);
+	public static KeyBinding beetleMine = new KeyBinding("key.erebus.beetleMine", Keyboard.KEY_LMENU, Reference.MOD_NAME);
 
 	public KeyBindingHandler() {
 		ClientRegistry.registerKeyBinding(glide);

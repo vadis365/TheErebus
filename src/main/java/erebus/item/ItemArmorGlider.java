@@ -1,5 +1,7 @@
 package erebus.item;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -25,6 +27,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.util.Constants;
@@ -34,6 +37,17 @@ public class ItemArmorGlider extends ItemArmor {
 	public ItemArmorGlider() {
 		super(ModMaterials.armorREINEXOSPECIAL, 2, 1);
 		setCreativeTab(ModTabs.gears);
+	}
+
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
+		if (canFly()) {
+			list.add(StatCollector.translateToLocal("tooltip.erebus.poweredGlider"));
+			// TODO Add tooltips with keys assigned to glide and poweredGlide as variables
+		}
 	}
 
 	@Override
@@ -228,6 +242,14 @@ public class ItemArmorGlider extends ItemArmor {
 
 	public boolean canFly() {
 		return this == ModItems.armorGliderPowered;
+	}
+
+	private boolean hasTag(ItemStack stack) {
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+			return false;
+		}
+		return true;
 	}
 
 	@SubscribeEvent
