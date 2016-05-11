@@ -2,9 +2,9 @@ package erebus.world.feature.decoration;
 
 import java.util.Random;
 
-import erebus.ModBlocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBlocks;
 
 //@formatter:off
 public class WorldGenRedGem extends WorldGenerator{
@@ -31,7 +31,8 @@ public class WorldGenRedGem extends WorldGenerator{
 						++adjacent;
 
 				if (adjacent == 1)
-					world.setBlock(xx,yy,zz,ModBlocks.redGem);
+					if(world.blockExists(xx,yy,zz))
+						world.setBlock(xx,yy,zz,ModBlocks.redGem);
 			}
 
 			if (++distUpd > 22 + dist * 30){
