@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ItemMaterials;
 
@@ -42,8 +43,8 @@ public class EntityChameleonTick extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 30D : 30D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 

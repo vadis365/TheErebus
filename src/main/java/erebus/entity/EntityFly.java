@@ -2,8 +2,6 @@ package erebus.entity;
 
 import java.util.Calendar;
 
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -13,6 +11,9 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.ItemMaterials;
 
 public class EntityFly extends EntityAmbientCreature {
 
@@ -35,7 +36,7 @@ public class EntityFly extends EntityAmbientCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
 	}
 

@@ -1,6 +1,7 @@
 package erebus.entity;
 
 import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -51,7 +52,7 @@ public class EntityBeetle extends EntityAnimal {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);;
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 	}
 

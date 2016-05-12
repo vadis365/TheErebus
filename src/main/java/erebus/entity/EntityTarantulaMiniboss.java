@@ -1,12 +1,5 @@
 package erebus.entity;
 
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAITarantulaMinibossAttack;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -31,6 +24,14 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAITarantulaMinibossAttack;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayData {
 	public int deathTicks;
@@ -55,9 +56,9 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 300D : 300D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
 	}
@@ -120,10 +121,10 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 	public void onUpdate() {
 		super.onUpdate();
 
-		if (getHealth() <= 150 && getFancyRenderOverlay())
+		if (getHealth() <= getMaxHealth()/2 && getFancyRenderOverlay())
 			dataWatcher.updateObject(17, Byte.valueOf((byte) 0));
 
-		if (getHealth() <= 150 && getHealth() > 0 && getAttackTarget() != null) {
+		if (getHealth() <= getMaxHealth()/2 && getHealth() > 0 && getAttackTarget() != null) {
 			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
 			forceCollideWithPlayer(getAttackTarget(), distance);
 		}
@@ -176,9 +177,9 @@ public class EntityTarantulaMiniboss extends EntityMob implements IBossDisplayDa
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
-		if (getHealth() > 150 && !(source instanceof EntityDamageSourceIndirect))
+		if (getHealth() > getMaxHealth()/2 && !(source instanceof EntityDamageSourceIndirect))
 			return false;
-		if (getHealth() <= 150 && source instanceof EntityDamageSourceIndirect)
+		if (getHealth() <= getMaxHealth()/2 && source instanceof EntityDamageSourceIndirect)
 			return false;
 		return super.attackEntityFrom(source, damage);
 	}

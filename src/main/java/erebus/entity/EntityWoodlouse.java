@@ -1,8 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -18,6 +15,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.core.helper.Utils;
+import erebus.item.ItemMaterials;
 
 public class EntityWoodlouse extends EntityCreature {
 
@@ -51,7 +52,7 @@ public class EntityWoodlouse extends EntityCreature {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
 	}
 
 	@Override

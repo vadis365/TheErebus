@@ -61,8 +61,8 @@ public class EntityBombardierBeetle extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D); // MaxHealth
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D); // atkDmg
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 60D : 60D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 3D : 3D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);
 	}

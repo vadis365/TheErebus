@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import erebus.ModBlocks;
-import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -23,6 +21,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
 
 public class EntityUmberGolem extends EntityCreature {
 
@@ -52,8 +53,8 @@ public class EntityUmberGolem extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 75D : 75D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(75.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
@@ -121,7 +122,7 @@ public class EntityUmberGolem extends EntityCreature {
 				motionY = 0.4000000059604645D;
 			}
 			int Knockback = 1;
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F + 3);
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 5D : 5D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
 			worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));

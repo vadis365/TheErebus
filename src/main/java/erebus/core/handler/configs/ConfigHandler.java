@@ -24,13 +24,13 @@ public class ConfigHandler {
 
 	public Configuration config;
 	public int erebusDimensionID;
-	public int portalCooldown, antlionMazeFrequency;
+	public int portalCooldown, antlionMazeFrequency, mobAttackDamageMultiplier, mobHealthMultipier;
 	public byte beetleLarvaEating = 0;
 	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows;
 
 	public boolean disableThaumcraft = false, disableFMP = false;
 
-	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores", "Integration" };
+	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores", "Integration", "Mob Modifiers" };
 
 	public void loadConfig(FMLPreInitializationEvent event) {
 		File configFile = event.getSuggestedConfigurationFile();
@@ -68,6 +68,9 @@ public class ConfigHandler {
 		glowshrooms = config.get(Configuration.CATEGORY_GENERAL, "Add Glowshrooms to World generation", true).getBoolean(true);
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
 		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
+		
+		mobAttackDamageMultiplier = config.get("Mob Modifiers", "Mob Attack Damage Multipier", 1).getInt(1);
+		mobHealthMultipier = config.get("Mob Modifiers", "Mob Health Multiplier", 1).getInt(1);
 		
 		disableThaumcraft = config.get("Integration", "Disable Thaumcraft integration", false).getBoolean(false);
 		disableFMP = config.get("Integration", "Disable Forge Multipart integration", false).getBoolean(false);

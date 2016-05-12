@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -16,6 +15,8 @@ import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 
 public class EntityVelvetWorm extends EntityMob {
 
@@ -50,9 +51,9 @@ public class EntityVelvetWorm extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength()); // atkDmg
 	}
 
 	@Override

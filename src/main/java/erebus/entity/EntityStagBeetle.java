@@ -23,6 +23,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ItemMaterials;
 
@@ -81,7 +82,7 @@ public class EntityStagBeetle extends EntityTameable {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 60D : 60D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);
 	}
@@ -160,14 +161,14 @@ public class EntityStagBeetle extends EntityTameable {
 		ItemStack is = player.inventory.getCurrentItem();
 		float healingBuff = 0.0F;
 		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.BEETLE_TAMING_AMULET.ordinal() && getTameState() == 0) {
-			healingBuff = 20F;
+			healingBuff = (float) (ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 20D : 20D * ConfigHandler.INSTANCE.mobHealthMultipier);
 			is.stackSize--;
 			setTameState((byte) 1);
 			playTameEffect(true);
 			player.swingItem();
 			tasks.removeTask(aiNearestAttackableTarget);
 			setAttackTarget((EntityLivingBase) null);
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 80D : 80D * ConfigHandler.INSTANCE.mobHealthMultipier);
 			heal(healingBuff);
 			return true;
 		}
@@ -189,7 +190,7 @@ public class EntityStagBeetle extends EntityTameable {
 			return true;
 		}
 		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.BAMBOO_SHOOT.ordinal() && getTameState() != 0) {
-			healingBuff = 5.0F;
+			healingBuff = (float) (ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 5D : 5D * ConfigHandler.INSTANCE.mobHealthMultipier);
 			if (getHealth() < getMaxHealth()) {
 				heal(healingBuff);
 				playTameEffect(true);
@@ -286,7 +287,7 @@ public class EntityStagBeetle extends EntityTameable {
 				return false;
 			}
 		if (entity != null && getDistanceToEntity(entity) <= 2.5F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 4);
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 		return super.attackEntityAsMob(entity);
 	}
 

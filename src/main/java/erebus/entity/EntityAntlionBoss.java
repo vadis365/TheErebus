@@ -2,15 +2,6 @@ package erebus.entity;
 
 import java.util.List;
 
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAIAntlionBossAttack;
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
-import erebus.world.feature.structure.AntlionMazeDungeon;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,6 +22,16 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIAntlionBossAttack;
+import erebus.item.ItemMaterials;
+import erebus.network.PacketPipeline;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
+import erebus.world.feature.structure.AntlionMazeDungeon;
 
 public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 
@@ -76,9 +77,9 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 400D : 400D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(400.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(48.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);
 	}
@@ -189,7 +190,7 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 			if (entity != null)
 				if (entity instanceof EntityLivingBase && !(entity instanceof EntityAntlionBoss)) {
 					float Knockback = (-3.0F + worldObj.rand.nextInt(4)) * 0.1F;
-					entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F);
+					entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 					entity.addVelocity(-MathHelper.sin(rotationYaw * -3.141593F + worldObj.rand.nextInt(3) + 0.141593F / 180.0F) * Knockback, 0.01D, MathHelper.cos(rotationYaw * -3.141593F + worldObj.rand.nextInt(3) + 0.141593F / 180.0F) * Knockback);
 					worldObj.playSoundAtEntity(entity, "erebus:antlionslam", 1.0F, 1.0F);
 				}

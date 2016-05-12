@@ -2,11 +2,6 @@ package erebus.entity.ai;
 
 import java.util.List;
 
-import erebus.entity.EntityPoisonJet;
-import erebus.entity.EntityTarantula;
-import erebus.entity.EntityTarantulaBaby;
-import erebus.entity.EntityTarantulaEgg;
-import erebus.entity.EntityTarantulaMiniboss;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,6 +15,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.EntityPoisonJet;
+import erebus.entity.EntityTarantula;
+import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityTarantulaEgg;
+import erebus.entity.EntityTarantulaMiniboss;
 
 public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 
@@ -107,7 +108,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 			if (attackTick <= 0) {
 				attackTick = 10;
 				attacker.attackEntityAsMob(entitylivingbase);
-				entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(attacker), 4.0F);
+				entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(attacker), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 				entitylivingbase.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F, 0.1D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F);
 			}
 
@@ -178,7 +179,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 			if (entity != null)
 				if (entity instanceof EntityLivingBase && !(entity instanceof EntityTarantulaMiniboss) && !(entity instanceof EntityTarantula) && !(entity instanceof EntityTarantulaBaby)) {
 					float Knockback = 2;
-					entity.attackEntityFrom(DamageSource.causeMobDamage(attacker), 8.0F);
+					entity.attackEntityFrom(DamageSource.causeMobDamage(attacker), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 					entity.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
 					attacker.playSound("erebus:blamsound", 1.5F, 1.0F);
 					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 8 * 20, 0));

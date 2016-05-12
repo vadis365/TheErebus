@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ItemMaterials;
 
@@ -36,8 +37,8 @@ public class EntityZombieAntSoldier extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 40D : 40D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 

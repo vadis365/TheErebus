@@ -3,6 +3,7 @@ package erebus.entity;
 import java.util.Calendar;
 
 import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.ItemMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -37,9 +38,9 @@ public class EntityBotFly extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D);
 	}
 

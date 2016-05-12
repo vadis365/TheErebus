@@ -1,11 +1,5 @@
 package erebus.entity;
 
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAIPolinate;
-import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -32,6 +26,13 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIPolinate;
+import erebus.item.ItemMaterials;
 
 public class EntityWorkerBee extends EntityTameable {
 	public ChunkCoordinates currentFlightTarget;
@@ -75,7 +76,7 @@ public class EntityWorkerBee extends EntityTameable {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 30D : 30D * ConfigHandler.INSTANCE.mobHealthMultipier);
 	}
 
 	@Override
@@ -315,7 +316,7 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 4);
+		return entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 	}
 
 	public void setNectarPoints(int count) {

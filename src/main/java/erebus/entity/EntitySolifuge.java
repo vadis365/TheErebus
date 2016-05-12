@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -13,6 +11,9 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.item.ItemMaterials;
 
 public class EntitySolifuge extends EntityMob {
 
@@ -38,8 +39,8 @@ public class EntitySolifuge extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 30D : 30D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 

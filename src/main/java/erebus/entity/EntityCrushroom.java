@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.ItemMaterials;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
@@ -39,8 +40,8 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(200.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(6.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 200D : 200D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
 	}
@@ -168,7 +169,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 	@Override
 	@SuppressWarnings("rawtypes")
 	public boolean canAttackClass(Class entity) {
-		return EntityCrushroom.class != entity && EntityCrushling.class != entity && EntityZombieAnt.class != entity && EntityPunchroom.class != entity;
+		return EntityCrushroom.class != entity && EntityCrushling.class != entity && EntityZombieAnt.class != entity && EntityZombieAntSoldier.class != entity && EntityPunchroom.class != entity;
 	}
 
 	@Override
@@ -187,7 +188,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 		if (!worldObj.isRemote && getAttackTarget().boundingBox.maxY >= boundingBox.minY - 1.0D && getAttackTarget().boundingBox.minY <= boundingBox.maxY && getSmashCount() == 20) {
 			playSound("erebus:blamsound", 0.5F, 1.0F);
 			spawnBlamParticles();
-			getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), 6.0F);
+			getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 			getAttackTarget().addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 0.5D, 0.2D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 0.5D);
 		}
 	}

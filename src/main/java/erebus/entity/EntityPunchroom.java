@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.item.ItemMaterials;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,6 +7,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.ItemMaterials;
 
 public class EntityPunchroom extends EntityMob {
 	private int shroomJumpDelay;
@@ -26,8 +27,8 @@ public class EntityPunchroom extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 20D : 20D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 
@@ -108,7 +109,7 @@ public class EntityPunchroom extends EntityMob {
 						knockback = 0.4F;
 					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
 						knockback = 0.6F;
-			player.attackEntityFrom(DamageSource.causeMobDamage(this), 1F);
+			player.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 			player.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback, 0.3D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback);
 		}
 	}

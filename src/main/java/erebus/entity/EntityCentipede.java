@@ -17,6 +17,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ItemMaterials;
 
@@ -44,8 +45,8 @@ public class EntityCentipede extends EntityMob {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength());
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 

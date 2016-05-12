@@ -1,6 +1,7 @@
 package erebus.entity;
 
 import erebus.ModBiomes;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.BiomeDecoratorFungalForest;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -48,8 +49,8 @@ public class EntityCrushling extends EntityAnimal {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 5D : 5D * ConfigHandler.INSTANCE.mobHealthMultipier);
 	}
 
 	@Override

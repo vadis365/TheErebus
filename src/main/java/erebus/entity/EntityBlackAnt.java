@@ -9,6 +9,7 @@ import java.util.Random;
 import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.helper.Utils;
 import erebus.core.proxy.CommonProxy;
 import erebus.entity.ai.EntityAIAntBonemealCrops;
@@ -91,9 +92,8 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D);
-		// getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 	}
 

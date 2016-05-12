@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.helper.Utils;
 import erebus.item.ItemDungeonIdols.IDOL;
 
@@ -229,7 +230,7 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 				motionY = 0.4000000059604645D;
 			}
 			int knockback = 1;
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) getAttackStrength());
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback * 0.5F, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback * 0.5F);
 			worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));
@@ -284,8 +285,8 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 
 	public void setType(byte isType) {
 		dataWatcher.updateObject(29, Byte.valueOf(isType));
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getGolemHealth());
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(getAttackStrength());
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? getGolemHealth() : getGolemHealth() * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 	}
 
 	public byte getType() {

@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import erebus.ModAchievements;
 import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityAIEatWoodenItem;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
@@ -86,7 +87,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
 	}
 

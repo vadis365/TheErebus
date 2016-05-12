@@ -12,6 +12,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityAIEatCrops;
 
 public class EntityGrasshopper extends EntityCreature {
@@ -39,7 +40,7 @@ public class EntityGrasshopper extends EntityCreature {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
 	}
 
 	@Override

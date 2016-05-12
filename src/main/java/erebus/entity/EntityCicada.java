@@ -20,6 +20,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.item.ItemMaterials;
 import erebus.lib.EnumWood;
 
@@ -41,8 +42,8 @@ public class EntityCicada extends EntityCreature {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 5D : 5D * ConfigHandler.INSTANCE.mobHealthMultipier);
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -17,6 +15,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.item.ItemMaterials;
 
 public class EntityWheatWeevil extends EntityCreature {
 
@@ -55,7 +56,7 @@ public class EntityWheatWeevil extends EntityCreature {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(15.0D); // MaxHealth
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
 	}
 
 	@Override

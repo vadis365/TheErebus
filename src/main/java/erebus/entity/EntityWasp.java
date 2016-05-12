@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.ModItems;
 import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.item.ItemMaterials;
 
@@ -72,15 +73,15 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 				setSize(2.5F, 2F);
 				experienceValue = 25;
 				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.9D);
-				getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
-				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D);
+				getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 60D : 60D * ConfigHandler.INSTANCE.mobHealthMultipier);
+				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 				getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 			} else {
 				setSize(1.5F, 1.0F);
 				experienceValue = 10;
 				getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D);
-				getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
-				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+				getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
+				getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 				getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
 			}
 	}
@@ -221,20 +222,21 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		if (super.attackEntityAsMob(entity)) {
-			if (entity instanceof EntityLivingBase) {
-				byte duration = 0;
+		if (canEntityBeSeen(entity)) {
+			if (super.attackEntityAsMob(entity)) {
+				if (entity instanceof EntityLivingBase) {
+					byte duration = 0;
 
-				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal())
-					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-						duration = 7;
-					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-						duration = 15;
+					if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal())
+						if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+							duration = 7;
+						else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+							duration = 15;
 
-				if (duration > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
+					if (duration > 0)
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
+				}
 			}
-
 			return true;
 		} else
 			return false;

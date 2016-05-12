@@ -10,6 +10,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
 
 public class EntityThrownSand extends EntityThrowable {
 	public static float rotationticks;
@@ -37,7 +38,7 @@ public class EntityThrownSand extends EntityThrowable {
 					((EntityLivingBase) movingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.blindness.id, 2 * 20, 0));
 					worldObj.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(Blocks.sand));
 				}
-			if (!movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 4))
+			if (!movingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier)))
 				;
 		} else if (movingObjectPosition.entityHit == null && Blocks.sand.canPlaceBlockAt(worldObj, x, y, z))
 			if (!worldObj.isRemote) {

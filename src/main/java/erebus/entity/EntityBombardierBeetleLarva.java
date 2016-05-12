@@ -1,12 +1,14 @@
 package erebus.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
 import erebus.network.PacketPipeline;
 import erebus.network.client.PacketParticle;
@@ -60,7 +62,7 @@ public class EntityBombardierBeetleLarva extends EntityBeetleLarva {
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (entity != null && getDistanceToEntity(entity) <= 1.5F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1);
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 		return super.attackEntityAsMob(entity);
 	}
 
