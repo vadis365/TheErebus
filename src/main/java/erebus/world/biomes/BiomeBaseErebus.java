@@ -2,18 +2,19 @@ package erebus.world.biomes;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.world.SpawnerErebus.SpawnEntry;
-import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
-import erebus.world.loot.IWeightProvider;
-import erebus.world.loot.WeightedList;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBiomes;
+import erebus.ModBlocks;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.SpawnerErebus.SpawnEntry;
+import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
+import erebus.world.loot.IWeightProvider;
+import erebus.world.loot.WeightedList;
 
 public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightProvider {
 
@@ -57,7 +58,10 @@ public abstract class BiomeBaseErebus extends BiomeGenBase implements IWeightPro
 	}
 
 	protected final BiomeBaseErebus setFog(int red, int green, int blue) {
-		fogColorRGB = new short[] { (short) red, (short) green, (short) blue };
+		if(ConfigHandler.INSTANCE.biomeFogColours)
+			fogColorRGB = new short[] { (short) red, (short) green, (short) blue };
+		else
+			fogColorRGB = new short[] { 0, 0, 0 };
 		return this;
 	}
 
