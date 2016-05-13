@@ -438,11 +438,11 @@ item.erebus.smoothie_money_honey.name=Смузи: Денежный мёд
 item.erebus.smoothie_nothing_in_the_middle.name=Смузи: Пустота посередине
 item.erebus.smoothie_green_giant.name=Смузи: Зелёный гигант
 item.erebus.smoothie_seedy_goodness.name=Смузи: Семенная доброта
-item.erebus.smoothie_givin_me_the_blues.name=Смузи: сыграй мне "блюз"
+item.erebus.smoothie_givin_me_the_blues.name=Смузи: Сыграй мне "блюз"
 item.erebus.smoothie_hot_hot_baby.name=Смузи: Горячая-прегорячая детка
 item.erebus.smoothie_dont_meddle_with_the_nettle.name=Смузи: Не трогайте крапиву
 item.erebus.smoothie_liquid_gold.name=Смузи: Жидкое золото
-item.erebus.smoothie_bryufs_brew.name=Смузи: Bryuf's Brew
+item.erebus.smoothie_bryufs_brew.name=Смузи: Напиток Бруфа
 
 # Foodstuffs
 item.erebus.food_beetle_larva_raw.name=Личинка жука
@@ -708,11 +708,12 @@ entity.erebus.animatedChest.name=Оживлённый сундук
 entity.erebus.animatedBambooCrate.name=Оживлённый бамбуковый ящик
 entity.erebus.animatedBlock.name=Оживленный блок
 entity.erebus.honeyPotAnt.name=Медовый муравей
-entity.erebus.bombardierBeetleLarva.name=Жук-бомбардир
+entity.erebus.bombardierBeetleLarva.name=Личинка жука-бомбардира
 entity.erebus.zombieAntSoldier.name=Зомби-солдат
 entity.erebus.bedBug.name=Постельный клоп
 entity.erebus.stagBeetle.name=Рогач
 entity.erebus.gasVent.name=Пламя болотного газа
+entity.erebus.umberGolem.name=Умбровый голем
 
 ##########
 # Fluids #
@@ -761,9 +762,9 @@ container.petrifiedChestDouble=Большой сундук из окаменел
 container.extenderThingy=Бамбуковый прокладчик мостов
 container.antInventory=Управление муравьями
 container.composter=Органический компостер
-container.chester=Оживленный сундук
-container.bamber=Оживлённый бамбуковый ящик
 container.silo=Местоположение силоса
+container.animatedChest=Оживленный сундук
+container.animatedBambooCrate=Оживлённый бамбуковый ящик
 
 ############
 # Tooltips #
@@ -804,11 +805,11 @@ tooltip.erebus.heals=Лечит 10 сердец при употреблении.
 tooltip.erebus.feeds=Утоляет голод при употреблении. Всегда съедобно.
 tooltip.erebus.poweredGlider=Требуются блоки красного камня в качестве топлива для полета.
 
-armchair.spawnSet=You can only sit here... oh, whenever.
-armchair.obstructed=Adventurer's Armchair obstructed. Defaulting spawn to most recent Portal used.
-armchair.missing=Adventurer's Armchair not found. Defaulting spawn to most recent Portal used.
-armchair.unstable=An unstable spawn point has been set to your current location. Please travel through an Erebus portal from The Overworld to create a stable spawn point.
-armchair.unableToSit=Adventurer's Armchair obstructed.
+armchair.spawnSet=Вы можете сидеть только тут... ох, иногда.
+armchair.obstructed=Доступ к креслу путешественника затруднен. Используется спаун по умолчанию.
+armchair.missing=Кресло путешественника не найдено. Установка точки спавна на последнем месте использования портала.
+armchair.unstable=Временная точка спауна была установлена на вашем текущем местоположении. Пожалуйста, путешествуйте через портал в Эреб их обычного мира, чтобы создать постоянную точку респауна.
+armchair.unableToSit=Доступ к креслу путешественника затруднен.
 
 ############
 # Commands #
@@ -824,7 +825,7 @@ command.erebus.gen=/erebus gen <тип> <функция>
 # Others #
 ##########
 
-erebus.smoothie.effect.milk=Убирает эффекты
+erebus.smoothie.effect.milk=Снимает эффекты
 erebus.smoothie.effect.extinguish=Тушит
 erebus.smoothie.effect.set_fire=Поджигает
 erebus.smoothie.effect.heal=Лечит

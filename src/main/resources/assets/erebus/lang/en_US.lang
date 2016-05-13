@@ -712,6 +712,7 @@ entity.erebus.zombieAntSoldier.name=Zombie Ant Soldier
 entity.erebus.bedBug.name=Bed Bug
 entity.erebus.stagBeetle.name=Stag Beetle
 entity.erebus.gasVent.name=Swamp gas flame
+entity.erebus.umberGolem.name=Umbergolem
 
 ##########
 # Fluids #
