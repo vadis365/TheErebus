@@ -13,7 +13,7 @@ import net.minecraft.util.StatCollector;
 @SideOnly(Side.CLIENT)
 public class GuiErebusBasic extends GuiErebus {
 
-	private final int TEXT_COLOUR = Utils.getColour(192, 192, 192);
+	private final int TEXT_COLOUR = Utils.getColour(0, 0, 0);
 
 	protected final IInventory invt;
 	protected final ResourceLocation texture;

@@ -2,10 +2,15 @@ package erebus.client.gui;
 
 import java.util.List;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.gui.elements.GuiInvisibleButton;
@@ -13,16 +18,11 @@ import erebus.inventory.ContainerColossalCrate;
 import erebus.network.PacketPipeline;
 import erebus.network.server.S00ColossalCratePage;
 import erebus.tileentity.TileEntityBambooCrate;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
 public class GuiColossalCrate extends GuiContainer {
 
-	public static final boolean hasInventoryTweaks = Loader.isModLoaded("inventorytweaks");
+	//public static final boolean hasInventoryTweaks = Loader.isModLoaded("inventorytweaks");
 	private static final ResourceLocation GUI_BAMBOO_CRATE = new ResourceLocation("erebus:textures/gui/container/bambooCollosalCrate.png");
 
 	public GuiColossalCrate(InventoryPlayer playerInventory, List<TileEntityBambooCrate> list) {
@@ -39,7 +39,9 @@ public class GuiColossalCrate extends GuiContainer {
 		Keyboard.enableRepeatEvents(true);
 		buttonList.clear();
 		buttonList.add(new GuiInvisibleButton(0, guiLeft + 7, guiTop + 4, 17, 11));
-		buttonList.add(new GuiInvisibleButton(1, guiLeft + 205 - (hasInventoryTweaks ? 50 : 0), guiTop + 4, 17, 11));
+		buttonList.add(new GuiInvisibleButton(1, guiLeft + 205, guiTop + 4, 17, 11));
+		//This never worked!
+		//buttonList.add(new GuiInvisibleButton(1, guiLeft + 205 - (hasInventoryTweaks ? 50 : 0), guiTop + 4, 17, 11));
 	}
 
 	@Override
