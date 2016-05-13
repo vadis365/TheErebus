@@ -805,6 +805,8 @@ tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
 tooltip.erebus.heals=Heals 10 Hearts when consumed. Always Edible.
 tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
 tooltip.erebus.poweredGlider=Needs redgem blocks at the cost of fuel to flight.
+tooltip.erebus.gliderGlideKey=Gliding Key
+tooltip.erebus.gliderPoweredKey=Flying Key
 
 armchair.spawnSet=You can only sit here... oh, whenever.
 armchair.obstructed=Adventurer's Armchair obstructed. Defaulting spawn to most recent Portal used.

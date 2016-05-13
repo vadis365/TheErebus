@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.util.Constants;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -34,7 +35,6 @@ import erebus.network.server.PacketGlider;
 import erebus.network.server.PacketGliderPowered;
 
 public class ItemArmorGlider extends ItemArmor {
-
 	public ItemArmorGlider() {
 		super(ModMaterials.armorREINEXOSPECIAL, 2, 1);
 		setCreativeTab(ModTabs.gears);
@@ -47,8 +47,9 @@ public class ItemArmorGlider extends ItemArmor {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
 		if (canFly()) {
 			list.add(StatCollector.translateToLocal("tooltip.erebus.poweredGlider"));
-			// TODO Add tooltips with keys assigned to glide and poweredGlide as variables
+			list.add(StatCollector.translateToLocal("tooltip.erebus.gliderPoweredKey") + ": " + Keyboard.getKeyName(KeyBindingHandler.poweredGlide.getKeyCode()));
 		}
+		list.add(StatCollector.translateToLocal("tooltip.erebus.gliderGlideKey") + ": " + Keyboard.getKeyName(KeyBindingHandler.glide.getKeyCode()));
 	}
 
 	@Override
