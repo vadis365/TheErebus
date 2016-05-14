@@ -67,21 +67,21 @@ public class ItemMaterials extends Item {
 		if (!world.isRemote) {
 			int damage = is.getItemDamage();
 
-			if (damage == ITEM_DATA.bioVelocity.ordinal() || damage == ITEM_DATA.supernaturalvelocity.ordinal()) {
+			if (damage == ITEM_DATA.BIO_VELOCITY.ordinal() || damage == ITEM_DATA.SUPERNATURAL_VELOCITY.ordinal()) {
 				PotionEffect currentSpeed = player.getActivePotionEffect(MobEffects.moveSpeed);
 
-				if (currentSpeed == null || damage == ITEM_DATA.bioVelocity.ordinal() && currentSpeed.getAmplifier() < 1 || damage == ITEM_DATA.supernaturalvelocity.ordinal() && currentSpeed.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, damage == ITEM_DATA.bioVelocity.ordinal() ? 280 : 210, damage == ITEM_DATA.bioVelocity.ordinal() ? 1 : 3, true, false));
+				if (currentSpeed == null || damage == ITEM_DATA.BIO_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 1 || damage == ITEM_DATA.SUPERNATURAL_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 3) {
+					player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, damage == ITEM_DATA.BIO_VELOCITY.ordinal() ? 280 : 210, damage == ITEM_DATA.BIO_VELOCITY.ordinal() ? 1 : 3, true, false));
 					//PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 				} else
 					return new ActionResult(EnumActionResult.PASS, is);
 			}
 
-			if (damage == ITEM_DATA.camoPowder.ordinal()) {
+			if (damage == ITEM_DATA.CAMO_POWDER.ordinal()) {
 				PotionEffect currentVisibility = player.getActivePotionEffect(MobEffects.invisibility);
 
-				if (currentVisibility == null || damage == ITEM_DATA.camoPowder.ordinal() && currentVisibility.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(MobEffects.invisibility, damage == ITEM_DATA.camoPowder.ordinal() ? 280 : 210, damage == ITEM_DATA.camoPowder.ordinal() ? 1 : 3, true, false));
+				if (currentVisibility == null || damage == ITEM_DATA.CAMO_POWDER.ordinal() && currentVisibility.getAmplifier() < 3) {
+					player.addPotionEffect(new PotionEffect(MobEffects.invisibility, damage == ITEM_DATA.CAMO_POWDER.ordinal() ? 280 : 210, damage == ITEM_DATA.CAMO_POWDER.ordinal() ? 1 : 3, true, false));
 				//	PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 				} else
 					return new ActionResult(EnumActionResult.PASS, is);
@@ -107,80 +107,86 @@ public class ItemMaterials extends Item {
 	public String getUnlocalizedName(ItemStack is) {
 		int meta = is.getItemDamage();
 		meta = Math.min(Math.max(meta, 0), ITEM_DATA.values().length - 1);
-		return super.getUnlocalizedName() + "." + ITEM_DATA.values()[meta].name();
+		return super.getUnlocalizedName() + "." + ITEM_DATA.values()[meta].name().toLowerCase();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack is) {
-		return is.getItemDamage() == ITEM_DATA.whetstonePowder.ordinal();
+		return is.getItemDamage() == ITEM_DATA.WHETSTONE_POWDER.ordinal();
 	}
 
 	public enum ITEM_DATA {
-		plateExo,
-		jade,
-		shardBone,
-		bamboo,
-		compoundEyes,
-		compoundLens,
-		flyWing,
-		petrifiedWood,
-		bioVelocity,
-		elasticFibre,
-		waspSting,
-		bambooShoot,
-		redGem,
-		bioLuminescence,
-		supernaturalvelocity,
-		altarFragment,
-		reinforcedPlateExo,
-		gliderWing,
-		scorpionPincer,
-		camoPowder,
-		nectar,
-		honeyDrip,
-		poisonGland,
-		mudBrick,
-		whetstonePowder,
-		dragonflyWing,
-		weepingBluePetal,
-		papyrus,
-		enhancedGliderWing,
-		repellent,
-		mucusCharge,
-		nettleleaves,
-		nettleflowers,
-		darkFruitSeeds,
-		mossBall,
-		yellowDottedFungus,
-		plateExoRhino,
-		rhinoBeetleHorn,
-		antPheromones,
-		gaeanGem,
-		crimsonHeart,
-		sapBall,
-		ingotAluminium,
-		ingotCopper,
-		ingotLead,
-		ingotSilver,
-		ingotTin,
-		gneissRock,
-		hideShroom,
-		rhinoRidingKit,
-		beetleTamingAmulet,
-		umberGolemCore,
-		umberGolemHead,
-		umberGolemClaw,
-		umberGolemLegs,
-		jadeBerries,
-		snapperRoot,
-		hydrofuge,
-		waterRepellent,
-		smoothieGlass,
-		magmaCrawlerEye,
-		stewPot,
-		titanStew;
-
+		PLATE_EXO,
+		JADE,
+		SHARD_BONE,
+		BAMBOO,
+		COMPOUND_EYES,
+		COMPOUND_LENS,
+		FLY_WING,
+		PETRIFIED_WOOD,
+		BIO_VELOCITY,
+		ELASTIC_FIBRE,
+		WASP_STING,
+		BAMBOO_SHOOT,
+		RED_GEM,
+		BIO_LUMINESCENCE,
+		SUPERNATURAL_VELOCITY,
+		ALTAR_FRAGMENT,
+		REINFORCED_PLATE_EXO,
+		GLIDER_WING,
+		SCORPION_PINCER,
+		CAMO_POWDER,
+		NECTAR,
+		HONEY_DRIP,
+		POISON_GLAND,
+		MUD_BRICK,
+		WHETSTONE_POWDER,
+		DRAGONFLY_WING,
+		WEEPING_BLUE_PETAL,
+		PAPYRUS,
+		ENHANCED_GLIDER_WING,
+		REPELLENT,
+		MUCUS_CHARGE,
+		NETTLE_LEAVES,
+		NETTLE_FLOWERS,
+		DARK_FRUIT_SEEDS,
+		MOSS_BALL,
+		YELLOW_DOTTED_FUNGUS,
+		PLATE_EXO_RHINO,
+		RHINO_BEETLE_HORN,
+		ANT_PHEROMONES,
+		GAEAN_GEM,
+		CRIMSON_HEART,
+		SAP_BALL,
+		AMBER_STAR,
+		INGOT_ALUMINIUM,
+		INGOT_COPPER,
+		INGOT_LEAD,
+		INGOT_SILVER,
+		INGOT_TIN,
+		GNEISS_ROCK,
+		HIDE_SHROOM,
+		RHINO_RIDING_KIT,
+		BEETLE_TAMING_AMULET,
+		UMBERGOLEM_CORE,
+		UMBERGOLEM_HEAD,
+		UMBERGOLEM_CLAW,
+		UMBERGOLEM_LEGS,
+		JADE_BERRIES,
+		SNAPPER_ROOT,
+		HYDROFUGE,
+		WATER_REPELLENT,
+		SMOOTHIE_GLASS,
+		MAGMA_CRAWLER_EYE,
+		STEW_POT,
+		TITAN_STEW,
+		FORCE_KEY,
+		SOUL_CRYSTAL,
+		PLATE_ZOMBIE_ANT,
+		STAG_BEETLE_MANDIBLES,
+		TERPSISHROOM;
+		
 		public ItemStack createStack() {
 			return createStack(1);
 		}
