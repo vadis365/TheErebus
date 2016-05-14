@@ -11,14 +11,14 @@ public class ModTabs {
 			return Item.getItemFromBlock(ModBlocks.umberstone);
 		}
 	};
-/*
+
 	public static CreativeTabs items = new CreativeTabs("erebus.item") {
 		@Override
 		public Item getTabIconItem() {
-			return ModItems.food;
+			return ModItems.materials;
 		}
 	};
-
+/*
 	public static CreativeTabs gears = new CreativeTabs("erebus.gear") {
 		@Override
 		public Item getTabIconItem() {

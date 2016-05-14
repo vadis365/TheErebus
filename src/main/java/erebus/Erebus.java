@@ -43,7 +43,7 @@ public class Erebus {
 */
 	//	ModFluids.init();
 		ModBlocks.init();
-		//ModItems.init();
+		ModItems.init();
 		//ModEntities.init();
 
 //		AchievementPage.registerAchievementPage(new ModAchievements());
