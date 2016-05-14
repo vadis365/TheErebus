@@ -122,6 +122,7 @@ public class ModItems {
 	public static void init() {
 		registerItems();
 		registerProperties();
+		Erebus.proxy.registerItemRenderer();
 	}
 
 	private static void registerItems() {

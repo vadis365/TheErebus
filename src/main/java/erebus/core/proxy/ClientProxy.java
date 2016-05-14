@@ -9,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.item.ItemMaterials;
 import erebus.lib.EnumWood;
 
 public class ClientProxy extends CommonProxy {
@@ -270,34 +272,48 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerBlockRenderer() {
-		reg(ModBlocks.portal);
-		reg(ModBlocks.umberstone, 0, "umberstone");
-		reg(ModBlocks.umberstone, 1, "umbercobble");
-		reg(ModBlocks.umberstone, 2, "umbercobble_mossy");
-		reg(ModBlocks.umberstone, 3, "umbercobble_webbed");
-		reg(ModBlocks.umberstone, 4, "umberstone_bricks");
-		reg(ModBlocks.umberstone, 5, "umbertile_smooth");
-		reg(ModBlocks.umberstone, 6, "umbertile_smooth_small");
+		regItemBlock(ModBlocks.portal);
+		regItemBlock(ModBlocks.umberstone, 0, "umberstone");
+		regItemBlock(ModBlocks.umberstone, 1, "umbercobble");
+		regItemBlock(ModBlocks.umberstone, 2, "umbercobble_mossy");
+		regItemBlock(ModBlocks.umberstone, 3, "umbercobble_webbed");
+		regItemBlock(ModBlocks.umberstone, 4, "umberstone_bricks");
+		regItemBlock(ModBlocks.umberstone, 5, "umbertile_smooth");
+		regItemBlock(ModBlocks.umberstone, 6, "umbertile_smooth_small");
 		
 		for (int i = 0; i < EnumWood.values().length; i++) {
 			EnumWood wood = EnumWood.values()[i];
 			if (wood.hasPlanks()) {
 				String name = "planks_" + EnumWood.values()[i].name().toLowerCase();
-				reg(ModBlocks.planks, EnumWood.values()[i].ordinal(), name);
+				regItemBlock(ModBlocks.planks, EnumWood.values()[i].ordinal(), name);
 			}
 		}
 	}
 
 	@Override
-	public void reg(Block block) {
+	public void regItemBlock(Block block) {
 		System.out.println("**This should print a block type before crash**:" + block);
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName().toString(), "inventory"));
 	}
 	
 	@Override
-	public void reg(Block block, int meta, String file) {
+	public void regItemBlock(Block block, int meta, String file) {
 		System.out.println("**This should print a META block type before crash**:" + block + " variant: "+ file);
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, new ModelResourceLocation("erebus:" + file, "inventory"));		
+	}
+
+	@Override
+	public void registerItemRenderer() {
+		for (int i = 0; i < ItemMaterials.ITEM_DATA.values().length; i++) {
+			String name = ItemMaterials.ITEM_DATA.values()[i].name().toLowerCase();
+			regItem(ModItems.materials, ItemMaterials.ITEM_DATA.values()[i].ordinal(), name);
+		}
+	}
+
+	@Override
+	public void regItem(Item item, int meta, String file) {
+		System.out.println("**This should print a META Item type before crash**:" + item + " variant: "+ file);
+		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation("erebus:" + file, "inventory"));		
 	}
 
 	private ModelResourceLocation[] variants(String... strings) {

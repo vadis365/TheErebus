@@ -310,16 +310,26 @@ public class CommonProxy implements IGuiHandler {
 		
 	}
 
-	public void reg(Block block) {
+	public void regItemBlock(Block block) {
 		// TODO Auto-generated method stub
 	}
 
-	public void reg(Block block, int meta, String file) {
+	public void regItemBlock(Block block, int meta, String file) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	public void setCustomStateMap(Block block, StateMap stateMap) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void registerItemRenderer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void regItem(Item item, int meta, String file) {
 		// TODO Auto-generated method stub
 		
 	}

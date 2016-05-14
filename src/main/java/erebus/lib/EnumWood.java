@@ -105,7 +105,7 @@ public enum EnumWood implements IStringSerializable {
 				GameRegistry.register(log);
 				ItemBlock itemBlock = new ItemBlock(log);
 				GameRegistry.register(itemBlock.setRegistryName(log.getRegistryName()));
-				Erebus.proxy.reg(log);
+				Erebus.proxy.regItemBlock(log);
 				Blocks.fire.setFireInfo(log, 5, 5);
 				logs.put(wood, log);
 			}
@@ -115,7 +115,7 @@ public enum EnumWood implements IStringSerializable {
 				ItemBlock itemBlock = new ItemBlock(sapling);
 				GameRegistry.register(itemBlock.setRegistryName(sapling.getRegistryName()));
 				Erebus.proxy.setCustomStateMap(sapling, new StateMap.Builder().ignore(new IProperty[] {BlockSapling.TYPE}).build());
-				Erebus.proxy.reg(sapling);
+				Erebus.proxy.regItemBlock(sapling);
 				saplings.put(wood, sapling);
 			}
 			if (wood.hasLeaves) {
@@ -124,7 +124,7 @@ public enum EnumWood implements IStringSerializable {
 				ItemBlock itemBlock = new ItemBlock(leaf);
 				GameRegistry.register(itemBlock.setRegistryName(leaf.getRegistryName()));
 				Erebus.proxy.setCustomStateMap(leaf, new StateMap.Builder().ignore(new IProperty[] {BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE}).build());
-				Erebus.proxy.reg(leaf);
+				Erebus.proxy.regItemBlock(leaf);
 				Blocks.fire.setFireInfo(leaf, 30, 60);
 				leaves.put(wood, leaf);
 			}
