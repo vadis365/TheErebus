@@ -73,6 +73,8 @@ public class ItemMaterials extends Item {
 				if (currentSpeed == null || damage == ITEM_DATA.BIO_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 1 || damage == ITEM_DATA.SUPERNATURAL_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 3) {
 					player.addPotionEffect(new PotionEffect(MobEffects.moveSpeed, damage == ITEM_DATA.BIO_VELOCITY.ordinal() ? 280 : 210, damage == ITEM_DATA.BIO_VELOCITY.ordinal() ? 1 : 3, true, false));
 					//PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
+					if (!player.capabilities.isCreativeMode)
+						--is.stackSize;
 				} else
 					return new ActionResult(EnumActionResult.PASS, is);
 			}
@@ -83,13 +85,12 @@ public class ItemMaterials extends Item {
 				if (currentVisibility == null || damage == ITEM_DATA.CAMO_POWDER.ordinal() && currentVisibility.getAmplifier() < 3) {
 					player.addPotionEffect(new PotionEffect(MobEffects.invisibility, damage == ITEM_DATA.CAMO_POWDER.ordinal() ? 280 : 210, damage == ITEM_DATA.CAMO_POWDER.ordinal() ? 1 : 3, true, false));
 				//	PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
+					if (!player.capabilities.isCreativeMode)
+						--is.stackSize;
 				} else
 					return new ActionResult(EnumActionResult.PASS, is);
 			} else
 				return new ActionResult(EnumActionResult.PASS, is);
-
-			if (!player.capabilities.isCreativeMode)
-				--is.stackSize;
 		}
 
 		return new ActionResult(EnumActionResult.PASS, is);
@@ -143,7 +144,7 @@ public class ItemMaterials extends Item {
 		MUD_BRICK,
 		WHETSTONE_POWDER,
 		DRAGONFLY_WING,
-		WEEPING_BLUEBELL_PETAL,
+		BLUEBELL_PETAL,
 		PAPYRUS,
 		ENHANCED_GLIDER_WING,
 		REPELLENT,
@@ -167,7 +168,7 @@ public class ItemMaterials extends Item {
 		INGOT_TIN,
 		GNEISS_ROCK,
 		HIDE_SHROOM,
-		RHINO_RIDING_KIT,
+		BEETLE_RIDING_KIT,
 		BEETLE_TAMING_AMULET,
 		UMBERGOLEM_CORE,
 		UMBERGOLEM_HEAD,
