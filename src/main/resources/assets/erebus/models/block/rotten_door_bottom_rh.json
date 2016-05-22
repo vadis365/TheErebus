@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom_rh",
+    "textures": {
+        "bottom": "erebus:blocks/door_rotten_lower",
+        "top": "erebus:blocks/door_rotten_upper"
+    }
+}

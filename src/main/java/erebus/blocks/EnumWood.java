@@ -2,13 +2,13 @@ package erebus.blocks;
 
 import java.util.Locale;
 
+import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import erebus.ModBlocks;
 
 public enum EnumWood implements IStringSerializable {
 
@@ -18,26 +18,27 @@ public enum EnumWood implements IStringSerializable {
 	MOSSBARK,
 	ASPER,
 	CYPRESS,
-	BALSAM,
-	WHITE(false, true, false, false),
-	BAMBOO(false, true, false, false),
-	ROTTEN(true, true, false, false),
+	BALSAM(true, true, true, true, false),
+	WHITE(false, true, false, false, false),
+	BAMBOO(false, true, false, false, false),
+	ROTTEN(true, true, false, false, true),
 	MARSHWOOD,
-	SCORCHED(true, true, false, false),
-	VARNISHED(false, true, false, false);
+	SCORCHED(true, true, false, false, true),
+	VARNISHED(false, true, false, false, false);
 
-	private final boolean hasLog, hasPlanks, hasSapling, hasLeaves;
-	private Block stairs, log, slab, leaves, sapling;
+	private final boolean hasLog, hasPlanks, hasSapling, hasLeaves, hasDoor;
+	private Block stairs, log, slab, leaves, sapling, door;
 
-	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling, boolean hasLeaves) {
+	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling, boolean hasLeaves, boolean hasDoor) {
 		this.hasLog = hasLog;
 		this.hasPlanks = hasPlanks;
 		this.hasSapling = hasSapling;
 		this.hasLeaves = hasLeaves;
+		this.hasDoor = hasDoor;
 	}
 
 	EnumWood() {
-		this(true, true, true, true);
+		this(true, true, true, true, true);
 	}
 
 	@Override
@@ -85,6 +86,10 @@ public enum EnumWood implements IStringSerializable {
 		return sapling;
 	}
 
+	public Block getDoor() {
+		return door;
+	}
+
 	public static void init() {
 		for (EnumWood wood : values()) {
 			if (wood.hasLog) {
@@ -115,6 +120,13 @@ public enum EnumWood implements IStringSerializable {
 				GameRegistry.registerBlock(slab, ItemBlockSlabSimple.class, "slabPlanks" + wood.name());
 				Blocks.fire.setFireInfo(slab, 5, 5);
 				slabs.put(wood, slab);*/
+
+				if (wood.hasDoor) {
+					Block door = new BlockDoorErebus();
+					ModBlocks.registerBlock("door_" + wood.getName(), door);
+
+					wood.door = door;
+				}
 			}
 		}
 	}
@@ -137,6 +149,9 @@ public enum EnumWood implements IStringSerializable {
 				/*Block slab = wood.slab;
 				OreDictionary.registerOre("slabWood", slab);
 				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });*/
+
+				if (wood.hasDoor)
+					GameRegistry.addRecipe(new ItemStack(wood.door, 3), new Object[] { "xx", "xx", "xx", 'x', new ItemStack(ModBlocks.PLANKS, 1, wood.ordinal()) });
 			}
 			if (wood.hasLeaves)
 				OreDictionary.registerOre("treeLeaves", wood.getLeaves());

@@ -148,6 +148,17 @@ tile.erebus.stairs_marshwood.name=Marshwood Stairs
 tile.erebus.stairs_scorched.name=Scorched Stairs
 tile.erebus.stairs_varnished.name=Varnished Stairs
 
+# Doors
+tile.erebus.door_baobab.name=Baobab Door
+tile.erebus.door_eucalyptus.name=Eucalyptus Door
+tile.erebus.door_mahogany.name=Mahogany Door
+tile.erebus.door_mossbark.name=Mossbark Door
+tile.erebus.door_asper.name=Asper Door
+tile.erebus.door_cypress.name=Cypress Door
+tile.erebus.door_rotten.name=Rotten Door
+tile.erebus.door_marshwood.name=Marshwood Door
+tile.erebus.door_scorched.name=Scorched Door
+
 #################
 # CREATIVE TABS #
 #################
