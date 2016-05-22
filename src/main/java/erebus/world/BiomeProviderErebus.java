@@ -149,7 +149,7 @@ public class BiomeProviderErebus extends BiomeProvider {
 	}
 
 	@Override
-	public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
+	public GenLayer[] getModdedBiomeerators(WorldType worldType, long seed, GenLayer[] original) {
 		WorldTypeEvent.InitBiomeGens event = new WorldTypeEvent.InitBiomeGens(worldType, seed, original);
 		MinecraftForge.TERRAIN_GEN_BUS.post(event);
 		return event.getNewBiomeGens();
