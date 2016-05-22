@@ -124,11 +124,6 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		TERPSISHROOM;
 
 		@Override
-		public ItemStack createStack() {
-			return createStack(1);
-		}
-
-		@Override
 		public ItemStack createStack(int size) {
 			return new ItemStack(ModItems.MATERIALS, size, ordinal());
 		}

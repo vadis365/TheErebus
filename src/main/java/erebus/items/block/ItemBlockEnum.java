@@ -1,13 +1,13 @@
 package erebus.items.block;
 
-import erebus.api.IErebusEnum;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemCloth;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 
-public class ItemBlockEnum<T extends Enum<T> & IErebusEnum> extends ItemCloth {
+public class ItemBlockEnum<T extends Enum<T> & IStringSerializable> extends ItemCloth {
 
-	public static <T extends Enum<T> & IErebusEnum> ItemBlockEnum<T> create(Block block, Class<T> cls) {
+	public static <T extends Enum<T> & IStringSerializable> ItemBlockEnum<T> create(Block block, Class<T> cls) {
 		return new ItemBlockEnum<T>(block, cls.getEnumConstants());
 	}
 

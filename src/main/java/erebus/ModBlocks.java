@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
 import erebus.lib.Reference;
@@ -21,6 +22,7 @@ public class ModBlocks {
 	private static final List<Block> BLOCKS = new LinkedList<Block>();
 
 	public static final Block UMBERSTONE = new BlockUmberstone();
+	public static final Block PLANKS = new BlockPlanksErebus();
 
 	public static void init() {
 		try {

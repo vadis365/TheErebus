@@ -118,6 +118,21 @@ tile.erebus.leaves_baobab.name=Baobab Leaves
 tile.erebus.leaves_marshwood.name=Marshwood Leaves
 tile.erebus.leaves_cypress.name=Cypress Leaves
 
+# Planks
+tile.erebus.planks_baobab.name=Baobab Planks
+tile.erebus.planks_eucalyptus.name=Eucalyptus Planks
+tile.erebus.planks_mahogany.name=Mahogany Planks
+tile.erebus.planks_mossbark.name=Mossbark Planks
+tile.erebus.planks_asper.name=Asper Planks
+tile.erebus.planks_cypress.name=Cypress Planks
+tile.erebus.planks_balsam.name=Balsam Planks
+tile.erebus.planks_white.name=White Planks
+tile.erebus.planks_bamboo.name=Bamboo Planks
+tile.erebus.planks_rotten.name=Rotten Planks
+tile.erebus.planks_marshwood.name=Marshwood Planks
+tile.erebus.planks_scorched.name=Scorched Planks
+tile.erebus.planks_varnished.name=Varnished Planks
+
 #################
 # CREATIVE TABS #
 #################

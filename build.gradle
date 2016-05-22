@@ -1,24 +1,20 @@
-buildscript
-{
-    repositories
-	{
+buildscript {
+    repositories {
         mavenCentral()
-        maven
-		{
+        maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven
-		{
+        maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
-    dependencies
-	{
+    dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
+
 
 apply plugin: 'forge'
 
@@ -26,28 +22,18 @@ version = "1.0.0"
 group= "erebus"
 archivesBaseName = "Erebus"
 
-minecraft
-{
+minecraft {
     version = "12.16.1.1901"
-    runDir = "minecraft"
-    replace '${version}', project.version
+    runDir = "eclipse/assets"
 }
 
-processResources
-{
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+processResources {
+     from(sourceSets.main.resources.srcDirs) {
+          include 'mcmod.info'
+          expand 'version': project.version, 'mcversion': project.minecraft.version
+     }
 
-    from(sourceSets.main.resources.srcDirs)
-	{
-        include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    from(sourceSets.main.resources.srcDirs)
-	{
-        exclude 'mcmod.info'
-    }
+     from(sourceSets.main.resources.srcDirs) {
+          exclude 'mcmod.info'
+     }
 }
-
-idea { module { inheritOutputDirs = true } }

@@ -99,11 +99,6 @@ public class BlockUmberstone extends Block implements IHasCustomItem, ISubBlocks
 		UMBERTILE_SMOOTH_SMALL;
 
 		@Override
-		public ItemStack createStack() {
-			return createStack(1);
-		}
-
-		@Override
 		public ItemStack createStack(int size) {
 			return new ItemStack(ModBlocks.UMBERSTONE, size, ordinal());
 		}
