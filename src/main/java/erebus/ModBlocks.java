@@ -8,6 +8,7 @@ import java.util.Locale;
 import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
+import erebus.blocks.ErebusPortal;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -23,6 +24,7 @@ public class ModBlocks {
 
 	public static final Block UMBERSTONE = new BlockUmberstone();
 	public static final Block PLANKS = new BlockPlanksErebus();
+	public static final Block PORTAL = new ErebusPortal();
 
 	public static void init() {
 		try {

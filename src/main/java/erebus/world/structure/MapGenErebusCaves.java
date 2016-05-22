@@ -2,13 +2,13 @@ package erebus.world.structure;
 
 import java.util.Random;
 
+import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
-import erebus.world.biomes.BiomeBaseErebus;
 
 public class MapGenErebusCaves extends MapGenBase {
 	protected void generateLargeCaveNode(long seed, int chunkX, int chunkZ, double xx, double yy, double zz) {
@@ -108,7 +108,6 @@ public class MapGenErebusCaves extends MapGenBase {
 
 							for (int pz = minZ; pz < maxZ; ++pz) {
 								double zDiff = (pz + chunkZ * 16 + 0.5D - zz) / xzRange;
-								int index = (px * 16 + pz) * 128 + maxY;
 
 								if (xDiff * xDiff + zDiff * zDiff < 1D)
 									for (int py = maxY - 1; py >= minY; --py) {
@@ -119,8 +118,6 @@ public class MapGenErebusCaves extends MapGenBase {
 											BiomeBaseErebus biome = (BiomeBaseErebus) worldObj.getBiomeGenForCoords(new BlockPos(px + chunkX * 16, 0, pz + chunkZ * 16));
 											block = biome.placeCaveBlock(block, px, py, pz, rand);
 										}
-
-										--index;
 									}
 							}
 						}
@@ -133,7 +130,6 @@ public class MapGenErebusCaves extends MapGenBase {
 		}
 	}
 
-	
 	@Override
 	//protected void func_151538_a(World world, int localX, int localZ, int chunkX, int chunkZ, Block[] blocks)
 	protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int localX, int localZ, ChunkPrimer chunkPrimerIn) {

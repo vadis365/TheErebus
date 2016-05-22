@@ -1,6 +1,12 @@
 package erebus.world.structure;
+
 import java.util.Random;
 
+import com.google.common.base.Objects;
+
+import erebus.ModBiomes;
+import erebus.ModBlocks;
+import erebus.world.ChunkProviderErebus;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -11,16 +17,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
-import com.google.common.base.Objects;
-
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.world.ChunkProviderErebus;
-
 public class MapGenErebusRavine extends MapGenBase {
 	protected static final IBlockState BLK_AIR = Blocks.AIR.getDefaultState();
 	private final float[] field_75046_d = new float[1024];
-	
+
 	protected void generateRavine(long seed, int x, int z, ChunkPrimer chunkPrimer, double par6, double par8, double seed0, float seed2, float seed3, float seed4, int seed5, int seed6, double seed7) {
 		Random random = new Random(seed);
 		double blockCoordX = x * 16 + 8;
@@ -106,9 +106,7 @@ public class MapGenErebusRavine extends MapGenBase {
 
 					for (int posX = minX; !flag1 && posX < maxX; ++posX)
 						for (int posZ = minZ; !flag1 && posZ < maxZ; ++posZ)
-							for (int posY = maxY + 1; !flag1 && posY >= minY - 1; --posY) {
-								int arrayIndex = (posX * 16 + posZ) * 128 + posY;
-
+							for (int posY = maxY + 1; !flag1 && posY >= minY - 1; --posY)
 								if (posY >= 0 && posY < 128) {
 									if (isOceanBlock(chunkPrimer, posX, posY, posZ, x, z))
 										flag1 = true;
@@ -116,7 +114,6 @@ public class MapGenErebusRavine extends MapGenBase {
 									if (posY != minY - 1 && posX != minX && posX != maxX - 1 && posZ != minZ && posZ != maxZ - 1)
 										posY = minY;
 								}
-							}
 
 					if (!flag1) {
 						for (int posX = minX; posX < maxX; ++posX) {
@@ -124,7 +121,6 @@ public class MapGenErebusRavine extends MapGenBase {
 
 							for (int posZ = minZ; posZ < maxZ; ++posZ) {
 								double d13 = (posZ + z * 16 + 0.5D - seed0) / d6;
-								int arrayIndex = (posX * 16 + posZ) * 128 + maxY;
 								boolean flag2 = false;
 
 								if (d12 * d12 + d13 * d13 < 1.0D)
@@ -132,15 +128,14 @@ public class MapGenErebusRavine extends MapGenBase {
 										double d14 = (posY + 0.5D - par8) / d7;
 
 										if ((d12 * d12 + d13 * d13) * field_75046_d[posY] + d14 * d14 / 6.0D < 1.0D) {
-												IBlockState iblockstate1 = chunkPrimer.getBlockState(posX, posY, posZ);
-												IBlockState iblockstate2 = (IBlockState)Objects.firstNonNull(chunkPrimer.getBlockState(posX, posY + 1, posZ), BLK_AIR);
+											IBlockState iblockstate1 = chunkPrimer.getBlockState(posX, posY, posZ);
+											IBlockState iblockstate2 = Objects.firstNonNull(chunkPrimer.getBlockState(posX, posY + 1, posZ), BLK_AIR);
 
-												if (isTopBlock(chunkPrimer, posX, posY, posZ, x, z))
-													flag2 = true;
+											if (isTopBlock(chunkPrimer, posX, posY, posZ, x, z))
+												flag2 = true;
 
-												digBlock(chunkPrimer, posX, posY, posZ, x, z, flag2, iblockstate1, iblockstate2);
+											digBlock(chunkPrimer, posX, posY, posZ, x, z, flag2, iblockstate1, iblockstate2);
 										}
-										--arrayIndex;
 									}
 							}
 						}
@@ -163,7 +158,7 @@ public class MapGenErebusRavine extends MapGenBase {
 			float f = rand.nextFloat() * (float) Math.PI * 2.0F;
 			float f1 = (rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
 			float f2 = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
-			generateRavine(this.rand.nextLong(), par4, par5, chunkPrimerIn, d0, d1, d2, f2, f, f1, 0, 0, 1.0D);
+			generateRavine(rand.nextLong(), par4, par5, chunkPrimerIn, d0, d1, d2, f2, f, f1, 0, 0, 1.0D);
 		}
 	}
 
@@ -172,36 +167,36 @@ public class MapGenErebusRavine extends MapGenBase {
 		return block == Blocks.FLOWING_WATER || block == Blocks.WATER;
 	}
 
-    private boolean isExceptionBiome(Biome biome) {
-    	// this may do something at some point
-        return false;
-    }
+	private boolean isExceptionBiome(Biome biome) {
+		// this may do something at some point
+		return false;
+	}
 
-    private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ) {
-        Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
-        IBlockState state = data.getBlockState(x, y, z);
-        return (isExceptionBiome(biome) ? state.getBlock() == Blocks.GRASS : state.getBlock() == biome.topBlock);
-    }
+	private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ) {
+		Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+		IBlockState state = data.getBlockState(x, y, z);
+		return isExceptionBiome(biome) ? state.getBlock() == Blocks.GRASS : state.getBlock() == biome.topBlock;
+	}
 
 	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, IBlockState state, IBlockState up) {
 		Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
 		IBlockState top = biome.topBlock;
-        IBlockState filler = biome.fillerBlock;
-        Block block = data.getBlockState(x, y, z).getBlock();
+		IBlockState filler = biome.fillerBlock;
+		Block block = data.getBlockState(x, y, z).getBlock();
 
 		if (y < 3)
-			block =  Blocks.BEDROCK;
+			block = Blocks.BEDROCK;
 		else if (y < 4)
-			block =  ModBlocks.UMBERSTONE;
-		else if (y < 10 && biome.getIdForBiome(biome) == biome.getIdForBiome(ModBiomes.volcanicDesert))
-			block =  Blocks.FLOWING_LAVA;
-		else if (y < ChunkProviderErebus.swampWaterHeight - 1 && biome.getIdForBiome(biome) == biome.getIdForBiome(ModBiomes.submergedSwamp))
+			block = ModBlocks.UMBERSTONE;
+		else if (y < 10 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.volcanicDesert))
+			block = Blocks.FLOWING_LAVA;
+		else if (y < ChunkProviderErebus.swampWaterHeight - 1 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.submergedSwamp))
 			block = Blocks.FLOWING_WATER;
 		else {
-			block =  Blocks.AIR;
+			block = Blocks.AIR;
 
-			 if (foundTop && data.getBlockState(x, y - 1, z).getBlock() == filler.getBlock())
-                 data.setBlockState(x, y - 1, z, top.getBlock().getDefaultState());
+			if (foundTop && data.getBlockState(x, y - 1, z).getBlock() == filler.getBlock())
+				data.setBlockState(x, y - 1, z, top.getBlock().getDefaultState());
 		}
 	}
 }
