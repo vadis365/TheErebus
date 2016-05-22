@@ -6,12 +6,16 @@ import erebus.ModTabs;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ErebusPortal extends Block {
 
@@ -19,6 +23,7 @@ public class ErebusPortal extends Block {
 		super(Material.PORTAL);
 		setLightLevel(1.0F);
 		setBlockUnbreakable();
+		setSoundType(SoundType.GLASS);
 		setCreativeTab(ModTabs.BLOCKS);
 	}
 
@@ -80,6 +85,13 @@ public class ErebusPortal extends Block {
 			return world.getBlock(x, y, z) == target && world.getBlockMetadata(x, y, z) == meta;
 		}
 	*/
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+
 	@Override
 	public int quantityDropped(Random rand) {
 		return 0;
@@ -87,7 +99,7 @@ public class ErebusPortal extends Block {
 
 	@Override
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
-		return NULL_AABB;
+		return FULL_BLOCK_AABB;
 	}
 
 	//	@Override
