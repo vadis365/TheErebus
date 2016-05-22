@@ -20,7 +20,6 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setCreativeTab(ModTabs.ITEMS);
-		setUnlocalizedName("materials");
 	}
 
 	@Override

@@ -1,8 +1,14 @@
 package erebus.world;
 
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.loot.IWeightProvider;
@@ -12,24 +18,21 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
-
-import java.lang.reflect.Constructor;
-import java.util.*;
-import java.util.Map.Entry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 
 public final class SpawnerErebus {
 	public static final SpawnerErebus INSTANCE = new SpawnerErebus();
 	public static final int MAX_MOBS_PER_WORLD = 300;
 
 	public static void onChunkPopulate(World world, Random rand, BiomeBaseErebus biome, int x, int z) {
-		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
+		if (!world.isRemote && world.getGameRules().getBoolean("doMobSpawning"))
 			INSTANCE.runPopulationSpawning((WorldServer) world, rand, biome, x, z);
 	}
 
@@ -39,7 +42,7 @@ public final class SpawnerErebus {
 			return;
 
 		WorldServer erebusWorld = DimensionManager.getWorld(ConfigHandler.INSTANCE.erebusDimensionID);
-		if (erebusWorld != null && erebusWorld.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
+		if (erebusWorld != null && erebusWorld.getGameRules().getBoolean("doMobSpawning"))
 			runGradualSpawning(erebusWorld);
 	}
 
