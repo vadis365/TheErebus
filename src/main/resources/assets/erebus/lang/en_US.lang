@@ -108,6 +108,16 @@ tile.erebus.sapling_baobab.name=Baobab Sapling
 tile.erebus.sapling_marshwood.name=Marshwood Sapling
 tile.erebus.sapling_cypress.name=Cypress Sapling
 
+# Leaves
+tile.erebus.leaves_mossbark.name=Mossbark Leaves
+tile.erebus.leaves_asper.name=Asper Leaves
+tile.erebus.leaves_eucalyptus.name=Eucalyptus Leaves
+tile.erebus.leaves_mahogany.name=Mahogany Leaves
+tile.erebus.leaves_balsam.name=Balsam Leaves
+tile.erebus.leaves_baobab.name=Baobab Leaves
+tile.erebus.leaves_marshwood.name=Marshwood Leaves
+tile.erebus.leaves_cypress.name=Cypress Leaves
+
 #################
 # CREATIVE TABS #
 #################

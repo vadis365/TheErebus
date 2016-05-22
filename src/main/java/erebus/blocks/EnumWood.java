@@ -4,7 +4,11 @@ import java.util.Locale;
 
 import erebus.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public enum EnumWood implements IStringSerializable {
 
@@ -100,14 +104,10 @@ public enum EnumWood implements IStringSerializable {
 				wood.sapling = sapling;
 			}
 			if (wood.hasLeaves) {
-				/*Block leaf = new BlockLeavesErebus(wood);
-				GameRegistry.register(leaf);
-				ItemBlock itemBlock = new ItemBlock(leaf);
-				GameRegistry.register(itemBlock.setRegistryName(leaf.getRegistryName()));
-				Erebus.proxy.setCustomStateMap(leaf, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
-				Erebus.proxy.regItemBlock(leaf);
-				Blocks.fire.setFireInfo(leaf, 30, 60);
-				leaves.put(wood, leaf);*/
+				Block leaves = new BlockLeavesErebus(wood);
+				ModBlocks.registerBlock("leaves_" + wood.getName(), leaves);
+
+				wood.leaves = leaves;
 			}
 			if (wood.hasPlanks) {
 				/*Block stair = new BlockStairPlanks(ModBlocks.planks, wood);
@@ -126,14 +126,13 @@ public enum EnumWood implements IStringSerializable {
 	public static void initRecipes() {
 		for (EnumWood wood : values()) {
 			if (wood.hasLog) {
-				/*Block log = wood.log;
+				Block log = wood.log;
 				OreDictionary.registerOre("logWood", log);
-				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planks, 4, wood.ordinal()), new ItemStack(log));
-				GameRegistry.addSmelting(new ItemStack(log), new ItemStack(Items.coal, 1, 1), 0.15F);*/
+				//GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.planks, 4, wood.ordinal()), new ItemStack(log));
+				GameRegistry.addSmelting(new ItemStack(log), new ItemStack(Items.COAL, 1, 1), 0.15F);
 			}
-			if (wood.hasSapling) {
-				// OreDictionary.registerOre("treeSapling", saplings.get(wood));
-			}
+			if (wood.hasSapling)
+				OreDictionary.registerOre("treeSapling", wood.sapling);
 			if (wood.hasPlanks) {
 				/*Block stairs = wood.stairs;
 				OreDictionary.registerOre("stairWood", stairs);
@@ -143,10 +142,8 @@ public enum EnumWood implements IStringSerializable {
 				OreDictionary.registerOre("slabWood", slab);
 				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });*/
 			}
-			if (wood.hasLeaves) {
-				/*Block leaf = wood.getLeaves();
-				OreDictionary.registerOre("treeLeaves", leaf);*/
-			}
+			if (wood.hasLeaves)
+				OreDictionary.registerOre("treeLeaves", wood.getLeaves());
 		}
 	}
 }
