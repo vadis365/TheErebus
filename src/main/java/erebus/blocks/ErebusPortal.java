@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -36,12 +37,12 @@ public class ErebusPortal extends Block {
 			}
 			return false;
 		}
-
+	
 		public static boolean isPatternValid(World world, int x, int y, int z) {
 			// Layer 0
 			if (!check(world, x, y - 1, z, Blocks.stonebrick, 3))
 				return false;
-
+	
 			// Layer 1
 			if (!check(world, x - 1, y, z - 1, Blocks.stonebrick, 0))
 				return false;
@@ -53,7 +54,7 @@ public class ErebusPortal extends Block {
 				return false;
 			if (!world.isAirBlock(x, y, z) && world.getBlock(x, y, z) != ModBlocks.portal)
 				return false;
-
+	
 			// Layer 2
 			if (!check(world, x - 1, y + 1, z - 1, Blocks.stonebrick, 0))
 				return false;
@@ -65,11 +66,11 @@ public class ErebusPortal extends Block {
 				return false;
 			if (!world.isAirBlock(x, y + 1, z) && world.getBlock(x, y + 1, z) != ModBlocks.portal)
 				return false;
-
+	
 			// Layer 3
 			if (world.getBlock(x, y + 2, z) != ModBlocks.gaeanKeystone)
 				return false;
-
+	
 			for (int i = -1; i <= -1; i++)
 				for (int j = -1; j <= -1; j++) {
 					if (i == 0 && j == 0)
@@ -77,10 +78,10 @@ public class ErebusPortal extends Block {
 					if (!check(world, x + i, y + 2, z + j, Blocks.stone_slab, 5))
 						return false;
 				}
-
+	
 			return true;
 		}
-
+	
 		private static boolean check(World world, int x, int y, int z, Block target, int meta) {
 			return world.getBlock(x, y, z) == target && world.getBlockMetadata(x, y, z) == meta;
 		}
@@ -98,8 +99,13 @@ public class ErebusPortal extends Block {
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return FULL_BLOCK_AABB;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+		return NULL_AABB;
 	}
 
 	//	@Override
