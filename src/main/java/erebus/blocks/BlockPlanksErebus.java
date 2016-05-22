@@ -81,6 +81,6 @@ public class BlockPlanksErebus extends Block implements IHasCustomItem, ISubBloc
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return ItemBlockEnum.create(this, EnumWood.class);
+		return ItemBlockEnum.create(this, EnumWood.class, '_');
 	}
 }

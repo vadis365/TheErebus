@@ -133,6 +133,21 @@ tile.erebus.planks_marshwood.name=Marshwood Planks
 tile.erebus.planks_scorched.name=Scorched Planks
 tile.erebus.planks_varnished.name=Varnished Planks
 
+# Stairs
+tile.erebus.stairs_baobab.name=Baobab Stairs
+tile.erebus.stairs_eucalyptus.name=Eucalyptus Stairs
+tile.erebus.stairs_mahogany.name=Mahogany Stairs
+tile.erebus.stairs_mossbark.name=Mossbark Stairs
+tile.erebus.stairs_asper.name=Asper Stairs
+tile.erebus.stairs_cypress.name=Cypress Stairs
+tile.erebus.stairs_balsam.name=Balsam Stairs
+tile.erebus.stairs_white.name=White Stairs
+tile.erebus.stairs_bamboo.name=Bamboo Stairs
+tile.erebus.stairs_rotten.name=Rotten Stairs
+tile.erebus.stairs_marshwood.name=Marshwood Stairs
+tile.erebus.stairs_scorched.name=Scorched Stairs
+tile.erebus.stairs_varnished.name=Varnished Stairs
+
 #################
 # CREATIVE TABS #
 #################

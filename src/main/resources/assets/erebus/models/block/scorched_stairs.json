@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "erebus:blocks/planks_scorched",
+        "top": "erebus:blocks/planks_scorched",
+        "side": "erebus:blocks/planks_scorched"
+    }
+}

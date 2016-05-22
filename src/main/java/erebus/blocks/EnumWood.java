@@ -106,12 +106,12 @@ public enum EnumWood implements IStringSerializable {
 				wood.leaves = leaves;
 			}
 			if (wood.hasPlanks) {
-				/*Block stair = new BlockStairPlanks(ModBlocks.planks, wood);
-				GameRegistry.registerBlock(stair, ItemBlockLocalised.class, "plankStair" + wood.name());
-				Blocks.fire.setFireInfo(stair, 5, 5);
-				stairs.put(wood, stair);
+				Block stairs = BlockStairsErebus.createWooden(ModBlocks.PLANKS.getDefaultState().withProperty(BlockPlanksErebus.TYPE, wood));
+				ModBlocks.registerBlock("stairs_" + wood.getName(), stairs);
 
-				Block slab = new BlockSlabPlanks(wood);
+				wood.stairs = stairs;
+
+				/*Block slab = new BlockSlabPlanks(wood);
 				GameRegistry.registerBlock(slab, ItemBlockSlabSimple.class, "slabPlanks" + wood.name());
 				Blocks.fire.setFireInfo(slab, 5, 5);
 				slabs.put(wood, slab);*/
@@ -130,11 +130,11 @@ public enum EnumWood implements IStringSerializable {
 			if (wood.hasSapling)
 				OreDictionary.registerOre("treeSapling", wood.sapling);
 			if (wood.hasPlanks) {
-				/*Block stairs = wood.stairs;
+				Block stairs = wood.stairs;
 				OreDictionary.registerOre("stairWood", stairs);
-				GameRegistry.addRecipe(new ItemStack(stairs, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });
-				
-				Block slab = wood.slab;
+				GameRegistry.addRecipe(new ItemStack(stairs, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.PLANKS, 1, wood.ordinal()) });
+
+				/*Block slab = wood.slab;
 				OreDictionary.registerOre("slabWood", slab);
 				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });*/
 			}

@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "erebus:blocks/planks_mossbark",
+        "top": "erebus:blocks/planks_mossbark",
+        "side": "erebus:blocks/planks_mossbark"
+    }
+}
