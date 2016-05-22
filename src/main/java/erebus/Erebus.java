@@ -22,6 +22,10 @@ public class Erebus {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ModItems.init();
+		ModBlocks.init();
+
+		proxy.registerItemAndBlockRenderers();
 	}
 
 	@EventHandler
