@@ -98,6 +98,16 @@ tile.erebus.log_rotten.name=Rotten Wood
 tile.erebus.log_marshwood.name=Marshwood Wood
 tile.erebus.log_scorched.name=Scorched Wood
 
+# Saplings
+tile.erebus.sapling_mossbark.name=Mossbark Sapling
+tile.erebus.sapling_asper.name=Asper Sapling
+tile.erebus.sapling_eucalyptus.name=Eucalyptus Sapling
+tile.erebus.sapling_mahogany.name=Mahogany Sapling
+tile.erebus.sapling_balsam.name=Balsam Sapling
+tile.erebus.sapling_baobab.name=Baobab Sapling
+tile.erebus.sapling_marshwood.name=Marshwood Sapling
+tile.erebus.sapling_cypress.name=Cypress Sapling
+
 #################
 # CREATIVE TABS #
 #################

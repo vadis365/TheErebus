@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import erebus.ModBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.IStringSerializable;
 
 public enum EnumWood implements IStringSerializable {
@@ -92,17 +91,13 @@ public enum EnumWood implements IStringSerializable {
 				Block log = new BlockLogErebus();
 				ModBlocks.registerBlock("log_" + wood.getName(), log);
 
-				Blocks.FIRE.setFireInfo(log, 5, 5);
 				wood.log = log;
 			}
 			if (wood.hasSapling) {
-				/*Block sapling = new BlockSaplingErebus(wood);
-				GameRegistry.register(sapling);
-				ItemBlock itemBlock = new ItemBlock(sapling);
-				GameRegistry.register(itemBlock.setRegistryName(sapling.getRegistryName()));
-				Erebus.proxy.setCustomStateMap(sapling, new StateMap.Builder().ignore(new IProperty[] { BlockSapling.TYPE }).build());
-				Erebus.proxy.regItemBlock(sapling);
-				saplings.put(wood, sapling);*/
+				Block sapling = new BlockSaplingErebus(wood);
+				ModBlocks.registerBlock("sapling_" + wood.getName(), sapling);
+
+				wood.sapling = sapling;
 			}
 			if (wood.hasLeaves) {
 				/*Block leaf = new BlockLeavesErebus(wood);
