@@ -1,5 +1,5 @@
 #########
-# Items #
+# ITEMS #
 #########
 
 # Materials
@@ -72,3 +72,23 @@ item.erebus.materials.soul_crystal.name=Soul Crystal
 item.erebus.materials.plate_zombie_ant.name=Zombie Ant Plate
 item.erebus.materials.stag_beetle_mandibles.name=Stag Beetle Mandibles
 item.erebus.materials.terpsishroom.name=Terpsishroom
+
+##########
+# BLOCKS #
+##########
+
+# Umberstone
+tile.erebus.umberstone.umberstone.name=Umberstone
+tile.erebus.umberstone.umbercobble.name=Umbercobble
+tile.erebus.umberstone.umbercobble_mossy.name=Mossy Umbercobble
+tile.erebus.umberstone.umbercobble_webbed.name=Webbed Umbercobble
+tile.erebus.umberstone.umberstone_bricks.name=Umberstone Bricks
+tile.erebus.umberstone.umbertile_smooth.name=Smooth Umbertile
+tile.erebus.umberstone.umbertile_smooth_small.name=Small Smooth Umbertile
+
+#################
+# CREATIVE TABS #
+#################
+
+itemGroup.erebus.items=Erebus Items
+itemGroup.erebus.blocks=Erebus Blocks

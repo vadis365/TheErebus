@@ -7,6 +7,7 @@ import java.util.Locale;
 import erebus.ModItems;
 import erebus.ModItems.ISubItemsItem;
 import erebus.ModTabs;
+import erebus.api.IErebusEnum;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,24 +26,33 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
-		for (ITEM_DATA data : ITEM_DATA.values())
-			list.add(data.createStack());
+		for (EnumType type : EnumType.values())
+			list.add(type.createStack());
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		int meta = stack.getItemDamage();
-		meta = Math.min(Math.max(meta, 0), ITEM_DATA.values().length - 1);
-		return super.getUnlocalizedName() + "." + ITEM_DATA.values()[meta].name().toLowerCase();
+		meta = Math.min(Math.max(meta, 0), EnumType.values().length - 1);
+		return super.getUnlocalizedName() + "." + EnumType.values()[meta].name().toLowerCase();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack) {
-		return stack.getItemDamage() == ITEM_DATA.WHETSTONE_POWDER.ordinal();
+		return stack.getItemDamage() == EnumType.WHETSTONE_POWDER.ordinal();
 	}
 
-	public enum ITEM_DATA {
+	@Override
+	public List<String> getModels() {
+		List<String> models = new ArrayList<String>();
+		for (EnumType type : EnumType.values())
+			models.add(type.getName());
+		return models;
+	}
+
+	public enum EnumType implements IErebusEnum {
+
 		PLATE_EXO,
 		JADE,
 		SHARD_BONE,
@@ -113,20 +123,19 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		STAG_BEETLE_MANDIBLES,
 		TERPSISHROOM;
 
+		@Override
 		public ItemStack createStack() {
 			return createStack(1);
 		}
 
+		@Override
 		public ItemStack createStack(int size) {
 			return new ItemStack(ModItems.MATERIALS, size, ordinal());
 		}
-	}
 
-	@Override
-	public List<String> getModels() {
-		List<String> models = new ArrayList<String>();
-		for (ITEM_DATA data : ITEM_DATA.values())
-			models.add(data.name().toLowerCase(Locale.ENGLISH));
-		return models;
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ENGLISH);
+		}
 	}
 }

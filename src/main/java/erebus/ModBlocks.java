@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.blocks.BlockUmberstone;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -14,6 +15,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
 
+	public static final Block UMBERSTONE = new BlockUmberstone();
+
 	public static void init() {
 		try {
 			for (Field field : ModBlocks.class.getDeclaredFields()) {
@@ -23,6 +26,10 @@ public class ModBlocks {
 					String name = field.getName().toLowerCase(Locale.ENGLISH);
 
 					GameRegistry.register(block.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name));
+					if (block instanceof IHasCustomItem) {
+						ItemBlock item = (ItemBlock) ((IHasCustomItem) block).getItemBlock().setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name);
+						GameRegistry.register(item);
+					}
 				}
 			}
 		} catch (IllegalAccessException e) {
@@ -40,10 +47,10 @@ public class ModBlocks {
 					if (block instanceof ISubBlocksBlock) {
 						List<String> models = ((ISubBlocksBlock) block).getModels();
 						for (int i = 0; i < models.size(); i++)
-							ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, new ModelResourceLocation(Reference.MOD_ID + ":" + models.get(i), "inventory"));
+							ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + models.get(i), "inventory"));
 					} else {
 						String name = field.getName().toLowerCase(Locale.ENGLISH);
-						ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + name, "inventory"));
+						ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + name, "inventory"));
 					}
 				}
 			}
@@ -53,7 +60,7 @@ public class ModBlocks {
 	}
 
 	public static interface IHasCustomItem {
-		ItemBlock getItemBlock(Block block);
+		ItemBlock getItemBlock();
 	}
 
 	public static interface ISubBlocksBlock {
