@@ -2,10 +2,10 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
+import erebus.blocks.EnumWood;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.blocks.EnumWood;
 
 public class WorldGenAsperTree extends WorldGenTreeBase {
 
@@ -50,7 +50,7 @@ public class WorldGenAsperTree extends WorldGenTreeBase {
 				if (yy > 0 && !world.isAirBlock(new BlockPos(x + offsetX[dir], y + yy - 1, z + offsetZ[dir])))
 					continue;
 
-				world.setBlockState(new BlockPos(x + offsetX[dir], y + yy, z + offsetZ[dir]), log.getStateFromMeta(dir < 2 ? 4 : 8) , 3);
+				world.setBlockState(new BlockPos(x + offsetX[dir], y + yy, z + offsetZ[dir]), log.getStateFromMeta(dir < 2 ? 4 : 8), 3);
 				if (yy > 0 && rand.nextBoolean())
 					world.setBlockState(new BlockPos(x + offsetX[dir] * 2, y + yy, z + offsetZ[dir] * 2), leaves.getDefaultState(), 3);
 				++extraWood;

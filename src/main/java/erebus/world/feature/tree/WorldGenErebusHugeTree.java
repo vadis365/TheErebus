@@ -2,6 +2,7 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
+import erebus.blocks.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
@@ -11,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.blocks.EnumWood;
 
 public class WorldGenErebusHugeTree extends WorldGenerator {
 	private int baseHeight;

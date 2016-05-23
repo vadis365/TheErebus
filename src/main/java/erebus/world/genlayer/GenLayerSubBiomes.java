@@ -1,11 +1,12 @@
 package erebus.world.genlayer;
 
+import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
-import erebus.world.biomes.BiomeBaseErebus;
 
 public class GenLayerSubBiomes extends GenLayerErebus {
+
 	private static final byte[] offsetX = new byte[] { 0, 1, -1, 0, 0 }, offsetZ = new byte[] { 0, 0, 0, 1, -1 };
 
 	public GenLayerSubBiomes(long seed, GenLayer parentGenLayer) {
@@ -45,7 +46,7 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 					bz2 = currentBiomeInts[nx + 2 + (nz + 2 + 1) * (sizeX + 4)];
 
 					if (bx1 == biomeID && bx2 == biomeID && bz1 == biomeID && bz2 == biomeID && (a == 0 || nextInt(3) != 0)) {
-						biomeInts[nx + nz * sizeX] = subBiome.getIdForBiome(subBiome);
+						biomeInts[nx + nz * sizeX] = Biome.getIdForBiome(subBiome);
 						attempt = 999;
 					} else if (a == 0)
 						break;

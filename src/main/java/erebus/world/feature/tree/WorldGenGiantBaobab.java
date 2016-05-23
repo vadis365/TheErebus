@@ -1,10 +1,11 @@
 package erebus.world.feature.tree;
 
+import java.util.List;
+import java.util.Random;
+
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.entity.EntityTarantulaMiniboss;
-import erebus.item.ItemMaterials.DATA;
-import erebus.lib.EnumWood;
+import erebus.blocks.EnumWood;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
@@ -21,9 +22,6 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import java.util.List;
-import java.util.Random;
 
 public class WorldGenGiantBaobab extends WorldGenerator {
 

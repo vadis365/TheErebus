@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import erebus.ModBiomes;
+import erebus.world.genlayer.GenLayerErebus;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,22 +18,18 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.WorldTypeEvent;
-import erebus.ModBiomes;
-import erebus.world.genlayer.GenLayerErebus;
 
 public class BiomeProviderErebus extends BiomeProvider {
 
 	private static final float rainfall = 0F;
-	static final ArrayList<Biome> allowedBiomes = new ArrayList<Biome>(Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah));
+	private static final List<Biome> allowedBiomes = Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah);
 
-	@SuppressWarnings("rawtypes")
-	private final List biomesToSpawnIn;
+	private final List<Biome> biomesToSpawnIn;
 	private final BiomeCache biomeCache;
 	private final GenLayer biomeGenLayer;
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public BiomeProviderErebus(World world) {
-		biomesToSpawnIn = new ArrayList(allowedBiomes);
+		biomesToSpawnIn = new ArrayList<Biome>(allowedBiomes);
 		biomeCache = new BiomeCache(this);
 		biomeGenLayer = GenLayerErebus.initializeAllBiomeGenerators(world.getSeed(), world.getWorldInfo().getTerrainType())[1];
 	}
@@ -83,7 +81,7 @@ public class BiomeProviderErebus extends BiomeProvider {
 			int[] generatedBiomes = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
 			for (int index = 0; index < sizeX * sizeZ; ++index)
 				biomesForGeneration[index] = Biome.getBiome(generatedBiomes[index], Biomes.DEFAULT);
-	
+
 			return biomesForGeneration;
 		}
 	}
@@ -138,8 +136,7 @@ public class BiomeProviderErebus extends BiomeProvider {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List getBiomesToSpawnIn() {
+	public List<Biome> getBiomesToSpawnIn() {
 		return biomesToSpawnIn;
 	}
 

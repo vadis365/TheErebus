@@ -4,6 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 
 public enum SurfaceType {
+
 	GRASS,
 	DIRT,
 	SAND,
@@ -12,7 +13,7 @@ public enum SurfaceType {
 	public boolean matchBlock(IBlockState block) {
 		switch (this) {
 			case GRASS:
-				return block == Blocks.GRASS.getDefaultState()  || block == Blocks.MYCELIUM.getDefaultState() ;
+				return block == Blocks.GRASS.getDefaultState() || block == Blocks.MYCELIUM.getDefaultState();
 			case DIRT:
 				return block == Blocks.DIRT.getDefaultState();
 			case SAND:

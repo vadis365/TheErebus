@@ -21,6 +21,7 @@ package erebus.world.feature.util;
  * @author synopia
  */
 public interface MazeGenerator {
+
 	int[][] generateMaze();
 
 	public enum Direction {

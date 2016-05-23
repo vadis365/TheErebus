@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 
 public final class SpawnerErebus {
+
 	public static final SpawnerErebus INSTANCE = new SpawnerErebus();
 	public static final int MAX_MOBS_PER_WORLD = 300;
 

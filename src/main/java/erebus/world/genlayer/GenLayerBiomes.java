@@ -1,16 +1,17 @@
 package erebus.world.genlayer;
 
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
 import erebus.ModBiomes;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.loot.WeightedList;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerBiomes extends GenLayerErebus {
 
 	private final WeightedList<BiomeBaseErebus> biomesToGenerate;
 	private final int totalWeight;
+
 	public GenLayerBiomes(long seed, GenLayer parentGenLayer) {
 		super(seed);
 		biomesToGenerate = ModBiomes.biomeList;

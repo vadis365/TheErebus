@@ -2,9 +2,9 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
+import erebus.blocks.EnumWood;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.blocks.EnumWood;
 
 public class WorldGenBalsamTree extends WorldGenTreeBase {
 
@@ -30,7 +30,7 @@ public class WorldGenBalsamTree extends WorldGenTreeBase {
 
 		for (int yy = y; yy < y + height; ++yy) {
 
-			if (yy < y + height -1)
+			if (yy < y + height - 1)
 				world.setBlockState(new BlockPos(x, yy, z), log.getStateFromMeta(0), 2);
 
 			if (yy == y + height - 1) {
@@ -38,7 +38,7 @@ public class WorldGenBalsamTree extends WorldGenTreeBase {
 				placeLeaves(world, x, yy + 1, z);
 			}
 
-			if (yy == y + height - 7 || yy == y + height - 10) {
+			if (yy == y + height - 7 || yy == y + height - 10)
 				if (alternate) {
 					createBranch(world, rand, x + 1, yy - rand.nextInt(2), z, 1, 1);
 					createBranch(world, rand, x - 1, yy - rand.nextInt(2), z, 2, 1);
@@ -49,9 +49,8 @@ public class WorldGenBalsamTree extends WorldGenTreeBase {
 					createBranch(world, rand, x, yy - rand.nextInt(2), z - 1, 4, 1);
 					alternate = true;
 				}
-			}
 
-			if (yy == y + height - 4) {
+			if (yy == y + height - 4)
 				if (alternate) {
 					createBranch(world, rand, x + 1, yy - rand.nextInt(2), z, 1, 1);
 					createBranch(world, rand, x - 1, yy - rand.nextInt(2), z, 2, 1);
@@ -62,7 +61,6 @@ public class WorldGenBalsamTree extends WorldGenTreeBase {
 					createBranch(world, rand, x, yy - rand.nextInt(2), z - 1, 4, 1);
 					alternate = true;
 				}
-			}
 		}
 		return true;
 	}

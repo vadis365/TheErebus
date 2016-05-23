@@ -2,9 +2,9 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
+import erebus.blocks.EnumWood;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.blocks.EnumWood;
 
 public class WorldGenBaobabTree extends WorldGenTreeBase {
 

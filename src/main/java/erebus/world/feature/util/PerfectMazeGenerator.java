@@ -25,6 +25,7 @@ import java.util.Random;
  * @author synopia
  */
 public class PerfectMazeGenerator implements MazeGenerator {
+
 	private int[][] maze;
 	private int width;
 	private int height;
@@ -49,7 +50,7 @@ public class PerfectMazeGenerator implements MazeGenerator {
 		for (Direction dir : dirs) {
 			int nx = cx + dir.dx;
 			int ny = cy + dir.dy;
-			if (between(nx, width) && between(ny, height) && (maze[nx][ny] == 0)) {
+			if (between(nx, width) && between(ny, height) && maze[nx][ny] == 0) {
 				maze[cx][cy] |= dir.bit;
 				maze[nx][ny] |= dir.opposite.bit;
 				generateMaze(nx, ny);
@@ -58,7 +59,7 @@ public class PerfectMazeGenerator implements MazeGenerator {
 	}
 
 	private static boolean between(int v, int upper) {
-		return (v >= 0) && (v < upper);
+		return v >= 0 && v < upper;
 	}
 
 }
