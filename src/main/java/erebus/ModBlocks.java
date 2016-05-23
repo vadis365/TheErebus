@@ -43,11 +43,11 @@ public class ModBlocks {
 	public static final Block ORE_LEAD = new BlockOreErebus(1);
 	public static final Block ORE_ALUMINIUM = new BlockOreErebus(1);
 	public static final Block ORE_JADE = new BlockOreErebus2(2, ModItems.MATERIALS, ItemMaterials.EnumType.JADE.ordinal(), 1, 1, 3, 7);
-	public static final Block ORE_ENCRUSTED_DIAMOND = new BlockOreErebus(2);
-	public static final Block ORE_FOSSIL = new BlockOreErebus(0);
-	public static final Block ORE_GNEISS = new BlockOreErebus(0);
-	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus(0);
-	public static final Block ORE_TEMPLE = new BlockOreErebus(0);
+	public static final Block ORE_ENCRUSTED_DIAMOND = new BlockOreErebus2(2, Items.DIAMOND, 0, 1, 1, 3, 7);
+	public static final Block ORE_FOSSIL = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.SHARD_BONE.ordinal(), 1, 1, 0, 2);
+	public static final Block ORE_GNEISS = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.GNEISS_ROCK.ordinal(), 1, 1, 0, 2);
+	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
+	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
 
 	public static void init() {
 		try {
