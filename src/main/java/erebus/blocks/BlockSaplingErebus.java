@@ -5,6 +5,14 @@ import java.util.Random;
 
 import erebus.Erebus;
 import erebus.ModTabs;
+import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenBalsamTree;
+import erebus.world.feature.tree.WorldGenBaobabTree;
+import erebus.world.feature.tree.WorldGenCypressTree;
+import erebus.world.feature.tree.WorldGenErebusHugeTree;
+import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import erebus.world.feature.tree.WorldGenMarshwoodTree;
+import erebus.world.feature.tree.WorldGenMossbarkTree;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
@@ -44,7 +52,6 @@ public class BlockSaplingErebus extends BlockSapling {
 
 		WorldGenerator worldGen = null;
 
-		/*
 		switch (wood) {
 			case EUCALYPTUS:
 				worldGen = new WorldGenEucalyptusTree();
@@ -74,7 +81,6 @@ public class BlockSaplingErebus extends BlockSapling {
 			default:
 				break;
 		}
-		*/
 
 		if (worldGen == null)
 			return;
