@@ -86,6 +86,26 @@ tile.erebus.umberstone.umberstone_bricks.name=Umberstone Bricks
 tile.erebus.umberstone.umbertile_smooth.name=Smooth Umbertile
 tile.erebus.umberstone.umbertile_smooth_small.name=Small Smooth Umbertile
 
+# Ores
+tile.erebus.ore_iron.name=Iron Ore
+tile.erebus.ore_gold.name=Gold Ore
+tile.erebus.ore_diamond.name=Diamond Ore
+tile.erebus.ore_emerald.name=Emerald Ore
+tile.erebus.ore_lapis.name=Lapis Lazuli Ore
+tile.erebus.ore_quartz.name=Quartz Ore
+tile.erebus.ore_coal.name=Coal Ore
+tile.erebus.ore_copper.name=Copper Ore
+tile.erebus.ore_tin.name=Tin Ore
+tile.erebus.ore_silver.name=Silver Ore
+tile.erebus.ore_aluminium.name=Aluminum Ore
+tile.erebus.ore_lead.name=Lead Ore
+tile.erebus.ore_jade.name=Jade Ore
+tile.erebus.ore_encrusted_diamond.name=Encrusted Diamond Ore
+tile.erebus.ore_fossil.name=Fossil Ore
+tile.erebus.ore_gneiss.name=Gneiss Ore
+tile.erebus.ore_petrified_wood.name=Petrified Wood Ore
+tile.erebus.ore_temple.name=Temple Ore
+
 # Logs
 tile.erebus.log_baobab.name=Baobab Wood
 tile.erebus.log_eucalyptus.name=Eucalyptus Wood

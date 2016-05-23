@@ -5,13 +5,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.blocks.BlockOreErebus;
+import erebus.blocks.BlockOreErebus2;
 import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
 import erebus.blocks.ErebusPortal;
+import erebus.items.ItemMaterials;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +29,25 @@ public class ModBlocks {
 	public static final Block UMBERSTONE = new BlockUmberstone();
 	public static final Block PLANKS = new BlockPlanksErebus();
 	public static final Block PORTAL = new ErebusPortal();
+
+	public static final Block ORE_IRON = new BlockOreErebus(1);
+	public static final Block ORE_GOLD = new BlockOreErebus(2);
+	public static final Block ORE_COAL = new BlockOreErebus2(0, Items.COAL, 0, 1, 1, 0, 2);
+	public static final Block ORE_DIAMOND = new BlockOreErebus2(2, Items.DIAMOND, 0, 1, 1, 3, 7);
+	public static final Block ORE_EMERALD = new BlockOreErebus2(2, Items.EMERALD, 0, 1, 1, 3, 7);
+	public static final Block ORE_LAPIS = new BlockOreErebus2(1, Items.DYE, 4, 4, 9, 2, 5);
+	public static final Block ORE_QUARTZ = new BlockOreErebus2(0, Items.QUARTZ, 0, 1, 1, 2, 5);
+	public static final Block ORE_COPPER = new BlockOreErebus(1);
+	public static final Block ORE_SILVER = new BlockOreErebus(2);
+	public static final Block ORE_TIN = new BlockOreErebus(1);
+	public static final Block ORE_LEAD = new BlockOreErebus(1);
+	public static final Block ORE_ALUMINIUM = new BlockOreErebus(1);
+	public static final Block ORE_JADE = new BlockOreErebus2(2, ModItems.MATERIALS, ItemMaterials.EnumType.JADE.ordinal(), 1, 1, 3, 7);
+	public static final Block ORE_ENCRUSTED_DIAMOND = new BlockOreErebus(2);
+	public static final Block ORE_FOSSIL = new BlockOreErebus(0);
+	public static final Block ORE_GNEISS = new BlockOreErebus(0);
+	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus(0);
+	public static final Block ORE_TEMPLE = new BlockOreErebus(0);
 
 	public static void init() {
 		try {
