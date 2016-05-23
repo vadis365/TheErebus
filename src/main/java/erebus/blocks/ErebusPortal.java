@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -37,12 +38,12 @@ public class ErebusPortal extends Block {
 			}
 			return false;
 		}
-	
+
 		public static boolean isPatternValid(World world, int x, int y, int z) {
 			// Layer 0
 			if (!check(world, x, y - 1, z, Blocks.stonebrick, 3))
 				return false;
-	
+
 			// Layer 1
 			if (!check(world, x - 1, y, z - 1, Blocks.stonebrick, 0))
 				return false;
@@ -54,7 +55,7 @@ public class ErebusPortal extends Block {
 				return false;
 			if (!world.isAirBlock(x, y, z) && world.getBlock(x, y, z) != ModBlocks.portal)
 				return false;
-	
+
 			// Layer 2
 			if (!check(world, x - 1, y + 1, z - 1, Blocks.stonebrick, 0))
 				return false;
@@ -66,11 +67,11 @@ public class ErebusPortal extends Block {
 				return false;
 			if (!world.isAirBlock(x, y + 1, z) && world.getBlock(x, y + 1, z) != ModBlocks.portal)
 				return false;
-	
+
 			// Layer 3
 			if (world.getBlock(x, y + 2, z) != ModBlocks.gaeanKeystone)
 				return false;
-	
+
 			for (int i = -1; i <= -1; i++)
 				for (int j = -1; j <= -1; j++) {
 					if (i == 0 && j == 0)
@@ -78,10 +79,10 @@ public class ErebusPortal extends Block {
 					if (!check(world, x + i, y + 2, z + j, Blocks.stone_slab, 5))
 						return false;
 				}
-	
+
 			return true;
 		}
-	
+
 		private static boolean check(World world, int x, int y, int z, Block target, int meta) {
 			return world.getBlock(x, y, z) == target && world.getBlockMetadata(x, y, z) == meta;
 		}
@@ -108,10 +109,6 @@ public class ErebusPortal extends Block {
 		return NULL_AABB;
 	}
 
-	//	@Override
-	//	 public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
-	//   }
-
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.timeUntilPortal <= 0) {
@@ -130,9 +127,18 @@ public class ErebusPortal extends Block {
 		return false;
 	}
 
-	/*
+	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+	@SuppressWarnings("deprecation")
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+		IBlockState iblockstate = world.getBlockState(pos.offset(side));
+		Block block = iblockstate.getBlock();
+
+		if (state != iblockstate)
 			return true;
-		}*/
+		if (block == this)
+			return false;
+
+		return block == this ? false : super.shouldSideBeRendered(state, world, pos, side);
+	}
 }
