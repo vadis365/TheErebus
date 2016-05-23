@@ -1,5 +1,6 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.block.BlockSand;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
@@ -23,7 +24,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 
 			for (yy = 20; yy < 100; yy += rand.nextInt(2) + 1) {
 				BlockPos pos = new BlockPos(xx, yy, zz);
-				if (world.getBlockState(pos) == Blocks.SAND && world.isAirBlock(pos.up())) {
+				if (world.getBlockState(pos) == Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND) && world.isAirBlock(pos.up())) {
 					if (rand.nextInt(3) == 0)
 						world.setBlockState(pos, Blocks.GRASS.getDefaultState(), 2);
 					else
