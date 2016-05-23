@@ -1,14 +1,17 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.util.math.BlockPos;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenScorchedWood;
+
 
 public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
-	@Override
-	protected void decorate() {
-	//	System.out.println("Volcanic Desert Decorating");
-	}
+
+private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
+
 /*	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
 	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.flowing_lava);
-	private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
+	
 
 	@Override
 	public void populate() {
@@ -21,10 +24,10 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 				genLavaLakes.generate(world, world.rand, xx, yy, zz);
 		}
 	}
-
+*/
 	@Override
 	public void decorate() {
-		for (attempt = 0; attempt < 10; attempt++) {
+	/*	for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
@@ -36,23 +39,24 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 				world.scheduledUpdatesAreImmediate = false;
 			}
 		}
-
+*/
 		for (attempt = 0; attempt < 22; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.SAND, xx, yy, zz) && !world.isAirBlock(xx, yy - 2, zz)) {
-				genScorchedWood.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.SAND, pos) && !world.isAirBlock(pos.down(2))) {
+				genScorchedWood.generate(world, rand, pos);
 				if (rand.nextInt(4) != 0)
 					break;
 			}
 		}
-
+/*
 		if (rand.nextInt(34) == 0)
 			for (int attempt = 0; attempt < 15; attempt++)
 				if (genAntlionLair.generate(world, rand, x + 5 + rand.nextInt(6) + 8, 15 + rand.nextInt(35), z + 5 + rand.nextInt(6) + 8))
 					break;
+					
 	}
 
 	@Override
@@ -83,6 +87,6 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 			case FOSSIL:
 				oreGen.setChance(0.25F).setIterations(0, 1);
 				break; // much more rare
-		}
-	}*/
+		}*/
+	}
 }
