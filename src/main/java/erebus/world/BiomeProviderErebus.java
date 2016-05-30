@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import erebus.ModBiomes;
+import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.genlayer.GenLayerErebus;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +23,7 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 public class BiomeProviderErebus extends BiomeProvider {
 
 	private static final float rainfall = 0F;
-	private static final List<Biome> allowedBiomes = Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah);
+	private static final List<BiomeBaseErebus> allowedBiomes = Arrays.asList(ModBiomes.undergroundJungle, ModBiomes.subterraneanSavannah);
 
 	private final List<Biome> biomesToSpawnIn;
 	private final BiomeCache biomeCache;
