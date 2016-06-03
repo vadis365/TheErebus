@@ -33,7 +33,7 @@ public final class SpawnerErebus {
 	public static final int MAX_MOBS_PER_WORLD = 300;
 
 	public static void onChunkPopulate(World world, Random rand, BiomeBaseErebus biome, int x, int z) {
-		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doMobSpawning") && world.getTotalWorldTime()%5 == 0)
+		if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
 			INSTANCE.runPopulationSpawning((WorldServer) world, rand, biome, x, z);
 	}
 
@@ -46,7 +46,7 @@ public final class SpawnerErebus {
 		WorldServer erebusWorld = DimensionManager.getWorld(ConfigHandler.INSTANCE.erebusDimensionID);
 		if(erebusWorld.playerEntities.isEmpty())
 			return;
-		if (erebusWorld != null && erebusWorld.getGameRules().getGameRuleBooleanValue("doMobSpawning") && erebusWorld.getTotalWorldTime()%5 == 0)
+		if (erebusWorld != null && erebusWorld.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
 			runGradualSpawning(erebusWorld);
 		//TimeMeasurement.finish("whatever");
 	}
