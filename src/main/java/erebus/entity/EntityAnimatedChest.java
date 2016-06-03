@@ -36,6 +36,11 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 		dataWatcher.addObject(21, 0.0F);
 	}
 
+	@Override
+	public boolean isEntityInvulnerable() {
+		return true;
+	}
+
 	public EntityAnimatedChest setContents(IInventory chest) {
 		if (chest == null)
 			return this;

@@ -28,6 +28,11 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 		isImmuneToFire = true;
 	}
 
+	@Override
+	public boolean isEntityInvulnerable() {
+		return true;
+	}
+
 	public EntityAnimatedBambooCrate setContents(IInventory chest) {
 		if (chest == null)
 			return this;
