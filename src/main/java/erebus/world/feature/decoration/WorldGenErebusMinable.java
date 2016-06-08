@@ -17,16 +17,16 @@ public class WorldGenErebusMinable extends WorldGenerator {
 	private Block minableBlock;
 	private int minableBlockMeta = 0;
 	private int numberOfBlocks;
-	private IBlockState blockToReplace;
+	private Block blockToReplace;
 
 	public void prepare(Block block, int meta, int numberOfBlocks) {
 		minableBlock = block;
 		minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
-		blockToReplace = ModBlocks.UMBERSTONE.getDefaultState();
+		blockToReplace = ModBlocks.UMBERSTONE;
 	}
 
-	public void prepare(Block block, int meta, int numberOfBlocks, IBlockState blockToReplace) {
+	public void prepare(Block block, int meta, int numberOfBlocks, Block blockToReplace) {
 		minableBlock = block;
 		minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
