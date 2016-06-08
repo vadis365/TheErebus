@@ -3,27 +3,30 @@ package erebus.world.feature.decoration;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.google.common.base.Predicate;
+
 import erebus.ModBlocks;
 
 public class WorldGenErebusMinable extends WorldGenerator {
 	private Block minableBlock;
 	private int minableBlockMeta = 0;
 	private int numberOfBlocks;
-	private Block blockToReplace;
+	private IBlockState blockToReplace;
 
 	public void prepare(Block block, int meta, int numberOfBlocks) {
 		minableBlock = block;
 		minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
-		blockToReplace = Blocks.stone;//ModBlocks.umberstone;
+		blockToReplace = ModBlocks.UMBERSTONE.getDefaultState();
 	}
 
-	public void prepare(Block block, int meta, int numberOfBlocks, Block blockToReplace) {
+	public void prepare(Block block, int meta, int numberOfBlocks, IBlockState blockToReplace) {
 		minableBlock = block;
 		minableBlockMeta = meta;
 		this.numberOfBlocks = numberOfBlocks;
@@ -71,9 +74,9 @@ public class WorldGenErebusMinable extends WorldGenerator {
 								if (d12 * d12 + d13 * d13 + d14 * d14 >= 1D)
 									continue;
 
-								Block block = world.getBlock(xx, yy, zz);
-								if (block != null && block.isReplaceableOreGen(world, xx, yy, zz, blockToReplace)) {
-									world.setBlock(xx, yy, zz, minableBlock, minableBlockMeta, 2);
+								IBlockState block = world.getBlockState(new BlockPos(xx, yy, zz));
+								if (block != null && block.getBlock().isReplaceableOreGen(block, world, new BlockPos(xx, yy, zz), (Predicate<IBlockState>) blockToReplace)) {
+									world.setBlockState(new BlockPos(xx, yy, zz), minableBlock.getStateFromMeta(minableBlockMeta), 2);
 									++placed;
 								}
 							}
