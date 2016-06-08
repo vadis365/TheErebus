@@ -12,6 +12,8 @@ import erebus.blocks.EnumWood;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenAmberGround;
+import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
@@ -21,10 +23,10 @@ import erebus.world.feature.tree.WorldGenMossbarkTree;
 public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 /*	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
-	private final WorldGenPonds genPonds = new WorldGenPonds();
+	private final WorldGenPonds genPonds = new WorldGenPonds();*/
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
-*/
+
 	private final WorldGenBush genMushroomsBrown = new WorldGenBush(Blocks.BROWN_MUSHROOM);
 	private final WorldGenBush genMushroomsRed = new WorldGenBush(Blocks.RED_MUSHROOM);
 	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(Blocks.BROWN_MUSHROOM_BLOCK);
@@ -63,17 +65,17 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 */
 	@Override
 	protected void decorate() {
-/*		
+		
 		if (rand.nextInt(3) == 0)
 			for (attempt = 0; attempt < 5; attempt++)
-				if (genAmberUmberstone.generate(world, rand, x + offsetXZ(), rand.nextInt(120), z + offsetXZ()))
+				if (genAmberUmberstone.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ())))
 					break;
 
 		if (rand.nextInt(6) == 0)
 			for (attempt = 0; attempt < 4; attempt++)
-				if (genAmberGround.generate(world, rand, x + offsetXZ(), 10 + rand.nextInt(40), z + offsetXZ()))
+				if (genAmberGround.generate(world, rand, new BlockPos(x + offsetXZ(), 10 + rand.nextInt(40), z + offsetXZ())))
 					break;
-
+/*
 		if ((x >> 4) % 5 == 0 && (z >> 4) % 5 == 0 && rand.nextInt(6) == 0 || rand.nextInt(60) == 0)
 			for (attempt = 0; attempt < 5; attempt++)
 				if (genWaspDungeon.generate(world, rand, x + offsetXZ(), 127, z + offsetXZ()))

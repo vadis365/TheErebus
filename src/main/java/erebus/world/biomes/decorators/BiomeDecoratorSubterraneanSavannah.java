@@ -10,6 +10,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenAmberGround;
+import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
@@ -21,8 +23,8 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	//private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
 	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
 	//private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
-	//private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
-	//private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
+	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
+	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
 	//private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
@@ -67,17 +69,17 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				genGiantBaobab.generate(world, rand, xx, yUp, zz);
 				break;
 			}
-
+*/
 		if (rand.nextInt(12) == 0)
 			for (attempt = 0; attempt < 5; attempt++)
-				if (genAmberUmberstone.generate(world, rand, x + offsetXZ(), rand.nextInt(120), z + offsetXZ()))
+				if (genAmberUmberstone.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ())))
 					break;
 
 		if (rand.nextInt(24) == 0)
 			for (attempt = 0; attempt < 4; attempt++)
-				if (genAmberGround.generate(world, rand, x + offsetXZ(), 10 + rand.nextInt(40), z + offsetXZ()))
+				if (genAmberGround.generate(world, rand, new BlockPos(x + offsetXZ(), 10 + rand.nextInt(40), z + offsetXZ())))
 					break;
-*/
+
 		for (attempt = 0; attempt < 65; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
