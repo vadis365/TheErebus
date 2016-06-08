@@ -3,11 +3,6 @@ package erebus.world;
 import java.util.List;
 import java.util.Random;
 
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.structure.MapGenErebusCaves;
-import erebus.world.structure.MapGenErebusRavine;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -27,6 +22,11 @@ import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import erebus.ModBiomes;
+import erebus.ModBlocks;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.structure.MapGenErebusCaves;
+import erebus.world.structure.MapGenErebusRavine;
 
 public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 
@@ -141,7 +141,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		replaceBlocksForBiome(x, z, biomesForGeneration, chunkprimer);
 
 		caveGenerator.generate(worldObj, x, z, chunkprimer);
-		// ravineGenerator.func_151539_a(this, worldObj, x, z, blocks);
+		ravineGenerator.generate(worldObj, x, z, chunkprimer);
 
 		Chunk chunk = new Chunk(worldObj, chunkprimer, x, z);
 		byte[] biomeArrayReference = chunk.getBiomeArray();

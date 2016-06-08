@@ -1,6 +1,8 @@
 package erebus.world.biomes.decorators;
 
 import net.minecraft.util.math.BlockPos;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 
@@ -51,14 +53,14 @@ private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 					break;
 			}
 		}
-/*
-		if (rand.nextInt(34) == 0)
-			for (int attempt = 0; attempt < 15; attempt++)
-				if (genAntlionLair.generate(world, rand, x + 5 + rand.nextInt(6) + 8, 15 + rand.nextInt(35), z + 5 + rand.nextInt(6) + 8))
-					break;
+
+	//	if (rand.nextInt(34) == 0)
+	//		for (int attempt = 0; attempt < 15; attempt++)
+	//			if (genAntlionLair.generate(world, rand, x + 5 + rand.nextInt(6) + 8, 15 + rand.nextInt(35), z + 5 + rand.nextInt(6) + 8))
+	//				break;
 					
 	}
-
+/*
 	@Override
 	public void generateFeature(FeatureType featureType) {
 		if (featureType == FeatureType.REDGEM)
@@ -67,7 +69,7 @@ private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 		else
 			super.generateFeature(featureType);
 	}
-
+*/
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {
@@ -87,6 +89,6 @@ private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 			case FOSSIL:
 				oreGen.setChance(0.25F).setIterations(0, 1);
 				break; // much more rare
-		}*/
+		}
 	}
 }

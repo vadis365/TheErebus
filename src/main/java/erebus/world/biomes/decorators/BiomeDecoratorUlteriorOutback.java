@@ -5,6 +5,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 
@@ -96,7 +98,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 						break;
 			}
 	}
-/*
+
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {
@@ -118,7 +120,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 				break; // more rare
 		}
 	}
-
+/*
 	@Override
 	public void generateFeature(FeatureType featureType) {
 		if (featureType == FeatureType.REDGEM)

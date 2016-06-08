@@ -2,11 +2,6 @@ package erebus.world.structure;
 
 import java.util.Random;
 
-import com.google.common.base.Objects;
-
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.world.ChunkProviderErebus;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -17,9 +12,35 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
 
+import com.google.common.base.Objects;
+
+import erebus.ModBiomes;
+import erebus.ModBlocks;
+import erebus.world.ChunkProviderErebus;
+
 public class MapGenErebusRavine extends MapGenBase {
-	protected static final IBlockState BLK_AIR = Blocks.AIR.getDefaultState();
+	protected static final IBlockState BLOCK_AIR = Blocks.AIR.getDefaultState();
 	private final float[] field_75046_d = new float[1024];
+
+	@Override
+    public void generate(World worldIn, int x, int z, ChunkPrimer primer) {
+        int i = this.range;
+        this.worldObj = worldIn;
+        this.rand.setSeed(worldIn.getSeed());
+        long j = this.rand.nextLong();
+        long k = this.rand.nextLong();
+
+        for (int l = x - i; l <= x + i; ++l)
+        {
+            for (int i1 = z - i; i1 <= z + i; ++i1)
+            {
+                long j1 = (long)l * j;
+                long k1 = (long)i1 * k;
+                this.rand.setSeed(j1 ^ k1 ^ worldIn.getSeed());
+                this.recursiveGenerate(worldIn, l, i1, x, z, primer);
+            }
+        }
+    }
 
 	protected void generateRavine(long seed, int x, int z, ChunkPrimer chunkPrimer, double par6, double par8, double seed0, float seed2, float seed3, float seed4, int seed5, int seed6, double seed7) {
 		Random random = new Random(seed);
@@ -129,7 +150,7 @@ public class MapGenErebusRavine extends MapGenBase {
 
 										if ((d12 * d12 + d13 * d13) * field_75046_d[posY] + d14 * d14 / 6.0D < 1.0D) {
 											IBlockState iblockstate1 = chunkPrimer.getBlockState(posX, posY, posZ);
-											IBlockState iblockstate2 = Objects.firstNonNull(chunkPrimer.getBlockState(posX, posY + 1, posZ), BLK_AIR);
+											IBlockState iblockstate2 = Objects.firstNonNull(chunkPrimer.getBlockState(posX, posY + 1, posZ), BLOCK_AIR);
 
 											if (isTopBlock(chunkPrimer, posX, posY, posZ, x, z))
 												flag2 = true;

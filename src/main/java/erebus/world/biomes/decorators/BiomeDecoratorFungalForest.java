@@ -1,5 +1,8 @@
 package erebus.world.biomes.decorators;
 
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
+
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 	@Override
@@ -163,7 +166,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 	}
-
+*/
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {
@@ -190,5 +193,5 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				oreGen.setChance(0.25F).setOreAmount(5, 8);
 				break; // double chance, lower amount per vein
 		}
-	}*/
+	}
 }

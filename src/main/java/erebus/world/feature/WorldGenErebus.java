@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -31,15 +32,15 @@ public abstract class WorldGenErebus extends WorldGenerator {
 	 */
 
 	protected final boolean setBlock(int x, int y, int z, Block block) {
-		return world.setBlockState(x, y, z, block);
+		return world.setBlockState(new BlockPos(x, y, z), block.getDefaultState());
 	}
 
 	protected final boolean setBlock(int x, int y, int z, Block block, int metadata) {
-		return world.setBlockState(x, y, z, block, metadata, 2);
+		return world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(metadata), 2);
 	}
 
 	protected final boolean setBlock(int x, int y, int z, Block block, int metadata, boolean update) {
-		return world.setBlockState(x, y, z, block, metadata, update ? 3 : 2);
+		return world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(metadata), update ? 3 : 2);
 	}
 
 	protected final void setBlockRect(int x1, int z1, int x2, int z2, int y, Block block) {
@@ -49,7 +50,7 @@ public abstract class WorldGenErebus extends WorldGenerator {
 	protected final void setBlockRect(int x1, int z1, int x2, int z2, int y, Block block, int metadata) {
 		for (int xx = x1; xx <= x2; xx++)
 			for (int zz = z1; zz <= z2; zz++)
-				world.setBlockState(xx, y, zz, block, metadata, 2);
+				world.setBlockState(new BlockPos(xx, y, zz), block.getStateFromMeta(metadata), 2);
 	}
 
 	protected final void setBlockPillar(int x, int z, int y1, int y2, Block block) {
@@ -58,7 +59,7 @@ public abstract class WorldGenErebus extends WorldGenerator {
 
 	protected final void setBlockPillar(int x, int z, int y1, int y2, Block block, int metadata) {
 		for (int yy = y1; yy <= y2; yy++)
-			world.setBlockState(x, yy, z, block, metadata, 2);
+			world.setBlockState(new BlockPos(x, yy, z), block.getStateFromMeta(metadata), 2);
 	}
 
 	protected final void setBlockCube(int x1, int y1, int z1, int x2, int y2, int z2, Block block) {
@@ -69,15 +70,17 @@ public abstract class WorldGenErebus extends WorldGenerator {
 		for (int yy = y1; yy <= y2; yy++)
 			for (int xx = x1; xx <= x2; xx++)
 				for (int zz = z1; zz <= z2; zz++)
-					world.setBlockState(xx, yy, zz, block, metadata, 2);
+					world.setBlockState(new BlockPos(xx, yy, zz), block.getStateFromMeta(metadata), 2);
 	}
 
 	protected final boolean setMetadata(int x, int y, int z, int metadata) {
-		return world.setBlockState(x, y, z, metadata, 2);
+		Block block = world.getBlockState(new BlockPos(x, y, z)).getBlock();
+		return world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(metadata), 2);
 	}
 
 	protected final boolean setMetadata(int x, int y, int z, int metadata, boolean update) {
-		return world.setBlockState(x, y, z, metadata, update ? 3 : 2);
+		Block block = world.getBlockState(new BlockPos(x, y, z)).getBlock();
+		return world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(metadata), update ? 3 : 2);
 	}
 
 	/*
@@ -85,30 +88,31 @@ public abstract class WorldGenErebus extends WorldGenerator {
 	 */
 
 	protected final Block getBlock(int x, int y, int z) {
-		return world.getBlockState(x, y, z).getBlock();
+		return world.getBlockState(new BlockPos(x, y, z)).getBlock();
 	}
 
 	protected final int getMetadata(int x, int y, int z) {
-		return world.getBlockMetadata(x, y, z);
+		IBlockState block = world.getBlockState(new BlockPos(x, y, z));
+		return block.getBlock().getMetaFromState(block);
 	}
 
 	protected final Material getMaterial(int x, int y, int z) {
-		return world.getBlockState(x, y, z).getMaterial();
+		return world.getBlockState(new BlockPos(x, y, z)).getMaterial();
 	}
 
 	protected final boolean isAir(int x, int y, int z) {
-		Block block = world.getBlock(x, y, z);
-		return block == Blocks.air || block.isAir(world, x, y, z);
+		IBlockState block = world.getBlockState(new BlockPos(x, y, z));
+		return block == Blocks.AIR || world.isAirBlock(new BlockPos(x, y, z));
 	}
 
 	protected final boolean checkAirCube(int x1, int y1, int z1, int x2, int y2, int z2) {
-		Block block;
+		IBlockState block;
 
 		for (int yy = y1; yy <= y2; yy++)
 			for (int xx = x1; xx <= x2; xx++)
 				for (int zz = z1; zz <= z2; zz++) {
-					block = world.getBlock(xx, yy, zz);
-					if (block != Blocks.air && !block.isAir(world, xx, yy, zz))
+					block = world.getBlockState(new BlockPos(xx, yy, zz));
+					if (block != Blocks.AIR && !world.isAirBlock(new BlockPos(xx, yy, zz)))
 						return false;
 				}
 
@@ -116,11 +120,14 @@ public abstract class WorldGenErebus extends WorldGenerator {
 	}
 
 	protected final boolean checkSolidCube(int x1, int y1, int z1, int x2, int y2, int z2) {
+		IBlockState block;
 		for (int yy = y1; yy <= y2; yy++)
 			for (int xx = x1; xx <= x2; xx++)
-				for (int zz = z1; zz <= z2; zz++)
-					if (!world.getBlock(xx, yy, zz).isOpaqueCube())
+				for (int zz = z1; zz <= z2; zz++) {
+					block = world.getBlockState(new BlockPos(xx, yy, zz));
+					if (!block.getBlock().isOpaqueCube(block))
 						return false;
+				}
 
 		return true;
 	}

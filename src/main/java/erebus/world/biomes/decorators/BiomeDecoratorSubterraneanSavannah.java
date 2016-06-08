@@ -7,6 +7,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.tree.WorldGenAsperTree;
@@ -143,7 +145,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			}
 		}
 	}
-/*
+
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {
@@ -166,5 +168,5 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				oreGen.setChance(0.5F).setIterations(0, extraOres ? 2 : 3).setY(5, 64);
 				break; // less common and lowered area ~2 times, thus lowered chance and iterations
 		}
-	}*/
+	}
 }

@@ -2,6 +2,8 @@ package erebus.world.biomes.decorators;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 
@@ -215,7 +217,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
 		}*/
 	}
-/*
+
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {
@@ -237,7 +239,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				break; // more rare
 		}
 	}
-
+/*
 	@Override
 	public void generateFeature(FeatureType featureType) {
 		if (featureType == FeatureType.REDGEM)

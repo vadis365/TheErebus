@@ -17,9 +17,9 @@ public abstract class BiomeDecoratorBaseErebus {
 	protected int xx, yy, zz, attempt;
 	private boolean isDecorating = false;
 
-//	private static final OreSettings oreGen = new OreSettings();
+	private static final OreSettings oreGen = new OreSettings();
 
-//	protected static final WorldGenRedGem genRedGem = new WorldGenRedGem();
+	//protected static final WorldGenRedGem genRedGem = new WorldGenRedGem();
 
 	protected BiomeDecoratorBaseErebus() {
 	}
@@ -41,16 +41,17 @@ public abstract class BiomeDecoratorBaseErebus {
 		this.x = x;
 		this.z = z;
 
-	/*	for (FeatureType featureType : FeatureType.values())
+		for (FeatureType featureType : FeatureType.values())
 			generateFeature(featureType);
 
-		boolean extraOres = ConfigHandler.INSTANCE.lead || ConfigHandler.INSTANCE.silver || ConfigHandler.INSTANCE.copper || ConfigHandler.INSTANCE.tin || ConfigHandler.INSTANCE.aluminium;
+		boolean extraOres = OreType.LEAD.isEnabled() || OreType.SILVER.isEnabled() || OreType.COPPER.isEnabled() || OreType.TIN.isEnabled() || OreType.ALUMINIUM.isEnabled();
 
-		for (OreType oreType : OreType.values()) {
-			oreType.setupDefault(oreGen, extraOres);
-			modifyOreGen(oreGen, oreType, extraOres);
-			oreGen.generate(world, rand, x, z);
-		}*/
+		for (OreType oreType : OreType.values())
+			if (oreType.isEnabled()) {
+				oreType.setupDefault(oreGen, extraOres);
+				modifyOreGen(oreGen, oreType, extraOres);
+				oreGen.generate(world, rand, x, z);
+			}
 
 		decorate();
 

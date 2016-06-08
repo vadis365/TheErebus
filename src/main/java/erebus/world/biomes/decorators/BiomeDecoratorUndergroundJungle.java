@@ -9,6 +9,8 @@ import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBush;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.blocks.EnumWood;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
@@ -253,7 +255,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			}
 			*/
 	}
-/*
+
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {
@@ -275,5 +277,5 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				oreGen.setChance(0.25F);
 				break; // ~ 1/3 chance
 		}
-	}*/
+	}
 }

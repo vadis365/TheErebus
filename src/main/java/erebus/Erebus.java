@@ -33,6 +33,7 @@ public class Erebus {
 		ConfigHandler.INSTANCE.loadConfig(event);
 		ModItems.init();
 		ModBlocks.init();
+		ConfigHandler.INSTANCE.initOreConfigs();
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
 		proxy.registerItemAndBlockRenderers();
