@@ -9,23 +9,25 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.loot.IWeightProvider;
-import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.loot.IWeightProvider;
+import gnu.trove.map.hash.TObjectIntHashMap;
 
 public final class SpawnerErebus {
 
@@ -49,7 +51,7 @@ public final class SpawnerErebus {
 
 	private boolean canSpawnHostiles;
 	private boolean canSpawnAnimals;
-	private Map<ChunkCoordIntPair, Boolean> spawnChunks = new HashMap<ChunkCoordIntPair, Boolean>(64);
+	private Map<ChunkPos, Boolean> spawnChunks = new HashMap<ChunkPos, Boolean>(64);
 
 	private void prepare(WorldServer world) {
 		WorldProviderErebus provider = (WorldProviderErebus) world.provider;
@@ -76,7 +78,7 @@ public final class SpawnerErebus {
 
 			for (px = -dist; px <= dist; px++)
 				for (pz = -dist; pz <= dist; pz++) {
-					ChunkCoordIntPair coords = new ChunkCoordIntPair(chunkX + px, chunkZ + pz);
+					ChunkPos coords = new ChunkPos(chunkX + px, chunkZ + pz);
 
 					if (px == -dist || px == dist || pz == -dist || pz == dist || Math.abs(px) <= 1 || Math.abs(pz) <= 1) {
 						if (!spawnChunks.containsKey(coords))
@@ -102,9 +104,9 @@ public final class SpawnerErebus {
 		if (totalAmount >= Math.min(spawnChunks.size() >> 1, MAX_MOBS_PER_WORLD) / (world.getDifficulty() == EnumDifficulty.PEACEFUL ? 2 : 1))
 			return;
 
-		List<ChunkCoordIntPair> chunksToTest = new ArrayList<ChunkCoordIntPair>();
+		List<ChunkPos> chunksToTest = new ArrayList<ChunkPos>();
 
-		for (Entry<ChunkCoordIntPair, Boolean> entry : spawnChunks.entrySet())
+		for (Entry<ChunkPos, Boolean> entry : spawnChunks.entrySet())
 			if (entry.getValue())
 				chunksToTest.add(entry.getKey());
 
@@ -115,7 +117,7 @@ public final class SpawnerErebus {
 
 		Collections.shuffle(chunksToTest, rand);
 
-		for (ChunkCoordIntPair coords : chunksToTest) {
+		for (ChunkPos coords : chunksToTest) {
 			spawned = attempts = 0;
 
 			while (attempts < 4 && spawned < 2) {
@@ -123,7 +125,7 @@ public final class SpawnerErebus {
 				z = coords.chunkZPos * 16 + rand.nextInt(16);
 				y = 10 + rand.nextInt(100);
 				BlockPos blockCoord = new BlockPos(x, y, z);
-				BiomeGenBase biome = world.getBiomeGenForCoords(blockCoord);
+				Biome biome = world.getBiomeGenForCoords(blockCoord);
 				if (!(biome instanceof BiomeBaseErebus))
 					break;
 
@@ -151,7 +153,7 @@ public final class SpawnerErebus {
 						fy = y + rand.nextInt(2) - 1;
 						fz = z + rand.nextInt(12) - 6 + 0.5F;
 
-						if ((entry.blockBelow == null && world.getBlock((int) fx, (int) fy - 1, (int) fz).isNormalCube() || world.getBlock((int) fx, (int) fy - 1, (int) fz) == entry.blockBelow) && world.getClosestPlayer(fx, fy, fz, 24D) == null) {
+						if ((entry.blockBelow == null && world.getBlockState(new BlockPos ((int) fx, (int) fy - 1, (int) fz)).isNormalCube() || world.getBlockState(new BlockPos ((int) fx, (int) fy - 1, (int) fz)) == entry.blockBelow) && world.getClosestPlayer(fx, fy, fz, 24D, false) == null) {
 							if (!coordsFinal) {
 								coordsFinal = true;
 								posAttempts = 10;
