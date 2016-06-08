@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import erebus.ModItems;
-import erebus.ModItems.ISubItemsItem;
-import erebus.ModTabs;
-import erebus.api.IErebusEnum;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModItems;
+import erebus.ModItems.ISubItemsItem;
+import erebus.ModTabs;
+import erebus.api.IErebusEnum;
 
 public class ItemMaterials extends Item implements ISubItemsItem {
 
@@ -26,7 +26,7 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
 		for (EnumType type : EnumType.values())
-			list.add(type.createStack());
+			list.add(type.createStack(1));
 	}
 
 	@Override
@@ -130,6 +130,12 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		@Override
 		public String getName() {
 			return name().toLowerCase(Locale.ENGLISH);
+		}
+
+		@Override
+		public ItemStack createStack() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 }
