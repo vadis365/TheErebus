@@ -14,7 +14,7 @@ public class WorldGenSavannahRock extends WorldGenerator {
 	public boolean generate(World world, Random rand, BlockPos pos) {
 		for (int xx = pos.getX() - 3; xx <= pos.getX() + 3; xx++)
 			for (int zz = pos.getZ() - 3; zz <= pos.getZ() + 3; zz++)
-				if (world.getBlockState(pos.add(xx, pos.getY(), zz)) != Blocks.GRASS.getDefaultState()) {
+				if (world.getBlockState(new BlockPos(xx, pos.getY(), zz)) != Blocks.GRASS.getDefaultState()) {
 					return false;
 				}
 
@@ -48,10 +48,10 @@ public class WorldGenSavannahRock extends WorldGenerator {
 			IBlockState block;
 			for (int attempt = 0, diamonds = 0, diamondAmount = rand.nextInt(2) + 1, iradX = (int) Math.ceil(radX), iradY = (int) Math.ceil(radY), iradZ = (int) Math.ceil(radZ); attempt < 10 && diamonds < diamondAmount; attempt++) {
 				int xx = x + rand.nextInt(iradX * 2) - iradX, yy = y + rand.nextInt(iradY * 2) - iradY, zz = z + rand.nextInt(iradZ * 2) - iradZ;
-				block = world.getBlockState(pos.add(xx, yy, zz));
+				block = world.getBlockState(new BlockPos(xx, yy, zz));
 
 				if (block == Blocks.STONE.getDefaultState() || block == Blocks.MONSTER_EGG.getDefaultState()) {
-					world.setBlockState(pos.add(xx, yy, zz), Blocks.DIAMOND_ORE.getDefaultState());
+					world.setBlockState(new BlockPos(xx, yy, zz), Blocks.DIAMOND_ORE.getDefaultState());
 					++diamonds;
 				}
 			}
