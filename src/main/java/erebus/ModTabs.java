@@ -1,8 +1,8 @@
 package erebus;
 
-import erebus.lib.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import erebus.lib.Reference;
 
 public class ModTabs {
 
@@ -14,6 +14,13 @@ public class ModTabs {
 	};
 
 	public static final CreativeTabs ITEMS = new CreativeTabs(Reference.MOD_ID + ".items") {
+		@Override
+		public Item getTabIconItem() {
+			return ModItems.MATERIALS;
+		}
+	};
+
+	public static final CreativeTabs GEAR = new CreativeTabs(Reference.MOD_ID + ".gear") {
 		@Override
 		public Item getTabIconItem() {
 			return ModItems.MATERIALS;
