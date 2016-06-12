@@ -15,6 +15,7 @@ import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
+import erebus.world.feature.tree.WorldGenGiantBaobab;
 
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
@@ -25,7 +26,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	//private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
-	//private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
+	private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
@@ -60,16 +61,18 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 */
 	@Override
 	public void decorate() {
-	/*	xx = x + 16;
+		xx = x + 16;
 		yy = 16;
 		zz = z + 16;
 
-		for (int yUp = yy; 64 + yy >= yUp; yUp++)
-			if (checkSurface(SurfaceType.GRASS, xx, yUp, zz) && checkSurface(SurfaceType.GRASS, xx - 6, yUp, zz - 6) && checkSurface(SurfaceType.GRASS, xx + 6, yUp, zz + 6) || checkSurface(SurfaceType.GRASS, xx, yUp, zz) && checkSurface(SurfaceType.GRASS, xx + 6, yUp, zz - 6) && checkSurface(SurfaceType.GRASS, xx - 6, yUp, zz + 6)) {
-				genGiantBaobab.generate(world, rand, xx, yUp, zz);
+		for (int yUp = yy; 64 + yy >= yUp; yUp++) {
+			BlockPos pos = new BlockPos(xx, yUp, zz);
+			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(xx - 6, yUp, zz - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(xx + 6, yUp, zz + 6)) || checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(xx + 6, yUp, zz - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(xx - 6, yUp, zz + 6))) {
+				genGiantBaobab.generate(world, rand, pos);
 				break;
 			}
-*/
+		}
+		
 		if (rand.nextInt(12) == 0)
 			for (attempt = 0; attempt < 5; attempt++)
 				if (genAmberUmberstone.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ())))

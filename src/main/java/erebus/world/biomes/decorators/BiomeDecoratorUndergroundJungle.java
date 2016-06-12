@@ -1,12 +1,18 @@
 package erebus.world.biomes.decorators;
 
 import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockOldLeaf;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBush;
+import net.minecraft.world.gen.feature.WorldGenMegaJungle;
+import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.blocks.EnumWood;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -16,8 +22,10 @@ import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
+import erebus.world.feature.tree.WorldGenErebusTrees;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
+import erebus.world.feature.tree.WorldGenTallJungleTree;
 
 
 public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
@@ -36,13 +44,16 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead, 1);
 */	
 // TODO FIX the below trees
-//	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true, 5, false, EnumWood.MAHOGANY, ModBlocks.thorns);
+	private static final IBlockState JUMGLE_TRUNK = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE);
+	private static final IBlockState JUNGLE_LEAF = Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
+	    
+	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true, 5, false, EnumWood.MAHOGANY, Blocks.VINE); // should have thorns not vines
 	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true, false, EnumWood.MAHOGANY);
-//	private final WorldGenerator genTreeJungle = new WorldGenTrees(true, 6, 3, 3, true);
-//	private final WorldGenerator genTreeJungleLarge = new WorldGenMegaJungle(false, 10, 20, 3, 3);
+	private final WorldGenerator genTreeJungle = new WorldGenTrees(true, 6, JUMGLE_TRUNK, JUNGLE_LEAF, true);
+	private final WorldGenerator genTreeJungleLarge = new WorldGenMegaJungle(false, 10, 20, JUMGLE_TRUNK, JUNGLE_LEAF);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
-//	private final WorldGenerator genTreeJungleTall = new WorldGenTallJungleTree();
+	private final WorldGenerator genTreeJungleTall = new WorldGenTallJungleTree();
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 /*
 	private final WorldGenerator genBamboo = new WorldGenBamboo(13, false);
@@ -99,13 +110,13 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				WorldGenerator treeGen = null;
 				int r = rand.nextInt(31);
 
-				//if (r <= 6) {
-				//	xx = x + 9 + rand.nextInt(14);
-				//	zz = z + 9 + rand.nextInt(14);
-				//	treeGen = genTreeJungleLarge;
-				//} else if (r <= 11)
-				//	treeGen = genTreeMahogany;
-				//else
+				if (r <= 6) {
+					xx = x + 9 + rand.nextInt(14);
+					zz = z + 9 + rand.nextInt(14);
+					treeGen = genTreeJungleLarge;
+				} else if (r <= 11)
+					treeGen = genTreeMahogany;
+				else
 				if (r <= 16) {
 					xx = x + 9 + rand.nextInt(14);
 					zz = z + 9 + rand.nextInt(14);
@@ -113,12 +124,12 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 					treeGen = genTreeMahoganyLarge;
 				} else if (r <= 20)
 					treeGen = genTreeAsper;
-				//else if (r <= 23)
-					//treeGen = genTreeJungle;
+				else if (r <= 23)
+					treeGen = genTreeJungle;
 				else if (r <= 26)
 					treeGen = genTreeMossbark;
-				//else if (r <= 28)
-				//	treeGen = genTreeJungleTall;
+				else if (r <= 28)
+					treeGen = genTreeJungleTall;
 				else
 					treeGen = genTreeEucalyptus;
 
