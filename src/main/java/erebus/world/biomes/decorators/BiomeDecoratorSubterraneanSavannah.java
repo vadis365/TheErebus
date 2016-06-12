@@ -67,7 +67,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 
 		for (int yUp = yy; 64 + yy >= yUp; yUp++) {
 			BlockPos pos = new BlockPos(xx, yUp, zz);
-			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(xx - 6, yUp, zz - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(xx + 6, yUp, zz + 6)) || checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(xx + 6, yUp, zz - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(xx - 6, yUp, zz + 6))) {
+			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() - 6, pos.getY(), pos.getZ() - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() + 6, pos.getY(), pos.getZ() + 6)) || checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() + 6, pos.getY(), pos.getZ() - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() - 6, pos.getY(), pos.getZ() + 6))) {
 				genGiantBaobab.generate(world, rand, pos);
 				break;
 			}
