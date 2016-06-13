@@ -85,6 +85,7 @@ tile.erebus.umberstone.umbercobble_webbed.name=Webbed Umbercobble
 tile.erebus.umberstone.umberstone_bricks.name=Umberstone Bricks
 tile.erebus.umberstone.umbertile_smooth.name=Smooth Umbertile
 tile.erebus.umberstone.umbertile_smooth_small.name=Small Smooth Umbertile
+tile.erebus.amber.name=Amber
 
 # Ores
 tile.erebus.ore_iron.name=Iron Ore

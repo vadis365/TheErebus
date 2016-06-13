@@ -5,14 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import erebus.blocks.BlockOreErebus;
-import erebus.blocks.BlockOreErebus2;
-import erebus.blocks.BlockPlanksErebus;
-import erebus.blocks.BlockUmberstone;
-import erebus.blocks.EnumWood;
-import erebus.blocks.ErebusPortal;
-import erebus.items.ItemMaterials;
-import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
@@ -21,6 +13,15 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import erebus.blocks.BlockAmber;
+import erebus.blocks.BlockOreErebus;
+import erebus.blocks.BlockOreErebus2;
+import erebus.blocks.BlockPlanksErebus;
+import erebus.blocks.BlockUmberstone;
+import erebus.blocks.EnumWood;
+import erebus.blocks.ErebusPortal;
+import erebus.items.ItemMaterials;
+import erebus.lib.Reference;
 
 public class ModBlocks {
 
@@ -48,7 +49,8 @@ public class ModBlocks {
 	public static final Block ORE_GNEISS = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.GNEISS_ROCK.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
-
+	public static final Block AMBER = new BlockAmber(); 
+	
 	public static void init() {
 		try {
 			for (Field field : ModBlocks.class.getDeclaredFields()) {

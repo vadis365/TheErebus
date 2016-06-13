@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBlocks;
 
 public class WorldGenAmberGround extends WorldGenerator {
 	@Override
@@ -34,7 +35,7 @@ public class WorldGenAmberGround extends WorldGenerator {
 			for (int yy = -ceilRad; yy <= ceilRad; yy++)
 				for (int zz = -ceilRad; zz <= ceilRad; zz++)
 					if (Math.sqrt(xx * xx + yy * yy + zz * zz) <= rad + rand.nextFloat() * 0.4F)
-						world.setBlockState(new BlockPos(x + xx, y + yy, z + zz), Blocks.GLASS.getDefaultState(), 2); //ModBlocks.amber
+						world.setBlockState(new BlockPos(x + xx, y + yy, z + zz), ModBlocks.AMBER.getDefaultState(), 2); //ModBlocks.amber
 
 		return true;
 	}

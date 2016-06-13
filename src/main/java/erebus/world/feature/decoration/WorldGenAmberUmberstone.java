@@ -2,7 +2,6 @@ package erebus.world.feature.decoration;
 
 import java.util.Random;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -24,7 +23,7 @@ public class WorldGenAmberUmberstone extends WorldGenerator {
 			for (int yy = -ceilRad; yy <= ceilRad; yy++)
 				for (int zz = -ceilRad; zz <= ceilRad; zz++)
 					if (Math.sqrt(xx * xx + yy * yy + zz * zz) <= rad + rand.nextFloat() * 0.4F && world.getBlockState(new BlockPos(x + xx, y + yy, z + zz)) == ModBlocks.UMBERSTONE.getDefaultState())
-						world.setBlockState(new BlockPos(x + xx, y + yy, z + zz), Blocks.GLASS.getDefaultState(), 2); //ModBlocks.amber
+						world.setBlockState(new BlockPos(x + xx, y + yy, z + zz), ModBlocks.AMBER.getDefaultState(), 2); //ModBlocks.amber
 
 		return true;
 	}
