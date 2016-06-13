@@ -23,7 +23,7 @@ public class ModTabs {
 	public static final CreativeTabs GEAR = new CreativeTabs(Reference.MOD_ID + ".gear") {
 		@Override
 		public Item getTabIconItem() {
-			return ModItems.MATERIALS;
+			return ModItems.JADE_PICKAXE;
 		}
 	};
 }
