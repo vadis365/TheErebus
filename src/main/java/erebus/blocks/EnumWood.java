@@ -2,13 +2,13 @@ package erebus.blocks;
 
 import java.util.Locale;
 
-import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import erebus.ModBlocks;
 
 public enum EnumWood implements IStringSerializable {
 
@@ -20,7 +20,7 @@ public enum EnumWood implements IStringSerializable {
 	CYPRESS,
 	BALSAM(true, true, true, true, false),
 	WHITE(false, true, false, false, false),
-	BAMBOO(false, true, false, false, false),
+	BAMBOO(true, true, true, false, false),
 	ROTTEN(true, true, false, false, true),
 	MARSHWOOD,
 	SCORCHED(true, true, false, false, true),
@@ -92,8 +92,15 @@ public enum EnumWood implements IStringSerializable {
 
 	public static void init() {
 		for (EnumWood wood : values()) {
-			if (wood.hasLog) {
+			if (wood.hasLog && wood != EnumWood.BAMBOO) {
 				Block log = new BlockLogErebus();
+				ModBlocks.registerBlock("log_" + wood.getName(), log);
+
+				wood.log = log;
+			}
+			
+			else if (wood.hasLog && wood == EnumWood.BAMBOO) {
+				Block log = new BlockBamboo();
 				ModBlocks.registerBlock("log_" + wood.getName(), log);
 
 				wood.log = log;

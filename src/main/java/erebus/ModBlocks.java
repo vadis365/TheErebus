@@ -49,8 +49,8 @@ public class ModBlocks {
 	public static final Block ORE_GNEISS = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.GNEISS_ROCK.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
-	public static final Block AMBER = new BlockAmber(); 
-	
+	public static final Block AMBER = new BlockAmber();
+
 	public static void init() {
 		try {
 			for (Field field : ModBlocks.class.getDeclaredFields()) {

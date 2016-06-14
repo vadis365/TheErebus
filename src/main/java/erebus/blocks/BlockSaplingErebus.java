@@ -3,16 +3,6 @@ package erebus.blocks;
 import java.util.List;
 import java.util.Random;
 
-import erebus.Erebus;
-import erebus.ModTabs;
-import erebus.world.feature.tree.WorldGenAsperTree;
-import erebus.world.feature.tree.WorldGenBalsamTree;
-import erebus.world.feature.tree.WorldGenBaobabTree;
-import erebus.world.feature.tree.WorldGenCypressTree;
-import erebus.world.feature.tree.WorldGenErebusHugeTree;
-import erebus.world.feature.tree.WorldGenEucalyptusTree;
-import erebus.world.feature.tree.WorldGenMarshwoodTree;
-import erebus.world.feature.tree.WorldGenMossbarkTree;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
@@ -27,6 +17,17 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.Erebus;
+import erebus.ModTabs;
+import erebus.world.feature.plant.WorldGenBamboo;
+import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenBalsamTree;
+import erebus.world.feature.tree.WorldGenBaobabTree;
+import erebus.world.feature.tree.WorldGenCypressTree;
+import erebus.world.feature.tree.WorldGenErebusHugeTree;
+import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import erebus.world.feature.tree.WorldGenMarshwoodTree;
+import erebus.world.feature.tree.WorldGenMossbarkTree;
 
 public class BlockSaplingErebus extends BlockSapling {
 
@@ -77,6 +78,9 @@ public class BlockSaplingErebus extends BlockSapling {
 				break;
 			case MARSHWOOD:
 				worldGen = new WorldGenMarshwoodTree();
+				break;
+			case BAMBOO:
+				worldGen = new WorldGenBamboo(true, false);
 				break;
 			default:
 				break;

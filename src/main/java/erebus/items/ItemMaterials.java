@@ -63,7 +63,6 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		BIO_VELOCITY,
 		ELASTIC_FIBRE,
 		WASP_STING,
-		BAMBOO_SHOOT,
 		RED_GEM,
 		BIO_LUMINESCENCE,
 		SUPERNATURAL_VELOCITY,
