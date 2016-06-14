@@ -61,12 +61,11 @@ public class BlockBamboo extends Block implements IPlantable {
 
 	@Override
 	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-		if (this.getMetaFromState(state) == 0 && RANDOM.nextInt(this.getMetaFromState(state) >= 8 ? 35 : 20) == 0) {
-			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		if (this.getMetaFromState(state) == 0 && RANDOM.nextInt(this.getMetaFromState(state) >= 8 ? 35 : 20) == 0)
 			ret.add(new ItemStack(Item.getItemFromBlock(EnumWood.BAMBOO.getSapling())));
-			return ret;
-		}
-		return null;
+		ret.add(new ItemStack(ModItems.MATERIALS, 1, EnumType.BAMBOO.ordinal()));
+		return ret;
 	}
 
 	@Override
@@ -74,7 +73,8 @@ public class BlockBamboo extends Block implements IPlantable {
 		return false;
 	}
 
-	public void updateTick2(World world, BlockPos pos, IBlockState state, Random rand) {
+	@Override
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		if (world.getBlockState(pos.down()).getBlock() == EnumWood.BAMBOO.getLog() || this.checkForDrop(world, pos, state)) {
 			if (world.isAirBlock(pos.up())) {
 				int growthHeight;

@@ -13,6 +13,7 @@ import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
+import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
 import erebus.world.feature.tree.WorldGenGiantBaobab;
@@ -21,7 +22,7 @@ import erebus.world.feature.tree.WorldGenGiantBaobab;
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
 
 	//private final WorldGenPonds genPonds = new WorldGenPonds();
-	//private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
+	private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
 	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
 	//private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();

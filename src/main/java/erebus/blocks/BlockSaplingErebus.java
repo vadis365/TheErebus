@@ -47,6 +47,20 @@ public class BlockSaplingErebus extends BlockSapling {
 	}
 
 	@Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        if (!world.isRemote) {
+            super.updateTick(world, pos, state, rand);
+
+            if (world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+            	if(this != EnumWood.BAMBOO.getSapling())
+            		grow(world, pos, state, rand);
+            	else
+            		world.setBlockState(pos, EnumWood.BAMBOO.getLog().getDefaultState(), 3);
+            }
+        }
+    }
+
+	@Override
 	public void generateTree(World world, BlockPos pos, IBlockState state, Random rand) {
 		if (!TerrainGen.saplingGrowTree(world, rand, pos))
 			return;

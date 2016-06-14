@@ -65,9 +65,9 @@ public class WorldGenBamboo extends WorldGenerator {
 			}
 		}
 		else {
-			for (int bambooY = 1, bambooHeight = rand.nextInt(6) + 4; bambooY < bambooHeight; bambooY++)
+			for (int bambooY = 0, bambooHeight = rand.nextInt(6) + 4; bambooY < bambooHeight; bambooY++)
 				if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY() + bambooY, pos.getZ())))
-					world.setBlockState(new BlockPos(pos.getX(), pos.getY() + bambooY, pos.getZ()), EnumWood.BAMBOO.getLog().getDefaultState());
+					world.setBlockState(new BlockPos(pos.getX(), pos.getY() + bambooY, pos.getZ()), EnumWood.BAMBOO.getLog().getDefaultState(), 3);
 				else
 					break;
 		}
