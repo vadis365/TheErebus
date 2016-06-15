@@ -1,7 +1,9 @@
 {
+    "parent": "block/block",
     "textures": {
         "0": "erebus:blocks/log_bamboo",
-        "1": "erebus:blocks/log_bamboo_top"
+        "1": "erebus:blocks/log_bamboo_top",
+        "particle": "erebus:blocks/log_bamboo"
     },
     "elements": [
         {

@@ -9,12 +9,14 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
@@ -33,7 +35,7 @@ public class BlockBamboo extends Block implements IPlantable {
 
 	public BlockBamboo() {
 		super(Material.WOOD);
-		setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
+		setDefaultState(blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
 		setTickRandomly(true);
 		setCreativeTab(ModTabs.BLOCKS);
 	}
@@ -51,7 +53,7 @@ public class BlockBamboo extends Block implements IPlantable {
 	@Nullable
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return this.getMetaFromState(state) >= 8 && rand.nextInt(17) <= 3 ? null : ModItems.MATERIALS;
+		return getMetaFromState(state) >= 8 && rand.nextInt(17) <= 3 ? null : ModItems.MATERIALS;
 	}
 
 	@Override
@@ -62,11 +64,16 @@ public class BlockBamboo extends Block implements IPlantable {
 	@Override
 	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		if (this.getMetaFromState(state) == 0 && RANDOM.nextInt(this.getMetaFromState(state) >= 8 ? 35 : 20) == 0)
+		if (this.getMetaFromState(state) == 0 && RANDOM.nextInt(getMetaFromState(state) >= 8 ? 35 : 20) == 0)
 			ret.add(new ItemStack(Item.getItemFromBlock(EnumWood.BAMBOO.getSapling())));
 		ret.add(new ItemStack(ModItems.MATERIALS, 1, EnumType.BAMBOO.ordinal()));
 		return ret;
 	}
+
+	@Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
@@ -75,7 +82,7 @@ public class BlockBamboo extends Block implements IPlantable {
 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
-		if (world.getBlockState(pos.down()).getBlock() == EnumWood.BAMBOO.getLog() || this.checkForDrop(world, pos, state)) {
+		if (world.getBlockState(pos.down()).getBlock() == EnumWood.BAMBOO.getLog() || checkForDrop(world, pos, state)) {
 			if (world.isAirBlock(pos.up())) {
 				int growthHeight;
 
@@ -85,7 +92,7 @@ public class BlockBamboo extends Block implements IPlantable {
 					int stage = ((Integer) state.getValue(AGE)).intValue();
 
 					if (stage == 15) {
-						world.setBlockState(pos.up(), this.getDefaultState());
+						world.setBlockState(pos.up(), getDefaultState());
 						world.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(0)), 4);
 					} else
 						world.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(stage + 1)), 4);
@@ -124,12 +131,12 @@ public class BlockBamboo extends Block implements IPlantable {
 	}
 
 	public boolean canBlockStay(World world, BlockPos pos) {
-		return this.canPlaceBlockAt(world, pos);
+		return canPlaceBlockAt(world, pos);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(AGE, Integer.valueOf(meta));
+		return getDefaultState().withProperty(AGE, Integer.valueOf(meta));
 	}
 
 	@Override
@@ -144,12 +151,17 @@ public class BlockBamboo extends Block implements IPlantable {
 
 	@Override
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-		return this.getDefaultState();
+		return getDefaultState();
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] { AGE });
 	}
+
+	@Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(Item.getItemFromBlock(EnumWood.BAMBOO.getLog()));
+    }
 
 }

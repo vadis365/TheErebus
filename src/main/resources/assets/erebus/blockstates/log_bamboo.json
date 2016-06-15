@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"age=0": { "model": "erebus:log_bamboo" },
+        "age=0": { "model": "erebus:log_bamboo" },
 		"age=1": { "model": "erebus:log_bamboo" },
 		"age=2": { "model": "erebus:log_bamboo" },
 		"age=3": { "model": "erebus:log_bamboo" },
