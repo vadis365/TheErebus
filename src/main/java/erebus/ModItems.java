@@ -9,8 +9,8 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import erebus.items.ItemArmorBamboo;
 import erebus.items.ItemArmorExoskeleton;
-import erebus.items.ItemArmorGlider;
 import erebus.items.ItemArmorJade;
 import erebus.items.ItemArmorReinExoskeleton;
 import erebus.items.ItemArmorRhino;
@@ -62,6 +62,12 @@ public class ModItems {
 	public static final Item RHINO_EXOSKELETON_CHESTPLATE = new ItemArmorRhino(EntityEquipmentSlot.CHEST);
 	public static final Item RHINO_EXOSKELETON_LEGGINGS = new ItemArmorRhino(EntityEquipmentSlot.LEGS);
 	public static final Item RHINO_EXOSKELETON_BOOTS = new ItemArmorRhino(EntityEquipmentSlot.FEET);
+	
+	// BAMBOO STUFF
+	public static final Item BAMBOO_HELMET = new ItemArmorBamboo(EntityEquipmentSlot.HEAD);
+	public static final Item BAMBOO_CHESTPLATE = new ItemArmorBamboo(EntityEquipmentSlot.CHEST);
+	public static final Item BAMBOO_LEGGINGS = new ItemArmorBamboo(EntityEquipmentSlot.LEGS);
+	public static final Item BAMBOO_BOOTS = new ItemArmorBamboo(EntityEquipmentSlot.FEET);
 
 	// MISC ARMOR
 	public static final Item REIN_COMPOUND_GOGGLES = new ItemCompoundGoggles(ModMaterials.ARMOR_REIN_EXOSKELETON, EntityEquipmentSlot.HEAD);
