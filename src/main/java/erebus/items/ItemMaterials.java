@@ -5,8 +5,17 @@ import java.util.List;
 import java.util.Locale;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModItems;
@@ -20,6 +29,73 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setCreativeTab(ModTabs.ITEMS);
+	}
+
+	@Override
+	 public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	// TODO Blocks for this to work
+	/*	BlockPos top = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+		BlockPos bottom = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
+		if (facing.getIndex() == 1 && is.getItemDamage() == EnumType.bambooShoot.ordinal() && player.canPlayerEdit(pos, facing, is) && player.canPlayerEdit(top, facing, is)) {
+			Block soil = world.getBlockState(pos).getBlock();
+
+			if (soil != null && soil.canSustainPlant(soil.getDefaultState(), world, pos, EnumFacing.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(top)) {
+				world.setBlockState(top, ModBlocks.bambooShoot.getDefaultState());
+
+				if (!player.capabilities.isCreativeMode)
+					--is.stackSize;
+				return EnumActionResult.SUCCESS;
+			}
+		}
+
+		if (facing.getIndex() == 0 && is.getItemDamage() == EnumType.darkFruitSeeds.ordinal() && player.canPlayerEdit(pos, facing, is) && player.canPlayerEdit(bottom, facing, is)) {
+			Block block = world.getBlockState(pos).getBlock();
+
+			if (block != null && block.getMaterial((IBlockState) pos).blocksMovement()) {
+				FMLLog.info("Placed a hanger");
+				world.setBlockState(bottom, ModBlocks.hanger.getStateFromMeta(BlockHangerPlants.ITEM_DATAHanger0), 2);
+
+				if (!player.capabilities.isCreativeMode)
+					--is.stackSize;
+				return EnumActionResult.SUCCESS;
+			}
+		}
+*/
+		return EnumActionResult.FAIL;
+	}
+
+	@Override
+	 public ActionResult<ItemStack> onItemRightClick(ItemStack is, World world, EntityPlayer player, EnumHand hand) {
+		if (!world.isRemote) {
+			int damage = is.getItemDamage();
+
+			if (damage == EnumType.BIO_VELOCITY.ordinal() || damage == EnumType.SUPERNATURAL_VELOCITY.ordinal()) {
+				PotionEffect currentSpeed = player.getActivePotionEffect(MobEffects.SPEED);
+
+				if (currentSpeed == null || damage == EnumType.BIO_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 1 || damage == EnumType.SUPERNATURAL_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 3) {
+					player.addPotionEffect(new PotionEffect(MobEffects.SPEED, damage == EnumType.BIO_VELOCITY.ordinal() ? 280 : 210, damage == EnumType.BIO_VELOCITY.ordinal() ? 1 : 3, true, false));
+					//PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
+					if (!player.capabilities.isCreativeMode)
+						--is.stackSize;
+				} else
+					return new ActionResult(EnumActionResult.PASS, is);
+			}
+
+			if (damage == EnumType.CAMO_POWDER.ordinal()) {
+				PotionEffect currentVisibility = player.getActivePotionEffect(MobEffects.INVISIBILITY);
+
+				if (currentVisibility == null || damage == EnumType.CAMO_POWDER.ordinal() && currentVisibility.getAmplifier() < 3) {
+					player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, damage == EnumType.CAMO_POWDER.ordinal() ? 280 : 210, damage == EnumType.CAMO_POWDER.ordinal() ? 1 : 3, true, false));
+				//	PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
+					if (!player.capabilities.isCreativeMode)
+						--is.stackSize;
+				} else
+					return new ActionResult(EnumActionResult.PASS, is);
+			} else
+				return new ActionResult(EnumActionResult.PASS, is);
+		}
+
+		return new ActionResult(EnumActionResult.PASS, is);
 	}
 
 	@Override

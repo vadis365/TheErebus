@@ -18,6 +18,7 @@ import erebus.items.ItemArmorWaterStriders;
 import erebus.items.ItemAxeJade;
 import erebus.items.ItemBootsJump;
 import erebus.items.ItemCompoundGoggles;
+import erebus.items.ItemErebusFood;
 import erebus.items.ItemHelmMushroom;
 import erebus.items.ItemHelmRhino;
 import erebus.items.ItemJadeHoe;
@@ -33,7 +34,7 @@ import erebus.lib.Reference;
 public class ModItems {
 
 	public static final Item MATERIALS = new ItemMaterials();
-	
+	public static final Item EREBUS_FOOD = new ItemErebusFood();
 	
 	// JADE STUFF
 	public static final Item JADE_HELMET = new ItemArmorJade(EntityEquipmentSlot.HEAD);

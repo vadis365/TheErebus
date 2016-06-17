@@ -73,6 +73,75 @@ item.erebus.materials.plate_zombie_ant.name=Zombie Ant Plate
 item.erebus.materials.stag_beetle_mandibles.name=Stag Beetle Mandibles
 item.erebus.materials.terpsishroom.name=Terpsishroom
 
+# Food
+item.erebus.erebus_food.beetle_larva_raw.name=Beetle Larva
+item.erebus.erebus_food.beetle_larva_cooked.name=Cooked Beetle Larva
+item.erebus.erebus_food.grasshopper_leg_raw.name=Grasshopper Leg
+item.erebus.erebus_food.grasshopper_leg_cooked.name=Cooked Grasshopper Leg
+item.erebus.erebus_food.tarantula_leg_raw.name=Tarantula Leg
+item.erebus.erebus_food.tarantula_leg_cooked.name=Crispy Tarantula Leg
+item.erebus.erebus_food.bamboo_soup.name=Bamboo Soup
+item.erebus.erebus_food.melonade.name=Melonade
+item.erebus.erebus_food.melonade_sparkly.name=Sparkly Melonade
+item.erebus.erebus_food.larvae_on_stick.name=Larvae-on-a-Stick
+item.erebus.erebus_food.honey_sandwich.name=Honey Sandwich
+item.erebus.erebus_food.dark_fruit.name=Dark Fruit
+item.erebus.erebus_food.titan_chop_raw.name=Raw Titan Chop
+item.erebus.erebus_food.titan_chop_cooked.name=Cooked Titan Chop
+item.erebus.erebus_food.swampberries.name=Swampberries
+item.erebus.erebus_food.cabbage.name=Cabbage
+item.erebus.erebus_food.titan_stew_cooked.name=Cooked Titan Stew
+item.erebus.erebus_food.prickly_pear_raw.name=Raw Prickly Pear
+item.erebus.erebus_food.prickly_pear_cooked.name=Cooked Prickly Pear
+item.erebus.erebus_food.dark_fruit_pie.name=Dark Fruit Pie
+
+# Armour, Weapons and Tools
+item.erebus.bamboo_helmet.name=Bamboo Helmet
+item.erebus.bamboo_chestplate.name=Bamboo Chestplate
+item.erebus.bamboo_leggings.name=Bamboo Leggings
+item.erebus.bamboo_boots.name=Bamboo Boots
+
+item.erebus.exoskeleton_helmet.name=Exoskeleton Helmet
+item.erebus.exoskeleton_chestplate.name=Exoskeleton Chestplate
+item.erebus.exoskeleton_leggings.name=Exoskeleton Leggings
+item.erebus.exoskeleton_boots.name=Exoskeleton Boots
+
+item.erebus.rein_exoskeleton_helmet.name=Reinforced Exoskeleton Helmet
+item.erebus.rein_exoskeleton_chestplate.name=Reinforced Exoskeleton Chestplate
+item.erebus.rein_exoskeleton_leggings.name=Reinforced Exoskeleton Leggings
+item.erebus.rein_exoskeleton_boots.name=Reinforced Exoskeleton Boots
+
+item.erebus.rhino_exoskeleton_helmet.name=Rhino Plate Helmet
+item.erebus.rhino_exoskeleton_chestplate.name=Rhino Plate Chestplate
+item.erebus.rhino_exoskeleton_leggings.name=Rhino Plate Leggings
+item.erebus.rhino_exoskeleton_boots.name=Rhino Plate Boots
+
+item.erebus.jade_helmet.name=Jade Helmet
+item.erebus.jade_chestplate.name=Jade Chestplate
+item.erebus.jade_leggings.name=Jade Leggings
+item.erebus.jade_boots.name=Jade Boots
+
+item.erebus.jade_sword.name=Jade Sword
+item.erebus.jade_pickaxe.name=Jade Pickaxe
+item.erebus.jade_axe.name=Jade Axe
+item.erebus.jade_shovel.name=Jade Shovel
+item.erebus.jade_paxel.name=Jade Paxel
+item.erebus.jade_hoe.name=Jade Hoe
+
+item.erebus.compound_goggles.name=Compound Goggles
+item.erebus.rein_compound_goggles.name=Reinforced Compound Goggles
+item.erebus.jump_boots.name=Jump Boots
+item.erebus.sprint_leggings.name=Sprint Leggings
+item.erebus.spider_t_shirt.name=Tarantula Boss Trophy
+item.erebus.mushroom_helmet.name=Mush Helm
+item.erebus.water_striders.name=Water Striders
+
+# Plants
+item.erebus.turnips.name=Turnips
+item.erebus.cabbageSeeds.name=Cabbage Seeds
+item.erebus.heart_stag_raw.name=Heart of the Stag
+item.erebus.heart_stag_cooked.name=Roasted Heart of the Stag
+
 ##########
 # BLOCKS #
 ##########
