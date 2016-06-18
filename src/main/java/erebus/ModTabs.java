@@ -16,7 +16,7 @@ public class ModTabs {
 	public static final CreativeTabs ITEMS = new CreativeTabs(Reference.MOD_ID + ".items") {
 		@Override
 		public Item getTabIconItem() {
-			return ModItems.MATERIALS;
+			return ModItems.EREBUS_FOOD;
 		}
 	};
 
