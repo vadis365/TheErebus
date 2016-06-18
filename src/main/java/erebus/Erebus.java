@@ -44,6 +44,7 @@ public class Erebus {
 		ModBiomes.init();
 		TeleporterHandler.init();
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);
 	}
 
 	@EventHandler
