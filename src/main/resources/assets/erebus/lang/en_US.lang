@@ -137,8 +137,8 @@ item.erebus.mushroom_helmet.name=Mush Helm
 item.erebus.water_striders.name=Water Striders
 
 # Plants
-item.erebus.turnips.name=Turnips
-item.erebus.cabbageSeeds.name=Cabbage Seeds
+item.erebus.turnip.name=Turnips
+item.erebus.cabbage_seeds.name=Cabbage Seeds
 item.erebus.heart_stag_raw.name=Heart of the Stag
 item.erebus.heart_stag_cooked.name=Roasted Heart of the Stag
 

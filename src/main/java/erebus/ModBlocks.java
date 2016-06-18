@@ -14,9 +14,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import erebus.blocks.BlockAmber;
+import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
 import erebus.blocks.BlockPlanksErebus;
+import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
 import erebus.blocks.ErebusPortal;
@@ -50,6 +52,9 @@ public class ModBlocks {
 	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
 	public static final Block AMBER = new BlockAmber();
+
+	public static final Block CROP_TURNIP = new BlockTurnip();
+	public static final Block CROP_CABBAGE = new BlockCabbage();
 
 	public static void init() {
 		try {
