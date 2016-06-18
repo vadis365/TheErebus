@@ -90,7 +90,7 @@ public class ModItems {
 	*/
 	public static final Item MUSHROOM_HELMET = new ItemHelmMushroom(EntityEquipmentSlot.HEAD);
 	public static final Item SPIDER_T_SHIRT = new ItemSpiderTShirt(EntityEquipmentSlot.CHEST);
-	public static final Item WATER_STRIDERS = new ItemArmorWaterStriders(EntityEquipmentSlot.LEGS);
+	public static final Item WATER_STRIDERS = new ItemArmorWaterStriders(EntityEquipmentSlot.FEET);
 	
 
 

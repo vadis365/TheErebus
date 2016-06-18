@@ -9,6 +9,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -72,8 +73,10 @@ public class ItemLeggingsSprint extends ItemArmor {
 	public void getSubItems(Item id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
 
-		//ItemStack is = new ItemStack(id, 1, 0);
-		//(is.stackTagCompound = new NBTTagCompound()).setByte("upgradeTier", (byte) 8);
-		//list.add(is);
+		ItemStack is = new ItemStack(id, 1, 0);
+		if (!is.hasTagCompound())
+			is.setTagCompound(new NBTTagCompound());
+		is.getTagCompound().setByte("upgradeTier", (byte) 9);
+		list.add(is);
 	}
 }

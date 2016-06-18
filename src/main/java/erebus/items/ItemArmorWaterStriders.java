@@ -13,12 +13,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModMaterials;
+import erebus.ModTabs;
 import erebus.items.ItemMaterials.EnumType;
 
 public class ItemArmorWaterStriders extends ItemArmor {
 
 	public ItemArmorWaterStriders(EntityEquipmentSlot slot) {
 		super(ModMaterials.ARMOR_REIN_EXOSKELETON, 2, slot);
+		setCreativeTab(ModTabs.GEAR);
 	}
 
 	@Override
