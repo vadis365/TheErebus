@@ -253,6 +253,13 @@ tile.erebus.door_rotten.name=Rotten Door
 tile.erebus.door_marshwood.name=Marshwood Door
 tile.erebus.door_scorched.name=Scorched Door
 
+# Plants
+tile.erebus.crop_trunip.name=Turnips
+tile.erebus.crop_cabbage.name=Cabbage
+tile.erebus.heart_berry_bush.name=Heartberry Bush
+tile.erebus.jade_berry_bush.name=Jadeberry Bush
+tile.erebus.swamp_berry_bush.name=Swampberry Bush
+
 #################
 # CREATIVE TABS #
 #################
