@@ -9,7 +9,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -66,12 +65,6 @@ public class BlockBerryBush extends Block {
     public IBlockState withAge(int age) {
         return this.getDefaultState().withProperty(this.getAgeProperty(), Integer.valueOf(age));
     }
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : true;
-	}
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
@@ -135,7 +128,7 @@ public class BlockBerryBush extends Block {
 			world.setBlockState(pos, this.withAge(2), 2);
 			return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
