@@ -158,7 +158,7 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 		DARK_FRUIT(2, 0.3F),
 		TITAN_CHOP_RAW(4, 0.3F),
 		TITAN_CHOP_COOKED(8, 0.8F),
-		SWAMPBERRIES(1, 0.1F),
+		SWAMP_BERRIES(1, 0.1F),
 		CABBAGE(1, 0.3F),
 		TITAN_STEW_COOKED(20, 4.0F),
 		PRICKLY_PEAR_RAW(3, 0.3F),

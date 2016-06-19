@@ -88,7 +88,7 @@ item.erebus.erebus_food.honey_sandwich.name=Honey Sandwich
 item.erebus.erebus_food.dark_fruit.name=Dark Fruit
 item.erebus.erebus_food.titan_chop_raw.name=Raw Titan Chop
 item.erebus.erebus_food.titan_chop_cooked.name=Cooked Titan Chop
-item.erebus.erebus_food.swampberries.name=Swampberries
+item.erebus.erebus_food.swamp_berries.name=Swampberries
 item.erebus.erebus_food.cabbage.name=Cabbage
 item.erebus.erebus_food.titan_stew_cooked.name=Cooked Titan Stew
 item.erebus.erebus_food.prickly_pear_raw.name=Raw Prickly Pear
@@ -139,8 +139,10 @@ item.erebus.water_striders.name=Water Striders
 # Plants
 item.erebus.turnip.name=Turnips
 item.erebus.cabbage_seeds.name=Cabbage Seeds
-item.erebus.heart_stag_raw.name=Heart of the Stag
-item.erebus.heart_stag_cooked.name=Roasted Heart of the Stag
+
+item.erebus.life_blood.name=Life Blood
+item.erebus.stag_heart_raw.name=Heart of the Stag
+item.erebus.stag_heart_cooked.name=Roasted Heart of the Stag
 
 ##########
 # BLOCKS #

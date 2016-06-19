@@ -21,6 +21,8 @@ import erebus.items.ItemAxeJade;
 import erebus.items.ItemBootsJump;
 import erebus.items.ItemCompoundGoggles;
 import erebus.items.ItemErebusFood;
+import erebus.items.ItemFoodHeartBerries;
+import erebus.items.ItemFoodStagHeart;
 import erebus.items.ItemHelmMushroom;
 import erebus.items.ItemHelmRhino;
 import erebus.items.ItemJadeHoe;
@@ -37,12 +39,12 @@ public class ModItems {
 
 	public static final Item MATERIALS = new ItemMaterials();
 	public static final Item EREBUS_FOOD = new ItemErebusFood();
-	//public static final Item HEART_BERRIES = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.heartBerries").setTextureName("erebus:heart_berries");
-	//public static final Item LIFE_BLOOD = new ItemFoodHeartBerries(0, 0F, false).setUnlocalizedName("erebus.lifeBlood").setTextureName("erebus:life_blood");
+	public static final Item HEART_BERRIES = new ItemFoodHeartBerries(0, 0F, false);
+	public static final Item LIFE_BLOOD = new ItemFoodHeartBerries(0, 0F, false);
 	public static final Item TURNIP = new ItemSeedFood(4, 0.6F, ModBlocks.CROP_TURNIP, Blocks.FARMLAND).setCreativeTab(ModTabs.ITEMS);
 	public static final Item CABBAGE_SEEDS = new ItemSeedFood(4, 0.1F, ModBlocks.CROP_CABBAGE, Blocks.FARMLAND).setCreativeTab(ModTabs.ITEMS);
-	//public static final Item STAG_HEART_RAW = new ItemFoodStagHeart(0, 0F, false, "raw");
-	//public static final Item STAG_HEART_COOKED = new ItemFoodStagHeart(20, 0.5F, false, "cooked");
+	public static final Item STAG_HEART_RAW = new ItemFoodStagHeart(0, 0F, false, "raw");
+	public static final Item STAG_HEART_COOKED = new ItemFoodStagHeart(20, 0.5F, false, "cooked");
 	
 	// JADE STUFF
 	public static final Item JADE_HELMET = new ItemArmorJade(EntityEquipmentSlot.HEAD);

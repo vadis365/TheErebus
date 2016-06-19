@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import erebus.blocks.BlockAmber;
+import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
@@ -55,7 +56,10 @@ public class ModBlocks {
 
 	public static final Block CROP_TURNIP = new BlockTurnip();
 	public static final Block CROP_CABBAGE = new BlockCabbage();
-
+	public static final Block JADE_BERRY_BUSH = new BlockBerryBush("JADE");
+	public static final Block HEART_BERRY_BUSH = new BlockBerryBush("HEART");
+	public static final Block SWAMP_BERRY_BUSH = new BlockBerryBush("SWAMP");
+	
 	public static void init() {
 		try {
 			for (Field field : ModBlocks.class.getDeclaredFields()) {
