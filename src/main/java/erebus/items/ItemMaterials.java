@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -18,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModItems.ISubItemsItem;
 import erebus.ModTabs;
@@ -33,34 +36,17 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 
 	@Override
 	 public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-	// TODO Blocks for this to work
-	/*	BlockPos top = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
-		BlockPos bottom = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
-		if (facing.getIndex() == 1 && is.getItemDamage() == EnumType.bambooShoot.ordinal() && player.canPlayerEdit(pos, facing, is) && player.canPlayerEdit(top, facing, is)) {
-			Block soil = world.getBlockState(pos).getBlock();
-
-			if (soil != null && soil.canSustainPlant(soil.getDefaultState(), world, pos, EnumFacing.UP, (BlockBambooShoot) ModBlocks.bambooShoot) && world.isAirBlock(top)) {
-				world.setBlockState(top, ModBlocks.bambooShoot.getDefaultState());
-
+		BlockPos bottom = pos.down();
+		IBlockState state = world.getBlockState(pos);
+		if (facing.getIndex() == 0 && is.getItemDamage() == EnumType.DARK_FRUIT_SEEDS.ordinal() && player.canPlayerEdit(pos, facing, is) && player.canPlayerEdit(bottom, facing, is)) {
+			Block block = state.getBlock();
+			if (block != null && state.getMaterial().blocksMovement()) {
+				world.setBlockState(bottom, ModBlocks.DARK_FRUIT_VINE.getDefaultState(), 2);
 				if (!player.capabilities.isCreativeMode)
 					--is.stackSize;
 				return EnumActionResult.SUCCESS;
 			}
 		}
-
-		if (facing.getIndex() == 0 && is.getItemDamage() == EnumType.darkFruitSeeds.ordinal() && player.canPlayerEdit(pos, facing, is) && player.canPlayerEdit(bottom, facing, is)) {
-			Block block = world.getBlockState(pos).getBlock();
-
-			if (block != null && block.getMaterial((IBlockState) pos).blocksMovement()) {
-				FMLLog.info("Placed a hanger");
-				world.setBlockState(bottom, ModBlocks.hanger.getStateFromMeta(BlockHangerPlants.ITEM_DATAHanger0), 2);
-
-				if (!player.capabilities.isCreativeMode)
-					--is.stackSize;
-				return EnumActionResult.SUCCESS;
-			}
-		}
-*/
 		return EnumActionResult.FAIL;
 	}
 

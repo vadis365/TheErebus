@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "erebus:blocks/dark_fruit_vine_4"
+    }
+}
