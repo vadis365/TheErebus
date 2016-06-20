@@ -1,14 +1,17 @@
 package erebus.world.biomes.decorators.data;
 
+import net.minecraft.block.BlockSand;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import erebus.ModBlocks;
 
 public enum SurfaceType {
 
 	GRASS,
 	DIRT,
 	SAND,
-	MIXED;
+	MIXED,
+	UMBERSTONE;
 
 	public boolean matchBlock(IBlockState block) {
 		switch (this) {
@@ -17,10 +20,12 @@ public enum SurfaceType {
 			case DIRT:
 				return block == Blocks.DIRT.getDefaultState();
 			case SAND:
-				return block == Blocks.SAND.getDefaultState();
+				return block == Blocks.SAND.getDefaultState() || block == Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND);
 			case MIXED:
-				return block == Blocks.GRASS.getDefaultState() || block == Blocks.DIRT.getDefaultState() || block == Blocks.SAND.getDefaultState();
-			default:
+				return block == Blocks.GRASS.getDefaultState() || block == Blocks.DIRT.getDefaultState() || block == Blocks.SAND.getDefaultState() || block == Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND);
+			case UMBERSTONE:
+				return block == ModBlocks.UMBERSTONE.getDefaultState();
+				default:
 				return false;
 		}
 	}

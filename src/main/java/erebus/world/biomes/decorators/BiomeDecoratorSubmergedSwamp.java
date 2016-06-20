@@ -5,11 +5,14 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.plant.WorldGenRottenLogs;
+import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
+	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
 /*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
@@ -18,7 +21,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenTallGrass genSwampPlant = new WorldGenTallGrass(ModBlocks.swampPlant, 1);
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 	protected final WorldGenGasVents genGasVent = new WorldGenGasVents();
-	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
+	
 	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
 	private final WorldGenReed genReed = new WorldGenReed();
 	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
@@ -105,20 +108,24 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 						}
 				}
 		}
-
+*/
 		if (rand.nextInt(10) == 0)
 			for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
 				xx = x + offsetXZ();
 				yy = 25 + rand.nextInt(75);
 				zz = z + offsetXZ();
-
-				for (; yy > 20; yy--)
-					if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
-						genSwampBush.generate(world, rand, xx, yy, zz);
+				for (; yy > 20; yy--) {
+					BlockPos pos = new BlockPos(xx, yy, zz);
+					if (checkSurface(SurfaceType.GRASS, pos)) {
+						genSwampBush.generate(world, rand, pos.up());
+						break;
+					} else if (checkSurface(SurfaceType.UMBERSTONE, pos) && world.isAirBlock(pos.up())) {
+						genSwampBush.generate(world, rand, pos.up());
 						break;
 					}
+				}
 			}
-
+/*
 		for (attempt = 0; attempt < 8; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
@@ -204,7 +211,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 				genQuickSand.generate(world, rand, xx, yy, zz);
 		}
-
+*/
 		for (attempt = 0; attempt < 40; attempt++) {
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
@@ -212,10 +219,10 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			xx = x + 16;
 			yy = rand.nextInt(118);
 			zz = z + 16;
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
-		}*/
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, pos);
+		}
 	}
 
 	@Override

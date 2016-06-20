@@ -6,6 +6,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBlocks;
+import erebus.blocks.BlockDarkFruitVine;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -119,20 +121,20 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 				world.setBlock(xx, yy + 1, zz, ModBlocks.weepingBlue, 8, 2);
 			}
 		}
-
+*/
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(90);
 			zz = z + offsetXZ();
-
-			if (!world.getBlock(xx, yy, zz).isNormalCube())
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (!world.getBlockState(pos).isNormalCube())
 				continue;
 
 			for (int hangerY = rand.nextInt(20); hangerY > 0; hangerY--)
-				if (world.isAirBlock(xx, yy - hangerY, zz))
-					world.setBlock(xx, yy - hangerY, zz, ModBlocks.hanger, 4, 2);
+				if (world.isAirBlock(pos.down(hangerY)))
+					world.setBlockState(pos.down(hangerY), ModBlocks.DARK_FRUIT_VINE.getDefaultState().withProperty(BlockDarkFruitVine.DARK_VINE_AGE, Integer.valueOf(4)), 2);
 		}
-
+/*
 		for (attempt = 0; attempt < 15; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(80);

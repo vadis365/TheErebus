@@ -2,9 +2,11 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
-import erebus.blocks.EnumWood;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import erebus.ModBlocks;
+import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.EnumWood;
 
 public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 	public WorldGenMarshwoodTree() {
@@ -194,15 +196,14 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 	}
 
 	public void addHangers(World world, Random rand, int x, int y, int z) {
-		/* TODO FIX HANGERS
+
 		if (rand.nextInt(4) != 0) {
 			int length = rand.nextInt(13) + 4;
 			for (int yy = y; yy > y - length; --yy)
 				if (world.isAirBlock(new BlockPos(x, yy, z)))
-					world.setBlockState(new BlockPos(x, yy, z), ModBlocks.hanger, 4, 2);
+					world.setBlockState(new BlockPos(x, yy, z), ModBlocks.DARK_FRUIT_VINE.getDefaultState().withProperty(BlockDarkFruitVine.DARK_VINE_AGE, Integer.valueOf(4)), 2);
 				else
 					break;
 		}
-		 */
 	}
 }

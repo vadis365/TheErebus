@@ -14,6 +14,8 @@ import net.minecraft.world.gen.feature.WorldGenBush;
 import net.minecraft.world.gen.feature.WorldGenMegaJungle;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import erebus.ModBlocks;
+import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.EnumWood;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -21,6 +23,8 @@ import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
 import erebus.world.feature.plant.WorldGenBamboo;
+import erebus.world.feature.plant.WorldGenMelon;
+import erebus.world.feature.plant.WorldGenTurnips;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import erebus.world.feature.tree.WorldGenErebusTrees;
@@ -58,9 +62,9 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 
 	private final WorldGenerator genBamboo = new WorldGenBamboo(13, false);
-/*	private final WorldGenerator genTurnips = new WorldGenTurnips();
+	private final WorldGenerator genTurnips = new WorldGenTurnips();
 	private final WorldGenerator genMelons = new WorldGenMelon();
-
+/*
 	@Override
 	protected void populate() {
 		for (attempt = 0; attempt < 35; attempt++) {
@@ -236,18 +240,18 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 						world.setBlock(xx + Direction.offsetX[offset], yy - vineY, zz + Direction.offsetZ[offset], Blocks.vine, offset == 3 ? 1 : offset == 2 ? 4 : offset == 1 ? 0 : 2, 3);
 			}
 		}
-
+*/
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(90);
 			zz = z + offsetXZ();
-
-			if (!world.getBlock(xx, yy, zz).isNormalCube())
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (!world.getBlockState(pos).isNormalCube())
 				continue;
 
 			for (int hangerY = rand.nextInt(20); hangerY > 0; hangerY--)
-				if (world.isAirBlock(xx, yy - hangerY, zz))
-					world.setBlock(xx, yy - hangerY, zz, ModBlocks.hanger, 4, 2);
+				if (world.isAirBlock(pos.down(hangerY)))
+					world.setBlockState(pos.down(hangerY), ModBlocks.DARK_FRUIT_VINE.getDefaultState().withProperty(BlockDarkFruitVine.DARK_VINE_AGE, Integer.valueOf(4)), 2);
 		}
 
 		if (rand.nextInt(3) == 0)
@@ -255,20 +259,20 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				xx = x + offsetXZ();
 				yy = 15 + rand.nextInt(90);
 				zz = z + offsetXZ();
-
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-					genTurnips.generate(world, rand, xx, yy, zz);
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos))
+					genTurnips.generate(world, rand, pos.up());
 			}
 		else if (rand.nextBoolean() || rand.nextBoolean())
 			for (attempt = 0; attempt < 3; ++attempt) {
 				xx = x + offsetXZ();
 				yy = 15 + rand.nextInt(90);
 				zz = z + offsetXZ();
-
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-					genMelons.generate(world, rand, xx, yy, zz);
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos))
+					genMelons.generate(world, rand, pos.up());
 			}
-			*/
+			
 	}
 
 	@Override

@@ -1,12 +1,15 @@
 package erebus.world.feature.plant;
 
-import erebus.lib.EnumWood;
+import java.util.Random;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import java.util.Random;
+import erebus.blocks.BlockLogErebus;
+import erebus.blocks.EnumWood;
 
 public class WorldGenRottenLogs extends WorldGenerator {
 
@@ -19,18 +22,21 @@ public class WorldGenRottenLogs extends WorldGenerator {
 		this.length = length;
 		this.baseRadius = baseRadius;
 		this.direction = direction;
-		log = EnumWood.Rotten.getLog();
+		log = EnumWood.ROTTEN.getLog();
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
+	public boolean generate(World world, Random rand, BlockPos pos) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
 
 		// Trunk N/S
 		if (direction == 1) {
 			for (int xx = x - baseRadius; baseRadius + x >= xx; xx++)
 				for (int zz = z - length; length + z - 1 >= zz; zz++)
 					for (int yy = y + 1; yy <= y + baseRadius * 2; yy++)
-						if (!world.isAirBlock(xx, yy, zz))
+						if (!world.isAirBlock(new BlockPos(xx, yy, zz)))
 							return false;
 
 			for (int zz = z - length; length + z - 1 >= zz; zz++)
@@ -38,13 +44,13 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = i * i + j * j;
 						if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-							world.setBlock(x + i, y + j + baseRadius, zz, log, 11, 2);
+							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), log.getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, BlockLogErebus.EnumAxis.X), 2);
 							if (rand.nextInt(12) == 0)
-								world.setBlock(x + i, y + j + baseRadius, zz, Blocks.air);
+								world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), Blocks.AIR.getDefaultState());
 							if (zz == z - length && rand.nextInt(2) == 0 || zz == z + length - 1 && rand.nextInt(2) == 0)
-								world.setBlock(x + i, y + j + baseRadius, zz, Blocks.air);
+								world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), Blocks.AIR.getDefaultState());
 						} else
-							world.setBlock(x + i, y + j + baseRadius, zz, Blocks.air);
+							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), Blocks.AIR.getDefaultState());
 					}
 
 		} else {
@@ -53,7 +59,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 			for (int xx = x - length; length + x - 1 >= xx; xx++)
 				for (int zz = z - baseRadius; baseRadius + z >= zz; zz++)
 					for (int yy = y + 1; yy <= y + baseRadius * 2; yy++)
-						if (!world.isAirBlock(xx, yy, zz))
+						if (!world.isAirBlock(new BlockPos(xx, yy, zz)))
 							return false;
 
 			for (int xx = x - length; length + x - 1 >= xx; xx++)
@@ -61,13 +67,13 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = i * i + j * j;
 						if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-							world.setBlock(xx, y + j + baseRadius, z + i, log, 7, 2);
+							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), log.getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, BlockLogErebus.EnumAxis.Z), 2);
 							if (rand.nextInt(12) == 0)
-								world.setBlock(xx, y + j + baseRadius, z + i, Blocks.air);
+								world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), Blocks.AIR.getDefaultState());
 							if (xx == x - length && rand.nextInt(2) == 0 || xx == x + length - 1 && rand.nextInt(2) == 0)
-								world.setBlock(xx, y + j + baseRadius, z + i, Blocks.air);
+								world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), Blocks.AIR.getDefaultState());
 						} else
-							world.setBlock(xx, y + j + baseRadius, z + i, Blocks.air);
+							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), Blocks.AIR.getDefaultState());
 					}
 		}
 		return true;
