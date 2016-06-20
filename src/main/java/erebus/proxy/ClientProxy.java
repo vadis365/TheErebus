@@ -1,10 +1,12 @@
 package erebus.proxy;
 
-import erebus.ModBlocks;
-import erebus.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.core.handler.GogglesClientTickHandler;
 
 public class ClientProxy extends CommonProxy {
 
@@ -12,6 +14,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerItemAndBlockRenderers() {
 		ModItems.registerRenderers();
 		ModBlocks.registerRenderers();
+		MinecraftForge.EVENT_BUS.register(new GogglesClientTickHandler());
 	}
 
 	@Override
