@@ -221,7 +221,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			zz = z + 16;
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos))
-				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, pos);
+				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, pos.up());
 		}
 	}
 

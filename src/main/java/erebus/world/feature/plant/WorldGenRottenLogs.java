@@ -3,8 +3,6 @@ package erebus.world.feature.plant;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -44,13 +42,13 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = i * i + j * j;
 						if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), log.getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, BlockLogErebus.EnumAxis.X), 2);
+							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), log.getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, BlockLogErebus.EnumAxis.Z), 2);
 							if (rand.nextInt(12) == 0)
-								world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), Blocks.AIR.getDefaultState());
+								world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
 							if (zz == z - length && rand.nextInt(2) == 0 || zz == z + length - 1 && rand.nextInt(2) == 0)
-								world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), Blocks.AIR.getDefaultState());
+								world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
 						} else
-							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), Blocks.AIR.getDefaultState());
+							world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
 					}
 
 		} else {
@@ -67,13 +65,13 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = i * i + j * j;
 						if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), log.getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, BlockLogErebus.EnumAxis.Z), 2);
+							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), log.getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, BlockLogErebus.EnumAxis.X), 2);
 							if (rand.nextInt(12) == 0)
-								world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), Blocks.AIR.getDefaultState());
+								world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
 							if (xx == x - length && rand.nextInt(2) == 0 || xx == x + length - 1 && rand.nextInt(2) == 0)
-								world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), Blocks.AIR.getDefaultState());
+								world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
 						} else
-							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), Blocks.AIR.getDefaultState());
+							world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
 					}
 		}
 		return true;
