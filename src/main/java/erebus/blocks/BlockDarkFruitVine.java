@@ -129,7 +129,6 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 			world.setBlockState(pos, this.withAge(4));
 	}
 
-
 	@Override
 	public int damageDropped(IBlockState state) {
 		return 0;
