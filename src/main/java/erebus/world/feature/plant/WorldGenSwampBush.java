@@ -13,9 +13,9 @@ import erebus.blocks.BlockBerryBush;
 
 public class WorldGenSwampBush extends WorldGenerator {
 	private IBlockState[] bushType = {
-			ModBlocks.HEART_BERRY_BUSH.getDefaultState().withProperty(BlockBerryBush.BUSH_AGE, Integer.valueOf(2)), 
-			ModBlocks.JADE_BERRY_BUSH.getDefaultState().withProperty(BlockBerryBush.BUSH_AGE, Integer.valueOf(2)),
-			ModBlocks.SWAMP_BERRY_BUSH.getDefaultState().withProperty(BlockBerryBush.BUSH_AGE, Integer.valueOf(2))
+			ModBlocks.HEART_BERRY_BUSH.getDefaultState().withProperty(BlockBerryBush.BUSH_AGE, Integer.valueOf(2)),
+			ModBlocks.SWAMP_BERRY_BUSH.getDefaultState().withProperty(BlockBerryBush.BUSH_AGE, Integer.valueOf(2)), 
+			ModBlocks.JADE_BERRY_BUSH.getDefaultState().withProperty(BlockBerryBush.BUSH_AGE, Integer.valueOf(2))
 			};
 
 	@Override
