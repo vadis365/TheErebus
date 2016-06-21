@@ -2,7 +2,6 @@ package erebus.world.structure;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -11,9 +10,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
-
-import com.google.common.base.Objects;
-
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.world.ChunkProviderErebus;
@@ -149,13 +145,10 @@ public class MapGenErebusRavine extends MapGenBase {
 										double d14 = (posY + 0.5D - par8) / d7;
 
 										if ((d12 * d12 + d13 * d13) * field_75046_d[posY] + d14 * d14 / 6.0D < 1.0D) {
-											IBlockState iblockstate1 = chunkPrimer.getBlockState(posX, posY, posZ);
-											IBlockState iblockstate2 = Objects.firstNonNull(chunkPrimer.getBlockState(posX, posY + 1, posZ), BLOCK_AIR);
-
 											if (isTopBlock(chunkPrimer, posX, posY, posZ, x, z))
 												flag2 = true;
 
-											digBlock(chunkPrimer, posX, posY, posZ, x, z, flag2, iblockstate1, iblockstate2);
+											digBlock(chunkPrimer, posX, posY, posZ, x, z, flag2);
 										}
 									}
 							}
@@ -199,25 +192,26 @@ public class MapGenErebusRavine extends MapGenBase {
 		return isExceptionBiome(biome) ? state.getBlock() == Blocks.GRASS : state.getBlock() == biome.topBlock;
 	}
 
-	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop, IBlockState state, IBlockState up) {
+	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
 		Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
-		IBlockState top = biome.topBlock;
-		IBlockState filler = biome.fillerBlock;
-		Block block = data.getBlockState(x, y, z).getBlock();
+		IBlockState top = isExceptionBiome(biome) ? Blocks.GRASS.getDefaultState() : biome.topBlock;
+		IBlockState filler = isExceptionBiome(biome) ? Blocks.DIRT.getDefaultState() : biome.fillerBlock;
+		IBlockState state = data.getBlockState(x, y, z);
+		if (state.getBlock() == ModBlocks.UMBERSTONE || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock()) {
+			if (y < 3)
+				data.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
+			else if (y < 4)
+				data.setBlockState(x, y, z, ModBlocks.UMBERSTONE.getDefaultState());
+			else if (y < 10 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.volcanicDesert))
+				data.setBlockState(x, y, z, Blocks.FLOWING_LAVA.getDefaultState());
+			else if (y < ChunkProviderErebus.swampWaterHeight - 1 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.submergedSwamp))
+				data.setBlockState(x, y, z, Blocks.FLOWING_WATER.getDefaultState());
+			else {
+				data.setBlockState(x, y, z, Blocks.AIR.getDefaultState());
 
-		if (y < 3)
-			block = Blocks.BEDROCK;
-		else if (y < 4)
-			block = ModBlocks.UMBERSTONE;
-		else if (y < 10 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.volcanicDesert))
-			block = Blocks.FLOWING_LAVA;
-		else if (y < ChunkProviderErebus.swampWaterHeight - 1 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.submergedSwamp))
-			block = Blocks.FLOWING_WATER;
-		else {
-			block = Blocks.AIR;
-
-			if (foundTop && data.getBlockState(x, y - 1, z).getBlock() == filler.getBlock())
-				data.setBlockState(x, y - 1, z, top.getBlock().getDefaultState());
-		}
+				if (foundTop && data.getBlockState(x, y - 1, z).getBlock() == filler.getBlock())
+					data.setBlockState(x, y - 1, z, top.getBlock().getDefaultState());
+			}
+        }
 	}
 }
