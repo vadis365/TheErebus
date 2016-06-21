@@ -1,5 +1,6 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -7,12 +8,14 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenSwampBush;
+import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
 	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
+	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
 /*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
@@ -24,7 +27,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	
 	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
 	private final WorldGenReed genReed = new WorldGenReed();
-	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
+	
 
 	@Override
 	protected void populate() {
@@ -63,7 +66,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			xx = x + offsetXZ();
 			yy = ChunkProviderErebus.swampWaterHeight - 4;
 			zz = z + offsetXZ();
-			genVines.generate(world, rand, xx, yy, zz);
+			genVines.generate(world, rand, new BlockPos(xx, yy, zz));
 		}
 
 		for (attempt = 0; attempt < 10; attempt++) {
@@ -145,25 +148,25 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
 				genRottenAcacia.generate(world, rand, xx, yy, zz);
 		}
-
+*/
 		int offset;
 		for (attempt = 0; attempt < 800; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.isAirBlock(xx, yy, zz)) {
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (world.isAirBlock(pos)) {
 				offset = rand.nextInt(4);
 
-				if (!world.getBlock(xx + Direction.offsetX[offset], yy, zz + Direction.offsetZ[offset]).isNormalCube())
+				if (!world.getBlockState(pos).isNormalCube())
 					continue;
 
 				for (int vineY = rand.nextInt(30); vineY > 0; vineY--)
-					if (world.isAirBlock(xx + Direction.offsetX[offset], yy - vineY, zz + Direction.offsetZ[offset]))
-						world.setBlock(xx + Direction.offsetX[offset], yy - vineY, zz + Direction.offsetZ[offset], Blocks.vine, offset == 3 ? 1 : offset == 2 ? 4 : offset == 1 ? 0 : 2, 3);
+					if (world.isAirBlock(new BlockPos(xx , yy - vineY, zz)))
+						world.setBlockState(new BlockPos(xx , yy - vineY, zz), Blocks.VINE.getStateFromMeta(offset == 3 ? 1 : offset == 2 ? 4 : offset == 1 ? 0 : 2), 3);
 			}
 		}
-
+/*
 		for (attempt = 0; attempt < 40; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
