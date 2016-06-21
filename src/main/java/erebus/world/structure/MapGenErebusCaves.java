@@ -2,17 +2,19 @@ package erebus.world.structure;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
-import erebus.world.biomes.BiomeBaseErebus;
+import erebus.ModBlocks;
 
 public class MapGenErebusCaves extends MapGenBase {
-	protected void generateLargeCaveNode(long seed, int chunkX, int chunkZ, double xx, double yy, double zz) {
-		generateCaveNode(seed, chunkX, chunkZ, xx, yy, zz, 1F + rand.nextFloat() * 3F, 0F, 0F, -1, -1, rand.nextDouble() * 0.5D + 0.3D);
+	protected static final IBlockState BLOCK_AIR = Blocks.AIR.getDefaultState();
+
+	protected void generateLargeCaveNode(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double xx, double yy, double zz) {
+		generateCaveNode(seed, chunkX, chunkZ, primer, xx, yy, zz, 1F + rand.nextFloat() * 3F, 0F, 0F, -1, -1, rand.nextDouble() * 0.5D + 0.3D);
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class MapGenErebusCaves extends MapGenBase {
         }
     }
 
-	protected void generateCaveNode(long seed, int chunkX, int chunkZ, double xx, double yy, double zz, float innerSize, float xzAngle, float yAngle, int par15, int par16, double heightMp) {
+	protected void generateCaveNode(long seed, int chunkX, int chunkZ, ChunkPrimer primer, double xx, double yy, double zz, float innerSize, float xzAngle, float yAngle, int par15, int par16, double heightMp) {
 		double centerX = chunkX * 16 + 8;
 		double centerZ = chunkZ * 16 + 8;
 		float f3 = 0F;
@@ -78,8 +80,8 @@ public class MapGenErebusCaves extends MapGenBase {
 			f3 += (rand.nextFloat() - rand.nextFloat()) * rand.nextFloat() * 4F;
 
 			if (!flag && par15 == k1 && innerSize > 1F) {
-				generateCaveNode(rand.nextLong(), chunkX, chunkZ, xx, yy, zz, rand.nextFloat() * 0.5F + 0.5F, xzAngle - (float) Math.PI / 2F, yAngle / 3F, par15, par16, 1D);
-				generateCaveNode(rand.nextLong(), chunkX, chunkZ, xx, yy, zz, rand.nextFloat() * 0.5F + 0.5F, xzAngle + (float) Math.PI / 2F, yAngle / 3F, par15, par16, 1D);
+				generateCaveNode(rand.nextLong(), chunkX, chunkZ, primer, xx, yy, zz, rand.nextFloat() * 0.5F + 0.5F, xzAngle - (float) Math.PI / 2F, yAngle / 3F, par15, par16, 1D);
+				generateCaveNode(rand.nextLong(), chunkX, chunkZ, primer, xx, yy, zz, rand.nextFloat() * 0.5F + 0.5F, xzAngle + (float) Math.PI / 2F, yAngle / 3F, par15, par16, 1D);
 				return;
 			}
 
@@ -134,9 +136,9 @@ public class MapGenErebusCaves extends MapGenBase {
 										double yDiff = (py + 0.5D - yy) / yRange;
 
 										if (yDiff > -0.7D && xDiff * xDiff + yDiff * yDiff + zDiff * zDiff < 1D) {
-											Block block = null;
-											BiomeBaseErebus biome = (BiomeBaseErebus) worldObj.getBiomeGenForCoords(new BlockPos(px + chunkX * 16, 0, pz + chunkZ * 16));
-											block = biome.placeCaveBlock(block, px, py, pz, rand);
+											 IBlockState state = primer.getBlockState(px, py, pz);
+											 if (state.getBlock() == ModBlocks.UMBERSTONE || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS)
+												 primer.setBlockState(px, py, pz, BLOCK_AIR);
 										}
 									}
 							}
@@ -151,7 +153,7 @@ public class MapGenErebusCaves extends MapGenBase {
 	}
 
 	@Override
-	protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int localX, int localZ, ChunkPrimer chunkPrimerIn) {
+	protected void recursiveGenerate(World worldIn, int chunkX, int chunkZ, int localX, int localZ, ChunkPrimer primer) {
 		int caveAmount = rand.nextInt(rand.nextInt(25) + 1);
 		if (rand.nextInt(10) != 0)
 			caveAmount = 0;
@@ -163,7 +165,7 @@ public class MapGenErebusCaves extends MapGenBase {
 			int smallCaves = rand.nextBoolean() && rand.nextBoolean() ? 2 : 1;
 
 			if (rand.nextInt(8) == 0) {
-				generateLargeCaveNode(rand.nextLong(), chunkX, chunkZ, xx, yy, zz);
+				generateLargeCaveNode(rand.nextLong(), chunkX, chunkZ, primer, xx, yy, zz);
 				smallCaves += rand.nextInt(3);
 			}
 
@@ -175,7 +177,7 @@ public class MapGenErebusCaves extends MapGenBase {
 				if (rand.nextInt(10) == 0)
 					innerSize *= rand.nextFloat() * rand.nextFloat() + 1F;
 
-				generateCaveNode(rand.nextLong(), chunkX, chunkZ, xx, yy, zz, innerSize, xzAngle, yAngle, 0, 0, 1D);
+				generateCaveNode(rand.nextLong(), chunkX, chunkZ, primer, xx, yy, zz, innerSize, xzAngle, yAngle, 0, 0, 1D);
 			}
 		}
 	}
