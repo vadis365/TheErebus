@@ -22,6 +22,7 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
+import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.plant.WorldGenMelon;
 import erebus.world.feature.plant.WorldGenTurnips;
@@ -35,8 +36,8 @@ import erebus.world.feature.tree.WorldGenTallJungleTree;
 
 public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 /*	private final WorldGenWaspDungeon genWaspDungeon = new WorldGenWaspDungeon();
-	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
-	private final WorldGenPonds genPonds = new WorldGenPonds();*/
+	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();*/
+	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
 
@@ -64,21 +65,21 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	private final WorldGenerator genBamboo = new WorldGenBamboo(13, false);
 	private final WorldGenerator genTurnips = new WorldGenTurnips();
 	private final WorldGenerator genMelons = new WorldGenMelon();
-/*
+
 	@Override
 	protected void populate() {
 		for (attempt = 0; attempt < 35; attempt++) {
 			xx = x + 16;
 			yy = rand.nextInt(120);
 			zz = z + 16;
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos)) {
 				genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D);
-				genPonds.generate(world, rand, xx, yy, zz);
+				genPonds.generate(world, rand, pos.up());
 			}
 		}
 	}
-*/
+
 	@Override
 	protected void decorate() {
 		

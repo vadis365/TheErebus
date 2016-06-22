@@ -6,6 +6,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.plant.WorldGenVinesErebus;
@@ -16,8 +17,9 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
 	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
 	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
-/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenPonds genPonds = new WorldGenPonds();
+/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+	
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern, 1);
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead, 1);
@@ -28,21 +30,21 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
 	private final WorldGenReed genReed = new WorldGenReed();
 	
-
+*/
 	@Override
 	protected void populate() {
 		for (attempt = 0; attempt < 800; attempt++) {
 			xx = x + 16;
 			yy = rand.nextInt(120);
 			zz = z + 16;
-
-			if (checkSurface(SurfaceType.MIXED, xx, yy, zz)) {
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.MIXED, pos)) {
 				genPonds.prepare((rand.nextDouble() + 0.7D) * 1.5D);
-				genPonds.generate(world, rand, xx, yy, zz);
+				genPonds.generate(world, rand, pos.up());
 			}
 		}
 	}
-*/
+
 	@Override
 	public void decorate() {
 /*		// Water

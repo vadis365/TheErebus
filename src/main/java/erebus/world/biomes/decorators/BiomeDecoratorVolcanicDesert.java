@@ -1,6 +1,9 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenLakes;
+import erebus.ModBlocks;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -11,8 +14,8 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 
 private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 
-/*	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
-	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.flowing_lava);
+//	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
+	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.FLOWING_LAVA);
 	
 
 	@Override
@@ -21,27 +24,25 @@ private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.SAND, xx, yy, zz))
-				genLavaLakes.generate(world, world.rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.SAND, pos))
+				genLavaLakes.generate(world, world.rand, pos.up());
 		}
 	}
-*/
+
 	@Override
 	public void decorate() {
-	/*	for (attempt = 0; attempt < 10; attempt++) {
+		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
-
-			if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone && world.isAirBlock(xx, yy - 1, zz)) {
-				world.setBlock(xx, yy, zz, Blocks.flowing_lava);
-				world.scheduledUpdatesAreImmediate = true;
-				Blocks.flowing_lava.updateTick(world, xx, yy, zz, rand);
-				world.scheduledUpdatesAreImmediate = false;
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (world.getBlockState(pos) == ModBlocks.UMBERSTONE.getDefaultState() && world.isAirBlock(pos.down())) {
+				world.setBlockState(pos, Blocks.FLOWING_LAVA.getDefaultState());
+				world.immediateBlockTick(pos, Blocks.FLOWING_LAVA.getDefaultState(), rand);
 			}
 		}
-*/
+
 		for (attempt = 0; attempt < 22; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);

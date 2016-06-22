@@ -323,8 +323,9 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 					if (yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))
 						primer.setBlockState(xInChunk, yInChunk, zInChunk, Blocks.BEDROCK.getDefaultState());
 					else {
-						//	if (biome == ModBiomes.submergedSwamp && yInChunk < swampWaterHeight && block == Blocks.air)
-						//		blocks[index] = rand.nextInt(256) == 0 && blocks[index - 1].isOpaqueCube() && yInChunk < swampWaterHeight - 1 ? ModBlocks.mireCoral : Blocks.water;
+							if (biome == ModBiomes.submergedSwamp && yInChunk < swampWaterHeight && primer.getBlockState(xInChunk, yInChunk, zInChunk) == Blocks.AIR)
+								if(primer.getBlockState(xInChunk, yInChunk - 1, zInChunk).isOpaqueCube() && yInChunk < swampWaterHeight - 1)
+									primer.setBlockState(xInChunk, yInChunk, zInChunk, Blocks.WATER.getDefaultState());
 
 						IBlockState iblockstate2 = primer.getBlockState(xInChunk, yInChunk, zInChunk);
 						if (iblockstate2.getMaterial() == Material.AIR)
@@ -377,7 +378,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 			BiomeBaseErebus biome = (BiomeBaseErebus) biomeBase;
 			rand.setSeed(worldObj.getSeed());
 			rand.setSeed(x * (rand.nextLong() / 2L * 2L + 1L) + z * (rand.nextLong() / 2L * 2L + 1L) ^ worldObj.getSeed());
-			//	biome.populate(worldObj, rand, blockCoordX, blockCoordZ);
+			biome.populate(worldObj, rand, blockCoord.getX(), blockCoord.getZ());
 			biome.decorate(worldObj, rand, blockCoord.getX(), blockCoord.getZ());
 			//	SpawnerErebus.onChunkPopulate(worldObj, rand, biome, blockCoordX + 8, blockCoordZ + 8);
 		}

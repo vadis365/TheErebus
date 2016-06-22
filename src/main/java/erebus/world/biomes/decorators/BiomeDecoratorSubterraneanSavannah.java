@@ -12,6 +12,7 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenAmberGround;
 import erebus.world.feature.decoration.WorldGenAmberUmberstone;
+import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.tree.WorldGenAsperTree;
@@ -21,7 +22,7 @@ import erebus.world.feature.tree.WorldGenGiantBaobab;
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
 
-	//private final WorldGenPonds genPonds = new WorldGenPonds();
+	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
 	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
 	//private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
@@ -33,7 +34,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
 	private final WorldGenerator genTreeBaobab = new WorldGenBaobabTree();
 
-/*
+
 	@Override
 	public void populate() {
 
@@ -42,10 +43,10 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				xx = x + 16;
 				yy = rand.nextInt(120);
 				zz = z + 16;
-
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
 					genPonds.prepare((rand.nextDouble() + 0.75D) * 1.2D);
-					genPonds.generate(world, rand, xx, yy, zz);
+					genPonds.generate(world, rand, pos.up());
 				}
 			}
 
@@ -53,13 +54,13 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 				for (yy = 100; yy > 20; yy--) {
 					xx = x + offsetXZ();
 					zz = z + offsetXZ();
-
-					if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-						genBamboo.generate(world, rand, xx, yy, zz);
+					BlockPos pos = new BlockPos(xx, yy, zz);
+					if (checkSurface(SurfaceType.GRASS, pos))
+						genBamboo.generate(world, rand, pos.up());
 				}
 		}
 	}
-*/
+
 	@Override
 	public void decorate() {
 		xx = x + 16;

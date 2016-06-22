@@ -19,7 +19,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		setColors(0x314D31);
 		//setWaterColor(6051893);
 		setFog(8, 128, 8);
-		setWeight(20);
+		setWeight(2000);
 
 		/*
 		waterColorMultiplier = 6051893;
