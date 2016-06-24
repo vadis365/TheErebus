@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.BlockFalling;
+import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -24,6 +25,7 @@ import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.structure.MapGenErebusCaves;
 import erebus.world.structure.MapGenErebusRavine;
@@ -294,47 +296,42 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 								for (h += 0; h > 23.08D - additionalNoise1[horIndex]; h--) {
 									if (h == swampWaterHeight) {
 										if(rand.nextInt(32) == 0)
-											primer.setBlockState(xInChunk, h+1, zInChunk, Blocks.WATERLILY.getDefaultState());
+											primer.setBlockState(xInChunk, h + 1, zInChunk, Blocks.WATERLILY.getDefaultState());
 									}
 									if (h <= swampWaterHeight) {
-											primer.setBlockState(xInChunk, h, zInChunk, Blocks.WATER.getDefaultState());
-											/*	if(additionalNoise1[horIndex] < 0.08D) {
+										primer.setBlockState(xInChunk, h, zInChunk, Blocks.WATER.getDefaultState());
+												if(additionalNoise1[horIndex] < 0.08D) {
 													if(ConfigHandler.INSTANCE.generateVents && rand.nextInt(25) == 0)
-														primer.setBlockState(xInChunk, h-1, zInChunk, Blocks.LIT_PUMPKIN.getDefaultState()); // SWAMP_VENT
+														primer.setBlockState(xInChunk, h, zInChunk, Blocks.LIT_PUMPKIN.getDefaultState()); // SWAMP_VENT
 													else
-														primer.setBlockState(xInChunk, h-1, zInChunk, ModBlocks.UMBERSTONE.getDefaultState());
+														primer.setBlockState(xInChunk, h, zInChunk, ModBlocks.UMBERSTONE.getDefaultState());
 												}
 												else if(additionalNoise1[horIndex] < 0.5D )
-													primer.setBlockState(xInChunk, h-1, zInChunk, Blocks.SAND.getDefaultState());
-												else if(additionalNoise1[horIndex] < 1)
-													primer.setBlockState(xInChunk, h-1, zInChunk, Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND)); //QUICKSAND
+													primer.setBlockState(xInChunk, h - 1, zInChunk, Blocks.SAND.getDefaultState());
+												else if(additionalNoise1[horIndex] <= 1)
+													primer.setBlockState(xInChunk, h - 2, zInChunk, Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND)); //QUICKSAND
 												else if(additionalNoise2[horIndex] > 1)
-													primer.setBlockState(xInChunk, h-1, zInChunk, Blocks.MOSSY_COBBLESTONE.getDefaultState()); // MUD
+													primer.setBlockState(xInChunk, h - 3, zInChunk, Blocks.MOSSY_COBBLESTONE.getDefaultState()); // MUD
 												else
-														primer.setBlockState(xInChunk, h-1, zInChunk, Blocks.DIRT.getDefaultState());
-												
-											*/
+													primer.setBlockState(xInChunk, h - 2, zInChunk, Blocks.DIRT.getDefaultState());
 									}
 									else
 										primer.setBlockState(xInChunk, h, zInChunk, Blocks.AIR.getDefaultState());
-									
 								}
-							}
+							}	
 						}
 						else if (additionalNoise1[horIndex] > -0.15D) {
 							int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 35);
 							if (h > swampWaterHeight) {
 								for (h += 0; h >= (22 + h) / 2; h--)
 									primer.setBlockState(xInChunk, h, zInChunk, Blocks.AIR.getDefaultState());
-									//blocks[preHeightIndex + h] = Blocks.air;
 								h++;
 						//		if (h >= swampWaterHeight && rand.nextInt(8) == 0 && blocks[preHeightIndex + h] == Blocks.air && blocks[preHeightIndex + h + 1] == Blocks.air) {
 						//			blocks[preHeightIndex + h] = blocks[preHeightIndex + h + 1] = ModBlocks.bullrush;
 						//			metadata[preHeightIndex + h + 1] = 8;
 								}
-							}
 						}
-
+				}
 				if ((biome == ModBiomes.volcanicDesert || biome == ModBiomes.desertSubCharredForest) && Math.abs(additionalNoise1[horIndex]) < 1) {
 					int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 32);
 					if (h > 0) {
