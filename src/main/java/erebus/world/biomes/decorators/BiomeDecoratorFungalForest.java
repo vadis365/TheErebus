@@ -1,28 +1,33 @@
 package erebus.world.biomes.decorators;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenBigMushroom;
+import net.minecraft.world.gen.feature.WorldGenBush;
+import erebus.ModBlocks;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.plant.WorldGenGiantMushrooms;
+import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
-	@Override
-	protected void decorate() {
-		//System.out.println("Fungal Forest Decorating");
-	}
-	
-/*	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
-	protected final WorldGenerator genLichenPatch = new WorldGenMossPatch(1);
-	private final WorldGenFlowers genMushroomsBrown = new WorldGenFlowers(Blocks.brown_mushroom);
-	private final WorldGenFlowers genMushroomsRed = new WorldGenFlowers(Blocks.red_mushroom);
-	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(0);
-	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(1);
+
+	//protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
+	//protected final WorldGenerator genLichenPatch = new WorldGenMossPatch(1);
+	private final WorldGenBush genMushroomsBrown = new WorldGenBush(Blocks.BROWN_MUSHROOM);
+	private final WorldGenBush genMushroomsRed = new WorldGenBush(Blocks.RED_MUSHROOM);
+	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(Blocks.BROWN_MUSHROOM_BLOCK);
+	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(Blocks.RED_MUSHROOM_BLOCK);
 	private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
 
-	public static final Block[] mushrooms = { ModBlocks.dutchCap, ModBlocks.kaizerfinger, ModBlocks.bundleshroom, ModBlocks.greenMushroom, ModBlocks.bulbCapped };
+	public static final Block[] MUSHROOMS = { ModBlocks.DUTCH_CAP_MUSHROOM, ModBlocks.KAIZERS_FINGERS_MUSHROOM, ModBlocks.SARCASTIC_CZECH_MUSHROOM, ModBlocks.GRANDMAS_SHOES_MUSHROOM, ModBlocks.DARK_CAPPED_MUSHROOM };
 
 	@Override
 	public void decorate() {
-
+/*
 		for (attempt = 0; attempt < 10; attempt++) {
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
@@ -30,9 +35,9 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			xx = x + 16;
 			yy = rand.nextInt(118);
 			zz = z + 16;
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, pos.up());
 		}
 
 		for (attempt = 0; attempt < 10; attempt++) {
@@ -41,42 +46,66 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(128);
 			zz = z + offsetXZ();
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos.up()))
 				new WorldGenRottenTreeStump(height, baseRadius).generate(world, rand, xx, yy, zz);
 		}
-
+*/
 		for (attempt = 0; attempt < 256; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(128);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				world.setBlock(xx, yy, zz, mushrooms[rand.nextInt(mushrooms.length)], 0, 2);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				world.setBlockState(pos.up(), MUSHROOMS[rand.nextInt(MUSHROOMS.length)].getDefaultState(), 2);
 		}
 
 		for (attempt = 0; attempt < 200; attempt++) {
 			int r = rand.nextInt(100);
 			if (r < 16)
 				genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
+			else if (r < 25)
+				genGiantMushrooms.setMushroomType(MushroomType.SARCASTIC_CZECH);
 			else if (r < 80)
 				genGiantMushrooms.setMushroomType(MushroomType.KAIZERS_FINGERS);
 			else if (r < 96)
 				genGiantMushrooms.setMushroomType(MushroomType.GRANDMAS_SHOES);
 			else
-				genGiantMushrooms.setMushroomType(MushroomType.BULB_CAPPED);
+				genGiantMushrooms.setMushroomType(MushroomType.DARK_CAPPED);
 
 			xx = x + offsetXZ();
 			yy = 25 + rand.nextInt(50 + rand.nextInt(40));
 			zz = z + offsetXZ();
-
-			for (int yAttempt = 0; yAttempt < 10; yAttempt++)
-				if (checkSurface(SurfaceType.GRASS, xx, --yy, zz))
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			for (int yAttempt = 10; yAttempt > 0; yAttempt--)
+				if (checkSurface(SurfaceType.GRASS, pos.down(yAttempt)))
 					break;
 
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && genGiantMushrooms.generate(world, rand, xx, yy, zz) && rand.nextInt(5) == 0)
+			if (checkSurface(SurfaceType.GRASS, pos) && genGiantMushrooms.generate(world, rand, pos.up()) && rand.nextInt(5) == 0)
 				break;
 		}
+		
+		genMushroomsBrown.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
+		genMushroomsRed.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
 
+		for (attempt = 0; attempt < 100; attempt++) {
+			xx = x + offsetXZ();
+			yy = 15 + rand.nextInt(90);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				genBigMushroomRed.generate(world, rand, pos.up());
+		}
+
+		for (attempt = 0; attempt < 100; attempt++) {
+			xx = x + offsetXZ();
+			yy = 15 + rand.nextInt(90);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				genBigMushroomBrown.generate(world, rand, pos.up());
+		}
+/*
 		for (attempt = 0; attempt < 100; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
@@ -133,27 +162,6 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				genLichenPatch.generate(world, rand, xx, yy, zz);
 		}
 
-		genMushroomsBrown.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
-		genMushroomsRed.generate(world, rand, x + offsetXZ(), rand.nextInt(128), z + offsetXZ());
-
-		for (attempt = 0; attempt < 100; attempt++) {
-			xx = x + offsetXZ();
-			yy = 15 + rand.nextInt(90);
-			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genBigMushroomRed.generate(world, rand, xx, yy, zz);
-		}
-
-		for (attempt = 0; attempt < 100; attempt++) {
-			xx = x + offsetXZ();
-			yy = 15 + rand.nextInt(90);
-			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genBigMushroomBrown.generate(world, rand, xx, yy, zz);
-		}
-
 		// TODO OK this may need moving to it's own class to make it generate looking nice
 		if (ConfigHandler.INSTANCE.glowshrooms) {
 			for (attempt = 0; attempt < 10; attempt++) {
@@ -165,8 +173,9 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 					world.setBlock(xx, yy - 1, zz, ModBlocks.glowshroomStalkMain, 4, 2);
 			}
 		}
+		*/
 	}
-*/
+
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {

@@ -125,7 +125,7 @@ public abstract class WorldGenErebus extends WorldGenerator {
 			for (int xx = x1; xx <= x2; xx++)
 				for (int zz = z1; zz <= z2; zz++) {
 					block = world.getBlockState(new BlockPos(xx, yy, zz));
-					if (!block.getBlock().isOpaqueCube(block))
+					if (!block.isOpaqueCube())
 						return false;
 				}
 

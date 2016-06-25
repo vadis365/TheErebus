@@ -1,27 +1,29 @@
 package erebus.world.feature.plant;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import erebus.ModBlocks;
 import erebus.core.helper.MathUtil;
 import erebus.world.feature.WorldGenErebus;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Direction;
-
-import java.util.ArrayList;
-import java.util.List;
+import erebus.world.feature.util.OldForgeDirection;
 
 public class WorldGenGiantMushrooms extends WorldGenErebus {
 	private static final int stalkMeta = 10;
 	private static final int bulbFullMeta = 14;
-	private static final Block tempBlock = Blocks.bedrock;
+	private static final Block tempBlock = Blocks.BEDROCK;
+	public static final int[] offsetX = new int[] {0, -1, 0, 1};
+    public static final int[] offsetZ = new int[] {1, 0, -1, 0};
 
 	public enum MushroomType {
-		BULB_CAPPED(ModBlocks.bigBulbCappedMushroom),
-		GRANDMAS_SHOES(ModBlocks.bigGreenMushroom),
-		SARCASTIC_CZECH(ModBlocks.bigBundleMushroom),
-		KAIZERS_FINGERS(ModBlocks.bigKaiserfingerMushroom),
-		DUTCH_CAP(ModBlocks.bigDutchCapMushroom);
+		DARK_CAPPED(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK),
+		GRANDMAS_SHOES(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK),
+		SARCASTIC_CZECH(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK),
+		KAIZERS_FINGERS(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK),
+		DUTCH_CAP(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
 
 		public final Block block;
 
@@ -30,21 +32,24 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 		}
 	}
 
-	private MushroomType mushroomType = MushroomType.BULB_CAPPED;
-	private final List<ChunkCoordinates> bulbs = new ArrayList<ChunkCoordinates>();
+	private MushroomType mushroomType = MushroomType.DARK_CAPPED;
+	private final List<BlockPos> bulbs = new ArrayList<BlockPos>();
 
 	public void setMushroomType(MushroomType type) {
 		mushroomType = type;
 	}
 
 	@Override
-	protected boolean generate(int x, int y, int z) {
+	protected boolean generate(BlockPos pos) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
 		bulbs.clear();
 		Block mushroom = mushroomType.block;
 		boolean res = false;
 
 		switch (mushroomType) {
-			case BULB_CAPPED:
+			case DARK_CAPPED:
 				res = genBulbCapped(x, y, z, mushroom);
 				break;
 			case KAIZERS_FINGERS:
@@ -56,6 +61,8 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 			case GRANDMAS_SHOES:
 				res = genGrandmasShoes(x - 1, y, z, mushroom);
 				break;
+			case SARCASTIC_CZECH:
+				res = genSarcasticCzech(x - 1, y, z, mushroom);
 			default:
 				break;
 		}
@@ -83,14 +90,14 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 
 		for (int px = -1; px <= 1; px++)
 			for (int pz = -1; pz <= 1; pz++)
-				bulbs.add(new ChunkCoordinates(x + px, y, z + pz));
+				bulbs.add(new BlockPos(x + px, y, z + pz));
 
 		for (int py = 1; py <= sideHeight; py++)
 			for (int off = -1; off <= 1; off++) {
-				bulbs.add(new ChunkCoordinates(x + 2, y - py, z + off));
-				bulbs.add(new ChunkCoordinates(x - 2, y - py, z + off));
-				bulbs.add(new ChunkCoordinates(x + off, y - py, z + 2));
-				bulbs.add(new ChunkCoordinates(x + off, y - py, z - 2));
+				bulbs.add(new BlockPos(x + 2, y - py, z + off));
+				bulbs.add(new BlockPos(x - 2, y - py, z + off));
+				bulbs.add(new BlockPos(x + off, y - py, z + 2));
+				bulbs.add(new BlockPos(x + off, y - py, z - 2));
 			}
 
 		return true;
@@ -111,17 +118,17 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 
 			if (py >= 2 && py < mainShroomHeight - 1 && rand.nextInt(4 + sidesPlaced * 2) == 0) {
 				int dir = rand.nextInt(4);
-				setBlock(x + Direction.offsetX[dir], y + py, z + Direction.offsetZ[dir], mushroom, bulbFullMeta);
+				setBlock(x + offsetX[dir], y + py, z + offsetZ[dir], mushroom, bulbFullMeta);
 				++sidesPlaced;
 			}
 		}
 
-		bulbs.add(new ChunkCoordinates(x, y + mainShroomHeight + 1, z));
+		bulbs.add(new BlockPos(x, y + mainShroomHeight + 1, z));
 		for (int a = 0; a < 4; a++)
-			bulbs.add(new ChunkCoordinates(x + Direction.offsetX[a], y + mainShroomHeight, z + Direction.offsetZ[a]));
+			bulbs.add(new BlockPos(x + offsetX[a], y + mainShroomHeight, z + offsetZ[a]));
 
-		List<ChunkCoordinates> connectList = new ArrayList<ChunkCoordinates>();
-		connectList.add(new ChunkCoordinates(x, y - 1, z));
+		List<BlockPos> connectList = new ArrayList<BlockPos>();
+		connectList.add(new BlockPos(x, y - 1, z));
 
 		for (int smallShroomAttempt = 0, xx, zz; smallShroomAttempt < 4 + rand.nextInt(7); smallShroomAttempt++) {
 			xx = x + rand.nextInt(4) - rand.nextInt(4);
@@ -132,31 +139,30 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 			int smallShroomHeight = rand.nextBoolean() ? 1 : 1 + rand.nextInt(2);
 			setBlockPillar(xx, zz, y, y + smallShroomHeight - 1, mushroom, stalkMeta);
 			setBlock(xx, y + smallShroomHeight, zz, mushroom, bulbFullMeta);
-			connectList.add(new ChunkCoordinates(xx, y - 1, zz));
+			connectList.add(new BlockPos(xx, y - 1, zz));
 		}
 
 		int coordAmt = connectList.size();
 
 		for (int connectionAttempt = 0, dir, xx, zz; connectionAttempt < 48; connectionAttempt++) {
-			ChunkCoordinates coords1 = connectList.get(rand.nextInt(coordAmt));
-			ChunkCoordinates coords2 = rand.nextInt(3) != 0 ? connectList.get(0) : connectList.get(rand.nextInt(coordAmt));
+			BlockPos coords1 = connectList.get(rand.nextInt(coordAmt));
+			BlockPos coords2 = rand.nextInt(3) != 0 ? connectList.get(0) : connectList.get(rand.nextInt(coordAmt));
 			if (coords1 == coords2)
 				continue;
 
-			double dist = MathUtil.distance(coords1.posX - coords2.posX, coords1.posZ - coords2.posZ);
+			double dist = MathUtil.distance(coords1.getX() - coords2.getX(), coords1.getZ() - coords2.getZ());
 			if (dist < 1D)
 				continue;
 
 			dir = rand.nextInt(4);
-			xx = coords1.posX + Direction.offsetX[dir];
-			zz = coords1.posZ + Direction.offsetZ[dir];
+			xx = coords1.getX() + offsetX[dir];
+			zz = coords1.getZ() + offsetZ[dir];
 
-			if (MathUtil.distance(xx - coords2.posX, zz - coords2.posZ) < dist) {
+			if (MathUtil.distance(xx - coords2.getX(), zz - coords2.getZ()) < dist) {
 				setBlock(xx, y - 1, zz, mushroom, stalkMeta);
 				if (rand.nextInt(16) == 0)
 					setBlock(xx, y, zz, mushroom, stalkMeta);
-				coords1.posX = xx;
-				coords1.posZ = zz;
+				coords1.add(offsetX[dir], 0, offsetZ[dir]);
 			}
 		}
 
@@ -254,7 +260,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 	private boolean genGrandmasShoes(int x, int y, int z, Block mushroom) {
 		int height = 5 + rand.nextInt(8), splits = rand.nextInt(height > 8 ? 3 : 2), splitSize = splits == 0 ? height : (int) Math.ceil(height / (1F + splits)), splitDir = splits != 0 ? rand.nextInt(4) : -1;
 
-		int splitOffX = splitDir == -1 ? 0 : Direction.offsetX[splitDir], splitOffZ = splitDir == -1 ? 0 : Direction.offsetZ[splitDir];
+		int splitOffX = splitDir == -1 ? 0 : offsetX[splitDir], splitOffZ = splitDir == -1 ? 0 : offsetZ[splitDir];
 		if (!checkAirCube(x - 1, y, z - 1, x + 2, y + height - 2, z + 2) || !checkAirCube(x - 3 + splitOffX, z - 3 + splitOffZ, y + height - 1, x + 3 + splitOffX, y + height + 1, z + 3 + splitOffZ) || !checkSolidCube(x - 1, y - 1, z - 1, x + 3, y - 1, z + 3))
 			return false;
 
@@ -276,21 +282,64 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 
 		for (int a = 0; a < 2; a++) {
 			for (int b = 0; b < 2; b++) {
-				bulbs.add(new ChunkCoordinates(x + a, y + height + 1, z + b));
-				bulbs.add(new ChunkCoordinates(x - 1 + 3 * a, y + height + 1, z + b));
-				bulbs.add(new ChunkCoordinates(x + b, y + height + 1, z - 1 + 3 * a));
+				bulbs.add(new BlockPos(x + a, y + height + 1, z + b));
+				bulbs.add(new BlockPos(x - 1 + 3 * a, y + height + 1, z + b));
+				bulbs.add(new BlockPos(x + b, y + height + 1, z - 1 + 3 * a));
 				setBlock(x - 1 + 3 * a, y + height, z - 1 + 3 * b, mushroom, 5); // top
 				// only
-				bulbs.add(new ChunkCoordinates(x - 2 + 5 * a, y + height - 1, z - 2 + 5 * b));
+				bulbs.add(new BlockPos(x - 2 + 5 * a, y + height - 1, z - 2 + 5 * b));
 			}
 
 			for (int b = 0; b < 4; b++) {
-				bulbs.add(new ChunkCoordinates(x - 2 + 5 * a, y + height, z - 1 + b));
-				bulbs.add(new ChunkCoordinates(x - 1 + b, y + height, z - 2 + 5 * a));
-				bulbs.add(new ChunkCoordinates(x - 3 + 7 * a, y + height - 1, z - 1 + b));
-				bulbs.add(new ChunkCoordinates(x - 1 + b, y + height - 1, z - 3 + 7 * a));
+				bulbs.add(new BlockPos(x - 2 + 5 * a, y + height, z - 1 + b));
+				bulbs.add(new BlockPos(x - 1 + b, y + height, z - 2 + 5 * a));
+				bulbs.add(new BlockPos(x - 3 + 7 * a, y + height - 1, z - 1 + b));
+				bulbs.add(new BlockPos(x - 1 + b, y + height - 1, z - 3 + 7 * a));
 			}
 		}
+
+		return true;
+	}
+
+	/*
+	 * MUSHROOM TYPE - SARCASTIC CZECH
+	 */
+	private boolean genSarcasticCzech(int x, int y, int z, Block mushroom) {
+		int height = 2 + rand.nextInt(3);
+		int armLength = 4 + rand.nextInt(3);
+
+		if (!checkAirCube(x, y, z, x, y + height, z) || !checkAirCube(x - armLength, y + height, z - armLength, x + armLength, y + height + 1, z + armLength))
+			return false;
+	
+		setBlockPillar(x, z, y, y + height, mushroom, stalkMeta);
+		setBlockPillar(x + 1, z, y, y + height, mushroom, stalkMeta);
+		setBlockPillar(x, z + 1, y, y + height, mushroom, stalkMeta);
+		setBlockPillar(x + 1, z + 1, y, y + height, mushroom, stalkMeta);
+		y += height;
+		//temp fix until gany fixes (t)his shit :P
+		for (OldForgeDirection[] dirs : new OldForgeDirection[][] { new OldForgeDirection[] { OldForgeDirection.EAST, OldForgeDirection.SOUTH }, new OldForgeDirection[] { OldForgeDirection.EAST, OldForgeDirection.NORTH }, new OldForgeDirection[] { OldForgeDirection.WEST, OldForgeDirection.SOUTH }, new OldForgeDirection[] { OldForgeDirection.WEST, OldForgeDirection.NORTH } }) {
+			int xx = x + dirs[0].offsetX;
+			int yy = y;
+			int zz = z + dirs[0].offsetZ;
+			for (int i = 0; i < armLength; i++) {
+				if (i % 2 == 0)
+					yy++;
+				else {
+					OldForgeDirection dir = dirs[rand.nextInt(dirs.length)];
+					xx += dir.offsetX;
+					zz += dir.offsetZ;
+				}
+				setBlock(xx, yy, zz, mushroom, stalkMeta);
+			}
+
+			setBlock(xx, yy + 1, zz, mushroom, bulbFullMeta);
+			for (int i = -1; i <= 1; i++)
+				for (int j = -1; j <= 1; j++)
+					setBlock(xx + i, yy, zz + j, mushroom, bulbFullMeta);
+		}
+
+		setBlockRect(x, z, x + 1, z + 1, y + 1, mushroom, bulbFullMeta);
+		setBlockRect(x - 1, z - 1, x + 2, z + 2, y, mushroom, bulbFullMeta);
 
 		return true;
 	}
@@ -300,29 +349,29 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 	 */
 
 	private void generateBulbs(int centerX, int centerZ, Block mushroom) {
-		for (ChunkCoordinates bulb : bulbs)
-			setBlock(bulb.posX, bulb.posY, bulb.posZ, tempBlock);
-		for (ChunkCoordinates bulb : bulbs)
-			setMetadata(bulb.posX, bulb.posY, bulb.posZ, getBulbMetadata(centerX, centerZ, bulb));
-		for (ChunkCoordinates bulb : bulbs)
-			setBlock(bulb.posX, bulb.posY, bulb.posZ, mushroom, getMetadata(bulb.posX, bulb.posY, bulb.posZ));
+		for (BlockPos bulb : bulbs)
+			setBlock(bulb.getX(), bulb.getY(), bulb.getZ(), tempBlock);
+		for (BlockPos bulb : bulbs)
+			setMetadata(bulb.getX(), bulb.getY(), bulb.getZ(), getBulbMetadata(centerX, centerZ, bulb));
+		for (BlockPos bulb : bulbs)
+			setBlock(bulb.getX(), bulb.getY(), bulb.getZ(), mushroom, getMetadata(bulb.getZ(), bulb.getY(), bulb.getZ()));
 		bulbs.clear();
 	}
 
-	private int getBulbMetadata(int centerX, int centerZ, ChunkCoordinates bulb) {
-		boolean posX = getBlock(bulb.posX + 1, bulb.posY, bulb.posZ) == tempBlock, negX = getBlock(bulb.posX - 1, bulb.posY, bulb.posZ) == tempBlock, posZ = getBlock(bulb.posX, bulb.posY, bulb.posZ + 1) == tempBlock, negZ = getBlock(bulb.posX, bulb.posY, bulb.posZ - 1) == tempBlock;
+	private int getBulbMetadata(int centerX, int centerZ, BlockPos bulb) {
+		boolean posX = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ()) == tempBlock, negX = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ()) == tempBlock, posZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() + 1) == tempBlock, negZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() - 1) == tempBlock;
 
 		if (posX && negX && posZ && negZ)
 			return 5; // if surrounded, use top only
 
 		if (posX && negX)
-			if (bulb.posZ > centerZ)
+			if (bulb.getZ() > centerZ)
 				return 8; // use top and south
 			else
 				return 2; // use top and north
 
 		if (posZ && negZ)
-			if (bulb.posX > centerX)
+			if (bulb.getX() > centerX)
 				return 6; // use top and east
 			else
 				return 4; // use top and west
@@ -340,7 +389,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 		if (sides > 1)
 			return 0; // go away, you're no longer needed here
 
-		boolean posXposZ = getBlock(bulb.posX + 1, bulb.posY, bulb.posZ + 1) == tempBlock, negXposZ = getBlock(bulb.posX - 1, bulb.posY, bulb.posZ + 1) == tempBlock, posXnegZ = getBlock(bulb.posX + 1, bulb.posY, bulb.posZ - 1) == tempBlock, negXnegZ = getBlock(bulb.posX - 1, bulb.posY, bulb.posZ - 1) == tempBlock;
+		boolean posXposZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() + 1) == tempBlock, negXposZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() + 1) == tempBlock, posXnegZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() - 1) == tempBlock, negXnegZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() - 1) == tempBlock;
 
 		int corners = (posXposZ ? 1 : 0) + (negXposZ ? 1 : 0) + (posXnegZ ? 1 : 0) + (negXnegZ ? 1 : 0);
 
@@ -351,18 +400,18 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 
 		if (sides == 0 && corners == 2)
 			for (int dir = 0, meta; dir < 4; dir++) {
-				meta = getMetadata(bulb.posX + Direction.offsetX[dir], bulb.posY - 1, bulb.posZ + Direction.offsetZ[dir]);
+				meta = getMetadata(bulb.getX() + offsetX[dir], bulb.getY() - 1, bulb.getZ() + offsetZ[dir]);
 				if (meta != 0)
 					return meta; // use meta of cap above and to the side - either 2 side cap or full cap
 			}
 
 		if (sides == 1 && corners == 1 || sides == 0 && corners == 2)
-			if (bulb.posX > centerX) {
-				if (bulb.posZ > centerZ)
+			if (bulb.getX() > centerX) {
+				if (bulb.getZ() > centerZ)
 					return 9; // use top, south and east
 				else
 					return 3; // use top, north and east
-			} else if (bulb.posZ > centerZ)
+			} else if (bulb.getZ() > centerZ)
 				return 7; // use top, south and west
 			else
 				return 1; // use top, north and west
