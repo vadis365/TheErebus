@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/mushroom_block_inside_dark_capped",
+        "down": "erebus:blocks/mushroom_block_inside_dark_capped",
+        "up": "erebus:blocks/mushroom_block_skin_dark_capped",
+        "north": "erebus:blocks/mushroom_block_skin_dark_capped",
+        "east": "erebus:blocks/mushroom_block_skin_dark_capped",
+        "south": "erebus:blocks/mushroom_block_inside_dark_capped",
+        "west": "erebus:blocks/mushroom_block_inside_dark_capped"
+    }
+}
