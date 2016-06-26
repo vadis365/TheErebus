@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import erebus.ModBlocks;
 import erebus.blocks.ErebusHugeMushroom;
@@ -20,16 +19,25 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
     public static final int[] offsetZ = new int[] {1, 0, -1, 0};
 
 	public enum MushroomType {
-		DARK_CAPPED(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK),
-		GRANDMAS_SHOES(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK),
-		SARCASTIC_CZECH(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK),
-		KAIZERS_FINGERS(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK),
-		DUTCH_CAP(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
+		DARK_CAPPED(ModBlocks.DARK_CAPPED_MUSHROOM, ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK),
+		GRANDMAS_SHOES(ModBlocks.GRANDMAS_SHOES_MUSHROOM, ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK),
+		SARCASTIC_CZECH(ModBlocks.SARCASTIC_CZECH_MUSHROOM, ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK),
+		KAIZERS_FINGERS(ModBlocks.KAIZERS_FINGERS_MUSHROOM, ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK),
+		DUTCH_CAP(ModBlocks.DUTCH_CAP_MUSHROOM, ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
 
-		public final Block block;
 
-		MushroomType(Block block) {
-			this.block = block;
+		public final Block mushroom, block;
+
+		MushroomType(Block mushroom, Block log) {
+			this.block = log;
+			this.mushroom = mushroom;
+		}
+
+		public static MushroomType getFromShroom(Block block) {
+			for (MushroomType type : values())
+				if (type.mushroom == block)
+					return type;
+			return null;
 		}
 	}
 
@@ -341,7 +349,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 
 		setBlockRect(x, z, x + 1, z + 1, y + 1, mushroom, bulbFullMeta);
 		setBlockRect(x - 1, z - 1, x + 2, z + 2, y, mushroom, bulbFullMeta);
-
+System.out.println("Did Gen");
 		return true;
 	}
 

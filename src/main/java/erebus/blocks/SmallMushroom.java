@@ -7,24 +7,23 @@ import net.minecraft.block.BlockMushroom;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 
 public class SmallMushroom extends BlockMushroom {
-
-	public SmallMushroom() {
+	private boolean requires2x2ToGrow;
+	public SmallMushroom(boolean requires2x2ToGrow) {
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
 		setCreativeTab(ModTabs.BLOCKS);
+		this.requires2x2ToGrow = requires2x2ToGrow;
 	}
 
 	@Override
@@ -36,82 +35,84 @@ public class SmallMushroom extends BlockMushroom {
 
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
-		WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
-		int i = 0;
-        int j = 0;
-        boolean flag = false;
 
-        if (this == ModBlocks.SARCASTIC_CZECH_MUSHROOM) {
-	           for (i = 0; i >= -1; --i) {
-                   for (j = 0; j >= -1; --j) {
-                       if (isTwoByTwoOfType(world, pos, i, j)) {
-            			genGiantMushrooms.setMushroomType(MushroomType.SARCASTIC_CZECH);
-                           flag = true;
-                           break;
-                       }
-                   }
-               }
-        }
+		if (requires2x2ToGrow) {
+			if (isMushroom(world, pos.east()) && isMushroom(world, pos.east().south()) && isMushroom(world, pos.south())) {
 
-        else if (this == ModBlocks.GRANDMAS_SHOES_MUSHROOM) {
-	           for (i = 0; i >= -1; --i) {
-                   for (j = 0; j >= -1; --j) {
-                       if (isTwoByTwoOfType(world, pos, i, j)) {
-            			genGiantMushrooms.setMushroomType(MushroomType.GRANDMAS_SHOES);
-                           flag = true;
-                           break;
-                       }
-                   }
-               }
-        }
+				world.setBlockToAir(pos);
+				world.setBlockToAir(pos.east());
+				world.setBlockToAir(pos.east().south());
+				world.setBlockToAir(pos.south());
+				WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+				genGiantMushrooms.setMushroomType(MushroomType.getFromShroom(this));
 
-        else if (this == ModBlocks.DUTCH_CAP_MUSHROOM) {
-	           for (i = 0; i >= -1; --i) {
-                   for (j = 0; j >= -1; --j) {
-                       if (isTwoByTwoOfType(world, pos, i, j)) {
-            			genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
-                           flag = true;
-                           break;
-                       }
-                   }
-               }
-        }
+				if (!genGiantMushrooms.generate(world, rand, pos.east())) {
+					world.setBlockState(pos, this.getDefaultState());
+					world.setBlockState(pos.east(), this.getDefaultState());
+					world.setBlockState(pos.east().south(), this.getDefaultState());
+					world.setBlockState(pos.south(), this.getDefaultState());
+				}
 
-        else if (this == ModBlocks.DARK_CAPPED_MUSHROOM)
-    			genGiantMushrooms.setMushroomType(MushroomType.DARK_CAPPED);
+			} else if (isMushroom(world, pos.west()) && isMushroom(world, pos.west().south()) && isMushroom(world, pos.south())) {
 
-        else if (this == ModBlocks.KAIZERS_FINGERS_MUSHROOM)
-    			genGiantMushrooms.setMushroomType(MushroomType.KAIZERS_FINGERS);
+				world.setBlockToAir(pos);
+				world.setBlockToAir(pos.west());
+				world.setBlockToAir(pos.west().south());
+				world.setBlockToAir(pos.south());
+				WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+				genGiantMushrooms.setMushroomType(MushroomType.getFromShroom(this));
 
-               IBlockState airBlock = Blocks.AIR.getDefaultState();
+				if (!genGiantMushrooms.generate(world, rand, pos)) {
+					world.setBlockState(pos, this.getDefaultState());
+					world.setBlockState(pos.west(), this.getDefaultState());
+					world.setBlockState(pos.west().south(), this.getDefaultState());
+					world.setBlockState(pos.south(), this.getDefaultState());
+				}
 
-               if (flag) {
-                   world.setBlockState(pos.add(i, 0, j), airBlock, 4);
-                   world.setBlockState(pos.add(i + 1, 0, j), airBlock, 4);
-                   world.setBlockState(pos.add(i, 0, j + 1), airBlock, 4);
-                   world.setBlockState(pos.add(i + 1, 0, j + 1), airBlock, 4);
-               }
-               else
-                   world.setBlockState(pos, airBlock, 4);
+			} else if (isMushroom(world, pos.east()) && isMushroom(world, pos.east().north()) && isMushroom(world, pos.north())) {
 
-               if (!genGiantMushrooms.generate(world, rand, pos.add(i, 0, j))) {
-                   if (flag) {
-                       world.setBlockState(pos.add(i, 0, j), state, 4);
-                       world.setBlockState(pos.add(i + 1, 0, j), state, 4);
-                       world.setBlockState(pos.add(i, 0, j + 1), state, 4);
-                       world.setBlockState(pos.add(i + 1, 0, j + 1), state, 4);
-                   }
-                   else
-                       world.setBlockState(pos, state, 4);
-               }
+				world.setBlockToAir(pos);
+				world.setBlockToAir(pos.east());
+				world.setBlockToAir(pos.east().north());
+				world.setBlockToAir(pos.north());
+				WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+				genGiantMushrooms.setMushroomType(MushroomType.getFromShroom(this));
+
+				if (!genGiantMushrooms.generate(world, rand, pos.east().north())) {
+					world.setBlockState(pos, this.getDefaultState());
+					world.setBlockState(pos.east(), this.getDefaultState());
+					world.setBlockState(pos.east().north(), this.getDefaultState());
+					world.setBlockState(pos.north(), this.getDefaultState());
+				}
+
+			} else if (isMushroom(world, pos.west()) && isMushroom(world, pos.west().north()) && isMushroom(world, pos.north())) {
+
+				world.setBlockToAir(pos);
+				world.setBlockToAir(pos.west());
+				world.setBlockToAir(pos.west().north());
+				world.setBlockToAir(pos.north());
+				WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+				genGiantMushrooms.setMushroomType(MushroomType.getFromShroom(this));
+
+				if (!genGiantMushrooms.generate(world, rand, pos.north())) {
+					world.setBlockState(pos, this.getDefaultState());
+					world.setBlockState(pos.west(), this.getDefaultState());
+					world.setBlockState(pos.west().north(), this.getDefaultState());
+					world.setBlockState(pos.north(), this.getDefaultState());
+				}
+
+			}
+		} else {
+			world.setBlockToAir(pos);
+			WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+			genGiantMushrooms.setMushroomType(MushroomType.getFromShroom(this));
+			if (!genGiantMushrooms.generate(world, rand, pos))
+				world.setBlockState(pos, this.getDefaultState());
+
+		}
 	}
 
-	private boolean isTwoByTwoOfType(World world, BlockPos pos, int x, int z) {
-		return isTypeAt(world, pos.add(x, 0, z)) && isTypeAt(world, pos.add(x + 1, 0, z)) && isTypeAt(world, pos.add(x, 0, z + 1)) && isTypeAt(world, pos.add(x + 1, 0, z + 1));
-	}
-
-	public boolean isTypeAt(World worldIn, BlockPos pos) {
-		IBlockState iblockstate = worldIn.getBlockState(pos);
-		return iblockstate.getBlock() == this;
+	private boolean isMushroom(World world, BlockPos pos) {
+		return world.getBlockState(pos).getBlock() == this;
 	}
 }

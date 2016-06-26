@@ -68,11 +68,11 @@ public class ModBlocks {
 	public static final Block PRICKLY_PEAR = new BlockPricklyPear();
 
 	//MUSHROOMS
-	public static final Block DARK_CAPPED_MUSHROOM = new SmallMushroom();
-	public static final Block SARCASTIC_CZECH_MUSHROOM = new SmallMushroom();
-	public static final Block GRANDMAS_SHOES_MUSHROOM = new SmallMushroom();
-	public static final Block DUTCH_CAP_MUSHROOM = new SmallMushroom();
-	public static final Block KAIZERS_FINGERS_MUSHROOM = new SmallMushroom();
+	public static final Block DARK_CAPPED_MUSHROOM = new SmallMushroom(false);
+	public static final Block SARCASTIC_CZECH_MUSHROOM = new SmallMushroom(true);
+	public static final Block GRANDMAS_SHOES_MUSHROOM = new SmallMushroom(true);
+	public static final Block DUTCH_CAP_MUSHROOM = new SmallMushroom(true);
+	public static final Block KAIZERS_FINGERS_MUSHROOM = new SmallMushroom(false);
 
 	public static final Block DARK_CAPPED_MUSHROOM_BLOCK = new ErebusHugeMushroom(MapColor.OBSIDIAN, DARK_CAPPED_MUSHROOM);
 	public static final Block SARCASTIC_CZECH_MUSHROOM_BLOCK = new ErebusHugeMushroom(MapColor.RED, SARCASTIC_CZECH_MUSHROOM);
