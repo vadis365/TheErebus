@@ -75,7 +75,7 @@ public abstract class WorldGenErebus extends WorldGenerator {
 
 	protected final boolean setMetadata(int x, int y, int z, int metadata) {
 		Block block = world.getBlockState(new BlockPos(x, y, z)).getBlock();
-		return world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(metadata), 2);
+		return world.setBlockState(new BlockPos(x, y, z), block.getStateFromMeta(metadata), 3);
 	}
 
 	protected final boolean setMetadata(int x, int y, int z, int metadata, boolean update) {

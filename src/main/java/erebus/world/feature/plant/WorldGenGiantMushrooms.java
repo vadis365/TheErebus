@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import erebus.ModBlocks;
+import erebus.blocks.ErebusHugeMushroom;
 import erebus.core.helper.MathUtil;
 import erebus.world.feature.WorldGenErebus;
 import erebus.world.feature.util.OldForgeDirection;
@@ -14,7 +15,7 @@ import erebus.world.feature.util.OldForgeDirection;
 public class WorldGenGiantMushrooms extends WorldGenErebus {
 	private static final int stalkMeta = 10;
 	private static final int bulbFullMeta = 14;
-	private static final Block tempBlock = Blocks.BEDROCK;
+	//private static final Block tempBlock = Blocks.BEDROCK;
 	public static final int[] offsetX = new int[] {0, -1, 0, 1};
     public static final int[] offsetZ = new int[] {1, 0, -1, 0};
 
@@ -350,16 +351,20 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 
 	private void generateBulbs(int centerX, int centerZ, Block mushroom) {
 		for (BlockPos bulb : bulbs)
-			setBlock(bulb.getX(), bulb.getY(), bulb.getZ(), tempBlock);
+			setBlock(bulb.getX(), bulb.getY(), bulb.getZ(), mushroom);
 		for (BlockPos bulb : bulbs)
 			setMetadata(bulb.getX(), bulb.getY(), bulb.getZ(), getBulbMetadata(centerX, centerZ, bulb));
-		for (BlockPos bulb : bulbs)
-			setBlock(bulb.getX(), bulb.getY(), bulb.getZ(), mushroom, getMetadata(bulb.getZ(), bulb.getY(), bulb.getZ()));
+
+		//for (BlockPos bulb : bulbs) {
+		//	int meta = getMetadata(bulb.getX(), bulb.getY(), bulb.getZ());
+		//	System.out.println("Meta should ALSO not be 0 here: " + meta);
+		//	setBlock(bulb.getX(), bulb.getY(), bulb.getZ(), mushroom, getMetadata(bulb.getX(), bulb.getY(), bulb.getZ()));
+		//}
 		bulbs.clear();
 	}
 
 	private int getBulbMetadata(int centerX, int centerZ, BlockPos bulb) {
-		boolean posX = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ()) == tempBlock, negX = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ()) == tempBlock, posZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() + 1) == tempBlock, negZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() - 1) == tempBlock;
+		boolean posX = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ()) instanceof ErebusHugeMushroom, negX = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ()) instanceof ErebusHugeMushroom, posZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() + 1) instanceof ErebusHugeMushroom, negZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() - 1) instanceof ErebusHugeMushroom;
 
 		if (posX && negX && posZ && negZ)
 			return 5; // if surrounded, use top only
@@ -389,7 +394,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 		if (sides > 1)
 			return 0; // go away, you're no longer needed here
 
-		boolean posXposZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() + 1) == tempBlock, negXposZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() + 1) == tempBlock, posXnegZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() - 1) == tempBlock, negXnegZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() - 1) == tempBlock;
+		boolean posXposZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() + 1) instanceof ErebusHugeMushroom, negXposZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() + 1) instanceof ErebusHugeMushroom, posXnegZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() - 1) instanceof ErebusHugeMushroom, negXnegZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() - 1) instanceof ErebusHugeMushroom;
 
 		int corners = (posXposZ ? 1 : 0) + (negXposZ ? 1 : 0) + (posXnegZ ? 1 : 0) + (negXnegZ ? 1 : 0);
 
