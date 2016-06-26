@@ -8,12 +8,13 @@ import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
+import erebus.world.feature.plant.WorldGenPricklyPairPatch;
 
 
 public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 
-private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
-
+	private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
+	protected final WorldGenPricklyPairPatch genPricklyPair = new WorldGenPricklyPairPatch();
 //	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
 	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.FLOWING_LAVA);
 	
@@ -54,6 +55,21 @@ private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 					break;
 			}
 		}
+
+		if (rand.nextInt(20) == 0)
+			for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
+				xx = x + offsetXZ();
+				yy = 25 + rand.nextInt(75);
+				zz = z + offsetXZ();
+
+				for (; yy > 20; yy--) {
+					BlockPos pos = new BlockPos(xx, yy, zz);
+					if (checkSurface(SurfaceType.SAND, pos)) {
+						genPricklyPair.generate(world, rand, pos.up());
+						break;
+					}
+				}
+			}
 
 	//	if (rand.nextInt(34) == 0)
 	//		for (int attempt = 0; attempt < 15; attempt++)

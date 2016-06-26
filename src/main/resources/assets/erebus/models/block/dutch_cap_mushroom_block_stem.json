@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "side": "erebus:blocks/mushroom_block_skin_stem_dutch_cap",
+        "end": "erebus:blocks/mushroom_block_inside_dutch_cap"
+    }
+}

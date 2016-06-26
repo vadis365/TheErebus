@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "erebus:blocks/mushroom_grandmas_shoes"
+    }
+}

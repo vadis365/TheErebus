@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "erebus:blocks/mushroom_block_inside_grandmas_shoes"
+    }
+}

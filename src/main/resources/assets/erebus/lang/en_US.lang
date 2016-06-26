@@ -261,6 +261,17 @@ tile.erebus.heart_berry_bush.name=Heartberry Bush
 tile.erebus.jade_berry_bush.name=Jadeberry Bush
 tile.erebus.swamp_berry_bush.name=Swampberry Bush
 tile.erebus.dark_fruit_vine.name=Dark Fruit Vine
+tile.erebus.prickly_pear.name=Prickly Pear Cactus
+tile.erebus.dark_capped_mushroom.name=Dark Capped Mushroom
+tile.erebus.dutch_cap_mushroom.name=Dutch Cap Mushroom
+tile.erebus.grandmas_shoes_mushroom.name=Grandma's Shoes Mushroom
+tile.erebus.kaizers_fingers_mushroom.name=Kaizer's Fingers Mushroom
+tile.erebus.sarcastic_czech_mushroom.name=Sarcastic Czech Mushroom
+tile.erebus.dark_capped_mushroom_block.name=Dark Capped Mushroom Block
+tile.erebus.dutch_cap_mushroom_block.name=Dutch Cap Mushroom Block
+tile.erebus.grandmas_shoes_mushroom_block.name=Grandma's Shoes Mushroom Block
+tile.erebus.kaizers_fingers_mushroom_block.name=Kaizer's Fingers Mushroom Block
+tile.erebus.sarcastic_czech_mushroom_block.name=Sarcastic Czech Mushroom Block
 
 #################
 # CREATIVE TABS #

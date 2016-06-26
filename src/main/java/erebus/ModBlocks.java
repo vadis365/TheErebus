@@ -21,6 +21,7 @@ import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
 import erebus.blocks.BlockPlanksErebus;
+import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
@@ -64,6 +65,7 @@ public class ModBlocks {
 	public static final Block HEART_BERRY_BUSH = new BlockBerryBush("HEART");
 	public static final Block SWAMP_BERRY_BUSH = new BlockBerryBush("SWAMP");
 	public static final Block DARK_FRUIT_VINE = new BlockDarkFruitVine();
+	public static final Block PRICKLY_PEAR = new BlockPricklyPear();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new SmallMushroom();

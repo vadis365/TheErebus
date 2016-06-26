@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/mushroom_block_inside_kaizers_fingers",
+        "down": "erebus:blocks/mushroom_block_inside_kaizers_fingers",
+        "up": "erebus:blocks/mushroom_block_skin_kaizers_fingers",
+        "north": "erebus:blocks/mushroom_block_inside_kaizers_fingers",
+        "east": "erebus:blocks/mushroom_block_inside_kaizers_fingers",
+        "south": "erebus:blocks/mushroom_block_skin_kaizers_fingers",
+        "west": "erebus:blocks/mushroom_block_inside_kaizers_fingers"
+    }
+}
