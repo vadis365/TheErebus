@@ -21,6 +21,7 @@ import erebus.items.ItemAxeJade;
 import erebus.items.ItemBootsJump;
 import erebus.items.ItemCompoundGoggles;
 import erebus.items.ItemErebusFood;
+import erebus.items.ItemErebusShield;
 import erebus.items.ItemFoodHeartBerries;
 import erebus.items.ItemFoodStagHeart;
 import erebus.items.ItemHelmMushroom;
@@ -93,6 +94,12 @@ public class ModItems {
 	public static final Item MUSHROOM_HELMET = new ItemHelmMushroom(EntityEquipmentSlot.HEAD);
 	public static final Item SPIDER_T_SHIRT = new ItemSpiderTShirt(EntityEquipmentSlot.CHEST);
 	public static final Item WATER_STRIDERS = new ItemArmorWaterStriders(EntityEquipmentSlot.FEET);
+	
+	public static final Item BAMBOO_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_BAMBOO);
+	public static final Item EXOSKELETON_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_EXOSKELETON);
+	public static final Item JADE_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_JADE);
+	public static final Item REIN_EXOSKELETON_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_EXOSKELETON);
+	public static final Item RHINO_EXOSKELETON_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_REIN_EXOSKELETON);
 	
 
 

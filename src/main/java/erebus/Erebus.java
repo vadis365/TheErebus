@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
 import erebus.proxy.CommonProxy;
@@ -45,10 +46,12 @@ public class Erebus {
 		TeleporterHandler.init();
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);
+		MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		proxy.postInit();
 	}
 
 	@EventHandler

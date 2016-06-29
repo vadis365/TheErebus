@@ -1,0 +1,11 @@
+{
+  "parent": "erebus:item/shield",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "erebus:item/shield_blocking"
+    }
+  ]
+}
