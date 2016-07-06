@@ -48,8 +48,8 @@ public class ModBiomes {
 
 	public static void init() {
 		for (int id : new int[] { undergroundJungleID, volcanicDesertID, subterraneanSavannahID, elysianFieldsID, ulteriorOutbackID, fungalForestID, submergedSwampID, fieldsSubForestID }) {
-			if (id >= 128 || id < 0)
-				throw new IllegalArgumentException("Erebus biome IDs cannot be higher than 127 or smaller than 0!");
+			if (id >= 256 || id < 0)
+				throw new IllegalArgumentException("Erebus biome IDs cannot be higher than 255 or smaller than 0!");
 			BiomeGenBase biome = BiomeGenBase.getBiomeGenArray()[id];
 			if (biome != null)
 				throw new IllegalArgumentException("Erebus can not use biome ID " + id + " because it's being used by " + biome + ". Please choose a different one.");
