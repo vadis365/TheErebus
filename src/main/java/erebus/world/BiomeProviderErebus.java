@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import erebus.ModBiomes;
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.genlayer.GenLayerErebus;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,6 +16,9 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.WorldTypeEvent;
+import erebus.ModBiomes;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.genlayer.GenLayerErebus;
 
 public class BiomeProviderErebus extends BiomeProvider {
 
@@ -147,7 +147,7 @@ public class BiomeProviderErebus extends BiomeProvider {
 	}
 
 	@Override
-	public GenLayer[] getModdedBiomeerators(WorldType worldType, long seed, GenLayer[] original) {
+	public GenLayer[] getModdedBiomeGenerators(WorldType worldType, long seed, GenLayer[] original) {
 		WorldTypeEvent.InitBiomeGens event = new WorldTypeEvent.InitBiomeGens(worldType, seed, original);
 		MinecraftForge.TERRAIN_GEN_BUS.post(event);
 		return event.getNewBiomeGens();
