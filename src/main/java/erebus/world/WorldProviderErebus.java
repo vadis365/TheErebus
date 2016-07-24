@@ -1,5 +1,8 @@
 package erebus.world;
 
+import erebus.Erebus;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,15 +11,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.GameType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldSettings;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.biomes.BiomeBaseErebus;
 
 public class WorldProviderErebus extends WorldProvider {
 
@@ -144,8 +144,7 @@ public class WorldProviderErebus extends WorldProvider {
 	@Override
     public BlockPos getRandomizedSpawnPoint() {
         BlockPos ret = this.worldObj.getSpawnPoint();
-
-        boolean isAdventure = worldObj.getWorldInfo().getGameType() == WorldSettings.GameType.ADVENTURE;
+        boolean isAdventure = worldObj.getWorldInfo().getGameType() == GameType.ADVENTURE;
         int spawnFuzz = 100;
         int border = MathHelper.floor_double(worldObj.getWorldBorder().getClosestDistance(ret.getX(), ret.getZ()));
         if (border < spawnFuzz) spawnFuzz = border;
