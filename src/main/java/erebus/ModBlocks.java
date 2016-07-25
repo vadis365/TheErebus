@@ -5,6 +5,24 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.blocks.BlockAmber;
+import erebus.blocks.BlockBerryBush;
+import erebus.blocks.BlockCabbage;
+import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.BlockMud;
+import erebus.blocks.BlockOreErebus;
+import erebus.blocks.BlockOreErebus2;
+import erebus.blocks.BlockPlanksErebus;
+import erebus.blocks.BlockPricklyPear;
+import erebus.blocks.BlockQuickSand;
+import erebus.blocks.BlockTurnip;
+import erebus.blocks.BlockUmberstone;
+import erebus.blocks.EnumWood;
+import erebus.blocks.ErebusHugeMushroom;
+import erebus.blocks.ErebusPortal;
+import erebus.blocks.SmallMushroom;
+import erebus.items.ItemMaterials;
+import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -14,22 +32,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import erebus.blocks.BlockAmber;
-import erebus.blocks.BlockBerryBush;
-import erebus.blocks.BlockCabbage;
-import erebus.blocks.BlockDarkFruitVine;
-import erebus.blocks.BlockOreErebus;
-import erebus.blocks.BlockOreErebus2;
-import erebus.blocks.BlockPlanksErebus;
-import erebus.blocks.BlockPricklyPear;
-import erebus.blocks.BlockTurnip;
-import erebus.blocks.BlockUmberstone;
-import erebus.blocks.EnumWood;
-import erebus.blocks.ErebusHugeMushroom;
-import erebus.blocks.ErebusPortal;
-import erebus.blocks.SmallMushroom;
-import erebus.items.ItemMaterials;
-import erebus.lib.Reference;
 
 public class ModBlocks {
 
@@ -58,6 +60,8 @@ public class ModBlocks {
 	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
 	public static final Block AMBER = new BlockAmber();
+	public static final Block MUD = new BlockMud();
+	public static final Block QUICKSAND = new BlockQuickSand();
 
 	public static final Block CROP_TURNIP = new BlockTurnip();
 	public static final Block CROP_CABBAGE = new BlockCabbage();
