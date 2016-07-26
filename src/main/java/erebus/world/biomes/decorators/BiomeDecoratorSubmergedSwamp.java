@@ -1,16 +1,17 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenPonds;
+import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
@@ -18,9 +19,10 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
 	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
 	private final WorldGenPonds genPonds = new WorldGenPonds();
+	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 /*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	
-	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
+	
 	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern, 1);
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead, 1);
 	private final WorldGenTallGrass genSwampPlant = new WorldGenTallGrass(ModBlocks.swampPlant, 1);
@@ -207,16 +209,17 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
 				genSwampPlant.generate(world, rand, xx, yy, zz);
 		}
-
-		for (attempt = 0; attempt < 30; attempt++) {
+*/
+		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
 
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genQuickSand.generate(world, rand, xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				genQuickSand.generate(world, rand, pos);
 		}
-*/
+
 		for (attempt = 0; attempt < 40; attempt++) {
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;

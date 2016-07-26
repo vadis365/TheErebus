@@ -2,6 +2,9 @@ package erebus.world.feature.decoration;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
+import erebus.world.biomes.BiomeSubmergedSwamp;
+import erebus.world.biomes.BiomeUndergroundJungle;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -11,9 +14,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenWaterlily;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
-import erebus.world.biomes.BiomeSubmergedSwamp;
-import erebus.world.biomes.BiomeUndergroundJungle;
 
 public class WorldGenPonds extends WorldGenerator {
 	private double size;
@@ -108,7 +108,7 @@ public class WorldGenPonds extends WorldGenerator {
 
     					Material mat = worldIn.getBlockState(position.add(xx, yy, zz)).getMaterial();
     					if ((yy < 4 || rand.nextBoolean()) && mat.isSolid())
-    						worldIn.setBlockState(position.add(xx, yy, zz), isJungle || isSwamp ? ModBlocks.UMBERSTONE.getDefaultState() : Blocks.SAND.getDefaultState(), 2); // UMBERSTONE > MUD
+    						worldIn.setBlockState(position.add(xx, yy, zz), isJungle || isSwamp ? ModBlocks.MUD.getDefaultState() : Blocks.SAND.getDefaultState(), 2);
     				}
     		
     		if (rand.nextBoolean())
@@ -143,7 +143,7 @@ public class WorldGenPonds extends WorldGenerator {
     			zz = position.getZ() + rand.nextInt(16);
     			block = worldIn.getBlockState(new BlockPos(xx, yy - 1, zz)).getBlock();
 
-    			if ((block == Blocks.GRASS || block == Blocks.SAND /*|| block == ModBlocks.mud*/) && Blocks.REEDS.canPlaceBlockAt(worldIn,new BlockPos(xx, yy, zz)))
+    			if ((block == Blocks.GRASS || block == Blocks.SAND || block == ModBlocks.MUD) && Blocks.REEDS.canPlaceBlockAt(worldIn,new BlockPos(xx, yy, zz)))
     				for (int height = 0; height < 1 + rand.nextInt(7); height++)
     					if (worldIn.isAirBlock(new BlockPos(xx, yy + height, zz)))
     						worldIn.setBlockState(new BlockPos(xx, yy + height, zz), Blocks.REEDS.getDefaultState());

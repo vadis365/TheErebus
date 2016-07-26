@@ -61,7 +61,7 @@ public class ModBlocks {
 	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
 	public static final Block AMBER = new BlockAmber();
 	public static final Block MUD = new BlockMud();
-	public static final Block QUICKSAND = new BlockQuickSand();
+	public static final Block QUICK_SAND = new BlockQuickSand();
 
 	public static final Block CROP_TURNIP = new BlockTurnip();
 	public static final Block CROP_CABBAGE = new BlockCabbage();

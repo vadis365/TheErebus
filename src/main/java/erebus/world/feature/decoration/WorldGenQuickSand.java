@@ -1,124 +1,126 @@
 package erebus.world.feature.decoration;
 
+import java.util.Random;
+
 import erebus.ModBlocks;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import java.util.Random;
 
 public class WorldGenQuickSand extends WorldGenerator { // TODO tweak?
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
-		while (world.isAirBlock(x, y, z) && y > 2)
+	public boolean generate(World world, Random rand, BlockPos pos) {
+		int y = 0;
+		while (world.isAirBlock(pos.add(0, y, 0)) && y > 2)
 			--y;
 
-		if (world.getBlock(x, y, z) != Blocks.grass)
+		if (world.getBlockState(pos).getBlock() != Blocks.GRASS)
 			return false;
 
-		world.setBlock(x, y, z, ModBlocks.quickSand);
-		world.setBlock(x, y - 1, z, ModBlocks.quickSand);
-		world.setBlock(x, y - 2, z, ModBlocks.quickSand);
+		world.setBlockState(pos, ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(0,  y - 1, 0), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(0, y - 2, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
-		world.setBlock(x, y, z - 1, ModBlocks.quickSand);
-		world.setBlock(x, y - 1, z - 1, ModBlocks.quickSand);
+		world.setBlockState(pos.add(0, y, - 1), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(0, y - 1, - 1), ModBlocks.QUICK_SAND.getDefaultState());
 
-		world.setBlock(x, y, z + 1, ModBlocks.quickSand);
-		world.setBlock(x, y - 1, z + 1, ModBlocks.quickSand);
+		world.setBlockState(pos.add(0, y, 1), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(0, y - 1, 1), ModBlocks.QUICK_SAND.getDefaultState());
 
-		world.setBlock(x - 1, y, z, ModBlocks.quickSand);
-		world.setBlock(x - 1, y - 1, z, ModBlocks.quickSand);
+		world.setBlockState(pos.add(- 1, y, 0), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(- 1, y - 1, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
-		world.setBlock(x + 1, y, z, ModBlocks.quickSand);
-		world.setBlock(x + 1, y - 1, z, ModBlocks.quickSand);
+		world.setBlockState(pos.add(1, y, 0), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(1, y - 1, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
-		world.setBlock(x - 2, y, z, ModBlocks.quickSand);
-		world.setBlock(x - 1, y, z - 1, ModBlocks.quickSand);
+		world.setBlockState(pos.add(- 2, y, 0), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(- 1, y, - 1), ModBlocks.QUICK_SAND.getDefaultState());
 
-		world.setBlock(x + 2, y, z, ModBlocks.quickSand);
-		world.setBlock(x + 1, y, z + 1, ModBlocks.quickSand);
+		world.setBlockState(pos.add(2, y, 0), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(1, y, 1), ModBlocks.QUICK_SAND.getDefaultState());
 
-		world.setBlock(x, y, z - 2, ModBlocks.quickSand);
-		world.setBlock(x - 1, y, z + 1, ModBlocks.quickSand);
+		world.setBlockState(pos.add(0, y, - 2), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(- 1, y, 1), ModBlocks.QUICK_SAND.getDefaultState());
 
-		world.setBlock(x, y, z + 2, ModBlocks.quickSand);
-		world.setBlock(x + 1, y, z - 1, ModBlocks.quickSand);
+		world.setBlockState(pos.add(0, y, 2), ModBlocks.QUICK_SAND.getDefaultState());
+		world.setBlockState(pos.add(1, y, - 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		// Top Layer
 		if (rand.nextBoolean())
-			world.setBlock(x + 1, y - 2, z + 0, ModBlocks.quickSand);
+			world.setBlockState(pos.add(1, y - 2, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x + 0, y - 2, z + 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(0, y - 2, 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 0, y - 2, z - 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(0, y - 2, - 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 1, y - 2, z + 0, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 1, y - 2, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
 		// Middle Layer
 		if (rand.nextBoolean())
-			world.setBlock(x + 2, y - 1, z + 0, ModBlocks.quickSand);
+			world.setBlockState(pos.add(2, y - 1, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x + 1, y - 1, z + 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(1, y - 1, 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 0, y - 1, z + 2, ModBlocks.quickSand);
+			world.setBlockState(pos.add(0, y - 1, 2), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 1, y - 1, z + 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 1, y - 1, 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 2, y - 1, z - 0, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 2, y - 1, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x + 1, y - 1, z - 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(1, y - 1, - 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 0, y - 1, z - 2, ModBlocks.quickSand);
+			world.setBlockState(pos.add(0, y - 1, - 2), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 1, y - 1, z - 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 1, y - 1, - 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		// Bottom Layer
 		if (rand.nextBoolean())
-			world.setBlock(x + 3, y, z + 0, ModBlocks.quickSand);
+			world.setBlockState(pos.add(3, y, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x + 2, y, z + 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(2, y, 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x + 1, y, z + 2, ModBlocks.quickSand);
+			world.setBlockState(pos.add(1, y, 2), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 3, y, z + 0, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 3, y, 0), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 2, y, z + 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 2, y, 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 1, y, z + 2, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 1, y, 2), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x + 0, y, z - 3, ModBlocks.quickSand);
+			world.setBlockState(pos.add(0, y, - 3), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x + 2, y, z - 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(2, y, - 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x + 1, y, z - 2, ModBlocks.quickSand);
+			world.setBlockState(pos.add(1, y, - 2), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 0, y, z + 3, ModBlocks.quickSand);
+			world.setBlockState(pos.add(0, y, 3), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 2, y, z - 1, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 2, y, - 1), ModBlocks.QUICK_SAND.getDefaultState());
 
 		if (rand.nextBoolean())
-			world.setBlock(x - 1, y, z - 2, ModBlocks.quickSand);
+			world.setBlockState(pos.add(- 1, y, - 2), ModBlocks.QUICK_SAND.getDefaultState());
 
 		return true;
 	}

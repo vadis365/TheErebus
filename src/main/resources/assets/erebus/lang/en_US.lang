@@ -273,6 +273,10 @@ tile.erebus.grandmas_shoes_mushroom_block.name=Grandma's Shoes Mushroom Block
 tile.erebus.kaizers_fingers_mushroom_block.name=Kaizer's Fingers Mushroom Block
 tile.erebus.sarcastic_czech_mushroom_block.name=Sarcastic Czech Mushroom Block
 
+# Other
+tile.erebus.mud.name=Mud
+tile.erebus.quick_sand.name=Quicksand
+
 #################
 # CREATIVE TABS #
 #################

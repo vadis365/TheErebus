@@ -2,6 +2,7 @@ package erebus.blocks;
 
 import erebus.ModTabs;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -18,6 +19,7 @@ public class BlockMud extends Block {
 	public BlockMud() {
 		super(Material.GROUND);
 		setHardness(2.0F);
+		setSoundType(SoundType.GROUND);
 		setCreativeTab(ModTabs.BLOCKS);
 	}
 	
