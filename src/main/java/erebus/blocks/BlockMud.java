@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 public class BlockMud extends Block {
 
-	protected static final AxisAlignedBB MUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
+	private static final AxisAlignedBB MUD_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
 	public BlockMud() {
 		super(Material.GROUND);
@@ -29,7 +29,7 @@ public class BlockMud extends Block {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World world, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess world, BlockPos pos) {
 		return MUD_AABB;
 	}
 

@@ -1,7 +1,5 @@
 package erebus.blocks;
 
-import java.util.Random;
-
 import erebus.Erebus;
 import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModTabs;
@@ -17,9 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class BlockDoorErebus extends BlockDoor implements IHasCustomItem {
 
-	public BlockDoorErebus() {
+	BlockDoorErebus() {
 		super(Material.WOOD);
 		setHarvestLevel("axe", 0);
 		setCreativeTab(ModTabs.BLOCKS);

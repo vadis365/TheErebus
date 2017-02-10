@@ -1,7 +1,6 @@
 package erebus.blocks;
 
-import java.util.Random;
-
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -12,7 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModTabs;
+
+import java.util.Random;
 
 public class BlockAmber extends Block {
 
@@ -49,12 +49,8 @@ public class BlockAmber extends Block {
 		IBlockState iblockstate = world.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
 
-		if (state != iblockstate)
-			return true;
-		if (block == this)
-			return false;
+		return state != iblockstate || block != this && block != this && super.shouldSideBeRendered(state, world, pos, side);
 
-		return block == this ? false : super.shouldSideBeRendered(state, world, pos, side);
 	}
 
 }

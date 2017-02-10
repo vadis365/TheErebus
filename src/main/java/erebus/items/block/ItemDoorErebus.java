@@ -6,7 +6,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemDoor;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -21,7 +20,7 @@ public class ItemDoorErebus extends ItemBlock {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (facing != EnumFacing.UP)
 			return EnumActionResult.FAIL;
 		else {
@@ -31,7 +30,7 @@ public class ItemDoorErebus extends ItemBlock {
 			if (!block.isReplaceable(world, pos))
 				pos = pos.offset(facing);
 
-			if (player.canPlayerEdit(pos, facing, stack) && this.block.canPlaceBlockAt(world, pos)) {
+			if (player.canPlayerEdit(pos, facing, player.getHeldItem(hand)) && this.block.canPlaceBlockAt(world, pos)) {
 				EnumFacing enumfacing = EnumFacing.fromAngle(player.rotationYaw);
 				int i = enumfacing.getFrontOffsetX();
 				int j = enumfacing.getFrontOffsetZ();
@@ -39,7 +38,7 @@ public class ItemDoorErebus extends ItemBlock {
 				ItemDoor.placeDoor(world, pos, enumfacing, this.block, flag);
 				SoundType soundtype = this.block.getSoundType();
 				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-				stack.stackSize--;
+				player.getHeldItem(hand).setCount(player.getHeldItem(hand).getCount() - 1);
 				return EnumActionResult.SUCCESS;
 			} else
 				return EnumActionResult.FAIL;

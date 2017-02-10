@@ -1,7 +1,10 @@
 package erebus.items;
 
-import java.util.Set;
-
+import com.google.common.collect.Sets;
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -9,15 +12,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
-import com.google.common.collect.Sets;
-
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
+import java.util.Set;
 
 public class ItemAxeJade extends ItemTool {
-	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(new Block[] { Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE });
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.PLANKS, Blocks.BOOKSHELF, Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK, Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE);
 	private static final float ATTACK_DAMAGE = 6.0F;
 	private static final float ATTACK_SPEED = -3.0F;
 

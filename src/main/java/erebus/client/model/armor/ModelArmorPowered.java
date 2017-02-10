@@ -4,33 +4,31 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.lwjgl.opengl.GL11;
-
-import erebus.ModItems;
 
 @SideOnly(Side.CLIENT)
 public class ModelArmorPowered extends ModelBiped {
 
-	ModelRenderer Body;
-	ModelRenderer RArm;
-	ModelRenderer LArm;
-	ModelRenderer RWingbase;
-	ModelRenderer LWingbase;
-	ModelRenderer ChestEngine;
-	ModelRenderer RWingUpgradeTop;
-	ModelRenderer RWingUpgradeMid;
-	ModelRenderer RWingUpgradeBottom;
-	ModelRenderer LWingUpgradeTop;
-	ModelRenderer LWingUpgradeMid;
-	ModelRenderer LWingUpgradeBottom;
-
 	public boolean isGliding;
 	public boolean isPowered;
+	private ModelRenderer Body;
+	private ModelRenderer RArm;
+	private ModelRenderer LArm;
+	private ModelRenderer RWingbase;
+	private ModelRenderer LWingbase;
+	private ModelRenderer ChestEngine;
+	private ModelRenderer RWingUpgradeTop;
+	private ModelRenderer RWingUpgradeMid;
+	private ModelRenderer RWingUpgradeBottom;
+	private ModelRenderer LWingUpgradeTop;
+	private ModelRenderer LWingUpgradeMid;
+	private ModelRenderer LWingUpgradeBottom;
 
 	public ModelArmorPowered() {
 		textureWidth = 64;
@@ -115,14 +113,22 @@ public class ModelArmorPowered extends ModelBiped {
 
 		if (entity instanceof EntityLivingBase) {
 			EntityLivingBase living = (EntityLivingBase) entity;
-			ItemStack chestplate = living.getEquipmentInSlot(3);
-			if (chestplate != null && chestplate.getItem() == ModItems.armorGliderPowered && ModItems.armorGliderPowered.hasColor(chestplate)) {
+			ItemStack chestplate = null;
+			for (ItemStack stack : living.getArmorInventoryList()) {
+				ItemArmor armor = (ItemArmor) stack.getItem();
+				if (armor.getEquipmentSlot() == EntityEquipmentSlot.CHEST)
+					chestplate = stack;
+			}
+
+			//TODO: Add glider
+
+			/*if (chestplate != null && chestplate.getItem() == ModItems.GLIDER && ModItems.armorGliderPowered.hasColor(chestplate)) {
 				int colour = ModItems.armorGliderPowered.getColor(chestplate);
 				float red = (colour >> 16 & 255) / 255.0F;
 				float green = (colour >> 8 & 255) / 255.0F;
 				float blue = (colour & 255) / 255.0F;
 				GL11.glColor3f(red, green, blue);
-			}
+			}*/
 		}
 
 		RWingUpgradeTop.render(unitPixel);
@@ -186,7 +192,6 @@ public class ModelArmorPowered extends ModelBiped {
 				RWingUpgradeMid.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 				RWingUpgradeBottom.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 				LWingUpgradeTop.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
-				;
 				LWingUpgradeMid.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 				LWingUpgradeBottom.rotateAngleX = 0.3F + MathHelper.cos(entityTickTime) * 4.0F * prevLimbSwing * 120F;
 			}

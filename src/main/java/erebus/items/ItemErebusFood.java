@@ -1,9 +1,9 @@
 package erebus.items;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
+import erebus.ModItems;
+import erebus.ModItems.ISubItemsItem;
+import erebus.ModTabs;
+import erebus.api.IErebusEnum;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,13 +15,14 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModItems.ISubItemsItem;
-import erebus.ModTabs;
-import erebus.api.IErebusEnum;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 
@@ -73,7 +74,7 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entityLiving;
 			EnumFoodType type = EnumFoodType.values()[stack.getItemDamage()];
-			stack.stackSize--;
+			stack.setCount(stack.getCount() - 1);
 			player.getFoodStats().addStats(this, stack);
 			String sound = type == EnumFoodType.CABBAGE ? "erebus:cabbagefart" : "random.burp";
 			float volume = type == EnumFoodType.CABBAGE ? 1 : 0.5F;
@@ -90,12 +91,12 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 		if (!world.isRemote && effect != null)
 			player.addPotionEffect(effect);
 		if (!world.isRemote && stack.getItemDamage() == EnumFoodType.PRICKLY_PEAR_RAW.ordinal())
-			player.attackEntityFrom(DamageSource.cactus, 1);
+			player.attackEntityFrom(DamageSource.CACTUS, 1);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (EnumFoodType type : EnumFoodType.values())
 			list.add(type.createStack(1));
 	}

@@ -1,12 +1,12 @@
 package erebus.world.feature.util;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public abstract class WorldGeneratorExt extends WorldGenerator {
 	protected World world;
@@ -30,7 +30,7 @@ public abstract class WorldGeneratorExt extends WorldGenerator {
 	protected void rect(Block block, int metadata, int x1, int z1, int x2, int z2, int y) {
 		for (int x = x1; x <= x2; x++)
 			for (int z = z1; z <= z2; z++)
-				world.setBlock(x, y, z, block == null ? Blocks.air : block, metadata, 2);
+				world.setBlockState(new BlockPos(x, y, z), block == null ? Blocks.AIR.getDefaultState() : block.getStateFromMeta(metadata), 2);
 	}
 
 	protected void linex(Block block, int x1, int x2, int z, int y) {
@@ -39,7 +39,7 @@ public abstract class WorldGeneratorExt extends WorldGenerator {
 
 	protected void linex(Block block, int metadata, int x1, int x2, int z, int y) {
 		for (int x = x1; x <= x2; x++)
-			world.setBlock(x, y, z, block == null ? Blocks.AIR : block, metadata, 2);
+			world.setBlockState(new BlockPos(x, y, z), block == null ? Blocks.AIR.getDefaultState() : block.getStateFromMeta(metadata), 2);
 	}
 
 	protected void linez(Block block, int z1, int z2, int x, int y) {
@@ -48,7 +48,7 @@ public abstract class WorldGeneratorExt extends WorldGenerator {
 
 	protected void linez(Block block, int metadata, int z1, int z2, int x, int y) {
 		for (int z = z1; z <= z2; z++)
-			world.setBlock(x, y, z, block == null ? Blocks.AIR : block, metadata, 2);
+			world.setBlockState(new BlockPos(x, y, z), block == null ? Blocks.AIR.getDefaultState() : block.getStateFromMeta(metadata), 2);
 	}
 
 	protected void block(Block block, int x, int z, int y) {
@@ -56,6 +56,6 @@ public abstract class WorldGeneratorExt extends WorldGenerator {
 	}
 
 	protected void block(Block block, int metadata, int x, int z, int y) {
-		world.setBlock(x, y, z, block == null ? Blocks.AIR : block, metadata, 2);
+		world.setBlockState(new BlockPos(x, y, z), block == null ? Blocks.AIR.getDefaultState() : block.getStateFromMeta(metadata), 2);
 	}
 }

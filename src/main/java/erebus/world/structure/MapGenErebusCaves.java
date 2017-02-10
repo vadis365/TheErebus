@@ -1,14 +1,14 @@
 package erebus.world.structure;
 
-import java.util.Random;
-
+import erebus.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
-import erebus.ModBlocks;
+
+import java.util.Random;
 
 public class MapGenErebusCaves extends MapGenBase {
 	protected static final IBlockState BLOCK_AIR = Blocks.AIR.getDefaultState();
@@ -20,8 +20,8 @@ public class MapGenErebusCaves extends MapGenBase {
 	@Override
     public void generate(World worldIn, int x, int z, ChunkPrimer primer) {
         int i = this.range;
-        this.worldObj = worldIn;
-        this.rand.setSeed(worldIn.getSeed());
+		this.world = worldIn;
+		this.rand.setSeed(worldIn.getSeed());
         long j = this.rand.nextLong();
         long k = this.rand.nextLong();
 
@@ -95,12 +95,12 @@ public class MapGenErebusCaves extends MapGenBase {
 					return;
 
 				if (xx >= centerX - 16D - xzRange * 2D && zz >= centerZ - 16D - xzRange * 2D && xx <= centerX + 16D + xzRange * 2D && zz <= centerZ + 16D + xzRange * 2D) {
-					int minX = MathHelper.floor_double(xx - xzRange) - chunkX * 16 - 1;
-					int maxX = MathHelper.floor_double(xx + xzRange) - chunkX * 16 + 1;
-					int minY = MathHelper.floor_double(yy - yRange) - 1;
-					int maxY = MathHelper.floor_double(yy + yRange) + 1;
-					int minZ = MathHelper.floor_double(zz - xzRange) - chunkZ * 16 - 1;
-					int maxZ = MathHelper.floor_double(zz + xzRange) - chunkZ * 16 + 1;
+					int minX = MathHelper.floor(xx - xzRange) - chunkX * 16 - 1;
+					int maxX = MathHelper.floor(xx + xzRange) - chunkX * 16 + 1;
+					int minY = MathHelper.floor(yy - yRange) - 1;
+					int maxY = MathHelper.floor(yy + yRange) + 1;
+					int minZ = MathHelper.floor(zz - xzRange) - chunkZ * 16 - 1;
+					int maxZ = MathHelper.floor(zz + xzRange) - chunkZ * 16 + 1;
 
 					if (minX < 0)
 						minX = 0;

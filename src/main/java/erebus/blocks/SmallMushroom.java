@@ -1,21 +1,21 @@
 package erebus.blocks;
 
-import java.util.List;
-import java.util.Random;
-
+import erebus.ModTabs;
+import erebus.world.feature.plant.WorldGenGiantMushrooms;
+import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.world.feature.plant.WorldGenGiantMushrooms;
-import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
+
+import java.util.Random;
 
 public class SmallMushroom extends BlockMushroom {
 	private boolean requires2x2ToGrow;
@@ -29,7 +29,7 @@ public class SmallMushroom extends BlockMushroom {
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
 		list.add(new ItemStack(item));
 	}
 

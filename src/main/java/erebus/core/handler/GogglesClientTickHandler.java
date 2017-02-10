@@ -1,5 +1,6 @@
 package erebus.core.handler;
 
+import erebus.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -10,7 +11,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModItems;
 
 @SideOnly(Side.CLIENT)
 public class GogglesClientTickHandler {
@@ -21,13 +21,13 @@ public class GogglesClientTickHandler {
 	@SubscribeEvent
 	public void onRenderTick(RenderTickEvent e) {
 		if (e.phase == Phase.START) {
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			if (player != null && player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem() == ModItems.COMPOUND_GOGGLES)
+			EntityPlayer player = Minecraft.getMinecraft().player;
+			if (player != null && player.inventory.armorInventory.get(3).getItem() == ModItems.COMPOUND_GOGGLES)
 				player.addPotionEffect(nightVisionEffect);
-			if (player != null && player.inventory.armorInventory[3] != null && player.inventory.armorInventory[3].getItem() == ModItems.REIN_COMPOUND_GOGGLES)
+			if (player != null && player.inventory.armorInventory.get(3).getItem() == ModItems.REIN_COMPOUND_GOGGLES)
 				player.addPotionEffect(nightVisionEffect);
 		} else if (e.phase == Phase.END) {
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayer player = Minecraft.getMinecraft().player;
 			if (player != null) {
 				PotionEffect eff = player.getActivePotionEffect(MobEffects.NIGHT_VISION);
 				if (eff != null && eff.getAmplifier() == 1)

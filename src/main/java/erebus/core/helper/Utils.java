@@ -1,10 +1,5 @@
 package erebus.core.helper;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -22,7 +17,15 @@ import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Objects;
+
 public class Utils {
+	private static final String[] orePrefixes = new String[]{"dust", "ingot", "ore", "block", "gem", "nugget", "shard", "plate", "gear", "stickWood"};
+
 /* TODO FIX
 	public static boolean rightClickItemAt(World world, BlockPos pos, EnumHand hand, EnumFacing side, ItemStack stack) {
 		if (world.isRemote || stack == null || stack.getItem() == null)
@@ -56,6 +59,7 @@ public class Utils {
 
 		return meta;
 	}
+
 /* TODO FIX
 	public static final void breakBlockWithParticles(World world, BlockPos pos, IBlockState state) {
 		playBreakParticles(world, pos, state);
@@ -65,7 +69,7 @@ public class Utils {
 	public static final void breakBlockWithParticles(World world, BlockPos pos) {
 		breakBlockWithParticles(world, pos, world.getBlockState(pos));
 	}
-	
+
 	public static void playBreakParticles(World world, BlockPos pos, IBlockState state) {
 		world.playAuxSFXAtEntity(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + world.getBlockState(pos).getBlock().getMetaFromState(state) << 12);
 	}
@@ -82,7 +86,7 @@ public class Utils {
 			double d2 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			EntityItem entityitem = new EntityItem(world, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, is);
 			entityitem.setPickupDelay(10);
-			world.spawnEntityInWorld(entityitem);
+			world.spawnEntity(entityitem);
 		}
 	}
 
@@ -105,7 +109,7 @@ public class Utils {
 			entityItem.motionY = 0;
 			entityItem.motionZ = 0;
 			entityItem.setPickupDelay(10);
-			world.spawnEntityInWorld(entityItem);
+			world.spawnEntity(entityItem);
 		}
 	}
 
@@ -150,20 +154,19 @@ public class Utils {
 	private static ItemStack extractFromSlots(IInventory iinventory, EnumFacing side, int maxStackSize, int[] slots) {
 		for (int slot : slots) {
 			ItemStack invtStack = iinventory.getStackInSlot(slot);
-			if (invtStack != null)
-				if (!(iinventory instanceof ISidedInventory) || ((ISidedInventory) iinventory).canExtractItem(slot, invtStack, side)) {
-					ItemStack copy = invtStack.copy();
-					if (maxStackSize <= 0)
+			if (!(iinventory instanceof ISidedInventory) || ((ISidedInventory) iinventory).canExtractItem(slot, invtStack, side)) {
+				ItemStack copy = invtStack.copy();
+				if (maxStackSize <= 0)
+					iinventory.setInventorySlotContents(slot, null);
+				else {
+					int amount = Math.min(maxStackSize, invtStack.getCount());
+					invtStack.setCount(amount - 1);
+					copy.setCount(amount);
+					if (invtStack.getCount() <= 0)
 						iinventory.setInventorySlotContents(slot, null);
-					else {
-						int amount = Math.min(maxStackSize, invtStack.stackSize);
-						invtStack.stackSize -= amount;
-						copy.stackSize = amount;
-						if (invtStack.stackSize <= 0)
-							iinventory.setInventorySlotContents(slot, null);
-					}
-					return copy;
 				}
+				return copy;
+			}
 		}
 		return null;
 	}
@@ -175,7 +178,7 @@ public class Utils {
 		boolean flag = addItemStackToInventory(iinventory, entity.getEntityItem());
 		if (flag)
 			entity.setDead();
-		else if (entity.getEntityItem().stackSize <= 0)
+		else if (entity.getEntityItem().getCount() <= 0)
 			entity.setDead();
 		return flag;
 	}
@@ -188,7 +191,7 @@ public class Utils {
 		if (iinventory == null)
 			return false;
 
-		if (stack == null || stack.stackSize <= 0)
+		if (stack == null || stack.getCount() <= 0)
 			return false;
 
 		IInventory invt = getInventory(iinventory);
@@ -203,21 +206,15 @@ public class Utils {
 			} else if (!iinventory.isItemValidForSlot(slot, stack))
 				continue;
 
-			if (iinventory.getStackInSlot(slot) == null) {
-				iinventory.setInventorySlotContents(slot, stack.copy());
-				stack.stackSize = 0;
+			ItemStack invtStack = iinventory.getStackInSlot(slot);
+			if (invtStack.getCount() < Math.min(invtStack.getMaxStackSize(), iinventory.getInventoryStackLimit()) && areStacksTheSame(invtStack, stack, false)) {
+				invtStack.setCount(invtStack.getCount() + stack.getCount());
+				if (invtStack.getCount() > invtStack.getMaxStackSize()) {
+					stack.setCount(invtStack.getCount() - invtStack.getMaxStackSize());
+					invtStack.setCount(invtStack.getMaxStackSize());
+				} else
+					stack.setCount(0);
 				return true;
-			} else {
-				ItemStack invtStack = iinventory.getStackInSlot(slot);
-				if (invtStack.stackSize < Math.min(invtStack.getMaxStackSize(), iinventory.getInventoryStackLimit()) && areStacksTheSame(invtStack, stack, false)) {
-					invtStack.stackSize += stack.stackSize;
-					if (invtStack.stackSize > invtStack.getMaxStackSize()) {
-						stack.stackSize = invtStack.stackSize - invtStack.getMaxStackSize();
-						invtStack.stackSize = invtStack.getMaxStackSize();
-					} else
-						stack.stackSize = 0;
-					return true;
-				}
 			}
 		}
 		return false;
@@ -239,8 +236,6 @@ public class Utils {
 				return isIntercheageableOreName(ore2);
 		return false;
 	}
-
-	private static final String[] orePrefixes = new String[] { "dust", "ingot", "ore", "block", "gem", "nugget", "shard", "plate", "gear", "stickWood" };
 
 	private static boolean isIntercheageableOreName(String name) {
 		for (String prefix : orePrefixes)
@@ -271,9 +266,9 @@ public class Utils {
 
 		if (stack1.getItem() == stack2.getItem())
 			if (stack1.getItemDamage() == stack2.getItemDamage() || isWildcard(stack1.getItemDamage()) || isWildcard(stack2.getItemDamage()))
-				if (!matchSize || stack1.stackSize == stack2.stackSize) {
+				if (!matchSize || stack1.getCount() == stack2.getCount()) {
 					if (stack1.hasTagCompound() && stack2.hasTagCompound())
-						return stack1.getTagCompound().equals(stack2.getTagCompound());
+						return Objects.equals(stack1.getTagCompound(), stack2.getTagCompound());
 					return stack1.hasTagCompound() == stack2.hasTagCompound();
 				}
 		return false;
@@ -310,7 +305,7 @@ public class Utils {
 		IInventory iinventory = (IInventory) tile;
 		for (int i = 0; i < iinventory.getSizeInventory(); i++) {
 			ItemStack stack = iinventory.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.stackSize > 0) {
+			if (stack.getCount() > 0) {
 				dropStack(tile.getWorld(), tile.getPos(), stack.copy());
 				iinventory.setInventorySlotContents(i, null);
 			}
@@ -333,9 +328,9 @@ public class Utils {
 			if (areStacksTheSame(invtStack, stack, false)) {
 				if (ignoreSize)
 					return true;
-				totalSize += invtStack.stackSize;
+				totalSize += invtStack.getCount();
 			}
-			if (totalSize >= stack.stackSize)
+			if (totalSize >= stack.getCount())
 				return true;
 		}
 
@@ -355,16 +350,16 @@ public class Utils {
 		for (int slot : slots) {
 			ItemStack invtStack = iinventory.getStackInSlot(slot);
 			if (areStacksTheSame(invtStack, stack, false) || areStacksSameOre(invtStack, stack))
-				if (invtStack.stackSize >= stack.stackSize) {
-					invtStack.stackSize -= stack.stackSize;
-					if (invtStack.stackSize <= 0)
+				if (invtStack.getCount() >= stack.getCount()) {
+					invtStack.setCount(invtStack.getCount() - stack.getCount());
+					if (invtStack.getCount() <= 0)
 						iinventory.setInventorySlotContents(slot, getContainer(stack));
 					return true;
 				} else {
-					totalDel += invtStack.stackSize;
+					totalDel += invtStack.getCount();
 					iinventory.setInventorySlotContents(slot, getContainer(stack));
 				}
-			if (totalDel == stack.stackSize)
+			if (totalDel == stack.getCount())
 				return true;
 		}
 		return false;

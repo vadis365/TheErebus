@@ -1,7 +1,5 @@
 package erebus.blocks;
 
-import java.util.Random;
-
 import erebus.ModTabs;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
@@ -18,6 +16,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class ErebusPortal extends Block {
 
@@ -105,7 +105,7 @@ public class ErebusPortal extends Block {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return NULL_AABB;
 	}
 
@@ -134,11 +134,7 @@ public class ErebusPortal extends Block {
 		IBlockState iblockstate = world.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
 
-		if (state != iblockstate)
-			return true;
-		if (block == this)
-			return false;
+		return state != iblockstate || block != this && block != this && super.shouldSideBeRendered(state, world, pos, side);
 
-		return block == this ? false : super.shouldSideBeRendered(state, world, pos, side);
 	}
 }

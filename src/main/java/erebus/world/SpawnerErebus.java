@@ -1,14 +1,9 @@
 package erebus.world;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.loot.IWeightProvider;
+import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -24,15 +19,21 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.loot.IWeightProvider;
-import gnu.trove.map.hash.TObjectIntHashMap;
+
+import java.lang.reflect.Constructor;
+import java.util.*;
+import java.util.Map.Entry;
 
 public final class SpawnerErebus {
 
 	public static final SpawnerErebus INSTANCE = new SpawnerErebus();
 	public static final int MAX_MOBS_PER_WORLD = 300;
+	private boolean canSpawnHostiles;
+	private boolean canSpawnAnimals;
+	private Map<ChunkPos, Boolean> spawnChunks = new HashMap<ChunkPos, Boolean>(64);
+
+	private SpawnerErebus() {
+	}
 
 	public static void onChunkPopulate(World world, Random rand, BiomeBaseErebus biome, int x, int z) {
 		if (!world.isRemote && world.getGameRules().getBoolean("doMobSpawning"))
@@ -48,10 +49,6 @@ public final class SpawnerErebus {
 		if (erebusWorld != null && erebusWorld.getGameRules().getBoolean("doMobSpawning"))
 			runGradualSpawning(erebusWorld);
 	}
-
-	private boolean canSpawnHostiles;
-	private boolean canSpawnAnimals;
-	private Map<ChunkPos, Boolean> spawnChunks = new HashMap<ChunkPos, Boolean>(64);
 
 	private void prepare(WorldServer world) {
 		WorldProviderErebus provider = (WorldProviderErebus) world.provider;
@@ -125,7 +122,7 @@ public final class SpawnerErebus {
 				z = coords.chunkZPos * 16 + rand.nextInt(16);
 				y = 10 + rand.nextInt(100);
 				BlockPos blockCoord = new BlockPos(x, y, z);
-				Biome biome = world.getBiomeGenForCoords(blockCoord);
+				Biome biome = world.getBiome(blockCoord);
 				if (!(biome instanceof BiomeBaseErebus))
 					break;
 
@@ -173,7 +170,7 @@ public final class SpawnerErebus {
 							entity.setLocationAndAngles(fx, fy, fz, yaw, 0F);
 
 							if (entity.getCanSpawnHere()) {
-								world.spawnEntityInWorld(entity);
+								world.spawnEntity(entity);
 								entity = null;
 
 								if (--spawnGroup <= 0)
@@ -206,14 +203,11 @@ public final class SpawnerErebus {
 		// TODO maybe I'll finish this one sometime...
 	}
 
-	private SpawnerErebus() {
-	}
-
 	public static final class SpawnEntry implements IWeightProvider {
-		private final Constructor<? extends EntityLiving> mobConstructor;
 		protected final Class<? extends EntityLiving> mobClass;
 		protected final short weight;
 		protected final boolean isHostile;
+		private final Constructor<? extends EntityLiving> mobConstructor;
 		protected byte minGroupSize = 1, maxGroupSize = 1;
 		protected int worldLimit = 10;
 		protected Block blockBelow = null;

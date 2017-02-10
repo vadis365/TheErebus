@@ -1,10 +1,5 @@
 package erebus.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.common.base.Predicate;
-
 import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModTabs;
@@ -12,7 +7,6 @@ import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -20,17 +14,16 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BlockPlanksErebus extends Block implements IHasCustomItem, ISubBlocksBlock {
 
-	public static final PropertyEnum<EnumWood> TYPE = PropertyEnum.create("type", EnumWood.class, new Predicate<EnumWood>() {
-		@Override
-		public boolean apply(EnumWood input) {
-			return input.hasPlanks();
-		}
-	});
+	public static final PropertyEnum<EnumWood> TYPE = PropertyEnum.create("type", EnumWood.class, EnumWood::hasPlanks);
 
 	public BlockPlanksErebus() {
 		super(Material.WOOD);
@@ -43,7 +36,7 @@ public class BlockPlanksErebus extends Block implements IHasCustomItem, ISubBloc
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
 		EnumWood[] values = EnumWood.values();
 		for (int i = 0; i < values.length; i++)
 			if (values[i].hasPlanks())
@@ -67,12 +60,12 @@ public class BlockPlanksErebus extends Block implements IHasCustomItem, ISubBloc
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { TYPE });
+		return new BlockStateContainer(this, TYPE);
 	}
 
 	@Override
 	public List<String> getModels() {
-		List<String> models = new ArrayList<String>();
+		List<String> models = new ArrayList<>();
 		for (EnumWood wood : EnumWood.values())
 			if (wood.hasPlanks())
 				models.add("planks_" + wood.getName());

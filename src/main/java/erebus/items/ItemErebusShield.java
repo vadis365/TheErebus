@@ -1,7 +1,6 @@
 package erebus.items;
 
-import java.util.List;
-
+import erebus.ModTabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +16,8 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModTabs;
+
+import java.util.List;
 
 public class ItemErebusShield extends ItemShield {
 
@@ -81,15 +81,15 @@ public class ItemErebusShield extends ItemShield {
         System.out.println(damage);
         if (damage >= material.getDurability(EntityEquipmentSlot.CHEST)) {
             entityIn.renderBrokenItemStack(stack);
-            --stack.stackSize;
+            stack.setCount(stack.getCount() - 1);
 
             if (entityIn instanceof EntityPlayer) {
                 EntityPlayer entityplayer = (EntityPlayer) entityIn;
                 entityplayer.addStat(StatList.getObjectBreakStats(stack.getItem()));
             }
 
-            if (stack.stackSize < 0) {
-                stack.stackSize = 0;
+            if (stack.getCount() < 0) {
+                stack.setCount(0);
             }
 
         } else {

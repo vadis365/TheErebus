@@ -11,6 +11,6 @@ public class PlayerChangedDimensionEventHandler {
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void entityJoin(PlayerChangedDimensionEvent event) {
 		if (event.toDim == ConfigHandler.INSTANCE.erebusDimensionID)
-			event.player.triggerAchievement(ModAchievements.welcome);
+			event.player.addStat(ModAchievements.WELCOME);
 	}
 }

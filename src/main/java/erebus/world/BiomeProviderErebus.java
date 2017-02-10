@@ -1,10 +1,8 @@
 package erebus.world;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
+import erebus.ModBiomes;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.genlayer.GenLayerErebus;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,9 +14,11 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.WorldTypeEvent;
-import erebus.ModBiomes;
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.genlayer.GenLayerErebus;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class BiomeProviderErebus extends BiomeProvider {
 
@@ -44,10 +44,10 @@ public class BiomeProviderErebus extends BiomeProvider {
 	}*/
 
 	@Override
-	public Biome[] getBiomesForGeneration(Biome biomesForGeneration[], int x, int z, int sizeX, int sizeZ) {
+	public Biome[] getBiomesForGeneration(Biome[] biomesForGeneration, int x, int z, int sizeX, int sizeZ) {
 		IntCache.resetIntCache();
 
-		if (biomesForGeneration == null || biomesForGeneration.length < sizeX * sizeZ)
+		if (biomesForGeneration.length < sizeX * sizeZ)
 			biomesForGeneration = new Biome[sizeX * sizeZ];
 
 		int[] biomeArray = biomeGenLayer.getInts(x, z, sizeX, sizeZ);
@@ -61,14 +61,12 @@ public class BiomeProviderErebus extends BiomeProvider {
 	/*
 	 * @Override public float[] getTemperatures(float temperatureArray[], int x, int z, int sizeX, int sizeZ) { if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ) temperatureArray = new float[sizeX * sizeZ]; Arrays.fill(temperatureArray, 0, sizeX * sizeZ, temperature); return temperatureArray; }
 	 */
-
-	@Override
 	public Biome[] loadBlockGeneratorData(Biome biomesForGeneration[], int x, int z, int sizeX, int sizeZ) {
-		return getBiomeGenAt(biomesForGeneration, x, z, sizeX, sizeZ, true);
+		return getBiomes(biomesForGeneration, x, z, sizeX, sizeZ, true);
 	}
 
 	@Override
-	public Biome[] getBiomeGenAt(Biome[] biomesForGeneration, int x, int z, int sizeX, int sizeZ, boolean useCache) {
+	public Biome[] getBiomes(Biome[] biomesForGeneration, int x, int z, int sizeX, int sizeZ, boolean useCache) {
 		IntCache.resetIntCache();
 
 		if (biomesForGeneration == null || biomesForGeneration.length < sizeX * sizeZ)

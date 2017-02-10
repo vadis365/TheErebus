@@ -1,14 +1,19 @@
 package erebus.items;
 
-import java.util.List;
-
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.client.model.armor.ModelArmorGlider;
+import erebus.client.model.armor.ModelArmorPowered;
+import erebus.items.ItemMaterials.EnumType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,17 +23,9 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.client.model.armor.ModelArmorGlider;
-import erebus.client.model.armor.ModelArmorPowered;
-import erebus.items.ItemMaterials.EnumType;
+import java.util.List;
 
 public class ItemArmorGlider extends ItemArmor {
 	public ItemArmorGlider() {
@@ -40,16 +37,16 @@ public class ItemArmorGlider extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
-		if (canFly()) {
-			list.add(StatCollector.translateToLocal("tooltip.erebus.poweredGlider"));
-			list.add(StatCollector.translateToLocal("tooltip.erebus.gliderPoweredKey") + ": " + Keyboard.getKeyName(KeyBindingHandler.poweredGlide.getKeyCode()));
+		/*if (canFly()) {
+			list.add(I18n.translateToLocal("tooltip.erebus.poweredGlider"));
+			list.add(I18n.translateToLocal("tooltip.erebus.gliderPoweredKey") + ": " + Keyboard.getKeyName(KeyBindingHandler.poweredGlide.getKeyCode()));
 		}
-		list.add(StatCollector.translateToLocal("tooltip.erebus.gliderGlideKey") + ": " + Keyboard.getKeyName(KeyBindingHandler.glide.getKeyCode()));
+		list.add(I18n.translateToLocal("tooltip.erebus.gliderGlideKey") + ": " + Keyboard.getKeyName(KeyBindingHandler.glide.getKeyCode()));*/
 	}
 
 	@Override
 	public boolean hasColor(ItemStack stack) {
-		return !stack.hasTagCompound() ? false : !stack.getTagCompound().hasKey("display", Constants.NBT.TAG_COMPOUND) ? false : stack.getTagCompound().getCompoundTag("display").hasKey("color", Constants.NBT.TAG_INT);
+		return stack.hasTagCompound() && (stack.getTagCompound().hasKey("display", Constants.NBT.TAG_COMPOUND) && stack.getTagCompound().getCompoundTag("display").hasKey("color", Constants.NBT.TAG_INT));
 	}
 
 	@Override
@@ -77,7 +74,7 @@ public class ItemArmorGlider extends ItemArmor {
 	}
 
 	@Override
-	public void func_82813_b(ItemStack stack, int colour) {
+	public void setColor(ItemStack stack, int color) {
 		NBTTagCompound nbt = stack.getTagCompound();
 
 		if (nbt == null) {
@@ -90,7 +87,7 @@ public class ItemArmorGlider extends ItemArmor {
 		if (!nbt.hasKey("display", 10))
 			nbt.setTag("display", displayNBT);
 
-		displayNBT.setInteger("color", colour);
+		displayNBT.setInteger("color", color);
 	}
 
 	@Override
@@ -107,7 +104,7 @@ public class ItemArmorGlider extends ItemArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase player, ItemStack stack, EntityEquipmentSlot armorSlot, ModelBiped modelBiped) {
-		if (canFly()) {
+		if (true/*canFly()*/) {
 			ModelArmorPowered model = new ModelArmorPowered();
 			model.bipedHead.showModel = false;
 			model.bipedHeadwear.showModel = false;
@@ -141,24 +138,24 @@ public class ItemArmorGlider extends ItemArmor {
 		}
 	}
 
-	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
-		if (world.isRemote) {
-			if (!stack.hasTagCompound())
-				stack.getTagCompound() = new NBTTagCompound();
-
-			if (stack.getTagCompound().getBoolean("isGliding") && (!KeyBindingHandler.glide.getIsKeyPressed() || entity.onGround)) {
-				stack.getTagCompound().setBoolean("isGliding", false);
-				PacketPipeline.sendToServer(new PacketGlider(false));
-			}
-
-			if (canFly())
-				if (stack.getTagCompound().getBoolean("isPowered") && (!KeyBindingHandler.poweredGlide.getIsKeyPressed() || entity.onGround)) {
-					stack.getTagCompound().setBoolean("isPowered", false);
-					PacketPipeline.sendToServer(new PacketGliderPowered(false));
-				}
-		}
-	}
+//	@Override
+//	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
+//		if (world.isRemote) {
+//			if (!stack.hasTagCompound())
+//				stack.getTagCompound() = new NBTTagCompound();
+//
+//			if (stack.getTagCompound().getBoolean("isGliding") && (!KeyBindingHandler.glide.getIsKeyPressed() || entity.onGround)) {
+//				stack.getTagCompound().setBoolean("isGliding", false);
+//				PacketPipeline.sendToServer(new PacketGlider(false));
+//			}
+//
+//			if (canFly())
+//				if (stack.getTagCompound().getBoolean("isPowered") && (!KeyBindingHandler.poweredGlide.getIsKeyPressed() || entity.onGround)) {
+//					stack.getTagCompound().setBoolean("isPowered", false);
+//					PacketPipeline.sendToServer(new PacketGliderPowered(false));
+//				}
+//		}
+//	}
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
@@ -167,7 +164,7 @@ public class ItemArmorGlider extends ItemArmor {
 		player.fallDistance = 0.0F;
 
 		if (!stack.hasTagCompound()) {
-			stack.getTagCompound() = new NBTTagCompound();
+			stack.setTagCompound(new NBTTagCompound());
 			return;
 		}
 		NBTTagCompound nbt = stack.getTagCompound();
@@ -179,7 +176,7 @@ public class ItemArmorGlider extends ItemArmor {
 				player.motionY *= 0.5D;
 			}
 
-		if (nbt.getBoolean("isPowered") && canFly() && hasGemOrIsCreative(player))
+		if (nbt.getBoolean("isPowered") && /*canFly() &&*/ hasGemOrIsCreative(player))
 			if (!player.onGround) {
 				player.motionX *= 1.05D;
 				player.motionZ *= 1.05D;
@@ -189,14 +186,14 @@ public class ItemArmorGlider extends ItemArmor {
 					nbt.setInteger("fuelTicks", nbt.getInteger("fuelTicks") + 1);
 					if (nbt.getInteger("fuelTicks") >= 80) {
 						nbt.setInteger("fuelTicks", 0);
-						player.inventory.consumeInventoryItem(Item.getItemFromBlock(ModBlocks.RED_GEM));
+						player.inventory.deleteStack(new ItemStack(ModBlocks.MUD));
 					}
 				}
 			}
 	}
 
 	private boolean hasGemOrIsCreative(EntityPlayer player) {
-		return player.capabilities.isCreativeMode || player.inventory.hasItem(Item.getItemFromBlock(ModBlocks.RED_GEM));
+		return player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(ModBlocks.MUD));
 	}
 
 	@Override
@@ -215,17 +212,18 @@ public class ItemArmorGlider extends ItemArmor {
 		GL11.glPushMatrix();
 
 		EntityPlayer player = event.getEntityPlayer();
+		RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
 
 		double d0 = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.getPartialRenderTick();
 		double d1 = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.getPartialRenderTick();
 		double d2 = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.getPartialRenderTick();
-		d0 = d0 - RenderManager.renderPosX;
-		d1 = d1 - RenderManager.renderPosY;
-		d2 = d2 - RenderManager.renderPosZ;
+		d0 = d0 - renderManager.viewerPosX;
+		d1 = d1 - renderManager.viewerPosY;
+		d2 = d2 - renderManager.viewerPosZ;
 		GL11.glTranslated(d0, d1, d2);
 
-		ItemStack chestPlate = player.inventory.armorInventory[2];
-		if (chestPlate != null && chestPlate.getItem() instanceof ItemArmorGlider && chestPlate.hasTagCompound())
+		ItemStack chestPlate = player.inventory.armorInventory.get(2);
+		if (chestPlate.getItem() instanceof ItemArmorGlider && chestPlate.hasTagCompound())
 			if (chestPlate.getTagCompound().getBoolean("isGliding") && !player.onGround || chestPlate.getTagCompound().getBoolean("isPowered") && !player.onGround) {
 				float yaw = player.rotationYaw;
 				float x = (float) Math.cos(Math.PI * yaw / 180F);
@@ -237,9 +235,9 @@ public class ItemArmorGlider extends ItemArmor {
 		GL11.glTranslated(-d0, -d1, -d2);
 	}
 
-	public boolean canFly() {
+	/*public boolean canFly() {
 		return this == ModItems.GLIDER_CHESTPLATE_POWERED;
-	}
+	}*/
 
 	private boolean hasTag(ItemStack stack) {
 		if (!stack.hasTagCompound()) {

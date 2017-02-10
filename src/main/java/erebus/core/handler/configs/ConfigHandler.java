@@ -1,29 +1,25 @@
 package erebus.core.handler.configs;
 
-import java.io.File;
-
+import erebus.lib.Reference;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import erebus.lib.Reference;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
+
+import java.io.File;
 
 public class ConfigHandler {
 
 	public static final ConfigHandler INSTANCE = new ConfigHandler();
-
-	private File configFolder;
-
-	public Configuration config;
+	public final String[] usedCategories = {Configuration.CATEGORY_GENERAL, "Biomes", "Ores", "Integration", "Mob Modifiers"};
 	public int erebusDimensionID;
 	public int portalCooldown, antlionMazeFrequency, mobAttackDamageMultiplier, mobHealthMultipier;
 	public byte beetleLarvaEating = 0;
 	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours;
-
 	public boolean disableThaumcraft = false, disableFMP = false;
-
-	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores", "Integration", "Mob Modifiers" };
+	Configuration config;
+	private File configFolder;
 
 	public void loadConfig(FMLPreInitializationEvent event) {
 		File configFile = event.getSuggestedConfigurationFile();

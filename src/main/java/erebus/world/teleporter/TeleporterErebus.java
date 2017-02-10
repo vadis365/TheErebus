@@ -1,9 +1,5 @@
 package erebus.world.teleporter;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.entity.Entity;
@@ -13,6 +9,10 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 final class TeleporterErebus extends Teleporter {
 
@@ -40,9 +40,9 @@ final class TeleporterErebus extends Teleporter {
 		int posX = 0;
 		int posY = 0;
 		int posZ = 0;
-		int roundX = MathHelper.floor_double(entityIn.posX);
-		int roundZ = MathHelper.floor_double(entityIn.posZ);
-		long coordPair = ChunkPos.chunkXZ2Int(roundX, roundZ);
+		int roundX = MathHelper.floor(entityIn.posX);
+		int roundZ = MathHelper.floor(entityIn.posZ);
+		long coordPair = ChunkPos.asLong(roundX, roundZ);
 		boolean portalNotSaved = true;
 		BlockPos blockpos = BlockPos.ORIGIN;
 		if (destinationCoordinateCache.containsKey(coordPair)) {
@@ -76,12 +76,12 @@ final class TeleporterErebus extends Teleporter {
 		if (distToPortal >= 0.0) {
 			if (portalNotSaved) {
 				destinationCoordinateCache.put(coordPair, new Teleporter.PortalPosition(blockpos, worldServerInstance.getTotalWorldTime()));
-				destinationCoordinateKeys.add(Long.valueOf(coordPair));
+				destinationCoordinateKeys.add(coordPair);
 			}
 
 			entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0;
 
-			int entityFacing = MathHelper.floor_double(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+			int entityFacing = MathHelper.floor(entityIn.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			float entityRotation = 0;
 			double offsetX = 0;
 			double offsetZ = 0;
@@ -120,9 +120,9 @@ final class TeleporterErebus extends Teleporter {
 		//attempt at constraining the portal height in the Erebus
 		double safeHeight = Math.min(Math.max(entity.posY * 0.5D, 12), 116);
 
-		int x = MathHelper.floor_double(entity.posX);
-		int y = MathHelper.floor_double(safeHeight) - 2;
-		int z = MathHelper.floor_double(entity.posZ);
+		int x = MathHelper.floor(entity.posX);
+		int y = MathHelper.floor(safeHeight) - 2;
+		int z = MathHelper.floor(entity.posZ);
 
 		for (int i = -2; i <= 2; i++)
 			for (int j = 0; j <= 3; j++)

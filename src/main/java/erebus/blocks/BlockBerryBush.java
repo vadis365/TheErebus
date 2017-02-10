@@ -1,11 +1,13 @@
 package erebus.blocks;
 
-import java.util.Random;
-
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.items.ItemErebusFood.EnumFoodType;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -24,16 +26,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.items.ItemErebusFood.EnumFoodType;
-import erebus.items.ItemMaterials.EnumType;
+
+import java.util.Objects;
+import java.util.Random;
 
 public class BlockBerryBush extends Block {
-	private String type;
     public static final PropertyInteger BUSH_AGE = PropertyInteger.create("age", 0, 3);
     private static final AxisAlignedBB[] BUSH_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.5D, 0.75D), new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 0.75D, 0.875D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
+	private String type;
 
 	public BlockBerryBush(String bushType) {
 		super(Material.LEAVES);
@@ -50,21 +50,21 @@ public class BlockBerryBush extends Block {
 		return 10;
 	}
 
-    protected PropertyInteger getAgeProperty() {
-        return BUSH_AGE;
+	private PropertyInteger getAgeProperty() {
+		return BUSH_AGE;
     }
 
     public int getMaxAge() {
         return 3;
     }
 
-    protected int getAge(IBlockState state) {
-        return ((Integer)state.getValue(this.getAgeProperty())).intValue();
-    }
+	private int getAge(IBlockState state) {
+		return state.getValue(this.getAgeProperty());
+	}
 
-    public IBlockState withAge(int age) {
-        return this.getDefaultState().withProperty(this.getAgeProperty(), Integer.valueOf(age));
-    }
+	private IBlockState withAge(int age) {
+		return this.getDefaultState().withProperty(this.getAgeProperty(), age);
+	}
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
@@ -79,27 +79,27 @@ public class BlockBerryBush extends Block {
 
 	@Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {BUSH_AGE});
-    }
+		return new BlockStateContainer(this, BUSH_AGE);
+	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(BUSH_AGE, Integer.valueOf(meta));
+		return getDefaultState().withProperty(BUSH_AGE, meta);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((Integer) state.getValue(BUSH_AGE)).intValue();
+		return state.getValue(BUSH_AGE);
 	}
 
 	@Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BUSH_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
-    }
+		return BUSH_AABB[state.getValue(this.getAgeProperty())];
+	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos) {
-		return BUSH_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return BUSH_AABB[state.getValue(this.getAgeProperty())];
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class BlockBerryBush extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		int age = getAge(state);
 		if (age == 3) {
 			world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, 2.0F);
@@ -144,12 +144,12 @@ public class BlockBerryBush extends Block {
 		return isValidBlock(state);
 	}
 
-	public boolean canBlockStay(World world, BlockPos pos) {
+	private boolean canBlockStay(World world, BlockPos pos) {
 		return canPlaceBlockAt(world, pos);
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn) {
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos from) {
 		int age = getAge(state);
 		if (world.isAirBlock(pos.down())) {
 			if (age == 3)
@@ -162,7 +162,7 @@ public class BlockBerryBush extends Block {
 
 	private boolean isValidBlock(IBlockState state) {
 		Block block = state.getBlock();
-		return block != null && (block == Blocks.DIRT || block == Blocks.FARMLAND || block == Blocks.GRASS|| block == this && getAge(state) >= 2);//&& block == ModBlocks.MUD
+		return block == Blocks.DIRT || block == Blocks.FARMLAND || block == Blocks.GRASS || block == this && getAge(state) >= 2;//&& block == ModBlocks.MUD
 	}
 
 	@Override
@@ -175,13 +175,13 @@ public class BlockBerryBush extends Block {
 		return 1;
 	}
 
-	public ItemStack getBerry() {
+	private ItemStack getBerry() {
 		ItemStack item = null;
-		if (type == "JADE")
+		if (Objects.equals(type, "JADE"))
 			item = new ItemStack(ModItems.MATERIALS, 1, EnumType.JADE_BERRIES.ordinal());
-		if (type == "HEART")
+		if (Objects.equals(type, "HEART"))
 			item = new ItemStack(ModItems.HEART_BERRIES, 1);
-		if (type == "SWAMP")
+		if (Objects.equals(type, "SWAMP"))
 			item = new ItemStack(ModItems.EREBUS_FOOD, 1, EnumFoodType.SWAMP_BERRIES.ordinal());
 		return item;
 	}

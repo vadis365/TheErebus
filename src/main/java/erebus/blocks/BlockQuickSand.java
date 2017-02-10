@@ -29,7 +29,7 @@ public class BlockQuickSand extends Block {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World world, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess world, BlockPos pos) {
 		return NULL_AABB;
 	}
 
@@ -41,7 +41,7 @@ public class BlockQuickSand extends Block {
 
 	@SubscribeEvent
 	public void onEntityJump(LivingJumpEvent e) {
-		if (e.getEntity().worldObj.getBlockState(new BlockPos((int) Math.floor(e.getEntity().posX), (int) Math.floor(e.getEntity().posY) - 1, (int) Math.floor(e.getEntity().posZ))).getBlock() == this)
+		if (e.getEntity().getEntityWorld().getBlockState(new BlockPos((int) Math.floor(e.getEntity().posX), (int) Math.floor(e.getEntity().posY) - 1, (int) Math.floor(e.getEntity().posZ))).getBlock() == this)
 			e.getEntityLiving().motionY = 0D;
 	}
 }

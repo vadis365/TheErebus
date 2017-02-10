@@ -1,9 +1,10 @@
 package erebus.world.teleporter;
 
-import java.util.UUID;
-
+import erebus.Erebus;
+import erebus.core.handler.configs.ConfigHandler;
+import gnu.trove.map.TObjectByteMap;
+import gnu.trove.map.hash.TObjectByteHashMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityMinecartContainer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -16,13 +17,18 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
-import erebus.Erebus;
-import erebus.core.handler.configs.ConfigHandler;
-import gnu.trove.map.TObjectByteMap;
-import gnu.trove.map.hash.TObjectByteHashMap;
+
+import java.util.UUID;
 
 public final class TeleporterHandler {
 	private static TeleporterHandler INSTANCE = new TeleporterHandler();
+	private final TObjectByteMap<UUID> waitingPlayers = new TObjectByteHashMap<>();
+	private boolean checkWaitingPlayers = false;
+	private TeleporterErebus teleportToOverworld;
+	private TeleporterErebus teleportToErebus;
+
+	private TeleporterHandler() {
+	}
 
 	public static void init() {
 		MinecraftForge.EVENT_BUS.register(INSTANCE);
@@ -34,15 +40,6 @@ public final class TeleporterHandler {
 
 	public static void transferToErebus(Entity entity) {
 		INSTANCE.transferEntity(entity, ConfigHandler.INSTANCE.erebusDimensionID);
-	}
-
-	private final TObjectByteMap<UUID> waitingPlayers = new TObjectByteHashMap<UUID>();
-	private boolean checkWaitingPlayers = false;
-
-	private TeleporterErebus teleportToOverworld;
-	private TeleporterErebus teleportToErebus;
-
-	private TeleporterHandler() {
 	}
 
 	@SubscribeEvent
@@ -79,7 +76,7 @@ public final class TeleporterHandler {
 		if (dimensionId != 0 && dimensionId != ConfigHandler.INSTANCE.erebusDimensionID)
 			throw new IllegalArgumentException("Supplied invalid dimension ID into Erebus teleporter: " + dimensionId);
 
-		World world = entity.worldObj;
+		World world = entity.world;
 
 		if (!world.isRemote && !entity.isDead)
 			if (entity instanceof EntityPlayerMP) {
@@ -114,20 +111,12 @@ public final class TeleporterHandler {
 				world.theProfiler.startSection("reposition");
 				mcServer.getPlayerList().transferEntityToWorld(entity, dimensionId, worldCurrent, worldTarget, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				world.theProfiler.endStartSection("reloading");
-				Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), worldTarget);
-
-				if (newEntity != null) {
-					//newEntity.copyDataFromOld(entity);
-					worldTarget.spawnEntityInWorld(newEntity);
-				}
 
 				entity.isDead = true;
 				world.theProfiler.endSection();
 				worldCurrent.resetUpdateEntityTick();
 				worldTarget.resetUpdateEntityTick();
 				world.theProfiler.endSection();
-
-				newEntity.timeUntilPortal = entity.getPortalCooldown();
 			}
 	}
 }

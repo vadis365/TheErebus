@@ -1,10 +1,10 @@
 package erebus.items;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import net.minecraft.block.Block;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModItems.ISubItemsItem;
+import erebus.ModTabs;
+import erebus.api.IErebusEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,19 +12,15 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModItems.ISubItemsItem;
-import erebus.ModTabs;
-import erebus.api.IErebusEnum;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class ItemMaterials extends Item implements ISubItemsItem {
 
@@ -35,15 +31,14 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	}
 
 	@Override
-	 public EnumActionResult onItemUse(ItemStack is, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		BlockPos bottom = pos.down();
 		IBlockState state = world.getBlockState(pos);
-		if (facing.getIndex() == 0 && is.getItemDamage() == EnumType.DARK_FRUIT_SEEDS.ordinal() && player.canPlayerEdit(pos, facing, is) && player.canPlayerEdit(bottom, facing, is)) {
-			Block block = state.getBlock();
-			if (block != null && state.getMaterial().blocksMovement()) {
+		if (facing.getIndex() == 0 && player.getHeldItem(hand).getItemDamage() == EnumType.DARK_FRUIT_SEEDS.ordinal() && player.canPlayerEdit(pos, facing, player.getHeldItem(hand)) && player.canPlayerEdit(bottom, facing, player.getHeldItem(hand))) {
+			if (state.getMaterial().blocksMovement()) {
 				world.setBlockState(bottom, ModBlocks.DARK_FRUIT_VINE.getDefaultState(), 2);
 				if (!player.capabilities.isCreativeMode)
-					--is.stackSize;
+					player.getHeldItem(hand).setCount(player.getHeldItem(hand).getCount() - 1);
 				return EnumActionResult.SUCCESS;
 			}
 		}
@@ -51,9 +46,9 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	}
 
 	@Override
-	 public ActionResult<ItemStack> onItemRightClick(ItemStack is, World world, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (!world.isRemote) {
-			int damage = is.getItemDamage();
+			int damage = player.getHeldItem(hand).getItemDamage();
 
 			if (damage == EnumType.BIO_VELOCITY.ordinal() || damage == EnumType.SUPERNATURAL_VELOCITY.ordinal()) {
 				PotionEffect currentSpeed = player.getActivePotionEffect(MobEffects.SPEED);
@@ -62,9 +57,9 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 					player.addPotionEffect(new PotionEffect(MobEffects.SPEED, damage == EnumType.BIO_VELOCITY.ordinal() ? 280 : 210, damage == EnumType.BIO_VELOCITY.ordinal() ? 1 : 3, true, false));
 					//PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 					if (!player.capabilities.isCreativeMode)
-						--is.stackSize;
+						player.getHeldItem(hand).setCount(player.getHeldItem(hand).getCount() - 1);
 				} else
-					return new ActionResult(EnumActionResult.PASS, is);
+					return new ActionResult(EnumActionResult.PASS, player.getHeldItem(hand));
 			}
 
 			if (damage == EnumType.CAMO_POWDER.ordinal()) {
@@ -74,19 +69,19 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 					player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, damage == EnumType.CAMO_POWDER.ordinal() ? 280 : 210, damage == EnumType.CAMO_POWDER.ordinal() ? 1 : 3, true, false));
 				//	PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 					if (!player.capabilities.isCreativeMode)
-						--is.stackSize;
+						player.getHeldItem(hand).setCount(player.getHeldItem(hand).getCount() - 1);
 				} else
-					return new ActionResult(EnumActionResult.PASS, is);
+					return new ActionResult(EnumActionResult.PASS, player.getHeldItem(hand));
 			} else
-				return new ActionResult(EnumActionResult.PASS, is);
+				return new ActionResult(EnumActionResult.PASS, player.getHeldItem(hand));
 		}
 
-		return new ActionResult(EnumActionResult.PASS, is);
+		return new ActionResult(EnumActionResult.PASS, player.getHeldItem(hand));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (EnumType type : EnumType.values())
 			list.add(type.createStack(1));
 	}

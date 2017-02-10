@@ -13,6 +13,6 @@ public class ModAchievements extends AchievementPage {
 	//	public static Achievement TSHIRT = new Achievement("tshirt", "tshirt", 3, 3, ModItems.spiderTShirt, welcome).registerStat();
 
 	public ModAchievements() {
-		super("The Erebus", new Achievement[] { WELCOME, /*BEETLE, BEETLESPECIAL, DIAMOND,*/ UMBERSTONE, /*TSHIRT*/ });
+		super("The Erebus", WELCOME, /*BEETLE, BEETLESPECIAL, DIAMOND,*/ UMBERSTONE, /*TSHIRT*/);
 	}
 }

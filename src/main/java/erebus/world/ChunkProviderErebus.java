@@ -1,8 +1,5 @@
 package erebus.world;
 
-import java.util.List;
-import java.util.Random;
-
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
@@ -29,18 +26,23 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 
+	public static int swampWaterHeight = 24;
 	private final World worldObj;
-
 	private final Random rand;
-
 	private final NoiseGeneratorOctaves noiseGen1;
 	private final NoiseGeneratorOctaves noiseGen2;
 	private final NoiseGeneratorOctaves noiseGen3;
 	private final NoiseGeneratorOctaves noiseGen4;
 	private final NoiseGeneratorOctaves noiseGen5;
 	private final NoiseGeneratorOctaves noiseGen6;
+	private final MapGenBase caveGenerator;
+	private final MapGenBase ravineGenerator;
 	private double[] noiseArray;
 	private double[] stoneNoise;
 	private double[] noiseData1;
@@ -48,14 +50,9 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	private double[] noiseData3;
 	private double[] noiseData4;
 	private double[] noiseData5;
-
 	private NoiseGeneratorPerlin perlinAdditional1;
 	private NoiseGeneratorPerlin perlinAdditional2;
-
 	private Biome[] biomesForGeneration;
-
-	private final MapGenBase caveGenerator;
-	private final MapGenBase ravineGenerator;
 
 	public ChunkProviderErebus(World world, long seed) {
 		worldObj = world;
@@ -137,7 +134,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	public Chunk provideChunk(int x, int z) {
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomesForGeneration(biomesForGeneration, x * 16, z * 16, 16, 16);
 		generateTerrain(x, z, chunkprimer);
 		replaceBlocksForBiome(x, z, biomesForGeneration, chunkprimer);
 
@@ -153,6 +150,11 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		chunk.generateSkylightMap();
 		chunk.resetRelightChecks();
 		return chunk;
+	}
+
+	@Override
+	public boolean tick() {
+		return false;
 	}
 
 	private double[] initializeNoiseField(double[] noise, int x, int y, int z, int sizeX, int sizeY, int sizeZ) {
@@ -258,8 +260,6 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 
 		return noise;
 	}
-
-	public static int swampWaterHeight = 24;
 
 	public void replaceBlocksForBiome(int x, int z, Biome[] biomes, ChunkPrimer primer) {
 		ChunkGeneratorEvent.ReplaceBiomeBlocks event = new ChunkGeneratorEvent.ReplaceBiomeBlocks(this, x, z, primer, worldObj);
@@ -397,7 +397,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		BlockPos blockCoordOffSet = new BlockPos(blockCoord.getX() + 16, 0, blockCoord.getZ() + 16);
 		//int blockCoordX = x * 16;
 		//int blockCoordZ = z * 16;
-		Biome biomeBase = worldObj.getBiomeGenForCoords(blockCoordOffSet);
+		Biome biomeBase = worldObj.getBiome(blockCoordOffSet);
 
 		if (biomeBase instanceof BiomeBaseErebus) {
 			BiomeBaseErebus biome = (BiomeBaseErebus) biomeBase;
@@ -427,15 +427,14 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	}
 
 	@Override
-	public Chunk getLoadedChunk(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isChunkGeneratedAt(int p_191062_1_, int p_191062_2_) {
+		return false;
 	}
 
 	@Override
-	public boolean unloadQueuedChunks() {
+	public Chunk getLoadedChunk(int x, int z) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
@@ -450,9 +449,9 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		return null;
 	}
 
+	@Nullable
 	@Override
-	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position) {
-		// TODO Auto-generated method stub
+	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
 		return null;
 	}
 

@@ -1,10 +1,12 @@
 package erebus.blocks;
 
-import java.util.Random;
-
+import com.sun.istack.internal.Nullable;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.items.ItemErebusFood.EnumFoodType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,17 +23,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
-import com.sun.istack.internal.Nullable;
-
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.items.ItemErebusFood.EnumFoodType;
+import java.util.Random;
 
 public class BlockPricklyPear extends Block implements IPlantable {
 
-	protected static final AxisAlignedBB PRICKLY_PEAR_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 11);
+	protected static final AxisAlignedBB PRICKLY_PEAR_AABB = new AxisAlignedBB(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);
 
 	public BlockPricklyPear() {
 		super(Material.CACTUS);
@@ -46,7 +43,7 @@ public class BlockPricklyPear extends Block implements IPlantable {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World world, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess world, BlockPos pos) {
 		return PRICKLY_PEAR_AABB;
 	}
 
@@ -81,16 +78,16 @@ public class BlockPricklyPear extends Block implements IPlantable {
 				for (growthHeight = 1; world.getBlockState(pos.down(growthHeight)).getBlock() == this; ++growthHeight);
 
 				if (growthHeight < 3) {
-					int stage = ((Integer) state.getValue(AGE)).intValue();
+					int stage = state.getValue(AGE);
 
 					if (stage == 10) {
 						world.setBlockState(pos.up(), getDefaultState());
 						if (world.getBlockState(pos).getBlock() == this && world.getBlockState(pos.down()).getBlock() == this)
-							world.setBlockState(pos.up(), state.withProperty(AGE, Integer.valueOf(11)), 4);
+							world.setBlockState(pos.up(), state.withProperty(AGE, 11), 4);
 						else
-							world.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(0)), 4);
+							world.setBlockState(pos, state.withProperty(AGE, 0), 4);
 					} else if (stage < 10) {
-						world.setBlockState( pos, state.withProperty(AGE, Integer.valueOf(stage + 1)), 4);
+						world.setBlockState(pos, state.withProperty(AGE, stage + 1), 4);
 					}
 				}
 			}
@@ -112,7 +109,7 @@ public class BlockPricklyPear extends Block implements IPlantable {
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn) {
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos from) {
 		checkForDrop(world, pos, state);
 	}
 
@@ -132,12 +129,12 @@ public class BlockPricklyPear extends Block implements IPlantable {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(AGE, Integer.valueOf(meta));
+		return getDefaultState().withProperty(AGE, meta);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return ((Integer) state.getValue(AGE)).intValue();
+		return state.getValue(AGE);
 	}
 
 	@Override
@@ -152,7 +149,7 @@ public class BlockPricklyPear extends Block implements IPlantable {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { AGE });
+		return new BlockStateContainer(this, AGE);
 	}
 
 	@Override

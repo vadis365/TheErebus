@@ -6,21 +6,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class ModelArmorGlider extends ModelBiped {
 
-	ModelRenderer Body;
-	ModelRenderer RArm;
-	ModelRenderer LArm;
-	ModelRenderer RWingbase;
-	ModelRenderer LWingbase;
-	ModelRenderer RWing;
-	ModelRenderer LWing;
-
 	public boolean isGliding;
+	private ModelRenderer Body;
+	private ModelRenderer RArm;
+	private ModelRenderer LArm;
+	private ModelRenderer RWingbase;
+	private ModelRenderer LWingbase;
+	private ModelRenderer RWing;
+	private ModelRenderer LWing;
 
 	public ModelArmorGlider() {
 		textureWidth = 64;

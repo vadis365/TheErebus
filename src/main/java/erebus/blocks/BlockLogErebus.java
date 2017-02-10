@@ -1,17 +1,16 @@
 package erebus.blocks;
 
+import erebus.ModTabs;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.ModTabs;
 
 public class BlockLogErebus extends BlockLog {
 
-	public BlockLogErebus() {
+	BlockLogErebus() {
 		setHarvestLevel("axe", 0);
 		setCreativeTab(ModTabs.BLOCKS);
 		Blocks.FIRE.setFireInfo(this, 5, 5);
@@ -59,7 +58,7 @@ public class BlockLogErebus extends BlockLog {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { LOG_AXIS });
+		return new BlockStateContainer(this, LOG_AXIS);
 	}
 
 	@Override

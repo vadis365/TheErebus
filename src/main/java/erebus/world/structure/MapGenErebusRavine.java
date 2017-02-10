@@ -1,7 +1,8 @@
 package erebus.world.structure;
 
-import java.util.Random;
-
+import erebus.ModBiomes;
+import erebus.ModBlocks;
+import erebus.world.ChunkProviderErebus;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -10,9 +11,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.MapGenBase;
-import erebus.ModBiomes;
-import erebus.ModBlocks;
-import erebus.world.ChunkProviderErebus;
+
+import java.util.Random;
 
 public class MapGenErebusRavine extends MapGenBase {
 	protected static final IBlockState BLOCK_AIR = Blocks.AIR.getDefaultState();
@@ -21,8 +21,8 @@ public class MapGenErebusRavine extends MapGenBase {
 	@Override
     public void generate(World worldIn, int x, int z, ChunkPrimer primer) {
         int i = this.range;
-        this.worldObj = worldIn;
-        this.rand.setSeed(worldIn.getSeed());
+		this.world = worldIn;
+		this.rand.setSeed(worldIn.getSeed());
         long j = this.rand.nextLong();
         long k = this.rand.nextLong();
 
@@ -94,12 +94,12 @@ public class MapGenErebusRavine extends MapGenBase {
 					return;
 
 				if (par6 >= blockCoordX - 16.0D - d6 * 2.0D && seed0 >= blockCoordZ - 16.0D - d6 * 2.0D && par6 <= blockCoordX + 16.0D + d6 * 2.0D && seed0 <= blockCoordZ + 16.0D + d6 * 2.0D) {
-					int minX = MathHelper.floor_double(par6 - d6) - x * 16 - 1;
-					int maxX = MathHelper.floor_double(par6 + d6) - x * 16 + 1;
-					int minY = MathHelper.floor_double(par8 - d7) - 1;
-					int maxY = MathHelper.floor_double(par8 + d7) + 1;
-					int minZ = MathHelper.floor_double(seed0 - d6) - z * 16 - 1;
-					int maxZ = MathHelper.floor_double(seed0 + d6) - z * 16 + 1;
+					int minX = MathHelper.floor(par6 - d6) - x * 16 - 1;
+					int maxX = MathHelper.floor(par6 + d6) - x * 16 + 1;
+					int minY = MathHelper.floor(par8 - d7) - 1;
+					int maxY = MathHelper.floor(par8 + d7) + 1;
+					int minZ = MathHelper.floor(seed0 - d6) - z * 16 - 1;
+					int maxZ = MathHelper.floor(seed0 + d6) - z * 16 + 1;
 
 					if (minX < 0)
 						minX = 0;
@@ -187,15 +187,15 @@ public class MapGenErebusRavine extends MapGenBase {
 	}
 
 	private boolean isTopBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ) {
-		Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+		Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
 		IBlockState state = data.getBlockState(x, y, z);
-		return isExceptionBiome(biome) ? state.getBlock() == Blocks.GRASS : state.getBlock() == biome.topBlock;
+		return state.getBlock() == biome.topBlock;
 	}
 
 	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
-		Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
-		IBlockState top = isExceptionBiome(biome) ? Blocks.GRASS.getDefaultState() : biome.topBlock;
-		IBlockState filler = isExceptionBiome(biome) ? Blocks.DIRT.getDefaultState() : biome.fillerBlock;
+		Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
+		IBlockState top = biome.topBlock;
+		IBlockState filler = biome.fillerBlock;
 		IBlockState state = data.getBlockState(x, y, z);
 		if (state.getBlock() == ModBlocks.UMBERSTONE || state.getBlock() == top.getBlock() || state.getBlock() == filler.getBlock()) {
 			if (y < 3)

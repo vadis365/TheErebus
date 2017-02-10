@@ -1,9 +1,5 @@
 package erebus.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import erebus.ModBlocks;
 import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModBlocks.ISubBlocksBlock;
@@ -12,7 +8,6 @@ import erebus.api.IErebusEnum;
 import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,14 +16,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class BlockUmberstone extends Block implements IHasCustomItem, ISubBlocksBlock {
 
-	public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", EnumType.class);
+	private static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", EnumType.class);
 
 	public BlockUmberstone() {
 		super(Material.ROCK);
@@ -57,12 +57,12 @@ public class BlockUmberstone extends Block implements IHasCustomItem, ISubBlocks
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { TYPE });
+		return new BlockStateContainer(this, TYPE);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (EnumType type : EnumType.values())
 			list.add(new ItemStack(item, 1, type.ordinal()));
 	}
@@ -82,7 +82,7 @@ public class BlockUmberstone extends Block implements IHasCustomItem, ISubBlocks
 
 	@Override
 	public List<String> getModels() {
-		List<String> models = new ArrayList<String>();
+		List<String> models = new ArrayList<>();
 		for (EnumType type : EnumType.values())
 			models.add(type.getName());
 		return models;
@@ -110,7 +110,6 @@ public class BlockUmberstone extends Block implements IHasCustomItem, ISubBlocks
 
 		@Override
 		public ItemStack createStack() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 	}

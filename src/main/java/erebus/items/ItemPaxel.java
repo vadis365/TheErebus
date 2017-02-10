@@ -1,9 +1,12 @@
 package erebus.items;
 
+import erebus.ModTabs;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import erebus.ModTabs;
+
+import javax.annotation.Nullable;
 
 public abstract class ItemPaxel extends ItemTool {
 
@@ -13,7 +16,7 @@ public abstract class ItemPaxel extends ItemTool {
 	}
 
 	@Override
-	public int getHarvestLevel(ItemStack stack, String toolClass) {
+	public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState) {
 		if ("pickaxe".equals(toolClass) || "axe".equals(toolClass) || "shovel".equals(toolClass))
 			return ToolMaterial.IRON.getHarvestLevel();
 		return -1;

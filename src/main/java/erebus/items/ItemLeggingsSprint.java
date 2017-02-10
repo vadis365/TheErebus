@@ -1,7 +1,9 @@
 package erebus.items;
 
-import java.util.List;
-
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,13 +12,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
+
+import java.util.List;
 
 public class ItemLeggingsSprint extends ItemArmor {
 
@@ -70,7 +71,7 @@ public class ItemLeggingsSprint extends ItemArmor {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
+	public void getSubItems(Item id, CreativeTabs tab, NonNullList list) {
 		list.add(new ItemStack(id, 1, 0));
 
 		ItemStack is = new ItemStack(id, 1, 0);
