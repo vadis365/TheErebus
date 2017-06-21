@@ -9,6 +9,7 @@ import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockMud;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
@@ -24,8 +25,11 @@ import erebus.blocks.SmallMushroom;
 import erebus.items.ItemMaterials;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -124,6 +128,8 @@ public class ModBlocks {
 			} else {
 				ResourceLocation name = block.getRegistryName();
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + name.getResourcePath(), "inventory"));
+			if(block instanceof BlockLeavesErebus)
+				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
 			}
 	}
 

@@ -1,8 +1,8 @@
 {
 	"variants": {
 			"axis=y":    { "model": "erebus:log_asper" },
-        	"axis=z":    { "model": "erebus:log_asper_side" },
-        	"axis=x":    { "model": "erebus:log_asper_side", "y": 90 },
+        	"axis=z":    { "model": "erebus:log_asper", "x": 90 },
+        	"axis=x":    { "model": "erebus:log_asper", "x": 90, "y": 90 },
         	"axis=none": { "model": "erebus:log_asper_bark" }
 	}
 }

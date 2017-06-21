@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import erebus.Erebus;
 import erebus.ModTabs;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
@@ -13,7 +12,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -39,7 +37,6 @@ public class BlockLeavesErebus extends BlockLeaves {
 		setSoundType(SoundType.PLANT);
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 		setDefaultState(blockState.getBaseState().withProperty(CHECK_DECAY, true).withProperty(DECAYABLE, true));
-		Erebus.proxy.setCustomStateMap(this, new StateMap.Builder().ignore(new IProperty[] { CHECK_DECAY, DECAYABLE }).build());
 	}
 
 	@Override

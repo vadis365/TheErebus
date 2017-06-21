@@ -21,7 +21,8 @@ public class ItemDoorErebus extends ItemBlock {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
 		if (facing != EnumFacing.UP)
 			return EnumActionResult.FAIL;
 		else {
@@ -39,7 +40,7 @@ public class ItemDoorErebus extends ItemBlock {
 				ItemDoor.placeDoor(world, pos, enumfacing, this.block, flag);
 				SoundType soundtype = this.block.getSoundType();
 				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-				stack.stackSize--;
+				stack.shrink(1);
 				return EnumActionResult.SUCCESS;
 			} else
 				return EnumActionResult.FAIL;

@@ -1,8 +1,8 @@
 {
-	"variants": {
-		"axis=y":  { "model": "erebus:log_marshwood" },
-        "axis=z":   { "model": "erebus:log_marshwood_side" },
-        "axis=x":   { "model": "erebus:log_marshwood_side", "y": 90 },
-        "axis=none": { "model": "erebus:log_marshwood_bark" }
-	}
+    "variants": {
+            "axis=y":    { "model": "erebus:log_marshwood" },
+            "axis=z":    { "model": "erebus:log_marshwood", "x": 90 },
+            "axis=x":    { "model": "erebus:log_marshwood", "x": 90, "y": 90 },
+            "axis=none": { "model": "erebus:log_marshwood_bark" }
+    }
 }

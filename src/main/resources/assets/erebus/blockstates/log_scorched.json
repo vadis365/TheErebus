@@ -1,8 +1,8 @@
 {
-	"variants": {
-		"axis=y":  { "model": "erebus:log_scorched" },
-        "axis=z":   { "model": "erebus:log_scorched_side" },
-        "axis=x":   { "model": "erebus:log_scorched_side", "y": 90 },
-        "axis=none": { "model": "erebus:log_scorched_bark" }
-	}
+    "variants": {
+            "axis=y":    { "model": "erebus:log_scorched" },
+            "axis=z":    { "model": "erebus:log_scorched", "x": 90 },
+            "axis=x":    { "model": "erebus:log_scorched", "x": 90, "y": 90 },
+            "axis=none": { "model": "erebus:log_scorched_bark" }
+    }
 }

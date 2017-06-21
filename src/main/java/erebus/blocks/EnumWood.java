@@ -2,13 +2,13 @@ package erebus.blocks;
 
 import java.util.Locale;
 
+import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import erebus.ModBlocks;
 
 public enum EnumWood implements IStringSerializable {
 

@@ -1,7 +1,0 @@
-{
-	"parent": "block/column_side",
-	"textures": {
-		"side": "erebus:blocks/log_asper",
-        	"end": "erebus:blocks/log_asper_top"
-	}
-}

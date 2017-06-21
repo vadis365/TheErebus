@@ -1,8 +1,8 @@
 {
-	"variants": {
-		"axis=y":  { "model": "erebus:log_mossbark" },
-        "axis=z":   { "model": "erebus:log_mossbark_side" },
-        "axis=x":   { "model": "erebus:log_mossbark_side", "y": 90 },
-        "axis=none": { "model": "erebus:log_mossbark_bark" }
-	}
+    "variants": {
+            "axis=y":    { "model": "erebus:log_mossbark" },
+            "axis=z":    { "model": "erebus:log_mossbark", "x": 90 },
+            "axis=x":    { "model": "erebus:log_mossbark", "x": 90, "y": 90 },
+            "axis=none": { "model": "erebus:log_mossbark_bark" }
+    }
 }
