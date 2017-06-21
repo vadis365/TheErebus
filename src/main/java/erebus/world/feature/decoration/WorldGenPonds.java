@@ -80,7 +80,7 @@ public class WorldGenPonds extends WorldGenerator {
     						BlockPos blockpos = position.add(xx, yy - 1, zz);
 
                             if (worldIn.getBlockState(blockpos).getBlock() == Blocks.DIRT && worldIn.getLightFor(EnumSkyBlock.SKY, position.add(xx, yy, zz)) > 0) {
-                                Biome biome = worldIn.getBiomeGenForCoords(blockpos);
+                                Biome biome = worldIn.getBiome(blockpos);
 
                                 if (biome.topBlock.getBlock() == Blocks.MYCELIUM)
                                     worldIn.setBlockState(blockpos, Blocks.MYCELIUM.getDefaultState(), 2);
@@ -95,7 +95,7 @@ public class WorldGenPonds extends WorldGenerator {
     					worldIn.setBlockState(position.add(xx, 4, zz), Blocks.ICE.getDefaultState(), 2);
     		
 
-    		Biome biome = worldIn.getBiomeGenForCoords(new BlockPos(position.getX() + 8, 0, position.getZ() + 8));
+    		Biome biome = worldIn.getBiome(new BlockPos(position.getX() + 8, 0, position.getZ() + 8));
     		boolean isJungle = biome instanceof BiomeUndergroundJungle;
     		boolean isSwamp = biome instanceof BiomeSubmergedSwamp;
     		

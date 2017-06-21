@@ -1,5 +1,9 @@
 package erebus.items;
 
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +15,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
 
 public class ItemArmorWaterStriders extends ItemArmor {
 
@@ -39,9 +39,9 @@ public class ItemArmorWaterStriders extends ItemArmor {
 
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		int x = MathHelper.floor_double(player.posX);
-		int y = MathHelper.floor_double(player.posY - player.getYOffset());
-		int z = MathHelper.floor_double(player.posZ);
+		int x = MathHelper.floor(player.posX);
+		int y = MathHelper.floor(player.posY - player.getYOffset());
+		int z = MathHelper.floor(player.posZ);
 
 		player.posY += -player.motionY;
 

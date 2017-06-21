@@ -43,8 +43,8 @@ public class WorldProviderErebus extends WorldProvider {
 	
     public Block getGroundAvailableUp(BlockPos pos) {
         BlockPos blockpos1;
-        for (blockpos1 = new BlockPos(pos.getX(), 20, pos.getZ()); !this.worldObj.isAirBlock(blockpos1.up()); blockpos1 = blockpos1.up());
-        return this.worldObj.getBlockState(blockpos1).getBlock();
+        for (blockpos1 = new BlockPos(pos.getX(), 20, pos.getZ()); !this.world.isAirBlock(blockpos1.up()); blockpos1 = blockpos1.up());
+        return this.world.getBlockState(blockpos1).getBlock();
     }
 
 	@Override
@@ -55,8 +55,8 @@ public class WorldProviderErebus extends WorldProvider {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Vec3d getFogColor(float celestialAngle, float partialTickTime) {
-		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		Biome biome = worldObj.getBiomeGenForCoords(new BlockPos(player.posX, player.posY, player.posZ));
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		Biome biome = world.getBiome(new BlockPos(player.posX, player.posY, player.posZ));
 		if (biome instanceof BiomeBaseErebus)
 			targetFogColor = ((BiomeBaseErebus) biome).getFogRGB();
 		else
@@ -94,11 +94,11 @@ public class WorldProviderErebus extends WorldProvider {
 	}
 
 	@Override
-	public void createBiomeProvider() {
+    protected void init() {
 		setDimension(ConfigHandler.INSTANCE.erebusDimensionID);
-		biomeProvider = new BiomeProviderErebus(worldObj);
+		biomeProvider = new BiomeProviderErebus(world);
 		hasNoSky = true;
-	}
+    }
 
 	@Override
 	public DimensionType getDimensionType() {
@@ -107,7 +107,7 @@ public class WorldProviderErebus extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new ChunkProviderErebus(worldObj, worldObj.getSeed());
+		return new ChunkProviderErebus(world, world.getSeed());
 	}
 
 	@Override
@@ -143,16 +143,16 @@ public class WorldProviderErebus extends WorldProvider {
 
 	@Override
     public BlockPos getRandomizedSpawnPoint() {
-        BlockPos ret = this.worldObj.getSpawnPoint();
-        boolean isAdventure = worldObj.getWorldInfo().getGameType() == GameType.ADVENTURE;
+        BlockPos ret = this.world.getSpawnPoint();
+        boolean isAdventure = world.getWorldInfo().getGameType() == GameType.ADVENTURE;
         int spawnFuzz = 100;
-        int border = MathHelper.floor_double(worldObj.getWorldBorder().getClosestDistance(ret.getX(), ret.getZ()));
+        int border = MathHelper.floor(world.getWorldBorder().getClosestDistance(ret.getX(), ret.getZ()));
         if (border < spawnFuzz) spawnFuzz = border;
         if (spawnFuzz < 1) spawnFuzz = 1;
         int spawnFuzzHalf = spawnFuzz / 2;
 
-        if (!getHasNoSky() && !isAdventure)
-            ret = worldObj.getTopSolidOrLiquidBlock(ret.add(worldObj.rand.nextInt(spawnFuzzHalf) - spawnFuzz, 0, worldObj.rand.nextInt(spawnFuzzHalf) - spawnFuzz));
+        if (!hasNoSky() && !isAdventure)
+            ret = world.getTopSolidOrLiquidBlock(ret.add(world.rand.nextInt(spawnFuzzHalf) - spawnFuzz, 0, world.rand.nextInt(spawnFuzzHalf) - spawnFuzz));
 
         return ret;
     }

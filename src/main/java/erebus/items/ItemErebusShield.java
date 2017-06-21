@@ -81,15 +81,15 @@ public class ItemErebusShield extends ItemShield {
         System.out.println(damage);
         if (damage >= material.getDurability(EntityEquipmentSlot.CHEST)) {
             entityIn.renderBrokenItemStack(stack);
-            --stack.stackSize;
+            stack.shrink(1);
 
             if (entityIn instanceof EntityPlayer) {
                 EntityPlayer entityplayer = (EntityPlayer) entityIn;
                 entityplayer.addStat(StatList.getObjectBreakStats(stack.getItem()));
             }
 
-            if (stack.stackSize < 0) {
-                stack.stackSize = 0;
+            if (stack.getCount() < 0) {
+                stack.setCount(0);
             }
 
         } else {

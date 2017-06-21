@@ -1,11 +1,11 @@
 package erebus.items;
 
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemStack;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.items.ItemMaterials.EnumType;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemStack;
 
 public class ItemJadeHoe extends ItemHoe {
 

@@ -1,5 +1,11 @@
 package erebus;
 
+import erebus.core.handler.EntityShieldDamageEvent;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.lib.Reference;
+import erebus.proxy.CommonProxy;
+import erebus.world.WorldProviderErebus;
+import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -11,14 +17,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import erebus.core.handler.EntityShieldDamageEvent;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.lib.Reference;
-import erebus.proxy.CommonProxy;
-import erebus.world.WorldProviderErebus;
-import erebus.world.teleporter.TeleporterHandler;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)//, dependencies = Reference.DEPENDENCIES)
 public class Erebus {
 
 	@SidedProxy(clientSide = Reference.PROXY_CLIENT, serverSide = Reference.PROXY_COMMON)

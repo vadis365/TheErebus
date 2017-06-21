@@ -98,7 +98,7 @@ public class BlockBerryBush extends Block {
     }
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return BUSH_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
 	}
 
@@ -119,7 +119,7 @@ public class BlockBerryBush extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		int age = getAge(state);
 		if (age == 3) {
 			world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, 2.0F);
@@ -149,7 +149,7 @@ public class BlockBerryBush extends Block {
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn) {
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		int age = getAge(state);
 		if (world.isAirBlock(pos.down())) {
 			if (age == 3)

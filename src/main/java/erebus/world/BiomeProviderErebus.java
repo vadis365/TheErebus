@@ -5,6 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
+import erebus.ModBiomes;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.genlayer.GenLayerErebus;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,9 +21,6 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.WorldTypeEvent;
-import erebus.ModBiomes;
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.genlayer.GenLayerErebus;
 
 public class BiomeProviderErebus extends BiomeProvider {
 
@@ -62,13 +64,12 @@ public class BiomeProviderErebus extends BiomeProvider {
 	 * @Override public float[] getTemperatures(float temperatureArray[], int x, int z, int sizeX, int sizeZ) { if (temperatureArray == null || temperatureArray.length < sizeX * sizeZ) temperatureArray = new float[sizeX * sizeZ]; Arrays.fill(temperatureArray, 0, sizeX * sizeZ, temperature); return temperatureArray; }
 	 */
 
-	@Override
-	public Biome[] loadBlockGeneratorData(Biome biomesForGeneration[], int x, int z, int sizeX, int sizeZ) {
-		return getBiomeGenAt(biomesForGeneration, x, z, sizeX, sizeZ, true);
-	}
+    public Biome[] getBiomes(@Nullable Biome[] oldBiomeList, int x, int z, int width, int depth) {
+        return this.getBiomes(oldBiomeList, x, z, width, depth, true);
+    }
 
 	@Override
-	public Biome[] getBiomeGenAt(Biome[] biomesForGeneration, int x, int z, int sizeX, int sizeZ, boolean useCache) {
+	public Biome[] getBiomes(@Nullable Biome[] biomesForGeneration, int x, int z, int sizeX, int sizeZ, boolean useCache) {
 		IntCache.resetIntCache();
 
 		if (biomesForGeneration == null || biomesForGeneration.length < sizeX * sizeZ)

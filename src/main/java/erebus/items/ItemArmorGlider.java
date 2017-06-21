@@ -2,6 +2,16 @@ package erebus.items;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.client.model.armor.ModelArmorGlider;
+import erebus.client.model.armor.ModelArmorPowered;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -18,17 +28,6 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.client.model.armor.ModelArmorGlider;
-import erebus.client.model.armor.ModelArmorPowered;
-import erebus.items.ItemMaterials.EnumType;
 
 public class ItemArmorGlider extends ItemArmor {
 	public ItemArmorGlider() {

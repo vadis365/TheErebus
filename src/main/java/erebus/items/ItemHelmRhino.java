@@ -1,5 +1,10 @@
 package erebus.items;
 
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.client.model.armor.ModelRhinoHelm;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,11 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.client.model.armor.ModelRhinoHelm;
-import erebus.items.ItemMaterials.EnumType;
 
 public class ItemHelmRhino extends ItemArmor {
 

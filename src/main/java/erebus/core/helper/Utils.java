@@ -82,7 +82,7 @@ public class Utils {
 			double d2 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			EntityItem entityitem = new EntityItem(world, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, is);
 			entityitem.setPickupDelay(10);
-			world.spawnEntityInWorld(entityitem);
+			world.spawnEntity(entityitem);
 		}
 	}
 
@@ -105,7 +105,7 @@ public class Utils {
 			entityItem.motionY = 0;
 			entityItem.motionZ = 0;
 			entityItem.setPickupDelay(10);
-			world.spawnEntityInWorld(entityItem);
+			world.spawnEntity(entityItem);
 		}
 	}
 
@@ -154,13 +154,13 @@ public class Utils {
 				if (!(iinventory instanceof ISidedInventory) || ((ISidedInventory) iinventory).canExtractItem(slot, invtStack, side)) {
 					ItemStack copy = invtStack.copy();
 					if (maxStackSize <= 0)
-						iinventory.setInventorySlotContents(slot, null);
+						iinventory.setInventorySlotContents(slot, ItemStack.EMPTY);
 					else {
-						int amount = Math.min(maxStackSize, invtStack.stackSize);
-						invtStack.stackSize -= amount;
-						copy.stackSize = amount;
-						if (invtStack.stackSize <= 0)
-							iinventory.setInventorySlotContents(slot, null);
+						int amount = Math.min(maxStackSize, invtStack.getCount());
+						invtStack.shrink(amount);
+						copy.setCount(amount);
+						if (invtStack.isEmpty())
+							iinventory.setInventorySlotContents(slot, ItemStack.EMPTY);
 					}
 					return copy;
 				}
@@ -175,7 +175,7 @@ public class Utils {
 		boolean flag = addItemStackToInventory(iinventory, entity.getEntityItem());
 		if (flag)
 			entity.setDead();
-		else if (entity.getEntityItem().stackSize <= 0)
+		else if (entity.getEntityItem().isEmpty())
 			entity.setDead();
 		return flag;
 	}
@@ -188,7 +188,7 @@ public class Utils {
 		if (iinventory == null)
 			return false;
 
-		if (stack == null || stack.stackSize <= 0)
+		if (stack.isEmpty())
 			return false;
 
 		IInventory invt = getInventory(iinventory);
@@ -203,19 +203,19 @@ public class Utils {
 			} else if (!iinventory.isItemValidForSlot(slot, stack))
 				continue;
 
-			if (iinventory.getStackInSlot(slot) == null) {
+			if (iinventory.getStackInSlot(slot).isEmpty()) {
 				iinventory.setInventorySlotContents(slot, stack.copy());
-				stack.stackSize = 0;
+				stack.setCount(0);
 				return true;
 			} else {
 				ItemStack invtStack = iinventory.getStackInSlot(slot);
-				if (invtStack.stackSize < Math.min(invtStack.getMaxStackSize(), iinventory.getInventoryStackLimit()) && areStacksTheSame(invtStack, stack, false)) {
-					invtStack.stackSize += stack.stackSize;
-					if (invtStack.stackSize > invtStack.getMaxStackSize()) {
-						stack.stackSize = invtStack.stackSize - invtStack.getMaxStackSize();
-						invtStack.stackSize = invtStack.getMaxStackSize();
+				if (invtStack.getCount() < Math.min(invtStack.getMaxStackSize(), iinventory.getInventoryStackLimit()) && areStacksTheSame(invtStack, stack, false)) {
+					invtStack.setCount(stack.getCount());
+					if (invtStack.getCount() > invtStack.getMaxStackSize()) {
+						stack.shrink(stack.getMaxStackSize() - invtStack.getCount());
+						invtStack.setCount(stack.getMaxStackSize());
 					} else
-						stack.stackSize = 0;
+						stack.setCount(0);
 					return true;
 				}
 			}
@@ -266,12 +266,12 @@ public class Utils {
 	}
 
 	public static boolean areStacksTheSame(ItemStack stack1, ItemStack stack2, boolean matchSize) {
-		if (stack1 == null || stack2 == null)
+		if (stack1.isEmpty() || stack2.isEmpty())
 			return false;
 
 		if (stack1.getItem() == stack2.getItem())
 			if (stack1.getItemDamage() == stack2.getItemDamage() || isWildcard(stack1.getItemDamage()) || isWildcard(stack2.getItemDamage()))
-				if (!matchSize || stack1.stackSize == stack2.stackSize) {
+				if (!matchSize || stack1.getCount() == stack2.getCount()) {
 					if (stack1.hasTagCompound() && stack2.hasTagCompound())
 						return stack1.getTagCompound().equals(stack2.getTagCompound());
 					return stack1.hasTagCompound() == stack2.hasTagCompound();
@@ -310,9 +310,9 @@ public class Utils {
 		IInventory iinventory = (IInventory) tile;
 		for (int i = 0; i < iinventory.getSizeInventory(); i++) {
 			ItemStack stack = iinventory.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.stackSize > 0) {
+			if (!stack.isEmpty() && stack.getItem() != null && stack.getCount()> 0) {
 				dropStack(tile.getWorld(), tile.getPos(), stack.copy());
-				iinventory.setInventorySlotContents(i, null);
+				iinventory.setInventorySlotContents(i, ItemStack.EMPTY);
 			}
 		}
 		tile.markDirty();
@@ -323,7 +323,7 @@ public class Utils {
 	}
 
 	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize, int... slots) {
-		if (stack == null)
+		if (stack.isEmpty())
 			return false;
 		iinventory = getInventory(iinventory);
 
@@ -333,9 +333,9 @@ public class Utils {
 			if (areStacksTheSame(invtStack, stack, false)) {
 				if (ignoreSize)
 					return true;
-				totalSize += invtStack.stackSize;
+				totalSize += invtStack.getCount();
 			}
-			if (totalSize >= stack.stackSize)
+			if (totalSize >= stack.getCount())
 				return true;
 		}
 
@@ -355,16 +355,16 @@ public class Utils {
 		for (int slot : slots) {
 			ItemStack invtStack = iinventory.getStackInSlot(slot);
 			if (areStacksTheSame(invtStack, stack, false) || areStacksSameOre(invtStack, stack))
-				if (invtStack.stackSize >= stack.stackSize) {
-					invtStack.stackSize -= stack.stackSize;
-					if (invtStack.stackSize <= 0)
+				if (invtStack.getCount() >= stack.getCount()) {
+					invtStack.shrink(stack.getMaxStackSize() - invtStack.getCount());
+					if (invtStack.getCount() <= 0)
 						iinventory.setInventorySlotContents(slot, getContainer(stack));
 					return true;
 				} else {
-					totalDel += invtStack.stackSize;
+					totalDel += invtStack.getCount();
 					iinventory.setInventorySlotContents(slot, getContainer(stack));
 				}
-			if (totalDel == stack.stackSize)
+			if (totalDel == stack.getCount())
 				return true;
 		}
 		return false;

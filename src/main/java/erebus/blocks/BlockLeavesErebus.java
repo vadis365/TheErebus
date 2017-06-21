@@ -20,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -48,7 +49,7 @@ public class BlockLeavesErebus extends BlockLeaves {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
 		list.add(new ItemStack(item));
 	}
 

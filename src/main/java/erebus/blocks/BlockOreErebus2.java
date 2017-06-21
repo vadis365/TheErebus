@@ -46,7 +46,7 @@ public class BlockOreErebus2 extends BlockOreErebus {
 	@Override
 	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
-		return MathHelper.getRandomIntegerInRange(rand, minXP, maxXP);
+		return MathHelper.getInt(rand, minXP, maxXP);
 	}
 
 	@Override

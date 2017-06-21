@@ -2,11 +2,16 @@ package erebus.world.teleporter;
 
 import java.util.UUID;
 
+import erebus.Erebus;
+import erebus.core.handler.configs.ConfigHandler;
+import gnu.trove.map.TObjectByteMap;
+import gnu.trove.map.hash.TObjectByteHashMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityMinecartContainer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -16,10 +21,6 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
-import erebus.Erebus;
-import erebus.core.handler.configs.ConfigHandler;
-import gnu.trove.map.TObjectByteMap;
-import gnu.trove.map.hash.TObjectByteHashMap;
 
 public final class TeleporterHandler {
 	private static TeleporterHandler INSTANCE = new TeleporterHandler();
@@ -79,7 +80,7 @@ public final class TeleporterHandler {
 		if (dimensionId != 0 && dimensionId != ConfigHandler.INSTANCE.erebusDimensionID)
 			throw new IllegalArgumentException("Supplied invalid dimension ID into Erebus teleporter: " + dimensionId);
 
-		World world = entity.worldObj;
+		World world = entity.getEntityWorld();
 
 		if (!world.isRemote && !entity.isDead)
 			if (entity instanceof EntityPlayerMP) {
@@ -114,11 +115,11 @@ public final class TeleporterHandler {
 				world.theProfiler.startSection("reposition");
 				mcServer.getPlayerList().transferEntityToWorld(entity, dimensionId, worldCurrent, worldTarget, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				world.theProfiler.endStartSection("reloading");
-				Entity newEntity = EntityList.createEntityByName(EntityList.getEntityString(entity), worldTarget);
+				Entity newEntity = EntityList.createEntityByIDFromName(new ResourceLocation(EntityList.getEntityString(entity)), world);
 
 				if (newEntity != null) {
 					//newEntity.copyDataFromOld(entity);
-					worldTarget.spawnEntityInWorld(newEntity);
+					worldTarget.spawnEntity(newEntity);
 				}
 
 				entity.isDead = true;

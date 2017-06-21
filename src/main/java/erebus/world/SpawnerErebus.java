@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.loot.IWeightProvider;
+import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -24,10 +28,6 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.loot.IWeightProvider;
-import gnu.trove.map.hash.TObjectIntHashMap;
 
 public final class SpawnerErebus {
 
@@ -125,7 +125,7 @@ public final class SpawnerErebus {
 				z = coords.chunkZPos * 16 + rand.nextInt(16);
 				y = 10 + rand.nextInt(100);
 				BlockPos blockCoord = new BlockPos(x, y, z);
-				Biome biome = world.getBiomeGenForCoords(blockCoord);
+				Biome biome = world.getBiome(blockCoord);
 				if (!(biome instanceof BiomeBaseErebus))
 					break;
 
@@ -173,7 +173,7 @@ public final class SpawnerErebus {
 							entity.setLocationAndAngles(fx, fy, fz, yaw, 0F);
 
 							if (entity.getCanSpawnHere()) {
-								world.spawnEntityInWorld(entity);
+								world.spawnEntity(entity);
 								entity = null;
 
 								if (--spawnGroup <= 0)

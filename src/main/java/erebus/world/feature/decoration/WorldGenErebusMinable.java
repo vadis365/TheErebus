@@ -2,6 +2,7 @@ package erebus.world.feature.decoration;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
@@ -9,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModBlocks;
 
 public class WorldGenErebusMinable extends WorldGenerator {
 	private Block minableBlock;
@@ -51,12 +51,12 @@ public class WorldGenErebusMinable extends WorldGenerator {
 			double spreadFactor = rand.nextDouble() * numberOfBlocks * 0.0625D;
 			double maxDistXZ = (MathHelper.sin(placed * (float) Math.PI / numberOfBlocks) + 1F) * spreadFactor + 1D;
 			double maxDistY = (MathHelper.sin(placed * (float) Math.PI / numberOfBlocks) + 1F) * spreadFactor + 1D;
-			int minX = MathHelper.floor_double(centerX - maxDistXZ * 0.5D);
-			int minY = MathHelper.floor_double(centerY - maxDistY * 0.5D);
-			int minZ = MathHelper.floor_double(centerZ - maxDistXZ * 0.5D);
-			int maxX = MathHelper.floor_double(centerX + maxDistXZ * 0.5D);
-			int maxY = MathHelper.floor_double(centerY + maxDistY * 0.5D);
-			int maxZ = MathHelper.floor_double(centerZ + maxDistXZ * 0.5D);
+			int minX = MathHelper.floor(centerX - maxDistXZ * 0.5D);
+			int minY = MathHelper.floor(centerY - maxDistY * 0.5D);
+			int minZ = MathHelper.floor(centerZ - maxDistXZ * 0.5D);
+			int maxX = MathHelper.floor(centerX + maxDistXZ * 0.5D);
+			int maxY = MathHelper.floor(centerY + maxDistY * 0.5D);
+			int maxZ = MathHelper.floor(centerZ + maxDistXZ * 0.5D);
 
 			for (int xx = minX; xx <= maxX; ++xx) {
 				double d12 = (xx + 0.5D - centerX) / (maxDistXZ * 0.5D);

@@ -2,6 +2,10 @@ package erebus.items;
 
 import java.util.List;
 
+import erebus.ModItems;
+import erebus.ModMaterials;
+import erebus.ModTabs;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,13 +14,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.ModMaterials;
-import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
 
 public class ItemLeggingsSprint extends ItemArmor {
 
@@ -70,10 +71,10 @@ public class ItemLeggingsSprint extends ItemArmor {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
-		list.add(new ItemStack(id, 1, 0));
+	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+		list.add(new ItemStack(item, 1, 0));
 
-		ItemStack is = new ItemStack(id, 1, 0);
+		ItemStack is = new ItemStack(item, 1, 0);
 		if (!is.hasTagCompound())
 			is.setTagCompound(new NBTTagCompound());
 		is.getTagCompound().setByte("upgradeTier", (byte) 9);

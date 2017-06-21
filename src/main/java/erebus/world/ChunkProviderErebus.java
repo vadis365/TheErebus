@@ -137,7 +137,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	public Chunk provideChunk(int x, int z) {
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
-		biomesForGeneration = worldObj.getBiomeProvider().loadBlockGeneratorData(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = worldObj.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
 		generateTerrain(x, z, chunkprimer);
 		replaceBlocksForBiome(x, z, biomesForGeneration, chunkprimer);
 
@@ -397,7 +397,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 		BlockPos blockCoordOffSet = new BlockPos(blockCoord.getX() + 16, 0, blockCoord.getZ() + 16);
 		//int blockCoordX = x * 16;
 		//int blockCoordZ = z * 16;
-		Biome biomeBase = worldObj.getBiomeGenForCoords(blockCoordOffSet);
+		Biome biomeBase = worldObj.getBiome(blockCoordOffSet);
 
 		if (biomeBase instanceof BiomeBaseErebus) {
 			BiomeBaseErebus biome = (BiomeBaseErebus) biomeBase;
@@ -427,18 +427,6 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	}
 
 	@Override
-	public Chunk getLoadedChunk(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean unloadQueuedChunks() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
 		// TODO Auto-generated method stub
 		return false;
@@ -451,7 +439,7 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	}
 
 	@Override
-	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position) {
+	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -459,7 +447,26 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 	@Override
 	public void recreateStructures(Chunk chunkIn, int x, int z) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
+	@Override
+	public Chunk getLoadedChunk(int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean tick() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isChunkGeneratedAt(int p_191062_1_, int p_191062_2_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

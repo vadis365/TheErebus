@@ -3,6 +3,11 @@ package erebus.blocks;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.sun.istack.internal.Nullable;
+
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -22,12 +27,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
-import com.sun.istack.internal.Nullable;
-
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
-
 public class BlockBamboo extends Block implements IPlantable {
 
 	protected static final AxisAlignedBB BAMBOO_AABB = new AxisAlignedBB(0.2D, 0.0D, 0.2D, 0.8D, 1.0D, 0.8D);
@@ -46,7 +45,7 @@ public class BlockBamboo extends Block implements IPlantable {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World world, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return BAMBOO_AABB;
 	}
 
@@ -116,7 +115,7 @@ public class BlockBamboo extends Block implements IPlantable {
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn) {
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		checkForDrop(world, pos, state);
 	}
 

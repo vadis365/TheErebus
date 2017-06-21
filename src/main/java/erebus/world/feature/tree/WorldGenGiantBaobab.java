@@ -3,6 +3,13 @@ package erebus.world.feature.tree;
 import java.util.List;
 import java.util.Random;
 
+import erebus.ModItems;
+import erebus.blocks.EnumWood;
+import erebus.items.ItemMaterials.EnumType;
+import erebus.world.loot.IPostProcess;
+import erebus.world.loot.LootItemStack;
+import erebus.world.loot.LootUtil;
+import erebus.world.loot.WeightedLootList;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -16,13 +23,6 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.ModItems;
-import erebus.blocks.EnumWood;
-import erebus.items.ItemMaterials.EnumType;
-import erebus.world.loot.IPostProcess;
-import erebus.world.loot.LootItemStack;
-import erebus.world.loot.LootUtil;
-import erebus.world.loot.WeightedLootList;
 
 public class WorldGenGiantBaobab extends WorldGenerator {
 
@@ -47,10 +47,10 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			if (is.getItem() == Items.ENCHANTED_BOOK || rand.nextBoolean() && (is.getItem() instanceof ItemTool || is.getItem() instanceof ItemArmor || is.getItem() instanceof ItemSword)) {
 				boolean enchBook = is.getItem() == Items.ENCHANTED_BOOK;
 				if (enchBook)
-					is.setItem(Items.BOOK);
+					is = new ItemStack(Items.BOOK);
 				List enchList = EnchantmentHelper.buildEnchantmentList(rand, is, 7 + rand.nextInt(10), true);
 				if (enchBook)
-					is.setItem(Items.ENCHANTED_BOOK);
+					is = new ItemStack(Items.ENCHANTED_BOOK);
 
 				if (enchList != null && enchList.size() > 0)
 					for (int a = 0; a < enchList.size(); ++a) {

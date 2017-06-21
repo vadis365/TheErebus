@@ -2,6 +2,11 @@ package erebus.blocks;
 
 import java.util.Random;
 
+import erebus.ModItems;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.items.ItemErebusFood;
+import erebus.items.ItemMaterials.EnumType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -20,11 +25,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.items.ItemErebusFood;
-import erebus.items.ItemMaterials.EnumType;
 
 public class BlockDarkFruitVine extends BlockBush {
 
@@ -145,7 +145,7 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		int age = getAge(state);
 
 		if (age == 5) {
@@ -195,7 +195,7 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn) {
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		int age = getAge(state);
 		ItemStack item = null;
 		if (world.isAirBlock(pos.up())) {

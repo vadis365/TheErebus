@@ -21,6 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -62,7 +63,7 @@ public class BlockUmberstone extends Block implements IHasCustomItem, ISubBlocks
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (EnumType type : EnumType.values())
 			list.add(new ItemStack(item, 1, type.ordinal()));
 	}
