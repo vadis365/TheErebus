@@ -1,11 +1,5 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockTallGrass;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import erebus.ModBlocks;
 import erebus.blocks.BlockDarkFruitVine;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -13,6 +7,12 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.tree.WorldGenCypressTree;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 
 public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
