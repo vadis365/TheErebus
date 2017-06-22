@@ -18,4 +18,6 @@ public class ItemJadeSword extends ItemSword {
 	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
 		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumType.JADE.ordinal();
 	}
+
 }
+

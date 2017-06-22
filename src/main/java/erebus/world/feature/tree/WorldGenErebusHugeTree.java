@@ -87,7 +87,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 						for (int var13 = 0; var13 < 5; ++var13) {
 							var11 = x + (int) (1.5F + MathHelper.cos(var15) * var13);
 							var12 = z + (int) (1.5F + MathHelper.sin(var15) * var13);
-							world.setBlockState(new BlockPos(var11, var14 - 3 + var13 / 2, var12), woodBlock.getStateFromMeta(0), 2);
+							setBlockAndNotifyAdequately(world, new BlockPos(var11, var14 - 3 + var13 / 2, var12), woodBlock.getDefaultState());
 						}
 					}
 
@@ -97,7 +97,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 
 
 						if (block.getBlock().isReplaceable(world, pos) || block.getBlock().isLeaves(block, world, pos)) {
-							world.setBlockState(new BlockPos(x, y + var10, z), woodBlock.getStateFromMeta(0), 2);
+							setBlockAndNotifyAdequately(world, new BlockPos(x, y + var10, z), woodBlock.getDefaultState());
 							/* TODO FIX THORNS
 							if (var10 > 0) {
 								if (rand.nextInt(3) > 0 && world.isAirBlock(new BlockPos(x - 1, y + var10, z)) && thorns == true)
@@ -112,7 +112,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 							pos = new BlockPos(x + 1, y + var10, z);
 							block = world.getBlockState(pos);
 							if (block.getBlock().isReplaceable(world, pos) || block.getBlock().isLeaves(block, world, pos)) {
-								world.setBlockState(new BlockPos(x + 1, y + var10, z), woodBlock.getStateFromMeta(0), 2);
+								setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + var10, z), woodBlock.getDefaultState());
 								/* TODO FIX THORNS
 								if (var10 > 0) {
 									if (rand.nextInt(3) > 0 && world.isAirBlock(new BlockPos(x + 2, y + var10, z)) && thorns == true)
@@ -126,7 +126,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 							block = world.getBlockState(pos);
 
 							if (block.getBlock().isReplaceable(world, pos) || block.getBlock().isLeaves(block, world, pos)) {
-								world.setBlockState(new BlockPos(x + 1, y + var10, z + 1), woodBlock.getStateFromMeta(0), 2);
+								setBlockAndNotifyAdequately(world, new BlockPos(x + 1, y + var10, z + 1), woodBlock.getDefaultState());
 								/* TODO FIX THORNS
 								if (var10 > 0) {
 									if (rand.nextInt(3) > 0 && world.isAirBlock(new BlockPos(x + 2, y + var10, z + 1)) && thorns == true)
@@ -141,7 +141,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 							block = world.getBlockState(pos);
 							
 							if (block.getBlock().isReplaceable(world, pos) || block.getBlock().isLeaves(block, world, pos)) {
-								world.setBlockState(new BlockPos(x, y + var10, z + 1), woodBlock.getStateFromMeta(0), 2);
+								setBlockAndNotifyAdequately(world, new BlockPos(x, y + var10, z + 1), woodBlock.getDefaultState());
 								/* TODO FIX THORNS
 								if (var10 > 0) {
 									if (rand.nextInt(3) > 0 && world.isAirBlock(new BlockPos(x - 1, y + var10, z + 1)) && thorns == true)
@@ -178,7 +178,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 					IBlockState block = world.getBlockState(new BlockPos(var11, var8, var13));
 
 					if ((var12 >= 0 || var14 >= 0 || var12 * var12 + var14 * var14 <= var10 * var10) && (var12 <= 0 && var14 <= 0 || var12 * var12 + var14 * var14 <= (var10 + 1) * (var10 + 1)) && (par6Random.nextInt(4) != 0 || var12 * var12 + var14 * var14 <= (var10 - 1) * (var10 - 1)) && (block == null || block.getBlock().canBeReplacedByLeaves(block, world, new BlockPos(var11, var8, var13))))
-						world.setBlockState(new BlockPos(var11, var8, var13), leafBlock.getStateFromMeta(0), 2);
+					setBlockAndNotifyAdequately(world, new BlockPos(var11, var8, var13), leafBlock.getDefaultState());
 				}
 			}
 		}

@@ -121,6 +121,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				if (r <= 6) {
 					xx = x + 9 + rand.nextInt(14);
 					zz = z + 9 + rand.nextInt(14);
+					pos = new BlockPos(xx, yy, zz);
 					treeGen = genTreeJungleLarge;
 				} else if (r <= 11)
 					treeGen = genTreeMahogany;
@@ -128,6 +129,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				if (r <= 16) {
 					xx = x + 9 + rand.nextInt(14);
 					zz = z + 9 + rand.nextInt(14);
+					pos = new BlockPos(xx, yy, zz);
 					((WorldGenErebusHugeTree) genTreeMahoganyLarge).prepare(20 + rand.nextInt(5));
 					treeGen = genTreeMahoganyLarge;
 				} else if (r <= 20)

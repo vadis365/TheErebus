@@ -2,11 +2,11 @@ package erebus.world.biomes;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 
 public class BiomeUndergroundJungle extends BiomeBaseErebus {
 	public BiomeUndergroundJungle(BiomeProperties properties) {

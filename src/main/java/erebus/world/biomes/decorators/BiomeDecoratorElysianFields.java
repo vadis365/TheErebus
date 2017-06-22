@@ -202,7 +202,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 	public static class BiomeDecoratorElysianForest extends BiomeDecoratorElysianFields {
 		@Override
 		public void decorate() {
-		System.out.println("Elysian Forest Decorating");
+		//System.out.println("Elysian Forest Decorating");
 			// System.out.println("decorating at "+x+","+z);
 		}
 	/*	private final WorldGenerator genOakTree = new WorldGenTrees(false, 5, 0, 0, false);

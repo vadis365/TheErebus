@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import erebus.ModBlocks;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.entity.Entity;
@@ -59,10 +60,10 @@ final class TeleporterErebus extends Teleporter {
 
 				for (int j = roundZ - checkRadius; j <= roundZ + checkRadius; j++)
 					for (int h = worldServerInstance.getActualHeight() - 1; h >= 0; h--)
-						if (worldServerInstance.getBlockState(new BlockPos(i, h, j)).getBlock() == Blocks.STONE) { //ModBlocks.gaeanKeystone
+						if (worldServerInstance.getBlockState(new BlockPos(i, h, j)).getBlock() == ModBlocks.UMBERSTONE && worldServerInstance.getBlockState(new BlockPos(i, h + 1, j)).getBlock() == Blocks.AIR) { //ModBlocks.gaeanKeystone
 							double X = i + 0.5 - entityIn.posX;
 							double Z = j + 0.5 - entityIn.posZ;
-							double Y = h - 2 + 0.5 - entityIn.posY;
+							double Y = h + 0.5 - entityIn.posY;
 							double dist = X * X + Z * Z + Y * Y;
 
 							if (distToPortal < 0.0 || dist < distToPortal) {

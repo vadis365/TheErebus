@@ -349,7 +349,6 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 
 		setBlockRect(x, z, x + 1, z + 1, y + 1, mushroom, bulbFullMeta);
 		setBlockRect(x - 1, z - 1, x + 2, z + 2, y, mushroom, bulbFullMeta);
-System.out.println("Did Gen");
 		return true;
 	}
 
