@@ -2,6 +2,7 @@ package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockDarkFruitVine;
+import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -185,19 +186,18 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 				break; // double chance, lower amount per vein
 		}
 	}
-/*
+
 	@Override
 	public void generateFeature(FeatureType featureType) {
-		if (featureType == FeatureType.REDGEM)
+		if (featureType == FeatureType.RED_GEM)
 			for (attempt = 0; attempt < 2 + rand.nextInt(2); attempt++)
-				genRedGem.generate(world, rand, x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ());
+				genRedGem.generate(world, rand, new BlockPos(x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ()));
 		else
 			super.generateFeature(featureType);
 	}
 
 	/*
-	 * SUB-BIOME - ELYSIAN FOREST
-	 */
+
 
 	public static class BiomeDecoratorElysianForest extends BiomeDecoratorElysianFields {
 		@Override
@@ -246,6 +246,6 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 			}
 
 			super.decorate();
-		}*/
-	}
+		}
+	}*/
 }

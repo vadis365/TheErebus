@@ -1,14 +1,15 @@
 package erebus.world.biomes.decorators;
 
+import erebus.world.biomes.decorators.data.FeatureType;
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import net.minecraft.block.BlockSand;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
-import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.tree.WorldGenEucalyptusTree;
 
 
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
@@ -120,13 +121,13 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 				break; // more rare
 		}
 	}
-/*
+
 	@Override
 	public void generateFeature(FeatureType featureType) {
-		if (featureType == FeatureType.REDGEM)
+		if (featureType == FeatureType.RED_GEM)
 			for (attempt = 0; attempt < 8; attempt++)
-				genRedGem.generate(world, rand, x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ());
+				genRedGem.generate(world, rand, new BlockPos(x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ()));
 		else
 			super.generateFeature(featureType);
-	}*/
+	}
 }

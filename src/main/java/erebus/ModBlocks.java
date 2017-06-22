@@ -16,6 +16,7 @@ import erebus.blocks.BlockOreErebus2;
 import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockQuickSand;
+import erebus.blocks.BlockRedGem;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
@@ -66,6 +67,7 @@ public class ModBlocks {
 	public static final Block AMBER = new BlockAmber();
 	public static final Block MUD = new BlockMud();
 	public static final Block QUICK_SAND = new BlockQuickSand();
+	public static final Block RED_GEM = new BlockRedGem();
 
 	public static final Block CROP_TURNIP = new BlockTurnip();
 	public static final Block CROP_CABBAGE = new BlockCabbage();
@@ -131,6 +133,7 @@ public class ModBlocks {
 			if(block instanceof BlockLeavesErebus)
 				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
 			}
+		
 	}
 
 	public static interface IHasCustomItem {

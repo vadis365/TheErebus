@@ -108,11 +108,5 @@ public class BlockUmberstone extends Block implements IHasCustomItem, ISubBlocks
 		public String getName() {
 			return name().toLowerCase(Locale.ENGLISH);
 		}
-
-		@Override
-		public ItemStack createStack() {
-			// TODO Auto-generated method stub
-			return null;
-		}
 	}
 }

@@ -1,5 +1,5 @@
 package erebus.world.biomes.decorators.data;
 
 public enum FeatureType {
-	REDGEM
+	RED_GEM
 }

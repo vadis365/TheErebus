@@ -46,8 +46,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	private final WorldGenBush genMushroomsRed = new WorldGenBush(Blocks.RED_MUSHROOM);
 	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(Blocks.BROWN_MUSHROOM_BLOCK);
 	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(Blocks.RED_MUSHROOM_BLOCK);
-/*
-	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern, 1);
+
+/*	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern, 1);
 	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead, 1);
 */	
 // TODO FIX the below trees

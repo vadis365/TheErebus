@@ -1,145 +1,161 @@
 package erebus.blocks;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.IHasCustomItemBlock;
+import erebus.ModBlocks;
+import erebus.ModBlocks.IHasCustomItem;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.item.ItemMaterials.DATA;
-import erebus.item.block.ItemBlockGeneric;
+import erebus.api.IErebusEnum;
+import erebus.items.ItemMaterials;
+import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRedGem extends Block implements IHasCustomItemBlock {
-
-	public static final String[] iconPaths = new String[] { "redgem", "redlampOn", "redlampOff" };
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+public class BlockRedGem extends Block implements IHasCustomItem, ISubBlocksBlock {
+	
+	public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", EnumType.class);
 
 	public BlockRedGem() {
-		super(Material.glass);
+		super(Material.GLASS);
 		setHardness(0.3F);
 		setLightLevel(1F);
-		setStepSound(soundTypeGlass);
-		setBlockName("erebus.redGem");
-		setCreativeTab(ModTabs.blocks);
+		setSoundType(SoundType.GLASS);
+		setCreativeTab(ModTabs.BLOCKS);
+		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumType.RED_GEM));
 	}
-
+	
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		icons = new IIcon[iconPaths.length];
-
-		int i = 0;
-		for (String path : iconPaths)
-			icons[i++] = iconRegister.registerIcon("erebus:" + path);
-	}
-
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		if (meta < 0 || meta >= icons.length)
-			return null;
-		return icons[meta];
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { TYPE });
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
-		list.add(new ItemStack(id, 1, 0));
-		list.add(new ItemStack(id, 1, 1));
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+		for (EnumType type : EnumType.values())
+			list.add(new ItemStack(item, 1, type.ordinal()));
 	}
 
 	@Override
-	public int damageDropped(int meta) {
-		return meta == 1 || meta == 2 ? 1 : DATA.RED_GEM.ordinal();
+	public int damageDropped(IBlockState state) {
+		return state.getValue(TYPE) == EnumType.RED_LAMP_ON || state.getValue(TYPE) == EnumType.RED_LAMP_OFF ? 1 : ItemMaterials.EnumType.RED_GEM.ordinal();
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
-		if (meta == 0)
+    public int quantityDropped(IBlockState state, int fortune, Random random) {
+		if (getMetaFromState(state) == 0)
 			return 1 + random.nextInt(2 + fortune);
 		return 1;
+    }
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return state.getValue(TYPE) == EnumType.RED_GEM ? ModItems.MATERIALS : Item.getItemFromBlock(ModBlocks.RED_GEM);
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random random, int fortune) {
-		return meta == 0 ? ModItems.materials : Item.getItemFromBlock(this);
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(TYPE, EnumType.values()[meta]);
 	}
 
 	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
-		int realMeta = world.getBlockMetadata(x, y, z);
-		return realMeta == 2 ? 1 : realMeta;
+	public int getMetaFromState(IBlockState state) {
+		EnumType type = state.getValue(TYPE);
+		return type.ordinal();
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 2)
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+		if (state.getValue(TYPE) == EnumType.RED_LAMP_ON)
 			return false;
 		return true;
-	}
+    }
 
 	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 0 || meta == 1)
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+		if (state.getValue(TYPE) == EnumType.RED_GEM || state.getValue(TYPE) == EnumType.RED_LAMP_ON)
 			return 15;
 		return 0;
+    }
+
+	@Override
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		if (!world.isRemote) {
+			if (state.getValue(TYPE) == EnumType.RED_LAMP_OFF && !world.isBlockPowered(pos))
+				world.scheduleBlockUpdate(pos, this, 0, 4);
+			else if (state.getValue(TYPE) == EnumType.RED_LAMP_ON && world.isBlockPowered(pos))
+				world.setBlockState(pos, state.withProperty(TYPE, EnumType.RED_LAMP_OFF), 2);
+		}
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (!world.isRemote && (meta == 1 || meta == 2))
-			if (meta == 2 && !world.isBlockIndirectlyGettingPowered(x, y, z))
-				world.scheduleBlockUpdate(x, y, z, this, 4);
-			else if (meta != 2 && world.isBlockIndirectlyGettingPowered(x, y, z))
-				world.setBlock(x, y, z, this, 2, 2);
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (!world.isRemote) {
+			if (state.getValue(TYPE) == EnumType.RED_LAMP_OFF && !world.isBlockPowered(pos)) {
+				world.setBlockState(pos, state.withProperty(TYPE, EnumType.RED_LAMP_ON), 2);
+				world.scheduleUpdate(pos, this, 4);
+			} else if (state.getValue(TYPE) == EnumType.RED_LAMP_ON && world.isBlockPowered(pos))
+				world.setBlockState(pos, state.withProperty(TYPE, EnumType.RED_LAMP_OFF), 2);
+		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborID) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (!world.isRemote && (meta == 1 || meta == 2))
-			if (meta == 2 && !world.isBlockIndirectlyGettingPowered(x, y, z))
-				world.scheduleBlockUpdate(x, y, z, this, 4);
-			else if (meta != 2 && world.isBlockIndirectlyGettingPowered(x, y, z))
-				world.setBlock(x, y, z, this, meta + 1, 2);
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		if (!world.isRemote) {
+			if (state.getValue(TYPE) == EnumType.RED_LAMP_OFF && !world.isBlockPowered(pos))
+				world.setBlockState(pos, state.withProperty(TYPE, EnumType.RED_LAMP_ON), 2);
+		}
+	}
+	
+	@Override
+	public ItemBlock getItemBlock() {
+		return ItemBlockEnum.create(this, EnumType.class);
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (!world.isRemote && meta == 2 && !world.isBlockIndirectlyGettingPowered(x, y, z))
-			world.setBlock(x, y, z, this, 1, 2);
+	public List<String> getModels() {
+		List<String> models = new ArrayList<String>();
+		for (EnumType type : EnumType.values())
+			models.add(type.getName());
+		return models;
 	}
 
-	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 0 && side == ForgeDirection.UP)
-			return true;
-		if (meta == 1 || meta == 2)
-			return true;
-		return false;
-	}
+	public enum EnumType implements IErebusEnum {
 
-	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
-		return ItemBlockGeneric.class;
+		RED_GEM,
+		RED_LAMP_OFF,
+		RED_LAMP_ON;
+
+		@Override
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModBlocks.RED_GEM, size, ordinal());
+		}
+
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ENGLISH);
+		}
 	}
 }

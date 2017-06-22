@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"type=red_gem": { "model": "erebus:red_gem" },
+		"type=red_lamp_off": { "model": "erebus:red_lamp_off" },
+		"type=red_lamp_on": { "model": "erebus:red_lamp_on" }
+	}
+}

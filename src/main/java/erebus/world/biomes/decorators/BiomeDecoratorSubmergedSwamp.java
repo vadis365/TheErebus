@@ -1,5 +1,6 @@
 package erebus.world.biomes.decorators;
 
+import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -254,13 +255,13 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				break; // more rare
 		}
 	}
-/*
+
 	@Override
 	public void generateFeature(FeatureType featureType) {
-		if (featureType == FeatureType.REDGEM)
+		if (featureType == FeatureType.RED_GEM)
 			for (attempt = 0; attempt < 8; attempt++)
-				genRedGem.generate(world, rand, x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ());
+				genRedGem.generate(world, rand, new BlockPos(x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ()));
 		else
 			super.generateFeature(featureType);
-	}*/
+	}
 }

@@ -1,14 +1,15 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 import erebus.ModBlocks;
+import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.plant.WorldGenPricklyPairPatch;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenLakes;
 
 
 public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
@@ -77,16 +78,16 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 	//				break;
 					
 	}
-/*
+
 	@Override
 	public void generateFeature(FeatureType featureType) {
-		if (featureType == FeatureType.REDGEM)
+		if (featureType == FeatureType.RED_GEM)
 			for (attempt = 0; attempt < 10; attempt++)
-				genRedGem.generate(world, rand, x + offsetXZ(), rand.nextInt(64), z + offsetXZ());
+				genRedGem.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(64), z + offsetXZ()));
 		else
 			super.generateFeature(featureType);
 	}
-*/
+
 	@Override
 	@SuppressWarnings("incomplete-switch")
 	protected void modifyOreGen(OreSettings oreGen, OreType oreType, boolean extraOres) {

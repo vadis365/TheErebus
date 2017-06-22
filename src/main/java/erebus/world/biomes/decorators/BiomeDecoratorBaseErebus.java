@@ -6,6 +6,7 @@ import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenRedGem;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,7 +20,7 @@ public abstract class BiomeDecoratorBaseErebus {
 
 	private static final OreSettings oreGen = new OreSettings();
 
-	//protected static final WorldGenRedGem genRedGem = new WorldGenRedGem();
+	protected static final WorldGenRedGem genRedGem = new WorldGenRedGem();
 
 	protected BiomeDecoratorBaseErebus() {
 	}
@@ -68,12 +69,12 @@ public abstract class BiomeDecoratorBaseErebus {
 	}
 
 	protected void generateFeature(FeatureType featureType) {
-	/*	switch (featureType) {
-			case REDGEM:
+		switch (featureType) {
+			case RED_GEM:
 				for (attempt = 0; attempt < 5; attempt++)
-					genRedGem.generate(world, rand, x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ());
+					genRedGem.generate(world, rand, new BlockPos(x + offsetXZ(), 64 + rand.nextInt(60), z + offsetXZ()));
 				break;
-		}*/
+		}
 	}
 
 	protected final int offsetXZ() {
