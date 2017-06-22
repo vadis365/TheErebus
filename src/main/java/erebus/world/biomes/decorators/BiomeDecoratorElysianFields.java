@@ -196,7 +196,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 			super.generateFeature(featureType);
 	}
 
-	/*
+	
 
 
 	public static class BiomeDecoratorElysianForest extends BiomeDecoratorElysianFields {
@@ -246,6 +246,6 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 			}
 
 			super.decorate();
-		}
-	}*/
+		}*/
+	}
 }
