@@ -9,6 +9,7 @@ import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockMud;
 import erebus.blocks.BlockOreErebus;
@@ -76,6 +77,7 @@ public class ModBlocks {
 	public static final Block SWAMP_BERRY_BUSH = new BlockBerryBush("SWAMP");
 	public static final Block DARK_FRUIT_VINE = new BlockDarkFruitVine();
 	public static final Block PRICKLY_PEAR = new BlockPricklyPear();
+	public static final Block GIANT_FLOWER = new BlockGiantFlower();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new SmallMushroom(false);

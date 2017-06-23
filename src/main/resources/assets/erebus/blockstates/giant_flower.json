@@ -1,0 +1,20 @@
+{
+	"variants": {
+		"type=petal_black": { "model": "erebus:petal_black" },
+        "type=petal_red": { "model": "erebus:petal_red" },
+        "type=petal_brown": { "model": "erebus:petal_brown" },
+        "type=petal_blue": { "model": "erebus:petal_blue" },
+        "type=petal_purple": { "model": "erebus:petal_purple" },
+        "type=petal_cyan": { "model": "erebus:petal_cyan" },
+        "type=petal_light_gray": { "model": "erebus:petal_light_gray" },
+        "type=petal_gray": { "model": "erebus:petal_gray" },
+        "type=petal_pink": { "model": "erebus:petal_pink" },
+        "type=petal_yellow": { "model": "erebus:petal_yellowl" },
+        "type=petal_light_blue": { "model": "erebus:petal_light_blue" },
+        "type=petal_magenta": { "model": "erebus:petal_magenta" },
+        "type=petal_orange": { "model": "erebus:petal_orange" },
+        "type=petal_white": { "model": "erebus:petal_white" },
+        "type=exploding_stigma": { "model": "erebus:stigma" },
+        "type=stem": { "model": "erebus:stem" }
+	}
+}
