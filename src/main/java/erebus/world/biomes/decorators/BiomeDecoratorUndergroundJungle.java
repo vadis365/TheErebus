@@ -149,7 +149,6 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 
 				if (treeGen != null)
 					treeGen.generate(world, rand, pos.up());
-				break;
 			}
 		}
 

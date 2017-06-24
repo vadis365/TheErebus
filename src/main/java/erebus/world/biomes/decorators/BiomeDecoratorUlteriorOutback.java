@@ -10,6 +10,7 @@ import erebus.world.feature.tree.WorldGenBalsamTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockSand;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
@@ -100,7 +101,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 					} else if (rand.nextInt(80) == 0)
 						world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIRE_BLOOM), 2);
 					else
-						world.setBlockState(pos.up(), Blocks.TALLGRASS.getDefaultState(), 2);
+						world.setBlockState(pos.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 2);
 					break;
 				}
 			}
