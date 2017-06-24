@@ -40,7 +40,7 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		BlockPos bottom = pos.down();
 		IBlockState state = world.getBlockState(pos);
 		ItemStack stack = player.getHeldItem(hand);
-		if (facing.getIndex() == 0 && stack.getItemDamage() == EnumType.DARK_FRUIT_SEEDS.ordinal() && player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(bottom, facing, stack)) {
+		if (facing.getIndex() == 0 && stack.getItemDamage() == EnumErebusMaterialsType.DARK_FRUIT_SEEDS.ordinal() && player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(bottom, facing, stack)) {
 			Block block = state.getBlock();
 			if (block != null && state.getMaterial().blocksMovement()) {
 				world.setBlockState(bottom, ModBlocks.DARK_FRUIT_VINE.getDefaultState(), 2);
@@ -58,11 +58,11 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		if (!world.isRemote) {
 			int damage = stack.getItemDamage();
 
-			if (damage == EnumType.BIO_VELOCITY.ordinal() || damage == EnumType.SUPERNATURAL_VELOCITY.ordinal()) {
+			if (damage == EnumErebusMaterialsType.BIO_VELOCITY.ordinal() || damage == EnumErebusMaterialsType.SUPERNATURAL_VELOCITY.ordinal()) {
 				PotionEffect currentSpeed = player.getActivePotionEffect(MobEffects.SPEED);
 
-				if (currentSpeed == null || damage == EnumType.BIO_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 1 || damage == EnumType.SUPERNATURAL_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(MobEffects.SPEED, damage == EnumType.BIO_VELOCITY.ordinal() ? 280 : 210, damage == EnumType.BIO_VELOCITY.ordinal() ? 1 : 3, true, false));
+				if (currentSpeed == null || damage == EnumErebusMaterialsType.BIO_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 1 || damage == EnumErebusMaterialsType.SUPERNATURAL_VELOCITY.ordinal() && currentSpeed.getAmplifier() < 3) {
+					player.addPotionEffect(new PotionEffect(MobEffects.SPEED, damage == EnumErebusMaterialsType.BIO_VELOCITY.ordinal() ? 280 : 210, damage == EnumErebusMaterialsType.BIO_VELOCITY.ordinal() ? 1 : 3, true, false));
 					//PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_VELOCITY_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 					if (!player.capabilities.isCreativeMode)
 						stack.shrink(1);
@@ -70,11 +70,11 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 					return new ActionResult(EnumActionResult.PASS, stack);
 			}
 
-			if (damage == EnumType.CAMO_POWDER.ordinal()) {
+			if (damage == EnumErebusMaterialsType.CAMO_POWDER.ordinal()) {
 				PotionEffect currentVisibility = player.getActivePotionEffect(MobEffects.INVISIBILITY);
 
-				if (currentVisibility == null || damage == EnumType.CAMO_POWDER.ordinal() && currentVisibility.getAmplifier() < 3) {
-					player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, damage == EnumType.CAMO_POWDER.ordinal() ? 280 : 210, damage == EnumType.CAMO_POWDER.ordinal() ? 1 : 3, true, false));
+				if (currentVisibility == null || damage == EnumErebusMaterialsType.CAMO_POWDER.ordinal() && currentVisibility.getAmplifier() < 3) {
+					player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, damage == EnumErebusMaterialsType.CAMO_POWDER.ordinal() ? 280 : 210, damage == EnumErebusMaterialsType.CAMO_POWDER.ordinal() ? 1 : 3, true, false));
 				//	PacketPipeline.sendToAll(new PacketSound(PacketSound.SOUND_CAMO_USE, player.posX, player.posY, player.posZ, 1.2F, 1F));
 					if (!player.capabilities.isCreativeMode)
 						stack.shrink(1);
@@ -90,32 +90,32 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		for (EnumType type : EnumType.values())
+		for (EnumErebusMaterialsType type : EnumErebusMaterialsType.values())
 			list.add(type.createStack(1));
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		int meta = stack.getItemDamage();
-		meta = Math.min(Math.max(meta, 0), EnumType.values().length - 1);
-		return super.getUnlocalizedName() + "." + EnumType.values()[meta].name().toLowerCase();
+		meta = Math.min(Math.max(meta, 0), EnumErebusMaterialsType.values().length - 1);
+		return super.getUnlocalizedName() + "." + EnumErebusMaterialsType.values()[meta].name().toLowerCase();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack) {
-		return stack.getItemDamage() == EnumType.WHETSTONE_POWDER.ordinal();
+		return stack.getItemDamage() == EnumErebusMaterialsType.WHETSTONE_POWDER.ordinal();
 	}
 
 	@Override
 	public List<String> getModels() {
 		List<String> models = new ArrayList<String>();
-		for (EnumType type : EnumType.values())
+		for (EnumErebusMaterialsType type : EnumErebusMaterialsType.values())
 			models.add(type.getName());
 		return models;
 	}
 
-	public enum EnumType implements IErebusEnum {
+	public enum EnumErebusMaterialsType implements IErebusEnum {
 
 		PLATE_EXO,
 		JADE,

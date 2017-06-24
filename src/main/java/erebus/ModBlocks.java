@@ -9,26 +9,28 @@ import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockMud;
+import erebus.blocks.BlockMushroomSmall;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
 import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockQuickSand;
 import erebus.blocks.BlockRedGem;
+import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
-import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.ErebusPortal;
-import erebus.blocks.BlockMushroomSmall;
-import erebus.items.ItemMaterials;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -60,11 +62,11 @@ public class ModBlocks {
 	public static final Block ORE_TIN = new BlockOreErebus(1);
 	public static final Block ORE_LEAD = new BlockOreErebus(1);
 	public static final Block ORE_ALUMINIUM = new BlockOreErebus(1);
-	public static final Block ORE_JADE = new BlockOreErebus2(2, ModItems.MATERIALS, ItemMaterials.EnumType.JADE.ordinal(), 1, 1, 3, 7);
+	public static final Block ORE_JADE = new BlockOreErebus2(2, ModItems.MATERIALS, EnumErebusMaterialsType.JADE.ordinal(), 1, 1, 3, 7);
 	public static final Block ORE_ENCRUSTED_DIAMOND = new BlockOreErebus2(2, Items.DIAMOND, 0, 1, 1, 3, 7);
-	public static final Block ORE_FOSSIL = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.SHARD_BONE.ordinal(), 1, 1, 0, 2);
-	public static final Block ORE_GNEISS = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.GNEISS_ROCK.ordinal(), 1, 1, 0, 2);
-	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, ItemMaterials.EnumType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
+	public static final Block ORE_FOSSIL = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.SHARD_BONE.ordinal(), 1, 1, 0, 2);
+	public static final Block ORE_GNEISS = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.GNEISS_ROCK.ordinal(), 1, 1, 0, 2);
+	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
 	public static final Block AMBER = new BlockAmber();
 	public static final Block MUD = new BlockMud();
@@ -80,6 +82,7 @@ public class ModBlocks {
 	public static final Block PRICKLY_PEAR = new BlockPricklyPear();
 	public static final Block GIANT_FLOWER = new BlockGiantFlower();
 	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma();
+	public static final Block SMALL_PLANT = new BlockSmallPlant();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new BlockMushroomSmall(false);
@@ -136,6 +139,9 @@ public class ModBlocks {
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + name.getResourcePath(), "inventory"));
 			if(block instanceof BlockLeavesErebus)
 				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
+			if(block instanceof BlockSmallPlant)
+				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockTallGrass.TYPE, BlockTallGrass.TYPE }).build());
+			
 			}
 
 	}

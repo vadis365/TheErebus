@@ -37,7 +37,7 @@ public class BlockSaplingErebus extends BlockSapling {
 	public BlockSaplingErebus(EnumWood wood) {
 		this.wood = wood;
 		setSoundType(SoundType.PLANT);
-		setCreativeTab(ModTabs.BLOCKS);
+		setCreativeTab(ModTabs.PLANTS);
 		Erebus.proxy.setCustomStateMap(this, new StateMap.Builder().ignore(new IProperty[] { TYPE }).build());
 	}
 

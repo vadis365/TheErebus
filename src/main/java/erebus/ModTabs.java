@@ -1,5 +1,6 @@
 package erebus;
 
+import erebus.items.ItemMaterials;
 import erebus.lib.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -25,6 +26,13 @@ public class ModTabs {
 		@Override
 		public ItemStack getTabIconItem() {
 			return new ItemStack(ModItems.JADE_PICKAXE);
+		}
+	};
+
+	public static final CreativeTabs PLANTS = new CreativeTabs(Reference.MOD_ID + ".plants") {
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ModItems.MATERIALS,1, ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.ordinal());
 		}
 	};
 }

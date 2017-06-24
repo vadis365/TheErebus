@@ -7,7 +7,7 @@ import com.sun.istack.internal.Nullable;
 
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -36,7 +36,7 @@ public class BlockBamboo extends Block implements IPlantable {
 		super(Material.WOOD);
 		setDefaultState(blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
 		setTickRandomly(true);
-		setCreativeTab(ModTabs.BLOCKS);
+		setCreativeTab(ModTabs.PLANTS);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class BlockBamboo extends Block implements IPlantable {
 
 	@Override
 	public int damageDropped(IBlockState state) {
-		return EnumType.BAMBOO.ordinal();
+		return EnumErebusMaterialsType.BAMBOO.ordinal();
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class BlockBamboo extends Block implements IPlantable {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		if (this.getMetaFromState(state) == 0 && RANDOM.nextInt(getMetaFromState(state) >= 8 ? 35 : 20) == 0)
 			ret.add(new ItemStack(Item.getItemFromBlock(EnumWood.BAMBOO.getSapling())));
-		ret.add(new ItemStack(ModItems.MATERIALS, 1, EnumType.BAMBOO.ordinal()));
+		ret.add(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.BAMBOO.ordinal()));
 		return ret;
 	}
 

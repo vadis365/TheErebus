@@ -11,7 +11,7 @@ import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.client.model.armor.ModelArmorGlider;
 import erebus.client.model.armor.ModelArmorPowered;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -94,7 +94,7 @@ public class ItemArmorGlider extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumType.GLIDER_WING.ordinal();
+		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.GLIDER_WING.ordinal();
 	}
 
 	@Override

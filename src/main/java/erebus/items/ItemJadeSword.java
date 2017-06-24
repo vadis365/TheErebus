@@ -3,7 +3,7 @@ package erebus.items;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 
@@ -16,7 +16,7 @@ public class ItemJadeSword extends ItemSword {
 
 	@Override
 	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
-		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumType.JADE.ordinal();
+		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.JADE.ordinal();
 	}
 
 }

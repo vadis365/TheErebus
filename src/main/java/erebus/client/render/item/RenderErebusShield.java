@@ -39,9 +39,9 @@ public class RenderErebusShield extends TileEntitySpecialRenderer<TileEntity> {
     }
     
     private void renderItem() {
-        ItemStack stack = new ItemStack(ModItems.MATERIALS, 1, ItemMaterials.EnumType.PLATE_EXO.ordinal()); //Test item - works yay!
-        RenderHelper.enableStandardItemLighting();
-		GlStateManager.enableLighting();
+        ItemStack stack = new ItemStack(ModItems.MATERIALS, 1, ItemMaterials.EnumErebusMaterialsType.PLATE_EXO.ordinal()); //Test item - works yay!
+       // RenderHelper.enableStandardItemLighting();
+		//GlStateManager.enableLighting();
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(0.0D, 0.0625D, 0.1D);
 		GlStateManager.scale(1.25f, 1.25f, 1.25f);

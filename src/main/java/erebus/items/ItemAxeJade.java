@@ -7,7 +7,7 @@ import com.google.common.collect.Sets;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -34,6 +34,6 @@ public class ItemAxeJade extends ItemTool {
 
 	@Override
 	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
-		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumType.JADE.ordinal();
+		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.JADE.ordinal();
 	}
 }

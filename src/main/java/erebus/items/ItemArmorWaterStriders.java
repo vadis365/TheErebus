@@ -3,7 +3,7 @@ package erebus.items;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +34,7 @@ public class ItemArmorWaterStriders extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumType.HYDROFUGE.ordinal();
+		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.HYDROFUGE.ordinal();
 	}
 
 	@Override

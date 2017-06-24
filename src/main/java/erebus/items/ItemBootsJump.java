@@ -3,7 +3,7 @@ package erebus.items;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -33,7 +33,7 @@ public class ItemBootsJump extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumType.ELASTIC_FIBRE.ordinal();
+		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.ELASTIC_FIBRE.ordinal();
 	}
 
 	@Override

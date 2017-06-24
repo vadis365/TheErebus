@@ -6,7 +6,7 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.items.ItemErebusFood;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -41,7 +41,7 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 
 	public BlockDarkFruitVine() {
 		setHardness(0.0F);
-		setCreativeTab(ModTabs.BLOCKS);
+		setCreativeTab(ModTabs.PLANTS);
 		setSoundType(SoundType.PLANT);
 		setDefaultState(blockState.getBaseState().withProperty(DARK_VINE_AGE, Integer.valueOf(0)));
 	}
@@ -158,7 +158,7 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 		}
 
 		if (age == 6) {
-			ItemStack item = new ItemStack(ModItems.MATERIALS, 1, EnumType.DARK_FRUIT_SEEDS.ordinal());
+			ItemStack item = new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.DARK_FRUIT_SEEDS.ordinal());
 			world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.5F, 2.0F);
 			if (!player.inventory.addItemStackToInventory(item))
 				Utils.dropStack(world, pos, item);
@@ -178,7 +178,7 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 		}
 
 		if (age == 6) {
-			item = new ItemStack(ModItems.MATERIALS, 2, EnumType.DARK_FRUIT_SEEDS.ordinal());
+			item = new ItemStack(ModItems.MATERIALS, 2, EnumErebusMaterialsType.DARK_FRUIT_SEEDS.ordinal());
 			Utils.dropStack(world, pos, item);
 		}
 	}
@@ -204,7 +204,7 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 				Utils.dropStack(world, pos, item);
 			}
 			if (age == 6) {
-				item = new ItemStack(ModItems.MATERIALS, 1, EnumType.DARK_FRUIT_SEEDS.ordinal());
+				item = new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.DARK_FRUIT_SEEDS.ordinal());
 				Utils.dropStack(world, pos, item);
 			}
 			world.setBlockToAir(pos);

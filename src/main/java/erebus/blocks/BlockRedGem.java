@@ -11,7 +11,7 @@ import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.api.IErebusEnum;
-import erebus.items.ItemMaterials;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -60,7 +60,7 @@ public class BlockRedGem extends Block implements IHasCustomItem, ISubBlocksBloc
 
 	@Override
 	public int damageDropped(IBlockState state) {
-		return state.getValue(TYPE) == EnumType.RED_LAMP_ON || state.getValue(TYPE) == EnumType.RED_LAMP_OFF ? 1 : ItemMaterials.EnumType.RED_GEM.ordinal();
+		return state.getValue(TYPE) == EnumType.RED_LAMP_ON || state.getValue(TYPE) == EnumType.RED_LAMP_OFF ? 1 : EnumErebusMaterialsType.RED_GEM.ordinal();
 	}
 
 	@Override

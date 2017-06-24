@@ -28,7 +28,7 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.items.ItemErebusFood.EnumFoodType;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 
 public class BlockBerryBush extends Block {
 	private String type;
@@ -41,7 +41,7 @@ public class BlockBerryBush extends Block {
 		setTickRandomly(true);
 		setHardness(0.2F);
 		setLightOpacity(1);
-		setCreativeTab(ModTabs.BLOCKS);
+		setCreativeTab(ModTabs.PLANTS);
 		setSoundType(SoundType.PLANT);
 	}
 
@@ -178,7 +178,7 @@ public class BlockBerryBush extends Block {
 	public ItemStack getBerry() {
 		ItemStack item = null;
 		if (type == "JADE")
-			item = new ItemStack(ModItems.MATERIALS, 1, EnumType.JADE_BERRIES.ordinal());
+			item = new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.JADE_BERRIES.ordinal());
 		if (type == "HEART")
 			item = new ItemStack(ModItems.HEART_BERRIES, 1);
 		if (type == "SWAMP")

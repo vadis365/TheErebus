@@ -22,7 +22,7 @@ public class BlockMushroomSmall extends BlockMushroom {
 	public BlockMushroomSmall(boolean requires2x2ToGrow) {
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
-		setCreativeTab(ModTabs.BLOCKS);
+		setCreativeTab(ModTabs.PLANTS);
 		this.requires2x2ToGrow = requires2x2ToGrow;
 	}
 

@@ -4,7 +4,7 @@ import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.client.model.armor.ModelRhinoHelm;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,7 +25,7 @@ public class ItemHelmRhino extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumType.PLATE_EXO_RHINO.ordinal();
+		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.PLATE_EXO_RHINO.ordinal();
 	}
 
 	@Override

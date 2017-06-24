@@ -117,9 +117,9 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 				return new ItemStack(Items.BOWL);
 			case MELONADE:
 			case MELONADE_SPARKLY:
-				return ItemMaterials.EnumType.SMOOTHIE_GLASS.createStack();
+				return ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack();
 			case TITAN_STEW_COOKED:
-				return ItemMaterials.EnumType.STEW_POT.createStack();
+				return ItemMaterials.EnumErebusMaterialsType.STEW_POT.createStack();
 			default:
 				return null;
 		}

@@ -1,0 +1,11 @@
+{
+   "variants": {
+        "type=nettle": { "model": "erebus:nettle" },
+        "type=nettle_flowered": { "model": "erebus:nettle_flowered" },
+        "type=swamp_plant": { "model": "erebus:swamp_plant" },
+        "type=desert_shrub": { "model": "erebus:desert_shrub" },
+        "type=fire_bloom": { "model": "erebus:fire_bloom" },
+        "type=fiddle_head": { "model": "erebus:fiddle_head" },
+        "type=fern": { "model": "erebus:fern" }
+    }
+}

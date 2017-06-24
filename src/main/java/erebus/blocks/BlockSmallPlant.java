@@ -2,122 +2,145 @@ package erebus.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
-import erebus.ModBlocks.IHasCustomItemBlock;
+import erebus.ModBlocks.IHasCustomItem;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.item.ItemMaterials;
-import erebus.item.block.ItemBlockColoured;
+import erebus.api.IErebusEnum;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.BlockTallGrass;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSmallPlant extends BlockTallGrass implements IHasCustomItemBlock {
+public class BlockSmallPlant extends BlockTallGrass implements IHasCustomItem, ISubBlocksBlock {
+	public static final PropertyEnum<EnumSmallPlantType> PLANT_TYPE = PropertyEnum.create("type", EnumSmallPlantType.class);
 
-	protected final String name;
-	protected final boolean colour;
-
-	public BlockSmallPlant(String name, boolean colour) {
-		this.name = name;
+	public BlockSmallPlant() {
 		setHardness(0.0F);
-		this.colour = colour;
-		setStepSound(soundTypeGrass);
-		setCreativeTab(ModTabs.plants);
-		setBlockName("erebus." + name);
+		setSoundType(SoundType.PLANT);
+		setCreativeTab(ModTabs.PLANTS);
+		setDefaultState(blockState.getBaseState().withProperty(PLANT_TYPE, EnumSmallPlantType.NETTLE));
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
-		super.updateTick(world, x, y, z, rand);
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { PLANT_TYPE });
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+		for (EnumSmallPlantType type : EnumSmallPlantType.values())
+			list.add(new ItemStack(item, 1, type.ordinal()));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.FIRE_BLOOM)
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() + 1D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D, new int[0]);
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(PLANT_TYPE, EnumSmallPlantType.values()[meta]);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		EnumSmallPlantType type = state.getValue(PLANT_TYPE);
+		return type.ordinal();
+	}
+
+	@Override
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		super.updateTick(world, pos, state, rand);
 		if (rand.nextInt(25) == 0) {
 			int xx;
 			int yy;
 			int zz;
-			xx = x + rand.nextInt(3) - 1;
-			yy = y + rand.nextInt(2) - rand.nextInt(2);
-			zz = z + rand.nextInt(3) - 1;
-			if (world.isAirBlock(xx, yy, zz) && canBlockStay(world, xx, yy, zz)) {
-				if ("nettle".equals(name) && rand.nextInt(3) == 0)
-					world.setBlock(x, y, z, ModBlocks.nettleFlowered);
-				if ("nettleFlowered".equals(name))
-					world.setBlock(xx, yy, zz, ModBlocks.nettle);
+			BlockPos newPos = pos.add(rand.nextInt(3) - 1, rand.nextInt(2) - rand.nextInt(2), rand.nextInt(3) - 1);
+			xx = pos.getX() + rand.nextInt(3) - 1;
+			yy = pos.getY() + rand.nextInt(2) - rand.nextInt(2);
+			zz = pos.getZ() + rand.nextInt(3) - 1;
+			if (world.isAirBlock(newPos) && canBlockStay(world, newPos, state)) {
+				if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.NETTLE && rand.nextInt(3) == 0)
+					world.setBlockState(newPos, this.getDefaultState().withProperty(PLANT_TYPE, EnumSmallPlantType.NETTLE_FLOWERED));
+				if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.NETTLE_FLOWERED)
+					world.setBlockState(newPos, this.getDefaultState().withProperty(PLANT_TYPE, EnumSmallPlantType.NETTLE));
 			}
 		}
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
-		if ("nettle".equals(name)) {
-			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(ItemMaterials.DATA.NETTLE_LEAVES.makeStack());
-			return ret;
-		} else if ("nettleFlowered".equals(name)) {
-			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(ItemMaterials.DATA.NETTLE_FLOWERS.makeStack());
-			return ret;
-		} else if ("swampPlant".equals(name) && world.rand.nextInt(8) == 0) {
-			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(new ItemStack(ModItems.cabbageSeeds, 1, 0));
-			return ret;
-		} else if ("desertShrub".equals(name) || "mireCoral".equals(name) || "fireBloom".equals(name)) {
-			ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-			ret.add(new ItemStack(this));
-			return ret;
-		} else
-			return super.getDrops(world, x, y, z, meta, fortune);
+	  public NonNullList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.NETTLE)
+			return NonNullList.withSize(1, new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.NETTLE_LEAVES.ordinal()));
+		else if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.NETTLE_FLOWERED)
+			return NonNullList.withSize(1, new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.NETTLE_FLOWERS.ordinal()));
+		else if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.SWAMP_PLANT)
+			return NonNullList.withSize(1, new ItemStack(ModItems.CABBAGE_SEEDS, 1, 0));
+		else if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.DESERT_SHRUB)
+			return NonNullList.withSize(1, new ItemStack(this, 1, getMetaFromState(state)));
+		else if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.FIRE_BLOOM)
+			return NonNullList.withSize(1, new ItemStack(this, 1, getMetaFromState(state)));
+		else if (state.getValue(PLANT_TYPE) == EnumSmallPlantType.FIDDLE_HEAD)
+			return NonNullList.withSize(1, new ItemStack(Items.MELON_SEEDS));
+		else
+	        return NonNullList.create();
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderColor(int meta) {
-		return colour ? ColorizerGrass.getGrassColor(0.5D, 1.0D) : 0xFFFFFF;
+	public ItemBlock getItemBlock() {
+		return ItemBlockEnum.create(this, EnumSmallPlantType.class);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-		return colour ? world.getBiomeGenForCoords(x, z).getBiomeGrassColor(x, y, z) : 0xFFFFFF;
+	public List<String> getModels() {
+		List<String> models = new ArrayList<String>();
+		for (EnumSmallPlantType type : EnumSmallPlantType.values())
+			models.add(type.getName());
+		return models;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-		list.add(new ItemStack(item));
-	}
+	public enum EnumSmallPlantType implements IErebusEnum {
+		NETTLE,
+		NETTLE_FLOWERED,
+		SWAMP_PLANT,
+		DESERT_SHRUB,
+		FIRE_BLOOM,
+		FIDDLE_HEAD,
+		FERN;
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return blockIcon;
-	}
+		@Override
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModBlocks.SMALL_PLANT, size, ordinal());
+		}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon("erebus:" + name);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if ("fireBloom".equals(name))
-			world.spawnParticle("flame", x + 0.5F, y + 1F, z + 0.5F, 0.0D, 0.0D, 0.0D);
-	}
-
-	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
-		return ItemBlockColoured.class;
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ENGLISH);
+		}
 	}
 }

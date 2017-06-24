@@ -3,7 +3,7 @@ package erebus.items;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
-import erebus.items.ItemMaterials.EnumType;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 
@@ -16,6 +16,6 @@ public class ItemJadeHoe extends ItemHoe {
 
 	@Override
 	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
-		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumType.JADE.ordinal();
+		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.JADE.ordinal();
 	}
 }

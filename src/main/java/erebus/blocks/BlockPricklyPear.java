@@ -35,7 +35,7 @@ public class BlockPricklyPear extends Block implements IPlantable {
 	public BlockPricklyPear() {
 		super(Material.CACTUS);
 		setDefaultState(blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
-		setCreativeTab(ModTabs.BLOCKS);
+		setCreativeTab(ModTabs.PLANTS);
 		setTickRandomly(true);
 	}
 
