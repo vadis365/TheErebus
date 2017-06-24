@@ -13,8 +13,10 @@ import erebus.ModTabs;
 import erebus.api.IErebusEnum;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.items.block.ItemBlockEnum;
-import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -27,16 +29,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockSmallPlant extends BlockTallGrass implements IHasCustomItem, ISubBlocksBlock {
+public class BlockSmallPlant extends BlockBush implements IGrowable, IShearable, IHasCustomItem, ISubBlocksBlock {
 	public static final PropertyEnum<EnumSmallPlantType> PLANT_TYPE = PropertyEnum.create("type", EnumSmallPlantType.class);
 
 	public BlockSmallPlant() {
+		super(Material.VINE);
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
 		setCreativeTab(ModTabs.PLANTS);
@@ -109,6 +112,30 @@ public class BlockSmallPlant extends BlockTallGrass implements IHasCustomItem, I
 			return NonNullList.withSize(1, new ItemStack(Items.MELON_SEEDS));
 		else
 	        return NonNullList.create();
+	}
+
+	@Override
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
+		return true;
+	}
+
+	@Override
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		 return NonNullList.withSize(1, new ItemStack(ModBlocks.SMALL_PLANT, 1, world.getBlockState(pos).getValue(PLANT_TYPE).ordinal()));
+	}
+
+	@Override
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+		return false;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 	}
 
 	@Override

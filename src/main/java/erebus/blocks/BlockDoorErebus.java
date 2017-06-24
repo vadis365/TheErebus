@@ -23,7 +23,6 @@ public class BlockDoorErebus extends BlockDoor implements IHasCustomItem {
 		super(Material.WOOD);
 		setHarvestLevel("axe", 0);
 		setCreativeTab(ModTabs.BLOCKS);
-		Erebus.proxy.setCustomStateMap(this, new StateMap.Builder().ignore(new IProperty[] { POWERED }).build());
 	}
 
 	@Override

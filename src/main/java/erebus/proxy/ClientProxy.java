@@ -1,13 +1,10 @@
 package erebus.proxy;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import erebus.ModBlocks;
+import erebus.ModColourManager;
 import erebus.ModItems;
+import erebus.blocks.BlockSmallPlant;
+import erebus.blocks.BlockSmallPlant.EnumSmallPlantType;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.tileentity.TileEntityBambooShield;
@@ -15,6 +12,14 @@ import erebus.tileentity.TileEntityExoPlateShield;
 import erebus.tileentity.TileEntityJadeShield;
 import erebus.tileentity.TileEntityReinExoShield;
 import erebus.tileentity.TileEntityRhinoExoShield;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {
 
@@ -28,6 +33,11 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void setCustomStateMap(Block block, StateMap stateMap) {
 		ModelLoader.setCustomStateMapper(block, stateMap);
+	}
+
+	@Override
+	public void registerItemAndBlockColourRenderers() {
+		ModColourManager.registerColourHandlers();
 	}
 
 	@Override

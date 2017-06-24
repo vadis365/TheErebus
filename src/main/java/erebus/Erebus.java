@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 public class Erebus {
 
 	@SidedProxy(clientSide = Reference.PROXY_CLIENT, serverSide = Reference.PROXY_COMMON)
-	public static CommonProxy proxy;
+	public static CommonProxy PROXY;
 
 	@Instance(Reference.MOD_ID)
 	public static Erebus instance;
@@ -37,7 +37,7 @@ public class Erebus {
 		ConfigHandler.INSTANCE.initOreConfigs();
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
-		proxy.registerItemAndBlockRenderers();
+		PROXY.registerItemAndBlockRenderers();
 	}
 
 	@EventHandler
@@ -47,11 +47,12 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);
 		MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
+		PROXY.registerItemAndBlockColourRenderers();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit();
+		PROXY.postInit();
 	}
 
 	@EventHandler

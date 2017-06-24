@@ -10,6 +10,7 @@ import erebus.world.loot.IWeightProvider;
 import erebus.world.loot.WeightedList;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
@@ -81,8 +82,19 @@ public abstract class BiomeBaseErebus extends Biome implements IWeightProvider {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public int getGrassColorAtPos(BlockPos pos) {
+		return grassColor;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
     public int getModdedBiomeFoliageColor(int original) {
        return foliageColor;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getFoliageColorAtPos(BlockPos pos) {
+    	return foliageColor;
     }
 
 	@SideOnly(Side.CLIENT)

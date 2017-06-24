@@ -9,6 +9,7 @@ import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockLeavesErebus;
@@ -20,6 +21,7 @@ import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockQuickSand;
 import erebus.blocks.BlockRedGem;
+import erebus.blocks.BlockSaplingErebus;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockTurnip;
@@ -29,8 +31,9 @@ import erebus.blocks.ErebusPortal;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -73,8 +76,8 @@ public class ModBlocks {
 	public static final Block QUICK_SAND = new BlockQuickSand();
 	public static final Block RED_GEM = new BlockRedGem();
 
-	public static final Block CROP_TURNIP = new BlockTurnip();
-	public static final Block CROP_CABBAGE = new BlockCabbage();
+	public static final Block CROP_TURNIP = new BlockTurnip().setCreativeTab(ModTabs.PLANTS);
+	public static final Block CROP_CABBAGE = new BlockCabbage().setCreativeTab(ModTabs.PLANTS);
 	public static final Block JADE_BERRY_BUSH = new BlockBerryBush("JADE");
 	public static final Block HEART_BERRY_BUSH = new BlockBerryBush("HEART");
 	public static final Block SWAMP_BERRY_BUSH = new BlockBerryBush("SWAMP");
@@ -137,13 +140,13 @@ public class ModBlocks {
 			} else {
 				ResourceLocation name = block.getRegistryName();
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + name.getResourcePath(), "inventory"));
-			if(block instanceof BlockLeavesErebus)
-				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
-			if(block instanceof BlockSmallPlant)
-				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockTallGrass.TYPE, BlockTallGrass.TYPE }).build());
-			
+				if (block instanceof BlockLeavesErebus)
+					ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
+				if (block instanceof BlockSaplingErebus)
+					ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockSapling.TYPE }).build());
+				if (block instanceof BlockDoorErebus)
+					ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockDoor.POWERED }).build());
 			}
-
 	}
 
 	public static interface IHasCustomItem {

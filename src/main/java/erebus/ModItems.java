@@ -4,13 +4,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemSeedFood;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import erebus.items.ItemArmorBamboo;
 import erebus.items.ItemArmorExoskeleton;
 import erebus.items.ItemArmorJade;
@@ -35,6 +28,13 @@ import erebus.items.ItemMaterials;
 import erebus.items.ItemPickaxeJade;
 import erebus.items.ItemSpiderTShirt;
 import erebus.lib.Reference;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemSeedFood;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModItems {
 
@@ -42,8 +42,8 @@ public class ModItems {
 	public static final Item EREBUS_FOOD = new ItemErebusFood();
 	public static final Item HEART_BERRIES = new ItemFoodHeartBerries(0, 0F, false);
 	public static final Item LIFE_BLOOD = new ItemFoodHeartBerries(0, 0F, false);
-	public static final Item TURNIP = new ItemSeedFood(4, 0.6F, ModBlocks.CROP_TURNIP, Blocks.FARMLAND).setCreativeTab(ModTabs.ITEMS);
-	public static final Item CABBAGE_SEEDS = new ItemSeedFood(4, 0.1F, ModBlocks.CROP_CABBAGE, Blocks.FARMLAND).setCreativeTab(ModTabs.ITEMS);
+	public static final Item TURNIP = new ItemSeedFood(4, 0.6F, ModBlocks.CROP_TURNIP, Blocks.FARMLAND).setCreativeTab(ModTabs.PLANTS);
+	public static final Item CABBAGE_SEEDS = new ItemSeedFood(4, 0.1F, ModBlocks.CROP_CABBAGE, Blocks.FARMLAND).setCreativeTab(ModTabs.PLANTS);
 	public static final Item STAG_HEART_RAW = new ItemFoodStagHeart(0, 0F, false, "raw");
 	public static final Item STAG_HEART_COOKED = new ItemFoodStagHeart(20, 0.5F, false, "cooked");
 	
