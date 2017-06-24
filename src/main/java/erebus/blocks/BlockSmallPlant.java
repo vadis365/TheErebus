@@ -1,4 +1,4 @@
-package erebus.block.plants;
+package erebus.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +23,12 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class SmallPlant extends BlockTallGrass implements IHasCustomItemBlock {
+public class BlockSmallPlant extends BlockTallGrass implements IHasCustomItemBlock {
 
 	protected final String name;
 	protected final boolean colour;
 
-	public SmallPlant(String name, boolean colour) {
+	public BlockSmallPlant(String name, boolean colour) {
 		this.name = name;
 		setHardness(0.0F);
 		this.colour = colour;

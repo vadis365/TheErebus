@@ -1,4 +1,4 @@
-package erebus.block.plants;
+package erebus.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +21,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
 
-public class DoubleHeightPlant extends BlockDoublePlant implements IShearable {
+public class BlockDoubleHeightPlant extends BlockDoublePlant implements IShearable {
 	@SideOnly(Side.CLIENT)
 	private IIcon top, bottom;
 	private final String name;
 
-	public DoubleHeightPlant(String name) {
+	public BlockDoubleHeightPlant(String name) {
 		this(name, 1);
 	}
 
-	public DoubleHeightPlant(String name, float width) {
+	public BlockDoubleHeightPlant(String name, float width) {
 		this.name = name;
 		setCreativeTab(ModTabs.plants);
 		setStepSound(Block.soundTypeGrass);
