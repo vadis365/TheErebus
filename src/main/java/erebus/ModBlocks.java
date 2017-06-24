@@ -22,9 +22,9 @@ import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
-import erebus.blocks.ErebusHugeMushroom;
+import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.ErebusPortal;
-import erebus.blocks.SmallMushroom;
+import erebus.blocks.BlockMushroomSmall;
 import erebus.items.ItemMaterials;
 import erebus.lib.Reference;
 import net.minecraft.block.Block;
@@ -82,17 +82,17 @@ public class ModBlocks {
 	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma();
 
 	//MUSHROOMS
-	public static final Block DARK_CAPPED_MUSHROOM = new SmallMushroom(false);
-	public static final Block SARCASTIC_CZECH_MUSHROOM = new SmallMushroom(true);
-	public static final Block GRANDMAS_SHOES_MUSHROOM = new SmallMushroom(true);
-	public static final Block DUTCH_CAP_MUSHROOM = new SmallMushroom(true);
-	public static final Block KAIZERS_FINGERS_MUSHROOM = new SmallMushroom(false);
+	public static final Block DARK_CAPPED_MUSHROOM = new BlockMushroomSmall(false);
+	public static final Block SARCASTIC_CZECH_MUSHROOM = new BlockMushroomSmall(true);
+	public static final Block GRANDMAS_SHOES_MUSHROOM = new BlockMushroomSmall(true);
+	public static final Block DUTCH_CAP_MUSHROOM = new BlockMushroomSmall(true);
+	public static final Block KAIZERS_FINGERS_MUSHROOM = new BlockMushroomSmall(false);
 
-	public static final Block DARK_CAPPED_MUSHROOM_BLOCK = new ErebusHugeMushroom(MapColor.OBSIDIAN, DARK_CAPPED_MUSHROOM);
-	public static final Block SARCASTIC_CZECH_MUSHROOM_BLOCK = new ErebusHugeMushroom(MapColor.RED, SARCASTIC_CZECH_MUSHROOM);
-	public static final Block GRANDMAS_SHOES_MUSHROOM_BLOCK = new ErebusHugeMushroom(MapColor.GREEN, GRANDMAS_SHOES_MUSHROOM );
-	public static final Block DUTCH_CAP_MUSHROOM_BLOCK = new ErebusHugeMushroom(MapColor.YELLOW, DUTCH_CAP_MUSHROOM);
-	public static final Block KAIZERS_FINGERS_MUSHROOM_BLOCK = new ErebusHugeMushroom(MapColor.BROWN, KAIZERS_FINGERS_MUSHROOM);
+	public static final Block DARK_CAPPED_MUSHROOM_BLOCK = new BlockErebusMushroomHuge(MapColor.OBSIDIAN, DARK_CAPPED_MUSHROOM);
+	public static final Block SARCASTIC_CZECH_MUSHROOM_BLOCK = new BlockErebusMushroomHuge(MapColor.RED, SARCASTIC_CZECH_MUSHROOM);
+	public static final Block GRANDMAS_SHOES_MUSHROOM_BLOCK = new BlockErebusMushroomHuge(MapColor.GREEN, GRANDMAS_SHOES_MUSHROOM );
+	public static final Block DUTCH_CAP_MUSHROOM_BLOCK = new BlockErebusMushroomHuge(MapColor.YELLOW, DUTCH_CAP_MUSHROOM);
+	public static final Block KAIZERS_FINGERS_MUSHROOM_BLOCK = new BlockErebusMushroomHuge(MapColor.BROWN, KAIZERS_FINGERS_MUSHROOM);
 
 	public static void init() {
 		try {

@@ -110,7 +110,7 @@ final class TeleporterErebus extends Teleporter {
 					break;
 			}
 
-			entityIn.setLocationAndAngles(posX + offsetX, posY, posZ + offsetZ, entityRotation, entityIn.rotationPitch);
+			entityIn.setLocationAndAngles(posX + offsetX, posY + 0.5D, posZ + offsetZ, entityRotation, entityIn.rotationPitch);
 			return true;
 		}
 		return false;

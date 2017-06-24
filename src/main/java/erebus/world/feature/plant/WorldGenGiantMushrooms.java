@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import erebus.ModBlocks;
-import erebus.blocks.ErebusHugeMushroom;
+import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.core.helper.MathUtil;
 import erebus.world.feature.WorldGenErebus;
 import erebus.world.feature.util.OldForgeDirection;
@@ -371,7 +371,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 	}
 
 	private int getBulbMetadata(int centerX, int centerZ, BlockPos bulb) {
-		boolean posX = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ()) instanceof ErebusHugeMushroom, negX = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ()) instanceof ErebusHugeMushroom, posZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() + 1) instanceof ErebusHugeMushroom, negZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() - 1) instanceof ErebusHugeMushroom;
+		boolean posX = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ()) instanceof BlockErebusMushroomHuge, negX = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ()) instanceof BlockErebusMushroomHuge, posZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() + 1) instanceof BlockErebusMushroomHuge, negZ = getBlock(bulb.getX(), bulb.getY(), bulb.getZ() - 1) instanceof BlockErebusMushroomHuge;
 
 		if (posX && negX && posZ && negZ)
 			return 5; // if surrounded, use top only
@@ -401,7 +401,7 @@ public class WorldGenGiantMushrooms extends WorldGenErebus {
 		if (sides > 1)
 			return 0; // go away, you're no longer needed here
 
-		boolean posXposZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() + 1) instanceof ErebusHugeMushroom, negXposZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() + 1) instanceof ErebusHugeMushroom, posXnegZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() - 1) instanceof ErebusHugeMushroom, negXnegZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() - 1) instanceof ErebusHugeMushroom;
+		boolean posXposZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() + 1) instanceof BlockErebusMushroomHuge, negXposZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() + 1) instanceof BlockErebusMushroomHuge, posXnegZ = getBlock(bulb.getX() + 1, bulb.getY(), bulb.getZ() - 1) instanceof BlockErebusMushroomHuge, negXnegZ = getBlock(bulb.getX() - 1, bulb.getY(), bulb.getZ() - 1) instanceof BlockErebusMushroomHuge;
 
 		int corners = (posXposZ ? 1 : 0) + (negXposZ ? 1 : 0) + (posXnegZ ? 1 : 0) + (negXnegZ ? 1 : 0);
 

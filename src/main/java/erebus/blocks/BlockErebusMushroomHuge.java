@@ -7,9 +7,9 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import erebus.ModTabs;
 
-public class ErebusHugeMushroom extends BlockHugeMushroom {
+public class BlockErebusMushroomHuge extends BlockErebusMushroomHuge {
 
-	public ErebusHugeMushroom(MapColor colour, Block drop) {
+	public BlockErebusMushroomHuge(MapColor colour, Block drop) {
 		super(Material.WOOD, colour, drop);
 		setHardness(0.2F);
 		setCreativeTab(ModTabs.BLOCKS);

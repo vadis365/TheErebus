@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class SmallMushroom extends BlockMushroom {
+public class BlockMushroomSmall extends BlockMushroom {
 	private boolean requires2x2ToGrow;
-	public SmallMushroom(boolean requires2x2ToGrow) {
+	public BlockMushroomSmall(boolean requires2x2ToGrow) {
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
 		setCreativeTab(ModTabs.BLOCKS);

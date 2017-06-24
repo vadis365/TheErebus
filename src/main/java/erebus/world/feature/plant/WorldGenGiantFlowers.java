@@ -115,7 +115,7 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 				if (rand.nextInt(10) == 0)
 					world.setBlockState(new BlockPos(x, y + 3, z), ModBlocks.GIANT_FLOWER.getDefaultState().withProperty(BlockGiantFlower.TYPE, EnumType.EXPLODING_STIGMA), 2);
 				else
-					world.setBlockState(new BlockPos(x, y + 3, z), ModBlocks.GIANT_FLOWER_STIGMA.getDefaultState().withProperty(BlockStigma.TYPE, BlockStigma.EnumType.values()[primaryPetalColor]), 2);
+					world.setBlockState(new BlockPos(x, y + 3, z), ModBlocks.GIANT_FLOWER_STIGMA.getDefaultState().withProperty(BlockStigma.TYPE, BlockStigma.EnumType.values()[primaryPetalColor]), 3);
 
 				for (int a = 0; a < 3; a++)
 					for (int b = 0; b < 2; b++) {
@@ -152,7 +152,7 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 				if (rand.nextInt(10) == 0)
 					world.setBlockState(new BlockPos(x, y + 1, z), ModBlocks.GIANT_FLOWER.getDefaultState().withProperty(BlockGiantFlower.TYPE, EnumType.EXPLODING_STIGMA), 2);
 				else
-					world.setBlockState(new BlockPos(x, y + 1, z), ModBlocks.GIANT_FLOWER_STIGMA.getDefaultState().withProperty(BlockStigma.TYPE, BlockStigma.EnumType.values()[primaryPetalColor]), 2);
+					world.setBlockState(new BlockPos(x, y + 1, z), ModBlocks.GIANT_FLOWER_STIGMA.getDefaultState().withProperty(BlockStigma.TYPE, BlockStigma.EnumType.values()[primaryPetalColor]), 3);
 
 				for (int a = 0; a < 4; a++)
 					for (int b = 1; b <= 3; b++)
@@ -176,7 +176,7 @@ public class WorldGenGiantFlowers extends WorldGenerator {
 				if (rand.nextInt(10) == 0)
 					world.setBlockState(new BlockPos(x, y + 2, z), ModBlocks.GIANT_FLOWER.getDefaultState().withProperty(BlockGiantFlower.TYPE, EnumType.EXPLODING_STIGMA), 2);
 				else
-					world.setBlockState(new BlockPos(x, y + 2, z), ModBlocks.GIANT_FLOWER_STIGMA.getDefaultState().withProperty(BlockStigma.TYPE, BlockStigma.EnumType.values()[primaryPetalColor]), 2);
+					world.setBlockState(new BlockPos(x, y + 2, z), ModBlocks.GIANT_FLOWER_STIGMA.getDefaultState().withProperty(BlockStigma.TYPE, BlockStigma.EnumType.values()[primaryPetalColor]), 3);
 
 				for (int a = 0; a < 3; a++) {
 					world.setBlockState(new BlockPos(x - 3 + a, y + 1, z), ModBlocks.GIANT_FLOWER.getDefaultState().withProperty(BlockGiantFlower.TYPE, EnumType.values()[primaryPetalColor]), 2);
