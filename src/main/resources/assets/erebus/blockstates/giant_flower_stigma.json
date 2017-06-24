@@ -1,0 +1,18 @@
+{
+	"variants": {
+		"type=stigma_black": { "model": "erebus:stigma" },
+        "type=stigma_red": { "model": "erebus:stigma" },
+        "type=stigma_brown": { "model": "erebus:stigma" },
+        "type=stigma_blue": { "model": "erebus:stigma" },
+        "type=stigma_purple": { "model": "erebus:stigma" },
+        "type=stigma_cyan": { "model": "erebus:stigma" },
+        "type=stigma_light_gray": { "model": "erebus:stigma" },
+        "type=stigma_gray": { "model": "erebus:stigma" },
+        "type=stigma_pink": { "model": "erebus:stigma" },
+        "type=stigma_yellow": { "model": "erebus:stigma" },
+        "type=stigma_light_blue": { "model": "erebus:stigma" },
+        "type=stigma_magenta": { "model": "erebus:stigma" },
+        "type=stigma_orange": { "model": "erebus:stigma" },
+        "type=stigma_white": { "model": "erebus:stigma" }
+	}
+}

@@ -18,6 +18,7 @@ import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockQuickSand;
 import erebus.blocks.BlockRedGem;
+import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
@@ -78,6 +79,7 @@ public class ModBlocks {
 	public static final Block DARK_FRUIT_VINE = new BlockDarkFruitVine();
 	public static final Block PRICKLY_PEAR = new BlockPricklyPear();
 	public static final Block GIANT_FLOWER = new BlockGiantFlower();
+	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new SmallMushroom(false);
@@ -135,7 +137,7 @@ public class ModBlocks {
 			if(block instanceof BlockLeavesErebus)
 				ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
 			}
-		
+
 	}
 
 	public static interface IHasCustomItem {
