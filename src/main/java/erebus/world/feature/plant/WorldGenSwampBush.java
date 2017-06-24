@@ -19,7 +19,6 @@ public class WorldGenSwampBush extends WorldGenerator {
 			};
 
 	@Override
-
 	public boolean generate(World world, Random rand, BlockPos pos) {
 		int x = pos.getX();
 		int y = pos.getY();

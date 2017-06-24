@@ -2,6 +2,7 @@ package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.EnumWood;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -25,6 +26,7 @@ import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.BlockVine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -46,10 +48,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	private final WorldGenBush genMushroomsRed = new WorldGenBush(Blocks.RED_MUSHROOM);
 	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(Blocks.BROWN_MUSHROOM_BLOCK);
 	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(Blocks.RED_MUSHROOM_BLOCK);
-
-/*	private final WorldGenTallGrass genFerns = new WorldGenTallGrass(ModBlocks.fern, 1);
-	private final WorldGenTallGrass genFiddleheads = new WorldGenTallGrass(ModBlocks.fiddlehead, 1);
-*/	
+	
 // TODO FIX the below trees
 	private static final IBlockState JUMGLE_TRUNK = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE);
 	private static final IBlockState JUNGLE_LEAF = Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
@@ -66,6 +65,9 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	private final WorldGenerator genBamboo = new WorldGenBamboo(13, false);
 	private final WorldGenerator genTurnips = new WorldGenTurnips();
 	private final WorldGenerator genMelons = new WorldGenMelon();
+	
+	private static final int[] offsetX = new int[] { -1, 1, 0, 0 };
+	private static final int[] offsetZ = new int[] { 0, 0, -1, 1 };
 
 	@Override
 	protected void populate() {
@@ -105,8 +107,10 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
 
-			if (checkSurface(SurfaceType.GRASS, pos))
+			if (checkSurface(SurfaceType.GRASS, pos)) {
 				genQuickSand.generate(world, rand, pos);
+				break;
+			}
 		}
 
 		for (attempt = 0; attempt < 2200; attempt++) {
@@ -145,6 +149,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 
 				if (treeGen != null)
 					treeGen.generate(world, rand, pos.up());
+				break;
 			}
 		}
 
@@ -156,8 +161,10 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (checkSurface(SurfaceType.GRASS, pos))
+			if (checkSurface(SurfaceType.GRASS, pos)) {
 				genBigMushroomRed.generate(world, rand, pos.up());
+				break;
+			}
 		}
 
 		for (attempt = 0; attempt < 20; attempt++) {
@@ -165,8 +172,10 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (checkSurface(SurfaceType.GRASS, pos))
+			if (checkSurface(SurfaceType.GRASS, pos)) {
 				genBigMushroomBrown.generate(world, rand, pos.up());
+				break;
+			}
 		}
 
 		if (rand.nextInt(11) == 0) {
@@ -179,37 +188,49 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 						break;
 			}
 		}
-/*
+
 		for (attempt = 0; attempt < 40; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genFerns.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				if (world.isAirBlock(pos.up())) {
+					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FERN), 2);
+					break;
+				}
 		}
 
 		for (attempt = 0; attempt < 16; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genFiddleheads.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				if (world.isAirBlock(pos.up())) {
+					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIDDLE_HEAD), 2);
+					break;
+				}
 		}
 
-		for (attempt = 0; attempt < 180; attempt++) {
+		for (attempt = 0; attempt < 12; attempt++) {
 			xx = x + offsetXZ();
-			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-				boolean fern = rand.nextInt(4) == 0;
-				world.setBlock(xx, yy, zz, Blocks.double_plant, fern ? 3 : 2, 2);
-				world.setBlock(xx, yy + 1, zz, Blocks.double_plant, 10, 2);
+			
+			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2))) {
+						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.FERN, 2);
+						break;
+					} else
+						if (world.isAirBlock(pos.up()))
+							world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FERN), 2);
+					break;
+				}
 			}
 		}
-*/	
+
 		IBlockState tallGrassState = Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
 		for (attempt = 0; attempt < 850; attempt++) {
 			xx = x + offsetXZ();
@@ -218,34 +239,44 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 
 			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
 				BlockPos pos = new BlockPos(xx, yy, zz);
-				if (checkSurface(SurfaceType.MIXED, pos)) {
-					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2)))
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2))) {
 						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
-					else
-						if (world.isAirBlock(pos.up()))
-							world.setBlockState(pos.up(), tallGrassState);
+						break;
+					} else if (world.isAirBlock(pos.up())) {
+						world.setBlockState(pos.up(), tallGrassState);
+						break;
+					}
 				}
 			}
 		}
-/*
+
 		int offset;
 		for (attempt = 0; attempt < 800; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.isAirBlock(xx, yy, zz)) {
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (world.isAirBlock(pos)) {
 				offset = rand.nextInt(4);
 
-				if (!world.getBlock(xx + Direction.offsetX[offset], yy, zz + Direction.offsetZ[offset]).isNormalCube())
+				if (!world.getBlockState(new BlockPos(xx + offsetX[offset], yy, zz + offsetZ[offset])).isNormalCube())
 					continue;
 
 				for (int vineY = rand.nextInt(30); vineY > 0; vineY--)
-					if (world.isAirBlock(xx + Direction.offsetX[offset], yy - vineY, zz + Direction.offsetZ[offset]))
-						world.setBlock(xx + Direction.offsetX[offset], yy - vineY, zz + Direction.offsetZ[offset], Blocks.vine, offset == 3 ? 1 : offset == 2 ? 4 : offset == 1 ? 0 : 2, 3);
+					if (world.isAirBlock(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]))) {
+						if (offset == 3)
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), Blocks.VINE.getDefaultState().withProperty(BlockVine.SOUTH, true), 3);
+						if (offset == 2)
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), Blocks.VINE.getDefaultState().withProperty(BlockVine.NORTH, true), 3);
+						if (offset == 1)
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), Blocks.VINE.getDefaultState().withProperty(BlockVine.EAST, true), 3);
+						if (offset == 0)
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), Blocks.VINE.getDefaultState().withProperty(BlockVine.WEST, true), 3);
+					}
 			}
 		}
-*/
+
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(90);

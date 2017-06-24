@@ -1,10 +1,14 @@
 package erebus.world.biomes.decorators;
 
+import erebus.ModBlocks;
+import erebus.blocks.BlockSmallPlant;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.tree.WorldGenBalsamTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockSand;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -18,6 +22,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
+	private final WorldGenerator genTreeBalsam = new WorldGenBalsamTree();
 
 	@Override
 	public void decorate() {
@@ -47,13 +52,26 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 		}
 */
 		if (rand.nextBoolean())
-			for (attempt = 0; attempt < 20; attempt++) {
+			for (attempt = 0; attempt < 30; attempt++) {
 				xx = x + offsetXZ();
 				yy = 20 + rand.nextInt(80);
 				zz = z + offsetXZ();
 				BlockPos pos = new BlockPos(xx, yy, zz);
 				if (checkSurface(SurfaceType.GRASS, pos)) {
 					genTreeAcacia.generate(world, rand, pos.up());
+					if (rand.nextBoolean())
+						break;
+				}
+			}
+
+		if (rand.nextBoolean())
+			for (attempt = 0; attempt < 30; attempt++) {
+				xx = x + offsetXZ();
+				yy = 20 + rand.nextInt(80);
+				zz = z + offsetXZ();
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					genTreeBalsam.generate(world, rand, pos.up());
 					if (rand.nextBoolean())
 						break;
 				}
@@ -69,25 +87,25 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 				world.setBlock(xx, yy + 1, zz, ModBlocks.droughtedShrub, 8, 2);
 			}
 		}
-
+*/
 		for (attempt = 0; attempt < 194; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
-			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
-				if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
-					if (rand.nextInt(10) == 0 && world.isAirBlock(xx, yy + 1, zz)) {
-						world.setBlock(xx, yy, zz, Blocks.double_plant, 2, 2);
-						world.setBlock(xx, yy + 1, zz, Blocks.double_plant, 10, 2);
+			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up())) {
+						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
 					} else if (rand.nextInt(80) == 0)
-						world.setBlock(xx, yy, zz, ModBlocks.fireBloom, 0, 2);
+						world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIRE_BLOOM), 2);
 					else
-						world.setBlock(xx, yy, zz, Blocks.tallgrass, 1, 2);
-
+						world.setBlockState(pos.up(), Blocks.TALLGRASS.getDefaultState(), 2);
 					break;
 				}
+			}
 		}
-*/
+
 		if (rand.nextBoolean())
 			for (attempt = 0; attempt < 180; attempt++) {
 				xx = x + offsetXZ();
