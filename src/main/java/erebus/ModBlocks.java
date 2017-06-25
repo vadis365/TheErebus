@@ -24,6 +24,7 @@ import erebus.blocks.BlockRedGem;
 import erebus.blocks.BlockSaplingErebus;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockStigma;
+import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.EnumWood;
@@ -86,6 +87,7 @@ public class ModBlocks {
 	public static final Block GIANT_FLOWER = new BlockGiantFlower();
 	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma();
 	public static final Block SMALL_PLANT = new BlockSmallPlant();
+	public static final Block THORNS = new BlockThorns();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new BlockMushroomSmall(false);
