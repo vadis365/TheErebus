@@ -183,7 +183,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		for (attempt = 0; attempt < 40; attempt++) {
+		for (attempt = 0; attempt < 20; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 			
@@ -192,7 +192,6 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				if (checkSurface(SurfaceType.GRASS, pos)) {
 					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2))) {
 						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.FERN, 2);
-						break;
 					} else
 						if (world.isAirBlock(pos.up()))
 							world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FERN), 2);
@@ -209,11 +208,10 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, pos))
 				if (world.isAirBlock(pos.up())) {
 					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIDDLE_HEAD), 2);
-					break;
 				}
 		}
 
-		for (attempt = 0; attempt < 200; attempt++) {
+		for (attempt = 0; attempt < 400; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
@@ -221,7 +219,6 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, pos))
 				if (world.isAirBlock(pos.up())) {
 					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.SWAMP_PLANT), 2);
-					break;
 				}
 		}
 

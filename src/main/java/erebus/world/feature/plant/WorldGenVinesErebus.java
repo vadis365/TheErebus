@@ -22,16 +22,19 @@ public class WorldGenVinesErebus extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 		for (; pos.getY() < maxVineHeight + rand.nextInt(variation) - rand.nextInt(variation); pos = pos.up()) {
-			if (world.isAirBlock(pos))
+			if (world.isBlockLoaded(pos) && world.isAirBlock(pos))
 				for (EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings())
-					if (Blocks.VINE.canPlaceBlockOnSide(world, pos, facing)) {
-						IBlockState state = Blocks.VINE.getDefaultState().withProperty(BlockVine.NORTH, Boolean.valueOf(facing == EnumFacing.NORTH)).withProperty(BlockVine.EAST, Boolean.valueOf(facing == EnumFacing.EAST)).withProperty(BlockVine.SOUTH, Boolean.valueOf(facing == EnumFacing.SOUTH)).withProperty(BlockVine.WEST, Boolean.valueOf(facing == EnumFacing.WEST));
-						if(world.isBlockLoaded(pos)) {
+					if (world.isBlockLoaded(pos.offset(facing))) {
+						if (Blocks.VINE.canPlaceBlockOnSide(world, pos, facing)) {
+							IBlockState state = Blocks.VINE.getDefaultState()
+									.withProperty(BlockVine.NORTH, Boolean.valueOf(facing == EnumFacing.SOUTH))
+									.withProperty(BlockVine.EAST, Boolean.valueOf(facing == EnumFacing.WEST))
+									.withProperty(BlockVine.SOUTH, Boolean.valueOf(facing == EnumFacing.NORTH))
+									.withProperty(BlockVine.WEST, Boolean.valueOf(facing == EnumFacing.EAST));
 							world.setBlockState(pos, state, 2);
-						break;
+							break;
 						}
-					}
-					else
+					} else
 						pos = pos.add(rand.nextInt(4) - rand.nextInt(4), 0, rand.nextInt(4) - rand.nextInt(4));
 		}
 		return true;

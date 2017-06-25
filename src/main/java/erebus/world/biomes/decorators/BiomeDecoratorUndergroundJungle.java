@@ -188,19 +188,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		for (attempt = 0; attempt < 40; attempt++) {
-			xx = x + offsetXZ();
-			yy = 20 + rand.nextInt(80);
-			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (checkSurface(SurfaceType.GRASS, pos))
-				if (world.isAirBlock(pos.up())) {
-					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FERN), 2);
-					break;
-				}
-		}
-
-		for (attempt = 0; attempt < 16; attempt++) {
+		for (attempt = 0; attempt < 50; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
@@ -208,11 +196,10 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, pos))
 				if (world.isAirBlock(pos.up())) {
 					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIDDLE_HEAD), 2);
-					break;
 				}
 		}
 
-		for (attempt = 0; attempt < 12; attempt++) {
+		for (attempt = 0; attempt < 30; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 			
@@ -231,7 +218,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 		}
 
 		IBlockState tallGrassState = Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
-		for (attempt = 0; attempt < 850; attempt++) {
+		for (attempt = 0; attempt < 250; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
@@ -241,11 +228,10 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				if (checkSurface(SurfaceType.GRASS, pos)) {
 					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2))) {
 						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
-						break;
 					} else if (world.isAirBlock(pos.up())) {
 						world.setBlockState(pos.up(), tallGrassState);
-						break;
 					}
+					break;
 				}
 			}
 		}
@@ -290,7 +276,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 		}
 
 		if (rand.nextInt(3) == 0)
-			for (attempt = 0; attempt < 6; ++attempt) {
+			for (attempt = 0; attempt < 20; ++attempt) {
 				xx = x + offsetXZ();
 				yy = 15 + rand.nextInt(90);
 				zz = z + offsetXZ();
@@ -299,7 +285,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 					genTurnips.generate(world, rand, pos.up());
 			}
 		else if (rand.nextBoolean() || rand.nextBoolean())
-			for (attempt = 0; attempt < 3; ++attempt) {
+			for (attempt = 0; attempt < 10; ++attempt) {
 				xx = x + offsetXZ();
 				yy = 15 + rand.nextInt(90);
 				zz = z + offsetXZ();

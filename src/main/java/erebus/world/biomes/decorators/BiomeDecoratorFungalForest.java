@@ -1,11 +1,13 @@
 package erebus.world.biomes.decorators;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBush;
 import erebus.ModBlocks;
+import erebus.blocks.BlockSmallPlant;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
@@ -60,7 +62,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				world.setBlockState(pos.up(), MUSHROOMS[rand.nextInt(MUSHROOMS.length)].getDefaultState(), 2);
 		}
 
-		for (attempt = 0; attempt < 200; attempt++) {
+		for (attempt = 0; attempt < 400; attempt++) {
 			int r = rand.nextInt(100);
 			if (r < 16)
 				genGiantMushrooms.setMushroomType(MushroomType.DUTCH_CAP);
@@ -81,14 +83,14 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				if (checkSurface(SurfaceType.GRASS, pos.down(yAttempt)))
 					break;
 
-			if (checkSurface(SurfaceType.GRASS, pos) && genGiantMushrooms.generate(world, rand, pos.up()) && rand.nextInt(5) == 0)
+			if (checkSurface(SurfaceType.GRASS, pos) && genGiantMushrooms.generate(world, rand, pos.up()))
 				break;
 		}
 		
 		genMushroomsBrown.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
 		genMushroomsRed.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
 
-		for (attempt = 0; attempt < 100; attempt++) {
+		for (attempt = 0; attempt < 40; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
@@ -97,7 +99,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				genBigMushroomRed.generate(world, rand, pos.up());
 		}
 
-		for (attempt = 0; attempt < 100; attempt++) {
+		for (attempt = 0; attempt < 40; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
@@ -105,23 +107,25 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, pos))
 				genBigMushroomBrown.generate(world, rand, pos.up());
 		}
-/*
+
 		for (attempt = 0; attempt < 100; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
-
-			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1)
-				if (checkSurface(SurfaceType.MIXED, xx, yy, zz)) {
-					if (rand.nextInt(8) == 0 && world.isAirBlock(xx, yy + 1, zz)) {
-						world.setBlock(xx, yy, zz, Blocks.double_plant, 3, 2);
-						world.setBlock(xx, yy + 1, zz, Blocks.double_plant, 10, 2);
+			
+			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2))) {
+						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.FERN, 2);
 					} else
-						world.setBlock(xx, yy, zz, ModBlocks.fern, 0, 2);
-
+						if (world.isAirBlock(pos.up()))
+							world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FERN), 2);
 					break;
 				}
+			}
 		}
 
+		/*
 		for (attempt = 0; attempt < 20; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
