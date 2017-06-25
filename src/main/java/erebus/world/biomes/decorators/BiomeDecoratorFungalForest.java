@@ -1,18 +1,20 @@
 package erebus.world.biomes.decorators;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.feature.WorldGenBigMushroom;
-import net.minecraft.world.gen.feature.WorldGenBush;
 import erebus.ModBlocks;
 import erebus.blocks.BlockSmallPlant;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
+import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
+import erebus.world.feature.plant.WorldGenRottenTreeStump;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.gen.feature.WorldGenBigMushroom;
+import net.minecraft.world.gen.feature.WorldGenBush;
 
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
@@ -29,7 +31,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 
 	@Override
 	public void decorate() {
-/*
+
 		for (attempt = 0; attempt < 10; attempt++) {
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
@@ -43,16 +45,16 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 		}
 
 		for (attempt = 0; attempt < 10; attempt++) {
-			int height = rand.nextInt(11) + 5;
+			int height = rand.nextInt(11) + 6;
 			int baseRadius = rand.nextInt(4) + 3;
 			xx = x + offsetXZ();
 			yy = rand.nextInt(128);
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (checkSurface(SurfaceType.GRASS, pos.up()))
-				new WorldGenRottenTreeStump(height, baseRadius).generate(world, rand, xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				new WorldGenRottenTreeStump(height, baseRadius).generate(world, rand, pos.up());
 		}
-*/
+
 		for (attempt = 0; attempt < 256; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(128);

@@ -10,6 +10,7 @@ import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
+import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockLeavesErebus;
@@ -88,6 +89,7 @@ public class ModBlocks {
 	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma();
 	public static final Block SMALL_PLANT = new BlockSmallPlant();
 	public static final Block THORNS = new BlockThorns();
+	public static final Block DOUBLE_PLANT = new BlockDoubleHeightPlant();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new BlockMushroomSmall(false);

@@ -54,7 +54,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 	private static final IBlockState JUNGLE_LEAF = Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
 	    
 	private final WorldGenerator genTreeMahogany = new WorldGenErebusTrees(true, 5, false, EnumWood.MAHOGANY, Blocks.VINE); // should have thorns not vines
-	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true, false, EnumWood.MAHOGANY);
+	private final WorldGenerator genTreeMahoganyLarge = new WorldGenErebusHugeTree(true, true, EnumWood.MAHOGANY);
 	private final WorldGenerator genTreeJungle = new WorldGenTrees(true, 6, JUMGLE_TRUNK, JUNGLE_LEAF, true);
 	private final WorldGenerator genTreeJungleLarge = new WorldGenMegaJungle(false, 10, 20, JUMGLE_TRUNK, JUNGLE_LEAF);
 	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();

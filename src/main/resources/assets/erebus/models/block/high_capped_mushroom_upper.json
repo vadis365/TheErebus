@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "erebus:blocks/high_capped_mushroom_upper"
+    }
+}
