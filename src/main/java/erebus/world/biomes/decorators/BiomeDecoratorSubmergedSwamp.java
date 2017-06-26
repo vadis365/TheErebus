@@ -1,6 +1,7 @@
 package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
+import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockSmallPlant;
 import erebus.world.ChunkProviderErebus;
 import erebus.world.biomes.decorators.data.FeatureType;
@@ -136,18 +137,17 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 					}
 				}
 			}
-/*
+
 		for (attempt = 0; attempt < 8; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.getBlock(xx, yy - 1, zz) == Blocks.grass && world.isAirBlock(xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-				world.setBlock(xx, yy, zz, ModBlocks.sundew, 0, 2);
-				world.setBlock(xx, yy + 1, zz, ModBlocks.sundew, 8, 2);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos) && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
+				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.SUNDEW, 2);
 			}
 		}
-
+/*
 		for (attempt = 0; attempt < rand.nextInt(3); attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(25) * (1 + rand.nextInt(3)); // more likely in lower levels

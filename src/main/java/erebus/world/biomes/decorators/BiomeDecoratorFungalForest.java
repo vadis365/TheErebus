@@ -1,13 +1,14 @@
 package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
+import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockSmallPlant;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
-import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
+import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenRottenTreeStump;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -127,29 +128,27 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		/*
+		
 		for (attempt = 0; attempt < 20; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-				world.setBlock(xx, yy, zz, ModBlocks.tangledStalk, 0, 2);
-				world.setBlock(xx, yy + 1, zz, ModBlocks.tangledStalk, 8, 2);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos) && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
+				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.TANGLED_STALK_MUSHROOM, 2);
 			}
 		}
 
-		for (attempt = 0; attempt < 20; attempt++) {
+		for (attempt = 0; attempt < 8; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-				world.setBlock(xx, yy, zz, ModBlocks.highCapped, 0, 2);
-				world.setBlock(xx, yy + 1, zz, ModBlocks.highCapped, 8, 2);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos) && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
+				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.HIGH_CAPPED_MUSHROOM, 2);
 			}
 		}
-
+/*
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(80);

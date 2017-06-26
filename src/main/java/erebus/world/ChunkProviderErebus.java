@@ -5,6 +5,8 @@ import java.util.Random;
 
 import erebus.ModBiomes;
 import erebus.ModBlocks;
+import erebus.blocks.BlockDoubleHeightPlant;
+import erebus.blocks.BlockDoubleHeightPlant.EnumBlockHalf;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.structure.MapGenErebusCaves;
@@ -320,17 +322,18 @@ public class ChunkProviderErebus implements IChunkProvider, IChunkGenerator {
 										primer.setBlockState(xInChunk, h, zInChunk, Blocks.AIR.getDefaultState());
 								}
 							}	
-						}/*
-						else if (additionalNoise1[horIndex] > -0.15D) {
-							int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 35);
+						}
+						/*else if (additionalNoise1[horIndex] > -0.15D) {
+							int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 30);
 							if (h > swampWaterHeight) {
-								for (h += 0; h >= (22 + h) / 2; h--)
-									primer.setBlockState(xInChunk, h, zInChunk, Blocks.RED_SANDSTONE.getDefaultState());
+								for (h += 0; h >= (4 + h) / 2; h--)
+									primer.setBlockState(xInChunk, h, zInChunk, ModBlocks.MUD.getDefaultState());
 								h++;
-						//		if (h >= swampWaterHeight && rand.nextInt(8) == 0 && blocks[preHeightIndex + h] == Blocks.air && blocks[preHeightIndex + h + 1] == Blocks.air) {
-						//			blocks[preHeightIndex + h] = blocks[preHeightIndex + h + 1] = ModBlocks.bullrush;
-						//			metadata[preHeightIndex + h + 1] = 8;
+								if (h >= swampWaterHeight && rand.nextInt(8) == 0 && primer.getBlockState(xInChunk, preHeightIndex + h +1, zInChunk) == Blocks.AIR.getDefaultState() && primer.getBlockState(xInChunk, preHeightIndex + h + 2, zInChunk) == Blocks.AIR.getDefaultState()) {
+									primer.setBlockState(xInChunk, preHeightIndex + h + 1, zInChunk, ModBlocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoubleHeightPlant.HALF, EnumBlockHalf.LOWER).withProperty(BlockDoubleHeightPlant.VARIANT, BlockDoubleHeightPlant.EnumPlantType.BULLRUSH));
+									primer.setBlockState(xInChunk, preHeightIndex + h + 2, zInChunk, ModBlocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoubleHeightPlant.HALF, EnumBlockHalf.UPPER));
 								}
+							}
 						}*/
 				}
 				if ((biome == ModBiomes.volcanicDesert || biome == ModBiomes.desertSubCharredForest) && Math.abs(additionalNoise1[horIndex]) < 1) {

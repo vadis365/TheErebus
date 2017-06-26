@@ -89,7 +89,7 @@ public class ModBlocks {
 	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma();
 	public static final Block SMALL_PLANT = new BlockSmallPlant();
 	public static final Block THORNS = new BlockThorns();
-	public static final Block DOUBLE_PLANT = new BlockDoubleHeightPlant();
+	public static final BlockDoubleHeightPlant DOUBLE_PLANT = new BlockDoubleHeightPlant();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new BlockMushroomSmall(false);

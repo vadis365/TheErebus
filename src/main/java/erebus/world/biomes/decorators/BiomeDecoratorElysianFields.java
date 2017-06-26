@@ -2,6 +2,7 @@ package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockSmallPlant;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -126,18 +127,17 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 				}
 			}
 		}
-/*
+
 		for (attempt = 0; attempt < 5; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.getBlock(xx, yy - 1, zz) == Blocks.grass && world.isAirBlock(xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-				world.setBlock(xx, yy, zz, ModBlocks.weepingBlue, 0, 2);
-				world.setBlock(xx, yy + 1, zz, ModBlocks.weepingBlue, 8, 2);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos) && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
+				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.WEEPING_BLUEBELL, 2);
 			}
 		}
-*/
+
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(90);
@@ -159,17 +159,16 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 			if (world.isAirBlock(xx, yy, zz))
 				genMossPatch.generate(world, rand, xx, yy, zz);
 		}
-
+*/
 		for (attempt = 0; attempt < 15; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.getBlock(xx, yy - 1, zz) == Blocks.grass && world.isAirBlock(xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-				world.setBlock(xx, yy, zz, ModBlocks.waterFlower, 0, 2);
-				world.setBlock(xx, yy + 1, zz, ModBlocks.waterFlower, 8, 2);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos) && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
+				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.TALL_BLOOM, 2);
 			}
-		}*/
+		}
 	}
 
 	@Override

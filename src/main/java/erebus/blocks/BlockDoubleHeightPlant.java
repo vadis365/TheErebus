@@ -66,7 +66,7 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
 
 	@Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return super.canPlaceBlockAt(world, pos) && world.isAirBlock(pos.up());
+        return world.getBlockState(pos.down()).getBlock() == Blocks.SAND && world.isAirBlock(pos.up()) ? true : super.canPlaceBlockAt(world, pos) && world.isAirBlock(pos.up());
     }
 
 	@Override
@@ -95,13 +95,14 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
 
 	@Override
     public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
+		IBlockState iblockstateDown = world.getBlockState(pos.down());
         if (state.getBlock() != this)
-        	return super.canBlockStay(world, pos, state); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+        	return iblockstateDown.getBlock() == Blocks.SAND ? true : super.canBlockStay(world, pos, state); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
         if (state.getValue(HALF) == BlockDoubleHeightPlant.EnumBlockHalf.UPPER)
             return world.getBlockState(pos.down()).getBlock() == this;
         else {
             IBlockState iblockstate = world.getBlockState(pos.up());
-            return iblockstate.getBlock() == this && super.canBlockStay(world, pos, iblockstate);
+            return iblockstate.getBlock() == this && iblockstateDown.getBlock() == Blocks.SAND ? true : iblockstate.getBlock() == this && super.canBlockStay(world, pos, iblockstate);
         }
     }
 

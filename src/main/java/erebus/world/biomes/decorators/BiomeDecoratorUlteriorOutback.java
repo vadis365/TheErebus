@@ -1,6 +1,7 @@
 package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
+import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockSmallPlant;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -77,30 +78,40 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 						break;
 				}
 			}
-/*
+
 		for (attempt = 0; attempt < 420; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.SAND, xx, yy, zz) && world.isAirBlock(xx, yy + 1, zz)) {
-				world.setBlock(xx, yy, zz, ModBlocks.droughtedShrub, 0, 2);
-				world.setBlock(xx, yy + 1, zz, ModBlocks.droughtedShrub, 8, 2);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos) && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
+				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.DROUGHTED_SHRUB, 2);
 			}
 		}
-*/
-		for (attempt = 0; attempt < 194; attempt++) {
+		
+		for (attempt = 0; attempt < 16; attempt++) {
+			xx = x + offsetXZ();
+			yy = 20 + rand.nextInt(80);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				if (world.isAirBlock(pos.up())) {
+					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.DESERT_SHRUB), 2);
+				}
+		}
+
+		for (attempt = 0; attempt < 50; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
 
 			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
 				BlockPos pos = new BlockPos(xx, yy, zz);
 				if (checkSurface(SurfaceType.GRASS, pos)) {
-					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up())) {
+					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
 						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
-					} else if (rand.nextInt(80) == 0)
+					} else if (rand.nextInt(80) == 0 && world.isAirBlock(pos.up()))
 						world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIRE_BLOOM), 2);
-					else
+					else if (world.isAirBlock(pos.up()))
 						world.setBlockState(pos.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 2);
 					break;
 				}

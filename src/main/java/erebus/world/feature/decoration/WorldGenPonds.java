@@ -3,6 +3,7 @@ package erebus.world.feature.decoration;
 import java.util.Random;
 
 import erebus.ModBlocks;
+import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.world.biomes.BiomeSubmergedSwamp;
 import erebus.world.biomes.BiomeUndergroundJungle;
 import net.minecraft.block.Block;
@@ -150,22 +151,21 @@ public class WorldGenPonds extends WorldGenerator {
     					else
     						break;
     		}
-    /*
-    		for (int bullRushAttempt = 0, xx, yy, zz; bullRushAttempt < 50; bullRushAttempt++) {
-    			xx = x + rand.nextInt(16);
-    			yy = y + 3 + rand.nextInt(5);
-    			zz = z + rand.nextInt(16);
-    			block = world.getBlock(xx, yy - 1, zz);
 
-    			if (block == Blocks.SAND || block == ModBlocks.mud)
+    		for (int bullRushAttempt = 0, xx, yy, zz; bullRushAttempt < 50; bullRushAttempt++) {
+    			xx = position.getX() + rand.nextInt(16);
+    			yy = position.getY() + 3 + rand.nextInt(5);
+    			zz = position.getZ() + rand.nextInt(16);
+    			block = worldIn.getBlockState(new BlockPos(xx, yy - 1, zz)).getBlock();
+
+    			if (block == Blocks.SAND || block == ModBlocks.MUD)
     				for (int height = 0; height < 1; height++)
-    					if (world.isAirBlock(xx, yy + height, zz)) {
-    						world.setBlock(xx, yy, zz, ModBlocks.bullrush, 0, 2);
-    						world.setBlock(xx, yy + 1, zz, ModBlocks.bullrush, 8, 2);
+    					if (worldIn.isAirBlock(new BlockPos(xx, yy + height, zz))) {
+    						ModBlocks.DOUBLE_PLANT.placeAt(worldIn, new BlockPos(xx, yy, zz), BlockDoubleHeightPlant.EnumPlantType.BULLRUSH, 2);
     					} else
     						break;
     		}
-    */	}
+    	}
     		return true;
 	}
 }
