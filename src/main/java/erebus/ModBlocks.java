@@ -13,6 +13,8 @@ import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockGiantFlower;
+import erebus.blocks.BlockGlowshroom;
+import erebus.blocks.BlockGlowshroomStalkMain;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
@@ -104,6 +106,10 @@ public class ModBlocks {
 	public static final Block DUTCH_CAP_MUSHROOM_BLOCK = new BlockErebusMushroomHuge(MapColor.YELLOW, DUTCH_CAP_MUSHROOM);
 	public static final Block KAIZERS_FINGERS_MUSHROOM_BLOCK = new BlockErebusMushroomHuge(MapColor.BROWN, KAIZERS_FINGERS_MUSHROOM);
 
+	//GLOWSHROOMS
+	public static final Block GLOWSHROOM = new BlockGlowshroom();
+	public static final Block GLOWSHROOM_STALK_MAIN = new BlockGlowshroomStalkMain();
+	
 	public static void init() {
 		try {
 			for (Field field : ModBlocks.class.getDeclaredFields()) {
