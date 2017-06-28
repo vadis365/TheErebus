@@ -76,7 +76,7 @@ public class BlockGlowshroom extends Block {
 		if (world.isRemote)
 			return;
 		if (!canPlaceBlockAt(world, pos)) {
-			Utils.dropStack(world, pos, new ItemStack(Item.getItemFromBlock(this)));
+			Utils.dropStack(world, pos, new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.GLOWSHROOM.ordinal()));
 			world.setBlockToAir(pos);
 		}
 	}

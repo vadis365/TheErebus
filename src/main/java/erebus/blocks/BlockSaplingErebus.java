@@ -1,24 +1,7 @@
 package erebus.blocks;
 
-import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.event.terraingen.TerrainGen;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.Erebus;
 import erebus.ModTabs;
 import erebus.world.feature.plant.WorldGenBamboo;
 import erebus.world.feature.tree.WorldGenAsperTree;
@@ -29,6 +12,19 @@ import erebus.world.feature.tree.WorldGenErebusHugeTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSaplingErebus extends BlockSapling {
 
@@ -105,6 +101,6 @@ public class BlockSaplingErebus extends BlockSapling {
 
 		world.setBlockToAir(pos);
 		if (!worldGen.generate(world, rand, pos))
-			world.setBlockState(pos, (IBlockState) this);
+			world.setBlockState(pos, this.getDefaultState());
 	}
 }

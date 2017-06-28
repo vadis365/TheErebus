@@ -82,7 +82,7 @@ public class BlockGlowshroomStalkMain extends Block {
 */
 	@Override
 	public int tickRate(World world) {
-		return 1;
+		return 5;
 	}
 
 	@Override
@@ -232,7 +232,28 @@ public class BlockGlowshroomStalkMain extends Block {
 		if (world.isRemote)
 			return;
 
-		if (!canPlaceBlockAt(world, pos)) {
+		EnumPartType part = state.getValue(PART);
+		boolean flag = false;
+		if (part == EnumPartType.MAIN)
+			if(canPlaceBlockAt(world, pos))
+				flag = true;
+		if (part == EnumPartType.DOWN_1 || part == EnumPartType.DOWN_2 || part == EnumPartType.DOWN_3)
+			if (isValidBlock(world.getBlockState(pos.up())))
+				flag = true;
+		if (part == EnumPartType.NORTH_1 || part == EnumPartType.NORTH_2 || part == EnumPartType.NORTH_3)
+			if (isValidBlock(world.getBlockState(pos.south())))
+				flag = true;
+		if (part == EnumPartType.SOUTH_1 || part == EnumPartType.SOUTH_2 || part == EnumPartType.SOUTH_3)
+			if (isValidBlock(world.getBlockState(pos.north())))
+				flag = true;
+		if (part == EnumPartType.EAST_1 || part == EnumPartType.EAST_2 || part == EnumPartType.EAST_3)
+			if (isValidBlock(world.getBlockState(pos.west())))
+				flag = true;
+		if (part == EnumPartType.WEST_1 || part == EnumPartType.WEST_2 || part == EnumPartType.WEST_3)
+			if (isValidBlock(world.getBlockState(pos.east())))
+				flag = true;
+
+		if (!flag) {
 			world.playEvent(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + world.getBlockState(pos).getBlock().getMetaFromState(state) << 12);
 			if (state.getValue(PART) == EnumPartType.MAIN)
 				Utils.dropStack(world, pos, new ItemStack(Item.getItemFromBlock(this)));
