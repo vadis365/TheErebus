@@ -26,7 +26,23 @@ public class BlockGlowshroomStalkMain extends Block {
 			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D),
 			new AxisAlignedBB(0.3125D, 0.5D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
 			new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
-			new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 1.0D, 0.8125D) };
+			new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 1.0D, 0.8125D),
+			//NORTH
+			new AxisAlignedBB(0D, 0.3125D, 0.3125D, 0.6875D, 0.6875D, 0.6875D),
+			new AxisAlignedBB(0D, 0.1875D, 0.1875D, 1D, 0.8125D, 0.8125D),
+			new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
+			//SOUTH
+			new AxisAlignedBB(0.3125D, 0.3125D, 0D, 0.6875D, 0.6875D, 0.6875D),
+			new AxisAlignedBB(0.1875D, 0.1875D, 0D, 0.8125D, 0.8125D, 1D),
+			new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
+			//EAST NOT DONE
+			new AxisAlignedBB(0.3125D, 0.3125D, 0D, 0.6875D, 0.6875D, 0.6875D),
+			new AxisAlignedBB(0.1875D, 0.1875D, 0D, 0.8125D, 0.8125D, 1D),
+			new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
+			//WEST NOT DONE
+			new AxisAlignedBB(0.3125D, 0.3125D, 0D, 0.6875D, 0.6875D, 0.6875D),
+			new AxisAlignedBB(0.1875D, 0.1875D, 0D, 0.8125D, 0.8125D, 1D),
+			new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D)};
 */
 	public BlockGlowshroomStalkMain() {
 		super(Material.WOOD);
