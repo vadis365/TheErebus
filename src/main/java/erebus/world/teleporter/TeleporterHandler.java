@@ -57,8 +57,6 @@ public final class TeleporterHandler {
 			world.customTeleporters.add(teleportToOverworld = new TeleporterErebus(world));
 		else if (world.provider.getDimensionType() == Erebus.dimensionType)
 			world.customTeleporters.add(teleportToErebus = new TeleporterErebus(world));
-
-		System.out.println("added to " + e.getWorld());
 	}
 
 	@SubscribeEvent
@@ -95,8 +93,8 @@ public final class TeleporterHandler {
 
 				waitingPlayers.put(player.getUniqueID(), (byte) 40); // if there are any issues, we can either increase the number or rewrite the "is player in portal?" checking part
 				checkWaitingPlayers = true;
-				player.mcServer.getPlayerList().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 
+				player.mcServer.getPlayerList().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				player.timeUntilPortal = 0;
 				/*
 				 * player.lastExperience = -1; player.lastHealth = -1.0F; player.lastFoodLevel = -1;

@@ -51,5 +51,3 @@ public class TileEntityGaeanKeystone extends TileEntity implements ITickable {
 		return Double.MAX_VALUE;
 	}
 }
-
-
