@@ -12,6 +12,7 @@ import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockErebusMushroomHuge;
+import erebus.blocks.BlockGaeanKeystone;
 import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
@@ -57,6 +58,7 @@ public class ModBlocks {
 	public static final Block UMBERSTONE = new BlockUmberstone();
 	public static final Block PLANKS = new BlockPlanksErebus();
 	public static final Block PORTAL = new ErebusPortal();
+	public static final Block GAEAN_KEYSTONE = new BlockGaeanKeystone();
 
 	public static final Block ORE_IRON = new BlockOreErebus(1);
 	public static final Block ORE_GOLD = new BlockOreErebus(2);

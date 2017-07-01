@@ -3,19 +3,17 @@ package erebus.proxy;
 import erebus.ModBlocks;
 import erebus.ModColourManager;
 import erebus.ModItems;
-import erebus.blocks.BlockSmallPlant;
-import erebus.blocks.BlockSmallPlant.EnumSmallPlantType;
 import erebus.client.render.item.RenderErebusShield;
+import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.tileentity.TileEntityBambooShield;
 import erebus.tileentity.TileEntityExoPlateShield;
+import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityJadeShield;
 import erebus.tileentity.TileEntityReinExoShield;
 import erebus.tileentity.TileEntityRhinoExoShield;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,6 +36,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerItemAndBlockColourRenderers() {
 		ModColourManager.registerColourHandlers();
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGaeanKeystone.class, new TileEntityGaeanKeystoneRenderer());
 	}
 
 	@Override

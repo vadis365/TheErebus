@@ -37,6 +37,7 @@ public class Erebus {
 		ConfigHandler.INSTANCE.initOreConfigs();
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
+		PROXY.registerTileEntities();
 		PROXY.registerItemAndBlockRenderers();
 	}
 

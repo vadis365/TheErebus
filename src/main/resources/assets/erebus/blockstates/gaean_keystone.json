@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"active=false": { "model": "erebus:gaean_keystone" },
+		"active=true": { "model": "erebus:gaean_keystone" }
+	}
+}

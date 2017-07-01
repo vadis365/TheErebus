@@ -7,6 +7,8 @@ import java.util.List;
 import erebus.ModBlocks;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -60,7 +62,7 @@ final class TeleporterErebus extends Teleporter {
 
 				for (int j = roundZ - checkRadius; j <= roundZ + checkRadius; j++)
 					for (int h = worldServerInstance.getActualHeight() - 1; h >= 0; h--)
-						if (worldServerInstance.getBlockState(new BlockPos(i, h, j)).getBlock() == ModBlocks.UMBERSTONE && worldServerInstance.getBlockState(new BlockPos(i, h + 1, j)).getBlock() == Blocks.AIR) { //ModBlocks.gaeanKeystone
+						if (worldServerInstance.getBlockState(new BlockPos(i, h, j)).getBlock() == ModBlocks.GAEAN_KEYSTONE) {
 							double X = i + 0.5 - entityIn.posX;
 							double Z = j + 0.5 - entityIn.posZ;
 							double Y = h + 0.5 - entityIn.posY;
@@ -110,7 +112,7 @@ final class TeleporterErebus extends Teleporter {
 					break;
 			}
 
-			entityIn.setLocationAndAngles(posX + offsetX, posY + 0.5D, posZ + offsetZ, entityRotation, entityIn.rotationPitch);
+			entityIn.setLocationAndAngles(posX + offsetX, posY - 2.0D, posZ + offsetZ, entityRotation, entityIn.rotationPitch);
 			return true;
 		}
 		return false;
@@ -129,50 +131,50 @@ final class TeleporterErebus extends Teleporter {
 			for (int j = 0; j <= 3; j++)
 				for (int k = -2; k <= 2; k++)
 					worldServerInstance.setBlockToAir(new BlockPos(x + i, y + j, z + k));
-		/*
+		
 				// Layer -1
 				for (int i = -1; i <= 1; i++)
 					for (int j = -1; j <= 1; j++)
-						if (worldServerInstance.getBlockState(x + i, y - 1, z + j).getBlockHardness(worldServerInstance, x + i, y - 2, z + j) >= 0)
-							worldServerInstance.setBlock(x + i, y - 2, z + j, Blocks.stonebrick, 3, 3);
+						if (worldServerInstance.getBlockState(new BlockPos(x + i, y - 1, z + j)).getBlockHardness(worldServerInstance, new BlockPos(x + i, y - 2, z + j)) >= 0)
+							worldServerInstance.setBlockState(new BlockPos(x + i, y - 2, z + j), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.byMetadata(3)), 3);
 		
 				// Layer 0
-				worldServerInstance.setBlock(x, y - 1, z, Blocks.stonebrick, 3, 3);
-				worldServerInstance.setBlock(x - 1, y - 1, z, ModBlocks.redGem);
-				worldServerInstance.setBlock(x, y - 1, z - 1, ModBlocks.redGem);
-				worldServerInstance.setBlock(x + 1, y - 1, z, ModBlocks.redGem);
-				worldServerInstance.setBlock(x, y - 1, z + 1, ModBlocks.redGem);
-				worldServerInstance.setBlock(x - 1, y - 1, z + 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x + 1, y - 1, z - 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x - 1, y - 1, z - 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x + 1, y - 1, z + 1, Blocks.stonebrick);
+				worldServerInstance.setBlockState(new BlockPos(x, y - 1, z), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.byMetadata(3)), 3);
+				worldServerInstance.setBlockState(new BlockPos(x - 1, y - 1, z), ModBlocks.RED_GEM.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x, y - 1, z - 1), ModBlocks.RED_GEM.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x + 1, y - 1, z), ModBlocks.RED_GEM.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x, y - 1, z + 1), ModBlocks.RED_GEM.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x - 1, y - 1, z + 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x + 1, y - 1, z - 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x - 1, y - 1, z - 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x + 1, y - 1, z + 1), Blocks.STONEBRICK.getDefaultState());
 		
 				// Layer 1
-				worldServerInstance.setBlock(x - 1, y, z + 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x + 1, y, z - 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x - 1, y, z - 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x + 1, y, z + 1, Blocks.stonebrick);
+				worldServerInstance.setBlockState(new BlockPos(x - 1, y, z + 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x + 1, y, z - 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x - 1, y, z - 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x + 1, y, z + 1), Blocks.STONEBRICK.getDefaultState());
 		
 				// Layer 2
-				worldServerInstance.setBlock(x - 1, y + 1, z + 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x + 1, y + 1, z - 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x - 1, y + 1, z - 1, Blocks.stonebrick);
-				worldServerInstance.setBlock(x + 1, y + 1, z + 1, Blocks.stonebrick);
+				worldServerInstance.setBlockState(new BlockPos(x - 1, y + 1, z + 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x + 1, y + 1, z - 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x - 1, y + 1, z - 1), Blocks.STONEBRICK.getDefaultState());
+				worldServerInstance.setBlockState(new BlockPos(x + 1, y + 1, z + 1), Blocks.STONEBRICK.getDefaultState());
 		
 				// Layer 3
 				for (int i = -1; i <= 1; i++)
 					for (int j = -1; j <= 1; j++)
 						if (i == 0 && j == 0)
-							worldServerInstance.setBlock(x + i, y + 2, z + j, ModBlocks.gaeanKeystone);
+							worldServerInstance.setBlockState(new BlockPos(x + i, y + 2, z + j), ModBlocks.GAEAN_KEYSTONE.getDefaultState());
 						else
-							worldServerInstance.setBlock(x + i, y + 2, z + j, Blocks.stone_slab, 5, 3);
+							worldServerInstance.setBlockState(new BlockPos(x + i, y + 2, z + j), Blocks.STONE_SLAB.getDefaultState().withProperty(BlockStoneSlab.HALF, BlockStoneSlab.EnumBlockHalf.BOTTOM).withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.SMOOTHBRICK), 3);
 		
 				int height = y + 3;
-				while (worldServerInstance.getBlockState(x, height, z).getBlockHardness(worldServerInstance, x, height, z) >= 0) {
-					worldServerInstance.setBlockToAir(x, height, z);
+				while (worldServerInstance.getBlockState(new BlockPos(x, height, z)).getBlockHardness(worldServerInstance, new BlockPos(x, height, z)) >= 0) {
+					worldServerInstance.setBlockToAir(new BlockPos(x, height, z));
 					height++;
 				}
-		*/
+		
 		return true;
 	}
 

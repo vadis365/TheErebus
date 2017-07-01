@@ -2,14 +2,18 @@ package erebus.blocks;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -29,64 +33,68 @@ public class ErebusPortal extends Block {
 		setCreativeTab(ModTabs.BLOCKS);
 	}
 
-	/*
-		public static boolean makePortal(World world, int x, int y, int z) {
-			if (isPatternValid(world, x, y, z)) {
-				world.setBlock(x, y, z, ModBlocks.portal);
-				world.setBlock(x, y + 1, z, ModBlocks.portal);
+	
+		public static boolean makePortal(World world, BlockPos pos) {
+			if (isPatternValid(world, pos)) {
+				world.setBlockState(pos, ModBlocks.PORTAL.getDefaultState());
+				world.setBlockState(pos.up(), ModBlocks.PORTAL.getDefaultState());
 				return true;
 			}
 			return false;
 		}
 
-		public static boolean isPatternValid(World world, int x, int y, int z) {
+		public static boolean isPatternValid(World world, BlockPos pos) {
 			// Layer 0
-			if (!check(world, x, y - 1, z, Blocks.stonebrick, 3))
+			//System.out.println("Block Found: " + world.getBlockState(pos.down()));
+			if (!check(world, pos.down(), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED))) {
 				return false;
+			}
 
 			// Layer 1
-			if (!check(world, x - 1, y, z - 1, Blocks.stonebrick, 0))
+			if (!check(world, pos.add(- 1, 0, - 1), Blocks.STONEBRICK.getDefaultState()))
 				return false;
-			if (!check(world, x - 1, y, z + 1, Blocks.stonebrick, 0))
+			if (!check(world, pos.add(- 1, 0, 1), Blocks.STONEBRICK.getDefaultState()))
 				return false;
-			if (!check(world, x + 1, y, z - 1, Blocks.stonebrick, 0))
+			if (!check(world, pos.add(1, 0, - 1), Blocks.STONEBRICK.getDefaultState()))
 				return false;
-			if (!check(world, x + 1, y, z + 1, Blocks.stonebrick, 0))
+			if (!check(world, pos.add(1, 0, 1), Blocks.STONEBRICK.getDefaultState()))
 				return false;
-			if (!world.isAirBlock(x, y, z) && world.getBlock(x, y, z) != ModBlocks.portal)
+			if (!world.isAirBlock(pos) && world.getBlockState(pos) != ModBlocks.PORTAL.getDefaultState())
 				return false;
 
 			// Layer 2
-			if (!check(world, x - 1, y + 1, z - 1, Blocks.stonebrick, 0))
+			if (!check(world, pos.add(- 1, 1, - 1), Blocks.STONEBRICK.getDefaultState()))
 				return false;
-			if (!check(world, x - 1, y + 1, z + 1, Blocks.stonebrick, 0))
+			if (!check(world, pos.add(- 1, 1, 1), Blocks.STONEBRICK.getDefaultState()))
 				return false;
-			if (!check(world, x + 1, y + 1, z - 1, Blocks.stonebrick, 0))
+			if (!check(world, pos.add(1, 1, - 1), Blocks.STONEBRICK.getDefaultState()))
 				return false;
-			if (!check(world, x + 1, y + 1, z + 1, Blocks.stonebrick, 0))
+			if (!check(world, pos.add( 1, 1, 1), Blocks.STONEBRICK.getDefaultState()))
 				return false;
-			if (!world.isAirBlock(x, y + 1, z) && world.getBlock(x, y + 1, z) != ModBlocks.portal)
+			if (!world.isAirBlock(pos.up()) && world.getBlockState(pos.up()) != ModBlocks.PORTAL.getDefaultState())
 				return false;
 
+
 			// Layer 3
-			if (world.getBlock(x, y + 2, z) != ModBlocks.gaeanKeystone)
+			if (world.getBlockState(pos.up(2)) != ModBlocks.GAEAN_KEYSTONE.getDefaultState() && world.getBlockState(pos.up(2)) != ModBlocks.GAEAN_KEYSTONE.getDefaultState().withProperty(BlockGaeanKeystone.ACTIVE, true))
 				return false;
+
 
 			for (int i = -1; i <= -1; i++)
 				for (int j = -1; j <= -1; j++) {
 					if (i == 0 && j == 0)
 						continue;
-					if (!check(world, x + i, y + 2, z + j, Blocks.stone_slab, 5))
+					if (!check(world, pos.add(i, 2, j), Blocks.STONE_SLAB.getDefaultState().withProperty(BlockStoneSlab.HALF, BlockStoneSlab.EnumBlockHalf.BOTTOM).withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.SMOOTHBRICK)))
 						return false;
 				}
 
 			return true;
 		}
 
-		private static boolean check(World world, int x, int y, int z, Block target, int meta) {
-			return world.getBlock(x, y, z) == target && world.getBlockMetadata(x, y, z) == meta;
+		private static boolean check(World world, BlockPos pos, IBlockState target) {
+			return world.getBlockState(pos) == target;
 		}
-	*/
+	
 
 	@Override
 	@SideOnly(Side.CLIENT)
