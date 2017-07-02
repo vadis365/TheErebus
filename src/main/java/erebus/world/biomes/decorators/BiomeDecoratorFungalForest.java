@@ -3,11 +3,13 @@ package erebus.world.biomes.decorators;
 import erebus.ModBlocks;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockSmallPlant;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
+import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenRottenTreeStump;
 import net.minecraft.block.Block;
@@ -16,12 +18,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBush;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 
 public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 
-	//protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
-	//protected final WorldGenerator genLichenPatch = new WorldGenMossPatch(1);
+	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
+	protected final WorldGenerator genLichenPatch = new WorldGenMossPatch(1);
 	private final WorldGenBush genMushroomsBrown = new WorldGenBush(Blocks.BROWN_MUSHROOM);
 	private final WorldGenBush genMushroomsRed = new WorldGenBush(Blocks.RED_MUSHROOM);
 	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(Blocks.BROWN_MUSHROOM_BLOCK);
@@ -148,23 +151,23 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.HIGH_CAPPED_MUSHROOM, 2);
 			}
 		}
-/*
+
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.isAirBlock(xx, yy, zz))
-				genMossPatch.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (world.isAirBlock(pos))
+				genMossPatch.generate(world, rand, pos);
 		}
 
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.isAirBlock(xx, yy, zz))
-				genLichenPatch.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (world.isAirBlock(pos))
+				genLichenPatch.generate(world, rand,pos);
 		}
 
 		// TODO OK this may need moving to it's own class to make it generate looking nice
@@ -173,12 +176,12 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				xx = x + offsetXZ();
 				yy = 30 + rand.nextInt(90);
 				zz = z + offsetXZ();
-
-				if (world.getBlock(xx, yy, zz) == ModBlocks.umberstone && world.isAirBlock(xx, yy - 1, zz))
-					world.setBlock(xx, yy - 1, zz, ModBlocks.glowshroomStalkMain, 4, 2);
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.getBlockState(pos).getBlock() == ModBlocks.UMBERSTONE && world.isAirBlock(pos.down()))
+					world.setBlockState(pos.down(), ModBlocks.GLOWSHROOM_STALK_MAIN.getDefaultState(), 2);
 			}
 		}
-		*/
+
 	}
 
 	@Override

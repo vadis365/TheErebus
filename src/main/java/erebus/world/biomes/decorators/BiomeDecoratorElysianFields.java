@@ -10,6 +10,7 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
+import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenNettlePatch;
 import erebus.world.feature.tree.WorldGenCypressTree;
 import net.minecraft.block.BlockDoublePlant;
@@ -31,7 +32,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 	protected final WorldGenerator genTreeCypress = new WorldGenCypressTree();
 	protected final WorldGenerator genGiantFlowers = new WorldGenGiantFlowers();
 
-	//protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
+	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 	protected final WorldGenNettlePatch genNettle = new WorldGenNettlePatch();
 	
 	protected boolean generateFlowers = true;
@@ -150,16 +151,16 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 				if (world.isAirBlock(pos.down(hangerY)))
 					world.setBlockState(pos.down(hangerY), ModBlocks.DARK_FRUIT_VINE.getDefaultState().withProperty(BlockDarkFruitVine.DARK_VINE_AGE, Integer.valueOf(4)), 2);
 		}
-/*
+
 		for (attempt = 0; attempt < 15; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.isAirBlock(xx, yy, zz))
-				genMossPatch.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (world.isAirBlock(pos))
+				genMossPatch.generate(world, rand, pos);
 		}
-*/
+
 		for (attempt = 0; attempt < 15; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);

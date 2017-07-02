@@ -1,13 +1,15 @@
 package erebus.world.feature.plant;
 
-import erebus.ModBlocks;
-import erebus.lib.EnumWood;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-
 import java.util.Random;
 
-import static net.minecraftforge.common.util.ForgeDirection.*;
+import erebus.ModBlocks;
+import erebus.blocks.BlockWallPlants;
+import erebus.blocks.EnumWood;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenMossPatch extends WorldGenerator {
 	boolean blockPlaced = false;
@@ -19,53 +21,51 @@ public class WorldGenMossPatch extends WorldGenerator {
 	}
 
 	@Override
-	public boolean generate(World world, Random rand, int x, int y, int z) {
-		placeBlockAt(world, rand, x, y, z);
+	public boolean generate(World world, Random rand, BlockPos pos) {
+		placeBlockAt(world, rand, pos);
 		if (blockPlaced)
-			createPatch(world, rand, x, y, z);
+			createPatch(world, rand, pos);
 		return true;
 	}
 
-	private void placeBlockAt(World world, Random rand, int x, int y, int z) {
+	private void placeBlockAt(World world, Random rand, BlockPos pos) {
 		int offset = 1;
-		int metaMapped = 0;
+		IBlockState state = ModBlocks.WALL_PLANTS.getDefaultState();
 		int randomiseSide = rand.nextInt(6);
-		if (mossType == 1)
-			metaMapped += 6;
 		switch (randomiseSide) {
 			case 0:
-				if (world.isSideSolid(x, y + offset, z, DOWN) && isValidBlock(world, x, y + offset, z)) {
-					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 2, 2);
+				if (world.isSideSolid(pos.up(), EnumFacing.DOWN) && isValidBlock(world, pos.up())) {
+					world.setBlockState(pos, mossType == 0 ? state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOSS_DOWN) : state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOULD_DOWN), 2);
 					blockPlaced = true;
 				}
 				break;
 			case 1:
-				if (world.isSideSolid(x, y - offset, z, UP) && isValidBlock(world, x, y - offset, z)) {
-					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 3, 2);
+				if (world.isSideSolid(pos.down(), EnumFacing.UP) && isValidBlock(world, pos.down())) {
+					world.setBlockState(pos, mossType == 0 ? state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOSS_UP) : state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOULD_UP), 2);
 					blockPlaced = true;
 				}
 				break;
 			case 2:
-				if (world.isSideSolid(x, y, z + offset, NORTH) && isValidBlock(world, x, y, z + offset)) {
-					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 4, 2);
+				if (world.isSideSolid(pos.south(), EnumFacing.NORTH) && isValidBlock(world, pos.south())) {
+					world.setBlockState(pos, mossType == 0 ? state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOSS_NORTH) : state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOULD_NORTH), 2);
 					blockPlaced = true;
 				}
 				break;
 			case 3:
-				if (world.isSideSolid(x, y, z - offset, SOUTH) && isValidBlock(world, x, y, z - offset)) {
-					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 5, 2);
+				if (world.isSideSolid(pos.north(), EnumFacing.SOUTH) && isValidBlock(world, pos.north())) {
+					world.setBlockState(pos, mossType == 0 ? state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOSS_SOUTH) : state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOULD_SOUTH), 2);
 					blockPlaced = true;
 				}
 				break;
 			case 4:
-				if (world.isSideSolid(x + offset, y, z, WEST) && isValidBlock(world, x + offset, y, z)) {
-					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 6, 2);
+				if (world.isSideSolid(pos.east(), EnumFacing.WEST) && isValidBlock(world, pos.east())) {
+					world.setBlockState(pos, mossType == 0 ? state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOSS_WEST) : state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOULD_WEST), 2);
 					blockPlaced = true;
 				}
 				break;
 			case 5:
-				if (world.isSideSolid(x - offset, y, z, EAST) && isValidBlock(world, x - offset, y, z)) {
-					world.setBlock(x, y, z, ModBlocks.wallPlants, metaMapped + 7, 2);
+				if (world.isSideSolid(pos.west(), EnumFacing.EAST) && isValidBlock(world, pos.west())) {
+					world.setBlockState(pos, mossType == 0 ? state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOSS_EAST) : state.withProperty(BlockWallPlants.TYPE, BlockWallPlants.EnumWallPlantType.MOULD_EAST), 2);
 					blockPlaced = true;
 				}
 				break;
@@ -75,18 +75,18 @@ public class WorldGenMossPatch extends WorldGenerator {
 		}
 	}
 
-	private void createPatch(World world, Random rand, int x, int y, int z) {
+	private void createPatch(World world, Random rand, BlockPos pos) {
 		byte radius = 2;
-		for (int xx = x - radius; xx <= x + radius; ++xx)
-			for (int zz = z - radius; zz <= z + radius; ++zz)
-				for (int yy = y - radius; yy <= y + radius; ++yy)
-					if (world.isAirBlock(xx, yy, zz))
+		for (int xx = - radius; xx <= radius; ++xx)
+			for (int zz = - radius; zz <= radius; ++zz)
+				for (int yy = - radius; yy <= radius; ++yy)
+					if (world.isAirBlock(pos.add(xx, yy, zz)))
 						for (int attempt = 0; attempt < 3; attempt++)
-							placeBlockAt(world, rand, xx, yy, zz);
+							placeBlockAt(world, rand, pos.add(xx, yy, zz));
 	}
 
-	private boolean isValidBlock(World world, int x, int y, int z) {
-		return world.getBlock(x, y, z) == EnumWood.Rotten.getLog() || world.getBlock(x, y, z) == ModBlocks.umberstone;
+	private boolean isValidBlock(World world, BlockPos pos) {
+		return world.getBlockState(pos).getBlock() == EnumWood.ROTTEN.getLog() || world.getBlockState(pos).getBlock() == ModBlocks.UMBERSTONE;
 	}
 
 }

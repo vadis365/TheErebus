@@ -10,6 +10,7 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
+import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.plant.WorldGenVinesErebus;
@@ -28,8 +29,8 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
-/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
+/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	protected final WorldGenGasVents genGasVent = new WorldGenGasVents();
 	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
 */
@@ -77,16 +78,16 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			genVines.generate(world, rand, pos);
 		}
-/*
+
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = ChunkProviderErebus.swampWaterHeight + rand.nextInt(36 - ChunkProviderErebus.swampWaterHeight);
 			zz = z + offsetXZ();
-
-			if (world.isAirBlock(xx, yy, zz))
-				genMossPatch.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (world.isAirBlock(pos))
+				genMossPatch.generate(world, rand, pos);
 		}
-*/
+
 		// Ground
 		for (attempt = 0; attempt < 600; attempt++) {
 			xx = x + rand.nextInt(5) + 12;
@@ -96,16 +97,16 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, pos.east(2)) && checkSurface(SurfaceType.GRASS, pos.west(2)) && checkSurface(SurfaceType.GRASS, pos.north(2)) && checkSurface(SurfaceType.GRASS, pos.south(2)))
 				genTreeMarshwood.generate(world, rand, pos.up());
 		}
-/*
+
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
 			yy = 30 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			if (world.isAirBlock(xx, yy, zz))
-				genMossPatch.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (world.isAirBlock(pos))
+				genMossPatch.generate(world, rand, pos);
 		}
-
+/*
 		if (ConfigHandler.INSTANCE.generateVents) {
 			if (rand.nextInt(6) == 0)
 				for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
