@@ -1,0 +1,16 @@
+{
+  "variants": {
+      "type=moss_up_cultivated": { "model": "erebus:moss_cultivated", "x": 90 },
+      "type=moss_down_cultivated": { "model": "erebus:moss_cultivated", "x": -90 },
+      "type=moss_south_cultivated": { "model": "erebus:moss_cultivated" },
+      "type=moss_west_cultivated": { "model": "erebus:moss_cultivated", "y": 90 },
+      "type=moss_north_cultivated": { "model": "erebus:moss_cultivated", "y": 180 },
+      "type=moss_east_cultivated": { "model": "erebus:moss_cultivated", "y": 270 },
+      "type=mould_up_cultivated": { "model": "erebus:mould_cultivated", "x": 90 },
+      "type=mould_down_cultivated": { "model": "erebus:mould_cultivated", "x": -90 },
+      "type=mould_south_cultivated": { "model": "erebus:mould_cultivated" },
+      "type=mould_west_cultivated": { "model": "erebus:mould_cultivated", "y": 90 },
+      "type=mould_north_cultivated": { "model": "erebus:mould_cultivated", "y": 180 },
+      "type=mould_east_cultivated": { "model": "erebus:mould_cultivated", "y": 270 }
+  }
+}

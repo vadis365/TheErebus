@@ -127,19 +127,20 @@ public class BlockWallPlants extends Block implements IShearable, IHasCustomItem
 		return NULL_AABB;
 	}
 
-	private boolean canPlaceAt(World worldIn, BlockPos pos, EnumFacing facing) {
+	private boolean canPlaceAt(World world, BlockPos pos, EnumFacing facing) {
 		BlockPos blockPos = pos.offset(facing.getOpposite());
 		boolean flag = facing.getAxis().isHorizontal();
-		return flag && worldIn.isSideSolid(blockPos, facing, true) || ((facing.equals(EnumFacing.DOWN) || facing.equals(EnumFacing.UP)) && this.canPlaceOn(worldIn, blockPos));
+		return flag && world.isSideSolid(blockPos, facing, true) && canPlaceOn(world, blockPos) || ((facing.equals(EnumFacing.DOWN) || facing.equals(EnumFacing.UP)) && canPlaceOn(world, blockPos));
 	}
 
-	private boolean canPlaceOn(World worldIn, BlockPos pos) {
-		return true;
+	private boolean canPlaceOn(World world, BlockPos pos) {
+		return isValidBlock(world.getBlockState(pos).getBlock());
 	}
 
 	private boolean isValidBlock(Block block) {
 		return block == EnumWood.ROTTEN.getLog() || block == ModBlocks.UMBERSTONE;
 	}
+
 
 	@Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {

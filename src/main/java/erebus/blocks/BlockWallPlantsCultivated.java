@@ -1,54 +1,59 @@
-package erebus.block.plants;
-
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
+package erebus.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import javax.annotation.Nullable;
+
 import erebus.ModBlocks;
-import erebus.ModBlocks.IHasCustomItemBlock;
+import erebus.ModBlocks.IHasCustomItem;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.item.block.ItemBlockErebusPlantSmall;
-import erebus.lib.EnumWood;
+import erebus.api.IErebusEnum;
+import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockWallPlantsCultivated extends Block implements IShearable, IHasCustomItemBlock {
+public class BlockWallPlantsCultivated extends Block implements IShearable, IHasCustomItem, ISubBlocksBlock {
 
-	public static final String[] iconPaths = new String[] { "mossCultivated", "mouldCultivated" };
-
-	public static final int dataMoss = 0, dataMould = 1;
-
-	@SideOnly(Side.CLIENT)
-	public IIcon[] icons;
+	public static final PropertyEnum<EnumWallPlantCultivatedType> TYPE = PropertyEnum.<EnumWallPlantCultivatedType>create("type", EnumWallPlantCultivatedType.class);
+	protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.2D, 1.0D);
+	protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.0D, 0.8D, 0.0D, 1.0D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.8D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.2D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.2D);
+	protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.8D, 1.0D, 1.0D, 1.0D);
 
 	public BlockWallPlantsCultivated() {
-		super(Material.plants);
+		super(Material.PLANTS);
 		setHardness(0.2F);
 		setTickRandomly(true);
-		setCreativeTab(ModTabs.plants);
-		setStepSound(Block.soundTypeGrass);
-		setBlockName("erebus.wallPlantsCultivated");
+		setCreativeTab(ModTabs.PLANTS);
+		setSoundType(SoundType.PLANT);
+		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED));
 	}
 
 	@Override
@@ -57,284 +62,177 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, IHas
 	}
 
 	@Override
-	public void setBlockBoundsForItemRender() {
-		setBlockBounds(0.125F, 0.0F, 0.0F, 0.25F, 1.0F, 1.0F);
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister reg) {
-		icons = new IIcon[iconPaths.length];
-		int i = 0;
-		for (String path : iconPaths)
-			icons[i++] = reg.registerIcon("erebus:" + path);
-	}
-
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		if (meta < 0)
-			return null;
-		if (meta == dataMoss)
-			return icons[dataMoss];
-		if (meta == dataMould)
-			return icons[dataMould];
-		if (meta > 1 && meta <= 7)
-			return icons[dataMoss];
-		else
-			return icons[dataMould];
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+		list.add(new ItemStack(item, 1, EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED.ordinal()));
+		list.add(new ItemStack(item, 1, EnumWallPlantCultivatedType.MOULD_DOWN_CULTIVATED.ordinal()));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
-		for (int i = 0; i < icons.length; i++)
-			list.add(new ItemStack(id, 1, i));
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 
 	@Override
-	public int getRenderType() {
-		return 0;
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { TYPE });
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
-		int meta = access.getBlockMetadata(x, y, z);
-		float widthMin = 0, heightMin = 0, depthMin = 0;
-		float widthMax = 0, heightMax = 0, depthMax = 0;
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.values()[meta]);
+	}
 
-		switch (meta) {
-			case 0:
-				widthMin = 0F;
-				heightMin = 0.875F;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0F;
-				depthMax = 0F;
-				break;
-			case 1:
-				widthMin = 0F;
-				heightMin = 0.875F;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0F;
-				depthMax = 0F;
-				break;
-			case 2:
-				widthMin = 0F;
-				heightMin = 0.875F;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0F;
-				depthMax = 0F;
-				break;
-			case 3:
-				widthMin = 0F;
-				heightMin = 0F;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0.875F;
-				depthMax = 0F;
-				break;
-			case 4:
-				widthMin = 0F;
-				heightMin = 0F;
-				depthMin = 0.875F;
-				widthMax = 0F;
-				heightMax = 0F;
-				depthMax = 0F;
-				break;
-			case 5:
-				widthMin = 0F;
-				heightMin = 0F;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0F;
-				depthMax = 0.875F;
-				break;
-			case 6:
-				widthMin = 0.875F;
-				heightMin = 0;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0;
-				depthMax = 0F;
-				break;
-			case 7:
-				widthMin = 0F;
-				heightMin = 0F;
-				depthMin = 0F;
-				widthMax = 0.875F;
-				heightMax = 0F;
-				depthMax = 0F;
-				break;
-			case 8:
-				widthMin = 0F;
-				heightMin = 0.875F;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0F;
-				depthMax = 0F;
-				break;
-			case 9:
-				widthMin = 0F;
-				heightMin = 0F;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0.875F;
-				depthMax = 0F;
-				break;
-			case 10:
-				widthMin = 0F;
-				heightMin = 0F;
-				depthMin = 0.875F;
-				widthMax = 0F;
-				heightMax = 0F;
-				depthMax = 0F;
-				break;
-			case 11:
-				widthMin = 0F;
-				heightMin = 0F;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0F;
-				depthMax = 0.875F;
-				break;
-			case 12:
-				widthMin = 0.875F;
-				heightMin = 0;
-				depthMin = 0F;
-				widthMax = 0F;
-				heightMax = 0;
-				depthMax = 0F;
-				break;
-			case 13:
-				widthMin = 0F;
-				heightMin = 0F;
-				depthMin = 0F;
-				widthMax = 0.875F;
-				heightMax = 0F;
-				depthMax = 0F;
-				break;
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		EnumWallPlantCultivatedType type = ((EnumWallPlantCultivatedType)state.getValue(TYPE));
+		return type.ordinal();
+	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		switch ((EnumWallPlantCultivatedType)state.getValue(TYPE)) {
+		default:
+		case MOSS_EAST_CULTIVATED:
+			return EAST_AABB;
+		case MOSS_WEST_CULTIVATED:
+			return WEST_AABB;
+		case MOSS_SOUTH_CULTIVATED:
+			return SOUTH_AABB;
+		case MOSS_NORTH_CULTIVATED:
+			return NORTH_AABB;
+		case MOSS_UP_CULTIVATED:
+			return UP_AABB;
+		case MOSS_DOWN_CULTIVATED:
+			return DOWN_AABB;
+		case MOULD_EAST_CULTIVATED:
+			return EAST_AABB;
+		case MOULD_WEST_CULTIVATED:
+			return WEST_AABB;
+		case MOULD_SOUTH_CULTIVATED:
+			return SOUTH_AABB;
+		case MOULD_NORTH_CULTIVATED:
+			return NORTH_AABB;
+		case MOULD_UP_CULTIVATED:
+			return UP_AABB;
+		case MOULD_DOWN_CULTIVATED:
+			return DOWN_AABB;
 		}
-		setBlockBounds(0F + widthMin, 0F + heightMin, 0F + depthMin, 1F - widthMax, 1F - heightMax, 1F - depthMax);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-		return null;
+	@Nullable
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		return NULL_AABB;
 	}
 
-	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		return isValidBlock(world.getBlock(x, y + 1, z)) || isValidBlock(world.getBlock(x, y - 1, z)) || isValidBlock(world.getBlock(x - 1, y, z)) || isValidBlock(world.getBlock(x + 1, y, z)) || isValidBlock(world.getBlock(x, y, z - 1)) || isValidBlock(world.getBlock(x, y, z + 1));
+	private boolean canPlaceAt(World world, BlockPos pos, EnumFacing facing) {
+		BlockPos blockPos = pos.offset(facing.getOpposite());
+		boolean flag = facing.getAxis().isHorizontal();
+		return flag && world.isSideSolid(blockPos, facing, true) && canPlaceOn(world, blockPos) || ((facing.equals(EnumFacing.DOWN) || facing.equals(EnumFacing.UP)) && canPlaceOn(world, blockPos));
+	}
+
+	private boolean canPlaceOn(World world, BlockPos pos) {
+		return isValidBlock(world.getBlockState(pos).getBlock());
 	}
 
 	private boolean isValidBlock(Block block) {
-		return block == EnumWood.Rotten.getLog();
+		return block == EnumWood.ROTTEN.getLog();
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-		if (meta == dataMoss) {
-			if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+
+    	if (meta <= 5) {
+			if (facing.equals(EnumFacing.UP) && world.isSideSolid(pos.down(), EnumFacing.UP))
+				meta = 0;
+
+			if (facing.equals(EnumFacing.DOWN) && world.isSideSolid(pos.up(), EnumFacing.DOWN))
+				meta = 1;
+
+			if (facing.equals(EnumFacing.SOUTH) && world.isSideSolid(pos.north(), EnumFacing.SOUTH))
 				meta = 2;
 
-			if (side == 1 && world.isSideSolid(x, y - 1, z, UP))
+			if (facing.equals(EnumFacing.NORTH) && world.isSideSolid(pos.south(), EnumFacing.NORTH))
 				meta = 3;
 
-			if (side == 2 && world.isSideSolid(x, y, z + 1, NORTH))
+			if (facing.equals(EnumFacing.EAST) && world.isSideSolid(pos.west(), EnumFacing.EAST))
 				meta = 4;
 
-			if (side == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
+			if (facing.equals(EnumFacing.WEST) && world.isSideSolid(pos.east(), EnumFacing.WEST))
 				meta = 5;
+		}
 
-			if (side == 4 && world.isSideSolid(x + 1, y, z, WEST))
+		else if (meta > 5) {
+			if (facing.equals(EnumFacing.UP) && world.isSideSolid(pos.down(), EnumFacing.UP))
 				meta = 6;
 
-			if (side == 5 && world.isSideSolid(x - 1, y, z, EAST))
+			if (facing.equals(EnumFacing.DOWN) && world.isSideSolid(pos.up(), EnumFacing.DOWN))
 				meta = 7;
-		}
 
-		if (meta == dataMould) {
-			if (side == 0 && world.isSideSolid(x, y + 1, z, DOWN))
+			if (facing.equals(EnumFacing.SOUTH) && world.isSideSolid(pos.north(), EnumFacing.SOUTH))
 				meta = 8;
 
-			if (side == 1 && world.isSideSolid(x, y - 1, z, UP))
+			if (facing.equals(EnumFacing.NORTH) && world.isSideSolid(pos.south(), EnumFacing.NORTH))
 				meta = 9;
 
-			if (side == 2 && world.isSideSolid(x, y, z + 1, NORTH))
+			if (facing.equals(EnumFacing.EAST) && world.isSideSolid(pos.west(), EnumFacing.EAST))
 				meta = 10;
 
-			if (side == 3 && world.isSideSolid(x, y, z - 1, SOUTH))
-				meta = 11;
-
-			if (side == 4 && world.isSideSolid(x + 1, y, z, WEST))
-				meta = 12;
-
-			if (side == 5 && world.isSideSolid(x - 1, y, z, EAST))
-				meta = 13;
+			if (facing.equals(EnumFacing.WEST) && world.isSideSolid(pos.east(), EnumFacing.WEST))
+				meta = 1;
 		}
-		return meta;
-	}
+
+    	return getStateFromMeta(meta);
+    }
+
 
 	@Override
-	public void onPostBlockPlaced(World world, int x, int y, int z, int meta) {
-		onNeighborBlockChange(world, x, y, z, this);
-	}
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
+		if (world.isRemote)
+			return;
 
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		int meta = world.getBlockMetadata(x, y, z);
+		EnumWallPlantCultivatedType type = state.getValue(TYPE);
 		boolean flag = false;
 
-		if (meta == 2 || meta == 8)
-			if (world.isSideSolid(x, y + 1, z, DOWN))
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_DOWN_CULTIVATED))
+			if (world.isSideSolid(pos.down(), EnumFacing.UP))
 				flag = true;
-		if (meta == 3 || meta == 9)
-			if (world.isSideSolid(x, y - 1, z, UP))
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_UP_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_UP_CULTIVATED))
+			if (world.isSideSolid(pos.up(), EnumFacing.DOWN))
 				flag = true;
-		if (meta == 4 || meta == 10)
-			if (world.isSideSolid(x, y, z + 1, NORTH))
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_NORTH_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_NORTH_CULTIVATED))
+			if (world.isSideSolid(pos.north(), EnumFacing.SOUTH))
 				flag = true;
-		if (meta == 5 || meta == 11)
-			if (world.isSideSolid(x, y, z - 1, SOUTH))
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_SOUTH_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_SOUTH_CULTIVATED))
+			if (world.isSideSolid(pos.south(), EnumFacing.NORTH))
 				flag = true;
-		if (meta == 6 || meta == 12)
-			if (world.isSideSolid(x + 1, y, z, WEST))
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_WEST_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_WEST_CULTIVATED))
+			if (world.isSideSolid(pos.west(), EnumFacing.EAST))
 				flag = true;
-		if (meta == 7 || meta == 13)
-			if (world.isSideSolid(x - 1, y, z, EAST))
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_EAST_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_EAST_CULTIVATED))
+			if (world.isSideSolid(pos.east(), EnumFacing.WEST))
 				flag = true;
 
-		if (!flag || meta == dataMoss || meta == dataMould)
+		if (!flag)
 			if (!world.isRemote)
-				Utils.breakBlockWithParticles(world, x, y, z, meta);
+				world.playEvent(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + world.getBlockState(pos).getBlock().getMetaFromState(state) << 12);
 
-		super.onNeighborBlockChange(world, x, y, z, neighbour);
 	}
 
 	@Override
-	public int damageDropped(int meta) {
-		return meta;
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
 	}
 
 	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
-		return world.getBlockMetadata(x, y, z);
-	}
-
-	@Override
-	public Item getItemDropped(int id, Random random, int fortune) {
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return null;
 	}
 
@@ -344,105 +242,187 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, IHas
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata) {
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
 		return false;
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
+    public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 2 || meta == 3 || meta == 4 || meta == 5 || meta == 6 || meta == 7)
-			meta = dataMoss;
-		if (meta == 8 || meta == 9 || meta == 10 || meta == 11 || meta == 12 || meta == 13)
-			meta = dataMould;
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+		EnumWallPlantCultivatedType type = world.getBlockState(pos).getValue(TYPE);
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(new ItemStack(this, 1, meta));
+		switch (type) {
+		case MOSS_EAST_CULTIVATED:
+		case MOSS_WEST_CULTIVATED:
+		case MOSS_SOUTH_CULTIVATED:
+		case MOSS_NORTH_CULTIVATED:
+		case MOSS_UP_CULTIVATED:
+		case MOSS_DOWN_CULTIVATED:
+			ret.add(new ItemStack(this, 1, EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED.ordinal()));
+			break;
+		case MOULD_EAST_CULTIVATED:
+		case MOULD_WEST_CULTIVATED:
+		case MOULD_SOUTH_CULTIVATED:
+		case MOULD_NORTH_CULTIVATED:
+		case MOULD_UP_CULTIVATED:
+		case MOULD_DOWN_CULTIVATED:
+			ret.add(new ItemStack(this, 1, EnumWallPlantCultivatedType.MOULD_DOWN_CULTIVATED.ordinal()));
+			break;
+		default:
+			ret.add(new ItemStack(this, 1, EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED.ordinal()));
+			break;
+		}
 		return ret;
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand) {
-		int meta = world.getBlockMetadata(x, y, z);
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		if (world.isRemote)
+			return;
+		EnumWallPlantCultivatedType type = world.getBlockState(pos).getValue(TYPE);
 		int attempt = 0;
-		int xx;
-		int yy;
-		int zz;
-		for (attempt = 0; attempt < 52; attempt++) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		
+		if (rand.nextInt(2) == 0) {
+			byte radius = 4;
+			int distance = 5;
+			int xx;
+			int yy;
+			int zz;
+			for (xx = x - radius; xx <= x + radius; ++xx)
+				for (zz = z - radius; zz <= z + radius; ++zz)
+					for (yy = y - radius; yy <= y + radius; ++yy)
+						if (world.getBlockState(new BlockPos(xx, zz, yy)) == this) {
+							--distance;
+							if (distance <= 0)
+								return;
+						}
+
 			xx = x + rand.nextInt(3) - 1;
 			yy = y + rand.nextInt(3) - 1;
 			zz = z + rand.nextInt(3) - 1;
-			if (world.isAirBlock(xx, yy, zz)) {
-				int offset = 1;
-				int randomiseSide = rand.nextInt(6);
+			if (world.isAirBlock(new BlockPos(xx, yy, zz)))
+				for (attempt = 0; attempt < 6; attempt++) {
+					int offset = 1;
+					int randomiseSide = rand.nextInt(6);
 
-				if (meta > 1 && meta <= 7)
-					switch (randomiseSide) {
-						case 0:
-							if (world.isSideSolid(xx, yy + offset, zz, DOWN) && isValidBlock(world.getBlock(xx, yy + offset, zz)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 2, 2);
-							break;
-						case 1:
-							if (world.isSideSolid(xx, yy - offset, zz, UP) && isValidBlock(world.getBlock(xx, yy - offset, zz)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 3, 2);
-							break;
-						case 2:
-							if (world.isSideSolid(xx, yy, zz + offset, NORTH) && isValidBlock(world.getBlock(xx, yy, zz + offset)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 4, 2);
-							break;
-						case 3:
-							if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && isValidBlock(world.getBlock(xx, yy, zz - offset)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 5, 2);
-							break;
-						case 4:
-							if (world.isSideSolid(xx + offset, yy, zz, WEST) && isValidBlock(world.getBlock(xx + offset, yy, zz)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 6, 2);
-							break;
-						case 5:
-							if (world.isSideSolid(xx - offset, yy, zz, EAST) && isValidBlock(world.getBlock(xx - offset, yy, zz)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 7, 2);
-							break;
+					switch (type) {
+					
+					case MOSS_EAST_CULTIVATED:
+					case MOSS_WEST_CULTIVATED:
+					case MOSS_SOUTH_CULTIVATED:
+					case MOSS_NORTH_CULTIVATED:
+					case MOSS_UP_CULTIVATED:
+					case MOSS_DOWN_CULTIVATED:
+						switch (randomiseSide) {
+							case 0:
+								if (world.isSideSolid(new BlockPos(xx, yy + offset, zz), EnumFacing.DOWN) && isValidBlock(world.getBlockState(new BlockPos(xx, yy + offset, zz)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED), 2);
+								break;
+							case 1:
+								if (world.isSideSolid(new BlockPos(xx, yy - offset, zz), EnumFacing.UP) && isValidBlock(world.getBlockState(new BlockPos(xx, yy - offset, zz)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOSS_UP_CULTIVATED), 2);
+								break;
+							case 2:
+								if (world.isSideSolid(new BlockPos(xx, yy, zz + offset), EnumFacing.NORTH) && isValidBlock(world.getBlockState(new BlockPos(xx, yy, zz + offset)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz),getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOSS_NORTH_CULTIVATED), 2);
+								break;
+							case 3:
+								if (world.isSideSolid(new BlockPos(xx, yy, zz - offset), EnumFacing.SOUTH) && isValidBlock(world.getBlockState(new BlockPos(xx, yy, zz - offset)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOSS_SOUTH_CULTIVATED), 2);
+								break;
+							case 4:
+								if (world.isSideSolid(new BlockPos(xx + offset, yy, zz), EnumFacing.WEST) && isValidBlock(world.getBlockState(new BlockPos(xx + offset, yy, zz)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOSS_WEST_CULTIVATED), 2);
+								break;
+							case 5:
+								if (world.isSideSolid(new BlockPos(xx - offset, yy, zz), EnumFacing.EAST) && isValidBlock(world.getBlockState(new BlockPos(xx - offset, yy, zz)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOSS_EAST_CULTIVATED), 2);
+								break;
+						}
+					break;
+					case MOULD_EAST_CULTIVATED:
+					case MOULD_WEST_CULTIVATED:
+					case MOULD_SOUTH_CULTIVATED:
+					case MOULD_NORTH_CULTIVATED:
+					case MOULD_UP_CULTIVATED:
+					case MOULD_DOWN_CULTIVATED:
+						switch (randomiseSide) {
+							case 0:
+								if (world.isSideSolid(new BlockPos(xx, yy + offset, zz), EnumFacing.DOWN) && isValidBlock(world.getBlockState(new BlockPos(xx, yy + offset, zz)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOULD_DOWN_CULTIVATED), 2);
+								break;
+							case 1:
+								if (world.isSideSolid(new BlockPos(xx, yy - offset, zz), EnumFacing.UP) && isValidBlock(world.getBlockState(new BlockPos(xx, yy - offset, zz)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOULD_UP_CULTIVATED), 2);
+								break;
+							case 2:
+								if (world.isSideSolid(new BlockPos(xx, yy, zz + offset), EnumFacing.NORTH) && isValidBlock(world.getBlockState(new BlockPos(xx, yy, zz + offset)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOULD_NORTH_CULTIVATED), 2);
+								break;
+							case 3:
+								if (world.isSideSolid(new BlockPos(xx, yy, zz - offset), EnumFacing.SOUTH) && isValidBlock(world.getBlockState(new BlockPos(xx, yy, zz - offset)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOULD_SOUTH_CULTIVATED), 2);
+								break;
+							case 4:
+								if (world.isSideSolid(new BlockPos(xx + offset, yy, zz), EnumFacing.WEST) && isValidBlock(world.getBlockState(new BlockPos(xx + offset, yy, zz)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOULD_WEST_CULTIVATED), 2);
+								break;
+							case 5:
+								if (world.isSideSolid(new BlockPos(xx - offset, yy, zz), EnumFacing.EAST) && isValidBlock(world.getBlockState(new BlockPos(xx - offset, yy, zz)).getBlock()))
+									world.setBlockState(new BlockPos(xx, yy, zz), getDefaultState().withProperty(TYPE, EnumWallPlantCultivatedType.MOULD_EAST_CULTIVATED), 2);
+								break;
+						}
+						break;
 					}
-				else if (meta > 7 && meta <= 13)
-					switch (randomiseSide) {
-						case 0:
-							if (world.isSideSolid(xx, yy + offset, zz, DOWN) && isValidBlock(world.getBlock(xx, yy + offset, zz)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 8, 2);
-							break;
-						case 1:
-							if (world.isSideSolid(xx, yy - offset, zz, UP) && isValidBlock(world.getBlock(xx, yy - offset, zz)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 9, 2);
-							break;
-						case 2:
-							if (world.isSideSolid(xx, yy, zz + offset, NORTH) && isValidBlock(world.getBlock(xx, yy, zz + offset)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 10, 2);
-							break;
-						case 3:
-							if (world.isSideSolid(xx, yy, zz - offset, SOUTH) && isValidBlock(world.getBlock(xx, yy, zz - offset)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 11, 2);
-							break;
-						case 4:
-							if (world.isSideSolid(xx + offset, yy, zz, WEST) && isValidBlock(world.getBlock(xx + offset, yy, zz)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 12, 2);
-							break;
-						case 5:
-							if (world.isSideSolid(xx - offset, yy, zz, EAST) && isValidBlock(world.getBlock(xx - offset, yy, zz)))
-								world.setBlock(xx, yy, zz, ModBlocks.wallPlantsCultivated, 13, 2);
-							break;
-					}
-			}
+				}
+			if (rand.nextInt(25) == 0)
+				world.setBlockToAir(pos);
 		}
-		if (rand.nextInt(100) == 0)
-			world.setBlockToAir(x, y, z);
+	}
+
+	public static enum EnumWallPlantCultivatedType implements IErebusEnum {
+		MOSS_UP_CULTIVATED,
+		MOSS_DOWN_CULTIVATED,
+		MOSS_SOUTH_CULTIVATED,
+		MOSS_NORTH_CULTIVATED,
+		MOSS_EAST_CULTIVATED,
+		MOSS_WEST_CULTIVATED,
+		MOULD_UP_CULTIVATED,
+		MOULD_DOWN_CULTIVATED,
+		MOULD_SOUTH_CULTIVATED,
+		MOULD_NORTH_CULTIVATED,
+		MOULD_EAST_CULTIVATED,
+		MOULD_WEST_CULTIVATED;
+
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ENGLISH);
+		}
+
+		@Override
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModBlocks.WALL_PLANTS_CULTIVATED, size, ordinal());
+		}
+	}
+	
+	@Override
+	public List<String> getModels() {
+		List<String> models = new ArrayList<String>();
+		for (EnumWallPlantCultivatedType type : EnumWallPlantCultivatedType.values())
+			models.add(type.getName());
+		return models;
 	}
 
 	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
-		return ItemBlockErebusPlantSmall.class;
+	public ItemBlock getItemBlock() {
+		return ItemBlockEnum.create(this, EnumWallPlantCultivatedType.class);
 	}
 
 }

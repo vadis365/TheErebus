@@ -32,6 +32,7 @@ import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.BlockWallPlants;
+import erebus.blocks.BlockWallPlantsCultivated;
 import erebus.blocks.EnumWood;
 import erebus.blocks.ErebusPortal;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
@@ -96,6 +97,7 @@ public class ModBlocks {
 	public static final Block THORNS = new BlockThorns();
 	public static final BlockDoubleHeightPlant DOUBLE_PLANT = new BlockDoubleHeightPlant();
 	public static final Block WALL_PLANTS = new BlockWallPlants();
+	public static final Block WALL_PLANTS_CULTIVATED = new BlockWallPlantsCultivated();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new BlockMushroomSmall(false);

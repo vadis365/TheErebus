@@ -1,0 +1,22 @@
+{
+    "ambientocclusion": true,
+    "textures": {
+        "particle": "erebus:blocks/mould_cultivated",
+        "mould": "erebus:blocks/mould_cultivated"
+    },
+    "elements": [
+        {   
+            "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 2 ],
+            "shade": false,
+            "faces": {
+                "down":  { "texture": "#mould", "cullface": "down" },
+                "up":    { "texture": "#mould", "cullface": "up" },
+                "north": { "texture": "#mould", "cullface": "north" },
+                "south": { "texture": "#mould", "cullface": "south" },
+                "west":  { "texture": "#mould", "cullface": "west" },
+                "east":  { "texture": "#mould", "cullface": "east" }
+            }
+        }
+    ]
+}
