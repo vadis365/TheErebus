@@ -142,7 +142,7 @@ public class BlockGlowshroomStalkMain extends Block {
 			world.setBlockState(pos, getDefaultState().withProperty(PART, EnumPartType.DOWN_2), 2);
 			break;
 		case DOWN_2:
-			world.setBlockState(pos, getDefaultState().withProperty(PART, EnumPartType.DOWN_2), 2);
+			world.setBlockState(pos, getDefaultState().withProperty(PART, EnumPartType.DOWN_3), 2);
 			break;
 		case DOWN_3:
 			world.setBlockState(pos, getDefaultState().withProperty(PART, EnumPartType.MAIN), 2);
@@ -164,8 +164,6 @@ public class BlockGlowshroomStalkMain extends Block {
 					world.setBlockState(pos.east(), getDefaultState().withProperty(PART, EnumPartType.EAST_2));
 			}
 			break;
-		case EAST_3:
-			break;
 		case NORTH_1:
 			if (rand.nextBoolean()) {
 				world.setBlockState(pos, getDefaultState().withProperty(PART, EnumPartType.NORTH_2), 2);
@@ -182,8 +180,6 @@ public class BlockGlowshroomStalkMain extends Block {
 				if (world.getBlockState(pos.north()) == getDefaultState().withProperty(PART, EnumPartType.NORTH_1))
 					world.setBlockState(pos.north(), getDefaultState().withProperty(PART, EnumPartType.NORTH_2));
 			}
-			break;
-		case NORTH_3:
 			break;
 		case SOUTH_1:
 			if (rand.nextBoolean()) {
@@ -202,8 +198,6 @@ public class BlockGlowshroomStalkMain extends Block {
 					world.setBlockState(pos.south(), getDefaultState().withProperty(PART, EnumPartType.SOUTH_2));
 			}
 			break;
-		case SOUTH_3:
-			break;
 		case WEST_1:
 			if (rand.nextBoolean()) {
 				world.setBlockState(pos, getDefaultState().withProperty(PART, EnumPartType.WEST_2), 2);
@@ -221,6 +215,9 @@ public class BlockGlowshroomStalkMain extends Block {
 					world.setBlockState(pos.west(), getDefaultState().withProperty(PART, EnumPartType.WEST_2));
 			}
 			break;
+		case EAST_3:
+		case NORTH_3:
+		case SOUTH_3:
 		case WEST_3:
 			break;
 		default:
@@ -278,7 +275,7 @@ public class BlockGlowshroomStalkMain extends Block {
 	}
 
 	private boolean isValidBlock(IBlockState state) {
-		return state.getMaterial().blocksMovement() || state == this;
+		return state.getMaterial().blocksMovement() || state.getBlock() == this;
 	}
 
 	public static enum EnumPartType implements IStringSerializable {

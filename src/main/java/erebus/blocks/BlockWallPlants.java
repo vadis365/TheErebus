@@ -198,28 +198,29 @@ public class BlockWallPlants extends Block implements IShearable, IHasCustomItem
 		boolean flag = false;
 
 		if (type.equals(EnumWallPlantType.MOSS_DOWN) || type.equals(EnumWallPlantType.MOULD_DOWN))
-			if (world.isSideSolid(pos.down(), EnumFacing.UP))
-				flag = true;
-		if (type.equals(EnumWallPlantType.MOSS_UP) || type.equals(EnumWallPlantType.MOULD_UP))
 			if (world.isSideSolid(pos.up(), EnumFacing.DOWN))
 				flag = true;
-		if (type.equals(EnumWallPlantType.MOSS_NORTH) || type.equals(EnumWallPlantType.MOULD_NORTH))
-			if (world.isSideSolid(pos.north(), EnumFacing.SOUTH))
+		if (type.equals(EnumWallPlantType.MOSS_UP) || type.equals(EnumWallPlantType.MOULD_UP))
+			if (world.isSideSolid(pos.down(), EnumFacing.UP))
 				flag = true;
-		if (type.equals(EnumWallPlantType.MOSS_SOUTH) || type.equals(EnumWallPlantType.MOULD_SOUTH))
+		if (type.equals(EnumWallPlantType.MOSS_NORTH) || type.equals(EnumWallPlantType.MOULD_NORTH))
 			if (world.isSideSolid(pos.south(), EnumFacing.NORTH))
 				flag = true;
+		if (type.equals(EnumWallPlantType.MOSS_SOUTH) || type.equals(EnumWallPlantType.MOULD_SOUTH))
+			if (world.isSideSolid(pos.north(), EnumFacing.SOUTH))
+				flag = true;
 		if (type.equals(EnumWallPlantType.MOSS_WEST) || type.equals(EnumWallPlantType.MOULD_WEST))
-			if (world.isSideSolid(pos.west(), EnumFacing.EAST))
+			if (world.isSideSolid(pos.east(), EnumFacing.WEST))
 				flag = true;
 		if (type.equals(EnumWallPlantType.MOSS_EAST) || type.equals(EnumWallPlantType.MOULD_EAST))
-			if (world.isSideSolid(pos.east(), EnumFacing.WEST))
+			if (world.isSideSolid(pos.west(), EnumFacing.EAST))
 				flag = true;
 
 		if (!flag)
-			if (!world.isRemote)
+			if (!world.isRemote) {
 				world.playEvent(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + world.getBlockState(pos).getBlock().getMetaFromState(state) << 12);
-
+				world.setBlockToAir(pos);
+			}
 	}
 
 	@Override

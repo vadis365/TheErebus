@@ -202,28 +202,29 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, IHas
 		boolean flag = false;
 
 		if (type.equals(EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_DOWN_CULTIVATED))
-			if (world.isSideSolid(pos.down(), EnumFacing.UP))
-				flag = true;
-		if (type.equals(EnumWallPlantCultivatedType.MOSS_UP_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_UP_CULTIVATED))
 			if (world.isSideSolid(pos.up(), EnumFacing.DOWN))
 				flag = true;
-		if (type.equals(EnumWallPlantCultivatedType.MOSS_NORTH_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_NORTH_CULTIVATED))
-			if (world.isSideSolid(pos.north(), EnumFacing.SOUTH))
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_UP_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_UP_CULTIVATED))
+			if (world.isSideSolid(pos.down(), EnumFacing.UP))
 				flag = true;
-		if (type.equals(EnumWallPlantCultivatedType.MOSS_SOUTH_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_SOUTH_CULTIVATED))
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_NORTH_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_NORTH_CULTIVATED))
 			if (world.isSideSolid(pos.south(), EnumFacing.NORTH))
 				flag = true;
+		if (type.equals(EnumWallPlantCultivatedType.MOSS_SOUTH_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_SOUTH_CULTIVATED))
+			if (world.isSideSolid(pos.north(), EnumFacing.SOUTH))
+				flag = true;
 		if (type.equals(EnumWallPlantCultivatedType.MOSS_WEST_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_WEST_CULTIVATED))
-			if (world.isSideSolid(pos.west(), EnumFacing.EAST))
+			if (world.isSideSolid(pos.east(), EnumFacing.WEST))
 				flag = true;
 		if (type.equals(EnumWallPlantCultivatedType.MOSS_EAST_CULTIVATED) || type.equals(EnumWallPlantCultivatedType.MOULD_EAST_CULTIVATED))
-			if (world.isSideSolid(pos.east(), EnumFacing.WEST))
+			if (world.isSideSolid(pos.west(), EnumFacing.EAST))
 				flag = true;
 
 		if (!flag)
-			if (!world.isRemote)
+			if (!world.isRemote) {
 				world.playEvent(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + world.getBlockState(pos).getBlock().getMetaFromState(state) << 12);
-
+				world.setBlockToAir(pos);
+			}
 	}
 
 	@Override
