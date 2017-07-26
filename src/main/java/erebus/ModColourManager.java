@@ -60,7 +60,7 @@ public class ModColourManager {
 		final IItemColor itemBlockColourHandler = (stack, tintIndex) -> {
 			@SuppressWarnings("deprecation")
 			final IBlockState state = ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
-			if(state.getValue(BlockSmallPlant.PLANT_TYPE) == EnumSmallPlantType.FIDDLE_HEAD ||state.getValue(BlockSmallPlant.PLANT_TYPE) == EnumSmallPlantType.FERN)
+			if(state.getBlock() instanceof BlockSmallPlant && (state.getValue(BlockSmallPlant.PLANT_TYPE) == EnumSmallPlantType.FIDDLE_HEAD ||state.getValue(BlockSmallPlant.PLANT_TYPE) == EnumSmallPlantType.FERN))
 				return blockColors.colorMultiplier(state, null, null, tintIndex);
 			return -1;
 		};
