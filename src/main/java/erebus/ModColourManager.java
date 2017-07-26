@@ -46,6 +46,7 @@ public class ModColourManager {
 		};
 
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SMALL_PLANT);
+		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.ALGAE);
 	}
 
 	/**
@@ -65,6 +66,7 @@ public class ModColourManager {
 		};
 
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.SMALL_PLANT);
+		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.ALGAE);
 	}
 }
 

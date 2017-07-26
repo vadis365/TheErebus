@@ -1,0 +1,16 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "erebus:blocks/algae",
+        "algae": "erebus:blocks/algae"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 0.25, 16 ],
+            "faces": {
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#algae", "tintindex": 0 },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#algae", "tintindex": 0 }
+            }
+        }
+    ]
+}

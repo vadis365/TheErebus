@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.blocks.BlockAlgae;
 import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockCabbage;
@@ -98,6 +99,7 @@ public class ModBlocks {
 	public static final BlockDoubleHeightPlant DOUBLE_PLANT = new BlockDoubleHeightPlant();
 	public static final Block WALL_PLANTS = new BlockWallPlants();
 	public static final Block WALL_PLANTS_CULTIVATED = new BlockWallPlantsCultivated();
+	public static final Block ALGAE = new BlockAlgae();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new BlockMushroomSmall(false);

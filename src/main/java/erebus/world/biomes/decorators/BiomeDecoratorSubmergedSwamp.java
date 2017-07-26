@@ -10,6 +10,7 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
+import erebus.world.feature.plant.WorldGenAlgae;
 import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenSwampBush;
@@ -32,8 +33,8 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
 /*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	protected final WorldGenGasVents genGasVent = new WorldGenGasVents();
-	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
-*/
+*/	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
+
 	private final WorldGenReed genReed = new WorldGenReed();
 	private static final int[] offsetX = new int[] { -1, 1, 0, 0 };
 	private static final int[] offsetZ = new int[] { 0, 0, -1, 1 };
@@ -54,15 +55,15 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 
 	@Override
 	public void decorate() {
-/*		// Water
+		// Water
 		for (int attempt = 0; attempt < 5; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-
-			genAlgae.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			genAlgae.generate(world, rand, pos);
 		}
-*/
+
 		for (attempt = 0; attempt < 2; attempt++) {
 			xx = x + offsetXZ();
 			yy = ChunkProviderErebus.swampWaterHeight;
