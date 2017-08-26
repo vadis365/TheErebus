@@ -55,10 +55,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 				if (enchList != null && enchList.size() > 0)
 					for (int a = 0; a < enchList.size(); ++a) {
 						EnchantmentData data = (EnchantmentData) enchList.get(a);
-						if (is.getItem() == Items.ENCHANTED_BOOK)
-							Items.ENCHANTED_BOOK.addEnchantment(is, data);
-						else
-							is.addEnchantment(data.enchantmentobj, data.enchantmentLevel);
+						is.addEnchantment(data.enchantment, data.enchantmentLevel);
 					}
 			}
 			return is;

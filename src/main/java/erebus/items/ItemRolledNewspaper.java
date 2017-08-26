@@ -6,7 +6,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.NonNullList;
@@ -23,10 +22,12 @@ public class ItemRolledNewspaper extends ItemSword {
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		ItemStack is = new ItemStack(item);
-		is.addEnchantment(Enchantment.getEnchantmentByLocation("bane_of_arthropods"), 5);
-		list.add(is);
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.GEAR) {
+			ItemStack is = new ItemStack(this);
+			is.addEnchantment(Enchantment.getEnchantmentByLocation("bane_of_arthropods"), 5);
+			list.add(is);
+		}
 	}
 
 	@Override

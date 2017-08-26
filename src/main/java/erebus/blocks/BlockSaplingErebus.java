@@ -16,7 +16,6 @@ import net.minecraft.block.BlockSapling;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -38,8 +37,9 @@ public class BlockSaplingErebus extends BlockSapling {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(item));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.PLANTS)
+			list.add(new ItemStack(this));
 	}
 
 	@Override

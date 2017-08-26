@@ -14,7 +14,7 @@ public class GenLayerBiomes extends GenLayerErebus {
 
 	public GenLayerBiomes(long seed, GenLayer parentGenLayer) {
 		super(seed);
-		biomesToGenerate = ModBiomes.biomeList;
+		biomesToGenerate = ModBiomes.BIOME_LIST;
 		totalWeight = biomesToGenerate.getTotalWeight();
 		parent = parentGenLayer;
 	}

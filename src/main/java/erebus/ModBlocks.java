@@ -1,6 +1,7 @@
 package erebus;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -50,12 +51,20 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModBlocks {
 
 	private static final List<Block> BLOCKS = new LinkedList<Block>();
+	public static final List<ItemBlock> ITEM_BLOCKS = new ArrayList<ItemBlock>();
 
 	public static final Block UMBERSTONE = new BlockUmberstone();
 	public static final Block PLANKS = new BlockPlanksErebus();
@@ -137,34 +146,55 @@ public class ModBlocks {
 
 	public static void registerBlock(String name, Block block) {
 		BLOCKS.add(block);
-
-		GameRegistry.register(block.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name));
+		block.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name);
 
 		ItemBlock item;
 		if (block instanceof IHasCustomItem)
 			item = ((IHasCustomItem) block).getItemBlock();
 		else
 			item = new ItemBlock(block);
-
-		GameRegistry.register((ItemBlock) item.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name));
+		ITEM_BLOCKS.add(item);
+		item.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name);
 	}
+	
+	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
+	public static class RegistrationHandlerBlocks {
 
-	public static void registerRenderers() {
-		for (Block block : BLOCKS)
-			if (block instanceof ISubBlocksBlock) {
-				List<String> models = ((ISubBlocksBlock) block).getModels();
-				for (int i = 0; i < models.size(); i++)
-					ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + models.get(i), "inventory"));
-			} else {
-				ResourceLocation name = block.getRegistryName();
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + name.getResourcePath(), "inventory"));
-				if (block instanceof BlockLeavesErebus)
-					ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
-				if (block instanceof BlockSaplingErebus)
-					ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockSapling.TYPE }).build());
-				if (block instanceof BlockDoorErebus)
-					ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockDoor.POWERED }).build());
+		@SubscribeEvent
+		public static void registerBlocks(final RegistryEvent.Register<Block> event) {
+			final IForgeRegistry<Block> registry = event.getRegistry();
+			for (Block block : BLOCKS) {
+				registry.register(block);
 			}
+		}
+
+		@SubscribeEvent
+		public static void registerItemBlocks(final RegistryEvent.Register<Item> event) {
+			final IForgeRegistry<Item> registry = event.getRegistry();
+				for (ItemBlock item : ITEM_BLOCKS) {
+				registry.register(item);
+			}
+		}
+		
+		@SideOnly(Side.CLIENT)
+		@SubscribeEvent
+		public static void registerModels(ModelRegistryEvent event) {
+			for (Block block : BLOCKS)
+				if (block instanceof ISubBlocksBlock) {
+					List<String> models = ((ISubBlocksBlock) block).getModels();
+					for (int i = 0; i < models.size(); i++)
+						ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + models.get(i), "inventory"));
+				} else {
+					ResourceLocation name = block.getRegistryName();
+					ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + name.getResourcePath(), "inventory"));
+					if (block instanceof BlockLeavesErebus)
+						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
+					if (block instanceof BlockSaplingErebus)
+						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockSapling.TYPE }).build());
+					if (block instanceof BlockDoorErebus)
+						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockDoor.POWERED }).build());
+				}
+		}
 	}
 
 	public static interface IHasCustomItem {

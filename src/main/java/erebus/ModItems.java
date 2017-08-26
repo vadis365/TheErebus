@@ -1,6 +1,7 @@
 package erebus;
 
 import java.lang.reflect.Field;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,11 +34,17 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSeedFood;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModItems {
-
+	private static final List<Item> ITEMS = new LinkedList<Item>();
 	public static final Item MATERIALS = new ItemMaterials();
 	public static final Item EREBUS_FOOD = new ItemErebusFood();
 	public static final Item HEART_BERRIES = new ItemFoodHeartBerries(0, 0F, false);
@@ -109,9 +116,9 @@ public class ModItems {
 				Object obj = field.get(null);
 				if (obj instanceof Item) {
 					Item item = (Item) obj;
+					ITEMS.add(item);
 					String name = field.getName().toLowerCase(Locale.ENGLISH);
-
-					GameRegistry.register(item.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name));
+					item.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name);
 				}
 			}
 		} catch (IllegalAccessException e) {
@@ -119,25 +126,28 @@ public class ModItems {
 		}
 	}
 
-	public static void registerRenderers() {
-		try {
-			for (Field field : ModItems.class.getDeclaredFields()) {
-				Object obj = field.get(null);
-				if (obj instanceof Item) {
-					Item item = (Item) obj;
+	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
+	public static class RegistrationHandlerBlocks {
 
-					if (item instanceof ISubItemsItem) {
-						List<String> models = ((ISubItemsItem) item).getModels();
-						for (int i = 0; i < models.size(); i++)
-							ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(Reference.MOD_ID + ":" + models.get(i), "inventory"));
-					} else {
-						String name = field.getName().toLowerCase(Locale.ENGLISH);
-						ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Reference.MOD_ID + ":" + name, "inventory"));
-					}
-				}
+		@SubscribeEvent
+		public static void registerItemBlocks(final RegistryEvent.Register<Item> event) {
+			final IForgeRegistry<Item> registry = event.getRegistry();
+				for (Item item : ITEMS) {
+				registry.register(item);
 			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
+		}
+		
+		@SideOnly(Side.CLIENT)
+		@SubscribeEvent
+		public static void registerModels(ModelRegistryEvent event) {
+			for (Item item : ITEMS)
+				if (item instanceof ISubItemsItem) {
+					List<String> models = ((ISubItemsItem) item).getModels();
+					for (int i = 0; i < models.size(); i++)
+						ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(Reference.MOD_ID + ":" + models.get(i), "inventory"));
+				} else {
+					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
+				}
 		}
 	}
 

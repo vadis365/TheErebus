@@ -2,19 +2,23 @@ package erebus.items;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -39,8 +43,8 @@ public class ItemLeggingsSprint extends ItemArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean showAdvancedInfo) {
-		//list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocalFormatted("tooltip.erebus.sprintleggingstier", 1 + (!stack.hasTagCompound() ? 0 : stack.stackTagCompound.getByte("upgradeTier"))));
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		list.add(TextFormatting.GRAY + new TextComponentTranslation("tooltip.erebus.sprintleggingstier").getFormattedText() + " " + 1 + (!stack.hasTagCompound() ? 0 : stack.getTagCompound().getByte("upgradeTier")));
 	}
 
 	@Override
@@ -71,13 +75,15 @@ public class ItemLeggingsSprint extends ItemArmor {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(item, 1, 0));
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.GEAR) {
+			list.add(new ItemStack(this, 1, 0));
 
-		ItemStack is = new ItemStack(item, 1, 0);
-		if (!is.hasTagCompound())
-			is.setTagCompound(new NBTTagCompound());
-		is.getTagCompound().setByte("upgradeTier", (byte) 9);
-		list.add(is);
+			ItemStack is = new ItemStack(this, 1, 0);
+			if (!is.hasTagCompound())
+				is.setTagCompound(new NBTTagCompound());
+			is.getTagCompound().setByte("upgradeTier", (byte) 9);
+			list.add(is);
+		}
 	}
 }

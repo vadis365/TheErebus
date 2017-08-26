@@ -23,8 +23,6 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerItemAndBlockRenderers() {
-		ModItems.registerRenderers();
-		ModBlocks.registerRenderers();
 		MinecraftForge.EVENT_BUS.register(new GogglesClientTickHandler());
 	}
 

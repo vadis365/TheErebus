@@ -202,9 +202,9 @@ public class MapGenErebusRavine extends MapGenBase {
 				data.setBlockState(x, y, z, Blocks.BEDROCK.getDefaultState());
 			else if (y < 4)
 				data.setBlockState(x, y, z, ModBlocks.UMBERSTONE.getDefaultState());
-			else if (y < 10 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.volcanicDesert))
+			else if (y < 10 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.VOLCANIC_DESERT))
 				data.setBlockState(x, y, z, Blocks.FLOWING_LAVA.getDefaultState());
-			else if (y < ChunkProviderErebus.swampWaterHeight - 1 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.submergedSwamp))
+			else if (y < ChunkProviderErebus.swampWaterHeight - 1 && Biome.getIdForBiome(biome) == Biome.getIdForBiome(ModBiomes.SUBMERGED_SWAMP))
 				data.setBlockState(x, y, z, Blocks.FLOWING_WATER.getDefaultState());
 			else {
 				data.setBlockState(x, y, z, Blocks.AIR.getDefaultState());

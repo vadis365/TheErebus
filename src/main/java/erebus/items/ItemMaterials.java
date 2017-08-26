@@ -89,9 +89,11 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		for (EnumErebusMaterialsType type : EnumErebusMaterialsType.values())
-			list.add(type.createStack(1));
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.ITEMS) {
+			for (EnumErebusMaterialsType type : EnumErebusMaterialsType.values())
+				list.add(type.createStack(1));
+		}
 	}
 
 	@Override

@@ -34,16 +34,16 @@ public class Erebus {
 		ConfigHandler.INSTANCE.loadConfig(event);
 		ModItems.init();
 		ModBlocks.init();
-		ConfigHandler.INSTANCE.initOreConfigs();
-		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
+		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, false);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
+		ConfigHandler.INSTANCE.initOreConfigs();
+
 		PROXY.registerTileEntities();
 		PROXY.registerItemAndBlockRenderers();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		ModBiomes.init();
 		TeleporterHandler.init();
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);

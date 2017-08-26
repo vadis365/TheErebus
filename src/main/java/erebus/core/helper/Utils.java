@@ -172,10 +172,10 @@ public class Utils {
 		if (entity == null)
 			return false;
 
-		boolean flag = addItemStackToInventory(iinventory, entity.getEntityItem());
+		boolean flag = addItemStackToInventory(iinventory, entity.getItem());
 		if (flag)
 			entity.setDead();
-		else if (entity.getEntityItem().isEmpty())
+		else if (entity.getItem().isEmpty())
 			entity.setDead();
 		return flag;
 	}
@@ -376,7 +376,7 @@ public class Utils {
 
 	public static final LinkedHashMap<Short, Short> getEnchantments(ItemStack stack) {
 		LinkedHashMap<Short, Short> map = new LinkedHashMap<Short, Short>();
-		NBTTagList list = stack.getItem() == Items.ENCHANTED_BOOK ? Items.ENCHANTED_BOOK.getEnchantments(stack) : stack.getEnchantmentTagList();
+		NBTTagList list = stack.getItem() == Items.ENCHANTED_BOOK ? stack.getEnchantmentTagList() : stack.getEnchantmentTagList(); //will come back to this
 
 		if (list != null)
 			for (int i = 0; i < list.tagCount(); i++) {

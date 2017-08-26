@@ -121,8 +121,8 @@ public final class SpawnerErebus {
 			spawned = attempts = 0;
 
 			while (attempts < 4 && spawned < 2) {
-				x = coords.chunkXPos * 16 + rand.nextInt(16);
-				z = coords.chunkZPos * 16 + rand.nextInt(16);
+				x = coords.x * 16 + rand.nextInt(16);
+				z = coords.z * 16 + rand.nextInt(16);
 				y = 10 + rand.nextInt(100);
 				BlockPos blockCoord = new BlockPos(x, y, z);
 				Biome biome = world.getBiome(blockCoord);
@@ -183,8 +183,8 @@ public final class SpawnerErebus {
 						}
 
 						if (!coordsFinal) {
-							x = coords.chunkXPos * 16 + rand.nextInt(16);
-							z = coords.chunkZPos * 16 + rand.nextInt(16);
+							x = coords.x * 16 + rand.nextInt(16);
+							z = coords.z * 16 + rand.nextInt(16);
 							y = 20 + rand.nextInt(80);
 						}
 

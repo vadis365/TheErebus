@@ -14,7 +14,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.GameType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,9 +26,7 @@ public class WorldProviderErebus extends WorldProvider {
 	private short[] targetFogColor;
 
 	private boolean allowHostiles, allowAnimals;
-	
 
-	
 	@Override
 	public boolean canRespawnHere() {
 		if(ConfigHandler.INSTANCE.allowRespawning)
@@ -97,7 +95,7 @@ public class WorldProviderErebus extends WorldProvider {
     protected void init() {
 		setDimension(ConfigHandler.INSTANCE.erebusDimensionID);
 		biomeProvider = new BiomeProviderErebus(world);
-		hasNoSky = true;
+		hasSkyLight = false;
     }
 
 	@Override
@@ -151,7 +149,7 @@ public class WorldProviderErebus extends WorldProvider {
         if (spawnFuzz < 1) spawnFuzz = 1;
         int spawnFuzzHalf = spawnFuzz / 2;
 
-        if (!hasNoSky() && !isAdventure)
+		if (!hasSkyLight() && !isAdventure)
             ret = world.getTopSolidOrLiquidBlock(ret.add(world.rand.nextInt(spawnFuzzHalf) - spawnFuzz, 0, world.rand.nextInt(spawnFuzzHalf) - spawnFuzz));
 
         return ret;

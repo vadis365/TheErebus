@@ -53,9 +53,10 @@ public class BlockRedGem extends Block implements IHasCustomItem, ISubBlocksBloc
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		for (EnumType type : EnumType.values())
-			list.add(new ItemStack(item, 1, type.ordinal()));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.BLOCKS)
+			for (EnumType type : EnumType.values())
+				list.add(new ItemStack(this, 1, type.ordinal()));
 	}
 
 	@Override

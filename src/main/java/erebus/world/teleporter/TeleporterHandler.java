@@ -101,18 +101,18 @@ public final class TeleporterHandler {
 				 */
 			} else if (!(entity instanceof EntityMinecartContainer)) { // TODO we cannot handle this, would result in container breaking in both worlds and duplicate items;
 				// find some sneaky solution around this issue fixme copy paste
-				world.theProfiler.startSection("changeDimension");
+				world.profiler.startSection("changeDimension");
 
 				MinecraftServer mcServer = world.getMinecraftServer();
-				WorldServer worldCurrent = mcServer.worldServerForDimension(entity.dimension);
-				WorldServer worldTarget = mcServer.worldServerForDimension(dimensionId);
+				WorldServer worldCurrent = mcServer.getWorld(entity.dimension);
+				WorldServer worldTarget = mcServer.getWorld(dimensionId);
 				entity.dimension = dimensionId;
 
 				world.removeEntity(entity);
 				entity.isDead = false;
-				world.theProfiler.startSection("reposition");
+				world.profiler.startSection("reposition");
 				mcServer.getPlayerList().transferEntityToWorld(entity, dimensionId, worldCurrent, worldTarget, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
-				world.theProfiler.endStartSection("reloading");
+				world.profiler.endStartSection("reloading");
 				Entity newEntity = EntityList.createEntityByIDFromName(new ResourceLocation(EntityList.getEntityString(entity)), world);
 
 				if (newEntity != null) {
@@ -121,10 +121,10 @@ public final class TeleporterHandler {
 				}
 
 				entity.isDead = true;
-				world.theProfiler.endSection();
+				world.profiler.endSection();
 				worldCurrent.resetUpdateEntityTick();
 				worldTarget.resetUpdateEntityTick();
-				world.theProfiler.endSection();
+				world.profiler.endSection();
 
 				newEntity.timeUntilPortal = entity.getPortalCooldown();
 			}

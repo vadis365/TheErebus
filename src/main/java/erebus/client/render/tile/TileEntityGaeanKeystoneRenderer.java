@@ -2,9 +2,9 @@ package erebus.client.render.tile;
 
 import erebus.blocks.BlockGaeanKeystone;
 import erebus.tileentity.TileEntityGaeanKeystone;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
@@ -17,13 +17,13 @@ public class TileEntityGaeanKeystoneRenderer extends TileEntitySpecialRenderer<T
 	private static final ResourceLocation beamTexture = new ResourceLocation("textures/entity/beacon_beam.png");
 
 	@Override
-	public void renderTileEntityAt(TileEntityGaeanKeystone tile, double x, double y, double z, float partialTick, int destroyStage) {
+	public void render(TileEntityGaeanKeystone tile, double x, double y, double z, float partialTick, int destroyStage, float alpha) {
 		if (!BlockGaeanKeystone.isGemActive(tile.getBlockMetadata()))
 			return;
 
 		GlStateManager.alphaFunc(516, 0.1F);
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
+		BufferBuilder vertexbuffer = tessellator.getBuffer();
 		bindTexture(beamTexture);
         GlStateManager.glTexParameteri(3553, 10242, 10497);
         GlStateManager.glTexParameteri(3553, 10243, 10497);

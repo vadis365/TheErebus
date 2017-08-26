@@ -14,7 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -96,9 +95,10 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		for (EnumFoodType type : EnumFoodType.values())
-			list.add(type.createStack(1));
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.ITEMS)
+			for (EnumFoodType type : EnumFoodType.values())
+				list.add(type.createStack(1));
 	}
 
 	@Override

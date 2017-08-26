@@ -1,10 +1,11 @@
 package erebus.client.render.item;
 
+import erebus.ModItems;
+import erebus.items.ItemMaterials;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelShield;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import erebus.ModItems;
-import erebus.items.ItemMaterials;
 
 public class RenderErebusShield extends TileEntitySpecialRenderer<TileEntity> {
 	ItemStack stack = new ItemStack(ModItems.MATERIALS, 1, ItemMaterials.EnumErebusMaterialsType.PLATE_EXO.ordinal());
@@ -32,7 +31,7 @@ public class RenderErebusShield extends TileEntitySpecialRenderer<TileEntity> {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
+    public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         Minecraft.getMinecraft().getTextureManager().bindTexture(type.resloc);
         GlStateManager.pushMatrix();
         GlStateManager.scale(1.0F, -1.0F, -1.0F);

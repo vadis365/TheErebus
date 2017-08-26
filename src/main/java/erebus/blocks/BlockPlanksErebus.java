@@ -17,7 +17,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -44,11 +43,13 @@ public class BlockPlanksErebus extends Block implements IHasCustomItem, ISubBloc
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		EnumWood[] values = EnumWood.values();
-		for (int i = 0; i < values.length; i++)
-			if (values[i].hasPlanks())
-				list.add(new ItemStack(item, 1, i));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.BLOCKS) {
+			EnumWood[] values = EnumWood.values();
+			for (int i = 0; i < values.length; i++)
+				if (values[i].hasPlanks())
+					list.add(new ItemStack(this, 1, i));
+		}
 	}
 
 	@Override

@@ -58,9 +58,11 @@ public class BlockWallPlants extends Block implements IShearable, IHasCustomItem
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(item, 1, EnumWallPlantType.MOSS_DOWN.ordinal()));
-		list.add(new ItemStack(item, 1, EnumWallPlantType.MOULD_DOWN.ordinal()));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.PLANTS) {
+			list.add(new ItemStack(this, 1, EnumWallPlantType.MOSS_DOWN.ordinal()));
+			list.add(new ItemStack(this, 1, EnumWallPlantType.MOULD_DOWN.ordinal()));
+		}
 	}
 
 	@Override

@@ -46,8 +46,9 @@ public class BlockLeavesErebus extends BlockLeaves {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(item));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.BLOCKS)
+			list.add(new ItemStack(this));
 	}
 
 	@Override

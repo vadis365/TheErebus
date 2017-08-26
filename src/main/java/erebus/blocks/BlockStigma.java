@@ -18,7 +18,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -55,9 +54,10 @@ public class BlockStigma extends Block implements IHasCustomItem, ISubBlocksBloc
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		for (EnumType type : EnumType.values())
-			list.add(new ItemStack(item, 1, type.ordinal()));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.PLANTS)
+			for (EnumType type : EnumType.values())
+				list.add(new ItemStack(this, 1, type.ordinal()));
 	}
 
 	@Override

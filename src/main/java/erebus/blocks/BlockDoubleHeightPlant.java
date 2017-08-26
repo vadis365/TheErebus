@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
+import erebus.ModTabs;
 import erebus.items.ItemMaterials;
 import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
@@ -195,12 +196,13 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
     	return true;
     }
 
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	@Override
-    public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
-        for (EnumPlantType planttype : EnumPlantType.values())
-            list.add(new ItemStack(itemIn, 1, planttype.ordinal()));
-    }
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.BLOCKS)
+			for (EnumPlantType planttype : EnumPlantType.values())
+				list.add(new ItemStack(this, 1, planttype.ordinal()));
+	}
 
 	@Override
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {

@@ -63,9 +63,11 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, IHas
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-		list.add(new ItemStack(item, 1, EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED.ordinal()));
-		list.add(new ItemStack(item, 1, EnumWallPlantCultivatedType.MOULD_DOWN_CULTIVATED.ordinal()));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.PLANTS) {
+			list.add(new ItemStack(this, 1, EnumWallPlantCultivatedType.MOSS_DOWN_CULTIVATED.ordinal()));
+			list.add(new ItemStack(this, 1, EnumWallPlantCultivatedType.MOULD_DOWN_CULTIVATED.ordinal()));
+		}
 	}
 
 	@Override

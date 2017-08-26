@@ -2,7 +2,6 @@ package erebus.world.biomes;
 
 import java.util.Random;
 
-import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
 import net.minecraft.block.Block;
@@ -12,12 +11,11 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 	public BiomeUndergroundJungle(BiomeProperties properties) {
 		super(properties, new BiomeDecoratorUndergroundJungle());
 
-		properties.setBaseBiome("Undergound Jungle");
+		properties.setBaseBiome("Underground Jungle");
 		properties.setTemperature(1.35F);
 		properties.setRainDisabled();
 		setColors(0x53CA37, 0x29BC05);
 		setFog(8, 128, 8);
-		setWeight(22);
 /*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
@@ -47,9 +45,10 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 	public Block placeCaveBlock(Block block, int x, int y, int z, Random rand) {
 		return block == ModBlocks.UMBERSTONE || block == topBlock || block == fillerBlock || block == Blocks.SANDSTONE ? y < 24 ? Blocks.FLOWING_WATER : Blocks.AIR : block;
 	}
-
+/*
 	@Override
 	public BiomeBaseErebus getRandomSubBiome(int randomValue) {
 		return ModBiomes.jungleSubLake;
 	}
+	*/
 }

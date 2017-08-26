@@ -64,7 +64,7 @@ final class TeleporterErebus extends Teleporter {
 						blockpos2 = blockpos1.down();
 
 						if (this.worldServerInstance.getBlockState(blockpos1).getBlock() == ModBlocks.GAEAN_KEYSTONE) {
-							for (blockpos2 = blockpos1.down(); this.worldServerInstance.getBlockState(blockpos2) .getBlock() == Blocks.PORTAL; blockpos2 = blockpos2.down()) {
+							for (blockpos2 = blockpos1.down(); this.worldServerInstance.getBlockState(blockpos2).getBlock() == Blocks.PORTAL; blockpos2 = blockpos2.down()) {
 								blockpos1 = blockpos2;
 							}
 

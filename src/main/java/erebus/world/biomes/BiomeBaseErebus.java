@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class BiomeBaseErebus extends Biome implements IWeightProvider {
 
 	private final BiomeDecoratorBaseErebus decorator;
-	private short biomeWeight;
+	public static short biomeWeight;
 	private int grassColor, foliageColor;
 	private short[] fogColorRGB = new short[] { 255, 255, 255 };
 
@@ -62,7 +62,7 @@ public abstract class BiomeBaseErebus extends Biome implements IWeightProvider {
 			throw new RuntimeException("Cannot set biome weight twice!");
 		biomeWeight = (short) weight;
 		if (getClass().getGenericSuperclass() == BiomeBaseErebus.class)
-			ModBiomes.biomeList.add(this); // add to list once weight is known
+			ModBiomes.BIOME_LIST.add(this); // add to list once weight is known
 		return this;
 	}
 
