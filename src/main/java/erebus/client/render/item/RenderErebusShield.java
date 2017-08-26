@@ -5,15 +5,18 @@ import net.minecraft.client.model.ModelShield;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import erebus.ModItems;
 import erebus.items.ItemMaterials;
 
 public class RenderErebusShield extends TileEntitySpecialRenderer<TileEntity> {
-
+	ItemStack stack = new ItemStack(ModItems.MATERIALS, 1, ItemMaterials.EnumErebusMaterialsType.PLATE_EXO.ordinal());
     private ModelShield MODEL_SHIELD = new ModelShield() { //TODO Will add some custom thing here
     @Override
     public void render() {
@@ -39,13 +42,13 @@ public class RenderErebusShield extends TileEntitySpecialRenderer<TileEntity> {
     }
     
     private void renderItem() {
-        ItemStack stack = new ItemStack(ModItems.MATERIALS, 1, ItemMaterials.EnumErebusMaterialsType.PLATE_EXO.ordinal()); //Test item - works yay!
-       // RenderHelper.enableStandardItemLighting();
-		//GlStateManager.enableLighting();
+        RenderHelper.enableStandardItemLighting();
+		GlStateManager.enableLighting();
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(0.0D, 0.0625D, 0.1D);
 		GlStateManager.scale(1.25f, 1.25f, 1.25f);
-		Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.NONE);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		Minecraft.getMinecraft().getRenderItem().renderItem(stack, Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, (World) null, (EntityLivingBase) null));
 		GlStateManager.popMatrix();
     }
 
