@@ -20,14 +20,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
-import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderErebus implements IChunkGenerator {
 
@@ -139,7 +135,9 @@ public class ChunkProviderErebus implements IChunkGenerator {
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		biomesForGeneration = worldObj.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
 		generateTerrain(x, z, chunkprimer);
-		replaceBlocksForBiome(x, z, biomesForGeneration, chunkprimer);
+		System.out.println("BIOME PROVIDER: " + worldObj.getBiomeProvider());
+		System.out.println("HERE IS CRASH AT BIOMES FOR GENERATE CHUNK: " + biomesForGeneration);
+		replaceBiomeBlocks(x, z, chunkprimer, biomesForGeneration);
 
 		caveGenerator.generate(worldObj, x, z, chunkprimer);
 		ravineGenerator.generate(worldObj, x, z, chunkprimer);
@@ -162,8 +160,7 @@ public class ChunkProviderErebus implements IChunkGenerator {
 		double d1 = 2053.236D;
 		noiseData4 = noiseGen5.generateNoiseOctaves(noiseData4, x, y, z, sizeX, 1, sizeZ, 1D, 0D, 1D);
 		noiseData5 = noiseGen6.generateNoiseOctaves(noiseData5, x, y, z, sizeX, 1, sizeZ, 100D, 0D, 100D);
-		noiseData1 = noiseGen3.generateNoiseOctaves(noiseData1, x, y, z, sizeX, sizeY, sizeZ, d * 0.0125D, d1 / 60D,
-				d * 0.0125D);
+		noiseData1 = noiseGen3.generateNoiseOctaves(noiseData1, x, y, z, sizeX, sizeY, sizeZ, d * 0.0125D, d1 / 60D, d * 0.0125D);
 		noiseData2 = noiseGen1.generateNoiseOctaves(noiseData2, x, y, z, sizeX, sizeY, sizeZ, d, d1, d);
 		noiseData3 = noiseGen2.generateNoiseOctaves(noiseData3, x, y, z, sizeX, sizeY, sizeZ, d, d1, d);
 		int index = 0;
@@ -261,11 +258,9 @@ public class ChunkProviderErebus implements IChunkGenerator {
 
 	public static int swampWaterHeight = 24;
 
-	public void replaceBlocksForBiome(int x, int z, Biome[] biomes, ChunkPrimer primer) {
-		ChunkGeneratorEvent.ReplaceBiomeBlocks event = new ChunkGeneratorEvent.ReplaceBiomeBlocks(this, x, z, primer, worldObj);
-		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == Result.DENY)
-			return;
+    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomes) {
+    	if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.worldObj))
+    		return;
 
 		byte var5 = 0;
 		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, x * 16, z * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
@@ -275,18 +270,20 @@ public class ChunkProviderErebus implements IChunkGenerator {
 		additionalNoise1 = perlinAdditional1.getRegion(additionalNoise1, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 		additionalNoise2 = perlinAdditional2.getRegion(additionalNoise2, x * 16, z * 16, 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
-		for (int zInChunk = 0; zInChunk < 16; ++zInChunk)
-			for (int xInChunk = 0; xInChunk < 16; ++xInChunk) {
-				int horIndex = xInChunk + zInChunk * 16;
+		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
+			for (int zInChunk = 0; zInChunk < 16; ++zInChunk) {
+				int horIndex = zInChunk + xInChunk * 16;
+				
 				BiomeBaseErebus biome = (BiomeBaseErebus) biomes[horIndex];
+				System.out.println("BIOME IS : " + biome);
 				// float temperature = biome.getFloatTemperature(0, 0, 0);
-				int var12 = (int) (stoneNoise[xInChunk + zInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
+				int var12 = (int) (stoneNoise[zInChunk + xInChunk * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
 				int var13 = -1;
 
 				IBlockState topBlock = biome.topBlock;
 				IBlockState fillerBlock = biome.fillerBlock;
 
-				int preHeightIndex = (xInChunk * 16 + zInChunk) * 128;
+				int preHeightIndex = (zInChunk + xInChunk * 16) * 128;
 
 				if (biome == ModBiomes.SUBMERGED_SWAMP) {
 					if (additionalNoise1[horIndex] > 0) {
@@ -295,26 +292,21 @@ public class ChunkProviderErebus implements IChunkGenerator {
 							for (h += 0; h > 23.08D - additionalNoise1[horIndex]; h--) {
 								if (h == swampWaterHeight) {
 									if (rand.nextInt(32) == 0)
-										primer.setBlockState(xInChunk, h + 1, zInChunk,
-												Blocks.WATERLILY.getDefaultState());
+										primer.setBlockState(xInChunk, h + 1, zInChunk, Blocks.WATERLILY.getDefaultState());
 								}
 								if (h <= swampWaterHeight) {
 									primer.setBlockState(xInChunk, h, zInChunk, Blocks.WATER.getDefaultState());
 									if (additionalNoise1[horIndex] < 0.08D) {
 										if (ConfigHandler.INSTANCE.generateVents && rand.nextInt(25) == 0)
-											primer.setBlockState(xInChunk, h, zInChunk,
-													Blocks.LIT_PUMPKIN.getDefaultState()); // SWAMP_VENT
+											primer.setBlockState(xInChunk, h, zInChunk, Blocks.LIT_PUMPKIN.getDefaultState()); // SWAMP_VENT
 										else
-											primer.setBlockState(xInChunk, h, zInChunk,
-													ModBlocks.UMBERSTONE.getDefaultState());
+											primer.setBlockState(xInChunk, h, zInChunk, ModBlocks.UMBERSTONE.getDefaultState());
 									} else if (additionalNoise1[horIndex] < 0.5D)
 										primer.setBlockState(xInChunk, h - 1, zInChunk, Blocks.SAND.getDefaultState());
 									else if (additionalNoise1[horIndex] <= 2)
-										primer.setBlockState(xInChunk, h - 2, zInChunk,
-												ModBlocks.QUICK_SAND.getDefaultState());
+										primer.setBlockState(xInChunk, h - 2, zInChunk, ModBlocks.QUICK_SAND.getDefaultState());
 									else if (additionalNoise2[horIndex] > 2)
-										primer.setBlockState(xInChunk, h - 3, zInChunk,
-												ModBlocks.MUD.getDefaultState());
+										primer.setBlockState(xInChunk, h - 3, zInChunk, ModBlocks.MUD.getDefaultState());
 									else {
 										primer.setBlockState(xInChunk, h - 4, zInChunk, Blocks.CLAY.getDefaultState());
 										primer.setBlockState(xInChunk, h, zInChunk, Blocks.WATER.getDefaultState());

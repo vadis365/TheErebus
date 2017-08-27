@@ -61,6 +61,7 @@ public class ModBiomes {
 		}
 
 		private static <T extends Biome> void registerBiome(final IForgeRegistry<Biome> registry, final T biome, final String biomeName, final BiomeManager.BiomeType biomeType, final int weight, final BiomeDictionary.Type... types) {
+			BIOME_LIST.add((BiomeBaseErebus) biome);
 			registry.register(biome.setRegistryName(Reference.MOD_ID, biomeName));
 			BiomeDictionary.addTypes(biome, types);
 			BiomeManager.addBiome(biomeType, new BiomeManager.BiomeEntry(biome, weight));

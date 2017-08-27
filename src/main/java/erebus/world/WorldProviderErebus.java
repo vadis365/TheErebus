@@ -14,6 +14,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.GameType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -96,6 +97,11 @@ public class WorldProviderErebus extends WorldProvider {
 		setDimension(ConfigHandler.INSTANCE.erebusDimensionID);
 		biomeProvider = new BiomeProviderErebus(world);
 		hasSkyLight = false;
+    }
+
+	@Override
+    public BiomeProvider getBiomeProvider() {
+        return this.biomeProvider;
     }
 
 	@Override

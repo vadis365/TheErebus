@@ -35,10 +35,10 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		*/
 	}
 
-	@Override
-	public BiomeBaseErebus getRandomSubBiome(int randomValue) {
-		return randomValue < 40 ? ModBiomes.FIELDS_SUB_FOREST : null;
-	}
+	//@Override
+	//public BiomeBaseErebus getRandomSubBiome(int randomValue) {
+	//	return randomValue < 40 ? ModBiomes.FIELDS_SUB_FOREST : null;
+	//}
 
 	public static class BiomeElysianForest extends BiomeElysianFields {
 		public BiomeElysianForest(BiomeProperties properties) {
