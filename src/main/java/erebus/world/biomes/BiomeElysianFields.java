@@ -17,6 +17,7 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0xC6FF54);
 		setFog(213, 228, 127);
+		//setWeight(20);
 /*
 		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 10).setGroupSize(1, 3));
@@ -35,10 +36,10 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		*/
 	}
 
-	//@Override
-	//public BiomeBaseErebus getRandomSubBiome(int randomValue) {
-	//	return randomValue < 40 ? ModBiomes.FIELDS_SUB_FOREST : null;
-	//}
+	@Override
+	public BiomeBaseErebus getRandomSubBiome(int randomValue) {
+		return randomValue < 40 ? ModBiomes.FIELDS_SUB_FOREST : null;
+	}
 
 	public static class BiomeElysianForest extends BiomeElysianFields {
 		public BiomeElysianForest(BiomeProperties properties) {

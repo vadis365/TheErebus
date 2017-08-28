@@ -13,7 +13,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0xC1B668);
 		setFog(234, 194, 114);
-
+		//setWeight(15);
 /*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(2, 2));

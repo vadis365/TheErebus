@@ -12,7 +12,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0xB6B957, 0xA3A52D);
 		setFog(140, 116, 9);
-
+		//setWeight(20);
 /*
 		spawningGradual.add(new SpawnEntry(EntityGrasshopper.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 8).setGroupSize(1, 4));

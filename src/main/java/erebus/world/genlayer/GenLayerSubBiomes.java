@@ -34,7 +34,7 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 			int biomeID = currentBiomeInts[xx + 2 + (zz + 2) * (sizeX + 4)];
 
 			BiomeBaseErebus biome = (BiomeBaseErebus) Biome.getBiomeForId(biomeID);
-		/*	BiomeBaseErebus subBiome = biome.getRandomSubBiome(nextInt(100));
+			BiomeBaseErebus subBiome = biome.getRandomSubBiome(nextInt(101));
 
 			if (subBiome != null && biome != subBiome)
 				for (int a = 0, bx1, bx2, bz1, bz2, nx, nz; a < 5; a++) {
@@ -50,7 +50,7 @@ public class GenLayerSubBiomes extends GenLayerErebus {
 						attempt = 999;
 					} else if (a == 0)
 						break;
-				}*/
+				}
 		}
 
 		return biomeInts;

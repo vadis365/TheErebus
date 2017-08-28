@@ -16,6 +16,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0x53CA37, 0x29BC05);
 		setFog(8, 128, 8);
+		//setWeight(22);
 /*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
