@@ -26,8 +26,8 @@ public class WorldGenGasVents extends WorldGenerator {
 			zz = (int) (z + 0.5F + MathHelper.sin(ang) * len);
 			BlockPos posNew = new BlockPos(xx, yy, zz);
 
-			if (world.isAirBlock(posNew) && world.getBlockState(posNew.down()) == Blocks.GRASS.getDefaultState()) {
-				world.setBlockState(posNew.down(), ModBlocks.SWAMP_VENT.getDefaultState(), 2);
+			if (world.isAirBlock(posNew.up()) && world.getBlockState(posNew) == Blocks.GRASS.getDefaultState()) {
+				world.setBlockState(posNew, ModBlocks.SWAMP_VENT.getDefaultState(), 2);
 				++placed;
 			}
 		}
