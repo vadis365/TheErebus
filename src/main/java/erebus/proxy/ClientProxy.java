@@ -3,6 +3,8 @@ package erebus.proxy;
 import erebus.ModColourManager;
 import erebus.ModItems;
 import erebus.client.fx.ParticleBubbleGas;
+import erebus.client.fx.ParticleRepellent;
+import erebus.client.fx.ParticleSonic;
 import erebus.client.render.entity.RenderGasVent;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
@@ -23,6 +25,7 @@ import net.minecraft.client.particle.ParticleEnchantmentTable;
 import net.minecraft.client.particle.ParticleFlame;
 import net.minecraft.client.particle.ParticleHeart;
 import net.minecraft.client.particle.ParticleLava;
+import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.client.particle.ParticleSpell;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -78,30 +81,31 @@ public class ClientProxy extends CommonProxy {
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {
 		Particle fx = null;
 
-		//if (particleName.equals("repellent"))
-		//	fx = new EntityRepellentFX(world, x, y, z, 0.0F, 0.0F, 0.0F);
+		if (particleName.equals("repellent"))
+			fx = new ParticleRepellent(world, x, y, z, 0.0F, 0.0F, 0.0F);
 
-		//if (particleName.equals("sonic"))
-		//	fx = new EntitySonicFX(world, x, y, z, vecX, vecY, vecZ);
+		if (particleName.equals("sonic"))
+			fx = new ParticleSonic(world, x, y, z, vecX, vecY, vecZ);
 
 		if (particleName.equals("bubblegas")) {
 			fx = new ParticleBubbleGas(world, x, y, z, vecX, vecY, vecZ);
 			fx.setRBGColorF(0.306F, 0.576F, 0.192F);
 		}
 
-		//if (particleName.equals("bubblegasAcid")) {
-		//	fx = new EntityBubbleGasFX(world, x, y, z, vecX, vecY, vecZ);
-		//	fx.setRBGColorF(0.490F, 0.7451F, 0.6863F);
-		//}
+		if (particleName.equals("bubblegasAcid")) {
+			fx = new ParticleBubbleGas(world, x, y, z, vecX, vecY, vecZ);
+			fx.setRBGColorF(0.490F, 0.7451F, 0.6863F);
+		}
 
 		if (particleName.equals("swampflame")) {
 			fx = new ParticleFlame.Factory().createParticle(EnumParticleTypes.FLAME.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 			fx.setParticleTextureIndex(96);
 		}
 
-		if (particleName.equals("portal"))
-		//	fx = new EntityPortalFX(world, x, y, z, vecX, vecY, vecZ);
-
+		if (particleName.equals("portal")) {
+			fx = new ParticlePortal.Factory().createParticle(EnumParticleTypes.PORTAL.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
+			fx.setRBGColorF(0F, 1F, 0F);
+		}
 		if (particleName.equals("cloud"))
 			fx = new ParticleCloud.Factory().createParticle(EnumParticleTypes.CLOUD.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 

@@ -3,11 +3,13 @@ package erebus.world.biomes.decorators;
 import erebus.ModBlocks;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockSmallPlant;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.ChunkProviderErebus;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenGasVents;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.plant.WorldGenAlgae;
@@ -31,9 +33,9 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
-/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();*/
 	protected final WorldGenGasVents genGasVent = new WorldGenGasVents();
-*/	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
+	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
 
 	private final WorldGenReed genReed = new WorldGenReed();
 	private static final int[] offsetX = new int[] { -1, 1, 0, 0 };
@@ -107,7 +109,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (world.isAirBlock(pos))
 				genMossPatch.generate(world, rand, pos);
 		}
-/*
+
 		if (ConfigHandler.INSTANCE.generateVents) {
 			if (rand.nextInt(6) == 0)
 				for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
@@ -115,14 +117,16 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 					yy = 25 + rand.nextInt(75);
 					zz = z + offsetXZ();
 
-					for (; yy > 20; yy--)
-						if (checkSurface(SurfaceType.GRASS, xx, yy, zz)) {
-							genGasVent.generate(world, rand, xx, yy, zz);
+					for (; yy > 20; yy--) {
+						BlockPos pos = new BlockPos(xx, yy, zz);
+						if (checkSurface(SurfaceType.GRASS, pos)) {
+							genGasVent.generate(world, rand, pos);
 							break;
 						}
+					}
 				}
 		}
-*/
+
 		if (rand.nextInt(10) == 0)
 			for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
 				xx = x + offsetXZ();

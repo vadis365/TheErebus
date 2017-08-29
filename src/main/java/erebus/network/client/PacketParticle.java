@@ -131,7 +131,7 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 					}
 					break;
 				case GAS_VENT_VOLCANIC:
-					/*for (double yy = message.posY; yy < message.posY + 2D; yy += 0.5D) {
+					for (double yy = message.posY; yy < message.posY + 2D; yy += 0.5D) {
 						double d0 = message.posX - 0.075F;
 						double d1 = yy;
 						double d2 = message.posZ - 0.075F;
@@ -140,15 +140,15 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 						double d5 = message.posX;
 						double d6 = yy + 0.25F;
 						double d7 = message.posZ;
-						Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
-						Erebus.proxy.spawnCustomParticle("flame", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
-						Erebus.proxy.spawnCustomParticle("flame", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
-						Erebus.proxy.spawnCustomParticle("flame", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
-						Erebus.proxy.spawnCustomParticle("flame", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
-					}*/
+						Erebus.PROXY.spawnCustomParticle("flame", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
+						Erebus.PROXY.spawnCustomParticle("flame", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
+						Erebus.PROXY.spawnCustomParticle("flame", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
+						Erebus.PROXY.spawnCustomParticle("flame", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
+						Erebus.PROXY.spawnCustomParticle("flame", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
+					}
 					break;
 				case SPORE_JET:
-					/*for (double yy = message.posY; yy < message.posY + 2D; yy += 0.5D) {
+					for (double yy = message.posY; yy < message.posY + 2D; yy += 0.5D) {
 						double d0 = message.posX - 0.075F;
 						double d1 = yy;
 						double d2 = message.posZ - 0.075F;
@@ -157,12 +157,12 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 						double d5 = message.posX;
 						double d6 = yy + 0.25F;
 						double d7 = message.posZ;
-						Erebus.proxy.spawnCustomParticle("spell", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
-						Erebus.proxy.spawnCustomParticle("spell", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
-						Erebus.proxy.spawnCustomParticle("spell", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
-						Erebus.proxy.spawnCustomParticle("spell", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
-						Erebus.proxy.spawnCustomParticle("spell", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
-					}*/
+						Erebus.PROXY.spawnCustomParticle("spell", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
+						Erebus.PROXY.spawnCustomParticle("spell", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
+						Erebus.PROXY.spawnCustomParticle("spell", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
+						Erebus.PROXY.spawnCustomParticle("spell", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
+						Erebus.PROXY.spawnCustomParticle("spell", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
+					}
 					break;
 				default:
 			}

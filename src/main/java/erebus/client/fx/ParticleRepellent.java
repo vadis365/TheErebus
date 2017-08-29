@@ -1,21 +1,23 @@
 package erebus.client.fx;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class EntityRepellentFX extends EntityFX {
+public class ParticleRepellent extends Particle {
 
 	float repellentParticleScale;
 
-	public EntityRepellentFX(World world, double x, double y, double z, float red, float green, float blue) {
+	public ParticleRepellent(World world, double x, double y, double z, float red, float green, float blue) {
 		this(world, x, y, z, 1.0F, red, green, blue);
 	}
 
-	public EntityRepellentFX(World world, double x, double y, double z, float sizeMp, float red, float green, float blue) {
+	public ParticleRepellent(World world, double x, double y, double z, float sizeMp, float red, float green, float blue) {
 		super(world, x, y, z, 0.0D, 0.0D, 0.0D);
 		motionX *= 0.10000000149011612D;
 		motionY *= 0.10000000149011612D;
@@ -33,26 +35,17 @@ public class EntityRepellentFX extends EntityFX {
 		repellentParticleScale = particleScale;
 		particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D));
 		particleMaxAge = (int) (particleMaxAge * sizeMp);
-		noClip = false;
+		canCollide = false;
 	}
 
 	@Override
-	public void renderParticle(Tessellator tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {
-		float f6 = (particleAge + par2) / particleMaxAge * 32.0F;
-
-		if (f6 < 0.0F)
-			f6 = 0.0F;
-
-		if (f6 > 1.0F)
-			f6 = 1.0F;
-
-		particleScale = repellentParticleScale * f6;
-		super.renderParticle(tessellator, par2, par3, par4, par5, par6, par7);
+	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
+		float f = ((float) this.particleAge + partialTicks) / (float) this.particleMaxAge * 32.0F;
+		f = MathHelper.clamp(f, 0.0F, 1.0F);
+		this.particleScale = repellentParticleScale * f;
+		super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
 	}
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
 	@Override
 	public void onUpdate() {
 		prevPosX = posX;
@@ -60,10 +53,10 @@ public class EntityRepellentFX extends EntityFX {
 		prevPosZ = posZ;
 
 		if (particleAge++ >= particleMaxAge)
-			setDead();
+			setExpired();
 
 		setParticleTextureIndex(7 - particleAge * 8 / particleMaxAge);
-		moveEntity(motionX, motionY, motionZ);
+		move(motionX, motionY, motionZ);
 
 		if (posY == prevPosY) {
 			motionX *= 1.1D;

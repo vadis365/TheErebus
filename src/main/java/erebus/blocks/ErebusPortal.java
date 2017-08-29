@@ -2,6 +2,7 @@ package erebus.blocks;
 
 import java.util.Random;
 
+import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.core.handler.configs.ConfigHandler;
@@ -33,7 +34,6 @@ public class ErebusPortal extends Block {
 		setCreativeTab(ModTabs.BLOCKS);
 	}
 
-	
 		public static boolean makePortal(World world, BlockPos pos) {
 			if (isPatternValid(world, pos)) {
 				world.setBlockState(pos, ModBlocks.PORTAL.getDefaultState());
@@ -148,5 +148,27 @@ public class ErebusPortal extends Block {
 			return false;
 
 		return block == this ? false : super.shouldSideBeRendered(state, world, pos, side);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random rand) {
+		for (int amount = 0; amount < 4; ++amount) {
+			double x = (double) ((float) pos.getX() + rand.nextFloat());
+			double y = (double) ((float) pos.getY() + rand.nextFloat());
+			double z = (double) ((float) pos.getZ() + rand.nextFloat());
+			double velX = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+			double velY = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+			double velZ = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+			int offSet = rand.nextInt(2) * 2 - 1;
+
+			if (world.getBlockState(pos.west()).getBlock() != this && world.getBlockState(pos.east()).getBlock() != this) {
+				x = (double) pos.getX() + 0.5D + 0.25D * (double) offSet;
+				velX = (double) (rand.nextFloat() * 2.0F * (float) offSet);
+			} else {
+				z = (double) pos.getZ() + 0.5D + 0.25D * (double) offSet;
+				velZ = (double) (rand.nextFloat() * 2.0F * (float) offSet);
+			}
+			Erebus.PROXY.spawnCustomParticle("portal", world, x, y, z, velX, velY, velZ);
+		}
 	}
 }
