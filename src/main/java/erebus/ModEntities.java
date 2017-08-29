@@ -4,6 +4,7 @@ package erebus;
 import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityBlackWidow;
+import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
 import erebus.lib.Reference;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
@@ -21,7 +22,7 @@ public class ModEntities {
 		registerEntity(1, EntityWasp.class, "wasp", -256, -16382458);
 		registerEntity(2, EntityCentipede.class, "centipede", -13565952, -92160);
 		registerEntity(3, EntityBeetle.class, "beetle", -12116973, -5938366);
-		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
+		
 		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
 		registerEntity(6, EntityTarantula.class, "tarantula", 0x000000, 0xE82066);
 		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
@@ -96,6 +97,7 @@ public class ModEntities {
 		registerEntity(82, EntitySporeJet.class, "spore_jet");
 		registerEntity(83, EntityArmchairMount.class, "armchair_mount");
 */
+		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
 		registerEntity(79, EntityGasVent.class, "gas_vent");
 		
 

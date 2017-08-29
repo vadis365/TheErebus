@@ -5,10 +5,12 @@ import erebus.ModItems;
 import erebus.client.fx.ParticleBubbleGas;
 import erebus.client.fx.ParticleRepellent;
 import erebus.client.fx.ParticleSonic;
+import erebus.client.render.entity.RenderFly;
 import erebus.client.render.entity.RenderGasVent;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
+import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
 import erebus.tileentity.TileEntityBambooShield;
 import erebus.tileentity.TileEntityExoPlateShield;
@@ -58,6 +60,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerEnitityRenderers() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGasVent.class, RenderGasVent::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFly.class, RenderFly::new);
 	}
 
 	@Override

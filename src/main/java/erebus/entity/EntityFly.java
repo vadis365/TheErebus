@@ -1,43 +1,47 @@
 package erebus.entity;
 
-import java.util.Calendar;
-
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAmbientCreature;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
 
 public class EntityFly extends EntityAmbientCreature {
 
-	private ChunkCoordinates currentFlightTarget;
-	public float wingFloat;
-	AnimationMathHelper mathWings = new AnimationMathHelper();
+	private BlockPos spawnPosition;
+	private static final DataParameter<Byte> HANGING = EntityDataManager.<Byte>createKey(EntityFly.class, DataSerializers.BYTE);
 
 	public EntityFly(World world) {
 		super(world);
-		setSize(0.5F, 0.9F);
+		setSize(0.5F, 0.45F);
 		setIsFlyHanging(false);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(16, new Byte((byte) 0));
+        dataManager.register(HANGING, Byte.valueOf((byte)0));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
 	}
 
 	@Override
@@ -56,18 +60,18 @@ public class EntityFly extends EntityAmbientCreature {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return getIsFlyHanging() && rand.nextInt(4) != 0 ? null : "erebus:flysound";
+    public SoundEvent getAmbientSound() {
+		return null;//getIsFlyHanging() && rand.nextInt(4) != 0 ? null : "erebus:flysound";
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:flyhurt";
+    protected SoundEvent getHurtSound(DamageSource source) {
+		return null;//"erebus:flyhurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+    protected SoundEvent getDeathSound() {
+		return null;//"erebus:squish";
 	}
 
 	@Override
@@ -80,21 +84,15 @@ public class EntityFly extends EntityAmbientCreature {
 	}
 
 	public boolean getIsFlyHanging() {
-		return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		return (((Byte) dataManager.get(HANGING)).byteValue() & 1) != 0;
 	}
 
-	public void setIsFlyHanging(boolean par1) {
-		byte var2 = dataWatcher.getWatchableObjectByte(16);
-
-		if (par1)
-			dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 | 1)));
+	public void setIsFlyHanging(boolean isHanging) {
+		byte b0 = ((Byte) dataManager.get(HANGING)).byteValue();
+		if (isHanging)
+			dataManager.set(HANGING, Byte.valueOf((byte) (b0 | 1)));
 		else
-			dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 & -2)));
-	}
-
-	@Override
-	protected boolean isAIEnabled() {
-		return true;
+			dataManager.set(HANGING, Byte.valueOf((byte) (b0 & -2)));
 	}
 
 	@Override
@@ -102,11 +100,11 @@ public class EntityFly extends EntityAmbientCreature {
 		super.onUpdate();
 
 		if (getIsFlyHanging()) {
-			wingFloat = 0.0F;
-			motionX = motionY = motionZ = 0.0D;
-			posY = MathHelper.floor_double(posY) + 1.0D - height;
+			motionX = 0.0D;
+			motionY = 0.0D;
+			motionZ = 0.0D;
+			posY = (double) MathHelper.floor(posY) + 1.0D - (double) height;
 		} else {
-			wingFloat = mathWings.swing(4.0F, 0.1F);
 			motionY *= 0.6000000238418579D;
 		}
 	}
@@ -114,37 +112,43 @@ public class EntityFly extends EntityAmbientCreature {
 	@Override
 	protected void updateAITasks() {
 		super.updateAITasks();
+		BlockPos blockpos = new BlockPos(this);
+		BlockPos blockpos1 = blockpos.up();
 
 		if (getIsFlyHanging()) {
-			if (!worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
-				setIsFlyHanging(false);
-			else {
+			if (world.getBlockState(blockpos1).isNormalCube()) {
 				if (rand.nextInt(200) == 0)
-					rotationYawHead = rand.nextInt(360);
+					rotationYawHead = (float) rand.nextInt(360);
 
-				if (worldObj.getClosestPlayerToEntity(this, 4.0D) != null)
+				if (world.getNearestPlayerNotCreative(this, 4.0D) != null) {
 					setIsFlyHanging(false);
+					world.playEvent((EntityPlayer) null, 1025, blockpos, 0);
+				}
+			} else {
+				setIsFlyHanging(false);
+				world.playEvent((EntityPlayer) null, 1025, blockpos, 0);
 			}
 		} else {
-			if (currentFlightTarget != null && (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
-				currentFlightTarget = null;
+			if (spawnPosition != null && (!world.isAirBlock(spawnPosition) || spawnPosition.getY() < 1))
+				spawnPosition = null;
 
-			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
-				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
+			if (spawnPosition == null || rand.nextInt(30) == 0 || spawnPosition.distanceSq((double) ((int) posX), (double) ((int) posY), (double) ((int) posZ)) < 4.0D)
+				spawnPosition = new BlockPos((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
 
-			double var1 = currentFlightTarget.posX + 0.5D - posX;
-			double var3 = currentFlightTarget.posY + 0.1D - posY;
-			double var5 = currentFlightTarget.posZ + 0.5D - posZ;
-			motionX += (Math.signum(var1) * 0.5D - motionX) * 0.10000000149011612D;
-			motionY += (Math.signum(var3) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-			motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.10000000149011612D;
-			float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float var8 = MathHelper.wrapAngleTo180_float(var7 - rotationYaw);
+			double d0 = (double) spawnPosition.getX() + 0.5D - posX;
+			double d1 = (double) spawnPosition.getY() + 0.1D - posY;
+			double d2 = (double) spawnPosition.getZ() + 0.5D - posZ;
+			motionX += (Math.signum(d0) * 0.5D - motionX) * 0.10000000149011612D;
+			motionY += (Math.signum(d1) * 0.699999988079071D - motionY) * 0.10000000149011612D;
+			motionZ += (Math.signum(d2) * 0.5D - motionZ) * 0.10000000149011612D;
+			float f = (float) (MathHelper.atan2(motionZ, motionX) * (180D / Math.PI)) - 90.0F;
+			float f1 = MathHelper.wrapDegrees(f - rotationYaw);
 			moveForward = 0.5F;
-			rotationYaw += var8;
+			rotationYaw += f1;
 
-			if (rand.nextInt(100) == 0 && worldObj.getBlock(MathHelper.floor_double(posX), (int) posY + 1, MathHelper.floor_double(posZ)).isNormalCube())
-				setIsFlyHanging(false);
+			if (rand.nextInt(100) == 0 && world.getBlockState(blockpos1).isNormalCube()) {
+				setIsFlyHanging(true);
+			}
 		}
 	}
 
@@ -154,11 +158,11 @@ public class EntityFly extends EntityAmbientCreature {
 	}
 
 	@Override
-	protected void fall(float par1) {
+	public void fall(float distance, float damageMultiplier) {
 	}
 
 	@Override
-	protected void updateFallState(double par1, boolean par3) {
+	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
 	}
 
 	@Override
@@ -167,49 +171,34 @@ public class EntityFly extends EntityAmbientCreature {
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float par2) {
-		if (isEntityInvulnerable())
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		if (isEntityInvulnerable(source))
 			return false;
-		else {
-			if (!worldObj.isRemote && getIsFlyHanging())
-				setIsFlyHanging(false);
-
-			return super.attackEntityFrom(source, par2);
-		}
+		else if (!world.isRemote && getIsFlyHanging())
+			setIsFlyHanging(false);
+		return super.attackEntityFrom(source, amount);
 	}
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
-		super.readEntityFromNBT(nbt);
-		dataWatcher.updateObject(16, Byte.valueOf(nbt.getByte("BatFlags")));
+	public void readEntityFromNBT(NBTTagCompound compound) {
+		super.readEntityFromNBT(compound);
+		dataManager.set(HANGING, Byte.valueOf(compound.getByte("fly_hanging")));
 	}
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
-		super.writeEntityToNBT(nbt);
-		nbt.setByte("BatFlags", dataWatcher.getWatchableObjectByte(16));
+	public void writeEntityToNBT(NBTTagCompound compound) {
+		super.writeEntityToNBT(compound);
+		compound.setByte("fly_hanging", ((Byte) dataManager.get(HANGING)).byteValue());
 	}
 
 	@Override
 	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(boundingBox.minY);
-
-		if (var1 >= 63)
+		BlockPos blockpos = new BlockPos(posX, getEntityBoundingBox().minY, posZ);
+		if (blockpos.getY() >= 63)
 			return false;
 		else {
-			int var2 = MathHelper.floor_double(posX);
-			int var3 = MathHelper.floor_double(posZ);
-			int var4 = worldObj.getBlockLightValue(var2, var1, var3);
-			byte var5 = 4;
-			Calendar var6 = worldObj.getCurrentDate();
-
-			if ((var6.get(2) + 1 != 10 || var6.get(5) < 20) && (var6.get(2) + 1 != 11 || var6.get(5) > 3)) {
-				if (rand.nextBoolean())
-					return false;
-			} else
-				var5 = 7;
-
-			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
+			int lightValue = world.getLightFromNeighbors(blockpos);
+			if (rand.nextBoolean())
+				return false;
+			return lightValue > rand.nextInt(4) ? false : super.getCanSpawnHere();
 		}
 	}
 
@@ -221,8 +210,8 @@ public class EntityFly extends EntityAmbientCreature {
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
 		if (rand.nextInt(10) == 0)
-			entityDropItem(ItemMaterials.DATA.FLY_WING.makeStack(), 0.0F);
+			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.FLY_WING.ordinal()), 0.0F);
 		if (rand.nextInt(20) == 0)
-			entityDropItem(ItemMaterials.DATA.COMPOUND_EYES.makeStack(), 0.0F);
+			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.COMPOUND_EYES.ordinal()), 0.0F);
 	}
 }
