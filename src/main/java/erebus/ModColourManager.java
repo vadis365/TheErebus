@@ -1,6 +1,7 @@
 package erebus;
 
 import erebus.blocks.BlockSmallPlant;
+import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockSmallPlant.EnumSmallPlantType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -47,6 +48,7 @@ public class ModColourManager {
 
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SMALL_PLANT);
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.ALGAE);
+		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SWAMP_VENT);
 	}
 
 	/**
@@ -62,11 +64,16 @@ public class ModColourManager {
 			final IBlockState state = ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
 			if(state.getBlock() instanceof BlockSmallPlant && (state.getValue(BlockSmallPlant.PLANT_TYPE) == EnumSmallPlantType.FIDDLE_HEAD ||state.getValue(BlockSmallPlant.PLANT_TYPE) == EnumSmallPlantType.FERN))
 				return blockColors.colorMultiplier(state, null, null, tintIndex);
+			
+			if(state.getBlock() instanceof BlockSwampVent)
+				return blockColors.colorMultiplier(state, null, null, tintIndex);
+			
 			return -1;
 		};
 
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.SMALL_PLANT);
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.ALGAE);
+		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.SWAMP_VENT);
 	}
 }
 

@@ -30,6 +30,7 @@ import erebus.blocks.BlockRedGem;
 import erebus.blocks.BlockSaplingErebus;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockStigma;
+import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
@@ -93,6 +94,7 @@ public class ModBlocks {
 	public static final Block MUD = new BlockMud();
 	public static final Block QUICK_SAND = new BlockQuickSand();
 	public static final Block RED_GEM = new BlockRedGem();
+	public static final Block SWAMP_VENT = new BlockSwampVent();
 
 	public static final Block CROP_TURNIP = new BlockTurnip().setCreativeTab(ModTabs.PLANTS);
 	public static final Block CROP_CABBAGE = new BlockCabbage().setCreativeTab(ModTabs.PLANTS);

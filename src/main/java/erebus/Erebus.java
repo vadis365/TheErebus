@@ -3,6 +3,7 @@ package erebus;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
+import erebus.network.client.PacketParticle;
 import erebus.proxy.CommonProxy;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
@@ -17,6 +18,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)//, dependencies = Reference.DEPENDENCIES)
 public class Erebus {
@@ -25,22 +29,28 @@ public class Erebus {
 	public static CommonProxy PROXY;
 
 	@Instance(Reference.MOD_ID)
-	public static Erebus instance;
+	public static Erebus INSTANCE;
 
 	public static DimensionType dimensionType;
-	
+	public static SimpleNetworkWrapper NETWORK_WRAPPER;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.INSTANCE.loadConfig(event);
 		ModItems.init();
 		ModBlocks.init();
 		ModBiomes.init();
+		ModEntities.init();
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
 		ConfigHandler.INSTANCE.initOreConfigs();
+		
+		NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
+		NETWORK_WRAPPER.registerMessage(PacketParticle.class, PacketParticle.class, 1, Side.CLIENT);
 
 		PROXY.registerTileEntities();
 		PROXY.registerItemAndBlockRenderers();
+		PROXY.registerEnitityRenderers();
 	}
 
 	@EventHandler
