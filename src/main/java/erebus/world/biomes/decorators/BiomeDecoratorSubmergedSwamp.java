@@ -111,7 +111,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 		}
 
 		if (ConfigHandler.INSTANCE.generateVents) {
-			if (rand.nextInt(2) == 0)
+			if (rand.nextBoolean())
 				for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
 					xx = x + offsetXZ();
 					yy = 25 + rand.nextInt(75);
