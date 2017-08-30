@@ -5,6 +5,7 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
 import erebus.network.client.PacketParticle;
 import erebus.proxy.CommonProxy;
+import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.world.DimensionType;
@@ -59,6 +60,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);
 		MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
+		MinecraftForge.EVENT_BUS.register(SpawnerErebus.INSTANCE);
 		PROXY.registerItemAndBlockColourRenderers();
 	}
 
