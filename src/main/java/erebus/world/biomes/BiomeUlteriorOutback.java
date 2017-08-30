@@ -1,8 +1,10 @@
 package erebus.world.biomes;
 
+import erebus.entity.EntityFly;
+import erebus.world.SpawnerErebus.SpawnEntry;
+import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 import net.minecraft.block.BlockSand;
 import net.minecraft.init.Blocks;
-import erebus.world.biomes.decorators.BiomeDecoratorUlteriorOutback;
 
 public class BiomeUlteriorOutback extends BiomeBaseErebus {
 	public BiomeUlteriorOutback(BiomeProperties properties) {
@@ -26,8 +28,10 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityMidgeSwarm.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityRhinoBeetle.class, 10).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 15).setGroupSize(2, 4));
-		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
+		
 */
+		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
+		
 		topBlock = Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND);
 	}
 }

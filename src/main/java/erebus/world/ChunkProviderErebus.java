@@ -405,7 +405,7 @@ public class ChunkProviderErebus implements IChunkGenerator {
 			rand.setSeed(x * (rand.nextLong() / 2L * 2L + 1L) + z * (rand.nextLong() / 2L * 2L + 1L) ^ worldObj.getSeed());
 			biome.populate(worldObj, rand, blockCoord.getX(), blockCoord.getZ());
 			biome.decorate(worldObj, rand, blockCoord.getX(), blockCoord.getZ());
-			//	SpawnerErebus.onChunkPopulate(worldObj, rand, biome, blockCoordX + 8, blockCoordZ + 8);
+			SpawnerErebus.onChunkPopulate(worldObj, rand, biome, blockCoord.getX() + 8, blockCoord.getZ() + 8);
 		}
 
 		//	for (int attempt = 0; attempt < 14; ++attempt)
@@ -413,14 +413,6 @@ public class ChunkProviderErebus implements IChunkGenerator {
 
 		BlockFalling.fallInstantly = false;
 	}
-
-	//	@Override
-	//	@SuppressWarnings("rawtypes")
-	//	public List getPossibleCreatures(EnumCreatureType creatureType, int x, int y, int z) {
-	//		Biome biome = worldObj.getBiomeGenForCoords(x, z);
-	//		return biome == null ? null : biome.getSpawnableList(creatureType);
-	//	}
-
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
@@ -430,8 +422,8 @@ public class ChunkProviderErebus implements IChunkGenerator {
 
 	@Override
 	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-		// TODO Auto-generated method stub
-		return null;
+		Biome biome = this.worldObj.getBiome(pos);
+		return biome == null ? null : biome.getSpawnableList(creatureType);
 	}
 
 	@Override
@@ -441,8 +433,7 @@ public class ChunkProviderErebus implements IChunkGenerator {
 	}
 
 	@Override
-	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position,
-			boolean findUnexplored) {
+	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
 		// TODO Auto-generated method stub
 		return null;
 	}

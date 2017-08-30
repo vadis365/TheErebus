@@ -2,10 +2,12 @@ package erebus.world.biomes;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
+import erebus.entity.EntityFly;
+import erebus.world.SpawnerErebus.SpawnEntry;
+import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import erebus.ModBlocks;
-import erebus.world.biomes.decorators.BiomeDecoratorVolcanicDesert;
 
 public class BiomeVolcanicDesert extends BiomeBaseErebus {
 	public BiomeVolcanicDesert(BiomeProperties properties) {
@@ -26,9 +28,11 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBlackWidow.class, 5).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityLavaWebSpider.class, 300).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
-		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
+		
 		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
 */
+		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
+
 		topBlock = Blocks.SAND.getDefaultState();
 		fillerBlock = Blocks.SANDSTONE.getDefaultState();
 	}

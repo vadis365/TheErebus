@@ -1,6 +1,5 @@
 package erebus.client.model.entity;
 
-
 import erebus.entity.EntityFly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -12,96 +11,90 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelFly extends ModelBase {
-
-	ModelRenderer Shape1;
-	ModelRenderer Shape2;
-	ModelRenderer Shape3;
-	ModelRenderer Shape4;
-	ModelRenderer Shape5;
-	ModelRenderer Shape6;
-	ModelRenderer Shape7;
-	ModelRenderer Shape8;
-	ModelRenderer Shape9;
-	ModelRenderer Shape10;
-	ModelRenderer Shape11;
-	ModelRenderer Shape12;
-	ModelRenderer Shape13;
+	ModelRenderer thorax;
+	ModelRenderer abdomen;
+	ModelRenderer right_eye;
+	ModelRenderer left_eye;
+	ModelRenderer leg_left_back;
+	ModelRenderer head;
+	ModelRenderer leg_left_front;
+	ModelRenderer leg_left_mid;
+	ModelRenderer leg_right_back;
+	ModelRenderer leg_right_front;
+	ModelRenderer leg_right_mid;
+	ModelRenderer wing_right;
+	ModelRenderer wing_left;
 
 	public ModelFly() {
 		textureWidth = 64;
 		textureHeight = 32;
-
-		Shape1 = new ModelRenderer(this, 24, 7);
-		Shape1.addBox(-2.5F, -2F, -2.5F, 5, 5, 4);
-		Shape1.setRotationPoint(0F, 19F, 0F);
-		setRotation(Shape1, 0F, 0F, 0F);
-		Shape2 = new ModelRenderer(this, 0, 0);
-		Shape2.addBox(-3F, -3F, 2F, 6, 6, 6);
-		Shape2.setRotationPoint(0F, 19F, 0F);
-		setRotation(Shape2, 0F, 0F, 0F);
-		Shape3 = new ModelRenderer(this, 24, 0);
-		Shape3.addBox(0.5F, -2.5F, -3.5F, 2, 4, 3);
-		Shape3.setRotationPoint(0F, 19F, -2F);
-		setRotation(Shape3, 0F, 0F, 0F);
-		Shape4 = new ModelRenderer(this, 24, 0);
-		Shape4.addBox(-2.5F, -2.5F, -3.5F, 2, 4, 3);
-		Shape4.setRotationPoint(0F, 19F, -2F);
-		setRotation(Shape4, 0F, 0F, 0F);
-		Shape5 = new ModelRenderer(this, 0, 12);
-		Shape5.addBox(0F, 0F, 0F, 6, 1, 1);
-		Shape5.setRotationPoint(3F, 19F, 0F);
-		setRotation(Shape5, 0F, -0.5235988F, 0.7853982F);
-		Shape6 = new ModelRenderer(this, 34, 0);
-		Shape6.addBox(-2F, -2F, -3F, 4, 4, 3);
-		Shape6.setRotationPoint(0F, 19F, -2F);
-		setRotation(Shape6, 0F, 0F, 0F);
-		Shape7 = new ModelRenderer(this, 0, 12);
-		Shape7.addBox(0F, 0F, 0.5F, 6, 1, 1);
-		Shape7.setRotationPoint(3F, 19F, 0F);
-		setRotation(Shape7, 0F, 0.5235988F, 0.7853982F);
-		Shape8 = new ModelRenderer(this, 0, 12);
-		Shape8.addBox(0F, 0F, -0.5F, 6, 1, 1);
-		Shape8.setRotationPoint(3F, 19F, -0.5F);
-		setRotation(Shape8, 0F, 0.5235988F, 0.7853982F);
-		Shape9 = new ModelRenderer(this, 0, 12);
-		Shape9.addBox(-6F, 0F, 0F, 6, 1, 1);
-		Shape9.setRotationPoint(-3F, 19F, -1F);
-		setRotation(Shape9, 0F, 0.5235988F, -0.7853982F);
-		Shape10 = new ModelRenderer(this, 0, 12);
-		Shape10.addBox(-6F, 0F, -1F, 6, 1, 1);
-		Shape10.setRotationPoint(-3F, 19F, -1F);
-		setRotation(Shape10, 0F, -0.5235988F, -0.7853982F);
-		Shape11 = new ModelRenderer(this, 0, 12);
-		Shape11.addBox(-6F, 0F, -0.5F, 6, 1, 1);
-		Shape11.setRotationPoint(-3F, 19F, -0.5F);
-		setRotation(Shape11, 0F, 0F, -0.7853982F);
-		Shape12 = new ModelRenderer(this, 0, 25);
-		Shape12.addBox(-6F, 0F, 0F, 6, 1, 6);
-		Shape12.setRotationPoint(-1F, 16F, 0F);
-		setRotation(Shape12, 0.5235988F, -0.1745329F, 0F);
-		Shape13 = new ModelRenderer(this, 0, 25);
-		Shape13.addBox(0F, 0F, 0F, 6, 1, 6);
-		Shape13.setRotationPoint(1F, 16F, 0F);
-		setRotation(Shape13, 0.5235988F, 0.1745329F, 0F);
+		leg_right_back = new ModelRenderer(this, 0, 12);
+		leg_right_back.setRotationPoint(-3.0F, 19.0F, 0.0F);
+		leg_right_back.addBox(-6.0F, 0.0F, 0.0F, 6, 1, 1, 0.0F);
+		setRotation(leg_right_back, -0.3876376268679406F, 0.36128315516282616F, -0.8571311956544152F);
+		wing_left = new ModelRenderer(this, 0, 25);
+		wing_left.mirror = true;
+		wing_left.setRotationPoint(1.0F, 16.0F, 0.0F);
+		wing_left.addBox(0.0F, 0.0F, 0.0F, 6, 1, 6, 0.0F);
+		setRotation(wing_left, 0.5235987755982988F, 0.17453292519943295F, 0.0F);
+		leg_right_mid = new ModelRenderer(this, 0, 12);
+		leg_right_mid.setRotationPoint(-3.0F, 19.0F, -0.5F);
+		leg_right_mid.addBox(-6.0F, 0.0F, -0.5F, 6, 1, 1, 0.0F);
+		setRotation(leg_right_mid, 0.0F, -0.0F, -0.7853981633974483F);
+		abdomen = new ModelRenderer(this, 0, 0);
+		abdomen.setRotationPoint(0.0F, 19.0F, 0.0F);
+		abdomen.addBox(-3.0F, -3.0F, 2.0F, 6, 6, 6, 0.0F);
+		leg_left_back = new ModelRenderer(this, 0, 12);
+		leg_left_back.setRotationPoint(3.0F, 19.0F, 0.0F);
+		leg_left_back.addBox(0.0F, 0.0F, 0.0F, 6, 1, 1, 0.0F);
+		setRotation(leg_left_back, -0.3876376268679406F, -0.36128315516282616F, 0.8571311956544152F);
+		thorax = new ModelRenderer(this, 24, 7);
+		thorax.setRotationPoint(0.0F, 19.0F, 0.0F);
+		thorax.addBox(-2.5F, -2.5F, -2.0F, 5, 5, 4, 0.0F);
+		left_eye = new ModelRenderer(this, 24, 0);
+		left_eye.setRotationPoint(0.0F, 19.0F, -2.0F);
+		left_eye.addBox(0.5F, -2.5F, -3.5F, 2, 4, 3, 0.0F);
+		leg_left_mid = new ModelRenderer(this, 0, 12);
+		leg_left_mid.setRotationPoint(3.0F, 19.0F, -0.5F);
+		leg_left_mid.addBox(0.0F, 0.0F, -0.5F, 6, 1, 1, 0.0F);
+		setRotation(leg_left_mid, 0.0F, -0.0F, 0.7853981633974483F);
+		leg_left_front = new ModelRenderer(this, 0, 12);
+		leg_left_front.setRotationPoint(3.0F, 19.0F, -1.0F);
+		leg_left_front.addBox(0.0F, 0.0F, -1.0F, 6, 1, 1, 0.0F);
+		setRotation(leg_left_front, 0.3876376268679406F, 0.36128315516282616F, 0.8571311956544152F);
+		right_eye = new ModelRenderer(this, 24, 0);
+		right_eye.mirror = true;
+		right_eye.setRotationPoint(0.0F, 19.0F, -2.0F);
+		right_eye.addBox(-2.5F, -2.5F, -3.5F, 2, 4, 3, 0.0F);
+		wing_right = new ModelRenderer(this, 0, 25);
+		wing_right.setRotationPoint(-1.0F, 16.0F, 0.0F);
+		wing_right.addBox(-6.0F, 0.0F, 0.0F, 6, 1, 6, 0.0F);
+		setRotation(wing_right, 0.5235987755982988F, -0.17453292519943295F, 0.0F);
+		leg_right_front = new ModelRenderer(this, 0, 12);
+		leg_right_front.setRotationPoint(-3.0F, 19.0F, -1.0F);
+		leg_right_front.addBox(-6.0F, 0.0F, -1.0F, 6, 1, 1, 0.0F);
+		setRotation(leg_right_front, 0.3876376268679406F, -0.36128315516282616F, -0.8571311956544152F);
+		head = new ModelRenderer(this, 34, 0);
+		head.setRotationPoint(0.0F, 19.0F, -2.0F);
+		head.addBox(-2.0F, -2.0F, -3.0F, 4, 4, 3, 0.0F);
 	}
 
 	@Override
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
-		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		Shape1.render(unitPixel);
-		Shape2.render(unitPixel);
-		Shape3.render(unitPixel);
-		Shape4.render(unitPixel);
-		Shape5.render(unitPixel);
-		Shape6.render(unitPixel);
-		Shape7.render(unitPixel);
-		Shape8.render(unitPixel);
-		Shape9.render(unitPixel);
-		Shape10.render(unitPixel);
-		Shape11.render(unitPixel);
-		Shape12.render(unitPixel);
-		Shape13.render(unitPixel);
+        leg_right_back.render(unitPixel);
+        wing_left.render(unitPixel);
+        leg_right_mid.render(unitPixel);
+        abdomen.render(unitPixel);
+        leg_left_back.render(unitPixel);
+        thorax.render(unitPixel);
+        left_eye.render(unitPixel);
+        leg_left_mid.render(unitPixel);
+        leg_left_front.render(unitPixel);
+        right_eye.render(unitPixel);
+        wing_right.render(unitPixel);
+        leg_right_front.render(unitPixel);
+        head.render(unitPixel);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -109,26 +102,25 @@ public class ModelFly extends ModelBase {
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-	
+
 	@Override
 	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
 		EntityFly fly = (EntityFly) entity;
-		float flap = MathHelper.sin((fly.ticksExisted) * 0.75F) * 0.8F;
+		float flap = MathHelper.sin((fly.ticksExisted) * 0.95F) * 1F;
 		if (!fly.getIsFlyHanging()) {
-			Shape12.rotateAngleX = 0.5235988F + flap * 0.2F;
-			Shape13.rotateAngleX = 0.5235988F + flap * 0.2F;
-			Shape12.rotateAngleZ = 0F + flap * 0.5F;
-			Shape13.rotateAngleZ = 0F - flap * 0.5F;
-			Shape12.rotateAngleY = -0.5235988F;
-			Shape13.rotateAngleY = 0.5235988F;
-		}
-		else {
-			Shape12.rotateAngleX = 0.5235988F;
-			Shape13.rotateAngleX = 0.5235988F;
-			Shape12.rotateAngleZ = 0F;
-			Shape13.rotateAngleZ = 0F;
-			Shape12.rotateAngleY = -0.1745329F;
-			Shape13.rotateAngleY = 0.1745329F;
+			wing_left.rotateAngleX = 0.5235988F + flap * 0.2F;
+			wing_right.rotateAngleX = 0.5235988F + flap * 0.2F;
+			wing_left.rotateAngleZ = 0F + flap * 0.5F;
+			wing_right.rotateAngleZ = 0F - flap * 0.5F;
+			wing_left.rotateAngleY = 0.5235988F;
+			wing_right.rotateAngleY = -0.5235988F;
+		} else {
+			wing_left.rotateAngleX = 0.25235988F;
+			wing_right.rotateAngleX = 0.25235988F;
+			wing_left.rotateAngleZ = 0F;
+			wing_right.rotateAngleZ = 0F;
+			wing_left.rotateAngleY = -0.1745329F;
+			wing_right.rotateAngleY = 0.1745329F;
 		}
 	}
 
@@ -137,7 +129,4 @@ public class ModelFly extends ModelBase {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 	}
 
-	public int getFlySize() {
-		return 72;
-	}
 }

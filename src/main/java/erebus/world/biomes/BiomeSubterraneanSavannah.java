@@ -1,7 +1,9 @@
 package erebus.world.biomes;
 
-import net.minecraft.init.Blocks;
+import erebus.entity.EntityFly;
+import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorSubterraneanSavannah;
+import net.minecraft.init.Blocks;
 
 public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 	public BiomeSubterraneanSavannah(BiomeProperties properties) {
@@ -22,10 +24,12 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 60).setGroupSize(1, 3));
-		spawningGradual.add(new SpawnEntry(EntityFly.class, 15).setGroupSize(8, 8));
+		
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
 */
+		spawningGradual.add(new SpawnEntry(EntityFly.class, 15).setGroupSize(8, 8));
+
 		topBlock = Blocks.GRASS.getDefaultState();
 		fillerBlock = Blocks.DIRT.getDefaultState();
 	}
