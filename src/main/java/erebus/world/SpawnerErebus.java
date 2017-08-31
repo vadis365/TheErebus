@@ -172,6 +172,7 @@ public final class SpawnerErebus {
 							entity.setLocationAndAngles(fx, fy, fz, yaw, 0F);
 
 							if (entity.getCanSpawnHere()) {
+								System.out.println("Spawned Mob: "+ entity);
 								world.spawnEntity(entity);
 								entity = null;
 

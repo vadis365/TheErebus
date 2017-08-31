@@ -45,16 +45,17 @@ public class ModBiomes {
 		FUNGAL_FOREST = new BiomeFungalForest(new BiomeProperties("Fungal Forest"));
 		SUBMERGED_SWAMP = new BiomeSubmergedSwamp(new BiomeProperties("Submerged Swamp"));
 		FIELDS_SUB_FOREST = new BiomeElysianFields.BiomeElysianForest(new BiomeProperties("Elysian Forest"));
-	}
+		
 		// MUTATIONS
-		//undergroundJungle.isMutation();
-		//volcanicDesert.isMutation();
-		//subterraneanSavannah.isMutation();
-		//elysianFields.isMutation();
-		//ulteriorOutback.isMutation();
-		//fungalForest.isMutation();
-		//submergedSwamp.isMutation();
-		//fieldsSubForest.isMutation();
+		UNDERGROUND_JUNGLE.getMutationForBiome(UNDERGROUND_JUNGLE);
+		VOLCANIC_DESERT.getMutationForBiome(VOLCANIC_DESERT);
+		SUBTERRANEAN_SAVANNAH.getMutationForBiome(SUBTERRANEAN_SAVANNAH);
+		ELYSIAN_FIELDS.getMutationForBiome(ELYSIAN_FIELDS);
+		ULTERIOR_OUTBACK.getMutationForBiome(ULTERIOR_OUTBACK);
+		FUNGAL_FOREST.getMutationForBiome(FUNGAL_FOREST);
+		SUBMERGED_SWAMP.getMutationForBiome(SUBMERGED_SWAMP);
+		FIELDS_SUB_FOREST.getMutationForBiome(FIELDS_SUB_FOREST);
+	}
 
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 	public static class RegistrationHandler {
@@ -76,9 +77,9 @@ public class ModBiomes {
 		private static <T extends Biome> void registerBiome(final IForgeRegistry<Biome> registry, final T biome, final String biomeName, final BiomeManager.BiomeType biomeType, final int weight, final BiomeDictionary.Type... types) {
 			registry.register(biome.setRegistryName(Reference.MOD_ID, biomeName));
 			BiomeDictionary.addTypes(biome, types);
-			BiomeManager.addBiome(biomeType, new BiomeManager.BiomeEntry(biome, weight));
+			//BiomeManager.addBiome(biomeType, new BiomeManager.BiomeEntry(biome, weight));
 			for(int x = 0; x < weight; x++)
-			BIOME_LIST.add((BiomeBaseErebus) biome); //temp hack for now
+				BIOME_LIST.add((BiomeBaseErebus) biome); //temp hack for now
 		}
 	}
 }
