@@ -6,6 +6,7 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
+import erebus.entity.EntityWasp;
 import erebus.lib.Reference;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import net.minecraft.entity.Entity;
@@ -19,7 +20,7 @@ public class ModEntities {
 	public static void init() {
 		// Entity registrations
 /*		registerEntity(0, EntityBeetleLarva.class, "beetle_larva", -1251634, -13032944);
-		registerEntity(1, EntityWasp.class, "wasp", -256, -16382458);
+		
 		registerEntity(2, EntityCentipede.class, "centipede", -13565952, -92160);
 		registerEntity(3, EntityBeetle.class, "beetle", -12116973, -5938366);
 		
@@ -97,6 +98,7 @@ public class ModEntities {
 		registerEntity(82, EntitySporeJet.class, "spore_jet");
 		registerEntity(83, EntityArmchairMount.class, "armchair_mount");
 */
+		registerEntity(1, EntityWasp.class, "wasp", -256, -16382458);
 		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
 		registerEntity(79, EntityGasVent.class, "gas_vent");
 		

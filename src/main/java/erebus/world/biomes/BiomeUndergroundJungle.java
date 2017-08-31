@@ -4,6 +4,7 @@ import java.util.Random;
 
 import erebus.ModBlocks;
 import erebus.entity.EntityFly;
+import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
 import net.minecraft.block.Block;
@@ -21,7 +22,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		//setWeight(22);
 /*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
-		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
+		
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityPrayingMantis.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(1, 4));
@@ -36,6 +37,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBombardierBeetle.class, 8).setGroupSize(1, 2));
 */
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
+		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
 
 		topBlock = Blocks.GRASS.getDefaultState();
 		fillerBlock = Blocks.DIRT.getDefaultState();

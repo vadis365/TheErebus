@@ -62,10 +62,9 @@ public final class SpawnerErebus {
 	@SuppressWarnings("unchecked")
 	private void runGradualSpawning(WorldServer world) {
 		prepare(world);
-
 		if (!canSpawnHostiles && !canSpawnAnimals)
 			return;
-
+		
 		spawnChunks.clear();
 
 		List<EntityPlayer> players = world.playerEntities;

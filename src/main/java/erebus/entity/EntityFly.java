@@ -192,7 +192,7 @@ public class EntityFly extends EntityAmbientCreature {
 	@Override
 	public boolean getCanSpawnHere() {
 		BlockPos blockpos = new BlockPos(posX, getEntityBoundingBox().minY, posZ);
-		if (blockpos.getY() >= 63)
+		if (blockpos.getY() >= 120 || blockpos.getY() <= 20)
 			return false;
 		else {
 			int lightValue = world.getLightFromNeighbors(blockpos);

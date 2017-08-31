@@ -2,27 +2,26 @@ package erebus.client.render.entity;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelWasp;
 import erebus.entity.EntityWasp;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderWasp extends RenderLiving {
+public class RenderWasp extends RenderLiving<EntityWasp> {
 
 	private static final ResourceLocation WASP = new ResourceLocation("erebus:textures/entity/wasp.png");
 	private static final ResourceLocation HORNET = new ResourceLocation("erebus:textures/entity/hornet.png");
 
-	public RenderWasp() {
-		super(new ModelWasp(), 1F);
-	}
+	public RenderWasp(RenderManager renderManagerIn) {
+        super(renderManagerIn, new ModelWasp(), 1F);
+    }
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entity, float partialTickTime) {
+	protected void preRenderCallback(EntityWasp entity, float partialTickTime) {
 		if (((EntityWasp) entity).getIsBoss() == 1) {
 			shadowSize = 2;
 			GL11.glScalef(2, 2, 2);
@@ -31,7 +30,7 @@ public class RenderWasp extends RenderLiving {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityWasp entity) {
 		return ((EntityWasp) entity).getIsBoss() == 1 ? HORNET : WASP;
 	}
 }
