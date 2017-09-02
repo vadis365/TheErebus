@@ -1,11 +1,11 @@
 package erebus.world.biomes;
 
 import erebus.ModBiomes;
+import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
-import net.minecraft.entity.monster.EntityZombie;
 
 public class BiomeElysianFields extends BiomeBaseErebus {
 	public BiomeElysianFields(BiomeProperties properties) {
@@ -38,7 +38,7 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		*/
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
-		//spawningGradual.add(new SpawnEntry(EntityZombie.class, 100).setGroupSize(2, 10));
+		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 10).setGroupSize(1, 3));
 	}
 
 	@Override

@@ -2,6 +2,12 @@ package erebus.entity;
 
 import java.util.Random;
 
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -11,21 +17,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityDragonfly extends EntityMob {
 
-	private ChunkCoordinates currentFlightTarget;
+	private BlockPos currentFlightTarget;
 	EntityLivingBase entityToAttack;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
 	public float wingFloat;
@@ -35,6 +41,8 @@ public class EntityDragonfly extends EntityMob {
 	private int droptime = 0;// cool-down for picking up
 	private int countDown;// makes sure player is always dropped
 
+	private static final DataParameter<Integer> SKIN_TYPE = EntityDataManager.<Integer>createKey(EntityDragonfly.class, DataSerializers.VARINT);
+
 	public EntityDragonfly(World world) {
 		super(world);
 		setSize(2.5F, 1.0F);
@@ -43,16 +51,16 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(30, new Integer(rand.nextInt(51)));
+		dataManager.register(SKIN_TYPE, new Integer(rand.nextInt(51)));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(128.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(128.0D);
 	}
 
 	@Override
@@ -75,21 +83,16 @@ public class EntityDragonfly extends EntityMob {
 	}
 
 	@Override
-	protected boolean isAIEnabled() {
-		return false;
-	}
-
-	@Override
 	protected boolean canTriggerWalking() {
 		return false;
 	}
 
 	@Override
-	protected void fall(float par1) {
+	public void fall(float distance, float damageMultiplier) {
 	}
 
 	@Override
-	protected void updateFallState(double par1, boolean par3) {
+	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
 	}
 
 	@Override
@@ -98,7 +101,7 @@ public class EntityDragonfly extends EntityMob {
 	}
 
 	public boolean captured() {
-		return riddenByEntity != null;
+		return isBeingRidden();
 	}
 
 	private void setCountdown(int count) {
@@ -124,18 +127,18 @@ public class EntityDragonfly extends EntityMob {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return rand.nextInt(4) != 0 ? null : "erebus:flysound";
+    public SoundEvent getAmbientSound() {
+		return null;// rand.nextInt(4) != 0 ? null : "erebus:flysound";
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:flyhurt";
+    protected SoundEvent getHurtSound(DamageSource source) {
+		return null;// "erebus:flyhurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+    protected SoundEvent getDeathSound() {
+		return null;// "erebus:squish";
 	}
 
 	@Override
@@ -143,12 +146,12 @@ public class EntityDragonfly extends EntityMob {
 		super.onUpdate();
 		wingFloat = mathWings.swing(4.0F, 0.1F);
 		motionY *= 0.6000000238418579D;
-		if (getEntityToAttack() == null)
+		if (getAttackTarget() == null)
 			flyAbout();
-		if (riddenByEntity != null)
-			if (!worldObj.isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0 || !worldObj.isRemote && captured() && worldObj.isSideSolid(MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1D), MathHelper.floor_double(posZ), ForgeDirection.UP))) {
+		if (isBeingRidden())
+			if (!getEntityWorld().isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0 || !getEntityWorld().isRemote && captured() && getEntityWorld().isSideSolid(new BlockPos (MathHelper.floor(posX), MathHelper.floor(posY + 1D), MathHelper.floor(posZ)), EnumFacing.UP))) {
 				setDropped(true);
-				riddenByEntity.mountEntity(null);
+				removePassengers();
 			}
 		if (dropped) {
 			droptime++;
@@ -159,14 +162,14 @@ public class EntityDragonfly extends EntityMob {
 		}
 		if (countDown >= 0)
 			countDown--;
-		if (getEntityToAttack() != null) {
-			currentFlightTarget = new ChunkCoordinates((int) getEntityToAttack().posX, (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()), (int) getEntityToAttack().posZ);
+		if (getAttackTarget() != null) {
+			currentFlightTarget = new BlockPos((int) getAttackTarget().posX, (int) ((int) getAttackTarget().posY + getAttackTarget().getEyeHeight()), (int) getAttackTarget().posZ);
 			flyToTarget();
 		}
-		if (worldObj.isRemote)
+		if (getEntityWorld().isRemote)
 			if (getSkin() == 0) {
-				spawnParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
-				if (!hasCustomNameTag())
+				spawnParticles(getEntityWorld(), posX - 0.5D, posY, posZ - 0.5D, rand);
+				if (!hasCustomName())
 					setCustomNameTag("Ender Dragonfly");
 			}
 	}
@@ -182,31 +185,31 @@ public class EntityDragonfly extends EntityMob {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 1.0F * motionZ;
 			velX = rand.nextFloat() * 1.0F * motionX;
-			Erebus.proxy.spawnCustomParticle("portal", worldObj, x, y, z, velX, velY, velZ);
+			Erebus.PROXY.spawnCustomParticle("portal", getEntityWorld(), x, y, z, velX, velY, velZ);
 		}
 	}
 
 	public void flyAbout() {
 		if (rand.nextInt(200) == 0)
 			rotationYawHead = rand.nextInt(360);
-		if (currentFlightTarget != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) && (worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget.posY < 1))
+		if (currentFlightTarget != null && !getEntityWorld().isAirBlock(currentFlightTarget) && (getEntityWorld().isAirBlock(currentFlightTarget.down(3)) || currentFlightTarget.getY() < 1))
 			currentFlightTarget = null;
-		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 4.0F)
-			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(10) - rand.nextInt(10), (int) posY + rand.nextInt(4) - rand.nextInt(4), (int) posZ + rand.nextInt(10) - rand.nextInt(10));
-		if (currentFlightTarget != null && getEntityToAttack() != null && !worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY - 3, currentFlightTarget.posZ) || currentFlightTarget != null && !getDropped() && currentFlightTarget.posY < pickupHeight + 10D)
-			currentFlightTarget.posY++;
+		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.distanceSq((int) posX, (int) posY, (int) posZ) < 4.0F)
+			currentFlightTarget = new BlockPos((int) posX + rand.nextInt(10) - rand.nextInt(10), (int) posY + rand.nextInt(4) - rand.nextInt(4), (int) posZ + rand.nextInt(10) - rand.nextInt(10));
+		if (currentFlightTarget != null && getAttackTarget() != null && !getEntityWorld().isAirBlock(currentFlightTarget.down(3)) || currentFlightTarget != null && !getDropped() && currentFlightTarget.getY() < pickupHeight + 10D)
+			currentFlightTarget.up(1);
 		flyToTarget();
 	}
 
 	public void flyToTarget() {
-		double targetX = currentFlightTarget.posX + 0.5D - posX;
-		double targetY = currentFlightTarget.posY + 1D - posY;
-		double targetZ = currentFlightTarget.posZ + 0.5D - posZ;
+		double targetX = currentFlightTarget.getX() + 0.5D - posX;
+		double targetY = currentFlightTarget.getY() + 1D - posY;
+		double targetZ = currentFlightTarget.getZ() + 0.5D - posZ;
 		motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.20000000149011612D;
 		motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.30000000149011612D;
 		motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.20000000149011612D;
 		float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-		float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+		float rotation = MathHelper.wrapDegrees(angle - rotationYaw);
 		moveForward = 0.5F;
 		rotationYaw += rotation;
 	}
@@ -216,36 +219,31 @@ public class EntityDragonfly extends EntityMob {
 		super.onCollideWithPlayer(player);
 		if (player.isSneaking())
 			player.setSneaking(false);
-		if (!worldObj.isRemote && !player.capabilities.isCreativeMode && !captured() && rand.nextInt(20) == 0 && !getDropped()) {
-			player.mountEntity(this);
+		if (!getEntityWorld().isRemote && !player.capabilities.isCreativeMode && !captured() && rand.nextInt(20) == 0 && !getDropped()) {
+			player.startRiding(this, true);
 			pickupHeight = posY;
 			setCountdown(60);
 		}
 	}
 
 	@Override
-	public void updateRiderPosition() {
-		super.updateRiderPosition();
-		if (riddenByEntity instanceof EntityLivingBase) {
+	public void updatePassenger(Entity entity) {
+		super.updatePassenger(entity);
+		if (entity instanceof EntityLivingBase) {
 			double a = Math.toRadians(renderYawOffset);
 			double offSetX = -Math.sin(a) * -0.6D;
 			double offSetZ = Math.cos(a) * -0.6D;
-			riddenByEntity.setPosition(posX - offSetX, posY, posZ - offSetZ);
+			entity.setPosition(posX - offSetX, posY - 2, posZ - offSetZ);
 		}
 	}
 
 	@Override
-	protected Entity findPlayerToAttack() {
-		return worldObj.getClosestVulnerablePlayerToEntity(this, 16D);
-	}
-
-	@Override
 	public boolean attackEntityFrom(DamageSource source, float amp) {
-		if (isEntityInvulnerable())
+		if (getIsInvulnerable())
 			return false;
 		else if (super.attackEntityFrom(source, amp)) {
-			Entity entity = source.getEntity();
-			if (riddenByEntity != entity && ridingEntity != entity) {
+			Entity entity = source.getTrueSource();
+			if (getControllingPassenger() != entity && getRidingEntity() != entity) {
 				if (entity != this)
 					entityToAttack = (EntityLivingBase) entity;
 				return true;
@@ -257,15 +255,12 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		int var1 = MathHelper.floor_double(boundingBox.minY);
-		if (var1 >= 100)
+		BlockPos blockpos = new BlockPos(posX, getEntityBoundingBox().minY, posZ);
+		if (blockpos.getY() > 100)
 			return false;
 		else {
-			int var2 = MathHelper.floor_double(posX);
-			int var3 = MathHelper.floor_double(posZ);
-			int var4 = worldObj.getBlockLightValue(var2, var1, var3);
-			byte var5 = 7;
-			return var4 > rand.nextInt(var5) ? false : super.getCanSpawnHere();
+			int lightValue = world.getLightFromNeighbors(blockpos);
+			return lightValue > rand.nextInt(7) ? false : super.getCanSpawnHere();
 		}
 	}
 
@@ -276,11 +271,11 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(ItemMaterials.DATA.DRAGONFLY_WING.makeStack(), 0.0F);
+		entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.DRAGONFLY_WING.ordinal()), 0.0F);
 		if (rand.nextInt(5) == 0)
-			entityDropItem(ItemMaterials.DATA.COMPOUND_EYES.makeStack(rand.nextInt(1) + 1 + looting), 0.0F);
+			entityDropItem(new ItemStack(ModItems.MATERIALS, rand.nextInt(1) + 1 + looting, EnumErebusMaterialsType.COMPOUND_EYES.ordinal()), 0.0F);
 		if (getSkin() == 0)
-			entityDropItem(new ItemStack(Items.ender_pearl, rand.nextInt(1) + 1 + looting), 0.0F);
+			entityDropItem(new ItemStack(Items.ENDER_PEARL, rand.nextInt(1) + 1 + looting), 0.0F);
 	}
 
 	@Override
@@ -289,18 +284,12 @@ public class EntityDragonfly extends EntityMob {
 		// I know this does nothing! - But it may soon!
 	}
 
-	@Override
-	protected void attackEntity(Entity entity, float distance) {
-		if (distance < 2.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
-			super.attackEntity(entity, distance);
-	}
-
 	public void setSkin(int skinType) {
-		dataWatcher.updateObject(30, new Integer(skinType));
+		dataManager.set(SKIN_TYPE, skinType);
 	}
 
 	public int getSkin() {
-		return dataWatcher.getWatchableObjectInt(30);
+		return dataManager.get(SKIN_TYPE).intValue();
 	}
 
 	@Override

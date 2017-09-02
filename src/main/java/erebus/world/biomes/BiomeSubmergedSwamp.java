@@ -2,11 +2,13 @@ package erebus.world.biomes;
 
 import java.util.Random;
 
+import erebus.ModBlocks;
+import erebus.entity.EntityDragonfly;
+import erebus.world.ChunkProviderErebus;
+import erebus.world.SpawnerErebus.SpawnEntry;
+import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import erebus.ModBlocks;
-import erebus.world.ChunkProviderErebus;
-import erebus.world.biomes.decorators.BiomeDecoratorSubmergedSwamp;
 
 public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 
@@ -34,6 +36,8 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
 		*/
+
+		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 20).setGroupSize(1, 3));
 	}
 
 	@Override

@@ -4,6 +4,7 @@ package erebus;
 import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityBlackWidow;
+import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
 import erebus.entity.EntityWasp;
@@ -100,6 +101,7 @@ public class ModEntities {
 */
 		registerEntity(1, EntityWasp.class, "wasp", -256, -16382458);
 		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
+		registerEntity(25, EntityDragonfly.class, "dragon_fly", 0x2CF2C4, 0x2CF2C4);
 		registerEntity(79, EntityGasVent.class, "gas_vent");
 		
 

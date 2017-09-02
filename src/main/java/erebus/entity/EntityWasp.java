@@ -212,7 +212,7 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 			if (!getEntityWorld().isAirBlock(currentFlightTarget) || currentFlightTarget.getY() < 1)
 				currentFlightTarget = null;
 
-		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistance((int) posX, (int) posY, (int) posZ) < 10F)
+		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.distanceSq((int) posX, (int) posY, (int) posZ) < 10F)
 			currentFlightTarget = new BlockPos((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
 
 		flyToTarget();

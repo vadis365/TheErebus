@@ -1,46 +1,52 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelDragonfly;
 import erebus.entity.EntityDragonfly;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDragonfly extends RenderLiving {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/dragonflyEnder.png"), new ResourceLocation("erebus:textures/entity/dragonflyGreen.png"), new ResourceLocation("erebus:textures/entity/dragonflyRed.png"), new ResourceLocation("erebus:textures/entity/dragonflyPurple.png"), new ResourceLocation("erebus:textures/entity/dragonflyBlue.png"), new ResourceLocation("erebus:textures/entity/dragonflyTan.png") };
+	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
+			new ResourceLocation("erebus:textures/entity/dragonfly_ender.png"),
+			new ResourceLocation("erebus:textures/entity/dragonfly_green.png"),
+			new ResourceLocation("erebus:textures/entity/dragonfly_red.png"),
+			new ResourceLocation("erebus:textures/entity/dragonfly_purple.png"),
+			new ResourceLocation("erebus:textures/entity/dragonfly_blue.png"),
+			new ResourceLocation("erebus:textures/entity/dragonfly_tan.png") };
 
-	public RenderDragonfly() {
-		super(new ModelDragonfly(), 0.3F);
+	public RenderDragonfly(RenderManager renderManagerIn) {
+		super(renderManagerIn, new ModelDragonfly(), 0.3F);
 	}
 
 	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		// Other sizes to be added
-		GL11.glScalef(1.0F, 1.0F, 1.0F);
+		GlStateManager.scale(1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityDragonfly dragonfly = (EntityDragonfly) entity;
 		if (dragonfly.getSkin() > 0 && dragonfly.getSkin() <= 10)
-			return textures[1];
+			return TEXTURES[1];
 		else if (dragonfly.getSkin() > 10 && dragonfly.getSkin() <= 20)
-			return textures[2];
+			return TEXTURES[2];
 		else if (dragonfly.getSkin() > 20 && dragonfly.getSkin() <= 30)
-			return textures[3];
+			return TEXTURES[3];
 		else if (dragonfly.getSkin() > 30 && dragonfly.getSkin() <= 40)
-			return textures[4];
+			return TEXTURES[4];
 		else if (dragonfly.getSkin() > 40 && dragonfly.getSkin() <= 50)
-			return textures[5];
+			return TEXTURES[5];
 		else if (dragonfly.getSkin() == 0)
-			return textures[0];
+			return TEXTURES[0];
 		else
-			return textures[1];
+			return TEXTURES[1];
 	}
 }
