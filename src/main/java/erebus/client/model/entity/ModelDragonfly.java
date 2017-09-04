@@ -4,7 +4,10 @@ package erebus.client.model.entity;
 import erebus.entity.EntityDragonfly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -194,9 +197,10 @@ public class ModelDragonfly extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
-		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
-		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
+		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+
 		REye.render(unitPixel);
 		LEye.render(unitPixel);
 		HeadFront.render(unitPixel);
@@ -206,10 +210,19 @@ public class ModelDragonfly extends ModelBase {
 		ThoraxFront.render(unitPixel);
 		ThoraxBottom.render(unitPixel);
 		ThoraxBack.render(unitPixel);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.depthMask(!entity.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, 0.75F);
 		RFWing.render(unitPixel);
 		RBWing.render(unitPixel);
 		LFWing.render(unitPixel);
 		LBWing.render(unitPixel);
+		GlStateManager.depthMask(true);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
 		Tail1.render(unitPixel);
 		Tail2.render(unitPixel);
 		Tail3.render(unitPixel);
@@ -239,14 +252,21 @@ public class ModelDragonfly extends ModelBase {
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
+	@Override
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
+		EntityDragonfly dragonfly = (EntityDragonfly) entity;
+		float smoothedTicks = dragonfly.ticksExisted + (dragonfly.ticksExisted - (dragonfly.ticksExisted - 1)) * partialTicks;
+		float flap = MathHelper.sin((smoothedTicks) * 1.8F) * 0.35F;
+		
+		RFWing.rotateAngleZ = flap;
+		LFWing.rotateAngleZ = -flap;
+		RBWing.rotateAngleZ = flap;
+		LBWing.rotateAngleZ = -flap;
+	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
-		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityDragonfly var8 = (EntityDragonfly) entity;
-		RFWing.rotateAngleZ = var8.wingFloat;
-		LFWing.rotateAngleZ = -var8.wingFloat;
-		RBWing.rotateAngleZ = var8.wingFloat;
-		LBWing.rotateAngleZ = -var8.wingFloat;
+	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+
 	}
 }

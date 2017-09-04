@@ -3,6 +3,7 @@ package erebus.client.model.entity;
 import erebus.entity.EntityFly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
@@ -83,7 +84,6 @@ public class ModelFly extends ModelBase {
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
         leg_right_back.render(unitPixel);
-        wing_left.render(unitPixel);
         leg_right_mid.render(unitPixel);
         abdomen.render(unitPixel);
         leg_left_back.render(unitPixel);
@@ -92,9 +92,19 @@ public class ModelFly extends ModelBase {
         leg_left_mid.render(unitPixel);
         leg_left_front.render(unitPixel);
         right_eye.render(unitPixel);
-        wing_right.render(unitPixel);
         leg_right_front.render(unitPixel);
         head.render(unitPixel);
+        GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.depthMask(!entity.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, 0.5F);
+        wing_right.render(unitPixel);
+        wing_left.render(unitPixel);
+		GlStateManager.depthMask(true);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -106,7 +116,8 @@ public class ModelFly extends ModelBase {
 	@Override
 	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
 		EntityFly fly = (EntityFly) entity;
-		float flap = MathHelper.sin((fly.ticksExisted) * 0.95F) * 1F;
+		float smoothedTicks = fly.ticksExisted + (fly.ticksExisted - (fly.ticksExisted - 1)) * partialRenderTicks;
+		float flap = MathHelper.sin((smoothedTicks) * 0.95F) * 1F;
 		if (!fly.getIsFlyHanging()) {
 			wing_left.rotateAngleX = 0.5235988F + flap * 0.2F;
 			wing_right.rotateAngleX = 0.5235988F + flap * 0.2F;

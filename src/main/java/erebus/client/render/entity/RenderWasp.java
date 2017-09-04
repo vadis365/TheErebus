@@ -1,9 +1,8 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelWasp;
 import erebus.entity.EntityWasp;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -22,11 +21,14 @@ public class RenderWasp extends RenderLiving<EntityWasp> {
 
 	@Override
 	protected void preRenderCallback(EntityWasp entity, float partialTickTime) {
-		if (((EntityWasp) entity).getIsBoss() == 1) {
-			shadowSize = 2;
-			GL11.glScalef(2, 2, 2);
-		} else
-			shadowSize = 1;
+		float size = 0.5F;
+		if (entity.getIsBoss() == 1) {
+			shadowSize = 1F;
+			size = 1F;
+		}
+		else
+			shadowSize = 0.5F;
+		GlStateManager.scale(size, size, size);
 	}
 
 	@Override

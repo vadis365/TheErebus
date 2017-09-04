@@ -1,11 +1,11 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.entity.EntityWasp;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -295,8 +295,8 @@ public class ModelWasp extends ModelBase {
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		GL11.glPushMatrix();
-		GL11.glTranslated(0F, 0F, -0.5F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, 0F, -0.5F);
 		Thx.render(unitPixel);
 		ThxS.render(unitPixel);
 		ThxTop.render(unitPixel);
@@ -345,18 +345,24 @@ public class ModelWasp extends ModelBase {
 		Sting.render(unitPixel);
 		ThxRW.render(unitPixel);
 		ThxLW.render(unitPixel);
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.depthMask(!entity.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, 0.75F);
+		GlStateManager.enableCull();
 		RWingBack.render(unitPixel);
 		RWingMid.render(unitPixel);
 		RWingFront.render(unitPixel);
 		LWingBack.render(unitPixel);
 		LWingMid.render(unitPixel);
 		LWingFront.render(unitPixel);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
-		GL11.glPopMatrix();
+		GlStateManager.disableCull();
+		GlStateManager.depthMask(true);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -366,8 +372,8 @@ public class ModelWasp extends ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
-		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
+		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float heady = rotationYaw / (180F / (float) Math.PI);
 		float headx = rotationPitch / (180F / (float) Math.PI) - 1.0F;
 		HeadA.rotateAngleY = heady;
@@ -394,10 +400,16 @@ public class ModelWasp extends ModelBase {
 		RMandibleB.rotateAngleX = headx;
 		LMandibleA.rotateAngleX = headx;
 		LMandibleB.rotateAngleX = headx;
+	}
+
+	@Override
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
 		EntityWasp wasp = (EntityWasp) entity;
+		float smoothedTicks = wasp.ticksExisted + (wasp.ticksExisted - (wasp.ticksExisted - 1)) * partialTicks;
+		float flap = MathHelper.sin((smoothedTicks) * 1.2F) * 0.5F;
 		if (wasp.onGround) {
-			float legx1 = MathHelper.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * prevLimbSwing;
-			float legx2 = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing;
+			float legx1 = MathHelper.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAngle;
+			float legx2 = MathHelper.cos(limbSwing * 2.0F) * 0.7F * limbSwingAngle;
 			LBLA.rotateAngleX = legx1 + 0.25F;
 			LBLB.rotateAngleX = legx1 + 0.25F;
 			LBLC.rotateAngleX = legx1 + 0.5F;
@@ -472,12 +484,12 @@ public class ModelWasp extends ModelBase {
 			LWingBack.rotateAngleY = 1.5F;
 			LWingMid.rotateAngleY = 1.5F;
 			LWingFront.rotateAngleY = 1.5F;
-			RWingBack.rotateAngleX = wasp.wingFloat;
-			RWingMid.rotateAngleX = wasp.wingFloat;
-			RWingFront.rotateAngleX = wasp.wingFloat;
-			LWingBack.rotateAngleX = wasp.wingFloat;
-			LWingMid.rotateAngleX = wasp.wingFloat;
-			LWingFront.rotateAngleX = wasp.wingFloat;
+			RWingBack.rotateAngleX = flap;
+			RWingMid.rotateAngleX = flap;
+			RWingFront.rotateAngleX = flap;
+			LWingBack.rotateAngleX = flap;
+			LWingMid.rotateAngleX = flap;
+			LWingFront.rotateAngleX = flap;
 			Ab.rotateAngleX = -0.8F;
 			AbF.rotateAngleX = -0.8F;
 			AbSide.rotateAngleX = -0.8F;

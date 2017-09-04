@@ -1,8 +1,10 @@
 package erebus.entity;
 
 import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIFlyingWander;
+import erebus.entity.ai.FlyingMoveHelper;
+import erebus.entity.ai.PathNavigateFlying;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -16,7 +18,6 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,20 +28,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData {
 
-	public BlockPos currentFlightTarget;
-	public float wingFloat;
-	AnimationMathHelper mathWings = new AnimationMathHelper();
 	private boolean areAttributesSetup = false;
 	public boolean waspFlying;
 	public final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
@@ -49,23 +48,31 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	public EntityWasp(World world) {
 		super(world);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, aiAttackOnCollide);
-		tasks.addTask(2, new EntityAIWander(this, 0.4D));
-		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(4, new EntityAILookIdle(this));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(1, aiNearestAttackableTarget);
-	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGrasshopper.class, true));
-	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityBeetle.class, true));
-	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityBeetleLarva.class, true));
-	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWorkerBee.class, true));
+		moveHelper = new FlyingMoveHelper(this);
+		setPathPriority(PathNodeType.WATER, -8F);
+		setPathPriority(PathNodeType.BLOCKED, -8.0F);
+		setPathPriority(PathNodeType.OPEN, 8.0F);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		dataManager.register(IS_BOSS, new Byte((byte) rand.nextInt(32)));
+	}
+	
+	@Override
+	protected void initEntityAI() {
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIAttackMelee(this, 0.5D, true));
+		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(4, new EntityAILookIdle(this));
+		tasks.addTask(5, new EntityAIFlyingWander(this, 0.75D));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGrasshopper.class, true));
+	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityBeetle.class, true));
+	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityBeetleLarva.class, true));
+	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWorkerBee.class, true));
 	}
 
 	@Override
@@ -78,14 +85,14 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	protected void updateBossAttributes() {
 		if (getEntityWorld() != null && !getEntityWorld().isRemote)
 			if (getIsBoss() == 1) {
-				setSize(2.5F, 2F);
+				setSize(1.5F, 1.0F);
 				experienceValue = 25;
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.9D);
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 60D : 60D * ConfigHandler.INSTANCE.mobHealthMultipier);
 				getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 				getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 			} else {
-				setSize(1.5F, 1.0F);
+				setSize(0.5F, 0.4F);
 				experienceValue = 10;
 				getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.75D);
 				getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
@@ -166,75 +173,34 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		if (getEntityWorld().isRemote) {
 			i = getIsBoss();
 			if (i == 1) {
-				setSize(2.5F, 2F);
+				setSize(1.5F, 1.0F);
 				if (!hasCustomName())
 					if (rand.nextBoolean())
 						setCustomNameTag("Livid's Bane");
 					else
 						setCustomNameTag("Hornet of Despair");
 			} else
-				setSize(1.5F, 1.0F);
+				setSize(0.5F, 0.4F);
 		}
-
-		if (!isFlying())
-			wingFloat = 0.0F;
-		else
-			wingFloat = mathWings.swing(4.0F, 0.1F);
 
 		if (motionY < 0.0D)
-			motionY *= 0.6D;
+			motionY *= 0.4D;
 
-		if (!getEntityWorld().isRemote) {
-			if (getAttackTarget() == null) {
-				if (rand.nextInt(200) == 0)
-					if (!waspFlying)
-						setWaspFlying(true);
-					else
-						setWaspFlying(false);
+		if(isInWater())
+			getMoveHelper().setMoveTo(this.posX, this.posY + 1, this.posZ, 0.32D);
 
-				if (waspFlying)
-					flyAbout();
-				else
-					land();
-			}
-
-			if (getAttackTarget() != null) {
-				currentFlightTarget = new BlockPos((int) getAttackTarget().posX, (int) ((int) getAttackTarget().posY + getAttackTarget().getEyeHeight()), (int) getAttackTarget().posZ);
-				setWaspFlying(false);
-				flyToTarget();
-			}
-		}
 		super.onUpdate();
 	}
 
-	public void flyAbout() {
-		if (currentFlightTarget != null)
-			if (!getEntityWorld().isAirBlock(currentFlightTarget) || currentFlightTarget.getY() < 1)
-				currentFlightTarget = null;
-
-		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.distanceSq((int) posX, (int) posY, (int) posZ) < 10F)
-			currentFlightTarget = new BlockPos((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
-
-		flyToTarget();
+	@Override
+    protected PathNavigate createNavigator(World world) {
+		return new PathNavigateFlying(this, world);
 	}
 
-	public void flyToTarget() {
-		if (currentFlightTarget != null) {
-			double targetX = currentFlightTarget.getX() + 0.5D - posX;
-			double targetY = currentFlightTarget.getY() + 1D - posY;
-			double targetZ = currentFlightTarget.getZ() + 0.5D - posZ;
-			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
-			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
-			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float rotation = MathHelper.wrapDegrees(angle - rotationYaw);
-			moveForward = 0.5F;
-			rotationYaw += rotation;
-		}
-	}
-
-	private void land() {
-		// Nothing to see here - yet
+	@Override
+	@SuppressWarnings("rawtypes")
+	public boolean canAttackClass(Class entity) {
+		return EntityWasp.class != entity;
 	}
 
 	@Override
