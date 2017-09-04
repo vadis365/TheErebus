@@ -5,14 +5,12 @@ import erebus.entity.EntityDragonfly;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderDragonfly extends RenderLiving {
+public class RenderDragonfly extends RenderLiving<EntityDragonfly>{
 	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
 			new ResourceLocation("erebus:textures/entity/dragonfly_ender.png"),
 			new ResourceLocation("erebus:textures/entity/dragonfly_green.png"),
@@ -26,14 +24,13 @@ public class RenderDragonfly extends RenderLiving {
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
+	protected void preRenderCallback(EntityDragonfly dragonfly, float partialTickTime) {
 		// Other sizes to be added
 		GlStateManager.scale(1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityDragonfly dragonfly = (EntityDragonfly) entity;
+	protected ResourceLocation getEntityTexture(EntityDragonfly dragonfly) {
 		if (dragonfly.getSkin() > 0 && dragonfly.getSkin() <= 10)
 			return TEXTURES[1];
 		else if (dragonfly.getSkin() > 10 && dragonfly.getSkin() <= 20)

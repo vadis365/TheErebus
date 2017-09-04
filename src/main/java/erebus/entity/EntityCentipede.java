@@ -1,10 +1,14 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -12,47 +16,53 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
 
 public class EntityCentipede extends EntityMob {
+	private static final DataParameter<Integer> SKIN_TYPE = EntityDataManager.<Integer>createKey(EntityCentipede.class, DataSerializers.VARINT);
 
 	public EntityCentipede(World world) {
 		super(world);
 		setSize(1.0F, 0.8F);
-		getNavigator().setAvoidsWater(true);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.3D, false));
-		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(3, new EntityAIWander(this, 0.3D));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		setPathPriority(PathNodeType.WATER, -8F);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(30, new Integer(rand.nextInt(3)));
+		dataManager.register(SKIN_TYPE, new Integer(rand.nextInt(3)));
+	}
+
+	@Override
+	protected void initEntityAI() {
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIAttackMelee(this, 0.3D, false));
+		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(3, new EntityAIWander(this, 0.3D));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
-	}
-
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
 
 	@Override
@@ -61,7 +71,7 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	public double getAttackStrength() {
-		switch (worldObj.difficultySetting) {
+		switch (getEntityWorld().getDifficulty()) {
 			default:
 				return 2.0D;
 			case EASY:
@@ -79,24 +89,30 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "erebus:centipedesound";
+    public SoundEvent getAmbientSound() {
+		return null;// "erebus:centipedesound";
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:centipedehurt";
+    protected SoundEvent getHurtSound(DamageSource source) {
+		return null;// "erebus:centipedehurt";
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+    protected SoundEvent getDeathSound() {
+		return null;// "erebus:squish";
 	}
 
+	@Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+    }
+/*
 	@Override
 	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
 		playSound("erebus:centipedewalk", 0.5F, 1.0F);
 	}
+*/
 
 	@Override
 	protected float getSoundVolume() {
@@ -113,14 +129,17 @@ public class EntityCentipede extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount) {
-			entityDropItem(ItemMaterials.DATA.BIO_VELOCITY.makeStack(), 0.0F);
-			entityDropItem(ItemMaterials.DATA.POISON_GLAND.makeStack(), 0.0F);
+			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.BIO_VELOCITY.ordinal()), 0.0F);
+			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.POISON_GLAND.ordinal()), 0.0F);
 		}
 	}
 
 	@Override
-	protected void dropRareDrop(int looting) {
-		entityDropItem(ItemMaterials.DATA.SUPERNATURAL_VELOCITY.makeStack(), 0.0F);
+	public void onDeath(DamageSource cause) {
+		super.onDeath(cause);
+		if (this.world.getGameRules().getBoolean("doMobLoot") && rand.nextInt(50) == 0)
+			if (cause.getTrueSource() instanceof EntityLivingBase)
+				entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.SUPERNATURAL_VELOCITY.ordinal()), 0.0F);
 	}
 
 	@Override
@@ -129,14 +148,14 @@ public class EntityCentipede extends EntityMob {
 			if (entity instanceof EntityLivingBase) {
 				byte duration = 0;
 
-				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal())
-					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				if (getEntityWorld().getDifficulty().ordinal() > EnumDifficulty.EASY.ordinal())
+					if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
 						duration = 7;
-					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+					else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
 						duration = 15;
 
 				if (duration > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, duration * 20, 0));
 			}
 
 			return true;
@@ -145,7 +164,11 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	public void setSkin(int skinType) {
-		dataWatcher.updateObject(30, new Integer(skinType));
+		dataManager.set(SKIN_TYPE, skinType);
+	}
+
+	public int getSkin() {
+		return dataManager.get(SKIN_TYPE).intValue();
 	}
 
 	@Override
@@ -163,7 +186,4 @@ public class EntityCentipede extends EntityMob {
 			setSkin(rand.nextInt(3));
 	}
 
-	public int getSkin() {
-		return dataWatcher.getWatchableObjectInt(30);
-	}
 }

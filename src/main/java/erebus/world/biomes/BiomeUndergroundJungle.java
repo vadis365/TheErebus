@@ -3,6 +3,7 @@ package erebus.world.biomes;
 import java.util.Random;
 
 import erebus.ModBlocks;
+import erebus.entity.EntityCentipede;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
@@ -22,15 +23,12 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		//setWeight(22);
 /*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
-		
-		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityPrayingMantis.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 60).setGroupSize(1, 3));
-		
 		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 20).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 15).setGroupSize(1, 2));
@@ -38,6 +36,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 */
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
+		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 
 		topBlock = Blocks.GRASS.getDefaultState();
 		fillerBlock = Blocks.DIRT.getDefaultState();

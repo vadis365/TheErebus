@@ -20,9 +20,9 @@ public class RenderWasp extends RenderLiving<EntityWasp> {
     }
 
 	@Override
-	protected void preRenderCallback(EntityWasp entity, float partialTickTime) {
+	protected void preRenderCallback(EntityWasp wasp, float partialTickTime) {
 		float size = 0.5F;
-		if (entity.getIsBoss() == 1) {
+		if (wasp.getIsBoss() == 1) {
 			shadowSize = 1F;
 			size = 1F;
 		}
@@ -32,7 +32,7 @@ public class RenderWasp extends RenderLiving<EntityWasp> {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityWasp entity) {
-		return ((EntityWasp) entity).getIsBoss() == 1 ? HORNET : WASP;
+	protected ResourceLocation getEntityTexture(EntityWasp wasp) {
+		return wasp.getIsBoss() == 1 ? HORNET : WASP;
 	}
 }

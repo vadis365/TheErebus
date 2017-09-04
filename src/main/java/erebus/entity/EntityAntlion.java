@@ -3,9 +3,8 @@ package erebus.entity;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityErebusAIAttackOnCollide;
-import erebus.item.ItemMaterials;
+import erebus.items.ItemMaterials;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -19,7 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAntlion extends EntityMob {
@@ -43,16 +42,11 @@ public class EntityAntlion extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 35D : 35D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-	}
-
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 35D : 35D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
 	}
 
 	@Override
@@ -92,7 +86,7 @@ public class EntityAntlion extends EntityMob {
 
 	@Override
 	protected Item getDropItem() {
-		return Item.getItemFromBlock(Blocks.sand);
+		return Item.getItemFromBlock(Blocks.SAND);
 	}
 
 	@Override
@@ -109,35 +103,24 @@ public class EntityAntlion extends EntityMob {
 	}
 
 	public boolean isOnSpawner() {
-		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == ModBlocks.antlionSpawner;
+		return getEntityWorld().getBlockState(getPosition().down()).getBlock() == ModBlocks.antlionSpawner;
 	}
 
 	public boolean isOnSand() {
-		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == Blocks.sand;
+		return getEntityWorld().getBlockState(getPosition().down()).getBlock() == Blocks.SAND;
 	}
 
 	public boolean isOnGneiss() {
-		return worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(boundingBox.minY) - 1, MathHelper.floor_double(posZ)) == ModBlocks.gneiss;
+		return getEntityWorld().getBlockState(getPosition().down()).getBlock() == ModBlocks.gneiss;
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (findPlayerToAttack() != null)
-			entityToAttack = findPlayerToAttack();
-		else
-			entityToAttack = null;
-
-		if (!worldObj.isRemote && getEntityToAttack() == null && isOnSand())
+		if (!getEntityWorld().isRemote && getAttackTarget() == null && isOnSand())
 			yOffset = -1;
 		else
 			yOffset = 0;
-	}
-
-	@Override
-	protected Entity findPlayerToAttack() {
-		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
-		return player;
 	}
 
 	@Override

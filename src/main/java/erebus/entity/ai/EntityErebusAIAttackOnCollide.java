@@ -1,78 +1,91 @@
 package erebus.entity.ai;
 
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.pathfinding.PathPoint;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityVelvetWorm;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.pathfinding.Path;
+import net.minecraft.pathfinding.PathPoint;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 
-	World worldObj;
-	EntityCreature attacker;
-	int attackTick;
+	World world;
+	protected EntityCreature attacker;
+	protected int attackTick;
 	double speedTowardsTarget;
 	boolean longMemory;
-	PathEntity entityPathEntity;
-	Class<?> classTarget;
-	private int field_75445_i;
-	private int failedPathFindingPenalty;
+	Path entityPathEntity;
+	private int delayCounter;
+	private double targetX;
+	private double targetY;
+	private double targetZ;
+	protected final int attackInterval = 20;
+	private int failedPathFindingPenalty = 0;
+	private boolean canPenalize = false;
 
-	public EntityErebusAIAttackOnCollide(EntityCreature entityCreature, Class<?> par2Class, double par3, boolean par5) {
-		this(entityCreature, par3, par5);
-		classTarget = par2Class;
-	}
-
-	public EntityErebusAIAttackOnCollide(EntityCreature entityCreature, double par2, boolean par4) {
-		attacker = entityCreature;
-		worldObj = entityCreature.worldObj;
-		speedTowardsTarget = par2;
-		longMemory = par4;
+	public EntityErebusAIAttackOnCollide(EntityCreature creature, double speedIn, boolean useLongMemory) {
+		attacker = creature;
+		world = creature.world;
+		speedTowardsTarget = speedIn;
+		longMemory = useLongMemory;
 		setMutexBits(3);
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		if(!attacker.isEntityAlive())
-			return false;
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 		if (entitylivingbase == null)
 			return false;
 		else if (!entitylivingbase.isEntityAlive())
 			return false;
-		else if (classTarget != null && !classTarget.isAssignableFrom(entitylivingbase.getClass()))
-			return false;
-		else if (--field_75445_i <= 0) {
-			entityPathEntity = attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
-			field_75445_i = 4 + attacker.getRNG().nextInt(7);
-			return entityPathEntity != null;
-		} else
+		else if (canPenalize)
+			if (--delayCounter <= 0) {
+				entityPathEntity = attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
+				delayCounter = 4 + attacker.getRNG().nextInt(7);
+				return entityPathEntity != null;
+			} else
+				return true;
+		entityPathEntity = attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
+		if (entityPathEntity != null)
 			return true;
+		else
+			return getAttackReachSqr(entitylivingbase) >= attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ);
 	}
 
 	@Override
-	public boolean continueExecuting() {
-		if(!attacker.isEntityAlive())
-			return false;
+	public boolean shouldContinueExecuting() {
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
-		return entitylivingbase == null ? false : !entitylivingbase.isEntityAlive() ? false : !longMemory ? !attacker.getNavigator().noPath() : attacker.isWithinHomeDistance(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ));
+		if (entitylivingbase == null)
+			return false;
+		 else if (!entitylivingbase.isEntityAlive())
+			return false;
+		else if (!longMemory)
+			return !attacker.getNavigator().noPath();
+		else if (!attacker.isWithinHomeDistanceFromPosition(new BlockPos(entitylivingbase)))
+			return false;
+		else
+			return !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).isSpectator() && !((EntityPlayer) entitylivingbase).isCreative();
 	}
 
 	@Override
 	public void startExecuting() {
 		attacker.getNavigator().setPath(entityPathEntity, speedTowardsTarget);
-		field_75445_i = 0;
+		delayCounter = 0;
 	}
 
 	@Override
 	public void resetTask() {
+		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
+		if (entitylivingbase instanceof EntityPlayer && (((EntityPlayer) entitylivingbase).isSpectator() || ((EntityPlayer) entitylivingbase).isCreative()))
+			attacker.setAttackTarget((EntityLivingBase) null);
 		attacker.getNavigator().clearPathEntity();
 	}
 
@@ -80,33 +93,58 @@ public class EntityErebusAIAttackOnCollide extends EntityAIBase {
 	public void updateTask() {
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
 		attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
-		if ((longMemory || attacker.getEntitySenses().canSee(entitylivingbase)) && --field_75445_i <= 0) {
-			field_75445_i = failedPathFindingPenalty + 4 + attacker.getRNG().nextInt(7);
-			attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, speedTowardsTarget);
-			if (attacker.getNavigator().getPath() != null) {
-				PathPoint finalPathPoint = attacker.getNavigator().getPath().getFinalPathPoint();
-				if (finalPathPoint != null && entitylivingbase.getDistanceSq(finalPathPoint.xCoord, finalPathPoint.yCoord, finalPathPoint.zCoord) < 1)
-					failedPathFindingPenalty = 0;
-				else
-					failedPathFindingPenalty += 10;
-			} else
-				failedPathFindingPenalty += 10;
-		}
-		attackTick = Math.max(attackTick - 1, 0);
-		double d0 = attacker.width * attacker.width + entitylivingbase.width;
+		double distance = attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ);
+		--delayCounter;
 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) <= d0 + 2)
-			if (attackTick <= 0) {
-				attackTick = 10;
-				if (attacker.getHeldItem() != null)
-					attacker.swingItem();
-				if (attacker instanceof EntityPrayingMantis)
-					((EntityPrayingMantis) attacker).setAttackAnimation(0, (byte) 0);
-				if (attacker instanceof EntityAntlionMiniBoss)
-					entitylivingbase.addPotionEffect(new PotionEffect(Potion.weakness.id, 15 * 20, 0));
-				if (attacker instanceof EntityVelvetWorm)
-					((EntityVelvetWorm) attacker).setInflateSize(0);
-				attacker.attackEntityAsMob(entitylivingbase);
+		if ((longMemory || attacker.getEntitySenses().canSee(entitylivingbase)) && delayCounter <= 0 && (targetX == 0.0D && targetY == 0.0D && targetZ == 0.0D || entitylivingbase.getDistanceSq(targetX, targetY, targetZ) >= 1.0D || attacker.getRNG().nextFloat() < 0.05F)) {
+			targetX = entitylivingbase.posX;
+			targetY = entitylivingbase.getEntityBoundingBox().minY;
+			targetZ = entitylivingbase.posZ;
+			delayCounter = 4 + attacker.getRNG().nextInt(7);
+
+			if (canPenalize) {
+				delayCounter += failedPathFindingPenalty;
+				if (attacker.getNavigator().getPath() != null) {
+					PathPoint finalPathPoint = attacker.getNavigator().getPath().getFinalPathPoint();
+					if (finalPathPoint != null && entitylivingbase.getDistanceSq(finalPathPoint.x, finalPathPoint.y, finalPathPoint.z) < 1)
+						failedPathFindingPenalty = 0;
+					else
+						failedPathFindingPenalty += 10;
+				} else
+					failedPathFindingPenalty += 10;
 			}
+
+			if (distance > 1024.0D)
+				delayCounter += 10;
+			else if (distance > 256.0D)
+				delayCounter += 5;
+
+			if (!attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, speedTowardsTarget))
+				delayCounter += 15;
+		}
+
+		attackTick = Math.max(attackTick - 1, 0);
+		checkAndPerformAttack(entitylivingbase, distance);
+	}
+
+	protected void checkAndPerformAttack(EntityLivingBase entity, double distanceIn) {
+		double distanceReach = getAttackReachSqr(entity);
+
+		if (distanceIn <= distanceReach && attackTick <= 0) {
+			attackTick = 20;
+			attacker.swingArm(EnumHand.MAIN_HAND);
+			//TODO remove this shit, delete the class, and just extend the vanilla melee attack in each mob
+			if (attacker instanceof EntityPrayingMantis)
+				((EntityPrayingMantis) attacker).setAttackAnimation(0, (byte) 0);
+			if (attacker instanceof EntityAntlionMiniBoss)
+				entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 15 * 20, 0));
+			if (attacker instanceof EntityVelvetWorm)
+				((EntityVelvetWorm) attacker).setInflateSize(0);
+			attacker.attackEntityAsMob(entity);
+		}
+	}
+
+	protected double getAttackReachSqr(EntityLivingBase attackTarget) {
+		return (double) (attacker.width * 2.0F * attacker.width * 2.0F + attackTarget.width);
 	}
 }

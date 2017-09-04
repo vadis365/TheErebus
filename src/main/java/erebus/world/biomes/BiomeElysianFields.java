@@ -32,7 +32,6 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 18).setGroupSize(2, 3));
 		spawningGradual.add(new SpawnEntry(EntityCicada.class, 100).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityWheatWeevil.class, 10).setGroupSize(1, 2));
-		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
