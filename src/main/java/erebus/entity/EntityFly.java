@@ -1,6 +1,7 @@
 package erebus.entity;
 
 import erebus.ModItems;
+import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.state.IBlockState;
@@ -61,17 +62,17 @@ public class EntityFly extends EntityAmbientCreature {
 
 	@Override
     public SoundEvent getAmbientSound() {
-		return null;//getIsFlyHanging() && rand.nextInt(4) != 0 ? null : "erebus:flysound";
+		return getIsFlyHanging() && rand.nextInt(4) != 0 ? null : ModSounds.FLY_SOUND;
 	}
 
 	@Override
     protected SoundEvent getHurtSound(DamageSource source) {
-		return null;//"erebus:flyhurt";
+		return ModSounds.FLY_HURT;
 	}
 
 	@Override
     protected SoundEvent getDeathSound() {
-		return null;//"erebus:squish";
+		return ModSounds.SQUISH;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package erebus;
 
+import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
@@ -41,7 +42,14 @@ public class Erebus {
 		ModItems.init();
 		ModBlocks.init();
 		ModBiomes.init();
+		ModSounds.init();
 		ModEntities.init();
+		
+		if (event.getSide() == Side.CLIENT) {
+			if (ConfigHandler.INSTANCE.playCustomSongs)
+				MinecraftForge.EVENT_BUS.register(new ErebusMusicHandler());
+		}
+
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
 		ConfigHandler.INSTANCE.initOreConfigs();

@@ -1,6 +1,7 @@
 package erebus.entity;
 
 import erebus.ModItems;
+import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityAIFlyingWander;
 import erebus.entity.ai.FlyingMoveHelper;
@@ -130,18 +131,18 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 	}
 
 	@Override
-    public SoundEvent getAmbientSound() {
-		return null;// "erebus:waspsound";
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.WASP_SOUND;
 	}
 
 	@Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-		return null;//"erebus:wasphurt";
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.WASP_HURT;
 	}
 
 	@Override
-    protected SoundEvent getDeathSound() {
-		return null;//"erebus:squish";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import erebus.Erebus;
 import erebus.ModItems;
+import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityAIFlyingWander;
 import erebus.entity.ai.FlyingMoveHelper;
@@ -143,7 +144,7 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	protected float getSoundVolume() {
-		return 0.1F;
+		return 0.3F;
 	}
 
 	@Override
@@ -153,17 +154,17 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
     public SoundEvent getAmbientSound() {
-		return null;// rand.nextInt(4) != 0 ? null : "erebus:flysound";
+		return ModSounds.FLY_SOUND;
 	}
 
 	@Override
     protected SoundEvent getHurtSound(DamageSource source) {
-		return null;// "erebus:flyhurt";
+		return ModSounds.FLY_HURT;
 	}
 
 	@Override
     protected SoundEvent getDeathSound() {
-		return null;// "erebus:squish";
+		return ModSounds.SQUISH;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package erebus.entity;
 
 import erebus.ModItems;
+import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
@@ -17,7 +18,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -90,29 +90,23 @@ public class EntityCentipede extends EntityMob {
 
 	@Override
     public SoundEvent getAmbientSound() {
-		return null;// "erebus:centipedesound";
+		return ModSounds.CENTIPEDE_SOUND;
 	}
 
 	@Override
     protected SoundEvent getHurtSound(DamageSource source) {
-		return null;// "erebus:centipedehurt";
+		return ModSounds.CENTIPEDE_HURT;
 	}
 
 	@Override
     protected SoundEvent getDeathSound() {
-		return null;// "erebus:squish";
+		return ModSounds.SQUISH;
 	}
 
 	@Override
     protected void playStepSound(BlockPos pos, Block blockIn) {
-        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+        this.playSound(ModSounds.CENTIPEDE_WALK, 0.5F, 1.0F);
     }
-/*
-	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
-		playSound("erebus:centipedewalk", 0.5F, 1.0F);
-	}
-*/
 
 	@Override
 	protected float getSoundVolume() {
