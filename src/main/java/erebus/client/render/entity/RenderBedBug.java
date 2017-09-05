@@ -1,31 +1,30 @@
 package erebus.client.render.entity;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelBeetle;
+import erebus.entity.EntityBedBug;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBedBug extends RenderLiving {
-	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/bedBug.png");
+public class RenderBedBug extends RenderLiving<EntityBedBug> {
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/bed_bug.png");
 
-	public RenderBedBug() {
-		super(new ModelBeetle(), 0.3F);
+	public RenderBedBug(RenderManager renderManagerIn) {
+		super(renderManagerIn, new ModelBeetle(), 0.3F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
+	protected void preRenderCallback(EntityBedBug bedbug, float partialTickTime) {
 		GL11.glScalef(0.75F, 0.75F, 0.75F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityBedBug bedbug) {
 		return TEXTURE;
 	}
 }

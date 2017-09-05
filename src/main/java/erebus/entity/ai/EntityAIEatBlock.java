@@ -6,11 +6,13 @@ import java.util.List;
 import erebus.core.helper.Spiral;
 import erebus.core.helper.Utils;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 
 public abstract class EntityAIEatBlock extends EntityAIBase {
 
@@ -22,7 +24,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	private final int EAT_SPEED;
 	protected final EntityLiving entity;
 	private final int maxGrowthMetadata;
-	private final Block block;
+	private final IBlockState blockState;
 
 	private boolean hasTarget;
 	public int cropX;
@@ -32,10 +34,10 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	private int eatTicks;
 	private static final List<Point> spiral = new Spiral(16, 16).spiral();
 
-	public EntityAIEatBlock(EntityLiving entity, Block block, int maxGrowthMetadata, double moveSpeed, int eatSpeed) {
+	public EntityAIEatBlock(EntityLiving entity, IBlockState state, int maxGrowthMetadata, double moveSpeed, int eatSpeed) {
 		this.entity = entity;
 		this.maxGrowthMetadata = maxGrowthMetadata;
-		this.block = block;
+		blockState = state;
 		hasTarget = false;
 		spiralIndex = 0;
 		EAT_SPEED = eatSpeed * 20;
@@ -43,17 +45,17 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return entity.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+		return entity.getEntityWorld().getGameRules().hasRule("mobGriefing");
 	}
 
 	@Override
-	public boolean continueExecuting() {
+	public boolean shouldContinueExecuting() {
 		return !entity.isChild();
 	}
 
 	@Override
 	public void updateTask() {
-		if (!continueExecuting())
+		if (!shouldContinueExecuting())
 			return;
 
 		int xCoord = (int) entity.posX;
@@ -66,7 +68,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 
 				Point p = getNextPoint();
 				for (int y = -2; y < 2; y++)
-					if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
+					if (canEatBlock(entity.getEntityWorld().getBlockState(new BlockPos(xCoord + p.x, yCoord + y, zCoord + p.y)))) {
 						cropX = xCoord + p.x;
 						cropY = yCoord + y;
 						cropZ = zCoord + p.y;
@@ -76,18 +78,18 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 				moveToLocation();
 				entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 				AxisAlignedBB blockbounds = getBlockAABB(cropX, cropY, cropZ);
-				boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
+				boolean flag = entity.getEntityBoundingBox().maxY >= blockbounds.minY && entity.getEntityBoundingBox().minY <= blockbounds.maxY && entity.getEntityBoundingBox().maxX >= blockbounds.minX && entity.getEntityBoundingBox().minX <= blockbounds.maxX && entity.getEntityBoundingBox().maxZ >= blockbounds.minZ && entity.getEntityBoundingBox().minZ <= blockbounds.maxZ;
 
 				if (flag) {
 					prepareToEat();
 					eatTicks++;
-					entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), cropX, cropY, cropZ, getScaledEatTicks());
-					if (!canEatBlock(entity.worldObj.getBlock(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
+					entity.getEntityWorld().sendBlockBreakProgress(entity.getEntityId(), new BlockPos(cropX, cropY, cropZ), getScaledEatTicks());
+					if (!canEatBlock(entity.getEntityWorld().getBlockState(new BlockPos(cropX, cropY, cropZ))))
 						hasTarget = false;
 					else if (EAT_SPEED <= eatTicks) {
-						entity.worldObj.playAuxSFXAtEntity(null, 2001, cropX, cropY, cropZ, Block.getIdFromBlock(entity.worldObj.getBlock(cropX, cropY, cropZ)) + (maxGrowthMetadata << 12));
-						if (getTargetBlock() != Blocks.tallgrass)
-							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, new ItemStack(getTargetBlock().getItemDropped(entity.worldObj.getBlockMetadata(cropX, cropY, cropZ), entity.worldObj.rand, 0), 1));
+						entity.getEntityWorld().playEvent(null, 2001, new BlockPos(cropX, cropY, cropZ), Block.getIdFromBlock(entity.getEntityWorld().getBlockState(new BlockPos(cropX, cropY, cropZ)).getBlock()) + (maxGrowthMetadata << 12));
+						if (getTargetBlock() != Blocks.TALLGRASS)
+							Utils.dropStack(entity.getEntityWorld(), new BlockPos(cropX, cropY, cropZ), new ItemStack(getTargetBlock().getItemDropped(entity.getEntityWorld().getBlockState(new BlockPos (cropX, cropY, cropZ)), entity.getEntityWorld().rand, 0), 1));
 						hasTarget = false;
 						eatTicks = 0;
 						afterEaten();
@@ -116,18 +118,17 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	}
 
 	public Block getTargetBlock() {
-		return entity.worldObj.getBlock(cropX, cropY, cropZ);
+		return entity.getEntityWorld().getBlockState(new BlockPos(cropX, cropY, cropZ)).getBlock();
 	}
 
 	/**
 	 * Override this if you wish to do a more advanced checking on which blocks should be eaten
 	 *
 	 * @param block
-	 * @param meta
 	 * @return true is should eat block, false is it shouldn't
 	 */
-	protected boolean canEatBlock(Block block, int meta) {
-		return block == this.block && meta == maxGrowthMetadata;
+	protected boolean canEatBlock(IBlockState state) {
+		return state == blockState;
 	}
 
 	/**
@@ -158,6 +159,6 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 	protected abstract void afterEaten();
 
 	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
-		return AxisAlignedBB.getBoundingBox(cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
+		return new AxisAlignedBB(cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
 	}
 }

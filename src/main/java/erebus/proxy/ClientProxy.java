@@ -5,6 +5,9 @@ import erebus.ModItems;
 import erebus.client.fx.ParticleBubbleGas;
 import erebus.client.fx.ParticleRepellent;
 import erebus.client.fx.ParticleSonic;
+import erebus.client.render.entity.RenderBedBug;
+import erebus.client.render.entity.RenderBeetle;
+import erebus.client.render.entity.RenderBeetleLarva;
 import erebus.client.render.entity.RenderCentipede;
 import erebus.client.render.entity.RenderDragonfly;
 import erebus.client.render.entity.RenderFly;
@@ -13,6 +16,9 @@ import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
+import erebus.entity.EntityBedBug;
+import erebus.entity.EntityBeetle;
+import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
@@ -70,6 +76,9 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityWasp.class, RenderWasp::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDragonfly.class, RenderDragonfly::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityCentipede.class, RenderCentipede::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBeetle.class, RenderBeetle::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBeetleLarva.class, RenderBeetleLarva::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBedBug.class, RenderBedBug::new);
 	}
 
 	@Override

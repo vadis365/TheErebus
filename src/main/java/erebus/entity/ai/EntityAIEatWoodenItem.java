@@ -1,17 +1,16 @@
 package erebus.entity.ai;
 
 import erebus.ModBlocks;
-import erebus.block.BlockHollowLog;
-import erebus.block.bamboo.BlockBambooCrop;
-import erebus.block.bamboo.BlockBambooTorch;
+import erebus.blocks.EnumWood;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityBeetleLarva;
-import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 
 public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
@@ -19,34 +18,36 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
 	public EntityAIEatWoodenItem(EntityAnimal entity, double moveSpeed, int eatSpeed) {
 		super(entity, null, 0, moveSpeed, eatSpeed);
+		setMutexBits(1);
 		this.moveSpeed = moveSpeed;
 	}
 
 	@Override
-	protected boolean canEatBlock(Block block, int blockMeta) {
+	protected boolean canEatBlock(IBlockState state) {
+		Block block = state.getBlock();
 		if (block == null)
 			return false;
 
-		if (block == ModBlocks.scorchedWood)
+		if (block == EnumWood.SCORCHED.getLog())
 			return false;
 
-		if (block == ModBlocks.planks && blockMeta == EnumWood.Rotten.ordinal())
+		if (block == ModBlocks.PLANKS && block.getMetaFromState(state) == EnumWood.ROTTEN.ordinal())
 			return false;
 
-		if (block == EnumWood.Bamboo.getSlab())
+		if (block == EnumWood.BAMBOO.getSlab())
 			return false;
 
-		if (block == EnumWood.Bamboo.getStair())
+		if (block == EnumWood.BAMBOO.getStairs())
 			return false;
 
-		if (block == ModBlocks.planks && blockMeta == EnumWood.Bamboo.ordinal())
+		if (block == ModBlocks.PLANKS && block.getMetaFromState(state) == EnumWood.BAMBOO.ordinal())
 			return false;
 
 		if (ConfigHandler.INSTANCE.beetleLarvaEating == 2)
 			return true;
-		else if (block.getMaterial() != Material.wood || block instanceof BlockLog || block instanceof BlockBambooCrop || block instanceof BlockHollowLog || block == Blocks.brown_mushroom_block || block == Blocks.red_mushroom_block || block instanceof BlockBambooTorch)
+		else if (state.getMaterial() != Material.WOOD || block instanceof BlockLog || block == EnumWood.BAMBOO.getLog() || block == Blocks.BROWN_MUSHROOM_BLOCK || block == Blocks.RED_MUSHROOM_BLOCK /*|| block instanceof BlockBambooTorch || block instanceof BlockHollowLog*/)
 			return false;
-		else if (ConfigHandler.INSTANCE.beetleLarvaEating == 0 && block.hasTileEntity(blockMeta))
+		else if (ConfigHandler.INSTANCE.beetleLarvaEating == 0 && block.hasTileEntity(state))
 			return false;
 
 		return true;
@@ -67,7 +68,6 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 	@Override
 	protected void prepareToEat() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
-		beetleLarva.setMoveTasks(false);
 		beetleLarva.setIsEating(true);
 	}
 
@@ -75,15 +75,13 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 	protected void eatingInterupted() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
 		beetleLarva.setIsEating(false);
-		beetleLarva.setMoveTasks(true);
 	}
 
 	@Override
 	protected void afterEaten() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
-		beetleLarva.worldObj.setBlockToAir(cropX, cropY, cropZ);
+		beetleLarva.getEntityWorld().setBlockToAir(new BlockPos(cropX, cropY, cropZ));
 		beetleLarva.setIsEating(false);
-		beetleLarva.setMoveTasks(true);
 		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);
 	}
 }

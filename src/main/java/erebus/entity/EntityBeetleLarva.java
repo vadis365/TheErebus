@@ -1,6 +1,12 @@
 package erebus.entity;
 
-import net.minecraft.entity.Entity;
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIEatWoodenItem;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -9,66 +15,53 @@ import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-import erebus.ModAchievements;
-import erebus.ModItems;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityAIEatWoodenItem;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 
 public class EntityBeetleLarva extends EntityAnimal {
+	private static final DataParameter<Byte> LARVA_TYPE = EntityDataManager.<Byte>createKey(EntityBeetleLarva.class, DataSerializers.BYTE);
+	private static final DataParameter<Float> LARVA_SIZE = EntityDataManager.<Float>createKey(EntityBeetleLarva.class, DataSerializers.FLOAT);
 
-	public EntityAIEatWoodenItem aiEatWoodItem = new EntityAIEatWoodenItem(this, 0.48D, 10);
-	private final EntityAIWander aiWander = new EntityAIWander(this, 0.48D);
 	public boolean isEating;
 	public boolean isSquashed;
 
 	public EntityBeetleLarva(World world) {
 		super(world);
 		setSize(0.9F, 0.5F);
-		getNavigator().setAvoidsWater(true);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, aiEatWoodItem);
-		tasks.addTask(2, new EntityAITempt(this, 0.48D, Items.stick, false));
-		tasks.addTask(3, aiWander);
-		tasks.addTask(4, new EntityAILookIdle(this));
-		tasks.addTask(5, new EntityAIPanic(this, 0.48D));
+		setPathPriority(PathNodeType.WATER, -8F);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(28, new Float(1.0F));
-		dataWatcher.addObject(29, new Byte((byte) 0));
+		dataManager.register(LARVA_SIZE, 1F);
+		dataManager.register(LARVA_TYPE, new Byte((byte) 0));
 	}
-
-	public void setLarvaSize(float byteSize) {
-		dataWatcher.updateObject(28, new Float(byteSize));
-		setSize(0.9F * byteSize, 0.5F * byteSize);
-	}
-
-	public void setTame(byte isBred) {
-		dataWatcher.updateObject(29, Byte.valueOf(isBred));
-	}
-
+	
 	@Override
-	public boolean isAIEnabled() {
-		return true;
+	protected void initEntityAI() {
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIEatWoodenItem(this, 0.48D, 10));
+		tasks.addTask(2, new EntityAITempt(this, 0.48D, Items.STICK, false));
+		tasks.addTask(3, new EntityAIWander(this, 0.48D));
+		tasks.addTask(4, new EntityAILookIdle(this));
+		tasks.addTask(5, new EntityAIPanic(this, 0.48D));
 	}
 
 	@Override
@@ -78,7 +71,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	protected boolean canDespawn() {
-		if (getTame() != 0 && getTame() != 4)
+		if (getLarvaType() != 0 && getLarvaType() != 4)
 			return false;
 		else
 			return true;
@@ -87,8 +80,8 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
 	}
 
 	@Override
@@ -98,9 +91,9 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = getBrightness(1.0F);
+		float light = getBrightness();
 		if (light >= 0F)
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+			return getEntityWorld().checkNoEntityCollision(getEntityBoundingBox()) && getEntityWorld().getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !getEntityWorld().containsAnyLiquid(getEntityBoundingBox());
 		return super.getCanSpawnHere();
 	}
 
@@ -108,44 +101,43 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
 		byte duration = 0;
-		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && player.boundingBox.maxX >= boundingBox.minX && player.boundingBox.minX <= boundingBox.maxX && player.boundingBox.maxZ >= boundingBox.minZ && player.boundingBox.minZ <= boundingBox.maxZ && player.lastTickPosY > player.posY) {
-			if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+		if (!getEntityWorld().isRemote && player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && player.getEntityBoundingBox().maxX >= getEntityBoundingBox().minX && player.getEntityBoundingBox().minX <= getEntityBoundingBox().maxX && player.getEntityBoundingBox().maxZ >= getEntityBoundingBox().minZ && player.getEntityBoundingBox().minZ <= getEntityBoundingBox().maxZ && player.lastTickPosY > player.posY) {
+			if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
 				duration = 7;
-			else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+			else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
 				duration = 15;
 			if (duration > 0)
-				player.addPotionEffect(new PotionEffect(Potion.confusion.id, duration * 20, 0));
+				player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, duration * 20, 0));
 			setisSquashed(true);
 			setDead();
 			onDeathUpdate();
-			player.triggerAchievement(ModAchievements.beetleSpecial);
 		}
 	}
 
 	@Override
-	protected String getLivingSound() {
-		String actionSound = "erebus:beetlelarvasound";
+	protected SoundEvent getAmbientSound() {
+		SoundEvent actionSound = ModSounds.BEETLE_LARVA_SOUND;
 		if (isEating)
-			actionSound = "erebus:beetlelarvamunch";
+			actionSound = ModSounds.BEETLE_LARVA_MUNCH;
 		return actionSound;
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:beetlelarvahurt";
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.BEETLE_LARVA_HURT;
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
 	}
 
-	protected String getJumpedOnSound() {
-		return "erebus:beetlelarvasplat";
+	protected SoundEvent getJumpedOnSound() {
+		return ModSounds.BEETLE_LARVA_SPLAT;
 	}
 
-	protected static String getHasMunched() {
-		return "erebus:beetlelarvamunch";
+	protected SoundEvent getHasMunched() {
+		return ModSounds.BEETLE_LARVA_MUNCH;
 	}
 
 	@Override
@@ -157,11 +149,11 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onUpdate() {
 		super.onUpdate();
 		float i;
-		if (worldObj.isRemote) {
+		if (getEntityWorld().isRemote) {
 			i = getLarvaSize();
 			setSize(0.9F * i, 0.5F * i);
 		}
-		if (!worldObj.isRemote)
+		if (!getEntityWorld().isRemote)
 			if (getLarvaSize() > 1.8F) {
 				setDead();
 				spawnBeetle();
@@ -169,35 +161,35 @@ public class EntityBeetleLarva extends EntityAnimal {
 	}
 
 	private void spawnBeetle() {
-		if (getTame() == 0) {
-			EntityBeetle entityBeetle = new EntityBeetle(worldObj);
+		if (getLarvaType() == 0) {
+			EntityBeetle entityBeetle = new EntityBeetle(getEntityWorld());
 			entityBeetle.setPosition(posX, posY, posZ);
-			worldObj.spawnEntityInWorld(entityBeetle);
+			getEntityWorld().spawnEntity(entityBeetle);
 		}
-		if (getTame() == 1) {
-			EntityBeetle entityBeetle = new EntityBeetle(worldObj);
+		if (getLarvaType() == 1) {
+			EntityBeetle entityBeetle = new EntityBeetle(getEntityWorld());
 			entityBeetle.setPosition(posX, posY, posZ);
-			entityBeetle.setTame((byte) 1);
-			worldObj.spawnEntityInWorld(entityBeetle);
-		} else if (getTame() == 2) {
-			EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(worldObj);
+			entityBeetle.setTame(true);
+			getEntityWorld().spawnEntity(entityBeetle);
+		} else if (getLarvaType() == 2) {
+			EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(getEntityWorld());
 			entityRhinoBeetle.setPosition(posX, posY, posZ);
 			entityRhinoBeetle.setTameState((byte) 1);
-			worldObj.spawnEntityInWorld(entityRhinoBeetle);
-		} else if (getTame() == 3) {
-			EntityTitanBeetle entityTitanBeetle = new EntityTitanBeetle(worldObj);
+			getEntityWorld().spawnEntity(entityRhinoBeetle);
+		} else if (getLarvaType() == 3) {
+			EntityTitanBeetle entityTitanBeetle = new EntityTitanBeetle(getEntityWorld());
 			entityTitanBeetle.setPosition(posX, posY, posZ);
 			entityTitanBeetle.setTameState((byte) 1);
-			worldObj.spawnEntityInWorld(entityTitanBeetle);
-		} else if (getTame() == 4) {
-			EntityBombardierBeetle entityBombardierBeetle = new EntityBombardierBeetle(worldObj);
+			getEntityWorld().spawnEntity(entityTitanBeetle);
+		} else if (getLarvaType() == 4) {
+			EntityBombardierBeetle entityBombardierBeetle = new EntityBombardierBeetle(getEntityWorld());
 			entityBombardierBeetle.setPosition(posX, posY, posZ);
-			worldObj.spawnEntityInWorld(entityBombardierBeetle);
-		} else if (getTame() == 5) {
-			EntityStagBeetle entityStagBeetle = new EntityStagBeetle(worldObj);
+			getEntityWorld().spawnEntity(entityBombardierBeetle);
+		} else if (getLarvaType() == 5) {
+			EntityStagBeetle entityStagBeetle = new EntityStagBeetle(getEntityWorld());
 			entityStagBeetle.setPosition(posX, posY, posZ);
 			entityStagBeetle.setTameState((byte) 1);
-			worldObj.spawnEntityInWorld(entityStagBeetle);
+			getEntityWorld().spawnEntity(entityStagBeetle);
 		}
 	}
 
@@ -205,13 +197,13 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onDeathUpdate() {
 		super.onDeathUpdate();
 		if (isSquashed) {
-			PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
-			worldObj.playSoundEffect(posX, posY, posZ, getJumpedOnSound(), 1.0F, 0.5F);
-			worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
-			if (!worldObj.isRemote) {
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BEETLE_LARVA_SQUISH, (float) posX, (float)posY, (float)posZ));
+			getEntityWorld().playSound((EntityPlayer)null, getPosition(), getJumpedOnSound(), SoundCategory.NEUTRAL, 1.0F, 0.5F);
+			getEntityWorld().playSound((EntityPlayer)null, getPosition(), getDeathSound(), SoundCategory.NEUTRAL, 1.0F, 0.7F);
+			if (!getEntityWorld().isRemote) {
 				if (rand.nextInt(200) == 0)
-					entityDropItem(new ItemStack(Items.diamond), 0.0F);
-				entityDropItem(new ItemStack(Items.slime_ball), 0.0F);
+					entityDropItem(new ItemStack(Items.DIAMOND), 0.0F);
+				entityDropItem(new ItemStack(Items.SLIME_BALL), 0.0F);
 			}
 		}
 	}
@@ -219,9 +211,9 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (isBurning())
-			entityDropItem(new ItemStack(ModItems.food, 1, 1), 0.0F);
+			entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, 1), 0.0F);
 		else
-			entityDropItem(new ItemStack(ModItems.food, 1, 0), 0.0F);
+			entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, 0), 0.0F);
 	}
 
 	private boolean isStick(ItemStack stack) {
@@ -233,14 +225,14 @@ public class EntityBeetleLarva extends EntityAnimal {
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player) {
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && isStick(stack) && getTame() != 4) {
+		if (!getEntityWorld().isRemote && isStick(stack) && getLarvaType() != 4) {
 			setLarvaSize(getLarvaSize() + 0.1F);
-			stack.stackSize--;
+			stack.shrink(1);
 			return true;
 		}
-		return super.interact(player);
+		return super.processInteract(player, hand);
 	}
 
 	public void setIsEating(boolean eating) {
@@ -251,38 +243,35 @@ public class EntityBeetleLarva extends EntityAnimal {
 		isSquashed = squashed;
 	}
 
-	public void setMoveTasks(boolean task) {
-		if (!task)
-			tasks.removeTask(aiWander);
-		else
-			tasks.addTask(2, aiWander);
-	}
-
-	@Override
-	public AxisAlignedBB getBoundingBox() {
-		return boundingBox;
-	}
-
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setFloat("size", getLarvaSize());
-		nbt.setByte("tame", getTame());
+		nbt.setFloat("larvaSize", getLarvaSize());
+		nbt.setByte("larvaType", getLarvaType());
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setLarvaSize(nbt.getFloat("size"));
-		setTame(nbt.getByte("tame"));
+		setLarvaSize(nbt.getFloat("larvaSize"));
+		setLarvaType(nbt.getByte("larvaType"));
+	}
+
+	public void setLarvaSize(float size) {
+		dataManager.set(LARVA_SIZE, size);
+		setSize(0.9F * size, 0.5F * size);
+	}
+
+	public void setLarvaType(byte isTamed) {
+		dataManager.set(LARVA_TYPE, isTamed);
 	}
 
 	public float getLarvaSize() {
-		return dataWatcher.getWatchableObjectFloat(28);
+		return dataManager.get(LARVA_SIZE);
 	}
 
-	public byte getTame() {
-		return dataWatcher.getWatchableObjectByte(29);
+	public byte getLarvaType() {
+		return dataManager.get(LARVA_TYPE);
 	}
 
 	@Override
@@ -290,25 +279,4 @@ public class EntityBeetleLarva extends EntityAnimal {
 		return null;
 	}
 
-	@Override
-	public void onDeath(DamageSource dmgSrc) {
-		super.onDeath(dmgSrc);
-
-		if (dmgSrc instanceof EntityDamageSource) {
-			Entity killer = ((EntityDamageSource) dmgSrc).getSourceOfDamage();
-			if (killer instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) killer;
-				player.triggerAchievement(ModAchievements.beetle);
-
-				for (EntityItem entityDrop : capturedDrops)
-					if (entityDrop != null) {
-						ItemStack stack = entityDrop.getEntityItem();
-						if (stack != null && stack.getItem() == Items.diamond) {
-							player.triggerAchievement(ModAchievements.diamond);
-							break;
-						}
-					}
-			}
-		}
-	}
 }

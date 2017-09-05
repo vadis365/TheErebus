@@ -1,36 +1,41 @@
 package erebus.client.render.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelBeetle;
 import erebus.entity.EntityBeetle;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBeetle extends RenderLiving {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/beetleRareSpawn.png"), new ResourceLocation("erebus:textures/entity/beetleBlue.png"), new ResourceLocation("erebus:textures/entity/beetleBrown.png"), new ResourceLocation("erebus:textures/entity/beetleGreen.png"), new ResourceLocation("erebus:textures/entity/beetleRed.png"), new ResourceLocation("erebus:textures/entity/beetleTan.png") };
+public class RenderBeetle extends RenderLiving<EntityBeetle> {
+	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
+			new ResourceLocation("erebus:textures/entity/beetle_rare_spawn.png"),
+			new ResourceLocation("erebus:textures/entity/beetle_blue.png"),
+			new ResourceLocation("erebus:textures/entity/beetle_brown.png"),
+			new ResourceLocation("erebus:textures/entity/beetle_green.png"),
+			new ResourceLocation("erebus:textures/entity/beetle_red.png"),
+			new ResourceLocation("erebus:textures/entity/beetle_tan.png") };
 
-	public RenderBeetle() {
-		super(new ModelBeetle(), 0.5F);
+	public RenderBeetle(RenderManager renderManagerIn) {
+		super(renderManagerIn, new ModelBeetle(), 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityBeetle beetle = (EntityBeetle) entity;
+	protected ResourceLocation getEntityTexture(EntityBeetle beetle) {
 		if (beetle.getSkin() > 0 && beetle.getSkin() <= 10)
-			return textures[1];
+			return TEXTURE[1];
 		else if (beetle.getSkin() > 10 && beetle.getSkin() <= 20)
-			return textures[2];
+			return TEXTURE[2];
 		else if (beetle.getSkin() > 20 && beetle.getSkin() <= 30)
-			return textures[3];
+			return TEXTURE[3];
 		else if (beetle.getSkin() > 30 && beetle.getSkin() <= 40)
-			return textures[4];
+			return TEXTURE[4];
 		else if (beetle.getSkin() > 40 && beetle.getSkin() <= 50)
-			return textures[5];
+			return TEXTURE[5];
 		else if (beetle.getSkin() == 0)
-			return textures[0];
+			return TEXTURE[0];
 		else
 			return null;
 	}

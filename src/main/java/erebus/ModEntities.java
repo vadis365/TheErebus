@@ -3,6 +3,9 @@ package erebus;
 
 import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.EntityBedBug;
+import erebus.entity.EntityBeetle;
+import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
@@ -21,11 +24,8 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 public class ModEntities {
 	public static void init() {
 		// Entity registrations
-/*		registerEntity(0, EntityBeetleLarva.class, "beetle_larva", -1251634, -13032944);
-		
-		registerEntity(2, EntityCentipede.class, "centipede", -13565952, -92160);
-		registerEntity(3, EntityBeetle.class, "beetle", -12116973, -5938366);
-		
+/*		
+
 		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
 		registerEntity(6, EntityTarantula.class, "tarantula", 0x000000, 0xE82066);
 		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
@@ -82,7 +82,7 @@ public class ModEntities {
 		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(60, EntityZombieAntSoldier.class, "zombie_ant_soldier", 0x00FE40, 0xF09071);
-		registerEntity(61, EntityBedBug.class, "bed_bug");
+		
 		registerEntity(62, EntityStagBeetle.class, "stag_beetle", 0x222222, 0x747474);
 
 		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
@@ -100,10 +100,16 @@ public class ModEntities {
 		registerEntity(82, EntitySporeJet.class, "spore_jet");
 		registerEntity(83, EntityArmchairMount.class, "armchair_mount");
 */
+		registerEntity(0, EntityBeetleLarva.class, "beetle_larva", -1251634, -13032944);
 		registerEntity(1, EntityWasp.class, "wasp", -256, -16382458);
 		registerEntity(2, EntityCentipede.class, "centipede", -13565952, -92160);
+		registerEntity(3, EntityBeetle.class, "beetle", -12116973, -5938366);
 		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
+		
 		registerEntity(25, EntityDragonfly.class, "dragon_fly", 0x2CF2C4, 0x2CF2C4);
+
+		registerEntity(61, EntityBedBug.class, "bed_bug");
+
 		registerEntity(79, EntityGasVent.class, "gas_vent");
 		
 

@@ -1,12 +1,12 @@
 package erebus.client.model.entity;
 
+import erebus.entity.EntityBeetleLarva;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.entity.EntityBeetleLarva;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelBeetleLarva extends ModelBase {
@@ -187,18 +187,18 @@ public class ModelBeetleLarva extends ModelBase {
 		mouthjaw.render(unitPixel);
 		sensorleft.render(unitPixel);
 		sensorright.render(unitPixel);
-		if (larva.getTame() == 2) {
+		if (larva.getLarvaType() == 2) {
 			horn1.render(unitPixel);
 			horn2.render(unitPixel);
 			horn3.render(unitPixel);
 		}
-		if (larva.getTame() == 3) {
+		if (larva.getLarvaType() == 3) {
 			titanL1.render(unitPixel);
 			titanL2.render(unitPixel);
 			titanR1.render(unitPixel);
 			titanR2.render(unitPixel);
 		}
-		if (larva.getTame() == 5) {
+		if (larva.getLarvaType() == 5) {
 			jawleft.showModel = false;
 			jawright.showModel = false;
 			jawStagLeft.render(unitPixel);
