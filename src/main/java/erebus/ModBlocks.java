@@ -36,6 +36,7 @@ import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.BlockWallPlants;
 import erebus.blocks.BlockWallPlantsCultivated;
+import erebus.blocks.BlockWitherWeb;
 import erebus.blocks.EnumWood;
 import erebus.blocks.ErebusPortal;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
@@ -57,7 +58,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -128,6 +128,9 @@ public class ModBlocks {
 	//GLOWSHROOMS
 	public static final Block GLOWSHROOM = new BlockGlowshroom();
 	public static final Block GLOWSHROOM_STALK_MAIN = new BlockGlowshroomStalkMain();
+	
+	//OTHER
+	public static final Block WITHER_WEB = new BlockWitherWeb();
 	
 	public static void init() {
 		try {

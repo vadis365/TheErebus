@@ -1,10 +1,9 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelBeetleLarva;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBombardierBeetleLarva;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -26,11 +25,10 @@ public class RenderBeetleLarva extends RenderLiving<EntityBeetleLarva> {
 	@Override
 	protected void preRenderCallback(EntityBeetleLarva larva, float partialTickTime) {
 		float larvaSize = larva.getLarvaSize();
-		GL11.glScalef(larvaSize, larvaSize, larvaSize);
+		GlStateManager.scale(larvaSize, larvaSize, larvaSize);
 		if (larva instanceof EntityBombardierBeetleLarva) {
 			int size = ((EntityBombardierBeetleLarva) larva).getInflateSize();
-			GL11.glScalef((float) (size * 0.009 + larvaSize), (float) (size * 0.009 + larvaSize),
-					(float) (-size * 0.0025 + larvaSize));
+			GlStateManager.scale((float) (size * 0.009 + larvaSize), (float) (size * 0.009 + larvaSize), (float) (-size * 0.0025 + larvaSize));
 		}
 	}
 

@@ -9,6 +9,7 @@ import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -30,6 +31,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
@@ -45,6 +47,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 		super(world);
 		setSize(0.9F, 0.5F);
 		setPathPriority(PathNodeType.WATER, -8F);
+		stepHeight = 1F;
 	}
 
 	@Override
@@ -57,9 +60,9 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIEatWoodenItem(this, 0.48D, 10));
-		tasks.addTask(2, new EntityAITempt(this, 0.48D, Items.STICK, false));
-		tasks.addTask(3, new EntityAIWander(this, 0.48D));
+		tasks.addTask(1, new EntityAIWander(this, 0.48D));
+		tasks.addTask(2, new EntityAIEatWoodenItem(this, 0.48D, 10));
+		tasks.addTask(3, new EntityAITempt(this, 0.48D, Items.STICK, false));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIPanic(this, 0.48D));
 	}
@@ -117,8 +120,6 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	protected SoundEvent getAmbientSound() {
 		SoundEvent actionSound = ModSounds.BEETLE_LARVA_SOUND;
-		if (isEating)
-			actionSound = ModSounds.BEETLE_LARVA_MUNCH;
 		return actionSound;
 	}
 
@@ -139,6 +140,11 @@ public class EntityBeetleLarva extends EntityAnimal {
 	protected SoundEvent getHasMunched() {
 		return ModSounds.BEETLE_LARVA_MUNCH;
 	}
+	
+	@Override
+	public void updateAITasks() {
+		super.updateAITasks();
+	}
 
 	@Override
 	protected float getSoundVolume() {
@@ -148,10 +154,10 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		float i;
+		float size;
 		if (getEntityWorld().isRemote) {
-			i = getLarvaSize();
-			setSize(0.9F * i, 0.5F * i);
+			size = getLarvaSize();
+			setSize(0.9F * size, 0.5F * size);
 		}
 		if (!getEntityWorld().isRemote)
 			if (getLarvaSize() > 1.8F) {
@@ -257,9 +263,31 @@ public class EntityBeetleLarva extends EntityAnimal {
 		setLarvaType(nbt.getByte("larvaType"));
 	}
 
+	@Override
+	public void notifyDataManagerChange(DataParameter<?> key) {
+		if (LARVA_SIZE.equals(key)) {
+			float size = getLarvaSize();
+			setNewSize( 0.9F * size, 0.5F * size);
+		}
+		super.notifyDataManagerChange(key);
+	}
+
+	protected void setNewSize(float width, float height) {
+		if (this.width != width || this.height != height) {
+			float f = this.width;
+			this.width = width;
+			this.height = height;
+			AxisAlignedBB axisalignedbb = getEntityBoundingBox();
+			setEntityBoundingBox(new AxisAlignedBB(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.minX + (double) width, axisalignedbb.minY + (double) height, axisalignedbb.minZ + (double) width));
+
+			if (width > f && !firstUpdate && !getEntityWorld().isRemote) {
+				move(MoverType.SELF, (double) (f - width), 0.0D, (double) (f - width));
+			}
+		}
+	}
+
 	public void setLarvaSize(float size) {
 		dataManager.set(LARVA_SIZE, size);
-		setSize(0.9F * size, 0.5F * size);
 	}
 
 	public void setLarvaType(byte isTamed) {
@@ -278,5 +306,4 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		return null;
 	}
-
 }

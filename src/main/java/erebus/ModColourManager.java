@@ -1,8 +1,11 @@
 package erebus;
 
+import java.awt.Color;
+
 import erebus.blocks.BlockSmallPlant;
-import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockSmallPlant.EnumSmallPlantType;
+import erebus.blocks.BlockSwampVent;
+import erebus.blocks.BlockWitherWeb;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -46,9 +49,18 @@ public class ModColourManager {
 			return ColorizerGrass.getGrassColor(0.5D, 1.0D);
 		};
 
+		final IBlockColor witheWebColourHandler = (state, blockAccess, pos, tintIndex) -> {
+			if (blockAccess != null && pos != null) {
+				return new Color(0, 0, 0).getRGB() & 0x00ffffff;
+			}
+
+			return new Color(0, 0, 0).getRGB() & 0x00ffffff;
+		};
+
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SMALL_PLANT);
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.ALGAE);
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SWAMP_VENT);
+		blockColors.registerBlockColorHandler(witheWebColourHandler, ModBlocks.WITHER_WEB);
 	}
 
 	/**
@@ -68,12 +80,16 @@ public class ModColourManager {
 			if(state.getBlock() instanceof BlockSwampVent)
 				return blockColors.colorMultiplier(state, null, null, tintIndex);
 			
+			if(state.getBlock() instanceof BlockWitherWeb)
+				return blockColors.colorMultiplier(state, null, null, tintIndex);
+			
 			return -1;
 		};
 
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.SMALL_PLANT);
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.ALGAE);
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.SWAMP_VENT);
+		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.WITHER_WEB);
 	}
 }
 

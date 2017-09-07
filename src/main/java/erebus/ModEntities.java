@@ -7,11 +7,14 @@ import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
+import erebus.entity.EntityBombardierBeetle;
+import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
 import erebus.entity.EntityWasp;
+import erebus.entity.EntityWebSling;
 import erebus.lib.Reference;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import net.minecraft.entity.Entity;
@@ -25,7 +28,6 @@ public class ModEntities {
 	public static void init() {
 		// Entity registrations
 /*		
-
 		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
 		registerEntity(6, EntityTarantula.class, "tarantula", 0x000000, 0xE82066);
 		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
@@ -36,9 +38,9 @@ public class ModEntities {
 		registerEntity(12, EntityMoth.class, "moth", 0x00FFDD, 0xFBFFA8);
 		registerEntity(13, EntityRhinoBeetle.class, "rhinoBeetle", 0x222222, 0x747474);
 		registerEntity(14, EntityAntlion.class, "antlion", 0x000000, 0xFFFFFF);
-		registerEntity(15, EntityBlackWidow.class, "black_widow", 0x000000, 0xFF0000);
+
 		registerEntity(16, EntityGlowWorm.class, "glow_worm", 0xFFFF00, 0xFFFFFF);
-		registerEntity(17, EntityBombardierBeetle.class, "bombardier_beetle", 0xFFEEFF, 0x9E0E0E);
+		
 		registerEntity(18, EntityScytodes.class, "scytodes", 0x0B4D49, 0xFFFFFF);
 		registerEntity(19, EntityMoneySpider.class, "money_spider", 0xF5C400, 0x0B4D49);
 		registerEntity(20, EntityPrayingMantis.class, "praying_mantis", 0x06B900, 0x06B900);
@@ -46,7 +48,7 @@ public class ModEntities {
 		registerEntity(22, EntityFireAnt.class, "fire_ant", 0xFF0000, 0xFFEE00);
 		registerEntity(23, EntityWorkerBee.class, "worker_bee", 0xFFA200, 0x000000);
 		registerEntity(24, EntityVelvetWorm.class, "velvet_worm", 0x3449EB, 0xF22C5A);
-		registerEntity(25, EntityDragonfly.class, "dragon_fly", 0x2CF2C4, 0x2CF2C4);
+
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
 		registerEntity(27, EntityTitanBeetle.class, "titan_beetle", 0xF09071, 0x000000);
 		registerEntity(28, EntityBotFlyLarva.class, "bot_fly_larva");
@@ -80,13 +82,12 @@ public class ModEntities {
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umber_golem_idol");
 		registerEntity(57, EntityAntlionBoss.class, "antlion_boss", 0x000000, 0xFFFFFF);
 		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);
-		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
+
 		registerEntity(60, EntityZombieAntSoldier.class, "zombie_ant_soldier", 0x00FE40, 0xF09071);
-		
+
 		registerEntity(62, EntityStagBeetle.class, "stag_beetle", 0x222222, 0x747474);
 
 		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
-		registerEntity(71, EntityWebSling.class, "web_sling");
 
 		registerEntity(73, EntityExtractedBlock.class, "extracted_block");
 		registerEntity(74, EntityGooBall.class, "goo_ball");
@@ -94,7 +95,7 @@ public class ModEntities {
 		registerEntity(76, EntitySporeBall.class, "spore_ball");
 		registerEntity(77, EntityTarantulaEgg.class, "tarantula_egg"); 
 		registerEntity(78, EntityPoisonJet.class, "poison_jet");
-		
+
 		registerEntity(80, EntityThrownSand.class, "thrown_sand");
 		registerEntity(81, EntityPreservedBlock.class, "preserved_block");
 		registerEntity(82, EntitySporeJet.class, "spore_jet");
@@ -105,14 +106,19 @@ public class ModEntities {
 		registerEntity(2, EntityCentipede.class, "centipede", -13565952, -92160);
 		registerEntity(3, EntityBeetle.class, "beetle", -12116973, -5938366);
 		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
-		
+
+		registerEntity(15, EntityBlackWidow.class, "black_widow", 0x000000, 0xFF0000);
+
+		registerEntity(17, EntityBombardierBeetle.class, "bombardier_beetle", 0xFFEEFF, 0x9E0E0E);
+
 		registerEntity(25, EntityDragonfly.class, "dragon_fly", 0x2CF2C4, 0x2CF2C4);
 
+		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(61, EntityBedBug.class, "bed_bug");
 
-		registerEntity(79, EntityGasVent.class, "gas_vent");
-		
+		registerEntity(71, EntityWebSling.class, "web_sling");
 
+		registerEntity(79, EntityGasVent.class, "gas_vent");
 
 		// Spawn conditions
 		if (ConfigHandler.INSTANCE.netherWidows)

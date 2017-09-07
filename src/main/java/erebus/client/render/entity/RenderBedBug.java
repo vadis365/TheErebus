@@ -1,9 +1,8 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelBeetle;
 import erebus.entity.EntityBedBug;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -20,7 +19,7 @@ public class RenderBedBug extends RenderLiving<EntityBedBug> {
 
 	@Override
 	protected void preRenderCallback(EntityBedBug bedbug, float partialTickTime) {
-		GL11.glScalef(0.75F, 0.75F, 0.75F);
+		GlStateManager.scale(0.75F, 0.75F, 0.75F);
 	}
 
 	@Override

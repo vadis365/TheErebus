@@ -1,109 +1,100 @@
 package erebus.entity;
 
-import java.util.List;
+import javax.annotation.Nullable;
 
+import erebus.ModItems;
+import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityBlackWidow extends EntityMob {
-
+	private static final DataParameter<Integer> SIZE = EntityDataManager.<Integer>createKey(EntityBlackWidow.class, DataSerializers.VARINT);
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityBlackWidow.class, DataSerializers.BYTE);
 	private int shouldDo;
 	Class<?>[] preys = { EntityFly.class, EntityBotFly.class, EntityMidgeSwarm.class };
 
 	public EntityBlackWidow(World world) {
 		super(world);
-		int i = 1 << rand.nextInt(3);
-		setWidowSize(i);
 		isImmuneToFire = true;
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(16, new Byte((byte) 1));
+		dataManager.register(SIZE, Integer.valueOf(1));
+		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
-
-	protected void setWidowSize(int par1) {
-		dataWatcher.updateObject(16, new Byte((byte) par1));
-		setSize(0.9F * par1, 0.4F * par1);
+	
+	@Override
+	protected void initEntityAI() {
+        tasks.addTask(1, new EntityAISwimming(this));
+        tasks.addTask(2, new EntityBlackWidow.AIWebSlingAttack(this));
+        tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+        tasks.addTask(4, new EntityAIAttackMelee(this, 0.5D, true));
+        tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.5D));
+        tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        tasks.addTask(6, new EntityAILookIdle(this));
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+        targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityFly.class, true));
+        targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityBotFly.class, true));
+        targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityMidgeSwarm.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
 
 	@Override
-	protected Entity findPlayerToAttack() {
-		EntityPlayer var1 = worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
-		return var1;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected Entity findEnemyToAttack() {
-		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(8D, 10D, 8D));
-		for (int i = 0; i < list.size(); i++) {
-			Entity entity = list.get(i);
-			if (entity != null) {
-				if (!(entity instanceof EntityLivingBase))
-					continue;
-				for (int j = 0; j < preys.length; j++)
-					if (entity.getClass() == preys[j])
-						return entity;
-			}
-		}
-		return null;
-	}
+    protected PathNavigate createNavigator(World worldIn) {
+        return new PathNavigateClimber(this, worldIn);
+    }
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		int i;
-		if (worldObj.isRemote) {
-			i = getWidowSize();
-			setSize(0.9F * i, 0.4F * i);
-		}
-		if (findPlayerToAttack() != null)
-			entityToAttack = findPlayerToAttack();
-		else if (findEnemyToAttack() != null)
-			entityToAttack = findEnemyToAttack();
-		else
-			entityToAttack = null;
-
-		if (!worldObj.isRemote && getWidowSize() == 1) {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-			
-		}
-		if (!worldObj.isRemote && getWidowSize() == 2) {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 20D : 20D * ConfigHandler.INSTANCE.mobHealthMultipier);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1.5D : 1.5D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-			
-		}
-		if (!worldObj.isRemote && getWidowSize() == 4) {
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
-			getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-			
-		}
+        if (!this.world.isRemote) {
+            this.setBesideClimbableBlock(this.isCollidedHorizontally);
+        }
 	}
 
 	@Override
@@ -117,104 +108,72 @@ public class EntityBlackWidow extends EntityMob {
 	}
 
 	@Override
-	protected void fall(float distance) {
+	public void fall(float distance, float damageMultiplier) {
 	}
 
 	@Override
 	public void setInWeb() {
 	}
 
-	public boolean isClimbing() {
-		return !onGround && isOnLadder();
+	@Override
+    public boolean isOnLadder() {
+        return isBesideClimbableBlock();
+    }
+	
+    public boolean isBesideClimbableBlock() {
+        return (((Byte)dataManager.get(CLIMBING)).byteValue() & 1) != 0;
+    }
+
+    public void setBesideClimbableBlock(boolean climbing) {
+        byte b0 = ((Byte)dataManager.get(CLIMBING)).byteValue();
+        if (climbing)
+            b0 = (byte)(b0 | 1);
+        else
+            b0 = (byte)(b0 & -2);
+
+        this.dataManager.set(CLIMBING, Byte.valueOf(b0));
+    }
+
+	@Override
+	public boolean isPotionApplicable(PotionEffect potioneffectIn) {
+		 return (potioneffectIn.getPotion() == MobEffects.POISON || potioneffectIn.getPotion() == MobEffects.WITHER) ? false : super.isPotionApplicable(potioneffectIn);
 	}
 
 	@Override
-	public boolean isOnLadder() {
-		return isCollidedHorizontally;
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.BLACK_WIDOW_SOUND;
 	}
 
 	@Override
-	public boolean isPotionApplicable(PotionEffect potionEffect) {
-		return potionEffect.getPotionID() == Potion.poison.id ? false : super.isPotionApplicable(potionEffect);
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.BLACK_WIDOW_HURT;
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "erebus:blackwidowsound";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:blackwidowhurt";
-	}
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+    }
 
-	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
-	}
-
-	protected String getWebSlingThrowSound() {
-		return "erebus:webslingthrow";
-	}
-
-	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
-		playSound("mob.spider.step", 0.15F, 1.0F);
+	protected SoundEvent getWebSlingThrowSound() {
+		return ModSounds.WEBSLING_THROW;
 	}
 
 	@Override
 	protected Item getDropItem() {
-		return Items.string;
+		return Items.STRING;
 	}
 
 	@Override
 	protected void dropFewItems(boolean attackedByPlayer, int looting) {
 		super.dropFewItems(attackedByPlayer, looting);
 		if (attackedByPlayer && (rand.nextInt(3) == 0 || rand.nextInt(1 + looting) > 0))
-			dropItem(Items.spider_eye, 1);
-		entityDropItem(ItemMaterials.DATA.POISON_GLAND.makeStack(1 + rand.nextInt(2)), 0.0F);
-	}
-
-	@Override
-	protected void attackEntity(Entity entity, float distance) {
-		int i;
-		i = getWidowSize();
-		if (distance < 0.9F * i) {
-			super.attackEntity(entity, distance);
-			attackEntityAsMob(entity);
-		}
-
-		if (distance > 2.0F && distance < 6.0F && rand.nextInt(10) == 0)
-			if (onGround) {
-				double d0 = entity.posX - posX;
-				double d1 = entity.posZ - posZ;
-				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-				motionX = d0 / f2 * 0.5D * 0.800000011920929D + motionX * 0.20000000298023224D;
-				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
-				motionY = 0.4000000059604645D;
-			}
-
-		if (distance >= 5 & distance < 8.0F)
-			if (attackTime == 0) {
-				++shouldDo;
-				if (shouldDo == 1)
-					attackTime = 60;
-				else if (shouldDo <= 4)
-					attackTime = 6;
-				else {
-					attackTime = 20;
-					shouldDo = 0;
-				}
-				if (shouldDo > 1 && getWidowSize() > 1 && entity instanceof EntityPlayer) {
-					worldObj.playSoundAtEntity(this, getWebSlingThrowSound(), 1.0F, 1.0F);
-					for (int count = 0; count < 1; ++count) {
-						EntityWebSling webSling = new EntityWebSling(worldObj, this);
-						webSling.posY = posY + height / 2.0F + 0.5D;
-						webSling.setType((byte) 1);
-						worldObj.spawnEntityInWorld(webSling);
-					}
-				}
-			}
+			dropItem(Items.SPIDER_EYE, 1);
+		entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.POISON_GLAND.ordinal()), 0.0F);
 	}
 
 	@Override
@@ -222,14 +181,13 @@ public class EntityBlackWidow extends EntityMob {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityLivingBase) {
 				byte duration = 0;
-				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
+				if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
 					duration = 7;
-				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
+				else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
 					duration = 15;
 				if (duration > 0) {
-					int chanceFiftyFifty = rand.nextInt(2);
-					if (chanceFiftyFifty == 1)
-						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.wither.id, duration * 20, 0));
+					if (rand.nextBoolean())
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, duration * 20, 0));
 				}
 			}
 			return true;
@@ -238,18 +196,139 @@ public class EntityBlackWidow extends EntityMob {
 	}
 
 	@Override
+	public void notifyDataManagerChange(DataParameter<?> key) {
+		if (SIZE.equals(key)) {
+			int size = getWidowSize();
+			setSize(0.9F * size, 0.4F * size);
+			rotationYaw = this.rotationYawHead;
+			renderYawOffset = this.rotationYawHead;
+		}
+		super.notifyDataManagerChange(key);
+	}
+
+	protected void setWidowSize(int size, boolean resetHealth) {
+		dataManager.set(SIZE, size);
+		setSize(0.9F * size, 0.4F * size);
+		setPosition(this.posX, this.posY, this.posZ);
+		
+		if (size == 1) {
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		}
+		if (size == 2) {
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 20D : 20D * ConfigHandler.INSTANCE.mobHealthMultipier);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1.5D : 1.5D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		}
+		if (size == 4) {
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
+			getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		}
+
+        if (resetHealth)
+            setHealth(getMaxHealth());
+	}
+
+	public int getWidowSize() {
+		return dataManager.get(SIZE);
+	}
+
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+        int randomSize = this.rand.nextInt(3);
+
+        if (randomSize < 2 && this.rand.nextFloat() < 0.5F * difficulty.getClampedAdditionalDifficulty())
+            ++randomSize;
+
+        int size = 1 << randomSize;
+        setWidowSize(size, true);
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
+
+	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setInteger("Size", getWidowSize() - 1);
+		nbt.setInteger("widowSize", getWidowSize() - 1);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		setWidowSize(nbt.getInteger("Size") + 1);
+		int size = nbt.getInteger("widowSize");
+		if (size < 0)
+			size = 0;
+		setWidowSize(size + 1, false);
 	}
 
-	public int getWidowSize() {
-		return dataWatcher.getWatchableObjectByte(16);
+	static class AIWebSlingAttack extends EntityAIBase {
+		private final EntityBlackWidow widow;
+		private int attackStep;
+		private int attackTime;
+
+		public AIWebSlingAttack(EntityBlackWidow widowIn) {
+			widow = widowIn;
+			setMutexBits(3);
+		}
+
+		@Override
+		public boolean shouldExecute() {
+			EntityLivingBase entitylivingbase = widow.getAttackTarget();
+			return entitylivingbase != null && entitylivingbase.isEntityAlive() && widow.getWidowSize() > 1;
+		}
+
+		@Override
+		public void startExecuting() {
+			attackStep = 0;
+		}
+
+		@Override
+		public void updateTask() {
+			--attackTime;
+			EntityLivingBase entitylivingbase = widow.getAttackTarget();
+			double distance = widow.getDistanceSqToEntity(entitylivingbase);
+
+			if (distance < 4.0D) {
+				if (attackTime <= 0) {
+					attackTime = 20;
+					widow.attackEntityAsMob(entitylivingbase);
+				}
+
+				widow.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, widow.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+
+			} else if (distance < 256.0D) {
+				double targetX = entitylivingbase.posX - widow.posX;
+				double targetY = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (widow.posY + (double) (widow.height / 2.0F));
+				double targetZ = entitylivingbase.posZ - widow.posZ;
+
+				if (attackTime <= 0) {
+					++attackStep;
+
+					if (attackStep == 1) {
+						attackTime = 60;
+					} else if (attackStep <= 4) {
+						attackTime = 6;
+					} else {
+						attackTime = 100;
+						attackStep = 0;
+
+					}
+
+					if (attackStep > 1 && entitylivingbase instanceof EntityPlayer) {
+
+						widow.getEntityWorld().playSound((EntityPlayer) null, widow.getPosition(), widow.getWebSlingThrowSound(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+						for (int count = 0; count < 1; ++count) {
+							EntityWebSling webSling = new EntityWebSling(widow.getEntityWorld(), widow);
+							webSling.posY = widow.posY + (double) (widow.height / 2.0F) + 0.5D;
+							webSling.setType((byte) 1);
+							webSling.setThrowableHeading(targetX, targetY, targetZ, 1.0F, 0.0F);
+							widow.getEntityWorld().spawnEntity(webSling);
+						}
+					}
+				}
+				widow.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
+				widow.getNavigator().clearPathEntity();
+				widow.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, widow.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+			}
+			super.updateTask();
+		}
 	}
 }

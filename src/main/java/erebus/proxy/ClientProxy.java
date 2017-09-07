@@ -8,22 +8,29 @@ import erebus.client.fx.ParticleSonic;
 import erebus.client.render.entity.RenderBedBug;
 import erebus.client.render.entity.RenderBeetle;
 import erebus.client.render.entity.RenderBeetleLarva;
+import erebus.client.render.entity.RenderBlackWidow;
+import erebus.client.render.entity.RenderBombardierBeetle;
 import erebus.client.render.entity.RenderCentipede;
 import erebus.client.render.entity.RenderDragonfly;
 import erebus.client.render.entity.RenderFly;
 import erebus.client.render.entity.RenderGasVent;
 import erebus.client.render.entity.RenderWasp;
+import erebus.client.render.entity.RenderWebSling;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityBlackWidow;
+import erebus.entity.EntityBombardierBeetle;
+import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
 import erebus.entity.EntityWasp;
+import erebus.entity.EntityWebSling;
 import erebus.tileentity.TileEntityBambooShield;
 import erebus.tileentity.TileEntityExoPlateShield;
 import erebus.tileentity.TileEntityGaeanKeystone;
@@ -78,7 +85,11 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityCentipede.class, RenderCentipede::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeetle.class, RenderBeetle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeetleLarva.class, RenderBeetleLarva::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBombardierBeetleLarva.class, RenderBeetleLarva::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBedBug.class, RenderBedBug::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBombardierBeetle.class, RenderBombardierBeetle::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlackWidow.class, RenderBlackWidow::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityWebSling.class, RenderWebSling::new);
 	}
 
 	@Override

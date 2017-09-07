@@ -69,8 +69,8 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 
 			switch (ParticleType.values[message.particleType]) {
 				case BEETLE_LARVA_SQUISH:
-					//for (int count = 0; count <= 200; ++count)
-					//	eff.addEffect(new EntityBreakingFX(player.worldObj, message.posX + (player.worldObj.rand.nextDouble() - 0.5D) * message.width, message.posY + player.worldObj.rand.nextDouble() * message.height - message.yOffset, message.posZ + (player.worldObj.rand.nextDouble() - 0.5D) * message.width, Items.slime_ball));
+					for (int count = 0; count <= 200; ++count)
+						Erebus.PROXY.spawnCustomParticle("slime", world, message.posX + (world.rand.nextDouble() - 0.5D) , message.posY + world.rand.nextDouble(), message.posZ + (world.rand.nextDouble() - 0.5D), 0, 0, 0);
 					break;
 				case CRUSHROOM_BLAM:
 					//for (int a = 0; a < 360; a += 4) {

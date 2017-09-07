@@ -1,32 +1,30 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelBlackWidow;
 import erebus.entity.EntityBlackWidow;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBlackWidow extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackWidow.png");
+public class RenderBlackWidow extends RenderLiving<EntityBlackWidow> {
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/black_widow.png");
 
-	public RenderBlackWidow() {
-		super(new ModelBlackWidow(), 0.3F);
+	public RenderBlackWidow(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelBlackWidow(), 0.3F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		shadowSize = ((EntityBlackWidow) entityliving).getWidowSize() * 0.3F;
-		GL11.glScalef(shadowSize, shadowSize, shadowSize);
+	protected void preRenderCallback(EntityBlackWidow widow, float f) {
+		shadowSize = widow.getWidowSize() * 0.3F;
+		GlStateManager.scale(shadowSize, shadowSize, shadowSize);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityBlackWidow widow) {
+		return TEXTURE;
 	}
 }

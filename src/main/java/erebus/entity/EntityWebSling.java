@@ -1,16 +1,23 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.ModSounds;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
 
 public class EntityWebSling extends EntityThrowable {
+	private static final DataParameter<Byte> TYPE = EntityDataManager.<Byte>createKey(EntityWebSling.class, DataSerializers.BYTE);
+	
 	public EntityWebSling(World world) {
 		super(world);
 		setSize(1F, 1F);
@@ -31,46 +38,42 @@ public class EntityWebSling extends EntityThrowable {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(24, new Byte((byte) 0));
+		dataManager.register(TYPE, new Byte((byte) 0));
 	}
 
-	protected String getWebSlingSplatSound() {
-		return "erebus:webslingsplat";
+	protected SoundEvent getWebSlingSplatSound() {
+		return ModSounds.WEBSLING_SPLAT;
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(RayTraceResult mop) {
 		byte type = getType();
 
-		if (!worldObj.isRemote) {
-			int x = MathHelper.floor_double(posX);
-			int y = MathHelper.floor_double(posY);
-			int z = MathHelper.floor_double(posZ);
-
+		if (!getEntityWorld().isRemote) {
 			if (mop.entityHit != null) {
-				if (Blocks.web.canPlaceBlockAt(worldObj, x, y, z))
+				if (Blocks.WEB.canPlaceBlockAt(getEntityWorld(), getPosition()))
 					if (type == 0)
-						worldObj.setBlock(x, y, z, Blocks.web);
+						getEntityWorld().setBlockState(getPosition(), Blocks.WEB.getDefaultState());
 					else if (type == 1)
-						worldObj.setBlock(x, y, z, ModBlocks.witherWeb);
-				if (Blocks.fire.canPlaceBlockAt(worldObj, x, y, z))
+						getEntityWorld().setBlockState(getPosition(), ModBlocks.WITHER_WEB.getDefaultState());
+				if (Blocks.FIRE.canPlaceBlockAt(getEntityWorld(), getPosition()))
 					if (type == 2)
 						mop.entityHit.setFire(10);
 			} else {
-				if (Blocks.web.canPlaceBlockAt(worldObj, x, y, z))
+				if (Blocks.WEB.canPlaceBlockAt(getEntityWorld(), getPosition()))
 					if (type == 0)
-						worldObj.setBlock(x, y, z, Blocks.web);
+						getEntityWorld().setBlockState(getPosition(), Blocks.WEB.getDefaultState());
 					else if (type == 1)
-						worldObj.setBlock(x, y, z, ModBlocks.witherWeb);
-				if (Blocks.fire.canPlaceBlockAt(worldObj, x, y, z))
+						getEntityWorld().setBlockState(getPosition(), ModBlocks.WITHER_WEB.getDefaultState());
+				if (Blocks.FIRE.canPlaceBlockAt(getEntityWorld(), getPosition()))
 					if (type == 2)
-						worldObj.setBlock(x, y, z, Blocks.fire);
+						getEntityWorld().setBlockState(getPosition(), Blocks.FIRE.getDefaultState());
 			}
-			if (!worldObj.isRemote)
+			if (!getEntityWorld().isRemote)
 				setDead();
 		}
 		if (type != 2)
-			worldObj.playSoundAtEntity(this, getWebSlingSplatSound(), 1.0F, 1.0F);
+			getEntityWorld().playSound((EntityPlayer)null, getPosition(), getWebSlingSplatSound(), SoundCategory.HOSTILE, 1.0F, 1.0F);
 	}
 
 	@Override
@@ -83,10 +86,10 @@ public class EntityWebSling extends EntityThrowable {
 	}
 
 	public void setType(byte webType) {
-		dataWatcher.updateObject(24, webType);
+		dataManager.set(TYPE, webType);
 	}
 
 	public byte getType() {
-		return dataWatcher.getWatchableObjectByte(24);
+		return dataManager.get(TYPE);
 	}
 }
