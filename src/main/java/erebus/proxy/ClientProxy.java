@@ -10,6 +10,8 @@ import erebus.client.render.entity.RenderBeetle;
 import erebus.client.render.entity.RenderBeetleLarva;
 import erebus.client.render.entity.RenderBlackWidow;
 import erebus.client.render.entity.RenderBombardierBeetle;
+import erebus.client.render.entity.RenderBotFly;
+import erebus.client.render.entity.RenderBotFlyLarva;
 import erebus.client.render.entity.RenderCentipede;
 import erebus.client.render.entity.RenderDragonfly;
 import erebus.client.render.entity.RenderFly;
@@ -25,6 +27,8 @@ import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBombardierBeetleLarva;
+import erebus.entity.EntityBotFly;
+import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
@@ -90,6 +94,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBombardierBeetle.class, RenderBombardierBeetle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackWidow.class, RenderBlackWidow::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWebSling.class, RenderWebSling::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBotFly.class, RenderBotFly::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBotFlyLarva.class, RenderBotFlyLarva::new);
 	}
 
 	@Override

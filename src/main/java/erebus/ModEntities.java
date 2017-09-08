@@ -9,6 +9,8 @@ import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBombardierBeetleLarva;
+import erebus.entity.EntityBotFly;
+import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
@@ -30,7 +32,7 @@ public class ModEntities {
 /*		
 		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
 		registerEntity(6, EntityTarantula.class, "tarantula", 0x000000, 0xE82066);
-		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
+		
 		registerEntity(8, EntityScorpion.class, "scorpion", 0xFFA200, 0xFFDB9C);
 		registerEntity(9, EntitySolifuge.class, "solifuge", 0xFFDB9C, 0xFFA200);
 		registerEntity(10, EntityGrasshopper.class, "grasshopper", 0x06B900, 0x5FFF5F);
@@ -51,7 +53,7 @@ public class ModEntities {
 
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
 		registerEntity(27, EntityTitanBeetle.class, "titan_beetle", 0xF09071, 0x000000);
-		registerEntity(28, EntityBotFlyLarva.class, "bot_fly_larva");
+		
 		registerEntity(29, EntityCrushling.class, "crushling", 0xFFFFFF, 0xFF0000);
 		registerEntity(30, EntityWheatWeevil.class, "wheat_weevil", 0x000000, 0xFFA200);
 		registerEntity(31, EntityWoodlouse.class, "woodlouse", 0x747474, 0x222222);
@@ -107,12 +109,16 @@ public class ModEntities {
 		registerEntity(3, EntityBeetle.class, "beetle", -12116973, -5938366);
 		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
 
+		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
+
 		registerEntity(15, EntityBlackWidow.class, "black_widow", 0x000000, 0xFF0000);
 
 		registerEntity(17, EntityBombardierBeetle.class, "bombardier_beetle", 0xFFEEFF, 0x9E0E0E);
 
 		registerEntity(25, EntityDragonfly.class, "dragon_fly", 0x2CF2C4, 0x2CF2C4);
 
+		registerEntity(28, EntityBotFlyLarva.class, "bot_fly_larva", -6750208, -13165534);
+		
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(61, EntityBedBug.class, "bed_bug");
 

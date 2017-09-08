@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -8,14 +9,26 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-public class EntityBotFlyLarva extends EntityMob {
+public class EntityBotFlyLarva extends EntityMob implements IEntityAdditionalSpawnData {
+	private static final DataParameter<Byte> PARASITE_COUNT = EntityDataManager.<Byte>createKey(EntityBotFlyLarva.class, DataSerializers.BYTE);
+	private static final DataParameter<String> INFESTED_PLAYER = EntityDataManager.<String>createKey(EntityBotFlyLarva.class, DataSerializers.STRING);
+	
 	public EntityBotFlyLarva(World world) {
 		super(world);
 		setSize(0.5F, 0.2F);
@@ -26,98 +39,93 @@ public class EntityBotFlyLarva extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(16, new Byte((byte) 1));
-		dataWatcher.addObject(17, "");
+		dataManager.register(PARASITE_COUNT, new Byte((byte) 1));
+		dataManager.register(INFESTED_PLAYER, "");
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6000000238418579D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(0.0D);
-	}
-
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6000000238418579D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.0D);
 	}
 
 	@Override
 	public boolean canBeCollidedWith() {
-		return false;
-	}
-
-	@Override
-	public boolean isEntityInvulnerable() {
 		return true;
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "mob.silverfish.say";
+	public boolean getIsInvulnerable() {
+		return false;
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "mob.silverfish.hit";
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.ENTITY_SILVERFISH_AMBIENT;
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "mob.silverfish.kill";
+	protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+		return SoundEvents.ENTITY_SILVERFISH_HURT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.ENTITY_SILVERFISH_DEATH;
+	}
+
+	@Override
+	protected void playStepSound(BlockPos pos, Block blockIn) {
+		this.playSound(SoundEvents.ENTITY_SILVERFISH_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		if (!worldObj.isRemote)
-			if (player.riddenByEntity == null) {
-				mountEntity(player);
-				setPosition(player.posX, player.posY + ridingEntity.getYOffset(), player.posZ);
-				setPersistanceOnPlayer(player.getCommandSenderName()); // may
-				// not
-				// work
+		if (!getEntityWorld().isRemote)
+			if (!player.isBeingRidden()) {
+				startRiding(player, true);
+				setPersistanceOnPlayer(player.getCommandSenderEntity().getName()); // may not work
 			}
-		setRotation(player.renderYawOffset, player.rotationPitch);
 	}
 
 	@Override
 	public double getYOffset() {
-		if (ridingEntity != null && ridingEntity instanceof EntityPlayer)
-			return -2D;
-		else if (ridingEntity != null)
-			return ridingEntity.height * 0.75D - 1.0D;
+		if (getRidingEntity() != null && getRidingEntity() instanceof EntityPlayer)
+			return getRidingEntity().height -2.25F;
+		else if (getRidingEntity() != null)
+			return getRidingEntity().height * 0.75D - 1.0D;
 		else
-			return yOffset;
-	}
-
-	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.silverfish.step", 0.15F, 1.0F);
+			return getYOffset();
 	}
 
 	@Override
 	public void onUpdate() {
-		renderYawOffset = rotationYaw;
-		if (!worldObj.isRemote)
-			if (ridingEntity != null && ridingEntity instanceof EntityPlayer && getParasiteCount() > 0 && rand.nextInt(180 / getParasiteCount()) == 0) {
-				byte duration = (byte) (getParasiteCount() * 5);
-				((EntityLivingBase) ridingEntity).addPotionEffect(new PotionEffect(Potion.weakness.id, duration * 20, 0));
-				((EntityLivingBase) ridingEntity).addPotionEffect(new PotionEffect(Potion.digSlowdown.id, duration * 20, 0));
-				((EntityLivingBase) ridingEntity).addPotionEffect(new PotionEffect(Potion.hunger.id, duration * 20, 0));
+
+		if (getRidingEntity() != null && getRidingEntity() instanceof EntityPlayer) {
+			setRotation(getRidingEntity().rotationYaw, 0F);
+			if (!getEntityWorld().isRemote) {
+				if (getParasiteCount() > 0 && rand.nextInt(180 / getParasiteCount()) == 0) {
+					byte duration = (byte) (getParasiteCount() * 5);
+					((EntityLivingBase) getRidingEntity()).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, duration * 20, 0));
+					((EntityLivingBase) getRidingEntity()).addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, duration * 20, 0));
+					((EntityLivingBase) getRidingEntity()).addPotionEffect(new PotionEffect(MobEffects.HUNGER, duration * 20, 0));
+				}
+				if (getParasiteCount() == 0)
+					setDead();
 			}
-		if (getParasiteCount() == 0)
-			setDead();
+		}
 		super.onUpdate();
 	}
 
 	public void setABitDead() {
-		worldObj.playSoundEffect(posX, posY, posZ, getDeathSound(), 1.0F, 0.7F);
-		if (worldObj.isRemote)
-			worldObj.spawnParticle("smoke", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-		if (!worldObj.isRemote)
-			entityDropItem(new ItemStack(Items.slime_ball), 0.0F);
+		getEntityWorld().playSound((EntityPlayer)null, getPosition(), getDeathSound(), SoundCategory.HOSTILE, 1.0F, 0.7F);
+		if (getEntityWorld().isRemote)
+			getEntityWorld().spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		if (!getEntityWorld().isRemote)
+			entityDropItem(new ItemStack(Items.SLIME_BALL), 0.0F);
 		setParasiteCount((byte) (getParasiteCount() - 1));
 	}
 
@@ -128,29 +136,29 @@ public class EntityBotFlyLarva extends EntityMob {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
-		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown))
+		if (source.equals(DamageSource.IN_WALL) || source.equals(DamageSource.DROWN))
 			return false;
 		return super.attackEntityFrom(source, damage);
 	}
 
 	public void setParasiteCount(byte parasites) {
-		dataWatcher.updateObject(16, Byte.valueOf(parasites));
+		dataManager.set(PARASITE_COUNT, parasites);
 	}
 
 	public byte getParasiteCount() {
-		return dataWatcher.getWatchableObjectByte(16);
+		return dataManager.get(PARASITE_COUNT);
 	}
 
 	private void setPersistanceOnPlayer(String entityName) {
-		dataWatcher.updateObject(17, "" + entityName);
+		dataManager.set(INFESTED_PLAYER, entityName);
 	}
 
 	public String getPersistanceOnPlayer() {
-		return dataWatcher.getWatchableObjectString(17);
+		return dataManager.get(INFESTED_PLAYER);
 	}
 
-	public EntityLivingBase playerName() {
-		return worldObj.getPlayerEntityByName(getPersistanceOnPlayer());
+	public EntityPlayer playerName() {
+		return getEntityWorld().getPlayerEntityByName(getPersistanceOnPlayer());
 	}
 
 	@Override
@@ -160,12 +168,10 @@ public class EntityBotFlyLarva extends EntityMob {
 		setPersistanceOnPlayer(nbt.getString("playerName"));
 		if ((EntityPlayer) playerName() != null) {
 			EntityPlayer player = (EntityPlayer) playerName();
-			if (!worldObj.isRemote)
-				if (player.riddenByEntity == null) {
-					mountEntity(player);
-					setPosition(player.posX, player.posY + ridingEntity.getYOffset(), player.posZ);
+			if (!getEntityWorld().isRemote)
+				if (!player.isBeingRidden()) {
+					startRiding(player, true);
 				}
-			setRotation(player.renderYawOffset, player.rotationPitch);
 		}
 	}
 
@@ -174,6 +180,17 @@ public class EntityBotFlyLarva extends EntityMob {
 		super.writeEntityToNBT(nbt);
 		nbt.setByte("parasites", getParasiteCount());
 		nbt.setString("playerName", getPersistanceOnPlayer());
+	}
+
+	@Override
+	public void writeSpawnData(ByteBuf buffer) {
+		buffer.writeByte(getParasiteCount());
+		
+	}
+
+	@Override
+	public void readSpawnData(ByteBuf additionalData) {
+		setParasiteCount(additionalData.readByte());
 	}
 
 }

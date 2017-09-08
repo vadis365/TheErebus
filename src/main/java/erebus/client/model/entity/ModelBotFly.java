@@ -1,13 +1,14 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityBotFly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelBotFly extends ModelBase {
@@ -196,7 +197,6 @@ public class ModelBotFly extends ModelBase {
 	@Override
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
-		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		Head.render(unitPixel);
 		HeadFront.render(unitPixel);
 		HeadTop.render(unitPixel);
@@ -228,14 +228,21 @@ public class ModelBotFly extends ModelBase {
 		LegLB1.render(unitPixel);
 		LegLB2.render(unitPixel);
 		LegLB3.render(unitPixel);
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.depthMask(!entity.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, 0.75F);
+		GlStateManager.enableCull();
 		RWing1.render(unitPixel);
 		RWing2.render(unitPixel);
 		LWing1.render(unitPixel);
 		LWing2.render(unitPixel);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
+		GlStateManager.disableCull();
+		GlStateManager.depthMask(true);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -243,19 +250,15 @@ public class ModelBotFly extends ModelBase {
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
-		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityBotFly var8 = (EntityBotFly) entity;
-		RWing1.rotateAngleX = var8.wingFloat;
-		RWing2.rotateAngleX = var8.wingFloat;
-		LWing1.rotateAngleX = var8.wingFloat;
-		LWing2.rotateAngleX = var8.wingFloat;
-	}
-
-	public int getFlySize() {
-		return 100;
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
+		EntityBotFly botFly = (EntityBotFly) entity;
+		float smoothedTicks = botFly.ticksExisted + (botFly.ticksExisted - (botFly.ticksExisted - 1)) * partialTicks;
+		float flap = MathHelper.sin((smoothedTicks) * 1.2F) * 0.5F;
+		RWing1.rotateAngleX = flap;
+		RWing2.rotateAngleX = flap;
+		LWing1.rotateAngleX = flap;
+		LWing2.rotateAngleX = flap;
 	}
 
 }

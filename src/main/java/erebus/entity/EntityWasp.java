@@ -43,8 +43,6 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 
 	private boolean areAttributesSetup = false;
 	public boolean waspFlying;
-	public final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
-	public final EntityAIAttackMelee aiAttackOnCollide = new EntityAIAttackMelee(this, 0.5D, true);
 	private static final DataParameter<Byte> IS_BOSS = EntityDataManager.<Byte>createKey(EntityWasp.class, DataSerializers.BYTE);
 
 	public EntityWasp(World world) {

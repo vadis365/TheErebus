@@ -1,51 +1,40 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelBotFlyLarva;
 import erebus.entity.EntityBotFlyLarva;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBotFlyLarva extends RenderLiving {
+public class RenderBotFlyLarva extends RenderLiving<EntityBotFlyLarva> {
 
-	private static final ResourceLocation Texture = new ResourceLocation("erebus:textures/entity/botFlyLarva.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/bot_fly_larva.png");
 
-	public RenderBotFlyLarva() {
-		super(new ModelBotFlyLarva(), 0.5F);
+	public RenderBotFlyLarva(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelBotFlyLarva(), 0.5F);
 	}
 
 	@Override
-	protected float getDeathMaxRotation(EntityLivingBase entityLivingBase) {
+	protected float getDeathMaxRotation(EntityBotFlyLarva larva) {
 		return 180F;
 	}
 
 	@Override
-	protected int shouldRenderPass(EntityLivingBase entityLivingBase, int par2, float par3) {
-		return -1;
+	protected ResourceLocation getEntityTexture(EntityBotFlyLarva larva) {
+		return TEXTURE;
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return Texture;
-	}
-
-	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		scaleBotFlyLarva((EntityBotFlyLarva) entityliving, f);
-	}
-
-	protected void scaleBotFlyLarva(EntityBotFlyLarva entityBotFlyLarva, float f) {
-		float f1 = 0.6F;
-		GL11.glScalef(f1, f1, f1);
-		if (entityBotFlyLarva.ridingEntity != null) {
-			GL11.glTranslatef(0F, 0F, -0.2F);
-			GL11.glRotatef(180, 0F, 1F, 0F);
+	protected void preRenderCallback(EntityBotFlyLarva larva, float partialTickTime) {
+		GlStateManager.scale(0.6F, 0.6F, 0.6F);
+		if (larva.getRidingEntity() != null) {
+			GlStateManager.translate(0F, 0F, -0.2F);
+			GlStateManager.rotate(180F, 0F, 1F, 0F);
 		}
 	}
+
 }

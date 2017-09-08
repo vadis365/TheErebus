@@ -1,14 +1,13 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityBotFlyLarva;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelBotFlyLarva extends ModelBase {
@@ -36,39 +35,39 @@ public class ModelBotFlyLarva extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-		setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+	
+		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 		EntityBotFlyLarva larva = (EntityBotFlyLarva) entity;
 		int i;
 
 		if (larva.getParasiteCount() > 0)
 			for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
-				botFlyLarvaBodyParts[i].render(par7);
+				botFlyLarvaBodyParts[i].render(scale);
 
 		if (larva.getParasiteCount() > 1) {
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0.5F, -0.4F, 0.0F);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.5F, -0.4F, 0.0F);
 			for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
-				botFlyLarvaBodyParts[i].render(par7);
-			GL11.glPopMatrix();
+				botFlyLarvaBodyParts[i].render(scale);
+			GlStateManager.popMatrix();
 		}
 
 		if (larva.getParasiteCount() == 3) {
-			GL11.glPushMatrix();
-			GL11.glTranslatef(-0.5F, -0.4F, 0.0F);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(-0.5F, -0.4F, 0.0F);
 			for (i = 0; i < botFlyLarvaBodyParts.length; ++i)
-				botFlyLarvaBodyParts[i].render(par7);
-			GL11.glPopMatrix();
+				botFlyLarvaBodyParts[i].render(scale);
+			GlStateManager.popMatrix();
 		}
 
 	}
 
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, Entity entity) {
 		for (int i = 0; i < botFlyLarvaBodyParts.length; ++i) {
-			botFlyLarvaBodyParts[i].rotateAngleY = MathHelper.cos(par3 * 0.9F + i * 0.15F * (float) Math.PI) * (float) Math.PI * 0.05F * (1 + Math.abs(i - 2));
-			botFlyLarvaBodyParts[i].rotationPointX = MathHelper.sin(par3 * 0.9F + i * 0.15F * (float) Math.PI) * (float) Math.PI * 0.2F * Math.abs(i - 2);
+			botFlyLarvaBodyParts[i].rotateAngleY = MathHelper.cos(ageInTicks * 0.9F + i * 0.15F * (float) Math.PI) * (float) Math.PI * 0.05F * (1 + Math.abs(i - 2));
+			botFlyLarvaBodyParts[i].rotationPointX = MathHelper.sin(ageInTicks * 0.9F + i * 0.15F * (float) Math.PI) * (float) Math.PI * 0.2F * Math.abs(i - 2);
 		}
-
 	}
 }
