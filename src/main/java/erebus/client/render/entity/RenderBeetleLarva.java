@@ -25,7 +25,8 @@ public class RenderBeetleLarva extends RenderLiving<EntityBeetleLarva> {
 	@Override
 	protected void preRenderCallback(EntityBeetleLarva larva, float partialTickTime) {
 		float larvaSize = larva.getLarvaSize();
-		GlStateManager.scale(larvaSize, larvaSize, larvaSize);
+		if (!(larva instanceof EntityBombardierBeetleLarva))
+			GlStateManager.scale(larvaSize, larvaSize, larvaSize);
 		if (larva instanceof EntityBombardierBeetleLarva) {
 			int size = ((EntityBombardierBeetleLarva) larva).getInflateSize();
 			GlStateManager.scale((float) (size * 0.009 + larvaSize), (float) (size * 0.009 + larvaSize), (float) (-size * 0.0025 + larvaSize));

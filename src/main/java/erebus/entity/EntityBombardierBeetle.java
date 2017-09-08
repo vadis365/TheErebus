@@ -3,11 +3,13 @@ package erebus.entity;
 import erebus.ModItems;
 import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityAIExplodeAttackOnCollide;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -33,10 +35,10 @@ public class EntityBombardierBeetle extends EntityMob {
 		stepHeight = 1.0F;
 		setSize(1.9F, 0.9F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIExplodeAttackOnCollide(this, EntityPlayer.class, 0.3D, false));
+		tasks.addTask(1, new EntityBombardierBeetle.AIExplodeAttack(this));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(3, new EntityAIWander(this, 0.3D));
-		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
+		tasks.addTask(3, new EntityAIWander(this, 0.5D));
+		tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.6D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
 	}
@@ -61,7 +63,7 @@ public class EntityBombardierBeetle extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 60D : 60D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 3D : 3D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
@@ -103,6 +105,19 @@ public class EntityBombardierBeetle extends EntityMob {
 	}
 
 	@Override
+	public boolean attackEntityAsMob(Entity entity) {
+		if (canEntityBeSeen(entity)) {
+			boolean hasHitTarget = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
+			if (hasHitTarget) {
+				if (getEntityWorld().getGameRules().getBoolean("mobGriefing"))
+					getEntityWorld().createExplosion(entity, entity.posX, entity.posY, entity.posZ, 1.0F, false);
+			}
+			return hasHitTarget;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
 		if (source.isExplosion())
 			return false;
@@ -115,6 +130,18 @@ public class EntityBombardierBeetle extends EntityMob {
 		double y = posY;
 		double z = posZ;
 		if (ConfigHandler.INSTANCE.bombardierBlockDestroy == true)
-			getEntityWorld().createExplosion(this, x, y + 1, z, explosionRadius, rule);
+			getEntityWorld().createExplosion(this, x, y + 1, z, explosionRadius, false);
+	}
+	
+	static class AIExplodeAttack extends EntityAIAttackMelee {
+		
+		public AIExplodeAttack(EntityBombardierBeetle beetle) {
+			super(beetle, 0.6D, false);
+		}
+
+		@Override
+		protected double getAttackReachSqr(EntityLivingBase attackTarget) {
+			return (double) (4.0F + attackTarget.width);
+		}
 	}
 }

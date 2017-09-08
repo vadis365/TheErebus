@@ -1,37 +1,46 @@
 package erebus.entity;
 
+import javax.annotation.Nullable;
+
 import erebus.Erebus;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class EntityBombardierBeetleLarva extends EntityBeetleLarva {
+public class EntityBombardierBeetleLarva extends EntityBeetleLarva implements IMob {
 	private static final DataParameter<Integer> INFLATE_SIZE = EntityDataManager.<Integer>createKey(EntityBombardierBeetleLarva.class, DataSerializers.VARINT);
 
 	public EntityBombardierBeetleLarva(World world) {
 		super(world);
-		setLarvaType((byte) 4);
-		tasks.addTask(6, new EntityAIAttackMelee(this, 0.5D, false));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		dataManager.register(INFLATE_SIZE, new Integer(0));
+	}
+
+	@Override
+	protected void initEntityAI() {
+		super.initEntityAI();
+		tasks.addTask(6, new EntityAIAttackMelee(this, 0.5D, false));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
 	}
 
 	@Override
@@ -77,4 +86,11 @@ public class EntityBombardierBeetleLarva extends EntityBeetleLarva {
 	public int getInflateSize() {
 		return dataManager.get(INFLATE_SIZE);
 	}
+
+    @Nullable
+	@Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+		setLarvaType((byte) 4);
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
 }
