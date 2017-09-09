@@ -98,6 +98,14 @@ public class EntityFireAnt extends EntityMob {
 	}
 
 	@Override
+	public boolean getCanSpawnHere() {
+		float light = getBrightness();
+		if (light >= 0F)
+			return isNotColliding();
+		return super.getCanSpawnHere();
+	}
+
+	@Override
 	public int getMaxSpawnedInChunk() {
 		return 5;
 	}

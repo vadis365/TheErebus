@@ -38,7 +38,7 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 
 		*/
 
-		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 20).setGroupSize(1, 3).setBlockBelow(Blocks.AIR));
+		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 20).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));

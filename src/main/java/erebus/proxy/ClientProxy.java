@@ -5,6 +5,7 @@ import erebus.ModItems;
 import erebus.client.fx.ParticleBubbleGas;
 import erebus.client.fx.ParticleRepellent;
 import erebus.client.fx.ParticleSonic;
+import erebus.client.render.entity.RenderAntlion;
 import erebus.client.render.entity.RenderBedBug;
 import erebus.client.render.entity.RenderBeetle;
 import erebus.client.render.entity.RenderBeetleLarva;
@@ -23,6 +24,7 @@ import erebus.client.render.entity.RenderWebSling;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
+import erebus.entity.EntityAntlion;
 import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
@@ -50,6 +52,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleBreaking;
 import net.minecraft.client.particle.ParticleCloud;
+import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.client.particle.ParticleEnchantmentTable;
 import net.minecraft.client.particle.ParticleFlame;
 import net.minecraft.client.particle.ParticleHeart;
@@ -58,6 +61,7 @@ import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.client.particle.ParticleSpell;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -102,6 +106,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBotFlyLarva.class, RenderBotFlyLarva::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFireAnt.class, RenderFireAnt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFireAntSoldier.class, RenderFireAntSoldier::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntlion.class, RenderAntlion::new);
 	}
 
 	@Override
@@ -178,7 +183,10 @@ public class ClientProxy extends CommonProxy {
 
 		if (particleName.equals("slime"))
 			fx = new ParticleBreaking.SlimeFactory().createParticle(EnumParticleTypes.SLIME.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
-
+		
+		if (particleName.equals("antlion_dig"))
+			fx = new ParticleDigging.Factory().createParticle(EnumParticleTypes.BLOCK_DUST.getParticleID(), world, x, y, z, vecX, vecY, vecZ, Block.getIdFromBlock(Blocks.SAND));
+		
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 	}

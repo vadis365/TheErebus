@@ -287,7 +287,7 @@ public class EntityDragonfly extends EntityMob {
 			return false;
 		else {
 			int lightValue = world.getLightFromNeighbors(blockpos);
-			return lightValue > rand.nextInt(7) ? false : super.getCanSpawnHere();
+			return lightValue > rand.nextInt(7) ? false : isNotColliding() && super.getCanSpawnHere();
 		}
 	}
 

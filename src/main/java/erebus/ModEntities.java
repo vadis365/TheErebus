@@ -3,6 +3,7 @@ package erebus;
 
 import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.EntityAntlion;
 import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
@@ -41,7 +42,6 @@ public class ModEntities {
 		registerEntity(11, EntityLocust.class, "locust", 0x5FFF5F, 0x06B900);
 		registerEntity(12, EntityMoth.class, "moth", 0x00FFDD, 0xFBFFA8);
 		registerEntity(13, EntityRhinoBeetle.class, "rhinoBeetle", 0x222222, 0x747474);
-		registerEntity(14, EntityAntlion.class, "antlion", 0x000000, 0xFFFFFF);
 
 		registerEntity(16, EntityGlowWorm.class, "glow_worm", 0xFFFF00, 0xFFFFFF);
 		
@@ -113,6 +113,7 @@ public class ModEntities {
 
 		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
 
+		registerEntity(14, EntityAntlion.class, "antlion", 0x000000, 0xFFFFFF);
 		registerEntity(15, EntityBlackWidow.class, "black_widow", 0x000000, 0xFF0000);
 
 		registerEntity(17, EntityBombardierBeetle.class, "bombardier_beetle", 0xFFEEFF, 0x9E0E0E);

@@ -1,31 +1,30 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelAntlion;
+import erebus.entity.EntityAntlion;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderAntlion extends RenderLiving {
+public class RenderAntlion extends RenderLiving<EntityAntlion> {
 
-	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/antlion.png");
+	private static ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/antlion.png");
 
-	public RenderAntlion() {
-		super(new ModelAntlion(), 0.75F);
+	public RenderAntlion(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelAntlion(), 0.75F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		GL11.glScalef(0.75F, 0.75F, 0.75F);
+	protected void preRenderCallback(EntityAntlion antlion, float partialTickTime) {
+		GlStateManager.scale(0.75F, 0.75F, 0.75F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityAntlion antlion) {
+		return TEXTURE;
 	}
 }

@@ -1,6 +1,7 @@
 package erebus.network.client;
 import erebus.Erebus;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -19,6 +20,7 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 		BOSS_DEATH,
 		ANTLION_BLAM,
 		ANTLION_RUMBLE,
+		ANTLION_DIG,
 		HAMMER_BLAM,
 		GAS_VENT_SWAMP,
 		GAS_VENT_VOLCANIC,
@@ -98,12 +100,17 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 					//float f2 = (message.worldObj.rand.nextFloat() - 0.5F) * 8.0F;
 					//eff.addEffect(new EntityHugeExplodeFX(player.worldObj, message.posX + f, message.posY + 2.0D + f1, message.posZ + f2, 0.0D, 0.0D, 0.0D));
 					break;
-
 				case ANTLION_RUMBLE:
 					//for (int a = 0; a < 360; a += 4) {
 					//	double ang = a * Math.PI / 180D;
 					//	eff.addEffect(new EntityDiggingFX(player.worldObj, message.posX + -MathHelper.sin((float) ang) * 3.5D, message.posY + 0.125D, message.posZ + MathHelper.cos((float) ang) * 3.5D, -MathHelper.sin((float) ang) * 0.8, 0.3D, MathHelper.cos((float) ang) * 0.8, ModBlocks.ghostSand, 0));
 					//}
+					break;
+				case ANTLION_DIG:
+					for (int a = 0; a < 360; a += 4) {
+						double ang = a * Math.PI / 180D;
+						Erebus.PROXY.spawnCustomParticle("antlion_dig", world, message.posX + -MathHelper.sin((float) ang) * 1.5D, message.posY, message.posZ + MathHelper.cos((float) ang) * 1.5D, -MathHelper.sin((float) ang) * 0.8, 0.3D, MathHelper.cos((float) ang) * 0.8);
+					}
 					break;
 				case HAMMER_BLAM:
 					//for (int a = 0; a < 360; a += 4) {

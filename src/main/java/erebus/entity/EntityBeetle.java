@@ -73,7 +73,7 @@ public class EntityBeetle extends EntityAnimal {
 	public boolean getCanSpawnHere() {
 		float light = getBrightness();
 		if (light >= 0F)
-			return getEntityWorld().checkNoEntityCollision(getEntityBoundingBox()) && getEntityWorld().getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !getEntityWorld().containsAnyLiquid(getEntityBoundingBox());
+			return isNotColliding();
 		return super.getCanSpawnHere();
 	}
 

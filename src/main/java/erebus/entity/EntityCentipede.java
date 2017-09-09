@@ -70,6 +70,14 @@ public class EntityCentipede extends EntityMob {
 		return 2;
 	}
 
+	@Override
+	public boolean getCanSpawnHere() {
+		float light = getBrightness();
+		if (light >= 0F)
+			return isNotColliding();
+		return super.getCanSpawnHere();
+	}
+
 	public double getAttackStrength() {
 		switch (getEntityWorld().getDifficulty()) {
 			default:
