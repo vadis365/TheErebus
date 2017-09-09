@@ -32,10 +32,10 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityRhinoBeetle.class, 10).setGroupSize(1, 1));
 
 */
-		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
+		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2).setBlockBelow(Blocks.AIR));
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityBlackWidow.class, 5).setGroupSize(1, 1));
-		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
+		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3).setBlockBelow(Blocks.AIR));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 15).setGroupSize(2, 4));
 		
 		topBlock = Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND);

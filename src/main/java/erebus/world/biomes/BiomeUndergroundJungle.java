@@ -38,10 +38,10 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 
 
 */
-		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
-		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
+		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8).setBlockBelow(Blocks.AIR));
+		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8).setBlockBelow(Blocks.AIR));
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
-		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
+		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3).setBlockBelow(Blocks.AIR));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 20).setGroupSize(2, 4));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 15).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBombardierBeetle.class, 8).setGroupSize(1, 2));

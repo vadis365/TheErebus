@@ -9,6 +9,8 @@ import erebus.entity.EntityFly;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 
 public class BiomeElysianFields extends BiomeBaseErebus {
 	public BiomeElysianFields(BiomeProperties properties) {
@@ -39,11 +41,11 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		*/
-		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
-		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 10).setGroupSize(1, 3));
+		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8).setBlockBelow(Blocks.AIR));
+		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 10).setGroupSize(1, 3).setBlockBelow(Blocks.AIR));
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(3, 5));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 18).setGroupSize(2, 3));
-		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
+		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3).setBlockBelow(Blocks.AIR));
 	}
 
 	@Override
