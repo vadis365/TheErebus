@@ -42,8 +42,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityDragonfly extends EntityMob {
 
-	EntityLivingBase entityToAttack;
-
 	public double pickupHeight;
 	private boolean dropped;
 	private int droptime = 0;// cool-down for picking up
@@ -172,11 +170,14 @@ public class EntityDragonfly extends EntityMob {
 		super.onUpdate();
 
 		if (motionY < 0.0D)
-			motionY *= 0.4D;
+			motionY *= 0.3D;
 		
 		if (isBeingRidden()){
-			if (getAttackTarget() != null && !getEntityWorld().isAirBlock(getPosition().down(3)) || !getDropped() && getPosition().getY() < pickupHeight + 10D)
-				getMoveHelper().setMoveTo(this.posX, this.posY + 1, this.posZ, 0.32D);
+			if (getAttackTarget() != null && !getEntityWorld().isAirBlock(getPosition().down(3)) || !getDropped() && getPosition().getY() < pickupHeight + 10D) {
+				getNavigator().clearPathEntity();
+				getNavigator().tryMoveToXYZ(this.posX, this.posY + 10D, this.posZ, 1D);
+				motionY += 0.08D;
+			}
 			
 			if (!getEntityWorld().isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0 || !getEntityWorld().isRemote && captured() && getEntityWorld().isSideSolid(new BlockPos (MathHelper.floor(posX), MathHelper.floor(posY + 1D), MathHelper.floor(posZ)), EnumFacing.UP))) {
 				setDropped(true);
@@ -229,8 +230,24 @@ public class EntityDragonfly extends EntityMob {
 		if (!getEntityWorld().isRemote && !player.capabilities.isCreativeMode && !captured() && rand.nextInt(20) == 0 && !getDropped()) {
 			player.startRiding(this, true);
 			pickupHeight = posY;
+			setPosition(posX, player.posY + getYOffset(), posZ);
 			setCountdown(60);
 		}
+	}
+
+	@Override
+	public double getYOffset() {
+		if (getCapturedPlayer() != null)
+			return getCapturedPlayer().height;
+		else
+			return super.getYOffset();
+	}
+
+	public EntityPlayer getCapturedPlayer() {
+		for (Entity entity : this.getPassengers())
+			if (entity instanceof EntityPlayer)
+				return (EntityPlayer) entity;
+		return null;
 	}
 
 	@Override
@@ -240,7 +257,9 @@ public class EntityDragonfly extends EntityMob {
 			double a = Math.toRadians(renderYawOffset);
 			double offSetX = -Math.sin(a) * -0.6D;
 			double offSetZ = Math.cos(a) * -0.6D;
-			entity.setPosition(posX - offSetX, posY - 2, posZ - offSetZ);
+			entity.setPosition(posX - offSetX, posY - getYOffset(), posZ - offSetZ);
+			if (entity.isSneaking())
+				entity.setSneaking(false);
 		}
 	}
 
@@ -250,9 +269,10 @@ public class EntityDragonfly extends EntityMob {
 			return false;
 		else if (super.attackEntityFrom(source, amp)) {
 			Entity entity = source.getTrueSource();
-			if (getControllingPassenger() != entity && getRidingEntity() != entity) {
-				if (entity != this)
-					entityToAttack = (EntityLivingBase) entity;
+			if (isBeingRidden() && getCapturedPlayer() != null) {
+				if (entity == getCapturedPlayer())
+					setDropped(true);
+					removePassengers();
 				return true;
 			} else
 				return true;

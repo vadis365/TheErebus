@@ -3,6 +3,8 @@ package erebus.world.biomes;
 import java.util.Random;
 
 import erebus.ModBlocks;
+import erebus.entity.EntityBeetle;
+import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
 import erebus.world.ChunkProviderErebus;
@@ -33,12 +35,13 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntitySnapper.class, 20).setGroupSize(2, 3));
 		spawningGradual.add(new SpawnEntry(EntityWisp.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBloodSnail.class, 10).setGroupSize(1, 2));
-		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
-		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
+
 		*/
 
 		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 20).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));
+		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));
+		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 20).setGroupSize(1, 2));
 	}
 
 	@Override

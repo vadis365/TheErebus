@@ -14,6 +14,8 @@ import erebus.client.render.entity.RenderBotFly;
 import erebus.client.render.entity.RenderBotFlyLarva;
 import erebus.client.render.entity.RenderCentipede;
 import erebus.client.render.entity.RenderDragonfly;
+import erebus.client.render.entity.RenderFireAnt;
+import erebus.client.render.entity.RenderFireAntSoldier;
 import erebus.client.render.entity.RenderFly;
 import erebus.client.render.entity.RenderGasVent;
 import erebus.client.render.entity.RenderWasp;
@@ -31,6 +33,8 @@ import erebus.entity.EntityBotFly;
 import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityDragonfly;
+import erebus.entity.EntityFireAnt;
+import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
 import erebus.entity.EntityWasp;
@@ -96,6 +100,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityWebSling.class, RenderWebSling::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBotFly.class, RenderBotFly::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBotFlyLarva.class, RenderBotFlyLarva::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFireAnt.class, RenderFireAnt::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFireAntSoldier.class, RenderFireAntSoldier::new);
 	}
 
 	@Override
