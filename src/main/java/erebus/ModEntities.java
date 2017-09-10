@@ -19,6 +19,7 @@ import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
+import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
 import erebus.lib.Reference;
@@ -86,7 +87,6 @@ public class ModEntities {
 		registerEntity(55, EntityMucusBombPrimed.class, "mucus_bomb_primed");
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umber_golem_idol");
 		registerEntity(57, EntityAntlionBoss.class, "antlion_boss", 0x000000, 0xFFFFFF);
-		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);
 
 		registerEntity(60, EntityZombieAntSoldier.class, "zombie_ant_soldier", 0x00FE40, 0xF09071);
 
@@ -129,6 +129,7 @@ public class ModEntities {
 
 		registerEntity(35, EntityAntlionMiniBoss.class, "antlion_mini_boss", 0x000000, 0xFFFFFF);
 
+		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(61, EntityBedBug.class, "bed_bug");
 

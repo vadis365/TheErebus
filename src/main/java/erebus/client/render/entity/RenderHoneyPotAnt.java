@@ -1,32 +1,30 @@
 package erebus.client.render.entity;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelHoneyPotAnt;
+import erebus.entity.EntityHoneyPotAnt;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderHoneyPotAnt extends RenderLiving {
+public class RenderHoneyPotAnt extends RenderLiving<EntityHoneyPotAnt> {
 
-	private static ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/honeyPotAnt.png");
+	private static ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/honey_pot_ant.png");
 
-	public RenderHoneyPotAnt() {
-		super(new ModelHoneyPotAnt(), 0.5F);
+	public RenderHoneyPotAnt(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelHoneyPotAnt(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
+	protected void preRenderCallback(EntityHoneyPotAnt ant, float partialTickTime) {
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityHoneyPotAnt ant) {
 		return TEXTURE;
 	}
 }

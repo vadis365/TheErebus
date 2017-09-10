@@ -1,14 +1,13 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityHoneyPotAnt;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelHoneyPotAnt extends ModelBase {
@@ -250,8 +249,8 @@ public class ModelHoneyPotAnt extends ModelBase {
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		GL11.glPushMatrix();
-		GL11.glTranslated(0F, 0F, -0.625F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, 0F, -0.625F);
 		Thx.render(unitPixel);
 		ThxTop.render(unitPixel);
 		ThxS.render(unitPixel);
@@ -282,19 +281,19 @@ public class ModelHoneyPotAnt extends ModelBase {
 		RBLB.render(unitPixel);
 		RBLC.render(unitPixel);
 		RBLD.render(unitPixel);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
 		EntityHoneyPotAnt ant = (EntityHoneyPotAnt) entity;
-		GL11.glPushMatrix();
-		GL11.glTranslated(0F, 0F, -0.625F);
-		GL11.glScalef(1F + ant.getHoneyBelly(), 1F + ant.getHoneyBelly(), 1F + ant.getHoneyBelly());
-		GL11.glTranslatef(0F, -ant.getHoneyBelly() * 0.5F, -ant.getHoneyBelly() * 0.36F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, 0F, -0.625F);
+		GlStateManager.scale(1F + ant.getHoneyBelly(), 1F + ant.getHoneyBelly(), 1F + ant.getHoneyBelly());
+		GlStateManager.translate(0F, -ant.getHoneyBelly() * 0.5F, -ant.getHoneyBelly() * 0.36F);
 		Ab.render(unitPixel);
 		AbF.render(unitPixel);
 		AbSide.render(unitPixel);
 		AbTop.render(unitPixel);
 		AbBack.render(unitPixel);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

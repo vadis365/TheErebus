@@ -37,6 +37,10 @@ public class EntityAntlion extends EntityMob {
 		stepHeight = 1F;
 		isImmuneToFire = true;
 		experienceValue = 17;
+	}
+
+	@Override
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIAttackMelee(this, 0.7D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));

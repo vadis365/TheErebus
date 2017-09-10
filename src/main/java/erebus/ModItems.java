@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.items.ItemAmuletAntTaming;
 import erebus.items.ItemArmorBamboo;
 import erebus.items.ItemArmorExoskeleton;
 import erebus.items.ItemArmorJade;
@@ -26,6 +27,7 @@ import erebus.items.ItemJadeShovel;
 import erebus.items.ItemJadeSword;
 import erebus.items.ItemLeggingsSprint;
 import erebus.items.ItemMaterials;
+import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
 import erebus.items.ItemSpiderTShirt;
 import erebus.lib.Reference;
@@ -108,7 +110,9 @@ public class ModItems {
 	public static final Item REIN_EXOSKELETON_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_EXOSKELETON);
 	public static final Item RHINO_EXOSKELETON_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_REIN_EXOSKELETON);
 	
-
+	// RANDOM STUFF
+	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();
+	public static final Item ANT_TAMING_AMULET = new ItemAmuletAntTaming();
 
 	public static void init() {
 		try {
