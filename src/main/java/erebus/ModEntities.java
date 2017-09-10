@@ -4,6 +4,7 @@ package erebus;
 import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityAntlion;
+import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
@@ -62,7 +63,7 @@ public class ModEntities {
 		registerEntity(32, EntityCicada.class, "cicada", 0x747474, 0xFFA200);
 
 		registerEntity(34, EntityLavaWebSpider.class, "lava_web_spider", 0xFF0000, 0x06B900);
-		registerEntity(35, EntityAntlionMiniBoss.class, "antlion_mini_boss", 0x000000, 0xFFFFFF);
+
 		registerEntity(36, EntityChameleonTick.class, "chameleon_tick", 0x804E3D, 0x3D6F80);
 		registerEntity(37, EntitySolifugeSmall.class, "solifuge_small");
 		registerEntity(38, EntityMidgeSwarm.class, "midge_swarm", -14803180, -13816034);
@@ -125,6 +126,8 @@ public class ModEntities {
 		registerEntity(28, EntityBotFlyLarva.class, "bot_fly_larva", -6750208, -13165534);
 
 		registerEntity(33, EntityFireAntSoldier.class, "fire_ant_soldier", 0xFF0000, 0xFFEE00);
+
+		registerEntity(35, EntityAntlionMiniBoss.class, "antlion_mini_boss", 0x000000, 0xFFFFFF);
 
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(61, EntityBedBug.class, "bed_bug");

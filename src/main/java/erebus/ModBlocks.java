@@ -15,6 +15,7 @@ import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockGaeanKeystone;
+import erebus.blocks.BlockGhostSand;
 import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
@@ -95,6 +96,7 @@ public class ModBlocks {
 	public static final Block QUICK_SAND = new BlockQuickSand();
 	public static final Block RED_GEM = new BlockRedGem();
 	public static final Block SWAMP_VENT = new BlockSwampVent();
+	public static final Block GHOST_SAND = new BlockGhostSand();
 
 	public static final Block CROP_TURNIP = new BlockTurnip().setCreativeTab(ModTabs.PLANTS);
 	public static final Block CROP_CABBAGE = new BlockCabbage().setCreativeTab(ModTabs.PLANTS);

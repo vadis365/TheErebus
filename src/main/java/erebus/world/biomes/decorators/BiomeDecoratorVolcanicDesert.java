@@ -7,6 +7,7 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.plant.WorldGenPricklyPairPatch;
+import erebus.world.feature.structure.WorldGenAntlionLair;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenLakes;
@@ -16,7 +17,7 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 
 	private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 	protected final WorldGenPricklyPairPatch genPricklyPair = new WorldGenPricklyPairPatch();
-//	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
+	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
 	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.FLOWING_LAVA);
 	
 
@@ -72,10 +73,10 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 				}
 			}
 
-	//	if (rand.nextInt(34) == 0)
-	//		for (int attempt = 0; attempt < 15; attempt++)
-	//			if (genAntlionLair.generate(world, rand, x + 5 + rand.nextInt(6) + 8, 15 + rand.nextInt(35), z + 5 + rand.nextInt(6) + 8))
-	//				break;
+		if (rand.nextInt(5) == 0)
+			for (int attempt = 0; attempt < 300; attempt++)
+				if (genAntlionLair.generate(world, rand, new BlockPos(x + 5 + rand.nextInt(6) + 8, 15 + rand.nextInt(35), z + 5 + rand.nextInt(6) + 8)))
+					break;
 					
 	}
 

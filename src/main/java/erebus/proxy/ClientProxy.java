@@ -6,6 +6,7 @@ import erebus.client.fx.ParticleBubbleGas;
 import erebus.client.fx.ParticleRepellent;
 import erebus.client.fx.ParticleSonic;
 import erebus.client.render.entity.RenderAntlion;
+import erebus.client.render.entity.RenderAntlionMiniBoss;
 import erebus.client.render.entity.RenderBedBug;
 import erebus.client.render.entity.RenderBeetle;
 import erebus.client.render.entity.RenderBeetleLarva;
@@ -25,6 +26,7 @@ import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.entity.EntityAntlion;
+import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
@@ -107,6 +109,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityFireAnt.class, RenderFireAnt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFireAntSoldier.class, RenderFireAntSoldier::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntlion.class, RenderAntlion::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntlionMiniBoss.class, RenderAntlionMiniBoss::new);
 	}
 
 	@Override
