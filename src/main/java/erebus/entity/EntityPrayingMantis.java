@@ -13,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.item.ItemMaterials;
 
 public class EntityPrayingMantis extends EntityMob {
@@ -26,7 +26,7 @@ public class EntityPrayingMantis extends EntityMob {
 		setSize(2.0F, 2.5F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.6D, false));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, EntityPlayer.class, 0.6D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(3, new EntityAIWander(this, 0.3D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));

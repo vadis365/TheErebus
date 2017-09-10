@@ -20,7 +20,9 @@ import erebus.client.render.entity.RenderFireAnt;
 import erebus.client.render.entity.RenderFireAntSoldier;
 import erebus.client.render.entity.RenderFly;
 import erebus.client.render.entity.RenderGasVent;
+import erebus.client.render.entity.RenderGrasshopper;
 import erebus.client.render.entity.RenderHoneyPotAnt;
+import erebus.client.render.entity.RenderLocust;
 import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
 import erebus.client.render.item.RenderErebusShield;
@@ -42,7 +44,9 @@ import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
+import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityHoneyPotAnt;
+import erebus.entity.EntityLocust;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
 import erebus.tileentity.TileEntityBambooShield;
@@ -113,6 +117,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntlion.class, RenderAntlion::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntlionMiniBoss.class, RenderAntlionMiniBoss::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHoneyPotAnt.class, RenderHoneyPotAnt::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrasshopper.class, RenderGrasshopper::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityLocust.class, RenderLocust::new);
 	}
 
 	@Override

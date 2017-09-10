@@ -1,12 +1,12 @@
 package erebus.client.model.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityGrasshopper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelGrasshopper extends ModelBase {
@@ -324,8 +324,8 @@ public class ModelGrasshopper extends ModelBase {
 		RFL2.rotateAngleX = legx1;
 		RFL3.rotateAngleX = legx1;
 		RFL4.rotateAngleX = legx1;
-		EntityGrasshopper var8 = (EntityGrasshopper) entity;
-		if (!var8.onGround) {
+		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
+		if (!grasshopper.onGround) {
 			LBL4.setRotationPoint(2F, 22.0F, 14F);
 			LBL5.setRotationPoint(2F, 22.0F, 14F);
 			LBL6.setRotationPoint(2F, 21.0F, 14F);
@@ -361,7 +361,7 @@ public class ModelGrasshopper extends ModelBase {
 			RML3.rotateAngleX = 0.6F;
 			RML4.rotateAngleX = 0.6F;
 		}
-		if (var8.onGround) {
+		if (grasshopper.onGround) {
 			LBL4.setRotationPoint(2F, 18F, 3F);
 			LBL5.setRotationPoint(2F, 18F, 3F);
 			LBL6.setRotationPoint(2F, 18F, 3F);

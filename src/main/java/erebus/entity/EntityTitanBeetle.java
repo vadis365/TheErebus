@@ -35,7 +35,7 @@ import erebus.Erebus;
 import erebus.ModItems;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.item.ItemErebusFood;
 import erebus.item.ItemMaterials;
 import erebus.tileentity.TileEntityTitanChest;
@@ -54,7 +54,7 @@ public class EntityTitanBeetle extends EntityTameable {
 		stepHeight = 2.0F;
 		setSize(2.5F, 1.2F);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, 0.5D, true));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, true));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));
 		tasks.addTask(3, new EntityAITempt(this, 0.5D, ModItems.turnip, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.5D));

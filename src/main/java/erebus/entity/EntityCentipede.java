@@ -3,13 +3,13 @@ package erebus.entity;
 import erebus.ModItems;
 import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -49,7 +49,7 @@ public class EntityCentipede extends EntityMob {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackMelee(this, 0.3D, false));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.3D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(3, new EntityAIWander(this, 0.3D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));

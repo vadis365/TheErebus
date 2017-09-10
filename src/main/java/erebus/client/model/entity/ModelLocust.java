@@ -1,14 +1,13 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityLocust;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelLocust extends ModelBase {
@@ -295,14 +294,21 @@ public class ModelLocust extends ModelBase {
 		RBL4.render(unitPixel);
 		RBL5.render(unitPixel);
 		RBL6.render(unitPixel);
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.depthMask(!entity.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, 0.75F);
+		GlStateManager.enableCull();
 		LFWing.render(unitPixel);
 		RFWing.render(unitPixel);
 		LBWing.render(unitPixel);
 		RBWing.render(unitPixel);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
+		GlStateManager.disableCull();
+		GlStateManager.depthMask(true);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -353,8 +359,8 @@ public class ModelLocust extends ModelBase {
 		RFL2.rotateAngleX = legx1;
 		RFL3.rotateAngleX = legx1;
 		RFL4.rotateAngleX = legx1;
-		EntityLocust var8 = (EntityLocust) entity;
-		if (!var8.onGround) {
+		EntityLocust locust = (EntityLocust) entity;
+		if (!locust.onGround) {
 			LBL4.setRotationPoint(2F, 22.0F, 14F);
 			LBL5.setRotationPoint(2F, 22.0F, 14F);
 			LBL6.setRotationPoint(2F, 21.0F, 14F);
@@ -398,7 +404,7 @@ public class ModelLocust extends ModelBase {
 			LFWing.rotateAngleX = legx1;
 			LBWing.rotateAngleX = legx1;
 		}
-		if (var8.onGround) {
+		if (locust.onGround) {
 			RFWing.rotateAngleY = 0F;
 			RBWing.rotateAngleY = 0F;
 			LFWing.rotateAngleY = 0F;

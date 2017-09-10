@@ -11,7 +11,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.item.ItemMaterials;
 
 public class EntityZombieAnt extends EntityMob {
@@ -22,7 +22,7 @@ public class EntityZombieAnt extends EntityMob {
 		setSize(1.5F, 0.75F);
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.4D, false));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, EntityPlayer.class, 0.4D, false));
 		tasks.addTask(2, new EntityAILookIdle(this));
 		tasks.addTask(3, new EntityAIWander(this, 0.6D));
 		targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));

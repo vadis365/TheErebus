@@ -3,6 +3,7 @@ package erebus.entity;
 import erebus.ModItems;
 import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.entity.ai.EntityAIFlyingWander;
 import erebus.entity.ai.FlyingMoveHelper;
 import erebus.entity.ai.PathNavigateFlying;
@@ -11,7 +12,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -47,7 +47,7 @@ public class EntityBotFly extends EntityMob {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackMelee(this, 0.5D, true));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, true));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIFlyingWander(this, 0.75D));
@@ -165,13 +165,13 @@ public class EntityBotFly extends EntityMob {
 	public boolean attackEntityAsMob(Entity entity) {
 		if (super.attackEntityAsMob(entity)) {
 			if (entity instanceof EntityPlayer)
-				if (rand.nextInt(2) == 0 && !entity.isBeingRidden()) {
+				if (rand.nextInt(20) == 0 && !entity.isBeingRidden()) {
 					EntityBotFlyLarva entityBotFlyLarva = new EntityBotFlyLarva(getEntityWorld());
 					entityBotFlyLarva.setPosition(entity.posX, entity.posY + 1, entity.posZ);
 					entityBotFlyLarva.setParasiteCount((byte) 1);
 					entityBotFlyLarva.startRiding(entity, true);
 					getEntityWorld().spawnEntity(entityBotFlyLarva);
-				} else if (rand.nextInt(2) == 0 && getParasite((EntityPlayer) entity) != null)
+				} else if (rand.nextInt(20) == 0 && getParasite((EntityPlayer) entity) != null)
 					if (((EntityBotFlyLarva) getParasite((EntityPlayer) entity)).getParasiteCount() < 3)
 						((EntityBotFlyLarva) getParasite((EntityPlayer) entity)).setParasiteCount((byte) (((EntityBotFlyLarva) getParasite((EntityPlayer) entity)).getParasiteCount() + 1));
 			return true;

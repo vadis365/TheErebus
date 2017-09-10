@@ -2,11 +2,11 @@ package erebus.entity;
 
 import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -39,7 +39,7 @@ public class EntityFireAntSoldier extends EntityMob {
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityFireAntSoldier.AIFireballAttackBig(this));
-		tasks.addTask(2, new EntityAIAttackMelee(this, 0.5D, true));
+		tasks.addTask(2, new EntityAIErebusAttackMelee(this, 0.5D, true));
 		tasks.addTask(3, new EntityAIWander(this, 0.5D));
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(5, new EntityAILookIdle(this));

@@ -19,7 +19,9 @@ import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
+import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityHoneyPotAnt;
+import erebus.entity.EntityLocust;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
 import erebus.lib.Reference;
@@ -113,6 +115,9 @@ public class ModEntities {
 		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
 
 		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
+
+		registerEntity(10, EntityGrasshopper.class, "grasshopper", 0x06B900, 0x5FFF5F);
+		registerEntity(11, EntityLocust.class, "locust", 0x5FFF5F, 0x06B900);
 
 		registerEntity(14, EntityAntlion.class, "antlion", 0x000000, 0xFFFFFF);
 		registerEntity(15, EntityBlackWidow.class, "black_widow", 0x000000, 0xFF0000);

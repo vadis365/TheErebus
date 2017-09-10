@@ -13,7 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.item.ItemMaterials;
 
 public class EntityChameleonTick extends EntityMob {
@@ -23,7 +23,7 @@ public class EntityChameleonTick extends EntityMob {
 	public int animation;
 	public boolean active = false;
 	private final EntityAINearestAttackableTarget aiAttackTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
-	private final EntityErebusAIAttackOnCollide aiAttackOnCollide = new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.65D, false);
+	private final EntityAIErebusAttackMelee aiAttackOnCollide = new EntityAIErebusAttackMelee(this, EntityPlayer.class, 0.65D, false);
 
 	public EntityChameleonTick(World world) {
 		super(world);

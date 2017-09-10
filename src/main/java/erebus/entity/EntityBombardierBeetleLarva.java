@@ -4,11 +4,11 @@ import javax.annotation.Nullable;
 
 import erebus.Erebus;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.IMob;
@@ -38,7 +38,7 @@ public class EntityBombardierBeetleLarva extends EntityBeetleLarva implements IM
 	@Override
 	protected void initEntityAI() {
 		super.initEntityAI();
-		tasks.addTask(6, new EntityAIAttackMelee(this, 0.5D, false));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, false));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
 	}

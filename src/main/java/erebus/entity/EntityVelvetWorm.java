@@ -16,7 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityErebusAIAttackOnCollide;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 
 public class EntityVelvetWorm extends EntityMob {
 
@@ -29,7 +29,7 @@ public class EntityVelvetWorm extends EntityMob {
 		isImmuneToFire = false;
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityErebusAIAttackOnCollide(this, EntityPlayer.class, 0.7D, false));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, EntityPlayer.class, 0.7D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 4.0F));
 		tasks.addTask(3, new EntityAIWander(this, 0.5D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));

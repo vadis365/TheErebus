@@ -6,6 +6,7 @@ import erebus.Erebus;
 import erebus.ModItems;
 import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.entity.ai.EntityAIFlyingWander;
 import erebus.entity.ai.FlyingMoveHelper;
 import erebus.entity.ai.PathNavigateFlying;
@@ -15,7 +16,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -65,7 +65,7 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackMelee(this, 0.5D, true));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, true));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		tasks.addTask(5, new EntityAIFlyingWander(this, 1D));

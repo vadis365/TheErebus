@@ -75,7 +75,7 @@ public class BlockStigma extends Block implements IHasCustomItem, ISubBlocksBloc
 	  public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
 		//ret.add(new ItemStack(ModItems.FLOWER_BULBS, 1 + new Random().nextInt(3), meta));
-		ret.add(new ItemStack(this, 1 + RANDOM.nextInt(3), getMetaFromState(state)));
+		ret.add(new ItemStack(this, 1, getMetaFromState(state)));
 		return ret;
 	}
 
