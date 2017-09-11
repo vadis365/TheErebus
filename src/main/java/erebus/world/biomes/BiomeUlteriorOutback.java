@@ -25,8 +25,6 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(2, 2));
 		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 10).setGroupSize(1, 3));
-
-
 		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityMidgeSwarm.class, 10).setGroupSize(1, 2));

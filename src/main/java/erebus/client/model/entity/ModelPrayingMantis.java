@@ -1,12 +1,12 @@
 package erebus.client.model.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityPrayingMantis;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelPrayingMantis extends ModelBase {
@@ -330,7 +330,7 @@ public class ModelPrayingMantis extends ModelBase {
 		RFLeg5.rotateAngleX = cos1;
 		RFLeg6.rotateAngleX = cos1;
 
-		if (entityPrayingMantis.getDataWatcher().getWatchableObjectByte(22) == 1) {
+		if (entityPrayingMantis.getAnimationByte() == 1) {
 			LArm1.rotateAngleX = cosxnz1 + 0.3490659F;
 			LArm2.rotateAngleX = cosxnz1 - 2.268928F;
 			LArm3.rotateAngleX = cosxnz1 + 0.3490659F;
@@ -341,7 +341,7 @@ public class ModelPrayingMantis extends ModelBase {
 			RArm4.rotateAngleX = -cosxnz1 + 0.3490659F;
 		}
 
-		if (entityPrayingMantis.getDataWatcher().getWatchableObjectByte(22) == 0) {
+		if (entityPrayingMantis.getAnimationByte() == 0) {
 			LArm1.rotateAngleX = -1.222F;
 			LArm2.rotateAngleX = 2.443F;
 			LArm3.rotateAngleX = -1.222F;

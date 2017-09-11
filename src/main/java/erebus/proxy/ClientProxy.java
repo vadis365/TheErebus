@@ -22,7 +22,9 @@ import erebus.client.render.entity.RenderFly;
 import erebus.client.render.entity.RenderGasVent;
 import erebus.client.render.entity.RenderGrasshopper;
 import erebus.client.render.entity.RenderHoneyPotAnt;
+import erebus.client.render.entity.RenderJumpingSpider;
 import erebus.client.render.entity.RenderLocust;
+import erebus.client.render.entity.RenderPrayingMantis;
 import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
 import erebus.client.render.item.RenderErebusShield;
@@ -46,7 +48,9 @@ import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityHoneyPotAnt;
+import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLocust;
+import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
 import erebus.tileentity.TileEntityBambooShield;
@@ -95,7 +99,7 @@ public class ClientProxy extends CommonProxy {
 		ModColourManager.registerColourHandlers();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGaeanKeystone.class, new TileEntityGaeanKeystoneRenderer());
 	}
-	
+
 	@Override
 	public void registerEnitityRenderers() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGasVent.class, RenderGasVent::new);
@@ -119,6 +123,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityHoneyPotAnt.class, RenderHoneyPotAnt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGrasshopper.class, RenderGrasshopper::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLocust.class, RenderLocust::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityJumpingSpider.class, RenderJumpingSpider::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityPrayingMantis.class, RenderPrayingMantis::new);
 	}
 
 	@Override

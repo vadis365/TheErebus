@@ -1,33 +1,37 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelPrayingMantis;
+import erebus.entity.EntityPrayingMantis;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderPrayingMantis extends RenderLiving {
+public class RenderPrayingMantis extends RenderLiving<EntityPrayingMantis> {
 
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/prayingMantis.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/praying_mantis.png");
 
-	public RenderPrayingMantis() {
-		super(new ModelPrayingMantis(), 0.5F);
+	public RenderPrayingMantis(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelPrayingMantis(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entity, float partialTickTime) {
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, entity.getDataWatcher().getWatchableObjectFloat(20));
+	protected void preRenderCallback(EntityPrayingMantis mantis, float partialTickTime) {
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+	//	GlStateManager.depthMask(!mantis.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, mantis.getAlpha());
+		//System.out.println("Mantis Alpha: " + mantis.getAlpha());
+	//	GlStateManager.depthMask(true);
+	//	GlStateManager.disableBlend();
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityPrayingMantis entity) {
+		return TEXTURE;
 	}
 }

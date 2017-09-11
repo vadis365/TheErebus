@@ -10,6 +10,8 @@ import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityFly;
+import erebus.entity.EntityJumpingSpider;
+import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
@@ -28,14 +30,10 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		//setWeight(22);
 /*
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
-
-		spawningGradual.add(new SpawnEntry(EntityPrayingMantis.class, 10).setGroupSize(4, 8));
-		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 60).setGroupSize(1, 3));
-
 
 */
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
@@ -46,6 +44,8 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityBeetle.class, 15).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBombardierBeetle.class, 8).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityBombardierBeetleLarva.class, 20).setGroupSize(2, 4));
+		spawningGradual.add(new SpawnEntry(EntityJumpingSpider.class, 10).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntityPrayingMantis.class, 10).setGroupSize(4, 8));
 
 		topBlock = Blocks.GRASS.getDefaultState();
 		fillerBlock = Blocks.DIRT.getDefaultState();

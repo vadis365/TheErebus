@@ -1,13 +1,12 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelJumpingSpider extends ModelBase {
@@ -391,53 +390,53 @@ public class ModelJumpingSpider extends ModelBase {
 		RMEye.render(ationTank);
 		RBEye.render(ationTank);
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(0.625F, 0F, 0F);
-		GL11.glRotated(60F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0.625F, 0F, 0F);
+		GlStateManager.rotate(60F, 0F, 1F, 0F);
 		LFL1.render(ationTank);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(0.1875, -0.0625F, 0.0625F);
-		GL11.glRotated(20F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0.1875, -0.0625F, 0.0625F);
+		GlStateManager.rotate(20F, 0F, 1F, 0F);
 		LMFL1.render(ationTank);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(0F, -0.0625F, -0.125F);
-		GL11.glRotated(-20F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, -0.0625F, -0.125F);
+		GlStateManager.rotate(-20F, 0F, 1F, 0F);
 		LMBL1.render(ationTank);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(0.1875F, -0.0625F, -0.25F);
-		GL11.glRotated(-60F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0.1875F, -0.0625F, -0.25F);
+		GlStateManager.rotate(-60F, 0F, 1F, 0F);
 		LBL1.render(ationTank);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(-0.625F, 0F, 0F);
-		GL11.glRotated(-60F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(-0.625F, 0F, 0F);
+		GlStateManager.rotate(-60F, 0F, 1F, 0F);
 		RFL1.render(ationTank);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(-0.1875, -0.0625F, 0.0625F);
-		GL11.glRotated(-20F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(-0.1875, -0.0625F, 0.0625F);
+		GlStateManager.rotate(-20F, 0F, 1F, 0F);
 		RMFL1.render(ationTank);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(0F, -0.0625F, -0.125F);
-		GL11.glRotated(20F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, -0.0625F, -0.125F);
+		GlStateManager.rotate(20F, 0F, 1F, 0F);
 		RMBL1.render(ationTank);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(-0.1875F, -0.0625F, -0.25F);
-		GL11.glRotated(60F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(-0.1875F, -0.0625F, -0.25F);
+		GlStateManager.rotate(60F, 0F, 1F, 0F);
 		RBL1.render(ationTank);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

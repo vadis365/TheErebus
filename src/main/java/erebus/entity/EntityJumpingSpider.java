@@ -1,74 +1,86 @@
 package erebus.entity;
 
+import javax.annotation.Nullable;
+
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
 
 public class EntityJumpingSpider extends EntitySpider {
+	private static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(EntityJumpingSpider.class, DataSerializers.VARINT);
 
-	public EntityJumpingSpider(World par1World) {
-		super(par1World);
+	public EntityJumpingSpider(World world) {
+		super(world);
 		setSize(0.7F, 0.5F);
+	}
+
+	@Override
+	protected void initEntityAI() {
+		tasks.addTask(1, new EntityAISwimming(this));
+		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.6F));
+		tasks.addTask(4, new EntityAIErebusAttackMelee(this, 1.0D, true));
+		tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
+		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(6, new EntityAILookIdle(this));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(30, new Integer(rand.nextInt(3)));
+		dataManager.register(TYPE, new Integer(rand.nextInt(3)));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		
-	}
-
-	@Override
-	protected void attackEntity(Entity entity, float distance) {
-		if (distance < 2.0F) {
-			super.attackEntity(entity, distance);
-			attackEntityAsMob(entity);
-		}
-		if (distance > 2.0F && distance < 12.0F && rand.nextInt(10) == 0)
-			if (onGround) {
-				double d0 = entity.posX - posX;
-				double d1 = entity.posZ - posZ;
-				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-				motionX = d0 / f2 * 0.5D * 1.900000011920929D + motionX * 0.70000000298023224D;
-				motionZ = d1 / f2 * 0.5D * 1.900000011920929D + motionZ * 0.70000000298023224D;
-				motionY = 0.5000000059604645D;
-			}
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		if (super.attackEntityAsMob(entity)) {
-			if (entity instanceof EntityLivingBase) {
-				byte duration = 0;
+		if (canEntityBeSeen(entity)) {
+			if (super.attackEntityAsMob(entity)) {
+				if (entity instanceof EntityLivingBase) {
+					byte duration = 0;
 
-				if (worldObj.difficultySetting.ordinal() > EnumDifficulty.EASY.ordinal())
-					if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-						duration = 7;
-					else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-						duration = 15;
+					if (getEntityWorld().getDifficulty().ordinal() > EnumDifficulty.EASY.ordinal())
+						if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
+							duration = 3;
+						else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
+							duration = 5;
 
-				if (duration > 0)
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.id, duration * 20, 0));
+					if (duration > 0)
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.POISON, duration * 20, 0));
+				}
 			}
-
 			return true;
 		} else
 			return false;
@@ -82,14 +94,13 @@ public class EntityJumpingSpider extends EntitySpider {
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.POISON_GLAND.makeStack(), 0F);
+		for (int amount = 0; amount < chance; ++amount)
+			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.POISON_GLAND.ordinal()), 0.0F);
 	}
 
-	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
-		return par1EntityLivingData;
+	@Nullable
+	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+		return livingdata;
 	}
 
 	@Override
@@ -98,7 +109,11 @@ public class EntityJumpingSpider extends EntitySpider {
 	}
 
 	public void setSkin(int skinType) {
-		dataWatcher.updateObject(30, new Integer(skinType));
+		dataManager.set(TYPE, skinType);
+	}
+
+	public int getSkin() {
+		return dataManager.get(TYPE);
 	}
 
 	@Override
@@ -114,9 +129,5 @@ public class EntityJumpingSpider extends EntitySpider {
 			setSkin(nbt.getInteger("skin"));
 		else
 			setSkin(rand.nextInt(3));
-	}
-
-	public int getSkin() {
-		return dataWatcher.getWatchableObjectInt(30);
 	}
 }

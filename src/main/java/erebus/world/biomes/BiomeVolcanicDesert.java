@@ -27,8 +27,6 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus {
 /*
 		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 25).setGroupSize(1, 4));
-
-
 		spawningGradual.add(new SpawnEntry(EntityLavaWebSpider.class, 300).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 
