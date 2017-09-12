@@ -23,6 +23,7 @@ import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLocust;
+import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
@@ -76,7 +77,7 @@ public class ModEntities {
 		registerEntity(42, EntityZombieAnt.class, "zombie_ant", 0x00FE40, 0xF09071);
 		registerEntity(43, EntityTarantulaMiniboss.class, "tarantula_mini_boss", 0x000000, 0xE82066);
 		registerEntity(44, EntityTarantulaBaby.class, "tarantula_baby", 0x000000, 0xE82066);
-		registerEntity(45, EntityPondSkater.class, "pond_skater", -13816034, -14803180);
+		
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
 		registerEntity(47, EntitySnapper.class, "snapper", 0x804E3D, 0x3D6F80);
 		registerEntity(48, EntityWisp.class, "wisp", 0x804E3D, 0x3D6F80);
@@ -135,6 +136,8 @@ public class ModEntities {
 		registerEntity(33, EntityFireAntSoldier.class, "fire_ant_soldier", 0xFF0000, 0xFFEE00);
 
 		registerEntity(35, EntityAntlionMiniBoss.class, "antlion_mini_boss", 0x000000, 0xFFFFFF);
+
+		registerEntity(45, EntityPondSkater.class, "pond_skater", -13816034, -14803180);
 
 		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);

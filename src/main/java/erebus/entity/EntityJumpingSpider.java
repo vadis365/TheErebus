@@ -108,6 +108,14 @@ public class EntityJumpingSpider extends EntitySpider {
 		return 2;
 	}
 
+	@Override
+	public boolean getCanSpawnHere() {
+		float light = getBrightness();
+		if (light >= 0F)
+			return isNotColliding();
+		return super.getCanSpawnHere();
+	}
+
 	public void setSkin(int skinType) {
 		dataManager.set(TYPE, skinType);
 	}

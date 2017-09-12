@@ -1,31 +1,30 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelPondSkater;
+import erebus.entity.EntityPondSkater;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderPondSkater extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/pondSkater.png");
+public class RenderPondSkater extends RenderLiving<EntityPondSkater> {
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/pond_skater.png");
 
-	public RenderPondSkater() {
-		super(new ModelPondSkater(), 0.5F);
+	public RenderPondSkater(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelPondSkater(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityLiving, float partialTickTime) {
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		GL11.glTranslatef(0F, -0.5F, 0F);
+	protected void preRenderCallback(EntityPondSkater skater, float partialTickTime) {
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
+		GlStateManager.translate(0F, -0.5F, 0F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityPondSkater skater) {
+		return TEXTURE;
 	}
 }
