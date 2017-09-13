@@ -1,11 +1,13 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityMidgeSwarm;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.MathHelper;
 
 public class ModelMidgeSwarm extends ModelBase {
 	ModelRenderer LFLeg;
@@ -168,46 +170,46 @@ public class ModelMidgeSwarm extends ModelBase {
 	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
-		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityMidgeSwarm midge = (EntityMidgeSwarm) entity;
+		float flap = MathHelper.sin((midge.ticksExisted) * 0.25F) * 0.25F;
 
-		if (midge.getHealth() > 0) {
-			GL11.glPushMatrix();
-			GL11.glTranslated(0F + -midge.wingFloat, -1F + midge.wingFloat, 0F - midge.wingFloat);
-			renderMultiBits(unitPixel);
-			GL11.glPopMatrix();
+		if (midge.getHealth() > 0  * ConfigHandler.INSTANCE.mobHealthMultipier) {
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0F + -flap, -1F + flap, 0F - flap);
+			renderMultiBits(entity, unitPixel);
+			GlStateManager.popMatrix();
 		}
 
-		if (midge.getHealth() > 3) {
-			GL11.glPushMatrix();
-			GL11.glTranslated(0.5F + midge.wingFloat, -1.5F + midge.wingFloat, 0.5F + midge.wingFloat);
-			renderMultiBits(unitPixel);
-			GL11.glPopMatrix();
+		if (midge.getHealth() > 3 * ConfigHandler.INSTANCE.mobHealthMultipier) {
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.5F + flap, -1.5F + flap, 0.5F + flap);
+			renderMultiBits(entity, unitPixel);
+			GlStateManager.popMatrix();
 		}
 
-		if (midge.getHealth() > 6) {
-			GL11.glPushMatrix();
-			GL11.glTranslated(-0.5F - midge.wingFloat, 0F - midge.wingFloat, -0.5F - midge.wingFloat);
-			renderMultiBits(unitPixel);
-			GL11.glPopMatrix();
+		if (midge.getHealth() > 6 * ConfigHandler.INSTANCE.mobHealthMultipier) {
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(-0.5F - flap, 0F - flap, -0.5F - flap);
+			renderMultiBits(entity, unitPixel);
+			GlStateManager.popMatrix();
 		}
 
-		if (midge.getHealth() > 9) {
-			GL11.glPushMatrix();
-			GL11.glTranslated(0.5F + midge.wingFloat, 0F + midge.wingFloat, -0.5F + midge.wingFloat);
-			renderMultiBits(unitPixel);
-			GL11.glPopMatrix();
+		if (midge.getHealth() > 9 * ConfigHandler.INSTANCE.mobHealthMultipier) {
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.5F + flap, 0F + flap, -0.5F + flap);
+			renderMultiBits(entity, unitPixel);
+			GlStateManager.popMatrix();
 		}
 
-		if (midge.getHealth() > 12) {
-			GL11.glPushMatrix();
-			GL11.glTranslated(-0.5F - midge.wingFloat, -1.5D - midge.wingFloat, -0.5F - midge.wingFloat);
-			renderMultiBits(unitPixel);
-			GL11.glPopMatrix();
+		if (midge.getHealth() > 12 * ConfigHandler.INSTANCE.mobHealthMultipier) {
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(-0.5F - flap, -1.5D - flap, -0.5F - flap);
+			renderMultiBits(entity, unitPixel);
+			GlStateManager.popMatrix();
 		}
 	}
 
-	private void renderMultiBits(float unitPixel) {
+	private void renderMultiBits(Entity entity, float unitPixel) {
 		LFLeg.render(unitPixel);
 		LFLeg2.render(unitPixel);
 		LMLeg.render(unitPixel);
@@ -229,8 +231,13 @@ public class ModelMidgeSwarm extends ModelBase {
 		AB2.render(unitPixel);
 		AB3.render(unitPixel);
 		AB4.render(unitPixel);
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.depthMask(!entity.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, 0.75F);
+		//GlStateManager.enableCull();
 		WingL.render(unitPixel);
 		WingL2.render(unitPixel);
 		WingL3.render(unitPixel);
@@ -239,8 +246,10 @@ public class ModelMidgeSwarm extends ModelBase {
 		WingR2.render(unitPixel);
 		WingR3.render(unitPixel);
 		WingR4.render(unitPixel);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
+		//GlStateManager.disableCull();
+		GlStateManager.depthMask(true);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
 		MidWing.render(unitPixel);
 	}
 
@@ -251,16 +260,17 @@ public class ModelMidgeSwarm extends ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
-		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
 		EntityMidgeSwarm midge = (EntityMidgeSwarm) entity;
-		WingL.rotateAngleX = midge.wingFloat;
-		WingL2.rotateAngleX = midge.wingFloat;
-		WingL3.rotateAngleX = midge.wingFloat;
-		WingL4.rotateAngleX = midge.wingFloat;
-		WingR.rotateAngleX = midge.wingFloat;
-		WingR2.rotateAngleX = midge.wingFloat;
-		WingR3.rotateAngleX = midge.wingFloat;
-		WingR4.rotateAngleX = midge.wingFloat;
+		float smoothedTicks = midge.ticksExisted + (midge.ticksExisted - (midge.ticksExisted - 1)) * partialTicks;
+		float flap = MathHelper.sin((smoothedTicks) * 1.2F) * 0.5F;
+		WingL.rotateAngleX = flap;
+		WingL2.rotateAngleX = flap;
+		WingL3.rotateAngleX = flap;
+		WingL4.rotateAngleX = flap;
+		WingR.rotateAngleX = flap;
+		WingR2.rotateAngleX = flap;
+		WingR3.rotateAngleX = flap;
+		WingR4.rotateAngleX = flap;
 	}
 }

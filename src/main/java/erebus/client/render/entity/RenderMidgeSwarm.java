@@ -1,31 +1,30 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelMidgeSwarm;
+import erebus.entity.EntityMidgeSwarm;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderMidgeSwarm extends RenderLiving {
+public class RenderMidgeSwarm extends RenderLiving<EntityMidgeSwarm> {
 
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/midgeSwarm.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/midge_swarm.png");
 
-	public RenderMidgeSwarm() {
-		super(new ModelMidgeSwarm(), 0.5F);
+	public RenderMidgeSwarm(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelMidgeSwarm(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityLiving, float partialTickTime) {
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
+	protected void preRenderCallback(EntityMidgeSwarm swarm, float partialTickTime) {
+		GlStateManager.scale(0.4F, 0.4F, 0.4F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityMidgeSwarm swarm) {
+		return TEXTURE;
 	}
 }

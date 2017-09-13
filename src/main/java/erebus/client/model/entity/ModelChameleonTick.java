@@ -1,12 +1,11 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.entity.EntityChameleonTick;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 public class ModelChameleonTick extends ModelBase {
 	ModelRenderer LBL1;
@@ -186,9 +185,9 @@ public class ModelChameleonTick extends ModelBase {
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		EntityChameleonTick chameleonTick = (EntityChameleonTick) entity;
 		float x = chameleonTick.animation;
-		GL11.glPushMatrix();
-		GL11.glTranslated(0F, 1.0F - 0.1F * x, 0F);
-		GL11.glScalef(0.1F * x, 0.1F * x, 0.1F * x);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, 1.0F - 0.1F * x, 0F);
+		GlStateManager.scale(0.1F * x, 0.1F * x, 0.1F * x);
 		LBL1.render(unitPixel);
 		LBL2.render(unitPixel);
 		LBL3.render(unitPixel);
@@ -219,7 +218,7 @@ public class ModelChameleonTick extends ModelBase {
 		Rmand.render(unitPixel);
 		Lmand.render(unitPixel);
 		HeadFront.render(unitPixel);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

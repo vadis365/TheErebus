@@ -1,6 +1,11 @@
 package erebus.entity;
 
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,11 +15,10 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.MathHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityAIErebusAttackMelee;
-import erebus.item.ItemMaterials;
 
 public class EntityChameleonTick extends EntityMob {
 
@@ -22,14 +26,18 @@ public class EntityChameleonTick extends EntityMob {
 	public int blockMeta;
 	public int animation;
 	public boolean active = false;
-	private final EntityAINearestAttackableTarget aiAttackTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
-	private final EntityAIErebusAttackMelee aiAttackOnCollide = new EntityAIErebusAttackMelee(this, EntityPlayer.class, 0.65D, false);
+	private final EntityAINearestAttackableTarget aiAttackTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
+	private final EntityAIErebusAttackMelee aiAttackOnCollide = new EntityAIErebusAttackMelee(this, 0.65D, false);
 
 	public EntityChameleonTick(World world) {
 		super(world);
 		setSize(1.0F, 1.0F);
-		setBlock(Blocks.grass, 0);
-		getNavigator().setAvoidsWater(true);
+		setBlock(Blocks.GRASS, 0);
+		setPathPriority(PathNodeType.WATER, -8F);
+	}
+
+	@Override
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 	}
@@ -42,15 +50,10 @@ public class EntityChameleonTick extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 30D : 30D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
-	}
-
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 30D : 30D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
 
 	@Override
@@ -68,22 +71,23 @@ public class EntityChameleonTick extends EntityMob {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.CAMO_POWDER.makeStack(), 0.0F);
+			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.CAMO_POWDER.ordinal()), 0.0F);
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		Block newblockID = worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
-		int newBlockMeta = worldObj.getBlockMetadata(MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ));
+		IBlockState state = getEntityWorld().getBlockState(getPosition().add(0, -1, 0));
+		Block newblockID = state.getBlock();
+		int newBlockMeta = newblockID.getMetaFromState(state);
 
-		if (onGround && newblockID != null && newblockID != blockID && World.doesBlockHaveSolidTopSurface(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 1, MathHelper.floor_double(posZ))) {
+		if (onGround && newblockID != null && newblockID != blockID && state.isBlockNormalCube()) {
 			blockID = newblockID;
 			blockMeta = newBlockMeta;
 		}
 
-		if (findPlayerToAttack() != null) {
-			entityToAttack = findPlayerToAttack();
+		if (findPlayerToAttack() != null && (!findPlayerToAttack().isSpectator() && !findPlayerToAttack().isCreative())) {
+			setAttackTarget(findPlayerToAttack());
 			if (!active)
 				active = true;
 			animation++;
@@ -91,7 +95,7 @@ public class EntityChameleonTick extends EntityMob {
 				animation = 10;
 
 		} else {
-			entityToAttack = null;
+			setAttackTarget(null);
 			if (active)
 				active = false;
 			animation--;
@@ -99,52 +103,49 @@ public class EntityChameleonTick extends EntityMob {
 				animation = 0;
 		}
 
-		if (!worldObj.isRemote && animation == 9 && active)
+		if (!getEntityWorld().isRemote && animation == 9 && active)
 			setAIs(true);
 
-		if (!worldObj.isRemote && !active) {
+		if (!getEntityWorld().isRemote && !active) {
 			stationaryEntity();
 			if (animation == 1)
 				setAIs(false);
 		}
 	}
 
+	@Override
+	public boolean attackEntityAsMob(Entity entity) {
+		if (canEntityBeSeen(entity))
+			return super.attackEntityAsMob(entity);
+		else
+			return false;
+	}
+
 	public void stationaryEntity() {
-		posX = MathHelper.floor_double(posX) + 0.5;
-		posY = MathHelper.floor_double(posY);
-		posZ = MathHelper.floor_double(posZ) + 0.5;
+		posX = MathHelper.floor(posX) + 0.5;
+		posY = MathHelper.floor(posY);
+		posZ = MathHelper.floor(posZ) + 0.5;
 		rotationYaw = prevRotationYaw = 0F;
 		renderYawOffset = prevRenderYawOffset = 0F;
 
-		int x = MathHelper.floor_double(posX);
-		int y = MathHelper.floor_double(posY) - 1;
-		int z = MathHelper.floor_double(posZ);
-
-		if (worldObj.getBlock(x, y, z) == null)
+		if (getEntityWorld().getBlockState(getPosition().down()) == null)
 			posY -= 1;
 	}
 
 	public void setAIs(boolean active) {
 		if (!active) {
-			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
+			getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 			tasks.removeTask(aiAttackOnCollide);
 			tasks.removeTask(aiAttackTarget);
 		}
 		if (active) {
-			getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.65D);
+			getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.65D);
 			tasks.addTask(1, aiAttackOnCollide);
 			targetTasks.addTask(1, aiAttackTarget);
 		}
 	}
 
-	@Override
-	protected Entity findPlayerToAttack() {
-		return worldObj.getClosestVulnerablePlayerToEntity(this, 8.0D);
-	}
-
-	@Override
-	protected void attackEntity(Entity entity, float distance) {
-		if (distance > 0.0F && distance < 2.0F)
-			attackEntityAsMob(entity);
+	protected EntityPlayer findPlayerToAttack() {
+		return getEntityWorld().getClosestPlayerToEntity(this, 8.0D);
 	}
 }

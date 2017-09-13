@@ -1,11 +1,13 @@
 package erebus.client.model.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityMoth;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelMoth extends ModelBase {
@@ -48,9 +50,8 @@ public class ModelMoth extends ModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
-		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
-		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
+	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
+		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		body.render(unitPixel);
 		head.render(unitPixel);
 		rearend.render(unitPixel);
@@ -66,10 +67,11 @@ public class ModelMoth extends ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
-		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityMoth var8 = (EntityMoth) entity;
-		rightwing.rotateAngleZ = var8.wingFloat;
-		leftwing.rotateAngleZ = -var8.wingFloat;
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
+		EntityMoth moth = (EntityMoth) entity;
+		float smoothedTicks = moth.ticksExisted + (moth.ticksExisted - (moth.ticksExisted - 1)) * partialTicks;
+		float flap = MathHelper.sin((smoothedTicks) * 1.2F) * 0.5F;
+		rightwing.rotateAngleZ = flap;
+		leftwing.rotateAngleZ = -flap;
 	}
 }

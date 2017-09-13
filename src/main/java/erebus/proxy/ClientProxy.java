@@ -15,6 +15,8 @@ import erebus.client.render.entity.RenderBombardierBeetle;
 import erebus.client.render.entity.RenderBotFly;
 import erebus.client.render.entity.RenderBotFlyLarva;
 import erebus.client.render.entity.RenderCentipede;
+import erebus.client.render.entity.RenderChameleonTick;
+import erebus.client.render.entity.RenderCropWeevil;
 import erebus.client.render.entity.RenderDragonfly;
 import erebus.client.render.entity.RenderFireAnt;
 import erebus.client.render.entity.RenderFireAntSoldier;
@@ -24,6 +26,8 @@ import erebus.client.render.entity.RenderGrasshopper;
 import erebus.client.render.entity.RenderHoneyPotAnt;
 import erebus.client.render.entity.RenderJumpingSpider;
 import erebus.client.render.entity.RenderLocust;
+import erebus.client.render.entity.RenderMidgeSwarm;
+import erebus.client.render.entity.RenderMoth;
 import erebus.client.render.entity.RenderPondSkater;
 import erebus.client.render.entity.RenderPrayingMantis;
 import erebus.client.render.entity.RenderWasp;
@@ -42,6 +46,8 @@ import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityBotFly;
 import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
+import erebus.entity.EntityChameleonTick;
+import erebus.entity.EntityCropWeevil;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
@@ -51,6 +57,8 @@ import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLocust;
+import erebus.entity.EntityMidgeSwarm;
+import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityWasp;
@@ -128,6 +136,10 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityJumpingSpider.class, RenderJumpingSpider::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityPrayingMantis.class, RenderPrayingMantis::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityPondSkater.class, RenderPondSkater::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMidgeSwarm.class, RenderMidgeSwarm::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMoth.class, RenderMoth::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCropWeevil.class, RenderCropWeevil::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityChameleonTick.class, RenderChameleonTick::new);
 	}
 
 	@Override

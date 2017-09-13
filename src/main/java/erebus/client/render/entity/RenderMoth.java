@@ -1,46 +1,39 @@
 package erebus.client.render.entity;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelMoth;
 import erebus.entity.EntityMoth;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderMoth extends RenderLiving {
-	private static final ResourceLocation resource1 = new ResourceLocation("erebus:textures/entity/moth1.png");
-	private static final ResourceLocation resource2 = new ResourceLocation("erebus:textures/entity/moth2.png");
-	private static final ResourceLocation resource3 = new ResourceLocation("erebus:textures/entity/moth3.png");
+public class RenderMoth extends RenderLiving<EntityMoth> {
+	private static final ResourceLocation TEXTURE_1 = new ResourceLocation("erebus:textures/entity/moth_1.png");
+	private static final ResourceLocation TEXTURE_2 = new ResourceLocation("erebus:textures/entity/moth_2.png");
+	private static final ResourceLocation TEXTURE_3 = new ResourceLocation("erebus:textures/entity/moth_3.png");
 
-	public RenderMoth() {
-		super(new ModelMoth(), 0.3F);
+	public RenderMoth(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelMoth(), 0.3F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		EntityMoth entityMoth = (EntityMoth) entityliving;
-		if (entityMoth.getIsMothHanging())
-			GL11.glRotatef(180.0F, -1.0F, 0.0F, 0.0F);
+	protected void preRenderCallback(EntityMoth moth, float partialTickTime ) {
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityMoth entityMoth = (EntityMoth) entity;
-		switch (entityMoth.getSkin()) {
+	protected ResourceLocation getEntityTexture(EntityMoth moth) {
+		switch (moth.getSkin()) {
 			case 0:
-				return resource1;
+				return TEXTURE_1;
 			case 1:
-				return resource2;
+				return TEXTURE_2;
 			case 2:
-				return resource3;
+				return TEXTURE_3;
 		}
-		return resource1;
+		return TEXTURE_1;
 	}
 }

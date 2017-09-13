@@ -1,14 +1,14 @@
 package erebus.client.model.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelWheatWeevil extends ModelBase {
+public class ModelCropWeevil extends ModelBase {
 	ModelRenderer HeadTop;
 	ModelRenderer HeadMain;
 	ModelRenderer HeadFront;
@@ -48,7 +48,7 @@ public class ModelWheatWeevil extends ModelBase {
 	ModelRenderer LBL3;
 	ModelRenderer LBL4;
 
-	public ModelWheatWeevil() {
+	public ModelCropWeevil() {
 		textureWidth = 64;
 		textureHeight = 128;
 		HeadTop = new ModelRenderer(this, 17, 25);

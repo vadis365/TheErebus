@@ -250,6 +250,7 @@ public class ModelBotFly extends ModelBase {
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
+
 	@Override
 	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
 		EntityBotFly botFly = (EntityBotFly) entity;
