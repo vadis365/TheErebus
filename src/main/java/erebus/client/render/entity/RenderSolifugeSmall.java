@@ -1,33 +1,30 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelSolifuge;
+import erebus.entity.EntitySolifugeSmall;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderSolifugeSmall extends RenderLiving {
+public class RenderSolifugeSmall extends RenderLiving<EntitySolifugeSmall> {
 
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/solifuge.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/solifuge.png");
 
-	public RenderSolifugeSmall() {
-		super(new ModelSolifuge(), 0.5F);
+	public RenderSolifugeSmall(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelSolifuge(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		float f1 = 0.5F;
-		shadowSize = f1;
-		GL11.glScalef(f1, f1, f1);
+	protected void preRenderCallback(EntitySolifugeSmall solifuge, float f) {
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntitySolifugeSmall solifuge) {
+		return TEXTURE;
 	}
 }

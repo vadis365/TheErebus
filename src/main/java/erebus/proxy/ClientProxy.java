@@ -32,6 +32,8 @@ import erebus.client.render.entity.RenderMoth;
 import erebus.client.render.entity.RenderPondSkater;
 import erebus.client.render.entity.RenderPrayingMantis;
 import erebus.client.render.entity.RenderScytodes;
+import erebus.client.render.entity.RenderSolifuge;
+import erebus.client.render.entity.RenderSolifugeSmall;
 import erebus.client.render.entity.RenderTarantula;
 import erebus.client.render.entity.RenderTarantulaBaby;
 import erebus.client.render.entity.RenderWasp;
@@ -69,6 +71,8 @@ import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityScytodes;
+import erebus.entity.EntitySolifuge;
+import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityWasp;
@@ -159,6 +163,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityScytodes.class, RenderScytodes::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantula.class, RenderTarantula::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaBaby.class, RenderTarantulaBaby::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySolifuge.class, RenderSolifuge::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySolifugeSmall.class, RenderSolifugeSmall::new);
 	}
 
 	@Override
