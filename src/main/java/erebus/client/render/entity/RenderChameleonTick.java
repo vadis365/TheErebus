@@ -56,7 +56,6 @@ public class RenderChameleonTick extends RenderLiving<EntityChameleonTick> {
 			modName = blockPath.split(":")[0];
 			blockPath = blockPath.split(":")[1];
 		}
-		//System.out.println(modName+ ":textures/" + blockPath + ".png");
 		return new ResourceLocation(modName, "textures/" + blockPath + ".png");
 	}
 }

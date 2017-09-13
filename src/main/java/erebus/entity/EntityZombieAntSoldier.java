@@ -1,18 +1,25 @@
 package erebus.entity;
 
+import erebus.Erebus;
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
+import erebus.items.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.ai.EntityAIErebusAttackMelee;
-import erebus.item.ItemMaterials;
 
 public class EntityZombieAntSoldier extends EntityMob {
 
@@ -20,26 +27,25 @@ public class EntityZombieAntSoldier extends EntityMob {
 		super(world);
 		stepHeight = 1.0F;
 		setSize(1.75F, 0.75F);
-		getNavigator().setAvoidsWater(true);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIErebusAttackMelee(this, EntityPlayer.class, 0.4D, false));
-		tasks.addTask(2, new EntityAILookIdle(this));
-		tasks.addTask(3, new EntityAIWander(this, 0.6D));
-		targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		setPathPriority(PathNodeType.WATER, -8F);
 	}
 
 	@Override
-	public boolean isAIEnabled() {
-		return true;
+	protected void initEntityAI() {
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.4D, false));
+		tasks.addTask(2, new EntityAILookIdle(this));
+		tasks.addTask(3, new EntityAIWanderAvoidWater(this, 0.6D));
+		targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 40D : 40D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 40D : 40D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
 
 	@Override
@@ -53,28 +59,36 @@ public class EntityZombieAntSoldier extends EntityMob {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "erebus:fireantsound";
-	}
-
-	@Override
-	protected String getHurtSound() {
-		return "erebus:fireanthurt";
-	}
-
-	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
-	}
-
-	@Override
 	protected float getSoundPitch() {
 		return 0.5F;
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.spider.step", 0.15F, 1.0F);
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.FIRE_ANT_SOUND;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.FIRE_ANT_HURT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
+	}
+
+	@Override
+	protected void playStepSound(BlockPos pos, Block blockIn) {
+		this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+	}
+
+	@Override
+	public boolean getCanSpawnHere() {
+		float light = getBrightness();
+		if (light >= 0F)
+			return isNotColliding();
+		return super.getCanSpawnHere();
 	}
 
 	@Override
@@ -86,18 +100,18 @@ public class EntityZombieAntSoldier extends EntityMob {
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int amount = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < amount; ++a)
-			entityDropItem(ItemMaterials.DATA.PLATE_ZOMBIE_ANT.makeStack(), 0.0F);
+			entityDropItem(erebus.items.ItemMaterials.EnumErebusMaterialsType.PLATE_ZOMBIE_ANT.createStack(), 0.0F);
 		if (rand.nextInt(5) == 0)
 			if(rand.nextBoolean())
-				entityDropItem(ItemMaterials.DATA.ANT_PHEROMONES.makeStack(), 0.0F);
+				entityDropItem(ItemMaterials.EnumErebusMaterialsType.ANT_PHEROMONES.createStack(), 0.0F);
 			else
-				entityDropItem(ItemMaterials.DATA.TERPSISHROOM.makeStack(), 0.0F);
+				entityDropItem(ItemMaterials.EnumErebusMaterialsType.TERPSISHROOM.createStack(), 0.0F);
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (worldObj.isRemote)
-			worldObj.spawnParticle("reddust", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
+		if (getEntityWorld().isRemote)
+			Erebus.PROXY.spawnCustomParticle("spores", getEntityWorld(), posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
 	}
 }

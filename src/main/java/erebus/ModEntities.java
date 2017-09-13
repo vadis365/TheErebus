@@ -26,11 +26,17 @@ import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLocust;
 import erebus.entity.EntityMidgeSwarm;
+import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityScytodes;
+import erebus.entity.EntityTarantula;
+import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
+import erebus.entity.EntityZombieAnt;
+import erebus.entity.EntityZombieAntSoldier;
 import erebus.lib.Reference;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import net.minecraft.entity.Entity;
@@ -45,7 +51,6 @@ public class ModEntities {
 		// Entity registrations
 /*		
 		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
-		registerEntity(6, EntityTarantula.class, "tarantula", 0x000000, 0xE82066);
 
 		registerEntity(8, EntityScorpion.class, "scorpion", 0xFFA200, 0xFFDB9C);
 		registerEntity(9, EntitySolifuge.class, "solifuge", 0xFFDB9C, 0xFFA200);
@@ -53,9 +58,6 @@ public class ModEntities {
 		registerEntity(13, EntityRhinoBeetle.class, "rhinoBeetle", 0x222222, 0x747474);
 
 		registerEntity(16, EntityGlowWorm.class, "glow_worm", 0xFFFF00, 0xFFFFFF);
-
-		registerEntity(18, EntityScytodes.class, "scytodes", 0x0B4D49, 0xFFFFFF);
-		registerEntity(19, EntityMoneySpider.class, "money_spider", 0xF5C400, 0x0B4D49);
 
 		registerEntity(23, EntityWorkerBee.class, "worker_bee", 0xFFA200, 0x000000);
 		registerEntity(24, EntityVelvetWorm.class, "velvet_worm", 0x3449EB, 0xF22C5A);
@@ -70,15 +72,13 @@ public class ModEntities {
 
 		registerEntity(34, EntityLavaWebSpider.class, "lava_web_spider", 0xFF0000, 0x06B900);
 
-		registerEntity(36, EntityChameleonTick.class, "chameleon_tick", 0x804E3D, 0x3D6F80);
 		registerEntity(37, EntitySolifugeSmall.class, "solifuge_small");
 
 		registerEntity(39, EntityPunchroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
 		registerEntity(40, EntityCrushroom.class, "crushroom", 0xFFFFFF, 0xFF0000);
 		registerEntity(41, EntityBlackAnt.class, "black_ant", 0x000000, 0xF09071);
-		registerEntity(42, EntityZombieAnt.class, "zombie_ant", 0x00FE40, 0xF09071);
+
 		registerEntity(43, EntityTarantulaMiniboss.class, "tarantula_mini_boss", 0x000000, 0xE82066);
-		registerEntity(44, EntityTarantulaBaby.class, "tarantula_baby", 0x000000, 0xE82066);
 
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
 		registerEntity(47, EntitySnapper.class, "snapper", 0x804E3D, 0x3D6F80);
@@ -92,8 +92,6 @@ public class ModEntities {
 		registerEntity(55, EntityMucusBombPrimed.class, "mucus_bomb_primed");
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umber_golem_idol");
 		registerEntity(57, EntityAntlionBoss.class, "antlion_boss", 0x000000, 0xFFFFFF);
-
-		registerEntity(60, EntityZombieAntSoldier.class, "zombie_ant_soldier", 0x00FE40, 0xF09071);
 
 		registerEntity(62, EntityStagBeetle.class, "stag_beetle", 0x222222, 0x747474);
 
@@ -117,6 +115,7 @@ public class ModEntities {
 		registerEntity(3, EntityBeetle.class, "beetle", -12116973, -5938366);
 		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
 
+		registerEntity(6, EntityTarantula.class, "tarantula", 0x000000, 0xE82066);
 		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
 
 		registerEntity(10, EntityGrasshopper.class, "grasshopper", 0x06B900, 0x5FFF5F);
@@ -127,7 +126,8 @@ public class ModEntities {
 		registerEntity(15, EntityBlackWidow.class, "black_widow", 0x000000, 0xFF0000);
 
 		registerEntity(17, EntityBombardierBeetle.class, "bombardier_beetle", 0xFFEEFF, 0x9E0E0E);
-
+		registerEntity(18, EntityScytodes.class, "scytodes", 0x0B4D49, 0xFFFFFF);
+		registerEntity(19, EntityMoneySpider.class, "money_spider", 0xF5C400, 0x0B4D49);
 		registerEntity(20, EntityPrayingMantis.class, "praying_mantis", 0x06B900, 0x06B900);
 		registerEntity(21, EntityJumpingSpider.class, "jumping_spider", 0xE82066, 0x06B900);
 		registerEntity(22, EntityFireAnt.class, "fire_ant", 0xFF0000, 0xFFEE00);
@@ -145,10 +145,14 @@ public class ModEntities {
 
 		registerEntity(38, EntityMidgeSwarm.class, "midge_swarm", -14803180, -13816034);
 
+		registerEntity(42, EntityZombieAnt.class, "zombie_ant", 0x00FE40, 0xF09071);
+
+		registerEntity(44, EntityTarantulaBaby.class, "tarantula_baby", 0x000000, 0xE82066);
 		registerEntity(45, EntityPondSkater.class, "pond_skater", -13816034, -14803180);
 
 		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
+		registerEntity(60, EntityZombieAntSoldier.class, "zombie_ant_soldier", 0x00FE40, 0xF09071);
 		registerEntity(61, EntityBedBug.class, "bed_bug");
 
 		registerEntity(71, EntityWebSling.class, "web_sling");

@@ -46,8 +46,6 @@ import net.minecraft.world.World;
 public class EntityBlackWidow extends EntityMob {
 	private static final DataParameter<Integer> SIZE = EntityDataManager.<Integer>createKey(EntityBlackWidow.class, DataSerializers.VARINT);
 	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityBlackWidow.class, DataSerializers.BYTE);
-	private int shouldDo;
-	Class<?>[] preys = { EntityFly.class, EntityBotFly.class, EntityMidgeSwarm.class };
 
 	public EntityBlackWidow(World world) {
 		super(world);
@@ -60,7 +58,7 @@ public class EntityBlackWidow extends EntityMob {
 		dataManager.register(SIZE, Integer.valueOf(1));
 		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
-	
+
 	@Override
 	protected void initEntityAI() {
         tasks.addTask(1, new EntityAISwimming(this));

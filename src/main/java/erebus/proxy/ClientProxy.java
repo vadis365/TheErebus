@@ -27,11 +27,17 @@ import erebus.client.render.entity.RenderHoneyPotAnt;
 import erebus.client.render.entity.RenderJumpingSpider;
 import erebus.client.render.entity.RenderLocust;
 import erebus.client.render.entity.RenderMidgeSwarm;
+import erebus.client.render.entity.RenderMoneySpider;
 import erebus.client.render.entity.RenderMoth;
 import erebus.client.render.entity.RenderPondSkater;
 import erebus.client.render.entity.RenderPrayingMantis;
+import erebus.client.render.entity.RenderScytodes;
+import erebus.client.render.entity.RenderTarantula;
+import erebus.client.render.entity.RenderTarantulaBaby;
 import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
+import erebus.client.render.entity.RenderZombieAnt;
+import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
@@ -58,11 +64,17 @@ import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLocust;
 import erebus.entity.EntityMidgeSwarm;
+import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityScytodes;
+import erebus.entity.EntityTarantula;
+import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
+import erebus.entity.EntityZombieAnt;
+import erebus.entity.EntityZombieAntSoldier;
 import erebus.tileentity.TileEntityBambooShield;
 import erebus.tileentity.TileEntityExoPlateShield;
 import erebus.tileentity.TileEntityGaeanKeystone;
@@ -80,6 +92,7 @@ import net.minecraft.client.particle.ParticleFlame;
 import net.minecraft.client.particle.ParticleHeart;
 import net.minecraft.client.particle.ParticleLava;
 import net.minecraft.client.particle.ParticlePortal;
+import net.minecraft.client.particle.ParticleRedstone;
 import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.client.particle.ParticleSpell;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -140,6 +153,12 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMoth.class, RenderMoth::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityCropWeevil.class, RenderCropWeevil::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityChameleonTick.class, RenderChameleonTick::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityZombieAnt.class, RenderZombieAnt::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityZombieAntSoldier.class, RenderZombieAntSoldier::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMoneySpider.class, RenderMoneySpider::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityScytodes.class, RenderScytodes::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTarantula.class, RenderTarantula::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaBaby.class, RenderTarantulaBaby::new);
 	}
 
 	@Override
@@ -219,7 +238,12 @@ public class ClientProxy extends CommonProxy {
 		
 		if (particleName.equals("antlion_dig"))
 			fx = new ParticleDigging.Factory().createParticle(EnumParticleTypes.BLOCK_DUST.getParticleID(), world, x, y, z, vecX, vecY, vecZ, Block.getIdFromBlock(Blocks.SAND));
-		
+
+		if (particleName.equals("spores")) {
+			fx = new ParticleRedstone.Factory().createParticle(EnumParticleTypes.REDSTONE.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
+			fx.setRBGColorF(1F, 1F, 1F);
+		}
+
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 	}

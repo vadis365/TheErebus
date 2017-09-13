@@ -1,24 +1,27 @@
 package erebus.client.render.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelTarantula;
 import erebus.entity.EntityTarantula;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderTarantula extends RenderLiving {
+public class RenderTarantula extends RenderLiving<EntityTarantula> {
 
-	private final ResourceLocation[] TEXTURES = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/tarantula.png"), new ResourceLocation("erebus:textures/entity/tarantulaTurqoise.png") };
+	private final ResourceLocation[] TEXTURES = new ResourceLocation[] {
+			new ResourceLocation("erebus:textures/entity/tarantula.png"),
+			new ResourceLocation("erebus:textures/entity/tarantula_turqoise.png"),
+			new ResourceLocation("erebus:textures/entity/tarantula_yellow.png") };
 
-	public RenderTarantula() {
-		super(new ModelTarantula(), 0.5F);
+	public RenderTarantula(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelTarantula(), 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return TEXTURES[Math.min(TEXTURES.length - 1, ((EntityTarantula) entity).getSkin())];
+	protected ResourceLocation getEntityTexture(EntityTarantula tarantula) {
+		return TEXTURES[tarantula.getSkin()];
 	}
 }
