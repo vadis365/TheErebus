@@ -21,6 +21,7 @@ import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
+import erebus.entity.EntityGooBall;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
@@ -35,6 +36,7 @@ import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
 import erebus.entity.EntityZombieAnt;
@@ -61,7 +63,6 @@ public class ModEntities {
 		registerEntity(16, EntityGlowWorm.class, "glow_worm", 0xFFFF00, 0xFFFFFF);
 
 		registerEntity(23, EntityWorkerBee.class, "worker_bee", 0xFFA200, 0x000000);
-		registerEntity(24, EntityVelvetWorm.class, "velvet_worm", 0x3449EB, 0xF22C5A);
 
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
 		registerEntity(27, EntityTitanBeetle.class, "titan_beetle", 0xF09071, 0x000000);
@@ -97,7 +98,7 @@ public class ModEntities {
 		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
 
 		registerEntity(73, EntityExtractedBlock.class, "extracted_block");
-		registerEntity(74, EntityGooBall.class, "goo_ball");
+
 		registerEntity(75, EntityWoodlouseBall.class, "woodlouse_ball");
 		registerEntity(76, EntitySporeBall.class, "spore_ball");
 		registerEntity(77, EntityTarantulaEgg.class, "tarantula_egg"); 
@@ -132,6 +133,7 @@ public class ModEntities {
 		registerEntity(21, EntityJumpingSpider.class, "jumping_spider", 0xE82066, 0x06B900);
 		registerEntity(22, EntityFireAnt.class, "fire_ant", 0xFF0000, 0xFFEE00);
 
+		registerEntity(24, EntityVelvetWorm.class, "velvet_worm", 0x3449EB, 0xF22C5A);
 		registerEntity(25, EntityDragonfly.class, "dragon_fly", 0x2CF2C4, 0x2CF2C4);
 
 		registerEntity(28, EntityBotFlyLarva.class, "bot_fly_larva", -6750208, -13165534);
@@ -156,6 +158,8 @@ public class ModEntities {
 		registerEntity(61, EntityBedBug.class, "bed_bug");
 
 		registerEntity(71, EntityWebSling.class, "web_sling");
+
+		registerEntity(74, EntityGooBall.class, "goo_ball");
 
 		registerEntity(79, EntityGasVent.class, "gas_vent");
 

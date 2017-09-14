@@ -1,38 +1,34 @@
 package erebus.client.render.entity;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelVelvetWorm;
 import erebus.entity.EntityVelvetWorm;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderVelvetWorm extends RenderLiving {
-	private final ResourceLocation resource1 = new ResourceLocation("erebus:textures/entity/velvetworm.png");
-	private final ResourceLocation resource2 = new ResourceLocation("erebus:textures/entity/velvetworm2.png");
+public class RenderVelvetWorm extends RenderLiving<EntityVelvetWorm> {
+	private final ResourceLocation TEXTURE_1 = new ResourceLocation("erebus:textures/entity/velvetworm.png");
+	private final ResourceLocation TEXTURE_2 = new ResourceLocation("erebus:textures/entity/velvetworm_2.png");
 
-	public RenderVelvetWorm() {
-		super(new ModelVelvetWorm(), 0.6F);
+	public RenderVelvetWorm(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelVelvetWorm(), 0.6F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityLiving, float par2) {
-		EntityVelvetWorm worm = (EntityVelvetWorm) entityLiving;
-		int size = worm.getInflateSize();
-		GL11.glScalef((float) (size * 0.009 + 1F), (float) (size * 0.009 + 1F), (float) (-size * 0.0025 + 1F));
+	protected void preRenderCallback(EntityVelvetWorm velvetworm, float partialTickTime) {
+		int size = velvetworm.getInflateSize();
+		GlStateManager.scale((float) (size * 0.009 + 1F), (float) (size * 0.009 + 1F), (float) (-size * 0.0025 + 1F));
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		if (((EntityVelvetWorm) entity).getSkin() == 0)
-			return resource2;
+	protected ResourceLocation getEntityTexture(EntityVelvetWorm velvetworm) {
+		if (velvetworm.getSkin() == 0)
+			return TEXTURE_1;
 		else
-			return resource1;
+			return TEXTURE_2;
 	}
 }

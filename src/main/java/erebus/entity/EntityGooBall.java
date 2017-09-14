@@ -2,22 +2,23 @@ package erebus.entity;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
-import erebus.network.PacketPipeline;
+import erebus.ModSounds;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityGooBall extends EntityThrowable {
 
@@ -43,32 +44,32 @@ public class EntityGooBall extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (worldObj.isRemote)
-			trailParticles(worldObj, posX - 0.5D, posY, posZ - 0.5D, rand);
+		if (getEntityWorld().isRemote)
+			trailParticles(getEntityWorld(), posX - 0.5D, posY, posZ - 0.5D, rand);
 	}
 
-	protected String getJumpedOnSound() {
-		return "erebus:beetlelarvasplat";
+	protected SoundEvent getJumpedOnSound() {
+		return ModSounds.BEETLE_LARVA_SPLAT;
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(RayTraceResult mop) {
 
 		if (mop.entityHit != null) {
 			if (mop.entityHit instanceof EntityPlayer) {
-				if (!worldObj.isRemote) {
-					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 5 * 20, 3));
+				if (!getEntityWorld().isRemote) {
+					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5 * 20, 3));
 					setDead();
 				}
-				if (worldObj.isRemote)
-					PacketPipeline.sendToAllAround(mop.entityHit, 64D, new PacketParticle(this, ParticleType.BEETLE_LARVA_SQUISH));
+				if (getEntityWorld().isRemote)
+					Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BEETLE_LARVA_SQUISH, (float) posX, (float)posY, (float)posZ));
 			}
-			if (mop.typeOfHit != null && mop.typeOfHit == MovingObjectType.BLOCK)
+			if (mop.typeOfHit != null && mop.typeOfHit == RayTraceResult.Type.BLOCK)
 				setDead();
 		}
 
 		if (!playedSound) {
-			worldObj.playSoundAtEntity(this, getJumpedOnSound(), 1.0F, 1.0F);
+			getEntityWorld().playSound((EntityPlayer)null, getPosition(), getJumpedOnSound(), SoundCategory.HOSTILE, 1.0F, 1.0F);
 			playedSound = true;
 		}
 	}
@@ -93,7 +94,7 @@ public class EntityGooBall extends EntityThrowable {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 1.0F * motionZ;
 			velX = rand.nextFloat() * 1.0F * motionX;
-			Erebus.proxy.spawnCustomParticle("slime", worldObj, x, y, z, velX, velY, velZ);
+			Erebus.PROXY.spawnCustomParticle("slime", getEntityWorld(), x, y, z, velX, velY, velZ);
 		}
 	}
 }

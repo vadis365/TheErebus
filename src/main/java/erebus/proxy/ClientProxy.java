@@ -22,6 +22,7 @@ import erebus.client.render.entity.RenderFireAnt;
 import erebus.client.render.entity.RenderFireAntSoldier;
 import erebus.client.render.entity.RenderFly;
 import erebus.client.render.entity.RenderGasVent;
+import erebus.client.render.entity.RenderGooBall;
 import erebus.client.render.entity.RenderGrasshopper;
 import erebus.client.render.entity.RenderHoneyPotAnt;
 import erebus.client.render.entity.RenderJumpingSpider;
@@ -36,6 +37,7 @@ import erebus.client.render.entity.RenderSolifuge;
 import erebus.client.render.entity.RenderSolifugeSmall;
 import erebus.client.render.entity.RenderTarantula;
 import erebus.client.render.entity.RenderTarantulaBaby;
+import erebus.client.render.entity.RenderVelvetWorm;
 import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
 import erebus.client.render.entity.RenderZombieAnt;
@@ -61,6 +63,7 @@ import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGasVent;
+import erebus.entity.EntityGooBall;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
@@ -75,6 +78,7 @@ import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
 import erebus.entity.EntityZombieAnt;
@@ -165,6 +169,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaBaby.class, RenderTarantulaBaby::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySolifuge.class, RenderSolifuge::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySolifugeSmall.class, RenderSolifugeSmall::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityVelvetWorm.class, RenderVelvetWorm::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGooBall.class, RenderGooBall::new);
 	}
 
 	@Override
