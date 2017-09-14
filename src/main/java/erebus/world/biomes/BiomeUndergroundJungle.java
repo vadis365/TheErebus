@@ -15,6 +15,7 @@ import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
+import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorUndergroundJungle;
@@ -32,9 +33,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		setFog(8, 128, 8);
 		//setWeight(22);
 /*
-		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 60).setGroupSize(1, 3));
-
 */
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
@@ -49,6 +48,7 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 10).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class, 10).setGroupSize(1, 2));
 
 		topBlock = Blocks.GRASS.getDefaultState();
 		fillerBlock = Blocks.DIRT.getDefaultState();

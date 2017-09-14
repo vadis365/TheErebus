@@ -10,6 +10,7 @@ import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityMoth;
+import erebus.entity.EntityVelvetWorm;
 import erebus.world.SpawnerErebus.SpawnEntry;
 import erebus.world.biomes.decorators.BiomeDecoratorBaseErebus;
 import erebus.world.biomes.decorators.BiomeDecoratorElysianFields;
@@ -33,7 +34,6 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityTitanBeetle.class, 8).setGroupSize(1, 1));
 		spawningGradual.add(new SpawnEntry(EntityWorkerBee.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityCicada.class, 100).setGroupSize(1, 1));
-		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class, 10).setGroupSize(1, 2));
 */
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityDragonfly.class, 10).setGroupSize(1, 2));
@@ -44,6 +44,7 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityMoth.class, 15).setGroupSize(2, 3));
 		spawningGradual.add(new SpawnEntry(EntityCropWeevil.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityVelvetWorm.class, 10).setGroupSize(1, 2));
 	}
 
 	@Override
