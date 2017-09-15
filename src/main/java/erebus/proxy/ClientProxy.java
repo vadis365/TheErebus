@@ -16,6 +16,7 @@ import erebus.client.render.entity.RenderBotFly;
 import erebus.client.render.entity.RenderBotFlyLarva;
 import erebus.client.render.entity.RenderCentipede;
 import erebus.client.render.entity.RenderChameleonTick;
+import erebus.client.render.entity.RenderCicada;
 import erebus.client.render.entity.RenderCropWeevil;
 import erebus.client.render.entity.RenderDragonfly;
 import erebus.client.render.entity.RenderFireAnt;
@@ -32,6 +33,7 @@ import erebus.client.render.entity.RenderMoneySpider;
 import erebus.client.render.entity.RenderMoth;
 import erebus.client.render.entity.RenderPondSkater;
 import erebus.client.render.entity.RenderPrayingMantis;
+import erebus.client.render.entity.RenderScorpion;
 import erebus.client.render.entity.RenderScytodes;
 import erebus.client.render.entity.RenderSolifuge;
 import erebus.client.render.entity.RenderSolifugeSmall;
@@ -59,6 +61,7 @@ import erebus.entity.EntityBotFly;
 import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityChameleonTick;
+import erebus.entity.EntityCicada;
 import erebus.entity.EntityCropWeevil;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFireAnt;
@@ -75,6 +78,7 @@ import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
@@ -177,6 +181,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGooBall.class, RenderGooBall::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodlouse.class, RenderWoodlouse::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWoodlouseBall.class, RenderWoodlouseBall::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityCicada.class, RenderCicada::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityScorpion.class, RenderScorpion::new);
 	}
 
 	@Override

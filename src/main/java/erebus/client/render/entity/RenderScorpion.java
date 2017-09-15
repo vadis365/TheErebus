@@ -1,22 +1,23 @@
 package erebus.client.render.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelScorpion;
+import erebus.entity.EntityScorpion;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderScorpion extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/scorpion.png");
+public class RenderScorpion extends RenderLiving<EntityScorpion> {
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/scorpion.png");
 
-	public RenderScorpion() {
-		super(new ModelScorpion(), 0.5F);
+	public RenderScorpion(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelScorpion(), 0.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityScorpion scopion) {
+		return TEXTURE;
 	}
 }

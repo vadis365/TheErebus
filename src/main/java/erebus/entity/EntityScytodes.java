@@ -29,6 +29,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -78,6 +80,11 @@ public class EntityScytodes extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
 	}
+
+	@Override
+    protected PathNavigate createNavigator(World worldIn) {
+        return new PathNavigateClimber(this, worldIn);
+    }
 
 	@Override
 	public boolean getCanSpawnHere() {

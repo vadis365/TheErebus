@@ -1,5 +1,6 @@
 package erebus;
 
+import erebus.client.fx.ParticleTextureStitchEvent;
 import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
@@ -48,6 +49,8 @@ public class Erebus {
 		if (event.getSide() == Side.CLIENT) {
 			if (ConfigHandler.INSTANCE.playCustomSongs)
 				MinecraftForge.EVENT_BUS.register(new ErebusMusicHandler());
+			
+			MinecraftForge.EVENT_BUS.register(new ParticleTextureStitchEvent());
 		}
 
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);

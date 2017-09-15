@@ -8,6 +8,7 @@ import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityMidgeSwarm;
+import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntityTarantula;
@@ -27,9 +28,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		setFog(234, 194, 114);
 		//setWeight(15);
 /*
-		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(2, 2));
 		spawningGradual.add(new SpawnEntry(EntityRhinoBeetle.class, 10).setGroupSize(1, 1));
-
 */
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(1, 4));
@@ -42,6 +41,7 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
+		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(2, 2));
 		
 		topBlock = Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND);
 	}

@@ -1,13 +1,12 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityCicada;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelCicada extends ModelBase {
@@ -287,19 +286,19 @@ public class ModelCicada extends ModelBase {
 
 		if (cicada.isFlying()) {
 
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0.05F, 0.4F, 0.1F);
-			GL11.glRotatef(20F, 0F, 1F, 0F);
-			GL11.glScalef(0.7F, 0.7F, 0.7F);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0.05F, 0.4F, 0.1F);
+			GlStateManager.rotate(20F, 0F, 1F, 0F);
+			GlStateManager.scale(0.7F, 0.7F, 0.7F);
 			RWingFront.render(unitPixel);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 
-			GL11.glPushMatrix();
-			GL11.glTranslatef(-0.05F, 0.4F, 0.1F);
-			GL11.glRotatef(-20F, 0F, 1F, 0F);
-			GL11.glScalef(0.7F, 0.7F, 0.7F);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(-0.05F, 0.4F, 0.1F);
+			GlStateManager.rotate(-20F, 0F, 1F, 0F);
+			GlStateManager.scale(0.7F, 0.7F, 0.7F);
 			LWingFront.render(unitPixel);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 
@@ -325,9 +324,7 @@ public class ModelCicada extends ModelBase {
 
 		if (cicada.isFlying()) {
 			RWingFront.rotateAngleZ = 1.8F - cicada.wingFloat;
-			;
 			LWingFront.rotateAngleZ = -1.8F + cicada.wingFloat;
-			;
 			RWingFront.rotateAngleX = -1.8F;
 			LWingFront.rotateAngleX = -1.8F;
 			RWingFront.rotateAngleY = 0F;

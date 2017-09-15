@@ -5,6 +5,7 @@ import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGrasshopper;
+import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityWasp;
@@ -24,7 +25,6 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 		//setWeight(20);
 /*
 		spawningGradual.add(new SpawnEntry(EntityGlowWorm.class, 8).setGroupSize(1, 4));
-		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(1, 3));
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 60).setGroupSize(1, 3));
 */
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 15).setGroupSize(8, 8));
@@ -35,6 +35,7 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityScytodes.class, 20).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityTarantula.class, 10).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 10).setGroupSize(1, 3));
 
 		topBlock = Blocks.GRASS.getDefaultState();
 		fillerBlock = Blocks.DIRT.getDefaultState();

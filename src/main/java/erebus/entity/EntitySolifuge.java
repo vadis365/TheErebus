@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -17,6 +18,8 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -45,6 +48,8 @@ public class EntitySolifuge extends EntityMob {
 		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.3D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(3, new EntityAIWander(this, 0.3D));
+        tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        tasks.addTask(5, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
@@ -57,6 +62,11 @@ public class EntitySolifuge extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
+
+	@Override
+    protected PathNavigate createNavigator(World worldIn) {
+        return new PathNavigateClimber(this, worldIn);
+    }
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {

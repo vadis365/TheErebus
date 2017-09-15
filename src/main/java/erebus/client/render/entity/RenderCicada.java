@@ -1,28 +1,30 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelCicada;
+import erebus.entity.EntityCicada;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RenderCicada extends RenderLiving {
+@SideOnly(Side.CLIENT)
+public class RenderCicada extends RenderLiving<EntityCicada> {
 
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/cicada.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/cicada.png");
 
-	public RenderCicada() {
-		super(new ModelCicada(), 0.3F);
+	public RenderCicada(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelCicada(), 0.3F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
-		GL11.glScalef(0.7F, 0.7F, 0.7F);
+	protected void preRenderCallback(EntityCicada cicada, float partialTickTime) {
+		GlStateManager.scale(0.7F, 0.7F, 0.7F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityCicada cicada) {
+		return TEXTURE;
 	}
 }

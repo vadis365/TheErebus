@@ -2,32 +2,35 @@ package erebus.entity;
 
 import java.util.List;
 
+import erebus.Erebus;
+import erebus.ModSounds;
+import erebus.blocks.EnumWood;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.items.ItemMaterials;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
-import erebus.lib.EnumWood;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityCicada extends EntityCreature {
 
 	private int sonics;
-	public ChunkCoordinates currentFlightTarget;
+	private BlockPos currentFlightTarget;
 	public float wingFloat;
 	public boolean cicadaFlying;
 	AnimationMathHelper mathWings = new AnimationMathHelper();
@@ -41,9 +44,9 @@ public class EntityCicada extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(8.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 5D : 5D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 5D : 5D * ConfigHandler.INSTANCE.mobHealthMultipier);
 	}
 
 	@Override
@@ -58,21 +61,21 @@ public class EntityCicada extends EntityCreature {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		AxisAlignedBB axisalignedbb = boundingBox.expand(1D, 1D, 1D);
-		int n = MathHelper.floor_double(axisalignedbb.minX);
-		int o = MathHelper.floor_double(axisalignedbb.maxX + 1.0D);
-		int p = MathHelper.floor_double(axisalignedbb.minY);
-		int q = MathHelper.floor_double(axisalignedbb.maxY + 1.0D);
-		int n1 = MathHelper.floor_double(axisalignedbb.minZ);
-		int o1 = MathHelper.floor_double(axisalignedbb.maxZ + 1.0D);
+		AxisAlignedBB axisalignedbb = getEntityBoundingBox().grow(1D, 1D, 1D);
+		int n = MathHelper.floor(axisalignedbb.minX);
+		int o = MathHelper.floor(axisalignedbb.maxX + 1.0D);
+		int p = MathHelper.floor(axisalignedbb.minY);
+		int q = MathHelper.floor(axisalignedbb.maxY + 1.0D);
+		int n1 = MathHelper.floor(axisalignedbb.minZ);
+		int o1 = MathHelper.floor(axisalignedbb.maxZ + 1.0D);
 		for (int p1 = n; p1 < o; p1++)
 			for (int q1 = p; q1 < q; q1++)
 				for (int n2 = n1; n2 < o1; n2++) {
-					Block o2 = worldObj.getBlock(p1, q1, n2);
+					Block o2 = getEntityWorld().getBlockState(new BlockPos(p1, q1, n2)).getBlock();
 					if (o2 == null)
 						continue;
-					if (o2 == EnumWood.Cypress.getLog())
-						return true;
+					if (o2 == EnumWood.CYPRESS.getLog())
+						return isNotColliding();
 				}
 		return false;
 	}
@@ -88,7 +91,7 @@ public class EntityCicada extends EntityCreature {
 			int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 			int amount;
 			for (amount = 0; amount < chance; ++amount)
-				entityDropItem(ItemMaterials.DATA.REPELLENT.makeStack(), 0.0F);
+				entityDropItem(ItemMaterials.EnumErebusMaterialsType.REPELLENT.createStack(), 0.0F);
 		}
 	}
 
@@ -101,7 +104,7 @@ public class EntityCicada extends EntityCreature {
 		if (sonics > 20)
 			sonics = 0;
 		if (sonics > 10)
-			entityToAttack = null;
+			setAttackTarget(null);
 
 		if (!isFlying())
 			wingFloat = 0.0F;
@@ -111,7 +114,7 @@ public class EntityCicada extends EntityCreature {
 		if (motionY < 0.0D)
 			motionY *= 0.6D;
 
-		if (!worldObj.isRemote) {
+		if (!getEntityWorld().isRemote) {
 			if (rand.nextInt(100) == 0)
 				if (cicadaFlying)
 					setCicadaFlying(false);
@@ -122,7 +125,7 @@ public class EntityCicada extends EntityCreature {
 				land();
 		}
 
-		if (worldObj.difficultySetting == EnumDifficulty.PEACEFUL)
+		if (getEntityWorld().getDifficulty() == EnumDifficulty.PEACEFUL)
 			setDead();
 	}
 
@@ -139,47 +142,61 @@ public class EntityCicada extends EntityCreature {
 	}
 
 	@Override
-	protected void fall(float par1) {
+	protected boolean canTriggerWalking() {
+		return false;
+	}
+
+	@Override
+	public void fall(float distance, float damageMultiplier) {
+	}
+
+	@Override
+	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+	}
+
+	@Override
+	public boolean doesEntityNotTriggerPressurePlate() {
+		return true;
 	}
 
 	public void flyAbout() {
 		if (currentFlightTarget != null)
-			if (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1)
+			if (!getEntityWorld().isAirBlock(currentFlightTarget) || currentFlightTarget.getY() < 1)
 				currentFlightTarget = null;
 
-		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
-			currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
+		if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.distanceSq((int) posX, (int) posY, (int) posZ) < 10F)
+			currentFlightTarget = new BlockPos((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
 
 		flyToTarget();
 	}
 
 	public void flyToTarget() {
 		if (currentFlightTarget != null) {
-			double targetX = currentFlightTarget.posX + 0.5D - posX;
-			double targetY = currentFlightTarget.posY + 1D - posY;
-			double targetZ = currentFlightTarget.posZ + 0.5D - posZ;
+			double targetX = currentFlightTarget.getX() + 0.5D - posX;
+			double targetY = currentFlightTarget.getY() + 1D - posY;
+			double targetZ = currentFlightTarget.getZ() + 0.5D - posZ;
 			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
 			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
 			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
 			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+			float rotation = MathHelper.wrapDegrees(angle - rotationYaw);
 			moveForward = 0.5F;
 			rotationYaw += rotation;
 		}
 	}
 
 	protected Entity findEnemyToAttack() {
-		List<?> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(posX + 0.5D, posY + 0.5D, posZ + 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(sonics * 0.2D, 0.5D, sonics * 0.2D));
+		List<?> list = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX + 0.5D, posY + 0.5D, posZ + 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).grow(sonics * 0.2D, 0.5D, sonics * 0.2D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = (Entity) list.get(i);
 			if (entity instanceof EntityPlayer && !((EntityPlayer) entity).capabilities.isCreativeMode) {
 				if (sonics == 20) {
-					if (worldObj.isRemote)
+					if (getEntityWorld().isRemote)
 						spawnSonicParticles();
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 8 * 20, 0));
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 8 * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 8 * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 8 * 20, 0));
 					entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 2.0D, 0D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 2.0D);
-					worldObj.playSoundAtEntity(this, "erebus:locustspawn", 1.0F, 6.0F);
+					getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.LOCUST_SPAWN, SoundCategory.NEUTRAL, 1.0F, 6.0F);
 					setCicadaFlying(true);
 				}
 				return canEntityBeSeen(entity) ? entity : null;
@@ -192,12 +209,12 @@ public class EntityCicada extends EntityCreature {
 	public void spawnSonicParticles() {
 		for (int a = 0; a < 360; a += 6) {
 			double ang = a * Math.PI / 180D;
-			Erebus.proxy.spawnCustomParticle("repellent", worldObj, posX + -MathHelper.sin((float) ang) * 1.0, posY + 0.5D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
+			Erebus.PROXY.spawnCustomParticle("repellent", getEntityWorld(), posX + -MathHelper.sin((float) ang) * 1.0, posY + 0.5D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
 		}
 
 		for (int a = 0; a < 360; a += 4) {
 			double ang = a * Math.PI / 180D;
-			Erebus.proxy.spawnCustomParticle("sonic", worldObj, posX + -MathHelper.sin((float) ang) * 1.0, posY + 0.5D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
+			Erebus.PROXY.spawnCustomParticle("sonic", getEntityWorld(), posX + -MathHelper.sin((float) ang) * 1.0, posY + 0.5D, posZ + MathHelper.cos((float) ang) * 1.0, -MathHelper.sin((float) ang) * 0.3, 0D, MathHelper.cos((float) ang) * 0.3);
 		}
 	}
 

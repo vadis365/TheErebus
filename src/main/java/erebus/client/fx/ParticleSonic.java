@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ParticleSonic extends Particle {
 	private final float scale;
 	// TODO Stitch event for this
-	private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/particle/particle_sonic");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID + ":particle/particle_sonic");
 
 	@SideOnly(Side.CLIENT)
 	public ParticleSonic(World world, double x, double y, double z, double velX, double velY, double velZ) {
@@ -27,8 +27,6 @@ public class ParticleSonic extends Particle {
 		particleRed = particleGreen = particleBlue = 1.0F;
 		particleMaxAge = 20;
 		canCollide = false;
-		particleTextureIndexX = 0;
-		particleTextureIndexY = 0;
 		setParticleTexture(Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TEXTURE.toString()));
 	}
 
@@ -42,7 +40,7 @@ public class ParticleSonic extends Particle {
 
 	@Override
 	public int getFXLayer() {
-		return 3;
+		return 1;
 	}
 
 	@Override

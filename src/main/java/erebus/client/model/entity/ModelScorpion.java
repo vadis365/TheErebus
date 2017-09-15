@@ -1,12 +1,12 @@
 package erebus.client.model.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityScorpion;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelScorpion extends ModelBase {
@@ -358,7 +358,7 @@ public class ModelScorpion extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntityScorpion var8 = (EntityScorpion) entity;
+		EntityScorpion scorpion = (EntityScorpion) entity;
 		float cosz1 = MathHelper.cos(limbSwing * 1.0F + (float) Math.PI) * 0.3F * prevLimbSwing;
 		float cosz2 = MathHelper.cos(limbSwing * 1.0F) * 0.3F * prevLimbSwing;
 		float cozy1 = MathHelper.cos(limbSwing * 1.0F + (float) Math.PI) * 0.4F * prevLimbSwing;
@@ -407,7 +407,7 @@ public class ModelScorpion extends ModelBase {
 		Tail6.rotateAngleZ = -cosxnz1;
 		Sting1.rotateAngleZ = -cosxnz1;
 		Sting2.rotateAngleZ = -cosxnz1;
-		if (var8.captured()) {
+		if (scorpion.captured()) {
 			Tail1.rotateAngleX = EntityScorpion.stingticks;
 			Tail2.rotateAngleX = EntityScorpion.stingticks + 0.8726646F;
 			Tail3.rotateAngleX = EntityScorpion.stingticks + 1.22173F;
@@ -431,7 +431,7 @@ public class ModelScorpion extends ModelBase {
 			ClawL5Bot.rotateAngleX = -0.14719755F;
 			ClawL5Top.rotateAngleX = -0.14719755F;
 		}
-		if (!var8.captured()) {
+		if (!scorpion.captured()) {
 			Tail1.rotateAngleX = 0F;
 			Tail2.rotateAngleX = 0.8726646F;
 			Tail3.rotateAngleX = 1.22173F;

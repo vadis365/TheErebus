@@ -26,10 +26,10 @@ public class RenderChameleonTick extends RenderLiving<EntityChameleonTick> {
 		GlStateManager.translate((float) x, (float) y, (float) z);
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(-tick.renderYawOffset, 0.0F, 1.0F, 0.0F);
-		GlStateManager.translate(-0.5F, 0.2F, 0.475F);
+		GlStateManager.translate(-0.5F, 0F, 0.475F);
 		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 		GlStateManager.pushMatrix();
-		GlStateManager.scale(1F, 1F - 0.02F * animationSize, 1F);
+		GlStateManager.scale(1F, 1F - 0.01F * animationSize, 1F);
 		Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(tick.blockID.getStateFromMeta(tick.blockMeta), 1.0F);
 		GlStateManager.popMatrix();
 		GlStateManager.popMatrix();

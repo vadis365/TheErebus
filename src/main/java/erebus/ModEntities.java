@@ -15,6 +15,7 @@ import erebus.entity.EntityBotFly;
 import erebus.entity.EntityBotFlyLarva;
 import erebus.entity.EntityCentipede;
 import erebus.entity.EntityChameleonTick;
+import erebus.entity.EntityCicada;
 import erebus.entity.EntityCropWeevil;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFireAnt;
@@ -31,6 +32,7 @@ import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
@@ -58,8 +60,6 @@ public class ModEntities {
 /*		
 		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
 
-		registerEntity(8, EntityScorpion.class, "scorpion", 0xFFA200, 0xFFDB9C);
-
 		registerEntity(13, EntityRhinoBeetle.class, "rhinoBeetle", 0x222222, 0x747474);
 
 		registerEntity(16, EntityGlowWorm.class, "glow_worm", 0xFFFF00, 0xFFFFFF);
@@ -70,9 +70,6 @@ public class ModEntities {
 		registerEntity(27, EntityTitanBeetle.class, "titan_beetle", 0xF09071, 0x000000);
 
 		registerEntity(29, EntityCrushling.class, "crushling", 0xFFFFFF, 0xFF0000);
-
-		registerEntity(31, EntityWoodlouse.class, "woodlouse", 0x747474, 0x222222);
-		registerEntity(32, EntityCicada.class, "cicada", 0x747474, 0xFFA200);
 
 		registerEntity(34, EntityLavaWebSpider.class, "lava_web_spider", 0xFF0000, 0x06B900);
 
@@ -118,7 +115,7 @@ public class ModEntities {
 
 		registerEntity(6, EntityTarantula.class, "tarantula", 0x000000, 0xE82066);
 		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
-
+		registerEntity(8, EntityScorpion.class, "scorpion", 0xFFA200, 0xFFDB9C);
 		registerEntity(9, EntitySolifuge.class, "solifuge", 0xFFDB9C, 0xFFA200);
 		registerEntity(10, EntityGrasshopper.class, "grasshopper", 0x06B900, 0x5FFF5F);
 		registerEntity(11, EntityLocust.class, "locust", 0x5FFF5F, 0x06B900);
@@ -141,7 +138,7 @@ public class ModEntities {
 
 		registerEntity(30, EntityCropWeevil.class, "crop_weevil", 0x000000, 0xFFA200);
 		registerEntity(31, EntityWoodlouse.class, "woodlouse", 0x747474, 0x222222);
-
+		registerEntity(32, EntityCicada.class, "cicada", 0x747474, 0xFFA200);
 		registerEntity(33, EntityFireAntSoldier.class, "fire_ant_soldier", 0xFF0000, 0xFFEE00);
 
 		registerEntity(35, EntityAntlionMiniBoss.class, "antlion_mini_boss", 0x000000, 0xFFFFFF);

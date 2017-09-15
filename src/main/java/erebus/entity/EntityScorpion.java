@@ -1,27 +1,47 @@
 package erebus.entity;
 
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
+import erebus.items.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
 
 public class EntityScorpion extends EntityMob {
 	private boolean sting;
 	private boolean poisoned;
 	public static float stingticks;
 	private int cooldown = 0;
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityScorpion.class, DataSerializers.BYTE);
 
 	public EntityScorpion(World world) {
 		super(world);
-		stepHeight = 0.1F;
+		setPathPriority(PathNodeType.WATER, -8.0F);
+		stepHeight = 1F;
 		isImmuneToFire = true;
 		setSize(2.0F, 2.0F);
 	}
@@ -29,27 +49,44 @@ public class EntityScorpion extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
+	}
+
+	@Override
+	protected void initEntityAI() {
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.3D, false));
+		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(3, new EntityAIWanderAvoidWater(this, 0.3D));
+        tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        tasks.addTask(5, new EntityAILookIdle(this));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 30D : 30D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 3D : 3D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D); // followRange
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 30D : 30D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 3D : 3D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
+
+	@Override
+    protected PathNavigate createNavigator(World worldIn) {
+        return new PathNavigateClimber(this, worldIn);
+    }
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!worldObj.isRemote && !captured()) {
+		if (!getEntityWorld().isRemote && !captured()) {
 			setisStinging(false);
 			if(cooldown > 0 )
 				cooldown = 0;
 		}
-		if (!worldObj.isRemote && captured()) {
-			updateRiderPosition();
+		if (!getEntityWorld().isRemote && captured()) {
 			if(cooldown < 10)
 				cooldown++;
 			if(cooldown >= 10)
@@ -67,11 +104,22 @@ public class EntityScorpion extends EntityMob {
 			if (stingticks <= 0.0F)
 				setHasBeenStung(false);
 		}
+
+        if (!world.isRemote)
+            setBesideClimbableBlock(isCollidedHorizontally);
 	}
 
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 2;
+	}
+
+	@Override
+	public boolean getCanSpawnHere() {
+		float light = getBrightness();
+		if (light >= 0F)
+			return isNotColliding();
+		return super.getCanSpawnHere();
 	}
 
 	@Override
@@ -86,31 +134,51 @@ public class EntityScorpion extends EntityMob {
 	 */
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.spider.step", 0.15F, 1.0F);
+	protected void playStepSound(BlockPos pos, Block block) {
+		playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount) {
-			int pincerChance = rand.nextInt(30);
-			if (pincerChance == 0)
-				entityDropItem(ItemMaterials.DATA.SCORPION_PINCER.makeStack(), 0.0F);
-			entityDropItem(ItemMaterials.DATA.POISON_GLAND.makeStack(1 + rand.nextInt(2)), 0.0F);
+		for (int amount = 0; amount < chance; ++amount) {
+			if (rand.nextInt(30) == 0)
+				entityDropItem(ItemMaterials.EnumErebusMaterialsType.SCORPION_PINCER.createStack(), 0.0F);
+			entityDropItem(ItemMaterials.EnumErebusMaterialsType.POISON_GLAND.createStack(1 + rand.nextInt(2)), 0.0F);
 		}
 	}
 
 	@Override
-	public boolean isOnLadder() {
-		return isCollidedHorizontally;
+	public void fall(float distance, float damageMultiplier) {
 	}
+
+	@Override
+	public void setInWeb() {
+	}
+
+	@Override
+    public boolean isOnLadder() {
+        return isBesideClimbableBlock();
+    }
+	
+    public boolean isBesideClimbableBlock() {
+        return (((Byte)dataManager.get(CLIMBING)).byteValue() & 1) != 0;
+    }
+
+    public void setBesideClimbableBlock(boolean climbing) {
+        byte b0 = ((Byte)dataManager.get(CLIMBING)).byteValue();
+        if (climbing)
+            b0 = (byte)(b0 | 1);
+        else
+            b0 = (byte)(b0 & -2);
+
+        dataManager.set(CLIMBING, Byte.valueOf(b0));
+    }
 
 	@Override
 	public boolean canRiderInteract() {
@@ -123,7 +191,7 @@ public class EntityScorpion extends EntityMob {
 	}
 
 	public boolean captured() {
-		return riddenByEntity != null;
+		return isBeingRidden();
 	}
 
 	private void setisStinging(boolean state) {
@@ -140,34 +208,33 @@ public class EntityScorpion extends EntityMob {
 		if (player.isSneaking())
 			player.setSneaking(false);
 		byte duration = 0;
-		if (!worldObj.isRemote && player.boundingBox.maxY >= boundingBox.minY && player.boundingBox.minY <= boundingBox.maxY && captured())
-			if (worldObj.difficultySetting.ordinal() > 1)
-				if (worldObj.difficultySetting == EnumDifficulty.NORMAL)
-					duration = 7;
-				else if (worldObj.difficultySetting == EnumDifficulty.HARD)
-					duration = 15;
-		if (duration > 0 && rand.nextInt(200) == 0) {
-			player.addPotionEffect(new PotionEffect(Potion.poison.id, duration * 10, 0));
+		if (!getEntityWorld().isRemote && player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && captured())
+			if (getEntityWorld().getDifficulty().ordinal() > 1)
+				if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
+					duration = 5;
+				else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
+					duration = 10;
+		if (duration > 0 && rand.nextInt(50) == 0) {
+			player.addPotionEffect(new PotionEffect(MobEffects.POISON, duration * 20, 0));
 			setisStinging(true);
 		}
-		if (!player.capabilities.isCreativeMode && !worldObj.isRemote && !captured())
+		if (!player.capabilities.isCreativeMode && !getEntityWorld().isRemote && !captured())
 			if(getEntitySenses().canSee(player))
-				player.mountEntity(this);
+				player.startRiding(this, true);
+	}
+	
+	@Override
+	public void updatePassenger(Entity entity) {
+		super.updatePassenger(entity);
+		if (entity instanceof EntityLivingBase) {
+			double a = Math.toRadians(renderYawOffset);
+			double offSetX = -Math.sin(a) * 0.75D;
+			double offSetZ = Math.cos(a) * 0.75D;
+			if (captured())
+				entity.setPosition(posX + offSetX, posY + 0.75D + entity.getYOffset(), posZ + offSetZ);
+			if (entity.isSneaking())
+				entity.setSneaking(false);
+		}
 	}
 
-	@Override
-	public void updateRiderPosition() {
-		double a = Math.toRadians(renderYawOffset);
-		double offSetX = -Math.sin(a) * 0.75D;
-		double offSetZ = Math.cos(a) * 0.75D;
-		if (captured())
-			riddenByEntity.setPosition(posX + offSetX, posY + 0.75D + riddenByEntity.getYOffset(), posZ + offSetZ);
-	}
-
-	@Override
-	protected void attackEntity(Entity entity, float distance) {
-		super.attackEntity(entity, distance);
-		if (distance < 1.0F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY && cooldown == 0)
-			attackEntityAsMob(entity);
-	}
 }
