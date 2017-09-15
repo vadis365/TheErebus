@@ -39,6 +39,8 @@ import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
+import erebus.entity.EntityWoodlouse;
+import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.EntityZombieAntSoldier;
 import erebus.lib.Reference;
@@ -99,7 +101,6 @@ public class ModEntities {
 
 		registerEntity(73, EntityExtractedBlock.class, "extracted_block");
 
-		registerEntity(75, EntityWoodlouseBall.class, "woodlouse_ball");
 		registerEntity(76, EntitySporeBall.class, "spore_ball");
 		registerEntity(77, EntityTarantulaEgg.class, "tarantula_egg"); 
 		registerEntity(78, EntityPoisonJet.class, "poison_jet");
@@ -139,6 +140,7 @@ public class ModEntities {
 		registerEntity(28, EntityBotFlyLarva.class, "bot_fly_larva", -6750208, -13165534);
 
 		registerEntity(30, EntityCropWeevil.class, "crop_weevil", 0x000000, 0xFFA200);
+		registerEntity(31, EntityWoodlouse.class, "woodlouse", 0x747474, 0x222222);
 
 		registerEntity(33, EntityFireAntSoldier.class, "fire_ant_soldier", 0xFF0000, 0xFFEE00);
 
@@ -160,6 +162,7 @@ public class ModEntities {
 		registerEntity(71, EntityWebSling.class, "web_sling");
 
 		registerEntity(74, EntityGooBall.class, "goo_ball");
+		registerEntity(75, EntityWoodlouseBall.class, "woodlouse_ball");
 
 		registerEntity(79, EntityGasVent.class, "gas_vent");
 

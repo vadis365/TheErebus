@@ -94,7 +94,7 @@ public class EntityGooBall extends EntityThrowable {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 1.0F * motionZ;
 			velX = rand.nextFloat() * 1.0F * motionX;
-			Erebus.PROXY.spawnCustomParticle("slime", getEntityWorld(), x, y, z, velX, velY, velZ);
+			Erebus.PROXY.spawnCustomParticle("slime", getEntityWorld(), x + 0.5D, y, z + 0.5D, velX, velY, velZ);
 		}
 	}
 }

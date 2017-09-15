@@ -40,6 +40,8 @@ import erebus.client.render.entity.RenderTarantulaBaby;
 import erebus.client.render.entity.RenderVelvetWorm;
 import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
+import erebus.client.render.entity.RenderWoodlouse;
+import erebus.client.render.entity.RenderWoodlouseBall;
 import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
@@ -81,6 +83,8 @@ import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
+import erebus.entity.EntityWoodlouse;
+import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.EntityZombieAntSoldier;
 import erebus.tileentity.TileEntityBambooShield;
@@ -171,6 +175,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySolifugeSmall.class, RenderSolifugeSmall::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityVelvetWorm.class, RenderVelvetWorm::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGooBall.class, RenderGooBall::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityWoodlouse.class, RenderWoodlouse::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityWoodlouseBall.class, RenderWoodlouseBall::new);
 	}
 
 	@Override
@@ -254,6 +260,11 @@ public class ClientProxy extends CommonProxy {
 		if (particleName.equals("spores")) {
 			fx = new ParticleRedstone.Factory().createParticle(EnumParticleTypes.REDSTONE.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 			fx.setRBGColorF(1F, 1F, 1F);
+		}
+
+		if (particleName.equals("reddust")) {
+			fx = new ParticleRedstone.Factory().createParticle(EnumParticleTypes.REDSTONE.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
+			fx.setRBGColorF(1F, 0F, 0F);
 		}
 
 		if (fx != null)

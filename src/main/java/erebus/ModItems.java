@@ -30,6 +30,7 @@ import erebus.items.ItemMaterials;
 import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
 import erebus.items.ItemSpiderTShirt;
+import erebus.items.ItemWoodlouseBall;
 import erebus.lib.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -113,6 +114,7 @@ public class ModItems {
 	// RANDOM STUFF
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();
 	public static final Item ANT_TAMING_AMULET = new ItemAmuletAntTaming();
+	public static final Item WOODLOUSE_BALL = new ItemWoodlouseBall();
 
 	public static void init() {
 		try {

@@ -1,9 +1,12 @@
 package erebus.blocks;
 
 import erebus.ModTabs;
+import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityWoodlouse;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -61,20 +64,20 @@ public class BlockLogErebus extends BlockLog {
 
 	@Override
 	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
-		/*if (!world.isRemote && wood.name() == "Rotten")
+		if (!world.isRemote && state.getBlock() == EnumWood.ROTTEN.getLog())
 			if (world.rand.nextInt(30) == 0) {
 				EntityWoodlouse entity = new EntityWoodlouse(world);
-				entity.setLocationAndAngles(x + 0.5D, y, z + 0.5D, 0.0F, 0.0F);
-				world.spawnEntityInWorld(entity);
+				entity.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
+				world.spawnEntity(entity);
 			} else if (world.rand.nextInt(30) == 0) {
 				EntityBeetleLarva entity = new EntityBeetleLarva(world);
-				entity.setLocationAndAngles(x + 0.5D, y, z + 0.5D, 0.0F, 0.0F);
-				world.spawnEntityInWorld(entity);
+				entity.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
+				world.spawnEntity(entity);
 			} else if (world.rand.nextInt(30) == 0) {
 				EntitySilverfish entity = new EntitySilverfish(world);
-				entity.setLocationAndAngles(x + 0.5D, y, z + 0.5D, 0.0F, 0.0F);
-				world.spawnEntityInWorld(entity);
-			}*/
+				entity.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
+				world.spawnEntity(entity);
+			}
 		super.onBlockDestroyedByPlayer(world, pos, state);
 	}
 }
