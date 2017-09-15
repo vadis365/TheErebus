@@ -1,34 +1,31 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelGlowWorm;
 import erebus.entity.EntityGlowWorm;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderGlowWorm extends RenderLiving {
+public class RenderGlowWorm extends RenderLiving<EntityGlowWorm> {
 
-	private static final ResourceLocation TEXTURE_ON = new ResourceLocation("erebus:textures/entity/glowWormGlow.png");
-	private static final ResourceLocation TEXTURE_OFF = new ResourceLocation("erebus:textures/entity/glowWorm.png");
+	private static final ResourceLocation TEXTURE_ON = new ResourceLocation("erebus:textures/entity/glow_worm_glow.png");
+	private static final ResourceLocation TEXTURE_OFF = new ResourceLocation("erebus:textures/entity/glow_worm.png");
 
-	public RenderGlowWorm() {
-		super(new ModelGlowWorm(), 0.0F);
-		setRenderPassModel(new ModelGlowWorm());
+	public RenderGlowWorm(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelGlowWorm(), 0.0F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		GL11.glScalef(0.75F, 0.75F, 0.75F);
+	protected void preRenderCallback(EntityGlowWorm glowworm, float partialTickTime) {
+		GlStateManager.scale(0.75F, 0.75F, 0.75F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return ((EntityGlowWorm) entity).isGlowing() ? TEXTURE_ON : TEXTURE_OFF;
+	protected ResourceLocation getEntityTexture(EntityGlowWorm glowworm) {
+		return glowworm.isGlowing() ? TEXTURE_ON : TEXTURE_OFF;
 	}
 }

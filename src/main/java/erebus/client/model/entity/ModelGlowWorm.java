@@ -3,7 +3,7 @@ package erebus.client.model.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 public class ModelGlowWorm extends ModelBase {
 	ModelRenderer Head1;
@@ -110,7 +110,6 @@ public class ModelGlowWorm extends ModelBase {
 		ThxL3 = new ModelRenderer(this, 13, 22);
 		ThxL3.addBox(-0.7F, -3.5F, 4F, 5, 7, 4);
 		ThxL3.setRotationPoint(0F, 16F, -10F);
-		;
 		setRotation(ThxL3, 0.1745329F, -0.0261799F, 0.1745329F);
 		ThxR3 = new ModelRenderer(this, 32, 22);
 		ThxR3.addBox(-4.3F, -3.5F, 4F, 5, 7, 4);

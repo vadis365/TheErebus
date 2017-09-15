@@ -2,6 +2,9 @@ package erebus.entity;
 
 import java.util.List;
 
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.items.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -11,33 +14,43 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityGlowWorm extends EntityCreature {
 	public int lastX;
 	public int lastY;
 	public int lastZ;
 	private boolean triggerOnce;
+	private static final DataParameter<Byte> TRIGGRED = EntityDataManager.<Byte>createKey(EntityGlowWorm.class, DataSerializers.BYTE);
 
 	public EntityGlowWorm(World world) {
 		super(world);
+		setSize(1.5F, 0.5F);
 		stepHeight = 0.0F;
 		isImmuneToFire = true;
-		setSize(1.5F, 0.5F);
-		getNavigator().setAvoidsWater(true);
+		setPathPriority(PathNodeType.WATER, -8F);
+	}
+
+	@Override
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(3, new EntityAIWander(this, 0.5D));
+		tasks.addTask(3, new EntityAIWanderAvoidWater(this, 0.5D));
 		tasks.addTask(4, new EntityAIPanic(this, 0.7F));
 		tasks.addTask(5, new EntityAILookIdle(this));
 	}
@@ -45,19 +58,14 @@ public class EntityGlowWorm extends EntityCreature {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(30, new Byte((byte) 0));
-	}
-
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		dataManager.register(TRIGGRED, new Byte((byte) 0));
 	}
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = getBrightness(1.0F);
+		float light = getBrightness();
 		if (light >= 0F)
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+			return isNotColliding();
 		return super.getCanSpawnHere();
 	}
 
@@ -69,8 +77,8 @@ public class EntityGlowWorm extends EntityCreature {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D); // Movespeed
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
 	}
 
 	@Override
@@ -79,57 +87,57 @@ public class EntityGlowWorm extends EntityCreature {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "erebus:glowwormsound";
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.GLOW_WORM_SOUND;
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:glowwormhurt";
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.GLOW_WORM_HURT;
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.spider.step", 0.15F, 1.0F);
-	}
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+    }
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
 		int amount;
 		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(ItemMaterials.DATA.BIO_LUMINESCENCE.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.EnumErebusMaterialsType.BIO_LUMINESCENCE.createStack(), 0.0F);
 	}
 
 	@Override
 	public void onUpdate() {
-		if (!worldObj.isRemote)
+		if (!getEntityWorld().isRemote)
 			findNearEntity();
-		if (worldObj.isRemote && isGlowing())
-			lightUp(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
-		if (worldObj.isRemote && !isGlowing())
+		if (getEntityWorld().isRemote && isGlowing())
+			lightUp(getEntityWorld(), getPosition());
+		if (getEntityWorld().isRemote && !isGlowing())
 			switchOff();
 		super.onUpdate();
 	}
 
 	@SideOnly(Side.CLIENT)
-	private void lightUp(World world, int x, int y, int z) {
+	private void lightUp(World world, BlockPos pos) {
 		if (!ConfigHandler.INSTANCE.bioluminescence)
 			return;
-		world.setLightValue(EnumSkyBlock.Block, x, y, z, 9);
-		for (int i = -1; i < 2; i++)
-			for (int j = -1; j < 2; j++)
-				for (int k = -1; k < 2; k++)
-					if (x + i != lastX || y + j != lastY || z + k != lastZ || isDead) {
-						world.updateLightByType(EnumSkyBlock.Block, lastX + i, lastY + j, lastZ + k);
-						lastX = x;
-						lastY = y;
-						lastZ = z;
+		world.setLightFor(EnumSkyBlock.BLOCK, pos, 9);
+		for (int i = -2; i < 2; i++)
+			for (int j = -2; j < 2; j++)
+				for (int k = -2; k < 2; k++)
+					if (pos.getX() + i != lastX || pos.getY() + j != lastY || pos.getZ() + k != lastZ || isDead) {
+						world.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(lastX + i, lastY + j, lastZ + k));
+						lastX = pos.getX();
+						lastY = pos.getY();
+						lastZ = pos.getZ();
 					}
 		triggerOnce = true;
 	}
@@ -139,15 +147,15 @@ public class EntityGlowWorm extends EntityCreature {
 		if (!ConfigHandler.INSTANCE.bioluminescence)
 			return;
 		if(triggerOnce) {
-			worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
-			worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+			getEntityWorld().checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(lastX, lastY, lastZ));
+			getEntityWorld().checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ)));
 			triggerOnce = false;
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	protected Entity findNearEntity() {
-		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(posX - 0.5D, posY - 0.5D, posZ - 0.5D, posX + 0.5D, posY + 0.5D, posZ + 0.5D).expand(8D, 8D, 8D));
+		List<EntityLivingBase> list = getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, getEntityBoundingBox().grow(6D, 6D, 6D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = list.get(i);
 			if (entity != null && !getIsNearEntity())
@@ -159,21 +167,21 @@ public class EntityGlowWorm extends EntityCreature {
 	}
 
 	public boolean isGlowing() {
-		return worldObj.getSunBrightness(1.0F) < 0.5F && getIsNearEntity();
+		return getEntityWorld().getSunBrightness(1.0F) < 0.5F && getIsNearEntity();
 	}
 
 	public void setIsNearEntity(boolean entityNear) {
-		dataWatcher.updateObject(30, entityNear ? (byte) 1 : (byte) 0);
+		dataManager.set(TRIGGRED, entityNear ? (byte) 1 : (byte) 0);
 	}
 
 	public boolean getIsNearEntity() {
-		return dataWatcher.getWatchableObjectByte(30) == 1 ? true : false;
+		return dataManager.get(TRIGGRED) == 1 ? true : false;
 	}
 
 	@Override
 	public void setDead() {
 		super.setDead();
-		if (worldObj.isRemote)
+		if (getEntityWorld().isRemote)
 			switchOff();
 	}
 }
