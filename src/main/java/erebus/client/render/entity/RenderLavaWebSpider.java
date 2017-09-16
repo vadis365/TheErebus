@@ -1,28 +1,30 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelLavaWebSpider;
+import erebus.entity.EntityLavaWebSpider;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RenderLavaWebSpider extends RenderLiving {
+@SideOnly(Side.CLIENT)
+public class RenderLavaWebSpider extends RenderLiving<EntityLavaWebSpider> {
 
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/lavaWebSpider.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/lava_web_spider.png");
 
-	public RenderLavaWebSpider() {
-		super(new ModelLavaWebSpider(), 0.3F);
+	public RenderLavaWebSpider(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelLavaWebSpider(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
-		GL11.glScalef(1.8F, 1.8F, 1.8F);
+	protected void preRenderCallback(EntityLavaWebSpider spider, float partialTickTime) {
+		GlStateManager.scale(1.8F, 1.8F, 1.8F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityLavaWebSpider spider) {
+		return TEXTURE;
 	}
 }

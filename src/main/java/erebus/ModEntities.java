@@ -27,6 +27,7 @@ import erebus.entity.EntityGooBall;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
+import erebus.entity.EntityLavaWebSpider;
 import erebus.entity.EntityLocust;
 import erebus.entity.EntityMidgeSwarm;
 import erebus.entity.EntityMoneySpider;
@@ -69,8 +70,6 @@ public class ModEntities {
 		registerEntity(27, EntityTitanBeetle.class, "titan_beetle", 0xF09071, 0x000000);
 
 		registerEntity(29, EntityCrushling.class, "crushling", 0xFFFFFF, 0xFF0000);
-
-		registerEntity(34, EntityLavaWebSpider.class, "lava_web_spider", 0xFF0000, 0x06B900);
 
 		registerEntity(39, EntityPunchroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
 		registerEntity(40, EntityCrushroom.class, "crushroom", 0xFFFFFF, 0xFF0000);
@@ -139,7 +138,7 @@ public class ModEntities {
 		registerEntity(31, EntityWoodlouse.class, "woodlouse", 0x747474, 0x222222);
 		registerEntity(32, EntityCicada.class, "cicada", 0x747474, 0xFFA200);
 		registerEntity(33, EntityFireAntSoldier.class, "fire_ant_soldier", 0xFF0000, 0xFFEE00);
-
+		registerEntity(34, EntityLavaWebSpider.class, "lava_web_spider", 0xFF0000, 0x06B900);
 		registerEntity(35, EntityAntlionMiniBoss.class, "antlion_mini_boss", 0x000000, 0xFFFFFF);
 		registerEntity(36, EntityChameleonTick.class, "chameleon_tick", 0x804E3D, 0x3D6F80);
 		registerEntity(37, EntitySolifugeSmall.class, "solifuge_small");

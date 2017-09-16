@@ -6,7 +6,11 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+
+@SideOnly(Side.CLIENT)
 public class RenderFireAntSoldier extends RenderLiving<EntityFireAntSoldier> {
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/fire_ant_soldier.png");

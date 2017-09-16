@@ -10,6 +10,7 @@ import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
 import erebus.entity.EntityFly;
+import erebus.entity.EntityLavaWebSpider;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntitySolifuge;
 import erebus.world.SpawnerErebus.SpawnEntry;
@@ -27,9 +28,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus {
 		setColors(0xA6BB4E, 0x91A922);
 		setFog(255, 231, 10);
 		//setWeight(16);
-/*
-		spawningGradual.add(new SpawnEntry(EntityLavaWebSpider.class, 300).setGroupSize(1, 1));
-*/
+
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));
 		spawningGradual.add(new SpawnEntry(EntityFireAnt.class, 30).setGroupSize(1, 8));
@@ -39,6 +38,7 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntitySolifuge.class, 25).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityChameleonTick.class, 10).setGroupSize(1, 2));
 		spawningGradual.add(new SpawnEntry(EntityScorpion.class, 20).setGroupSize(1, 4));
+		spawningGradual.add(new SpawnEntry(EntityLavaWebSpider.class, 300).setGroupSize(1, 1));
 
 		topBlock = Blocks.SAND.getDefaultState();
 		fillerBlock = Blocks.SANDSTONE.getDefaultState();
