@@ -186,7 +186,12 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		SOUL_CRYSTAL,
 		PLATE_ZOMBIE_ANT,
 		STAG_BEETLE_MANDIBLES,
-		TERPSISHROOM;
+		TERPSISHROOM,
+		SHIELD_BAMBOO_FACE,
+		SHIELD_EXO_PLATE_FACE,
+		SHIELD_JADE_FACE,
+		SHIELD_REIN_EXO_FACE,
+		SHIELD_RHINO_EXO_FACE;
 
 		@Override
 		public ItemStack createStack(int size) {

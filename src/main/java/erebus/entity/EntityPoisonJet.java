@@ -2,18 +2,18 @@ package erebus.entity;
 
 import java.util.Random;
 
+import erebus.Erebus;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityPoisonJet extends EntityThrowable {
 
@@ -37,19 +37,19 @@ public class EntityPoisonJet extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (worldObj.isRemote)
-			trailParticles(worldObj, posX, posY + 0.35D, posZ, rand);
+		if (getEntityWorld().isRemote)
+			trailParticles(getEntityWorld(), posX, posY + 0.35D, posZ, rand);
 
 		if (ticksExisted > 140)
 			setDead();
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(RayTraceResult mop) {
 		if (mop.entityHit != null) {
 			if (mop.entityHit instanceof EntityLivingBase) {
-				if (!worldObj.isRemote) {
-					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 5 * 20, 0));
+				if (!getEntityWorld().isRemote) {
+					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(MobEffects.POISON, 5 * 20, 0));
 					((EntityLivingBase) mop.entityHit).attackEntityFrom(DamageSource.causeMobDamage(getThrower()), 1.0F);
 				}
 			}
@@ -74,6 +74,6 @@ public class EntityPoisonJet extends EntityThrowable {
 	@SideOnly(Side.CLIENT)
 	public void trailParticles(World world, double x, double y, double z, Random rand) {
 		for (int count = 0; count < 5; ++count)
-			Erebus.proxy.spawnCustomParticle("poison", worldObj, x, y, z, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("poison", getEntityWorld(), x, y, z, 0.0D, 0.0D, 0.0D);
 	}
 }

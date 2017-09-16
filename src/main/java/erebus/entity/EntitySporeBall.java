@@ -2,21 +2,21 @@ package erebus.entity;
 
 import java.util.Random;
 
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.core.handler.configs.ConfigHandler;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.handler.configs.ConfigHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySporeBall extends EntityThrowable {
 
@@ -40,21 +40,20 @@ public class EntitySporeBall extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (ridingEntity == null)
-			if (worldObj.isRemote)
-				trailParticles(worldObj, posX, posY + 0.35D, posZ, rand);
+		if (getRidingEntity() == null)
+			if (getEntityWorld().isRemote)
+				trailParticles(getEntityWorld(), posX, posY + 0.35D, posZ, rand);
 
-		if (ridingEntity != null) {
-			yOffset = -1.5F;
-			if (worldObj.isRemote)
-				confusionParticles(worldObj, posX, posY, posZ, rand);
+		if (getRidingEntity() != null) {
+			if (getEntityWorld().isRemote)
+				confusionParticles(getEntityWorld(), posX, posY + 1F, posZ, rand);
 
-			if (!worldObj.isRemote)
-				if (ridingEntity instanceof EntityPlayer) {
-					EntityPlayer player = (EntityPlayer) ridingEntity;
-					ItemStack is = player.inventory.getCurrentItem();
-					if (is != null)
-						player.dropOneItem(true);
+			if (!getEntityWorld().isRemote)
+				if (getRidingEntity() instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer) getRidingEntity();
+					ItemStack is = player.getHeldItemMainhand();
+					if (!is.isEmpty())
+						player.dropItem(true);
 				}
 
 			if (ticksExisted > 140)
@@ -63,27 +62,27 @@ public class EntitySporeBall extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
+	protected void onImpact(RayTraceResult mop) {
 
 		if (mop.entityHit != null) {
 
 			if (mop.entityHit instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) mop.entityHit;
-				ItemStack helm = player.inventory.armorInventory[3];
+				ItemStack helm = player.inventory.armorItemInSlot(3);
 
-				if (helm != null && helm.getItem() == ModItems.mushroomHelm)
+				if (!helm.isEmpty() && helm.getItem() == ModItems.MUSHROOM_HELMET)
 					setDead();
 
-				else if (!worldObj.isRemote)
-					if (player.riddenByEntity == null) {
-						mountEntity(player);
+				else if (!getEntityWorld().isRemote)
+					if (!player.isBeingRidden()) {
+						startRiding(player, true);
 						ticksExisted = 0;
 					}
 			}
 
 			if (mop.entityHit instanceof EntityLivingBase && !(mop.entityHit instanceof EntityPlayer)) {
-				if (!worldObj.isRemote) {
-					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 5 * 20, 0));
+				if (!getEntityWorld().isRemote) {
+					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(MobEffects.POISON, 5 * 20, 0));
 					((EntityLivingBase) mop.entityHit).attackEntityFrom(DamageSource.causeMobDamage(getThrower()), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 				}
 				setDead();
@@ -104,7 +103,7 @@ public class EntitySporeBall extends EntityThrowable {
 	@SideOnly(Side.CLIENT)
 	public void trailParticles(World world, double x, double y, double z, Random rand) {
 		for (int count = 0; count < 3; ++count)
-			Erebus.proxy.spawnCustomParticle("spell", worldObj, x, y, z, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("spell", getEntityWorld(), x, y, z, 0.0D, 0.0D, 0.0D);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -118,7 +117,7 @@ public class EntitySporeBall extends EntityThrowable {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 0.5F * motionZ;
 			velX = rand.nextFloat() * 0.5F * motionX;
-			Erebus.proxy.spawnCustomParticle("spell", worldObj, x, y, z, velX, velY, velZ);
+			Erebus.PROXY.spawnCustomParticle("spell", getEntityWorld(), x, y, z, velX, velY, velZ);
 		}
 	}
 }

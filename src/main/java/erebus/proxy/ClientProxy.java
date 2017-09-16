@@ -1,7 +1,6 @@
 package erebus.proxy;
 
 import erebus.ModColourManager;
-import erebus.ModItems;
 import erebus.client.fx.ParticleBubbleGas;
 import erebus.client.fx.ParticleRepellent;
 import erebus.client.fx.ParticleSonic;
@@ -95,12 +94,7 @@ import erebus.entity.EntityWoodlouse;
 import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.EntityZombieAntSoldier;
-import erebus.tileentity.TileEntityBambooShield;
-import erebus.tileentity.TileEntityExoPlateShield;
 import erebus.tileentity.TileEntityGaeanKeystone;
-import erebus.tileentity.TileEntityJadeShield;
-import erebus.tileentity.TileEntityReinExoShield;
-import erebus.tileentity.TileEntityRhinoExoShield;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
@@ -116,10 +110,10 @@ import net.minecraft.client.particle.ParticleRedstone;
 import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.client.particle.ParticleSpell;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -189,12 +183,15 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityScorpion.class, RenderScorpion::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGlowWorm.class, RenderGlowWorm::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLavaWebSpider.class, RenderLavaWebSpider::new);
+		
+		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
+	
 	}
 
 	@Override
 	public void postInit() {
 		// shield rendering
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.BAMBOO));
+	/*	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.BAMBOO));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExoPlateShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.EXO_PLATE));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJadeShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.JADE));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityReinExoShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.REIN_EXO));
@@ -206,7 +203,8 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(ModItems.JADE_SHIELD, 0, TileEntityJadeShield.class);
 		ForgeHooksClient.registerTESRItemStack(ModItems.REIN_EXOSKELETON_SHIELD, 0, TileEntityReinExoShield.class);
 		ForgeHooksClient.registerTESRItemStack(ModItems.RHINO_EXOSKELETON_SHIELD, 0, TileEntityRhinoExoShield.class);
-	}
+	*/
+		}
 
 	@Override
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {

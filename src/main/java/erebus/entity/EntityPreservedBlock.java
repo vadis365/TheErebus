@@ -10,9 +10,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityPreservedBlock extends EntityThrowable {
@@ -30,23 +30,20 @@ public class EntityPreservedBlock extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
-		if (worldObj.isRemote)
+	protected void onImpact(RayTraceResult mop) {
+		if (getEntityWorld().isRemote)
 			return;
+		BlockPos pos = new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ));
 
-		int x = MathHelper.floor_double(posX);
-		int y = MathHelper.floor_double(posY);
-		int z = MathHelper.floor_double(posZ);
-
-		if (mop.typeOfHit == MovingObjectType.ENTITY && mop.entityHit != null && !(mop.entityHit instanceof EntityPlayer)) {
+		if (mop.entityHit != null && !(mop.entityHit instanceof EntityPlayer)) {
 			if (canTrap(mop.entityHit)) {
-				worldObj.setBlock(x, y, z, ModBlocks.preservedBlock, 2 + rand.nextInt(4), 3);
-				TileEntityPreservedBlock tile = Utils.getTileEntity(worldObj, x, y, z, TileEntityPreservedBlock.class);
+				getEntityWorld().setBlock(pos, ModBlocks.preservedBlock, 2 + rand.nextInt(4), 3);
+				TileEntityPreservedBlock tile = Utils.getTileEntity(getEntityWorld(), pos, TileEntityPreservedBlock.class);
 				tile.setEntityNBT(trapEntity(mop.entityHit));
 				mop.entityHit.setDead();
 			}
-		} else if (mop.entityHit == null && ModBlocks.amber.canPlaceBlockAt(worldObj, x, y, z))
-			worldObj.setBlock(x, y, z, ModBlocks.amber, 1, 2);
+		} else if (mop.entityHit == null && ModBlocks.AMBER.canPlaceBlockAt(getEntityWorld(), pos))
+			getEntityWorld().setBlockState(pos, ModBlocks.AMBER.getDefaultState(), 2);
 
 		setDead();
 	}

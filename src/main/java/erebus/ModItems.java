@@ -31,7 +31,9 @@ import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
 import erebus.items.ItemSpiderTShirt;
 import erebus.items.ItemWoodlouseBall;
+import erebus.items.ShieldTypeBasic;
 import erebus.lib.Reference;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -105,12 +107,12 @@ public class ModItems {
 	public static final Item SPIDER_T_SHIRT = new ItemSpiderTShirt(EntityEquipmentSlot.CHEST);
 	public static final Item WATER_STRIDERS = new ItemArmorWaterStriders(EntityEquipmentSlot.FEET);
 	
-	public static final Item BAMBOO_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_BAMBOO);
-	public static final Item EXOSKELETON_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_EXOSKELETON);
-	public static final Item JADE_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_JADE);
-	public static final Item REIN_EXOSKELETON_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_EXOSKELETON);
-	public static final Item RHINO_EXOSKELETON_SHIELD = new ItemErebusShield(ModMaterials.ARMOR_REIN_EXOSKELETON);
-	
+	public static final ItemErebusShield BAMBOO_SHIELD = new ItemErebusShield();
+	public static final ItemErebusShield EXOSKELETON_SHIELD = new ItemErebusShield();
+	public static final ItemErebusShield JADE_SHIELD = new ItemErebusShield();
+	public static final ItemErebusShield REIN_EXOSKELETON_SHIELD = new ItemErebusShield();
+	public static final ItemErebusShield RHINO_EXOSKELETON_SHIELD = new ItemErebusShield();
+
 	// RANDOM STUFF
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();
 	public static final Item ANT_TAMING_AMULET = new ItemAmuletAntTaming();
@@ -130,19 +132,47 @@ public class ModItems {
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}
+		setupShieldStats();
+	}
+
+	public static void setupShieldStats() {
+		BAMBOO_SHIELD.setShieldType(new ShieldTypeBasic(
+				ItemMaterials.EnumErebusMaterialsType.SHIELD_BAMBOO_FACE.createStack(),
+				ItemMaterials.EnumErebusMaterialsType.BAMBOO.createStack(),
+				null, null, ModMaterials.ARMOR_BAMBOO.getDurability(EntityEquipmentSlot.CHEST)));
+
+		EXOSKELETON_SHIELD.setShieldType(new ShieldTypeBasic(
+				ItemMaterials.EnumErebusMaterialsType.SHIELD_EXO_PLATE_FACE.createStack(),
+				ItemMaterials.EnumErebusMaterialsType.PLATE_EXO.createStack(),
+				null, null, ModMaterials.ARMOR_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST)));
+
+		JADE_SHIELD.setShieldType(new ShieldTypeBasic(
+				ItemMaterials.EnumErebusMaterialsType.SHIELD_JADE_FACE.createStack(),
+				ItemMaterials.EnumErebusMaterialsType.JADE.createStack(),
+				null, null, ModMaterials.ARMOR_JADE.getDurability(EntityEquipmentSlot.CHEST)));
+
+		REIN_EXOSKELETON_SHIELD.setShieldType(new ShieldTypeBasic(
+				ItemMaterials.EnumErebusMaterialsType.SHIELD_REIN_EXO_FACE.createStack(),
+				ItemMaterials.EnumErebusMaterialsType.REINFORCED_PLATE_EXO.createStack(),
+				null, null, ModMaterials.ARMOR_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST)));
+
+		RHINO_EXOSKELETON_SHIELD.setShieldType(new ShieldTypeBasic(
+				ItemMaterials.EnumErebusMaterialsType.SHIELD_RHINO_EXO_FACE.createStack(),
+				ItemMaterials.EnumErebusMaterialsType.PLATE_EXO_RHINO.createStack(),
+				null, null, ModMaterials.ARMOR_REIN_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST)));
 	}
 
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 	public static class RegistrationHandlerBlocks {
 
 		@SubscribeEvent
-		public static void registerItemBlocks(final RegistryEvent.Register<Item> event) {
+		public static void registerItems(final RegistryEvent.Register<Item> event) {
 			final IForgeRegistry<Item> registry = event.getRegistry();
 				for (Item item : ITEMS) {
 				registry.register(item);
 			}
 		}
-		
+
 		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
 		public static void registerModels(ModelRegistryEvent event) {
@@ -151,7 +181,13 @@ public class ModItems {
 					List<String> models = ((ISubItemsItem) item).getModels();
 					for (int i = 0; i < models.size(); i++)
 						ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(Reference.MOD_ID + ":" + models.get(i), "inventory"));
-				} else {
+				}
+				else if (item instanceof ItemErebusShield) {
+					ModelResourceLocation shield = new ModelResourceLocation("minecraft:shield", "inventory");
+			        ModelLoader.setCustomMeshDefinition(item, stack -> shield);
+			        ModelBakery.registerItemVariants(item, shield);
+				}
+				else {
 					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
 				}
 		}

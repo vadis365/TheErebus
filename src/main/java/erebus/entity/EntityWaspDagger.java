@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityWaspDagger extends EntityThrowable {
@@ -24,7 +24,7 @@ public class EntityWaspDagger extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition MovingObjectPosition) {
+	protected void onImpact(RayTraceResult MovingObjectPosition) {
 		if (MovingObjectPosition.entityHit != null) {
 			byte byte0 = 4;
 			if (MovingObjectPosition.entityHit instanceof EntityWasp)
@@ -34,8 +34,8 @@ public class EntityWaspDagger extends EntityThrowable {
 			if (isBurning() && !(MovingObjectPosition.entityHit instanceof EntityEnderman))
 				MovingObjectPosition.entityHit.setFire(5);
 			for (int i = 0; i < 8; i++)
-				Erebus.proxy.spawnCustomParticle("reddust", worldObj, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-			if (!worldObj.isRemote)
+				Erebus.PROXY.spawnCustomParticle("reddust", getEntityWorld(), posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+			if (!getEntityWorld().isRemote)
 				setDead();
 		}
 	}

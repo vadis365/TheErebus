@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import erebus.core.helper.Utils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -11,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityExtractedBlock extends EntityFlying implements IEntityAdditionalSpawnData {
 
@@ -21,7 +21,7 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 	public EntityExtractedBlock(World world) {
 		super(world);
 		setSize(1.0F, 1.0F);
-		setBlock(Blocks.stone, 0);
+		setBlock(Blocks.STONE, 0);
 		experienceValue = 0;
 	}
 
@@ -37,13 +37,8 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 	}
 
 	@Override
-	public boolean isAIEnabled() {
-		return true;
-	}
-
-	@Override
 	public void onUpdate() {
-		if (!worldObj.isRemote) {
+		if (!getEntityWorld().isRemote) {
 			if (posX != targetX || posZ != targetZ) {
 				motionX += ((targetX - posX) * 0.5D - motionX) * 0.10000000149011612D;
 				motionY += ((targetY - posY) * 0.5D - motionY) * 0.10000000149011612D;
@@ -57,7 +52,7 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 			if (posY <= targetY)
 				if (onGround) {
 					setDead();
-					worldObj.setBlock((int) posX, (int) posY, (int) posZ, blockID, blockMeta, 3);
+					getEntityWorld().setBlockState(getPosition(), blockID.getStateFromMeta(blockMeta), 3);
 				}
 		}
 		super.onUpdate();
@@ -67,13 +62,13 @@ public class EntityExtractedBlock extends EntityFlying implements IEntityAdditio
 	protected void collideWithEntity(Entity entity) {
 		setDead();
 		if (entity instanceof EntityPlayer) {
-			if (!worldObj.isRemote)
+			if (!getEntityWorld().isRemote)
 				if (((EntityPlayer) entity).inventory.addItemStackToInventory(new ItemStack(blockID, 1, blockMeta)))
 					;
 				else
-					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(blockID, 1, blockMeta));
-		} else if (!worldObj.isRemote)
-			worldObj.setBlock((int) posX, (int) posY, (int) posZ, blockID, blockMeta, 3);
+					Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(blockID, 1, blockMeta));
+		} else if (!getEntityWorld().isRemote)
+			getEntityWorld().setBlockState(getPosition(), blockID.getStateFromMeta(blockMeta), 3);
 		super.collideWithEntity(entity);
 	}
 

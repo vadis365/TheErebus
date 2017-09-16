@@ -70,7 +70,7 @@ public class Erebus {
 		TeleporterHandler.init();
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);
-		MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
+        MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
 		MinecraftForge.EVENT_BUS.register(SpawnerErebus.INSTANCE);
 		PROXY.registerItemAndBlockColourRenderers();
 	}

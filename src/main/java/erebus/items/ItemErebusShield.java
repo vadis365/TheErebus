@@ -2,100 +2,118 @@ package erebus.items;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import erebus.ModTabs;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import erebus.ModTabs;
 
 public class ItemErebusShield extends ItemShield {
 
-    private ArmorMaterial material;
+	private IShieldType shieldType;
 
-    public ItemErebusShield(ArmorMaterial material) {
-        this.material = material;
-        this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter() {
-            @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, World worldIn, EntityLivingBase entityIn) {
-                return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
-            }
-        });
+	public ItemErebusShield() {
 
-    }
+		addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter() {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
+				return stack.getItem().getItemUseAction(stack) == EnumAction.BLOCK && entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F;
+			}
+		});
+	}
 
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (getItemUseAction(stack) == EnumAction.BLOCK) {
+			return super.onItemRightClick(world, player, hand);
+		} else {
+			return new ActionResult<>(EnumActionResult.PASS, stack);
+		}
+	}
+
+	public IShieldType getShieldType() {
+		return shieldType;
+	}
+
+	public void setShieldType(IShieldType shieldType) {
+		this.shieldType = shieldType;
+
+		setMaxDamage(shieldType.getDurability());
+	}
+
+	@Override
+	public CreativeTabs getCreativeTab() {
+		return ModTabs.GEAR;
+	}
+	
     @Override
-    public double getDurabilityForDisplay(ItemStack stack) {
-        if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("damage")) {
-            return ((double) stack.getTagCompound().getInteger("damage") / (double) material.getDurability(EntityEquipmentSlot.CHEST));
-        } else
-            return 1;
-    }
-
-    @Override
-    public boolean showDurabilityBar(ItemStack stack) {
-        return stack.getTagCompound() != null && stack.getTagCompound().hasKey("damage") && stack.getTagCompound().getInteger("damage") > 0;
-    }
-
     public String getItemStackDisplayName(ItemStack stack) {
-        return ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+        return (new TextComponentTranslation(getUnlocalizedNameInefficiently(stack) + ".name")).getFormattedText().trim();
     }
 
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> list, ITooltipFlag flag) {
+        shieldType.addInformation(stack, world, list, flag);
     }
 
-    @Override
-    public CreativeTabs getCreativeTab() {
-        return ModTabs.GEAR;
-    }
+	@Override
+	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+		shieldType.onUpdate(this, stack, world, entity, slot, selected);
+	}
 
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    	//TODO Add some stuff here ;)
-        return false;
-    }
+	@Override
+	public boolean isRepairable() {
+		return !shieldType.getRepairItem().isEmpty();
+	}
 
-    @Override
-    public boolean updateItemStackNBT(NBTTagCompound nbt) {
-        return super.updateItemStackNBT(nbt);
-    }
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return !repair.isEmpty() && ItemStack.areItemsEqual(repair, shieldType.getRepairItem());
+	}
 
-    public boolean damageShield(int i, ItemStack stack, EntityLivingBase entityIn) {
-        if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("damage")) {
-            NBTTagCompound tagCompound = new NBTTagCompound();
-            tagCompound.setInteger("damage", material.getDurability(EntityEquipmentSlot.CHEST));
-            stack.setTagCompound(new NBTTagCompound());
-        }
+	public boolean damageShield(int toDamage, ItemStack stack, EntityLivingBase entity) {
+		int damage = stack.getItemDamage() + toDamage;
 
-        int damage = stack.getTagCompound().getInteger("damage") + i;
-        System.out.println(damage);
-        if (damage >= material.getDurability(EntityEquipmentSlot.CHEST)) {
-            entityIn.renderBrokenItemStack(stack);
-            stack.shrink(1);
+		if (damage >= getMaxDamage(stack)) {
+			stack.shrink(1);
+			if (entity instanceof EntityPlayer) {
+				EntityPlayer player = (EntityPlayer) entity;
+				player.addStat(StatList.getObjectBreakStats(stack.getItem()));
+			}
+			if (stack.getCount() < 0) {
+				stack.setCount(0);
+			}
+		} else {
+			stack.setItemDamage(damage);
+		}
+		return true;
+	}
 
-            if (entityIn instanceof EntityPlayer) {
-                EntityPlayer entityplayer = (EntityPlayer) entityIn;
-                entityplayer.addStat(StatList.getObjectBreakStats(stack.getItem()));
-            }
-
-            if (stack.getCount() < 0) {
-                stack.setCount(0);
-            }
-
-        } else {
-            stack.getTagCompound().setInteger("damage", damage);
-        }
-
-        return true;
-    }
+	public boolean repairShield(int toRepair, ItemStack stack) {
+		if (stack.getItemDamage() > 0) {
+			stack.setItemDamage(Math.max(0, stack.getItemDamage() - toRepair));
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
