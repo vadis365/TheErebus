@@ -1,35 +1,46 @@
 package erebus.entity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
+import javax.annotation.Nullable;
+
 import erebus.Erebus;
 import erebus.ModItems;
+import erebus.ModSounds;
 import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
 import erebus.entity.ai.EntityAIBlockFollowOwner;
+import erebus.proxy.CommonProxy;
 import erebus.tileentity.TileEntityBambooCrate;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.world.World;
 
 public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements IInventory {
 
-	public ItemStack[] inventory;
+	public NonNullList<ItemStack> inventory;
 
 	public EntityAnimatedBambooCrate(World world) {
 		super(world);
-		inventory = new ItemStack[27];
-		tasks.removeTask(aiWander);
-		tasks.removeTask(aiAttackOnCollide);
-		tasks.removeTask(aiAttackNearestTarget);
-		tasks.addTask(1, new EntityAIBlockFollowOwner(this, 1.0D, 10.0F, 2.0F));
+		inventory = NonNullList.<ItemStack>withSize(27, ItemStack.EMPTY);
 		isImmuneToFire = true;
 	}
 
 	@Override
-	public boolean isEntityInvulnerable() {
+	protected void initEntityAI() {
+		super.initEntityAI();
+		tasks.removeTask(aiWander);
+		tasks.removeTask(aiAttackOnCollide);
+		tasks.removeTask(aiAttackNearestTarget);
+		tasks.addTask(1, new EntityAIBlockFollowOwner(this, 1.0D, 10.0F, 2.0F));
+	}
+
+	@Override
+	public boolean getIsInvulnerable() {
 		return true;
 	}
 
@@ -37,11 +48,11 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 		if (chest == null)
 			return this;
 
-		inventory = new ItemStack[chest.getSizeInventory()];
+		inventory = NonNullList.<ItemStack>withSize(chest.getSizeInventory(), ItemStack.EMPTY);
 		for (int i = 0; i < chest.getSizeInventory(); i++) {
-			if (chest.getStackInSlot(i) == null)
+			if (chest.getStackInSlot(i).isEmpty())
 				continue;
-			inventory[i] = chest.getStackInSlot(i).copy();
+			inventory.set(i, chest.getStackInSlot(i).copy());
 			chest.setInventorySlotContents(i, null);
 		}
 		return this;
@@ -50,112 +61,88 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!worldObj.isRemote && isDead)
+		if (!getEntityWorld().isRemote && isDead)
 			for (ItemStack is : inventory)
 				if (is != null)
-					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
+					Utils.dropStack(getEntityWorld(), getPosition(), is);
 	}
 
 	public TileEntityBambooCrate getTile() {
 		TileEntityBambooCrate crate = new TileEntityBambooCrate();
-		for (int i = 0; i < inventory.length; i++)
-			crate.setInventorySlotContents(i, inventory[i]);
+		for (int i = 0; i < inventory.size(); i++)
+			crate.setInventorySlotContents(i, inventory.get(i));
 		return crate;
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player) {
-		if (worldObj.isRemote)
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
+		if (getEntityWorld().isRemote)
 			return true;
 		ItemStack is = player.inventory.getCurrentItem();
 		if (is != null && is.getItem() == ModItems.wandOfAnimation) {
 			setDead();
-			worldObj.playSoundEffect(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), "erebus:altaroffering", 0.2F, 1.0F);
-			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), blockID, blockMeta, 3);
-			TileEntityBambooCrate chest = Utils.getTileEntity(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), TileEntityBambooCrate.class);
+			getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.ALTAR_OFFERING, SoundCategory.NEUTRAL, 0.2F, 1.0F);
+			getEntityWorld().setBlockState(getPosition(), blockID.getStateFromMeta(blockMeta), 3);
+			TileEntityBambooCrate chest = Utils.getTileEntity(getEntityWorld(), getPosition(), TileEntityBambooCrate.class);
 			for (int i = 0; i < chest.getSizeInventory(); i++)
-				chest.setInventorySlotContents(i, inventory[i]);
-			worldObj.notifyBlocksOfNeighborChange(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), blockID);
-			worldObj.markBlockForUpdate(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+				chest.setInventorySlotContents(i, inventory.get(i));
+			IBlockState state = this.getEntityWorld().getBlockState(this.getPosition());
+	        getEntityWorld().notifyBlockUpdate(this.getPosition(), state, state, 2);
 			return true;
 		} else {
-			player.openGui(Erebus.instance, CommonProxy.GuiID.ANIMATED_BAMBOO_CRATE.ordinal(), player.worldObj, getEntityId(), 0, 0);
+			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.ANIMATED_BAMBOO_CRATE.ordinal(), player.getEntityWorld(), getEntityId(), 0, 0);
 			return true;
 		}
 	}
-
+	
 	@Override
-	public void writeEntityToNBT(NBTTagCompound data) {
-		super.writeEntityToNBT(data);
-		NBTTagList nbttaglist = new NBTTagList();
-		for (int i = 0; i < inventory.length; i++)
-			if (inventory[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				inventory[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		data.setTag("Items", nbttaglist);
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		this.loadFromNbt(compound);
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound data) {
-		super.readEntityFromNBT(data);
-		NBTTagList nbttaglist = data.getTagList("Items", 10);
-		inventory = new ItemStack[27];
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-			if (b0 >= 0 && b0 < inventory.length)
-				inventory[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		}
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		return this.saveToNbt(compound);
+	}
+	
+	public void loadFromNbt(NBTTagCompound compound) {
+		inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
+		if (compound.hasKey("Items", 9))
+			ItemStackHelper.loadAllItems(compound, inventory);
+	}
+
+	public NBTTagCompound saveToNbt(NBTTagCompound compound) {
+		ItemStackHelper.saveAllItems(compound, inventory, false);
+		return compound;
 	}
 
 	@Override
 	public int getSizeInventory() {
-		return inventory.length;
+		return inventory.size();
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return inventory[slot];
+		return inventory.get(slot);
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int size) {
-		if (inventory[slot] != null) {
-			ItemStack itemstack;
-			if (inventory[slot].stackSize <= size) {
-				itemstack = inventory[slot];
-				inventory[slot] = null;
-				return itemstack;
-			} else {
-				itemstack = inventory[slot].splitStack(size);
-				if (inventory[slot].stackSize == 0)
-					inventory[slot] = null;
-				return itemstack;
-			}
-		} else
-			return null;
+    public ItemStack decrStackSize(int index, int count) {
+		ItemStack itemstack = ItemStackHelper.getAndSplit(inventory, index, count);
+		if (!itemstack.isEmpty())
+			this.markDirty();
+		return itemstack;
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (inventory[slot] != null) {
-			ItemStack itemstack = inventory[slot];
-			inventory[slot] = null;
-			return itemstack;
-		} else
-			return null;
-	}
-
-	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return "container.animatedBambooCrate";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		return false;
 	}
 
@@ -165,42 +152,65 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 	}
 
 	@Override
-	public final boolean isUseableByPlayer(EntityPlayer player) {
-		return true;
-	}
-
-	@Override
-	public void openInventory() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void closeInventory() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		return true;
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		inventory[slot] = stack;
+    public void setInventorySlotContents(int index, @Nullable ItemStack stack) {
+        inventory.set(index, stack);
+        if (stack.getCount() > this.getInventoryStackLimit())
+            stack.setCount(this.getInventoryStackLimit());
+        this.markDirty();
+    }
 
-		if (stack != null && stack.stackSize > getInventoryStackLimit())
-			stack.stackSize = getInventoryStackLimit();
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		return true;
 	}
 
 	@Override
-	public void markDirty() {
-		// TODO Auto-generated method stub
-
+	public boolean isEmpty() {
+		for (ItemStack itemstack : inventory) {
+			if (!itemstack.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
-	protected void fall(float distance) {
+	public ItemStack removeStackFromSlot(int index) {
+		return null;
+	}
+
+	@Override
+	public void markDirty() {	
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) {	
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+	}
+
+	@Override
+	public int getField(int id) {
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+	}
+
+	@Override
+	public int getFieldCount() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {
 	}
 }

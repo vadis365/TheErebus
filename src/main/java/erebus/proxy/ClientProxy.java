@@ -1,9 +1,22 @@
 package erebus.proxy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import erebus.ModColourManager;
+import erebus.block.silo.TileEntitySiloTank;
+import erebus.blocks.BlockPetrifiedChest;
 import erebus.client.fx.ParticleBubbleGas;
 import erebus.client.fx.ParticleRepellent;
 import erebus.client.fx.ParticleSonic;
+import erebus.client.gui.GuiAntInventory;
+import erebus.client.gui.GuiColossalCrate;
+import erebus.client.gui.GuiComposter;
+import erebus.client.gui.GuiErebusBasic;
+import erebus.client.gui.GuiPetrifiedChest;
+import erebus.client.gui.GuiPetrifiedWorkbench;
+import erebus.client.gui.GuiSmoothieMaker;
+import erebus.client.gui.GuiUmberFurnace;
 import erebus.client.render.entity.RenderAntlion;
 import erebus.client.render.entity.RenderAntlionMiniBoss;
 import erebus.client.render.entity.RenderBedBug;
@@ -50,11 +63,13 @@ import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
+import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
+import erebus.entity.EntityBlackAnt;
 import erebus.entity.EntityBlackWidow;
 import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBombardierBeetleLarva;
@@ -94,9 +109,21 @@ import erebus.entity.EntityWoodlouse;
 import erebus.entity.EntityWoodlouseBall;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.EntityZombieAntSoldier;
+import erebus.inventory.ContainerAnimatedBambooCrate;
+import erebus.inventory.ContainerBambooCrate;
+import erebus.inventory.ContainerExtenderThingy;
+import erebus.inventory.ContainerHoneyComb;
+import erebus.inventory.ContainerSilo;
+import erebus.tileentity.TileEntityBambooCrate;
+import erebus.tileentity.TileEntityComposter;
+import erebus.tileentity.TileEntityExtenderThingy;
 import erebus.tileentity.TileEntityGaeanKeystone;
+import erebus.tileentity.TileEntityHoneyComb;
+import erebus.tileentity.TileEntitySmoothieMaker;
+import erebus.tileentity.TileEntityUmberFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleBreaking;
 import net.minecraft.client.particle.ParticleCloud;
@@ -111,8 +138,14 @@ import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.client.particle.ParticleSpell;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -191,8 +224,8 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void postInit() {
 		// shield rendering
-	/*	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.BAMBOO));
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExoPlateShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.EXO_PLATE));
+
+		/*	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExoPlateShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.EXO_PLATE));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJadeShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.JADE));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityReinExoShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.REIN_EXO));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRhinoExoShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.RHINO_EXO));
@@ -202,8 +235,9 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(ModItems.EXOSKELETON_SHIELD, 0, TileEntityExoPlateShield.class);
 		ForgeHooksClient.registerTESRItemStack(ModItems.JADE_SHIELD, 0, TileEntityJadeShield.class);
 		ForgeHooksClient.registerTESRItemStack(ModItems.REIN_EXOSKELETON_SHIELD, 0, TileEntityReinExoShield.class);
-		ForgeHooksClient.registerTESRItemStack(ModItems.RHINO_EXOSKELETON_SHIELD, 0, TileEntityRhinoExoShield.class);
+		
 	*/
+	
 		}
 
 	@Override
@@ -279,5 +313,54 @@ public class ClientProxy extends CommonProxy {
 
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
+	}
+	
+	@Override
+	public GuiContainer getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		GuiID guiID = GuiID.values()[ID];
+		BlockPos pos = new BlockPos(x, y, z);
+		TileEntity tile = world.getTileEntity(pos);
+		Entity entity = world.getEntityByID(x);
+
+		switch (guiID) {
+			case ANIMATED_BAMBOO_CRATE:
+				if (entity != null && entity instanceof EntityAnimatedBambooCrate)
+					return new GuiErebusBasic(new ContainerAnimatedBambooCrate(player.inventory, (IInventory) entity), new ResourceLocation("erebus:textures/gui/container/bamboo_crate.png"), (IInventory) entity, 168);
+			case ANT_INVENTORY:
+				if (entity != null && entity instanceof EntityBlackAnt)
+					return new GuiAntInventory(player.inventory, entity);
+			case BAMBOO_CRATE:
+				return new GuiErebusBasic(new ContainerBambooCrate(player.inventory, (TileEntityBambooCrate) tile), new ResourceLocation("erebus:textures/gui/container/bamboo_crate.png"), (TileEntityBambooCrate) tile, 168);
+			case COLOSSAL_CRATE:
+				List<TileEntityBambooCrate> list = new ArrayList<TileEntityBambooCrate>();
+				for (int[] place : places) {
+					TileEntity te = world.getTileEntity(pos.add(place[0], place[1],place[2]));
+					if (te != null && te instanceof TileEntityBambooCrate)
+						list.add((TileEntityBambooCrate) te);
+					else
+						return null;
+				}
+				return new GuiColossalCrate(player.inventory, list);
+			case COMPOSTER:
+				return new GuiComposter(player.inventory, (TileEntityComposter) tile);
+			case EXTENDER_THINGY:
+				return new GuiErebusBasic(new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) tile), new ResourceLocation("erebus:textures/gui/container/extenderThingy.png"), (TileEntityExtenderThingy) tile, 176, 136);
+			case HONEY_COMB:
+				return new GuiErebusBasic(new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile), new ResourceLocation("erebus:textures/gui/container/honeyCombGui.png"), (TileEntityHoneyComb) tile, 168);
+			case PETRIFIED_CHEST:
+				IInventory inventory = BlockPetrifiedChest.getInventory(world, pos);
+				System.out.println("Client Gui called here");
+				return new GuiPetrifiedChest(player.inventory, inventory);
+			case PETRIFIED_CRAFT:
+				return new GuiPetrifiedWorkbench(player.inventory, world, pos);
+			case SILO_INVENTORY:
+				return new GuiErebusBasic(new ContainerSilo(player.inventory, (TileEntitySiloTank) tile), new ResourceLocation("erebus:textures/gui/container/siloGui.png"), (TileEntitySiloTank) tile, 256, 256);
+			case SMOOTHIE_MAKER:
+				return new GuiSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tile);
+			case UMBER_FURNACE:
+				return new GuiUmberFurnace(player.inventory, (TileEntityUmberFurnace) tile);
+			default:
+				return null;
+		}
 	}
 }

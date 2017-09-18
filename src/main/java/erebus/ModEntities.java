@@ -3,6 +3,9 @@ package erebus;
 
 import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.EntityAnimatedBambooCrate;
+import erebus.entity.EntityAnimatedBlock;
+import erebus.entity.EntityAnimatedChest;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBedBug;
@@ -81,9 +84,7 @@ public class ModEntities {
 		registerEntity(47, EntitySnapper.class, "snapper", 0x804E3D, 0x3D6F80);
 		registerEntity(48, EntityWisp.class, "wisp", 0x804E3D, 0x3D6F80);
 		registerEntity(49, EntityMagmaCrawler.class, "magma_crawler", 0xFF0000, 0xFFEE00);
-		registerEntity(50, EntityAnimatedBlock.class, "animated_block");
-		registerEntity(51, EntityAnimatedChest.class, "animated_chest");
-		registerEntity(52, EntityAnimatedBambooCrate.class, "animated_bamboo_crate");
+	
 		registerEntity(53, EntityUmberGolem.class, "umber_golem");
 		registerEntity(54, EntityFireResistent.class, "fire_resistent_item");
 		registerEntity(55, EntityMucusBombPrimed.class, "mucus_bomb_primed");
@@ -148,7 +149,11 @@ public class ModEntities {
 
 		registerEntity(44, EntityTarantulaBaby.class, "tarantula_baby", 0x000000, 0xE82066);
 		registerEntity(45, EntityPondSkater.class, "pond_skater", -13816034, -14803180);
-
+		
+		registerEntity(50, EntityAnimatedBlock.class, "animated_block");
+		registerEntity(51, EntityAnimatedChest.class, "animated_chest");
+		registerEntity(52, EntityAnimatedBambooCrate.class, "animated_bamboo_crate");
+		
 		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(60, EntityZombieAntSoldier.class, "zombie_ant_soldier", 0x00FE40, 0xF09071);

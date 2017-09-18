@@ -1,0 +1,58 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "0": "erebus:blocks/bamboo_crate_top_right",
+        "1": "erebus:blocks/bamboo_crate_top_left",
+        "2": "erebus:blocks/bamboo_crate_bottom_left",
+        "3": "erebus:blocks/bamboo_crate_bottom_right",
+        "particle": "erebus:blocks/bamboo_crate"
+    },
+    "elements": [
+        {
+            "name": "upright",
+            "from": [ 1.0, 0.0, 11.0 ], 
+            "to": [ 5.0, 16.0, 15.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 11.0, 0.0, 15.0, 16.0 ] },
+                "east": { "texture": "#0", "uv": [ 11.0, 0.0, 15.0, 16.0 ] },
+                "south": { "texture": "#1", "uv": [ 1.0, 0.0, 5.0, 16.0 ] },
+                "west": { "texture": "#1", "uv": [ 1.0, 0.0, 5.0, 16.0 ] },
+                "up": { "texture": "#1", "uv": [ 1.0, 1.0, 5.0, 5.0 ] }
+            }
+        },
+        {
+            "name": "across",
+            "from": [ 0.0, 11.0, 11.0 ], 
+            "to": [ 16.0, 15.0, 15.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 1.0, 16.0, 5.0 ] },
+                "south": { "texture": "#1", "uv": [ 0.0, 1.0, 16.0, 5.0 ] },
+                "west": { "texture": "#0", "uv": [ 11.0, 1.0, 15.0, 5.0 ] },
+                "up": { "texture": "#2", "uv": [ 0.0, 11.0, 16.0, 15.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 1.0, 16.0, 5.0 ] }
+            }
+        },
+        {
+            "name": "frontback",
+            "from": [ 1.0, 11.0, 0.0 ], 
+            "to": [ 5.0, 15.0, 16.0 ], 
+            "faces": {
+                "east": { "texture": "#1", "uv": [ 0.0, 1.0, 16.0, 5.0 ] },
+                "south": { "texture": "#0", "uv": [ 11.0, 1.0, 15.0, 5.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 1.0, 16.0, 5.0 ] },
+                "up": { "texture": "#3", "uv": [ 11.0, 0.0, 15.0, 16.0 ] },
+                "down": { "texture": "#1", "uv": [ 1.0, 0.0, 5.0, 16.0 ] }
+            }
+        },
+        {
+            "name": "middle",
+            "from": [ 2.0, 0.0, 0.0 ], 
+            "to": [ 16.0, 14.0, 14.0 ], 
+            "faces": {
+                "south": { "texture": "#1", "uv": [ 2.0, 2.0, 16.0, 16.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 2.0, 14.0, 16.0 ] },
+                "up": { "texture": "#2", "uv": [ 2.0, 0.0, 16.0, 14.0 ] }
+            }
+        }
+    ]
+}

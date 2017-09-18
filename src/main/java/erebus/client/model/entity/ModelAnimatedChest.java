@@ -4,10 +4,11 @@ import erebus.entity.EntityAnimatedChest;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+@SideOnly(Side.CLIENT)
 public class ModelAnimatedChest extends ModelBase {
-	// fields
 	ModelRenderer LBL1;
 	ModelRenderer LBL2;
 	ModelRenderer LBL3;
@@ -217,8 +218,8 @@ public class ModelAnimatedChest extends ModelBase {
 		RFL3.rotateAngleX = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing - 0.3F;
 		RFL4.rotateAngleX = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing - 0.334F;
 
-		Lid.rotateAngleX = chest.getDataWatcher().getWatchableObjectFloat(21);
-		Lock.rotateAngleX = chest.getDataWatcher().getWatchableObjectFloat(21);
+		Lid.rotateAngleX = chest.getOpenTicks();
+		Lock.rotateAngleX = chest.getOpenTicks();
 
 	}
 }

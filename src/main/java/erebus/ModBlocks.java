@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.block.bamboo.BlockBambooCrate;
 import erebus.blocks.BlockAlgae;
 import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockBerryBush;
@@ -24,6 +25,7 @@ import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
+import erebus.blocks.BlockPetrifiedCraftingTable;
 import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockQuickSand;
@@ -133,6 +135,11 @@ public class ModBlocks {
 	
 	//OTHER
 	public static final Block WITHER_WEB = new BlockWitherWeb();
+	
+	
+	//UTILS BLOCKS
+	public static final Block PETRIFIED_CRAFTING_TABLE = new BlockPetrifiedCraftingTable();
+	public static final Block BAMBOO_CRATE = new BlockBambooCrate();
 	
 	public static void init() {
 		try {

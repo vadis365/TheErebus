@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/entity",
+    "textures": {
+        "particle": "erebus:blocks/log_bamboo"
+    }
+}

@@ -1,15 +1,26 @@
 package erebus.entity;
 
-import io.netty.buffer.ByteBuf;
-
 import java.util.UUID;
 
+import javax.annotation.Nullable;
+
+import com.google.common.base.Optional;
+
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIBlockFollowOwner;
+import erebus.proxy.CommonProxy;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -17,42 +28,38 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.server.management.PreYggdrasilConverter;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
-import erebus.entity.ai.EntityAIBlockFollowOwner;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditionalSpawnData {
+	protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(EntityAnimatedBlock.class, DataSerializers.OPTIONAL_UNIQUE_ID);
 
 	public Block blockID;
 	public int blockMeta;
 	private int lastX = 0, lastY = 0, lastZ = 0;
-	protected final EntityAIWander aiWander = new EntityAIWander(this, 0.5D);
-	protected final EntityAINearestAttackableTarget aiAttackNearestTarget = new EntityAINearestAttackableTarget(this, EntityMob.class, 0, true);
-	protected final EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityMob.class, 0.5D, false);
+	public EntityAIWander aiWander;
+	public EntityAINearestAttackableTarget aiAttackNearestTarget;
+	public EntityAIAttackMelee aiAttackOnCollide;
 
 	public EntityAnimatedBlock(World world) {
 		super(world);
 		setSize(1.0F, 1.5F);
-		setBlock(Blocks.stone, 0);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(2, aiAttackOnCollide);
-		tasks.addTask(3, aiWander);
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, aiAttackNearestTarget);
+		setBlock(Blocks.STONE, 0);
 		experienceValue = 0;
 	}
 
@@ -65,23 +72,29 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(16, new Byte((byte) 0));
-		dataWatcher.addObject(17, new Byte((byte) 0));
-		dataWatcher.addObject(18, "");
+		dataManager.register(OWNER_UNIQUE_ID, Optional.<UUID>absent());
+	}
+
+	@Override
+	protected void initEntityAI() {
+		aiWander = new EntityAIWander(this, 0.5D);
+		aiAttackNearestTarget = new EntityAINearestAttackableTarget(this, EntityMob.class, true);
+		aiAttackOnCollide = new EntityAIAttackMelee(this, 0.5D, false);
+		
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(2, aiAttackOnCollide);
+		tasks.addTask(3, aiWander);
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, aiAttackNearestTarget);
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 10.0D : 10D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
-	}
-
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 10.0D : 10D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
 
 	@Override
@@ -95,9 +108,9 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		worldObj.playSoundAtEntity(this, "mob.zombie.step", 0.15F, 1.0F);
-	}
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+    }
 
 	@Override
 	protected Item getDropItem() {
@@ -107,44 +120,44 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!worldObj.isRemote && isDead)
-			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(blockID, 1, blockMeta));
+		if (!getEntityWorld().isRemote && isDead)
+			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(blockID, 1, blockMeta));
 	}
 
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (worldObj.isRemote)
-			if (worldObj.getSunBrightness(1.0F) < 0.5F)
-				lightUp(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+		if (getEntityWorld().isRemote)
+			if (getEntityWorld().getSunBrightness(1.0F) < 0.5F)
+				lightUp(getEntityWorld(), getPosition());
 			else
 				switchOff();
 	}
 
 	@SideOnly(Side.CLIENT)
-	private void lightUp(World world, int x, int y, int z) {
-		world.setLightValue(EnumSkyBlock.Block, x, y, z, blockID.getLightValue());
-		for (int i = -1; i < 2; i++)
-			for (int j = -1; j < 2; j++)
-				for (int k = -1; k < 2; k++)
-					if (x + i != lastX || y + j != lastY || z + k != lastZ || isDead) {
-						world.updateLightByType(EnumSkyBlock.Block, lastX + i, lastY + j, lastZ + k);
-						lastX = x;
-						lastY = y;
-						lastZ = z;
+	private void lightUp(World world, BlockPos pos) {
+		world.setLightFor(EnumSkyBlock.BLOCK, pos, 9);
+		for (int i = -2; i < 2; i++)
+			for (int j = -2; j < 2; j++)
+				for (int k = -2; k < 2; k++)
+					if (pos.getX() + i != lastX || pos.getY() + j != lastY || pos.getZ() + k != lastZ || isDead) {
+						world.checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(lastX + i, lastY + j, lastZ + k));
+						lastX = pos.getX();
+						lastY = pos.getY();
+						lastZ = pos.getZ();
 					}
 	}
 
 	@SideOnly(Side.CLIENT)
 	private void switchOff() {
-		worldObj.updateLightByType(EnumSkyBlock.Block, lastX, lastY, lastZ);
-		worldObj.updateLightByType(EnumSkyBlock.Block, MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
+		getEntityWorld().checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(lastX, lastY, lastZ));
+		getEntityWorld().checkLightFor(EnumSkyBlock.BLOCK, new BlockPos(MathHelper.floor(posX), MathHelper.floor(posY), MathHelper.floor(posZ)));
 	}
 
 	@Override
 	public void setDead() {
 		super.setDead();
-		if (worldObj.isRemote)
+		if (getEntityWorld().isRemote)
 			switchOff();
 	}
 
@@ -158,15 +171,15 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player) {
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is.getItem() == ModItems.wandOfAnimation) {
+		if (!getEntityWorld().isRemote && is != null && is.getItem() == ModItems.wandOfAnimation) {
 			setDead();
-			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), blockID, blockMeta, 3);
-			worldObj.playSoundEffect(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), "erebus:altaroffering", 0.2F, 1.0F);
+			getEntityWorld().setBlockState(getPosition(), blockID.getStateFromMeta(blockMeta), 3);
+			getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.ALTAR_OFFERING, SoundCategory.NEUTRAL, 0.2F, 1.0F);
 			return true;
-		} else if (blockID == ModBlocks.petrifiedCraftingTable && is == null) {
-			player.openGui(Erebus.instance, CommonProxy.GuiID.PETRIFIED_CRAFT.ordinal(), player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+		} else if (blockID == ModBlocks.PETRIFIED_CRAFTING_TABLE && is == null) {
+			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.PETRIFIED_CRAFT.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
 			return true;
 		} else
 			return false;
@@ -190,39 +203,40 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	}
 
 	public void setCanBeTempted() {
-		if (blockID == ModBlocks.petrifiedCraftingTable)
+		if (blockID == ModBlocks.PETRIFIED_CRAFTING_TABLE)
 			tasks.addTask(1, new EntityAIBlockFollowOwner(this, 1.0D, 10.0F, 2.0F));
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound data) {
-		super.writeEntityToNBT(data);
-		data.setInteger("blockID", Block.getIdFromBlock(blockID));
-		data.setInteger("blockMeta", blockMeta);
-		if (getOwnerName() == null)
-			data.setString("OwnerUUID", "");
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("blockID", Block.getIdFromBlock(blockID));
+		nbt.setInteger("blockMeta", blockMeta);
+		if (this.getOwnerId() == null)
+			nbt.setString("OwnerUUID", "");
 		else
-			data.setString("OwnerUUID", getOwnerName());
+			nbt.setString("OwnerUUID", this.getOwnerId().toString());
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound data) {
-		super.readEntityFromNBT(data);
-		blockID = Block.getBlockById(data.getInteger("blockID"));
-		blockMeta = data.getInteger("blockMeta");
-		setCanBeTempted();
-
-		String s = "";
-
-		if (data.hasKey("OwnerUUID", 8))
-			s = data.getString("OwnerUUID");
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		blockID = Block.getBlockById(nbt.getInteger("blockID"));
+		blockMeta = nbt.getInteger("blockMeta");
+		String s;
+		if (nbt.hasKey("OwnerUUID", 8))
+			s = nbt.getString("OwnerUUID");
 		else {
-			String s1 = data.getString("Owner");
-			s = PreYggdrasilConverter.func_152719_a(s1);
+			String s1 = nbt.getString("Owner");
+			s = PreYggdrasilConverter.convertMobOwnerIfNeeded(this.getServer(), s1);
 		}
 
-		if (s.length() > 0)
-			setOwnerName(s);
+		if (!s.isEmpty()) {
+			try {
+				this.setOwnerId(UUID.fromString(s));
+			} catch (Throwable e) {
+			}
+		}
 	}
 
 	@Override
@@ -238,21 +252,27 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 		setCanBeTempted();
 	}
 
-	public String getOwnerName() {
-		return dataWatcher.getWatchableObjectString(18);
+	@Nullable
+	public UUID getOwnerId() {
+		return (UUID) ((Optional) this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
 	}
 
-	public void setOwnerName(String name) {
-		dataWatcher.updateObject(18, name);
+	public void setOwnerId(@Nullable UUID uuid) {
+		this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(uuid));
 	}
 
+	@Nullable
 	public EntityLivingBase getOwner() {
 		try {
-			UUID uuid = UUID.fromString(getOwnerName());
-			return uuid == null ? null : worldObj.func_152378_a(uuid);
-		} catch (IllegalArgumentException illegalargumentexception) {
+			UUID uuid = this.getOwnerId();
+			return uuid == null ? null : this.getEntityWorld().getPlayerEntityByUUID(uuid);
+		} catch (IllegalArgumentException e) {
 			return null;
 		}
+	}
+
+	public boolean isOwner(EntityLivingBase entityIn) {
+		return entityIn == this.getOwner();
 	}
 
 	public boolean belongsTo(EntityLivingBase entity) {

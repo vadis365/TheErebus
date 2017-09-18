@@ -6,6 +6,7 @@ import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
 import erebus.network.client.PacketParticle;
+import erebus.network.server.ColossalCratePage;
 import erebus.proxy.CommonProxy;
 import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
@@ -56,13 +57,15 @@ public class Erebus {
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
 		ConfigHandler.INSTANCE.initOreConfigs();
-		
-		NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
-		NETWORK_WRAPPER.registerMessage(PacketParticle.class, PacketParticle.class, 1, Side.CLIENT);
 
 		PROXY.registerTileEntities();
 		PROXY.registerItemAndBlockRenderers();
 		PROXY.registerEnitityRenderers();
+
+		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, PROXY);
+		NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
+		NETWORK_WRAPPER.registerMessage(PacketParticle.class, PacketParticle.class, 0, Side.CLIENT);
+		NETWORK_WRAPPER.registerMessage(ColossalCratePage.class, ColossalCratePage.class, 1, Side.SERVER);
 	}
 
 	@EventHandler
