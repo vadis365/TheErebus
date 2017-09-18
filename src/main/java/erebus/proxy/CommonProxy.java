@@ -177,7 +177,6 @@ public class CommonProxy implements IGuiHandler {
 				IInventory inventory = BlockPetrifiedChest.getInventory(world, pos);
 				return new ContainerPetrifiedWoodChest(player.inventory, inventory);
 			case PETRIFIED_CRAFT:
-				System.out.println("Server Container called here");
 				return new ContainerPetrifiedCraftingTable(player.inventory, world, pos);
 			case SILO_INVENTORY:
 				return new ContainerSilo(player.inventory, (TileEntitySiloTank) tile);

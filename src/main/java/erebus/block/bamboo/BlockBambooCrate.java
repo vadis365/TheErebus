@@ -1,17 +1,13 @@
 package erebus.block.bamboo;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import erebus.Erebus;
 import erebus.ModBlocks;
-import erebus.ModTabs;
 import erebus.ModBlocks.IHasCustomItem;
-import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModTabs;
 import erebus.api.IErebusEnum;
 import erebus.blocks.EnumWood;
-import erebus.blocks.BlockGiantFlower.EnumType;
 import erebus.core.helper.Utils;
 import erebus.items.block.ItemBlockEnum;
 import erebus.proxy.CommonProxy;
@@ -26,7 +22,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -113,28 +108,24 @@ public class BlockBambooCrate extends BlockContainer implements IHasCustomItem {
 			if (isCrate(world, pos.up()) && isCrate(world, pos.add(1, 1, 0)) && isCrate(world, pos.add(1, 1, 1)) && isCrate(world, pos.add(0, 1, 1)))
 				if (isCrate(world, pos.add(1, 0, 0)) && isCrate(world, pos.add(1, 0, 1)) && isCrate(world, pos.add(0, 0, 1))) {
 					world.setBlockState(pos, this.getDefaultState().withProperty(CRATE_TYPE, EnumCrateType.BTL), 3); // BTL
-					System.out.println("Meta: " + world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)) + "Block:"+ world.getBlockState(pos).getBlock() + "Pos: "+ pos);
 					return;
 				}
 
 			if (isCrate(world, pos.up()) && isCrate(world, pos.add(- 1, 1, 0)) && isCrate(world, pos.add(- 1, 1, 1)) && isCrate(world, pos.add(0, 1, 1)))
 				if (isCrate(world, pos.add(- 1, 0, 0)) && isCrate(world, pos.add(- 1, 0, 1)) && isCrate(world, pos.add(0, 0, 1))) {
 					world.setBlockState(pos, this.getDefaultState().withProperty(CRATE_TYPE, EnumCrateType.BTR), 3); // BTR
-					System.out.println("Meta: " + world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)) + "Block:"+ world.getBlockState(pos).getBlock() + "Pos: "+ pos);
 					return;
 				}
 
 			if (isCrate(world, pos.up()) && isCrate(world, pos.add(1, 1, 0)) && isCrate(world, pos.add(1, 1, - 1)) && isCrate(world, pos.add(0, 1, - 1)))
 				if (isCrate(world, pos.add(1, 0, 0)) && isCrate(world, pos.add(1, 0, - 1)) && isCrate(world, pos.add(0, 0, - 1))) {
 					world.setBlockState(pos, this.getDefaultState().withProperty(CRATE_TYPE, EnumCrateType.BBL), 3); // BBL
-					System.out.println("Meta: " + world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)) + "Block:"+ world.getBlockState(pos).getBlock() + "Pos: "+ pos);
 					return;
 				}
 
 			if (isCrate(world, pos.up()) && isCrate(world, pos.add(- 1, 1, 0)) && isCrate(world, pos.add(- 1, 1, - 1)) && isCrate(world, pos.add(0, 1, - 1)))
 				if (isCrate(world, pos.add(- 1, 0, 0)) && isCrate(world, pos.add(- 1, 0, - 1)) && isCrate(world, pos.add(0, 0, - 1))) {
 					world.setBlockState(pos, this.getDefaultState().withProperty(CRATE_TYPE, EnumCrateType.BBR), 3); // BBR
-					System.out.println("Meta: " + world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)) + "Block:"+ world.getBlockState(pos).getBlock() + "Pos: "+ pos);
 					return;
 				}
 
@@ -244,7 +235,7 @@ public class BlockBambooCrate extends BlockContainer implements IHasCustomItem {
 							world.setBlockState(pos.add(i, k, j), this.getStateFromMeta(0), 3);
 					}
 	}
-	
+
 	@Override
 	public ItemBlock getItemBlock() {
 		return ItemBlockEnum.create(this, EnumCrateType.class);

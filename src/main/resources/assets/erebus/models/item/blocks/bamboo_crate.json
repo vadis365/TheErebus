@@ -1,5 +1,5 @@
 {
-    "parent": "erebus:block/bamboo_crate",
+    "parent": "erebus:block/bamboo_crate_default",
      "display": {
      
       "thirdperson_righthand": {

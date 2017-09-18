@@ -1,13 +1,13 @@
 {
     "variants": {
         "crate_type=default": { "model": "erebus:bamboo_crate_default" },
-        "crate_type=btl": { "model": "erebus:bamboo_crate_corner" },
-        "crate_type=btr": { "model": "erebus:bamboo_crate_corner", "y": 90 },
-        "crate_type=bbl": { "model": "erebus:bamboo_crate_corner", "y": 270 },
-        "crate_type=bbr": { "model": "erebus:bamboo_crate_corner", "y": 180},
-        "crate_type=ttl": { "model": "erebus:bamboo_crate_tnw"},
-        "crate_type=ttr": { "model": "erebus:bamboo_crate_tne"},
-        "crate_type=tbl": { "model": "erebus:bamboo_crate_tsw"},
-        "crate_type=tbr": { "model": "erebus:bamboo_crate_tse"}
+        "crate_type=btl": { "model": "erebus:bamboo_crate_bnw" },
+        "crate_type=btr": { "model": "erebus:bamboo_crate_bne" },
+        "crate_type=bbl": { "model": "erebus:bamboo_crate_bsw" },
+        "crate_type=bbr": { "model": "erebus:bamboo_crate_bse" },
+        "crate_type=ttl": { "model": "erebus:bamboo_crate_tnw" },
+        "crate_type=ttr": { "model": "erebus:bamboo_crate_tne" },
+        "crate_type=tbl": { "model": "erebus:bamboo_crate_tsw" },
+        "crate_type=tbr": { "model": "erebus:bamboo_crate_tse" }
     }
 }

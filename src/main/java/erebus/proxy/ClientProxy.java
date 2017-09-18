@@ -349,7 +349,6 @@ public class ClientProxy extends CommonProxy {
 				return new GuiErebusBasic(new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile), new ResourceLocation("erebus:textures/gui/container/honeyCombGui.png"), (TileEntityHoneyComb) tile, 168);
 			case PETRIFIED_CHEST:
 				IInventory inventory = BlockPetrifiedChest.getInventory(world, pos);
-				System.out.println("Client Gui called here");
 				return new GuiPetrifiedChest(player.inventory, inventory);
 			case PETRIFIED_CRAFT:
 				return new GuiPetrifiedWorkbench(player.inventory, world, pos);
