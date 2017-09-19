@@ -61,7 +61,7 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 			if (chest.getStackInSlot(i).isEmpty())
 				continue;
 			inventory.set(i, chest.getStackInSlot(i).copy());
-			chest.setInventorySlotContents(i, null);
+			chest.setInventorySlotContents(i, ItemStack.EMPTY);
 		}
 		return this;
 	}
@@ -71,7 +71,7 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 		super.onUpdate();
 		if (!getEntityWorld().isRemote && isDead)
 			for (ItemStack is : inventory)
-				if (is != null)
+				if (!is.isEmpty())
 					Utils.dropStack(getEntityWorld(), getPosition(), is);
 	}
 
@@ -96,7 +96,7 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 		if (getEntityWorld().isRemote)
 			return true;
 		ItemStack is = player.inventory.getCurrentItem();
-		if (is != null && is.getItem() == ModItems.wandOfAnimation) {
+		if (!is.isEmpty() && is.getItem() == ModItems.WAND_OF_ANIMATION) {
 			setDead();
 			getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.ALTAR_OFFERING, SoundCategory.NEUTRAL, 0.2F, 1.0F);
 			getEntityWorld().setBlockState(getPosition(), blockID.getStateFromMeta(blockMeta), 3);
@@ -104,7 +104,7 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 			for (int i = 0; i < chest.getSizeInventory(); i++)
 				chest.setInventorySlotContents(i, inventory.get(i));
 			return true;
-		} else if (is == null) {
+		} else if (is.isEmpty()) {
 			getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, 0.9F);
 			player.displayGUIChest(new TileEntityAnimatedChest(this));
 			return true;

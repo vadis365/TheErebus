@@ -53,7 +53,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 			if (chest.getStackInSlot(i).isEmpty())
 				continue;
 			inventory.set(i, chest.getStackInSlot(i).copy());
-			chest.setInventorySlotContents(i, null);
+			chest.setInventorySlotContents(i, ItemStack.EMPTY);
 		}
 		return this;
 	}
@@ -63,7 +63,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 		super.onUpdate();
 		if (!getEntityWorld().isRemote && isDead)
 			for (ItemStack is : inventory)
-				if (is != null)
+				if (!is.isEmpty())
 					Utils.dropStack(getEntityWorld(), getPosition(), is);
 	}
 
@@ -79,7 +79,7 @@ public class EntityAnimatedBambooCrate extends EntityAnimatedBlock implements II
 		if (getEntityWorld().isRemote)
 			return true;
 		ItemStack is = player.inventory.getCurrentItem();
-		if (is != null && is.getItem() == ModItems.wandOfAnimation) {
+		if (!is.isEmpty() && is.getItem() == ModItems.WAND_OF_ANIMATION) {
 			setDead();
 			getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.ALTAR_OFFERING, SoundCategory.NEUTRAL, 0.2F, 1.0F);
 			getEntityWorld().setBlockState(getPosition(), blockID.getStateFromMeta(blockMeta), 3);

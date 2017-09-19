@@ -1,10 +1,17 @@
 package erebus.entity.ai;
 
 import erebus.entity.EntityAnimatedBlock;
+import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.util.MathHelper;
+import net.minecraft.pathfinding.PathNavigateFlying;
+import net.minecraft.pathfinding.PathNavigateGround;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAIBlockFollowOwner extends EntityAIBase {
@@ -16,16 +23,20 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 	private int distanceCounter;
 	float maxDist;
 	float minDist;
-	private boolean avoidWater;
+	private float avoidWater;
 
 	public EntityAIBlockFollowOwner(EntityAnimatedBlock entity, double speed, float minDistance, float maxDistance) {
 		animatedBlock = entity;
-		theWorld = entity.worldObj;
+		theWorld = entity.getEntityWorld();
 		moveSpeed = speed;
 		petPathfinder = entity.getNavigator();
 		minDist = minDistance;
 		maxDist = maxDistance;
 		setMutexBits(3);
+
+        if (!(animatedBlock.getNavigator() instanceof PathNavigateGround) && !(animatedBlock.getNavigator() instanceof PathNavigateFlying)) {
+            throw new IllegalArgumentException("Unsupported mob type for FollowOwnerGoal");
+        }
 	}
 
 	@Override
@@ -42,22 +53,22 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 	}
 
 	@Override
-	public boolean continueExecuting() {
+    public boolean shouldContinueExecuting() {
 		return !petPathfinder.noPath() && animatedBlock.getDistanceSqToEntity(theOwner) > (double) (maxDist * maxDist);
 	}
 
 	@Override
 	public void startExecuting() {
 		distanceCounter = 0;
-		avoidWater = animatedBlock.getNavigator().getAvoidsWater();
-		animatedBlock.getNavigator().setAvoidsWater(false);
+		avoidWater = animatedBlock.getPathPriority(PathNodeType.WATER);
+		animatedBlock.setPathPriority(PathNodeType.WATER, 0.0F);
 	}
 
 	@Override
 	public void resetTask() {
 		theOwner = null;
 		petPathfinder.clearPathEntity();
-		animatedBlock.getNavigator().setAvoidsWater(avoidWater);
+		animatedBlock.setPathPriority(PathNodeType.WATER, avoidWater);
 	}
 
 	@Override
@@ -68,12 +79,12 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 			if (!petPathfinder.tryMoveToEntityLiving(theOwner, moveSpeed)) {
 				if (!animatedBlock.getLeashed()) {
 					if (animatedBlock.getDistanceSqToEntity(theOwner) >= 144.0D) {
-						int i = MathHelper.floor_double(theOwner.posX) - 2;
-						int j = MathHelper.floor_double(theOwner.posZ) - 2;
-						int k = MathHelper.floor_double(theOwner.boundingBox.minY);
+						int i = MathHelper.floor(theOwner.posX) - 2;
+						int j = MathHelper.floor(theOwner.posZ) - 2;
+						int k = MathHelper.floor(theOwner.getEntityBoundingBox().minY);
 						for (int l = 0; l <= 4; ++l) {
 							for (int i1 = 0; i1 <= 4; ++i1) {
-								if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && World.doesBlockHaveSolidTopSurface(theWorld, i + l, k - 1, j + i1) && !theWorld.getBlock(i + l, k, j + i1).isNormalCube() && !theWorld.getBlock(i + l, k + 1, j + i1).isNormalCube()) {
+								if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && isTeleportFriendlyBlock(i, k, j, l, i1)) {
 									animatedBlock.setLocationAndAngles((double) ((float) (i + l) + 0.5F), (double) k, (double) ((float) (j + i1) + 0.5F), animatedBlock.rotationYaw, animatedBlock.rotationPitch);
 									petPathfinder.clearPathEntity();
 									return;
@@ -85,4 +96,10 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 			}
 		}
 	}
+
+    protected boolean isTeleportFriendlyBlock(int x, int y, int z, int offSetX, int offSetZ) {
+        BlockPos blockpos = new BlockPos(x + offSetX, y - 1, z + offSetZ);
+        IBlockState iblockstate = theWorld.getBlockState(blockpos);
+        return iblockstate.getBlockFaceShape(theWorld, blockpos, EnumFacing.DOWN) == BlockFaceShape.SOLID && iblockstate.canEntitySpawn(animatedBlock) && theWorld.isAirBlock(blockpos.up()) && theWorld.isAirBlock(blockpos.up(2));
+    }
 }

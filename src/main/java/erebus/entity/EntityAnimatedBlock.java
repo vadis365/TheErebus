@@ -17,6 +17,7 @@ import erebus.proxy.CommonProxy;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -46,7 +47,7 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditionalSpawnData {
+public class EntityAnimatedBlock extends EntityCreature implements IEntityAdditionalSpawnData {
 	protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(EntityAnimatedBlock.class, DataSerializers.OPTIONAL_UNIQUE_ID);
 
 	public Block blockID;
@@ -93,7 +94,7 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 10.0D : 10D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
 
@@ -121,17 +122,32 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	public void onUpdate() {
 		super.onUpdate();
 		if (!getEntityWorld().isRemote && isDead)
-			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(blockID, 1, blockMeta));
+			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(blockID, 1, blockID.damageDropped(blockID.getStateFromMeta(blockMeta))));
 	}
 
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (getEntityWorld().isRemote)
+		if (getEntityWorld().isRemote && isGlowingBlock(blockID, blockMeta))
 			if (getEntityWorld().getSunBrightness(1.0F) < 0.5F)
 				lightUp(getEntityWorld(), getPosition());
 			else
 				switchOff();
+	}
+
+	private boolean isGlowingBlock(Block blockID, int blockMeta) {
+		if(blockID == Blocks.LIT_PUMPKIN)
+			return true;
+		if(blockID == Blocks.LIT_REDSTONE_LAMP)
+			return true;
+		if(blockID == Blocks.GLOWSTONE)
+			return true;
+		if(blockID == ModBlocks.RED_GEM && (blockMeta == 0 || blockMeta == 2)) //yuck - this crap all needs to be blockstate properties
+			return true;
+		//if(state == ModBlocks.RED_GEM.getDefaultState().withProperty(BlockRedGem.TYPE, BlockRedGem.EnumType.RED_LAMP_ON))
+		//	return true;
+		
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -157,7 +173,7 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	@Override
 	public void setDead() {
 		super.setDead();
-		if (getEntityWorld().isRemote)
+		if (getEntityWorld().isRemote && isGlowingBlock(blockID, blockMeta))
 			switchOff();
 	}
 
@@ -173,22 +189,16 @@ public class EntityAnimatedBlock extends EntityMobBlock implements IEntityAdditi
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack is = player.inventory.getCurrentItem();
-		if (!getEntityWorld().isRemote && is != null && is.getItem() == ModItems.wandOfAnimation) {
+		if (!getEntityWorld().isRemote && !is.isEmpty() && is.getItem() == ModItems.WAND_OF_ANIMATION) {
 			setDead();
 			getEntityWorld().setBlockState(getPosition(), blockID.getStateFromMeta(blockMeta), 3);
 			getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.ALTAR_OFFERING, SoundCategory.NEUTRAL, 0.2F, 1.0F);
 			return true;
-		} else if (blockID == ModBlocks.PETRIFIED_CRAFTING_TABLE && is == null) {
+		} else if (blockID == ModBlocks.PETRIFIED_CRAFTING_TABLE && is.isEmpty()) {
 			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.PETRIFIED_CRAFT.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
 			return true;
 		} else
 			return false;
-	}
-
-	@Override
-	protected void attackEntity(Entity entity, float distance) {
-		if (distance > 0.0F && distance < 2.0F)
-			attackEntityAsMob(entity);
 	}
 
 	@Override

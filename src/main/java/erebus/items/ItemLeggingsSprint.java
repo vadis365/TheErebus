@@ -44,7 +44,7 @@ public class ItemLeggingsSprint extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
-		list.add(TextFormatting.GRAY + new TextComponentTranslation("tooltip.erebus.sprintleggingstier").getFormattedText() + " " + 1 + (!stack.hasTagCompound() ? 0 : stack.getTagCompound().getByte("upgradeTier")));
+		list.add(TextFormatting.GRAY + new TextComponentTranslation("tooltip.erebus.sprintleggingstier").getFormattedText() + " " + (1 + (!stack.hasTagCompound() ? 0 : stack.getTagCompound().getByte("upgradeTier"))));
 	}
 
 	@Override

@@ -17,6 +17,8 @@ import erebus.client.gui.GuiPetrifiedChest;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.client.gui.GuiSmoothieMaker;
 import erebus.client.gui.GuiUmberFurnace;
+import erebus.client.render.entity.RenderAnimatedBlock;
+import erebus.client.render.entity.RenderAnimatedChest;
 import erebus.client.render.entity.RenderAntlion;
 import erebus.client.render.entity.RenderAntlionMiniBoss;
 import erebus.client.render.entity.RenderBedBug;
@@ -64,6 +66,8 @@ import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
+import erebus.entity.EntityAnimatedBlock;
+import erebus.entity.EntityAnimatedChest;
 import erebus.entity.EntityAntlion;
 import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBedBug;
@@ -216,6 +220,10 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityScorpion.class, RenderScorpion::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGlowWorm.class, RenderGlowWorm::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLavaWebSpider.class, RenderLavaWebSpider::new);
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedBlock.class, RenderAnimatedBlock::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedChest.class, RenderAnimatedChest::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedBambooCrate.class, RenderAnimatedBlock::new);
 		
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 	

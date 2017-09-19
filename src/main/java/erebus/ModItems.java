@@ -30,6 +30,7 @@ import erebus.items.ItemMaterials;
 import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
 import erebus.items.ItemSpiderTShirt;
+import erebus.items.ItemWandOfAnimation;
 import erebus.items.ItemWoodlouseBall;
 import erebus.items.ShieldTypeBasic;
 import erebus.lib.Reference;
@@ -117,6 +118,7 @@ public class ModItems {
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();
 	public static final Item ANT_TAMING_AMULET = new ItemAmuletAntTaming();
 	public static final Item WOODLOUSE_BALL = new ItemWoodlouseBall();
+	public static final Item WAND_OF_ANIMATION = new ItemWandOfAnimation();
 
 	public static void init() {
 		try {

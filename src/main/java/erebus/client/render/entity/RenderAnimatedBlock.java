@@ -24,12 +24,11 @@ public class RenderAnimatedBlock extends RenderLiving<EntityAnimatedBlock> {
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 		GlStateManager.enableBlend();
 		GlStateManager.translate((float) x, (float) y, (float) z);
-		GlStateManager.translate(0.0F, 0.75F, 0.0F);
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(-animatedblock.renderYawOffset, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(-0.5F, 0.25F, 0.5F);
 		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 		Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(animatedblock.blockID.getStateFromMeta(animatedblock.blockMeta), 1.0F);
-		GlStateManager.popMatrix();
 		GlStateManager.popMatrix();
 		GlStateManager.disableBlend();
 		GlStateManager.popMatrix();
