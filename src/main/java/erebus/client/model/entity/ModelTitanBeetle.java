@@ -1,14 +1,13 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityTitanBeetle;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelTitanBeetle extends ModelBase {
@@ -266,13 +265,13 @@ public class ModelTitanBeetle extends ModelBase {
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
 		if (beetle.getTameState() >= 3) {
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0F, 0.27F, 0.15F);
-			GL11.glScalef(0.67F, 0.67F, 0.67F);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0F, 0.27F, 0.15F);
+			GlStateManager.scale(0.67F, 0.67F, 0.67F);
 			Body.render(unitPixel);
 			Lid.render(unitPixel);
 			Lock.render(unitPixel);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 	}
 

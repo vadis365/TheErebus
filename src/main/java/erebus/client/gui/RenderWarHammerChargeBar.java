@@ -1,18 +1,17 @@
 package erebus.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderWarHammerChargeBar extends Gui {
@@ -20,13 +19,13 @@ public class RenderWarHammerChargeBar extends Gui {
 	@SubscribeEvent
 	public void onRenderHUD(RenderGameOverlayEvent.Post event) {
 		Minecraft mc = Minecraft.getMinecraft();
-		if (event.type.equals(RenderGameOverlayEvent.ElementType.HOTBAR)) {
-			EntityClientPlayerMP player = mc.thePlayer;
-			if (player != null && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.warHammer) {
-				ItemStack stack = player.getCurrentEquippedItem();
-				GL11.glColor4f(1F, 1F, 1F, 1F);
-				mc.renderEngine.bindTexture(new ResourceLocation("erebus:textures/gui/overlay/rhinoChargeBar.png"));
-				ScaledResolution res = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+		if (event.getType().equals(RenderGameOverlayEvent.ElementType.HOTBAR)) {
+			EntityPlayerSP player = mc.player;
+			if (player != null && !player.inventory.getCurrentItem().isEmpty() && player.inventory.getCurrentItem().getItem() == ModItems.WAR_HAMMER) {
+				ItemStack stack = player.inventory.getCurrentItem();
+				GlStateManager.color(1F, 1F, 1F, 1F);
+				mc.renderEngine.bindTexture(new ResourceLocation("erebus:textures/gui/overlay/rhino_charge_bar.png"));
+				ScaledResolution res = new ScaledResolution(mc);
 
 				if (stack.getTagCompound().hasKey("charge"))
 					renderChargeBar(stack.getTagCompound().getInteger("charge") * 2, res.getScaledWidth() / 2 + 84, res.getScaledHeight() - 30);

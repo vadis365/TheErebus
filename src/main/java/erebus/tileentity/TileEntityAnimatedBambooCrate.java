@@ -5,7 +5,6 @@ import erebus.entity.EntityAnimatedBambooCrate;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.StatCollector;
 
 public class TileEntityAnimatedBambooCrate extends TileEntityBasicInventory {
 
@@ -19,7 +18,7 @@ public class TileEntityAnimatedBambooCrate extends TileEntityBasicInventory {
 
 	@Override
 	public Block getBlockType() {
-		return ModBlocks.bambooCrate;
+		return ModBlocks.BAMBOO_CRATE;
 	}
 
 	@Override

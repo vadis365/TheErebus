@@ -1,13 +1,12 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityMosquito;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelMosquito extends ModelBase {
@@ -187,12 +186,12 @@ public class ModelMosquito extends ModelBase {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-		int b = entity.ridingEntity != null ? 1 : 0;
+		int b = entity.getRidingEntity() != null ? 1 : 0;
 
 		EntityMosquito mosquito = (EntityMosquito) entity;
 		float blood = mosquito.getBloodConsumed() / 10F;
 
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		Tail[b].render(f5);
 		Head1[b].render(f5);
 		LegLeft1[b].render(f5);
@@ -206,24 +205,28 @@ public class ModelMosquito extends ModelBase {
 		ArmRight1.render(f5);
 		ArmRight2.render(f5);
 
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.depthMask(!entity.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, 0.75F);
 		WingLeft.render(f5);
 		WingRight.render(f5);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
+		GlStateManager.depthMask(true);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
 
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glScalef(1.0F + blood, 1.0F, 1.0F);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.scale(1.0F + blood, 1.0F, 1.0F);
 		Body.render(f5);
-		GL11.glScalef(1.0F - blood, 1.0F, 1.0F);
-		GL11.glScalef(mosquito.suckFloat, 1.0F, 1.0F);
+		GlStateManager.scale(1.0F - blood, 1.0F, 1.0F);
+		GlStateManager.scale(mosquito.suckFloat, 1.0F, 1.0F);
 		Head2[b].render(f5);
 		Head3[b].render(f5);
 		Head4[b].render(f5);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

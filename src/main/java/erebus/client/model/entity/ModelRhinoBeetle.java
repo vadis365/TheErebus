@@ -1,13 +1,14 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.entity.EntityRhinoBeetle;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+@SideOnly(Side.CLIENT)
 public class ModelRhinoBeetle extends ModelBase {
 	ModelRenderer Ab;
 	ModelRenderer AbSide;
@@ -230,8 +231,8 @@ public class ModelRhinoBeetle extends ModelBase {
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0F, -0.0625F, -0.25F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, -0.0625F, -0.25F);
 		Ab.render(unitPixel);
 		AbSide.render(unitPixel);
 		Ab.render(unitPixel);
@@ -251,17 +252,17 @@ public class ModelRhinoBeetle extends ModelBase {
 		NoseB.render(unitPixel);
 		NoseC.render(unitPixel);
 		Neck.render(unitPixel);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0F, 0.125F, -0.375F);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, 0.125F, -0.375F);
 		LBL1.render(unitPixel);
 		LFL1.render(unitPixel);
 		LML1.render(unitPixel);
-		GL11.glTranslatef(0.125F, 0F, 0F);
+		GlStateManager.translate(0.125F, 0F, 0F);
 		RFL1.render(unitPixel);
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

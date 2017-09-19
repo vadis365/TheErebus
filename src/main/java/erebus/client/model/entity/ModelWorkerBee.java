@@ -1,14 +1,13 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.entity.EntityWorkerBee;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelWorkerBee extends ModelBase {
@@ -293,8 +292,8 @@ public class ModelWorkerBee extends ModelBase {
 	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		GL11.glPushMatrix();
-		GL11.glTranslated(0F, 0F, -0.5F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0F, 0F, -0.5F);
 		Thx.render(unitPixel);
 		ThxS.render(unitPixel);
 		Ab.render(unitPixel);
@@ -311,13 +310,20 @@ public class ModelWorkerBee extends ModelBase {
 		RBL1.render(unitPixel);
 		Sting.render(unitPixel);
 		ThxTop.render(unitPixel);
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.depthMask(!entity.isInvisible());
+		GlStateManager.color(1F, 1F, 1F, 0.75F);
+		GlStateManager.enableCull();
 		ThxRW.render(unitPixel);
 		ThxLW.render(unitPixel);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
-		GL11.glPopMatrix();
+		GlStateManager.disableCull();
+		GlStateManager.depthMask(true);
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

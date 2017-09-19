@@ -4,13 +4,13 @@ import java.awt.Rectangle;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.inventory.ContainerSmoothieMaker;
 import erebus.tileentity.TileEntitySmoothieMaker;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiSmoothieMaker extends GuiErebus {
