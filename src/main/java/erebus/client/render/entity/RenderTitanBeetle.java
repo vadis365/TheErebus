@@ -1,40 +1,36 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelTitanBeetle;
 import erebus.entity.EntityTitanBeetle;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderTitanBeetle extends RenderLiving {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/titanBeetle.png"), new ResourceLocation("erebus:textures/entity/titanBeetleKit.png"), new ResourceLocation("erebus:textures/entity/titanBeetleChested.png"), new ResourceLocation("erebus:textures/entity/titanBeetleEnderChested.png") };
+public class RenderTitanBeetle extends RenderLiving <EntityTitanBeetle>{
+	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/titan_beetle.png"), new ResourceLocation("erebus:textures/entity/titan_beetle_kit.png"), new ResourceLocation("erebus:textures/entity/titan_beetle_chested.png"), new ResourceLocation("erebus:textures/entity/titan_beetle_ender_chested.png") };
 
-	public RenderTitanBeetle() {
-		super(new ModelTitanBeetle(), 1.5F);
+	public RenderTitanBeetle(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelTitanBeetle(), 1.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
-		float f1 = 1.5F;
-		GL11.glScalef(f1, f1, f1);
+	protected void preRenderCallback(EntityTitanBeetle beetle, float partialTickTime ) {
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityTitanBeetle beetle = (EntityTitanBeetle) entity;
+	protected ResourceLocation getEntityTexture(EntityTitanBeetle beetle) {
 		if (beetle.getTameState() < 2)
-			return textures[0];
+			return TEXTURES[0];
 		if (beetle.getTameState() == 2)
-			return textures[1];
+			return TEXTURES[1];
 		if (beetle.getTameState() == 3)
-			return textures[2];
+			return TEXTURES[2];
 		else
-			return textures[3];
+			return TEXTURES[3];
 	}
 }

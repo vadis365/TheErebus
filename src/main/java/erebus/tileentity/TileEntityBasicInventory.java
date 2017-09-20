@@ -10,6 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public abstract class TileEntityBasicInventory extends TileEntity implements ISidedInventory {
 
@@ -129,13 +131,13 @@ public abstract class TileEntityBasicInventory extends TileEntity implements ISi
 
 	@Override
 	public boolean hasCustomName() {
-		return false;
+		return true;
 	}
 
 	@Override
-	public ITextComponent getDisplayName() {
-		return null;
-	}
+    public ITextComponent getDisplayName() {
+        return (ITextComponent)(this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName(), new Object[0]));
+    }
 
 	public boolean canInsertItem() {
 		return false;

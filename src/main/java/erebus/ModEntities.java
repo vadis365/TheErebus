@@ -43,6 +43,7 @@ import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
@@ -70,7 +71,6 @@ public class ModEntities {
 		registerEntity(23, EntityWorkerBee.class, "worker_bee", 0xFFA200, 0x000000);
 
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
-		registerEntity(27, EntityTitanBeetle.class, "titan_beetle", 0xF09071, 0x000000);
 
 		registerEntity(29, EntityCrushling.class, "crushling", 0xFFFFFF, 0xFF0000);
 
@@ -133,6 +133,7 @@ public class ModEntities {
 		registerEntity(24, EntityVelvetWorm.class, "velvet_worm", 0x3449EB, 0xF22C5A);
 		registerEntity(25, EntityDragonfly.class, "dragon_fly", 0x2CF2C4, 0x2CF2C4);
 
+		registerEntity(27, EntityTitanBeetle.class, "titan_beetle", 0xF09071, 0x000000);
 		registerEntity(28, EntityBotFlyLarva.class, "bot_fly_larva", -6750208, -13165534);
 
 		registerEntity(30, EntityCropWeevil.class, "crop_weevil", 0x000000, 0xFFA200);

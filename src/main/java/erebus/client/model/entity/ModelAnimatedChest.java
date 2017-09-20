@@ -4,6 +4,7 @@ import erebus.entity.EntityAnimatedChest;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -191,6 +192,16 @@ public class ModelAnimatedChest extends ModelBase {
 	}
 
 	@Override
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
+		EntityAnimatedChest chest = (EntityAnimatedChest) entity;
+		float smoothedTicks = chest.getPrevOpenTicks() + (chest.getOpenTicks() - chest.getPrevOpenTicks()) * partialTicks;
+		smoothedTicks = 1.0F - smoothedTicks;
+		smoothedTicks = 1.0F - smoothedTicks * smoothedTicks * smoothedTicks;
+		Lid.rotateAngleX = -smoothedTicks * ((float)Math.PI / 2F);
+		Lock.rotateAngleX = -smoothedTicks * ((float)Math.PI / 2F);
+	}
+
+	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		EntityAnimatedChest chest = (EntityAnimatedChest) entity;
 		LBL1.rotateAngleX = MathHelper.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * prevLimbSwing + 0.25F;
@@ -217,9 +228,5 @@ public class ModelAnimatedChest extends ModelBase {
 		RFL2.rotateAngleX = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing - 0.25F;
 		RFL3.rotateAngleX = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing - 0.3F;
 		RFL4.rotateAngleX = MathHelper.cos(limbSwing * 2.0F) * 0.7F * prevLimbSwing - 0.334F;
-
-		Lid.rotateAngleX = chest.getOpenTicks();
-		Lock.rotateAngleX = chest.getOpenTicks();
-
 	}
 }

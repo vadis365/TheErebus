@@ -22,9 +22,9 @@ import net.minecraft.world.World;
 
 public class EntityAnimatedChest extends EntityAnimatedBlock {
 	private static final DataParameter<Float> OPENTICKS = EntityDataManager.<Float>createKey(EntityAnimatedChest.class, DataSerializers.FLOAT);
+	private static final DataParameter<Float> PREV_OPENTICKS = EntityDataManager.<Float>createKey(EntityAnimatedChest.class, DataSerializers.FLOAT);
 	public NonNullList<ItemStack> inventory;
 	boolean isOpen;
-	boolean canClose;
 
 	public EntityAnimatedChest(World world) {
 		super(world);
@@ -36,6 +36,7 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 	protected void entityInit() {
 		super.entityInit();
 		dataManager.register(OPENTICKS, 0.0F);
+		dataManager.register(PREV_OPENTICKS, 0.0F);
 	}
 
 	@Override
@@ -78,16 +79,18 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (isOpen)
-			if (getOpenTicks() >= -1.570F) {
-				setOpenTicks(getOpenTicks() - 0.19625F);
-			}
-		if (!isOpen) {
-			if (getOpenTicks() < 0F) {
-				setOpenTicks(getOpenTicks() + 0.19625F);
-			}
-			if (getOpenTicks() == -1.5699999F)
-				getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, 0.9F);
+		if (!getEntityWorld().isRemote) {
+			setPrevOpenTicks(getOpenTicks());
+			if (isOpen)
+				if (getOpenTicks() < 1F)
+					setOpenTicks(getOpenTicks() + 0.1F);
+			if (!isOpen)
+				if (getOpenTicks() > 0F)
+					setOpenTicks(getOpenTicks() - 0.1F);
+			if (getOpenTicks() > 1)
+				setOpenTicks(1F);
+			if (getOpenTicks() < 0)
+				setOpenTicks(0F);
 		}
 	}
 
@@ -105,7 +108,6 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 				chest.setInventorySlotContents(i, inventory.get(i));
 			return true;
 		} else if (is.isEmpty()) {
-			getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, 0.9F);
 			player.displayGUIChest(new TileEntityAnimatedChest(this));
 			return true;
 		} else
@@ -113,7 +115,16 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 	}
 
 	public void setOpen(boolean open) {
+		if (!getEntityWorld().isRemote)
+			if (open)
+				getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, 0.9F);
+			else
+				getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, 0.9F);
 		isOpen = open;
+	}
+
+	public boolean getOpen() {
+		return isOpen;
 	}
 
 	public void setOpenTicks(float ticks) {
@@ -122,6 +133,14 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 
 	public float getOpenTicks() {
 		return dataManager.get(OPENTICKS);
+	}
+
+	public void setPrevOpenTicks(float ticks) {
+		dataManager.set(PREV_OPENTICKS, ticks);
+	}
+
+	public float getPrevOpenTicks() {
+		return dataManager.get(PREV_OPENTICKS);
 	}
 
 	@Override
@@ -135,7 +154,7 @@ public class EntityAnimatedChest extends EntityAnimatedBlock {
 		super.writeToNBT(compound);
 		return this.saveToNbt(compound);
 	}
-	
+
 	public void loadFromNbt(NBTTagCompound compound) {
 		inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		if (compound.hasKey("Items", 9))

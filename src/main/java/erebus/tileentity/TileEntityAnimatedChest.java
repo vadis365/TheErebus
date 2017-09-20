@@ -24,12 +24,14 @@ public class TileEntityAnimatedChest extends TileEntityBasicInventory {
 
 	@Override
 	public void openInventory(EntityPlayer playerIn) {
-		chester.setOpen(true);
+		if(!chester.getOpen())
+			chester.setOpen(true);
 	}
 
 	@Override
 	public void closeInventory(EntityPlayer playerIn) {
-		chester.setOpen(false);
+		if(chester.getOpen())
+			chester.setOpen(false);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -280,6 +281,17 @@ public class ModelTitanBeetle extends ModelBase {
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
+	
+	@Override
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
+		EntityTitanBeetle beetle = (EntityTitanBeetle) entity;
+		float smoothedTicks = beetle.getPrevOpenTicks() + (beetle.getOpenTicks() - beetle.getPrevOpenTicks()) * partialTicks;
+		smoothedTicks = 1.0F - smoothedTicks;
+		smoothedTicks = 1.0F - smoothedTicks * smoothedTicks * smoothedTicks;
+		
+		Lid.rotateAngleX = 0.0872665F - (smoothedTicks * ((float)Math.PI / 2F));
+		Lock.rotateAngleX = 0.0872665F - (smoothedTicks * ((float)Math.PI / 2F));
+	}
 
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
@@ -294,7 +306,5 @@ public class ModelTitanBeetle extends ModelBase {
 		RBL1.rotateAngleX = legMovement + correction;
 		RML1.rotateAngleX = -legMovement;
 		RFL1.rotateAngleX = legMovement - correction;
-		Lid.rotateAngleX = beetle.getDataWatcher().getWatchableObjectFloat(21) + 0.087F;
-		Lock.rotateAngleX = beetle.getDataWatcher().getWatchableObjectFloat(21) + 0.087F;
 	}
 }

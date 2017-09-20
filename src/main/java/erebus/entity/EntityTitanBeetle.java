@@ -2,6 +2,18 @@ package erebus.entity;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
+import erebus.Erebus;
+import erebus.ModItems;
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIErebusAttackMelee;
+import erebus.items.ItemErebusFood;
+import erebus.items.ItemMaterials;
+import erebus.tileentity.TileEntityTitanChest;
+import erebus.tileentity.TileEntityTitanEnderChest;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -19,44 +31,58 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModItems;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAIErebusAttackMelee;
-import erebus.item.ItemErebusFood;
-import erebus.item.ItemMaterials;
-import erebus.tileentity.TileEntityTitanChest;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityTitanBeetle extends EntityTameable {
-
-	private final EntityAINearestAttackableTarget aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true);
+	private static final DataParameter<Byte> BEETLE_TYPE = EntityDataManager.<Byte>createKey(EntityTitanBeetle.class, DataSerializers.BYTE);
+	private static final DataParameter<Float> OPENTICKS = EntityDataManager.<Float>createKey(EntityTitanBeetle.class, DataSerializers.FLOAT);
+	private static final DataParameter<Float> PREV_OPENTICKS = EntityDataManager.<Float>createKey(EntityTitanBeetle.class, DataSerializers.FLOAT);
+	private EntityAINearestAttackableTarget aiNearestAttackableTarget;
 	boolean isOpen;
-	float openticks;
 	int shagCount;
-	public ItemStack[] inventory;
+	public NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(27, ItemStack.EMPTY);
 
 	public EntityTitanBeetle(World world) {
 		super(world);
-		inventory = new ItemStack[27];
 		stepHeight = 2.0F;
 		setSize(2.5F, 1.2F);
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataManager.register(OPENTICKS, 0.0F);
+		dataManager.register(PREV_OPENTICKS, 0.0F);
+		dataManager.register(BEETLE_TYPE, new Byte((byte) 0));
+	}
+
+	@Override
+	protected void initEntityAI() {
+		aiNearestAttackableTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, true));
 		tasks.addTask(2, new EntityAIMate(this, 0.5D));
-		tasks.addTask(3, new EntityAITempt(this, 0.5D, ModItems.turnip, false));
+		tasks.addTask(3, new EntityAITempt(this, 0.5D, ModItems.TURNIP, false));
 		tasks.addTask(5, new EntityAIWander(this, 0.5D));
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(7, new EntityAILookIdle(this));
@@ -64,48 +90,67 @@ public class EntityTitanBeetle extends EntityTameable {
 		targetTasks.addTask(1, aiNearestAttackableTarget);
 	}
 
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-		dataWatcher.addObject(21, 0.0F);
-		dataWatcher.addObject(31, new Byte((byte) 0));
-	}
-
 	public EntityTitanBeetle setContents(IInventory chest) {
 		if (chest == null)
 			return this;
 
-		inventory = new ItemStack[chest.getSizeInventory()];
+		inventory = NonNullList.<ItemStack>withSize(chest.getSizeInventory(), ItemStack.EMPTY);
 		for (int i = 0; i < chest.getSizeInventory(); i++) {
-			if (chest.getStackInSlot(i) == null)
+			if (chest.getStackInSlot(i).isEmpty())
 				continue;
-			inventory[i] = chest.getStackInSlot(i).copy();
-			chest.setInventorySlotContents(i, null);
+			inventory.set(i, chest.getStackInSlot(i).copy());
+			chest.setInventorySlotContents(i, ItemStack.EMPTY);
 		}
 		return this;
 	}
 
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+	public void setOpen(boolean open) {
+		if (!getEntityWorld().isRemote)
+			if (open)
+				if(getTameState() == 3)
+					getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, 0.9F);
+				else
+					getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_ENDERCHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+			else
+				if(getTameState() == 3)
+					getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, 0.9F);
+				else
+					getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.BLOCK_ENDERCHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+		isOpen = open;
 	}
 
-	public void setOpen(boolean open) {
-		isOpen = open;
+	public boolean getOpen() {
+		return isOpen;
+	}
+
+	public void setOpenTicks(float ticks) {
+		dataManager.set(OPENTICKS, ticks);
+	}
+
+	public float getOpenTicks() {
+		return dataManager.get(OPENTICKS);
+	}
+
+	public void setPrevOpenTicks(float ticks) {
+		dataManager.set(PREV_OPENTICKS, ticks);
+	}
+
+	public float getPrevOpenTicks() {
+		return dataManager.get(PREV_OPENTICKS);
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!worldObj.isRemote && isDead)
+		if (!getEntityWorld().isRemote && isDead)
 			for (ItemStack is : inventory)
-				if (is != null)
-					Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, is);
-		if (worldObj.isRemote && getTameState() == 4) {
+				if (!is.isEmpty())
+					Utils.dropStack(getEntityWorld(), getPosition(), is);
+		if (getEntityWorld().isRemote && getTameState() == 4) {
 			double a = Math.toRadians(renderYawOffset);
 			double offSetX = -Math.sin(a) * 1.2D;
 			double offSetZ = Math.cos(a) * 1.2D;
-			enderChestParticles(worldObj, posX - offSetX, posY + 1.2, posZ - offSetZ, rand);
+			enderChestParticles(getEntityWorld(), posX - offSetX, posY + 1.2, posZ - offSetZ, rand);
 		}
 		if (shagCount > 0)
 			shagCount--;
@@ -114,28 +159,28 @@ public class EntityTitanBeetle extends EntityTameable {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (isOpen)
-			if (openticks >= -1.570F) {
-				openticks = openticks - 0.19625F;
-				dataWatcher.updateObject(21, openticks);
-			}
-		if (!isOpen) {
-			if (openticks < 0F) {
-				openticks = openticks + 0.19625F;
-				dataWatcher.updateObject(21, openticks);
-			}
-			if (openticks == -1.5699999F)
-				worldObj.playSoundEffect(posX, posY + 0.5D, posZ, "random.chestclosed", 0.5F, 0.9F);
+		if (!getEntityWorld().isRemote) {
+			setPrevOpenTicks(getOpenTicks());
+			if (isOpen)
+				if (getOpenTicks() < 1F)
+					setOpenTicks(getOpenTicks() + 0.1F);
+			if (!isOpen)
+				if (getOpenTicks() > 0F)
+					setOpenTicks(getOpenTicks() - 0.1F);
+			if (getOpenTicks() > 1)
+				setOpenTicks(1F);
+			if (getOpenTicks() < 0)
+				setOpenTicks(0F);
 		}
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 60D : 60D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 60D : 60D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.75D);
 	}
 
 	@Override
@@ -144,30 +189,30 @@ public class EntityTitanBeetle extends EntityTameable {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "erebus:bombardierbeetlesound";
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.BOMBARDIER_BEETLE_SOUND;
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:bombardierbeetlehurt";
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.BOMBARDIER_BEETLE_HURT;
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.spider.step", 0.15F, 1.0F);
+	protected void playStepSound(BlockPos pos, Block blockIn) {
+		this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = getBrightness(1.0F);
+		float light = getBrightness();
 		if (light >= 0F)
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox) && worldObj.difficultySetting != EnumDifficulty.PEACEFUL;
+			return getEntityWorld().checkNoEntityCollision(getEntityBoundingBox()) && getEntityWorld().getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !getEntityWorld().containsAnyLiquid(getEntityBoundingBox()) && getEntityWorld().getDifficulty() != EnumDifficulty.PEACEFUL;
 		return super.getCanSpawnHere();
 	}
 
@@ -185,48 +230,48 @@ public class EntityTitanBeetle extends EntityTameable {
 	}
 
 	@Override
-	public boolean allowLeashing() {
-		return !canDespawn() && super.allowLeashing();
-	}
+    public boolean canBeLeashedTo(EntityPlayer player) {
+        return !canDespawn() && super.canBeLeashedTo(player);
+    }
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
 		if (getTameState() >= 2)
-			entityDropItem(ItemMaterials.DATA.RHINO_RIDING_KIT.makeStack(), 0.0F);
+			entityDropItem(ItemMaterials.EnumErebusMaterialsType.BEETLE_RIDING_KIT.createStack(), 0.0F);
 		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
 		for (int a = 0; a < var3; ++a)
-			entityDropItem(ItemMaterials.DATA.PLATE_EXO.makeStack(), 0.0F);
-
-		entityDropItem(new ItemStack(ModItems.food, 1 + rand.nextInt(1), isBurning() ? ItemErebusFood.FoodType.TITAN_CHOP_COOKED.ordinal() : ItemErebusFood.FoodType.TITAN_CHOP_RAW.ordinal()), 0.0F);
+			entityDropItem(ItemMaterials.EnumErebusMaterialsType.PLATE_EXO.createStack(), 0.0F);
+		entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1 + rand.nextInt(1), isBurning() ? ItemErebusFood.EnumFoodType.TITAN_CHOP_COOKED.ordinal() : ItemErebusFood.EnumFoodType.TITAN_CHOP_RAW.ordinal()), 0.0F);
 		dropChests();
 	}
 
 	public void dropChests() {
-		if (!worldObj.isRemote) {
+		if (!getEntityWorld().isRemote) {
 			if (getTameState() == 3)
-				dropItem(Item.getItemFromBlock(Blocks.chest), 1);
+				dropItem(Item.getItemFromBlock(Blocks.CHEST), 1);
 			if (getTameState() == 4)
-				dropItem(Item.getItemFromBlock(Blocks.ender_chest), 1);
+				dropItem(Item.getItemFromBlock(Blocks.ENDER_CHEST), 1);
 		}
 	}
 
 	public void openGUI(EntityPlayer player) {
-		if (!worldObj.isRemote && (riddenByEntity == null || riddenByEntity == player) && getTameState() != 0) {
+		if (!getEntityWorld().isRemote && !isBeingRidden() && getTameState() != 0) {
 			if (getTameState() == 3)
 				player.displayGUIChest(new TileEntityTitanChest(this));
 			if (getTameState() == 4) {
+				setOpen(true);
 				InventoryEnderChest inventoryenderchest = player.getInventoryEnderChest();
+                inventoryenderchest.setChestTileEntity(new TileEntityTitanEnderChest(this));
 				player.displayGUIChest(inventoryenderchest);
 			}
 		}
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player) {
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack is = player.inventory.getCurrentItem();
 		float healingBuff = 0.0F;
 		if (getTameState() == 3 && player.isSneaking()) {
-			worldObj.playSoundEffect(posX, posY + 0.5D, posZ, "random.chestopen", 0.5F, 0.9F);
 			openGUI(player);
 			return true;
 		}
@@ -234,71 +279,71 @@ public class EntityTitanBeetle extends EntityTameable {
 			openGUI(player);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.BEETLE_TAMING_AMULET.ordinal() && getTameState() == 0) {
+		if (!is.isEmpty() && is.getItem() == ModItems.MATERIALS && is.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BEETLE_TAMING_AMULET.ordinal() && getTameState() == 0) {
 			healingBuff = (float) (ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 20D : 20D * ConfigHandler.INSTANCE.mobHealthMultipier);
-			is.stackSize--;
+			is.shrink(1);
 			setTameState((byte) 1);
 			playTameEffect(true);
-			player.swingItem();
+			player.swingArm(hand);
 			tasks.removeTask(aiNearestAttackableTarget);
 			setAttackTarget((EntityLivingBase) null);
-			getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(80.0D);
+			getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
 			heal(healingBuff);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.RHINO_RIDING_KIT.ordinal() && getTameState() == 1) {
-			is.stackSize--;
-			player.swingItem();
+		if (!is.isEmpty() && is.getItem() == ModItems.MATERIALS && is.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BEETLE_RIDING_KIT.ordinal() && getTameState() == 1) {
+			is.shrink(1);
+			player.swingArm(hand);
 			setTameState((byte) 2);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.turnip && !shagging() && getTameState() != 0) {
-			is.stackSize--;
+		if (!is.isEmpty() && is.getItem() == ModItems.TURNIP && !shagging() && getTameState() != 0) {
+			is.shrink(1);
 			shagCount = 600;
-			worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
+			getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.BEETLE_LARVA_MUNCH, SoundCategory.NEUTRAL, 1.0F, 0.75F);
 			return true;
 		}
-		if (is == null && getTameState() >= 2) {
-			if (!worldObj.isRemote)
-				player.mountEntity(this);
+		if (is.isEmpty() && getTameState() >= 2) {
+			if (!getEntityWorld().isRemote)
+				player.startRiding(this);
 			return true;
 		}
-		if (is != null && is.getItem() == ModItems.materials && is.getItemDamage() == ItemMaterials.DATA.BAMBOO_SHOOT.ordinal() && getTameState() != 0) {
+		if (!is.isEmpty() && is.getItem() == ModItems.MATERIALS && is.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BAMBOO.ordinal() && getTameState() != 0) {
 			healingBuff = (float) (ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 5D : 5D * ConfigHandler.INSTANCE.mobHealthMultipier);
 			if (getHealth() < getMaxHealth()) {
 				heal(healingBuff);
 				playTameEffect(true);
-				player.swingItem();
-				is.stackSize--;
+				player.swingArm(hand);
+				is.shrink(1);
 				if (getHealth() == getMaxHealth())
-					worldObj.playSoundEffect(posX, posY, posZ, "erebus:beetlelarvamunch", 1.0F, 0.75F);
+					getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.BEETLE_LARVA_MUNCH, SoundCategory.NEUTRAL, 1.0F, 0.75F);
 			}
 			return true;
 		}
-		if (is != null) {
+		if (!is.isEmpty()) {
 			boolean flag = false;
-			if (!flag && getTameState() == 2 && is.getItem() == Item.getItemFromBlock(Blocks.chest)) {
+			if (!flag && getTameState() == 2 && is.getItem() == Item.getItemFromBlock(Blocks.CHEST)) {
 				setTameState((byte) 3);
-				playSound("mob.chickenplop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 				flag = true;
 			}
 			if (flag && getTameState() == 3) {
-				if (!player.capabilities.isCreativeMode && --is.stackSize == 0)
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
+				if (!player.capabilities.isCreativeMode)
+					is.shrink(1);
 				return true;
 			}
-			if (!flag && getTameState() == 2 && is.getItem() == Item.getItemFromBlock(Blocks.ender_chest)) {
+			if (!flag && getTameState() == 2 && is.getItem() == Item.getItemFromBlock(Blocks.ENDER_CHEST)) {
 				setTameState((byte) 4);
-				playSound("mob.chickenplop", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				getEntityWorld().playSound((EntityPlayer)null, getPosition(), SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.NEUTRAL, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 				flag = true;
 			}
 			if (flag && getTameState() == 4) {
-				if (!player.capabilities.isCreativeMode && --is.stackSize == 0)
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
+				if (!player.capabilities.isCreativeMode)
+					is.shrink(1);
 				return true;
 			}
 		}
-		return super.interact(player);
+		return super.processInteract(player, hand);
 	}
 
 	public boolean shagging() {
@@ -306,47 +351,75 @@ public class EntityTitanBeetle extends EntityTameable {
 	}
 
 	@Override
-	public void moveEntityWithHeading(float strafe, float forward) {
-		if (riddenByEntity != null) {
-			prevRotationYaw = rotationYaw = riddenByEntity.rotationYaw;
-			rotationPitch = riddenByEntity.rotationPitch * 0.5F;
-			setRotation(rotationYaw, rotationPitch);
-			rotationYawHead = renderYawOffset = rotationYaw;
-			strafe = ((EntityLivingBase) riddenByEntity).moveStrafing * 0.3F;
-			forward = ((EntityLivingBase) riddenByEntity).moveForward * 0.3F;
-			if (forward <= 0.0F)
-				forward *= 0.25F;
-			stepHeight = 2.0F;
-			jumpMovementFactor = getAIMoveSpeed() * 0.1F;
-			if (!worldObj.isRemote) {
-				setAIMoveSpeed((float) getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
-				super.moveEntityWithHeading(strafe, forward);
-			}
-			prevLimbSwingAmount = limbSwingAmount;
-			double d0 = posX - prevPosX;
-			double d1 = posZ - prevPosZ;
-			float f4 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
-			if (f4 > 1.0F)
-				f4 = 1.0F;
-			limbSwingAmount += (f4 - limbSwingAmount) * 0.4F;
-			limbSwing += limbSwingAmount;
-		} else {
-			stepHeight = 0.5F;
-			jumpMovementFactor = 0.02F;
-			super.moveEntityWithHeading(strafe, forward);
+    public void travel(float strafe, float up, float forward) {
+        if (isBeingRidden() && canBeSteered()) {
+            EntityLivingBase entitylivingbase = (EntityLivingBase)getControllingPassenger();
+            rotationYaw = entitylivingbase.rotationYaw;
+            prevRotationYaw = rotationYaw;
+            rotationPitch = entitylivingbase.rotationPitch * 0.5F;
+            setRotation(rotationYaw, rotationPitch);
+            renderYawOffset = rotationYaw;
+            rotationYawHead = renderYawOffset;
+            strafe = entitylivingbase.moveStrafing * 0.4F;
+            forward = entitylivingbase.moveForward * 0.4F;
+
+            if (forward <= 0.0F) 
+                forward *= 0.25F;
+
+            jumpMovementFactor = getAIMoveSpeed() * 0.1F;
+
+            if (canPassengerSteer()) {
+                setAIMoveSpeed((float)getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+                super.travel(strafe, up, forward);
+            }
+            else if (entitylivingbase instanceof EntityPlayer) {
+            	setAIMoveSpeed((float)getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+                super.travel(strafe, up, forward);
+            }
+
+            prevLimbSwingAmount = limbSwingAmount;
+            double d1 = posX - prevPosX;
+            double d0 = posZ - prevPosZ;
+            float f2 = MathHelper.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+
+            if (f2 > 1.0F)
+                f2 = 1.0F;
+
+            limbSwingAmount += (f2 - limbSwingAmount) * 0.4F;
+            limbSwing += limbSwingAmount;
+        }
+        else {
+            jumpMovementFactor = 0.02F;
+            super.travel(strafe, up, forward);
+        }
+    }
+
+	@Override
+	public void updatePassenger(Entity entity) {
+		super.updatePassenger(entity);
+		if (entity instanceof EntityLivingBase) {
+			double a = Math.toRadians(renderYawOffset);
+			double offSetX = -Math.sin(a) * 0.1D;
+			double offSetZ = Math.cos(a) * 0.1D;
+			entity.setPosition(posX - offSetX, posY + 1.1D + entity.getYOffset(), posZ - offSetZ);
 		}
 	}
 
 	@Override
-	public void updateRiderPosition() {
-		super.updateRiderPosition();
-		if (riddenByEntity instanceof EntityLivingBase) {
-			double a = Math.toRadians(renderYawOffset);
-			double offSetX = -Math.sin(a) * 0.1D;
-			double offSetZ = Math.cos(a) * 0.1D;
-			riddenByEntity.setPosition(posX - offSetX, posY + 1.1D + riddenByEntity.getYOffset(), posZ - offSetZ);
-		}
-	}
+    public boolean canBeSteered() {
+        return this.getControllingPassenger() instanceof EntityLivingBase;
+    }
+
+	@Override
+    public boolean canPassengerSteer() {
+        Entity entity = this.getControllingPassenger();
+        return entity instanceof EntityPlayer ? ((EntityPlayer)entity).isUser() : !this.world.isRemote;
+    }
+
+    @Nullable
+    public Entity getControllingPassenger()  {
+        return this.getPassengers().isEmpty() ? null : (Entity)this.getPassengers().get(0);
+    }
 
 	@SideOnly(Side.CLIENT)
 	public void enderChestParticles(World world, double x, double y, double z, Random rand) {
@@ -359,7 +432,7 @@ public class EntityTitanBeetle extends EntityTameable {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 1.0F * motionZ;
 			velX = rand.nextFloat() * 1.0F * motionX;
-			Erebus.proxy.spawnCustomParticle("portal", worldObj, x, y, z, velX, velY, velZ);
+			Erebus.PROXY.spawnCustomParticle("portal", getEntityWorld(), x, y, z, velX, velY, velZ);
 		}
 	}
 
@@ -371,14 +444,14 @@ public class EntityTitanBeetle extends EntityTameable {
 	@Override
 	public boolean isBreedingItem(ItemStack is) {
 		if (getTameState() != 0)
-			return is != null && is.getItem() == ModItems.turnip;
+			return !is.isEmpty() && is.getItem() == ModItems.TURNIP;
 		else
 			return false;
 	}
 
 	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {
-		EntityBeetleLarva entityBeetleLarva = new EntityBeetleLarva(worldObj);
-		entityBeetleLarva.setTame((byte) 3);
+		EntityBeetleLarva entityBeetleLarva = new EntityBeetleLarva(getEntityWorld());
+		entityBeetleLarva.setLarvaType((byte) 3);
 		return entityBeetleLarva;
 	}
 
@@ -398,49 +471,50 @@ public class EntityTitanBeetle extends EntityTameable {
 				setAttackTarget((EntityLivingBase) null);
 				return false;
 			}
-		if (entity != null && getDistanceToEntity(entity) <= 2.5F && entity.boundingBox.maxY > boundingBox.minY && entity.boundingBox.minY < boundingBox.maxY)
+		if (entity != null && getDistanceToEntity(entity) <= 2.5F && entity.getEntityBoundingBox().maxY > getEntityBoundingBox().minY && entity.getEntityBoundingBox().minY < getEntityBoundingBox().maxY)
 			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 		return super.attackEntityAsMob(entity);
 	}
 
 	public void setTameState(byte tameState) {
-		dataWatcher.updateObject(31, Byte.valueOf(tameState));
+		dataManager.set(BEETLE_TYPE, tameState);
 	}
 
 	public byte getTameState() {
-		return dataWatcher.getWatchableObjectByte(31);
+		return dataManager.get(BEETLE_TYPE);
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound data) {
-		super.writeEntityToNBT(data);
-		data.setByte("tameState", getTameState());
-		if (getTameState() == 3) {
-			NBTTagList nbttaglist = new NBTTagList();
-			for (int i = 0; i < inventory.length; i++)
-				if (inventory[i] != null) {
-					NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-					nbttagcompound1.setByte("Slot", (byte) i);
-					inventory[i].writeToNBT(nbttagcompound1);
-					nbttaglist.appendTag(nbttagcompound1);
-				}
-			data.setTag("Items", nbttaglist);
-		}
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		this.loadFromNbt(compound);
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound data) {
-		super.readEntityFromNBT(data);
-		setTameState(data.getByte("tameState"));
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		return this.saveToNbt(compound);
+	}
+
+	public void loadFromNbt(NBTTagCompound compound) {
+		setTameState(compound.getByte("tameState"));
 		if (getTameState() == 3) {
-			NBTTagList nbttaglist = data.getTagList("Items", 10);
-			inventory = new ItemStack[27];
-			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-				byte b0 = nbttagcompound1.getByte("Slot");
-				if (b0 >= 0 && b0 < inventory.length)
-					inventory[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
+			inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
+			if (compound.hasKey("Items", 9))
+				ItemStackHelper.loadAllItems(compound, inventory);
 		}
 	}
+
+	public NBTTagCompound saveToNbt(NBTTagCompound compound) {
+		compound.setByte("tameState", getTameState());
+		if (getTameState() == 3) {
+			ItemStackHelper.saveAllItems(compound, inventory, false);
+		}
+		return compound;
+	}
+
+	public int getSizeInventory() {
+		return inventory.size();
+	}
+
 }

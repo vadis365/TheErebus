@@ -55,6 +55,7 @@ import erebus.client.render.entity.RenderSolifuge;
 import erebus.client.render.entity.RenderSolifugeSmall;
 import erebus.client.render.entity.RenderTarantula;
 import erebus.client.render.entity.RenderTarantulaBaby;
+import erebus.client.render.entity.RenderTitanBeetle;
 import erebus.client.render.entity.RenderVelvetWorm;
 import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
@@ -106,6 +107,7 @@ import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
@@ -220,10 +222,10 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityScorpion.class, RenderScorpion::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGlowWorm.class, RenderGlowWorm::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLavaWebSpider.class, RenderLavaWebSpider::new);
-		
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedBlock.class, RenderAnimatedBlock::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedChest.class, RenderAnimatedChest::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedBambooCrate.class, RenderAnimatedBlock::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTitanBeetle.class, RenderTitanBeetle::new);
 		
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 	
