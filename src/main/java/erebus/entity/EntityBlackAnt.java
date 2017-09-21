@@ -9,12 +9,13 @@ import java.util.Random;
 import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModItems;
+import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
 import erebus.entity.ai.EntityAIAntBonemealCrops;
 import erebus.entity.ai.EntityAIAntHarvestCrops;
 import erebus.entity.ai.EntityAIAntPlantCrops;
+import erebus.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -29,19 +30,30 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.Path;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityBlackAnt extends EntityTameable implements IInventory {
-
+	private static final DataParameter<Integer> DROP_POINT_X = EntityDataManager.<Integer>createKey(EntityBlackAnt.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> DROP_POINT_Y = EntityDataManager.<Integer>createKey(EntityBlackAnt.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> DROP_POINT_Z = EntityDataManager.<Integer>createKey(EntityBlackAnt.class, DataSerializers.VARINT);
+	private static final DataParameter<Byte> TAME_TYPE = EntityDataManager.<Byte>createKey(EntityBlackAnt.class, DataSerializers.BYTE);
 	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
 	private final EntityAIAntHarvestCrops aiHarvestCrops = new EntityAIAntHarvestCrops(this, 0.6D, 1);
 	private final EntityAIAntPlantCrops aiPlantCrops = new EntityAIAntPlantCrops(this, 0.6D, 4);
@@ -53,7 +65,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	public boolean canCollectFromSilo;
 	public boolean canAddToSilo;
 
-	protected ItemStack[] inventory;
+	public NonNullList<ItemStack> inventory;
 	public static final int TOOL_SLOT = 0;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
@@ -66,35 +78,34 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		canAddToSilo = false;
 		canCollectFromSilo = false;
 		setSize(0.9F, 0.4F);
-		getNavigator().setAvoidsWater(true);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, aiWander);
-		tasks.addTask(2, aiPanic);
-		tasks.addTask(3, new EntityAILookIdle(this));
-		tasks.addTask(4, new EntityAITempt(this, 0.6D, ModItems.antTamingAmulet, false));
-		tasks.addTask(5, new EntityAITempt(this, 0.6D, Items.sugar, false));
-		inventory = new ItemStack[3];
+		inventory = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(24, new Integer(0));
-		dataWatcher.addObject(25, new Integer(0));
-		dataWatcher.addObject(26, new Integer(0));
+		dataManager.register(DROP_POINT_X, 0);
+		dataManager.register(DROP_POINT_Y, 0);
+		dataManager.register(DROP_POINT_Z, 0);
+		dataManager.register(TAME_TYPE, (byte) 0);
 	}
-
+	
 	@Override
-	public boolean isAIEnabled() {
-		return true;
+	protected void initEntityAI() {
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, aiWander);
+		tasks.addTask(2, aiPanic);
+		tasks.addTask(3, new EntityAILookIdle(this));
+		tasks.addTask(4, new EntityAITempt(this, 0.6D, ModItems.ANT_TAMING_AMULET, false));
+		tasks.addTask(5, new EntityAITempt(this, 0.6D, Items.SUGAR, false));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.6D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 	}
 
 	@Override
@@ -103,23 +114,23 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "erebus:fireantsound";
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.FIRE_ANT_SOUND;
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:fireanthurt";
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.FIRE_ANT_HURT;
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.spider.step", 0.15F, 1.0F);
+	protected void playStepSound(BlockPos pos, Block blockIn) {
+		this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -134,15 +145,15 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = getBrightness(1.0F);
+		float light = getBrightness();
 		if (light >= 0F)
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+			return isNotColliding();
 		return super.getCanSpawnHere();
 	}
 
 	@Override
 	public boolean isTamed() {
-		return dataWatcher.getWatchableObjectByte(16) != 0;
+		return dataManager.get(TAME_TYPE) != 0;
 	}
 
 	private static final String[] names = { "Antwan", "George", "Geoff", "Alberto", "Jose", "Linda", "Chantelle", "Dave", "Basil", "Gertrude", "Herbert", "Russel", "Adam", "Gwen", "Billy Bob Joe Bob Joe Harrison Jr.", "Sid", "Dylan", "Jade" };
@@ -150,40 +161,40 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public void setTamed(boolean tamed) {
 		if (tamed) {
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 1));
-			if (!hasCustomNameTag())
-				setCustomNameTag(names[worldObj.rand.nextInt(names.length)]);
+			dataManager.set(TAME_TYPE, (byte) 1);
+			if (!hasCustomName())
+				setCustomNameTag(names[getEntityWorld().rand.nextInt(names.length)]);
 		} else
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 0));
+			dataManager.set(TAME_TYPE, (byte) 0);
 	}
 
 	public void openGUI(EntityPlayer player) {
-		player.openGui(Erebus.instance, CommonProxy.GuiID.ANT_INVENTORY.ordinal(), player.worldObj, getEntityId(), 0, 0);
+		player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.ANT_INVENTORY.ordinal(), player.getEntityWorld(), getEntityId(), 0, 0);
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player) {
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack is = player.inventory.getCurrentItem();
 
-		if (is != null && is.getItem() == ModItems.antTamingAmulet && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
+		if (!is.isEmpty() && is.getItem() == ModItems.ANT_TAMING_AMULET && is.hasTagCompound() && is.getTagCompound().hasKey("homeX")) {
 			setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
-			player.swingItem();
+			player.swingArm(hand);;
 			setTamed(true);
 			playTameEffect(true);
 			return true;
 		}
 		if (isTamed()) {
-			openInventory();
+			openInventory(player);
 			openGUI(player);
 		}
-		return super.interact(player);
+		return super.processInteract(player, hand);
 	}
 
 	public void setBlockHarvested(Block block, int meta) {
 		Random rand = new Random();
 		if (block != null) {
-			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(block.getItemDropped(meta, rand, 0), rand.nextInt(2) + 1));
-			Utils.dropStack(worldObj, (int) posX, (int) posY, (int) posZ, new ItemStack(block.getItemDropped(0, rand, 0), rand.nextInt(2) + 1));
+			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(block.getItemDropped(block.getStateFromMeta(meta), rand, 0), rand.nextInt(2) + 1));
+			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(block.getItemDropped(block.getDefaultState(), rand, 0), rand.nextInt(2) + 1));
 		}
 	}
 
@@ -191,10 +202,10 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	public void onUpdate() {
 		super.onUpdate();
 
-		if (!worldObj.isRemote && !setAttributes) {
+		if (!getEntityWorld().isRemote && !setAttributes) {
 			if (isTamed()) {
-				openInventory();
-				closeInventory();
+				openInventory(null);
+				closeInventory(null);
 			}
 			setAttributes = true;
 		}
@@ -203,24 +214,24 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	protected void dropEquipment(boolean rencentHit, int fortune) {
 		for (ItemStack stack : inventory)
-			if (stack != null)
+			if (!stack.isEmpty())
 				entityDropItem(stack, 0.0F);
 	}
 
 	private void addToInventory(ItemStack stack) {
-		if (stack == null)
+		if (stack.isEmpty())
 			return;
-		if (inventory[INVENTORY_SLOT] == null) {
-			inventory[INVENTORY_SLOT] = stack.copy();
-			stack.stackSize = 0;
-		} else if (Utils.areStacksTheSame(stack, inventory[INVENTORY_SLOT], false)) {
-			int old = inventory[INVENTORY_SLOT].stackSize;
-			inventory[INVENTORY_SLOT].stackSize += stack.stackSize;
-			if (inventory[INVENTORY_SLOT].stackSize > inventory[INVENTORY_SLOT].getMaxStackSize())
-				inventory[INVENTORY_SLOT].stackSize = inventory[INVENTORY_SLOT].getMaxStackSize();
+		if (inventory.get(INVENTORY_SLOT).isEmpty()) {
+			inventory.set(INVENTORY_SLOT, stack.copy());
+			stack.setCount(0);
+		} else if (Utils.areStacksTheSame(stack, inventory.get(INVENTORY_SLOT), false)) {
+			int old = inventory.get(INVENTORY_SLOT).getCount();
+			inventory.get(INVENTORY_SLOT).setCount(stack.getCount());
+			if (inventory.get(INVENTORY_SLOT).getCount() > inventory.get(INVENTORY_SLOT).getMaxStackSize())
+				inventory.get(INVENTORY_SLOT).setCount(inventory.get(INVENTORY_SLOT).getMaxStackSize());
 
-			int added = inventory[INVENTORY_SLOT].stackSize - old;
-			stack.stackSize -= added;
+			int added = inventory.get(INVENTORY_SLOT).getCount() - old;
+			stack.shrink(added);
 		}
 	}
 
@@ -231,11 +242,11 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		// Don't pick up items unless the filter is defined and the inventory is
 		// not full
 		if (isTamed()) {
-			if (canPickupItems && !isFilterSlotEmpty() && (getAntInvSlotStack() == null || getAntInvSlotStack().stackSize < getAntInvSlotStack().getMaxStackSize())) {
+			if (canPickupItems && !isFilterSlotEmpty() && (getAntInvSlotStack().isEmpty() || getAntInvSlotStack().getCount() < getAntInvSlotStack().getMaxStackSize())) {
 				EntityItem entityitem = getClosestEntityItem(this, 16.0D, getFilterSlotStack());
 				if (entityitem != null) {
 					float distance = entityitem.getDistanceToEntity(this);
-					if (distance >= 2F && entityitem.delayBeforeCanPickup <= 0 && !entityitem.isDead) {
+					if (distance >= 2F && !entityitem.isDead) {
 						double x = entityitem.posX;
 						double y = entityitem.posY;
 						double z = entityitem.posZ;
@@ -245,8 +256,8 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 					}
 					if (distance < 2F) {
 						getMoveHelper().setMoveTo(entityitem.posX, entityitem.posY, entityitem.posZ, 0.5D);
-						addToInventory(entityitem.getEntityItem());
-						if (entityitem.getEntityItem().stackSize <= 0)
+						addToInventory(entityitem.getItem());
+						if (entityitem.getItem().getCount() <= 0)
 							entityitem.setDead();
 						return;
 					}
@@ -254,23 +265,24 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			}
 
 			if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemBucket)
-				if (!isAntInvSlotEmpty() && getAntInvSlotStack().stackSize > 15) {
+				if (!isAntInvSlotEmpty() && getAntInvSlotStack().getCount() > 15) {
 					canAddToSilo = true;
 					canPickupItems = false;
 				}
 
 			if (!canPickupItems && canAddToSilo) {
 				moveToSilo();
-				Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
-				if (block == ModBlocks.siloTank)
+				BlockPos pos = new BlockPos(getDropPointX(), getDropPointY(), getDropPointZ());
+				Block block = getEntityWorld().getBlockState(pos).getBlock();
+				if (block == ModBlocks.SILO_TANK)
 					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 2D) {
-						addDropToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
+						addDropToInventory(pos);
 						canAddToSilo = false;
 						canPickupItems = true;
 					}
 			}
 
-			if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe || !isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.bone)
+			if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe || !isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.BONE)
 				if (isAntInvSlotEmpty() && !isFilterSlotEmpty())
 					canCollectFromSilo = true; // this stops the planting or
 			// bonemealing AIs and makes the ant
@@ -278,8 +290,9 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 			if (canCollectFromSilo) {
 				moveToSilo();
-				Block block = worldObj.getBlock(getDropPointX(), getDropPointY(), getDropPointZ());
-				if (block == ModBlocks.siloTank)
+				BlockPos pos = new BlockPos(getDropPointX(), getDropPointY(), getDropPointZ());
+				Block block = getEntityWorld().getBlockState(pos).getBlock();
+				if (block == ModBlocks.SILO_TANK)
 					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 2D) {
 						getStackFromSilo();
 						canCollectFromSilo = false;
@@ -289,37 +302,38 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	private void getStackFromSilo() {
-		if (worldObj.isRemote)
+		if (getEntityWorld().isRemote)
 			return;
-		IInventory siloTile = (IInventory) worldObj.getTileEntity(getDropPointX(), getDropPointY(), getDropPointZ());
+		BlockPos pos = new BlockPos(getDropPointX(), getDropPointY(), getDropPointZ());
+		IInventory siloTile = (IInventory) getEntityWorld().getTileEntity(pos);
 		ItemStack[] siloInventory = new ItemStack[siloTile.getSizeInventory()];
 		for (int i = 0; i < siloInventory.length; i++)
-			if (siloTile.getStackInSlot(i) != null)
+			if (!siloTile.getStackInSlot(i).isEmpty())
 				if (siloTile.getStackInSlot(i).getItem() == getStackInSlot(CROP_ID_SLOT).getItem() && siloTile.getStackInSlot(i).getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage())
 					if (isAntInvSlotEmpty()) {
-						int collectStackSize = siloTile.getStackInSlot(i).stackSize;
+						int collectStackSize = siloTile.getStackInSlot(i).getCount();
 						setInventorySlotContents(INVENTORY_SLOT, new ItemStack(siloTile.getStackInSlot(i).getItem(), collectStackSize, siloTile.getStackInSlot(i).getItemDamage()));
 						siloTile.decrStackSize(i, collectStackSize);
 						return;
 					}
 	}
 
-	private void addDropToInventory(int x, int y, int z) {
+	private void addDropToInventory(BlockPos pos) {
 		ItemStack stack = getAntInvSlotStack();
 		if (!isAntInvSlotEmpty())
-			Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), new ItemStack(stack.getItem(), stack.stackSize, stack.getItemDamage()));
-		setInventorySlotContents(2, null);
+			Utils.addItemStackToInventory(Utils.getTileEntity(getEntityWorld(), pos, IInventory.class), new ItemStack(stack.getItem(), stack.getCount(), stack.getItemDamage()));
+		setInventorySlotContents(2, ItemStack.EMPTY);
 	}
 
 	@SuppressWarnings("unchecked")
 	public EntityItem getClosestEntityItem(final Entity entity, double d, ItemStack filter) {
-		List<EntityItem> list = worldObj.getEntitiesWithinAABB(EntityItem.class, boundingBox.expand(d, d, d));
+		List<EntityItem> list = getEntityWorld().getEntitiesWithinAABB(EntityItem.class, getEntityBoundingBox().expand(d, d, d));
 		if (list.isEmpty())
 			return null;
 
 		for (Iterator<EntityItem> iterator = list.iterator(); iterator.hasNext();) {
 			EntityItem item = iterator.next();
-			if (!Utils.areStacksTheSame(filter, item.getEntityItem(), false) || item.delayBeforeCanPickup > 0)
+			if (!Utils.areStacksTheSame(filter, item.getItem(), false))
 				iterator.remove();
 		}
 
@@ -339,49 +353,47 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	public void moveToItem(Entity entity) {
-		PathEntity pathentity = worldObj.getPathEntityToEntity(this, entity, 16.0F, true, false, false, true);
+		Path pathentity = getNavigator().getPathToEntityLiving(entity);
 		if (pathentity != null) {
-			setPathToEntity(pathentity);
 			getNavigator().setPath(pathentity, 0.5D);
 		}
 	}
 
 	public void moveToSilo() {
-		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, getDropPointX(), getDropPointY() - 1, getDropPointZ(), 16.0F, true, false, false, true);
+		Path pathentity = getNavigator().getPathToXYZ(getDropPointX(), getDropPointY() - 1, getDropPointZ());
 		if (pathentity != null) {
-			setPathToEntity(pathentity);
 			getNavigator().setPath(pathentity, 0.5D);
 		}
 	}
 
 	@Override
 	public int getSizeInventory() {
-		return inventory.length;
+		return inventory.size();
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return inventory[slot];
+		return inventory.get(slot);
 	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int size) {
-		if (inventory[slot] != null) {
+		if (!inventory.get(slot).isEmpty()) {
 			ItemStack itemstack;
-			if (inventory[slot].stackSize <= size) {
-				itemstack = inventory[slot];
-				inventory[slot] = null;
+			if (inventory.get(slot).getCount() <= size) {
+				itemstack = inventory.get(slot);
+				inventory.set(slot, ItemStack.EMPTY);
 				return itemstack;
 			} else {
-				itemstack = inventory[slot].splitStack(size);
-				if (inventory[slot].stackSize == 0)
-					inventory[slot] = null;
+				itemstack = inventory.get(slot).splitStack(size);
+				if (inventory.get(slot).getCount() == 0)
+					inventory.set(slot, ItemStack.EMPTY);
 				return itemstack;
 			}
 		} else
-			return null;
+			return ItemStack.EMPTY;
 	}
-
+/*
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		if (inventory[slot] != null) {
@@ -391,23 +403,18 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		} else
 			return null;
 	}
-
+*/
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		inventory[slot] = stack;
+		inventory.set(slot, stack);
 
-		if (stack != null && stack.stackSize > getInventoryStackLimit())
-			stack.stackSize = getInventoryStackLimit();
+		if (!stack.isEmpty() && stack.getCount() > getInventoryStackLimit())
+			stack.setCount(getInventoryStackLimit());
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return "container.antInventory";
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
 	}
 
 	@Override
@@ -416,70 +423,51 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	@Override
-	public final boolean isUseableByPlayer(EntityPlayer player) {
-		return true;
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		if (slot == TOOL_SLOT)
-			return stack.getItem() == Items.shears || stack.getItem() == Items.bucket || stack.getItem() instanceof ItemHoe || stack.getItem() == Items.bone;
+			return stack.getItem() == Items.SHEARS || stack.getItem() == Items.BUCKET || stack.getItem() instanceof ItemHoe || stack.getItem() == Items.BONE;
 
 		return true;
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
-		super.readEntityFromNBT(nbt);
-
-		if (nbt.getByte("tamed") == 1)
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		if (compound.getByte("tamed") == 1)
 			setTamed(true);
 		else
 			setTamed(false);
-
-		setDropPoint(nbt.getInteger("dropPointX"), nbt.getInteger("dropPointY"), nbt.getInteger("dropPointZ"));
-
-		NBTTagList tags = nbt.getTagList("Items", 10);
-		inventory = new ItemStack[getSizeInventory()];
-
-		for (int i = 0; i < tags.tagCount(); i++) {
-			NBTTagCompound data = tags.getCompoundTagAt(i);
-			int j = data.getByte("Slot") & 255;
-
-			if (j >= 0 && j < inventory.length)
-				inventory[j] = ItemStack.loadItemStackFromNBT(data);
-		}
+		setDropPoint(compound.getInteger("dropPointX"), compound.getInteger("dropPointY"), compound.getInteger("dropPointZ"));
+		loadFromNbt(compound);
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
-		super.writeEntityToNBT(nbt);
-
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
 		if (isTamed())
-			nbt.setByte("tamed", Byte.valueOf((byte) 1));
+			compound.setByte("tamed", Byte.valueOf((byte) 1));
 		else
-			nbt.setByte("tamed", Byte.valueOf((byte) 0));
+			compound.setByte("tamed", Byte.valueOf((byte) 0));
+		compound.setInteger("dropPointX", getDropPointX());
+		compound.setInteger("dropPointY", getDropPointY());
+		compound.setInteger("dropPointZ", getDropPointZ());
+		return saveToNbt(compound);
+	}
 
-		nbt.setInteger("dropPointX", getDropPointX());
-		nbt.setInteger("dropPointY", getDropPointY());
-		nbt.setInteger("dropPointZ", getDropPointZ());
+	public void loadFromNbt(NBTTagCompound compound) {
+		inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
+		if (compound.hasKey("Items", 9))
+			ItemStackHelper.loadAllItems(compound, inventory);
+	}
 
-		NBTTagList tags = new NBTTagList();
-
-		for (int i = 0; i < inventory.length; i++)
-			if (inventory[i] != null) {
-				NBTTagCompound data = new NBTTagCompound();
-				data.setByte("Slot", (byte) i);
-				inventory[i].writeToNBT(data);
-				tags.appendTag(data);
-			}
-
-		nbt.setTag("Items", tags);
+	public NBTTagCompound saveToNbt(NBTTagCompound compound) {
+		ItemStackHelper.saveAllItems(compound, inventory, false);
+		return compound;
 	}
 
 	@Override
-	public void openInventory() {
-		if (worldObj.isRemote)
+	public void openInventory(EntityPlayer player) {
+		if (getEntityWorld().isRemote)
 			return;
 		canPickupItems = false;
 		canAddToSilo = false;
@@ -491,39 +479,39 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	@Override
-	public void closeInventory() {
-		if (worldObj.isRemote)
+	public void closeInventory(EntityPlayer player) {
+		if (getEntityWorld().isRemote)
 			return;
 
 		if (isTaskSlotEmpty() && isTamed()) {
 			tasks.addTask(1, aiWander);
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 1));
+			dataManager.set(TAME_TYPE, (byte) 1);
 		}
 
 		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemHoe && !isFilterSlotEmpty()) {
 			tasks.addTask(1, aiPlantCrops);
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 2));
+			dataManager.set(TAME_TYPE, (byte) 2);
 		}
 
 		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemBucket && !isFilterSlotEmpty()) {
 			canPickupItems = true;
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 3));
+			dataManager.set(TAME_TYPE, (byte) 3);
 		}
 
 		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ItemShears) {
 			tasks.addTask(1, aiHarvestCrops);
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 4));
+			dataManager.set(TAME_TYPE, (byte) 4);
 		}
 
-		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.bone && !isFilterSlotEmpty()) {
+		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.BONE && !isFilterSlotEmpty()) {
 			tasks.addTask(1, aiBonemealCrops);
-			dataWatcher.updateObject(16, Byte.valueOf((byte) 5));
+			dataManager.set(TAME_TYPE, (byte) 5);
 		}
 		updateAITasks();
 	}
 
 	public boolean isTaskSlotEmpty() {
-		return getTaskSlotStack() == null;
+		return getTaskSlotStack().isEmpty();
 	}
 
 	public ItemStack getTaskSlotStack() {
@@ -531,7 +519,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	public boolean isFilterSlotEmpty() {
-		return getFilterSlotStack() == null;
+		return getFilterSlotStack().isEmpty();
 	}
 
 	public ItemStack getFilterSlotStack() {
@@ -539,7 +527,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	}
 
 	public boolean isAntInvSlotEmpty() {
-		return getAntInvSlotStack() == null;
+		return getAntInvSlotStack().isEmpty();
 	}
 
 	public ItemStack getAntInvSlotStack() {
@@ -552,27 +540,31 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
-		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown))
+		if (source.equals(DamageSource.IN_WALL) || source.equals(DamageSource.DROWN))
 			return false;
 		return super.attackEntityFrom(source, damage);
 	}
 
 	public void setDropPoint(int x, int y, int z) {
-		dataWatcher.updateObject(24, Integer.valueOf(x));
-		dataWatcher.updateObject(25, Integer.valueOf(y));
-		dataWatcher.updateObject(26, Integer.valueOf(z));
+		dataManager.set(DROP_POINT_X, x);
+		dataManager.set(DROP_POINT_Y, y);
+		dataManager.set(DROP_POINT_Z, z);
 	}
 
 	public int getDropPointX() {
-		return dataWatcher.getWatchableObjectInt(24);
+		return dataManager.get(DROP_POINT_X);
 	}
 
 	public int getDropPointY() {
-		return dataWatcher.getWatchableObjectInt(25);
+		return dataManager.get(DROP_POINT_Y);
 	}
 
 	public int getDropPointZ() {
-		return dataWatcher.getWatchableObjectInt(26);
+		return dataManager.get(DROP_POINT_Z);
+	}
+	
+	public byte getTamedType() {
+		return dataManager.get(TAME_TYPE);
 	}
 
 	@Override
@@ -588,5 +580,38 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	protected boolean canTriggerWalking() {
 		return false;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		return null;
+	}
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		return true;
+	}
+
+	@Override
+	public int getField(int id) {
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+	}
+
+	@Override
+	public int getFieldCount() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {	
 	}
 }

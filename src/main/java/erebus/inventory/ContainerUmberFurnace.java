@@ -7,6 +7,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
+import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -22,7 +23,7 @@ public class ContainerUmberFurnace extends Container {
 		addSlotToContainer(new SlotFluidContainer(tile, 0, 31, 35));
 		addSlotToContainer(new SlotSmelt(tile, 1, 56, 17));
 		addSlotToContainer(new SlotFuel(tile, 2, 56, 53));
-		addSlotToContainer(new SlotFurnace(inventory.player, tile, 3, 116, 35));
+		addSlotToContainer(new SlotFurnaceOutput(inventory.player, tile, 3, 116, 35));
 
 		for (int i = 0; i < 3; ++i)
 			for (int j = 0; j < 9; ++j)
@@ -56,7 +57,7 @@ public class ContainerUmberFurnace extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-		ItemStack itemStack = null;
+		ItemStack itemStack = ItemStack.EMPTY;
 		Slot slot = (Slot) inventorySlots.get(slotIndex);
 
 		if (slot != null && slot.getHasStack()) {
@@ -65,24 +66,24 @@ public class ContainerUmberFurnace extends Container {
 
 			if (slotIndex < 4) {
 				if (!mergeItemStack(slotItemStack, 4, inventorySlots.size(), true))
-					return null;
+					return ItemStack.EMPTY;
 			} else if (FluidContainerRegistry.isContainer(slotItemStack)) {
 				if (!mergeItemStack(slotItemStack, 0, 1, false))
-					return null;
-			} else if (FurnaceRecipes.smelting().getSmeltingResult(slotItemStack) != null) {
+					return ItemStack.EMPTY;
+			} else if (!FurnaceRecipes.instance().getSmeltingResult(slotItemStack).isEmpty()) {
 				if (!mergeItemStack(slotItemStack, 1, 2, false))
-					return null;
+					return ItemStack.EMPTY;
 			} else if (TileEntityFurnace.isItemFuel(slotItemStack))
 				if (!mergeItemStack(slotItemStack, 2, 3, false))
-					return null;
+					return ItemStack.EMPTY;
 
-			if (slotItemStack.stackSize == 0)
-				slot.putStack(null);
+			if (slotItemStack.getCount() == 0)
+				slot.putStack(ItemStack.EMPTY);
 			else
 				slot.onSlotChanged();
 
-			if (slotItemStack.stackSize == itemStack.stackSize)
-				return null;
+			if (slotItemStack.getCount() == itemStack.getCount())
+				return ItemStack.EMPTY;
 			slot.onPickupFromSlot(player, slotItemStack);
 		}
 

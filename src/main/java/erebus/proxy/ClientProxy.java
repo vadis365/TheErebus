@@ -24,6 +24,7 @@ import erebus.client.render.entity.RenderAntlionMiniBoss;
 import erebus.client.render.entity.RenderBedBug;
 import erebus.client.render.entity.RenderBeetle;
 import erebus.client.render.entity.RenderBeetleLarva;
+import erebus.client.render.entity.RenderBlackAnt;
 import erebus.client.render.entity.RenderBlackWidow;
 import erebus.client.render.entity.RenderBombardierBeetle;
 import erebus.client.render.entity.RenderBotFly;
@@ -226,6 +227,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedChest.class, RenderAnimatedChest::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedBambooCrate.class, RenderAnimatedBlock::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTitanBeetle.class, RenderTitanBeetle::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlackAnt.class, RenderBlackAnt::new);
 		
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 	
@@ -363,7 +365,7 @@ public class ClientProxy extends CommonProxy {
 			case PETRIFIED_CRAFT:
 				return new GuiPetrifiedWorkbench(player.inventory, world, pos);
 			case SILO_INVENTORY:
-				return new GuiErebusBasic(new ContainerSilo(player.inventory, (TileEntitySiloTank) tile), new ResourceLocation("erebus:textures/gui/container/siloGui.png"), (TileEntitySiloTank) tile, 256, 256);
+				return new GuiErebusBasic(new ContainerSilo(player.inventory, (TileEntitySiloTank) tile), new ResourceLocation("erebus:textures/gui/container/silo_gui.png"), (TileEntitySiloTank) tile, 256, 256);
 			case SMOOTHIE_MAKER:
 				return new GuiSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tile);
 			case UMBER_FURNACE:

@@ -34,22 +34,22 @@ public class ContainerSilo extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
-		ItemStack is = null;
-		Slot slot = (Slot) inventorySlots.get(par2);
+	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+		ItemStack is = ItemStack.EMPTY;
+		Slot slot = (Slot) inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack is1 = slot.getStack();
 			is = is1.copy();
 
-			if (par2 < numRows * 13) {
+			if (index < numRows * 13) {
 				if (!mergeItemStack(is1, numRows * 13, inventorySlots.size(), true))
-					return null;
+					return ItemStack.EMPTY;
 			} else if (!mergeItemStack(is1, 0, numRows * 13, false))
-				return null;
+				return ItemStack.EMPTY;
 
-			if (is1.stackSize == 0)
-				slot.putStack(null);
+			if (is1.getCount() == 0)
+				slot.putStack(ItemStack.EMPTY);
 			else
 				slot.onSlotChanged();
 		}

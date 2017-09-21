@@ -3,6 +3,7 @@ package erebus.inventory;
 import erebus.entity.EntityBlackAnt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -34,7 +35,7 @@ public class ContainerAntInventory extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber) {
-		ItemStack is = null;
+		ItemStack is = ItemStack.EMPTY;
 		Slot slot = (Slot) inventorySlots.get(slotNumber);
 
 		if (slot != null && slot.getHasStack()) {
@@ -42,19 +43,19 @@ public class ContainerAntInventory extends Container {
 			is = is1.copy();
 
 			if (slotNumber == EntityBlackAnt.CROP_ID_SLOT) {
-				slot.putStack(null);
+				slot.putStack(ItemStack.EMPTY);
 				return null;
 			} else if (slotNumber < 3) {
 				if (!mergeItemStack(is1, 3, inventorySlots.size(), true))
-					return null;
+					return ItemStack.EMPTY;
 			} else if (inventory.isItemValidForSlot(0, is1)) {
 				if (!mergeItemStack(is1, 0, 1, false))
-					return null;
+					return ItemStack.EMPTY;
 			} else
-				return null;
+				return ItemStack.EMPTY;
 
-			if (is1.stackSize == 0)
-				slot.putStack(null);
+			if (is1.getCount() == 0)
+				slot.putStack(ItemStack.EMPTY);
 			else
 				slot.onSlotChanged();
 		}
@@ -65,25 +66,25 @@ public class ContainerAntInventory extends Container {
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
-		inventory.closeInventory();
+		inventory.closeInventory(player);
 	}
 
 	@Override
-	public ItemStack slotClick(int slotIndex, int button, int clickType, EntityPlayer player) {
-		if (slotIndex == EntityBlackAnt.CROP_ID_SLOT) {
-			Slot slot = (Slot) inventorySlots.get(slotIndex);
+	  public ItemStack slotClick(int slotId, int dragType, ClickType clickType, EntityPlayer player) {
+		if (slotId == EntityBlackAnt.CROP_ID_SLOT) {
+			Slot slot = (Slot) inventorySlots.get(slotId);
 			ItemStack slotStack = slot.getStack();
 			ItemStack heldStack = player.inventory.getItemStack();
 
-			if (slotStack == null && heldStack != null) {
+			if (slotStack.isEmpty() && !heldStack.isEmpty()) {
 				ItemStack copy = heldStack.copy();
-				copy.stackSize = 0;
+				copy.setCount(0);
 				slot.putStack(copy);
-			} else if (slotStack != null)
-				slot.putStack(null);
+			} else if (!slotStack.isEmpty())
+				slot.putStack(ItemStack.EMPTY);
 
-			return null;
+			return ItemStack.EMPTY;
 		} else
-			return super.slotClick(slotIndex, button, clickType, player);
+			return super.slotClick(slotId, dragType, clickType, player);
 	}
 }

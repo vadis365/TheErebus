@@ -1,47 +1,27 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelBlackAnt;
 import erebus.entity.EntityBlackAnt;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderBlackAnt extends RenderLiving {
+public class RenderBlackAnt extends RenderLiving<EntityBlackAnt> {
 
-	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/blackAntKit.png");
+	private static ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/black_ant_kit.png");
 
-	public RenderBlackAnt() {
-		super(new ModelBlackAnt(), 0.5F);
+	public RenderBlackAnt(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelBlackAnt(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
-		scaleBlackAnt((EntityBlackAnt) entityliving, partialTickTime);
-	}
-
-	public void renderBlackAnt(EntityBlackAnt entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		// double a = Math.toRadians(entity.renderYawOffset);
-		// double offSetX = -Math.sin(a) * 1D;
-		// double offSetZ = Math.cos(a) * 1D;
-		// TODO add item render code for carrying or maybe some nice hats
-		super.doRender(entity, x, y, z, rotationYaw, partialTickTime);
+	protected void preRenderCallback(EntityBlackAnt ant, float partialTickTime) {
+		GlStateManager.scale(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderBlackAnt((EntityBlackAnt) entity, x, y, z, rotationYaw, partialTickTime);
-	}
-
-	protected void scaleBlackAnt(EntityBlackAnt entityBlackAnt, float partialTickTime) {
-		float size = 0.5F;
-		GL11.glScalef(size, size, size);
-	}
-
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityBlackAnt ant) {
+		return TEXTURE;
 	}
 }

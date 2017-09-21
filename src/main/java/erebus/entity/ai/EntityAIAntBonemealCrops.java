@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathEntity;
 
 public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
@@ -52,10 +53,9 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 
 	@Override
 	protected void moveToLocation() {
-		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY, cropZ, 16.0F, true, false, false, true);
+		Path pathentity = blackAnt.getNavigator().getPathToXYZ(cropX, cropY, cropZ);
 
 		if (pathentity != null) {
-			blackAnt.setPathToEntity(pathentity);
 			blackAnt.getNavigator().setPath(pathentity, 0.5D);
 		}
 
@@ -73,9 +73,9 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 
 	@Override
 	protected void afterEaten() {
-		EntityPlayer player = Utils.getPlayer(blackAnt.worldObj);
+		EntityPlayer player = Utils.getPlayer(blackAnt.getEntityWorld());
 
-		if (!blackAnt.worldObj.isRemote)
+		if (!blackAnt.getEntityWorld().isRemote)
 			if (!isFilterSlotEmpty() && !isAntInvSlotEmpty()) {
 				Item filterItem = getFilterSlotStack().getItem();
 				Item invItem = getAntInvSlotStack().getItem();
@@ -83,8 +83,8 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 				int filterItemMeta = getFilterSlotStack().getItemDamage();
 
 				if (filterItem == invItem && filterItemMeta == invItemMeta) {
-					Utils.rightClickItemAt(blackAnt.worldObj, cropX, cropY, cropZ, 1, new ItemStack(invItem, invItemMeta));
-					ItemDye.applyBonemeal(getAntInvSlotStack(), blackAnt.worldObj, cropX, cropY, cropZ, player);
+					Utils.rightClickItemAt(blackAnt.getEntityWorld(), cropX, cropY, cropZ, 1, new ItemStack(invItem, invItemMeta));
+					ItemDye.applyBonemeal(getAntInvSlotStack(), blackAnt.getEntityWorld(), cropX, cropY, cropZ, player);
 					if (getAntInvSlotStack().stackSize < 1)
 						blackAnt.setInventorySlotContents(INVENTORY_SLOT, null);
 				}

@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import erebus.ModBlocks;
 import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,7 +50,7 @@ public class ItemAmuletAntTaming extends Item {
 		if (!world.isRemote && hasTag(stack)) {
 			Block block = world.getBlockState(pos).getBlock();
 			if (!world.isRemote && block != null) {
-				if (block == Blocks.CHEST) { // TODO ModBlocks.siloTank
+				if (block == ModBlocks.SILO_TANK) {
 					stack.getTagCompound().setInteger("homeX", pos.getX());
 					stack.getTagCompound().setInteger("homeY", pos.getY());
 					stack.getTagCompound().setInteger("homeZ", pos.getZ());

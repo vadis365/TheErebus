@@ -1,0 +1,22 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "0": "erebus:blocks/silo_tank_active",
+        "particle": "erebus:blocks/silo_tank_active"
+    },
+    "elements": [
+        {
+            "name": "main",
+            "from": [ 2.0, 0.0, 2.0 ], 
+            "to": [ 14.0, 16.0, 14.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+                "east": { "texture": "#0", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+                "south": { "texture": "#0", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+                "west": { "texture": "#0", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+                "up": { "texture": "#0", "uv": [ 2.0, 2.0, 14.0, 14.0 ] },
+                "down": { "texture": "#0", "uv": [ 2.0, 2.0, 14.0, 14.0 ] }
+            }
+        }
+    ]
+}

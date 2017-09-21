@@ -1,10 +1,9 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.entity.EntityBlackAnt;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -353,7 +352,7 @@ public class ModelBlackAnt extends ModelBase {
 		AbBack.render(unitPixel);
 		Neck.render(unitPixel);
 		Head1.render(unitPixel);
-		;
+
 		LBL1.render(unitPixel);
 		LML1.render(unitPixel);
 		LFL1.render(unitPixel);
@@ -361,33 +360,33 @@ public class ModelBlackAnt extends ModelBase {
 		RML1.render(unitPixel);
 		RBL1.render(unitPixel);
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 3)) {
+		if (ant.getTamedType() == (byte) 3) {
 			LeftPack.render(unitPixel);
 			StrapPack.render(unitPixel);
 			RightPack.render(unitPixel);
 
 		}
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 4)) {
+		if (ant.getTamedType() == (byte) 4) {
 			RightShears.render(unitPixel);
 			LeftShears.render(unitPixel);
 		}
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 2)) {
+		if (ant.getTamedType() == (byte) 2) {
 			LeftPack.render(unitPixel);
 			StrapPack.render(unitPixel);
 			RightPack.render(unitPixel);
-			GL11.glPushMatrix();
-			GL11.glTranslated(0F, -0.0625F, 0.0625F);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0F, -0.0625F, 0.0625F);
 			HatTop.render(unitPixel);
 			HatBrimF.render(unitPixel);
 			HatBrimL.render(unitPixel);
 			HatBrimMain.render(unitPixel);
 			HatBrimR.render(unitPixel);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 		}
 
-		if (ant.getDataWatcher().getWatchableObjectByte(16) == Byte.valueOf((byte) 5)) {
+		if (ant.getTamedType() == (byte) 5) {
 			LeftPack.render(unitPixel);
 			StrapPack.render(unitPixel);
 			RightPack.render(unitPixel);

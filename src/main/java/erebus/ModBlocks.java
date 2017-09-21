@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Locale;
 
 import erebus.block.bamboo.BlockBambooCrate;
+import erebus.block.silo.BlockSiloRoof;
+import erebus.block.silo.BlockSiloSupports;
+import erebus.block.silo.BlockSiloTank;
 import erebus.blocks.BlockAlgae;
 import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockBerryBush;
@@ -49,6 +52,7 @@ import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -140,6 +144,10 @@ public class ModBlocks {
 	//UTILS BLOCKS
 	public static final Block PETRIFIED_CRAFTING_TABLE = new BlockPetrifiedCraftingTable();
 	public static final Block BAMBOO_CRATE = new BlockBambooCrate();
+	public static final Block SILO_ROOF = new BlockSiloRoof(Material.WOOD);
+	public static final Block SILO_TANK = new BlockSiloTank(Material.IRON);
+	public static final Block SILO_SUPPORTS = new BlockSiloSupports(Material.WOOD);
+	
 	
 	public static void init() {
 		try {
