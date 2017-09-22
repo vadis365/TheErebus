@@ -42,6 +42,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.Path;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -54,11 +55,11 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	private static final DataParameter<Integer> DROP_POINT_Y = EntityDataManager.<Integer>createKey(EntityBlackAnt.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> DROP_POINT_Z = EntityDataManager.<Integer>createKey(EntityBlackAnt.class, DataSerializers.VARINT);
 	private static final DataParameter<Byte> TAME_TYPE = EntityDataManager.<Byte>createKey(EntityBlackAnt.class, DataSerializers.BYTE);
-	private final EntityAIPanic aiPanic = new EntityAIPanic(this, 0.8D);
-	private final EntityAIAntHarvestCrops aiHarvestCrops = new EntityAIAntHarvestCrops(this, 0.6D, 1);
-	private final EntityAIAntPlantCrops aiPlantCrops = new EntityAIAntPlantCrops(this, 0.6D, 4);
-	private final EntityAIAntBonemealCrops aiBonemealCrops = new EntityAIAntBonemealCrops(this, 0.6D, 4);
-	private final EntityAIWander aiWander = new EntityAIWander(this, 0.6D);
+	public EntityAIPanic aiPanic;
+	public EntityAIAntHarvestCrops aiHarvestCrops;
+	public EntityAIAntPlantCrops aiPlantCrops;
+	public EntityAIAntBonemealCrops aiBonemealCrops;
+	public EntityAIWander aiWander;
 
 	public boolean setAttributes;
 	public boolean canPickupItems;
@@ -72,6 +73,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	public EntityBlackAnt(World world) {
 		super(world);
+		setPathPriority(PathNodeType.WATER, -8F);
 		stepHeight = 1.0F;
 		setAttributes = false;
 		canPickupItems = false;
@@ -92,6 +94,12 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	
 	@Override
 	protected void initEntityAI() {
+		aiPanic = new EntityAIPanic(this, 0.8D);
+		aiHarvestCrops = new EntityAIAntHarvestCrops(this, 0.6D, 1);
+		aiPlantCrops = new EntityAIAntPlantCrops(this, 0.6D, 4);
+		aiBonemealCrops = new EntityAIAntBonemealCrops(this, 0.6D, 4);
+		aiWander = new EntityAIWander(this, 0.6D);
+		
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, aiWander);
 		tasks.addTask(2, aiPanic);
@@ -178,7 +186,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 		if (!is.isEmpty() && is.getItem() == ModItems.ANT_TAMING_AMULET && is.hasTagCompound() && is.getTagCompound().hasKey("homeX")) {
 			setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
-			player.swingArm(hand);;
+			player.swingArm(hand);
 			setTamed(true);
 			playTameEffect(true);
 			return true;
@@ -226,7 +234,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			stack.setCount(0);
 		} else if (Utils.areStacksTheSame(stack, inventory.get(INVENTORY_SLOT), false)) {
 			int old = inventory.get(INVENTORY_SLOT).getCount();
-			inventory.get(INVENTORY_SLOT).setCount(stack.getCount());
+			inventory.get(INVENTORY_SLOT).setCount(stack.getCount() + old);
 			if (inventory.get(INVENTORY_SLOT).getCount() > inventory.get(INVENTORY_SLOT).getMaxStackSize())
 				inventory.get(INVENTORY_SLOT).setCount(inventory.get(INVENTORY_SLOT).getMaxStackSize());
 
@@ -327,7 +335,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@SuppressWarnings("unchecked")
 	public EntityItem getClosestEntityItem(final Entity entity, double d, ItemStack filter) {
-		List<EntityItem> list = getEntityWorld().getEntitiesWithinAABB(EntityItem.class, getEntityBoundingBox().expand(d, d, d));
+		List<EntityItem> list = getEntityWorld().getEntitiesWithinAABB(EntityItem.class, getEntityBoundingBox().grow(d, d, d));
 		if (list.isEmpty())
 			return null;
 

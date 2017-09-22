@@ -3,6 +3,7 @@ package erebus.block.silo;
 import erebus.tileentity.TileEntityBasicInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +13,7 @@ import net.minecraft.world.World;
 public class TileEntitySiloTank extends TileEntityBasicInventory {
 
 	private boolean active;
-
+	//private static final int[] SLOTS;
 	public TileEntitySiloTank() {
 		super(104, "");
 	}
@@ -37,31 +38,28 @@ public class TileEntitySiloTank extends TileEntityBasicInventory {
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
-		// TODO Auto-generated method stub
-		return null;
+		int[] SLOTS = new int[getSizeInventory()];
+		return SLOTS;
 	}
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

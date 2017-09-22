@@ -78,7 +78,7 @@ public class ContainerAntInventory extends Container {
 
 			if (slotStack.isEmpty() && !heldStack.isEmpty()) {
 				ItemStack copy = heldStack.copy();
-				copy.setCount(0);
+				copy.setCount(1);
 				slot.putStack(copy);
 			} else if (!slotStack.isEmpty())
 				slot.putStack(ItemStack.EMPTY);

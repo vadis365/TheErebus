@@ -4,14 +4,16 @@ import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackAnt;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.Path;
-import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 
 public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 
@@ -29,18 +31,20 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 	}
 
 	@Override
-	public boolean continueExecuting() {
+	public boolean shouldContinueExecuting() {
 		return !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty();
 	}
 
 	@Override
-	protected boolean canEatBlock(Block block, int blockMeta) {
+	protected boolean canEatBlock(IBlockState state) {
+		Block block = state.getBlock();
+
 		if (block == null)
 			return false;
 
-		if (block instanceof BlockCrops && blockMeta < 7)
+		if (block instanceof BlockCrops && block.getMetaFromState(state) < 7)
 			return true;
-		else if (block.hasTileEntity(blockMeta))
+		else if (block.hasTileEntity(state))
 			return false;
 
 		return false;
@@ -53,14 +57,7 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 
 	@Override
 	protected void moveToLocation() {
-		Path pathentity = blackAnt.getNavigator().getPathToXYZ(cropX, cropY, cropZ);
-
-		if (pathentity != null) {
-			blackAnt.getNavigator().setPath(pathentity, 0.5D);
-		}
-
-		if (blackAnt.getDistance(cropX, cropY, cropZ) < 1.5D)
-			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, 0.5D);
+		blackAnt.getNavigator().tryMoveToXYZ(cropX + 0.5D, cropY, cropZ + 0.5D, 0.5D);
 	}
 
 	@Override
@@ -74,7 +71,7 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 	@Override
 	protected void afterEaten() {
 		EntityPlayer player = Utils.getPlayer(blackAnt.getEntityWorld());
-
+		BlockPos pos = new BlockPos(cropX, cropY, cropZ);
 		if (!blackAnt.getEntityWorld().isRemote)
 			if (!isFilterSlotEmpty() && !isAntInvSlotEmpty()) {
 				Item filterItem = getFilterSlotStack().getItem();
@@ -83,16 +80,16 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 				int filterItemMeta = getFilterSlotStack().getItemDamage();
 
 				if (filterItem == invItem && filterItemMeta == invItemMeta) {
-					Utils.rightClickItemAt(blackAnt.getEntityWorld(), cropX, cropY, cropZ, 1, new ItemStack(invItem, invItemMeta));
-					ItemDye.applyBonemeal(getAntInvSlotStack(), blackAnt.getEntityWorld(), cropX, cropY, cropZ, player);
-					if (getAntInvSlotStack().stackSize < 1)
-						blackAnt.setInventorySlotContents(INVENTORY_SLOT, null);
+					Utils.rightClickItemAt(blackAnt.getEntityWorld(), pos, EnumHand.MAIN_HAND, EnumFacing.UP, new ItemStack(invItem, invItemMeta));
+					ItemDye.applyBonemeal(getAntInvSlotStack(), blackAnt.getEntityWorld(), pos, player, EnumHand.MAIN_HAND);
+					if (getAntInvSlotStack().getCount() < 1)
+						blackAnt.setInventorySlotContents(INVENTORY_SLOT, ItemStack.EMPTY);
 				}
 			}
 	}
 
 	public boolean isFilterSlotEmpty() {
-		return getFilterSlotStack() == null;
+		return getFilterSlotStack().isEmpty();
 	}
 
 	public ItemStack getFilterSlotStack() {
@@ -100,7 +97,7 @@ public class EntityAIAntBonemealCrops extends EntityAIAntsBlock {
 	}
 
 	public boolean isAntInvSlotEmpty() {
-		return getAntInvSlotStack() == null;
+		return getAntInvSlotStack().isEmpty();
 	}
 
 	public ItemStack getAntInvSlotStack() {

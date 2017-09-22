@@ -6,24 +6,26 @@ import java.util.List;
 import erebus.core.helper.Spiral;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackAnt;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 
 public abstract class EntityAIAntsBlock extends EntityAIBase {
 
 	/**
 	 * The bigger you make this value the faster the AI will be. But performance will also decrease so be sensible
 	 */
-	private static final int CHECKS_PER_TICK = 10;
+	private static final int CHECKS_PER_TICK = 3;
 
 	private final int EAT_SPEED;
 	protected final EntityLiving entity;
 	private final int maxGrowthMetadata;
-	private final Block block;
+	private final IBlockState blockState;
 	private final ItemStack seed;
 
 	private boolean hasTarget;
@@ -34,34 +36,34 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 	private int eatTicks;
 	private static final List<Point> spiral = new Spiral(8, 8).spiral();
 
-	public EntityAIAntsBlock(EntityLiving entity, Block block, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed) {
+	public EntityAIAntsBlock(EntityLiving entity, IBlockState state, int maxGrowthMetadata, ItemStack seed, double moveSpeed, int eatSpeed) {
 		this.entity = entity;
 		this.maxGrowthMetadata = maxGrowthMetadata;
-		this.block = block;
+		blockState = state;
 		this.seed = seed;
 		hasTarget = false;
 		spiralIndex = 0;
 		EAT_SPEED = eatSpeed * 20;
 	}
 
-	public EntityAIAntsBlock(EntityAnimal entity, Block block, int maxGrowthMetadata, float moveSpeed, int eatSpeed) {
-		this(entity, block, maxGrowthMetadata, null, moveSpeed, eatSpeed);
+	public EntityAIAntsBlock(EntityAnimal entity, IBlockState state, int maxGrowthMetadata, float moveSpeed, int eatSpeed) {
+		this(entity, state, maxGrowthMetadata, null, moveSpeed, eatSpeed);
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		return entity.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+		return entity.getEntityWorld().getGameRules().getBoolean("mobGriefing");
 	}
 
 	@Override
-	public boolean continueExecuting() {
+	public boolean shouldContinueExecuting() {
 		return !entity.isChild();
 	}
 
 	@Override
 	public void updateTask() {
 		EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
-		if (!continueExecuting())
+		if (!shouldContinueExecuting())
 			return;
 
 		int xCoord = blackAnt.getDropPointX();
@@ -74,7 +76,7 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 
 				Point p = getNextPoint();
 				for (int y = -2; y < 1; y++)
-					if (canEatBlock(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
+					if (canEatBlock(entity.getEntityWorld().getBlockState(new BlockPos(xCoord + p.x, yCoord + y, zCoord + p.y)))) {
 						cropX = xCoord + p.x;
 						cropY = yCoord + y;
 						cropZ = zCoord + p.y;
@@ -84,25 +86,31 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 				moveToLocation();
 				entity.getLookHelper().setLookPosition(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, 30.0F, 8.0F);
 				AxisAlignedBB blockbounds = getBlockAABB(cropX, cropY, cropZ);
-				boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
+				boolean flag = entity.getEntityBoundingBox().maxY >= blockbounds.minY && entity.getEntityBoundingBox().minY <= blockbounds.maxY && entity.getEntityBoundingBox().maxX >= blockbounds.minX && entity.getEntityBoundingBox().minX <= blockbounds.maxX && entity.getEntityBoundingBox().maxZ >= blockbounds.minZ && entity.getEntityBoundingBox().minZ <= blockbounds.maxZ;
 
-				if (flag) {
+				if (flag && canEatBlock(getTargetBlock())) {
 					prepareToEat();
 					eatTicks++;
-					if (!canEatBlock(entity.worldObj.getBlock(cropX, cropY, cropZ), entity.worldObj.getBlockMetadata(cropX, cropY, cropZ)))
+				if (!canEatBlock(getTargetBlock())) {
+						eatingInterupted();
 						hasTarget = false;
+						eatTicks = 0;
+						return;
+					}
 					else if (EAT_SPEED <= eatTicks) {
 						if (seed != null)
-							Utils.dropStack(entity.worldObj, cropX, cropY, cropZ, seed.copy());
+							Utils.dropStack(entity.getEntityWorld(), new BlockPos(cropX, cropY, cropZ), seed.copy());
 						hasTarget = false;
 						eatTicks = 0;
 						afterEaten();
+						return;
 					}
 				}
-				if (!flag && eatTicks > 0) {
+				if (!flag && eatTicks >  0 || entity.getEntityWorld().isAirBlock(new BlockPos(cropX, cropY, cropZ))) {
 					eatingInterupted();
 					hasTarget = false;
 					eatTicks = 0;
+					return;
 				}
 			}
 	}
@@ -117,19 +125,21 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 		return spiral.get(spiralIndex);
 	}
 
-	public Block getTargetBlock() {
-		return entity.worldObj.getBlock(cropX, cropY, cropZ);
+	public IBlockState getTargetBlock() {
+		IBlockState state = entity.getEntityWorld().getBlockState(new BlockPos(cropX, cropY, cropZ));
+		return state;
 	}
 
 	/**
 	 * Override this if you wish to do a more advanced checking on which blocks should be eaten
 	 *
-	 * @param block
-	 * @param meta
+	 * @param state
+	 * @yeah - it uses meta atm :(
 	 * @return true is should eat block, false is it shouldn't
 	 */
-	protected boolean canEatBlock(Block block, int meta) {
-		return block == this.block && meta == maxGrowthMetadata;
+	
+	protected boolean canEatBlock(IBlockState state) {
+		return state == blockState && state.getBlock().getMetaFromState(state) == maxGrowthMetadata && state.getBlock() != Blocks.AIR;
 	}
 
 	/**
@@ -160,6 +170,6 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 	protected abstract void afterEaten();
 
 	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
-		return AxisAlignedBB.getBoundingBox(cropX, cropY, cropZ, cropX + 1.0D, cropY + 1.0D, cropZ + 1.0D);
+		return new AxisAlignedBB(cropX, cropY, cropZ, cropX + 1D, cropY + 1D, cropZ + 1D);
 	}
 }

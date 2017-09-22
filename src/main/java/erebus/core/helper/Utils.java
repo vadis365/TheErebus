@@ -4,8 +4,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.UUID;
 
+import com.mojang.authlib.GameProfile;
+
+import erebus.lib.Reference;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -16,32 +21,35 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class Utils {
-/* TODO FIX
+
 	public static boolean rightClickItemAt(World world, BlockPos pos, EnumHand hand, EnumFacing side, ItemStack stack) {
-		if (world.isRemote || stack == null || stack.getItem() == null)
+		if (world.isRemote || stack.isEmpty() || stack.getItem() == null)
 			return false;
 		EntityPlayer player = getPlayer(world);
 		player.replaceItemInInventory(0, stack);
 		try {
-			return stack.getItem().onItemUse(stack, player, world, pos, hand, side, 0, 0, 0) != null;
+			return stack.getItem().onItemUse(player, world, pos, hand, side, 0, 0, 0) != null;
 		} finally {
-			player.replaceItemInInventory(0, null);
+			player.replaceItemInInventory(0, ItemStack.EMPTY);
 		}
 	}
 
 	public static EntityPlayer getPlayer(World world) {
 		if (world.isRemote || !(world instanceof WorldServer))
 			return null;
-		return FakePlayerFactory.get((WorldServer) world, new GameProfile(UUID.nameUUIDFromBytes(Reference.MOD_ID.getBytes()), "[" + Reference.CHANNEL + "]"));
+		return FakePlayerFactory.get((WorldServer) world, new GameProfile(UUID.nameUUIDFromBytes(Reference.MOD_ID.getBytes()), "[" + Reference.MOD_ID + "]"));
 	}
-*/
+
 	public static final int getFlowerMetadata(Object obj) {
 		int meta = -1;
 		if (obj instanceof ItemStack)
@@ -99,7 +107,7 @@ public class Utils {
 	}
 
 	public static void dropStackNoRandom(World world, BlockPos pos, ItemStack stack) {
-		if (!world.isRemote && stack != null && world.getGameRules().getBoolean("doTileDrops")) {
+		if (!world.isRemote && !stack.isEmpty() && world.getGameRules().getBoolean("doTileDrops")) {
 			EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, stack);
 			entityItem.motionX = 0;
 			entityItem.motionY = 0;
@@ -150,7 +158,7 @@ public class Utils {
 	private static ItemStack extractFromSlots(IInventory iinventory, EnumFacing side, int maxStackSize, int[] slots) {
 		for (int slot : slots) {
 			ItemStack invtStack = iinventory.getStackInSlot(slot);
-			if (invtStack != null)
+			if (!invtStack.isEmpty())
 				if (!(iinventory instanceof ISidedInventory) || ((ISidedInventory) iinventory).canExtractItem(slot, invtStack, side)) {
 					ItemStack copy = invtStack.copy();
 					if (maxStackSize <= 0)
@@ -224,7 +232,7 @@ public class Utils {
 	}
 
 	public static boolean areStacksSameOre(ItemStack stack1, ItemStack stack2) {
-		if (stack1 == null || stack2 == null)
+		if (stack1.isEmpty() || stack2.isEmpty())
 			return false;
 		if (areStacksTheSame(stack1, stack2, false))
 			return true;
@@ -371,7 +379,7 @@ public class Utils {
 	}
 
 	public static ItemStack getContainer(ItemStack stack) {
-		return stack.getItem().hasContainerItem(stack) ? stack.getItem().getContainerItem(stack) : null;
+		return stack.getItem().hasContainerItem(stack) ? stack.getItem().getContainerItem(stack) : ItemStack.EMPTY;
 	}
 
 	public static final LinkedHashMap<Short, Short> getEnchantments(ItemStack stack) {

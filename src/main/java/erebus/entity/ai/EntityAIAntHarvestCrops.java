@@ -3,15 +3,16 @@ package erebus.entity.ai;
 import erebus.entity.EntityBlackAnt;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.util.math.BlockPos;
 
 public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
 
 	EntityBlackAnt blackAnt = (EntityBlackAnt) entity;
-	private Block blockMunched;
+	private IBlockState blockMunched;
 	private int metaData;
 
 	public EntityAIAntHarvestCrops(EntityLivingBase entity, double moveSpeed, int eatSpeed) {
@@ -19,13 +20,15 @@ public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
 	}
 
 	@Override
-	protected boolean canEatBlock(Block block, int blockMeta) {
+	protected boolean canEatBlock(IBlockState state) {
+		Block block = state.getBlock();
+
 		if (block == null)
 			return false;
 
-		if (block instanceof BlockCrops && blockMeta >= 7)
+		if (block instanceof BlockCrops && block.getMetaFromState(state) >= 7)
 			return true;
-		else if (block.hasTileEntity(blockMeta))
+		else if (block.hasTileEntity(state))
 			return false;
 
 		return false;
@@ -37,32 +40,32 @@ public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
 	}
 
 	@Override
+	public boolean shouldExecute() {
+		return !blackAnt.getMoveHelper().isUpdating() && super.shouldExecute();
+	}
+
+	@Override
 	protected void moveToLocation() {
-		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY, cropZ, 16.0F, true, false, false, true);
-
-		if (pathentity != null) {
-			blackAnt.setPathToEntity(pathentity);
-			blackAnt.getNavigator().setPath(pathentity, 0.5D);
-		}
-
-		if (blackAnt.getDistance(cropX, cropY, cropZ) < 1.5D)
-			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY, cropZ + 0.5D, 0.5D);
+		blackAnt.getNavigator().tryMoveToXYZ(cropX + 0.5D, cropY + 1, cropZ + 0.5D, 0.5D);
 	}
 
 	@Override
 	protected void prepareToEat() {
 		blockMunched = getTargetBlock();
-		metaData = blackAnt.worldObj.getBlockMetadata(cropX, cropY, cropZ);
+		metaData = getTargetBlock().getBlock().getMetaFromState(getTargetBlock());
 	}
 
 	@Override
 	protected void eatingInterupted() {
+		entity.getNavigator().clearPathEntity();
 	}
 
 	@Override
 	protected void afterEaten() {
-		blackAnt.worldObj.setBlockToAir(cropX, cropY, cropZ);
-		blackAnt.worldObj.setBlock(cropX, cropY - 1, cropZ, Blocks.dirt);
-		blackAnt.setBlockHarvested(blockMunched, metaData);
+		BlockPos pos = new BlockPos(cropX, cropY, cropZ);
+		blackAnt.getEntityWorld().setBlockToAir(pos);
+		blackAnt.getEntityWorld().setBlockState(pos.down(), Blocks.DIRT.getDefaultState());
+		blackAnt.setBlockHarvested(blockMunched.getBlock(), metaData);
+		entity.getNavigator().clearPathEntity();
 	}
 }

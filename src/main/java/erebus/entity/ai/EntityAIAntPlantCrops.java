@@ -3,13 +3,19 @@ package erebus.entity.ai;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityBlackAnt;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 
 public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 
@@ -27,18 +33,21 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 	}
 
 	@Override
-	public boolean continueExecuting() {
+	public boolean shouldContinueExecuting() {
 		return !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty();
 	}
 
 	@Override
-	protected boolean canEatBlock(Block block, int blockMeta) {
+	protected boolean canEatBlock(IBlockState state) {
+		Block block = state.getBlock();
 		if (block == null)
 			return false;
 
-		if (block == Blocks.dirt || block == Blocks.grass)
+		if (block == Blocks.DIRT || block == Blocks.GRASS)
 			return true;
-		else if (block.hasTileEntity(blockMeta))
+		if (block == Blocks.FARMLAND && entity.getEntityWorld().isAirBlock(new BlockPos(cropX, cropY + 1, cropZ)))
+			return true;
+		else if (block.hasTileEntity(state))
 			return false;
 
 		return false;
@@ -51,14 +60,7 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 
 	@Override
 	protected void moveToLocation() {
-		PathEntity pathentity = blackAnt.worldObj.getEntityPathToXYZ(blackAnt, cropX, cropY + 1, cropZ, 16.0F, true, false, false, true);
-		if (pathentity != null) {
-			blackAnt.setPathToEntity(pathentity);
-			blackAnt.getNavigator().setPath(pathentity, 0.5D);
-		}
-
-		if (blackAnt.getDistance(cropX, cropY, cropZ) < 1.5D)
-			blackAnt.getMoveHelper().setMoveTo(cropX + 0.5D, cropY + 1, cropZ + 0.5D, 0.5D);
+		blackAnt.getNavigator().tryMoveToXYZ(cropX + 0.5D, cropY + 1, cropZ + 0.5D, 0.5D);
 	}
 
 	@Override
@@ -71,11 +73,11 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 
 	@Override
 	protected void afterEaten() {
-		if (!blackAnt.worldObj.isRemote) {
-
-			if (getTargetBlock() != Blocks.farmland) {
-				Utils.rightClickItemAt(blackAnt.worldObj, cropX, cropY, cropZ, 1, new ItemStack(Items.wooden_hoe));
-				blackAnt.worldObj.playSoundEffect((double) cropX + 0.5F, (double) cropY + 0.5F, (double) cropZ + 0.5F, Blocks.farmland.stepSound.getStepResourcePath(), (Blocks.farmland.stepSound.getVolume() + 1.0F) / 2.0F, Blocks.farmland.stepSound.getPitch() * 0.8F);
+		BlockPos pos = new BlockPos(cropX, cropY, cropZ);
+		if (!blackAnt.getEntityWorld().isRemote) {
+			if (getTargetBlock() != Blocks.FARMLAND) {
+				Utils.rightClickItemAt(blackAnt.getEntityWorld(), pos, EnumHand.MAIN_HAND, EnumFacing.UP, new ItemStack(Items.WOODEN_HOE));
+				blackAnt.getEntityWorld().playSound((EntityPlayer)null, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 
 			if (!isFilterSlotEmpty() && !isAntInvSlotEmpty()) {
@@ -85,17 +87,17 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 				int filterItemMeta = getFilterSlotStack().getItemDamage();
 
 				if (filterItem == invItem && filterItemMeta == invItemMeta) {
-					Utils.rightClickItemAt(blackAnt.worldObj, cropX, cropY, cropZ, 1, new ItemStack(invItem, invItemMeta));
-					blackAnt.setInventorySlotContents(INVENTORY_SLOT, new ItemStack(invItem, getAntInvSlotStack().stackSize - 1, invItemMeta));
-					if (getAntInvSlotStack().stackSize < 1)
-						blackAnt.setInventorySlotContents(INVENTORY_SLOT, null);
+					Utils.rightClickItemAt(blackAnt.getEntityWorld(), pos, EnumHand.MAIN_HAND, EnumFacing.UP, new ItemStack(invItem, 1, invItemMeta));
+					blackAnt.setInventorySlotContents(INVENTORY_SLOT, new ItemStack(invItem, getAntInvSlotStack().getCount() - 1, invItemMeta));
+					if (getAntInvSlotStack().getCount() < 1)
+						blackAnt.setInventorySlotContents(INVENTORY_SLOT, ItemStack.EMPTY);
 				}
 			}
 		}
 	}
 
 	public boolean isFilterSlotEmpty() {
-		return getFilterSlotStack() == null;
+		return getFilterSlotStack().isEmpty();
 	}
 
 	public ItemStack getFilterSlotStack() {
@@ -103,7 +105,7 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 	}
 
 	public boolean isAntInvSlotEmpty() {
-		return getAntInvSlotStack() == null;
+		return getAntInvSlotStack().isEmpty();
 	}
 
 	public ItemStack getAntInvSlotStack() {
