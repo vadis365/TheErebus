@@ -10,6 +10,7 @@ import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModSounds;
+import erebus.block.silo.TileEntitySiloTank;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAIAntBonemealCrops;
@@ -44,11 +45,15 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 public class EntityBlackAnt extends EntityTameable implements IInventory {
 	private static final DataParameter<Integer> DROP_POINT_X = EntityDataManager.<Integer>createKey(EntityBlackAnt.class, DataSerializers.VARINT);
@@ -246,7 +251,8 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-
+		if (getEntityWorld().isRemote)
+			return;
 		// Don't pick up items unless the filter is defined and the inventory is
 		// not full
 		if (isTamed()) {
@@ -285,8 +291,10 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 				if (block == ModBlocks.SILO_TANK)
 					if (getDistance(getDropPointX() + 0.5D, getDropPointY() - 1D, getDropPointZ() + 0.5D) < 2D) {
 						addDropToInventory(pos);
-						canAddToSilo = false;
-						canPickupItems = true;
+						if(isAntInvSlotEmpty()) {
+							canAddToSilo = false;
+							canPickupItems = true;
+						}
 					}
 			}
 
@@ -313,9 +321,12 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		if (getEntityWorld().isRemote)
 			return;
 		BlockPos pos = new BlockPos(getDropPointX(), getDropPointY(), getDropPointZ());
-		IInventory siloTile = (IInventory) getEntityWorld().getTileEntity(pos);
-		ItemStack[] siloInventory = new ItemStack[siloTile.getSizeInventory()];
-		for (int i = 0; i < siloInventory.length; i++)
+		TileEntitySiloTank siloTile = (TileEntitySiloTank) getEntityWorld().getTileEntity(pos);
+
+		if (siloTile != null && siloTile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN)) {
+			IItemHandler handler = siloTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+			int sizeInventory = handler.getSlots();
+		for (int i = 0; i < sizeInventory; i++)
 			if (!siloTile.getStackInSlot(i).isEmpty())
 				if (siloTile.getStackInSlot(i).getItem() == getStackInSlot(CROP_ID_SLOT).getItem() && siloTile.getStackInSlot(i).getItemDamage() == getStackInSlot(CROP_ID_SLOT).getItemDamage())
 					if (isAntInvSlotEmpty()) {
@@ -324,13 +335,26 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 						siloTile.decrStackSize(i, collectStackSize);
 						return;
 					}
+		}
 	}
 
 	private void addDropToInventory(BlockPos pos) {
 		ItemStack stack = getAntInvSlotStack();
-		if (!isAntInvSlotEmpty())
-			Utils.addItemStackToInventory(Utils.getTileEntity(getEntityWorld(), pos, IInventory.class), new ItemStack(stack.getItem(), stack.getCount(), stack.getItemDamage()));
-		setInventorySlotContents(2, ItemStack.EMPTY);
+		TileEntitySiloTank siloTile = (TileEntitySiloTank) getEntityWorld().getTileEntity(pos);
+		if (!isAntInvSlotEmpty()) {
+			if (siloTile != null && siloTile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN)) {
+				IItemHandler handler = siloTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+				if (!stack.isEmpty()) {
+					ItemStack stackNew = stack.copy();
+					stackNew.setCount(1);
+					ItemStack stack1 = ItemHandlerHelper.insertItem(handler, stackNew, true);
+					if (stack1.isEmpty()) {
+						ItemHandlerHelper.insertItem(handler, decrStackSize(INVENTORY_SLOT, 1), false);
+						markDirty();
+					}
+				}
+			}
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -401,17 +425,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 		} else
 			return ItemStack.EMPTY;
 	}
-/*
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (inventory[slot] != null) {
-			ItemStack itemstack = inventory[slot];
-			inventory[slot] = null;
-			return itemstack;
-		} else
-			return null;
-	}
-*/
+
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		inventory.set(slot, stack);
@@ -422,7 +436,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 
 	@Override
 	public String getName() {
-		return "container.antInventory";
+		return hasCustomName() ? getCustomNameTag() : "container.antInventory";
 	}
 
 	@Override
@@ -515,7 +529,6 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			tasks.addTask(1, aiBonemealCrops);
 			dataManager.set(TAME_TYPE, (byte) 5);
 		}
-		updateAITasks();
 	}
 
 	public boolean isTaskSlotEmpty() {

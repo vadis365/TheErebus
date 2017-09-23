@@ -176,11 +176,11 @@ public class Utils {
 		return null;
 	}
 
-	public static boolean addEntitytoInventory(IInventory iinventory, EntityItem entity) {
+	public static boolean addEntitytoInventory(IInventory iinventoryTo, EntityItem entity) {
 		if (entity == null)
 			return false;
 
-		boolean flag = addItemStackToInventory(iinventory, entity.getItem());
+		boolean flag = addItemStackToInventory(iinventoryTo, entity.getItem());
 		if (flag)
 			entity.setDead();
 		else if (entity.getItem().isEmpty())
@@ -188,19 +188,19 @@ public class Utils {
 		return flag;
 	}
 
-	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack) {
-		return addItemStackToInventory(iinventory, stack, EnumFacing.DOWN);
+	public static boolean addItemStackToInventory(IInventory iinventoryTo, ItemStack stack) {
+		return addItemStackToInventory(iinventoryTo, stack, EnumFacing.DOWN);
 	}
 
-	public static boolean addItemStackToInventory(IInventory iinventory, ItemStack stack, EnumFacing side) {
-		if (iinventory == null)
+	public static boolean addItemStackToInventory(IInventory iinventoryTo, ItemStack stack, EnumFacing side) {
+		if (iinventoryTo == null)
 			return false;
 
 		if (stack.isEmpty())
 			return false;
 
-		IInventory invt = getInventory(iinventory);
-		return addToSlots(invt, stack, side, getSlotsFromSide(invt, side));
+		IInventory invtTo = getInventory(iinventoryTo);
+		return addToSlots(invtTo, stack, side, getSlotsFromSide(invtTo, side));
 	}
 
 	private static boolean addToSlots(IInventory iinventory, ItemStack stack, EnumFacing side, int[] slots) {
@@ -218,10 +218,10 @@ public class Utils {
 			} else {
 				ItemStack invtStack = iinventory.getStackInSlot(slot);
 				if (invtStack.getCount() < Math.min(invtStack.getMaxStackSize(), iinventory.getInventoryStackLimit()) && areStacksTheSame(invtStack, stack, false)) {
-					invtStack.setCount(stack.getCount());
+					invtStack.grow(stack.getCount());
 					if (invtStack.getCount() > invtStack.getMaxStackSize()) {
-						stack.shrink(stack.getMaxStackSize() - invtStack.getCount());
-						invtStack.setCount(stack.getMaxStackSize());
+						stack.setCount(invtStack.getMaxStackSize() - invtStack.getCount());
+						invtStack.setCount(invtStack.getMaxStackSize());
 					} else
 						stack.setCount(0);
 					return true;

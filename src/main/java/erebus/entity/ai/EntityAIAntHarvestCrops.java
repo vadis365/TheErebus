@@ -65,6 +65,7 @@ public class EntityAIAntHarvestCrops extends EntityAIAntsBlock {
 		BlockPos pos = new BlockPos(cropX, cropY, cropZ);
 		blackAnt.getEntityWorld().setBlockToAir(pos);
 		blackAnt.getEntityWorld().setBlockState(pos.down(), Blocks.DIRT.getDefaultState());
+		blackAnt.setPosition(cropX + 0.5D, cropY, cropZ + 0.5D); // may stop ant glitching in to farmland once it changed
 		blackAnt.setBlockHarvested(blockMunched.getBlock(), metaData);
 		entity.getNavigator().clearPathEntity();
 	}

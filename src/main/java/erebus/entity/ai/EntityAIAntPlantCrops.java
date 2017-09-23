@@ -45,7 +45,7 @@ public class EntityAIAntPlantCrops extends EntityAIAntsBlock {
 
 		if (block == Blocks.DIRT || block == Blocks.GRASS)
 			return true;
-		if (block == Blocks.FARMLAND && entity.getEntityWorld().isAirBlock(new BlockPos(cropX, cropY + 1, cropZ)))
+		if (block == Blocks.FARMLAND && blackAnt.getEntityWorld().isAirBlock(new BlockPos(cropX, cropY + 1, cropZ)))
 			return true;
 		else if (block.hasTileEntity(state))
 			return false;

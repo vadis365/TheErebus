@@ -3,17 +3,20 @@ package erebus.block.silo;
 import erebus.tileentity.TileEntityBasicInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class TileEntitySiloTank extends TileEntityBasicInventory {
 
 	private boolean active;
-	//private static final int[] SLOTS;
+	private IItemHandler itemHandler;
 	public TileEntitySiloTank() {
 		super(104, "");
 	}
@@ -39,6 +42,8 @@ public class TileEntitySiloTank extends TileEntityBasicInventory {
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
 		int[] SLOTS = new int[getSizeInventory()];
+		for (int index = 0; index < SLOTS.length; index++)
+			SLOTS[index] = index;
 		return SLOTS;
 	}
 
@@ -49,7 +54,6 @@ public class TileEntitySiloTank extends TileEntityBasicInventory {
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -61,5 +65,24 @@ public class TileEntitySiloTank extends TileEntityBasicInventory {
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		return true;
+	}
+	
+	// INVENTORY CAPABILITIES STUFF
+
+	protected IItemHandler createUnSidedHandler() {
+		return new InvWrapper(this);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			return (T) (itemHandler == null ? (itemHandler = createUnSidedHandler()) : itemHandler);
+		return super.getCapability(capability, facing);
 	}
 }

@@ -27,6 +27,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -129,6 +130,11 @@ public class BlockRedGem extends Block implements IHasCustomItem, ISubBlocksBloc
 				world.setBlockState(pos, state.withProperty(TYPE, EnumType.RED_LAMP_ON), 2);
 		}
 	}
+
+	@Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
+    }
 	
 	@Override
 	public ItemBlock getItemBlock() {
