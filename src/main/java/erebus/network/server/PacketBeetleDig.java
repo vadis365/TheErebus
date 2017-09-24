@@ -97,7 +97,6 @@ public class PacketBeetleDig implements IMessage, IMessageHandler<PacketBeetleDi
 									BlockPos pos = new BlockPos(k1, l1, i2);
 									IBlockState state = player.getEntityWorld().getBlockState(pos);
 									if (state.getBlock() != null && state.getBlockHardness(player.getEntityWorld(), pos) <= 10F) {
-										//player.getEntityWorld().playEvent(null, 2001, pos, Block.getIdFromBlock(state.getBlock()));
 										Utils.breakBlockWithParticles(player.getEntityWorld(), pos);
 										state.getBlock().dropBlockAsItem(player.getEntityWorld(), pos, state, 0);
 									}

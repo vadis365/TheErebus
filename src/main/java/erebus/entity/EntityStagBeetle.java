@@ -46,6 +46,7 @@ public class EntityStagBeetle extends EntityTameable {
 	private EntityAINearestAttackableTarget aiNearestAttackableTarget;
 	int shagCount;
 	public int prevAnimation;
+
 	public EntityStagBeetle(World world) {
 		super(world);
 		stepHeight = 2.0F;
