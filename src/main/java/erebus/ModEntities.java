@@ -42,6 +42,7 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
+import erebus.entity.EntityStagBeetle;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTitanBeetle;
@@ -91,7 +92,7 @@ public class ModEntities {
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umber_golem_idol");
 		registerEntity(57, EntityAntlionBoss.class, "antlion_boss", 0x000000, 0xFFFFFF);
 
-		registerEntity(62, EntityStagBeetle.class, "stag_beetle", 0x222222, 0x747474);
+		
 
 		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
 
@@ -160,6 +161,7 @@ public class ModEntities {
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(60, EntityZombieAntSoldier.class, "zombie_ant_soldier", 0x00FE40, 0xF09071);
 		registerEntity(61, EntityBedBug.class, "bed_bug");
+		registerEntity(62, EntityStagBeetle.class, "stag_beetle", 0x222222, 0x747474);
 
 		registerEntity(71, EntityWebSling.class, "web_sling");
 

@@ -9,6 +9,8 @@ import java.util.UUID;
 import com.mojang.authlib.GameProfile;
 
 import erebus.lib.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -64,7 +66,7 @@ public class Utils {
 
 		return meta;
 	}
-/* TODO FIX
+
 	public static final void breakBlockWithParticles(World world, BlockPos pos, IBlockState state) {
 		playBreakParticles(world, pos, state);
 		world.setBlockToAir(pos);
@@ -75,13 +77,13 @@ public class Utils {
 	}
 	
 	public static void playBreakParticles(World world, BlockPos pos, IBlockState state) {
-		world.playAuxSFXAtEntity(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + world.getBlockState(pos).getBlock().getMetaFromState(state) << 12);
+		world.playEvent(null, 2001, pos, Block.getIdFromBlock(state.getBlock()));
 	}
 
 	public static void playBreakParticles(World world, BlockPos pos) {
-		world.playAuxSFXAtEntity(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + (world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)) << 12));
+		world.playEvent(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()) + (world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos)) << 12));
 	}
-*/
+
 	public static final void dropStack(World world, BlockPos pos, ItemStack is) {
 		if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops")) {
 			float f = 0.7F;

@@ -1,33 +1,30 @@
 package erebus.client.render.entity;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.client.model.entity.ModelStagBeetle;
 import erebus.entity.EntityStagBeetle;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderStagBeetle extends RenderLiving {
-	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/stagBeetle.png");
-	private static final ResourceLocation TEXTURE_TAME = new ResourceLocation("erebus:textures/entity/stagBeetleKit.png");
+public class RenderStagBeetle extends RenderLiving<EntityStagBeetle> {
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/stag_beetle.png");
+	private static final ResourceLocation TEXTURE_TAME = new ResourceLocation("erebus:textures/entity/stag_beetle_kit.png");
 
-	public RenderStagBeetle() {
-		super(new ModelStagBeetle(), 1F);
+	public RenderStagBeetle(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelStagBeetle(), 1F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
-		GL11.glScalef(1.2F, 1.2F, 1.2F);
+	protected void preRenderCallback(EntityStagBeetle beetle, float partialTickTime) {
+		GlStateManager.scale(1.2F, 1.2F, 1.2F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return ((EntityStagBeetle) entity).getTameState() < 2 ? TEXTURE : TEXTURE_TAME;
+	protected ResourceLocation getEntityTexture(EntityStagBeetle beetle) {
+		return beetle.getTameState() < 2 ? TEXTURE : TEXTURE_TAME;
 	}
 }

@@ -1,7 +1,5 @@
 package erebus.client.model.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.entity.EntityStagBeetle;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -353,19 +351,19 @@ public class ModelStagBeetle extends ModelBase {
 		float legMovement = MathHelper.cos(limbSwing * 0.75F) * 0.3F * limbSwingAngle;
 		float correction = 0.3490659F;
 		int prevAnimation = beetle.prevAnimation;
-		float interAnimationTicks = beetle.getDataWatcher().getWatchableObjectInt(30) + (beetle.getDataWatcher().getWatchableObjectInt(30) - prevAnimation) * partialTickTime;
+		float interAnimationTicks = beetle.getJawMotion() + (beetle.getJawMotion() - prevAnimation) * partialTickTime;
 		legLB1.rotateAngleY = legMovement - correction;
 		legLM1.rotateAngleY = -legMovement;
 		legLF1.rotateAngleY = legMovement + correction;
 		legRB1.rotateAngleY = -legMovement - correction;
 		legRM1.rotateAngleY = legMovement;
 		legRF1.rotateAngleY = legMovement + 3.142F - correction;
-		if(beetle.getDataWatcher().getWatchableObjectByte(29) == 1) {
-			if(beetle.getDataWatcher().getWatchableObjectByte(28) == 0)
+		if(beetle.getAction() == 1) {
+			if(beetle.getHeadPos() == 0)
 				headMid.rotateAngleX = -0.175F + 0.085F * interAnimationTicks;
-			else if(beetle.getDataWatcher().getWatchableObjectByte(28) == 2)
+			else if(beetle.getHeadPos() == 2)
 				headMid.rotateAngleX = -0.175F - 0.17F * interAnimationTicks;
-			else if(beetle.getDataWatcher().getWatchableObjectByte(28) == 1)
+			else if(beetle.getHeadPos() == 1)
 				if(headMid.rotateAngleX > -0.175F)
 					headMid.rotateAngleX -= 0.17F * interAnimationTicks;
 				else if(headMid.rotateAngleX < -0.175F)

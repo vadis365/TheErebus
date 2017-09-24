@@ -7,6 +7,7 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
 import erebus.network.client.PacketParticle;
 import erebus.network.server.ColossalCratePage;
+import erebus.network.server.PacketBeetleDig;
 import erebus.proxy.CommonProxy;
 import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
@@ -58,6 +59,7 @@ public class Erebus {
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
 		ConfigHandler.INSTANCE.initOreConfigs();
 
+		PROXY.registerKeyHandlers();
 		PROXY.registerTileEntities();
 		PROXY.registerItemAndBlockRenderers();
 		PROXY.registerEnitityRenderers();
@@ -66,6 +68,7 @@ public class Erebus {
 		NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID);
 		NETWORK_WRAPPER.registerMessage(PacketParticle.class, PacketParticle.class, 0, Side.CLIENT);
 		NETWORK_WRAPPER.registerMessage(ColossalCratePage.class, ColossalCratePage.class, 1, Side.SERVER);
+		NETWORK_WRAPPER.registerMessage(PacketBeetleDig.class, PacketBeetleDig.class, 2, Side.SERVER);
 	}
 
 	@EventHandler

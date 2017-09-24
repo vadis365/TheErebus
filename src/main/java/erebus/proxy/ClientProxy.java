@@ -54,6 +54,7 @@ import erebus.client.render.entity.RenderScorpion;
 import erebus.client.render.entity.RenderScytodes;
 import erebus.client.render.entity.RenderSolifuge;
 import erebus.client.render.entity.RenderSolifugeSmall;
+import erebus.client.render.entity.RenderStagBeetle;
 import erebus.client.render.entity.RenderTarantula;
 import erebus.client.render.entity.RenderTarantulaBaby;
 import erebus.client.render.entity.RenderTitanBeetle;
@@ -67,6 +68,7 @@ import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
+import erebus.core.handler.KeyBindingHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityAnimatedChest;
@@ -106,6 +108,7 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
+import erebus.entity.EntityStagBeetle;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTitanBeetle;
@@ -160,6 +163,11 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
+	
+	@Override
+	public void registerKeyHandlers() {
+		MinecraftForge.EVENT_BUS.register(new KeyBindingHandler());
+	}
 
 	@Override
 	public void registerItemAndBlockRenderers() {
@@ -228,6 +236,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnimatedBambooCrate.class, RenderAnimatedBlock::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTitanBeetle.class, RenderTitanBeetle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackAnt.class, RenderBlackAnt::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityStagBeetle.class, RenderStagBeetle::new);
 		
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 	

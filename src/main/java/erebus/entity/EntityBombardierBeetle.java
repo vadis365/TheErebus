@@ -34,6 +34,10 @@ public class EntityBombardierBeetle extends EntityMob {
 		super(world);
 		stepHeight = 1.0F;
 		setSize(1.9F, 0.9F);
+	}
+
+	@Override
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityBombardierBeetle.AIExplodeAttack(this));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));

@@ -83,6 +83,10 @@ public class CommonProxy implements IGuiHandler {
 
 	public final int[][] places = new int[][] { { 1, 0, 0 }, { 1, 0, 1 }, { 0, 0, 1 }, { 1, 1, 0 }, { 1, 1, 1 }, { 0, 1, 1 }, { 0, 1, 0 }, { 0, 0, 0 } };
 
+	public void registerKeyHandlers() {
+		// Unused server side. -- see ClientProxy for implementation
+	}
+
 	public void registerItemAndBlockRenderers() {
 	}
 
