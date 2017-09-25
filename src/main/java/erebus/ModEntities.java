@@ -38,6 +38,7 @@ import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
@@ -68,8 +69,6 @@ public class ModEntities {
 /*		
 		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
 
-		registerEntity(13, EntityRhinoBeetle.class, "rhinoBeetle", 0x222222, 0x747474);
-
 		registerEntity(23, EntityWorkerBee.class, "worker_bee", 0xFFA200, 0x000000);
 
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
@@ -91,8 +90,6 @@ public class ModEntities {
 		registerEntity(55, EntityMucusBombPrimed.class, "mucus_bomb_primed");
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umber_golem_idol");
 		registerEntity(57, EntityAntlionBoss.class, "antlion_boss", 0x000000, 0xFFFFFF);
-
-		
 
 		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
 
@@ -120,7 +117,7 @@ public class ModEntities {
 		registerEntity(10, EntityGrasshopper.class, "grasshopper", 0x06B900, 0x5FFF5F);
 		registerEntity(11, EntityLocust.class, "locust", 0x5FFF5F, 0x06B900);
 		registerEntity(12, EntityMoth.class, "moth", 0x00FFDD, 0xFBFFA8);
-
+		registerEntity(13, EntityRhinoBeetle.class, "rhinoBeetle", 0x222222, 0x747474);
 		registerEntity(14, EntityAntlion.class, "antlion", 0x000000, 0xFFFFFF);
 		registerEntity(15, EntityBlackWidow.class, "black_widow", 0x000000, 0xFF0000);
 		registerEntity(16, EntityGlowWorm.class, "glow_worm", 0xFFFF00, 0xFFFFFF);

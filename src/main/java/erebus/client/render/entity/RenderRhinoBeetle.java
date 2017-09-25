@@ -1,30 +1,30 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelRhinoBeetle;
 import erebus.entity.EntityRhinoBeetle;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+@SideOnly(Side.CLIENT)
+public class RenderRhinoBeetle extends RenderLiving<EntityRhinoBeetle> {
 
-public class RenderRhinoBeetle extends RenderLiving {
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/rhino_beetle.png");
+	private static final ResourceLocation TEXTURE_UNTAME = new ResourceLocation("erebus:textures/entity/rhino_beetle_kit.png");
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/rhinoBeetle.png");
-	private static final ResourceLocation TEXTURE_UNTAME = new ResourceLocation("erebus:textures/entity/rhinoBeetleKit.png");
-
-	public RenderRhinoBeetle() {
-		super(new ModelRhinoBeetle(), 0.5F);
+	public RenderRhinoBeetle(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelRhinoBeetle(), 0.5F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
-		GL11.glScalef(1.5F, 1.5F, 1.5F);
+	protected void preRenderCallback(EntityRhinoBeetle beetle, float partialTickTime) {
+		GlStateManager.scale(1.5F, 1.5F, 1.5F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return ((EntityRhinoBeetle) entity).getTameState() < 2 ? TEXTURE : TEXTURE_UNTAME;
+	protected ResourceLocation getEntityTexture(EntityRhinoBeetle beetle) {
+		return beetle.getTameState() < 2 ? TEXTURE : TEXTURE_UNTAME;
 	}
 }

@@ -1,6 +1,8 @@
 package erebus;
 
 import erebus.client.fx.ParticleTextureStitchEvent;
+import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
+import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
@@ -8,6 +10,7 @@ import erebus.lib.Reference;
 import erebus.network.client.PacketParticle;
 import erebus.network.server.ColossalCratePage;
 import erebus.network.server.PacketBeetleDig;
+import erebus.network.server.PacketBeetleRamAttack;
 import erebus.proxy.CommonProxy;
 import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
@@ -53,6 +56,8 @@ public class Erebus {
 				MinecraftForge.EVENT_BUS.register(new ErebusMusicHandler());
 			
 			MinecraftForge.EVENT_BUS.register(new ParticleTextureStitchEvent());
+			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
+			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
 		}
 
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
@@ -69,6 +74,7 @@ public class Erebus {
 		NETWORK_WRAPPER.registerMessage(PacketParticle.class, PacketParticle.class, 0, Side.CLIENT);
 		NETWORK_WRAPPER.registerMessage(ColossalCratePage.class, ColossalCratePage.class, 1, Side.SERVER);
 		NETWORK_WRAPPER.registerMessage(PacketBeetleDig.class, PacketBeetleDig.class, 2, Side.SERVER);
+		NETWORK_WRAPPER.registerMessage(PacketBeetleRamAttack.class, PacketBeetleRamAttack.class, 3, Side.SERVER);
 	}
 
 	@EventHandler

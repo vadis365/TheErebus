@@ -50,6 +50,7 @@ import erebus.client.render.entity.RenderMoneySpider;
 import erebus.client.render.entity.RenderMoth;
 import erebus.client.render.entity.RenderPondSkater;
 import erebus.client.render.entity.RenderPrayingMantis;
+import erebus.client.render.entity.RenderRhinoBeetle;
 import erebus.client.render.entity.RenderScorpion;
 import erebus.client.render.entity.RenderScytodes;
 import erebus.client.render.entity.RenderSolifuge;
@@ -104,6 +105,7 @@ import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
@@ -237,14 +239,15 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTitanBeetle.class, RenderTitanBeetle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackAnt.class, RenderBlackAnt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityStagBeetle.class, RenderStagBeetle::new);
-		
+		RenderingRegistry.registerEntityRenderingHandler(EntityRhinoBeetle.class, RenderRhinoBeetle::new);
+
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
-	
+
 	}
 
 	@Override
 	public void postInit() {
-		// shield rendering
+		// shield rendering unused but keeping here for future reference on other stuff
 
 		/*	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExoPlateShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.EXO_PLATE));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJadeShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.JADE));
@@ -288,7 +291,7 @@ public class ClientProxy extends CommonProxy {
 
 		if (particleName.equals("portal")) {
 			fx = new ParticlePortal.Factory().createParticle(EnumParticleTypes.PORTAL.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
-			fx.setRBGColorF(0F, 1F, 0F);
+			//fx.setRBGColorF(0F, 1F, 0F);
 		}
 		if (particleName.equals("cloud"))
 			fx = new ParticleCloud.Factory().createParticle(EnumParticleTypes.CLOUD.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);

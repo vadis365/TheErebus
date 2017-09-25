@@ -3,9 +3,11 @@ package erebus.core.handler;
 import org.lwjgl.input.Keyboard;
 
 import erebus.Erebus;
+import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityStagBeetle;
 import erebus.lib.Reference;
 import erebus.network.server.PacketBeetleDig;
+import erebus.network.server.PacketBeetleRamAttack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,18 +66,18 @@ public class KeyBindingHandler {
 				PacketPipeline.sendToServer(new PacketGliderPowered(true));
 			}
 		}
-
-		if (beetleRam.isPressed()) {
-			EntityPlayer player = FMLClientHandler.instance().getClient().player;
+*/
+		if (BEETLE_RAM.isPressed()) {
+			EntityPlayer player = FMLClientHandler.instance().getClientPlayerEntity();
 			if (player == null)
 				return;
 
 			if (player.isRiding() && player.getRidingEntity() instanceof EntityRhinoBeetle)
-				PacketPipeline.sendToServer(new PacketBeetleRamAttack(true));
+				Erebus.NETWORK_WRAPPER.sendToServer(new PacketBeetleRamAttack(true));
 		}
-*/
+
 		if (BEETLE_MINE.isPressed()) {
-			EntityPlayer player = FMLClientHandler.instance().getClient().player;
+			EntityPlayer player = FMLClientHandler.instance().getClientPlayerEntity();
 			if (player == null)
 				return;
 
