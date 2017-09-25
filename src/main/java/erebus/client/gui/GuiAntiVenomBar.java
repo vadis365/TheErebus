@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiAntiVenomBar extends Gui {
-	public ResourceLocation antiVenomTexture = new ResourceLocation("erebus:textures/gui/overlay/anti_venom_bar.png");
+	public ResourceLocation ANTI_VENOM_TEXTURE = new ResourceLocation("erebus:textures/gui/overlay/anti_venom_bar.png");
 	public Minecraft mc = Minecraft.getMinecraft();
 	public Random random = new Random();
 	
@@ -25,13 +25,13 @@ public class GuiAntiVenomBar extends Gui {
 			int startX = event.getResolution().getScaledWidth() / 2 + 82;
 			int startY = event.getResolution().getScaledHeight() - 51;
 			if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-				mc.getTextureManager().bindTexture(antiVenomTexture);
+				mc.getTextureManager().bindTexture(ANTI_VENOM_TEXTURE);
 
 				for (int i = 0; i < 10; i++) {
 					int offsetY = mc.player.isInsideOfMaterial(Material.WATER) ? -10 : 0;
 
-					if (mc.player.getEntityData().hasKey("antivenomDuration")) {
-						int duration = mc.player.getEntityData().getInteger("antivenomDuration") / 9;
+					if (mc.player.getEntityData().hasKey("anti_venom_duration")) {
+						int duration = mc.player.getEntityData().getInteger("anti_venom_duration") / 9;
 						GlStateManager.enableBlend();
 						GlStateManager.enableAlpha();
 						GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);

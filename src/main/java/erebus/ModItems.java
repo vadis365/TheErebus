@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import erebus.items.ItemAmuletAntTaming;
+import erebus.items.ItemAntiVenomBottle;
 import erebus.items.ItemArmorBamboo;
 import erebus.items.ItemArmorExoskeleton;
 import erebus.items.ItemArmorJade;
@@ -119,6 +120,7 @@ public class ModItems {
 	public static final Item ANT_TAMING_AMULET = new ItemAmuletAntTaming();
 	public static final Item WOODLOUSE_BALL = new ItemWoodlouseBall();
 	public static final Item WAND_OF_ANIMATION = new ItemWandOfAnimation();
+	public static final Item ANTI_VENOM_BOTTLE = new ItemAntiVenomBottle();
 
 	public static void init() {
 		try {

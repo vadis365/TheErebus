@@ -1,14 +1,17 @@
 package erebus;
 
 import erebus.client.fx.ParticleTextureStitchEvent;
+import erebus.client.gui.GuiAntiVenomBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
+import erebus.core.handler.AntiVenomDurationHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
 import erebus.network.client.PacketParticle;
 import erebus.network.server.ColossalCratePage;
+import erebus.network.server.PacketAntiVenom;
 import erebus.network.server.PacketBeetleDig;
 import erebus.network.server.PacketBeetleRamAttack;
 import erebus.proxy.CommonProxy;
@@ -58,6 +61,7 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new ParticleTextureStitchEvent());
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
+			MinecraftForge.EVENT_BUS.register(new GuiAntiVenomBar());
 		}
 
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
@@ -75,6 +79,7 @@ public class Erebus {
 		NETWORK_WRAPPER.registerMessage(ColossalCratePage.class, ColossalCratePage.class, 1, Side.SERVER);
 		NETWORK_WRAPPER.registerMessage(PacketBeetleDig.class, PacketBeetleDig.class, 2, Side.SERVER);
 		NETWORK_WRAPPER.registerMessage(PacketBeetleRamAttack.class, PacketBeetleRamAttack.class, 3, Side.SERVER);
+		NETWORK_WRAPPER.registerMessage(PacketAntiVenom.class, PacketAntiVenom.class, 4, Side.CLIENT);
 	}
 
 	@EventHandler
@@ -84,6 +89,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);
         MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
 		MinecraftForge.EVENT_BUS.register(SpawnerErebus.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(new AntiVenomDurationHandler());
 		PROXY.registerItemAndBlockColourRenderers();
 	}
 

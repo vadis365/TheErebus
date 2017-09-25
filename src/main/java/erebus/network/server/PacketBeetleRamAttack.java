@@ -21,6 +21,16 @@ public class PacketBeetleRamAttack implements IMessage, IMessageHandler<PacketBe
 	}
 
 	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeBoolean(ramming);
+	}
+
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		ramming = buf.readBoolean();
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IMessage onMessage(PacketBeetleRamAttack message, MessageContext ctx) {
 		final EntityPlayerMP player = ctx.getServerHandler().player;
@@ -33,15 +43,5 @@ public class PacketBeetleRamAttack implements IMessage, IMessageHandler<PacketBe
 			}
 		});
 		return null;
-	}
-
-	@Override
-	public void toBytes(ByteBuf buf) {
-		buf.writeBoolean(ramming);
-	}
-
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		ramming = buf.readBoolean();
 	}
 }
