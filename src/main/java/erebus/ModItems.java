@@ -9,6 +9,7 @@ import erebus.items.ItemAmuletAntTaming;
 import erebus.items.ItemAntiVenomBottle;
 import erebus.items.ItemArmorBamboo;
 import erebus.items.ItemArmorExoskeleton;
+import erebus.items.ItemArmorGlider;
 import erebus.items.ItemArmorJade;
 import erebus.items.ItemArmorReinExoskeleton;
 import erebus.items.ItemArmorRhino;
@@ -40,6 +41,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemSeedFood;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -100,11 +102,9 @@ public class ModItems {
 	public static final Item COMPOUND_GOGGLES = new ItemCompoundGoggles(ModMaterials.ARMOR_EXOSKELETON, EntityEquipmentSlot.HEAD);
 	public static final Item SPRINT_LEGGINGS = new ItemLeggingsSprint();
 	public static final Item JUMP_BOOTS = new ItemBootsJump();
-	
-	/* TODO FIX ERRORS
-	public static final Item GLIDER_CHESTPLATE = new ItemArmorGlider();
-	public static final Item GLIDER_CHESTPLATE_POWERED =  new ItemArmorGlider();
-	*/
+	public static final ItemArmor GLIDER_CHESTPLATE = (ItemArmor)new ItemArmorGlider();
+	public static final ItemArmor GLIDER_CHESTPLATE_POWERED = (ItemArmor)new ItemArmorGlider();
+
 	public static final Item MUSHROOM_HELMET = new ItemHelmMushroom(EntityEquipmentSlot.HEAD);
 	public static final Item SPIDER_T_SHIRT = new ItemSpiderTShirt(EntityEquipmentSlot.CHEST);
 	public static final Item WATER_STRIDERS = new ItemArmorWaterStriders(EntityEquipmentSlot.FEET);

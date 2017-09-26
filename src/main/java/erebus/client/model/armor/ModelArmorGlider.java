@@ -1,9 +1,8 @@
 package erebus.client.model.armor;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -60,31 +59,32 @@ public class ModelArmorGlider extends ModelBiped {
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
 		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0.0F, -0.05F, 0.0F);
-		GL11.glScalef(1.1F, 1.2F, 1.3F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0.0F, -0.05F, 0.0F);
+		GlStateManager.scale(1.1F, 1.2F, 1.3F);
 		Body.render(unitPixel);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0.15F, -0.05F, 0.0F);
-		GL11.glScalef(1.5F, 1.2F, 1.3F);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(0.15F, -0.05F, 0.0F);
+		GlStateManager.scale(1.5F, 1.2F, 1.3F);
 		RArm.render(unitPixel);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glTranslatef(-0.15F, -0.05F, 0.0F);
-		GL11.glScalef(1.5F, 1.2F, 1.3F);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(-0.15F, -0.05F, 0.0F);
+		GlStateManager.scale(1.5F, 1.2F, 1.3F);
 		LArm.render(unitPixel);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 		RWingbase.render(unitPixel);
 		LWingbase.render(unitPixel);
 
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 		RWing.render(unitPixel);
 		LWing.render(unitPixel);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

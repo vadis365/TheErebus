@@ -3,14 +3,19 @@ package erebus.core.handler;
 import org.lwjgl.input.Keyboard;
 
 import erebus.Erebus;
+import erebus.ModItems;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityStagBeetle;
 import erebus.lib.Reference;
 import erebus.network.server.PacketBeetleDig;
 import erebus.network.server.PacketBeetleRamAttack;
+import erebus.network.server.PacketGlider;
+import erebus.network.server.PacketGliderPowered;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -36,37 +41,45 @@ public class KeyBindingHandler {
 
 	@SubscribeEvent
 	public void onKey(KeyInputEvent e) {
-/*
-		if (glide.isPressed()) {
+
+		if (GLIDE.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().player;
-			if (player == null || player.onGround)
+			if (player == null)
 				return;
 
-			ItemStack chestPlate = player.inventory.armorInventory[2];
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGlider || chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
+			ItemStack chestPlate = player.inventory.armorInventory.get(2);
+			if (!chestPlate.isEmpty() && chestPlate.getItem() == ModItems.GLIDER_CHESTPLATE || !chestPlate.isEmpty() && chestPlate.getItem() == ModItems.GLIDER_CHESTPLATE_POWERED) {
 				if (!chestPlate.hasTagCompound())
-					chestPlate.getTagCompound() = new NBTTagCompound();
+					chestPlate.setTagCompound(new NBTTagCompound());
 
 				chestPlate.getTagCompound().setBoolean("isGliding", true);
-				PacketPipeline.sendToServer(new PacketGlider(true));
+				if(player.onGround) {
+					player.jump();
+					player.onGround = false;
+				}
+				Erebus.NETWORK_WRAPPER.sendToServer(new PacketGlider(true));
 			}
 		}
 
-		if (poweredGlide.isPressed()) {
+		if (POWERED_GLIDE.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClient().player;
-			if (player == null || player.onGround)
+			if (player == null)
 				return;
 
-			ItemStack chestPlate = player.inventory.armorInventory[2];
-			if (chestPlate != null && chestPlate.getItem() == ModItems.armorGliderPowered) {
+			ItemStack chestPlate = player.inventory.armorInventory.get(2);
+			if (!chestPlate.isEmpty() && chestPlate.getItem() == ModItems.GLIDER_CHESTPLATE_POWERED) {
 				if (!chestPlate.hasTagCompound())
-					chestPlate.stackTagCompound = new NBTTagCompound();
+					chestPlate.setTagCompound(new NBTTagCompound());
 
 				chestPlate.getTagCompound().setBoolean("isPowered", true);
-				PacketPipeline.sendToServer(new PacketGliderPowered(true));
+				if(player.onGround) {
+					player.jump();
+					player.onGround = false;
+				}
+				Erebus.NETWORK_WRAPPER.sendToServer(new PacketGliderPowered(true));
 			}
 		}
-*/
+
 		if (BEETLE_RAM.isPressed()) {
 			EntityPlayer player = FMLClientHandler.instance().getClientPlayerEntity();
 			if (player == null)

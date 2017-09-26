@@ -14,6 +14,8 @@ import erebus.network.server.ColossalCratePage;
 import erebus.network.server.PacketAntiVenom;
 import erebus.network.server.PacketBeetleDig;
 import erebus.network.server.PacketBeetleRamAttack;
+import erebus.network.server.PacketGlider;
+import erebus.network.server.PacketGliderPowered;
 import erebus.proxy.CommonProxy;
 import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
@@ -80,6 +82,8 @@ public class Erebus {
 		NETWORK_WRAPPER.registerMessage(PacketBeetleDig.class, PacketBeetleDig.class, 2, Side.SERVER);
 		NETWORK_WRAPPER.registerMessage(PacketBeetleRamAttack.class, PacketBeetleRamAttack.class, 3, Side.SERVER);
 		NETWORK_WRAPPER.registerMessage(PacketAntiVenom.class, PacketAntiVenom.class, 4, Side.CLIENT);
+		NETWORK_WRAPPER.registerMessage(PacketGlider.class, PacketGlider.class, 5, Side.SERVER);
+		NETWORK_WRAPPER.registerMessage(PacketGliderPowered.class, PacketGliderPowered.class, 6, Side.SERVER);
 	}
 
 	@EventHandler
@@ -87,6 +91,7 @@ public class Erebus {
 		TeleporterHandler.init();
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);
+		MinecraftForge.EVENT_BUS.register(ModItems.GLIDER_CHESTPLATE);
         MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
 		MinecraftForge.EVENT_BUS.register(SpawnerErebus.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(new AntiVenomDurationHandler());
