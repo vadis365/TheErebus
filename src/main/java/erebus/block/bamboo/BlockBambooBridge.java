@@ -2,44 +2,65 @@ package erebus.block.bamboo;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import erebus.ModTabs;
+import erebus.blocks.EnumWood;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityBambooBridge;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBambooBridge extends BlockContainer {
+public class BlockBambooBridge extends Block implements ITileEntityProvider {
+
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	public BlockBambooBridge() {
-		super(Material.wood);
-		setCreativeTab(ModTabs.blocks);
+		super(Material.WOOD);
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setCreativeTab(ModTabs.BLOCKS);
 		setHardness(0.4F);
-		setStepSound(Block.soundTypeLadder);
-		setBlockName("erebus.bambooBridge");
-		setBlockTextureName("erebus:planks_bamboo");
+		setSoundType(SoundType.LADDER);
 	}
 
 	@Override
-	public int getRenderType() {
-		return -1;
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.INVISIBLE;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return false;
 	}
 
@@ -49,32 +70,58 @@ public class BlockBambooBridge extends BlockContainer {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack is) {
-		byte meta = 0;
-		int rotation = MathHelper.floor_double(entityLivingBase.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-		if (rotation == 0)
-			meta = 2;
-		if (rotation == 1)
-			meta = 5;
-		if (rotation == 2)
-			meta = 3;
-		if (rotation == 3)
-			meta = 4;
-		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
-		onBlockAdded(world, x, y, z);
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing facing = EnumFacing.getFront(meta);
+		if (facing.getAxis() == EnumFacing.Axis.Y)
+			facing = EnumFacing.NORTH;
+		return getDefaultState().withProperty(FACING, facing);
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		TileEntityBambooBridge te = Utils.getTileEntity(world, x, y, z, TileEntityBambooBridge.class);
+	public int getMetaFromState(IBlockState state) {
+		int meta = 0;
+		meta = meta | ((EnumFacing) state.getValue(FACING)).getIndex();
+		return meta;
+	}
 
-		boolean front = canConnectBridgeTo(world, x, y, z - 1);
-		boolean back = canConnectBridgeTo(world, x, y, z + 1);
-		boolean left = canConnectBridgeTo(world, x - 1, y, z);
-		boolean right = canConnectBridgeTo(world, x + 1, y, z);
+	@Override
+	 public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+	}
 
-		switch (world.getBlockMetadata(x, y, z)) {
-			case 2:
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] {FACING});
+	}
+
+	@Override
+	   public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		world.setBlockState(pos, this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()), 3);
+		onBlockAdded(world, pos, state);
+	}
+
+    @SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager) {
+        return true;
+    }
+
+	@Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		world.playEvent(2001, pos, Block.getStateId(EnumWood.BAMBOO.getLog().getDefaultState()));
+		super.breakBlock(world, pos, state);
+	}
+
+	@SuppressWarnings("incomplete-switch")
+	@Override
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		TileEntityBambooBridge te = Utils.getTileEntity(world, pos, TileEntityBambooBridge.class);
+		boolean front = canConnectBridgeTo(world, pos.add(0, 0, - 1));
+		boolean back = canConnectBridgeTo(world, pos.add(0, 0, 1));
+		boolean left = canConnectBridgeTo(world, pos.add(- 1, 0, 0));
+		boolean right = canConnectBridgeTo(world, pos.add(1, 0, 0));
+
+		switch (state.getValue(FACING)) {
+			case NORTH: //North
 				if (!right)
 					te.setRenderSide1(true);
 				if (!left)
@@ -84,7 +131,7 @@ public class BlockBambooBridge extends BlockContainer {
 				if (left)
 					te.setRenderSide2(false);
 				break;
-			case 3:
+			case SOUTH: //SOUTH
 				if (!right)
 					te.setRenderSide2(true);
 				if (!left)
@@ -94,7 +141,7 @@ public class BlockBambooBridge extends BlockContainer {
 				if (left)
 					te.setRenderSide1(false);
 				break;
-			case 4:
+			case EAST: // WEST
 				if (!back)
 					te.setRenderSide1(true);
 				if (!front)
@@ -104,7 +151,7 @@ public class BlockBambooBridge extends BlockContainer {
 				if (front)
 					te.setRenderSide2(false);
 				break;
-			case 5:
+			case WEST: //EAST
 				if (!back)
 					te.setRenderSide2(true);
 				if (!front)
@@ -115,56 +162,52 @@ public class BlockBambooBridge extends BlockContainer {
 					te.setRenderSide1(false);
 				break;
 		}
+		world.notifyBlockUpdate(pos, state, state, 2);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		onBlockAdded(world, x, y, z);
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
+		onBlockAdded(world, pos, state);
 	}
 
-	@Override
-	@SuppressWarnings("rawtypes")
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB box, List list, Entity entity) {
-		float pixel = 0.0625F;
-		int meta = world.getBlockMetadata(x, y, z);
-		boolean front = canConnectBridgeTo(world, x, y, z - 1);
-		boolean back = canConnectBridgeTo(world, x, y, z + 1);
-		boolean left = canConnectBridgeTo(world, x - 1, y, z);
-		boolean right = canConnectBridgeTo(world, x + 1, y, z);
+	public static double PIXEL = 0.0625F;
+    public static final AxisAlignedBB  RIGHT_AABB = new AxisAlignedBB(1.0D - PIXEL * 2D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
+    public static final AxisAlignedBB LEFT_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D + PIXEL * 2D, 0.875D, 1.0D);
+    public static final AxisAlignedBB BACK_AABB = new AxisAlignedBB(0.0D, 0.0D, 1.0D - PIXEL * 2D, 1.0D, 0.875D, 1.0D);
+    public static final AxisAlignedBB FRONT_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 0.0D + PIXEL * 2D);
+    public static final AxisAlignedBB BASE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, PIXEL * 2D, 1.0D);
 
-		if (meta == 2 || meta == 3) {
-			setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, pixel * 2, 1.0F);
-			super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
+    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
+        if (!p_185477_7_)
+            state = state.getActualState(world, pos);
 
-			if (!right) {
-				setBlockBounds(1.0F - pixel * 2, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);
-				super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
-			}
-			if (!left) {
-				setBlockBounds(0.0F, 0.0F, 0.0F, 0.0F + pixel * 2, 0.875F, 1.0F);
-				super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
-			}
+		boolean front = canConnectBridgeTo(world, pos.add(0, 0, - 1));
+		boolean back = canConnectBridgeTo(world, pos.add(0, 0, 1));
+		boolean left = canConnectBridgeTo(world, pos.add(- 1, 0, 0));
+		boolean right = canConnectBridgeTo(world, pos.add(1, 0, 0));
+
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, BASE);
+
+		if (state.getValue(FACING).equals(EnumFacing.NORTH) || state.getValue(FACING).equals(EnumFacing.SOUTH)) {
+			if (!right)
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, RIGHT_AABB);
+			if (!left)
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, LEFT_AABB);
 		}
 
-		if (meta == 4 || meta == 5) {
-			setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, pixel * 2, 1.0F);
-			super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
-			if (!back) {
-				setBlockBounds(0.0F, 0.0F, 1.0F - pixel * 2, 1.0F, 0.875F, 1.0F);
-				super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
-			}
-			if (!front) {
-				setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 0.0F + pixel * 2);
-				super.addCollisionBoxesToList(world, x, y, z, box, list, entity);
-			}
+		if (state.getValue(FACING).equals(EnumFacing.EAST) || state.getValue(FACING).equals(EnumFacing.WEST)) {
+			if (!back)
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, BACK_AABB);
+			if (!front) 
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, FRONT_AABB);
 		}
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);
-	}
+    }
 
-	public boolean canConnectBridgeTo(IBlockAccess world, int x, int y, int z) {
-		Block block = world.getBlock(x, y, z);
+	public boolean canConnectBridgeTo(IBlockAccess world, BlockPos pos) {
+		IBlockState state = world.getBlockState(pos);
+		Block block = state.getBlock();
 		if (block != this)
-			return !block.isAir(world, x, y, z) && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
+			return !world.isAirBlock(pos) && state.isNormalCube() ? state.getMaterial() != Material.GOURD : false;
 		else
 			return true;
 	}

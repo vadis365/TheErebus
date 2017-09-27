@@ -1,10 +1,10 @@
 package erebus.client.model.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityBambooBridge;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelBambooBridge extends ModelBase {
@@ -112,6 +112,25 @@ public class ModelBambooBridge extends ModelBase {
 			String3.render(0.0625F);
 		}
 
+		BambooStep1.render(0.0625F);
+		BambooStep3.render(0.0625F);
+		BambooStep2.render(0.0625F);
+		BambooStep4.render(0.0625F);
+		String1.render(0.0625F);
+		String2.render(0.0625F);
+	}
+
+	public void render() {
+		SupportR1.render(0.0625F);
+		SupportR2.render(0.0625F);
+		StringR1.render(0.0625F);
+		StringR2.render(0.0625F);
+		String4.render(0.0625F);
+		SupportL1.render(0.0625F);
+		SupportL2.render(0.0625F);
+		StringL1.render(0.0625F);
+		StringL2.render(0.0625F);
+		String3.render(0.0625F);
 		BambooStep1.render(0.0625F);
 		BambooStep3.render(0.0625F);
 		BambooStep2.render(0.0625F);

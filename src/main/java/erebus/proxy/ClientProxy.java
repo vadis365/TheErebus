@@ -3,6 +3,7 @@ package erebus.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import erebus.ModBlocks;
 import erebus.ModColourManager;
 import erebus.block.silo.TileEntitySiloTank;
 import erebus.blocks.BlockPetrifiedChest;
@@ -67,6 +68,7 @@ import erebus.client.render.entity.RenderWoodlouseBall;
 import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
+import erebus.client.render.tile.TileEntityBambooBridgeRenderer;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
@@ -126,6 +128,7 @@ import erebus.inventory.ContainerBambooCrate;
 import erebus.inventory.ContainerExtenderThingy;
 import erebus.inventory.ContainerHoneyComb;
 import erebus.inventory.ContainerSilo;
+import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityComposter;
 import erebus.tileentity.TileEntityExtenderThingy;
@@ -154,11 +157,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -174,6 +179,8 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerItemAndBlockRenderers() {
 		MinecraftForge.EVENT_BUS.register(new GogglesClientTickHandler());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGaeanKeystone.class, new TileEntityGaeanKeystoneRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooBridge.class, new TileEntityBambooBridgeRenderer());
 	}
 
 	@Override
@@ -184,7 +191,6 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerItemAndBlockColourRenderers() {
 		ModColourManager.registerColourHandlers();
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGaeanKeystone.class, new TileEntityGaeanKeystoneRenderer());
 	}
 
 	@Override
@@ -242,14 +248,14 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityRhinoBeetle.class, RenderRhinoBeetle::new);
 
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
-
 	}
 
 	@Override
 	public void postInit() {
-		// shield rendering unused but keeping here for future reference on other stuff
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BAMBOO_BRIDGE), 0, TileEntityBambooBridge.class);
 
-		/*	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExoPlateShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.EXO_PLATE));
+		// shield rendering unused but keeping here for future reference on other stuff
+		/*	
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJadeShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.JADE));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityReinExoShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.REIN_EXO));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRhinoExoShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.RHINO_EXO));

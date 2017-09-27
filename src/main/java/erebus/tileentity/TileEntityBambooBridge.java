@@ -2,8 +2,7 @@ package erebus.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBambooBridge extends TileEntity {
@@ -26,11 +25,6 @@ public class TileEntityBambooBridge extends TileEntity {
 		return renderSide2;
 	}
 
-	@Override
-	public boolean canUpdate() {
-		return false;
-	}
-
 	protected void writeTileToNBT(NBTTagCompound nbt) {
 		nbt.setBoolean("renderSide1", renderSide1);
 		nbt.setBoolean("renderSide2", renderSide2);
@@ -42,9 +36,10 @@ public class TileEntityBambooBridge extends TileEntity {
 	}
 
 	@Override
-	public final void writeToNBT(NBTTagCompound nbt) {
+	public final NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		writeTileToNBT(nbt);
+		return nbt;
 	}
 
 	@Override
@@ -54,16 +49,20 @@ public class TileEntityBambooBridge extends TileEntity {
 	}
 
 	@Override
-	public Packet getDescriptionPacket() {
-		NBTTagCompound data = new NBTTagCompound();
-		writeTileToNBT(data);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, data);
+    public NBTTagCompound getUpdateTag() {
+		NBTTagCompound nbt = new NBTTagCompound();
+        return writeToNBT(nbt);
+    }
+
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new SPacketUpdateTileEntity(pos, 0, nbt);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-		readTileFromNBT(packet.func_148857_g());
-		worldObj.func_147479_m(xCoord, yCoord, zCoord);
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+		readFromNBT(packet.getNbtCompound());
 	}
 }

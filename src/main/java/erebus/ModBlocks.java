@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.block.bamboo.BlockBambooBridge;
 import erebus.block.bamboo.BlockBambooCrate;
 import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
@@ -144,6 +145,7 @@ public class ModBlocks {
 	//UTILS BLOCKS
 	public static final Block PETRIFIED_CRAFTING_TABLE = new BlockPetrifiedCraftingTable();
 	public static final Block BAMBOO_CRATE = new BlockBambooCrate();
+	public static final Block BAMBOO_BRIDGE = new BlockBambooBridge();
 	public static final Block SILO_ROOF = new BlockSiloRoof(Material.WOOD);
 	public static final Block SILO_TANK = new BlockSiloTank(Material.IRON);
 	public static final Block SILO_SUPPORTS = new BlockSiloSupports(Material.WOOD);
