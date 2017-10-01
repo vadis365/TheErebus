@@ -37,7 +37,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockPlantedGiantFlower extends BlockBush implements IGrowable, IHasCustomItem, ISubBlocksBlock {
 
 	public static final PropertyEnum<EnumFlowerType> TYPE = PropertyEnum.create("type", EnumFlowerType.class);
-	protected static final AxisAlignedBB FLOWER_AABB = new AxisAlignedBB(0.1D, 0D, 0.1D, 0.9D, 1D, 0.9D);
+	protected static final AxisAlignedBB FLOWER_AABB = new AxisAlignedBB(0.21875D, 0D, 0.21875D, 0.78125D, 0.625D, 0.78125D);
 
 	public BlockPlantedGiantFlower() {
 		setHardness(0.0F);
@@ -153,6 +153,8 @@ public class BlockPlantedGiantFlower extends BlockBush implements IGrowable, IHa
 		WorldGenerator worldGen = new WorldGenGiantFlowers();
 		if (meta >= 0 && meta <= 13)
 			((WorldGenGiantFlowers) worldGen).setFlowerColor(meta);
+		if (meta == 14)
+			((WorldGenGiantFlowers) worldGen).setFlowerColor(rand.nextInt(14), rand.nextInt(14));
 		world.setBlockToAir(pos);
 		if (!worldGen.generate(world, rand, pos))
 			world.setBlockState(pos, this.getDefaultState().withProperty(TYPE, EnumFlowerType.values()[meta]), 3);
