@@ -8,10 +8,12 @@ import java.util.Random;
 import erebus.ModBlocks;
 import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModBlocks.ISubBlocksBlock;
+import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.api.IErebusEnum;
 import erebus.items.block.ItemBlockEnum;
 import erebus.world.feature.plant.WorldGenGiantFlowers;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -21,6 +23,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumBlockRenderType;
@@ -49,7 +52,7 @@ public class BlockPlantedGiantFlower extends BlockBush implements IGrowable, IHa
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return FLOWER_AABB;
+		return FLOWER_AABB.offset(state.getOffset(source, pos));
 	}
 
 	@Override
@@ -71,24 +74,21 @@ public class BlockPlantedGiantFlower extends BlockBush implements IGrowable, IHa
 	public int damageDropped(IBlockState state) {
 		return getMetaFromState(state);
 	}
-/*
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getDrop(World world, int x, int y, int z) {
-		return ModItems.flowerSeeds;
-	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(new ItemStack(ModItems.flowerSeeds, 1, meta));
-		return ret;
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return ModItems.FLOWER_SEED;
 	}
-*/
+
 	@Override
 	public int quantityDropped(Random rand) {
 		return 1;
 	}
+
+	@Override
+    public Block.EnumOffsetType getOffsetType() {
+        return Block.EnumOffsetType.XZ;
+    }
 
 	@Override
 	protected BlockStateContainer createBlockState() {

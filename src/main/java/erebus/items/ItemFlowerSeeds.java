@@ -1,91 +1,84 @@
 package erebus.items;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModItems.ISubItemsItem;
 import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.lib.EnumColour;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockColored;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import erebus.api.IErebusEnum;
+import erebus.blocks.BlockPlantedGiantFlower;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFlowerSeeds extends Item {
-
-	@SideOnly(Side.CLIENT)
-	public IIcon normal, rainbow;
+public class ItemFlowerSeeds extends Item implements IPlantable, ISubItemsItem {
 
 	public ItemFlowerSeeds() {
 		setHasSubtypes(true);
-		setCreativeTab(ModTabs.specials);
-		setUnlocalizedName("erebus.flowerSeeds");
+		setCreativeTab(ModTabs.PLANTS);
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+		IBlockState state = worldIn.getBlockState(pos);
+		if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, stack) && state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) && worldIn.isAirBlock(pos.up())) {
+			worldIn.setBlockState(pos.up(), ModBlocks.PLANTED_FLOWER.getDefaultState().withProperty(BlockPlantedGiantFlower.TYPE, BlockPlantedGiantFlower.EnumFlowerType.values()[stack.getItemDamage()]), 11);
+			stack.shrink(1);
+			return EnumActionResult.SUCCESS;
+		} else {
+			return EnumActionResult.FAIL;
+		}
+	}
+
+	@Override
+	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+		return EnumPlantType.Plains;
+	}
+
+	@Override
+	public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
+		return ModBlocks.PLANTED_FLOWER.getDefaultState();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int pass) {
-		float[] colour = EntitySheep.fleeceColorTable[BlockColored.func_150032_b(Utils.getFlowerMetadata(stack))];
-		return Utils.getColour((int) (colour[0] * 255), (int) (colour[1] * 255), (int) (colour[2] * 255));
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.PLANTS)
+			for (EnumSeedType type : EnumSeedType.values())
+				list.add(type.createStack(1));
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (side != 1)
-			return false;
-		else if (player.canPlayerEdit(x, y, z, side, stack) && player.canPlayerEdit(x, y + 1, z, side, stack)) {
-			Block soil = world.getBlock(x, y, z);
-			if (soil != null && soil == Blocks.grass && world.isAirBlock(x, y + 1, z)) {
-				world.setBlock(x, y + 1, z, ModBlocks.flowerPlanted, stack.getItemDamage(), 3);
-				stack.stackSize--;
-				return true;
-			} else
-				return false;
-		} else
-			return false;
+	public String getUnlocalizedName(ItemStack stack) {
+		return "item.erebus.flower_seed_" + EnumSeedType.values()[stack.getItemDamage()].getName();
 	}
 
 	@Override
-	public void registerIcons(IIconRegister reg) {
-		normal = reg.registerIcon("erebus:flower_seed");
-		rainbow = reg.registerIcon("erebus:flower_seed_rainbow");
+	public List<String> getModels() {
+		List<String> models = new ArrayList<String>();
+		for (EnumSeedType type : EnumSeedType.values())
+			models.add("flower_seed_" + type.getName());
+		return models;
 	}
 
-	@Override
-	public IIcon getIconFromDamage(int meta) {
-		return meta == SEED_TYPE.RAINBOW.ordinal() ? rainbow : normal;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
-		for (int i = 0; i < SEED_TYPE.values().length; i++)
-			list.add(new ItemStack(id, 1, i));
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
-		String colour;
-		if (stack.getItemDamage() == SEED_TYPE.RAINBOW.ordinal())
-			colour = "rainbow";
-		else
-			colour = EnumColour.values()[Utils.getFlowerMetadata(stack)].getUnlocalisedName();
-
-		return StatCollector.translateToLocal("item.erebus.flower_bulb_" + colour + ".name");
-	}
-
-	public enum SEED_TYPE {
+	public enum EnumSeedType implements IErebusEnum {
 		BLACK,
 		RED,
 		BROWN,
@@ -101,5 +94,15 @@ public class ItemFlowerSeeds extends Item {
 		ORANGE,
 		WHITE,
 		RAINBOW;
+
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ENGLISH);
+		}
+
+		@Override
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModItems.FLOWER_SEED, size, ordinal());
+		}
 	}
 }

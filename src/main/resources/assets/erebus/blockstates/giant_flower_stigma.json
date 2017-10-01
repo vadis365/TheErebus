@@ -13,6 +13,7 @@
         "type=stigma_light_blue": { "model": "erebus:stigma" },
         "type=stigma_magenta": { "model": "erebus:stigma" },
         "type=stigma_orange": { "model": "erebus:stigma" },
-        "type=stigma_white": { "model": "erebus:stigma" }
+        "type=stigma_white": { "model": "erebus:stigma" }, 
+        "type=stigma_rainbow": { "model": "erebus:stigma" }
 	}
 }

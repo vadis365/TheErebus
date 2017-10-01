@@ -106,15 +106,15 @@ public class ModBlocks {
 	public static final Block SWAMP_VENT = new BlockSwampVent();
 	public static final Block GHOST_SAND = new BlockGhostSand();
 
-	public static final Block CROP_TURNIP = new BlockTurnip().setCreativeTab(ModTabs.PLANTS);
+	public static final Block CROP_TURNIP = new BlockTurnip();
 	public static final Block CROP_CABBAGE = new BlockCabbage().setCreativeTab(ModTabs.PLANTS);
 	public static final Block JADE_BERRY_BUSH = new BlockBerryBush("JADE");
 	public static final Block HEART_BERRY_BUSH = new BlockBerryBush("HEART");
 	public static final Block SWAMP_BERRY_BUSH = new BlockBerryBush("SWAMP");
 	public static final Block DARK_FRUIT_VINE = new BlockDarkFruitVine();
 	public static final Block PRICKLY_PEAR = new BlockPricklyPear();
-	public static final Block GIANT_FLOWER = new BlockGiantFlower();
-	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma();
+	public static final Block GIANT_FLOWER = new BlockGiantFlower().setCreativeTab(ModTabs.PLANTS);
+	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma().setCreativeTab(ModTabs.PLANTS);
 	public static final Block PLANTED_FLOWER = new BlockPlantedGiantFlower();
 	public static final Block SMALL_PLANT = new BlockSmallPlant();
 	public static final Block THORNS = new BlockThorns();
