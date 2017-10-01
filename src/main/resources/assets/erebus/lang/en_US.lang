@@ -135,10 +135,40 @@ item.erebus.sprint_leggings.name=Sprint Leggings
 item.erebus.spider_t_shirt.name=Tarantula Boss Trophy
 item.erebus.mushroom_helmet.name=Mush Helm
 item.erebus.water_striders.name=Water Striders
+item.erebus.glider_chestplate_powered.name=Powered Glider Chestplate
+item.erebus.glider_chestplate.name=Glider Chestplate
+
+#Shields
+item.erebus.bamboo_shield.name=Bamboo Shield
+item.erebus.exoskeleton_shield.name=Exoskeleton Shield
+item.erebus.jade_shield.name=Bamboo Shield
+item.erebus.rein_exoskeleton_shield.name=Reinforced Exoskeleton Shield
+item.erebus.rhino_exoskeleton_shield.name=Rhino Plate Shield
+
+#Misc
+item.erebus.wand_of_animation.name=Wand of Animation
+item.erebus.woodlouse_ball.name=Woodlouse Ball
+item.erebus.nectar_collector.name=Nectar Collector
+item.erebus.ant_taming_amulet.name=Ant Taming Amulet
 
 # Plants
 item.erebus.turnip.name=Turnips
 item.erebus.cabbage_seeds.name=Cabbage Seeds
+item.erebus.flower_seed_black.name=Black Flower Seeds
+item.erebus.flower_seed_red.name=Red Flower Seeds
+item.erebus.flower_seed_brown.name=Brown Flower Seeds
+item.erebus.flower_seed_blue.name=Blue Flower Seeds
+item.erebus.flower_seed_purple.name=Purple Flower Seeds
+item.erebus.flower_seed_cyan.name=Cyan Flower Seeds
+item.erebus.flower_seed_light_gray.name=Light Gray Flower Seeds
+item.erebus.flower_seed_gray.name=Gray Flower Seeds
+item.erebus.flower_seed_pink.name=Pink Flower Seeds
+item.erebus.flower_seed_yellow.name=Yellow Flower Seeds
+item.erebus.flower_seed_light_blue.name=Light Blue Flower Seeds
+item.erebus.flower_seed_magenta.name=Magenta Flower Seeds
+item.erebus.flower_seed_orange.name=Orange Flower Seeds
+item.erebus.flower_seed_white.name=White Flower Seeds
+item.erebus.flower_seed_rainbow.name=Rainbow Flower Seeds
 
 item.erebus.life_blood.name=Life Blood
 item.erebus.heart_berries.name=Heartberries
@@ -273,9 +303,103 @@ tile.erebus.grandmas_shoes_mushroom_block.name=Grandma's Shoes Mushroom Block
 tile.erebus.kaizers_fingers_mushroom_block.name=Kaizer's Fingers Mushroom Block
 tile.erebus.sarcastic_czech_mushroom_block.name=Sarcastic Czech Mushroom Block
 
+tile.erebus.small_plant.desert_shrub.name=Desert Shrub 
+tile.erebus.small_plant.mireCoral.name=Glowing Swamp Weed
+tile.erebus.small_plant.nettle.name=Nettle
+tile.erebus.small_plant.nettle_flowered.name=Blooming Nettle
+tile.erebus.small_plant.swamp_plant.name=Swamp Plant
+tile.erebus.small_plant.fire_bloom.name=Firebloom
+tile.erebus.small_plant.fern.name=Fern
+tile.erebus.small_plant.fiddle_head.name=Fiddlehead
+
+tile.erebus.thorns.name=Thorns
+tile.erebus.wall_plants.moss_down.name=Moss
+tile.erebus.wall_plants.mould_down.name=Mould
+tile.erebus.wall_plants_cultivated.moss_down_cultivated.name=Cultivated Moss
+tile.erebus.wall_plants_cultivated.mould_down_cultivated.name=Cultivated Mould
+tile.erebus.algae.name=Swamp Algae
+
+tile.erebus.glowshroom.name=Glowshroom
+tile.erebus.glowshroom_stalk_main.name=Glowshroom Stalk
+
+# Flowers
+tile.erebus.giant_flower.petal_black.name=Black Petal Block
+tile.erebus.giant_flower.petal_red.name=Red Petal Block
+tile.erebus.giant_flower.petal_brown.name=Brown Petal Block
+tile.erebus.giant_flower.petal_blue.name=Blue Petal Block
+tile.erebus.giant_flower.petal_purple.name=Purple Petal Block
+tile.erebus.giant_flower.petal_cyan.name=Cyan Petal Block
+tile.erebus.giant_flower.petal_light_gray.name=Light Gray Petal Block
+tile.erebus.giant_flower.petal_gray.name=Gray Petal Block
+tile.erebus.giant_flower.petal_pink.name=Pink Petal Block
+tile.erebus.giant_flower.petal_yellow.name=Yellow Petal Block
+tile.erebus.giant_flower.petal_light_blue.name=Light Blue Petal Block
+tile.erebus.giant_flower.petal_magenta.name=Magenta Petal Block
+tile.erebus.giant_flower.petal_orange.name=Orange Petal Block
+tile.erebus.giant_flower.petal_white.name=White Petal Block
+tile.erebus.giant_flower.exploding_stigma.name=Exploding Stigma
+tile.erebus.giant_flower.stem.name=Stem
+
+tile.erebus.giant_flower_stigma.stigma_black.name=Black Stigma
+tile.erebus.giant_flower_stigma.stigma_red.name=Red Stigma
+tile.erebus.giant_flower_stigma.stigma_brown.name=Brown Stigma
+tile.erebus.giant_flower_stigma.stigma_blue.name=Blue Stigma
+tile.erebus.giant_flower_stigma.stigma_purple.name=Purple Stigma
+tile.erebus.giant_flower_stigma.stigma_cyan.name=Cyan Stigma
+tile.erebus.giant_flower_stigma.stigma_light_grey.name=Light Gray Stigma
+tile.erebus.giant_flower_stigma.stigma_grey.name=Gray Stigma
+tile.erebus.giant_flower_stigma.stigma_pink.name=Pink Stigma
+tile.erebus.giant_flower_stigma.stigma_yellow.name=Yellow Stigma
+tile.erebus.giant_flower_stigma.stigma_light_blue.name=Light Blue Stigma
+tile.erebus.giant_flower_stigma.stigma_magenta.name=Magenta Stigma
+tile.erebus.giant_flower_stigma.stigma_orange.name=Orange Stigma
+tile.erebus.giant_flower_stigma.stigma_white.name=White Stigma
+tile.erebus.giant_flower_stigma.stigma_rainbow.name=Rainbow Stigma
+
+tile.erebus.planted_flower.flower_black.name=Black Flower
+tile.erebus.planted_flower.flower_red.name=Red Flower
+tile.erebus.planted_flower.flower_brown.name=Brown Flower
+tile.erebus.planted_flower.flower_blue.name=Blue Flower
+tile.erebus.planted_flower.flower_purple.name=Purple Flower
+tile.erebus.planted_flower.flower_cyan.name=Cyan Flower
+tile.erebus.planted_flower.flower_light_gray.name=Light Gray Flower
+tile.erebus.planted_flower.flower_gray.name=Gray Flower
+tile.erebus.planted_flower.flower_pink.name=Pink Flower
+tile.erebus.planted_flower.flower_yellow.name=Yellow Flower
+tile.erebus.planted_flower.flower_light_blue.name=Light Blue Flower
+tile.erebus.planted_flower.flower_magenta.name=Magenta Flower
+tile.erebus.planted_flower.flower_orange.name=Orange Flower
+tile.erebus.planted_flower.flower_white.name=White Flower
+tile.erebus.planted_flower.flower_rainbow.name=Rainbow Flower
+
 # Other
+tile.erebus.portal.name=Erebus Portal Block
+tile.erebus.gaean_keystone.name=Gaean Keystone
 tile.erebus.mud.name=Mud
 tile.erebus.quick_sand.name=Quicksand
+tile.erebus.ghost_sand.name=Ghost sand
+tile.erebus.swamp_vent.name=Swamp Vent
+tile.erebus.red_gem.red_gem.name=Red Gem
+tile.erebus.red_gem.red_lamp_off.name=Red Gem Lamp
+tile.erebus.red_gem.red_lamp_on.name=Red Gem Lamp
+tile.erebus.wither_web.name=Wither Web
+
+#Utility Blocks
+tile.erebus.petrified_crafting_table.name=Petrified Crafting Table
+tile.erebus.bamboo_crate.default.name=BambooCrate
+tile.erebus.bamboo_crate.btl.name=BambooCrate
+tile.erebus.bamboo_crate.btr.name=Colossal BambooCrate
+tile.erebus.bamboo_crate.bbl.name=Colossal BambooCrate
+tile.erebus.bamboo_crate.bbr.name=Colossal BambooCrate
+tile.erebus.bamboo_crate.ttl.name=Colossal BambooCrate
+tile.erebus.bamboo_crate.ttr.name=Colossal BambooCrate
+tile.erebus.bamboo_crate.tbl.name=Colossal BambooCrate
+tile.erebus.bamboo_crate.tbr.name=Colossal BambooCrate
+tile.erebus.bamboo_bridge.name=Bamboo Bridge
+tile.erebus.silo_roof.name=Silo Roof
+tile.erebus.silo_tank.silo_inactive.name=Silo Tank
+tile.erebus.silo_tank.silo_active.name=Silo Tank
+tile.erebus.silo_supports.name=Silo Supports
 
 #################
 # CREATIVE TABS #
