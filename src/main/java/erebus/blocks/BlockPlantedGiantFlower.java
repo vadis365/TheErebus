@@ -43,7 +43,7 @@ public class BlockPlantedGiantFlower extends BlockBush implements IGrowable, IHa
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
 		setLightLevel(0.5F);
-		setCreativeTab(ModTabs.BLOCKS);
+		setCreativeTab(ModTabs.PLANTS);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumFlowerType.FLOWER_WHITE));
 	}
 
