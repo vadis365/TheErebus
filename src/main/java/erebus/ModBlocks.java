@@ -31,6 +31,7 @@ import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
 import erebus.blocks.BlockPetrifiedCraftingTable;
 import erebus.blocks.BlockPlanksErebus;
+import erebus.blocks.BlockPlantedGiantFlower;
 import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockQuickSand;
 import erebus.blocks.BlockRedGem;
@@ -114,6 +115,7 @@ public class ModBlocks {
 	public static final Block PRICKLY_PEAR = new BlockPricklyPear();
 	public static final Block GIANT_FLOWER = new BlockGiantFlower();
 	public static final Block GIANT_FLOWER_STIGMA = new BlockStigma();
+	public static final Block PLANTED_FLOWER = new BlockPlantedGiantFlower();
 	public static final Block SMALL_PLANT = new BlockSmallPlant();
 	public static final Block THORNS = new BlockThorns();
 	public static final BlockDoubleHeightPlant DOUBLE_PLANT = new BlockDoubleHeightPlant();
