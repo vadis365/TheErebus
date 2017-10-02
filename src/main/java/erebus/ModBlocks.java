@@ -13,11 +13,13 @@ import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.blocks.BlockAlgae;
 import erebus.blocks.BlockAmber;
+import erebus.blocks.BlockAntlionSpawner;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
+import erebus.blocks.BlockDragonflySpawner;
 import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockGaeanKeystone;
 import erebus.blocks.BlockGhostSand;
@@ -37,6 +39,7 @@ import erebus.blocks.BlockQuickSand;
 import erebus.blocks.BlockRedGem;
 import erebus.blocks.BlockSaplingErebus;
 import erebus.blocks.BlockSmallPlant;
+import erebus.blocks.BlockSpiderSpawner;
 import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockThorns;
@@ -44,7 +47,9 @@ import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.BlockWallPlants;
 import erebus.blocks.BlockWallPlantsCultivated;
+import erebus.blocks.BlockWaspSpawner;
 import erebus.blocks.BlockWitherWeb;
+import erebus.blocks.BlockZombieAntSpawner;
 import erebus.blocks.EnumWood;
 import erebus.blocks.ErebusPortal;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
@@ -152,6 +157,16 @@ public class ModBlocks {
 	public static final Block SILO_TANK = new BlockSiloTank(Material.IRON);
 	public static final Block SILO_SUPPORTS = new BlockSiloSupports(Material.WOOD);
 	
+	// DUNGEONS
+	public static final Block SPIDER_SPAWNER = new BlockSpiderSpawner("erebus:scytodes");
+	public static final Block JUMPING_SPIDER_SPAWNER  = new BlockSpiderSpawner("erebus:jumping_spider");
+	public static final Block TARANTULA_SPAWNER = new BlockSpiderSpawner("erebus:tarantula");
+	public static final Block WASP_SPAWNER = new BlockWaspSpawner("erebus:wasp");
+	public static final Block ANTLION_SPAWNER = new BlockAntlionSpawner("erebus:antlion");
+	public static final Block DRAGON_FLY_SPAWNER = new BlockDragonflySpawner("erebus:dragon_fly");
+	public static final Block ZOMBIE_ANT_SPAWNER = new BlockZombieAntSpawner("erebus:zombie_ant");
+	public static final Block ZOMBIE_ANT_SOLDIER_SPAWNER = new BlockZombieAntSpawner("erebus:zombie_ant_soldier");
+	//public static final Block magmaCrawler_SPAWNER = new BlockMagmaCrawlerSpawner("erebus:magmaCrawler");
 	
 	public static void init() {
 		try {

@@ -384,6 +384,16 @@ tile.erebus.red_gem.red_lamp_off.name=Red Gem Lamp
 tile.erebus.red_gem.red_lamp_on.name=Red Gem Lamp
 tile.erebus.wither_web.name=Wither Web
 
+#Spawners
+tile.erebus.antlion_spawner.name=Antlion Spawner
+tile.erebus.dragon_fly_spawner.name=Dragon Fly Spawner
+tile.erebus.jumping_spider_spawner.name=Jumping Spider Spawner
+tile.erebus.spider_spawner.name=Scytodes Spawner
+tile.erebus.tarantula_spawner.name=Tarantula Spawner
+tile.erebus.wasp_spawner.name=Wasp Spawner
+tile.erebus.zombie_ant_spawner.name=Zombie Ant Spawner
+tile.erebus.zombie_ant_soldier_spawner.name=Zombie Ant Soldier Spawner
+
 #Utility Blocks
 tile.erebus.petrified_crafting_table.name=Petrified Crafting Table
 tile.erebus.bamboo_crate.default.name=BambooCrate
@@ -400,6 +410,73 @@ tile.erebus.silo_roof.name=Silo Roof
 tile.erebus.silo_tank.silo_inactive.name=Silo Tank
 tile.erebus.silo_tank.silo_active.name=Silo Tank
 tile.erebus.silo_supports.name=Silo Supports
+
+############
+# Entities #
+############
+
+entity.beetle_larva.name=Beetle Larva
+entity.wasp.name=Wasp
+entity.centipede.name=Centipede
+entity.beetle.name=Beetle
+entity.fly.name=Fly
+entity.mosquito.name=Mosquito
+entity.tarantula.name=Tarantula
+entity.velvet_worm.name=Velvet Worm
+entity.bot_fly.name=Bot Fly
+entity.black_widow.name=Black Widow
+entity.scorpion.name=Scorpion
+entity.grasshopper.name=Grasshopper
+entity.locust.name=Locust
+entity.solifuge.name=Solifuge
+entity.moth.name=Moth
+entity.antlion.name=Antlion
+entity.glow_worm.name=Glowworm
+entity.scytodes.name=Scytodes
+entity.money_spider.name=Money Spider
+entity.praying_mantis.name=Praying Mantis
+entity.jumping_spider.name=Jumping Spider
+entity.fire_ant.name=Fire Ant
+entity.rhino_beetle.name=Rhinoceros Beetle
+entity.worker_bee.name=Worker Bee
+entity.dragon_fly.name=Dragonfly
+entity.blood_snail.name=Snail
+entity.titan_beetle.name=Titan Beetle
+entity.bot_fly_larva.name=Bot Fly Larva
+entity.crushling.name=Crushling
+entity.crop_weevil.name=Crop Weevil
+entity.woodlouse.name=Woodlouse
+entity.cicada.name=Cicada
+entity.fire_ant_soldier.name=Fire Ant Soldier
+entity.lava_web_spider.name=Lava Web Spider
+entity.antlion_mini_boss.name=Antlion Trove Guardian
+entity.chameleon_tick.name=Chameleon Tick
+entity.solifuge_small.name=Solifuge Small
+entity.midge_swarm.name=Midge Swarm
+entity.punchroom.name=Punchroom
+entity.crushroom.name=Crushroom
+entity.black_ant.name=Black Ant
+entity.zombie_ant.name=Zombie Ant
+entity.tarantula_miniboss.name=Tarantula Brood Mother
+entity.tarantula_baby.name=Tarantula Baby
+entity.leech.name=Leech
+entity.pond_skater.name=Pond Skater
+entity.wisp.name=Swamp Wisp
+entity.snapper.name=Bog Maw
+entity.magma_crawler.name=Magma Crawler
+entity.umber_golem_idol.name=Umber Golem Idol Guardian
+entity.antlion_boss.name=Antlion Overlord
+entity.bombardier_beetle.name=Bombardier Beetle
+entity.animated_chest.name=Chester
+entity.animated_camboo_crate.name=Bamber
+entity.animated_block.name=Animated Block
+entity.honey_pot_ant.name=Honey Pot Ant
+entity.bombardier_beetle_larva.name=Bombardier Beetle Larva
+entity.zombie_ant_soldier.name=Zombie Ant Soldier
+entity.bed_bug.name=Bed Bug
+entity.stag_beetle.name=Stag Beetle
+entity.gas_vent.name=Swamp gas flame
+entity.umber_golem.name=Umbergolem
 
 #################
 # CREATIVE TABS #

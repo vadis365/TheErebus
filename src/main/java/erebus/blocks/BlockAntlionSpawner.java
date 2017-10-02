@@ -3,18 +3,19 @@ package erebus.blocks;
 import java.util.Random;
 
 import erebus.ModBlocks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
 public class BlockAntlionSpawner extends BlockSpawner {
 
 	public BlockAntlionSpawner(String mobName) {
-		super("erebus." + mobName);
+		super(mobName);
 		setHarvestLevel("pickaxe", 0);
 	}
 
 	@Override
-	public Item getItemDropped(int id, Random rand, int fortune) {
-		return Item.getItemFromBlock(ModBlocks.ghostSand);
+	  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(ModBlocks.GHOST_SAND);
 	}
 
 	@Override
