@@ -20,4 +20,10 @@ public class BlockStairsErebus extends BlockStairs {
 		block.setHarvestLevel("axe", 0);
 		return block;
 	}
+
+	public static Block createWaspStairs(IBlockState modelState) {
+		Block block = new BlockStairsErebus(modelState);
+		block.setHardness(50.0F);
+		return block;
+	}
 }

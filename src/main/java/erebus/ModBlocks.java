@@ -40,6 +40,7 @@ import erebus.blocks.BlockRedGem;
 import erebus.blocks.BlockSaplingErebus;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockSpiderSpawner;
+import erebus.blocks.BlockStairsErebus;
 import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockThorns;
@@ -47,6 +48,7 @@ import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.BlockWallPlants;
 import erebus.blocks.BlockWallPlantsCultivated;
+import erebus.blocks.BlockWaspNest;
 import erebus.blocks.BlockWaspSpawner;
 import erebus.blocks.BlockWitherWeb;
 import erebus.blocks.BlockZombieAntSpawner;
@@ -166,6 +168,9 @@ public class ModBlocks {
 	public static final Block DRAGON_FLY_SPAWNER = new BlockDragonflySpawner("erebus:dragon_fly");
 	public static final Block ZOMBIE_ANT_SPAWNER = new BlockZombieAntSpawner("erebus:zombie_ant");
 	public static final Block ZOMBIE_ANT_SOLDIER_SPAWNER = new BlockZombieAntSpawner("erebus:zombie_ant_soldier");
+	public static final Block WASP_NEST = new BlockWaspNest();
+	public static final Block STAIRS_WASP_NEST = BlockStairsErebus.createWaspStairs(WASP_NEST.getDefaultState());
+	
 	//public static final Block magmaCrawler_SPAWNER = new BlockMagmaCrawlerSpawner("erebus:magmaCrawler");
 	
 	public static void init() {

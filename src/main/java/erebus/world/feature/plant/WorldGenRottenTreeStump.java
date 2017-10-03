@@ -3,6 +3,7 @@ package erebus.world.feature.plant;
 import java.util.List;
 import java.util.Random;
 
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.blocks.BlockLogErebus;
 import erebus.blocks.EnumWood;
@@ -122,13 +123,13 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 			world.setBlockState(new BlockPos(x, y + 2, z + 1), Blocks.WEB.getDefaultState(), 2);
 			world.setBlockState(new BlockPos(x, y + 3, z), Blocks.WEB.getDefaultState(), 2);
 			world.setBlockState(new BlockPos(x, y + 1, z), Blocks.WEB.getDefaultState(), 2);
-			//world.setBlockState(new BlockPos(x, y + 2, z), ModBlocks.jumpingSpiderSpawner);
+			world.setBlockState(new BlockPos(x, y + 2, z), ModBlocks.JUMPING_SPIDER_SPAWNER.getDefaultState(), 2);
 			// Loot Chest
 			world.setBlockState(new BlockPos(x, y, z), Blocks.CHEST.getDefaultState(), 2);
 			TileEntityChest chest1 = (TileEntityChest) world.getTileEntity(new BlockPos(x, y, z));
 			if (chest1 != null)
 				LootUtil.generateLoot(chest1, rand, chestLoot, 3, 10);
-			if (height >= maxHeight) {
+			if (height >= maxHeight - 3) {
 				// Upper spawner
 				world.setBlockState(new BlockPos(x + 1, y + 12, z), Blocks.WEB.getDefaultState(), 2);
 				world.setBlockState(new BlockPos(x - 1, y + 12, z), Blocks.WEB.getDefaultState(), 2);
@@ -136,7 +137,7 @@ public class WorldGenRottenTreeStump extends WorldGenerator {
 				world.setBlockState(new BlockPos(x, y + 12, z + 1), Blocks.WEB.getDefaultState(), 2);
 				world.setBlockState(new BlockPos(x, y + 11, z), Blocks.WEB.getDefaultState(), 2);
 				world.setBlockState(new BlockPos(x, y + 13, z), Blocks.WEB.getDefaultState(), 2);
-				//world.setBlockState(new BlockPos(x, y + 12, z), ModBlocks.tarantulaSpawner);
+				world.setBlockState(new BlockPos(x, y + 12, z), ModBlocks.TARANTULA_SPAWNER.getDefaultState(), 2);
 				// Loot Chests
 				int moveyChest = rand.nextInt(5) - 2;
 				world.setBlockState(new BlockPos(x - 4, y + 11, z + moveyChest), Blocks.CHEST.getDefaultState(), 2);

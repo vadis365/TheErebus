@@ -1,4 +1,4 @@
-{
+    {
     "variants": {
         "facing=east,half=bottom,shape=straight":  { "model": "erebus:asper_stairs" },
         "facing=west,half=bottom,shape=straight":  { "model": "erebus:asper_stairs", "y": 180, "uvlock": true },
@@ -24,21 +24,21 @@
         "facing=west,half=top,shape=straight":  { "model": "erebus:asper_stairs", "x": 180, "y": 180, "uvlock": true },
         "facing=south,half=top,shape=straight": { "model": "erebus:asper_stairs", "x": 180, "y": 90, "uvlock": true },
         "facing=north,half=top,shape=straight": { "model": "erebus:asper_stairs", "x": 180, "y": 270, "uvlock": true },
-        "facing=east,half=top,shape=outer_right":  { "model": "erebus:asper_outer_stairs", "x": 180, "uvlock": true },
-        "facing=west,half=top,shape=outer_right":  { "model": "erebus:asper_outer_stairs", "x": 180, "y": 180, "uvlock": true },
-        "facing=south,half=top,shape=outer_right": { "model": "erebus:asper_outer_stairs", "x": 180, "y": 90, "uvlock": true },
-        "facing=north,half=top,shape=outer_right": { "model": "erebus:asper_outer_stairs", "x": 180, "y": 270, "uvlock": true },
-        "facing=east,half=top,shape=outer_left":  { "model": "erebus:asper_outer_stairs", "x": 180, "y": 90, "uvlock": true },
-        "facing=west,half=top,shape=outer_left":  { "model": "erebus:asper_outer_stairs", "x": 180, "y": 270, "uvlock": true },
-        "facing=south,half=top,shape=outer_left": { "model": "erebus:asper_outer_stairs", "x": 180, "y": 180, "uvlock": true },
-        "facing=north,half=top,shape=outer_left": { "model": "erebus:asper_outer_stairs", "x": 180, "uvlock": true },
-        "facing=east,half=top,shape=inner_right":  { "model": "erebus:asper_inner_stairs", "x": 180, "uvlock": true },
-        "facing=west,half=top,shape=inner_right":  { "model": "erebus:asper_inner_stairs", "x": 180, "y": 180, "uvlock": true },
-        "facing=south,half=top,shape=inner_right": { "model": "erebus:asper_inner_stairs", "x": 180, "y": 90, "uvlock": true },
-        "facing=north,half=top,shape=inner_right": { "model": "erebus:asper_inner_stairs", "x": 180, "y": 270, "uvlock": true },
-        "facing=east,half=top,shape=inner_left":  { "model": "erebus:asper_inner_stairs", "x": 180, "y": 90, "uvlock": true },
-        "facing=west,half=top,shape=inner_left":  { "model": "erebus:asper_inner_stairs", "x": 180, "y": 270, "uvlock": true },
-        "facing=south,half=top,shape=inner_left": { "model": "erebus:asper_inner_stairs", "x": 180, "y": 180, "uvlock": true },
-        "facing=north,half=top,shape=inner_left": { "model": "erebus:asper_inner_stairs", "x": 180, "uvlock": true }
+        "facing=east,half=top,shape=outer_right":  { "model": "erebus:asper_outer_stairs", "x": 180, "y": 90, "uvlock": true },
+        "facing=west,half=top,shape=outer_right":  { "model": "erebus:asper_outer_stairs", "x": 180, "y": 270, "uvlock": true },
+        "facing=south,half=top,shape=outer_right": { "model": "erebus:asper_outer_stairs", "x": 180, "y": 180, "uvlock": true },
+        "facing=north,half=top,shape=outer_right": { "model": "erebus:asper_outer_stairs", "x": 180, "uvlock": true },
+        "facing=east,half=top,shape=outer_left":  { "model": "erebus:asper_outer_stairs", "x": 180, "uvlock": true },
+        "facing=west,half=top,shape=outer_left":  { "model": "erebus:asper_outer_stairs", "x": 180, "y": 180, "uvlock": true },
+        "facing=south,half=top,shape=outer_left": { "model": "erebus:asper_outer_stairs", "x": 180, "y": 90, "uvlock": true },
+        "facing=north,half=top,shape=outer_left": { "model": "erebus:asper_outer_stairs", "x": 180, "y": 270, "uvlock": true },
+        "facing=east,half=top,shape=inner_right":  { "model": "erebus:asper_inner_stairs", "x": 180, "y": 90, "uvlock": true },
+        "facing=west,half=top,shape=inner_right":  { "model": "erebus:asper_inner_stairs", "x": 180, "y": 270, "uvlock": true },
+        "facing=south,half=top,shape=inner_right": { "model": "erebus:asper_inner_stairs", "x": 180, "y": 180, "uvlock": true },
+        "facing=north,half=top,shape=inner_right": { "model": "erebus:asper_inner_stairs", "x": 180, "uvlock": true },
+        "facing=east,half=top,shape=inner_left":  { "model": "erebus:asper_inner_stairs", "x": 180, "uvlock": true },
+        "facing=west,half=top,shape=inner_left":  { "model": "erebus:asper_inner_stairs", "x": 180, "y": 180, "uvlock": true },
+        "facing=south,half=top,shape=inner_left": { "model": "erebus:asper_inner_stairs", "x": 180, "y": 90, "uvlock": true },
+        "facing=north,half=top,shape=inner_left": { "model": "erebus:asper_inner_stairs", "x": 180, "y": 270, "uvlock": true }
     }
 }

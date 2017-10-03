@@ -3,6 +3,7 @@ package erebus.world.feature.tree;
 import java.util.List;
 import java.util.Random;
 
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.blocks.EnumWood;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
@@ -245,7 +246,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		world.setBlockState(new BlockPos(x, y, z - 1), Blocks.WEB.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(x, y, z + 1), Blocks.WEB.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(x, y + 1, z), Blocks.WEB.getDefaultState(), 2);
-		// TODO world.setBlockState(new BlockPos(x, y, z, ModBlocks.tarantulaSpawner);
+		world.setBlockState(new BlockPos(x, y, z), ModBlocks.TARANTULA_SPAWNER.getDefaultState(), 2);
 		world.setBlockState(new BlockPos(x, y - 1, z), Blocks.CHEST.getStateFromMeta(0), 2);
 		TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(x, y - 1, z));
 		if (chest != null)

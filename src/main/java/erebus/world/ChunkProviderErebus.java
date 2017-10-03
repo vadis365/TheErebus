@@ -7,6 +7,7 @@ import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.feature.structure.WorldGenSpiderDungeons;
 import erebus.world.structure.MapGenErebusCaves;
 import erebus.world.structure.MapGenErebusRavine;
 import net.minecraft.block.BlockFalling;
@@ -408,8 +409,8 @@ public class ChunkProviderErebus implements IChunkGenerator {
 			SpawnerErebus.onChunkPopulate(worldObj, rand, biome, blockCoord.getX() + 8, blockCoord.getZ() + 8);
 		}
 
-		//	for (int attempt = 0; attempt < 14; ++attempt)
-		//	new WorldGenSpiderDungeons().generate(worldObj, rand, blockCoordX + rand.nextInt(16) + 8, rand.nextInt(128), blockCoordZ + rand.nextInt(16) + 8);
+		for (int attempt = 0; attempt < 14; ++attempt)
+			new WorldGenSpiderDungeons().generate(worldObj, rand, new BlockPos(blockCoord.getX() + rand.nextInt(16) + 8, rand.nextInt(128), blockCoord.getZ() + rand.nextInt(16) + 8));
 
 		BlockFalling.fallInstantly = false;
 	}
