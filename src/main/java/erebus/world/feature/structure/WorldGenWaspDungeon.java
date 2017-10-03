@@ -2,8 +2,11 @@ package erebus.world.feature.structure;
 
 import erebus.ModBlocks;
 import erebus.world.feature.util.WorldGeneratorExt;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockStairs.EnumHalf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
 public class WorldGenWaspDungeon extends WorldGeneratorExt {
@@ -39,8 +42,8 @@ public class WorldGenWaspDungeon extends WorldGeneratorExt {
 		rect(WASP_NEST_BLOCK, x - 3, z - 1, x - 1, z + 1, y);
 		rect(WASP_NEST_BLOCK, x + 1, z - 1, x + 3, z + 1, y);
 		for (int a = 0; a < 2; a++) {
-			linex(WASP_NEST_STAIRS.getBlock().getStateFromMeta(4 + (a == 0 ? 3 : 2)), x - 1, x + 1, z - 1 + 2 * a, y);
-			block(WASP_NEST_STAIRS.getBlock().getStateFromMeta(4 + (a == 0 ? 1 : 0)), x - 1 + 2 * a, z, y);
+			linex(getStairRotations(WASP_NEST_STAIRS, 4 + (a == 0 ? 3 : 2)), x - 1, x + 1, z - 1 + 2 * a, y);
+			block(getStairRotations(WASP_NEST_STAIRS, 4 + (a == 0 ? 1 : 0)), x - 1 + 2 * a, z, y);
 		}
 		block(Blocks.AIR.getDefaultState(), x, z, y);
 		--y;
@@ -191,8 +194,8 @@ public class WorldGenWaspDungeon extends WorldGeneratorExt {
 		// Layer 13
 
 		for (int a = 0; a < 2; a++) {
-			linex(WASP_NEST_STAIRS.getBlock().getStateFromMeta(4 + (a == 0 ? 2 : 3)), x - 3, x + 3, z - 4 + 8 * a, y);
-			linez(WASP_NEST_STAIRS.getBlock().getStateFromMeta(4 + (a == 0 ? 0 : 1)), z - 3, z + 3, x - 4 + 8 * a, y);
+			linex(getStairRotations(WASP_NEST_STAIRS, 4 + (a == 0 ? 2 : 3)), x - 3, x + 3, z - 4 + 8 * a, y);
+			linez(getStairRotations(WASP_NEST_STAIRS, 4 + (a == 0 ? 0 : 1)), z - 3, z + 3, x - 4 + 8 * a, y);
 			linex(WASP_NEST_BLOCK, x - 3, x + 3, z - 3 + 6 * a, y);
 			linez(WASP_NEST_BLOCK, z - 2, z + 2, x - 3 + 6 * a, y);
 		}
@@ -202,12 +205,35 @@ public class WorldGenWaspDungeon extends WorldGeneratorExt {
 		// Layer 14
 
 		for (int a = 0; a < 2; a++) {
-			linex(WASP_NEST_STAIRS.getBlock().getStateFromMeta(4 + (a == 0 ? 3 : 2)), x - 3, x + 3, z - 3 + 6 * a, y);
-			linez(WASP_NEST_STAIRS.getBlock().getStateFromMeta(4 + (a == 0 ? 1 : 0)), z - 2, z + 2, x - 3 + 6 * a, y);
+			linex(getStairRotations(WASP_NEST_STAIRS, 4 + (a == 0 ? 3 : 2)), x - 3, x + 3, z - 3 + 6 * a, y);
+			linez(getStairRotations(WASP_NEST_STAIRS, 4 + (a == 0 ? 1 : 0)), z - 2, z + 2, x - 3 + 6 * a, y);
 		}
 		rect(Blocks.AIR.getDefaultState(), x - 2, z - 2, x + 2, z + 2, y);
-		//System.out.println("GENERATED WASP DUNGEON AT: " + pos );
+
 		return true;
+	}
+
+	public IBlockState getStairRotations(IBlockState state, int blockMeta) {
+		int direction = blockMeta;
+		switch (direction) {
+		case 0:
+			return state.withProperty(BlockStairs.FACING, EnumFacing.EAST);
+		case 1:
+			return state.withProperty(BlockStairs.FACING, EnumFacing.WEST);
+		case 2:
+			return state.withProperty(BlockStairs.FACING, EnumFacing.SOUTH);
+		case 3:
+			return state.withProperty(BlockStairs.FACING, EnumFacing.NORTH);
+		case 4:
+			return state.withProperty(BlockStairs.FACING, EnumFacing.EAST).withProperty(BlockStairs.HALF, EnumHalf.TOP);
+		case 5:
+			return state.withProperty(BlockStairs.FACING, EnumFacing.WEST).withProperty(BlockStairs.HALF, EnumHalf.TOP);
+		case 6:
+			return state.withProperty(BlockStairs.FACING, EnumFacing.SOUTH).withProperty(BlockStairs.HALF, EnumHalf.TOP);
+		case 7:
+			return state.withProperty(BlockStairs.FACING, EnumFacing.NORTH).withProperty(BlockStairs.HALF, EnumHalf.TOP);
+		}
+		return state;
 	}
 
 }
