@@ -206,7 +206,7 @@ public class WorldGenWaspDungeon extends WorldGeneratorExt {
 			linez(WASP_NEST_STAIRS.getBlock().getStateFromMeta(4 + (a == 0 ? 1 : 0)), z - 2, z + 2, x - 3 + 6 * a, y);
 		}
 		rect(Blocks.AIR.getDefaultState(), x - 2, z - 2, x + 2, z + 2, y);
-		System.out.println("GENERATED WASP DUNGEON AT: " + pos );
+		//System.out.println("GENERATED WASP DUNGEON AT: " + pos );
 		return true;
 	}
 
