@@ -150,6 +150,7 @@ item.erebus.wand_of_animation.name=Wand of Animation
 item.erebus.woodlouse_ball.name=Woodlouse Ball
 item.erebus.nectar_collector.name=Nectar Collector
 item.erebus.ant_taming_amulet.name=Ant Taming Amulet
+item.erebus.anti_venom_bottle.name=Bottle of Anti-Venom
 
 # Plants
 item.erebus.turnip.name=Turnips
@@ -372,6 +373,8 @@ tile.erebus.planted_flower.flower_orange.name=Orange Flower
 tile.erebus.planted_flower.flower_white.name=White Flower
 tile.erebus.planted_flower.flower_rainbow.name=Rainbow Flower
 
+tile.erebus.giant_lily_pad.name=Giant Lily Pad
+
 # Other
 tile.erebus.portal.name=Erebus Portal Block
 tile.erebus.gaean_keystone.name=Gaean Keystone
@@ -410,6 +413,9 @@ tile.erebus.silo_roof.name=Silo Roof
 tile.erebus.silo_tank.silo_inactive.name=Silo Tank
 tile.erebus.silo_tank.silo_active.name=Silo Tank
 tile.erebus.silo_supports.name=Silo Supports
+tile.erebus.bamboo_ladder.name=Bamboo Ladder
+tile.erebus.wasp_nest.name=Wasp Nest
+tile.erebus.stairs_wasp_nest.name=Wasp Nest Stairs
 
 ############
 # Entities #
@@ -485,3 +491,45 @@ entity.umber_golem.name=Umbergolem
 itemGroup.erebus.items=Erebus Items
 itemGroup.erebus.blocks=Erebus Blocks
 itemGroup.erebus.gear=Erebus Gear
+itemGroup.erebus.plants=Erebus Plants
+
+############
+# Tooltips #
+############
+
+tooltip.erebus.dimension=Dimension: %s
+tooltip.erebus.targetx=Target X: %d
+tooltip.erebus.targety=Target Y: %d
+tooltip.erebus.targetz=Target Z: %d
+tooltip.erebus.homingbeeconadvanced_1=Sneak + Right click on a block to set as target.
+tooltip.erebus.homingbeeconadvanced_2=Right click to teleport.
+tooltip.erebus.homingbeecon=Sneak + Click on a block to set as target.
+tooltip.erebus.deathcompass=Given to Player after death to find Block o' Bones.
+tooltip.erebus.warhammer_1=Hold Right mouse button to charge up.
+tooltip.erebus.warhammer_2=Sneak + Right Click on top of block to use A.O.E. attack.
+tooltip.erebus.waspdagger_1=One use.
+tooltip.erebus.waspdagger_2=Can be thrown.
+tooltip.erebus.honeycombx=Honey Comb Block X: %d
+tooltip.erebus.honeycomby=Honey Comb Block Y: %d
+tooltip.erebus.honeycombz=Honey Comb Block Z: %d
+tooltip.erebus.beetamingamulet_1=Click on a Honey Comb Block to set as target for Bee drops.
+tooltip.erebus.beetamingamulet_2=Then click on Bee to tame.
+tooltip.erebus.siloblockx=Silo Block X: %d
+tooltip.erebus.siloblocky=Silo Block Y: %d
+tooltip.erebus.siloblockz=Silo Block Z: %d
+tooltip.erebus.anttamingamulet_1=Click on a Silo Block to set as target for Ants.
+tooltip.erebus.anttamingamulet_2=Then click on Ant to link it.
+tooltip.erebus.sprintleggingstier=Tier %d
+tooltip.erebus.whetstonesharpness=Sharpness Level %d
+tooltip.erebus.whetstone_1=Apply to tools using an Anvil.
+tooltip.erebus.whetstone_2=Un-enchanted
+tooltip.erebus.whetstone_3=Surround with Whetstone Powder to increase levels.
+tooltip.erebus.nectarcollector=Right click Bees to collect nectar.
+tooltip.erebus.wandofanimation=Right click blocks to animate them.
+tooltip.erebus.extractor=Point at blocks and hold down the right mouse button to extract them.
+tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
+tooltip.erebus.heals=Heals 10 Hearts when consumed. Always Edible.
+tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
+tooltip.erebus.poweredGlider=Needs redgem blocks at the cost of fuel to flight.
+tooltip.erebus.gliderGlideKey=Gliding Key
+tooltip.erebus.gliderPoweredKey=Flying Key

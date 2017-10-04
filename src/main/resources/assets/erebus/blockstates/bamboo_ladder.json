@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "erebus:bamboo_ladder", "y": 180 },
+        "facing=east":  { "model": "erebus:bamboo_ladder", "y": 270 },
+        "facing=south": { "model": "erebus:bamboo_ladder" },
+        "facing=west":  { "model": "erebus:bamboo_ladder", "y": 90 }
+    }
+}
