@@ -17,6 +17,7 @@ import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.plant.WorldGenVinesErebus;
+import erebus.world.feature.structure.WorldGenDragonflyDungeon;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockVine;
@@ -27,6 +28,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
+	private final WorldGenDragonflyDungeon genGiantLilyPad = new WorldGenDragonflyDungeon();
 	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
 	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
 	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
@@ -57,6 +59,11 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 
 	@Override
 	public void decorate() {
+
+		for (int attempt = 0; attempt < 15; attempt++)
+			if (genGiantLilyPad.generate(world, rand, new BlockPos(x + offsetXZ(), ChunkProviderErebus.swampWaterHeight, z + offsetXZ())))
+				break;
+		
 		// Water
 		for (int attempt = 0; attempt < 5; attempt++) {
 			xx = x + offsetXZ();

@@ -2,6 +2,8 @@ package erebus.entity;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.ModSounds;
@@ -15,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -36,6 +39,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -59,7 +63,7 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataManager.register(SKIN_TYPE, new Integer(rand.nextInt(51)));
+		dataManager.register(SKIN_TYPE, rand.nextInt(51));
 	}
 
 	@Override
@@ -79,7 +83,7 @@ public class EntityDragonfly extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1D);
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
 	}
 
 	@Override
@@ -91,6 +95,11 @@ public class EntityDragonfly extends EntityMob {
     protected PathNavigate createNavigator(World world) {
 		return new PathNavigateFlying(this, world);
 	}
+
+	@Override
+    public boolean canRiderInteract() {
+        return true;
+    }
 
 	@Override
 	public boolean canBePushed() {
@@ -179,7 +188,7 @@ public class EntityDragonfly extends EntityMob {
 				motionY += 0.08D;
 			}
 			
-			if (!getEntityWorld().isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0 || !getEntityWorld().isRemote && captured() && getEntityWorld().isSideSolid(new BlockPos (MathHelper.floor(posX), MathHelper.floor(posY + 1D), MathHelper.floor(posZ)), EnumFacing.UP))) {
+			if (!getEntityWorld().isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0 || !getEntityWorld().isRemote && captured() && getEntityWorld().isSideSolid(new BlockPos (MathHelper.floor(posX), MathHelper.floor(posY + 1D), MathHelper.floor(posZ)), EnumFacing.DOWN))) {
 				setDropped(true);
 				removePassengers();
 			}
@@ -310,13 +319,20 @@ public class EntityDragonfly extends EntityMob {
 		return super.attackEntityAsMob(entity);
 		// I know this does nothing! - But it may soon!
 	}
+	
+	@Override
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+        setSkin(rand.nextInt(51));
+		return super.onInitialSpawn(difficulty, livingdata);
+	}
 
 	public void setSkin(int skinType) {
 		dataManager.set(SKIN_TYPE, skinType);
 	}
 
 	public int getSkin() {
-		return dataManager.get(SKIN_TYPE).intValue();
+		return dataManager.get(SKIN_TYPE);
 	}
 
 	@Override

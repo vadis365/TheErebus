@@ -24,6 +24,7 @@ import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockGaeanKeystone;
 import erebus.blocks.BlockGhostSand;
 import erebus.blocks.BlockGiantFlower;
+import erebus.blocks.BlockGiantLilyPad;
 import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
 import erebus.blocks.BlockLeavesErebus;
@@ -166,6 +167,7 @@ public class ModBlocks {
 	public static final Block WASP_SPAWNER = new BlockWaspSpawner("erebus:wasp");
 	public static final Block ANTLION_SPAWNER = new BlockAntlionSpawner("erebus:antlion");
 	public static final Block DRAGON_FLY_SPAWNER = new BlockDragonflySpawner("erebus:dragon_fly");
+	public static final Block GIANT_LILY_PAD = new BlockGiantLilyPad(Material.WOOD, "axe", 1);
 	public static final Block ZOMBIE_ANT_SPAWNER = new BlockZombieAntSpawner("erebus:zombie_ant");
 	public static final Block ZOMBIE_ANT_SOLDIER_SPAWNER = new BlockZombieAntSpawner("erebus:zombie_ant_soldier");
 	public static final Block WASP_NEST = new BlockWaspNest();
