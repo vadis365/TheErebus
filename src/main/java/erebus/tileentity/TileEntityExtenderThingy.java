@@ -1,32 +1,49 @@
 package erebus.tileentity;
 
 import erebus.ModBlocks;
+import erebus.block.bamboo.BlockBambooBridge;
+import erebus.block.bamboo.BlockExtenderThingy;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class TileEntityExtenderThingy extends TileEntityBasicInventory {
+public class TileEntityExtenderThingy extends TileEntityBasicInventory implements ITickable {
 
 	private boolean extending;
-	private ForgeDirection dir = null;
+	private EnumFacing direction;
+	private IItemHandler itemHandler;
 
 	public TileEntityExtenderThingy() {
 		super(6, "container.extenderThingy");
 	}
 
 	@Override
-	public void updateEntity() {
-		if (worldObj.isRemote)
-			return;
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
+	}
 
-		if (dir == null)
-			dir = getDirectionFromMetadata(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+	@Override
+	public void update() {
+		if (getWorld().isRemote)
+			return;
+		IBlockState state = getWorld().getBlockState(getPos());
+		if (direction == null)
+			direction = state.getValue(BlockExtenderThingy.FACING);
 
 		Block blockID;
-		Block extension = getExtension(dir);
+		Block extension = getExtension(direction);
 		int index = getIndex(extension);
 
 		if (extending)
@@ -36,56 +53,56 @@ public class TileEntityExtenderThingy extends TileEntityBasicInventory {
 			index--;
 		}
 
-		int x = xCoord + index * dir.offsetX;
-		int y = yCoord + index * dir.offsetY;
-		int z = zCoord + index * dir.offsetZ;
-		if (x == xCoord && y == yCoord && z == zCoord)
+		int x = getPos().getX() + index * direction.getFrontOffsetX();
+		int y = getPos().getY() + index * direction.getFrontOffsetY();
+		int z = getPos().getZ() + index * direction.getFrontOffsetZ();
+		if (x == getPos().getX() && y == getPos().getY() && z == getPos().getZ())
 			return;
 
-		Block block = worldObj.getBlock(x, y, z);
-		if (block == null || block.isReplaceable(worldObj, x, y, z) || !extending)
+
+		if (state.getBlock() == null || state.getBlock().isReplaceable(getWorld(), new BlockPos(x, y, z)) || !extending)
 			if (decreaseInventory(blockID))
-				if (addToInventory(x, y, z))
+				if (addToInventory(new BlockPos(x, y, z)))
 					if (extending) {
-						worldObj.setBlock(x, y, z, blockID, getMetaFromDirection(dir), 3);
-						worldObj.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, extension.stepSound.getBreakSound(), (extension.stepSound.getVolume() + 1.0F) / 2.0F, extension.stepSound.getPitch() * 0.8F);
+						getWorld().setBlockState(new BlockPos(x, y, z), getStateFromDirection(direction), 3);
+						getWorld().playSound((EntityPlayer)null, new BlockPos(x, y, z), extension.getSoundType().getBreakSound(), SoundCategory.BLOCKS, (extension.getSoundType().getVolume() + 1.0F) / 2.0F, extension.getSoundType().getPitch() * 0.8F);
 					} else {
-						worldObj.setBlock(x, y, z, Blocks.air, getMetaFromDirection(dir), 3);
-						worldObj.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(extension) + (worldObj.getBlockMetadata(x, y, z) << 12));
+						getWorld().setBlockToAir(new BlockPos(x, y, z));
+						getWorld().playEvent((EntityPlayer)null, 2001, new BlockPos(x, y, z), Block.getIdFromBlock(extension));
 					}
 	}
 
 	private int getIndex(Block extension) {
 		int index = 1;
 
-		int x = xCoord + index * dir.offsetX;
-		int y = yCoord + index * dir.offsetY;
-		int z = zCoord + index * dir.offsetZ;
+		int x = getPos().getX() + index * direction.getFrontOffsetX();
+		int y = getPos().getY() + index * direction.getFrontOffsetY();
+		int z = getPos().getZ() + index * direction.getFrontOffsetZ();
 
-		while (worldObj.getBlock(x, y, z) == extension) {
+		while (getWorld().getBlockState(new BlockPos (x, y, z)).getBlock() == extension) {
 			index++;
-			x = xCoord + index * dir.offsetX;
-			y = yCoord + index * dir.offsetY;
-			z = zCoord + index * dir.offsetZ;
+			x = getPos().getX() + index * direction.getFrontOffsetX();
+			y = getPos().getY() + index * direction.getFrontOffsetY();
+			z = getPos().getZ() + index * direction.getFrontOffsetZ();
 		}
-		Block block = worldObj.getBlock(x, y, z);
-		if (block == null || block.isReplaceable(worldObj, x, y, z) || !extending)
+		IBlockState state = getWorld().getBlockState(new BlockPos(x, y, z));
+		if (state.getBlock() == null || state.getBlock().isReplaceable(getWorld(), new BlockPos(x, y, z)) || !extending)
 			return index;
 
 		return index - 1;
 	}
 
-	private boolean addToInventory(int x, int y, int z) {
-		Block block = worldObj.getBlock(x, y, z);
+	private boolean addToInventory(BlockPos pos) {
+		IBlockState state = getWorld().getBlockState(pos);
 
-		if (worldObj.isAirBlock(x, y, z) || block.isReplaceable(worldObj, x, y, z))
+		if (getWorld().isAirBlock(pos) || state.getBlock().isReplaceable(getWorld(), pos))
 			return true;
-		for (int i = 0; i < inventory.length; i++)
-			if (getInventory()[i] == null) {
-				getInventory()[i] = new ItemStack(block, 1, 0);
+		for (int i = 0; i < getInventory().size(); i++)
+			if (getInventory().get(i).isEmpty()) {
+				getInventory().set(i, new ItemStack(state.getBlock(), 1, 0));
 				return true;
-			} else if (getInventory()[i].getItem() == Item.getItemFromBlock(block) && getInventory()[i].stackSize < getInventory()[i].getMaxStackSize() && getInventory()[i].stackSize < getInventoryStackLimit()) {
-				getInventory()[i].stackSize++;
+			} else if (getInventory().get(i).getItem() == Item.getItemFromBlock(state.getBlock()) && getInventory().get(i).getCount() < getInventory().get(i).getMaxStackSize() && getInventory().get(i).getCount() < getInventoryStackLimit()) {
+				getInventory().get(i).grow(1);
 				return true;
 			}
 		return false;
@@ -94,53 +111,33 @@ public class TileEntityExtenderThingy extends TileEntityBasicInventory {
 	private boolean decreaseInventory(Block blockID) {
 		if (blockID == null)
 			return true;
-		for (int i = 0; i < inventory.length; i++)
-			if (getInventory()[i] != null && getInventory()[i].getItem() == Item.getItemFromBlock(blockID)) {
-				getInventory()[i].stackSize--;
-				if (getInventory()[i].stackSize <= 0)
-					getInventory()[i] = null;
+		for (int i = 0; i < getInventory().size(); i++)
+			if (!getInventory().get(i).isEmpty() && getInventory().get(i).getItem() == Item.getItemFromBlock(blockID)) {
+				getInventory().get(i).shrink(1);
+				if (getInventory().get(i).getCount() <= 0)
+					getInventory().set(i, ItemStack.EMPTY);
 				return true;
 			}
 		return false;
 	}
 
-	private Block getExtension(ForgeDirection dir) {
-		return dir == ForgeDirection.UP || dir == ForgeDirection.DOWN ? ModBlocks.bambooPole : ModBlocks.bambooBridge;
+	private Block getExtension(EnumFacing facing) {
+		return facing == EnumFacing.UP || facing == EnumFacing.DOWN ? ModBlocks.BAMBOO_NERD_POLE : ModBlocks.BAMBOO_BRIDGE;
 	}
 
-	private int getMetaFromDirection(ForgeDirection dir) {
-		switch (dir) {
+	private IBlockState getStateFromDirection(EnumFacing facing) {
+		switch (facing) {
 			case UP:
-				return 1;
+				return ModBlocks.BAMBOO_NERD_POLE.getDefaultState();
 			case DOWN:
-				return 1;
+				return ModBlocks.BAMBOO_NERD_POLE.getDefaultState();
 			case EAST:
 			case WEST:
-				return 4;
 			case NORTH:
 			case SOUTH:
-				return 3;
-			default:
-				return 0;
+				return ModBlocks.BAMBOO_BRIDGE.getDefaultState().withProperty(BlockBambooBridge.FACING, facing);
 		}
-	}
-
-	private ForgeDirection getDirectionFromMetadata(int meta) {
-		switch (meta) {
-			case 0:
-				return ForgeDirection.DOWN;
-			case 1:
-				return ForgeDirection.UP;
-			case 2:
-				return ForgeDirection.NORTH;
-			case 3:
-				return ForgeDirection.SOUTH;
-			case 4:
-				return ForgeDirection.WEST;
-			case 5:
-				return ForgeDirection.EAST;
-		}
-		return null;
+		return ModBlocks.BAMBOO_BRIDGE.getDefaultState();
 	}
 
 	public void setExtending(boolean extending) {
@@ -149,18 +146,59 @@ public class TileEntityExtenderThingy extends TileEntityBasicInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return stack != null && (stack.getItem() == Item.getItemFromBlock(ModBlocks.bambooPole) || stack.getItem() == Item.getItemFromBlock(ModBlocks.bambooBridge));
+		return !stack.isEmpty() && (stack.getItem() == Item.getItemFromBlock(ModBlocks.BAMBOO_NERD_POLE) || stack.getItem() == Item.getItemFromBlock(ModBlocks.BAMBOO_BRIDGE));
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound data) {
+	public NBTTagCompound writeToNBT(NBTTagCompound data) {
 		super.writeToNBT(data);
 		data.setBoolean("extending", extending);
+		return data;
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
 		extending = data.getBoolean("extending");
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		int[] SLOTS = new int[getSizeInventory()];
+		for (int index = 0; index < SLOTS.length; index++)
+			SLOTS[index] = index;
+		return SLOTS;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		return true;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		return true;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		return null;
+	}
+	
+	protected IItemHandler createUnSidedHandler() {
+		return new InvWrapper(this);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			return (T) (itemHandler == null ? (itemHandler = createUnSidedHandler()) : itemHandler);
+		return super.getCapability(capability, facing);
 	}
 }

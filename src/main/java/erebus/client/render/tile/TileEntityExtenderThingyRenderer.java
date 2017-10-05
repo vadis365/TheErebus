@@ -1,95 +1,115 @@
 package erebus.client.render.tile;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
+import erebus.block.bamboo.BlockExtenderThingy;
+import erebus.blocks.BlockPlanksErebus;
+import erebus.blocks.EnumWood;
 import erebus.client.model.block.ModelExtenderThingy;
-import erebus.lib.EnumWood;
 import erebus.tileentity.TileEntityExtenderThingy;
-import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer {
+public class TileEntityExtenderThingyRenderer extends TileEntitySpecialRenderer <TileEntityExtenderThingy> {
 
-	private final ModelExtenderThingy ModelExtenderThingy = new ModelExtenderThingy();
-	private final RenderBlocks blockRenderer = new RenderBlocks();
+	private final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/special/tiles/extender_thingy.png");
+	private final ModelExtenderThingy EXTENDER_MODEL = new ModelExtenderThingy();
 
-	public void renderAModelAt(TileEntityExtenderThingy tile, double x, double y, double z, float f) {
-		bindTexture(new ResourceLocation("erebus:textures/special/tiles/extenderThingy.png"));
-		int meta = tile.getBlockMetadata();
-		switch (meta) {
-			case 0:
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y - 0.5F, z + 0.5D);
-				GL11.glScalef(1F, -1F, -1F);
-				GL11.glRotatef(180F, 0.0F, 0F, 1F);
-				GL11.glRotatef(-180F, 0.0F, 1F, 0F);
-				ModelExtenderThingy.render2(tile);
-				GL11.glPopMatrix();
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 0.5625F, z + 0.5D);
-				GL11.glScaled(1.0D, 0.875D, 1.0D);
-				bindTexture(TextureMap.locationBlocksTexture);
-				blockRenderer.renderBlockAsItem(ModBlocks.planks, EnumWood.Bamboo.ordinal(), 1.0F);
-				GL11.glPopMatrix();
+	public void renderTile(TileEntityExtenderThingy tile, double x, double y, double z, float partialTick, int destroyStage, float alpha) {
+		IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+		if(state == null || state.getBlock() != ModBlocks.BAMBOO_EXTENDER)
+			return;
+
+		bindTexture(TEXTURE);
+		EnumFacing facing = state.getValue(BlockExtenderThingy.FACING);
+
+		switch (facing) {
+			case DOWN:
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(x + 0.5D, y - 0.5F, z + 0.5D);
+				GlStateManager.scale(1F, -1F, -1F);
+				GlStateManager.rotate(180F, 0.0F, 0F, 1F);
+				GlStateManager.rotate(-180F, 0.0F, 1F, 0F);
+				EXTENDER_MODEL.render2();
+				GlStateManager.popMatrix();
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(x, y + 0.125, z + 1D);
+				GlStateManager.scale(1.0D, 0.875D, 1.0D);
+				bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+				Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(ModBlocks.PLANKS.getDefaultState().withProperty(BlockPlanksErebus.TYPE, EnumWood.BAMBOO), 1.0F);
+				GlStateManager.popMatrix();
 				break;
-			case 1:
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
-				GL11.glScalef(1F, -1F, -1F);
-				GL11.glRotatef(180F, 0.0F, 1F, 0F);
-				ModelExtenderThingy.render2(tile);
-				GL11.glPopMatrix();
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 0.4375F, z + 0.5D);
-				GL11.glScaled(1.0D, 0.875D, 1.0D);
-				bindTexture(TextureMap.locationBlocksTexture);
-				blockRenderer.renderBlockAsItem(ModBlocks.planks, EnumWood.Bamboo.ordinal(), 1.0F);
-				GL11.glPopMatrix();
+			case UP:
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(x + 0.5D, y + 1.5F, z + 0.5D);
+				GlStateManager.scale(1F, -1F, -1F);
+				GlStateManager.rotate(180F, 0.0F, 1F, 0F);
+				EXTENDER_MODEL.render2();
+				GlStateManager.popMatrix();
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(x, y , z + 1F);
+				GlStateManager.scale(1.0D, 0.875D, 1.0D);
+				bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+				Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(ModBlocks.PLANKS.getDefaultState().withProperty(BlockPlanksErebus.TYPE, EnumWood.BAMBOO), 1.0F);
+				GlStateManager.popMatrix();
 				break;
-			case 2:
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
-				GL11.glScalef(1F, -1F, -1F);
-				GL11.glRotatef(180F, 0.0F, 1F, 0F);
-				ModelExtenderThingy.render(tile);
-				GL11.glPopMatrix();
+			case NORTH:
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(x + 0.5D, y + 1.5F, z + 0.5D);
+				GlStateManager.scale(1F, -1F, -1F);
+				GlStateManager.rotate(180F, 0.0F, 1F, 0F);
+				EXTENDER_MODEL.render();
+				GlStateManager.popMatrix();
 				break;
-			case 3:
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
-				GL11.glScalef(1F, -1F, -1F);
-				GL11.glRotatef(0F, 0.0F, 1F, 0F);
-				ModelExtenderThingy.render(tile);
-				GL11.glPopMatrix();
+			case SOUTH:
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(x + 0.5D, y + 1.5F, z + 0.5D);
+				GlStateManager.scale(1F, -1F, -1F);
+				GlStateManager.rotate(0F, 0.0F, 1F, 0F);
+				EXTENDER_MODEL.render();
+				GlStateManager.popMatrix();
 				break;
-			case 4:
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
-				GL11.glScalef(1F, -1F, -1F);
-				GL11.glRotatef(90F, 0.0F, 1F, 0F);
-				ModelExtenderThingy.render(tile);
-				GL11.glPopMatrix();
+			case WEST:
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(x + 0.5D, y + 1.5F, z + 0.5D);
+				GlStateManager.scale(1F, -1F, -1F);
+				GlStateManager.rotate(90F, 0.0F, 1F, 0F);
+				EXTENDER_MODEL.render();
+				GlStateManager.popMatrix();
 				break;
-			case 5:
-				GL11.glPushMatrix();
-				GL11.glTranslated(x + 0.5D, y + 1.5F, z + 0.5D);
-				GL11.glScalef(1F, -1F, -1F);
-				GL11.glRotatef(-90F, 0.0F, 1F, 0F);
-				ModelExtenderThingy.render(tile);
-				GL11.glPopMatrix();
+			case EAST:
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(x + 0.5D, y + 1.5F, z + 0.5D);
+				GlStateManager.scale(1F, -1F, -1F);
+				GlStateManager.rotate(-90F, 0.0F, 1F, 0F);
+				EXTENDER_MODEL.render();
+				GlStateManager.popMatrix();
 				break;
 		}
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float meta) {
-		renderAModelAt((TileEntityExtenderThingy) tile, x, y, z, meta);
+	public void render(TileEntityExtenderThingy tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+		if(tile == null || !tile.hasWorld()) {
+			renderTileAsItem(x, y, z);
+			return;
+		}
+		renderTile(tile, x, y, z, partialTicks, destroyStage, alpha);
+	}
+
+	private void renderTileAsItem(double x, double y, double z) {
+		GlStateManager.pushMatrix();
+		bindTexture(TEXTURE);
+		GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		GlStateManager.scale(-1, -1, 1);
+		EXTENDER_MODEL.render();
+		GlStateManager.popMatrix();
 	}
 }

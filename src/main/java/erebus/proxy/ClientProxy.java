@@ -69,6 +69,7 @@ import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityBambooBridgeRenderer;
+import erebus.client.render.tile.TileEntityExtenderThingyRenderer;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
@@ -181,6 +182,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new GogglesClientTickHandler());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGaeanKeystone.class, new TileEntityGaeanKeystoneRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooBridge.class, new TileEntityBambooBridgeRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtenderThingy.class, new TileEntityExtenderThingyRenderer());
 	}
 
 	@Override
@@ -253,6 +255,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void postInit() {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BAMBOO_BRIDGE), 0, TileEntityBambooBridge.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BAMBOO_EXTENDER), 0, TileEntityExtenderThingy.class);
 
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	
@@ -374,7 +377,7 @@ public class ClientProxy extends CommonProxy {
 			case COMPOSTER:
 				return new GuiComposter(player.inventory, (TileEntityComposter) tile);
 			case EXTENDER_THINGY:
-				return new GuiErebusBasic(new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) tile), new ResourceLocation("erebus:textures/gui/container/extenderThingy.png"), (TileEntityExtenderThingy) tile, 176, 136);
+				return new GuiErebusBasic(new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) tile), new ResourceLocation("erebus:textures/gui/container/extender_thingy.png"), (TileEntityExtenderThingy) tile, 176, 136);
 			case HONEY_COMB:
 				return new GuiErebusBasic(new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile), new ResourceLocation("erebus:textures/gui/container/honeyCombGui.png"), (TileEntityHoneyComb) tile, 168);
 			case PETRIFIED_CHEST:

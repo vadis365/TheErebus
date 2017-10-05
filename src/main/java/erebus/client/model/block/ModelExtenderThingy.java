@@ -1,10 +1,10 @@
 package erebus.client.model.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityExtenderThingy;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelExtenderThingy extends ModelBase {
@@ -75,7 +75,7 @@ public class ModelExtenderThingy extends ModelBase {
 		setRotation(Main, 0F, 0F, 0F);
 	}
 
-	public void render(TileEntityExtenderThingy tile) {
+	public void render() {
 		BambooStep1.render(0.0625F);
 		BambooStep2.render(0.0625F);
 		SupportR1.render(0.0625F);
@@ -90,7 +90,7 @@ public class ModelExtenderThingy extends ModelBase {
 		Main.render(0.0625F);
 	}
 
-	public void render2(TileEntityExtenderThingy tile) {
+	public void render2() {
 		Polebit.render(0.0625F);
 	}
 
