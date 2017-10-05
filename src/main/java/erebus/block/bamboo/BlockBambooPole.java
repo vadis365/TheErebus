@@ -2,88 +2,86 @@ package erebus.block.bamboo;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import javax.annotation.Nullable;
+
 import erebus.ModTabs;
-import erebus.tileentity.TileEntityBambooPole;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBambooPole extends BlockContainer {
+public class BlockBambooPole extends Block {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon poleIconTop, poleIconBottom;
+	protected static final AxisAlignedBB NERD_POLE_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1D, 0.625D);
 
 	public BlockBambooPole() {
-		super(Material.wood);
+		super(Material.WOOD);
 		setHardness(0.4F);
 		setHarvestLevel("axe", 0);
-		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.bambooPole");
-		setBlockTextureName("erebus:blockBambooPole");
-		setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
+		setSoundType(SoundType.LADDER);
+		setCreativeTab(ModTabs.BLOCKS);
 	}
 
 	@Override
-	public int getRenderType() {
-		return -1;
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return NERD_POLE_AABB;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	@Nullable
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		return NERD_POLE_AABB;
+	}
+
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityBambooPole();
-	}
-
-	@Override
-	public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity) {
+    @Override
+    public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
 		return true;
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		Block block = world.getBlock(x, y - 1, z);
-		if (block == null)
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
+		IBlockState state = world.getBlockState(pos.down());
+		if (state.getBlock() == null)
 			return false;
-		if (block == this)
+		if (state.getBlock() == this)
 			return true;
-		if (block.isLeaves(world, x, y - 1, z) && !block.isOpaqueCube())
+		if (state.getBlock().isLeaves(state, world, pos.down()) && !state.isOpaqueCube())
 			return false;
-		return block.getMaterial().blocksMovement();
+		return state.getMaterial().blocksMovement();
 	}
 
 	@Override
 	public int quantityDropped(Random rand) {
 		return 1;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side == 0 ? poleIconBottom : side == 1 ? poleIconTop : blockIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon("erebus:bambooPole");// Side
-		poleIconTop = iconRegister.registerIcon("erebus:bambooPole");// Top
-		poleIconBottom = iconRegister.registerIcon("erebus:bambooPole");
 	}
 }

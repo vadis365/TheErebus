@@ -409,11 +409,12 @@ tile.erebus.bamboo_crate.ttr.name=Colossal BambooCrate
 tile.erebus.bamboo_crate.tbl.name=Colossal BambooCrate
 tile.erebus.bamboo_crate.tbr.name=Colossal BambooCrate
 tile.erebus.bamboo_bridge.name=Bamboo Bridge
+tile.erebus.bamboo_ladder.name=Bamboo Ladder
+tile.erebus.bamboo_nerd_pole.name=Bamboo Nerd Pole
 tile.erebus.silo_roof.name=Silo Roof
 tile.erebus.silo_tank.silo_inactive.name=Silo Tank
 tile.erebus.silo_tank.silo_active.name=Silo Tank
 tile.erebus.silo_supports.name=Silo Supports
-tile.erebus.bamboo_ladder.name=Bamboo Ladder
 tile.erebus.wasp_nest.name=Wasp Nest
 tile.erebus.stairs_wasp_nest.name=Wasp Nest Stairs
 

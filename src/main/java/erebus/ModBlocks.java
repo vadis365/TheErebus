@@ -9,6 +9,7 @@ import java.util.Locale;
 import erebus.block.bamboo.BlockBambooBridge;
 import erebus.block.bamboo.BlockBambooCrate;
 import erebus.block.bamboo.BlockBambooLadder;
+import erebus.block.bamboo.BlockBambooPole;
 import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
@@ -158,6 +159,7 @@ public class ModBlocks {
 	public static final Block BAMBOO_CRATE = new BlockBambooCrate();
 	public static final Block BAMBOO_BRIDGE = new BlockBambooBridge();
 	public static final Block BAMBOO_LADDER = new BlockBambooLadder();
+	public static final Block BAMBOO_NERD_POLE = new BlockBambooPole();
 	public static final Block SILO_ROOF = new BlockSiloRoof(Material.WOOD);
 	public static final Block SILO_TANK = new BlockSiloTank(Material.IRON);
 	public static final Block SILO_SUPPORTS = new BlockSiloSupports(Material.WOOD);
