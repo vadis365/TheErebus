@@ -27,7 +27,7 @@ public enum EnumWood implements IStringSerializable {
 	VARNISHED(false, true, false, false, false);
 
 	private final boolean hasLog, hasPlanks, hasSapling, hasLeaves, hasDoor;
-	private Block stairs, log, slab, leaves, sapling, door;
+	private Block stairs, log, slab, leaves, sapling, door, fence, gate;
 
 	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling, boolean hasLeaves, boolean hasDoor) {
 		this.hasLog = hasLog;
@@ -134,6 +134,14 @@ public enum EnumWood implements IStringSerializable {
 
 					wood.door = door;
 				}
+				
+				Block fence = new BlockWoodFence(ModBlocks.PLANKS.getDefaultState().withProperty(BlockPlanksErebus.TYPE, wood));
+				ModBlocks.registerBlock("fence_" + wood.getName(), fence);
+				wood.fence = fence;
+
+				Block fenceGate = new BlockWoodFenceGate(ModBlocks.PLANKS.getDefaultState().withProperty(BlockPlanksErebus.TYPE, wood));
+				ModBlocks.registerBlock("fence_gate_" + wood.getName(), fenceGate);
+				wood.gate = fenceGate;
 			}
 		}
 	}

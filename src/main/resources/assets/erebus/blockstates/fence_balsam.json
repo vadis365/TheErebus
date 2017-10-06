@@ -1,0 +1,42 @@
+{
+  "forge_marker": 1,
+  "defaults":{
+    "model": "erebus:base_fence_post",
+    "textures": {
+      "texture": "erebus:blocks/planks_balsam"
+    }
+  },
+  "variants": {
+    "north": {
+      "true": {
+        "submodel": "erebus:base_fence_side",
+        "uvlock": true
+      },
+      "false": {}
+    },
+    "east": {
+      "true": {
+        "submodel": "erebus:base_fence_side",
+        "y": 90,
+        "uvlock": true
+      },
+      "false": {}
+    },
+    "south": {
+      "true": {
+        "submodel": "erebus:base_fence_side",
+        "y": 180,
+        "uvlock": true
+      },
+      "false": {}
+    },
+    "west": {
+      "true": {
+        "submodel": "erebus:base_fence_side",
+        "y": 270,
+        "uvlock": true
+      },
+      "false": {}
+    }
+  }
+}

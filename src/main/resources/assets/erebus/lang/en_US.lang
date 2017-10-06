@@ -285,6 +285,36 @@ tile.erebus.door_rotten.name=Rotten Door
 tile.erebus.door_marshwood.name=Marshwood Door
 tile.erebus.door_scorched.name=Scorched Door
 
+# Fences
+tile.erebus.fence_baobab.name=Baobab Fence
+tile.erebus.fence_eucalyptus.name=Eucalyptus Fence
+tile.erebus.fence_mahogany.name=Mahogany Fence
+tile.erebus.fence_mossbark.name=Mossbark Fence
+tile.erebus.fence_asper.name=Asper Fence
+tile.erebus.fence_cypress.name=Cypress Fence
+tile.erebus.fence_balsam.name=Balsam Fence
+tile.erebus.fence_white.name=White Fence
+tile.erebus.fence_bamboo.name=Bamboo Fence
+tile.erebus.fence_rotten.name=Rotten Fence
+tile.erebus.fence_marshwood.name=Marshwood Fence
+tile.erebus.fence_scorched.name=Scorched Fence
+tile.erebus.fence_varnished.name=Varnished Fence
+
+# Fence Gates
+tile.erebus.fence_gate_baobab.name=Baobab Fence Gate
+tile.erebus.fence_gate_eucalyptus.name=Eucalyptus Fence Gate
+tile.erebus.fence_gate_mahogany.name=Mahogany Fence Gate
+tile.erebus.fence_gate_mossbark.name=Mossbark Fence Gate
+tile.erebus.fence_gate_asper.name=Asper Fence Gate
+tile.erebus.fence_gate_cypress.name=Cypress Fence Gate
+tile.erebus.fence_gate_balsam.name=Balsam Fence Gate
+tile.erebus.fence_gate_white.name=White Fence Gate
+tile.erebus.fence_gate_bamboo.name=Bamboo Fence Gate
+tile.erebus.fence_gate_rotten.name=Rotten Fence Gate
+tile.erebus.fence_gate_marshwood.name=Marshwood Fence Gate
+tile.erebus.fence_gate_scorched.name=Scorched Fence Gate
+tile.erebus.fence_gate_varnished.name=Varnished Fence Gate
+
 # Plants
 tile.erebus.crop_trunip.name=Turnips
 tile.erebus.crop_cabbage.name=Cabbage

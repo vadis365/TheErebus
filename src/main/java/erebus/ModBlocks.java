@@ -56,6 +56,7 @@ import erebus.blocks.BlockWallPlantsCultivated;
 import erebus.blocks.BlockWaspNest;
 import erebus.blocks.BlockWaspSpawner;
 import erebus.blocks.BlockWitherWeb;
+import erebus.blocks.BlockWoodFenceGate;
 import erebus.blocks.BlockZombieAntSpawner;
 import erebus.blocks.EnumWood;
 import erebus.blocks.ErebusPortal;
@@ -249,6 +250,8 @@ public class ModBlocks {
 						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockSapling.TYPE }).build());
 					if (block instanceof BlockDoorErebus)
 						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockDoor.POWERED }).build());
+					if (block instanceof BlockWoodFenceGate)
+						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockWoodFenceGate.POWERED }).build());
 				}
 		}
 	}
