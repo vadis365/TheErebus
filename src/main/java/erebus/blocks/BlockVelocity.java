@@ -80,8 +80,8 @@ public class BlockVelocity extends Block {
 
 		double speed = speed();
 		int meta = state.getValue(FACING).getIndex() - 2;
-		int[] factorX = { 0, 0, 1, -1 };
-		int[] factorZ = { 1, -1, 0, 0 };
+		int[] factorX = { 0, 0, -1, 1 };
+		int[] factorZ = { -1, 1, 0, 0 };
 
 		if (entity.posY > pos.getY() + 0.5D) {
 			if (factorX[meta] == 0 && Math.abs(pos.getX() + 0.5D - entity.posX) < 0.5D && Math.abs(pos.getX() + 0.5D - entity.posX) > 0.1D)
