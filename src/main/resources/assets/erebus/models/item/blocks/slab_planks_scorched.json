@@ -1,0 +1,6 @@
+{
+    "parent": "erebus:block/base_slab",
+    "textures": {
+        "all": "erebus:blocks/planks_scorched"
+    }
+}

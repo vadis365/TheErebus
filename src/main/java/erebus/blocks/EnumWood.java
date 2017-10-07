@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import erebus.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -27,7 +28,13 @@ public enum EnumWood implements IStringSerializable {
 	VARNISHED(false, true, false, false, false);
 
 	private final boolean hasLog, hasPlanks, hasSapling, hasLeaves, hasDoor;
-	private Block stairs, log, slab, leaves, sapling, door, fence, gate;
+	private Block stairs, log;
+	private Block slab;
+	private Block leaves;
+	private Block sapling;
+	private Block door;
+	private Block fence;
+	private Block gate;
 
 	EnumWood(boolean hasLog, boolean hasPlanks, boolean hasSapling, boolean hasLeaves, boolean hasDoor) {
 		this.hasLog = hasLog;
@@ -123,10 +130,10 @@ public enum EnumWood implements IStringSerializable {
 
 				wood.stairs = stairs;
 
-				/*Block slab = new BlockSlabPlanks(wood);
-				GameRegistry.registerBlock(slab, ItemBlockSlabSimple.class, "slabPlanks" + wood.name());
-				Blocks.fire.setFireInfo(slab, 5, 5);
-				slabs.put(wood, slab);*/
+				Block slabs = new BlockSlabErebus(ModBlocks.PLANKS.getDefaultState().withProperty(BlockPlanksErebus.TYPE, wood), "axe", 0);
+				ModBlocks.registerBlock("slab_planks_" + wood.getName(), slabs);
+				Blocks.FIRE.setFireInfo(slabs, 5, 5);
+				wood.slab = slabs;
 
 				if (wood.hasDoor) {
 					Block door = new BlockDoorErebus();
@@ -134,7 +141,7 @@ public enum EnumWood implements IStringSerializable {
 
 					wood.door = door;
 				}
-				
+
 				Block fence = new BlockWoodFence(ModBlocks.PLANKS.getDefaultState().withProperty(BlockPlanksErebus.TYPE, wood));
 				ModBlocks.registerBlock("fence_" + wood.getName(), fence);
 				wood.fence = fence;

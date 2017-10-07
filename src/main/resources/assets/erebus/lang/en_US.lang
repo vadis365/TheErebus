@@ -259,6 +259,21 @@ tile.erebus.planks_marshwood.name=Marshwood Planks
 tile.erebus.planks_scorched.name=Scorched Planks
 tile.erebus.planks_varnished.name=Varnished Planks
 
+# Slabs Plank 
+tile.erebus.slab_planks_baobab.name=Baobab Slab
+tile.erebus.slab_planks_eucalyptus.name=Eucalyptus Slab
+tile.erebus.slab_planks_mahogany.name=Mahogany Slab
+tile.erebus.slab_planks_mossbark.name=Mossbark Slab
+tile.erebus.slab_planks_asper.name=Asper Slab
+tile.erebus.slab_planks_cypress.name=Cypress Slab
+tile.erebus.slab_planks_balsam.name=Balsam Slab
+tile.erebus.slab_planks_white.name=White Slab
+tile.erebus.slab_planks_bamboo.name=Bamboo Slab
+tile.erebus.slab_planks_rotten.name=Rotten Slab
+tile.erebus.slab_planks_marshwood.name=Marshwood Slab
+tile.erebus.slab_planks_scorched.name=Scorched Slab
+tile.erebus.slab_planks_varnished.name=Varnished Slab
+
 # Stairs
 tile.erebus.stairs_baobab.name=Baobab Stairs
 tile.erebus.stairs_eucalyptus.name=Eucalyptus Stairs
