@@ -32,6 +32,7 @@ import erebus.blocks.BlockGiantLilyPad;
 import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
 import erebus.blocks.BlockLeavesErebus;
+import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
 import erebus.blocks.BlockOreErebus;
@@ -51,6 +52,7 @@ import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
+import erebus.blocks.BlockVelocity;
 import erebus.blocks.BlockWallPlants;
 import erebus.blocks.BlockWallPlantsCultivated;
 import erebus.blocks.BlockWaspNest;
@@ -168,6 +170,10 @@ public class ModBlocks {
 	public static final Block SILO_ROOF = new BlockSiloRoof(Material.WOOD);
 	public static final Block SILO_TANK = new BlockSiloTank(Material.IRON);
 	public static final Block SILO_SUPPORTS = new BlockSiloSupports(Material.WOOD);
+	
+	// VELOCITY BLOCKS
+	public static final Block VELOCITY_BLOCK = new BlockVelocity();
+	public static final Block LIGHTNING_SPEED_BLOCK = new BlockLightningSpeed();
 	
 	// DUNGEONS
 	public static final Block SPIDER_SPAWNER = new BlockSpiderSpawner("erebus:scytodes");

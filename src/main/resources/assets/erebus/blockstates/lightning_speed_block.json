@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "erebus:lightning_speed_block", "y": 180 },
+        "facing=south": { "model": "erebus:lightning_speed_block" },
+        "facing=west":  { "model": "erebus:lightning_speed_block", "y": 90},
+        "facing=east":  { "model": "erebus:lightning_speed_block" , "y": 270 }
+    }
+}

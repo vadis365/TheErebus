@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "erebus:velocity_block", "y": 180 },
+        "facing=south": { "model": "erebus:velocity_block" },
+        "facing=west":  { "model": "erebus:velocity_block", "y": 90},
+        "facing=east":  { "model": "erebus:velocity_block" , "y": 270 }
+    }
+}
