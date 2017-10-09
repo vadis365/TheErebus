@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "erebus:umberstone_pillar" },
+        "axis=z": { "model": "erebus:umberstone_pillar", "x": 90 },
+        "axis=x": { "model": "erebus:umberstone_pillar", "x": 90, "y": 90 }
+    }
+}

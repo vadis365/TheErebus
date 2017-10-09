@@ -53,8 +53,12 @@ import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
+import erebus.blocks.BlockUmberGravel;
+import erebus.blocks.BlockUmberPaver;
+import erebus.blocks.BlockUmberPaver.EnumUmberPaverType;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.BlockUmberstone.EnumType;
+import erebus.blocks.BlockUmberstonePillar;
 import erebus.blocks.BlockVelocity;
 import erebus.blocks.BlockWallErebus;
 import erebus.blocks.BlockWallPlants;
@@ -100,6 +104,10 @@ public class ModBlocks {
 	public static final Block PLANKS = new BlockPlanksErebus();
 	public static final Block PORTAL = new ErebusPortal();
 	public static final Block GAEAN_KEYSTONE = new BlockGaeanKeystone();
+
+	public static final Block UMBERGRAVEL = new BlockUmberGravel();
+	public static final Block UMBERPAVER = new BlockUmberPaver();
+	public static final Block UMBERSTONE_PILLAR = new BlockUmberstonePillar();
 
 	public static final Block ORE_IRON = new BlockOreErebus(1);
 	public static final Block ORE_GOLD = new BlockOreErebus(2);
@@ -213,9 +221,9 @@ public class ModBlocks {
 	public static final Block WALL_UMBERTILE_SMOOTH = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH));
 	public static final Block WALL_UMBERTILE_SMOOTH_SMALL = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH_SMALL));
 	public static final Block WALL_AMBER = new BlockWallErebus(AMBER.getDefaultState());
-	//public static final Block WALL_UMBERPAVER1 = new BlockWallErebus(null);
-	//public static final Block WALL_UMBERPAVER2 = new BlockWallErebus(null);
-	//public static final Block WALL_UMBERPAVER3 = new BlockWallErebus(null);
+	public static final Block WALL_UMBERPAVER = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER));
+	public static final Block WALL_UMBERPAVER_MOSSY = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_MOSSY));
+	public static final Block WALL_UMBERPAVER_WEBBED = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_WEBBED));
 
 	public static void init() {
 		try {

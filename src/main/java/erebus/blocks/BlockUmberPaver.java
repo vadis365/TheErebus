@@ -1,65 +1,98 @@
 package erebus.blocks;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.IHasCustomItemBlock;
+import erebus.ModBlocks;
+import erebus.ModBlocks.IHasCustomItem;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModTabs;
-import erebus.item.block.ItemBlockGeneric;
+import erebus.api.IErebusEnum;
+import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockUmberPaver extends Block implements IHasCustomItemBlock {
+public class BlockUmberPaver extends Block implements IHasCustomItem, ISubBlocksBlock {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] blockIcon;
-	public static final String[] types = new String[] { "", "Mossy", "Webbed" };
+	public static final PropertyEnum<EnumUmberPaverType> TYPE = PropertyEnum.create("type", EnumUmberPaverType.class);
 
 	public BlockUmberPaver() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHardness(3.5F);
-		setStepSound(soundTypeStone);
+		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", 0);
-		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.umberPaver");
+		setCreativeTab(ModTabs.BLOCKS);
+		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumUmberPaverType.UMBERPAVER));
 	}
 
 	@Override
-	public int damageDropped(int meta) {
-		return meta;
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(TYPE, EnumUmberPaverType.values()[meta]);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		EnumUmberPaverType type = state.getValue(TYPE);
+		return type.ordinal();
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { TYPE });
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
-		for (int i = 0; i < types.length; i++)
-			list.add(new ItemStack(id, 1, i));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.BLOCKS)
+			for (EnumUmberPaverType type : EnumUmberPaverType.values())
+				list.add(new ItemStack(this, 1, type.ordinal()));
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return blockIcon[meta];
+	public ItemBlock getItemBlock() {
+		return ItemBlockEnum.create(this, EnumUmberPaverType.class);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = new IIcon[types.length];
-		for (int i = 0; i < blockIcon.length; i++)
-			blockIcon[i] = reg.registerIcon("erebus:umberpaver" + types[i]);
+	public List<String> getModels() {
+		List<String> models = new ArrayList<String>();
+		for (EnumUmberPaverType type : EnumUmberPaverType.values())
+			models.add(type.getName());
+		return models;
 	}
 
-	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
-		return ItemBlockGeneric.class;
+	public enum EnumUmberPaverType implements IErebusEnum {
+
+		UMBERPAVER,
+		UMBERPAVER_MOSSY,
+		UMBERPAVER_WEBBED;
+
+		@Override
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModBlocks.UMBERPAVER, size, ordinal());
+		}
+
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ENGLISH);
+		}
 	}
 }
