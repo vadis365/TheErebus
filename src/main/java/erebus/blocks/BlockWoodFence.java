@@ -8,6 +8,7 @@ import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
@@ -136,12 +137,17 @@ public class BlockWoodFence extends Block {
         IBlockState iblockstate = world.getBlockState(pos);
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(world, pos, facing);
         Block block = iblockstate.getBlock();
-        boolean flag = blockfaceshape == BlockFaceShape.MIDDLE_POLE && (iblockstate.getMaterial() == this.blockMaterial || block instanceof BlockFenceGate);
+        boolean flag = blockfaceshape == BlockFaceShape.MIDDLE_POLE && (iblockstate.getMaterial() == this.blockMaterial || block instanceof BlockFenceGate || block instanceof BlockWoodFenceGate || block instanceof BlockWall || block instanceof BlockWallErebus);
         return !isExcepBlockForAttachWithPiston(block) && blockfaceshape == BlockFaceShape.SOLID || flag;
     }
 
     protected static boolean isExcepBlockForAttachWithPiston(Block block) {
         return Block.isExceptBlockForAttachWithPiston(block) || block == Blocks.BARRIER || block == Blocks.MELON_BLOCK || block == Blocks.PUMPKIN || block == Blocks.LIT_PUMPKIN;
+    }
+
+    @Override 
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+       return true;
     }
 
     @Override

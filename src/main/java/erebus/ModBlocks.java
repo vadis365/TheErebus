@@ -31,6 +31,7 @@ import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockGiantLilyPad;
 import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
+import erebus.blocks.BlockGneiss;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockMud;
@@ -44,6 +45,7 @@ import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockQuickSand;
 import erebus.blocks.BlockRedGem;
 import erebus.blocks.BlockSaplingErebus;
+import erebus.blocks.BlockSimple;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockSpiderSpawner;
 import erebus.blocks.BlockStairsErebus;
@@ -52,7 +54,9 @@ import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberstone;
+import erebus.blocks.BlockUmberstone.EnumType;
 import erebus.blocks.BlockVelocity;
+import erebus.blocks.BlockWallErebus;
 import erebus.blocks.BlockWallPlants;
 import erebus.blocks.BlockWallPlantsCultivated;
 import erebus.blocks.BlockWaspNest;
@@ -68,6 +72,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSapling;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -157,7 +162,16 @@ public class ModBlocks {
 	
 	//OTHER
 	public static final Block WITHER_WEB = new BlockWitherWeb();
-	
+	public static final Block SILK = new BlockSimple(Material.CLOTH, SoundType.CLOTH).setHardness(0.2F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block MIR_BRICK = new BlockSimple(Material.ROCK, "pickaxe", 1, SoundType.STONE).setHardness(1.5F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block PLANKS_PETRIFIED_WOOD = new BlockSimple(Material.ROCK, SoundType.WOOD).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block REIN_EXO = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(1.5F).setResistance(2000.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block MUD_BRICK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(0.8F).setResistance(1.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block TEMPLE_BRICK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block TEMPLE_PILLAR = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block TEMPLE_TILE = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
+
+	public static final Block GNEISS = new BlockGneiss();
 	
 	//UTILS BLOCKS
 	public static final Block PETRIFIED_CRAFTING_TABLE = new BlockPetrifiedCraftingTable();
@@ -190,6 +204,19 @@ public class ModBlocks {
 	
 	//public static final Block magmaCrawler_SPAWNER = new BlockMagmaCrawlerSpawner("erebus:magmaCrawler");
 	
+	// WALLS
+	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));
+	public static final Block WALL_UMBERCOBBLE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE));
+	public static final Block WALL_UMBERCOBBLE_MOSSY = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_MOSSY));
+	public static final Block WALL_UMBERCOBBLE_WEBBED = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_WEBBED));
+	public static final Block WALL_UMBERSTONE_BRICKS = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE_BRICKS));
+	public static final Block WALL_UMBERTILE_SMOOTH = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH));
+	public static final Block WALL_UMBERTILE_SMOOTH_SMALL = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH_SMALL));
+	public static final Block WALL_AMBER = new BlockWallErebus(AMBER.getDefaultState());
+	//public static final Block WALL_UMBERPAVER1 = new BlockWallErebus(null);
+	//public static final Block WALL_UMBERPAVER2 = new BlockWallErebus(null);
+	//public static final Block WALL_UMBERPAVER3 = new BlockWallErebus(null);
+
 	public static void init() {
 		try {
 			for (Field field : ModBlocks.class.getDeclaredFields()) {

@@ -258,6 +258,7 @@ tile.erebus.planks_rotten.name=Rotten Planks
 tile.erebus.planks_marshwood.name=Marshwood Planks
 tile.erebus.planks_scorched.name=Scorched Planks
 tile.erebus.planks_varnished.name=Varnished Planks
+tile.erebus.planks_petrified_wood.name=Petrified Wood Planks
 
 # Slabs Plank 
 tile.erebus.slab_planks_baobab.name=Baobab Slab
@@ -329,6 +330,16 @@ tile.erebus.fence_gate_rotten.name=Rotten Fence Gate
 tile.erebus.fence_gate_marshwood.name=Marshwood Fence Gate
 tile.erebus.fence_gate_scorched.name=Scorched Fence Gate
 tile.erebus.fence_gate_varnished.name=Varnished Fence Gate
+
+# Walls
+tile.erebus.wall_umberstone.name=Umberstone Wall
+tile.erebus.wall_umbercobble.name=Umbercobble Wall
+tile.erebus.wall_umbercobble_mossy.name=Mossy Umbercobble Wall
+tile.erebus.wall_umbercobble_webbed.name=Webbed Umbercobble Wall
+tile.erebus.wall_umberstone_bricks.name=Umbrick Wall
+tile.erebus.wall_umbertile_smooth.name=Umbertile Wall
+tile.erebus.wall_umbertile_smooth_small.name=Small Umbertile  Wall
+tile.erebus.wall_amber.name=Amber Wall
 
 # Plants
 tile.erebus.crop_trunip.name=Turnips
@@ -431,6 +442,22 @@ tile.erebus.red_gem.red_gem.name=Red Gem
 tile.erebus.red_gem.red_lamp_off.name=Red Gem Lamp
 tile.erebus.red_gem.red_lamp_on.name=Red Gem Lamp
 tile.erebus.wither_web.name=Wither Web
+tile.erebus.gneiss.gneiss.name=Gneiss
+tile.erebus.gneiss.gneiss_carved.name=Carved Gneiss
+tile.erebus.gneiss.gneiss_relief.name=Layered Gneiss
+tile.erebus.gneiss.gneiss_bricks.name=Gneiss Brick
+tile.erebus.gneiss.gneiss_smooth.name=Smooth Gneiss
+tile.erebus.gneiss.gneiss_tiles.name=Gneiss Tiles
+tile.erebus.gneiss.gneiss_tiles_cracked.name=Cracked Gneiss Tiles
+tile.erebus.temple_brick.name=Temple Brick
+tile.erebus.temple_pillar.name=Temple Pillar
+tile.erebus.temple_tile.name=Temple Tile
+tile.erebus.silk.name=Silk
+tile.erebus.mir_brick.name=Mir Brick
+tile.erebus.mud_brick.name=Mud Brick
+tile.erebus.rein_exo.name=Reinforced Exo Blocks
+tile.erebus.velocity_block.name=Velocity Block
+tile.erebus.lightning_speed_block.name=Lightning Velocity Block
 
 #Spawners
 tile.erebus.antlion_spawner.name=Antlion Spawner

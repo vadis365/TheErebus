@@ -1,92 +1,111 @@
 package erebus.blocks;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Locale;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks.IHasCustomItemBlock;
+import erebus.ModBlocks;
+import erebus.ModBlocks.IHasCustomItem;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModTabs;
-import erebus.item.block.ItemBlockGeneric;
+import erebus.api.IErebusEnum;
+import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockGneiss extends Block implements IHasCustomItemBlock {
+public class BlockGneiss extends Block implements IHasCustomItem, ISubBlocksBlock {
 
-	public static final String[] iconPaths = new String[] { "gneiss", "gneissCarved", "gneissRelief1", "gneissBricks", "gneissSmooth", "gneissTiles" };
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+	public static final PropertyEnum<EnumGneissType> TYPE = PropertyEnum.create("type", EnumGneissType.class);
 
 	public BlockGneiss() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHardness(30F);
 		setResistance(6000000.0F);
-		setStepSound(soundTypeStone);
-		setBlockName("erebus.gneiss");
-		setCreativeTab(ModTabs.blocks);
+		setSoundType(SoundType.STONE);
+		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumGneissType.GNEISS));
+		setCreativeTab(ModTabs.BLOCKS);
+	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(TYPE, EnumGneissType.values()[meta]);
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister reg) {
-		icons = new IIcon[iconPaths.length];
-		int i = 0;
-		for (String path : iconPaths)
-			icons[i++] = reg.registerIcon("erebus:" + path);
+	public int getMetaFromState(IBlockState state) {
+		EnumGneissType type = state.getValue(TYPE);
+		return type.ordinal();
 	}
 
 	@Override
-	public IIcon getIcon(int side, int meta) {
-		if (meta < 0 || meta >= icons.length)
-			return null;
-		return icons[meta];
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { TYPE });
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
-		for (int i = 0; i < icons.length; i++)
-			list.add(new ItemStack(id, 1, i));
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.BLOCKS)
+			for (EnumGneissType type : EnumGneissType.values())
+				list.add(new ItemStack(this, 1, type.ordinal()));
 	}
 
 	@Override
-	public int damageDropped(int meta) {
-		if (meta == 0)
-			return 1;
-		else
-			return meta;
+	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+		if (!world.isRemote)
+			world.setBlockState(pos, Blocks.FLOWING_LAVA.getDefaultState(), 11);
 	}
 
 	@Override
-	public int quantityDropped(int meta, int fortune, Random random) {
-		return 0;
+	public ItemBlock getItemBlock() {
+		return ItemBlockEnum.create(this, EnumGneissType.class);
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random random, int fortune) {
-		return null;
+	public List<String> getModels() {
+		List<String> models = new ArrayList<String>();
+		for (EnumGneissType type : EnumGneissType.values())
+			models.add(type.getName());
+		return models;
 	}
 
-	@Override
-	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta) {
-		world.setBlock(x, y, z, Blocks.flowing_lava);
-	}
+	public enum EnumGneissType implements IErebusEnum {
 
-	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
-		return world.getBlockMetadata(x, y, z);
-	}
+		GNEISS,
+		GNEISS_CARVED,
+		GNEISS_RELIEF,
+		GNEISS_BRICKS,
+		GNEISS_SMOOTH,
+		GNEISS_TILES,
+		GNEISS_TILES_CRACKED;
 
-	@Override
-	public Class<? extends ItemBlock> getItemBlockClass() {
-		return ItemBlockGeneric.class;
+		@Override
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModBlocks.GNEISS, size, ordinal());
+		}
+
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ENGLISH);
+		}
 	}
 }
