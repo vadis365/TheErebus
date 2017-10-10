@@ -19,6 +19,7 @@ import erebus.blocks.BlockAlgae;
 import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockAntlionSpawner;
 import erebus.blocks.BlockBerryBush;
+import erebus.blocks.BlockBossEgg;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
@@ -32,6 +33,7 @@ import erebus.blocks.BlockGiantLilyPad;
 import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
 import erebus.blocks.BlockGneiss;
+import erebus.blocks.BlockGneissVent;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockMud;
@@ -46,6 +48,7 @@ import erebus.blocks.BlockQuickSand;
 import erebus.blocks.BlockRedGem;
 import erebus.blocks.BlockSaplingErebus;
 import erebus.blocks.BlockSimple;
+import erebus.blocks.BlockSlabErebus;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockSpiderSpawner;
 import erebus.blocks.BlockStairsErebus;
@@ -127,6 +130,7 @@ public class ModBlocks {
 	public static final Block ORE_GNEISS = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.GNEISS_ROCK.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
+	public static final Block JADE_BLOCK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(5.0F).setResistance(10.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block AMBER = new BlockAmber();
 	public static final Block MUD = new BlockMud();
 	public static final Block QUICK_SAND = new BlockQuickSand();
@@ -178,8 +182,10 @@ public class ModBlocks {
 	public static final Block TEMPLE_BRICK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block TEMPLE_PILLAR = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block TEMPLE_TILE = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block VOLCANIC_ROCK = new BlockSimple(Material.ROCK, SoundType.STONE).setResistance(20.0F).setCreativeTab(ModTabs.BLOCKS);
 
 	public static final Block GNEISS = new BlockGneiss();
+	public static final Block GNEISS_VENT = new BlockGneissVent();
 	
 	//UTILS BLOCKS
 	public static final Block PETRIFIED_CRAFTING_TABLE = new BlockPetrifiedCraftingTable();
@@ -209,9 +215,10 @@ public class ModBlocks {
 	public static final Block ZOMBIE_ANT_SOLDIER_SPAWNER = new BlockZombieAntSpawner("erebus:zombie_ant_soldier");
 	public static final Block WASP_NEST = new BlockWaspNest();
 	public static final Block STAIRS_WASP_NEST = BlockStairsErebus.createWaspStairs(WASP_NEST.getDefaultState());
-	
 	//public static final Block magmaCrawler_SPAWNER = new BlockMagmaCrawlerSpawner("erebus:magmaCrawler");
-	
+	public static final Block ANTLION_EGG = new BlockBossEgg();
+	public static final Block TARANTULA_EGG = new BlockBossEgg();
+
 	// WALLS
 	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));
 	public static final Block WALL_UMBERCOBBLE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE));
@@ -224,6 +231,18 @@ public class ModBlocks {
 	public static final Block WALL_UMBERPAVER = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER));
 	public static final Block WALL_UMBERPAVER_MOSSY = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_MOSSY));
 	public static final Block WALL_UMBERPAVER_WEBBED = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_WEBBED));
+
+	//SLABS
+	public static final Block SLAB_UMBERSTONE = new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE), "pickaxe", 0);
+	public static final Block SLAB_UMBERCOBBLE = new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE), "pickaxe", 0);
+	public static final Block SLAB_UMBERCOBBLE_MOSSY= new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_MOSSY), "pickaxe", 0);
+	public static final Block SLAB_UMBERCOBBLE_WEBBED = new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_WEBBED), "pickaxe", 0);
+	public static final Block SLAB_UMBERSTONE_BRICKS = new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE_BRICKS), "pickaxe", 0);
+	public static final Block SLAB_UMBERTILE_SMOOTH = new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH), "pickaxe", 0);
+	public static final Block SLAB_UMBERTILE_SMOOTH_SMALL = new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH_SMALL), "pickaxe", 0);
+	public static final Block SLAB_UMBERPAVER = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER), "pickaxe", 0);
+	public static final Block SLAB_UMBERPAVER_MOSSY = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_MOSSY), "pickaxe", 0);
+	public static final Block SLAB_UMBERPAVER_WEBBED = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_WEBBED), "pickaxe", 0);
 
 	public static void init() {
 		try {

@@ -2,6 +2,7 @@ package erebus.blocks;
 
 import java.util.Random;
 
+import erebus.ModTabs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -31,6 +32,7 @@ public class BlockSlabErebus extends BlockSimple {
 		setDefaultState(blockState.getBaseState().withProperty(HALF, EnumBlockHalf.BOTTOM));
 		setHardness(2.0F);
 		setLightOpacity(0);
+		setCreativeTab(ModTabs.BLOCKS);
 	}
 
 	@Override
