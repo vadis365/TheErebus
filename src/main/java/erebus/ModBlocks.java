@@ -34,6 +34,7 @@ import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
 import erebus.blocks.BlockGneiss;
 import erebus.blocks.BlockGneissVent;
+import erebus.blocks.BlockHollowLog;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockMud;
@@ -186,6 +187,7 @@ public class ModBlocks {
 
 	public static final Block GNEISS = new BlockGneiss();
 	public static final Block GNEISS_VENT = new BlockGneissVent();
+	public static final Block HOLLOW_LOG = new BlockHollowLog();
 	
 	//UTILS BLOCKS
 	public static final Block PETRIFIED_CRAFTING_TABLE = new BlockPetrifiedCraftingTable();
