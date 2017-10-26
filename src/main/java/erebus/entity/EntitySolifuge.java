@@ -90,7 +90,7 @@ public class EntitySolifuge extends EntityMob {
 	public void onUpdate() {
 		super.onUpdate();
         if (!world.isRemote) {
-            setBesideClimbableBlock(isCollidedHorizontally);
+            setBesideClimbableBlock(collidedHorizontally);
         }
 	}
 	

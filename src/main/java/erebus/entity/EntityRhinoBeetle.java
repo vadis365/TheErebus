@@ -139,7 +139,7 @@ public class EntityRhinoBeetle extends EntityTameable {
 
 	@Override
 	public boolean isOnLadder() {
-		return isBeingRidden() && isCollidedHorizontally;
+		return isBeingRidden() && collidedHorizontally;
 	}
 
 	@Override

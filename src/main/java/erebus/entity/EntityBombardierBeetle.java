@@ -67,7 +67,7 @@ public class EntityBombardierBeetle extends EntityMob {
 		if (collideTick > 20 || getAttackTarget() == null)
 			collideTick = 0;
 		if (getAttackTarget() != null)
-			if (!getEntityWorld().isRemote && isCollidedHorizontally)
+			if (!getEntityWorld().isRemote && collidedHorizontally)
 				if (collideTick == 20)
 					clearpath();
 	}

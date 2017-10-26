@@ -94,7 +94,7 @@ public class EntityFireAntSoldier extends EntityMob {
 
 	@Override
 	public boolean isOnLadder() {
-		return isCollidedHorizontally;
+		return collidedHorizontally;
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class EntityFireAntSoldier extends EntityMob {
 		public void updateTask() {
 			--attackTime;
 			EntityLivingBase entitylivingbase = fire_ant.getAttackTarget();
-			double d0 = fire_ant.getDistanceSqToEntity(entitylivingbase);
+			double d0 = fire_ant.getDistanceSq(entitylivingbase);
 			if (d0 < 4.0D) {
 				if (attackTime <= 0) {
 					attackTime = 20;
@@ -163,7 +163,7 @@ public class EntityFireAntSoldier extends EntityMob {
 					}
 				}
 				fire_ant.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
-				fire_ant.getNavigator().clearPathEntity();
+				fire_ant.getNavigator().clearPath();
 				fire_ant.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.6D);
 			}
 			super.updateTask();

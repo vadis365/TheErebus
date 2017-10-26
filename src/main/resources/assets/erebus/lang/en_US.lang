@@ -492,6 +492,13 @@ tile.erebus.silo_supports.name=Silo Supports
 tile.erebus.wasp_nest.name=Wasp Nest
 tile.erebus.stairs_wasp_nest.name=Wasp Nest Stairs
 
+tile.erebus.altar_base.name=Altar Base
+tile.erebus.altar_lightning.name=Altar of Lightning
+tile.erebus.altar_healing.name=Altar of Healing
+tile.erebus.altar_xp.name=Altar of Experience
+tile.erebus.altar_repair.name=Altar of Repair
+tile.erebus.offering_altar.name=Offering Altar
+
 ############
 # Entities #
 ############

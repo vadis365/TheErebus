@@ -183,7 +183,7 @@ public class EntityDragonfly extends EntityMob {
 		
 		if (isBeingRidden()){
 			if (getAttackTarget() != null && !getEntityWorld().isAirBlock(getPosition().down(3)) || !getDropped() && getPosition().getY() < pickupHeight + 10D) {
-				getNavigator().clearPathEntity();
+				getNavigator().clearPath();
 				getNavigator().tryMoveToXYZ(this.posX, this.posY + 10D, this.posZ, 1D);
 				motionY += 0.08D;
 			}

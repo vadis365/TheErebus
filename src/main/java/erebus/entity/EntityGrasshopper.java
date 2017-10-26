@@ -115,7 +115,7 @@ public class EntityGrasshopper extends EntityCreature {
 	}
 
 	protected float getJumpUpwardsMotion() {
-		if (!isCollidedHorizontally && (!moveHelper.isUpdating() || moveHelper.getY() <= posY + 0.5D)) {
+		if (!collidedHorizontally && (!moveHelper.isUpdating() || moveHelper.getY() <= posY + 0.5D)) {
 			Path path = navigator.getPath();
 			if (path != null && path.getCurrentPathIndex() < path.getCurrentPathLength()) {
 				Vec3d vec3d = path.getPosition(this);

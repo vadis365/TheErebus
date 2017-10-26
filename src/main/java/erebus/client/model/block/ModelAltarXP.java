@@ -1,13 +1,12 @@
 package erebus.client.model.block;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityErebusAltarXP;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelAltarXP extends ModelBase {
@@ -80,8 +79,8 @@ public class ModelAltarXP extends ModelBase {
 
 	public void render(TileEntityErebusAltarXP tile) {
 		float x = tile.animationTicks;
-		GL11.glPushMatrix();
-		GL11.glScalef(0.04F * x, 0.04F * x, 0.04F * x);
+		GlStateManager.pushMatrix();
+		GlStateManager.scale(0.04F * x, 0.04F * x, 0.04F * x);
 		GlassTop.render(0.0625F);
 		GlassBot.render(0.0625F);
 		GlassMid.render(0.0625F);
@@ -91,16 +90,16 @@ public class ModelAltarXP extends ModelBase {
 		RBSupport.render(0.0625F);
 		LFSupport.render(0.0625F);
 		LBSupport.render(0.0625F);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glRotatef(-x * 7.2F, 0F, 1F, 0F);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(-x * 7.2F, 0F, 1F, 0F);
 		Mid.render(0.0625F);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glRotatef(x * 7.2F, 0F, 1F, 0F);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(x * 7.2F, 0F, 1F, 0F);
 		Top.render(0.0625F);
 		Bot.render(0.0625F);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

@@ -31,7 +31,7 @@ public class ItemWoodlouseBall extends Item {
 
 		if (!world.isRemote) {
 			EntityWoodlouseBall woodlouseball = new EntityWoodlouseBall(world, player);
-			woodlouseball.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
+			woodlouseball.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
 			world.spawnEntity(woodlouseball);
 		}
 

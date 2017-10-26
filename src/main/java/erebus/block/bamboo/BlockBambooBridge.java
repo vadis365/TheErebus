@@ -177,8 +177,8 @@ public class BlockBambooBridge extends Block implements ITileEntityProvider {
     public static final AxisAlignedBB FRONT_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 0.0D + PIXEL * 2D);
     public static final AxisAlignedBB BASE = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, PIXEL * 2D, 1.0D);
 
-    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-        if (!p_185477_7_)
+    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+        if (!isActualState)
             state = state.getActualState(world, pos);
 
 		boolean front = canConnectBridgeTo(world, pos.add(0, 0, - 1));

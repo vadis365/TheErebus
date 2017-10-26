@@ -69,6 +69,11 @@ import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityBambooBridgeRenderer;
+import erebus.client.render.tile.TileEntityErebusAltarHealingRenderer;
+import erebus.client.render.tile.TileEntityErebusAltarLightningRenderer;
+import erebus.client.render.tile.TileEntityErebusAltarRenderer;
+import erebus.client.render.tile.TileEntityErebusAltarRepairRenderer;
+import erebus.client.render.tile.TileEntityErebusAltarXPRenderer;
 import erebus.client.render.tile.TileEntityExtenderThingyRenderer;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
@@ -132,6 +137,11 @@ import erebus.inventory.ContainerSilo;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityComposter;
+import erebus.tileentity.TileEntityErebusAltar;
+import erebus.tileentity.TileEntityErebusAltarHealing;
+import erebus.tileentity.TileEntityErebusAltarLightning;
+import erebus.tileentity.TileEntityErebusAltarRepair;
+import erebus.tileentity.TileEntityErebusAltarXP;
 import erebus.tileentity.TileEntityExtenderThingy;
 import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityHoneyComb;
@@ -183,6 +193,11 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGaeanKeystone.class, new TileEntityGaeanKeystoneRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBambooBridge.class, new TileEntityBambooBridgeRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtenderThingy.class, new TileEntityExtenderThingyRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltar.class, new TileEntityErebusAltarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarLightning.class, new TileEntityErebusAltarLightningRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarHealing.class, new TileEntityErebusAltarHealingRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarXP.class, new TileEntityErebusAltarXPRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarRepair.class, new TileEntityErebusAltarRepairRenderer());
 	}
 
 	@Override
@@ -256,6 +271,11 @@ public class ClientProxy extends CommonProxy {
 	public void postInit() {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BAMBOO_BRIDGE), 0, TileEntityBambooBridge.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BAMBOO_EXTENDER), 0, TileEntityExtenderThingy.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_BASE), 0, TileEntityErebusAltar.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_LIGHTNING), 0,TileEntityErebusAltarLightning.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_HEALING), 0,TileEntityErebusAltarHealing.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_XP), 0,TileEntityErebusAltarXP.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_REPAIR), 0,TileEntityErebusAltarRepair.class);
 
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	
@@ -270,7 +290,6 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(ModItems.REIN_EXOSKELETON_SHIELD, 0, TileEntityReinExoShield.class);
 		
 	*/
-	
 		}
 
 	@Override

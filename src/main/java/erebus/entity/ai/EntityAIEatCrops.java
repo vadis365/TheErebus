@@ -70,7 +70,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 	protected void eatingInterupted() {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
 		grasshopper.setIsEating(false);
-		grasshopper.getNavigator().clearPathEntity();
+		grasshopper.getNavigator().clearPath();
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 				EntityGrasshopper entityGrasshopper = new EntityGrasshopper(grasshopper.getEntityWorld());
 				entityGrasshopper.setPosition(cropX, cropY + 1, cropZ);
 				grasshopper.getEntityWorld().spawnEntity(entityGrasshopper);
-				grasshopper.getNavigator().clearPathEntity();
+				grasshopper.getNavigator().clearPath();
 			}
 		if (reproCap >= 12) {
 			if (grasshopper.getEntityWorld().countEntities(EntityLocust.class) < 5) {

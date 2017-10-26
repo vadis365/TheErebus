@@ -106,7 +106,7 @@ public class EntityScorpion extends EntityMob {
 		}
 
         if (!world.isRemote)
-            setBesideClimbableBlock(isCollidedHorizontally);
+            setBesideClimbableBlock(collidedHorizontally);
 	}
 
 	@Override

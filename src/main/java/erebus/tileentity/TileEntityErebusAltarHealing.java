@@ -4,57 +4,61 @@ import java.util.List;
 
 import erebus.Erebus;
 import erebus.ModBlocks;
+import erebus.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityErebusAltarHealing extends TileEntityErebusAltar {
+public class TileEntityErebusAltarHealing extends TileEntityErebusAltar implements ITickable {
 
 	public int animationTicks;
 	public boolean active;
 	private int spawnTicks;
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 		findEnemyToAttack();
 		spawnTicks--;
 		if (active) {
 			if (animationTicks == 0)
-				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+				getWorld().playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
 			if (animationTicks <= 24)
 				animationTicks++;
 		}
 		if (!active) {
 			if (animationTicks == 25)
-				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+				getWorld().playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
 			if (animationTicks >= 1)
 				animationTicks--;
 			if (animationTicks == 1)
-				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.altarBase);
+				getWorld().setBlockState(getPos(), ModBlocks.ALTAR_BASE.getDefaultState());
 		}
 		if (animationTicks == 6)
-			bigLove(worldObj, xCoord, yCoord, zCoord);
+			bigLove(getWorld(), getPos());
 		if (spawnTicks == 0)
 			setActive(false);
 	}
 
-	public void bigLove(World world, int x, int y, int z) {
+	public void bigLove(World world, BlockPos pos) {
 		if (world.isRemote) {
-			double d0 = x + 0.53125F;
-			double d1 = y + 1.25F;
-			double d2 = z + 0.53125F;
-			Erebus.proxy.spawnCustomParticle("heart", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("heart", world, d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("heart", world, d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("heart", world, d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("heart", world, d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("heart", world, d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("heart", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+			double d0 = pos.getX() + 0.53125F;
+			double d1 = pos.getY() + 1.25F;
+			double d2 = pos.getZ() + 0.53125F;
+			Erebus.PROXY.spawnCustomParticle("heart", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("heart", world, d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("heart", world, d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("heart", world, d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("heart", world, d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("heart", world, d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("heart", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -68,13 +72,13 @@ public class TileEntityErebusAltarHealing extends TileEntityErebusAltar {
 
 	@SuppressWarnings("unchecked")
 	protected Entity findEnemyToAttack() {
-		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D).expand(4D, 2D, 4D));
+		List<EntityLivingBase> list = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos()).grow(4D, 2D, 4D));
 		if (active)
 			for (int i = 0; i < list.size(); i++) {
 				Entity entity = list.get(i);
 				if (entity != null)
 					if (entity instanceof EntityPlayer)
-						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.heal.id, 1 * 20, 0));
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 1 * 20, 0));
 			}
 		return null;
 	}

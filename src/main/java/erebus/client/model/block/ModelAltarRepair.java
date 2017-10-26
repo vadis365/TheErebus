@@ -1,13 +1,12 @@
 package erebus.client.model.block;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityErebusAltarRepair;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelAltarRepair extends ModelBase {
@@ -74,11 +73,9 @@ public class ModelAltarRepair extends ModelBase {
 	}
 
 	public void render(TileEntityErebusAltarRepair tile) {
-
 		float x = tile.animationTicks;
-		GL11.glPushMatrix();
-		GL11.glScalef(0.04F * x, 0.04F * x, 0.04F * x);
-		;
+		GlStateManager.pushMatrix();
+		GlStateManager.scale(0.04F * x, 0.04F * x, 0.04F * x);
 		AnvilFrontFoot.render(0.0625F);
 		AnvilRearFoot.render(0.0625F);
 		AnvilBase.render(0.0625F);
@@ -87,16 +84,16 @@ public class ModelAltarRepair extends ModelBase {
 		AnvilTable.render(0.0625F);
 		AnvilHorn.render(0.0625F);
 		AnvilHeel.render(0.0625F);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glRotatef(-x * 7.2F, 0F, 1F, 0F);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(-x * 7.2F, 0F, 1F, 0F);
 		Mid.render(0.0625F);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glRotatef(x * 7.2F, 0F, 1F, 0F);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(x * 7.2F, 0F, 1F, 0F);
 		Top.render(0.0625F);
 		Bot.render(0.0625F);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

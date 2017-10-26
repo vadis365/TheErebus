@@ -91,7 +91,7 @@ public class EntityBlackWidow extends EntityMob {
 	public void onUpdate() {
 		super.onUpdate();
         if (!this.world.isRemote) {
-            this.setBesideClimbableBlock(this.isCollidedHorizontally);
+            this.setBesideClimbableBlock(this.collidedHorizontally);
         }
 	}
 
@@ -290,7 +290,7 @@ public class EntityBlackWidow extends EntityMob {
 		public void updateTask() {
 			--attackTime;
 			EntityLivingBase entitylivingbase = widow.getAttackTarget();
-			double distance = widow.getDistanceSqToEntity(entitylivingbase);
+			double distance = widow.getDistanceSq(entitylivingbase);
 
 			if (distance < 4.0D) {
 				if (attackTime <= 0) {
@@ -325,13 +325,13 @@ public class EntityBlackWidow extends EntityMob {
 							EntityWebSling webSling = new EntityWebSling(widow.getEntityWorld(), widow);
 							webSling.posY = widow.posY + (double) (widow.height / 2.0F) + 0.5D;
 							webSling.setType((byte) 1);
-							webSling.setThrowableHeading(targetX, targetY, targetZ, 1.0F, 0.0F);
+							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 							widow.getEntityWorld().spawnEntity(webSling);
 						}
 					}
 				}
 				widow.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
-				widow.getNavigator().clearPathEntity();
+				widow.getNavigator().clearPath();
 				widow.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, widow.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 			}
 			super.updateTask();

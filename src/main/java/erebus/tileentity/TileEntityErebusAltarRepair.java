@@ -1,13 +1,17 @@
 package erebus.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModBlocks;
+import erebus.ModSounds;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityErebusAltarRepair extends TileEntityErebusAltar {
+public class TileEntityErebusAltarRepair extends TileEntityErebusAltar implements ITickable {
 
 	public int animationTicks;
 	public boolean active;
@@ -16,23 +20,23 @@ public class TileEntityErebusAltarRepair extends TileEntityErebusAltar {
 	private int collisions;
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 		if (active) {
 			if (animationTicks == 0)
-				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+				getWorld().playSound(null, getPos(), ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
 			if (animationTicks <= 24)
 				animationTicks++;
 		}
 		if (!active) {
 			if (animationTicks == 25)
-				worldObj.playSoundEffect(xCoord, yCoord, zCoord, "erebus:altarchangestate", 1.0F, 1.3F);
+				getWorld().playSound(null, getPos(), ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
 			if (animationTicks >= 1)
 				animationTicks--;
 			if (animationTicks == 1)
-				worldObj.setBlock(xCoord, yCoord, zCoord, ModBlocks.altarBase);
+				getWorld().setBlockState(getPos(), ModBlocks.ALTAR_BASE.getDefaultState());
 		}
 		if (animationTicks == 6)
-			cloudBurst(worldObj, xCoord, yCoord, zCoord);
+			cloudBurst(getWorld(), getPos());
 		if (spawnTicks == 160)
 			setcanBeUsed(false);
 		if (spawnTicks == 0)
@@ -40,18 +44,18 @@ public class TileEntityErebusAltarRepair extends TileEntityErebusAltar {
 		spawnTicks--;
 	}
 
-	private void cloudBurst(World world, int x, int y, int z) {
+	private void cloudBurst(World world, BlockPos pos) {
 		if (world.isRemote) {
-			double d0 = x + 0.53125F;
-			double d1 = y + 1.25F;
-			double d2 = z + 0.53125F;
-			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("cloud", world, d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("cloud", world, d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
-			Erebus.proxy.spawnCustomParticle("cloud", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+			double d0 = pos.getX() + 0.53125F;
+			double d1 = pos.getY() + 1.25F;
+			double d2 = pos.getZ() + 0.53125F;
+			Erebus.PROXY.spawnCustomParticle("cloud", world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("cloud", world, d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("cloud", world, d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("cloud", world, d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("cloud", world, d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("cloud", world, d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+			Erebus.PROXY.spawnCustomParticle("cloud", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -80,15 +84,15 @@ public class TileEntityErebusAltarRepair extends TileEntityErebusAltar {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void sparky(World world, int x, int y, int z) {
-		double d0 = x + 0.53125F;
-		double d1 = y + 1.5F;
-		double d2 = z + 0.53125F;
-		Erebus.proxy.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, 0.5D, 0.0D, -0.5D);
-		Erebus.proxy.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, -0.5D, 0.0D, 0.5D);
-		Erebus.proxy.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, -0.5D, 0.0D, -0.5D);
-		Erebus.proxy.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, 0.5D, 0.0D, 0.5D);
-		Erebus.proxy.spawnCustomParticle("portal", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+	public void sparky(World world, BlockPos pos) {
+		double d0 = pos.getX() + 0.53125F;
+		double d1 = pos.getY() + 1.5F;
+		double d2 = pos.getZ() + 0.53125F;
+		Erebus.PROXY.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, 0.5D, 0.0D, -0.5D);
+		Erebus.PROXY.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, -0.5D, 0.0D, 0.5D);
+		Erebus.PROXY.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, -0.5D, 0.0D, -0.5D);
+		Erebus.PROXY.spawnCustomParticle("enchantmenttable", world, d0, d1, d2, 0.5D, 0.0D, 0.5D);
+		Erebus.PROXY.spawnCustomParticle("portal", world, d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
 	}
 
 	@Override

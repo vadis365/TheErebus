@@ -6,6 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import erebus.block.altars.AltarBase;
+import erebus.block.altars.HealingAltar;
+import erebus.block.altars.LightningAltar;
+import erebus.block.altars.RepairAltar;
+import erebus.block.altars.XPAltar;
 import erebus.block.bamboo.BlockBambooBridge;
 import erebus.block.bamboo.BlockBambooCrate;
 import erebus.block.bamboo.BlockBambooLadder;
@@ -204,7 +209,15 @@ public class ModBlocks {
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
 	public static final Block LIGHTNING_SPEED_BLOCK = new BlockLightningSpeed();
-	
+
+	// ALTARS
+	public static final Block ALTAR_BASE = new AltarBase();
+	public static final Block ALTAR_LIGHTNING = new LightningAltar();
+	public static final Block ALTAR_HEALING = new HealingAltar();
+	public static final Block ALTAR_XP = new XPAltar();
+	public static final Block ALTAR_REPAIR = new RepairAltar();
+	//public static final Block offeringAltar = new OfferingAltar();
+
 	// DUNGEONS
 	public static final Block SPIDER_SPAWNER = new BlockSpiderSpawner("erebus:scytodes");
 	public static final Block JUMPING_SPIDER_SPAWNER  = new BlockSpiderSpawner("erebus:jumping_spider");

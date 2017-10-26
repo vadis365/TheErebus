@@ -114,7 +114,7 @@ public class EntityLavaWebSpider extends EntityMob {
 	public void onUpdate() {
 		super.onUpdate();
         if (!this.world.isRemote)
-            this.setBesideClimbableBlock(this.isCollidedHorizontally);
+            this.setBesideClimbableBlock(this.collidedHorizontally);
 
 		if (getEntityWorld().isRemote && getEntityWorld().getWorldTime() % 5 == 0)
 			lavaParticles(getEntityWorld(), posX, posY + 1.3D, posZ, rand);
@@ -262,7 +262,7 @@ public class EntityLavaWebSpider extends EntityMob {
 		public void updateTask() {
 			--attackTime;
 			EntityLivingBase entitylivingbase = lavaweb_spider.getAttackTarget();
-			double distance = lavaweb_spider.getDistanceSqToEntity(entitylivingbase);
+			double distance = lavaweb_spider.getDistanceSq(entitylivingbase);
 
 			if (distance < 4.0D) {
 				if (attackTime <= 0) {
@@ -295,13 +295,13 @@ public class EntityLavaWebSpider extends EntityMob {
 							EntityWebSling webSling = new EntityWebSling(lavaweb_spider.getEntityWorld(), lavaweb_spider);
 							webSling.posY = lavaweb_spider.posY + (double) (lavaweb_spider.height / 2.0F) + 0.5D;
 							webSling.setType((byte) 2);
-							webSling.setThrowableHeading(targetX, targetY, targetZ, 1.0F, 0.0F);
+							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 							lavaweb_spider.getEntityWorld().spawnEntity(webSling);
 						}
 					}
 				}
 				lavaweb_spider.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
-				lavaweb_spider.getNavigator().clearPathEntity();
+				lavaweb_spider.getNavigator().clearPath();
 				lavaweb_spider.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, lavaweb_spider.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 			}
 			super.updateTask();

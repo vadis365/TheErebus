@@ -6,19 +6,24 @@ import java.util.Random;
 
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.item.ItemMaterials;
+import erebus.ModSounds;
+import erebus.items.ItemMaterials;
 import erebus.tileentity.TileEntityErebusAltarEmpty;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class AltarBase extends AltarAbstract {
 
-	private final Map<ItemMaterials.DATA, Block> ALTAR_TYPES = new HashMap<ItemMaterials.DATA, Block>();
+	private final Map<ItemMaterials.EnumErebusMaterialsType, Block> ALTAR_TYPES = new HashMap<ItemMaterials.EnumErebusMaterialsType, Block>();
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
@@ -26,23 +31,25 @@ public class AltarBase extends AltarAbstract {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		initMap();
+		if (world.isRemote)
+			return true;
 
-		ItemStack stack = player.getCurrentEquippedItem();
-		if (stack != null && stack.getItem() == ModItems.materials) {
-			Block altar = ALTAR_TYPES.get(ItemMaterials.DATA.values()[stack.getItemDamage()]);
+		ItemStack stack = player.getHeldItem(hand);
+		if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS) {
+			Block altar = ALTAR_TYPES.get(ItemMaterials.EnumErebusMaterialsType.values()[stack.getItemDamage()]);
 			if (altar != null) {
 				if (!world.isRemote) {
-					world.setBlock(x, y, z, altar, world.getBlockMetadata(x, y, z), 3);
-					world.playSoundEffect(x + 0.5, y, z + 0.5, "erebus:altaroffering", 0.2F, 1.0F);
-					if (!player.capabilities.isCreativeMode && --stack.stackSize <= 0)
-						player.setCurrentItemOrArmor(0, null);
+					world.setBlockState(pos, altar.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+					world.playSound((EntityPlayer)null, pos, ModSounds.ALTAR_OFFERING, SoundCategory.BLOCKS, 0.2F, 1.0F);
+					if (!player.capabilities.isCreativeMode && stack.getCount() <= 0)
+						player.setHeldItem(hand, ItemStack.EMPTY);
 				} else
 					for (int i = 0; i < 10; i++) {
 						Random rand = world.rand;
-						world.spawnParticle("flame", x + rand.nextDouble(), y + 1.1, z + rand.nextDouble(), 0, 0, 0);
-						world.spawnParticle("cloud", x + rand.nextDouble(), y + 1.1, z + rand.nextDouble(), 0, 0, 0);
+						world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + rand.nextDouble(), pos.getY() + 1.1, pos.getZ() + rand.nextDouble(), 0D, 0D, 0D);
+						world.spawnParticle(EnumParticleTypes.CLOUD, pos.getX() + rand.nextDouble(), pos.getY() + 1.1, pos.getZ() + rand.nextDouble(), 0D, 0D, 0D);
 					}
 				return true;
 			}
@@ -51,18 +58,12 @@ public class AltarBase extends AltarAbstract {
 		return false;
 	}
 
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack is) {
-		int meta = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-		world.setBlockMetadataWithNotify(x, y, z, meta == 0 ? 2 : meta == 1 ? 5 : meta == 2 ? 3 : 4, 2);
-	}
-
 	private void initMap() {
 		if (ALTAR_TYPES.isEmpty()) {
-			ALTAR_TYPES.put(ItemMaterials.DATA.BIO_VELOCITY, ModBlocks.altarXP);
-			ALTAR_TYPES.put(ItemMaterials.DATA.ELASTIC_FIBRE, ModBlocks.altarRepair);
-			ALTAR_TYPES.put(ItemMaterials.DATA.RED_GEM, ModBlocks.altarLightning);
-			ALTAR_TYPES.put(ItemMaterials.DATA.BIO_LUMINESCENCE, ModBlocks.altarHealing);
+			ALTAR_TYPES.put(ItemMaterials.EnumErebusMaterialsType.BIO_VELOCITY, ModBlocks.ALTAR_XP);
+			ALTAR_TYPES.put(ItemMaterials.EnumErebusMaterialsType.ELASTIC_FIBRE, ModBlocks.ALTAR_REPAIR);
+			ALTAR_TYPES.put(ItemMaterials.EnumErebusMaterialsType.RED_GEM, ModBlocks.ALTAR_LIGHTNING);
+			ALTAR_TYPES.put(ItemMaterials.EnumErebusMaterialsType.BIO_LUMINESCENCE, ModBlocks.ALTAR_HEALING);
 		}
 	}
 }

@@ -97,7 +97,7 @@ public class EntitySolifugeSmall extends EntityMob implements IEntityAdditionalS
 		if(!hasCustomName())
 			setCustomNameTag(POTION_NAME[getPotionEffect()] + " Solifuge");
         if (!world.isRemote) {
-            setBesideClimbableBlock(isCollidedHorizontally);
+            setBesideClimbableBlock(collidedHorizontally);
         }
 	}
 

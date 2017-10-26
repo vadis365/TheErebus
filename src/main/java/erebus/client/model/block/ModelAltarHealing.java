@@ -1,13 +1,12 @@
 package erebus.client.model.block;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.tileentity.TileEntityErebusAltarHealing;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelAltarHealing extends ModelBase {
@@ -212,8 +211,8 @@ public class ModelAltarHealing extends ModelBase {
 	public void render(TileEntityErebusAltarHealing tile) {
 
 		float x = tile.animationTicks;
-		GL11.glPushMatrix();
-		GL11.glScalef(0.04F * x, 0.04F * x, 0.04F * x);
+		GlStateManager.pushMatrix();
+		GlStateManager.scale(0.04F * x, 0.04F * x, 0.04F * x);
 		ROutPetal1.render(0.0625F);
 		ROutPetal2.render(0.0625F);
 		ROutPetal3.render(0.0625F);
@@ -249,18 +248,18 @@ public class ModelAltarHealing extends ModelBase {
 		LLeafTop.render(0.0625F);
 		LLeafEnd.render(0.0625F);
 		Stem.render(0.0625F);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glRotatef(-x * 7.2F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(-x * 7.2F, 0F, 1F, 0F);
 		Mid.render(0.0625F);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
-		GL11.glPushMatrix();
-		GL11.glRotatef(x * 7.2F, 0F, 1F, 0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(x * 7.2F, 0F, 1F, 0F);
 		Top.render(0.0625F);
 		Bot.render(0.0625F);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

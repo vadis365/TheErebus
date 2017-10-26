@@ -86,7 +86,7 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 	protected void eatingInterupted() {
 		EntityBeetleLarva beetleLarva = (EntityBeetleLarva) entity;
 		beetleLarva.setIsEating(false);
-		entity.getNavigator().clearPathEntity();
+		entity.getNavigator().clearPath();
 	}
 
 	@Override
@@ -95,6 +95,6 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 		beetleLarva.getEntityWorld().setBlockToAir(new BlockPos(cropX, cropY, cropZ));
 		beetleLarva.setIsEating(false);
 		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);
-		entity.getNavigator().clearPathEntity();
+		entity.getNavigator().clearPath();
 	}
 }

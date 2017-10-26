@@ -23,9 +23,9 @@ public abstract class ItemPaxel extends ItemTool {
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state) {
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
 		if (isToolEffective(state))
-			return efficiencyOnProperMaterial;
+			return efficiency;
 		return 1.0F;
 	}
 

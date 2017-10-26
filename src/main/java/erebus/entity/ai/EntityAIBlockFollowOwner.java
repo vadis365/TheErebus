@@ -44,7 +44,7 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 		EntityLivingBase entitylivingbase = animatedBlock.getOwner();
 		if (entitylivingbase == null)
 			return false;
-		else if (animatedBlock.getDistanceSqToEntity(entitylivingbase) < (double) (minDist * minDist))
+		else if (animatedBlock.getDistanceSq(entitylivingbase) < (double) (minDist * minDist))
 			return false;
 		else {
 			theOwner = entitylivingbase;
@@ -54,7 +54,7 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 
 	@Override
     public boolean shouldContinueExecuting() {
-		return !petPathfinder.noPath() && animatedBlock.getDistanceSqToEntity(theOwner) > (double) (maxDist * maxDist);
+		return !petPathfinder.noPath() && animatedBlock.getDistanceSq(theOwner) > (double) (maxDist * maxDist);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 	@Override
 	public void resetTask() {
 		theOwner = null;
-		petPathfinder.clearPathEntity();
+		petPathfinder.clearPath();
 		animatedBlock.setPathPriority(PathNodeType.WATER, avoidWater);
 	}
 
@@ -78,7 +78,7 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 			distanceCounter = 10;
 			if (!petPathfinder.tryMoveToEntityLiving(theOwner, moveSpeed)) {
 				if (!animatedBlock.getLeashed()) {
-					if (animatedBlock.getDistanceSqToEntity(theOwner) >= 144.0D) {
+					if (animatedBlock.getDistanceSq(theOwner) >= 144.0D) {
 						int i = MathHelper.floor(theOwner.posX) - 2;
 						int j = MathHelper.floor(theOwner.posZ) - 2;
 						int k = MathHelper.floor(theOwner.getEntityBoundingBox().minY);
@@ -86,7 +86,7 @@ public class EntityAIBlockFollowOwner extends EntityAIBase {
 							for (int i1 = 0; i1 <= 4; ++i1) {
 								if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && isTeleportFriendlyBlock(i, k, j, l, i1)) {
 									animatedBlock.setLocationAndAngles((double) ((float) (i + l) + 0.5F), (double) k, (double) ((float) (j + i1) + 0.5F), animatedBlock.rotationYaw, animatedBlock.rotationPitch);
-									petPathfinder.clearPathEntity();
+									petPathfinder.clearPath();
 									return;
 								}
 							}

@@ -259,7 +259,7 @@ public class EntityBlackAnt extends EntityTameable implements IInventory {
 			if (canPickupItems && !isFilterSlotEmpty() && (getAntInvSlotStack().isEmpty() || getAntInvSlotStack().getCount() < getAntInvSlotStack().getMaxStackSize())) {
 				EntityItem entityitem = getClosestEntityItem(this, 16.0D, getFilterSlotStack());
 				if (entityitem != null) {
-					float distance = entityitem.getDistanceToEntity(this);
+					float distance = entityitem.getDistance(this);
 					if (distance >= 2F && !entityitem.isDead) {
 						double x = entityitem.posX;
 						double y = entityitem.posY;

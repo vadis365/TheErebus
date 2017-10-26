@@ -103,7 +103,7 @@ public class EntityScytodes extends EntityMob {
 	public void onUpdate() {
 		super.onUpdate();
         if (!this.world.isRemote) {
-            this.setBesideClimbableBlock(this.isCollidedHorizontally);
+            this.setBesideClimbableBlock(this.collidedHorizontally);
         }
 	}
 	
@@ -254,7 +254,7 @@ public class EntityScytodes extends EntityMob {
 		public void updateTask() {
 			--attackTime;
 			EntityLivingBase entitylivingbase = scytodes.getAttackTarget();
-			double distance = scytodes.getDistanceSqToEntity(entitylivingbase);
+			double distance = scytodes.getDistanceSq(entitylivingbase);
 
 			if (distance < 4.0D) {
 				if (attackTime <= 0) {
@@ -286,13 +286,13 @@ public class EntityScytodes extends EntityMob {
 							EntityWebSling webSling = new EntityWebSling(scytodes.getEntityWorld(), scytodes);
 							webSling.posY = scytodes.posY + (double) (scytodes.height / 2.0F) + 0.5D;
 							webSling.setType((byte) 0);
-							webSling.setThrowableHeading(targetX, targetY, targetZ, 1.0F, 0.0F);
+							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 							scytodes.getEntityWorld().spawnEntity(webSling);
 						}
 					}
 				}
 				scytodes.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
-				scytodes.getNavigator().clearPathEntity();
+				scytodes.getNavigator().clearPath();
 				scytodes.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, scytodes.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 			}
 			super.updateTask();

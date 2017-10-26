@@ -183,7 +183,7 @@ public class EntityAnimatedBlock extends EntityCreature implements IEntityAdditi
 
 	@Override
 	public boolean isOnLadder() {
-		return isCollidedHorizontally;
+		return collidedHorizontally;
 	}
 
 	@Override

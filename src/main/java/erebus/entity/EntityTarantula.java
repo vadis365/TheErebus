@@ -144,7 +144,7 @@ public class EntityTarantula extends EntityMob {
 	public void onUpdate() {
 		super.onUpdate();
 		if (!this.world.isRemote)
-			setBesideClimbableBlock(this.isCollidedHorizontally);
+			setBesideClimbableBlock(this.collidedHorizontally);
 	}
 
     public boolean isBesideClimbableBlock() {

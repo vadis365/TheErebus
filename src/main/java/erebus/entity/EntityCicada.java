@@ -51,7 +51,7 @@ public class EntityCicada extends EntityCreature {
 
 	@Override
 	public boolean isOnLadder() {
-		return isCollidedHorizontally;
+		return collidedHorizontally;
 	}
 
 	@Override

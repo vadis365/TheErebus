@@ -74,7 +74,7 @@ public class EntityBombardierBeetleLarva extends EntityBeetleLarva implements IM
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		if (entity != null && getDistanceToEntity(entity) <= 1.5F && entity.getEntityBoundingBox().maxY > getEntityBoundingBox().minY && entity.getEntityBoundingBox().minY < getEntityBoundingBox().maxY)
+		if (entity != null && getDistance(entity) <= 1.5F && entity.getEntityBoundingBox().maxY > getEntityBoundingBox().minY && entity.getEntityBoundingBox().minY < getEntityBoundingBox().maxY)
 			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 		return super.attackEntityAsMob(entity);
 	}
