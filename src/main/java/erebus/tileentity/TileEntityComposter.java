@@ -1,7 +1,5 @@
 package erebus.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.recipes.ComposterRegistry;
 import net.minecraft.block.Block;
@@ -10,8 +8,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityComposter extends TileEntityBasicInventory {
+public class TileEntityComposter extends TileEntityBasicInventory implements ITickable {
 
 	public int composterBurnTime;
 	public int currentItemBurnTime;
@@ -27,14 +28,15 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 
 		composterBurnTime = nbt.getShort("BurnTime");
 		composterCookTime = nbt.getShort("CookTime");
-		currentItemBurnTime = getItemBurnTime(getInventory()[1]);
+		currentItemBurnTime = getItemBurnTime(getInventory().get(1));
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public NBTTagCompound  writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setShort("BurnTime", (short) composterBurnTime);
 		nbt.setShort("CookTime", (short) composterCookTime);
+		return nbt;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -55,26 +57,26 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 	}
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 		boolean flag = composterBurnTime > 0;
 		boolean flag1 = false;
 
 		if (composterBurnTime > 0)
 			composterBurnTime--;
 
-		if (!worldObj.isRemote) {
-			if (composterBurnTime != 0 || getInventory()[1] != null && getInventory()[0] != null) {
+		if (!getWorld().isRemote) {
+			if (composterBurnTime != 0 || !getInventory().get(1).isEmpty() && !getInventory().get(0).isEmpty()) {
 				if (composterBurnTime == 0 && canSmelt()) {
-					currentItemBurnTime = composterBurnTime = getItemBurnTime(getInventory()[1]);
+					currentItemBurnTime = composterBurnTime = getItemBurnTime(getInventory().get(1));
 
 					if (composterBurnTime > 0) {
 						flag1 = true;
 
-						if (getInventory()[1] != null) {
-							--getInventory()[1].stackSize;
+						if (getInventory().get(1).isEmpty()) {
+							getInventory().get(1).shrink(1);
 
-							if (getInventory()[1].stackSize == 0)
-								getInventory()[1] = getInventory()[1].getItem().getContainerItem(getInventory()[1]);
+							if (getInventory().get(1).getCount() == 0)
+								getInventory().set(1, getInventory().get(1).getItem().getContainerItem(getInventory().get(1)));
 						}
 					}
 				}
@@ -97,9 +99,9 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 				int meta = getBlockMetadata();
 				boolean blockActive = meta == 1;
 				if (blockActive && !tileActive)
-					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
+					getWorld().setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
 				if (!blockActive && tileActive)
-					worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
+					getWorld().setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
 			}
 		}
 
@@ -108,18 +110,18 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 	}
 
 	private boolean canSmelt() {
-		if (getInventory()[0] == null)
+		if (getInventory().get(0).isEmpty())
 			return false;
 		else {
-			ItemStack itemstack = ComposterRegistry.isCompostable(getInventory()[0]);
-			if (itemstack == null)
+			ItemStack itemstack = ComposterRegistry.isCompostable(getInventory().get(0));
+			if (itemstack.isEmpty())
 				return false;
-			if (getInventory()[2] == null)
+			if (getInventory().get(2).isEmpty())
 				return true;
-			if (!getInventory()[2].isItemEqual(itemstack))
+			if (!getInventory().get(2).isItemEqual(itemstack))
 				return false;
-			int result = getInventory()[2].stackSize + itemstack.stackSize;
-			return result <= getInventoryStackLimit() && result <= getInventory()[2].getMaxStackSize(); // Forge
+			int result = getInventory().get(2).getCount() + itemstack.getCount();
+			return result <= getInventoryStackLimit() && result <= getInventory().get(2).getMaxStackSize(); // Forge
 			// BugFix:
 			// Make
 			// it
@@ -132,36 +134,36 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 
 	public void smeltItem() {
 		if (canSmelt()) {
-			ItemStack itemstack = ComposterRegistry.isCompostable(getInventory()[0]);
+			ItemStack itemstack = ComposterRegistry.isCompostable(getInventory().get(0));
 
-			if (getInventory()[2] == null)
-				getInventory()[2] = itemstack.copy();
-			else if (getInventory()[2].getItem() == itemstack.getItem())
-				getInventory()[2].stackSize += itemstack.stackSize; // Forge BugFix:
+			if (getInventory().get(2).isEmpty())
+				getInventory().set(2, itemstack.copy());
+			else if (getInventory().get(2).getItem() == itemstack.getItem())
+				getInventory().get(2).grow(itemstack.getCount());// Forge BugFix:
 			// Results may
 			// have multiple
 			// items
 
-			--getInventory()[0].stackSize;
+			getInventory().get(0).shrink(1);
 
-			if (getInventory()[0].stackSize <= 0)
-				getInventory()[0] = null;
+			if (getInventory().get(0).getCount() <= 0)
+				getInventory().set(0, ItemStack.EMPTY);
 		}
 	}
 
 	public static int getItemBurnTime(ItemStack is) {
-		if (is == null)
+		if (is.isEmpty())
 			return 0;
 		else {
 			Item item = is.getItem();
 
-			if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air) {
+			if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR) {
 				Block block = Block.getBlockFromItem(item);
 
-				if (block == ModBlocks.wallPlants && is.getItemDamage() == 1)
+				if (block == ModBlocks.WALL_PLANTS && is.getItemDamage() == 1)
 					return 800;
 
-				if (block == ModBlocks.wallPlantsCultivated && is.getItemDamage() == 1)
+				if (block == ModBlocks.WALL_PLANTS_CULTIVATED && is.getItemDamage() == 1)
 					return 400;
 			}
 		}
@@ -178,13 +180,4 @@ public class TileEntityComposter extends TileEntityBasicInventory {
 		return slot == 2 ? false : slot == 1 ? isItemFuel(is) : true;
 	}
 
-	@Override
-	public boolean canInsertItem(int slot, ItemStack is, int side) {
-		return isItemValidForSlot(slot, is);
-	}
-
-	@Override
-	public boolean canExtractItem(int slot, ItemStack is, int side) {
-		return slot == 2;
-	}
 }

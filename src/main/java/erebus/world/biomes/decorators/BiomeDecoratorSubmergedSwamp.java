@@ -12,6 +12,7 @@ import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenGasVents;
 import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
+import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.plant.WorldGenAlgae;
 import erebus.world.feature.plant.WorldGenMossPatch;
 import erebus.world.feature.plant.WorldGenRottenLogs;
@@ -35,7 +36,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenQuickSand genQuickSand = new WorldGenQuickSand();
 	protected final WorldGenerator genMossPatch = new WorldGenMossPatch(0);
-/*	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();*/
+	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	protected final WorldGenGasVents genGasVent = new WorldGenGasVents();
 	private final WorldGenAlgae genAlgae = new WorldGenAlgae();
 
@@ -160,16 +161,17 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.SUNDEW, 2);
 			}
 		}
-/*
+
 		for (attempt = 0; attempt < rand.nextInt(3); attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(25) * (1 + rand.nextInt(3)); // more likely in lower levels
 			zz = z + offsetXZ();
 
-			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
-				genRottenAcacia.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.MIXED, pos))
+				genRottenAcacia.generate(world, rand, pos.up());
 		}
-*/
+
 		int offset;
 		for (attempt = 0; attempt < 800; attempt++) {
 			xx = x + offsetXZ();

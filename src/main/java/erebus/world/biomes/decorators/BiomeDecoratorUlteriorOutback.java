@@ -7,6 +7,7 @@ import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.tree.WorldGenBalsamTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import net.minecraft.block.BlockDoublePlant;
@@ -20,8 +21,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 
-//	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
-
+	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 	private final WorldGenerator genTreeBalsam = new WorldGenBalsamTree();
@@ -43,16 +43,17 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 				}
 			}
 		}
-/*
+		
 		for (attempt = 0; attempt < rand.nextInt(3); attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(25) * (1 + rand.nextInt(3)); // more likely in lower levels
 			zz = z + offsetXZ();
 
-			if (checkSurface(SurfaceType.MIXED, xx, yy, zz))
-				genRottenAcacia.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.MIXED, pos))
+				genRottenAcacia.generate(world, rand, pos.up());
 		}
-*/
+
 		if (rand.nextBoolean())
 			for (attempt = 0; attempt < 30; attempt++) {
 				xx = x + offsetXZ();

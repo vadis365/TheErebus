@@ -1,5 +1,17 @@
 package erebus.world.biomes.decorators;
 
+import erebus.world.biomes.decorators.data.OreSettings;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenAmberGround;
+import erebus.world.feature.decoration.WorldGenAmberUmberstone;
+import erebus.world.feature.decoration.WorldGenPonds;
+import erebus.world.feature.decoration.WorldGenRottenAcacia;
+import erebus.world.feature.decoration.WorldGenSavannahRock;
+import erebus.world.feature.plant.WorldGenBamboo;
+import erebus.world.feature.tree.WorldGenAsperTree;
+import erebus.world.feature.tree.WorldGenBaobabTree;
+import erebus.world.feature.tree.WorldGenGiantBaobab;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
@@ -7,17 +19,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenSavannaTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.world.biomes.decorators.data.OreSettings;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
-import erebus.world.biomes.decorators.data.SurfaceType;
-import erebus.world.feature.decoration.WorldGenAmberGround;
-import erebus.world.feature.decoration.WorldGenAmberUmberstone;
-import erebus.world.feature.decoration.WorldGenPonds;
-import erebus.world.feature.decoration.WorldGenSavannahRock;
-import erebus.world.feature.plant.WorldGenBamboo;
-import erebus.world.feature.tree.WorldGenAsperTree;
-import erebus.world.feature.tree.WorldGenBaobabTree;
-import erebus.world.feature.tree.WorldGenGiantBaobab;
 
 
 public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus {
@@ -25,7 +26,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	private final WorldGenPonds genPonds = new WorldGenPonds();
 	private final WorldGenBamboo genBamboo = new WorldGenBamboo(7, true);
 	private final WorldGenSavannahRock genRocks = new WorldGenSavannahRock();
-	//private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
+	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
 	private final WorldGenGiantBaobab genGiantBaobab = new WorldGenGiantBaobab();
@@ -70,7 +71,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 		for (int yUp = yy; 64 + yy >= yUp; yUp++) {
 			BlockPos pos = new BlockPos(xx, yUp, zz);
 			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() - 6, pos.getY(), pos.getZ() - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() + 6, pos.getY(), pos.getZ() + 6)) || checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() + 6, pos.getY(), pos.getZ() - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() - 6, pos.getY(), pos.getZ() + 6))) {
-				genGiantBaobab.generate(world, rand, pos);
+				genGiantBaobab.generate(world, rand, pos.up());
 				break;
 			}
 		}
@@ -118,23 +119,23 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 		}
 
 		for (attempt = 0; attempt < 20; attempt++) {
-			xx = x + rand.nextInt(13) + 9;
+			xx = x + rand.nextInt(5) + 12;
 			yy = rand.nextInt(120);
-			zz = z + rand.nextInt(13) + 9;
+			zz = z + rand.nextInt(5) + 12;
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, pos.east(2)) && checkSurface(SurfaceType.GRASS, pos.west(2)) && checkSurface(SurfaceType.GRASS, pos.north(2)) && checkSurface(SurfaceType.GRASS, pos.south(2)))
 				genTreeBaobab.generate(world, rand, pos.up());
 		}
-/*
+
 		for (attempt = 0; attempt < 28; attempt++) {
 			xx = x + offsetXZ();
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
-
-			if (checkSurface(SurfaceType.GRASS, xx, yy, zz))
-				genRottenAcacia.generate(world, rand, xx, yy, zz);
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.GRASS, pos))
+				genRottenAcacia.generate(world, rand, pos.up());
 		}
-*/
+
 		IBlockState tallGrassState = Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
 		for (attempt = 0; attempt < 35; attempt++) {
 			xx = x + offsetXZ();

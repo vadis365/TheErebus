@@ -7,6 +7,7 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 import erebus.world.feature.plant.WorldGenMossPatch;
@@ -30,6 +31,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 	private final WorldGenBigMushroom genBigMushroomRed = new WorldGenBigMushroom(Blocks.BROWN_MUSHROOM_BLOCK);
 	private final WorldGenBigMushroom genBigMushroomBrown = new WorldGenBigMushroom(Blocks.RED_MUSHROOM_BLOCK);
 	private final WorldGenGiantMushrooms genGiantMushrooms = new WorldGenGiantMushrooms();
+	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 
 	public static final Block[] MUSHROOMS = { ModBlocks.DUTCH_CAP_MUSHROOM, ModBlocks.KAIZERS_FINGERS_MUSHROOM, ModBlocks.SARCASTIC_CZECH_MUSHROOM, ModBlocks.GRANDMAS_SHOES_MUSHROOM, ModBlocks.DARK_CAPPED_MUSHROOM };
 
@@ -168,6 +170,15 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (world.isAirBlock(pos))
 				genLichenPatch.generate(world, rand,pos);
+		}
+
+		for (attempt = 0; attempt < 28; attempt++) {
+			xx = x + offsetXZ();
+			yy = 15 + rand.nextInt(90);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.MIXED, pos))
+				genRottenAcacia.generate(world, rand, pos.up());
 		}
 
 		// TODO OK this may need moving to it's own class to make it generate looking nice
