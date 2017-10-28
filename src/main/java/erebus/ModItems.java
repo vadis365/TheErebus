@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import erebus.items.ItemAmuletAntTaming;
+import erebus.items.ItemAmuletBeeTaming;
 import erebus.items.ItemAntiVenomBottle;
 import erebus.items.ItemArmorBamboo;
 import erebus.items.ItemArmorExoskeleton;
@@ -17,6 +18,7 @@ import erebus.items.ItemArmorWaterStriders;
 import erebus.items.ItemAxeJade;
 import erebus.items.ItemBootsJump;
 import erebus.items.ItemCompoundGoggles;
+import erebus.items.ItemDungeonIdols;
 import erebus.items.ItemErebusFood;
 import erebus.items.ItemErebusShield;
 import erebus.items.ItemFlowerSeeds;
@@ -63,6 +65,7 @@ public class ModItems {
 	public static final Item CABBAGE_SEEDS = new ItemSeedFood(4, 0.1F, ModBlocks.CROP_CABBAGE, Blocks.FARMLAND).setCreativeTab(ModTabs.PLANTS);
 	public static final Item STAG_HEART_RAW = new ItemFoodStagHeart(0, 0F, false, "raw");
 	public static final Item STAG_HEART_COOKED = new ItemFoodStagHeart(20, 0.5F, false, "cooked");
+	public static final Item IDOLS = new ItemDungeonIdols();
 	
 	// JADE STUFF
 	public static final Item JADE_HELMET = new ItemArmorJade(EntityEquipmentSlot.HEAD);
@@ -119,6 +122,7 @@ public class ModItems {
 	// RANDOM STUFF
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();
 	public static final Item ANT_TAMING_AMULET = new ItemAmuletAntTaming();
+	public static final Item BEE_TAMING_AMULET = new ItemAmuletBeeTaming();
 	public static final Item WOODLOUSE_BALL = new ItemWoodlouseBall();
 	public static final Item WAND_OF_ANIMATION = new ItemWandOfAnimation();
 	public static final Item ANTI_VENOM_BOTTLE = new ItemAntiVenomBottle();

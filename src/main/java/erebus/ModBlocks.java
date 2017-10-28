@@ -22,15 +22,19 @@ import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.blocks.BlockAlgae;
 import erebus.blocks.BlockAmber;
+import erebus.blocks.BlockAnthillBlock;
 import erebus.blocks.BlockAntlionSpawner;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockBossEgg;
 import erebus.blocks.BlockCabbage;
+import erebus.blocks.BlockCapstone;
 import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockDragonflySpawner;
 import erebus.blocks.BlockErebusMushroomHuge;
+import erebus.blocks.BlockForceField;
+import erebus.blocks.BlockForceLock;
 import erebus.blocks.BlockGaeanKeystone;
 import erebus.blocks.BlockGhostSand;
 import erebus.blocks.BlockGiantFlower;
@@ -40,6 +44,7 @@ import erebus.blocks.BlockGlowshroomStalkMain;
 import erebus.blocks.BlockGneiss;
 import erebus.blocks.BlockGneissVent;
 import erebus.blocks.BlockHollowLog;
+import erebus.blocks.BlockHoneyComb;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockMud;
@@ -60,6 +65,7 @@ import erebus.blocks.BlockSpiderSpawner;
 import erebus.blocks.BlockStairsErebus;
 import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockSwampVent;
+import erebus.blocks.BlockTempleBrickUnbreaking;
 import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberGravel;
@@ -205,7 +211,8 @@ public class ModBlocks {
 	public static final Block SILO_ROOF = new BlockSiloRoof(Material.WOOD);
 	public static final Block SILO_TANK = new BlockSiloTank(Material.IRON);
 	public static final Block SILO_SUPPORTS = new BlockSiloSupports(Material.WOOD);
-	
+	public static final Block HONEY_COMB = new BlockHoneyComb();
+
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
 	public static final Block LIGHTNING_SPEED_BLOCK = new BlockLightningSpeed();
@@ -233,6 +240,11 @@ public class ModBlocks {
 	//public static final Block magmaCrawler_SPAWNER = new BlockMagmaCrawlerSpawner("erebus:magmaCrawler");
 	public static final Block ANTLION_EGG = new BlockBossEgg();
 	public static final Block TARANTULA_EGG = new BlockBossEgg();
+	public static final Block CAPSTONE = new BlockCapstone();
+	public static final Block ANT_HILL_BLOCK = new BlockAnthillBlock();
+	public static final Block FORCE_FIELD = new BlockForceField();
+	public static final Block FORCE_LOCK = new BlockForceLock();
+	public static final Block TEMPLE_BRICK_UNBREAKING = new BlockTempleBrickUnbreaking();
 
 	// WALLS
 	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));

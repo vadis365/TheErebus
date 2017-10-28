@@ -155,6 +155,7 @@ import net.minecraft.client.particle.ParticleBreaking;
 import net.minecraft.client.particle.ParticleCloud;
 import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.client.particle.ParticleEnchantmentTable;
+import net.minecraft.client.particle.ParticleFirework;
 import net.minecraft.client.particle.ParticleFlame;
 import net.minecraft.client.particle.ParticleHeart;
 import net.minecraft.client.particle.ParticleLava;
@@ -363,6 +364,9 @@ public class ClientProxy extends CommonProxy {
 			fx.setRBGColorF(1F, 0F, 0F);
 		}
 
+		if (particleName.equals("sparks"))
+			fx = new ParticleFirework.Factory().createParticle(EnumParticleTypes.FIREWORKS_SPARK.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
+
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);
 	}
@@ -398,7 +402,7 @@ public class ClientProxy extends CommonProxy {
 			case EXTENDER_THINGY:
 				return new GuiErebusBasic(new ContainerExtenderThingy(player.inventory, (TileEntityExtenderThingy) tile), new ResourceLocation("erebus:textures/gui/container/extender_thingy.png"), (TileEntityExtenderThingy) tile, 176, 136);
 			case HONEY_COMB:
-				return new GuiErebusBasic(new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile), new ResourceLocation("erebus:textures/gui/container/honeyCombGui.png"), (TileEntityHoneyComb) tile, 168);
+				return new GuiErebusBasic(new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile), new ResourceLocation("erebus:textures/gui/container/honey_comb_gui.png"), (TileEntityHoneyComb) tile, 168);
 			case PETRIFIED_CHEST:
 				IInventory inventory = BlockPetrifiedChest.getInventory(world, pos);
 				return new GuiPetrifiedChest(player.inventory, inventory);

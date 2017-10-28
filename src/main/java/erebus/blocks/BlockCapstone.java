@@ -1,118 +1,129 @@
 package erebus.blocks;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import erebus.ModBlocks;
+import erebus.ModBlocks.IHasCustomItem;
+import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModItems;
 import erebus.ModTabs;
-import erebus.entity.effect.EntityErebusLightningBolt;
-import erebus.item.ItemDungeonIdols.IDOL;
+import erebus.api.IErebusEnum;
+import erebus.items.ItemDungeonIdols.EnumIdolType;
+import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCapstone extends Block {
-	private IIcon capstoneMud, capstoneMud1, capstoneIron, capstoneIron1, capstoneGold, capstoneGold1, capstoneJade, capstoneJade1;
+public class BlockCapstone extends Block implements IHasCustomItem, ISubBlocksBlock {
+	
+	public static final PropertyEnum<EnumCapstoneType> TYPE = PropertyEnum.create("type", EnumCapstoneType.class);
 
 	public BlockCapstone() {
-		super(Material.rock);
-		setStepSound(Block.soundTypeStone);
+		super(Material.ROCK);
+		setSoundType(SoundType.STONE);
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
-		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.capstone");
-		setBlockTextureName("erebus:capstone");
+		setCreativeTab(ModTabs.BLOCKS);
+		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumCapstoneType.CAPSTONE));
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
+	}
+
+	@Override
+	public int quantityDropped(Random rand) {
+		return 0;
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { TYPE });
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:capstone");
-		capstoneMud = reg.registerIcon("erebus:capstoneMud");
-		capstoneIron = reg.registerIcon("erebus:capstoneIron");
-		capstoneGold = reg.registerIcon("erebus:capstoneGold");
-		capstoneJade = reg.registerIcon("erebus:capstoneJade");
-		capstoneMud1 = reg.registerIcon("erebus:capstoneMud1");
-		capstoneIron1 = reg.registerIcon("erebus:capstoneIron1");
-		capstoneGold1 = reg.registerIcon("erebus:capstoneGold1");
-		capstoneJade1 = reg.registerIcon("erebus:capstoneJade1");
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (tab == ModTabs.BLOCKS)
+			for (EnumCapstoneType type : EnumCapstoneType.values())
+				list.add(new ItemStack(this, 1, type.ordinal()));
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (side == 1)
-			switch (meta) {
-				case 0:
-					return blockIcon;
-				case 1:
-					return capstoneMud;
-				case 2:
-					return capstoneIron;
-				case 3:
-					return capstoneGold;
-				case 4:
-					return capstoneJade;
-				case 5:
-					return capstoneMud1;
-				case 6:
-					return capstoneIron1;
-				case 7:
-					return capstoneGold1;
-				case 8:
-					return capstoneJade1;
-				default:
-					return blockIcon;
-			}
-		return blockIcon;
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(TYPE, EnumCapstoneType.values()[meta]);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public int getMetaFromState(IBlockState state) {
+		EnumCapstoneType type = state.getValue(TYPE);
+		return type.ordinal();
+	}
+
+	@Override
+	 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
 			return true;
 
 		if (player.isSneaking())
 			return false;
 
-		ItemStack stack = player.getCurrentEquippedItem();
-		int meta = world.getBlockMetadata(x, y, z);
-		if (stack != null) {
-			switch (meta) {
-				case 0:
+		ItemStack stack = player.getHeldItem(hand);
+		EnumCapstoneType type = state.getValue(TYPE);
+		if (!stack.isEmpty()) {
+			switch (type) {
+				case CAPSTONE:
+				case CAPSTONE_MUD_ACTIVE:
+				case CAPSTONE_IRON_ACTIVE:
+				case CAPSTONE_GOLD_ACTIVE:
+				case CAPSTONE_JADE_ACTIVE:
 					return true;
-				case 1:
-					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.MUD.ordinal()) {
-						world.setBlockMetadataWithNotify(x, y, z, 5, 3);
+				case CAPSTONE_MUD:
+					if (stack.getItem() == ModItems.IDOLS && stack.getItemDamage() == EnumIdolType.IDOL_MUD.ordinal()) {
+						world.setBlockState(pos, this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_MUD_ACTIVE), 3);
 						if (!player.capabilities.isCreativeMode)
-							stack.stackSize--;
+							stack.shrink(1);
 					}
 					return true;
-				case 2:
-					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.IRON.ordinal()) {
-						world.setBlockMetadataWithNotify(x, y, z, 6, 3);
+				case CAPSTONE_IRON:
+					if (stack.getItem() == ModItems.IDOLS && stack.getItemDamage() == EnumIdolType.IDOL_IRON.ordinal()) {
+						world.setBlockState(pos, this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_IRON_ACTIVE), 3);
 						if (!player.capabilities.isCreativeMode)
-							stack.stackSize--;
+							stack.shrink(1);
 					}
 					return true;
-				case 3:
-					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.GOLD.ordinal()) {
-						world.setBlockMetadataWithNotify(x, y, z, 7, 3);
+				case CAPSTONE_GOLD:
+					if (stack.getItem() == ModItems.IDOLS && stack.getItemDamage() == EnumIdolType.IDOL_GOLD.ordinal()) {
+						world.setBlockState(pos, this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_GOLD_ACTIVE), 3);
 						if (!player.capabilities.isCreativeMode)
-							stack.stackSize--;
+							stack.shrink(1);
 					}
 					return true;
-				case 4:
-					if (stack.getItem() == ModItems.idols && stack.getItemDamage() == IDOL.JADE.ordinal()) {
-						world.setBlockMetadataWithNotify(x, y, z, 8, 3);
+				case CAPSTONE_JADE:
+					if (stack.getItem() == ModItems.IDOLS && stack.getItemDamage() == EnumIdolType.IDOL_JADE.ordinal()) {
+						world.setBlockState(pos, this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_JADE_ACTIVE), 3);
 						if (!player.capabilities.isCreativeMode)
-							stack.stackSize--;
+							stack.shrink(1);
 					}
 					return true;
 			}
@@ -121,48 +132,90 @@ public class BlockCapstone extends Block {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 5)
-			if (world.getBlockMetadata(x + 1, y, z) == 6)
-				if (world.getBlockMetadata(x, y, z + 1) == 7)
-					if (world.getBlockMetadata(x + 1, y, z + 1) == 8)
-						openPyramid(world, x, y, z, 1, 1);
-		if (meta == 6)
-			if (world.getBlockMetadata(x - 1, y, z) == 5)
-				if (world.getBlockMetadata(x, y, z + 1) == 8)
-					if (world.getBlockMetadata(x - 1, y, z + 1) == 7)
-						openPyramid(world, x, y, z, -1, 1);
-
-		if (meta == 7)
-			if (world.getBlockMetadata(x + 1, y, z) == 8)
-				if (world.getBlockMetadata(x, y, z - 1) == 5)
-					if (world.getBlockMetadata(x + 1, y, z - 1) == 6)
-						openPyramid(world, x, y, z, 1, -1);
-
-		if (meta == 8)
-			if (world.getBlockMetadata(x - 1, y, z) == 7)
-				if (world.getBlockMetadata(x, y, z - 1) == 6)
-					if (world.getBlockMetadata(x - 1, y, z - 1) == 5)
-						openPyramid(world, x, y, z, -1, -1);
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
+		EnumCapstoneType type = state.getValue(TYPE);
+			switch (type) {
+				case CAPSTONE:
+				case CAPSTONE_MUD:
+				case CAPSTONE_IRON:
+				case CAPSTONE_GOLD:
+				case CAPSTONE_JADE:
+					break;
+				case CAPSTONE_MUD_ACTIVE:
+					if (world.getBlockState(pos.add(1, 0, 0)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_IRON_ACTIVE))
+						if (world.getBlockState(pos.add(0, 0, 1)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_GOLD_ACTIVE))
+							if (world.getBlockState(pos.add(1, 0, 1)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_JADE_ACTIVE))
+								openPyramid(world, pos, 1, 1);
+					break;
+				case CAPSTONE_IRON_ACTIVE:
+					if (world.getBlockState(pos.add(- 1, 0, 0)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_MUD_ACTIVE))
+						if (world.getBlockState(pos.add(0, 0, 1)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_JADE_ACTIVE))
+							if (world.getBlockState(pos.add(- 1, 0, 1)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_GOLD_ACTIVE))
+								openPyramid(world, pos, - 1, 1);
+					break;
+				case CAPSTONE_GOLD_ACTIVE:
+					if (world.getBlockState(pos.add(1, 0, 0)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_JADE_ACTIVE))
+						if (world.getBlockState(pos.add(0, 0, - 1)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_MUD_ACTIVE))
+							if (world.getBlockState(pos.add(1, 0, - 1)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_IRON_ACTIVE))
+								openPyramid(world, pos, 1, - 1);
+					break;
+				case CAPSTONE_JADE_ACTIVE:
+					if (world.getBlockState(pos.add(- 1, 0, 0)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_GOLD_ACTIVE))
+						if (world.getBlockState(pos.add(0, 0, - 1)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_IRON_ACTIVE))
+							if (world.getBlockState(pos.add(- 1, 0, - 1)) == this.getDefaultState().withProperty(TYPE, EnumCapstoneType.CAPSTONE_MUD_ACTIVE))
+								openPyramid(world, pos, - 1, - 1);
+					break;
+			}
 	}
 
-	private void openPyramid(World world, int x, int y, int z, int offsetX, int offsetZ) {
-		EntityErebusLightningBolt entitybolt = new EntityErebusLightningBolt(world, 0D, 0D, 0D);
-		entitybolt.setLocationAndAngles(x + offsetX, y, z + offsetZ, 0F, 0F);
+	private void openPyramid(World world, BlockPos pos, int offsetX, int offsetZ) {
+		EntityLightningBolt entitybolt = new EntityLightningBolt(world, 0D, 0D, 0D, false);
+		entitybolt.setLocationAndAngles(pos.getX() + offsetX, pos.getY(), pos.getZ() + offsetZ, 0F, 0F);
 		world.addWeatherEffect(entitybolt);
-		world.playAuxSFXAtEntity(null, 2001, x, y, z, Block.getIdFromBlock(world.getBlock(x, y, z)));
-		world.setBlockToAir(x, y, z);
-		world.playAuxSFXAtEntity(null, 2001, x + offsetX, y, z, Block.getIdFromBlock(world.getBlock(x + offsetX, y, z)));
-		world.setBlockToAir(x + offsetX, y, z);
-		world.playAuxSFXAtEntity(null, 2001, x, y, z + offsetZ, Block.getIdFromBlock(world.getBlock(x, y, z + offsetZ)));
-		world.setBlockToAir(x, y, z + offsetZ);
-		world.playAuxSFXAtEntity(null, 2001, x + offsetX, y, z + offsetZ, Block.getIdFromBlock(world.getBlock(x + offsetX, y, z + offsetZ)));
-		world.setBlockToAir(x + offsetX, y, z + offsetZ);
+		world.playEvent(null, 2001, pos, Block.getIdFromBlock(world.getBlockState(pos).getBlock()));
+		world.setBlockToAir(pos);
+		world.playEvent(null, 2001, pos.add(offsetX, 0, 0), Block.getIdFromBlock(world.getBlockState(pos.add(offsetX, 0, 0)).getBlock()));
+		world.setBlockToAir(pos.add(offsetX, 0, 0));
+		world.playEvent(null, 2001, pos.add(0, 0, offsetZ), Block.getIdFromBlock(world.getBlockState(pos.add(0, 0, offsetZ)).getBlock()));
+		world.setBlockToAir(pos.add(0, 0, offsetZ));
+		world.playEvent(null, 2001, pos.add(offsetX, 0, offsetZ), Block.getIdFromBlock(world.getBlockState(pos.add(offsetX, 0, offsetZ)).getBlock()));
+		world.setBlockToAir(pos.add(offsetX, 0, offsetZ));
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random rand, int fortune) {
-		return null;
+	public ItemBlock getItemBlock() {
+		return ItemBlockEnum.create(this, EnumCapstoneType.class);
 	}
+
+	@Override
+	public List<String> getModels() {
+		List<String> models = new ArrayList<String>();
+		for (EnumCapstoneType type : EnumCapstoneType.values())
+			models.add(type.getName());
+		return models;
+	}
+
+	public enum EnumCapstoneType implements IErebusEnum {
+		
+		CAPSTONE,
+		CAPSTONE_MUD,
+		CAPSTONE_IRON,
+		CAPSTONE_GOLD,
+		CAPSTONE_JADE,
+		CAPSTONE_MUD_ACTIVE,
+		CAPSTONE_IRON_ACTIVE,
+		CAPSTONE_GOLD_ACTIVE,
+		CAPSTONE_JADE_ACTIVE;
+
+		@Override
+		public ItemStack createStack(int size) {
+			return new ItemStack(ModBlocks.CAPSTONE, size, ordinal());
+		}
+
+		@Override
+		public String getName() {
+			return name().toLowerCase(Locale.ENGLISH);
+		}
+	}
+
 }

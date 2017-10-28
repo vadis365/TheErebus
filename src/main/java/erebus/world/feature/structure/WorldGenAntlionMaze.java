@@ -4,14 +4,15 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import erebus.core.handler.configs.ConfigHandler;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import java.util.Random;
 
 public class WorldGenAntlionMaze implements IWorldGenerator {
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		if (world.provider.dimensionId == ConfigHandler.INSTANCE.erebusDimensionID)
+	 public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+		if (world.provider.getDimension() == ConfigHandler.INSTANCE.erebusDimensionID)
 			generate(world, random, chunkX * 16, chunkZ * 16);
 	}
 

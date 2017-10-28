@@ -1,0 +1,15 @@
+{
+	"variants": {
+		"type=temple_brick": { "model": "erebus:temple_brick" },
+        "type=temple_brick_jade": { "model": "erebus:temple_brick_jade" },
+        "type=temple_brick_exo": { "model": "erebus:temple_brick_exo" },
+        "type=temple_brick_cream": { "model": "erebus:temple_brick_cream" },
+        "type=temple_brick_eye": { "model": "erebus:temple_brick_eye" },
+        "type=temple_brick_string": { "model": "erebus:temple_brick_string" },
+        "type=temple_brick_jade_active": { "model": "erebus:temple_brick_jade_active" },
+        "type=temple_brick_exo_active": { "model": "erebus:temple_brick_exo_active" },
+        "type=temple_brick_cream_active": { "model": "erebus:temple_brick_cream_active" },
+        "type=temple_brick_eye_active": { "model": "erebus:temple_brick_eye_active" },
+        "type=temple_brick_string_active": { "model": "erebus:temple_brick_string_active" }
+	}
+}

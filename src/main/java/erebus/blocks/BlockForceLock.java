@@ -2,98 +2,109 @@ package erebus.blocks;
 
 import java.util.Random;
 
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModSounds;
+import erebus.ModTabs;
+import erebus.core.helper.Utils;
+import erebus.items.ItemMaterials;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.Erebus;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.ModTabs;
-import erebus.core.helper.Utils;
-import erebus.item.ItemMaterials;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockForceLock extends Block {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon front;
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	public static final AxisAlignedBB FORCE_LOCK_AABB = new AxisAlignedBB(0.125D, 0D, 0.125D, 0.875D, 1D, 0.875D);
 
 	public BlockForceLock() {
-		super(Material.rock);
+		super(Material.GLASS);
+		setSoundType(SoundType.GLASS);
+		setCreativeTab(ModTabs.BLOCKS);
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
-		setStepSound(soundTypeStone);
-		//setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.forceLock");
+		setLightLevel(0.8F);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+		return FORCE_LOCK_AABB;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return meta == 0 && side == 4 ? front : meta == 1 && side == 2 ? front : meta == 2 && side == 5 ? front : meta == 3 && side == 3 ? front : blockIcon;
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+		return FULL_BLOCK_AABB;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:forceField");
-		front = reg.registerIcon("erebus:force_lock");
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-		return world.getBlock(x, y, z) == ModBlocks.forceField ? false : super.shouldSideBeRendered(world, x, y, z, side);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public int getRenderBlockPass() {
-		return 1;
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing facing = EnumFacing.getFront(meta);
+		if (facing.getAxis() == EnumFacing.Axis.Y)
+			facing = EnumFacing.NORTH;
+		return getDefaultState().withProperty(FACING, facing);
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
+	public int getMetaFromState(IBlockState state) {
+		int meta = 0;
+		meta = meta | ((EnumFacing) state.getValue(FACING)).getIndex();
+		return meta;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
+	 public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-		ItemStack stack = player.getCurrentEquippedItem();
-		if (stack != null && stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.FORCE_KEY.ordinal()) {
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { FACING });
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS && stack.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.FORCE_KEY.ordinal()) {
 			if (!player.capabilities.isCreativeMode)
-				stack.stackSize--;
+				stack.shrink(1);
 			if (!world.isRemote) {
-				int meta = world.getBlockMetadata(x, y, z);
-				if (meta == 0 || meta == 2) {
-					if(world.getBlock(x, y, z + 1) == ModBlocks.forceField)
-						Utils.breakBlockWithParticles(world, x, y, z + 1, 0);
-					if(world.getBlock(x, y, z - 1) == ModBlocks.forceField)
-						Utils.breakBlockWithParticles(world, x, y, z - 1, 0);
+				EnumFacing type = state.getValue(FACING);
+				if (type == EnumFacing.EAST || type == EnumFacing.WEST) {
+					if(world.getBlockState(pos.add(0, 0, 1)).getBlock() == ModBlocks.FORCE_FIELD)
+						Utils.breakBlockWithParticles(world, pos.add(0, 0, 1));
+					if(world.getBlockState(pos.add(0, 0, - 1)).getBlock() == ModBlocks.FORCE_FIELD)
+						Utils.breakBlockWithParticles(world, pos.add(0, 0, - 1));
 				}
-				if (meta == 1 || meta == 3) {
-					if(world.getBlock(x + 1, y, z) == ModBlocks.forceField)
-						Utils.breakBlockWithParticles(world, x + 1, y, z, 0);
-					if(world.getBlock(x - 1, y, z) == ModBlocks.forceField)
-						Utils.breakBlockWithParticles(world, x - 1, y, z, 0);
+				if (type == EnumFacing.SOUTH || type == EnumFacing.NORTH) {
+					if(world.getBlockState(pos.add(1, 0, 0)).getBlock() == ModBlocks.FORCE_FIELD)
+						Utils.breakBlockWithParticles(world, pos.add(1, 0, 0));
+					if(world.getBlockState(pos.add(- 1, 0, 0)).getBlock() == ModBlocks.FORCE_FIELD)
+						Utils.breakBlockWithParticles(world, pos.add(- 1, 0, 0));
 				}
-				Utils.breakBlockWithParticles(world, x, y, z, 0);
+				Utils.breakBlockWithParticles(world, pos, state);
 			}
 			return true;
 		}
@@ -101,58 +112,72 @@ public class BlockForceLock extends Block {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack is) {
-		int meta = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 1.5D) & 3;
-		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
-		System.out.println("Meta: "+ meta);
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("deprecation")
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+		IBlockState iblockstate = world.getBlockState(pos.offset(side));
+		Block block = iblockstate.getBlock();
+		return (block == this || block == ModBlocks.FORCE_FIELD)  ? false : super.shouldSideBeRendered(state, world, pos, side);
 	}
 
 	@Override
-	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+
+	@Override
+	public int quantityDropped(Random rand) {
+		return 0;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+
 		Random random = world.rand;
 		double pixel = 0.0625D;
-		if (rand.nextInt(5) == 0)
-			for (int l = 0; l < 6; ++l) {
-				double particleX = x + random.nextFloat();
-				double particleY = y + random.nextFloat();
-				double particleZ = z + random.nextFloat();
+		if (rand.nextInt(5) == 0) {
+			for (int sideIndex = 0; sideIndex < 6; ++sideIndex) {
+				double particleX = (double) ((float) pos.getX() + random.nextFloat());
+				double particleY = (double) ((float) pos.getY() + random.nextFloat());
+				double particleZ = (double) ((float) pos.getZ() + random.nextFloat());
 
-				if (l == 0 && !world.getBlock(x, y + 1, z).isOpaqueCube())
-					particleY = y + 1 + pixel;
+				if (sideIndex == 0 && !world.getBlockState(pos.up()).isOpaqueCube())
+					particleY = (double) pos.getY() + 0.0625D + 1.0D;
 
-				if (l == 1 && !world.getBlock(x, y - 1, z).isOpaqueCube())
-					particleY = y - pixel;
+				if (sideIndex == 1 && !world.getBlockState(pos.down()).isOpaqueCube())
+					particleY = (double) pos.getY() - 0.0625D;
 
-				if (l == 2 && !world.getBlock(x, y, z + 1).isOpaqueCube())
-					particleZ = z + 1 + pixel;
+				if (sideIndex == 2 && !world.getBlockState(pos.south()).isOpaqueCube())
+					particleZ = (double) pos.getZ() + 0.0625D + 1.0D;
 
-				if (l == 3 && !world.getBlock(x, y, z - 1).isOpaqueCube())
-					particleZ = z - pixel;
+				if (sideIndex == 3 && !world.getBlockState(pos.north()).isOpaqueCube())
+					particleZ = (double) pos.getZ() - 0.0625D;
 
-				if (l == 4 && !world.getBlock(x + 1, y, z).isOpaqueCube())
-					particleX = x + 1 + pixel;
+				if (sideIndex == 4 && !world.getBlockState(pos.east()).isOpaqueCube())
+					particleX = (double) pos.getX() + 0.0625D + 1.0D;
 
-				if (l == 5 && !world.getBlock(x - 1, y, z).isOpaqueCube())
-					particleX = x - pixel;
+				if (sideIndex == 5 && !world.getBlockState(pos.west()).isOpaqueCube())
+					particleX = (double) pos.getX() - 0.0625D;
 
-				if (particleX < x || particleX > x + 1 || particleY < 0.0D || particleY > y + 1 || particleZ < z || particleZ > z + 1)
-					Erebus.proxy.spawnCustomParticle("sparks", world, particleX, particleY, particleZ, 0, 0, 0);
+				if (particleX < (double) pos.getX() || particleX > (double) (pos.getX() + 1) || particleY < 0.0D || particleY > (double) (pos.getY() + 1) || particleZ < (double) pos.getZ() || particleZ > (double) (pos.getZ() + 1))
+					Erebus.PROXY.spawnCustomParticle("sparks", world, particleX, particleY, particleZ, 0, 0, 0);
 			}
+		}
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-		double twoPixels = 0.125D;
-		return AxisAlignedBB.getBoundingBox(x + twoPixels, y, z + twoPixels, x + 1 - twoPixels, y + 1, z + 1 - twoPixels);
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (entity instanceof EntityLivingBase) {
 			int Knockback = 1;
-			entity.attackEntityFrom(DamageSource.cactus, 1);
+			entity.attackEntityFrom(DamageSource.CACTUS, 1);
 			entity.addVelocity(MathHelper.sin(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F, 0.08D, -MathHelper.cos(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F);
-			entity.worldObj.playSoundAtEntity(entity, "erebus:glowwormhurt", 1.0F, 1.0F);
+			entity.getEntityWorld().playSound(null, pos, ModSounds.GLOW_WORM_HURT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 }

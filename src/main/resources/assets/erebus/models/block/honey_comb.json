@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/honey_comb_top",
+        "down": "erebus:blocks/honey_comb_top",
+        "up": "erebus:blocks/honey_comb_top",
+        "north": "erebus:blocks/honey_comb_front",
+        "east": "erebus:blocks/honey_comb_sides",
+        "south": "erebus:blocks/honey_comb_front",
+        "west": "erebus:blocks/honey_comb_sides"
+    }
+}

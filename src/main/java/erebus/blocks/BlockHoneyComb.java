@@ -2,50 +2,39 @@ package erebus.blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
+import erebus.proxy.CommonProxy;
 import erebus.tileentity.TileEntityHoneyComb;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockHoneyComb extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon top, frontAndBack;
-
 	public BlockHoneyComb() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHardness(0.5F);
 		setLightLevel(0.5F);
 		setResistance(10.0F);
-		setStepSound(soundTypeCloth);
-		setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.honeyCombBlock");
-		setBlockTextureName("erebus:honeyCombTop");
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1F, 1F, 1F);
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return true;
+		setSoundType(SoundType.CLOTH);
+		setCreativeTab(ModTabs.BLOCKS);
 	}
 
 	@Override
@@ -54,53 +43,56 @@ public class BlockHoneyComb extends BlockContainer {
 	}
 
 	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public boolean isFullBlock(IBlockState state) {
+		return true;
+	}
+
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityHoneyComb();
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
 			return true;
-		TileEntityHoneyComb tileComb = Utils.getTileEntity(world, x, y, z, TileEntityHoneyComb.class);
-		if (tileComb != null)
-			if (world.getBlockMetadata(x, y, z) == 0) {
-				ItemStack current = player.inventory.getCurrentItem();
-				if (current != null && current.getItem() == Item.getItemFromBlock(this) || current != null && current.getItem() == ModItems.beeTamingAmulet)
-					return false;
-				player.openGui(Erebus.instance, CommonProxy.GuiID.HONEY_COMB.ordinal(), world, x, y, z);
-			}
+		TileEntityHoneyComb tileComb = Utils.getTileEntity(world, pos, TileEntityHoneyComb.class);
+		if (tileComb != null) {
+			ItemStack stack = player.getHeldItem(hand);
+			if (!stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(this) || !stack.isEmpty() && stack.getItem() == ModItems.BEE_TAMING_AMULET)
+				return false;
+			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.HONEY_COMB.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+		}
 		return true;
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
-
-		TileEntityHoneyComb tile = (TileEntityHoneyComb) world.getTileEntity(x, y, z);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntityHoneyComb tile = (TileEntityHoneyComb) world.getTileEntity(pos);
 		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
-				ItemStack is = tile.getStackInSlot(i);
-				if (is != null)
-					Utils.dropStack(world, x, y, z, is);
+				ItemStack stack = tile.getStackInSlot(i);
+				if (!stack.isEmpty())
+					Utils.dropStack(world, pos, stack);
 			}
-			world.func_147453_f(x, y, z, block);
 		}
-		super.breakBlock(world, x, y, z, block, par6);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side == 0 ? top : side == 1 ? top : side == 2 || side == 3 ? frontAndBack : blockIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:honeyCombSides");// Sides
-		top = reg.registerIcon("erebus:honeyCombTop");// Top & Bottom
-		frontAndBack = reg.registerIcon("erebus:honeyCombFrontAndBack");// Front
-		// &
-		// Back
+		world.playEvent(2001, pos, Block.getStateId(state));
+		super.breakBlock(world, pos, state);
 	}
 }

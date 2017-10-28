@@ -2,17 +2,16 @@ package erebus.blocks;
 
 import erebus.ModTabs;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 public class BlockAnthillBlock extends Block {
 
 	public BlockAnthillBlock() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
-		setStepSound(soundTypeStone);
-		//setCreativeTab(ModTabs.blocks);
-		setBlockName("erebus.anthillBlock");
-		setBlockTextureName("erebus:anthillBlock");
+		setSoundType(SoundType.STONE);
+		setCreativeTab(ModTabs.BLOCKS);
 	}
 }

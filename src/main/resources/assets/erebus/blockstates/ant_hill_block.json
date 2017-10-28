@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "erebus:ant_hill_block" }
+    }
+}

@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"type=capstone": { "model": "erebus:capstone" },
+        "type=capstone_mud": { "model": "erebus:capstone_mud" },
+        "type=capstone_iron": { "model": "erebus:capstone_iron" },
+        "type=capstone_gold": { "model": "erebus:capstone_gold" },
+        "type=capstone_jade": { "model": "erebus:capstone_jade" },
+        "type=capstone_mud_active": { "model": "erebus:capstone_mud_active" },
+        "type=capstone_iron_active": { "model": "erebus:capstone_iron_active" },
+        "type=capstone_gold_active": { "model": "erebus:capstone_gold_active" },
+        "type=capstone_jade_active": { "model": "erebus:capstone_jade_active" }
+	}
+}
