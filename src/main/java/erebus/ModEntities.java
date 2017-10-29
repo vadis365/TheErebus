@@ -7,6 +7,7 @@ import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityAnimatedChest;
 import erebus.entity.EntityAntlion;
+import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
@@ -46,7 +47,9 @@ import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntityStagBeetle;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityThrownSand;
 import erebus.entity.EntityTitanBeetle;
+import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
@@ -88,8 +91,6 @@ public class ModEntities {
 		registerEntity(53, EntityUmberGolem.class, "umber_golem");
 		registerEntity(54, EntityFireResistent.class, "fire_resistent_item");
 		registerEntity(55, EntityMucusBombPrimed.class, "mucus_bomb_primed");
-		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umber_golem_idol");
-		registerEntity(57, EntityAntlionBoss.class, "antlion_boss", 0x000000, 0xFFFFFF);
 
 		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
 
@@ -99,7 +100,6 @@ public class ModEntities {
 		registerEntity(77, EntityTarantulaEgg.class, "tarantula_egg"); 
 		registerEntity(78, EntityPoisonJet.class, "poison_jet");
 
-		registerEntity(80, EntityThrownSand.class, "thrown_sand");
 		registerEntity(81, EntityPreservedBlock.class, "preserved_block");
 		registerEntity(82, EntitySporeJet.class, "spore_jet");
 		registerEntity(83, EntityArmchairMount.class, "armchair_mount");
@@ -153,7 +153,9 @@ public class ModEntities {
 		registerEntity(50, EntityAnimatedBlock.class, "animated_block");
 		registerEntity(51, EntityAnimatedChest.class, "animated_chest");
 		registerEntity(52, EntityAnimatedBambooCrate.class, "animated_bamboo_crate");
-		
+
+		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umber_golem_idol");
+		registerEntity(57, EntityAntlionBoss.class, "antlion_boss", 0x000000, 0xFFFFFF);
 		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);
 		registerEntity(59, EntityBombardierBeetleLarva.class, "bombardier_beetle_larva", 0xFFEEFF, 0x9E0E0E);
 		registerEntity(60, EntityZombieAntSoldier.class, "zombie_ant_soldier", 0x00FE40, 0xF09071);
@@ -166,6 +168,7 @@ public class ModEntities {
 		registerEntity(75, EntityWoodlouseBall.class, "woodlouse_ball");
 
 		registerEntity(79, EntityGasVent.class, "gas_vent");
+		registerEntity(80, EntityThrownSand.class, "thrown_sand");
 
 		// Spawn conditions
 		if (ConfigHandler.INSTANCE.netherWidows)

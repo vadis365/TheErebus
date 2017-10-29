@@ -124,7 +124,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 							world.setBlockState(new BlockPos(x + i, yy, z + j), log.getDefaultState());
 
 						if (Math.round(Math.sqrt(dSq)) <= radius - 3 && yy == y + 21)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), Blocks.WOOL.getDefaultState());//ModBlocks.blockSilk
+							world.setBlockState(new BlockPos(x + i, yy, z + j), ModBlocks.SILK.getDefaultState());
 
 					}
 

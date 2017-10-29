@@ -1,36 +1,32 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelAntlionBoss;
 import erebus.entity.EntityAntlionBoss;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.boss.BossStatus;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+@SideOnly(Side.CLIENT)
+public class RenderAntlionBoss extends RenderLiving<EntityAntlionBoss>{
 
-public class RenderAntlionBoss extends RenderLiving {
+	private static ResourceLocation TEXTUE = new ResourceLocation("erebus:textures/entity/antlion_sandstone.png");
 
-	private static ResourceLocation texture = new ResourceLocation("erebus:textures/entity/antlionSandstone.png");
-
-	public RenderAntlionBoss() {
-		super(new ModelAntlionBoss(), 3.0F);
+	public RenderAntlionBoss(RenderManager rendermanagerIn) {
+		super(rendermanagerIn, new ModelAntlionBoss(), 3.0F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entityliving, float partialTickTime) {
-		EntityAntlionBoss antlionBoss = (EntityAntlionBoss) entityliving;
-		BossStatus.setBossStatus(antlionBoss, false);
-		float f1 = 2.0F;
-		GL11.glScalef(f1, f1, f1);
+	protected void preRenderCallback(EntityAntlionBoss antlionBoss, float partialTickTime) {
+		GlStateManager.scale(2.0F, 2.0F, 2.0F);
 		if (antlionBoss.getHealth() <= 0) {
-			GL11.glTranslatef(0, (antlionBoss.deathTicks) * 0.006F, 0);
+			GlStateManager.translate(0, (antlionBoss.deathTicks) * 0.006F, 0);
 		}
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityAntlionBoss antlionBoss) {
+		return TEXTUE;
 	}
 }

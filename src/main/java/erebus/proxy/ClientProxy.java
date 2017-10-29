@@ -21,6 +21,7 @@ import erebus.client.gui.GuiUmberFurnace;
 import erebus.client.render.entity.RenderAnimatedBlock;
 import erebus.client.render.entity.RenderAnimatedChest;
 import erebus.client.render.entity.RenderAntlion;
+import erebus.client.render.entity.RenderAntlionBoss;
 import erebus.client.render.entity.RenderAntlionMiniBoss;
 import erebus.client.render.entity.RenderBedBug;
 import erebus.client.render.entity.RenderBeetle;
@@ -59,7 +60,9 @@ import erebus.client.render.entity.RenderSolifugeSmall;
 import erebus.client.render.entity.RenderStagBeetle;
 import erebus.client.render.entity.RenderTarantula;
 import erebus.client.render.entity.RenderTarantulaBaby;
+import erebus.client.render.entity.RenderThrownSand;
 import erebus.client.render.entity.RenderTitanBeetle;
+import erebus.client.render.entity.RenderUmberGolemDungeonType;
 import erebus.client.render.entity.RenderVelvetWorm;
 import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
@@ -82,6 +85,7 @@ import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityAnimatedChest;
 import erebus.entity.EntityAntlion;
+import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityAntlionMiniBoss;
 import erebus.entity.EntityBedBug;
 import erebus.entity.EntityBeetle;
@@ -121,7 +125,9 @@ import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntityStagBeetle;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityThrownSand;
 import erebus.entity.EntityTitanBeetle;
+import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
@@ -155,6 +161,7 @@ import net.minecraft.client.particle.ParticleBreaking;
 import net.minecraft.client.particle.ParticleCloud;
 import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.client.particle.ParticleEnchantmentTable;
+import net.minecraft.client.particle.ParticleExplosionHuge;
 import net.minecraft.client.particle.ParticleFirework;
 import net.minecraft.client.particle.ParticleFlame;
 import net.minecraft.client.particle.ParticleHeart;
@@ -264,6 +271,9 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackAnt.class, RenderBlackAnt::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityStagBeetle.class, RenderStagBeetle::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityRhinoBeetle.class, RenderRhinoBeetle::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityUmberGolemDungeonTypes.class, RenderUmberGolemDungeonType::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityAntlionBoss.class, RenderAntlionBoss::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityThrownSand.class, RenderThrownSand::new);
 
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 	}
@@ -322,6 +332,7 @@ public class ClientProxy extends CommonProxy {
 			fx = new ParticlePortal.Factory().createParticle(EnumParticleTypes.PORTAL.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 			//fx.setRBGColorF(0F, 1F, 0F);
 		}
+
 		if (particleName.equals("cloud"))
 			fx = new ParticleCloud.Factory().createParticle(EnumParticleTypes.CLOUD.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 
@@ -366,6 +377,9 @@ public class ClientProxy extends CommonProxy {
 
 		if (particleName.equals("sparks"))
 			fx = new ParticleFirework.Factory().createParticle(EnumParticleTypes.FIREWORKS_SPARK.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
+
+		if (particleName.equals("huge_explode"))
+			fx = new ParticleExplosionHuge.Factory().createParticle(EnumParticleTypes.EXPLOSION_HUGE.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 
 		if (fx != null)
 			Minecraft.getMinecraft().effectRenderer.addEffect(fx);

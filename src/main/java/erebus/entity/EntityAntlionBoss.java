@@ -2,68 +2,83 @@ package erebus.entity;
 
 import java.util.List;
 
+import erebus.Erebus;
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIAntlionBossAttack;
+import erebus.items.ItemMaterials;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
+import erebus.world.feature.structure.AntlionMazeDungeon;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAIAntlionBossAttack;
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
-import erebus.world.feature.structure.AntlionMazeDungeon;
 
-public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
-
+public class EntityAntlionBoss extends EntityMob {
+	private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
+	private static final DataParameter<BlockPos> SPAWN_ORIGIN = EntityDataManager.<BlockPos>createKey(EntityAntlionBoss.class, DataSerializers.BLOCK_POS);
+	private static final DataParameter<Byte> IN_PYRAMID = EntityDataManager.<Byte>createKey(EntityAntlionBoss.class, DataSerializers.BYTE);
+	private static final DataParameter<Byte> BLAM = EntityDataManager.<Byte>createKey(EntityAntlionBoss.class, DataSerializers.BYTE);
 	private int blamCount;
 	public int deathTicks;
 
 	public EntityAntlionBoss(World world) {
 		super(world);
+		setSize(6.0F, 2.0F);
 		isImmuneToFire = true;
 		stepHeight = 1.0F;
 		experienceValue = 100;
-		setSize(6.0F, 2.0F);
+	}
+	
+	@Override
+	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAIAntlionBossAttack<EntityPlayer>(this, EntityPlayer.class, 0.6D, true));
 		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(21, new Byte((byte) 3));
-		dataWatcher.addObject(23, new Byte((byte) 0));
-		dataWatcher.addObject(24, new Integer(0));
-		dataWatcher.addObject(25, new Integer(0));
-		dataWatcher.addObject(26, new Integer(0));
+		dataManager.register(SPAWN_ORIGIN, new BlockPos(0, 0, 0));
+		dataManager.register(IN_PYRAMID, (byte) 0);
+		dataManager.register(BLAM, (byte) 3);
 	}
 
 	@Override
-	public boolean isAIEnabled() {
-		return true;
-	}
+    public boolean isNonBoss() {
+        return false;
+    }
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -71,27 +86,27 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 	}
 
 	@Override
-	protected void fall(float fallAmount) {
+	public void fall(float distance, float damageMultiplier) {
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 400D : 400D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(48.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.75D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 400D : 400D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.75D);
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) { // playStepSound
-		playSound("mob.spider.step", 0.15F, 1.0F);
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.ANTLION_GROWL;
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "erebus:antliongrowl";
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.ANTLION_GROWL;
 	}
 
 	@Override
@@ -104,7 +119,7 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 			setBlam(5, (byte) 3);
 
 		if (blamCount < 75 && blamCount > 10)
-			if (dataWatcher.getWatchableObjectByte(21) >= 1 && dataWatcher.getWatchableObjectByte(21) <= 2)
+			if (getBlam() >= 1 && getBlam() <= 2)
 				if (blamCount % 5 == 0 && blamCount % 10 != 0)
 					setBlam(blamCount, (byte) 2);
 				else if (blamCount % 10 == 0) {
@@ -115,56 +130,64 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 		if (blamCount == 75)
 			setBlam(75, (byte) 3);
 
-		if (dataWatcher.getWatchableObjectByte(21) == 1)
+		if (getBlam() == 1)
 			spawnRumbleParticles();
-		destroyBlocksInAABB(getBoundingBox());
+		destroyBlocksInAABB(getEntityBoundingBox());
+	}
+
+	@Override
+	protected void updateAITasks() {
+		super.updateAITasks();
+		bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 	}
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
-		if (source.equals(DamageSource.inWall) || source.equals(DamageSource.drown) || source instanceof EntityDamageSourceIndirect)
+		if (source.equals(DamageSource.IN_WALL) || source.equals(DamageSource.DROWN) || source instanceof EntityDamageSourceIndirect)
 			return false;
 		return super.attackEntityFrom(source, damage);
 	}
 
 	public void spawnBlamParticles() {
 		if (onGround)
-			PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.ANTLION_BLAM));
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.ANTLION_BLAM, (float) posX, (float)posY, (float)posZ));
 	}
 
 	public void spawnRumbleParticles() {
-		PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.ANTLION_RUMBLE));
+		Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.ANTLION_RUMBLE, (float) posX, (float)posY, (float)posZ));
 	}
 
 	public void setBlam(int count, byte action) {
 		blamCount = count;
-		dataWatcher.updateObject(21, action);
+		dataManager.set(BLAM, action);
+	}
+
+	public byte getBlam() {
+		return dataManager.get(BLAM);
 	}
 
 	public void setInPyramid(byte state) {
-		dataWatcher.updateObject(23, Byte.valueOf(state));
+		dataManager.set(IN_PYRAMID, state);
 	}
 
 	public byte getInPyramid() {
-		return dataWatcher.getWatchableObjectByte(23);
+		return dataManager.get(IN_PYRAMID);
 	}
 
 	public int getSpawnPointX() {
-		return dataWatcher.getWatchableObjectInt(24);
+		return dataManager.get(SPAWN_ORIGIN).getX();
 	}
 
 	public int getSpawnPointY() {
-		return dataWatcher.getWatchableObjectInt(25);
+		return dataManager.get(SPAWN_ORIGIN).getY();
 	}
 
 	public int getSpawnPointZ() {
-		return dataWatcher.getWatchableObjectInt(26);
+		return dataManager.get(SPAWN_ORIGIN).getZ();
 	}
 
 	public void setSpawnPoint(int x, int y, int z) {
-		dataWatcher.updateObject(24, Integer.valueOf(x));
-		dataWatcher.updateObject(25, Integer.valueOf(y));
-		dataWatcher.updateObject(26, Integer.valueOf(z));
+		dataManager.set(SPAWN_ORIGIN, new BlockPos(x, y, z));
 	}
 
 	@Override
@@ -181,18 +204,38 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 		super.readEntityFromNBT(nbt);
 		setInPyramid(nbt.getByte("inPyramid"));
 		setSpawnPoint(nbt.getInteger("spawnPointX"), nbt.getInteger("spawnPointY"), nbt.getInteger("spawnPointZ"));
+        if(hasCustomName())
+        	bossInfo.setName(this.getDisplayName());
 	}
 
+	@Override
+    public void setCustomNameTag(String name) {
+        super.setCustomNameTag(name);
+        bossInfo.setName(this.getDisplayName());
+    }
+
+	@Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+		super.addTrackingPlayer(player);
+        bossInfo.addPlayer(player);
+    }
+
+	@Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        bossInfo.removePlayer(player);
+    }
+
 	protected Entity areaOfEffect2() {
-		List<?> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(boundingBox.minX, boundingBox.minY, boundingBox.minZ, boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ).expand(16D, 1D, 16D));
+		List<?> list = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().grow(16D, 1D, 16D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = (Entity) list.get(i);
 			if (entity != null)
 				if (entity instanceof EntityLivingBase && !(entity instanceof EntityAntlionBoss)) {
-					float Knockback = (-3.0F + worldObj.rand.nextInt(4)) * 0.1F;
+					float Knockback = (-3.0F + getEntityWorld().rand.nextInt(4)) * 0.1F;
 					entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 2D : 2D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
-					entity.addVelocity(-MathHelper.sin(rotationYaw * -3.141593F + worldObj.rand.nextInt(3) + 0.141593F / 180.0F) * Knockback, 0.01D, MathHelper.cos(rotationYaw * -3.141593F + worldObj.rand.nextInt(3) + 0.141593F / 180.0F) * Knockback);
-					worldObj.playSoundAtEntity(entity, "erebus:antlionslam", 1.0F, 1.0F);
+					entity.addVelocity(-MathHelper.sin(rotationYaw * -3.141593F + getEntityWorld().rand.nextInt(3) + 0.141593F / 180.0F) * Knockback, 0.01D, MathHelper.cos(rotationYaw * -3.141593F + getEntityWorld().rand.nextInt(3) + 0.141593F / 180.0F) * Knockback);
+					getEntityWorld().playSound(null, getPosition(), ModSounds.ANTLION_SLAM, SoundCategory.HOSTILE, 1.0F, 1.0F);
 				}
 		}
 		return null;
@@ -203,76 +246,73 @@ public class EntityAntlionBoss extends EntityMob implements IBossDisplayData {
 		++deathTicks;
 
 		if (deathTicks % 25 == 1) {
-			worldObj.playSoundEffect(posX, posY, posZ, "erebus:antliongrowl", 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
-			worldObj.playSoundEffect(posX, posY, posZ, "erebus:antliongrowl", 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.3F);
-			worldObj.playSoundEffect(posX, posY, posZ, "erebus:antliongrowl", 1.0F, worldObj.rand.nextFloat() * 0.1F + 0.1F);
+			getEntityWorld().playSound(null, getPosition(), ModSounds.ANTLION_GROWL, SoundCategory.HOSTILE, 1.0F, getEntityWorld().rand.nextFloat() * 0.1F + 0.9F);
+			getEntityWorld().playSound(null, getPosition(), ModSounds.ANTLION_GROWL, SoundCategory.HOSTILE, 1.0F, getEntityWorld().rand.nextFloat() * 0.1F + 0.3F);
+			getEntityWorld().playSound(null, getPosition(), ModSounds.ANTLION_GROWL, SoundCategory.HOSTILE, 1.0F, getEntityWorld().rand.nextFloat() * 0.1F + 0.1F);
 		}
 
 		if (deathTicks >= 180 && deathTicks <= 200)
-			PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.BOSS_DEATH));
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BOSS_DEATH, (float) posX, (float)posY, (float)posZ));
 
 		int i;
 		int j;
 
-		if (!worldObj.isRemote)
+		if (!getEntityWorld().isRemote)
 			if (deathTicks > 150 && deathTicks % 5 == 0) {
 				i = 1000;
 
 				while (i > 0) {
 					j = EntityXPOrb.getXPSplit(i);
 					i -= j;
-					worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+					getEntityWorld().spawnEntity(new EntityXPOrb(getEntityWorld(), posX, posY, posZ, j));
 				}
 			}
-		moveEntity(0.0D, 0.310000000149011612D, 0.0D);
+		move(MoverType.SELF, 0.0D, 0.310000000149011612D, 0.0D);
 		spawnRumbleParticles();
 		renderYawOffset = prevRenderYawOffset += 0.03F;
 		limbSwingAmount = 0.5F;
-		if (deathTicks == 200 && !worldObj.isRemote) {
+		if (deathTicks == 200 && !getEntityWorld().isRemote) {
 			i = 2000;
 
 			while (i > 0) {
 				j = EntityXPOrb.getXPSplit(i);
 				i -= j;
-				worldObj.spawnEntityInWorld(new EntityXPOrb(worldObj, posX, posY, posZ, j));
+				getEntityWorld().spawnEntity(new EntityXPOrb(getEntityWorld(), posX, posY, posZ, j));
 			}
 			if (getInPyramid() == 1) {
-				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX(), getSpawnPointY(), getSpawnPointZ(), 7, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ());
-				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ(), 6, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ());
-				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX(), getSpawnPointY(), getSpawnPointZ() + 1, 9, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ() + 1);
-				AntlionMazeDungeon.setTeleporter(worldObj, getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ() + 1, 8, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ() + 1);
+				AntlionMazeDungeon.setTeleporter(getEntityWorld(), getSpawnPointX(), getSpawnPointY(), getSpawnPointZ(), 7, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ());
+				AntlionMazeDungeon.setTeleporter(getEntityWorld(), getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ(), 6, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ());
+				AntlionMazeDungeon.setTeleporter(getEntityWorld(), getSpawnPointX(), getSpawnPointY(), getSpawnPointZ() + 1, 9, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ() + 1);
+				AntlionMazeDungeon.setTeleporter(getEntityWorld(), getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ() + 1, 8, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ() + 1);
 			}
-			worldObj.setBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ), ModBlocks.antlionEgg);
-			Utils.dropStackNoRandom(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ), ItemMaterials.DATA.SOUL_CRYSTAL.makeStack());
-			Utils.dropStackNoRandom(worldObj, MathHelper.floor_double(posX), MathHelper.floor_double(posY + 1.5), MathHelper.floor_double(posZ), new ItemStack(ModItems.warHammer));
+			getEntityWorld().setBlockState(getPosition(), ModBlocks.ANTLION_EGG.getDefaultState());
+			Utils.dropStackNoRandom(getEntityWorld(), getPosition().up(), ItemMaterials.EnumErebusMaterialsType.SOUL_CRYSTAL.createStack());
+			Utils.dropStackNoRandom(getEntityWorld(), getPosition().up(), new ItemStack(ModItems.REIN_EXOSKELETON_SHIELD)); //WAR HAMMER HERE
 			setDead();
 		}
 	}
 
 	public void destroyBlocksInAABB(AxisAlignedBB AABB) {
-		if (worldObj.isRemote)
+		if (getEntityWorld().isRemote)
 			return;
-		int i = MathHelper.floor_double(AABB.minX - 1);
-		int j = MathHelper.floor_double(AABB.minY - 0.2);
-		int k = MathHelper.floor_double(AABB.minZ - 1);
-		int l = MathHelper.floor_double(AABB.maxX + 1);
-		int i1 = MathHelper.floor_double(AABB.maxY);
-		int j1 = MathHelper.floor_double(AABB.maxZ + 21);
+		int i = MathHelper.floor(AABB.minX - 1);
+		int j = MathHelper.floor(AABB.minY - 0.2);
+		int k = MathHelper.floor(AABB.minZ - 1);
+		int l = MathHelper.floor(AABB.maxX + 1);
+		int i1 = MathHelper.floor(AABB.maxY);
+		int j1 = MathHelper.floor(AABB.maxZ + 1);
 
 		for (int k1 = i; k1 <= l; ++k1)
 			for (int l1 = j; l1 <= i1; ++l1)
 				for (int i2 = k; i2 <= j1; ++i2) {
-					Block block = worldObj.getBlock(k1, l1, i2);
-					Block blockBelow = worldObj.getBlock(k1, l1 - 1, i2);
-					if (block == Blocks.sand && blockBelow != ModBlocks.templeBrickUnbreaking) {
-						worldObj.setBlockToAir(k1, l1, i2);
-						worldObj.playAuxSFXAtEntity(null, 2001, k1, l1, i2, Block.getIdFromBlock(Blocks.sand));
+					BlockPos pos = new BlockPos(k1, l1, i2);
+					Block block = getEntityWorld().getBlockState(pos).getBlock();
+					Block blockBelow = getEntityWorld().getBlockState(pos.down()).getBlock();
+					if (block == Blocks.SAND && blockBelow != ModBlocks.TEMPLE_BRICK_UNBREAKING) {
+						getEntityWorld().setBlockToAir(pos);
+						getEntityWorld().playEvent(null, 2001, pos, Block.getIdFromBlock(block));
 					}
 				}
 	}
 
-	@Override
-	public AxisAlignedBB getBoundingBox() {
-		return boundingBox;
-	}
 }

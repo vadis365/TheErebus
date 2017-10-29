@@ -16,6 +16,7 @@ import erebus.blocks.BlockTempleBrickUnbreaking;
 import erebus.blocks.BlockTempleBrickUnbreaking.EnumTempleBrickType;
 import erebus.blocks.BlockTempleTeleporter;
 import erebus.blocks.BlockTempleTeleporter.EnumTeleporterType;
+import erebus.entity.EntityAntlionBoss;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.items.ItemErebusFood.EnumFoodType;
 import erebus.items.ItemMaterials;
@@ -168,7 +169,7 @@ public class AntlionMazeDungeon {
 		decoratePyramid(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
 		addTeleporters(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
 		addCapstones(world, x + sizeX - 1, y + 15, z + sizeZ - 1);
-		//spawnIdolGuardians(world, x, y, z);
+		spawnIdolGuardians(world, x, y, z);
 		// System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
 
@@ -354,10 +355,10 @@ public class AntlionMazeDungeon {
 						entityUmberGolem.setPosition(x + 118.5D, y - 3.0D, z + 2.5D);
 						break;
 					case 2:
-						entityUmberGolem.setPosition(x + 118.5D, y - 3.0D, z + 118.5D);
+						entityUmberGolem.setPosition(x + 2.5D, y - 3.0D, z + 118.5D);
 						break;
 					case 3:
-						entityUmberGolem.setPosition(x + 2.5D, y - 3.0D, z + 118.5D);
+						entityUmberGolem.setPosition(x + 118.5D, y - 3.0D, z + 118.5D);
 						break;
 				}
 				world.spawnEntity(entityUmberGolem);
@@ -538,14 +539,11 @@ public class AntlionMazeDungeon {
 		world.setBlockState(new BlockPos(x + 23, y + 1, z + 23), BAMBOO_TORCH_UPPER, 3);
 		world.setBlockState(new BlockPos(x + 23, y, z + 20), BAMBOO_TORCH_LOWER, 3);
 		world.setBlockState(new BlockPos(x + 23, y + 1, z + 20), BAMBOO_TORCH_UPPER, 3);
-		
-		System.out.println("ANTLION OVERLORD SUMMONED HERE!");
-		
-	/*	EntityAntlionBoss antlionboss = new EntityAntlionBoss(world);
+
+		EntityAntlionBoss antlionboss = new EntityAntlionBoss(world);
 		antlionboss.setPosition(x + 21, y - 8, z + 21);
 		antlionboss.setInPyramid((byte) 1);
 		antlionboss.setSpawnPoint(x + 21, y - 8, z + 21);
 		world.spawnEntity(antlionboss);
-	*/
 	}
 }

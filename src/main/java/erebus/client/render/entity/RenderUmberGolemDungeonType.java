@@ -1,41 +1,34 @@
 package erebus.client.render.entity;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.boss.BossStatus;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelUmberGolem;
 import erebus.entity.EntityUmberGolemDungeonTypes;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
 
-public class RenderUmberGolemDungeonType extends RenderLiving {
-	private static final ResourceLocation[] textures = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/umberGolemMud.png"), new ResourceLocation("erebus:textures/entity/umberGolemIron.png"), new ResourceLocation("erebus:textures/entity/umberGolemGold.png"), new ResourceLocation("erebus:textures/entity/umberGolemJade.png") };
+public class RenderUmberGolemDungeonType extends RenderLiving<EntityUmberGolemDungeonTypes> {
+	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] { new ResourceLocation("erebus:textures/entity/umber_golem_mud.png"), new ResourceLocation("erebus:textures/entity/umber_golem_iron.png"), new ResourceLocation("erebus:textures/entity/umber_golem_gold.png"), new ResourceLocation("erebus:textures/entity/umber_golem_jade.png") };
 
-	public RenderUmberGolemDungeonType() {
-		super(new ModelUmberGolem(), 1.0F);
+	public RenderUmberGolemDungeonType(RenderManager renderManagerIn) {
+		super(renderManagerIn, new ModelUmberGolem(), 1.0F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entity, float partialTickTime) {
-		float f1 = 1.4F;
-		BossStatus.setBossStatus((EntityUmberGolemDungeonTypes) entity, false);
-		GL11.glScalef(f1, f1, f1);
+	protected void preRenderCallback(EntityUmberGolemDungeonTypes golem, float partialTickTime) {
+		GlStateManager.scale(1.4F, 1.4F, 1.4F);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityUmberGolemDungeonTypes golem = (EntityUmberGolemDungeonTypes) entity;
+	protected ResourceLocation getEntityTexture(EntityUmberGolemDungeonTypes golem) {
 		if (golem.getType() == 0)
-			return textures[0];
+			return TEXTURES[0];
 		else if (golem.getType() == 1)
-			return textures[1];
+			return TEXTURES[1];
 		else if (golem.getType() == 2)
-			return textures[2];
+			return TEXTURES[2];
 		else if (golem.getType() == 3)
-			return textures[3];
+			return TEXTURES[3];
 		else
 			return null;
 	}

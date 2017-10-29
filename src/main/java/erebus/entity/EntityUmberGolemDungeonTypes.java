@@ -1,73 +1,88 @@
 package erebus.entity;
 
+import erebus.ModBlocks;
+import erebus.ModItems;
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.core.helper.Utils;
+import erebus.items.ItemDungeonIdols.EnumIdolType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.core.helper.Utils;
-import erebus.item.ItemDungeonIdols.IDOL;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAdditionalSpawnData, IBossDisplayData{
-	Block block;
-	int blockMeta;
+public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAdditionalSpawnData {
+	
+	private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
+	private static final DataParameter<Byte> BOSS_TYPE = EntityDataManager.<Byte>createKey(EntityUmberGolemDungeonTypes.class, DataSerializers.BYTE);
+	private static final DataParameter<Integer> RANGE_TIMER = EntityDataManager.<Integer>createKey(EntityUmberGolemDungeonTypes.class, DataSerializers.VARINT);
+	
+	IBlockState blockState;
 	boolean hasBlock = false;
 	float hardness;
-	int blockX;
-	int blockY;
-	int blockZ;
 	int breakTime = 0;
 
 	public EntityUmberGolemDungeonTypes(World world) {
 		super(world);
-		isImmuneToFire = true;
 		setSize(1.0F, 1.9F);
-		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.5D, false));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		isImmuneToFire = true;
 		experienceValue = 120;
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(20, new Integer(0));
-		dataWatcher.addObject(29, new Byte((byte) 0));
+		dataManager.register(RANGE_TIMER, 0);
+		dataManager.register(BOSS_TYPE, new Byte((byte) 0));
 	}
-
+	
 	@Override
-	public boolean isAIEnabled() {
-		return true;
+	protected void initEntityAI() {
+		tasks.addTask(0, new EntityAISwimming(this));
+		tasks.addTask(1, new EntityAIAttackMelee(this, 0.5D, true));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
 	}
+
+	@Override
+    public boolean isNonBoss() {
+        return false;
+    }
 
 	private double getAttackStrength() {
 		switch (getType()) {
@@ -113,37 +128,32 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	public void setInWeb() {
 	}
 
-	@Override
-	public boolean allowLeashing() {
-		return !canDespawn() && super.allowLeashing();
-	}
-
 	/*
 	 * protected String getLivingSound() { return "erebus:umbergolemsound"; } protected String getHurtSound() { return "erebus:umbergolemhurt"; }
 	 */
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.zombie.step", 0.15F, 1.0F);
+	protected void playStepSound(BlockPos pos, Block blockIn) {
+		playSound(SoundEvents.ENTITY_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
 	protected void dropFewItems(boolean hitByPlayer, int looting) {
-		IDOL type = IDOL.values()[Math.max(0, Math.min(IDOL.values().length, getType()))];
+		EnumIdolType type = EnumIdolType.values()[Math.max(0, Math.min(EnumIdolType.values().length, getType()))];
 
-		entityDropItem(new ItemStack(ModItems.idols, 1, type.ordinal()), 0.0F);
+		entityDropItem(new ItemStack(ModItems.IDOLS, 1, type.ordinal()), 0.0F);
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if (getAttackTarget() != null) {
-			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
+			float distance = (float) getDistance(getAttackTarget().posX, getAttackTarget().getEntityBoundingBox().minY, getAttackTarget().posZ);
 			if (!hasBlock) {
 				if (getRangeAttackTimer() < 100 && distance > 3)
 					setRangeAttackTimer(getRangeAttackTimer() + 2);
@@ -154,57 +164,62 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 			if (oneShotMoveCheat())
 				getMoveHelper().setMoveTo(getAttackTarget().posX, getAttackTarget().posY, getAttackTarget().posZ, 0.5D);
 
-			if (isCollidedHorizontally) {
+			if (collidedHorizontally) {
 				double direction = Math.toRadians(renderYawOffset);
-				removeBlock((int) (posX + -Math.sin(direction) * 1.5D), (int) posY, (int) (posZ + Math.cos(direction) * 1.5D));
-				removeBlock((int) (posX + -Math.sin(direction) * 1.5D), (int) posY + 1, (int) (posZ + Math.cos(direction) * 1.5D));
+				BlockPos posLower = new BlockPos((posX + -Math.sin(direction) * 1.5D), posY, (posZ + Math.cos(direction) * 1.5D));
+				BlockPos posUpper = new BlockPos((posX + -Math.sin(direction) * 1.5D), posY + 1, (posZ + Math.cos(direction) * 1.5D));
+				if(!getEntityWorld().isAirBlock(posLower))
+					removeBlock(posLower);
+				if(!getEntityWorld().isAirBlock(posUpper))
+					removeBlock(posUpper);
 			}
 		}
+	}
+
+	@Override
+	protected void updateAITasks() {
+		super.updateAITasks();
+		bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 	}
 
 	private boolean oneShotMoveCheat() {
 		return !getNavigator().tryMoveToEntityLiving(getAttackTarget(), 0.5D);
 	}
 
-	protected void removeBlock(int x, int y, int z) {
-		if (!hasBlock && worldObj.getBlock(x, y, z) != Blocks.air) {
+	protected void removeBlock(BlockPos pos) {
+		if (!hasBlock) {
 			hasBlock = true;
-			blockX = x;
-			blockY = y;
-			blockZ = z;
 			breakTime = 0;
-			block = worldObj.getBlock(blockX, blockY, blockZ);
-			blockMeta = worldObj.getBlockMetadata(blockX, blockY, blockZ);
-			hardness = block.getBlockHardness(worldObj, blockX, blockY, blockZ);
+			blockState = getEntityWorld().getBlockState(pos);
+			hardness = blockState.getBlockHardness(getEntityWorld(), pos);
 		}
 
-		if (hardness <= 0.0F || block == null || !canBreakBlock(block, blockMeta) || !isInSamePos())
+		if (hardness <= 0.0F || blockState == null || !canBreakBlock(blockState) || !isInSamePos())
 			hasBlock = false;
 
 		if (hasBlock) {
 			breakTime += 1;
-			block = worldObj.getBlock(blockX, blockY, blockZ);
-			blockMeta = worldObj.getBlockMetadata(blockX, blockY, blockZ);
+			blockState = getEntityWorld().getBlockState(pos);
 			int i = (int) (breakTime / (hardness * 160.0F) * 10.0F);
-			worldObj.destroyBlockInWorldPartially(getEntityId(), blockX, blockY, blockZ, i);
+			getEntityWorld().sendBlockBreakProgress(getEntityId(), pos, i);
 
-			if (worldObj.rand.nextInt(30) == 0)
-				worldObj.playAuxSFXAtEntity(null, 2001, blockX, blockY, blockZ, Block.getIdFromBlock(worldObj.getBlock(blockX, blockY, blockZ)));
+			if (getEntityWorld().rand.nextInt(30) == 0)
+				getEntityWorld().playEvent(null, 2001, pos, Block.getIdFromBlock(blockState.getBlock()));
 
 			if (breakTime >= hardness * 160.0F) {
-				Utils.dropStack(worldObj, blockX, blockY, blockZ, new ItemStack(block, 1, blockMeta));
-				worldObj.setBlockToAir(blockX, blockY, blockZ);
+				Utils.dropStack(getEntityWorld(), pos, new ItemStack(blockState.getBlock(), 1));
+				getEntityWorld().setBlockToAir(pos);
 				breakTime = 0;
 				hasBlock = false;
-				worldObj.playAuxSFXAtEntity(null, 2001, blockX, blockY, blockZ, Block.getIdFromBlock(worldObj.getBlock(blockX, blockY, blockZ)));
+				getEntityWorld().playEvent(null, 2001, pos, Block.getIdFromBlock(blockState.getBlock()));
 			}
 		}
 	}
 
-	protected boolean canBreakBlock(Block block, int blockMeta) {
-		if (block == ModBlocks.gneiss)
+	protected boolean canBreakBlock(IBlockState state) {
+		if (state.getBlock() == ModBlocks.GNEISS)
 			return false;
-		if (block.hasTileEntity(blockMeta))
+		if (state.getBlock().hasTileEntity(state))
 			return false;
 		return true;
 	}
@@ -216,15 +231,15 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		// TODO Add a different attack style for each type
-		return Attack(entity);
+		return attack(entity);
 	}
 
-	protected boolean Attack(Entity entity) {
-		if (!worldObj.isRemote && canEntityBeSeen(entity)) {
+	protected boolean attack(Entity entity) {
+		if (!getEntityWorld().isRemote && canEntityBeSeen(entity)) {
 			if (onGround) {
 				double d0 = entity.posX - posX;
 				double d1 = entity.posZ - posZ;
-				float f2 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+				float f2 = MathHelper.sqrt(d0 * d0 + d1 * d1);
 				motionX = d0 / f2 * 0.5D * 0.800000011920929D + motionX * 0.20000000298023224D;
 				motionZ = d1 / f2 * 0.5D * 0.800000011920929D + motionZ * 0.20000000298023224D;
 				motionY = 0.4000000059604645D;
@@ -232,8 +247,8 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 			int knockback = 1;
 			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 			entity.addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * knockback * 0.5F, 0.4D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * knockback * 0.5F);
-			worldObj.playSoundAtEntity(entity, "game.player.hurt.fall.big", 1.0F, 1.0F);
-			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, worldObj.difficultySetting.ordinal() * 50, 0));
+			getEntityWorld().playSound(null, getPosition(), SoundEvents.ENTITY_PLAYER_BIG_FALL, SoundCategory.HOSTILE, 1.0F, 1.0F);
+			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, getEntityWorld().getDifficulty().ordinal() * 50, 0));
 			return true;
 		}
 		return true;
@@ -242,14 +257,14 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	public EntityThrowable getMissileType() {
 		switch (getType()) {
 			case 0:
-				return new EntityGooBall(worldObj, this);
+				return new EntityGooBall(getEntityWorld(), this);
 			case 1:
 			case 2:
-				return new EntityWebSling(worldObj, this);
+				return new EntityWebSling(getEntityWorld(), this);
 			case 3:
-				return new EntityPoisonJet(worldObj, this);
+				return new EntityPoisonJet(getEntityWorld(), this);
 			default:
-				return new EntityGooBall(worldObj, this);
+				return new EntityGooBall(getEntityWorld(), this);
 		}
 	}
 
@@ -265,9 +280,9 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 			double targetX = entity.posX + entity.motionX - posX;
 			double targetY = entity.posY + entity.getEyeHeight() - 1.100000023841858D - posY;
 			double targetZ = entity.posZ + entity.motionZ - posZ;
-			float target = MathHelper.sqrt_double(targetX * targetX + targetZ * targetZ);
-			missile.setThrowableHeading(targetX, targetY + target * 0.1F, targetZ, 0.75F, 8.0F);
-			worldObj.spawnEntityInWorld(missile);
+			float target = MathHelper.sqrt(targetX * targetX + targetZ * targetZ);
+			missile.shoot(targetX, targetY + target * 0.1F, targetZ, 0.75F, 8.0F);
+			getEntityWorld().spawnEntity(missile);
 		}
 	}
 
@@ -281,24 +296,44 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		setType(nbt.getByte("type"));
+        if(hasCustomName())
+        	bossInfo.setName(this.getDisplayName());
 	}
 
-	public void setType(byte isType) {
-		dataWatcher.updateObject(29, Byte.valueOf(isType));
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? getGolemHealth() : getGolemHealth() * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+	@Override
+    public void setCustomNameTag(String name) {
+        super.setCustomNameTag(name);
+        bossInfo.setName(this.getDisplayName());
+    }
+
+	public void setType(byte type) {
+		dataManager.set(BOSS_TYPE, type);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? getGolemHealth() : getGolemHealth() * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? getAttackStrength() : getAttackStrength() * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 	}
+
+	@Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+		super.addTrackingPlayer(player);
+        bossInfo.addPlayer(player);
+    }
+
+	@Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        bossInfo.removePlayer(player);
+    }
 
 	public byte getType() {
-		return dataWatcher.getWatchableObjectByte(29);
+		return dataManager.get(BOSS_TYPE);
 	}
 
-	public void setRangeAttackTimer(int size) {
-		dataWatcher.updateObject(20, Integer.valueOf(size));
+	public void setRangeAttackTimer(int time) {
+		dataManager.set(RANGE_TIMER, time);
 	}
 
 	public int getRangeAttackTimer() {
-		return dataWatcher.getWatchableObjectInt(20);
+		return dataManager.get(RANGE_TIMER);
 	}
 
 	@Override

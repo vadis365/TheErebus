@@ -2,22 +2,23 @@ package erebus.entity.ai;
 
 import java.util.List;
 
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.EntityAntlionBoss;
+import erebus.entity.EntityThrownSand;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.init.MobEffects;
+import net.minecraft.pathfinding.Path;
 import net.minecraft.pathfinding.PathPoint;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.entity.EntityAntlionBoss;
-import erebus.entity.EntityThrownSand;
 
 public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 
@@ -26,7 +27,7 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 	int attackTick;
 	double speedTowardsTarget;
 	boolean longMemory;
-	PathEntity entityPathEntity;
+	Path entityPathEntity;
 	Class<T> classTarget;
 	private int attackTimer;
 	private int failedPathFindingPenalty;
@@ -40,7 +41,7 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 
 	public EntityAIAntlionBossAttack(EntityCreature entity, double moveSpeed, boolean memory) {
 		attacker = entity;
-		worldObj = entity.worldObj;
+		worldObj = entity.getEntityWorld();
 		speedTowardsTarget = moveSpeed;
 		longMemory = memory;
 		setMutexBits(3);
@@ -64,9 +65,9 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 	}
 
 	@Override
-	public boolean continueExecuting() {
+	public boolean shouldContinueExecuting() {
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
-		return entitylivingbase == null ? false : !entitylivingbase.isEntityAlive() ? false : !longMemory ? !attacker.getNavigator().noPath() : attacker.isWithinHomeDistance(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ));
+		return entitylivingbase == null ? false : !entitylivingbase.isEntityAlive() ? false : !longMemory ? !attacker.getNavigator().noPath() : attacker.isWithinHomeDistanceCurrentPosition();
 	}
 
 	@Override
@@ -77,7 +78,7 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 
 	@Override
 	public void resetTask() {
-		attacker.getNavigator().clearPathEntity();
+		attacker.getNavigator().clearPath();
 	}
 
 	@Override
@@ -90,7 +91,7 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 			attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, speedTowardsTarget);
 			if (attacker.getNavigator().getPath() != null) {
 				PathPoint finalPathPoint = attacker.getNavigator().getPath().getFinalPathPoint();
-				if (finalPathPoint != null && entitylivingbase.getDistanceSq(finalPathPoint.xCoord, finalPathPoint.yCoord, finalPathPoint.zCoord) < 1D)
+				if (finalPathPoint != null && entitylivingbase.getDistanceSq(finalPathPoint.x, finalPathPoint.y, finalPathPoint.z) < 1D)
 					failedPathFindingPenalty = 0;
 				else
 					failedPathFindingPenalty += 10;
@@ -99,16 +100,16 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 		}
 		attackTick = Math.max(attackTick - 1, 0);
 		double distance = attacker.width * attacker.width + entitylivingbase.width;
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) <= distance)
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) <= distance)
 			if (attackTick <= 0) {
 				attackTick = 20;
-				worldObj.playSoundAtEntity(attacker, "erebus:antliongrowl", 1.0F, 1.0F);
+				worldObj.playSound(null, attacker.getPosition(), ModSounds.ANTLION_GROWL, SoundCategory.HOSTILE, 1.0F, 1.0F);
 				attacker.attackEntityAsMob(entitylivingbase);
 				entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(attacker), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 				entitylivingbase.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * 0.3F, 0.1D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * 0.3F);
 			}
 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > distance + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < distance + 256.0D)
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) > distance + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) < distance + 256.0D)
 			if (attackTick <= 0) {
 				++shouldDo;
 				if (shouldDo <= 2)
@@ -118,19 +119,19 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 					shouldDo = 0;
 				}
 				if (shouldDo == 1) {
-					Vec3 look = attacker.getLookVec();
+					Vec3d look = attacker.getLookVec();
 					double direction = Math.toRadians(attacker.renderYawOffset);
 					EntityThrownSand thrownsand = new EntityThrownSand(worldObj, attacker);
 					thrownsand.setPosition(attacker.posX - Math.sin(direction) * 3.5, attacker.posY + attacker.height, attacker.posZ + Math.cos(direction) * 3.5);
-					thrownsand.motionX = look.xCoord;
-					thrownsand.motionY = look.yCoord * 2.2;
-					thrownsand.motionZ = look.zCoord;
-					worldObj.spawnEntityInWorld(thrownsand);
+					thrownsand.motionX = look.x;
+					thrownsand.motionY = look.y * 2.2;
+					thrownsand.motionZ = look.z;
+					worldObj.spawnEntity(thrownsand);
 					attackTick = 30;
 				}
 			}
 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > distance && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) <= distance + 256.0D)
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) > distance && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) <= distance + 256.0D)
 			if (attackTick <= 0) {
 				int x = worldObj.rand.nextInt(4);
 				if (x == 0) {
@@ -143,7 +144,7 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 					((EntityAntlionBoss) attacker).setBlam(10, (byte) 1);
 				}
 			}
-		if (jumpAttack && attacker.isCollidedVertically && !(attacker.motionY > 0D)) {
+		if (jumpAttack && attacker.collidedVertically && !(attacker.motionY > 0D)) {
 			areaOfEffect();
 			((EntityAntlionBoss) attacker).spawnBlamParticles();
 			jumpAttack = false;
@@ -151,17 +152,17 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 	}
 
 	protected Entity areaOfEffect() {
-		List<?> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(attacker.boundingBox.minX, attacker.boundingBox.minY, attacker.boundingBox.minZ, attacker.boundingBox.maxX, attacker.boundingBox.maxY, attacker.boundingBox.maxZ).expand(8D, 1D, 8D));
+		List<?> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, attacker.getEntityBoundingBox().grow(8D, 1D, 8D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = (Entity) list.get(i);
 			if (entity != null)
 				if (entity instanceof EntityLivingBase && !(entity instanceof EntityAntlionBoss)) {
 					entity.attackEntityFrom(DamageSource.causeMobDamage(attacker), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 					entity.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * 1D, 0.4D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * 1D);
-					worldObj.playSoundAtEntity(entity, "erebus:antlionslam", 1.0F, 1.0F);
-					worldObj.playSoundAtEntity(entity, "erebus:antlionexplode", 1.0F, 1.0F);
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 8 * 20, 0));
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.confusion.id, 8 * 20, 0));
+					worldObj.playSound(null, entity.getPosition(), ModSounds.ANTLION_SLAM, SoundCategory.HOSTILE, 1.0F, 1.0F);
+					worldObj.playSound(null, entity.getPosition(), ModSounds.ANTLION_EXPLODE, SoundCategory.HOSTILE, 1.0F, 1.0F);;
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 8 * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 8 * 20, 0));
 				}
 		}
 		return null;

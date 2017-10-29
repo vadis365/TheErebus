@@ -302,7 +302,7 @@ public class ModelAntlionBoss extends ModelBase {
 		float heady = par4 / (180F / (float) Math.PI);
 		float headx = par5 / (180F / (float) Math.PI);
 
-		if (entityAntlionBoss.getDataWatcher().getWatchableObjectByte(21) == 2) {
+		if (entityAntlionBoss.getBlam() == 2) {
 			for (addhead = 0; addhead < 17; addhead++) {
 				headx = headx - addhead * 0.0053702F;
 			}
