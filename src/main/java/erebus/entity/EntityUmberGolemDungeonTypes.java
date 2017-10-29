@@ -41,10 +41,9 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAdditionalSpawnData {
 	
-	private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
 	private static final DataParameter<Byte> BOSS_TYPE = EntityDataManager.<Byte>createKey(EntityUmberGolemDungeonTypes.class, DataSerializers.BYTE);
 	private static final DataParameter<Integer> RANGE_TIMER = EntityDataManager.<Integer>createKey(EntityUmberGolemDungeonTypes.class, DataSerializers.VARINT);
-	
+	private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
 	IBlockState blockState;
 	boolean hasBlock = false;
 	float hardness;
@@ -180,6 +179,23 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	protected void updateAITasks() {
 		super.updateAITasks();
 		bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+		switch (getType()) {
+		case 0:
+			bossInfo.setColor(BossInfo.Color.RED);
+			break;
+		case 1:
+			bossInfo.setColor(BossInfo.Color.WHITE);
+			break;
+		case 2:
+			bossInfo.setColor(BossInfo.Color.YELLOW);
+			break;
+		case 3:
+			bossInfo.setColor(BossInfo.Color.GREEN);
+			break;
+		default:
+			bossInfo.setColor(BossInfo.Color.GREEN);
+			break;
+		}
 	}
 
 	private boolean oneShotMoveCheat() {
