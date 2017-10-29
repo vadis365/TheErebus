@@ -66,6 +66,7 @@ import erebus.blocks.BlockStairsErebus;
 import erebus.blocks.BlockStigma;
 import erebus.blocks.BlockSwampVent;
 import erebus.blocks.BlockTempleBrickUnbreaking;
+import erebus.blocks.BlockTempleTeleporter;
 import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
 import erebus.blocks.BlockUmberGravel;
@@ -245,6 +246,7 @@ public class ModBlocks {
 	public static final Block FORCE_FIELD = new BlockForceField();
 	public static final Block FORCE_LOCK = new BlockForceLock();
 	public static final Block TEMPLE_BRICK_UNBREAKING = new BlockTempleBrickUnbreaking();
+	public static final Block TEMPLE_TELEPORTER = new BlockTempleTeleporter();
 
 	// WALLS
 	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));

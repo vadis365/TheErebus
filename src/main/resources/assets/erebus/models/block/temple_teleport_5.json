@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/capstone",
+        "down": "erebus:blocks/capstone",
+        "up": "erebus:blocks/temple_teleport_5",
+        "north": "erebus:blocks/capstone",
+        "east": "erebus:blocks/capstone",
+        "south": "erebus:blocks/capstone",
+        "west": "erebus:blocks/capstone"
+    }
+}

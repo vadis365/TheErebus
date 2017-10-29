@@ -6,12 +6,20 @@ import java.util.Random;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.ModItems;
-import erebus.entity.EntityAntlionBoss;
+import erebus.block.bamboo.BlockBambooTorch;
+import erebus.block.bamboo.BlockBambooTorch.EnumBlockTorchHalf;
+import erebus.blocks.BlockCapstone;
+import erebus.blocks.BlockCapstone.EnumCapstoneType;
+import erebus.blocks.BlockGneiss;
+import erebus.blocks.BlockGneiss.EnumGneissType;
+import erebus.blocks.BlockTempleBrickUnbreaking;
+import erebus.blocks.BlockTempleBrickUnbreaking.EnumTempleBrickType;
+import erebus.blocks.BlockTempleTeleporter;
+import erebus.blocks.BlockTempleTeleporter.EnumTeleporterType;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.items.ItemErebusFood.EnumFoodType;
 import erebus.items.ItemMaterials;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
-import erebus.tileentity.TileEntityBones;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.world.feature.util.MazeGenerator;
 import erebus.world.feature.util.PerfectMazeGenerator;
@@ -20,6 +28,9 @@ import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
+import net.minecraft.block.BlockTorch;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
@@ -29,12 +40,31 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 public class AntlionMazeDungeon {
-	private Block solid = ModBlocks.GNEISS;
+	private IBlockState GNEISS = ModBlocks.GNEISS.getDefaultState();
+	private IBlockState GNEISS_RELIEF = ModBlocks.GNEISS.getDefaultState().withProperty(BlockGneiss.TYPE, EnumGneissType.GNEISS_RELIEF);
+	private IBlockState GNEISS_CARVED = ModBlocks.GNEISS.getDefaultState().withProperty(BlockGneiss.TYPE, EnumGneissType.GNEISS_CARVED);
+	private IBlockState GNEISS_BRICKS = ModBlocks.GNEISS.getDefaultState().withProperty(BlockGneiss.TYPE, EnumGneissType.GNEISS_BRICKS);
+	private IBlockState GNEISS_TILES = ModBlocks.GNEISS.getDefaultState().withProperty(BlockGneiss.TYPE, EnumGneissType.GNEISS_TILES);
+	private IBlockState TEMPLE_BRICK_UNBREAKING = ModBlocks.TEMPLE_BRICK_UNBREAKING.getDefaultState();
+	private IBlockState TEMPLE_PILLAR = ModBlocks.TEMPLE_PILLAR.getDefaultState();
+	private IBlockState CAPSTONE = ModBlocks.CAPSTONE.getDefaultState();
+	private static IBlockState BAMBOO_TORCH_LOWER = ModBlocks.BAMBOO_TORCH.getDefaultState().withProperty(BlockBambooTorch.HALF, EnumBlockTorchHalf.LOWER);
+	private static IBlockState BAMBOO_TORCH_UPPER = ModBlocks.BAMBOO_TORCH.getDefaultState().withProperty(BlockBambooTorch.HALF, EnumBlockTorchHalf.UPPER);
+	private IBlockState GNEISS_VENT = ModBlocks.GNEISS_VENT.getDefaultState();
+	private IBlockState FORCE_FIELD = ModBlocks.FORCE_FIELD.getDefaultState();
+	private IBlockState TEMPLE_BRICK = ModBlocks.TEMPLE_BRICK.getDefaultState();
+	private IBlockState ANTLION_SPAWNER = ModBlocks.ANTLION_SPAWNER.getDefaultState();
+	private IBlockState TORCH_EAST = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.EAST);
+	private IBlockState TORCH_WEST = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST);
+	private IBlockState TORCH_SOUTH = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH);
+	private IBlockState TORCH_NORTH = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH);
+	
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] {
 			new LootItemStack(Items.BOOK).setAmount(1, 4).setWeight(18),
 			new LootItemStack(Items.PAPER).setAmount(2, 6).setWeight(16),
@@ -126,19 +156,19 @@ public class AntlionMazeDungeon {
 					buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
 					break;
 				case 1:
-					buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, solid, 2);
-					buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, solid, 1);
-					buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, solid, 2);
+					buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
+					buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, GNEISS_CARVED);
+					buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
 					createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
 					addFeature(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, rand);
 					break;
 			}
-		buildCourtyard(world, ModBlocks.TEMPLE_PILLAR, 0, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
-		createPyramid(world, ModBlocks.TEMPLE_BRICK_UNBREAKING, 0, true, x + sizeX / 2 + 8, z + sizeZ / 2 + 8, 44, 44, y - 6);
+		buildCourtyard(world, TEMPLE_PILLAR, x + sizeX, y - 4, z + sizeZ, 52, 4, 52);
+		createPyramid(world, TEMPLE_BRICK_UNBREAKING, true, x + sizeX / 2 + 8, z + sizeZ / 2 + 8, 44, 44, y - 6);
 		decoratePyramid(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
 		addTeleporters(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
-		addCapstones(world, x + sizeX - 1, y + 15, z + sizeZ - 1, ModBlocks.CAPSTONE);
-		spawnIdolGuardians(world, x, y, z);
+		addCapstones(world, x + sizeX - 1, y + 15, z + sizeZ - 1);
+		//spawnIdolGuardians(world, x, y, z);
 		// System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
 
@@ -146,31 +176,31 @@ public class AntlionMazeDungeon {
 		for (int i = 0; i <= h * 4; i++)
 			for (int j = 0; j <= w * 4; j++)
 				for (int k = 0; k <= 2; k++)
-					if (world.getBlock(x + j, y + k, z + i) != solid)
-						world.setBlockToAir(x + j, y + k, z + i);
+					if (world.getBlockState(new BlockPos(x + j, y + k, z + i)).getBlock() != ModBlocks.GNEISS)
+						world.setBlockToAir(new BlockPos(x + j, y + k, z + i));
 	}
 
 	private void addTeleporters(World world, int x, int y, int z) {
 		// room 1
-		world.setBlock(x + 13, y + 9, z + 13, ModBlocks.CAPSTONE, 0, 2);
+		world.setBlockState(new BlockPos(x + 13, y + 9, z + 13), CAPSTONE, 2);
 		setFloorDecoStone(world, x + 14, y + 9, z + 14);
 		setLockStone(world, x + 15, y + 9, z + 15, 2);
 		setTeleporter(world, x + 16, y + 9, z + 16, 0, x + 30, y + 9, z + 13);
 		setTeleporter(world, x + 19, y + 9, z + 19, 5, x + 19, y + 14, z + 19);
 		// room 2
-		world.setBlock(x + 30, y + 9, z + 13, ModBlocks.CAPSTONE, 0, 2);
+		world.setBlockState(new BlockPos(x + 30, y + 9, z + 13), CAPSTONE, 2);
 		setFloorDecoStone(world, x + 25, y + 9, z + 14);
 		setLockStone(world, x + 26, y + 9, z + 15, 3);
 		setTeleporter(world, x + 27, y + 9, z + 16, 0, x + 30, y + 9, z + 30);
 		setTeleporter(world, x + 24, y + 9, z + 19, 5, x + 13, y + 9, z + 13);
 		// room 3
-		world.setBlock(x + 30, y + 9, z + 30, ModBlocks.CAPSTONE, 0, 2);
+		world.setBlockState(new BlockPos(x + 30, y + 9, z + 30), CAPSTONE, 2);
 		setFloorDecoStone(world, x + 25, y + 9, z + 25);
 		setLockStone(world, x + 26, y + 9, z + 26, 4);
 		setTeleporter(world, x + 27, y + 9, z + 27, 0, x + 13, y + 9, z + 30);
 		setTeleporter(world, x + 24, y + 9, z + 24, 5, x + 30, y + 9, z + 13);
 		// room 4
-		world.setBlock(x + 13, y + 9, z + 30, ModBlocks.CAPSTONE, 0, 2);
+		world.setBlockState(new BlockPos(x + 13, y + 9, z + 30), CAPSTONE, 2);
 		setFloorDecoStone(world, x + 14, y + 9, z + 25);
 		setLockStone(world, x + 15, y + 9, z + 26, 5);
 		setTeleporter(world, x + 16, y + 9, z + 27, 0, x + 13, y + 9, z + 13);
@@ -182,11 +212,11 @@ public class AntlionMazeDungeon {
 		setTeleporter(world, x + 22, y + 9, z + 22, 8, x + 38, y + 1, z + 38);
 		setTeleporter(world, x + 21, y + 9, z + 22, 9, x + 5, y + 1, z + 38);
 		// Top level
-		world.setBlock(x + 19, y + 14, z + 19, ModBlocks.CAPSTONE, 0, 2);
-		world.setBlock(x + 19, y + 15, z + 25, ModBlocks.BAMBOO_TORCH, 0, 3);
-		world.setBlock(x + 19, y + 16, z + 25, ModBlocks.BAMBOO_TORCH, 1, 3);
-		world.setBlock(x + 25, y + 15, z + 19, ModBlocks.BAMBOO_TORCH, 0, 3);
-		world.setBlock(x + 25, y + 16, z + 19, ModBlocks.BAMBOO_TORCH, 1, 3);
+		world.setBlockState(new BlockPos(x + 19, y + 14, z + 19), CAPSTONE, 2);
+		world.setBlockState(new BlockPos(x + 19, y + 15, z + 25), BAMBOO_TORCH_LOWER, 3);
+		world.setBlockState(new BlockPos(x + 19, y + 16, z + 25), BAMBOO_TORCH_UPPER, 3);
+		world.setBlockState(new BlockPos(x + 25, y + 15, z + 19), BAMBOO_TORCH_LOWER, 3);
+		world.setBlockState(new BlockPos(x + 25, y + 16, z + 19), BAMBOO_TORCH_UPPER, 3);
 		setFloorDecoStone(world, x + 20, y + 14, z + 20);
 		setLockStone(world, x + 21, y + 14, z + 21, 1);
 		setTeleporter(world, x + 22, y + 14, z + 22, 0, x + 13, y + 9, z + 13);
@@ -196,19 +226,19 @@ public class AntlionMazeDungeon {
 	private void setLockStone(World world, int x, int y, int z, int meta) {
 		for (int dx = x; dx < x + 3; dx++)
 			for (int dz = z; dz < z + 3; dz++)
-				world.setBlock(dx, y, dz, ModBlocks.TEMPLE_BRICK_UNBREAKING, meta, 2);
+				world.setBlockState(new BlockPos(dx, y, dz), ModBlocks.TEMPLE_BRICK_UNBREAKING.getDefaultState().withProperty(BlockTempleBrickUnbreaking.TYPE, EnumTempleBrickType.values()[meta]), 2);
 	}
 
 	private void setFloorDecoStone(World world, int x, int y, int z) {
 		for (int dx = x; dx < x + 5; dx++)
 			for (int dz = z; dz < z + 5; dz++)
-				world.setBlock(dx, y, dz, ModBlocks.CAPSTONE, 0, 2);
+				world.setBlockState(new BlockPos(dx, y, dz), CAPSTONE, 2);
 	}
 
-	private static void setFloorMidDecoStone(World world, int x, int y, int z) {
+	private void setFloorMidDecoStone(World world, int x, int y, int z) {
 		for (int dx = x; dx < x + 4; dx++)
 			for (int dz = z; dz < z + 4; dz++)
-				world.setBlock(dx, y, dz, ModBlocks.CAPSTONE, 0, 2);
+				world.setBlockState(new BlockPos(dx, y, dz), CAPSTONE, 2);
 	}
 
 	private void decoratePyramid(World world, int x, int y, int z) {
@@ -219,79 +249,78 @@ public class AntlionMazeDungeon {
 			for (int xx = x; xx < x + 44; xx++)
 				for (int zz = z; zz < z + 44; zz++) {
 					if (yy == y)
-						world.setBlock(xx, yy, zz, ModBlocks.TEMPLE_BRICK_UNBREAKING, 0, 2);
+						world.setBlockState(new BlockPos(xx, yy, zz), TEMPLE_BRICK_UNBREAKING, 2);
 					if (yy == y + 1) {
 						if (xx > x + 1 && xx < x + 42 && zz > z + 1 && zz < z + 42)
-							world.setBlock(xx, yy, zz, Blocks.SAND, 0, 2);
+							world.setBlockState(new BlockPos(xx, yy, zz), Blocks.SAND.getDefaultState(), 2);
 						if (xx > x + 4 && xx < x + 39 && zz > z + 4 && zz < z + 39)
 							if ((xx - x) % 11 == 5 || (zz - z) % 11 == 5)
-								world.setBlock(xx, yy, zz, ModBlocks.GNEISS_VENT, 0, 2);
+								world.setBlockState(new BlockPos(xx, yy, zz), GNEISS_VENT, 2);
 							else
-								world.setBlock(xx, yy, zz, Blocks.SAND, 0, 2);
+								world.setBlockState(new BlockPos(xx, yy, zz), Blocks.SAND.getDefaultState(), 2);
 					}
 
 					if (yy == y + 9)
 						if (xx > x + 9 && xx < x + 34 && zz > z + 9 && zz < z + 34)
-							world.setBlock(xx, yy, zz, ModBlocks.TEMPLE_BRICK_UNBREAKING, 0, 2);
+							world.setBlockState(new BlockPos(xx, yy, zz), TEMPLE_BRICK_UNBREAKING, 2);
 
 					if (yy == y + 10 && !forcefieldSet) {
 						for (int d = 0; d < 4; d++) {
 							for (int wx = 0 + d; wx < 9; wx++) {
-								world.setBlock(x + 11 + wx, yy + d, z + 21, ModBlocks.FORCE_FIELD, 0, 2);
-								world.setBlock(x + 11 + wx, yy + d, z + 22, ModBlocks.FORCE_FIELD, 0, 2);
-								world.setBlock(x + 21, yy + d, z + 11 + wx, ModBlocks.FORCE_FIELD, 0, 2);
-								world.setBlock(x + 22, yy + d, z + 11 + wx, ModBlocks.FORCE_FIELD, 0, 2);
-								world.setBlock(x + 21, yy + d, z + 32 - wx, ModBlocks.FORCE_FIELD, 0, 2);
-								world.setBlock(x + 22, yy + d, z + 32 - wx, ModBlocks.FORCE_FIELD, 0, 2);
-								world.setBlock(x + 32 - wx, yy + d, z + 21, ModBlocks.FORCE_FIELD, 0, 2);
-								world.setBlock(x + 32 - wx, yy + d, z + 22, ModBlocks.FORCE_FIELD, 0, 2);
+								world.setBlockState(new BlockPos(x + 11 + wx, yy + d, z + 21), FORCE_FIELD, 2);
+								world.setBlockState(new BlockPos(x + 11 + wx, yy + d, z + 22), FORCE_FIELD, 2);
+								world.setBlockState(new BlockPos(x + 21, yy + d, z + 11 + wx), FORCE_FIELD, 2);
+								world.setBlockState(new BlockPos(x + 22, yy + d, z + 11 + wx), FORCE_FIELD, 2);
+								world.setBlockState(new BlockPos(x + 21, yy + d, z + 32 - wx), FORCE_FIELD, 2);
+								world.setBlockState(new BlockPos(x + 22, yy + d, z + 32 - wx), FORCE_FIELD, 2);
+								world.setBlockState(new BlockPos(x + 32 - wx, yy + d, z + 21), FORCE_FIELD, 2);
+								world.setBlockState(new BlockPos(x + 32 - wx, yy + d, z + 22), FORCE_FIELD, 2);
 							}
 
 							for (int dx = x + 20; dx < x + 24; dx++)
 								for (int dz = z + 20; dz < z + 24; dz++)
-									world.setBlock(dx, yy + d, dz, ModBlocks.FORCE_FIELD, 0, 2);
+									world.setBlockState(new BlockPos(dx, yy + d, dz), FORCE_FIELD, 2);
 
 							for (int dx1 = x + 21; dx1 < x + 23; dx1++)
 								for (int dz1 = z + 21; dz1 < z + 23; dz1++)
-									world.setBlockToAir(dx1, yy + d, dz1);
+									world.setBlockToAir(new BlockPos(dx1, yy + d, dz1));
 						}
 						forcefieldSet = true;
 					}
-
 					if (yy == y + 14)
 						if (xx > x + 14 && xx < x + 29 && zz > z + 14 && zz < z + 29)
-							world.setBlock(xx, yy, zz, ModBlocks.TEMPLE_BRICK_UNBREAKING, 0, 2);
+							world.setBlockState(new BlockPos(xx, yy, zz), TEMPLE_BRICK_UNBREAKING, 2);
 
 					if (yy == y + 15 && !topchestSet) {
 						// contents is 8 pieces of jade
-						world.setBlock(x + 19, yy, z + 22, Blocks.CHEST, 2, 2);
-						TileEntityChest chest = (TileEntityChest) world.getTileEntity(x + 19, yy, z + 22);
-						if (chest != null)
+						world.setBlockState(new BlockPos(x + 19, yy, z + 22), Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.NORTH), 2);
+						TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(x + 19, yy, z + 22));
+						if (chest != null) {
 							chest.setInventorySlotContents(0, ItemMaterials.EnumErebusMaterialsType.JADE.createStack(8));
-						world.setBlockMetadataWithNotify(x + 19, yy, z + 22, 2, 3);
+							chest.markDirty();
+						}
 					}
-
 					if (yy == y + 16) {
 						// TODO Lighting?
 					}
 				}
 	}
 
-	public static void setTeleporter(World world, int x, int y, int z, int metaData, int targetX, int targetY, int targetZ) {
-		world.setBlock(x, y, z, ModBlocks.templeTeleporter, metaData, 2);
-		TileEntityTempleTeleporter teleporter = (TileEntityTempleTeleporter) world.getTileEntity(x, y, z);
+	public static void setTeleporter(World world, int x, int y, int z, int meta, int targetX, int targetY, int targetZ) {
+		world.setBlockState(new BlockPos(x, y, z), ModBlocks.TEMPLE_TELEPORTER.getDefaultState().withProperty(BlockTempleTeleporter.TYPE, EnumTeleporterType.values()[meta]), 2);
+		TileEntityTempleTeleporter teleporter = (TileEntityTempleTeleporter) world.getTileEntity(new BlockPos(x, y, z));
 		if (teleporter != null)
 			teleporter.setTargetDestination(targetX, targetY, targetZ);
 	}
 
-	private void addCapstones(World world, int x, int y, int z, Block capstone) {
-		world.setBlock(x, y, z, capstone, 1, 3);
-		world.setBlock(x + 1, y, z, capstone, 2, 3);
-		world.setBlock(x, y, z + 1, capstone, 3, 3);
-		world.setBlock(x + 1, y, z + 1, capstone, 4, 3);
+	private void addCapstones(World world, int x, int y, int z) {
+		world.setBlockState(new BlockPos(x, y, z), CAPSTONE.withProperty(BlockCapstone.TYPE, EnumCapstoneType.CAPSTONE_MUD), 3);
+		world.setBlockState(new BlockPos(x + 1, y, z), CAPSTONE.withProperty(BlockCapstone.TYPE, EnumCapstoneType.CAPSTONE_IRON), 3);
+		world.setBlockState(new BlockPos(x, y, z + 1), CAPSTONE.withProperty(BlockCapstone.TYPE, EnumCapstoneType.CAPSTONE_GOLD), 3);
+		world.setBlockState(new BlockPos(x + 1, y, z + 1), CAPSTONE.withProperty(BlockCapstone.TYPE, EnumCapstoneType.CAPSTONE_JADE), 3);
 	}
 
-	private void createPyramid(World world, Block block, int metaData, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart) {
+	private void createPyramid(World world, IBlockState block, boolean isHollow, int x, int z, int baseLengthX, int baseLengthZ, int yStart) {
 		int yStop = Math.min((baseLengthZ - 1) / 2, (baseLengthX - 1) / 2) + yStart;
 		for (int i = 0; i + yStart <= yStop - 1; i++) {
 			int y = yStart + i;
@@ -300,10 +329,10 @@ public class AntlionMazeDungeon {
 			for (int ix = 0; x + ix + i <= maxX; ix++)
 				for (int iz = 0; z + iz + i <= maxZ; iz++)
 					if (ix == 0 || ix + i + 1 == baseLengthX || iz == 0 || iz + i + 1 == baseLengthZ)
-						world.setBlock(ix + x + i, y, iz + z + i, block, metaData, 2);
+						world.setBlockState(new BlockPos(ix + x + i, y, iz + z + i), block, 2);
 					else if (isHollow)
-						if (!world.isAirBlock(ix + x + i, y, iz + z + i))
-							world.setBlockToAir(ix + x + i, y, iz + z + i);
+						if (!world.isAirBlock(new BlockPos(ix + x + i, y, iz + z + i)))
+							world.setBlockToAir(new BlockPos(ix + x + i, y, iz + z + i));
 
 			baseLengthX--;
 			baseLengthZ--;
@@ -335,33 +364,33 @@ public class AntlionMazeDungeon {
 			}
 	}
 
-	private void buildCourtyard(World world, Block block, int metaData, int x, int y, int z, int baseLengthX, int heightY, int baseLengthZ) {
+	private void buildCourtyard(World world, IBlockState block, int x, int y, int z, int baseLengthX, int heightY, int baseLengthZ) {
 		for (int yy = y; yy <= heightY + y; yy++)
 			for (int xx = x - baseLengthX / 2; xx < x + baseLengthX / 2; xx++)
 				for (int zz = z - baseLengthZ / 2; zz < z + baseLengthZ / 2; zz++)
 					if (yy > y)
 						if (yy <= y + 4) {
-							if (!world.isAirBlock(xx, yy, zz))
-								world.setBlockToAir(xx, yy, zz);
+							if (!world.isAirBlock(new BlockPos(xx, yy, zz)))
+								world.setBlockToAir(new BlockPos(xx, yy, zz));
 
 							if (xx == x - baseLengthX / 2 || xx == x + baseLengthX / 2 - 1)
 								if (zz > z - baseLengthZ / 2 && zz < z + baseLengthZ / 2) {
 									if (yy <= y + 3)
 										for (int i = 3; i < 49; i += 5)
-											world.setBlock(xx, yy, z - baseLengthZ / 2 + i, block, metaData, 2);
+											world.setBlockState(new BlockPos(xx, yy, z - baseLengthZ / 2 + i), block, 2);
 									if (yy == y + 4)
 										for (int i = 0; i < 52; i++)
-											world.setBlock(xx, yy, z - baseLengthZ / 2 + i, ModBlocks.TEMPLE_BRICK, 0, 2);
+											world.setBlockState(new BlockPos(xx, yy, z - baseLengthZ / 2 + i), TEMPLE_BRICK, 2);
 								}
 
 							if (zz == z - baseLengthZ / 2 || zz == z + baseLengthZ / 2 - 1)
 								if (xx > x - baseLengthX / 2 && xx < x + baseLengthX / 2) {
 									if (yy <= y + 3)
 										for (int i = 3; i < 49; i += 5)
-											world.setBlock(x - baseLengthZ / 2 + i, yy, zz, block, metaData, 2);
+											world.setBlockState(new BlockPos(x - baseLengthZ / 2 + i, yy, zz), block, 2);
 									if (yy == y + 4)
 										for (int i = 0; i < 52; i++)
-											world.setBlock(x - baseLengthZ / 2 + i, yy, zz, ModBlocks.TEMPLE_BRICK, 0, 2);
+											world.setBlockState(new BlockPos(x - baseLengthZ / 2 + i, yy, zz), TEMPLE_BRICK, 2);
 								}
 						}
 	}
@@ -370,20 +399,20 @@ public class AntlionMazeDungeon {
 		for (int i = 0; i <= h * 4; i++)
 			for (int j = 0; j <= w * 4; j++)
 				if (canPlaceFeatureAt(world, x, y, z, x + j, y, z + i))
-					world.setBlock(x + j, y, z + i, solid, 3, 2);
+					world.setBlockState(new BlockPos(x + j, y, z + i), GNEISS_BRICKS, 2);
 	}
 
 	private void buildFloor(World world, int x, int y, int z, int w, int h, Random rand) {
-		createPyramid(world, Blocks.air, 0, true, x + 36, z + 36, 48, 48, y + 5);
+		createPyramid(world, Blocks.AIR.getDefaultState(), true, x + 36, z + 36, 48, 48, y + 5);
 		for (int i = 0; i <= h * 4; i++)
 			for (int j = 0; j <= w * 4; j++)
 				if (rand.nextInt(15) == 0)
 					if (rand.nextBoolean() && rand.nextBoolean())
-						world.setBlock(x + j, y, z + i, Blocks.LAVA);
+						world.setBlockState(new BlockPos(x + j, y, z + i), Blocks.LAVA.getDefaultState());
 					else
-						world.setBlock(x + j, y, z + i, ModBlocks.GNEISS_VENT);
+						world.setBlockState(new BlockPos(x + j, y, z + i), GNEISS_VENT);
 				else
-					world.setBlock(x + j, y, z + i, solid, 5, 2);
+					world.setBlockState(new BlockPos(x + j, y, z + i), GNEISS_TILES, 2);
 	}
 
 	private void addFeature(World world, int x, int y, int z, int w, int h, int[][] maze, Random rand) {
@@ -391,58 +420,59 @@ public class AntlionMazeDungeon {
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 1) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 1 + j * 4, y - 1, z + 1 + i * 4)) {
-						world.setBlock(x + 1 + j * 4, y, z + 1 + i * 4, Blocks.TORCH, 3, 2);
+						world.setBlockState(new BlockPos(x + 1 + j * 4, y, z + 1 + i * 4), TORCH_SOUTH, 2);
 						if (rand.nextInt(4) == 0)
-							placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
+							placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, EnumFacing.SOUTH, rand);
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
 					} else if (rand.nextInt(10) == 0)
 						if (rand.nextBoolean())
-							world.setBlock(x + 2 + j * 4, y - 2, z + 2 + i * 4, ModBlocks.ANTLION_SPAWNER);
+							world.setBlockState(new BlockPos(x + 2 + j * 4, y - 2, z + 2 + i * 4), ANTLION_SPAWNER);
 						else
-							world.setBlock(x + 2 + j * 4, y + 2, z + 2 + i * 4, ModBlocks.magmaCrawlerSpawner);
+							world.setBlockState(new BlockPos(x + 2 + j * 4, y + 2, z + 2 + i * 4), ModBlocks.ZOMBIE_ANT_SPAWNER.getDefaultState());//ModBlocks.magmaCrawlerSpawner
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 1 + j * 4, y - 1, z + 2 + i * 4)) {
-						world.setBlock(x + 1 + j * 4, y, z + 2 + i * 4, Blocks.TORCH, 1, 2);
+						world.setBlockState(new BlockPos(x + 1 + j * 4, y, z + 2 + i * 4), TORCH_EAST, 2);
 						if (rand.nextInt(4) == 0)
-							placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 1, rand);
+							placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, EnumFacing.EAST, rand);
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);
 					}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 4) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 3 + j * 4, y - 1, z + 2 + i * 4)) {
-						world.setBlock(x + 3 + j * 4, y, z + 2 + i * 4, Blocks.TORCH, 2, 2);
+						world.setBlockState(new BlockPos(x + 3 + j * 4, y, z + 2 + i * 4), TORCH_WEST, 2);
 						if (rand.nextInt(4) == 0)
-							placeChest(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 2, rand);
+							placeChest(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, EnumFacing.WEST, rand);
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 4, rand);
 					}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 2) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 2 + j * 4, y - 1, z + 3 + i * 4)) {
-						world.setBlock(x + 2 + j * 4, y, z + 3 + i * 4, Blocks.TORCH, 4, 2);
+						world.setBlockState(new BlockPos(x + 2 + j * 4, y, z + 3 + i * 4), TORCH_NORTH, 2);
 						if (rand.nextInt(4) == 0)
-							placeChest(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 4, rand);
+							placeChest(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, EnumFacing.NORTH, rand);
 						else if (rand.nextInt(6) == 0)
 							placeBones(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 2, rand);
 					}
 		}
 	}
 
-	private void placeChest(World world, int x, int y, int z, int directionMeta, Random rand) {
-		world.setBlock(x, y, z, Blocks.CHEST, directionMeta, 2);
-		TileEntityChest chest = (TileEntityChest) world.getTileEntity(x, y, z);
+	private void placeChest(World world, int x, int y, int z, EnumFacing facing, Random rand) {
+		world.setBlockState(new BlockPos(x, y, z), Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, facing), 2);
+		TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(x, y, z));
 		if (chest != null)
 			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
 	}
 
 	private void placeBones(World world, int x, int y, int z, int directionMeta, Random rand) {
-		world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 2);
+		/*world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 2);
 		TileEntityBones bones = (TileEntityBones) world.getTileEntity(x, y, z);
 		if (bones != null)
 			LootUtil.generateLoot(bones, rand, chestLoot, 3, 10);
+			*/
 	}
 
 	private boolean canPlaceFeatureAt(World world, int x, int y, int z, int featureX, int featureY, int featureZ) {
@@ -453,65 +483,69 @@ public class AntlionMazeDungeon {
 		return true;
 	}
 
-	private void buildLevel(World world, int x, int y, int z, int w, int h, int[][] maze, Block blockType, int blockMeta) {
+	private void buildLevel(World world, int x, int y, int z, int w, int h, int[][] maze, IBlockState blockType) {
 		for (int i = 0; i < h; i++) {
 			// draw the north edge
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 1) == 0) {
-					world.setBlock(x + j * 4, y, z + i * 4, blockType, blockMeta, 2);
-					world.setBlock(x + j * 4 + 1, y, z + i * 4, blockType, blockMeta, 2);
-					world.setBlock(x + j * 4 + 2, y, z + i * 4, blockType, blockMeta, 2);
-					world.setBlock(x + j * 4 + 3, y, z + i * 4, blockType, blockMeta, 2);
+					world.setBlockState(new BlockPos(x + j * 4, y, z + i * 4), blockType, 2);
+					world.setBlockState(new BlockPos(x + j * 4 + 1, y, z + i * 4), blockType, 2);
+					world.setBlockState(new BlockPos(x + j * 4 + 2, y, z + i * 4), blockType, 2);
+					world.setBlockState(new BlockPos(x + j * 4 + 3, y, z + i * 4), blockType, 2);
 				} else
-					world.setBlock(x + j * 4, y, z + i * 4, blockType, blockMeta, 2);
+					world.setBlockState(new BlockPos(x + j * 4, y, z + i * 4), blockType, 2);
 			// draw the west edge
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0) {
-					world.setBlock(x + j * 4, y, z + i * 4 + 1, blockType, blockMeta, 2);
-					world.setBlock(x + j * 4, y, z + i * 4 + 2, blockType, blockMeta, 2);
-					world.setBlock(x + j * 4, y, z + i * 4 + 3, blockType, blockMeta, 2);
+					world.setBlockState(new BlockPos(x + j * 4, y, z + i * 4 + 1), blockType, 2);
+					world.setBlockState(new BlockPos(x + j * 4, y, z + i * 4 + 2), blockType, 2);
+					world.setBlockState(new BlockPos(x + j * 4, y, z + i * 4 + 3), blockType, 2);
 				}
-			world.setBlock(x + w * 4, y, z + i * 4, blockType, blockMeta, 2);
-			world.setBlock(x + w * 4, y, z + i * 4 + 1, blockType, blockMeta, 2);
-			world.setBlock(x + w * 4, y, z + i * 4 + 2, blockType, blockMeta, 2);
-			world.setBlock(x + w * 4, y, z + i * 4 + 3, blockType, blockMeta, 2);
+			world.setBlockState(new BlockPos(x + w * 4, y, z + i * 4), blockType,  2);
+			world.setBlockState(new BlockPos(x + w * 4, y, z + i * 4 + 1), blockType, 2);
+			world.setBlockState(new BlockPos(x + w * 4, y, z + i * 4 + 2), blockType, 2);
+			world.setBlockState(new BlockPos(x + w * 4, y, z + i * 4 + 3), blockType, 2);
 		}
 		// draw the bottom line
 		for (int j = 0; j <= w * 4; j++)
-			world.setBlock(x + j, y, z + h * 4, blockType, blockMeta, 2);
+			world.setBlockState(new BlockPos(x + j, y, z + h * 4), blockType, 2);
 	}
 
 	public static void breakForceField(World world, int x, int y, int z) {
 		for (int d = 0; d < 4; d++) {
 			for (int wx = 0 + d; wx < 9; wx++) {
-				world.setBlockToAir(x + 11 + wx, y + d, z + 21);
-				world.setBlockToAir(x + 11 + wx, y + d, z + 22);
-				world.setBlockToAir(x + 21, y + d, z + 11 + wx);
-				world.setBlockToAir(x + 22, y + d, z + 11 + wx);
-				world.setBlockToAir(x + 21, y + d, z + 32 - wx);
-				world.setBlockToAir(x + 22, y + d, z + 32 - wx);
-				world.setBlockToAir(x + 32 - wx, y + d, z + 21);
-				world.setBlockToAir(x + 32 - wx, y + d, z + 22);
+				world.setBlockToAir(new BlockPos(x + 11 + wx, y + d, z + 21));
+				world.setBlockToAir(new BlockPos(x + 11 + wx, y + d, z + 22));
+				world.setBlockToAir(new BlockPos(x + 21, y + d, z + 11 + wx));
+				world.setBlockToAir(new BlockPos(x + 22, y + d, z + 11 + wx));
+				world.setBlockToAir(new BlockPos(x + 21, y + d, z + 32 - wx));
+				world.setBlockToAir(new BlockPos(x + 22, y + d, z + 32 - wx));
+				world.setBlockToAir(new BlockPos(x + 32 - wx, y + d, z + 21));
+				world.setBlockToAir(new BlockPos(x + 32 - wx, y + d, z + 22));
 			}
 			for (int dx = x + 20; dx < x + 24; dx++)
 				for (int dz = z + 20; dz < z + 24; dz++)
-					if (!world.isAirBlock(dx, y + d, dz)) {
-						world.playAuxSFXAtEntity(null, 2001, dx, y + d, dz, Block.getIdFromBlock(world.getBlock(dx, y + d, dz)));
-						world.setBlockToAir(dx, y + d, dz);
+					if (!world.isAirBlock(new BlockPos(dx, y + d, dz))) {
+						world.playEvent(null, 2001, new BlockPos(dx, y + d, dz), Block.getIdFromBlock(ModBlocks.FORCE_FIELD));
+						world.setBlockToAir(new BlockPos(dx, y + d, dz));
 					}
 		}
-		world.setBlock(x + 20, y, z + 20, ModBlocks.BAMBOO_TORCH, 0, 3);
-		world.setBlock(x + 20, y + 1, z + 20, ModBlocks.BAMBOO_TORCH, 1, 3);
-		world.setBlock(x + 20, y, z + 23, ModBlocks.BAMBOO_TORCH, 0, 3);
-		world.setBlock(x + 20, y + 1, z + 23, ModBlocks.BAMBOO_TORCH, 1, 3);
-		world.setBlock(x + 23, y, z + 23, ModBlocks.BAMBOO_TORCH, 0, 3);
-		world.setBlock(x + 23, y + 1, z + 23, ModBlocks.BAMBOO_TORCH, 1, 3);
-		world.setBlock(x + 23, y, z + 20, ModBlocks.BAMBOO_TORCH, 0, 3);
-		world.setBlock(x + 23, y + 1, z + 20, ModBlocks.BAMBOO_TORCH, 1, 3);
-		EntityAntlionBoss antlionboss = new EntityAntlionBoss(world);
+		world.setBlockState(new BlockPos(x + 20, y, z + 20), BAMBOO_TORCH_LOWER, 3);
+		world.setBlockState(new BlockPos(x + 20, y + 1, z + 20), BAMBOO_TORCH_UPPER, 3);
+		world.setBlockState(new BlockPos(x + 20, y, z + 23), BAMBOO_TORCH_LOWER, 3);
+		world.setBlockState(new BlockPos(x + 20, y + 1, z + 23), BAMBOO_TORCH_UPPER, 3);
+		world.setBlockState(new BlockPos(x + 23, y, z + 23), BAMBOO_TORCH_LOWER, 3);
+		world.setBlockState(new BlockPos(x + 23, y + 1, z + 23), BAMBOO_TORCH_UPPER, 3);
+		world.setBlockState(new BlockPos(x + 23, y, z + 20), BAMBOO_TORCH_LOWER, 3);
+		world.setBlockState(new BlockPos(x + 23, y + 1, z + 20), BAMBOO_TORCH_UPPER, 3);
+		
+		System.out.println("ANTLION OVERLORD SUMMONED HERE!");
+		
+	/*	EntityAntlionBoss antlionboss = new EntityAntlionBoss(world);
 		antlionboss.setPosition(x + 21, y - 8, z + 21);
 		antlionboss.setInPyramid((byte) 1);
 		antlionboss.setSpawnPoint(x + 21, y - 8, z + 21);
 		world.spawnEntity(antlionboss);
+	*/
 	}
 }
