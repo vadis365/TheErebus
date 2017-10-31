@@ -8,6 +8,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.block.bamboo.BlockBambooTorch;
 import erebus.block.bamboo.BlockBambooTorch.EnumBlockTorchHalf;
+import erebus.blocks.BlockBones;
 import erebus.blocks.BlockCapstone;
 import erebus.blocks.BlockCapstone.EnumCapstoneType;
 import erebus.blocks.BlockGneiss;
@@ -21,6 +22,7 @@ import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.items.ItemErebusFood.EnumFoodType;
 import erebus.items.ItemMaterials;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import erebus.tileentity.TileEntityBones;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.world.feature.util.MazeGenerator;
 import erebus.world.feature.util.PerfectMazeGenerator;
@@ -99,8 +101,8 @@ public class AntlionMazeDungeon {
 			new LootItemStack(ModItems.CABBAGE_SEEDS).setAmount(1, 3).setWeight(2),
 			//new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1),
 			new LootItemStack(ModItems.LIFE_BLOOD).setAmount(1, 2).setWeight(4),
-			/*new LootItemStack(ModItems.rolledNewspaper).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
+			new LootItemStack(ModItems.ROLLED_NEWSPAPER).setAmount(1).setWeight(1),
+			/*new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
 			new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
 			new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1),
 			new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1),
@@ -156,7 +158,7 @@ public class AntlionMazeDungeon {
 			switch ((yy - y) % 4) {
 				case 0:
 					buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-					buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
+					//buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
 					break;
 				case 1:
 					buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
@@ -427,7 +429,7 @@ public class AntlionMazeDungeon {
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, EnumFacing.SOUTH, rand);
 						else if (rand.nextInt(6) == 0)
-							placeBones(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, 3, rand);
+							placeBones(world, x + 1 + j * 4, y - 1, z + 1 + i * 4, EnumFacing.SOUTH, rand);
 					} else if (rand.nextInt(10) == 0)
 						if (rand.nextBoolean())
 							world.setBlockState(new BlockPos(x + 2 + j * 4, y - 2, z + 2 + i * 4), ANTLION_SPAWNER);
@@ -440,7 +442,7 @@ public class AntlionMazeDungeon {
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, EnumFacing.EAST, rand);
 						else if (rand.nextInt(6) == 0)
-							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, 5, rand);
+							placeBones(world, x + 1 + j * 4, y - 1, z + 2 + i * 4, EnumFacing.EAST, rand);
 					}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 4) == 0)
@@ -449,7 +451,7 @@ public class AntlionMazeDungeon {
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, EnumFacing.WEST, rand);
 						else if (rand.nextInt(6) == 0)
-							placeBones(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, 4, rand);
+							placeBones(world, x + 3 + j * 4, y - 1, z + 2 + i * 4, EnumFacing.WEST, rand);
 					}
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 2) == 0)
@@ -458,7 +460,7 @@ public class AntlionMazeDungeon {
 						if (rand.nextInt(4) == 0)
 							placeChest(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, EnumFacing.NORTH, rand);
 						else if (rand.nextInt(6) == 0)
-							placeBones(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, 2, rand);
+							placeBones(world, x + 2 + j * 4, y - 1, z + 3 + i * 4, EnumFacing.NORTH, rand);
 					}
 		}
 	}
@@ -470,12 +472,12 @@ public class AntlionMazeDungeon {
 			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
 	}
 
-	private void placeBones(World world, int x, int y, int z, int directionMeta, Random rand) {
-		/*world.setBlock(x, y, z, ModBlocks.bones, directionMeta, 2);
-		TileEntityBones bones = (TileEntityBones) world.getTileEntity(x, y, z);
+	private void placeBones(World world, int x, int y, int z, EnumFacing facing, Random rand) {
+		world.setBlockState(new BlockPos(x, y, z), ModBlocks.BLOCK_OF_BONES.getDefaultState().withProperty(BlockBones.FACING, facing), 2);
+		TileEntityBones bones = (TileEntityBones) world.getTileEntity(new BlockPos(x, y, z));
 		if (bones != null)
 			LootUtil.generateLoot(bones, rand, chestLoot, 3, 10);
-			*/
+			
 	}
 
 	private boolean canPlaceFeatureAt(World world, int x, int y, int z, int featureX, int featureY, int featureZ) {

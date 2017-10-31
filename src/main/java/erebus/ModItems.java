@@ -35,6 +35,7 @@ import erebus.items.ItemLeggingsSprint;
 import erebus.items.ItemMaterials;
 import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
+import erebus.items.ItemRolledNewspaper;
 import erebus.items.ItemSpiderTShirt;
 import erebus.items.ItemWandOfAnimation;
 import erebus.items.ItemWoodlouseBall;
@@ -129,6 +130,7 @@ public class ModItems {
 	public static final Item ANTI_VENOM_BOTTLE = new ItemAntiVenomBottle();
 	public static final Item FLOWER_SEED = new ItemFlowerSeeds();
 	public static final Item DEATH_COMPASS = new ItemDeathCompass();
+	public static final Item ROLLED_NEWSPAPER = new ItemRolledNewspaper();
 
 	public static void init() {
 		try {

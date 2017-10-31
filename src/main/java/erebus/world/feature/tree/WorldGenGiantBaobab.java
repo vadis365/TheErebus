@@ -38,9 +38,32 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		leaves = EnumWood.BAOBAB.getLeaves();
 	}
 
-	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] { new LootItemStack(Items.BOW).setWeight(1), new LootItemStack(Items.ARROW).setAmount(3, 10).setWeight(18), new LootItemStack(Items.BOOK).setAmount(1, 4).setWeight(18), new LootItemStack(Items.PAPER).setAmount(2, 6).setWeight(16), new LootItemStack(Blocks.WEB).setAmount(2, 7).setWeight(13), new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.JADE.ordinal()).setWeight(10), new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9), new LootItemStack(Items.ENCHANTED_BOOK).setWeight(8),/* new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),*/ new LootItemStack(Items.GOLDEN_PICKAXE).setWeight(3), new LootItemStack(Items.IRON_PICKAXE).setWeight(2),
-			new LootItemStack(ModItems.JADE_PICKAXE).setWeight(1), new LootItemStack(Items.STONE_PICKAXE).setWeight(1), new LootItemStack(Items.GOLDEN_SHOVEL).setWeight(3), new LootItemStack(Items.IRON_SHOVEL).setWeight(2), new LootItemStack(ModItems.JADE_SHOVEL).setWeight(1), new LootItemStack(Items.STONE_SHOVEL).setWeight(1), new LootItemStack(Items.GOLDEN_AXE).setWeight(3), new LootItemStack(Items.IRON_AXE).setWeight(2), new LootItemStack(ModItems.JADE_AXE).setWeight(1), new LootItemStack(Items.STONE_AXE).setWeight(1), new LootItemStack(Items.GOLDEN_SWORD).setWeight(3), new LootItemStack(Items.IRON_SWORD).setWeight(2), new LootItemStack(ModItems.JADE_SWORD).setWeight(1), new LootItemStack(Items.STONE_SWORD).setWeight(1), new LootItemStack(Items.IRON_CHESTPLATE).setWeight(2),
-			new LootItemStack(ModItems.JADE_CHESTPLATE).setWeight(1), new LootItemStack(Items.GOLDEN_CHESTPLATE).setWeight(1), new LootItemStack(Items.IRON_HELMET).setWeight(2), new LootItemStack(ModItems.JADE_HELMET).setWeight(1), new LootItemStack(Items.GOLDEN_HELMET).setWeight(1), new LootItemStack(Items.IRON_LEGGINGS).setWeight(2), new LootItemStack(ModItems.JADE_LEGGINGS).setWeight(1), new LootItemStack(Items.GOLDEN_LEGGINGS).setWeight(1), new LootItemStack(Items.IRON_BOOTS).setWeight(2), new LootItemStack(ModItems.JADE_BOOTS).setWeight(1), new LootItemStack(Items.GOLDEN_BOOTS).setWeight(1) }).setPostProcessor(new IPostProcess() {
+	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] {
+			new LootItemStack(Items.BOW).setWeight(1), new LootItemStack(Items.ARROW).setAmount(3, 10).setWeight(18),
+			new LootItemStack(Items.BOOK).setAmount(1, 4).setWeight(18),
+			new LootItemStack(Items.PAPER).setAmount(2, 6).setWeight(16),
+			new LootItemStack(Blocks.WEB).setAmount(2, 7).setWeight(13),
+			new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.JADE.ordinal()).setWeight(10),
+			new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9),
+			new LootItemStack(Items.ENCHANTED_BOOK).setWeight(8),
+			/*
+			 * new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new
+			 * LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
+			 */ new LootItemStack(Items.GOLDEN_PICKAXE).setWeight(3),
+			new LootItemStack(Items.IRON_PICKAXE).setWeight(2), new LootItemStack(ModItems.JADE_PICKAXE).setWeight(1),
+			new LootItemStack(Items.STONE_PICKAXE).setWeight(1), new LootItemStack(Items.GOLDEN_SHOVEL).setWeight(3),
+			new LootItemStack(Items.IRON_SHOVEL).setWeight(2), new LootItemStack(ModItems.JADE_SHOVEL).setWeight(1),
+			new LootItemStack(Items.STONE_SHOVEL).setWeight(1), new LootItemStack(Items.GOLDEN_AXE).setWeight(3),
+			new LootItemStack(Items.IRON_AXE).setWeight(2), new LootItemStack(ModItems.JADE_AXE).setWeight(1),
+			new LootItemStack(Items.STONE_AXE).setWeight(1), new LootItemStack(Items.GOLDEN_SWORD).setWeight(3),
+			new LootItemStack(Items.IRON_SWORD).setWeight(2), new LootItemStack(ModItems.JADE_SWORD).setWeight(1),
+			new LootItemStack(Items.STONE_SWORD).setWeight(1), new LootItemStack(Items.IRON_CHESTPLATE).setWeight(2),
+			new LootItemStack(ModItems.JADE_CHESTPLATE).setWeight(1),
+			new LootItemStack(Items.GOLDEN_CHESTPLATE).setWeight(1), new LootItemStack(Items.IRON_HELMET).setWeight(2),
+			new LootItemStack(ModItems.JADE_HELMET).setWeight(1), new LootItemStack(Items.GOLDEN_HELMET).setWeight(1),
+			new LootItemStack(Items.IRON_LEGGINGS).setWeight(2), new LootItemStack(ModItems.JADE_LEGGINGS).setWeight(1),
+			new LootItemStack(Items.GOLDEN_LEGGINGS).setWeight(1), new LootItemStack(Items.IRON_BOOTS).setWeight(2),
+			new LootItemStack(ModItems.JADE_BOOTS).setWeight(1), new LootItemStack(Items.GOLDEN_BOOTS).setWeight(1) }).setPostProcessor(new IPostProcess() {
 
 		@SuppressWarnings("rawtypes")
 		@Override
