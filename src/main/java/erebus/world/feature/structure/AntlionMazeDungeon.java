@@ -45,7 +45,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-
+// 1691502390890771781
+// X: 272 Y: 18 Z: 576 // 272 36 576
 public class AntlionMazeDungeon {
 	private IBlockState GNEISS = ModBlocks.GNEISS.getDefaultState();
 	private IBlockState GNEISS_RELIEF = ModBlocks.GNEISS.getDefaultState().withProperty(BlockGneiss.TYPE, EnumGneissType.GNEISS_RELIEF);
@@ -133,7 +134,8 @@ public class AntlionMazeDungeon {
 	public void generateSurface(World world, Random rand, int chunkX, int chunkY, int chunkZ) {
 		Biome biomeBase = world.getBiome(new BlockPos(chunkX, chunkY, chunkZ));
 		if (biomeBase == ModBiomes.VOLCANIC_DESERT)
-			generate(world, rand, chunkX, chunkY, chunkZ);
+			if(world.isBlockLoaded(new BlockPos(chunkX, chunkY, chunkZ)) && world.getBlockState(new BlockPos(chunkX, chunkY, chunkZ)).getBlock() != ModBlocks.GNEISS)
+				generate(world, rand, chunkX, chunkY, chunkZ);
 	}
 
 	public void generate(World world, Random rand, int x, int y, int z) {
@@ -170,7 +172,7 @@ public class AntlionMazeDungeon {
 		addTeleporters(world, x + sizeX / 2 + 8, y - 6, z + sizeZ / 2 + 8);
 		addCapstones(world, x + sizeX - 1, y + 15, z + sizeZ - 1);
 		spawnIdolGuardians(world, x, y, z);
-		// System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
+		System.out.println("Generated Maze At: X: " + x + " Y: " + y + " Z: " + z);
 	}
 
 	private void createAir(World world, int x, int y, int z, int w, int h, Random rand) {

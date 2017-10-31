@@ -118,7 +118,7 @@ public class WorldGenAntlionLair extends WorldGenerator {
 		antlion.setLocationAndAngles(x, y - 5, z, rand.nextFloat() * 360F, 0F);
 		antlion.forceSpawn = true;
 		world.spawnEntity(antlion);
-		System.out.println("Antlion Lair Generated: " + pos);
+		//System.out.println("Antlion Lair Generated: " + pos);
 		return true;
 	}
 }

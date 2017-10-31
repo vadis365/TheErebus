@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import erebus.Erebus;
-import erebus.network.server.PacketAntiVenom;
+import erebus.network.client.PacketAntiVenom;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;

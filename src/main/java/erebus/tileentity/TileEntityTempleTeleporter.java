@@ -94,16 +94,17 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 	}
 
     public void markForUpdate() {
-        IBlockState state = this.getWorld().getBlockState(this.getPos());
-        if(state != null)
-        	getWorld().notifyBlockUpdate(getPos(), state, state, 2);
+    	if (this != null && !getWorld().isRemote) {
+			final IBlockState state = getWorld().getBlockState(getPos());
+			getWorld().notifyBlockUpdate(getPos(), state, state, 8);
+			markDirty();
+    	}
     }
 
 	public void setTargetDestination(int x, int y, int z) {
 		targetX = x;
 		targetY = y;
 		targetZ = z;
-		markForUpdate();
 	}
 
 	public int getTargetX() {
@@ -143,11 +144,14 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
-		return new SPacketUpdateTileEntity(pos, 0, nbt);
+		return new SPacketUpdateTileEntity(getPos(), 0, nbt);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+		super.onDataPacket(net, packet);
 		readFromNBT(packet.getNbtCompound());
+		markForUpdate();
+		return;
 	}
 }

@@ -5,13 +5,17 @@ import erebus.client.gui.GuiAntiVenomBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
+import erebus.core.capabilities.base.EntityCapabilityHandler;
 import erebus.core.handler.AntiVenomDurationHandler;
+import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
+import erebus.network.client.MessageSyncEntityCapabilities;
+import erebus.network.client.PacketAntiVenom;
+import erebus.network.client.PacketBones;
 import erebus.network.client.PacketParticle;
 import erebus.network.server.ColossalCratePage;
-import erebus.network.server.PacketAntiVenom;
 import erebus.network.server.PacketBeetleDig;
 import erebus.network.server.PacketBeetleRamAttack;
 import erebus.network.server.PacketGlider;
@@ -84,6 +88,13 @@ public class Erebus {
 		NETWORK_WRAPPER.registerMessage(PacketAntiVenom.class, PacketAntiVenom.class, 4, Side.CLIENT);
 		NETWORK_WRAPPER.registerMessage(PacketGlider.class, PacketGlider.class, 5, Side.SERVER);
 		NETWORK_WRAPPER.registerMessage(PacketGliderPowered.class, PacketGliderPowered.class, 6, Side.SERVER);
+		NETWORK_WRAPPER.registerMessage(PacketBones.class, PacketBones.class, 7, Side.CLIENT);
+		NETWORK_WRAPPER.registerMessage(MessageSyncEntityCapabilities.class, MessageSyncEntityCapabilities.class, 5, Side.CLIENT);
+	
+	
+		MinecraftForge.EVENT_BUS.register(EntityCapabilityHandler.class);
+		//EntityCapabilityHandler.registerEntityCapability(new BossBarPlayerCapability());
+		EntityCapabilityHandler.registerCapabilities();
 	}
 
 	@EventHandler
@@ -95,6 +106,11 @@ public class Erebus {
         MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
 		MinecraftForge.EVENT_BUS.register(SpawnerErebus.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(new AntiVenomDurationHandler());
+		if (ConfigHandler.INSTANCE.graveMarker) {
+			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
+			//MinecraftForge.EVENT_BUS.register(new EntityConstructingEvent());
+			//MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
+		}
 		PROXY.registerItemAndBlockColourRenderers();
 	}
 

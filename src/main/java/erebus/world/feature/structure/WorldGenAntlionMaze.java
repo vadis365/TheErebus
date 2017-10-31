@@ -1,12 +1,12 @@
 package erebus.world.feature.structure;
 
-import net.minecraftforge.fml.common.IWorldGenerator;
+import java.util.Random;
+
 import erebus.core.handler.configs.ConfigHandler;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-
-import java.util.Random;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenAntlionMaze implements IWorldGenerator {
 
@@ -21,7 +21,7 @@ public class WorldGenAntlionMaze implements IWorldGenerator {
 		int chunkX = x;
 		int chunkZ = z;
 		int chunkY = 18;
-		if (random.nextInt(1024) == 0)
+		if (random.nextInt(ConfigHandler.INSTANCE.antlionMazeFrequency) == 0)
 			maze.generateSurface(world, random, chunkX, chunkY, chunkZ);
 	}
 }

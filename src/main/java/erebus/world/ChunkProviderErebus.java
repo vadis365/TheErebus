@@ -7,6 +7,7 @@ import erebus.ModBiomes;
 import erebus.ModBlocks;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
+import erebus.world.feature.structure.WorldGenAntlionMaze;
 import erebus.world.feature.structure.WorldGenSpiderDungeons;
 import erebus.world.structure.MapGenErebusCaves;
 import erebus.world.structure.MapGenErebusRavine;
@@ -21,6 +22,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
@@ -29,7 +31,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
-public class ChunkProviderErebus implements IChunkGenerator {
+public class ChunkProviderErebus implements IChunkGenerator, IChunkProvider {
 
 	private final World worldObj;
 
@@ -411,14 +413,13 @@ public class ChunkProviderErebus implements IChunkGenerator {
 
 		for (int attempt = 0; attempt < 14; ++attempt)
 			new WorldGenSpiderDungeons().generate(worldObj, rand, new BlockPos(blockCoord.getX() + rand.nextInt(16) + 8, rand.nextInt(128), blockCoord.getZ() + rand.nextInt(16) + 8));
-
+		new WorldGenAntlionMaze().generate(rand, x, z, worldObj, this, this);
 		BlockFalling.fallInstantly = false;
 	}
 
 	@Override
 	public boolean generateStructures(Chunk chunkIn, int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return false; 
 	}
 
 	@Override
@@ -441,6 +442,35 @@ public class ChunkProviderErebus implements IChunkGenerator {
 
 	@Override
 	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Chunk getLoadedChunk(int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Chunk provideChunk(int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean tick() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String makeString() {
+		return "Erebus";
+	}
+
+	@Override
+	public boolean isChunkGeneratedAt(int x, int z) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -1,4 +1,4 @@
-package erebus.network.server;
+package erebus.network.client;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;

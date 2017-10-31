@@ -126,7 +126,7 @@ public class EntityVelvetWorm extends EntityMob {
 				setInflateSize(0);
 				EntityGooBall gooBall = new EntityGooBall(getEntityWorld(), this);
 				gooBall.posY = posY + height + 0.3D;
-				gooBall.setThrowableHeading(targetX, targetY, targetZ, 1.0F, 0.0F);
+				gooBall.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 				getEntityWorld().spawnEntity(gooBall);
 			}
 	}

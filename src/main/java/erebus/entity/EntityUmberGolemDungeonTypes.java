@@ -178,23 +178,26 @@ public class EntityUmberGolemDungeonTypes extends EntityMob implements IEntityAd
 	@Override
 	protected void updateAITasks() {
 		super.updateAITasks();
-		bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-		switch (getType()) {
-		case 0:
-			bossInfo.setColor(BossInfo.Color.RED);
-			break;
-		case 1:
-			bossInfo.setColor(BossInfo.Color.WHITE);
-			break;
-		case 2:
-			bossInfo.setColor(BossInfo.Color.YELLOW);
-			break;
-		case 3:
-			bossInfo.setColor(BossInfo.Color.GREEN);
-			break;
-		default:
-			bossInfo.setColor(BossInfo.Color.GREEN);
-			break;
+
+		if (!getEntityWorld().isRemote) {
+			bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+			switch (getType()) {
+			case 0:
+				bossInfo.setColor(BossInfo.Color.RED);
+				break;
+			case 1:
+				bossInfo.setColor(BossInfo.Color.WHITE);
+				break;
+			case 2:
+				bossInfo.setColor(BossInfo.Color.YELLOW);
+				break;
+			case 3:
+				bossInfo.setColor(BossInfo.Color.GREEN);
+				break;
+			default:
+				bossInfo.setColor(BossInfo.Color.GREEN);
+				break;
+			}
 		}
 	}
 

@@ -1,12 +1,13 @@
 package erebus.tileentity;
 
-import erebus.network.AbstractPacket;
-import erebus.network.PacketPipeline;
+import erebus.Erebus;
 import erebus.network.client.PacketBones;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.EnumFacing;
 
 public class TileEntityBones extends TileEntityBasicInventory {
 
@@ -18,45 +19,44 @@ public class TileEntityBones extends TileEntityBasicInventory {
 		super(86, "container.bones");
 	}
 
-	@Override
-	public boolean canUpdate() {
-		return false;
-	}
-
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
-		if (allowInsertion)
-			return super.getAccessibleSlotsFromSide(side);
-		return new int[0];
-	}
-
 	public void setOwner(String name) {
 		owner = name;
-		if (!worldObj.isRemote)
-			PacketPipeline.sendToAll(getPacket());
+		if (!getWorld().isRemote)
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketBones(getPos().getX(), getPos().getY(), getPos().getZ(), name));
 	}
 
 	public String getOwnerName() {
 		return owner;
 	}
 
-	public AbstractPacket getPacket() {
-		return new PacketBones(xCoord, yCoord, zCoord, owner);
-	}
+    public void markForUpdate() {
+    	if (this != null && !getWorld().isRemote) {
+			final IBlockState state = getWorld().getBlockState(getPos());
+			getWorld().notifyBlockUpdate(getPos(), state, state, 8);
+			markDirty();
+    	}
+    }
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+		return new SPacketUpdateTileEntity(getPos(), 0, nbt);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-		NBTTagCompound nbt = packet.func_148857_g();
-		if (packet.func_148853_f() == 0)
-			readFromNBT(nbt);
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+		super.onDataPacket(net, packet);
+		readFromNBT(packet.getNbtCompound());
+		markForUpdate();
+		return;
 	}
+
+	@Override
+    public NBTTagCompound getUpdateTag() {
+		NBTTagCompound nbt = new NBTTagCompound();
+        return writeToNBT(nbt);
+    }
 
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
@@ -65,8 +65,40 @@ public class TileEntityBones extends TileEntityBasicInventory {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound data) {
+	public NBTTagCompound writeToNBT(NBTTagCompound data) {
 		super.writeToNBT(data);
 		data.setString("owner", owner);
+		return data;
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		if (allowInsertion) {
+			int[] SLOTS = new int[getSizeInventory()];
+			for (int index = 0; index < SLOTS.length; index++)
+				SLOTS[index] = index;
+			return SLOTS;
+		}
+		return new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		return true;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		return true;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		return null;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		return true;
 	}
 }

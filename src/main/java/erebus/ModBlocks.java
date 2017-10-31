@@ -25,6 +25,7 @@ import erebus.blocks.BlockAmber;
 import erebus.blocks.BlockAnthillBlock;
 import erebus.blocks.BlockAntlionSpawner;
 import erebus.blocks.BlockBerryBush;
+import erebus.blocks.BlockBones;
 import erebus.blocks.BlockBossEgg;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockCapstone;
@@ -247,6 +248,7 @@ public class ModBlocks {
 	public static final Block FORCE_LOCK = new BlockForceLock();
 	public static final Block TEMPLE_BRICK_UNBREAKING = new BlockTempleBrickUnbreaking();
 	public static final Block TEMPLE_TELEPORTER = new BlockTempleTeleporter();
+	public static final Block BLOCK_OF_BONES = new BlockBones();
 
 	// WALLS
 	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));

@@ -72,6 +72,7 @@ import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.tile.TileEntityBambooBridgeRenderer;
+import erebus.client.render.tile.TileEntityBoneBlockRenderer;
 import erebus.client.render.tile.TileEntityErebusAltarHealingRenderer;
 import erebus.client.render.tile.TileEntityErebusAltarLightningRenderer;
 import erebus.client.render.tile.TileEntityErebusAltarRenderer;
@@ -142,6 +143,7 @@ import erebus.inventory.ContainerHoneyComb;
 import erebus.inventory.ContainerSilo;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
+import erebus.tileentity.TileEntityBones;
 import erebus.tileentity.TileEntityComposter;
 import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarHealing;
@@ -206,6 +208,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarHealing.class, new TileEntityErebusAltarHealingRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarXP.class, new TileEntityErebusAltarXPRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarRepair.class, new TileEntityErebusAltarRepairRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBones.class, new TileEntityBoneBlockRenderer());
 	}
 
 	@Override
@@ -287,6 +290,7 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_HEALING), 0,TileEntityErebusAltarHealing.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_XP), 0,TileEntityErebusAltarXP.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_REPAIR), 0,TileEntityErebusAltarRepair.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BLOCK_OF_BONES), 0, TileEntityBones.class);
 
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	

@@ -18,6 +18,7 @@ import erebus.items.ItemArmorWaterStriders;
 import erebus.items.ItemAxeJade;
 import erebus.items.ItemBootsJump;
 import erebus.items.ItemCompoundGoggles;
+import erebus.items.ItemDeathCompass;
 import erebus.items.ItemDungeonIdols;
 import erebus.items.ItemErebusFood;
 import erebus.items.ItemErebusShield;
@@ -127,6 +128,7 @@ public class ModItems {
 	public static final Item WAND_OF_ANIMATION = new ItemWandOfAnimation();
 	public static final Item ANTI_VENOM_BOTTLE = new ItemAntiVenomBottle();
 	public static final Item FLOWER_SEED = new ItemFlowerSeeds();
+	public static final Item DEATH_COMPASS = new ItemDeathCompass();
 
 	public static void init() {
 		try {
