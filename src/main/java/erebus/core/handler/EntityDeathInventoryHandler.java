@@ -4,6 +4,8 @@ import java.util.List;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockBones;
+import erebus.core.capabilities.player.IPlayerDeathLocationCapability;
+import erebus.core.capabilities.player.PlayerDeathLocationCapability;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityBones;
 import net.minecraft.entity.item.EntityItem;
@@ -30,7 +32,7 @@ public class EntityDeathInventoryHandler {
 
 		if (event.getEntityLiving() instanceof EntityPlayer && !world.getGameRules().getBoolean("keepInventory")) {
 			final EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			//ErebusExtendedPlayerProperties playerProps = ErebusExtendedPlayerProperties.get(player);
+			IPlayerDeathLocationCapability cap = player.getCapability(PlayerDeathLocationCapability.CAPABILITY_PLAYER_DEATH_LOCATION, null);
 			BlockPos pos = player.getPosition().up();
 			BlockPos posBones = player.getPosition();
 			EnumFacing playerFacing = player.getHorizontalFacing();
@@ -42,11 +44,11 @@ public class EntityDeathInventoryHandler {
 				}
 
 			world.setBlockState(posBones, ModBlocks.BLOCK_OF_BONES.getDefaultState().withProperty(BlockBones.FACING, playerFacing), 3);
-		//	playerProps.setDimension(player.world.provider.getDimension());
-		//	playerProps.setXLocation(x);
-		//	playerProps.setZLocation(z);
-		//	NBTTagCompound playerData = new NBTTagCompound();
-		//	playerProps.saveNBTData(playerData);
+			cap.setGraveDimension(player.world.provider.getDimension());
+			cap.setGraveDimensionName(player.world.provider.getDimensionType().getName());
+			cap.setGraveLocationX(posBones.getX());
+			cap.setGraveLocationZ(posBones.getZ());
+
 			TileEntityBones tile = Utils.getTileEntity(world, new BlockPos(posBones), TileEntityBones.class);
 			if (tile != null) {
 				int index = 0;

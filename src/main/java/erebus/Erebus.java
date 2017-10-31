@@ -6,7 +6,9 @@ import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.capabilities.base.EntityCapabilityHandler;
+import erebus.core.capabilities.player.PlayerDeathLocationCapability;
 import erebus.core.handler.AntiVenomDurationHandler;
+import erebus.core.handler.DeathCompassRespawnEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
@@ -93,7 +95,7 @@ public class Erebus {
 	
 	
 		MinecraftForge.EVENT_BUS.register(EntityCapabilityHandler.class);
-		//EntityCapabilityHandler.registerEntityCapability(new BossBarPlayerCapability());
+		EntityCapabilityHandler.registerEntityCapability(new PlayerDeathLocationCapability());
 		EntityCapabilityHandler.registerCapabilities();
 	}
 
@@ -108,8 +110,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(new AntiVenomDurationHandler());
 		if (ConfigHandler.INSTANCE.graveMarker) {
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
-			//MinecraftForge.EVENT_BUS.register(new EntityConstructingEvent());
-			//MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
+			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
 		}
 		PROXY.registerItemAndBlockColourRenderers();
 	}

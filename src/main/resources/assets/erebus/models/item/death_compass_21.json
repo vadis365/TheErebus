@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "items/erebus:death_compass_21"
+        "layer0": "erebus:items/death_compass_21"
     }
 }

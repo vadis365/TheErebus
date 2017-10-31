@@ -141,7 +141,7 @@ item.erebus.glider_chestplate.name=Glider Chestplate
 #Shields
 item.erebus.bamboo_shield.name=Bamboo Shield
 item.erebus.exoskeleton_shield.name=Exoskeleton Shield
-item.erebus.jade_shield.name=Bamboo Shield
+item.erebus.jade_shield.name=Jade Shield
 item.erebus.rein_exoskeleton_shield.name=Reinforced Exoskeleton Shield
 item.erebus.rhino_exoskeleton_shield.name=Rhino Plate Shield
 
@@ -151,6 +151,7 @@ item.erebus.woodlouse_ball.name=Woodlouse Ball
 item.erebus.nectar_collector.name=Nectar Collector
 item.erebus.ant_taming_amulet.name=Ant Taming Amulet
 item.erebus.anti_venom_bottle.name=Bottle of Anti-Venom
+item.erebus.death_compass.name=Death Compass
 
 # Plants
 item.erebus.turnip.name=Turnips
@@ -458,6 +459,7 @@ tile.erebus.mud_brick.name=Mud Brick
 tile.erebus.rein_exo.name=Reinforced Exo Blocks
 tile.erebus.velocity_block.name=Velocity Block
 tile.erebus.lightning_speed_block.name=Lightning Velocity Block
+tile.erebus.block_of_bones.name=Block O' Bones
 
 #Spawners
 tile.erebus.antlion_spawner.name=Antlion Spawner
