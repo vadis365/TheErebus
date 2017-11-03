@@ -38,6 +38,7 @@ import erebus.items.ItemPickaxeJade;
 import erebus.items.ItemRolledNewspaper;
 import erebus.items.ItemSpiderTShirt;
 import erebus.items.ItemWandOfAnimation;
+import erebus.items.ItemWaspSword;
 import erebus.items.ItemWoodlouseBall;
 import erebus.items.ShieldTypeBasic;
 import erebus.lib.Reference;
@@ -114,12 +115,17 @@ public class ModItems {
 	public static final Item MUSHROOM_HELMET = new ItemHelmMushroom(EntityEquipmentSlot.HEAD);
 	public static final Item SPIDER_T_SHIRT = new ItemSpiderTShirt(EntityEquipmentSlot.CHEST);
 	public static final Item WATER_STRIDERS = new ItemArmorWaterStriders(EntityEquipmentSlot.FEET);
-	
+
+	// SHIELDS
 	public static final ItemErebusShield BAMBOO_SHIELD = new ItemErebusShield();
 	public static final ItemErebusShield EXOSKELETON_SHIELD = new ItemErebusShield();
 	public static final ItemErebusShield JADE_SHIELD = new ItemErebusShield();
 	public static final ItemErebusShield REIN_EXOSKELETON_SHIELD = new ItemErebusShield();
 	public static final ItemErebusShield RHINO_EXOSKELETON_SHIELD = new ItemErebusShield();
+	
+	// MISC WEAPONS
+	public static final Item ROLLED_NEWSPAPER = new ItemRolledNewspaper();
+	public static final ItemWaspSword WASP_SWORD = new ItemWaspSword();
 
 	// RANDOM STUFF
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();
@@ -130,7 +136,6 @@ public class ModItems {
 	public static final Item ANTI_VENOM_BOTTLE = new ItemAntiVenomBottle();
 	public static final Item FLOWER_SEED = new ItemFlowerSeeds();
 	public static final Item DEATH_COMPASS = new ItemDeathCompass();
-	public static final Item ROLLED_NEWSPAPER = new ItemRolledNewspaper();
 
 	public static void init() {
 		try {

@@ -1,11 +1,10 @@
 package erebus.client.model.item;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelWandOfAnimation extends ModelBase {
@@ -90,21 +89,21 @@ public class ModelWandOfAnimation extends ModelBase {
 			up = false;
 
 		Shaft.render(unitPixel);
-		GL11.glRotatef(tick, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(tick, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
-		GL11.glPushMatrix();
-		GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
-		GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
-		GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(270.0F, 0.0F, 1.0F, 0.0F);
 		TopR3.render(unitPixel);
 
-		GL11.glTranslatef(0f, -0.29f + (up ? tick / 360 : 1 + 1 - tick / 360) / 10f, 0f);
+		GlStateManager.translate(0f, -0.29f + (up ? tick / 360 : 1 + 1 - tick / 360) / 10f, 0f);
 
-		GL11.glRotatef(-tick * 2, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(-tick * 2, 0.0F, 1.0F, 0.0F);
 		Jewel1.render(unitPixel);
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
