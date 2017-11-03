@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import erebus.ModItems;
 import erebus.ModItems.ISubItemsItem;
+import erebus.ModSounds;
 import erebus.ModTabs;
 import erebus.api.IErebusEnum;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,12 +14,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -75,10 +79,9 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 			EnumFoodType type = EnumFoodType.values()[stack.getItemDamage()];
 			stack.shrink(1);
 			player.getFoodStats().addStats(this, stack);
-			String sound = type == EnumFoodType.CABBAGE ? "erebus:cabbagefart" : "random.burp";
+			SoundEvent sound = type == EnumFoodType.CABBAGE ? ModSounds.CABBAGE_FART : SoundEvents.ENTITY_PLAYER_BURP;
 			float volume = type == EnumFoodType.CABBAGE ? 1 : 0.5F;
-			// TODO fix sounds
-			//world.playSoundAtEntity(player, sound, volume, world.rand.nextFloat() * 0.1F + 0.9F);
+			world.playSound(null, player.getPosition(), sound, SoundCategory.PLAYERS, volume, world.rand.nextFloat() * 0.1F + 0.9F);
 			onFoodEaten(stack, world, player);
 		}
 		return hasContainerItem(stack) ? getContainerItem(stack) : stack;

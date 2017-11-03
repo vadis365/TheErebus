@@ -1,5 +1,7 @@
 package erebus.tileentity;
 
+import java.util.List;
+
 import erebus.ModBlocks;
 import erebus.ModSounds;
 import erebus.blocks.BlockTempleBrickUnbreaking;
@@ -8,8 +10,11 @@ import erebus.blocks.BlockTempleTeleporter.EnumTeleporterType;
 import erebus.core.helper.Utils;
 import erebus.world.feature.structure.AntlionMazeDungeon;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -18,6 +23,7 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -28,7 +34,11 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 
 	@Override
 	public void update() {
-		if (!getWorld().isRemote && getWorld().getBlockState(getPos()).getValue(BlockTempleTeleporter.TYPE).ordinal() < 4) {
+
+		if(getWorld().isRemote)
+			return;
+
+		if (getWorld().getBlockState(getPos()).getValue(BlockTempleTeleporter.TYPE).ordinal() < 4) {
 			int activeCount = 0;
 			for(int offX = -1; offX < 2; ++offX)
 				for(int offZ = -1; offZ < 2; ++offZ) {
@@ -40,7 +50,8 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 			if(activeCount == 8)
 				setAnimationMeta();
 		}
-		if (!getWorld().isRemote) {
+
+		if (getWorld().getBlockState(getPos()).getValue(BlockTempleTeleporter.TYPE).ordinal() == 4) {
 			int activeCount2 = 0;
 			for (int offX = -1; offX < 2; ++offX)
 				for (int offZ = -1; offZ < 2; ++offZ) {
@@ -52,6 +63,32 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 			if (activeCount2 == 8)
 				setDestoyForcefield();
 		}
+
+		if (getWorld().getTotalWorldTime() % 5 == 0 && getWorld().getBlockState(getPos()).getBlock() != null)
+			if (isActiveTeleporter())
+				activateBlock();
+	}
+
+	public boolean isActiveTeleporter() {
+		int type = getWorld().getBlockState(getPos()).getValue(BlockTempleTeleporter.TYPE).ordinal();
+		return type >= 4 && type <= 9;
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected Entity activateBlock() {
+		List<EntityLivingBase> list = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos()).grow(0D, 0.5D, 0D));
+		for (int i = 0; i < list.size(); i++) {
+			Entity entity = list.get(i);
+			if (entity != null) {
+				if (entity instanceof EntityLivingBase) {
+					if (entity.isSneaking())
+						return null;
+					((EntityLivingBase) entity).setPositionAndUpdate(getTargetX() + 0.5D, getTargetY() + 1D, getTargetZ() + 0.5D);
+					world.playSound(null, getPos(), SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				}
+			}
+		}
+		return null;
 	}
 
 	private void setDestoyForcefield() {

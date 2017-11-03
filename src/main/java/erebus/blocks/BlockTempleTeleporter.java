@@ -11,7 +11,6 @@ import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModTabs;
 import erebus.api.IErebusEnum;
-import erebus.core.helper.Utils;
 import erebus.items.block.ItemBlockEnum;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import net.minecraft.block.Block;
@@ -23,15 +22,11 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -48,21 +43,6 @@ public class BlockTempleTeleporter extends Block implements ITileEntityProvider,
 		setResistance(6000000.0F);
 		setCreativeTab(ModTabs.BLOCKS);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumTeleporterType.TEMPLE_TELEPORT_0));
-	}
-
-	@Override
-	   public void onEntityWalk(World world, BlockPos pos, Entity entity) {
-		if (entity.isSneaking())
-			return;
-		IBlockState state = world.getBlockState(pos);
-		EnumTeleporterType type = state.getValue(TYPE);
-		TileEntityTempleTeleporter tile = Utils.getTileEntity(world, pos, TileEntityTempleTeleporter.class);
-		if (!world.isRemote)
-			if (type.ordinal() >= 4 && type.ordinal() <= 9)
-				if (entity instanceof EntityLivingBase && tile != null) {
-					((EntityLivingBase) entity).setPositionAndUpdate(tile.getTargetX() + 0.5D, tile.getTargetY() + 1D, tile.getTargetZ() + 0.5D);
-					world.playSound(null, pos, SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				}
 	}
 
 	@Override
