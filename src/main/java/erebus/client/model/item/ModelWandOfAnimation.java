@@ -80,7 +80,7 @@ public class ModelWandOfAnimation extends ModelBase {
 		TopR3.addChild(TopR5);
 	}
 
-	public void render(float unitPixel) {
+	public void render() {
 		float tick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 		// System.out.println(up);
 		if (tick <= 360)
@@ -88,21 +88,21 @@ public class ModelWandOfAnimation extends ModelBase {
 		if (tick >= 361)
 			up = false;
 
-		Shaft.render(unitPixel);
+		Shaft.render(0.0625F);
 		GlStateManager.rotate(tick, 0.0F, 1.0F, 0.0F);
-		TopR3.render(unitPixel);
+		TopR3.render(0.0625F);
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
-		TopR3.render(unitPixel);
+		TopR3.render(0.0625F);
 		GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
-		TopR3.render(unitPixel);
+		TopR3.render(0.0625F);
 		GlStateManager.rotate(270.0F, 0.0F, 1.0F, 0.0F);
-		TopR3.render(unitPixel);
+		TopR3.render(0.0625F);
 
 		GlStateManager.translate(0f, -0.29f + (up ? tick / 360 : 1 + 1 - tick / 360) / 10f, 0f);
 
 		GlStateManager.rotate(-tick * 2, 0.0F, 1.0F, 0.0F);
-		Jewel1.render(unitPixel);
+		Jewel1.render(0.0625F);
 		GlStateManager.popMatrix();
 	}
 
