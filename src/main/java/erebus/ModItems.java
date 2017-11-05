@@ -41,6 +41,7 @@ import erebus.items.ItemWandOfAnimation;
 import erebus.items.ItemWaspSword;
 import erebus.items.ItemWoodlouseBall;
 import erebus.items.ShieldTypeBasic;
+import erebus.items.bambucket.ItemBambucket;
 import erebus.lib.Reference;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -49,6 +50,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemSeedFood;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -103,6 +105,7 @@ public class ModItems {
 	public static final Item BAMBOO_CHESTPLATE = new ItemArmorBamboo(EntityEquipmentSlot.CHEST);
 	public static final Item BAMBOO_LEGGINGS = new ItemArmorBamboo(EntityEquipmentSlot.LEGS);
 	public static final Item BAMBOO_BOOTS = new ItemArmorBamboo(EntityEquipmentSlot.FEET);
+	public static final Item BAMBUCKET = new ItemBambucket();
 
 	// MISC ARMOR
 	public static final Item REIN_COMPOUND_GOGGLES = new ItemCompoundGoggles(ModMaterials.ARMOR_REIN_EXOSKELETON, EntityEquipmentSlot.HEAD);
@@ -205,6 +208,11 @@ public class ModItems {
 					ModelResourceLocation shield = new ModelResourceLocation("minecraft:shield", "inventory");
 			        ModelLoader.setCustomMeshDefinition(item, stack -> shield);
 			        ModelBakery.registerItemVariants(item, shield);
+				}
+				else if (item instanceof ItemBambucket) {
+					ModelResourceLocation bambucket = new ModelResourceLocation(new ResourceLocation(Reference.MOD_ID, "bambucket"), "inventory");
+			        ModelLoader.setCustomMeshDefinition(item, stack -> bambucket);
+			        ModelBakery.registerItemVariants(item, bambucket);
 				}
 				else {
 					ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));

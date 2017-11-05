@@ -1,0 +1,17 @@
+    {
+        "forge_marker": 1,
+        "variants": {
+            "inventory": {
+                "model": "forge:forgebucket",
+                "textures": {
+                    "base": "erebus:items/bambucket_base",
+                    "fluid": "forge:items/bucket_fluid",
+                    "cover": "erebus:items/bambucket_cover"
+                },
+                "transform": "forge:default-item",
+                "custom": {
+                    "flipGas": true
+                }
+            }
+        }
+    }

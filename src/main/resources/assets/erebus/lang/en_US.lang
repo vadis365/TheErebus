@@ -153,6 +153,8 @@ item.erebus.ant_taming_amulet.name=Ant Taming Amulet
 item.erebus.anti_venom_bottle.name=Bottle of Anti-Venom
 item.erebus.death_compass.name=Death Compass
 item.erebus.rolled_newspaper.name=Rolled up Newspaper
+item.erebus.bambucket.name=Bambucket
+item.erebus.bambucket.filled.name=%s Bambucket
 
 # Plants
 item.erebus.turnip.name=Turnips
@@ -568,6 +570,16 @@ entity.bed_bug.name=Bed Bug
 entity.stag_beetle.name=Stag Beetle
 entity.gas_vent.name=Swamp gas flame
 entity.umber_golem.name=Umbergolem
+
+##########
+# Fluids #
+##########
+
+fluid.honey=Honey
+fluid.beetle_juice=Beetle Juice
+fluid.anti_venom=Anti-Venom
+fluid.milk=Milk
+fluid.formic_acid=Formic Acid
 
 #################
 # CREATIVE TABS #

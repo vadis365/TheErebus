@@ -29,6 +29,7 @@ import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -53,9 +54,14 @@ public class Erebus {
 	public static DimensionType dimensionType;
 	public static SimpleNetworkWrapper NETWORK_WRAPPER;
 
+	static { 
+		FluidRegistry.enableUniversalBucket();
+	} 
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.INSTANCE.loadConfig(event);
+		ModFluids.init();
 		ModItems.init();
 		ModBlocks.init();
 		ModBiomes.init();
@@ -70,6 +76,7 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
 			MinecraftForge.EVENT_BUS.register(new GuiAntiVenomBar());
+			MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);
 		}
 
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);

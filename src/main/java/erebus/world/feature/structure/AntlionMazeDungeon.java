@@ -158,7 +158,7 @@ public class AntlionMazeDungeon {
 			switch ((yy - y) % 4) {
 				case 0:
 					buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-					//buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
+					buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
 					break;
 				case 1:
 					buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
