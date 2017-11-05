@@ -1,4 +1,4 @@
-package erebus.items.bambucket;
+package erebus.items;
 
 import javax.annotation.Nullable;
 
@@ -35,9 +35,6 @@ import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.ItemHandlerHelper;
-
-// @author Choonster - because he's awesome (with some Erebus stuff too)
-// using this implementation for now in order to make things work initially
 
 public class ItemBambucket extends UniversalBucket {
 	
