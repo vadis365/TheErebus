@@ -172,14 +172,14 @@ public class AntlionMazeDungeon {
 		for (int yy = y; yy < sizeY; yy++)
 			switch ((yy - y) % 4) {
 				case 0:
-					//buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-					//buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
+					buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+					buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
 					break;
 				case 1:
-					//buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
-					//buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, GNEISS_CARVED);
-					//buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
-					//createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+					buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
+					buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, GNEISS_CARVED);
+					buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
+					createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
 					addFeature(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, rand);
 					break;
 			}
