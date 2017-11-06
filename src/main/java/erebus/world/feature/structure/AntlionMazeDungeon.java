@@ -5,6 +5,7 @@ import java.util.Random;
 
 import erebus.ModBiomes;
 import erebus.ModBlocks;
+import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.block.bamboo.BlockBambooTorch;
 import erebus.block.bamboo.BlockBambooTorch.EnumBlockTorchHalf;
@@ -47,6 +48,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 // 1691502390890771781
 // X: 272 Y: 18 Z: 576 // 272 36 576
 public class AntlionMazeDungeon {
@@ -68,7 +72,6 @@ public class AntlionMazeDungeon {
 	private IBlockState TORCH_WEST = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST);
 	private IBlockState TORCH_SOUTH = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH);
 	private IBlockState TORCH_NORTH = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH);
-	
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] {
 			new LootItemStack(Items.BOOK).setAmount(1, 4).setWeight(18),
 			new LootItemStack(Items.PAPER).setAmount(2, 6).setWeight(16),
@@ -102,11 +105,9 @@ public class AntlionMazeDungeon {
 			//new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1),
 			new LootItemStack(ModItems.LIFE_BLOOD).setAmount(1, 2).setWeight(4),
 			new LootItemStack(ModItems.ROLLED_NEWSPAPER).setAmount(1).setWeight(1),
+			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(6),
 			/*new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
-			new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1),
-			new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
+			 * new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
 			new LootItemStack(ModItems.homingBeecon).setAmount(1).setWeight(1),
 			new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal())
 					.setWeight(3),
@@ -128,6 +129,20 @@ public class AntlionMazeDungeon {
 										EnchantmentData data = (EnchantmentData) enchList.get(a);
 										is.addEnchantment(data.enchantment, data.enchantmentLevel);
 									}
+							}
+							if (is.getItem() == ModItems.BAMBUCKET) {
+								int randomBucket = rand.nextInt(3);
+								switch (randomBucket) {
+								case 0:
+									is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("beetle_juice"), Fluid.BUCKET_VOLUME));
+									break;
+								case 1:
+									is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME));
+									break;
+								case 2:
+									is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("honey"), Fluid.BUCKET_VOLUME));
+									break;
+								}
 							}
 							return is;
 						}
@@ -157,14 +172,14 @@ public class AntlionMazeDungeon {
 		for (int yy = y; yy < sizeY; yy++)
 			switch ((yy - y) % 4) {
 				case 0:
-					buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
-					buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
+					//buildFloor(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+					//buildRoof(world, x, yy, z, mazeWidth, mazeHeight, rand);
 					break;
 				case 1:
-					buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
-					buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, GNEISS_CARVED);
-					buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
-					createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
+					//buildLevel(world, x, yy - 4, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
+					//buildLevel(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, GNEISS_CARVED);
+					//buildLevel(world, x, yy - 2, z, mazeWidth, mazeHeight, maze, GNEISS_RELIEF);
+					//createAir(world, x, yy - 4, z, mazeWidth, mazeHeight, rand);
 					addFeature(world, x, yy - 3, z, mazeWidth, mazeHeight, maze, rand);
 					break;
 			}

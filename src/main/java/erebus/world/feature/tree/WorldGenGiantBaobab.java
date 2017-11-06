@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import erebus.ModBlocks;
+import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.blocks.EnumWood;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
@@ -24,6 +25,9 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class WorldGenGiantBaobab extends WorldGenerator {
 
@@ -63,7 +67,9 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			new LootItemStack(ModItems.JADE_HELMET).setWeight(1), new LootItemStack(Items.GOLDEN_HELMET).setWeight(1),
 			new LootItemStack(Items.IRON_LEGGINGS).setWeight(2), new LootItemStack(ModItems.JADE_LEGGINGS).setWeight(1),
 			new LootItemStack(Items.GOLDEN_LEGGINGS).setWeight(1), new LootItemStack(Items.IRON_BOOTS).setWeight(2),
-			new LootItemStack(ModItems.JADE_BOOTS).setWeight(1), new LootItemStack(Items.GOLDEN_BOOTS).setWeight(1) }).setPostProcessor(new IPostProcess() {
+			new LootItemStack(ModItems.JADE_BOOTS).setWeight(1), new LootItemStack(Items.GOLDEN_BOOTS).setWeight(1),
+			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(6)
+			}).setPostProcessor(new IPostProcess() {
 
 		@SuppressWarnings("rawtypes")
 		@Override
@@ -81,6 +87,20 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 						EnchantmentData data = (EnchantmentData) enchList.get(a);
 						is.addEnchantment(data.enchantment, data.enchantmentLevel);
 					}
+			}
+			if (is.getItem() == ModItems.BAMBUCKET) {
+				int randomBucket = rand.nextInt(3);
+				switch (randomBucket) {
+				case 0:
+					is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("beetle_juice"), Fluid.BUCKET_VOLUME));
+					break;
+				case 1:
+					is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME));
+					break;
+				case 2:
+					is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("honey"), Fluid.BUCKET_VOLUME));
+					break;
+				}
 			}
 			return is;
 		}

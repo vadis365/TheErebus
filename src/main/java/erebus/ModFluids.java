@@ -2,11 +2,17 @@ package erebus;
 
 import java.lang.reflect.Field;
 
+import javax.annotation.Nonnull;
+
 import erebus.lib.Reference;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -42,6 +48,18 @@ public class ModFluids {
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Nonnull
+    public static ItemStack getFilledBambucket(@Nonnull FluidStack fluidStack){
+        Fluid fluid = fluidStack.getFluid();
+        if (FluidRegistry.getBucketFluids().contains(fluid)){
+            ItemStack filledBucket = new ItemStack(ModItems.BAMBUCKET);
+            IFluidHandlerItem cap = filledBucket.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            cap.fill(fluidStack, true);
+            return filledBucket;
+        }
+        return ItemStack.EMPTY;
+    }
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)

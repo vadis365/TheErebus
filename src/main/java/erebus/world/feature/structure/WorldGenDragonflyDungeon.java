@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import erebus.ModBlocks;
+import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockGiantFlower.EnumType;
@@ -27,6 +28,9 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class WorldGenDragonflyDungeon extends WorldGenerator {
 	private IBlockState AIR = Blocks.AIR.getDefaultState();
@@ -62,11 +66,10 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 			new LootItemStack(ModItems.CABBAGE_SEEDS).setAmount(1, 3).setWeight(2),
 			new LootItemStack(ModItems.LIFE_BLOOD).setAmount(1, 2).setWeight(4),
 			new LootItemStack(ModItems.ROLLED_NEWSPAPER).setAmount(1).setWeight(1),
-			/*new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1),
+			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(6),
+			/*
+			new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1),
 			new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
-			new LootItemStack(ModItems.bucketAntiVenom).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.bucketBeetleJuice).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.bucketHoney).setAmount(1).setWeight(1),
 			new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
 			new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.NOTHING_IN_THE_MIDDLE.ordinal()).setWeight(3),
 			new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1)*/ }).setPostProcessor(new IPostProcess() {
@@ -86,6 +89,20 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 								EnchantmentData data = (EnchantmentData) enchList.get(a);
 								is.addEnchantment(data.enchantment, data.enchantmentLevel);
 							}
+					}
+					if (is.getItem() == ModItems.BAMBUCKET) {
+						int randomBucket = rand.nextInt(3);
+						switch (randomBucket) {
+						case 0:
+							is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("beetle_juice"), Fluid.BUCKET_VOLUME));
+							break;
+						case 1:
+							is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME));
+							break;
+						case 2:
+							is = ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("honey"), Fluid.BUCKET_VOLUME));
+							break;
+						}
 					}
 					return is;
 				}
