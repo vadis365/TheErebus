@@ -122,22 +122,7 @@ public class EntityBeetle extends EntityAnimal {
 	@Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack is = player.inventory.getCurrentItem();
-/*
-		if (!is.isEmpty() && is.getItem() == Items.BUCKET && !player.capabilities.isCreativeMode) {
-			if (is.stackSize-- == 1)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bucketBeetleJuice));
-			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bucketBeetleJuice)))
-				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bucketBeetleJuice, 1, 0), false);
-			return true;
-		}
-		if (!is.isEmpty() && is.getItem() == ModItems.bambucket && is.getItemDamage() == 0 && !player.capabilities.isCreativeMode) {
-			if (is.stackSize-- == 1)
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(ModItems.bambucketBeetleJuice));
-			else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.bambucketBeetleJuice)))
-				player.dropPlayerItemWithRandomChoice(new ItemStack(ModItems.bambucket), false);
-			return true;
-		}
-*/
+
 		if (!is.isEmpty() && is.getItem() == ModItems.TURNIP && !shagging()) {
 			is.shrink(1);
 			setTame(true);

@@ -33,9 +33,11 @@ import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockDragonflySpawner;
+import erebus.blocks.BlockErebusHoney;
 import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockForceField;
 import erebus.blocks.BlockForceLock;
+import erebus.blocks.BlockFormicAcid;
 import erebus.blocks.BlockGaeanKeystone;
 import erebus.blocks.BlockGhostSand;
 import erebus.blocks.BlockGiantFlower;
@@ -70,6 +72,7 @@ import erebus.blocks.BlockTempleBrickUnbreaking;
 import erebus.blocks.BlockTempleTeleporter;
 import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
+import erebus.blocks.BlockUmberGolemStatue;
 import erebus.blocks.BlockUmberGravel;
 import erebus.blocks.BlockUmberPaver;
 import erebus.blocks.BlockUmberPaver.EnumUmberPaverType;
@@ -106,6 +109,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -214,6 +218,7 @@ public class ModBlocks {
 	public static final Block SILO_TANK = new BlockSiloTank(Material.IRON);
 	public static final Block SILO_SUPPORTS = new BlockSiloSupports(Material.WOOD);
 	public static final Block HONEY_COMB = new BlockHoneyComb();
+	public static final Block UMBER_GOLEM_STATUE = new BlockUmberGolemStatue();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
@@ -274,6 +279,10 @@ public class ModBlocks {
 	public static final Block SLAB_UMBERPAVER = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER), "pickaxe", 0);
 	public static final Block SLAB_UMBERPAVER_MOSSY = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_MOSSY), "pickaxe", 0);
 	public static final Block SLAB_UMBERPAVER_WEBBED = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_WEBBED), "pickaxe", 0);
+
+	//FLUIDS
+	public static final Block FORMIC_ACID = new BlockFormicAcid();
+	public static final Block HONEY = new BlockErebusHoney();
 
 	public static void init() {
 		try {
@@ -343,6 +352,8 @@ public class ModBlocks {
 						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockDoor.POWERED }).build());
 					if (block instanceof BlockWoodFenceGate)
 						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockWoodFenceGate.POWERED }).build());
+					if (block instanceof BlockFluidClassic)
+						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockFluidClassic.LEVEL }).build());
 				}
 		}
 	}

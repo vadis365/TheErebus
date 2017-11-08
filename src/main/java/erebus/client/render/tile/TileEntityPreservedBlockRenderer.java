@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import erebus.api.ErebusAPI;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import erebus.tileentity.TileEntityPreservedBlock;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -59,7 +60,7 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 
 		GL11.glTranslated(xOff, yOff, zOff);
 		GL11.glScalef(scale, scale, scale);
-		Render renderer = RenderManager.instance.getEntityRenderObject(entity);
+		Render renderer = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(entity);
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		if (entity instanceof EntityItem)
 			((EntityItem) entity).hoverStart = 0;

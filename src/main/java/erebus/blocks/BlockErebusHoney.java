@@ -1,55 +1,37 @@
 package erebus.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModFluids;
 import erebus.ModMaterials;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 public class BlockErebusHoney extends BlockFluidClassic {
 
-	@SideOnly(Side.CLIENT)
-	protected IIcon stillIcon, flowingIcon;
-
 	public BlockErebusHoney() {
-		super(ModFluids.honey, ModMaterials.honey);
-		setBlockName("erebus.honeyBlock");
+		super(ModFluids.HONEY, ModMaterials.HONEY);
 	}
 
 	@Override
-	public IIcon getIcon(int side, int meta) {
-		return side == 0 || side == 1 ? stillIcon : flowingIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-		stillIcon = register.registerIcon("erebus:honey");
-		flowingIcon = register.registerIcon("erebus:honeyFlow");
-	}
-
-	@Override
-	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
-		if (world.getBlock(x, y, z).getMaterial().isLiquid())
+	public boolean canDisplace(IBlockAccess world, BlockPos pos) {
+		if (world.getBlockState(pos).getMaterial().isLiquid())
 			return false;
-		return super.canDisplace(world, x, y, z);
+		return super.canDisplace(world, pos);
 	}
 
 	@Override
-	public boolean displaceIfPossible(World world, int x, int y, int z) {
-		if (world.getBlock(x, y, z).getMaterial().isLiquid())
+	public boolean displaceIfPossible(World world, BlockPos pos) {
+		if (world.getBlockState(pos).getMaterial().isLiquid())
 			return false;
-		return super.displaceIfPossible(world, x, y, z);
+		return super.displaceIfPossible(world, pos);
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (entity instanceof EntityLivingBase) {
 			entity.motionX *= 0.005D;
 			entity.motionZ *= 0.005D;

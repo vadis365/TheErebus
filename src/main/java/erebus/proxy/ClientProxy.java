@@ -62,6 +62,7 @@ import erebus.client.render.entity.RenderTarantula;
 import erebus.client.render.entity.RenderTarantulaBaby;
 import erebus.client.render.entity.RenderThrownSand;
 import erebus.client.render.entity.RenderTitanBeetle;
+import erebus.client.render.entity.RenderUmberGolem;
 import erebus.client.render.entity.RenderUmberGolemDungeonType;
 import erebus.client.render.entity.RenderVelvetWorm;
 import erebus.client.render.entity.RenderWasp;
@@ -82,6 +83,7 @@ import erebus.client.render.tile.TileEntityErebusAltarRepairRenderer;
 import erebus.client.render.tile.TileEntityErebusAltarXPRenderer;
 import erebus.client.render.tile.TileEntityExtenderThingyRenderer;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
+import erebus.client.render.tile.TileEntityUmberGolemStatueRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
@@ -130,6 +132,7 @@ import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityThrownSand;
 import erebus.entity.EntityTitanBeetle;
+import erebus.entity.EntityUmberGolem;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
@@ -157,6 +160,7 @@ import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityUmberFurnace;
+import erebus.tileentity.TileEntityUmberGolemStatue;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -211,6 +215,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarXP.class, new TileEntityErebusAltarXPRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityErebusAltarRepair.class, new TileEntityErebusAltarRepairRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBones.class, new TileEntityBoneBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUmberGolemStatue.class, new TileEntityUmberGolemStatueRenderer());
 	}
 
 	@Override
@@ -279,6 +284,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityUmberGolemDungeonTypes.class, RenderUmberGolemDungeonType::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntlionBoss.class, RenderAntlionBoss::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrownSand.class, RenderThrownSand::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityUmberGolem.class, RenderUmberGolem::new);
 
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWaspSword(TileEntityItemStackRenderer.instance);
@@ -295,6 +301,7 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_XP), 0,TileEntityErebusAltarXP.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_REPAIR), 0,TileEntityErebusAltarRepair.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BLOCK_OF_BONES), 0, TileEntityBones.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.UMBER_GOLEM_STATUE), 0, TileEntityUmberGolemStatue.class);
 
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	
