@@ -37,6 +37,6 @@ public class RenderBeetle extends RenderLiving<EntityBeetle> {
 		else if (beetle.getSkin() == 0)
 			return TEXTURE[0];
 		else
-			return null;
+			return TEXTURE[1];
 	}
 }

@@ -16,6 +16,8 @@ import erebus.lib.Reference;
 import erebus.network.client.MessageSyncEntityCapabilities;
 import erebus.network.client.PacketAntiVenom;
 import erebus.network.client.PacketBones;
+import erebus.network.client.PacketOfferingAltar;
+import erebus.network.client.PacketOfferingAltarTimer;
 import erebus.network.client.PacketParticle;
 import erebus.network.server.ColossalCratePage;
 import erebus.network.server.PacketBeetleDig;
@@ -23,6 +25,7 @@ import erebus.network.server.PacketBeetleRamAttack;
 import erebus.network.server.PacketGlider;
 import erebus.network.server.PacketGliderPowered;
 import erebus.proxy.CommonProxy;
+import erebus.recipes.ErebusRecipesHandler;
 import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
@@ -67,6 +70,7 @@ public class Erebus {
 		ModBiomes.init();
 		ModSounds.init();
 		ModEntities.init();
+		ErebusRecipesHandler.init();
 		
 		if (event.getSide() == Side.CLIENT) {
 			if (ConfigHandler.INSTANCE.playCustomSongs)
@@ -98,9 +102,10 @@ public class Erebus {
 		NETWORK_WRAPPER.registerMessage(PacketGlider.class, PacketGlider.class, 5, Side.SERVER);
 		NETWORK_WRAPPER.registerMessage(PacketGliderPowered.class, PacketGliderPowered.class, 6, Side.SERVER);
 		NETWORK_WRAPPER.registerMessage(PacketBones.class, PacketBones.class, 7, Side.CLIENT);
-		NETWORK_WRAPPER.registerMessage(MessageSyncEntityCapabilities.class, MessageSyncEntityCapabilities.class, 5, Side.CLIENT);
-	
-	
+		NETWORK_WRAPPER.registerMessage(MessageSyncEntityCapabilities.class, MessageSyncEntityCapabilities.class, 8, Side.CLIENT);
+		NETWORK_WRAPPER.registerMessage(PacketOfferingAltar.class, PacketOfferingAltar.class, 9, Side.CLIENT);
+		NETWORK_WRAPPER.registerMessage(PacketOfferingAltarTimer.class, PacketOfferingAltarTimer.class, 10, Side.CLIENT);
+
 		MinecraftForge.EVENT_BUS.register(EntityCapabilityHandler.class);
 		EntityCapabilityHandler.registerEntityCapability(new PlayerDeathLocationCapability());
 		EntityCapabilityHandler.registerCapabilities();
