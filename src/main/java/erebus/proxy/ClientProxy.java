@@ -47,6 +47,7 @@ import erebus.client.render.entity.RenderHoneyPotAnt;
 import erebus.client.render.entity.RenderJumpingSpider;
 import erebus.client.render.entity.RenderLavaWebSpider;
 import erebus.client.render.entity.RenderLocust;
+import erebus.client.render.entity.RenderMagmaCrawler;
 import erebus.client.render.entity.RenderMidgeSwarm;
 import erebus.client.render.entity.RenderMoneySpider;
 import erebus.client.render.entity.RenderMoth;
@@ -118,6 +119,7 @@ import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityJumpingSpider;
 import erebus.entity.EntityLavaWebSpider;
 import erebus.entity.EntityLocust;
+import erebus.entity.EntityMagmaCrawler;
 import erebus.entity.EntityMidgeSwarm;
 import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
@@ -288,6 +290,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAntlionBoss.class, RenderAntlionBoss::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrownSand.class, RenderThrownSand::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityUmberGolem.class, RenderUmberGolem::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMagmaCrawler.class, RenderMagmaCrawler::new);
 
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWaspSword(TileEntityItemStackRenderer.instance);
@@ -326,11 +329,20 @@ public class ClientProxy extends CommonProxy {
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {
 		Particle fx = null;
 
-		if (particleName.equals("repellent"))
+		if (particleName.equals("repellent")) {
 			fx = new ParticleRepellent(world, x, y, z, 0.0F, 0.0F, 0.0F);
+			fx.setRBGColorF(0F, 1F, 0F);
+		}
 
-		if (particleName.equals("sonic"))
+		if (particleName.equals("sonic")) {
 			fx = new ParticleSonic(world, x, y, z, vecX, vecY, vecZ);
+			fx.setRBGColorF(1F, 1F, 1F);
+		}
+		
+		if (particleName.equals("sonicblue")) {
+			fx = new ParticleSonic(world, x, y, z, vecX, vecY, vecZ);
+			fx.setRBGColorF(0.490F, 0.7451F, 1F);
+		}
 
 		if (particleName.equals("bubblegas")) {
 			fx = new ParticleBubbleGas(world, x, y, z, vecX, vecY, vecZ);
@@ -345,6 +357,12 @@ public class ClientProxy extends CommonProxy {
 		if (particleName.equals("swampflame")) {
 			fx = new ParticleFlame.Factory().createParticle(EnumParticleTypes.FLAME.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 			fx.setParticleTextureIndex(96);
+		}
+
+		if (particleName.equals("swampflame_green")) {
+			fx = new ParticleFlame.Factory().createParticle(EnumParticleTypes.FLAME.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
+			fx.setParticleTextureIndex(96);
+			fx.setRBGColorF(1F, 1F, 0F);
 		}
 
 		if (particleName.equals("portal")) {

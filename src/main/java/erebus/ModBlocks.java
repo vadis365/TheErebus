@@ -51,6 +51,7 @@ import erebus.blocks.BlockHollowLog;
 import erebus.blocks.BlockHoneyComb;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
+import erebus.blocks.BlockMagmaCrawlerSpawner;
 import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
 import erebus.blocks.BlockOreErebus;
@@ -255,6 +256,7 @@ public class ModBlocks {
 	public static final Block TEMPLE_BRICK_UNBREAKING = new BlockTempleBrickUnbreaking();
 	public static final Block TEMPLE_TELEPORTER = new BlockTempleTeleporter();
 	public static final Block BLOCK_OF_BONES = new BlockBones();
+	public static final Block MAGMA_CRAWLER_SPAWNER = new BlockMagmaCrawlerSpawner("erebus:magma_crawler");
 
 	// WALLS
 	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));

@@ -68,6 +68,7 @@ public class AntlionMazeDungeon {
 	private IBlockState FORCE_FIELD = ModBlocks.FORCE_FIELD.getDefaultState();
 	private IBlockState TEMPLE_BRICK = ModBlocks.TEMPLE_BRICK.getDefaultState();
 	private IBlockState ANTLION_SPAWNER = ModBlocks.ANTLION_SPAWNER.getDefaultState();
+	private IBlockState MAGMA_CRAWLER_SPAWNER = ModBlocks.MAGMA_CRAWLER_SPAWNER.getDefaultState();
 	private IBlockState TORCH_EAST = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.EAST);
 	private IBlockState TORCH_WEST = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST);
 	private IBlockState TORCH_SOUTH = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH);
@@ -449,7 +450,7 @@ public class AntlionMazeDungeon {
 						if (rand.nextBoolean())
 							world.setBlockState(new BlockPos(x + 2 + j * 4, y - 2, z + 2 + i * 4), ANTLION_SPAWNER);
 						else
-							world.setBlockState(new BlockPos(x + 2 + j * 4, y + 2, z + 2 + i * 4), ModBlocks.ZOMBIE_ANT_SPAWNER.getDefaultState());//ModBlocks.magmaCrawlerSpawner
+							world.setBlockState(new BlockPos(x + 2 + j * 4, y + 2, z + 2 + i * 4), MAGMA_CRAWLER_SPAWNER);
 			for (int j = 0; j < w; j++)
 				if ((maze[j][i] & 8) == 0)
 					if (rand.nextInt(25) == 0 && canPlaceFeatureAt(world, x, y, z, x + 1 + j * 4, y - 1, z + 2 + i * 4)) {

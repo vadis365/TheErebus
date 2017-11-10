@@ -1,5 +1,6 @@
 package erebus.client.render.tile;
 
+import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.client.model.block.ModelOfferingAltar;
 import erebus.tileentity.TileEntityOfferingAltar;
@@ -35,7 +36,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer<T
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float) x + 0.5F, (float) y + 0.75F, (float) z + 0.5F);
-		renderItems(tile, partialTick);
+		renderItems(tile, partialTick, 0, 0, 0);
 		GlStateManager.popMatrix();
 	}
 
@@ -57,7 +58,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer<T
 		GlStateManager.popMatrix();
 	}
 
-	private void renderItems(TileEntityOfferingAltar tile, float partialTick) {
+	private void renderItems(TileEntityOfferingAltar tile, float partialTick, double x, double y, double z) {
 		float angle = tile.time;
 		if (tile.getStackInSlot(3).isEmpty()) {
 			GlStateManager.translate(0F, 0.75, 0F);
@@ -74,10 +75,18 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer<T
 						GlStateManager.scale(0.5, 0.5, 0.5);
 					GlStateManager.pushMatrix();
 					GlStateManager.rotate((float)120 * (i + 1) + tile.getWorld().getTotalWorldTime() * 8, 1F, 1F, 1F);
-					//GlStateManager.translate(Math.cos(Math.toRadians(angle * 0.25F)), 0, 0);
 					Minecraft.getMinecraft().getRenderItem().renderItem(item, Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(item, (World) null, (EntityLivingBase) null));
 					GlStateManager.popMatrix();
 					GlStateManager.popMatrix();
+					double a = -Math.toRadians((float)120 * (i + 1) + tile.getWorld().getTotalWorldTime() -90);
+					double offSetX = -Math.sin(a) * Math.cos(Math.toRadians(angle));
+					double offSetZ = Math.cos(a) * Math.cos(Math.toRadians(angle));
+					if(tile.getWorld().getTotalWorldTime()%4 == 0 && i == 0)
+						Erebus.PROXY.spawnCustomParticle("flame", tile.getWorld(), tile.getPos().getX() + 0.5F - offSetX , tile.getPos().getY() + 1.5F + (tile.getWorld().rand.nextFloat() - tile.getWorld().rand.nextFloat()) *0.1F, tile.getPos().getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
+					if(tile.getWorld().getTotalWorldTime()%4 == 0 && i == 1)
+						Erebus.PROXY.spawnCustomParticle("swampflame", tile.getWorld(), tile.getPos().getX() + 0.5F - offSetX , tile.getPos().getY() + 1.5F + (tile.getWorld().rand.nextFloat() - tile.getWorld().rand.nextFloat()) *0.1F, tile.getPos().getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
+					if(tile.getWorld().getTotalWorldTime()%4 == 0 && i == 2)
+						Erebus.PROXY.spawnCustomParticle("swampflame_green", tile.getWorld(), tile.getPos().getX() + 0.5F - offSetX , tile.getPos().getY() + 1.5F + (tile.getWorld().rand.nextFloat() - tile.getWorld().rand.nextFloat()) *0.1F, tile.getPos().getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		} else {

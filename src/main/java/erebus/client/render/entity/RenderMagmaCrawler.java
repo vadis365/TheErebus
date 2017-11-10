@@ -1,42 +1,42 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.client.model.entity.ModelMagmaCrawler;
 import erebus.entity.EntityMagmaCrawler;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RenderMagmaCrawler extends RenderLiving {
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/entity/magmaCrawler.png");
+@SideOnly(Side.CLIENT)
+public class RenderMagmaCrawler extends RenderLiving<EntityMagmaCrawler> {
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/entity/magma_crawler.png");
 
-	public RenderMagmaCrawler() {
-		super(new ModelMagmaCrawler(), 0.0F);
+	public RenderMagmaCrawler(RenderManager rendermangerIn) {
+		super(rendermangerIn, new ModelMagmaCrawler(), 0.0F);
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLivingBase entity, float partialTickTime) {
+	protected void preRenderCallback(EntityMagmaCrawler crawler, float partialTickTime) {
 		scaleCrawler();
-		EntityMagmaCrawler crawler = (EntityMagmaCrawler) entity;
 		if (crawler.isOnCeiling())
-			rotate(entity);
+			rotate(crawler);
 	}
 
-	protected void rotate(EntityLivingBase entityliving) {
-		GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(180.0F, 0F, 1.0F, 0.0F);
-		GL11.glTranslatef(0.0F, 1.25F, 0.0F);
+	protected void rotate(EntityMagmaCrawler crawler) {
+		GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
+		GlStateManager.rotate(180.0F, 0F, 1.0F, 0.0F);
+		GlStateManager.translate(0.0F, 1.25F, 0.0F);
 	}
 
 	protected void scaleCrawler() {
 		float size = 0.9F;
-		GL11.glScalef(size, size, size);
+		GlStateManager.scale(size, size, size);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	protected ResourceLocation getEntityTexture(EntityMagmaCrawler crawler) {
+		return TEXTURE;
 	}
 }
