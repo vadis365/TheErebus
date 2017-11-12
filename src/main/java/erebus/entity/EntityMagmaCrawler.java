@@ -17,6 +17,9 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundEvent;
@@ -25,22 +28,27 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityMagmaCrawler extends EntityMob {
-	private int shouldDo;
-	public boolean upAbove;
+	private static final DataParameter<Boolean> CLIMBING = EntityDataManager.<Boolean>createKey(EntityMagmaCrawler.class, DataSerializers.BOOLEAN);
 
 	public EntityMagmaCrawler(World world) {
 		super(world);
 		isImmuneToFire = true;
-		setSize(1.25F, 1.0F);
+		setSize(1F, 1F);
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataManager.register(CLIMBING, true);
 	}
 
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.7D, false));
-		tasks.addTask(5, new EntityAIWander(this, 0.5D));
-		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(7, new EntityAILookIdle(this));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.6D, false));
+		tasks.addTask(2, new EntityAIWander(this, 0.5D));
+		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
 	}
@@ -48,12 +56,12 @@ public class EntityMagmaCrawler extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.8D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 20D : 20D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
-		upAbove = true;
 	}
+
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -85,11 +93,6 @@ public class EntityMagmaCrawler extends EntityMob {
 		entityDropItem(erebus.items.ItemMaterials.EnumErebusMaterialsType.MAGMA_CRAWLER_EYE.createStack(), 0.0F);
 	}
 
-	public boolean isOnCeiling() {
-		return upAbove && getEntityWorld().getBlockState(getPosition().up(1)).getBlock() == ModBlocks.GNEISS && getEntityWorld().isAirBlock(getPosition().down()) ||
-				upAbove && getEntityWorld().getBlockState(getPosition().up(1)).getBlock() == ModBlocks.MAGMA_CRAWLER_SPAWNER && getEntityWorld().isAirBlock(getPosition().down());
-	}
-
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 5;
@@ -111,18 +114,94 @@ public class EntityMagmaCrawler extends EntityMob {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!getEntityWorld().isRemote) {
-			if (checkIsOnASurfaceNotGround() || isOnCeiling())
-				if(!this.hasNoGravity()) {
-					setNoGravity(true);
-					this.motionY += 0.1;
-				}
 
-			if (onGround && upAbove || collidedHorizontally && upAbove || getHealth() < getMaxHealth() && upAbove) {
-				upAbove = false;
+		if (!getEntityWorld().isRemote) {
+			if (checkIsOnASurfaceNotGround() && isClimbing()) {
+
+					switch (sideWalkingOn()) {
+					case DOWN:
+						setClimbing(false);
+						break;
+					case EAST:
+						this.motionX += 0.1D;
+						break;
+					case NORTH:
+						this.motionZ -= 0.1D;
+						break;
+					case SOUTH:
+						this.motionZ += 0.1D;
+						break;
+					case UP:
+						this.motionY += 0.1D;
+						break;
+					case WEST:
+						this.motionX -= 0.1D;
+						break;
+					default:
+						break;
+					
+					}
+			}
+			if (!hasNoGravity() && recentlyHit <= 0) {
+				setNoGravity(true);
+				setClimbing(true);
+			}
+
+		if (recentlyHit == 60 || getEntityWorld().canSeeSky(new BlockPos(posX, getEntityBoundingBox().minY, posZ))) {
+			if (hasNoGravity())
 				setNoGravity(false);
+			setClimbing(false);
+		}
+		/*
+		if(getAttackTarget() !=null && getDistanceSq(getAttackTarget()) < 9D) {
+			if (hasNoGravity())
+				setNoGravity(false);
+			setClimbing(false);
+		}
+			if (!isClimbing() && collidedHorizontally) {
+				if (!hasNoGravity())
+					setNoGravity(true);
+				setClimbing(true);
+			}
+
+*/
+		}
+	}
+
+	public EnumFacing sideWalkingOn() {
+		//if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.UP)) && getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.DOWN))) {
+		if(isClimbing()) {
+			if (getHorizontalFacing() == EnumFacing.NORTH || getHorizontalFacing() == EnumFacing.SOUTH) {
+				if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.WEST)) && getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.EAST)))
+					return EnumFacing.WEST;
+				if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.EAST)) && getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.WEST)))
+					return EnumFacing.EAST;
+			}
+			if (getHorizontalFacing() == EnumFacing.EAST || getHorizontalFacing() == EnumFacing.WEST) {
+				if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.NORTH)) && getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.SOUTH)))
+					return EnumFacing.NORTH;
+				if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.SOUTH)) && getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.NORTH)))
+					return EnumFacing.SOUTH;
 			}
 		}
+	//	}
+		/*
+		if (getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.UP)) && getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.DOWN))) {
+			if (getHorizontalFacing() == EnumFacing.NORTH || getHorizontalFacing() == EnumFacing.SOUTH) {
+				if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.WEST)))
+					return EnumFacing.WEST;
+				else if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.EAST)))
+					return EnumFacing.EAST;
+			}
+			if (getHorizontalFacing() == EnumFacing.EAST || getHorizontalFacing() == EnumFacing.WEST) {
+				if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.NORTH)))
+					return EnumFacing.NORTH;
+				else if (!getEntityWorld().isAirBlock(getPosition().offset(EnumFacing.SOUTH)))
+					return EnumFacing.SOUTH;
+			}
+		}*/
+
+		return !isClimbing() ? EnumFacing.DOWN : EnumFacing.UP;
 	}
 
 	private boolean checkIsOnASurfaceNotGround() {
@@ -135,17 +214,28 @@ public class EntityMagmaCrawler extends EntityMob {
 
 	@Override
 	public void onLivingUpdate() {
-		if (!getEntityWorld().isRemote)
+		if (!getEntityWorld().isRemote && sideWalkingOn() != EnumFacing.DOWN)
 			if (getAttackTarget() != null) {
 				double var1 = getAttackTarget().posX + 0.5D - posX;
 				double var5 = getAttackTarget().posZ + 0.5D - posZ;
+				double var11 = getAttackTarget().posY + 0.5D - posY;
 				motionX += (Math.signum(var1) * 0.5D - motionX) * 0.050000000149011612D;
+				if(sideWalkingOn() != EnumFacing.UP)
+					motionY += (var11 * 0.5D - motionY);
 				motionZ += (Math.signum(var5) * 0.5D - motionZ) * 0.050000000149011612D;
 				float var7 = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
 				float var8 = MathHelper.wrapDegrees(var7 - rotationYaw);
-				moveForward = 0.5F;
+				moveForward = 0.1F;
 				rotationYaw += var8;
 			}
 		super.onLivingUpdate();
+	}
+	
+	public void setClimbing(boolean climbState) {
+		dataManager.set(CLIMBING, climbState);
+	}
+
+	public boolean isClimbing() {
+		return dataManager.get(CLIMBING);
 	}
 }
