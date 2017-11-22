@@ -1,0 +1,41 @@
+{
+    "parent": "erebus:block/blank",
+     "display": {
+     
+      "thirdperson_righthand": {
+      "rotation": [ 0, -90, 180],
+      "translation": [ -8, 0.5, -6 ],
+      "scale": [ 1, 1, 1 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 0, 90, 180],
+      "translation": [ 8, 0.5, -6 ],
+      "scale": [ 1, 1, 1 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 5, -90, 170 ],
+      "translation": [ -7.25, 4, 2 ],
+      "scale": [ 0.4, 0.4, 0.4 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 5, 90, 190 ],
+      "translation": [ -1, 4, 2 ],
+      "scale": [ 0.4, 0.4, 0.4 ]
+    },
+     "gui": {
+            "rotation": [ 160, 0, 45],
+            "translation": [ 4, -10, 0],
+            "scale":[ 1, 1, 1 ]
+        },
+    "fixed": {
+      "rotation": [ 0, 0, -135],
+      "translation": [ -3.5, -7, 9 ],
+      "scale": [ 1, 1, 1 ]
+    },
+    "ground": {
+      "rotation": [ 180, -22.5, 45 ],
+      "translation": [ 0, 3, 0 ],
+      "scale": [ 0.5, 0.5, 0.5 ]
+    }
+    }
+}

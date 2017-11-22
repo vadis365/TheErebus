@@ -34,7 +34,7 @@ public class ItemSprayCan extends Item {
 		else if (player.canPlayerEdit(pos, EnumFacing.UP, stack) && player.canPlayerEdit(pos.up(), EnumFacing.UP, stack)) {
 			IBlockState state = world.getBlockState(pos);
 			if (state.getBlock() != null && state.isSideSolid(world, pos, EnumFacing.UP) && state.getBlock() != ModBlocks.INSECT_REPELLENT) {
-				world.setBlock(pos.up(), ModBlocks.INSECT_REPELLENT);
+				world.setBlockState(pos.up(), ModBlocks.INSECT_REPELLENT.getDefaultState());
 				stack.shrink(1);
 				world.playSound(null, pos.up(), getSprayCanSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
 				return EnumActionResult.SUCCESS;

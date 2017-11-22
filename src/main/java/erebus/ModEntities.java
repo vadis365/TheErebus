@@ -14,6 +14,7 @@ import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackAnt;
 import erebus.entity.EntityBlackWidow;
+import erebus.entity.EntityBogMaw;
 import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityBotFly;
@@ -149,7 +150,9 @@ public class ModEntities {
 
 		registerEntity(44, EntityTarantulaBaby.class, "tarantula_baby", 0x000000, 0xE82066);
 		registerEntity(45, EntityPondSkater.class, "pond_skater", -13816034, -14803180);
-
+		
+		registerEntity(47, EntityBogMaw.class, "bog_maw", 0x804E3D, 0x3D6F80);
+		
 		registerEntity(49, EntityMagmaCrawler.class, "magma_crawler", 0xFF0000, 0xFFEE00);
 
 		registerEntity(50, EntityAnimatedBlock.class, "animated_block");

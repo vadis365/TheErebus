@@ -83,7 +83,7 @@ public class BlockGaeanKeystone extends Block implements ITileEntityProvider {
 	@Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItemMainhand();
-		if (!stack.isEmpty() && stack.getItem() == ModItems.JADE_AXE) {
+		if (!stack.isEmpty() && stack.getItem() == ModItems.PORTAL_ACTIVATOR) {
 			if (!world.isRemote) {
 				if (ErebusPortal.makePortal(world, pos.down(2))) {
 					world.setBlockState(pos, getDefaultState().withProperty(ACTIVE, Boolean.valueOf(true)), 3);

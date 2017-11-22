@@ -15,13 +15,8 @@ public class TileEntityPreservedBlock extends TileEntity {
 
 	public Entity getRenderEntity() {
 		if (cachedRenderEntity == null && entityNBT != null)
-			cachedRenderEntity = EntityList.createEntityFromNBT(entityNBT, worldObj);
+			cachedRenderEntity = EntityList.createEntityFromNBT(entityNBT, getWorld());
 		return cachedRenderEntity;
-	}
-
-	@Override
-	public boolean canUpdate() {
-		return false;
 	}
 
 	@Override
@@ -55,15 +50,15 @@ public class TileEntityPreservedBlock extends TileEntity {
 
 	public void setEntityNBT(NBTTagCompound entityNBT) {
 		this.entityNBT = entityNBT;
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		getWorld().markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public void spawnTrappedEntity() {
-		if (worldObj.isRemote || entityNBT == null)
+		if (getWorld().isRemote || entityNBT == null)
 			return;
 
-		Entity entity = EntityList.createEntityFromNBT(entityNBT, worldObj);
+		Entity entity = EntityList.createEntityFromNBT(entityNBT, getWorld());
 		entity.setLocationAndAngles(xCoord + 0.5, yCoord, zCoord + 0.5, 0.0F, 0.0F);
-		worldObj.spawnEntityInWorld(entity);
+		getWorld().spawnEntity(entity);
 	}
 }

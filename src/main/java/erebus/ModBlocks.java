@@ -49,6 +49,7 @@ import erebus.blocks.BlockGneiss;
 import erebus.blocks.BlockGneissVent;
 import erebus.blocks.BlockHollowLog;
 import erebus.blocks.BlockHoneyComb;
+import erebus.blocks.BlockInsectRepellent;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockMagmaCrawlerSpawner;
@@ -221,6 +222,7 @@ public class ModBlocks {
 	public static final Block SILO_SUPPORTS = new BlockSiloSupports(Material.WOOD);
 	public static final Block HONEY_COMB = new BlockHoneyComb();
 	public static final Block UMBER_GOLEM_STATUE = new BlockUmberGolemStatue();
+	public static final Block INSECT_REPELLENT = new BlockInsectRepellent();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();

@@ -28,6 +28,7 @@ import erebus.client.render.entity.RenderBeetle;
 import erebus.client.render.entity.RenderBeetleLarva;
 import erebus.client.render.entity.RenderBlackAnt;
 import erebus.client.render.entity.RenderBlackWidow;
+import erebus.client.render.entity.RenderBogMaw;
 import erebus.client.render.entity.RenderBombardierBeetle;
 import erebus.client.render.entity.RenderBotFly;
 import erebus.client.render.entity.RenderBotFlyLarva;
@@ -73,6 +74,7 @@ import erebus.client.render.entity.RenderWoodlouseBall;
 import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
+import erebus.client.render.item.RenderPortalActivator;
 import erebus.client.render.item.RenderWandOfAnimation;
 import erebus.client.render.item.RenderWaspSword;
 import erebus.client.render.tile.TileEntityBambooBridgeRenderer;
@@ -99,6 +101,7 @@ import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityBlackAnt;
 import erebus.entity.EntityBlackWidow;
+import erebus.entity.EntityBogMaw;
 import erebus.entity.EntityBombardierBeetle;
 import erebus.entity.EntityBombardierBeetleLarva;
 import erebus.entity.EntityBotFly;
@@ -291,10 +294,12 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrownSand.class, RenderThrownSand::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityUmberGolem.class, RenderUmberGolem::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityMagmaCrawler.class, RenderMagmaCrawler::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBogMaw.class, RenderBogMaw::new);
 
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWaspSword(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWandOfAnimation(TileEntityItemStackRenderer.instance);
+		TileEntityItemStackRenderer.instance = new RenderPortalActivator(TileEntityItemStackRenderer.instance);
 	}
 
 	@Override

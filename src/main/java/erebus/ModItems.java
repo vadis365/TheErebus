@@ -36,10 +36,13 @@ import erebus.items.ItemLeggingsSprint;
 import erebus.items.ItemMaterials;
 import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
+import erebus.items.ItemPortalActivator;
 import erebus.items.ItemRolledNewspaper;
 import erebus.items.ItemSpiderTShirt;
+import erebus.items.ItemSprayCan;
 import erebus.items.ItemWandOfAnimation;
 import erebus.items.ItemWaspSword;
+import erebus.items.ItemWhetstone;
 import erebus.items.ItemWoodlouseBall;
 import erebus.items.ShieldTypeBasic;
 import erebus.lib.Reference;
@@ -139,6 +142,9 @@ public class ModItems {
 	public static final Item ANTI_VENOM_BOTTLE = new ItemAntiVenomBottle();
 	public static final Item FLOWER_SEED = new ItemFlowerSeeds();
 	public static final Item DEATH_COMPASS = new ItemDeathCompass();
+	public static final Item SPRAY_CAN = new ItemSprayCan();
+	public static final Item WHETSTONE = new ItemWhetstone();
+	public static final Item PORTAL_ACTIVATOR = new ItemPortalActivator();
 
 	public static void init() {
 		try {

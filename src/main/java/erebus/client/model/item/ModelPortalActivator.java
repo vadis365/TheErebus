@@ -6,11 +6,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelPortalStaff extends ModelBase {
+public class ModelPortalActivator extends ModelBase {
 
 	public ModelRenderer[] boxes = new ModelRenderer[8];
 
-	public ModelPortalStaff() {
+	public ModelPortalActivator() {
 		textureWidth = 64;
 		textureHeight = 32;
 

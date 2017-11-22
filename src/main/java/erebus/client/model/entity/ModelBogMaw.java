@@ -1,13 +1,13 @@
 package erebus.client.model.entity;
 
-import erebus.entity.EntitySnapper;
+import erebus.entity.EntityBogMaw;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
-public class ModelSnapper extends ModelBase {
+public class ModelBogMaw extends ModelBase {
 	ModelRenderer roots;
 	ModelRenderer main;
 	ModelRenderer rim1;
@@ -23,7 +23,7 @@ public class ModelSnapper extends ModelBase {
 	ModelRenderer jawmain4;
 	ModelRenderer jawtip4;
 
-	public ModelSnapper() {
+	public ModelBogMaw() {
 		textureWidth = 128;
 		textureHeight = 32;
 		roots = new ModelRenderer(this, -26, 0);
@@ -113,14 +113,14 @@ public class ModelSnapper extends ModelBase {
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		EntitySnapper snapper = (EntitySnapper) entity;
-		jawmain1.rotateAngleX = snapper.getDataWatcher().getWatchableObjectFloat(21);
-		jawtip1.rotateAngleX = snapper.getDataWatcher().getWatchableObjectFloat(21);
-		jawmain2.rotateAngleX = -snapper.getDataWatcher().getWatchableObjectFloat(21);
-		jawtip2.rotateAngleX = -snapper.getDataWatcher().getWatchableObjectFloat(21);
-		jawmain3.rotateAngleX = -snapper.getDataWatcher().getWatchableObjectFloat(21);
-		jawtip3.rotateAngleX = snapper.getDataWatcher().getWatchableObjectFloat(21);
-		jawmain4.rotateAngleX = snapper.getDataWatcher().getWatchableObjectFloat(21);
-		jawtip4.rotateAngleX = snapper.getDataWatcher().getWatchableObjectFloat(21);
+		EntityBogMaw snapper = (EntityBogMaw) entity;
+		jawmain1.rotateAngleX = snapper.getJawAngle();
+		jawtip1.rotateAngleX = snapper.getJawAngle();
+		jawmain2.rotateAngleX = -snapper.getJawAngle();
+		jawtip2.rotateAngleX = -snapper.getJawAngle();
+		jawmain3.rotateAngleX = -snapper.getJawAngle();
+		jawtip3.rotateAngleX = snapper.getJawAngle();
+		jawmain4.rotateAngleX = snapper.getJawAngle();
+		jawtip4.rotateAngleX = snapper.getJawAngle();
 	}
 }
