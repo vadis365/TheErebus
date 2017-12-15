@@ -28,6 +28,8 @@ import erebus.items.ItemFoodHeartBerries;
 import erebus.items.ItemFoodStagHeart;
 import erebus.items.ItemHelmMushroom;
 import erebus.items.ItemHelmRhino;
+import erebus.items.ItemHomingBeecon;
+import erebus.items.ItemHomingBeeconAdvanced;
 import erebus.items.ItemJadeHoe;
 import erebus.items.ItemJadePaxel;
 import erebus.items.ItemJadeShovel;
@@ -145,6 +147,8 @@ public class ModItems {
 	public static final Item SPRAY_CAN = new ItemSprayCan();
 	public static final Item WHETSTONE = new ItemWhetstone();
 	public static final Item PORTAL_ACTIVATOR = new ItemPortalActivator();
+	public static final Item HOMING_BEECON = new ItemHomingBeecon();
+	public static final Item HOMING_BEECON_ADVANCED = new ItemHomingBeeconAdvanced();
 
 	public static void init() {
 		try {

@@ -27,6 +27,7 @@ public class ItemDeathCompass extends Item {
 	public int dimID, targetX, targetZ;
 
 	public ItemDeathCompass() {
+		setMaxStackSize(1);
 		this.addPropertyOverride(new ResourceLocation("angle"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)
 			double rotation;
@@ -84,8 +85,8 @@ public class ItemDeathCompass extends Item {
 			}
 
 			@SideOnly(Side.CLIENT)
-			private double getFrameRotation(EntityItemFrame p_185094_1_) {
-				return (double) MathHelper.wrapDegrees(180 + p_185094_1_.facingDirection.getHorizontalIndex() * 90);
+			private double getFrameRotation(EntityItemFrame entityItemFrame) {
+				return (double) MathHelper.wrapDegrees(180 + entityItemFrame.facingDirection.getHorizontalIndex() * 90);
 			}
 
 			@SideOnly(Side.CLIENT)

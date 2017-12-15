@@ -155,6 +155,8 @@ item.erebus.death_compass.name=Death Compass
 item.erebus.rolled_newspaper.name=Rolled up Newspaper
 item.erebus.bambucket.name=Bambucket
 item.erebus.bambucket.filled.name=%s Bambucket
+item.erebus.homing_beecon.name=Homing Beecon
+item.erebus.homing_beecon_advanced.name=Advanced Homing Beecon
 
 # Plants
 item.erebus.turnip.name=Turnips

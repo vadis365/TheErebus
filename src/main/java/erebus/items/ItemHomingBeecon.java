@@ -2,64 +2,139 @@ package erebus.items;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import erebus.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModTabs;
-import erebus.core.handler.HomingBeeconTextureHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemHomingBeecon extends Item {
 
+public int dimID, targetX, targetZ;
+
 	public ItemHomingBeecon() {
 		setMaxStackSize(1);
-		setCreativeTab(ModTabs.specials);
-		setUnlocalizedName("erebus.homingBeecon");
+		this.addPropertyOverride(new ResourceLocation("angle"), new IItemPropertyGetter() {
+			@SideOnly(Side.CLIENT)
+			double rotation;
+			@SideOnly(Side.CLIENT)
+			double rota;
+			@SideOnly(Side.CLIENT)
+			long lastUpdateTick;
+
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entityIn) {
+				if (entityIn == null && !stack.isOnItemFrame()) {
+					return 0.0F;
+				} else {
+					boolean flag = entityIn != null;
+					Entity entity = (Entity) (flag ? entityIn : stack.getItemFrame());
+
+					if (world == null) {
+						world = entity.world;
+					}
+
+					double d0;
+
+					if (hasTag(stack) && stack.getTagCompound().hasKey("dimID"))
+						dimID = stack.getTagCompound().getInteger("dimID");
+					
+					if (world.provider.getDimension() == dimID) {
+						double d1 = flag ? (double) entity.rotationYaw : this.getFrameRotation((EntityItemFrame) entity);
+						d1 = MathHelper.positiveModulo(d1 / 360.0D, 1.0D);
+						double d2 = this.getSpawnToAngle(world, entity) / (Math.PI * 2D);
+						d0 = 0.5D - (d1 - 0.25D - d2);
+					} else {
+						d0 = Math.random();
+					}
+
+					if (flag) {
+						d0 = this.wobble(world, d0);
+					}
+
+					return MathHelper.positiveModulo((float) d0, 1.0F);
+				}
+			}
+
+			@SideOnly(Side.CLIENT)
+			private double wobble(World worldIn, double p_185093_2_) {
+				if (worldIn.getTotalWorldTime() != this.lastUpdateTick) {
+					this.lastUpdateTick = worldIn.getTotalWorldTime();
+					double d0 = p_185093_2_ - this.rotation;
+					d0 = MathHelper.positiveModulo(d0 + 0.5D, 1.0D) - 0.5D;
+					this.rota += d0 * 0.1D;
+					this.rota *= 0.8D;
+					this.rotation = MathHelper.positiveModulo(this.rotation + this.rota, 1.0D);
+				}
+
+				return this.rotation;
+			}
+
+			@SideOnly(Side.CLIENT)
+			private double getFrameRotation(EntityItemFrame entityItemFrame) {
+				return (double) MathHelper.wrapDegrees(180 + entityItemFrame.facingDirection.getHorizontalIndex() * 90);
+			}
+
+			@SideOnly(Side.CLIENT)
+			private double getSpawnToAngle(World world, Entity entity) {
+				if (world != null && entity instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer)entity;
+					ItemStack stack = player.inventory.getCurrentItem();
+					
+					if (!stack.isEmpty() && stack.getItem() == ModItems.HOMING_BEECON && stack.hasTagCompound() && stack.getTagCompound().hasKey("dimID")) {
+						targetX = stack.getTagCompound().getInteger("homeX");
+						targetZ = stack.getTagCompound().getInteger("homeZ");
+					}
+				}
+				return Math.atan2((double) targetZ - entity.posZ, (double) targetX - entity.posX);
+			}
+		});
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
-		return HomingBeeconTextureHandler.beecon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
-		if (hasTag(stack) && stack.stackTagCompound.hasKey("homeX")) {
-			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.dimension", stack.getTagCompound().getString("dimName")));
-			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.targetx", stack.getTagCompound().getInteger("homeX")));
-			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.targetz", stack.getTagCompound().getInteger("homeZ")));
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		if (hasTag(stack) && stack.getTagCompound().hasKey("dimID")) {
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.dimension", stack.getTagCompound().getInteger("dimID") + " " + stack.getTagCompound().getString("dimName")).getFormattedText());
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.targetx", stack.getTagCompound().getInteger("homeX")).getFormattedText());
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.targetz", stack.getTagCompound().getInteger("homeZ")).getFormattedText());
 		} else
-			list.add(StatCollector.translateToLocal("tooltip.erebus.homingbeecon"));
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.homingbeecon").getFormattedText());
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote && hasTag(stack) && player.isSneaking()) {
-			Block block = world.getBlock(x, y, z);
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (hasTag(stack) && player.isSneaking() && hand.equals(EnumHand.MAIN_HAND)) {
+			Block block = world.getBlockState(pos).getBlock();
 			if (!world.isRemote && block != null) {
-				stack.getTagCompound().setString("dimName", player.worldObj.provider.getDimensionName());
-				stack.getTagCompound().setInteger("homeX", x);
-				stack.getTagCompound().setInteger("homeZ", z);
-				player.swingItem();
-				return true;
+				stack.getTagCompound().setString("dimName", player.getEntityWorld().provider.getDimensionType().getName());
+				stack.getTagCompound().setInteger("dimID", player.getEntityWorld().provider.getDimension());
+				stack.getTagCompound().setInteger("homeX", pos.getX());
+				stack.getTagCompound().setInteger("homeZ", pos.getZ());
+				return EnumActionResult.SUCCESS;
 			}
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
 
 	private boolean hasTag(ItemStack stack) {
