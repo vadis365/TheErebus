@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import erebus.block.silo.TileEntitySiloTank;
-import erebus.blocks.BlockPetrifiedChest;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityBlackAnt;
 import erebus.inventory.ContainerAnimatedBambooCrate;
@@ -53,7 +52,6 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -170,8 +168,7 @@ public class CommonProxy implements IGuiHandler {
 			case HONEY_COMB:
 				return new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile);
 			case PETRIFIED_CHEST:
-				IInventory inventory = BlockPetrifiedChest.getInventory(world, pos);
-				return new ContainerPetrifiedWoodChest(player.inventory, inventory);
+				return new ContainerPetrifiedWoodChest(player.inventory, (TileEntityPetrifiedWoodChest) tile, player);
 			case PETRIFIED_CRAFT:
 				return new ContainerPetrifiedCraftingTable(player.inventory, world, pos);
 			case SILO_INVENTORY:

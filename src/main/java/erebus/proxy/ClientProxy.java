@@ -6,7 +6,6 @@ import java.util.List;
 import erebus.ModBlocks;
 import erebus.ModColourManager;
 import erebus.block.silo.TileEntitySiloTank;
-import erebus.blocks.BlockPetrifiedChest;
 import erebus.client.fx.ParticleBubbleGas;
 import erebus.client.fx.ParticleRepellent;
 import erebus.client.fx.ParticleSonic;
@@ -87,6 +86,7 @@ import erebus.client.render.tile.TileEntityErebusAltarXPRenderer;
 import erebus.client.render.tile.TileEntityExtenderThingyRenderer;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.client.render.tile.TileEntityOfferingAltarRenderer;
+import erebus.client.render.tile.TileEntityPetrifiedWoodChestRenderer;
 import erebus.client.render.tile.TileEntityUmberGolemStatueRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
@@ -165,6 +165,7 @@ import erebus.tileentity.TileEntityExtenderThingy;
 import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntityOfferingAltar;
+import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
@@ -224,6 +225,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingAltar.class, new TileEntityOfferingAltarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBones.class, new TileEntityBoneBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUmberGolemStatue.class, new TileEntityUmberGolemStatueRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPetrifiedWoodChest.class, new TileEntityPetrifiedWoodChestRenderer());
 	}
 
 	@Override
@@ -314,6 +316,7 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_OFFERING), 0,TileEntityOfferingAltar.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BLOCK_OF_BONES), 0, TileEntityBones.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.UMBER_GOLEM_STATUE), 0, TileEntityUmberGolemStatue.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PETRIFIED_WOOD_CHEST), 0, TileEntityPetrifiedWoodChest.class);
 
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	
@@ -460,8 +463,7 @@ public class ClientProxy extends CommonProxy {
 			case HONEY_COMB:
 				return new GuiErebusBasic(new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile), new ResourceLocation("erebus:textures/gui/container/honey_comb_gui.png"), (TileEntityHoneyComb) tile, 168);
 			case PETRIFIED_CHEST:
-				IInventory inventory = BlockPetrifiedChest.getInventory(world, pos);
-				return new GuiPetrifiedChest(player.inventory, inventory);
+				return new GuiPetrifiedChest(player.inventory, (TileEntityPetrifiedWoodChest) tile, player);
 			case PETRIFIED_CRAFT:
 				return new GuiPetrifiedWorkbench(player.inventory, world, pos);
 			case SILO_INVENTORY:

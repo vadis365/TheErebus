@@ -6,8 +6,8 @@ import net.minecraft.inventory.IInventory;
 
 public class ContainerPetrifiedWoodChest extends ContainerChest {
 
-	public ContainerPetrifiedWoodChest(IInventory player, IInventory chest) {
-		super(player, chest);
+	public ContainerPetrifiedWoodChest(IInventory playerInventory, IInventory chestInventory, EntityPlayer player) {
+		super(playerInventory, chestInventory, player);
 	}
 
 	@Override

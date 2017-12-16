@@ -1,0 +1,41 @@
+{
+    "parent": "erebus:block/petrified_wood_chest",
+     "display": {
+     
+      "thirdperson_righthand": {
+      "rotation": [ 75, -45, 0],
+      "translation": [ 0, 2.5, 1 ],
+      "scale": [ 0.375, 0.375, 0.375 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 75, -45, 0],
+      "translation": [ 0, 2.5, 1 ],
+      "scale": [ 0.375, 0.375, 0.375  ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 0, 0],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.5, 0.5, 0.5 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.5, 0.5, 0.5 ]
+    },
+     "gui": {
+            "rotation": [ 30, 45, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 0.625, 0.625, 0.625 ]
+        },
+    "fixed": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0,  0 , -1 ],
+      "scale": [ 0.5, 0.5, 0.5 ]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 0 ],
+      "scale": [ 0.25, 0.25, 0.25 ]
+    }
+    }
+}

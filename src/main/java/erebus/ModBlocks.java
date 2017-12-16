@@ -57,6 +57,7 @@ import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
+import erebus.blocks.BlockPetrifiedChest;
 import erebus.blocks.BlockPetrifiedCraftingTable;
 import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockPlantedGiantFlower;
@@ -223,6 +224,7 @@ public class ModBlocks {
 	public static final Block HONEY_COMB = new BlockHoneyComb();
 	public static final Block UMBER_GOLEM_STATUE = new BlockUmberGolemStatue();
 	public static final Block INSECT_REPELLENT = new BlockInsectRepellent();
+	public static final Block PETRIFIED_WOOD_CHEST = new BlockPetrifiedChest(BlockPetrifiedChest.PETRIFIED_CHEST);
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
