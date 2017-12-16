@@ -478,6 +478,7 @@ tile.erebus.zombie_ant_soldier_spawner.name=Zombie Ant Soldier Spawner
 
 #Utility Blocks
 tile.erebus.petrified_crafting_table.name=Petrified Crafting Table
+tile.erebus.petrified_wood_chest.name=Petrified Wood Chest
 tile.erebus.bamboo_crate.default.name=BambooCrate
 tile.erebus.bamboo_crate.btl.name=BambooCrate
 tile.erebus.bamboo_crate.btr.name=Colossal BambooCrate
@@ -505,6 +506,22 @@ tile.erebus.altar_healing.name=Altar of Healing
 tile.erebus.altar_xp.name=Altar of Experience
 tile.erebus.altar_repair.name=Altar of Repair
 tile.erebus.offering_altar.name=Offering Altar
+
+##############
+# Containers #
+##############
+
+container.bambooCrate=Bamboo Crate
+container.colossalCrate=Bamboo Crate
+container.umberFurnace=Umber Furnace
+container.petrifiedWoodChest=Petrified Wood Chest
+container.petrifiedChestDouble=Large Petrified Wood Chest
+container.extenderThingy=Bamboo Extender
+container.antInventory=Ant Command Control
+container.composter=Organic Composter
+container.silo=Silo location
+container.animatedChest=Chester
+container.animatedBambooCrate=Bamber
 
 ############
 # Entities #

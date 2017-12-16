@@ -3,9 +3,12 @@ package erebus.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import erebus.ModBlocks;
 import erebus.ModColourManager;
 import erebus.block.silo.TileEntitySiloTank;
+import erebus.blocks.BlockPetrifiedChest;
 import erebus.client.fx.ParticleBubbleGas;
 import erebus.client.fx.ParticleRepellent;
 import erebus.client.fx.ParticleSonic;
@@ -170,6 +173,7 @@ import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.particle.Particle;
@@ -192,11 +196,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
@@ -463,7 +470,7 @@ public class ClientProxy extends CommonProxy {
 			case HONEY_COMB:
 				return new GuiErebusBasic(new ContainerHoneyComb(player.inventory, (TileEntityHoneyComb) tile), new ResourceLocation("erebus:textures/gui/container/honey_comb_gui.png"), (TileEntityHoneyComb) tile, 168);
 			case PETRIFIED_CHEST:
-				return new GuiPetrifiedChest(player.inventory, (TileEntityPetrifiedWoodChest) tile, player);
+				return new GuiPetrifiedChest(player.inventory, getContainer(world, pos, false), player);
 			case PETRIFIED_CRAFT:
 				return new GuiPetrifiedWorkbench(player.inventory, world, pos);
 			case SILO_INVENTORY:
@@ -474,6 +481,46 @@ public class ClientProxy extends CommonProxy {
 				return new GuiUmberFurnace(player.inventory, (TileEntityUmberFurnace) tile);
 			default:
 				return null;
+		}
+	}
+
+	@Nullable
+	public ILockableContainer getContainer(World world, BlockPos pos, boolean allowBlocking) {
+		TileEntity tileentity = world.getTileEntity(pos);
+		IBlockState state = world.getBlockState(pos);
+		Block blockIn = state.getBlock();
+
+		if (!(tileentity instanceof TileEntityPetrifiedWoodChest)) {
+			return null;
+		} else {
+			ILockableContainer ilockablecontainer = (TileEntityPetrifiedWoodChest) tileentity;
+
+			if (!allowBlocking && ((BlockPetrifiedChest)blockIn).isBlocked(world, pos)) {
+				return null;
+			} else {
+				for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+					BlockPos blockpos = pos.offset(enumfacing);
+					Block block = world.getBlockState(blockpos).getBlock();
+
+					if (block instanceof BlockPetrifiedChest) {
+						if (((BlockPetrifiedChest)block).isBlocked(world, blockpos)) {
+							return null;
+						}
+
+						TileEntity tileentity1 = world.getTileEntity(blockpos);
+
+						if (tileentity1 instanceof TileEntityPetrifiedWoodChest) {
+							if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH) {
+								ilockablecontainer = new InventoryLargeChest("container.petrifiedChestDouble", ilockablecontainer, (TileEntityPetrifiedWoodChest) tileentity1);
+							} else {
+								ilockablecontainer = new InventoryLargeChest("container.petrifiedChestDouble", (TileEntityPetrifiedWoodChest) tileentity1, ilockablecontainer);
+							}
+						}
+					}
+				}
+
+				return ilockablecontainer;
+			}
 		}
 	}
 }

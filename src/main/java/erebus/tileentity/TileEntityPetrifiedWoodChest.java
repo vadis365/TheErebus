@@ -4,7 +4,9 @@ import javax.annotation.Nullable;
 
 import erebus.blocks.BlockPetrifiedChest;
 import erebus.inventory.ContainerPetrifiedWoodChest;
+import erebus.inventory.PetrifiedDoubleChestItemHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
@@ -15,8 +17,9 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.tileentity.TileEntityLockableLoot;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.datafix.DataFixer;
@@ -24,8 +27,12 @@ import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
-public class TileEntityPetrifiedWoodChest extends TileEntityChest {
+public class TileEntityPetrifiedWoodChest extends TileEntityLockableLoot implements ITickable {
 
 	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(36, ItemStack.EMPTY);
 	/** Determines if the check for adjacent chests has taken place. */
@@ -55,6 +62,17 @@ public class TileEntityPetrifiedWoodChest extends TileEntityChest {
         this.cachedChestType = typeIn;
     }
 
+    @Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+		//Use vanilla behaviour to prevent inventory from resetting when creating double chest
+		return oldState.getBlock() != newSate.getBlock();
+	}
+
+	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+		return new AxisAlignedBB(pos.add(-1, 0, -1), pos.add(2, 2, 2));
+}
+
 	@Override
 	public int getSizeInventory() {
 		return 36;
@@ -72,7 +90,7 @@ public class TileEntityPetrifiedWoodChest extends TileEntityChest {
 
 	@Override
 	public String getName() {
-		return this.hasCustomName() ? this.customName : "container.chest";
+		return this.hasCustomName() ? this.customName : "container.petrifiedWoodChest";
 	}
 
 	public static void registerFixesChest(DataFixer fixer) {
@@ -313,23 +331,23 @@ public class TileEntityPetrifiedWoodChest extends TileEntityChest {
 		}
 	}
 
-	public net.minecraftforge.items.VanillaDoubleChestItemHandler doubleChestHandler;
+	public PetrifiedDoubleChestItemHandler doubleChestHandler;
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability,
-			@Nullable net.minecraft.util.EnumFacing facing) {
-		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+	public <T> T getCapability(Capability<T> capability,
+			@Nullable EnumFacing facing) {
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (doubleChestHandler == null || doubleChestHandler.needsRefresh())
-				doubleChestHandler = net.minecraftforge.items.VanillaDoubleChestItemHandler.get(this);
-			if (doubleChestHandler != null && doubleChestHandler != net.minecraftforge.items.VanillaDoubleChestItemHandler.NO_ADJACENT_CHESTS_INSTANCE)
+				doubleChestHandler = PetrifiedDoubleChestItemHandler.get(this);
+			if (doubleChestHandler != null && doubleChestHandler != PetrifiedDoubleChestItemHandler.NO_ADJACENT_CHESTS_INSTANCE)
 				return (T) doubleChestHandler;
 		}
 		return super.getCapability(capability, facing);
 	}
 
-	public net.minecraftforge.items.IItemHandler getSingleChestHandler() {
-		return super.getCapability(net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+	public IItemHandler getSingleChestHandler() {
+		return super.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 	}
 
 	@Override

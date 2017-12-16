@@ -224,7 +224,7 @@ public class ModBlocks {
 	public static final Block HONEY_COMB = new BlockHoneyComb();
 	public static final Block UMBER_GOLEM_STATUE = new BlockUmberGolemStatue();
 	public static final Block INSECT_REPELLENT = new BlockInsectRepellent();
-	public static final Block PETRIFIED_WOOD_CHEST = new BlockPetrifiedChest(BlockPetrifiedChest.PETRIFIED_CHEST);
+	public static final Block PETRIFIED_WOOD_CHEST = new BlockPetrifiedChest(BlockPetrifiedChest.Type.BASIC);
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
