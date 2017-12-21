@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube",
+    "textures": {
+		"particle": "erebus:blocks/amber_glass_island",
+        "down": "erebus:blocks/amber_glass_ew",
+		"up": "erebus:blocks/amber_glass_news",
+		"north": "erebus:blocks/amber_glass_new",
+		"south": "erebus:blocks/amber_glass_new",
+		"west": "erebus:blocks/amber_glass_news",
+		"east": "erebus:blocks/amber_glass_news"
+    }
+}

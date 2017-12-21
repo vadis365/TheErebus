@@ -23,6 +23,7 @@ import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
 import erebus.blocks.BlockAlgae;
 import erebus.blocks.BlockAmber;
+import erebus.blocks.BlockAmberGlass;
 import erebus.blocks.BlockAnthillBlock;
 import erebus.blocks.BlockAntlionSpawner;
 import erebus.blocks.BlockBerryBush;
@@ -154,6 +155,7 @@ public class ModBlocks {
 	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
 	public static final Block JADE_BLOCK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(5.0F).setResistance(10.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block AMBER = new BlockAmber();
+	public static final Block AMBER_GLASS = new BlockAmberGlass();
 	public static final Block MUD = new BlockMud();
 	public static final Block QUICK_SAND = new BlockQuickSand();
 	public static final Block RED_GEM = new BlockRedGem();

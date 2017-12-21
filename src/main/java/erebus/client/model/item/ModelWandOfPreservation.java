@@ -50,14 +50,14 @@ public class ModelWandOfPreservation extends ModelBase {
 		setRotation(pommel2, 0F, 0.7853982F, 0F);
 	}
 
-	public void render(float unitPixel) {
-		topMid.render(unitPixel);
-		topMain.render(unitPixel);
-		topBase.render(unitPixel);
-		shaft1.render(unitPixel);
-		shaft2.render(unitPixel);
-		pommel1.render(unitPixel);
-		pommel2.render(unitPixel);
+	public void render() {
+		topMid.render(0.0625F);
+		topMain.render(0.0625F);
+		topBase.render(0.0625F);
+		shaft1.render(0.0625F);
+		shaft2.render(0.0625F);
+		pommel1.render(0.0625F);
+		pommel2.render(0.0625F);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

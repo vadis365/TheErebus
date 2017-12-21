@@ -1,14 +1,16 @@
 package erebus.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.entity.EntityPreservedBlock;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ItemWandOfPreservation extends Item {
@@ -16,36 +18,30 @@ public class ItemWandOfPreservation extends Item {
 	public ItemWandOfPreservation() {
 		setMaxDamage(256);
 		setMaxStackSize(1);
-		setCreativeTab(ModTabs.specials);
-		setUnlocalizedName("erebus.wand_of_preservation");
+		setCreativeTab(ModTabs.GEAR);
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand); 
 		if (player.capabilities.isCreativeMode || consumeBullet(player)) {
 			stack.damageItem(1, player);
-			world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+			world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS,  0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.isRemote)
-				world.spawnEntityInWorld(new EntityPreservedBlock(world, player));
+				world.spawnEntity(new EntityPreservedBlock(world, player));
 		}
-		return stack;
+		return new ActionResult(EnumActionResult.SUCCESS, stack);
 	}
 
 	private boolean consumeBullet(EntityPlayer player) {
-		for (int i = 0; i < player.inventory.mainInventory.length; i++) {
-			ItemStack stack = player.inventory.mainInventory[i];
-			if (stack != null && stack.getItem() == ModItems.materials && stack.getItemDamage() == ItemMaterials.DATA.AMBER_STAR.ordinal()) {
-				if (--stack.stackSize <= 0)
-					player.inventory.mainInventory[i] = null;
+		for (int i = 0; i < player.inventory.mainInventory.size(); i++) {
+			ItemStack stack = player.inventory.mainInventory.get(i);
+			if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS && stack.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.AMBER_STAR.ordinal()) {
+				stack.shrink(1);
 				player.inventory.markDirty();
 				return true;
 			}
 		}
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
 	}
 }
