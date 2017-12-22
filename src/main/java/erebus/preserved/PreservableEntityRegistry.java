@@ -112,7 +112,7 @@ public class PreservableEntityRegistry implements IPreservableEntityRegistry {
 
 	public static class EntityDimensions {
 
-		public static final EntityDimensions DEFAULT = new EntityDimensions(0.0F, 0.25F, 0.0F, 0.5F);
+		public static final EntityDimensions DEFAULT = new EntityDimensions(0.0F, 0.01F, 0.0F, 0.5F);
 
 		final float xOff, yOff, zOff, scale;
 

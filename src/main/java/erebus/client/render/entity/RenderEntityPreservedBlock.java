@@ -4,16 +4,20 @@ import erebus.ModBlocks;
 import erebus.entity.EntityPreservedBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderEntityPreservedBlock extends Render<EntityPreservedBlock> {
-
+	
+	public final ItemStack amberBlock = new ItemStack(ModBlocks.AMBER.getDefaultState().getBlock());
+	
 	public RenderEntityPreservedBlock(RenderManager rendermanagerIn) {
 		super(rendermanagerIn);
 	}
@@ -29,27 +33,27 @@ public class RenderEntityPreservedBlock extends Render<EntityPreservedBlock> {
 		GlStateManager.translate(x, y + 0.5D, z);
 		GlStateManager.rotate(180F, 1F, 0F, 0F);
 		GlStateManager.rotate(rotation, 0F, 1F, 0F);
-		GlStateManager.scale(0.75D, 0.75D, 0.75D);
+		GlStateManager.scale(1D, 1D, 1D);
 		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(ModBlocks.AMBER.getDefaultState(), 0.6F);
+		Minecraft.getMinecraft().getRenderItem().renderItem(amberBlock, TransformType.FIXED);
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y + 0.5D, z);
 		GlStateManager.rotate(180F, 1F, 0F, 0F);
 		GlStateManager.rotate(45F + rotation, 1F, 1F, 0F);
-		GlStateManager.scale(0.75D, 0.75D, 0.75D);
+		GlStateManager.scale(1D, 1D, 1D);
 		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(ModBlocks.AMBER.getDefaultState(), 0.6F);
+		Minecraft.getMinecraft().getRenderItem().renderItem(amberBlock, TransformType.FIXED);
 		GlStateManager.popMatrix();
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y + 0.5D, z);
 		GlStateManager.rotate(180F, 1F, 0F, 0F);
 		GlStateManager.rotate(-45F + rotation, 1F, 1F, 0F);
-		GlStateManager.scale(0.75D, 0.75D, 0.75D);
+		GlStateManager.scale(1D, 1D, 1D);
 		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(ModBlocks.AMBER.getDefaultState(), 0.6F);
+		Minecraft.getMinecraft().getRenderItem().renderItem(amberBlock, TransformType.FIXED);
 		GlStateManager.popMatrix();
 	}
 
