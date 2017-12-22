@@ -7,8 +7,8 @@ import net.minecraft.entity.Entity;
 
 public class PreservedWaspHandler implements IPreservableEntityHandler {
 
-	private final EntityDimensions normal = new EntityDimensions(0.0F, 0.35F, 0.0F, 0.35F);
-	private final EntityDimensions boss = new EntityDimensions(0.0F, 0.35F, 0.0F, 0.35F / 2F);
+	private final EntityDimensions normal = new EntityDimensions(0.0F, 0.35F, 0.0F, 0.7F);
+	private final EntityDimensions boss = new EntityDimensions(0.0F, 0.35F, 0.0F, 0.35F);
 
 	@Override
 	public boolean handlesEntity(Entity entity) {

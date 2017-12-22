@@ -57,7 +57,8 @@ public class EntityPreservedBlock extends EntityThrowable {
 	private NBTTagCompound trapEntity(Entity entity) {
 		NBTTagCompound entityNBT = new NBTTagCompound();
 		entity.writeToNBT(entityNBT);
-		entityNBT.setString("id", EntityList.getEntityString(entity));
+		String mobName = EntityList.getKey(entity).toString();
+		entityNBT.setString("id", mobName);
 
 		return entityNBT;
 	}

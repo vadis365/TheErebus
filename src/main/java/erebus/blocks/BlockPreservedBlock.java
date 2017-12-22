@@ -91,9 +91,9 @@ public class BlockPreservedBlock extends Block implements ITileEntityProvider, I
 					nbt.setTag("EntityNBT", tile.getEntityNBT());
 					stack.setTagCompound(nbt);
 					InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-					world.removeTileEntity(pos);
 				} else
 					tile.spawnTrappedEntity();
+				world.removeTileEntity(pos);
 			}
 		}
 	}
@@ -106,7 +106,7 @@ public class BlockPreservedBlock extends Block implements ITileEntityProvider, I
 			if (tile != null) {
 				NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("EntityNBT");
 				tile.setEntityNBT(nbt);
-				tile.rotation = (byte) (((MathHelper.floor((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 1) % 4);
+				tile.rotation = (byte) (((MathHelper.floor((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3)) % 4);
 			}
 			world.notifyBlockUpdate(pos, state, state, 3);
 		}

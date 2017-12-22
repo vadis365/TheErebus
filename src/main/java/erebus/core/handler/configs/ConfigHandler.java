@@ -80,7 +80,7 @@ public class ConfigHandler {
 
 	private void readEntityDimensionsFile() {
 		File file = new File(configFolder, "ErebusEntityDimensions.cfg");
-		BufferedReader br = new BufferedReader(new InputStreamReader(Erebus.class.getResourceAsStream("/assets/DefaultEntityDimensions.cfg")));
+		BufferedReader br = new BufferedReader(new InputStreamReader(Erebus.class.getResourceAsStream("/assets/erebus/default_entity_sizes.cfg")));
 		if (!file.exists()) {
 			PreservableEntityRegistry.INSTANCE.readFile(br, true);
 			PreservableEntityRegistry.INSTANCE.writeConfigFile(file);
