@@ -1,6 +1,10 @@
 package erebus;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import erebus.api.ErebusAPI;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
@@ -71,6 +75,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ModEntities {
+	public static final List<Class<? extends EntityLiving>> MOB_LIST = new ArrayList<Class<? extends EntityLiving>>();
 	public static void init() {
 		// Entity registrations
 /*		
@@ -199,7 +204,14 @@ public class ModEntities {
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor, EntityDimensions dimensions) {
 		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), entityClass, name, id, Erebus.INSTANCE, 256, 3, true, eggBackgroundColor, eggForegroundColor);
-		if (dimensions != null)
+		if (dimensions != null) {
 			ErebusAPI.preservableEntityRegistry.registerEntity(entityClass, dimensions);
+			MOB_LIST.add(entityClass);
+		}
+	}
+
+	public static Class<? extends EntityLiving> getRandomEntityClass() {
+		Collections.shuffle(MOB_LIST);
+		return MOB_LIST.get(0);
 	}
 }
