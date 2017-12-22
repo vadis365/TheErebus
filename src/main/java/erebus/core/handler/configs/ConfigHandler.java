@@ -1,13 +1,19 @@
 package erebus.core.handler.configs;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
+import erebus.Erebus;
+import erebus.lib.Reference;
+import erebus.preserved.PreservableEntityRegistry;
+import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import erebus.lib.Reference;
-import erebus.world.biomes.decorators.data.OreSettings.OreType;
 
 public class ConfigHandler {
 
@@ -35,7 +41,7 @@ public class ConfigHandler {
 	}
 
 	private void syncConfigs() {
-	//	readEntityDimensionsFile();
+		readEntityDimensionsFile();
 
 		erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
 		portalCooldown = config.get(Configuration.CATEGORY_GENERAL, "Number of seconds before the portal is usable again.", 5).getInt(5);
@@ -71,7 +77,7 @@ public class ConfigHandler {
 		if (config.hasChanged())
 			config.save();
 	}
-/* TODO
+
 	private void readEntityDimensionsFile() {
 		File file = new File(configFolder, "ErebusEntityDimensions.cfg");
 		BufferedReader br = new BufferedReader(new InputStreamReader(Erebus.class.getResourceAsStream("/assets/DefaultEntityDimensions.cfg")));
@@ -86,7 +92,7 @@ public class ConfigHandler {
 				e.printStackTrace();
 			}
 	}
-*/
+
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 		if (Reference.MOD_ID.equals(event.getModID())) {

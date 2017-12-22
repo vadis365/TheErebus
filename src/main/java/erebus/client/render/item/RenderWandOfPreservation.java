@@ -2,6 +2,7 @@ package erebus.client.render.item;
 
 import erebus.client.model.item.ModelWandOfPreservation;
 import erebus.items.ItemWandOfAnimation;
+import erebus.items.ItemWandOfPreservation;
 import erebus.lib.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -22,7 +23,7 @@ public class RenderWandOfPreservation extends TileEntityItemStackRenderer {
 
     @Override
     public void renderByItem(ItemStack stack) {
-        if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemWandOfAnimation)) {
+        if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemWandOfPreservation)) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
             GlStateManager.pushMatrix();
             GlStateManager.scale(1, 1, 1);

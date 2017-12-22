@@ -41,6 +41,7 @@ import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityPreservedBlock;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
@@ -87,7 +88,7 @@ public class ModEntities {
 		registerEntity(43, EntityTarantulaMiniboss.class, "tarantula_mini_boss", 0x000000, 0xE82066);
 
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
-		registerEntity(47, EntitySnapper.class, "snapper", 0x804E3D, 0x3D6F80);
+		
 		registerEntity(48, EntityWisp.class, "wisp", 0x804E3D, 0x3D6F80);
 	
 		registerEntity(54, EntityFireResistent.class, "fire_resistent_item");
@@ -175,6 +176,7 @@ public class ModEntities {
 
 		registerEntity(79, EntityGasVent.class, "gas_vent");
 		registerEntity(80, EntityThrownSand.class, "thrown_sand");
+		registerEntity(81, EntityPreservedBlock.class, "preserved_block");
 
 		// Spawn conditions
 		if (ConfigHandler.INSTANCE.netherWidows)

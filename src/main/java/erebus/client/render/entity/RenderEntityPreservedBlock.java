@@ -1,52 +1,61 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.ModBlocks;
 import erebus.entity.EntityPreservedBlock;
-import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RenderEntityPreservedBlock extends Render {
-	private final RenderBlocks blockRenderer = new RenderBlocks();
-	public static ResourceLocation texture = new ResourceLocation("erebus:textures/blocks/glassAmber.png");
+@SideOnly(Side.CLIENT)
+public class RenderEntityPreservedBlock extends Render<EntityPreservedBlock> {
 
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float yaw, float tick) {
-		renderPreservedBlock((EntityPreservedBlock) entity, x, y, z, yaw, tick);
-	}
-
-	public void renderPreservedBlock(EntityPreservedBlock entityPreservedBlock, double x, double y, double z, float yaw, float tick) {
-		float rotation = entityPreservedBlock.ticksExisted * 20 + tick;
-		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
-		GL11.glRotatef(rotation, 0, 1F, 0);
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		bindTexture(TextureMap.locationBlocksTexture);
-		blockRenderer.renderBlockAsItem(ModBlocks.amber, 0, 0.6F);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
-		GL11.glRotatef(45F + rotation, 1F, 1F, 0);
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		bindTexture(TextureMap.locationBlocksTexture);
-		blockRenderer.renderBlockAsItem(ModBlocks.amber, 0, 0.6F);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
-		GL11.glRotatef(-45F + rotation, 1F, 1F, 0);
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		bindTexture(TextureMap.locationBlocksTexture);
-		blockRenderer.renderBlockAsItem(ModBlocks.amber, 0, 0.6F);
-		GL11.glPopMatrix();
+	public RenderEntityPreservedBlock(RenderManager rendermanagerIn) {
+		super(rendermanagerIn);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+	public void doRender(EntityPreservedBlock entity, double x, double y, double z, float yaw, float tick) {
+		renderPreservedBlock(entity, x, y, z, yaw, tick);
+	}
+
+	public void renderPreservedBlock(EntityPreservedBlock entity, double x, double y, double z, float yaw, float tick) {
+		float rotation = entity.ticksExisted * 20 + tick;
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(x, y + 0.5D, z);
+		GlStateManager.rotate(180F, 1F, 0F, 0F);
+		GlStateManager.rotate(rotation, 0F, 1F, 0F);
+		GlStateManager.scale(0.75D, 0.75D, 0.75D);
+		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(ModBlocks.AMBER.getDefaultState(), 0.6F);
+		GlStateManager.popMatrix();
+
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(x, y + 0.5D, z);
+		GlStateManager.rotate(180F, 1F, 0F, 0F);
+		GlStateManager.rotate(45F + rotation, 1F, 1F, 0F);
+		GlStateManager.scale(0.75D, 0.75D, 0.75D);
+		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(ModBlocks.AMBER.getDefaultState(), 0.6F);
+		GlStateManager.popMatrix();
+
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(x, y + 0.5D, z);
+		GlStateManager.rotate(180F, 1F, 0F, 0F);
+		GlStateManager.rotate(-45F + rotation, 1F, 1F, 0F);
+		GlStateManager.scale(0.75D, 0.75D, 0.75D);
+		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(ModBlocks.AMBER.getDefaultState(), 0.6F);
+		GlStateManager.popMatrix();
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(EntityPreservedBlock entity) {
+		return null;
 	}
 
 }

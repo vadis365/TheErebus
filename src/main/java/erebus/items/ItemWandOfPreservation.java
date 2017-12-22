@@ -27,8 +27,11 @@ public class ItemWandOfPreservation extends Item {
 		if (player.capabilities.isCreativeMode || consumeBullet(player)) {
 			stack.damageItem(1, player);
 			world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS,  0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-			if (!world.isRemote)
-				world.spawnEntity(new EntityPreservedBlock(world, player));
+			if (!world.isRemote) {
+				EntityPreservedBlock amberStar = new EntityPreservedBlock(world, player);
+				amberStar.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
+				world.spawnEntity(amberStar);
+			}
 		}
 		return new ActionResult(EnumActionResult.SUCCESS, stack);
 	}

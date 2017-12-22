@@ -43,6 +43,7 @@ import erebus.items.ItemRolledNewspaper;
 import erebus.items.ItemSpiderTShirt;
 import erebus.items.ItemSprayCan;
 import erebus.items.ItemWandOfAnimation;
+import erebus.items.ItemWandOfPreservation;
 import erebus.items.ItemWaspSword;
 import erebus.items.ItemWhetstone;
 import erebus.items.ItemWoodlouseBall;
@@ -149,6 +150,7 @@ public class ModItems {
 	public static final Item PORTAL_ACTIVATOR = new ItemPortalActivator();
 	public static final Item HOMING_BEECON = new ItemHomingBeecon();
 	public static final Item HOMING_BEECON_ADVANCED = new ItemHomingBeeconAdvanced();
+	public static final Item WAND_OF_PRESERVATION = new ItemWandOfPreservation();
 
 	public static void init() {
 		try {

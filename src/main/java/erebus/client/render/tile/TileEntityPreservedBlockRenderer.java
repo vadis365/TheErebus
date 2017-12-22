@@ -2,32 +2,34 @@ package erebus.client.render.tile;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.api.ErebusAPI;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import erebus.tileentity.TileEntityPreservedBlock;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer {
+public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer<TileEntityPreservedBlock> {
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
-		Entity entity = ((TileEntityPreservedBlock) tile).getRenderEntity();
+	public void render(TileEntityPreservedBlock tile, double x, double y, double z, float partialTick, int destroyStage, float alpha) {
+		IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+		if(tile == null || !tile.hasWorld())
+			return;
+		Entity entity = tile.getRenderEntity();
 		if (entity == null)
 			return;
-
-		renderTrappedEntity(entity, x, y, z, tile.getBlockMetadata());
+		renderTrappedEntity(entity, x, y, z, 90.0F * (-tile.rotation));
 	}
-
-	public static void renderTrappedEntity(Entity entity, double x, double y, double z, int meta) {
+	
+	public static void renderTrappedEntity(Entity entity, double x, double y, double z, float rotation) {
 		EntityDimensions dimensions = ErebusAPI.preservableEntityRegistry.getEntityDimensions(entity);
 		float xOff = 0;
 		float yOff = 0;
@@ -40,26 +42,11 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 			scale = dimensions.getScale();
 		}
 
-		GL11.glPushMatrix();
-		GL11.glTranslated(x + 0.5F, y, z + 0.5F);
-		GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-		switch (meta) {
-			case 3:
-			case 7:
-				GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-				break;
-			case 5:
-			case 9:
-				GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
-				break;
-			case 4:
-			case 8:
-				GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-				break;
-		}
-
-		GL11.glTranslated(xOff, yOff, zOff);
-		GL11.glScalef(scale, scale, scale);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(x + 0.5F, y, z + 0.5F);
+		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(xOff, yOff, zOff);
+		GlStateManager.scale(scale, scale, scale);
 		Render renderer = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(entity);
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		if (entity instanceof EntityItem)
@@ -67,6 +54,6 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer 
 		renderer.doRender(entity, 0, 0, 0, 0, 0);
 		GL11.glPopAttrib();
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 }

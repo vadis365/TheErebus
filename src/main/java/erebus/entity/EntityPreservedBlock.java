@@ -2,6 +2,8 @@ package erebus.entity;
 
 import erebus.ModBlocks;
 import erebus.api.ErebusAPI;
+import erebus.blocks.BlockPreservedBlock;
+import erebus.blocks.BlockPreservedBlock.EnumAmberType;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityPreservedBlock;
 import net.minecraft.entity.Entity;
@@ -37,7 +39,7 @@ public class EntityPreservedBlock extends EntityThrowable {
 
 		if (mop.entityHit != null && !(mop.entityHit instanceof EntityPlayer)) {
 			if (canTrap(mop.entityHit)) {
-				getEntityWorld().setBlock(pos, ModBlocks.PRESERVED_BLOCK.getDefaultState(), 3);
+				getEntityWorld().setBlockState(pos, ModBlocks.PRESERVED_BLOCK.getDefaultState().withProperty(BlockPreservedBlock.TYPE, EnumAmberType.AMBER_GLASS), 3);
 				TileEntityPreservedBlock tile = Utils.getTileEntity(getEntityWorld(), pos, TileEntityPreservedBlock.class);
 				tile.setEntityNBT(trapEntity(mop.entityHit));
 				mop.entityHit.setDead();

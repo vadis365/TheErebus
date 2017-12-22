@@ -62,6 +62,7 @@ import erebus.blocks.BlockPetrifiedChest;
 import erebus.blocks.BlockPetrifiedCraftingTable;
 import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockPlantedGiantFlower;
+import erebus.blocks.BlockPreservedBlock;
 import erebus.blocks.BlockPricklyPear;
 import erebus.blocks.BlockQuickSand;
 import erebus.blocks.BlockRedGem;
@@ -156,6 +157,7 @@ public class ModBlocks {
 	public static final Block JADE_BLOCK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(5.0F).setResistance(10.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block AMBER = new BlockAmber();
 	public static final Block AMBER_GLASS = new BlockAmberGlass();
+	public static final Block PRESERVED_BLOCK = new BlockPreservedBlock();
 	public static final Block MUD = new BlockMud();
 	public static final Block QUICK_SAND = new BlockQuickSand();
 	public static final Block RED_GEM = new BlockRedGem();

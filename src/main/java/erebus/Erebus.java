@@ -1,5 +1,6 @@
 package erebus;
 
+import erebus.api.ErebusAPI;
 import erebus.client.fx.ParticleTextureStitchEvent;
 import erebus.client.gui.GuiAntiVenomBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
@@ -24,6 +25,7 @@ import erebus.network.server.PacketBeetleDig;
 import erebus.network.server.PacketBeetleRamAttack;
 import erebus.network.server.PacketGlider;
 import erebus.network.server.PacketGliderPowered;
+import erebus.preserved.PreservableEntityRegistry;
 import erebus.proxy.CommonProxy;
 import erebus.recipes.ErebusRecipesHandler;
 import erebus.world.SpawnerErebus;
@@ -63,6 +65,7 @@ public class Erebus {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ErebusAPI.preservableEntityRegistry = PreservableEntityRegistry.INSTANCE;
 		ConfigHandler.INSTANCE.loadConfig(event);
 		ModFluids.init();
 		ModItems.init();

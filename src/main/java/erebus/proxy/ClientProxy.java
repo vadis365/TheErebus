@@ -39,6 +39,7 @@ import erebus.client.render.entity.RenderChameleonTick;
 import erebus.client.render.entity.RenderCicada;
 import erebus.client.render.entity.RenderCropWeevil;
 import erebus.client.render.entity.RenderDragonfly;
+import erebus.client.render.entity.RenderEntityPreservedBlock;
 import erebus.client.render.entity.RenderFireAnt;
 import erebus.client.render.entity.RenderFireAntSoldier;
 import erebus.client.render.entity.RenderFly;
@@ -91,6 +92,7 @@ import erebus.client.render.tile.TileEntityExtenderThingyRenderer;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.client.render.tile.TileEntityOfferingAltarRenderer;
 import erebus.client.render.tile.TileEntityPetrifiedWoodChestRenderer;
+import erebus.client.render.tile.TileEntityPreservedBlockRenderer;
 import erebus.client.render.tile.TileEntityUmberGolemStatueRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
@@ -132,6 +134,7 @@ import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
+import erebus.entity.EntityPreservedBlock;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
@@ -170,6 +173,7 @@ import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
+import erebus.tileentity.TileEntityPreservedBlock;
 import erebus.tileentity.TileEntitySmoothieMaker;
 import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
@@ -234,6 +238,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBones.class, new TileEntityBoneBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUmberGolemStatue.class, new TileEntityUmberGolemStatueRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPetrifiedWoodChest.class, new TileEntityPetrifiedWoodChestRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPreservedBlock.class, new TileEntityPreservedBlockRenderer());
 	}
 
 	@Override
@@ -305,6 +310,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityUmberGolem.class, RenderUmberGolem::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityMagmaCrawler.class, RenderMagmaCrawler::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBogMaw.class, RenderBogMaw::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityPreservedBlock.class, RenderEntityPreservedBlock::new);
 
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWaspSword(TileEntityItemStackRenderer.instance);
@@ -318,15 +324,15 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BAMBOO_BRIDGE), 0, TileEntityBambooBridge.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BAMBOO_EXTENDER), 0, TileEntityExtenderThingy.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_BASE), 0, TileEntityErebusAltar.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_LIGHTNING), 0,TileEntityErebusAltarLightning.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_HEALING), 0,TileEntityErebusAltarHealing.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_XP), 0,TileEntityErebusAltarXP.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_REPAIR), 0,TileEntityErebusAltarRepair.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_OFFERING), 0,TileEntityOfferingAltar.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_LIGHTNING), 0, TileEntityErebusAltarLightning.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_HEALING), 0, TileEntityErebusAltarHealing.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_XP), 0, TileEntityErebusAltarXP.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_REPAIR), 0, TileEntityErebusAltarRepair.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.ALTAR_OFFERING), 0, TileEntityOfferingAltar.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.BLOCK_OF_BONES), 0, TileEntityBones.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.UMBER_GOLEM_STATUE), 0, TileEntityUmberGolemStatue.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PETRIFIED_WOOD_CHEST), 0, TileEntityPetrifiedWoodChest.class);
-
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PRESERVED_BLOCK), 0, TileEntityPreservedBlock.class);
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJadeShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.JADE));
