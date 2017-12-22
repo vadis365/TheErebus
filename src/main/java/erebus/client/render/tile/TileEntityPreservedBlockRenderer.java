@@ -26,7 +26,7 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer<
 		Entity entity = tile.getRenderEntity();
 		if (entity == null)
 			return;
-		renderTrappedEntity(entity, x, y, z, 90.0F * (-tile.rotation));
+		renderTrappedEntity(entity, x, y, z, 90F * -tile.rotation);
 	}
 	
 	public static void renderTrappedEntity(Entity entity, double x, double y, double z, float rotation) {
@@ -44,6 +44,7 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer<
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x + 0.5F, y, z + 0.5F);
+		GlStateManager.rotate(180F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
 		GlStateManager.translate(xOff, yOff, zOff);
 		GlStateManager.scale(scale, scale, scale);
