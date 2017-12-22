@@ -75,7 +75,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ModEntities {
-	public static final List<Class<? extends EntityLiving>> MOB_LIST = new ArrayList<Class<? extends EntityLiving>>();
+	public final static List<Class<? extends EntityLiving>> MOB_LIST = new ArrayList<Class<? extends EntityLiving>>();
 	public static void init() {
 		// Entity registrations
 /*		
@@ -204,9 +204,9 @@ public class ModEntities {
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor, EntityDimensions dimensions) {
 		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), entityClass, name, id, Erebus.INSTANCE, 256, 3, true, eggBackgroundColor, eggForegroundColor);
+		MOB_LIST.add(entityClass);
 		if (dimensions != null) {
 			ErebusAPI.preservableEntityRegistry.registerEntity(entityClass, dimensions);
-			MOB_LIST.add(entityClass);
 		}
 	}
 
