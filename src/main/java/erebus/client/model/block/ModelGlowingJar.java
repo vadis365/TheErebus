@@ -1,11 +1,10 @@
 package erebus.client.model.block;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelGlowingJar extends ModelBase {
@@ -26,18 +25,15 @@ public class ModelGlowingJar extends ModelBase {
 		neck.setRotationPoint(0F, 12F, 0F);
 	}
 
-	@SideOnly(Side.CLIENT)
 	public void render() {
 		lid.render(0.0625F);
-		GL11.glPushMatrix();
-		GL11.glEnable(3042);
-		GL11.glDepthMask(false);
-		GL11.glBlendFunc(770, 771);
-		GL11.glColor4f(0.8F, 0.8F, 0.8F, 0.6F);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.color(0.8F, 0.8F, 0.8F, 0.6F);
 		neck.render(0.0625F);
 		jar.render(0.0625F);
-		GL11.glDepthMask(true);
-		GL11.glDisable(3042);
-		GL11.glPopMatrix();
+		GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
 	}
 }

@@ -44,6 +44,7 @@ import erebus.blocks.BlockGaeanKeystone;
 import erebus.blocks.BlockGhostSand;
 import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockGiantLilyPad;
+import erebus.blocks.BlockGlowingJar;
 import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
 import erebus.blocks.BlockGneiss;
@@ -229,6 +230,7 @@ public class ModBlocks {
 	public static final Block UMBER_GOLEM_STATUE = new BlockUmberGolemStatue();
 	public static final Block INSECT_REPELLENT = new BlockInsectRepellent();
 	public static final Block PETRIFIED_WOOD_CHEST = new BlockPetrifiedChest(BlockPetrifiedChest.Type.BASIC);
+	public static final Block GLOWING_JAR = new BlockGlowingJar();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
@@ -254,7 +256,6 @@ public class ModBlocks {
 	public static final Block ZOMBIE_ANT_SOLDIER_SPAWNER = new BlockZombieAntSpawner("erebus:zombie_ant_soldier");
 	public static final Block WASP_NEST = new BlockWaspNest();
 	public static final Block STAIRS_WASP_NEST = BlockStairsErebus.createWaspStairs(WASP_NEST.getDefaultState());
-	//public static final Block magmaCrawler_SPAWNER = new BlockMagmaCrawlerSpawner("erebus:magmaCrawler");
 	public static final Block ANTLION_EGG = new BlockBossEgg();
 	public static final Block TARANTULA_EGG = new BlockBossEgg();
 	public static final Block CAPSTONE = new BlockCapstone();

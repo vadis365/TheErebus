@@ -1,30 +1,22 @@
 package erebus.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModItems;
-import erebus.item.ItemMaterials;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 
-public class TileEntityGlowingJar extends TileEntity {
-
-	@SideOnly(Side.CLIENT)
-	private EntityItem ghostItem;
-
-	@SideOnly(Side.CLIENT)
-	public EntityItem getGhostItem() {
-		if (ghostItem == null) {
-			ghostItem = new EntityItem(worldObj);
-			ghostItem.hoverStart = 0.0F;
-			ghostItem.setEntityItemStack(new ItemStack(ModItems.materials, 1, ItemMaterials.DATA.BIO_LUMINESCENCE.ordinal()));
-		}
-		return ghostItem;
-	}
+public class TileEntityGlowingJar extends TileEntity implements ITickable {
+	private float particleSpawnTick;
+	public float particleSize;
 
 	@Override
-	public boolean canUpdate() {
-		return false;
+	public void update() {
+		if (world.isRemote) {
+			particleSpawnTick++;
+			if (particleSpawnTick <= 50)
+				particleSize = particleSpawnTick / 25;
+			else
+				particleSize = 2 - (particleSpawnTick - 50) / 25;
+			if (particleSpawnTick > 100)
+				particleSpawnTick = 0;
+		}
 	}
 }

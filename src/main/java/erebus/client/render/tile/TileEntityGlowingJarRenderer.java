@@ -2,135 +2,110 @@ package erebus.client.render.tile;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import erebus.ModBlocks;
 import erebus.client.model.block.ModelGlowingJar;
+import erebus.lib.Reference;
 import erebus.tileentity.TileEntityGlowingJar;
-import erebus.tileentity.TileEntityJarOHoney;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer {
+public class TileEntityGlowingJarRenderer extends TileEntitySpecialRenderer <TileEntityGlowingJar> {
 
 	private final ModelGlowingJar glowingJar = new ModelGlowingJar();
-	private final RenderItem renderItem;
-	private final RenderBlocks blockRenderer = new RenderBlocks();
-	private static final ResourceLocation GLOWING_JAR = new ResourceLocation("erebus:textures/special/tiles/glowingJar.png");
-	public static TileEntityGlowingJarRenderer instance;
-
-	public TileEntityGlowingJarRenderer() {
-		renderItem = new RenderItem() {
-			@Override
-			public boolean shouldBob() {
-				return false;
-			}
-		};
-		renderItem.setRenderManager(RenderManager.instance);
-	}
+	private static final ResourceLocation GLOWING_JAR_TEXTURE = new ResourceLocation("erebus:textures/special/tiles/glowing_jar.png");
+	private static final ResourceLocation WISP_TEXTURE = new ResourceLocation(Reference.MOD_ID + ":entity/wisp");
 
 	@Override
-	public void func_147497_a(TileEntityRendererDispatcher renderer) {
-		super.func_147497_a(renderer);
-		instance = this;
-	}
-
-	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTickTime) {
-		if (tile instanceof TileEntityJarOHoney)
-			renderJarOHoney((TileEntityJarOHoney) tile, x, y, z);
-		else if (tile instanceof TileEntityGlowingJar)
-			renderGlowJar(x, y, z, ((TileEntityGlowingJar) tile).getGhostItem());
-
-		renderJar(x, y, z);
-	}
-
-	public void renderJarOHoney(TileEntityJarOHoney tile, double x, double y, double z) {
-		int amount = tile.tank.getFluidAmount();
-		int capacity = tile.tank.getCapacity();
-		float size = 0.70F / capacity * amount;
-		if (amount >= 100) {
-			GL11.glPushMatrix();
-			GL11.glEnable(3042);
-			GL11.glBlendFunc(770, 771);
-			GL11.glTranslated((float) x + 0.5F, (float) (y + 0.030F + size * 0.5F), (float) z + 0.5F);
-			GL11.glScalef(0.55F, -size, -0.55F);
-			bindTexture(TextureMap.locationBlocksTexture);
-			blockRenderer.renderBlockAsItem(ModBlocks.amber, 0, 1.0F);
-			GL11.glDisable(3042);
-			GL11.glPopMatrix();
+	public void render(TileEntityGlowingJar tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+		if(tile == null || !tile.hasWorld()) {
+			renderTileAsItem(x, y, z);
+			return;
 		}
-		renderNameTag(tile.getOwnerName(), x, y, z);
+		renderTile(tile, x, y, z, partialTicks, destroyStage, alpha);
 	}
 
-	public void renderGlowJar(double x, double y, double z, EntityItem ghostItem) {
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) (y + 0.2F), (float) z + 0.5F);
-		GL11.glScalef(1.2F, 1.2F, 1.2F);
-		renderItem.doRender(ghostItem, 0, 0, 0, 0, 0);
-		GL11.glRotatef(90, 0, 1, 0);
-		renderItem.doRender(ghostItem, 0, 0, 0, 0, 0);
-		GL11.glPopMatrix();
-	}
-
-	public void renderJar(double x, double y, double z) {
-		bindTexture(GLOWING_JAR);
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
-		GL11.glScalef(0.7F, -1F, -0.7F);
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		glowingJar.render();
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glPopMatrix();
-	}
-
-	private void renderNameTag(String name, double x, double y, double z) {
-		float scale = 0.02666667F;
-		float height = 0.8F;
-
-		GL11.glPushMatrix();
-		GL11.glTranslated(x + 0.5F, y + height + 0.5F, z + 0.5F);
-		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-RenderManager.instance.playerViewY, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(RenderManager.instance.playerViewX, 1.0F, 0.0F, 0.0F);
-		GL11.glScalef(-scale, -scale, scale);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDepthMask(false);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		Tessellator tessellator = Tessellator.instance;
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-
-		tessellator.startDrawingQuads();
-		FontRenderer fontrenderer = Minecraft.getMinecraft().fontRenderer;
-		int width = fontrenderer.getStringWidth(name) / 2;
-		tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-		tessellator.addVertex(-width - 1, -1, 0.0D);
-		tessellator.addVertex(-width - 1, 8, 0.0D);
-		tessellator.addVertex(width + 1, 8, 0.0D);
-		tessellator.addVertex(width + 1, -1, 0.0D);
+	public void renderTile(TileEntityGlowingJar tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+		Tessellator tessellator = Tessellator.getInstance();
+		BufferBuilder buffer = tessellator.getBuffer();
+		GlStateManager.pushMatrix();
+		GlStateManager.disableLighting();
+		GlStateManager.translate(x + 0.5F, y - tile.particleSize / 4, z + 0.5F);
+		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+		setGLColorFromInt(-1277682);
+		buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		float xMax, zMax, xMin, zMin, yMin = 0;
+		xMax = 0.5F;
+		zMax = 0F;
+		xMin = -0.5F;
+		zMin = 0F;
+		yMin = 0.5F;
+		GlStateManager.enableRescaleNormal();
+		GlStateManager.depthMask(false);
+		GlStateManager.enableBlend();
+		GlStateManager.rotate(180F + Minecraft.getMinecraft().getRenderManager().playerViewY, 0.0F, -1.0F, 0.0F);
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(WISP_TEXTURE.toString());
+		GlStateManager.scale(tile.particleSize / 3 + 0.5F, tile.particleSize / 3 + 0.5F, tile.particleSize / 3 + 0.5F);
+		renderQuads(buffer, xMax, xMin, yMin, 1F, zMin, zMax, texture);
 		tessellator.draw();
+		GlStateManager.disableRescaleNormal();
+		GlStateManager.disableBlend();
+		GlStateManager.depthMask(true);
+		GlStateManager.enableLighting();
+		GlStateManager.popMatrix();
 
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		fontrenderer.drawString(name, -fontrenderer.getStringWidth(name) / 2, 0, 553648127);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glDepthMask(true);
-		fontrenderer.drawString(name, -fontrenderer.getStringWidth(name) / 2, 0, -1);
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glPopMatrix();
+		bindTexture(GLOWING_JAR_TEXTURE);
+		GlStateManager.pushMatrix();
+		GlStateManager.color(1F, 1F, 1F, 1F);
+		GlStateManager.translate((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
+		GlStateManager.scale(0.7F, -0.9999F, -0.7F);
+		GlStateManager.disableCull();
+		glowingJar.render();
+		GlStateManager.enableCull();
+		GlStateManager.popMatrix();
 	}
+
+	private void setGLColorFromInt(int color) {
+		float red = (color >> 16 & 0xFF) / 255.0F;
+		float green = (color >> 8 & 0xFF) / 255.0F;
+		float blue = (color & 0xFF) / 255.0F;
+		GlStateManager.color(red, green, blue, 1F);
+	}
+
+	private void renderQuads(BufferBuilder buffer, float xMax, float xMin, float yMin, float height, float zMin, float zMax, TextureAtlasSprite textureAtlasSprite) {
+		double uMin = (double) textureAtlasSprite.getMinU();
+		double uMax = (double) textureAtlasSprite.getMaxU();
+		double vMin = (double) textureAtlasSprite.getMinV();
+		double vMax = (double) textureAtlasSprite.getMaxV();
+		final double vHeight = vMax - vMin;
+		addVertexWithUV(buffer, xMax, yMin, zMax, uMin, vMin);
+		addVertexWithUV(buffer, xMax, height, zMax, uMin, vMin + (vHeight * height));
+		addVertexWithUV(buffer, xMin, height, zMax, uMax, vMin + (vHeight * height));
+		addVertexWithUV(buffer, xMin, yMin, zMax, uMax, vMin);
+	}
+
+	private void addVertexWithUV(BufferBuilder buffer, float x, float y, float z, double u, double v) {
+		buffer.pos(x / 2f, y, z / 2f).tex(u, v).endVertex();
+	}
+
+	public void renderTileAsItem(double x, double y, double z) {
+		bindTexture(GLOWING_JAR_TEXTURE);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate((float) x + 0.5F, (float) y + 1.51F, (float) z + 0.5F);
+		GlStateManager.scale(0.7F, -1F, -0.7F);
+		GlStateManager.disableCull();
+		glowingJar.render();
+		GlStateManager.enableCull();
+		GlStateManager.popMatrix();
+	}
+
 }

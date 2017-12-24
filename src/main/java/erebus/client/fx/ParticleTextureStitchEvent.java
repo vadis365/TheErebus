@@ -13,6 +13,7 @@ public class ParticleTextureStitchEvent {
 	@SideOnly(Side.CLIENT)
 	 public void onTextureStitchPre(TextureStitchEvent.Pre event) {
 	  event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID + ":particle/particle_sonic"));
+	  event.getMap().registerSprite(new ResourceLocation(Reference.MOD_ID + ":entity/wisp"));
 	}
 
 }

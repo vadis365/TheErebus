@@ -90,6 +90,7 @@ import erebus.client.render.tile.TileEntityErebusAltarRepairRenderer;
 import erebus.client.render.tile.TileEntityErebusAltarXPRenderer;
 import erebus.client.render.tile.TileEntityExtenderThingyRenderer;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
+import erebus.client.render.tile.TileEntityGlowingJarRenderer;
 import erebus.client.render.tile.TileEntityOfferingAltarRenderer;
 import erebus.client.render.tile.TileEntityPetrifiedWoodChestRenderer;
 import erebus.client.render.tile.TileEntityPreservedBlockRenderer;
@@ -170,6 +171,7 @@ import erebus.tileentity.TileEntityErebusAltarRepair;
 import erebus.tileentity.TileEntityErebusAltarXP;
 import erebus.tileentity.TileEntityExtenderThingy;
 import erebus.tileentity.TileEntityGaeanKeystone;
+import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityHoneyComb;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
@@ -239,6 +241,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityUmberGolemStatue.class, new TileEntityUmberGolemStatueRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPetrifiedWoodChest.class, new TileEntityPetrifiedWoodChestRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPreservedBlock.class, new TileEntityPreservedBlockRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlowingJar.class, new TileEntityGlowingJarRenderer());
 	}
 
 	@Override
@@ -333,6 +336,7 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.UMBER_GOLEM_STATUE), 0, TileEntityUmberGolemStatue.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PETRIFIED_WOOD_CHEST), 0, TileEntityPetrifiedWoodChest.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PRESERVED_BLOCK), 0, TileEntityPreservedBlock.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.GLOWING_JAR), 0, TileEntityGlowingJar.class);
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJadeShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.JADE));
