@@ -1,10 +1,13 @@
 package erebus.tileentity;
 
+import java.util.Random;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
 public class TileEntityGlowingJar extends TileEntity implements ITickable {
-	private float particleSpawnTick;
+	Random rand = new Random();
+	private float particleSpawnTick = rand.nextInt(100);
 	public float particleSize;
 
 	@Override

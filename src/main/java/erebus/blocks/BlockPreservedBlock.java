@@ -8,7 +8,6 @@ import java.util.Random;
 import erebus.ModBlocks;
 import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModBlocks.ISubBlocksBlock;
-import erebus.ModTabs;
 import erebus.api.IErebusEnum;
 import erebus.core.helper.Utils;
 import erebus.items.block.ItemBlockEnum;
@@ -49,7 +48,6 @@ public class BlockPreservedBlock extends Block implements ITileEntityProvider, I
 		setHardness(10F);
 		setResistance(10.0F);
 		setSoundType(SoundType.GLASS);
-		setCreativeTab(ModTabs.BLOCKS);
 		setHarvestLevel("pickaxe", 0);
 	}
 

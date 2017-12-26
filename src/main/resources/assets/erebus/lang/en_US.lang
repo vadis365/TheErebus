@@ -138,18 +138,22 @@ item.erebus.water_striders.name=Water Striders
 item.erebus.glider_chestplate_powered.name=Powered Glider Chestplate
 item.erebus.glider_chestplate.name=Glider Chestplate
 
-#Shields
+# Shields
 item.erebus.bamboo_shield.name=Bamboo Shield
 item.erebus.exoskeleton_shield.name=Exoskeleton Shield
 item.erebus.jade_shield.name=Jade Shield
 item.erebus.rein_exoskeleton_shield.name=Reinforced Exoskeleton Shield
 item.erebus.rhino_exoskeleton_shield.name=Rhino Plate Shield
 
-#Misc
+# Misc
 item.erebus.wand_of_animation.name=Wand of Animation
+item.erebus.wand_of_preservation.name=Wand of Preservation
+item.erebus.portal_activator.name=Staff of Gaea
 item.erebus.woodlouse_ball.name=Woodlouse Ball
 item.erebus.nectar_collector.name=Nectar Collector
 item.erebus.ant_taming_amulet.name=Ant Taming Amulet
+item.erebus.bee_taming_amulet.name=Bee Taming Amulet
+item.erebus.wasp_sword.name=Wasp Sword
 item.erebus.anti_venom_bottle.name=Bottle of Anti-Venom
 item.erebus.death_compass.name=Death Compass
 item.erebus.rolled_newspaper.name=Rolled up Newspaper
@@ -157,6 +161,18 @@ item.erebus.bambucket.name=Bambucket
 item.erebus.bambucket.filled.name=%s Bambucket
 item.erebus.homing_beecon.name=Homing Beecon
 item.erebus.homing_beecon_advanced.name=Advanced Homing Beecon
+item.erebus.spray_can.name=Insect Repellent
+item.erebus.whetstone.name=Whetstone
+
+item.erebus.idols.idol_mud.name=Mud Scarab
+item.erebus.idols.idol_iron.name=Iron Scarab
+item.erebus.idols.idol_gold.name=Gold Scarab
+item.erebus.idols.idol_jade.name=Jade Scarab
+
+item.erebus.idols.idol_mud_umbergolem.name=Spawn Mud Umbergolem
+item.erebus.idols.idol_iron_umbergolem.name=Spawn Iron Umbergolem
+item.erebus.idols.idol_gold_umbergolem.name=Spawn Gold Umbergolem
+item.erebus.idols.idol_jade_umbergolem.name=Spawn Jade Umbergolem
 
 # Plants
 item.erebus.turnip.name=Turnips
@@ -194,7 +210,20 @@ tile.erebus.umberstone.umbercobble_webbed.name=Webbed Umbercobble
 tile.erebus.umberstone.umberstone_bricks.name=Umberstone Bricks
 tile.erebus.umberstone.umbertile_smooth.name=Smooth Umbertile
 tile.erebus.umberstone.umbertile_smooth_small.name=Small Smooth Umbertile
+tile.erebus.umbergravel.name=Umbergravel
+tile.erebus.umberpaver.umberpaver.name=Umberpaver
+tile.erebus.umberpaver.umberpaver_mossy.name=Mossy Umberpaver
+tile.erebus.umberpaver.umberpaver_webbed.name=Webbed Umberpaver
+tile.erebus.umberstone_pillar.name=Umberstone Pillar
+tile.erebus.volcanic_rock.name=Volcanic Rock
+
+#Amber
 tile.erebus.amber.name=Amber
+tile.erebus.amber_glass.name=Amber Glass
+tile.erebus.preserved_block.amber.name=Amber Preserved Block
+tile.erebus.preserved_block.amber_glass.name=Amber Preserved Block
+tile.erebus.glowing_jar.name=Glowing Jar
+tile.erebus.fluid_jar.name=Fluid Jar
 
 # Ores
 tile.erebus.ore_iron.name=Iron Ore
@@ -215,6 +244,7 @@ tile.erebus.ore_fossil.name=Fossil Ore
 tile.erebus.ore_gneiss.name=Gneiss Ore
 tile.erebus.ore_petrified_wood.name=Petrified Wood Ore
 tile.erebus.ore_temple.name=Temple Ore
+tile.erebus.jade_block.name=Block of Jade
 
 # Logs
 tile.erebus.log_baobab.name=Baobab Wood
@@ -228,6 +258,7 @@ tile.erebus.log_rotten.name=Rotten Wood
 tile.erebus.log_marshwood.name=Marshwood Wood
 tile.erebus.log_scorched.name=Scorched Wood
 tile.erebus.log_bamboo.name=Bamboo
+tile.erebus.hollow_log.name=Hollow Acacia Log
 
 # Saplings
 tile.erebus.sapling_mossbark.name=Mossbark Sapling
@@ -280,6 +311,18 @@ tile.erebus.slab_planks_rotten.name=Rotten Slab
 tile.erebus.slab_planks_marshwood.name=Marshwood Slab
 tile.erebus.slab_planks_scorched.name=Scorched Slab
 tile.erebus.slab_planks_varnished.name=Varnished Slab
+
+# Slabs Stone
+tile.erebus.slab_umberstone.name=Umberstone Slab
+tile.erebus.slab_umbercobble.name=Umbercobble Slab
+tile.erebus.slab_umbercobble_mossy.name=Mossy Umbercobble Slab
+tile.erebus.slab_umbercobble_webbed.name=Webbed Umbercobble Slab
+tile.erebus.slab_umberstone_bricks.name=Umberstone Bricks Slab
+tile.erebus.slab_umbertile_smooth.name=Smooth Umbertile Slab
+tile.erebus.slab_umbertile_smooth_small.name=Small Smooth Umbertile Slab
+tile.erebus.slab_umberpaver.name=Umberpaver Slab
+tile.erebus.slab_umberpaver_mossy.name=Mossy Umberpaver Slab
+tile.erebus.slab_umberpaver_webbed.name=Webbed Umberpaver Slab
 
 # Stairs
 tile.erebus.stairs_baobab.name=Baobab Stairs
@@ -346,6 +389,9 @@ tile.erebus.wall_umberstone_bricks.name=Umbrick Wall
 tile.erebus.wall_umbertile_smooth.name=Umbertile Wall
 tile.erebus.wall_umbertile_smooth_small.name=Small Umbertile  Wall
 tile.erebus.wall_amber.name=Amber Wall
+tile.erebus.wall_umberpaver.name=Umberpaver Wall
+tile.erebus.wall_umberpaver_mossy.name=Mossy Umberpaver Wall
+tile.erebus.wall_umberpaver_webbed.name=Webby Umberpaver Wall
 
 # Plants
 tile.erebus.crop_trunip.name=Turnips
@@ -444,6 +490,7 @@ tile.erebus.mud.name=Mud
 tile.erebus.quick_sand.name=Quicksand
 tile.erebus.ghost_sand.name=Ghost sand
 tile.erebus.swamp_vent.name=Swamp Vent
+tile.erebus.gneiss_vent.name=Gneiss Vent
 tile.erebus.red_gem.red_gem.name=Red Gem
 tile.erebus.red_gem.red_lamp_off.name=Red Gem Lamp
 tile.erebus.red_gem.red_lamp_on.name=Red Gem Lamp
@@ -465,8 +512,10 @@ tile.erebus.rein_exo.name=Reinforced Exo Blocks
 tile.erebus.velocity_block.name=Velocity Block
 tile.erebus.lightning_speed_block.name=Lightning Velocity Block
 tile.erebus.block_of_bones.name=Block O' Bones
+tile.erebus.antlion_egg.name=Antlion Egg
+tile.erebus.tarantula_egg.name=Tarantula Egg
 
-#Spawners
+# Spawners
 tile.erebus.antlion_spawner.name=Antlion Spawner
 tile.erebus.dragon_fly_spawner.name=Dragon Fly Spawner
 tile.erebus.jumping_spider_spawner.name=Jumping Spider Spawner
@@ -476,7 +525,7 @@ tile.erebus.wasp_spawner.name=Wasp Spawner
 tile.erebus.zombie_ant_spawner.name=Zombie Ant Spawner
 tile.erebus.zombie_ant_soldier_spawner.name=Zombie Ant Soldier Spawner
 
-#Utility Blocks
+# Utility Blocks
 tile.erebus.petrified_crafting_table.name=Petrified Crafting Table
 tile.erebus.petrified_wood_chest.name=Petrified Wood Chest
 tile.erebus.bamboo_crate.default.name=BambooCrate
@@ -497,6 +546,7 @@ tile.erebus.silo_roof.name=Silo Roof
 tile.erebus.silo_tank.silo_inactive.name=Silo Tank
 tile.erebus.silo_tank.silo_active.name=Silo Tank
 tile.erebus.silo_supports.name=Silo Supports
+tile.erebus.honey_comb.name=Honeycomb
 tile.erebus.wasp_nest.name=Wasp Nest
 tile.erebus.stairs_wasp_nest.name=Wasp Nest Stairs
 
@@ -505,7 +555,42 @@ tile.erebus.altar_lightning.name=Altar of Lightning
 tile.erebus.altar_healing.name=Altar of Healing
 tile.erebus.altar_xp.name=Altar of Experience
 tile.erebus.altar_repair.name=Altar of Repair
-tile.erebus.offering_altar.name=Offering Altar
+tile.erebus.altar_offering.name=Offering Altar
+
+# Antlion Dungeon
+tile.erebus.capstone.capstone.name=Capstone
+tile.erebus.capstone.capstone_mud.name=Mud Capstone
+tile.erebus.capstone.capstone_iron.name=Iron Capstone
+tile.erebus.capstone.capstone_gold.name=Gold Capstone
+tile.erebus.capstone.capstone_jade.name=Jade Capstone
+tile.erebus.capstone.capstone_mud_active.name=Mud Capstone Active
+tile.erebus.capstone.capstone_iron_active.name=Iron Capstone Active
+tile.erebus.capstone.capstone_gold_active.name=Gold Capstone Active
+tile.erebus.capstone.capstone_jade_active.name=Jade Capstone Active
+
+tile.erebus.temple_brick_unbreaking.temple_brick.name=Temple Brick
+tile.erebus.temple_brick_unbreaking.temple_brick_jade.name=Temple Brick Jade Slot
+tile.erebus.temple_brick_unbreaking.temple_brick_exo.name=Temple Brick Exoskeleton Slot
+tile.erebus.temple_brick_unbreaking.temple_brick_cream.name=Temple Brick Magma Cream Slot
+tile.erebus.temple_brick_unbreaking.temple_brick_eye.name=Temple Brick Magma Crawler Eye Slot
+tile.erebus.temple_brick_unbreaking.temple_brick_string.name=Temple Brick String Slot
+
+tile.erebus.temple_brick_unbreaking.temple_brick_jade_active.name=Active Temple Brick Jade Slot
+tile.erebus.temple_brick_unbreaking.temple_brick_exo_active.name=Active Temple Brick Exoskeleton Slot
+tile.erebus.temple_brick_unbreaking.temple_brick_cream_active.name=Active Temple Brick Magma Cream Slot
+tile.erebus.temple_brick_unbreaking.temple_brick_eye_active.name=Active Temple Brick Magma Crawler Eye Slot
+tile.erebus.temple_brick_unbreaking.temple_brick_string_active.name=Active Temple Brick String Slot
+
+tile.erebus.temple_teleporter.temple_teleport_0.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_1.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_2.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_3.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_4.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_5.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_ne.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_nw.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_se.name=Temple Teleporter
+tile.erebus.temple_teleporter.temple_teleport_sw.name=Temple Teleporter
 
 ##############
 # Containers #
