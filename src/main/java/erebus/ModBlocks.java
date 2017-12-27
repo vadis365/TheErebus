@@ -51,6 +51,7 @@ import erebus.blocks.BlockGneiss;
 import erebus.blocks.BlockGneissVent;
 import erebus.blocks.BlockHollowLog;
 import erebus.blocks.BlockHoneyComb;
+import erebus.blocks.BlockHoneyTreat;
 import erebus.blocks.BlockInsectRepellent;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
@@ -181,6 +182,7 @@ public class ModBlocks {
 	public static final Block WALL_PLANTS = new BlockWallPlants();
 	public static final Block WALL_PLANTS_CULTIVATED = new BlockWallPlantsCultivated();
 	public static final Block ALGAE = new BlockAlgae();
+	public static final Block HONEY_TREAT = new BlockHoneyTreat();
 
 	//MUSHROOMS
 	public static final Block DARK_CAPPED_MUSHROOM = new BlockMushroomSmall(false);

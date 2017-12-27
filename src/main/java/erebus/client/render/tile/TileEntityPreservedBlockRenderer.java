@@ -1,7 +1,5 @@
 package erebus.client.render.tile;
 
-import org.lwjgl.opengl.GL11;
-
 import erebus.api.ErebusAPI;
 import erebus.preserved.PreservableEntityRegistry.EntityDimensions;
 import erebus.tileentity.TileEntityPreservedBlock;
@@ -49,12 +47,9 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer<
 		GlStateManager.translate(xOff, yOff, zOff);
 		GlStateManager.scale(scale, scale, scale);
 		Render renderer = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(entity);
-		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		if (entity instanceof EntityItem)
 			((EntityItem) entity).hoverStart = 0;
 		renderer.doRender(entity, 0, 0, 0, 0, 0);
-		GL11.glPopAttrib();
-
 		GlStateManager.popMatrix();
 	}
 }

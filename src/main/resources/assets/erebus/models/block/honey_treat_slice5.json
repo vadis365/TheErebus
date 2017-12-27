@@ -1,0 +1,22 @@
+{
+    "textures": {
+        "particle": "erebus:blocks/honey_treat_side",
+        "bottom": "erebus:blocks/honey_treat_bottom",
+        "top": "erebus:blocks/honey_treat_top",
+        "side": "erebus:blocks/honey_treat_side",
+        "inside": "erebus:blocks/honey_treat_inner"
+    },
+    "elements": [
+        {   "from": [ 11, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}

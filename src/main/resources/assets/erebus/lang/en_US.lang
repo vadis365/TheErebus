@@ -514,6 +514,7 @@ tile.erebus.lightning_speed_block.name=Lightning Velocity Block
 tile.erebus.block_of_bones.name=Block O' Bones
 tile.erebus.antlion_egg.name=Antlion Egg
 tile.erebus.tarantula_egg.name=Tarantula Egg
+tile.erebus.honey_treat.name=Honey Treat
 
 # Spawners
 tile.erebus.antlion_spawner.name=Antlion Spawner
