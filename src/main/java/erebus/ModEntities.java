@@ -43,6 +43,7 @@ import erebus.entity.EntityMagmaCrawler;
 import erebus.entity.EntityMidgeSwarm;
 import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMoth;
+import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityPreservedBlock;
@@ -54,6 +55,8 @@ import erebus.entity.EntitySolifugeSmall;
 import erebus.entity.EntityStagBeetle;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
+import erebus.entity.EntityTarantulaEgg;
+import erebus.entity.EntityTarantulaMiniboss;
 import erebus.entity.EntityThrownSand;
 import erebus.entity.EntityTitanBeetle;
 import erebus.entity.EntityUmberGolem;
@@ -90,8 +93,6 @@ public class ModEntities {
 		registerEntity(39, EntityPunchroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
 		registerEntity(40, EntityCrushroom.class, "crushroom", 0xFFFFFF, 0xFF0000);
 
-		registerEntity(43, EntityTarantulaMiniboss.class, "tarantula_mini_boss", 0x000000, 0xE82066);
-
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
 		
 		registerEntity(48, EntityWisp.class, "wisp", 0x804E3D, 0x3D6F80);
@@ -104,10 +105,7 @@ public class ModEntities {
 		registerEntity(73, EntityExtractedBlock.class, "extracted_block");
 
 		registerEntity(76, EntitySporeBall.class, "spore_ball");
-		registerEntity(77, EntityTarantulaEgg.class, "tarantula_egg"); 
-		registerEntity(78, EntityPoisonJet.class, "poison_jet");
 
-		registerEntity(81, EntityPreservedBlock.class, "preserved_block");
 		registerEntity(82, EntitySporeJet.class, "spore_jet");
 		registerEntity(83, EntityArmchairMount.class, "armchair_mount");
 */
@@ -153,7 +151,7 @@ public class ModEntities {
 
 		registerEntity(41, EntityBlackAnt.class, "black_ant", 0x000000, 0xF09071);
 		registerEntity(42, EntityZombieAnt.class, "zombie_ant", 0x00FE40, 0xF09071);
-
+		registerEntity(43, EntityTarantulaMiniboss.class, "tarantula_mini_boss", 0x000000, 0xE82066);
 		registerEntity(44, EntityTarantulaBaby.class, "tarantula_baby", 0x000000, 0xE82066);
 		registerEntity(45, EntityPondSkater.class, "pond_skater", -13816034, -14803180);
 		
@@ -179,6 +177,8 @@ public class ModEntities {
 		registerEntity(74, EntityGooBall.class, "goo_ball");
 		registerEntity(75, EntityWoodlouseBall.class, "woodlouse_ball");
 
+		registerEntity(77, EntityTarantulaEgg.class, "tarantula_egg"); 
+		registerEntity(78, EntityPoisonJet.class, "poison_jet");
 		registerEntity(79, EntityGasVent.class, "gas_vent");
 		registerEntity(80, EntityThrownSand.class, "thrown_sand");
 		registerEntity(81, EntityPreservedBlock.class, "preserved_block");

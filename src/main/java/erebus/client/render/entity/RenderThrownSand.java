@@ -27,8 +27,7 @@ public class RenderThrownSand extends Render<EntityThrownSand> {
 			float tick) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y + 0.5D, z);
-		GlStateManager.rotate(
-				entityThrownSand.prevRotationYaw + (entityThrownSand.rotationYaw - entityThrownSand.prevRotationYaw) * tick - 90.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(entityThrownSand.prevRotationYaw + (entityThrownSand.rotationYaw - entityThrownSand.prevRotationYaw) * tick - 90.0F, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(entityThrownSand.prevRotationPitch + (entityThrownSand.rotationPitch - entityThrownSand.prevRotationPitch) * tick - EntityThrownSand.rotationticks, 0.0F, 0.0F, 1.0F);
 		GlStateManager.scale(1.0D, 1.0D, 1.0D);
 		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);

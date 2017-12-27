@@ -1,10 +1,13 @@
 package erebus.entity;
 
+import erebus.ModSounds;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityTarantulaEgg extends EntityThrowable {
@@ -37,20 +40,20 @@ public class EntityTarantulaEgg extends EntityThrowable {
 		}
 	}
 
-	protected String getSplatSound() {
-		return "erebus:beetlelarvasplat";
+	protected SoundEvent getSplatSound() {
+		return ModSounds.BEETLE_LARVA_SPLAT;
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition mop) {
-		if (!worldObj.isRemote)
+	protected void onImpact(RayTraceResult mop) {
+		if (!getEntityWorld().isRemote)
 			for (int a = 0; a < 2; a++) {
-				EntityTarantulaBaby tarantulaBaby = new EntityTarantulaBaby(worldObj);
+				EntityTarantulaBaby tarantulaBaby = new EntityTarantulaBaby(getEntityWorld());
 				tarantulaBaby.setPosition(posX + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D), posY + 1, posZ + (rand.nextFloat() * 0.03D - rand.nextFloat() * 0.03D));
-				worldObj.spawnEntityInWorld(tarantulaBaby);
+				getEntityWorld().spawnEntity(tarantulaBaby);
 			}
 		setDead();
-		worldObj.playSoundAtEntity(this, getSplatSound(), 1.0F, 1.0F);
+		getEntityWorld().playSound(null, getPosition(), getSplatSound(), SoundCategory.HOSTILE, 1.0F, 1.0F);
 	}
 
 	@Override

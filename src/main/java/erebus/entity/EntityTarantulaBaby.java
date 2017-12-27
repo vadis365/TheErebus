@@ -31,7 +31,7 @@ public class EntityTarantulaBaby extends EntityTarantula {
     protected void initEntityAI() {
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
-        tasks.addTask(2, new EntityAIErebusAttackMelee(this, 6D, true));
+        tasks.addTask(2, new EntityAIErebusAttackMelee(this, 0.6D, true));
         tasks.addTask(3, new EntityAIWanderAvoidWater(this, 0.4D));
         tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         tasks.addTask(5, new EntityAILookIdle(this));

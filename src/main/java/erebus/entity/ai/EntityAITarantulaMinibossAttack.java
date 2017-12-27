@@ -2,34 +2,33 @@ package erebus.entity.ai;
 
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.pathfinding.PathPoint;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
+import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
 import erebus.entity.EntityTarantulaEgg;
 import erebus.entity.EntityTarantulaMiniboss;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.init.MobEffects;
+import net.minecraft.pathfinding.Path;
+import net.minecraft.pathfinding.PathPoint;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
 
 public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 
-	World worldObj;
 	EntityCreature attacker;
 	int attackTick;
 	double speedTowardsTarget;
 	boolean longMemory;
-	PathEntity entityPathEntity;
+	Path entityPathEntity;
 	Class<? extends Entity> classTarget;
 	private int findAttemptCount;
 	private int failedPathFindingPenalty;
@@ -43,7 +42,6 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 
 	public EntityAITarantulaMinibossAttack(EntityCreature entityCreature, double moveSpeed, boolean memory) {
 		attacker = entityCreature;
-		worldObj = entityCreature.worldObj;
 		speedTowardsTarget = moveSpeed;
 		longMemory = memory;
 		setMutexBits(3);
@@ -67,9 +65,9 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 	}
 
 	@Override
-	public boolean continueExecuting() {
+	public boolean shouldContinueExecuting() {
 		EntityLivingBase entitylivingbase = attacker.getAttackTarget();
-		return entitylivingbase == null ? false : !entitylivingbase.isEntityAlive() ? false : !longMemory ? !attacker.getNavigator().noPath() : attacker.isWithinHomeDistance(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ));
+		return entitylivingbase == null ? false : !entitylivingbase.isEntityAlive() ? false : !longMemory ? !attacker.getNavigator().noPath() : attacker.isWithinHomeDistanceCurrentPosition();
 	}
 
 	@Override
@@ -83,7 +81,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 
 	@Override
 	public void resetTask() {
-		attacker.getNavigator().clearPathEntity();
+		attacker.getNavigator().clearPath();
 	}
 
 	@Override
@@ -95,7 +93,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 			attacker.getNavigator().tryMoveToEntityLiving(entitylivingbase, speedTowardsTarget);
 			if (attacker.getNavigator().getPath() != null) {
 				PathPoint finalPathPoint = attacker.getNavigator().getPath().getFinalPathPoint();
-				if (finalPathPoint != null && entitylivingbase.getDistanceSq(finalPathPoint.xCoord, finalPathPoint.yCoord, finalPathPoint.zCoord) < 1D)
+				if (finalPathPoint != null && entitylivingbase.getDistanceSq(finalPathPoint.x, finalPathPoint.y, finalPathPoint.z) < 1D)
 					failedPathFindingPenalty = 0;
 				else
 					failedPathFindingPenalty += 10;
@@ -104,7 +102,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 		}
 		attackTick = Math.max(attackTick - 1, 0);
 		double d0 = attacker.width * 1F * attacker.width * 1F + entitylivingbase.width;
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) <= d0)
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) <= d0)
 			if (attackTick <= 0) {
 				attackTick = 10;
 				attacker.attackEntityAsMob(entitylivingbase);
@@ -112,7 +110,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 				entitylivingbase.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F, 0.1D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F);
 			}
 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > d0 + 1D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() < 150)
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) > d0 + 1D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() < 150)
 			if (attackTick <= 0) {
 				++shouldDo;
 				if (shouldDo == 1)
@@ -124,18 +122,15 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 					shouldDo = 0;
 				}
 				if (shouldDo == 1) {
-					Vec3 look = attacker.getLookVec();
 					double direction = Math.toRadians(attacker.renderYawOffset);
-					EntityPoisonJet jet = new EntityPoisonJet(worldObj, attacker);
+					EntityPoisonJet jet = new EntityPoisonJet(attacker.getEntityWorld(), attacker);
 					jet.setPosition(attacker.posX + -Math.sin(direction) * 3.5D, attacker.posY + attacker.height * 0.5, attacker.posZ + Math.cos(direction) * 3.5D);
-					jet.motionX = look.xCoord * 1.0;
-					jet.motionY = look.yCoord * 2.2;
-					jet.motionZ = look.zCoord * 1.0;
-					worldObj.spawnEntityInWorld(jet);
+					jet.shoot(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0F, 0.0F);
+					attacker.getEntityWorld().spawnEntity(jet);
 				}
 			}
 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) > d0 + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() > 150) {
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) > d0 + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() > 150) {
 			if (attackTick <= 0) {
 				++shouldDo;
 				if (shouldDo == 1)
@@ -147,17 +142,14 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 					shouldDo = 0;
 				}
 				if (shouldDo == 1) {
-					Vec3 look = attacker.getLookVec();
 					double direction = Math.toRadians(attacker.renderYawOffset);
-					EntityTarantulaEgg babyEgg = new EntityTarantulaEgg(worldObj, attacker);
+					EntityTarantulaEgg babyEgg = new EntityTarantulaEgg(attacker.getEntityWorld(), attacker);
 					babyEgg.setPosition(attacker.posX + -Math.sin(direction) * 3.5D, attacker.posY + attacker.height, attacker.posZ + Math.cos(direction) * 3.5D);
-					babyEgg.motionX = look.xCoord * 1.0;
-					babyEgg.motionY = look.yCoord * 2.2;
-					babyEgg.motionZ = look.zCoord * 1.0;
-					worldObj.spawnEntityInWorld(babyEgg);
+					babyEgg.shoot(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0F, 0.0F);
+					attacker.getEntityWorld().spawnEntity(babyEgg);
 				}
 
-				if (worldObj.rand.nextInt(3) == 1) {
+				if (attacker.getEntityWorld().rand.nextInt(3) == 1) {
 					attackTick = 30;
 					attacker.motionY = 0.61999998688697815D;
 					jumpAttack = true;
@@ -173,7 +165,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 
 	@SuppressWarnings("unchecked")
 	protected Entity areaOfEffect() {
-		List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(attacker.boundingBox.minX, attacker.boundingBox.minY, attacker.boundingBox.minZ, attacker.boundingBox.maxX, attacker.boundingBox.maxY, attacker.boundingBox.maxZ).expand(8D, 1D, 8D));
+		List<EntityLivingBase> list = attacker.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(attacker.getEntityBoundingBox().minX, attacker.getEntityBoundingBox().minY, attacker.getEntityBoundingBox().minZ, attacker.getEntityBoundingBox().maxX, attacker.getEntityBoundingBox().maxY, attacker.getEntityBoundingBox().maxZ).grow(8D, 1D, 8D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = list.get(i);
 			if (entity != null)
@@ -181,9 +173,9 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 					float Knockback = 2;
 					entity.attackEntityFrom(DamageSource.causeMobDamage(attacker), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 					entity.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F, 0.4D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.5F);
-					attacker.playSound("erebus:blamsound", 1.5F, 1.0F);
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 8 * 20, 0));
-					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.blindness.id, 5 * 20, 0));
+					attacker.getEntityWorld().playSound(null, attacker.getPosition(), ModSounds.BLAM_SOUND, SoundCategory.HOSTILE, 1.5F, 1.0F);
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 8 * 20, 0));
+					((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 5 * 20, 0));
 				}
 		}
 		return null;
