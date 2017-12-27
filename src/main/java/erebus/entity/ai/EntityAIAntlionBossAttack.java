@@ -17,7 +17,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
@@ -119,13 +118,13 @@ public class EntityAIAntlionBossAttack<T extends Entity> extends EntityAIBase {
 					shouldDo = 0;
 				}
 				if (shouldDo == 1) {
-					Vec3d look = attacker.getLookVec();
 					double direction = Math.toRadians(attacker.renderYawOffset);
+					double targetX = entitylivingbase.posX - attacker.posX;
+					double targetY = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height) - (attacker.posY + (double) (attacker.height));
+					double targetZ = entitylivingbase.posZ - attacker.posZ;
 					EntityThrownSand thrownsand = new EntityThrownSand(worldObj, attacker);
 					thrownsand.setPosition(attacker.posX - Math.sin(direction) * 3.5, attacker.posY + attacker.height, attacker.posZ + Math.cos(direction) * 3.5);
-					thrownsand.motionX = look.x;
-					thrownsand.motionY = look.y * 2.2;
-					thrownsand.motionZ = look.z;
+					thrownsand.shoot(targetX, targetY, targetZ, 0.7F, 0.0F);
 					worldObj.spawnEntity(thrownsand);
 					attackTick = 30;
 				}

@@ -47,10 +47,8 @@ public class WorldGenAntlionLair extends WorldGenerator {
 			new LootItemStack(Items.IRON_LEGGINGS).setWeight(2), new LootItemStack(ModItems.JADE_LEGGINGS).setWeight(1),
 			new LootItemStack(Items.GOLDEN_LEGGINGS).setWeight(1), new LootItemStack(Items.IRON_BOOTS).setWeight(2),
 			new LootItemStack(ModItems.JADE_BOOTS).setWeight(1), new LootItemStack(Items.GOLDEN_BOOTS).setWeight(1),
-			// TODO
-			/*	new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1)
-			*/
+			new LootItemStack(ModBlocks.UMBER_GOLEM_STATUE).setAmount(1).setWeight(1)
+			//new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1)
 			})
 					.setPostProcessor(new IPostProcess() {
 						@SuppressWarnings("rawtypes")

@@ -7,6 +7,7 @@ import erebus.ModBlocks;
 import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.blocks.EnumWood;
+import erebus.entity.EntityTarantulaMiniboss;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
@@ -50,10 +51,9 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.JADE.ordinal()).setWeight(10),
 			new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9),
 			new LootItemStack(Items.ENCHANTED_BOOK).setWeight(8),
-			/*
-			 * new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1), new
-			 * LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
-			 */ new LootItemStack(Items.GOLDEN_PICKAXE).setWeight(3),
+			new LootItemStack(ModBlocks.UMBER_GOLEM_STATUE).setAmount(1).setWeight(1),
+			//new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
+			new LootItemStack(Items.GOLDEN_PICKAXE).setWeight(3),
 			new LootItemStack(Items.IRON_PICKAXE).setWeight(2), new LootItemStack(ModItems.JADE_PICKAXE).setWeight(1),
 			new LootItemStack(Items.STONE_PICKAXE).setWeight(1), new LootItemStack(Items.GOLDEN_SHOVEL).setWeight(3),
 			new LootItemStack(Items.IRON_SHOVEL).setWeight(2), new LootItemStack(ModItems.JADE_SHOVEL).setWeight(1),
@@ -241,14 +241,12 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			placeSpawner(world, rand, x, y + 13, z + 5);
 		}
 
-		// TODO boss mob
-		/*
 		EntityTarantulaMiniboss boss = new EntityTarantulaMiniboss(world);
 		boss.setLocationAndAngles(x + 0.5D, y + 22, z + 0.5D, rand.nextFloat() * 360F, 0F);
 		boss.forceSpawn = true;
-		world.spawnEntityInWorld(boss);
-		*/
-		System.out.println("Added Dungeon at: " + x + " " + z);
+		world.spawnEntity(boss);
+
+		//System.out.println("Added Dungeon at: " + x + " " + z);
 		return true;
 	}
 

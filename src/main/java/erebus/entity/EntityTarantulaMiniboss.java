@@ -26,9 +26,11 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -40,11 +42,14 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityTarantulaMiniboss extends EntityMob {
+	private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.NOTCHED_10)).setDarkenSky(false);
 	private static final DataParameter<Byte> SKIN_TYPE = EntityDataManager.<Byte>createKey(EntityTarantulaMiniboss.class, DataSerializers.BYTE);
 	public int deathTicks;
 
@@ -52,7 +57,6 @@ public class EntityTarantulaMiniboss extends EntityMob {
 		super(world);
 		setSize(4.0F, 1.2F);
 		experienceValue = 100;
-
 	}
 
 	@Override
@@ -144,13 +148,19 @@ public class EntityTarantulaMiniboss extends EntityMob {
 	}
 
 	@Override
+	protected void updateAITasks() {
+		super.updateAITasks();
+		bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+	}
+
+	@Override
 	protected void onDeathUpdate() {
 		++deathTicks;
 
 		if (deathTicks % 25 == 1) {
 			getEntityWorld().playSound(null, getPosition(), getDeathSound(), SoundCategory.HOSTILE, 1.0F, 0.1F);
 			getEntityWorld().playSound(null, getPosition(), SoundEvents.ENTITY_SPIDER_HURT, SoundCategory.HOSTILE, 1.0F, 0.1F);
-			getEntityWorld().playSound(null, getPosition(), SoundEvents.ENTITY_GHAST_SCREAM, SoundCategory.HOSTILE, 1.0F, 0.1F);
+			getEntityWorld().playSound(null, getPosition(), SoundEvents.ENTITY_GHAST_HURT, SoundCategory.HOSTILE, 1.0F, 0.1F);
 		}
 
 		if (deathTicks >= 180 && deathTicks <= 200)
@@ -278,4 +288,34 @@ public class EntityTarantulaMiniboss extends EntityMob {
 	public void spawnBlamParticles() {
 		Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.TARANTULA_BLAM, (float) posX, (float)posY, (float)posZ));
 	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+        if(hasCustomName())
+        	bossInfo.setName(this.getDisplayName());
+	}
+
+	@Override
+    public void setCustomNameTag(String name) {
+        super.setCustomNameTag(name);
+        bossInfo.setName(this.getDisplayName());
+    }
+
+	@Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+		super.addTrackingPlayer(player);
+        bossInfo.addPlayer(player);
+    }
+
+	@Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        bossInfo.removePlayer(player);
+    }
 }

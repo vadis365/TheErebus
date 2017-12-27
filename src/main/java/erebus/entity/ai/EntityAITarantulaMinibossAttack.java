@@ -110,7 +110,7 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 				entitylivingbase.addVelocity(-MathHelper.sin(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F, 0.1D, MathHelper.cos(attacker.rotationYaw * 3.141593F / 180.0F) * 0.5F);
 			}
 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) > d0 + 1D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() < 150)
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) > d0 + 1D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() <= attacker.getMaxHealth() / 2)
 			if (attackTick <= 0) {
 				++shouldDo;
 				if (shouldDo == 1)
@@ -123,14 +123,17 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 				}
 				if (shouldDo == 1) {
 					double direction = Math.toRadians(attacker.renderYawOffset);
+					double targetX = entitylivingbase.posX - attacker.posX;
+					double targetY = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height) - (attacker.posY + (double) (attacker.height));
+					double targetZ = entitylivingbase.posZ - attacker.posZ;
 					EntityPoisonJet jet = new EntityPoisonJet(attacker.getEntityWorld(), attacker);
 					jet.setPosition(attacker.posX + -Math.sin(direction) * 3.5D, attacker.posY + attacker.height * 0.5, attacker.posZ + Math.cos(direction) * 3.5D);
-					jet.shoot(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0F, 0.0F);
+					jet.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 					attacker.getEntityWorld().spawnEntity(jet);
 				}
 			}
 
-		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) > d0 + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() > 150) {
+		if (attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) > d0 + 9D && attacker.getDistanceSq(entitylivingbase.posX, entitylivingbase.getEntityBoundingBox().minY, entitylivingbase.posZ) < d0 + 256.0D && attacker.getHealth() > attacker.getMaxHealth() / 2) {
 			if (attackTick <= 0) {
 				++shouldDo;
 				if (shouldDo == 1)
@@ -143,9 +146,12 @@ public class EntityAITarantulaMinibossAttack extends EntityAIBase {
 				}
 				if (shouldDo == 1) {
 					double direction = Math.toRadians(attacker.renderYawOffset);
+					double targetX = entitylivingbase.posX - attacker.posX;
+					double targetY = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height) - (attacker.posY + (double) (attacker.height));
+					double targetZ = entitylivingbase.posZ - attacker.posZ;
 					EntityTarantulaEgg babyEgg = new EntityTarantulaEgg(attacker.getEntityWorld(), attacker);
-					babyEgg.setPosition(attacker.posX + -Math.sin(direction) * 3.5D, attacker.posY + attacker.height, attacker.posZ + Math.cos(direction) * 3.5D);
-					babyEgg.shoot(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0F, 0.0F);
+					babyEgg.setPosition(attacker.posX - Math.sin(direction) * 3.5, attacker.posY + attacker.height, attacker.posZ + Math.cos(direction) * 3.5);
+					babyEgg.shoot(targetX, targetY, targetZ, 0.7F, 0.0F);
 					attacker.getEntityWorld().spawnEntity(babyEgg);
 				}
 

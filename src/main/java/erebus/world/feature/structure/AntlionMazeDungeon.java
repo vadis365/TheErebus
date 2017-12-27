@@ -80,7 +80,7 @@ public class AntlionMazeDungeon {
 			new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.JADE.ordinal()).setWeight(10),
 			new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9),
 			new LootItemStack(Items.ENCHANTED_BOOK).setWeight(8),
-			//new LootItemStack(ModBlocks.umberGolemStatue).setAmount(1).setWeight(1),
+			new LootItemStack(ModBlocks.UMBER_GOLEM_STATUE).setAmount(1).setWeight(1),
 			//new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
 			new LootItemStack(Items.GOLDEN_PICKAXE).setWeight(3), new LootItemStack(Items.IRON_PICKAXE).setWeight(2),
 			new LootItemStack(ModItems.JADE_PICKAXE).setWeight(1), new LootItemStack(Items.GOLDEN_SHOVEL).setWeight(3),
@@ -95,25 +95,23 @@ public class AntlionMazeDungeon {
 			new LootItemStack(Items.GOLDEN_LEGGINGS).setWeight(1), new LootItemStack(Items.IRON_BOOTS).setWeight(2),
 			new LootItemStack(ModItems.JADE_BOOTS).setWeight(1), new LootItemStack(Items.GOLDEN_BOOTS).setWeight(1),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.ALTAR_FRAGMENT.ordinal()).setWeight(1),
-			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.REINFORCED_PLATE_EXO.ordinal())
-					.setWeight(1),
+			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.REINFORCED_PLATE_EXO.ordinal()).setWeight(1),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.SCORPION_PINCER.ordinal()).setWeight(1),
-			new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.WHETSTONE_POWDER.ordinal())
-					.setWeight(3),
+			new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.WHETSTONE_POWDER.ordinal()).setWeight(3),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.PLATE_EXO_RHINO.ordinal()).setWeight(1),
 			new LootItemStack(ModItems.EREBUS_FOOD).setAmount(1, 3).setDamage(EnumFoodType.HONEY_SANDWICH.ordinal()).setWeight(3),
 			new LootItemStack(ModItems.CABBAGE_SEEDS).setAmount(1, 3).setWeight(2),
-			//new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1),
+			new LootItemStack(ModItems.WHETSTONE).setAmount(1).setDamage(0).setWeight(1),
 			new LootItemStack(ModItems.LIFE_BLOOD).setAmount(1, 2).setWeight(4),
 			new LootItemStack(ModItems.ROLLED_NEWSPAPER).setAmount(1).setWeight(1),
 			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(6),
+			new LootItemStack(ModItems.HOMING_BEECON).setAmount(1).setWeight(1),
 			/*new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
-			 * new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
-			new LootItemStack(ModItems.homingBeecon).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal())
-					.setWeight(3),
-			new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal())
-					.setWeight(1) */}).setPostProcessor(new IPostProcess() {
+			 new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
+			new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal()).setWeight(3),
+			new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal()).setWeight(1)
+			*/
+			}).setPostProcessor(new IPostProcess() {
 				@SuppressWarnings("rawtypes")
 						@Override
 						public ItemStack postProcessItem(ItemStack is, Random rand) {

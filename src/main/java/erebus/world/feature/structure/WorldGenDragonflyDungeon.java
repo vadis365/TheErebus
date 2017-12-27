@@ -58,8 +58,7 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 			new LootItemStack(Items.IRON_BOOTS).setWeight(2), new LootItemStack(ModItems.JADE_BOOTS).setWeight(1),
 			new LootItemStack(Items.GOLDEN_BOOTS).setWeight(1),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.ALTAR_FRAGMENT.ordinal()).setWeight(1),
-			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.REINFORCED_PLATE_EXO.ordinal())
-					.setWeight(1),
+			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.REINFORCED_PLATE_EXO.ordinal()).setWeight(1),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.HYDROFUGE.ordinal()).setWeight(3),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.PLATE_EXO_RHINO.ordinal()).setWeight(1),
 			new LootItemStack(ModItems.EREBUS_FOOD).setAmount(1, 3).setDamage(EnumFoodType.HONEY_SANDWICH.ordinal()).setWeight(3),
@@ -67,12 +66,13 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 			new LootItemStack(ModItems.LIFE_BLOOD).setAmount(1, 2).setWeight(4),
 			new LootItemStack(ModItems.ROLLED_NEWSPAPER).setAmount(1).setWeight(1),
 			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(6),
-			/*
-			new LootItemStack(ModItems.whetstone).setAmount(1).setDamage(0).setWeight(1),
-			new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
+			new LootItemStack(ModItems.WHETSTONE).setAmount(1).setDamage(0).setWeight(1)
+			/*new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
 			new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
 			new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.NOTHING_IN_THE_MIDDLE.ordinal()).setWeight(3),
-			new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1)*/ }).setPostProcessor(new IPostProcess() {
+			new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1)
+			*/
+			}).setPostProcessor(new IPostProcess() {
 				@SuppressWarnings("rawtypes")
 				@Override
 				public ItemStack postProcessItem(ItemStack is, Random rand) {
