@@ -17,7 +17,7 @@ public class WorldGenRedGem extends WorldGenerator{
 		if (!world.isAirBlock(pos) || world.getBlockState(pos.up()).getBlock() != ModBlocks.UMBERSTONE)
 			return false;
 
-		world.setBlockState(pos, ModBlocks.RED_GEM.getDefaultState());
+		world.setBlockState(pos, ModBlocks.RED_GEM.getDefaultState(), 16);
 
 		for(int attempt = 0, xx, yy, zz, dist = 2, distUpd = 0, attCount = rand.nextInt(100) + 300; attempt < attCount; ++attempt){
 			xx = pos.getX() + rand.nextInt(dist) - rand.nextInt(dist);
@@ -33,7 +33,7 @@ public class WorldGenRedGem extends WorldGenerator{
 
 				if (adjacent == 1)
 					if(world.isBlockLoaded(new BlockPos(xx,yy,zz)))
-						world.setBlockState(new BlockPos(xx, yy, zz), ModBlocks.RED_GEM.getDefaultState());
+						world.setBlockState(new BlockPos(xx, yy, zz), ModBlocks.RED_GEM.getDefaultState(), 16);
 			}
 
 			if (++distUpd > 22 + dist * 30){

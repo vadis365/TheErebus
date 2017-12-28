@@ -96,7 +96,7 @@ public final class OreSettings {
 					if (world.isAirBlock(new BlockPos(testX, testY, testZ))) {
 						if ((oreAmount = minAmount + rand.nextInt(maxAmount - minAmount + 1)) == 1) {
 							if (world.getBlockState(new BlockPos(xx, yy, zz)) == ModBlocks.UMBERSTONE)
-								world.setBlockState(new BlockPos(xx, yy, zz), oreType.oreBlock.getStateFromMeta(oreType.oreMeta), 2);
+								world.setBlockState(new BlockPos(xx, yy, zz), oreType.oreBlock.getStateFromMeta(oreType.oreMeta), 16);
 						} else {
 							genMinable.prepare(oreType.oreBlock, oreType.oreMeta, oreAmount);
 							genMinable.generate(world, rand, new BlockPos(xx, yy, zz));

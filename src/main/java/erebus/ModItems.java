@@ -188,7 +188,7 @@ public class ModItems {
 		REIN_EXOSKELETON_SHIELD.setShieldType(new ShieldTypeBasic(
 				ItemMaterials.EnumErebusMaterialsType.SHIELD_REIN_EXO_FACE.createStack(),
 				ItemMaterials.EnumErebusMaterialsType.REINFORCED_PLATE_EXO.createStack(),
-				null, null, ModMaterials.ARMOR_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST)));
+				null, null, ModMaterials.ARMOR_REIN_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST)));
 
 		RHINO_EXOSKELETON_SHIELD.setShieldType(new ShieldTypeBasic(
 				ItemMaterials.EnumErebusMaterialsType.SHIELD_RHINO_EXO_FACE.createStack(),

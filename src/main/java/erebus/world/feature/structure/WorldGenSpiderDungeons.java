@@ -73,11 +73,11 @@ public class WorldGenSpiderDungeons extends WorldGenerator {
 							world.setBlockToAir(pos.add(xx, yy, zz));
 						else if (world.getBlockState(pos.add(xx, yy, zz)).getMaterial().isSolid())
 							if (yy == - 1 && rand.nextInt(4) == 0 || yy == height + 1 && rand.nextInt(4) == 0)
-								world.setBlockState(pos.add(xx, yy, zz), ModBlocks.UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_WEBBED), 2); // umbercobbleWebbed
+								world.setBlockState(pos.add(xx, yy, zz), ModBlocks.UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_WEBBED), 16); // umbercobbleWebbed
 							else if (yy == - 1 && rand.nextInt(4) == 0 || yy == height + 1 && rand.nextInt(4) == 0)
-								world.setBlockState(pos.add(xx, yy, zz), ModBlocks.UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_MOSSY), 2); // umbercobbleMossy
+								world.setBlockState(pos.add(xx, yy, zz), ModBlocks.UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_MOSSY), 16); // umbercobbleMossy
 							else
-								world.setBlockState(pos.add(xx, yy, zz), ModBlocks.UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE), 2); // umbercobble
+								world.setBlockState(pos.add(xx, yy, zz), ModBlocks.UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE), 16); // umbercobble
 			for (int iteration = 0; iteration < 2; iteration++)
 				for (int attempt = 0; attempt < (iteration == 0 ? Integer.MAX_VALUE : 3); attempt++) {
 
@@ -105,7 +105,7 @@ public class WorldGenSpiderDungeons extends WorldGenerator {
 						}
 
 						if (adjacentSolidBlocks == 1) {
-							world.setBlockState(pos.add(i2, 0, j2), Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, facing), 2);
+							world.setBlockState(pos.add(i2, 0, j2), Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, facing), 16);
 
 							TileEntityChest chest = (TileEntityChest) world.getTileEntity(pos.add(i2, 0, j2));
 							if (chest != null)
@@ -116,13 +116,13 @@ public class WorldGenSpiderDungeons extends WorldGenerator {
 					}
 				}
 
-			world.setBlockState(pos.add(1, 0, 0), Blocks.WEB.getDefaultState(), 2);
-			world.setBlockState(pos.add(- 1, 0, 0), Blocks.WEB.getDefaultState(), 2);
-			world.setBlockState(pos.add(0, 0, - 1), Blocks.WEB.getDefaultState(), 2);
-			world.setBlockState(pos.add(0, 0, 1), Blocks.WEB.getDefaultState(), 2);
-			world.setBlockState(pos.add(0, 1, 0), Blocks.WEB.getDefaultState(), 2);
-			world.setBlockState(pos.add(0, - 1, 0), Blocks.WEB.getDefaultState(), 2);
-			world.setBlockState(pos.add(0, 0, 0), getRandomSpawner(rand), 2);
+			world.setBlockState(pos.add(1, 0, 0), Blocks.WEB.getDefaultState(), 16);
+			world.setBlockState(pos.add(- 1, 0, 0), Blocks.WEB.getDefaultState(), 16);
+			world.setBlockState(pos.add(0, 0, - 1), Blocks.WEB.getDefaultState(), 16);
+			world.setBlockState(pos.add(0, 0, 1), Blocks.WEB.getDefaultState(), 16);
+			world.setBlockState(pos.add(0, 1, 0), Blocks.WEB.getDefaultState(), 16);
+			world.setBlockState(pos.add(0, - 1, 0), Blocks.WEB.getDefaultState(), 16);
+			world.setBlockState(pos.add(0, 0, 0), getRandomSpawner(rand), 16);
 			//System.out.println("Spider Dungeon Here: "  + pos);
 			return true;
 		}

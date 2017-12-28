@@ -70,7 +70,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 
 		for (int yUp = yy; 64 + yy >= yUp; yUp++) {
 			BlockPos pos = new BlockPos(xx, yUp, zz);
-			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() - 6, pos.getY(), pos.getZ() - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() + 6, pos.getY(), pos.getZ() + 6)) || checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() + 6, pos.getY(), pos.getZ() - 6)) && checkSurface(SurfaceType.GRASS, new BlockPos(pos.getX() - 6, pos.getY(), pos.getZ() + 6))) {
+			if (checkSurface(SurfaceType.MIXED, pos) && checkSurface(SurfaceType.MIXED, new BlockPos(pos.getX() - 6, pos.getY(), pos.getZ() - 6)) && checkSurface(SurfaceType.MIXED, new BlockPos(pos.getX() + 6, pos.getY(), pos.getZ() + 6)) || checkSurface(SurfaceType.MIXED, pos) && checkSurface(SurfaceType.MIXED, new BlockPos(pos.getX() + 6, pos.getY(), pos.getZ() - 6)) && checkSurface(SurfaceType.MIXED, new BlockPos(pos.getX() - 6, pos.getY(), pos.getZ() + 6))) {
 				genGiantBaobab.generate(world, rand, pos.up());
 				break;
 			}
@@ -132,7 +132,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			yy = 15 + rand.nextInt(90);
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (checkSurface(SurfaceType.GRASS, pos))
+			if (checkSurface(SurfaceType.GRASS, pos));
 				genRottenAcacia.generate(world, rand, pos.up());
 		}
 
@@ -149,6 +149,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 					else
 						if (world.isAirBlock(pos.up()))
 							world.setBlockState(pos.up(), tallGrassState);
+							
 				}
 			}
 		}

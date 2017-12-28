@@ -97,6 +97,14 @@ public enum EnumWood implements IStringSerializable {
 		return door;
 	}
 
+	public Block getFence() {
+		return fence;
+	}
+
+	public Block getGate() {
+		return gate;
+	}
+
 	public static void init() {
 		for (EnumWood wood : values()) {
 			if (wood.hasLog && wood != EnumWood.BAMBOO) {

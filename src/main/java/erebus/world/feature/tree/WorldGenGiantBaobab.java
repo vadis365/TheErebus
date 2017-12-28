@@ -6,6 +6,11 @@ import java.util.Random;
 import erebus.ModBlocks;
 import erebus.ModFluids;
 import erebus.ModItems;
+import erebus.block.bamboo.BlockBambooTorch;
+import erebus.block.bamboo.BlockBambooTorch.EnumBlockTorchHalf;
+import erebus.blocks.BlockDoorErebus;
+import erebus.blocks.BlockLogErebus;
+import erebus.blocks.BlockStairsErebus;
 import erebus.blocks.EnumWood;
 import erebus.entity.EntityTarantulaMiniboss;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
@@ -13,7 +18,9 @@ import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
 import erebus.world.loot.WeightedLootList;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockStairs.EnumHalf;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.init.Blocks;
@@ -23,6 +30,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -32,15 +40,20 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class WorldGenGiantBaobab extends WorldGenerator {
 
-	private int height = -1;
-	private int baseRadius = -1;
-	protected Block log, leaves;
-
+	public int height = -1;
+	public int baseRadius = -1;
+	public int direction = -1;
+	public IBlockState STAIRS = EnumWood.BAOBAB.getStairs().getDefaultState();
+	public IBlockState LOG = EnumWood.BAOBAB.getLog().getDefaultState();
+	public IBlockState LEAVES = EnumWood.BAOBAB.getLeaves().getDefaultState();
+	public IBlockState FENCE = EnumWood.BAOBAB.getFence().getDefaultState();
+	public IBlockState DOOR = EnumWood.BAOBAB.getDoor().getDefaultState();
+	public static IBlockState BAMBOO_TORCH_LOWER = ModBlocks.BAMBOO_TORCH.getDefaultState().withProperty(BlockBambooTorch.HALF, EnumBlockTorchHalf.LOWER);
+	public static IBlockState BAMBOO_TORCH_UPPER = ModBlocks.BAMBOO_TORCH.getDefaultState().withProperty(BlockBambooTorch.HALF, EnumBlockTorchHalf.UPPER);
+	
 	public WorldGenGiantBaobab() {
 		height = 28;
 		baseRadius = 14;
-		log = EnumWood.BAOBAB.getLog();
-		leaves = EnumWood.BAOBAB.getLeaves();
 	}
 
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] {
@@ -133,51 +146,51 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 					double dSq = i * i + j * j;
 					if (yy <= y + layer1 && yy < y + layer2) {
 						if (Math.round(Math.sqrt(dSq)) == radius || Math.round(Math.sqrt(dSq)) <= radius - 1 && yy <= y + 2)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), log.getDefaultState());
-						world.setBlockState(new BlockPos(x, yy, z), log.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, yy, z + j), LOG, 2);
+						world.setBlockState(new BlockPos(x, yy, z), LOG, 2);
 					}
 
 					if (yy <= y + layer2 && yy > y + layer1) {
 						if (Math.round(Math.sqrt(dSq)) == radius - 1)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), log.getDefaultState());
-						world.setBlockState(new BlockPos(x, yy, z), log.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, yy, z + j), LOG, 2);
+						world.setBlockState(new BlockPos(x, yy, z), LOG, 2);
 					}
 
 					if (yy <= y + layer3 && yy > y + layer2) {
 						if (Math.round(Math.sqrt(dSq)) == radius - 2)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), log.getDefaultState());
-						world.setBlockState(new BlockPos(x, yy, z), log.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, yy, z + j), LOG, 2);
+						world.setBlockState(new BlockPos(x, yy, z), LOG, 2);
 					}
 
 					if (yy <= y + layer4 && yy > y + layer3) {
-						world.setBlockState(new BlockPos(x, y + 10, z), log.getDefaultState());
-						world.setBlockState(new BlockPos(x, y + 11, z), log.getDefaultState());
+						world.setBlockState(new BlockPos(x, y + 10, z), LOG, 2);
+						world.setBlockState(new BlockPos(x, y + 11, z), LOG, 2);
 
 						if (Math.round(Math.sqrt(dSq)) <= radius - 12 && Math.round(Math.sqrt(dSq)) > radius - 13)
-							world.setBlockState(new BlockPos(x + i, y + 12, z + j), Blocks.WEB.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, y + 12, z + j), Blocks.WEB.getDefaultState(), 2);
 						if (Math.round(Math.sqrt(dSq)) == radius - 3 || Math.round(Math.sqrt(dSq)) <= radius - 3 && Math.round(Math.sqrt(dSq)) > radius - 12 && yy >= y + 9 && yy <= y + 12)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), log.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, yy, z + j), LOG, 2);
 					}
 
 					if (yy <= y + layer5 && yy > y + layer4) {
 						if (Math.round(Math.sqrt(dSq)) == radius - 2)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), log.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, yy, z + j), LOG, 2);
 
 						if (Math.round(Math.sqrt(dSq)) <= radius - 3 && yy == y + 20)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), log.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, yy, z + j), LOG, 2);
 
 						if (Math.round(Math.sqrt(dSq)) <= radius - 3 && yy == y + 21)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), ModBlocks.SILK.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, yy, z + j), ModBlocks.SILK.getDefaultState(), 2);
 
 					}
 
 					// 2nd floor gap in web shape
 					if (Math.round(Math.sqrt(dSq)) < radius - 3 && Math.round(Math.sqrt(dSq)) % 2 == 0 && yy == y + 21)
 						if (x + i != x && z + j != z)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), Blocks.WEB.getDefaultState());
+							world.setBlockState(new BlockPos(x + i, yy, z + j), Blocks.WEB.getDefaultState(), 2);
 				}
 
-		// leaves
+		// LEAVES
 		createLeaves(world, rand, x + 10, y + 29, z);
 		createLeaves(world, rand, x - 10, y + 29, z);
 		createLeaves(world, rand, x, y + 29, z + 10);
@@ -246,8 +259,72 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		boss.forceSpawn = true;
 		world.spawnEntity(boss);
 
-		//System.out.println("Added Dungeon at: " + x + " " + z);
+		System.out.println("Added Dungeon at: " + x + " " + z);
+		addEntranceDecoration(world, rand, pos);
 		return true;
+	}
+
+	public void addEntranceDecoration(World world, Random rand, BlockPos pos) {
+		for (direction = 0; direction < 4; direction++) {
+			for(int count = 0; count < 3; count ++) {
+				rotatedCubeVolume(world, rand, pos, 0, -2 + count, -15 + count, LOG, 1, 2, 2, direction);
+				rotatedCubeVolume(world, rand, pos, 0, 0 + count, -15 + count, getStairRotations(STAIRS, direction == 0 ? 2 : direction== 1 ? 0 : direction == 2 ? 3 : 1), 1, 1, 1, direction);
+				rotatedCubeVolume(world, rand, pos, 0, 1 + count, -15 + count, Blocks.AIR.getDefaultState(), 1, 2, 1, direction);
+				if(count < 2) {
+					rotatedCubeVolume(world, rand, pos, -1, -2 + count, -15 + count, LOG, 1, 3, 2, direction);
+					rotatedCubeVolume(world, rand, pos, 1, -2 + count, -15 + count, LOG, 1, 3, 2, direction);
+					rotatedCubeVolume(world, rand, pos, -1, 1 + count, -15 + count, FENCE, 1, 1, 1, direction);
+					rotatedCubeVolume(world, rand, pos, 1, 1 + count, -15 + count, FENCE, 1, 1, 1, direction);
+					if(count < 1) {
+						rotatedCubeVolume(world, rand, pos, -1, 2 + count, -15 + count, FENCE, 1, 1, 1, direction);
+						rotatedCubeVolume(world, rand, pos, 1, 2 + count, -15 + count, FENCE, 1, 1, 1, direction);
+						rotatedCubeVolume(world, rand, pos, -1, 3 + count, -15 + count, BAMBOO_TORCH_LOWER, 1, 1, 1, direction);
+						rotatedCubeVolume(world, rand, pos, 1, 3 + count, -15 + count, BAMBOO_TORCH_LOWER, 1, 1, 1, direction);
+						rotatedCubeVolume(world, rand, pos, -1, 4 + count, -15 + count, BAMBOO_TORCH_UPPER, 1, 1, 1, direction);
+						rotatedCubeVolume(world, rand, pos, 1, 4 + count, -15 + count, BAMBOO_TORCH_UPPER, 1, 1, 1, direction);
+					}
+				}
+			}
+			rotatedCubeVolume(world, rand, pos, 0, 3, -12, getDoorRotations(DOOR, direction), 1, 1, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 0, 4, -12, getDoorRotations(DOOR, direction + 4), 1, 1, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, -2, 5, -13, LOG, 5, 1, 1, direction);
+			rotatedCubeVolume(world, rand, pos, -1, 6, -13, LOG, 3, 1, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 0, 7, -13, LOG, 1, 1, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, -1, 8, -12, LOG, 3, 1, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 0, 9, -12, LOG, 1, 1, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, 0, 10, -11, LOG, 1, 1, 1, direction);
+			rotatedCubeVolume(world, rand, pos, -1, 10, -11, LOG, 1, 2, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 1, 10, -11, LOG, 1, 2, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, -2, 11, -11, LOG, 1, 2, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 2, 11, -11, LOG, 1, 2, 1, direction);
+			
+			rotatedCubeVolume(world, rand, pos, -3, 12, -11, LOG, 1, 5, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 3, 12, -11, LOG, 1, 5, 1, direction);
+			
+			rotatedCubeVolume(world, rand, pos, -1, 14, -10, ModBlocks.AMBER_GLASS.getDefaultState(), 1, 2, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 1, 14, -10, ModBlocks.AMBER_GLASS.getDefaultState(), 1, 2, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, -2, 16, -11, LOG, 1, 2, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 2, 16, -11, LOG, 1, 2, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, -1, 17, -11, LOG, 1, 2, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 1, 17, -11, LOG, 1, 2, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, 0, 18, -11, LOG, 1, 2, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, 0, 20, -12, LOG, 1, 6, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, -1, 22, -12, LOG, 1, 2, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 1, 22, -12, LOG, 1, 2, 1, direction);
+
+			rotatedCubeVolume(world, rand, pos, -2, 23, -12, LOG, 1, 3, 1, direction);
+			rotatedCubeVolume(world, rand, pos, 2, 23, -12, LOG, 1, 3, 1, direction);
+		}
+		
 	}
 
 	public void createLeaves(World world, Random rand, int x, int y, int z) {
@@ -260,9 +337,9 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 					if (Math.round(Math.sqrt(dSq)) < radius)
 						if (dSq >= Math.pow(radius - 2, 2.0D))
 							if (rand.nextInt(10) == 0)
-								world.setBlockState(new BlockPos(xx, yy, zz), log.getDefaultState());
+								world.setBlockState(new BlockPos(xx, yy, zz), LOG);
 							else
-								world.setBlockState(new BlockPos(xx, yy, zz), leaves.getDefaultState());
+								world.setBlockState(new BlockPos(xx, yy, zz), LEAVES);
 				}
 	}
 
@@ -275,7 +352,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 					double dSq = i * i + j * j;
 					if (Math.round(Math.sqrt(dSq)) <= radius)
 						if (rand.nextInt(5) != 0)
-							world.setBlockState(new BlockPos(x + i, yy, z + j), log.getStateFromMeta(15), 2);
+							world.setBlockState(new BlockPos(x + i, yy, z + j), LOG.withProperty(BlockLogErebus.LOG_AXIS, BlockLog.EnumAxis.NONE), 2);
 					if (yy % 4 == 0)
 						radius -= 0.02;
 				}
@@ -292,5 +369,85 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 		TileEntityChest chest = (TileEntityChest) world.getTileEntity(new BlockPos(x, y - 1, z));
 		if (chest != null)
 			LootUtil.generateLoot(chest, rand, chestLoot, 3, 10);
+	}
+	
+	public void rotatedCubeVolume(World world, Random rand, BlockPos pos, int offsetA, int offsetB, int offsetC, IBlockState state, int sizeWidth, int sizeHeight, int sizeDepth, int direction) {
+		//special cases here
+
+		switch (direction) {
+		case 0:
+			for (int yy = offsetB; yy < offsetB + sizeHeight; yy++)
+				for (int xx = offsetA; xx < offsetA + sizeWidth; xx++)
+					for (int zz = offsetC; zz < offsetC + sizeDepth; zz++) {
+						world.setBlockState(pos.add(xx, yy, zz), state, 16);
+					}
+			break;
+		case 1:
+			for (int yy = offsetB; yy < offsetB + sizeHeight; yy++)
+				for (int zz = - offsetA ; zz > - offsetA - sizeWidth; zz--)
+					for (int xx = offsetC; xx < offsetC + sizeDepth; xx++) {
+						world.setBlockState(pos.add(xx, yy, zz), state, 16);
+					}
+			break;
+		case 2:
+			for (int yy = offsetB; yy < offsetB + sizeHeight; yy++)
+				for (int xx = - offsetA; xx > - offsetA - sizeWidth; xx--)
+					for (int zz = - offsetC; zz > - offsetC - sizeDepth; zz--) {
+						world.setBlockState(pos.add(xx, yy, zz), state, 16);
+					}
+			break;
+		case 3:
+			for (int yy = offsetB; yy < offsetB + sizeHeight; yy++)
+				for (int zz = offsetA; zz < offsetA + sizeWidth; zz++)
+					for (int xx = - offsetC; xx > - offsetC - sizeDepth; xx--) {
+						world.setBlockState(pos.add(xx, yy, zz), state, 16);
+					}
+			break;
+		}
+	}
+	
+	public IBlockState getStairRotations(IBlockState state, int blockMeta) {
+		int direction = blockMeta;
+		switch (direction) {
+		case 0:
+			return state.withProperty(BlockStairsErebus.FACING, EnumFacing.EAST);
+		case 1:
+			return state.withProperty(BlockStairsErebus.FACING, EnumFacing.WEST);
+		case 2:
+			return state.withProperty(BlockStairsErebus.FACING, EnumFacing.SOUTH);
+		case 3:
+			return state.withProperty(BlockStairsErebus.FACING, EnumFacing.NORTH);
+		case 4:
+			return state.withProperty(BlockStairsErebus.FACING, EnumFacing.EAST).withProperty(BlockStairsErebus.HALF, EnumHalf.TOP);
+		case 5:
+			return state.withProperty(BlockStairsErebus.FACING, EnumFacing.WEST).withProperty(BlockStairsErebus.HALF, EnumHalf.TOP);
+		case 6:
+			return state.withProperty(BlockStairsErebus.FACING, EnumFacing.SOUTH).withProperty(BlockStairsErebus.HALF, EnumHalf.TOP);
+		case 7:
+			return state.withProperty(BlockStairsErebus.FACING, EnumFacing.NORTH).withProperty(BlockStairsErebus.HALF, EnumHalf.TOP);
+		}
+		return state;
+	}
+
+	public IBlockState getDoorRotations(IBlockState state, int direction) {
+		switch (direction) {
+		case 0:
+			return state.withProperty(BlockDoorErebus.FACING, EnumFacing.SOUTH).withProperty(BlockDoorErebus.HALF, BlockDoorErebus.EnumDoorHalf.LOWER);
+		case 1:
+			return state.withProperty(BlockDoorErebus.FACING, EnumFacing.EAST).withProperty(BlockDoorErebus.HALF, BlockDoorErebus.EnumDoorHalf.LOWER);
+		case 2:
+			return state.withProperty(BlockDoorErebus.FACING, EnumFacing.NORTH).withProperty(BlockDoorErebus.HALF, BlockDoorErebus.EnumDoorHalf.LOWER);
+		case 3:
+			return state.withProperty(BlockDoorErebus.FACING, EnumFacing.WEST).withProperty(BlockDoorErebus.HALF, BlockDoorErebus.EnumDoorHalf.LOWER);
+		case 4:
+			state.withProperty(BlockDoorErebus.FACING, EnumFacing.SOUTH).withProperty(BlockDoorErebus.HALF, BlockDoorErebus.EnumDoorHalf.UPPER);
+		case 5:
+			return state.withProperty(BlockDoorErebus.FACING, EnumFacing.EAST).withProperty(BlockDoorErebus.HALF, BlockDoorErebus.EnumDoorHalf.UPPER);
+		case 6:
+			return state.withProperty(BlockDoorErebus.FACING, EnumFacing.NORTH).withProperty(BlockDoorErebus.HALF, BlockDoorErebus.EnumDoorHalf.UPPER);
+		case 7:
+			return state.withProperty(BlockDoorErebus.FACING, EnumFacing.WEST).withProperty(BlockDoorErebus.HALF, BlockDoorErebus.EnumDoorHalf.UPPER);
+		}
+		return state;
 	}
 }
