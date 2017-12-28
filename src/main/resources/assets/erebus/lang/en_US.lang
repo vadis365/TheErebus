@@ -548,6 +548,7 @@ tile.erebus.silo_tank.silo_inactive.name=Silo Tank
 tile.erebus.silo_tank.silo_active.name=Silo Tank
 tile.erebus.silo_supports.name=Silo Supports
 tile.erebus.honey_comb.name=Honeycomb
+tile.erebus.composter.name=Organic Composter
 tile.erebus.wasp_nest.name=Wasp Nest
 tile.erebus.stairs_wasp_nest.name=Wasp Nest Stairs
 

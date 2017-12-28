@@ -7,7 +7,7 @@ import java.util.List;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.core.helper.Utils;
-import erebus.item.ItemMaterials;
+import erebus.items.ItemMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -20,34 +20,39 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ComposterRegistry {
 
-	private static List<Material> compostableMaterials = Arrays.asList(Material.cactus, Material.cake, Material.coral, Material.gourd, Material.grass, Material.leaves, Material.plants, Material.sponge, Material.vine, Material.web, Material.wood);
+	private static List<Material> compostableMaterials = Arrays.asList(Material.CACTUS, Material.CAKE, Material.CORAL, Material.GOURD, Material.GRASS, Material.LEAVES, Material.PLANTS, Material.SPONGE, Material.VINE, Material.WEB, Material.WOOD);
 	private static List<ItemStack> registry = new ArrayList<ItemStack>();
 	private static List<ItemStack> blacklist = new ArrayList<ItemStack>();
 
 	public static void init() {
-		register(Items.stick);
-		register(Items.wooden_axe);
-		register(Items.wooden_door);
-		register(Items.wooden_hoe);
-		register(Items.wooden_pickaxe);
-		register(Items.wooden_shovel);
-		register(Items.wooden_sword);
-		register(Items.wheat);
-		register(Items.poisonous_potato);
-		register(ItemMaterials.DATA.DARK_FRUIT_SEEDS.makeStack());
-		register(ItemMaterials.DATA.WEEPING_BLUE_PETAL.makeStack());
-		register(ItemMaterials.DATA.PAPYRUS.makeStack());
-		register(ItemMaterials.DATA.NETTLE_LEAVES.makeStack());
-		register(ItemMaterials.DATA.NETTLE_FLOWERS.makeStack());
-		register(ItemMaterials.DATA.MOSS_BALL.makeStack());
-		register(ItemMaterials.DATA.YELLOW_DOTTED_FUNGUS.makeStack());
-		register(ItemMaterials.DATA.JADE_BERRIES.makeStack());
-		register(ItemMaterials.DATA.SNAPPER_ROOT.makeStack());
-		register(ItemMaterials.DATA.BAMBOO.makeStack());
-		register(ItemMaterials.DATA.BAMBOO_SHOOT.makeStack());
+		register(Items.STICK);
+		register(Items.WOODEN_AXE);
+		register(Items.WOODEN_HOE);
+		register(Items.WOODEN_PICKAXE);
+		register(Items.WOODEN_SHOVEL);
+		register(Items.WOODEN_SWORD);
+		register(Items.WHEAT);
+		register(Items.POISONOUS_POTATO);
+		register(Items.ACACIA_DOOR);
+		register(Items.BIRCH_DOOR);
+		register(Items.DARK_OAK_DOOR);
+		register(Items.JUNGLE_DOOR);
+		register(Items.OAK_DOOR);
+		register(Items.SPRUCE_DOOR);
+		register(ItemMaterials.EnumErebusMaterialsType.DARK_FRUIT_SEEDS.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.BLUEBELL_PETAL.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.PAPYRUS.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.NETTLE_FLOWERS.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.MOSS_BALL.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.GLOWSHROOM.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.JADE_BERRIES.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.BOGMAW_ROOT.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.BAMBOO.createStack());
+		register(ItemMaterials.EnumErebusMaterialsType.BAMBOO.createStack());
 
-		blacklist.add(new ItemStack(ModBlocks.wallPlants, 1, 1));
-		blacklist.add(new ItemStack(ModBlocks.wallPlantsCultivated, 1, 1));
+		blacklist.add(new ItemStack(ModBlocks.WALL_PLANTS, 1, 1));
+		blacklist.add(new ItemStack(ModBlocks.WALL_PLANTS_CULTIVATED, 1, 1));
 	}
 
 	private static void register(Item item) {
@@ -59,24 +64,24 @@ public class ComposterRegistry {
 	}
 
 	public static ItemStack isCompostable(ItemStack stack) {
-		if (stack == null)
+		if (stack.isEmpty())
 			return null;
 		for (ItemStack s : blacklist)
 			if (Utils.areStacksTheSame(s, stack, false))
-				return null;
+				return ItemStack.EMPTY;
 
 		if (stack.getItem() instanceof ItemFood || stack.getItem() instanceof ItemSeeds)
-			return new ItemStack(ModItems.compost);
+			return new ItemStack(ModItems.COMPOST);
 		else {
 			Block block = Block.getBlockFromItem(stack.getItem());
-			if (block != null && block != Blocks.air && compostableMaterials.contains(block.getMaterial()))
-				return new ItemStack(ModItems.compost);
+			if (block != null && block != Blocks.AIR && compostableMaterials.contains(block.getDefaultState().getMaterial()))
+				return new ItemStack(ModItems.COMPOST);
 		}
 
 		for (ItemStack reg : registry)
 			if (Utils.areStacksTheSame(stack, reg, false))
-				return new ItemStack(ModItems.compost);
+				return new ItemStack(ModItems.COMPOST);
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 }

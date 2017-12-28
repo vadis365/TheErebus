@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -72,7 +73,7 @@ public class TileEntityComposter extends TileEntityBasicInventory implements ITi
 					if (composterBurnTime > 0) {
 						flag1 = true;
 
-						if (getInventory().get(1).isEmpty()) {
+						if (!getInventory().get(1).isEmpty()) {
 							getInventory().get(1).shrink(1);
 
 							if (getInventory().get(1).getCount() == 0)
@@ -95,13 +96,6 @@ public class TileEntityComposter extends TileEntityBasicInventory implements ITi
 
 			if (flag != composterBurnTime > 0) {
 				flag1 = true;
-				boolean tileActive = composterBurnTime > 0;
-				int meta = getBlockMetadata();
-				boolean blockActive = meta == 1;
-				if (blockActive && !tileActive)
-					getWorld().setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
-				if (!blockActive && tileActive)
-					getWorld().setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
 			}
 		}
 
@@ -160,10 +154,10 @@ public class TileEntityComposter extends TileEntityBasicInventory implements ITi
 			if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR) {
 				Block block = Block.getBlockFromItem(item);
 
-				if (block == ModBlocks.WALL_PLANTS && is.getItemDamage() == 1)
+				if (block == ModBlocks.WALL_PLANTS && is.getItemDamage() == 7)
 					return 800;
 
-				if (block == ModBlocks.WALL_PLANTS_CULTIVATED && is.getItemDamage() == 1)
+				if (block == ModBlocks.WALL_PLANTS_CULTIVATED && is.getItemDamage() == 7)
 					return 400;
 			}
 		}
@@ -178,6 +172,30 @@ public class TileEntityComposter extends TileEntityBasicInventory implements ITi
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack is) {
 		return slot == 2 ? false : slot == 1 ? isItemFuel(is) : true;
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

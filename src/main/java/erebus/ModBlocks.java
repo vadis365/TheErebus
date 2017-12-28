@@ -31,6 +31,7 @@ import erebus.blocks.BlockBones;
 import erebus.blocks.BlockBossEgg;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockCapstone;
+import erebus.blocks.BlockComposter;
 import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
@@ -233,6 +234,7 @@ public class ModBlocks {
 	public static final Block INSECT_REPELLENT = new BlockInsectRepellent();
 	public static final Block PETRIFIED_WOOD_CHEST = new BlockPetrifiedChest(BlockPetrifiedChest.Type.BASIC);
 	public static final Block GLOWING_JAR = new BlockGlowingJar();
+	public static final Block COMPOSTER = new BlockComposter();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();

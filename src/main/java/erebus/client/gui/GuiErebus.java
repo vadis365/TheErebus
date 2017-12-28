@@ -19,6 +19,12 @@ public abstract class GuiErebus extends GuiContainer {
 		super(container);
 	}
 
+	@Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        renderHoveredToolTip(mouseX, mouseY);
+    }
+
 	protected void drawTexturedModalRectFloat(float p_73729_1_, float p_73729_2_, float p_73729_3_, float p_73729_4_, float p_73729_5_, float p_73729_6_) {
 		float f = 0.00390625F;
 		float f1 = 0.00390625F;

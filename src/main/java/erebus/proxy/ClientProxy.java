@@ -203,6 +203,7 @@ import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.client.particle.ParticleRedstone;
 import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.client.particle.ParticleSpell;
+import net.minecraft.client.particle.ParticleSuspendedTown;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.entity.Entity;
@@ -405,6 +406,9 @@ public class ClientProxy extends CommonProxy {
 			fx = new ParticlePortal.Factory().createParticle(EnumParticleTypes.PORTAL.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 			//fx.setRBGColorF(0F, 1F, 0F);
 		}
+
+		if (particleName.equals("bonemeal"))
+			fx = new ParticleSuspendedTown.HappyVillagerFactory().createParticle(EnumParticleTypes.VILLAGER_HAPPY.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 
 		if (particleName.equals("cloud"))
 			fx = new ParticleCloud.Factory().createParticle(EnumParticleTypes.CLOUD.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);

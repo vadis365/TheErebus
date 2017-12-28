@@ -2,61 +2,61 @@ package erebus.blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.Erebus;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
-import erebus.core.proxy.ClientProxy.BlockRenderIDs;
-import erebus.core.proxy.CommonProxy;
+import erebus.proxy.CommonProxy;
 import erebus.tileentity.TileEntityComposter;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockComposter extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon composterTop, composterBottom;
-
 	public BlockComposter() {
-		super(Material.rock);
-		setCreativeTab(ModTabs.blocks);
+		super(Material.ROCK);
+		setHardness(2.0F);
+		setSoundType(SoundType.WOOD);
+		setCreativeTab(ModTabs.BLOCKS);
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side == 1 ? composterTop : side == 0 ? composterBottom : blockIcon;
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon("erebus:composterSide");
-		composterTop = reg.registerIcon("erebus:composterTop");
-		composterBottom = reg.registerIcon("erebus:composterBottom");
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
 			return true;
-		else {
-			TileEntityComposter composter = (TileEntityComposter) world.getTileEntity(x, y, z);
-
-			if (composter != null)
-				player.openGui(Erebus.instance, CommonProxy.GuiID.COMPOSTER.ordinal(), world, x, y, z);
-
-			return true;
-		}
+		TileEntityComposter composter = Utils.getTileEntity(world, pos, TileEntityComposter.class);
+		if (composter != null)
+			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.COMPOSTER.ordinal(), world, pos.getX(), pos.getY(),pos.getZ());
+		return true;
 	}
 
 	@Override
@@ -65,45 +65,36 @@ public class BlockComposter extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		Utils.dropInventoryContents(Utils.getTileEntity(world, x, y, z, TileEntityComposter.class));
-		world.func_147453_f(x, y, z, block);
-		super.breakBlock(world, x, y, z, block, meta);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntityComposter composter = Utils.getTileEntity(world, pos, TileEntityComposter.class);
+		if (composter != null)
+			for (int i = 0; i < composter.getSizeInventory(); i++) {
+				ItemStack is = composter.getStackInSlot(i);
+				if (!is.isEmpty())
+					Utils.dropStack(world, pos, is);
+			}
+		super.breakBlock(world, pos, state);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		if (world.getBlockMetadata(x, y, z) == 1) {
-			float f = x + 0.5F;
-			float f1 = y + 1.1F + rand.nextFloat() * 6.0F / 16.0F;
-			float f2 = z + 0.5F;
-			world.spawnParticle("happyVillager", f, f1, f2, 0.0D, 0.0D, 0.0D);
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		TileEntityComposter composter = Utils.getTileEntity(world, pos, TileEntityComposter.class);
+		if (composter != null && composter.composterBurnTime > 0) {
+			double particleX = pos.getX() + 0.5F;
+			double particleY = pos.getY() + 1.1F + rand.nextFloat() * 6.0F / 16.0F;
+			double particleZ = pos.getZ() + 0.5F;
+			Erebus.PROXY.spawnCustomParticle("bonemeal", world, particleX, particleY, particleZ, 0D, 0D, 0D);
 		}
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride() {
-		return true;
-	}
+    public boolean hasComparatorInputOverride(IBlockState state) {
+        return true;
+    }
 
 	@Override
-	public int getComparatorInputOverride(World world, int x, int y, int z, int side) {
-		return Container.calcRedstoneFromInventory(Utils.getTileEntity(world, x, y, z, IInventory.class));
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
-	public int getRenderType() {
-		return BlockRenderIDs.COMPOSTER.id();
-	}
+    public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
+        return Container.calcRedstone(worldIn.getTileEntity(pos));
+    }
 }

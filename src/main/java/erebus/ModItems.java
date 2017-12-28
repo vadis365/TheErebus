@@ -18,6 +18,7 @@ import erebus.items.ItemArmorWaterStriders;
 import erebus.items.ItemAxeJade;
 import erebus.items.ItemBambucket;
 import erebus.items.ItemBootsJump;
+import erebus.items.ItemCompost;
 import erebus.items.ItemCompoundGoggles;
 import erebus.items.ItemDeathCompass;
 import erebus.items.ItemDungeonIdols;
@@ -151,6 +152,7 @@ public class ModItems {
 	public static final Item HOMING_BEECON = new ItemHomingBeecon();
 	public static final Item HOMING_BEECON_ADVANCED = new ItemHomingBeeconAdvanced();
 	public static final Item WAND_OF_PRESERVATION = new ItemWandOfPreservation();
+	public static final Item COMPOST = new ItemCompost();
 
 	public static void init() {
 		try {

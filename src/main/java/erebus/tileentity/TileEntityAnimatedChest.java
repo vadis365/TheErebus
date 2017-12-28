@@ -12,7 +12,7 @@ public class TileEntityAnimatedChest extends TileEntityBasicInventory {
 	protected EntityAnimatedChest chester;
 
 	public TileEntityAnimatedChest(EntityAnimatedChest chest) {
-		super(chest.inventory.size(), "container.animatedChest");
+		super(chest.inventory.size(), "Chester");
 		setInventory(chest.inventory);
 		chester = chest;
 	}

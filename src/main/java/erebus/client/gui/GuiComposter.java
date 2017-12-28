@@ -37,7 +37,7 @@ public class GuiComposter extends GuiErebus {
 
 		if (tileComposter.isBurning()) {
 			int i1 = tileComposter.getBurnTimeRemainingScaled(13);
-			drawTexturedModalRect(guiLeft + 56, guiTop + 36 + 12 - i1, 176, 12 - i1, 14, i1 + 1);
+			drawTexturedModalRect(guiLeft + 56, guiTop + 36 + 12 - i1, 176, 12 - i1, 16, i1 + 2);
 			i1 = tileComposter.getCookProgressScaled(32);
 			drawTexturedModalRect(guiLeft + 76, guiTop + 28, 176, 14, i1 + 1, 32);
 		}

@@ -27,6 +27,7 @@ import erebus.network.server.PacketGlider;
 import erebus.network.server.PacketGliderPowered;
 import erebus.preserved.PreservableEntityRegistry;
 import erebus.proxy.CommonProxy;
+import erebus.recipes.ComposterRegistry;
 import erebus.recipes.ErebusRecipesHandler;
 import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
@@ -74,6 +75,7 @@ public class Erebus {
 		ModSounds.init();
 		ModEntities.init();
 		ErebusRecipesHandler.init();
+		ComposterRegistry.init();
 		
 		if (event.getSide() == Side.CLIENT) {
 			if (ConfigHandler.INSTANCE.playCustomSongs)

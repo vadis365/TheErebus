@@ -1,15 +1,15 @@
 package erebus.inventory;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.recipes.ComposterRegistry;
 import erebus.tileentity.TileEntityComposter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerComposter extends Container {
 
@@ -33,34 +33,33 @@ public class ContainerComposter extends Container {
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting crafting) {
-		super.addCraftingToCrafters(crafting);
-		crafting.sendProgressBarUpdate(this, 0, tileComposter.composterCookTime);
-		crafting.sendProgressBarUpdate(this, 1, tileComposter.composterBurnTime);
-		crafting.sendProgressBarUpdate(this, 2, tileComposter.currentItemBurnTime);
+	public void addListener(IContainerListener listener) {
+		super.addListener(listener);
+		listener.sendWindowProperty(this, 0, tileComposter.composterCookTime);
+		listener.sendWindowProperty(this, 1, tileComposter.composterBurnTime);
+		listener.sendWindowProperty(this, 2, tileComposter.currentItemBurnTime);
 	}
-
+	
 	@Override
-	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
 
-		for (Object crafter : crafters) {
-			ICrafting icrafting = (ICrafting) crafter;
+        for (IContainerListener listener : listeners) {
 
-			if (lastCookTime != tileComposter.composterCookTime)
-				icrafting.sendProgressBarUpdate(this, 0, tileComposter.composterCookTime);
+            if (lastCookTime != tileComposter.composterCookTime)
+            	listener.sendWindowProperty(this, 0, tileComposter.composterCookTime);
 
-			if (lastBurnTime != tileComposter.composterBurnTime)
-				icrafting.sendProgressBarUpdate(this, 1, tileComposter.composterBurnTime);
+            if (lastBurnTime != tileComposter.composterBurnTime)
+            	listener.sendWindowProperty(this, 1, tileComposter.composterBurnTime);
 
-			if (lastItemBurnTime != tileComposter.currentItemBurnTime)
-				icrafting.sendProgressBarUpdate(this, 2, tileComposter.currentItemBurnTime);
-		}
+            if (lastItemBurnTime != tileComposter.currentItemBurnTime)
+            	listener.sendWindowProperty(this, 2, tileComposter.currentItemBurnTime);
+        }
 
-		lastCookTime = tileComposter.composterCookTime;
-		lastBurnTime = tileComposter.composterBurnTime;
-		lastItemBurnTime = tileComposter.currentItemBurnTime;
-	}
+        lastCookTime = tileComposter.composterCookTime;
+        lastBurnTime = tileComposter.composterBurnTime;
+        lastItemBurnTime = tileComposter.currentItemBurnTime;
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -80,49 +79,46 @@ public class ContainerComposter extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return tileComposter.isUseableByPlayer(player);
+		return tileComposter.isUsableByPlayer(player);
 	}
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotIndex);
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = (Slot)inventorySlots.get(slotIndex);
 
-		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
+        if (slot != null && slot.getHasStack()) {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
 
-			if (slotIndex == 2) {
-				if (!mergeItemStack(itemstack1, 3, 39, true))
-					return null;
-
-				slot.onSlotChange(itemstack1, itemstack);
+            if (slotIndex == 2) {
+                if (!mergeItemStack(itemstack1, 3, 39, true))
+                    return ItemStack.EMPTY;
+                slot.onSlotChange(itemstack1, itemstack);
 			} else if (slotIndex != 1 && slotIndex != 0) {
-				if (ComposterRegistry.isCompostable(itemstack1) != null) {
+				if (!ComposterRegistry.isCompostable(itemstack1).isEmpty()) {
 					if (!mergeItemStack(itemstack1, 0, 1, false))
-						return null;
+						return ItemStack.EMPTY;
 				} else if (TileEntityComposter.isItemFuel(itemstack1)) {
 					if (!mergeItemStack(itemstack1, 1, 2, false))
-						return null;
+						return ItemStack.EMPTY;
 				} else if (slotIndex >= 3 && slotIndex < 30) {
 					if (!mergeItemStack(itemstack1, 30, 39, false))
-						return null;
+						return ItemStack.EMPTY;
 				} else if (slotIndex >= 30 && slotIndex < 39 && !mergeItemStack(itemstack1, 3, 30, false))
-					return null;
+					return ItemStack.EMPTY;
 			} else if (!mergeItemStack(itemstack1, 3, 39, false))
-				return null;
+				return ItemStack.EMPTY;
+            
+            if (itemstack1.getCount() == 0)
+                slot.putStack(ItemStack.EMPTY);
+            else
+                slot.onSlotChanged();
+            if (itemstack1.getCount() == itemstack.getCount())
+                return ItemStack.EMPTY;
 
-			if (itemstack1.stackSize == 0)
-				slot.putStack(null);
-			else
-				slot.onSlotChanged();
-
-			if (itemstack1.stackSize == itemstack.stackSize)
-				return null;
-
-			slot.onPickupFromSlot(player, itemstack1);
+            slot.onTake(player, itemstack1);
 		}
-
 		return itemstack;
 	}
 }
