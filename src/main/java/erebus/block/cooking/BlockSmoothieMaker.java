@@ -1,106 +1,127 @@
 package erebus.block.cooking;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import javax.annotation.Nullable;
+
 import erebus.Erebus;
-import erebus.ModBlocks;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
-import erebus.core.proxy.CommonProxy;
+import erebus.proxy.CommonProxy;
 import erebus.tileentity.TileEntitySmoothieMaker;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSmoothieMaker extends BlockContainer {
-
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public BlockSmoothieMaker() {
-		super(Material.rock);
+		super(Material.ROCK);
 		setHardness(2.0F);
 		setResistance(5.0F);
-		setBlockName("erebus.smoothieMaker");
-		setCreativeTab(ModTabs.blocks);
+		setCreativeTab(ModTabs.BLOCKS);
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.INVISIBLE;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return ModBlocks.umberstone.getIcon(side, 0);
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing facing = EnumFacing.getFront(meta);
+		if (facing.getAxis() == EnumFacing.Axis.Y)
+			facing = EnumFacing.NORTH;
+		return getDefaultState().withProperty(FACING, facing);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float hitX, float hitY, float hitZ) {
+	public int getMetaFromState(IBlockState state) {
+		int meta = 0;
+		meta = meta | ((EnumFacing) state.getValue(FACING)).getIndex();
+		return meta;
+	}
+
+	@Override
+	 public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] { FACING });
+	}
+
+	@Override
+	 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
 			return true;
 
-		TileEntitySmoothieMaker tile = Utils.getTileEntity(world, x, y, z, TileEntitySmoothieMaker.class);
+		TileEntitySmoothieMaker tile = Utils.getTileEntity(world, pos, TileEntitySmoothieMaker.class);
 
 		if (player.isSneaking())
 			return false;
 
-		if (player.getCurrentEquippedItem() != null) {
-			ItemStack oldItem = player.getCurrentEquippedItem();
-			ItemStack newItem = tile.fillTankWithBucket(oldItem);
-
-			if (!ItemStack.areItemStacksEqual(oldItem, newItem)) {
-				if (!player.capabilities.isCreativeMode)
-					if (oldItem.stackSize > 1) {
-						oldItem.stackSize--;
-						if (!player.inventory.addItemStackToInventory(newItem))
-							player.dropPlayerItemWithRandomChoice(newItem, false);
-						else
-							player.inventory.markDirty();
-					} else {
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, newItem);
-						player.inventory.markDirty();
-					}
-				return true;
+		if (!player.inventory.getCurrentItem().isEmpty()) {
+			final IFluidHandler fluidHandler = getFluidHandler(world, pos, facing);
+			if (fluidHandler != null) {
+				FluidUtil.interactWithFluidHandler(player, hand, world, pos, facing);
+				System.out.println("Hello?");
+				return FluidUtil.getFluidHandler(player.getHeldItem(hand)) != null;
 			}
+			return false;
 		}
-
-		if (tile != null)
-			player.openGui(Erebus.instance, CommonProxy.GuiID.SMOOTHIE_MAKER.ordinal(), world, x, y, z);
-
+		else if (tile != null)
+			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.SMOOTHIE_MAKER.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 
+	@Nullable
+	private IFluidHandler getFluidHandler(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+		TileEntitySmoothieMaker tileentity = (TileEntitySmoothieMaker) world.getTileEntity(pos);
+		return tileentity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
+	}
+
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		IInventory tile = Utils.getTileEntity(world, x, y, z, IInventory.class);
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntitySmoothieMaker tile = Utils.getTileEntity(world, pos, TileEntitySmoothieMaker.class);
 		if (tile != null)
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
-				ItemStack stack = tile.getStackInSlot(i);
-				if (stack != null)
-					Utils.dropStack(world, x, y, z, stack);
+				ItemStack is = tile.getStackInSlot(i);
+				if (!is.isEmpty())
+					Utils.dropStack(world, pos, is);
 			}
-		super.breakBlock(world, x, y, z, block, meta);
-	}
-
-	@Override
-	public int getRenderType() {
-		return -1;
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
+		world.setBlockToAir(pos);
+		super.breakBlock(world, pos, state);
 	}
 
 	@Override

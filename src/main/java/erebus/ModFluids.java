@@ -50,7 +50,7 @@ public class ModFluids {
 	}
 
 	@Nonnull
-    public static ItemStack getFilledBambucket(@Nonnull FluidStack fluidStack){
+    public static ItemStack getFilledBambucket(@Nonnull FluidStack fluidStack) {
         Fluid fluid = fluidStack.getFluid();
         if (FluidRegistry.getBucketFluids().contains(fluid)){
             ItemStack filledBucket = new ItemStack(ModItems.BAMBUCKET);

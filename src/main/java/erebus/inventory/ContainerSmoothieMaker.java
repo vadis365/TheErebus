@@ -1,8 +1,8 @@
 package erebus.inventory;
 
+import erebus.Erebus;
 import erebus.ModItems;
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
+import erebus.items.ItemMaterials;
 import erebus.network.client.PacketSmoothieMakerGUI;
 import erebus.tileentity.TileEntitySmoothieMaker;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,28 +37,28 @@ public class ContainerSmoothieMaker extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-		ItemStack stack = null;
+		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = (Slot) inventorySlots.get(slotIndex);
 		if (slot != null && slot.getHasStack()) {
 			ItemStack stack1 = slot.getStack();
 			stack = stack1.copy();
 			if (slotIndex > 4) {
-				if (stack1.getItem() == ModItems.materials && stack1.getItemDamage() != ItemMaterials.DATA.SMOOTHIE_GLASS.ordinal() || stack1.getItem() != ModItems.materials) {
+				if (stack1.getItem() == ModItems.MATERIALS && stack1.getItemDamage() != ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.ordinal() || stack1.getItem() != ModItems.MATERIALS) {
 					if (!mergeItemStack(stack1, 0, 4, false))
-						return null;
-				} else if (stack1.getItem() == ModItems.materials && stack1.getItemDamage() == ItemMaterials.DATA.SMOOTHIE_GLASS.ordinal())
+						return ItemStack.EMPTY;
+				} else if (stack1.getItem() == ModItems.MATERIALS && stack1.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.ordinal())
 					if (!mergeItemStack(stack1, 4, 5, false))
-						return null;
+						return ItemStack.EMPTY;
 			} else if (!mergeItemStack(stack1, 5, inventorySlots.size(), false))
-				return null;
-			if (stack1.stackSize == 0)
-				slot.putStack(null);
+				return ItemStack.EMPTY;
+			if (stack1.getCount() == 0)
+				slot.putStack(ItemStack.EMPTY);
 			else
 				slot.onSlotChanged();
-			if (stack1.stackSize != stack.stackSize)
-				slot.onPickupFromSlot(player, stack1);
+			if (stack1.getCount() != stack.getCount())
+				slot.onTake(player, stack1);
 			else
-				return null;
+				return ItemStack.EMPTY;
 		}
 		return stack;
 	}
@@ -70,9 +70,9 @@ public class ContainerSmoothieMaker extends Container {
 		if (tile != null) {
 			NBTTagCompound nbt = new NBTTagCompound();
 			tile.writeGUIData(nbt);
-			for (Object crafter : crafters)
-				if (crafter instanceof EntityPlayerMP)
-					PacketPipeline.sendToPlayer((EntityPlayerMP) crafter, new PacketSmoothieMakerGUI(nbt));
+			for (Object obj : listeners)  
+				if (obj instanceof EntityPlayerMP)  
+					Erebus.NETWORK_WRAPPER.sendTo(new PacketSmoothieMakerGUI(nbt), (EntityPlayerMP) obj);
 		}
 	}
 

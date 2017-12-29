@@ -194,11 +194,5 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 		public String getName() {
 			return name().toLowerCase(Locale.ENGLISH);
 		}
-
-		@Override
-		public ItemStack createStack() {
-			// TODO Auto-generated method stub
-			return null;
-		}
 	}
 }

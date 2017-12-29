@@ -1,14 +1,18 @@
 package erebus.client.gui;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.inventory.Container;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -39,10 +43,10 @@ public abstract class GuiErebus extends GuiContainer {
 	}
 
 	protected void drawToolTip(int mouseX, int mouseY, String text) {
-		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+		GlStateManager.disableRescaleNormal();
 		RenderHelper.disableStandardItemLighting();
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GlStateManager.disableLighting();
+		GlStateManager.disableDepth();
 		int k = 0;
 		int l = fontRenderer.getStringWidth(text);
 
@@ -78,35 +82,27 @@ public abstract class GuiErebus extends GuiContainer {
 
 		zLevel = 0.0F;
 		itemRender.zLevel = 0.0F;
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GlStateManager.enableLighting();
+		GlStateManager.enableDepth();
 		RenderHelper.enableStandardItemLighting();
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GlStateManager.enableRescaleNormal();
 	}
-/*
+
 	protected void drawFluid(FluidStack fluid, int fluidHeight, int x, int y, int width, int height) {
 		if (fluid == null || fluid.amount <= 0)
 			return;
 		if (fluid.getFluid().getDensity(fluid) < 0)
 			y += fluidHeight - height;
-		
-		
+
 		TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getFluid().getStill().toString());
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder buffer = tessellator.getBuffer();
-		mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-		buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-		buffer.pos(xOffSet + 156, yOffSet + 128, zLevel).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
-		buffer.pos(xOffSet + 168, yOffSet + 128, zLevel).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
-		buffer.pos(xOffSet + 168, yOffSet + 128 - fluid, zLevel).tex(sprite.getMaxU(), sprite.getMaxV()).endVertex();
-		buffer.pos(xOffSet + 156, yOffSet + 128 - fluid, zLevel).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
-		tessellator.draw();
+		GlStateManager.enableBlend();;
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		IIcon icon = fluid.getFluid().getStill();
 		mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 		glColour(fluid.getFluid().getColor(fluid) | 0xff000000);
+		buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 		int fullX = width / 16;
 		int fullY = height / 16;
 		int lastX = width - fullX * 16;
@@ -116,26 +112,28 @@ public abstract class GuiErebus extends GuiContainer {
 		for (int i = 0; i < fullX; i++)
 			for (int j = 0; j < fullY; j++)
 				if (j >= fullLvl)
-					drawCutIcon(icon, x + i * 16, y + j * 16, 16, 16, j == fullLvl ? lastLvl : 0);
+					drawCutIcon(buffer, sprite, x + i * 16, y + j * 16, 16, 16, j == fullLvl ? lastLvl : 0);
 		for (int i = 0; i < fullX; i++)
-			drawCutIcon(icon, x + i * 16, y + fullY * 16, 16, lastY, fullLvl == fullY ? lastLvl : 0);
+			drawCutIcon(buffer, sprite, x + i * 16, y + fullY * 16, 16, lastY, fullLvl == fullY ? lastLvl : 0);
 		for (int i = 0; i < fullY; i++)
 			if (i >= fullLvl)
-				drawCutIcon(icon, x + fullX * 16, y + i * 16, lastX, 16, i == fullLvl ? lastLvl : 0);
-		drawCutIcon(icon, x + fullX * 16, y + fullY * 16, lastX, lastY, fullLvl == fullY ? lastLvl : 0);
-		GL11.glColor3f(1, 1, 1);
+				drawCutIcon(buffer, sprite, x + fullX * 16, y + i * 16, lastX, 16, i == fullLvl ? lastLvl : 0);
+		drawCutIcon(buffer, sprite, x + fullX * 16, y + fullY * 16, lastX, lastY, fullLvl == fullY ? lastLvl : 0);
+		tessellator .draw();
+		GlStateManager.color(1F, 1F, 1F);
 	}
 
-	protected void drawCutIcon(IIcon icon, int x, int y, int width, int height, int cut) {
-		Tessellator tess = Tessellator.instance;
-		tess.startDrawingQuads();
-		tess.addVertexWithUV(x, y + height, zLevel, icon.getMinU(), icon.getInterpolatedV(height));
-		tess.addVertexWithUV(x + width, y + height, zLevel, icon.getInterpolatedU(width), icon.getInterpolatedV(height));
-		tess.addVertexWithUV(x + width, y + cut, zLevel, icon.getInterpolatedU(width), icon.getInterpolatedV(cut));
-		tess.addVertexWithUV(x, y + cut, zLevel, icon.getMinU(), icon.getInterpolatedV(cut));
-		tess.draw();
+	protected void drawCutIcon(BufferBuilder buffer, TextureAtlasSprite  icon, int x, int y, int width, int height, int cut) {
+		addVertexWithUV(buffer, x, y + height, zLevel, icon.getMinU(), icon.getInterpolatedV(height));
+		addVertexWithUV(buffer, x + width, y + height, zLevel, icon.getInterpolatedU(width), icon.getInterpolatedV(height));
+		addVertexWithUV(buffer, x + width, y + cut, zLevel, icon.getInterpolatedU(width), icon.getInterpolatedV(cut));
+		addVertexWithUV(buffer, x, y + cut, zLevel, icon.getMinU(), icon.getInterpolatedV(cut));
 	}
-*/
+	
+	private void addVertexWithUV(BufferBuilder buffer, float x, float y, float z, double u, double v) {
+		buffer.pos(x / 2f, y, z / 2f).tex(u, v).endVertex();
+	}
+
 	protected void glColour(int colour) {
 		float r = (colour >> 16 & 255) / 255F;
 		float g = (colour >> 8 & 255) / 255F;
@@ -144,6 +142,6 @@ public abstract class GuiErebus extends GuiContainer {
 		if (a <= 0)
 			a = 255;
 
-		GL11.glColor4f(r, g, b, a / 255F);
+		GlStateManager.color(r, g, b, a / 255F);
 	}
 }

@@ -18,6 +18,7 @@ import erebus.block.bamboo.BlockBambooLadder;
 import erebus.block.bamboo.BlockBambooPole;
 import erebus.block.bamboo.BlockBambooTorch;
 import erebus.block.bamboo.BlockExtenderThingy;
+import erebus.block.cooking.BlockSmoothieMaker;
 import erebus.block.silo.BlockSiloRoof;
 import erebus.block.silo.BlockSiloSupports;
 import erebus.block.silo.BlockSiloTank;
@@ -235,6 +236,7 @@ public class ModBlocks {
 	public static final Block PETRIFIED_WOOD_CHEST = new BlockPetrifiedChest(BlockPetrifiedChest.Type.BASIC);
 	public static final Block GLOWING_JAR = new BlockGlowingJar();
 	public static final Block COMPOSTER = new BlockComposter();
+	public static final Block SMOOTHIE_MAKER = new BlockSmoothieMaker();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();

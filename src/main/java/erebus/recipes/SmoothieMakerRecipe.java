@@ -7,7 +7,6 @@ import java.util.List;
 import erebus.core.helper.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.oredict.OreDictionary;
@@ -31,13 +30,13 @@ public class SmoothieMakerRecipe {
 	public static void addRecipe(ItemStack output, ItemStack container, Fluid[] fluids, Object... input) {
 		FluidStack[] stacks = new FluidStack[fluids.length];
 		for (int i = 0; i < stacks.length; i++)
-			stacks[i] = new FluidStack(fluids[i], FluidContainerRegistry.BUCKET_VOLUME);
+			stacks[i] = new FluidStack(fluids[i], Fluid.BUCKET_VOLUME);
 		addRecipe(output, container, stacks, input);
 	}
 
 	public static ItemStack getOutput(ItemStack container, IFluidTank tank0, IFluidTank tank1, IFluidTank tank2, IFluidTank tank3, ItemStack... input) {
 		SmoothieMakerRecipe recipe = getRecipe(container, tank0, tank1, tank2, tank3, input);
-		return recipe != null ? recipe.getOutput() : null;
+		return recipe != null ? recipe.getOutput() : ItemStack.EMPTY;
 	}
 
 	public static SmoothieMakerRecipe getRecipe(ItemStack container, IFluidTank tank0, IFluidTank tank1, IFluidTank tank2, IFluidTank tank3, ItemStack... input) {
@@ -58,7 +57,7 @@ public class SmoothieMakerRecipe {
 	private final Object[] input;
 
 	private SmoothieMakerRecipe(ItemStack output, ItemStack container, FluidStack[] fluids, Object... input) {
-		this.output = ItemStack.copyItemStack(output);
+		this.output = output.copy();
 		this.container = container;
 		this.fluids = fluids;
 		this.input = new Object[input.length];
@@ -70,7 +69,7 @@ public class SmoothieMakerRecipe {
 
 		for (int c = 0; c < input.length; c++)
 			if (input[c] instanceof ItemStack)
-				this.input[c] = ItemStack.copyItemStack((ItemStack) input[c]);
+				this.input[c] = ((ItemStack) input[c]).copy();
 			else if (input[c] instanceof String)
 				this.input[c] = OreDictionary.getOres((String) input[c]);
 			else
@@ -82,22 +81,22 @@ public class SmoothieMakerRecipe {
 	}
 
 	public ItemStack getOutput() {
-		return ItemStack.copyItemStack(output);
+		return output.copy();
 	}
 
 	public ItemStack getContainer() {
-		return ItemStack.copyItemStack(container);
+		return container.copy();
 	}
 
 	public boolean matches(ItemStack container, IFluidTank tank0, IFluidTank tank1, IFluidTank tank2, IFluidTank tank3, ItemStack... stacks) {
-		if (container != null && !areStacksTheSame(container, this.container) && container.stackSize == this.container.stackSize)
+		if (!container.isEmpty() && !areStacksTheSame(container, this.container) && container.getCount() == this.container.getCount())
 			return false;
 
 		label: for (Object input : this.input) {
 			for (int i = 0; i < stacks.length; i++)
-				if (stacks[i] != null)
+				if (!stacks[i].isEmpty())
 					if (areStacksTheSame(input, stacks[i])) {
-						stacks[i] = null;
+						stacks[i] = ItemStack.EMPTY;
 						continue label;
 					}
 

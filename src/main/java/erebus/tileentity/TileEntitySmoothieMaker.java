@@ -1,20 +1,22 @@
 package erebus.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.recipes.SmoothieMakerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements IFluidHandler {
+public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements ITickable {
 
 	private static final int MAX_TIME = 432;
 
@@ -24,7 +26,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 	public TileEntitySmoothieMaker() {
 		super(5, "container.kitchenCounter");
 		for (int i = 0; i < tanks.length; i++)
-			tanks[i] = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 16);
+			tanks[i] = new FluidTank(Fluid.BUCKET_VOLUME * 16);
 	}
 
 	public FluidTank[] getTanks() {
@@ -57,10 +59,11 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setInteger("progress", progress);
 		writeTanksToNBT(nbt);
+		return nbt;
 	}
 
 	private void writeTanksToNBT(NBTTagCompound nbt) {
@@ -83,22 +86,29 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 		readTanksFromNBT(nbt);
 	}
 
-	public ItemStack fillTankWithBucket(ItemStack bucket) {
-		FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(bucket);
-		if (fluid != null && canFill(ForgeDirection.UNKNOWN, fluid.getFluid())) {
-			int amountFilled = fill(ForgeDirection.UNKNOWN, fluid, false);
-			if (amountFilled == fluid.amount) {
-				fill(ForgeDirection.UNKNOWN, fluid, true);
-				return FluidContainerRegistry.drainFluidContainer(bucket);
-			}
-		}
-
-		return bucket;
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+		super.onDataPacket(net, packet);
+		readFromNBT(packet.getNbtCompound());
+		return;
 	}
 
 	@Override
-	public void updateEntity() {
-		if (worldObj.isRemote) {
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		NBTTagCompound tag = new NBTTagCompound();
+		writeToNBT(tag);
+		return new SPacketUpdateTileEntity(getPos(), 0, tag);
+	}
+
+	@Override
+    public NBTTagCompound getUpdateTag() {
+		NBTTagCompound tag = new NBTTagCompound();
+        return writeToNBT(tag);
+    }
+
+	@Override
+	public void update() {
+		if (getWorld().isRemote) {
 			// Interpolation stuff
 			prevProgress = progress;
 			return;
@@ -106,23 +116,23 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 		ItemStack[] inputs = new ItemStack[4];
 		for (int i = 0; i < 4; i++)
-			inputs[i] = getInventory()[i];
+			inputs[i] = getInventory().get(i);
 		SmoothieMakerRecipe recipe = SmoothieMakerRecipe.getRecipe(getStackInSlot(4), tanks[0], tanks[1], tanks[2], tanks[3], inputs);
 		if (recipe != null) {
 			progress++;
 
 			if (progress >= MAX_TIME) {
 				for (int i = 0; i < 5; i++)
-					if (getInventory()[i] != null)
-						if (--getInventory()[i].stackSize <= 0)
-							getInventory()[i] = null;
+					if (!getInventory().get(i).isEmpty())
+						getInventory().get(i).shrink(1);
+
 				extractFluids(recipe);
-				getInventory()[4] = ItemStack.copyItemStack(recipe.getOutput());
+				getInventory().set(4, recipe.getOutput().copy());
 				progress = 0;
 				markDirty();
 			}
 		}
-		if (recipe == null || getStackInSlot(4) == null) {
+		if (recipe == null || getStackInSlot(4).isEmpty()) {
 			progress = 0;
 			markDirty();
 		}
@@ -138,71 +148,57 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		return null;
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return null;
-	}
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
 
-	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		if (resource == null)
-			return 0;
-		resource = resource.copy();
+				if (facing == EnumFacing.NORTH)
+					return (T) tanks[0];
+				else if (facing == EnumFacing.EAST)
+					return (T) tanks[1];
+				else if (facing == EnumFacing.SOUTH)
+					return (T) tanks[2];
+				else if (facing == EnumFacing.WEST)
+					return (T) tanks[3];
 
-		int amountFilled = 0;
-		boolean foundTankWithSameFluid = false;
-		for (FluidTank tank : tanks)
-			if (resource.isFluidEqual(tank.getFluid())) {
-				foundTankWithSameFluid = true;
-				amountFilled = tank.fill(resource, doFill);
-				break;
-			}
-
-		resource.amount -= amountFilled;
-		if (!foundTankWithSameFluid && amountFilled < resource.amount)
-			for (FluidTank tank : tanks)
-				if (tank.getFluid() == null) {
-					amountFilled += tank.fill(resource, doFill);
-					break;
-				}
-
-		return amountFilled;
-	}
-
-	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		for (SmoothieMakerRecipe recipe : SmoothieMakerRecipe.getRecipeList())
-			for (FluidStack recipeFluid : recipe.getFluids())
-				if (recipeFluid.getFluid() == fluid)
-					return true;
-		return false;
-	}
-
-	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return false;
-	}
-
-	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		FluidTankInfo[] infos = new FluidTankInfo[tanks.length];
-		for (int i = 0; i < infos.length; i++)
-			infos[i] = new FluidTankInfo(tanks[i].getFluid(), tanks[i].getCapacity());
-		return infos;
-	}
-
-	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return slot == 4;
+		}
+		return super.getCapability(capability, facing);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox() {
-		return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 2, zCoord + 1);
+		return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1);
 	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		return null;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		return index == 4;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		return null;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		return false;
+	}
+
 }

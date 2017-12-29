@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiSmoothieMaker extends GuiErebus {
 
 	private TileEntitySmoothieMaker tile;
-	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/gui/container/smoothieMaker.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/gui/container/smoothie_maker.png");
 	public static final Rectangle[] tankPositions = new Rectangle[] { new Rectangle(8, 6, 9, 73), new Rectangle(25, 6, 9, 73), new Rectangle(142, 6, 9, 73), new Rectangle(159, 6, 9, 73) };
 
 	public GuiSmoothieMaker(InventoryPlayer inv, TileEntitySmoothieMaker tile) {

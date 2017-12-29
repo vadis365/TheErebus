@@ -20,6 +20,7 @@ import erebus.network.client.PacketBones;
 import erebus.network.client.PacketOfferingAltar;
 import erebus.network.client.PacketOfferingAltarTimer;
 import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketSmoothieMakerGUI;
 import erebus.network.server.ColossalCratePage;
 import erebus.network.server.PacketBeetleDig;
 import erebus.network.server.PacketBeetleRamAttack;
@@ -74,7 +75,6 @@ public class Erebus {
 		ModBiomes.init();
 		ModSounds.init();
 		ModEntities.init();
-		ErebusRecipesHandler.init();
 		ComposterRegistry.init();
 		
 		if (event.getSide() == Side.CLIENT) {
@@ -110,6 +110,7 @@ public class Erebus {
 		NETWORK_WRAPPER.registerMessage(MessageSyncEntityCapabilities.class, MessageSyncEntityCapabilities.class, 8, Side.CLIENT);
 		NETWORK_WRAPPER.registerMessage(PacketOfferingAltar.class, PacketOfferingAltar.class, 9, Side.CLIENT);
 		NETWORK_WRAPPER.registerMessage(PacketOfferingAltarTimer.class, PacketOfferingAltarTimer.class, 10, Side.CLIENT);
+		NETWORK_WRAPPER.registerMessage(PacketSmoothieMakerGUI.class, PacketSmoothieMakerGUI.class, 11, Side.CLIENT);
 
 		MinecraftForge.EVENT_BUS.register(EntityCapabilityHandler.class);
 		EntityCapabilityHandler.registerEntityCapability(new PlayerDeathLocationCapability());
@@ -130,6 +131,7 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
 		}
 		PROXY.registerItemAndBlockColourRenderers();
+		ErebusRecipesHandler.init();
 	}
 
 	@EventHandler

@@ -97,6 +97,7 @@ import erebus.client.render.tile.TileEntityGlowingJarRenderer;
 import erebus.client.render.tile.TileEntityOfferingAltarRenderer;
 import erebus.client.render.tile.TileEntityPetrifiedWoodChestRenderer;
 import erebus.client.render.tile.TileEntityPreservedBlockRenderer;
+import erebus.client.render.tile.TileEntitySmoothieMakerRenderer;
 import erebus.client.render.tile.TileEntityUmberGolemStatueRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
@@ -249,6 +250,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPetrifiedWoodChest.class, new TileEntityPetrifiedWoodChestRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPreservedBlock.class, new TileEntityPreservedBlockRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlowingJar.class, new TileEntityGlowingJarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySmoothieMaker.class, new TileEntitySmoothieMakerRenderer());
 	}
 
 	@Override
@@ -347,6 +349,7 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PETRIFIED_WOOD_CHEST), 0, TileEntityPetrifiedWoodChest.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PRESERVED_BLOCK), 0, TileEntityPreservedBlock.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.GLOWING_JAR), 0, TileEntityGlowingJar.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.SMOOTHIE_MAKER), 0, TileEntitySmoothieMaker.class);
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityJadeShield.class, new RenderErebusShield(RenderErebusShield.Shieldtype.JADE));
