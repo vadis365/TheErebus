@@ -41,6 +41,7 @@ import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
 import erebus.items.ItemPortalActivator;
 import erebus.items.ItemRolledNewspaper;
+import erebus.items.ItemSmoothie;
 import erebus.items.ItemSpiderTShirt;
 import erebus.items.ItemSprayCan;
 import erebus.items.ItemWandOfAnimation;
@@ -77,6 +78,7 @@ public class ModItems {
 	public static final Item CABBAGE_SEEDS = new ItemSeedFood(4, 0.1F, ModBlocks.CROP_CABBAGE, Blocks.FARMLAND).setCreativeTab(ModTabs.PLANTS);
 	public static final Item STAG_HEART_RAW = new ItemFoodStagHeart(0, 0F, false, "raw");
 	public static final Item STAG_HEART_COOKED = new ItemFoodStagHeart(20, 0.5F, false, "cooked");
+	public static final Item SMOOTHIE = new ItemSmoothie();
 	public static final Item IDOLS = new ItemDungeonIdols();
 	
 	// JADE STUFF

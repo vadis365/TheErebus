@@ -95,6 +95,18 @@ item.erebus.erebus_food.prickly_pear_raw.name=Raw Prickly Pear
 item.erebus.erebus_food.prickly_pear_cooked.name=Cooked Prickly Pear
 item.erebus.erebus_food.dark_fruit_pie.name=Dark Fruit Pie
 
+# Smoothies
+item.erebus.smoothie.green_tea_grasshopper.name=Green Tea Grasshopper Smoothie
+item.erebus.smoothie.money_honey.name=Money Honey Smoothie
+item.erebus.smoothie.nothing_in_the_middle.name=Nothing In The Middle Smoothie
+item.erebus.smoothie.green_giant.name=Green Giant Smoothie
+item.erebus.smoothie.seedy_goodness.name=Seedy Goodness Smoothie
+item.erebus.smoothie.givin_me_the_blues.name=Givin' Me The Blues Smoothie
+item.erebus.smoothie.hot_hot_baby.name=Hot Hot Baby Smoothie
+item.erebus.smoothie.dont_meddle_with_the_nettle.name=Don't Meddle With The Nettle Smoothie
+item.erebus.smoothie.liquid_gold.name=Liquid Gold Smoothie
+item.erebus.smoothie.bryufs_brew.name=Bryuf's Brew Smoothie
+
 # Armour, Weapons and Tools
 item.erebus.bamboo_helmet.name=Bamboo Helmet
 item.erebus.bamboo_chestplate.name=Bamboo Chestplate
@@ -736,3 +748,16 @@ tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
 tooltip.erebus.poweredGlider=Needs redgem blocks at the cost of fuel to flight.
 tooltip.erebus.gliderGlideKey=Gliding Key
 tooltip.erebus.gliderPoweredKey=Flying Key
+
+##########
+# Others #
+##########
+
+erebus.smoothie.effect.milk=Clears Effects
+erebus.smoothie.effect.extinguish=Puts Out Fires
+erebus.smoothie.effect.set_fire=Makes Fire
+erebus.smoothie.effect.heal=Heals
+key.erebus.glide=Glide
+key.erebus.poweredGlide=Glider Lift
+key.erebus.beetleRam=Beetle Ram Attack
+key.erebus.beetleMine=Stag Beetle Dig
