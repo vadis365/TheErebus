@@ -177,27 +177,27 @@ public class ModItems {
 		BAMBOO_SHIELD.setShieldType(new ShieldTypeBasic(
 				ItemMaterials.EnumErebusMaterialsType.SHIELD_BAMBOO_FACE.createStack(),
 				ItemMaterials.EnumErebusMaterialsType.BAMBOO.createStack(),
-				null, null, ModMaterials.ARMOR_BAMBOO.getDurability(EntityEquipmentSlot.CHEST)));
+				null, null, ModMaterials.ARMOR_BAMBOO.getDurability(EntityEquipmentSlot.CHEST) * 2));
 
 		EXOSKELETON_SHIELD.setShieldType(new ShieldTypeBasic(
 				ItemMaterials.EnumErebusMaterialsType.SHIELD_EXO_PLATE_FACE.createStack(),
 				ItemMaterials.EnumErebusMaterialsType.PLATE_EXO.createStack(),
-				null, null, ModMaterials.ARMOR_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST)));
+				null, null, ModMaterials.ARMOR_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST) * 2));
 
 		JADE_SHIELD.setShieldType(new ShieldTypeBasic(
 				ItemMaterials.EnumErebusMaterialsType.SHIELD_JADE_FACE.createStack(),
 				ItemMaterials.EnumErebusMaterialsType.JADE.createStack(),
-				null, null, ModMaterials.ARMOR_JADE.getDurability(EntityEquipmentSlot.CHEST)));
+				null, null, ModMaterials.ARMOR_JADE.getDurability(EntityEquipmentSlot.CHEST) * 2));
 
 		REIN_EXOSKELETON_SHIELD.setShieldType(new ShieldTypeBasic(
 				ItemMaterials.EnumErebusMaterialsType.SHIELD_REIN_EXO_FACE.createStack(),
 				ItemMaterials.EnumErebusMaterialsType.REINFORCED_PLATE_EXO.createStack(),
-				null, null, ModMaterials.ARMOR_REIN_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST)));
+				null, null, ModMaterials.ARMOR_REIN_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST) * 2));
 
 		RHINO_EXOSKELETON_SHIELD.setShieldType(new ShieldTypeBasic(
 				ItemMaterials.EnumErebusMaterialsType.SHIELD_RHINO_EXO_FACE.createStack(),
 				ItemMaterials.EnumErebusMaterialsType.PLATE_EXO_RHINO.createStack(),
-				null, null, ModMaterials.ARMOR_REIN_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST)));
+				null, null, ModMaterials.ARMOR_REIN_EXOSKELETON.getDurability(EntityEquipmentSlot.CHEST) * 2));
 	}
 
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)

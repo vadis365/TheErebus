@@ -82,6 +82,7 @@ import erebus.blocks.BlockTempleBrickUnbreaking;
 import erebus.blocks.BlockTempleTeleporter;
 import erebus.blocks.BlockThorns;
 import erebus.blocks.BlockTurnip;
+import erebus.blocks.BlockUmberFurnace;
 import erebus.blocks.BlockUmberGolemStatue;
 import erebus.blocks.BlockUmberGravel;
 import erebus.blocks.BlockUmberPaver;
@@ -220,6 +221,8 @@ public class ModBlocks {
 	public static final Block HOLLOW_LOG = new BlockHollowLog();
 	
 	//UTILS BLOCKS
+    public static final Block UMBER_FURNACE = new BlockUmberFurnace(false);
+    public static final Block UMBER_FURNACE_ACTIVE = new BlockUmberFurnace(true).setLightLevel(0.875F);
 	public static final Block PETRIFIED_CRAFTING_TABLE = new BlockPetrifiedCraftingTable();
 	public static final Block BAMBOO_CRATE = new BlockBambooCrate();
 	public static final Block BAMBOO_BRIDGE = new BlockBambooBridge();

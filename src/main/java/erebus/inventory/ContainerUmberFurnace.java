@@ -4,14 +4,13 @@ import erebus.tileentity.TileEntityUmberFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidUtil;
 
 public class ContainerUmberFurnace extends Container {
 
@@ -33,16 +32,16 @@ public class ContainerUmberFurnace extends Container {
 	}
 
 	@Override
-	public void addCraftingToCrafters(ICrafting crafter) {
-		super.addCraftingToCrafters(crafter);
-		furnace.sendGUIData(this, crafter);
+	public void addListener(IContainerListener listener) {
+		super.addListener(listener);
+		furnace.sendGUIData(this, listener);
 	}
 
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		for (Object crafter : crafters)
-			furnace.sendGUIData(this, (ICrafting) crafter);
+		for (Object listener : listeners)
+			furnace.sendGUIData(this, (IContainerListener) listener);
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class ContainerUmberFurnace extends Container {
 			if (slotIndex < 4) {
 				if (!mergeItemStack(slotItemStack, 4, inventorySlots.size(), true))
 					return ItemStack.EMPTY;
-			} else if (FluidContainerRegistry.isContainer(slotItemStack)) {
+			} else if (FluidUtil.getFluidHandler(slotItemStack) != null) {
 				if (!mergeItemStack(slotItemStack, 0, 1, false))
 					return ItemStack.EMPTY;
 			} else if (!FurnaceRecipes.instance().getSmeltingResult(slotItemStack).isEmpty()) {
@@ -84,7 +83,7 @@ public class ContainerUmberFurnace extends Container {
 
 			if (slotItemStack.getCount() == itemStack.getCount())
 				return ItemStack.EMPTY;
-			slot.onPickupFromSlot(player, slotItemStack);
+			slot.onTake(player, slotItemStack);
 		}
 
 		return itemStack;
