@@ -24,9 +24,12 @@ public class GuiComposter extends GuiErebus {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		int colour = Utils.getColour(20, 0, 0);
+		int colour = Utils.getColour(0, 0, 0);
 		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.composter").getFormattedText()), xSize / 2 - fontRenderer.getStringWidth(I18n.format(new TextComponentTranslation("container.composter").getFormattedText())) / 2, 6, colour);
-		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.inventory").getFormattedText()), xSize - 170, ySize - 93, colour);
+		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.inventory").getFormattedText()), xSize - 167, ySize - 93, colour);
+	
+		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.composter").getFormattedText()), xSize / 2 - fontRenderer.getStringWidth(I18n.format(new TextComponentTranslation("container.composter").getFormattedText())) / 2 - 1, 5, Utils.getColour(255, 255, 255));
+		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.inventory").getFormattedText()), xSize - 168, ySize - 94, Utils.getColour(255, 255, 255));
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package erebus.inventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidUtil;
 
 public class SlotFluidContainer extends Slot {
 
@@ -13,6 +13,6 @@ public class SlotFluidContainer extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack is) {
-		return FluidContainerRegistry.isContainer(is);
+		return FluidUtil.getFluidHandler(is) != null;
 	}
 }

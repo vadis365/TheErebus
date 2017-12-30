@@ -13,13 +13,18 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements ITickable {
 
 	private static final int MAX_TIME = 432;
-
+	private IItemHandler itemHandler;
 	private final FluidTank[] tanks = new FluidTank[4];
 	private int progress = 0, prevProgress = 0;
 
@@ -132,7 +137,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 				markDirty();
 			}
 		}
-		if (recipe == null || getStackInSlot(4).isEmpty()) {
+		if (recipe == null || getStackInSlot(4).isEmpty() || getStackInSlot(4).getCount() > 1) {
 			progress = 0;
 			markDirty();
 		}
@@ -147,28 +152,65 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 				}
 	}
 
+	protected IItemHandler createUnSidedHandler() {
+		return new InvWrapper(this);
+	}
+
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY  || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-
-				if (facing == EnumFacing.NORTH)
-					return (T) tanks[0];
-				else if (facing == EnumFacing.EAST)
-					return (T) tanks[1];
-				else if (facing == EnumFacing.SOUTH)
-					return (T) tanks[2];
-				else if (facing == EnumFacing.WEST)
-					return (T) tanks[3];
-
-		}
-		return super.getCapability(capability, facing);
-	}
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			return (T) (itemHandler == null ? (itemHandler = createUnSidedHandler()) : itemHandler);
+		
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            IFluidHandler[] myTanks = getTanks();
+           
+            return (T) new IFluidHandler() {
+                @Override
+                public IFluidTankProperties[] getTankProperties() {
+                    return null; //don't think that's needed
+                }
+ 
+                @Override
+                public int fill(FluidStack resource, boolean doFill) {
+                    for(IFluidHandler tank : myTanks) {
+                        int filled = tank.fill(resource, doFill);
+                        if(filled != 0) {
+                            return filled;
+                        }
+                    }
+                    return 0;
+                }
+ 
+                @Override
+                public FluidStack drain(FluidStack resource, boolean doDrain) {
+                    for(IFluidHandler tank : myTanks) {
+                        FluidStack ret = tank.drain(resource, doDrain);
+                        if(ret != null && ret.amount != 0) {
+                            return ret;
+                        }
+                    }
+                    return null;
+                }
+ 
+                @Override
+                public FluidStack drain(int maxDrain, boolean doDrain) {
+                    for(IFluidHandler tank : myTanks) {
+                        FluidStack ret = tank.drain(maxDrain, doDrain);
+                        if(ret != null && ret.amount != 0) {
+                            return ret;
+                        }
+                    }
+                    return null;
+                }
+            };
+        }
+        return super.getCapability(capability, facing);
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -178,17 +220,20 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
-		return null;
-	}
-
-	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-		return false;
+		int[] SLOTS = new int[getSizeInventory()];
+		for (int index = 0; index < SLOTS.length; index++)
+			SLOTS[index] = index;
+		return SLOTS;
 	}
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
 		return index == 4;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		return true;
 	}
 
 	@Override
@@ -198,7 +243,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return false;
+		return true;
 	}
 
 }

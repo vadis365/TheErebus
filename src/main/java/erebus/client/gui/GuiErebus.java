@@ -131,7 +131,7 @@ public abstract class GuiErebus extends GuiContainer {
 	}
 	
 	private void addVertexWithUV(BufferBuilder buffer, float x, float y, float z, double u, double v) {
-		buffer.pos(x / 2f, y, z / 2f).tex(u, v).endVertex();
+		buffer.pos(x, y, z).tex(u, v).endVertex();
 	}
 
 	protected void glColour(int colour) {

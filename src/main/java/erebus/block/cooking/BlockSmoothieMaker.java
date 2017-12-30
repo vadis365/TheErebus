@@ -95,7 +95,6 @@ public class BlockSmoothieMaker extends BlockContainer {
 			final IFluidHandler fluidHandler = getFluidHandler(world, pos, facing);
 			if (fluidHandler != null) {
 				FluidUtil.interactWithFluidHandler(player, hand, world, pos, facing);
-				System.out.println("Hello?");
 				return FluidUtil.getFluidHandler(player.getHeldItem(hand)) != null;
 			}
 			return false;
@@ -108,7 +107,7 @@ public class BlockSmoothieMaker extends BlockContainer {
 	@Nullable
 	private IFluidHandler getFluidHandler(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		TileEntitySmoothieMaker tileentity = (TileEntitySmoothieMaker) world.getTileEntity(pos);
-		return tileentity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
+		return tileentity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 	}
 
 	@Override

@@ -527,6 +527,8 @@ tile.erebus.block_of_bones.name=Block O' Bones
 tile.erebus.antlion_egg.name=Antlion Egg
 tile.erebus.tarantula_egg.name=Tarantula Egg
 tile.erebus.honey_treat.name=Honey Treat
+tile.erebus.wasp_nest.name=Wasp Nest
+tile.erebus.stairs_wasp_nest.name=Wasp Nest Stairs
 
 # Spawners
 tile.erebus.antlion_spawner.name=Antlion Spawner
@@ -561,8 +563,7 @@ tile.erebus.silo_tank.silo_active.name=Silo Tank
 tile.erebus.silo_supports.name=Silo Supports
 tile.erebus.honey_comb.name=Honeycomb
 tile.erebus.composter.name=Organic Composter
-tile.erebus.wasp_nest.name=Wasp Nest
-tile.erebus.stairs_wasp_nest.name=Wasp Nest Stairs
+tile.erebus.smoothie_maker.name=ErebusCo. Smoothie-matic 2000
 
 tile.erebus.altar_base.name=Altar Base
 tile.erebus.altar_lightning.name=Altar of Lightning

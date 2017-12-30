@@ -21,6 +21,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
@@ -132,22 +133,25 @@ public class ItemBambucket extends UniversalBucket {
 			player.setActiveHand(hand);
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, heldItem);
 		}
-
-		if (fluidStack != null)
-			return super.onItemRightClick(world, player, hand);
-
+		
 		final RayTraceResult target = this.rayTrace(world, player, true);
+		final BlockPos pos = target.getBlockPos();
+		
+		if (fluidStack != null) {
+			world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			return super.onItemRightClick(world, player, hand);
+		}
 
 		if (target == null || target.typeOfHit != RayTraceResult.Type.BLOCK)
 			return new ActionResult<>(EnumActionResult.PASS, heldItem);
-
-		final BlockPos pos = target.getBlockPos();
+		
 
 		final ItemStack singleBucket = heldItem.copy();
 		singleBucket.setCount(1);
 
 		final FluidActionResult filledResult = FluidUtil.tryPickUpFluid(singleBucket, player, world, pos, target.sideHit);
 		if (filledResult.isSuccess()) {
+            world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			final ItemStack filledBucket = filledResult.result;
 			if (player.capabilities.isCreativeMode)
 				return new ActionResult<>(EnumActionResult.SUCCESS, heldItem);

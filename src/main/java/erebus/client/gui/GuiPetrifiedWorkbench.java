@@ -23,6 +23,9 @@ public class GuiPetrifiedWorkbench extends GuiCrafting {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.crafting").getFormattedText()), 29, 7, Utils.getColour(0, 0, 0));
+		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.inventory").getFormattedText()), 9, ySize - 96 + 3, Utils.getColour(0, 0, 0));
+
 		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.crafting").getFormattedText()), 28, 6, Utils.getColour(255, 255, 255));
 		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.inventory").getFormattedText()), 8, ySize - 96 + 2, Utils.getColour(255, 255, 255));
 	}

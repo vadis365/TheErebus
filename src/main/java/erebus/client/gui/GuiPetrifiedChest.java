@@ -28,6 +28,9 @@ public class GuiPetrifiedChest extends GuiErebus {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+		fontRenderer.drawString(this.lowerChestInventory.getDisplayName().getUnformattedText(), 9, 7, Utils.getColour(0, 0, 0));
+		fontRenderer.drawString(this.upperChestInventory.getDisplayName().getUnformattedText(), 9, this.ySize - 96 + 5, Utils.getColour(0, 0, 0));
+		
 		fontRenderer.drawString(this.lowerChestInventory.getDisplayName().getUnformattedText(), 8, 6, Utils.getColour(255, 255, 255));
 		fontRenderer.drawString(this.upperChestInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 4, Utils.getColour(255, 255, 255));
 	}
