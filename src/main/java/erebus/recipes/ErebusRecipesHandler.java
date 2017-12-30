@@ -5,6 +5,7 @@ import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockSmallPlant.EnumSmallPlantType;
+import erebus.blocks.EnumWood;
 import erebus.items.ItemErebusFood.EnumFoodType;
 import erebus.items.ItemMaterials;
 import erebus.items.ItemSmoothie.SmoothieType;
@@ -35,7 +36,7 @@ public class ErebusRecipesHandler {
 		SmoothieMakerRecipe.addRecipe(SmoothieType.GIVIN_ME_THE_BLUES.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), ModFluids.MILK, ItemMaterials.EnumErebusMaterialsType.BLUEBELL_PETAL.createStack(), ItemMaterials.EnumErebusMaterialsType.BLUEBELL_PETAL.createStack(), "gemLapis", "gemLapis");
 		SmoothieMakerRecipe.addRecipe(SmoothieType.HOT_HOT_BABY.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), ModFluids.ANTI_VENOM, ItemMaterials.EnumErebusMaterialsType.WASP_STING.createStack(), ItemMaterials.EnumErebusMaterialsType.BOGMAW_ROOT.createStack(), new ItemStack(ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, EnumSmallPlantType.FIRE_BLOOM).getBlock()), new ItemStack(ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, EnumSmallPlantType.FIRE_BLOOM).getBlock()));
 		SmoothieMakerRecipe.addRecipe(SmoothieType.DONT_MEDDLE_WITH_THE_NETTLE.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), ModFluids.HONEY, ItemMaterials.EnumErebusMaterialsType.NETTLE_FLOWERS.createStack(), ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack(), ItemMaterials.EnumErebusMaterialsType.JADE_BERRIES.createStack(), ItemMaterials.EnumErebusMaterialsType.PLATE_EXO.createStack());
-		SmoothieMakerRecipe.addRecipe(SmoothieType.LIQUID_GOLD.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), ModFluids.MILK, new ItemStack(ModItems.LIFE_BLOOD), new ItemStack(ModItems.LIFE_BLOOD), ItemMaterials.EnumErebusMaterialsType.BAMBOO.createStack(), new ItemStack(Items.SPECKLED_MELON));
+		SmoothieMakerRecipe.addRecipe(SmoothieType.LIQUID_GOLD.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), ModFluids.MILK, new ItemStack(ModItems.LIFE_BLOOD), new ItemStack(ModItems.LIFE_BLOOD), new ItemStack(EnumWood.BAMBOO.getSapling()), new ItemStack(Items.SPECKLED_MELON));
 		SmoothieMakerRecipe.addRecipe(SmoothieType.BRYUFS_BREW.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), new Fluid[] { ModFluids.HONEY, ModFluids.MILK, ModFluids.ANTI_VENOM, ModFluids.BEETLE_JUICE }, ItemMaterials.EnumErebusMaterialsType.COMPOUND_EYES.createStack(), ItemMaterials.EnumErebusMaterialsType.TERPSISHROOM.createStack(), new ItemStack(ModItems.TURNIP), new ItemStack(ModItems.HEART_BERRIES));
 
 		SmoothieMakerRecipe.addRecipe(EnumFoodType.MELONADE.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), FluidRegistry.WATER, new ItemStack(Items.MELON));
