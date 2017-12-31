@@ -39,6 +39,7 @@ import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockDragonflySpawner;
 import erebus.blocks.BlockErebusHoney;
 import erebus.blocks.BlockErebusMushroomHuge;
+import erebus.blocks.BlockFluidJar;
 import erebus.blocks.BlockForceField;
 import erebus.blocks.BlockForceLock;
 import erebus.blocks.BlockFormicAcid;
@@ -238,6 +239,7 @@ public class ModBlocks {
 	public static final Block INSECT_REPELLENT = new BlockInsectRepellent();
 	public static final Block PETRIFIED_WOOD_CHEST = new BlockPetrifiedChest(BlockPetrifiedChest.Type.BASIC);
 	public static final Block GLOWING_JAR = new BlockGlowingJar();
+	public static final Block FLUID_JAR = new BlockFluidJar();
 	public static final Block COMPOSTER = new BlockComposter();
 	public static final Block SMOOTHIE_MAKER = new BlockSmoothieMaker();
 

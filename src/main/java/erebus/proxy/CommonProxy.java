@@ -39,7 +39,7 @@ import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityHoneyComb;
-import erebus.tileentity.TileEntityJarOHoney;
+import erebus.tileentity.TileEntityFluidJar;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import erebus.tileentity.TileEntityPreservedBlock;
@@ -116,7 +116,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityPetrifiedWoodChest.class, "petrified_wood_chest");
 		registerTileEntity(TileEntityBones.class, "block_of_bones");
 		registerTileEntity(TileEntityExtenderThingy.class, "extender_thingy");
-		registerTileEntity(TileEntityJarOHoney.class, "jar_of_honey");
+		registerTileEntity(TileEntityFluidJar.class, "fluid_jar");
 		registerTileEntity(TileEntityGlowGem.class, "glow_gem_block");
 		registerTileEntity(TileEntityHoneyComb.class, "honey_comb");
 		registerTileEntity(TileEntitySiloTank.class, "silo_tank");
