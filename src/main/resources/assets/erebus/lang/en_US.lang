@@ -229,7 +229,7 @@ tile.erebus.umberpaver.umberpaver_webbed.name=Webbed Umberpaver
 tile.erebus.umberstone_pillar.name=Umberstone Pillar
 tile.erebus.volcanic_rock.name=Volcanic Rock
 
-#Amber
+# Amber
 tile.erebus.amber.name=Amber
 tile.erebus.amber_glass.name=Amber Glass
 tile.erebus.preserved_block.amber.name=Amber Preserved Block
@@ -423,7 +423,6 @@ tile.erebus.dutch_cap_mushroom_block.name=Dutch Cap Mushroom Block
 tile.erebus.grandmas_shoes_mushroom_block.name=Grandma's Shoes Mushroom Block
 tile.erebus.kaizers_fingers_mushroom_block.name=Kaizer's Fingers Mushroom Block
 tile.erebus.sarcastic_czech_mushroom_block.name=Sarcastic Czech Mushroom Block
-
 tile.erebus.small_plant.desert_shrub.name=Desert Shrub 
 tile.erebus.small_plant.mireCoral.name=Glowing Swamp Weed
 tile.erebus.small_plant.nettle.name=Nettle
@@ -432,14 +431,12 @@ tile.erebus.small_plant.swamp_plant.name=Swamp Plant
 tile.erebus.small_plant.fire_bloom.name=Firebloom
 tile.erebus.small_plant.fern.name=Fern
 tile.erebus.small_plant.fiddle_head.name=Fiddlehead
-
 tile.erebus.thorns.name=Thorns
 tile.erebus.wall_plants.moss_down.name=Moss
 tile.erebus.wall_plants.mould_down.name=Mould
 tile.erebus.wall_plants_cultivated.moss_down_cultivated.name=Cultivated Moss
 tile.erebus.wall_plants_cultivated.mould_down_cultivated.name=Cultivated Mould
 tile.erebus.algae.name=Swamp Algae
-
 tile.erebus.glowshroom.name=Glowshroom
 tile.erebus.glowshroom_stalk_main.name=Glowshroom Stalk
 
@@ -460,7 +457,6 @@ tile.erebus.giant_flower.petal_orange.name=Orange Petal Block
 tile.erebus.giant_flower.petal_white.name=White Petal Block
 tile.erebus.giant_flower.exploding_stigma.name=Exploding Stigma
 tile.erebus.giant_flower.stem.name=Stem
-
 tile.erebus.giant_flower_stigma.stigma_black.name=Black Stigma
 tile.erebus.giant_flower_stigma.stigma_red.name=Red Stigma
 tile.erebus.giant_flower_stigma.stigma_brown.name=Brown Stigma
@@ -476,7 +472,6 @@ tile.erebus.giant_flower_stigma.stigma_magenta.name=Magenta Stigma
 tile.erebus.giant_flower_stigma.stigma_orange.name=Orange Stigma
 tile.erebus.giant_flower_stigma.stigma_white.name=White Stigma
 tile.erebus.giant_flower_stigma.stigma_rainbow.name=Rainbow Stigma
-
 tile.erebus.planted_flower.flower_black.name=Black Flower
 tile.erebus.planted_flower.flower_red.name=Red Flower
 tile.erebus.planted_flower.flower_brown.name=Brown Flower
@@ -492,7 +487,6 @@ tile.erebus.planted_flower.flower_magenta.name=Magenta Flower
 tile.erebus.planted_flower.flower_orange.name=Orange Flower
 tile.erebus.planted_flower.flower_white.name=White Flower
 tile.erebus.planted_flower.flower_rainbow.name=Rainbow Flower
-
 tile.erebus.giant_lily_pad.name=Giant Lily Pad
 
 # Other
@@ -565,6 +559,7 @@ tile.erebus.honey_comb.name=Honeycomb
 tile.erebus.composter.name=Organic Composter
 tile.erebus.smoothie_maker.name=ErebusCo. Smoothie-matic 2000
 tile.erebus.umber_furnace.name=Umber Furnace
+tile.erebus.umberstone_button.name=Umberstone Button
 
 tile.erebus.altar_base.name=Altar Base
 tile.erebus.altar_lightning.name=Altar of Lightning

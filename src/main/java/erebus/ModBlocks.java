@@ -30,6 +30,7 @@ import erebus.blocks.BlockAntlionSpawner;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockBones;
 import erebus.blocks.BlockBossEgg;
+import erebus.blocks.BlockButtonUmberstone;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockCapstone;
 import erebus.blocks.BlockComposter;
@@ -242,6 +243,7 @@ public class ModBlocks {
 	public static final Block FLUID_JAR = new BlockFluidJar();
 	public static final Block COMPOSTER = new BlockComposter();
 	public static final Block SMOOTHIE_MAKER = new BlockSmoothieMaker();
+	public static final Block UMBERSTONE_BUTTON = new BlockButtonUmberstone();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
