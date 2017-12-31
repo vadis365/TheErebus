@@ -26,7 +26,6 @@ import erebus.tileentity.TileEntityArmchair;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBones;
-import erebus.tileentity.TileEntityCompletedPuzzle;
 import erebus.tileentity.TileEntityComposter;
 import erebus.tileentity.TileEntityErebusAltar;
 import erebus.tileentity.TileEntityErebusAltarEmpty;
@@ -35,18 +34,15 @@ import erebus.tileentity.TileEntityErebusAltarLightning;
 import erebus.tileentity.TileEntityErebusAltarRepair;
 import erebus.tileentity.TileEntityErebusAltarXP;
 import erebus.tileentity.TileEntityExtenderThingy;
+import erebus.tileentity.TileEntityFluidJar;
 import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityHoneyComb;
-import erebus.tileentity.TileEntityFluidJar;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import erebus.tileentity.TileEntityPreservedBlock;
-import erebus.tileentity.TileEntityPuffShroom;
-import erebus.tileentity.TileEntitySlidingBlockPuzzle;
 import erebus.tileentity.TileEntitySmoothieMaker;
-import erebus.tileentity.TileEntitySoldierAntTrap;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.tileentity.TileEntityUmberFurnace;
 import erebus.tileentity.TileEntityUmberGolemStatue;
@@ -125,10 +121,6 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntitySmoothieMaker.class, "smoothie_maker");
 		registerTileEntity(TileEntityTempleTeleporter.class, "temple_teleporter");
 		registerTileEntity(TileEntityPreservedBlock.class, "preserved_block");
-		registerTileEntity(TileEntitySoldierAntTrap.class, "soldier_ant_trap");
-		registerTileEntity(TileEntitySlidingBlockPuzzle.class, "sliding_block_puzzle");
-		registerTileEntity(TileEntityPuffShroom.class, "puff_shroom");
-		registerTileEntity(TileEntityCompletedPuzzle.class, "completed_puzzle");
 		registerTileEntity(TileEntityArmchair.class, "armchair");
 	}
 

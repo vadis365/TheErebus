@@ -81,6 +81,7 @@ import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
 import erebus.client.render.item.RenderPortalActivator;
+import erebus.client.render.item.RenderScorpionPincer;
 import erebus.client.render.item.RenderWandOfAnimation;
 import erebus.client.render.item.RenderWandOfPreservation;
 import erebus.client.render.item.RenderWaspSword;
@@ -335,6 +336,7 @@ public class ClientProxy extends CommonProxy {
 		TileEntityItemStackRenderer.instance = new RenderWandOfAnimation(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderPortalActivator(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWandOfPreservation(TileEntityItemStackRenderer.instance);
+		TileEntityItemStackRenderer.instance = new RenderScorpionPincer(TileEntityItemStackRenderer.instance);
 	}
 
 	@Override

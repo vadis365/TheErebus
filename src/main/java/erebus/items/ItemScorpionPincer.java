@@ -4,28 +4,27 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.entity.EntityScorpion;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemScorpionPincer extends ItemSword {
 
@@ -55,10 +54,9 @@ public class ItemScorpionPincer extends ItemSword {
 	@Override
 	 public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (!player.capabilities.isCreativeMode && player.inventory.hasItem(Items.FIRE_CHARGE))
-			stack.damageItem(10, player);
-		if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.FIRE_CHARGE)) {
-			world.playSoundAtEntity(player, "mob.ghast.fireball", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		ItemStack ammoStack = findAmmo(player);
+		if (player.capabilities.isCreativeMode || !findAmmo(player).isEmpty()) {
+			world.playSound(null, player.getPosition(), SoundEvents.ENTITY_GHAST_SHOOT, SoundCategory.PLAYERS,  0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.isRemote) {
 				Vec3d look = player.getLookVec();
 				double direction = Math.toRadians(player.renderYawOffset);
@@ -70,9 +68,27 @@ public class ItemScorpionPincer extends ItemSword {
 				fireball.accelerationZ = look.z * 0.1;
 				world.spawnEntity(fireball);
 			}
-			player.inventory.consumeInventoryItem(Items.FIRE_CHARGE);
 		}
-		player.swingItem();
-		return new ActionResult(EnumActionResult.PASS, stack);
+			if (!player.capabilities.isCreativeMode && findAmmo(player) != null) {
+				ammoStack.shrink(1);
+	            if (ammoStack.getCount() <= 0)
+	                player.inventory.deleteStack(ammoStack);
+	            stack.damageItem(10, player);
+			}
+			player.swingArm(hand);
+			return new ActionResult(EnumActionResult.SUCCESS, stack);
+	}
+
+	private ItemStack findAmmo(EntityPlayer player) {
+		for (int i = 0; i < player.inventory.getSizeInventory(); ++i) {
+			ItemStack itemstack = player.inventory.getStackInSlot(i);
+			if (isAmmo(itemstack))
+				return itemstack;
+		}
+		return null;
+	}
+
+	protected boolean isAmmo(@Nullable ItemStack stack) {
+		return !stack.isEmpty() && stack.getItem() == Items.FIRE_CHARGE;
 	}
 }

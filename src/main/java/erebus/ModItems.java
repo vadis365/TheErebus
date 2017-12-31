@@ -41,6 +41,7 @@ import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
 import erebus.items.ItemPortalActivator;
 import erebus.items.ItemRolledNewspaper;
+import erebus.items.ItemScorpionPincer;
 import erebus.items.ItemSmoothie;
 import erebus.items.ItemSpiderTShirt;
 import erebus.items.ItemSprayCan;
@@ -138,6 +139,7 @@ public class ModItems {
 	// MISC WEAPONS
 	public static final Item ROLLED_NEWSPAPER = new ItemRolledNewspaper();
 	public static final ItemWaspSword WASP_SWORD = new ItemWaspSword();
+	public static final ItemScorpionPincer ENHANCED_SCORPION_PINCER = new ItemScorpionPincer();
 
 	// RANDOM STUFF
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();
