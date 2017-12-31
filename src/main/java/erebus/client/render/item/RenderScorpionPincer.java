@@ -1,9 +1,7 @@
 package erebus.client.render.item;
 
 import erebus.client.model.item.ModelScorpionPincer;
-import erebus.client.model.item.ModelWaspSword;
 import erebus.items.ItemScorpionPincer;
-import erebus.items.ItemWaspSword;
 import erebus.lib.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
