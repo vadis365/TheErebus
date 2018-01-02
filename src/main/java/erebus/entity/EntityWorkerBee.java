@@ -1,82 +1,88 @@
 package erebus.entity;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
+import erebus.ModItems;
+import erebus.client.render.entity.AnimationMathHelper;
+import erebus.core.helper.Utils;
+import erebus.entity.ai.EntityAIFlyingWander;
+import erebus.entity.ai.EntityAIPolinate;
+import erebus.entity.ai.FlyingMoveHelper;
+import erebus.entity.ai.PathNavigateFlying;
+import erebus.items.ItemMaterials;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import erebus.ModBlocks;
-import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAIPolinate;
-import erebus.item.ItemMaterials;
 
 public class EntityWorkerBee extends EntityTameable {
-	public ChunkCoordinates currentFlightTarget;
 	public float wingFloat;
 	private final AnimationMathHelper mathWings = new AnimationMathHelper();
 	public boolean beeFlying;
 	public boolean beePollinating;
-	public boolean beeCollecting;
+	public boolean beeCollecting = false;
+	private static final DataParameter<Integer> DROP_POINT_X = EntityDataManager.<Integer>createKey(EntityWorkerBee.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> DROP_POINT_Y = EntityDataManager.<Integer>createKey(EntityWorkerBee.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> DROP_POINT_Z = EntityDataManager.<Integer>createKey(EntityWorkerBee.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> NECTAR_POINTS = EntityDataManager.<Integer>createKey(EntityWorkerBee.class, DataSerializers.VARINT);
+	private static final DataParameter<Byte> TAME_STATE = EntityDataManager.<Byte>createKey(EntityWorkerBee.class, DataSerializers.BYTE);
+	private EntityAIFlyingWander aiFlyingWander;
 
 	public EntityWorkerBee(World world) {
 		super(world);
-		setSize(1.5F, 1.0F);
-		tasks.addTask(1, new EntityAIPolinate(this, 10));
-		tasks.addTask(2, new EntityAISwimming(this));
-		tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.3D, true));
-		tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityWasp.class, 0.3D, true));
-		tasks.addTask(5, new EntityAITempt(this, 0.5D, Items.sugar, false));
-		tasks.addTask(6, new EntityAIWander(this, 0.4D));
-		tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(8, new EntityAILookIdle(this));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityWasp.class, 0, true));
+		setSize(0.5F, 0.4F);
+		moveHelper = new FlyingMoveHelper(this);
+		setPathPriority(PathNodeType.WATER, -8F);
+		setPathPriority(PathNodeType.BLOCKED, -8.0F);
+		setPathPriority(PathNodeType.OPEN, 8.0F);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(22, new Integer(2));
-		dataWatcher.addObject(23, new Byte((byte) 0));
-		dataWatcher.addObject(24, new Integer(0));
-		dataWatcher.addObject(25, new Integer(0));
-		dataWatcher.addObject(26, new Integer(0));
+        dataManager.register(DROP_POINT_X , Integer.valueOf(0));
+        dataManager.register(DROP_POINT_Y , Integer.valueOf(0));
+        dataManager.register(DROP_POINT_Z , Integer.valueOf(0));
+        dataManager.register(NECTAR_POINTS , Integer.valueOf(0));
+        dataManager.register(TAME_STATE , Byte.valueOf((byte)0));
 	}
 
 	@Override
-	public boolean isAIEnabled() {
-		return true;
+	protected void initEntityAI() {
+		aiFlyingWander = new EntityAIFlyingWander(this, 0.5D, 20);
+		tasks.addTask(0, new EntityAIPolinate(this, 10));
+		tasks.addTask(1, new EntityAISwimming(this));
+		tasks.addTask(2, new EntityAIAttackMelee(this, 0.3D, true));
+		//tasks.addTask(3, new EntityAITempt(this, 0.5D, Items.SUGAR, false));
+		tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+		tasks.addTask(6, new EntityAILookIdle(this));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityWasp.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.75D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 30D : 30D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
 	}
 
 	@Override
@@ -86,9 +92,9 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = getBrightness(1.0F);
+		float light = getBrightness();
 		if (light >= 0F)
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+			return getEntityWorld().checkNoEntityCollision(getEntityBoundingBox()) && getEntityWorld().getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !getEntityWorld().containsAnyLiquid(getEntityBoundingBox());
 		return super.getCanSpawnHere();
 	}
 
@@ -105,53 +111,6 @@ public class EntityWorkerBee extends EntityTameable {
 			return true;
 	}
 
-	@Override
-	public boolean allowLeashing() {
-		return !canDespawn() && super.allowLeashing();
-	}
-
-	@Override
-	protected void fall(float par1) {
-	}
-
-	@Override
-	public boolean isOnLadder() {
-		Block block = worldObj.getBlock((int) posX, (int) posY - 1, (int) posZ);
-		Block block2 = worldObj.getBlock((int) posX, (int) posY, (int) posZ);
-		if (isCollidedHorizontally)
-			if (block != ModBlocks.stiga || !block.hasTileEntity(worldObj.getBlockMetadata((int) posX, (int) posY - 1, (int) posZ)))
-				if (block2 == ModBlocks.erebusFlower || block2 == Blocks.air) {
-					posY += 1;
-					return true;
-				}
-		return false;
-	}
-
-	@Override
-	protected String getLivingSound() {
-		return "erebus:waspsound";
-	}
-
-	@Override
-	protected String getHurtSound() {
-		return "erebus:wasphurt";
-	}
-
-	@Override
-	protected String getDeathSound() {
-		return "erebus:squish";
-	}
-
-	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.spider.step", 0.15F, 1.0F);
-	}
-
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(ItemMaterials.DATA.NECTAR.makeStack(getNectarPoints() + 2), 0.0F);
-	}
-
 	public boolean isFlying() {
 		return !onGround;
 	}
@@ -164,44 +123,32 @@ public class EntityWorkerBee extends EntityTameable {
 			wingFloat = mathWings.swing(4.0F, 0.1F);
 
 		if (motionY < 0.0D)
-			motionY *= 0.6D;
+			motionY *= 0.4D;
 
-		if (!worldObj.isRemote) {
-			if (getEntityToAttack() == null && !beePollinating && !beeCollecting) {
-				if (rand.nextInt(200) == 0)
-					if (!beeFlying)
-						setBeeFlying(true);
-					else
-						setBeeFlying(false);
+		if (!getEntityWorld().isRemote) {
+			if(ticksExisted == 1)
+				if(getTameState() == 0)
+					tasks.addTask(3, aiFlyingWander);
 
-				if (beeFlying)
-					flyAbout();
-				else
-					land();
-			}
-
-			if (getEntityToAttack() != null) {
-				currentFlightTarget = new ChunkCoordinates((int) getEntityToAttack().posX, (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()), (int) getEntityToAttack().posZ);
-				setBeeFlying(false);
-				flyToTarget();
-			}
-
-			if (getTameState() == 1 && beeCollecting) {
-				currentFlightTarget = new ChunkCoordinates(getDropPointX(), getDropPointY(), getDropPointZ());
-				flyToTarget();
-			}
-
-			if (MathHelper.floor_double(posX) == getDropPointX() && MathHelper.floor_double(posY) == getDropPointY() + 1 && MathHelper.floor_double(posZ) == getDropPointZ() && getNectarPoints() > 0) {
+			if (beeCollecting && !beePollinating)
+				getNavigator().tryMoveToXYZ(getDropPointX() + 0.5D, getDropPointY() + 1D, getDropPointZ() + 0.5D, 0.25D);
+			
+			if (getDistance(getDropPointX() + 0.5D, getDropPointY() + 0.5D, getDropPointZ() + 0.5D) < 1D && getNectarPoints() > 0) {
 				addHoneyToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 				setBeeCollecting(false);
+				setBeePollinating(true);
+				getNavigator().clearPath();
 			}
+			if(isInWater())
+				getMoveHelper().setMoveTo(this.posX, this.posY + 1, this.posZ, 0.32D);
 		}
 		super.onUpdate();
 	}
 
 	private void addHoneyToInventory(int x, int y, int z) {
-		if (Utils.addItemStackToInventory(Utils.getTileEntity(worldObj, x, y, z, IInventory.class), ItemMaterials.DATA.NECTAR.makeStack(2)))
-			setNectarPoints(getNectarPoints() - 2);
+		if (Utils.addItemStackToInventory(Utils.getTileEntity(getEntityWorld(),new BlockPos(x, y, z), IInventory.class), ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(getNectarPoints())))
+			setNectarPoints(0);
+		//System.out.println("Delivery Complete");
 	}
 
 	public void setBeeFlying(boolean state) {
@@ -216,115 +163,83 @@ public class EntityWorkerBee extends EntityTameable {
 		beeCollecting = state;
 	}
 
+	@Override
+	protected PathNavigate createNavigator(World worldIn) {
+		return new PathNavigateFlying(this, worldIn);
+	}
+
 	public void flyAbout() {
-		if (currentFlightTarget != null && currentFlightTarget.posX != getDropPointX() && currentFlightTarget.posY != getDropPointY() && currentFlightTarget.posZ != getDropPointZ())
-			if (!worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) || currentFlightTarget.posY < 1)
-				currentFlightTarget = null;
-
-		if (getTameState() == 0)
-			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
-				currentFlightTarget = new ChunkCoordinates((int) posX + rand.nextInt(7) - rand.nextInt(7), (int) posY + rand.nextInt(6) - 2, (int) posZ + rand.nextInt(7) - rand.nextInt(7));
-
-		if (getTameState() == 1)
-			if (currentFlightTarget == null || rand.nextInt(30) == 0 || currentFlightTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F)
-				currentFlightTarget = new ChunkCoordinates(getDropPointX() + rand.nextInt(32) - rand.nextInt(32), getDropPointY() + rand.nextInt(8) - 2, getDropPointZ() + rand.nextInt(32) - rand.nextInt(32));
 
 		flyToTarget();
 	}
 
 	public void flyToTarget() {
-		if (currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 1, MathHelper.floor_double(posZ)) == ModBlocks.erebusFlower && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ) || currentFlightTarget != null && getEntityToAttack() == null && worldObj.getBlock(MathHelper.floor_double(posX), MathHelper.floor_double(posY) + 1, MathHelper.floor_double(posZ)) == ModBlocks.erebusFlower && worldObj.isAirBlock(currentFlightTarget.posX, currentFlightTarget.posY + 2, currentFlightTarget.posZ)) {
-			if (worldObj.getBlock(currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ) == ModBlocks.stiga || Utils.getTileEntity(worldObj, currentFlightTarget.posX, currentFlightTarget.posY, currentFlightTarget.posZ, IInventory.class) != null) {
-				if (worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ, currentFlightTarget.posX + 1, currentFlightTarget.posY + 2, currentFlightTarget.posZ + 1)).isEmpty())
-					setPosition(currentFlightTarget.posX, currentFlightTarget.posY + 1, currentFlightTarget.posZ);
-			} else
-				currentFlightTarget = null;
-		} else if (currentFlightTarget != null) {
-			double targetX = currentFlightTarget.posX + 0.5D - posX;
-			double targetY = currentFlightTarget.posY + 1D - posY;
-			double targetZ = currentFlightTarget.posZ + 0.5D - posZ;
-			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
-			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
-			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
-			moveForward = 0.5F;
-			rotationYaw += rotation;
-		}
-	}
 
+	}
+	
+	 public void fall(float distance, float damageMultiplier) { 
+	 }
+	
 	private void land() {
-		// Nothing to see here - yet
 	}
 
 	@Override
-	public boolean interact(EntityPlayer player) {
-		ItemStack is = player.inventory.getCurrentItem();
-		if (!worldObj.isRemote && is != null && is.getItem() == ModItems.nectarCollector)
+	public boolean processInteract(EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.inventory.getCurrentItem();
+		if (!getEntityWorld().isRemote  && !stack.isEmpty() && stack.getItem() ==  ModItems.NECTAR_COLLECTOR)
 			if (getNectarPoints() > 0) {
-				entityDropItem(ItemMaterials.DATA.NECTAR.makeStack(2), 0.0F);
-				is.damageItem(1, player);
+				entityDropItem(ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(2), 0.0F);
+				stack.damageItem(1, player);
 				setNectarPoints(getNectarPoints() - 2);
-				setTarget(null);
-				setAttackTarget((EntityLivingBase) null);
 				return true;
 			}
 
-		if (is != null && is.getItem() == ModItems.beeTamingAmulet && is.hasTagCompound() && is.stackTagCompound.hasKey("homeX")) {
-			setDropPoint(is.getTagCompound().getInteger("homeX"), is.getTagCompound().getInteger("homeY"), is.getTagCompound().getInteger("homeZ"));
-			setTameState((byte) 1);
+		if (stack != null && stack.getItem() == ModItems.BEE_TAMING_AMULET && stack.hasTagCompound() && stack.getTagCompound().hasKey("homeX")) {
+			if (!getEntityWorld().isRemote) {
+				setDropPoint(stack.getTagCompound().getInteger("homeX"), stack.getTagCompound().getInteger("homeY"), stack.getTagCompound().getInteger("homeZ"));
+				setTameState((byte) 1);
+				tasks.removeTask(aiFlyingWander);
+				setAttackTarget((EntityLivingBase) null);
+			}
 			playTameEffect(true);
-			player.swingItem();
-			setTarget(null);
-			setAttackTarget((EntityLivingBase) null);
+			player.swingArm(hand);
 			return true;
 		}
-		return super.interact(player);
+		return super.processInteract(player, hand);
 	}
 
 	public void setDropPoint(int x, int y, int z) {
-		dataWatcher.updateObject(24, Integer.valueOf(x));
-		dataWatcher.updateObject(25, Integer.valueOf(y));
-		dataWatcher.updateObject(26, Integer.valueOf(z));
+		dataManager.set(DROP_POINT_X, Integer.valueOf(x));
+		dataManager.set(DROP_POINT_Y, Integer.valueOf(y));
+		dataManager.set(DROP_POINT_Z, Integer.valueOf(z));
 	}
 
 	public int getDropPointX() {
-		return dataWatcher.getWatchableObjectInt(24);
+		return dataManager.get(DROP_POINT_X);
 	}
 
 	public int getDropPointY() {
-		return dataWatcher.getWatchableObjectInt(25);
+		return dataManager.get(DROP_POINT_Y);
 	}
 
 	public int getDropPointZ() {
-		return dataWatcher.getWatchableObjectInt(26);
+		return dataManager.get(DROP_POINT_Z);
 	}
 
 	public void setTameState(byte state) {
-		dataWatcher.updateObject(23, Byte.valueOf(state));
+		dataManager.set(TAME_STATE, Byte.valueOf(state));
 	}
 
 	public byte getTameState() {
-		return dataWatcher.getWatchableObjectByte(23);
-	}
-
-	@Override
-	public void setAttackTarget(EntityLivingBase entity) {
-		setTarget(entity);
-		super.setAttackTarget(entity);
-	}
-
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		return entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
+		return dataManager.get(TAME_STATE);
 	}
 
 	public void setNectarPoints(int count) {
-		dataWatcher.updateObject(22, Integer.valueOf(count));
+		dataManager.set(NECTAR_POINTS, Integer.valueOf(count));
 	}
 
 	public int getNectarPoints() {
-		return dataWatcher.getWatchableObjectInt(22);
+		return dataManager.get(NECTAR_POINTS);
 	}
 
 	@Override

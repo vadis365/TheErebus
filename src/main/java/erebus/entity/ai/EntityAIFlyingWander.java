@@ -9,30 +9,45 @@ import net.minecraft.util.math.Vec3d;
 
 public class EntityAIFlyingWander extends EntityAIBase {
 	protected final EntityCreature entity;
-	protected double x;
-	protected double y;
-	protected double z;
-	protected final double speed;
+    protected double x;
+    protected double y;
+    protected double z;
+    protected final double speed;
+    protected int executionChance;
+    protected boolean mustUpdate;
 
-	public EntityAIFlyingWander(EntityCreature creatureIn, double speedIn) {
-		entity = creatureIn;
-		speed = speedIn;
-		setMutexBits(1);
-	}
+    public EntityAIFlyingWander(EntityCreature creatureIn, double speedIn) {
+        this(creatureIn, speedIn, 120);
+    }
 
+    public EntityAIFlyingWander(EntityCreature creatureIn, double speedIn, int chance) {
+        this.entity = creatureIn;
+        this.speed = speedIn;
+        this.executionChance = chance;
+        this.setMutexBits(1);
+    }
+    
 	@Override
-	public boolean shouldExecute() {
-		Vec3d vec3d = getPosition();
+    public boolean shouldExecute() {
+        if (!this.mustUpdate) {
+            if (this.entity.getIdleTime() >= 100)
+                return false;
+            if (this.entity.getRNG().nextInt(this.executionChance) != 0)
+                return false;
+        }
 
-		if (vec3d == null)
-			return false;
-		else {
-			x = vec3d.x;
-			y = vec3d.y;
-			z = vec3d.z;
-			return true;
-		}
-	}
+        Vec3d vec3d = this.getPosition();
+
+        if (vec3d == null)
+            return false;
+        else {
+            this.x = vec3d.x;
+            this.y = vec3d.y;
+            this.z = vec3d.z;
+            this.mustUpdate = false;
+            return true;
+        }
+    }
 
 	@Nullable
 	protected Vec3d getPosition() {
@@ -48,4 +63,12 @@ public class EntityAIFlyingWander extends EntityAIBase {
 	public void startExecuting() {
 		entity.getNavigator().tryMoveToXYZ(x, y, z, speed);
 	}
+	
+    public void makeUpdate() {
+        this.mustUpdate = true;
+    }
+
+    public void setExecutionChance(int newchance) {
+        this.executionChance = newchance;
+    }
 }

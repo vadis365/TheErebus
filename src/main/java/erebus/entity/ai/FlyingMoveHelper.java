@@ -17,16 +17,16 @@ public class FlyingMoveHelper extends EntityMoveHelper {
     public void onUpdateMoveHelper() {
         if (this.action == EntityMoveHelper.Action.MOVE_TO) {
             double x = this.posX - this.entity.posX;
-            double y = this.posY + 0.5D - this.entity.posY;
+            double y = this.posY + 1D - this.entity.posY;
             double z = this.posZ - this.entity.posZ;
             float distance = (float) Math.sqrt(x * x + y * y + z * z);
 
             if (this.courseChangeCooldown-- <= 0) {
-                this.courseChangeCooldown += this.entity.getRNG().nextInt(5) + 2;
+                this.courseChangeCooldown += 1;
                 if(distance >= 1D) {
-                	this.entity.motionX += (Math.signum(x) * 0.5D - entity.motionX) * 0.2D;
-                	this.entity.motionY += (Math.signum(y) * 0.5D - entity.motionY) * 0.3D;
-                    this.entity.motionZ += (Math.signum(z) * 0.5D - entity.motionZ) * 0.2D;
+                	this.entity.motionX += (Math.signum(x) * 0.5D - entity.motionX) * 0.1D;
+                	this.entity.motionY += (Math.signum(y) * 0.5D - entity.motionY) * 0.2D;
+                    this.entity.motionZ += (Math.signum(z) * 0.5D - entity.motionZ) * 0.1D;
 					float angle = (float) (Math.atan2(entity.motionZ, entity.motionX) * 180.0D / Math.PI) - 90.0F;
 					float rotation = MathHelper.wrapDegrees(angle - entity.rotationYaw);
 					entity.rotationYaw += rotation;

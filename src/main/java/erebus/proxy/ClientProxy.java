@@ -77,6 +77,7 @@ import erebus.client.render.entity.RenderWasp;
 import erebus.client.render.entity.RenderWebSling;
 import erebus.client.render.entity.RenderWoodlouse;
 import erebus.client.render.entity.RenderWoodlouseBall;
+import erebus.client.render.entity.RenderWorkerBee;
 import erebus.client.render.entity.RenderZombieAnt;
 import erebus.client.render.entity.RenderZombieAntSoldier;
 import erebus.client.render.item.RenderErebusShield;
@@ -162,6 +163,7 @@ import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
 import erebus.entity.EntityWoodlouse;
 import erebus.entity.EntityWoodlouseBall;
+import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.EntityZombieAntSoldier;
 import erebus.inventory.ContainerAnimatedBambooCrate;
@@ -330,6 +332,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaMiniboss.class, RenderTarantulaMiniboss::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTarantulaEgg.class, RenderEntityTarantulaEgg::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityPoisonJet.class, RenderPoisonJet::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityWorkerBee.class, RenderWorkerBee::new);
 
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWaspSword(TileEntityItemStackRenderer.instance);

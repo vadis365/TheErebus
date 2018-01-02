@@ -66,6 +66,7 @@ import erebus.entity.EntityWasp;
 import erebus.entity.EntityWebSling;
 import erebus.entity.EntityWoodlouse;
 import erebus.entity.EntityWoodlouseBall;
+import erebus.entity.EntityWorkerBee;
 import erebus.entity.EntityZombieAnt;
 import erebus.entity.EntityZombieAntSoldier;
 import erebus.lib.Reference;
@@ -83,8 +84,6 @@ public class ModEntities {
 		// Entity registrations
 /*		
 		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
-
-		registerEntity(23, EntityWorkerBee.class, "worker_bee", 0xFFA200, 0x000000);
 
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
 
@@ -132,7 +131,7 @@ public class ModEntities {
 		registerEntity(20, EntityPrayingMantis.class, "praying_mantis", 0x06B900, 0x06B900);
 		registerEntity(21, EntityJumpingSpider.class, "jumping_spider", 0xE82066, 0x06B900);
 		registerEntity(22, EntityFireAnt.class, "fire_ant", 0xFF0000, 0xFFEE00);
-
+		registerEntity(23, EntityWorkerBee.class, "worker_bee", 0xFFA200, 0x000000);
 		registerEntity(24, EntityVelvetWorm.class, "velvet_worm", 0x3449EB, 0xF22C5A);
 		registerEntity(25, EntityDragonfly.class, "dragon_fly", 0x2CF2C4, 0x2CF2C4);
 

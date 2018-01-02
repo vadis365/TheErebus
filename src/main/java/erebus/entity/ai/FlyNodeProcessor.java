@@ -16,12 +16,12 @@ import net.minecraft.world.IBlockAccess;
 public class FlyNodeProcessor extends NodeProcessor {
 	@Override
 	public PathPoint getStart() {
-		return this.openPoint(MathHelper.floor(this.entity.getEntityBoundingBox().minX), MathHelper.floor(this.entity.getEntityBoundingBox().minY + 0.5D), MathHelper.floor(this.entity.getEntityBoundingBox().minZ));
+		return this.openPoint(MathHelper.floor(this.entity.getEntityBoundingBox().minX), MathHelper.floor(this.entity.getEntityBoundingBox().minY), MathHelper.floor(this.entity.getEntityBoundingBox().minZ));
 	}
 
 	@Override
 	public PathPoint getPathPointToCoords(double x, double y, double z) {
-		return this.openPoint(MathHelper.floor(x - (double) (this.entity.width / 2.0F)), MathHelper.floor(y + 0.5D), MathHelper.floor(z - (double) (this.entity.width / 2.0F)));
+		return this.openPoint(MathHelper.floor(x - (double) (this.entity.width / 2.0F)), MathHelper.floor(y - (double) (this.entity.height / 2.0F)), MathHelper.floor(z - (double) (this.entity.width / 2.0F)));
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class FlyNodeProcessor extends NodeProcessor {
 			for (int j = y; j < y + this.entitySizeY; ++j) {
 				for (int k = z; k < z + this.entitySizeZ; ++k) {
 					IBlockState iblockstate = this.blockaccess.getBlockState(blockpos$mutableblockpos.setPos(i, j, k));
-					if (iblockstate.getMaterial() != Material.AIR && iblockstate.getMaterial() != Material.PLANTS)
+					if (iblockstate.getMaterial() != Material.AIR)
 						return PathNodeType.BLOCKED;
 				}
 			}

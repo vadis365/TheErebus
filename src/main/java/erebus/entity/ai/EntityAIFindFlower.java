@@ -5,23 +5,25 @@ import java.util.List;
 
 import erebus.core.helper.Spiral;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+
 
 public abstract class EntityAIFindFlower extends EntityAIBase {
 
 	/**
 	 * The bigger you make this value the faster the AI will be. But performance will also decrease so be sensible
 	 */
-	private static final int CHECKS_PER_TICK = 1;
+	private static final int CHECKS_PER_TICK = 6;
 
 	private final int COLLECT_SPEED;
 	protected final EntityLiving entity;
-	private final int blockMetadata;
-	private final Block block;
+	private final IBlockState blockState;
 
-	private boolean hasTarget;
+	protected boolean hasTarget;
 	public int flowerX;
 	public int flowerY;
 	public int flowerZ;
@@ -29,10 +31,9 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 	private int collectTicks;
 	private static final List<Point> spiral = new Spiral(32, 32).spiral();
 
-	public EntityAIFindFlower(EntityLiving entity, Block block, int blockMetadata, int pollinateSpeed) {
+	public EntityAIFindFlower(EntityLiving entity, IBlockState state, int pollinateSpeed) {
 		this.entity = entity;
-		this.blockMetadata = blockMetadata;
-		this.block = block;
+		blockState = state;
 		hasTarget = false;
 		spiralIndex = 0;
 		COLLECT_SPEED = pollinateSpeed * 20;
@@ -40,17 +41,17 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return entity.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+		return !hasTarget;
 	}
 
 	@Override
-	public boolean continueExecuting() {
-		return entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, AxisAlignedBB.getBoundingBox(flowerX, flowerY + 1, flowerZ, flowerX + 1, flowerY + 2, flowerZ + 1)).isEmpty();
+	public boolean shouldContinueExecuting() {
+		return true;//entity.getEntityWorld().getEntitiesWithinAABBExcludingEntity(entity, new AxisAlignedBB(flowerX, flowerY + 1, flowerZ, flowerX + 1, flowerY + 2, flowerZ + 1)).isEmpty();
 	}
 
 	@Override
 	public void updateTask() {
-		if (!continueExecuting())
+		if (!shouldContinueExecuting())
 			return;
 
 		int xCoord = (int) entity.posX;
@@ -62,8 +63,8 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 				increment();
 
 				Point p = getNextPoint();
-				for (int y = -8; y < 8; y++)
-					if (canPolinate(entity.worldObj.getBlock(xCoord + p.x, yCoord + y, zCoord + p.y), entity.worldObj.getBlockMetadata(xCoord + p.x, yCoord + y, zCoord + p.y))) {
+				for (int y = -16; y < 16; y++)
+					if (canPolinate(entity.getEntityWorld().getBlockState(new BlockPos(xCoord + p.x, yCoord + y, zCoord + p.y)))) {
 						flowerX = xCoord + p.x;
 						flowerY = yCoord + y;
 						flowerZ = zCoord + p.y;
@@ -73,24 +74,28 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 				moveToLocation();
 				entity.getLookHelper().setLookPosition(flowerX + 0.5D, flowerY + 0.5D, flowerZ + 0.5D, 30.0F, 8.0F);
 				AxisAlignedBB blockbounds = getBlockAABB(flowerX, flowerY, flowerZ);
-				boolean flag = entity.boundingBox.maxY >= blockbounds.minY && entity.boundingBox.minY <= blockbounds.maxY && entity.boundingBox.maxX >= blockbounds.minX && entity.boundingBox.minX <= blockbounds.maxX && entity.boundingBox.maxZ >= blockbounds.minZ && entity.boundingBox.minZ <= blockbounds.maxZ;
+				boolean flag = entity.getEntityBoundingBox().maxY >= blockbounds.minY && entity.getEntityBoundingBox().minY <= blockbounds.maxY + 0.25D && entity.getEntityBoundingBox().maxX >= blockbounds.minX && entity.getEntityBoundingBox().minX <= blockbounds.maxX && entity.getEntityBoundingBox().maxZ >= blockbounds.minZ && entity.getEntityBoundingBox().minZ <= blockbounds.maxZ;
 
 				if (flag) {
 					prepareToPollinate();
 					collectTicks++;
-					entity.worldObj.destroyBlockInWorldPartially(entity.getEntityId(), flowerX, flowerY, flowerZ, getScaledcollectTicks());
-					if (!canPolinate(entity.worldObj.getBlock(flowerX, flowerY, flowerZ), entity.worldObj.getBlockMetadata(flowerX, flowerY, flowerZ)))
+					//entity.getEntityWorld().sendBlockBreakProgress(entity.getEntityId(), new BlockPos(flowerX, flowerY, flowerZ), getScaledcollectTicks());
+					if (!canPolinate(entity.getEntityWorld().getBlockState(new BlockPos(flowerX, flowerY, flowerZ)))) {
 						hasTarget = false;
+						return;
+					}
 					else if (COLLECT_SPEED <= collectTicks) {
 						hasTarget = false;
 						collectTicks = 0;
 						afterPollination();
+						return;
 					}
 				}
 				if (!flag && collectTicks > 1) {
 					pollinationInterupted();
 					hasTarget = false;
 					collectTicks = 0;
+					return;
 				}
 			}
 	}
@@ -110,11 +115,11 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 	}
 
 	public Block getTargetBlockID() {
-		return entity.worldObj.getBlock(flowerX, flowerY, flowerZ);
+		return entity.getEntityWorld().getBlockState(new BlockPos(flowerX, flowerY, flowerZ)).getBlock();
 	}
 
-	protected boolean canPolinate(Block blockID, int meta) {
-		return blockID == block && meta == blockMetadata;
+	protected boolean canPolinate(IBlockState state) {
+		return state == blockState;
 	}
 
 	protected abstract boolean isEntityReady();
@@ -128,6 +133,6 @@ public abstract class EntityAIFindFlower extends EntityAIBase {
 	protected abstract void afterPollination();
 
 	protected AxisAlignedBB getBlockAABB(int x, int y, int z) {
-		return AxisAlignedBB.getBoundingBox(flowerX, flowerY, flowerZ, flowerX + 1.0D, flowerY + 1.0D, flowerZ + 1.0D);
+		return new AxisAlignedBB(flowerX, flowerY, flowerZ, flowerX + 1.0D, flowerY + 1.0D, flowerZ + 1.0D);
 	}
 }

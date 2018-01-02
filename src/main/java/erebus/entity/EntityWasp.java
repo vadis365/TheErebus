@@ -65,13 +65,13 @@ public class EntityWasp extends EntityMob implements IEntityAdditionalSpawnData 
 		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, true));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
-		tasks.addTask(5, new EntityAIFlyingWander(this, 0.75D));
+		tasks.addTask(5, new EntityAIFlyingWander(this, 0.75D, 1));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGrasshopper.class, true));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityBeetle.class, true));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityBeetleLarva.class, true));
-	//	targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWorkerBee.class, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityWorkerBee.class, true));
 	}
 
 	@Override

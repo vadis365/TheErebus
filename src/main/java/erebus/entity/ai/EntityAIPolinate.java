@@ -1,22 +1,24 @@
 package erebus.entity.ai;
 
-import erebus.ModBlocks;
+
+import erebus.blocks.BlockStigma;
 import erebus.entity.EntityWorkerBee;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.ChunkCoordinates;
+
 
 public class EntityAIPolinate extends EntityAIFindFlower {
 
 	public EntityAIPolinate(EntityLiving entity, int pollinateSpeed) {
-		super(entity, null, 0, pollinateSpeed);
+		super(entity, null, pollinateSpeed);
+		setMutexBits(2);
 	}
 
 	@Override
-	protected boolean canPolinate(Block blockID, int blockMeta) {
-		if (blockID == null)
+	protected boolean canPolinate(IBlockState state) {
+		if (state == null)
 			return false;
-		else if (blockID == ModBlocks.stiga)
+		else if (state.getBlock() instanceof BlockStigma)
 			return true;
 
 		return false;
@@ -26,43 +28,62 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	protected boolean isEntityReady() {
 		return true;
 	}
+	
+	@Override
+	public boolean shouldExecute() {
+		EntityWorkerBee bee = (EntityWorkerBee) entity;
+		return !bee.beeCollecting && !entity.getMoveHelper().isUpdating() && super.shouldExecute();
+		//return !entity.getNavigator().noPath() && super.shouldExecute();
+	}
+	
+	@Override
+	public boolean shouldContinueExecuting() {
+		return entity.getAttackTarget() == null;
+	}
 
 	@Override
 	protected void moveToLocation() {
+		if(!entity.getEntityWorld().isRemote) {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
-		if (flowerY > bee.boundingBox.minY - 1)
-			bee.posY++;
+		bee.getJumpHelper().doJump();
+		if (bee.getTameState() == 1)
+			bee.setBeeCollecting(false);
 		bee.setBeePollinating(true);
-		bee.setBeeFlying(false);
-		bee.currentFlightTarget = new ChunkCoordinates(flowerX, flowerY, flowerZ);
-		bee.flyToTarget();
+		bee.getNavigator().tryMoveToXYZ(flowerX + 0.5D, flowerY + 1D, flowerZ + 0.5D, 0.25D);
+		}
 	}
 
 	@Override
 	protected void prepareToPollinate() {
-
+		EntityWorkerBee bee = (EntityWorkerBee) entity;
+		if (flowerY >= bee.getEntityBoundingBox().minY - 0.75D)
+			bee.motionY+=0.04D;
 	}
 
 	@Override
 	protected void pollinationInterupted() {
+		if(!entity.getEntityWorld().isRemote) {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
 		bee.setBeePollinating(false);
-		bee.setBeeFlying(true);
-		bee.flyAbout();
+		bee.setBeeCollecting(true);
+		//bee.flyAbout();
+		}
 	}
 
 	@Override
 	protected void afterPollination() {
-		EntityWorkerBee bee = (EntityWorkerBee) entity;
-		if (bee.getNectarPoints() < 127)
-			bee.setNectarPoints(bee.getNectarPoints() + 2);
-		if (bee.getTameState() == 0) {
-			bee.setBeePollinating(false);
-			bee.setBeeFlying(true);
-			bee.flyAbout();
-		} else if (bee.getTameState() == 1) {
-			bee.setBeePollinating(false);
-			bee.setBeeCollecting(true);
+		if (!entity.getEntityWorld().isRemote) {
+			EntityWorkerBee bee = (EntityWorkerBee) entity;
+			if (bee.getNectarPoints() < 127)
+				bee.setNectarPoints(bee.getNectarPoints() + 2);
+			if (bee.getTameState() == 0) {
+				bee.setBeePollinating(false);
+				bee.flyAbout();
+			} else if (bee.getTameState() == 1) {
+				bee.setBeePollinating(false);
+				bee.setBeeCollecting(true);
+				bee.getNavigator().clearPath();
+			}
 		}
 	}
 }
