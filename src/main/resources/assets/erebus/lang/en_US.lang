@@ -72,6 +72,7 @@ item.erebus.materials.soul_crystal.name=Soul Crystal
 item.erebus.materials.plate_zombie_ant.name=Zombie Ant Plate
 item.erebus.materials.stag_beetle_mandibles.name=Stag Beetle Mandibles
 item.erebus.materials.terpsishroom.name=Terpsishroom
+item.erebus.materials.bamboo_pipe_wrench.name=Bamboo Pipe Wrench
 
 # Food
 item.erebus.erebus_food.beetle_larva_raw.name=Beetle Larva
@@ -553,6 +554,9 @@ tile.erebus.bamboo_ladder.name=Bamboo Ladder
 tile.erebus.bamboo_nerd_pole.name=Bamboo Nerd Pole
 tile.erebus.bamboo_extender.name=Bamboo Extender
 tile.erebus.bamboo_torch.name=Bamboo Torch
+tile.erebus.bamboo_pipe.name=Bamboo Fluid Pipe
+tile.erebus.bamboo_pipe_extract.name=Bamboo Fluid Extraction Pipe
+tile.erebus.bamboo_pipe_extract_active.name=Bamboo Fluid Extraction Pipe
 tile.erebus.silo_roof.name=Silo Roof
 tile.erebus.silo_tank.silo_inactive.name=Silo Tank
 tile.erebus.silo_tank.silo_active.name=Silo Tank
@@ -747,6 +751,10 @@ tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
 tooltip.erebus.poweredGlider=Needs redgem blocks at the cost of fuel to flight.
 tooltip.erebus.gliderGlideKey=Gliding Key
 tooltip.erebus.gliderPoweredKey=Flying Key
+tooltip.erebus.bambooPipe=A very basic fluid pipe.
+tooltip.erebus.bambooPipeExtract=Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.
+tooltip.erebus.bambooPipeWrench=Use on Bamboo Extractor Pipes to rotate them or on Bamboo Pipes to insta-break them.
+
 
 ##########
 # Others #

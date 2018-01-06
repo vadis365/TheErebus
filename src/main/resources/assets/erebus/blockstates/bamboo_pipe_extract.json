@@ -11,7 +11,18 @@
   },
   "variants": {
         "normal": [{}],
-        "inventory": [{}],
+        "inventory": [{
+            "transform": {
+                "thirdperson": {
+                    "rotation": [{"x": 10}, {"y": -45}, {"z": 170}],
+                    "translation": [ 0, 0, -0.1 ],
+                    "scale": [ 0.375, 0.375, 0.375 ]
+                },
+        "gui": {
+            "scale": [ 2, 2, 2 ]
+                }
+            }
+        }],
         "facing": {
             "down": { "submodel": "erebus:bamboo_pipe_extract_off", "x": 90, "y": 180 },
             "east": { "submodel": "erebus:bamboo_pipe_extract_off", "y": 90 },

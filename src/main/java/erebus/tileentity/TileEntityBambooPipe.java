@@ -27,21 +27,21 @@ public class TileEntityBambooPipe extends TileEntity implements ITickable {
 
 		for (EnumFacing facing : EnumFacing.VALUES) {
 			TileEntity tile = getWorld().getTileEntity(pos.offset(facing));
-			if (tile != null && !(tile instanceof TileEntityBambooPipeExtract) && tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) { // TODO not an extractor pipe here 
+			if (tile != null && !(tile instanceof TileEntityBambooPipeExtract) && tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
 				IFluidHandler recepticle = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
 				IFluidTankProperties[] tankProperties = recepticle.getTankProperties();
 				if (tankProperties != null) {
-				for (IFluidTankProperties properties : tankProperties) {
-					if (properties.canFill() && properties.getCapacity() > 0) {
-						FluidStack contents = properties.getContents();
-						if (tank.getFluid() != null) {
-							if (contents == null || contents.amount <= properties.getCapacity() - 100 && contents.containsFluid(new FluidStack(tank.getFluid(), 0))) {
-								recepticle.fill(tank.drain(new FluidStack(tank.getFluid(), 100), true), true);
-								markDirty();
+					for (IFluidTankProperties properties : tankProperties) {
+						if (properties.canFill() && properties.getCapacity() > 0) {
+							FluidStack contents = properties.getContents();
+							if (tank.getFluid() != null) {
+								if (contents == null || contents.amount <= properties.getCapacity() - 100 && contents.containsFluid(new FluidStack(tank.getFluid(), 0))) {
+									recepticle.fill(tank.drain(new FluidStack(tank.getFluid(), 100), true), true);
+									markDirty();
+								}
 							}
 						}
 					}
-				}
 				}
 			}
 		}

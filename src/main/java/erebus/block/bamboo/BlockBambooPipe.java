@@ -1,10 +1,14 @@
 package erebus.block.bamboo;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import erebus.ModBlocks.IHasCustomItem;
+import erebus.ModItems;
 import erebus.ModTabs;
+import erebus.items.ItemMaterials;
 import erebus.tileentity.TileEntityBambooPipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -14,14 +18,21 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -29,7 +40,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBambooPipe extends Block implements ITileEntityProvider {
+public class BlockBambooPipe extends Block implements ITileEntityProvider, IHasCustomItem {
     public static final PropertyBool CONNECTED_DOWN = PropertyBool.create("connected_down");
     public static final PropertyBool CONNECTED_UP = PropertyBool.create("connected_up");
     public static final PropertyBool CONNECTED_NORTH = PropertyBool.create("connected_north");
@@ -98,6 +109,32 @@ public class BlockBambooPipe extends Block implements ITileEntityProvider {
 		return block == this ? false : super.shouldSideBeRendered(state, world, pos, side);
 	}
 
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		float minX = 0.3125F, minY = 0.3125F, minZ = 0.3125F;
+		float maxX = 0.6875F, maxY = 0.6875F, maxZ = 0.6875F;
+		if (isSideConnectable (world, pos, EnumFacing.UP)) maxY = 1.0F;
+		if (isSideConnectable (world, pos, EnumFacing.DOWN)) minY = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.SOUTH)) maxZ = 1.0F;
+		if (isSideConnectable (world, pos, EnumFacing.NORTH)) minZ = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.WEST)) minX = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.EAST)) maxX = 1.0F;
+		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		float minX = 0.3125F, minY = 0.3125F, minZ = 0.3125F;
+		float maxX = 0.6875F, maxY = 0.6875F, maxZ = 0.6875F;
+		if (isSideConnectable (world, pos, EnumFacing.UP)) maxY = 1.0F;
+		if (isSideConnectable (world, pos, EnumFacing.DOWN)) minY = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.SOUTH)) maxZ = 1.0F;
+		if (isSideConnectable (world, pos, EnumFacing.NORTH)) minZ = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.WEST)) minX = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.EAST)) maxX = 1.0F;
+		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+	}
+
     @Override
     public int getMetaFromState (IBlockState state) {
     	return 0;
@@ -129,5 +166,32 @@ public class BlockBambooPipe extends Block implements ITileEntityProvider {
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityBambooPipe();
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (world.isRemote) {
+			return true;
+		} else {
+			ItemStack stack = player.getHeldItem(hand);
+			if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS && stack.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal()) {
+				breakBlock(world, pos, state);
+				dropBlockAsItem(world, pos, state, 0);
+				world.setBlockToAir(pos);
+			}
+			return false;
+		}
+	}
+
+	@Override
+	public ItemBlock getItemBlock() {
+		ItemBlock PIPE_ITEM = new ItemBlock(this) {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+				list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.bambooPipe").getFormattedText());
+			}
+		};
+		return PIPE_ITEM;
 	}
 }

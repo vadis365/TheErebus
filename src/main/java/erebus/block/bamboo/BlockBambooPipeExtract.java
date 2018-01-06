@@ -1,9 +1,14 @@
 package erebus.block.bamboo;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import erebus.ModBlocks;
+import erebus.ModBlocks.IHasCustomItem;
+import erebus.ModItems;
 import erebus.ModTabs;
+import erebus.items.ItemMaterials;
 import erebus.tileentity.TileEntityBambooPipeExtract;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.ITileEntityProvider;
@@ -13,22 +18,32 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBambooPipeExtract extends BlockDirectional implements ITileEntityProvider {
+public class BlockBambooPipeExtract extends BlockDirectional implements ITileEntityProvider, IHasCustomItem {
     public static final PropertyBool CONNECTED_DOWN = PropertyBool.create("connected_down");
     public static final PropertyBool CONNECTED_UP = PropertyBool.create("connected_up");
     public static final PropertyBool CONNECTED_NORTH = PropertyBool.create("connected_north");
@@ -65,6 +80,46 @@ public class BlockBambooPipeExtract extends BlockDirectional implements ITileEnt
 	}
 
 	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		float minX = 0.3125F, minY = 0.3125F, minZ = 0.3125F;
+		float maxX = 0.6875F, maxY = 0.6875F, maxZ = 0.6875F;
+		if (state.getValue(FACING) == EnumFacing.UP) maxY = 1.0F;
+		if (state.getValue(FACING) == EnumFacing.DOWN) minY = 0.0F;
+		if (state.getValue(FACING) == EnumFacing.SOUTH) maxZ = 1.0F;
+		if (state.getValue(FACING) == EnumFacing.NORTH) minZ = 0.0F;
+		if (state.getValue(FACING) == EnumFacing.WEST) minX = 0.0F;
+		if (state.getValue(FACING) == EnumFacing.EAST) maxX = 1.0F;
+
+		if (isSideConnectable (world, pos, EnumFacing.UP)) maxY = 1.0F;
+		if (isSideConnectable (world, pos, EnumFacing.DOWN)) minY = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.SOUTH)) maxZ = 1.0F;
+		if (isSideConnectable (world, pos, EnumFacing.NORTH)) minZ = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.WEST)) minX = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.EAST)) maxX = 1.0F;
+		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		float minX = 0.3125F, minY = 0.3125F, minZ = 0.3125F;
+		float maxX = 0.6875F, maxY = 0.6875F, maxZ = 0.6875F;
+		if (state.getValue(FACING) == EnumFacing.UP) maxY = 1.0F;
+		if (state.getValue(FACING) == EnumFacing.DOWN) minY = 0.0F;
+		if (state.getValue(FACING) == EnumFacing.SOUTH) maxZ = 1.0F;
+		if (state.getValue(FACING) == EnumFacing.NORTH) minZ = 0.0F;
+		if (state.getValue(FACING) == EnumFacing.WEST) minX = 0.0F;
+		if (state.getValue(FACING) == EnumFacing.EAST) maxX = 1.0F;
+
+		if (isSideConnectable (world, pos, EnumFacing.UP)) maxY = 1.0F;
+		if (isSideConnectable (world, pos, EnumFacing.DOWN)) minY = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.SOUTH)) maxZ = 1.0F;
+		if (isSideConnectable (world, pos, EnumFacing.NORTH)) minZ = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.WEST)) minX = 0.0F;
+		if (isSideConnectable (world, pos, EnumFacing.EAST)) maxX = 1.0F;
+		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+	}
+
+	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
 	}
@@ -85,7 +140,7 @@ public class BlockBambooPipeExtract extends BlockDirectional implements ITileEnt
     private boolean isSideConnectable (IBlockAccess world, BlockPos pos, EnumFacing side) {
     	IBlockState state = world.getBlockState(pos);
     	final IBlockState stateConnection = world.getBlockState(pos.offset(side));
-        return stateConnection == null ? false : (getFluidHandler(world, pos.offset(side)) != null && side != state.getValue(FACING));
+        return stateConnection == null ? false : getFluidHandler(world, pos.offset(side)) != null;
     }
 
     @Nullable
@@ -132,8 +187,17 @@ public class BlockBambooPipeExtract extends BlockDirectional implements ITileEnt
 		if (world.isRemote) {
 			return true;
 		} else {
-			IBlockState activeState = ModBlocks.BAMBOO_PIPE_EXTRACT_ACTIVE.getDefaultState().withProperty(BlockBambooPipeExtractActive.FACING, state.getValue(FACING));
-			world.setBlockState(pos, activeState, 3);
+			ItemStack stack = player.getHeldItem(hand);
+			if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS && stack.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal()) {
+				state = state.cycleProperty(FACING);
+				state.cycleProperty(FACING);
+				world.setBlockState(pos, state, 3);
+			}
+			else {
+				IBlockState activeState = ModBlocks.BAMBOO_PIPE_EXTRACT_ACTIVE.getDefaultState().withProperty(BlockBambooPipeExtractActive.FACING, state.getValue(FACING));
+				world.setBlockState(pos, activeState, 3);
+				world.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6F);
+			}
 			return true;
 		}
 	}
@@ -141,6 +205,18 @@ public class BlockBambooPipeExtract extends BlockDirectional implements ITileEnt
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityBambooPipeExtract();
+	}
+
+	@Override
+	public ItemBlock getItemBlock() {
+		ItemBlock EXTRACT_PIPE_ITEM = new ItemBlock(this) {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+				list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.bambooPipeExtract").getFormattedText());
+			}
+		};
+		return EXTRACT_PIPE_ITEM;
 	}
 
 }

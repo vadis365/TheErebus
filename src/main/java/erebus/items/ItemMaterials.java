@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Nullable;
+
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModItems.ISubItemsItem;
@@ -11,6 +13,7 @@ import erebus.ModTabs;
 import erebus.api.IErebusEnum;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -23,6 +26,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,6 +37,13 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	public ItemMaterials() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		if(stack.getItemDamage() == EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal())
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.bambooPipeWrench").getFormattedText());
 	}
 
 	@Override
@@ -195,7 +207,8 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		SHIELD_EXO_PLATE_FACE,
 		SHIELD_JADE_FACE,
 		SHIELD_REIN_EXO_FACE,
-		SHIELD_RHINO_EXO_FACE;
+		SHIELD_RHINO_EXO_FACE, 
+		BAMBOO_PIPE_WRENCH;
 
 		@Override
 		public ItemStack createStack(int size) {
