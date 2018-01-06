@@ -15,6 +15,9 @@ import erebus.block.altars.XPAltar;
 import erebus.block.bamboo.BlockBambooBridge;
 import erebus.block.bamboo.BlockBambooCrate;
 import erebus.block.bamboo.BlockBambooLadder;
+import erebus.block.bamboo.BlockBambooPipe;
+import erebus.block.bamboo.BlockBambooPipeExtract;
+import erebus.block.bamboo.BlockBambooPipeExtractActive;
 import erebus.block.bamboo.BlockBambooPole;
 import erebus.block.bamboo.BlockBambooTorch;
 import erebus.block.bamboo.BlockExtenderThingy;
@@ -244,6 +247,9 @@ public class ModBlocks {
 	public static final Block COMPOSTER = new BlockComposter();
 	public static final Block SMOOTHIE_MAKER = new BlockSmoothieMaker();
 	public static final Block UMBERSTONE_BUTTON = new BlockButtonUmberstone();
+	public static final Block BAMBOO_PIPE = new BlockBambooPipe();
+	public static final Block BAMBOO_PIPE_EXTRACT = new BlockBambooPipeExtract();
+	public static final Block BAMBOO_PIPE_EXTRACT_ACTIVE = new BlockBambooPipeExtractActive();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();

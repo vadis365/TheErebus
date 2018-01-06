@@ -32,7 +32,6 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	public ItemMaterials() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		setCreativeTab(ModTabs.ITEMS);
 	}
 
 	@Override
@@ -91,8 +90,13 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
 		if (tab == ModTabs.ITEMS) {
-			for (EnumErebusMaterialsType type : EnumErebusMaterialsType.values())
-				list.add(type.createStack(1));
+			for (EnumErebusMaterialsType type : EnumErebusMaterialsType.values()) // some stuff need to hide for now
+				if (type.createStack().getItemDamage() != EnumErebusMaterialsType.SHIELD_BAMBOO_FACE.ordinal()
+					&& type.createStack().getItemDamage() != EnumErebusMaterialsType.SHIELD_EXO_PLATE_FACE.ordinal()
+					&& type.createStack().getItemDamage() != EnumErebusMaterialsType.SHIELD_JADE_FACE.ordinal()
+					&& type.createStack().getItemDamage() != EnumErebusMaterialsType.SHIELD_REIN_EXO_FACE.ordinal()
+					&& type.createStack().getItemDamage() != EnumErebusMaterialsType.SHIELD_RHINO_EXO_FACE.ordinal())
+						list.add(type.createStack(1));
 		}
 	}
 

@@ -28,7 +28,7 @@ public class FluidTankTile extends FluidTank {
 	public void onContentsChanged() {
 		if (this.tile != null && !tile.getWorld().isRemote) {
 			final IBlockState state = this.tile.getWorld().getBlockState(this.tile.getPos());
-			this.tile.getWorld().notifyBlockUpdate(this.tile.getPos(), state, state, 8);
+			this.tile.getWorld().notifyBlockUpdate(this.tile.getPos(), state, state, 3);
 			this.tile.markDirty();
 		}
 	}

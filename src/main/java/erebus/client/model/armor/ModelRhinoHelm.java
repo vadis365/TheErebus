@@ -27,8 +27,6 @@ public class ModelRhinoHelm extends ModelBiped {
 	ModelRenderer lTopPlate;
 	ModelRenderer rEarCup;
 	ModelRenderer lEarCup;
-	ModelRenderer facePlate1;
-	ModelRenderer facePlate2;
 
 	public ModelRhinoHelm() {
 		textureWidth = 64;
@@ -86,12 +84,6 @@ public class ModelRhinoHelm extends ModelBiped {
 		lEarCup = new ModelRenderer(this, 54, 25);
 		lEarCup.addBox(4.5F, -4F, 1.5F, 1, 3, 3);
 		setRotation(lEarCup, 0.7853982F, 0F, 0F);
-		facePlate1 = new ModelRenderer(this, 25, 25);
-		facePlate1.addBox(-4.5F, -4F, -5.5F, 9, 4, 1);
-		setRotation(facePlate1, 0F, 0F, 0F);
-		facePlate2 = new ModelRenderer(this, 0, 24);
-		facePlate2.addBox(-2F, -4F, -7.5F, 4, 4, 2);
-		setRotation(facePlate2, 0F, 0F, 0F);
 
 		helmFront.addChild(helmTop);
 		helmFront.addChild(helmRight);
@@ -109,13 +101,10 @@ public class ModelRhinoHelm extends ModelBiped {
 		helmFront.addChild(lTopPlate);
 		helmFront.addChild(rEarCup);
 		helmFront.addChild(lEarCup);
-		helmFront.addChild(facePlate1);
-		helmFront.addChild(facePlate2);
 	}
 
 	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
-		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(1.2F, 1F, 1.2F);

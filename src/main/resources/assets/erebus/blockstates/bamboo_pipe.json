@@ -1,0 +1,51 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "erebus:bamboo_pipe_centre",
+    "custom": { "flip-v": true },
+    "textures": {
+      "particle": "erebus:blocks/bamboo_pipes",
+      "side": "erebus:blocks/bamboo_pipes"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+        "normal": [{}],
+        "inventory": [{
+            "transform": {
+                "thirdperson": {
+                    "rotation": [{"x": 10}, {"y": -45}, {"z": 170}],
+                    "translation": [ 0, 0, -0.1 ],
+                    "scale": [ 0.375, 0.375, 0.375 ]
+                },
+        "gui": {
+            "scale": [ 2, 2, 2 ]
+                }
+            }
+        }],
+        "connected_down": {
+            "false": {},
+            "true": { "submodel": "erebus:bamboo_pipe_join", "x": 90 }
+        },
+        "connected_east": {
+            "false": {},
+            "true": { "submodel": "erebus:bamboo_pipe_join", "y": 90 }
+        },
+        "connected_north": {
+            "false": {},
+            "true": { "submodel": "erebus:bamboo_pipe_join" }
+        },
+        "connected_south": {
+            "false": {},
+            "true": { "submodel": "erebus:bamboo_pipe_join", "x": 180 }
+        },
+        "connected_up": {
+            "false": {},
+            "true": { "submodel": "erebus:bamboo_pipe_join", "x": 270 }
+        },
+        "connected_west": {
+            "false": {},
+            "true": { "submodel": "erebus:bamboo_pipe_join", "y": 270 }
+        }
+    }
+  }

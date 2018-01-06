@@ -149,6 +149,7 @@ item.erebus.mushroom_helmet.name=Mush Helm
 item.erebus.water_striders.name=Water Striders
 item.erebus.glider_chestplate_powered.name=Powered Glider Chestplate
 item.erebus.glider_chestplate.name=Glider Chestplate
+item.erebus.enhanced_scorpion_pincer.name=Augmented Scorpion Pincer
 
 # Shields
 item.erebus.bamboo_shield.name=Bamboo Shield
@@ -175,6 +176,7 @@ item.erebus.homing_beecon.name=Homing Beecon
 item.erebus.homing_beecon_advanced.name=Advanced Homing Beecon
 item.erebus.spray_can.name=Insect Repellent
 item.erebus.whetstone.name=Whetstone
+item.erebus.compost.name=Compost
 
 item.erebus.idols.idol_mud.name=Mud Scarab
 item.erebus.idols.idol_iron.name=Iron Scarab

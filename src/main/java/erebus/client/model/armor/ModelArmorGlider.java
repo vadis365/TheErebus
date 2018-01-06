@@ -57,9 +57,10 @@ public class ModelArmorGlider extends ModelBiped {
 
 	@Override
 	public void render(Entity entity, float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
-		super.render(entity, limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GlStateManager.pushMatrix();
+        if (entity.isSneaking())
+            GlStateManager.translate(0.0F, 0.2F, -0.05F);
 		GlStateManager.translate(0.0F, -0.05F, 0.0F);
 		GlStateManager.scale(1.1F, 1.2F, 1.3F);
 		Body.render(unitPixel);
@@ -96,8 +97,8 @@ public class ModelArmorGlider extends ModelBiped {
 	@Override
 	public void setRotationAngles(float limbSwing, float prevLimbSwing, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel, Entity entity) {
 		super.setRotationAngles(limbSwing, prevLimbSwing, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		RArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.0F * prevLimbSwing * 0.5F;
-		LArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * prevLimbSwing * 0.5F;
+		RArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.5F * prevLimbSwing * 0.5F;
+		LArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.5F * prevLimbSwing * 0.5F;
 		if (!isGliding) {
 			RWing.rotateAngleZ = 0F;
 			LWing.rotateAngleZ = 0F;
@@ -114,7 +115,7 @@ public class ModelArmorGlider extends ModelBiped {
 			LWing.rotateAngleZ = -1.570796F;
 		}
 		if (entity.isSneaking()) {
-			Body.rotateAngleX = 0.4F;
+			Body.rotateAngleX = 0.5F;
 			RArm.rotateAngleX += 0.4F;
 			LArm.rotateAngleX += 0.4F;
 			RWingbase.rotateAngleX = 0.5F;
@@ -127,6 +128,10 @@ public class ModelArmorGlider extends ModelBiped {
 			LWingbase.rotationPointZ = 4.5F;
 			RWing.rotationPointZ = 4.5F;
 			LWing.rotationPointZ = 4.5F;
+			RArm.rotationPointZ = -0.5F;
+			LArm.rotationPointZ = -0.5F;
+			RArm.rotationPointY = 4F;
+			LArm.rotationPointY = 4F;
 		} else {
 			Body.rotateAngleX = 0.0F;
 			RWingbase.rotateAngleX = 0.0F;

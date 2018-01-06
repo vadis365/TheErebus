@@ -32,7 +32,7 @@ public class EntityAIPolinate extends EntityAIFindFlower {
 	@Override
 	public boolean shouldExecute() {
 		EntityWorkerBee bee = (EntityWorkerBee) entity;
-		return !bee.beeCollecting && !entity.getMoveHelper().isUpdating() && super.shouldExecute();
+		return !bee.beeCollecting && !bee.beePollinating && super.shouldExecute();
 		//return !entity.getNavigator().noPath() && super.shouldExecute();
 	}
 	

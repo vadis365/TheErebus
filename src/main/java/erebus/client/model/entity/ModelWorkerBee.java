@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -337,8 +338,13 @@ public class ModelWorkerBee extends ModelBase {
 		super.setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		float heady = rotationYaw / (180F / (float) Math.PI);
 		Head1.rotateAngleY = heady;
-		EntityWorkerBee bee = (EntityWorkerBee) entity;
+	}
 
+	@Override
+	public void setLivingAnimations(EntityLivingBase entity, float limbSwing, float limbSwingAngle, float partialTicks) {
+		EntityWorkerBee bee = (EntityWorkerBee) entity;
+		float smoothedTicks = bee.ticksExisted + (bee.ticksExisted - (bee.ticksExisted - 1)) * partialTicks;
+		float flap = MathHelper.sin((smoothedTicks) * 1.2F) * 0.5F;
 		if (bee.onGround) {
 			float legMovement = MathHelper.cos(limbSwing * 2.0F) * 0.7F * limbSwingAngle;
 			LBL1.rotateAngleX = -legMovement;
@@ -368,8 +374,8 @@ public class ModelWorkerBee extends ModelBase {
 			RBL1.rotateAngleX = +0.25F;
 			RML1.rotateAngleX = 0F;
 			RFL1.rotateAngleX = -0.25F;
-			ThxRW.rotateAngleX = bee.wingFloat;
-			ThxLW.rotateAngleX = bee.wingFloat;
+			ThxRW.rotateAngleX = flap;
+			ThxLW.rotateAngleX = flap;
 			ThxRW.rotateAngleY = -1.5F;
 			ThxLW.rotateAngleY = 1.5F;
 			ThxRW.rotateAngleZ = 0F;

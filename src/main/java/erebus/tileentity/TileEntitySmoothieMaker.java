@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.FluidTankPropertiesWrapper;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.relauncher.Side;
@@ -172,7 +173,10 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
             return (T) new IFluidHandler() {
                 @Override
                 public IFluidTankProperties[] getTankProperties() {
-                    return null; //don't think that's needed
+                	IFluidTankProperties[] infos = new IFluidTankProperties[tanks.length];
+            		for (int i = 0; i < tanks.length; i++)
+            			infos[i] = new FluidTankPropertiesWrapper(tanks[i]);
+            		return infos;
                 }
  
                 @Override

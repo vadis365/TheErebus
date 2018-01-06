@@ -1,13 +1,14 @@
 package erebus.entity;
 
 import erebus.ModItems;
-import erebus.client.render.entity.AnimationMathHelper;
+import erebus.ModSounds;
 import erebus.core.helper.Utils;
 import erebus.entity.ai.EntityAIFlyingWander;
 import erebus.entity.ai.EntityAIPolinate;
 import erebus.entity.ai.FlyingMoveHelper;
 import erebus.entity.ai.PathNavigateFlying;
 import erebus.items.ItemMaterials;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -20,6 +21,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,15 +30,15 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityWorkerBee extends EntityTameable {
-	public float wingFloat;
-	private final AnimationMathHelper mathWings = new AnimationMathHelper();
 	public boolean beeFlying;
-	public boolean beePollinating;
+	public boolean beePollinating = false;
 	public boolean beeCollecting = false;
 	private static final DataParameter<Integer> DROP_POINT_X = EntityDataManager.<Integer>createKey(EntityWorkerBee.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> DROP_POINT_Y = EntityDataManager.<Integer>createKey(EntityWorkerBee.class, DataSerializers.VARINT);
@@ -117,11 +119,6 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	public void onUpdate() {
-		if (!isFlying())
-			wingFloat = 0.0F;
-		else
-			wingFloat = mathWings.swing(4.0F, 0.1F);
-
 		if (motionY < 0.0D)
 			motionY *= 0.4D;
 
@@ -136,9 +133,9 @@ public class EntityWorkerBee extends EntityTameable {
 			if (getDistance(getDropPointX() + 0.5D, getDropPointY() + 0.5D, getDropPointZ() + 0.5D) < 1D && getNectarPoints() > 0) {
 				addHoneyToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 				setBeeCollecting(false);
-				setBeePollinating(true);
 				getNavigator().clearPath();
 			}
+
 			if(isInWater())
 				getMoveHelper().setMoveTo(this.posX, this.posY + 1, this.posZ, 0.32D);
 		}
@@ -148,7 +145,6 @@ public class EntityWorkerBee extends EntityTameable {
 	private void addHoneyToInventory(int x, int y, int z) {
 		if (Utils.addItemStackToInventory(Utils.getTileEntity(getEntityWorld(),new BlockPos(x, y, z), IInventory.class), ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(getNectarPoints())))
 			setNectarPoints(0);
-		//System.out.println("Delivery Complete");
 	}
 
 	public void setBeeFlying(boolean state) {
@@ -164,8 +160,8 @@ public class EntityWorkerBee extends EntityTameable {
 	}
 
 	@Override
-	protected PathNavigate createNavigator(World worldIn) {
-		return new PathNavigateFlying(this, worldIn);
+	protected PathNavigate createNavigator(World world) {
+		return new PathNavigateFlying(this, world);
 	}
 
 	public void flyAbout() {
@@ -177,11 +173,41 @@ public class EntityWorkerBee extends EntityTameable {
 
 	}
 	
-	 public void fall(float distance, float damageMultiplier) { 
+	public void fall(float distance, float damageMultiplier) { 
 	 }
 	
 	private void land() {
 	}
+	
+	@Override
+	public boolean doesEntityNotTriggerPressurePlate() {
+		return true;
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.WASP_SOUND;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.WASP_HURT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH;
+	}
+
+	@Override
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		entityDropItem(ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(2), 0.0F);
+	}
+
+	@Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
+    }
 
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
