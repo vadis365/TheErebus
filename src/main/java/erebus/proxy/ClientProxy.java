@@ -16,6 +16,7 @@ import erebus.client.gui.GuiAntInventory;
 import erebus.client.gui.GuiColossalCrate;
 import erebus.client.gui.GuiComposter;
 import erebus.client.gui.GuiErebusBasic;
+import erebus.client.gui.GuiLiquifier;
 import erebus.client.gui.GuiPetrifiedChest;
 import erebus.client.gui.GuiPetrifiedWorkbench;
 import erebus.client.gui.GuiSmoothieMaker;
@@ -97,6 +98,7 @@ import erebus.client.render.tile.TileEntityExtenderThingyRenderer;
 import erebus.client.render.tile.TileEntityFluidJarRenderer;
 import erebus.client.render.tile.TileEntityGaeanKeystoneRenderer;
 import erebus.client.render.tile.TileEntityGlowingJarRenderer;
+import erebus.client.render.tile.TileEntityLiquifierRenderer;
 import erebus.client.render.tile.TileEntityOfferingAltarRenderer;
 import erebus.client.render.tile.TileEntityPetrifiedWoodChestRenderer;
 import erebus.client.render.tile.TileEntityPreservedBlockRenderer;
@@ -185,6 +187,7 @@ import erebus.tileentity.TileEntityFluidJar;
 import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityHoneyComb;
+import erebus.tileentity.TileEntityLiquifier;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import erebus.tileentity.TileEntityPreservedBlock;
@@ -257,6 +260,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlowingJar.class, new TileEntityGlowingJarRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySmoothieMaker.class, new TileEntitySmoothieMakerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFluidJar.class, new TileEntityFluidJarRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLiquifier.class, new TileEntityLiquifierRenderer());
 	}
 
 	@Override
@@ -358,6 +362,7 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PRESERVED_BLOCK), 0, TileEntityPreservedBlock.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.GLOWING_JAR), 0, TileEntityGlowingJar.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.SMOOTHIE_MAKER), 0, TileEntitySmoothieMaker.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.LIQUIFIER), 0, TileEntityLiquifier.class);
 
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	
@@ -516,6 +521,8 @@ public class ClientProxy extends CommonProxy {
 				return new GuiSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tile);
 			case UMBER_FURNACE:
 				return new GuiUmberFurnace(player.inventory, (TileEntityUmberFurnace) tile);
+			case LIQUIFIER:
+				return new GuiLiquifier(player.inventory, (TileEntityLiquifier) tile);
 			default:
 				return null;
 		}

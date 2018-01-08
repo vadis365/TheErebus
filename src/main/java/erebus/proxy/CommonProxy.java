@@ -16,6 +16,7 @@ import erebus.inventory.ContainerColossalCrate;
 import erebus.inventory.ContainerComposter;
 import erebus.inventory.ContainerExtenderThingy;
 import erebus.inventory.ContainerHoneyComb;
+import erebus.inventory.ContainerLiquifier;
 import erebus.inventory.ContainerPetrifiedCraftingTable;
 import erebus.inventory.ContainerPetrifiedWoodChest;
 import erebus.inventory.ContainerSilo;
@@ -41,6 +42,7 @@ import erebus.tileentity.TileEntityGaeanKeystone;
 import erebus.tileentity.TileEntityGlowGem;
 import erebus.tileentity.TileEntityGlowingJar;
 import erebus.tileentity.TileEntityHoneyComb;
+import erebus.tileentity.TileEntityLiquifier;
 import erebus.tileentity.TileEntityOfferingAltar;
 import erebus.tileentity.TileEntityPetrifiedWoodChest;
 import erebus.tileentity.TileEntityPreservedBlock;
@@ -77,7 +79,8 @@ public class CommonProxy implements IGuiHandler {
 		ANT_INVENTORY,
 		SILO_INVENTORY,
 		COMPOSTER,
-		SMOOTHIE_MAKER;
+		SMOOTHIE_MAKER, 
+		LIQUIFIER;
 	}
 
 	public final int[][] places = new int[][] { { 1, 0, 0 }, { 1, 0, 1 }, { 0, 0, 1 }, { 1, 1, 0 }, { 1, 1, 1 }, { 0, 1, 1 }, { 0, 1, 0 }, { 0, 0, 0 } };
@@ -126,6 +129,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntityArmchair.class, "armchair");
 		registerTileEntity(TileEntityBambooPipe.class, "bamboo_pipe");
 		registerTileEntity(TileEntityBambooPipeExtract.class, "bamboo_pipe_extract");
+		registerTileEntity(TileEntityLiquifier.class, "liquifier");
 	}
 
 	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
@@ -180,6 +184,8 @@ public class CommonProxy implements IGuiHandler {
 				return new ContainerSmoothieMaker(player.inventory, (TileEntitySmoothieMaker) tile);
 			case UMBER_FURNACE:
 				return new ContainerUmberFurnace(player.inventory, (TileEntityUmberFurnace) tile);
+			case LIQUIFIER:
+				return new ContainerLiquifier(player.inventory, (TileEntityLiquifier) tile);
 			default:
 				return null;
 		}

@@ -62,6 +62,7 @@ import erebus.blocks.BlockHoneyTreat;
 import erebus.blocks.BlockInsectRepellent;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
+import erebus.blocks.BlockLiquifier;
 import erebus.blocks.BlockMagmaCrawlerSpawner;
 import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
@@ -250,6 +251,7 @@ public class ModBlocks {
 	public static final Block BAMBOO_PIPE = new BlockBambooPipe();
 	public static final Block BAMBOO_PIPE_EXTRACT = new BlockBambooPipeExtract();
 	public static final Block BAMBOO_PIPE_EXTRACT_ACTIVE = new BlockBambooPipeExtractActive();
+	public static final Block LIQUIFIER = new BlockLiquifier();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
