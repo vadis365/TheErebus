@@ -59,8 +59,11 @@ public class GuiLiquifier extends GuiErebus {
 		tankXMax = tankXMin + 36;
 		tankYMax = tankYMin + 41;
 		if (mouseX >= tankXMin && mouseX <= tankXMax)
-			if (mouseY >= tankYMin && mouseY <= tankYMax)
-				drawToolTip(mouseX, mouseY, "Contains: "+ liquifier.tank.getFluidAmount()+"Mb of "+ liquifier.tank.getFluid().getFluid().getName());
+			if (mouseY >= tankYMin && mouseY <= tankYMax) {
+				FluidTank tank = liquifier.tank;
+				if (tank.getFluidAmount() > 0)
+					drawToolTip(mouseX, mouseY, "Contains: "+ liquifier.tank.getFluidAmount()+"Mb of "+ liquifier.tank.getFluid().getLocalizedName());
+			}
 				
 	}
 }

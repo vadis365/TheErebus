@@ -98,8 +98,7 @@ public class TileEntityLiquifierRenderer extends TileEntitySpecialRenderer<TileE
 		}
 
 		GlStateManager.translate(0F, -1F, 0F);
-		MODEL.renderLid();
-
+		MODEL.renderLidAnimated(tile, partialTick);
 		GlStateManager.pushMatrix();
 		GlStateManager.rotate(ticks, 0.0F, 1F, 0F);
 		GlStateManager.enableBlend();
@@ -107,11 +106,9 @@ public class TileEntityLiquifierRenderer extends TileEntitySpecialRenderer<TileE
 		GlStateManager.color(1F, 1F, 1F, 1F);
 		MODEL.renderBlades();
 		GlStateManager.disableBlend();
-
 		GlStateManager.popMatrix();
 		MODEL.renderTank();
 		GlStateManager.popMatrix();
-		
 	}
 
 	@Override
@@ -131,7 +128,6 @@ public class TileEntityLiquifierRenderer extends TileEntitySpecialRenderer<TileE
 		GlStateManager.scale(-1, -1, 1);
 		MODEL.renderLid();
 		MODEL.renderBlades();
-
 		GlStateManager.popMatrix();
 		GlStateManager.popMatrix();
 	}
@@ -159,12 +155,10 @@ public class TileEntityLiquifierRenderer extends TileEntitySpecialRenderer<TileE
 		float red = (color >> 16 & 0xFF) / 255.0F;
 		float green = (color >> 8 & 0xFF) / 255.0F;
 		float blue = (color & 0xFF) / 255.0F;
-
 		GlStateManager.color(red, green, blue, 1.0F);
 	}
 
-	private void renderCuboid(BufferBuilder buffer, float xMax, float xMin, float yMin, float height, float zMin,
-			float zMax, TextureAtlasSprite textureAtlasSprite) {
+	private void renderCuboid(BufferBuilder buffer, float xMax, float xMin, float yMin, float height, float zMin, float zMax, TextureAtlasSprite textureAtlasSprite) {
 
 		double uMin = (double) textureAtlasSprite.getMinU();
 		double uMax = (double) textureAtlasSprite.getMaxU();
@@ -215,8 +209,7 @@ public class TileEntityLiquifierRenderer extends TileEntitySpecialRenderer<TileE
 		buffer.pos(x / 2f, y, z / 2f).tex(u, v).endVertex();
 	}
 
-	private void addVertexWithColor(BufferBuilder buffer, float x, float y, float z, float red, float green, float blue,
-			float alpha) {
+	private void addVertexWithColor(BufferBuilder buffer, float x, float y, float z, float red, float green, float blue, float alpha) {
 		buffer.pos(x / 2f, y, z / 2f).color(red, green, blue, alpha).endVertex();
 	}
 
