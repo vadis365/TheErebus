@@ -36,6 +36,7 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -72,7 +73,7 @@ public class BlockLiquifier extends BlockDirectional implements ITileEntityProvi
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.INVISIBLE;
+		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
@@ -111,9 +112,20 @@ public class BlockLiquifier extends BlockDirectional implements ITileEntityProvi
 		return meta;
 	}
 
+	public static EnumFacing getFacingFromEntity(BlockPos pos, EntityLivingBase entity) {
+		if (MathHelper.abs((float) entity.posX - (float) pos.getX()) < 2.0F && MathHelper.abs((float) entity.posZ - (float) pos.getZ()) < 2.0F) {
+			double eyeHeight = entity.posY + (double) entity.getEyeHeight();
+			if (eyeHeight - (double) pos.getY() > 2.0D)
+				return EnumFacing.UP;
+			if ((double) pos.getY() - eyeHeight > 0.0D)
+				return EnumFacing.DOWN;
+		}
+		return entity.getHorizontalFacing().getOpposite();
+	}
+
 	@Override
 	 public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(FACING, facing).withProperty(POWERED, world.isBlockPowered(pos));
+		return this.getDefaultState().withProperty(FACING, getFacingFromEntity(pos, placer)).withProperty(POWERED, world.isBlockPowered(pos));
 	}
 
 	@Override

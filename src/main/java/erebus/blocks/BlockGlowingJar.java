@@ -24,7 +24,7 @@ public class BlockGlowingJar extends BlockContainer {
 	public BlockGlowingJar() {
 		super(Material.GLASS);
 		setLightLevel(1.0F);
-		setHardness(10F);
+		setHardness(0.5F);
 		setResistance(10.0F);
 		setSoundType(SoundType.GLASS);
 		setCreativeTab(ModTabs.BLOCKS);

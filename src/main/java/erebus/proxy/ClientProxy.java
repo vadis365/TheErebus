@@ -362,7 +362,6 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.PRESERVED_BLOCK), 0, TileEntityPreservedBlock.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.GLOWING_JAR), 0, TileEntityGlowingJar.class);
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.SMOOTHIE_MAKER), 0, TileEntitySmoothieMaker.class);
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(ModBlocks.LIQUIFIER), 0, TileEntityLiquifier.class);
 
 		// shield rendering unused but keeping here for future reference on other stuff
 		/*	

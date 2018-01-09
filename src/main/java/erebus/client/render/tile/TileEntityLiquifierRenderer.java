@@ -114,22 +114,9 @@ public class TileEntityLiquifierRenderer extends TileEntitySpecialRenderer<TileE
 	@Override
 	public void render(TileEntityLiquifier te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		if (te == null || !te.hasWorld()) {
-			renderTileAsItem(x, y, z);
 			return;
 		}
 		renderTile(te, x, y, z, partialTicks, destroyStage);
-	}
-
-	private void renderTileAsItem(double x, double y, double z) {
-		GlStateManager.pushMatrix();
-		bindTexture(BASE_TEXTURE);
-		GlStateManager.pushMatrix();
-		GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		GlStateManager.scale(-1, -1, 1);
-		MODEL.renderLid();
-		MODEL.renderBlades();
-		GlStateManager.popMatrix();
-		GlStateManager.popMatrix();
 	}
 
 	public void renderItemInSlot(TileEntityLiquifier tile, ItemStack stack, float x, float y, float z, float scale) {
