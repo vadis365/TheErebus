@@ -43,15 +43,24 @@ public class BlockBambooPipeExtractActive extends BlockBambooPipeExtract {
 		} else {
 			ItemStack stack = player.getHeldItem(hand);
 			if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS && stack.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal()) {
-				state = state.cycleProperty(FACING);
-				state.cycleProperty(FACING);
-				world.setBlockState(pos, state, 3);
+				if (!player.isSneaking()) {
+					state = state.cycleProperty(FACING);
+					state.cycleProperty(FACING);
+					world.setBlockState(pos, state, 3);
+					return true;
+				}
+				else {
+					breakBlock(world, pos, state);
+					dropBlockAsItem(world, pos, state, 0);
+					world.setBlockToAir(pos);
+					return true;
+				}
 			} else {
 				IBlockState activeState = ModBlocks.BAMBOO_PIPE_EXTRACT.getDefaultState().withProperty(BlockBambooPipeExtract.FACING, state.getValue(FACING));
 				world.setBlockState(pos, activeState, 3);
 				world.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, 0.5F);
+				return true;
 			}
-			return true;
 		}
 	}
 }

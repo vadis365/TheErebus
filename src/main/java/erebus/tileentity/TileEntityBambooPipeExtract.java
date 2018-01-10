@@ -51,8 +51,8 @@ public class TileEntityBambooPipeExtract extends TileEntity implements ITickable
 					if (properties.canDrain() && properties.getCapacity() > 0) {
 						FluidStack contents = properties.getContents();
 						if (contents != null) {
-							if (tank.getFluid() == null || tank.getFluid().amount <= tank.getCapacity() - 100 && tank.getFluid().containsFluid(new FluidStack(contents.getFluid(), 0))) {
-								tank.fill(recepticle.drain(new FluidStack(contents.getFluid(), 100), true), true);
+							if (tank.getFluid() == null || tank.getFluid().amount < tank.getCapacity() && tank.getFluid().containsFluid(new FluidStack(contents.getFluid(), 0))) {
+								tank.fill(recepticle.drain(new FluidStack(contents.getFluid(), tank.getCapacity()), true), true);
 								markDirty();
 								//System.out.println("Sucking Hard");
 							}
@@ -72,8 +72,8 @@ public class TileEntityBambooPipeExtract extends TileEntity implements ITickable
 						if (properties != null && properties.canFill() && properties.getCapacity() > 0) {
 							FluidStack contents = properties.getContents();
 							if (tank.getFluid() != null) {
-								if (contents == null || contents.amount <= properties.getCapacity() - 100 && contents.containsFluid(new FluidStack(tank.getFluid(), 0))) {
-									recepticle.fill(tank.drain(new FluidStack(tank.getFluid(), 100), true), true);
+								if (contents == null || contents.amount <= properties.getCapacity() - tank.getFluid().amount && contents.containsFluid(new FluidStack(tank.getFluid(), 0))) {
+									recepticle.fill(tank.drain(new FluidStack(tank.getFluid(), tank.getFluid().amount), true), true);
 									markDirty();
 									//System.out.println("Push it real good");
 								}

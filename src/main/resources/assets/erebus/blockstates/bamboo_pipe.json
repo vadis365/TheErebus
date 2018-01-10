@@ -11,18 +11,15 @@
   },
   "variants": {
         "normal": [{}],
-        "inventory": [{
-            "transform": {
-                "thirdperson": {
-                    "rotation": [{"x": 10}, {"y": -45}, {"z": 170}],
-                    "translation": [ 0, 0, -0.1 ],
-                    "scale": [ 0.375, 0.375, 0.375 ]
-                },
-        "gui": {
-            "scale": [ 2, 2, 2 ]
-                }
-            }
-        }],
+        "inventory": [{}],
+        "facing": {
+            "down": { "submodel": "erebus:bamboo_pipe_direction", "x": 90, "y": 180 },
+            "east": { "submodel": "erebus:bamboo_pipe_direction", "y": 90 },
+            "north": {"submodel": "erebus:bamboo_pipe_direction" },
+            "south": { "submodel": "erebus:bamboo_pipe_direction", "y": 180 },
+            "up": { "submodel": "erebus:bamboo_pipe_direction", "x": 270 },
+            "west": { "submodel": "erebus:bamboo_pipe_direction", "y": 270 }
+        },
         "connected_down": {
             "false": {},
             "true": { "submodel": "erebus:bamboo_pipe_join", "x": 90 }

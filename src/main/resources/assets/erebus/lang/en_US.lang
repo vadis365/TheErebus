@@ -751,9 +751,9 @@ tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
 tooltip.erebus.poweredGlider=Needs redgem blocks at the cost of fuel to flight.
 tooltip.erebus.gliderGlideKey=Gliding Key
 tooltip.erebus.gliderPoweredKey=Flying Key
-tooltip.erebus.bambooPipe=A very basic fluid pipe.
+tooltip.erebus.bambooPipe=A very basic directional fluid pipe.
 tooltip.erebus.bambooPipeExtract=Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.
-tooltip.erebus.bambooPipeWrench=Use on Bamboo Extractor Pipes to rotate them or on Bamboo Pipes to insta-break them.
+tooltip.erebus.bambooPipeWrench=Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.
 
 
 ##########

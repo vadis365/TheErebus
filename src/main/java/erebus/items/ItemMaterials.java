@@ -28,6 +28,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,6 +46,11 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		if(stack.getItemDamage() == EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal())
 			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.bambooPipeWrench").getFormattedText());
 	}
+
+	@Override
+    public boolean doesSneakBypassUse(ItemStack stack, IBlockAccess world, BlockPos pos, EntityPlayer player) {
+        return stack.getItemDamage() == EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal();
+    }
 
 	@Override
 	 public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

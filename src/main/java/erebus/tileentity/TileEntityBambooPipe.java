@@ -1,5 +1,7 @@
 package erebus.tileentity;
 
+import erebus.block.bamboo.BlockBambooPipe;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -25,18 +27,25 @@ public class TileEntityBambooPipe extends TileEntity implements ITickable {
 		if (getWorld().isRemote)
 			return;
 
+		if (getWorld().getBlockState(getPos()) == null || !(getWorld().getBlockState(getPos()).getBlock() instanceof BlockBambooPipe))
+			return;
+		
+		IBlockState state = getWorld().getBlockState(getPos());
+		BlockBambooPipe block = (BlockBambooPipe) state.getBlock();
+		EnumFacing pipeFacing = state.getValue(block.FACING);
+
 		for (EnumFacing facing : EnumFacing.VALUES) {
-			TileEntity tile = getWorld().getTileEntity(pos.offset(facing));
-			if (tile != null && !(tile instanceof TileEntityBambooPipeExtract) && tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
-				IFluidHandler recepticle = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
+			TileEntity tileToFill = getWorld().getTileEntity(pos.offset(facing));
+			if (tileToFill != null && facing != pipeFacing && tileToFill.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing.getOpposite())) {
+				IFluidHandler recepticle = tileToFill.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
 				IFluidTankProperties[] tankProperties = recepticle.getTankProperties();
 				if (tankProperties != null) {
 					for (IFluidTankProperties properties : tankProperties) {
 						if (properties.canFill() && properties.getCapacity() > 0) {
 							FluidStack contents = properties.getContents();
 							if (tank.getFluid() != null) {
-								if (contents == null || contents.amount <= properties.getCapacity() - 100 && contents.containsFluid(new FluidStack(tank.getFluid(), 0))) {
-									recepticle.fill(tank.drain(new FluidStack(tank.getFluid(), 100), true), true);
+								if (contents == null || contents.amount <= properties.getCapacity() - tank.getFluid().amount && contents.containsFluid(new FluidStack(tank.getFluid(), 0))) {
+									recepticle.fill(tank.drain(new FluidStack(tank.getFluid(), tank.getFluid().amount), true), true);
 									markDirty();
 								}
 							}
