@@ -26,21 +26,10 @@ public class EntityFireResistent extends EntityItem {
 	}
 
 	@Override
-	public void setFire(int par1) {
+	public void setFire(int seconds) {
 	}
 
 	@Override
 	public void setOnFireFromLava() {
-	}
-
-	@Override
-	public boolean handleLavaMovement() {
-		return false;
-	}
-
-	@Override
-	public void playSound(String sound, float volume, float pitch) {
-		if (sound != "random.fizz")
-			super.playSound(sound, volume, pitch);
 	}
 }
