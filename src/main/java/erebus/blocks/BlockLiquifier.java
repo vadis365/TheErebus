@@ -37,6 +37,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -234,8 +235,10 @@ public class BlockLiquifier extends BlockDirectional implements ITileEntityProvi
 						list.add(TextFormatting.BLUE + ""+ fluid.amount +"Mb");
 					}
 				}
-				else
+				else {
+					list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.liquifier").getFormattedText());
 					list.add(TextFormatting.RED + "It's Empty!");
+				}
 			}
 		};
 		return LIQUIFIER_ITEM;

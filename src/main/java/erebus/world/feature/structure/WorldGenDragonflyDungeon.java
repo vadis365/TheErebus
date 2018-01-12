@@ -10,6 +10,7 @@ import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockGiantFlower.EnumType;
 import erebus.items.ItemErebusFood.EnumFoodType;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import erebus.items.ItemSmoothie.SmoothieType;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
@@ -41,8 +42,7 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 	public static final WeightedLootList CHEST_LOOT = new WeightedLootList(new LootItemStack[] {
 			new LootItemStack(Items.BOOK).setAmount(1, 4).setWeight(18),
 			new LootItemStack(Items.PAPER).setAmount(2, 6).setWeight(16),
-			new LootItemStack(ModItems.MATERIALS).setAmount(1, 2).setDamage(EnumErebusMaterialsType.WATER_REPELLENT.ordinal())
-					.setWeight(3),
+			new LootItemStack(ModItems.MATERIALS).setAmount(1, 2).setDamage(EnumErebusMaterialsType.WATER_REPELLENT.ordinal()).setWeight(3),
 			new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9),
 			new LootItemStack(Items.ENCHANTED_BOOK).setWeight(8), new LootItemStack(Items.GOLDEN_PICKAXE).setWeight(3),
 			new LootItemStack(Items.IRON_PICKAXE).setWeight(2), new LootItemStack(ModItems.JADE_PICKAXE).setWeight(1),
@@ -66,12 +66,12 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 			new LootItemStack(ModItems.LIFE_BLOOD).setAmount(1, 2).setWeight(4),
 			new LootItemStack(ModItems.ROLLED_NEWSPAPER).setAmount(1).setWeight(1),
 			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(6),
-			new LootItemStack(ModItems.WHETSTONE).setAmount(1).setDamage(0).setWeight(1)
-			/*new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
-			new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
-			new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.NOTHING_IN_THE_MIDDLE.ordinal()).setWeight(3),
-			new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1)
-			*/
+			new LootItemStack(ModItems.WHETSTONE).setAmount(1).setDamage(0).setWeight(1),
+			new LootItemStack(ModBlocks.GLOW_GEM_ACTIVE).setAmount(1, 3).setWeight(5),
+			new LootItemStack(ModItems.SMOOTHIE).setAmount(1, 3).setDamage(SmoothieType.NOTHING_IN_THE_MIDDLE.ordinal()).setWeight(3),
+			new LootItemStack(ModItems.SMOOTHIE).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1)
+			//new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
+
 			}).setPostProcessor(new IPostProcess() {
 				@SuppressWarnings("rawtypes")
 				@Override

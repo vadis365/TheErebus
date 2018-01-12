@@ -23,6 +23,7 @@ import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.items.ItemErebusFood.EnumFoodType;
 import erebus.items.ItemMaterials;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import erebus.items.ItemSmoothie.SmoothieType;
 import erebus.tileentity.TileEntityBones;
 import erebus.tileentity.TileEntityTempleTeleporter;
 import erebus.world.feature.util.MazeGenerator;
@@ -73,6 +74,7 @@ public class AntlionMazeDungeon {
 	private IBlockState TORCH_WEST = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.WEST);
 	private IBlockState TORCH_SOUTH = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.SOUTH);
 	private IBlockState TORCH_NORTH = Blocks.TORCH.getDefaultState().withProperty(BlockTorch.FACING, EnumFacing.NORTH);
+
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] {
 			new LootItemStack(Items.BOOK).setAmount(1, 4).setWeight(18),
 			new LootItemStack(Items.PAPER).setAmount(2, 6).setWeight(16),
@@ -106,11 +108,11 @@ public class AntlionMazeDungeon {
 			new LootItemStack(ModItems.ROLLED_NEWSPAPER).setAmount(1).setWeight(1),
 			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(6),
 			new LootItemStack(ModItems.HOMING_BEECON).setAmount(1).setWeight(1),
-			/*new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
-			 new LootItemStack(ModBlocks.glowGemBlock).setAmount(1, 3).setWeight(5),
-			new LootItemStack(ModItems.smoothie).setAmount(1, 3).setDamage(SmoothieType.givinMeTheBlues.ordinal()).setWeight(3),
-			new LootItemStack(ModItems.smoothie).setAmount(1).setDamage(SmoothieType.bryufsBrew.ordinal()).setWeight(1)
-			*/
+			new LootItemStack(ModBlocks.GLOW_GEM_ACTIVE).setAmount(1, 3).setWeight(5),
+			new LootItemStack(ModItems.SMOOTHIE).setAmount(1, 3).setDamage(SmoothieType.GIVIN_ME_THE_BLUES.ordinal()).setWeight(3),
+			new LootItemStack(ModItems.SMOOTHIE).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1)
+			//new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
+
 			}).setPostProcessor(new IPostProcess() {
 				@SuppressWarnings("rawtypes")
 						@Override

@@ -51,6 +51,8 @@ import erebus.blocks.BlockGaeanKeystone;
 import erebus.blocks.BlockGhostSand;
 import erebus.blocks.BlockGiantFlower;
 import erebus.blocks.BlockGiantLilyPad;
+import erebus.blocks.BlockGlowGemActive;
+import erebus.blocks.BlockGlowGemInactive;
 import erebus.blocks.BlockGlowingJar;
 import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
@@ -249,9 +251,11 @@ public class ModBlocks {
 	public static final Block SMOOTHIE_MAKER = new BlockSmoothieMaker();
 	public static final Block UMBERSTONE_BUTTON = new BlockButtonUmberstone();
 	public static final Block BAMBOO_PIPE = new BlockBambooPipe();
-	public static final Block BAMBOO_PIPE_EXTRACT = new BlockBambooPipeExtract();
+	public static final Block BAMBOO_PIPE_EXTRACT = new BlockBambooPipeExtract().setCreativeTab(ModTabs.BLOCKS);
 	public static final Block BAMBOO_PIPE_EXTRACT_ACTIVE = new BlockBambooPipeExtractActive();
 	public static final Block LIQUIFIER = new BlockLiquifier();
+	public static final Block GLOW_GEM_ACTIVE = new BlockGlowGemActive().setCreativeTab(ModTabs.BLOCKS);
+	public static final Block GLOW_GEM_INACTIVE = new BlockGlowGemInactive();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();

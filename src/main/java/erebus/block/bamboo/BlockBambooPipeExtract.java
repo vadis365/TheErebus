@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 import erebus.ModBlocks;
 import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModItems;
-import erebus.ModTabs;
 import erebus.items.ItemMaterials;
 import erebus.tileentity.TileEntityBambooPipeExtract;
 import net.minecraft.block.BlockDirectional;
@@ -56,7 +55,6 @@ public class BlockBambooPipeExtract extends BlockDirectional implements ITileEnt
 		setDefaultState(this.getBlockState().getBaseState().withProperty(CONNECTED_DOWN, Boolean.FALSE).withProperty(CONNECTED_EAST, Boolean.FALSE).withProperty(CONNECTED_NORTH, Boolean.FALSE).withProperty(CONNECTED_SOUTH, Boolean.FALSE).withProperty(CONNECTED_UP, Boolean.FALSE).withProperty(CONNECTED_WEST, Boolean.FALSE));
 		setHardness(1.5F);
 		setSoundType(SoundType.WOOD);
-		setCreativeTab(ModTabs.BLOCKS);
 	}
 
 	@Override

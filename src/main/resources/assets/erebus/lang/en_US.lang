@@ -566,6 +566,10 @@ tile.erebus.composter.name=Organic Composter
 tile.erebus.smoothie_maker.name=ErebusCo. Smoothie-matic 2000
 tile.erebus.umber_furnace.name=Umber Furnace
 tile.erebus.umberstone_button.name=Umberstone Button
+tile.erebus.liquifier.name=Honey Liquifier
+tile.erebus.glow_gem_active.name=Glowing Gem
+tile.erebus.glow_gem_inactive.name=Glowing Gem
+
 
 tile.erebus.altar_base.name=Altar Base
 tile.erebus.altar_lightning.name=Altar of Lightning
@@ -754,6 +758,8 @@ tooltip.erebus.gliderPoweredKey=Flying Key
 tooltip.erebus.bambooPipe=A very basic directional fluid pipe.
 tooltip.erebus.bambooPipeExtract=Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.
 tooltip.erebus.bambooPipeWrench=Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.
+tooltip.erebus.liquifier=Turns Honey Drips in to Fluid Honey. Redstone activated.
+tooltip.erebus.glowGem=Place on ANY side of a solid block as a light source. Right click to turn off and on.
 
 
 ##########
