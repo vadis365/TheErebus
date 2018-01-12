@@ -48,6 +48,7 @@ import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityPreservedBlock;
+import erebus.entity.EntityPunchroom;
 import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
@@ -142,6 +143,7 @@ public class ModEntities {
 		registerEntity(36, EntityChameleonTick.class, "chameleon_tick", 0x804E3D, 0x3D6F80);
 		registerEntity(37, EntitySolifugeSmall.class, "solifuge_small");
 		registerEntity(38, EntityMidgeSwarm.class, "midge_swarm", -14803180, -13816034);
+		registerEntity(39, EntityPunchroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
 
 		registerEntity(41, EntityBlackAnt.class, "black_ant", 0x000000, 0xF09071);
 		registerEntity(42, EntityZombieAnt.class, "zombie_ant", 0x00FE40, 0xF09071);
