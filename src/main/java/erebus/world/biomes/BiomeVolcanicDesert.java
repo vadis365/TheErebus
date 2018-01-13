@@ -27,7 +27,6 @@ public class BiomeVolcanicDesert extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0xA6BB4E, 0x91A922);
 		setFog(255, 231, 10);
-		//setWeight(16);
 
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityBotFly.class, 10).setGroupSize(2, 3));

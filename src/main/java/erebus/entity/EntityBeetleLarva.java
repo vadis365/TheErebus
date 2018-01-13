@@ -217,10 +217,12 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if (isBurning())
-			entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, 1), 0.0F);
-		else
-			entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, 0), 0.0F);
+		if (recentlyHit) {
+			if (isBurning())
+				entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, 1), 0.0F);
+			else
+				entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, 0), 0.0F);
+		}
 	}
 
 	private boolean isStick(ItemStack stack) {

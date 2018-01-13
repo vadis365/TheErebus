@@ -117,9 +117,9 @@ public class BlockLiquifier extends BlockDirectional implements ITileEntityProvi
 		if (MathHelper.abs((float) entity.posX - (float) pos.getX()) < 2.0F && MathHelper.abs((float) entity.posZ - (float) pos.getZ()) < 2.0F) {
 			double eyeHeight = entity.posY + (double) entity.getEyeHeight();
 			if (eyeHeight - (double) pos.getY() > 2.0D)
-				return EnumFacing.UP;
+				return EnumFacing.NORTH;
 			if ((double) pos.getY() - eyeHeight > 0.0D)
-				return EnumFacing.DOWN;
+				return EnumFacing.NORTH;
 		}
 		return entity.getHorizontalFacing().getOpposite();
 	}

@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +39,7 @@ public class EntityPunchroom extends EntityMob {
 		tasks.addTask(1, new EntityPunchroom.AIPunchroomAttack(this));
 		tasks.addTask(2, new EntityPunchroom.AIPunchroomFaceRandom(this));
 		tasks.addTask(3, new EntityPunchroom.AIPunchroomHop(this));
-		targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override

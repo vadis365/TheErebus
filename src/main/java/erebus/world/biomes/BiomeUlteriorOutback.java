@@ -8,6 +8,7 @@ import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityHoneyPotAnt;
 import erebus.entity.EntityMidgeSwarm;
+import erebus.entity.EntityRhinoBeetle;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
@@ -26,10 +27,8 @@ public class BiomeUlteriorOutback extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0xC1B668);
 		setFog(234, 194, 114);
-		//setWeight(15);
-/*
+
 		spawningGradual.add(new SpawnEntry(EntityRhinoBeetle.class, 10).setGroupSize(1, 1));
-*/
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(2, 2));
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(1, 4));
 		spawningGradual.add(new SpawnEntry(EntityBlackWidow.class, 5).setGroupSize(1, 1));

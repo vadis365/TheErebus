@@ -2,6 +2,8 @@ package erebus.entity.ai;
 
 import erebus.ModBlocks;
 import erebus.ModSounds;
+import erebus.block.bamboo.BlockBambooTorch;
+import erebus.blocks.BlockHollowLog;
 import erebus.blocks.EnumWood;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityBeetleLarva;
@@ -48,7 +50,7 @@ public class EntityAIEatWoodenItem extends EntityAIEatBlock {
 
 		if (ConfigHandler.INSTANCE.beetleLarvaEating == 2)
 			return true;
-		else if (state.getMaterial() != Material.WOOD || block instanceof BlockLog || block == EnumWood.BAMBOO.getLog() || block == Blocks.BROWN_MUSHROOM_BLOCK || block == Blocks.RED_MUSHROOM_BLOCK /*|| block instanceof BlockBambooTorch || block instanceof BlockHollowLog*/)
+		else if (state.getMaterial() != Material.WOOD || block instanceof BlockLog || block == EnumWood.BAMBOO.getLog() || block == Blocks.BROWN_MUSHROOM_BLOCK || block == Blocks.RED_MUSHROOM_BLOCK || block instanceof BlockBambooTorch || block instanceof BlockHollowLog)
 			return false;
 		else if (ConfigHandler.INSTANCE.beetleLarvaEating == 0 && block.hasTileEntity(state))
 			return false;

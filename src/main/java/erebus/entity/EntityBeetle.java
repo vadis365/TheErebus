@@ -145,10 +145,12 @@ public class EntityBeetle extends EntityAnimal {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.PLATE_EXO.ordinal()), 0.0F);
+		if (recentlyHit) {
+			int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
+			int amount;
+			for (amount = 0; amount < chance; ++amount)
+				entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.PLATE_EXO.ordinal()), 0.0F);
+		}
 	}
 
 	@Override

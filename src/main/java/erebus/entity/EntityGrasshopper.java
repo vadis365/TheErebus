@@ -101,13 +101,15 @@ public class EntityGrasshopper extends EntityCreature {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount)
-			if (isBurning())
-				entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, EnumFoodType.GRASSHOPPER_LEG_COOKED.ordinal()), 0.0F);
-			else
-				entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, EnumFoodType.GRASSHOPPER_LEG_RAW.ordinal()), 0.0F);
+		if(recentlyHit) {
+			int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+			int amount;
+			for (amount = 0; amount < chance; ++amount)
+				if (isBurning())
+					entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, EnumFoodType.GRASSHOPPER_LEG_COOKED.ordinal()), 0.0F);
+				else
+					entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, EnumFoodType.GRASSHOPPER_LEG_RAW.ordinal()), 0.0F);
+		}
 	}
 
 	public void setIsEating(boolean isEating) {

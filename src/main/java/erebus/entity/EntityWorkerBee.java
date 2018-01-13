@@ -201,7 +201,9 @@ public class EntityWorkerBee extends EntityTameable {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(2), 0.0F);
+		if (recentlyHit) {
+			entityDropItem(ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(2), 0.0F);
+		}
 	}
 
 	@Override

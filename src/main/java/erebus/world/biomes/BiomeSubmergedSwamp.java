@@ -25,11 +25,9 @@ public class BiomeSubmergedSwamp extends BiomeBaseErebus {
 		properties.setTemperature(0.75F);
 		properties.setRainDisabled();
 		setColors(0x314D31);
-		//setWaterColor(6051893);
+		properties.setWaterColor(6051893);
 		setFog(8, 128, 8);
-		//setWeight(20);
 		/*
-		waterColorMultiplier = 6051893;
 
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 20).setGroupSize(3, 4));
 		spawningGradual.add(new SpawnEntry(EntityLeech.class, 20).setGroupSize(3, 5));
