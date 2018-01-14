@@ -20,58 +20,11 @@ public class RenderMagmaCrawler extends RenderLiving<EntityMagmaCrawler> {
 
 	@Override
 	protected void preRenderCallback(EntityMagmaCrawler crawler, float partialTickTime) {
-		scaleCrawler();
-		if (crawler.sideWalkingOn() == EnumFacing.UP) {
+		scaleCrawler(0.9F);
+		if (crawler.getOnCeiling()) {
 			rotate(180F, 180F, 0);
 			GlStateManager.translate(0.0F, 1.25F, 0.0F);
 		}
-		if (crawler.sideWalkingOn() == EnumFacing.EAST) {
-			if(crawler.getHorizontalFacing() == EnumFacing.SOUTH) {
-				rotate(0F, 30F, -90F);
-				GlStateManager.translate(0.5F, 0.7F, 0.0F);
-			}
-			if(crawler.getHorizontalFacing() == EnumFacing.NORTH) {
-				rotate(0F, -30F, 90F);
-				GlStateManager.translate(-0.5F, 0.7F, 0.0F);
-			}
-		}
-		
-		if (crawler.sideWalkingOn() == EnumFacing.WEST) {
-			if(crawler.getHorizontalFacing() == EnumFacing.NORTH) {
-				rotate(0F, 30F, -90F);
-				GlStateManager.translate(0.5F, 0.7F, 0.0F);
-			}
-			if(crawler.getHorizontalFacing() == EnumFacing.SOUTH) {
-				rotate(0F, -30F, 90F);
-				GlStateManager.translate(-0.5F, 0.7F, 0.0F);
-			}
-		}
-		
-		if (crawler.sideWalkingOn() == EnumFacing.NORTH) {
-			if(crawler.getHorizontalFacing() == EnumFacing.WEST) {
-				rotate(0F, -30F, 90F);
-				GlStateManager.translate(-0.5F, 0.7F, 0.0F);
-			}
-			if(crawler.getHorizontalFacing() == EnumFacing.EAST) {
-				rotate(0F, 30F, -90F);
-				GlStateManager.translate(0.5F, 0.7F, 0.0F);
-			}
-		}
-		
-		if (crawler.sideWalkingOn() == EnumFacing.SOUTH) {
-			if(crawler.getHorizontalFacing() == EnumFacing.WEST) {
-				rotate(0F, 30F, -90F);
-				GlStateManager.translate(0.5F, 0.7F, 0.0F);
-			}
-			if(crawler.getHorizontalFacing() == EnumFacing.EAST) {
-				rotate(0F, -30F, 90F);
-				GlStateManager.translate(-0.5F, 0.7F, 0.0F);
-			}
-		}
-		/*if (crawler.sideWalkingOn() == EnumFacing.WEST || crawler.sideWalkingOn() == EnumFacing.NORTH) {
-			rotate(0F, 0F, 90F);
-			GlStateManager.translate(0.0F, 0.0F, 1.25F);
-		}*/
 	}
 
 	protected void rotate(float crawlerAngleX, float crawlerAngleY, float crawlerAngleZ) {
@@ -80,8 +33,7 @@ public class RenderMagmaCrawler extends RenderLiving<EntityMagmaCrawler> {
 		GlStateManager.rotate(crawlerAngleZ, 0F, 0.0F, 1.0F);
 	}
 
-	protected void scaleCrawler() {
-		float size = 0.9F;
+	protected void scaleCrawler(float size) {
 		GlStateManager.scale(size, size, size);
 	}
 

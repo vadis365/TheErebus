@@ -1,10 +1,14 @@
 {
     "variants": {
+        "facing=up,powered=false": { "model": "erebus:liquifier", "y": 180 },
+        "facing=down,powered=false": { "model": "erebus:liquifier", "y": 180 },
         "facing=north,powered=false": { "model": "erebus:liquifier", "y": 180 },
         "facing=south,powered=false": { "model": "erebus:liquifier" },
         "facing=west,powered=false":  { "model": "erebus:liquifier", "y": 90},
         "facing=east,powered=false":  { "model": "erebus:liquifier" , "y": 270 },
- 
+
+        "facing=up,powered=true": { "model": "erebus:liquifier", "y": 180 },
+        "facing=down,powered=true": { "model": "erebus:liquifier", "y": 180 },
         "facing=north,powered=true": { "model": "erebus:liquifier", "y": 180 },
         "facing=south,powered=true": { "model": "erebus:liquifier" },
         "facing=west,powered=true":  { "model": "erebus:liquifier", "y": 90},

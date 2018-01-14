@@ -27,6 +27,7 @@ import erebus.entity.EntityCentipede;
 import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityCicada;
 import erebus.entity.EntityCropWeevil;
+import erebus.entity.EntityCrushroom;
 import erebus.entity.EntityDragonfly;
 import erebus.entity.EntityFireAnt;
 import erebus.entity.EntityFireAntSoldier;
@@ -54,6 +55,7 @@ import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntitySolifuge;
 import erebus.entity.EntitySolifugeSmall;
+import erebus.entity.EntitySporeBall;
 import erebus.entity.EntityStagBeetle;
 import erebus.entity.EntityTarantula;
 import erebus.entity.EntityTarantulaBaby;
@@ -91,16 +93,13 @@ public class ModEntities {
 
 		registerEntity(29, EntityCrushling.class, "crushling", 0xFFFFFF, 0xFF0000);
 
-		registerEntity(39, EntityPunchroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
-		registerEntity(40, EntityCrushroom.class, "crushroom", 0xFFFFFF, 0xFF0000);
+
 
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
 
 		registerEntity(55, EntityMucusBombPrimed.class, "mucus_bomb_primed");
 
 		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
-
-		registerEntity(76, EntitySporeBall.class, "spore_ball");
 
 		registerEntity(83, EntityArmchairMount.class, "armchair_mount");
 */
@@ -144,7 +143,7 @@ public class ModEntities {
 		registerEntity(37, EntitySolifugeSmall.class, "solifuge_small");
 		registerEntity(38, EntityMidgeSwarm.class, "midge_swarm", -14803180, -13816034);
 		registerEntity(39, EntityPunchroom.class, "punchroom", 0xFFFFFF, 0xFF0000);
-
+		registerEntity(40, EntityCrushroom.class, "crushroom", 0xFFFFFF, 0xFF0000);
 		registerEntity(41, EntityBlackAnt.class, "black_ant", 0x000000, 0xF09071);
 		registerEntity(42, EntityZombieAnt.class, "zombie_ant", 0x00FE40, 0xF09071);
 		registerEntity(43, EntityTarantulaMiniboss.class, "tarantula_mini_boss", 0x000000, 0xE82066);
@@ -173,7 +172,7 @@ public class ModEntities {
 
 		registerEntity(74, EntityGooBall.class, "goo_ball");
 		registerEntity(75, EntityWoodlouseBall.class, "woodlouse_ball");
-
+		registerEntity(76, EntitySporeBall.class, "spore_ball");
 		registerEntity(77, EntityTarantulaEgg.class, "tarantula_egg"); 
 		registerEntity(78, EntityPoisonJet.class, "poison_jet");
 		registerEntity(79, EntityGasVent.class, "gas_vent");

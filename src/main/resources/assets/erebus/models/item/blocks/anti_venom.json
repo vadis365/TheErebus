@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0":"erebus:items/repellent"
+        "layer0":"erebus:fluids/anti_venom_still"
     }
 }

@@ -1,3 +1,6 @@
 {
-    "parent":"erebus:block/honey"
+    "parent": "item/generated",
+    "textures": {
+        "layer0":"erebus:fluids/honey_still"
+    }
 }

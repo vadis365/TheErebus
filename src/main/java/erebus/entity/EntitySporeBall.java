@@ -64,7 +64,7 @@ public class EntitySporeBall extends EntityThrowable {
 	@Override
 	protected void onImpact(RayTraceResult mop) {
 
-		if (mop.entityHit != null) {
+		if (mop.entityHit != null && !(mop.entityHit instanceof EntityCrushroom)) {
 
 			if (mop.entityHit instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) mop.entityHit;
@@ -87,13 +87,12 @@ public class EntitySporeBall extends EntityThrowable {
 				}
 				setDead();
 			}
-		} else
-			setDead();
+		}
 	}
 
 	@Override
 	public boolean canBeCollidedWith() {
-		return false;
+		return true;
 	}
 
 	public boolean attackEntityFrom(DamageSource source, int amount) {
@@ -102,7 +101,7 @@ public class EntitySporeBall extends EntityThrowable {
 
 	@SideOnly(Side.CLIENT)
 	public void trailParticles(World world, double x, double y, double z, Random rand) {
-		for (int count = 0; count < 3; ++count)
+		for (int count = 0; count < 30; ++count)
 			Erebus.PROXY.spawnCustomParticle("spell", getEntityWorld(), x, y, z, 0.0D, 0.0D, 0.0D);
 	}
 

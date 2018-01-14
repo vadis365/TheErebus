@@ -75,16 +75,16 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 						Erebus.PROXY.spawnCustomParticle("slime", world, message.posX + (world.rand.nextDouble() - 0.5D) , message.posY + world.rand.nextDouble(), message.posZ + (world.rand.nextDouble() - 0.5D), 0, 0, 0);
 					break;
 				case CRUSHROOM_BLAM:
-					//for (int a = 0; a < 360; a += 4) {
-					//	double ang = a * Math.PI / 180D;
-					//	eff.addEffect(new EntityRepellentFX(player.worldObj, message.posX + -MathHelper.sin((float) ang) * 3, message.posY + 0.1D, message.posZ + MathHelper.cos((float) ang) * 3, 0, 0, 0));
-					//}
+					for (int a = 0; a < 360; a += 4) {
+					double ang = a * Math.PI / 180D;
+					Erebus.PROXY.spawnCustomParticle("repellent", world, message.posX + -MathHelper.sin((float) ang) * 3, message.posY + 0.1D, message.posZ + MathHelper.cos((float) ang) * 3, 0, 0, 0);
+					}
 					break;
 				case TARANTULA_BLAM:
-					//for (int a = 0; a < 360; a += 4) {
-					//	double ang = a * Math.PI / 180D;
-					//	eff.addEffect(new EntityCloudFX(player.worldObj, message.posX + -MathHelper.sin((float) ang) * 3, message.posY, message.posZ + MathHelper.cos((float) ang) * 3, -MathHelper.sin((float) ang) * 0.5, 0.1D, MathHelper.cos((float) ang) * 0.5));
-					//}
+					for (int a = 0; a < 360; a += 4) {
+						double ang = a * Math.PI / 180D;
+						Erebus.PROXY.spawnCustomParticle("cloud", world, message.posX + -MathHelper.sin((float) ang) * 3, message.posY, message.posZ + MathHelper.cos((float) ang) * 3, -MathHelper.sin((float) ang) * 0.5, 0.1D, MathHelper.cos((float) ang) * 0.5);
+					}
 					break;
 				case ANTLION_BLAM:
 					for (int a = 0; a < 360; a += 4) {

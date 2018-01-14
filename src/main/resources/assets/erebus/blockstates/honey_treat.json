@@ -5,7 +5,7 @@
         "bites=2": { "model": "erebus:honey_treat_slice2" },
         "bites=3": { "model": "erebus:honey_treat_slice3" },
         "bites=4": { "model": "erebus:honey_treat_slice4" },
-        "bites=5": { "model": "cerebus:honey_treat_slice5" },
+        "bites=5": { "model": "erebus:honey_treat_slice5" },
         "bites=6": { "model": "erebus:honey_treat_slice6" }
     }
 }

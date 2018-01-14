@@ -170,7 +170,7 @@ public class EntityCentipede extends EntityMob {
 	}
 
 	public int getSkin() {
-		return dataManager.get(SKIN_TYPE).intValue();
+		return dataManager.get(SKIN_TYPE);
 	}
 
 	@Override

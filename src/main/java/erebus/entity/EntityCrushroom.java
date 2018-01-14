@@ -1,30 +1,41 @@
 package erebus.entity;
 
+import erebus.Erebus;
+import erebus.ModSounds;
+import erebus.core.handler.configs.ConfigHandler;
+import erebus.items.ItemMaterials;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
+import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import erebus.core.handler.configs.ConfigHandler;
-import erebus.item.ItemMaterials;
-import erebus.network.PacketPipeline;
-import erebus.network.client.PacketParticle;
-import erebus.network.client.PacketParticle.ParticleType;
 
-public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBossDisplayData {
+public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
+	
+	private static final DataParameter<Integer> SMASH_COUNT = EntityDataManager.<Integer>createKey(EntityCrushroom.class, DataSerializers.VARINT);
+	private static final DataParameter<Byte> STANDING = EntityDataManager.<Byte>createKey(EntityCrushroom.class, DataSerializers.BYTE);
 
-	private final EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 0.75D, 40, 12.0F);
+
+	private final EntityAIAttackRanged aiArrowAttack = new EntityAIAttackRanged(this, 0.75D, 40, 12.0F);
 
 	public EntityCrushroom(World world) {
 		super(world);
@@ -33,38 +44,34 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(2, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 200D : 200D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(16.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 200D : 200D * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(21, new Integer(0));
-		dataWatcher.addObject(22, new Byte((byte) 0));
-	}
-
-	@Override
-	public boolean isAIEnabled() {
-		return true;
+		dataManager.register(SMASH_COUNT, 0);
+		dataManager.register(STANDING,(byte) 0);
 	}
 
 	@Override
 	public void onLivingUpdate() {
-		worldObj.spawnParticle("reddust", posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
+		if (getEntityWorld().isRemote)
+			Erebus.PROXY.spawnCustomParticle("spores", getEntityWorld(), posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
 
-		if (!worldObj.isRemote && getAttackTarget() != null) {
+		if (!getEntityWorld().isRemote && getAttackTarget() != null) {
 			faceEntity(getAttackTarget(), 10.0F, 20.0F);
-			double distance = getDistance(getAttackTarget().posX, getAttackTarget().boundingBox.minY, getAttackTarget().posZ);
+			double distance = getDistance(getAttackTarget().posX, getAttackTarget().getEntityBoundingBox().minY, getAttackTarget().posZ);
 
 			if (distance > 5.0D && distance <= 12) {
 				tasks.addTask(3, aiArrowAttack);
@@ -96,7 +103,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 			}
 		}
 
-		if (!worldObj.isRemote && getAttackTarget() == null) {
+		if (!getEntityWorld().isRemote && getAttackTarget() == null) {
 			setStanding((byte) 1);
 			tasks.removeTask(aiArrowAttack);
 		}
@@ -105,26 +112,26 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 	}
 
 	private void setStanding(byte state) {
-		dataWatcher.updateObject(22, state);
+		dataManager.set(STANDING, state);
 	}
 
 	public byte getStanding() {
-		return dataWatcher.getWatchableObjectByte(22);
+		return dataManager.get(STANDING);
 	}
 
 	private void setSmashCount(int count) {
-		dataWatcher.updateObject(21, count);
+		dataManager.set(SMASH_COUNT, count);
 	}
 
 	public int getSmashCount() {
-		return dataWatcher.getWatchableObjectInt(21);
+		return dataManager.get(SMASH_COUNT);
 	}
 
 	@Override
 	public boolean getCanSpawnHere() {
-		float light = getBrightness(1.0F);
+		float light = getBrightness();
 		if (light >= 0F)
-			return worldObj.checkNoEntityCollision(boundingBox) && worldObj.getCollidingBoundingBoxes(this, boundingBox).isEmpty() && !worldObj.isAnyLiquid(boundingBox);
+			return getEntityWorld().checkNoEntityCollision(getEntityBoundingBox()) && getEntityWorld().getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && !getEntityWorld().containsAnyLiquid(getEntityBoundingBox());
 		return super.getCanSpawnHere();
 	}
 
@@ -134,23 +141,23 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 	}
 
 	@Override
-	protected String getLivingSound() {
-		return "erebus:sporelingliving";
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.CRUSHLING_LIVING;
 	}
 
 	@Override
-	protected String getHurtSound() {
-		return "erebus:sporelinghurt";
+	protected SoundEvent getHurtSound(DamageSource damagesource) {
+		return ModSounds.CRUSHLING_HURT;
 	}
 
 	@Override
-	protected String getDeathSound() {
-		return "erebus:sporelingdeath";
+	protected SoundEvent getDeathSound() {
+		return ModSounds.CRUSHLING_DEATH;
 	}
 
 	@Override
-	protected void func_145780_a(int x, int y, int z, Block block) {
-		playSound("mob.irongolem.walk", 1.0F, 0.5F);
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -163,7 +170,7 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 		int amount = rand.nextInt(3);
 		if (fortune > 0)
 			amount += rand.nextInt(fortune + 1);
-		entityDropItem(ItemMaterials.DATA.HIDE_SHROOM.makeStack(amount), 0.0F);
+		entityDropItem(ItemMaterials.EnumErebusMaterialsType.HIDE_SHROOM.createStack(amount), 0.0F);
 	}
 
 	@Override
@@ -174,19 +181,19 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase entity, float range) {
-		EntitySporeBall sporeball = new EntitySporeBall(worldObj, this);
+		EntitySporeBall sporeball = new EntitySporeBall(getEntityWorld(), this);
 		double distanceX = entity.posX - posX;
 		double distanceY = entity.posY + height - 4D - sporeball.posY;
 		double distanceZ = entity.posZ - posZ;
-		float height = MathHelper.sqrt_double(distanceX * distanceX + distanceZ * distanceZ) * 0.2F;
-		sporeball.setThrowableHeading(distanceX, distanceY + height, distanceZ, 1.6F, 12.0F);
-		playSound("erebus:spraycansound", 0.5F, 0.1F / (getRNG().nextFloat() * 0.4F + 0.8F));
-		worldObj.spawnEntityInWorld(sporeball);
+		float height = MathHelper.sqrt(distanceX * distanceX + distanceZ * distanceZ) * 0.2F;
+		sporeball.shoot(distanceX, distanceY + height, distanceZ, 0.8F, 0.0F);
+		getEntityWorld().playSound(null, getPosition(), ModSounds.SPRAY_CAN_SOUND, SoundCategory.HOSTILE, 0.5F, 0.1F / (getRNG().nextFloat() * 0.4F + 0.8F));
+		getEntityWorld().spawnEntity(sporeball);
 	}
 
 	private void meleeAttackPlayer() {
-		if (!worldObj.isRemote && getAttackTarget().boundingBox.maxY >= boundingBox.minY - 1.0D && getAttackTarget().boundingBox.minY <= boundingBox.maxY && getSmashCount() == 20) {
-			playSound("erebus:blamsound", 0.5F, 1.0F);
+		if (!getEntityWorld().isRemote && getAttackTarget().getEntityBoundingBox().maxY >= getEntityBoundingBox().minY - 1.0D && getAttackTarget().getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && getSmashCount() == 20) {
+			getEntityWorld().playSound(null, getPosition(), ModSounds.BLAM_SOUND, SoundCategory.HOSTILE, 0.5F, 1.0F);
 			spawnBlamParticles();
 			getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
 			getAttackTarget().addVelocity(-MathHelper.sin(rotationYaw * 3.141593F / 180.0F) * 0.5D, 0.2D, MathHelper.cos(rotationYaw * 3.141593F / 180.0F) * 0.5D);
@@ -194,6 +201,10 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob, IBos
 	}
 
 	public void spawnBlamParticles() {
-		PacketPipeline.sendToAllAround(this, 64D, new PacketParticle(this, ParticleType.CRUSHROOM_BLAM));
+		Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.CRUSHROOM_BLAM, (float) posX, (float)posY, (float)posZ));
+	}
+
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
 	}
 }
