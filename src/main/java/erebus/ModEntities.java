@@ -45,6 +45,7 @@ import erebus.entity.EntityLocust;
 import erebus.entity.EntityMagmaCrawler;
 import erebus.entity.EntityMidgeSwarm;
 import erebus.entity.EntityMoneySpider;
+import erebus.entity.EntityMosquito;
 import erebus.entity.EntityMoth;
 import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityPondSkater;
@@ -88,13 +89,8 @@ public class ModEntities {
 	public static void init() {
 		// Entity registrations
 /*		
-		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
 
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
-
-
-
-
 
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
 
@@ -109,7 +105,7 @@ public class ModEntities {
 		registerEntity(2, EntityCentipede.class, "centipede", -13565952, -92160);
 		registerEntity(3, EntityBeetle.class, "beetle", -12116973, -5938366);
 		registerEntity(4, EntityFly.class, "fly", -13165534, -6750208);
-
+		registerEntity(5, EntityMosquito.class, "mosquito", -13816034, -14803180);
 		registerEntity(6, EntityTarantula.class, "tarantula", 0x000000, 0xE82066);
 		registerEntity(7, EntityBotFly.class, "bot_fly", -6750208, -13165534);
 		registerEntity(8, EntityScorpion.class, "scorpion", 0xFFA200, 0xFFDB9C);
