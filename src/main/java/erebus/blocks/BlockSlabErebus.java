@@ -5,6 +5,7 @@ import java.util.Random;
 import erebus.ModTabs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -78,6 +79,17 @@ public class BlockSlabErebus extends BlockSimple {
 			return FULL_BLOCK_AABB;
 		}
 	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        if (state.getValue(HALF) == EnumBlockHalf.FULL) {
+            return BlockFaceShape.SOLID;
+        } else if (face == EnumFacing.UP && state.getValue(HALF) == EnumBlockHalf.TOP) {
+            return BlockFaceShape.SOLID;
+        } else {
+            return face == EnumFacing.DOWN && state.getValue(HALF) == EnumBlockHalf.BOTTOM ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+        }
+    }
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

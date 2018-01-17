@@ -66,6 +66,7 @@ import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockLiquifier;
 import erebus.blocks.BlockMagmaCrawlerSpawner;
+import erebus.blocks.BlockMucusBomb;
 import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
 import erebus.blocks.BlockOreErebus;
@@ -256,6 +257,7 @@ public class ModBlocks {
 	public static final Block LIQUIFIER = new BlockLiquifier();
 	public static final Block GLOW_GEM_ACTIVE = new BlockGlowGemActive().setCreativeTab(ModTabs.BLOCKS);
 	public static final Block GLOW_GEM_INACTIVE = new BlockGlowGemInactive();
+	public static final Block MUCUS_BOMB = new BlockMucusBomb();
 
 	// VELOCITY BLOCKS
 	public static final Block VELOCITY_BLOCK = new BlockVelocity();
@@ -391,6 +393,8 @@ public class ModBlocks {
 						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockWoodFenceGate.POWERED }).build());
 					if (block instanceof BlockFluidClassic)
 						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockFluidClassic.LEVEL }).build());
+					if (block instanceof BlockMucusBomb)
+						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockMucusBomb.EXPLODE }).build());
 				}
 		}
 	}

@@ -47,6 +47,7 @@ import erebus.entity.EntityMidgeSwarm;
 import erebus.entity.EntityMoneySpider;
 import erebus.entity.EntityMosquito;
 import erebus.entity.EntityMoth;
+import erebus.entity.EntityMucusBombPrimed;
 import erebus.entity.EntityPoisonJet;
 import erebus.entity.EntityPondSkater;
 import erebus.entity.EntityPrayingMantis;
@@ -93,8 +94,6 @@ public class ModEntities {
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
 
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
-
-		registerEntity(55, EntityMucusBombPrimed.class, "mucus_bomb_primed");
 
 		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
 
@@ -156,7 +155,7 @@ public class ModEntities {
 		registerEntity(52, EntityAnimatedBambooCrate.class, "animated_bamboo_crate");
 		registerEntity(53, EntityUmberGolem.class, "umber_golem");
 		registerEntity(54, EntityFireResistent.class, "fire_resistent_item");
-		
+		registerEntity(55, EntityMucusBombPrimed.class, "mucus_bomb_primed");
 		registerEntity(56, EntityUmberGolemDungeonTypes.class, "umber_golem_idol");
 		registerEntity(57, EntityAntlionBoss.class, "antlion_boss", 0x000000, 0xFFFFFF);
 		registerEntity(58, EntityHoneyPotAnt.class, "honey_pot_ant", 0xFFA400, 0x000000);

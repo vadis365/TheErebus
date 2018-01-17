@@ -1,74 +1,77 @@
 package erebus.client.render.entity;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import erebus.ModBlocks;
 import erebus.entity.EntityMucusBombPrimed;
-import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderMucusBombPrimed extends Render {
-	private RenderBlocks blockRenderer = new RenderBlocks();
-	private static final ResourceLocation texture = new ResourceLocation("erebus:textures/blocks/mucusBombSides.png");
+public class RenderMucusBombPrimed extends Render<EntityMucusBombPrimed> {
 
-	public RenderMucusBombPrimed() {
+	public RenderMucusBombPrimed(RenderManager renderManagerIn) {
+		super(renderManagerIn);
 		shadowSize = 0.5F;
 	}
 
-	public void renderPrimedMucusBomb(EntityMucusBombPrimed entityMucusBombPrimed, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
-		float f2;
+	@Override
+	public void doRender(EntityMucusBombPrimed entity, double x, double y, double z, float entityYaw, float partialTicks) {
+		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+		GlStateManager.pushMatrix();
+		GlStateManager.translate((float) x, (float) y + 0.5F, (float) z);
 
-		if (entityMucusBombPrimed.fuse - partialTickTime + 1.0F < 10.0F) {
-			f2 = 1.0F - (entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 10.0F;
-
-			if (f2 < 0.0F)
-				f2 = 0.0F;
-
-			if (f2 > 1.0F)
-				f2 = 1.0F;
-
-			f2 *= f2;
-			f2 *= f2;
-			float f3 = 1.0F + f2 * 0.3F;
-			GL11.glScalef(f3, f3, f3);
+		if ((float) entity.getFuse() - partialTicks + 1.0F < 10.0F) {
+			float f = 1.0F - ((float) entity.getFuse() - partialTicks + 1.0F) / 10.0F;
+			f = MathHelper.clamp(f, 0.0F, 1.0F);
+			f = f * f;
+			f = f * f;
+			float f1 = 1.0F + f * 0.3F;
+			GlStateManager.scale(f1, f1, f1);
 		}
 
-		f2 = (1.0F - (entityMucusBombPrimed.fuse - partialTickTime + 1.0F) / 100.0F) * 0.8F;
-		bindTexture(TextureMap.locationBlocksTexture);
-		blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, entityMucusBombPrimed.getBrightness(partialTickTime));
+		float f2 = (1.0F - ((float) entity.getFuse() - partialTicks + 1.0F) / 100.0F) * 0.8F;
+		this.bindEntityTexture(entity);
+		GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(-0.5F, -0.5F, 0.5F);
+		blockrendererdispatcher.renderBlockBrightness(ModBlocks.MUCUS_BOMB.getDefaultState(), entity.getBrightness());
+		GlStateManager.translate(0.0F, 0.0F, 1.0F);
 
-		if (entityMucusBombPrimed.fuse / 5 % 2 == 0) {
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_DST_ALPHA);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, f2);
-			bindTexture(TextureMap.locationBlocksTexture);
-			blockRenderer.renderBlockAsItem(ModBlocks.mucusBomb, 0, 1.0F);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+		if (this.renderOutlines) {
+			GlStateManager.enableColorMaterial();
+			GlStateManager.enableOutlineMode(this.getTeamColor(entity));
+			blockrendererdispatcher.renderBlockBrightness(ModBlocks.MUCUS_BOMB.getDefaultState(), 1.0F);
+			GlStateManager.disableOutlineMode();
+			GlStateManager.disableColorMaterial();
+		} else if (entity.getFuse() / 5 % 2 == 0) {
+			GlStateManager.disableTexture2D();
+			GlStateManager.disableLighting();
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.DST_ALPHA);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, f2);
+			GlStateManager.doPolygonOffset(-3.0F, -3.0F);
+			GlStateManager.enablePolygonOffset();
+			blockrendererdispatcher.renderBlockBrightness(ModBlocks.MUCUS_BOMB.getDefaultState(), 1.0F);
+			GlStateManager.doPolygonOffset(0.0F, 0.0F);
+			GlStateManager.disablePolygonOffset();
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.disableBlend();
+			GlStateManager.enableLighting();
+			GlStateManager.enableTexture2D();
 		}
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
+		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
-	}
-
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float rotationYaw, float partialTickTime) {
-		renderPrimedMucusBomb((EntityMucusBombPrimed) entity, x, y, z, rotationYaw, partialTickTime);
+	protected ResourceLocation getEntityTexture(EntityMucusBombPrimed entity) {
+		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}
 }
