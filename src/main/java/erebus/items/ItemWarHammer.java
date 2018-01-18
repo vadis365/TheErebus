@@ -2,53 +2,57 @@ package erebus.items;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import javax.annotation.Nullable;
+
+import erebus.Erebus;
 import erebus.ModItems;
 import erebus.ModMaterials;
+import erebus.ModSounds;
 import erebus.ModTabs;
-import erebus.item.ItemMaterials.DATA;
-import erebus.network.PacketPipeline;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemWarHammer extends ItemSword {
 
 	public ItemWarHammer() {
-		super(ModMaterials.weaponWarHammer);
+		super(ModMaterials.WEAPON_WAR_HAMMER);
 		setMaxStackSize(1);
-		setCreativeTab(ModTabs.gears);
-		setUnlocalizedName("erebus.warHammer");
-	}
+		setCreativeTab(ModTabs.GEAR);
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack is, EntityPlayer player, List list, boolean flag) {
-		list.add(StatCollector.translateToLocal("tooltip.erebus.warhammer_1"));
-		list.add(StatCollector.translateToLocal("tooltip.erebus.warhammer_2"));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.warhammer_1").getFormattedText());
+		list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.warhammer_2").getFormattedText());
 	}
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.materials && material.getItemDamage() == DATA.REINFORCED_PLATE_EXO.ordinal();
+		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.REINFORCED_PLATE_EXO.ordinal();
 	}
 
 	@Override
@@ -58,11 +62,10 @@ public class ItemWarHammer extends ItemSword {
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
-		if (!stack.hasTagCompound())
-			stack.stackTagCompound = new NBTTagCompound();
-		if (!stack.getTagCompound().hasKey("charge"))
-			stack.getTagCompound().setInteger("charge", 0);
+	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
+		if (hasTag(stack))
+			if (!stack.getTagCompound().hasKey("charge"))
+				stack.getTagCompound().setInteger("charge", 0);
 	}
 
 	@Override
@@ -71,34 +74,33 @@ public class ItemWarHammer extends ItemSword {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	 public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
 		if (stack.getTagCompound().getInteger("charge") < 25)
 			stack.getTagCompound().setInteger("charge", stack.getTagCompound().getInteger("charge") + 1);
 		if (stack.getTagCompound().getInteger("charge") >= 25)
 			stack.getTagCompound().setInteger("charge", 25);
-		return stack;
+		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (!stack.hasTagCompound()) {
-			stack.stackTagCompound = new NBTTagCompound();
-			return false;
-		}
-		if (side == 1 && player.isSneaking()) {
+	 public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (hasTag(stack))
+			if (facing == EnumFacing.UP && player.isSneaking()) {
 			if (stack.getTagCompound().getInteger("charge") > 0) {
-				PacketPipeline.sendToAllAround(player, 64D, new PacketParticle(player, ParticleType.HAMMER_BLAM));
-				world.playSoundAtEntity(player, "erebus:antlionslam", 1.0F, 1.0F);
+				Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.HAMMER_BLAM, (float) player.posX, (float)player.posY, (float)player.posZ));
+				world.playSound(null, pos, ModSounds.BLAM_SOUND, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			}
 			areaOfEffect(world, stack, player);
 			stack.getTagCompound().setInteger("charge", 0);
-			return true;
+			return EnumActionResult.SUCCESS;
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
 
 	protected Entity areaOfEffect(World world, ItemStack stack, EntityPlayer player) {
-		List<?> list = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(player.boundingBox.minX, player.boundingBox.minY, player.boundingBox.minZ, player.boundingBox.maxX, player.boundingBox.maxY, player.boundingBox.maxZ).expand(stack.getTagCompound().getInteger("charge") * 0.25D, 1D, stack.getTagCompound().getInteger("charge") * 0.25D));
+		List<?> list = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.getEntityBoundingBox().minX, player.getEntityBoundingBox().minY, player.getEntityBoundingBox().minZ, player.getEntityBoundingBox().maxX, player.getEntityBoundingBox().maxY, player.getEntityBoundingBox().maxZ).grow(stack.getTagCompound().getInteger("charge") * 0.25D, 1D, stack.getTagCompound().getInteger("charge") * 0.25D));
 		for (int i = 0; i < list.size(); i++) {
 			Entity entity = (Entity) list.get(i);
 			if (entity != null)
@@ -109,5 +111,13 @@ public class ItemWarHammer extends ItemSword {
 				}
 		}
 		return null;
+	}
+
+	private boolean hasTag(ItemStack stack) {
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+			return false;
+		}
+		return true;
 	}
 }

@@ -113,12 +113,12 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 					}
 					break;
 				case HAMMER_BLAM:
-					//for (int a = 0; a < 360; a += 4) {
-					//	double ang = a * Math.PI / 180D;
-					//	for (int count = 0; count <= 4; ++count)
-					//		eff.addEffect(new EntityFireworkSparkFX(player.worldObj, message.posX + -MathHelper.sin((float) ang) * 1 * count * 0.5, message.posY - 1, message.posZ + MathHelper.cos((float) ang) * 1 * count * 0.5, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5, eff));
-					//	eff.addEffect(new EntityCloudFX(player.worldObj, message.posX + -MathHelper.sin((float) ang) * 2, message.posY - 1, message.posZ + MathHelper.cos((float) ang) * 2, -MathHelper.sin((float) ang) * 0.5, 0.01D, MathHelper.cos((float) ang) * 0.5));
-					//}
+					for (int a = 0; a < 360; a += 4) {
+						double ang = a * Math.PI / 180D;
+						for (int count = 0; count <= 4; ++count)
+							Erebus.PROXY.spawnCustomParticle("sparks", world, message.posX + -MathHelper.sin((float) ang)  * 1D * count * 0.5, message.posY, message.posZ + MathHelper.cos((float) ang) * 1 * count * 0.5, -MathHelper.sin((float) ang) * 0.5D, 0.01D, MathHelper.cos((float) ang) * 0.5D);
+						Erebus.PROXY.spawnCustomParticle("cloud", world, message.posX + -MathHelper.sin((float) ang) * 2D, message.posY, message.posZ + MathHelper.cos((float) ang) * 2D, -MathHelper.sin((float) ang) * 0.5D, 0.01D, MathHelper.cos((float) ang) * 0.5D);
+					}
 					break;
 				case GAS_VENT_SWAMP:
 					for (double yy = message.posY; yy < message.posY + 2D; yy += 0.5D) {

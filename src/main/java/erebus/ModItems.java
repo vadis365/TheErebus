@@ -47,6 +47,7 @@ import erebus.items.ItemSpiderTShirt;
 import erebus.items.ItemSprayCan;
 import erebus.items.ItemWandOfAnimation;
 import erebus.items.ItemWandOfPreservation;
+import erebus.items.ItemWarHammer;
 import erebus.items.ItemWaspSword;
 import erebus.items.ItemWhetstone;
 import erebus.items.ItemWoodlouseBall;
@@ -140,6 +141,7 @@ public class ModItems {
 	public static final Item ROLLED_NEWSPAPER = new ItemRolledNewspaper();
 	public static final ItemWaspSword WASP_SWORD = new ItemWaspSword();
 	public static final ItemScorpionPincer ENHANCED_SCORPION_PINCER = new ItemScorpionPincer();
+	public static final ItemWarHammer WAR_HAMMER = new ItemWarHammer();
 
 	// RANDOM STUFF
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();

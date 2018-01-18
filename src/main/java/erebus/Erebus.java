@@ -3,6 +3,7 @@ package erebus;
 import erebus.api.ErebusAPI;
 import erebus.client.fx.ParticleTextureStitchEvent;
 import erebus.client.gui.GuiAntiVenomBar;
+import erebus.client.gui.RenderWarHammerChargeBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
 import erebus.client.sound.ErebusMusicHandler;
@@ -83,6 +84,7 @@ public class Erebus {
 			
 			MinecraftForge.EVENT_BUS.register(new ParticleTextureStitchEvent());
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
+			MinecraftForge.EVENT_BUS.register(new RenderWarHammerChargeBar());
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
 			MinecraftForge.EVENT_BUS.register(new GuiAntiVenomBar());
 			MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);

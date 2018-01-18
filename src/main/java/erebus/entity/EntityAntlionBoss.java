@@ -287,7 +287,7 @@ public class EntityAntlionBoss extends EntityMob {
 			}
 			getEntityWorld().setBlockState(getPosition(), ModBlocks.ANTLION_EGG.getDefaultState());
 			Utils.dropStackNoRandom(getEntityWorld(), getPosition().up(), ItemMaterials.EnumErebusMaterialsType.SOUL_CRYSTAL.createStack());
-			Utils.dropStackNoRandom(getEntityWorld(), getPosition().up(), new ItemStack(ModItems.REIN_EXOSKELETON_SHIELD)); //WAR HAMMER HERE
+			Utils.dropStackNoRandom(getEntityWorld(), getPosition().up(), new ItemStack(ModItems.WAR_HAMMER));
 			setDead();
 		}
 	}
