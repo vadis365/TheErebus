@@ -81,6 +81,7 @@ import erebus.client.render.entity.RenderUmberGolem;
 import erebus.client.render.entity.RenderUmberGolemDungeonType;
 import erebus.client.render.entity.RenderVelvetWorm;
 import erebus.client.render.entity.RenderWasp;
+import erebus.client.render.entity.RenderWaspDaggerEntity;
 import erebus.client.render.entity.RenderWebSling;
 import erebus.client.render.entity.RenderWoodlouse;
 import erebus.client.render.entity.RenderWoodlouseBall;
@@ -93,7 +94,9 @@ import erebus.client.render.item.RenderScorpionPincer;
 import erebus.client.render.item.RenderWandOfAnimation;
 import erebus.client.render.item.RenderWandOfPreservation;
 import erebus.client.render.item.RenderWarHammer;
+import erebus.client.render.item.RenderWaspDaggerItem;
 import erebus.client.render.item.RenderWaspSword;
+import erebus.client.render.item.RenderWebSlinger;
 import erebus.client.render.tile.TileEntityBambooBridgeRenderer;
 import erebus.client.render.tile.TileEntityBoneBlockRenderer;
 import erebus.client.render.tile.TileEntityErebusAltarHealingRenderer;
@@ -175,6 +178,7 @@ import erebus.entity.EntityUmberGolem;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
+import erebus.entity.EntityWaspDagger;
 import erebus.entity.EntityWebSling;
 import erebus.entity.EntityWoodlouse;
 import erebus.entity.EntityWoodlouseBall;
@@ -356,14 +360,17 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityFungalWeevil.class, RenderFungalWeevil::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityMosquito.class, RenderMosquito::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityMucusBombPrimed.class, RenderMucusBombPrimed::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityWaspDagger.class, RenderWaspDaggerEntity::new);
 
 		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWaspSword(TileEntityItemStackRenderer.instance);
+		TileEntityItemStackRenderer.instance = new RenderWaspDaggerItem(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWandOfAnimation(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderPortalActivator(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWandOfPreservation(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderScorpionPincer(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWarHammer(TileEntityItemStackRenderer.instance);
+		TileEntityItemStackRenderer.instance = new RenderWebSlinger(TileEntityItemStackRenderer.instance);
 	}
 
 	@Override

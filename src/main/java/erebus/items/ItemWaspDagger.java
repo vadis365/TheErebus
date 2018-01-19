@@ -42,8 +42,14 @@ public class ItemWaspDagger extends ItemSword {
 		if (!player.capabilities.isCreativeMode)
 			stack.shrink(1);
 		world.playSound(null, player.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-		if (!world.isRemote)
-			world.spawnEntity(new EntityWaspDagger(world, player));
+		if (!world.isRemote) {
+			EntityWaspDagger dagger = new EntityWaspDagger(world, player);
+			double direction = Math.toRadians(player.rotationYaw);
+			dagger.shoot(player, player.rotationPitch, player.rotationYaw, 0F, 1F, 0F);
+			dagger.setPosition(player.posX + -Math.sin(direction) * 1.5D, player.posY + player.eyeHeight, player.posZ + Math.cos(direction) * 1.5D);
+			world.spawnEntity(dagger);
+		}
+		player.swingArm(hand);
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 

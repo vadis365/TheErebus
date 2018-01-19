@@ -27,7 +27,7 @@ public class RenderWebSling extends Render<EntityWebSling> {
 	public void renderWebSling(EntityWebSling entityWebSling, double x, double y, double z, float yaw, float tick) {
 		GlStateManager.pushMatrix();
 		GlStateManager.disableLighting();
-		GlStateManager.translate(x, y + 0.5D, z);
+		GlStateManager.translate(x - 0.5D, y, z - 0.5D);
 		GlStateManager.rotate(180F, 1F, 0F, 0F);
 		GlStateManager.rotate(-90F, 0F, 1F, 0F);
 		GlStateManager.rotate(-180F, 0F, 0F, 1F);

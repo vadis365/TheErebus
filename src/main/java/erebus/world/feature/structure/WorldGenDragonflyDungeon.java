@@ -69,8 +69,8 @@ public class WorldGenDragonflyDungeon extends WorldGenerator {
 			new LootItemStack(ModItems.WHETSTONE).setAmount(1).setDamage(0).setWeight(1),
 			new LootItemStack(ModBlocks.GLOW_GEM_ACTIVE).setAmount(1, 3).setWeight(5),
 			new LootItemStack(ModItems.SMOOTHIE).setAmount(1, 3).setDamage(SmoothieType.NOTHING_IN_THE_MIDDLE.ordinal()).setWeight(3),
-			new LootItemStack(ModItems.SMOOTHIE).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1)
-			//new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
+			new LootItemStack(ModItems.SMOOTHIE).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1),
+			new LootItemStack(ModItems.WASP_DAGGER).setAmount(1, 3).setWeight(2)
 
 			}).setPostProcessor(new IPostProcess() {
 				@SuppressWarnings("rawtypes")

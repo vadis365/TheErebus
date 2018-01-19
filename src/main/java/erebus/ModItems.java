@@ -48,7 +48,10 @@ import erebus.items.ItemSprayCan;
 import erebus.items.ItemWandOfAnimation;
 import erebus.items.ItemWandOfPreservation;
 import erebus.items.ItemWarHammer;
+import erebus.items.ItemWaspDagger;
 import erebus.items.ItemWaspSword;
+import erebus.items.ItemWebSlinger;
+import erebus.items.ItemWebSlingerWither;
 import erebus.items.ItemWhetstone;
 import erebus.items.ItemWoodlouseBall;
 import erebus.items.ShieldTypeBasic;
@@ -140,8 +143,11 @@ public class ModItems {
 	// MISC WEAPONS
 	public static final Item ROLLED_NEWSPAPER = new ItemRolledNewspaper();
 	public static final ItemWaspSword WASP_SWORD = new ItemWaspSword();
+	public static final ItemWaspDagger WASP_DAGGER = new ItemWaspDagger();
 	public static final ItemScorpionPincer ENHANCED_SCORPION_PINCER = new ItemScorpionPincer();
 	public static final ItemWarHammer WAR_HAMMER = new ItemWarHammer();
+	public static final ItemWebSlinger WEB_SLINGER = new ItemWebSlinger();
+	public static final ItemWebSlinger WEB_SLINGER_WITHER = new ItemWebSlingerWither();
 
 	// RANDOM STUFF
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();

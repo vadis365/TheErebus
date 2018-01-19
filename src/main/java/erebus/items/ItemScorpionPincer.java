@@ -55,7 +55,7 @@ public class ItemScorpionPincer extends ItemSword {
 	 public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
 		ItemStack ammoStack = findAmmo(player);
-		if (player.capabilities.isCreativeMode || !findAmmo(player).isEmpty()) {
+		if (player.capabilities.isCreativeMode || !ammoStack.isEmpty()) {
 			world.playSound(null, player.getPosition(), SoundEvents.ENTITY_GHAST_SHOOT, SoundCategory.PLAYERS,  0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.isRemote) {
 				Vec3d look = player.getLookVec();
@@ -69,7 +69,7 @@ public class ItemScorpionPincer extends ItemSword {
 				world.spawnEntity(fireball);
 			}
 		}
-			if (!player.capabilities.isCreativeMode && findAmmo(player) != null) {
+			if (!player.capabilities.isCreativeMode && !ammoStack.isEmpty()) {
 				ammoStack.shrink(1);
 	            if (ammoStack.getCount() <= 0)
 	                player.inventory.deleteStack(ammoStack);
@@ -85,7 +85,7 @@ public class ItemScorpionPincer extends ItemSword {
 			if (isAmmo(itemstack))
 				return itemstack;
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	protected boolean isAmmo(@Nullable ItemStack stack) {

@@ -7,11 +7,8 @@ import erebus.core.handler.configs.ConfigHandler;
 import gnu.trove.map.TObjectByteMap;
 import gnu.trove.map.hash.TObjectByteHashMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.item.EntityMinecartContainer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -96,37 +93,19 @@ public final class TeleporterHandler {
 
 				player.mcServer.getPlayerList().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				player.timeUntilPortal = 0;
-				/*
-				 * player.lastExperience = -1; player.lastHealth = -1.0F; player.lastFoodLevel = -1;
-				 */
-			} else if (!(entity instanceof EntityMinecartContainer)) { // TODO we cannot handle this, would result in container breaking in both worlds and duplicate items;
-				// find some sneaky solution around this issue fixme copy paste
-				world.profiler.startSection("changeDimension");
 
-				MinecraftServer mcServer = world.getMinecraftServer();
-				WorldServer worldCurrent = mcServer.getWorld(entity.dimension);
-				WorldServer worldTarget = mcServer.getWorld(dimensionId);
+				 // player.lastExperience = -1; player.lastHealth = -1.0F; player.lastFoodLevel = -1;
+
+			} else  { // TODO
+				MinecraftServer server = world.getMinecraftServer();
+				WorldServer toWorld = server.getWorld(dimensionId);
+				entity.setDropItemsWhenDead(false);
+				world.removeEntityDangerously(entity);
 				entity.dimension = dimensionId;
-
-				world.removeEntity(entity);
 				entity.isDead = false;
-				world.profiler.startSection("reposition");
-				mcServer.getPlayerList().transferEntityToWorld(entity, dimensionId, worldCurrent, worldTarget, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
-				world.profiler.endStartSection("reloading");
-				Entity newEntity = EntityList.createEntityByIDFromName(new ResourceLocation(EntityList.getEntityString(entity)), world);
-
-				if (newEntity != null) {
-					//newEntity.copyDataFromOld(entity);
-					worldTarget.spawnEntity(newEntity);
-				}
-
-				entity.isDead = true;
-				world.profiler.endSection();
-				worldCurrent.resetUpdateEntityTick();
-				worldTarget.resetUpdateEntityTick();
-				world.profiler.endSection();
-
-				newEntity.timeUntilPortal = entity.getPortalCooldown();
+				WorldServer oldWorld = server.getWorld(entity.dimension);
+				server.getPlayerList().transferEntityToWorld(entity, dimensionId, oldWorld, toWorld, new TeleporterErebus(toWorld));
+				toWorld.updateEntity(entity);
 			}
 	}
 }

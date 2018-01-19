@@ -45,13 +45,13 @@ public class ModelWaspDagger extends ModelBase {
 		setRotation(Jewel, 0F, 0F, 0.7853982F);
 	}
 
-	public void render(float unitPixel) {
-		Point.render(unitPixel);
-		Blade.render(unitPixel);
-		Tang.render(unitPixel);
-		Hilt.render(unitPixel);
-		Pommel.render(unitPixel);
-		Jewel.render(unitPixel);
+	public void render() {
+		Point.render(0.0625F);
+		Blade.render(0.0625F);
+		Tang.render(0.0625F);
+		Hilt.render(0.0625F);
+		Pommel.render(0.0625F);
+		Jewel.render(0.0625F);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

@@ -65,7 +65,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9),
 			new LootItemStack(Items.ENCHANTED_BOOK).setWeight(8),
 			new LootItemStack(ModBlocks.UMBER_GOLEM_STATUE).setAmount(1).setWeight(1),
-			//new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
+			new LootItemStack(ModItems.WEB_SLINGER).setAmount(1).setWeight(1),
 			new LootItemStack(Items.GOLDEN_PICKAXE).setWeight(3),
 			new LootItemStack(Items.IRON_PICKAXE).setWeight(2), new LootItemStack(ModItems.JADE_PICKAXE).setWeight(1),
 			new LootItemStack(Items.STONE_PICKAXE).setWeight(1), new LootItemStack(Items.GOLDEN_SHOVEL).setWeight(3),

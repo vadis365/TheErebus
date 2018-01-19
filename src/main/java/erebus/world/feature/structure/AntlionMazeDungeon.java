@@ -83,7 +83,7 @@ public class AntlionMazeDungeon {
 			new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9),
 			new LootItemStack(Items.ENCHANTED_BOOK).setWeight(8),
 			new LootItemStack(ModBlocks.UMBER_GOLEM_STATUE).setAmount(1).setWeight(1),
-			//new LootItemStack(ModItems.webSlinger).setAmount(1).setWeight(1),
+			new LootItemStack(ModItems.WEB_SLINGER).setAmount(1).setWeight(1),
 			new LootItemStack(Items.GOLDEN_PICKAXE).setWeight(3), new LootItemStack(Items.IRON_PICKAXE).setWeight(2),
 			new LootItemStack(ModItems.JADE_PICKAXE).setWeight(1), new LootItemStack(Items.GOLDEN_SHOVEL).setWeight(3),
 			new LootItemStack(Items.IRON_SHOVEL).setWeight(2), new LootItemStack(ModItems.JADE_SHOVEL).setWeight(1),
@@ -110,8 +110,8 @@ public class AntlionMazeDungeon {
 			new LootItemStack(ModItems.HOMING_BEECON).setAmount(1).setWeight(1),
 			new LootItemStack(ModBlocks.GLOW_GEM_ACTIVE).setAmount(1, 3).setWeight(5),
 			new LootItemStack(ModItems.SMOOTHIE).setAmount(1, 3).setDamage(SmoothieType.GIVIN_ME_THE_BLUES.ordinal()).setWeight(3),
-			new LootItemStack(ModItems.SMOOTHIE).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1)
-			//new LootItemStack(ModItems.waspDagger).setAmount(1, 3).setWeight(2),
+			new LootItemStack(ModItems.SMOOTHIE).setAmount(1).setDamage(SmoothieType.BRYUFS_BREW.ordinal()).setWeight(1),
+			new LootItemStack(ModItems.WASP_DAGGER).setAmount(1, 3).setWeight(2)
 
 			}).setPostProcessor(new IPostProcess() {
 				@SuppressWarnings("rawtypes")

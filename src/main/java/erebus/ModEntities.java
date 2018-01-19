@@ -70,6 +70,7 @@ import erebus.entity.EntityUmberGolem;
 import erebus.entity.EntityUmberGolemDungeonTypes;
 import erebus.entity.EntityVelvetWorm;
 import erebus.entity.EntityWasp;
+import erebus.entity.EntityWaspDagger;
 import erebus.entity.EntityWebSling;
 import erebus.entity.EntityWoodlouse;
 import erebus.entity.EntityWoodlouseBall;
@@ -94,8 +95,6 @@ public class ModEntities {
 		registerEntity(26, EntityBloodSnail.class, "blood_snail", 0x634430, 0xFF0000);
 
 		registerEntity(46, EntityLeech.class, "leech", 0x804E3D, 0x3D6F80);
-
-		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
 
 		registerEntity(83, EntityArmchairMount.class, "armchair_mount");
 */
@@ -164,6 +163,7 @@ public class ModEntities {
 		registerEntity(61, EntityBedBug.class, "bed_bug");
 		registerEntity(62, EntityStagBeetle.class, "stag_beetle", 0x222222, 0x747474);
 
+		registerEntity(70, EntityWaspDagger.class, "wasp_dagger");
 		registerEntity(71, EntityWebSling.class, "web_sling");
 
 		registerEntity(74, EntityGooBall.class, "goo_ball");

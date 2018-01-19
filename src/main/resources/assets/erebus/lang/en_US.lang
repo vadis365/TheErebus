@@ -152,6 +152,8 @@ item.erebus.glider_chestplate_powered.name=Powered Glider Chestplate
 item.erebus.glider_chestplate.name=Glider Chestplate
 item.erebus.enhanced_scorpion_pincer.name=Augmented Scorpion Pincer
 item.erebus.war_hammer.name=Quake Hammer
+item.erebus.web_slinger.name=Web Slinger
+item.erebus.web_slinger_wither.name=Wither Web Slinger
 
 # Shields
 item.erebus.bamboo_shield.name=Bamboo Shield
@@ -169,6 +171,7 @@ item.erebus.nectar_collector.name=Nectar Collector
 item.erebus.ant_taming_amulet.name=Ant Taming Amulet
 item.erebus.bee_taming_amulet.name=Bee Taming Amulet
 item.erebus.wasp_sword.name=Wasp Sword
+item.erebus.wasp_dagger.name=Wasp Dagger
 item.erebus.anti_venom_bottle.name=Bottle of Anti-Venom
 item.erebus.death_compass.name=Death Compass
 item.erebus.rolled_newspaper.name=Rolled up Newspaper
