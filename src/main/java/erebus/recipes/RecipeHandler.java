@@ -57,9 +57,9 @@ public class RecipeHandler {
 		public static final IRecipe UMBERSTONE_PILLAR = new ShapedOreRecipe(getResource("recipe_umberstone_piller"), new ItemStack(ModBlocks.UMBERSTONE_PILLAR, 2), "#", "#", '#', "stoneUmber");
 
 		// Petrified Wood stuffs
-		public static final IRecipe PLANKS_PETRIFIED_WOOD = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.PLANKS_PETRIFIED_WOOD), "xx", "xx", 'x', EnumErebusMaterialsType.PETRIFIED_WOOD.createStack());
-		public static final IRecipe PETRIFIED_CRAFTING_TABLE = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.PETRIFIED_CRAFTING_TABLE), "xx", "xx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD);
-		public static final IRecipe PETRIFIED_WOOD_CHEST = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.PETRIFIED_WOOD_CHEST), "xxx", "xyx", "xxx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD, 'y', "ingotGold");
+		public static final IRecipe PLANKS_PETRIFIED_WOOD = new ShapedOreRecipe(getResource("recipe_planks_petrified_wood"), new ItemStack(ModBlocks.PLANKS_PETRIFIED_WOOD), "xx", "xx", 'x', EnumErebusMaterialsType.PETRIFIED_WOOD.createStack());
+		public static final IRecipe PETRIFIED_CRAFTING_TABLE = new ShapedOreRecipe(getResource("recipe_petrified_crafting_table"), new ItemStack(ModBlocks.PETRIFIED_CRAFTING_TABLE), "xx", "xx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD);
+		public static final IRecipe PETRIFIED_WOOD_CHEST = new ShapedOreRecipe(getResource("recipe_petrified_wood_chest"), new ItemStack(ModBlocks.PETRIFIED_WOOD_CHEST), "xxx", "xyx", "xxx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD, 'y', "ingotGold");
 /*
 			// Stairs, slabs, walls
 			for (int i = 0; i < ModBlocks.umbercobbleStairs.length; i++)
