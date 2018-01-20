@@ -4,6 +4,7 @@ import erebus.ModItems;
 import erebus.ModMaterials;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -12,7 +13,7 @@ public class RecipePaxel extends ShapedOreRecipe {
 	private static final int wildcard = OreDictionary.WILDCARD_VALUE;
 
 	public RecipePaxel() {
-		super(ModItems.jadePaxel, "xyz", " w ", " w ", 'x', new ItemStack(ModItems.jadeAxe, 1, wildcard), 'y', new ItemStack(ModItems.jadeShovel, 1, wildcard), 'z', new ItemStack(ModItems.jadePickaxe, 1, wildcard), 'w', "stickWood");
+		super(new ResourceLocation ("recipe_jade_paxel"), new ItemStack(ModItems.JADE_PAXEL), "xyz", " w ", " w ", 'x', new ItemStack(ModItems.JADE_AXE, 1, wildcard), 'y', new ItemStack(ModItems.JADE_SHOVEL, 1, wildcard), 'z', new ItemStack(ModItems.JADE_PICKAXE, 1, wildcard), 'w', "stickWood");
 	}
 
 	@Override
@@ -25,6 +26,6 @@ public class RecipePaxel extends ShapedOreRecipe {
 			currentDurability += is.getMaxDamage() - is.getItemDamage();
 		}
 
-		return new ItemStack(ModItems.jadePaxel, 1, ModMaterials.toolJADEPAXEL.getMaxUses() - (int) Math.floor((float) currentDurability * ModMaterials.toolJADEPAXEL.getMaxUses() / totalDurability));
+		return new ItemStack(ModItems.JADE_PAXEL, 1, ModMaterials.TOOL_JADE_PAXEL.getMaxUses() - (int) Math.floor((float) currentDurability * ModMaterials.TOOL_JADE_PAXEL.getMaxUses() / totalDurability));
 	}
 }

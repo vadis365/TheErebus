@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.google.common.collect.ImmutableList;
+
 import erebus.Erebus;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModSounds;
 import erebus.ModTabs;
+import erebus.core.helper.NBTHelper;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
@@ -112,6 +115,15 @@ public class ItemWarHammer extends ItemSword {
 		}
 		return null;
 	}
+
+	private static final ImmutableList<String> STACK_NBT_EXCLUSIONS = ImmutableList.of("charge");
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		boolean wasCharging = oldStack.getTagCompound() != null && oldStack.getTagCompound().getInteger("charge") <= 25;
+		boolean isCharging = newStack.getTagCompound() != null && newStack.getTagCompound().getInteger("charge") <= 25;
+		return (super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged) && !isCharging || isCharging != wasCharging) || !NBTHelper.areItemStackTagsEqual(oldStack, newStack, STACK_NBT_EXCLUSIONS);
+}
 
 	private boolean hasTag(ItemStack stack) {
 		if (!stack.hasTagCompound()) {

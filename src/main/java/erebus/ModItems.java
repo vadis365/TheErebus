@@ -39,6 +39,7 @@ import erebus.items.ItemLeggingsSprint;
 import erebus.items.ItemMaterials;
 import erebus.items.ItemNectarCollector;
 import erebus.items.ItemPickaxeJade;
+import erebus.items.ItemPlanticide;
 import erebus.items.ItemPortalActivator;
 import erebus.items.ItemRolledNewspaper;
 import erebus.items.ItemScorpionPincer;
@@ -165,6 +166,7 @@ public class ModItems {
 	public static final Item HOMING_BEECON_ADVANCED = new ItemHomingBeeconAdvanced();
 	public static final Item WAND_OF_PRESERVATION = new ItemWandOfPreservation();
 	public static final Item COMPOST = new ItemCompost();
+	public static final Item PLANTICIDE = new ItemPlanticide();
 
 	public static void init() {
 		try {

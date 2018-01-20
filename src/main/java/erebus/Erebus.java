@@ -31,6 +31,7 @@ import erebus.preserved.PreservableEntityRegistry;
 import erebus.proxy.CommonProxy;
 import erebus.recipes.ComposterRegistry;
 import erebus.recipes.ErebusRecipesHandler;
+import erebus.recipes.RecipeHandler;
 import erebus.world.SpawnerErebus;
 import erebus.world.WorldProviderErebus;
 import erebus.world.teleporter.TeleporterHandler;
@@ -75,6 +76,7 @@ public class Erebus {
 		ModBlocks.init();
 		ModBiomes.init();
 		ModSounds.init();
+		RecipeHandler.init();
 		ModEntities.init();
 		ComposterRegistry.init();
 		
@@ -133,6 +135,7 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
 		}
 		PROXY.registerItemAndBlockColourRenderers();
+		RecipeHandler.registerSmelting();
 		ErebusRecipesHandler.init();
 	}
 

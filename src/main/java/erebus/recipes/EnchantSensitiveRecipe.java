@@ -6,6 +6,7 @@ import java.util.Iterator;
 import erebus.core.helper.Utils;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -14,8 +15,8 @@ public class EnchantSensitiveRecipe extends ShapedOreRecipe {
 
 	private int width, height;
 
-	public EnchantSensitiveRecipe(ItemStack output, Object... inputs) {
-		super(output, inputs);
+	public EnchantSensitiveRecipe(ResourceLocation group, ItemStack output, Object... inputs) {
+		super(group, output, inputs);
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class EnchantSensitiveRecipe extends ShapedOreRecipe {
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean checkMatch(InventoryCrafting inv, int startX, int startY, boolean mirror) {
+	protected boolean checkMatch(InventoryCrafting inv, int startX, int startY, boolean mirror) {
 		for (int x = 0; x < 3; x++)
 			for (int y = 0; y < 3; y++) {
 				int subX = x - startX;
@@ -40,9 +41,10 @@ public class EnchantSensitiveRecipe extends ShapedOreRecipe {
 
 				if (subX >= 0 && subY >= 0 && subX < width && subY < height)
 					if (mirror)
-						target = getInput()[width - subX - 1 + subY * width];
+						target = input.get(width - subX - 1 + subY * width);
+
 					else
-						target = getInput()[subX + subY * width];
+						target = input.get(subX + subY * width);
 
 				ItemStack slot = inv.getStackInRowAndColumn(x, y);
 
@@ -71,8 +73,8 @@ public class EnchantSensitiveRecipe extends ShapedOreRecipe {
 		return stack1.hasTagCompound() == stack2.hasTagCompound();
 	}
 
-	public static EnchantSensitiveRecipe makeRecipe(ItemStack output, Object... inputs) {
-		EnchantSensitiveRecipe recipe = new EnchantSensitiveRecipe(output, inputs);
+	public static EnchantSensitiveRecipe makeRecipe(ResourceLocation group, ItemStack output, Object... inputs) {
+		EnchantSensitiveRecipe recipe = new EnchantSensitiveRecipe(group, output, inputs);
 		recipe.width = 0;
 		recipe.height = 0;
 

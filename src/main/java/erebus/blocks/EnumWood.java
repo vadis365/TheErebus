@@ -72,6 +72,10 @@ public enum EnumWood implements IStringSerializable {
 	public boolean hasLeaves() {
 		return hasLeaves;
 	}
+	
+	public boolean hasDoor() {
+		return hasDoor;
+	}
 
 	public Block getStairs() {
 		return stairs;
@@ -158,33 +162,6 @@ public enum EnumWood implements IStringSerializable {
 				ModBlocks.registerBlock("fence_gate_" + wood.getName(), fenceGate);
 				wood.gate = fenceGate;
 			}
-		}
-	}
-
-	public static void initRecipes() {
-		for (EnumWood wood : values()) {
-			if (wood.hasLog) {
-				Block log = wood.log;
-				OreDictionary.registerOre("logWood", log);
-				GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.PLANKS, 4, wood.ordinal()), new ItemStack(log));
-				GameRegistry.addSmelting(new ItemStack(log), new ItemStack(Items.COAL, 1, 1), 0.15F);
-			}
-			if (wood.hasSapling)
-				OreDictionary.registerOre("treeSapling", wood.sapling);
-			if (wood.hasPlanks) {
-				Block stairs = wood.stairs;
-				OreDictionary.registerOre("stairWood", stairs);
-				GameRegistry.addRecipe(new ItemStack(stairs, 4), new Object[] { "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.PLANKS, 1, wood.ordinal()) });
-
-				/*Block slab = wood.slab;
-				OreDictionary.registerOre("slabWood", slab);
-				GameRegistry.addRecipe(new ItemStack(slab, 6), new Object[] { "xxx", 'x', new ItemStack(ModBlocks.planks, 1, wood.ordinal()) });*/
-
-				if (wood.hasDoor)
-					GameRegistry.addRecipe(new ItemStack(wood.door, 3), new Object[] { "xx", "xx", "xx", 'x', new ItemStack(ModBlocks.PLANKS, 1, wood.ordinal()) });
-			}
-			if (wood.hasLeaves)
-				OreDictionary.registerOre("treeLeaves", wood.getLeaves());
 		}
 	}
 }

@@ -1,59 +1,38 @@
 package erebus.recipes;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import com.google.common.collect.Lists;
 
 import erebus.ModItems;
-import erebus.core.helper.Utils;
-import erebus.lib.EnumColour;
-import net.minecraft.block.BlockColored;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.RecipesArmorDyes;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.DyeUtils;
 
 public class RecipeGliderDye extends RecipesArmorDyes {
 
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
-		ItemStack stack = null;
-		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-
+		ItemStack stack = ItemStack.EMPTY;
+		List<ItemStack> list = Lists.<ItemStack>newArrayList();
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			ItemStack stack2 = inventory.getStackInSlot(i);
 
-			if (stack2 != null)
-				if (stack2.getItem() == ModItems.armorGliderPowered) {
-					if (stack != null)
+			if (!stack2.isEmpty())
+				if (stack2.getItem() == ModItems.GLIDER_CHESTPLATE_POWERED) {
+					if (!stack.isEmpty())
 						return false;
 					stack = stack2;
 				} else {
-					if (!isDye(stack2))
+					if (!DyeUtils.isDye(stack2))
 						return false;
 					list.add(stack2);
 				}
 		}
-
 		return stack != null && !list.isEmpty();
-	}
-
-	private boolean isDye(ItemStack stack) {
-		for (String ore : Utils.getOreNames(stack))
-			for (EnumColour colour : EnumColour.values())
-				if (ore.equals(colour.getOreName()))
-					return true;
-
-		return false;
-	}
-
-	private int getDyeIndex(ItemStack stack) {
-		for (String ore : Utils.getOreNames(stack))
-			for (EnumColour colour : EnumColour.values())
-				if (ore.equals(colour.getOreName()))
-					return colour.ordinal();
-
-		return -1;
 	}
 
 	// Messy and stolen from vanilla
@@ -73,12 +52,10 @@ public class RecipeGliderDye extends RecipesArmorDyes {
 		for (k = 0; k < inventory.getSizeInventory(); k++) {
 			ItemStack craftStack = inventory.getStackInSlot(k);
 
-			if (craftStack != null)
-				if (craftStack.getItem() == ModItems.armorGliderPowered) {
+			if (!craftStack.isEmpty())
+				if (craftStack.getItem() == ModItems.GLIDER_CHESTPLATE_POWERED) {
 					armour = (ItemArmor) craftStack.getItem();
-
 					result = craftStack.copy();
-
 					if (armour.hasColor(craftStack)) {
 						colour = armour.getColor(result);
 						f = (colour >> 16 & 255) / 255.0F;
@@ -90,7 +67,7 @@ public class RecipeGliderDye extends RecipesArmorDyes {
 						rgb[2] = (int) (rgb[2] + f2 * 255.0F);
 						j++;
 					}
-				} else if (craftStack.getItem() == ModItems.armorGliderPowered) {
+				} else if (craftStack.getItem() == ModItems.GLIDER_CHESTPLATE_POWERED) {
 
 					result = craftStack.copy();
 					if (armour.hasColor(craftStack)) {
@@ -105,10 +82,9 @@ public class RecipeGliderDye extends RecipesArmorDyes {
 						j++;
 					}
 				} else {
-					if (!isDye(craftStack))
-						return null;
-
-					float[] afloat = EntitySheep.fleeceColorTable[BlockColored.func_150031_c(getDyeIndex(craftStack))];
+					if (!DyeUtils.isDye(craftStack))
+						return ItemStack.EMPTY;
+					float[] afloat = DyeUtils.colorFromStack(craftStack).get().getColorComponentValues();
 					int j1 = (int) (afloat[0] * 255.0F);
 					int k1 = (int) (afloat[1] * 255.0F);
 					i1 = (int) (afloat[2] * 255.0F);
@@ -119,9 +95,8 @@ public class RecipeGliderDye extends RecipesArmorDyes {
 					j++;
 				}
 		}
-
 		if (armour == null)
-			return null;
+			return ItemStack.EMPTY;
 		else {
 			k = rgb[0] / j;
 			int l1 = rgb[1] / j;
@@ -133,7 +108,7 @@ public class RecipeGliderDye extends RecipesArmorDyes {
 			colour = (int) (colour * f / f1);
 			i1 = (k << 8) + l1;
 			i1 = (i1 << 8) + colour;
-			armour.func_82813_b(result, i1);
+			armour.setColor(result, i1);
 			return result;
 		}
 	}
