@@ -11,7 +11,6 @@ import erebus.ModItems;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockDoubleHeightPlant.EnumPlantType;
 import erebus.blocks.BlockGiantFlower.EnumType;
-import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockSmallPlant.EnumSmallPlantType;
 import erebus.blocks.EnumWood;
 import erebus.items.ItemDungeonIdols;
@@ -148,7 +147,7 @@ public class RecipeHandler {
 		public static final IRecipe REDSTONE = new ShapelessOreRecipe(getResource("recipe_redstone"), new ItemStack(Items.REDSTONE, 2, 0), EnumErebusMaterialsType.RED_GEM.createStack());
 		public static final IRecipe RED_GEM = new ShapedOreRecipe(getResource("recipe_red_gem_block"), new ItemStack(ModBlocks.RED_GEM, 1, 0), "##", "##", '#', EnumErebusMaterialsType.RED_GEM.createStack());
 		public static final IRecipe RED_GEM_LAMP = new ShapedOreRecipe(getResource("recipe_red_gem_lamp"), new ItemStack(ModBlocks.RED_GEM, 1, 1), " S ", "S#S", " S ", '#', new ItemStack(ModBlocks.RED_GEM, 1, 0), 'S', "stickWood");
-		public static final IRecipe GLOW_GEM_INACTIVE = new ShapedOreRecipe(getResource("recipe_glow_gem"), new ItemStack(ModBlocks.GLOW_GEM_INACTIVE, 3, 0), "BBB", "BGB", "BBB", 'B', EnumErebusMaterialsType.BIO_LUMINESCENCE.createStack(), 'G', EnumErebusMaterialsType.RED_GEM.createStack());
+		public static final IRecipe GLOW_GEM_ACTIVE = new ShapedOreRecipe(getResource("recipe_glow_gem"), new ItemStack(ModBlocks.GLOW_GEM_ACTIVE, 3, 0), "BBB", "BGB", "BBB", 'B', EnumErebusMaterialsType.BIO_LUMINESCENCE.createStack(), 'G', EnumErebusMaterialsType.RED_GEM.createStack());
 
 		// Bamboo
 		public static final IRecipe BAMBUCKET = new ShapedOreRecipe(getResource("recipe_bambucket"), new ItemStack(ModItems.BAMBUCKET, 1, 0), " S ", "B B", " B ", 'S', Items.STRING, 'B', EnumErebusMaterialsType.BAMBOO.createStack());
@@ -168,7 +167,7 @@ public class RecipeHandler {
 		public static final IRecipe MIR_BRICK_1 = new ShapedOreRecipe(getResource("recipe_mirbrick_1"), new ItemStack(ModBlocks.MIR_BRICK), "xy", "yx", 'x', Items.CLAY_BALL, 'y', EnumErebusMaterialsType.MUD_BRICK.createStack());
 		public static final IRecipe MIR_BRICK_2 = new ShapedOreRecipe(getResource("recipe_mirbrick_2"), new ItemStack(ModBlocks.MIR_BRICK), "xy", "yx", 'y', Items.CLAY_BALL, 'x', EnumErebusMaterialsType.MUD_BRICK.createStack());
 		public static final IRecipe MIR_BRICK_3 = new ShapedOreRecipe(getResource("recipe_mirbrick_3"), new ItemStack(ModBlocks.MIR_BRICK, 4), "xy", "yx", 'x', Blocks.CLAY, 'y', ModBlocks.MUD_BRICK);
-		public static final IRecipe MIR_BRICK_4 = new ShapedOreRecipe(getResource("recipe_mirbrick_4"), new ItemStack(ModBlocks.MIR_BRICK, 4), "xy", "yx", 'y', Blocks.CLAY, 'x', ModBlocks.MIR_BRICK);
+		public static final IRecipe MIR_BRICK_4 = new ShapedOreRecipe(getResource("recipe_mirbrick_4"), new ItemStack(ModBlocks.MIR_BRICK, 4), "xy", "yx", 'y', Blocks.CLAY, 'x', ModBlocks.MUD_BRICK);
 		public static final IRecipe SILK = new ShapedOreRecipe(getResource("recipe_silk"), new ItemStack(ModBlocks.SILK, 1), "sss", "sss", "sss", 's', Items.STRING);
 		//public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.AMBER_BRICKS, 4, 0), "ss", "ss", 's', new ItemStack(ModBlocks.AMBER, 1, 0));
 		public static final IRecipe STRING = new ShapelessOreRecipe(getResource("recipe_string"),  new ItemStack(Items.STRING, 9), new ItemStack(ModBlocks.SILK));
@@ -192,7 +191,7 @@ public class RecipeHandler {
 		public static final IRecipe MUCUS_CHARGE = new ShapedOreRecipe(getResource("recipe_mucus_charge"), EnumErebusMaterialsType.MUCUS_CHARGE.createStack(), "SSS", "SRS", "SSS", 'S', "slimeball", 'R', EnumErebusMaterialsType.REPELLENT.createStack());
 		public static final IRecipe MUCUS_BOMB = new ShapedOreRecipe(getResource("recipe_mucus_bomb"), new ItemStack(ModBlocks.MUCUS_BOMB, 1), "MMM", "MTM", "MMM", 'M', EnumErebusMaterialsType.MUCUS_CHARGE.createStack(), 'T', Blocks.TNT);
 		public static final IRecipe HONEY_COMB = new ShapedOreRecipe(getResource("recipe_hony_comb"), new ItemStack(ModBlocks.HONEY_COMB, 1), "NPN", "PCP", "NPN", 'P', EnumErebusMaterialsType.PAPYRUS.createStack(), 'C', "chestWood", 'N', EnumErebusMaterialsType.NECTAR.createStack());
-		public static final IRecipe BLAZE_POWDER = new ShapedOreRecipe(getResource("recipe_blaze_powder"), new ItemStack(Items.BLAZE_POWDER, 1), "FFF", "FFF", "FFF", 'F', new ItemStack(ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, EnumSmallPlantType.FIRE_BLOOM).getBlock()));
+		public static final IRecipe BLAZE_POWDER = new ShapedOreRecipe(getResource("recipe_blaze_powder"), new ItemStack(Items.BLAZE_POWDER, 1), "FFF", "FFF", "FFF", 'F', new ItemStack(ModBlocks.SMALL_PLANT, 1, EnumSmallPlantType.FIRE_BLOOM.ordinal()));
 		public static final IRecipe MOSS_BALL = new ShapedOreRecipe(getResource("recipe_moss_ball"), EnumErebusMaterialsType.MOSS_BALL.createStack(), "mmm", "mmm", "mmm", 'm', new ItemStack(ModBlocks.WALL_PLANTS, 1, 0));
 		public static final IRecipe GLOWSHROOM_1 = new ShapelessOreRecipe(getResource("recipe_glowshroom_1"), new ItemStack(ModBlocks.GLOWSHROOM), EnumErebusMaterialsType.GLOWSHROOM.createStack(), Blocks.TORCH);
 		public static final IRecipe GLOWSHROOM_2 = new ShapelessOreRecipe(getResource("recipe_glowshroom_2"), new ItemStack(ModBlocks.GLOWSHROOM), EnumErebusMaterialsType.GLOWSHROOM.createStack(), EnumErebusMaterialsType.BIO_LUMINESCENCE.createStack());
@@ -218,7 +217,7 @@ public class RecipeHandler {
 		public static final IRecipe TITAN_STEW_1 = new ShapelessOreRecipe(getResource("recipe_titan_stew_1"), EnumErebusMaterialsType.TITAN_STEW.createStack(), EnumErebusMaterialsType.STEW_POT.createStack(), new ItemStack(ModItems.EREBUS_FOOD, 1, ItemErebusFood.EnumFoodType.TITAN_CHOP_RAW.ordinal()), Items.POTATO, Items.CARROT, new ItemStack(ModItems.EREBUS_FOOD, 1, ItemErebusFood.EnumFoodType.CABBAGE.ordinal()), "foodMushroom", "foodMushroom");
 		public static final IRecipe TITAN_STEW_2 = new ShapelessOreRecipe(getResource("recipe_titan_stew_2"), EnumErebusMaterialsType.TITAN_STEW.createStack(), EnumErebusMaterialsType.STEW_POT.createStack(), Items.BEEF, Items.BEEF, Items.POTATO, Items.CARROT, new ItemStack(ModItems.EREBUS_FOOD, 1, ItemErebusFood.EnumFoodType.CABBAGE.ordinal()), "foodMushroom", "foodMushroom");
 		public static final IRecipe CULTIVATED_MOSS = new ShapedOreRecipe(getResource("recipe_cultivated_moss"), new ItemStack(ModBlocks.WALL_PLANTS_CULTIVATED, 1, 0), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.DYE, 1, 2), 'v', EnumErebusMaterialsType.SUPERNATURAL_VELOCITY.createStack(), 'p', new ItemStack(ModBlocks.WALL_PLANTS, 1, 0));
-		public static final IRecipe CULTIVATED_MOULD = new ShapedOreRecipe(getResource("recipe_cultivated_mould"), new ItemStack(ModBlocks.WALL_PLANTS_CULTIVATED, 1, 1), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.DYE, 1, 4), 'v', EnumErebusMaterialsType.SUPERNATURAL_VELOCITY.createStack(), 'p', new ItemStack(ModBlocks.WALL_PLANTS, 1, 1));
+		public static final IRecipe CULTIVATED_MOULD = new ShapedOreRecipe(getResource("recipe_cultivated_mould"), new ItemStack(ModBlocks.WALL_PLANTS_CULTIVATED, 1, 6), "dvd", "vpv", "dvd", 'd', new ItemStack(Items.DYE, 1, 4), 'v', EnumErebusMaterialsType.SUPERNATURAL_VELOCITY.createStack(), 'p', new ItemStack(ModBlocks.WALL_PLANTS, 1, 6));
 		public static final IRecipe LEATHER = new ShapedOreRecipe(getResource("recipe_leather"), new ItemStack(Items.LEATHER, 8), "xx", "xx", 'x', EnumErebusMaterialsType.HIDE_SHROOM.createStack());
 		public static final IRecipe DYE_GREEN = new ShapedOreRecipe(getResource("recipe_green_dye"), new ItemStack(Items.DYE, 1, 2), "xx", "xx", 'x', new ItemStack(ModBlocks.GIANT_FLOWER, 1, EnumType.STEM.ordinal()));
 		public static final IRecipe AMBER_STAR = new ShapedOreRecipe(getResource("recipe_amber_star"), EnumErebusMaterialsType.AMBER_STAR.createStack(), " x ", "xyx", " x ", 'x', EnumErebusMaterialsType.RESIN.createStack(), 'y', new ItemStack(ModBlocks.AMBER_GLASS, 1, 0));
@@ -230,7 +229,7 @@ public class RecipeHandler {
 		public static final IRecipe SMOOTHIE_GLASS = new ShapelessOreRecipe(getResource("recipe_smoothie_glass"), EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), Items.GLASS_BOTTLE, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE);
 		public static final IRecipe SMOOTHIE_MAKER = new ShapedOreRecipe(getResource("recipe_smoothie_maker"), new ItemStack(ModBlocks.SMOOTHIE_MAKER), "xrx", "xxx", "sss", 'x', EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), 'r', new ItemStack(ModBlocks.RED_GEM), 's', new ItemStack(ModBlocks.UMBERSTONE));
 
-		//public static final IRecipe ANTI_VENOM_1 = new ShapelessOreRecipe(getResource("recipe_anti_venom_1"), new ItemStack(ModItems.ANTI_VENOM_BOTTLE, 2), FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME)), Items.GLASS_BOTTLE, Items.GLASS_BOTTLE);
+		public static final IRecipe ANTI_VENOM_1 = new ShapelessOreRecipe(getResource("recipe_anti_venom_1"), new ItemStack(ModItems.ANTI_VENOM_BOTTLE, 2), FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME)), Items.GLASS_BOTTLE, Items.GLASS_BOTTLE);
 		public static final IRecipe ANTI_VENOM_2 = new ShapelessOreRecipe(getResource("recipe_anti_venom_2"), new ItemStack(ModItems.ANTI_VENOM_BOTTLE, 2), ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME)), Items.GLASS_BOTTLE, Items.GLASS_BOTTLE);
 
 		// Whetstone
@@ -252,10 +251,10 @@ public class RecipeHandler {
 		public static final IRecipe UMBERGOLEM_CLAW_1 = new ShapedOreRecipe(getResource("recipe_umbergolem_claw_1"), EnumErebusMaterialsType.UMBERGOLEM_CLAW.createStack(), "  P", "  S", " SS", 'S', "stone", 'P', EnumErebusMaterialsType.SCORPION_PINCER.createStack());
 		public static final IRecipe UMBERGOLEM_CLAW_2 = new ShapedOreRecipe(getResource("recipe_umbergolem_claw_2"), EnumErebusMaterialsType.UMBERGOLEM_CLAW.createStack(), "SSP", "S  ", 'S', "stone", 'P', EnumErebusMaterialsType.SCORPION_PINCER.createStack());
 		public static final IRecipe UMBERGOLEM_LEGS = new ShapedOreRecipe(getResource("recipe_umbergolem_legs"), EnumErebusMaterialsType.UMBERGOLEM_LEGS.createStack(), "SSS", "S S", "R R", 'S', "stone", 'R', EnumErebusMaterialsType.REINFORCED_PLATE_EXO.createStack());
-		public static final IRecipe IDOL_MUD_UMBERGOLEM = new ShapedOreRecipe(getResource("recipe_umbergolem_mud"), ItemDungeonIdols.EnumIdolType.IDOL_MUD_UMBERGOLEM.createStack(), "XXX", "XUX", "XXX", 'X', ModBlocks.MIR_BRICK, 'U', ModBlocks.UMBER_GOLEM_STATUE);
-		public static final IRecipe IDOL_IRON_UMBERGOLEM = new ShapedOreRecipe(getResource("recipe_umbergolem_iron"), ItemDungeonIdols.EnumIdolType.IDOL_IRON_UMBERGOLEM.createStack(), "XXX", "XUX", "XXX", 'X', "blockIron", 'U', ModBlocks.UMBER_GOLEM_STATUE);
-		public static final IRecipe IDOL_GOLD_UMBERGOLEM = new ShapedOreRecipe(getResource("recipe_umbergolem_gold"), ItemDungeonIdols.EnumIdolType.IDOL_GOLD_UMBERGOLEM.createStack(), "XXX", "XUX", "XXX", 'X', "blockGold", 'U', ModBlocks.UMBER_GOLEM_STATUE);
-		public static final IRecipe IDOL_JADE_UMBERGOLEM = new ShapedOreRecipe(getResource("recipe_umbergolem_jade"), ItemDungeonIdols.EnumIdolType.IDOL_JADE_UMBERGOLEM.createStack(), "XXX", "XUX", "XXX", 'X', "blockJade", 'U', ModBlocks.UMBER_GOLEM_STATUE);
+		public static final IRecipe IDOL_MUD_UMBERGOLEM = new ShapedOreRecipe(getResource("recipe_umbergolem_mud"), ItemDungeonIdols.EnumIdolType.IDOL_MUD_UMBERGOLEM.createStack(), "XXX", "XUX", "XXX", 'X', ModBlocks.MUD_BRICK, 'U', new ItemStack(ModBlocks.UMBER_GOLEM_STATUE));
+		public static final IRecipe IDOL_IRON_UMBERGOLEM = new ShapedOreRecipe(getResource("recipe_umbergolem_iron"), ItemDungeonIdols.EnumIdolType.IDOL_IRON_UMBERGOLEM.createStack(), "XXX", "XUX", "XXX", 'X', "blockIron", 'U', new ItemStack(ModBlocks.UMBER_GOLEM_STATUE));
+		public static final IRecipe IDOL_GOLD_UMBERGOLEM = new ShapedOreRecipe(getResource("recipe_umbergolem_gold"), ItemDungeonIdols.EnumIdolType.IDOL_GOLD_UMBERGOLEM.createStack(), "XXX", "XUX", "XXX", 'X', "blockGold", 'U', new ItemStack(ModBlocks.UMBER_GOLEM_STATUE));
+		public static final IRecipe IDOL_JADE_UMBERGOLEM = new ShapedOreRecipe(getResource("recipe_umbergolem_jade"), ItemDungeonIdols.EnumIdolType.IDOL_JADE_UMBERGOLEM.createStack(), "XXX", "XUX", "XXX", 'X', "blockJade", 'U', new ItemStack(ModBlocks.UMBER_GOLEM_STATUE));
 
 		// Umbergolem Statue
 		public static final IRecipe UMBER_GOLEM_STATUE = new ShapedOreRecipe(getResource("recipe_umbergolem_statue"), new ItemStack(ModBlocks.UMBER_GOLEM_STATUE), " H ", "LCL", " X ", 'H', EnumErebusMaterialsType.UMBERGOLEM_HEAD.createStack(), 'L', EnumErebusMaterialsType.UMBERGOLEM_CLAW.createStack(), 'C', EnumErebusMaterialsType.UMBERGOLEM_CORE.createStack(), 'X', EnumErebusMaterialsType.UMBERGOLEM_LEGS.createStack());
@@ -353,6 +352,7 @@ public class RecipeHandler {
 		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
 		public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
+			RecipeHandler.init();
 			final IForgeRegistry<IRecipe> registry = event.getRegistry();
 			for (IRecipe recipes : RECIPES)
 				registry.register(recipes);

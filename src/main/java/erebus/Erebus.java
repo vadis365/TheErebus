@@ -10,6 +10,7 @@ import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.capabilities.base.EntityCapabilityHandler;
 import erebus.core.capabilities.player.PlayerDeathLocationCapability;
 import erebus.core.handler.AntiVenomDurationHandler;
+import erebus.core.handler.AnvilEventHandlerWhetstone;
 import erebus.core.handler.DeathCompassRespawnEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
@@ -76,7 +77,6 @@ public class Erebus {
 		ModItems.init();
 		ModBiomes.init();
 		ModSounds.init();
-		RecipeHandler.init();
 		ModEntities.init();
 		ComposterRegistry.init();
 		
@@ -130,6 +130,7 @@ public class Erebus {
         MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
 		MinecraftForge.EVENT_BUS.register(SpawnerErebus.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(new AntiVenomDurationHandler());
+		MinecraftForge.EVENT_BUS.register(new AnvilEventHandlerWhetstone());
 		if (ConfigHandler.INSTANCE.graveMarker) {
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
 			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
