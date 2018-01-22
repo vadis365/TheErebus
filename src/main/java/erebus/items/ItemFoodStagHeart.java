@@ -1,10 +1,19 @@
 package erebus.items;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import erebus.ModTabs;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemFoodStagHeart extends ItemFood {
 
@@ -17,17 +26,16 @@ public class ItemFoodStagHeart extends ItemFood {
 		setCreativeTab(ModTabs.ITEMS);
 		this.type = type;
 	}
-/*
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
 		if (type.equals("raw"))
-			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.heals"));
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.heals").getFormattedText());
 		else
-			list.add(StatCollector.translateToLocalFormatted("tooltip.erebus.feeds"));
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.feeds").getFormattedText());
 	}
-*/
+
 	@Override
 	protected void onFoodEaten(ItemStack is, World world, EntityPlayer player) {
 		if(type.equals("raw"))

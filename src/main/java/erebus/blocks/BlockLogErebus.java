@@ -1,14 +1,23 @@
 package erebus.blocks;
 
+import java.util.Random;
+
+import erebus.ModBlocks;
+import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.entity.EntityBeetleLarva;
 import erebus.entity.EntityWoodlouse;
+import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockLogErebus extends BlockLog {
@@ -60,6 +69,23 @@ public class BlockLogErebus extends BlockLog {
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer.Builder(this).add(LOG_AXIS).build();
+	}
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		if (state.getBlock() == EnumWood.BALSAM.getLog()) {
+			Random rand = world instanceof World ? ((World) world).rand : RANDOM;
+			drops.add(new ItemStack(ModBlocks.LOG_BALSAM_RESINLESS));
+			for (int i = 0; i < 1 + rand.nextInt(2 + fortune); i++)
+				drops.add(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.AMBER_STAR.ordinal()));
+			return;
+		}
+		super.getDrops(drops, world, pos, state, fortune);
+	}
+
+	@Override
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+		return state.getBlock() == EnumWood.BALSAM.getLog() ? true : super.canSilkHarvest(world,pos, state,  player);
 	}
 
 	@Override

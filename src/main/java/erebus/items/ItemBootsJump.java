@@ -1,14 +1,21 @@
 package erebus.items;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -20,6 +27,12 @@ public class ItemBootsJump extends ItemArmor {
 	public ItemBootsJump() {
 		super(ModMaterials.ARMOR_REIN_EXOSKELETON, 2, EntityEquipmentSlot.FEET);
 		setCreativeTab(ModTabs.GEAR);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.jumpboots").getFormattedText());
 	}
 
 	@Override

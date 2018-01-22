@@ -1,10 +1,15 @@
 package erebus.items;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -12,6 +17,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,6 +28,12 @@ public class ItemArmorWaterStriders extends ItemArmor {
 	public ItemArmorWaterStriders(EntityEquipmentSlot slot) {
 		super(ModMaterials.ARMOR_REIN_EXOSKELETON, 2, slot);
 		setCreativeTab(ModTabs.GEAR);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.waterstriders").getFormattedText());
 	}
 
 	@Override

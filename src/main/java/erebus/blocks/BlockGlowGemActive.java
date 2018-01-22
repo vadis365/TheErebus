@@ -371,7 +371,7 @@ public class BlockGlowGemActive extends Block implements IHasCustomItem {
 			@Override
 			@SideOnly(Side.CLIENT)
 			public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
-				list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.glowGem").getFormattedText());
+				list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.glowgem").getFormattedText());
 			}
 		};
 		return GLOW_GEM_ITEM;

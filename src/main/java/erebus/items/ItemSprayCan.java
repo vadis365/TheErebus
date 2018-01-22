@@ -1,9 +1,14 @@
 package erebus.items;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import erebus.ModBlocks;
 import erebus.ModSounds;
 import erebus.ModTabs;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,7 +18,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSprayCan extends Item {
 
@@ -24,6 +33,12 @@ public class ItemSprayCan extends Item {
 
 	private SoundEvent getSprayCanSound() {
 		return ModSounds.SPRAY_CAN_SOUND;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.spraycan").getFormattedText());
 	}
 
 	@Override

@@ -182,6 +182,7 @@ item.erebus.homing_beecon_advanced.name=Advanced Homing Beecon
 item.erebus.spray_can.name=Insect Repellent
 item.erebus.whetstone.name=Whetstone
 item.erebus.compost.name=Compost
+item.erebus.planticide.name=Planticide
 
 item.erebus.idols.idol_mud.name=Mud Scarab
 item.erebus.idols.idol_iron.name=Iron Scarab
@@ -238,11 +239,13 @@ tile.erebus.volcanic_rock.name=Volcanic Rock
 
 # Amber
 tile.erebus.amber.name=Amber
+tile.erebus.amber_bricks.name=Amber Bricks
 tile.erebus.amber_glass.name=Amber Glass
 tile.erebus.preserved_block.amber.name=Amber Preserved Block
 tile.erebus.preserved_block.amber_glass.name=Amber Preserved Block
 tile.erebus.glowing_jar.name=Glowing Jar
 tile.erebus.fluid_jar.name=Fluid Jar
+tile.erebus.door_amber.name=Amber Door
 
 # Ores
 tile.erebus.ore_iron.name=Iron Ore
@@ -273,6 +276,7 @@ tile.erebus.log_mossbark.name=Mossbark Wood
 tile.erebus.log_asper.name=Asper Wood
 tile.erebus.log_cypress.name=Cypress Wood
 tile.erebus.log_balsam.name=Balsam Wood
+tile.erebus.log_balsam_resinless.name=Balsam Wood Resinless
 tile.erebus.log_rotten.name=Rotten Wood
 tile.erebus.log_marshwood.name=Marshwood Wood
 tile.erebus.log_scorched.name=Scorched Wood
@@ -413,7 +417,7 @@ tile.erebus.wall_umberpaver_mossy.name=Mossy Umberpaver Wall
 tile.erebus.wall_umberpaver_webbed.name=Webby Umberpaver Wall
 
 # Plants
-tile.erebus.crop_trunip.name=Turnips
+tile.erebus.crop_turnip.name=Turnips
 tile.erebus.crop_cabbage.name=Cabbage
 tile.erebus.heart_berry_bush.name=Heartberry Bush
 tile.erebus.jade_berry_bush.name=Jadeberry Bush
@@ -530,6 +534,7 @@ tile.erebus.tarantula_egg.name=Tarantula Egg
 tile.erebus.honey_treat.name=Honey Treat
 tile.erebus.wasp_nest.name=Wasp Nest
 tile.erebus.stairs_wasp_nest.name=Wasp Nest Stairs
+tile.erebus.insect_repellent.name=Insect Repellent
 
 # Spawners
 tile.erebus.antlion_spawner.name=Antlion Spawner
@@ -540,6 +545,7 @@ tile.erebus.tarantula_spawner.name=Tarantula Spawner
 tile.erebus.wasp_spawner.name=Wasp Spawner
 tile.erebus.zombie_ant_spawner.name=Zombie Ant Spawner
 tile.erebus.zombie_ant_soldier_spawner.name=Zombie Ant Soldier Spawner
+tile.erebus.magma_crawler_spawner.name=Magma Crawler Spawner
 
 # Utility Blocks
 tile.erebus.petrified_crafting_table.name=Petrified Crafting Table
@@ -569,11 +575,13 @@ tile.erebus.honey_comb.name=Honeycomb
 tile.erebus.composter.name=Organic Composter
 tile.erebus.smoothie_maker.name=ErebusCo. Smoothie-matic 2000
 tile.erebus.umber_furnace.name=Umber Furnace
+tile.erebus.umber_furnace_active.name=Umber Furnace
 tile.erebus.umberstone_button.name=Umberstone Button
 tile.erebus.liquifier.name=Honey Liquifier
 tile.erebus.glow_gem_active.name=Glowing Gem
 tile.erebus.glow_gem_inactive.name=Glowing Gem
 tile.erebus.mucus_bomb.name=Mucus Bomb
+tile.erebus.umber_golem_statue.name=Umbergolem Statue
 
 tile.erebus.altar_base.name=Altar Base
 tile.erebus.altar_lightning.name=Altar of Lightning
@@ -704,6 +712,9 @@ entity.umber_golem.name=Umbergolem
 # Fluids #
 ##########
 
+tile.erebus.formic_acid.name=Formic Acid
+tile.erebus.honey.name=Honey
+
 fluid.honey=Honey
 fluid.beetle_juice=Beetle Juice
 fluid.anti_venom=Anti-Venom
@@ -756,15 +767,25 @@ tooltip.erebus.extractor=Point at blocks and hold down the right mouse button to
 tooltip.erebus.scorpionpincer=Can Shoot Fire Charges if in your Inventory.
 tooltip.erebus.heals=Heals 10 Hearts when consumed. Always Edible.
 tooltip.erebus.feeds=Fills Hunger Bar when consumed. Always Edible.
-tooltip.erebus.poweredGlider=Needs redgem blocks at the cost of fuel to flight.
-tooltip.erebus.gliderGlideKey=Gliding Key
-tooltip.erebus.gliderPoweredKey=Flying Key
-tooltip.erebus.bambooPipe=A very basic directional fluid pipe.
-tooltip.erebus.bambooPipeExtract=Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.
-tooltip.erebus.bambooPipeWrench=Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.
+tooltip.erebus.poweredglider=Needs redgem blocks at the cost of fuel to flight.
+tooltip.erebus.gliderglidekey=Gliding Key
+tooltip.erebus.gliderpoweredkey=Flying Key
+tooltip.erebus.bamboopipe=A very basic directional fluid pipe.
+tooltip.erebus.bamboopipeextract=Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.
+tooltip.erebus.bamboopipewrench=Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.
 tooltip.erebus.liquifier=Turns Honey Drips in to Fluid Honey. Redstone activated.
-tooltip.erebus.glowGem=Place on ANY side of a solid block as a light source. Right click to turn off and on.
-
+tooltip.erebus.glowgem=Place on ANY side of a solid block as a light source. Right click to turn off and on.
+tooltip.erebus.mushhelm=Keeps you fed whilst worn at the cost of durability. Repaired in Anvil with Big Mushroom Blocks.
+tooltip.erebus.planticide=Removes Plants, Leaves and Crops in a 5x5x5 area!
+tooltip.erebus.healinghearts=Heals you a small amount when consumed.
+tooltip.erebus.nightvision=Enables you to see in the dark.
+tooltip.erebus.jumpboots=Enables you to Jump 4 blocks high.
+tooltip.erebus.waterstriders=Enables you to Walk on Water.
+tooltip.erebus.compost=Works just like bonemeal Mr.
+tooltip.erebus.hornsummon=Summons some bees.
+tooltip.erebus.spraycan=Use on the top of blocks to keep those pesky critters away.
+tooltip.erebus.wandofpreservation=Shoots Amber stars and captures mobs. Silk touch the block to collect or break to free the mob.
+tooltip.erebus.webslinger=Can Shoot Webs if in your Inventory.
 
 ##########
 # Others #
@@ -775,6 +796,6 @@ erebus.smoothie.effect.extinguish=Puts Out Fires
 erebus.smoothie.effect.set_fire=Makes Fire
 erebus.smoothie.effect.heal=Heals
 key.erebus.glide=Glide
-key.erebus.poweredGlide=Glider Lift
-key.erebus.beetleRam=Beetle Ram Attack
-key.erebus.beetleMine=Stag Beetle Dig
+key.erebus.poweredglide=Glider Lift
+key.erebus.beetleram=Beetle Ram Attack
+key.erebus.beetlemine=Stag Beetle Dig

@@ -1,10 +1,13 @@
 package erebus.items;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import erebus.ModSounds;
 import erebus.ModTabs;
 import erebus.entity.EntityWebSling;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,13 +18,23 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemWebSlinger extends Item {
 	public ItemWebSlinger() {
 		setMaxDamage(128);
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.GEAR);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.webslinger").getFormattedText());
 	}
 
 	@Override

@@ -5,11 +5,7 @@ import java.util.Locale;
 import erebus.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
 public enum EnumWood implements IStringSerializable {
 
@@ -148,7 +144,7 @@ public enum EnumWood implements IStringSerializable {
 				wood.slab = slabs;
 
 				if (wood.hasDoor) {
-					Block door = new BlockDoorErebus();
+					Block door = new BlockDoorErebus(ModBlocks.PLANKS.getDefaultState().withProperty(BlockPlanksErebus.TYPE, wood), "axe", 0);
 					ModBlocks.registerBlock("door_" + wood.getName(), door);
 
 					wood.door = door;

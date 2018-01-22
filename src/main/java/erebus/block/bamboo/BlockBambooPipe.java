@@ -264,7 +264,7 @@ public class BlockBambooPipe extends BlockDirectional implements ITileEntityProv
 			@Override
 			@SideOnly(Side.CLIENT)
 			public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
-				list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.bambooPipe").getFormattedText());
+				list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.bamboopipe").getFormattedText());
 			}
 		};
 		return PIPE_ITEM;

@@ -1,15 +1,25 @@
 package erebus.items;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import erebus.ModBlocks;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.client.model.armor.ModelMushroomHelm;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -24,8 +34,13 @@ public class ItemHelmMushroom extends ItemArmor {
 
 	@Override
 	public boolean getIsRepairable(ItemStack armour, ItemStack material) {
-		return false;
-		//material.getItem() == Item.getItemFromBlock(ModBlocks.bigBulbCappedMushroom) || material.getItem() == Item.getItemFromBlock(ModBlocks.bigGreenMushroom) || material.getItem() == Item.getItemFromBlock(ModBlocks.bigBundleMushroom) || material.getItem() == Item.getItemFromBlock(ModBlocks.bigKaiserfingerMushroom) || material.getItem() == Item.getItemFromBlock(ModBlocks.bigDutchCapMushroom) || material.getItem() == Item.getItemFromBlock(Blocks.red_mushroom_block) || material.getItem() == Item.getItemFromBlock(Blocks.brown_mushroom_block);
+		return material.getItem() == Item.getItemFromBlock(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK) || material.getItem() == Item.getItemFromBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK) || material.getItem() == Item.getItemFromBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK) || material.getItem() == Item.getItemFromBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK) || material.getItem() == Item.getItemFromBlock(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK) || material.getItem() == Item.getItemFromBlock(Blocks.RED_MUSHROOM_BLOCK) || material.getItem() == Item.getItemFromBlock(Blocks.BROWN_MUSHROOM_BLOCK);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.mushhelm").getFormattedText());
 	}
 
 	@Override

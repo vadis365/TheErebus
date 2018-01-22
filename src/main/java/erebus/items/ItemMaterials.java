@@ -44,7 +44,7 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
 		if(stack.getItemDamage() == EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal())
-			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.bambooPipeWrench").getFormattedText());
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.bamboopipewrench").getFormattedText());
 	}
 
 	@Override

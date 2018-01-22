@@ -46,10 +46,10 @@ public class ItemArmorGlider extends ItemArmor {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
 		if (canFly()) {
-			list.add(new TextComponentTranslation("tooltip.erebus.poweredGlider").getFormattedText());
-			list.add(new TextComponentTranslation("tooltip.erebus.gliderPoweredKey").getFormattedText() + ": " + Keyboard.getKeyName(KeyBindingHandler.POWERED_GLIDE.getKeyCode()));
+			list.add(new TextComponentTranslation("tooltip.erebus.poweredglider").getFormattedText());
+			list.add(new TextComponentTranslation("tooltip.erebus.gliderpoweredkey").getFormattedText() + ": " + Keyboard.getKeyName(KeyBindingHandler.POWERED_GLIDE.getKeyCode()));
 		}
-		list.add(new TextComponentTranslation("tooltip.erebus.gliderGlideKey").getFormattedText() + ": " + Keyboard.getKeyName(KeyBindingHandler.GLIDE.getKeyCode()));
+		list.add(new TextComponentTranslation("tooltip.erebus.gliderglidekey").getFormattedText() + ": " + Keyboard.getKeyName(KeyBindingHandler.GLIDE.getKeyCode()));
 	}
 
 	@Override

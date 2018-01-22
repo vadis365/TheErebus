@@ -1,5 +1,9 @@
 package erebus.items;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import net.minecraft.block.Block;
@@ -7,6 +11,7 @@ import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockDirt.DirtType;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -15,13 +20,23 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemPlanticide extends Item {
 
 	public ItemPlanticide() {
 		setCreativeTab(ModTabs.ITEMS);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
+		list.add(TextFormatting.RED + new TextComponentTranslation("tooltip.erebus.planticide").getFormattedText());
 	}
 
 	@Override
