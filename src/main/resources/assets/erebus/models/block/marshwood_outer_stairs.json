@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "erebus:blocks/planks_marshwood",
-        "top": "erebus:blocks/planks_marshwood",
-        "side": "erebus:blocks/planks_marshwood"
-    }
-}

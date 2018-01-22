@@ -1,8 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "erebus:blocks/planks_balsam",
-        "top": "erebus:blocks/planks_balsam",
-        "side": "erebus:blocks/planks_balsam"
-    }
-}

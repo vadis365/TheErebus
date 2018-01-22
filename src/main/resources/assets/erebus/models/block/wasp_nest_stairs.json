@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "erebus:blocks/wasp_nest",
-        "top": "erebus:blocks/wasp_nest",
-        "side": "erebus:blocks/wasp_nest"
-    }
-}

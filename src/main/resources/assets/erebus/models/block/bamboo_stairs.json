@@ -1,8 +1,0 @@
-{
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "erebus:blocks/planks_bamboo",
-        "top": "erebus:blocks/planks_bamboo",
-        "side": "erebus:blocks/planks_bamboo"
-    }
-}
