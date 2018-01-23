@@ -308,12 +308,13 @@ public class ModBlocks {
 	public static final Block WALL_UMBERSTONE_BRICKS = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE_BRICKS));
 	public static final Block WALL_UMBERTILE_SMOOTH = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH));
 	public static final Block WALL_UMBERTILE_SMOOTH_SMALL = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH_SMALL));
-	public static final Block WALL_AMBER = new BlockWallErebus(AMBER.getDefaultState());
 	public static final Block WALL_UMBERPAVER = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER));
 	public static final Block WALL_UMBERPAVER_MOSSY = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_MOSSY));
 	public static final Block WALL_UMBERPAVER_WEBBED = new BlockWallErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_WEBBED));
+	public static final Block WALL_AMBER = new BlockWallErebus(AMBER.getDefaultState());
+	public static final Block WALL_AMBER_BRICKS = new BlockWallErebus(AMBER_BRICKS.getDefaultState());
 
-	//SLABS
+	// SLABS
 	public static final Block SLAB_UMBERSTONE = new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE), "pickaxe", 0);
 	public static final Block SLAB_UMBERCOBBLE = new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE), "pickaxe", 0);
 	public static final Block SLAB_UMBERCOBBLE_MOSSY= new BlockSlabErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_MOSSY), "pickaxe", 0);
@@ -324,6 +325,24 @@ public class ModBlocks {
 	public static final Block SLAB_UMBERPAVER = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER), "pickaxe", 0);
 	public static final Block SLAB_UMBERPAVER_MOSSY = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_MOSSY), "pickaxe", 0);
 	public static final Block SLAB_UMBERPAVER_WEBBED = new BlockSlabErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_WEBBED), "pickaxe", 0);
+	public static final Block SLAB_AMBER = new BlockSlabErebus(AMBER.getDefaultState(), "pickaxe", 0);
+	public static final Block SLAB_AMBER_BRICKS = new BlockSlabErebus(AMBER_BRICKS.getDefaultState(), "pickaxe", 0);
+	public static final Block SLAB_PLANKS_PETRIFIED_WOOD = new BlockSlabErebus(PLANKS_PETRIFIED_WOOD.getDefaultState(), "pickaxe", 0);
+
+	// STONE STAIRS
+	public static final Block STAIRS_UMBERSTONE = new BlockStairsErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));
+	public static final Block STAIRS_UMBERCOBBLE = new BlockStairsErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE));
+	public static final Block STAIRS_UMBERCOBBLE_MOSSY= new BlockStairsErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_MOSSY));
+	public static final Block STAIRS_UMBERCOBBLE_WEBBED = new BlockStairsErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE_WEBBED));
+	public static final Block STAIRS_UMBERSTONE_BRICKS = new BlockStairsErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE_BRICKS));
+	public static final Block STAIRS_UMBERTILE_SMOOTH = new BlockStairsErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH));
+	public static final Block STAIRS_UMBERTILE_SMOOTH_SMALL = new BlockStairsErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERTILE_SMOOTH_SMALL));
+	public static final Block STAIRS_UMBERPAVER = new BlockStairsErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER));
+	public static final Block STAIRS_UMBERPAVER_MOSSY = new BlockStairsErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_MOSSY));
+	public static final Block STAIRS_UMBERPAVER_WEBBED = new BlockStairsErebus(UMBERPAVER.getDefaultState().withProperty(BlockUmberPaver.TYPE, EnumUmberPaverType.UMBERPAVER_WEBBED));
+	public static final Block STAIRS_AMBER = new BlockStairsErebus(AMBER.getDefaultState());
+	public static final Block STAIRS_AMBER_BRICKS = new BlockStairsErebus(AMBER_BRICKS.getDefaultState());
+	public static final Block STAIRS_PETRIFIED_WOOD = new BlockStairsErebus(PLANKS_PETRIFIED_WOOD.getDefaultState());
 
 	//FLUIDS
 	public static final Block FORMIC_ACID = new BlockFormicAcid();

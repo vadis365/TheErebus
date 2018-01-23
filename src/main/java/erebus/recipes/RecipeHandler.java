@@ -12,6 +12,9 @@ import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockDoubleHeightPlant.EnumPlantType;
 import erebus.blocks.BlockGiantFlower.EnumType;
 import erebus.blocks.BlockSmallPlant.EnumSmallPlantType;
+import erebus.blocks.BlockUmberPaver;
+import erebus.blocks.BlockUmberPaver.EnumUmberPaverType;
+import erebus.blocks.BlockUmberstone;
 import erebus.blocks.BlockWallPlants.EnumWallPlantType;
 import erebus.blocks.BlockWallPlantsCultivated.EnumWallPlantCultivatedType;
 import erebus.blocks.EnumWood;
@@ -62,29 +65,58 @@ public class RecipeHandler {
 		public static final IRecipe PLANKS_PETRIFIED_WOOD = new ShapedOreRecipe(getResource("recipe_planks_petrified_wood"), new ItemStack(ModBlocks.PLANKS_PETRIFIED_WOOD), "xx", "xx", 'x', EnumErebusMaterialsType.PETRIFIED_WOOD.createStack());
 		public static final IRecipe PETRIFIED_CRAFTING_TABLE = new ShapedOreRecipe(getResource("recipe_petrified_crafting_table"), new ItemStack(ModBlocks.PETRIFIED_CRAFTING_TABLE), "xx", "xx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD);
 		public static final IRecipe PETRIFIED_WOOD_CHEST = new ShapedOreRecipe(getResource("recipe_petrified_wood_chest"), new ItemStack(ModBlocks.PETRIFIED_WOOD_CHEST), "xxx", "xyx", "xxx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD, 'y', "ingotGold");
-/*
-			// Stairs, slabs, walls
-			for (int i = 0; i < ModBlocks.umbercobbleStairs.length; i++)
-			public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.umbercobbleStairs[i], 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, i));
-			X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.amberBrickStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.amber, 1, 2));
-			X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.petrifiedWoodStairs, 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.petrifiedWoodPlanks, 1, 0));
+		public static final IRecipe STAIRS_PETRIFIED_WOOD = new ShapedOreRecipe(getResource("recipe_stairs_petrified_wood"), new ItemStack(ModBlocks.STAIRS_PETRIFIED_WOOD, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD);
 
-			for (Block slab : ModBlocks.stoneSlabs)
-				X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(slab, 6), "xxx", 'x', new ItemStack(((BlockSlabStone) slab).base, 1, ((BlockSlabStone) slab).meta));
-			for (int i = 0; i < ModBlocks.gneissStairs.length; i++)
+		/*
+			// Stairs, slabs, walls
+
+		for (int i = 0; i < ModBlocks.gneissStairs.length; i++)
 				X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.gneissStairs[i], 4), "#  ", "## ", "###", '#', new ItemStack(ModBlocks.gneiss, 1, i));
 
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6), "###", "###", '#', "stoneUmber");
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6, 1), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, 1));
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6, 2), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, 2));
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6, 3), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, 3));
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6, 4), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, 4));
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6, 5), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 0));
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6, 6), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 1));
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6, 7), "###", "###", '#', new ItemStack(ModBlocks.umberPaver, 1, 2));
-		public static final IRecipe X = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.wall, 6, 8), "###", "###", '#', new ItemStack(ModBlocks.amber, 1, 2));
-
 */
+		// WALLS
+		public static final IRecipe WALL_UMBERSTONE = new ShapedOreRecipe(getResource("recipe_wall_umberstone"), new ItemStack(ModBlocks.WALL_UMBERSTONE, 6), "###", "###", '#', "stoneUmber");
+		public static final IRecipe WALL_UMBERCOBBLE = new ShapedOreRecipe(getResource("recipe_wall_umbercobble"), new ItemStack(ModBlocks.WALL_UMBERCOBBLE, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE.ordinal()));
+		public static final IRecipe WALL_UMBERCOBBLE_MOSSY = new ShapedOreRecipe(getResource("recipe_wall_umbercobble_mossy"), new ItemStack(ModBlocks.WALL_UMBERCOBBLE_MOSSY, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE_MOSSY.ordinal()));
+		public static final IRecipe WALL_UMBERCOBBLE_WEBBED = new ShapedOreRecipe(getResource("recipe_wall_umbercobble_webbed"), new ItemStack(ModBlocks.WALL_UMBERCOBBLE_WEBBED, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE_WEBBED.ordinal()));
+		public static final IRecipe WALL_UMBERSTONE_BRICKS = new ShapedOreRecipe(getResource("recipe_wall_umberstone_bricks"), new ItemStack(ModBlocks.WALL_UMBERSTONE_BRICKS, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERSTONE_BRICKS.ordinal()));
+		public static final IRecipe WALL_UMBERTILE_SMOOTH = new ShapedOreRecipe(getResource("recipe_wall_umbertile_smooth"), new ItemStack(ModBlocks.WALL_UMBERTILE_SMOOTH, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERTILE_SMOOTH.ordinal()));
+		public static final IRecipe WALL_UMBERTILE_SMOOTH_SMALL = new ShapedOreRecipe(getResource("recipe_wall_umbertile_smooth_small"), new ItemStack(ModBlocks.WALL_UMBERTILE_SMOOTH_SMALL, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERTILE_SMOOTH_SMALL.ordinal()));
+		public static final IRecipe WALL_UMBERPAVER = new ShapedOreRecipe(getResource("recipe_wall_umberpaver"), new ItemStack(ModBlocks.WALL_UMBERPAVER, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERPAVER, 1, EnumUmberPaverType.UMBERPAVER.ordinal()));
+		public static final IRecipe WALL_UMBERPAVER_MOSSY = new ShapedOreRecipe(getResource("recipe_wall_umberpaver_mossy"), new ItemStack(ModBlocks.WALL_UMBERPAVER_MOSSY, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERPAVER, 1, EnumUmberPaverType.UMBERPAVER_MOSSY.ordinal()));
+		public static final IRecipe WALL_UMBERPAVER_WEBBED = new ShapedOreRecipe(getResource("recipe_wall_umberpaver_webbed"), new ItemStack(ModBlocks.WALL_UMBERPAVER_WEBBED, 6), "###", "###", '#', new ItemStack(ModBlocks.UMBERPAVER, 1, EnumUmberPaverType.UMBERPAVER_WEBBED.ordinal()));
+		public static final IRecipe WALL_AMBER = new ShapedOreRecipe(getResource("recipe_wall_amber"), new ItemStack(ModBlocks.WALL_AMBER, 6), "###", "###", '#', ModBlocks.AMBER);
+		public static final IRecipe WALL_AMBER_BRICKS = new ShapedOreRecipe(getResource("recipe_wall_amber_bricks"), new ItemStack(ModBlocks.WALL_AMBER_BRICKS, 6), "###", "###", '#', ModBlocks.AMBER_BRICKS);
+
+		// SLABS
+		public static final IRecipe SLAB_UMBERSTONE = new ShapedOreRecipe(getResource("recipe_slab_umberstone"), new ItemStack(ModBlocks.SLAB_UMBERSTONE, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERSTONE.ordinal()));
+		public static final IRecipe SLAB_UMBERCOBBLE = new ShapedOreRecipe(getResource("recipe_slab_umbercobble"), new ItemStack(ModBlocks.SLAB_UMBERCOBBLE, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE.ordinal()));
+		public static final IRecipe SLAB_UMBERCOBBLE_MOSSY = new ShapedOreRecipe(getResource("recipe_slab_umbercobble_mossy"), new ItemStack(ModBlocks.SLAB_UMBERCOBBLE_MOSSY, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE_MOSSY.ordinal()));
+		public static final IRecipe SLAB_UMBERCOBBLE_WEBBED = new ShapedOreRecipe(getResource("recipe_slab_umbercobble_webbed"), new ItemStack(ModBlocks.SLAB_UMBERCOBBLE_WEBBED, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE_WEBBED.ordinal()));
+		public static final IRecipe SLAB_UMBERSTONE_BRICKS = new ShapedOreRecipe(getResource("recipe_slab_umberstone_bricks"), new ItemStack(ModBlocks.SLAB_UMBERSTONE_BRICKS, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERSTONE_BRICKS.ordinal()));
+		public static final IRecipe SLAB_UMBERTILE_SMOOTH = new ShapedOreRecipe(getResource("recipe_slab_umbertile_smooth"), new ItemStack(ModBlocks.SLAB_UMBERTILE_SMOOTH , 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERTILE_SMOOTH.ordinal()));
+		public static final IRecipe SLAB_UMBERTILE_SMOOTH_SMALL = new ShapedOreRecipe(getResource("recipe_slab_umbertile_smooth_small"), new ItemStack(ModBlocks.SLAB_UMBERTILE_SMOOTH_SMALL, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERTILE_SMOOTH_SMALL.ordinal()));
+		public static final IRecipe SLAB_UMBERPAVER = new ShapedOreRecipe(getResource("recipe_slab_umberpaver"), new ItemStack(ModBlocks.SLAB_UMBERPAVER, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERPAVER, 1, BlockUmberPaver.EnumUmberPaverType.UMBERPAVER.ordinal()));
+		public static final IRecipe SLAB_UMBERPAVER_MOSSY = new ShapedOreRecipe(getResource("recipe_slab_umberpaver_mossy"), new ItemStack(ModBlocks.SLAB_UMBERPAVER_MOSSY, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERPAVER, 1, BlockUmberPaver.EnumUmberPaverType.UMBERPAVER_MOSSY.ordinal()));
+		public static final IRecipe SLAB_UMBERPAVER_WEBBED = new ShapedOreRecipe(getResource("recipe_slab_umberpaver_webbed"), new ItemStack(ModBlocks.SLAB_UMBERPAVER_WEBBED, 6), "xxx", 'x', new ItemStack(ModBlocks.UMBERPAVER, 1, BlockUmberPaver.EnumUmberPaverType.UMBERPAVER_WEBBED.ordinal()));
+		public static final IRecipe SLAB_AMBER = new ShapedOreRecipe(getResource("recipe_slab_amber"), new ItemStack(ModBlocks.SLAB_AMBER, 6), "xxx", 'x', ModBlocks.AMBER);
+		public static final IRecipe SLAB_AMBER_BRICKS = new ShapedOreRecipe(getResource("recipe_slab_amber_bricks"), new ItemStack(ModBlocks.SLAB_AMBER_BRICKS, 6), "xxx", 'x', ModBlocks.AMBER_BRICKS);
+		public static final IRecipe SLAB_PLANKS_PETRIFIED_WOOD = new ShapedOreRecipe(getResource("recipe_slab_petrified_wood"), new ItemStack(ModBlocks.SLAB_PLANKS_PETRIFIED_WOOD, 6), "xxx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD);
+
+		// STONE STAIRS
+		public static final IRecipe STAIRS_UMBERSTONE = new ShapedOreRecipe(getResource("recipe_stairs_umberstone"), new ItemStack(ModBlocks.STAIRS_UMBERSTONE, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERSTONE.ordinal()));
+		public static final IRecipe STAIRS_UMBERCOBBLE = new ShapedOreRecipe(getResource("recipe_stairs_umbercobble"), new ItemStack(ModBlocks.STAIRS_UMBERCOBBLE, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE.ordinal()));
+		public static final IRecipe STAIRS_UMBERCOBBLE_MOSSY = new ShapedOreRecipe(getResource("recipe_stairs_umbercobble_mossy"), new ItemStack(ModBlocks.STAIRS_UMBERCOBBLE_MOSSY, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE_MOSSY.ordinal()));
+		public static final IRecipe STAIRS_UMBERCOBBLE_WEBBED = new ShapedOreRecipe(getResource("recipe_stairs_umbercobble_webbed"), new ItemStack(ModBlocks.STAIRS_UMBERCOBBLE_WEBBED, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERCOBBLE_WEBBED.ordinal()));
+		public static final IRecipe STAIRS_UMBERSTONE_BRICKS = new ShapedOreRecipe(getResource("recipe_stairs_umberstone_bricks"), new ItemStack(ModBlocks.STAIRS_UMBERSTONE_BRICKS, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERSTONE_BRICKS.ordinal()));
+		public static final IRecipe STAIRS_UMBERTILE_SMOOTH = new ShapedOreRecipe(getResource("recipe_stairs_umbertile_smooth"), new ItemStack(ModBlocks.STAIRS_UMBERTILE_SMOOTH, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERTILE_SMOOTH.ordinal()));
+		public static final IRecipe STAIRS_UMBERTILE_SMOOTH_SMALL = new ShapedOreRecipe(getResource("recipe_stairs_umbertile_smooth_small"), new ItemStack(ModBlocks.STAIRS_UMBERTILE_SMOOTH_SMALL, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERTILE_SMOOTH_SMALL.ordinal()));
+		public static final IRecipe STAIRS_UMBERPAVER = new ShapedOreRecipe(getResource("recipe_stairs_umberpaver"), new ItemStack(ModBlocks.STAIRS_UMBERPAVER, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERPAVER, 1, BlockUmberPaver.EnumUmberPaverType.UMBERPAVER.ordinal()));
+		public static final IRecipe STAIRS_UMBERPAVER_MOSSY = new ShapedOreRecipe(getResource("recipe_stairs_umberpaver_mossy"), new ItemStack(ModBlocks.STAIRS_UMBERPAVER_MOSSY, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERPAVER, 1, BlockUmberPaver.EnumUmberPaverType.UMBERPAVER_MOSSY.ordinal()));
+		public static final IRecipe STAIRS_UMBERPAVER_WEBBED = new ShapedOreRecipe(getResource("recipe_stairs_umberpaver_webbed"), new ItemStack(ModBlocks.STAIRS_UMBERPAVER_WEBBED, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERPAVER, 1, BlockUmberPaver.EnumUmberPaverType.UMBERPAVER_WEBBED.ordinal()));
+		public static final IRecipe STAIRS_AMBER = new ShapedOreRecipe(getResource("recipe_stairs_amber"), new ItemStack(ModBlocks.STAIRS_AMBER, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.AMBER);
+		public static final IRecipe STAIRS_AMBER_BRICKS = new ShapedOreRecipe(getResource("recipe_stairs_amber_bricks"), new ItemStack(ModBlocks.STAIRS_AMBER_BRICKS, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.AMBER_BRICKS);
+
 		// Jade tools
 		public static final IRecipe JADE_PICKAXE = new ShapedOreRecipe(getResource("recipe_jade_pickaxe"), new ItemStack(ModItems.JADE_PICKAXE, 1), "XXX", " # ", " # ", '#', "stickWood", 'X', "gemJade");
 		public static final IRecipe JADE_SHOVEL = new ShapedOreRecipe(getResource("recipe_jade_shovel"), new ItemStack(ModItems.JADE_SHOVEL, 1), "X", "#", "#", '#', "stickWood", 'X', "gemJade");

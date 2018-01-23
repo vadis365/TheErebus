@@ -4,6 +4,7 @@ import java.util.Random;
 
 import erebus.ModTabs;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -12,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
@@ -20,6 +22,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSlabErebus extends BlockSimple {
 	public static final PropertyEnum<EnumBlockHalf> HALF = PropertyEnum.<EnumBlockHalf>create("half", EnumBlockHalf.class);
@@ -48,7 +52,13 @@ public class BlockSlabErebus extends BlockSimple {
 
 	@Override
 	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		return (state.getValue(HALF).equals(EnumBlockHalf.BOTTOM) && face == EnumFacing.DOWN) || (state.getValue(HALF).equals(EnumBlockHalf.TOP) && face == EnumFacing.UP) || state.getValue(HALF).equals(EnumBlockHalf.FULL);
+		return (this.blockState.getBaseState().getMaterial() != Material.GLASS) && (state.getValue(HALF).equals(EnumBlockHalf.BOTTOM) && face == EnumFacing.DOWN) || (state.getValue(HALF).equals(EnumBlockHalf.TOP) && face == EnumFacing.UP) || state.getValue(HALF).equals(EnumBlockHalf.FULL);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return this.blockState.getBaseState().getMaterial() == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
 	}
 
 	@Override

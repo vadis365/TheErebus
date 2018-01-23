@@ -109,7 +109,7 @@ public class BlockWallErebus extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
-		return /*this.baseBlockState == ModBlocks.AMBER.getDefaultState() ? BlockRenderLayer.TRANSLUCENT :*/ BlockRenderLayer.CUTOUT;
+		return this.baseBlockState.getMaterial() == Material.GLASS ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
