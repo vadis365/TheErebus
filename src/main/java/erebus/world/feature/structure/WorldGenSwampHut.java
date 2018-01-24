@@ -2,24 +2,26 @@ package erebus.world.feature.structure;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.IWorldGenerator;
 import erebus.ModBiomes;
 import erebus.ModBlocks;
+import erebus.blocks.EnumWood;
 import erebus.core.handler.configs.ConfigHandler;
-import erebus.lib.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenSwampHut implements IWorldGenerator {
 
-	private Block log = EnumWood.Marshwood.getLog();
+	private Block log = EnumWood.MARSHWOOD.getLog();
 	private Block plank = ModBlocks.planks;
-	private int plankMeta = EnumWood.Marshwood.ordinal();
-	private Block stairs = EnumWood.Marshwood.getStair();
-	private Block roof = EnumWood.Marshwood.getStair();
+	private int plankMeta = EnumWood.MARSHWOOD.ordinal();
+	private Block stairs = EnumWood.MARSHWOOD.getStairs();
+	private Block roof = EnumWood.MARSHWOOD.getStairs();
 	private Block bricks = ModBlocks.umberstone;
 	private int bricksMeta = 1;
 	private Block fence = Blocks.fence;
@@ -40,9 +42,9 @@ public class WorldGenSwampHut implements IWorldGenerator {
 	}
 
 	private void generate(World world, Random random, int x, int z) {
-		BiomeGenBase biomeBase = world.getBiomeGenForCoords(x, z);
+		Biome biomeBase = world.getBiome(x, z);
 		int newY = 80;
-		if (biomeBase == ModBiomes.submergedSwamp)
+		if (biomeBase == ModBiomes.SUBMERGED_SWAMP)
 			for (int newX = x; newX <= x + length; ++newX)
 				for (int newZ = z; newZ <= z + width; ++newZ) {
 					Block block = world.getBlock(newX, newY, newZ);
@@ -291,5 +293,12 @@ public class WorldGenSwampHut implements IWorldGenerator {
 					world.setBlock(x, y, zz, blockType, blockMeta, 2);
 				break;
 		}
+	}
+
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
+			IChunkProvider chunkProvider) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -5,6 +5,8 @@ import java.util.Random;
 
 import erebus.ModBiomes;
 import erebus.ModBlocks;
+import erebus.blocks.BlockDoubleHeightPlant;
+import erebus.blocks.BlockDoubleHeightPlant.EnumBlockHalf;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.feature.structure.WorldGenAntlionMaze;
@@ -323,18 +325,18 @@ public class ChunkProviderErebus implements IChunkGenerator, IChunkProvider {
 								}
 							}	
 						}
-						/*else if (additionalNoise1[horIndex] > -0.15D) {
+						else if (additionalNoise1[horIndex] > -0.15D) {
 							int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 30);
 							if (h > swampWaterHeight) {
-								for (h += 0; h >= (4 + h) / 2; h--)
+								for (h += 0; h >= (2 + h) / 2; h--)
 									primer.setBlockState(xInChunk, h, zInChunk, ModBlocks.MUD.getDefaultState());
 								h++;
-								if (h >= swampWaterHeight && rand.nextInt(8) == 0 && primer.getBlockState(xInChunk, preHeightIndex + h +1, zInChunk) == Blocks.AIR.getDefaultState() && primer.getBlockState(xInChunk, preHeightIndex + h + 2, zInChunk) == Blocks.AIR.getDefaultState()) {
+								if (h >= swampWaterHeight && rand.nextInt(8) == 0 && primer.getBlockState(xInChunk, preHeightIndex + h + 1, zInChunk) == Blocks.AIR.getDefaultState() && primer.getBlockState(xInChunk, preHeightIndex + h + 2, zInChunk) == Blocks.AIR.getDefaultState()) {
 									primer.setBlockState(xInChunk, preHeightIndex + h + 1, zInChunk, ModBlocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoubleHeightPlant.HALF, EnumBlockHalf.LOWER).withProperty(BlockDoubleHeightPlant.VARIANT, BlockDoubleHeightPlant.EnumPlantType.BULLRUSH));
 									primer.setBlockState(xInChunk, preHeightIndex + h + 2, zInChunk, ModBlocks.DOUBLE_PLANT.getDefaultState().withProperty(BlockDoubleHeightPlant.HALF, EnumBlockHalf.UPPER));
 								}
 							}
-						}*/
+						}
 				}
 				if ((biome == ModBiomes.VOLCANIC_DESERT /*|| biome == ModBiomes.desertSubCharredForest*/) && Math.abs(additionalNoise1[horIndex]) < 1) {
 					int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 32);
@@ -360,22 +362,20 @@ public class ChunkProviderErebus implements IChunkGenerator, IChunkProvider {
 							var13 = -1;
 						else if (iblockstate2.getBlock().getDefaultState() == ModBlocks.UMBERSTONE.getDefaultState())
 							if (var13 == -1) {
-								//if (var12 <= 0) {
-								//	topBlock = Blocks.air.getDefaultState();
-								//	primer.setBlockState(xInChunk, yInChunk, zInChunk, topBlock);
-								//fillerBlock = ModBlocks.umberstone.getDefaultState();
-								//} else
-								//	if (yInChunk >= var5 + 4 && yInChunk <= var5 + 120) {
-								//topBlock = biome.topBlock;
-								primer.setBlockState(xInChunk, yInChunk + 1, zInChunk, topBlock);
-								//	fillerBlock = biome.fillerBlock;
-								//}
-
+								if (var12 <= 0) {
+									topBlock = Blocks.AIR.getDefaultState();
+									fillerBlock = ModBlocks.UMBERSTONE.getDefaultState();
+								} else if (yInChunk >= var5 + 4 && yInChunk <= var5 + 120) {
+									topBlock = biome.topBlock;
+									fillerBlock = biome.fillerBlock;
+								}
 								if (yInChunk < var5 && topBlock.getMaterial() == Material.AIR)
-									//if (temperature < 0.15F)
-									//	topBlock = Blocks.ice;
-									//else
-									topBlock = Blocks.WATER.getDefaultState();
+									if (biome.getDefaultTemperature() < 0.15F)
+										topBlock = Blocks.ICE.getDefaultState();
+									else
+										topBlock = Blocks.WATER.getDefaultState();
+								primer.setBlockState(xInChunk, yInChunk, zInChunk, fillerBlock);
+								primer.setBlockState(xInChunk, yInChunk + 1, zInChunk, topBlock);
 
 								var13 = var12;
 							}

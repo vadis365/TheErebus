@@ -12,6 +12,7 @@ import erebus.entity.EntityCentipede;
 import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityJumpingSpider;
+import erebus.entity.EntityMosquito;
 import erebus.entity.EntityPrayingMantis;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
@@ -31,9 +32,8 @@ public class BiomeUndergroundJungle extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0x53CA37, 0x29BC05);
 		setFog(8, 128, 8);
-/*
+
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 60).setGroupSize(1, 3));
-*/
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 10).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityCentipede.class, 10).setGroupSize(4, 8));

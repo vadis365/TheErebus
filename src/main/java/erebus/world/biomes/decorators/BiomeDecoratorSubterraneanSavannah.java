@@ -143,7 +143,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 
 			for (yy = rand.nextInt(3) == 0 ? 40 + rand.nextInt(35) : 22; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
 				BlockPos pos = new BlockPos(xx, yy, zz);
-				if (checkSurface(SurfaceType.MIXED, pos)) {
+				if (checkSurface(SurfaceType.GRASS, pos)) {
 					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2)))
 						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.GRASS, 2);
 					else

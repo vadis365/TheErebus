@@ -383,6 +383,7 @@ public class ModBlocks {
 
 		@SubscribeEvent
 		public static void registerBlocks(final RegistryEvent.Register<Block> event) {
+			ModBlocks.init();
 			final IForgeRegistry<Block> registry = event.getRegistry();
 			for (Block block : BLOCKS) {
 				registry.register(block);

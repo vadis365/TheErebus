@@ -6,6 +6,7 @@ import erebus.entity.EntityChameleonTick;
 import erebus.entity.EntityFly;
 import erebus.entity.EntityGlowWorm;
 import erebus.entity.EntityGrasshopper;
+import erebus.entity.EntityMosquito;
 import erebus.entity.EntityScorpion;
 import erebus.entity.EntityScytodes;
 import erebus.entity.EntityTarantula;
@@ -23,9 +24,8 @@ public class BiomeSubterraneanSavannah extends BiomeBaseErebus {
 		properties.setRainDisabled();
 		setColors(0xB6B957, 0xA3A52D);
 		setFog(140, 116, 9);
-/*
+
 		spawningGradual.add(new SpawnEntry(EntityMosquito.class, 60).setGroupSize(1, 3));
-*/
 		spawningGradual.add(new SpawnEntry(EntityFly.class, 15).setGroupSize(8, 8));
 		spawningGradual.add(new SpawnEntry(EntityWasp.class, 20).setGroupSize(4, 8));
 		spawningGradual.add(new SpawnEntry(EntityBeetleLarva.class, 25).setGroupSize(2, 4));

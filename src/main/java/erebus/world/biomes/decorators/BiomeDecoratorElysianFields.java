@@ -118,7 +118,7 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 			
 			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
 				BlockPos pos = new BlockPos(xx, yy, zz);
-				if (checkSurface(SurfaceType.MIXED, pos)) {
+				if (checkSurface(SurfaceType.GRASS, pos)) {
 					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2))) {
 						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.FERN, 2);
 					} else

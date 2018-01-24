@@ -217,6 +217,7 @@ public class ModItems {
 
 		@SubscribeEvent
 		public static void registerItems(final RegistryEvent.Register<Item> event) {
+			ModItems.init();
 			final IForgeRegistry<Item> registry = event.getRegistry();
 				for (Item item : ITEMS) {
 				registry.register(item);

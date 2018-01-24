@@ -62,6 +62,7 @@ public class ModBiomes {
 
 		@SubscribeEvent
 		public static void registerBiomes(final RegistryEvent.Register<Biome> event) {
+			ModBiomes.init();
 			final IForgeRegistry<Biome> registry = event.getRegistry();
 			
 			registerBiome(registry, UNDERGROUND_JUNGLE, "underground_jungle", BiomeManager.BiomeType.WARM, 22, BiomeDictionary.Type.HOT, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.JUNGLE);
