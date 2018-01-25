@@ -20,11 +20,13 @@ public class RenderMagmaCrawler extends RenderLiving<EntityMagmaCrawler> {
 
 	@Override
 	protected void preRenderCallback(EntityMagmaCrawler crawler, float partialTickTime) {
-		scaleCrawler(0.9F);
+		scaleCrawler(0.75F);
 		if (crawler.getOnCeiling()) {
 			rotate(180F, 180F, 0);
-			GlStateManager.translate(0.0F, 1.25F, 0.0F);
+			GlStateManager.translate(0.0F, 1.2F, 0.0F);
 		}
+		else
+			GlStateManager.translate(0.0F, 0F, 0.0F);
 	}
 
 	protected void rotate(float crawlerAngleX, float crawlerAngleY, float crawlerAngleZ) {

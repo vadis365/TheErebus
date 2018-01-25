@@ -15,35 +15,16 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockGlowshroomStalkMain extends Block {
 	public static final PropertyEnum<EnumPartType> PART = PropertyEnum.<EnumPartType>create("part", EnumPartType.class);
-/*
-	private static final AxisAlignedBB[] GLOWSHROOM_AABB = new AxisAlignedBB[] {
-			new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D),
-			new AxisAlignedBB(0.3125D, 0.5D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
-			new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
-			new AxisAlignedBB(0.1875D, 0.0D, 0.1875D, 0.8125D, 1.0D, 0.8125D),
-			//NORTH
-			new AxisAlignedBB(0D, 0.3125D, 0.3125D, 0.6875D, 0.6875D, 0.6875D),
-			new AxisAlignedBB(0D, 0.1875D, 0.1875D, 1D, 0.8125D, 0.8125D),
-			new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
-			//SOUTH
-			new AxisAlignedBB(0.3125D, 0.3125D, 0D, 0.6875D, 0.6875D, 0.6875D),
-			new AxisAlignedBB(0.1875D, 0.1875D, 0D, 0.8125D, 0.8125D, 1D),
-			new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
-			//EAST NOT DONE
-			new AxisAlignedBB(0.3125D, 0.3125D, 0D, 0.6875D, 0.6875D, 0.6875D),
-			new AxisAlignedBB(0.1875D, 0.1875D, 0D, 0.8125D, 0.8125D, 1D),
-			new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D),
-			//WEST NOT DONE
-			new AxisAlignedBB(0.3125D, 0.3125D, 0D, 0.6875D, 0.6875D, 0.6875D),
-			new AxisAlignedBB(0.1875D, 0.1875D, 0D, 0.8125D, 0.8125D, 1D),
-			new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D)};
-*/
+
 	public BlockGlowshroomStalkMain() {
 		super(Material.WOOD);
 		setTickRandomly(true);
@@ -57,6 +38,21 @@ public class BlockGlowshroomStalkMain extends Block {
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
+
+	@Override
+	public boolean isFullBlock(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+        return false;
+    }
 
 	@Override
 	protected BlockStateContainer createBlockState() {
@@ -73,29 +69,297 @@ public class BlockGlowshroomStalkMain extends Block {
 		EnumPartType part = state.getValue(PART);
 		return part.ordinal();
 	}
-/*
+	
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return GLOWSHROOM_AABB[state.getValue(PART).ordinal()];
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		EnumPartType part = state.getValue(PART);
+		float widthMin = 0, heightMin = 0, depthMin = 0;
+		float widthMax = 0, heightMax = 0, depthMax = 0;
+
+		switch (part) {
+			case MAIN:
+				widthMin= 0F;
+				heightMin = 0F;
+				depthMin= 0F;
+				widthMax= 0F;
+				heightMax = 0F;
+				depthMax= 0F;
+				break;
+		//down
+			case DOWN_1:
+				widthMin = 0.3125F;
+				heightMin = 0.5F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;
+			case DOWN_2:
+				widthMin= 0.3125F;
+				heightMin = 0F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;
+			case DOWN_3:
+				widthMin= 0.1875F;
+				heightMin = 0F;
+				depthMin= 0.1875F;
+				widthMax= 0.1875F;
+				heightMax = 0F;
+				depthMax= 0.1875F;
+				break;
+		//north		
+			case NORTH_1:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0.3125F;
+				depthMax = 0F;
+				break;
+			case NORTH_2:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0F;
+				break;
+			case NORTH_3:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+				
+		//south
+			case SOUTH_1:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0F;
+				widthMax = 0.3125F;
+				heightMax = 0.3125F;
+				depthMax = 0.3125F;
+				break;
+			case SOUTH_2:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0F;
+				break;
+			case SOUTH_3:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;
+		//west
+			case WEST_1:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0F;
+				heightMax = 0.3125F;
+				depthMax = 0.3125F;
+				break;
+			case WEST_2:
+				widthMin = 0F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+			case WEST_3:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;
+		//east
+			case EAST_1:
+				widthMin = 0F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0.3125F;
+				depthMax = 0.3125F;
+				break;
+			case EAST_2:
+				widthMin = 0F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+			case EAST_3:
+				widthMin = 0F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;		
+		}
+		return new AxisAlignedBB(0F + widthMin, 0F + heightMin, 0F + depthMin, 1F - widthMax, 1F - heightMax, 1F - depthMax);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		return GLOWSHROOM_AABB[state.getValue(PART).ordinal()];
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		EnumPartType part = state.getValue(PART);
+		float widthMin = 0, heightMin = 0, depthMin = 0;
+		float widthMax = 0, heightMax = 0, depthMax = 0;
+
+		switch (part) {
+			case MAIN:
+				widthMin= 0F;
+				heightMin = 0F;
+				depthMin= 0F;
+				widthMax= 0F;
+				heightMax = 0F;
+				depthMax= 0F;
+				break;
+		//down
+			case DOWN_1:
+				widthMin = 0.3125F;
+				heightMin = 0.5F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;
+			case DOWN_2:
+				widthMin = 0.3125F;
+				heightMin = 0F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;
+			case DOWN_3:
+				widthMin = 0.1875F;
+				heightMin = 0F;
+				depthMin = 0.1875F;
+				widthMax = 0.1875F;
+				heightMax = 0F;
+				depthMax = 0.1875F;
+				break;
+		//north		
+			case NORTH_1:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0.3125F;
+				depthMax = 0F;
+				break;
+			case NORTH_2:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0F;
+				break;
+			case NORTH_3:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0F;
+				break;
+				
+		//south
+			case SOUTH_1:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0F;
+				widthMax = 0.3125F;
+				heightMax = 0.3125F;
+				depthMax = 0.3125F;
+				break;
+			case SOUTH_2:
+				widthMin = 0.1875F;
+				heightMin = 0.1875F;
+				depthMin = 0F;
+				widthMax = 0.1875F;
+				heightMax = 0.1875F;
+				depthMax = 0F;
+				break;
+			case SOUTH_3:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;
+		//west
+			case WEST_1:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0F;
+				heightMax = 0.3125F;
+				depthMax = 0.3125F;
+				break;
+			case WEST_2:
+				widthMin = 0F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+			case WEST_3:
+				widthMin = 0.3125F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;
+		//east
+			case EAST_1:
+				widthMin = 0F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0.3125F;
+				depthMax = 0.3125F;
+				break;
+			case EAST_2:
+				widthMin = 0F;
+				heightMin = 0.1875F;
+				depthMin = 0.1875F;
+				widthMax = 0F;
+				heightMax = 0.1875F;
+				depthMax = 0.1875F;
+				break;
+			case EAST_3:
+				widthMin = 0F;
+				heightMin = 0.3125F;
+				depthMin = 0.3125F;
+				widthMax = 0.3125F;
+				heightMax = 0F;
+				depthMax = 0.3125F;
+				break;		
+		}
+		return new AxisAlignedBB(0F + widthMin, 0F + heightMin, 0F + depthMin, 1F - widthMax, 1F - heightMax, 1F - depthMax);
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-		return GLOWSHROOM_AABB[state.getValue(PART).ordinal()];
-	}
-
-	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
-			List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean whatIsThis) {
-		addCollisionBoxToList(pos, entityBox, collidingBoxes, GLOWSHROOM_AABB[state.getValue(PART).ordinal()]);
-	}
-*/
 	@Override
 	public int tickRate(World world) {
 		return 5;

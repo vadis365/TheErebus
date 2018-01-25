@@ -126,7 +126,8 @@ public final class OreSettings {
 		SILVER(ModBlocks.ORE_SILVER, false),
 		TIN(ModBlocks.ORE_TIN, false),
 		GNEISS(ModBlocks.ORE_GNEISS, true),
-		QUARTZ(ModBlocks.ORE_QUARTZ, true);
+		QUARTZ(ModBlocks.ORE_QUARTZ, true),
+		TEMPLE(ModBlocks.ORE_TEMPLE, true);
 
 		final Block oreBlock;
 		final byte oreMeta;
@@ -202,6 +203,12 @@ public final class OreSettings {
 					settings.setChance(1F).setIterations(2, 4).setOreAmount(3, 4).setCheckArea(2);
 					break;
 				case QUARTZ:
+					settings.setIterations(extraOres ? 1 : 2, extraOres ? 3 : 4).setOreAmount(7, 9).setCheckArea(2);
+					break;
+				case GNEISS:
+					settings.setIterations(extraOres ? 1 : 2, extraOres ? 3 : 4).setOreAmount(2, 3).setCheckArea(2);
+					break;
+				case TEMPLE:
 					settings.setIterations(extraOres ? 1 : 2, extraOres ? 3 : 4).setOreAmount(7, 9).setCheckArea(2);
 					break;
 			}

@@ -73,6 +73,7 @@ item.erebus.materials.plate_zombie_ant.name=Zombie Ant Plate
 item.erebus.materials.stag_beetle_mandibles.name=Stag Beetle Mandibles
 item.erebus.materials.terpsishroom.name=Terpsishroom
 item.erebus.materials.bamboo_pipe_wrench.name=Bamboo Pipe Wrench
+item.erebus.materials.temple_rock.name=Temple Rock
 
 # Food
 item.erebus.erebus_food.beetle_larva_raw.name=Beetle Larva
@@ -334,20 +335,25 @@ tile.erebus.slab_planks_rotten.name=Rotten Slab
 tile.erebus.slab_planks_marshwood.name=Marshwood Slab
 tile.erebus.slab_planks_scorched.name=Scorched Slab
 tile.erebus.slab_planks_varnished.name=Varnished Slab
+tile.erebus.slab_planks_petrified_wood.name=Petrified Wood Slab
 
 # Slabs Stone
 tile.erebus.slab_umberstone.name=Umberstone Slab
 tile.erebus.slab_umbercobble.name=Umbercobble Slab
 tile.erebus.slab_umbercobble_mossy.name=Mossy Umbercobble Slab
 tile.erebus.slab_umbercobble_webbed.name=Webbed Umbercobble Slab
-tile.erebus.slab_umberstone_bricks.name=Umberstone Bricks Slab
+tile.erebus.slab_umberstone_bricks.name=Umberstone Brick Slab
 tile.erebus.slab_umbertile_smooth.name=Smooth Umbertile Slab
 tile.erebus.slab_umbertile_smooth_small.name=Small Smooth Umbertile Slab
 tile.erebus.slab_umberpaver.name=Umberpaver Slab
 tile.erebus.slab_umberpaver_mossy.name=Mossy Umberpaver Slab
 tile.erebus.slab_umberpaver_webbed.name=Webbed Umberpaver Slab
+tile.erebus.slab_amber.name=Amber Slab
+tile.erebus.slab_amber_bricks.name=Amber Brick Slab
+tile.erebus.slab_mud_bricks.name=Mud Brick Slab
+tile.erebus.slab_mir_bricks.name=Mir Brick Slab
 
-# Stairs
+# Stairs Wood
 tile.erebus.stairs_baobab.name=Baobab Stairs
 tile.erebus.stairs_eucalyptus.name=Eucalyptus Stairs
 tile.erebus.stairs_mahogany.name=Mahogany Stairs
@@ -361,6 +367,23 @@ tile.erebus.stairs_rotten.name=Rotten Stairs
 tile.erebus.stairs_marshwood.name=Marshwood Stairs
 tile.erebus.stairs_scorched.name=Scorched Stairs
 tile.erebus.stairs_varnished.name=Varnished Stairs
+tile.erebus.stairs_petrified_wood.name=Petrified Wood Stairs
+
+# Stairs Stone
+tile.erebus.stairs_umberstone.name=Umberstone Stairs
+tile.erebus.stairs_umbercobble.name=Umbercobble Stairs
+tile.erebus.stairs_umbercobble_mossy.name=Mossy Umbercobble Stairs
+tile.erebus.stairs_umbercobble_webbed.name=Webbed Umbercobble Stairs
+tile.erebus.stairs_umberstone_bricks.name=Umberstone Brick Stairs
+tile.erebus.stairs_umbertile_smooth.name=Smooth Umbertile Stairs
+tile.erebus.stairs_umbertile_smooth_small.name=Small Smooth Umbertile Stairs
+tile.erebus.stairs_umberpaver.name=Umberpaver Stairs
+tile.erebus.stairs_umberpaver_mossy.name=Mossy Umberpaver Stairs
+tile.erebus.stairs_umberpaver_webbed.name=Webbed Umberpaver Stairs
+tile.erebus.stairs_amber.name=Amber Stairs
+tile.erebus.stairs_amber_bricks.name=Amber Brick Stairs
+tile.erebus.stairs_mud_bricks.name=Mud Brick Stairs
+tile.erebus.stairs_mir_bricks.name=Mir Brick Stairs
 
 # Doors
 tile.erebus.door_baobab.name=Baobab Door
@@ -372,6 +395,7 @@ tile.erebus.door_cypress.name=Cypress Door
 tile.erebus.door_rotten.name=Rotten Door
 tile.erebus.door_marshwood.name=Marshwood Door
 tile.erebus.door_scorched.name=Scorched Door
+tile.erebus.door_petrified_wood.name=Petrified Wood Door
 
 # Fences
 tile.erebus.fence_baobab.name=Baobab Fence
@@ -412,9 +436,10 @@ tile.erebus.wall_umberstone_bricks.name=Umbrick Wall
 tile.erebus.wall_umbertile_smooth.name=Umbertile Wall
 tile.erebus.wall_umbertile_smooth_small.name=Small Umbertile  Wall
 tile.erebus.wall_amber.name=Amber Wall
+tile.erebus.wall_amber_bricks.name=Amber Brick Wall
 tile.erebus.wall_umberpaver.name=Umberpaver Wall
 tile.erebus.wall_umberpaver_mossy.name=Mossy Umberpaver Wall
-tile.erebus.wall_umberpaver_webbed.name=Webby Umberpaver Wall
+tile.erebus.wall_umberpaver_webbed.name=Webbed Umberpaver Wall
 
 # Plants
 tile.erebus.crop_turnip.name=Turnips

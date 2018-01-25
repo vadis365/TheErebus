@@ -169,12 +169,13 @@ public class ModBlocks {
 	public static final Block ORE_FOSSIL = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.SHARD_BONE.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_GNEISS = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.GNEISS_ROCK.ordinal(), 1, 1, 0, 2);
 	public static final Block ORE_PETRIFIED_WOOD = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.PETRIFIED_WOOD.ordinal(), 1, 1, 0, 2);
-	public static final Block ORE_TEMPLE = new BlockOreErebus(0); // what does this drop?
+	public static final Block ORE_TEMPLE = new BlockOreErebus2(0, ModItems.MATERIALS, EnumErebusMaterialsType.TEMPLE_ROCK.ordinal(), 1, 1, 0, 2);
 	public static final Block JADE_BLOCK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(5.0F).setResistance(10.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block AMBER = new BlockAmber();
 	public static final Block AMBER_BRICKS = new BlockAmberBricks();
 	public static final Block AMBER_GLASS = new BlockAmberGlass();
 	public static final Block DOOR_AMBER = new BlockDoorErebus(AMBER_BRICKS.getDefaultState());
+
 	public static final Block PRESERVED_BLOCK = new BlockPreservedBlock();
 	public static final Block MUD = new BlockMud();
 	public static final Block QUICK_SAND = new BlockQuickSand();
@@ -222,6 +223,7 @@ public class ModBlocks {
 	public static final Block SILK = new BlockSimple(Material.CLOTH, SoundType.CLOTH).setHardness(0.2F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block MIR_BRICK = new BlockSimple(Material.ROCK, "pickaxe", 1, SoundType.STONE).setHardness(1.5F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block PLANKS_PETRIFIED_WOOD = new BlockSimple(Material.ROCK, SoundType.WOOD).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block DOOR_PETRIFIED_WOOD = new BlockDoorErebus(PLANKS_PETRIFIED_WOOD.getDefaultState());
 	public static final Block REIN_EXO = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(1.5F).setResistance(2000.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block MUD_BRICK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(0.8F).setResistance(1.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block TEMPLE_BRICK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
@@ -328,6 +330,8 @@ public class ModBlocks {
 	public static final Block SLAB_AMBER = new BlockSlabErebus(AMBER.getDefaultState(), "pickaxe", 0);
 	public static final Block SLAB_AMBER_BRICKS = new BlockSlabErebus(AMBER_BRICKS.getDefaultState(), "pickaxe", 0);
 	public static final Block SLAB_PLANKS_PETRIFIED_WOOD = new BlockSlabErebus(PLANKS_PETRIFIED_WOOD.getDefaultState(), "pickaxe", 0);
+	public static final Block SLAB_MUD_BRICKS = new BlockSlabErebus(MUD_BRICK.getDefaultState(), "pickaxe", 0);
+	public static final Block SLAB_MIR_BRICKS = new BlockSlabErebus(MIR_BRICK.getDefaultState(), "pickaxe", 0);
 
 	// STONE STAIRS
 	public static final Block STAIRS_UMBERSTONE = new BlockStairsErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));
@@ -343,6 +347,8 @@ public class ModBlocks {
 	public static final Block STAIRS_AMBER = new BlockStairsErebus(AMBER.getDefaultState());
 	public static final Block STAIRS_AMBER_BRICKS = new BlockStairsErebus(AMBER_BRICKS.getDefaultState());
 	public static final Block STAIRS_PETRIFIED_WOOD = new BlockStairsErebus(PLANKS_PETRIFIED_WOOD.getDefaultState());
+	public static final Block STAIRS_MUD_BRICKS = new BlockStairsErebus(MUD_BRICK.getDefaultState());
+	public static final Block STAIRS_MIR_BRICKS = new BlockStairsErebus(MIR_BRICK.getDefaultState());
 
 	//FLUIDS
 	public static final Block FORMIC_ACID = new BlockFormicAcid();

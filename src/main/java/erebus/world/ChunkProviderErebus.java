@@ -272,7 +272,7 @@ public class ChunkProviderErebus implements IChunkGenerator, IChunkProvider {
 			return;
 
 		byte var5 = 0;
-		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, x * 16, z * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
+		stoneNoise = noiseGen4.generateNoiseOctaves(stoneNoise, x * 16, 0, z * 16, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
 		double d0 = 0.03125D;
 		double[] additionalNoise1 = new double[256];
 		double[] additionalNoise2 = new double[256];

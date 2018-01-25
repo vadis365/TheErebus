@@ -102,6 +102,8 @@ public class RecipeHandler {
 		public static final IRecipe SLAB_AMBER = new ShapedOreRecipe(getResource("recipe_slab_amber"), new ItemStack(ModBlocks.SLAB_AMBER, 6), "xxx", 'x', ModBlocks.AMBER);
 		public static final IRecipe SLAB_AMBER_BRICKS = new ShapedOreRecipe(getResource("recipe_slab_amber_bricks"), new ItemStack(ModBlocks.SLAB_AMBER_BRICKS, 6), "xxx", 'x', ModBlocks.AMBER_BRICKS);
 		public static final IRecipe SLAB_PLANKS_PETRIFIED_WOOD = new ShapedOreRecipe(getResource("recipe_slab_petrified_wood"), new ItemStack(ModBlocks.SLAB_PLANKS_PETRIFIED_WOOD, 6), "xxx", 'x', ModBlocks.PLANKS_PETRIFIED_WOOD);
+		public static final IRecipe SLAB_MUD_BRICKS = new ShapedOreRecipe(getResource("recipe_slab_mud_bricks"), new ItemStack(ModBlocks.SLAB_MUD_BRICKS, 6), "xxx", 'x', ModBlocks.MUD_BRICK);
+		public static final IRecipe SLAB_MIR_BRICKS = new ShapedOreRecipe(getResource("recipe_slab_mir_bricks"), new ItemStack(ModBlocks.SLAB_MIR_BRICKS, 6), "xxx", 'x', ModBlocks.MIR_BRICK);
 
 		// STONE STAIRS
 		public static final IRecipe STAIRS_UMBERSTONE = new ShapedOreRecipe(getResource("recipe_stairs_umberstone"), new ItemStack(ModBlocks.STAIRS_UMBERSTONE, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERSTONE, 1, BlockUmberstone.EnumType.UMBERSTONE.ordinal()));
@@ -116,6 +118,8 @@ public class RecipeHandler {
 		public static final IRecipe STAIRS_UMBERPAVER_WEBBED = new ShapedOreRecipe(getResource("recipe_stairs_umberpaver_webbed"), new ItemStack(ModBlocks.STAIRS_UMBERPAVER_WEBBED, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.UMBERPAVER, 1, BlockUmberPaver.EnumUmberPaverType.UMBERPAVER_WEBBED.ordinal()));
 		public static final IRecipe STAIRS_AMBER = new ShapedOreRecipe(getResource("recipe_stairs_amber"), new ItemStack(ModBlocks.STAIRS_AMBER, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.AMBER);
 		public static final IRecipe STAIRS_AMBER_BRICKS = new ShapedOreRecipe(getResource("recipe_stairs_amber_bricks"), new ItemStack(ModBlocks.STAIRS_AMBER_BRICKS, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.AMBER_BRICKS);
+		public static final IRecipe STAIRS_MUD_BRICKS = new ShapedOreRecipe(getResource("recipe_stairs_mud_bricks"), new ItemStack(ModBlocks.STAIRS_MUD_BRICKS, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.MUD_BRICK);
+		public static final IRecipe STAIRS_MIR_BRICKS = new ShapedOreRecipe(getResource("recipe_stairs_mir_bricks"), new ItemStack(ModBlocks.STAIRS_MIR_BRICKS, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.MIR_BRICK);
 
 		// Jade tools
 		public static final IRecipe JADE_PICKAXE = new ShapedOreRecipe(getResource("recipe_jade_pickaxe"), new ItemStack(ModItems.JADE_PICKAXE, 1), "XXX", " # ", " # ", '#', "stickWood", 'X', "gemJade");
@@ -131,7 +135,7 @@ public class RecipeHandler {
 		public static final IRecipe JADE_CHESTPLATE = new ShapedOreRecipe(getResource("recipe_jade_chestplate"), new ItemStack(ModItems.JADE_CHESTPLATE, 1), "# #", "###", "###", '#', "gemJade");
 		public static final IRecipe JADE_LEGGINGS = new ShapedOreRecipe(getResource("recipe_jade_leggings"), new ItemStack(ModItems.JADE_LEGGINGS, 1), "###", "# #", "# #", '#', "gemJade");
 		public static final IRecipe JADE_BOOTS = new ShapedOreRecipe(getResource("recipe_jade_boots"), new ItemStack(ModItems.JADE_BOOTS, 1), "# #", "# #", '#', "gemJade");
-		
+
 		// Bamboo armor
 		public static final IRecipe BAMBOO_HELMET = new ShapedOreRecipe(getResource("recipe_bamboo_helmet"), new ItemStack(ModItems.BAMBOO_HELMET, 1), "###", "# #", '#', "plankBamboo");
 		public static final IRecipe BAMBOO_CHESTPLATE = new ShapedOreRecipe(getResource("recipe_bamboo_chestplate"), new ItemStack(ModItems.BAMBOO_CHESTPLATE, 1), "# #", "###", "###", '#', "plankBamboo");
@@ -275,6 +279,7 @@ public class RecipeHandler {
 		public static final IRecipe AMBER_STAR = new ShapedOreRecipe(getResource("recipe_amber_star"), EnumErebusMaterialsType.AMBER_STAR.createStack(), " x ", "xyx", " x ", 'x', EnumErebusMaterialsType.RESIN.createStack(), 'y', new ItemStack(ModBlocks.AMBER_GLASS, 1, 0));
 		//	public static final IRecipe ARMCHAIR = new ShapedOreRecipe(getResource("recipe_"), new ItemStack(ModBlocks.armchair), "  w", "www", "p p", 'w', Blocks.wool, 'p', "plankWood");
 		public static final IRecipe ROTTEN_FLESH = new ShapedOreRecipe(getResource("recipe_rotten_flesh"), new ItemStack(Items.ROTTEN_FLESH), "xx", "xx", 'x', EnumErebusMaterialsType.PLATE_ZOMBIE_ANT.createStack());
+		public static final IRecipe TEMPLE_BRICK = new ShapedOreRecipe(getResource("recipe_temple_brick"), new ItemStack(ModBlocks.TEMPLE_BRICK), "xx", "xx", 'x', EnumErebusMaterialsType.TEMPLE_ROCK.createStack());
 
 		// Smoothies
 		// Have to figure this out...
@@ -408,6 +413,7 @@ public class RecipeHandler {
 		public static final IRecipe DOOR_ROTTEN = new ShapedOreRecipe(getResource("recipe_door_rotten"), new ItemStack(EnumWood.ROTTEN.getDoor(), 3), "xx", "xx", "xx", 'x', new ItemStack(ModBlocks.PLANKS, 1, EnumWood.ROTTEN.ordinal()));
 		public static final IRecipe DOOR_MARSHWOOD = new ShapedOreRecipe(getResource("recipe_door_marshwood"), new ItemStack(EnumWood.MARSHWOOD.getDoor(), 3), "xx", "xx", "xx", 'x', new ItemStack(ModBlocks.PLANKS, 1, EnumWood.MARSHWOOD.ordinal()));
 		public static final IRecipe DOOR_SCORCHED = new ShapedOreRecipe(getResource("recipe_door_scorched"), new ItemStack(EnumWood.SCORCHED.getDoor(), 3), "xx", "xx", "xx", 'x', new ItemStack(ModBlocks.PLANKS, 1, EnumWood.SCORCHED.ordinal()));
+		public static final IRecipe DOOR_PETRIFIED = new ShapedOreRecipe(getResource("recipe_door_petrified"), new ItemStack(ModBlocks.DOOR_PETRIFIED_WOOD, 3), "xx", "xx", "xx", 'x', new ItemStack(ModBlocks.PLANKS_PETRIFIED_WOOD, 1));
 
 	private static ResourceLocation getResource(String inName) {
 		return new ResourceLocation(Reference.MOD_ID, inName);

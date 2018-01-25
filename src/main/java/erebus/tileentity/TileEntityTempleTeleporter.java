@@ -53,11 +53,11 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 
 		if (getWorld().getBlockState(getPos()).getValue(BlockTempleTeleporter.TYPE).ordinal() == 4) {
 			int activeCount2 = 0;
-			for (int offX = -1; offX < 2; ++offX)
-				for (int offZ = -1; offZ < 2; ++offZ) {
+			for (int offX = -1; offX < 2; ++offX) {
+				for (int offZ = -1; offZ < 2; ++offZ) 
 					if (getPos().add(offX, 0, offZ) != getPos())
-						if (getWorld().getBlockState(getPos().add(offX, 0, offZ)) .getBlock() instanceof BlockTempleBrickUnbreaking)
-							if (getWorld().getBlockState(getPos().add(offX, 0, offZ)) .getValue(BlockTempleBrickUnbreaking.TYPE).ordinal() == 10)
+						if (getWorld().getBlockState(getPos().add(offX, 0, offZ)).getBlock() instanceof BlockTempleBrickUnbreaking)
+							if (getWorld().getBlockState(getPos().add(offX, 0, offZ)).getValue(BlockTempleBrickUnbreaking.TYPE).ordinal() == 10)
 								activeCount2++;
 				}
 			if (activeCount2 == 8)
@@ -101,7 +101,7 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 		}
 		if (getWorld().getWorldTime() % 5 == 0 && meta < 4)
 			getWorld().setBlockState(getPos(), ModBlocks.TEMPLE_TELEPORTER.getDefaultState().withProperty(BlockTempleTeleporter.TYPE, EnumTeleporterType.values()[meta + 1]), 3);
-		if (meta == 3 && bossSpawn) {
+		if (meta == 4 && bossSpawn) {
 			AntlionMazeDungeon.breakForceField(getWorld(), getPos().getX() - 16, getPos().getY() + 1, getPos().getZ() - 27);
 			ItemStack nightVisionPotion = new ItemStack(Items.POTIONITEM, 1, 0);
 			PotionUtils.addPotionToItemStack(nightVisionPotion, PotionTypes.NIGHT_VISION);

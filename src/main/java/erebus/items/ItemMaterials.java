@@ -214,7 +214,8 @@ public class ItemMaterials extends Item implements ISubItemsItem {
 		SHIELD_JADE_FACE,
 		SHIELD_REIN_EXO_FACE,
 		SHIELD_RHINO_EXO_FACE, 
-		BAMBOO_PIPE_WRENCH;
+		BAMBOO_PIPE_WRENCH,
+		TEMPLE_ROCK;
 
 		@Override
 		public ItemStack createStack(int size) {
