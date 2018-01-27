@@ -1,18 +1,20 @@
 [
-	{
-		"modid": "erebus",
-		"name": "Erebus",
-		"description": "Discover a world ruled by insects, the Erebus is a place to explore, mine and build",
-		"version": "1.0.0",
-		"url": "http://minecraft.curseforge.com/projects/the-erebus",
-		"updateUrl": "",
-		"authorList": [
-			"ganymedes01", "vadis365"
-		],
-		"credits": "",
-		"logoFile": "",
-		"screenshots": [],
-		"parent":"",
-		"dependencies": []
-	}
+{
+  "modid": "erebus",
+  "name": "Erebus",
+  "description": "Discover a world ruled by insects, the Erebus is a place to explore, mine and build",
+  "version": "1.0.0",
+  "url": "http://minecraft.curseforge.com/projects/the-erebus",
+  "updateUrl": "",
+  "authorList": [
+    "vadis365", "ganymedes01"
+  ],
+  "credits": "Thanks to people and stuff.",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
 ]

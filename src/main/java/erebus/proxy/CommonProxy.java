@@ -23,7 +23,6 @@ import erebus.inventory.ContainerSilo;
 import erebus.inventory.ContainerSmoothieMaker;
 import erebus.inventory.ContainerUmberFurnace;
 import erebus.lib.Reference;
-import erebus.tileentity.TileEntityArmchair;
 import erebus.tileentity.TileEntityBambooBridge;
 import erebus.tileentity.TileEntityBambooCrate;
 import erebus.tileentity.TileEntityBambooPipe;
@@ -124,7 +123,7 @@ public class CommonProxy implements IGuiHandler {
 		registerTileEntity(TileEntitySmoothieMaker.class, "smoothie_maker");
 		registerTileEntity(TileEntityTempleTeleporter.class, "temple_teleporter");
 		registerTileEntity(TileEntityPreservedBlock.class, "preserved_block");
-		registerTileEntity(TileEntityArmchair.class, "armchair");
+		//registerTileEntity(TileEntityArmchair.class, "armchair");
 		registerTileEntity(TileEntityBambooPipe.class, "bamboo_pipe");
 		registerTileEntity(TileEntityBambooPipeExtract.class, "bamboo_pipe_extract");
 		registerTileEntity(TileEntityLiquifier.class, "liquifier");

@@ -2,7 +2,7 @@ package erebus.blocks;
 
 import java.util.Random;
 
-import com.sun.istack.internal.Nullable;
+import javax.annotation.Nullable;
 
 import erebus.ModBlocks;
 import erebus.ModItems;

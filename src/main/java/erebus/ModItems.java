@@ -44,6 +44,7 @@ import erebus.items.ItemPortalActivator;
 import erebus.items.ItemRolledNewspaper;
 import erebus.items.ItemScorpionPincer;
 import erebus.items.ItemSmoothie;
+import erebus.items.ItemSmoothieBook;
 import erebus.items.ItemSpiderTShirt;
 import erebus.items.ItemSprayCan;
 import erebus.items.ItemWandOfAnimation;
@@ -167,6 +168,7 @@ public class ModItems {
 	public static final Item WAND_OF_PRESERVATION = new ItemWandOfPreservation();
 	public static final Item COMPOST = new ItemCompost();
 	public static final Item PLANTICIDE = new ItemPlanticide();
+	public static final Item SMOOTHIE_BOOK = new ItemSmoothieBook();
 
 	public static void init() {
 		try {

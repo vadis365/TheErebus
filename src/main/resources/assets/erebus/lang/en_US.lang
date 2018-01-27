@@ -1,3 +1,5 @@
+#PARSE_ESCAPES
+
 #########
 # ITEMS #
 #########
@@ -184,6 +186,7 @@ item.erebus.spray_can.name=Insect Repellent
 item.erebus.whetstone.name=Whetstone
 item.erebus.compost.name=Compost
 item.erebus.planticide.name=Planticide
+item.erebus.smoothie_book.name=Smoothie-matic 2000
 
 item.erebus.idols.idol_mud.name=Mud Scarab
 item.erebus.idols.idol_iron.name=Iron Scarab
@@ -824,3 +827,21 @@ key.erebus.glide=Glide
 key.erebus.poweredglide=Glider Lift
 key.erebus.beetleram=Beetle Ram Attack
 key.erebus.beetlemine=Stag Beetle Dig
+
+#################
+# Smoothie Book #
+#################
+
+erebus.book.smoothie.0=\u00A70Thank you for using the new ErebusCo. Smoothie-matic 2000.\nIn the following pages you will find some delicious recipes.\n\nEach recipe will require a different base fluid. The fluid bars shown in the gui are for: Honey, Beetle Juice, Anti-Venom and Milk.
+erebus.book.smoothie.1=\u00A70Fluids can be added to the Smoothie-matic 2000 by right clicking on the block with a full bucket.\n\nThe Four top slots in the gui are for the required ingredients and the lower slot must contain a Smoothie Glass.
+erebus.book.smoothie.2=\u00A79Green Tea Grasshopper\n\n\u00A70Grasshopper Leg x2\nElastic Fibre\nFly Wing\n\n\u00A7dBeetle Juice\n\n\u00A74Effects:\nJumping
+erebus.book.smoothie.3=\u00A79Money Honey\n\n\u00A70Honey drip x2\nNectar\nGold Nugget\n\n\u00A7dHoney\n\n\u00A74Effects:\nRegeneration
+erebus.book.smoothie.4=\u00A79Darkness In The Middle\n\n\u00A70Cammo powder x2\nDark Fruit\nSwamp Berries\n\n\u00A7dBeetle Juice\n\n\u00A74Effects:\nInvisibility
+erebus.book.smoothie.5=\u00A79Green Giant\n\n\u00A70Repellent\nPoison Gland x2\nWasp Sting\n\n\u00A7dAnti-Venom\n\n\u00A74Effects:\nNegates Potions
+erebus.book.smoothie.6=\u00A79Seedy Goodness\n\n\u00A70Pumpkin Seeds\nMelon Seeds\nDark Fruit Seeds\nBio-Velocity\n\n\u00A7dBeetle Juice\n\n\u00A74Effects:\nDig Speed
+erebus.book.smoothie.7=\u00A79Givin' Me The Blues\n\n\u00A70Blue Bell Petal x2\nLapis Lazuli x2\n\n\u00A7dMilk\n\n\u00A74Effects:\nExtinguish
+erebus.book.smoothie.8=\u00A79Hot Hot Baby\n\n\u00A70Fire Bloom x2\nWasp Sting\nBog Maw Root\n\n\u00A7dAnti-Venom\n\n\u00A74Effects:\nStrength
+erebus.book.smoothie.9=\u00A79Don't Meddle With The Nettle\n\n\u00A70Nettle Leaf\nNettle Flower\nJade Berries\nExo Skeleton\n\n\u00A7dHoney\n\n\u00A74Effects:\nResistance
+erebus.book.smoothie.10=\u00A79Liquid Gold\n\n\u00A70Life Blood x2\nBamboo Shoot\nGlistering Melon\n\n\u00A7dMilk\n\n\u00A74Effects:\nSaturation
+erebus.book.smoothie.11=\u00A79Bryuf's Brew\n\n\u00A70Terpsishroom\nTurnip\nCompound Eyes\nHeart Berries\n\n\u00A7dHoney\n\u00A7dBeetle Juice\n\u00A7dAnti-Venom\n\u00A7dMilk\n\n\u00A74Effects:\nMighty Buffs
+

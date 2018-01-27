@@ -3,6 +3,7 @@ package erebus.block.cooking;
 import javax.annotation.Nullable;
 
 import erebus.Erebus;
+import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.proxy.CommonProxy;
@@ -16,6 +17,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -82,7 +84,7 @@ public class BlockSmoothieMaker extends BlockContainer {
 	}
 
 	@Override
-	 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
 			return true;
 
@@ -92,15 +94,19 @@ public class BlockSmoothieMaker extends BlockContainer {
 			return false;
 
 		if (!player.inventory.getCurrentItem().isEmpty()) {
-			final IFluidHandler fluidHandler = getFluidHandler(world, pos, facing);
-			if (fluidHandler != null) {
-				FluidUtil.interactWithFluidHandler(player, hand, world, pos, facing);
-				return FluidUtil.getFluidHandler(player.getHeldItem(hand)) != null;
+			if (player.inventory.getCurrentItem().getItem() instanceof ItemBook && player.inventory.getCurrentItem().getCount() == 1) {
+				player.setHeldItem(hand, new ItemStack(ModItems.SMOOTHIE_BOOK));
+			} else {
+				final IFluidHandler fluidHandler = getFluidHandler(world, pos, facing);
+				if (fluidHandler != null) {
+					FluidUtil.interactWithFluidHandler(player, hand, world, pos, facing);
+					return FluidUtil.getFluidHandler(player.getHeldItem(hand)) != null;
+				}
 			}
 			return false;
-		}
-		else if (tile != null)
-			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.SMOOTHIE_MAKER.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+		} else if (tile != null)
+			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.SMOOTHIE_MAKER.ordinal(), world, pos.getX(), pos.getY(),
+					pos.getZ());
 		return true;
 	}
 
