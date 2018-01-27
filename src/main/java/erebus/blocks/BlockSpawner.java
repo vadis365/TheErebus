@@ -5,12 +5,13 @@ import net.minecraft.block.SoundType;
 import net.minecraft.entity.EntityList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class BlockSpawner extends BlockMobSpawner {
-	private final String mobName;
+	private final ResourceLocation mobName;
 
-	public BlockSpawner(String mobName) {
+	public BlockSpawner(ResourceLocation mobName) {
 		disableStats();
 		setHardness(5.0F);
 		this.mobName = mobName;
@@ -20,7 +21,7 @@ public class BlockSpawner extends BlockMobSpawner {
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		TileEntityMobSpawner tile = new TileEntityMobSpawner();
-		tile.getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntityList.getClassFromName(mobName)));
+		tile.getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntityList.getClass(mobName)));
 		return tile;
 	}
 }

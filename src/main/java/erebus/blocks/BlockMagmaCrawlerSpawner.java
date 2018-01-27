@@ -5,10 +5,11 @@ import java.util.Random;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 public class BlockMagmaCrawlerSpawner extends BlockSpawner {
 
-	public BlockMagmaCrawlerSpawner(String mobName) {
+	public BlockMagmaCrawlerSpawner(ResourceLocation mobName) {
 		super(mobName);
 		setHarvestLevel("pickaxe", 0);
 	}

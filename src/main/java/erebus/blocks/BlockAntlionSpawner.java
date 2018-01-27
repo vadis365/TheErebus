@@ -5,10 +5,11 @@ import java.util.Random;
 import erebus.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 public class BlockAntlionSpawner extends BlockSpawner {
 
-	public BlockAntlionSpawner(String mobName) {
+	public BlockAntlionSpawner(ResourceLocation mobName) {
 		super(mobName);
 		setHarvestLevel("pickaxe", 0);
 	}

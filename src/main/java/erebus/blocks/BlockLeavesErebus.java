@@ -59,7 +59,7 @@ public class BlockLeavesErebus extends BlockLeaves {
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-		return !Minecraft.getMinecraft().gameSettings.fancyGraphics;
+		return Blocks.LEAVES.isOpaqueCube(state);
 	}
 
 	@Override

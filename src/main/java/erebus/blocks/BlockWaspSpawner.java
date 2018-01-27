@@ -5,10 +5,11 @@ import java.util.Random;
 import erebus.ModItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 public class BlockWaspSpawner extends BlockSpawner {
 
-	public BlockWaspSpawner(String mobName) {
+	public BlockWaspSpawner(ResourceLocation mobName) {
 		super(mobName);
 	}
 

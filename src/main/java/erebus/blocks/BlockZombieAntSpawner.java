@@ -5,10 +5,11 @@ import java.util.Random;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 public class BlockZombieAntSpawner extends BlockSpawner {
 
-	public BlockZombieAntSpawner(String mobName) {
+	public BlockZombieAntSpawner(ResourceLocation mobName) {
 		super(mobName);
 		setHarvestLevel("pickaxe", 0);
 	}
