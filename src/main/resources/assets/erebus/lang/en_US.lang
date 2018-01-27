@@ -157,6 +157,7 @@ item.erebus.enhanced_scorpion_pincer.name=Augmented Scorpion Pincer
 item.erebus.war_hammer.name=Quake Hammer
 item.erebus.web_slinger.name=Web Slinger
 item.erebus.web_slinger_wither.name=Wither Web Slinger
+item.erebus.max_speed_bow.name=Maximum Speed Bow
 
 # Shields
 item.erebus.bamboo_shield.name=Bamboo Shield

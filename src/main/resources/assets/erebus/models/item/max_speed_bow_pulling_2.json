@@ -1,0 +1,6 @@
+{
+    "parent": "erebus:item/max_speed_bow",
+    "textures": {
+        "layer0": "erebus:items/max_speed_bow_pulling_2"
+    }
+}

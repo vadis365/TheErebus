@@ -18,6 +18,7 @@ import erebus.items.ItemArmorWaterStriders;
 import erebus.items.ItemAxeJade;
 import erebus.items.ItemBambucket;
 import erebus.items.ItemBootsJump;
+import erebus.items.ItemBowMaxSpeed;
 import erebus.items.ItemCompost;
 import erebus.items.ItemCompoundGoggles;
 import erebus.items.ItemDeathCompass;
@@ -150,6 +151,7 @@ public class ModItems {
 	public static final ItemWarHammer WAR_HAMMER = new ItemWarHammer();
 	public static final ItemWebSlinger WEB_SLINGER = new ItemWebSlinger();
 	public static final ItemWebSlinger WEB_SLINGER_WITHER = new ItemWebSlingerWither();
+	public static final ItemBowMaxSpeed MAX_SPEED_BOW = new ItemBowMaxSpeed();
 
 	// RANDOM STUFF
 	public static final Item NECTAR_COLLECTOR = new ItemNectarCollector();
