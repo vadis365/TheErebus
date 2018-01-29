@@ -53,6 +53,7 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
         setDefaultState(blockState.getBaseState().withProperty(VARIANT, BlockDoubleHeightPlant.EnumPlantType.BULLRUSH).withProperty(HALF, BlockDoubleHeightPlant.EnumBlockHalf.LOWER));
         setHardness(0.0F);
         setSoundType(SoundType.PLANT);
+        setCreativeTab(ModTabs.PLANTS);
     }
 
 	@Override
@@ -199,7 +200,7 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		if (tab == ModTabs.BLOCKS)
+		if (tab == ModTabs.PLANTS)
 			for (EnumPlantType planttype : EnumPlantType.values())
 				list.add(new ItemStack(this, 1, planttype.ordinal()));
 	}

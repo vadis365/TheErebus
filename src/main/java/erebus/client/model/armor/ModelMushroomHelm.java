@@ -2,6 +2,7 @@ package erebus.client.model.armor;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -54,9 +55,14 @@ public class ModelMushroomHelm extends ModelBiped {
 
 	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAngle, float entityTickTime, float rotationYaw, float rotationPitch, float unitPixel) {
-		super.render(entity, limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel);
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
-		capTop.render(unitPixel);
+		GlStateManager.pushMatrix();
+        if (entity.isSneaking()) {
+            GlStateManager.translate(0.0F, 0.2F, 0F);
+            capTop.rotationPointY = 1.0F;
+        }
+        capTop.render(0.064F);
+        GlStateManager.popMatrix();
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

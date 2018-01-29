@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class KeyBindingHandler {
 
 	public static KeyBinding GLIDE = new KeyBinding("key.erebus.glide", Keyboard.KEY_G, Reference.MOD_NAME);
-	public static KeyBinding POWERED_GLIDE = new KeyBinding("key.erebus.poweredglide", Keyboard.KEY_F, Reference.MOD_NAME);
+	public static KeyBinding POWERED_GLIDE = new KeyBinding("key.erebus.poweredglide", Keyboard.KEY_H, Reference.MOD_NAME);
 	public static KeyBinding BEETLE_RAM = new KeyBinding("key.erebus.beetleram", Keyboard.KEY_R, Reference.MOD_NAME);
 	public static KeyBinding BEETLE_MINE = new KeyBinding("key.erebus.beetlemine", Keyboard.KEY_LMENU, Reference.MOD_NAME);
 

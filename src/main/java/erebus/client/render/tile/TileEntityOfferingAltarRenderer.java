@@ -10,6 +10,9 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -81,12 +84,8 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer<T
 					double a = -Math.toRadians((float)120 * (i + 1) + tile.getWorld().getTotalWorldTime() -90);
 					double offSetX = -Math.sin(a) * Math.cos(Math.toRadians(angle));
 					double offSetZ = Math.cos(a) * Math.cos(Math.toRadians(angle));
-					if(tile.getWorld().getTotalWorldTime()%4 == 0 && i == 0)
-						Erebus.PROXY.spawnCustomParticle("flame", tile.getWorld(), tile.getPos().getX() + 0.5F - offSetX , tile.getPos().getY() + 1.5F + (tile.getWorld().rand.nextFloat() - tile.getWorld().rand.nextFloat()) *0.1F, tile.getPos().getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
-					if(tile.getWorld().getTotalWorldTime()%4 == 0 && i == 1)
-						Erebus.PROXY.spawnCustomParticle("swampflame", tile.getWorld(), tile.getPos().getX() + 0.5F - offSetX , tile.getPos().getY() + 1.5F + (tile.getWorld().rand.nextFloat() - tile.getWorld().rand.nextFloat()) *0.1F, tile.getPos().getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
-					if(tile.getWorld().getTotalWorldTime()%4 == 0 && i == 2)
-						Erebus.PROXY.spawnCustomParticle("swampflame_green", tile.getWorld(), tile.getPos().getX() + 0.5F - offSetX , tile.getPos().getY() + 1.5F + (tile.getWorld().rand.nextFloat() - tile.getWorld().rand.nextFloat()) *0.1F, tile.getPos().getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
+					if(tile.getWorld().getTotalWorldTime()%4 == 0)
+						Erebus.PROXY.spawnCustomParticle(getParticleType(item.getItem()), tile.getWorld(), tile.getPos().getX() + 0.5F - offSetX , tile.getPos().getY() + 1.5F + (tile.getWorld().rand.nextFloat() - tile.getWorld().rand.nextFloat()) *0.1F, tile.getPos().getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		} else {
@@ -98,5 +97,15 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer<T
 			Minecraft.getMinecraft().getRenderItem().renderItem(tile.getItemForRendering(3), Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(tile.getItemForRendering(3), (World) null, (EntityLivingBase) null));
 			GlStateManager.popMatrix();
 		}
+	}
+
+	public String getParticleType (Item itemIn) {
+		if(itemIn == Item.getItemFromBlock(Blocks.OBSIDIAN))
+			return "flame";
+		if(itemIn == Items.DIAMOND)
+			return "swampflame";
+		if(itemIn == Items.EMERALD)
+			return "swampflame_green";
+		return "flame";
 	}
 }

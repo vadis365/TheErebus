@@ -31,7 +31,6 @@ public class PacketBeetleRamAttack implements IMessage, IMessageHandler<PacketBe
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public IMessage onMessage(PacketBeetleRamAttack message, MessageContext ctx) {
 		final EntityPlayerMP player = ctx.getServerHandler().player;
 		player.getServer().addScheduledTask(new Runnable() {

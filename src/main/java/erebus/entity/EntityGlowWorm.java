@@ -167,7 +167,7 @@ public class EntityGlowWorm extends EntityCreature {
 	}
 
 	public boolean isGlowing() {
-		return getEntityWorld().getSunBrightness(1.0F) < 0.5F && getIsNearEntity();
+		return getEntityWorld().isRemote && getEntityWorld().getSunBrightness(1.0F) < 0.5F && getIsNearEntity();
 	}
 
 	public void setIsNearEntity(boolean entityNear) {

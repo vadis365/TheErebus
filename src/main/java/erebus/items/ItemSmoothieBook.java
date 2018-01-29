@@ -1,5 +1,6 @@
 package erebus.items;
 
+import erebus.ModTabs;
 import erebus.lib.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -22,6 +23,7 @@ public class ItemSmoothieBook extends ItemWritableBook {
 	public int pageAmount = 12;
 
 	public ItemSmoothieBook() {
+		setCreativeTab(ModTabs.ITEMS);
 	}
 
 	@Override

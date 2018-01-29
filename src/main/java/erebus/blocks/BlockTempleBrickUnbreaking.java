@@ -42,7 +42,6 @@ public class BlockTempleBrickUnbreaking extends Block implements IHasCustomItem,
 		setSoundType(SoundType.STONE);
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
-		setCreativeTab(ModTabs.BLOCKS);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumTempleBrickType.TEMPLE_BRICK));
 	}
 	

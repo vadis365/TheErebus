@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import erebus.ModItems;
+import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -33,6 +34,7 @@ public int dimID, targetX, targetZ;
 
 	public ItemHomingBeecon() {
 		setMaxStackSize(1);
+		setCreativeTab(ModTabs.GEAR);
 		this.addPropertyOverride(new ResourceLocation("angle"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)
 			double rotation;

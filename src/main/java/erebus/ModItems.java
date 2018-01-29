@@ -32,6 +32,7 @@ import erebus.items.ItemHelmMushroom;
 import erebus.items.ItemHelmRhino;
 import erebus.items.ItemHomingBeecon;
 import erebus.items.ItemHomingBeeconAdvanced;
+import erebus.items.ItemHornOfSummoning;
 import erebus.items.ItemJadeHoe;
 import erebus.items.ItemJadePaxel;
 import erebus.items.ItemJadeShovel;
@@ -171,6 +172,7 @@ public class ModItems {
 	public static final Item COMPOST = new ItemCompost();
 	public static final Item PLANTICIDE = new ItemPlanticide();
 	public static final Item SMOOTHIE_BOOK = new ItemSmoothieBook();
+	public static final Item HORN_OF_SUMMONING = new ItemHornOfSummoning();
 
 	public static void init() {
 		try {

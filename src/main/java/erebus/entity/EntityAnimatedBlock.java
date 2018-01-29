@@ -122,7 +122,7 @@ public class EntityAnimatedBlock extends EntityCreature implements IEntityAdditi
 	public void onUpdate() {
 		super.onUpdate();
 		if (!getEntityWorld().isRemote && isDead)
-			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(blockID, 1, blockID.damageDropped(blockID.getStateFromMeta(blockMeta))));
+			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(blockID, 1, blockMeta));
 	}
 
 	@Override

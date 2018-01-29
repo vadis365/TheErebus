@@ -188,6 +188,7 @@ item.erebus.whetstone.name=Whetstone
 item.erebus.compost.name=Compost
 item.erebus.planticide.name=Planticide
 item.erebus.smoothie_book.name=Smoothie-matic 2000
+item.erebus.horn_of_summoning.name=Horn of Bee Summoning
 
 item.erebus.idols.idol_mud.name=Mud Scarab
 item.erebus.idols.idol_iron.name=Iron Scarab
@@ -529,6 +530,15 @@ tile.erebus.planted_flower.flower_white.name=White Flower
 tile.erebus.planted_flower.flower_rainbow.name=Rainbow Flower
 tile.erebus.giant_lily_pad.name=Giant Lily Pad
 
+# Flowers Double height
+tile.erebus.double_plant.bullrush.name=Bullrush
+tile.erebus.double_plant.weeping_bluebell.name=Weeping Bluebell
+tile.erebus.double_plant.sundew.name=Sundew
+tile.erebus.double_plant.droughted_shrub.name=Droughted Shrub
+tile.erebus.double_plant.tall_bloom.name=Tall Bloom
+tile.erebus.double_plant.tangled_stalk_mushroom.name=Tangled Stalk Mushroom
+tile.erebus.double_plant.high_capped_mushroom.name=High Capped Mushroom
+
 # Other
 tile.erebus.portal.name=Erebus Portal Block
 tile.erebus.gaean_keystone.name=Gaean Keystone
@@ -764,9 +774,9 @@ itemGroup.erebus.plants=Erebus Plants
 ############
 
 tooltip.erebus.dimension=Dimension: %s
-tooltip.erebus.targetx=Target X: %d
-tooltip.erebus.targety=Target Y: %d
-tooltip.erebus.targetz=Target Z: %d
+tooltip.erebus.targetx=Target X: %s
+tooltip.erebus.targety=Target Y: %s
+tooltip.erebus.targetz=Target Z: %s
 tooltip.erebus.homingbeeconadvanced_1=Sneak + Right click on a block to set as target.
 tooltip.erebus.homingbeeconadvanced_2=Right click to teleport.
 tooltip.erebus.homingbeecon=Sneak + Click on a block to set as target.
@@ -775,18 +785,18 @@ tooltip.erebus.warhammer_1=Hold Right mouse button to charge up.
 tooltip.erebus.warhammer_2=Sneak + Right Click on top of block to use A.O.E. attack.
 tooltip.erebus.waspdagger_1=One use.
 tooltip.erebus.waspdagger_2=Can be thrown.
-tooltip.erebus.honeycombx=Honey Comb Block X: %d
-tooltip.erebus.honeycomby=Honey Comb Block Y: %d
-tooltip.erebus.honeycombz=Honey Comb Block Z: %d
+tooltip.erebus.honeycombx=Honey Comb Block X: %s
+tooltip.erebus.honeycomby=Honey Comb Block Y: %s
+tooltip.erebus.honeycombz=Honey Comb Block Z: %s
 tooltip.erebus.beetamingamulet_1=Click on a Honey Comb Block to set as target for Bee drops.
 tooltip.erebus.beetamingamulet_2=Then click on Bee to tame.
-tooltip.erebus.siloblockx=Silo Block X: %d
-tooltip.erebus.siloblocky=Silo Block Y: %d
-tooltip.erebus.siloblockz=Silo Block Z: %d
+tooltip.erebus.siloblockx=Silo Block X: %s
+tooltip.erebus.siloblocky=Silo Block Y: %s
+tooltip.erebus.siloblockz=Silo Block Z: %s
 tooltip.erebus.anttamingamulet_1=Click on a Silo Block to set as target for Ants.
 tooltip.erebus.anttamingamulet_2=Then click on Ant to link it.
-tooltip.erebus.sprintleggingstier=Tier %d
-tooltip.erebus.whetstonesharpness=Sharpness Level %d
+tooltip.erebus.sprintleggingstier=Tier %s
+tooltip.erebus.whetstonesharpness=Sharpness Level %s
 tooltip.erebus.whetstone_1=Apply to tools using an Anvil.
 tooltip.erebus.whetstone_2=Un-enchanted
 tooltip.erebus.whetstone_3=Surround with Whetstone Powder to increase levels.

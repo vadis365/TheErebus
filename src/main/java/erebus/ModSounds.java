@@ -109,7 +109,6 @@ public class ModSounds {
 		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
 		public static void registerSoundEvents(final RegistryEvent.Register<SoundEvent> event) {
-			ModSounds.init();
 			final IForgeRegistry<SoundEvent> registry = event.getRegistry();
 			for (SoundEvent sounds : SOUNDS)
 				registry.register(sounds);

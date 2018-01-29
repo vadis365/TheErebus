@@ -4,7 +4,6 @@ import java.util.Random;
 
 import erebus.Erebus;
 import erebus.ModBlocks;
-import erebus.ModTabs;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.teleporter.TeleporterHandler;
 import net.minecraft.block.Block;
@@ -31,7 +30,6 @@ public class ErebusPortal extends Block {
 		setLightLevel(1.0F);
 		setBlockUnbreakable();
 		setSoundType(SoundType.GLASS);
-		setCreativeTab(ModTabs.BLOCKS);
 	}
 
 		public static boolean makePortal(World world, BlockPos pos) {

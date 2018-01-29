@@ -10,6 +10,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class EntityGasVent extends EntityLiving {
 
@@ -35,9 +36,9 @@ public class EntityGasVent extends EntityLiving {
 				setDead();
 			if (ticksExisted == 1) {
 				if (getFlameType() == 0)
-					Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.GAS_VENT_SWAMP, (float) posX, (float)posY, (float)posZ));
+					Erebus.NETWORK_WRAPPER.sendToAllAround((new PacketParticle(ParticleType.GAS_VENT_SWAMP, (float) posX, (float)posY, (float)posZ)), new TargetPoint(this.dimension, (double) posX, (double)posY, (double)posZ, 16D));
 				if (getFlameType() == 1)
-					Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.GAS_VENT_VOLCANIC, (float) posX, (float)posY, (float)posZ));
+					Erebus.NETWORK_WRAPPER.sendToAllAround((new PacketParticle(ParticleType.GAS_VENT_VOLCANIC, (float) posX, (float)posY, (float)posZ)), new TargetPoint(this.dimension, (double) posX, (double)posY, (double)posZ, 16D));
 			}
 		}
 	}

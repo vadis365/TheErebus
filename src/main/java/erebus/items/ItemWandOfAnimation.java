@@ -7,6 +7,8 @@ import javax.annotation.Nullable;
 import erebus.ModBlocks;
 import erebus.ModSounds;
 import erebus.ModTabs;
+import erebus.blocks.BlockDoubleHeightPlant;
+import erebus.blocks.BlockPreservedBlock;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -14,6 +16,7 @@ import erebus.entity.EntityAnimatedChest;
 import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -85,6 +88,6 @@ public class ItemWandOfAnimation extends Item {
 	}
 
 	private boolean canAnimate(IBlockState state, World world, BlockPos pos) {
-		return state.getBlock() == Blocks.CHEST || !(state.getBlock() instanceof BlockContainer) && state.getBlockHardness(world, pos) >= 0 && state.getBoundingBox(world, pos).maxX - state.getBoundingBox(world, pos).minX >= 0.7F && state.getBoundingBox(world, pos).maxZ - state.getBoundingBox(world, pos).minZ >= 0.7F && state.getBoundingBox(world, pos).maxY - state.getBoundingBox(world, pos).minY >= 0.7F || state.getBlock() == ModBlocks.BAMBOO_CRATE;
+		return !(state.getBlock() instanceof BlockDoublePlant) || !(state.getBlock() instanceof BlockDoubleHeightPlant) || !(state.getBlock() instanceof BlockPreservedBlock) || state.getBlock() == Blocks.CHEST || !(state.getBlock() instanceof BlockContainer) && state.getBlockHardness(world, pos) >= 0 && state.getBoundingBox(world, pos).maxX - state.getBoundingBox(world, pos).minX >= 0.7F && state.getBoundingBox(world, pos).maxZ - state.getBoundingBox(world, pos).minZ >= 0.7F && state.getBoundingBox(world, pos).maxY - state.getBoundingBox(world, pos).minY >= 0.7F || state.getBlock() == ModBlocks.BAMBOO_CRATE;
 	}
 }

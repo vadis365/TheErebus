@@ -66,7 +66,8 @@ public class EntityBombardierBeetleLarva extends EntityBeetleLarva implements IM
 	private void explode() {
 		Explosion explosion = new Explosion(getEntityWorld(), this, posX, posY, posZ, 3F, true, getEntityWorld().getGameRules().getBoolean("mobGriefing"));
 		explosion.doExplosionA();
-		Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BEETLE_LARVA_SQUISH, (float) posX, (float)posY, (float)posZ));
+		if (!getEntityWorld().isRemote)
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BEETLE_LARVA_SQUISH, (float) posX, (float)posY, (float)posZ));
 		getEntityWorld().playSound((EntityPlayer)null, getPosition(), getJumpedOnSound(), SoundCategory.NEUTRAL, 1.0F, 0.5F);
 		getEntityWorld().playSound((EntityPlayer)null, getPosition(), getDeathSound(), SoundCategory.NEUTRAL, 1.0F, 0.7F);
 		setDead();

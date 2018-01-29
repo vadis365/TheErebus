@@ -48,7 +48,6 @@ public class EntityRhinoBeetle extends EntityTameable {
 	private static final DataParameter<Byte> RAMMING_CHARGE = EntityDataManager.<Byte>createKey(EntityRhinoBeetle.class, DataSerializers.BYTE);
 	private static final DataParameter<Boolean> IS_RAMMING = EntityDataManager.<Boolean>createKey(EntityRhinoBeetle.class, DataSerializers.BOOLEAN);
 	private EntityAINearestAttackableTarget aiNearestAttackableTarget;
-	public int rammingCharge;
 	int shagCount;
 
 	public EntityRhinoBeetle(World world) {

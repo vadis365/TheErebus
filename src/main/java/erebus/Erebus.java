@@ -73,6 +73,7 @@ public class Erebus {
 		ErebusAPI.preservableEntityRegistry = PreservableEntityRegistry.INSTANCE;
 		ConfigHandler.INSTANCE.loadConfig(event);
 		ModFluids.init();
+		ModSounds.init();
 		ModEntities.init();
 		ComposterRegistry.init();
 		

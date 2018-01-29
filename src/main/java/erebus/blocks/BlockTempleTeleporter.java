@@ -41,7 +41,6 @@ public class BlockTempleTeleporter extends Block implements ITileEntityProvider,
 		setSoundType(SoundType.STONE);
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
-		setCreativeTab(ModTabs.BLOCKS);
 		setDefaultState(blockState.getBaseState().withProperty(TYPE, EnumTeleporterType.TEMPLE_TELEPORT_0));
 	}
 

@@ -49,7 +49,7 @@ public class EntityWorkerBee extends EntityTameable {
 
 	public EntityWorkerBee(World world) {
 		super(world);
-		setSize(0.5F, 0.4F);
+		setSize(0.5F, 0.5F);
 		moveHelper = new FlyingMoveHelper(this);
 		setPathPriority(PathNodeType.WATER, -8F);
 		setPathPriority(PathNodeType.BLOCKED, -8.0F);

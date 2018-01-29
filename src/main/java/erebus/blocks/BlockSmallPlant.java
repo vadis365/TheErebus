@@ -22,12 +22,15 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -75,6 +78,11 @@ public class BlockSmallPlant extends BlockBush implements IGrowable, IShearable,
 		EnumSmallPlantType type = state.getValue(PLANT_TYPE);
 		return type.ordinal();
 	}
+
+	@Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(Item.getItemFromBlock(this), 1, state.getValue(PLANT_TYPE).ordinal());
+    }
 
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {

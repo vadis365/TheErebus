@@ -31,6 +31,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -184,7 +185,7 @@ public class BlockWallPlants extends Block implements IShearable, IHasCustomItem
 				meta = 10;
 
 			if (facing.equals(EnumFacing.WEST) && world.isSideSolid(pos.east(), EnumFacing.WEST))
-				meta = 1;
+				meta = 11;
 		}
 
     	return getStateFromMeta(meta);
@@ -224,6 +225,12 @@ public class BlockWallPlants extends Block implements IShearable, IHasCustomItem
 				world.setBlockToAir(pos);
 			}
 	}
+
+	@Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+		int typeMeta = state.getValue(TYPE).ordinal();
+		return new ItemStack(Item.getItemFromBlock(this), 1, typeMeta <= 5 ? EnumWallPlantType.MOSS_DOWN.ordinal() : EnumWallPlantType.MOULD_DOWN.ordinal());
+    }
 
 	@Override
 	public int damageDropped(IBlockState state) {

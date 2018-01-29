@@ -123,7 +123,7 @@ public class ItemWarHammer extends ItemSword {
 		boolean wasCharging = oldStack.getTagCompound() != null && oldStack.getTagCompound().getInteger("charge") <= 25;
 		boolean isCharging = newStack.getTagCompound() != null && newStack.getTagCompound().getInteger("charge") <= 25;
 		return (super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged) && !isCharging || isCharging != wasCharging) || !NBTHelper.areItemStackTagsEqual(oldStack, newStack, STACK_NBT_EXCLUSIONS);
-}
+	}
 
 	private boolean hasTag(ItemStack stack) {
 		if (!stack.hasTagCompound()) {

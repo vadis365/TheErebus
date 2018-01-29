@@ -108,6 +108,10 @@ public class ModelRhinoHelm extends ModelBiped {
 		setRotationAngles(limbSwing, limbSwingAngle, entityTickTime, rotationYaw, rotationPitch, unitPixel, entity);
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(1.2F, 1F, 1.2F);
+        if (entity.isSneaking()) {
+            GlStateManager.translate(0.0F, 0.2F, 0F);
+            helmFront.rotationPointY = 1.0F;
+        }
 		helmFront.render(unitPixel);
 		GlStateManager.popMatrix();
 	}

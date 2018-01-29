@@ -164,7 +164,8 @@ public class EntityTarantulaMiniboss extends EntityMob {
 		}
 
 		if (deathTicks >= 180 && deathTicks <= 200)
-			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BOSS_DEATH, (float) posX, (float)posY, (float)posZ));
+			if (!getEntityWorld().isRemote)
+				Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BOSS_DEATH, (float) posX, (float)posY, (float)posZ));
 
 		int i;
 		int j;
@@ -286,7 +287,8 @@ public class EntityTarantulaMiniboss extends EntityMob {
 	}
 
 	public void spawnBlamParticles() {
-		Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.TARANTULA_BLAM, (float) posX, (float)posY, (float)posZ));
+		if (!getEntityWorld().isRemote)
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.TARANTULA_BLAM, (float) posX, (float)posY, (float)posZ));
 	}
 
 	@Override

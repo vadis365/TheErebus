@@ -204,7 +204,8 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onDeathUpdate() {
 		super.onDeathUpdate();
 		if (isSquashed) {
-			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BEETLE_LARVA_SQUISH, (float) posX, (float)posY, (float)posZ));
+			if (!getEntityWorld().isRemote)
+				Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BEETLE_LARVA_SQUISH, (float) posX, (float)posY, (float)posZ));
 			getEntityWorld().playSound((EntityPlayer)null, getPosition(), getJumpedOnSound(), SoundCategory.NEUTRAL, 1.0F, 0.5F);
 			getEntityWorld().playSound((EntityPlayer)null, getPosition(), getDeathSound(), SoundCategory.NEUTRAL, 1.0F, 0.7F);
 			if (!getEntityWorld().isRemote) {

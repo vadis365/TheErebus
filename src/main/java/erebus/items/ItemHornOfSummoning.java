@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import erebus.ModItems;
 import erebus.ModSounds;
 import erebus.ModTabs;
 import erebus.entity.EntityWorkerBee;
@@ -50,18 +49,18 @@ public class ItemHornOfSummoning extends Item {
 	@Override
 	 public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		world.playSound(null, player.getPosition(), ModSounds.HORN_BLOW, SoundCategory.PLAYERS, 1.0F, 2.0F);
+		world.playSound(null, player.getPosition(), ModSounds.HORN_BLOW, SoundCategory.PLAYERS, 1.0F, 1.0F);
+		stack.shrink(1);
+		summonBees(stack, world, player);
 		return new ActionResult(EnumActionResult.PASS, stack);
 	}
 
 	@Override
-    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
-		stack.shrink(1);
-		summonBees(stack, world, entity);
-		return stack;
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return false;
 	}
 
-	protected void summonBees(ItemStack is, World world, EntityLivingBase entity) {
+	public void summonBees(ItemStack is, World world, EntityLivingBase entity) {
 		if (!world.isRemote)
 			for (int a = -3; a < world.rand.nextInt(6); a++) {
 				EntityWorkerBee bee = new EntityWorkerBee(world);

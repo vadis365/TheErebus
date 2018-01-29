@@ -149,12 +149,13 @@ public class EntityAntlionBoss extends EntityMob {
 	}
 
 	public void spawnBlamParticles() {
-		if (onGround)
+		if (!getEntityWorld().isRemote && onGround)
 			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.ANTLION_BLAM, (float) posX, (float)posY, (float)posZ));
 	}
 
 	public void spawnRumbleParticles() {
-		Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.ANTLION_RUMBLE, (float) posX, (float)posY, (float)posZ));
+		if (!getEntityWorld().isRemote)
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.ANTLION_RUMBLE, (float) posX, (float)posY, (float)posZ));
 	}
 
 	public void setBlam(int count, byte action) {
@@ -252,7 +253,8 @@ public class EntityAntlionBoss extends EntityMob {
 		}
 
 		if (deathTicks >= 180 && deathTicks <= 200)
-			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BOSS_DEATH, (float) posX, (float)posY, (float)posZ));
+			if (!getEntityWorld().isRemote)
+				Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BOSS_DEATH, (float) posX, (float)posY, (float)posZ));
 
 		int i;
 		int j;

@@ -6,7 +6,6 @@ import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModSounds;
-import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.items.ItemMaterials;
 import net.minecraft.block.Block;
@@ -42,7 +41,6 @@ public class BlockForceLock extends Block {
 	public BlockForceLock() {
 		super(Material.GLASS);
 		setSoundType(SoundType.GLASS);
-		setCreativeTab(ModTabs.BLOCKS);
 		setBlockUnbreakable();
 		setResistance(6000000.0F);
 		setLightLevel(0.8F);

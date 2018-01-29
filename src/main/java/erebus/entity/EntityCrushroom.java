@@ -201,7 +201,8 @@ public class EntityCrushroom extends EntityMob implements IRangedAttackMob {
 	}
 
 	public void spawnBlamParticles() {
-		Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.CRUSHROOM_BLAM, (float) posX, (float)posY, (float)posZ));
+		if (!getEntityWorld().isRemote)
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.CRUSHROOM_BLAM, (float) posX, (float)posY, (float)posZ));
 	}
 
 	@Override
