@@ -5,6 +5,7 @@ import java.util.List;
 import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModSounds;
+import erebus.network.client.PacketAltarAnimationTimer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,32 +20,39 @@ import net.minecraft.world.World;
 
 public class TileEntityErebusAltarHealing extends TileEntityErebusAltar implements ITickable {
 
-	public int animationTicks;
 	public boolean active;
-	private int spawnTicks;
+	private int spawnTicks ;
 
 	@Override
 	public void update() {
-		findEnemyToAttack();
-		spawnTicks--;
-		if (active) {
-			if (animationTicks == 0)
-				getWorld().playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
-			if (animationTicks <= 24)
-				animationTicks++;
+		if (!getWorld().isRemote) {
+			prevAnimationTicks = animationTicks;
+			findEnemyToAttack();
+			spawnTicks--;
+			if (active) {
+				if (animationTicks == 0)
+					getWorld().playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
+				if (animationTicks <= 24)
+					animationTicks++;
+			}
+			if (!active) {
+				if (animationTicks == 25)
+					getWorld().playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
+				if (animationTicks >= 1)
+					animationTicks--;
+				if (animationTicks == 1)
+					getWorld().setBlockState(getPos(), ModBlocks.ALTAR_BASE.getDefaultState());
+			}
+			if (spawnTicks == 0)
+				setActive(false);
+			if (prevAnimationTicks != animationTicks)
+				Erebus.NETWORK_WRAPPER.sendToAll(new PacketAltarAnimationTimer(getPos().getX(), getPos().getY(), getPos().getZ(), animationTicks));
 		}
-		if (!active) {
-			if (animationTicks == 25)
-				getWorld().playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
-			if (animationTicks >= 1)
-				animationTicks--;
-			if (animationTicks == 1)
-				getWorld().setBlockState(getPos(), ModBlocks.ALTAR_BASE.getDefaultState());
+
+		if (getWorld().isRemote) {
+			if (animationTicks == 6)
+				bigLove(getWorld(), getPos());
 		}
-		if (animationTicks == 6)
-			bigLove(getWorld(), getPos());
-		if (spawnTicks == 0)
-			setActive(false);
 	}
 
 	public void bigLove(World world, BlockPos pos) {

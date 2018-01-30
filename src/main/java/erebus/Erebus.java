@@ -17,6 +17,7 @@ import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.lib.Reference;
 import erebus.network.client.MessageSyncEntityCapabilities;
+import erebus.network.client.PacketAltarAnimationTimer;
 import erebus.network.client.PacketAntiVenom;
 import erebus.network.client.PacketBones;
 import erebus.network.client.PacketOfferingAltar;
@@ -112,6 +113,7 @@ public class Erebus {
 		NETWORK_WRAPPER.registerMessage(PacketOfferingAltar.class, PacketOfferingAltar.class, 9, Side.CLIENT);
 		NETWORK_WRAPPER.registerMessage(PacketOfferingAltarTimer.class, PacketOfferingAltarTimer.class, 10, Side.CLIENT);
 		NETWORK_WRAPPER.registerMessage(PacketSmoothieMakerGUI.class, PacketSmoothieMakerGUI.class, 11, Side.CLIENT);
+		NETWORK_WRAPPER.registerMessage(PacketAltarAnimationTimer.class, PacketAltarAnimationTimer.class, 12, Side.CLIENT);
 
 		MinecraftForge.EVENT_BUS.register(EntityCapabilityHandler.class);
 		EntityCapabilityHandler.registerEntityCapability(new PlayerDeathLocationCapability());

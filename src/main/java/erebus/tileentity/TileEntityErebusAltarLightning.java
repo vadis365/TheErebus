@@ -7,6 +7,7 @@ import erebus.ModBlocks;
 import erebus.ModSounds;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityUmberGolem;
+import erebus.network.client.PacketAltarAnimationTimer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -20,20 +21,42 @@ import net.minecraft.world.World;
 
 public class TileEntityErebusAltarLightning extends TileEntityErebusAltar implements ITickable {
 
-	public int animationTicks;
 	public boolean active;
 	public int fuzz;
 	private int spawnTicks;
 
 	@Override
 	public void update() {
-		findEnemyToAttack();
-		spawnTicks--;
-		if (active) {
-			if (animationTicks == 0)
-				getWorld().playSound(null, getPos(), ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
-			if (animationTicks <= 24)
-				animationTicks++;
+		if (!getWorld().isRemote) {
+			prevAnimationTicks = animationTicks;
+			findEnemyToAttack();
+			spawnTicks--;
+			if (active) {
+				if (animationTicks == 0)
+					getWorld().playSound(null, getPos(), ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
+				if (animationTicks <= 24)
+					animationTicks++;
+
+			}
+			if (!active) {
+				if (animationTicks == 25)
+					getWorld().playSound(null, getPos(), ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F,
+							1.3F);
+				if (animationTicks >= 1)
+					animationTicks--;
+				if (animationTicks == 1)
+					getWorld().setBlockState(getPos(), ModBlocks.ALTAR_BASE.getDefaultState());
+			}
+
+			if (spawnTicks == 0)
+				setActive(false);
+			if (prevAnimationTicks != animationTicks)
+				Erebus.NETWORK_WRAPPER.sendToAll(new PacketAltarAnimationTimer(getPos().getX(), getPos().getY(), getPos().getZ(), animationTicks));
+		}
+
+		if (getWorld().isRemote) {
+			if (animationTicks >= 1 && animationTicks <= 24)
+				flameOn(getWorld(), getPos());
 			if (animationTicks == 25)
 				if (fuzz < 20) {
 					fuzz++;
@@ -41,18 +64,6 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar implem
 						fuzz = 0;
 				}
 		}
-		if (!active) {
-			if (animationTicks == 25)
-				getWorld().playSound(null, getPos(), ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
-			if (animationTicks >= 1)
-				animationTicks--;
-			if (animationTicks == 1)
-				getWorld().setBlockState(getPos(), ModBlocks.ALTAR_BASE.getDefaultState());
-		}
-		if (animationTicks >= 1 && animationTicks <= 24)
-			flameOn(getWorld(), getPos());
-		if (spawnTicks == 0)
-			setActive(false);
 	}
 
 	public void flameOn(World world, BlockPos pos) {

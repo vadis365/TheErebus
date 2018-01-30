@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import erebus.ModBlocks;
 import erebus.ModSounds;
 import erebus.ModTabs;
+import erebus.block.altars.AltarBase;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockPreservedBlock;
 import erebus.core.helper.Utils;
@@ -88,6 +89,6 @@ public class ItemWandOfAnimation extends Item {
 	}
 
 	private boolean canAnimate(IBlockState state, World world, BlockPos pos) {
-		return !(state.getBlock() instanceof BlockDoublePlant) || !(state.getBlock() instanceof BlockDoubleHeightPlant) || !(state.getBlock() instanceof BlockPreservedBlock) || state.getBlock() == Blocks.CHEST || !(state.getBlock() instanceof BlockContainer) && state.getBlockHardness(world, pos) >= 0 && state.getBoundingBox(world, pos).maxX - state.getBoundingBox(world, pos).minX >= 0.7F && state.getBoundingBox(world, pos).maxZ - state.getBoundingBox(world, pos).minZ >= 0.7F && state.getBoundingBox(world, pos).maxY - state.getBoundingBox(world, pos).minY >= 0.7F || state.getBlock() == ModBlocks.BAMBOO_CRATE;
+		return !(state.getBlock() instanceof AltarBase) && !(state.getBlock() instanceof BlockDoublePlant) && !(state.getBlock() instanceof BlockDoubleHeightPlant) && !(state.getBlock() instanceof BlockPreservedBlock) && !(state.getBlock() instanceof BlockContainer) && state.getBlockHardness(world, pos) >= 0 && state.getBoundingBox(world, pos).maxX - state.getBoundingBox(world, pos).minX >= 0.7F && state.getBoundingBox(world, pos).maxZ - state.getBoundingBox(world, pos).minZ >= 0.7F && state.getBoundingBox(world, pos).maxY - state.getBoundingBox(world, pos).minY >= 0.7F || state.getBlock() == Blocks.CHEST || state.getBlock() == ModBlocks.BAMBOO_CRATE;
 	}
 }

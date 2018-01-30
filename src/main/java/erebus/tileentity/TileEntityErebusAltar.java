@@ -11,6 +11,8 @@ public abstract class TileEntityErebusAltar extends TileEntity {
 
 	protected abstract void readTileFromNBT(NBTTagCompound nbt);
 
+	public int animationTicks, prevAnimationTicks;
+
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		writeTileToNBT(nbt);
