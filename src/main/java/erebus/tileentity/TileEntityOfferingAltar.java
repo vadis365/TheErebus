@@ -5,6 +5,7 @@ import erebus.core.helper.Utils;
 import erebus.network.client.PacketOfferingAltar;
 import erebus.network.client.PacketOfferingAltarTimer;
 import erebus.recipes.OfferingAltarRecipe;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -12,6 +13,8 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,6 +36,11 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 		super(size, name);
 	}
 
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
+	}
+
 	@SideOnly(Side.CLIENT)
 	public ItemStack getItemForRendering(int slot) {
 		if (getInventory().get(slot).isEmpty())
@@ -48,7 +56,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 				if (!getInventory().get(i).isEmpty()) {
 					Utils.dropStackNoRandom(getWorld(), getPos().up(), getInventory().get(i).copy());
 					getInventory().set(i, ItemStack.EMPTY);
-					markDirty();
+					updateBlock();
 					return;
 				}
 	}
@@ -69,7 +77,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 			getInventory().set(slot, stack.copy());
 			getInventory().get(slot).setCount(1);
 			stack.shrink(1);
-			markDirty();
+			updateBlock();
 		}
 	}
 
@@ -99,7 +107,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 							getInventory().set(i, ItemStack.EMPTY);
 					}
 				time = 0;
-				markDirty();
+				updateBlock();
 			}
 		}
 	}
@@ -120,6 +128,12 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
 		readFromNBT(packet.getNbtCompound());
+	}
+
+	public void updateBlock() {
+		final IBlockState state = this.getWorld().getBlockState(this.getPos());
+		this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 3);
+		this.markDirty();
 	}
 
 	@Override
